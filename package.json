@@ -40,7 +40,8 @@
     "ember-route-action-helper": "2.0.2",
     "ember-semantic-ui": "0.1.2",
     "ember-source": "~2.11.0",
-    "loader.js": "^4.0.10"
+    "loader.js": "^4.0.10",
+    "semantic-ui-ember": "2.0.1"
   },
   "engines": {
     "node": ">= 0.12.0"
