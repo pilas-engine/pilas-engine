@@ -4,7 +4,9 @@
 <div class="layout">
 
   <div class="game">
-    {{monaco-editor code=model.codigo onChange=(route-action "cuandoCambiaElCodigo")}}
+    {{#monaco-editor code=model.codigo onChange=(route-action "cuandoCambiaElCodigo")}}
+      <div class="ui active inline loader"></div>
+    {{/monaco-editor}}
   </div>
 
   <div class="editor">
