@@ -1,3 +1,12 @@
+body {
+  font-family: "Lato", Verdana, sans-serif;
+  background-color: #ddd;
+}
+
+.contenedor-de-pagina-principal {
+  margin: 4em;
+}
+
 .layout {
   display: flex;
   position: absolute;
@@ -23,4 +32,8 @@
 
 a.active {
   color: red;
+}
+
+.center {
+  text-align: center;
 }

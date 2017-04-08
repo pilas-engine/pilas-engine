@@ -1,5 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  code: '// demo ...'
+  model() {
+    return {
+      codigo: '// demo ...',
+    }
+  }
 });
