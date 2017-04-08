@@ -8,6 +8,8 @@
 /node_modules
 /bower_components
 
+pilasengine/node_modules/
+
 # misc
 /.sass-cache
 /connect.lock
@@ -15,3 +17,4 @@
 /libpeerconnection.log
 npm-debug.log*
 testem.log
+

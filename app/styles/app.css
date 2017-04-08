@@ -1,0 +1,26 @@
+.layout {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+.game {
+  border: 5px solid orange;
+  min-height: 200px;
+  flex: 1;
+}
+
+.editor {
+  border: 5px solid green;
+  min-height: 200px;
+  flex: 1;
+}
+
+
+a.active {
+  color: red;
+}

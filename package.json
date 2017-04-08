@@ -16,6 +16,10 @@
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
+    "devtron": "^1.4.0",
+    "electron": "^1.6.1",
+    "electron-packager": "^8.5.2",
+    "electron-rebuild": "^1.5.7",
     "ember-ajax": "^2.4.1",
     "ember-cli": "2.11.1",
     "ember-cli-app-version": "^2.0.0",
@@ -33,8 +37,11 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-concurrency": "0.7.19",
     "ember-data": "^2.11.0",
+    "ember-electron": "1.12.7",
     "ember-export-application-global": "^1.0.5",
+    "ember-inspector": "^2.0.4",
     "ember-load-initializers": "^0.6.0",
+    "ember-monaco-editor": "git+https://github.com/hugoruscitti/ember-monaco-editor.git",
     "ember-remodal": "2.0.0",
     "ember-resolver": "^2.0.3",
     "ember-route-action-helper": "2.0.2",
@@ -46,5 +53,57 @@
   "engines": {
     "node": ">= 0.12.0"
   },
-  "private": true
+  "private": true,
+  "main": "electron.js",
+  "ember-electron": {
+    "WHAT IS THIS?": "Please see the README.md",
+    "copy-files": [
+      "electron.js",
+      "package.json"
+    ],
+    "name": null,
+    "platform": null,
+    "arch": null,
+    "version": null,
+    "app-bundle-id": null,
+    "app-category-type": null,
+    "app-copyright": null,
+    "app-version": null,
+    "asar": null,
+    "asar-unpack": null,
+    "asar-unpack-dir": null,
+    "build-version": null,
+    "cache": null,
+    "extend-info": null,
+    "extra-resource": null,
+    "helper-bundle-id": null,
+    "icon": null,
+    "ignore": null,
+    "out": null,
+    "osx-sign": {
+      "identity": null,
+      "entitlements": null,
+      "entitlements-inherit": null
+    },
+    "protocol": [],
+    "protocol-names": [],
+    "win-opts": {
+      "loading-gif": null,
+      "icon-url": null,
+      "remote-releases": null,
+      "certificate-file": null,
+      "certificate-password": null,
+      "sign-with-params": null
+    },
+    "overwrite": null,
+    "prune": null,
+    "strict-ssl": null,
+    "win32metadata": {
+      "CompanyName": null,
+      "FileDescription": null,
+      "OriginalFilename": null,
+      "ProductName": null,
+      "InternalName": null
+    }
+  }
 }
