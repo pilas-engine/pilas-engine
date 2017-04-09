@@ -8,6 +8,7 @@ module.exports = function(defaults) {
       enabled: false
     },
     fingerprint: {
+      enabled: false,
       exclude: ['vs', 'monaco-editor-iframe.html'],
     }
   });
