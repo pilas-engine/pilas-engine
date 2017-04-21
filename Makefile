@@ -28,6 +28,7 @@ comandos:
 	@echo ""
 	@echo "    ${G}iniciar${N}              Instala dependencias."
 	@echo "    ${G}compilar${N}             Compila la aplicación."
+	@echo "    ${G}compilar_live${N}        Compila la aplicación en modo continuo."
 	@echo "    ${G}electron${N}             Compila y ejecuta electron (modo live)."
 	@echo "    ${G}serve${N}                Ejecuta la aplicación en modo desarrollo."
 	@echo "    ${G}test${N}                 Ejecuta los tests de la aplicación."
@@ -40,11 +41,6 @@ comandos:
 	@echo "    ${G}api${N}                  Genera la documentación de API para pilas."
 	@echo "    ${G}docs${N}                 Genera el manual de pilas."
 	@echo "    ${G}actualizar_imagenes${N}  Genera los spritesheets."
-	@echo ""
-	@echo "  ${Y}Para distribuir${N}"
-	@echo ""
-	@echo "    ${G}cordova_icons${N}        Genera los iconos para cordova."
-	@echo "    ${G}cordova${N}              Compila y genera la versión mobile."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
 	@echo ""
@@ -67,6 +63,10 @@ compilar:
 	$(call log, "Iniciando compilación.")
 	@ember build
 
+compilar_live:
+	$(call log, "Iniciando compilación.")
+	@ember build --watch
+
 s: serve
 
 serve:
@@ -83,9 +83,8 @@ version_major:
 	@ember release --major
 
 electron:
-	ember build
-	electron dist &
-	ember build --watch
+	@echo "${G}Iniciando electron ... (pero sin compilar desde cero).${N}"
+	./node_modules/.bin/electron .
 
 changelog:
 	@git log `git describe --tags --abbrev=0` --pretty=format:"  * %s" > CHANGELOG.txt
@@ -128,21 +127,6 @@ docs:
 	@echo "${G}OK, la documentación quedó en public/docs"
 	@echo ""
 
-cordova: _cordova_build _cordova_open
-	@echo "${G}Listo, ahora se abrirá xcode"
-
-cordova_icons:
-	$(call log, "Generando iconos")
-	@mobile-icon-resizer -i ember-cordova/cordova/res/pilas_logo_1024-fondo-color.png  --iosprefix="icon" --iosof=ember-cordova/cordova/res/ios/ --androidof=ember-cordova/cordova/res/android/
-
-_cordova_build:
-	$(call log, "Compilando con cordova:build")
-	@ember cordova:build
-
-_cordova_open:
-	$(call log, "Abriendo con cordova:open")
-	@ember cordova:open
-
 test:
 	$(call log, "Ejecutando test...")
 	@ember test
@@ -172,13 +156,3 @@ sprites:
 
 .PHONY: tmp docs binarios
 
-
-define print_error
-      @tput setaf 1
-      @echo $1
-      @tput sgr0
-endef
-
-
-all:
-	$(call print_error, "Tienes que especificar algún comando.")
