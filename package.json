@@ -107,5 +107,8 @@
       "ProductName": null,
       "InternalName": null
     }
+  },
+  "dependencies": {
+    "spritesheet-js": "^1.2.6"
   }
 }
