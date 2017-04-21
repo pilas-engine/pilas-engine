@@ -29,7 +29,7 @@ comandos:
 	@echo "    ${G}iniciar${N}              Instala dependencias."
 	@echo "    ${G}compilar${N}             Compila la aplicación."
 	@echo "    ${G}compilar_live${N}        Compila la aplicación en modo continuo."
-	@echo "    ${G}electron${N}             Compila y ejecuta electron (modo live)."
+	@echo "    ${G}electron${N}             Ejecuta la aplicación en electron (sin compilar)."
 	@echo "    ${G}serve${N}                Ejecuta la aplicación en modo desarrollo."
 	@echo "    ${G}test${N}                 Ejecuta los tests de la aplicación."
 	@echo "    ${G}sprites${N}              Genera las imágenes de la aplicación."
