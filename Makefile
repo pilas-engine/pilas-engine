@@ -32,7 +32,7 @@ comandos:
 	@echo "    ${G}electron${N}             Ejecuta la aplicación en electron (sin compilar)."
 	@echo "    ${G}serve${N}                Ejecuta la aplicación en modo desarrollo."
 	@echo "    ${G}test${N}                 Ejecuta los tests de la aplicación."
-	@echo "    ${G}sprites${N}              Genera las imágenes de la aplicación."
+	@echo "    ${G}sprites_ember${N}        Genera las imágenes de la aplicación."
 	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
 	@echo ""
@@ -109,7 +109,7 @@ pilas_live:
 	@grunt --gruntfile pilasengine/Gruntfile.js compilar-con-ejemplos-livereload --base pilasengine
 
 actualizar_imagenes:
-	$(call log, "Actualizando imagenes ...")
+	$(call log, "Actualizando imagenes para usar en pilas ...")
 	@./node_modules/.bin/spritesheet-js pilasengine/data/src/* -p public/data/ -f pixi.js --padding=10
 	@echo ""
 	@echo "${G}Listo, las archivos que se generaron son:"
@@ -149,9 +149,15 @@ endif
 	@zip -qr binarios/${NOMBREBIN}-win32-ia32.zip binarios/${NOMBREBIN}-win32-ia32/
 	@zip -qr binarios/${NOMBREBIN}-win32-x64.zip binarios/${NOMBREBIN}-win32-x64/
 
-sprites:
-	$(call log, "Generando Spritesheets ...")
+sprites_ember:
+	$(call log, "Generando Spritesheets para la aplicación ember...")
 	@./node_modules/.bin/spritesheet-js images/sprites/* -p public/images -f css --padding=2
+	@echo ""
+	@echo "${G}Listo, las archivos que se generaron son:"
+	@echo ""
+	@echo "    public/images/spritesheet.json"
+	@echo "    public/images/spritesheet.png"
+	@echo "${N}"
 
 
 .PHONY: tmp docs binarios
