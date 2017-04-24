@@ -10,33 +10,45 @@
       </div>
 
       <div class="center">
-        <h3>¡Hola!, esto es pilas-engine 2</h3>
-
-        <p>¿Qué te gustaría hacer ahora?</p>
+        <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong></p>
 
         <p>&nbsp;</p>
       </div>
 
       <div class="ui equal width grid center">
 
-        <div class="column">
-          <button class="ui disabled primary button">Abrir el intérprete</button>
+        <div class="column text-align-right">
+          <button class="ui basic button">
+            {{pilas-icono imagen="computadora"}}
+
+            Abrir el intérprete</button>
         </div>
 
-        <div class="column">
-          <button class="ui disabled button">Abrir el manual</button>
+        <div class="column text-align-left">
+          <button class="ui basic button">
+            {{pilas-icono imagen="manual"}}
+
+            Abrir el manual</button>
         </div>
 
       </div>
 
       <div class="ui equal width grid center">
 
-        <div class="column">
-          <button class="ui disabled button">Explorar ejemplos</button>
+        <div class="column text-align-right">
+          <button class="ui basic button">
+            {{pilas-icono imagen="ejemplos"}}
+
+            Explorar ejemplos</button>
         </div>
 
-        <div class="column">
-          {{#link-to "acercade" class="ui button"}}Acerca de pilas{{/link-to}}
+        <div class="column text-align-left">
+          {{#link-to "acercade" class="ui basic button"}}
+
+            {{pilas-icono imagen="info_squared"}}
+
+
+          Acerca de pilas{{/link-to}}
         </div>
 
       </div>

@@ -19,59 +19,66 @@
 	background-size: 270px 196px;
 }
 
-.electron {
+.typescript {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -69px -134px;
 	background-size: 270px 196px;
 }
 
-.pilas_logo_60 {
+.electron {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -133px -134px;
 	background-size: 270px 196px;
 }
 
-.typescript {
+.pilas_logo_60 {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -208px -2px;
 	background-size: 270px 196px;
 }
 
-.user_manual {
+.info_squared {
     width: 25px;
     height: 25px;
-    background: url("spritesheet.png") -134px -76px;
+    background: url("spritesheet.png") -163px -76px;
 	background-size: 270px 196px;
 }
 
-.add_folder {
+.manual {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -120px;
 	background-size: 270px 196px;
 }
 
-.info_squared {
+.ejemplos {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -120px;
 	background-size: 270px 196px;
 }
 
-.settings {
+.add_folder {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -149px;
 	background-size: 270px 196px;
 }
 
-.filled_box {
+.computadora {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -149px;
+	background-size: 270px 196px;
+}
+
+.settings {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -134px -76px;
 	background-size: 270px 196px;
 }
 

@@ -1,3 +1,5 @@
+@import "/images/spritesheet.css";
+
 .contenedor {
   background-color: #ddd;
   position: fixed;
@@ -40,4 +42,19 @@ a.active {
 
 .center {
   text-align: center;
+}
+
+.css-icon {
+  display: inline-block;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-left {
+  text-align: left;
 }

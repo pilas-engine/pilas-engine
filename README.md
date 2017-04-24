@@ -26,3 +26,13 @@ unos minutos en completarse.
 
 Una vez que termine, con el comando `make` van a aparecer en pantalla
 los comandos típicos a la hora de utilizar el proyecto.
+
+
+## Versión en desarrollo
+
+Esta versión está en fase de experimentación y desarrollo inicial, es casi un
+experimento. Sin embargo, cada vez que hacemos un push a este repositorio
+se ejecutan todos los tests en travis y se realiza una instalación en:
+
+- https://pilas-engine.pagefrontapp.com/
+
