@@ -7,8 +7,13 @@ module.exports = function(defaults) {
     minifyJS: {
       enabled: false
     },
+    minifyCSS: {
+      options: {
+        processImport: false
+      }
+    },
     fingerprint: {
-      enabled: false,
+      enabled: true,
       exclude: ['vs'],
     }
   });
