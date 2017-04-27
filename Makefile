@@ -118,14 +118,6 @@ actualizar_imagenes:
 	@echo "    public/data/spritesheet.png"
 	@echo "${N}"
 
-docs:
-	$(call log, "Generando documentación")
-	@cd docs; make generar;
-	@rm -rf public/docs
-	@mv docs/site public/docs
-	@echo ""
-	@echo "${G}OK, la documentación quedó en public/docs"
-	@echo ""
 
 test:
 	$(call log, "Ejecutando test...")
@@ -165,6 +157,7 @@ sprites_ember:
 docs:
 	$(call log, "Generando documentación")
 	@cd docs; .././node_modules/.bin/gitbook build
+	@rm -rf public/docs
 	@mv docs/_book public/docs
 	@echo ""
 	@echo "${G}OK, la documentación quedó en public/docs"
