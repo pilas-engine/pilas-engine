@@ -14,7 +14,7 @@ module.exports = function(defaults) {
     },
     fingerprint: {
       enabled: true,
-      exclude: ['vs'],
+      exclude: ['vs', 'public/docs'],
     }
   });
 

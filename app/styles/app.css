@@ -1,7 +1,6 @@
 @import "/images/spritesheet.css";
 
 .contenedor {
-  background-color: #ddd;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -57,4 +56,14 @@ a.active {
 
 .text-align-left {
   text-align: left;
+}
+
+.pilas-manual {
+  padding: 1em;
+  border: 1px solid gray;
+}
+
+.pilas-manual iframe {
+  border: 0;
+  border: 1px solid gray;
 }

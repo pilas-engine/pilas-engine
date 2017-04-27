@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('acercade');
   this.route('pilas');
+  this.route('manual');
 });
 
 export default Router;

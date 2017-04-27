@@ -3,7 +3,7 @@
 <div class="contenedor-de-pagina-principal">
 
   <div class="ui text container">
-    <div class="ui segment">
+    <div class="ui ">
 
       <div class="center">
         {{pilas-logo}}
@@ -25,10 +25,12 @@
         </div>
 
         <div class="column text-align-left">
-          <button class="ui basic button">
-            {{pilas-icono imagen="manual"}}
+          {{#link-to "manual" class="ui basic button"}}
 
-            Abrir el manual</button>
+            {{pilas-icono imagen="manual"}}
+            Abrir el manual
+
+          {{/link-to}}
         </div>
 
       </div>
@@ -46,9 +48,9 @@
           {{#link-to "acercade" class="ui basic button"}}
 
             {{pilas-icono imagen="info_squared"}}
+            Acerca de pilas
 
-
-          Acerca de pilas{{/link-to}}
+          {{/link-to}}
         </div>
 
       </div>

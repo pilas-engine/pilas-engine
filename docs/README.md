@@ -1,2 +1,5 @@
 # Introduction
 
+
+![](imagenes/nave.png)
+
