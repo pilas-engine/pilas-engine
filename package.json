@@ -109,6 +109,7 @@
     }
   },
   "dependencies": {
+    "gitbook-cli": "^2.3.0",
     "spritesheet-js": "^1.2.6"
   }
 }

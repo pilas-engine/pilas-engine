@@ -162,3 +162,10 @@ sprites_ember:
 
 .PHONY: tmp docs binarios
 
+docs:
+	$(call log, "Generando documentación")
+	@cd docs; .././node_modules/.bin/gitbook build
+	@mv docs/_book public/docs
+	@echo ""
+	@echo "${G}OK, la documentación quedó en public/docs"
+	@echo ""
