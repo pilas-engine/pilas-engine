@@ -66,4 +66,5 @@ a.active {
 .pilas-manual iframe {
   border: 0;
   border: 1px solid gray;
+  height: 600px;
 }
