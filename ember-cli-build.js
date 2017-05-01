@@ -13,8 +13,7 @@ module.exports = function(defaults) {
       }
     },
     fingerprint: {
-      enabled: true,
-      exclude: ['vs', 'public/docs'],
+      enabled: false,
     }
   });
 

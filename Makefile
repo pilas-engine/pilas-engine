@@ -61,11 +61,11 @@ iniciar:
 
 compilar:
 	$(call log, "Iniciando compilación.")
-	@ember build
+	@ember build --environment develop
 
 compilar_live:
 	$(call log, "Iniciando compilación.")
-	@ember build --watch
+	@ember build --environment develop --watch
 
 s: serve
 
