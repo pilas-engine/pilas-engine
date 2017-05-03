@@ -156,9 +156,9 @@ sprites_ember:
 
 docs:
 	$(call log, "Generando documentación")
-	@cd docs; .././node_modules/.bin/gitbook build
+	@./node_modules/.bin/gitbook build
 	@rm -rf public/docs
-	@mv docs/_book public/docs
+	@mv _book public/docs
 	@echo ""
 	@echo "${G}OK, la documentación quedó en public/docs"
 	@echo ""
