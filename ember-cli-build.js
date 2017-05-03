@@ -7,6 +7,9 @@ module.exports = function(defaults) {
     minifyJS: {
       enabled: false
     },
+    babel: {
+      compact: false
+    },
     minifyCSS: {
       options: {
         processImport: false
