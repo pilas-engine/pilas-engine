@@ -143,12 +143,12 @@ endif
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
-	@./node_modules/.bin/spritesheet-js images/sprites/* -p public/images -f css --padding=2
+	@./node_modules/.bin/spritesheet-js images/sprites/* -p public/assets/ -f css --padding=2
 	@echo ""
 	@echo "${G}Listo, las archivos que se generaron son:"
 	@echo ""
-	@echo "    public/images/spritesheet.json"
-	@echo "    public/images/spritesheet.png"
+	@echo "    public/assets/spritesheet.json"
+	@echo "    public/assets/spritesheet.png"
 	@echo "${N}"
 
 
