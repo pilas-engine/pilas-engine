@@ -70,11 +70,9 @@ a.active {
   height: 600px;
 }
 
-
 canvas {
   border: 1px solid gray;
 }
-
 
 .pilas-api {
   border: 1px solid gray;
@@ -89,5 +87,5 @@ canvas {
 iframe.pilas-canvas {
   width: 600px;
   height: 400px;
-  border: 1px solid gray;
+  border: 1px solid orange;
 }
