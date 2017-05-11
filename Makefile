@@ -39,7 +39,7 @@ comandos:
 	@echo "    ${G}compilar_pilas${N}       Genera pilasengine.js."
 	@echo "    ${G}compilar_pilas_live${N}  Genera pilasengine.js, ejemplos y tests."
 	@echo "    ${G}api${N}                  Genera la documentación de API para pilas."
-	@echo "    ${G}pilas_manual${N}                 Genera el manual de pilas."
+	@echo "    ${G}pilas_manual${N}         Genera el manual de pilas."
 	@echo "    ${G}pilas_sprites${N}        Genera los spritesheets."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"

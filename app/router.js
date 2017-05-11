@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('acercade');
   this.route('pilas');
   this.route('manual');
+  this.route('api');
 });
 
 export default Router;

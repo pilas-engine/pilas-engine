@@ -40,21 +40,21 @@
 	background-size: 270px 196px;
 }
 
+.github {
+    width: 60px;
+    height: 50px;
+    background: url("spritesheet.png") -208px -66px;
+	background-size: 270px 196px;
+}
+
 .info_squared {
     width: 25px;
     height: 25px;
-    background: url("spritesheet.png") -163px -76px;
+    background: url("spritesheet.png") -134px -105px;
 	background-size: 270px 196px;
 }
 
 .manual {
-    width: 25px;
-    height: 25px;
-    background: url("spritesheet.png") -208px -120px;
-	background-size: 270px 196px;
-}
-
-.ejemplos {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -120px;
@@ -75,17 +75,24 @@
 	background-size: 270px 196px;
 }
 
-.settings {
+.ejemplos {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -134px -76px;
 	background-size: 270px 196px;
 }
 
-.github {
-    width: 60px;
-    height: 50px;
-    background: url("spritesheet.png") -208px -66px;
+.settings {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -163px -76px;
+	background-size: 270px 196px;
+}
+
+.api {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -208px -120px;
 	background-size: 270px 196px;
 }
 

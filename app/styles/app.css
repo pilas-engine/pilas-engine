@@ -71,6 +71,19 @@ a.active {
   height: 600px;
 }
 
+
 canvas {
   border: 1px solid gray;
+}
+
+
+.pilas-api {
+  padding: 1em;
+  border: 1px solid gray;
+}
+
+.pilas-api iframe {
+  border: 0;
+  border: 1px solid gray;
+  height: 600px;
 }
