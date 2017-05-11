@@ -26,12 +26,14 @@
   border: 5px solid orange;
   min-height: 200px;
   flex: 1;
+  padding: 5px;
 }
 
 .editor {
   border: 5px solid green;
   min-height: 200px;
   flex: 1;
+  padding: 5px;
 }
 
 
@@ -67,4 +69,8 @@ a.active {
   border: 0;
   border: 1px solid gray;
   height: 600px;
+}
+
+canvas {
+  border: 1px solid gray;
 }

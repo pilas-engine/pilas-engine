@@ -5,6 +5,7 @@
     "pikaday": "^1.5.1",
     "semantic": "^2.2.9",
     "remodal": "1.1.0",
-    "semantic-ui": "^2.2.9"
+    "semantic-ui": "^2.2.9",
+    "phaser-ce": "^2.7.9"
   }
 }

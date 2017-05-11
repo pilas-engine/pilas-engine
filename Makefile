@@ -36,11 +36,11 @@ comandos:
 	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
 	@echo ""
-	@echo "    ${G}pilas${N}                Genera pilasengine.js."
-	@echo "    ${G}pilas_live${N}           Genera pilasengine.js, ejemplos y tests."
+	@echo "    ${G}compilar_pilas${N}       Genera pilasengine.js."
+	@echo "    ${G}compilar_pilas_live${N}  Genera pilasengine.js, ejemplos y tests."
 	@echo "    ${G}api${N}                  Genera la documentación de API para pilas."
 	@echo "    ${G}docs${N}                 Genera el manual de pilas."
-	@echo "    ${G}actualizar_imagenes${N}  Genera los spritesheets."
+	@echo "    ${G}pilas_sprites${N}        Genera los spritesheets."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
 	@echo ""
@@ -96,19 +96,17 @@ pilasengine/node_modules:
 
 api:
 	$(call log, "Generando documentacion de pilas-engine")
-	@grunt --gruntfile pilasengine/Gruntfile.js typedoc --base pilasengine
-	$(call log, "Copiando imagenes ...")
-	@cp -rf pilasengine/docs/imagenes pilasengine/docs/dist/
+	@./node_modules/.bin/typedoc --out public/api/ pilas-engine --hideGenerator
 
-pilas: pilasengine/node_modules
+compilar_pilas:
 	$(call log, "Compilando pilas-engine")
-	@grunt --gruntfile pilasengine/Gruntfile.js compilar --base pilasengine
+	./node_modules/typescript/bin/tsc --pretty -d
 
-pilas_live:
+compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
-	@grunt --gruntfile pilasengine/Gruntfile.js compilar-con-ejemplos-livereload --base pilasengine
+	./node_modules/typescript/bin/tsc --watch --pretty -d
 
-actualizar_imagenes:
+pilas_sprites:
 	$(call log, "Actualizando imagenes para usar en pilas ...")
 	@./node_modules/.bin/spritesheet-js pilasengine/data/src/* -p public/data/ -f pixi.js --padding=10
 	@echo ""

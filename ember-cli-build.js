@@ -20,5 +20,7 @@ module.exports = function(defaults) {
     }
   });
 
+  app.import('bower_components/phaser-ce/build/phaser.js');
+
   return app.toTree();
 };
