@@ -39,7 +39,7 @@ comandos:
 	@echo "    ${G}compilar_pilas${N}       Genera pilasengine.js."
 	@echo "    ${G}compilar_pilas_live${N}  Genera pilasengine.js, ejemplos y tests."
 	@echo "    ${G}api${N}                  Genera la documentación de API para pilas."
-	@echo "    ${G}docs${N}                 Genera el manual de pilas."
+	@echo "    ${G}pilas_manual${N}                 Genera el manual de pilas."
 	@echo "    ${G}pilas_sprites${N}        Genera los spritesheets."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
@@ -152,11 +152,11 @@ sprites_ember:
 
 .PHONY: tmp docs binarios
 
-docs:
+pilas_manual:
 	$(call log, "Generando documentación")
 	@./node_modules/.bin/gitbook build
-	@rm -rf public/docs
-	@mv _book public/docs
+	@rm -rf public/manual
+	@mv _book public/manual
 	@echo ""
-	@echo "${G}OK, la documentación quedó en public/docs"
+	@echo "${G}OK, la documentación quedó en public/manual"
 	@echo ""
