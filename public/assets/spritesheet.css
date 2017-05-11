@@ -50,7 +50,7 @@
 .info_squared {
     width: 25px;
     height: 25px;
-    background: url("spritesheet.png") -134px -105px;
+    background: url("spritesheet.png") -163px -105px;
 	background-size: 270px 196px;
 }
 
@@ -86,6 +86,13 @@
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -76px;
+	background-size: 270px 196px;
+}
+
+.test {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -134px -105px;
 	background-size: 270px 196px;
 }
 

@@ -22,5 +22,6 @@ export default Ember.Service.extend({
 
     });
 
+    window['pilas'] = pilas;
   }
 });

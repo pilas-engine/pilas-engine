@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('pilas');
   this.route('manual');
   this.route('api');
+  this.route('experimentos');
 });
 
 export default Router;
