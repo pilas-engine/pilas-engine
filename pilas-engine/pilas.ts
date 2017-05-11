@@ -20,8 +20,8 @@ class Pilas {
 
 
   constructor(idElementoDiv) {
-    let ancho = 200;
-    let alto = 200;
+    let ancho = 300;
+    let alto = 300;
 
     let opciones = this.obtener_opciones();
 
@@ -92,7 +92,7 @@ class Pilas {
     // Evita que se active la pausa cuando se pierde el foco del navegador.
     this.game.stage.disableVisibilityChange = true;
     // Precarga imágenes
-    this.game.load.image('ember', 'imagenes/ember.png');
+    this.game.load.image('ember', 'imagenes/logo.png');
   }
 
   obtener_cuadros_por_segundo() {
@@ -145,6 +145,7 @@ class Pilas {
 
 
     if (!this.pausado) {
+      this.game.stage.backgroundColor = "#4488AA";
       this.contador_de_actualizaciones += 1;
       this.sistemas.procesar_sobre_entidades(this.entidades);
       this.eventos.cuando_actualiza.emitir(this.contador_de_actualizaciones);

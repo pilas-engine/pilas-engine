@@ -1,27 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  cargando: true,
 
-  iniciar() {
-    let idCanvas = 'canvas';
-    let elemento = document.getElementById(idCanvas);
-    let pilas = pilasengine.iniciar(elemento);
+  inicializarPilas(iframeElement) {
+    this.set("iframe", iframeElement);
+    this.set("cargando", true);
 
+    return new Ember.RSVP.Promise((success) => {
 
-    pilas.eventos.cuando_carga.conectar(() => {
-      pilas.definir_cuadros_por_segundo(60, 10);
+      var codigo = "pilasengine.iniciar('canvas')";
+      let pilas = iframeElement.contentWindow.eval(codigo);
 
-      let id = pilas.crear_entidad('MiActor');
-      let x = pilas.azar(-100, 100);
-      let y = pilas.azar(-100, 100);
-
-      pilas.agregar_componente(id, 'posicion', {x, y});
-      pilas.agregar_componente(id, 'apariencia', {imagen: 'ember'});
-
-      console.log({x, y});
+      pilas.eventos.cuando_carga.conectar(() => {
+        this.set("cargando", false);
+        success(pilas);
+      });
 
     });
+  },
 
-    window['pilas'] = pilas;
+  liberarRecursos() {
+    this.set('cargando', true);
   }
+
 });

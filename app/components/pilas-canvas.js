@@ -2,8 +2,65 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   pilas: Ember.inject.service(),
+  cargando: Ember.computed.alias('pilas.cargando'),
 
   didInsertElement() {
-    //this.get('pilas').iniciar();
+    Ember.run.scheduleOnce('afterRender', this, this.initElement);
   },
+
+  willDestroyElement() {
+    this.get("pilas").liberarRecursos();
+  },
+
+  initElement() {
+    let iframeElement = this.$().find('#innerIframe')[0];
+
+    this.set("iframeElement", iframeElement);
+
+    this.get("iframeElement").onload = () => {
+
+      if (this.get('pilas')) {
+
+        this.get("pilas").
+          inicializarPilas(iframeElement).
+          then((pilas) => {
+            this.sendAction('cuandoCarga', pilas);
+
+          /*
+
+          if (this.get('escena')) {
+            this.get("pilas").inicializarEscena(iframeElement, this.get("escena"));
+          } else {
+            console.warn("No especificó una escena para cargar en pilas-canvas.");
+          }
+          */
+
+          /*
+          * Invoca a la acción "onReady" que envía el objeto pilas listo
+          * para ser utilizado.
+          *
+          */
+
+          /*
+          if (this.get('onReady')) {
+            this.sendAction("onReady", pilas);
+          } else {
+            //console.warn("Se a iniciado el componente pilas-canvas sin referencia a la acción onLoad.");
+          }
+          */
+        });
+      } else {
+        console.warn("No has enviado el objeto pilas.");
+      }
+
+      // onLoad solo se utiliza dentro de la batería de tests. Este
+      // componente se tendría que usar mediante el servicio "pilas"
+      // en cualquier otro lugar.
+      //this.sendAction('onLoad', {iframeElement});
+
+    };
+
+  },
+
+
 });

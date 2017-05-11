@@ -205,13 +205,13 @@ var Log = (function () {
     return Log;
 }());
 var Pilas = (function () {
-    function Pilas(idCanvas) {
+    function Pilas(idElementoDiv) {
         this.contador_de_actualizaciones = 0;
         this.pausado = false;
-        var ancho = 500;
+        var ancho = 300;
         var alto = 300;
         var opciones = this.obtener_opciones();
-        this.game = new Phaser.Game(ancho, alto, Phaser.CANVAS, idCanvas, opciones);
+        this.game = new Phaser.Game(ancho, alto, Phaser.CANVAS, idElementoDiv, opciones);
         this.log = new Log(this);
         this.eventos = new Eventos(this);
         this.validadores = new Validadores(this);
@@ -258,7 +258,7 @@ var Pilas = (function () {
     };
     Pilas.prototype.preload = function () {
         this.game.stage.disableVisibilityChange = true;
-        this.game.load.image('ember', 'imagenes/ember.png');
+        this.game.load.image('ember', 'imagenes/logo.png');
     };
     Pilas.prototype.obtener_cuadros_por_segundo = function () {
         return this.game.time.desiredFps;
@@ -293,6 +293,7 @@ var Pilas = (function () {
     };
     Pilas.prototype.update = function () {
         if (!this.pausado) {
+            this.game.stage.backgroundColor = "#4488AA";
             this.contador_de_actualizaciones += 1;
             this.sistemas.procesar_sobre_entidades(this.entidades);
             this.eventos.cuando_actualiza.emitir(this.contador_de_actualizaciones);

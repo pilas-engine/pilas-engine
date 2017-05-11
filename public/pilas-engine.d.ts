@@ -97,7 +97,7 @@ declare class Pilas {
     utils: Utils;
     grupo_actores: Phaser.Group;
     grupo_gui: Phaser.Group;
-    constructor(idCanvas: any);
+    constructor(idElementoDiv: any);
     obtener_entidades(): any[];
     obtener_entidades_como_string(): string;
     obtener_cantidad_de_entidades(): number;

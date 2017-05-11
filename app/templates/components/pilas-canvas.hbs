@@ -1,4 +1,8 @@
 {{yield}}
 
 
-<iframe class='pilas-canvas' src="pilas-canvas.html"></iframe>
+{{#if cargando}}
+  <p>cargando: {{cargando}}</p>
+{{/if}}
+
+<iframe class='pilas-canvas {{if cargando "invisible"}}' id='innerIframe' src="pilas-canvas.html"></iframe>
