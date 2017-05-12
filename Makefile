@@ -123,21 +123,25 @@ test:
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
-	$(call log, "Compilando ...")
-	@ember build
+	$(call log, "Limpiando descargas ...")
 	@rm -rf binarios
+	$(call log, "Compilando aplicación ember...")
+	@ember build
 	$(call log, "Generando binarios ...")
 ifeq ($(ELIMINAR_MAPS), 1)
 	$(call log, "Eliminando archivos .map porque la variable ELIMINAR_MAPS vale 1")
 	@rm dist/assets/*.map
 endif
-	@node_modules/.bin/electron-packager dist ${NOMBREBIN} --app-version=${VERSION} --platform=all --arch=all --version=0.37.6 --ignore=node_modules --ignore=bower_components --out=binarios
+	$(call log, "Compilando para osx - 64 bits...")
+	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=darwin --arch=x64  --electron-version=1.4.3 --ignore=node_modules --ignore=bower_components --out=binarios
+	$(call log, "Compilando para windows - 32 bits...")
+	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=ia32 --electron-version=1.4.3 --ignore=node_modules --ignore=bower_components --out=binarios
+	$(call log, "Compilando para windows - 64 bits...")
+	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=x64 --electron-version=1.4.3 --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Comprimiendo ...")
-	@zip -qr binarios/${NOMBREBIN}-darwin-x64.zip binarios/${NOMBREBIN}-darwin-x64/
-	@zip -qr binarios/${NOMBREBIN}-linux-ia32.zip binarios/${NOMBREBIN}-linux-ia32/
-	@zip -qr binarios/${NOMBREBIN}-linux-x64.zip binarios/${NOMBREBIN}-linux-x64/
-	@zip -qr binarios/${NOMBREBIN}-win32-ia32.zip binarios/${NOMBREBIN}-win32-ia32/
-	@zip -qr binarios/${NOMBREBIN}-win32-x64.zip binarios/${NOMBREBIN}-win32-x64/
+	@zip -qr binarios/${NOMBREBIN}-darwin-x64.zip binarios/${NOMBREBIN}-darwin-x64
+	@zip -qr binarios/${NOMBREBIN}-win32-ia32.zip binarios/${NOMBREBIN}-win32-ia32
+	@zip -qr binarios/${NOMBREBIN}-win32-ia32.zip binarios/${NOMBREBIN}-win32-x64
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")

@@ -4,6 +4,7 @@
 /dist
 /tmp
 .DS_Store
+/binarios
 
 # dependencies
 /node_modules
