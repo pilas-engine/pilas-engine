@@ -1,6 +1,6 @@
 VERSION=0.0.1
 NOMBRE="pilas-engine"
-NOMBREBIN="pilasEngine"
+NOMBREBIN="pilas-engine"
 DATE=`date +'%y.%m.%d %H:%M:%S'`
 
 # Le indica a la compilación de binarios si puede borrar todos los .map
@@ -133,11 +133,11 @@ ifeq ($(ELIMINAR_MAPS), 1)
 	@rm dist/assets/*.map
 endif
 	$(call log, "Compilando para osx - 64 bits...")
-	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=darwin --arch=x64  --electron-version=1.4.3 --ignore=node_modules --ignore=bower_components --out=binarios
+	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=darwin --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Compilando para windows - 32 bits...")
-	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=ia32 --electron-version=1.4.3 --ignore=node_modules --ignore=bower_components --out=binarios
+	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Compilando para windows - 64 bits...")
-	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=x64 --electron-version=1.4.3 --ignore=node_modules --ignore=bower_components --out=binarios
+	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-darwin-x64.zip binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-win32-ia32.zip binarios/${NOMBREBIN}-win32-ia32
