@@ -10,6 +10,7 @@ cache:
   - "$HOME/.cache"
 before_install:
 - npm config set spin false
+- npm install -g bower
 - bower --version
 - sudo apt-get update
 - sudo apt-get install wine -y
