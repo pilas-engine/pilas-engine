@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - 6.9.2
-sudo: false
+sudo: required
 addons:
   firefox: latest
 cache:
