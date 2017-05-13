@@ -10,9 +10,9 @@ cache:
   - "$HOME/.cache"
 before_install:
 - npm config set spin false
-- npm install -g bower phantomjs-prebuilt
 - bower --version
-- phantomjs --version
+- sudo apt-get update
+- sudo apt-get install wine -y
 before_script:
   - export DISPLAY=:99; sh -e /etc/init.d/xvfb start; sleep 3
 install:
