@@ -139,9 +139,9 @@ endif
 	$(call log, "Compilando para windows - 64 bits...")
 	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Comprimiendo ...")
-	@zip -qr binarios/${NOMBREBIN}-${VERSION}-darwin-x64.zip binarios/${NOMBREBIN}-darwin-x64
-	@zip -qr binarios/${NOMBREBIN}-${VERSION}-win32-ia32.zip binarios/${NOMBREBIN}-win32-ia32
-	@zip -qr binarios/${NOMBREBIN}-${VERSION}-win32-ia32.zip binarios/${NOMBREBIN}-win32-x64
+	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip binarios/${NOMBREBIN}-darwin-x64
+	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
+	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
