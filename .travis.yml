@@ -35,7 +35,6 @@ deploy:
       - "binarios/pilas-engine-osx-64_bits.zip"
       - "binarios/pilas-engine-windows-32_bits.zip"
       - "binarios/pilas-engine-windows-64_bits.zip"
-      - "file2"
     skip_cleanup: true
     on:
       tags: true
