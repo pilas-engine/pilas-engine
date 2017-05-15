@@ -1,10 +1,12 @@
+sudo: required
 language: node_js
+dist: trusty
 node_js:
 - 6.9.2
-sudo: required
 addons:
   firefox: latest
 cache:
+  apt: true
   directories:
   - "$HOME/.npm"
   - "$HOME/.cache"
@@ -39,4 +41,6 @@ deploy:
       tags: true
 env:
   global:
-    secure: dnHf18maa13Q6k93ksKZRfbEiEx+LUtwsfR+XRhX86lP4H2RdhG2UkSHsyAMgKqd5mrmEijISPJHVvDPIEi3reqOkwps0gBDIKPuiNdrf7wRLAXVasm+tv2ZS0PTmwPe95ElpRDA1Nv67Hc2FN5bNmC8MHKe4p3chCMrZ75wwU2vjPQdWSvWcOU+2Zr/saBoDpNTFnIISZEtB7g3gHXBWgERq9Yuj7pdOo6hbepa84U5u+tfY4O7hJjk6uT/4YE+fH4qRfPps+n4/BOzNl8m0bPU9/UyVyPoF5eEdeHC/Ox+PISDU/RTRofoeVk8/z00u0sGmt0fXVtNt6oY6TSmoZYrBCbrEG7G0i3Qwl/CsOsZO0/ZxhsT4lunvzI9MrsZ62ZF+pSzHaiBJpRt2lVL4YKj67GYSdtkH/t3kVRCIgwamaKw5LkStlsR9wqMUgjyfzskTeAYUxatQ/MxzAFLx4Mbsn1HPRIdK/mltzYTXJV7kmXyp6j8gRPUOYsvUzB9IOqMlrjUhPp1iUkdS7vBm80redRFdzhLS+Qytxkole0mZoBB68t0qoWjYE1m252UxVcFRXPvCDP+t0+484LtxBPBTWC9gqtMGl1d3hYxROpssE4WYv2HhEfzQY/SypdcBnJhSuuz2viy7MSJOYylHanc4fvOefJjsvXccUHFwlw=
+    - secure: dnHf18maa13Q6k93ksKZRfbEiEx+LUtwsfR+XRhX86lP4H2RdhG2UkSHsyAMgKqd5mrmEijISPJHVvDPIEi3reqOkwps0gBDIKPuiNdrf7wRLAXVasm+tv2ZS0PTmwPe95ElpRDA1Nv67Hc2FN5bNmC8MHKe4p3chCMrZ75wwU2vjPQdWSvWcOU+2Zr/saBoDpNTFnIISZEtB7g3gHXBWgERq9Yuj7pdOo6hbepa84U5u+tfY4O7hJjk6uT/4YE+fH4qRfPps+n4/BOzNl8m0bPU9/UyVyPoF5eEdeHC/Ox+PISDU/RTRofoeVk8/z00u0sGmt0fXVtNt6oY6TSmoZYrBCbrEG7G0i3Qwl/CsOsZO0/ZxhsT4lunvzI9MrsZ62ZF+pSzHaiBJpRt2lVL4YKj67GYSdtkH/t3kVRCIgwamaKw5LkStlsR9wqMUgjyfzskTeAYUxatQ/MxzAFLx4Mbsn1HPRIdK/mltzYTXJV7kmXyp6j8gRPUOYsvUzB9IOqMlrjUhPp1iUkdS7vBm80redRFdzhLS+Qytxkole0mZoBB68t0qoWjYE1m252UxVcFRXPvCDP+t0+484LtxBPBTWC9gqtMGl1d3hYxROpssE4WYv2HhEfzQY/SypdcBnJhSuuz2viy7MSJOYylHanc4fvOefJjsvXccUHFwlw=
+    - WINEDLLOVERRIDES="mscoree,mshtml="
+    - WINEDEBUG="-all"
