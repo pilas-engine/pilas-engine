@@ -1,18 +1,3 @@
 {{outlet}}
 
-<div class="layout">
-
-  <div class="game">
-    {{#link-to "index" class="ui button"}}Volver{{/link-to}}
-
-    {{pilas-canvas}}
-
-  </div>
-
-  <div class="editor">
-    {{#monaco-editor code=model.codigo onChange=(route-action "cuandoCambiaElCodigo")}}
-      <div class="ui active inline loader"></div>
-    {{/monaco-editor}}
-  </div>
-
-</div>
+{{pilas-editor}}

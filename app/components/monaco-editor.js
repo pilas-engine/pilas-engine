@@ -7,6 +7,20 @@ export default Ember.Component.extend({
   classNames: ['monaco-editor'],
   code: '// demo',
   loading: true,
+  readOnly: false,
+  editor: null,
+
+
+  /*
+   * Se encarga de mantener actualizado el estado del editor con respecto al
+   * atributo readOnly.
+   */
+  sincronizarReadOnly: Ember.observer('readOnly', function() {
+    if (this.get('editor')) {
+      this.get('editor').updateOptions({readOnly: this.get('readOnly')});
+    }
+  }),
+
 
   init () {
     this._super(...arguments);
@@ -50,6 +64,7 @@ export default Ember.Component.extend({
             if (typeof monaco !== "undefined") {
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
+                readOnly: ${this.get('readOnly')},
               });
 
               /*
@@ -87,7 +102,8 @@ export default Ember.Component.extend({
   },
 
   onLoadEditor(editor) {
-    window.editor = editor;
+    this.set('editor', editor);
+    //window.editor = editor;
 
     if (this.get('code')) {
       editor.setValue(this.get('code'));

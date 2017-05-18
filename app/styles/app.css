@@ -93,3 +93,8 @@ iframe.pilas-canvas {
 .invisible {
   opacity: 0;
 }
+
+
+.editor-deshabilitado {
+  opacity: 0.5;
+}
