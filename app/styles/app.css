@@ -98,3 +98,8 @@ iframe.pilas-canvas {
 .editor-deshabilitado {
   opacity: 0.5;
 }
+
+.version {
+  color: gray;
+  font-size: small;
+}
