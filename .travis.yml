@@ -23,12 +23,12 @@ install:
 - bower install
 script:
 - npm test
-after_success: make binarios
 deploy:
   - provider: script
     script: ember surge
     skip_cleanup: true
   - provider: releases
+    script: make binarios
     api_key:
       secure: NsBrmPasMSBspUBpiPtEemp8h9DwH63AX3y+seDx+/0PKEuvLFlFeV2cxbfVYsDiKS8ZrFzXvqalcKh4pbJSPttCczUWEzlEmB03v2Dmq+Cq7htvMzqRGe0/LvAgNl0cLW6+tpsgH4/ckzVX8igliRbe0vjEFMh+1BFjnFnURv4adO1cSqWhpFouKHk9WVcPT8SV6lefbLPXhSAC4XREkh0p6QeOJTU64ERYSoCDoNz7be+mrLzlCMvj0eVC4Oz3sP7sKH0FVhzPAyNm3QO+xS3HYpYE9TEZipzWUnBHTnTnVXwgSMIXZxC3W8shaJwrNInYVNBOL7d7YWWYZ2xOgbhmbu+PqWoo1RoxMlypOqMkIn/oA4F5WjpKJRkAtsH2XwB3rcz1YdMAUIvTjJZ4ieDlWRRSWPwVfVHvpn2DSYI/23tumbdUEcpaERIdS8uyJ0uYvYru5/VBdFrIoXh5DyO8sV39gm8uOt9eKirTJb9Up/tPDjbooXrMaw/5tcAHTU4rxHR3B8SRgaG2iiAGKmSQAzibOEO2PlcDwD314kHUN3WY61Qj9TRDowwCcVKz88cygONOlveNzrv/VKMSvEPuTK5hJbYJ05ydKunFwpHG4R3jAlZnlYKoofzqOfG2hl+KkWrNzQjKGfr0BLIYm7qafTAEDIMU5AKrHw6g+58=
     file: 
