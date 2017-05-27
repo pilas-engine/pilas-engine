@@ -22,6 +22,7 @@
     "electron-packager": "^8.5.2",
     "electron-rebuild": "^1.5.7",
     "ember-ajax": "^2.4.1",
+    "ember-ci": "0.1.3",
     "ember-cli": "2.11.1",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-babel": "^5.1.7",
