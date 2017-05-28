@@ -1,6 +1,6 @@
-# pilas-engine
+# pilas-engine 2
 
-Experimento de editor para crear pilas-engine 2
+Prototipo de la nueva versin de pilas-engine
 
 [![Build Status](https://travis-ci.org/pilas-engine/pilas-engine.svg?branch=master)](https://travis-ci.org/pilas-engine/pilas-engine)
 
