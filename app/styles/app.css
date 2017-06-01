@@ -12,6 +12,10 @@
   margin: 4em;
 }
 
+.boton-de-pagina-principal.ui.basic.button{
+  width: 200px !important;
+}
+
 .layout {
   display: flex;
   position: absolute;
