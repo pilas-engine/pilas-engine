@@ -6,6 +6,15 @@ DATE=`date +'%y.%m.%d %H:%M:%S'`
 # Le indica a la compilación de binarios si puede borrar todos los .map
 ELIMINAR_MAPS=1
 
+# Binarios
+BIN_ELECTRON=./node_modules/.bin/electron
+BIN_TYPEDOC=./node_modules/.bin/typedoc
+BIN_TYPESCRIPT=./node_modules/typescript/bin/tsc
+BIN_SPRITESHEET=./node_modules/.bin/spritesheet-js
+BIN_GITBOOK=./node_modules/.bin/gitbook
+BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
+
+
 N=[0m
 G=[01;32m
 Y=[01;33m
@@ -57,7 +66,7 @@ iniciar:
 	@npm install
 	@bower install
 	$(call log, "Instalando dependencias de pilas-engine")
-	@cd pilasengine; npm install
+	@cd pilasengine; pwd; npm install
 
 compilar:
 	$(call log, "Iniciando compilación.")
@@ -84,31 +93,27 @@ version_major:
 
 electron:
 	@echo "${G}Iniciando electron ... (pero sin compilar desde cero).${N}"
-	./node_modules/.bin/electron .
+	${BIN_ELECTRON} .
 
 changelog:
 	@git log `git describe --tags --abbrev=0` --pretty=format:"  * %s" > CHANGELOG.txt
 	@echo "Generando el archivo CHANGELOG.txt"
 
-pilasengine/node_modules:
-	$(call log, "Instalando dependencias de pilas-engine")
-	@cd pilasengine; npm install
-
 api:
 	$(call log, "Generando documentacion de pilas-engine")
-	@./node_modules/.bin/typedoc --out public/api/ pilas-engine --hideGenerator
+	@${BIN_TYPEDOC} --out public/api/ pilas-engine --hideGenerator
 
 compilar_pilas:
 	$(call log, "Compilando pilas-engine")
-	./node_modules/typescript/bin/tsc --pretty -d
+	${BIN_TYPESCRIPT} --pretty -d
 
 compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
-	./node_modules/typescript/bin/tsc --watch --pretty -d
+	${BIN_TYPESCRIPT} --watch --pretty -d
 
 pilas_sprites:
 	$(call log, "Actualizando imagenes para usar en pilas ...")
-	@./node_modules/.bin/spritesheet-js pilas-engine/data/src/* -p public/data/ -f pixi.js --padding=10
+	${BIN_SPRITESHEET} pilas-engine/data/src/* -p public/data/ -f pixi.js --padding=10
 	@echo ""
 	@echo "${G}Listo, las archivos que se generaron son:"
 	@echo ""
@@ -133,11 +138,11 @@ ifeq ($(ELIMINAR_MAPS), 1)
 	@rm dist/assets/*.map
 endif
 	$(call log, "Compilando para osx - 64 bits...")
-	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=darwin --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --app-version=${VERSION} --platform=darwin --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Compilando para windows - 32 bits...")
-	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Compilando para windows - 64 bits...")
-	@node_modules/.bin/electron-packager . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
@@ -158,7 +163,7 @@ sprites_ember:
 
 pilas_manual:
 	$(call log, "Generando documentación")
-	@./node_modules/.bin/gitbook build
+	${BIN_GITBOOK} build
 	@rm -rf public/manual
 	@mv _book public/manual
 	@echo ""
