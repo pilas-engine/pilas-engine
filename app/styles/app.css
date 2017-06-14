@@ -65,13 +65,17 @@ a.active {
 }
 
 .pilas-manual {
-  border: 1px solid gray;
   margin: 1em;
+  position: absolute;
+  bottom: 0;
+  border: 1px solid rgba(212, 212, 213, 0.72);
+  top: 100px;
+  left: 0;
+  right: 0;
 }
 
 .pilas-manual iframe {
   border: 0;
-  height: 600px;
 }
 
 canvas {
@@ -79,13 +83,17 @@ canvas {
 }
 
 .pilas-api {
-  border: 1px solid gray;
   margin: 1em;
+  position: absolute;
+  bottom: 0;
+  border: 1px solid rgba(212, 212, 213, 0.72);
+  top: 100px;
+  left: 0;
+  right: 0;
 }
 
 .pilas-api iframe {
   border: 0;
-  height: 600px;
 }
 
 iframe.pilas-canvas {
