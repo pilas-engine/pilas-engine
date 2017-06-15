@@ -42,6 +42,7 @@ comandos:
 	@echo "    ${G}serve${N}                Ejecuta la aplicación en modo desarrollo."
 	@echo "    ${G}test${N}                 Ejecuta los tests de la aplicación."
 	@echo "    ${G}sprites_ember${N}        Genera las imágenes de la aplicación."
+	@echo "    ${G}prettier${N}             Corrige el formato y la sintaxis de todos los archivos."
 	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
 	@echo ""
@@ -81,6 +82,10 @@ s: serve
 serve:
 	$(call log, "Iniciando ember s")
 	@ember s
+
+prettier:
+	./node_modules/.bin/prettier --write 'app/**/*.js'
+	./node_modules/.bin/prettier --write 'tests/**/*.js'
 
 version_patch:
 	ember release
