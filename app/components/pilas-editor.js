@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 class ModoCargando {
   constructor() {
@@ -13,7 +13,6 @@ class ModoCargando {
   onReady() {
     return new ModoEdicion();
   }
-
 }
 
 class ModoEdicion {
@@ -45,11 +44,9 @@ class ModoEjecucion {
   }
 }
 
-
 export default Ember.Component.extend({
-
   didInsertElement() {
-    this.set('model', new ModoCargando());
+    this.set("model", new ModoCargando());
   },
 
   actions: {
@@ -58,7 +55,7 @@ export default Ember.Component.extend({
     },
 
     cuandoCargaPilas(/*pilas*/) {
-      this.set('model', this.get('model').onReady());
+      this.set("model", this.get("model").onReady());
     },
 
     cuandoCargaMonacoEditor() {
@@ -68,11 +65,11 @@ export default Ember.Component.extend({
     },
 
     ejecutar() {
-      this.set('model', this.get('model').ejecutar());
+      this.set("model", this.get("model").ejecutar());
     },
 
     detener() {
-      this.set('model', this.get('model').detener());
-    },
+      this.set("model", this.get("model").detener());
+    }
   }
 });

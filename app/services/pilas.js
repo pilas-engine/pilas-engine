@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Service.extend({
   cargando: true,
@@ -7,8 +7,7 @@ export default Ember.Service.extend({
     this.set("iframe", iframeElement);
     this.set("cargando", true);
 
-    return new Ember.RSVP.Promise((success) => {
-
+    return new Ember.RSVP.Promise(success => {
       var codigo = "pilasengine.iniciar('canvas')";
       let pilas = iframeElement.contentWindow.eval(codigo);
 
@@ -16,12 +15,10 @@ export default Ember.Service.extend({
         this.set("cargando", false);
         success(pilas);
       });
-
     });
   },
 
   liberarRecursos() {
-    this.set('cargando', true);
+    this.set("cargando", true);
   }
-
 });

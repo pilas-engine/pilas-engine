@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Controller.extend({
-  code: '// Demo',
+  code: "// Demo",
   actions: {
     onChange(codigo) {
       console.log(codigo);

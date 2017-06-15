@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Component.extend({
-  tagName: 'span',
+  tagName: "span",
 
-  classNames: ['css-icon'],
-  classNameBindings: ['imagen'],
-  
+  classNames: ["css-icon"],
+  classNameBindings: ["imagen"]
 });

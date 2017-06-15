@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Component.extend({
   pilas: Ember.inject.service(),
-  cargando: Ember.computed.alias('pilas.cargando'),
+  cargando: Ember.computed.alias("pilas.cargando"),
 
   didInsertElement() {
-    Ember.run.scheduleOnce('afterRender', this, this.initElement);
+    Ember.run.scheduleOnce("afterRender", this, this.initElement);
   },
 
   willDestroyElement() {
@@ -13,18 +13,14 @@ export default Ember.Component.extend({
   },
 
   initElement() {
-    let iframeElement = this.$().find('#innerIframe')[0];
+    let iframeElement = this.$().find("#innerIframe")[0];
 
     this.set("iframeElement", iframeElement);
 
     this.get("iframeElement").onload = () => {
-
-      if (this.get('pilas')) {
-
-        this.get("pilas").
-          inicializarPilas(iframeElement).
-          then((pilas) => {
-            this.sendAction('cuandoCarga', pilas);
+      if (this.get("pilas")) {
+        this.get("pilas").inicializarPilas(iframeElement).then(pilas => {
+          this.sendAction("cuandoCarga", pilas);
 
           /*
 
@@ -57,10 +53,6 @@ export default Ember.Component.extend({
       // componente se tendría que usar mediante el servicio "pilas"
       // en cualquier otro lugar.
       //this.sendAction('onLoad', {iframeElement});
-
     };
-
-  },
-
-
+  }
 });
