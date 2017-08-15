@@ -1,5 +1,3 @@
-
-
 class Pilas {
   game: Phaser.Game;
   entidades: Entidades;
@@ -18,14 +16,19 @@ class Pilas {
   grupo_actores: Phaser.Group;
   grupo_gui: Phaser.Group;
 
-
   constructor(idElementoDiv) {
     let ancho = 300;
     let alto = 300;
 
     let opciones = this.obtener_opciones();
 
-    this.game = new Phaser.Game(ancho, alto, Phaser.CANVAS, idElementoDiv, opciones);
+    this.game = new Phaser.Game(
+      ancho,
+      alto,
+      Phaser.CANVAS,
+      idElementoDiv,
+      opciones
+    );
 
     this.log = new Log(this);
     this.eventos = new Eventos(this);
@@ -60,25 +63,32 @@ class Pilas {
     if (componente instanceof Function) {
       let instancia = componente();
       nombre = instancia.nombre;
-      entidad.componentes[instancia.nombre] = (<any>Object).assign(instancia.datos, opciones);
+      entidad.componentes[instancia.nombre] = (<any>Object).assign(
+        instancia.datos,
+        opciones
+      );
     } else {
       nombre = componente;
       entidad.componentes[componente] = opciones;
     }
 
-    this.eventos.cuando_agrega_componente.emitir({id, nombre, datos_iniciales: entidad.componentes[nombre]});
+    this.eventos.cuando_agrega_componente.emitir({
+      id,
+      nombre,
+      datos_iniciales: entidad.componentes[nombre]
+    });
   }
 
   agregar_habilidad(id, nombre_de_la_habilidad: string) {
     let entidad = this.obtener_entidad_por_id(id);
-    entidad.componentes['habilidades'].habilidades.push(nombre_de_la_habilidad);
+    entidad.componentes["habilidades"].habilidades.push(nombre_de_la_habilidad);
 
     // -- this.eventos.cuando_agrega_habilidad.emitir({id, nombre, datos_iniciales: entidad.componentes[nombre]});
   }
 
   obtener_entidad_por_id(id) {
-    let entidades = this.entidades.entidades.filter((a) => {
-      return (a.id === id);
+    let entidades = this.entidades.entidades.filter(a => {
+      return a.id === id;
     });
 
     if (entidades) {
@@ -92,7 +102,7 @@ class Pilas {
     // Evita que se active la pausa cuando se pierde el foco del navegador.
     this.game.stage.disableVisibilityChange = true;
     // Precarga imágenes
-    this.game.load.image('ember', 'imagenes/logo.png');
+    this.game.load.image("ember", "imagenes/logo.png");
   }
 
   obtener_cuadros_por_segundo() {
@@ -115,7 +125,7 @@ class Pilas {
 
       update: () => {
         this.update();
-      },
+      }
 
       /*
       render: () => {
@@ -123,7 +133,6 @@ class Pilas {
         this.game.debug.text('sky 123 layer:', 5, 35);
       }
       */
-
     };
 
     return opciones;
@@ -142,8 +151,6 @@ class Pilas {
   }
 
   update() {
-
-
     if (!this.pausado) {
       this.game.stage.backgroundColor = "#4488AA";
       this.contador_de_actualizaciones += 1;
@@ -152,7 +159,6 @@ class Pilas {
     }
 
     this.eventos.limpiar();
-
   }
 
   pausar() {
@@ -164,6 +170,7 @@ class Pilas {
   }
 
   crear_entidad(nombre) {
+    console.log(`Creando entidad ${nombre}`);
     return this.entidades.crear_entidad(nombre);
   }
 
@@ -177,7 +184,6 @@ class Pilas {
   crear_actor_desde_entidad(identificador) {
     return new ActorProxy(this, identificador);
   }
-
 }
 
 var pilasengine = {

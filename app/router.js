@@ -12,6 +12,7 @@ Router.map(function() {
   this.route("manual");
   this.route("api");
   this.route("experimentos");
+  this.route('demo');
 });
 
 export default Router;

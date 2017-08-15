@@ -9,9 +9,6 @@
         {{pilas-logo}}
       </div>
 
-      <div class="center version">
-        versión {{app-version}}
-      </div>
 
       <div class="center">
         <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong></p>
@@ -82,12 +79,28 @@
           {{/link-to}}
         </div>
 
+    </div>
 
+
+      <div class="ui equal width grid center">
+
+        <div class="column text-align-right">
+          {{#link-to "demo" class="ui basic boton-de-pagina-principal button"}}
+            {{pilas-icono imagen="demo"}}
+            Sección demo
+          {{/link-to}}
+        </div>
+
+          <div class="column text-align-left">
+          </div>
 
     </div>
 
 
 
+      <div class="center version">
+        versión {{app-version}}
+      </div>
 
     </div>
   </div>

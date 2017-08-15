@@ -239,15 +239,19 @@ var Pilas = (function () {
             nombre = componente;
             entidad.componentes[componente] = opciones;
         }
-        this.eventos.cuando_agrega_componente.emitir({ id: id, nombre: nombre, datos_iniciales: entidad.componentes[nombre] });
+        this.eventos.cuando_agrega_componente.emitir({
+            id: id,
+            nombre: nombre,
+            datos_iniciales: entidad.componentes[nombre]
+        });
     };
     Pilas.prototype.agregar_habilidad = function (id, nombre_de_la_habilidad) {
         var entidad = this.obtener_entidad_por_id(id);
-        entidad.componentes['habilidades'].habilidades.push(nombre_de_la_habilidad);
+        entidad.componentes["habilidades"].habilidades.push(nombre_de_la_habilidad);
     };
     Pilas.prototype.obtener_entidad_por_id = function (id) {
         var entidades = this.entidades.entidades.filter(function (a) {
-            return (a.id === id);
+            return a.id === id;
         });
         if (entidades) {
             return entidades[0];
@@ -258,7 +262,7 @@ var Pilas = (function () {
     };
     Pilas.prototype.preload = function () {
         this.game.stage.disableVisibilityChange = true;
-        this.game.load.image('ember', 'imagenes/logo.png');
+        this.game.load.image("ember", "imagenes/logo.png");
     };
     Pilas.prototype.obtener_cuadros_por_segundo = function () {
         return this.game.time.desiredFps;
@@ -277,7 +281,7 @@ var Pilas = (function () {
             },
             update: function () {
                 _this.update();
-            },
+            }
         };
         return opciones;
     };
@@ -307,6 +311,7 @@ var Pilas = (function () {
         this.pausado = false;
     };
     Pilas.prototype.crear_entidad = function (nombre) {
+        console.log("Creando entidad " + nombre);
         return this.entidades.crear_entidad(nombre);
     };
     Pilas.prototype.azar = function (a, b) {
