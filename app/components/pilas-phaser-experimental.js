@@ -334,12 +334,29 @@ export default Ember.Component.extend({
     contexto;
 `,
 
+
+  estado: null,
+
   didInsertElement() {
     let iframe = this.$("iframe")[0];
     let codigo = this.get("codigo");
 
+    class EstadoEdicion {
+      constructor() {
+        this.nombre = "Edición";
+      }
+
+      definirManejador(manejador) {
+        this.manejador = manejador;
+      }
+    }
+
+    this.set('estado', new EstadoEdicion());
+
     iframe.onload = () => {
       let contexto = iframe.contentWindow.eval(codigo);
+
+      this.get('estado').definirManejador(contexto);
 
       window.obtener = contexto.obtener;
       window.game = contexto.game;
@@ -348,5 +365,10 @@ export default Ember.Component.extend({
       window.guardar = contexto.guardar;
       window.restaurar = contexto.restaurar;
     };
+  },
+  actions: {
+    ejecutar() {
+      this.set('estado', this.get('estado').ejecutar());
+    }
   }
 });
