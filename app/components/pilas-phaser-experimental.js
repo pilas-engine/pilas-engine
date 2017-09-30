@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 
   codigo: `
     var editorState = {
-        entidades: [{"hola?": 123}],
+        entidades: [],
 
         init: function () {
         },
@@ -307,6 +307,7 @@ export default Ember.Component.extend({
       // carga la máquina del tiempo
       game.state.add('maquina del tiempo', debugState);
 
+
       /*
       p = crear("pelota");
       p.imagen = "pelota";
@@ -331,6 +332,20 @@ export default Ember.Component.extend({
       p.x = 100;
       */
     }
+
+
+      window.addEventListener('message', (e) => {
+
+         if (e.origin != 'http://localhost:4200') {
+           return;
+         }
+
+         if (e.data.tipo === 'define_entidades') {
+           var stateName = this.game.state.current;
+           this.game.states[stateName].definirEntidades(e.data.entidades);
+         }
+
+      }, false)
 
 
     // Inicialización
@@ -391,12 +406,21 @@ export default Ember.Component.extend({
     let codigo = this.get("codigo");
 
     class EstadoEdicion {
+
       constructor() {
         this.nombre = "Edición";
+        this.manejador = null;
+        this.contentWindow = null;
       }
 
-      definirManejador(manejador) {
+      definirManejador(manejador, contentWindow) {
         this.manejador = manejador;
+        this.contentWindow = contentWindow;
+      }
+
+      definirEntidades(entidades) {
+        let data = {tipo: 'define_entidades', entidades: entidades};
+        this.contentWindow.postMessage(data, 'http://localhost:4200')
       }
     }
 
@@ -406,7 +430,10 @@ export default Ember.Component.extend({
     iframe.onload = () => {
       let contexto = iframe.contentWindow.eval(codigo);
 
-      this.get('estado').definirManejador(contexto);
+      this.get('estado').definirManejador(contexto, iframe.contentWindow);
+      this.get('estado').definirEntidades([
+        {uno: 1}
+      ]);
 
       window.obtener = contexto.obtener;
       window.game = contexto.game;
