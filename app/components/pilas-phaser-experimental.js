@@ -1,7 +1,51 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+  mouse_x: 0,
+  mouse_y: 0,
+  entidades: {inicial: 1211},
+
   codigo: `
+    var editorState = {
+        entidades: [{"hola?": 123}],
+
+        init: function () {
+        },
+
+        preload: function () {
+        },
+
+        create: function () {
+          var style = { font: "16px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "top" };
+          text = game.add.text(0, 5, " Mouse: (0, 0) ", style);
+          text.setShadow(1, 1, 'rgba(0,0,0,0.5)', 3);
+          this.text = text;
+
+          game.stage.backgroundColor = "5b5";
+
+
+          var pelota = game.add.sprite(0, 0, 'pelota');
+          pelota.inputEnabled = true;
+          pelota.input.enableDrag();
+
+          //pelota.events.onDragStart.add(onDragStart, this);
+          //pelota.events.onDragStop.add(onDragStop, this);
+
+        },
+
+        update: function () {
+          let x = this.game.input.mousePointer.x;
+          let y = this.game.input.mousePointer.y;
+
+          this.text.text = " Mouse: (" + x + ", " + y + ") ";
+          window.parent.postMessage({tipo: 'movimiento_del_mouse', x: x, y: y}, 'http://localhost:4200');
+
+          window.parent.postMessage({tipo: 'entidades', entidades: this.entidades}, 'http://localhost:4200');
+        }
+
+
+    }
+
     var debugState = {
       sprites: {},
       entidades: [],
@@ -243,7 +287,6 @@ export default Ember.Component.extend({
     function create() {
       game.stage.backgroundColor = "bbb";
 
-
       // Aplica límites al escenario para las simulaciones físicas.
       game.world.setBounds(0, 0, 300, 300);
       game.physics.startSystem(Phaser.Physics.P2JS);
@@ -255,11 +298,16 @@ export default Ember.Component.extend({
 
       // Carga la escena principal
       game.state.add('play', playState);
-      game.state.start('play');
+      // game.state.start('play');
+
+      // Carga la escena del editor
+      game.state.add('editor', editorState);
+      game.state.start('editor');
 
       // carga la máquina del tiempo
       game.state.add('maquina del tiempo', debugState);
 
+      /*
       p = crear("pelota");
       p.imagen = "pelota";
       p.fisica = true;
@@ -281,6 +329,7 @@ export default Ember.Component.extend({
       p.fisica_circulo = true;
       p.fisica_radio = 25;
       p.x = 100;
+      */
     }
 
 
@@ -353,6 +402,7 @@ export default Ember.Component.extend({
 
     this.set('estado', new EstadoEdicion());
 
+
     iframe.onload = () => {
       let contexto = iframe.contentWindow.eval(codigo);
 
@@ -365,6 +415,28 @@ export default Ember.Component.extend({
       window.guardar = contexto.guardar;
       window.restaurar = contexto.restaurar;
     };
+
+
+    window.addEventListener('message', (e) => {
+       if (e.origin != 'http://localhost:4200') {
+         return;
+       }
+
+       if (e.data.tipo === 'movimiento_del_mouse') {
+         this.set('mouse_x', e.data.x);
+         this.set('mouse_y', e.data.y);
+       }
+
+       if (e.data.tipo === 'entidades') {
+         this.set('entidades', e.data.entidades);
+       }
+
+    }, false);
+
+
+
+
+
   },
   actions: {
     ejecutar() {
