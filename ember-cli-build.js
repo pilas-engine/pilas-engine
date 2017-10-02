@@ -27,7 +27,7 @@ module.exports = function(defaults) {
     destDir: '/'
   });
 
-  return app.toTree([phaserExtra]);
+  app.import('vendor/tachyons.min.css');
 
-  return app.toTree();
+  return app.toTree([phaserExtra]);
 };
