@@ -1,11 +1,24 @@
-{{yield}}
-<p>Estado: {{estado.nombre}}</p>
-<p>Mouse: ({{mouse_x}}, {{mouse_y}})</p>
+<div class="fl w-25">
+  {{yield}}
 
-<pre>{{json entidades}}</pre>
+  <p>Estado: {{estado.nombre}}</p>
+  <p>Mouse: ({{mouse_x}}, {{mouse_y}})</p>
 
-<div>
-  <button {{action "ejecutar"}}>Ejecutar</button>
+  <pre class='json-entidades'>{{json entidades}}</pre>
 </div>
 
-<iframe src="pilas-phaser-experimental.html" width=600 height=600></iframe>
+<div class="fl w-75">
+  <div class='pa1'>
+    {{#if estado.puedeEjecutar}}
+      <button {{action "ejecutar"}} class='ui primary basic button'>Ejecutar</button>
+    {{else}}
+      <button {{action "detener"}} class='ui orange basic button'>Detener</button>
+    {{/if}}
+
+    <button {{action "guardar"}} class='ui green basic button'>Guardar</button>
+  </div>
+
+  <div class='pa1'>
+    <iframe class='iframe-pilas' src="pilas-phaser-experimental.html" width=600 height=600></iframe>
+  </div>
+</div>
