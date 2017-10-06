@@ -1,8 +1,19 @@
 import Ember from "ember";
-var HOST = "http://localhost:4200";
+var HOST = "file://";
+
+if (window.location.host) {
+  HOST = "http://localhost:4200";
+}
 
 function clonar(obj) {
   return JSON.parse(JSON.stringify(obj));
+}
+
+class EstadoCarga {
+  constructor(contexto, entidades) {
+    this.nombre = "Cargando ...";
+    this.cargando = true;
+  }
 }
 
 class EstadoEdicion {
@@ -11,6 +22,7 @@ class EstadoEdicion {
     this.contexto = contexto;
     this.puedeEjecutar = true;
     this.entidades = entidades;
+    this.cargando = false;
 
     let data = {
       tipo: "define_escena",
@@ -42,6 +54,7 @@ class EstadoEjecucion {
     this.contexto = contexto;
     this.puedeEjecutar = false;
     this.entidades = entidades;
+    this.cargando = false;
 
     this.entidadesOriginales = clonar(entidades);
 
@@ -86,6 +99,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
+    this.set("estado", new EstadoCarga());
 
     iframe.onload = () => {
       let contexto = iframe.contentWindow;

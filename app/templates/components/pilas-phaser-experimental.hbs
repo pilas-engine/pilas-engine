@@ -8,17 +8,33 @@
 </div>
 
 <div class="fl w-75">
-  <div class='pa1'>
-    {{#if estado.puedeEjecutar}}
-      <button {{action "ejecutar"}} class='ui primary basic button'>Ejecutar</button>
-    {{else}}
-      <button {{action "detener"}} class='ui orange basic button'>Detener</button>
-    {{/if}}
 
-    <button {{action "guardar"}} class='ui green basic button'>Guardar</button>
+  {{#if estado.cargando}}
+    <div class='pa1'>
+      <button class="button-skeleton"></button>
+      <button class="button-skeleton"></button>
+    </div>
+
+    <div class="pa1">
+      <div class="canvas-skeleton"></div>
+    </div>
+  {{/if}}
+
+  <div class="{{if estado.cargando 'oculto' ''}}">
+    <div class='pa1'>
+      {{#if estado.puedeEjecutar}}
+        <button {{action "ejecutar"}} class='ui primary basic button'>Ejecutar</button>
+      {{else}}
+        <button {{action "detener"}} class='ui orange basic button'>Detener</button>
+      {{/if}}
+
+      <button {{action "guardar"}} class='ui green basic button'>Guardar</button>
+    </div>
+
+    <div class="pa1">
+      <iframe class='iframe-pilas' src="pilas-phaser-experimental.html" width=600 height=600></iframe>
+    </div>
   </div>
 
-  <div class='pa1'>
-    <iframe class='iframe-pilas' src="pilas-phaser-experimental.html" width=600 height=600></iframe>
-  </div>
+
 </div>

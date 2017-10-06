@@ -121,3 +121,23 @@ iframe.pilas-canvas {
 .json-entidades {
   font-size: small;
 }
+
+.oculto {
+  opacity: 0;
+}
+
+.button-skeleton {
+  display: inline-block;
+  width: 92px;
+  height: 37px;
+  background-color: #efefef;
+  border: 0;
+}
+
+.canvas-skeleton {
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+  background-color: #efefef;
+  border: 0;
+}

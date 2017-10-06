@@ -1,4 +1,8 @@
-var HOST = "http://localhost:4200";
+var HOST = "file://";
+
+if (window.location.host) {
+  HOST = "http://localhost:4200";
+}
 
 var editorState = {
   entidades: [],
@@ -37,12 +41,12 @@ var editorState = {
 
     window.parent.postMessage(
       { tipo: "movimiento_del_mouse", x: x, y: y },
-      "http://localhost:4200"
+      HOST
     );
 
     window.parent.postMessage(
       { tipo: "entidades", entidades: this.entidades },
-      "http://localhost:4200"
+      HOST
     );
   },
 
@@ -50,7 +54,7 @@ var editorState = {
     let x = this.game.input.mousePointer.x;
     let y = this.game.input.mousePointer.y;
 
-    this.text.text = " Mouse: (" + x + ", " + y + ") ";
+    this.text.text = "  Mouse: (" + x + ", " + y + ") ";
 
     // Actualiza las entidades
     this.entidades = this.entidades.map(e => {
@@ -361,7 +365,7 @@ window.addEventListener(
   e => {
     console.log("Desde iframe: " + e.data.tipo, e);
 
-    if (e.origin != "http://localhost:4200") {
+    if (e.origin != HOST) {
       return;
     }
 
