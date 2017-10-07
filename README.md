@@ -30,9 +30,15 @@ los comandos típicos a la hora de utilizar el proyecto.
 
 ## Versión en desarrollo
 
-Esta versión está en fase de experimentación y desarrollo inicial, es casi un
-experimento. Sin embargo, cada vez que hacemos un push a este repositorio
-se ejecutan todos los tests en travis y se realiza una instalación en:
+Esta versión está en fase de experimentación y desarrollo inicial, es casi una
+prueba de concepto. Sin embargo, cada vez que hacemos un push a este repositorio
+se ejecutan todos los tests sobre
+[travis](https://travis-ci.org/pilas-engine/pilas-engine/builds) y se
+realiza una instalación en:
 
 - http://pilas-engine.surge.sh/
 
+Si el push viene acompañado de un número de versión (como tag), también
+se generan los binarios para cada plataforma en esta dirección:
+
+- https://github.com/pilas-engine/pilas-engine/releases
