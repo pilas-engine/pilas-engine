@@ -1,4 +1,4 @@
-VERSION=0.0.1
+VERSION=$(shell git describe --tags)
 NOMBRE="pilas-engine"
 NOMBREBIN="pilas-engine"
 DATE=`date +'%y.%m.%d %H:%M:%S'`
