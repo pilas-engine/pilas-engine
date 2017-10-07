@@ -34,7 +34,9 @@ class EstadoEdicion {
   }
 
   ejecutar() {
-    return new EstadoEjecucion(this.contexto, this.entidades);
+    let entidades = this.contexto.obtener_entidades();
+    console.log(entidades);
+    return new EstadoEjecucion(this.contexto, entidades);
   }
 
   detener() {
@@ -42,7 +44,7 @@ class EstadoEdicion {
   }
 
   guardar() {
-    var entidades = this.contexto.eval("obtener_entidades()");
+    var entidades = this.contexto.obtener_entidades();
     console.log("las entidades son", entidades);
     return new EstadoEdicion(this.contexto, entidades);
   }
@@ -56,7 +58,7 @@ class EstadoEjecucion {
     this.entidades = entidades;
     this.cargando = false;
 
-    this.entidadesOriginales = clonar(entidades);
+    this.entidadesOriginales = entidades;
 
     let data = {
       tipo: "define_escena",
@@ -72,7 +74,9 @@ class EstadoEjecucion {
   }
 
   detener() {
-    return new EstadoEdicion(this.contexto, this.entidadesOriginales);
+    let entidades = this.entidades;
+    console.log(entidades);
+    return new EstadoEdicion(this.contexto, entidades);
   }
 }
 

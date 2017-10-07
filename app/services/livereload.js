@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.Service.extend({
   activar() {
-    if (process) {
+    if (window && window.process && window.process.type) {
       var fs = require("fs");
 
       function actualizar() {

@@ -5,14 +5,16 @@ if (window.location.host) {
 }
 
 var editorState = {
-  entidades: [],
-  sprites: {},
+  entidades: null,
+  sprites: null,
 
   init: function(data) {
     this.entidades = data.entidades;
+    this.sprites = {};
   },
 
   preload: function() {
+    this.notificar_al_editor();
     this.game.time.events.loop(1000, this.notificar_al_editor, this);
   },
 
@@ -35,6 +37,10 @@ var editorState = {
     this.game.stage.backgroundColor = "5b5";
   },
 
+  /* Se invoca automáticamente con regularidad para
+   * enviar toda la información de las entidades y el mouse
+   * al editor.
+   */
   notificar_al_editor() {
     let x = this.game.input.mousePointer.x;
     let y = this.game.input.mousePointer.y;
@@ -91,6 +97,9 @@ var debugState = {
   preload: function() {},
 
   create: function() {
+    this.entidades = [];
+    this.sprites = {};
+
     this.graphics = this.game.add.graphics(0, 0);
     game.stage.backgroundColor = "fbb";
   },
@@ -155,12 +164,14 @@ var playState = {
 
   init: function(data) {
     this.entidades = data.entidades;
+    this.sprites = {};
   },
 
   preload: function() {},
 
   create: function() {
     this.graphics = this.game.add.graphics(0, 0);
+    this.game.stage.backgroundColor = "9b5";
   },
 
   update: function() {
@@ -374,12 +385,6 @@ window.addEventListener(
         entidades: e.data.entidades
       });
     }
-
-    /*
-    if (e.data.tipo === "define_entidades") {
-      this.game.states[stateName].definirEntidades(e.data.entidades);
-    }
-    */
   },
   false
 );

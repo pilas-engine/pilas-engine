@@ -4,7 +4,9 @@
     "window",
     "-Promise",
     "Phaser",
-    "pilasengine"
+    "pilasengine",
+    "process",
+    "require"
   ],
   "browser": true,
   "boss": true,
