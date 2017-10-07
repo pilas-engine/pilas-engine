@@ -5,12 +5,14 @@ if (window.location.host) {
   HOST = "http://localhost:4200";
 }
 
+/*
 function clonar(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
+*/
 
 class EstadoCarga {
-  constructor(contexto, entidades) {
+  constructor() {
     this.nombre = "Cargando ...";
     this.cargando = true;
   }
@@ -113,7 +115,7 @@ export default Ember.Component.extend({
       window.addEventListener(
         "message",
         e => {
-          if (e.origin != HOST) {
+          if (e.origin !== HOST) {
             return;
           }
 
