@@ -65,7 +65,7 @@ iniciar:
 	$(call task, "Iniciando el proyecto.")
 	$(call log, "Instalando dependencias.")
 	@npm install
-	@bower install
+	@./node_modules/.bin/bower install
 	$(call log, "Instalando dependencias de pilas-engine")
 	@cd pilasengine; pwd; npm install
 
