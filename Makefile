@@ -1,4 +1,4 @@
-VERSION=$(shell git describe --tags | tr -dc '0-9.')
+VERSION=$(shell git describe --tags)
 NOMBRE="pilas-engine"
 NOMBREBIN="pilas-engine"
 DATE=`date +'%y.%m.%d %H:%M:%S'`
@@ -143,11 +143,11 @@ ifeq ($(ELIMINAR_MAPS), 1)
 	@rm dist/assets/*.map
 endif
 	$(call log, "Compilando para osx - 64 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --app-version=${VERSION} --platform=darwin --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=darwin --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Compilando para windows - 32 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Compilando para windows - 64 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --app-version=${VERSION} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
