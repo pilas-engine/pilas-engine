@@ -13,8 +13,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - pre_run: npm install -g bower
-
+      - run: npm install -g bower
       - run: make iniciar
 
       - save_cache:
