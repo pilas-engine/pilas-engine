@@ -5,10 +5,11 @@ dependencies:
   pre:
     - npm install -g bower
     - sudo apt-get update; sudo apt-get install -y --only-upgrade google-chrome-stable
+    - go get github.com/tcnksm/ghr
   post:
     - bower install
 deployment:
   release:
-    tag: /(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)/
+    #tag: /(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)/
     commands:
       - make binarios
