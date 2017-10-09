@@ -1,7 +1,7 @@
 var HOST = "file://";
 
 if (window.location.host) {
-  HOST = "http://localhost:4200";
+  HOST = "http://" + window.location.host;
 }
 
 var editorState = {
