@@ -148,10 +148,16 @@ endif
 	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Compilando para windows - 64 bits...")
 	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	$(call log, "Compilando para linux - 32 bits...")
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	$(call log, "Compilando para linux - 64 bits...")
+	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
 	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
+	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-linux-ia32
+	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-linux-x64
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
