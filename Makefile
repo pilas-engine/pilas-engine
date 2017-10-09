@@ -153,6 +153,8 @@ endif
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
 	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
 
+	mv binarios/*.zip ${CIRCLE_ARTIFACTS}
+
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
 	@./node_modules/.bin/spritesheet-js images/sprites/* -p public/assets/ -f css --padding=2

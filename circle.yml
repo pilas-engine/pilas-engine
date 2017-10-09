@@ -5,7 +5,6 @@ dependencies:
   pre:
     - npm install -g bower
     - sudo apt-get update; sudo apt-get install -y --only-upgrade google-chrome-stable
-    - sudo apt-get install wine -y
   post:
     - bower install
 deployment:
