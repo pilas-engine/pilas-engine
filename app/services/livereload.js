@@ -11,9 +11,11 @@ export default Ember.Service.extend({
     if (window && window.process && window.process.type) {
       var fs = require("fs");
 
-      fs.watchFile("dist/assets/pilas-engine.js", actualizar);
-      fs.watchFile("dist/assets/pilas-engine.css", actualizar);
-      fs.watchFile("dist/pilas-experimental.js", actualizar);
+      if (fs.existsSync("dist/assets")) {
+        fs.watchFile("dist/assets/pilas-engine.js", actualizar);
+        fs.watchFile("dist/assets/pilas-engine.css", actualizar);
+        fs.watchFile("dist/pilas-experimental.js", actualizar);
+      }
     }
   }
 });
