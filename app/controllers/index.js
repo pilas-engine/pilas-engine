@@ -5,6 +5,9 @@ export default Ember.Controller.extend({
   actions: {
     onChange(codigo) {
       console.log(codigo);
+    },
+    abrirInspector() {
+      requireNode('electron').remote.getCurrentWindow().toggleDevTools();
     }
   }
 });

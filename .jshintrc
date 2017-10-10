@@ -6,7 +6,8 @@
     "Phaser",
     "pilasengine",
     "process",
-    "require"
+    "require",
+    "requireNode"
   ],
   "browser": true,
   "boss": true,
