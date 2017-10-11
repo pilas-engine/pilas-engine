@@ -41,3 +41,10 @@ Si el push viene acompañado de un número de versión (como tag), también
 se generan los binarios para cada plataforma en esta dirección:
 
 - https://github.com/pilas-engine/pilas-engine/releases
+
+
+
+## Nota
+
+Los binarios de serialport corresponden a la versión de electron v53, y se
+obtuvieron desde: https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/tag/v5.1.0-beta5

@@ -13,7 +13,7 @@ BIN_TYPESCRIPT=./node_modules/typescript/bin/tsc
 BIN_SPRITESHEET=./node_modules/.bin/spritesheet-js
 BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
-
+BIN_ELECTRON_REBUILD=./node_modules/.bin/electron-rebuild
 
 N=[0m
 G=[01;32m
@@ -133,31 +133,51 @@ test:
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
-	$(call log, "Limpiando descargas ...")
+	$(call log, "Limpiando directorio de binarios ...")
 	@rm -rf binarios
-	$(call log, "Compilando aplicación ember...")
+	$(call log, "Compilando aplicación ember ...")
 	@ember build
 	$(call log, "Generando binarios ...")
 ifeq ($(ELIMINAR_MAPS), 1)
 	$(call log, "Eliminando archivos .map porque la variable ELIMINAR_MAPS vale 1")
 	@rm dist/assets/*.map
 endif
-	$(call log, "Compilando para osx - 64 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=darwin --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
-	$(call log, "Compilando para windows - 32 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
-	$(call log, "Compilando para windows - 64 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
-	$(call log, "Compilando para linux - 32 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux  --arch=ia32 --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
-	$(call log, "Compilando para linux - 64 bits...")
-	${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux  --arch=x64  --electron-version=1.6.7 --ignore=tmp --ignore=node_modules --ignore=bower_components --out=binarios
+	$(call log, "Instalando dependencias de produccion ...")
+	cp prod-electron.js dist/electron.js
+	cp prod-package.json dist/package.json
+	cd dist/; npm install
+	cd dist; ../${BIN_ELECTRON_REBUILD} --arch=x64 --electron-version=1.6.10
+	$(call log, "Compilando para osx - 64 bits ...")
+	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-darwin-x64.tar.gz
+	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
+	cd dist; rm -rf build
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=darwin --arch=x64 --electron-version=1.6.10 --out=../binarios
+	$(call log, "Compilando para windows - 32 bits ...")
+	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-win32-ia32.tar.gz
+	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
+	cd dist; rm -rf build
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=ia32 --electron-version=1.6.10 --out=../binarios
+	$(call log, "Compilando para windows - 64 bits ...")
+	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-win32-x64.tar.gz
+	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
+	cd dist; rm -rf build
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=x64 --electron-version=1.6.10 --out=../binarios
+	$(call log, "Compilando para linux - 32 bits ...")
+	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-linux-ia32.tar.gz
+	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
+	cd dist; rm -rf build
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=ia32 --electron-version=1.6.10 --out=../binarios
+	$(call log, "Compilando para linux - 64 bits ...")
+	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-linux-x64.tar.gz
+	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
+	cd dist; rm -rf build
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=x64 --electron-version=1.6.10 --out=../binarios
 	$(call log, "Comprimiendo ...")
-	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip binarios/${NOMBREBIN}-darwin-x64
+	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
 	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
-	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-linux-ia32
-	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-linux-x64
+	@zip -qr binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
+	@zip -qr binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
