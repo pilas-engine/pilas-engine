@@ -68,6 +68,8 @@ iniciar:
 	@bower install
 	$(call log, "Instalando dependencias de pilas-engine")
 	@cd pilasengine; pwd; npm install
+	$(call log, "Preparando dependencias binarias para electron")
+	./node_modules/.bin/electron-rebuild
 
 compilar:
 	$(call log, "Iniciando compilación.")
