@@ -3,6 +3,11 @@
 <p>
   {{#if conectado}}
     Conectado
+
+    {{#if mostrarErrorDeReConexion}}
+      (¡Cuidado, deberías reiniciar pilas, porque no soporta re-conexión del dispositivo!)
+    {{/if}}
+
   {{else}}
     Esperando que se conecte el arduino
   {{/if}}
@@ -26,6 +31,6 @@
 
 
 <div>
-  <button {{action "prenderLed"}} class="ui basic button">Encender led 13</button>
-  <button {{action "apagarLed"}} class="ui basic button">Apagar led 13</button>
+  <button {{action "prenderLed"}} class="ui {{if conectado '' 'disabled'}} basic primary button">Encender led 13</button>
+  <button {{action "apagarLed"}} class="ui {{if conectado '' 'disabled'}} basic red button">Apagar led 13</button>
 </div>
