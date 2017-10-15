@@ -10,15 +10,6 @@ const emberAppLocation = `file://${dirname}/dist/index.html`;
 
 let mainWindow = null;
 
-// Uncomment the lines below to enable Electron's crash reporter
-// For more information, see http://electron.atom.io/docs/api/crash-reporter/
-
-// electron.crashReporter.start({
-//     productName: 'YourName',
-//     companyName: 'YourCompany',
-//     submitURL: 'https://your-domain.com/url-to-submit',
-//     autoSubmit: true
-// });
 app.on("window-all-closed", function onWindowAllClosed() {
   app.quit();
 });
@@ -27,8 +18,8 @@ app.on("ready", function onReady() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-		minWidth: 800,
-		minHeight: 600
+    minWidth: 800,
+    minHeight: 600
   });
 
   delete mainWindow.module;

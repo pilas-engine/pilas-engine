@@ -13,6 +13,7 @@ Router.map(function() {
   this.route("api");
   this.route("experimentos");
   this.route('demo');
+  this.route('arduino');
 });
 
 export default Router;

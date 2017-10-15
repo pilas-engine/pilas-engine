@@ -1,0 +1,31 @@
+{{yield}}
+
+<p>
+  {{#if conectado}}
+    Conectado
+  {{else}}
+    Esperando que se conecte el arduino
+  {{/if}}
+</p>
+
+<p>
+  Dispositivos:
+
+  <ul>
+    {{#each dispositivos as |d|}}
+      <li>
+          <li>{{d.comName}} {{#if d.esArduino}}(¡Es un arduino!){{/if}}</li>
+      </li>
+    {{/each}}
+  </ul>
+</p>
+
+<p>
+  Acciones:
+</p>
+
+
+<div>
+  <button {{action "prenderLed"}} class="ui basic button">Encender led 13</button>
+  <button {{action "apagarLed"}} class="ui basic button">Apagar led 13</button>
+</div>
