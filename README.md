@@ -15,7 +15,7 @@ y ejecutar estos comandos:
 
 
 ```
-git clone git@github.com:pilas-engine/pilas-engine.git
+git clone https://github.com/pilas-engine/pilas-engine.git
 cd pilas-engine
 make iniciar
 ```
