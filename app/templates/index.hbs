@@ -11,7 +11,7 @@
 
 
       <div class="center">
-        <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong></p>
+        <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong> (experimental)</p>
 
         <p>&nbsp;</p>
       </div>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="column text-align-left">
-          {{#link-to "acercade" class="ui basic boton-de-pagina-principal disabled button"}}
+          {{#link-to "acercade" class="ui basic boton-de-pagina-principal button"}}
 
             {{pilas-icono imagen="info_squared"}}
             Acerca de pilas
@@ -106,9 +106,12 @@
       <div class="center version">
         versión {{app-version}}
 
-        <p>
-          <a href="#" {{action "abrirInspector"}}>abrir inspector</a>
-        </p>
+
+        {{#en-electron}}
+          <p>
+            <a href="#" {{action "abrirInspector"}}>abrir inspector</a>
+          </p>
+        {{/en-electron}}
 
       </div>
 

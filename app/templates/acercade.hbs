@@ -1,3 +1,40 @@
 {{outlet}}
 
-{{pilas-editor}}
+
+{{outlet}}
+
+<div class="pa2">
+  {{#link-to "index"}}Volver{{/link-to}}
+</div>
+
+<div class="pa2">
+  <h1>Acerca de pilas-engine 2</h1>
+
+
+  <h2>¿Que es pilas-engine?</h2>
+
+  <p>Pilas es una herramienta para construir videojuegos de manera
+    sencilla y divertida.
+  </p>
+
+  <p>
+    Ideamos esta herramienta para que los jóvenes puedan descubrir y
+    aprender a programar computadoras. Creemos que aprender a programar es
+    espectacular, porque les permite tener el control de las
+    computadora, inventar y desarrollar cualquier tipo de software.
+  </p>
+
+  <p>
+    Visitá el sitio
+
+    {{#en-electron}}
+      <a href="#" {{action "abrirSitioDePilas"}}>pilas-engine.com.ar</a>
+    {{else}}
+      <a href='http://pilas-engine.com.ar' target="_blank">pilas-engine.com.ar</a>
+    {{/en-electron}}
+
+    para conocer más sobre el proyecto.
+  </p>
+
+
+</div>
