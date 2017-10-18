@@ -85,6 +85,8 @@ class EstadoEjecucion {
 export default Ember.Component.extend({
   mouse_x: 0,
   mouse_y: 0,
+  ancho: 400,
+  alto: 400,
   entidades: [
     {
       id: "demo_123",
@@ -110,6 +112,14 @@ export default Ember.Component.extend({
     iframe.onload = () => {
       let contexto = iframe.contentWindow;
       let entidades = this.get("entidades");
+
+      let data = {
+        tipo: "iniciar_pilas",
+        ancho: this.get("ancho"),
+        alto: this.get("alto")
+      };
+
+      contexto.postMessage(data, HOST);
 
       // Mensajes desde el iframe de pilas-bloques
       window.addEventListener(

@@ -371,6 +371,8 @@ function create() {
   */
 }
 
+var game = null;
+
 window.addEventListener(
   "message",
   e => {
@@ -385,15 +387,21 @@ window.addEventListener(
         entidades: e.data.entidades
       });
     }
+
+    if (e.data.tipo === "iniciar_pilas") {
+      var ancho = e.data.ancho;
+      var alto = e.data.alto;
+
+      game = new Phaser.Game(ancho, alto, Phaser.AUTO, "game", {
+        preload: preload,
+        create: create
+      });
+
+      window.game = game;
+    }
   },
   false
 );
-
-// Inicialización
-var game = new Phaser.Game(500, 500, Phaser.AUTO, "game", {
-  preload: preload,
-  create: create
-});
 
 function crear(nombre) {
   let id = Math.round(Math.random() * 10000000);
@@ -425,21 +433,6 @@ function obtener(nombre) {
   }
 }
 
-window.game = game;
-
 function obtener_entidades() {
   return game.state.getCurrentState().entidades;
 }
-
-/*
-let contexto = {
-  game: game,
-  //obtener: obtener,
-  //crear: crear,
-  //playState: playState
-  //guardar: guardar,
-  //restaurar: restaurar
-};
-
-contexto;
-*/
