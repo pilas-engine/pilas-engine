@@ -1,48 +1,32 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "amd",
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
-        "outFile": "public/pilas-engine.js"
-    },
-    "exclude": [
-        "node_modules",
-        "bower_components",
-        "app",
-        "dist",
-        "public",
-        "tmp"
-    ],
-    "filesGlob": [
-        "pilas-engine/**/*.ts"
-    ],
-    "atom": {
-        "rewriteTsconfig": true
-    },
-    "files": [
-        "pilas-engine/_references.ts",
-        "pilas-engine/actores.ts",
-        "pilas-engine/actorProxy.ts",
-        "pilas-engine/componentes.ts",
-        "pilas-engine/declaraciones/box2d.d.ts",
-        "pilas-engine/declaraciones/p2.d.ts",
-        "pilas-engine/declaraciones/phaser.d.ts",
-        "pilas-engine/declaraciones/pixi.d.ts",
-        "pilas-engine/entidades.ts",
-        "pilas-engine/eventos.ts",
-        "pilas-engine/eventos/evento.ts",
-        "pilas-engine/habilidades.ts",
-        "pilas-engine/log.ts",
-        "pilas-engine/pilas.ts",
-        "pilas-engine/sistemas.ts",
-        "pilas-engine/sistemas/apariencia.ts",
-        "pilas-engine/sistemas/depurable.ts",
-        "pilas-engine/sistemas/sistema.ts",
-        "pilas-engine/sistemas/sistemaHabilidades.ts",
-        "pilas-engine/utils.ts",
-        "pilas-engine/validadores.ts"
-    ]
+  "compilerOptions": {
+    "target": "es5",
+    "module": "amd",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "skipLibCheck": true,
+    "outFile": "public/pilas-engine.js"
+  },
+  "exclude": [
+    "app_docs",
+    "node_modules",
+    "binarios",
+    "bower_components",
+    "app",
+    "dist",
+    "public",
+    "tmp",
+    "config",
+    "extra",
+    "images",
+    "manual",
+    "tests",
+    "vendor"
+  ],
+  "filesGlob": ["pilas-engine/**/*.ts"],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }

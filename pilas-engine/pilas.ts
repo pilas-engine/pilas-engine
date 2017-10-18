@@ -1,193 +1,72 @@
+var HOST = "file://";
+
+if (window.location.host) {
+  HOST = `http://${window.location.host}`;
+}
+
 class Pilas {
   game: Phaser.Game;
-  entidades: Entidades;
-  actores: Actores;
-
-  sistemas: Sistemas;
-  contador_de_actualizaciones: number = 0;
-  pausado: boolean = false;
-  componentes: Componentes;
-  eventos: Eventos;
-  validadores: Validadores;
-  habilidades: Habilidades;
   log: Log;
-  utils: Utils;
 
-  grupo_actores: Phaser.Group;
-  grupo_gui: Phaser.Group;
-
-  constructor(idElementoDiv) {
-    let ancho = 300;
-    let alto = 300;
-
-    let opciones = this.obtener_opciones();
-
-    this.game = new Phaser.Game(
-      ancho,
-      alto,
-      Phaser.CANVAS,
-      idElementoDiv,
-      opciones
-    );
-
+  constructor() {
     this.log = new Log(this);
-    this.eventos = new Eventos(this);
-    this.validadores = new Validadores(this);
-    this.utils = new Utils(this);
+    this._agregarManejadorDeMensajes();
   }
 
-  obtener_entidades() {
-    return this.entidades.obtener_entidades();
-  }
+  /*
+   * --------------- Métodos privados -------------------
+   */
 
-  obtener_entidades_como_string() {
-    return JSON.stringify(this.obtener_entidades(), null, 2);
-  }
-
-  obtener_cantidad_de_entidades() {
-    return this.obtener_entidades().length;
+  _agregarManejadorDeMensajes() {
+    window.addEventListener("message", e => this._atenderMensaje(e), false);
   }
 
   /**
-   * Agrega un componente con valores iniciales a una entidad.
-   *
-   * El componente se puede agregar especificando un string y conjunto de datos
-   * o desde una función. Por ejemplo:
-   *
-   *    >> pilas.agregar_componente(id_entidad, pilas.componentes.apariencia, {imagen: 'pilas.png'})
+   * El manejador de mensajes se encarga de recibir órdenes de
+   * parte del editor.
    */
-  agregar_componente(id, componente, opciones = {}) {
-    let entidad = this.obtener_entidad_por_id(id);
-    let nombre = null;
+  _atenderMensaje(e: any) {
+    this.log.debug("Llega un mensaje desde el editor: " + e.data.tipo, e);
 
-    if (componente instanceof Function) {
-      let instancia = componente();
-      nombre = instancia.nombre;
-      entidad.componentes[instancia.nombre] = (<any>Object).assign(
-        instancia.datos,
-        opciones
-      );
-    } else {
-      nombre = componente;
-      entidad.componentes[componente] = opciones;
+    if (e.origin != HOST) {
+      return;
     }
 
-    this.eventos.cuando_agrega_componente.emitir({
-      id,
-      nombre,
-      datos_iniciales: entidad.componentes[nombre]
-    });
-  }
+    if (e.data.tipo === "define_escena") {
+      this.game.state.start(e.data.nombre, true, false, {
+        entidades: e.data.entidades
+      });
+    }
 
-  agregar_habilidad(id, nombre_de_la_habilidad: string) {
-    let entidad = this.obtener_entidad_por_id(id);
-    entidad.componentes["habilidades"].habilidades.push(nombre_de_la_habilidad);
+    if (e.data.tipo === "iniciar_pilas") {
+      var ancho = e.data.ancho;
+      var alto = e.data.alto;
 
-    // -- this.eventos.cuando_agrega_habilidad.emitir({id, nombre, datos_iniciales: entidad.componentes[nombre]});
-  }
-
-  obtener_entidad_por_id(id) {
-    let entidades = this.entidades.entidades.filter(a => {
-      return a.id === id;
-    });
-
-    if (entidades) {
-      return entidades[0];
-    } else {
-      throw new Error(`No se encuentra la entidade con id=${id}`);
+      this.game = new Phaser.Game(ancho, alto, Phaser.AUTO, "game", {
+        preload: e => this._preload(),
+        create: e => this._create()
+      });
     }
   }
 
-  preload() {
-    // Evita que se active la pausa cuando se pierde el foco del navegador.
+  _preload() {
+    this.game.load.image("ember", "imagenes/ember.png");
+    this.game.load.image("pelota", "imagenes/pelota.png");
+  }
+
+  _create() {
     this.game.stage.disableVisibilityChange = true;
-    // Precarga imágenes
-    this.game.load.image("ember", "imagenes/logo.png");
+    this.game.state.add("editorState", EstadoEditor);
+    //this.game.state.add("playState", playState);
+
+    this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
   }
 
-  obtener_cuadros_por_segundo() {
-    return this.game.time.desiredFps;
-  }
-
-  definir_cuadros_por_segundo(numero: number) {
-    this.game.time.desiredFps = numero;
-  }
-
-  private obtener_opciones() {
-    let opciones = {
-      preload: () => {
-        this.preload();
-      },
-
-      create: () => {
-        this.create();
-      },
-
-      update: () => {
-        this.update();
-      }
-
-      /*
-      render: () => {
-        this.game.debug.text('sky layer:', 5, 15);
-        this.game.debug.text('sky 123 layer:', 5, 35);
-      }
-      */
-    };
-
-    return opciones;
-  }
-
-  create() {
-    this.grupo_actores = this.game.add.group();
-    this.grupo_gui = this.game.add.group();
-
-    this.sistemas = new Sistemas(this);
-    this.entidades = new Entidades(this);
-    this.componentes = new Componentes(this);
-    this.actores = new Actores(this);
-    this.habilidades = new Habilidades(this);
-    this.eventos.cuando_carga.emitir();
-  }
-
-  update() {
-    if (!this.pausado) {
-      this.game.stage.backgroundColor = "#4488AA";
-      this.contador_de_actualizaciones += 1;
-      this.sistemas.procesar_sobre_entidades(this.entidades);
-      this.eventos.cuando_actualiza.emitir(this.contador_de_actualizaciones);
-    }
-
-    this.eventos.limpiar();
-  }
-
-  pausar() {
-    this.pausado = true;
-  }
-
-  continuar() {
-    this.pausado = false;
-  }
-
-  crear_entidad(nombre) {
-    console.log(`Creando entidad ${nombre}`);
-    return this.entidades.crear_entidad(nombre);
-  }
-
-  /**
-   * Retorna un número al azar entre a y b.
-   */
-  azar(a: number, b: number) {
-    return this.game.rnd.integerInRange(a, b);
-  }
-
-  crear_actor_desde_entidad(identificador) {
-    return new ActorProxy(this, identificador);
+  _emitirMensajeAlEditor(nombre, datos) {
+    datos = datos || {};
+    datos.tipo = nombre;
+    window.parent.postMessage(datos, HOST);
   }
 }
 
-var pilasengine = {
-  iniciar: function(idCanvas) {
-    return new Pilas(idCanvas);
-  }
-};
+var pilas = new Pilas();
