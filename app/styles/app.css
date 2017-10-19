@@ -142,3 +142,7 @@ iframe.pilas-canvas {
   background-color: #efefef;
   border: 0;
 }
+
+.panel-ocultable__invisible {
+  display: none;
+}

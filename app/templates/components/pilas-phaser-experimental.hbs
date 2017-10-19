@@ -1,3 +1,8 @@
+<p>Actores: {{input type="checkbox" checked=ocultarPanelActores}}</p>
+<p>Editor: {{input type="checkbox" checked=ocultarPanelEditor}}</p>
+
+
+{{#panel-ocultable variable=ocultarPanelActores}}
 <div class="fl w-25">
   {{yield}}
 
@@ -6,6 +11,8 @@
 
   <pre class='json-entidades'>{{json entidades}}</pre>
 </div>
+{{/panel-ocultable}}
+
 
 <div class="fl w-75">
 
@@ -38,3 +45,7 @@
 
 
 </div>
+
+{{#panel-ocultable variable=ocultarPanelEditor}}
+EDITOR
+{{/panel-ocultable}}
