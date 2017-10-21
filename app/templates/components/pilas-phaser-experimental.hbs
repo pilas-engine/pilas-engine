@@ -1,20 +1,32 @@
-<p>Actores: {{input type="checkbox" checked=ocultarPanelActores}}</p>
-<p>Editor: {{input type="checkbox" checked=ocultarPanelEditor}}</p>
+<div class='cf'>
+  <div class="fl w-50 p1">
+    {{#link-to "index"}}Volver{{/link-to}}
+  </div>
 
+  <div class="fl w-50 p1">
+    <div class="a-derecha">
+      <div class="ui small basic icon buttons">
+        {{boton-ocultar variable=ocultarPanelActores icono="panel-izquierdo"}}
+        {{boton-ocultar variable=ocultarPanelEditor icono="panel-derecho"}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="pilas-phaser-experimental__contenedor">
 
 {{#panel-ocultable variable=ocultarPanelActores}}
-<div class="fl w-25">
   {{yield}}
 
   <p>Estado: {{estado.nombre}}</p>
   <p>Mouse: ({{mouse_x}}, {{mouse_y}})</p>
 
   <pre class='json-entidades'>{{json entidades}}</pre>
-</div>
 {{/panel-ocultable}}
 
 
-<div class="fl w-75">
+<div class="pilas-phaser-experimental__panel">
 
   {{#if estado.cargando}}
     <div class='pa1'>
@@ -47,5 +59,7 @@
 </div>
 
 {{#panel-ocultable variable=ocultarPanelEditor}}
-EDITOR
+  EDITOR
 {{/panel-ocultable}}
+
+</div>

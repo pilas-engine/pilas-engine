@@ -146,3 +146,15 @@ iframe.pilas-canvas {
 .panel-ocultable__invisible {
   display: none;
 }
+
+.a-derecha {
+  text-align: right;
+}
+
+.pilas-phaser-experimental__contenedor {
+  display: flex;
+}
+
+.pilas-phaser-experimental__panel {
+  flex-basis: 100%;
+}
