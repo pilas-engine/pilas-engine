@@ -14,7 +14,7 @@ class Pilas {
   }
 
   obtener_entidades() {
-    return this.game.state.getCurrentState().entidades;
+    return this.game.state.getCurrentState()["entidades"];
   }
 
   /*

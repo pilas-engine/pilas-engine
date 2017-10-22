@@ -3,7 +3,7 @@ class Sprite extends Phaser.Sprite {
   shadow: Phaser.Sprite;
 
   iniciar(entidad) {
-    this.image = entidad.imagen;
+    this.key = entidad.imagen;
     this.x = entidad.x;
     this.y = entidad.y;
 
@@ -32,7 +32,7 @@ class Sprite extends Phaser.Sprite {
   }
 
   update() {
-    this.shadow.image = this.image;
+    this.shadow.key = this.key;
     this.shadow.pivot.x = this.pivot.x;
     this.shadow.pivot.y = this.pivot.y;
     this.shadow.x = this.x + 5;
@@ -40,7 +40,7 @@ class Sprite extends Phaser.Sprite {
   }
 
   crear_sombra() {
-    this.shadow = this.game.add.sprite(10, 10, this.image);
+    this.shadow = this.game.add.sprite(10, 10, this.key);
     this.shadow.tint = 0x000000;
     this.ocultar_sombra();
   }

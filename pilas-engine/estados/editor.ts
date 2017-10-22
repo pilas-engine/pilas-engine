@@ -17,7 +17,7 @@ class EstadoEditor extends Phaser.State {
       boundsAlignV: "top"
     };
 
-    texto = this.game.add.text(0, 5, "", style);
+    let texto = this.game.add.text(0, 5, "", style);
     texto.setShadow(1, 1, "rgba(0, 0, 0, 0.5)", 3);
     this.texto = texto;
   }

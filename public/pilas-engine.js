@@ -38,7 +38,7 @@ var Pilas = (function () {
         this._agregarManejadorDeMensajes();
     }
     Pilas.prototype.obtener_entidades = function () {
-        return this.game.state.getCurrentState().entidades;
+        return this.game.state.getCurrentState()["entidades"];
     };
     Pilas.prototype._agregarManejadorDeMensajes = function () {
         var _this = this;
@@ -90,7 +90,7 @@ var Sprite = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Sprite.prototype.iniciar = function (entidad) {
-        this.image = entidad.imagen;
+        this.key = entidad.imagen;
         this.x = entidad.x;
         this.y = entidad.y;
         this.pivot.x = entidad.centro_x;
@@ -111,14 +111,14 @@ var Sprite = (function (_super) {
         this.shadow.alpha = 0.0;
     };
     Sprite.prototype.update = function () {
-        this.shadow.image = this.image;
+        this.shadow.key = this.key;
         this.shadow.pivot.x = this.pivot.x;
         this.shadow.pivot.y = this.pivot.y;
         this.shadow.x = this.x + 5;
         this.shadow.y = this.y + 5;
     };
     Sprite.prototype.crear_sombra = function () {
-        this.shadow = this.game.add.sprite(10, 10, this.image);
+        this.shadow = this.game.add.sprite(10, 10, this.key);
         this.shadow.tint = 0x000000;
         this.ocultar_sombra();
     };
@@ -141,7 +141,7 @@ var EstadoEditor = (function (_super) {
             boundsAlignH: "center",
             boundsAlignV: "top"
         };
-        texto = this.game.add.text(0, 5, "", style);
+        var texto = this.game.add.text(0, 5, "", style);
         texto.setShadow(1, 1, "rgba(0, 0, 0, 0.5)", 3);
         this.texto = texto;
     };
