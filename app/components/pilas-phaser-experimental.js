@@ -38,11 +38,6 @@ class EstadoEdicion {
     return this;
   }
 
-  guardar() {
-    var entidades = this.contexto.pilas.obtener_entidades();
-    return new EstadoEdicion(this.contexto, entidades);
-  }
-
   agregarActor(nombre) {
     var entidades = this.contexto.pilas.obtener_entidades();
 
@@ -159,19 +154,18 @@ export default Ember.Component.extend({
   },
   actions: {
     ejecutar() {
+      this.set("entidades", this.get("estado.entidades"));
       this.set("estado", this.get("estado").ejecutar());
     },
     detener() {
       this.set("estado", this.get("estado").detener());
-    },
-    guardar() {
-      this.set("estado", this.get("estado").guardar());
     },
     abrirDialogoParaAgregarUnActor() {
       this.get("remodal").open("dialogo-agregar-actor");
     },
     agregarUnActor(nombre) {
       this.set("estado", this.get("estado").agregarActor(nombre));
+      this.set("entidades", this.get("estado.entidades"));
       this.get("remodal").close("dialogo-agregar-actor");
     }
   }

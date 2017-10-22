@@ -43,18 +43,18 @@
 
   <div class="{{if estado.cargando 'oculto' ''}}">
     <div class='pa1'>
+
       {{#if estado.puedeEjecutar}}
         <button {{action "ejecutar"}} class='ui basic button'>Ejecutar</button>
       {{else}}
         <button {{action "detener"}} class='ui basic button'>Detener</button>
       {{/if}}
 
-      <button {{action "guardar"}} class='ui basic button'>Guardar</button>
 
       {{#if estado.puedeEjecutar}}
         <button {{action "abrirDialogoParaAgregarUnActor"}} class='ui basic button'>Agregar un actor</button>
       {{/if}}
-      
+
     </div>
 
     <div class="pa1">
