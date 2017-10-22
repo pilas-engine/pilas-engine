@@ -5,12 +5,6 @@ if (window.location.host) {
   HOST = "http://" + window.location.host;
 }
 
-/*
-function clonar(obj) {
-  return JSON.parse(JSON.stringify(obj));
-}
-*/
-
 class EstadoCarga {
   constructor() {
     this.nombre = "Cargando ...";
@@ -36,8 +30,7 @@ class EstadoEdicion {
   }
 
   ejecutar() {
-    let entidades = this.contexto.obtener_entidades();
-    console.log(entidades);
+    let entidades = this.contexto.pilas.obtener_entidades();
     return new EstadoEjecucion(this.contexto, entidades);
   }
 
@@ -64,7 +57,7 @@ class EstadoEjecucion {
 
     let data = {
       tipo: "define_escena",
-      nombre: "playState",
+      nombre: "estadoEjecucion",
       entidades: entidades
     };
 
@@ -77,14 +70,11 @@ class EstadoEjecucion {
 
   detener() {
     let entidades = this.entidades;
-    console.log(entidades);
     return new EstadoEdicion(this.contexto, entidades);
   }
 }
 
 export default Ember.Component.extend({
-  mouse_x: 0,
-  mouse_y: 0,
   ancho: 400,
   alto: 400,
   entidades: [
@@ -93,10 +83,10 @@ export default Ember.Component.extend({
       nombre: "demo",
       x: 250,
       y: 50,
-      imagen: "ember",
+      imagen: "sin_imagen",
       eliminado: false,
-      centro_x: 0,
-      centro_y: 0,
+      centro_x: 30,
+      centro_y: 30,
       fisica: false,
       estatico: false,
       habilidades: [{ nombre: "seguir puntero" }]

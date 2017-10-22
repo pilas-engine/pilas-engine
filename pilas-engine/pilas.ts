@@ -13,6 +13,10 @@ class Pilas {
     this._agregarManejadorDeMensajes();
   }
 
+  obtener_entidades() {
+    return this.game.state.getCurrentState().entidades;
+  }
+
   /*
    * --------------- Métodos privados -------------------
    */
@@ -52,12 +56,14 @@ class Pilas {
   _preload() {
     this.game.load.image("ember", "imagenes/ember.png");
     this.game.load.image("pelota", "imagenes/pelota.png");
+    this.game.load.image("logo", "imagenes/logo.png");
+    this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
   }
 
   _create() {
     this.game.stage.disableVisibilityChange = true;
     this.game.state.add("editorState", EstadoEditor);
-    //this.game.state.add("playState", playState);
+    this.game.state.add("estadoEjecucion", EstadoEjecucion);
 
     this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
   }
