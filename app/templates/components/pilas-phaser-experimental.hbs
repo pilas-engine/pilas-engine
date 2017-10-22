@@ -1,3 +1,5 @@
+{{dialogo-agregar-actor agregarUnActor=(action "agregarUnActor")}}
+
 <div class='cf'>
   <div class="fl w-50 p1">
     {{#link-to "index"}}Volver{{/link-to}}
@@ -31,6 +33,7 @@
     <div class='pa1'>
       <button class="button-skeleton"></button>
       <button class="button-skeleton"></button>
+      <button class="button-skeleton"></button>
     </div>
 
     <div class="pa1">
@@ -41,12 +44,17 @@
   <div class="{{if estado.cargando 'oculto' ''}}">
     <div class='pa1'>
       {{#if estado.puedeEjecutar}}
-        <button {{action "ejecutar"}} class='ui primary basic button'>Ejecutar</button>
+        <button {{action "ejecutar"}} class='ui basic button'>Ejecutar</button>
       {{else}}
-        <button {{action "detener"}} class='ui orange basic button'>Detener</button>
+        <button {{action "detener"}} class='ui basic button'>Detener</button>
       {{/if}}
 
-      <button {{action "guardar"}} class='ui green basic button'>Guardar</button>
+      <button {{action "guardar"}} class='ui basic button'>Guardar</button>
+
+      {{#if estado.puedeEjecutar}}
+        <button {{action "abrirDialogoParaAgregarUnActor"}} class='ui basic button'>Agregar un actor</button>
+      {{/if}}
+      
     </div>
 
     <div class="pa1">
