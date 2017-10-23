@@ -84,6 +84,28 @@ var Pilas = (function () {
     return Pilas;
 }());
 var pilas = new Pilas();
+var Actor = (function (_super) {
+    __extends(Actor, _super);
+    function Actor() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Actor.prototype.iniciar = function () { };
+    return Actor;
+}(Phaser.Sprite));
+var Pelota = (function (_super) {
+    __extends(Pelota, _super);
+    function Pelota() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Pelota.prototype.iniciar = function () {
+        this.vy = 0;
+    };
+    Pelota.prototype.update = function () {
+        this.y += this.vy;
+        this.vy += 0.1;
+    };
+    return Pelota;
+}(Actor));
 var Sprite = (function (_super) {
     __extends(Sprite, _super);
     function Sprite() {
@@ -196,7 +218,19 @@ var EstadoEjecucion = (function (_super) {
         });
     };
     EstadoEjecucion.prototype.crear_actor = function (entidad) {
-        var actor = this.add.sprite(entidad.x, entidad.y, entidad.imagen);
+        var x = entidad.x;
+        var y = entidad.y;
+        var imagen = entidad.imagen;
+        var actor = null;
+        console.log(entidad);
+        if (entidad.tipo === "pelota") {
+            actor = new Pelota(this.game, x, y, imagen);
+            this.world.add(actor);
+            actor.iniciar();
+        }
+        else {
+            actor = this.add.sprite(x, y, imagen);
+        }
         actor.pivot.x = entidad.centro_x;
         actor.pivot.y = entidad.centro_y;
     };

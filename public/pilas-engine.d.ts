@@ -17,6 +17,14 @@ declare class Pilas {
     _emitirMensajeAlEditor(nombre: any, datos: any): void;
 }
 declare var pilas: Pilas;
+declare class Actor extends Phaser.Sprite {
+    iniciar(): void;
+}
+declare class Pelota extends Actor {
+    vy: any;
+    iniciar(): void;
+    update(): void;
+}
 declare class Sprite extends Phaser.Sprite {
     rotateSpeed: number;
     shadow: Phaser.Sprite;

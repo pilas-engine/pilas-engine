@@ -44,6 +44,7 @@ class EstadoEdicion {
     entidades.push({
       id: "demo_123" + Math.random(),
       nombre: "demo",
+      tipo: nombre,
       x: 250,
       y: 50,
       imagen: nombre,
@@ -96,6 +97,7 @@ export default Ember.Component.extend({
     {
       id: "demo_123",
       nombre: "demo",
+      tipo: "pelota",
       x: 250,
       y: 50,
       imagen: "sin_imagen",

@@ -19,7 +19,21 @@ class EstadoEjecucion extends Phaser.State {
   }
 
   crear_actor(entidad) {
-    let actor = this.add.sprite(entidad.x, entidad.y, entidad.imagen);
+    let x = entidad.x;
+    let y = entidad.y;
+    let imagen = entidad.imagen;
+    let actor = null;
+
+    console.log(entidad);
+
+    if (entidad.tipo === "pelota") {
+      actor = new Pelota(this.game, x, y, imagen);
+      this.world.add(actor);
+      actor.iniciar();
+    } else {
+      actor = this.add.sprite(x, y, imagen);
+    }
+
     actor.pivot.x = entidad.centro_x;
     actor.pivot.y = entidad.centro_y;
   }
