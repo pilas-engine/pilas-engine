@@ -222,7 +222,6 @@ var EstadoEjecucion = (function (_super) {
         var y = entidad.y;
         var imagen = entidad.imagen;
         var actor = null;
-        console.log(entidad);
         if (entidad.tipo === "pelota") {
             actor = new Pelota(this.game, x, y, imagen);
             this.world.add(actor);

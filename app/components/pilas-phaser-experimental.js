@@ -48,12 +48,8 @@ class EstadoEdicion {
       x: 250,
       y: 50,
       imagen: nombre,
-      eliminado: false,
       centro_x: 30,
-      centro_y: 30,
-      fisica: false,
-      estatico: false,
-      habilidades: []
+      centro_y: 30
     });
 
     return new EstadoEdicion(this.contexto, entidades);
@@ -101,12 +97,8 @@ export default Ember.Component.extend({
       x: 250,
       y: 50,
       imagen: "sin_imagen",
-      eliminado: false,
       centro_x: 30,
-      centro_y: 30,
-      fisica: false,
-      estatico: false,
-      habilidades: [{ nombre: "seguir puntero" }]
+      centro_y: 30
     }
   ],
 

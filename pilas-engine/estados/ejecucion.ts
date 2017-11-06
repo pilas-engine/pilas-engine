@@ -24,8 +24,6 @@ class EstadoEjecucion extends Phaser.State {
     let imagen = entidad.imagen;
     let actor = null;
 
-    console.log(entidad);
-
     if (entidad.tipo === "pelota") {
       actor = new Pelota(this.game, x, y, imagen);
       this.world.add(actor);
