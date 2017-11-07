@@ -1,7 +1,5 @@
-{{yield}}
-
 {{#if variable}}
-  <button type="button" class="ui basic button" {{action "alternar"}}>{{pilas-icono imagen=icono}}</button>
+  <button type="button" class="ui basic button" {{action "alternar"}}>{{yield}}</button>
 {{else}}
-  <button type="button" class="ui basic button active" {{action "alternar"}}>{{pilas-icono imagen=icono}}</button>
+  <button type="button" class="ui basic button active" {{action "alternar"}}>{{yield}}</button>
 {{/if}}

@@ -43,6 +43,7 @@
     "ember-data": "2.13.1",
     "ember-electron": "1.12.7",
     "ember-export-application-global": "^1.0.5",
+    "ember-font-awesome": "4.0.0-alpha.13",
     "ember-inspector": "^2.0.4",
     "ember-load-initializers": "^0.6.0",
     "ember-monaco-editor": "git+https://github.com/hugoruscitti/ember-monaco-editor.git",
