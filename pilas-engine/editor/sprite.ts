@@ -21,6 +21,13 @@ class Sprite extends Phaser.Sprite {
   conectar_eventos_arrastrar_y_soltar() {
     this.events.onDragStart.add(this.activar_sombra, this);
     this.events.onDragStop.add(this.ocultar_sombra, this);
+    this.events.onDragStop.add(this.cuando_termina_de_mover, this);
+  }
+
+  cuando_termina_de_mover() {
+    if (this.al_terminar_de_arrastrar) {
+      this.al_terminar_de_arrastrar(this);
+    }
   }
 
   activar_sombra() {

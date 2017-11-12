@@ -89,28 +89,20 @@ export default Ember.Component.extend({
   remodal: Ember.inject.service(),
   ancho: 400,
   alto: 400,
-  entidades: [
-    {
-      id: "demo_123",
-      nombre: "demo",
-      tipo: "pelota",
-      x: 250,
-      y: 50,
-      imagen: "sin_imagen",
-      centro_x: 30,
-      centro_y: 30
-    }
-  ],
-
+  entidades: null,
   estado: null,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
+
+    this.set("entidades", this.get("proyecto.entidades"));
+
     this.set("estado", new EstadoCarga());
+    console.log("didInsertElement");
 
     iframe.onload = () => {
       let contexto = iframe.contentWindow;
-      let entidades = this.get("entidades");
+      console.log("iframe.onload");
 
       let data = {
         tipo: "iniciar_pilas",
@@ -124,6 +116,8 @@ export default Ember.Component.extend({
       window.addEventListener(
         "message",
         e => {
+          console.log("llega el mensaje: " + e.data.tipo);
+
           if (e.origin !== HOST) {
             return;
           }
@@ -139,7 +133,10 @@ export default Ember.Component.extend({
           }
 
           if (e.data.tipo === "finaliza_carga_de_recursos") {
-            this.set("estado", new EstadoEdicion(contexto, entidades));
+            this.set(
+              "estado",
+              new EstadoEdicion(contexto, this.get("entidades"))
+            );
           }
         },
         false

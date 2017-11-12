@@ -125,6 +125,12 @@ var Sprite = (function (_super) {
     Sprite.prototype.conectar_eventos_arrastrar_y_soltar = function () {
         this.events.onDragStart.add(this.activar_sombra, this);
         this.events.onDragStop.add(this.ocultar_sombra, this);
+        this.events.onDragStop.add(this.cuando_termina_de_mover, this);
+    };
+    Sprite.prototype.cuando_termina_de_mover = function () {
+        if (this.al_terminar_de_arrastrar) {
+            this.al_terminar_de_arrastrar(this);
+        }
     };
     Sprite.prototype.activar_sombra = function () {
         this.shadow.alpha = 0.3;
@@ -177,6 +183,7 @@ var EstadoEditor = (function (_super) {
             if (!_this.sprites[e.id]) {
                 sprite = new Sprite(_this.game, 0, 0, e.imagen);
                 sprite.iniciar(e);
+                sprite.al_terminar_de_arrastrar = function (s) { };
                 _this.world.add(sprite);
                 _this.sprites[e.id] = sprite;
             }

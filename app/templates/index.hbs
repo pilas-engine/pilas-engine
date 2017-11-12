@@ -20,10 +20,11 @@
       <div class="ui equal width grid center">
 
         <div class="column text-align-right">
-          <button class="ui basic boton-de-pagina-principal button disabled">
+          {{#link-to "editor" class="ui basic boton-de-pagina-principal button"}}
             {{pilas-icono imagen="computadora"}}
 
-            Abrir el intérprete</button>
+            Abrir el editor
+          {{/link-to}}
         </div>
 
         <div class="column text-align-left">
@@ -85,7 +86,7 @@
       <div class="ui equal width grid center">
 
         <div class="column text-align-right">
-          {{#link-to "demo" class="ui basic boton-de-pagina-principal button"}}
+          {{#link-to "demo" class="ui basic boton-de-pagina-principal disabled button"}}
             {{pilas-icono imagen="demo"}}
             Sección demo
           {{/link-to}}

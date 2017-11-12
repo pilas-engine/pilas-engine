@@ -1,0 +1,30 @@
+{{outlet}}
+
+<p>Titulo: {{model.titulo}}</p>
+
+<p>cantidad de escenas: {{model.escenas.length}}</p>
+
+<ul>
+  {{#each model.escenas as |escena|}}
+    <li>Escena: {{escena.nombre}} ({{escena.id}})</li>
+
+      <ul>
+        {{#each escena.actores as |actor|}}
+          <li>Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}})</li>
+        {{else}}
+          <li>sin actores</li>
+        {{/each}}
+      </ul>
+
+  {{else}}
+    <li>sin escenas</li>
+  {{/each}}
+</ul>
+
+<button {{action "agregarEscena" model}} class='ui button'>Agregar escena</button>
+<button {{action "agregarActor" model}} class='ui button'>Agregar actor a la escena 1</button>
+<button {{action "serializar" model}} class='ui button'>Serializar</button>
+
+<button {{action "cambiarEscena" model}} class='ui button'>Cambiar el nombre de escena</button>
+
+<button {{action "moverActores" model}} class='ui button'>MoverActores de la escena 1</button>

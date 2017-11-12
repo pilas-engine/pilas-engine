@@ -4,6 +4,7 @@ class Pelota extends Actor {
   iniciar() {
     this.vy = 0;
   }
+
   update() {
     this.y += this.vy;
     this.vy += 0.1;

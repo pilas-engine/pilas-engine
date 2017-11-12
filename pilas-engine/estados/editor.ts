@@ -41,6 +41,9 @@ class EstadoEditor extends Phaser.State {
       if (!this.sprites[e.id]) {
         sprite = new Sprite(this.game, 0, 0, e.imagen);
         sprite.iniciar(e);
+
+        sprite.al_terminar_de_arrastrar = function(s) {};
+
         this.world.add(sprite);
         this.sprites[e.id] = sprite;
       } else {
