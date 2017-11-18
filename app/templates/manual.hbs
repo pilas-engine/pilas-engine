@@ -1,7 +1,13 @@
-{{outlet}}
+<div class="vh-100 w-100 dt">
+  <div class="flex flex-column vh-100">
 
-<h1>Manual</h1>
+    <div class='bb b--black-10'>
+      {{pilas-boton-regresar}}
+    </div>
 
-{{#link-to "index" class="ui button"}}Volver{{/link-to}}
+    {{pilas-manual}}
+  </div>
 
-{{pilas-manual}}
+  {{outlet}}
+
+</div>
