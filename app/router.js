@@ -15,6 +15,7 @@ Router.map(function() {
   this.route('demo');
   this.route('arduino');
   this.route('editor');
+  this.route('ejemplos');
 });
 
 export default Router;

@@ -1,5 +1,17 @@
 @import "spritesheet.css";
 
+.css-icon {
+  display: inline-block;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
+.lato {
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+/*
 .contenedor {
   position: fixed;
   top: 0;
@@ -47,14 +59,11 @@ a.active {
 .center {
   text-align: center;
 }
+*/
 
-.css-icon {
-  display: inline-block;
-  margin-right: 0.5em;
-  vertical-align: middle;
-  margin-top: -3px;
-}
 
+
+/*
 .text-align-right {
   text-align: right;
 }
@@ -203,3 +212,4 @@ iframe.pilas-canvas {
   border-right: 1px dashed #ccc;
   padding-right: 1em;
 }
+*/

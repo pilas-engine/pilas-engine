@@ -1,110 +1,74 @@
 {{outlet}}
 
-<div class="contenedor-de-pagina-principal">
+<div class="center mw7 mt4 pa2">
 
-  <div class="ui text container">
-    <div class="ui ">
-
-      <div class="center">
+      <div class="tc">
         {{pilas-logo}}
       </div>
 
 
-      <div class="center">
+      <div class="tc lato">
         <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong> (experimental)</p>
 
         <p>&nbsp;</p>
       </div>
 
 
-      <div class="ui equal width grid center">
+      <div class="flex flex-wrap center tc">
 
-        <div class="column text-align-right">
-          {{#link-to "editor" class="ui basic boton-de-pagina-principal button"}}
-            {{pilas-icono imagen="computadora"}}
+        {{pilas-boton-principal
+          icono="computadora"
+          texto="Abrir el editor"
+          ruta="editor"
+        }}
 
-            Abrir el editor
-          {{/link-to}}
-        </div>
+        {{pilas-boton-principal
+          icono="manual"
+          texto="Abrir el manual"
+          ruta="manual"
+        }}
 
-        <div class="column text-align-left">
-          {{#link-to "manual" class="ui basic boton-de-pagina-principal disabled button"}}
 
-            {{pilas-icono imagen="manual"}}
-            Abrir el manual
+        {{pilas-boton-principal
+          icono="ejemplos"
+          texto="Explorar ejemplos"
+          ruta="ejemplos"
+        }}
 
-          {{/link-to}}
-        </div>
+        {{pilas-boton-principal
+          icono="info_squared"
+          texto="Acerca de pilas"
+          ruta="acercade"
+        }}
 
-      </div>
+        {{pilas-boton-principal
+          icono="api"
+          texto="Manual avanzado"
+          ruta="api"
+        }}
 
-      <div class="ui equal width grid center">
+        {{pilas-boton-principal
+          icono="test"
+          texto="Experimentos"
+          ruta="experimentos"
+        }}
 
-        <div class="column text-align-right">
-          <button class="ui basic boton-de-pagina-principal button disabled">
-            {{pilas-icono imagen="ejemplos"}}
+        {{pilas-boton-principal
+          icono="demo"
+          texto="Sección Demo"
+          ruta="demo"
+        }}
 
-            Explorar ejemplos</button>
-        </div>
-
-        <div class="column text-align-left">
-          {{#link-to "acercade" class="ui basic boton-de-pagina-principal button"}}
-
-            {{pilas-icono imagen="info_squared"}}
-            Acerca de pilas
-
-          {{/link-to}}
-        </div>
-
-      </div>
-
-      <div class="ui equal width grid center">
-
-        <div class="column text-align-right">
-
-          {{#link-to "api" class="ui basic boton-de-pagina-principal disabled button"}}
-
-            {{pilas-icono imagen="api"}}
-            Manual avanzado
-
-          {{/link-to}}
-        </div>
-
-          <div class="column text-align-left">
-
-          {{#link-to "experimentos" class="ui basic boton-de-pagina-principal button disabled"}}
-
-            {{pilas-icono imagen="test"}}
-            Experimentos
-
-          {{/link-to}}
-        </div>
+        {{pilas-boton-principal
+          icono="arduino"
+          texto="Pruebas Arduino"
+          ruta="arduino"
+        }}
 
     </div>
 
 
-      <div class="ui equal width grid center">
-
-        <div class="column text-align-right">
-          {{#link-to "demo" class="ui basic boton-de-pagina-principal disabled button"}}
-            {{pilas-icono imagen="demo"}}
-            Sección demo
-          {{/link-to}}
-        </div>
-
-          <div class="column text-align-left">
-
-          {{#link-to "arduino" class="ui basic boton-de-pagina-principal button"}}
-            {{pilas-icono imagen="arduino"}}
-            Pruebas arduino
-          {{/link-to}}
-          </div>
-
-    </div>
-
-
-
-      <div class="center version">
+      <div class="tc mt4">
         versión {{app-version}}
 
 
@@ -115,8 +79,5 @@
         {{/en-electron}}
 
       </div>
-
-    </div>
-  </div>
 
 </div>
