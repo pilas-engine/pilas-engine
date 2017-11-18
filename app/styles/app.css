@@ -8,7 +8,7 @@
 }
 
 .lato {
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 /*
@@ -59,11 +59,7 @@ a.active {
 .center {
   text-align: center;
 }
-*/
 
-
-
-/*
 .text-align-right {
   text-align: right;
 }
@@ -135,6 +131,7 @@ iframe.pilas-canvas {
 .oculto {
   opacity: 0;
 }
+*/
 
 .button-skeleton {
   display: inline-block;
@@ -152,6 +149,7 @@ iframe.pilas-canvas {
   border: 0;
 }
 
+/*
 .panel-ocultable__invisible {
   display: none;
 }
