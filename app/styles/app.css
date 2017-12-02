@@ -211,3 +211,28 @@ iframe.pilas-canvas {
   padding-right: 1em;
 }
 */
+
+.animacion-aparecer {
+  animation-duration: 0.25s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    margin-top: -10px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+.usn {
+  user-select: none;
+}
+
+.bg-primario {
+  background-color: rgb(245, 245, 245);
+}
