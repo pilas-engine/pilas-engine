@@ -1,9 +1,14 @@
 import Ember from "ember";
+import json_a_string from "../utils/json-a-string";
+import string_a_json from "../utils/string-a-json";
 
 export default Ember.Controller.extend({
+  serializado: null,
+
   actions: {
     serializar(model) {
-      console.log(JSON.parse(JSON.stringify(model)));
+      let str = json_a_string(model);
+      string_a_json(str);
     },
     agregarEscena(model) {
       model.escenas.pushObject({
