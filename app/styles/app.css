@@ -1,5 +1,17 @@
 @import "spritesheet.css";
 
+.css-icon {
+  display: inline-block;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
+.lato {
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+/*
 .contenedor {
   position: fixed;
   top: 0;
@@ -46,13 +58,6 @@ a.active {
 
 .center {
   text-align: center;
-}
-
-.css-icon {
-  display: inline-block;
-  margin-right: 0.5em;
-  vertical-align: middle;
-  margin-top: -3px;
 }
 
 .text-align-right {
@@ -126,6 +131,7 @@ iframe.pilas-canvas {
 .oculto {
   opacity: 0;
 }
+*/
 
 .button-skeleton {
   display: inline-block;
@@ -143,6 +149,7 @@ iframe.pilas-canvas {
   border: 0;
 }
 
+/*
 .panel-ocultable__invisible {
   display: none;
 }
@@ -202,4 +209,30 @@ iframe.pilas-canvas {
 .ocultable-panel-izquierdo {
   border-right: 1px dashed #ccc;
   padding-right: 1em;
+}
+*/
+
+.animacion-aparecer {
+  animation-duration: 0.25s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    margin-top: -10px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+.usn {
+  user-select: none;
+}
+
+.bg-primario {
+  background-color: rgb(245, 245, 245);
 }

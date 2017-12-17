@@ -1,6 +1,6 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
-  classNames: ["pilas-manual"],
+  tagName: "",
   url: "./manual/index.html"
 });
