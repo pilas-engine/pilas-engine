@@ -30,6 +30,7 @@ declare class Sprite extends Phaser.Sprite {
     shadow: Phaser.Sprite;
     iniciar(entidad: any): void;
     conectar_eventos_arrastrar_y_soltar(): void;
+    al_terminar_de_arrastrar(a: any): void;
     cuando_termina_de_mover(): void;
     activar_sombra(): void;
     ocultar_sombra(): void;

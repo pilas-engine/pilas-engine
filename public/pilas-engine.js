@@ -127,6 +127,8 @@ var Sprite = (function (_super) {
         this.events.onDragStop.add(this.ocultar_sombra, this);
         this.events.onDragStop.add(this.cuando_termina_de_mover, this);
     };
+    Sprite.prototype.al_terminar_de_arrastrar = function (a) {
+    };
     Sprite.prototype.cuando_termina_de_mover = function () {
         if (this.al_terminar_de_arrastrar) {
             this.al_terminar_de_arrastrar(this);

@@ -43,6 +43,15 @@ se generan los binarios para cada plataforma en esta dirección:
 - https://github.com/pilas-engine/pilas-engine/releases
 
 
+Si se quieren generar los binarios directamente de forma local, hay que tener
+instalado wine con anterioridad y luego ejecutar `make binarios`:
+
+```
+brew install wine winetricks
+make binarios
+```
+
+
 
 ## Nota
 

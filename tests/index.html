@@ -10,6 +10,20 @@
     {{content-for "head"}}
     {{content-for "test-head"}}
 
+<script>
+window.enElectron = false;
+
+var win = window;
+win.moduleNode = win.module;
+win.processNode = win.process;
+win.requireNode = win.require;
+
+delete win.module;
+delete win.process;
+delete win.require;
+</script>
+
+
     <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link rel="stylesheet" href="{{rootURL}}assets/pilas-engine.css">
     <link rel="stylesheet" href="{{rootURL}}assets/test-support.css">
@@ -29,5 +43,12 @@
 
     {{content-for "body-footer"}}
     {{content-for "test-body-footer"}}
+
+<script>
+win.process = win.processNode;
+win.module = win.moduleNode;
+</script>
+
+
   </body>
 </html>

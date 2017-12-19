@@ -1,10 +1,10 @@
-import Ember from "ember";
+import Service from "@ember/service";
 
-export default Ember.Service.extend({
+export default Service.extend({
   enElectron: false,
 
   iniciar() {
-    if (requireNode) {
+    if (window.enElectron) {
       this.set("enElectron", true);
     }
   }

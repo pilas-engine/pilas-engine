@@ -86,7 +86,6 @@ class EstadoEjecucion {
 }
 
 export default Ember.Component.extend({
-  remodal: Ember.inject.service(),
   ancho: 400,
   alto: 400,
   entidades: null,
@@ -98,7 +97,6 @@ export default Ember.Component.extend({
     this.set("entidades", this.get("proyecto.entidades"));
 
     this.set("estado", new EstadoCarga());
-    console.log("didInsertElement");
 
     iframe.onload = () => {
       let contexto = iframe.contentWindow;
@@ -133,10 +131,7 @@ export default Ember.Component.extend({
           }
 
           if (e.data.tipo === "finaliza_carga_de_recursos") {
-            this.set(
-              "estado",
-              new EstadoEdicion(contexto, this.get("entidades"))
-            );
+            this.set("estado", new EstadoEdicion(contexto, this.get("entidades")));
           }
         },
         false
@@ -151,9 +146,7 @@ export default Ember.Component.extend({
     detener() {
       this.set("estado", this.get("estado").detener());
     },
-    abrirDialogoParaAgregarUnActor() {
-      this.get("remodal").open("dialogo-agregar-actor");
-    },
+    abrirDialogoParaAgregarUnActor() {},
     agregarUnActor(nombre) {
       this.set("estado", this.get("estado").agregarActor(nombre));
       this.set("entidades", this.get("estado.entidades"));
