@@ -3,7 +3,7 @@ import { task, timeout } from "ember-concurrency";
 let serialport = {};
 let five = {};
 
-if (requireNode) {
+if (window.enElectron) {
   serialport = requireNode("serialport");
   five = requireNode("johnny-five");
 }
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement() {
-    if (requireNode) {
+    if (window.inElectron) {
       this.get("tareaListarDispositivos").perform({});
 
       var board = new five.Board({

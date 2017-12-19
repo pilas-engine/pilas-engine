@@ -1,6 +1,6 @@
-import Ember from "ember";
+import Service from "@ember/service";
 
-export default Ember.Service.extend({
+export default Service.extend({
   activar() {
     function actualizar() {
       setTimeout(function() {
@@ -8,8 +8,8 @@ export default Ember.Service.extend({
       }, 500);
     }
 
-    if (window && window.process && window.process.type) {
-      var fs = require("fs");
+    if (window.enElectron) {
+      var fs = requireNode("fs");
 
       if (fs.existsSync("dist/assets")) {
         fs.watchFile("dist/assets/pilas-engine.js", actualizar);

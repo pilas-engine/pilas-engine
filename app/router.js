@@ -1,7 +1,7 @@
-import Ember from "ember";
+import EmberRouter from "@ember/routing/router";
 import config from "./config/environment";
 
-const Router = Ember.Router.extend({
+const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL
 });
@@ -12,10 +12,10 @@ Router.map(function() {
   this.route("manual");
   this.route("api");
   this.route("experimentos");
-  this.route('demo');
-  this.route('arduino');
-  this.route('editor');
-  this.route('ejemplos');
+  this.route("demo");
+  this.route("arduino");
+  this.route("editor");
+  this.route("ejemplos");
 });
 
 export default Router;

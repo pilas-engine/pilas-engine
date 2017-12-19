@@ -24,6 +24,9 @@ class Sprite extends Phaser.Sprite {
     this.events.onDragStop.add(this.cuando_termina_de_mover, this);
   }
 
+  al_terminar_de_arrastrar(a:any) {
+  }
+
   cuando_termina_de_mover() {
     if (this.al_terminar_de_arrastrar) {
       this.al_terminar_de_arrastrar(this);

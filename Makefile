@@ -51,6 +51,7 @@ comandos:
 	@echo "    ${G}api${N}                  Genera la documentación de API para pilas."
 	@echo "    ${G}pilas_manual${N}         Genera el manual de pilas."
 	@echo "    ${G}pilas_sprites${N}        Genera los spritesheets."
+	@echo "    ${G}actualizar_phaser${N}    Actualiza phaser a una versión más reciente."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
 	@echo ""
@@ -202,3 +203,14 @@ pilas_manual:
 	@echo ""
 	@echo "${G}OK, la documentación quedó en public/manual"
 	@echo ""
+
+actualizar_phaser:
+	@echo "${Y}Para actualizar phaser, hay que seguir estos pasos:${N}"
+	@echo "${Y}${N}"
+	@echo "${Y} - Subir el número de versión de package.json.${N}"
+	@echo "${Y} - Ejecutar npm install.${N}"
+	@echo "${Y} - Copiar phaser al directorio public:${N}"
+	@echo "${Y}${N}"
+	@echo "${Y}        cp node_modules/phaser-ce/build/phaser.js public/${N}"
+	@echo "${Y}${N}"
+	

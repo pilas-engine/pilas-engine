@@ -3,14 +3,11 @@
 # compiled output
 /dist
 /tmp
-.DS_Store
 /binarios
 
 # dependencies
 /node_modules
 /bower_components
-
-pilasengine/node_modules/
 
 # misc
 /.sass-cache
@@ -18,8 +15,12 @@ pilasengine/node_modules/
 /coverage/*
 /libpeerconnection.log
 npm-debug.log*
+yarn-error.log
 testem.log
 
+# ember-try
+.node_modules.ember-try/
+bower.json.ember-try
+package.json.ember-try
 
-.env.deploy.*
-docs/_book
+electron-out/

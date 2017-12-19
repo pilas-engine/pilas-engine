@@ -9,8 +9,22 @@
 
     {{content-for "head"}}
 
-    <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
-    <link rel="stylesheet" href="{{rootURL}}assets/pilas-engine.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/pilas-engine.css">
+
+<script>
+window.enElectron = false;
+
+var win = window;
+win.moduleNode = win.module;
+win.processNode = win.process;
+win.requireNode = win.require;
+
+delete win.module;
+delete win.process;
+delete win.require;
+</script>
+
 
     {{content-for "head-footer"}}
   </head>
@@ -21,5 +35,11 @@
     <script src="{{rootURL}}assets/pilas-engine.js"></script>
 
     {{content-for "body-footer"}}
+
+<script>
+win.process = win.processNode;
+win.module = win.moduleNode;
+</script>
+
   </body>
 </html>
