@@ -97,7 +97,6 @@ export default Ember.Component.extend({
     this.set("entidades", this.get("proyecto.entidades"));
 
     this.set("estado", new EstadoCarga());
-    console.log("didInsertElement");
 
     iframe.onload = () => {
       let contexto = iframe.contentWindow;

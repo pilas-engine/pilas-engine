@@ -9,11 +9,19 @@
 
     {{content-for "head"}}
     {{content-for "test-head"}}
+
 <script>
 window.enElectron = false;
-requireNode = function() {};
-</script>
 
+var win = window;
+win.moduleNode = win.module;
+win.processNode = win.process;
+win.requireNode = win.require;
+
+delete win.module;
+delete win.process;
+delete win.require;
+</script>
 
 
     <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
@@ -35,5 +43,12 @@ requireNode = function() {};
 
     {{content-for "body-footer"}}
     {{content-for "test-body-footer"}}
+
+<script>
+win.process = win.processNode;
+win.module = win.moduleNode;
+</script>
+
+
   </body>
 </html>
