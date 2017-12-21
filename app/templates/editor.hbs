@@ -2,12 +2,12 @@
 
 {{pilas-boton-regresar}}
 
-<p>Titulo: {{model.titulo}}</p>
+<p>Titulo: {{proyecto.titulo}}</p>
 
-<p>cantidad de escenas: {{model.escenas.length}}</p>
+<p>cantidad de escenas: {{proyecto.escenas.length}}</p>
 
 <ul>
-  {{#each model.escenas as |escena|}}
+  {{#each proyecto.escenas as |escena|}}
     <li>Escena: {{escena.nombre}} ({{escena.id}})</li>
 
       <ul>
@@ -23,10 +23,10 @@
   {{/each}}
 </ul>
 
-<button {{action "agregarEscena" model}} class='ui button'>Agregar escena</button>
-<button {{action "agregarActor" model}} class='ui button'>Agregar actor a la escena 1</button>
-<button {{action "serializar" model}} class='ui button'>Serializar</button>
+<button {{action "agregarEscena" proyecto}} class='ui button'>Agregar escena</button>
+<button {{action "agregarActor" proyecto}} class='ui button'>Agregar actor a la escena 1</button>
+<button {{action "serializar" proyecto}} class='ui button'>Serializar</button>
 
-<button {{action "cambiarEscena" model}} class='ui button'>Cambiar el nombre de escena</button>
+<button {{action "cambiarEscena" proyecto}} class='ui button'>Cambiar el nombre de escena</button>
 
-<button {{action "moverActores" model}} class='ui button'>MoverActores de la escena 1</button>
+<button {{action "moverActores" proyecto}} class='ui button'>MoverActores a posiciones aleatorias en la escena 1</button>
