@@ -20,8 +20,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
     if (params.serializado) {
       this.cargarProyectoDesdeQueryParams(params);
     } else {
-      let proyecto = this.crearProyectoInicial();
-      this.set("proyecto", proyecto);
+      this.crearProyectoInicial();
     }
   },
 
@@ -38,7 +37,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
   },
 
   crearProyectoInicial() {
-    return Ember.Object.create({
+    let proyecto = Ember.Object.create({
       titulo: "Proyecto demo",
       escenas: [
         Ember.Object.create({
@@ -53,9 +52,11 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         })
       ]
     });
+
+    this.set("proyecto", proyecto);
   },
 
-  reset({ queryParams }, isExiting) {
+  reset(_, isExiting) {
     if (isExiting) {
       this.resetQueryParams();
     }
