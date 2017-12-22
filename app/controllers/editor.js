@@ -26,6 +26,11 @@ export default Ember.Controller.extend(queryParams.Mixin, {
 
   cargarProyectoDesdeQueryParams(params) {
     let proyecto = string_a_json(params.serializado);
+    let proyectoComoObjetoEmber = this.convertirEscenaEnObjetoEmber(proyecto);
+    this.set("proyecto", proyectoComoObjetoEmber);
+  },
+
+  convertirEscenaEnObjetoEmber(proyecto) {
     let proyectoComoObjetoEmber = Ember.Object.create(proyecto);
 
     proyectoComoObjetoEmber.escenas = proyecto.escenas.map(escena => {
@@ -33,27 +38,34 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       return Ember.Object.create(escena);
     });
 
-    this.set("proyecto", proyectoComoObjetoEmber);
+    return proyectoComoObjetoEmber;
   },
 
   crearProyectoInicial() {
-    let proyecto = Ember.Object.create({
+    let proyecto = {
       titulo: "Proyecto demo",
       escenas: [
-        Ember.Object.create({
+        {
           nombre: "escena principal",
           id: 1,
-          actores: []
-        }),
-        Ember.Object.create({
+          actores: [
+            {
+              x: 0,
+              y: 0,
+              tipo: "actor"
+            }
+          ]
+        },
+        {
           nombre: "Otra escena",
           id: 2,
           actores: []
-        })
+        }
       ]
-    });
+    };
 
-    this.set("proyecto", proyecto);
+    let proyectoComoObjetoEmber = this.convertirEscenaEnObjetoEmber(proyecto);
+    this.set("proyecto", proyectoComoObjetoEmber);
   },
 
   reset(_, isExiting) {
