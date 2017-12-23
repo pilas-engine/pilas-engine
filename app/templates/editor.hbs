@@ -1,30 +1,76 @@
+<div class="vh-100 w-100 dt">
+
 {{outlet}}
 
-{{pilas-boton-regresar}}
+<div class="flex flex-column debug vh-100">
 
-<p>Titulo: {{proyecto.titulo}}</p>
+  <div>
+    <div class="dt dt--fixed">
+      <div class="dtc">
+        {{pilas-boton-regresar}}
+      </div>
 
-<p>cantidad de escenas: {{proyecto.escenas.length}}</p>
+      <div class="dtc tr">
+        {{pilas-boton-interruptor variable=ocultarEditor}}
+      </div>
+    </div>
 
-<ul class="verdana f6 bg-black-10">
-  {{#each proyecto.escenas as |escena|}}
-    <li>Escena: {{escena.nombre}} ({{escena.id}})</li>
+  </div>
 
-      <ul>
-        {{#each escena.actores as |actor|}}
-          <li>Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}})</li>
-        {{else}}
-          <li>sin actores</li>
-        {{/each}}
-      </ul>
+  <div class="flex-expand">
 
-  {{else}}
-    <li>sin escenas</li>
-  {{/each}}
-</ul>
+    <div class="flex h-100">
 
-{{pilas-boton accion=(action "agregarEscena" proyecto) texto="Agregar escena"}}
-{{pilas-boton accion=(action "agregarActor" proyecto) texto="Agregar actor a la escena 1"}}
-{{pilas-boton accion=(action "serializar" proyecto) texto="Serializar"}}
-{{pilas-boton accion=(action "cambiarEscena" proyecto) texto="Cambiar el nombre de escena"}}
-{{pilas-boton accion=(action "moverActores" proyecto) texto="MoverActores a posiciones aleatorias en la escena 1"}}
+      <div class="br b--silver w-50">
+
+        <p>Titulo: {{proyecto.titulo}}</p>
+
+        <p>cantidad de escenas: {{proyecto.escenas.length}}</p>
+
+        <ul class="verdana f6 bg-black-10">
+          {{#each proyecto.escenas as |escena|}}
+            <li>Escena: {{escena.nombre}} ({{escena.id}})</li>
+
+              <ul>
+                {{#each escena.actores as |actor|}}
+                  <li>Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}})</li>
+                {{else}}
+                  <li>sin actores</li >
+                {{/each}}
+              </ul>
+
+          {{else}}
+            <li>sin escenas</li>
+          {{/each}}
+        </ul>
+
+        <div>
+          {{pilas-boton accion=(action "agregarEscena" proyecto) texto="Agregar escena"}}
+          {{pilas-boton accion=(action "agregarActor" proyecto) texto="Agregar actor a la escena 1"}}
+          {{pilas-boton accion=(action "serializar" proyecto) texto="Serializar"}}
+          {{pilas-boton accion=(action "cambiarEscena" proyecto) texto="Cambiar el nombre de escena"}}
+          {{pilas-boton accion=(action "moverActores" proyecto) texto="MoverActores a posiciones aleatorias en la escena 1"}}
+        </div>
+
+      </div>
+
+      <div class="bg-red white w-100">
+
+        Canvas
+
+      </div>
+
+
+      <div class="bg-blue white w-100 {{if ocultarEditor 'dn'}}">
+
+        Editor
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
+</div>

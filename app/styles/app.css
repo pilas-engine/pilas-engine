@@ -39,3 +39,13 @@
 .bg-primario {
   background-color: rgb(245, 245, 245);
 }
+
+:root,
+.ember-application,
+.ember-application > div {
+  height: 100%;
+}
+
+.flex-expand {
+  flex: 1;
+}
