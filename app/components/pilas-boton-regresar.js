@@ -8,5 +8,6 @@ export default Ember.Component.extend({
     black bg-animate hover-bg-black-10 b--black-20 pr3
     verdana f6
     bg-primario
+    unselectable
   `
 });

@@ -8,6 +8,16 @@ const queryParams = new QueryParams({
     defaultValue: null,
     refresh: true,
     replace: true
+  },
+  ocultarEditor: {
+    as: "p3",
+    defaultValue: false,
+    replace: true
+  },
+  ocultarPropiedades: {
+    as: "p1",
+    defaultValue: false,
+    replace: true
   }
 });
 

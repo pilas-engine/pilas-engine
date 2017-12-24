@@ -2,16 +2,19 @@
 
 {{outlet}}
 
-<div class="flex flex-column debug vh-100">
+<div class="flex flex-column vh-100">
 
   <div>
-    <div class="dt dt--fixed">
+    <div class="dt dt--fixed unselectable">
       <div class="dtc">
         {{pilas-boton-regresar}}
       </div>
 
       <div class="dtc tr">
-        {{pilas-boton-interruptor variable=ocultarEditor}}
+        <div class="dib mr2">
+          {{pilas-boton-interruptor class="pointer" variable=ocultarPropiedades iconoActivo="p1_on" iconoInactivo="p1_off"}}
+          {{pilas-boton-interruptor class="pointer" variable=ocultarEditor iconoActivo="p2_on" iconoInactivo="p2_off"}}
+        </div>
       </div>
     </div>
 
@@ -21,7 +24,7 @@
 
     <div class="flex h-100">
 
-      <div class="br b--silver w-50">
+      <div class="br b--silver w-50 {{if ocultarPropiedades 'dn'}}">
 
         <p>Titulo: {{proyecto.titulo}}</p>
 

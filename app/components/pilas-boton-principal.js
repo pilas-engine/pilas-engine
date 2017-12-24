@@ -9,5 +9,7 @@ export default Ember.Component.extend({
     b--black-10 pointer
     ma2
     bg-primario
+    truncate
+    unselectable
   `
 });

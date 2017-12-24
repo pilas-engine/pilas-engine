@@ -19,7 +19,7 @@
 	background-size: 270px 224px;
 }
 
-.typescript {
+.pilas_logo_60 {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -69px -134px;
@@ -33,7 +33,7 @@
 	background-size: 270px 224px;
 }
 
-.pilas_logo_60 {
+.typescript {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -208px -2px;
@@ -47,38 +47,38 @@
 	background-size: 270px 224px;
 }
 
-.info_squared {
+.computadora {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -120px;
 	background-size: 270px 224px;
 }
 
-.test {
+.api {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -120px;
 	background-size: 270px 224px;
 }
 
-.volver {
-    width: 24px;
-    height: 24px;
-    background: url("spritesheet.png") -58px -198px;
+.ejemplos {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -208px -149px;
 	background-size: 270px 224px;
 }
 
-.manual {
+.test {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -149px;
 	background-size: 270px 224px;
 }
 
-.ejemplos {
-    width: 25px;
-    height: 25px;
-    background: url("spritesheet.png") -134px -76px;
+.p1_off {
+    width: 12px;
+    height: 12px;
+    background: url("spritesheet.png") -256px -178px;
 	background-size: 270px 224px;
 }
 
@@ -89,38 +89,66 @@
 	background-size: 270px 224px;
 }
 
-.computadora {
+.info_squared {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -134px -105px;
 	background-size: 270px 224px;
 }
 
-.settings {
+.manual {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -105px;
 	background-size: 270px 224px;
 }
 
-.demo {
+.volver {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -2px -198px;
 	background-size: 270px 224px;
 }
 
-.arduino {
+.demo {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -30px -198px;
 	background-size: 270px 224px;
 }
 
-.api {
+.arduino {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -58px -198px;
+	background-size: 270px 224px;
+}
+
+.p2_on {
+    width: 12px;
+    height: 12px;
+    background: url("spritesheet.png") -208px -178px;
+	background-size: 270px 224px;
+}
+
+.p2_off {
+    width: 12px;
+    height: 12px;
+    background: url("spritesheet.png") -224px -178px;
+	background-size: 270px 224px;
+}
+
+.p1_on {
+    width: 12px;
+    height: 12px;
+    background: url("spritesheet.png") -240px -178px;
+	background-size: 270px 224px;
+}
+
+.settings {
     width: 25px;
     height: 25px;
-    background: url("spritesheet.png") -208px -149px;
+    background: url("spritesheet.png") -134px -76px;
 	background-size: 270px 224px;
 }
 

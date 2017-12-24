@@ -8,5 +8,6 @@ export default Component.extend({
     verdana f6 link pointer
     hover-bg-black-10
     black bg-animate hover-bg-black-10 b--black-20
+    unselectable
   `
 });
