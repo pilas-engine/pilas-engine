@@ -1,106 +1,25 @@
 import Ember from "ember";
-var HOST = "file://";
-
-if (window.location.host) {
-  HOST = "http://" + window.location.host;
-}
-
-class EstadoCarga {
-  constructor() {
-    this.nombre = "Cargando ...";
-    this.cargando = true;
-  }
-}
-
-class EstadoEdicion {
-  constructor(contexto, entidades) {
-    this.nombre = "Edición";
-    this.contexto = contexto;
-    this.puedeEjecutar = true;
-    this.entidades = entidades;
-    this.cargando = false;
-
-    let data = {
-      tipo: "define_escena",
-      nombre: "editorState",
-      entidades: entidades
-    };
-
-    this.contexto.postMessage(data, HOST);
-  }
-
-  ejecutar() {
-    let entidades = this.contexto.pilas.obtener_entidades();
-    return new EstadoEjecucion(this.contexto, entidades);
-  }
-
-  detener() {
-    return this;
-  }
-
-  agregarActor(nombre) {
-    var entidades = this.contexto.pilas.obtener_entidades();
-
-    entidades.push({
-      id: "demo_123" + Math.random(),
-      nombre: "demo",
-      tipo: nombre,
-      x: 250,
-      y: 50,
-      imagen: nombre,
-      centro_x: 30,
-      centro_y: 30
-    });
-
-    return new EstadoEdicion(this.contexto, entidades);
-  }
-}
-
-class EstadoEjecucion {
-  constructor(contexto, entidades) {
-    this.nombre = "Ejecucion";
-    this.contexto = contexto;
-    this.puedeEjecutar = false;
-    this.entidades = entidades;
-    this.cargando = false;
-
-    this.entidadesOriginales = entidades;
-
-    let data = {
-      tipo: "define_escena",
-      nombre: "estadoEjecucion",
-      entidades: entidades
-    };
-
-    this.contexto.postMessage(data, HOST);
-  }
-
-  ejecutar() {
-    return this;
-  }
-
-  detener() {
-    let entidades = this.entidades;
-    return new EstadoEdicion(this.contexto, entidades);
-  }
-}
+import estados from "../estados/estados";
+import utils from "../utils/utils";
 
 export default Ember.Component.extend({
   ancho: 400,
   alto: 400,
   entidades: null,
   estado: null,
+  bus: Ember.inject.service(),
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
 
-    this.set("entidades", this.get("proyecto.entidades"));
+    //this.set("entidades", this.get("proyecto.entidades"));
+    this.set("entidades", []);
 
-    this.set("estado", new EstadoCarga());
+    this.get("bus").trigger("cambiaEstado", { estado: "carga" });
+    this.set("estado", new estados.EstadoCarga());
 
     iframe.onload = () => {
       let contexto = iframe.contentWindow;
-      console.log("iframe.onload");
 
       let data = {
         tipo: "iniciar_pilas",
@@ -108,35 +27,49 @@ export default Ember.Component.extend({
         alto: this.get("alto")
       };
 
-      contexto.postMessage(data, HOST);
+      this.set("funcionParaAtenderMensajes", e => {
+        return this.atenderMensajesDePilas(contexto, e);
+      });
 
-      // Mensajes desde el iframe de pilas-bloques
-      window.addEventListener(
-        "message",
-        e => {
-          console.log("llega el mensaje: " + e.data.tipo);
+      contexto.postMessage(data, utils.HOST);
 
-          if (e.origin !== HOST) {
-            return;
-          }
+      window.addEventListener("message", this.get("funcionParaAtenderMensajes"), false);
 
-          if (e.data.tipo === "movimiento_del_mouse") {
-            this.set("mouse_x", e.data.x);
-            this.set("mouse_y", e.data.y);
-          }
-
-          if (e.data.tipo === "entidades") {
-            console.log("Desde el editor llegan las entidades...");
-            this.set("entidades", e.data.entidades);
-          }
-
-          if (e.data.tipo === "finaliza_carga_de_recursos") {
-            this.set("estado", new EstadoEdicion(contexto, this.get("entidades")));
-          }
-        },
-        false
-      );
+      this.get("bus").on("cargarEscena", this, "alCargarEscenaDesdeElEditor");
     };
+  },
+
+  willDestroyElement() {
+    window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
+    this.get("bus").off("cargarEscena", this, "alCargarEscenaDesdeElEditor");
+  },
+
+  alCargarEscenaDesdeElEditor({ escena }) {
+    this.set("estado", this.get("estado").definirEscena(escena));
+  },
+
+  atenderMensajesDePilas(contexto, e) {
+    if (e.origin !== utils.HOST) {
+      return;
+    }
+
+    if (e.data.tipo === "movimiento_del_mouse") {
+      this.set("mouse_x", e.data.x);
+      this.set("mouse_y", e.data.y);
+    }
+
+    if (e.data.tipo === "entidades") {
+      this.set("entidades", e.data.entidades);
+    }
+
+    if (e.data.tipo === "finaliza_carga_de_recursos") {
+      this.set("estado", new estados.EstadoEdicion(contexto, this.get("entidades")));
+      this.get("bus").trigger("finalizaCarga");
+    }
+
+    if (e.data.tipo === "termina_de_mover_un_actor") {
+      this.get("bus").trigger("moverActor", e.data);
+    }
   },
   actions: {
     ejecutar() {

@@ -37,8 +37,11 @@ class Pilas {
     }
 
     if (e.data.tipo === "define_escena") {
-      this.game.state.start(e.data.nombre, true, false, {
-        entidades: e.data.entidades
+      this.game.state.start("editorState", true, false, {
+        entidades: e.data.entidades,
+        cuando_termina_de_mover: datos => {
+          this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
+        }
       });
     }
 

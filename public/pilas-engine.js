@@ -51,8 +51,11 @@ var Pilas = (function () {
             return;
         }
         if (e.data.tipo === "define_escena") {
-            this.game.state.start(e.data.nombre, true, false, {
-                entidades: e.data.entidades
+            this.game.state.start("editorState", true, false, {
+                entidades: e.data.entidades,
+                cuando_termina_de_mover: function (datos) {
+                    _this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
+                }
             });
         }
         if (e.data.tipo === "iniciar_pilas") {
@@ -113,6 +116,7 @@ var Sprite = (function (_super) {
     }
     Sprite.prototype.iniciar = function (entidad) {
         this.key = entidad.imagen;
+        this.id = entidad.id;
         this.x = entidad.x;
         this.y = entidad.y;
         this.pivot.x = entidad.centro_x;
@@ -127,11 +131,10 @@ var Sprite = (function (_super) {
         this.events.onDragStop.add(this.ocultar_sombra, this);
         this.events.onDragStop.add(this.cuando_termina_de_mover, this);
     };
-    Sprite.prototype.al_terminar_de_arrastrar = function (a) {
-    };
+    Sprite.prototype.al_terminar_de_arrastrar = function (a) { };
     Sprite.prototype.cuando_termina_de_mover = function () {
         if (this.al_terminar_de_arrastrar) {
-            this.al_terminar_de_arrastrar(this);
+            this.al_terminar_de_arrastrar({ id: this.id, x: this.x, y: this.y });
         }
     };
     Sprite.prototype.activar_sombra = function () {
@@ -161,6 +164,7 @@ var EstadoEditor = (function (_super) {
     }
     EstadoEditor.prototype.init = function (datos) {
         this.entidades = datos.entidades;
+        this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
         this.sprites = {};
         this.crear_texto_con_posicion_del_mouse();
     };
@@ -185,7 +189,7 @@ var EstadoEditor = (function (_super) {
             if (!_this.sprites[e.id]) {
                 sprite = new Sprite(_this.game, 0, 0, e.imagen);
                 sprite.iniciar(e);
-                sprite.al_terminar_de_arrastrar = function (s) { };
+                sprite.al_terminar_de_arrastrar = _this.cuando_termina_de_mover;
                 _this.world.add(sprite);
                 _this.sprites[e.id] = sprite;
             }

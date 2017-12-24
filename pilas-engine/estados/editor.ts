@@ -5,6 +5,7 @@ class EstadoEditor extends Phaser.State {
 
   init(datos) {
     this.entidades = datos.entidades;
+    this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
     this.sprites = {};
     this.crear_texto_con_posicion_del_mouse();
   }
@@ -34,6 +35,7 @@ class EstadoEditor extends Phaser.State {
     // Las entidades se leen para generar el cache, pero
     // también se actualiza en base a la posición de los sprites
     // que el usuario puede mover por la pantalla.
+
     this.entidades = this.entidades.map(e => {
       var sprite = null;
 
@@ -42,7 +44,7 @@ class EstadoEditor extends Phaser.State {
         sprite = new Sprite(this.game, 0, 0, e.imagen);
         sprite.iniciar(e);
 
-        sprite.al_terminar_de_arrastrar = function(s) {};
+        sprite.al_terminar_de_arrastrar = this.cuando_termina_de_mover;
 
         this.world.add(sprite);
         this.sprites[e.id] = sprite;

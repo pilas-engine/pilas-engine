@@ -4,6 +4,7 @@ class Sprite extends Phaser.Sprite {
 
   iniciar(entidad) {
     this.key = entidad.imagen;
+    this.id = entidad.id;
     this.x = entidad.x;
     this.y = entidad.y;
 
@@ -24,12 +25,11 @@ class Sprite extends Phaser.Sprite {
     this.events.onDragStop.add(this.cuando_termina_de_mover, this);
   }
 
-  al_terminar_de_arrastrar(a:any) {
-  }
+  al_terminar_de_arrastrar(a: any) {}
 
   cuando_termina_de_mover() {
     if (this.al_terminar_de_arrastrar) {
-      this.al_terminar_de_arrastrar(this);
+      this.al_terminar_de_arrastrar({ id: this.id, x: this.x, y: this.y });
     }
   }
 

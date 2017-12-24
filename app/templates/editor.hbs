@@ -24,19 +24,36 @@
 
     <div class="flex h-100">
 
-      <div class="br b--silver w-50 {{if ocultarPropiedades 'dn'}}">
+      <div class="separadorr pa2 w-30 {{if ocultarPropiedades 'dn'}}">
+
+        {{#if cargando}}
+          Cargando ...
+        {{else}}
+          Listo para usar!
+        {{/if}}
 
         <p>Titulo: {{proyecto.titulo}}</p>
 
         <p>cantidad de escenas: {{proyecto.escenas.length}}</p>
 
+        <div class="tructate pb2">
+          {{pilas-boton accion=(action "serializar" proyecto) texto="Serializar"}}
+        </div>
+
+        <div class='truncate'>
+          {{pilas-boton accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
+          {{pilas-boton accion=(action "agregarActor" proyecto) texto="+ Actor"}}
+          {{pilas-boton accion=(action "cambiarEscena" proyecto) texto="~ Renombrar"}}
+          {{pilas-boton accion=(action "moverActores" proyecto) texto="Mover"}}
+        </div>
+
         <ul class="verdana f6 bg-black-10">
           {{#each proyecto.escenas as |escena|}}
-            <li>Escena: {{escena.nombre}} ({{escena.id}})</li>
+            <li class="pointer hover-bg-black-10" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
 
               <ul>
                 {{#each escena.actores as |actor|}}
-                  <li>Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}})</li>
+                  <li class='truncate'>Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}}, imagen: {{actor.imagen}})</li>
                 {{else}}
                   <li>sin actores</li >
                 {{/each}}
@@ -47,22 +64,18 @@
           {{/each}}
         </ul>
 
-        <div>
-          {{pilas-boton accion=(action "agregarEscena" proyecto) texto="Agregar escena"}}
-          {{pilas-boton accion=(action "agregarActor" proyecto) texto="Agregar actor a la escena 1"}}
-          {{pilas-boton accion=(action "serializar" proyecto) texto="Serializar"}}
-          {{pilas-boton accion=(action "cambiarEscena" proyecto) texto="Cambiar el nombre de escena"}}
-          {{pilas-boton accion=(action "moverActores" proyecto) texto="MoverActores a posiciones aleatorias en la escena 1"}}
-        </div>
 
       </div>
 
-      <div class="w-100 pa2 tc">
-        canvas
+      <div class="w-40 pa2 tc">
+        {{pilas-phaser-experimental
+          ancho=proyecto.ancho
+          alto=proyecto.alto
+        }}
       </div>
 
 
-      <div class="pa1 w-100 {{if ocultarEditor 'dn'}}">
+      <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
         <textarea class='pa2 w-100 h-100'>alert("hola!");</textarea>
       </div>
 

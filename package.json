@@ -48,6 +48,7 @@
     "ember-parachute": "^0.3.6",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.16.0",
+    "ember-truth-helpers": "^2.0.0",
     "gitbook-cli": "^2.3.0",
     "johnny-five": "^0.11.6",
     "loader.js": "^4.2.3",
