@@ -72,7 +72,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
     });
   },
 
-  avisarCambioDeEstado(datos) {
+  avisarCambioDeEstado(/*datos*/) {
     //console.log(datos.estado);
   },
 
@@ -177,7 +177,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         actores: []
       });
     },
-    agregarActor(model) {
+    agregarActor(/*model*/) {
       let escena = this.obtenerEscenaActual();
 
       escena.actores.pushObject(
@@ -194,8 +194,9 @@ export default Ember.Controller.extend(queryParams.Mixin, {
 
       this.mostrarEscenaActualSobrePilas();
     },
-    moverActores(model) {
+    moverActores(/*model*/) {
       let escena = this.obtenerEscenaActual();
+
       escena.actores.forEach(actor => {
         actor.set("x", Math.floor(Math.random() * 300));
         actor.set("y", Math.floor(Math.random() * 300));
