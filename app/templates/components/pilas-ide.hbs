@@ -1,0 +1,28 @@
+{{yield}}
+
+{{model.nombreDeEstado}}
+
+<div class="layout">
+
+  <div class="game">
+    {{#link-to "index" class="ui button"}}Volver{{/link-to}}
+
+    {{pilas-canvas cuandoCarga=(action "cuandoCargaPilas")}}
+
+    {{#if model.puedeEjecutar}}
+      <button {{action "ejecutar"}} class="ui button blue">Ejecutar</button>
+    {{/if}}
+
+    {{#if model.puedeDetener}}
+      <button {{action "detener"}} class="ui button red">Detener</button>
+    {{/if}}
+
+  </div>
+
+  <div class="editor {{if model.editorDeshabilitado 'editor-deshabilitado'}}">
+    {{#monaco-editor code=model.codigo readOnly=model.editorDeshabilitado cuandoCarga=(action "cuandoCargaMonacoEditor") onChange=(action "cuandoCambiaElCodigo")}}
+      <div class="ui active centered inline loader"></div>
+    {{/monaco-editor}}
+  </div>
+
+</div>

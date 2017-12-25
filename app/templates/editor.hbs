@@ -3,12 +3,12 @@
 {{outlet}}
 
 <div class="flex flex-column vh-100">
+  <div>
+    {{pilas-boton-regresar}}
+  </div>
 
   <div>
     <div class="dt dt--fixed unselectable">
-      <div class="dtc">
-        {{pilas-boton-regresar}}
-      </div>
 
       <div class="dtc tr">
         <div class="dib mr2">
@@ -47,9 +47,9 @@
           {{pilas-boton accion=(action "moverActores" proyecto) texto="Mover"}}
         </div>
 
-        <ul class="verdana f6 bg-black-10">
+        <ul class="verdana f6 bg-black-10 unselectable">
           {{#each proyecto.escenas as |escena|}}
-            <li class="pointer hover-bg-black-10" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
+            <li class="pointer hover-bg-black-10 {{if (eq escenaActual escena.id) "red"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
 
               <ul>
                 {{#each escena.actores as |actor|}}

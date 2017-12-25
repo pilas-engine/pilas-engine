@@ -1,11 +1,24 @@
-import { moduleForComponent, test } from "ember-qunit";
-import hbs from "htmlbars-inline-precompile";
+import { moduleForComponent, test } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent("pilas-editor", "Integration | Component | pilas editor", {
+moduleForComponent('pilas-editor', 'Integration | Component | pilas editor', {
   integration: true
 });
 
-test("it renders", function(assert) {
+test('it renders', function(assert) {
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
+
   this.render(hbs`{{pilas-editor}}`);
-  assert.ok(this.$().text(), "Se dibuja bien, al menos al principio");
+
+  assert.equal(this.$().text().trim(), '');
+
+  // Template block usage:
+  this.render(hbs`
+    {{#pilas-editor}}
+      template block text
+    {{/pilas-editor}}
+  `);
+
+  assert.equal(this.$().text().trim(), 'template block text');
 });
