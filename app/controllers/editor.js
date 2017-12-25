@@ -75,7 +75,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 200,
               centro_x: 0.5,
               centro_y: 0.5,
-              tipo: "actor",
+              tipo: "pelota",
               imagen: "pelota"
             },
             {

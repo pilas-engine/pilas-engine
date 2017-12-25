@@ -1,6 +1,50 @@
 import Component from "@ember/component";
 import Ember from "ember";
 
+class ModoCargando {
+  constructor() {
+    this.ModoCargando = true;
+    this.nombreDeEstado = "ModoCargando";
+    this.puedeEjecutar = false;
+    this.puedeDetener = false;
+    this.editorDeshabilitado = true;
+    this.codigo = "Demo";
+  }
+
+  onReady() {
+    return new ModoEdicion();
+  }
+}
+
+class ModoEdicion {
+  constructor() {
+    this.ModoCargando = false;
+    this.nombreDeEstado = "ModoEdicion";
+    this.puedeEjecutar = true;
+    this.puedeDetener = false;
+    this.editorDeshabilitado = false;
+    this.codigo = "Demo";
+  }
+
+  ejecutar() {
+    return new ModoEjecucion();
+  }
+}
+
+class ModoEjecucion {
+  constructor() {
+    this.ModoCargando = false;
+    this.nombreDeEstado = "ModoEjecucion";
+    this.puedeEjecutar = false;
+    this.puedeDetener = true;
+    this.editorDeshabilitado = true;
+  }
+
+  detener() {
+    return new ModoEdicion();
+  }
+}
+
 export default Component.extend({
   bus: Ember.inject.service(),
   codigo: "// codigo",
@@ -26,6 +70,7 @@ export default Component.extend({
   ],
 
   didInsertElement() {
+    this.set("estado", new ModoCargando());
     this.conectarEventos();
   },
 
@@ -83,6 +128,12 @@ export default Component.extend({
   },
 
   actions: {
+    ejecutar() {
+      this.set("estado", this.get("estado").ejecutar());
+    },
+    detener() {
+      this.set("estado", this.get("estado").detener());
+    },
     agregarEscena(model) {
       model.escenas.pushObject({
         id: this.generarID(),

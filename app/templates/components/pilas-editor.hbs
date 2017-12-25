@@ -2,6 +2,23 @@
   <div>
     <div class="dt dt--fixed unselectable">
 
+      <div class="dtc">
+
+        <p>Nombre: {{estado.nombreDeEstado}}</p>
+
+        {{#if estado.puedeEjecutar}}
+          <button class="ui button blue">Ejecutar</button>
+        {{/if}}
+
+        {{#if estado.puedeDetener}}
+          <button class="ui button red">Detener</button>
+        {{/if}}
+
+        <p> Editor deshabilitado: {{estado.editorDeshabilitado}}</p>
+
+
+      </div>
+
       <div class="dtc tr">
         <div class="dib mr2">
           {{pilas-boton-interruptor class="pointer" variable=ocultarPropiedades iconoActivo="p1_on" iconoInactivo="p1_off"}}
