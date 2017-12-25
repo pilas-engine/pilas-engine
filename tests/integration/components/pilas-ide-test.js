@@ -6,6 +6,6 @@ moduleForComponent("pilas-editor", "Integration | Component | pilas editor", {
 });
 
 test("it renders", function(assert) {
-  this.render(hbs`{{pilas-editor}}`);
+  this.render(hbs`{{pilas-ide}}`);
   assert.ok(this.$().text(), "Se dibuja bien, al menos al principio");
 });
