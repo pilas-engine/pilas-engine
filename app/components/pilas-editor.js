@@ -3,6 +3,7 @@ import Ember from "ember";
 
 export default Component.extend({
   bus: Ember.inject.service(),
+  codigo: "// codigo",
   tagName: "",
   mapaDeEventos: [
     {
@@ -110,6 +111,14 @@ export default Component.extend({
     definirEscena(indiceDeEscena) {
       this.set("escenaActual", indiceDeEscena);
       this.mostrarEscenaActualSobrePilas();
+    },
+
+    // Eventos del editor
+    cuandoCargaMonacoEditor() {
+      console.log("Cargó el editor");
+    },
+    cuandoCambiaElCodigo(codigo) {
+      this.set("codigo", codigo);
     }
   }
 });

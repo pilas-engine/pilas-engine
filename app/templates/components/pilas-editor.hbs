@@ -66,8 +66,13 @@
       </div>
 
 
+
       <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
-        <textarea class='pa2 w-100 h-100'>alert("hola!");</textarea>
+
+        {{#monaco-editor code=codigo readOnly=false cuandoCarga=(action "cuandoCargaMonacoEditor") onChange=(action "cuandoCambiaElCodigo")}}
+          Cargando ...
+        {{/monaco-editor}}
+
       </div>
 
 

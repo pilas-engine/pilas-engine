@@ -4,7 +4,7 @@ import getFrameById from "ember-monaco-editor/utils/get-frame-by-id";
 
 export default Ember.Component.extend({
   layout,
-  classNames: ["monaco-editor"],
+  classNames: ["monaco-editor", "w-100", "h-100", "ba"],
   code: "// demo",
   loading: true,
   readOnly: false,
@@ -25,21 +25,13 @@ export default Ember.Component.extend({
 
     const subscription = event => {
       // Ignore messages not coming from this iframe
-      if (
-        event.source === this.get("frame") &&
-        event.data &&
-        event.data.updatedCode
-      ) {
+      if (event.source === this.get("frame") && event.data && event.data.updatedCode) {
         if (this.attrs.onChange) {
           this.attrs.onChange(event.data.updatedCode);
         }
       }
 
-      if (
-        event.source === this.get("frame") &&
-        event.data &&
-        event.data.message
-      ) {
+      if (event.source === this.get("frame") && event.data && event.data.message) {
         if (event.data.message === "load-complete") {
           this.onLoadEditor(this.get("frame").editor);
         }
@@ -63,28 +55,40 @@ export default Ember.Component.extend({
       <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" id="print-modal-content">
       <head>
         <script src="vs/loader.js"></script>
+
+
+        <style type="text/css">
+          html,
+          body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+          }
+        </style>
+
         <script>
-          window.require.config({ paths: { 'vs': 'vs' }});
+          window.require.config({
+            'vs/nls' : {
+              availableLanguages: {
+                '*': 'es'
+              }
+            },
+            paths: {
+              'vs': 'vs'
+            }
+          });
 
           window.require(['vs/editor/editor.main'], function () {
             if (typeof monaco !== "undefined") {
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
+                minimap: true,
                 readOnly: ${this.get("readOnly")},
               });
 
-              /*
-              , {
-                value: '${this.get("code")}',
-                language: '${this.get("language")}'
-              });
-              */
-
               var origin = window.location.origin;
-
-              // TODO: when the code is autocompleted we don't get this even firing
-              // For example type a single ', the editor will autocomplete '' we only get
-              // the first ', not ''
 
               editor.onDidChangeModelContent(function (event) {
                 window.top.postMessage({updatedCode: editor.getValue()}, origin);
@@ -93,12 +97,16 @@ export default Ember.Component.extend({
               window.top.postMessage({message: "load-complete"}, origin);
               window.editor = editor;
 
+              window.onresize = function() {
+                editor.layout();
+              };
+
             }
           });
           </script>
       </head>
       <body>
-        <div id="monaco-editor-wrapper" style="width:800px;height:600px;border:1px solid grey"></div>
+        <div id="monaco-editor-wrapper"  style="width:100%;height:100%"></div>
       </body>
       </html>
 
