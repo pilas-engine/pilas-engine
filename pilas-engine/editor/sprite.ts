@@ -1,6 +1,7 @@
 class Sprite extends Phaser.Sprite {
   rotateSpeed: number;
   shadow: Phaser.Sprite;
+  id: number;
 
   iniciar(entidad) {
     this.key = entidad.imagen;
@@ -20,12 +21,22 @@ class Sprite extends Phaser.Sprite {
   }
 
   conectar_eventos_arrastrar_y_soltar() {
+    this.events.onDragStart.add(this.cuando_comienza_a_mover, this);
     this.events.onDragStart.add(this.activar_sombra, this);
+
     this.events.onDragStop.add(this.ocultar_sombra, this);
     this.events.onDragStop.add(this.cuando_termina_de_mover, this);
   }
 
   al_terminar_de_arrastrar(a: any) {}
+
+  al_comenzar_a_arrastrar(a: any) {}
+
+  cuando_comienza_a_mover() {
+    if (this.al_comenzar_a_arrastrar) {
+      this.al_comenzar_a_arrastrar({ id: this.id, x: this.x, y: this.y });
+    }
+  }
 
   cuando_termina_de_mover() {
     if (this.al_terminar_de_arrastrar) {

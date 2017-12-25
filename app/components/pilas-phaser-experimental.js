@@ -70,6 +70,10 @@ export default Ember.Component.extend({
     if (e.data.tipo === "termina_de_mover_un_actor") {
       this.get("bus").trigger("moverActor", e.data);
     }
+
+    if (e.data.tipo === "comienza_a_mover_un_actor") {
+      this.get("bus").trigger("comienzaAMoverActor", e.data);
+    }
   },
   actions: {
     ejecutar() {

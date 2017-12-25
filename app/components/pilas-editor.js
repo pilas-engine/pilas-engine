@@ -5,6 +5,7 @@ export default Component.extend({
   bus: Ember.inject.service(),
   codigo: "// codigo",
   tagName: "",
+  actorSeleccionado: -1,
   mapaDeEventos: [
     {
       evento: "cambiaEstado",
@@ -17,6 +18,10 @@ export default Component.extend({
     {
       evento: "moverActor",
       metodo: "cuandoTerminaDeMoverUnActorDesdePilas"
+    },
+    {
+      evento: "comienzaAMoverActor",
+      metodo: "cuandoComienzaAMovertUnActorDesdePilas"
     }
   ],
 
@@ -54,6 +59,10 @@ export default Component.extend({
     let actor = escena.actores.findBy("id", datos.id);
     actor.set("x", datos.x);
     actor.set("y", datos.y);
+  },
+
+  cuandoComienzaAMovertUnActorDesdePilas(datos) {
+    this.send("seleccionarActor", datos.id);
   },
 
   mostrarEscenaActualSobrePilas() {
@@ -109,10 +118,15 @@ export default Component.extend({
       this.mostrarEscenaActualSobrePilas();
     },
     definirEscena(indiceDeEscena) {
-      this.set("escenaActual", indiceDeEscena);
-      this.mostrarEscenaActualSobrePilas();
+      if (indiceDeEscena != this.get("escenaActual")) {
+        this.set("actorSeleccionado", -1);
+        this.set("escenaActual", indiceDeEscena);
+        this.mostrarEscenaActualSobrePilas();
+      }
     },
-
+    seleccionarActor(indiceDelActor) {
+      this.set("actorSeleccionado", indiceDelActor);
+    },
     // Eventos del editor
     cuandoCargaMonacoEditor() {
       console.log("Cargó el editor");

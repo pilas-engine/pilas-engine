@@ -6,9 +6,14 @@ class EstadoEditor extends Phaser.State {
   init(datos) {
     this.entidades = datos.entidades;
     this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
+    this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
     this.sprites = {};
     this.crear_texto_con_posicion_del_mouse();
   }
+
+  cuando_termina_de_mover(a: any) {}
+
+  cuando_comienza_a_mover(a: any) {}
 
   crear_texto_con_posicion_del_mouse() {
     var style = {
@@ -45,6 +50,7 @@ class EstadoEditor extends Phaser.State {
         sprite.iniciar(e);
 
         sprite.al_terminar_de_arrastrar = this.cuando_termina_de_mover;
+        sprite.al_comenzar_a_arrastrar = this.cuando_comienza_a_mover;
 
         this.world.add(sprite);
         this.sprites[e.id] = sprite;

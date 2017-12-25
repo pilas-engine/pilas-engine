@@ -55,6 +55,9 @@ var Pilas = (function () {
                 entidades: e.data.entidades,
                 cuando_termina_de_mover: function (datos) {
                     _this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
+                },
+                cuando_comienza_a_mover: function (datos) {
+                    _this._emitirMensajeAlEditor("comienza_a_mover_un_actor", datos);
                 }
             });
         }
@@ -127,11 +130,18 @@ var Sprite = (function (_super) {
         this.conectar_eventos_arrastrar_y_soltar();
     };
     Sprite.prototype.conectar_eventos_arrastrar_y_soltar = function () {
+        this.events.onDragStart.add(this.cuando_comienza_a_mover, this);
         this.events.onDragStart.add(this.activar_sombra, this);
         this.events.onDragStop.add(this.ocultar_sombra, this);
         this.events.onDragStop.add(this.cuando_termina_de_mover, this);
     };
     Sprite.prototype.al_terminar_de_arrastrar = function (a) { };
+    Sprite.prototype.al_comenzar_a_arrastrar = function (a) { };
+    Sprite.prototype.cuando_comienza_a_mover = function () {
+        if (this.al_comenzar_a_arrastrar) {
+            this.al_comenzar_a_arrastrar({ id: this.id, x: this.x, y: this.y });
+        }
+    };
     Sprite.prototype.cuando_termina_de_mover = function () {
         if (this.al_terminar_de_arrastrar) {
             this.al_terminar_de_arrastrar({ id: this.id, x: this.x, y: this.y });
@@ -165,9 +175,12 @@ var EstadoEditor = (function (_super) {
     EstadoEditor.prototype.init = function (datos) {
         this.entidades = datos.entidades;
         this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
+        this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
         this.sprites = {};
         this.crear_texto_con_posicion_del_mouse();
     };
+    EstadoEditor.prototype.cuando_termina_de_mover = function (a) { };
+    EstadoEditor.prototype.cuando_comienza_a_mover = function (a) { };
     EstadoEditor.prototype.crear_texto_con_posicion_del_mouse = function () {
         var style = {
             font: "16px Arial",
@@ -190,6 +203,7 @@ var EstadoEditor = (function (_super) {
                 sprite = new Sprite(_this.game, 0, 0, e.imagen);
                 sprite.iniciar(e);
                 sprite.al_terminar_de_arrastrar = _this.cuando_termina_de_mover;
+                sprite.al_comenzar_a_arrastrar = _this.cuando_comienza_a_mover;
                 _this.world.add(sprite);
                 _this.sprites[e.id] = sprite;
             }

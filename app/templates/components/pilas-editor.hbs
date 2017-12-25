@@ -38,15 +38,15 @@
           {{pilas-boton accion=(action "moverActores" proyecto) texto="Mover"}}
         </div>
 
-        <ul class="verdana f6 bg-black-10 unselectable">
+        <ul class="verdana f6 bg-black-10 unselectable pa0">
           {{#each proyecto.escenas as |escena|}}
-            <li class="pointer hover-bg-black-10 {{if (eq escenaActual escena.id) "red"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
+            <li class="pointer truncate pa1 hover-bg-black-10 {{if (eq escenaActual escena.id) "red"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
 
               <ul>
                 {{#each escena.actores as |actor|}}
-                  <li class='truncate'>Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}}, imagen: {{actor.imagen}})</li>
+                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}} >Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}}, imagen: {{actor.imagen}})</li>
                 {{else}}
-                  <li>sin actores</li >
+                  <li class='truncate pa1'>sin actores</li >
                 {{/each}}
               </ul>
 

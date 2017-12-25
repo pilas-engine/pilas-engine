@@ -41,6 +41,9 @@ class Pilas {
         entidades: e.data.entidades,
         cuando_termina_de_mover: datos => {
           this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
+        },
+        cuando_comienza_a_mover: datos => {
+          this._emitirMensajeAlEditor("comienza_a_mover_un_actor", datos);
         }
       });
     }

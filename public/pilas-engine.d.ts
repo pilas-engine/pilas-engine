@@ -28,9 +28,12 @@ declare class Pelota extends Actor {
 declare class Sprite extends Phaser.Sprite {
     rotateSpeed: number;
     shadow: Phaser.Sprite;
+    id: number;
     iniciar(entidad: any): void;
     conectar_eventos_arrastrar_y_soltar(): void;
     al_terminar_de_arrastrar(a: any): void;
+    al_comenzar_a_arrastrar(a: any): void;
+    cuando_comienza_a_mover(): void;
     cuando_termina_de_mover(): void;
     activar_sombra(): void;
     ocultar_sombra(): void;
@@ -42,6 +45,8 @@ declare class EstadoEditor extends Phaser.State {
     sprites: any;
     texto: any;
     init(datos: any): void;
+    cuando_termina_de_mover(a: any): void;
+    cuando_comienza_a_mover(a: any): void;
     crear_texto_con_posicion_del_mouse(): void;
     create(): void;
     update(): void;
