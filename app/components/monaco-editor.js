@@ -116,10 +116,13 @@ export default Ember.Component.extend({
 
   onLoadEditor(editor) {
     this.set("editor", editor);
-    //window.editor = editor;
 
     if (this.get("code")) {
       editor.setValue(this.get("code"));
+    }
+
+    if (this.get("cuandoCarga")) {
+      this.get("cuandoCarga")();
     }
 
     this.set("loading", false);

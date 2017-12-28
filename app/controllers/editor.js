@@ -70,13 +70,22 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           id: 1,
           actores: [
             {
-              id: 2,
+              id: 1,
               x: 300,
               y: 200,
               centro_x: 0.5,
               centro_y: 0.5,
               tipo: "pelota",
               imagen: "pelota"
+            },
+            {
+              id: 2,
+              x: 350,
+              y: 240,
+              centro_x: 0.5,
+              centro_y: 0.5,
+              tipo: "caja",
+              imagen: "caja"
             },
             {
               id: 3,

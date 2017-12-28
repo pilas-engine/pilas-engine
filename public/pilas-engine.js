@@ -52,13 +52,18 @@ var Pilas = (function () {
         }
         if (e.data.tipo === "define_escena") {
             this.game.state.start("editorState", true, false, {
-                entidades: e.data.entidades,
+                escena: e.data.escena,
                 cuando_termina_de_mover: function (datos) {
                     _this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
                 },
                 cuando_comienza_a_mover: function (datos) {
                     _this._emitirMensajeAlEditor("comienza_a_mover_un_actor", datos);
                 }
+            });
+        }
+        if (e.data.tipo === "ejecutar_escena") {
+            this.game.state.start("estadoEjecucion", true, false, {
+                escena: e.data.escena
             });
         }
         if (e.data.tipo === "iniciar_pilas") {
@@ -78,6 +83,7 @@ var Pilas = (function () {
     };
     Pilas.prototype._create = function () {
         this.game.stage.disableVisibilityChange = true;
+        this.game.renderer.renderSession.roundPixels = true;
         this.game.state.add("editorState", EstadoEditor);
         this.game.state.add("estadoEjecucion", EstadoEjecucion);
         this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
@@ -98,6 +104,18 @@ var Actor = (function (_super) {
     Actor.prototype.iniciar = function () { };
     return Actor;
 }(Phaser.Sprite));
+var Caja = (function (_super) {
+    __extends(Caja, _super);
+    function Caja() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Caja.prototype.iniciar = function () {
+        this.game.physics.p2.enable([this], true);
+        this.body.static = true;
+    };
+    Caja.prototype.update = function () { };
+    return Caja;
+}(Actor));
 var Pelota = (function (_super) {
     __extends(Pelota, _super);
     function Pelota() {
@@ -105,10 +123,10 @@ var Pelota = (function (_super) {
     }
     Pelota.prototype.iniciar = function () {
         this.vy = 0;
+        this.game.physics.p2.enable([this], true);
+        this.body.setCircle(25);
     };
     Pelota.prototype.update = function () {
-        this.y += this.vy;
-        this.vy += 0.1;
     };
     return Pelota;
 }(Actor));
@@ -173,7 +191,8 @@ var EstadoEditor = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EstadoEditor.prototype.init = function (datos) {
-        this.entidades = datos.entidades;
+        console.log(datos);
+        this.entidades = datos.escena.actores;
         this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
         this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
         this.sprites = {};
@@ -231,11 +250,15 @@ var EstadoEjecucion = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EstadoEjecucion.prototype.init = function (datos) {
-        this.entidades = datos.entidades;
+        this.entidades = datos.escena.actores;
         this.sprites = {};
     };
     EstadoEjecucion.prototype.create = function () {
         this.game.stage.backgroundColor = "F99";
+        this.game.physics.startSystem(Phaser.Physics.P2JS);
+        this.game.physics.p2.gravity.y = 200;
+        this.game.physics.p2.restitution = 0.75;
+        this.game.physics.p2.friction = 499;
         this.crear_actores_desde_entidades();
     };
     EstadoEjecucion.prototype.crear_actores_desde_entidades = function () {
@@ -255,7 +278,14 @@ var EstadoEjecucion = (function (_super) {
             actor.iniciar();
         }
         else {
-            actor = this.add.sprite(x, y, imagen);
+            if (entidad.tipo === "caja") {
+                actor = new Caja(this.game, x, y, imagen);
+                this.world.add(actor);
+                actor.iniciar();
+            }
+            else {
+                actor = this.add.sprite(x, y, imagen);
+            }
         }
         actor.pivot.x = entidad.centro_x;
         actor.pivot.y = entidad.centro_y;

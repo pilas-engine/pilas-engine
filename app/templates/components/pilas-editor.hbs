@@ -7,11 +7,11 @@
         <p>Nombre: {{estado.nombreDeEstado}}</p>
 
         {{#if estado.puedeEjecutar}}
-          <button class="ui button blue">Ejecutar</button>
+          {{pilas-boton accion=(action "ejecutar") texto="Ejecutar"}}
         {{/if}}
 
         {{#if estado.puedeDetener}}
-          <button class="ui button red">Detener</button>
+          {{pilas-boton accion=(action "detener") texto="Detener"}}
         {{/if}}
 
         <p> Editor deshabilitado: {{estado.editorDeshabilitado}}</p>
@@ -86,9 +86,9 @@
 
       <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
 
-        {{#monaco-editor code=codigo readOnly=false cuandoCarga=(action "cuandoCargaMonacoEditor") onChange=(action "cuandoCambiaElCodigo")}}
-          Cargando ...
-        {{/monaco-editor}}
+        {{monaco-editor code=codigo readOnly=false
+            cuandoCarga=(action "cuandoCargaMonacoEditor")
+            onChange=(action "cuandoCambiaElCodigo")}}
 
       </div>
 

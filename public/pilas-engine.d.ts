@@ -20,6 +20,10 @@ declare var pilas: Pilas;
 declare class Actor extends Phaser.Sprite {
     iniciar(): void;
 }
+declare class Caja extends Actor {
+    iniciar(): void;
+    update(): void;
+}
 declare class Pelota extends Actor {
     vy: any;
     iniciar(): void;

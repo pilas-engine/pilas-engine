@@ -1,49 +1,6 @@
 import Component from "@ember/component";
 import Ember from "ember";
-
-class ModoCargando {
-  constructor() {
-    this.ModoCargando = true;
-    this.nombreDeEstado = "ModoCargando";
-    this.puedeEjecutar = false;
-    this.puedeDetener = false;
-    this.editorDeshabilitado = true;
-    this.codigo = "Demo";
-  }
-
-  onReady() {
-    return new ModoEdicion();
-  }
-}
-
-class ModoEdicion {
-  constructor() {
-    this.ModoCargando = false;
-    this.nombreDeEstado = "ModoEdicion";
-    this.puedeEjecutar = true;
-    this.puedeDetener = false;
-    this.editorDeshabilitado = false;
-    this.codigo = "Demo";
-  }
-
-  ejecutar() {
-    return new ModoEjecucion();
-  }
-}
-
-class ModoEjecucion {
-  constructor() {
-    this.ModoCargando = false;
-    this.nombreDeEstado = "ModoEjecucion";
-    this.puedeEjecutar = false;
-    this.puedeDetener = true;
-    this.editorDeshabilitado = true;
-  }
-
-  detener() {
-    return new ModoEdicion();
-  }
-}
+import estados from "../estados/estados-de-pilas-editor";
 
 export default Component.extend({
   bus: Ember.inject.service(),
@@ -70,7 +27,7 @@ export default Component.extend({
   ],
 
   didInsertElement() {
-    this.set("estado", new ModoCargando());
+    this.set("estado", new estados.ModoCargando());
     this.conectarEventos();
   },
 
@@ -90,13 +47,9 @@ export default Component.extend({
     });
   },
 
-  cuandoCambiaDeEstado(/*datos*/) {
-    //console.log(datos.estado);
-  },
-
   cuandoFinalizaCargaDePilas() {
-    this.set("cargando", false);
     this.mostrarEscenaActualSobrePilas();
+    this.set("estado", this.get("estado").cuandoTerminoDeCargarPilas());
   },
 
   cuandoTerminaDeMoverUnActorDesdePilas(datos) {
@@ -128,12 +81,6 @@ export default Component.extend({
   },
 
   actions: {
-    ejecutar() {
-      this.set("estado", this.get("estado").ejecutar());
-    },
-    detener() {
-      this.set("estado", this.get("estado").detener());
-    },
     agregarEscena(model) {
       model.escenas.pushObject({
         id: this.generarID(),
@@ -180,10 +127,21 @@ export default Component.extend({
     },
     // Eventos del editor
     cuandoCargaMonacoEditor() {
-      console.log("Cargó el editor");
+      //console.log("Cargó el editor");
     },
     cuandoCambiaElCodigo(codigo) {
+      console.log("tests");
       this.set("codigo", codigo);
+    },
+    ejecutar(/* proyecto */) {
+      this.set("estado", this.get("estado").ejecutar());
+      let escena = this.obtenerEscenaActual();
+      let escenaComoJSON = JSON.parse(JSON.stringify(escena));
+      this.get("bus").trigger("ejecutarEscena", { escena: escenaComoJSON });
+    },
+    detener() {
+      this.mostrarEscenaActualSobrePilas();
+      this.set("estado", this.get("estado").detener());
     }
   }
 });

@@ -1,25 +1,19 @@
 import Ember from "ember";
-import estados from "../estados/estados";
 import utils from "../utils/utils";
 
 export default Ember.Component.extend({
   ancho: 400,
   alto: 400,
-  entidades: null,
   estado: null,
   bus: Ember.inject.service(),
+  contexto: null,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
 
-    //this.set("entidades", this.get("proyecto.entidades"));
-    this.set("entidades", []);
-
-    this.get("bus").trigger("cambiaEstado", { estado: "carga" });
-    this.set("estado", new estados.EstadoCarga());
-
     iframe.onload = () => {
       let contexto = iframe.contentWindow;
+      this.set("contexto", contexto);
 
       let data = {
         tipo: "iniciar_pilas",
@@ -36,16 +30,35 @@ export default Ember.Component.extend({
       window.addEventListener("message", this.get("funcionParaAtenderMensajes"), false);
 
       this.get("bus").on("cargarEscena", this, "alCargarEscenaDesdeElEditor");
+      this.get("bus").on("ejecutarEscena", this, "alTenerQueEjecutarEscena");
     };
   },
 
   willDestroyElement() {
     window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
+
     this.get("bus").off("cargarEscena", this, "alCargarEscenaDesdeElEditor");
+    this.get("bus").off("ejecutarEscena", this, "alTenerQueEjecutarEscena");
   },
 
   alCargarEscenaDesdeElEditor({ escena }) {
-    this.set("estado", this.get("estado").definirEscena(escena));
+    let data = {
+      tipo: "define_escena",
+      nombre: "editorState",
+      escena: escena
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  alTenerQueEjecutarEscena({ escena }) {
+    let data = {
+      tipo: "ejecutar_escena",
+      nombre: "editorState",
+      escena: escena
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
   },
 
   atenderMensajesDePilas(contexto, e) {
@@ -53,17 +66,14 @@ export default Ember.Component.extend({
       return;
     }
 
+    /*
     if (e.data.tipo === "movimiento_del_mouse") {
       this.set("mouse_x", e.data.x);
       this.set("mouse_y", e.data.y);
     }
-
-    if (e.data.tipo === "entidades") {
-      this.set("entidades", e.data.entidades);
-    }
+    */
 
     if (e.data.tipo === "finaliza_carga_de_recursos") {
-      this.set("estado", new estados.EstadoEdicion(contexto, this.get("entidades")));
       this.get("bus").trigger("finalizaCarga");
     }
 
@@ -76,18 +86,8 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    ejecutar() {
-      this.set("entidades", this.get("estado.entidades"));
-      this.set("estado", this.get("estado").ejecutar());
-    },
     detener() {
       this.set("estado", this.get("estado").detener());
-    },
-    abrirDialogoParaAgregarUnActor() {},
-    agregarUnActor(nombre) {
-      this.set("estado", this.get("estado").agregarActor(nombre));
-      this.set("entidades", this.get("estado.entidades"));
-      this.get("remodal").close("dialogo-agregar-actor");
     }
   }
 });

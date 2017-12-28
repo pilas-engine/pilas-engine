@@ -4,7 +4,8 @@ class EstadoEditor extends Phaser.State {
   texto: any;
 
   init(datos) {
-    this.entidades = datos.entidades;
+    console.log(datos);
+    this.entidades = datos.escena.actores;
     this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
     this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
     this.sprites = {};

@@ -38,13 +38,19 @@ class Pilas {
 
     if (e.data.tipo === "define_escena") {
       this.game.state.start("editorState", true, false, {
-        entidades: e.data.entidades,
+        escena: e.data.escena,
         cuando_termina_de_mover: datos => {
           this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
         },
         cuando_comienza_a_mover: datos => {
           this._emitirMensajeAlEditor("comienza_a_mover_un_actor", datos);
         }
+      });
+    }
+
+    if (e.data.tipo === "ejecutar_escena") {
+      this.game.state.start("estadoEjecucion", true, false, {
+        escena: e.data.escena
       });
     }
 
@@ -68,6 +74,7 @@ class Pilas {
 
   _create() {
     this.game.stage.disableVisibilityChange = true;
+    this.game.renderer.renderSession.roundPixels = true;
     this.game.state.add("editorState", EstadoEditor);
     this.game.state.add("estadoEjecucion", EstadoEjecucion);
 
