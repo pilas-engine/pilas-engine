@@ -4,19 +4,6 @@
 
       <div class="dtc">
 
-        <p>Nombre: {{estado.nombreDeEstado}}</p>
-
-        {{#if estado.puedeEjecutar}}
-          {{pilas-boton accion=(action "ejecutar") texto="Ejecutar"}}
-        {{/if}}
-
-        {{#if estado.puedeDetener}}
-          {{pilas-boton accion=(action "detener") texto="Detener"}}
-        {{/if}}
-
-        <p> Editor deshabilitado: {{estado.editorDeshabilitado}}</p>
-
-
       </div>
 
       <div class="dtc tr">
@@ -34,12 +21,6 @@
     <div class="flex h-100">
 
       <div class="separadorr pa2 w-30 {{if ocultarPropiedades 'dn'}}">
-
-        {{#if cargando}}
-          Cargando ...
-        {{else}}
-          Listo para usar!
-        {{/if}}
 
         <p>Titulo: {{proyecto.titulo}}</p>
 
@@ -76,6 +57,22 @@
       </div>
 
       <div class="w-40 pa2 tc">
+
+        <div class='mb2'>
+          {{#if estado.puedeEjecutar}}
+            {{pilas-boton accion=(action "ejecutar") texto="Ejecutar"}}
+          {{/if}}
+
+          {{#if estado.puedeDetener}}
+            {{pilas-boton accion=(action "detener") texto="Detener"}}
+          {{/if}}
+
+          {{#if estado.ModoCargando}}
+            {{pilas-skeleton ancho=80 alto=30}}
+          {{/if}}
+        </div>
+
+
         {{pilas-phaser-experimental
           ancho=proyecto.ancho
           alto=proyecto.alto
@@ -86,7 +83,7 @@
 
       <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
 
-        {{monaco-editor code=codigo readOnly=false
+        {{monaco-editor code=codigo readOnly=estado.editorDeshabilitado
             cuandoCarga=(action "cuandoCargaMonacoEditor")
             onChange=(action "cuandoCambiaElCodigo")}}
 
