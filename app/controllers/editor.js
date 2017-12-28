@@ -56,6 +56,10 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       return Ember.Object.create(escena);
     });
 
+    proyectoComoObjetoEmber.tiposDeActores = proyecto.tiposDeActores.map(tipo => {
+      return Ember.Object.create(tipo);
+    });
+
     return proyectoComoObjetoEmber;
   },
 
@@ -64,6 +68,22 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       titulo: "Proyecto demo",
       ancho: 500,
       alto: 500,
+      tiposDeActores: [
+        {
+          tipo: "pelota",
+          codigo: `class Pelota {}`
+        },
+        {
+          tipo: "caja",
+          codigo: `class Caja extends Actores {
+              // completar ...
+          }`
+        },
+        {
+          tipo: "actor",
+          codigo: `//sin definir...`
+        }
+      ],
       escenas: [
         {
           nombre: "escena principal",

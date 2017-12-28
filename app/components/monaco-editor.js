@@ -10,6 +10,12 @@ export default Ember.Component.extend({
   readOnly: false,
   editor: null,
 
+  cuandoCambiaDeArchivo: Ember.observer("titulo", function() {
+    let editor = this.get("editor");
+    let code = this.get("code");
+    editor.setValue(code);
+  }),
+
   /*
    * Se encarga de mantener actualizado el estado del editor con respecto al
    * atributo readOnly.

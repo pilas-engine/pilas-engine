@@ -80,6 +80,26 @@ export default Component.extend({
     return Math.floor(Math.random() * 999) + 1000;
   },
 
+  obtenerTipoDeActor(tipoDelActor) {
+    return this.get("proyecto.tiposDeActores").findBy("tipo", tipoDelActor);
+  },
+
+  obtenerDetalleDeActorPorIndice(indiceDelActor) {
+    let escena = this.obtenerEscenaActual();
+
+    return escena.get("actores").findBy("id", indiceDelActor);
+  },
+
+  sobreEscribirCodigoDelActorActual(codigo) {
+    let indiceDelActor = this.get("actorSeleccionado");
+
+    if (indiceDelActor > -1) {
+      let actor = this.obtenerDetalleDeActorPorIndice(indiceDelActor);
+      let tipoDeActor = this.obtenerTipoDeActor(actor.tipo);
+      tipoDeActor.set("codigo", codigo);
+    }
+  },
+
   actions: {
     agregarEscena(model) {
       model.escenas.pushObject({
@@ -124,14 +144,18 @@ export default Component.extend({
     },
     seleccionarActor(indiceDelActor) {
       this.set("actorSeleccionado", indiceDelActor);
+      let actor = this.obtenerDetalleDeActorPorIndice(indiceDelActor);
+      let tipoDeActor = this.obtenerTipoDeActor(actor.tipo);
+
+      this.set("codigo", tipoDeActor.get("codigo"));
+      this.set("tituloDelCodigo", actor.tipo);
     },
-    // Eventos del editor
     cuandoCargaMonacoEditor() {
       //console.log("Cargó el editor");
     },
     cuandoCambiaElCodigo(codigo) {
-      console.log("tests");
       this.set("codigo", codigo);
+      this.sobreEscribirCodigoDelActorActual(codigo);
     },
     ejecutar(/* proyecto */) {
       this.set("estado", this.get("estado").ejecutar());

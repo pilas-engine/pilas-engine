@@ -82,8 +82,7 @@
 
 
       <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
-
-        {{monaco-editor code=codigo readOnly=estado.editorDeshabilitado
+        {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
             cuandoCarga=(action "cuandoCargaMonacoEditor")
             onChange=(action "cuandoCambiaElCodigo")}}
 
