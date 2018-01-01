@@ -4,5 +4,6 @@ export default Ember.Component.extend({
   tagName: "span",
 
   classNames: ["css-icon"],
-  classNameBindings: ["imagen"]
+  classNameBindings: ["icono", "conSeparacion:mr2"],
+  conSeparacion: false
 });

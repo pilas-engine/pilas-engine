@@ -4,8 +4,10 @@ class ModoCargando {
     this.nombreDeEstado = "ModoCargando";
     this.puedeEjecutar = false;
     this.puedeDetener = false;
+    this.pausaActivada = false;
     this.editorDeshabilitado = true;
     this.codigo = "Demo";
+    this.mantenerFoco = false;
   }
 
   cuandoTerminoDeCargarPilas() {
@@ -19,8 +21,10 @@ class ModoEdicion {
     this.nombreDeEstado = "ModoEdicion";
     this.puedeEjecutar = true;
     this.puedeDetener = false;
+    this.pausaActivada = false;
     this.editorDeshabilitado = false;
     this.codigo = "Demo";
+    this.mantenerFoco = false;
   }
 
   ejecutar() {
@@ -34,7 +38,29 @@ class ModoEjecucion {
     this.nombreDeEstado = "ModoEjecucion";
     this.puedeEjecutar = false;
     this.puedeDetener = true;
+    this.pausaActivada = false;
     this.editorDeshabilitado = true;
+    this.mantenerFoco = true;
+  }
+
+  detener() {
+    return new ModoEdicion();
+  }
+
+  pausar() {
+    return new ModoPausa();
+  }
+}
+
+class ModoPausa {
+  constructor() {
+    this.ModoCargando = false;
+    this.nombreDeEstado = "ModoPausa";
+    this.puedeEjecutar = false;
+    this.puedeDetener = false;
+    this.pausaActivada = true;
+    this.editorDeshabilitado = true;
+    this.mantenerFoco = true;
   }
 
   detener() {
@@ -42,4 +68,4 @@ class ModoEjecucion {
   }
 }
 
-export default { ModoCargando, ModoEdicion, ModoEjecucion };
+export default { ModoCargando, ModoEdicion, ModoEjecucion, ModoPausa };

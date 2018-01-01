@@ -22,9 +22,9 @@
 
       <div class="separadorr pa2 w-30 {{if ocultarPropiedades 'dn'}}">
 
-        <p>Titulo: {{proyecto.titulo}}</p>
+        <p class="f6 verdana">Titulo: {{proyecto.titulo}}</p>
 
-        <p>cantidad de escenas: {{proyecto.escenas.length}}</p>
+        <p class="f6 verdana">Cantidad de escenas: {{proyecto.escenas.length}}</p>
 
         <div class="tructate pb2">
           {{pilas-boton accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
@@ -56,15 +56,20 @@
 
       </div>
 
-      <div class="w-40 pa2 tc">
+      <div class="w-40 pa2">
 
         <div class='mb2'>
           {{#if estado.puedeEjecutar}}
-            {{pilas-boton accion=(action "ejecutar") texto="Ejecutar"}}
+            {{pilas-boton accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
           {{/if}}
 
           {{#if estado.puedeDetener}}
-            {{pilas-boton accion=(action "detener") texto="Detener"}}
+            {{pilas-boton accion=(action "detener") texto="Detener" icono="detener"}}
+            {{pilas-boton accion=(action "pausar") texto="Pausar" icono="pausa"}}
+          {{/if}}
+
+          {{#if estado.pausaActivada}}
+            {{pilas-boton accion=(action "detener") texto="Terminar" icono="detener"}}
           {{/if}}
 
           {{#if estado.ModoCargando}}
@@ -72,19 +77,30 @@
           {{/if}}
         </div>
 
-
         {{pilas-phaser-experimental
           ancho=proyecto.ancho
           alto=proyecto.alto
+          mantenerFoco=estado.mantenerFoco
         }}
       </div>
 
 
 
       <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
-        {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
-            cuandoCarga=(action "cuandoCargaMonacoEditor")
-            onChange=(action "cuandoCambiaElCodigo")}}
+
+        {{#if tituloDelCodigo}}
+          <div class="verdana f6">Mostrando código de {{tituloDelCodigo}}:</div>
+
+          {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
+              cuandoCarga=(action "cuandoCargaMonacoEditor")
+              onChange=(action "cuandoCambiaElCodigo")}}
+
+        {{else}}
+          <div class="tc verdana f6">
+            Seleccioná un actor para editar su código.
+
+          </div>
+        {{/if}}
 
       </div>
 

@@ -8,9 +8,12 @@ export default Ember.Component.extend({
   bus: Ember.inject.service(),
   contexto: null,
   cargando: true,
+  mantenerFoco: false,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
+
+    this.actualizarTemporizadorDeFoco(iframe);
 
     iframe.onload = () => {
       let contexto = iframe.contentWindow;
@@ -36,7 +39,19 @@ export default Ember.Component.extend({
 
       this.get("bus").on("cargarEscena", this, "alCargarEscenaDesdeElEditor");
       this.get("bus").on("ejecutarEscena", this, "alTenerQueEjecutarEscena");
+      this.get("bus").on("pausarEscena", this, "alTenerQuePausarLaEscena");
     };
+  },
+
+  actualizarTemporizadorDeFoco(iframe) {
+    Ember.run.later(() => {
+      if (this.get("mantenerFoco")) {
+        console.log("foco");
+        iframe.contentWindow.focus();
+      }
+
+      this.actualizarTemporizadorDeFoco(iframe);
+    }, 500);
   },
 
   willDestroyElement() {
@@ -47,6 +62,7 @@ export default Ember.Component.extend({
 
     this.get("bus").off("cargarEscena", this, "alCargarEscenaDesdeElEditor");
     this.get("bus").off("ejecutarEscena", this, "alTenerQueEjecutarEscena");
+    this.get("bus").off("pausarEscena", this, "alTenerQuePausarLaEscena");
   },
 
   alCargarEscenaDesdeElEditor({ escena }) {
@@ -64,6 +80,16 @@ export default Ember.Component.extend({
     let data = {
       tipo: "ejecutar_escena",
       nombre: "editorState",
+      escena: escena
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  alTenerQuePausarLaEscena({ escena }) {
+    let data = {
+      tipo: "pausar_escena",
+      //nombre: "pausaState",
       escena: escena
     };
 

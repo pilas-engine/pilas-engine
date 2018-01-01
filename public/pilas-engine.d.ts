@@ -18,7 +18,17 @@ declare class Pilas {
 }
 declare var pilas: Pilas;
 declare class Actor extends Phaser.Sprite {
+    tipo: String;
     iniciar(): void;
+    serializar(): {
+        tipo: String;
+        x: number;
+        y: number;
+        centro_x: number;
+        centro_y: number;
+        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | Phaser.Video | PIXI.Texture;
+        rotacion: number;
+    };
 }
 declare class Caja extends Actor {
     iniciar(): void;
@@ -43,6 +53,8 @@ declare class Sprite extends Phaser.Sprite {
     update(): void;
     crear_sombra(): void;
 }
+declare class SpriteSimple extends Phaser.Sprite {
+}
 declare class Estado extends Phaser.State {
     render(): void;
 }
@@ -61,9 +73,28 @@ declare class EstadoEditor extends Estado {
 declare class EstadoEjecucion extends Estado {
     entidades: any;
     sprites: any;
+    historia: any;
+    actores: any;
     init(datos: any): void;
     create(): void;
     crear_actores_desde_entidades(): void;
-    crear_actor(entidad: any): void;
+    crear_actor(entidad: any): any;
     update(): void;
+    private guardar_foto_de_entidades();
+}
+declare class EstadoPausa extends Estado {
+    historia: any;
+    posicion: number;
+    sprites: any;
+    texto: any;
+    total: number;
+    izquierda: any;
+    derecha: any;
+    init(datos: any): void;
+    create(): void;
+    private crear_texto();
+    private crear_sprites_desde_historia(posicion);
+    update(): void;
+    private actualizar_texto();
+    crear_sprite_desde_entidad(entidad: any): SpriteSimple;
 }

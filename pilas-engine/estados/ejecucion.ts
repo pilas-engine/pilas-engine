@@ -1,10 +1,14 @@
 class EstadoEjecucion extends Estado {
   entidades: any;
   sprites: any;
+  historia: any;
+  actores: any;
 
   init(datos) {
     this.entidades = datos.escena.actores;
     this.sprites = {};
+    this.historia = [];
+    this.actores = [];
   }
 
   create() {
@@ -19,8 +23,8 @@ class EstadoEjecucion extends Estado {
   }
 
   crear_actores_desde_entidades() {
-    this.entidades.map(e => {
-      this.crear_actor(e);
+    this.actores = this.entidades.map(e => {
+      return this.crear_actor(e);
     });
   }
 
@@ -45,8 +49,22 @@ class EstadoEjecucion extends Estado {
         this.world.add(actor);
       }
     }
+
+    actor.tipo = entidad.tipo;
     actor.anchor.set(entidad.centro_x, entidad.centro_y);
+
+    return actor;
   }
 
-  update() {}
+  update() {
+    this.guardar_foto_de_entidades();
+  }
+
+  private guardar_foto_de_entidades() {
+    let entidades = this.actores.map(actor => {
+      return actor.serializar();
+    });
+
+    this.historia.push(entidades);
+  }
 }

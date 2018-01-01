@@ -166,6 +166,10 @@ export default Component.extend({
     detener() {
       this.mostrarEscenaActualSobrePilas();
       this.set("estado", this.get("estado").detener());
+    },
+    pausar() {
+      this.set("estado", this.get("estado").pausar());
+      this.get("bus").trigger("pausarEscena", {});
     }
   }
 });

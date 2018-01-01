@@ -66,6 +66,12 @@ var Pilas = (function () {
                 escena: e.data.escena
             });
         }
+        if (e.data.tipo === "pausar_escena") {
+            var historia = this.game.state.getCurrentState()["historia"];
+            this.game.state.start("estadoPausa", true, false, {
+                historia: historia
+            });
+        }
         if (e.data.tipo === "iniciar_pilas") {
             var ancho = e.data.ancho;
             var alto = e.data.alto;
@@ -87,6 +93,7 @@ var Pilas = (function () {
         this.game.renderer.renderSession.roundPixels = true;
         this.game.state.add("editorState", EstadoEditor);
         this.game.state.add("estadoEjecucion", EstadoEjecucion);
+        this.game.state.add("estadoPausa", EstadoPausa);
         this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
     };
     Pilas.prototype._emitirMensajeAlEditor = function (nombre, datos) {
@@ -103,6 +110,17 @@ var Actor = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Actor.prototype.iniciar = function () { };
+    Actor.prototype.serializar = function () {
+        return {
+            tipo: this.tipo,
+            x: this.x,
+            y: this.y,
+            centro_x: this.anchor.x,
+            centro_y: this.anchor.y,
+            imagen: this.key,
+            rotacion: this.angle
+        };
+    };
     return Actor;
 }(Phaser.Sprite));
 var Caja = (function (_super) {
@@ -184,6 +202,13 @@ var Sprite = (function (_super) {
         this.ocultar_sombra();
     };
     return Sprite;
+}(Phaser.Sprite));
+var SpriteSimple = (function (_super) {
+    __extends(SpriteSimple, _super);
+    function SpriteSimple() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return SpriteSimple;
 }(Phaser.Sprite));
 var Estado = (function (_super) {
     __extends(Estado, _super);
@@ -278,6 +303,8 @@ var EstadoEjecucion = (function (_super) {
     EstadoEjecucion.prototype.init = function (datos) {
         this.entidades = datos.escena.actores;
         this.sprites = {};
+        this.historia = [];
+        this.actores = [];
     };
     EstadoEjecucion.prototype.create = function () {
         this.game.stage.backgroundColor = "F99";
@@ -289,8 +316,8 @@ var EstadoEjecucion = (function (_super) {
     };
     EstadoEjecucion.prototype.crear_actores_desde_entidades = function () {
         var _this = this;
-        this.entidades.map(function (e) {
-            _this.crear_actor(e);
+        this.actores = this.entidades.map(function (e) {
+            return _this.crear_actor(e);
         });
     };
     EstadoEjecucion.prototype.crear_actor = function (entidad) {
@@ -315,8 +342,88 @@ var EstadoEjecucion = (function (_super) {
                 this.world.add(actor);
             }
         }
+        actor.tipo = entidad.tipo;
         actor.anchor.set(entidad.centro_x, entidad.centro_y);
+        return actor;
     };
-    EstadoEjecucion.prototype.update = function () { };
+    EstadoEjecucion.prototype.update = function () {
+        this.guardar_foto_de_entidades();
+    };
+    EstadoEjecucion.prototype.guardar_foto_de_entidades = function () {
+        var entidades = this.actores.map(function (actor) {
+            return actor.serializar();
+        });
+        this.historia.push(entidades);
+    };
     return EstadoEjecucion;
+}(Estado));
+var EstadoPausa = (function (_super) {
+    __extends(EstadoPausa, _super);
+    function EstadoPausa() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    EstadoPausa.prototype.init = function (datos) {
+        this.historia = datos.historia;
+        this.posicion = this.historia.length - 1;
+        this.total = this.historia.length - 1;
+        this.sprites = [];
+        this.izquierda = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        this.derecha = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        this.crear_texto();
+    };
+    EstadoPausa.prototype.create = function () {
+        this.game.stage.backgroundColor = "555";
+        this.crear_sprites_desde_historia(this.posicion);
+        this.actualizar_texto();
+    };
+    EstadoPausa.prototype.crear_texto = function () {
+        var style = {
+            font: "16px Arial",
+            fill: "#fff",
+            boundsAlignH: "center",
+            boundsAlignV: "top"
+        };
+        var texto = this.game.add.text(0, 5, "", style);
+        texto.setShadow(1, 1, "rgba(0, 0, 0, 0.5)", 3);
+        this.texto = texto;
+    };
+    EstadoPausa.prototype.crear_sprites_desde_historia = function (posicion) {
+        var _this = this;
+        var entidades = this.historia[posicion];
+        this.sprites.map(function (sprite) { return sprite.destroy(); });
+        this.sprites = entidades.map(function (entidad) {
+            return _this.crear_sprite_desde_entidad(entidad);
+        });
+    };
+    EstadoPausa.prototype.update = function () {
+        var debeActualizar = false;
+        if (this.izquierda.isDown) {
+            this.posicion -= 1;
+            debeActualizar = true;
+        }
+        if (this.derecha.isDown) {
+            this.posicion += 1;
+            debeActualizar = true;
+        }
+        if (debeActualizar) {
+            this.posicion = Math.min(this.posicion, this.total);
+            this.posicion = Math.max(this.posicion, 0);
+            this.crear_sprites_desde_historia(this.posicion);
+            this.actualizar_texto();
+        }
+    };
+    EstadoPausa.prototype.actualizar_texto = function () {
+        var ayuda = "Cambiar con las teclas izquierda y derecha";
+        var texto = " Posici\u00F3n " + this.posicion + "/" + this.total + " - " + ayuda;
+        this.texto.text = texto;
+    };
+    EstadoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
+        var sprite = new SpriteSimple(this.game, entidad.x, entidad.y, entidad.imagen);
+        sprite.angle = entidad.rotacion;
+        sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+        sprite["depurable"] = true;
+        this.world.add(sprite);
+        return sprite;
+    };
+    return EstadoPausa;
 }(Estado));

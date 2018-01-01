@@ -54,6 +54,13 @@ class Pilas {
       });
     }
 
+    if (e.data.tipo === "pausar_escena") {
+      let historia = this.game.state.getCurrentState()["historia"];
+      this.game.state.start("estadoPausa", true, false, {
+        historia: historia
+      });
+    }
+
     if (e.data.tipo === "iniciar_pilas") {
       var ancho = e.data.ancho;
       var alto = e.data.alto;
@@ -78,6 +85,7 @@ class Pilas {
     this.game.renderer.renderSession.roundPixels = true;
     this.game.state.add("editorState", EstadoEditor);
     this.game.state.add("estadoEjecucion", EstadoEjecucion);
+    this.game.state.add("estadoPausa", EstadoPausa);
 
     this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
   }
