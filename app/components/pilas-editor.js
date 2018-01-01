@@ -157,7 +157,7 @@ export default Component.extend({
       this.set("codigo", codigo);
       this.sobreEscribirCodigoDelActorActual(codigo);
     },
-    ejecutar(/* proyecto */) {
+    ejecutar() {
       this.set("estado", this.get("estado").ejecutar());
       let escena = this.obtenerEscenaActual();
       let escenaComoJSON = JSON.parse(JSON.stringify(escena));

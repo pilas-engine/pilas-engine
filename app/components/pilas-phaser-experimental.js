@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   estado: null,
   bus: Ember.inject.service(),
   contexto: null,
+  cargando: true,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
@@ -27,7 +28,11 @@ export default Ember.Component.extend({
 
       contexto.postMessage(data, utils.HOST);
 
-      window.addEventListener("message", this.get("funcionParaAtenderMensajes"), false);
+      window.addEventListener(
+        "message",
+        this.get("funcionParaAtenderMensajes"),
+        false
+      );
 
       this.get("bus").on("cargarEscena", this, "alCargarEscenaDesdeElEditor");
       this.get("bus").on("ejecutarEscena", this, "alTenerQueEjecutarEscena");
@@ -35,7 +40,10 @@ export default Ember.Component.extend({
   },
 
   willDestroyElement() {
-    window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
+    window.removeEventListener(
+      "message",
+      this.get("funcionParaAtenderMensajes")
+    );
 
     this.get("bus").off("cargarEscena", this, "alCargarEscenaDesdeElEditor");
     this.get("bus").off("ejecutarEscena", this, "alTenerQueEjecutarEscena");
@@ -48,6 +56,7 @@ export default Ember.Component.extend({
       escena: escena
     };
 
+    this.set("cargando", false);
     this.contexto.postMessage(data, utils.HOST);
   },
 
