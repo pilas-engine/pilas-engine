@@ -16,6 +16,9 @@ class Sprite extends Phaser.Sprite {
     this.input.enableDrag();
 
     this.crear_sombra();
+    this["depurable"] = true;
+
+    //this.tint = 0xaaaaff;
 
     this.conectar_eventos_arrastrar_y_soltar();
   }
@@ -54,8 +57,8 @@ class Sprite extends Phaser.Sprite {
 
   update() {
     this.shadow.key = this.key;
-    this.shadow.pivot.x = this.pivot.x;
-    this.shadow.pivot.y = this.pivot.y;
+    this.shadow.anchor.x = this.anchor.x;
+    this.shadow.anchor.y = this.anchor.y;
     this.shadow.x = this.x + 5;
     this.shadow.y = this.y + 5;
   }

@@ -70,6 +70,7 @@ class Pilas {
     this.game.load.image("pelota", "imagenes/pelota.png");
     this.game.load.image("logo", "imagenes/logo.png");
     this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
+    this.game.load.image("caja", "imagenes/caja.png");
   }
 
   _create() {

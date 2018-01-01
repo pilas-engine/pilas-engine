@@ -1,4 +1,4 @@
-class EstadoEjecucion extends Phaser.State {
+class EstadoEjecucion extends Estado {
   entidades: any;
   sprites: any;
 
@@ -11,7 +11,7 @@ class EstadoEjecucion extends Phaser.State {
     this.game.stage.backgroundColor = "F99";
 
     this.game.physics.startSystem(Phaser.Physics.P2JS);
-    this.game.physics.p2.gravity.y = 200;
+    this.game.physics.p2.gravity.y = 400;
     this.game.physics.p2.restitution = 0.75;
     this.game.physics.p2.friction = 499;
 
@@ -32,20 +32,20 @@ class EstadoEjecucion extends Phaser.State {
 
     if (entidad.tipo === "pelota") {
       actor = new Pelota(this.game, x, y, imagen);
-      this.world.add(actor);
       actor.iniciar();
+      this.world.add(actor);
     } else {
       if (entidad.tipo === "caja") {
         actor = new Caja(this.game, x, y, imagen);
-        this.world.add(actor);
         actor.iniciar();
+        this.world.add(actor);
       } else {
-        actor = this.add.sprite(x, y, imagen);
+        actor = new Actor(this.game, x, y, imagen);
+        actor.iniciar();
+        this.world.add(actor);
       }
     }
-
-    actor.pivot.x = entidad.centro_x;
-    actor.pivot.y = entidad.centro_y;
+    actor.anchor.set(entidad.centro_x, entidad.centro_y);
   }
 
   update() {}

@@ -5,7 +5,6 @@ export default Ember.Component.extend({
 
   actions: {
     cuandoCarga(pilas) {
-      console.log({ pilas });
       pilas.definir_cuadros_por_segundo(60, 10);
 
       let id = pilas.crear_entidad("MiActor");
@@ -14,8 +13,6 @@ export default Ember.Component.extend({
 
       pilas.agregar_componente(id, "posicion", { x, y });
       pilas.agregar_componente(id, "apariencia", { imagen: "ember" });
-
-      console.log({ x, y });
     }
   }
 });

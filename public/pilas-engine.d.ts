@@ -25,7 +25,6 @@ declare class Caja extends Actor {
     update(): void;
 }
 declare class Pelota extends Actor {
-    vy: any;
     iniciar(): void;
     update(): void;
 }
@@ -44,7 +43,10 @@ declare class Sprite extends Phaser.Sprite {
     update(): void;
     crear_sombra(): void;
 }
-declare class EstadoEditor extends Phaser.State {
+declare class Estado extends Phaser.State {
+    render(): void;
+}
+declare class EstadoEditor extends Estado {
     entidades: any;
     sprites: any;
     texto: any;
@@ -56,7 +58,7 @@ declare class EstadoEditor extends Phaser.State {
     update(): void;
     actualizar_texto_con_posicion_del_mouse(): void;
 }
-declare class EstadoEjecucion extends Phaser.State {
+declare class EstadoEjecucion extends Estado {
     entidades: any;
     sprites: any;
     init(datos: any): void;

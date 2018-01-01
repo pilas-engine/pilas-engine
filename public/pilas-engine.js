@@ -80,6 +80,7 @@ var Pilas = (function () {
         this.game.load.image("pelota", "imagenes/pelota.png");
         this.game.load.image("logo", "imagenes/logo.png");
         this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
+        this.game.load.image("caja", "imagenes/caja.png");
     };
     Pilas.prototype._create = function () {
         this.game.stage.disableVisibilityChange = true;
@@ -122,12 +123,10 @@ var Pelota = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Pelota.prototype.iniciar = function () {
-        this.vy = 0;
         this.game.physics.p2.enable([this], true);
         this.body.setCircle(25);
     };
-    Pelota.prototype.update = function () {
-    };
+    Pelota.prototype.update = function () { };
     return Pelota;
 }(Actor));
 var Sprite = (function (_super) {
@@ -145,6 +144,7 @@ var Sprite = (function (_super) {
         this.inputEnabled = true;
         this.input.enableDrag();
         this.crear_sombra();
+        this["depurable"] = true;
         this.conectar_eventos_arrastrar_y_soltar();
     };
     Sprite.prototype.conectar_eventos_arrastrar_y_soltar = function () {
@@ -173,8 +173,8 @@ var Sprite = (function (_super) {
     };
     Sprite.prototype.update = function () {
         this.shadow.key = this.key;
-        this.shadow.pivot.x = this.pivot.x;
-        this.shadow.pivot.y = this.pivot.y;
+        this.shadow.anchor.x = this.anchor.x;
+        this.shadow.anchor.y = this.anchor.y;
         this.shadow.x = this.x + 5;
         this.shadow.y = this.y + 5;
     };
@@ -185,13 +185,38 @@ var Sprite = (function (_super) {
     };
     return Sprite;
 }(Phaser.Sprite));
+var Estado = (function (_super) {
+    __extends(Estado, _super);
+    function Estado() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Estado.prototype.render = function () {
+        var debug = this.game.debug;
+        function dibujarPuntoDeControl(debug, x, y) {
+            var rect = new Phaser.Rectangle(x - 3, y - 3, 7, 7);
+            var line1 = new Phaser.Line(x - 2, y - 2, x + 2, y + 2);
+            var line2 = new Phaser.Line(x - 2, y + 2, x + 2, y - 2);
+            debug.geom(rect, "black", true);
+            debug.geom(line1, "white", false);
+            debug.geom(line2, "white", false);
+        }
+        this.game.world.children.forEach(function (sprite) {
+            if (sprite["depurable"]) {
+                var x = Math.round(sprite.x);
+                var y = Math.round(sprite.y);
+                debug.text("(" + x + ", " + y + ")", x + 5, y + 15, "white");
+                dibujarPuntoDeControl(debug, sprite.x, sprite.y);
+            }
+        });
+    };
+    return Estado;
+}(Phaser.State));
 var EstadoEditor = (function (_super) {
     __extends(EstadoEditor, _super);
     function EstadoEditor() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EstadoEditor.prototype.init = function (datos) {
-        console.log(datos);
         this.entidades = datos.escena.actores;
         this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
         this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
@@ -231,6 +256,7 @@ var EstadoEditor = (function (_super) {
             }
             e.x = sprite.x;
             e.y = sprite.y;
+            sprite.anchor.set(e.centro_x, e.centro_y);
             return e;
         });
         this.actualizar_texto_con_posicion_del_mouse();
@@ -243,7 +269,7 @@ var EstadoEditor = (function (_super) {
         }
     };
     return EstadoEditor;
-}(Phaser.State));
+}(Estado));
 var EstadoEjecucion = (function (_super) {
     __extends(EstadoEjecucion, _super);
     function EstadoEjecucion() {
@@ -256,7 +282,7 @@ var EstadoEjecucion = (function (_super) {
     EstadoEjecucion.prototype.create = function () {
         this.game.stage.backgroundColor = "F99";
         this.game.physics.startSystem(Phaser.Physics.P2JS);
-        this.game.physics.p2.gravity.y = 200;
+        this.game.physics.p2.gravity.y = 400;
         this.game.physics.p2.restitution = 0.75;
         this.game.physics.p2.friction = 499;
         this.crear_actores_desde_entidades();
@@ -274,22 +300,23 @@ var EstadoEjecucion = (function (_super) {
         var actor = null;
         if (entidad.tipo === "pelota") {
             actor = new Pelota(this.game, x, y, imagen);
-            this.world.add(actor);
             actor.iniciar();
+            this.world.add(actor);
         }
         else {
             if (entidad.tipo === "caja") {
                 actor = new Caja(this.game, x, y, imagen);
-                this.world.add(actor);
                 actor.iniciar();
+                this.world.add(actor);
             }
             else {
-                actor = this.add.sprite(x, y, imagen);
+                actor = new Actor(this.game, x, y, imagen);
+                actor.iniciar();
+                this.world.add(actor);
             }
         }
-        actor.pivot.x = entidad.centro_x;
-        actor.pivot.y = entidad.centro_y;
+        actor.anchor.set(entidad.centro_x, entidad.centro_y);
     };
     EstadoEjecucion.prototype.update = function () { };
     return EstadoEjecucion;
-}(Phaser.State));
+}(Estado));

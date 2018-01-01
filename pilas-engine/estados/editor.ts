@@ -1,10 +1,11 @@
-class EstadoEditor extends Phaser.State {
+/// <reference path="estado.ts"/>
+
+class EstadoEditor extends Estado {
   entidades: any;
   sprites: any;
   texto: any;
 
   init(datos) {
-    console.log(datos);
     this.entidades = datos.escena.actores;
     this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
     this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
@@ -63,6 +64,7 @@ class EstadoEditor extends Phaser.State {
       // en la lista de entidades.
       e.x = sprite.x;
       e.y = sprite.y;
+      sprite.anchor.set(e.centro_x, e.centro_y);
 
       return e;
     });
