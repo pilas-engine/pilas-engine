@@ -54,11 +54,27 @@ class Pilas {
       });
     }
 
+    if (e.data.tipo === "cambiar_posicion") {
+      let pos = +e.data.posicion;
+      this.game.state.getCurrentState().actualizarPosicionDeFormaExterna(pos);
+    }
+
     if (e.data.tipo === "pausar_escena") {
       let historia = this.game.state.getCurrentState()["historia"];
+
       this.game.state.start("estadoPausa", true, false, {
-        historia: historia
+        historia: historia,
+        cuando_cambia_posicion: datos => {
+          this._emitirMensajeAlEditor(
+            "cambia_posicion_dentro_del_modo_pausa",
+            datos
+          );
+        }
       });
+
+      let t = historia.length - 1;
+      let datos = { minimo: 0, posicion: t, maximo: t };
+      this._emitirMensajeAlEditor("comienza_a_depurar_en_modo_pausa", datos);
     }
 
     if (e.data.tipo === "iniciar_pilas") {

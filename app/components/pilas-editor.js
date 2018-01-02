@@ -7,6 +7,11 @@ export default Component.extend({
   codigo: "// codigo",
   tagName: "",
   actorSeleccionado: -1,
+
+  historiaPosicion: 10,
+  historiaMinimo: 0,
+  historiaMaximo: 10,
+
   mapaDeEventos: [
     {
       evento: "cambiaEstado",
@@ -23,6 +28,14 @@ export default Component.extend({
     {
       evento: "comienzaAMoverActor",
       metodo: "cuandoComienzaAMovertUnActorDesdePilas"
+    },
+    {
+      evento: "iniciaModoDepuracionEnPausa",
+      metodo: "cuandoComenzaADepurarEnModoPausa"
+    },
+    {
+      evento: "cuandoCambiaPosicionDentroDelModoPausa",
+      metodo: "cuandoCambiaPosicionDentroDelModoPausa"
     }
   ],
 
@@ -61,6 +74,16 @@ export default Component.extend({
 
   cuandoComienzaAMovertUnActorDesdePilas(datos) {
     this.send("seleccionarActor", datos.id);
+  },
+
+  cuandoComenzaADepurarEnModoPausa(datos) {
+    this.set("historiaPosicion", datos.posicion);
+    this.set("historiaMinimo", datos.minimo);
+    this.set("historiaMaximo", datos.maximo);
+  },
+
+  cuandoCambiaPosicionDentroDelModoPausa(datos) {
+    this.set("historiaPosicion", datos.posicion);
   },
 
   mostrarEscenaActualSobrePilas() {
@@ -170,6 +193,12 @@ export default Component.extend({
     pausar() {
       this.set("estado", this.get("estado").pausar());
       this.get("bus").trigger("pausarEscena", {});
+    },
+    cambiarPosicion(valorNuevo) {
+      this.set("posicion", valorNuevo);
+      this.get("bus").trigger("cambiarPosicionDesdeElEditor", {
+        posicion: valorNuevo
+      });
     }
   }
 });

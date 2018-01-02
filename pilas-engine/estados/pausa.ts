@@ -15,11 +15,14 @@ class EstadoPausa extends Estado {
     this.posicion = this.historia.length - 1;
     this.total = this.historia.length - 1;
     this.sprites = [];
+    this.cuando_cambia_posicion = datos.cuando_cambia_posicion;
 
     this.izquierda = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     this.derecha = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     this.crear_texto();
   }
+
+  cuando_cambia_posicion: any;
 
   create() {
     this.game.stage.backgroundColor = "555";
@@ -67,9 +70,20 @@ class EstadoPausa extends Estado {
       this.posicion = Math.min(this.posicion, this.total);
       this.posicion = Math.max(this.posicion, 0);
 
+      this.cuando_cambia_posicion({ posicion: this.posicion });
+
       this.crear_sprites_desde_historia(this.posicion);
       this.actualizar_texto();
     }
+  }
+
+  actualizarPosicionDeFormaExterna(posicion) {
+    this.posicion = posicion;
+    this.posicion = Math.min(this.posicion, this.total);
+    this.posicion = Math.max(this.posicion, 0);
+
+    this.crear_sprites_desde_historia(this.posicion);
+    this.actualizar_texto();
   }
 
   private actualizar_texto() {

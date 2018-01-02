@@ -70,6 +70,15 @@
 
           {{#if estado.pausaActivada}}
             {{pilas-boton accion=(action "detener") texto="Terminar" icono="detener"}}
+
+            <div class="dib pa2 f6 fr">
+              <input class="v-btm" type="range"
+                min={{historiaMinimo}}
+                max={{historiaMaximo}}
+                oninput={{action "cambiarPosicion" value="target.value"}}
+                value={{historiaPosicion}}>
+            </div>
+
           {{/if}}
 
           {{#if estado.ModoCargando}}
@@ -91,9 +100,13 @@
         {{#if tituloDelCodigo}}
           <div class="verdana f6">Mostrando código de {{tituloDelCodigo}}:</div>
 
+          {{#if estado.editorDeshabilitado}}
+            <p>Deshailitado ...</p>
+          {{else}}
           {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
               cuandoCarga=(action "cuandoCargaMonacoEditor")
               onChange=(action "cuandoCambiaElCodigo")}}
+          {{/if}}
 
         {{else}}
           <div class="tc verdana f6">

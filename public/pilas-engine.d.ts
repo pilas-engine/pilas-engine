@@ -91,10 +91,12 @@ declare class EstadoPausa extends Estado {
     izquierda: any;
     derecha: any;
     init(datos: any): void;
+    cuando_cambia_posicion: any;
     create(): void;
     private crear_texto();
     private crear_sprites_desde_historia(posicion);
     update(): void;
+    actualizarPosicionDeFormaExterna(posicion: any): void;
     private actualizar_texto();
     crear_sprite_desde_entidad(entidad: any): SpriteSimple;
 }

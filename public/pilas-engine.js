@@ -66,11 +66,21 @@ var Pilas = (function () {
                 escena: e.data.escena
             });
         }
+        if (e.data.tipo === "cambiar_posicion") {
+            var pos = +e.data.posicion;
+            this.game.state.getCurrentState().actualizarPosicionDeFormaExterna(pos);
+        }
         if (e.data.tipo === "pausar_escena") {
             var historia = this.game.state.getCurrentState()["historia"];
             this.game.state.start("estadoPausa", true, false, {
-                historia: historia
+                historia: historia,
+                cuando_cambia_posicion: function (datos) {
+                    _this._emitirMensajeAlEditor("cambia_posicion_dentro_del_modo_pausa", datos);
+                }
             });
+            var t = historia.length - 1;
+            var datos = { minimo: 0, posicion: t, maximo: t };
+            this._emitirMensajeAlEditor("comienza_a_depurar_en_modo_pausa", datos);
         }
         if (e.data.tipo === "iniciar_pilas") {
             var ancho = e.data.ancho;
@@ -367,6 +377,7 @@ var EstadoPausa = (function (_super) {
         this.posicion = this.historia.length - 1;
         this.total = this.historia.length - 1;
         this.sprites = [];
+        this.cuando_cambia_posicion = datos.cuando_cambia_posicion;
         this.izquierda = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         this.derecha = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         this.crear_texto();
@@ -408,9 +419,17 @@ var EstadoPausa = (function (_super) {
         if (debeActualizar) {
             this.posicion = Math.min(this.posicion, this.total);
             this.posicion = Math.max(this.posicion, 0);
+            this.cuando_cambia_posicion({ posicion: this.posicion });
             this.crear_sprites_desde_historia(this.posicion);
             this.actualizar_texto();
         }
+    };
+    EstadoPausa.prototype.actualizarPosicionDeFormaExterna = function (posicion) {
+        this.posicion = posicion;
+        this.posicion = Math.min(this.posicion, this.total);
+        this.posicion = Math.max(this.posicion, 0);
+        this.crear_sprites_desde_historia(this.posicion);
+        this.actualizar_texto();
     };
     EstadoPausa.prototype.actualizar_texto = function () {
         var ayuda = "Cambiar con las teclas izquierda y derecha";

@@ -40,13 +40,17 @@ export default Ember.Component.extend({
       this.get("bus").on("cargarEscena", this, "alCargarEscenaDesdeElEditor");
       this.get("bus").on("ejecutarEscena", this, "alTenerQueEjecutarEscena");
       this.get("bus").on("pausarEscena", this, "alTenerQuePausarLaEscena");
+      this.get("bus").on(
+        "cambiarPosicionDesdeElEditor",
+        this,
+        "alTenerQueCambiarLaPosicionDesdeElEditor"
+      );
     };
   },
 
   actualizarTemporizadorDeFoco(iframe) {
     Ember.run.later(() => {
       if (this.get("mantenerFoco")) {
-        console.log("foco");
         iframe.contentWindow.focus();
       }
 
@@ -63,6 +67,11 @@ export default Ember.Component.extend({
     this.get("bus").off("cargarEscena", this, "alCargarEscenaDesdeElEditor");
     this.get("bus").off("ejecutarEscena", this, "alTenerQueEjecutarEscena");
     this.get("bus").off("pausarEscena", this, "alTenerQuePausarLaEscena");
+    this.get("bus").off(
+      "cambiarPosicionDesdeElEditor",
+      this,
+      "alTenerQueCambiarLaPosicionDesdeElEditor"
+    );
   },
 
   alCargarEscenaDesdeElEditor({ escena }) {
@@ -96,6 +105,15 @@ export default Ember.Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
+  alTenerQueCambiarLaPosicionDesdeElEditor({ posicion }) {
+    let data = {
+      tipo: "cambiar_posicion",
+      posicion: posicion
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
   atenderMensajesDePilas(contexto, e) {
     if (e.origin !== utils.HOST) {
       return;
@@ -118,6 +136,14 @@ export default Ember.Component.extend({
 
     if (e.data.tipo === "comienza_a_mover_un_actor") {
       this.get("bus").trigger("comienzaAMoverActor", e.data);
+    }
+
+    if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
+      this.get("bus").trigger("iniciaModoDepuracionEnPausa", e.data);
+    }
+
+    if (e.data.tipo === "cambia_posicion_dentro_del_modo_pausa") {
+      this.get("bus").trigger("cuandoCambiaPosicionDentroDelModoPausa", e.data);
     }
   },
   actions: {
