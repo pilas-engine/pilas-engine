@@ -1,9 +1,11 @@
-<div class="flex flex-column vh-100">
-  <div>
+<div class="vh-100 wrapper verdana">
+
+  <div class="h3">
+
     <div class="dt dt--fixed unselectable">
 
       <div class="dtc">
-
+        {{pilas-boton-regresar}}
       </div>
 
       <div class="dtc tr">
@@ -14,6 +16,63 @@
       </div>
     </div>
 
+  </div>
+
+  <section class="flex1 flex">
+    <div class="columns">
+      <div class="w5">Sidebar first: Fixed width</div>
+      <div class="main">
+        <!-- EDITOR -->
+
+
+                <div class='mb2'>
+                  {{#if estado.puedeEjecutar}}
+                    {{pilas-boton accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
+                  {{/if}}
+
+                  {{#if estado.puedeDetener}}
+                    {{pilas-boton accion=(action "detener") texto="Detener" icono="detener"}}
+                    {{pilas-boton accion=(action "pausar") texto="Pausar" icono="pausa"}}
+                  {{/if}}
+
+                  {{#if estado.pausaActivada}}
+                    {{pilas-boton accion=(action "detener") texto="Terminar" icono="detener"}}
+
+                    <div class="dib pa2 f6 fr">
+                      <input class="v-btm" type="range"
+                        min={{historiaMinimo}}
+                        max={{historiaMaximo}}
+                        oninput={{action "cambiarPosicion" value="target.value"}}
+                        value={{historiaPosicion}}>
+                    </div>
+
+                  {{/if}}
+
+                  {{#if estado.ModoCargando}}
+                    {{pilas-skeleton ancho=80 alto=30}}
+                  {{/if}}
+                </div>
+
+                {{pilas-phaser-experimental
+                  ancho=proyecto.ancho
+                  alto=proyecto.alto
+                  mantenerFoco=estado.mantenerFoco
+                }}
+
+      </div>
+      <div class="w5">Sidebar second: Fixed width</div>
+    </div>
+  </section>
+
+  <footer class="h2 bg-red">Footer: Fixed height</footer>
+
+</div>
+
+
+
+
+<div class="flex flex-column vh-100">
+  <div>
   </div>
 
   <div class="flex-expand">
@@ -57,40 +116,7 @@
       </div>
 
       <div class="w-40 pa2">
-
-        <div class='mb2'>
-          {{#if estado.puedeEjecutar}}
-            {{pilas-boton accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
-          {{/if}}
-
-          {{#if estado.puedeDetener}}
-            {{pilas-boton accion=(action "detener") texto="Detener" icono="detener"}}
-            {{pilas-boton accion=(action "pausar") texto="Pausar" icono="pausa"}}
-          {{/if}}
-
-          {{#if estado.pausaActivada}}
-            {{pilas-boton accion=(action "detener") texto="Terminar" icono="detener"}}
-
-            <div class="dib pa2 f6 fr">
-              <input class="v-btm" type="range"
-                min={{historiaMinimo}}
-                max={{historiaMaximo}}
-                oninput={{action "cambiarPosicion" value="target.value"}}
-                value={{historiaPosicion}}>
-            </div>
-
-          {{/if}}
-
-          {{#if estado.ModoCargando}}
-            {{pilas-skeleton ancho=80 alto=30}}
-          {{/if}}
-        </div>
-
-        {{pilas-phaser-experimental
-          ancho=proyecto.ancho
-          alto=proyecto.alto
-          mantenerFoco=estado.mantenerFoco
-        }}
+        <!-- EDITOR -->
       </div>
 
 
