@@ -20,9 +20,8 @@
 
   <section class="flex1 flex">
     <div class="columns">
-      <div class="w5 {{if ocultarPropiedades 'dn'}} separadorr">
+      <div class="flex1 {{if ocultarPropiedades 'dn'}} separadorr">
 
-        <!-- Lista de entidades -->
 
         <p class="f6 verdana">Titulo: {{proyecto.titulo}}</p>
 
@@ -96,7 +95,7 @@
                 }}
 
       </div>
-      <div class="w5 {{if ocultarEditor 'dn'}} separadorl">
+      <div class="flex1 {{if ocultarEditor 'dn'}} separadorl">
         <!-- EDITOR -->
 
         {{#if tituloDelCodigo}}
@@ -123,38 +122,4 @@
 
   <footer class="h2 bg-red">Footer: Fixed height</footer>
 
-</div>
-
-
-
-
-<div class="flex flex-column vh-100">
-  <div>
-  </div>
-
-  <div class="flex-expand">
-
-    <div class="flex h-100">
-
-      <div class="separadorr pa2 w-30 {{if ocultarPropiedades 'dn'}}">
-
-
-      </div>
-
-      <div class="w-40 pa2">
-        <!-- EDITOR -->
-      </div>
-
-
-
-      <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
-
-
-      </div>
-
-
-    </div>
-
-
-  </div>
 </div>
