@@ -64,21 +64,9 @@
   border-right: 1px dashed #ccc;
 }
 
-.wrapper {
-  min-height: 100vh;
-  background: #ccc;
-  display: flex;
-  flex-direction: column;
-}
-
 .columns {
   display: flex;
   flex: 1;
-}
-
-.main {
-  flex: 1;
-  background: #eee;
 }
 
 .flex1 {

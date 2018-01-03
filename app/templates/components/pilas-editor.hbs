@@ -1,4 +1,4 @@
-<div class="vh-100 wrapper verdana">
+<div class="vh-100 wrapper verdana bg-white flex flex-column">
 
   <div class="h3">
 
@@ -20,9 +20,45 @@
 
   <section class="flex1 flex">
     <div class="columns">
-      <div class="w5">Sidebar first: Fixed width</div>
-      <div class="main">
-        <!-- EDITOR -->
+      <div class="w5 {{if ocultarPropiedades 'dn'}} separadorr">
+
+        <!-- Lista de entidades -->
+
+        <p class="f6 verdana">Titulo: {{proyecto.titulo}}</p>
+
+        <p class="f6 verdana">Cantidad de escenas: {{proyecto.escenas.length}}</p>
+
+        <div class="tructate pb2">
+          {{pilas-boton accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
+        </div>
+
+        <div class='truncate'>
+          {{pilas-boton accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
+          {{pilas-boton accion=(action "agregarActor" proyecto) texto="+ Actor"}}
+          {{pilas-boton accion=(action "moverActores" proyecto) texto="Mover"}}
+        </div>
+
+        <ul class="verdana f6 bg-black-10 unselectable pa0">
+          {{#each proyecto.escenas as |escena|}}
+            <li class="pointer truncate pa1 hover-bg-black-10 {{if (eq escenaActual escena.id) "red"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
+
+              <ul>
+                {{#each escena.actores as |actor|}}
+                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}} >Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}}, imagen: {{actor.imagen}})</li>
+                {{else}}
+                  <li class='truncate pa1'>sin actores</li >
+                {{/each}}
+              </ul>
+
+          {{else}}
+            <li>sin escenas</li>
+          {{/each}}
+        </ul>
+
+      </div>
+
+      <div class="flex1 bg-white ml2 mr2">
+        <!-- Canvas -->
 
 
                 <div class='mb2'>
@@ -60,7 +96,28 @@
                 }}
 
       </div>
-      <div class="w5">Sidebar second: Fixed width</div>
+      <div class="w5 {{if ocultarEditor 'dn'}} separadorl">
+        <!-- EDITOR -->
+
+        {{#if tituloDelCodigo}}
+          <div class="verdana f6">Mostrando código de {{tituloDelCodigo}}:</div>
+
+          {{#if estado.editorDeshabilitado}}
+            <p>Deshailitado ...</p>
+          {{else}}
+          {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
+              cuandoCarga=(action "cuandoCargaMonacoEditor")
+              onChange=(action "cuandoCambiaElCodigo")}}
+          {{/if}}
+
+        {{else}}
+          <div class="tc verdana f6">
+            Seleccioná un actor para editar su código.
+          </div>
+        {{/if}}
+
+      </div>
+
     </div>
   </section>
 
@@ -81,37 +138,6 @@
 
       <div class="separadorr pa2 w-30 {{if ocultarPropiedades 'dn'}}">
 
-        <p class="f6 verdana">Titulo: {{proyecto.titulo}}</p>
-
-        <p class="f6 verdana">Cantidad de escenas: {{proyecto.escenas.length}}</p>
-
-        <div class="tructate pb2">
-          {{pilas-boton accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
-        </div>
-
-        <div class='truncate'>
-          {{pilas-boton accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
-          {{pilas-boton accion=(action "agregarActor" proyecto) texto="+ Actor"}}
-          {{pilas-boton accion=(action "moverActores" proyecto) texto="Mover"}}
-        </div>
-
-        <ul class="verdana f6 bg-black-10 unselectable pa0">
-          {{#each proyecto.escenas as |escena|}}
-            <li class="pointer truncate pa1 hover-bg-black-10 {{if (eq escenaActual escena.id) "red"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
-
-              <ul>
-                {{#each escena.actores as |actor|}}
-                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}} >Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}}, imagen: {{actor.imagen}})</li>
-                {{else}}
-                  <li class='truncate pa1'>sin actores</li >
-                {{/each}}
-              </ul>
-
-          {{else}}
-            <li>sin escenas</li>
-          {{/each}}
-        </ul>
-
 
       </div>
 
@@ -123,23 +149,6 @@
 
       <div class="separadorl pa1 w-30 {{if ocultarEditor 'dn'}}">
 
-        {{#if tituloDelCodigo}}
-          <div class="verdana f6">Mostrando código de {{tituloDelCodigo}}:</div>
-
-          {{#if estado.editorDeshabilitado}}
-            <p>Deshailitado ...</p>
-          {{else}}
-          {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
-              cuandoCarga=(action "cuandoCargaMonacoEditor")
-              onChange=(action "cuandoCambiaElCodigo")}}
-          {{/if}}
-
-        {{else}}
-          <div class="tc verdana f6">
-            Seleccioná un actor para editar su código.
-
-          </div>
-        {{/if}}
 
       </div>
 
