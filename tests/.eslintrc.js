@@ -1,6 +1,7 @@
 module.exports = {
   globals: {
-    requireNode: true
+    requireNode: true,
+    ts: true
   },
   env: {
     embertest: true

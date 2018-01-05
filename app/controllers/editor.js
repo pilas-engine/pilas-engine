@@ -71,17 +71,24 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       tiposDeActores: [
         {
           tipo: "pelota",
-          codigo: `class Pelota {}`
+          codigo: `class Pelota {
+
+            iniciar() {
+              alert("iniciando pelota");
+            }
+
+          }`
         },
         {
           tipo: "caja",
-          codigo: `class Caja extends Actores {
-              // completar ...
+          codigo: `class Caja {
           }`
         },
         {
           tipo: "actor",
-          codigo: `//sin definir...`
+          codigo: `class ActorDemo {
+
+          }`
         }
       ],
       escenas: [

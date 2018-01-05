@@ -31,20 +31,12 @@ export default Ember.Component.extend({
 
       contexto.postMessage(data, utils.HOST);
 
-      window.addEventListener(
-        "message",
-        this.get("funcionParaAtenderMensajes"),
-        false
-      );
+      window.addEventListener("message", this.get("funcionParaAtenderMensajes"), false);
 
       this.get("bus").on("cargarEscena", this, "alCargarEscenaDesdeElEditor");
       this.get("bus").on("ejecutarEscena", this, "alTenerQueEjecutarEscena");
       this.get("bus").on("pausarEscena", this, "alTenerQuePausarLaEscena");
-      this.get("bus").on(
-        "cambiarPosicionDesdeElEditor",
-        this,
-        "alTenerQueCambiarLaPosicionDesdeElEditor"
-      );
+      this.get("bus").on("cambiarPosicionDesdeElEditor", this, "alTenerQueCambiarLaPosicionDesdeElEditor");
     };
   },
 
@@ -59,19 +51,12 @@ export default Ember.Component.extend({
   },
 
   willDestroyElement() {
-    window.removeEventListener(
-      "message",
-      this.get("funcionParaAtenderMensajes")
-    );
+    window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
 
     this.get("bus").off("cargarEscena", this, "alCargarEscenaDesdeElEditor");
     this.get("bus").off("ejecutarEscena", this, "alTenerQueEjecutarEscena");
     this.get("bus").off("pausarEscena", this, "alTenerQuePausarLaEscena");
-    this.get("bus").off(
-      "cambiarPosicionDesdeElEditor",
-      this,
-      "alTenerQueCambiarLaPosicionDesdeElEditor"
-    );
+    this.get("bus").off("cambiarPosicionDesdeElEditor", this, "alTenerQueCambiarLaPosicionDesdeElEditor");
   },
 
   alCargarEscenaDesdeElEditor({ escena }) {
