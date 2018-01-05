@@ -24,4 +24,6 @@ class Estado extends Phaser.State {
       }
     });
   }
+
+  actualizarPosicionDeFormaExterna(pos: any) {}
 }

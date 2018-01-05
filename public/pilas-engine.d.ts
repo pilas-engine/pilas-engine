@@ -57,6 +57,7 @@ declare class SpriteSimple extends Phaser.Sprite {
 }
 declare class Estado extends Phaser.State {
     render(): void;
+    actualizarPosicionDeFormaExterna(pos: any): void;
 }
 declare class EstadoEditor extends Estado {
     entidades: any;

@@ -20,7 +20,8 @@
 
   <section class="flex1 flex">
     <div class="columns">
-      <div class="flex1 {{if ocultarPropiedades 'dn'}} separadorr">
+
+      <div class="flex1 w-30 {{if ocultarPropiedades 'dn'}} separadorr">
 
 
         <p class="f6 verdana">Titulo: {{proyecto.titulo}}</p>
@@ -43,7 +44,7 @@
 
               <ul>
                 {{#each escena.actores as |actor|}}
-                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}} >Actor: {{actor.nombre}} (x: {{actor.x}}, y: {{actor.y}}, imagen: {{actor.imagen}})</li>
+                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}} >Actor: {{actor.nombre}} (x: {{round actor.x}}, y: {{round actor.y}}, imagen: {{actor.imagen}})</li>
                 {{else}}
                   <li class='truncate pa1'>sin actores</li >
                 {{/each}}
@@ -55,8 +56,7 @@
         </ul>
 
       </div>
-
-      <div class="flex1 bg-white ml2 mr2">
+      <div class="flex1 w-30 bg-white ml2 mr2">
         <!-- Canvas -->
 
 
@@ -95,14 +95,14 @@
                 }}
 
       </div>
-      <div class="flex1 {{if ocultarEditor 'dn'}} separadorl">
+      <div class="flex1 w-40 {{if ocultarEditor 'dn'}} separadorl">
         <!-- EDITOR -->
 
         {{#if tituloDelCodigo}}
           <div class="verdana f6">Mostrando código de {{tituloDelCodigo}}:</div>
 
           {{#if estado.editorDeshabilitado}}
-            <p>Deshailitado ...</p>
+            <p class="f6 c-silver">Deshabilitado hasta ingresar en modo edición</p>
           {{else}}
           {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
               cuandoCarga=(action "cuandoCargaMonacoEditor")
@@ -120,6 +120,6 @@
     </div>
   </section>
 
-  <footer class="h2 bg-red">Footer: Fixed height</footer>
+  <footer class="h2 bg-gray">Footer: Fixed height</footer>
 
 </div>

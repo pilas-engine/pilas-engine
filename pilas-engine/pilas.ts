@@ -65,10 +65,7 @@ class Pilas {
       this.game.state.start("estadoPausa", true, false, {
         historia: historia,
         cuando_cambia_posicion: datos => {
-          this._emitirMensajeAlEditor(
-            "cambia_posicion_dentro_del_modo_pausa",
-            datos
-          );
+          this._emitirMensajeAlEditor("cambia_posicion_dentro_del_modo_pausa", datos);
         }
       });
 
@@ -102,6 +99,9 @@ class Pilas {
     this.game.state.add("editorState", EstadoEditor);
     this.game.state.add("estadoEjecucion", EstadoEjecucion);
     this.game.state.add("estadoPausa", EstadoPausa);
+
+    this.game.scale.trackParentInterval = 1;
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
   }

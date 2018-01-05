@@ -73,8 +73,8 @@ class EstadoEditor extends Estado {
   }
 
   actualizar_texto_con_posicion_del_mouse() {
-    let x = this.input.mousePointer.x;
-    let y = this.input.mousePointer.y;
+    let x = Math.round(this.input.mousePointer.x);
+    let y = Math.round(this.input.mousePointer.y);
 
     if (x !== -1 && y !== -1) {
       this.texto.text = "  Mouse: (" + x + ", " + y + ") ";

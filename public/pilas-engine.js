@@ -104,6 +104,8 @@ var Pilas = (function () {
         this.game.state.add("editorState", EstadoEditor);
         this.game.state.add("estadoEjecucion", EstadoEjecucion);
         this.game.state.add("estadoPausa", EstadoPausa);
+        this.game.scale.trackParentInterval = 1;
+        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
     };
     Pilas.prototype._emitirMensajeAlEditor = function (nombre, datos) {
@@ -244,6 +246,7 @@ var Estado = (function (_super) {
             }
         });
     };
+    Estado.prototype.actualizarPosicionDeFormaExterna = function (pos) { };
     return Estado;
 }(Phaser.State));
 var EstadoEditor = (function (_super) {
@@ -297,8 +300,8 @@ var EstadoEditor = (function (_super) {
         this.actualizar_texto_con_posicion_del_mouse();
     };
     EstadoEditor.prototype.actualizar_texto_con_posicion_del_mouse = function () {
-        var x = this.input.mousePointer.x;
-        var y = this.input.mousePointer.y;
+        var x = Math.round(this.input.mousePointer.x);
+        var y = Math.round(this.input.mousePointer.y);
         if (x !== -1 && y !== -1) {
             this.texto.text = "  Mouse: (" + x + ", " + y + ") ";
         }
