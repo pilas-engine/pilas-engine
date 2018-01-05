@@ -70,11 +70,12 @@ export default Ember.Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  alTenerQueEjecutarEscena({ escena }) {
+  alTenerQueEjecutarEscena({ escena, codigo }) {
     let data = {
       tipo: "ejecutar_escena",
-      nombre: "editorState",
-      escena: escena
+      //nombre: "editorState",
+      escena: escena,
+      codigo: codigo.codigo
     };
 
     this.contexto.postMessage(data, utils.HOST);

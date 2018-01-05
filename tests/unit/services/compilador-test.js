@@ -20,4 +20,7 @@ test("it exists", function(assert) {
   `;
 
   assert.equal(eliminarEspacios(resultado.codigo), eliminarEspacios(codigoEsperado));
+
+  resultado = compilador.compilar(`class MiActor extends Actor {}`);
+  assert.ok(resultado.codigo.indexOf("var extendStatics = Object.setPrototypeOf") > -1);
 });

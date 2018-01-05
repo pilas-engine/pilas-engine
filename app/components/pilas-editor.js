@@ -4,6 +4,7 @@ import estados from "../estados/estados-de-pilas-editor";
 
 export default Component.extend({
   bus: Ember.inject.service(),
+  compilador: Ember.inject.service(),
   codigo: "// codigo",
   tagName: "",
   actorSeleccionado: -1,
@@ -99,6 +100,11 @@ export default Component.extend({
     return proyecto.escenas.findBy("id", indiceEscenaActual);
   },
 
+  obtenerCodigoTypescript() {
+    let proyecto = this.get("proyecto");
+    return proyecto.tiposDeActores.map(e => e.codigo).join("\n");
+  },
+
   generarID() {
     return Math.floor(Math.random() * 999) + 1000;
   },
@@ -182,9 +188,14 @@ export default Component.extend({
     },
     ejecutar() {
       this.set("estado", this.get("estado").ejecutar());
+
       let escena = this.obtenerEscenaActual();
       let escenaComoJSON = JSON.parse(JSON.stringify(escena));
-      this.get("bus").trigger("ejecutarEscena", { escena: escenaComoJSON });
+
+      let codigoTypescript = this.obtenerCodigoTypescript();
+      let codigoJavascript = this.get("compilador").compilar(codigoTypescript);
+
+      this.get("bus").trigger("ejecutarEscena", { codigo: codigoJavascript, escena: escenaComoJSON });
     },
     detener() {
       this.mostrarEscenaActualSobrePilas();

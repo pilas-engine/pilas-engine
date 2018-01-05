@@ -49,6 +49,9 @@ class Pilas {
     }
 
     if (e.data.tipo === "ejecutar_escena") {
+      console.log(e.data.codigo);
+      eval(e.data.codigo);
+
       this.game.state.start("estadoEjecucion", true, false, {
         escena: e.data.escena
       });
@@ -56,7 +59,9 @@ class Pilas {
 
     if (e.data.tipo === "cambiar_posicion") {
       let pos = +e.data.posicion;
-      this.game.state.getCurrentState().actualizarPosicionDeFormaExterna(pos);
+      if (this.game.state.getCurrentState()["actualizarPosicionDeFormaExterna"]) {
+        this.game.state.getCurrentState()["actualizarPosicionDeFormaExterna"](pos);
+      }
     }
 
     if (e.data.tipo === "pausar_escena") {
