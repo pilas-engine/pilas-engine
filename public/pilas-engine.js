@@ -40,6 +40,14 @@ var Pilas = (function () {
     Pilas.prototype.obtener_entidades = function () {
         return this.game.state.getCurrentState()["entidades"];
     };
+    Pilas.prototype._conectarAtajosDeTeclado = function () {
+        var _this = this;
+        this.game.input.keyboard.onUpCallback = function (evento) {
+            if (evento.keyCode == Phaser.Keyboard.ESC && _this.game.state.current === "estadoEjecucion") {
+                _this._emitirMensajeAlEditor("cuando_pulsa_escape");
+            }
+        };
+    };
     Pilas.prototype._agregarManejadorDeMensajes = function () {
         var _this = this;
         window.addEventListener("message", function (e) { return _this._atenderMensaje(e); }, false);
@@ -111,6 +119,7 @@ var Pilas = (function () {
         this.game.scale.trackParentInterval = 1;
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
+        this._conectarAtajosDeTeclado();
     };
     Pilas.prototype._emitirMensajeAlEditor = function (nombre, datos) {
         datos = datos || {};

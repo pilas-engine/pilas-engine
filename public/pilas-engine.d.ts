@@ -10,6 +10,7 @@ declare class Pilas {
     log: Log;
     constructor();
     obtener_entidades(): any;
+    _conectarAtajosDeTeclado(): void;
     _agregarManejadorDeMensajes(): void;
     _atenderMensaje(e: any): void;
     _preload(): void;

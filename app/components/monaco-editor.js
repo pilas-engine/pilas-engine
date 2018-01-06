@@ -41,6 +41,10 @@ export default Ember.Component.extend({
         if (event.data.message === "load-complete") {
           this.onLoadEditor(this.get("frame").editor);
         }
+
+        if (event.data.message === "on-save") {
+          this.onSave(this.get("frame").editor);
+        }
       }
     };
 
@@ -108,6 +112,10 @@ export default Ember.Component.extend({
               window.onresize = function() {
                 editor.layout();
               };
+
+              var myBinding = editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
+                window.top.postMessage({message: "on-save"}, origin);
+              });
 
             }
           });

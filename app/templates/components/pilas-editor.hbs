@@ -95,6 +95,7 @@
                   ancho=proyecto.ancho
                   alto=proyecto.alto
                   mantenerFoco=estado.mantenerFoco
+                  cuandoPulsaEscapeEnModoEjecucion=(action "alternarEstadoDeEjecucion")
                 }}
 
       </div>
@@ -107,8 +108,9 @@
           {{#if estado.editorDeshabilitado}}
             <p class="f6 c-silver">Deshabilitado hasta ingresar en modo edición</p>
           {{else}}
-          {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
+            {{monaco-editor titulo=tituloDelCodigo code=codigo readOnly=estado.editorDeshabilitado
               cuandoCarga=(action "cuandoCargaMonacoEditor")
+              onSave=(action "cuandoGuardaDesdeElEditor")
               onChange=(action "cuandoCambiaElCodigo")}}
           {{/if}}
 

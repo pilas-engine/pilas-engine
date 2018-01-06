@@ -132,6 +132,10 @@ export default Ember.Component.extend({
     if (e.data.tipo === "cambia_posicion_dentro_del_modo_pausa") {
       this.get("bus").trigger("cuandoCambiaPosicionDentroDelModoPausa", e.data);
     }
+
+    if (e.data.tipo === "cuando_pulsa_escape") {
+      this.cuandoPulsaEscapeEnModoEjecucion();
+    }
   },
   actions: {
     detener() {

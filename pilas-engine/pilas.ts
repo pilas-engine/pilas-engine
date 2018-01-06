@@ -17,18 +17,18 @@ class Pilas {
     return this.game.state.getCurrentState()["entidades"];
   }
 
-  /*
-   * --------------- Métodos privados -------------------
-   */
+  _conectarAtajosDeTeclado() {
+    this.game.input.keyboard.onUpCallback = evento => {
+      if (evento.keyCode == Phaser.Keyboard.ESC && this.game.state.current === "estadoEjecucion") {
+        this._emitirMensajeAlEditor("cuando_pulsa_escape");
+      }
+    };
+  }
 
   _agregarManejadorDeMensajes() {
     window.addEventListener("message", e => this._atenderMensaje(e), false);
   }
 
-  /**
-   * El manejador de mensajes se encarga de recibir órdenes de
-   * parte del editor.
-   */
   _atenderMensaje(e: any) {
     this.log.debug("Llega un mensaje desde el editor: " + e.data.tipo, e);
 
@@ -109,6 +109,7 @@ class Pilas {
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
+    this._conectarAtajosDeTeclado();
   }
 
   _emitirMensajeAlEditor(nombre, datos) {

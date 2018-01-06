@@ -2,7 +2,7 @@ import Component from "@ember/component";
 import Ember from "ember";
 import estados from "../estados/estados-de-pilas-editor";
 
-export default Component.extend({
+export default Ember.Component.extend({
   bus: Ember.inject.service(),
   compilador: Ember.inject.service(),
   codigo: "// codigo",
@@ -43,10 +43,19 @@ export default Component.extend({
   didInsertElement() {
     this.set("estado", new estados.ModoCargando());
     this.conectarEventos();
+
+    document.addEventListener("keydown", this.cuandoIntentaAlternarEjecucion.bind(this));
+  },
+
+  cuandoIntentaAlternarEjecucion(event) {
+    if (event.key === "r") {
+      this.send("alternarEstadoDeEjecucion");
+    }
   },
 
   willDestroyElement() {
     this.desconectarEventos();
+    document.removeEventListener("keydown", this.cuandoIntentaAlternarEjecucion);
   },
 
   conectarEventos() {
@@ -210,6 +219,20 @@ export default Component.extend({
       this.get("bus").trigger("cambiarPosicionDesdeElEditor", {
         posicion: valorNuevo
       });
+    },
+    cuandoGuardaDesdeElEditor(/*editor*/) {
+      this.send("alternarEstadoDeEjecucion");
+    },
+    alternarEstadoDeEjecucion() {
+      let estado = this.get("estado");
+
+      if (estado.puedeEjecutar) {
+        this.send("ejecutar");
+      } else {
+        if (estado.puedeDetener) {
+          this.send("detener");
+        }
+      }
     }
   }
 });
