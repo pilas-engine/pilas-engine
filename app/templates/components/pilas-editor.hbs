@@ -70,12 +70,13 @@
 
                   {{#if estado.puedeDetener}}
                     {{pilas-boton accion=(action "detener") texto="Detener" icono="detener"}}
+                  {{/if}}
+
+                  {{#if estado.puedePausar}}
                     {{pilas-boton accion=(action "pausar") texto="Pausar" icono="pausa"}}
                   {{/if}}
 
                   {{#if estado.pausaActivada}}
-                    {{pilas-boton accion=(action "detener") texto="Terminar" icono="detener"}}
-
                     <div class="dib pa2 f6 fr">
                       <input class="v-btm" type="range"
                         min={{historiaMinimo}}

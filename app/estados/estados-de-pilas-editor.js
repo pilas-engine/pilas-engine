@@ -8,6 +8,7 @@ class ModoCargando {
     this.editorDeshabilitado = true;
     this.codigo = "Demo";
     this.mantenerFoco = false;
+    this.puedePausar = false;
   }
 
   cuandoTerminoDeCargarPilas() {
@@ -25,6 +26,7 @@ class ModoEdicion {
     this.editorDeshabilitado = false;
     this.codigo = "Demo";
     this.mantenerFoco = false;
+    this.puedePausar = false;
   }
 
   ejecutar() {
@@ -41,6 +43,7 @@ class ModoEjecucion {
     this.pausaActivada = false;
     this.editorDeshabilitado = true;
     this.mantenerFoco = true;
+    this.puedePausar = true;
   }
 
   detener() {
@@ -57,10 +60,11 @@ class ModoPausa {
     this.ModoCargando = false;
     this.nombreDeEstado = "ModoPausa";
     this.puedeEjecutar = false;
-    this.puedeDetener = false;
+    this.puedeDetener = true;
     this.pausaActivada = true;
     this.editorDeshabilitado = true;
     this.mantenerFoco = true;
+    this.puedePausar = false;
   }
 
   detener() {

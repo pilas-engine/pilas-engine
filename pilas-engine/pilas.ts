@@ -19,8 +19,9 @@ class Pilas {
 
   _conectarAtajosDeTeclado() {
     this.game.input.keyboard.onUpCallback = evento => {
-      if (evento.keyCode == Phaser.Keyboard.ESC && this.game.state.current === "estadoEjecucion") {
-        this._emitirMensajeAlEditor("cuando_pulsa_escape");
+      if (evento.keyCode == Phaser.Keyboard.ESC && (this.game.state.current === "estadoEjecucion" || this.game.state.current === "estadoPausa")) {
+        console.log("pulsa pausa.");
+        this._emitirMensajeAlEditor("cuando_pulsa_escape", {});
       }
     };
   }

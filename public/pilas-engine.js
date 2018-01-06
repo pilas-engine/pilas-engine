@@ -43,8 +43,9 @@ var Pilas = (function () {
     Pilas.prototype._conectarAtajosDeTeclado = function () {
         var _this = this;
         this.game.input.keyboard.onUpCallback = function (evento) {
-            if (evento.keyCode == Phaser.Keyboard.ESC && _this.game.state.current === "estadoEjecucion") {
-                _this._emitirMensajeAlEditor("cuando_pulsa_escape");
+            if (evento.keyCode == Phaser.Keyboard.ESC && (_this.game.state.current === "estadoEjecucion" || _this.game.state.current === "estadoPausa")) {
+                console.log("pulsa pausa.");
+                _this._emitirMensajeAlEditor("cuando_pulsa_escape", {});
             }
         };
     };

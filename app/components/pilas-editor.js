@@ -2,7 +2,7 @@ import Component from "@ember/component";
 import Ember from "ember";
 import estados from "../estados/estados-de-pilas-editor";
 
-export default Ember.Component.extend({
+export default Component.extend({
   bus: Ember.inject.service(),
   compilador: Ember.inject.service(),
   codigo: "// codigo",
