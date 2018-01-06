@@ -72,3 +72,7 @@
 .flex1 {
   flex: 1;
 }
+
+body {
+  overflow: hidden;
+}

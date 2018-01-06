@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   contexto: null,
   cargando: true,
   mantenerFoco: false,
+  classNames: ["flex1", "overflow-hidden"],
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];

@@ -4,7 +4,7 @@ import getFrameById from "ember-monaco-editor/utils/get-frame-by-id";
 
 export default Ember.Component.extend({
   layout,
-  classNames: ["monaco-editor", "w-100", "h-100", "ba"],
+  classNames: ["monaco-editor", "w-100", "flex1", "ba", "b--light-gray"],
   code: "// demo",
   loading: true,
   readOnly: false,
@@ -91,6 +91,8 @@ export default Ember.Component.extend({
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
                 minimap: true,
+                fontSize: 14,
+                theme: 'vs', //'vs-dark',
                 readOnly: ${this.get("readOnly")},
               });
 
