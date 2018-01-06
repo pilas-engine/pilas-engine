@@ -93,12 +93,7 @@ class EstadoPausa extends Estado {
   }
 
   crear_sprite_desde_entidad(entidad) {
-    let sprite = new SpriteSimple(
-      this.game,
-      entidad.x,
-      entidad.y,
-      entidad.imagen
-    );
+    let sprite = new SpriteSimple(this.game, entidad.x, entidad.y, entidad.imagen);
 
     sprite.angle = entidad.rotacion;
     sprite.anchor.set(entidad.centro_x, entidad.centro_y);
@@ -106,5 +101,15 @@ class EstadoPausa extends Estado {
 
     this.world.add(sprite);
     return sprite;
+  }
+
+  render() {
+    super.render();
+
+    this.historia.map(historia => {
+      historia.map(entidad => {
+        this.game.debug.pixel(entidad.x, entidad.y, "rgba(255,255,255,0.5)");
+      });
+    });
   }
 }

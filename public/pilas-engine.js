@@ -451,5 +451,14 @@ var EstadoPausa = (function (_super) {
         this.world.add(sprite);
         return sprite;
     };
+    EstadoPausa.prototype.render = function () {
+        var _this = this;
+        _super.prototype.render.call(this);
+        this.historia.map(function (historia) {
+            historia.map(function (entidad) {
+                _this.game.debug.pixel(entidad.x, entidad.y, "rgba(255,255,255,0.5)");
+            });
+        });
+    };
     return EstadoPausa;
 }(Estado));
