@@ -7,6 +7,7 @@ if (window.location.host) {
 class Pilas {
   game: Phaser.Game;
   log: Log;
+  control: Control;
 
   constructor() {
     this.log = new Log(this);
@@ -110,6 +111,8 @@ class Pilas {
 
     this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
     this._conectarAtajosDeTeclado();
+
+    this.control = new Control(this);
   }
 
   _emitirMensajeAlEditor(nombre, datos) {

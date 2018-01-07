@@ -10,8 +10,10 @@ export default Ember.Component.extend({
   loading: true,
   readOnly: false,
   editor: null,
+  bus: Ember.inject.service(),
 
   cuandoCambiaDeArchivo: Ember.observer("titulo", function() {
+    console.log("Cargando codigo", this.get("titulo"));
     this.cargarCodigo();
   }),
 
@@ -19,7 +21,9 @@ export default Ember.Component.extend({
     let editor = this.get("editor");
     let code = this.get("code");
     let codigoFormateado = formatear(code);
-    editor.setValue(codigoFormateado);
+    let pos = editor.getPosition();
+    editor.getModel().setValue(codigoFormateado);
+    editor.setPosition(pos);
   },
 
   /*
@@ -50,10 +54,7 @@ export default Ember.Component.extend({
 
         if (event.data.message === "on-save") {
           this.cargarCodigo();
-
-          setTimeout(() => {
-            this.onSave(this.get("frame").editor);
-          }, 2000);
+          this.onSave(this.get("frame").editor);
         }
       }
     };
@@ -107,6 +108,9 @@ export default Ember.Component.extend({
                 minimap: true,
                 fontSize: 14,
                 theme: 'vs', //'vs-dark',
+                tabSize: 2,
+                insertSpaces: true,
+                tabWidth: 2,
                 readOnly: ${this.get("readOnly")},
               });
 
@@ -138,6 +142,8 @@ export default Ember.Component.extend({
 
       `);
     frameDoc.close();
+
+    this.get("bus").on("hacerFocoEnElEditor", this, "hacerFoco");
   },
 
   onLoadEditor(editor) {
@@ -154,8 +160,15 @@ export default Ember.Component.extend({
     this.set("loading", false);
   },
 
+  hacerFoco() {
+    let editor = this.get("editor");
+    this.$("iframe")[0].contentWindow.focus();
+    editor.focus();
+  },
+
   willDestroyElement() {
     this._super(...arguments);
     window.removeEventListener("message", this.get("_subscription"));
+    this.get("bus").on("hacerFocoEnElEditor", this, "hacerFoco");
   }
 });

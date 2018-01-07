@@ -14,7 +14,15 @@ export default Ember.Component.extend({
   didInsertElement() {
     let iframe = this.$("iframe")[0];
 
-    this.actualizarTemporizadorDeFoco(iframe);
+    iframe.onclick = () => {
+      this.hacerFoco();
+      console.log("foco");
+    };
+
+    iframe.contentWindow.click = () => {
+      this.hacerFoco();
+      console.log("foco");
+    };
 
     iframe.onload = () => {
       let contexto = iframe.contentWindow;
@@ -38,17 +46,8 @@ export default Ember.Component.extend({
       this.get("bus").on("ejecutarEscena", this, "alTenerQueEjecutarEscena");
       this.get("bus").on("pausarEscena", this, "alTenerQuePausarLaEscena");
       this.get("bus").on("cambiarPosicionDesdeElEditor", this, "alTenerQueCambiarLaPosicionDesdeElEditor");
+      this.get("bus").on("hacerFocoEnPilas", this, "hacerFoco");
     };
-  },
-
-  actualizarTemporizadorDeFoco(iframe) {
-    Ember.run.later(() => {
-      if (this.get("mantenerFoco")) {
-        iframe.contentWindow.focus();
-      }
-
-      this.actualizarTemporizadorDeFoco(iframe);
-    }, 500);
   },
 
   willDestroyElement() {
@@ -58,6 +57,7 @@ export default Ember.Component.extend({
     this.get("bus").off("ejecutarEscena", this, "alTenerQueEjecutarEscena");
     this.get("bus").off("pausarEscena", this, "alTenerQuePausarLaEscena");
     this.get("bus").off("cambiarPosicionDesdeElEditor", this, "alTenerQueCambiarLaPosicionDesdeElEditor");
+    this.get("bus").off("hacerFocoEnPilas", this, "hacerFoco");
   },
 
   alCargarEscenaDesdeElEditor({ escena }) {
@@ -90,6 +90,13 @@ export default Ember.Component.extend({
     };
 
     this.contexto.postMessage(data, utils.HOST);
+  },
+
+  hacerFoco() {
+    let iframe = this.$("iframe")[0];
+    setTimeout(function() {
+      iframe.contentWindow.focus();
+    }, 10);
   },
 
   alTenerQueCambiarLaPosicionDesdeElEditor({ posicion }) {

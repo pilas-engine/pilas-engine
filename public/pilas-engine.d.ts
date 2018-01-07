@@ -1,3 +1,11 @@
+declare class Control {
+    pilas: Pilas;
+    teclaIzquierda: any;
+    teclaDerecha: any;
+    constructor(pilas: Pilas);
+    readonly izquierda: any;
+    readonly derecha: any;
+}
 declare class Log {
     pilas: Pilas;
     constructor(pilas: Pilas);
@@ -8,6 +16,7 @@ declare var HOST: string;
 declare class Pilas {
     game: Phaser.Game;
     log: Log;
+    control: Control;
     constructor();
     obtener_entidades(): any;
     _conectarAtajosDeTeclado(): void;

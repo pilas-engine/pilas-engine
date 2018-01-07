@@ -99,7 +99,13 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               }
 
               actualizar() {
-                this.x += 1;
+                if (pilas.control.izquierda) {
+                  this.x -= this.velocidad;
+                }
+
+                if (pilas.control.derecha) {
+                  this.x += this.velocidad;
+                }
               }
 
             }`

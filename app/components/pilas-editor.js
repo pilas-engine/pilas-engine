@@ -5,6 +5,7 @@ import estados from "../estados/estados-de-pilas-editor";
 export default Component.extend({
   bus: Ember.inject.service(),
   compilador: Ember.inject.service(),
+  foco: Ember.inject.service(),
   codigo: "// codigo",
   tagName: "",
   actorSeleccionado: -1,
@@ -45,6 +46,15 @@ export default Component.extend({
     this.conectarEventos();
 
     document.addEventListener("keydown", this.cuandoIntentaAlternarEjecucion.bind(this));
+
+    this.get("foco").conectarFunciones(
+      () => {
+        this.get("bus").trigger("hacerFocoEnPilas", {});
+      },
+      () => {
+        this.get("bus").trigger("hacerFocoEnElEditor", {});
+      }
+    );
   },
 
   cuandoIntentaAlternarEjecucion(event) {
@@ -56,6 +66,7 @@ export default Component.extend({
   willDestroyElement() {
     this.desconectarEventos();
     document.removeEventListener("keydown", this.cuandoIntentaAlternarEjecucion);
+    this.get("foco").limpiar();
   },
 
   conectarEventos() {
@@ -205,10 +216,12 @@ export default Component.extend({
       let codigoJavascript = this.get("compilador").compilar(codigoTypescript);
 
       this.get("bus").trigger("ejecutarEscena", { codigo: codigoJavascript, escena: escenaComoJSON });
+      this.get("foco").hacerFocoEnPilas();
     },
     detener() {
       this.mostrarEscenaActualSobrePilas();
       this.set("estado", this.get("estado").detener());
+      this.get("foco").hacerFocoEnElEditor();
     },
     pausar() {
       this.set("estado", this.get("estado").pausar());

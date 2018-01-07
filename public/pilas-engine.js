@@ -8,6 +8,28 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var Control = (function () {
+    function Control(pilas) {
+        this.pilas = pilas;
+        this.teclaIzquierda = pilas.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        this.teclaDerecha = pilas.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    }
+    Object.defineProperty(Control.prototype, "izquierda", {
+        get: function () {
+            return this.teclaIzquierda.isDown;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "derecha", {
+        get: function () {
+            return this.teclaDerecha.isDown;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Control;
+}());
 var Log = (function () {
     function Log(pilas) {
         this.pilas = pilas;
@@ -121,6 +143,7 @@ var Pilas = (function () {
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
         this._conectarAtajosDeTeclado();
+        this.control = new Control(this);
     };
     Pilas.prototype._emitirMensajeAlEditor = function (nombre, datos) {
         datos = datos || {};
@@ -335,7 +358,6 @@ var EstadoEjecucion = (function (_super) {
         this.entidades = datos.escena.actores;
         this.codigo = datos.codigo;
         var codigoCompleto = this.codigo + "\n\nvar __clases_a_exportar = {Aceituna: Aceituna, Caja: Caja};\n__clases_a_exportar";
-        console.log(codigoCompleto);
         this.clasesDeActores = eval(codigoCompleto);
         this.sprites = {};
         this.historia = [];

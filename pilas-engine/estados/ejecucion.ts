@@ -10,7 +10,6 @@ class EstadoEjecucion extends Estado {
     this.codigo = datos.codigo;
 
     let codigoCompleto = this.codigo + "\n\nvar __clases_a_exportar = {Aceituna: Aceituna, Caja: Caja};\n__clases_a_exportar";
-    console.log(codigoCompleto);
     this.clasesDeActores = eval(codigoCompleto);
 
     this.sprites = {};

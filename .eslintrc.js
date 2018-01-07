@@ -10,7 +10,8 @@ module.exports = {
   },
   globals: {
     requireNode: true,
-    ts: true
+    ts: true,
+    js_beautify: true
   },
   rules: {
     "no-console": 0
