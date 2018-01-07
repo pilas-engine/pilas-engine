@@ -50,11 +50,9 @@ class Pilas {
     }
 
     if (e.data.tipo === "ejecutar_escena") {
-      console.log(e.data.codigo);
-      eval(e.data.codigo);
-
       this.game.state.start("estadoEjecucion", true, false, {
-        escena: e.data.escena
+        escena: e.data.escena,
+        codigo: e.data.codigo
       });
     }
 
@@ -97,6 +95,7 @@ class Pilas {
     this.game.load.image("logo", "imagenes/logo.png");
     this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
     this.game.load.image("caja", "imagenes/caja.png");
+    this.game.load.image("aceituna", "imagenes/aceituna.png");
   }
 
   _create() {

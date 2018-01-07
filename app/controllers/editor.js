@@ -89,6 +89,20 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           codigo: `class ActorDemo {
 
           }`
+        },
+        {
+          tipo: "aceituna",
+          codigo: `class Aceituna extends Actor {
+
+              iniciar() {
+                console.log("iniciando actor!!!");
+              }
+
+              actualizar() {
+                this.x += 1;
+              }
+
+            }`
         }
       ],
       escenas: [
@@ -122,6 +136,15 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               centro_y: 0.5,
               tipo: "actor",
               imagen: "sin_imagen"
+            },
+            {
+              id: 4,
+              x: 100,
+              y: 140,
+              centro_x: 0.5,
+              centro_y: 0.5,
+              tipo: "aceituna",
+              imagen: "aceituna"
             }
           ]
         },

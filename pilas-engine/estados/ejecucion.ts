@@ -3,9 +3,16 @@ class EstadoEjecucion extends Estado {
   sprites: any;
   historia: any;
   actores: any;
+  clasesDeActores: {};
 
   init(datos) {
     this.entidades = datos.escena.actores;
+    this.codigo = datos.codigo;
+
+    let codigoCompleto = this.codigo + "\n\nvar __clases_a_exportar = {Aceituna: Aceituna, Caja: Caja};\n__clases_a_exportar";
+    console.log(codigoCompleto);
+    this.clasesDeActores = eval(codigoCompleto);
+
     this.sprites = {};
     this.historia = [];
     this.actores = [];
@@ -44,9 +51,15 @@ class EstadoEjecucion extends Estado {
         actor.iniciar();
         this.world.add(actor);
       } else {
-        actor = new Actor(this.game, x, y, imagen);
-        actor.iniciar();
-        this.world.add(actor);
+        if (entidad.tipo === "aceituna") {
+          actor = new this.clasesDeActores["Aceituna"](this.game, x, y, imagen);
+          actor.iniciar();
+          this.world.add(actor);
+        } else {
+          actor = new Actor(this.game, x, y, imagen);
+          actor.iniciar();
+          this.world.add(actor);
+        }
       }
     }
 

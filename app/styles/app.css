@@ -56,14 +56,6 @@
   user-select: none;
 }
 
-.separadorl {
-  border-left: 1px dashed #ccc;
-}
-
-.separadorr {
-  border-right: 1px dashed #ccc;
-}
-
 .columns {
   display: flex;
   flex: 1;

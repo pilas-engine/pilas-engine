@@ -71,10 +71,9 @@ var Pilas = (function () {
             });
         }
         if (e.data.tipo === "ejecutar_escena") {
-            console.log(e.data.codigo);
-            eval(e.data.codigo);
             this.game.state.start("estadoEjecucion", true, false, {
-                escena: e.data.escena
+                escena: e.data.escena,
+                codigo: e.data.codigo
             });
         }
         if (e.data.tipo === "cambiar_posicion") {
@@ -110,6 +109,7 @@ var Pilas = (function () {
         this.game.load.image("logo", "imagenes/logo.png");
         this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
         this.game.load.image("caja", "imagenes/caja.png");
+        this.game.load.image("aceituna", "imagenes/aceituna.png");
     };
     Pilas.prototype._create = function () {
         this.game.stage.disableVisibilityChange = true;
@@ -147,6 +147,10 @@ var Actor = (function (_super) {
             rotacion: this.angle
         };
     };
+    Actor.prototype.update = function () {
+        this.actualizar();
+    };
+    Actor.prototype.actualizar = function () { };
     return Actor;
 }(Phaser.Sprite));
 var Caja = (function (_super) {
@@ -329,6 +333,10 @@ var EstadoEjecucion = (function (_super) {
     }
     EstadoEjecucion.prototype.init = function (datos) {
         this.entidades = datos.escena.actores;
+        this.codigo = datos.codigo;
+        var codigoCompleto = this.codigo + "\n\nvar __clases_a_exportar = {Aceituna: Aceituna, Caja: Caja};\n__clases_a_exportar";
+        console.log(codigoCompleto);
+        this.clasesDeActores = eval(codigoCompleto);
         this.sprites = {};
         this.historia = [];
         this.actores = [];
@@ -364,9 +372,16 @@ var EstadoEjecucion = (function (_super) {
                 this.world.add(actor);
             }
             else {
-                actor = new Actor(this.game, x, y, imagen);
-                actor.iniciar();
-                this.world.add(actor);
+                if (entidad.tipo === "aceituna") {
+                    actor = new this.clasesDeActores["Aceituna"](this.game, x, y, imagen);
+                    actor.iniciar();
+                    this.world.add(actor);
+                }
+                else {
+                    actor = new Actor(this.game, x, y, imagen);
+                    actor.iniciar();
+                    this.world.add(actor);
+                }
             }
         }
         actor.tipo = entidad.tipo;

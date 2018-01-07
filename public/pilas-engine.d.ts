@@ -30,6 +30,8 @@ declare class Actor extends Phaser.Sprite {
         imagen: string | Phaser.RenderTexture | Phaser.BitmapData | Phaser.Video | PIXI.Texture;
         rotacion: number;
     };
+    update(): void;
+    actualizar(): void;
 }
 declare class Caja extends Actor {
     iniciar(): void;
@@ -77,6 +79,7 @@ declare class EstadoEjecucion extends Estado {
     sprites: any;
     historia: any;
     actores: any;
+    clasesDeActores: {};
     init(datos: any): void;
     create(): void;
     crear_actores_desde_entidades(): void;

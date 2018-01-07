@@ -14,4 +14,10 @@ class Actor extends Phaser.Sprite {
       rotacion: this.angle
     };
   }
+
+  update() {
+    this.actualizar();
+  }
+
+  actualizar() {}
 }
