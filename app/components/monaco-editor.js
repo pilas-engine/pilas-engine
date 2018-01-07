@@ -163,7 +163,10 @@ export default Ember.Component.extend({
 
   hacerFoco() {
     let editor = this.get("editor");
-    this.$("iframe")[0].contentWindow.focus();
+    let iframe = this.$("iframe");
+    if (iframe) {
+      iframe[0].contentWindow.focus();
+    }
     editor.focus();
   },
 

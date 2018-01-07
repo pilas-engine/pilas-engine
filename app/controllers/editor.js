@@ -18,13 +18,20 @@ const queryParams = new QueryParams({
     as: "p1",
     defaultValue: false,
     replace: true
+  },
+  escenaActual: {
+    defaultValue: 1,
+    replace: true
+  },
+  actorSeleccionado: {
+    defaultValue: -1,
+    replace: true
   }
 });
 
 export default Ember.Controller.extend(queryParams.Mixin, {
   proyecto: null,
   bus: Ember.inject.service(),
-  escenaActual: 1,
 
   setup(event) {
     let params = event.queryParams;

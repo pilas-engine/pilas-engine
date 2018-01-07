@@ -4,8 +4,9 @@
 
     <div class="dt dt--fixed unselectable">
 
-      <div class="dtc">
+      <div class="dtc pa2">
         {{pilas-boton-regresar}}
+        {{pilas-boton accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
       </div>
 
       <div class="dtc tr">
@@ -21,31 +22,27 @@
   <section class="flex1 flex bt b--silver">
     <div class="columns">
 
-      <div class="w5 {{if ocultarPropiedades 'dn'}} br b--light-silver pa2">
+      <div class="w5 {{if ocultarPropiedades 'dn' 'flex flex-column'}} br b--light-silver pa2 ">
 
-        <p class="f6 verdana">Titulo: {{proyecto.titulo}}</p>
-        <p class="f6 verdana">Cantidad de escenas: {{proyecto.escenas.length}}</p>
 
-        <div class="tructate pb2">
-          {{pilas-boton accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
-        </div>
-
-        <div class='truncate'>
+        <div class='truncate unselectable'>
           {{pilas-boton accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
           {{pilas-boton accion=(action "agregarActor" proyecto) texto="+ Actor"}}
-          {{pilas-boton accion=(action "moverActores" proyecto) texto="Mover"}}
         </div>
 
-        <ul class="verdana f6 bg-black-10 unselectable pa0">
+        <ul class="verdana f6 unselectable pa0 flex1 overflow-y-scroll ba b--light-gray">
           {{#each proyecto.escenas as |escena|}}
-            <li class="pointer truncate pa1 hover-bg-black-10 {{if (eq escenaActual escena.id) "red"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
+            <li class="pointer truncate pa1 hover-bg-black-20 {{if (eq escenaActual escena.id) "bg-black-10"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}})</li>
+
+              {{#if (eq escenaActual escena.id)}}
               <ul>
                 {{#each escena.actores as |actor|}}
-                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}}> {{actor.tipo}}: {{actor.nombre}} ({{round actor.x}}, {{round actor.y}})</li>
+                  <li class="truncate pa1 pointer hover-bg-black-20 {{if (eq actorSeleccionado actor.id) "bg-black-10"}}" {{action "seleccionarActor" actor.id}}> {{actor.tipo}}: {{actor.nombre}} ({{round actor.x}}, {{round actor.y}})</li>
                 {{else}}
                   <li class='truncate pa1'>sin actores</li >
                 {{/each}}
               </ul>
+              {{/if}}
 
           {{else}}
             <li>sin escenas</li>
@@ -97,20 +94,14 @@
                 }}
 
       </div>
-      <div class="flex1 w-40 {{if ocultarEditor 'dn' 'flex flex-column'}} bl b--light-silver">
+
+      <div class="flex1 {{if ocultarEditor 'dn' 'flex flex-column'}} bl b--light-silver">
         <!-- EDITOR -->
 
-        {{#if tituloDelCodigo}}
             {{monaco-editor titulo=tituloDelCodigo code=codigo
               cuandoCarga=(action "cuandoCargaMonacoEditor")
               onSave=(action "cuandoGuardaDesdeElEditor")
               onChange=(action "cuandoCambiaElCodigo")}}
-
-        {{else}}
-          <div class="tc verdana f6">
-            Seleccioná un actor para editar su código.
-          </div>
-        {{/if}}
 
       </div>
 

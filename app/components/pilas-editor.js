@@ -6,7 +6,7 @@ export default Component.extend({
   bus: Ember.inject.service(),
   compilador: Ember.inject.service(),
   foco: Ember.inject.service(),
-  codigo: "// codigo",
+  codigo: "",
   tagName: "",
   actorSeleccionado: -1,
 
@@ -44,6 +44,10 @@ export default Component.extend({
   didInsertElement() {
     this.set("estado", new estados.ModoCargando());
     this.conectarEventos();
+
+    if (this.get("actorSeleccionado") != -1) {
+      this.send("seleccionarActor", this.get("actorSeleccionado"));
+    }
 
     document.addEventListener("keydown", this.cuandoIntentaAlternarEjecucion.bind(this));
 
@@ -171,16 +175,6 @@ export default Component.extend({
           imagen: "sin_imagen"
         })
       );
-
-      this.mostrarEscenaActualSobrePilas();
-    },
-    moverActores(/*model*/) {
-      let escena = this.obtenerEscenaActual();
-
-      escena.actores.forEach(actor => {
-        actor.set("x", Math.floor(Math.random() * 300));
-        actor.set("y", Math.floor(Math.random() * 300));
-      });
 
       this.mostrarEscenaActualSobrePilas();
     },
