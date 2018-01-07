@@ -114,11 +114,11 @@ api:
 
 compilar_pilas:
 	$(call log, "Compilando pilas-engine")
-	${BIN_TYPESCRIPT} --pretty -d
+	cd pilas-engine; ../${BIN_TYPESCRIPT} --pretty -d
 
 compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
-	${BIN_TYPESCRIPT} --watch --pretty -d
+	cd pilas-engine; ../${BIN_TYPESCRIPT} --watch --pretty -d
 
 pilas_sprites:
 	$(call log, "Actualizando imagenes para usar en pilas ...")

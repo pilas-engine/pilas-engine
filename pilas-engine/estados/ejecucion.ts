@@ -4,6 +4,7 @@ class EstadoEjecucion extends Estado {
   historia: any;
   actores: any;
   clasesDeActores: {};
+  codigo: any;
 
   init(datos) {
     this.entidades = datos.escena.actores;
@@ -11,7 +12,6 @@ class EstadoEjecucion extends Estado {
 
     let codigoDeExportacion = this.obtenerCodigoDeExportacion(this.codigo);
     let codigoCompleto = this.codigo + codigoDeExportacion;
-    console.log(codigoCompleto);
 
     try {
       this.clasesDeActores = eval(codigoCompleto);

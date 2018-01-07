@@ -187,7 +187,6 @@ var Caja = (function (_super) {
     }
     Caja.prototype.iniciar = function () {
     };
-    Caja.prototype.update = function () { };
     return Caja;
 }(Actor));
 var Pelota = (function (_super) {
@@ -197,7 +196,6 @@ var Pelota = (function (_super) {
     }
     Pelota.prototype.iniciar = function () {
     };
-    Pelota.prototype.update = function () { };
     return Pelota;
 }(Actor));
 var Sprite = (function (_super) {
@@ -359,7 +357,6 @@ var EstadoEjecucion = (function (_super) {
         this.codigo = datos.codigo;
         var codigoDeExportacion = this.obtenerCodigoDeExportacion(this.codigo);
         var codigoCompleto = this.codigo + codigoDeExportacion;
-        console.log(codigoCompleto);
         try {
             this.clasesDeActores = eval(codigoCompleto);
         }

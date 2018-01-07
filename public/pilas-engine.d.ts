@@ -45,11 +45,9 @@ declare class Actor {
 }
 declare class Caja extends Actor {
     iniciar(): void;
-    update(): void;
 }
 declare class Pelota extends Actor {
     iniciar(): void;
-    update(): void;
 }
 declare class Sprite extends Phaser.Sprite {
     rotateSpeed: number;
@@ -90,6 +88,7 @@ declare class EstadoEjecucion extends Estado {
     historia: any;
     actores: any;
     clasesDeActores: {};
+    codigo: any;
     init(datos: any): void;
     obtenerCodigoDeExportacion(codigo: any): string;
     create(): void;
