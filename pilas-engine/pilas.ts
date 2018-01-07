@@ -100,6 +100,7 @@ class Pilas {
   }
 
   _create() {
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.stage.disableVisibilityChange = true;
     this.game.renderer.renderSession.roundPixels = true;
     this.game.state.add("editorState", EstadoEditor);
@@ -107,7 +108,6 @@ class Pilas {
     this.game.state.add("estadoPausa", EstadoPausa);
 
     this.game.scale.trackParentInterval = 1;
-    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
     this._conectarAtajosDeTeclado();

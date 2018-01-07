@@ -134,13 +134,13 @@ var Pilas = (function () {
         this.game.load.image("aceituna", "imagenes/aceituna.png");
     };
     Pilas.prototype._create = function () {
+        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.stage.disableVisibilityChange = true;
         this.game.renderer.renderSession.roundPixels = true;
         this.game.state.add("editorState", EstadoEditor);
         this.game.state.add("estadoEjecucion", EstadoEjecucion);
         this.game.state.add("estadoPausa", EstadoPausa);
         this.game.scale.trackParentInterval = 1;
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
         this._conectarAtajosDeTeclado();
         this.control = new Control(this);
@@ -153,37 +153,39 @@ var Pilas = (function () {
     return Pilas;
 }());
 var pilas = new Pilas();
-var Actor = (function (_super) {
-    __extends(Actor, _super);
-    function Actor() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var Actor = (function () {
+    function Actor(game, x, y, imagen) {
+        var _this = this;
+        this.sprite = new Phaser.Sprite(game, x, y, imagen);
+        this.sprite.update = function () {
+            _this.actualizar();
+        };
     }
-    Actor.prototype.iniciar = function () { };
+    Actor.prototype.iniciar = function () {
+        console.log("iniciando ...");
+    };
     Actor.prototype.serializar = function () {
         return {
             tipo: this.tipo,
-            x: this.x,
-            y: this.y,
-            centro_x: this.anchor.x,
-            centro_y: this.anchor.y,
-            imagen: this.key,
-            rotacion: this.angle
+            x: this.sprite.x,
+            y: this.sprite.y,
+            centro_x: this.sprite.anchor.x,
+            centro_y: this.sprite.anchor.y,
+            imagen: this.sprite.key,
+            rotacion: this.sprite.angle
         };
     };
-    Actor.prototype.update = function () {
-        this.actualizar();
+    Actor.prototype.actualizar = function () {
+        this.sprite.x += 1;
     };
-    Actor.prototype.actualizar = function () { };
     return Actor;
-}(Phaser.Sprite));
+}());
 var Caja = (function (_super) {
     __extends(Caja, _super);
     function Caja() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Caja.prototype.iniciar = function () {
-        this.game.physics.p2.enable([this], true);
-        this.body.static = true;
     };
     Caja.prototype.update = function () { };
     return Caja;
@@ -194,8 +196,6 @@ var Pelota = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Pelota.prototype.iniciar = function () {
-        this.game.physics.p2.enable([this], true);
-        this.body.setCircle(25);
     };
     Pelota.prototype.update = function () { };
     return Pelota;
@@ -357,11 +357,30 @@ var EstadoEjecucion = (function (_super) {
     EstadoEjecucion.prototype.init = function (datos) {
         this.entidades = datos.escena.actores;
         this.codigo = datos.codigo;
-        var codigoCompleto = this.codigo + "\n\nvar __clases_a_exportar = {Aceituna: Aceituna, Caja: Caja};\n__clases_a_exportar";
-        this.clasesDeActores = eval(codigoCompleto);
+        var codigoDeExportacion = this.obtenerCodigoDeExportacion(this.codigo);
+        var codigoCompleto = this.codigo + codigoDeExportacion;
+        console.log(codigoCompleto);
+        try {
+            this.clasesDeActores = eval(codigoCompleto);
+        }
+        catch (e) {
+            console.error(e);
+        }
         this.sprites = {};
         this.historia = [];
         this.actores = [];
+    };
+    EstadoEjecucion.prototype.obtenerCodigoDeExportacion = function (codigo) {
+        var re_creacion_de_clase = /var (.*) \= \/\*\* @class/g;
+        var re_solo_clase = /var\ (\w+)/;
+        var lista_de_clases = codigo.match(re_creacion_de_clase).map(function (e) { return e.match(re_solo_clase)[1]; });
+        var diccionario = {};
+        for (var i = 0; i < lista_de_clases.length; i++) {
+            var item = lista_de_clases[i];
+            diccionario[item] = item;
+        }
+        var diccionario_como_cadena = JSON.stringify(diccionario).replace(/"/g, "");
+        return "\n__clases = " + diccionario_como_cadena + ";\n__clases;";
     };
     EstadoEjecucion.prototype.create = function () {
         this.game.stage.backgroundColor = "F99";
@@ -382,32 +401,23 @@ var EstadoEjecucion = (function (_super) {
         var y = entidad.y;
         var imagen = entidad.imagen;
         var actor = null;
-        if (entidad.tipo === "pelota") {
-            actor = new Pelota(this.game, x, y, imagen);
-            actor.iniciar();
-            this.world.add(actor);
+        var clase = this.clasesDeActores[entidad.tipo];
+        if (clase) {
+            try {
+                console.log("- Creando actor " + entidad.tipo);
+                actor = new this.clasesDeActores[entidad.tipo](this.game, x, y, imagen);
+                actor.tipo = entidad.tipo;
+                actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+                actor.iniciar();
+                this.world.add(actor.sprite);
+            }
+            catch (e) {
+                console.error(e);
+            }
         }
         else {
-            if (entidad.tipo === "caja") {
-                actor = new Caja(this.game, x, y, imagen);
-                actor.iniciar();
-                this.world.add(actor);
-            }
-            else {
-                if (entidad.tipo === "aceituna") {
-                    actor = new this.clasesDeActores["Aceituna"](this.game, x, y, imagen);
-                    actor.iniciar();
-                    this.world.add(actor);
-                }
-                else {
-                    actor = new Actor(this.game, x, y, imagen);
-                    actor.iniciar();
-                    this.world.add(actor);
-                }
-            }
+            throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.tipo);
         }
-        actor.tipo = entidad.tipo;
-        actor.anchor.set(entidad.centro_x, entidad.centro_y);
         return actor;
     };
     EstadoEjecucion.prototype.update = function () {

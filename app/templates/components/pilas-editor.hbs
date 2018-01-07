@@ -6,7 +6,6 @@
 
       <div class="dtc">
         {{pilas-boton-regresar}}
-        {{foco.elemento}}
       </div>
 
       <div class="dtc tr">
@@ -22,7 +21,7 @@
   <section class="flex1 flex bt b--silver">
     <div class="columns">
 
-      <div class="w5 {{if ocultarPropiedades 'dn'}} br b--light-silver">
+      <div class="w5 {{if ocultarPropiedades 'dn'}} br b--light-silver pa2">
 
         <p class="f6 verdana">Titulo: {{proyecto.titulo}}</p>
         <p class="f6 verdana">Cantidad de escenas: {{proyecto.escenas.length}}</p>
@@ -42,7 +41,7 @@
             <li class="pointer truncate pa1 hover-bg-black-10 {{if (eq escenaActual escena.id) "red"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}}) {{#if (eq escenaActual escena.id)}}<span class='red'>SELECCIONADA!</span>{{/if}}</li>
               <ul>
                 {{#each escena.actores as |actor|}}
-                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}} >Actor: {{actor.nombre}} (x: {{round actor.x}}, y: {{round actor.y}}, imagen: {{actor.imagen}})</li>
+                  <li class="truncate pa1 pointer {{if (eq actorSeleccionado actor.id) "red"}}" {{action "seleccionarActor" actor.id}}> {{actor.tipo}}: {{actor.nombre}} ({{round actor.x}}, {{round actor.y}})</li>
                 {{else}}
                   <li class='truncate pa1'>sin actores</li >
                 {{/each}}
@@ -54,7 +53,7 @@
         </ul>
 
       </div>
-      <div class="flex flex1 flex-column w-30 bg-white ml2 mr2">
+      <div class="flex flex1 flex-column w-30 bg-white ml2 mr2 pa2">
 
 
 

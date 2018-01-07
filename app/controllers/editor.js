@@ -70,28 +70,28 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       alto: 500,
       tiposDeActores: [
         {
-          tipo: "pelota",
-          codigo: `class Pelota {
+          tipo: "Pelota",
+          codigo: `class Pelota  extends Actor{
 
             iniciar() {
-              alert("iniciando pelota");
+              console.log("iniciando pelota");
             }
 
           }`
         },
         {
-          tipo: "caja",
-          codigo: `class Caja {
+          tipo: "Caja",
+          codigo: `class Caja extends Actor {
           }`
         },
         {
-          tipo: "actor",
-          codigo: `class ActorDemo {
+          tipo: "ActorBasico",
+          codigo: `class ActorBasico extends Actor {
 
           }`
         },
         {
-          tipo: "aceituna",
+          tipo: "Aceituna",
           codigo: `class Aceituna extends Actor {
 
               iniciar() {
@@ -122,7 +122,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 200,
               centro_x: 0.5,
               centro_y: 0.5,
-              tipo: "pelota",
+              tipo: "Pelota",
               imagen: "pelota"
             },
             {
@@ -131,7 +131,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 240,
               centro_x: 0.5,
               centro_y: 0.5,
-              tipo: "caja",
+              tipo: "Caja",
               imagen: "caja"
             },
             {
@@ -140,7 +140,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 100,
               centro_x: 0.5,
               centro_y: 0.5,
-              tipo: "actor",
+              tipo: "ActorBasico",
               imagen: "sin_imagen"
             },
             {
@@ -149,7 +149,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 140,
               centro_x: 0.5,
               centro_y: 0.5,
-              tipo: "aceituna",
+              tipo: "Aceituna",
               imagen: "aceituna"
             }
           ]

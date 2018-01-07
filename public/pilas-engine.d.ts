@@ -27,8 +27,10 @@ declare class Pilas {
     _emitirMensajeAlEditor(nombre: any, datos: any): void;
 }
 declare var pilas: Pilas;
-declare class Actor extends Phaser.Sprite {
+declare class Actor {
     tipo: String;
+    sprite: Phaser.Sprite;
+    constructor(game: any, x: any, y: any, imagen: any);
     iniciar(): void;
     serializar(): {
         tipo: String;
@@ -36,10 +38,9 @@ declare class Actor extends Phaser.Sprite {
         y: number;
         centro_x: number;
         centro_y: number;
-        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | Phaser.Video | PIXI.Texture;
+        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture | Phaser.Video;
         rotacion: number;
     };
-    update(): void;
     actualizar(): void;
 }
 declare class Caja extends Actor {
@@ -90,6 +91,7 @@ declare class EstadoEjecucion extends Estado {
     actores: any;
     clasesDeActores: {};
     init(datos: any): void;
+    obtenerCodigoDeExportacion(codigo: any): string;
     create(): void;
     crear_actores_desde_entidades(): void;
     crear_actor(entidad: any): any;

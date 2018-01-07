@@ -167,7 +167,7 @@ export default Component.extend({
           y: 30,
           centro_x: 0.5,
           centro_y: 0.5,
-          tipo: "actor",
+          tipo: "ActorBasico",
           imagen: "sin_imagen"
         })
       );
@@ -226,6 +226,7 @@ export default Component.extend({
     pausar() {
       this.set("estado", this.get("estado").pausar());
       this.get("bus").trigger("pausarEscena", {});
+      this.get("foco").hacerFocoEnPilas();
     },
     cambiarPosicion(valorNuevo) {
       this.set("posicion", valorNuevo);

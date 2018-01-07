@@ -1,23 +1,32 @@
-class Actor extends Phaser.Sprite {
+class Actor {
   tipo: String;
+  sprite: Phaser.Sprite;
 
-  iniciar() {}
+  constructor(game, x, y, imagen) {
+    this.sprite = new Phaser.Sprite(game, x, y, imagen);
+
+    this.sprite.update = () => {
+      this.actualizar();
+    };
+  }
+
+  iniciar() {
+    console.log("iniciando ...");
+  }
 
   serializar() {
     return {
       tipo: this.tipo,
-      x: this.x,
-      y: this.y,
-      centro_x: this.anchor.x,
-      centro_y: this.anchor.y,
-      imagen: this.key,
-      rotacion: this.angle
+      x: this.sprite.x,
+      y: this.sprite.y,
+      centro_x: this.sprite.anchor.x,
+      centro_y: this.sprite.anchor.y,
+      imagen: this.sprite.key,
+      rotacion: this.sprite.angle
     };
   }
 
-  update() {
-    this.actualizar();
+  actualizar() {
+    this.sprite.x += 1;
   }
-
-  actualizar() {}
 }

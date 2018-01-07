@@ -13,7 +13,6 @@ export default Ember.Component.extend({
   bus: Ember.inject.service(),
 
   cuandoCambiaDeArchivo: Ember.observer("titulo", function() {
-    console.log("Cargando codigo", this.get("titulo"));
     this.cargarCodigo();
   }),
 
@@ -21,9 +20,11 @@ export default Ember.Component.extend({
     let editor = this.get("editor");
     let code = this.get("code");
     let codigoFormateado = formatear(code);
-    let pos = editor.getPosition();
-    editor.getModel().setValue(codigoFormateado);
-    editor.setPosition(pos);
+    if (editor) {
+      let pos = editor.getPosition();
+      editor.getModel().setValue(codigoFormateado);
+      editor.setPosition(pos);
+    }
   },
 
   /*

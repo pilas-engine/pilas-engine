@@ -9,12 +9,35 @@ class EstadoEjecucion extends Estado {
     this.entidades = datos.escena.actores;
     this.codigo = datos.codigo;
 
-    let codigoCompleto = this.codigo + "\n\nvar __clases_a_exportar = {Aceituna: Aceituna, Caja: Caja};\n__clases_a_exportar";
-    this.clasesDeActores = eval(codigoCompleto);
+    let codigoDeExportacion = this.obtenerCodigoDeExportacion(this.codigo);
+    let codigoCompleto = this.codigo + codigoDeExportacion;
+    console.log(codigoCompleto);
+
+    try {
+      this.clasesDeActores = eval(codigoCompleto);
+    } catch (e) {
+      console.error(e);
+    }
 
     this.sprites = {};
     this.historia = [];
     this.actores = [];
+  }
+
+  obtenerCodigoDeExportacion(codigo) {
+    const re_creacion_de_clase = /var (.*) \= \/\*\* @class/g;
+    const re_solo_clase = /var\ (\w+)/;
+    let lista_de_clases = codigo.match(re_creacion_de_clase).map(e => e.match(re_solo_clase)[1]);
+    let diccionario = {};
+
+    for (let i = 0; i < lista_de_clases.length; i++) {
+      let item = lista_de_clases[i];
+      diccionario[item] = item;
+    }
+
+    let diccionario_como_cadena = JSON.stringify(diccionario).replace(/"/g, "");
+
+    return `\n__clases = ${diccionario_como_cadena};\n__clases;`;
   }
 
   create() {
@@ -40,30 +63,22 @@ class EstadoEjecucion extends Estado {
     let imagen = entidad.imagen;
     let actor = null;
 
-    if (entidad.tipo === "pelota") {
-      actor = new Pelota(this.game, x, y, imagen);
-      actor.iniciar();
-      this.world.add(actor);
-    } else {
-      if (entidad.tipo === "caja") {
-        actor = new Caja(this.game, x, y, imagen);
-        actor.iniciar();
-        this.world.add(actor);
-      } else {
-        if (entidad.tipo === "aceituna") {
-          actor = new this.clasesDeActores["Aceituna"](this.game, x, y, imagen);
-          actor.iniciar();
-          this.world.add(actor);
-        } else {
-          actor = new Actor(this.game, x, y, imagen);
-          actor.iniciar();
-          this.world.add(actor);
-        }
-      }
-    }
+    let clase = this.clasesDeActores[entidad.tipo];
 
-    actor.tipo = entidad.tipo;
-    actor.anchor.set(entidad.centro_x, entidad.centro_y);
+    if (clase) {
+      try {
+        console.log(`- Creando actor ${entidad.tipo}`);
+        actor = new this.clasesDeActores[entidad.tipo](this.game, x, y, imagen);
+        actor.tipo = entidad.tipo;
+        actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+        actor.iniciar();
+        this.world.add(actor.sprite);
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      throw new Error(`No existe código para crear un actor de la clase ${entidad.tipo}`);
+    }
 
     return actor;
   }
