@@ -1,6 +1,7 @@
 import Ember from "ember";
 import layout from "ember-monaco-editor/templates/components/monaco-editor";
 import getFrameById from "ember-monaco-editor/utils/get-frame-by-id";
+import formatear from "pilas-engine/utils/formatear";
 
 export default Ember.Component.extend({
   layout,
@@ -11,10 +12,15 @@ export default Ember.Component.extend({
   editor: null,
 
   cuandoCambiaDeArchivo: Ember.observer("titulo", function() {
+    this.cargarCodigo();
+  }),
+
+  cargarCodigo() {
     let editor = this.get("editor");
     let code = this.get("code");
-    editor.setValue(code);
-  }),
+    let codigoFormateado = formatear(code);
+    editor.setValue(codigoFormateado);
+  },
 
   /*
    * Se encarga de mantener actualizado el estado del editor con respecto al
@@ -43,7 +49,11 @@ export default Ember.Component.extend({
         }
 
         if (event.data.message === "on-save") {
-          this.onSave(this.get("frame").editor);
+          this.cargarCodigo();
+
+          setTimeout(() => {
+            this.onSave(this.get("frame").editor);
+          }, 2000);
         }
       }
     };
@@ -134,7 +144,7 @@ export default Ember.Component.extend({
     this.set("editor", editor);
 
     if (this.get("code")) {
-      editor.setValue(this.get("code"));
+      this.cargarCodigo();
     }
 
     if (this.get("cuandoCarga")) {

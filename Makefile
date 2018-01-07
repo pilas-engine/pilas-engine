@@ -44,6 +44,7 @@ comandos:
 	@echo "    ${G}sprites_ember${N}          Genera las imágenes de la aplicación."
 	@echo "    ${G}prettier${N}               Corrige el formato y la sintaxis de todos los archivos."
 	@echo "    ${G}actualizar_typescript${N}  Actualiza typescript a una versión más reciente."
+	@echo "    ${G}actualizar_jsbeautify${N}  Actualiza jsbeautify a una versión más reciente."
 	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
 	@echo ""
@@ -214,7 +215,6 @@ actualizar_phaser:
 	@echo "${Y}        cp node_modules/phaser-ce/build/phaser.js public/${N}"
 	@echo "${Y}${N}"
 	
-
 actualizar_typescript:
 	@echo "${Y}Para actualizar typescript, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"
@@ -223,4 +223,14 @@ actualizar_typescript:
 	@echo "${Y} - Copiar dist/typescript.js al directorio vendor:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/typescript/lib/typescript.js vendor${N}"
+	@echo "${Y}${N}"
+
+actualizar_jsbeautify:
+	@echo "${Y}Para actualizar jsbeautify, hay que seguir estos pasos:${N}"
+	@echo "${Y}${N}"
+	@echo "${Y} - Subir el número de versión de package.json.${N}"
+	@echo "${Y} - Ejecutar npm install.${N}"
+	@echo "${Y} - Copiar el archivo beautify.js al directorio vendor:${N}"
+	@echo "${Y}${N}"
+	@echo "${Y}        cp node_modules/js-beautify/js/lib/beautify.js vendor${N}"
 	@echo "${Y}${N}"

@@ -477,11 +477,15 @@ var EstadoPausa = (function (_super) {
         return sprite;
     };
     EstadoPausa.prototype.render = function () {
-        var _this = this;
         _super.prototype.render.call(this);
+        this.dibujarLineaDeCoordenadasRecorridas();
+    };
+    EstadoPausa.prototype.dibujarLineaDeCoordenadasRecorridas = function () {
+        var _this = this;
+        var color = "rgba(255,255,255,0.5)";
         this.historia.map(function (historia) {
             historia.map(function (entidad) {
-                _this.game.debug.pixel(entidad.x, entidad.y, "rgba(255,255,255,0.5)");
+                _this.game.debug.pixel(entidad.x, entidad.y, color);
             });
         });
     };

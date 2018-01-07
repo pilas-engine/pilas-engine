@@ -8,6 +8,7 @@ module.exports = function(defaults) {
   });
 
   app.import('vendor/typescript.js');
+  app.import('vendor/beautify.js');
 
   return app.toTree();
 };

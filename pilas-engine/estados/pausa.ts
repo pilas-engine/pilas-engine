@@ -106,9 +106,15 @@ class EstadoPausa extends Estado {
   render() {
     super.render();
 
+    this.dibujarLineaDeCoordenadasRecorridas();
+  }
+
+  dibujarLineaDeCoordenadasRecorridas() {
+    const color = "rgba(255,255,255,0.5)";
+
     this.historia.map(historia => {
       historia.map(entidad => {
-        this.game.debug.pixel(entidad.x, entidad.y, "rgba(255,255,255,0.5)");
+        this.game.debug.pixel(entidad.x, entidad.y, color);
       });
     });
   }

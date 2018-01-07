@@ -105,4 +105,5 @@ declare class EstadoPausa extends Estado {
     private actualizar_texto();
     crear_sprite_desde_entidad(entidad: any): SpriteSimple;
     render(): void;
+    dibujarLineaDeCoordenadasRecorridas(): void;
 }
