@@ -6,6 +6,7 @@ class EstadoEditor extends Estado {
   texto: any;
 
   init(datos) {
+    this.pilas = datos.pilas;
     this.entidades = datos.escena.actores;
     this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
     this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;

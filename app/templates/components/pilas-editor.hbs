@@ -93,6 +93,22 @@
                   cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                 }}
 
+                <div class="h2 pa2 bt bl br b--gray bg-light-gray">
+                </div>
+
+                <div class="h4 pa2 ba b--gray">
+                  {{#each log.items as |item|}}
+                    <div class="f6">{{item.tipo}} - {{item.mensaje}}
+
+                        <div class="ba">
+                          {{item.detalle}}
+                        </div>
+
+                    </div>
+                  {{else}}
+                  {{/each}}
+                </div>
+
       </div>
 
       <div class="flex1 {{if ocultarEditor 'dn' 'flex flex-column'}} bl b--light-silver">

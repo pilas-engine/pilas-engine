@@ -1,4 +1,6 @@
 class Estado extends Phaser.State {
+  pilas: Pilas;
+
   render() {
     var debug = this.game.debug;
 

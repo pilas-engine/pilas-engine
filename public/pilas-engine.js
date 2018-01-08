@@ -58,6 +58,7 @@ var Pilas = (function () {
     function Pilas() {
         this.log = new Log(this);
         this._agregarManejadorDeMensajes();
+        this.capturar_errores_y_reportarlos_al_editor();
     }
     Pilas.prototype.obtener_entidades = function () {
         return this.game.state.getCurrentState()["entidades"];
@@ -67,13 +68,20 @@ var Pilas = (function () {
         this.game.input.keyboard.onUpCallback = function (evento) {
             if (evento.keyCode == Phaser.Keyboard.ESC && (_this.game.state.current === "estadoEjecucion" || _this.game.state.current === "estadoPausa")) {
                 console.log("pulsa pausa.");
-                _this._emitirMensajeAlEditor("cuando_pulsa_escape", {});
+                _this.emitir_mensaje_al_editor("cuando_pulsa_escape", {});
             }
         };
     };
     Pilas.prototype._agregarManejadorDeMensajes = function () {
         var _this = this;
         window.addEventListener("message", function (e) { return _this._atenderMensaje(e); }, false);
+    };
+    Pilas.prototype.emitir_error_y_detener = function (error) {
+        this.emitir_mensaje_al_editor("error", { mensaje: error.message, stack: error.stack });
+        this.game.paused = true;
+        console.error(error);
+    };
+    Pilas.prototype.capturar_errores_y_reportarlos_al_editor = function () {
     };
     Pilas.prototype._atenderMensaje = function (e) {
         var _this = this;
@@ -83,17 +91,19 @@ var Pilas = (function () {
         }
         if (e.data.tipo === "define_escena") {
             this.game.state.start("editorState", true, false, {
+                pilas: this,
                 escena: e.data.escena,
                 cuando_termina_de_mover: function (datos) {
-                    _this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
+                    _this.emitir_mensaje_al_editor("termina_de_mover_un_actor", datos);
                 },
                 cuando_comienza_a_mover: function (datos) {
-                    _this._emitirMensajeAlEditor("comienza_a_mover_un_actor", datos);
+                    _this.emitir_mensaje_al_editor("comienza_a_mover_un_actor", datos);
                 }
             });
         }
         if (e.data.tipo === "ejecutar_escena") {
             this.game.state.start("estadoEjecucion", true, false, {
+                pilas: this,
                 escena: e.data.escena,
                 codigo: e.data.codigo
             });
@@ -107,14 +117,15 @@ var Pilas = (function () {
         if (e.data.tipo === "pausar_escena") {
             var historia = this.game.state.getCurrentState()["historia"];
             this.game.state.start("estadoPausa", true, false, {
+                pilas: this,
                 historia: historia,
                 cuando_cambia_posicion: function (datos) {
-                    _this._emitirMensajeAlEditor("cambia_posicion_dentro_del_modo_pausa", datos);
+                    _this.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", datos);
                 }
             });
             var t = historia.length - 1;
             var datos = { minimo: 0, posicion: t, maximo: t };
-            this._emitirMensajeAlEditor("comienza_a_depurar_en_modo_pausa", datos);
+            this.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos);
         }
         if (e.data.tipo === "iniciar_pilas") {
             var ancho = e.data.ancho;
@@ -141,11 +152,11 @@ var Pilas = (function () {
         this.game.state.add("estadoEjecucion", EstadoEjecucion);
         this.game.state.add("estadoPausa", EstadoPausa);
         this.game.scale.trackParentInterval = 1;
-        this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
+        this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
         this._conectarAtajosDeTeclado();
         this.control = new Control(this);
     };
-    Pilas.prototype._emitirMensajeAlEditor = function (nombre, datos) {
+    Pilas.prototype.emitir_mensaje_al_editor = function (nombre, datos) {
         datos = datos || {};
         datos.tipo = nombre;
         window.parent.postMessage(datos, HOST);
@@ -154,11 +165,17 @@ var Pilas = (function () {
 }());
 var pilas = new Pilas();
 var Actor = (function () {
-    function Actor(game, x, y, imagen) {
+    function Actor(pilas, x, y, imagen) {
         var _this = this;
-        this.sprite = new Phaser.Sprite(game, x, y, imagen);
+        this.pilas = pilas;
+        this.sprite = new Phaser.Sprite(pilas.game, x, y, imagen);
         this.sprite.update = function () {
-            _this.actualizar();
+            try {
+                _this.actualizar();
+            }
+            catch (e) {
+                _this.pilas.emitir_error_y_detener(e);
+            }
         };
     }
     Actor.prototype.iniciar = function () {
@@ -294,6 +311,7 @@ var EstadoEditor = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EstadoEditor.prototype.init = function (datos) {
+        this.pilas = datos.pilas;
         this.entidades = datos.escena.actores;
         this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
         this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
@@ -353,6 +371,7 @@ var EstadoEjecucion = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EstadoEjecucion.prototype.init = function (datos) {
+        this.pilas = datos.pilas;
         this.entidades = datos.escena.actores;
         this.codigo = datos.codigo;
         var codigoDeExportacion = this.obtenerCodigoDeExportacion(this.codigo);
@@ -361,7 +380,7 @@ var EstadoEjecucion = (function (_super) {
             this.clasesDeActores = eval(codigoCompleto);
         }
         catch (e) {
-            console.error(e);
+            this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
         }
         this.sprites = {};
         this.historia = [];
@@ -385,7 +404,12 @@ var EstadoEjecucion = (function (_super) {
         this.game.physics.p2.gravity.y = 400;
         this.game.physics.p2.restitution = 0.75;
         this.game.physics.p2.friction = 499;
-        this.crear_actores_desde_entidades();
+        try {
+            this.crear_actores_desde_entidades();
+        }
+        catch (e) {
+            this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+        }
     };
     EstadoEjecucion.prototype.crear_actores_desde_entidades = function () {
         var _this = this;
@@ -400,17 +424,12 @@ var EstadoEjecucion = (function (_super) {
         var actor = null;
         var clase = this.clasesDeActores[entidad.tipo];
         if (clase) {
-            try {
-                console.log("- Creando actor " + entidad.tipo);
-                actor = new this.clasesDeActores[entidad.tipo](this.game, x, y, imagen);
-                actor.tipo = entidad.tipo;
-                actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
-                actor.iniciar();
-                this.world.add(actor.sprite);
-            }
-            catch (e) {
-                console.error(e);
-            }
+            console.log("- Creando actor " + entidad.tipo);
+            actor = new this.clasesDeActores[entidad.tipo](this.pilas, x, y, imagen);
+            actor.tipo = entidad.tipo;
+            actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+            actor.iniciar();
+            this.world.add(actor.sprite);
         }
         else {
             throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.tipo);
@@ -418,7 +437,12 @@ var EstadoEjecucion = (function (_super) {
         return actor;
     };
     EstadoEjecucion.prototype.update = function () {
-        this.guardar_foto_de_entidades();
+        try {
+            this.guardar_foto_de_entidades();
+        }
+        catch (e) {
+            this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+        }
     };
     EstadoEjecucion.prototype.guardar_foto_de_entidades = function () {
         var entidades = this.actores.map(function (actor) {
@@ -434,6 +458,7 @@ var EstadoPausa = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EstadoPausa.prototype.init = function (datos) {
+        this.pilas = datos.pilas;
         this.historia = datos.historia;
         this.posicion = this.historia.length - 1;
         this.total = this.historia.length - 1;

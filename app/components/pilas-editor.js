@@ -4,6 +4,7 @@ import estados from "../estados/estados-de-pilas-editor";
 
 export default Component.extend({
   bus: Ember.inject.service(),
+  log: Ember.inject.service(),
   compilador: Ember.inject.service(),
   foco: Ember.inject.service(),
   codigo: "",
@@ -211,6 +212,7 @@ export default Component.extend({
 
       this.get("bus").trigger("ejecutarEscena", { codigo: codigoJavascript, escena: escenaComoJSON });
       this.get("foco").hacerFocoEnPilas();
+      this.get("log").limpiar();
     },
     detener() {
       this.mostrarEscenaActualSobrePilas();

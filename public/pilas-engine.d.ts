@@ -21,16 +21,19 @@ declare class Pilas {
     obtener_entidades(): any;
     _conectarAtajosDeTeclado(): void;
     _agregarManejadorDeMensajes(): void;
+    emitir_error_y_detener(error: any): void;
+    capturar_errores_y_reportarlos_al_editor(): void;
     _atenderMensaje(e: any): void;
     _preload(): void;
     _create(): void;
-    _emitirMensajeAlEditor(nombre: any, datos: any): void;
+    emitir_mensaje_al_editor(nombre: any, datos: any): void;
 }
 declare var pilas: Pilas;
 declare class Actor {
     tipo: String;
     sprite: Phaser.Sprite;
-    constructor(game: any, x: any, y: any, imagen: any);
+    pilas: Pilas;
+    constructor(pilas: any, x: any, y: any, imagen: any);
     iniciar(): void;
     serializar(): {
         tipo: String;
@@ -67,6 +70,7 @@ declare class Sprite extends Phaser.Sprite {
 declare class SpriteSimple extends Phaser.Sprite {
 }
 declare class Estado extends Phaser.State {
+    pilas: Pilas;
     render(): void;
     actualizarPosicionDeFormaExterna(pos: any): void;
 }

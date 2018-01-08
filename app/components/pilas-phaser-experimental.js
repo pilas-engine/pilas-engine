@@ -2,10 +2,11 @@ import Ember from "ember";
 import utils from "../utils/utils";
 
 export default Ember.Component.extend({
+  bus: Ember.inject.service(),
+  log: Ember.inject.service(),
   ancho: 400,
   alto: 400,
   estado: null,
-  bus: Ember.inject.service(),
   contexto: null,
   cargando: true,
   mantenerFoco: false,
@@ -138,6 +139,10 @@ export default Ember.Component.extend({
 
     if (e.data.tipo === "cambia_posicion_dentro_del_modo_pausa") {
       this.get("bus").trigger("cuandoCambiaPosicionDentroDelModoPausa", e.data);
+    }
+
+    if (e.data.tipo === "error_de_ejecucion") {
+      this.get("bus").trigger("error", e.data);
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {

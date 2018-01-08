@@ -12,6 +12,7 @@ class Pilas {
   constructor() {
     this.log = new Log(this);
     this._agregarManejadorDeMensajes();
+    this.capturar_errores_y_reportarlos_al_editor();
   }
 
   obtener_entidades() {
@@ -22,13 +23,43 @@ class Pilas {
     this.game.input.keyboard.onUpCallback = evento => {
       if (evento.keyCode == Phaser.Keyboard.ESC && (this.game.state.current === "estadoEjecucion" || this.game.state.current === "estadoPausa")) {
         console.log("pulsa pausa.");
-        this._emitirMensajeAlEditor("cuando_pulsa_escape", {});
+        this.emitir_mensaje_al_editor("cuando_pulsa_escape", {});
       }
     };
   }
 
   _agregarManejadorDeMensajes() {
     window.addEventListener("message", e => this._atenderMensaje(e), false);
+  }
+
+  emitir_error_y_detener(error) {
+    this.emitir_mensaje_al_editor("error", { mensaje: error.message, stack: error.stack });
+    this.game.paused = true;
+    console.error(error);
+  }
+
+  capturar_errores_y_reportarlos_al_editor() {
+    /*
+    window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+      alert("Error occured: " + errorMsg); //or any message
+      return false;
+    };
+    */
+    /*
+    window.addEventListener("error", e => {
+      console.warn(e);
+      this.emitir_mensaje_al_editor("error", { mensaje: e.message });
+      e.preventDefault();
+      window.location.reload();
+    });
+    */
+    /*
+    window.onerror = (e, b) => {
+      console.log(e, b);
+      this.emitir_mensaje_al_editor("error", { mensaje: e });
+      return true;
+    };
+    */
   }
 
   _atenderMensaje(e: any) {
@@ -40,18 +71,20 @@ class Pilas {
 
     if (e.data.tipo === "define_escena") {
       this.game.state.start("editorState", true, false, {
+        pilas: this,
         escena: e.data.escena,
         cuando_termina_de_mover: datos => {
-          this._emitirMensajeAlEditor("termina_de_mover_un_actor", datos);
+          this.emitir_mensaje_al_editor("termina_de_mover_un_actor", datos);
         },
         cuando_comienza_a_mover: datos => {
-          this._emitirMensajeAlEditor("comienza_a_mover_un_actor", datos);
+          this.emitir_mensaje_al_editor("comienza_a_mover_un_actor", datos);
         }
       });
     }
 
     if (e.data.tipo === "ejecutar_escena") {
       this.game.state.start("estadoEjecucion", true, false, {
+        pilas: this,
         escena: e.data.escena,
         codigo: e.data.codigo
       });
@@ -68,15 +101,16 @@ class Pilas {
       let historia = this.game.state.getCurrentState()["historia"];
 
       this.game.state.start("estadoPausa", true, false, {
+        pilas: this,
         historia: historia,
         cuando_cambia_posicion: datos => {
-          this._emitirMensajeAlEditor("cambia_posicion_dentro_del_modo_pausa", datos);
+          this.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", datos);
         }
       });
 
       let t = historia.length - 1;
       let datos = { minimo: 0, posicion: t, maximo: t };
-      this._emitirMensajeAlEditor("comienza_a_depurar_en_modo_pausa", datos);
+      this.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos);
     }
 
     if (e.data.tipo === "iniciar_pilas") {
@@ -109,13 +143,13 @@ class Pilas {
 
     this.game.scale.trackParentInterval = 1;
 
-    this._emitirMensajeAlEditor("finaliza_carga_de_recursos", {});
+    this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
     this._conectarAtajosDeTeclado();
 
     this.control = new Control(this);
   }
 
-  _emitirMensajeAlEditor(nombre, datos) {
+  emitir_mensaje_al_editor(nombre, datos) {
     datos = datos || {};
     datos.tipo = nombre;
     window.parent.postMessage(datos, HOST);

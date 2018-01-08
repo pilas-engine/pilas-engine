@@ -1,12 +1,18 @@
 class Actor {
   tipo: String;
   sprite: Phaser.Sprite;
+  pilas: Pilas;
 
-  constructor(game, x, y, imagen) {
-    this.sprite = new Phaser.Sprite(game, x, y, imagen);
+  constructor(pilas, x, y, imagen) {
+    this.pilas = pilas;
+    this.sprite = new Phaser.Sprite(pilas.game, x, y, imagen);
 
     this.sprite.update = () => {
-      this.actualizar();
+      try {
+        this.actualizar();
+      } catch (e) {
+        this.pilas.emitir_error_y_detener(e);
+      }
     };
   }
 

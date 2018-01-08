@@ -7,6 +7,7 @@ class EstadoEjecucion extends Estado {
   codigo: any;
 
   init(datos) {
+    this.pilas = datos.pilas;
     this.entidades = datos.escena.actores;
     this.codigo = datos.codigo;
 
@@ -16,7 +17,7 @@ class EstadoEjecucion extends Estado {
     try {
       this.clasesDeActores = eval(codigoCompleto);
     } catch (e) {
-      console.error(e);
+      this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
     }
 
     this.sprites = {};
@@ -48,7 +49,11 @@ class EstadoEjecucion extends Estado {
     this.game.physics.p2.restitution = 0.75;
     this.game.physics.p2.friction = 499;
 
-    this.crear_actores_desde_entidades();
+    try {
+      this.crear_actores_desde_entidades();
+    } catch (e) {
+      this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+    }
   }
 
   crear_actores_desde_entidades() {
@@ -66,16 +71,12 @@ class EstadoEjecucion extends Estado {
     let clase = this.clasesDeActores[entidad.tipo];
 
     if (clase) {
-      try {
-        console.log(`- Creando actor ${entidad.tipo}`);
-        actor = new this.clasesDeActores[entidad.tipo](this.game, x, y, imagen);
-        actor.tipo = entidad.tipo;
-        actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
-        actor.iniciar();
-        this.world.add(actor.sprite);
-      } catch (e) {
-        console.error(e);
-      }
+      console.log(`- Creando actor ${entidad.tipo}`);
+      actor = new this.clasesDeActores[entidad.tipo](this.pilas, x, y, imagen);
+      actor.tipo = entidad.tipo;
+      actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+      actor.iniciar();
+      this.world.add(actor.sprite);
     } else {
       throw new Error(`No existe código para crear un actor de la clase ${entidad.tipo}`);
     }
@@ -84,7 +85,11 @@ class EstadoEjecucion extends Estado {
   }
 
   update() {
-    this.guardar_foto_de_entidades();
+    try {
+      this.guardar_foto_de_entidades();
+    } catch (e) {
+      this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+    }
   }
 
   private guardar_foto_de_entidades() {

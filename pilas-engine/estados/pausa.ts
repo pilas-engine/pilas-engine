@@ -11,6 +11,7 @@ class EstadoPausa extends Estado {
   derecha: any;
 
   init(datos) {
+    this.pilas = datos.pilas;
     this.historia = datos.historia;
     this.posicion = this.historia.length - 1;
     this.total = this.historia.length - 1;
