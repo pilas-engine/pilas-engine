@@ -3,7 +3,6 @@ import moduleForAcceptance from "pilas-engine/tests/helpers/module-for-acceptanc
 
 moduleForAcceptance("Acceptance | puede ingresar al editor");
 
-const TIEMPO_DE_CARGA = 4;
 const PAUSA = 2;
 
 test("puede ingresar a la pantalla principal", async function(assert) {
@@ -12,24 +11,26 @@ test("puede ingresar a la pantalla principal", async function(assert) {
   assert.dom("#pilas-logo").exists();
   assert.equal(currentURL(), "/");
 
-  await esperar(TIEMPO_DE_CARGA);
-  await click("#abrir-editor");
+  await pulsar("Abrir el editor");
   assert.equal(currentURL(), "/editor");
 
   await esperar(PAUSA);
 
-  await click("#ejecutar");
+  await pulsar("Ejecutar");
   await esperar(PAUSA);
 
-  await click("#detener");
+  await pulsar("Detener");
   await esperar(PAUSA);
 
-  await click("#ejecutar");
+  await pulsar("Ejecutar");
   await esperar(PAUSA);
 
-  await click("#pausar");
+  await pulsar("Pausar");
   await esperar(PAUSA);
 
-  await click("#detener");
+  await pulsar("Detener");
   await esperar(PAUSA);
+
+  await pulsar("Volver");
+  assert.equal(currentURL(), "/");
 });
