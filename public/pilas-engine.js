@@ -179,7 +179,6 @@ var Actor = (function () {
         };
     }
     Actor.prototype.iniciar = function () {
-        console.log("iniciando ...");
     };
     Actor.prototype.serializar = function () {
         return {
@@ -424,7 +423,6 @@ var EstadoEjecucion = (function (_super) {
         var actor = null;
         var clase = this.clasesDeActores[entidad.tipo];
         if (clase) {
-            console.log("- Creando actor " + entidad.tipo);
             actor = new this.clasesDeActores[entidad.tipo](this.pilas, x, y, imagen);
             actor.tipo = entidad.tipo;
             actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);

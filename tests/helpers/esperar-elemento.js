@@ -24,7 +24,7 @@ export default registerAsyncHelper("esperarElemento", function(app, selector) {
             consultarExistenciaDiferida();
           }
         }
-      }, 500);
+      }, 1000);
     }
   });
 });

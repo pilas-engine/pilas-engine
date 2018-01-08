@@ -81,7 +81,6 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           codigo: `class Pelota  extends Actor{
 
             iniciar() {
-              console.log("iniciando pelota");
             }
 
           }`
@@ -102,7 +101,6 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           codigo: `class Aceituna extends Actor {
 
               iniciar() {
-                console.log("iniciando actor!!!");
               }
 
               actualizar() {

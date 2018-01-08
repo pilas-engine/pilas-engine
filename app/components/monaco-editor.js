@@ -2,6 +2,7 @@ import Ember from "ember";
 import layout from "ember-monaco-editor/templates/components/monaco-editor";
 import getFrameById from "ember-monaco-editor/utils/get-frame-by-id";
 import formatear from "pilas-engine/utils/formatear";
+import utils from "../utils/utils";
 
 export default Ember.Component.extend({
   layout,
@@ -42,7 +43,11 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     const subscription = event => {
-      // Ignore messages not coming from this iframe
+
+      if (event.origin != utils.HOST) {
+        return;
+      }
+
       if (event.source === this.get("frame") && event.data && event.data.updatedCode) {
         if (this.attrs.onChange) {
           this.attrs.onChange(event.data.updatedCode);
@@ -79,15 +84,24 @@ export default Ember.Component.extend({
     this.set("frame", frame);
 
     let declaraciones_de_pilas_engine_ts = this.get("declaraciones").obtener();
+    let rootURL = this.get("rootURL");
 
     frameDoc.open();
     frameDoc.write(`
 
-
       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" id="print-modal-content">
       <head>
-        <script src="vs/loader.js"></script>
+
+        <script>
+        var HOST = "file://";
+
+        if (window.location.host) {
+          HOST = "http://" + window.location.host;
+        }
+        </script>
+
+        <script src="${rootURL}vs/loader.js"></script>
 
 
         <style type="text/css">
@@ -109,11 +123,12 @@ export default Ember.Component.extend({
               }
             },
             paths: {
-              'vs': 'vs'
+              'vs': '${rootURL}vs'
             }
           });
 
-          window.require(['vs/editor/editor.main'], function () {
+          window.require(['${rootURL}vs/editor/editor.main'], function () {
+
             if (typeof monaco !== "undefined") {
 
               monaco.languages.typescript.typescriptDefaults.addExtraLib(\`'${declaraciones_de_pilas_engine_ts}\`, 'pilas-engine.d.ts');
@@ -129,13 +144,12 @@ export default Ember.Component.extend({
                 readOnly: ${this.get("readOnly")},
               });
 
-              var origin = window.location.origin;
 
               editor.onDidChangeModelContent(function (event) {
-                window.top.postMessage({updatedCode: editor.getValue()}, origin);
+                window.top.postMessage({updatedCode: editor.getValue()}, HOST);
               });
 
-              window.top.postMessage({message: "load-complete"}, origin);
+              window.top.postMessage({message: "load-complete"}, HOST);
               window.editor = editor;
 
               window.onresize = function() {
@@ -143,7 +157,7 @@ export default Ember.Component.extend({
               };
 
               var myBinding = editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
-                window.top.postMessage({message: "on-save"}, origin);
+                window.top.postMessage({message: "on-save"}, HOST);
               });
 
             }
@@ -178,10 +192,14 @@ export default Ember.Component.extend({
   hacerFoco() {
     let editor = this.get("editor");
     let iframe = this.$("iframe");
+
     if (iframe) {
       iframe[0].contentWindow.focus();
     }
-    editor.focus();
+
+    if (editor) {
+      editor.focus();
+    }
   },
 
   willDestroyElement() {

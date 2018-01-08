@@ -17,7 +17,6 @@ class Actor {
   }
 
   iniciar() {
-    console.log("iniciando ...");
   }
 
   serializar() {

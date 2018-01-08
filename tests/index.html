@@ -11,16 +11,16 @@
     {{content-for "test-head"}}
 
 <script>
-window.enElectron = false;
+  window.enElectron = false;
 
-var win = window;
-win.moduleNode = win.module;
-win.processNode = win.process;
-win.requireNode = win.require;
+  var win = window;
+  win.moduleNode = win.module;
+  win.processNode = win.process;
+  win.requireNode = win.require;
 
-delete win.module;
-delete win.process;
-delete win.require;
+  delete win.module;
+  delete win.process;
+  delete win.require;
 </script>
 
 
@@ -45,8 +45,8 @@ delete win.require;
     {{content-for "test-body-footer"}}
 
 <script>
-win.process = win.processNode;
-win.module = win.moduleNode;
+  win.process = win.processNode;
+  win.module = win.moduleNode;
 </script>
 
 
