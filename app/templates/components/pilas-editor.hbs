@@ -59,15 +59,15 @@
 
                 <div class='mb2'>
                   {{#if estado.puedeEjecutar}}
-                    {{pilas-boton accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
+                    {{pilas-boton id='ejecutar' accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
                   {{/if}}
 
                   {{#if estado.puedeDetener}}
-                    {{pilas-boton accion=(action "detener") texto="Detener" icono="detener"}}
+                    {{pilas-boton id='detener' accion=(action "detener") texto="Detener" icono="detener"}}
                   {{/if}}
 
                   {{#if estado.puedePausar}}
-                    {{pilas-boton accion=(action "pausar") texto="Pausar" icono="pausa"}}
+                    {{pilas-boton id='pausar' accion=(action "pausar") texto="Pausar" icono="pausa"}}
                   {{/if}}
 
                   {{#if estado.pausaActivada}}

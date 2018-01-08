@@ -2,17 +2,22 @@ import Service from "@ember/service";
 import Ember from "ember";
 
 export default Service.extend({
-  data: "",
+  data: null,
 
   iniciar() {
-    return Ember.$.get("/pilas-engine.d.ts").then(data => {
-      console.log("listo!");
-      this.set("data", data);
-    });
+    let data = this.get("data");
+
+    if (!data) {
+      return Ember.$.get("/pilas-engine.d.ts").then(result => {
+        this.set("data", result);
+        return result;
+      });
+    } else {
+      return data;
+    }
   },
 
   obtener() {
-    console.log("obteniendo declaraciones");
     return this.get("data");
   }
 });

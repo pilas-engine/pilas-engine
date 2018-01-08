@@ -17,9 +17,9 @@ app.on("window-all-closed", function onWindowAllClosed() {
 app.on("ready", function onReady() {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 650,
     minWidth: 800,
-    minHeight: 600
+    minHeight: 650
   });
 
   delete mainWindow.module;
@@ -42,18 +42,12 @@ app.on("ready", function onReady() {
   });
 
   mainWindow.webContents.on("crashed", () => {
-    console.log(
-      "Your Ember app (or other code) in the main window has crashed."
-    );
-    console.log(
-      "This is a serious issue that needs to be handled and/or debugged."
-    );
+    console.log("Your Ember app (or other code) in the main window has crashed.");
+    console.log("This is a serious issue that needs to be handled and/or debugged.");
   });
 
   mainWindow.on("unresponsive", () => {
-    console.log(
-      "Your Ember app (or other code) has made the window unresponsive."
-    );
+    console.log("Your Ember app (or other code) has made the window unresponsive.");
   });
 
   mainWindow.on("responsive", () => {
@@ -81,9 +75,7 @@ app.on("ready", function onReady() {
   // not safe to resume normal operation after 'uncaughtException'.
   process.on("uncaughtException", err => {
     console.log("An exception in the main thread was not handled.");
-    console.log(
-      "This is a serious issue that needs to be handled and/or debugged."
-    );
+    console.log("This is a serious issue that needs to be handled and/or debugged.");
     console.log(`Exception: ${err}`);
   });
 });

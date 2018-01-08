@@ -7,5 +7,18 @@ export default Service.extend({
     if (window.enElectron) {
       this.set("enElectron", true);
     }
+  },
+
+  abrirInspector() {
+    requireNode("electron")
+      .remote.getCurrentWindow()
+      .toggleDevTools();
+  },
+
+  abrir_en_un_navegador(url) {
+    const { shell } = requireNode("electron");
+    console.log("Asdasdasd");
+    alert(url);
+    shell.openExternal(url);
   }
 });

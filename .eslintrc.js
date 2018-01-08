@@ -11,7 +11,8 @@ module.exports = {
   globals: {
     requireNode: true,
     ts: true,
-    js_beautify: true
+    js_beautify: true,
+    esperar: true
   },
   rules: {
     "no-console": 0

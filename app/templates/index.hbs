@@ -19,6 +19,7 @@
             icono="computadora"
             texto="Abrir el editor"
             ruta="editor"
+            id='abrir-editor'
           }}
 
           {{pilas-boton-principal
@@ -75,14 +76,6 @@
 
       <div class="tc mt4 lato gray">
         versión {{app-version}}
-
-
-        {{#en-electron}}
-          <p>
-            <a href="#" {{action "abrirInspector"}}>abrir inspector</a>
-          </p>
-        {{/en-electron}}
-
       </div>
 
 </div>

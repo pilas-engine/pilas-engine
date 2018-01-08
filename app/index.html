@@ -13,7 +13,7 @@
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/pilas-engine.css">
 
 <script>
-window.enElectron = false;
+window.enElectron = window && window.process && window.process.type;
 
 var win = window;
 win.moduleNode = win.module;
