@@ -4,7 +4,8 @@ module.exports = {
     ts: true,
     js_beautify: true,
     esperar: true,
-    pulsar: true
+    pulsar: true,
+    esperarElemento: true
   },
   env: {
     embertest: true

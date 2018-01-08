@@ -14,7 +14,7 @@ test("puede ingresar a la pantalla principal", async function(assert) {
   await pulsar("Abrir el editor");
   assert.equal(currentURL(), "/editor");
 
-  await esperar(PAUSA);
+  await esperarElemento("a#ejecutar");
 
   await pulsar("Ejecutar");
   await esperar(PAUSA);

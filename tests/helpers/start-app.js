@@ -4,6 +4,7 @@ import { merge } from "@ember/polyfills";
 import { run } from "@ember/runloop";
 import "./esperar";
 import "./pulsar";
+import "./esperar-elemento";
 
 export default function startApp(attrs) {
   let attributes = merge({}, config.APP);
