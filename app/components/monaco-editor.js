@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   readOnly: false,
   editor: null,
   bus: Ember.inject.service(),
+  declaraciones: Ember.inject.service(),
 
   cuandoCambiaDeArchivo: Ember.observer("titulo", function() {
     this.cargarCodigo();
@@ -65,9 +66,19 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
+    this.get("declaraciones")
+      .iniciar()
+      .then(() => {
+        this.iniciarEditor();
+      });
+  },
+
+  iniciarEditor() {
     const frame = getFrameById(this.get("elementId"));
     const frameDoc = frame.document;
     this.set("frame", frame);
+
+    let declaraciones_de_pilas_engine_ts = this.get("declaraciones").obtener();
 
     frameDoc.open();
     frameDoc.write(`
@@ -104,6 +115,9 @@ export default Ember.Component.extend({
 
           window.require(['vs/editor/editor.main'], function () {
             if (typeof monaco !== "undefined") {
+
+              monaco.languages.typescript.typescriptDefaults.addExtraLib(\`'${declaraciones_de_pilas_engine_ts}\`, 'pilas-engine.d.ts');
+
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
                 minimap: true,
