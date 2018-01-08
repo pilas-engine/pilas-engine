@@ -5,7 +5,7 @@ export default Service.extend({
   data: "",
 
   iniciar() {
-    return Ember.$.post("/pilas-engine.d.ts").then(data => {
+    return Ember.$.get("/pilas-engine.d.ts").then(data => {
       console.log("listo!");
       this.set("data", data);
     });
