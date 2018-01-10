@@ -28,6 +28,7 @@
         <div class='truncate unselectable'>
           {{pilas-boton accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
           {{pilas-boton accion=(action "agregarActor" proyecto) texto="+ Actor"}}
+          {{pilas-crear-actor cuandoQuiereCrearActor=(action "agregarActor" proyecto)}}
         </div>
 
         <ul class="verdana f6 unselectable pa0 flex1 overflow-y-scroll ba b--light-gray">

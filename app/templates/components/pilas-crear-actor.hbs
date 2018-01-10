@@ -1,0 +1,31 @@
+{{yield}}
+{{pilas-boton accion=(action "abrirModal") texto="+ A"}}
+
+
+{{#if modalVisible}}
+
+
+<div class="flex absolute absolute--fill">
+
+  <div {{action "ocultar"}} class="bg-black-50 z-1 absolute absolute--fill">
+  </div>
+
+  <div class="flex flex-column flex-auto ma5 bg-white z-2">
+
+    <h1 class="f4 pl3">Agregar un actor a la escena</h1>
+
+    <div class="bg-yellow flex1 pa3">
+      Area de contenido
+      Area de contenido
+    </div>
+
+    <div class="bg-white tr pa3 cf">
+      <button class="fr" type="button" name="button">Agregar</button>
+      <button class="fl" type="button" name="button">Cancelar</button>
+    </div>
+
+  </div>
+
+</div>
+
+{{/if}}

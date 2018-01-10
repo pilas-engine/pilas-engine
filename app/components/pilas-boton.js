@@ -9,5 +9,6 @@ export default Component.extend({
     hover-bg-black-10
     black bg-animate hover-bg-black-10 b--black-20
     unselectable
-  `
+  `,
+  accion: () => {}
 });
