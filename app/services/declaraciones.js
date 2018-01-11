@@ -15,7 +15,9 @@ export default Service.extend({
         return result;
       });
     } else {
-      return data;
+      return new Ember.RSVP.Promise(success => {
+        success(data);
+      });
     }
   },
 

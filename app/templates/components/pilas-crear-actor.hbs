@@ -21,7 +21,12 @@
         {{pilas-celda-de-actor-skeleton}}
         {{pilas-celda-de-actor-skeleton}}
       {{else}}
-        {{pilas-grilla-de-actores actores=tarea.last.value.actores}}
+
+        {{pilas-grilla-de-actores
+            actores=tarea.last.value.actores
+            cuandoQuiereCrearActor=cuandoQuiereCrearActor
+        }}
+        
       {{/if}}
 
     </div>

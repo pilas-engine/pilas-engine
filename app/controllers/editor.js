@@ -30,6 +30,10 @@ const queryParams = new QueryParams({
   mostrarModalCreacionDeActor: {
     defaultValue: false,
     replace: true
+  },
+  mostrarInterprete: {
+    defaultValue: true,
+    replace: true
   }
 });
 

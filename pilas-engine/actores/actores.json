@@ -2,23 +2,28 @@
   "actores": [
     {
       "nombre": "Aceituna",
-      "imagen": "aceituna.png"
+      "tipo": "Aceituna",
+      "imagen": "aceituna"
     },
     {
       "nombre": "Caja",
-      "imagen": "caja.png"
+      "tipo": "Caja",
+      "imagen": "caja"
     },
     {
       "nombre": "Ember",
-      "imagen": "ember.png"
+      "tipo": "ActorBasico",
+      "imagen": "ember"
     },
     {
       "nombre": "Logo",
-      "imagen": "logo.png"
+      "tipo": "ActorBasico",
+      "imagen": "logo"
     },
     {
       "nombre": "Pelota",
-      "imagen": "pelota.png"
+      "tipo": "Pelota",
+      "imagen": "pelota"
     }
   ]
 }

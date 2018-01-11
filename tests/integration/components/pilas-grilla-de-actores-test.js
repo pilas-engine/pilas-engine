@@ -13,7 +13,9 @@ test("it renders", function(assert) {
     }
   ]);
 
-  this.render(hbs`{{pilas-grilla-de-actores actores=actores}}`);
+  this.set("f", function() {});
+
+  this.render(hbs`{{pilas-grilla-de-actores actores=actores cuandoQuiereCrearActor=f}}`);
 
   assert.equal(
     this.$("")

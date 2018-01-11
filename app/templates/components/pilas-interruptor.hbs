@@ -1,0 +1,17 @@
+<div class="button
+    dib  pa2
+    verdana f7 link pointer
+    hover-bg-black-20
+    black bg-animate b--black-20
+    unselectable
+    m0
+    {{if variable "bg-black-10"}}
+    "
+  {{action "alternar"}}
+>
+  {{#if variable}}
+    {{texto}} {{yield}}
+  {{else}}
+    {{texto}} {{yield}}
+  {{/if}}
+</div>

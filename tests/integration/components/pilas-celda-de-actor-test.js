@@ -11,6 +11,8 @@ test("it renders", function(assert) {
     imagen: "aceituna.png"
   });
 
-  this.render(hbs`{{pilas-celda-de-actor actor=actor}}`);
+  this.set("f", function() {});
+
+  this.render(hbs`{{pilas-celda-de-actor actor=actor cuandoQuiereCrearActor=f}}`);
   assert.ok(this.$("img").length, 1);
 });

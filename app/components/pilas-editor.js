@@ -140,8 +140,8 @@ export default Component.extend({
 
   obtenerDetalleDeActorPorIndice(indiceDelActor) {
     let escena = this.obtenerEscenaActual();
-
-    return escena.get("actores").findBy("id", indiceDelActor);
+    let actor = escena.get("actores").findBy("id", indiceDelActor);
+    return actor;
   },
 
   sobreEscribirCodigoDelActorActual(codigo) {
@@ -162,20 +162,24 @@ export default Component.extend({
         actores: []
       });
     },
-    agregarActor(/*model*/) {
+    agregarActor(proyecto, actor) {
       let escena = this.obtenerEscenaActual();
+      let id = this.generarID();
 
       escena.actores.pushObject(
         Ember.Object.create({
-          id: this.generarID(),
-          x: 1,
-          y: 30,
+          id: id,
+          x: 100,
+          y: 100,
           centro_x: 0.5,
           centro_y: 0.5,
-          tipo: "ActorBasico",
-          imagen: "sin_imagen"
+          tipo: actor.tipo,
+          imagen: actor.imagen
         })
       );
+
+      this.send("seleccionarActor", id);
+      this.set("mostrarModalCreacionDeActor", false);
 
       this.mostrarEscenaActualSobrePilas();
     },
@@ -187,12 +191,17 @@ export default Component.extend({
       }
     },
     seleccionarActor(indiceDelActor) {
-      this.set("actorSeleccionado", indiceDelActor);
       let actor = this.obtenerDetalleDeActorPorIndice(indiceDelActor);
-      let tipoDeActor = this.obtenerTipoDeActor(actor.tipo);
 
-      this.set("codigo", tipoDeActor.get("codigo"));
-      this.set("tituloDelCodigo", actor.tipo);
+      if (actor) {
+        this.set("actorSeleccionado", indiceDelActor);
+        let tipoDeActor = this.obtenerTipoDeActor(actor.tipo);
+
+        this.set("codigo", tipoDeActor.get("codigo"));
+        this.set("tituloDelCodigo", actor.tipo);
+      } else {
+        this.set("actorSeleccionado", -1);
+      }
     },
     cuandoCargaMonacoEditor() {
       //console.log("Cargó el editor");

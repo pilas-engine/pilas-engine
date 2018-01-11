@@ -7,13 +7,15 @@
     unselectable
     v-top
     mb1
-">
+"
+  {{action cuandoQuiereCrearActor actor}}
+>
 <div class="flex flex-column h-100 w-100">
 
   {{yield}}
 
   <div class="flex1 tc">
-    <img class='w3 h3' src="{{rootURL}}imagenes/{{actor.imagen}}" alt="">
+    <img class='w3 h3' src="{{rootURL}}imagenes/{{actor.imagen}}.png" alt="">
   </div>
 
   <div class="f6 tc mt2 h1">

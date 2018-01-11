@@ -24,14 +24,12 @@
 
       <div class="w5 {{if ocultarPropiedades 'dn' 'flex flex-column'}} br b--light-silver pa2 ">
 
-
         <div class='unselectable'>
           {{pilas-boton accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
-          {{pilas-boton accion=(action "agregarActor" proyecto) texto="+ Actor"}}
           {{pilas-crear-actor cuandoQuiereCrearActor=(action "agregarActor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
         </div>
 
-        <ul class="verdana f6 unselectable pa0 flex1 overflow-y-scroll ba b--light-gray">
+        <ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba b--light-gray">
           {{#each proyecto.escenas as |escena|}}
             <li class="pointer truncate pa1 hover-bg-black-20 {{if (eq escenaActual escena.id) "bg-black-10"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}})</li>
 
@@ -94,10 +92,11 @@
                   cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                 }}
 
-                <div class="h2 pa2 bt bl br b--gray bg-light-gray">
+                <div class="h2 ba br b--gray bg-light-gray">
+                  {{pilas-interruptor texto="Intérprete" variable=mostrarInterprete}}
                 </div>
 
-                <div class="h4 pa2 ba b--gray">
+                <div class="h4 pa2 bl br bb b--gray {{if mostrarInterprete '' 'dn'}}">
                   {{#each log.items as |item|}}
                     <div class="f6">{{item.tipo}} - {{item.mensaje}}
 
