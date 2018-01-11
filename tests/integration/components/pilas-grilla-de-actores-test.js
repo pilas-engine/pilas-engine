@@ -9,7 +9,8 @@ test("it renders", function(assert) {
   this.set("actores", [
     {
       nombre: "aceituna",
-      imagen: "aceituna.png"
+      imagen: "aceituna",
+      tipo: "Aceituna"
     }
   ]);
 

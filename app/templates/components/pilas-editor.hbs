@@ -29,32 +29,22 @@
           {{pilas-crear-actor cuandoQuiereCrearActor=(action "agregarActor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
         </div>
 
-        <ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba b--light-gray">
-          {{#each proyecto.escenas as |escena|}}
-            <li class="pointer truncate pa1 hover-bg-black-20 {{if (eq escenaActual escena.id) "bg-black-10"}}" {{action "definirEscena" escena.id}}>Escena: {{escena.nombre}} ({{escena.id}})</li>
+        {{pilas-panel-de-escenas
+            escenas=proyecto.escenas
+            escenaActual=escenaActual
+            actorSeleccionado=actorSeleccionado
+            cuandoSeleccionaEscena=(action "definirEscena")
+            cuandoSeleccionaActor=(action "seleccionarActor")
+          }}
 
-              {{#if (eq escenaActual escena.id)}}
-              <ul>
-                {{#each escena.actores as |actor|}}
-                  <li class="truncate pa1 pointer hover-bg-black-20 {{if (eq actorSeleccionado actor.id) "bg-black-10"}}" {{action "seleccionarActor" actor.id}}> {{actor.tipo}}: {{actor.nombre}} ({{round actor.x}}, {{round actor.y}})</li>
-                {{else}}
-                  <li class='truncate pa1'>sin actores</li >
-                {{/each}}
-              </ul>
-              {{/if}}
-
-          {{else}}
-            <li>sin escenas</li>
-          {{/each}}
-        </ul>
+        {{pilas-inspector
+          actorSeleccionado=actorSeleccionado
+        }}
 
       </div>
       <div class="flex flex1 flex-column w-30 bg-white ml2 mr2 pa2">
 
-
-
         <!-- Canvas -->
-
 
                 <div class='mb2'>
                   {{#if estado.puedeEjecutar}}
@@ -112,12 +102,11 @@
       </div>
 
       <div class="flex1 {{if ocultarEditor 'dn' 'flex flex-column'}} bl b--light-silver">
-        <!-- EDITOR -->
 
-            {{monaco-editor titulo=tituloDelCodigo code=codigo
-              cuandoCarga=(action "cuandoCargaMonacoEditor")
-              onSave=(action "cuandoGuardaDesdeElEditor")
-              onChange=(action "cuandoCambiaElCodigo")}}
+        {{monaco-editor titulo=tituloDelCodigo code=codigo
+            cuandoCarga=(action "cuandoCargaMonacoEditor")
+            onSave=(action "cuandoGuardaDesdeElEditor")
+            onChange=(action "cuandoCambiaElCodigo")}}
 
       </div>
 
@@ -125,6 +114,5 @@
   </section>
 
   <footer class="h2 tr bt b--light-silver"></footer>
-
 
 </div>

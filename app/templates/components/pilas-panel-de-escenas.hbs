@@ -1,0 +1,27 @@
+<ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba b--silver">
+  {{#each escenas as |escena|}}
+    <li class="pointer truncate pa1 hover-bg-black-20 {{if (eq escenaActual escena.id) "bg-black-10"}}" {{action cuandoSeleccionaEscena escena.id}}>
+
+        {{# if (eq escenaActual escena.id)}}
+          ▾
+        {{else}}
+          ▸
+        {{/if}}
+        Escena: {{escena.nombre}} ({{escena.id}})
+
+      </li>
+
+      {{#if (eq escenaActual escena.id)}}
+        <ul>
+          {{#each escena.actores as |actor|}}
+            <li class="truncate pa1 pointer hover-bg-black-20 {{if (eq actorSeleccionado actor.id) "bg-black-10"}}" {{action cuandoSeleccionaActor actor.id}}> {{actor.tipo}}: {{actor.nombre}} ({{round actor.x}}, {{round actor.y}})</li>
+          {{else}}
+            <li class='truncate pa1'>sin actores</li >
+          {{/each}}
+        </ul>
+      {{/if}}
+
+  {{else}}
+    <li>sin escenas</li>
+  {{/each}}
+</ul>

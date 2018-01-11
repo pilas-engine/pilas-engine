@@ -1,17 +1,17 @@
 {{yield}}
 
-{{pilas-boton accion=(action "abrirModal") texto="+ A"}}
+{{pilas-boton accion=(action "abrirModal") texto="+ Actor"}}
 
 {{#if modalVisible}}
 
-<div class="flex absolute absolute--fill">
+<div class="flex absolute absolute--fill" id='dialogoCrearActor'>
 
   <div {{action "ocultar"}} class="bg-black-50 z-1 absolute absolute--fill">
   </div>
 
   <div class="flex flex-column flex-auto ma5 bg-white z-2">
 
-    <h1 class="f4 pl3">Agregar un actor a la escena</h1>
+    <h1 class="f4 pl3" id='titulo'>Agregar un actor a la escena</h1>
 
     <div class="flex1 pa3">
       {{#if tarea.isRunning}}
@@ -26,7 +26,7 @@
             actores=tarea.last.value.actores
             cuandoQuiereCrearActor=cuandoQuiereCrearActor
         }}
-        
+
       {{/if}}
 
     </div>

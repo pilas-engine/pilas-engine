@@ -11,6 +11,14 @@ test("it renders", function(assert) {
     this.$()
       .text()
       .trim(),
-    "+ A"
+    "+ Actor"
+  );
+
+  this.render(hbs`{{pilas-crear-actor cuandoQuiereCrearActor=f modalVisible=true}}`);
+  assert.equal(
+    this.$("#dialogoCrearActor #titulo")
+      .text()
+      .trim(),
+    "Agregar un actor a la escena"
   );
 });
