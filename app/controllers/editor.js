@@ -26,6 +26,10 @@ const queryParams = new QueryParams({
   actorSeleccionado: {
     defaultValue: -1,
     replace: true
+  },
+  mostrarModalCreacionDeActor: {
+    defaultValue: false,
+    replace: true
   }
 });
 

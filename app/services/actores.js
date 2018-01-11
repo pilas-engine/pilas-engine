@@ -1,24 +1,25 @@
 import Service from "@ember/service";
 import config from "pilas-engine/config/environment";
+import Ember from "ember";
+import { task, timeout } from "ember-concurrency";
 
 export default Service.extend({
   iniciado: false,
   data: null,
 
-  iniciar() {
-    if (this.get("iniciado")) {
-      return;
-    }
+  tareaConseguirActores: task(function*() {
+    yield timeout(500);
 
-    Ember.$.ajax({
+    let actores = yield Ember.$.ajax({
       mimeType: "application/json",
       dataType: "json",
-      url: `${config.rootURL}actores/actores.js`,
-      success: result => {
-        this.set("data", result);
-        this.set("iniciado", true);
-        console.log(result);
-      }
+      url: `${config.rootURL}actores/actores.json`
     });
+
+    return actores;
+  }).drop(),
+
+  iniciar() {
+    this.get("tareaConseguirActores").perform();
   }
 });

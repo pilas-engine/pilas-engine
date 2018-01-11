@@ -1,0 +1,24 @@
+{
+  "actores": [
+    {
+      "nombre": "Aceituna",
+      "imagen": "aceituna.png"
+    },
+    {
+      "nombre": "Caja",
+      "imagen": "caja.png"
+    },
+    {
+      "nombre": "Ember",
+      "imagen": "ember.png"
+    },
+    {
+      "nombre": "Logo",
+      "imagen": "logo.png"
+    },
+    {
+      "nombre": "Pelota",
+      "imagen": "pelota.png"
+    }
+  ]
+}

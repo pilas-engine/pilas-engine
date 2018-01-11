@@ -1,11 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import { moduleFor, test } from "ember-qunit";
 
-moduleFor('route:editor', 'Unit | Route | editor', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+moduleFor("route:editor", "Unit | Route | editor", {
+  needs: ["service:actores"]
 });
 
-test('it exists', function(assert) {
+test("it exists", function(assert) {
   let route = this.subject();
   assert.ok(route);
 });

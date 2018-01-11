@@ -1,0 +1,23 @@
+<div class="w4 dib
+    ba pa2 button
+    br2
+    verdana f6 link pointer
+    hover-bg-black-10
+    black bg-animate hover-bg-black-10 b--black-20
+    unselectable
+    v-top
+    mb1
+">
+<div class="flex flex-column h-100 w-100">
+
+  {{yield}}
+
+  <div class="flex1 tc">
+    <img class='w3 h3' src="{{rootURL}}imagenes/{{actor.imagen}}" alt="">
+  </div>
+
+  <div class="f6 tc mt2 h1">
+    {{actor.nombre}}
+  </div>
+</div>
+</div>
