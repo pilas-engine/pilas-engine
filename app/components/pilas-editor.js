@@ -10,6 +10,7 @@ export default Component.extend({
   codigo: "",
   tagName: "",
   actorSeleccionado: -1,
+  instanciaDeActorSeleccionado: null,
 
   historiaPosicion: 10,
   historiaMinimo: 0,
@@ -195,12 +196,14 @@ export default Component.extend({
 
       if (actor) {
         this.set("actorSeleccionado", indiceDelActor);
+        this.set("instanciaActorSeleccionado", actor);
         let tipoDeActor = this.obtenerTipoDeActor(actor.tipo);
 
         this.set("codigo", tipoDeActor.get("codigo"));
         this.set("tituloDelCodigo", actor.tipo);
       } else {
         this.set("actorSeleccionado", -1);
+        this.set("instanciaActorSeleccionado", null);
       }
     },
     cuandoCargaMonacoEditor() {
