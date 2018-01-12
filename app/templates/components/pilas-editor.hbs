@@ -11,8 +11,8 @@
 
       <div class="dtc tr">
         <div class="dib mr2">
-          {{pilas-boton-interruptor class="pointer" variable=ocultarPropiedades iconoActivo="p1_on" iconoInactivo="p1_off"}}
-          {{pilas-boton-interruptor class="pointer" variable=ocultarEditor iconoActivo="p2_on" iconoInactivo="p2_off"}}
+          {{pilas-interruptor variable=mostrarPropiedades texto="Panel de actores"}}
+          {{pilas-interruptor variable=mostrarEditor texto="Panel del editor"}}
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
   <section class="flex1 flex bt b--silver">
     <div class="columns">
 
-      <div class="w5 {{if ocultarPropiedades 'dn' 'flex flex-column'}} br b--light-silver pa2 ">
+      <div class="w5 {{if mostrarPropiedades 'flex flex-column' 'dn'}} br b--light-silver pa2 ">
 
         <div class='unselectable'>
           {{pilas-boton accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
@@ -42,6 +42,7 @@
         }}
 
       </div>
+
       <div class="flex flex1 flex-column w-30 bg-white ml2 mr2 pa2">
 
         <!-- Canvas -->
@@ -88,9 +89,9 @@
 
                 <div class="h4 pa2 bl br bb b--gray {{if mostrarInterprete '' 'dn'}}">
                   {{#each log.items as |item|}}
-                    <div class="f6">{{item.tipo}} - {{item.mensaje}}
+                    <div class="f6 {{if (eq item.tipo 'error') 'red'}}">{{item.tipo}} - {{item.mensaje}}
 
-                        <div class="ba">
+                        <div class="pl3 truncate w4">
                           {{item.detalle}}
                         </div>
 
@@ -101,7 +102,7 @@
 
       </div>
 
-      <div class="flex1 {{if ocultarEditor 'dn' 'flex flex-column'}} bl b--light-silver">
+      <div class="flex1 {{if mostrarEditor 'flex flex-column' 'dn'}} bl b--light-silver">
 
         {{monaco-editor titulo=tituloDelCodigo code=codigo
             cuandoCarga=(action "cuandoCargaMonacoEditor")

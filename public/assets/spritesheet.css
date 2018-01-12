@@ -47,7 +47,7 @@
 	background-size: 270px 224px;
 }
 
-.manual {
+.ejemplos {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -120px;
@@ -68,10 +68,10 @@
 	background-size: 270px 224px;
 }
 
-.settings {
-    width: 25px;
-    height: 25px;
-    background: url("spritesheet.png") -237px -149px;
+.volver {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -142px -198px;
 	background-size: 270px 224px;
 }
 
@@ -82,21 +82,21 @@
 	background-size: 270px 224px;
 }
 
-.p1_off {
-    width: 12px;
-    height: 12px;
-    background: url("spritesheet.png") -256px -178px;
+.manual {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -163px -76px;
 	background-size: 270px 224px;
 }
 
-.add_folder {
+.settings {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -134px -105px;
 	background-size: 270px 224px;
 }
 
-.ejemplos {
+.add_folder {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -105px;
@@ -138,38 +138,10 @@
 	background-size: 270px 224px;
 }
 
-.volver {
-    width: 24px;
-    height: 24px;
-    background: url("spritesheet.png") -142px -198px;
-	background-size: 270px 224px;
-}
-
-.p2_off {
-    width: 12px;
-    height: 12px;
-    background: url("spritesheet.png") -208px -178px;
-	background-size: 270px 224px;
-}
-
-.p2_on {
-    width: 12px;
-    height: 12px;
-    background: url("spritesheet.png") -224px -178px;
-	background-size: 270px 224px;
-}
-
-.p1_on {
-    width: 12px;
-    height: 12px;
-    background: url("spritesheet.png") -240px -178px;
-	background-size: 270px 224px;
-}
-
 .api {
     width: 25px;
     height: 25px;
-    background: url("spritesheet.png") -163px -76px;
+    background: url("spritesheet.png") -237px -149px;
 	background-size: 270px 224px;
 }
 

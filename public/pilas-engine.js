@@ -1,13 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Control = (function () {
     function Control(pilas) {
         this.pilas = pilas;
@@ -178,8 +168,7 @@ var Actor = (function () {
             }
         };
     }
-    Actor.prototype.iniciar = function () {
-    };
+    Actor.prototype.iniciar = function () { };
     Actor.prototype.serializar = function () {
         return {
             tipo: this.tipo,
@@ -196,6 +185,16 @@ var Actor = (function () {
     };
     return Actor;
 }());
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Caja = (function (_super) {
     __extends(Caja, _super);
     function Caja() {

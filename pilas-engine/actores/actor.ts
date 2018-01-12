@@ -16,8 +16,7 @@ class Actor {
     };
   }
 
-  iniciar() {
-  }
+  iniciar() {}
 
   serializar() {
     return {

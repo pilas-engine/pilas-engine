@@ -13,16 +13,16 @@
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/pilas-engine.css">
 
 <script>
-  window.enElectron = window && window.process && window.process.type;
+window.enElectron = window && window.process && window.process.type;
 
-  var win = window;
-  win.moduleNode = win.module;
-  win.processNode = win.process;
-  win.requireNode = win.require;
+var win = window;
+win.moduleNode = win.module;
+win.processNode = win.process;
+win.requireNode = win.require;
 
-  delete win.module;
-  delete win.process;
-  delete win.require;
+delete win.module;
+delete win.process;
+delete win.require;
 </script>
 
 
@@ -37,8 +37,8 @@
     {{content-for "body-footer"}}
 
 <script>
-  win.process = win.processNode;
-  win.module = win.moduleNode;
+win.process = win.processNode;
+win.module = win.moduleNode;
 </script>
 
   </body>

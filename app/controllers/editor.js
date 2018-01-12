@@ -9,14 +9,14 @@ const queryParams = new QueryParams({
     refresh: true,
     replace: true
   },
-  ocultarEditor: {
+  mostrarEditor: {
     as: "p3",
-    defaultValue: false,
+    defaultValue: true,
     replace: true
   },
-  ocultarPropiedades: {
+  mostrarPropiedades: {
     as: "p1",
-    defaultValue: false,
+    defaultValue: true,
     replace: true
   },
   escenaActual: {
