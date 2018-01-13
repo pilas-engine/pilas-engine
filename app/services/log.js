@@ -15,7 +15,6 @@ export default Service.extend({
   },
 
   error(mensaje, detalle) {
-    console.log("agregando mensaje");
     this.get("items").pushObject({ tipo: "error", mensaje: mensaje, detalle: detalle });
   },
 
