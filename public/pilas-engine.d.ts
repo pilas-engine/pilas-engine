@@ -117,6 +117,7 @@ declare class EstadoPausa extends Estado {
     total: number;
     izquierda: any;
     derecha: any;
+    canvas: any;
     init(datos: any): void;
     cuando_cambia_posicion: any;
     create(): void;

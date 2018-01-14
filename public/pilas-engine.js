@@ -493,6 +493,8 @@ var EstadoPausa = (function (_super) {
         this.game.stage.backgroundColor = "555";
         this.crear_sprites_desde_historia(this.posicion);
         this.actualizar_texto();
+        this.canvas = this.game.add.graphics(0, 0);
+        this.dibujarLineaDeCoordenadasRecorridas();
     };
     EstadoPausa.prototype.crear_texto = function () {
         var style = {
@@ -537,6 +539,7 @@ var EstadoPausa = (function (_super) {
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
         this.actualizar_texto();
+        this.game.world.bringToTop(this.canvas);
     };
     EstadoPausa.prototype.actualizar_texto = function () {
         var ayuda = "Cambiar con las teclas izquierda y derecha";
@@ -553,14 +556,13 @@ var EstadoPausa = (function (_super) {
     };
     EstadoPausa.prototype.render = function () {
         _super.prototype.render.call(this);
-        this.dibujarLineaDeCoordenadasRecorridas();
     };
     EstadoPausa.prototype.dibujarLineaDeCoordenadasRecorridas = function () {
         var _this = this;
-        var color = "rgba(255,255,255,0.5)";
+        this.canvas.beginFill(0xffffff, 1);
         this.historia.map(function (historia) {
             historia.map(function (entidad) {
-                _this.game.debug.pixel(entidad.x, entidad.y, color);
+                _this.canvas.drawCircle(entidad.x, entidad.y, 1);
             });
         });
     };

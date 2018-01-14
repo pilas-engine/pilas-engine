@@ -10,6 +10,8 @@ class EstadoPausa extends Estado {
   izquierda: any;
   derecha: any;
 
+  canvas: any;
+
   init(datos) {
     this.pilas = datos.pilas;
     this.historia = datos.historia;
@@ -29,6 +31,9 @@ class EstadoPausa extends Estado {
     this.game.stage.backgroundColor = "555";
     this.crear_sprites_desde_historia(this.posicion);
     this.actualizar_texto();
+
+    this.canvas = this.game.add.graphics(0, 0);
+    this.dibujarLineaDeCoordenadasRecorridas();
   }
 
   private crear_texto() {
@@ -74,6 +79,7 @@ class EstadoPausa extends Estado {
       this.cuando_cambia_posicion({ posicion: this.posicion });
 
       this.crear_sprites_desde_historia(this.posicion);
+
       this.actualizar_texto();
     }
   }
@@ -85,6 +91,7 @@ class EstadoPausa extends Estado {
 
     this.crear_sprites_desde_historia(this.posicion);
     this.actualizar_texto();
+    this.game.world.bringToTop(this.canvas);
   }
 
   private actualizar_texto() {
@@ -106,16 +113,14 @@ class EstadoPausa extends Estado {
 
   render() {
     super.render();
-
-    this.dibujarLineaDeCoordenadasRecorridas();
   }
 
   dibujarLineaDeCoordenadasRecorridas() {
-    const color = "rgba(255,255,255,0.5)";
+    this.canvas.beginFill(0xffffff, 1);
 
     this.historia.map(historia => {
       historia.map(entidad => {
-        this.game.debug.pixel(entidad.x, entidad.y, color);
+        this.canvas.drawCircle(entidad.x, entidad.y, 1);
       });
     });
   }
