@@ -60,7 +60,7 @@ class EstadoEjecucion extends Estado {
       this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
     }
 
-    this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion");
+    this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
   }
 
   crear_actores_desde_entidades() {

@@ -111,7 +111,7 @@ changelog:
 
 api:
 	$(call log, "Generando documentacion de pilas-engine")
-	@${BIN_TYPEDOC} --out public/api/ pilas-engine --hideGenerator
+	cd pilas-engine; ../${BIN_TYPEDOC} --out ../public/api/ ./ --hideGenerator
 
 compilar_pilas:
 	$(call log, "Compilando pilas-engine")
@@ -215,7 +215,7 @@ actualizar_phaser:
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/phaser-ce/build/phaser.js public/${N}"
 	@echo "${Y}${N}"
-	
+
 actualizar_typescript:
 	@echo "${Y}Para actualizar typescript, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"

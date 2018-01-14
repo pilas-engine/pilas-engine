@@ -69,20 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Permite emitir mensajes internos del motor en consola.</p>
-					</div>
-					<p>El objetivo de este objeto es que los desarrolladores de un videojuego
-						puedan ver paso a paso todo lo que ocurre dentro del motor, por ejemplo
-					las señales que se emiten y los cambios en el arbol de entidades.</p>
-					<p>Por omisión este objeto está deshabilitado, pero se puede activar con
-					una llamada así:</p>
-					<pre><code><span class="hljs-selector-tag">pilas</span><span class="hljs-selector-class">.log</span><span class="hljs-selector-class">.habilitar</span>();
-</code></pre>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -104,15 +90,13 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_log_.log.html#habilitado" class="tsd-kind-icon">habilitado</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_log_.log.html#pilas" class="tsd-kind-icon">pilas</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_log_.log.html#deshabilitar" class="tsd-kind-icon">deshabilitar</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_log_.log.html#habilitar" class="tsd-kind-icon">habilitar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_log_.log.html#debug" class="tsd-kind-icon">debug</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_log_.log.html#info" class="tsd-kind-icon">info</a></li>
 							</ul>
 						</section>
@@ -131,7 +115,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/log.ts#L17">log.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/log.ts#L2">log.ts:2</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -148,22 +132,12 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-					<a name="habilitado" class="tsd-anchor"></a>
-					<h3>habilitado</h3>
-					<div class="tsd-signature tsd-kind-icon">habilitado<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/log.ts#L17">log.ts:17</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
 					<a name="pilas" class="tsd-anchor"></a>
 					<h3>pilas</h3>
 					<div class="tsd-signature tsd-kind-icon">pilas<span class="tsd-signature-symbol">:</span> <a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/log.ts#L16">log.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/log.ts#L2">log.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -171,35 +145,24 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-					<a name="deshabilitar" class="tsd-anchor"></a>
-					<h3>deshabilitar</h3>
+					<a name="debug" class="tsd-anchor"></a>
+					<h3>debug</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">deshabilitar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>mensaje<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/log.ts#L36">log.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/log.ts#L8">log.ts:8</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-					<a name="habilitar" class="tsd-anchor"></a>
-					<h3>habilitar</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">habilitar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/log.ts#L32">log.ts:32</a></li>
-								</ul>
-							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>mensaje: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -208,19 +171,19 @@
 					<a name="info" class="tsd-anchor"></a>
 					<h3>info</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>mensaje<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/log.ts#L23">log.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/log.ts#L12">log.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>mensaje: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -236,55 +199,43 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/__references_.html">"_<wbr>references"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_actorproxy_.html">"actor<wbr>Proxy"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_actores_.html">"actores"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_componentes_.html">"componentes"</a>
+						<a href="../modules/_actores_actor_.html">"actores/actor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_entidades_.html">"entidades"</a>
+						<a href="../modules/_actores_caja_.html">"actores/caja"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventos_.html">"eventos"</a>
+						<a href="../modules/_actores_pelota_.html">"actores/pelota"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventos_evento_.html">"eventos/evento"</a>
+						<a href="../modules/_control_.html">"control"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_habilidades_.html">"habilidades"</a>
+						<a href="../modules/_editor_sprite_.html">"editor/sprite"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_editor_spritesimple_.html">"editor/sprite<wbr>Simple"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_editor_.html">"estados/editor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_ejecucion_.html">"estados/ejecucion"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_estado_.html">"estados/estado"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_pausa_.html">"estados/pausa"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_log_.html">"log"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_pilas_.html">"pilas"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_.html">"sistemas"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_apariencia_.html">"sistemas/apariencia"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_depurable_.html">"sistemas/depurable"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistema_.html">"sistemas/sistema"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistemahabilidades_.html">"sistemas/sistema<wbr>Habilidades"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_utils_.html">"utils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_validadores_.html">"validadores"</a>
 					</li>
 				</ul>
 			</nav>
@@ -299,16 +250,10 @@
 								<a href="_log_.log.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_log_.log.html#habilitado" class="tsd-kind-icon">habilitado</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
 								<a href="_log_.log.html#pilas" class="tsd-kind-icon">pilas</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_log_.log.html#deshabilitar" class="tsd-kind-icon">deshabilitar</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_log_.log.html#habilitar" class="tsd-kind-icon">habilitar</a>
+								<a href="_log_.log.html#debug" class="tsd-kind-icon">debug</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
 								<a href="_log_.log.html#info" class="tsd-kind-icon">info</a>

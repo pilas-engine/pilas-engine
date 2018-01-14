@@ -160,7 +160,7 @@ class Pilas {
   }
 
   obtener_actores() {
-    return pilas.game.world.children.map(s => s.actor);
+    return pilas.game.world.children.map(s => s["actor"]);
   }
 
   obtener_cantidad_de_actores() {

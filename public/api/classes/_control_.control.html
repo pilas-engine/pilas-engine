@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ActorProxy | pilas-engine</title>
+	<title>Control | pilas-engine</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_actorproxy_.html">&quot;actorProxy&quot;</a>
+					<a href="../modules/_control_.html">&quot;control&quot;</a>
 				</li>
 				<li>
-					<a href="_actorproxy_.actorproxy.html">ActorProxy</a>
+					<a href="_control_.control.html">Control</a>
 				</li>
 			</ul>
-			<h1>Class ActorProxy</h1>
+			<h1>Class Control</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ActorProxy</span>
+						<span class="target">Control</span>
 					</li>
 				</ul>
 			</section>
@@ -84,20 +84,22 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported"><a href="_actorproxy_.actorproxy.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported"><a href="_control_.control.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_actorproxy_.actorproxy.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_actorproxy_.actorproxy.html#pilas" class="tsd-kind-icon">pilas</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_control_.control.html#pilas" class="tsd-kind-icon">pilas</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_control_.control.html#tecladerecha" class="tsd-kind-icon">tecla<wbr>Derecha</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_control_.control.html#teclaizquierda" class="tsd-kind-icon">tecla<wbr>Izquierda</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-not-exported"><a href="_actorproxy_.actorproxy.html#x" class="tsd-kind-icon">x</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported"><a href="_control_.control.html#derecha" class="tsd-kind-icon">derecha</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported"><a href="_control_.control.html#izquierda" class="tsd-kind-icon">izquierda</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,13 +111,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Actor<wbr>Proxy<span class="tsd-signature-symbol">(</span>pilas<span class="tsd-signature-symbol">: </span><a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_actorproxy_.actorproxy.html" class="tsd-signature-type">ActorProxy</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Control<span class="tsd-signature-symbol">(</span>pilas<span class="tsd-signature-symbol">: </span><a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_control_.control.html" class="tsd-signature-type">Control</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/actorProxy.ts#L3">actorProxy.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/control.ts#L4">control.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -123,11 +125,8 @@
 								<li>
 									<h5>pilas: <a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a></h5>
 								</li>
-								<li>
-									<h5>id: <span class="tsd-signature-type">any</span></h5>
-								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_actorproxy_.actorproxy.html" class="tsd-signature-type">ActorProxy</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_control_.control.html" class="tsd-signature-type">Control</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -135,57 +134,69 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/actorProxy.ts#L3">actorProxy.ts:3</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
 					<a name="pilas" class="tsd-anchor"></a>
 					<h3>pilas</h3>
 					<div class="tsd-signature tsd-kind-icon">pilas<span class="tsd-signature-symbol">:</span> <a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/actorProxy.ts#L2">actorProxy.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/control.ts#L2">control.ts:2</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+					<a name="tecladerecha" class="tsd-anchor"></a>
+					<h3>tecla<wbr>Derecha</h3>
+					<div class="tsd-signature tsd-kind-icon">tecla<wbr>Derecha<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/control.ts#L4">control.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+					<a name="teclaizquierda" class="tsd-anchor"></a>
+					<h3>tecla<wbr>Izquierda</h3>
+					<div class="tsd-signature tsd-kind-icon">tecla<wbr>Izquierda<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/control.ts#L3">control.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-not-exported">
-					<a name="x" class="tsd-anchor"></a>
-					<h3>x</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> x<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> x<span class="tsd-signature-symbol">(</span>valor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported">
+					<a name="derecha" class="tsd-anchor"></a>
+					<h3>derecha</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> derecha<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/actorProxy.ts#L10">actorProxy.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/control.ts#L16">control.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported">
+					<a name="izquierda" class="tsd-anchor"></a>
+					<h3>izquierda</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> izquierda<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/actorProxy.ts#L14">actorProxy.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/control.ts#L12">control.ts:12</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>valor: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -198,55 +209,43 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/__references_.html">"_<wbr>references"</a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_actorproxy_.html">"actor<wbr>Proxy"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_actores_.html">"actores"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_componentes_.html">"componentes"</a>
+						<a href="../modules/_actores_actor_.html">"actores/actor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_entidades_.html">"entidades"</a>
+						<a href="../modules/_actores_caja_.html">"actores/caja"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventos_.html">"eventos"</a>
+						<a href="../modules/_actores_pelota_.html">"actores/pelota"</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_control_.html">"control"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventos_evento_.html">"eventos/evento"</a>
+						<a href="../modules/_editor_sprite_.html">"editor/sprite"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_habilidades_.html">"habilidades"</a>
+						<a href="../modules/_editor_spritesimple_.html">"editor/sprite<wbr>Simple"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_editor_.html">"estados/editor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_ejecucion_.html">"estados/ejecucion"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_estado_.html">"estados/estado"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_pausa_.html">"estados/pausa"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_log_.html">"log"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_pilas_.html">"pilas"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_.html">"sistemas"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_apariencia_.html">"sistemas/apariencia"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_depurable_.html">"sistemas/depurable"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistema_.html">"sistemas/sistema"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistemahabilidades_.html">"sistemas/sistema<wbr>Habilidades"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_utils_.html">"utils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_validadores_.html">"validadores"</a>
 					</li>
 				</ul>
 			</nav>
@@ -255,19 +254,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_actorproxy_.actorproxy.html" class="tsd-kind-icon">Actor<wbr>Proxy</a>
+						<a href="_control_.control.html" class="tsd-kind-icon">Control</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_actorproxy_.actorproxy.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_control_.control.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_actorproxy_.actorproxy.html#id" class="tsd-kind-icon">id</a>
+								<a href="_control_.control.html#pilas" class="tsd-kind-icon">pilas</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_actorproxy_.actorproxy.html#pilas" class="tsd-kind-icon">pilas</a>
+								<a href="_control_.control.html#tecladerecha" class="tsd-kind-icon">tecla<wbr>Derecha</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_actorproxy_.actorproxy.html#x" class="tsd-kind-icon">x</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+								<a href="_control_.control.html#teclaizquierda" class="tsd-kind-icon">tecla<wbr>Izquierda</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported">
+								<a href="_control_.control.html#derecha" class="tsd-kind-icon">derecha</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-not-exported">
+								<a href="_control_.control.html#izquierda" class="tsd-kind-icon">izquierda</a>
 							</li>
 						</ul>
 					</li>

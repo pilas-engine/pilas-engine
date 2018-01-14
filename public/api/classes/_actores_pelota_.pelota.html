@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Apariencia | pilas-engine</title>
+	<title>Pelota | pilas-engine</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_sistemas_apariencia_.html">&quot;sistemas/apariencia&quot;</a>
+					<a href="../modules/_actores_pelota_.html">&quot;actores/pelota&quot;</a>
 				</li>
 				<li>
-					<a href="_sistemas_apariencia_.apariencia.html">Apariencia</a>
+					<a href="_actores_pelota_.pelota.html">Pelota</a>
 				</li>
 			</ul>
-			<h1>Class Apariencia</h1>
+			<h1>Class Pelota</h1>
 		</div>
 	</div>
 </header>
@@ -73,10 +73,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="_sistemas_sistema_.sistema.html" class="tsd-signature-type">Sistema</a>
+						<a href="_actores_actor_.actor.html" class="tsd-signature-type">Actor</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">Apariencia</span>
+								<span class="target">Pelota</span>
 							</li>
 						</ul>
 					</li>
@@ -89,22 +89,23 @@
 						<section class="tsd-index-section tsd-is-inherited tsd-is-not-exported">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_sistemas_apariencia_.apariencia.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_actores_pelota_.pelota.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section tsd-is-inherited tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_sistemas_apariencia_.apariencia.html#cache" class="tsd-kind-icon">cache</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_sistemas_apariencia_.apariencia.html#pilas" class="tsd-kind-icon">pilas</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_sistemas_apariencia_.apariencia.html#requisitos" class="tsd-kind-icon">requisitos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_actores_pelota_.pelota.html#pilas" class="tsd-kind-icon">pilas</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_actores_pelota_.pelota.html#sprite" class="tsd-kind-icon">sprite</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_actores_pelota_.pelota.html#tipo" class="tsd-kind-icon">tipo</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported"><a href="_sistemas_apariencia_.apariencia.html#iniciar" class="tsd-kind-icon">iniciar</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported"><a href="_sistemas_apariencia_.apariencia.html#procesar" class="tsd-kind-icon">procesar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_actores_pelota_.pelota.html#actualizar" class="tsd-kind-icon">actualizar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported"><a href="_actores_pelota_.pelota.html#iniciar" class="tsd-kind-icon">iniciar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_actores_pelota_.pelota.html#serializar" class="tsd-kind-icon">serializar</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,64 +117,92 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Apariencia<span class="tsd-signature-symbol">(</span>pilas<span class="tsd-signature-symbol">: </span><a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_sistemas_apariencia_.apariencia.html" class="tsd-signature-type">Apariencia</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Pelota<span class="tsd-signature-symbol">(</span>pilas<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, imagen<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_actores_pelota_.pelota.html" class="tsd-signature-type">Pelota</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_sistemas_sistema_.sistema.html">Sistema</a>.<a href="_sistemas_sistema_.sistema.html#constructor">constructor</a></p>
+								<p>Inherited from <a href="_actores_actor_.actor.html">Actor</a>.<a href="_actores_actor_.actor.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/sistemas/sistema.ts#L3">sistemas/sistema.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L4">actores/actor.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>pilas: <a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a></h5>
+									<h5>pilas: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>x: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>y: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>imagen: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_sistemas_apariencia_.apariencia.html" class="tsd-signature-type">Apariencia</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_actores_pelota_.pelota.html" class="tsd-signature-type">Pelota</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited tsd-is-not-exported">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-					<a name="cache" class="tsd-anchor"></a>
-					<h3>cache</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/sistemas/apariencia.ts#L4">sistemas/apariencia.ts:4</a></li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
 					<a name="pilas" class="tsd-anchor"></a>
 					<h3>pilas</h3>
 					<div class="tsd-signature tsd-kind-icon">pilas<span class="tsd-signature-symbol">:</span> <a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_sistemas_sistema_.sistema.html">Sistema</a>.<a href="_sistemas_sistema_.sistema.html#pilas">pilas</a></p>
+						<p>Inherited from <a href="_actores_actor_.actor.html">Actor</a>.<a href="_actores_actor_.actor.html#pilas">pilas</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/sistemas/sistema.ts#L3">sistemas/sistema.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L4">actores/actor.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
-					<a name="requisitos" class="tsd-anchor"></a>
-					<h3>requisitos</h3>
-					<div class="tsd-signature tsd-kind-icon">requisitos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
+					<a name="sprite" class="tsd-anchor"></a>
+					<h3>sprite</h3>
+					<div class="tsd-signature tsd-kind-icon">sprite<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Sprite</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_sistemas_sistema_.sistema.html">Sistema</a>.<a href="_sistemas_sistema_.sistema.html#requisitos">requisitos</a></p>
+						<p>Inherited from <a href="_actores_actor_.actor.html">Actor</a>.<a href="_actores_actor_.actor.html#sprite">sprite</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/sistemas/sistema.ts#L2">sistemas/sistema.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L3">actores/actor.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+					<a name="tipo" class="tsd-anchor"></a>
+					<h3>tipo</h3>
+					<div class="tsd-signature tsd-kind-icon">tipo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">String</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_actores_actor_.actor.html">Actor</a>.<a href="_actores_actor_.actor.html#tipo">tipo</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L2">actores/actor.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+					<a name="actualizar" class="tsd-anchor"></a>
+					<h3>actualizar</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">actualizar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_actores_actor_.actor.html">Actor</a>.<a href="_actores_actor_.actor.html#actualizar">actualizar</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L33">actores/actor.ts:33</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported">
 					<a name="iniciar" class="tsd-anchor"></a>
 					<h3>iniciar</h3>
@@ -183,36 +212,53 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="_sistemas_sistema_.sistema.html">Sistema</a>.<a href="_sistemas_sistema_.sistema.html#iniciar">iniciar</a></p>
+								<p>Overrides <a href="_actores_actor_.actor.html">Actor</a>.<a href="_actores_actor_.actor.html#iniciar">iniciar</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/sistemas/apariencia.ts#L6">sistemas/apariencia.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/pelota.ts#L2">actores/pelota.ts:2</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported">
-					<a name="procesar" class="tsd-anchor"></a>
-					<h3>procesar</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">procesar<span class="tsd-signature-symbol">(</span>entidades<span class="tsd-signature-symbol">: </span><a href="_entidades_.entidades.html" class="tsd-signature-type">Entidades</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+					<a name="serializar" class="tsd-anchor"></a>
+					<h3>serializar</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">serializar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="_sistemas_sistema_.sistema.html">Sistema</a>.<a href="_sistemas_sistema_.sistema.html#procesar">procesar</a></p>
+								<p>Inherited from <a href="_actores_actor_.actor.html">Actor</a>.<a href="_actores_actor_.actor.html#serializar">serializar</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/sistemas/apariencia.ts#L10">sistemas/apariencia.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L21">actores/actor.ts:21</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
 							<ul class="tsd-parameters">
-								<li>
-									<h5>entidades: <a href="_entidades_.entidades.html" class="tsd-signature-type">Entidades</a></h5>
+								<li class="tsd-parameter">
+									<h5>centro_<wbr>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>centro_<wbr>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>imagen<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RenderTexture</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">BitmapData</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Video</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Texture</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>rotacion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>tipo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">String</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -225,55 +271,43 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/__references_.html">"_<wbr>references"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_actorproxy_.html">"actor<wbr>Proxy"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_actores_.html">"actores"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_componentes_.html">"componentes"</a>
+						<a href="../modules/_actores_actor_.html">"actores/actor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_entidades_.html">"entidades"</a>
+						<a href="../modules/_actores_caja_.html">"actores/caja"</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_actores_pelota_.html">"actores/pelota"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventos_.html">"eventos"</a>
+						<a href="../modules/_control_.html">"control"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventos_evento_.html">"eventos/evento"</a>
+						<a href="../modules/_editor_sprite_.html">"editor/sprite"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_habilidades_.html">"habilidades"</a>
+						<a href="../modules/_editor_spritesimple_.html">"editor/sprite<wbr>Simple"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_editor_.html">"estados/editor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_ejecucion_.html">"estados/ejecucion"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_estado_.html">"estados/estado"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_pausa_.html">"estados/pausa"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_log_.html">"log"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_pilas_.html">"pilas"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_.html">"sistemas"</a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_sistemas_apariencia_.html">"sistemas/apariencia"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_depurable_.html">"sistemas/depurable"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistema_.html">"sistemas/sistema"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistemahabilidades_.html">"sistemas/sistema<wbr>Habilidades"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_utils_.html">"utils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_validadores_.html">"validadores"</a>
 					</li>
 				</ul>
 			</nav>
@@ -282,25 +316,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_sistemas_apariencia_.apariencia.html" class="tsd-kind-icon">Apariencia</a>
+						<a href="_actores_pelota_.pelota.html" class="tsd-kind-icon">Pelota</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
-								<a href="_sistemas_apariencia_.apariencia.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_sistemas_apariencia_.apariencia.html#cache" class="tsd-kind-icon">cache</a>
+								<a href="_actores_pelota_.pelota.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
-								<a href="_sistemas_apariencia_.apariencia.html#pilas" class="tsd-kind-icon">pilas</a>
+								<a href="_actores_pelota_.pelota.html#pilas" class="tsd-kind-icon">pilas</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
-								<a href="_sistemas_apariencia_.apariencia.html#requisitos" class="tsd-kind-icon">requisitos</a>
+								<a href="_actores_pelota_.pelota.html#sprite" class="tsd-kind-icon">sprite</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+								<a href="_actores_pelota_.pelota.html#tipo" class="tsd-kind-icon">tipo</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+								<a href="_actores_pelota_.pelota.html#actualizar" class="tsd-kind-icon">actualizar</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported">
-								<a href="_sistemas_apariencia_.apariencia.html#iniciar" class="tsd-kind-icon">iniciar</a>
+								<a href="_actores_pelota_.pelota.html#iniciar" class="tsd-kind-icon">iniciar</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported">
-								<a href="_sistemas_apariencia_.apariencia.html#procesar" class="tsd-kind-icon">procesar</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+								<a href="_actores_pelota_.pelota.html#serializar" class="tsd-kind-icon">serializar</a>
 							</li>
 						</ul>
 					</li>

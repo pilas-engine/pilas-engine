@@ -176,7 +176,7 @@ var Pilas = (function () {
         window.parent.postMessage(datos, HOST);
     };
     Pilas.prototype.obtener_actores = function () {
-        return pilas.game.world.children.map(function (s) { return s.actor; });
+        return pilas.game.world.children.map(function (s) { return s["actor"]; });
     };
     Pilas.prototype.obtener_cantidad_de_actores = function () {
         return this.obtener_actores().length;
@@ -431,7 +431,7 @@ var EstadoEjecucion = (function (_super) {
         catch (e) {
             this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
         }
-        this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion");
+        this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
     };
     EstadoEjecucion.prototype.crear_actores_desde_entidades = function () {
         var _this = this;

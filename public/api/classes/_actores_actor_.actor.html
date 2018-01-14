@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Evento | pilas-engine</title>
+	<title>Actor | pilas-engine</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_eventos_evento_.html">&quot;eventos/evento&quot;</a>
+					<a href="../modules/_actores_actor_.html">&quot;actores/actor&quot;</a>
 				</li>
 				<li>
-					<a href="_eventos_evento_.evento.html">Evento</a>
+					<a href="_actores_actor_.actor.html">Actor</a>
 				</li>
 			</ul>
-			<h1>Class Evento</h1>
+			<h1>Class Actor</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,15 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Evento</span>
+						<span class="target">Actor</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="_actores_caja_.caja.html" class="tsd-signature-type">Caja</a>
+							</li>
+							<li>
+								<a href="_actores_pelota_.pelota.html" class="tsd-signature-type">Pelota</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -84,24 +92,23 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported"><a href="_actores_actor_.actor.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#emitir_log" class="tsd-kind-icon">emitir_<wbr>log</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#evento" class="tsd-kind-icon">evento</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#nombre" class="tsd-kind-icon">nombre</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#pilas" class="tsd-kind-icon">pilas</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_actores_actor_.actor.html#pilas" class="tsd-kind-icon">pilas</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_actores_actor_.actor.html#sprite" class="tsd-kind-icon">sprite</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="_actores_actor_.actor.html#tipo" class="tsd-kind-icon">tipo</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#conectar" class="tsd-kind-icon">conectar</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#emitir" class="tsd-kind-icon">emitir</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_eventos_evento_.evento.html#iniciar" class="tsd-kind-icon">iniciar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_actores_actor_.actor.html#actualizar" class="tsd-kind-icon">actualizar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_actores_actor_.actor.html#iniciar" class="tsd-kind-icon">iniciar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_actores_actor_.actor.html#serializar" class="tsd-kind-icon">serializar</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,25 +120,31 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Evento<span class="tsd-signature-symbol">(</span>pilas<span class="tsd-signature-symbol">: </span><a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a>, nombre<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_eventos_evento_.evento.html" class="tsd-signature-type">Evento</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Actor<span class="tsd-signature-symbol">(</span>pilas<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, imagen<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_actores_actor_.actor.html" class="tsd-signature-type">Actor</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L5">eventos/evento.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L4">actores/actor.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>pilas: <a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a></h5>
+									<h5>pilas: <span class="tsd-signature-type">any</span></h5>
 								</li>
 								<li>
-									<h5>nombre: <span class="tsd-signature-type">string</span></h5>
+									<h5>x: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>y: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>imagen: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_eventos_evento_.evento.html" class="tsd-signature-type">Evento</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_actores_actor_.actor.html" class="tsd-signature-type">Actor</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -139,42 +152,32 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-					<a name="emitir_log" class="tsd-anchor"></a>
-					<h3>emitir_<wbr>log</h3>
-					<div class="tsd-signature tsd-kind-icon">emitir_<wbr>log<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L5">eventos/evento.ts:5</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-					<a name="evento" class="tsd-anchor"></a>
-					<h3>evento</h3>
-					<div class="tsd-signature tsd-kind-icon">evento<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Signal</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L3">eventos/evento.ts:3</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-					<a name="nombre" class="tsd-anchor"></a>
-					<h3>nombre</h3>
-					<div class="tsd-signature tsd-kind-icon">nombre<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L4">eventos/evento.ts:4</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
 					<a name="pilas" class="tsd-anchor"></a>
 					<h3>pilas</h3>
 					<div class="tsd-signature tsd-kind-icon">pilas<span class="tsd-signature-symbol">:</span> <a href="_pilas_.pilas.html" class="tsd-signature-type">Pilas</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L2">eventos/evento.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L4">actores/actor.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+					<a name="sprite" class="tsd-anchor"></a>
+					<h3>sprite</h3>
+					<div class="tsd-signature tsd-kind-icon">sprite<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Sprite</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L3">actores/actor.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+					<a name="tipo" class="tsd-anchor"></a>
+					<h3>tipo</h3>
+					<div class="tsd-signature tsd-kind-icon">tipo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">String</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L2">actores/actor.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,52 +185,18 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-					<a name="conectar" class="tsd-anchor"></a>
-					<h3>conectar</h3>
+					<a name="actualizar" class="tsd-anchor"></a>
+					<h3>actualizar</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">conectar<span class="tsd-signature-symbol">(</span>funcion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, identificador<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">actualizar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L17">eventos/evento.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L33">actores/actor.ts:33</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>funcion: <span class="tsd-signature-type">any</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> identificador: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;any&quot;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-					<a name="emitir" class="tsd-anchor"></a>
-					<h3>emitir</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">emitir<span class="tsd-signature-symbol">(</span>datos<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L22">eventos/evento.ts:22</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> datos: <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
-									<ul class="tsd-parameters">
-									</ul>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -242,10 +211,50 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/38c44e9/pilas-engine/eventos/evento.ts#L13">eventos/evento.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L19">actores/actor.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+					<a name="serializar" class="tsd-anchor"></a>
+					<h3>serializar</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">serializar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pilas-engine/pilas-engine/blob/708d2d1/pilas-engine/actores/actor.ts#L21">actores/actor.ts:21</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>centro_<wbr>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>centro_<wbr>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>imagen<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RenderTexture</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">BitmapData</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Video</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Texture</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>rotacion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>tipo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">String</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -258,55 +267,43 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/__references_.html">"_<wbr>references"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_actorproxy_.html">"actor<wbr>Proxy"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_actores_.html">"actores"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_componentes_.html">"componentes"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_entidades_.html">"entidades"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventos_.html">"eventos"</a>
-					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_eventos_evento_.html">"eventos/evento"</a>
+						<a href="../modules/_actores_actor_.html">"actores/actor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_habilidades_.html">"habilidades"</a>
+						<a href="../modules/_actores_caja_.html">"actores/caja"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_actores_pelota_.html">"actores/pelota"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_control_.html">"control"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_editor_sprite_.html">"editor/sprite"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_editor_spritesimple_.html">"editor/sprite<wbr>Simple"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_editor_.html">"estados/editor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_ejecucion_.html">"estados/ejecucion"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_estado_.html">"estados/estado"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_estados_pausa_.html">"estados/pausa"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_log_.html">"log"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_pilas_.html">"pilas"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_.html">"sistemas"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_apariencia_.html">"sistemas/apariencia"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_depurable_.html">"sistemas/depurable"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistema_.html">"sistemas/sistema"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sistemas_sistemahabilidades_.html">"sistemas/sistema<wbr>Habilidades"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_utils_.html">"utils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_validadores_.html">"validadores"</a>
 					</li>
 				</ul>
 			</nav>
@@ -315,31 +312,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_eventos_evento_.evento.html" class="tsd-kind-icon">Evento</a>
+						<a href="_actores_actor_.actor.html" class="tsd-kind-icon">Actor</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_actores_actor_.actor.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#emitir_log" class="tsd-kind-icon">emitir_<wbr>log</a>
+								<a href="_actores_actor_.actor.html#pilas" class="tsd-kind-icon">pilas</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#evento" class="tsd-kind-icon">evento</a>
+								<a href="_actores_actor_.actor.html#sprite" class="tsd-kind-icon">sprite</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#nombre" class="tsd-kind-icon">nombre</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#pilas" class="tsd-kind-icon">pilas</a>
+								<a href="_actores_actor_.actor.html#tipo" class="tsd-kind-icon">tipo</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#conectar" class="tsd-kind-icon">conectar</a>
+								<a href="_actores_actor_.actor.html#actualizar" class="tsd-kind-icon">actualizar</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#emitir" class="tsd-kind-icon">emitir</a>
+								<a href="_actores_actor_.actor.html#iniciar" class="tsd-kind-icon">iniciar</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-								<a href="_eventos_evento_.evento.html#iniciar" class="tsd-kind-icon">iniciar</a>
+								<a href="_actores_actor_.actor.html#serializar" class="tsd-kind-icon">serializar</a>
 							</li>
 						</ul>
 					</li>
