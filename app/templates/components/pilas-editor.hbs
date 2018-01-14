@@ -63,6 +63,7 @@
                   {{#if estado.pausaActivada}}
                     <div class="dib pa2 f6 fr">
                       <input class="v-btm" type="range"
+                        id='posicion'
                         min={{historiaMinimo}}
                         max={{historiaMaximo}}
                         oninput={{action "cambiarPosicion" value="target.value"}}

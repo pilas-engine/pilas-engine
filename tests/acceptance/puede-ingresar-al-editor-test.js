@@ -1,5 +1,6 @@
 import { test } from "qunit";
 import moduleForAcceptance from "pilas-engine/tests/helpers/module-for-acceptance";
+import Ember from "ember";
 
 moduleForAcceptance("Acceptance | puede ingresar al editor");
 
@@ -27,6 +28,25 @@ test("puede ingresar a la pantalla principal", async function(assert) {
 
   await pulsar("Pausar");
   await esperar(PAUSA);
+
+  function cambiar_input(valor) {
+    Ember.$("input#posicion")
+      .val(valor)
+      .trigger("input");
+    return esperar(0.01);
+  }
+
+  for (let i = 140; i >= 0; i -= 5) {
+    await cambiar_input(i);
+  }
+
+  await esperar(PAUSA / 2);
+
+  for (let i = 0; i <= 140; i += 5) {
+    await cambiar_input(i);
+  }
+
+  await esperar(PAUSA / 2);
 
   await pulsar("Detener");
   await esperar(PAUSA);
