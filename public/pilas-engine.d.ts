@@ -1,3 +1,8 @@
+declare class Actores {
+    pilas: Pilas;
+    constructor(pilas: any);
+    Caja(x: any, y: any): Caja;
+}
 declare class Control {
     pilas: Pilas;
     teclaIzquierda: any;
@@ -17,6 +22,7 @@ declare class Pilas {
     game: Phaser.Game;
     log: Log;
     control: Control;
+    actores: Actores;
     constructor();
     obtener_entidades(): any;
     _conectarAtajosDeTeclado(): void;
@@ -27,6 +33,8 @@ declare class Pilas {
     _preload(): void;
     _create(): void;
     emitir_mensaje_al_editor(nombre: any, datos: any): void;
+    obtener_actores(): any[];
+    obtener_cantidad_de_actores(): number;
 }
 declare var pilas: Pilas;
 declare class Actor {

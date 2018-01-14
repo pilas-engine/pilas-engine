@@ -28,7 +28,12 @@ class EstadoEjecucion extends Estado {
   obtenerCodigoDeExportacion(codigo) {
     const re_creacion_de_clase = /var (.*) \= \/\*\* @class/g;
     const re_solo_clase = /var\ (\w+)/;
-    let lista_de_clases = codigo.match(re_creacion_de_clase).map(e => e.match(re_solo_clase)[1]);
+    let lista_de_clases = [];
+
+    if (codigo.match(re_creacion_de_clase)) {
+      lista_de_clases = codigo.match(re_creacion_de_clase).map(e => e.match(re_solo_clase)[1]);
+    }
+
     let diccionario = {};
 
     for (let i = 0; i < lista_de_clases.length; i++) {
@@ -54,6 +59,8 @@ class EstadoEjecucion extends Estado {
     } catch (e) {
       this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
     }
+
+    this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion");
   }
 
   crear_actores_desde_entidades() {

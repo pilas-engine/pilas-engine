@@ -17,12 +17,10 @@ export default Ember.Component.extend({
 
     iframe.onclick = () => {
       this.hacerFoco();
-      console.log("foco");
     };
 
     iframe.contentWindow.click = () => {
       this.hacerFoco();
-      console.log("foco");
     };
 
     iframe.onload = () => {
@@ -43,64 +41,67 @@ export default Ember.Component.extend({
 
       window.addEventListener("message", this.get("funcionParaAtenderMensajes"), false);
 
-      this.get("bus").on("cargarEscena", this, "alCargarEscenaDesdeElEditor");
-      this.get("bus").on("ejecutarEscena", this, "alTenerQueEjecutarEscena");
-      this.get("bus").on("pausarEscena", this, "alTenerQuePausarLaEscena");
-      this.get("bus").on("cambiarPosicionDesdeElEditor", this, "alTenerQueCambiarLaPosicionDesdeElEditor");
-      this.get("bus").on("hacerFocoEnPilas", this, "hacerFoco");
+      this.get("bus").on("cargarEscena", this, "cargarEscena");
+      this.get("bus").on("finalizaCarga", this, "finalizaCarga");
+      this.get("bus").on("ejecutarEscena", this, "ejecutarEscena");
+      this.get("bus").on("pausarEscena", this, "pausarEscena");
+      this.get("bus").on("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
+      this.get("bus").on("hacerFocoEnPilas", this, "hacerFocoEnPilas");
     };
   },
 
   willDestroyElement() {
     window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
 
-    this.get("bus").off("cargarEscena", this, "alCargarEscenaDesdeElEditor");
-    this.get("bus").off("ejecutarEscena", this, "alTenerQueEjecutarEscena");
-    this.get("bus").off("pausarEscena", this, "alTenerQuePausarLaEscena");
-    this.get("bus").off("cambiarPosicionDesdeElEditor", this, "alTenerQueCambiarLaPosicionDesdeElEditor");
-    this.get("bus").off("hacerFocoEnPilas", this, "hacerFoco");
+    this.get("bus").off("cargarEscena", this, "cargarEscena");
+    this.get("bus").off("finalizaCarga", this, "finalizaCarga");
+    this.get("bus").off("ejecutarEscena", this, "ejecutarEscena");
+    this.get("bus").off("pausarEscena", this, "pausarEscena");
+    this.get("bus").off("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
+    this.get("bus").off("hacerFocoEnPilas", this, "hacerFocoEnPilas");
   },
 
-  alCargarEscenaDesdeElEditor({ escena }) {
+  cargarEscena({ escena }) {
     let data = {
       tipo: "define_escena",
       nombre: "editorState",
       escena: escena
     };
 
-    this.set("cargando", false);
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  alTenerQueEjecutarEscena({ escena, codigo }) {
+  ejecutarEscena({ escena, codigo }) {
     let data = {
       tipo: "ejecutar_escena",
-      //nombre: "editorState",
       escena: escena,
-      codigo: codigo.codigo
+      codigo: codigo
     };
 
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  alTenerQuePausarLaEscena({ escena }) {
+  finalizaCarga() {
+    this.set("cargando", false);
+  },
+
+  pausarEscena({ escena }) {
     let data = {
       tipo: "pausar_escena",
-      //nombre: "pausaState",
       escena: escena
     };
 
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  hacerFoco() {
+  hacerFocoEnPilas() {
     let iframe = this.$("iframe")[0];
     setTimeout(function() {
       iframe.contentWindow.focus();
     }, 10);
   },
 
-  alTenerQueCambiarLaPosicionDesdeElEditor({ posicion }) {
+  cambiarPosicionDesdeElEditor({ posicion }) {
     let data = {
       tipo: "cambiar_posicion",
       posicion: posicion
@@ -114,15 +115,8 @@ export default Ember.Component.extend({
       return;
     }
 
-    /*
-    if (e.data.tipo === "movimiento_del_mouse") {
-      this.set("mouse_x", e.data.x);
-      this.set("mouse_y", e.data.y);
-    }
-    */
-
     if (e.data.tipo === "finaliza_carga_de_recursos") {
-      this.get("bus").trigger("finalizaCarga");
+      this.get("bus").trigger("finalizaCarga", contexto.pilas);
     }
 
     if (e.data.tipo === "termina_de_mover_un_actor") {
@@ -143,6 +137,10 @@ export default Ember.Component.extend({
 
     if (e.data.tipo === "error_de_ejecucion") {
       this.get("bus").trigger("error", e.data);
+    }
+
+    if (e.data.tipo === "termina_de_iniciar_ejecucion") {
+      this.get("bus").trigger("cuandoTerminaDeIniciarEjecucion", contexto.pilas);
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {

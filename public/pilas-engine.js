@@ -1,3 +1,26 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var Actores = (function () {
+    function Actores(pilas) {
+        this.pilas = pilas;
+    }
+    Actores.prototype.Caja = function (x, y) {
+        console.log("Creando caja!");
+        var actor = new Caja(this.pilas, x, y, "caja");
+        this.pilas.game.world.add(actor.sprite);
+        actor.sprite["actor"] = actor;
+        return actor;
+    };
+    return Actores;
+}());
 var Control = (function () {
     function Control(pilas) {
         this.pilas = pilas;
@@ -142,14 +165,21 @@ var Pilas = (function () {
         this.game.state.add("estadoEjecucion", EstadoEjecucion);
         this.game.state.add("estadoPausa", EstadoPausa);
         this.game.scale.trackParentInterval = 1;
-        this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
         this._conectarAtajosDeTeclado();
         this.control = new Control(this);
+        this.actores = new Actores(this);
+        this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
     };
     Pilas.prototype.emitir_mensaje_al_editor = function (nombre, datos) {
         datos = datos || {};
         datos.tipo = nombre;
         window.parent.postMessage(datos, HOST);
+    };
+    Pilas.prototype.obtener_actores = function () {
+        return pilas.game.world.children.map(function (s) { return s.actor; });
+    };
+    Pilas.prototype.obtener_cantidad_de_actores = function () {
+        return this.obtener_actores().length;
     };
     return Pilas;
 }());
@@ -185,16 +215,6 @@ var Actor = (function () {
     };
     return Actor;
 }());
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Caja = (function (_super) {
     __extends(Caja, _super);
     function Caja() {
@@ -387,7 +407,10 @@ var EstadoEjecucion = (function (_super) {
     EstadoEjecucion.prototype.obtenerCodigoDeExportacion = function (codigo) {
         var re_creacion_de_clase = /var (.*) \= \/\*\* @class/g;
         var re_solo_clase = /var\ (\w+)/;
-        var lista_de_clases = codigo.match(re_creacion_de_clase).map(function (e) { return e.match(re_solo_clase)[1]; });
+        var lista_de_clases = [];
+        if (codigo.match(re_creacion_de_clase)) {
+            lista_de_clases = codigo.match(re_creacion_de_clase).map(function (e) { return e.match(re_solo_clase)[1]; });
+        }
         var diccionario = {};
         for (var i = 0; i < lista_de_clases.length; i++) {
             var item = lista_de_clases[i];
@@ -408,6 +431,7 @@ var EstadoEjecucion = (function (_super) {
         catch (e) {
             this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
         }
+        this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion");
     };
     EstadoEjecucion.prototype.crear_actores_desde_entidades = function () {
         var _this = this;

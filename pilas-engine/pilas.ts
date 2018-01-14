@@ -8,6 +8,7 @@ class Pilas {
   game: Phaser.Game;
   log: Log;
   control: Control;
+  actores: Actores;
 
   constructor() {
     this.log = new Log(this);
@@ -137,22 +138,33 @@ class Pilas {
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.stage.disableVisibilityChange = true;
     this.game.renderer.renderSession.roundPixels = true;
+
     this.game.state.add("editorState", EstadoEditor);
     this.game.state.add("estadoEjecucion", EstadoEjecucion);
     this.game.state.add("estadoPausa", EstadoPausa);
 
     this.game.scale.trackParentInterval = 1;
 
-    this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
     this._conectarAtajosDeTeclado();
 
     this.control = new Control(this);
+    this.actores = new Actores(this);
+
+    this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
   }
 
   emitir_mensaje_al_editor(nombre, datos) {
     datos = datos || {};
     datos.tipo = nombre;
     window.parent.postMessage(datos, HOST);
+  }
+
+  obtener_actores() {
+    return pilas.game.world.children.map(s => s.actor);
+  }
+
+  obtener_cantidad_de_actores() {
+    return this.obtener_actores().length;
   }
 }
 

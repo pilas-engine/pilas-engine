@@ -157,11 +157,13 @@ export default Component.extend({
 
   actions: {
     agregarEscena(model) {
-      model.escenas.pushObject({
-        id: this.generarID(),
-        nombre: "demo",
-        actores: []
-      });
+      model.escenas.pushObject(
+        Ember.Object.create({
+          id: this.generarID(),
+          nombre: "demo",
+          actores: []
+        })
+      );
     },
     agregarActor(proyecto, actor) {
       let escena = this.obtenerEscenaActual();
@@ -220,9 +222,9 @@ export default Component.extend({
       let escenaComoJSON = JSON.parse(JSON.stringify(escena));
 
       let codigoTypescript = this.obtenerCodigoTypescript();
-      let codigoJavascript = this.get("compilador").compilar(codigoTypescript);
+      let resultado = this.get("compilador").compilar(codigoTypescript);
 
-      this.get("bus").trigger("ejecutarEscena", { codigo: codigoJavascript, escena: escenaComoJSON });
+      this.get("bus").trigger("ejecutarEscena", { codigo: resultado.codigo, escena: escenaComoJSON });
       this.get("foco").hacerFocoEnPilas();
       this.get("log").limpiar();
     },
