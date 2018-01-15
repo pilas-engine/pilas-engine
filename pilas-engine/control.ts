@@ -5,10 +5,10 @@ class Control {
   teclaArriba;
   teclaAbajo;
 
-  izquierda: Boolean;
-  derecha: Boolean;
-  arriba: Boolean;
-  abajo: Boolean;
+  izquierda: boolean;
+  derecha: boolean;
+  arriba: boolean;
+  abajo: boolean;
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
@@ -19,19 +19,19 @@ class Control {
     this.teclaAbajo = pilas.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
   }
 
-  get izquierda(): Boolean {
+  get izquierda(): boolean {
     return this.teclaIzquierda.isDown;
   }
 
-  get derecha(): Boolean {
+  get derecha(): boolean {
     return this.teclaDerecha.isDown;
   }
 
-  get arriba(): Boolean {
+  get arriba(): boolean {
     return this.teclaArriba.isDown;
   }
 
-  get abajo(): Boolean {
+  get abajo(): boolean {
     return this.teclaAbajo.isDown;
   }
 }

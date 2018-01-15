@@ -10,15 +10,15 @@ declare class Control {
     teclaDerecha: any;
     teclaArriba: any;
     teclaAbajo: any;
-    izquierda: Boolean;
-    derecha: Boolean;
-    arriba: Boolean;
-    abajo: Boolean;
+    izquierda: boolean;
+    derecha: boolean;
+    arriba: boolean;
+    abajo: boolean;
     constructor(pilas: Pilas);
-    readonly izquierda: Boolean;
-    readonly derecha: Boolean;
-    readonly arriba: Boolean;
-    readonly abajo: Boolean;
+    readonly izquierda: boolean;
+    readonly derecha: boolean;
+    readonly arriba: boolean;
+    readonly abajo: boolean;
 }
 declare class Log {
     pilas: Pilas;

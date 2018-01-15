@@ -7,11 +7,14 @@ export default Service.extend({
 
   iniciar() {
     let data = this.get("data");
-    let rootURL = config.rootURL;
 
     if (!data) {
-      return Ember.$.get(`${rootURL}pilas-engine.d.ts`).then(result => {
-        this.set("data", result);
+      return Ember.RSVP.hash({
+        pilas: this._obtener_archivo("pilas-engine.d.ts"),
+        typescript: this._obtener_archivo("phaser.d.ts"),
+        p2: this._obtener_archivo("p2.d.ts")
+      }).then(result => {
+        this.set("data", result.typescript + "\n\n" + result.p2 + "\n\n" + result.pilas);
         return result;
       });
     } else {
@@ -19,6 +22,10 @@ export default Service.extend({
         success(data);
       });
     }
+  },
+
+  _obtener_archivo(nombre) {
+    return Ember.$.get(`${config.rootURL}${nombre}`);
   },
 
   obtener() {

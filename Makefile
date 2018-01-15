@@ -214,6 +214,8 @@ actualizar_phaser:
 	@echo "${Y} - Copiar phaser al directorio public:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/phaser-ce/build/phaser.js public/${N}"
+	@echo "${Y}        cp node_modules/phaser-ce/typescript/p2.d.ts public/${N}"
+	@echo "${Y}        cp node_modules/phaser-ce/typescript/phaser.d.ts public/${N}"
 	@echo "${Y}${N}"
 
 actualizar_typescript:
