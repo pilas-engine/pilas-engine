@@ -166,6 +166,18 @@ class Pilas {
   obtener_cantidad_de_actores() {
     return this.obtener_actores().length;
   }
+
+  obtener_actores_en(x: Number, y: Number) {
+    let actores = this.obtener_actores();
+
+    // TODO: Pasar a coordenadas de phaser.
+    x = x + 300;
+    y = 300 - y;
+
+    return actores.filter(actor => {
+      return actor.sprite.getBounds().contains(x - actor.sprite.x, y - actor.sprite.y);
+    });
+  }
 }
 
 var pilas = new Pilas();

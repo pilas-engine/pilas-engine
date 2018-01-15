@@ -2,14 +2,17 @@ declare class Actores {
     pilas: Pilas;
     constructor(pilas: any);
     Caja(x: any, y: any): Caja;
+    Aceituna(x?: number, y?: number): Aceituna;
 }
 declare class Control {
     pilas: Pilas;
     teclaIzquierda: any;
     teclaDerecha: any;
+    izquierda: Boolean;
+    derecha: Boolean;
     constructor(pilas: Pilas);
-    readonly izquierda: any;
-    readonly derecha: any;
+    readonly izquierda: Boolean;
+    readonly derecha: Boolean;
 }
 declare class Log {
     pilas: Pilas;
@@ -35,13 +38,18 @@ declare class Pilas {
     emitir_mensaje_al_editor(nombre: any, datos: any): void;
     obtener_actores(): any[];
     obtener_cantidad_de_actores(): number;
+    obtener_actores_en(x: Number, y: Number): any[];
 }
 declare var pilas: Pilas;
 declare class Actor {
     tipo: String;
     sprite: Phaser.Sprite;
     pilas: Pilas;
-    constructor(pilas: any, x: any, y: any, imagen: any);
+    _rotacion: number;
+    x: number;
+    y: number;
+    rotacion: number;
+    constructor(pilas: any, x: any, y: any, imagen?: string);
     iniciar(): void;
     serializar(): {
         tipo: String;
@@ -53,6 +61,13 @@ declare class Actor {
         rotacion: number;
     };
     actualizar(): void;
+    imagen: string;
+    x: number;
+    y: number;
+    rotacion: number;
+}
+declare class Aceituna extends Actor {
+    iniciar(): void;
 }
 declare class Caja extends Actor {
     iniciar(): void;

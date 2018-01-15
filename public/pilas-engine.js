@@ -13,8 +13,15 @@ var Actores = (function () {
         this.pilas = pilas;
     }
     Actores.prototype.Caja = function (x, y) {
-        console.log("Creando caja!");
         var actor = new Caja(this.pilas, x, y, "caja");
+        this.pilas.game.world.add(actor.sprite);
+        actor.sprite["actor"] = actor;
+        return actor;
+    };
+    Actores.prototype.Aceituna = function (x, y) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        var actor = new Aceituna(this.pilas, x, y);
         this.pilas.game.world.add(actor.sprite);
         actor.sprite["actor"] = actor;
         return actor;
@@ -181,14 +188,27 @@ var Pilas = (function () {
     Pilas.prototype.obtener_cantidad_de_actores = function () {
         return this.obtener_actores().length;
     };
+    Pilas.prototype.obtener_actores_en = function (x, y) {
+        var actores = this.obtener_actores();
+        x = x + 300;
+        y = 300 - y;
+        return actores.filter(function (actor) {
+            return actor.sprite.getBounds().contains(x - actor.sprite.x, y - actor.sprite.y);
+        });
+    };
     return Pilas;
 }());
 var pilas = new Pilas();
 var Actor = (function () {
     function Actor(pilas, x, y, imagen) {
+        if (imagen === void 0) { imagen = "sin_imagen"; }
         var _this = this;
         this.pilas = pilas;
-        this.sprite = new Phaser.Sprite(pilas.game, x, y, imagen);
+        this.sprite = new Phaser.Sprite(pilas.game, 0, 0, imagen);
+        this.x = x;
+        this.y = y;
+        this.rotacion = 0;
+        this.iniciar();
         this.sprite.update = function () {
             try {
                 _this.actualizar();
@@ -211,10 +231,60 @@ var Actor = (function () {
         };
     };
     Actor.prototype.actualizar = function () {
-        this.sprite.x += 1;
     };
+    Object.defineProperty(Actor.prototype, "imagen", {
+        get: function () {
+            return this.sprite.frameName;
+        },
+        set: function (nombre) {
+            this.sprite.loadTexture(nombre);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Actor.prototype, "x", {
+        get: function () {
+            return this.sprite.x - 300;
+        },
+        set: function (x) {
+            this.sprite.x = x + 300;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Actor.prototype, "y", {
+        get: function () {
+            return this.sprite.y - 300;
+        },
+        set: function (y) {
+            this.sprite.y = 300 - y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Actor.prototype, "rotacion", {
+        get: function () {
+            return this._rotacion;
+        },
+        set: function (angulo) {
+            this._rotacion = angulo % 360;
+            this.sprite.angle = -this._rotacion;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Actor;
 }());
+var Aceituna = (function (_super) {
+    __extends(Aceituna, _super);
+    function Aceituna() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Aceituna.prototype.iniciar = function () {
+        this.imagen = "aceituna";
+    };
+    return Aceituna;
+}(Actor));
 var Caja = (function (_super) {
     __extends(Caja, _super);
     function Caja() {
