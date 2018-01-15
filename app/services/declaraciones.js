@@ -3,7 +3,7 @@ import Ember from "ember";
 import config from "pilas-engine/config/environment";
 
 export default Service.extend({
-  data: null,
+  data: "",
 
   iniciar() {
     let data = this.get("data");
@@ -14,8 +14,12 @@ export default Service.extend({
         typescript: this._obtener_archivo("phaser.d.ts"),
         p2: this._obtener_archivo("p2.d.ts")
       }).then(result => {
-        this.set("data", result.typescript + "\n\n" + result.p2 + "\n\n" + result.pilas);
-        return result;
+        if (!(this.get("isDestroyed") || this.get("isDestroying"))) {
+          this.set("data", [result.typescript, result.p2, result.pilas].join("\n"));
+          return result;
+        } else {
+          return result;
+        }
       });
     } else {
       return new Ember.RSVP.Promise(success => {

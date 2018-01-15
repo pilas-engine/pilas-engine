@@ -43,7 +43,6 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     const subscription = event => {
-
       if (event.origin != utils.HOST) {
         return;
       }
@@ -79,6 +78,9 @@ export default Ember.Component.extend({
   },
 
   iniciarEditor() {
+    if (this.get("isDestroyed") || this.get("isDestroying")) {
+      return;
+    }
     const frame = getFrameById(this.get("elementId"));
     const frameDoc = frame.document;
     this.set("frame", frame);
