@@ -1,3 +1,5 @@
+/// <reference path="estado.ts"/>
+
 class EstadoEjecucion extends Estado {
   entidades: any;
   sprites: any;
@@ -47,6 +49,7 @@ class EstadoEjecucion extends Estado {
   }
 
   create() {
+    super.create();
     this.game.stage.backgroundColor = "F99";
 
     this.game.physics.startSystem(Phaser.Physics.P2JS);
@@ -90,7 +93,7 @@ class EstadoEjecucion extends Estado {
     return actor;
   }
 
-  update() {
+  preRender() {
     try {
       this.guardar_foto_de_entidades();
     } catch (e) {

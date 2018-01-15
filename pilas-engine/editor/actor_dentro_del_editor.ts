@@ -1,13 +1,16 @@
-class Sprite extends Phaser.Sprite {
+class ActorDentroDelEditor extends Phaser.Sprite {
   rotateSpeed: number;
   shadow: Phaser.Sprite;
   id: number;
+  pilas: Pilas;
 
-  iniciar(entidad) {
+  iniciar(pilas, entidad) {
     this.key = entidad.imagen;
     this.id = entidad.id;
-    this.x = entidad.x;
-    this.y = entidad.y;
+    this.pilas = pilas;
+    let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
+    this.x = x;
+    this.y = y;
 
     this.pivot.x = entidad.centro_x;
     this.pivot.y = entidad.centro_y;
@@ -37,13 +40,15 @@ class Sprite extends Phaser.Sprite {
 
   cuando_comienza_a_mover() {
     if (this.al_comenzar_a_arrastrar) {
-      this.al_comenzar_a_arrastrar({ id: this.id, x: this.x, y: this.y });
+      let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.x, this.y);
+      this.al_comenzar_a_arrastrar({ id: this.id, x: x, y: y });
     }
   }
 
   cuando_termina_de_mover() {
     if (this.al_terminar_de_arrastrar) {
-      this.al_terminar_de_arrastrar({ id: this.id, x: this.x, y: this.y });
+      let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.x, this.y);
+      this.al_terminar_de_arrastrar({ id: this.id, x: x, y: y });
     }
   }
 

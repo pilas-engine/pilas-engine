@@ -10,6 +10,9 @@ class Pilas {
   control: Control;
   actores: Actores;
 
+  _ancho: number;
+  _alto: number;
+
   constructor() {
     this.log = new Log(this);
     this._agregarManejadorDeMensajes();
@@ -115,10 +118,10 @@ class Pilas {
     }
 
     if (e.data.tipo === "iniciar_pilas") {
-      var ancho = e.data.ancho;
-      var alto = e.data.alto;
+      this._ancho = +e.data.ancho;
+      this._alto = +e.data.alto;
 
-      this.game = new Phaser.Game(ancho, alto, Phaser.AUTO, "game", {
+      this.game = new Phaser.Game(this._ancho, this._alto, Phaser.AUTO, "game", {
         preload: e => this._preload(),
         create: e => this._create()
       });
@@ -160,23 +163,29 @@ class Pilas {
   }
 
   obtener_actores() {
-    return pilas.game.world.children.map(s => s["actor"]);
+    return pilas.game.world.children.map(s => s["actor"]).filter(s => s !== undefined);
   }
 
   obtener_cantidad_de_actores() {
     return this.obtener_actores().length;
   }
 
-  obtener_actores_en(x: Number, y: Number) {
+  obtener_actores_en(_x: number, _y: number) {
     let actores = this.obtener_actores();
 
-    // TODO: Pasar a coordenadas de phaser.
-    x = x + 300;
-    y = 300 - y;
+    let { x, y } = this.convertir_coordenada_de_pilas_a_phaser(_x, _y);
 
     return actores.filter(actor => {
       return actor.sprite.getBounds().contains(x - actor.sprite.x, y - actor.sprite.y);
     });
+  }
+
+  convertir_coordenada_de_pilas_a_phaser(x, y) {
+    return { x: x + this._ancho / 2, y: this._alto / 2 - y };
+  }
+
+  convertir_coordenada_de_phaser_a_pilas(x, y) {
+    return { x: x - this._ancho / 2, y: this._ancho / 2 - y };
   }
 }
 

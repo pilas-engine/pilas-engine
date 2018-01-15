@@ -8,7 +8,7 @@ moduleForComponent("pilas-celda-de-actor", "Integration | Component | pilas celd
 test("it renders", function(assert) {
   this.set("actor", {
     nombre: "aceituna",
-    imagen: "aceituna.png"
+    imagen: "aceituna"
   });
 
   this.set("f", function() {});

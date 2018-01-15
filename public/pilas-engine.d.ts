@@ -8,11 +8,17 @@ declare class Control {
     pilas: Pilas;
     teclaIzquierda: any;
     teclaDerecha: any;
+    teclaArriba: any;
+    teclaAbajo: any;
     izquierda: Boolean;
     derecha: Boolean;
+    arriba: Boolean;
+    abajo: Boolean;
     constructor(pilas: Pilas);
     readonly izquierda: Boolean;
     readonly derecha: Boolean;
+    readonly arriba: Boolean;
+    readonly abajo: Boolean;
 }
 declare class Log {
     pilas: Pilas;
@@ -26,6 +32,8 @@ declare class Pilas {
     log: Log;
     control: Control;
     actores: Actores;
+    _ancho: number;
+    _alto: number;
     constructor();
     obtener_entidades(): any;
     _conectarAtajosDeTeclado(): void;
@@ -38,7 +46,15 @@ declare class Pilas {
     emitir_mensaje_al_editor(nombre: any, datos: any): void;
     obtener_actores(): any[];
     obtener_cantidad_de_actores(): number;
-    obtener_actores_en(x: Number, y: Number): any[];
+    obtener_actores_en(_x: number, _y: number): any[];
+    convertir_coordenada_de_pilas_a_phaser(x: any, y: any): {
+        x: any;
+        y: number;
+    };
+    convertir_coordenada_de_phaser_a_pilas(x: any, y: any): {
+        x: number;
+        y: number;
+    };
 }
 declare var pilas: Pilas;
 declare class Actor {
@@ -75,11 +91,12 @@ declare class Caja extends Actor {
 declare class Pelota extends Actor {
     iniciar(): void;
 }
-declare class Sprite extends Phaser.Sprite {
+declare class ActorDentroDelEditor extends Phaser.Sprite {
     rotateSpeed: number;
     shadow: Phaser.Sprite;
     id: number;
-    iniciar(entidad: any): void;
+    pilas: Pilas;
+    iniciar(pilas: any, entidad: any): void;
     conectar_eventos_arrastrar_y_soltar(): void;
     al_terminar_de_arrastrar(a: any): void;
     al_comenzar_a_arrastrar(a: any): void;
@@ -90,17 +107,22 @@ declare class Sprite extends Phaser.Sprite {
     update(): void;
     crear_sombra(): void;
 }
-declare class SpriteSimple extends Phaser.Sprite {
+declare class ActorDentroDelModoPausa extends Phaser.Sprite {
 }
 declare class Estado extends Phaser.State {
     pilas: Pilas;
+    historia: any;
+    canvas: any;
     render(): void;
+    create(): void;
     actualizarPosicionDeFormaExterna(pos: any): void;
+    dibujarLineaDeCoordenadasRecorridas(): void;
 }
 declare class EstadoEditor extends Estado {
     entidades: any;
     sprites: any;
     texto: any;
+    historia: any;
     init(datos: any): void;
     cuando_termina_de_mover(a: any): void;
     cuando_comienza_a_mover(a: any): void;
@@ -121,7 +143,7 @@ declare class EstadoEjecucion extends Estado {
     create(): void;
     crear_actores_desde_entidades(): void;
     crear_actor(entidad: any): any;
-    update(): void;
+    preRender(): void;
     private guardar_foto_de_entidades();
 }
 declare class EstadoPausa extends Estado {
@@ -132,7 +154,6 @@ declare class EstadoPausa extends Estado {
     total: number;
     izquierda: any;
     derecha: any;
-    canvas: any;
     init(datos: any): void;
     cuando_cambia_posicion: any;
     create(): void;
@@ -141,7 +162,5 @@ declare class EstadoPausa extends Estado {
     update(): void;
     actualizarPosicionDeFormaExterna(posicion: any): void;
     private actualizar_texto();
-    crear_sprite_desde_entidad(entidad: any): SpriteSimple;
-    render(): void;
-    dibujarLineaDeCoordenadasRecorridas(): void;
+    crear_sprite_desde_entidad(entidad: any): ActorDentroDelModoPausa;
 }

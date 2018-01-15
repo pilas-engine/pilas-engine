@@ -10,8 +10,6 @@ class EstadoPausa extends Estado {
   izquierda: any;
   derecha: any;
 
-  canvas: any;
-
   init(datos) {
     this.pilas = datos.pilas;
     this.historia = datos.historia;
@@ -28,11 +26,11 @@ class EstadoPausa extends Estado {
   cuando_cambia_posicion: any;
 
   create() {
+    super.create();
     this.game.stage.backgroundColor = "555";
     this.crear_sprites_desde_historia(this.posicion);
     this.actualizar_texto();
 
-    this.canvas = this.game.add.graphics(0, 0);
     this.dibujarLineaDeCoordenadasRecorridas();
   }
 
@@ -82,6 +80,8 @@ class EstadoPausa extends Estado {
 
       this.actualizar_texto();
     }
+
+    this.pilas.game.world.bringToTop(this.canvas);
   }
 
   actualizarPosicionDeFormaExterna(posicion) {
@@ -101,27 +101,13 @@ class EstadoPausa extends Estado {
   }
 
   crear_sprite_desde_entidad(entidad) {
-    let sprite = new SpriteSimple(this.game, entidad.x, entidad.y, entidad.imagen);
-
+    let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
+    let sprite = new ActorDentroDelModoPausa(this.game, x, y, entidad.imagen);
     sprite.angle = entidad.rotacion;
     sprite.anchor.set(entidad.centro_x, entidad.centro_y);
     sprite["depurable"] = true;
 
     this.world.add(sprite);
     return sprite;
-  }
-
-  render() {
-    super.render();
-  }
-
-  dibujarLineaDeCoordenadasRecorridas() {
-    this.canvas.beginFill(0xffffff, 1);
-
-    this.historia.map(historia => {
-      historia.map(entidad => {
-        this.canvas.drawCircle(entidad.x, entidad.y, 1);
-      });
-    });
   }
 }

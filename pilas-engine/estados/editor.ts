@@ -4,6 +4,7 @@ class EstadoEditor extends Estado {
   entidades: any;
   sprites: any;
   texto: any;
+  historia: any;
 
   init(datos) {
     this.pilas = datos.pilas;
@@ -35,22 +36,13 @@ class EstadoEditor extends Estado {
     this.game.stage.backgroundColor = "5b5";
   }
 
-  /**
-   * Se encarga de mantener el cache de sprites acorde a
-   * la lista de entidades.
-   */
   update() {
-    // Las entidades se leen para generar el cache, pero
-    // también se actualiza en base a la posición de los sprites
-    // que el usuario puede mover por la pantalla.
-
     this.entidades = this.entidades.map(e => {
       var sprite = null;
 
-      // Si el sprite no tiene cache, se construye desde cero
       if (!this.sprites[e.id]) {
-        sprite = new Sprite(this.game, 0, 0, e.imagen);
-        sprite.iniciar(e);
+        sprite = new ActorDentroDelEditor(this.game, 0, 0, e.imagen);
+        sprite.iniciar(pilas, e);
 
         sprite.al_terminar_de_arrastrar = this.cuando_termina_de_mover;
         sprite.al_comenzar_a_arrastrar = this.cuando_comienza_a_mover;
@@ -61,10 +53,11 @@ class EstadoEditor extends Estado {
         sprite = this.sprites[e.id];
       }
 
-      // Una vez que el sprite existe, se toma su posición y se coloca
-      // en la lista de entidades.
-      e.x = sprite.x;
-      e.y = sprite.y;
+      let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(sprite.x, sprite.y);
+
+      e.x = x;
+      e.y = y;
+
       sprite.anchor.set(e.centro_x, e.centro_y);
 
       return e;
@@ -74,11 +67,16 @@ class EstadoEditor extends Estado {
   }
 
   actualizar_texto_con_posicion_del_mouse() {
-    let x = Math.round(this.input.mousePointer.x);
-    let y = Math.round(this.input.mousePointer.y);
+    let _x = Math.round(this.input.mousePointer.x);
+    let _y = Math.round(this.input.mousePointer.y);
+
+    let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y);
 
     if (x !== -1 && y !== -1) {
       this.texto.text = "  Mouse: (" + x + ", " + y + ") ";
     }
+
+    this.game.world.bringToTop(this.texto);
   }
+
 }

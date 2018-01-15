@@ -36,13 +36,13 @@ test("puede ingresar a la pantalla principal", async function(assert) {
     return esperar(0.01);
   }
 
-  for (let i = 140; i >= 0; i -= 5) {
+  for (let i = 140; i >= 0; i -= 2) {
     await cambiar_input(i);
   }
 
   await esperar(PAUSA / 2);
 
-  for (let i = 0; i <= 140; i += 5) {
+  for (let i = 0; i <= 140; i += 2) {
     await cambiar_input(i);
   }
 

@@ -96,6 +96,10 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         {
           tipo: "Caja",
           codigo: `class Caja extends Actor {
+            iniciar() {
+              this.sprite.game.physics.p2.enable([this.sprite], true);
+              this.sprite.body.static = false;
+            }
           }`
         },
         {
@@ -113,11 +117,13 @@ export default Ember.Controller.extend(queryParams.Mixin, {
 
               actualizar() {
                 if (pilas.control.izquierda) {
-                  this.x -= this.velocidad;
+                  this.x -= 5;
+                  this.rotacion += 10;
                 }
 
                 if (pilas.control.derecha) {
-                  this.x += this.velocidad;
+                  this.x += 5;
+                  this.rotacion -= 10;
                 }
               }
 
@@ -131,8 +137,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           actores: [
             {
               id: 1,
-              x: 300,
-              y: 200,
+              x: 200,
+              y: 100,
               centro_x: 0.5,
               centro_y: 0.5,
               tipo: "Pelota",
@@ -140,8 +146,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             },
             {
               id: 2,
-              x: 350,
-              y: 240,
+              x: 250,
+              y: 140,
               centro_x: 0.5,
               centro_y: 0.5,
               tipo: "Caja",
@@ -149,8 +155,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             },
             {
               id: 3,
-              x: 200,
-              y: 100,
+              x: 100,
+              y: 0,
               centro_x: 0.5,
               centro_y: 0.5,
               tipo: "ActorBasico",
@@ -158,8 +164,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             },
             {
               id: 4,
-              x: 100,
-              y: 140,
+              x: 0,
+              y: 40,
               centro_x: 0.5,
               centro_y: 0.5,
               tipo: "Aceituna",

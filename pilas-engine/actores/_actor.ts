@@ -30,8 +30,8 @@ class Actor {
   serializar() {
     return {
       tipo: this.tipo,
-      x: this.sprite.x,
-      y: this.sprite.y,
+      x: Math.round(this.x),
+      y: Math.round(this.y),
       centro_x: this.sprite.anchor.x,
       centro_y: this.sprite.anchor.y,
       imagen: this.sprite.key,
@@ -39,9 +39,7 @@ class Actor {
     };
   }
 
-  actualizar() {
-    //this.sprite.x += 1;
-  }
+  actualizar() {}
 
   get imagen(): string {
     return this.sprite.frameName;
@@ -51,24 +49,24 @@ class Actor {
     this.sprite.loadTexture(nombre);
   }
 
-  set x(x: number) {
-    // TODO: Pasar a coordenadas de phaser.
-    this.sprite.x = x + 300;
+  set x(_x: number) {
+    let { x, _ } = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0);
+    this.sprite.x = x;
   }
 
   get x() {
-    // TODO: Convertir desde coordenadas phaser.
-    return this.sprite.x - 300;
+    let { x, _ } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
+    return x;
   }
 
-  set y(y: number) {
-    // TODO: Pasar a coordenadas de phaser.
-    this.sprite.y = 300 - y;
+  set y(_y: number) {
+    let { _, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y);
+    this.sprite.y = y;
   }
 
   get y() {
-    // TODO: Convertir desde coordenadas phaser.
-    return this.sprite.y - 300;
+    let { _, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
+    return y;
   }
 
   set rotacion(angulo: number) {
