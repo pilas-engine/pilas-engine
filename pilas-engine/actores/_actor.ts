@@ -50,22 +50,22 @@ class Actor {
   }
 
   set x(_x: number) {
-    let { x, _ } = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0);
+    let { x } = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0);
     this.sprite.x = x;
   }
 
   get x() {
-    let { x, _ } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
+    let { x } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
     return x;
   }
 
   set y(_y: number) {
-    let { _, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y);
+    let { y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y);
     this.sprite.y = y;
   }
 
   get y() {
-    let { _, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
+    let { y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
     return y;
   }
 

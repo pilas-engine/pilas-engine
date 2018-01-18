@@ -10,6 +10,10 @@
   font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
+.menlo {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
 .verdana {
   font-family: "Verdana";
 }
@@ -67,4 +71,8 @@
 
 body {
   overflow: hidden;
+}
+
+.no-outline:focus {
+  outline: none;
 }

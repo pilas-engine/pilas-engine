@@ -1,11 +1,10 @@
-{{#each log.items as |item|}}
-  <div class="f6 {{if (eq item.tipo 'error') 'red'}}">{{item.tipo}} - {{item.mensaje}}
+<div class="h4 menlo bl br bb b--gray {{if mostrar 'flex flex-column' 'dn'}}">
 
-      <div class="pl3 truncate w4">
-        {{item.detalle}}
-      </div>
+  {{pilas-contenido-de-log log=log}}
 
+  <div class="w-100 flex flex-row bt b--light-silver">
+    <div class='dib blue pa1 unselectable'>→</div>
+    {{input value=valor class="flex1 menlo pa1 bn no-outline" enter="cuandoPulsaEnter"}}
   </div>
-{{else}}
 
-{{/each}}
+</div>

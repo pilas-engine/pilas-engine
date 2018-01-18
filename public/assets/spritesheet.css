@@ -68,35 +68,35 @@
 	background-size: 270px 224px;
 }
 
+.settings {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -237px -149px;
+	background-size: 270px 224px;
+}
+
 .volver {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -142px -198px;
+    background: url("spritesheet.png") -198px -198px;
 	background-size: 270px 224px;
 }
 
-.info_squared {
-    width: 25px;
-    height: 25px;
-    background: url("spritesheet.png") -134px -76px;
-	background-size: 270px 224px;
-}
-
-.manual {
+.add_folder {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -76px;
 	background-size: 270px 224px;
 }
 
-.settings {
+.info_squared {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -134px -105px;
 	background-size: 270px 224px;
 }
 
-.add_folder {
+.manual {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -105px;
@@ -110,38 +110,52 @@
 	background-size: 270px 224px;
 }
 
-.ejecutar {
+.info {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -30px -198px;
 	background-size: 270px 224px;
 }
 
-.detener {
+.error {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -58px -198px;
 	background-size: 270px 224px;
 }
 
-.demo {
+.ejecutar {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -86px -198px;
 	background-size: 270px 224px;
 }
 
-.arduino {
+.detener {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -114px -198px;
 	background-size: 270px 224px;
 }
 
+.demo {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -142px -198px;
+	background-size: 270px 224px;
+}
+
+.arduino {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -170px -198px;
+	background-size: 270px 224px;
+}
+
 .api {
     width: 25px;
     height: 25px;
-    background: url("spritesheet.png") -237px -149px;
+    background: url("spritesheet.png") -134px -76px;
 	background-size: 270px 224px;
 }
 

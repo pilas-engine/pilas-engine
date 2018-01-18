@@ -51,7 +51,7 @@ export default Component.extend({
       this.send("seleccionarActor", this.get("actorSeleccionado"));
     }
 
-    document.addEventListener("keydown", this.cuandoIntentaAlternarEjecucion.bind(this));
+    document.addEventListener("keydown", this.alPulsarTecla.bind(this));
 
     this.get("foco").conectarFunciones(
       () => {
@@ -63,15 +63,11 @@ export default Component.extend({
     );
   },
 
-  cuandoIntentaAlternarEjecucion(event) {
-    if (event.key === "r") {
-      this.send("alternarEstadoDeEjecucion");
-    }
-  },
+  alPulsarTecla(/*evento*/) {},
 
   willDestroyElement() {
     this.desconectarEventos();
-    document.removeEventListener("keydown", this.cuandoIntentaAlternarEjecucion);
+    document.removeEventListener("keydown", this.alPulsarTecla);
     this.get("foco").limpiar();
   },
 
@@ -95,8 +91,18 @@ export default Component.extend({
   cuandoTerminaDeMoverUnActorDesdePilas(datos) {
     let escena = this.obtenerEscenaActual();
     let actor = escena.actores.findBy("id", datos.id);
+
     actor.set("x", datos.x);
     actor.set("y", datos.y);
+
+    this.get("log").grupo(
+      "Cambió la posición del actor desde el editor:",
+      `
+      let actor = pilas.obtener_actor(${datos.id});
+      actor.x = ${Math.round(datos.x)};
+      actor.y = ${Math.round(datos.y)};
+    `
+    );
   },
 
   cuandoComienzaAMovertUnActorDesdePilas(datos) {
@@ -227,16 +233,21 @@ export default Component.extend({
       this.get("bus").trigger("ejecutarEscena", { codigo: resultado.codigo, escena: escenaComoJSON });
       this.get("foco").hacerFocoEnPilas();
       this.get("log").limpiar();
+      this.get("log").info("Ingresando en modo ejecución");
     },
     detener() {
       this.mostrarEscenaActualSobrePilas();
       this.set("estado", this.get("estado").detener());
       this.get("foco").hacerFocoEnElEditor();
+      this.get("log").limpiar();
+      this.get("log").info("Ingreando al modo edición");
     },
     pausar() {
       this.set("estado", this.get("estado").pausar());
       this.get("bus").trigger("pausarEscena", {});
       this.get("foco").hacerFocoEnPilas();
+      this.get("log").limpiar();
+      this.get("log").info("Ingresando en modo pausa");
     },
     cambiarPosicion(valorNuevo) {
       this.set("posicion", valorNuevo);

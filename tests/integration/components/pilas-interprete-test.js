@@ -7,10 +7,5 @@ moduleForComponent("pilas-interprete", "Integration | Component | pilas interpre
 
 test("it renders", function(assert) {
   this.render(hbs`{{pilas-interprete}}`);
-  assert.equal(
-    this.$()
-      .text()
-      .trim(),
-    ""
-  );
+  assert.ok(this.$().text());
 });

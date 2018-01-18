@@ -264,11 +264,11 @@ var Actor = (function () {
     });
     Object.defineProperty(Actor.prototype, "x", {
         get: function () {
-            var _a = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0), x = _a.x, _ = _a._;
+            var x = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
             return x;
         },
         set: function (_x) {
-            var _a = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0), x = _a.x, _ = _a._;
+            var x = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0).x;
             this.sprite.x = x;
         },
         enumerable: true,
@@ -276,11 +276,11 @@ var Actor = (function () {
     });
     Object.defineProperty(Actor.prototype, "y", {
         get: function () {
-            var _a = this.pilas.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y), _ = _a._, y = _a.y;
+            var y = this.pilas.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y).y;
             return y;
         },
         set: function (_y) {
-            var _a = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y), _ = _a._, y = _a.y;
+            var y = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y).y;
             this.sprite.y = y;
         },
         enumerable: true,

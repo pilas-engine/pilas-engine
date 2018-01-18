@@ -88,9 +88,7 @@
                   {{pilas-interruptor texto="Intérprete" variable=mostrarInterprete}}
                 </div>
 
-                <div class="h4 pa2 bl br bb b--gray {{if mostrarInterprete '' 'dn'}}">
-                  {{pilas-interprete log=log}}
-                </div>
+                {{pilas-interprete log=log mostrar=mostrarInterprete}}
 
       </div>
 

@@ -1,0 +1,34 @@
+{{#each log.items as |item|}}
+  <div class="f6 cf b--light-gray bb pa1 {{if (eq item.tipo 'error') 'red'}}">
+
+
+    {{#if (eq item.tipo 'grupo')}}
+
+      <div class="gray unselectable">{{pilas-icono icono='info'}}{{item.titulo}}</div>
+
+      {{#each item.lineas as |linea|}}
+        <div class="truncate pl3">
+          {{linea}}
+        </div>
+      {{/each}}
+
+    {{else}}
+
+      {{pilas-icono icono=item.tipo}} {{item.mensaje}}
+
+        <div class="dib pl3 truncate w4">
+          {{item.detalle}}
+        </div>
+
+
+
+    {{/if}}
+
+    <div class="fr f7 silver unselectable">
+      {{item.tiempo}}
+    </div>
+
+  </div>
+{{/each}}
+
+{{yield}}
