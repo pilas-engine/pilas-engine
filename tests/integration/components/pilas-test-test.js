@@ -11,6 +11,6 @@ test("it renders", function(assert) {
     this.$()
       .text()
       .trim(),
-    ""
+    "Iniciando: 0 %"
   );
 });

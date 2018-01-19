@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   cargando: true,
   mantenerFoco: false,
   classNames: ["flex1", "overflow-hidden"],
+  porcentajeDeCarga: 0,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
@@ -47,6 +48,7 @@ export default Ember.Component.extend({
       this.get("bus").on("pausarEscena", this, "pausarEscena");
       this.get("bus").on("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
       this.get("bus").on("hacerFocoEnPilas", this, "hacerFocoEnPilas");
+      this.get("bus").on("progresoDeCarga", this, "progresoDeCarga");
     };
   },
 
@@ -59,6 +61,7 @@ export default Ember.Component.extend({
     this.get("bus").off("pausarEscena", this, "pausarEscena");
     this.get("bus").off("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
     this.get("bus").off("hacerFocoEnPilas", this, "hacerFocoEnPilas");
+    this.get("bus").off("progresoDeCarga", this, "progresoDeCarga");
   },
 
   cargarEscena({ escena }) {
@@ -101,6 +104,10 @@ export default Ember.Component.extend({
     }, 10);
   },
 
+  progresoDeCarga({ progreso }) {
+    this.set("porcentajeDeCarga", progreso);
+  },
+
   cambiarPosicionDesdeElEditor({ posicion }) {
     let data = {
       tipo: "cambiar_posicion",
@@ -117,6 +124,10 @@ export default Ember.Component.extend({
 
     if (e.data.tipo === "finaliza_carga_de_recursos") {
       this.get("bus").trigger("finalizaCarga", contexto.pilas);
+    }
+
+    if (e.data.tipo === "progreso_de_carga") {
+      this.get("bus").trigger("progresoDeCarga", e.data);
     }
 
     if (e.data.tipo === "termina_de_mover_un_actor") {

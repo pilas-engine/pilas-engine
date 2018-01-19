@@ -128,20 +128,39 @@ class Pilas {
     }
   }
 
-  _preload() {
-    this.game.load.image("ember", "imagenes/ember.png");
-    this.game.load.image("pelota", "imagenes/pelota.png");
-    this.game.load.image("logo", "imagenes/logo.png");
-    this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
-    this.game.load.image("caja", "imagenes/caja.png");
-    this.game.load.image("aceituna", "imagenes/aceituna.png");
-  }
+  _preload() {}
 
   _create() {
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.stage.disableVisibilityChange = true;
     this.game.renderer.renderSession.roundPixels = true;
 
+    this.game.load.onLoadStart.add(this._cuando_comienza_a_cargar, this);
+    this.game.load.onFileComplete.add(this._cuando_carga_archivo, this);
+    this.game.load.onLoadComplete.add(this._cuando_termina_de_cargar, this);
+
+    this.start();
+  }
+
+  start() {
+    this.game.load.image("ember", "imagenes/ember.png");
+    this.game.load.image("pelota", "imagenes/pelota.png");
+    this.game.load.image("logo", "imagenes/logo.png");
+    this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
+    this.game.load.image("caja", "imagenes/caja.png");
+    this.game.load.image("aceituna", "imagenes/aceituna.png");
+    this.game.load.start();
+  }
+
+  _cuando_comienza_a_cargar() {
+    console.log("comienza a cargar");
+  }
+
+  _cuando_carga_archivo(progreso) {
+    this.emitir_mensaje_al_editor("progreso_de_carga", { progreso });
+  }
+
+  _cuando_termina_de_cargar() {
     this.game.state.add("editorState", EstadoEditor);
     this.game.state.add("estadoEjecucion", EstadoEjecucion);
     this.game.state.add("estadoPausa", EstadoPausa);

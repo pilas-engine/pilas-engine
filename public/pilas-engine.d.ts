@@ -43,6 +43,10 @@ declare class Pilas {
     _atenderMensaje(e: any): void;
     _preload(): void;
     _create(): void;
+    start(): void;
+    _cuando_comienza_a_cargar(): void;
+    _cuando_carga_archivo(progreso: any): void;
+    _cuando_termina_de_cargar(): void;
     emitir_mensaje_al_editor(nombre: any, datos: any): void;
     obtener_actores(): any[];
     obtener_cantidad_de_actores(): number;
