@@ -191,9 +191,7 @@ var Pilas = (function () {
         this.game.load.image("aceituna", "imagenes/aceituna.png");
         this.game.load.start();
     };
-    Pilas.prototype._cuando_comienza_a_cargar = function () {
-        console.log("comienza a cargar");
-    };
+    Pilas.prototype._cuando_comienza_a_cargar = function () { };
     Pilas.prototype._cuando_carga_archivo = function (progreso) {
         this.emitir_mensaje_al_editor("progreso_de_carga", { progreso: progreso });
     };

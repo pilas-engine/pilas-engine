@@ -152,9 +152,7 @@ class Pilas {
     this.game.load.start();
   }
 
-  _cuando_comienza_a_cargar() {
-    console.log("comienza a cargar");
-  }
+  _cuando_comienza_a_cargar() {}
 
   _cuando_carga_archivo(progreso) {
     this.emitir_mensaje_al_editor("progreso_de_carga", { progreso });
