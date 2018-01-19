@@ -10,13 +10,23 @@ export default Service.extend({
   tareaConseguirActores: task(function*() {
     yield timeout(500);
 
-    let actores = yield Ember.$.ajax({
+    let metadata = yield Ember.$.ajax({
       mimeType: "application/json",
       dataType: "json",
       url: `${config.rootURL}actores/actores.json`
     });
 
-    return actores;
+    for (let i = 0; i < metadata.actores.length; i++) {
+      let actor = metadata.actores[i];
+
+      let data = yield Ember.$.ajax({
+        url: `${config.rootURL}actores/${actor.archivo}`
+      });
+
+      actor.codigo = data;
+    }
+
+    return metadata;
   }).drop(),
 
   iniciar() {

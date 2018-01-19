@@ -3,27 +3,32 @@
     {
       "nombre": "Aceituna",
       "tipo": "Aceituna",
-      "imagen": "aceituna"
+      "imagen": "aceituna",
+      "archivo": "aceituna.ts"
     },
     {
       "nombre": "Caja",
       "tipo": "Caja",
-      "imagen": "caja"
+      "imagen": "caja",
+      "archivo": "caja.ts"
     },
     {
       "nombre": "Ember",
       "tipo": "ActorBasico",
-      "imagen": "ember"
+      "imagen": "ember",
+      "archivo": "_actor.ts"
     },
     {
       "nombre": "Logo",
       "tipo": "ActorBasico",
-      "imagen": "logo"
+      "imagen": "logo",
+      "archivo": "_actor.ts"
     },
     {
       "nombre": "Pelota",
       "tipo": "Pelota",
-      "imagen": "pelota"
+      "imagen": "pelota",
+      "archivo": "_actor.ts"
     }
   ]
 }
