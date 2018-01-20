@@ -50,3 +50,4 @@ make binarios
 
 Los binarios de serialport corresponden a la versión de electron v53, y se
 obtuvieron desde: https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/tag/v5.1.0-beta5
+
