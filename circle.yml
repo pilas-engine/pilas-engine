@@ -4,17 +4,17 @@ machine:
 dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install -y --only-upgrade google-chrome-stable
-    - go get github.com/tcnksm/ghr
-    - echo "Instalando wine ..."
-    - sudo dpkg --add-architecture i386
-    - sudo add-apt-repository -y ppa:ubuntu-wine/ppa
-    - sudo apt-get update
-    - echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-    - sudo apt-get install -y wine
 deployment:
   release:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
+      - go get github.com/tcnksm/ghr
+      - echo "Instalando wine ..."
+      - sudo dpkg --add-architecture i386
+      - sudo add-apt-repository -y ppa:ubuntu-wine/ppa
+      - sudo apt-get update
+      - echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+      - sudo apt-get install -y wine
       - ember surge
       - make binarios
       - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
