@@ -18,36 +18,11 @@ export default Component.extend({
   historiaMinimo: 0,
   historiaMaximo: 10,
 
-  mapaDeEventos: [
-    {
-      evento: "cambiaEstado",
-      metodo: "cuandoCambiaDeEstado"
-    },
-    {
-      evento: "finalizaCarga",
-      metodo: "cuandoFinalizaCargaDePilas"
-    },
-    {
-      evento: "moverActor",
-      metodo: "cuandoTerminaDeMoverUnActorDesdePilas"
-    },
-    {
-      evento: "comienzaAMoverActor",
-      metodo: "cuandoComienzaAMovertUnActorDesdePilas"
-    },
-    {
-      evento: "iniciaModoDepuracionEnPausa",
-      metodo: "cuandoComenzaADepurarEnModoPausa"
-    },
-    {
-      evento: "cuandoCambiaPosicionDentroDelModoPausa",
-      metodo: "cuandoCambiaPosicionDentroDelModoPausa"
-    }
-  ],
+  lista_de_eventos: ["finalizaCarga", "moverActor", "comienzaAMoverActor", "iniciaModoDepuracionEnPausa", "cuandoCambiaPosicionDentroDelModoPausa"],
 
   didInsertElement() {
     this.set("estado", new estados.ModoCargando());
-    this.conectarEventos();
+    this.conectar_eventos();
 
     if (this.get("actorSeleccionado") != -1) {
       this.send("seleccionarActor", this.get("actorSeleccionado"));
@@ -68,29 +43,29 @@ export default Component.extend({
   alPulsarTecla(/*evento*/) {},
 
   willDestroyElement() {
-    this.desconectarEventos();
+    this.desconectar_eventos();
     document.removeEventListener("keydown", this.alPulsarTecla);
     this.get("foco").limpiar();
   },
 
-  conectarEventos() {
-    this.get("mapaDeEventos").map(({ evento, metodo }) => {
-      this.get("bus").on(evento, this, metodo);
+  conectar_eventos() {
+    this.get("lista_de_eventos").map(evento => {
+      this.get("bus").on(evento, this, evento);
     });
   },
 
-  desconectarEventos() {
-    this.get("mapaDeEventos").map(({ evento, metodo }) => {
-      this.get("bus").off(evento, this, metodo);
+  desconectar_eventos() {
+    this.get("lista_de_eventos").map(evento => {
+      this.get("bus").off(evento, this, evento);
     });
   },
 
-  cuandoFinalizaCargaDePilas() {
+  finalizaCarga() {
     this.mostrarEscenaActualSobrePilas();
     this.set("estado", this.get("estado").cuandoTerminoDeCargarPilas());
   },
 
-  cuandoTerminaDeMoverUnActorDesdePilas(datos) {
+  moverActor(datos) {
     let escena = this.obtenerEscenaActual();
     let actor = escena.actores.findBy("id", datos.id);
 
@@ -107,11 +82,11 @@ export default Component.extend({
     );
   },
 
-  cuandoComienzaAMovertUnActorDesdePilas(datos) {
+  comienzaAMoverActor(datos) {
     this.send("seleccionarActor", datos.id);
   },
 
-  cuandoComenzaADepurarEnModoPausa(datos) {
+  iniciaModoDepuracionEnPausa(datos) {
     this.set("historiaPosicion", datos.posicion);
     this.set("historiaMinimo", datos.minimo);
     this.set("historiaMaximo", datos.maximo);
