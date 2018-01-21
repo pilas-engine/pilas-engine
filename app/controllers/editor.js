@@ -86,7 +86,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       tiposDeActores: [
         {
           tipo: "Pelota",
-          codigo: `class Pelota  extends Actor{
+          codigo: `class Pelota  extends ActorBase {
 
             iniciar() {
             }
@@ -95,7 +95,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         },
         {
           tipo: "Caja",
-          codigo: `class Caja extends Actor {
+          codigo: `class Caja extends ActorBase {
             iniciar() {
               this.sprite.game.physics.p2.enable([this.sprite], true);
               this.sprite.body.static = false;
@@ -103,14 +103,14 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           }`
         },
         {
-          tipo: "ActorBasico",
-          codigo: `class ActorBasico extends Actor {
+          tipo: "Actor",
+          codigo: `class Actor extends ActorBase {
 
           }`
         },
         {
           tipo: "Aceituna",
-          codigo: `class Aceituna extends Actor {
+          codigo: `class Aceituna extends ActorBase {
 
               iniciar() {
               }
@@ -159,7 +159,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 0,
               centro_x: 0.5,
               centro_y: 0.5,
-              tipo: "ActorBasico",
+              tipo: "Actor",
               imagen: "sin_imagen"
             },
             {

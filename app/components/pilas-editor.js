@@ -1,6 +1,8 @@
 import Component from "@ember/component";
 import Ember from "ember";
 import estados from "../estados/estados-de-pilas-editor";
+import aplicarNombre from "../utils/aplicar-nombre";
+import obtenerNombreSinRepetir from "../utils/obtener-nombre-sin-repetir";
 
 export default Component.extend({
   bus: Ember.inject.service(),
@@ -132,6 +134,17 @@ export default Component.extend({
     return proyecto.escenas.findBy("id", indiceEscenaActual);
   },
 
+  registrar_codigo(tipo, codigo) {
+    let proyecto = this.get("proyecto");
+
+    proyecto.tiposDeActores.pushObject(
+      Ember.Object.create({
+        tipo: tipo,
+        codigo: aplicarNombre(tipo, codigo)
+      })
+    );
+  },
+
   obtenerCodigoTypescript() {
     let proyecto = this.get("proyecto");
     return proyecto.tiposDeActores.map(e => e.codigo).join("\n");
@@ -161,6 +174,10 @@ export default Component.extend({
     }
   },
 
+  obtener_nombres_de_actores(escena) {
+    return escena.actores.map(e => e.tipo);
+  },
+
   actions: {
     agregarEscena(model) {
       model.escenas.pushObject(
@@ -173,7 +190,9 @@ export default Component.extend({
     },
     agregarActor(proyecto, actor) {
       let escena = this.obtenerEscenaActual();
+      let nombres = this.obtener_nombres_de_actores(escena);
       let id = this.generarID();
+      let nombre = obtenerNombreSinRepetir(nombres, actor.tipo);
 
       escena.actores.pushObject(
         Ember.Object.create({
@@ -182,10 +201,12 @@ export default Component.extend({
           y: 100,
           centro_x: 0.5,
           centro_y: 0.5,
-          tipo: actor.tipo,
+          tipo: nombre,
           imagen: actor.imagen
         })
       );
+
+      this.registrar_codigo(nombre, actor.codigo);
 
       this.send("seleccionarActor", id);
       this.set("mostrarModalCreacionDeActor", false);

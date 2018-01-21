@@ -61,7 +61,7 @@ declare class Pilas {
     };
 }
 declare var pilas: Pilas;
-declare class Actor {
+declare class ActorBase {
     tipo: String;
     sprite: Phaser.Sprite;
     pilas: Pilas;
@@ -85,6 +85,10 @@ declare class Actor {
     x: number;
     y: number;
     rotacion: number;
+}
+declare class Actor extends ActorBase {
+    iniciar(): void;
+    actualizar(): void;
 }
 declare class Aceituna extends Actor {
     iniciar(): void;

@@ -232,8 +232,8 @@ var Pilas = (function () {
     return Pilas;
 }());
 var pilas = new Pilas();
-var Actor = (function () {
-    function Actor(pilas, x, y, imagen) {
+var ActorBase = (function () {
+    function ActorBase(pilas, x, y, imagen) {
         if (imagen === void 0) { imagen = "sin_imagen"; }
         var _this = this;
         this.pilas = pilas;
@@ -251,8 +251,8 @@ var Actor = (function () {
             }
         };
     }
-    Actor.prototype.iniciar = function () { };
-    Actor.prototype.serializar = function () {
+    ActorBase.prototype.iniciar = function () { };
+    ActorBase.prototype.serializar = function () {
         return {
             tipo: this.tipo,
             x: Math.round(this.x),
@@ -263,8 +263,8 @@ var Actor = (function () {
             rotacion: this.sprite.angle
         };
     };
-    Actor.prototype.actualizar = function () { };
-    Object.defineProperty(Actor.prototype, "imagen", {
+    ActorBase.prototype.actualizar = function () { };
+    Object.defineProperty(ActorBase.prototype, "imagen", {
         get: function () {
             return this.sprite.frameName;
         },
@@ -274,7 +274,7 @@ var Actor = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Actor.prototype, "x", {
+    Object.defineProperty(ActorBase.prototype, "x", {
         get: function () {
             var x = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
             return x;
@@ -286,7 +286,7 @@ var Actor = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Actor.prototype, "y", {
+    Object.defineProperty(ActorBase.prototype, "y", {
         get: function () {
             var y = this.pilas.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y).y;
             return y;
@@ -298,7 +298,7 @@ var Actor = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Actor.prototype, "rotacion", {
+    Object.defineProperty(ActorBase.prototype, "rotacion", {
         get: function () {
             return this._rotacion;
         },
@@ -309,8 +309,19 @@ var Actor = (function () {
         enumerable: true,
         configurable: true
     });
-    return Actor;
+    return ActorBase;
 }());
+var Actor = (function (_super) {
+    __extends(Actor, _super);
+    function Actor() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Actor.prototype.iniciar = function () {
+    };
+    Actor.prototype.actualizar = function () {
+    };
+    return Actor;
+}(ActorBase));
 var Aceituna = (function (_super) {
     __extends(Aceituna, _super);
     function Aceituna() {
