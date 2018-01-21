@@ -51,3 +51,12 @@ make binarios
 Los binarios de serialport corresponden a la versión de electron v53, y se
 obtuvieron desde: https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/tag/v5.1.0-beta5
 
+## Estilo de programación
+
+Si estás con ganas de participar del proyecto o enviar correcciones, tené
+en cuenta que el código enviado debería estar en español (siempre que sea
+posible) y que las variables o métodos con varias palabras tienen que estar
+separadas por guiones bajos (por ejemplo "cantidad_de_actores")
+
+Además, es muy importante que tengas configurado tu editor para usar
+automáticamente prettier (https://prettier.io/).
