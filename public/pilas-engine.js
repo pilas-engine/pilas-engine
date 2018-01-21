@@ -13,18 +13,12 @@ var Actores = (function () {
         this.pilas = pilas;
     }
     Actores.prototype.Caja = function (x, y) {
-        var actor = new Caja(this.pilas, x, y, "caja");
-        this.pilas.game.world.add(actor.sprite);
-        actor.sprite["actor"] = actor;
-        return actor;
+        return new Caja(this.pilas, x, y, "caja");
     };
     Actores.prototype.Aceituna = function (x, y) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
-        var actor = new Aceituna(this.pilas, x, y);
-        this.pilas.game.world.add(actor.sprite);
-        actor.sprite["actor"] = actor;
-        return actor;
+        return new Aceituna(this.pilas, x, y);
     };
     return Actores;
 }());
@@ -241,6 +235,8 @@ var ActorBase = (function () {
         this.x = x;
         this.y = y;
         this.rotacion = 0;
+        this.pilas.game.world.add(this.sprite);
+        this.sprite["actor"] = this;
         this.iniciar();
         this.sprite.update = function () {
             try {

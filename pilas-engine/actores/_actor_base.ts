@@ -14,6 +14,11 @@ class ActorBase {
     this.x = x;
     this.y = y;
     this.rotacion = 0;
+
+    this.pilas.game.world.add(this.sprite);
+    //this.pilas.escena_actual.agregar_actor(this);
+    this.sprite["actor"] = this;
+
     this.iniciar();
 
     this.sprite.update = () => {
