@@ -71,7 +71,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       return Ember.Object.create(escena);
     });
 
-    proyectoComoObjetoEmber.tiposDeActores = proyecto.tiposDeActores.map(tipo => {
+    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
       return Ember.Object.create(tipo);
     });
 
@@ -83,34 +83,45 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       titulo: "Proyecto demo",
       ancho: 500,
       alto: 500,
-      tiposDeActores: [
-        {
-          tipo: "Pelota",
-          codigo: `class Pelota  extends ActorBase {
+      codigos: {
+        escenas: [
+          {
+            nombre: "principal",
+            codigo: "class Principal extends Escena { /* ... */ }"
+          },
+          {
+            nombre: "otra",
+            codigo: "class Otra extends Escena { /* codigo de otra escena */ }"
+          }
+        ],
+        actores: [
+          {
+            tipo: "Pelota",
+            codigo: `class Pelota  extends ActorBase {
 
             iniciar() {
             }
 
           }`
-        },
-        {
-          tipo: "Caja",
-          codigo: `class Caja extends ActorBase {
+          },
+          {
+            tipo: "Caja",
+            codigo: `class Caja extends ActorBase {
             iniciar() {
               this.sprite.game.physics.p2.enable([this.sprite], true);
               this.sprite.body.static = false;
             }
           }`
-        },
-        {
-          tipo: "Actor",
-          codigo: `class Actor extends ActorBase {
+          },
+          {
+            tipo: "Actor",
+            codigo: `class Actor extends ActorBase {
 
           }`
-        },
-        {
-          tipo: "Aceituna",
-          codigo: `class Aceituna extends ActorBase {
+          },
+          {
+            tipo: "Aceituna",
+            codigo: `class Aceituna extends ActorBase {
 
               iniciar() {
               }
@@ -128,11 +139,12 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               }
 
             }`
-        }
-      ],
+          }
+        ]
+      },
       escenas: [
         {
-          nombre: "escena principal",
+          nombre: "principal",
           id: 1,
           actores: [
             {
@@ -174,7 +186,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           ]
         },
         {
-          nombre: "Otra escena",
+          nombre: "otra",
           id: 4,
           actores: []
         }

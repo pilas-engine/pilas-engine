@@ -112,7 +112,7 @@ export default Component.extend({
   registrar_codigo(tipo, codigo) {
     let proyecto = this.get("proyecto");
 
-    proyecto.tiposDeActores.pushObject(
+    proyecto.codigos.actores.pushObject(
       Ember.Object.create({
         tipo: tipo,
         codigo: aplicarNombre(tipo, codigo)
@@ -122,7 +122,7 @@ export default Component.extend({
 
   obtenerCodigoTypescript() {
     let proyecto = this.get("proyecto");
-    return proyecto.tiposDeActores.map(e => e.codigo).join("\n");
+    return proyecto.codigos.actores.map(e => e.codigo).join("\n");
   },
 
   generarID() {
@@ -130,7 +130,7 @@ export default Component.extend({
   },
 
   obtenerTipoDeActor(tipoDelActor) {
-    return this.get("proyecto.tiposDeActores").findBy("tipo", tipoDelActor);
+    return this.get("proyecto.codigos.actores").findBy("tipo", tipoDelActor);
   },
 
   obtenerDetalleDeActorPorIndice(indiceDelActor) {
