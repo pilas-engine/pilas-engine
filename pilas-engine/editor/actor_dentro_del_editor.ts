@@ -73,4 +73,13 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.shadow.tint = 0x000000;
     this.ocultar_sombra();
   }
+
+  destacar() {
+    let i = Phaser.Easing.Linear.None;
+    let a = this.game.add.tween(this).to({ alpha: 0.5 }, 200, i);
+    let b = this.game.add.tween(this).to({ alpha: 1 }, 200, i);
+    a.chain(b);
+
+    a.start();
+  }
 }

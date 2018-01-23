@@ -144,6 +144,15 @@ var Pilas = (function () {
                 this.game.state.getCurrentState()["actualizarPosicionDeFormaExterna"](pos);
             }
         }
+        if (e.data.tipo === "selecciona_actor_desde_el_editor") {
+            var id = +e.data.id;
+            var actores = this.obtener_actores();
+            var sprites = this.game.state.getCurrentState().obtener_sprites();
+            var sprite = sprites[id];
+            if (sprite) {
+                sprite.destacar();
+            }
+        }
         if (e.data.tipo === "pausar_escena") {
             var historia = this.game.state.getCurrentState()["historia"];
             this.game.state.start("estadoPausa", true, false, {
@@ -406,6 +415,13 @@ var ActorDentroDelEditor = (function (_super) {
         this.shadow.tint = 0x000000;
         this.ocultar_sombra();
     };
+    ActorDentroDelEditor.prototype.destacar = function () {
+        var i = Phaser.Easing.Linear.None;
+        var a = this.game.add.tween(this).to({ alpha: 0.5 }, 200, i);
+        var b = this.game.add.tween(this).to({ alpha: 1 }, 200, i);
+        a.chain(b);
+        a.start();
+    };
     return ActorDentroDelEditor;
 }(Phaser.Sprite));
 var ActorDentroDelModoPausa = (function (_super) {
@@ -443,6 +459,9 @@ var Estado = (function (_super) {
     };
     Estado.prototype.create = function () {
         this.canvas = this.game.add.graphics(0, 0);
+    };
+    Estado.prototype.obtener_sprites = function () {
+        return this.sprites;
     };
     Estado.prototype.actualizarPosicionDeFormaExterna = function (pos) { };
     Estado.prototype.dibujarLineaDeCoordenadasRecorridas = function () {

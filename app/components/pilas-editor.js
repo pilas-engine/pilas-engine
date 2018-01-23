@@ -11,8 +11,10 @@ export default Component.extend({
   foco: Ember.inject.service(),
   codigo: "",
   tagName: "",
-  actorSeleccionado: -1,
+  actorSeleccionado: -1, //deprecated
+  seleccion: -1,
   instanciaDeActorSeleccionado: null,
+  cargando: true,
 
   historiaPosicion: 10,
   historiaMinimo: 0,
@@ -24,8 +26,8 @@ export default Component.extend({
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
-    if (this.get("actorSeleccionado") != -1) {
-      this.send("seleccionarActor", this.get("actorSeleccionado"));
+    if (this.get("seleccion") != -1) {
+      this.send("cuandoSelecciona", this.get("seleccion"));
     }
 
     document.addEventListener("keydown", this.alPulsarTecla.bind(this));
@@ -61,6 +63,7 @@ export default Component.extend({
   },
 
   finalizaCarga() {
+    this.set("cargando", false);
     this.mostrarEscenaActualSobrePilas();
     this.set("estado", this.get("estado").cuandoTerminoDeCargarPilas());
   },
@@ -83,7 +86,7 @@ export default Component.extend({
   },
 
   comienzaAMoverActor(datos) {
-    this.send("seleccionarActor", datos.id);
+    this.send("cuandoSelecciona", datos.id);
   },
 
   iniciaModoDepuracionEnPausa(datos) {
@@ -103,10 +106,8 @@ export default Component.extend({
   },
 
   obtenerEscenaActual() {
-    let proyecto = this.get("proyecto");
-    let indiceEscenaActual = this.get("escenaActual");
-
-    return proyecto.escenas.findBy("id", indiceEscenaActual);
+    let indice = this.get("ultimaEscenaSeleccionada");
+    return this.get("proyecto.escenas").findBy("id", indice);
   },
 
   registrar_codigo(tipo, codigo) {
@@ -133,24 +134,47 @@ export default Component.extend({
     return this.get("proyecto.codigos.actores").findBy("tipo", tipoDelActor);
   },
 
-  obtenerDetalleDeActorPorIndice(indiceDelActor) {
+  obtenerDetalleDeActorPorIndice(indice) {
     let escena = this.obtenerEscenaActual();
-    let actor = escena.get("actores").findBy("id", indiceDelActor);
+    let actor = escena.get("actores").findBy("id", indice);
     return actor;
   },
 
-  sobreEscribirCodigoDelActorActual(codigo) {
-    let indiceDelActor = this.get("actorSeleccionado");
+  obtenerDetalleDeEscenaPorIndice(indice) {
+    return this.get("proyecto.escenas").findBy("id", indice);
+  },
 
-    if (indiceDelActor > -1) {
-      let actor = this.obtenerDetalleDeActorPorIndice(indiceDelActor);
-      let tipoDeActor = this.obtenerTipoDeActor(actor.tipo);
-      tipoDeActor.set("codigo", codigo);
+  guardar_codigo_en_el_proyecto(seleccion, codigo) {
+    let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+
+    if (actor) {
+      this.definir_codigo_para_el_actor(actor, codigo);
+    } else {
+      let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
+      this.definir_codigo_para_la_escena(escena, codigo);
     }
   },
 
   obtener_nombres_de_actores(escena) {
     return escena.actores.map(e => e.tipo);
+  },
+
+  obtener_codigo_para_la_escena({ nombre }) {
+    return this.get("proyecto.codigos.escenas").findBy("nombre", nombre).codigo;
+  },
+
+  obtener_codigo_para_el_actor({ tipo }) {
+    return this.obtenerTipoDeActor(tipo).get("codigo");
+  },
+
+  definir_codigo_para_la_escena({ nombre }, codigo) {
+    this.get("proyecto.codigos.escenas")
+      .findBy("nombre", nombre)
+      .set("codigo", codigo);
+  },
+
+  definir_codigo_para_el_actor({ tipo }, codigo) {
+    this.obtenerTipoDeActor(tipo).set("codigo", codigo);
   },
 
   actions: {
@@ -183,12 +207,13 @@ export default Component.extend({
 
       this.registrar_codigo(nombre, actor.codigo);
 
-      this.send("seleccionarActor", id);
+      this.send("cuandoSelecciona", id);
       this.set("mostrarModalCreacionDeActor", false);
 
       this.mostrarEscenaActualSobrePilas();
     },
     definirEscena(indiceDeEscena) {
+      console.warn("Deprecated: definirEscena");
       if (indiceDeEscena != this.get("escenaActual")) {
         this.set("actorSeleccionado", -1);
         this.set("escenaActual", indiceDeEscena);
@@ -196,6 +221,7 @@ export default Component.extend({
       }
     },
     seleccionarActor(indiceDelActor) {
+      console.warn("Deprecated: seleccionarActor");
       let actor = this.obtenerDetalleDeActorPorIndice(indiceDelActor);
 
       if (actor) {
@@ -210,12 +236,10 @@ export default Component.extend({
         this.set("instanciaActorSeleccionado", null);
       }
     },
-    cuandoCargaMonacoEditor() {
-      //console.log("Cargó el editor");
-    },
+    cuandoCargaMonacoEditor() {},
     cuandoCambiaElCodigo(codigo) {
       this.set("codigo", codigo);
-      this.sobreEscribirCodigoDelActorActual(codigo);
+      this.guardar_codigo_en_el_proyecto(this.get("seleccion"), codigo);
     },
     ejecutar() {
       this.set("estado", this.get("estado").ejecutar());
@@ -264,6 +288,28 @@ export default Component.extend({
           this.send("detener");
         }
       }
+    },
+    cuandoSelecciona(seleccion) {
+      this.set("seleccion", seleccion);
+
+      let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+
+      if (actor) {
+        this.set("instanciaActorSeleccionado", actor);
+        this.set("codigo", this.obtener_codigo_para_el_actor(actor));
+        this.set("tituloDelCodigo", `Código del actor: ${seleccion}`);
+      } else {
+        let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
+        this.set("ultimaEscenaSeleccionada", seleccion);
+        this.mostrarEscenaActualSobrePilas();
+
+        this.set("codigo", this.obtener_codigo_para_la_escena(escena));
+        this.set("tituloDelCodigo", `Código de la escena: ${seleccion}`);
+      }
+
+      this.get("bus").trigger("selecciona_actor_desde_el_editor", {
+        id: seleccion
+      });
     }
   }
 });

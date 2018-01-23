@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   editor: null,
   bus: Ember.inject.service(),
   declaraciones: Ember.inject.service(),
+  linenumbers: true,
 
   cuandoCambiaDeArchivo: Ember.observer("titulo", function() {
     this.cargarCodigo();
@@ -137,12 +138,13 @@ export default Ember.Component.extend({
 
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
-                minimap: true,
+                minimap: false,
                 fontSize: 14,
                 theme: 'vs', //'vs-dark',
                 tabSize: 2,
                 insertSpaces: true,
                 tabWidth: 2,
+                lineNumbers: ${this.get("linenumbers")},
                 readOnly: ${this.get("readOnly")},
               });
 
@@ -167,7 +169,7 @@ export default Ember.Component.extend({
           </script>
       </head>
       <body>
-        <div id="monaco-editor-wrapper"  style="width:100%;height:100%"></div>
+        <div id="monaco-editor-wrapper" style="width:100%;height:100%"></div>
       </body>
       </html>
 

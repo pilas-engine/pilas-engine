@@ -114,6 +114,7 @@ declare class ActorDentroDelEditor extends Phaser.Sprite {
     ocultar_sombra(): void;
     update(): void;
     crear_sombra(): void;
+    destacar(): void;
 }
 declare class ActorDentroDelModoPausa extends Phaser.Sprite {
 }
@@ -123,6 +124,7 @@ declare class Estado extends Phaser.State {
     canvas: any;
     render(): void;
     create(): void;
+    obtener_sprites(): any;
     actualizarPosicionDeFormaExterna(pos: any): void;
     dibujarLineaDeCoordenadasRecorridas(): void;
 }

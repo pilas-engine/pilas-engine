@@ -34,6 +34,10 @@ class Estado extends Phaser.State {
     this.canvas = this.game.add.graphics(0, 0);
   }
 
+  obtener_sprites() {
+    return this.sprites;
+  }
+
   actualizarPosicionDeFormaExterna(pos: any) {}
 
   dibujarLineaDeCoordenadasRecorridas() {

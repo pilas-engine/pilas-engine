@@ -101,6 +101,18 @@ class Pilas {
       }
     }
 
+    if (e.data.tipo === "selecciona_actor_desde_el_editor") {
+      let id = +e.data.id;
+      let actores = this.obtener_actores();
+
+      let sprites = this.game.state.getCurrentState().obtener_sprites();
+      let sprite = sprites[id];
+
+      if (sprite) {
+        sprite.destacar();
+      }
+    }
+
     if (e.data.tipo === "pausar_escena") {
       let historia = this.game.state.getCurrentState()["historia"];
 

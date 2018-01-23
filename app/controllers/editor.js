@@ -4,37 +4,15 @@ import string_a_json from "../utils/string-a-json";
 import QueryParams from "ember-parachute";
 
 const queryParams = new QueryParams({
-  serializado: {
-    defaultValue: null,
-    refresh: true,
-    replace: true
-  },
-  mostrarEditor: {
-    as: "p3",
-    defaultValue: true,
-    replace: true
-  },
-  mostrarPropiedades: {
-    as: "p1",
-    defaultValue: true,
-    replace: true
-  },
-  escenaActual: {
-    defaultValue: 1,
-    replace: true
-  },
-  actorSeleccionado: {
-    defaultValue: -1,
-    replace: true
-  },
-  mostrarModalCreacionDeActor: {
-    defaultValue: false,
-    replace: true
-  },
-  mostrarInterprete: {
-    defaultValue: true,
-    replace: true
-  }
+  serializado: { defaultValue: null, refresh: true, replace: true },
+  mostrarEditor: { as: "p3", defaultValue: true, replace: true },
+  mostrarPropiedades: { as: "p1", defaultValue: true, replace: true },
+  escenaActual: { defaultValue: 1, replace: true },
+  actorSeleccionado: { defaultValue: -1, replace: true },
+  seleccion: { defaultValue: -1, replace: true },
+  ultimaEscenaSeleccionada: { defaultValue: 1, replace: true },
+  mostrarModalCreacionDeActor: { defaultValue: false, replace: true },
+  mostrarInterprete: { defaultValue: true, replace: true }
 });
 
 export default Ember.Controller.extend(queryParams.Mixin, {
@@ -72,6 +50,10 @@ export default Ember.Controller.extend(queryParams.Mixin, {
     });
 
     proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
+      return Ember.Object.create(tipo);
+    });
+
+    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(tipo => {
       return Ember.Object.create(tipo);
     });
 
@@ -148,7 +130,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           id: 1,
           actores: [
             {
-              id: 1,
+              id: 2,
               x: 200,
               y: 100,
               centro_x: 0.5,
@@ -157,7 +139,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               imagen: "pelota"
             },
             {
-              id: 2,
+              id: 3,
               x: 250,
               y: 140,
               centro_x: 0.5,
@@ -166,7 +148,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               imagen: "caja"
             },
             {
-              id: 3,
+              id: 4,
               x: 100,
               y: 0,
               centro_x: 0.5,
@@ -175,7 +157,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               imagen: "sin_imagen"
             },
             {
-              id: 4,
+              id: 5,
               x: 0,
               y: 40,
               centro_x: 0.5,
@@ -187,7 +169,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         },
         {
           nombre: "otra",
-          id: 4,
+          id: 6,
           actores: []
         }
       ]

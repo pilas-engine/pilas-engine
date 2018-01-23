@@ -1,6 +1,6 @@
-<ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba b--silver mt2 mb2">
+<ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba b--silver mt2 mb2 {{if desactivado 'o-40 disabled'}}">
   {{#each escenas as |escena|}}
-    <li class="pointer truncate pa1 hover-bg-black-20 {{if (eq escenaActual escena.id) "bg-black-10"}}" {{action cuandoSeleccionaEscena escena.id}}>
+    <li class="pointer truncate pa1 {{if (eq ultimaEscenaSeleccionada escena.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona escena.id}}>
 
         {{# if (eq escenaActual escena.id)}}
           ▾
@@ -11,10 +11,10 @@
 
       </li>
 
-      {{#if (eq escenaActual escena.id)}}
+      {{#if (eq ultimaEscenaSeleccionada escena.id)}}
         <ul>
           {{#each escena.actores as |actor|}}
-            <li class="truncate pa1 pointer hover-bg-black-20 {{if (eq actorSeleccionado actor.id) "bg-black-10"}}" {{action cuandoSeleccionaActor actor.id}}> {{actor.tipo}}: {{actor.nombre}} ({{round actor.x}}, {{round actor.y}})</li>
+            <li class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}> {{actor.tipo}}: {{actor.nombre}} ({{round actor.x}}, {{round actor.y}})</li>
           {{else}}
             <li class='truncate pa1'>sin actores</li >
           {{/each}}

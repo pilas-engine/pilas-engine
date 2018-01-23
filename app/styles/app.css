@@ -76,3 +76,7 @@ body {
 .no-outline:focus {
   outline: none;
 }
+
+.disabled {
+  pointer-events: none;
+}
