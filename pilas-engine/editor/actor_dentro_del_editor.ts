@@ -66,6 +66,7 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.shadow.anchor.y = this.anchor.y;
     this.shadow.x = this.x + 5;
     this.shadow.y = this.y + 5;
+    this.shadow.scale = this.scale;
   }
 
   crear_sombra() {
@@ -76,9 +77,22 @@ class ActorDentroDelEditor extends Phaser.Sprite {
 
   destacar() {
     let i = Phaser.Easing.Linear.None;
-    let a = this.game.add.tween(this).to({ alpha: 0.5 }, 200, i);
-    let b = this.game.add.tween(this).to({ alpha: 1 }, 200, i);
+    let y0 = 1;
+    let y1 = 1.05;
+    let y2 = 0.95;
+    let x0 = 1;
+    let x1 = 0.95;
+    let x2 = 1.05;
+    let t = 70;
+
+    let a = this.game.add.tween(this.scale).to({ y: y1, x: x1 }, t, i);
+    let b = this.game.add.tween(this.scale).to({ y: y0, x: x0 }, t, i);
+    let c = this.game.add.tween(this.scale).to({ y: y2, x: x2 }, t, i);
+    let d = this.game.add.tween(this.scale).to({ y: y0, x: x0 }, t, i);
+
     a.chain(b);
+    b.chain(c);
+    c.chain(d);
 
     a.start();
   }

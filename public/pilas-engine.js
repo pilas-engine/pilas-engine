@@ -409,6 +409,7 @@ var ActorDentroDelEditor = (function (_super) {
         this.shadow.anchor.y = this.anchor.y;
         this.shadow.x = this.x + 5;
         this.shadow.y = this.y + 5;
+        this.shadow.scale = this.scale;
     };
     ActorDentroDelEditor.prototype.crear_sombra = function () {
         this.shadow = this.game.add.sprite(10, 10, this.key);
@@ -417,9 +418,20 @@ var ActorDentroDelEditor = (function (_super) {
     };
     ActorDentroDelEditor.prototype.destacar = function () {
         var i = Phaser.Easing.Linear.None;
-        var a = this.game.add.tween(this).to({ alpha: 0.5 }, 200, i);
-        var b = this.game.add.tween(this).to({ alpha: 1 }, 200, i);
+        var y0 = 1;
+        var y1 = 1.05;
+        var y2 = 0.95;
+        var x0 = 1;
+        var x1 = 0.95;
+        var x2 = 1.05;
+        var t = 70;
+        var a = this.game.add.tween(this.scale).to({ y: y1, x: x1 }, t, i);
+        var b = this.game.add.tween(this.scale).to({ y: y0, x: x0 }, t, i);
+        var c = this.game.add.tween(this.scale).to({ y: y2, x: x2 }, t, i);
+        var d = this.game.add.tween(this.scale).to({ y: y0, x: x0 }, t, i);
         a.chain(b);
+        b.chain(c);
+        c.chain(d);
         a.start();
     };
     return ActorDentroDelEditor;
