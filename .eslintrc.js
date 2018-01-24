@@ -14,8 +14,8 @@ module.exports = {
     js_beautify: true,
     esperar: true,
     pulsar: true,
+    autoComplete: true,
     esperarElemento: true
-
   },
   rules: {
     "no-console": 0

@@ -85,6 +85,7 @@ declare class ActorBase {
     x: number;
     y: number;
     rotacion: number;
+    toString(): string;
 }
 declare class Actor extends ActorBase {
     iniciar(): void;

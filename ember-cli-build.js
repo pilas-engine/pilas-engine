@@ -12,6 +12,7 @@ module.exports = function(defaults) {
 
   app.import("vendor/typescript.js");
   app.import("vendor/beautify.js");
+  app.import("vendor/auto-complete.js");
 
   var assetsExtra = new Funnel("pilas-engine/actores", {
     srcDir: "/",

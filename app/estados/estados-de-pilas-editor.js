@@ -9,6 +9,7 @@ class ModoCargando {
     this.codigo = "Demo";
     this.mantenerFoco = false;
     this.puedePausar = false;
+    this.puede_usar_el_interprete = false;
   }
 
   cuandoTerminoDeCargarPilas() {
@@ -27,6 +28,7 @@ class ModoEdicion {
     this.codigo = "Demo";
     this.mantenerFoco = false;
     this.puedePausar = false;
+    this.puede_usar_el_interprete = false;
   }
 
   ejecutar() {
@@ -44,6 +46,7 @@ class ModoEjecucion {
     this.editorDeshabilitado = true;
     this.mantenerFoco = true;
     this.puedePausar = true;
+    this.puede_usar_el_interprete = true;
   }
 
   detener() {
@@ -65,6 +68,7 @@ class ModoPausa {
     this.editorDeshabilitado = true;
     this.mantenerFoco = true;
     this.puedePausar = false;
+    this.puede_usar_el_interprete = false;
   }
 
   detener() {

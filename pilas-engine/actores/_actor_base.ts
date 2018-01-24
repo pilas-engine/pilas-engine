@@ -82,4 +82,9 @@ class ActorBase {
   get rotacion() {
     return this._rotacion;
   }
+
+  toString() {
+    let clase = this.constructor["name"];
+    return `<${clase} en (${this.x}, ${this.y})>`;
+  }
 }

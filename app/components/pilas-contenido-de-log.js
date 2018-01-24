@@ -15,10 +15,12 @@ export default Component.extend({
 
   realizarScroll() {
     Ember.run.later(() => {
-      let elemento = this.$()[0];
+      if (this.$()) {
+        let elemento = this.$()[0];
 
-      if (elemento && elemento.scroll) {
-        elemento.scroll(0, elemento.scrollHeight);
+        if (elemento && elemento.scroll) {
+          elemento.scroll(0, elemento.scrollHeight);
+        }
       }
     }, 10);
   }

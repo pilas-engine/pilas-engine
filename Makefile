@@ -88,6 +88,8 @@ serve:
 	$(call log, "Iniciando ember s")
 	@ember s
 
+ejecutar: serve
+
 prettier:
 	./node_modules/.bin/prettier --write 'app/**/*.js'
 	./node_modules/.bin/prettier --write 'tests/**/*.js'

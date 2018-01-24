@@ -314,6 +314,10 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype.toString = function () {
+        var clase = this.constructor["name"];
+        return "<" + clase + " en (" + this.x + ", " + this.y + ")>";
+    };
     return ActorBase;
 }());
 var Actor = (function (_super) {

@@ -3,8 +3,8 @@
   {{pilas-contenido-de-log log=log}}
 
   <div class="w-100 flex flex-row bt b--light-silver">
-    <div class='dib blue pa1 unselectable'>→</div>
-    {{input keyDown=(action "pulsaTecla") value=valor class="flex1 menlo pa1 bn no-outline" enter="cuandoPulsaEnter"}}
+    <div class='dib {{if habilitado 'blue' 'gray'}} pa1 unselectable'>→</div>
+    {{input id='input' keyDown=(action "pulsaTecla") value=valor class="flex1 menlo pa1 bn no-outline" enter="cuandoPulsaEnter"}}
   </div>
 
 </div>

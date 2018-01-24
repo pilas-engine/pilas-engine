@@ -134,7 +134,7 @@ export default Ember.Component.extend({
     }
 
     if (e.data.tipo === "finaliza_carga_de_recursos") {
-      this.get("bus").trigger("finalizaCarga", contexto.pilas);
+      this.get("bus").trigger("finalizaCarga", contexto.pilas, contexto);
     }
 
     if (e.data.tipo === "progreso_de_carga") {
