@@ -15,15 +15,34 @@ class Pilas {
 
   constructor() {
     this.log = new Log(this);
-    this._agregarManejadorDeMensajes();
+    this.agregar_manejador_de_eventos();
     this.capturar_errores_y_reportarlos_al_editor();
+  }
+
+  iniciar() {
+    this.game.state.add("editorState", EstadoEditor);
+    this.game.state.add("estadoEjecucion", EstadoEjecucion);
+    this.game.state.add("estadoPausa", EstadoPausa);
+
+    this.game.scale.trackParentInterval = 1;
+
+    this.conectar_atajos_de_teclado();
+
+    this.control = new Control(this);
+    this.actores = new Actores(this);
+    this.escenas = new Escenas(this);
+    this.utilidades = new Utilidades(this);
   }
 
   obtener_entidades() {
     return this.game.state.getCurrentState()["entidades"];
   }
 
-  _conectarAtajosDeTeclado() {
+  escena_actual() {
+    return this.escenas.escena_actual;
+  }
+
+  conectar_atajos_de_teclado() {
     this.game.input.keyboard.onUpCallback = evento => {
       if (evento.keyCode == Phaser.Keyboard.ESC && (this.game.state.current === "estadoEjecucion" || this.game.state.current === "estadoPausa")) {
         console.log("pulsa pausa.");
@@ -32,8 +51,8 @@ class Pilas {
     };
   }
 
-  _agregarManejadorDeMensajes() {
-    window.addEventListener("message", e => this._atenderMensaje(e), false);
+  private agregar_manejador_de_eventos() {
+    window.addEventListener("message", e => this.antender_mensaje_desde_el_editor(e), false);
   }
 
   emitir_error_y_detener(error) {
@@ -66,9 +85,7 @@ class Pilas {
     */
   }
 
-  _atenderMensaje(e: any) {
-    this.log.debug("Llega un mensaje desde el editor: " + e.data.tipo, e);
-
+  private antender_mensaje_desde_el_editor(e: any) {
     if (e.origin != HOST) {
       return;
     }
@@ -130,14 +147,18 @@ class Pilas {
     }
 
     if (e.data.tipo === "iniciar_pilas") {
-      this._ancho = +e.data.ancho;
-      this._alto = +e.data.alto;
-
-      this.game = new Phaser.Game(this._ancho, this._alto, Phaser.AUTO, "game", {
-        preload: e => this._preload(),
-        create: e => this._create()
-      });
+      this.iniciar_pilas_desde_el_editor(+e.data.ancho, +e.data.alto);
     }
+  }
+
+  iniciar_pilas_desde_el_editor(ancho, alto) {
+    this._ancho = ancho;
+    this._alto = alto;
+
+    this.game = new Phaser.Game(this._ancho, this._alto, Phaser.AUTO, "game", {
+      preload: e => this._preload(),
+      create: e => this._create()
+    });
   }
 
   _preload() {}
@@ -171,17 +192,7 @@ class Pilas {
   }
 
   _cuando_termina_de_cargar() {
-    this.game.state.add("editorState", EstadoEditor);
-    this.game.state.add("estadoEjecucion", EstadoEjecucion);
-    this.game.state.add("estadoPausa", EstadoPausa);
-
-    this.game.scale.trackParentInterval = 1;
-
-    this._conectarAtajosDeTeclado();
-
-    this.control = new Control(this);
-    this.actores = new Actores(this);
-
+    this.iniciar();
     this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
   }
 

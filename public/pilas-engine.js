@@ -60,6 +60,17 @@ var Control = (function () {
     });
     return Control;
 }());
+var Escenas = (function () {
+    function Escenas(pilas) {
+        this.escena_actual = null;
+        this.pilas = pilas;
+    }
+    Escenas.prototype.Normal = function () {
+        this.escena_actual = new Normal(this.pilas);
+        return this.escena_actual;
+    };
+    return Escenas;
+}());
 var Log = (function () {
     function Log(pilas) {
         this.pilas = pilas;
@@ -87,13 +98,27 @@ if (window.location.host) {
 var Pilas = (function () {
     function Pilas() {
         this.log = new Log(this);
-        this._agregarManejadorDeMensajes();
+        this.agregar_manejador_de_eventos();
         this.capturar_errores_y_reportarlos_al_editor();
     }
+    Pilas.prototype.iniciar = function () {
+        this.game.state.add("editorState", EstadoEditor);
+        this.game.state.add("estadoEjecucion", EstadoEjecucion);
+        this.game.state.add("estadoPausa", EstadoPausa);
+        this.game.scale.trackParentInterval = 1;
+        this.conectar_atajos_de_teclado();
+        this.control = new Control(this);
+        this.actores = new Actores(this);
+        this.escenas = new Escenas(this);
+        this.utilidades = new Utilidades(this);
+    };
     Pilas.prototype.obtener_entidades = function () {
         return this.game.state.getCurrentState()["entidades"];
     };
-    Pilas.prototype._conectarAtajosDeTeclado = function () {
+    Pilas.prototype.escena_actual = function () {
+        return this.escenas.escena_actual;
+    };
+    Pilas.prototype.conectar_atajos_de_teclado = function () {
         var _this = this;
         this.game.input.keyboard.onUpCallback = function (evento) {
             if (evento.keyCode == Phaser.Keyboard.ESC && (_this.game.state.current === "estadoEjecucion" || _this.game.state.current === "estadoPausa")) {
@@ -102,9 +127,9 @@ var Pilas = (function () {
             }
         };
     };
-    Pilas.prototype._agregarManejadorDeMensajes = function () {
+    Pilas.prototype.agregar_manejador_de_eventos = function () {
         var _this = this;
-        window.addEventListener("message", function (e) { return _this._atenderMensaje(e); }, false);
+        window.addEventListener("message", function (e) { return _this.antender_mensaje_desde_el_editor(e); }, false);
     };
     Pilas.prototype.emitir_error_y_detener = function (error) {
         this.emitir_mensaje_al_editor("error", { mensaje: error.message, stack: error.stack });
@@ -113,9 +138,8 @@ var Pilas = (function () {
     };
     Pilas.prototype.capturar_errores_y_reportarlos_al_editor = function () {
     };
-    Pilas.prototype._atenderMensaje = function (e) {
+    Pilas.prototype.antender_mensaje_desde_el_editor = function (e) {
         var _this = this;
-        this.log.debug("Llega un mensaje desde el editor: " + e.data.tipo, e);
         if (e.origin != HOST) {
             return;
         }
@@ -167,13 +191,17 @@ var Pilas = (function () {
             this.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos);
         }
         if (e.data.tipo === "iniciar_pilas") {
-            this._ancho = +e.data.ancho;
-            this._alto = +e.data.alto;
-            this.game = new Phaser.Game(this._ancho, this._alto, Phaser.AUTO, "game", {
-                preload: function (e) { return _this._preload(); },
-                create: function (e) { return _this._create(); }
-            });
+            this.iniciar_pilas_desde_el_editor(+e.data.ancho, +e.data.alto);
         }
+    };
+    Pilas.prototype.iniciar_pilas_desde_el_editor = function (ancho, alto) {
+        var _this = this;
+        this._ancho = ancho;
+        this._alto = alto;
+        this.game = new Phaser.Game(this._ancho, this._alto, Phaser.AUTO, "game", {
+            preload: function (e) { return _this._preload(); },
+            create: function (e) { return _this._create(); }
+        });
     };
     Pilas.prototype._preload = function () { };
     Pilas.prototype._create = function () {
@@ -199,13 +227,7 @@ var Pilas = (function () {
         this.emitir_mensaje_al_editor("progreso_de_carga", { progreso: progreso });
     };
     Pilas.prototype._cuando_termina_de_cargar = function () {
-        this.game.state.add("editorState", EstadoEditor);
-        this.game.state.add("estadoEjecucion", EstadoEjecucion);
-        this.game.state.add("estadoPausa", EstadoPausa);
-        this.game.scale.trackParentInterval = 1;
-        this._conectarAtajosDeTeclado();
-        this.control = new Control(this);
-        this.actores = new Actores(this);
+        this.iniciar();
         this.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
     };
     Pilas.prototype.emitir_mensaje_al_editor = function (nombre, datos) {
@@ -235,6 +257,17 @@ var Pilas = (function () {
     return Pilas;
 }());
 var pilas = new Pilas();
+var Utilidades = (function () {
+    function Utilidades(pilas) {
+        this.pilas = pilas;
+        this.id = 1;
+    }
+    Utilidades.prototype.obtener_id_autoincremental = function () {
+        this.id = this.id + 1;
+        return this.id;
+    };
+    return Utilidades;
+}());
 var ActorBase = (function () {
     function ActorBase(pilas, x, y, imagen) {
         if (imagen === void 0) { imagen = "sin_imagen"; }
@@ -255,6 +288,7 @@ var ActorBase = (function () {
                 _this.pilas.emitir_error_y_detener(e);
             }
         };
+        this.pilas.escena_actual().agregar_actor(this);
     }
     ActorBase.prototype.iniciar = function () { };
     ActorBase.prototype.serializar = function () {
@@ -447,6 +481,36 @@ var ActorDentroDelModoPausa = (function (_super) {
     }
     return ActorDentroDelModoPausa;
 }(Phaser.Sprite));
+var EscenaBase = (function () {
+    function EscenaBase(pilas) {
+        this.pilas = pilas;
+        this.actores = [];
+        this.pilas.utilidades.obtener_id_autoincremental();
+    }
+    EscenaBase.prototype.agregar_actor = function (actor) {
+        this.actores.push(actor);
+    };
+    return EscenaBase;
+}());
+var Escena = (function (_super) {
+    __extends(Escena, _super);
+    function Escena() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Escena.prototype.iniciar = function () { };
+    Escena.prototype.actualizar = function () { };
+    return Escena;
+}(EscenaBase));
+var Normal = (function (_super) {
+    __extends(Normal, _super);
+    function Normal() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Normal.prototype.iniciar = function () {
+        console.log("ha iniciando la escena!");
+    };
+    return Normal;
+}(Escena));
 var Estado = (function (_super) {
     __extends(Estado, _super);
     function Estado() {

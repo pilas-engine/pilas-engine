@@ -20,6 +20,12 @@ declare class Control {
     readonly arriba: boolean;
     readonly abajo: boolean;
 }
+declare class Escenas {
+    pilas: Pilas;
+    escena_actual: Escena;
+    constructor(pilas: any);
+    Normal(): Escena;
+}
 declare class Log {
     pilas: Pilas;
     constructor(pilas: Pilas);
@@ -35,12 +41,15 @@ declare class Pilas {
     _ancho: number;
     _alto: number;
     constructor();
+    iniciar(): void;
     obtener_entidades(): any;
-    _conectarAtajosDeTeclado(): void;
-    _agregarManejadorDeMensajes(): void;
+    escena_actual(): any;
+    conectar_atajos_de_teclado(): void;
+    private agregar_manejador_de_eventos();
     emitir_error_y_detener(error: any): void;
     capturar_errores_y_reportarlos_al_editor(): void;
-    _atenderMensaje(e: any): void;
+    private antender_mensaje_desde_el_editor(e);
+    iniciar_pilas_desde_el_editor(ancho: any, alto: any): void;
     _preload(): void;
     _create(): void;
     start(): void;
@@ -61,6 +70,12 @@ declare class Pilas {
     };
 }
 declare var pilas: Pilas;
+declare class Utilidades {
+    pilas: Pilas;
+    id: number;
+    constructor(pilas: any);
+    obtener_id_autoincremental(): number;
+}
 declare class ActorBase {
     tipo: String;
     sprite: Phaser.Sprite;
@@ -118,6 +133,19 @@ declare class ActorDentroDelEditor extends Phaser.Sprite {
     destacar(): void;
 }
 declare class ActorDentroDelModoPausa extends Phaser.Sprite {
+}
+declare class EscenaBase {
+    actores: Actor[];
+    id: number;
+    constructor(pilas: any);
+    agregar_actor(actor: Actor): void;
+}
+declare class Escena extends EscenaBase {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class Normal extends Escena {
+    iniciar(): void;
 }
 declare class Estado extends Phaser.State {
     pilas: Pilas;

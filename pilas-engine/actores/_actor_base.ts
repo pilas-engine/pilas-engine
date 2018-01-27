@@ -28,6 +28,8 @@ class ActorBase {
         this.pilas.emitir_error_y_detener(e);
       }
     };
+
+    this.pilas.escena_actual().agregar_actor(this);
   }
 
   iniciar() {}
