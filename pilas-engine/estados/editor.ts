@@ -29,6 +29,7 @@ class EstadoEditor extends Estado {
 
     let texto = this.game.add.text(0, 5, "", style);
     texto.setShadow(1, 1, "rgba(0, 0, 0, 0.5)", 3);
+    texto["ocultar_posicion"] = true;
     this.texto = texto;
   }
 
@@ -63,7 +64,11 @@ class EstadoEditor extends Estado {
       return e;
     });
 
-    this.actualizar_texto_con_posicion_del_mouse();
+    if (this.pilas.depurador.modo_posicion_activado) {
+      this.actualizar_texto_con_posicion_del_mouse();
+    } else {
+      this.texto.text = "";
+    }
   }
 
   actualizar_texto_con_posicion_del_mouse() {
@@ -78,5 +83,4 @@ class EstadoEditor extends Estado {
 
     this.game.world.bringToTop(this.texto);
   }
-
 }

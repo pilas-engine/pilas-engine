@@ -53,6 +53,12 @@ export default Ember.Component.extend({
     };
   },
 
+  didReceiveAttrs() {
+    if (this.get("contexto")) {
+      this.emitir_estados_de_depuracion_a_pilas();
+    }
+  },
+
   willDestroyElement() {
     window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
 
@@ -73,6 +79,15 @@ export default Ember.Component.extend({
       escena: escena
     };
 
+    this.contexto.postMessage(data, utils.HOST);
+    this.emitir_estados_de_depuracion_a_pilas();
+  },
+
+  emitir_estados_de_depuracion_a_pilas() {
+    let data = {
+      tipo: "definir_estados_de_depuracion",
+      pos: this.get("pos")
+    };
     this.contexto.postMessage(data, utils.HOST);
   },
 

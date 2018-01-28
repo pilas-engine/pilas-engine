@@ -19,7 +19,6 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.input.enableDrag();
 
     this.crear_sombra();
-    this["depurable"] = true;
 
     //this.tint = 0xaaaaff;
 
@@ -89,6 +88,7 @@ class ActorDentroDelEditor extends Phaser.Sprite {
   crear_sombra() {
     this.shadow = this.game.add.sprite(10, 10, this.key);
     this.shadow.tint = 0x000000;
+    this.shadow["ocultar_posicion"] = true;
     this.ocultar_sombra();
   }
 

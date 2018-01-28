@@ -105,7 +105,6 @@ class EstadoPausa extends Estado {
     let sprite = new ActorDentroDelModoPausa(this.game, x, y, entidad.imagen);
     sprite.angle = entidad.rotacion;
     sprite.anchor.set(entidad.centro_x, entidad.centro_y);
-    sprite["depurable"] = true;
 
     this.world.add(sprite);
     return sprite;

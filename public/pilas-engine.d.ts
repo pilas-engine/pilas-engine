@@ -20,6 +20,12 @@ declare class Control {
     readonly arriba: boolean;
     readonly abajo: boolean;
 }
+declare class Log {
+    pilas: Pilas;
+    constructor(pilas: Pilas);
+    debug(...mensaje: any[]): void;
+    info(...mensaje: any[]): void;
+}
 declare class Escenas {
     pilas: Pilas;
     escena_actual: Escena;

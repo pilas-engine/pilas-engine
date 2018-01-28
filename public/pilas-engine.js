@@ -60,6 +60,13 @@ var Control = (function () {
     });
     return Control;
 }());
+var Depurador = (function () {
+    function Depurador(pilas) {
+        this.pilas = pilas;
+        this.modo_posicion_activado = false;
+    }
+    return Depurador;
+}());
 var Escenas = (function () {
     function Escenas(pilas) {
         this.escena_actual = null;
@@ -100,6 +107,7 @@ var Pilas = (function () {
         this.log = new Log(this);
         this.agregar_manejador_de_eventos();
         this.capturar_errores_y_reportarlos_al_editor();
+        this.depurador = new Depurador(this);
     }
     Pilas.prototype.iniciar = function () {
         this.game.state.add("editorState", EstadoEditor);
@@ -193,6 +201,9 @@ var Pilas = (function () {
         }
         if (e.data.tipo === "iniciar_pilas") {
             this.iniciar_pilas_desde_el_editor(+e.data.ancho, +e.data.alto);
+        }
+        if (e.data.tipo === "definir_estados_de_depuracion") {
+            this.depurador.modo_posicion_activado = e.data.pos;
         }
     };
     Pilas.prototype.iniciar_pilas_desde_el_editor = function (ancho, alto) {
@@ -413,7 +424,6 @@ var ActorDentroDelEditor = (function (_super) {
         this.inputEnabled = true;
         this.input.enableDrag();
         this.crear_sombra();
-        this["depurable"] = true;
         this.conectar_eventos_arrastrar_y_soltar();
     };
     ActorDentroDelEditor.prototype.conectar_eventos_arrastrar_y_soltar = function () {
@@ -466,6 +476,7 @@ var ActorDentroDelEditor = (function (_super) {
     ActorDentroDelEditor.prototype.crear_sombra = function () {
         this.shadow = this.game.add.sprite(10, 10, this.key);
         this.shadow.tint = 0x000000;
+        this.shadow["ocultar_posicion"] = true;
         this.ocultar_sombra();
     };
     ActorDentroDelEditor.prototype.destacar = function () {
@@ -541,15 +552,17 @@ var Estado = (function (_super) {
             debug.geom(line1, "white", false);
             debug.geom(line2, "white", false);
         }
-        this.game.world.children.forEach(function (sprite) {
-            if (sprite["depurable"]) {
-                var _x = Math.round(sprite.x);
-                var _y = Math.round(sprite.y);
-                var _a = _this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y), x = _a.x, y = _a.y;
-                debug.text("(" + x + ", " + y + ")", _x + 5, _y + 15, "white");
-                dibujarPuntoDeControl(debug, sprite.x, sprite.y);
-            }
-        });
+        if (this.pilas.depurador.modo_posicion_activado) {
+            this.game.world.children.forEach(function (sprite) {
+                if (!sprite["ocultar_posicion"]) {
+                    var _x = Math.round(sprite.x);
+                    var _y = Math.round(sprite.y);
+                    var _a = _this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y), x = _a.x, y = _a.y;
+                    debug.text("(" + x + ", " + y + ")", _x + 5, _y + 15, "white");
+                    dibujarPuntoDeControl(debug, sprite.x, sprite.y);
+                }
+            });
+        }
     };
     Estado.prototype.create = function () {
         this.canvas = this.game.add.graphics(0, 0);
@@ -595,6 +608,7 @@ var EstadoEditor = (function (_super) {
         };
         var texto = this.game.add.text(0, 5, "", style);
         texto.setShadow(1, 1, "rgba(0, 0, 0, 0.5)", 3);
+        texto["ocultar_posicion"] = true;
         this.texto = texto;
     };
     EstadoEditor.prototype.create = function () {
@@ -621,7 +635,12 @@ var EstadoEditor = (function (_super) {
             sprite.anchor.set(e.centro_x, e.centro_y);
             return e;
         });
-        this.actualizar_texto_con_posicion_del_mouse();
+        if (this.pilas.depurador.modo_posicion_activado) {
+            this.actualizar_texto_con_posicion_del_mouse();
+        }
+        else {
+            this.texto.text = "";
+        }
     };
     EstadoEditor.prototype.actualizar_texto_con_posicion_del_mouse = function () {
         var _x = Math.round(this.input.mousePointer.x);
@@ -804,7 +823,6 @@ var EstadoPausa = (function (_super) {
         var sprite = new ActorDentroDelModoPausa(this.game, x, y, entidad.imagen);
         sprite.angle = entidad.rotacion;
         sprite.anchor.set(entidad.centro_x, entidad.centro_y);
-        sprite["depurable"] = true;
         this.world.add(sprite);
         return sprite;
     };

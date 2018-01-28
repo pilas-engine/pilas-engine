@@ -17,6 +17,8 @@ class Pilas {
     this.log = new Log(this);
     this.agregar_manejador_de_eventos();
     this.capturar_errores_y_reportarlos_al_editor();
+
+    this.depurador = new Depurador(this);
   }
 
   iniciar() {
@@ -150,6 +152,11 @@ class Pilas {
 
     if (e.data.tipo === "iniciar_pilas") {
       this.iniciar_pilas_desde_el_editor(+e.data.ancho, +e.data.alto);
+    }
+
+    if (e.data.tipo === "definir_estados_de_depuracion") {
+      this.depurador.modo_posicion_activado = e.data.pos;
+      //console.log("En pilas.ts, intenta definir los estados de depuración", e.data);
     }
   }
 

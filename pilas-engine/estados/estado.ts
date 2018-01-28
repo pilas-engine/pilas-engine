@@ -16,18 +16,20 @@ class Estado extends Phaser.State {
       debug.geom(line2, "white", false);
     }
 
-    this.game.world.children.forEach(sprite => {
-      if (sprite["depurable"]) {
-        let _x = Math.round(sprite.x);
-        let _y = Math.round(sprite.y);
-        let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y);
+    if (this.pilas.depurador.modo_posicion_activado) {
+      this.game.world.children.forEach(sprite => {
+        if (!sprite["ocultar_posicion"]) {
+          let _x = Math.round(sprite.x);
+          let _y = Math.round(sprite.y);
+          let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y);
 
-        //debug.spriteBounds(sprite, "white", false);
-        debug.text(`(${x}, ${y})`, _x + 5, _y + 15, "white");
+          //debug.spriteBounds(sprite, "white", false);
+          debug.text(`(${x}, ${y})`, _x + 5, _y + 15, "white");
 
-        dibujarPuntoDeControl(debug, sprite.x, sprite.y);
-      }
-    });
+          dibujarPuntoDeControl(debug, sprite.x, sprite.y);
+        }
+      });
+    }
   }
 
   create() {
