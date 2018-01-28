@@ -32,6 +32,8 @@ class Pilas {
     this.actores = new Actores(this);
     this.escenas = new Escenas(this);
     this.utilidades = new Utilidades(this);
+
+    this.escenas.Normal();
   }
 
   obtener_entidades() {

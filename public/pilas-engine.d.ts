@@ -125,7 +125,10 @@ declare class ActorDentroDelEditor extends Phaser.Sprite {
     al_terminar_de_arrastrar(a: any): void;
     al_comenzar_a_arrastrar(a: any): void;
     cuando_comienza_a_mover(): void;
+    cuando_posiciona_el_mouse_sobre_el_actor(): void;
+    cuando_deja_de_posicionar_el_mouse_sobre_el_actor(): void;
     cuando_termina_de_mover(): void;
+    definir_puntero(nombre: any): void;
     activar_sombra(): void;
     ocultar_sombra(): void;
     update(): void;

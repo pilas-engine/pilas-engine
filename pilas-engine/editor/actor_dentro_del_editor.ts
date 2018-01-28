@@ -30,6 +30,9 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.events.onDragStart.add(this.cuando_comienza_a_mover, this);
     this.events.onDragStart.add(this.activar_sombra, this);
 
+    this.events.onInputOver.add(this.cuando_posiciona_el_mouse_sobre_el_actor, this);
+    this.events.onInputOut.add(this.cuando_deja_de_posicionar_el_mouse_sobre_el_actor, this);
+
     this.events.onDragStop.add(this.ocultar_sombra, this);
     this.events.onDragStop.add(this.cuando_termina_de_mover, this);
   }
@@ -41,15 +44,29 @@ class ActorDentroDelEditor extends Phaser.Sprite {
   cuando_comienza_a_mover() {
     if (this.al_comenzar_a_arrastrar) {
       let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.x, this.y);
+      this.definir_puntero("-webkit-grabbing");
       this.al_comenzar_a_arrastrar({ id: this.id, x: x, y: y });
     }
+  }
+
+  cuando_posiciona_el_mouse_sobre_el_actor() {
+    this.definir_puntero("-webkit-grab");
+  }
+
+  cuando_deja_de_posicionar_el_mouse_sobre_el_actor() {
+    this.definir_puntero("default");
   }
 
   cuando_termina_de_mover() {
     if (this.al_terminar_de_arrastrar) {
       let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.x, this.y);
+      this.definir_puntero("-webkit-grab");
       this.al_terminar_de_arrastrar({ id: this.id, x: x, y: y });
     }
+  }
+
+  definir_puntero(nombre) {
+    this.game.canvas.style.cursor = nombre;
   }
 
   activar_sombra() {

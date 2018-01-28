@@ -111,6 +111,7 @@ var Pilas = (function () {
         this.actores = new Actores(this);
         this.escenas = new Escenas(this);
         this.utilidades = new Utilidades(this);
+        this.escenas.Normal();
     };
     Pilas.prototype.obtener_entidades = function () {
         return this.game.state.getCurrentState()["entidades"];
@@ -418,6 +419,8 @@ var ActorDentroDelEditor = (function (_super) {
     ActorDentroDelEditor.prototype.conectar_eventos_arrastrar_y_soltar = function () {
         this.events.onDragStart.add(this.cuando_comienza_a_mover, this);
         this.events.onDragStart.add(this.activar_sombra, this);
+        this.events.onInputOver.add(this.cuando_posiciona_el_mouse_sobre_el_actor, this);
+        this.events.onInputOut.add(this.cuando_deja_de_posicionar_el_mouse_sobre_el_actor, this);
         this.events.onDragStop.add(this.ocultar_sombra, this);
         this.events.onDragStop.add(this.cuando_termina_de_mover, this);
     };
@@ -426,14 +429,25 @@ var ActorDentroDelEditor = (function (_super) {
     ActorDentroDelEditor.prototype.cuando_comienza_a_mover = function () {
         if (this.al_comenzar_a_arrastrar) {
             var _a = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.x, this.y), x = _a.x, y = _a.y;
+            this.definir_puntero("-webkit-grabbing");
             this.al_comenzar_a_arrastrar({ id: this.id, x: x, y: y });
         }
+    };
+    ActorDentroDelEditor.prototype.cuando_posiciona_el_mouse_sobre_el_actor = function () {
+        this.definir_puntero("-webkit-grab");
+    };
+    ActorDentroDelEditor.prototype.cuando_deja_de_posicionar_el_mouse_sobre_el_actor = function () {
+        this.definir_puntero("default");
     };
     ActorDentroDelEditor.prototype.cuando_termina_de_mover = function () {
         if (this.al_terminar_de_arrastrar) {
             var _a = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.x, this.y), x = _a.x, y = _a.y;
+            this.definir_puntero("-webkit-grab");
             this.al_terminar_de_arrastrar({ id: this.id, x: x, y: y });
         }
+    };
+    ActorDentroDelEditor.prototype.definir_puntero = function (nombre) {
+        this.game.canvas.style.cursor = nombre;
     };
     ActorDentroDelEditor.prototype.activar_sombra = function () {
         this.shadow.alpha = 0.3;
