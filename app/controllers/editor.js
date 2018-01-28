@@ -69,12 +69,12 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       codigos: {
         escenas: [
           {
-            nombre: "principal",
-            codigo: "class Principal extends Escena { /* ... */ }"
+            nombre: "Escena1",
+            codigo: "class Escena1 extends Escena { /* ... */ }"
           },
           {
-            nombre: "otra",
-            codigo: "class Otra extends Escena { /* codigo de otra escena */ }"
+            nombre: "Escena2",
+            codigo: "class Escena2 extends Escena { /* codigo de otra escena */ }"
           }
         ],
         actores: [
@@ -127,7 +127,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
       },
       escenas: [
         {
-          nombre: "principal",
+          nombre: "Escena1",
           id: 1,
           actores: [
             {
@@ -169,7 +169,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
           ]
         },
         {
-          nombre: "otra",
+          nombre: "Escena2",
           id: 6,
           actores: []
         }
