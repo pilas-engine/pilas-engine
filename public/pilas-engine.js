@@ -164,6 +164,14 @@ var Pilas = (function () {
                 }
             });
         }
+        if (e.data.tipo === "ejecutar_proyecto") {
+            this.game.state.start("estadoEjecucion", true, false, {
+                pilas: this,
+                proyecto: e.data.proyecto,
+                nombre_de_la_escena_inicial: e.data.nombre_de_la_escena_inicial,
+                codigo: e.data.codigo
+            });
+        }
         if (e.data.tipo === "ejecutar_escena") {
             this.game.state.start("estadoEjecucion", true, false, {
                 pilas: this,
@@ -246,6 +254,14 @@ var Pilas = (function () {
         datos = datos || {};
         datos.tipo = nombre;
         window.parent.postMessage(datos, HOST);
+    };
+    Pilas.prototype.emitir_excepcion_al_editor = function (error) {
+        var detalle = {
+            mensaje: error.message,
+            stack: error.stack.toString()
+        };
+        this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
+        console.error(error);
     };
     Pilas.prototype.obtener_actores = function () {
         return pilas.game.world.children.map(function (s) { return s["actor"]; }).filter(function (s) { return s !== undefined; });
@@ -656,25 +672,28 @@ var EstadoEditor = (function (_super) {
 var EstadoEjecucion = (function (_super) {
     __extends(EstadoEjecucion, _super);
     function EstadoEjecucion() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.nombre_de_la_escena_inicial = null;
+        return _this;
     }
     EstadoEjecucion.prototype.init = function (datos) {
         this.pilas = datos.pilas;
-        this.entidades = datos.escena.actores;
+        this.nombre_de_la_escena_inicial = datos.nombre_de_la_escena_inicial;
+        this.proyecto = datos.proyecto;
         this.codigo = datos.codigo;
-        var codigoDeExportacion = this.obtenerCodigoDeExportacion(this.codigo);
+        var codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
         var codigoCompleto = this.codigo + codigoDeExportacion;
         try {
-            this.clasesDeActores = eval(codigoCompleto);
+            this.clases = eval(codigoCompleto);
         }
         catch (e) {
-            this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+            this.pilas.emitir_excepcion_al_editor(e);
         }
         this.sprites = {};
         this.historia = [];
         this.actores = [];
     };
-    EstadoEjecucion.prototype.obtenerCodigoDeExportacion = function (codigo) {
+    EstadoEjecucion.prototype.obtener_codigo_para_exportar_clases = function (codigo) {
         var re_creacion_de_clase = /var (.*) \= \/\*\* @class/g;
         var re_solo_clase = /var\ (\w+)/;
         var lista_de_clases = [];
@@ -697,16 +716,17 @@ var EstadoEjecucion = (function (_super) {
         this.game.physics.p2.restitution = 0.75;
         this.game.physics.p2.friction = 499;
         try {
-            this.crear_actores_desde_entidades();
+            this.instanciar_escena(this.nombre_de_la_escena_inicial);
         }
         catch (e) {
-            this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+            this.pilas.emitir_excepcion_al_editor(e);
         }
         this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
     };
-    EstadoEjecucion.prototype.crear_actores_desde_entidades = function () {
+    EstadoEjecucion.prototype.instanciar_escena = function (nombre) {
         var _this = this;
-        this.actores = this.entidades.map(function (e) {
+        var escena = this.proyecto.escenas.filter(function (e) { return e.nombre == nombre; })[0];
+        this.actores = escena.actores.map(function (e) {
             return _this.crear_actor(e);
         });
     };
@@ -715,9 +735,9 @@ var EstadoEjecucion = (function (_super) {
         var y = entidad.y;
         var imagen = entidad.imagen;
         var actor = null;
-        var clase = this.clasesDeActores[entidad.tipo];
+        var clase = this.clases[entidad.tipo];
         if (clase) {
-            actor = new this.clasesDeActores[entidad.tipo](this.pilas, x, y, imagen);
+            actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen);
             actor.tipo = entidad.tipo;
             actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
             actor.iniciar();

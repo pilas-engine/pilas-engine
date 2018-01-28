@@ -5,21 +5,26 @@ class EstadoEjecucion extends Estado {
   sprites: any;
   historia: any;
   actores: any;
-  clasesDeActores: {};
+  clases: {};
+  proyecto: {};
   codigo: any;
+  nombre_de_la_escena_inicial: string = null;
 
   init(datos) {
     this.pilas = datos.pilas;
-    this.entidades = datos.escena.actores;
+
+    this.nombre_de_la_escena_inicial = datos.nombre_de_la_escena_inicial;
+    this.proyecto = datos.proyecto;
     this.codigo = datos.codigo;
 
-    let codigoDeExportacion = this.obtenerCodigoDeExportacion(this.codigo);
-    let codigoCompleto = this.codigo + codigoDeExportacion;
+    let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
+    //manejador_de_errores = "\nwindow.onerror = function(a) {alert(a)}\n";
+    let codigoCompleto = this.codigo /* + manejador_de_errores*/ + codigoDeExportacion;
 
     try {
-      this.clasesDeActores = eval(codigoCompleto);
+      this.clases = eval(codigoCompleto);
     } catch (e) {
-      this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+      this.pilas.emitir_excepcion_al_editor(e);
     }
 
     this.sprites = {};
@@ -27,7 +32,17 @@ class EstadoEjecucion extends Estado {
     this.actores = [];
   }
 
-  obtenerCodigoDeExportacion(codigo) {
+  /**
+   * Este método se utiliza para extraer todas las referencias a clases y
+   * colocarlas en un diccionario que se pueda obtener luego de ejecutar
+   * eval.
+   *
+   * Por ejemplo, si el código es algo como "class Ejemplo {... \n class B ..."
+   * esta función va a generar un string de la forma:
+   *
+   * "__clases = {Ejemplo:Ejemplo,B:B};\n__clases;
+   */
+  obtener_codigo_para_exportar_clases(codigo) {
     const re_creacion_de_clase = /var (.*) \= \/\*\* @class/g;
     const re_solo_clase = /var\ (\w+)/;
     let lista_de_clases = [];
@@ -58,16 +73,18 @@ class EstadoEjecucion extends Estado {
     this.game.physics.p2.friction = 499;
 
     try {
-      this.crear_actores_desde_entidades();
+      this.instanciar_escena(this.nombre_de_la_escena_inicial);
     } catch (e) {
-      this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+      this.pilas.emitir_excepcion_al_editor(e);
     }
 
     this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
   }
 
-  crear_actores_desde_entidades() {
-    this.actores = this.entidades.map(e => {
+  instanciar_escena(nombre) {
+    let escena = this.proyecto.escenas.filter(e => e.nombre == nombre)[0];
+
+    this.actores = escena.actores.map(e => {
       return this.crear_actor(e);
     });
   }
@@ -78,10 +95,10 @@ class EstadoEjecucion extends Estado {
     let imagen = entidad.imagen;
     let actor = null;
 
-    let clase = this.clasesDeActores[entidad.tipo];
+    let clase = this.clases[entidad.tipo];
 
     if (clase) {
-      actor = new this.clasesDeActores[entidad.tipo](this.pilas, x, y, imagen);
+      actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen);
       actor.tipo = entidad.tipo;
       actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
       actor.iniciar();

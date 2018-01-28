@@ -45,6 +45,7 @@ export default Ember.Component.extend({
       this.get("bus").on("cargarEscena", this, "cargarEscena");
       this.get("bus").on("finalizaCarga", this, "finalizaCarga");
       this.get("bus").on("ejecutarEscena", this, "ejecutarEscena");
+      this.get("bus").on("ejecutar_proyecto", this, "ejecutar_proyecto");
       this.get("bus").on("pausarEscena", this, "pausarEscena");
       this.get("bus").on("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
       this.get("bus").on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
@@ -65,6 +66,7 @@ export default Ember.Component.extend({
     this.get("bus").off("cargarEscena", this, "cargarEscena");
     this.get("bus").off("finalizaCarga", this, "finalizaCarga");
     this.get("bus").off("ejecutarEscena", this, "ejecutarEscena");
+    this.get("bus").off("ejecutar_proyecto", this, "ejecutar_proyecto");
     this.get("bus").off("pausarEscena", this, "pausarEscena");
     this.get("bus").off("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
     this.get("bus").off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
@@ -92,9 +94,22 @@ export default Ember.Component.extend({
   },
 
   ejecutarEscena({ escena, codigo }) {
+    console.warn("Deprecated");
+
     let data = {
       tipo: "ejecutar_escena",
       escena: escena,
+      codigo: codigo
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  ejecutar_proyecto({ proyecto, nombre_de_la_escena_inicial, codigo }) {
+    let data = {
+      tipo: "ejecutar_proyecto",
+      proyecto: proyecto,
+      nombre_de_la_escena_inicial: nombre_de_la_escena_inicial,
       codigo: codigo
     };
 

@@ -107,6 +107,15 @@ class Pilas {
       });
     }
 
+    if (e.data.tipo === "ejecutar_proyecto") {
+      this.game.state.start("estadoEjecucion", true, false, {
+        pilas: this,
+        proyecto: e.data.proyecto,
+        nombre_de_la_escena_inicial: e.data.nombre_de_la_escena_inicial,
+        codigo: e.data.codigo
+      });
+    }
+
     if (e.data.tipo === "ejecutar_escena") {
       this.game.state.start("estadoEjecucion", true, false, {
         pilas: this,
@@ -209,6 +218,16 @@ class Pilas {
     datos = datos || {};
     datos.tipo = nombre;
     window.parent.postMessage(datos, HOST);
+  }
+
+  emitir_excepcion_al_editor(error) {
+    let detalle = {
+      mensaje: error.message,
+      stack: error.stack.toString()
+    };
+
+    this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
+    console.error(error);
   }
 
   obtener_actores() {

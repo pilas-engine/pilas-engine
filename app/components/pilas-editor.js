@@ -2,6 +2,8 @@ import Component from "@ember/component";
 import Ember from "ember";
 import estados from "../estados/estados-de-pilas-editor";
 import aplicarNombre from "../utils/aplicar-nombre";
+import json_a_string from "../utils/json-a-string";
+import string_a_json from "../utils/string-a-json";
 import obtenerNombreSinRepetir from "../utils/obtener-nombre-sin-repetir";
 import obtenerPlantillaDeEscena from "../utils/obtener-plantilla-de-escena";
 
@@ -152,7 +154,11 @@ export default Component.extend({
 
   obtenerCodigoTypescript() {
     let proyecto = this.get("proyecto");
-    return proyecto.codigos.actores.map(e => e.codigo).join("\n");
+
+    let codigo_de_escenas = proyecto.codigos.escenas.map(e => e.codigo).join("\n");
+    let codigo_de_actores = proyecto.codigos.actores.map(e => e.codigo).join("\n");
+
+    return codigo_de_escenas + codigo_de_actores;
   },
 
   generarID() {
@@ -270,12 +276,18 @@ export default Component.extend({
       this.set("estado", this.get("estado").ejecutar());
 
       let escena = this.obtenerEscenaActual();
-      let escenaComoJSON = JSON.parse(JSON.stringify(escena));
 
       let codigoTypescript = this.obtenerCodigoTypescript();
       let resultado = this.get("compilador").compilar(codigoTypescript);
 
-      this.get("bus").trigger("ejecutarEscena", { codigo: resultado.codigo, escena: escenaComoJSON });
+      //this.get("bus").trigger("ejecutarEscena", { codigo: resultado.codigo, escena: escenaComoJSON });
+      let datos = {
+        nombre_de_la_escena_inicial: escena.nombre,
+        codigo: resultado.codigo,
+        proyecto: string_a_json(json_a_string(this.get("proyecto")))
+      };
+
+      this.get("bus").trigger("ejecutar_proyecto", datos);
       this.get("foco").hacerFocoEnPilas();
       this.get("log").limpiar();
       this.get("log").info("Ingresando en modo ejecución");
