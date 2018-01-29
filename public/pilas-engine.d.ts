@@ -4,33 +4,36 @@ declare class Actores {
     Caja(x: any, y: any): Caja;
     Aceituna(x?: number, y?: number): Aceituna;
 }
+declare class Camara {
+    pilas: Pilas;
+    constructor(pilas: Pilas);
+    vibrar(intensidad?: number, tiempo?: number): void;
+    x: number;
+    y: number;
+}
 declare class Control {
     pilas: Pilas;
     teclaIzquierda: any;
     teclaDerecha: any;
     teclaArriba: any;
     teclaAbajo: any;
-    izquierda: boolean;
-    derecha: boolean;
-    arriba: boolean;
-    abajo: boolean;
     constructor(pilas: Pilas);
     readonly izquierda: boolean;
     readonly derecha: boolean;
     readonly arriba: boolean;
     readonly abajo: boolean;
 }
-declare class Log {
+declare class Depurador {
     pilas: Pilas;
+    modo_posicion_activado: boolean;
     constructor(pilas: Pilas);
-    debug(...mensaje: any[]): void;
-    info(...mensaje: any[]): void;
 }
 declare class Escenas {
     pilas: Pilas;
     escena_actual: Escena;
     constructor(pilas: any);
     Normal(): Escena;
+    vincular(escena: any): void;
 }
 declare class Log {
     pilas: Pilas;
@@ -44,12 +47,16 @@ declare class Pilas {
     log: Log;
     control: Control;
     actores: Actores;
+    depurador: Depurador;
+    escenas: Escenas;
+    utilidades: Utilidades;
     _ancho: number;
     _alto: number;
     constructor();
     iniciar(): void;
     obtener_entidades(): any;
-    escena_actual(): any;
+    escena_actual(): Escena;
+    readonly camara: Camara;
     conectar_atajos_de_teclado(): void;
     private agregar_manejador_de_eventos();
     emitir_error_y_detener(error: any): void;
@@ -63,6 +70,7 @@ declare class Pilas {
     _cuando_carga_archivo(progreso: any): void;
     _cuando_termina_de_cargar(): void;
     emitir_mensaje_al_editor(nombre: any, datos: any): void;
+    emitir_excepcion_al_editor(error: any): void;
     obtener_actores(): any[];
     obtener_cantidad_de_actores(): number;
     obtener_actores_en(_x: number, _y: number): any[];
@@ -87,9 +95,6 @@ declare class ActorBase {
     sprite: Phaser.Sprite;
     pilas: Pilas;
     _rotacion: number;
-    x: number;
-    y: number;
-    rotacion: number;
     constructor(pilas: any, x: any, y: any, imagen?: string);
     iniciar(): void;
     serializar(): {
@@ -144,8 +149,10 @@ declare class ActorDentroDelEditor extends Phaser.Sprite {
 declare class ActorDentroDelModoPausa extends Phaser.Sprite {
 }
 declare class EscenaBase {
+    pilas: Pilas;
     actores: Actor[];
     id: number;
+    camara: Camara;
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
 }
@@ -160,6 +167,7 @@ declare class Estado extends Phaser.State {
     pilas: Pilas;
     historia: any;
     canvas: any;
+    sprites: any;
     render(): void;
     create(): void;
     obtener_sprites(): any;
@@ -184,12 +192,14 @@ declare class EstadoEjecucion extends Estado {
     sprites: any;
     historia: any;
     actores: any;
-    clasesDeActores: {};
+    clases: {};
+    proyecto: any;
     codigo: any;
+    nombre_de_la_escena_inicial: string;
     init(datos: any): void;
-    obtenerCodigoDeExportacion(codigo: any): string;
+    obtener_codigo_para_exportar_clases(codigo: any): string;
     create(): void;
-    crear_actores_desde_entidades(): void;
+    instanciar_escena(nombre: any): void;
     crear_actor(entidad: any): any;
     preRender(): void;
     private guardar_foto_de_entidades();

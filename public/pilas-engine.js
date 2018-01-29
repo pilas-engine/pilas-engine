@@ -234,7 +234,7 @@ var Pilas = (function () {
         if (e.data.tipo === "selecciona_actor_desde_el_editor") {
             var id = +e.data.id;
             var actores = this.obtener_actores();
-            var sprites = this.game.state.getCurrentState().obtener_sprites();
+            var sprites = this.game.state.getCurrentState()['obtener_sprites']();
             var sprite = sprites[id];
             if (sprite) {
                 sprite.destacar();
@@ -903,3 +903,4 @@ var EstadoPausa = (function (_super) {
     };
     return EstadoPausa;
 }(Estado));
+//# sourceMappingURL=pilas-engine.js.map

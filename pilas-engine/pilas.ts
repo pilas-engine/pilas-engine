@@ -145,7 +145,7 @@ class Pilas {
       let id = +e.data.id;
       let actores = this.obtener_actores();
 
-      let sprites = this.game.state.getCurrentState().obtener_sprites();
+      let sprites = this.game.state.getCurrentState()['obtener_sprites']();
       let sprite = sprites[id];
 
       if (sprite) {

@@ -1,6 +1,6 @@
 class Depurador {
   pilas: Pilas;
-  modo_posicion_activado: bool;
+  modo_posicion_activado: boolean;
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;

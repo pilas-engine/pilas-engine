@@ -1,14 +1,10 @@
 class Control {
   pilas: Pilas;
+
   teclaIzquierda;
   teclaDerecha;
   teclaArriba;
   teclaAbajo;
-
-  izquierda: boolean;
-  derecha: boolean;
-  arriba: boolean;
-  abajo: boolean;
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
