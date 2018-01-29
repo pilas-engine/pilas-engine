@@ -6,6 +6,22 @@ export default Component.extend({
   bus: Ember.inject.service(),
   compilador: Ember.inject.service(),
   espera: 2,
+  proyecto: {
+    titulo: "Proyecto para pilas-test",
+    ancho: 500,
+    alto: 500,
+    codigos: {
+      escenas: [],
+      actores: []
+    },
+    escenas: [
+      {
+        nombre: "principal",
+        id: 1,
+        actores: []
+      }
+    ]
+  },
 
   didInsertElement() {
     this.get("bus").on("finalizaCarga", this, "finalizaCarga");
@@ -18,46 +34,12 @@ export default Component.extend({
   },
 
   finalizaCarga(pilas) {
-    let proyecto = {
-      titulo: "Proyecto para pilas-test",
-      ancho: 500,
-      alto: 500,
-      codigos: {
-        escenas: [],
-        actores: [
-          {
-            tipo: "Pelota",
-            codigo: `class Pelota  extends ActorBase {
-
-            iniciar() {
-            }
-
-          }`
-          }
-        ]
-      },
-      escenas: [
-        {
-          nombre: "principal",
-          id: 1,
-          actores: [
-            {
-              id: 1,
-              x: 300,
-              y: 200,
-              centro_x: 0.5,
-              centro_y: 0.5,
-              tipo: "Pelota",
-              imagen: "pelota"
-            }
-          ]
-        }
-      ]
-    };
+    let proyecto = this.get("proyecto");
+    let resultado = this.get("compilador").compilar_proyecto(proyecto);
 
     let datos = {
       nombre_de_la_escena_inicial: "principal",
-      codigo: "",
+      codigo: resultado.codigo,
       proyecto: proyecto
     };
 
@@ -70,7 +52,7 @@ export default Component.extend({
     }
   },
 
-  cuandoTerminaDeIniciarEjecucion(pilas) {
-    this.get("cuandoInicia")(pilas, this.get("compilador"));
+  cuandoTerminaDeIniciarEjecucion(pilas, contexto) {
+    this.get("cuandoInicia")(pilas, contexto);
   }
 });

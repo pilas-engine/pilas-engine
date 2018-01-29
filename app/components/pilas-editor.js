@@ -152,15 +152,6 @@ export default Component.extend({
     );
   },
 
-  obtenerCodigoTypescript() {
-    let proyecto = this.get("proyecto");
-
-    let codigo_de_escenas = proyecto.codigos.escenas.map(e => e.codigo).join("\n");
-    let codigo_de_actores = proyecto.codigos.actores.map(e => e.codigo).join("\n");
-
-    return codigo_de_escenas + codigo_de_actores;
-  },
-
   generarID() {
     return Math.floor(Math.random() * 999) + 1000;
   },
@@ -277,10 +268,8 @@ export default Component.extend({
 
       let escena = this.obtenerEscenaActual();
 
-      let codigoTypescript = this.obtenerCodigoTypescript();
-      let resultado = this.get("compilador").compilar(codigoTypescript);
+      let resultado = this.get("compilador").compilar_proyecto(this.get('proyecto'));
 
-      //this.get("bus").trigger("ejecutarEscena", { codigo: resultado.codigo, escena: escenaComoJSON });
       let datos = {
         nombre_de_la_escena_inicial: escena.nombre,
         codigo: resultado.codigo,
