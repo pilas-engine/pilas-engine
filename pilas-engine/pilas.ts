@@ -9,6 +9,9 @@ class Pilas {
   log: Log;
   control: Control;
   actores: Actores;
+  depurador: Depurador;
+  escenas: Escenas;
+  utilidades: Utilidades;
 
   _ancho: number;
   _alto: number;
@@ -35,6 +38,9 @@ class Pilas {
     this.escenas = new Escenas(this);
     this.utilidades = new Utilidades(this);
 
+
+    pilas.game.camera.bounds = null;
+
     this.escenas.Normal();
   }
 
@@ -44,6 +50,10 @@ class Pilas {
 
   escena_actual() {
     return this.escenas.escena_actual;
+  }
+
+  get camara() {
+    return this.escena_actual().camara;
   }
 
   conectar_atajos_de_teclado() {
@@ -200,6 +210,7 @@ class Pilas {
     this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
     this.game.load.image("caja", "imagenes/caja.png");
     this.game.load.image("aceituna", "imagenes/aceituna.png");
+    this.game.load.image("plano", "imagenes/fondos/plano.png");
     this.game.load.start();
   }
 

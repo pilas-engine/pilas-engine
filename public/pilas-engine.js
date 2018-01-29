@@ -22,6 +22,37 @@ var Actores = (function () {
     };
     return Actores;
 }());
+var Camara = (function () {
+    function Camara(pilas) {
+        this.pilas = pilas;
+    }
+    Camara.prototype.vibrar = function (intensidad, tiempo) {
+        if (intensidad === void 0) { intensidad = 1; }
+        if (tiempo === void 0) { tiempo = 1; }
+        this.pilas.game.camera.shake(0.05 * intensidad, 250 * tiempo);
+    };
+    Object.defineProperty(Camara.prototype, "x", {
+        get: function () {
+            return this.pilas.game.camera.x;
+        },
+        set: function (x) {
+            this.pilas.game.camera.x = x;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Camara.prototype, "y", {
+        get: function () {
+            return -this.pilas.game.camera.y;
+        },
+        set: function (y) {
+            this.pilas.game.camera.y = -y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Camara;
+}());
 var Control = (function () {
     function Control(pilas) {
         this.pilas = pilas;
@@ -76,6 +107,13 @@ var Escenas = (function () {
         this.escena_actual = new Normal(this.pilas);
         return this.escena_actual;
     };
+    Escenas.prototype.vincular = function (escena) {
+        var _this = this;
+        this[escena.name] = function () {
+            _this.escena_actual = new escena(_this.pilas);
+            return _this.escena_actual;
+        };
+    };
     return Escenas;
 }());
 var Log = (function () {
@@ -119,6 +157,7 @@ var Pilas = (function () {
         this.actores = new Actores(this);
         this.escenas = new Escenas(this);
         this.utilidades = new Utilidades(this);
+        pilas.game.camera.bounds = null;
         this.escenas.Normal();
     };
     Pilas.prototype.obtener_entidades = function () {
@@ -127,6 +166,13 @@ var Pilas = (function () {
     Pilas.prototype.escena_actual = function () {
         return this.escenas.escena_actual;
     };
+    Object.defineProperty(Pilas.prototype, "camara", {
+        get: function () {
+            return this.escena_actual().camara;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Pilas.prototype.conectar_atajos_de_teclado = function () {
         var _this = this;
         this.game.input.keyboard.onUpCallback = function (evento) {
@@ -240,6 +286,7 @@ var Pilas = (function () {
         this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
         this.game.load.image("caja", "imagenes/caja.png");
         this.game.load.image("aceituna", "imagenes/aceituna.png");
+        this.game.load.image("plano", "imagenes/fondos/plano.png");
         this.game.load.start();
     };
     Pilas.prototype._cuando_comienza_a_cargar = function () { };
@@ -527,6 +574,7 @@ var EscenaBase = (function () {
         this.pilas = pilas;
         this.actores = [];
         this.pilas.utilidades.obtener_id_autoincremental();
+        this.camara = new Camara(pilas);
     }
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
@@ -612,6 +660,9 @@ var EstadoEditor = (function (_super) {
         this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
         this.sprites = {};
         this.crear_texto_con_posicion_del_mouse();
+        var fondo = this.game.add.tileSprite(-100, -100, this.game.width + 200, this.game.height + 200, "plano");
+        fondo.fixedToCamera = true;
+        window['fondo'] = fondo;
     };
     EstadoEditor.prototype.cuando_termina_de_mover = function (a) { };
     EstadoEditor.prototype.cuando_comienza_a_mover = function (a) { };
@@ -632,6 +683,8 @@ var EstadoEditor = (function (_super) {
     };
     EstadoEditor.prototype.update = function () {
         var _this = this;
+        window['fondo'].tilePosition.x = -pilas.game.camera.x;
+        window['fondo'].tilePosition.y = -pilas.game.camera.y;
         this.entidades = this.entidades.map(function (e) {
             var sprite = null;
             if (!_this.sprites[e.id]) {
@@ -673,6 +726,7 @@ var EstadoEjecucion = (function (_super) {
     __extends(EstadoEjecucion, _super);
     function EstadoEjecucion() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.proyecto = {};
         _this.nombre_de_la_escena_inicial = null;
         return _this;
     }
@@ -682,9 +736,9 @@ var EstadoEjecucion = (function (_super) {
         this.proyecto = datos.proyecto;
         this.codigo = datos.codigo;
         var codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
-        var codigoCompleto = this.codigo + codigoDeExportacion;
+        var codigo_completo = this.codigo + codigoDeExportacion;
         try {
-            this.clases = eval(codigoCompleto);
+            this.clases = eval(codigo_completo);
         }
         catch (e) {
             this.pilas.emitir_excepcion_al_editor(e);
@@ -744,6 +798,7 @@ var EstadoEjecucion = (function (_super) {
             this.world.add(actor.sprite);
         }
         else {
+            console.error(this.clases);
             throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.tipo);
         }
         return actor;

@@ -13,6 +13,10 @@ class EstadoEditor extends Estado {
     this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
     this.sprites = {};
     this.crear_texto_con_posicion_del_mouse();
+
+    let fondo = this.game.add.tileSprite(-100, -100, this.game.width + 200, this.game.height + 200, "plano");
+    fondo.fixedToCamera = true;
+    window['fondo'] = fondo;
   }
 
   cuando_termina_de_mover(a: any) {}
@@ -38,6 +42,9 @@ class EstadoEditor extends Estado {
   }
 
   update() {
+    window['fondo'].tilePosition.x = -pilas.game.camera.x;
+    window['fondo'].tilePosition.y = -pilas.game.camera.y;
+
     this.entidades = this.entidades.map(e => {
       var sprite = null;
 

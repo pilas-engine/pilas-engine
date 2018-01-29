@@ -192,7 +192,7 @@ export default Ember.Component.extend({
     }
 
     if (e.data.tipo === "termina_de_iniciar_ejecucion") {
-      this.get("bus").trigger("cuandoTerminaDeIniciarEjecucion", contexto.pilas);
+      this.get("bus").trigger("cuandoTerminaDeIniciarEjecucion", contexto.pilas, contexto);
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {
