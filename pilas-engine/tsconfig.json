@@ -5,7 +5,6 @@
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": true,
-    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "suppressImplicitAnyIndexErrors": true,
