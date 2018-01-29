@@ -6,7 +6,7 @@ class EstadoEjecucion extends Estado {
   historia: any;
   actores: any;
   clases: {};
-  proyecto: {};
+  proyecto: any = {};
   codigo: any;
   nombre_de_la_escena_inicial: string = null;
 
@@ -19,10 +19,10 @@ class EstadoEjecucion extends Estado {
 
     let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
     //manejador_de_errores = "\nwindow.onerror = function(a) {alert(a)}\n";
-    let codigoCompleto = this.codigo /* + manejador_de_errores*/ + codigoDeExportacion;
+    let codigo_completo = this.codigo /* + manejador_de_errores*/ + codigoDeExportacion;
 
     try {
-      this.clases = eval(codigoCompleto);
+      this.clases = eval(codigo_completo);
     } catch (e) {
       this.pilas.emitir_excepcion_al_editor(e);
     }
@@ -104,6 +104,7 @@ class EstadoEjecucion extends Estado {
       actor.iniciar();
       this.world.add(actor.sprite);
     } else {
+      console.error(this.clases);
       throw new Error(`No existe código para crear un actor de la clase ${entidad.tipo}`);
     }
 
