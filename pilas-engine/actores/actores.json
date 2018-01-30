@@ -16,19 +16,19 @@
       "nombre": "Ember",
       "tipo": "ActorBasico",
       "imagen": "ember",
-      "archivo": "_actor.ts"
+      "archivo": "-actor.ts"
     },
     {
       "nombre": "Logo",
       "tipo": "ActorBasico",
       "imagen": "logo",
-      "archivo": "_actor.ts"
+      "archivo": "-actor.ts"
     },
     {
       "nombre": "Pelota",
       "tipo": "Pelota",
       "imagen": "pelota",
-      "archivo": "_actor.ts"
+      "archivo": "-actor.ts"
     }
   ]
 }

@@ -11,4 +11,8 @@ class Utilidades {
     this.id = this.id + 1;
     return this.id;
   }
+
+  acceso_incorrecto(v) {
+    console.error(`No se puede definir esta propiedad (valor ${v}) porque es de solo lectura.`);
+  }
 }

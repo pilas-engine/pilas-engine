@@ -15,19 +15,35 @@ class Control {
     this.teclaAbajo = pilas.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
   }
 
-  get izquierda(): boolean {
+  get izquierda() {
     return this.teclaIzquierda.isDown;
   }
 
-  get derecha(): boolean {
+  set izquierda(v) {
+    this.pilas.utilidades.acceso_incorrecto(v);
+  }
+
+  get derecha() {
     return this.teclaDerecha.isDown;
   }
 
-  get arriba(): boolean {
+  set derecha(v) {
+    this.pilas.utilidades.acceso_incorrecto(v);
+  }
+
+  get arriba() {
     return this.teclaArriba.isDown;
   }
 
-  get abajo(): boolean {
+  set arriba(v) {
+    this.pilas.utilidades.acceso_incorrecto(v);
+  }
+
+  get abajo() {
     return this.teclaAbajo.isDown;
+  }
+
+  set abajo(v) {
+    this.pilas.utilidades.acceso_incorrecto(v);
   }
 }

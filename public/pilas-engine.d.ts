@@ -18,10 +18,10 @@ declare class Control {
     teclaArriba: any;
     teclaAbajo: any;
     constructor(pilas: Pilas);
-    readonly izquierda: boolean;
-    readonly derecha: boolean;
-    readonly arriba: boolean;
-    readonly abajo: boolean;
+    izquierda: any;
+    derecha: any;
+    arriba: any;
+    abajo: any;
 }
 declare class Depurador {
     pilas: Pilas;
@@ -89,6 +89,7 @@ declare class Utilidades {
     id: number;
     constructor(pilas: any);
     obtener_id_autoincremental(): number;
+    acceso_incorrecto(v: any): void;
 }
 declare class ActorBase {
     tipo: String;

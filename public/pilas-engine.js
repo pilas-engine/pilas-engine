@@ -65,12 +65,18 @@ var Control = (function () {
         get: function () {
             return this.teclaIzquierda.isDown;
         },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "derecha", {
         get: function () {
             return this.teclaDerecha.isDown;
+        },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
         },
         enumerable: true,
         configurable: true
@@ -79,12 +85,18 @@ var Control = (function () {
         get: function () {
             return this.teclaArriba.isDown;
         },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "abajo", {
         get: function () {
             return this.teclaAbajo.isDown;
+        },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
         },
         enumerable: true,
         configurable: true
@@ -340,6 +352,9 @@ var Utilidades = (function () {
     Utilidades.prototype.obtener_id_autoincremental = function () {
         this.id = this.id + 1;
         return this.id;
+    };
+    Utilidades.prototype.acceso_incorrecto = function (v) {
+        console.error("No se puede definir esta propiedad (valor " + v + ") porque es de solo lectura.");
     };
     return Utilidades;
 }());
@@ -903,4 +918,3 @@ var EstadoPausa = (function (_super) {
     };
     return EstadoPausa;
 }(Estado));
-//# sourceMappingURL=pilas-engine.js.map
