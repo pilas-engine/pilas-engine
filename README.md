@@ -4,8 +4,6 @@ Prototipo de la nueva versión de pilas-engine
 
 [![CircleCI](https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg)](https://circleci.com/gh/pilas-engine/pilas-engine)
 
-[![Stories in Ready](https://badge.waffle.io/pilas-engine/pilas-engine.svg?label=ready&title=Ready)](http://waffle.io/pilas-engine/pilas-engine)
-
 ## Primeros pasos
 
 Para comenzar a utilizar este repositorio deberías tener instalado git, Make
