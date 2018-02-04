@@ -246,6 +246,9 @@ export default Component.extend({
           y: 0,
           centro_x: 0.5,
           centro_y: 0.5,
+          rotacion: 0,
+          escala_x: 1,
+          escala_y: 1,
           tipo: nombre,
           imagen: actor.imagen
         })
@@ -268,7 +271,7 @@ export default Component.extend({
 
       let escena = this.obtenerEscenaActual();
 
-      let resultado = this.get("compilador").compilar_proyecto(this.get('proyecto'));
+      let resultado = this.get("compilador").compilar_proyecto(this.get("proyecto"));
 
       let datos = {
         nombre_de_la_escena_inicial: escena.nombre,
@@ -335,6 +338,13 @@ export default Component.extend({
 
       this.get("bus").trigger("selecciona_actor_desde_el_editor", {
         id: seleccion
+      });
+    },
+
+    cuandoModificaObjeto(objeto) {
+      this.get("bus").trigger("actualizar_actor_desde_el_editor", {
+        id: objeto.id,
+        actor: objeto
       });
     }
   }

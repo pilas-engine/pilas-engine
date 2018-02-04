@@ -49,6 +49,7 @@ export default Ember.Component.extend({
       this.get("bus").on("pausarEscena", this, "pausarEscena");
       this.get("bus").on("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
       this.get("bus").on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
+      this.get("bus").on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
       this.get("bus").on("hacerFocoEnPilas", this, "hacerFocoEnPilas");
       this.get("bus").on("progresoDeCarga", this, "progresoDeCarga");
     };
@@ -70,6 +71,7 @@ export default Ember.Component.extend({
     this.get("bus").off("pausarEscena", this, "pausarEscena");
     this.get("bus").off("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
     this.get("bus").off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
+    this.get("bus").off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
     this.get("bus").off("hacerFocoEnPilas", this, "hacerFocoEnPilas");
     this.get("bus").off("progresoDeCarga", this, "progresoDeCarga");
   },
@@ -120,6 +122,16 @@ export default Ember.Component.extend({
     let data = {
       tipo: "selecciona_actor_desde_el_editor",
       id
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  actualizar_actor_desde_el_editor({ id, actor }) {
+    let data = {
+      tipo: "actualizar_actor_desde_el_editor",
+      id,
+      actor
     };
 
     this.contexto.postMessage(data, utils.HOST);

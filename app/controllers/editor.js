@@ -9,7 +9,7 @@ const queryParams = new QueryParams({
   mostrarPropiedades: { as: "p1", defaultValue: true, replace: true },
   escenaActual: { defaultValue: 1, replace: true },
   actorSeleccionado: { defaultValue: -1, replace: true },
-  seleccion: { defaultValue: -1, replace: true },
+  seleccion: { defaultValue: 1, replace: true },
   ultimaEscenaSeleccionada: { defaultValue: 1, replace: true },
   mostrarModalCreacionDeActor: { defaultValue: false, replace: true },
   mostrarInterprete: { defaultValue: true, replace: true },
@@ -136,6 +136,9 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 100,
               centro_x: 0.5,
               centro_y: 0.5,
+              rotacion: 30,
+              escala_x: 1,
+              escala_y: 1,
               tipo: "Pelota",
               imagen: "pelota"
             },
@@ -145,6 +148,9 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 140,
               centro_x: 0.5,
               centro_y: 0.5,
+              rotacion: 30,
+              escala_x: 1,
+              escala_y: 1,
               tipo: "Caja",
               imagen: "caja"
             },
@@ -154,6 +160,9 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 0,
               centro_x: 0.5,
               centro_y: 0.5,
+              rotacion: 30,
+              escala_x: 1,
+              escala_y: 1,
               tipo: "Actor",
               imagen: "sin_imagen"
             },
@@ -163,6 +172,9 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               y: 40,
               centro_x: 0.5,
               centro_y: 0.5,
+              rotacion: 10,
+              escala_x: 1,
+              escala_y: 1,
               tipo: "Aceituna",
               imagen: "aceituna"
             }

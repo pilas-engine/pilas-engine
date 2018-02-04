@@ -38,7 +38,6 @@ class Pilas {
     this.escenas = new Escenas(this);
     this.utilidades = new Utilidades(this);
 
-
     pilas.game.camera.bounds = null;
 
     this.escenas.Normal();
@@ -145,11 +144,24 @@ class Pilas {
       let id = +e.data.id;
       let actores = this.obtener_actores();
 
-      let sprites = this.game.state.getCurrentState()['obtener_sprites']();
+      let sprites = this.game.state.getCurrentState()["obtener_sprites"]();
       let sprite = sprites[id];
 
       if (sprite) {
         sprite.destacar();
+      }
+    }
+
+    if (e.data.tipo === "actualizar_actor_desde_el_editor") {
+      let id = +e.data.id;
+      let datos = e.data.actor;
+      let actores = this.obtener_actores();
+
+      let sprites = this.game.state.getCurrentState()["obtener_sprites"]();
+      let sprite = sprites[id];
+
+      if (sprite) {
+        sprite.actualizar_desde_el_editor(datos);
       }
     }
 

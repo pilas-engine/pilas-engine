@@ -140,7 +140,7 @@ export default Ember.Component.extend({
                 language: 'typescript',
                 minimap: false,
                 fontSize: 14,
-                theme: 'vs', //'vs-dark',
+                theme: 'vs', // 'vs-dark',
                 tabSize: 2,
                 insertSpaces: true,
                 tabWidth: 2,

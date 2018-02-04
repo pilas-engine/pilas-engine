@@ -104,14 +104,16 @@ declare class ActorBase {
         y: number;
         centro_x: number;
         centro_y: number;
-        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture | Phaser.Video;
         rotacion: number;
+        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture | Phaser.Video;
     };
     actualizar(): void;
     imagen: string;
     x: number;
     y: number;
     rotacion: number;
+    escala_x: number;
+    escala_y: number;
     toString(): string;
 }
 declare class Actor extends ActorBase {
@@ -128,7 +130,6 @@ declare class Pelota extends Actor {
     iniciar(): void;
 }
 declare class ActorDentroDelEditor extends Phaser.Sprite {
-    rotateSpeed: number;
     shadow: Phaser.Sprite;
     id: number;
     pilas: Pilas;
@@ -145,6 +146,8 @@ declare class ActorDentroDelEditor extends Phaser.Sprite {
     ocultar_sombra(): void;
     update(): void;
     crear_sombra(): void;
+    actualizar_desde_el_editor(datos: any): void;
+    rotacion: number;
     destacar(): void;
 }
 declare class ActorDentroDelModoPausa extends Phaser.Sprite {

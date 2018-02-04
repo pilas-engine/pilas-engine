@@ -1,5 +1,4 @@
 class ActorDentroDelEditor extends Phaser.Sprite {
-  rotateSpeed: number;
   shadow: Phaser.Sprite;
   id: number;
   pilas: Pilas;
@@ -11,16 +10,14 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
     this.x = x;
     this.y = y;
-
-    this.pivot.x = entidad.centro_x;
-    this.pivot.y = entidad.centro_y;
+    this.rotacion = entidad.rotacion;
+    this.scale.x = entidad.escala_x;
+    this.scale.y = entidad.escala_y;
 
     this.inputEnabled = true;
     this.input.enableDrag();
 
     this.crear_sombra();
-
-    //this.tint = 0xaaaaff;
 
     this.conectar_eventos_arrastrar_y_soltar();
   }
@@ -80,9 +77,10 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.shadow.key = this.key;
     this.shadow.anchor.x = this.anchor.x;
     this.shadow.anchor.y = this.anchor.y;
-    this.shadow.x = this.x + 5;
-    this.shadow.y = this.y + 5;
+    this.shadow.x = this.x + 10;
+    this.shadow.y = this.y + 10;
     this.shadow.scale = this.scale;
+    this.shadow.angle = -this.rotacion;
   }
 
   crear_sombra() {
@@ -90,6 +88,23 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.shadow.tint = 0x000000;
     this.shadow["ocultar_posicion"] = true;
     this.ocultar_sombra();
+  }
+
+  actualizar_desde_el_editor(datos) {
+    let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(datos.x, datos.y);
+    this.x = x;
+    this.y = y;
+    this.scale.x = datos.escala_x;
+    this.scale.y = datos.escala_y;
+    this.rotacion = datos.rotacion;
+  }
+
+  set rotacion(r) {
+    this.angle = -r;
+  }
+
+  get rotacion() {
+    return -this.angle;
   }
 
   destacar() {

@@ -10,6 +10,8 @@ class ActorBase {
     this.x = x;
     this.y = y;
     this.rotacion = 0;
+    this.escala_x = 1;
+    this.escala_y = 1;
 
     this.pilas.game.world.add(this.sprite);
     //this.pilas.escena_actual.agregar_actor(this);
@@ -37,8 +39,8 @@ class ActorBase {
       y: Math.round(this.y),
       centro_x: this.sprite.anchor.x,
       centro_y: this.sprite.anchor.y,
+      rotacion: this.rotacion,
       imagen: this.sprite.key,
-      rotacion: this.sprite.angle
     };
   }
 
@@ -79,6 +81,22 @@ class ActorBase {
 
   get rotacion() {
     return this._rotacion;
+  }
+
+  set escala_x(s) {
+    this.sprite.scale.x = s;
+  }
+
+  get escala_x() {
+    return this.sprite.scale.x;
+  }
+
+  set escala_y(s) {
+    this.sprite.scale.y = s;
+  }
+
+  get escala_y() {
+    return this.sprite.scale.y;
   }
 
   toString() {

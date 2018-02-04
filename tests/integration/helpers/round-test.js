@@ -13,6 +13,6 @@ test("it renders", function(assert) {
     this.$()
       .text()
       .trim(),
-    "15"
+    "15.44"
   );
 });

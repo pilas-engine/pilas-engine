@@ -100,7 +100,10 @@ class EstadoEjecucion extends Estado {
     if (clase) {
       actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen);
       actor.tipo = entidad.tipo;
+      actor.rotacion = entidad.rotacion;
       actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+      actor.escala_x = entidad.escala_x;
+      actor.escala_y = entidad.escala_y;
       actor.iniciar();
       this.world.add(actor.sprite);
     } else {

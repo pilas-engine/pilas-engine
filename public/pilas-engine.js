@@ -246,10 +246,20 @@ var Pilas = (function () {
         if (e.data.tipo === "selecciona_actor_desde_el_editor") {
             var id = +e.data.id;
             var actores = this.obtener_actores();
-            var sprites = this.game.state.getCurrentState()['obtener_sprites']();
+            var sprites = this.game.state.getCurrentState()["obtener_sprites"]();
             var sprite = sprites[id];
             if (sprite) {
                 sprite.destacar();
+            }
+        }
+        if (e.data.tipo === "actualizar_actor_desde_el_editor") {
+            var id = +e.data.id;
+            var datos = e.data.actor;
+            var actores = this.obtener_actores();
+            var sprites = this.game.state.getCurrentState()["obtener_sprites"]();
+            var sprite = sprites[id];
+            if (sprite) {
+                sprite.actualizar_desde_el_editor(datos);
             }
         }
         if (e.data.tipo === "pausar_escena") {
@@ -367,6 +377,8 @@ var ActorBase = (function () {
         this.x = x;
         this.y = y;
         this.rotacion = 0;
+        this.escala_x = 1;
+        this.escala_y = 1;
         this.pilas.game.world.add(this.sprite);
         this.sprite["actor"] = this;
         this.iniciar();
@@ -388,8 +400,8 @@ var ActorBase = (function () {
             y: Math.round(this.y),
             centro_x: this.sprite.anchor.x,
             centro_y: this.sprite.anchor.y,
+            rotacion: this.rotacion,
             imagen: this.sprite.key,
-            rotacion: this.sprite.angle
         };
     };
     ActorBase.prototype.actualizar = function () { };
@@ -434,6 +446,26 @@ var ActorBase = (function () {
         set: function (angulo) {
             this._rotacion = angulo % 360;
             this.sprite.angle = -this._rotacion;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "escala_x", {
+        get: function () {
+            return this.sprite.scale.x;
+        },
+        set: function (s) {
+            this.sprite.scale.x = s;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "escala_y", {
+        get: function () {
+            return this.sprite.scale.y;
+        },
+        set: function (s) {
+            this.sprite.scale.y = s;
         },
         enumerable: true,
         configurable: true
@@ -497,8 +529,9 @@ var ActorDentroDelEditor = (function (_super) {
         var _a = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
         this.x = x;
         this.y = y;
-        this.pivot.x = entidad.centro_x;
-        this.pivot.y = entidad.centro_y;
+        this.rotacion = entidad.rotacion;
+        this.scale.x = entidad.escala_x;
+        this.scale.y = entidad.escala_y;
         this.inputEnabled = true;
         this.input.enableDrag();
         this.crear_sombra();
@@ -547,9 +580,10 @@ var ActorDentroDelEditor = (function (_super) {
         this.shadow.key = this.key;
         this.shadow.anchor.x = this.anchor.x;
         this.shadow.anchor.y = this.anchor.y;
-        this.shadow.x = this.x + 5;
-        this.shadow.y = this.y + 5;
+        this.shadow.x = this.x + 10;
+        this.shadow.y = this.y + 10;
         this.shadow.scale = this.scale;
+        this.shadow.angle = -this.rotacion;
     };
     ActorDentroDelEditor.prototype.crear_sombra = function () {
         this.shadow = this.game.add.sprite(10, 10, this.key);
@@ -557,6 +591,24 @@ var ActorDentroDelEditor = (function (_super) {
         this.shadow["ocultar_posicion"] = true;
         this.ocultar_sombra();
     };
+    ActorDentroDelEditor.prototype.actualizar_desde_el_editor = function (datos) {
+        var _a = this.pilas.convertir_coordenada_de_pilas_a_phaser(datos.x, datos.y), x = _a.x, y = _a.y;
+        this.x = x;
+        this.y = y;
+        this.scale.x = datos.escala_x;
+        this.scale.y = datos.escala_y;
+        this.rotacion = datos.rotacion;
+    };
+    Object.defineProperty(ActorDentroDelEditor.prototype, "rotacion", {
+        get: function () {
+            return -this.angle;
+        },
+        set: function (r) {
+            this.angle = -r;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ActorDentroDelEditor.prototype.destacar = function () {
         var i = Phaser.Easing.Linear.None;
         var y0 = 1;
@@ -808,7 +860,10 @@ var EstadoEjecucion = (function (_super) {
         if (clase) {
             actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen);
             actor.tipo = entidad.tipo;
+            actor.rotacion = entidad.rotacion;
             actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+            actor.escala_x = entidad.escala_x;
+            actor.escala_y = entidad.escala_y;
             actor.iniciar();
             this.world.add(actor.sprite);
         }
