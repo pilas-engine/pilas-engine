@@ -3,9 +3,13 @@
 
     <div class='bb b--black-10 pa2'>
       {{pilas-boton-regresar}}
+
+      <div class="fr">
+        {{pilas-boton accion=(action "abrirEnUnaVentanaNueva") texto="Abrir en una ventana nueva"}}
+      </div>
     </div>
 
-    {{pilas-manual}}
+    {{pilas-manual url=url cuandoCambiaURL=(action 'cuandoCambiaURL')}}
   </div>
 
   {{outlet}}
