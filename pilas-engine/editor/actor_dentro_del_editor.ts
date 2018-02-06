@@ -108,13 +108,15 @@ class ActorDentroDelEditor extends Phaser.Sprite {
   }
 
   destacar() {
+    let ex = this.scale.x;
+    let ey = this.scale.y;
     let i = Phaser.Easing.Linear.None;
-    let y0 = 1;
-    let y1 = 1.05;
-    let y2 = 0.95;
-    let x0 = 1;
-    let x1 = 0.95;
-    let x2 = 1.05;
+    let y0 = ey;
+    let y1 = ey + 0.05;
+    let y2 = ey - 0.05;
+    let x0 = ex;
+    let x1 = ex - 0.05;
+    let x2 = ex + 0.05;
     let t = 70;
 
     let a = this.game.add.tween(this.scale).to({ y: y1, x: x1 }, t, i);

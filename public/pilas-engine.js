@@ -610,13 +610,15 @@ var ActorDentroDelEditor = (function (_super) {
         configurable: true
     });
     ActorDentroDelEditor.prototype.destacar = function () {
+        var ex = this.scale.x;
+        var ey = this.scale.y;
         var i = Phaser.Easing.Linear.None;
-        var y0 = 1;
-        var y1 = 1.05;
-        var y2 = 0.95;
-        var x0 = 1;
-        var x1 = 0.95;
-        var x2 = 1.05;
+        var y0 = ey;
+        var y1 = ey + 0.05;
+        var y2 = ey - 0.05;
+        var x0 = ex;
+        var x1 = ex - 0.05;
+        var x2 = ex + 0.05;
         var t = 70;
         var a = this.game.add.tween(this.scale).to({ y: y1, x: x1 }, t, i);
         var b = this.game.add.tween(this.scale).to({ y: y0, x: x0 }, t, i);
