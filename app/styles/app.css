@@ -113,3 +113,7 @@ body {
 .autocomplete-suggestion.selected {
   background: #f0f0f0;
 }
+
+.default-cursor {
+  cursor: default;
+}
