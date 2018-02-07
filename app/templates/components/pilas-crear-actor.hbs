@@ -2,47 +2,24 @@
 
 {{pilas-boton desactivado=desactivado accion=(action "abrirModal") texto="+ Actor"}}
 
-{{#if modalVisible}}
 
-<div class="flex absolute absolute--fill" id='dialogoCrearActor'>
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id='dialogoCrearActor' titulo="Agregar un actor a la escena"}}
 
-  <div {{action "ocultar"}} class="bg-black-50 z-1 absolute absolute--fill">
-  </div>
+  {{#if tarea.isRunning}}
+  
+    {{pilas-celda-de-actor-skeleton}}
+    {{pilas-celda-de-actor-skeleton}}
+    {{pilas-celda-de-actor-skeleton}}
+    {{pilas-celda-de-actor-skeleton}}
+    {{pilas-celda-de-actor-skeleton}}
 
-  <div class="flex flex-column flex-auto ma5 bg-white z-2">
+  {{else}}
 
-    <div class="flex">
-      <h1 class="f4 pl3 flex1" id='titulo'>Agregar un actor a la escena</h1>
+    {{pilas-grilla-de-actores
+        actores=tarea.last.value.actores
+        cuandoQuiereCrearActor=cuandoQuiereCrearActor
+    }}
 
-      <div class="pointer ma3" {{action "ocultar"}}>
-        ×
-      </div>
-    </div>
+  {{/if}}
 
-
-
-
-    <div class="flex1 pa3 overflow-auto">
-      {{#if tarea.isRunning}}
-        {{pilas-celda-de-actor-skeleton}}
-        {{pilas-celda-de-actor-skeleton}}
-        {{pilas-celda-de-actor-skeleton}}
-        {{pilas-celda-de-actor-skeleton}}
-        {{pilas-celda-de-actor-skeleton}}
-      {{else}}
-
-        {{pilas-grilla-de-actores
-            actores=tarea.last.value.actores
-            cuandoQuiereCrearActor=cuandoQuiereCrearActor
-        }}
-
-      {{/if}}
-
-    </div>
-
-
-  </div>
-
-</div>
-
-{{/if}}
+{{/pilas-modal}}

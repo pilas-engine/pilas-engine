@@ -22,6 +22,7 @@ export default Component.extend({
   historiaPosicion: 10,
   historiaMinimo: 0,
   historiaMaximo: 10,
+  cantidadDeEscenas: Ember.computed.alias("proyecto.escenas.length"),
 
   lista_de_eventos: ["finalizaCarga", "moverActor", "comienzaAMoverActor", "iniciaModoDepuracionEnPausa", "cuandoCambiaPosicionDentroDelModoPausa"],
 
@@ -130,6 +131,27 @@ export default Component.extend({
     return this.get("proyecto.escenas").findBy("id", indice);
   },
 
+  eliminarEscenaActual() {
+    let escenaActual = this.obtenerEscenaActual();
+    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
+    this.set("proyecto.escenas", escenasSinLaEscenaActual);
+
+    if (this.elProyectoNoTieneEscenas()) {
+      this.send("agregarEscena", this.get("proyecto"));
+    } else {
+      this.seleccionarPrimerEscenaDelProyecto();
+    }
+  },
+
+  elProyectoNoTieneEscenas() {
+    return this.get("cantidadDeEscenas") === 0;
+  },
+
+  seleccionarPrimerEscenaDelProyecto() {
+    let primerEscena = this.get("proyecto.escenas")[0];
+    this.send("cuandoSelecciona", primerEscena.get("id"));
+  },
+
   registrar_codigo_de_actor(tipo, codigo) {
     let proyecto = this.get("proyecto");
 
@@ -186,8 +208,10 @@ export default Component.extend({
     }
   },
 
-  obtener_nombres_de_actores(escena) {
-    return escena.actores.map(e => e.tipo);
+  obtener_todos_los_nombres_de_actores() {
+    let escenas = this.get("proyecto.escenas");
+    let actores = escenas.map(e => e.actores);
+    return actores.reduce(e => e.concat()).map(e => e.get("tipo"));
   },
 
   obtener_nombres_de_escenas(proyecto) {
@@ -235,7 +259,7 @@ export default Component.extend({
     },
     agregarActor(proyecto, actor) {
       let escena = this.obtenerEscenaActual();
-      let nombres = this.obtener_nombres_de_actores(escena);
+      let nombres = this.obtener_todos_los_nombres_de_actores();
       let id = this.generarID();
       let nombre = obtenerNombreSinRepetir(nombres, actor.tipo);
 
@@ -340,12 +364,20 @@ export default Component.extend({
         id: seleccion
       });
     },
-
     cuandoModificaObjeto(objeto) {
       this.get("bus").trigger("actualizar_actor_desde_el_editor", {
         id: objeto.id,
         actor: objeto
       });
+    },
+    cuandoIntentaEliminar(id) {
+      let actor = this.obtenerDetalleDeActorPorIndice(id);
+
+      if (actor) {
+        alert("sin implementar");
+      } else {
+        this.eliminarEscenaActual();
+      }
     }
   }
 });

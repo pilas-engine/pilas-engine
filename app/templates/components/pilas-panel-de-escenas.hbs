@@ -7,7 +7,12 @@
         {{else}}
           ▸
         {{/if}}
-        {{escena.nombre}}
+
+        <span data-test='nombre-de-escena'>{{escena.nombre}}</span>
+
+        {{#if (eq ultimaEscenaSeleccionada escena.id)}}
+          {{pilas-boton-eliminar-con-confirmacion accion=(action cuandoIntentaEliminar escena.id)}}
+        {{/if}}
 
       </li>
 
@@ -22,6 +27,6 @@
       {{/if}}
 
   {{else}}
-    <li>sin escenas</li>
+    sin escenas
   {{/each}}
 </ul>

@@ -1,0 +1,9 @@
+<button id='boton-eliminar' class='ba fr bn o-50 pointer' {{action "mostrar"}}>×{{yield}}</button>
+
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id='dialogoEliminar' titulo="¿Realmente quieres eliminar la escena?"}}
+
+
+  {{pilas-boton accion=(action "ocultarEjecutandoAccion") texto="Si"}}
+  {{pilas-boton accion=(action "ocultar") texto="No"}}
+
+{{/pilas-modal}}
