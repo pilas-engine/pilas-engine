@@ -105,6 +105,7 @@ export default Component.extend({
   },
 
   iniciaModoDepuracionEnPausa(datos) {
+    this.set("posicion", datos.posicion);
     this.set("historiaPosicion", datos.posicion);
     this.set("historiaMinimo", datos.minimo);
     this.set("historiaMaximo", datos.maximo);
@@ -112,6 +113,7 @@ export default Component.extend({
 
   cuandoCambiaPosicionDentroDelModoPausa(datos) {
     this.set("historiaPosicion", datos.posicion);
+    this.set("posicion", datos.posicion);
   },
 
   mostrarEscenaActualSobrePilas() {

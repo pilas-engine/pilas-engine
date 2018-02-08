@@ -5,9 +5,9 @@ module("Unit | Utility | formatear");
 
 let codigoFormateadoCorrectamente = `//demo
 function demo() {
-  if (a === 2) {
-    console.log('demo');
-  }
+    if (a === 2) {
+        console.log('demo');
+    }
 }`;
 
 // Replace this with your real tests.

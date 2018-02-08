@@ -117,3 +117,7 @@ body {
 .default-cursor {
   cursor: default;
 }
+
+.h2-5 {
+  height: 3em;
+}

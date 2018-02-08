@@ -17,7 +17,6 @@ export default Service.extend({
 
   abrir_en_un_navegador(url) {
     const { shell } = requireNode("electron");
-    alert(url);
     shell.openExternal(url);
   }
 });

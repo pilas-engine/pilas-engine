@@ -1,21 +1,19 @@
 <div class="vh-100 wrapper verdana bg-white flex flex-column">
 
-  <div class="h3">
+  <div class="h2-5 flex">
 
-    <div class="dt dt--fixed unselectable">
-
-      <div class="dtc pa2">
+      <div class="pa2">
         {{pilas-boton-regresar}}
         {{pilas-boton desactivado=cargando accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
       </div>
 
-      <div class="dtc tr">
-        <div class="dib mr2">
-          {{pilas-interruptor variable=mostrarPropiedades texto="Panel de actores"}}
-          {{pilas-interruptor variable=mostrarEditor texto="Panel del editor"}}
-        </div>
+      <div class="flex1">
       </div>
-    </div>
+
+      <div class="pa2">
+        {{pilas-interruptor variable=mostrarPropiedades texto="Panel de actores"}}
+        {{pilas-interruptor variable=mostrarEditor texto="Panel del editor"}}
+      </div>
 
   </div>
 
@@ -54,7 +52,7 @@
 
         <!-- Canvas -->
 
-                <div class='mb2'>
+                <div class='mb2 flex'>
                   {{#if estado.puedeEjecutar}}
                     {{pilas-boton id='ejecutar' accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
                   {{/if}}
@@ -64,17 +62,24 @@
                   {{/if}}
 
                   {{#if estado.puedePausar}}
-                    {{pilas-boton id='pausar' accion=(action "pausar") texto="Pausar" icono="pausa"}}
+                    {{pilas-boton id='pausar' extraClass="ml2" accion=(action "pausar") texto="Pausar" icono="pausa"}}
                   {{/if}}
 
                   {{#if estado.pausaActivada}}
-                    <div class="dib pa2 f6 fr">
+                    <div class="dib ma2 f6 fr flex1 flex">
+
+                      <div class='truncate w5 f7 unselectable tr pt1 pr1'>
+                        Cuadro: {{plus posicion}} / {{tiempo (plus posicion)}}
+                      </div>
+
                       <input class="v-btm" type="range"
                         id='posicion'
                         min={{historiaMinimo}}
                         max={{historiaMaximo}}
                         oninput={{action "cambiarPosicion" value="target.value"}}
-                        value={{historiaPosicion}}>
+                        value={{historiaPosicion}}
+                        class='w-100'>
+
                     </div>
 
                   {{/if}}
