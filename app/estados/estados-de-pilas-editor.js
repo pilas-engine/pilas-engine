@@ -1,5 +1,6 @@
 class ModoCargando {
   constructor() {
+    this.puede_editar = false;
     this.ModoCargando = true;
     this.nombreDeEstado = "ModoCargando";
     this.puedeEjecutar = false;
@@ -19,6 +20,7 @@ class ModoCargando {
 
 class ModoEdicion {
   constructor() {
+    this.puede_editar = true;
     this.ModoCargando = false;
     this.nombreDeEstado = "ModoEdicion";
     this.puedeEjecutar = true;
@@ -38,6 +40,7 @@ class ModoEdicion {
 
 class ModoEjecucion {
   constructor() {
+    this.puede_editar = false;
     this.ModoCargando = false;
     this.nombreDeEstado = "ModoEjecucion";
     this.puedeEjecutar = false;
@@ -60,6 +63,7 @@ class ModoEjecucion {
 
 class ModoPausa {
   constructor() {
+    this.puede_editar = false;
     this.ModoCargando = false;
     this.nombreDeEstado = "ModoPausa";
     this.puedeEjecutar = false;

@@ -285,8 +285,8 @@ export default Component.extend({
 
       this.mostrarEscenaActualSobrePilas();
     },
-    cuandoCargaMonacoEditor() {},
-    cuandoCambiaElCodigo(codigo) {
+    cuando_termino_de_cargar_monaco_editor() {},
+    cuando_cambia_el_codigo(codigo) {
       this.set("codigo", codigo);
       this.guardar_codigo_en_el_proyecto(this.get("seleccion"), codigo);
     },

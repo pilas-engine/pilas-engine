@@ -25,8 +25,8 @@
       <div class="w5 {{if mostrarPropiedades 'flex flex-column' 'dn'}} br b--light-silver pa2 ">
 
         <div class='unselectable'>
-          {{pilas-boton desactivado=cargando accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
-          {{pilas-crear-actor desactivado=cargando cuandoQuiereCrearActor=(action "agregarActor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
+          {{pilas-boton desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
+          {{pilas-crear-actor desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=(action "agregarActor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
         </div>
 
         {{pilas-panel-de-escenas
@@ -37,7 +37,7 @@
             cuandoSelecciona=(action "cuandoSelecciona")
             cuandoIntentaEliminar=(action "cuandoIntentaEliminar")
             ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
-            desactivado=cargando
+            desactivado=(not estado.puede_editar)
 
             actorSeleccionado=actorSeleccionado
           }}
@@ -45,6 +45,7 @@
         {{pilas-inspector
           instanciaActorSeleccionado=instanciaActorSeleccionado
           cuandoModificaObjeto=(action "cuandoModificaObjeto")
+          desactivado=(not estado.puede_editar)
         }}
 
       </div>
@@ -105,10 +106,13 @@
 
       <div class="flex1 {{if mostrarEditor 'flex flex-column' 'dn'}} bl b--light-silver">
 
-        {{monaco-editor titulo=tituloDelCodigo code=codigo
-            cuandoCarga=(action "cuandoCargaMonacoEditor")
+        {{monaco-editor
+            titulo=tituloDelCodigo
+            code=codigo
+            desactivado=(not estado.puede_editar)
+            cuandoCarga=(action "cuando_termino_de_cargar_monaco_editor")
             onSave=(action "cuandoGuardaDesdeElEditor")
-            onChange=(action "cuandoCambiaElCodigo")}}
+            onChange=(action "cuando_cambia_el_codigo")}}
 
       </div>
 

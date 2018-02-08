@@ -31,7 +31,7 @@ class EstadoPausa extends Estado {
     this.crear_sprites_desde_historia(this.posicion);
     this.actualizar_texto();
 
-    this.dibujarLineaDeCoordenadasRecorridas();
+    this.dibujar_todos_los_puntos_de_las_posiciones_recorridas();
   }
 
   private crear_texto() {

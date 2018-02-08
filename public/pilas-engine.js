@@ -366,6 +366,15 @@ var Utilidades = (function () {
     Utilidades.prototype.acceso_incorrecto = function (v) {
         console.error("No se puede definir esta propiedad (valor " + v + ") porque es de solo lectura.");
     };
+    Utilidades.prototype.obtener_rampa_de_colores = function () {
+        var colores = ["#0080FF", "#178BE7", "#2E97D0", "#45A2B9", "#5CAEA2", "#73B98B", "#8BC573", "#A2D05C", "#B9DC45", "#D0E72E", "#E7F317", "#FFFF00", "#FFF300", "#FFE700", "#FFDC00", "#FFD000", "#FFC500", "#FFB900", "#FFAE00", "#FFA200", "#FF9700", "#FF8B00", "#FF8000", "#FF7000", "#FF6000", "#FF5000", "#FF4000", "#FF3000", "#FF2000", "#FF1000", "#FF0000", "#E71717", "#D02E2E", "#B94545", "#A25C5C", "#8B7373", "#738B8B", "#5CA2A2", "#45B9B9", "#2ED0D0", "#17E7E7", "#00FFFF", "#00FFD4", "#00FFAA", "#00FF7F", "#00FF55", "#00FF2A", "#00FF00", "#17E70B", "#2ED017", "#45B922", "#5CA22E", "#738B3A", "#8B7345", "#A25C51", "#B9455D", "#D02E68", "#E71774", "#FF0080"];
+        return colores;
+    };
+    Utilidades.prototype.obtener_color_al_azar = function (transparencia) {
+        var colores = this.obtener_rampa_de_colores();
+        var cantidad_de_colores = colores.length;
+        return colores[Math.floor(Math.random() * cantidad_de_colores)] + transparencia;
+    };
     return Utilidades;
 }());
 var ActorBase = (function () {
@@ -379,6 +388,7 @@ var ActorBase = (function () {
         this.rotacion = 0;
         this.escala_x = 1;
         this.escala_y = 1;
+        this.id_color = this.generar_color_para_depurar();
         this.pilas.game.world.add(this.sprite);
         this.sprite["actor"] = this;
         this.iniciar();
@@ -401,8 +411,15 @@ var ActorBase = (function () {
             centro_x: this.sprite.anchor.x,
             centro_y: this.sprite.anchor.y,
             rotacion: this.rotacion,
+            escala_x: this.escala_x,
+            escala_y: this.escala_y,
             imagen: this.sprite.key,
+            id_color: this.id_color
         };
+    };
+    ActorBase.prototype.generar_color_para_depurar = function () {
+        var transparencia = "55";
+        return this.pilas.utilidades.obtener_color_al_azar(transparencia);
     };
     ActorBase.prototype.actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "imagen", {
@@ -441,11 +458,10 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "rotacion", {
         get: function () {
-            return this._rotacion;
+            return -this.sprite.angle % 360;
         },
         set: function (angulo) {
-            this._rotacion = angulo % 360;
-            this.sprite.angle = -this._rotacion;
+            this.sprite.angle = -(angulo % 360);
         },
         enumerable: true,
         configurable: true
@@ -676,42 +692,50 @@ var Estado = (function (_super) {
     }
     Estado.prototype.render = function () {
         var _this = this;
-        var debug = this.game.debug;
-        function dibujarPuntoDeControl(debug, x, y) {
-            var rect = new Phaser.Rectangle(x - 3, y - 3, 7, 7);
-            var line1 = new Phaser.Line(x - 2, y - 2, x + 2, y + 2);
-            var line2 = new Phaser.Line(x - 2, y + 2, x + 2, y - 2);
-            debug.geom(rect, "black", true);
-            debug.geom(line1, "white", false);
-            debug.geom(line2, "white", false);
+        function dibujarPuntoDeControl(bitmap, x, y, x_de_pilas, y_de_pilas) {
+            bitmap.ctx.beginPath();
+            bitmap.ctx.stroke();
+            bitmap.ctx.strokeStyle = "black";
+            bitmap.ctx.lineWidth = 4;
+            bitmap.ctx.fillStyle = "white";
+            bitmap.ctx.font = "12px verdana";
+            bitmap.ctx.strokeText("×", x - 5, y + 3);
+            bitmap.ctx.fillText("×", x - 5, y + 3);
+            var coordenada = "(" + x_de_pilas + ", " + y_de_pilas + ")";
+            bitmap.ctx.strokeText(coordenada, x + 15, y + 15);
+            bitmap.ctx.fillText(coordenada, x + 15, y + 15);
+            bitmap.ctx.closePath();
         }
+        this.canvas.bringToTop();
+        this.bitmap.clear();
         if (this.pilas.depurador.modo_posicion_activado) {
             this.game.world.children.forEach(function (sprite) {
                 if (!sprite["ocultar_posicion"]) {
                     var _x = Math.round(sprite.x);
                     var _y = Math.round(sprite.y);
                     var _a = _this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y), x = _a.x, y = _a.y;
-                    debug.text("(" + x + ", " + y + ")", _x + 5, _y + 15, "white");
-                    dibujarPuntoDeControl(debug, sprite.x, sprite.y);
+                    dibujarPuntoDeControl(_this.bitmap, _x, _y, x, y);
                 }
             });
         }
     };
     Estado.prototype.create = function () {
-        this.canvas = this.game.add.graphics(0, 0);
+        this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
+        this.canvas = this.bitmap.addToWorld(0, 0);
+        this.texto = this.game.make.text(0, 0, "...", { font: "12px Verdana", fill: "#ffffff" });
     };
     Estado.prototype.obtener_sprites = function () {
         return this.sprites;
     };
     Estado.prototype.actualizarPosicionDeFormaExterna = function (pos) { };
-    Estado.prototype.dibujarLineaDeCoordenadasRecorridas = function () {
+    Estado.prototype.dibujar_todos_los_puntos_de_las_posiciones_recorridas = function () {
         var _this = this;
-        this.canvas.clear();
-        this.canvas.beginFill(0xffffff, 1);
+        var bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
+        var canvas = bitmap.addToWorld(0, 0);
         this.historia.map(function (historia) {
             historia.map(function (entidad) {
                 var _a = _this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
-                _this.canvas.drawRect(x, y, 2, 2);
+                bitmap.circle(x, y, 1, entidad.id_color);
             });
         });
     };
@@ -748,6 +772,7 @@ var EstadoEditor = (function (_super) {
         this.texto = texto;
     };
     EstadoEditor.prototype.create = function () {
+        _super.prototype.create.call(this);
         this.game.stage.backgroundColor = "5b5";
     };
     EstadoEditor.prototype.update = function () {
@@ -912,7 +937,7 @@ var EstadoPausa = (function (_super) {
         this.game.stage.backgroundColor = "555";
         this.crear_sprites_desde_historia(this.posicion);
         this.actualizar_texto();
-        this.dibujarLineaDeCoordenadasRecorridas();
+        this.dibujar_todos_los_puntos_de_las_posiciones_recorridas();
     };
     EstadoPausa.prototype.crear_texto = function () {
         var style = {

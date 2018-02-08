@@ -1,21 +1,37 @@
 class Estado extends Phaser.State {
   pilas: Pilas;
   historia: any;
+  bitmap: Phaser.BitmapData;
   canvas: any;
+  texto: Phaser.Text;
   sprites: any;
 
   render() {
-    var debug = this.game.debug;
 
-    function dibujarPuntoDeControl(debug, x, y) {
-      let rect = new Phaser.Rectangle(x - 3, y - 3, 7, 7);
-      let line1 = new Phaser.Line(x - 2, y - 2, x + 2, y + 2);
-      let line2 = new Phaser.Line(x - 2, y + 2, x + 2, y - 2);
+    function dibujarPuntoDeControl(bitmap, x, y, x_de_pilas, y_de_pilas) {
 
-      debug.geom(rect, "black", true);
-      debug.geom(line1, "white", false);
-      debug.geom(line2, "white", false);
+      bitmap.ctx.beginPath();
+      bitmap.ctx.stroke();
+      bitmap.ctx.strokeStyle = "black";
+      bitmap.ctx.lineWidth = 4;
+
+      bitmap.ctx.fillStyle = "white";
+      bitmap.ctx.font = "12px verdana";
+      bitmap.ctx.strokeText("×", x-5, y+3);
+      bitmap.ctx.fillText("×", x-5, y+3);
+
+      let coordenada = `(${x_de_pilas}, ${y_de_pilas})`;
+
+      bitmap.ctx.strokeText(coordenada, x + 15, y + 15);
+      bitmap.ctx.fillText(coordenada, x + 15, y + 15);
+
+      bitmap.ctx.closePath();
     }
+
+
+    this.canvas.bringToTop();
+    this.bitmap.clear();
+
 
     if (this.pilas.depurador.modo_posicion_activado) {
       this.game.world.children.forEach(sprite => {
@@ -24,17 +40,16 @@ class Estado extends Phaser.State {
           let _y = Math.round(sprite.y);
           let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y);
 
-          //debug.spriteBounds(sprite, "white", false);
-          debug.text(`(${x}, ${y})`, _x + 5, _y + 15, "white");
-
-          dibujarPuntoDeControl(debug, sprite.x, sprite.y);
+          dibujarPuntoDeControl(this.bitmap, _x, _y, x, y);
         }
       });
     }
   }
 
   create() {
-    this.canvas = this.game.add.graphics(0, 0);
+    this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
+    this.canvas = this.bitmap.addToWorld(0, 0);
+    this.texto = this.game.make.text(0, 0, `...`, { font: "12px Verdana", fill: "#ffffff" });
   }
 
   obtener_sprites() {
@@ -43,14 +58,14 @@ class Estado extends Phaser.State {
 
   actualizarPosicionDeFormaExterna(pos: any) {}
 
-  dibujarLineaDeCoordenadasRecorridas() {
-    this.canvas.clear();
-    this.canvas.beginFill(0xffffff, 1);
+  dibujar_todos_los_puntos_de_las_posiciones_recorridas() {
+    let bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
+    let canvas = bitmap.addToWorld(0, 0);
 
     this.historia.map(historia => {
       historia.map(entidad => {
         let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
-        this.canvas.drawRect(x, y, 2, 2);
+        bitmap.circle(x, y, 1, entidad.id_color);
       });
     });
   }

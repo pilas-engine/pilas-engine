@@ -2,7 +2,7 @@ class ActorBase {
   tipo: String;
   sprite: Phaser.Sprite;
   pilas: Pilas;
-  _rotacion: number;
+  id_color: string;
 
   constructor(pilas, x, y, imagen = "sin_imagen") {
     this.pilas = pilas;
@@ -12,6 +12,7 @@ class ActorBase {
     this.rotacion = 0;
     this.escala_x = 1;
     this.escala_y = 1;
+    this.id_color = this.generar_color_para_depurar();
 
     this.pilas.game.world.add(this.sprite);
     //this.pilas.escena_actual.agregar_actor(this);
@@ -40,8 +41,16 @@ class ActorBase {
       centro_x: this.sprite.anchor.x,
       centro_y: this.sprite.anchor.y,
       rotacion: this.rotacion,
+      escala_x: this.escala_x,
+      escala_y: this.escala_y,
       imagen: this.sprite.key,
+      id_color: this.id_color
     };
+  }
+
+  generar_color_para_depurar() {
+    let transparencia = "55";
+    return this.pilas.utilidades.obtener_color_al_azar(transparencia);
   }
 
   actualizar() {}
@@ -75,12 +84,11 @@ class ActorBase {
   }
 
   set rotacion(angulo: number) {
-    this._rotacion = angulo % 360;
-    this.sprite.angle = -this._rotacion;
+    this.sprite.angle = -(angulo % 360);
   }
 
   get rotacion() {
-    return this._rotacion;
+    return -this.sprite.angle % 360;
   }
 
   set escala_x(s) {

@@ -90,12 +90,14 @@ declare class Utilidades {
     constructor(pilas: any);
     obtener_id_autoincremental(): number;
     acceso_incorrecto(v: any): void;
+    obtener_rampa_de_colores(): string[];
+    obtener_color_al_azar(transparencia: any): string;
 }
 declare class ActorBase {
     tipo: String;
     sprite: Phaser.Sprite;
     pilas: Pilas;
-    _rotacion: number;
+    id_color: string;
     constructor(pilas: any, x: any, y: any, imagen?: string);
     iniciar(): void;
     serializar(): {
@@ -105,8 +107,12 @@ declare class ActorBase {
         centro_x: number;
         centro_y: number;
         rotacion: number;
+        escala_x: number;
+        escala_y: number;
         imagen: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture | Phaser.Video;
+        id_color: string;
     };
+    generar_color_para_depurar(): string;
     actualizar(): void;
     imagen: string;
     x: number;
@@ -170,13 +176,15 @@ declare class Normal extends Escena {
 declare class Estado extends Phaser.State {
     pilas: Pilas;
     historia: any;
+    bitmap: Phaser.BitmapData;
     canvas: any;
+    texto: Phaser.Text;
     sprites: any;
     render(): void;
     create(): void;
     obtener_sprites(): any;
     actualizarPosicionDeFormaExterna(pos: any): void;
-    dibujarLineaDeCoordenadasRecorridas(): void;
+    dibujar_todos_los_puntos_de_las_posiciones_recorridas(): void;
 }
 declare class EstadoEditor extends Estado {
     entidades: any;
