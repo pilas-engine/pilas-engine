@@ -121,3 +121,7 @@ body {
 .h2-5 {
   height: 3em;
 }
+
+.cursor-resize {
+  cursor: col-resize;
+}

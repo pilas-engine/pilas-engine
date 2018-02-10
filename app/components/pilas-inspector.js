@@ -3,11 +3,11 @@ import Component from "@ember/component";
 export default Component.extend({
   tagName: "",
   propiedades: [
-    { propiedad: "escala_x", incremento: 0.1 },
-    { propiedad: "escala_y", incremento: 0.1 },
-    { propiedad: "x", incremento: 1 },
-    { propiedad: "y", incremento: 1 },
-    { propiedad: "rotacion", incremento: 10 }
+    { propiedad: "escala_x", intensidad: 0.01 },
+    { propiedad: "escala_y", intensidad: 0.01 },
+    { propiedad: "x", intensidad: 1 },
+    { propiedad: "y", intensidad: 1 },
+    { propiedad: "rotacion", intensidad: 1 }
   ],
 
   actions: {
