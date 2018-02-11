@@ -122,6 +122,10 @@ class EstadoEjecucion extends Estado {
     }
   }
 
+  update() {
+    this.pilas.escena_actual().actualizar();
+  }
+
   private guardar_foto_de_entidades() {
     let entidades = this.actores.map(actor => {
       return actor.serializar();

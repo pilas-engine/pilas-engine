@@ -58,7 +58,6 @@ class Pilas {
   conectar_atajos_de_teclado() {
     this.game.input.keyboard.onUpCallback = evento => {
       if (evento.keyCode == Phaser.Keyboard.ESC && (this.game.state.current === "estadoEjecucion" || this.game.state.current === "estadoPausa")) {
-        console.log("pulsa pausa.");
         this.emitir_mensaje_al_editor("cuando_pulsa_escape", {});
       }
     };
@@ -187,7 +186,7 @@ class Pilas {
 
     if (e.data.tipo === "definir_estados_de_depuracion") {
       this.depurador.modo_posicion_activado = e.data.pos;
-      //console.log("En pilas.ts, intenta definir los estados de depuración", e.data);
+      this.depurador.mostrar_fps = e.data.fps;
     }
   }
 
@@ -277,6 +276,10 @@ class Pilas {
 
   convertir_coordenada_de_phaser_a_pilas(x, y) {
     return { x: x - this._ancho / 2, y: this._ancho / 2 - y };
+  }
+
+  obtener_oscilacion(velocidad = 1, intensidad = 100) {
+    return this.escena_actual().obtener_oscilacion(velocidad, intensidad);
   }
 }
 

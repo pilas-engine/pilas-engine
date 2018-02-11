@@ -10,6 +10,8 @@ class EstadoPausa extends Estado {
   izquierda: any;
   derecha: any;
 
+  canvas_lineas_de_recorrido: any;
+
   init(datos) {
     this.pilas = datos.pilas;
     this.historia = datos.historia;
@@ -31,7 +33,7 @@ class EstadoPausa extends Estado {
     this.crear_sprites_desde_historia(this.posicion);
     this.actualizar_texto();
 
-    this.dibujar_todos_los_puntos_de_las_posiciones_recorridas();
+    this.canvas_lineas_de_recorrido = this.dibujar_todos_los_puntos_de_las_posiciones_recorridas();
   }
 
   private crear_texto() {
@@ -82,6 +84,7 @@ class EstadoPausa extends Estado {
     }
 
     this.pilas.game.world.bringToTop(this.canvas);
+    this.pilas.game.world.bringToTop(this.canvas_lineas_de_recorrido);
   }
 
   actualizarPosicionDeFormaExterna(posicion) {

@@ -49,8 +49,8 @@ class ActorBase {
   }
 
   generar_color_para_depurar() {
-    let transparencia = "55";
-    return this.pilas.utilidades.obtener_color_al_azar(transparencia);
+    let opacidad = "FF";
+    return this.pilas.utilidades.obtener_color_al_azar(opacidad);
   }
 
   actualizar() {}

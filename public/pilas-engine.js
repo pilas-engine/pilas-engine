@@ -107,6 +107,7 @@ var Depurador = (function () {
     function Depurador(pilas) {
         this.pilas = pilas;
         this.modo_posicion_activado = false;
+        this.mostrar_fps = true;
     }
     return Depurador;
 }());
@@ -189,7 +190,6 @@ var Pilas = (function () {
         var _this = this;
         this.game.input.keyboard.onUpCallback = function (evento) {
             if (evento.keyCode == Phaser.Keyboard.ESC && (_this.game.state.current === "estadoEjecucion" || _this.game.state.current === "estadoPausa")) {
-                console.log("pulsa pausa.");
                 _this.emitir_mensaje_al_editor("cuando_pulsa_escape", {});
             }
         };
@@ -280,6 +280,7 @@ var Pilas = (function () {
         }
         if (e.data.tipo === "definir_estados_de_depuracion") {
             this.depurador.modo_posicion_activado = e.data.pos;
+            this.depurador.mostrar_fps = e.data.fps;
         }
     };
     Pilas.prototype.iniciar_pilas_desde_el_editor = function (ancho, alto) {
@@ -351,6 +352,11 @@ var Pilas = (function () {
     Pilas.prototype.convertir_coordenada_de_phaser_a_pilas = function (x, y) {
         return { x: x - this._ancho / 2, y: this._ancho / 2 - y };
     };
+    Pilas.prototype.obtener_oscilacion = function (velocidad, intensidad) {
+        if (velocidad === void 0) { velocidad = 1; }
+        if (intensidad === void 0) { intensidad = 100; }
+        return this.escena_actual().obtener_oscilacion(velocidad, intensidad);
+    };
     return Pilas;
 }());
 var pilas = new Pilas();
@@ -367,13 +373,13 @@ var Utilidades = (function () {
         console.error("No se puede definir esta propiedad (valor " + v + ") porque es de solo lectura.");
     };
     Utilidades.prototype.obtener_rampa_de_colores = function () {
-        var colores = ["#0080FF", "#178BE7", "#2E97D0", "#45A2B9", "#5CAEA2", "#73B98B", "#8BC573", "#A2D05C", "#B9DC45", "#D0E72E", "#E7F317", "#FFFF00", "#FFF300", "#FFE700", "#FFDC00", "#FFD000", "#FFC500", "#FFB900", "#FFAE00", "#FFA200", "#FF9700", "#FF8B00", "#FF8000", "#FF7000", "#FF6000", "#FF5000", "#FF4000", "#FF3000", "#FF2000", "#FF1000", "#FF0000", "#E71717", "#D02E2E", "#B94545", "#A25C5C", "#8B7373", "#738B8B", "#5CA2A2", "#45B9B9", "#2ED0D0", "#17E7E7", "#00FFFF", "#00FFD4", "#00FFAA", "#00FF7F", "#00FF55", "#00FF2A", "#00FF00", "#17E70B", "#2ED017", "#45B922", "#5CA22E", "#738B3A", "#8B7345", "#A25C51", "#B9455D", "#D02E68", "#E71774", "#FF0080"];
+        var colores = ["#82E0AA", "#F8C471", "#F0B27A", "#F4F6F7", "#B2BABB", "#85C1E9", "#BB8FCE", "#F1948A", "#D98880"];
         return colores;
     };
-    Utilidades.prototype.obtener_color_al_azar = function (transparencia) {
+    Utilidades.prototype.obtener_color_al_azar = function (opacidad) {
         var colores = this.obtener_rampa_de_colores();
         var cantidad_de_colores = colores.length;
-        return colores[Math.floor(Math.random() * cantidad_de_colores)] + transparencia;
+        return colores[Math.floor(Math.random() * cantidad_de_colores)] + opacidad;
     };
     return Utilidades;
 }());
@@ -418,8 +424,8 @@ var ActorBase = (function () {
         };
     };
     ActorBase.prototype.generar_color_para_depurar = function () {
-        var transparencia = "55";
-        return this.pilas.utilidades.obtener_color_al_azar(transparencia);
+        var opacidad = "FF";
+        return this.pilas.utilidades.obtener_color_al_azar(opacidad);
     };
     ActorBase.prototype.actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "imagen", {
@@ -669,10 +675,17 @@ var EscenaBase = (function () {
 var Escena = (function (_super) {
     __extends(Escena, _super);
     function Escena() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.cuadro = 0;
+        return _this;
     }
     Escena.prototype.iniciar = function () { };
-    Escena.prototype.actualizar = function () { };
+    Escena.prototype.actualizar = function () {
+        this.cuadro += 1;
+    };
+    Escena.prototype.obtener_oscilacion = function (velocidad, intensidad) {
+        return Math.sin(this.cuadro * velocidad * 0.1) * intensidad;
+    };
     return Escena;
 }(EscenaBase));
 var Normal = (function (_super) {
@@ -718,11 +731,15 @@ var Estado = (function (_super) {
                 }
             });
         }
+        if (this.pilas.depurador.mostrar_fps) {
+            this.game.debug.text("Cuadros por segundo: " + this.game.time.fps, 4, 16, "#ffffff");
+        }
     };
     Estado.prototype.create = function () {
         this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
         this.canvas = this.bitmap.addToWorld(0, 0);
         this.texto = this.game.make.text(0, 0, "...", { font: "12px Verdana", fill: "#ffffff" });
+        this.game.time.advancedTiming = true;
     };
     Estado.prototype.obtener_sprites = function () {
         return this.sprites;
@@ -738,6 +755,7 @@ var Estado = (function (_super) {
                 bitmap.circle(x, y, 1, entidad.id_color);
             });
         });
+        return canvas;
     };
     return Estado;
 }(Phaser.State));
@@ -908,6 +926,9 @@ var EstadoEjecucion = (function (_super) {
             this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
         }
     };
+    EstadoEjecucion.prototype.update = function () {
+        this.pilas.escena_actual().actualizar();
+    };
     EstadoEjecucion.prototype.guardar_foto_de_entidades = function () {
         var entidades = this.actores.map(function (actor) {
             return actor.serializar();
@@ -937,7 +958,7 @@ var EstadoPausa = (function (_super) {
         this.game.stage.backgroundColor = "555";
         this.crear_sprites_desde_historia(this.posicion);
         this.actualizar_texto();
-        this.dibujar_todos_los_puntos_de_las_posiciones_recorridas();
+        this.canvas_lineas_de_recorrido = this.dibujar_todos_los_puntos_de_las_posiciones_recorridas();
     };
     EstadoPausa.prototype.crear_texto = function () {
         var style = {
@@ -976,6 +997,7 @@ var EstadoPausa = (function (_super) {
             this.actualizar_texto();
         }
         this.pilas.game.world.bringToTop(this.canvas);
+        this.pilas.game.world.bringToTop(this.canvas_lineas_de_recorrido);
     };
     EstadoPausa.prototype.actualizarPosicionDeFormaExterna = function (posicion) {
         this.posicion = posicion;

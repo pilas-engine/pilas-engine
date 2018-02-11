@@ -26,6 +26,7 @@ declare class Control {
 declare class Depurador {
     pilas: Pilas;
     modo_posicion_activado: boolean;
+    mostrar_fps: boolean;
     constructor(pilas: Pilas);
 }
 declare class Escenas {
@@ -82,6 +83,7 @@ declare class Pilas {
         x: number;
         y: number;
     };
+    obtener_oscilacion(velocidad?: number, intensidad?: number): number;
 }
 declare var pilas: Pilas;
 declare class Utilidades {
@@ -91,7 +93,7 @@ declare class Utilidades {
     obtener_id_autoincremental(): number;
     acceso_incorrecto(v: any): void;
     obtener_rampa_de_colores(): string[];
-    obtener_color_al_azar(transparencia: any): string;
+    obtener_color_al_azar(opacidad: any): string;
 }
 declare class ActorBase {
     tipo: String;
@@ -167,8 +169,10 @@ declare class EscenaBase {
     agregar_actor(actor: Actor): void;
 }
 declare class Escena extends EscenaBase {
+    cuadro: number;
     iniciar(): void;
     actualizar(): void;
+    obtener_oscilacion(velocidad: any, intensidad: any): number;
 }
 declare class Normal extends Escena {
     iniciar(): void;
@@ -184,7 +188,7 @@ declare class Estado extends Phaser.State {
     create(): void;
     obtener_sprites(): any;
     actualizarPosicionDeFormaExterna(pos: any): void;
-    dibujar_todos_los_puntos_de_las_posiciones_recorridas(): void;
+    dibujar_todos_los_puntos_de_las_posiciones_recorridas(): Phaser.Image;
 }
 declare class EstadoEditor extends Estado {
     entidades: any;
@@ -214,6 +218,7 @@ declare class EstadoEjecucion extends Estado {
     instanciar_escena(nombre: any): void;
     crear_actor(entidad: any): any;
     preRender(): void;
+    update(): void;
     private guardar_foto_de_entidades();
 }
 declare class EstadoPausa extends Estado {
@@ -224,6 +229,7 @@ declare class EstadoPausa extends Estado {
     total: number;
     izquierda: any;
     derecha: any;
+    canvas_lineas_de_recorrido: any;
     init(datos: any): void;
     cuando_cambia_posicion: any;
     create(): void;

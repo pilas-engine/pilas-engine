@@ -7,9 +7,7 @@ class Estado extends Phaser.State {
   sprites: any;
 
   render() {
-
     function dibujarPuntoDeControl(bitmap, x, y, x_de_pilas, y_de_pilas) {
-
       bitmap.ctx.beginPath();
       bitmap.ctx.stroke();
       bitmap.ctx.strokeStyle = "black";
@@ -17,8 +15,8 @@ class Estado extends Phaser.State {
 
       bitmap.ctx.fillStyle = "white";
       bitmap.ctx.font = "12px verdana";
-      bitmap.ctx.strokeText("×", x-5, y+3);
-      bitmap.ctx.fillText("×", x-5, y+3);
+      bitmap.ctx.strokeText("×", x - 5, y + 3);
+      bitmap.ctx.fillText("×", x - 5, y + 3);
 
       let coordenada = `(${x_de_pilas}, ${y_de_pilas})`;
 
@@ -28,10 +26,8 @@ class Estado extends Phaser.State {
       bitmap.ctx.closePath();
     }
 
-
     this.canvas.bringToTop();
     this.bitmap.clear();
-
 
     if (this.pilas.depurador.modo_posicion_activado) {
       this.game.world.children.forEach(sprite => {
@@ -44,12 +40,17 @@ class Estado extends Phaser.State {
         }
       });
     }
+
+    if (this.pilas.depurador.mostrar_fps) {
+      this.game.debug.text("Cuadros por segundo: " + this.game.time.fps, 4, 16, "#ffffff");
+    }
   }
 
   create() {
     this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
     this.canvas = this.bitmap.addToWorld(0, 0);
     this.texto = this.game.make.text(0, 0, `...`, { font: "12px Verdana", fill: "#ffffff" });
+    this.game.time.advancedTiming = true;
   }
 
   obtener_sprites() {
@@ -68,5 +69,7 @@ class Estado extends Phaser.State {
         bitmap.circle(x, y, 1, entidad.id_color);
       });
     });
+
+    return canvas;
   }
 }

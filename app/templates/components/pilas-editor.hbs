@@ -95,14 +95,17 @@
                   mantenerFoco=estado.mantenerFoco
                   cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                   pos=pos
+                  fps=fps
                 }}
 
                 <div class="h2 ba br b--gray bg-light-gray mt2">
                   {{pilas-interruptor texto="Intérprete" variable=mostrarInterprete}}
 
                   <div class="fr">
+                    {{pilas-interruptor texto="fps" variable=fps}}
                     {{pilas-interruptor texto="pos" variable=pos}}
                   </div>
+
                 </div>
 
                 {{pilas-interprete log=log mostrar=mostrarInterprete habilitado=estado.puede_usar_el_interprete}}

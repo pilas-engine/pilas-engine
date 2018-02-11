@@ -90,7 +90,8 @@ export default Ember.Component.extend({
   emitir_estados_de_depuracion_a_pilas() {
     let data = {
       tipo: "definir_estados_de_depuracion",
-      pos: this.get("pos")
+      pos: this.get("pos"),
+      fps: this.get("fps")
     };
     this.contexto.postMessage(data, utils.HOST);
   },
