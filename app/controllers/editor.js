@@ -12,7 +12,7 @@ const queryParams = new QueryParams({
   seleccion: { defaultValue: 1, replace: true },
   ultimaEscenaSeleccionada: { defaultValue: 1, replace: true },
   mostrarModalCreacionDeActor: { defaultValue: false, replace: true },
-  mostrarInterprete: { defaultValue: true, replace: true },
+  mostrarInterprete: { defaultValue: false, replace: true },
   pos: { defaultValue: true, replace: true },
   fps: { defaultValue: true, replace: true }
 });
