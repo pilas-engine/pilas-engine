@@ -38,8 +38,8 @@ class ActorBase {
       tipo: this.tipo,
       x: Math.round(this.x),
       y: Math.round(this.y),
-      centro_x: this.sprite.anchor.x,
-      centro_y: this.sprite.anchor.y,
+      centro_x: this.centro_x,
+      centro_y: this.centro_y,
       rotacion: this.rotacion,
       escala_x: this.escala_x,
       escala_y: this.escala_y,
@@ -105,6 +105,22 @@ class ActorBase {
 
   get escala_y() {
     return this.sprite.scale.y;
+  }
+
+  get centro_y() {
+    return this.sprite.anchor.y;
+  }
+
+  set centro_y(y) {
+    this.sprite.anchor.y = y;
+  }
+
+  get centro_x() {
+    return this.sprite.anchor.x;
+  }
+
+  set centro_x(x) {
+    this.sprite.anchor.x = x;
   }
 
   toString() {

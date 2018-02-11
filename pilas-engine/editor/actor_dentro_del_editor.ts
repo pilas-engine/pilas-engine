@@ -13,6 +13,8 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.rotacion = entidad.rotacion;
     this.scale.x = entidad.escala_x;
     this.scale.y = entidad.escala_y;
+    this.anchor.x = entidad.centro_x;
+    this.anchor.y = entidad.centro_y;
 
     this.inputEnabled = true;
     this.input.enableDrag();
@@ -92,10 +94,14 @@ class ActorDentroDelEditor extends Phaser.Sprite {
 
   actualizar_desde_el_editor(datos) {
     let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(datos.x, datos.y);
+
     this.x = x;
     this.y = y;
     this.scale.x = datos.escala_x;
     this.scale.y = datos.escala_y;
+    this.anchor.x = datos.centro_x;
+    this.anchor.y = datos.centro_y;
+
     this.rotacion = datos.rotacion;
   }
 

@@ -414,8 +414,8 @@ var ActorBase = (function () {
             tipo: this.tipo,
             x: Math.round(this.x),
             y: Math.round(this.y),
-            centro_x: this.sprite.anchor.x,
-            centro_y: this.sprite.anchor.y,
+            centro_x: this.centro_x,
+            centro_y: this.centro_y,
             rotacion: this.rotacion,
             escala_x: this.escala_x,
             escala_y: this.escala_y,
@@ -492,6 +492,26 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ActorBase.prototype, "centro_y", {
+        get: function () {
+            return this.sprite.anchor.y;
+        },
+        set: function (y) {
+            this.sprite.anchor.y = y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "centro_x", {
+        get: function () {
+            return this.sprite.anchor.x;
+        },
+        set: function (x) {
+            this.sprite.anchor.x = x;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ActorBase.prototype.toString = function () {
         var clase = this.constructor["name"];
         return "<" + clase + " en (" + this.x + ", " + this.y + ")>";
@@ -554,6 +574,8 @@ var ActorDentroDelEditor = (function (_super) {
         this.rotacion = entidad.rotacion;
         this.scale.x = entidad.escala_x;
         this.scale.y = entidad.escala_y;
+        this.anchor.x = entidad.centro_x;
+        this.anchor.y = entidad.centro_y;
         this.inputEnabled = true;
         this.input.enableDrag();
         this.crear_sombra();
@@ -619,6 +641,8 @@ var ActorDentroDelEditor = (function (_super) {
         this.y = y;
         this.scale.x = datos.escala_x;
         this.scale.y = datos.escala_y;
+        this.anchor.x = datos.centro_x;
+        this.anchor.y = datos.centro_y;
         this.rotacion = datos.rotacion;
     };
     Object.defineProperty(ActorDentroDelEditor.prototype, "rotacion", {
@@ -652,13 +676,6 @@ var ActorDentroDelEditor = (function (_super) {
         a.start();
     };
     return ActorDentroDelEditor;
-}(Phaser.Sprite));
-var ActorDentroDelModoPausa = (function (_super) {
-    __extends(ActorDentroDelModoPausa, _super);
-    function ActorDentroDelModoPausa() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return ActorDentroDelModoPausa;
 }(Phaser.Sprite));
 var EscenaBase = (function () {
     function EscenaBase(pilas) {
@@ -773,7 +790,7 @@ var EstadoEditor = (function (_super) {
         this.crear_texto_con_posicion_del_mouse();
         var fondo = this.game.add.tileSprite(-100, -100, this.game.width + 200, this.game.height + 200, "plano");
         fondo.fixedToCamera = true;
-        window['fondo'] = fondo;
+        this.fondo = fondo;
     };
     EstadoEditor.prototype.cuando_termina_de_mover = function (a) { };
     EstadoEditor.prototype.cuando_comienza_a_mover = function (a) { };
@@ -795,8 +812,8 @@ var EstadoEditor = (function (_super) {
     };
     EstadoEditor.prototype.update = function () {
         var _this = this;
-        window['fondo'].tilePosition.x = -pilas.game.camera.x;
-        window['fondo'].tilePosition.y = -pilas.game.camera.y;
+        this.fondo.tilePosition.x = -pilas.game.camera.x;
+        this.fondo.tilePosition.y = -pilas.game.camera.y;
         this.entidades = this.entidades.map(function (e) {
             var sprite = null;
             if (!_this.sprites[e.id]) {
@@ -810,10 +827,6 @@ var EstadoEditor = (function (_super) {
             else {
                 sprite = _this.sprites[e.id];
             }
-            var _a = _this.pilas.convertir_coordenada_de_phaser_a_pilas(sprite.x, sprite.y), x = _a.x, y = _a.y;
-            e.x = x;
-            e.y = y;
-            sprite.anchor.set(e.centro_x, e.centro_y);
             return e;
         });
         if (this.pilas.depurador.modo_posicion_activado) {
@@ -1014,9 +1027,11 @@ var EstadoPausa = (function (_super) {
     };
     EstadoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
         var _a = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
-        var sprite = new ActorDentroDelModoPausa(this.game, x, y, entidad.imagen);
-        sprite.angle = entidad.rotacion;
+        var sprite = new Phaser.Sprite(this.game, x, y, entidad.imagen);
+        sprite.angle = -entidad.rotacion;
         sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+        sprite.scale.x = entidad.escala_x;
+        sprite.scale.y = entidad.escala_y;
         this.world.add(sprite);
         return sprite;
     };

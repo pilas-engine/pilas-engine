@@ -5,6 +5,7 @@ class EstadoEditor extends Estado {
   sprites: any;
   texto: any;
   historia: any;
+  fondo: any;
 
   init(datos) {
     this.pilas = datos.pilas;
@@ -16,7 +17,7 @@ class EstadoEditor extends Estado {
 
     let fondo = this.game.add.tileSprite(-100, -100, this.game.width + 200, this.game.height + 200, "plano");
     fondo.fixedToCamera = true;
-    window['fondo'] = fondo;
+    this.fondo = fondo;
   }
 
   cuando_termina_de_mover(a: any) {}
@@ -43,8 +44,8 @@ class EstadoEditor extends Estado {
   }
 
   update() {
-    window['fondo'].tilePosition.x = -pilas.game.camera.x;
-    window['fondo'].tilePosition.y = -pilas.game.camera.y;
+    this.fondo.tilePosition.x = -pilas.game.camera.x;
+    this.fondo.tilePosition.y = -pilas.game.camera.y;
 
     this.entidades = this.entidades.map(e => {
       var sprite = null;
@@ -62,12 +63,13 @@ class EstadoEditor extends Estado {
         sprite = this.sprites[e.id];
       }
 
-      let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(sprite.x, sprite.y);
+      //let { x, y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(sprite.x, sprite.y);
 
-      e.x = x;
-      e.y = y;
+      //e.x = x;
+      //e.y = y;
 
-      sprite.anchor.set(e.centro_x, e.centro_y);
+      //sprite.pivot.x = e.centro_x;
+      //sprite.pivot.y = e.centro_y;
 
       return e;
     });

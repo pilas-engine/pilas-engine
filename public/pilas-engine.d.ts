@@ -122,6 +122,8 @@ declare class ActorBase {
     rotacion: number;
     escala_x: number;
     escala_y: number;
+    centro_y: number;
+    centro_x: number;
     toString(): string;
 }
 declare class Actor extends ActorBase {
@@ -158,8 +160,6 @@ declare class ActorDentroDelEditor extends Phaser.Sprite {
     rotacion: number;
     destacar(): void;
 }
-declare class ActorDentroDelModoPausa extends Phaser.Sprite {
-}
 declare class EscenaBase {
     pilas: Pilas;
     actores: Actor[];
@@ -195,6 +195,7 @@ declare class EstadoEditor extends Estado {
     sprites: any;
     texto: any;
     historia: any;
+    fondo: any;
     init(datos: any): void;
     cuando_termina_de_mover(a: any): void;
     cuando_comienza_a_mover(a: any): void;
@@ -238,5 +239,5 @@ declare class EstadoPausa extends Estado {
     update(): void;
     actualizarPosicionDeFormaExterna(posicion: any): void;
     private actualizar_texto();
-    crear_sprite_desde_entidad(entidad: any): ActorDentroDelModoPausa;
+    crear_sprite_desde_entidad(entidad: any): Phaser.Sprite;
 }

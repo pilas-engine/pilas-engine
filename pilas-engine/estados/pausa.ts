@@ -105,9 +105,12 @@ class EstadoPausa extends Estado {
 
   crear_sprite_desde_entidad(entidad) {
     let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
-    let sprite = new ActorDentroDelModoPausa(this.game, x, y, entidad.imagen);
-    sprite.angle = entidad.rotacion;
+    let sprite = new Phaser.Sprite(this.game, x, y, entidad.imagen);
+
+    sprite.angle = -entidad.rotacion;
     sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+    sprite.scale.x = entidad.escala_x;
+    sprite.scale.y = entidad.escala_y;
 
     this.world.add(sprite);
     return sprite;
