@@ -1,6 +1,7 @@
 class Pelota extends Actor {
   iniciar() {
-    //this.game.physics.p2.enable([this], true);
-    //this.body.setCircle(25);
+    this.sprite.game.physics.p2.enable([this.sprite], true);
+    this.sprite.body.static = false;
+    this.sprite.body.setCircle(25);
   }
 }

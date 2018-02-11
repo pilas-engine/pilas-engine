@@ -50,12 +50,24 @@ export default Component.extend({
     let propiedad = this.get("propiedad.propiedad");
     let valorActual = this.get("objeto").get(propiedad);
 
-    this.get("modificarAtributo")(propiedad, +valorActual + delta);
+    let valor_a_asignar = +valorActual + delta;
+    valor_a_asignar = this.aplicar_limites_mayor_y_menor(valor_a_asignar);
+
+    this.get("modificarAtributo")(propiedad, valor_a_asignar);
+  },
+
+  aplicar_limites_mayor_y_menor(valor) {
+    if (this.get("min") !== undefined && this.get("max") !== undefined) {
+      return Math.min(Math.max(valor, this.get("min")), this.get("max"));
+    } else {
+      return valor;
+    }
   },
 
   actions: {
     modificar_desde_input(objeto, propiedad, valor) {
       if (!isNaN(+valor) && isFinite(+valor)) {
+        valor = this.aplicar_limites_mayor_y_menor(valor);
         this.get("modificarAtributo")(propiedad, +valor);
       }
     },
@@ -75,6 +87,5 @@ export default Component.extend({
         this.set("editando", false);
       }
     }
-
   }
 });

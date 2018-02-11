@@ -275,6 +275,7 @@ export default Component.extend({
           rotacion: 0,
           escala_x: 1,
           escala_y: 1,
+          transparencia: 0,
           tipo: nombre,
           imagen: actor.imagen
         })

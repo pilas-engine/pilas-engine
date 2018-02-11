@@ -94,6 +94,7 @@ declare class Utilidades {
     acceso_incorrecto(v: any): void;
     obtener_rampa_de_colores(): string[];
     obtener_color_al_azar(opacidad: any): string;
+    limitar(valor: number, minimo: number, maximo: number): number;
 }
 declare class ActorBase {
     tipo: String;
@@ -112,6 +113,7 @@ declare class ActorBase {
         escala_x: number;
         escala_y: number;
         imagen: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture | Phaser.Video;
+        transparencia: number;
         id_color: string;
     };
     generar_color_para_depurar(): string;
@@ -124,6 +126,7 @@ declare class ActorBase {
     escala_y: number;
     centro_y: number;
     centro_x: number;
+    transparencia: number;
     toString(): string;
 }
 declare class Actor extends ActorBase {
@@ -199,10 +202,8 @@ declare class EstadoEditor extends Estado {
     init(datos: any): void;
     cuando_termina_de_mover(a: any): void;
     cuando_comienza_a_mover(a: any): void;
-    crear_texto_con_posicion_del_mouse(): void;
     create(): void;
     update(): void;
-    actualizar_texto_con_posicion_del_mouse(): void;
 }
 declare class EstadoEjecucion extends Estado {
     entidades: any;

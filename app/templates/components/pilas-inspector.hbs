@@ -4,7 +4,10 @@
     <div class="pb1 truncate h2"><div class="dib w4">imagen</div> {{instanciaActorSeleccionado.imagen}}</div>
 
     {{#each propiedades as |propiedad|}}
-      {{pilas-propiedad objeto=instanciaActorSeleccionado propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modificarAtributo")}}
+      {{pilas-propiedad objeto=instanciaActorSeleccionado
+          min=propiedad.min
+          max=propiedad.max
+          propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modificarAtributo")}}
     {{/each}}
 
   {{/if}}

@@ -381,6 +381,9 @@ var Utilidades = (function () {
         var cantidad_de_colores = colores.length;
         return colores[Math.floor(Math.random() * cantidad_de_colores)] + opacidad;
     };
+    Utilidades.prototype.limitar = function (valor, minimo, maximo) {
+        return Math.min(Math.max(valor, minimo), maximo);
+    };
     return Utilidades;
 }());
 var ActorBase = (function () {
@@ -420,6 +423,7 @@ var ActorBase = (function () {
             escala_x: this.escala_x,
             escala_y: this.escala_y,
             imagen: this.sprite.key,
+            transparencia: this.transparencia,
             id_color: this.id_color
         };
     };
@@ -512,6 +516,17 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ActorBase.prototype, "transparencia", {
+        get: function () {
+            return (1 - this.sprite.alpha) * 100;
+        },
+        set: function (t) {
+            t = this.pilas.utilidades.limitar(t, 0, 100);
+            this.sprite.alpha = 1 - t / 100;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ActorBase.prototype.toString = function () {
         var clase = this.constructor["name"];
         return "<" + clase + " en (" + this.x + ", " + this.y + ")>";
@@ -556,6 +571,9 @@ var Pelota = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Pelota.prototype.iniciar = function () {
+        this.sprite.game.physics.p2.enable([this.sprite], true);
+        this.sprite.body.static = false;
+        this.sprite.body.setCircle(25);
     };
     return Pelota;
 }(Actor));
@@ -576,6 +594,7 @@ var ActorDentroDelEditor = (function (_super) {
         this.scale.y = entidad.escala_y;
         this.anchor.x = entidad.centro_x;
         this.anchor.y = entidad.centro_y;
+        this.alpha = 1 - entidad.transparencia / 100;
         this.inputEnabled = true;
         this.input.enableDrag();
         this.crear_sombra();
@@ -643,6 +662,7 @@ var ActorDentroDelEditor = (function (_super) {
         this.scale.y = datos.escala_y;
         this.anchor.x = datos.centro_x;
         this.anchor.y = datos.centro_y;
+        this.alpha = 1 - datos.transparencia / 100;
         this.rotacion = datos.rotacion;
     };
     Object.defineProperty(ActorDentroDelEditor.prototype, "rotacion", {
@@ -787,25 +807,12 @@ var EstadoEditor = (function (_super) {
         this.cuando_termina_de_mover = datos.cuando_termina_de_mover;
         this.cuando_comienza_a_mover = datos.cuando_comienza_a_mover;
         this.sprites = {};
-        this.crear_texto_con_posicion_del_mouse();
         var fondo = this.game.add.tileSprite(-100, -100, this.game.width + 200, this.game.height + 200, "plano");
         fondo.fixedToCamera = true;
         this.fondo = fondo;
     };
     EstadoEditor.prototype.cuando_termina_de_mover = function (a) { };
     EstadoEditor.prototype.cuando_comienza_a_mover = function (a) { };
-    EstadoEditor.prototype.crear_texto_con_posicion_del_mouse = function () {
-        var style = {
-            font: "16px Arial",
-            fill: "#fff",
-            boundsAlignH: "center",
-            boundsAlignV: "top"
-        };
-        var texto = this.game.add.text(0, 5, "", style);
-        texto.setShadow(1, 1, "rgba(0, 0, 0, 0.5)", 3);
-        texto["ocultar_posicion"] = true;
-        this.texto = texto;
-    };
     EstadoEditor.prototype.create = function () {
         _super.prototype.create.call(this);
         this.game.stage.backgroundColor = "5b5";
@@ -829,21 +836,6 @@ var EstadoEditor = (function (_super) {
             }
             return e;
         });
-        if (this.pilas.depurador.modo_posicion_activado) {
-            this.actualizar_texto_con_posicion_del_mouse();
-        }
-        else {
-            this.texto.text = "";
-        }
-    };
-    EstadoEditor.prototype.actualizar_texto_con_posicion_del_mouse = function () {
-        var _x = Math.round(this.input.mousePointer.x);
-        var _y = Math.round(this.input.mousePointer.y);
-        var _a = this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y), x = _a.x, y = _a.y;
-        if (x !== -1 && y !== -1) {
-            this.texto.text = "  Mouse: (" + x + ", " + y + ") ";
-        }
-        this.game.world.bringToTop(this.texto);
     };
     return EstadoEditor;
 }(Estado));
@@ -919,9 +911,11 @@ var EstadoEjecucion = (function (_super) {
             actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen);
             actor.tipo = entidad.tipo;
             actor.rotacion = entidad.rotacion;
-            actor.sprite.anchor.set(entidad.centro_x, entidad.centro_y);
+            actor.centro_x = entidad.centro_x;
+            actor.centro_y = entidad.centro_y;
             actor.escala_x = entidad.escala_x;
             actor.escala_y = entidad.escala_y;
+            actor.transparencia = entidad.transparencia;
             actor.iniciar();
             this.world.add(actor.sprite);
         }
@@ -1032,6 +1026,7 @@ var EstadoPausa = (function (_super) {
         sprite.anchor.set(entidad.centro_x, entidad.centro_y);
         sprite.scale.x = entidad.escala_x;
         sprite.scale.y = entidad.escala_y;
+        sprite.alpha = 1 - entidad.transparencia / 100;
         this.world.add(sprite);
         return sprite;
     };

@@ -111,6 +111,7 @@ class EstadoPausa extends Estado {
     sprite.anchor.set(entidad.centro_x, entidad.centro_y);
     sprite.scale.x = entidad.escala_x;
     sprite.scale.y = entidad.escala_y;
+    sprite.alpha = 1 - entidad.transparencia / 100;
 
     this.world.add(sprite);
     return sprite;

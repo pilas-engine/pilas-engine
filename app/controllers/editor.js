@@ -84,6 +84,9 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             codigo: `class Pelota  extends ActorBase {
 
             iniciar() {
+              this.sprite.game.physics.p2.enable([this.sprite], true);
+              this.sprite.body.static = false;
+              this.sprite.body.setCircle(25)
             }
 
           }`
@@ -141,7 +144,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_x: 1,
               escala_y: 1,
               tipo: "Pelota",
-              imagen: "pelota"
+              imagen: "pelota",
+              transparencia: 0
             },
             {
               id: 3,
@@ -153,7 +157,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_x: 1,
               escala_y: 1,
               tipo: "Caja",
-              imagen: "caja"
+              imagen: "caja",
+              transparencia: 0
             },
             {
               id: 4,
@@ -165,7 +170,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_x: 1,
               escala_y: 1,
               tipo: "Actor",
-              imagen: "sin_imagen"
+              imagen: "sin_imagen",
+              transparencia: 0
             },
             {
               id: 5,
@@ -177,7 +183,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_x: 1,
               escala_y: 1,
               tipo: "Aceituna",
-              imagen: "aceituna"
+              imagen: "aceituna",
+              transparencia: 0
             }
           ]
         },

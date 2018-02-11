@@ -30,6 +30,12 @@ export default Component.extend({
     {
       propiedad: "rotacion",
       intensidad: 1
+    },
+    {
+      propiedad: "transparencia",
+      intensidad: 1,
+      min: 0,
+      max: 100
     }
   ],
 

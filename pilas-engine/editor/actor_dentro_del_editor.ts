@@ -15,6 +15,7 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.scale.y = entidad.escala_y;
     this.anchor.x = entidad.centro_x;
     this.anchor.y = entidad.centro_y;
+    this.alpha = 1 - entidad.transparencia / 100;
 
     this.inputEnabled = true;
     this.input.enableDrag();
@@ -101,6 +102,7 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.scale.y = datos.escala_y;
     this.anchor.x = datos.centro_x;
     this.anchor.y = datos.centro_y;
+    this.alpha = 1 - datos.transparencia / 100;
 
     this.rotacion = datos.rotacion;
   }

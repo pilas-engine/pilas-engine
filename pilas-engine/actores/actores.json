@@ -28,7 +28,7 @@
       "nombre": "Pelota",
       "tipo": "Pelota",
       "imagen": "pelota",
-      "archivo": "-actor.ts"
+      "archivo": "pelota.ts"
     }
   ]
 }

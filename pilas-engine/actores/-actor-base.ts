@@ -44,6 +44,7 @@ class ActorBase {
       escala_x: this.escala_x,
       escala_y: this.escala_y,
       imagen: this.sprite.key,
+      transparencia: this.transparencia,
       id_color: this.id_color
     };
   }
@@ -121,6 +122,15 @@ class ActorBase {
 
   set centro_x(x) {
     this.sprite.anchor.x = x;
+  }
+
+  set transparencia(t) {
+    t = this.pilas.utilidades.limitar(t, 0, 100);
+    this.sprite.alpha = 1 - t / 100;
+  }
+
+  get transparencia() {
+    return (1 - this.sprite.alpha) * 100;
   }
 
   toString() {

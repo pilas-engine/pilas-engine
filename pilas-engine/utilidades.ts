@@ -26,4 +26,8 @@ class Utilidades {
     let cantidad_de_colores = colores.length;
     return colores[Math.floor(Math.random() * cantidad_de_colores)] + opacidad;
   }
+
+  limitar(valor: number, minimo: number, maximo: number) {
+    return Math.min(Math.max(valor, minimo), maximo);
+  }
 }
