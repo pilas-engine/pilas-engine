@@ -501,6 +501,15 @@ var ActorBase = (function () {
             return this.sprite.anchor.y;
         },
         set: function (y) {
+            var comunes = {
+                centro: 0.5,
+                arriba: 0,
+                abajo: 1,
+                medio: 0.5
+            };
+            if (comunes[y] !== undefined) {
+                y = comunes[y];
+            }
             this.sprite.anchor.y = y;
         },
         enumerable: true,
@@ -511,6 +520,15 @@ var ActorBase = (function () {
             return this.sprite.anchor.x;
         },
         set: function (x) {
+            var comunes = {
+                centro: 0.5,
+                izquierda: 0,
+                derecha: 1,
+                medio: 0.5
+            };
+            if (comunes[x] !== undefined) {
+                x = comunes[x];
+            }
             this.sprite.anchor.x = x;
         },
         enumerable: true,
