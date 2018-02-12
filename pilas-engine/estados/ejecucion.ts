@@ -16,15 +16,15 @@ class EstadoEjecucion extends Estado {
     this.nombre_de_la_escena_inicial = datos.nombre_de_la_escena_inicial;
     this.proyecto = datos.proyecto;
     this.codigo = datos.codigo;
+    this.game.paused = false;
 
     let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
-    //manejador_de_errores = "\nwindow.onerror = function(a) {alert(a)}\n";
-    let codigo_completo = this.codigo /* + manejador_de_errores*/ + codigoDeExportacion;
+    let codigo_completo = this.codigo + codigoDeExportacion;
 
     try {
       this.clases = eval(codigo_completo);
     } catch (e) {
-      this.pilas.emitir_excepcion_al_editor(e);
+      this.pilas.emitir_excepcion_al_editor(e, "ejecutar el proyecto");
     }
 
     this.sprites = {};
@@ -75,7 +75,7 @@ class EstadoEjecucion extends Estado {
     try {
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
     } catch (e) {
-      this.pilas.emitir_excepcion_al_editor(e);
+      this.pilas.emitir_excepcion_al_editor(e, "crear la escena");
     }
 
     this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});

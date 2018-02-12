@@ -11,7 +11,7 @@
         <span data-test='nombre-de-escena'>{{escena.nombre}}</span>
 
         {{#if (eq ultimaEscenaSeleccionada escena.id)}}
-          {{pilas-boton-eliminar-con-confirmacion accion=(action cuandoIntentaEliminar escena.id)}}
+          {{pilas-boton-eliminar-con-confirmacion tipo="escena" titulo="¿Realmente quieres eliminar la escena?" accion=(action cuandoIntentaEliminar escena.id)}}
         {{/if}}
 
       </li>
@@ -19,7 +19,15 @@
       {{#if (eq ultimaEscenaSeleccionada escena.id)}}
         <ul>
           {{#each escena.actores as |actor|}}
-            <li class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}> {{actor.tipo}} {{!actor.nombre}}</li>
+            <li class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}> {{actor.tipo}} {{!actor.nombre}}
+
+        {{#if (eq seleccion actor.id)}}
+          {{pilas-boton-eliminar-con-confirmacion tipo="actor" titulo="¿Realmente quieres eliminar este actor?" accion=(action cuandoIntentaEliminar actor.id)}}
+        {{/if}}
+
+
+
+            </li>
           {{else}}
             <li class='truncate pa1'>sin actores</li >
           {{/each}}

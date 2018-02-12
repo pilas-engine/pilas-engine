@@ -84,9 +84,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             codigo: `class Pelota  extends ActorBase {
 
             iniciar() {
-              this.sprite.game.physics.p2.enable([this.sprite], true);
-              this.sprite.body.static = false;
-              this.sprite.body.setCircle(25)
+              this.crear_figura_circular();
             }
 
           }`
@@ -95,8 +93,7 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             tipo: "Caja",
             codigo: `class Caja extends ActorBase {
             iniciar() {
-              this.sprite.game.physics.p2.enable([this.sprite], true);
-              this.sprite.body.static = false;
+              this.crear_figura_rectangular();
             }
           }`
           },

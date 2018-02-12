@@ -19,6 +19,7 @@ class EstadoPausa extends Estado {
     this.total = this.historia.length - 1;
     this.sprites = [];
     this.cuando_cambia_posicion = datos.cuando_cambia_posicion;
+    this.game.paused = false;
 
     this.izquierda = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     this.derecha = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);

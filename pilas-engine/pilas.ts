@@ -68,18 +68,17 @@ class Pilas {
   }
 
   emitir_error_y_detener(error) {
-    this.emitir_mensaje_al_editor("error", { mensaje: error.message, stack: error.stack });
+    this.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: error.message, stack: error.stack });
     this.game.paused = true;
-    console.error(error);
+    console.error("Error capturado por la función 'emitir_error_y_detener'", error);
   }
 
   capturar_errores_y_reportarlos_al_editor() {
-    /*
     window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
       alert("Error occured: " + errorMsg); //or any message
       return false;
     };
-    */
+
     /*
     window.addEventListener("error", e => {
       console.warn(e);
@@ -151,6 +150,17 @@ class Pilas {
       }
     }
 
+    if (e.data.tipo === "eliminar_actor_desde_el_editor") {
+      let id = +e.data.id;
+
+      let sprites = this.game.state.getCurrentState()["obtener_sprites"]();
+      let sprite = sprites[id];
+
+      if (sprite) {
+        sprite.destroy();
+      }
+    }
+
     if (e.data.tipo === "actualizar_actor_desde_el_editor") {
       let id = +e.data.id;
       let datos = e.data.actor;
@@ -162,6 +172,10 @@ class Pilas {
       if (sprite) {
         sprite.actualizar_desde_el_editor(datos);
       }
+    }
+
+    if (e.data.tipo === "quitar_pausa_de_phaser") {
+      this.game.paused = false;
     }
 
     if (e.data.tipo === "pausar_escena") {
@@ -242,13 +256,15 @@ class Pilas {
     window.parent.postMessage(datos, HOST);
   }
 
-  emitir_excepcion_al_editor(error) {
+  emitir_excepcion_al_editor(error, origen) {
     let detalle = {
       mensaje: error.message,
       stack: error.stack.toString()
     };
 
+    this.game.paused = true;
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
+    console.warn("Se produjo una llamada a pilas.emitir_excepcion_al_editor desde " + origen);
     console.error(error);
   }
 

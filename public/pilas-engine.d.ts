@@ -71,7 +71,7 @@ declare class Pilas {
     _cuando_carga_archivo(progreso: any): void;
     _cuando_termina_de_cargar(): void;
     emitir_mensaje_al_editor(nombre: any, datos: any): void;
-    emitir_excepcion_al_editor(error: any): void;
+    emitir_excepcion_al_editor(error: any, origen: any): void;
     obtener_actores(): any[];
     obtener_cantidad_de_actores(): number;
     obtener_actores_en(_x: number, _y: number): any[];
@@ -128,6 +128,13 @@ declare class ActorBase {
     centro_x: number;
     transparencia: number;
     toString(): string;
+    crear_figura_rectangular(ancho?: number, alto?: number, estatico?: boolean): void;
+    crear_figura_circular(radio?: number, estatico?: boolean): void;
+    ancho: number;
+    alto: number;
+    estatico: boolean;
+    dinamico: boolean;
+    cada_segundo(): void;
 }
 declare class Actor extends ActorBase {
     iniciar(): void;

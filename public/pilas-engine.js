@@ -199,11 +199,15 @@ var Pilas = (function () {
         window.addEventListener("message", function (e) { return _this.antender_mensaje_desde_el_editor(e); }, false);
     };
     Pilas.prototype.emitir_error_y_detener = function (error) {
-        this.emitir_mensaje_al_editor("error", { mensaje: error.message, stack: error.stack });
+        this.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: error.message, stack: error.stack });
         this.game.paused = true;
-        console.error(error);
+        console.error("Error capturado por la función 'emitir_error_y_detener'", error);
     };
     Pilas.prototype.capturar_errores_y_reportarlos_al_editor = function () {
+        window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+            alert("Error occured: " + errorMsg);
+            return false;
+        };
     };
     Pilas.prototype.antender_mensaje_desde_el_editor = function (e) {
         var _this = this;
@@ -252,6 +256,14 @@ var Pilas = (function () {
                 sprite.destacar();
             }
         }
+        if (e.data.tipo === "eliminar_actor_desde_el_editor") {
+            var id = +e.data.id;
+            var sprites = this.game.state.getCurrentState()["obtener_sprites"]();
+            var sprite = sprites[id];
+            if (sprite) {
+                sprite.destroy();
+            }
+        }
         if (e.data.tipo === "actualizar_actor_desde_el_editor") {
             var id = +e.data.id;
             var datos = e.data.actor;
@@ -261,6 +273,9 @@ var Pilas = (function () {
             if (sprite) {
                 sprite.actualizar_desde_el_editor(datos);
             }
+        }
+        if (e.data.tipo === "quitar_pausa_de_phaser") {
+            this.game.paused = false;
         }
         if (e.data.tipo === "pausar_escena") {
             var historia = this.game.state.getCurrentState()["historia"];
@@ -325,12 +340,14 @@ var Pilas = (function () {
         datos.tipo = nombre;
         window.parent.postMessage(datos, HOST);
     };
-    Pilas.prototype.emitir_excepcion_al_editor = function (error) {
+    Pilas.prototype.emitir_excepcion_al_editor = function (error, origen) {
         var detalle = {
             mensaje: error.message,
             stack: error.stack.toString()
         };
+        this.game.paused = true;
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
+        console.warn("Se produjo una llamada a pilas.emitir_excepcion_al_editor desde " + origen);
         console.error(error);
     };
     Pilas.prototype.obtener_actores = function () {
@@ -400,13 +417,18 @@ var ActorBase = (function () {
         this.id_color = this.generar_color_para_depurar();
         this.pilas.game.world.add(this.sprite);
         this.sprite["actor"] = this;
-        this.iniciar();
+        try {
+            this.iniciar();
+        }
+        catch (e) {
+            this.pilas.emitir_excepcion_al_editor(e, "iniciar actor");
+        }
         this.sprite.update = function () {
             try {
                 _this.actualizar();
             }
             catch (e) {
-                _this.pilas.emitir_error_y_detener(e);
+                _this.pilas.emitir_excepcion_al_editor(e, "actualizar actor");
             }
         };
         this.pilas.escena_actual().agregar_actor(this);
@@ -549,6 +571,83 @@ var ActorBase = (function () {
         var clase = this.constructor["name"];
         return "<" + clase + " en (" + this.x + ", " + this.y + ")>";
     };
+    ActorBase.prototype.crear_figura_rectangular = function (ancho, alto, estatico) {
+        if (ancho === void 0) { ancho = 0; }
+        if (alto === void 0) { alto = 0; }
+        if (estatico === void 0) { estatico = false; }
+        this.sprite.game.physics.p2.enable([this.sprite], true);
+        this.sprite.body.static = estatico;
+        if (ancho && alto) {
+            this.sprite.body.setRectangle(ancho, alto);
+        }
+        else {
+            this.sprite.body.setRectangle(this.ancho, this.alto);
+        }
+        this.sprite.body.angle = -this.rotacion;
+    };
+    ActorBase.prototype.crear_figura_circular = function (radio, estatico) {
+        if (radio === void 0) { radio = 0; }
+        if (estatico === void 0) { estatico = false; }
+        this.sprite.game.physics.p2.enable([this.sprite], true);
+        this.sprite.body.static = estatico;
+        if (radio) {
+            this.sprite.body.setCircle(radio);
+        }
+        else {
+            this.sprite.body.setCircle(this.ancho / 2 * this.escala_x);
+        }
+        this.sprite.body.angle = -this.rotacion;
+    };
+    Object.defineProperty(ActorBase.prototype, "ancho", {
+        get: function () {
+            return this.sprite.width;
+        },
+        set: function (a) {
+            console.log("No puede definir este atributo");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "alto", {
+        get: function () {
+            return this.sprite.height;
+        },
+        set: function (a) {
+            console.log("No puede definir este atributo");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "estatico", {
+        get: function () {
+            if (this.sprite.body) {
+                return this.sprite.body.static;
+            }
+        },
+        set: function (estatico) {
+            if (this.sprite.body) {
+                if (estatico) {
+                    this.sprite.body.velocity.x = 0;
+                    this.sprite.body.velocity.y = 0;
+                    this.sprite.body.angularVelocity = 0;
+                }
+                this.sprite.body.static = estatico;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "dinamico", {
+        get: function () {
+            return !this.estatico;
+        },
+        set: function (dinamico) {
+            this.estatico = !dinamico;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ActorBase.prototype.cada_segundo = function () { };
     return ActorBase;
 }());
 var Actor = (function (_super) {
@@ -556,10 +655,8 @@ var Actor = (function (_super) {
     function Actor() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Actor.prototype.iniciar = function () {
-    };
-    Actor.prototype.actualizar = function () {
-    };
+    Actor.prototype.iniciar = function () { };
+    Actor.prototype.actualizar = function () { };
     return Actor;
 }(ActorBase));
 var Aceituna = (function (_super) {
@@ -578,8 +675,7 @@ var Caja = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Caja.prototype.iniciar = function () {
-        this.sprite.game.physics.p2.enable([this.sprite], true);
-        this.sprite.body.static = false;
+        this.crear_figura_rectangular(100, 40, false);
     };
     return Caja;
 }(Actor));
@@ -589,9 +685,7 @@ var Pelota = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Pelota.prototype.iniciar = function () {
-        this.sprite.game.physics.p2.enable([this.sprite], true);
-        this.sprite.body.static = false;
-        this.sprite.body.setCircle(25);
+        this.crear_figura_circular(20, false);
     };
     return Pelota;
 }(Actor));
@@ -737,6 +831,11 @@ var Escena = (function (_super) {
     Escena.prototype.iniciar = function () { };
     Escena.prototype.actualizar = function () {
         this.cuadro += 1;
+        if (this.cuadro % 60 === 0) {
+            this.actores.map(function (actor) {
+                actor.cada_segundo();
+            });
+        }
     };
     Escena.prototype.obtener_oscilacion = function (velocidad, intensidad) {
         return Math.sin(this.cuadro * velocidad * 0.1) * intensidad;
@@ -834,6 +933,7 @@ var EstadoEditor = (function (_super) {
     EstadoEditor.prototype.create = function () {
         _super.prototype.create.call(this);
         this.game.stage.backgroundColor = "5b5";
+        this.game.paused = false;
     };
     EstadoEditor.prototype.update = function () {
         var _this = this;
@@ -870,13 +970,14 @@ var EstadoEjecucion = (function (_super) {
         this.nombre_de_la_escena_inicial = datos.nombre_de_la_escena_inicial;
         this.proyecto = datos.proyecto;
         this.codigo = datos.codigo;
+        this.game.paused = false;
         var codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
         var codigo_completo = this.codigo + codigoDeExportacion;
         try {
             this.clases = eval(codigo_completo);
         }
         catch (e) {
-            this.pilas.emitir_excepcion_al_editor(e);
+            this.pilas.emitir_excepcion_al_editor(e, "ejecutar el proyecto");
         }
         this.sprites = {};
         this.historia = [];
@@ -908,7 +1009,7 @@ var EstadoEjecucion = (function (_super) {
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
         }
         catch (e) {
-            this.pilas.emitir_excepcion_al_editor(e);
+            this.pilas.emitir_excepcion_al_editor(e, "crear la escena");
         }
         this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
     };
@@ -974,6 +1075,7 @@ var EstadoPausa = (function (_super) {
         this.total = this.historia.length - 1;
         this.sprites = [];
         this.cuando_cambia_posicion = datos.cuando_cambia_posicion;
+        this.game.paused = false;
         this.izquierda = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         this.derecha = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         this.crear_texto();

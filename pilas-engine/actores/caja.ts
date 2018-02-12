@@ -1,6 +1,5 @@
 class Caja extends Actor {
   iniciar() {
-    this.sprite.game.physics.p2.enable([this.sprite], true);
-    this.sprite.body.static = false;
+    this.crear_figura_rectangular(100, 40, false);
   }
 }

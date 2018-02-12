@@ -20,10 +20,9 @@ test("puede ingresar al editor y eliminar una escena", async function(assert) {
   await pulsar("Detener");
   await esperar(PAUSA);
 
-
   assert.equal(Ember.$("[data-test='nombre-de-escena']").text(), "Escena1Escena2");
 
-  await click("#boton-eliminar");
+  await click("#boton-eliminar-escena");
   await pulsar("Si");
   assert.equal(Ember.$("[data-test='nombre-de-escena']").text(), "Escena2");
   await esperar(PAUSA);

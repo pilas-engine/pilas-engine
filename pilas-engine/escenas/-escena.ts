@@ -5,6 +5,12 @@ class Escena extends EscenaBase {
 
   actualizar() {
     this.cuadro += 1;
+
+    if (this.cuadro % 60 === 0) {
+      this.actores.map(actor => {
+        actor.cada_segundo();
+      });
+    }
   }
 
   obtener_oscilacion(velocidad, intensidad) {

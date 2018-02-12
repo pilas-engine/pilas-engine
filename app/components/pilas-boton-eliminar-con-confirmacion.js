@@ -1,8 +1,13 @@
 import Component from "@ember/component";
+import Ember from "ember";
 
 export default Component.extend({
   tagName: "",
   modalVisible: false,
+
+  idDialogo: Ember.computed("tipo", function() {
+    return "dialogoEliminar" + this.get("tipo");
+  }),
 
   actions: {
     ocultar() {

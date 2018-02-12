@@ -1,11 +1,5 @@
 class Actor extends ActorBase {
+  iniciar() {}
 
-  iniciar() {
-
-  }
-
-  actualizar() {
-
-  }
-  
+  actualizar() {}
 }

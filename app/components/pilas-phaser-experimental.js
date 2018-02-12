@@ -52,6 +52,8 @@ export default Ember.Component.extend({
       this.get("bus").on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
       this.get("bus").on("hacerFocoEnPilas", this, "hacerFocoEnPilas");
       this.get("bus").on("progresoDeCarga", this, "progresoDeCarga");
+      this.get("bus").on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+      this.get("bus").on("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
     };
   },
 
@@ -74,6 +76,8 @@ export default Ember.Component.extend({
     this.get("bus").off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
     this.get("bus").off("hacerFocoEnPilas", this, "hacerFocoEnPilas");
     this.get("bus").off("progresoDeCarga", this, "progresoDeCarga");
+    this.get("bus").off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+    this.get("bus").off("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
   },
 
   cargarEscena({ escena }) {
@@ -122,6 +126,23 @@ export default Ember.Component.extend({
   selecciona_actor_desde_el_editor({ id }) {
     let data = {
       tipo: "selecciona_actor_desde_el_editor",
+      id
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  quitar_pausa_de_phaser() {
+    let data = {
+      tipo: "quitar_pausa_de_phaser"
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  eliminar_actor_desde_el_editor({ id }) {
+    let data = {
+      tipo: "eliminar_actor_desde_el_editor",
       id
     };
 

@@ -26,6 +26,7 @@ class EstadoEditor extends Estado {
   create() {
     super.create();
     this.game.stage.backgroundColor = "5b5";
+    this.game.paused = false;
   }
 
   update() {

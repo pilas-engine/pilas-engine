@@ -18,13 +18,17 @@ class ActorBase {
     //this.pilas.escena_actual.agregar_actor(this);
     this.sprite["actor"] = this;
 
-    this.iniciar();
+    try {
+      this.iniciar();
+    } catch (e) {
+      this.pilas.emitir_excepcion_al_editor(e, "iniciar actor");
+    }
 
     this.sprite.update = () => {
       try {
         this.actualizar();
       } catch (e) {
-        this.pilas.emitir_error_y_detener(e);
+        this.pilas.emitir_excepcion_al_editor(e, "actualizar actor");
       }
     };
 
@@ -159,4 +163,74 @@ class ActorBase {
     let clase = this.constructor["name"];
     return `<${clase} en (${this.x}, ${this.y})>`;
   }
+
+  crear_figura_rectangular(ancho: number = 0, alto: number = 0, estatico: boolean = false) {
+    this.sprite.game.physics.p2.enable([this.sprite], true);
+    this.sprite.body.static = estatico;
+
+    if (ancho && alto) {
+      this.sprite.body.setRectangle(ancho, alto);
+    } else {
+      this.sprite.body.setRectangle(this.ancho, this.alto);
+    }
+
+    this.sprite.body.angle = -this.rotacion;
+  }
+
+  crear_figura_circular(radio: number = 0, estatico: boolean = false) {
+    this.sprite.game.physics.p2.enable([this.sprite], true);
+    this.sprite.body.static = estatico;
+
+    if (radio) {
+      this.sprite.body.setCircle(radio);
+    } else {
+      this.sprite.body.setCircle(this.ancho / 2 * this.escala_x);
+    }
+
+    this.sprite.body.angle = -this.rotacion;
+  }
+
+  get ancho() {
+    return this.sprite.width;
+  }
+
+  get alto() {
+    return this.sprite.height;
+  }
+
+  set alto(a: number) {
+    console.log("No puede definir este atributo");
+  }
+
+  set ancho(a: number) {
+    console.log("No puede definir este atributo");
+  }
+
+  get estatico() {
+    if (this.sprite.body) {
+      return this.sprite.body.static;
+    }
+  }
+
+  set estatico(estatico: boolean) {
+    if (this.sprite.body) {
+      if (estatico) {
+        this.sprite.body.velocity.x = 0;
+        this.sprite.body.velocity.y = 0;
+        this.sprite.body.angularVelocity = 0;
+      }
+
+      this.sprite.body.static = estatico;
+    }
+  }
+
+  set dinamico(dinamico: boolean) {
+    this.estatico = !dinamico;
+  }
+
+  get dinamico() {
+    return !this.estatico;
+  }
+
+  cada_segundo() {}
 }

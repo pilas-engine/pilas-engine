@@ -18,13 +18,14 @@ export default Component.extend({
   seleccion: -1,
   instanciaDeActorSeleccionado: null,
   cargando: true,
+  existe_un_error_reciente: false,
 
   historiaPosicion: 10,
   historiaMinimo: 0,
   historiaMaximo: 10,
   cantidadDeEscenas: Ember.computed.alias("proyecto.escenas.length"),
 
-  lista_de_eventos: ["finalizaCarga", "moverActor", "comienzaAMoverActor", "iniciaModoDepuracionEnPausa", "cuandoCambiaPosicionDentroDelModoPausa"],
+  lista_de_eventos: ["finalizaCarga", "error", "moverActor", "comienzaAMoverActor", "iniciaModoDepuracionEnPausa", "cuandoCambiaPosicionDentroDelModoPausa"],
 
   didInsertElement() {
     this.set("estado", new estados.ModoCargando());
@@ -133,7 +134,7 @@ export default Component.extend({
     return this.get("proyecto.escenas").findBy("id", indice);
   },
 
-  eliminarEscenaActual() {
+  eliminar_escena_actual() {
     let escenaActual = this.obtenerEscenaActual();
     let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
     this.set("proyecto.escenas", escenasSinLaEscenaActual);
@@ -141,15 +142,37 @@ export default Component.extend({
     if (this.elProyectoNoTieneEscenas()) {
       this.send("agregarEscena", this.get("proyecto"));
     } else {
-      this.seleccionarPrimerEscenaDelProyecto();
+      this.seleccionar_primer_escena_del_proyecto();
     }
+  },
+
+  eliminar_actor(id) {
+    let escenaActual = this.obtenerEscenaActual();
+    let actor = escenaActual.actores.findBy("id", id);
+    this.get("bus").trigger("eliminar_actor_desde_el_editor", { id: actor.id });
+    escenaActual.actores.removeObject(actor);
+
+    if (this.tiene_actores(escenaActual)) {
+      this.seleccionar_primer_actor_de_la_escena(escenaActual);
+    } else {
+      this.set("seleccion", -1);
+    }
+  },
+
+  tiene_actores(escena) {
+    return escena.actores.length > 0;
+  },
+
+  seleccionar_primer_actor_de_la_escena(escena) {
+    let actor = escena.actores[0];
+    this.send("cuandoSelecciona", actor.id);
   },
 
   elProyectoNoTieneEscenas() {
     return this.get("cantidadDeEscenas") === 0;
   },
 
-  seleccionarPrimerEscenaDelProyecto() {
+  seleccionar_primer_escena_del_proyecto() {
     let primerEscena = this.get("proyecto.escenas")[0];
     this.send("cuandoSelecciona", primerEscena.get("id"));
   },
@@ -234,6 +257,10 @@ export default Component.extend({
       .set("codigo", codigo);
   },
 
+  error(/* data */) {
+    this.set("existe_un_error_reciente", true);
+  },
+
   definir_codigo_para_el_actor({ tipo }, codigo) {
     this.obtenerTipoDeActor(tipo).set("codigo", codigo);
   },
@@ -294,6 +321,8 @@ export default Component.extend({
       this.guardar_codigo_en_el_proyecto(this.get("seleccion"), codigo);
     },
     ejecutar() {
+      this.get("bus").trigger("quitar_pausa", {});
+      this.set("existe_un_error_reciente", false);
       this.set("estado", this.get("estado").ejecutar());
 
       let escena = this.obtenerEscenaActual();
@@ -312,6 +341,8 @@ export default Component.extend({
       this.get("log").info("Ingresando en modo ejecución");
     },
     detener() {
+      this.get("bus").trigger("quitar_pausa_de_phaser", {});
+      this.set("existe_un_error_reciente", false);
       this.mostrarEscenaActualSobrePilas();
       this.set("estado", this.get("estado").detener());
       this.get("foco").hacerFocoEnElEditor();
@@ -319,6 +350,8 @@ export default Component.extend({
       this.get("log").info("Ingreando al modo edición");
     },
     pausar() {
+      this.get("bus").trigger("quitar_pausa_de_phaser", {});
+      this.set("existe_un_error_reciente", false);
       this.set("estado", this.get("estado").pausar());
       this.get("bus").trigger("pausarEscena", {});
       this.get("foco").hacerFocoEnPilas();
@@ -377,9 +410,9 @@ export default Component.extend({
       let actor = this.obtenerDetalleDeActorPorIndice(id);
 
       if (actor) {
-        alert("sin implementar");
+        this.eliminar_actor(id);
       } else {
-        this.eliminarEscenaActual();
+        this.eliminar_escena_actual();
       }
     }
   }
