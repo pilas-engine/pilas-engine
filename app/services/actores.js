@@ -6,6 +6,7 @@ import { task, timeout } from "ember-concurrency";
 export default Service.extend({
   iniciado: false,
   data: null,
+  lista_de_actores: [1],
 
   tareaConseguirActores: task(function*() {
     yield timeout(500);
@@ -26,10 +27,12 @@ export default Service.extend({
       actor.codigo = data;
     }
 
+    this.set("lista_de_actores", metadata.actores);
+
     return metadata;
   }).drop(),
 
   iniciar() {
-    this.get("tareaConseguirActores").perform();
+    return this.get("tareaConseguirActores").perform();
   }
 });

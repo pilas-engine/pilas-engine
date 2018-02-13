@@ -229,7 +229,6 @@ class Pilas {
   }
 
   start() {
-    this.game.load.image("ember", "imagenes/ember.png");
     this.game.load.image("pelota", "imagenes/pelota.png");
     this.game.load.image("logo", "imagenes/logo.png");
     this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");

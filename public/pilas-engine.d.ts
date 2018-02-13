@@ -101,7 +101,7 @@ declare class ActorBase {
     sprite: Phaser.Sprite;
     pilas: Pilas;
     id_color: string;
-    constructor(pilas: any, x: any, y: any, imagen?: string);
+    constructor(pilas: any, x?: number, y?: number, imagen?: string);
     iniciar(): void;
     serializar(): {
         tipo: String;

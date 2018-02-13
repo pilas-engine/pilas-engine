@@ -13,12 +13,6 @@
       "archivo": "caja.ts"
     },
     {
-      "nombre": "Ember",
-      "tipo": "ActorBasico",
-      "imagen": "ember",
-      "archivo": "-actor.ts"
-    },
-    {
       "nombre": "Logo",
       "tipo": "ActorBasico",
       "imagen": "logo",

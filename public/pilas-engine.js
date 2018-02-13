@@ -318,7 +318,6 @@ var Pilas = (function () {
         this.start();
     };
     Pilas.prototype.start = function () {
-        this.game.load.image("ember", "imagenes/ember.png");
         this.game.load.image("pelota", "imagenes/pelota.png");
         this.game.load.image("logo", "imagenes/logo.png");
         this.game.load.image("sin_imagen", "imagenes/sin_imagen.png");
@@ -405,6 +404,8 @@ var Utilidades = (function () {
 }());
 var ActorBase = (function () {
     function ActorBase(pilas, x, y, imagen) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
         if (imagen === void 0) { imagen = "sin_imagen"; }
         var _this = this;
         this.pilas = pilas;
@@ -675,7 +676,7 @@ var Caja = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Caja.prototype.iniciar = function () {
-        this.crear_figura_rectangular(100, 40, false);
+        this.crear_figura_rectangular();
     };
     return Caja;
 }(Actor));

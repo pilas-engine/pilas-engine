@@ -1,0 +1,35 @@
+<div class="ma2">
+  {{pilas-boton-regresar}}
+</div>
+
+
+<div class="flex">
+
+  <div class="flex1 overflow-auto">
+    {{pilas-grilla-de-actores
+        actores=actores.lista_de_actores
+        actor_seleccionado=actor
+        cuandoQuiereCrearActor=(action "al_seleccionar_un_actor")
+    }}
+  </div>
+
+  <div class="flex1 lato overflow-auto">
+
+    {{#if actor}}
+      <p>archivo: {{actor.archivo}}</p>
+      <p>nombre: {{actor.nombre}}</p>
+      <p>tipo: {{actor.tipo}}</p>
+
+      <pre>{{actor.codigo}}</pre>
+
+      {{pilas-previsualizacion-de-actor actor=actor}}
+
+    {{else}}
+      <p class='lato'>Seleccioná un actor de la izquierda para
+        verlo en detalle.</p>
+    {{/if}}
+
+    {{outlet}}
+  </div>
+
+</div>
