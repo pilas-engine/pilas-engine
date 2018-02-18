@@ -521,9 +521,6 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "escala", {
         get: function () {
-            if (this.escala_x != this.escala_y) {
-                console.warning("La escala x e y difieren, se asume que la escala_x es la más importante.");
-            }
             return this.escala_x;
         },
         set: function (escala) {

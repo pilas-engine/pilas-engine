@@ -113,9 +113,12 @@ class ActorBase {
   }
 
   get escala() {
+    /*
     if (this.escala_x != this.escala_y) {
       console.warning("La escala x e y difieren, se asume que la escala_x es la más importante.");
     }
+    */
+
     return this.escala_x;
   }
 
