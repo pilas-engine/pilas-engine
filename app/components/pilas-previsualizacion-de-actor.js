@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import Ember from "ember";
+import { task, timeout } from "ember-concurrency";
 
 export default Component.extend({
   bus: Ember.inject.service(),
@@ -20,11 +21,28 @@ export default Component.extend({
       }
     ]
   },
+  actor: null,
   primer_carga: true,
+  mantener_foco: true,
 
   didInsertElement() {
     this.get("bus").on("finalizaCarga", this, "finalizaCarga");
     this.get("bus").on("cuandoTerminaDeIniciarEjecucion", this, "cuandoTerminaDeIniciarEjecucion");
+
+    if (this.get("mantener_foco")) {
+      this.get("tarea_para_mantener_foco").perform();
+    }
+  },
+
+  tarea_para_mantener_foco: task(function*() {
+    while (true) {
+      this.hacer_foco_en_pilas();
+      yield timeout(1000);
+    }
+  }),
+
+  hacer_foco_en_pilas() {
+    this.get("bus").trigger("hacerFocoEnPilas", {});
   },
 
   didReceiveAttrs() {
@@ -44,6 +62,9 @@ export default Component.extend({
 
   compilar_proyecto_y_ejecutar() {
     let proyecto = this.get("proyecto");
+
+    this.agregar_actor_al_proyecto(proyecto, this.get("actor"));
+
     let resultado = this.get("compilador").compilar_proyecto(proyecto);
 
     let datos = {
@@ -55,8 +76,33 @@ export default Component.extend({
     this.get("bus").trigger("ejecutar_proyecto", datos);
   },
 
-  cuandoTerminaDeIniciarEjecucion(pilas /*, contexto*/) {
+  agregar_actor_al_proyecto(proyecto, actor) {
+    proyecto.codigos.actores = [
+      {
+        tipo: actor.nombre,
+        codigo: actor.codigo
+      }
+    ];
+
+    proyecto.escenas[0].actores = [
+      {
+        id: 0,
+        x: 0,
+        y: 0,
+        centro_x: 0.5,
+        centro_y: 0.5,
+        rotacion: 0,
+        escala_x: 1,
+        escala_y: 1,
+        tipo: actor.nombre,
+        imagen: actor.imagen,
+        transparencia: 0
+      }
+    ];
+  },
+
+  cuandoTerminaDeIniciarEjecucion(pilas) {
     this.set("pilas", pilas);
-    pilas.actores.Caja();
+    this.hacer_foco_en_pilas();
   }
 });

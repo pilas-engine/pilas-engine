@@ -668,6 +668,11 @@ var Aceituna = (function (_super) {
     Aceituna.prototype.iniciar = function () {
         this.imagen = "aceituna";
     };
+    Aceituna.prototype.actualizar = function () {
+        if (this.pilas.control.izquierda) {
+            this.x -= 10;
+        }
+    };
     return Aceituna;
 }(Actor));
 var Caja = (function (_super) {
@@ -679,6 +684,14 @@ var Caja = (function (_super) {
         this.crear_figura_rectangular();
     };
     return Caja;
+}(Actor));
+var Logo = (function (_super) {
+    __extends(Logo, _super);
+    function Logo() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Logo.prototype.iniciar = function () { };
+    return Logo;
 }(Actor));
 var Pelota = (function (_super) {
     __extends(Pelota, _super);
@@ -1041,7 +1054,8 @@ var EstadoEjecucion = (function (_super) {
         }
         else {
             console.error(this.clases);
-            throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.tipo);
+            var nombres_de_clases = Object.getOwnPropertyNames(this.clases);
+            throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.tipo + ". Las clases disponibles son [" + nombres_de_clases.join(", ") + "]");
         }
         return actor;
     };

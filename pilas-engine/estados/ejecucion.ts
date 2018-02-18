@@ -110,7 +110,8 @@ class EstadoEjecucion extends Estado {
       this.world.add(actor.sprite);
     } else {
       console.error(this.clases);
-      throw new Error(`No existe código para crear un actor de la clase ${entidad.tipo}`);
+      let nombres_de_clases = Object.getOwnPropertyNames(this.clases);
+      throw new Error(`No existe código para crear un actor de la clase ${entidad.tipo}. Las clases disponibles son [${nombres_de_clases.join(", ")}]`);
     }
 
     return actor;

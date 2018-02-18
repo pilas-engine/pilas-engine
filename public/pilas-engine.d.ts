@@ -142,8 +142,12 @@ declare class Actor extends ActorBase {
 }
 declare class Aceituna extends Actor {
     iniciar(): void;
+    actualizar(): void;
 }
 declare class Caja extends Actor {
+    iniciar(): void;
+}
+declare class Logo extends Actor {
     iniciar(): void;
 }
 declare class Pelota extends Actor {

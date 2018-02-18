@@ -16,7 +16,7 @@
       "nombre": "Logo",
       "tipo": "ActorBasico",
       "imagen": "logo",
-      "archivo": "-actor.ts"
+      "archivo": "logo.ts"
     },
     {
       "nombre": "Pelota",
