@@ -519,6 +519,20 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ActorBase.prototype, "escala", {
+        get: function () {
+            if (this.escala_x != this.escala_y) {
+                console.warning("La escala x e y difieren, se asume que la escala_x es la más importante.");
+            }
+            return this.escala_x;
+        },
+        set: function (escala) {
+            this.escala_x = escala;
+            this.escala_y = escala;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ActorBase.prototype, "centro_y", {
         get: function () {
             return this.sprite.anchor.y;
@@ -576,7 +590,7 @@ var ActorBase = (function () {
         if (ancho === void 0) { ancho = 0; }
         if (alto === void 0) { alto = 0; }
         if (estatico === void 0) { estatico = false; }
-        this.sprite.game.physics.p2.enable([this.sprite], true);
+        this.sprite.game.physics.p2.enable([this.sprite], false);
         this.sprite.body.static = estatico;
         if (ancho && alto) {
             this.sprite.body.setRectangle(ancho, alto);
@@ -589,7 +603,7 @@ var ActorBase = (function () {
     ActorBase.prototype.crear_figura_circular = function (radio, estatico) {
         if (radio === void 0) { radio = 0; }
         if (estatico === void 0) { estatico = false; }
-        this.sprite.game.physics.p2.enable([this.sprite], true);
+        this.sprite.game.physics.p2.enable([this.sprite], false);
         this.sprite.body.static = estatico;
         if (radio) {
             this.sprite.body.setCircle(radio);
@@ -667,11 +681,6 @@ var Aceituna = (function (_super) {
     }
     Aceituna.prototype.iniciar = function () {
         this.imagen = "aceituna";
-    };
-    Aceituna.prototype.actualizar = function () {
-        if (this.pilas.control.izquierda) {
-            this.x -= 10;
-        }
     };
     return Aceituna;
 }(Actor));

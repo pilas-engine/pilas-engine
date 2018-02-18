@@ -71,7 +71,16 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         escenas: [
           {
             nombre: "Escena1",
-            codigo: "class Escena1 extends Escena { /* ... */ }"
+            codigo: `class Escena1 extends Escena {
+              iniciar() {
+                console.log("iniciando escena...");
+              }
+
+
+              actualizar() {
+                console.log("actualizando escena...");
+              }
+            }`
           },
           {
             nombre: "Escena2",

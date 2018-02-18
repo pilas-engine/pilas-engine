@@ -124,6 +124,7 @@ declare class ActorBase {
     rotacion: number;
     escala_x: number;
     escala_y: number;
+    escala: number;
     centro_y: number;
     centro_x: number;
     transparencia: number;
@@ -142,7 +143,6 @@ declare class Actor extends ActorBase {
 }
 declare class Aceituna extends Actor {
     iniciar(): void;
-    actualizar(): void;
 }
 declare class Caja extends Actor {
     iniciar(): void;

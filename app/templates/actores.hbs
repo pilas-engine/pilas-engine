@@ -5,7 +5,7 @@
 </div>
 
 
-<div class="flex flex1">
+<div class="flex flex1 pl2 pr2 pb2">
 
   <div class="flex1 overflow-auto">
     {{pilas-grilla-de-actores
@@ -20,7 +20,7 @@
     {{#if actor}}
       {{pilas-previsualizacion-de-actor actor=actor}}
 
-      <div class='verdana pt1 pb2'>{{actor.nombre}} (del archivo {{actor.archivo}})</div>
+      <div class='lato pt1 pb2 f6'>{{actor.nombre}} (del archivo {{actor.archivo}})</div>
 
 
       {{monaco-editor
@@ -30,7 +30,7 @@
 
 
     {{else}}
-      <p class='lato'>Seleccioná un actor de la izquierda para
+      <p class='lato f5 ma0'>Seleccioná un actor de la izquierda para
         verlo en detalle.</p>
     {{/if}}
 

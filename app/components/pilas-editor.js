@@ -11,7 +11,6 @@ export default Component.extend({
   bus: Ember.inject.service(),
   log: Ember.inject.service(),
   compilador: Ember.inject.service(),
-  foco: Ember.inject.service(),
   codigo: "",
   tagName: "",
   actorSeleccionado: -1, //deprecated
@@ -41,14 +40,7 @@ export default Component.extend({
 
     document.addEventListener("keydown", this.alPulsarTecla.bind(this));
 
-    this.get("foco").conectarFunciones(
-      () => {
-        this.get("bus").trigger("hacerFocoEnPilas", {});
-      },
-      () => {
-        this.get("bus").trigger("hacerFocoEnElEditor", {});
-      }
-    );
+    this.get("bus").trigger("hacerFocoEnPilas", {});
   },
 
   existe_actor_o_escena_con_id(id) {
@@ -63,7 +55,6 @@ export default Component.extend({
   willDestroyElement() {
     this.desconectar_eventos();
     document.removeEventListener("keydown", this.alPulsarTecla);
-    this.get("foco").limpiar();
   },
 
   conectar_eventos() {
@@ -336,7 +327,8 @@ export default Component.extend({
       };
 
       this.get("bus").trigger("ejecutar_proyecto", datos);
-      this.get("foco").hacerFocoEnPilas();
+      this.get("bus").trigger("hacerFocoEnPilas", {});
+
       this.get("log").limpiar();
       this.get("log").info("Ingresando en modo ejecución");
     },
@@ -345,7 +337,7 @@ export default Component.extend({
       this.set("existe_un_error_reciente", false);
       this.mostrarEscenaActualSobrePilas();
       this.set("estado", this.get("estado").detener());
-      this.get("foco").hacerFocoEnElEditor();
+      this.get("bus").trigger("hacerFocoEnElEditor", {});
       this.get("log").limpiar();
       this.get("log").info("Ingreando al modo edición");
     },
@@ -354,7 +346,7 @@ export default Component.extend({
       this.set("existe_un_error_reciente", false);
       this.set("estado", this.get("estado").pausar());
       this.get("bus").trigger("pausarEscena", {});
-      this.get("foco").hacerFocoEnPilas();
+      this.get("bus").trigger("hacerFocoEnPilas", {});
       this.get("log").limpiar();
       this.get("log").info("Ingresando en modo pausa");
     },

@@ -112,6 +112,18 @@ class ActorBase {
     return this.sprite.scale.y;
   }
 
+  get escala() {
+    if (this.escala_x != this.escala_y) {
+      console.warning("La escala x e y difieren, se asume que la escala_x es la más importante.");
+    }
+    return this.escala_x;
+  }
+
+  set escala(escala) {
+    this.escala_x = escala;
+    this.escala_y = escala;
+  }
+
   get centro_y() {
     return this.sprite.anchor.y;
   }
@@ -165,7 +177,7 @@ class ActorBase {
   }
 
   crear_figura_rectangular(ancho: number = 0, alto: number = 0, estatico: boolean = false) {
-    this.sprite.game.physics.p2.enable([this.sprite], true);
+    this.sprite.game.physics.p2.enable([this.sprite], false);
     this.sprite.body.static = estatico;
 
     if (ancho && alto) {
@@ -178,7 +190,7 @@ class ActorBase {
   }
 
   crear_figura_circular(radio: number = 0, estatico: boolean = false) {
-    this.sprite.game.physics.p2.enable([this.sprite], true);
+    this.sprite.game.physics.p2.enable([this.sprite], false);
     this.sprite.body.static = estatico;
 
     if (radio) {
