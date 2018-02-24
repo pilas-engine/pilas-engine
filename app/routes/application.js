@@ -1,5 +1,6 @@
 import Ember from "ember";
 import Route from "@ember/routing/route";
+import config from "../config/environment";
 
 export default Route.extend({
   electron: Ember.inject.service(),
@@ -13,5 +14,9 @@ export default Route.extend({
     this.get("log").iniciar();
 
     return this.get("actores").iniciar();
+  },
+
+  afterModel() {
+    return Ember.$().get(`${config.rootURL}spritesheet.png`);
   }
 });
