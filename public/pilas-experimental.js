@@ -45,15 +45,9 @@ var editorState = {
     let x = this.game.input.mousePointer.x;
     let y = this.game.input.mousePointer.y;
 
-    window.parent.postMessage(
-      { tipo: "movimiento_del_mouse", x: x, y: y },
-      HOST
-    );
+    window.parent.postMessage({ tipo: "movimiento_del_mouse", x: x, y: y }, HOST);
 
-    window.parent.postMessage(
-      { tipo: "entidades", entidades: this.entidades },
-      HOST
-    );
+    window.parent.postMessage({ tipo: "entidades", entidades: this.entidades }, HOST);
   },
 
   update: function() {
