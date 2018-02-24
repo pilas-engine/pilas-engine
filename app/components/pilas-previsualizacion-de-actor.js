@@ -6,16 +6,26 @@ export default Component.extend({
   bus: Ember.inject.service(),
   compilador: Ember.inject.service(),
   proyecto: {
-    titulo: "Proyecto para pilas-test",
+    titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",
     ancho: 200,
     alto: 200,
     codigos: {
-      escenas: [],
+      escenas: [
+        {
+          nombre: "principal",
+          codigo: `class principal extends Escena {
+            iniciar() {
+            }
+          }`
+        }
+      ],
       actores: []
     },
     escenas: [
       {
         nombre: "principal",
+        camara_x: 0,
+        camara_y: 0,
         id: 1,
         actores: []
       }
@@ -64,6 +74,7 @@ export default Component.extend({
     let proyecto = this.get("proyecto");
 
     this.agregar_actor_al_proyecto(proyecto, this.get("actor"));
+    console.warn(proyecto);
 
     let resultado = this.get("compilador").compilar_proyecto(proyecto);
 

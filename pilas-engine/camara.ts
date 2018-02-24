@@ -14,6 +14,7 @@ class Camara {
   }
 
   set x(x) {
+    this.pilas.utilidades.validar_numero(x);
     this.pilas.game.camera.x = x;
   }
 
@@ -22,6 +23,7 @@ class Camara {
   }
 
   set y(y) {
+    this.pilas.utilidades.validar_numero(y);
     this.pilas.game.camera.y = -y;
   }
 }

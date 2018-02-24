@@ -36,6 +36,7 @@ var Camara = (function () {
             return this.pilas.game.camera.x;
         },
         set: function (x) {
+            this.pilas.utilidades.validar_numero(x);
             this.pilas.game.camera.x = x;
         },
         enumerable: true,
@@ -46,6 +47,7 @@ var Camara = (function () {
             return -this.pilas.game.camera.y;
         },
         set: function (y) {
+            this.pilas.utilidades.validar_numero(y);
             this.pilas.game.camera.y = -y;
         },
         enumerable: true,
@@ -171,6 +173,7 @@ var Pilas = (function () {
         this.escenas = new Escenas(this);
         this.utilidades = new Utilidades(this);
         pilas.game.camera.bounds = null;
+        console.log("iniciando la escena normal");
         this.escenas.Normal();
     };
     Pilas.prototype.obtener_entidades = function () {
@@ -215,9 +218,10 @@ var Pilas = (function () {
             return;
         }
         if (e.data.tipo === "define_escena") {
+            var escena = e.data.escena;
             this.game.state.start("editorState", true, false, {
                 pilas: this,
-                escena: e.data.escena,
+                escena: escena,
                 cuando_termina_de_mover: function (datos) {
                     _this.emitir_mensaje_al_editor("termina_de_mover_un_actor", datos);
                 },
@@ -235,11 +239,15 @@ var Pilas = (function () {
             });
         }
         if (e.data.tipo === "ejecutar_escena") {
+            console.warn("Deprecated: ejecutar_escena");
+            var escena = e.data.escena;
             this.game.state.start("estadoEjecucion", true, false, {
                 pilas: this,
-                escena: e.data.escena,
+                escena: escena,
                 codigo: e.data.codigo
             });
+            this.escena_actual().camara.x = escena.camara_x;
+            this.escena_actual().camara.y = escena.camara_y;
         }
         if (e.data.tipo === "cambiar_posicion") {
             var pos = +e.data.posicion;
@@ -274,6 +282,12 @@ var Pilas = (function () {
                 sprite.actualizar_desde_el_editor(datos);
             }
         }
+        if (e.data.tipo === "actualizar_escena_desde_el_editor") {
+            var id = +e.data.id;
+            var escena = e.data.escena;
+            this.escena_actual().camara.x = escena.camara_x;
+            this.escena_actual().camara.y = escena.camara_y;
+        }
         if (e.data.tipo === "quitar_pausa_de_phaser") {
             this.game.paused = false;
         }
@@ -296,6 +310,7 @@ var Pilas = (function () {
         if (e.data.tipo === "definir_estados_de_depuracion") {
             this.depurador.modo_posicion_activado = e.data.pos;
             this.depurador.mostrar_fps = e.data.fps;
+            console.log("definir_estados_de_depuracion", e.data);
         }
     };
     Pilas.prototype.iniciar_pilas_desde_el_editor = function (ancho, alto) {
@@ -400,6 +415,11 @@ var Utilidades = (function () {
     Utilidades.prototype.limitar = function (valor, minimo, maximo) {
         return Math.min(Math.max(valor, minimo), maximo);
     };
+    Utilidades.prototype.validar_numero = function (valor) {
+        if (typeof valor !== "number") {
+            throw new Error("El valor enviado no corresponde con un n\u00FAmero: " + valor);
+        }
+    };
     return Utilidades;
 }());
 var ActorBase = (function () {
@@ -471,6 +491,7 @@ var ActorBase = (function () {
             return x;
         },
         set: function (_x) {
+            this.pilas.utilidades.validar_numero(_x);
             var x = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0).x;
             this.sprite.x = x;
         },
@@ -483,6 +504,7 @@ var ActorBase = (function () {
             return y;
         },
         set: function (_y) {
+            this.pilas.utilidades.validar_numero(_y);
             var y = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y).y;
             this.sprite.y = y;
         },
@@ -494,6 +516,7 @@ var ActorBase = (function () {
             return -this.sprite.angle % 360;
         },
         set: function (angulo) {
+            this.pilas.utilidades.validar_numero(angulo);
             this.sprite.angle = -(angulo % 360);
         },
         enumerable: true,
@@ -504,6 +527,7 @@ var ActorBase = (function () {
             return this.sprite.scale.x;
         },
         set: function (s) {
+            this.pilas.utilidades.validar_numero(s);
             this.sprite.scale.x = s;
         },
         enumerable: true,
@@ -514,6 +538,7 @@ var ActorBase = (function () {
             return this.sprite.scale.y;
         },
         set: function (s) {
+            this.pilas.utilidades.validar_numero(s);
             this.sprite.scale.y = s;
         },
         enumerable: true,
@@ -524,6 +549,7 @@ var ActorBase = (function () {
             return this.escala_x;
         },
         set: function (escala) {
+            this.pilas.utilidades.validar_numero(escala);
             this.escala_x = escala;
             this.escala_y = escala;
         },
@@ -544,6 +570,7 @@ var ActorBase = (function () {
             if (comunes[y] !== undefined) {
                 y = comunes[y];
             }
+            this.pilas.utilidades.validar_numero(y);
             this.sprite.anchor.y = y;
         },
         enumerable: true,
@@ -563,6 +590,7 @@ var ActorBase = (function () {
             if (comunes[x] !== undefined) {
                 x = comunes[x];
             }
+            this.pilas.utilidades.validar_numero(x);
             this.sprite.anchor.x = x;
         },
         enumerable: true,
@@ -573,6 +601,7 @@ var ActorBase = (function () {
             return (1 - this.sprite.alpha) * 100;
         },
         set: function (t) {
+            this.pilas.utilidades.validar_numero(t);
             t = this.pilas.utilidades.limitar(t, 0, 100);
             this.sprite.alpha = 1 - t / 100;
         },
@@ -587,6 +616,8 @@ var ActorBase = (function () {
         if (ancho === void 0) { ancho = 0; }
         if (alto === void 0) { alto = 0; }
         if (estatico === void 0) { estatico = false; }
+        this.pilas.utilidades.validar_numero(ancho);
+        this.pilas.utilidades.validar_numero(alto);
         this.sprite.game.physics.p2.enable([this.sprite], false);
         this.sprite.body.static = estatico;
         if (ancho && alto) {
@@ -600,6 +631,7 @@ var ActorBase = (function () {
     ActorBase.prototype.crear_figura_circular = function (radio, estatico) {
         if (radio === void 0) { radio = 0; }
         if (estatico === void 0) { estatico = false; }
+        this.pilas.utilidades.validar_numero(radio);
         this.sprite.game.physics.p2.enable([this.sprite], false);
         this.sprite.body.static = estatico;
         if (radio) {
@@ -615,7 +647,7 @@ var ActorBase = (function () {
             return this.sprite.width;
         },
         set: function (a) {
-            console.log("No puede definir este atributo");
+            throw new Error("No puede definir este atributo");
         },
         enumerable: true,
         configurable: true
@@ -625,7 +657,7 @@ var ActorBase = (function () {
             return this.sprite.height;
         },
         set: function (a) {
-            console.log("No puede definir este atributo");
+            throw new Error("No puede definir este atributo");
         },
         enumerable: true,
         configurable: true
@@ -655,6 +687,16 @@ var ActorBase = (function () {
         },
         set: function (dinamico) {
             this.estatico = !dinamico;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "fijo", {
+        get: function () {
+            return this.sprite.fixedToCamera;
+        },
+        set: function (valor) {
+            this.sprite.fixedToCamera = valor;
         },
         enumerable: true,
         configurable: true
@@ -718,6 +760,7 @@ var ActorDentroDelEditor = (function (_super) {
         this.key = entidad.imagen;
         this.id = entidad.id;
         this.pilas = pilas;
+        this["actor"] = this;
         var _a = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
         this.x = x;
         this.y = y;
@@ -868,7 +911,7 @@ var Normal = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Normal.prototype.iniciar = function () {
-        console.log("ha iniciando la escena!");
+        console.log("ha iniciando la escena Normal!");
     };
     return Normal;
 }(Escena));
@@ -878,40 +921,52 @@ var Estado = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Estado.prototype.render = function () {
-        var _this = this;
-        function dibujarPuntoDeControl(bitmap, x, y, x_de_pilas, y_de_pilas) {
-            bitmap.ctx.beginPath();
-            bitmap.ctx.stroke();
-            bitmap.ctx.strokeStyle = "black";
-            bitmap.ctx.lineWidth = 4;
-            bitmap.ctx.fillStyle = "white";
-            bitmap.ctx.font = "12px verdana";
-            bitmap.ctx.strokeText("×", x - 5, y + 3);
-            bitmap.ctx.fillText("×", x - 5, y + 3);
-            var coordenada = "(" + x_de_pilas + ", " + y_de_pilas + ")";
-            bitmap.ctx.strokeText(coordenada, x + 15, y + 15);
-            bitmap.ctx.fillText(coordenada, x + 15, y + 15);
-            bitmap.ctx.closePath();
-        }
         this.canvas.bringToTop();
         this.bitmap.clear();
         if (this.pilas.depurador.modo_posicion_activado) {
-            this.game.world.children.forEach(function (sprite) {
-                if (!sprite["ocultar_posicion"]) {
-                    var _x = Math.round(sprite.x);
-                    var _y = Math.round(sprite.y);
-                    var _a = _this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y), x = _a.x, y = _a.y;
-                    dibujarPuntoDeControl(_this.bitmap, _x, _y, x, y);
-                }
-            });
+            this.dibujar_puntos_de_control_de_todos_los_actores(this.bitmap);
+            this.dibujar_limites_del_mundo(this.bitmap);
         }
         if (this.pilas.depurador.mostrar_fps) {
-            this.game.debug.text("Cuadros por segundo: " + this.game.time.fps, 4, 16, "#ffffff");
+            this.bitmap.text("Cuadros por segundo: " + this.game.time.fps, 4, 16, "#ffffff");
         }
+    };
+    Estado.prototype.dibujar_puntos_de_control_de_todos_los_actores = function (bitmap) {
+        var _this = this;
+        this.game.world.children.forEach(function (sprite) {
+            if (sprite["actor"]) {
+                var _x = Math.round(sprite.x) - _this.pilas.camara.x;
+                var _y = Math.round(sprite.y) + _this.pilas.camara.y;
+                var _a = _this.pilas.convertir_coordenada_de_phaser_a_pilas(_x, _y), x = _a.x, y = _a.y;
+                _this.dibujar_punto_de_control(bitmap, _x, _y, x, y);
+            }
+        });
+    };
+    Estado.prototype.dibujar_limites_del_mundo = function (bitmap) {
+        bitmap.ctx.beginPath();
+        bitmap.ctx.rect(0 - this.pilas.camara.x, 0 + this.pilas.camara.y, this.game.world.width, this.game.world.height);
+        bitmap.ctx.strokeStyle = "white";
+        bitmap.ctx.lineWidth = 1;
+        bitmap.ctx.stroke();
+    };
+    Estado.prototype.dibujar_punto_de_control = function (bitmap, x, y, x_de_pilas, y_de_pilas) {
+        bitmap.ctx.beginPath();
+        bitmap.ctx.stroke();
+        bitmap.ctx.strokeStyle = "black";
+        bitmap.ctx.lineWidth = 4;
+        bitmap.ctx.fillStyle = "white";
+        bitmap.ctx.strokeText("×", x - 5, y + 3);
+        bitmap.ctx.fillText("×", x - 5, y + 3);
+        var coordenada = "(" + x_de_pilas + ", " + y_de_pilas + ")";
+        bitmap.ctx.strokeText(coordenada, x + 15, y + 15);
+        bitmap.ctx.fillText(coordenada, x + 15, y + 15);
+        bitmap.ctx.closePath();
     };
     Estado.prototype.create = function () {
         this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
+        this.bitmap.ctx.font = "12px verdana";
         this.canvas = this.bitmap.addToWorld(0, 0);
+        this.canvas.fixedToCamera = true;
         this.texto = this.game.make.text(0, 0, "...", { font: "12px Verdana", fill: "#ffffff" });
         this.game.time.advancedTiming = true;
     };
@@ -947,6 +1002,7 @@ var EstadoEditor = (function (_super) {
         var fondo = this.game.add.tileSprite(-100, -100, this.game.width + 200, this.game.height + 200, "plano");
         fondo.fixedToCamera = true;
         this.fondo = fondo;
+        this.datos_iniciales_de_escena = datos.escena;
     };
     EstadoEditor.prototype.cuando_termina_de_mover = function (a) { };
     EstadoEditor.prototype.cuando_comienza_a_mover = function (a) { };
@@ -954,6 +1010,8 @@ var EstadoEditor = (function (_super) {
         _super.prototype.create.call(this);
         this.game.stage.backgroundColor = "5b5";
         this.game.paused = false;
+        this.game.camera.x = this.datos_iniciales_de_escena.camara_x;
+        this.game.camera.y = -this.datos_iniciales_de_escena.camara_y;
     };
     EstadoEditor.prototype.update = function () {
         var _this = this;
@@ -1034,9 +1092,16 @@ var EstadoEjecucion = (function (_super) {
         this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
     };
     EstadoEjecucion.prototype.instanciar_escena = function (nombre) {
-        var _this = this;
         var escena = this.proyecto.escenas.filter(function (e) { return e.nombre == nombre; })[0];
-        this.actores = escena.actores.map(function (e) {
+        this.crear_escena(escena);
+    };
+    EstadoEjecucion.prototype.crear_escena = function (datos_de_la_escena) {
+        var _this = this;
+        var escena = new this.clases[datos_de_la_escena.nombre](this.pilas);
+        escena.camara.x = datos_de_la_escena.camara_x;
+        escena.camara.y = datos_de_la_escena.camara_y;
+        escena.iniciar();
+        this.actores = datos_de_la_escena.actores.map(function (e) {
             return _this.crear_actor(e);
         });
     };

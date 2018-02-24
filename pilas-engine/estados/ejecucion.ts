@@ -84,7 +84,17 @@ class EstadoEjecucion extends Estado {
   instanciar_escena(nombre) {
     let escena = this.proyecto.escenas.filter(e => e.nombre == nombre)[0];
 
-    this.actores = escena.actores.map(e => {
+    this.crear_escena(escena);
+  }
+
+  crear_escena(datos_de_la_escena) {
+    let escena = new this.clases[datos_de_la_escena.nombre](this.pilas);
+
+    escena.camara.x = datos_de_la_escena.camara_x;
+    escena.camara.y = datos_de_la_escena.camara_y;
+    escena.iniciar();
+
+    this.actores = datos_de_la_escena.actores.map(e => {
       return this.crear_actor(e);
     });
   }

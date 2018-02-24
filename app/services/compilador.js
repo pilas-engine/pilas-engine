@@ -13,6 +13,7 @@ export default Service.extend({
     let codigo_de_escenas = proyecto.codigos.escenas.map(e => e.codigo).join("\n");
     let codigo_de_actores = proyecto.codigos.actores.map(e => e.codigo).join("\n");
 
+    //let codigo_completo = ["// Escenas:", codigo_de_escenas, "//Actores: ", codigo_de_actores].join("\n\n");
     let codigo_completo = codigo_de_escenas + codigo_de_actores;
 
     return this.compilar(codigo_completo);

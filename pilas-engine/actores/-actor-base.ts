@@ -69,6 +69,7 @@ class ActorBase {
   }
 
   set x(_x: number) {
+    this.pilas.utilidades.validar_numero(_x);
     let { x } = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0);
     this.sprite.x = x;
   }
@@ -79,6 +80,7 @@ class ActorBase {
   }
 
   set y(_y: number) {
+    this.pilas.utilidades.validar_numero(_y);
     let { y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y);
     this.sprite.y = y;
   }
@@ -89,6 +91,7 @@ class ActorBase {
   }
 
   set rotacion(angulo: number) {
+    this.pilas.utilidades.validar_numero(angulo);
     this.sprite.angle = -(angulo % 360);
   }
 
@@ -97,6 +100,7 @@ class ActorBase {
   }
 
   set escala_x(s) {
+    this.pilas.utilidades.validar_numero(s);
     this.sprite.scale.x = s;
   }
 
@@ -105,6 +109,7 @@ class ActorBase {
   }
 
   set escala_y(s) {
+    this.pilas.utilidades.validar_numero(s);
     this.sprite.scale.y = s;
   }
 
@@ -123,6 +128,7 @@ class ActorBase {
   }
 
   set escala(escala) {
+    this.pilas.utilidades.validar_numero(escala);
     this.escala_x = escala;
     this.escala_y = escala;
   }
@@ -143,6 +149,7 @@ class ActorBase {
       y = comunes[y];
     }
 
+    this.pilas.utilidades.validar_numero(y);
     this.sprite.anchor.y = y;
   }
 
@@ -162,10 +169,12 @@ class ActorBase {
       x = comunes[x];
     }
 
+    this.pilas.utilidades.validar_numero(x);
     this.sprite.anchor.x = x;
   }
 
   set transparencia(t) {
+    this.pilas.utilidades.validar_numero(t);
     t = this.pilas.utilidades.limitar(t, 0, 100);
     this.sprite.alpha = 1 - t / 100;
   }
@@ -180,6 +189,9 @@ class ActorBase {
   }
 
   crear_figura_rectangular(ancho: number = 0, alto: number = 0, estatico: boolean = false) {
+    this.pilas.utilidades.validar_numero(ancho);
+    this.pilas.utilidades.validar_numero(alto);
+
     this.sprite.game.physics.p2.enable([this.sprite], false);
     this.sprite.body.static = estatico;
 
@@ -193,6 +205,8 @@ class ActorBase {
   }
 
   crear_figura_circular(radio: number = 0, estatico: boolean = false) {
+    this.pilas.utilidades.validar_numero(radio);
+
     this.sprite.game.physics.p2.enable([this.sprite], false);
     this.sprite.body.static = estatico;
 
@@ -214,11 +228,11 @@ class ActorBase {
   }
 
   set alto(a: number) {
-    console.log("No puede definir este atributo");
+    throw new Error("No puede definir este atributo");
   }
 
   set ancho(a: number) {
-    console.log("No puede definir este atributo");
+    throw new Error("No puede definir este atributo");
   }
 
   get estatico() {
@@ -245,6 +259,14 @@ class ActorBase {
 
   get dinamico() {
     return !this.estatico;
+  }
+
+  get fijo() {
+    return this.sprite.fixedToCamera;
+  }
+
+  set fijo(valor: boolean) {
+    this.sprite.fixedToCamera = valor;
   }
 
   cada_segundo() {}

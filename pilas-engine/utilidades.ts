@@ -30,4 +30,10 @@ class Utilidades {
   limitar(valor: number, minimo: number, maximo: number) {
     return Math.min(Math.max(valor, minimo), maximo);
   }
+
+  validar_numero(valor: number) {
+    if (typeof valor !== "number") {
+      throw new Error(`El valor enviado no corresponde con un número: ${valor}`);
+    }
+  }
 }

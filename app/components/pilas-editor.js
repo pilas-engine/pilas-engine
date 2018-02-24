@@ -15,9 +15,10 @@ export default Component.extend({
   tagName: "",
   actorSeleccionado: -1, //deprecated
   seleccion: -1,
-  instanciaDeActorSeleccionado: null,
   cargando: true,
   existe_un_error_reciente: false,
+  instancia_seleccionada: null,
+  tipo_de_la_instancia_seleccionada: null,
 
   historiaPosicion: 10,
   historiaMinimo: 0,
@@ -377,10 +378,13 @@ export default Component.extend({
       let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
 
       if (actor) {
-        this.set("instanciaActorSeleccionado", actor);
+        this.set("instancia_seleccionada", actor);
+        this.set("tipo_de_la_instancia_seleccionada", "actor");
         this.set("codigo", this.obtener_codigo_para_el_actor(actor));
         this.set("tituloDelCodigo", `Código del actor: ${seleccion}`);
       } else {
+        this.set("instancia_seleccionada", escena);
+        this.set("tipo_de_la_instancia_seleccionada", "escena");
         this.set("ultimaEscenaSeleccionada", seleccion);
         this.mostrarEscenaActualSobrePilas();
 
@@ -396,6 +400,12 @@ export default Component.extend({
       this.get("bus").trigger("actualizar_actor_desde_el_editor", {
         id: objeto.id,
         actor: objeto
+      });
+    },
+    cuando_modifica_escena(escena) {
+      this.get("bus").trigger("actualizar_escena_desde_el_editor", {
+        id: escena.id,
+        escena: escena
       });
     },
     cuandoIntentaEliminar(id) {

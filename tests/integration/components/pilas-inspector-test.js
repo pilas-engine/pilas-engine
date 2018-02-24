@@ -14,14 +14,18 @@ test("it renders", function(assert) {
     ""
   );
 
-  this.set("instanciaActorSeleccionado", {
+  this.set("instancia_seleccionada", {
     id: 123,
     x: 20,
     y: 30,
     imagen: "demo"
   });
 
-  this.render(hbs`{{pilas-inspector instanciaActorSeleccionado=instanciaActorSeleccionado}}`);
+  this.set("tipo_de_la_instancia_seleccionada", "actor");
+
+  this.render(hbs`{{pilas-inspector 
+    instancia_seleccionada=instancia_seleccionada 
+    tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}`);
 
   function tiene_texto(t, texto) {
     return (

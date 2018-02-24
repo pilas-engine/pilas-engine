@@ -1,14 +1,36 @@
 <div class="verdana pa2 f6 unselectable pa0 flex1 overflow-y-auto ba b--silver {{if desactivado 'o-40 disabled'}}">
-  {{#if instanciaActorSeleccionado}}
-    <div class="pb1 truncate h2"><div class="dib w4">tipo</div> {{instanciaActorSeleccionado.tipo}}</div>
-    <div class="pb1 truncate h2"><div class="dib w4">imagen</div> {{instanciaActorSeleccionado.imagen}}</div>
 
-    {{#each propiedades as |propiedad|}}
-      {{pilas-propiedad objeto=instanciaActorSeleccionado
-          min=propiedad.min
-          max=propiedad.max
-          propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modificarAtributo")}}
-    {{/each}}
+  {{#if instancia_seleccionada}}
+
+    {{#if ha_seleccionado_un_actor}}
+
+
+      <div class="pb1 truncate h2"><div class="dib w4">tipo</div> {{instancia_seleccionada.tipo}}</div>
+      <div class="pb1 truncate h2"><div class="dib w4">imagen</div> {{instancia_seleccionada.imagen}}</div>
+
+      {{#each propiedades_de_actores as |propiedad|}}
+        {{pilas-propiedad objeto=instancia_seleccionada
+            min=propiedad.min
+            max=propiedad.max
+            propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modificarAtributo")}}
+      {{/each}}
+
+    {{else}}
+
+      <div class="pb1 truncate h2"><div class="dib w4">nombre</div> {{instancia_seleccionada.nombre}}</div>
+
+      {{#each propiedades_de_escenas as |propiedad|}}
+        {{pilas-propiedad objeto=instancia_seleccionada
+            min=propiedad.min
+            max=propiedad.max
+            propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modifica_atributo_de_escena")}}
+      {{/each}}
+
+
+    {{/if}}
 
   {{/if}}
+
+
+
 </div>

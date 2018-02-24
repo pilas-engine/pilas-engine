@@ -7,6 +7,7 @@ class ActorDentroDelEditor extends Phaser.Sprite {
     this.key = entidad.imagen;
     this.id = entidad.id;
     this.pilas = pilas;
+    this["actor"] = this;
     let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
     this.x = x;
     this.y = y;

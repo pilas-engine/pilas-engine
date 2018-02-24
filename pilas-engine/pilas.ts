@@ -40,6 +40,7 @@ class Pilas {
 
     pilas.game.camera.bounds = null;
 
+    console.log("iniciando la escena normal");
     this.escenas.Normal();
   }
 
@@ -102,9 +103,11 @@ class Pilas {
     }
 
     if (e.data.tipo === "define_escena") {
+      let escena = e.data.escena;
+
       this.game.state.start("editorState", true, false, {
         pilas: this,
-        escena: e.data.escena,
+        escena: escena,
         cuando_termina_de_mover: datos => {
           this.emitir_mensaje_al_editor("termina_de_mover_un_actor", datos);
         },
@@ -112,6 +115,11 @@ class Pilas {
           this.emitir_mensaje_al_editor("comienza_a_mover_un_actor", datos);
         }
       });
+
+      //console.log("ESCENA", escena);
+
+      //this.game.camera.x = escena.camara_x;
+      //this.game.camera.y = -escena.camara_y;
     }
 
     if (e.data.tipo === "ejecutar_proyecto") {
@@ -124,11 +132,17 @@ class Pilas {
     }
 
     if (e.data.tipo === "ejecutar_escena") {
+      console.warn("Deprecated: ejecutar_escena");
+      let escena = e.data.escena;
+
       this.game.state.start("estadoEjecucion", true, false, {
         pilas: this,
-        escena: e.data.escena,
+        escena: escena,
         codigo: e.data.codigo
       });
+
+      this.escena_actual().camara.x = escena.camara_x;
+      this.escena_actual().camara.y = escena.camara_y;
     }
 
     if (e.data.tipo === "cambiar_posicion") {
@@ -174,6 +188,14 @@ class Pilas {
       }
     }
 
+    if (e.data.tipo === "actualizar_escena_desde_el_editor") {
+      let id = +e.data.id;
+      let escena = e.data.escena;
+
+      this.escena_actual().camara.x = escena.camara_x;
+      this.escena_actual().camara.y = escena.camara_y;
+    }
+
     if (e.data.tipo === "quitar_pausa_de_phaser") {
       this.game.paused = false;
     }
@@ -201,6 +223,8 @@ class Pilas {
     if (e.data.tipo === "definir_estados_de_depuracion") {
       this.depurador.modo_posicion_activado = e.data.pos;
       this.depurador.mostrar_fps = e.data.fps;
+
+      console.log("definir_estados_de_depuracion", e.data);
     }
   }
 
@@ -220,7 +244,7 @@ class Pilas {
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.stage.disableVisibilityChange = true;
     this.game.renderer.renderSession.roundPixels = true;
-
+    //this.game.world.setBounds(0, 0, 100, 100);
     this.game.load.onLoadStart.add(this._cuando_comienza_a_cargar, this);
     this.game.load.onFileComplete.add(this._cuando_carga_archivo, this);
     this.game.load.onLoadComplete.add(this._cuando_termina_de_cargar, this);

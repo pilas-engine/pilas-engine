@@ -41,8 +41,11 @@
           }}
 
         {{pilas-inspector
-          instanciaActorSeleccionado=instanciaActorSeleccionado
+          instancia_seleccionada=instancia_seleccionada
+          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
+
           cuandoModificaObjeto=(action "cuandoModificaObjeto")
+          cuando_modifica_escena=(action "cuando_modifica_escena")
           desactivado=(not estado.puede_editar)
         }}
 

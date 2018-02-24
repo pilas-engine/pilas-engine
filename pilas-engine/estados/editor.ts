@@ -6,6 +6,7 @@ class EstadoEditor extends Estado {
   texto: any;
   historia: any;
   fondo: any;
+  datos_iniciales_de_escena: { camara_x: 0; camara_y: 0 };
 
   init(datos) {
     this.pilas = datos.pilas;
@@ -17,6 +18,7 @@ class EstadoEditor extends Estado {
     let fondo = this.game.add.tileSprite(-100, -100, this.game.width + 200, this.game.height + 200, "plano");
     fondo.fixedToCamera = true;
     this.fondo = fondo;
+    this.datos_iniciales_de_escena = datos.escena;
   }
 
   cuando_termina_de_mover(a: any) {}
@@ -27,6 +29,9 @@ class EstadoEditor extends Estado {
     super.create();
     this.game.stage.backgroundColor = "5b5";
     this.game.paused = false;
+
+    this.game.camera.x = this.datos_iniciales_de_escena.camara_x;
+    this.game.camera.y = -this.datos_iniciales_de_escena.camara_y;
   }
 
   update() {

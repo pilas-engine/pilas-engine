@@ -139,6 +139,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         {
           nombre: "Escena1",
           id: 1,
+          camara_x: 0,
+          camara_y: 0,
           actores: [
             {
               id: 2,
@@ -197,6 +199,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
         {
           nombre: "Escena2",
           id: 6,
+          camara_x: 0,
+          camara_y: 0,
           actores: []
         }
       ]

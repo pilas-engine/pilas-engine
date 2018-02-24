@@ -95,6 +95,7 @@ declare class Utilidades {
     obtener_rampa_de_colores(): string[];
     obtener_color_al_azar(opacidad: any): string;
     limitar(valor: number, minimo: number, maximo: number): number;
+    validar_numero(valor: number): void;
 }
 declare class ActorBase {
     tipo: String;
@@ -135,6 +136,7 @@ declare class ActorBase {
     alto: number;
     estatico: boolean;
     dinamico: boolean;
+    fijo: boolean;
     cada_segundo(): void;
 }
 declare class Actor extends ActorBase {
@@ -199,6 +201,9 @@ declare class Estado extends Phaser.State {
     texto: Phaser.Text;
     sprites: any;
     render(): void;
+    dibujar_puntos_de_control_de_todos_los_actores(bitmap: any): void;
+    dibujar_limites_del_mundo(bitmap: any): void;
+    dibujar_punto_de_control(bitmap: any, x: any, y: any, x_de_pilas: any, y_de_pilas: any): void;
     create(): void;
     obtener_sprites(): any;
     actualizarPosicionDeFormaExterna(pos: any): void;
@@ -210,6 +215,10 @@ declare class EstadoEditor extends Estado {
     texto: any;
     historia: any;
     fondo: any;
+    datos_iniciales_de_escena: {
+        camara_x: 0;
+        camara_y: 0;
+    };
     init(datos: any): void;
     cuando_termina_de_mover(a: any): void;
     cuando_comienza_a_mover(a: any): void;
@@ -229,6 +238,7 @@ declare class EstadoEjecucion extends Estado {
     obtener_codigo_para_exportar_clases(codigo: any): string;
     create(): void;
     instanciar_escena(nombre: any): void;
+    crear_escena(datos_de_la_escena: any): void;
     crear_actor(entidad: any): any;
     preRender(): void;
     update(): void;
