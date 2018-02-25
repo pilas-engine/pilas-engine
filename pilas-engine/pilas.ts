@@ -223,8 +223,6 @@ class Pilas {
     if (e.data.tipo === "definir_estados_de_depuracion") {
       this.depurador.modo_posicion_activado = e.data.pos;
       this.depurador.mostrar_fps = e.data.fps;
-
-      console.log("definir_estados_de_depuracion", e.data);
     }
   }
 
@@ -259,7 +257,20 @@ class Pilas {
     this.game.load.image("caja", "imagenes/caja.png");
     this.game.load.image("aceituna", "imagenes/aceituna.png");
     this.game.load.image("plano", "imagenes/fondos/plano.png");
+    this.game.load.image("nave", "imagenes/nave.png");
+
+    this.game.load.audio("laser", "sonidos/laser.wav");
+    this.game.load.audio("moneda", "sonidos/moneda.wav");
+    this.game.load.audio("salto-corto", "sonidos/salto-corto.wav");
+    this.game.load.audio("salto-largo", "sonidos/salto-largo.wav");
+    this.game.load.audio("seleccion-aguda", "sonidos/seleccion-aguda.wav");
+    this.game.load.audio("seleccion-grave", "sonidos/seleccion-grave.wav");
+
     this.game.load.start();
+  }
+
+  reproducir_sonido(nombre: string) {
+    this.game.sound.play(nombre);
   }
 
   _cuando_comienza_a_cargar() {}

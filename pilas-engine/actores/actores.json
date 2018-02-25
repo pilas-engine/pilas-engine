@@ -23,6 +23,12 @@
       "tipo": "Pelota",
       "imagen": "pelota",
       "archivo": "pelota.ts"
+    },
+    {
+      "nombre": "Nave",
+      "tipo": "Nave",
+      "imagen": "nave",
+      "archivo": "nave.ts"
     }
   ]
 }

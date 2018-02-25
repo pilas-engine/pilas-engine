@@ -67,6 +67,7 @@ declare class Pilas {
     _preload(): void;
     _create(): void;
     start(): void;
+    reproducir_sonido(nombre: string): void;
     _cuando_comienza_a_cargar(): void;
     _cuando_carga_archivo(progreso: any): void;
     _cuando_termina_de_cargar(): void;
@@ -138,6 +139,7 @@ declare class ActorBase {
     dinamico: boolean;
     fijo: boolean;
     cada_segundo(): void;
+    avanzar(rotacion?: number, velocidad?: number): void;
 }
 declare class Actor extends ActorBase {
     iniciar(): void;
@@ -151,6 +153,11 @@ declare class Caja extends Actor {
 }
 declare class Logo extends Actor {
     iniciar(): void;
+}
+declare class Nave extends Actor {
+    velocidad: number;
+    iniciar(): void;
+    actualizar(): void;
 }
 declare class Pelota extends Actor {
     iniciar(): void;

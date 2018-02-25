@@ -270,4 +270,12 @@ class ActorBase {
   }
 
   cada_segundo() {}
+
+  avanzar(rotacion: number = null, velocidad: number = 1) {
+    rotacion = rotacion || this.rotacion;
+
+    this.x += velocidad;
+    this.y += velocidad;
+    console.log(Math.cos(rotacion) * velocidad);
+  }
 }

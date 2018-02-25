@@ -310,7 +310,6 @@ var Pilas = (function () {
         if (e.data.tipo === "definir_estados_de_depuracion") {
             this.depurador.modo_posicion_activado = e.data.pos;
             this.depurador.mostrar_fps = e.data.fps;
-            console.log("definir_estados_de_depuracion", e.data);
         }
     };
     Pilas.prototype.iniciar_pilas_desde_el_editor = function (ancho, alto) {
@@ -339,7 +338,17 @@ var Pilas = (function () {
         this.game.load.image("caja", "imagenes/caja.png");
         this.game.load.image("aceituna", "imagenes/aceituna.png");
         this.game.load.image("plano", "imagenes/fondos/plano.png");
+        this.game.load.image("nave", "imagenes/nave.png");
+        this.game.load.audio("laser", "sonidos/laser.wav");
+        this.game.load.audio("moneda", "sonidos/moneda.wav");
+        this.game.load.audio("salto-corto", "sonidos/salto-corto.wav");
+        this.game.load.audio("salto-largo", "sonidos/salto-largo.wav");
+        this.game.load.audio("seleccion-aguda", "sonidos/seleccion-aguda.wav");
+        this.game.load.audio("seleccion-grave", "sonidos/seleccion-grave.wav");
         this.game.load.start();
+    };
+    Pilas.prototype.reproducir_sonido = function (nombre) {
+        this.game.sound.play(nombre);
     };
     Pilas.prototype._cuando_comienza_a_cargar = function () { };
     Pilas.prototype._cuando_carga_archivo = function (progreso) {
@@ -702,6 +711,14 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.cada_segundo = function () { };
+    ActorBase.prototype.avanzar = function (rotacion, velocidad) {
+        if (rotacion === void 0) { rotacion = null; }
+        if (velocidad === void 0) { velocidad = 1; }
+        rotacion = rotacion || this.rotacion;
+        this.x += velocidad;
+        this.y += velocidad;
+        console.log(Math.cos(rotacion) * velocidad);
+    };
     return ActorBase;
 }());
 var Actor = (function (_super) {
@@ -740,6 +757,32 @@ var Logo = (function (_super) {
     }
     Logo.prototype.iniciar = function () { };
     return Logo;
+}(Actor));
+var Nave = (function (_super) {
+    __extends(Nave, _super);
+    function Nave() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.velocidad = 5;
+        return _this;
+    }
+    Nave.prototype.iniciar = function () {
+        this.imagen = "nave";
+        this.y = 0;
+        this.y = 9;
+        console.log(this.y);
+        this.pilas.reproducir_sonido("moneda");
+    };
+    Nave.prototype.actualizar = function () {
+        if (this.pilas.control.izquierda) {
+            this.rotacion += this.velocidad;
+        }
+        if (this.pilas.control.derecha) {
+            this.rotacion -= this.velocidad;
+        }
+        if (this.pilas.control.arriba) {
+        }
+    };
+    return Nave;
 }(Actor));
 var Pelota = (function (_super) {
     __extends(Pelota, _super);
