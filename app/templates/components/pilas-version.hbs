@@ -1,1 +1,17 @@
 {{yield}}
+
+<div class="tc mt4 lato gray">
+  versión {{app-version hideSha=true}}
+</div>
+
+<div class="tc mt2 f7 lato gray">
+  {{#if consultando}}
+    Consultando si existe una versión más reciente en el servidor ...
+  {{else}}
+    {{#if actualizada}}
+      Tienes la versión más reciente.
+    {{else}}
+      <span class='red'>Existe una actualización disponible: <a href='https://github.com/pilas-engine/pilas-engine/releases' target="_blank">{{version_en_el_servidor}}</a></span>
+    {{/if}}
+  {{/if}}
+</div>
