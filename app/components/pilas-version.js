@@ -8,6 +8,12 @@ export default Component.extend({
   consultando: true,
   version_en_el_servidor: null,
   actualizanda: true,
+  version: version,
+  version_simplificada: Ember.computed("version", function() {
+    return this.get("version")
+      .replace("v", "")
+      .split("+")[0];
+  }),
 
   didInsertElement() {
     Ember.run.later(() => {
@@ -24,7 +30,7 @@ export default Component.extend({
     }).then(data => {
       this.set("consultando", false);
       this.set("version_en_el_servidor", data.tag_name);
-      this.set("actualizada", version >= data.tag_name);
+      this.set("actualizada", this.get("version") >= data.tag_name);
     });
   }
 });
