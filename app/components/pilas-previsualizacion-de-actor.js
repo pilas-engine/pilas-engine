@@ -74,7 +74,6 @@ export default Component.extend({
     let proyecto = this.get("proyecto");
 
     this.agregar_actor_al_proyecto(proyecto, this.get("actor"));
-    console.warn(proyecto);
 
     let resultado = this.get("compilador").compilar_proyecto(proyecto);
 

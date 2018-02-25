@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   contexto: null,
   cargando: true,
   mantenerFoco: false,
-  classNames: ["flex1", "overflow-hidden"],
+  classNames: ["flex1", "overflow-hidden", "unseletable"],
   porcentajeDeCarga: 0,
 
   didInsertElement() {
