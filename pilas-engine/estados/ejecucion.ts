@@ -83,7 +83,6 @@ class EstadoEjecucion extends Estado {
 
   instanciar_escena(nombre) {
     let escena = this.proyecto.escenas.filter(e => e.nombre == nombre)[0];
-
     this.crear_escena(escena);
   }
 

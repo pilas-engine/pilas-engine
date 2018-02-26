@@ -30,7 +30,7 @@ export default Component.extend({
     }).then(data => {
       this.set("consultando", false);
       this.set("version_en_el_servidor", data.tag_name);
-      this.set("actualizada", this.get("version") >= data.tag_name);
+      this.set("actualizada", "v" + this.get("version") >= data.tag_name);
     });
   }
 });
