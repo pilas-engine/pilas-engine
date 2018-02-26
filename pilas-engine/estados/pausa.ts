@@ -1,7 +1,6 @@
 /// <reference path="estado.ts"/>
 
 class EstadoPausa extends Estado {
-  historia: any;
   posicion: number;
   sprites: any;
   texto: any;
@@ -14,9 +13,8 @@ class EstadoPausa extends Estado {
 
   init(datos) {
     this.pilas = datos.pilas;
-    this.historia = datos.historia;
-    this.posicion = this.historia.length - 1;
-    this.total = this.historia.length - 1;
+    this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
+    this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.sprites = [];
     this.cuando_cambia_posicion = datos.cuando_cambia_posicion;
     this.game.paused = false;
@@ -51,7 +49,7 @@ class EstadoPausa extends Estado {
   }
 
   private crear_sprites_desde_historia(posicion) {
-    let entidades = this.historia[posicion];
+    let entidades = this.pilas.historia.obtener_foto(posicion);
 
     this.sprites.map(sprite => sprite.destroy());
 

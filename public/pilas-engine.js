@@ -119,8 +119,7 @@ var Escenas = (function () {
         this.pilas = pilas;
     }
     Escenas.prototype.Normal = function () {
-        this.escena_actual = new Normal(this.pilas);
-        return this.escena_actual;
+        return new Normal(this.pilas);
     };
     Escenas.prototype.vincular = function (escena) {
         var _this = this;
@@ -129,7 +128,31 @@ var Escenas = (function () {
             return _this.escena_actual;
         };
     };
+    Escenas.prototype.definir_escena_actual = function (escena) {
+        this.escena_actual = escena;
+    };
     return Escenas;
+}());
+var Historia = (function () {
+    function Historia(pilas) {
+        this.fotos = [];
+        this.pilas = pilas;
+        this.fotos = [];
+    }
+    Historia.prototype.limpiar = function () {
+        this.fotos = [];
+    };
+    Historia.prototype.serializar_escena_actual = function () {
+    };
+    Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (bitmap) {
+    };
+    Historia.prototype.obtener_cantidad_de_posiciones = function () {
+        return this.fotos.length - 1;
+    };
+    Historia.prototype.obtener_foto = function (posicion) {
+        return this.fotos[posicion];
+    };
+    return Historia;
 }());
 var Log = (function () {
     function Log(pilas) {
@@ -172,6 +195,7 @@ var Pilas = (function () {
         this.actores = new Actores(this);
         this.escenas = new Escenas(this);
         this.utilidades = new Utilidades(this);
+        this.historia = new Historia(this);
         pilas.game.camera.bounds = null;
         console.log("iniciando la escena normal");
         this.escenas.Normal();
@@ -921,6 +945,7 @@ var EscenaBase = (function () {
         this.actores = [];
         this.pilas.utilidades.obtener_id_autoincremental();
         this.camara = new Camara(pilas);
+        this.pilas.escenas.definir_escena_actual(this);
     }
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
@@ -1018,15 +1043,9 @@ var Estado = (function (_super) {
     };
     Estado.prototype.actualizarPosicionDeFormaExterna = function (pos) { };
     Estado.prototype.dibujar_todos_los_puntos_de_las_posiciones_recorridas = function () {
-        var _this = this;
         var bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
         var canvas = bitmap.addToWorld(0, 0);
-        this.historia.map(function (historia) {
-            historia.map(function (entidad) {
-                var _a = _this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
-                bitmap.circle(x, y, 1, entidad.id_color);
-            });
-        });
+        this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(bitmap);
         return canvas;
     };
     return Estado;
@@ -1101,8 +1120,8 @@ var EstadoEjecucion = (function (_super) {
             this.pilas.emitir_excepcion_al_editor(e, "ejecutar el proyecto");
         }
         this.sprites = {};
-        this.historia = [];
         this.actores = [];
+        this.pilas.historia.limpiar();
     };
     EstadoEjecucion.prototype.obtener_codigo_para_exportar_clases = function (codigo) {
         var re_creacion_de_clase = /var (.*) \= \/\*\* @class/g;
@@ -1185,10 +1204,7 @@ var EstadoEjecucion = (function (_super) {
         this.pilas.escena_actual().actualizar();
     };
     EstadoEjecucion.prototype.guardar_foto_de_entidades = function () {
-        var entidades = this.actores.map(function (actor) {
-            return actor.serializar();
-        });
-        this.historia.push(entidades);
+        this.pilas.historia.serializar_escena_actual();
     };
     return EstadoEjecucion;
 }(Estado));
@@ -1199,9 +1215,8 @@ var EstadoPausa = (function (_super) {
     }
     EstadoPausa.prototype.init = function (datos) {
         this.pilas = datos.pilas;
-        this.historia = datos.historia;
-        this.posicion = this.historia.length - 1;
-        this.total = this.historia.length - 1;
+        this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
+        this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.sprites = [];
         this.cuando_cambia_posicion = datos.cuando_cambia_posicion;
         this.game.paused = false;
@@ -1229,7 +1244,7 @@ var EstadoPausa = (function (_super) {
     };
     EstadoPausa.prototype.crear_sprites_desde_historia = function (posicion) {
         var _this = this;
-        var entidades = this.historia[posicion];
+        var entidades = this.pilas.historia.obtener_foto(posicion);
         this.sprites.map(function (sprite) { return sprite.destroy(); });
         this.sprites = entidades.map(function (entidad) {
             return _this.crear_sprite_desde_entidad(entidad);

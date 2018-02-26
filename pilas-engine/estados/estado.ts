@@ -1,6 +1,5 @@
 class Estado extends Phaser.State {
   pilas: Pilas;
-  historia: any;
   bitmap: Phaser.BitmapData;
   canvas: any;
   texto: Phaser.Text;
@@ -78,12 +77,7 @@ class Estado extends Phaser.State {
     let bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
     let canvas = bitmap.addToWorld(0, 0);
 
-    this.historia.map(historia => {
-      historia.map(entidad => {
-        let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
-        bitmap.circle(x, y, 1, entidad.id_color);
-      });
-    });
+    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(bitmap);
 
     return canvas;
   }

@@ -7,8 +7,7 @@ class Escenas {
   }
 
   Normal() {
-    this.escena_actual = new Normal(this.pilas);
-    return this.escena_actual;
+    return new Normal(this.pilas);
   }
 
   vincular(escena) {
@@ -16,6 +15,9 @@ class Escenas {
       this.escena_actual = new escena(this.pilas);
       return this.escena_actual;
     };
+  }
 
+  definir_escena_actual(escena) {
+    this.escena_actual = escena;
   }
 }

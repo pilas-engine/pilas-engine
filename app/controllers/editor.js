@@ -73,18 +73,21 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             nombre: "Escena1",
             codigo: `class Escena1 extends Escena {
               iniciar() {
-                console.log("iniciando escena...");
               }
 
-
               actualizar() {
-                console.log("actualizando escena...");
               }
             }`
           },
           {
             nombre: "Escena2",
-            codigo: "class Escena2 extends Escena { /* codigo de otra escena */ }"
+            codigo: `class Escena2 extends Escena {
+              iniciar() {
+              }
+
+              actualizar() {
+              }
+            }`
           }
         ],
         actores: [
@@ -96,6 +99,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               this.crear_figura_circular();
             }
 
+            actualizar() {
+            }
           }`
           },
           {
@@ -104,12 +109,20 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             iniciar() {
               this.crear_figura_rectangular();
             }
+
+            actualizar() {
+            }
           }`
           },
           {
             tipo: "Actor",
             codigo: `class Actor extends ActorBase {
+              iniciar() {
 
+              }
+
+              actualizar() {
+              }
           }`
           },
           {

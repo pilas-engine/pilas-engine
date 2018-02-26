@@ -12,6 +12,7 @@ class Pilas {
   depurador: Depurador;
   escenas: Escenas;
   utilidades: Utilidades;
+  historia: Historia;
 
   _ancho: number;
   _alto: number;
@@ -37,6 +38,7 @@ class Pilas {
     this.actores = new Actores(this);
     this.escenas = new Escenas(this);
     this.utilidades = new Utilidades(this);
+    this.historia = new Historia(this);
 
     pilas.game.camera.bounds = null;
 

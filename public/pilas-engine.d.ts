@@ -33,8 +33,19 @@ declare class Escenas {
     pilas: Pilas;
     escena_actual: Escena;
     constructor(pilas: any);
-    Normal(): Escena;
+    Normal(): Normal;
     vincular(escena: any): void;
+    definir_escena_actual(escena: any): void;
+}
+declare class Historia {
+    pilas: Pilas;
+    fotos: any[];
+    constructor(pilas: Pilas);
+    limpiar(): void;
+    serializar_escena_actual(): void;
+    dibujar_puntos_de_las_posiciones_recorridas(bitmap: any): void;
+    obtener_cantidad_de_posiciones(): number;
+    obtener_foto(posicion: number): any;
 }
 declare class Log {
     pilas: Pilas;
@@ -51,6 +62,7 @@ declare class Pilas {
     depurador: Depurador;
     escenas: Escenas;
     utilidades: Utilidades;
+    historia: Historia;
     _ancho: number;
     _alto: number;
     constructor();
@@ -202,7 +214,6 @@ declare class Normal extends Escena {
 }
 declare class Estado extends Phaser.State {
     pilas: Pilas;
-    historia: any;
     bitmap: Phaser.BitmapData;
     canvas: any;
     texto: Phaser.Text;
@@ -235,7 +246,6 @@ declare class EstadoEditor extends Estado {
 declare class EstadoEjecucion extends Estado {
     entidades: any;
     sprites: any;
-    historia: any;
     actores: any;
     clases: {};
     proyecto: any;
@@ -252,7 +262,6 @@ declare class EstadoEjecucion extends Estado {
     private guardar_foto_de_entidades();
 }
 declare class EstadoPausa extends Estado {
-    historia: any;
     posicion: number;
     sprites: any;
     texto: any;

@@ -3,7 +3,6 @@
 class EstadoEjecucion extends Estado {
   entidades: any;
   sprites: any;
-  historia: any;
   actores: any;
   clases: {};
   proyecto: any = {};
@@ -28,8 +27,8 @@ class EstadoEjecucion extends Estado {
     }
 
     this.sprites = {};
-    this.historia = [];
     this.actores = [];
+    this.pilas.historia.limpiar();
   }
 
   /**
@@ -139,10 +138,6 @@ class EstadoEjecucion extends Estado {
   }
 
   private guardar_foto_de_entidades() {
-    let entidades = this.actores.map(actor => {
-      return actor.serializar();
-    });
-
-    this.historia.push(entidades);
+    this.pilas.historia.serializar_escena_actual();
   }
 }
