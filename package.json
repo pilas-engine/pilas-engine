@@ -13,7 +13,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test --silent -r 'xunit'"
   },
   "main": "electron.js",
   "devDependencies": {
