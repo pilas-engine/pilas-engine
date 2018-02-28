@@ -143,8 +143,19 @@ var Historia = (function () {
         this.fotos = [];
     };
     Historia.prototype.serializar_escena_actual = function () {
+        this.fotos.push({
+            escena: this.pilas.escena_actual().serializar(),
+            actores: this.pilas.escena_actual().actores.map(function (e) { return e.serializar(); })
+        });
     };
     Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (bitmap) {
+        var _this = this;
+        this.fotos.map(function (historia) {
+            historia.actores.map(function (entidad) {
+                var _a = _this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
+                bitmap.circle(x, y, 1, entidad.id_color);
+            });
+        });
     };
     Historia.prototype.obtener_cantidad_de_posiciones = function () {
         return this.fotos.length - 1;
@@ -316,15 +327,13 @@ var Pilas = (function () {
             this.game.paused = false;
         }
         if (e.data.tipo === "pausar_escena") {
-            var historia = this.game.state.getCurrentState()["historia"];
             this.game.state.start("estadoPausa", true, false, {
                 pilas: this,
-                historia: historia,
                 cuando_cambia_posicion: function (datos) {
                     _this.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", datos);
                 }
             });
-            var t = historia.length - 1;
+            var t = this.historia.obtener_cantidad_de_posiciones();
             var datos = { minimo: 0, posicion: t, maximo: t };
             this.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos);
         }
@@ -452,6 +461,12 @@ var Utilidades = (function () {
         if (typeof valor !== "number") {
             throw new Error("El valor enviado no corresponde con un n\u00FAmero: " + valor);
         }
+    };
+    Utilidades.prototype.convertir_angulo_a_radianes = function (grados) {
+        return grados * Math.PI / 180;
+    };
+    Utilidades.prototype.convertir_radianes_a_angulos = function (radianes) {
+        return radianes * 180 / Math.PI;
     };
     return Utilidades;
 }());
@@ -739,9 +754,9 @@ var ActorBase = (function () {
         if (rotacion === void 0) { rotacion = null; }
         if (velocidad === void 0) { velocidad = 1; }
         rotacion = rotacion || this.rotacion;
-        this.x += velocidad;
-        this.y += velocidad;
-        console.log(Math.cos(rotacion) * velocidad);
+        var r = this.pilas.utilidades.convertir_angulo_a_radianes(rotacion);
+        this.x += Math.cos(r) * velocidad;
+        this.y += Math.sin(r) * velocidad;
     };
     return ActorBase;
 }());
@@ -791,9 +806,6 @@ var Nave = (function (_super) {
     }
     Nave.prototype.iniciar = function () {
         this.imagen = "nave";
-        this.y = 0;
-        this.y = 9;
-        console.log(this.y);
         this.pilas.reproducir_sonido("moneda");
     };
     Nave.prototype.actualizar = function () {
@@ -804,6 +816,7 @@ var Nave = (function (_super) {
             this.rotacion -= this.velocidad;
         }
         if (this.pilas.control.arriba) {
+            this.avanzar(this.rotacion + 90, this.velocidad);
         }
     };
     return Nave;
@@ -949,6 +962,12 @@ var EscenaBase = (function () {
     }
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
+    };
+    EscenaBase.prototype.serializar = function () {
+        return {
+            camara_x: this.camara.x,
+            camara_y: this.camara.y
+        };
     };
     return EscenaBase;
 }());
@@ -1244,9 +1263,11 @@ var EstadoPausa = (function (_super) {
     };
     EstadoPausa.prototype.crear_sprites_desde_historia = function (posicion) {
         var _this = this;
-        var entidades = this.pilas.historia.obtener_foto(posicion);
+        var foto = this.pilas.historia.obtener_foto(posicion);
         this.sprites.map(function (sprite) { return sprite.destroy(); });
-        this.sprites = entidades.map(function (entidad) {
+        this.game.camera.x = foto.escena.camara_x;
+        this.game.camera.y = foto.escena.camara_y;
+        this.sprites = foto.actores.map(function (entidad) {
             return _this.crear_sprite_desde_entidad(entidad);
         });
     };

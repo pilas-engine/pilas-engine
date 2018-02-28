@@ -49,11 +49,14 @@ class EstadoPausa extends Estado {
   }
 
   private crear_sprites_desde_historia(posicion) {
-    let entidades = this.pilas.historia.obtener_foto(posicion);
+    let foto = this.pilas.historia.obtener_foto(posicion);
 
     this.sprites.map(sprite => sprite.destroy());
 
-    this.sprites = entidades.map(entidad => {
+    this.game.camera.x = foto.escena.camara_x;
+    this.game.camera.y = foto.escena.camara_y;
+
+    this.sprites = foto.actores.map(entidad => {
       return this.crear_sprite_desde_entidad(entidad);
     });
   }

@@ -11,13 +11,26 @@ export default Component.extend({
     ancho: 500,
     alto: 500,
     codigos: {
-      escenas: [],
+      escenas: [
+        {
+          nombre: "principal",
+          codigo: `class principal extends Escena {
+          iniciar() {
+          }
+
+          actualizar() {
+          }
+        }`
+        }
+      ],
       actores: []
     },
     escenas: [
       {
         nombre: "principal",
         id: 1,
+        camara_x: 0,
+        camara_y: 0,
         actores: []
       }
     ]

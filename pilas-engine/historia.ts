@@ -12,25 +12,19 @@ class Historia {
   }
 
   serializar_escena_actual() {
-    /*
-    let entidades = this.actores.map(actor => {
-      return actor.serializar();
+    this.fotos.push({
+      escena: this.pilas.escena_actual().serializar(),
+      actores: this.pilas.escena_actual().actores.map(e => e.serializar())
     });
-
-    this.historia.push(entidades);
-    */
   }
 
   dibujar_puntos_de_las_posiciones_recorridas(bitmap) {
-    /*
-
-        this.historia.map(historia => {
-          historia.map(entidad => {
-            let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
-            bitmap.circle(x, y, 1, entidad.id_color);
-          });
-        });
-        */
+    this.fotos.map(historia => {
+      historia.actores.map(entidad => {
+        let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
+        bitmap.circle(x, y, 1, entidad.id_color);
+      });
+    });
   }
 
   obtener_cantidad_de_posiciones() {

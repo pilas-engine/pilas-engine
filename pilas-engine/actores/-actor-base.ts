@@ -274,8 +274,9 @@ class ActorBase {
   avanzar(rotacion: number = null, velocidad: number = 1) {
     rotacion = rotacion || this.rotacion;
 
-    this.x += velocidad;
-    this.y += velocidad;
-    console.log(Math.cos(rotacion) * velocidad);
+    let r = this.pilas.utilidades.convertir_angulo_a_radianes(rotacion);
+
+    this.x += Math.cos(r) * velocidad;
+    this.y += Math.sin(r) * velocidad;
   }
 }

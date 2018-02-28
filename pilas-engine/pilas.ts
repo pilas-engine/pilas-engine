@@ -81,22 +81,6 @@ class Pilas {
       alert("Error occured: " + errorMsg); //or any message
       return false;
     };
-
-    /*
-    window.addEventListener("error", e => {
-      console.warn(e);
-      this.emitir_mensaje_al_editor("error", { mensaje: e.message });
-      e.preventDefault();
-      window.location.reload();
-    });
-    */
-    /*
-    window.onerror = (e, b) => {
-      console.log(e, b);
-      this.emitir_mensaje_al_editor("error", { mensaje: e });
-      return true;
-    };
-    */
   }
 
   private antender_mensaje_desde_el_editor(e: any) {
@@ -117,11 +101,6 @@ class Pilas {
           this.emitir_mensaje_al_editor("comienza_a_mover_un_actor", datos);
         }
       });
-
-      //console.log("ESCENA", escena);
-
-      //this.game.camera.x = escena.camara_x;
-      //this.game.camera.y = -escena.camara_y;
     }
 
     if (e.data.tipo === "ejecutar_proyecto") {
@@ -203,17 +182,14 @@ class Pilas {
     }
 
     if (e.data.tipo === "pausar_escena") {
-      let historia = this.game.state.getCurrentState()["historia"];
-
       this.game.state.start("estadoPausa", true, false, {
         pilas: this,
-        historia: historia,
         cuando_cambia_posicion: datos => {
           this.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", datos);
         }
       });
 
-      let t = historia.length - 1;
+      let t = this.historia.obtener_cantidad_de_posiciones();
       let datos = { minimo: 0, posicion: t, maximo: t };
       this.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos);
     }

@@ -109,6 +109,8 @@ declare class Utilidades {
     obtener_color_al_azar(opacidad: any): string;
     limitar(valor: number, minimo: number, maximo: number): number;
     validar_numero(valor: number): void;
+    convertir_angulo_a_radianes(grados: number): number;
+    convertir_radianes_a_angulos(radianes: number): number;
 }
 declare class ActorBase {
     tipo: String;
@@ -126,7 +128,7 @@ declare class ActorBase {
         rotacion: number;
         escala_x: number;
         escala_y: number;
-        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture | Phaser.Video;
+        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | Phaser.Video | PIXI.Texture;
         transparencia: number;
         id_color: string;
     };
@@ -202,6 +204,10 @@ declare class EscenaBase {
     camara: Camara;
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
+    serializar(): {
+        camara_x: number;
+        camara_y: number;
+    };
 }
 declare class Escena extends EscenaBase {
     cuadro: number;

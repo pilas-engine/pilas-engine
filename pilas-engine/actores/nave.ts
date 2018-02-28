@@ -3,10 +3,6 @@ class Nave extends Actor {
 
   iniciar() {
     this.imagen = "nave";
-    this.y = 0;
-    this.y = 9;
-    console.log(this.y);
-    //this.y += 1;
     this.pilas.reproducir_sonido("moneda");
   }
 
@@ -20,9 +16,7 @@ class Nave extends Actor {
     }
 
     if (this.pilas.control.arriba) {
-      //console.log(this.y);
-      //this.avanzar(this.rotacion, 0.00001);
-      //this.pilas.reproducir_sonido("moneda");
+      this.avanzar(this.rotacion + 90, this.velocidad);
     }
   }
 }

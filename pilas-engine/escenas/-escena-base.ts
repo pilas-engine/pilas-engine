@@ -15,4 +15,11 @@ class EscenaBase {
   agregar_actor(actor: Actor) {
     this.actores.push(actor);
   }
+
+  serializar() {
+    return {
+      camara_x: this.camara.x,
+      camara_y: this.camara.y
+    };
+  }
 }

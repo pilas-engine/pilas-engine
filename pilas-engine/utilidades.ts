@@ -36,4 +36,12 @@ class Utilidades {
       throw new Error(`El valor enviado no corresponde con un número: ${valor}`);
     }
   }
+
+  convertir_angulo_a_radianes(grados: number) {
+    return grados * Math.PI / 180;
+  }
+
+  convertir_radianes_a_angulos(radianes: number) {
+    return radianes * 180 / Math.PI;
+  }
 }
