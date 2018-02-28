@@ -208,7 +208,6 @@ var Pilas = (function () {
         this.utilidades = new Utilidades(this);
         this.historia = new Historia(this);
         pilas.game.camera.bounds = null;
-        console.log("iniciando la escena normal");
         this.escenas.Normal();
     };
     Pilas.prototype.obtener_entidades = function () {
@@ -270,6 +269,7 @@ var Pilas = (function () {
                 pilas: this,
                 proyecto: e.data.proyecto,
                 nombre_de_la_escena_inicial: e.data.nombre_de_la_escena_inicial,
+                permitir_modo_pausa: e.data.permitir_modo_pausa,
                 codigo: e.data.codigo
             });
         }
@@ -997,9 +997,8 @@ var Normal = (function (_super) {
     function Normal() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Normal.prototype.iniciar = function () {
-        console.log("ha iniciando la escena Normal!");
-    };
+    Normal.prototype.iniciar = function () { };
+    Normal.prototype.actualizar = function () { };
     return Normal;
 }(Escena));
 var Estado = (function (_super) {
@@ -1130,6 +1129,7 @@ var EstadoEjecucion = (function (_super) {
         this.proyecto = datos.proyecto;
         this.codigo = datos.codigo;
         this.game.paused = false;
+        this.permitir_modo_pausa = datos.permitir_modo_pausa;
         var codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
         var codigo_completo = this.codigo + codigoDeExportacion;
         try {
@@ -1212,11 +1212,13 @@ var EstadoEjecucion = (function (_super) {
         return actor;
     };
     EstadoEjecucion.prototype.preRender = function () {
-        try {
-            this.guardar_foto_de_entidades();
-        }
-        catch (e) {
-            this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+        if (this.permitir_modo_pausa) {
+            try {
+                this.guardar_foto_de_entidades();
+            }
+            catch (e) {
+                this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+            }
         }
     };
     EstadoEjecucion.prototype.update = function () {

@@ -267,6 +267,8 @@ export default Component.extend({
         Ember.Object.create({
           id: id,
           nombre: nombre,
+          camara_x: 0,
+          camara_y: 0,
           actores: []
         })
       );
@@ -324,6 +326,7 @@ export default Component.extend({
       let datos = {
         nombre_de_la_escena_inicial: escena.nombre,
         codigo: resultado.codigo,
+        permitir_modo_pausa: this.get("permitir_modo_pausa"),
         proyecto: string_a_json(json_a_string(this.get("proyecto")))
       };
 

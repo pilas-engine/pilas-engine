@@ -8,6 +8,7 @@ class EstadoEjecucion extends Estado {
   proyecto: any = {};
   codigo: any;
   nombre_de_la_escena_inicial: string = null;
+  permitir_modo_pausa: boolean;
 
   init(datos) {
     this.pilas = datos.pilas;
@@ -16,6 +17,7 @@ class EstadoEjecucion extends Estado {
     this.proyecto = datos.proyecto;
     this.codigo = datos.codigo;
     this.game.paused = false;
+    this.permitir_modo_pausa = datos.permitir_modo_pausa;
 
     let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
     let codigo_completo = this.codigo + codigoDeExportacion;
@@ -126,10 +128,12 @@ class EstadoEjecucion extends Estado {
   }
 
   preRender() {
-    try {
-      this.guardar_foto_de_entidades();
-    } catch (e) {
-      this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+    if (this.permitir_modo_pausa) {
+      try {
+        this.guardar_foto_de_entidades();
+      } catch (e) {
+        this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+      }
     }
   }
 

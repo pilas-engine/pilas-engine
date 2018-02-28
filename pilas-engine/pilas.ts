@@ -42,7 +42,6 @@ class Pilas {
 
     pilas.game.camera.bounds = null;
 
-    console.log("iniciando la escena normal");
     this.escenas.Normal();
   }
 
@@ -108,6 +107,7 @@ class Pilas {
         pilas: this,
         proyecto: e.data.proyecto,
         nombre_de_la_escena_inicial: e.data.nombre_de_la_escena_inicial,
+        permitir_modo_pausa: e.data.permitir_modo_pausa,
         codigo: e.data.codigo
       });
     }

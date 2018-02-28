@@ -115,11 +115,12 @@ export default Ember.Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  ejecutar_proyecto({ proyecto, nombre_de_la_escena_inicial, codigo }) {
+  ejecutar_proyecto({ proyecto, nombre_de_la_escena_inicial, codigo, permitir_modo_pausa }) {
     let data = {
       tipo: "ejecutar_proyecto",
       proyecto: proyecto,
       nombre_de_la_escena_inicial: nombre_de_la_escena_inicial,
+      permitir_modo_pausa: permitir_modo_pausa,
       codigo: codigo
     };
 

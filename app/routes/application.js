@@ -7,11 +7,13 @@ export default Route.extend({
   bus: Ember.inject.service(),
   log: Ember.inject.service(),
   actores: Ember.inject.service(),
+  estadisticas: Ember.inject.service(),
 
   model() {
     this.get("electron").iniciar();
     this.get("bus").iniciar();
     this.get("log").iniciar();
+    this.get("estadisticas").iniciar();
 
     return this.get("actores").iniciar();
   },

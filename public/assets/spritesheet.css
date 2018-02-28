@@ -2,167 +2,174 @@
     width: 70px;
     height: 70px;
     background: url("spritesheet.png") -134px -2px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .pilas_logo_128 {
     width: 128px;
     height: 128px;
     background: url("spritesheet.png") -2px -2px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .ember {
     width: 63px;
     height: 60px;
     background: url("spritesheet.png") -2px -134px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .typescript {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -69px -134px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .pilas_logo_60 {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -133px -134px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .electron {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -208px -2px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .github {
     width: 60px;
     height: 50px;
     background: url("spritesheet.png") -208px -66px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .api {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -120px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .manual {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -120px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .add_folder {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -149px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .ejemplos {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -149px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .computadora {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -134px -76px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .volver {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -226px -198px;
-	background-size: 270px 224px;
+    background: url("spritesheet.png") -2px -226px;
+	background-size: 270px 252px;
 }
 
 .test {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -134px -105px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .info_squared {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -105px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .arduino {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -2px -198px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .pausa {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -30px -198px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .actores {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -58px -198px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .demo {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -86px -198px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 
 .error {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -114px -198px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
+}
+
+.preferencias {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -142px -198px;
+	background-size: 270px 252px;
 }
 
 .detener {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -142px -198px;
-	background-size: 270px 224px;
+    background: url("spritesheet.png") -170px -198px;
+	background-size: 270px 252px;
 }
 
 .info {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -170px -198px;
-	background-size: 270px 224px;
+    background: url("spritesheet.png") -198px -198px;
+	background-size: 270px 252px;
 }
 
 .ejecutar {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -198px -198px;
-	background-size: 270px 224px;
+    background: url("spritesheet.png") -226px -198px;
+	background-size: 270px 252px;
 }
 
 .settings {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -76px;
-	background-size: 270px 224px;
+	background-size: 270px 252px;
 }
 

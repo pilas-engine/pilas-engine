@@ -2,6 +2,7 @@ import Component from "@ember/component";
 
 export default Component.extend({
   tagName: "",
+  truncate: true,
   class: `
     ba pa2 button
     dib br2

@@ -6,6 +6,6 @@ moduleForComponent('pilas-phaser-experimental', 'Integration | Component | pilas
 });
 
 test('it renders', function(assert) {
-  this.render(hbs`{{pilas-phaser-experimental}}`);
+  this.render(hbs`{{pilas-canvas}}`);
   assert.ok(this.$().text());
 });

@@ -217,6 +217,7 @@ declare class Escena extends EscenaBase {
 }
 declare class Normal extends Escena {
     iniciar(): void;
+    actualizar(): void;
 }
 declare class Estado extends Phaser.State {
     pilas: Pilas;
@@ -257,6 +258,7 @@ declare class EstadoEjecucion extends Estado {
     proyecto: any;
     codigo: any;
     nombre_de_la_escena_inicial: string;
+    permitir_modo_pausa: boolean;
     init(datos: any): void;
     obtener_codigo_para_exportar_clases(codigo: any): string;
     create(): void;

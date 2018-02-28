@@ -14,7 +14,8 @@ const queryParams = new QueryParams({
   mostrarModalCreacionDeActor: { defaultValue: false, replace: true },
   mostrarInterprete: { defaultValue: false, replace: true },
   pos: { defaultValue: true, replace: true },
-  fps: { defaultValue: true, replace: true }
+  fps: { defaultValue: true, replace: true },
+  permitir_modo_pausa: { defaultValue: true, replace: true }
 });
 
 export default Ember.Controller.extend(queryParams.Mixin, {
