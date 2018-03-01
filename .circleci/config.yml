@@ -34,7 +34,9 @@ jobs:
     steps:
         - checkout
         - run: make iniciar
-        - run: make deploy_a_surge 
+        - run: 
+            command: make deploy_a_surge 
+            no_output_timeout: 3600
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
 
