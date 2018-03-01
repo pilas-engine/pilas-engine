@@ -40,9 +40,8 @@ test("puede crear escenas personalizadas", function(assert) {
       escenas: [
         {
           nombre: "principal",
-          codigo: `class MiEscena extends Escena {
+          codigo: `class principal extends Escena {
             iniciar() {
-              alert("escena!");
             }
 
           }`
@@ -54,6 +53,8 @@ test("puede crear escenas personalizadas", function(assert) {
       {
         nombre: "principal",
         id: 1,
+        camara_x: 0,
+        camara_y: 0,
         actores: []
       }
     ]
@@ -62,8 +63,8 @@ test("puede crear escenas personalizadas", function(assert) {
   this.set("cuandoInicia", (pilas, contexto) => {
     assert.ok(pilas.escenas, "Existe el acceso a las escenas");
 
-    pilas.escenas.vincular(contexto.__clases.MiEscena)
-    pilas.escenas.MiEscena();
+    pilas.escenas.vincular(contexto.__clases.principal);
+    pilas.escenas.principal();
 
     done();
   });
