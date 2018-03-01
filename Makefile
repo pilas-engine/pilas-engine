@@ -12,8 +12,10 @@ BIN_TYPEDOC=./node_modules/.bin/typedoc
 BIN_TYPESCRIPT=./node_modules/typescript/bin/tsc
 BIN_SPRITESHEET=./node_modules/.bin/spritesheet-js
 BIN_GITBOOK=./node_modules/.bin/gitbook
+BIN_EMBER=./node_modules/.bin/ember
 BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
 BIN_ELECTRON_REBUILD=./node_modules/.bin/electron-rebuild
+BIN_PRETTIER=./node_modules/.bin/prettier 
 FLAGS_ELECTRON_PACKAGER=--asar
 
 N=[0m
@@ -69,39 +71,37 @@ iniciar:
 	$(call task, "Iniciando el proyecto.")
 	$(call log, "Instalando dependencias.")
 	@npm install
-	$(call log, "Instalando dependencias de pilas-engine")
-	@cd pilasengine; pwd; npm install
 	$(call log, "Preparando dependencias binarias para electron")
 	./node_modules/.bin/electron-rebuild
 
 compilar:
 	$(call log, "Iniciando compilación.")
-	@ember build --environment develop
+	${BIN_EMBER} build --environment develop
 
 compilar_live:
 	$(call log, "Iniciando compilación.")
-	@ember build --environment develop --watch
+	${BIN_EMBER} build --environment develop --watch
 
 s: serve
 
 serve:
 	$(call log, "Iniciando ember s")
-	@ember s
+	${BIN_EMBER} s
 
 ejecutar: serve
 
 prettier:
-	./node_modules/.bin/prettier --write 'app/**/*.js'
-	./node_modules/.bin/prettier --write 'tests/**/*.js'
+	${BIN_PRETTIER} --write 'app/**/*.js'
+	${BIN_PRETTIER} ./node_modules/.bin/prettier --write 'tests/**/*.js'
 
 version_patch:
-	ember release
+	${BIN_EMBER} release
 
 version_minor:
-	@ember release --minor
+	${BIN_EMBER} release --minor
 
 version_major:
-	@ember release --major
+	${BIN_EMBER} release --major
 
 electron:
 	@echo "${G}Iniciando electron ... (pero sin compilar desde cero).${N}"
@@ -136,14 +136,14 @@ pilas_sprites:
 
 test:
 	$(call log, "Ejecutando test...")
-	@ember test
+	${BIN_EMBER} test
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
 	$(call log, "Limpiando directorio de binarios ...")
 	@rm -rf binarios
 	$(call log, "Compilando aplicación ember ...")
-	@ember build
+	${BIN_EMBER} build
 	$(call log, "Generando binarios ...")
 ifeq ($(ELIMINAR_MAPS), 1)
 	$(call log, "Eliminando archivos .map porque la variable ELIMINAR_MAPS vale 1")
