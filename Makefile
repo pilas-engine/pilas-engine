@@ -64,6 +64,7 @@ comandos:
 	@echo "    ${G}version_minor${N}          Genera una versión MINOR."
 	@echo "    ${G}version_major${N}          Genera una versión MAJOR."
 	@echo "    ${G}binarios${N}               Genera los binarios de la aplicación."
+	@echo "    ${G}deploy_a_surge${N}         Sube la versión más reciente a surge."
 	@echo ""
 	@echo ""
 
@@ -137,6 +138,9 @@ pilas_sprites:
 test:
 	$(call log, "Ejecutando test...")
 	${BIN_EMBER} test
+
+deploy_a_surge:
+	${BIN_EMBER} surge
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
