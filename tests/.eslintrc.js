@@ -6,7 +6,8 @@ module.exports = {
     esperar: true,
     pulsar: true,
     autoComplete: true,
-    esperarElemento: true
+    esperarElemento: true,
+    ga: true
   },
   env: {
     embertest: true

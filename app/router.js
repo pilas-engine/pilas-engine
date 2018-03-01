@@ -1,9 +1,20 @@
 import EmberRouter from "@ember/routing/router";
 import config from "./config/environment";
+import Ember from "ember";
 
 const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL
+});
+
+Ember.Router.reopen({
+  estadisticas: Ember.inject.service(),
+  rutaAnterior: "",
+
+  didTransition() {
+    this._super(...arguments);
+    this.get("estadisticas").notificar_transicion(this.get("url"));
+  }
 });
 
 Router.map(function() {

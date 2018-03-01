@@ -15,6 +15,7 @@ module.exports = {
     esperar: true,
     pulsar: true,
     autoComplete: true,
+    ga: true,
     esperarElemento: true
   },
   rules: {
