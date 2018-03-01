@@ -141,6 +141,7 @@ test:
 
 deploy_a_surge:
 	${BIN_EMBER} surge
+	echo "Finalizo"
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")

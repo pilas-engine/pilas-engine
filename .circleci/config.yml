@@ -12,8 +12,8 @@ jobs:
           name: Ejecutando test
           command: make test
   deploy:
-    machine:
-        enabled: true
+    docker:
+      - image: circleci/node:6.13.0-stretch-browsers
     steps:
         - checkout
         - run: make iniciar
@@ -29,12 +29,13 @@ jobs:
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
   deploy_a_surge:
-    machine:
-        enabled: true
+    docker:
+      - image: circleci/node:6.13.0-stretch-browsers
     steps:
         - checkout
         - run: make iniciar
         - run: 
+            name: "Subiendo archivos a surge..."
             command: make deploy_a_surge 
             no_output_timeout: 3600
     release:
