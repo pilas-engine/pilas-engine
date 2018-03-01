@@ -17,7 +17,6 @@ jobs:
     steps:
         - checkout
         - run: make iniciar
-        - run: go get github.com/tcnksm/ghr
         - run: echo "Instalando wine ..."
         - run: sudo dpkg --add-architecture i386
         - run: sudo add-apt-repository -y ppa:ubuntu-wine/ppa
@@ -25,6 +24,9 @@ jobs:
         - run: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
         - run: sudo apt-get install -y wine
         - run: make binarios
+        - run: echo "Instalando go y ghr ..."
+        - run: sudo apt-get install golang-go
+        - run: go get github.com/tcnksm/ghr
         - run: ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
