@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:6.13.0-stretch-browsers
+      - image: circleci/node:8.9.4-stretch-browsers
     steps:
       - checkout
       - run:
@@ -13,32 +13,31 @@ jobs:
           command: make test
   deploy:
     docker:
-      - image: circleci/node:6.13.0-stretch-browsers
+      - image: circleci/node:8.9.4-stretch-browsers
     steps:
         - checkout
         - run: make iniciar
         - run: echo "Instalando wine ..."
-        - run: sudo dpkg --add-architecture i386
-        - run: sudo add-apt-repository -y ppa:ubuntu-wine/ppa
-        - run: sudo apt-get update
-        - run: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-        - run: sudo apt-get install -y wine
+        - run: sudo dpkg --add-architecture i386 && sudo apt update
+        - run: sudo apt install wine wine32 wine64 libwine libwine:i386 fonts-wine
         - run: make binarios
         - run: echo "Instalando go y ghr ..."
-        - run: sudo apt-get install golang-go
+        - run: sudo apt-get install golang
+        - run: export GOPATH="/tmp/go"
+        - run: export PATH=$PATH:$GOPATH/bin
         - run: go get github.com/tcnksm/ghr
         - run: ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
   deploy_a_surge:
     docker:
-      - image: circleci/node:6.13.0-stretch-browsers
+      - image: circleci/node:8.9.4-stretch-browsers
     steps:
         - checkout
         - run: make iniciar
-        - run: 
+        - run:
             name: "Subiendo archivos a surge..."
-            command: make deploy_a_surge 
+            command: make deploy_a_surge
             no_output_timeout: 3600
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
