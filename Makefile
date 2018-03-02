@@ -15,7 +15,7 @@ BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_EMBER=./node_modules/.bin/ember
 BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
 BIN_ELECTRON_REBUILD=./node_modules/.bin/electron-rebuild
-BIN_PRETTIER=./node_modules/.bin/prettier 
+BIN_PRETTIER=./node_modules/.bin/prettier
 FLAGS_ELECTRON_PACKAGER=--asar
 
 N=[0m
@@ -140,7 +140,7 @@ test:
 	${BIN_EMBER} test
 
 deploy_a_surge:
-	${BIN_EMBER} surge
+	${BIN_EMBER} surge --environment development
 	echo "Finalizo"
 
 binarios:
