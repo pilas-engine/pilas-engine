@@ -28,8 +28,7 @@ jobs:
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
   deploy_a_surge:
-    docker:
-      - image: circleci/node:8.9.4-stretch-browsers
+    machine: true
     steps:
         - checkout
         - run: make iniciar
