@@ -23,10 +23,8 @@ jobs:
         - run: make binarios
         - run: echo "Instalando go y ghr ..."
         - run: sudo apt-get install golang
-        - run: export GOPATH="/tmp/go"
-        - run: export PATH=$PATH:$GOPATH/bin
-        - run: go get github.com/tcnksm/ghr
-        - run: ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
+        - run: GOPATH="/tmp/go" go get github.com/tcnksm/ghr
+        - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
   deploy_a_surge:
