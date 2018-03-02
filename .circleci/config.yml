@@ -36,9 +36,14 @@ jobs:
         - run:
             name: "Subiendo archivos a surge..."
             command: make deploy_a_surge
-            no_output_timeout: 3600
+        - run: circleci step halt
     release:
       tag: /v[0-9]+(\.[0-9]+)*/
+  finalizar:
+    docker:
+      - image: circleci/node:8.9.4-stretch-browsers
+    steps:
+      - run: echo "Terminado"
 
 workflows:
   version: 2
@@ -54,6 +59,13 @@ workflows:
       - deploy_a_surge:
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
+      - finalizar:
+          requires:
+            - deploy_a_surge
+            - deploy
           filters:
             tags:
               only: /^v.*/
