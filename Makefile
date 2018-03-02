@@ -140,8 +140,7 @@ test:
 	${BIN_EMBER} test
 
 deploy_a_surge:
-	${BIN_EMBER} surge --environment development&
-	find ./ dist
+	${BIN_EMBER} surge --environment development
 	echo "Finalizo"
 
 binarios:
