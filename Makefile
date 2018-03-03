@@ -141,6 +141,7 @@ test:
 	${BIN_EMBER} test
 
 deploy_a_surge:
+	rm -rf dist
 	@echo "Compilando la aplicación en modo producción..."
 	${BIN_EMBER} build --prod
 	@echo "Subiendo contenido al sitio de surge."
@@ -233,9 +234,9 @@ actualizar_typescript:
 	@echo "${Y}${N}"
 	@echo "${Y} - Subir el número de versión de package.json.${N}"
 	@echo "${Y} - Ejecutar npm install.${N}"
-	@echo "${Y} - Copiar dist/typescript.js al directorio vendor:${N}"
+	@echo "${Y} - Copiar typescript.js al directorio public:${N}"
 	@echo "${Y}${N}"
-	@echo "${Y}        cp node_modules/typescript/lib/typescript.js vendor${N}"
+	@echo "${Y}        cp node_modules/typescript/lib/typescript.js public${N}"
 	@echo "${Y}${N}"
 
 actualizar_jsbeautify:
