@@ -17,6 +17,7 @@ jobs:
     steps:
         - checkout
         - run: make iniciar
+        - run: make test
         - run: echo "Instalando wine ..."
         - run: sudo dpkg --add-architecture i386 && sudo apt update
         - run: sudo apt install wine wine32 wine64 libwine libwine:i386 fonts-wine
@@ -30,15 +31,10 @@ jobs:
     steps:
         - checkout
         - run: make iniciar
+        - run: make test
         - run:
             name: "Subiendo archivos a surge..."
             command: make deploy_a_surge
-        - run: circleci step halt
-  finalizar:
-    docker:
-      - image: circleci/node:8.9.4-stretch-browsers
-    steps:
-      - run: echo "Terminado"
 
 workflows:
   version: 2
@@ -57,7 +53,3 @@ workflows:
               only: /^v\d+.\d+.\d+/
             branches:
               ignore: /.*/
-      - finalizar:
-          requires:
-            - deploy_a_surge
-            - deploy
