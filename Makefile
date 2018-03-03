@@ -13,6 +13,7 @@ BIN_TYPESCRIPT=./node_modules/typescript/bin/tsc
 BIN_SPRITESHEET=./node_modules/.bin/spritesheet-js
 BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_EMBER=./node_modules/.bin/ember
+BIN_SURGE=./node_modules/.bin/surge
 BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
 BIN_ELECTRON_REBUILD=./node_modules/.bin/electron-rebuild
 BIN_PRETTIER=./node_modules/.bin/prettier
@@ -141,9 +142,9 @@ test:
 
 deploy_a_surge:
 	@echo "Compilando la aplicación en modo producción..."
-	ember build --prod
+	${BIN_EMBER} build --prod
 	@echo "Subiendo contenido al sitio de surge."
-	./node_modules/.bin/surge dist pilas-engine.surge.sh
+	${BIN_SURGE} dist pilas-engine.surge.sh
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
