@@ -13,6 +13,7 @@ BIN_TYPESCRIPT=./node_modules/typescript/bin/tsc
 BIN_SPRITESHEET=./node_modules/.bin/spritesheet-js
 BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_EMBER=./node_modules/.bin/ember
+BIN_SURGE=./node_modules/.bin/surge
 BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
 BIN_ELECTRON_REBUILD=./node_modules/.bin/electron-rebuild
 BIN_PRETTIER=./node_modules/.bin/prettier
@@ -140,8 +141,11 @@ test:
 	${BIN_EMBER} test
 
 deploy_a_surge:
-	${BIN_EMBER} surge --environment development
-	echo "Finalizo"
+	rm -rf dist
+	@echo "Compilando la aplicación en modo producción..."
+	${BIN_EMBER} build --prod
+	@echo "Subiendo contenido al sitio de surge."
+	${BIN_SURGE} dist pilas-engine.surge.sh
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
@@ -230,9 +234,9 @@ actualizar_typescript:
 	@echo "${Y}${N}"
 	@echo "${Y} - Subir el número de versión de package.json.${N}"
 	@echo "${Y} - Ejecutar npm install.${N}"
-	@echo "${Y} - Copiar dist/typescript.js al directorio vendor:${N}"
+	@echo "${Y} - Copiar typescript.js al directorio public:${N}"
 	@echo "${Y}${N}"
-	@echo "${Y}        cp node_modules/typescript/lib/typescript.js vendor${N}"
+	@echo "${Y}        cp node_modules/typescript/lib/typescript.js public${N}"
 	@echo "${Y}${N}"
 
 actualizar_jsbeautify:

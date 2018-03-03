@@ -7,10 +7,9 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
       exclude: ["vs", "manual", "api", "imagenes"]
-    }
+    },
   });
 
-  app.import("vendor/typescript.js");
   app.import("vendor/beautify.js");
   app.import("vendor/auto-complete.js");
 
