@@ -10,8 +10,8 @@
   {{action "alternar"}}
 >
   {{#if variable}}
-    ✔ {{texto}} {{yield}}
+    {{pilas-icono icono='on'}} {{texto}} {{yield}}
   {{else}}
-    🗸 {{texto}} {{yield}}
+    {{pilas-icono icono='off'}} {{texto}} {{yield}}
   {{/if}}
 </div>
