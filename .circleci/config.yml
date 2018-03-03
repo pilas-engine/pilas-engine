@@ -53,7 +53,7 @@ workflows:
               only: /^v\d+.\d+.\d+/
             branches:
               ignore: /.*/
-      - deploy_a_surge
+      - deploy_a_surge:
           requires:
             - build
           filters:
