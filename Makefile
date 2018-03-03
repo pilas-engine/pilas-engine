@@ -140,8 +140,10 @@ test:
 	${BIN_EMBER} test
 
 deploy_a_surge:
-	${BIN_EMBER} surge --environment development
-	echo "Finalizo"
+	@echo "Compilando la aplicación en modo producción..."
+	ember build --prod
+	@echo "Subiendo contenido al sitio de surge."
+	./node_modules/.bin/surge dist pilas-engine.surge.sh
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
