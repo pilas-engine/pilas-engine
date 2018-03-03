@@ -49,28 +49,9 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
-      - deploy_a_surge:
-          requires:
-            - build
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
+      - deploy
+      - deploy_a_surge
       - finalizar:
           requires:
             - deploy_a_surge
             - deploy
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
