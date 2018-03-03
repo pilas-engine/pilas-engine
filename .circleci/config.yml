@@ -52,7 +52,9 @@ workflows:
       - deploy:
           filters:
             tags:
-              only: /^v.*/
+              only: /^v\d+.\d+.\d+/
+            branches:
+              ignore: /.*/
       - deploy_a_surge
       - finalizar:
           requires:
