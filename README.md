@@ -4,10 +4,12 @@ Prototipo de la nueva versión de pilas-engine
 
 [![CircleCI](https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg)](https://circleci.com/gh/pilas-engine/pilas-engine)
 
+La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
+
 ## Primeros pasos
 
-Para comenzar a utilizar este repositorio deberías tener instalado git, Make
-y ejecutar estos comandos:
+Para comenzar a utilizar este repositorio deberías tener instalado git, Make, nodejs
+(versión 6 o superior) y ejecutar estos comandos:
 
 ```
 git clone https://github.com/pilas-engine/pilas-engine.git
@@ -58,3 +60,11 @@ separadas por guiones bajos (por ejemplo "cantidad_de_actores")
 
 Además, es muy importante que tengas configurado tu editor para usar
 automáticamente prettier (https://prettier.io/).
+
+
+
+## Próximas tareas a desarrollar
+
+Tenemos un board de trello con todas las tareas que estamos desarrollando:
+
+- https://trello.com/b/eQJOjpOF/pilas-engine-2
