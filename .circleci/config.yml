@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  compilar:
     docker:
       - image: circleci/node:8.9.4-stretch-browsers
     steps:
@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Ejecutando test
           command: make test
-  deploy:
+  binarios:
     docker:
       - image: circleci/node:8.9.4-stretch-browsers
     steps:
@@ -29,10 +29,9 @@ jobs:
         - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
         - run: echo "Generando manuales..."
         - run: sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
-        - run: sudo npm install svgexport -g
         - run: make pilas_manuales_descargables
         - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` manuales/
-  deploy_a_surge:
+  actualizar-sitio:
     docker:
       - image: circleci/node:8.9.4-stretch-browsers
     steps:
@@ -44,16 +43,16 @@ jobs:
             command: make deploy_a_surge
 workflows:
   version: 2
-  build-and-deploy:
+  compilar-y-subir:
     jobs:
-      - build
-      - deploy:
+      - compilar
+      - binarios:
           filters:
             tags:
               only: /^v\d+.\d+.\d+/
             branches:
               ignore: /.*/
-      - deploy_a_surge:
+      - actualizar-sitio:
           filters:
             tags:
               only: /^v\d+.\d+.\d+/
