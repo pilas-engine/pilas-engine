@@ -30,10 +30,11 @@ jobs:
         - run: echo "Generando manuales..."
         - run: sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
         - run: npm install svgexport -g
-        - run: make pilas_manuales_descargables 
+        - run: make pilas_manuales_descargables
         - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` manuales/
   deploy_a_surge:
-    - image: circleci/node:8.9.4-stretch-browsers
+    docker:
+      - image: circleci/node:8.9.4-stretch-browsers
     steps:
         - checkout
         - run: make iniciar
