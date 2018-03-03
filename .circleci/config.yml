@@ -46,16 +46,12 @@ workflows:
     jobs:
       - build
       - deploy:
-          requires:
-            - build
           filters:
             tags:
               only: /^v\d+.\d+.\d+/
             branches:
               ignore: /.*/
       - deploy_a_surge:
-          requires:
-            - build
           filters:
             tags:
               only: /^v\d+.\d+.\d+/
