@@ -225,7 +225,9 @@ pilas_manuales_descargables:
 	${BIN_GITBOOK} mobi
 	@rm -rf manuales
 	@mkdir manuales
-	@mv book* manuales/
+	@mv book.epub manuales/
+	@mv book.mobi manuales/
+	@mv book.pdf manuales/
 	@echo ""
 	@echo "${G}OK, los archivos generados están en el directorio manuales"
 	@echo ""
