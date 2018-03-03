@@ -56,6 +56,7 @@ comandos:
 	@echo "    ${G}compilar_pilas_live${N}    Genera pilasengine.js, ejemplos y tests."
 	@echo "    ${G}api${N}                    Genera la documentación de API para pilas."
 	@echo "    ${G}pilas_manual${N}           Genera el manual de pilas."
+	@echo "    ${G}pilas_manuales_descargables${N}  Genera los pdf, epub y mobi del manual."
 	@echo "    ${G}pilas_sprites${N}          Genera los spritesheets."
 	@echo "    ${G}actualizar_phaser${N}      Actualiza phaser a una versión más reciente."
 	@echo ""
@@ -216,6 +217,19 @@ pilas_manual:
 	@echo ""
 	@echo "${G}OK, la documentación quedó en public/manual"
 	@echo ""
+
+pilas_manuales_descargables:
+	$(call log, "Generando archivos de documentación")
+	${BIN_GITBOOK} pdf
+	${BIN_GITBOOK} epub
+	${BIN_GITBOOK} mobi
+	@rm -rf manuales
+	@mkdir manuales
+	@mv book* manuales/
+	@echo ""
+	@echo "${G}OK, los archivos generados están en el directorio manuales"
+	@echo ""
+
 
 actualizar_phaser:
 	@echo "${Y}Para actualizar phaser, hay que seguir estos pasos:${N}"
