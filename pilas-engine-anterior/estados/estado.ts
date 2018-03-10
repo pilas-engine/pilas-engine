@@ -1,4 +1,4 @@
-class Estado extends Phaser.State {
+class Estado extends Phaser.Scene {
   pilas: Pilas;
   bitmap: Phaser.BitmapData;
   canvas: any;

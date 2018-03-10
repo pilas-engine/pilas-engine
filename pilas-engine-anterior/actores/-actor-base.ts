@@ -6,7 +6,7 @@ class ActorBase {
 
   constructor(pilas, x: number = 0, y: number = 0, imagen = "sin_imagen") {
     this.pilas = pilas;
-    this.sprite = new Phaser.Sprite(pilas.game, 0, 0, imagen);
+    this.sprite = new Phaser.GameObjects.Sprite(pilas.game, 0, 0, imagen);
     this.x = x;
     this.y = y;
     this.rotacion = 0;

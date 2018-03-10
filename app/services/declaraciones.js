@@ -11,8 +11,8 @@ export default Service.extend({
     if (!data) {
       return Ember.RSVP.hash({
         pilas: this._obtener_archivo("pilas-engine.d.ts"),
-        typescript: this._obtener_archivo("phaser.d.ts"),
-        p2: this._obtener_archivo("p2.d.ts")
+        //typescript: this._obtener_archivo("phaser.d.ts"),
+        //p2: this._obtener_archivo("p2.d.ts")
       }).then(result => {
         if (!(this.get("isDestroyed") || this.get("isDestroying"))) {
           this.set("data", [result.typescript, result.p2, result.pilas].join("\n"));

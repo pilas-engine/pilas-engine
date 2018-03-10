@@ -2,8 +2,6 @@ import Component from "@ember/component";
 import Ember from "ember";
 import estados from "../estados/estados-de-pilas-editor";
 import aplicarNombre from "../utils/aplicar-nombre";
-import json_a_string from "../utils/json-a-string";
-import string_a_json from "../utils/string-a-json";
 import obtenerNombreSinRepetir from "../utils/obtener-nombre-sin-repetir";
 import obtenerPlantillaDeEscena from "../utils/obtener-plantilla-de-escena";
 
@@ -327,7 +325,7 @@ export default Component.extend({
         nombre_de_la_escena_inicial: escena.nombre,
         codigo: resultado.codigo,
         permitir_modo_pausa: this.get("permitir_modo_pausa"),
-        proyecto: string_a_json(json_a_string(this.get("proyecto")))
+        proyecto: resultado.proyecto_serializado
       };
 
       this.get("bus").trigger("ejecutar_proyecto", datos);

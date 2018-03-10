@@ -23,7 +23,7 @@ Router.map(function() {
   this.route("manual");
   this.route("api");
   this.route("experimentos");
-  this.route("demo");
+  this.route("pruebas");
   this.route("arduino");
   this.route("editor");
   this.route("ejemplos");

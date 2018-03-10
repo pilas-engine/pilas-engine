@@ -1,107 +1,28 @@
-declare class Actores {
-    pilas: Pilas;
-    constructor(pilas: any);
-    Caja(x: any, y: any): Caja;
-    Aceituna(x?: number, y?: number): Aceituna;
-}
-declare class Camara {
-    pilas: Pilas;
-    constructor(pilas: Pilas);
-    vibrar(intensidad?: number, tiempo?: number): void;
-    x: number;
-    y: number;
-}
-declare class Control {
-    pilas: Pilas;
-    teclaIzquierda: any;
-    teclaDerecha: any;
-    teclaArriba: any;
-    teclaAbajo: any;
-    constructor(pilas: Pilas);
-    izquierda: any;
-    derecha: any;
-    arriba: any;
-    abajo: any;
-}
 declare class Depurador {
     pilas: Pilas;
     modo_posicion_activado: boolean;
     mostrar_fps: boolean;
     constructor(pilas: Pilas);
+    definir_estados_de_depuracion(datos: any): void;
 }
-declare class Escenas {
-    pilas: Pilas;
-    escena_actual: Escena;
-    constructor(pilas: any);
-    Normal(): Normal;
-    vincular(escena: any): void;
-    definir_escena_actual(escena: any): void;
-}
-declare class Historia {
-    pilas: Pilas;
-    fotos: any[];
-    constructor(pilas: Pilas);
-    limpiar(): void;
-    serializar_escena_actual(): void;
-    dibujar_puntos_de_las_posiciones_recorridas(bitmap: any): void;
-    obtener_cantidad_de_posiciones(): number;
-    obtener_foto(posicion: number): any;
-}
-declare class Log {
+declare const DEPURAR_MENSAJES: boolean;
+declare class Mensajes {
     pilas: Pilas;
     constructor(pilas: Pilas);
-    debug(...mensaje: any[]): void;
-    info(...mensaje: any[]): void;
-}
-declare var HOST: string;
-declare class Pilas {
-    game: Phaser.Game;
-    log: Log;
-    control: Control;
-    actores: Actores;
-    depurador: Depurador;
-    escenas: Escenas;
-    utilidades: Utilidades;
-    historia: Historia;
-    _ancho: number;
-    _alto: number;
-    constructor();
-    iniciar(): void;
-    obtener_entidades(): any;
-    escena_actual(): Escena;
-    readonly camara: Camara;
-    conectar_atajos_de_teclado(): void;
     private agregar_manejador_de_eventos();
-    emitir_error_y_detener(error: any): void;
-    capturar_errores_y_reportarlos_al_editor(): void;
-    private antender_mensaje_desde_el_editor(e);
-    iniciar_pilas_desde_el_editor(ancho: any, alto: any): void;
-    _preload(): void;
-    _create(): void;
-    start(): void;
-    reproducir_sonido(nombre: string): void;
-    _cuando_comienza_a_cargar(): void;
-    _cuando_carga_archivo(progreso: any): void;
-    _cuando_termina_de_cargar(): void;
-    emitir_mensaje_al_editor(nombre: any, datos: any): void;
-    emitir_excepcion_al_editor(error: any, origen: any): void;
-    obtener_actores(): any[];
-    obtener_cantidad_de_actores(): number;
-    obtener_actores_en(_x: number, _y: number): any[];
-    convertir_coordenada_de_pilas_a_phaser(x: any, y: any): {
-        x: any;
-        y: number;
-    };
-    convertir_coordenada_de_phaser_a_pilas(x: any, y: any): {
-        x: number;
-        y: number;
-    };
-    obtener_oscilacion(velocidad?: number, intensidad?: number): number;
+    atender_mensaje(e: any): void;
+    atender_mensaje_iniciar_pilas(datos: any): void;
+    atender_mensaje_definir_estados_de_depuracion(datos: any): void;
+    emitir_mensaje_al_editor(nombre: any, datos?: any): void;
+    atender_mensaje_define_escena(datos: any): void;
+    atender_mensaje_ejecutar_proyecto(datos: any): void;
+    atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
+    atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
 }
-declare var pilas: Pilas;
 declare class Utilidades {
     pilas: Pilas;
     id: number;
+    navegador: string;
     constructor(pilas: any);
     obtener_id_autoincremental(): number;
     acceso_incorrecto(v: any): void;
@@ -111,179 +32,77 @@ declare class Utilidades {
     validar_numero(valor: number): void;
     convertir_angulo_a_radianes(grados: number): number;
     convertir_radianes_a_angulos(radianes: number): number;
+    es_firefox(): boolean;
 }
-declare class ActorBase {
-    tipo: String;
-    sprite: Phaser.Sprite;
-    pilas: Pilas;
-    id_color: string;
-    constructor(pilas: any, x?: number, y?: number, imagen?: string);
-    iniciar(): void;
-    serializar(): {
-        tipo: String;
-        x: number;
-        y: number;
-        centro_x: number;
-        centro_y: number;
-        rotacion: number;
-        escala_x: number;
-        escala_y: number;
-        imagen: string | Phaser.RenderTexture | Phaser.BitmapData | Phaser.Video | PIXI.Texture;
-        transparencia: number;
-        id_color: string;
+declare var HOST: string;
+declare class Pilas {
+    mensajes: Mensajes;
+    game: Phaser.Game;
+    depurador: Depurador;
+    utilidades: Utilidades;
+    constructor();
+    iniciar_phaser(ancho: number, alto: number): void;
+    definir_modo(nombre: any, datos: any): void;
+    crear_configuracion(ancho: any, alto: any): {
+        type: number;
+        parent: string;
+        width: any;
+        height: any;
+        backgroundColor: string;
+        physics: {
+            default: string;
+            matter: {
+                gravity: {
+                    y: number;
+                };
+                debug: boolean;
+            };
+        };
     };
-    generar_color_para_depurar(): string;
-    actualizar(): void;
-    imagen: string;
-    x: number;
-    y: number;
-    rotacion: number;
-    escala_x: number;
-    escala_y: number;
-    escala: number;
-    centro_y: number;
-    centro_x: number;
-    transparencia: number;
-    toString(): string;
-    crear_figura_rectangular(ancho?: number, alto?: number, estatico?: boolean): void;
-    crear_figura_circular(radio?: number, estatico?: boolean): void;
+}
+declare var pilas: Pilas;
+declare class ActorDelEditor {
+    actor: Phaser.GameObjects.Sprite;
+    constructor(funcion: any, datos: any);
+}
+declare class Escena extends Phaser.Scene {
+}
+declare class EscenaCargador extends Escena {
+    pilas: Pilas;
+    preload(): void;
+    create(): void;
+    cuando_progresa_la_carga(progreso: any): void;
+}
+declare class EscenaEditor extends Escena {
+    pilas: Pilas;
+    fondo: Phaser.GameObjects.TileSprite;
     ancho: number;
     alto: number;
-    estatico: boolean;
-    dinamico: boolean;
-    fijo: boolean;
-    cada_segundo(): void;
-    avanzar(rotacion?: number, velocidad?: number): void;
-}
-declare class Actor extends ActorBase {
-    iniciar(): void;
-    actualizar(): void;
-}
-declare class Aceituna extends Actor {
-    iniciar(): void;
-}
-declare class Caja extends Actor {
-    iniciar(): void;
-}
-declare class Logo extends Actor {
-    iniciar(): void;
-}
-declare class Nave extends Actor {
-    velocidad: number;
-    iniciar(): void;
-    actualizar(): void;
-}
-declare class Pelota extends Actor {
-    iniciar(): void;
-}
-declare class ActorDentroDelEditor extends Phaser.Sprite {
-    shadow: Phaser.Sprite;
-    id: number;
-    pilas: Pilas;
-    iniciar(pilas: any, entidad: any): void;
-    conectar_eventos_arrastrar_y_soltar(): void;
-    al_terminar_de_arrastrar(a: any): void;
-    al_comenzar_a_arrastrar(a: any): void;
-    cuando_comienza_a_mover(): void;
-    cuando_posiciona_el_mouse_sobre_el_actor(): void;
-    cuando_deja_de_posicionar_el_mouse_sobre_el_actor(): void;
-    cuando_termina_de_mover(): void;
-    definir_puntero(nombre: any): void;
-    activar_sombra(): void;
-    ocultar_sombra(): void;
-    update(): void;
-    crear_sombra(): void;
-    actualizar_desde_el_editor(datos: any): void;
-    rotacion: number;
-    destacar(): void;
-}
-declare class EscenaBase {
-    pilas: Pilas;
-    actores: Actor[];
-    id: number;
-    camara: Camara;
-    constructor(pilas: any);
-    agregar_actor(actor: Actor): void;
-    serializar(): {
-        camara_x: number;
-        camara_y: number;
-    };
-}
-declare class Escena extends EscenaBase {
-    cuadro: number;
-    iniciar(): void;
-    actualizar(): void;
-    obtener_oscilacion(velocidad: any, intensidad: any): number;
-}
-declare class Normal extends Escena {
-    iniciar(): void;
-    actualizar(): void;
-}
-declare class Estado extends Phaser.State {
-    pilas: Pilas;
-    bitmap: Phaser.BitmapData;
-    canvas: any;
-    texto: Phaser.Text;
-    sprites: any;
-    render(): void;
-    dibujar_puntos_de_control_de_todos_los_actores(bitmap: any): void;
-    dibujar_limites_del_mundo(bitmap: any): void;
-    dibujar_punto_de_control(bitmap: any, x: any, y: any, x_de_pilas: any, y_de_pilas: any): void;
-    create(): void;
-    obtener_sprites(): any;
-    actualizarPosicionDeFormaExterna(pos: any): void;
-    dibujar_todos_los_puntos_de_las_posiciones_recorridas(): Phaser.Image;
-}
-declare class EstadoEditor extends Estado {
-    entidades: any;
-    sprites: any;
-    texto: any;
-    historia: any;
-    fondo: any;
-    datos_iniciales_de_escena: {
-        camara_x: 0;
-        camara_y: 0;
-    };
-    init(datos: any): void;
-    cuando_termina_de_mover(a: any): void;
-    cuando_comienza_a_mover(a: any): void;
-    create(): void;
-    update(): void;
-}
-declare class EstadoEjecucion extends Estado {
-    entidades: any;
-    sprites: any;
     actores: any;
-    clases: {};
-    proyecto: any;
-    codigo: any;
-    nombre_de_la_escena_inicial: string;
-    permitir_modo_pausa: boolean;
-    init(datos: any): void;
-    obtener_codigo_para_exportar_clases(codigo: any): string;
-    create(): void;
-    instanciar_escena(nombre: any): void;
-    crear_escena(datos_de_la_escena: any): void;
-    crear_actor(entidad: any): any;
-    preRender(): void;
+    graphics: any;
+    fps: any;
+    preload(): void;
+    create(datos: any): void;
+    posicionar_la_camara(datos_de_la_escena: any): void;
+    crear_fondo(): void;
+    crear_manejadores_para_hacer_arrastrables_los_actores(): void;
+    crear_actores_desde_los_datos_de_la_escena(escena: any): void;
+    crear_sprite_desde_actor(actor: any): void;
+    aplicar_atributos_de_actor_a_sprite(actor: any, sprite: any): void;
+    crear_canvas_de_depuracion(): void;
     update(): void;
-    private guardar_foto_de_entidades();
+    dibujar_punto_de_control(graphics: any, x: any, y: any): void;
 }
-declare class EstadoPausa extends Estado {
-    posicion: number;
-    sprites: any;
-    texto: any;
-    total: number;
-    izquierda: any;
-    derecha: any;
-    canvas_lineas_de_recorrido: any;
-    init(datos: any): void;
-    cuando_cambia_posicion: any;
-    create(): void;
-    private crear_texto();
-    private crear_sprites_desde_historia(posicion);
+declare class EscenaEjecucion extends Escena {
+    pilas: Pilas;
+    fondo: Phaser.GameObjects.TileSprite;
+    ancho: number;
+    alto: number;
+    actores: any;
+    graphics: any;
+    fps: any;
+    preload(): void;
+    create(datos: any): void;
+    crear_fondo(): void;
     update(): void;
-    actualizarPosicionDeFormaExterna(posicion: any): void;
-    private actualizar_texto();
-    crear_sprite_desde_entidad(entidad: any): Phaser.Sprite;
 }

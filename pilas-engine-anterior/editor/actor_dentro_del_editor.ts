@@ -1,5 +1,5 @@
-class ActorDentroDelEditor extends Phaser.Sprite {
-  shadow: Phaser.Sprite;
+class ActorDentroDelEditor extends Phaser.GameObjects.Sprite {
+  shadow: Phaser.GameObjects.Sprite;
   id: number;
   pilas: Pilas;
 

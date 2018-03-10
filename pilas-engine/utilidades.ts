@@ -1,10 +1,12 @@
 class Utilidades {
   pilas: Pilas;
   id: number;
+  navegador: string;
 
   constructor(pilas) {
     this.pilas = pilas;
     this.id = 1;
+    this.navegador = navigator.appCodeName;
   }
 
   obtener_id_autoincremental() {
@@ -43,5 +45,9 @@ class Utilidades {
 
   convertir_radianes_a_angulos(radianes: number) {
     return radianes * 180 / Math.PI;
+  }
+
+  es_firefox() {
+    return this.navegador === "Mozilla";
   }
 }

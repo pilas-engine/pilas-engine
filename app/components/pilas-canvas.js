@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   mantenerFoco: false,
   classNames: ["flex1", "overflow-hidden", "unseletable"],
   porcentajeDeCarga: 0,
+  cuando_termina_de_cargar: null,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
@@ -175,6 +176,10 @@ export default Ember.Component.extend({
 
   finalizaCarga() {
     this.set("cargando", false);
+
+    if (this.get("cuando_termina_de_cargar")) {
+      this.get("cuando_termina_de_cargar")();
+    }
   },
 
   pausarEscena({ escena }) {
@@ -196,6 +201,11 @@ export default Ember.Component.extend({
   progresoDeCarga({ progreso }) {
     this.set("porcentajeDeCarga", progreso);
   },
+
+  estilo_barra_de_progreso: Ember.computed("porcentajeDeCarga", function() {
+    let porcentajeDeCarga = this.get("porcentajeDeCarga");
+    return Ember.String.htmlSafe(`width: ${porcentajeDeCarga}%`);
+  }),
 
   cambiarPosicionDesdeElEditor({ posicion }) {
     let data = {
