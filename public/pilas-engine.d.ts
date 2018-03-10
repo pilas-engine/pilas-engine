@@ -65,15 +65,15 @@ declare class ActorDelEditor {
     actor: Phaser.GameObjects.Sprite;
     constructor(funcion: any, datos: any);
 }
-declare class Escena extends Phaser.Scene {
+declare class Modo extends Phaser.Scene {
 }
-declare class EscenaCargador extends Escena {
+declare class ModoCargador extends Modo {
     pilas: Pilas;
     preload(): void;
     create(): void;
     cuando_progresa_la_carga(progreso: any): void;
 }
-declare class EscenaEditor extends Escena {
+declare class ModoEditor extends Modo {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;
     ancho: number;
@@ -93,7 +93,7 @@ declare class EscenaEditor extends Escena {
     update(): void;
     dibujar_punto_de_control(graphics: any, x: any, y: any): void;
 }
-declare class EscenaEjecucion extends Escena {
+declare class ModoEjecucion extends Modo {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;
     ancho: number;
@@ -101,8 +101,16 @@ declare class EscenaEjecucion extends Escena {
     actores: any;
     graphics: any;
     fps: any;
+    clases: {};
+    proyecto: any;
+    codigo: any;
+    nombre_de_la_escena_inicial: string;
+    permitir_modo_pausa: boolean;
     preload(): void;
     create(datos: any): void;
+    obtener_referencias_a_clases(): any;
+    obtener_codigo_para_exportar_clases(codigo: any): string;
+    guardar_parametros_en_atributos(datos: any): void;
     crear_fondo(): void;
     update(): void;
 }

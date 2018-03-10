@@ -1,6 +1,6 @@
-/// <reference path="escena.ts"/>
+/// <reference path="modo.ts"/>
 
-class EscenaEditor extends Escena {
+class ModoEditor extends Modo {
   pilas: Pilas;
   fondo: Phaser.GameObjects.TileSprite;
 
@@ -24,7 +24,7 @@ class EscenaEditor extends Escena {
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
-    this.fps = this.add.bitmapText(5, 5, "font", "FPS");
+    this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
   }
 
   posicionar_la_camara(datos_de_la_escena) {
@@ -103,7 +103,7 @@ class EscenaEditor extends Escena {
   update() {
     if (this.pilas.depurador.mostrar_fps) {
       this.fps.alpha = 1;
-      this.fps.text = Math.round(this.time.now / 1000) + "";
+      this.fps.text = "FPS: " + Math.round(this.pilas.game.loop.actualFps);
     } else {
       this.fps.alpha = 0;
     }

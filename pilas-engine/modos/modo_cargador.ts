@@ -1,6 +1,6 @@
-/// <reference path="escena.ts"/>
+/// <reference path="modo.ts"/>
 
-class EscenaCargador extends Escena {
+class ModoCargador extends Modo {
   pilas: Pilas;
 
   preload() {

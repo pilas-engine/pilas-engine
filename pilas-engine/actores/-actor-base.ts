@@ -1,6 +1,6 @@
 class ActorBase {
   tipo: String;
-  sprite: Phaser.Sprite;
+  //sprite: Phaser.Sprite;
   pilas: Pilas;
   id_color: string;
 

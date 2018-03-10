@@ -47,7 +47,7 @@ class Mensajes {
   }
 
   atender_mensaje_define_escena(datos) {
-    this.pilas.definir_modo("EscenaEditor", { pilas: this.pilas, escena: datos.escena });
+    this.pilas.definir_modo("ModoEditor", { pilas: this.pilas, escena: datos.escena });
   }
 
   atender_mensaje_ejecutar_proyecto(datos) {
@@ -59,7 +59,7 @@ class Mensajes {
       proyecto: datos.proyecto
     };
 
-    this.pilas.definir_modo("EscenaEjecucion", parametros);
+    this.pilas.definir_modo("ModoEjecucion", parametros);
   }
 
   atender_mensaje_actualizar_escena_desde_el_editor(datos) {
