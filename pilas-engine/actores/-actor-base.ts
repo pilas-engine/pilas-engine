@@ -190,16 +190,15 @@ class ActorBase {
     this.pilas.utilidades.validar_numero(ancho);
     this.pilas.utilidades.validar_numero(alto);
 
-    this.sprite.game.physics.p2.enable([this.sprite], false);
-    this.sprite.body.static = estatico;
+    console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
 
     if (ancho && alto) {
-      this.sprite.body.setRectangle(ancho, alto);
+      this.sprite.setRectangle(ancho, alto);
     } else {
-      this.sprite.body.setRectangle(this.ancho, this.alto);
+      this.sprite.setRectangle(this.ancho, this.alto);
     }
 
-    this.sprite.body.angle = -this.rotacion;
+    this.sprite.angle = -this.rotacion;
   }
 
   crear_figura_circular(radio: number = 0, estatico: boolean = false) {
@@ -213,7 +212,7 @@ class ActorBase {
       this.sprite.setCircle();
     }
 
-    this.sprite.body.angle = -this.rotacion;
+    this.sprite.angle = -this.rotacion;
   }
 
   get ancho() {

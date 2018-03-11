@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
           codigo: `class Pelota  extends ActorBase {
 
             iniciar() {
-              this.crear_figura_circular();
+              this.crear_figura_rectangular();
             }
 
             actualizar() {
@@ -51,7 +51,7 @@ export default Ember.Controller.extend({
             y: 100,
             centro_x: 0.5,
             centro_y: 0.5,
-            rotacion: 0,
+            rotacion: 45,
             escala_x: 1,
             escala_y: 1,
             tipo: "Pelota",

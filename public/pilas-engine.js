@@ -448,15 +448,14 @@ var ActorBase = (function () {
         if (estatico === void 0) { estatico = false; }
         this.pilas.utilidades.validar_numero(ancho);
         this.pilas.utilidades.validar_numero(alto);
-        this.sprite.game.physics.p2.enable([this.sprite], false);
-        this.sprite.body.static = estatico;
+        console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
         if (ancho && alto) {
-            this.sprite.body.setRectangle(ancho, alto);
+            this.sprite.setRectangle(ancho, alto);
         }
         else {
-            this.sprite.body.setRectangle(this.ancho, this.alto);
+            this.sprite.setRectangle(this.ancho, this.alto);
         }
-        this.sprite.body.angle = -this.rotacion;
+        this.sprite.angle = -this.rotacion;
     };
     ActorBase.prototype.crear_figura_circular = function (radio, estatico) {
         if (radio === void 0) { radio = 0; }
@@ -469,7 +468,7 @@ var ActorBase = (function () {
         else {
             this.sprite.setCircle();
         }
-        this.sprite.body.angle = -this.rotacion;
+        this.sprite.angle = -this.rotacion;
     };
     Object.defineProperty(ActorBase.prototype, "ancho", {
         get: function () {
