@@ -93,13 +93,6 @@ class ModoEditor extends Modo {
     this.graphics = graphics;
   }
 
-  /*
-  crear_sistema_de_fisica() {
-    this.matter.add.mouseSpring();
-    this.matter.world.setBounds(0, 0, this.ancho, this.alto);
-  }
-  */
-
   update() {
     if (this.pilas.depurador.mostrar_fps) {
       this.fps.alpha = 1;
@@ -108,15 +101,13 @@ class ModoEditor extends Modo {
       this.fps.alpha = 0;
     }
 
-    this.graphics.clear();
-
     if (this.pilas.depurador.modo_posicion_activado) {
+      this.graphics.clear();
+
       this.actores.map(sprite => {
         this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
       });
     }
-
-    //this.fondo.x += 1;
   }
 
   dibujar_punto_de_control(graphics, x, y) {
@@ -125,46 +116,4 @@ class ModoEditor extends Modo {
     graphics.fillStyle(0x000000, 1);
     graphics.fillRect(x - 2, y - 2, 4, 4);
   }
-
-  /*
-  configuracion.scene.preload = function() {
-  };
-
-  configuracion.scene.create = function() {
-    self.phaser = this;
-
-    a.setCircle(26);
-    a.setBounce(1);
-
-    this.matter.world.setBounds(0, 0, 500, 500);
-
-    this.matter.add.mouseSpring();
-
-    this.matter.world.on("collisionstart", function(event, bodyA, bodyB) {
-      if (bodyA.gameObject) {
-        bodyA.gameObject.setTint(0xff0000);
-      }
-      if (bodyB.gameObject) {
-        bodyB.gameObject.setTint(0x00ff00);
-      }
-    });
-
-    let graphics = this.add.graphics({ x: 100, y: 100 });
-
-    graphics.lineStyle(5, 0xff00ff, 1.0);
-    graphics.fillStyle(0xff0000, 1.0);
-    graphics.beginPath();
-    graphics.lineTo(100, 100);
-    graphics.lineTo(200, 30);
-
-    graphics.closePath();
-    graphics.strokePath();
-    graphics.fillPath();
-    self.graphics = graphics;
-
-    self.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos", {});
-  };
-
-  configuracion.scene.update = function() {};
-  */
 }

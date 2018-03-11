@@ -50,4 +50,12 @@ class Utilidades {
   es_firefox() {
     return this.navegador === "Mozilla";
   }
+
+  convertir_coordenada_de_pilas_a_phaser(x, y) {
+    return { x: x + this.pilas._ancho / 2, y: this.pilas._alto / 2 - y };
+  }
+
+  convertir_coordenada_de_phaser_a_pilas(x, y) {
+    return { x: x - this.pilas._ancho / 2, y: this.pilas._ancho / 2 - y };
+  }
 }

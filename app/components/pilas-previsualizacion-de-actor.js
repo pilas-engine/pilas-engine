@@ -36,8 +36,8 @@ export default Component.extend({
   mantener_foco: true,
 
   didInsertElement() {
-    this.get("bus").on("finalizaCarga", this, "finalizaCarga");
-    this.get("bus").on("cuandoTerminaDeIniciarEjecucion", this, "cuandoTerminaDeIniciarEjecucion");
+    this.get("bus").on("finaliza_carga", this, "finaliza_carga");
+    this.get("bus").on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
 
     if (this.get("mantener_foco")) {
       this.get("tarea_para_mantener_foco").perform();
@@ -52,7 +52,7 @@ export default Component.extend({
   }),
 
   hacer_foco_en_pilas() {
-    this.get("bus").trigger("hacerFocoEnPilas", {});
+    this.get("bus").trigger("hacer_foco_en_pilas", {});
   },
 
   didReceiveAttrs() {
@@ -62,11 +62,11 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this.get("bus").off("finalizaCarga", this, "finalizaCarga");
-    this.get("bus").off("cuandoTerminaDeIniciarEjecucion", this, "cuandoTerminaDeIniciarEjecucion");
+    this.get("bus").off("finaliza_carga", this, "finaliza_carga");
+    this.get("bus").off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
-  finalizaCarga() {
+  finaliza_carga() {
     this.compilar_proyecto_y_ejecutar();
   },
 
@@ -111,7 +111,7 @@ export default Component.extend({
     ];
   },
 
-  cuandoTerminaDeIniciarEjecucion(pilas) {
+  cuando_termina_de_iniciar_ejecucion(pilas) {
     this.set("pilas", pilas);
     this.hacer_foco_en_pilas();
   }

@@ -11,11 +11,20 @@ class Pilas {
   game: Phaser.Game;
   depurador: Depurador;
   utilidades: Utilidades;
+  escenas: Escenas;
+  modo: Phaser.Scene;
+  _ancho: number;
+  _alto: number;
 
   constructor() {
     this.mensajes = new Mensajes(this);
     this.depurador = new Depurador(this);
     this.utilidades = new Utilidades(this);
+    this.escenas = new Escenas(this);
+  }
+
+  get escena() {
+    return this.escenas.escena_actual;
   }
 
   iniciar_phaser(ancho: number, alto: number) {
@@ -23,13 +32,15 @@ class Pilas {
     var configuracion = this.crear_configuracion(ancho, alto);
 
     var game = new Phaser.Game(configuracion);
+    this._ancho = ancho;
+    this._alto = alto;
+    this.game = game;
 
     game.scene.add("ModoEditor", ModoEditor, false);
     game.scene.add("ModoCargador", ModoCargador, false);
     game.scene.add("ModoEjecucion", ModoEjecucion, false);
-    game.scene.start("ModoCargador", { pilas: this });
 
-    this.game = game;
+    this.definir_modo("ModoCargador", { pilas: this });
   }
 
   definir_modo(nombre, datos) {
@@ -37,6 +48,7 @@ class Pilas {
     this.game.scene.stop("EscenaEjecutar");
     this.game.scene.stop("ModoEditor");
     this.game.scene.start(nombre, datos);
+    this.modo = this.game.scene.getScene(nombre);
   }
 
   crear_configuracion(ancho, alto) {

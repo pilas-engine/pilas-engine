@@ -20,17 +20,17 @@ export default Component.extend({
       }
     });
 
-    this.get("bus").on("finalizaCarga", this, "finalizaCarga");
+    this.get("bus").on("finaliza_carga", this, "finaliza_carga");
     this.get("log").limpiar();
   },
 
-  finalizaCarga(pilas, contexto) {
+  finaliza_carga(pilas, contexto) {
     this.set("pilas", pilas);
     this.set("contexto", contexto);
   },
 
   willDestroyElement() {
-    this.get("bus").off("finalizaCarga", this, "finalizaCarga");
+    this.get("bus").off("finaliza_carga", this, "finaliza_carga");
   },
 
   autocompletar(termino, success) {

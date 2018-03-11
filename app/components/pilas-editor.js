@@ -23,7 +23,7 @@ export default Component.extend({
   historiaMaximo: 10,
   cantidadDeEscenas: Ember.computed.alias("proyecto.escenas.length"),
 
-  lista_de_eventos: ["finalizaCarga", "error", "moverActor", "comienzaAMoverActor", "iniciaModoDepuracionEnPausa", "cuandoCambiaPosicionDentroDelModoPausa"],
+  lista_de_eventos: ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa"],
 
   didInsertElement() {
     this.set("estado", new estados.ModoCargando());
@@ -39,7 +39,7 @@ export default Component.extend({
 
     document.addEventListener("keydown", this.alPulsarTecla.bind(this));
 
-    this.get("bus").trigger("hacerFocoEnPilas", {});
+    this.get("bus").trigger("hacer_foco_en_pilas", {});
   },
 
   existe_actor_o_escena_con_id(id) {
@@ -68,13 +68,13 @@ export default Component.extend({
     });
   },
 
-  finalizaCarga() {
+  finaliza_carga() {
     this.set("cargando", false);
     this.mostrarEscenaActualSobrePilas();
     this.set("estado", this.get("estado").cuandoTerminoDeCargarPilas());
   },
 
-  moverActor(datos) {
+  termina_de_mover_un_actor(datos) {
     let escena = this.obtenerEscenaActual();
     let actor = escena.actores.findBy("id", datos.id);
 
@@ -91,18 +91,18 @@ export default Component.extend({
     );
   },
 
-  comienzaAMoverActor(datos) {
+  comienza_a_mover_un_actor(datos) {
     this.send("cuandoSelecciona", datos.id);
   },
 
-  iniciaModoDepuracionEnPausa(datos) {
+  inicia_modo_depuracion_en_pausa(datos) {
     this.set("posicion", datos.posicion);
     this.set("historiaPosicion", datos.posicion);
     this.set("historiaMinimo", datos.minimo);
     this.set("historiaMaximo", datos.maximo);
   },
 
-  cuandoCambiaPosicionDentroDelModoPausa(datos) {
+  cuando_cambia_posicion_dentro_del_modo_pausa(datos) {
     this.set("historiaPosicion", datos.posicion);
     this.set("posicion", datos.posicion);
   },
@@ -116,7 +116,7 @@ export default Component.extend({
     }
 
     let escenaComoJSON = JSON.parse(JSON.stringify(escena));
-    this.get("bus").trigger("cargarEscena", { escena: escenaComoJSON });
+    this.get("bus").trigger("cargar_escena", { escena: escenaComoJSON });
   },
 
   obtenerEscenaActual() {
@@ -329,7 +329,7 @@ export default Component.extend({
       };
 
       this.get("bus").trigger("ejecutar_proyecto", datos);
-      this.get("bus").trigger("hacerFocoEnPilas", {});
+      this.get("bus").trigger("hacer_foco_en_pilas", {});
 
       this.get("log").limpiar();
       this.get("log").info("Ingresando en modo ejecución");
@@ -347,14 +347,14 @@ export default Component.extend({
       this.get("bus").trigger("quitar_pausa_de_phaser", {});
       this.set("existe_un_error_reciente", false);
       this.set("estado", this.get("estado").pausar());
-      this.get("bus").trigger("pausarEscena", {});
-      this.get("bus").trigger("hacerFocoEnPilas", {});
+      this.get("bus").trigger("pausar_escena", {});
+      this.get("bus").trigger("hacer_foco_en_pilas", {});
       this.get("log").limpiar();
       this.get("log").info("Ingresando en modo pausa");
     },
     cambiarPosicion(valorNuevo) {
       this.set("posicion", valorNuevo);
-      this.get("bus").trigger("cambiarPosicionDesdeElEditor", {
+      this.get("bus").trigger("cambiar_posicion_desde_el_editor", {
         posicion: valorNuevo
       });
     },

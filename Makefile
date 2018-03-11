@@ -89,7 +89,7 @@ s: serve
 
 serve:
 	$(call log, "Iniciando ember s")
-	${BIN_EMBER} s
+	yarn start
 
 ejecutar: serve
 
@@ -120,11 +120,11 @@ api:
 
 compilar_pilas:
 	$(call log, "Compilando pilas-engine")
-	cd pilas-engine; ../${BIN_TYPESCRIPT} --pretty -d
+	yarn compilar_pilas
 
 compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
-	cd pilas-engine; ../${BIN_TYPESCRIPT} --watch --pretty -d
+	yarn compilar_pilas_live
 
 pilas_sprites:
 	$(call log, "Actualizando imagenes para usar en pilas ...")

@@ -13,7 +13,9 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "compilar_pilas": "tsc -p pilas-engine --pretty -d",
+    "compilar_pilas_live": "tsc -p pilas-engine --watch --pretty -d"
   },
   "main": "electron.js",
   "devDependencies": {

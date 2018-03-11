@@ -6,7 +6,7 @@ class ActorBase {
 
   constructor(pilas, x: number = 0, y: number = 0, imagen = "sin_imagen") {
     this.pilas = pilas;
-    this.sprite = new Phaser.GameObjects.Sprite(pilas.game, 0, 0, imagen);
+    this.sprite = pilas.modo.matter.add.image(x, y, imagen);
     this.x = x;
     this.y = y;
     this.rotacion = 0;
@@ -14,25 +14,23 @@ class ActorBase {
     this.escala_y = 1;
     this.id_color = this.generar_color_para_depurar();
 
-    this.pilas.game.world.add(this.sprite);
-    //this.pilas.escena_actual.agregar_actor(this);
     this.sprite["actor"] = this;
 
     try {
       this.iniciar();
     } catch (e) {
-      this.pilas.emitir_excepcion_al_editor(e, "iniciar actor");
+      this.pilas.mensajes.emitir_excepcion_al_editor(e, "iniciar actor");
     }
 
     this.sprite.update = () => {
       try {
         this.actualizar();
       } catch (e) {
-        this.pilas.emitir_excepcion_al_editor(e, "actualizar actor");
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
       }
     };
 
-    this.pilas.escena_actual().agregar_actor(this);
+    this.pilas.escena.agregar_actor(this);
   }
 
   iniciar() {}
@@ -70,23 +68,23 @@ class ActorBase {
 
   set x(_x: number) {
     this.pilas.utilidades.validar_numero(_x);
-    let { x } = this.pilas.convertir_coordenada_de_pilas_a_phaser(_x, 0);
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
     this.sprite.x = x;
   }
 
   get x() {
-    let { x } = this.pilas.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
     return x;
   }
 
   set y(_y: number) {
     this.pilas.utilidades.validar_numero(_y);
-    let { y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(0, _y);
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
     this.sprite.y = y;
   }
 
   get y() {
-    let { y } = this.pilas.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
     return y;
   }
 
@@ -101,20 +99,20 @@ class ActorBase {
 
   set escala_x(s) {
     this.pilas.utilidades.validar_numero(s);
-    this.sprite.scale.x = s;
+    this.sprite.scaleX = s;
   }
 
   get escala_x() {
-    return this.sprite.scale.x;
+    return this.sprite.scaleX;
   }
 
   set escala_y(s) {
     this.pilas.utilidades.validar_numero(s);
-    this.sprite.scale.y = s;
+    this.sprite.scaleY = s;
   }
 
   get escala_y() {
-    return this.sprite.scale.y;
+    return this.sprite.scaleY;
   }
 
   get escala() {
@@ -134,7 +132,7 @@ class ActorBase {
   }
 
   get centro_y() {
-    return this.sprite.anchor.y;
+    return this.sprite.originY;
   }
 
   set centro_y(y) {
@@ -150,11 +148,11 @@ class ActorBase {
     }
 
     this.pilas.utilidades.validar_numero(y);
-    this.sprite.anchor.y = y;
+    this.sprite.setOrigin(this.centro_x, y);
   }
 
   get centro_x() {
-    return this.sprite.anchor.x;
+    return this.sprite.originX;
   }
 
   set centro_x(x) {
@@ -170,7 +168,7 @@ class ActorBase {
     }
 
     this.pilas.utilidades.validar_numero(x);
-    this.sprite.anchor.x = x;
+    this.sprite.setOrigin(x, this.centro_y);
   }
 
   set transparencia(t) {
@@ -207,13 +205,12 @@ class ActorBase {
   crear_figura_circular(radio: number = 0, estatico: boolean = false) {
     this.pilas.utilidades.validar_numero(radio);
 
-    this.sprite.game.physics.p2.enable([this.sprite], false);
-    this.sprite.body.static = estatico;
+    console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
 
     if (radio) {
-      this.sprite.body.setCircle(radio);
+      this.sprite.setCircle(radio);
     } else {
-      this.sprite.body.setCircle(this.ancho / 2 * this.escala_x);
+      this.sprite.setCircle();
     }
 
     this.sprite.body.angle = -this.rotacion;

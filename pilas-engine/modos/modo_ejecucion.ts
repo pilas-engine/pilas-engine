@@ -17,22 +17,26 @@ class ModoEjecucion extends Modo {
   nombre_de_la_escena_inicial: string = null;
   permitir_modo_pausa: boolean;
 
-  preload() {}
+  preload() {
+    this.load.image("pelota", "imagenes/pelota.png");
+  }
 
   create(datos) {
     this.actores = [];
 
     this.guardar_parametros_en_atributos(datos);
-    //this.crear_fondo();
+    this.crear_fondo();
     this.clases = this.obtener_referencias_a_clases();
 
     try {
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
     } catch (e) {
-      this.pilas.emitir_excepcion_al_editor(e, "crear la escena");
+      this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
     }
 
-    this.pilas.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+    this.matter.world.setBounds(0, 0, 500, 400, 32, true, true, false, true);
+
+    this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
   }
 
   instanciar_escena(nombre) {
@@ -70,7 +74,6 @@ class ModoEjecucion extends Modo {
       actor.escala_y = entidad.escala_y;
       actor.transparencia = entidad.transparencia;
       actor.iniciar();
-      this.world.add(actor.sprite);
     } else {
       console.error(this.clases);
       let nombres_de_clases = Object.getOwnPropertyNames(this.clases);

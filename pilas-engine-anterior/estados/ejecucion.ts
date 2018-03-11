@@ -117,7 +117,6 @@ class EstadoEjecucion extends Estado {
       actor.escala_y = entidad.escala_y;
       actor.transparencia = entidad.transparencia;
       actor.iniciar();
-      this.world.add(actor.sprite);
     } else {
       console.error(this.clases);
       let nombres_de_clases = Object.getOwnPropertyNames(this.clases);

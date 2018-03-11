@@ -13,8 +13,8 @@ export default Ember.Controller.extend({
     codigos: {
       escenas: [
         {
-          nombre: "Escena1",
-          codigo: `class Escena1 extends Escena {
+          nombre: NOMBRE_DE_LA_ESCENA,
+          codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
               }
 
@@ -47,11 +47,11 @@ export default Ember.Controller.extend({
         actores: [
           {
             id: 2,
-            x: 200,
+            x: 100,
             y: 100,
             centro_x: 0.5,
             centro_y: 0.5,
-            rotacion: 30,
+            rotacion: 0,
             escala_x: 1,
             escala_y: 1,
             tipo: "Pelota",
@@ -74,7 +74,7 @@ export default Ember.Controller.extend({
       };
 
       this.get("bus").trigger("ejecutar_proyecto", datos);
-      this.get("bus").trigger("hacerFocoEnPilas", {});
+      this.get("bus").trigger("hacer_foco_en_pilas", {});
     }
   }
 });

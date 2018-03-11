@@ -37,16 +37,16 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    this.get("bus").on("finalizaCarga", this, "finalizaCarga");
-    this.get("bus").on("cuandoTerminaDeIniciarEjecucion", this, "cuandoTerminaDeIniciarEjecucion");
+    this.get("bus").on("finaliza_carga", this, "finaliza_carga");
+    this.get("bus").on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
   willDestroyElement() {
-    this.get("bus").off("finalizaCarga", this, "finalizaCarga");
-    this.get("bus").off("cuandoTerminaDeIniciarEjecucion", this, "cuandoTerminaDeIniciarEjecucion");
+    this.get("bus").off("finaliza_carga", this, "finaliza_carga");
+    this.get("bus").off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
-  finalizaCarga(pilas) {
+  finaliza_carga(pilas) {
     let proyecto = this.get("proyecto");
     let resultado = this.get("compilador").compilar_proyecto(proyecto);
 
@@ -65,7 +65,7 @@ export default Component.extend({
     }
   },
 
-  cuandoTerminaDeIniciarEjecucion(pilas, contexto) {
+  cuando_termina_de_iniciar_ejecucion(pilas, contexto) {
     this.get("cuandoInicia")(pilas, contexto);
   }
 });

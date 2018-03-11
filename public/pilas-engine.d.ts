@@ -1,9 +1,25 @@
+declare class Camara {
+    pilas: Pilas;
+    constructor(pilas: Pilas);
+    readonly camara_principal: Phaser.Cameras.Scene2D.Camera;
+    vibrar(intensidad?: number, tiempo?: number): void;
+    x: number;
+    y: number;
+}
 declare class Depurador {
     pilas: Pilas;
     modo_posicion_activado: boolean;
     mostrar_fps: boolean;
     constructor(pilas: Pilas);
     definir_estados_de_depuracion(datos: any): void;
+}
+declare class Escenas {
+    pilas: Pilas;
+    escena_actual: Escena;
+    constructor(pilas: any);
+    Normal(): Normal;
+    vincular(escena: any): void;
+    definir_escena_actual(escena: any): void;
 }
 declare const DEPURAR_MENSAJES: boolean;
 declare class Mensajes {
@@ -17,6 +33,7 @@ declare class Mensajes {
     atender_mensaje_define_escena(datos: any): void;
     atender_mensaje_ejecutar_proyecto(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
+    emitir_excepcion_al_editor(error: any, origen: any): void;
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
 }
 declare class Utilidades {
@@ -33,6 +50,14 @@ declare class Utilidades {
     convertir_angulo_a_radianes(grados: number): number;
     convertir_radianes_a_angulos(radianes: number): number;
     es_firefox(): boolean;
+    convertir_coordenada_de_pilas_a_phaser(x: any, y: any): {
+        x: any;
+        y: number;
+    };
+    convertir_coordenada_de_phaser_a_pilas(x: any, y: any): {
+        x: number;
+        y: number;
+    };
 }
 declare var HOST: string;
 declare class Pilas {
@@ -40,7 +65,12 @@ declare class Pilas {
     game: Phaser.Game;
     depurador: Depurador;
     utilidades: Utilidades;
+    escenas: Escenas;
+    modo: Phaser.Scene;
+    _ancho: number;
+    _alto: number;
     constructor();
+    readonly escena: Escena;
     iniciar_phaser(ancho: number, alto: number): void;
     definir_modo(nombre: any, datos: any): void;
     crear_configuracion(ancho: any, alto: any): {
@@ -61,6 +91,74 @@ declare class Pilas {
     };
 }
 declare var pilas: Pilas;
+declare class ActorBase {
+    tipo: String;
+    pilas: Pilas;
+    id_color: string;
+    constructor(pilas: any, x?: number, y?: number, imagen?: string);
+    iniciar(): void;
+    serializar(): {
+        tipo: String;
+        x: number;
+        y: number;
+        centro_x: any;
+        centro_y: any;
+        rotacion: number;
+        escala_x: any;
+        escala_y: any;
+        imagen: any;
+        transparencia: number;
+        id_color: string;
+    };
+    generar_color_para_depurar(): string;
+    actualizar(): void;
+    imagen: string;
+    x: number;
+    y: number;
+    rotacion: number;
+    escala_x: any;
+    escala_y: any;
+    escala: any;
+    centro_y: any;
+    centro_x: any;
+    transparencia: number;
+    toString(): string;
+    crear_figura_rectangular(ancho?: number, alto?: number, estatico?: boolean): void;
+    crear_figura_circular(radio?: number, estatico?: boolean): void;
+    ancho: number;
+    alto: number;
+    estatico: boolean;
+    dinamico: boolean;
+    fijo: boolean;
+    cada_segundo(): void;
+    avanzar(rotacion?: number, velocidad?: number): void;
+}
+declare class Actor extends ActorBase {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class EscenaBase {
+    pilas: Pilas;
+    actores: Actor[];
+    id: number;
+    camara: Camara;
+    constructor(pilas: any);
+    agregar_actor(actor: Actor): void;
+    serializar(): {
+        camara_x: number;
+        camara_y: number;
+    };
+}
+declare class Escena extends EscenaBase {
+    cuadro: number;
+    iniciar(): void;
+    actualizar(): void;
+    obtener_oscilacion(velocidad: any, intensidad: any): number;
+}
+declare class Normal extends Escena {
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class ActorDelEditor {
     actor: Phaser.GameObjects.Sprite;
     constructor(funcion: any, datos: any);
@@ -108,6 +206,10 @@ declare class ModoEjecucion extends Modo {
     permitir_modo_pausa: boolean;
     preload(): void;
     create(datos: any): void;
+    instanciar_escena(nombre: any): void;
+    crear_escena(datos_de_la_escena: any): void;
+    crear_actor(entidad: any): any;
+    preRender(): void;
     obtener_referencias_a_clases(): any;
     obtener_codigo_para_exportar_clases(codigo: any): string;
     guardar_parametros_en_atributos(datos: any): void;

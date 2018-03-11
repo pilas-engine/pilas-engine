@@ -7,9 +7,6 @@ class ModoCargador extends Modo {
     this.pilas = pilas;
 
     this.load.image("pelota", "imagenes/pelota.png");
-    this.load.image("plano", "imagenes/fondos/plano.png");
-
-    this.load.image("pelota", "imagenes/pelota.png");
     this.load.image("logo", "imagenes/logo.png");
     this.load.image("sin_imagen", "imagenes/sin_imagen.png");
     this.load.image("caja", "imagenes/caja.png");

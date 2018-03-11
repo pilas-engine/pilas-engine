@@ -66,6 +66,19 @@ class Mensajes {
     console.log(datos);
   }
 
+  emitir_excepcion_al_editor(error, origen) {
+    let detalle = {
+      mensaje: error.message,
+      stack: error.stack.toString()
+    };
+
+    //this.game.paused = true;
+    console.warn("TODO: aquí deberia pausar phaser");
+    this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
+    console.warn("Se produjo una llamada a pilas.emitir_excepcion_al_editor desde " + origen);
+    console.error(error);
+  }
+
   atender_mensaje_selecciona_actor_desde_el_editor(datos) {
     console.log(datos);
   }
