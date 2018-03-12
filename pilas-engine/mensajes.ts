@@ -47,6 +47,7 @@ class Mensajes {
   }
 
   atender_mensaje_define_escena(datos) {
+    console.log("definir modo!");
     this.pilas.definir_modo("ModoEditor", { pilas: this.pilas, escena: datos.escena });
   }
 
@@ -80,6 +81,15 @@ class Mensajes {
   }
 
   atender_mensaje_selecciona_actor_desde_el_editor(datos) {
-    console.log(datos);
+    this.pilas.modo.destacar_actor_por_id(datos.id);
+  }
+
+  atender_mensaje_actualizar_actor_desde_el_editor(datos) {
+    let sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
+    this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
+  }
+
+  atender_mensaje_quitar_pausa_de_phaser() {
+    console.log("TODO: quitar modo pausa");
   }
 }

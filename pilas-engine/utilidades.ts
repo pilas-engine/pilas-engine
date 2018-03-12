@@ -48,7 +48,7 @@ class Utilidades {
   }
 
   es_firefox() {
-    return this.navegador === "Mozilla";
+    return /Firefox/.test(navigator.userAgent);
   }
 
   convertir_coordenada_de_pilas_a_phaser(x, y) {

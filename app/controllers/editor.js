@@ -97,7 +97,6 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             codigo: `class Pelota  extends ActorBase {
 
             iniciar() {
-              this.crear_figura_circular();
             }
 
             actualizar() {
@@ -108,7 +107,6 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             tipo: "Caja",
             codigo: `class Caja extends ActorBase {
             iniciar() {
-              this.crear_figura_rectangular();
             }
 
             actualizar() {
@@ -119,7 +117,6 @@ export default Ember.Controller.extend(queryParams.Mixin, {
             tipo: "Actor",
             codigo: `class Actor extends ActorBase {
               iniciar() {
-
               }
 
               actualizar() {
@@ -167,7 +164,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_y: 1,
               tipo: "Pelota",
               imagen: "pelota",
-              transparencia: 0
+              transparencia: 0,
+              figura: "circulo"
             },
             {
               id: 3,
@@ -193,7 +191,8 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_y: 1,
               tipo: "Actor",
               imagen: "sin_imagen",
-              transparencia: 0
+              transparencia: 0,
+              figura: "rectangulo"
             },
             {
               id: 5,

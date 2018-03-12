@@ -1,9 +1,9 @@
 declare class Camara {
     pilas: Pilas;
     constructor(pilas: Pilas);
-    readonly camara_principal: Phaser.Cameras.Scene2D.Camera;
+    readonly camara_principal: any;
     vibrar(intensidad?: number, tiempo?: number): void;
-    x: number;
+    x: any;
     y: number;
 }
 declare class Depurador {
@@ -35,6 +35,8 @@ declare class Mensajes {
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
     emitir_excepcion_al_editor(error: any, origen: any): void;
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
+    atender_mensaje_actualizar_actor_desde_el_editor(datos: any): void;
+    atender_mensaje_quitar_pausa_de_phaser(): void;
 }
 declare class Utilidades {
     pilas: Pilas;
@@ -66,7 +68,7 @@ declare class Pilas {
     depurador: Depurador;
     utilidades: Utilidades;
     escenas: Escenas;
-    modo: Phaser.Scene;
+    modo: any;
     _ancho: number;
     _alto: number;
     constructor();
@@ -76,9 +78,18 @@ declare class Pilas {
     crear_configuracion(ancho: any, alto: any): {
         type: number;
         parent: string;
+        zoom: number;
         width: any;
         height: any;
         backgroundColor: string;
+        disableContextMenu: boolean;
+        input: {
+            keyboard: boolean;
+            mouse: boolean;
+            touch: boolean;
+            gamepad: boolean;
+        };
+        pixelart: boolean;
         physics: {
             default: string;
             matter: {
@@ -93,19 +104,21 @@ declare class Pilas {
 declare var pilas: Pilas;
 declare class ActorBase {
     tipo: String;
+    sprite: Phaser.GameObjects.Sprite;
     pilas: Pilas;
     id_color: string;
-    constructor(pilas: any, x?: number, y?: number, imagen?: string);
+    figura: any;
+    constructor(pilas: any, x?: number, y?: number, imagen?: string, figura?: any);
     iniciar(): void;
     serializar(): {
         tipo: String;
         x: number;
         y: number;
-        centro_x: any;
-        centro_y: any;
+        centro_x: number;
+        centro_y: number;
         rotacion: number;
-        escala_x: any;
-        escala_y: any;
+        escala_x: number;
+        escala_y: number;
         imagen: any;
         transparencia: number;
         id_color: string;
@@ -116,13 +129,14 @@ declare class ActorBase {
     x: number;
     y: number;
     rotacion: number;
-    escala_x: any;
-    escala_y: any;
-    escala: any;
-    centro_y: any;
-    centro_x: any;
+    escala_x: number;
+    escala_y: number;
+    escala: number;
+    centro_y: number;
+    centro_x: number;
     transparencia: number;
     toString(): string;
+    fallar_si_no_tiene_figura(): void;
     crear_figura_rectangular(ancho?: number, alto?: number, estatico?: boolean): void;
     crear_figura_circular(radio?: number, estatico?: boolean): void;
     ancho: number;
@@ -145,9 +159,10 @@ declare class EscenaBase {
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
     serializar(): {
-        camara_x: number;
+        camara_x: any;
         camara_y: number;
     };
+    actualizar_actores(): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;
@@ -159,11 +174,12 @@ declare class Normal extends Escena {
     iniciar(): void;
     actualizar(): void;
 }
-declare class ActorDelEditor {
-    actor: Phaser.GameObjects.Sprite;
-    constructor(funcion: any, datos: any);
-}
 declare class Modo extends Phaser.Scene {
+    matter: any;
+    actores: any;
+    destacar_actor_por_id(id: any): void;
+    obtener_actor_por_id(id: any): any;
+    actualizar_sprite_desde_datos(sprite: any, actor: any): void;
 }
 declare class ModoCargador extends Modo {
     pilas: Pilas;
@@ -176,7 +192,6 @@ declare class ModoEditor extends Modo {
     fondo: Phaser.GameObjects.TileSprite;
     ancho: number;
     alto: number;
-    actores: any;
     graphics: any;
     fps: any;
     preload(): void;
@@ -196,7 +211,6 @@ declare class ModoEjecucion extends Modo {
     fondo: Phaser.GameObjects.TileSprite;
     ancho: number;
     alto: number;
-    actores: any;
     graphics: any;
     fps: any;
     clases: {};

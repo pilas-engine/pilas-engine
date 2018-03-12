@@ -8,7 +8,6 @@ class ModoEditor extends Modo {
   ancho: number = 500;
   alto: number = 500;
 
-  actores: any;
   graphics: any;
   fps: any;
 
@@ -25,6 +24,16 @@ class ModoEditor extends Modo {
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
     this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
+
+    var particles = this.add.particles("pelota");
+
+    var emitter = particles.createEmitter({
+      speed: 50,
+      x: 200,
+      y: 200,
+      scale: { start: 1, end: 0 },
+      blendMode: "ADD"
+    });
   }
 
   posicionar_la_camara(datos_de_la_escena) {
@@ -42,8 +51,8 @@ class ModoEditor extends Modo {
     let escena = this;
 
     this.input.on("dragstart", function(pointer, gameObject) {
-      // TODO: mostrar este cursor si pasa el mouse sobre un
-      //       actor pero no lo arrastra: "-webkit-grab";
+      escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
+
       if (escena.pilas.utilidades.es_firefox()) {
         escena.pilas.game.canvas.style.cursor = "grabbing";
       } else {
@@ -58,6 +67,8 @@ class ModoEditor extends Modo {
 
     this.input.on("dragend", function(pointer, gameObject) {
       escena.pilas.game.canvas.style.cursor = "default";
+      let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
+      escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
     });
   }
 
@@ -68,10 +79,32 @@ class ModoEditor extends Modo {
   }
 
   crear_sprite_desde_actor(actor) {
-    let sprite = this.add.sprite(actor.x, actor.y, actor.imagen);
+    let sprite = this.add.sprite(0, 0, actor.imagen);
 
     sprite["setInteractive"]();
     sprite["actor"] = actor;
+    sprite["destacandose"] = false;
+
+    sprite["destacar"] = () => {
+      if (sprite["destacandose"]) {
+        return;
+      }
+
+      sprite["destacandose"] = true;
+
+      this.tweens.add({
+        targets: sprite,
+        scaleX: sprite.scaleX + 0.1,
+        scaleY: sprite.scaleY + 0.1,
+        duration: 100,
+        ease: "Power2",
+        yoyo: true,
+        delay: 0,
+        onComplete: function() {
+          sprite["destacandose"] = false;
+        }
+      });
+    };
 
     this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
     this.input.setDraggable(sprite, undefined);
@@ -79,12 +112,7 @@ class ModoEditor extends Modo {
   }
 
   aplicar_atributos_de_actor_a_sprite(actor, sprite) {
-    sprite.rotacion = actor.rotacion;
-    sprite.scaleX = actor.escala_x;
-    sprite.scaleY = actor.escala_y;
-    sprite.originX = actor.centro_x;
-    sprite.originY = actor.centro_y;
-    sprite.alpha = 1 - actor.transparencia / 100;
+    this.actualizar_sprite_desde_datos(sprite, actor);
   }
 
   crear_canvas_de_depuracion() {
@@ -96,7 +124,7 @@ class ModoEditor extends Modo {
   update() {
     if (this.pilas.depurador.mostrar_fps) {
       this.fps.alpha = 1;
-      this.fps.text = "FPS: " + Math.round(this.pilas.game.loop.actualFps);
+      this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
     } else {
       this.fps.alpha = 0;
     }

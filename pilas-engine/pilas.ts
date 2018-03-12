@@ -12,7 +12,7 @@ class Pilas {
   depurador: Depurador;
   utilidades: Utilidades;
   escenas: Escenas;
-  modo: Phaser.Scene;
+  modo: any;
   _ancho: number;
   _alto: number;
 
@@ -45,7 +45,7 @@ class Pilas {
 
   definir_modo(nombre, datos) {
     this.game.scene.stop("ModoCargador");
-    this.game.scene.stop("EscenaEjecutar");
+    this.game.scene.stop("ModoEjecucion");
     this.game.scene.stop("ModoEditor");
     this.game.scene.start(nombre, datos);
     this.modo = this.game.scene.getScene(nombre);
@@ -55,9 +55,18 @@ class Pilas {
     return {
       type: Phaser.AUTO,
       parent: "game",
+      zoom: 1,
       width: ancho,
       height: alto,
       backgroundColor: "#5d5d5d",
+      disableContextMenu: true,
+      input: {
+        keyboard: true,
+        mouse: true,
+        touch: true,
+        gamepad: true
+      },
+      pixelart: false,
       physics: {
         default: "matter",
         matter: {

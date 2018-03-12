@@ -7,7 +7,6 @@ class ModoEjecucion extends Modo {
   ancho: number;
   alto: number;
 
-  actores: any;
   graphics: any;
   fps: any;
 
@@ -34,7 +33,7 @@ class ModoEjecucion extends Modo {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
     }
 
-    this.matter.world.setBounds(0, 0, 500, 400, 32, true, true, false, true);
+    this.matter.world.setBounds(0, 0, this.ancho, this.alto, 200, true, true, true, true);
 
     this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
   }
@@ -65,7 +64,7 @@ class ModoEjecucion extends Modo {
     let clase = this.clases[entidad.tipo];
 
     if (clase) {
-      actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen);
+      actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen, entidad.figura);
       actor.tipo = entidad.tipo;
       actor.rotacion = entidad.rotacion;
       actor.centro_x = entidad.centro_x;
@@ -156,5 +155,7 @@ class ModoEjecucion extends Modo {
     this.fondo.setOrigin(0);
   }
 
-  update() {}
+  update() {
+    this.pilas.escena.actualizar_actores();
+  }
 }

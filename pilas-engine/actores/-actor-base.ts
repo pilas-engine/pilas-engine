@@ -1,12 +1,33 @@
 class ActorBase {
   tipo: String;
-  //sprite: Phaser.Sprite;
+  sprite: Phaser.GameObjects.Sprite;
   pilas: Pilas;
   id_color: string;
+  figura: any;
 
-  constructor(pilas, x: number = 0, y: number = 0, imagen = "sin_imagen") {
+  constructor(pilas, x: number = 0, y: number = 0, imagen = "sin_imagen", figura: any = false) {
     this.pilas = pilas;
-    this.sprite = pilas.modo.matter.add.image(x, y, imagen);
+    this.figura = figura;
+
+    switch (figura) {
+      case "rectangulo":
+        this.sprite = pilas.modo.matter.add.image(x, y, imagen);
+        this.crear_figura_rectangular();
+        break;
+
+      case "circulo":
+        this.sprite = pilas.modo.matter.add.image(x, y, imagen);
+        this.crear_figura_circular();
+        break;
+
+      case false:
+        this.sprite = pilas.modo.add.image(x, y, imagen);
+        break;
+
+      default:
+        throw Error(`No se conoce el tipo de figura ${figura}`);
+    }
+
     this.x = x;
     this.y = y;
     this.rotacion = 0;
@@ -186,7 +207,15 @@ class ActorBase {
     return `<${clase} en (${this.x}, ${this.y})>`;
   }
 
+  fallar_si_no_tiene_figura() {
+    if (!this.figura) {
+      throw Error(`Este actor no tiene figura física, no se puede llamar a este método`);
+    }
+  }
+
   crear_figura_rectangular(ancho: number = 0, alto: number = 0, estatico: boolean = false) {
+    this.fallar_si_no_tiene_figura();
+
     this.pilas.utilidades.validar_numero(ancho);
     this.pilas.utilidades.validar_numero(alto);
 
@@ -202,6 +231,8 @@ class ActorBase {
   }
 
   crear_figura_circular(radio: number = 0, estatico: boolean = false) {
+    this.fallar_si_no_tiene_figura();
+
     this.pilas.utilidades.validar_numero(radio);
 
     console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
@@ -232,12 +263,16 @@ class ActorBase {
   }
 
   get estatico() {
+    this.fallar_si_no_tiene_figura();
+
     if (this.sprite.body) {
       return this.sprite.body.static;
     }
   }
 
   set estatico(estatico: boolean) {
+    this.fallar_si_no_tiene_figura();
+
     if (this.sprite.body) {
       if (estatico) {
         this.sprite.body.velocity.x = 0;
@@ -250,10 +285,14 @@ class ActorBase {
   }
 
   set dinamico(dinamico: boolean) {
+    this.fallar_si_no_tiene_figura();
+
     this.estatico = !dinamico;
   }
 
   get dinamico() {
+    this.fallar_si_no_tiene_figura();
+
     return !this.estatico;
   }
 

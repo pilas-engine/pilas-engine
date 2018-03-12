@@ -22,4 +22,14 @@ class EscenaBase {
       camara_y: this.camara.y
     };
   }
+
+  actualizar_actores() {
+    this.actores.map(actor => {
+      try {
+        actor.actualizar();
+      } catch (e) {
+        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+      }
+    });
+  }
 }
