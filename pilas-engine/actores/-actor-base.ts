@@ -66,7 +66,7 @@ class ActorBase {
       rotacion: this.rotacion,
       escala_x: this.escala_x,
       escala_y: this.escala_y,
-      imagen: this.sprite.key,
+      imagen: this.imagen,
       transparencia: this.transparencia,
       id_color: this.id_color
     };
@@ -80,11 +80,11 @@ class ActorBase {
   actualizar() {}
 
   get imagen(): string {
-    return this.sprite.frameName;
+    return this.sprite.texture.key;
   }
 
   set imagen(nombre: string) {
-    this.sprite.loadTexture(nombre);
+    this.sprite.setTexture(nombre);
   }
 
   set x(_x: number) {

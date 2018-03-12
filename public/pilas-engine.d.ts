@@ -6,6 +6,18 @@ declare class Camara {
     x: any;
     y: number;
 }
+declare class Control {
+    pilas: Pilas;
+    _izquierda: any;
+    _derecha: any;
+    _arriba: any;
+    _abajo: any;
+    constructor(pilas: Pilas);
+    izquierda: any;
+    derecha: any;
+    arriba: any;
+    abajo: any;
+}
 declare class Depurador {
     pilas: Pilas;
     modo_posicion_activado: boolean;
@@ -68,6 +80,7 @@ declare class Pilas {
     depurador: Depurador;
     utilidades: Utilidades;
     escenas: Escenas;
+    control: Control;
     modo: any;
     _ancho: number;
     _alto: number;
@@ -119,7 +132,7 @@ declare class ActorBase {
         rotacion: number;
         escala_x: number;
         escala_y: number;
-        imagen: any;
+        imagen: string;
         transparencia: number;
         id_color: string;
     };
@@ -150,6 +163,23 @@ declare class ActorBase {
 declare class Actor extends ActorBase {
     iniciar(): void;
     actualizar(): void;
+}
+declare class Aceituna extends Actor {
+    iniciar(): void;
+}
+declare class Caja extends Actor {
+    iniciar(): void;
+}
+declare class Logo extends Actor {
+    iniciar(): void;
+}
+declare class Nave extends Actor {
+    velocidad: number;
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class Pelota extends Actor {
+    iniciar(): void;
 }
 declare class EscenaBase {
     pilas: Pilas;

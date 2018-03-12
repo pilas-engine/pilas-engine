@@ -12,6 +12,7 @@ class Pilas {
   depurador: Depurador;
   utilidades: Utilidades;
   escenas: Escenas;
+  control: Control;
   modo: any;
   _ancho: number;
   _alto: number;
@@ -40,6 +41,7 @@ class Pilas {
     game.scene.add("ModoCargador", ModoCargador, false);
     game.scene.add("ModoEjecucion", ModoEjecucion, false);
 
+    this.control = new Control(this);
     this.definir_modo("ModoCargador", { pilas: this });
   }
 

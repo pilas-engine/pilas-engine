@@ -48,6 +48,57 @@ var Camara = (function () {
     });
     return Camara;
 }());
+var Control = (function () {
+    function Control(pilas) {
+        var codigos = Phaser.Input.Keyboard.KeyCodes;
+        this.pilas = pilas;
+        this._izquierda = pilas.game.input.keyboard.addKey(codigos.LEFT);
+        this._derecha = pilas.game.input.keyboard.addKey(codigos.RIGHT);
+        this._arriba = pilas.game.input.keyboard.addKey(codigos.UP);
+        this._abajo = pilas.game.input.keyboard.addKey(codigos.DOWN);
+    }
+    Object.defineProperty(Control.prototype, "izquierda", {
+        get: function () {
+            return this._izquierda.isDown;
+        },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "derecha", {
+        get: function () {
+            return this._derecha.isDown;
+        },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "arriba", {
+        get: function () {
+            return this._arriba.isDown;
+        },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "abajo", {
+        get: function () {
+            return this._abajo.isDown;
+        },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Control;
+}());
 var Depurador = (function () {
     function Depurador(pilas) {
         this.pilas = pilas;
@@ -231,6 +282,7 @@ var Pilas = (function () {
         game.scene.add("ModoEditor", ModoEditor, false);
         game.scene.add("ModoCargador", ModoCargador, false);
         game.scene.add("ModoEjecucion", ModoEjecucion, false);
+        this.control = new Control(this);
         this.definir_modo("ModoCargador", { pilas: this });
     };
     Pilas.prototype.definir_modo = function (nombre, datos) {
@@ -328,7 +380,7 @@ var ActorBase = (function () {
             rotacion: this.rotacion,
             escala_x: this.escala_x,
             escala_y: this.escala_y,
-            imagen: this.sprite.key,
+            imagen: this.imagen,
             transparencia: this.transparencia,
             id_color: this.id_color
         };
@@ -340,10 +392,10 @@ var ActorBase = (function () {
     ActorBase.prototype.actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "imagen", {
         get: function () {
-            return this.sprite.frameName;
+            return this.sprite.texture.key;
         },
         set: function (nombre) {
-            this.sprite.loadTexture(nombre);
+            this.sprite.setTexture(nombre);
         },
         enumerable: true,
         configurable: true
@@ -593,6 +645,67 @@ var Actor = (function (_super) {
     Actor.prototype.actualizar = function () { };
     return Actor;
 }(ActorBase));
+var Aceituna = (function (_super) {
+    __extends(Aceituna, _super);
+    function Aceituna() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Aceituna.prototype.iniciar = function () {
+        this.imagen = "aceituna";
+    };
+    return Aceituna;
+}(Actor));
+var Caja = (function (_super) {
+    __extends(Caja, _super);
+    function Caja() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Caja.prototype.iniciar = function () {
+        this.crear_figura_rectangular();
+    };
+    return Caja;
+}(Actor));
+var Logo = (function (_super) {
+    __extends(Logo, _super);
+    function Logo() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Logo.prototype.iniciar = function () { };
+    return Logo;
+}(Actor));
+var Nave = (function (_super) {
+    __extends(Nave, _super);
+    function Nave() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.velocidad = 5;
+        return _this;
+    }
+    Nave.prototype.iniciar = function () {
+        this.imagen = "nave";
+        this.pilas.reproducir_sonido("moneda");
+    };
+    Nave.prototype.actualizar = function () {
+        if (this.pilas.control.izquierda) {
+            this.rotacion += this.velocidad;
+        }
+        if (this.pilas.control.derecha) {
+            this.rotacion -= this.velocidad;
+        }
+        if (this.pilas.control.arriba) {
+            this.avanzar(this.rotacion + 90, this.velocidad);
+        }
+    };
+    return Nave;
+}(Actor));
+var Pelota = (function (_super) {
+    __extends(Pelota, _super);
+    function Pelota() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Pelota.prototype.iniciar = function () {
+    };
+    return Pelota;
+}(Actor));
 var EscenaBase = (function () {
     function EscenaBase(pilas) {
         this.pilas = pilas;
