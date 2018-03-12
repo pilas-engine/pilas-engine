@@ -37,6 +37,10 @@ export default Component.extend({
       intensidad: 1,
       min: 0,
       max: 100
+    },
+    {
+      propiedad: "figura",
+      opciones: ["ninguna", "circulo", "rectangulo"]
     }
   ],
   propiedades_de_escenas: [
