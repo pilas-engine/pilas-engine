@@ -33,6 +33,27 @@ var Actores = (function () {
     };
     return Actores;
 }());
+var Animaciones = (function () {
+    function Animaciones(pilas) {
+        this.animaciones = {};
+        this.pilas = pilas;
+    }
+    Animaciones.prototype.crear_o_sustituir = function (nombre, cuadros, velocidad) {
+        if (!this.animaciones[nombre]) {
+            var frames_1 = cuadros.map(function (nombre) {
+                return { key: nombre };
+            });
+            var animacion = pilas.modo.anims.create({
+                key: nombre,
+                frames: frames_1,
+                frameRate: velocidad,
+                repeat: -1
+            });
+            this.animaciones[nombre] = animacion;
+        }
+    };
+    return Animaciones;
+}());
 var Camara = (function () {
     function Camara(pilas) {
         this.pilas = pilas;
@@ -347,6 +368,7 @@ var Pilas = (function () {
         this.historia = new Historia(this);
         this.sonidos = {};
         this.actores = new Actores(this);
+        this.animaciones = new Animaciones(this);
     }
     Object.defineProperty(Pilas.prototype, "escena", {
         get: function () {
@@ -391,7 +413,7 @@ var Pilas = (function () {
                 touch: true,
                 gamepad: true
             },
-            pixelart: false,
+            pixelart: true,
             physics: {
                 default: "matter",
                 matter: {
@@ -438,7 +460,8 @@ var ActorBase = (function () {
             figura_ancho: 100,
             figura_alto: 100,
             figura_radio: 40,
-            figura_sin_rotacion: false
+            figura_sin_rotacion: false,
+            figura_rebote: 1
         };
         this.propiedades = {
             x: 0,
@@ -463,12 +486,18 @@ var ActorBase = (function () {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
                 this.figura = figura;
-                this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.figura_dinamica, propiedades.figura_sin_rotacion);
+                this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
+                this.dinamico = propiedades.figura_dinamica;
+                this.sin_rotacion = propiedades.figura_sin_rotacion;
+                this.rebote = propiedades.figura_rebote;
                 break;
             case "circulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
                 this.figura = figura;
-                this.crear_figura_circular(propiedades.figura_radio, propiedades.figura_dinamica, propiedades.figura_sin_rotacion);
+                this.crear_figura_circular(propiedades.figura_radio);
+                this.dinamico = propiedades.figura_dinamica;
+                this.sin_rotacion = propiedades.figura_sin_rotacion;
+                this.rebote = propiedades.figura_rebote;
                 break;
             case "":
                 this.figura = figura;
@@ -517,6 +546,11 @@ var ActorBase = (function () {
     ActorBase.prototype.generar_color_para_depurar = function () {
         var opacidad = "FF";
         return this.pilas.utilidades.obtener_color_al_azar(opacidad);
+    };
+    ActorBase.prototype.pre_actualizar = function () {
+        if (this.figura && this.sin_rotacion) {
+            this.sprite.setAngularVelocity(0);
+        }
     };
     ActorBase.prototype.actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "imagen", {
@@ -661,11 +695,9 @@ var ActorBase = (function () {
             throw Error("Este actor no tiene figura f\u00EDsica, no se puede llamar a este m\u00E9todo");
         }
     };
-    ActorBase.prototype.crear_figura_rectangular = function (ancho, alto, dinamica, figura_sin_rotacion) {
+    ActorBase.prototype.crear_figura_rectangular = function (ancho, alto) {
         if (ancho === void 0) { ancho = 0; }
         if (alto === void 0) { alto = 0; }
-        if (dinamica === void 0) { dinamica = false; }
-        if (figura_sin_rotacion === void 0) { figura_sin_rotacion = false; }
         this.fallar_si_no_tiene_figura();
         this.pilas.utilidades.validar_numero(ancho);
         this.pilas.utilidades.validar_numero(alto);
@@ -676,20 +708,13 @@ var ActorBase = (function () {
         else {
             this.sprite.setRectangle(this.ancho, this.alto);
         }
-        this.sprite.setBounce(1);
+        this.sprite.setBounce(0);
         this.sprite.angle = -this.rotacion;
-        this.dinamico = dinamica;
-        if (figura_sin_rotacion) {
-            this.sprite.setFixedRotation();
-        }
     };
-    ActorBase.prototype.crear_figura_circular = function (radio, dinamica, figura_sin_rotacion) {
+    ActorBase.prototype.crear_figura_circular = function (radio) {
         if (radio === void 0) { radio = 0; }
-        if (dinamica === void 0) { dinamica = false; }
-        if (figura_sin_rotacion === void 0) { figura_sin_rotacion = false; }
         this.fallar_si_no_tiene_figura();
         this.pilas.utilidades.validar_numero(radio);
-        console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
         if (radio) {
             this.sprite.setCircle(radio);
         }
@@ -698,11 +723,6 @@ var ActorBase = (function () {
         }
         this.sprite.setBounce(1);
         this.sprite.angle = -this.rotacion;
-        this.dinamico = dinamica;
-        console.log({ figura_sin_rotacion: figura_sin_rotacion });
-        if (figura_sin_rotacion) {
-            this.sprite.setFixedRotation(true);
-        }
     };
     Object.defineProperty(ActorBase.prototype, "ancho", {
         get: function () {
@@ -732,6 +752,7 @@ var ActorBase = (function () {
         set: function (estatico) {
             this.fallar_si_no_tiene_figura();
             this.sprite.setStatic(estatico);
+            this.sprite.setVelocity(0, 0);
         },
         enumerable: true,
         configurable: true
@@ -744,6 +765,47 @@ var ActorBase = (function () {
         set: function (dinamico) {
             this.fallar_si_no_tiene_figura();
             this.estatico = !dinamico;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ActorBase.prototype.impulsar = function (x, y) {
+        this.fallar_si_no_tiene_figura();
+        this.sprite.setVelocity(x, -y);
+    };
+    Object.defineProperty(ActorBase.prototype, "velocidad_x", {
+        get: function () {
+            this.fallar_si_no_tiene_figura();
+            return this.sprite.body.velocity.x;
+        },
+        set: function (valor) {
+            this.fallar_si_no_tiene_figura();
+            return this.sprite.setVelocityX(valor);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "velocidad_y", {
+        get: function () {
+            this.fallar_si_no_tiene_figura();
+            return -this.sprite.body.velocity.y;
+        },
+        set: function (valor) {
+            this.fallar_si_no_tiene_figura();
+            return this.sprite.setVelocityX(-valor);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "rebote", {
+        get: function () {
+            this.fallar_si_no_tiene_figura();
+            return this.sprite.body.restitution;
+        },
+        set: function (valor) {
+            this.pilas.utilidades.validar_numero(valor);
+            this.fallar_si_no_tiene_figura();
+            this.sprite.setBounce(valor);
         },
         enumerable: true,
         configurable: true
@@ -792,6 +854,12 @@ var ActorBase = (function () {
         this.x += Math.cos(r) * velocidad;
         this.y += Math.sin(r) * velocidad;
     };
+    ActorBase.prototype.crear_animacion = function (nombre, cuadros, velocidad) {
+        this.pilas.animaciones.crear_o_sustituir(nombre, cuadros, velocidad);
+    };
+    ActorBase.prototype.reproducir_animacion = function (nombre) {
+        this.sprite.anims.play(nombre);
+    };
     return ActorBase;
 }());
 var Actor = (function (_super) {
@@ -837,22 +905,19 @@ var Conejo = (function (_super) {
             x: 0,
             y: 0,
             imagen: "salta",
-            figura: "circulo",
+            figura: "rectangulo",
             figura_ancho: 50,
             figura_alto: 100,
-            figura_radio: 40,
-            figura_sin_rotacion: true
+            figura_radio: 50,
+            figura_sin_rotacion: true,
+            figura_dinamica: true,
+            figura_rebote: 0
         };
         return _this;
     }
     Conejo.prototype.iniciar = function () {
-        this.pilas.game.scene.scenes[0].anims.create({
-            key: "camina",
-            frames: [{ key: "camina1" }, { key: "camina2" }],
-            frameRate: 20,
-            repeat: -1
-        });
-        this.sprite.anims.play("camina");
+        this.crear_animacion("camina", ["camina1", "camina2"], 20);
+        this.reproducir_animacion("camina");
     };
     Conejo.prototype.actualizar = function () {
         if (this.pilas.control.izquierda) {
@@ -862,6 +927,11 @@ var Conejo = (function (_super) {
         if (this.pilas.control.derecha) {
             this.x += 5;
             this.espejado = false;
+        }
+        if (this.pilas.control.arriba) {
+            if (this.velocidad_y < 1 && this.velocidad_y > -1) {
+                this.impulsar(0, 10);
+            }
         }
     };
     return Conejo;
@@ -930,6 +1000,7 @@ var EscenaBase = (function () {
         var _this = this;
         this.actores.map(function (actor) {
             try {
+                actor.pre_actualizar();
                 actor.actualizar();
             }
             catch (e) {
@@ -1063,14 +1134,6 @@ var ModoEditor = (function (_super) {
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
         this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
-        var particles = this.add.particles("pelota");
-        var emitter = particles.createEmitter({
-            speed: 50,
-            x: 200,
-            y: 200,
-            scale: { start: 1, end: 0 },
-            blendMode: "ADD"
-        });
     };
     ModoEditor.prototype.crear_fondo = function () {
         this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, "plano");
@@ -1220,18 +1283,9 @@ var ModoEjecucion = (function (_super) {
         var clase = this.clases[entidad.tipo];
         if (clase) {
             actor = new this.clases[entidad.tipo](this.pilas);
-            actor.propiedades.x = x;
-            actor.propiedades.y = y;
-            actor.propiedades.imagen = imagen;
-            actor.propiedades.figura = entidad.figura;
-            actor.propiedades.tipo = entidad.tipo;
-            actor.propiedades.rotacion = entidad.rotacion;
-            actor.propiedades.centro_x = entidad.centro_x;
-            actor.propiedades.centro_y = entidad.centro_y;
-            actor.propiedades.escala_x = entidad.escala_x;
-            actor.propiedades.escala_y = entidad.escala_y;
-            actor.propiedades.transparencia = entidad.transparencia;
-            actor.pre_iniciar(actor.propiedades);
+            var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
+            p = this.pilas.utilidades.combinar_propiedades(p, entidad);
+            actor.pre_iniciar(p);
             actor.iniciar();
         }
         else {

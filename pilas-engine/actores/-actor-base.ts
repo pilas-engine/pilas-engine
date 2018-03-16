@@ -4,6 +4,7 @@ class ActorBase {
   pilas: Pilas;
   id_color: string;
   figura = "";
+  sin_rotacion: false;
 
   propiedades_base = {
     x: 0,
@@ -14,7 +15,8 @@ class ActorBase {
     figura_ancho: 100,
     figura_alto: 100,
     figura_radio: 40,
-    figura_sin_rotacion: false
+    figura_sin_rotacion: false,
+    figura_rebote: 1
   };
 
   propiedades = {
@@ -40,13 +42,19 @@ class ActorBase {
       case "rectangulo":
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
         this.figura = figura;
-        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.figura_dinamica, propiedades.figura_sin_rotacion);
+        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
+        this.dinamico = propiedades.figura_dinamica;
+        this.sin_rotacion = propiedades.figura_sin_rotacion;
+        this.rebote = propiedades.figura_rebote;
         break;
 
       case "circulo":
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
         this.figura = figura;
-        this.crear_figura_circular(propiedades.figura_radio, propiedades.figura_dinamica, propiedades.figura_sin_rotacion);
+        this.crear_figura_circular(propiedades.figura_radio);
+        this.dinamico = propiedades.figura_dinamica;
+        this.sin_rotacion = propiedades.figura_sin_rotacion;
+        this.rebote = propiedades.figura_rebote;
         break;
 
       case "":
@@ -111,6 +119,12 @@ class ActorBase {
   generar_color_para_depurar() {
     let opacidad = "FF";
     return this.pilas.utilidades.obtener_color_al_azar(opacidad);
+  }
+
+  pre_actualizar() {
+    if (this.figura && this.sin_rotacion) {
+      this.sprite.setAngularVelocity(0);
+    }
   }
 
   actualizar() {}
@@ -249,7 +263,7 @@ class ActorBase {
     }
   }
 
-  crear_figura_rectangular(ancho: number = 0, alto: number = 0, dinamica: boolean = false, figura_sin_rotacion = false) {
+  crear_figura_rectangular(ancho: number = 0, alto: number = 0) {
     this.fallar_si_no_tiene_figura();
 
     this.pilas.utilidades.validar_numero(ancho);
@@ -263,21 +277,14 @@ class ActorBase {
       this.sprite.setRectangle(this.ancho, this.alto);
     }
 
-    this.sprite.setBounce(1);
+    this.sprite.setBounce(0);
     this.sprite.angle = -this.rotacion;
-    this.dinamico = dinamica;
-
-    if (figura_sin_rotacion) {
-      this.sprite.setFixedRotation();
-    }
   }
 
-  crear_figura_circular(radio: number = 0, dinamica: boolean = false, figura_sin_rotacion = false) {
+  crear_figura_circular(radio: number = 0) {
     this.fallar_si_no_tiene_figura();
 
     this.pilas.utilidades.validar_numero(radio);
-
-    console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
 
     if (radio) {
       this.sprite.setCircle(radio);
@@ -287,13 +294,6 @@ class ActorBase {
 
     this.sprite.setBounce(1);
     this.sprite.angle = -this.rotacion;
-    this.dinamico = dinamica;
-
-    console.log({ figura_sin_rotacion });
-
-    if (figura_sin_rotacion) {
-      this.sprite.setFixedRotation(true);
-    }
   }
 
   get ancho() {
@@ -322,6 +322,7 @@ class ActorBase {
     this.fallar_si_no_tiene_figura();
 
     this.sprite.setStatic(estatico);
+    this.sprite.setVelocity(0, 0);
   }
 
   set dinamico(dinamico: boolean) {
@@ -334,6 +335,42 @@ class ActorBase {
     this.fallar_si_no_tiene_figura();
 
     return !this.estatico;
+  }
+
+  impulsar(x, y) {
+    this.fallar_si_no_tiene_figura();
+    this.sprite.setVelocity(x, -y);
+  }
+
+  get velocidad_x() {
+    this.fallar_si_no_tiene_figura();
+    return this.sprite.body.velocity.x;
+  }
+
+  set velocidad_x(valor: number) {
+    this.fallar_si_no_tiene_figura();
+    return this.sprite.setVelocityX(valor);
+  }
+
+  get velocidad_y() {
+    this.fallar_si_no_tiene_figura();
+    return -this.sprite.body.velocity.y;
+  }
+
+  set velocidad_y(valor: number) {
+    this.fallar_si_no_tiene_figura();
+    return this.sprite.setVelocityX(-valor);
+  }
+
+  set rebote(valor: boolean) {
+    this.pilas.utilidades.validar_numero(valor);
+    this.fallar_si_no_tiene_figura();
+    this.sprite.setBounce(valor);
+  }
+
+  get rebote() {
+    this.fallar_si_no_tiene_figura();
+    return this.sprite.body.restitution;
   }
 
   get fijo() {

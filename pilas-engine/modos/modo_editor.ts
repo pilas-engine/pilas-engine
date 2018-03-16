@@ -24,16 +24,6 @@ class ModoEditor extends Modo {
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
     this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
-
-    var particles = this.add.particles("pelota");
-
-    var emitter = particles.createEmitter({
-      speed: 50,
-      x: 200,
-      y: 200,
-      scale: { start: 1, end: 0 },
-      blendMode: "ADD"
-    });
   }
 
   crear_fondo() {

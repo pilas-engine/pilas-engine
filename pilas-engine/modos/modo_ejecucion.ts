@@ -69,18 +69,12 @@ class ModoEjecucion extends Modo {
 
     if (clase) {
       actor = new this.clases[entidad.tipo](this.pilas);
-      actor.propiedades.x = x;
-      actor.propiedades.y = y;
-      actor.propiedades.imagen = imagen;
-      actor.propiedades.figura = entidad.figura;
-      actor.propiedades.tipo = entidad.tipo;
-      actor.propiedades.rotacion = entidad.rotacion;
-      actor.propiedades.centro_x = entidad.centro_x;
-      actor.propiedades.centro_y = entidad.centro_y;
-      actor.propiedades.escala_x = entidad.escala_x;
-      actor.propiedades.escala_y = entidad.escala_y;
-      actor.propiedades.transparencia = entidad.transparencia;
-      actor.pre_iniciar(actor.propiedades);
+
+      let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
+      p = this.pilas.utilidades.combinar_propiedades(p, entidad);
+
+      actor.pre_iniciar(p);
+
       actor.iniciar();
     } else {
       console.error(this.clases);

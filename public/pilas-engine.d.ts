@@ -6,6 +6,12 @@ declare class Actores {
     Aceituna(x?: number, y?: number): any;
     Conejo(): any;
 }
+declare class Animaciones {
+    pilas: Pilas;
+    animaciones: {};
+    constructor(pilas: any);
+    crear_o_sustituir(nombre: any, cuadros: any, velocidad: any): void;
+}
 declare class Camara {
     pilas: Pilas;
     constructor(pilas: Pilas);
@@ -107,6 +113,7 @@ declare class Pilas {
     historia: Historia;
     sonidos: any;
     actores: Actores;
+    animaciones: Animaciones;
     modo: any;
     _ancho: number;
     _alto: number;
@@ -151,6 +158,7 @@ declare class ActorBase {
     pilas: Pilas;
     id_color: string;
     figura: string;
+    sin_rotacion: false;
     propiedades_base: {
         x: number;
         y: number;
@@ -161,6 +169,7 @@ declare class ActorBase {
         figura_alto: number;
         figura_radio: number;
         figura_sin_rotacion: boolean;
+        figura_rebote: number;
     };
     propiedades: {
         x: number;
@@ -191,6 +200,7 @@ declare class ActorBase {
         id_color: string;
     };
     generar_color_para_depurar(): any;
+    pre_actualizar(): void;
     actualizar(): void;
     imagen: string;
     x: number;
@@ -204,17 +214,23 @@ declare class ActorBase {
     transparencia: number;
     toString(): string;
     fallar_si_no_tiene_figura(): void;
-    crear_figura_rectangular(ancho?: number, alto?: number, dinamica?: boolean, figura_sin_rotacion?: boolean): void;
-    crear_figura_circular(radio?: number, dinamica?: boolean, figura_sin_rotacion?: boolean): void;
+    crear_figura_rectangular(ancho?: number, alto?: number): void;
+    crear_figura_circular(radio?: number): void;
     ancho: number;
     alto: number;
     estatico: boolean;
     dinamico: boolean;
+    impulsar(x: any, y: any): void;
+    velocidad_x: number;
+    velocidad_y: number;
+    rebote: boolean;
     fijo: boolean;
     espejado: boolean;
     espejado_vertical: boolean;
     cada_segundo(): void;
     avanzar(rotacion?: number, velocidad?: number): void;
+    crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
+    reproducir_animacion(nombre: any): void;
 }
 declare class Actor extends ActorBase {
     iniciar(): void;
@@ -242,6 +258,8 @@ declare class Conejo extends Actor {
         figura_alto: number;
         figura_radio: number;
         figura_sin_rotacion: boolean;
+        figura_dinamica: boolean;
+        figura_rebote: number;
     };
     iniciar(): void;
     actualizar(): void;

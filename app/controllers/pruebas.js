@@ -17,12 +17,6 @@ export default Ember.Controller.extend({
           codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
                 pilas.actores.Conejo();
-                pilas.actores.Conejo();
-                pilas.actores.Conejo();
-                pilas.actores.Conejo();
-                pilas.actores.Conejo();
-                pilas.actores.Conejo();
-                pilas.actores.Conejo();
               }
 
               actualizar() {
@@ -58,7 +52,7 @@ export default Ember.Controller.extend({
           {
             id: 3,
             x: 100,
-            y: 200,
+            y: -200,
             centro_x: 0.5,
             centro_y: 0.5,
             rotacion: 45,
@@ -68,7 +62,7 @@ export default Ember.Controller.extend({
             imagen: "pelota",
             transparencia: 0,
             figura: "circulo",
-            figura_radio: 80,
+            figura_radio: 25,
             figura_dinamica: true
           }
         ]
