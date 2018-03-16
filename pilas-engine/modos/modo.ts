@@ -26,4 +26,13 @@ class Modo extends Phaser.Scene {
     sprite.setOrigin(actor.centro_x, actor.centro_y);
     sprite.alpha = 1 - actor.transparencia / 100;
   }
+
+  posicionar_la_camara(datos_de_la_escena) {
+    this.cameras.cameras[0].x = -datos_de_la_escena.camara_x;
+    this.cameras.cameras[0].y = datos_de_la_escena.camara_y;
+  }
+
+  actualizar_posicion(posicion: any = null) {
+    throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
+  }
 }

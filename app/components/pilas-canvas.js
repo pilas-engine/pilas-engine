@@ -99,7 +99,8 @@ export default Ember.Component.extend({
     let data = {
       tipo: "definir_estados_de_depuracion",
       pos: this.get("pos"),
-      fps: this.get("fps")
+      fps: this.get("fps"),
+      fisica: this.get("fisica")
     };
     this.contexto.postMessage(data, utils.HOST);
   },

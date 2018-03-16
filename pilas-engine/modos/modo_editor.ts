@@ -36,11 +36,6 @@ class ModoEditor extends Modo {
     });
   }
 
-  posicionar_la_camara(datos_de_la_escena) {
-    this.cameras.cameras[0].x = datos_de_la_escena.camara_x;
-    this.cameras.cameras[0].y = datos_de_la_escena.camara_y;
-  }
-
   crear_fondo() {
     this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, "plano");
     this.fondo.depth = -1000;
@@ -122,6 +117,8 @@ class ModoEditor extends Modo {
   }
 
   update() {
+    this.graphics.clear();
+
     if (this.pilas.depurador.mostrar_fps) {
       this.fps.alpha = 1;
       this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
@@ -130,8 +127,6 @@ class ModoEditor extends Modo {
     }
 
     if (this.pilas.depurador.modo_posicion_activado) {
-      this.graphics.clear();
-
       this.actores.map(sprite => {
         this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
       });
@@ -143,5 +138,11 @@ class ModoEditor extends Modo {
     graphics.fillRect(x - 3, y - 3, 6, 6);
     graphics.fillStyle(0x000000, 1);
     graphics.fillRect(x - 2, y - 2, 4, 4);
+  }
+
+  eliminar_actor_por_id(id) {
+    let indice = this.actores.findIndex(e => e.id === id);
+    let actor_a_eliminar = this.actores.splice(indice, 1);
+    actor_a_eliminar[0].destroy();
   }
 }

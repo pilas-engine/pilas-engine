@@ -47,7 +47,6 @@ class Mensajes {
   }
 
   atender_mensaje_define_escena(datos) {
-    console.log("definir modo!");
     this.pilas.definir_modo("ModoEditor", { pilas: this.pilas, escena: datos.escena });
   }
 
@@ -64,7 +63,7 @@ class Mensajes {
   }
 
   atender_mensaje_actualizar_escena_desde_el_editor(datos) {
-    console.log(datos);
+    this.pilas.modo.posicionar_la_camara(datos.escena);
   }
 
   emitir_excepcion_al_editor(error, origen) {
@@ -91,5 +90,21 @@ class Mensajes {
 
   atender_mensaje_quitar_pausa_de_phaser() {
     console.log("TODO: quitar modo pausa");
+  }
+
+  atender_mensaje_pausar_escena() {
+    let parametros = {
+      pilas: this.pilas
+    };
+
+    this.pilas.definir_modo("ModoPausa", parametros);
+  }
+
+  atender_mensaje_cambiar_posicion(datos) {
+    this.pilas.modo.actualizar_posicion(datos.posicion);
+  }
+
+  atender_mensaje_eliminar_actor_desde_el_editor(datos) {
+    this.pilas.modo.eliminar_actor_por_id(datos.id);
   }
 }

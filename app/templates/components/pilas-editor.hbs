@@ -104,12 +104,14 @@
                   cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                   pos=pos
                   fps=fps
+                  fisica=fisica
                 }}
 
                 <div class="h2 ba br b--gray bg-light-gray mt2">
                   {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
                   <div class="fr">
+                    {{pilas-interruptor texto="fisica" variable=fisica}}
                     {{pilas-interruptor texto="fps" variable=fps}}
                     {{pilas-interruptor texto="pos" variable=pos}}
                   </div>

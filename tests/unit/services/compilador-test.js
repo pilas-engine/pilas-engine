@@ -3,6 +3,7 @@ import { moduleFor, test } from "ember-qunit";
 moduleFor("service:compilador", "Unit | Service | compilador", {});
 
 test("it exists", function(assert) {
+  let proyecto = {};
   let compilador = this.subject();
   assert.ok(compilador);
 
@@ -10,7 +11,7 @@ test("it exists", function(assert) {
     return str.replace(/\s\s+/g, " ").trim();
   }
 
-  let resultado = compilador.compilar(`class Actor {}`);
+  let resultado = compilador.compilar(`class Actor {}`, proyecto);
   let codigoEsperado = `
     var Actor = /** @class */ (function () {
       function Actor() {
@@ -21,6 +22,6 @@ test("it exists", function(assert) {
 
   assert.equal(eliminarEspacios(resultado.codigo), eliminarEspacios(codigoEsperado));
 
-  resultado = compilador.compilar(`class MiActor extends Actor {}`);
+  resultado = compilador.compilar(`class MiActor extends Actor {}`, proyecto);
   assert.ok(resultado.codigo.indexOf("var extendStatics = Object.setPrototypeOf") > -1);
 });

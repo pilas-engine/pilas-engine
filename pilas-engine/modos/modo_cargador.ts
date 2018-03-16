@@ -14,6 +14,16 @@ class ModoCargador extends Modo {
     this.load.image("plano", "imagenes/fondos/plano.png");
     this.load.image("nave", "imagenes/nave.png");
 
+    this.load.image("nave", "imagenes/nave.png");
+
+    this.load.image("conejo", "imagenes/conejo.png");
+    this.load.image("muere", "imagenes/conejo/muere.png");
+    this.load.image("salta", "imagenes/conejo/salta.png");
+    this.load.image("parado1", "imagenes/conejo/parado1.png");
+    this.load.image("parado2", "imagenes/conejo/parado2.png");
+    this.load.image("camina1", "imagenes/conejo/camina1.png");
+    this.load.image("camina2", "imagenes/conejo/camina2.png");
+
     this.load.audio("laser", "sonidos/laser.wav", {});
     this.load.audio("moneda", "sonidos/moneda.wav", {});
     this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});

@@ -3,45 +3,81 @@ class ActorBase {
   sprite: Phaser.GameObjects.Sprite;
   pilas: Pilas;
   id_color: string;
-  figura: any;
+  figura = "";
 
-  constructor(pilas, x: number = 0, y: number = 0, imagen = "sin_imagen", figura: any = false) {
+  propiedades_base = {
+    x: 0,
+    y: 0,
+    imagen: "sin_imagen",
+    figura: "",
+    figura_dinamica: true,
+    figura_ancho: 100,
+    figura_alto: 100,
+    figura_radio: 40,
+    figura_sin_rotacion: false
+  };
+
+  propiedades = {
+    x: 0,
+    y: 0,
+    imagen: "sin_imagen",
+    figura: ""
+  };
+
+  constructor(pilas) {
     this.pilas = pilas;
-    this.figura = figura;
+  }
+
+  get propiedades_iniciales() {
+    return this.propiedades;
+  }
+
+  pre_iniciar(propiedades) {
+    let figura = propiedades.figura || "";
+    let imagen = propiedades.imagen;
 
     switch (figura) {
       case "rectangulo":
-        this.sprite = pilas.modo.matter.add.image(x, y, imagen);
-        this.crear_figura_rectangular();
+        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
+        this.figura = figura;
+        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.figura_dinamica, propiedades.figura_sin_rotacion);
         break;
 
       case "circulo":
-        this.sprite = pilas.modo.matter.add.image(x, y, imagen);
-        this.crear_figura_circular();
+        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
+        this.figura = figura;
+        this.crear_figura_circular(propiedades.figura_radio, propiedades.figura_dinamica, propiedades.figura_sin_rotacion);
         break;
 
-      case false:
-        this.sprite = pilas.modo.add.image(x, y, imagen);
+      case "":
+        this.figura = figura;
+        this.sprite = this.pilas.modo.add.sprite(0, 0, imagen);
         break;
 
       default:
         throw Error(`No se conoce el tipo de figura ${figura}`);
     }
 
-    this.x = x;
-    this.y = y;
-    this.rotacion = 0;
-    this.escala_x = 1;
-    this.escala_y = 1;
+    this.rotacion = propiedades.rotacion || 0;
+    this.escala_x = propiedades.escala_x || 1;
+    this.escala_y = propiedades.escala_y || 1;
     this.id_color = this.generar_color_para_depurar();
 
-    this.sprite["actor"] = this;
+    this.tipo = propiedades.tipo;
+    this.centro_x = propiedades.centro_x || 0.5;
+    this.centro_y = propiedades.centro_y || 0.5;
+    this.transparencia = propiedades.transparencia || 0;
+    this.x = propiedades.x || 0;
+    this.y = propiedades.y || 0;
 
+    this.sprite["actor"] = this;
+    /*
     try {
       this.iniciar();
     } catch (e) {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "iniciar actor");
     }
+    */
 
     this.sprite.update = () => {
       try {
@@ -213,7 +249,7 @@ class ActorBase {
     }
   }
 
-  crear_figura_rectangular(ancho: number = 0, alto: number = 0, estatico: boolean = false) {
+  crear_figura_rectangular(ancho: number = 0, alto: number = 0, dinamica: boolean = false, figura_sin_rotacion = false) {
     this.fallar_si_no_tiene_figura();
 
     this.pilas.utilidades.validar_numero(ancho);
@@ -227,10 +263,16 @@ class ActorBase {
       this.sprite.setRectangle(this.ancho, this.alto);
     }
 
+    this.sprite.setBounce(1);
     this.sprite.angle = -this.rotacion;
+    this.dinamico = dinamica;
+
+    if (figura_sin_rotacion) {
+      this.sprite.setFixedRotation();
+    }
   }
 
-  crear_figura_circular(radio: number = 0, estatico: boolean = false) {
+  crear_figura_circular(radio: number = 0, dinamica: boolean = false, figura_sin_rotacion = false) {
     this.fallar_si_no_tiene_figura();
 
     this.pilas.utilidades.validar_numero(radio);
@@ -243,7 +285,15 @@ class ActorBase {
       this.sprite.setCircle();
     }
 
+    this.sprite.setBounce(1);
     this.sprite.angle = -this.rotacion;
+    this.dinamico = dinamica;
+
+    console.log({ figura_sin_rotacion });
+
+    if (figura_sin_rotacion) {
+      this.sprite.setFixedRotation(true);
+    }
   }
 
   get ancho() {
@@ -265,23 +315,13 @@ class ActorBase {
   get estatico() {
     this.fallar_si_no_tiene_figura();
 
-    if (this.sprite.body) {
-      return this.sprite.body.static;
-    }
+    return this.sprite.isStatic();
   }
 
   set estatico(estatico: boolean) {
     this.fallar_si_no_tiene_figura();
 
-    if (this.sprite.body) {
-      if (estatico) {
-        this.sprite.body.velocity.x = 0;
-        this.sprite.body.velocity.y = 0;
-        this.sprite.body.angularVelocity = 0;
-      }
-
-      this.sprite.body.static = estatico;
-    }
+    this.sprite.setStatic(estatico);
   }
 
   set dinamico(dinamico: boolean) {
@@ -297,11 +337,31 @@ class ActorBase {
   }
 
   get fijo() {
-    return this.sprite.fixedToCamera;
+    return this.sprite.scrollFactorX == 0;
   }
 
   set fijo(valor: boolean) {
-    this.sprite.fixedToCamera = valor;
+    if (valor) {
+      this.sprite.setScrollFactor(0, 0);
+    } else {
+      this.sprite.setScrollFactor(1, 1);
+    }
+  }
+
+  set espejado(valor: boolean) {
+    this.sprite.setFlipX(valor);
+  }
+
+  get espejado() {
+    return this.sprite.flipX;
+  }
+
+  set espejado_vertical(valor: boolean) {
+    this.sprite.setFlipY(valor);
+  }
+
+  get espejado_vertical() {
+    return this.sprite.flipY;
   }
 
   cada_segundo() {}

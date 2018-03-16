@@ -1,6 +1,6 @@
 class Historia {
   pilas: Pilas;
-  fotos = [];
+  fotos: any;
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
@@ -11,18 +11,20 @@ class Historia {
     this.fotos = [];
   }
 
-  serializar_escena_actual() {
+  serializar_escena(escena_actual: any) {
     this.fotos.push({
-      escena: this.pilas.escena_actual().serializar(),
-      actores: this.pilas.escena_actual().actores.map(e => e.serializar())
+      escena: escena_actual.serializar(),
+      actores: escena_actual.actores.map(e => e.serializar())
     });
   }
 
-  dibujar_puntos_de_las_posiciones_recorridas(bitmap) {
+  dibujar_puntos_de_las_posiciones_recorridas(graphics) {
     this.fotos.map(historia => {
       historia.actores.map(entidad => {
-        let { x, y } = this.pilas.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
-        bitmap.circle(x, y, 1, entidad.id_color);
+        let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
+
+        graphics.fillStyle(entidad.id_color, 1);
+        graphics.fillRect(x, y, 2, 2);
       });
     });
   }

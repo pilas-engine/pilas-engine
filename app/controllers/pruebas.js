@@ -16,6 +16,13 @@ export default Ember.Controller.extend({
           nombre: NOMBRE_DE_LA_ESCENA,
           codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
+                pilas.actores.Conejo();
+                pilas.actores.Conejo();
+                pilas.actores.Conejo();
+                pilas.actores.Conejo();
+                pilas.actores.Conejo();
+                pilas.actores.Conejo();
+                pilas.actores.Conejo();
               }
 
               actualizar() {
@@ -27,6 +34,10 @@ export default Ember.Controller.extend({
         {
           tipo: "Pelota",
           codigo: `class Pelota  extends ActorBase {
+            propiedades = {
+              figura: 'rectangulo',
+              transparencia: 50
+            }
 
             iniciar() {
             }
@@ -45,22 +56,8 @@ export default Ember.Controller.extend({
         camara_y: 0,
         actores: [
           {
-            id: 2,
-            x: 100,
-            y: 100,
-            centro_x: 0.5,
-            centro_y: 0.5,
-            rotacion: 45,
-            escala_x: 1,
-            escala_y: 1,
-            tipo: "Pelota",
-            imagen: "pelota",
-            transparencia: 0,
-            figura: "circulo"
-          },
-          {
             id: 3,
-            x: 110,
+            x: 100,
             y: 200,
             centro_x: 0.5,
             centro_y: 0.5,
@@ -70,7 +67,9 @@ export default Ember.Controller.extend({
             tipo: "Pelota",
             imagen: "pelota",
             transparencia: 0,
-            figura: "rectangulo"
+            figura: "circulo",
+            figura_radio: 80,
+            figura_dinamica: true
           }
         ]
       }

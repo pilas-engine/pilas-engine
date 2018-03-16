@@ -7,12 +7,17 @@ if (window.location.host) {
 }
 
 class Pilas {
-  mensajes: Mensajes;
   game: Phaser.Game;
+
+  mensajes: Mensajes;
   depurador: Depurador;
   utilidades: Utilidades;
   escenas: Escenas;
   control: Control;
+  historia: Historia;
+  sonidos: any;
+  actores: Actores;
+
   modo: any;
   _ancho: number;
   _alto: number;
@@ -22,6 +27,9 @@ class Pilas {
     this.depurador = new Depurador(this);
     this.utilidades = new Utilidades(this);
     this.escenas = new Escenas(this);
+    this.historia = new Historia(this);
+    this.sonidos = {};
+    this.actores = new Actores(this);
   }
 
   get escena() {
@@ -40,6 +48,7 @@ class Pilas {
     game.scene.add("ModoEditor", ModoEditor, false);
     game.scene.add("ModoCargador", ModoCargador, false);
     game.scene.add("ModoEjecucion", ModoEjecucion, false);
+    game.scene.add("ModoPausa", ModoPausa, false);
 
     this.control = new Control(this);
     this.definir_modo("ModoCargador", { pilas: this });
@@ -49,6 +58,8 @@ class Pilas {
     this.game.scene.stop("ModoCargador");
     this.game.scene.stop("ModoEjecucion");
     this.game.scene.stop("ModoEditor");
+    this.game.scene.stop("ModoPausa");
+
     this.game.scene.start(nombre, datos);
     this.modo = this.game.scene.getScene(nombre);
   }
@@ -57,7 +68,6 @@ class Pilas {
     return {
       type: Phaser.AUTO,
       parent: "game",
-      zoom: 1,
       width: ancho,
       height: alto,
       backgroundColor: "#5d5d5d",
@@ -79,6 +89,32 @@ class Pilas {
         }
       }
     };
+  }
+
+  reproducir_sonido(nombre: string) {
+    var music = this.modo.sound.add(nombre);
+    music.play();
+  }
+
+  obtener_actores() {
+    return this.escena.actores;
+  }
+
+  obtener_cantidad_de_actores() {
+    return this.obtener_actores().length;
+  }
+
+  obtener_actores_en(_x: number, _y: number) {
+    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
+    let actores = this.obtener_actores();
+
+    return actores.filter(actor => {
+      return actor.sprite.getBounds()["contains"](x, y);
+    });
+  }
+
+  escena_actual() {
+    return this.escena;
   }
 }
 

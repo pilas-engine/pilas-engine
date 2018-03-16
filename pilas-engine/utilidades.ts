@@ -19,14 +19,14 @@ class Utilidades {
   }
 
   obtener_rampa_de_colores() {
-    let colores = ["#82E0AA", "#F8C471", "#F0B27A", "#F4F6F7", "#B2BABB", "#85C1E9", "#BB8FCE", "#F1948A", "#D98880"];
+    let colores = [0x82e0aa, 0xf8c471, 0xf0b27a, 0xf4f6f7, 0xb2babb, 0x85c1e9, 0xbb8fce, 0xf1948a, 0xd98880];
     return colores;
   }
 
-  obtener_color_al_azar(opacidad) {
+  obtener_color_al_azar() {
     let colores = this.obtener_rampa_de_colores();
     let cantidad_de_colores = colores.length;
-    return colores[Math.floor(Math.random() * cantidad_de_colores)] + opacidad;
+    return colores[Math.floor(Math.random() * cantidad_de_colores)];
   }
 
   limitar(valor: number, minimo: number, maximo: number) {
@@ -57,5 +57,16 @@ class Utilidades {
 
   convertir_coordenada_de_phaser_a_pilas(x, y) {
     return { x: x - this.pilas._ancho / 2, y: this.pilas._ancho / 2 - y };
+  }
+
+  combinar_propiedades(propiedades_iniciales, propiedades) {
+    function extend(obj, src) {
+      for (var key in src) {
+        if (src.hasOwnProperty(key)) obj[key] = src[key];
+      }
+      return obj;
+    }
+
+    return extend(JSON.parse(JSON.stringify(propiedades_iniciales)), propiedades);
   }
 }

@@ -22,6 +22,7 @@ class ModoEjecucion extends Modo {
 
   create(datos) {
     this.actores = [];
+    this.matter.world.setBounds(0, 0, this.ancho, this.alto);
 
     this.guardar_parametros_en_atributos(datos);
     this.crear_fondo();
@@ -33,9 +34,12 @@ class ModoEjecucion extends Modo {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
     }
 
-    this.matter.world.setBounds(0, 0, this.ancho, this.alto, 200, true, true, true, true);
-
     this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+    this.pilas.historia.limpiar();
+
+    if (this.pilas.depurador.mostrar_fisica) {
+      this.matter.systems.matterPhysics.world.createDebugGraphic();
+    }
   }
 
   instanciar_escena(nombre) {
@@ -64,14 +68,19 @@ class ModoEjecucion extends Modo {
     let clase = this.clases[entidad.tipo];
 
     if (clase) {
-      actor = new this.clases[entidad.tipo](this.pilas, x, y, imagen, entidad.figura);
-      actor.tipo = entidad.tipo;
-      actor.rotacion = entidad.rotacion;
-      actor.centro_x = entidad.centro_x;
-      actor.centro_y = entidad.centro_y;
-      actor.escala_x = entidad.escala_x;
-      actor.escala_y = entidad.escala_y;
-      actor.transparencia = entidad.transparencia;
+      actor = new this.clases[entidad.tipo](this.pilas);
+      actor.propiedades.x = x;
+      actor.propiedades.y = y;
+      actor.propiedades.imagen = imagen;
+      actor.propiedades.figura = entidad.figura;
+      actor.propiedades.tipo = entidad.tipo;
+      actor.propiedades.rotacion = entidad.rotacion;
+      actor.propiedades.centro_x = entidad.centro_x;
+      actor.propiedades.centro_y = entidad.centro_y;
+      actor.propiedades.escala_x = entidad.escala_x;
+      actor.propiedades.escala_y = entidad.escala_y;
+      actor.propiedades.transparencia = entidad.transparencia;
+      actor.pre_iniciar(actor.propiedades);
       actor.iniciar();
     } else {
       console.error(this.clases);
@@ -80,19 +89,6 @@ class ModoEjecucion extends Modo {
     }
 
     return actor;
-  }
-
-  preRender() {
-    if (this.permitir_modo_pausa) {
-      try {
-        // TODO:
-        console.log("Guardar fotos de entidades");
-        //this.guardar_foto_de_entidades();
-      } catch (e) {
-        //this.pilas.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
-        console.error("TODO Emitir error", e);
-      }
-    }
   }
 
   obtener_referencias_a_clases() {
@@ -156,6 +152,19 @@ class ModoEjecucion extends Modo {
   }
 
   update() {
+    if (this.permitir_modo_pausa) {
+      try {
+        this.guardar_foto_de_entidades();
+      } catch (e) {
+        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+      }
+    }
+
+    this.pilas.escena.actualizar();
     this.pilas.escena.actualizar_actores();
+  }
+
+  guardar_foto_de_entidades() {
+    this.pilas.historia.serializar_escena(this.pilas.escena);
   }
 }
