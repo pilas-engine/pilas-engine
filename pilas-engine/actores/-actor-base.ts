@@ -374,4 +374,12 @@ class ActorBase {
     this.x += Math.cos(r) * velocidad;
     this.y += Math.sin(r) * velocidad;
   }
+
+  crear_animacion(nombre, cuadros, velocidad) {
+    this.pilas.animaciones.crear_o_sustituir(nombre, cuadros, velocidad);
+  }
+
+  reproducir_animacion(nombre) {
+    this.sprite.anims.play(nombre);
+  }
 }

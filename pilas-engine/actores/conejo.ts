@@ -4,25 +4,18 @@ class Conejo extends Actor {
     y: 0,
     imagen: "salta",
 
-    figura: "circulo",
+    figura: "rectangulo",
     figura_ancho: 50,
     figura_alto: 100,
-    figura_radio: 40,
-    figura_sin_rotacion: true
+    figura_radio: 50,
+    figura_sin_rotacion: true,
+    figura_dinamica: true,
+    figura_rebote: 0
   };
 
   iniciar() {
-    //this.pilas.crear_animacion("camina");
-
-    this.pilas.game.scene.scenes[0].anims.create({
-      key: "camina",
-      frames: [{ key: "camina1" }, { key: "camina2" }],
-      frameRate: 20,
-      repeat: -1
-    });
-
-    this.sprite.anims.play("camina");
-    //this.sprite.anims.load("camina");
+    this.crear_animacion("camina", ["camina1", "camina2"], 20);
+    this.reproducir_animacion("camina");
   }
 
   actualizar() {
@@ -34,6 +27,12 @@ class Conejo extends Actor {
     if (this.pilas.control.derecha) {
       this.x += 5;
       this.espejado = false;
+    }
+
+    if (this.pilas.control.arriba) {
+      if (this.velocidad_y < 1 && this.velocidad_y > -1) {
+        this.impulsar(0, 10);
+      }
     }
   }
 }

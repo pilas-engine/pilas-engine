@@ -17,6 +17,7 @@ class Pilas {
   historia: Historia;
   sonidos: any;
   actores: Actores;
+  animaciones: Animaciones;
 
   modo: any;
   _ancho: number;
@@ -30,6 +31,7 @@ class Pilas {
     this.historia = new Historia(this);
     this.sonidos = {};
     this.actores = new Actores(this);
+    this.animaciones = new Animaciones(this);
   }
 
   get escena() {
@@ -78,7 +80,7 @@ class Pilas {
         touch: true,
         gamepad: true
       },
-      pixelart: false,
+      pixelart: true,
       physics: {
         default: "matter",
         matter: {
