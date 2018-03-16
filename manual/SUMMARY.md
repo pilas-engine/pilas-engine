@@ -1,6 +1,4 @@
 # Summary
 
-* [Introduction](README.md)
+* [Introducción](README.md)
 * [Primeros pasos](primeros_pasos.md)
-
-
