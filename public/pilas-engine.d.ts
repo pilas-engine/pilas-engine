@@ -163,6 +163,14 @@ declare class ActorBase {
         x: number;
         y: number;
         imagen: string;
+        centro_x: number;
+        centro_y: number;
+        rotacion: number;
+        escala_x: number;
+        escala_y: number;
+        transparencia: number;
+        espejado: boolean;
+        espejado_vertical: boolean;
         figura: string;
         figura_dinamica: boolean;
         figura_ancho: number;
@@ -171,19 +179,9 @@ declare class ActorBase {
         figura_sin_rotacion: boolean;
         figura_rebote: number;
     };
-    propiedades: {
-        x: number;
-        y: number;
-        imagen: string;
-        figura: string;
-    };
+    propiedades: any;
     constructor(pilas: any);
-    readonly propiedades_iniciales: {
-        x: number;
-        y: number;
-        imagen: string;
-        figura: string;
-    };
+    readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;
     iniciar(): void;
     serializar(): {
@@ -196,6 +194,8 @@ declare class ActorBase {
         escala_x: number;
         escala_y: number;
         imagen: string;
+        espejado: boolean;
+        espejado_vertical: boolean;
         transparencia: number;
         id_color: string;
     };
@@ -214,7 +214,7 @@ declare class ActorBase {
     transparencia: number;
     toString(): string;
     fallar_si_no_tiene_figura(): void;
-    crear_figura_rectangular(ancho?: number, alto?: number): void;
+    crear_figura_rectangular(ancho?: number, alto?: number, escala_x?: number, escala_y?: number): void;
     crear_figura_circular(radio?: number): void;
     ancho: number;
     alto: number;
@@ -233,6 +233,7 @@ declare class ActorBase {
     reproducir_animacion(nombre: any): void;
 }
 declare class Actor extends ActorBase {
+    propiedades: {};
     iniciar(): void;
     actualizar(): void;
 }
@@ -245,6 +246,9 @@ declare class Caja extends Actor {
         y: number;
         imagen: string;
         figura: string;
+        figura_ancho: number;
+        figura_alto: number;
+        figura_rebote: number;
     };
     iniciar(): void;
 }
@@ -273,7 +277,10 @@ declare class Nave extends Actor {
     actualizar(): void;
 }
 declare class Pelota extends Actor {
-    figura: string;
+    propiedades: {
+        figura: string;
+        figura_radio: number;
+    };
     iniciar(): void;
 }
 declare class EscenaBase {

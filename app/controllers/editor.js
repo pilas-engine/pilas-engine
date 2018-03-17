@@ -166,7 +166,15 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               tipo: "Pelota",
               imagen: "pelota",
               transparencia: 0,
-              figura: "circulo"
+              espejado: false,
+              espejado_vertical: false,
+              figura: "circulo",
+              figura_dinamica: true,
+              figura_ancho: 100,
+              figura_alto: 100,
+              figura_radio: 40,
+              figura_sin_rotacion: false,
+              figura_rebote: 1
             },
             {
               id: 3,
@@ -179,7 +187,16 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_y: 1,
               tipo: "Caja",
               imagen: "caja",
-              transparencia: 0
+              transparencia: 0,
+              espejado: false,
+              espejado_vertical: false,
+              figura: "",
+              figura_dinamica: true,
+              figura_ancho: 100,
+              figura_alto: 100,
+              figura_radio: 40,
+              figura_sin_rotacion: false,
+              figura_rebote: 1
             },
             {
               id: 4,
@@ -193,7 +210,15 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               tipo: "Actor",
               imagen: "sin_imagen",
               transparencia: 0,
-              figura: "rectangulo"
+              espejado: false,
+              espejado_vertical: false,
+              figura: "rectangulo",
+              figura_dinamica: true,
+              figura_ancho: 100,
+              figura_alto: 100,
+              figura_radio: 40,
+              figura_sin_rotacion: false,
+              figura_rebote: 0.9
             },
             {
               id: 5,
@@ -206,7 +231,16 @@ export default Ember.Controller.extend(queryParams.Mixin, {
               escala_y: 1,
               tipo: "Aceituna",
               imagen: "aceituna",
-              transparencia: 0
+              transparencia: 0,
+              espejado: false,
+              espejado_vertical: false,
+              figura: "",
+              figura_dinamica: true,
+              figura_ancho: 100,
+              figura_alto: 100,
+              figura_radio: 40,
+              figura_sin_rotacion: false,
+              figura_rebote: 1
             }
           ]
         },

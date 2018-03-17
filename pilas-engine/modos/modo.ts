@@ -25,6 +25,9 @@ class Modo extends Phaser.Scene {
     sprite.scaleY = actor.escala_y;
     sprite.setOrigin(actor.centro_x, actor.centro_y);
     sprite.alpha = 1 - actor.transparencia / 100;
+
+    sprite.setFlipX(actor.espejado);
+    sprite.setFlipY(actor.espejado_vertical);
   }
 
   posicionar_la_camara(datos_de_la_escena) {

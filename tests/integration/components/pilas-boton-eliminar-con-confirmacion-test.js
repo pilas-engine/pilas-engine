@@ -12,5 +12,5 @@ test("it renders", function(assert) {
   assert.ok(this.$().text());
 
   this.$("#boton-eliminar-escena").click();
-  assert.equal(this.$("#titulo").text(), "¿Realmente quieres eliminar la escena?");
+  assert.equal(this.$("#titulo").text(), "Cuidado");
 });

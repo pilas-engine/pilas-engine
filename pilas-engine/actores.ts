@@ -23,7 +23,7 @@ class Actores {
   }
 
   Aceituna(x: number = 0, y: number = 0) {
-    return new Aceituna(this.pilas, x, y);
+    return this.crear_actor("Aceituna");
   }
 
   Conejo() {

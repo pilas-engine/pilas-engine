@@ -1,9 +1,9 @@
 import Component from "@ember/component";
 import Ember from "ember";
 import estados from "../estados/estados-de-pilas-editor";
-import aplicarNombre from "../utils/aplicar-nombre";
-import obtenerNombreSinRepetir from "../utils/obtener-nombre-sin-repetir";
-import obtenerPlantillaDeEscena from "../utils/obtener-plantilla-de-escena";
+import aplicar_nombre from "../utils/aplicar-nombre";
+import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
+import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
 
 export default Component.extend({
   bus: Ember.inject.service(),
@@ -70,12 +70,12 @@ export default Component.extend({
 
   finaliza_carga() {
     this.set("cargando", false);
-    this.mostrarEscenaActualSobrePilas();
+    this.mostrar_la_escena_actual_sobre_pilas();
     this.set("estado", this.get("estado").cuandoTerminoDeCargarPilas());
   },
 
   termina_de_mover_un_actor(datos) {
-    let escena = this.obtenerEscenaActual();
+    let escena = this.obtener_la_escena_actual();
     let actor = escena.actores.findBy("id", datos.id);
 
     actor.set("x", datos.x);
@@ -107,37 +107,41 @@ export default Component.extend({
     this.set("posicion", datos.posicion);
   },
 
-  mostrarEscenaActualSobrePilas() {
-    let escena = this.obtenerEscenaActual();
+  mostrar_la_escena_actual_sobre_pilas() {
+    let escena = this.obtener_la_escena_actual();
 
     if (!escena) {
       this.set("ultimaEscenaSeleccionada", 1);
-      escena = this.obtenerEscenaActual();
+      escena = this.obtener_la_escena_actual();
     }
 
     let escenaComoJSON = JSON.parse(JSON.stringify(escena));
     this.get("bus").trigger("cargar_escena", { escena: escenaComoJSON });
   },
 
-  obtenerEscenaActual() {
+  obtener_la_escena_actual() {
     let indice = this.get("ultimaEscenaSeleccionada");
     return this.get("proyecto.escenas").findBy("id", indice);
   },
 
   eliminar_escena_actual() {
-    let escenaActual = this.obtenerEscenaActual();
+    let escenaActual = this.obtener_la_escena_actual();
     let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
     this.set("proyecto.escenas", escenasSinLaEscenaActual);
 
-    if (this.elProyectoNoTieneEscenas()) {
+    if (this.el_proyecto_no_tiene_escena()) {
       this.send("agregarEscena", this.get("proyecto"));
     } else {
       this.seleccionar_primer_escena_del_proyecto();
     }
   },
 
+  el_proyecto_no_tiene_escena() {
+    return this.get('cantidadDeEscenas') === 0;
+  },
+
   eliminar_actor(id) {
-    let escenaActual = this.obtenerEscenaActual();
+    let escenaActual = this.obtener_la_escena_actual();
     let actor = escenaActual.actores.findBy("id", id);
     this.get("bus").trigger("eliminar_actor_desde_el_editor", { id: actor.id });
     escenaActual.actores.removeObject(actor);
@@ -158,13 +162,9 @@ export default Component.extend({
     this.send("cuandoSelecciona", actor.id);
   },
 
-  elProyectoNoTieneEscenas() {
-    return this.get("cantidadDeEscenas") === 0;
-  },
-
   seleccionar_primer_escena_del_proyecto() {
-    let primerEscena = this.get("proyecto.escenas")[0];
-    this.send("cuandoSelecciona", primerEscena.get("id"));
+    let primer_escena = this.get("proyecto.escenas")[0];
+    this.send("cuandoSelecciona", primer_escena.get("id"));
   },
 
   registrar_codigo_de_actor(tipo, codigo) {
@@ -173,7 +173,7 @@ export default Component.extend({
     proyecto.codigos.actores.pushObject(
       Ember.Object.create({
         tipo: tipo,
-        codigo: aplicarNombre(tipo, codigo)
+        codigo: aplicar_nombre(tipo, codigo)
       })
     );
   },
@@ -184,12 +184,12 @@ export default Component.extend({
     proyecto.codigos.escenas.pushObject(
       Ember.Object.create({
         nombre: nombre,
-        codigo: aplicarNombre(nombre, codigo)
+        codigo: aplicar_nombre(nombre, codigo)
       })
     );
   },
 
-  generarID() {
+  generar_id() {
     return Math.floor(Math.random() * 999) + 1000;
   },
 
@@ -198,7 +198,7 @@ export default Component.extend({
   },
 
   obtenerDetalleDeActorPorIndice(indice) {
-    let escena = this.obtenerEscenaActual();
+    let escena = this.obtener_la_escena_actual();
 
     if (escena) {
       let actor = escena.get("actores").findBy("id", indice);
@@ -258,8 +258,8 @@ export default Component.extend({
   actions: {
     agregarEscena(model) {
       let nombres_de_escenas = this.obtener_nombres_de_escenas(model);
-      let nombre = obtenerNombreSinRepetir(nombres_de_escenas, "Escena");
-      let id = this.generarID();
+      let nombre = obtener_nombre_sin_repetir(nombres_de_escenas, "Escena");
+      let id = this.generar_id();
 
       model.escenas.pushObject(
         Ember.Object.create({
@@ -271,33 +271,26 @@ export default Component.extend({
         })
       );
 
-      let plantilla = obtenerPlantillaDeEscena();
+      let plantilla = obtener_plantilla_de_escena();
 
       this.registrar_codigo_de_escena(nombre, plantilla);
       this.send("cuandoSelecciona", id);
 
-      this.mostrarEscenaActualSobrePilas();
+      this.mostrar_la_escena_actual_sobre_pilas();
     },
-    agregarActor(proyecto, actor) {
-      let escena = this.obtenerEscenaActual();
+
+    agregar_actor(proyecto, actor) {
+      let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
-      let id = this.generarID();
-      let nombre = obtenerNombreSinRepetir(nombres, actor.tipo);
+      let id = this.generar_id();
+      let nombre = obtener_nombre_sin_repetir(nombres, actor.tipo);
+
+      actor.propiedades.id = id;
+      actor.propiedades.imagen = actor.imagen;
+      actor.propiedades.tipo = actor.tipo;
 
       escena.actores.pushObject(
-        Ember.Object.create({
-          id: id,
-          x: 0,
-          y: 0,
-          centro_x: 0.5,
-          centro_y: 0.5,
-          rotacion: 0,
-          escala_x: 1,
-          escala_y: 1,
-          transparencia: 0,
-          tipo: nombre,
-          imagen: actor.imagen
-        })
+        Ember.Object.create(actor.propiedades)
       );
 
       this.registrar_codigo_de_actor(nombre, actor.codigo);
@@ -305,19 +298,22 @@ export default Component.extend({
       this.send("cuandoSelecciona", id);
       this.set("mostrarModalCreacionDeActor", false);
 
-      this.mostrarEscenaActualSobrePilas();
+      this.mostrar_la_escena_actual_sobre_pilas();
     },
+
     cuando_termino_de_cargar_monaco_editor() {},
+
     cuando_cambia_el_codigo(codigo) {
       this.set("codigo", codigo);
       this.guardar_codigo_en_el_proyecto(this.get("seleccion"), codigo);
     },
+
     ejecutar() {
       this.get("bus").trigger("quitar_pausa", {});
       this.set("existe_un_error_reciente", false);
       this.set("estado", this.get("estado").ejecutar());
 
-      let escena = this.obtenerEscenaActual();
+      let escena = this.obtener_la_escena_actual();
 
       let resultado = this.get("compilador").compilar_proyecto(this.get("proyecto"));
 
@@ -337,7 +333,7 @@ export default Component.extend({
     detener() {
       this.get("bus").trigger("quitar_pausa_de_phaser", {});
       this.set("existe_un_error_reciente", false);
-      this.mostrarEscenaActualSobrePilas();
+      this.mostrar_la_escena_actual_sobre_pilas();
       this.set("estado", this.get("estado").detener());
       this.get("bus").trigger("hacerFocoEnElEditor", {});
       this.get("log").limpiar();
@@ -387,7 +383,7 @@ export default Component.extend({
         this.set("instancia_seleccionada", escena);
         this.set("tipo_de_la_instancia_seleccionada", "escena");
         this.set("ultimaEscenaSeleccionada", seleccion);
-        this.mostrarEscenaActualSobrePilas();
+        this.mostrar_la_escena_actual_sobre_pilas();
 
         this.set("codigo", this.obtener_codigo_para_la_escena(escena));
         this.set("tituloDelCodigo", `Código de la escena: ${seleccion}`);
@@ -409,7 +405,7 @@ export default Component.extend({
         escena: escena
       });
     },
-    cuandoIntentaEliminar(id) {
+    cuando_intenta_eliminar(id) {
       let actor = this.obtenerDetalleDeActorPorIndice(id);
 
       if (actor) {

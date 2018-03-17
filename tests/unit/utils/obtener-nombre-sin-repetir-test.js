@@ -1,12 +1,12 @@
-import obtenerNombreSinRepetir from "pilas-engine/utils/obtener-nombre-sin-repetir";
+import obtener_nombre_sin_repetir from "pilas-engine/utils/obtener-nombre-sin-repetir";
 import { module, test } from "qunit";
 
 module("Unit | Utility | obtener nombre sin repetir");
 
 test("it works", function(assert) {
-  let result = obtenerNombreSinRepetir(["Actor"], "Demo");
+  let result = obtener_nombre_sin_repetir(["Actor"], "Demo");
   assert.equal(result, "Demo");
 
-  result = obtenerNombreSinRepetir(["Actor"], "Actor");
+  result = obtener_nombre_sin_repetir(["Actor"], "Actor");
   assert.equal(result, "Actor1");
 });

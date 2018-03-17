@@ -52,6 +52,8 @@ class ModoPausa extends Modo {
     sprite.scaleX = entidad.escala_x;
     sprite.scaleY = entidad.escala_y;
     sprite.alpha = 1 - entidad.transparencia / 100;
+    sprite.setFlipX(entidad.espejado);
+    sprite.setFlipY(entidad.espejado_vertical);
 
     return sprite;
   }

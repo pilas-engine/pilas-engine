@@ -10,6 +10,17 @@ class ActorBase {
     x: 0,
     y: 0,
     imagen: "sin_imagen",
+
+    centro_x: 0.5,
+    centro_y: 0.5,
+    rotacion: 0,
+    escala_x: 1,
+    escala_y: 1,
+    transparencia: 0,
+
+    espejado: false,
+    espejado_vertical: false,
+
     figura: "",
     figura_dinamica: true,
     figura_ancho: 100,
@@ -19,7 +30,7 @@ class ActorBase {
     figura_rebote: 1
   };
 
-  propiedades = {
+  propiedades: any = {
     x: 0,
     y: 0,
     imagen: "sin_imagen",
@@ -42,7 +53,8 @@ class ActorBase {
       case "rectangulo":
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
         this.figura = figura;
-        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
+        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.escala_x, propiedades.escala_y);
+
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
         this.rebote = propiedades.figura_rebote;
@@ -52,11 +64,13 @@ class ActorBase {
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
         this.figura = figura;
         this.crear_figura_circular(propiedades.figura_radio);
+
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
         this.rebote = propiedades.figura_rebote;
         break;
 
+      case "ninguna":
       case "":
         this.figura = figura;
         this.sprite = this.pilas.modo.add.sprite(0, 0, imagen);
@@ -67,9 +81,10 @@ class ActorBase {
     }
 
     this.rotacion = propiedades.rotacion || 0;
+    this.id_color = this.generar_color_para_depurar();
+
     this.escala_x = propiedades.escala_x || 1;
     this.escala_y = propiedades.escala_y || 1;
-    this.id_color = this.generar_color_para_depurar();
 
     this.tipo = propiedades.tipo;
     this.centro_x = propiedades.centro_x || 0.5;
@@ -77,8 +92,11 @@ class ActorBase {
     this.transparencia = propiedades.transparencia || 0;
     this.x = propiedades.x || 0;
     this.y = propiedades.y || 0;
+    this.espejado = propiedades.espejado;
+    this.espejado_vertical = propiedades.espejado_vertical;
 
     this.sprite["actor"] = this;
+
     /*
     try {
       this.iniciar();
@@ -111,6 +129,8 @@ class ActorBase {
       escala_x: this.escala_x,
       escala_y: this.escala_y,
       imagen: this.imagen,
+      espejado: this.espejado,
+      espejado_vertical: this.espejado_vertical,
       transparencia: this.transparencia,
       id_color: this.id_color
     };
@@ -187,12 +207,6 @@ class ActorBase {
   }
 
   get escala() {
-    /*
-    if (this.escala_x != this.escala_y) {
-      console.warning("La escala x e y difieren, se asume que la escala_x es la más importante.");
-    }
-    */
-
     return this.escala_x;
   }
 
@@ -263,22 +277,23 @@ class ActorBase {
     }
   }
 
-  crear_figura_rectangular(ancho: number = 0, alto: number = 0) {
+  crear_figura_rectangular(ancho: number = 0, alto: number = 0, escala_x: number = 0, escala_y: number = 0) {
     this.fallar_si_no_tiene_figura();
 
     this.pilas.utilidades.validar_numero(ancho);
     this.pilas.utilidades.validar_numero(alto);
 
-    console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
-
-    if (ancho && alto) {
-      this.sprite.setRectangle(ancho, alto);
-    } else {
-      this.sprite.setRectangle(this.ancho, this.alto);
+    if (!escala_x) {
+      escala_x = this.escala_x;
     }
 
-    this.sprite.setBounce(0);
-    this.sprite.angle = -this.rotacion;
+    if (!escala_y) {
+      escala_y = this.escala_y;
+    }
+
+    // FIX: no tengo claro porqué debo dividir por escala_x aquí, salió por prueba
+    //      y error, no le veo mucho sentido, pero funciona así :|
+    this.sprite.setRectangle(ancho * escala_x, alto * escala_y);
   }
 
   crear_figura_circular(radio: number = 0) {
@@ -291,9 +306,6 @@ class ActorBase {
     } else {
       this.sprite.setCircle();
     }
-
-    this.sprite.setBounce(1);
-    this.sprite.angle = -this.rotacion;
   }
 
   get ancho() {

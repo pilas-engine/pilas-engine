@@ -1,5 +1,9 @@
 class Pelota extends Actor {
-  figura = "circlo";
+  propiedades = {
+    figura: "circulo",
+    figura_radio: 25,
+  };
+
 
   iniciar() {
     //this.crear_figura_circular(20, false);

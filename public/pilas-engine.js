@@ -26,7 +26,7 @@ var Actores = (function () {
     Actores.prototype.Aceituna = function (x, y) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
-        return new Aceituna(this.pilas, x, y);
+        return this.crear_actor("Aceituna");
     };
     Actores.prototype.Conejo = function () {
         return this.crear_actor("Conejo");
@@ -455,6 +455,14 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             imagen: "sin_imagen",
+            centro_x: 0.5,
+            centro_y: 0.5,
+            rotacion: 0,
+            escala_x: 1,
+            escala_y: 1,
+            transparencia: 0,
+            espejado: false,
+            espejado_vertical: false,
             figura: "",
             figura_dinamica: true,
             figura_ancho: 100,
@@ -486,7 +494,7 @@ var ActorBase = (function () {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
                 this.figura = figura;
-                this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
+                this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.escala_x, propiedades.escala_y);
                 this.dinamico = propiedades.figura_dinamica;
                 this.sin_rotacion = propiedades.figura_sin_rotacion;
                 this.rebote = propiedades.figura_rebote;
@@ -499,6 +507,7 @@ var ActorBase = (function () {
                 this.sin_rotacion = propiedades.figura_sin_rotacion;
                 this.rebote = propiedades.figura_rebote;
                 break;
+            case "ninguna":
             case "":
                 this.figura = figura;
                 this.sprite = this.pilas.modo.add.sprite(0, 0, imagen);
@@ -507,15 +516,17 @@ var ActorBase = (function () {
                 throw Error("No se conoce el tipo de figura " + figura);
         }
         this.rotacion = propiedades.rotacion || 0;
+        this.id_color = this.generar_color_para_depurar();
         this.escala_x = propiedades.escala_x || 1;
         this.escala_y = propiedades.escala_y || 1;
-        this.id_color = this.generar_color_para_depurar();
         this.tipo = propiedades.tipo;
         this.centro_x = propiedades.centro_x || 0.5;
         this.centro_y = propiedades.centro_y || 0.5;
         this.transparencia = propiedades.transparencia || 0;
         this.x = propiedades.x || 0;
         this.y = propiedades.y || 0;
+        this.espejado = propiedades.espejado;
+        this.espejado_vertical = propiedades.espejado_vertical;
         this.sprite["actor"] = this;
         this.sprite.update = function () {
             try {
@@ -539,6 +550,8 @@ var ActorBase = (function () {
             escala_x: this.escala_x,
             escala_y: this.escala_y,
             imagen: this.imagen,
+            espejado: this.espejado,
+            espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
             id_color: this.id_color
         };
@@ -695,21 +708,21 @@ var ActorBase = (function () {
             throw Error("Este actor no tiene figura f\u00EDsica, no se puede llamar a este m\u00E9todo");
         }
     };
-    ActorBase.prototype.crear_figura_rectangular = function (ancho, alto) {
+    ActorBase.prototype.crear_figura_rectangular = function (ancho, alto, escala_x, escala_y) {
         if (ancho === void 0) { ancho = 0; }
         if (alto === void 0) { alto = 0; }
+        if (escala_x === void 0) { escala_x = 0; }
+        if (escala_y === void 0) { escala_y = 0; }
         this.fallar_si_no_tiene_figura();
         this.pilas.utilidades.validar_numero(ancho);
         this.pilas.utilidades.validar_numero(alto);
-        console.warn("TODO: tengo que leer la variable estatico y definirla en el cuerpo matter");
-        if (ancho && alto) {
-            this.sprite.setRectangle(ancho, alto);
+        if (!escala_x) {
+            escala_x = this.escala_x;
         }
-        else {
-            this.sprite.setRectangle(this.ancho, this.alto);
+        if (!escala_y) {
+            escala_y = this.escala_y;
         }
-        this.sprite.setBounce(0);
-        this.sprite.angle = -this.rotacion;
+        this.sprite.setRectangle(ancho * escala_x, alto * escala_y);
     };
     ActorBase.prototype.crear_figura_circular = function (radio) {
         if (radio === void 0) { radio = 0; }
@@ -721,8 +734,6 @@ var ActorBase = (function () {
         else {
             this.sprite.setCircle();
         }
-        this.sprite.setBounce(1);
-        this.sprite.angle = -this.rotacion;
     };
     Object.defineProperty(ActorBase.prototype, "ancho", {
         get: function () {
@@ -865,7 +876,9 @@ var ActorBase = (function () {
 var Actor = (function (_super) {
     __extends(Actor, _super);
     function Actor() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {};
+        return _this;
     }
     Actor.prototype.iniciar = function () { };
     Actor.prototype.actualizar = function () { };
@@ -889,7 +902,10 @@ var Caja = (function (_super) {
             x: 0,
             y: 0,
             imagen: "caja",
-            figura: "rectangulo"
+            figura: "rectangulo",
+            figura_ancho: 45,
+            figura_alto: 45,
+            figura_rebote: 0.9,
         };
         return _this;
     }
@@ -972,7 +988,10 @@ var Pelota = (function (_super) {
     __extends(Pelota, _super);
     function Pelota() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.figura = "circlo";
+        _this.propiedades = {
+            figura: "circulo",
+            figura_radio: 25,
+        };
         return _this;
     }
     Pelota.prototype.iniciar = function () {
@@ -1064,6 +1083,8 @@ var Modo = (function (_super) {
         sprite.scaleY = actor.escala_y;
         sprite.setOrigin(actor.centro_x, actor.centro_y);
         sprite.alpha = 1 - actor.transparencia / 100;
+        sprite.setFlipX(actor.espejado);
+        sprite.setFlipY(actor.espejado_vertical);
     };
     Modo.prototype.posicionar_la_camara = function (datos_de_la_escena) {
         this.cameras.cameras[0].x = -datos_de_la_escena.camara_x;
@@ -1385,6 +1406,8 @@ var ModoPausa = (function (_super) {
         sprite.scaleX = entidad.escala_x;
         sprite.scaleY = entidad.escala_y;
         sprite.alpha = 1 - entidad.transparencia / 100;
+        sprite.setFlipX(entidad.espejado);
+        sprite.setFlipY(entidad.espejado_vertical);
         return sprite;
     };
     ModoPausa.prototype.actualizar_posicion = function (posicion) {
