@@ -1,6 +1,6 @@
-import EmberObject from '@ember/object';
-import { alias } from '@ember/object/computed';
-import { inject as service } from '@ember/service';
+import EmberObject from "@ember/object";
+import { alias } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import estados from "../estados/estados-de-pilas-editor";
 import aplicar_nombre from "../utils/aplicar-nombre";
@@ -25,9 +25,10 @@ export default Component.extend({
   historiaMaximo: 10,
   cantidadDeEscenas: alias("proyecto.escenas.length"),
 
-  lista_de_eventos: ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa"],
+  lista_de_eventos: null,
 
   didInsertElement() {
+    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa"]);
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
@@ -139,7 +140,7 @@ export default Component.extend({
   },
 
   el_proyecto_no_tiene_escena() {
-    return this.get('cantidadDeEscenas') === 0;
+    return this.get("cantidadDeEscenas") === 0;
   },
 
   eliminar_actor(id) {
@@ -291,9 +292,7 @@ export default Component.extend({
       actor.propiedades.imagen = actor.imagen;
       actor.propiedades.tipo = actor.tipo;
 
-      escena.actores.pushObject(
-        EmberObject.create(actor.propiedades)
-      );
+      escena.actores.pushObject(EmberObject.create(actor.propiedades));
 
       this.registrar_codigo_de_actor(nombre, actor.codigo);
 

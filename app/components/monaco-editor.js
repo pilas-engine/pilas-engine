@@ -51,8 +51,8 @@ export default Component.extend({
       }
 
       if (event.source === this.get("frame") && event.data && event.data.updatedCode) {
-        if (this.attrs.onChange) {
-          this.attrs.onChange(event.data.updatedCode);
+        if (this.get("onChange")) {
+          this.get("onChange")(event.data.updatedCode);
         }
       }
 

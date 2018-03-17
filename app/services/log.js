@@ -2,10 +2,12 @@ import Service, { inject as service } from "@ember/service";
 
 export default Service.extend({
   bus: service(),
-  items: [],
+  items: null,
   iniciado: false,
 
   iniciar() {
+    this.set("items", []);
+
     if (this.get("iniciado")) {
       return;
     }

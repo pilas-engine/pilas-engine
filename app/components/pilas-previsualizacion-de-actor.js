@@ -1,41 +1,42 @@
-import { inject as service } from '@ember/service';
+import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import { task, timeout } from "ember-concurrency";
 
 export default Component.extend({
   bus: service(),
   compilador: service(),
-  proyecto: {
-    titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",
-    ancho: 200,
-    alto: 200,
-    codigos: {
-      escenas: [
-        {
-          nombre: "principal",
-          codigo: `class principal extends Escena {
-            iniciar() {
-            }
-          }`
-        }
-      ],
-      actores: []
-    },
-    escenas: [
-      {
-        nombre: "principal",
-        camara_x: 0,
-        camara_y: 0,
-        id: 1,
-        actores: []
-      }
-    ]
-  },
+  proyecto: null,
   actor: null,
   primer_carga: true,
   mantener_foco: true,
 
   didInsertElement() {
+    this.set("proyecto", {
+      titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",
+      ancho: 400,
+      alto: 200,
+      codigos: {
+        escenas: [
+          {
+            nombre: "principal",
+            codigo: `class principal extends Escena {
+              iniciar() {
+              }
+            }`
+          }
+        ],
+        actores: []
+      },
+      escenas: [
+        {
+          nombre: "principal",
+          camara_x: 0,
+          camara_y: 0,
+          id: 1,
+          actores: []
+        }
+      ]
+    });
     this.get("bus").on("finaliza_carga", this, "finaliza_carga");
     this.get("bus").on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
 

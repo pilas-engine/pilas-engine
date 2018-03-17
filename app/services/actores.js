@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $ from "jquery";
 import Service from "@ember/service";
 import config from "pilas-engine/config/environment";
 import { task, timeout } from "ember-concurrency";
@@ -6,7 +6,7 @@ import { task, timeout } from "ember-concurrency";
 export default Service.extend({
   iniciado: false,
   data: null,
-  lista_de_actores: [1],
+  lista_de_actores: null,
 
   tareaConseguirActores: task(function*() {
     yield timeout(500);
@@ -32,7 +32,6 @@ export default Service.extend({
 
       actor.codigo = codigo;
 
-
       let propiedades = this.extraer_diccionario("propiedades", codigo);
       actor.propiedades = this.combinar_propiedades(propiedades_base, propiedades);
     }
@@ -44,12 +43,12 @@ export default Service.extend({
 
   extraer_diccionario(diccionario, codigo) {
     let regex = new RegExp(`${diccionario}\\s+=\\s+(\\{[\\s\\S]*?\\})`, "g");
-    let resultado = regex.exec(codigo)
+    let resultado = regex.exec(codigo);
 
     let propiedades = {};
 
     if (resultado && resultado.length > 1) {
-      propiedades = eval("(" + resultado[1] + ")")
+      propiedades = eval("(" + resultado[1] + ")");
     }
 
     return propiedades;
@@ -65,7 +64,6 @@ export default Service.extend({
 
     return extend(JSON.parse(JSON.stringify(propiedades_iniciales)), propiedades);
   },
-
 
   iniciar() {
     return this.get("tareaConseguirActores").perform();

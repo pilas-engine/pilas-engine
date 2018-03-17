@@ -1,17 +1,18 @@
-import { inject as service } from '@ember/service';
+import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import autocompletar from "pilas-engine/utils/autocompletar";
 
 export default Component.extend({
   valor: "",
   log: service(),
-  historial: [],
+  historial: null,
   posicion_en_el_historial: 0,
   bus: service(),
   pilas: null,
   contexto: null,
 
   didInsertElement() {
+    this.set("historial", []);
     new autoComplete({
       selector: this.$("#input")[0],
       minChars: 1,

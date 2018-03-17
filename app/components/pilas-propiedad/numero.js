@@ -1,5 +1,5 @@
-import { later } from '@ember/runloop';
-import $ from 'jquery';
+import { later } from "@ember/runloop";
+import $ from "jquery";
 import Component from "@ember/component";
 
 export default Component.extend({
@@ -12,28 +12,36 @@ export default Component.extend({
     var initialX = 0;
 
     element.on("mousedown", mouse_down_event => {
-      initialX = mouse_down_event.pageX;
-      this.set("original_value", this.get("value"));
+      later(() => {
+        initialX = mouse_down_event.pageX;
+        this.set("original_value", this.get("value"));
 
-      $("html").on("mousemove", event => {
-        var intensidad = this.get("intensidad");
+        $("html").on("mousemove", event => {
+          later(() => {
+            var intensidad = this.get("intensidad");
 
-        var mouse_dx = (event.pageX - initialX) * intensidad;
+            var mouse_dx = (event.pageX - initialX) * intensidad;
 
-        this.modificar(mouse_dx);
-        initialX = event.pageX;
+            this.modificar(mouse_dx);
+            initialX = event.pageX;
 
-        return false;
-      });
+            return false;
+          });
+        });
 
-      $("html").on("mouseup", () => {
-        this.disconnectEvents();
-        return false;
-      });
+        $("html").on("mouseup", () => {
+          later(() => {
+            this.disconnectEvents();
+            return false;
+          });
+        });
 
-      $("html").on("mouseleave", () => {
-        this.disconnectEvents();
-        return false;
+        $("html").on("mouseleave", () => {
+          later(() => {
+            this.disconnectEvents();
+            return false;
+          });
+        });
       });
     });
   },

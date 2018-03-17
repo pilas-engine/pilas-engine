@@ -1,5 +1,5 @@
-import { later } from '@ember/runloop';
-import { inject as service } from '@ember/service';
+import { later } from "@ember/runloop";
+import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 
 export default Component.extend({
@@ -7,37 +7,38 @@ export default Component.extend({
   bus: service(),
   compilador: service(),
   espera: 2,
-  proyecto: {
-    titulo: "Proyecto para pilas-test",
-    ancho: 500,
-    alto: 500,
-    codigos: {
-      escenas: [
-        {
-          nombre: "principal",
-          codigo: `class principal extends Escena {
+  proyecto: null,
+
+  didInsertElement() {
+    this.set("proyecto", {
+      titulo: "Proyecto para pilas-test",
+      ancho: 500,
+      alto: 500,
+      codigos: {
+        escenas: [
+          {
+            nombre: "principal",
+            codigo: `class principal extends Escena {
           iniciar() {
           }
 
           actualizar() {
           }
         }`
-        }
-      ],
-      actores: []
-    },
-    escenas: [
-      {
-        nombre: "principal",
-        id: 1,
-        camara_x: 0,
-        camara_y: 0,
+          }
+        ],
         actores: []
-      }
-    ]
-  },
-
-  didInsertElement() {
+      },
+      escenas: [
+        {
+          nombre: "principal",
+          id: 1,
+          camara_x: 0,
+          camara_y: 0,
+          actores: []
+        }
+      ]
+    });
     this.get("bus").on("finaliza_carga", this, "finaliza_carga");
     this.get("bus").on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },

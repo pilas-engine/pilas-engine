@@ -1,5 +1,5 @@
-import { inject as service } from '@ember/service';
-import Controller from '@ember/controller';
+import { inject as service } from "@ember/service";
+import Controller from "@ember/controller";
 
 const NOMBRE_DE_LA_ESCENA = "demo";
 
@@ -7,15 +7,18 @@ export default Controller.extend({
   bus: service(),
   compilador: service(),
 
-  proyecto: {
-    titulo: "Proyecto demo",
-    ancho: 640,
-    alto: 480,
-    codigos: {
-      escenas: [
-        {
-          nombre: NOMBRE_DE_LA_ESCENA,
-          codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
+  proyecto: null,
+
+  iniciar() {
+    this.set("proyecto", {
+      titulo: "Proyecto demo",
+      ancho: 640,
+      alto: 480,
+      codigos: {
+        escenas: [
+          {
+            nombre: NOMBRE_DE_LA_ESCENA,
+            codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
                 pilas.actores.Conejo();
               }
@@ -23,12 +26,12 @@ export default Controller.extend({
               actualizar() {
               }
             }`
-        }
-      ],
-      actores: [
-        {
-          tipo: "Pelota",
-          codigo: `class Pelota  extends ActorBase {
+          }
+        ],
+        actores: [
+          {
+            tipo: "Pelota",
+            codigo: `class Pelota  extends ActorBase {
             propiedades = {
               figura: 'rectangulo',
               transparencia: 50
@@ -40,36 +43,38 @@ export default Controller.extend({
             actualizar() {
             }
           }`
-        }
-      ]
-    },
-    escenas: [
-      {
-        nombre: NOMBRE_DE_LA_ESCENA,
-        id: 1,
-        camara_x: 0,
-        camara_y: 0,
-        actores: [
-          {
-            id: 3,
-            x: 100,
-            y: -200,
-            centro_x: 0.5,
-            centro_y: 0.5,
-            rotacion: 45,
-            escala_x: 1,
-            escala_y: 1,
-            tipo: "Pelota",
-            imagen: "pelota",
-            transparencia: 0,
-            figura: "circulo",
-            figura_radio: 25,
-            figura_dinamica: true
           }
         ]
-      }
-    ]
+      },
+      escenas: [
+        {
+          nombre: NOMBRE_DE_LA_ESCENA,
+          id: 1,
+          camara_x: 0,
+          camara_y: 0,
+          actores: [
+            {
+              id: 3,
+              x: 100,
+              y: -200,
+              centro_x: 0.5,
+              centro_y: 0.5,
+              rotacion: 45,
+              escala_x: 1,
+              escala_y: 1,
+              tipo: "Pelota",
+              imagen: "pelota",
+              transparencia: 0,
+              figura: "circulo",
+              figura_radio: 25,
+              figura_dinamica: true
+            }
+          ]
+        }
+      ]
+    });
   },
+
   actions: {
     cuando_termina_de_cargar() {
       let resultado = this.get("compilador").compilar_proyecto(this.get("proyecto"));

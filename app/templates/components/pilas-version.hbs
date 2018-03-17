@@ -8,10 +8,16 @@
   {{#if consultando}}
     Consultando si existe una versión más reciente en el servidor ...
   {{else}}
-    {{#if actualizada}}
-      Tienes la versión más reciente.
+  
+    {{#if error}}
+      <span class='red'>{{error}}</span>
     {{else}}
-      <span class='red'>Existe una actualización disponible: <a href='https://github.com/pilas-engine/pilas-engine/releases' target="_blank">{{version_en_el_servidor}}</a></span>
+      {{#if actualizada}}
+        Tienes la versión más reciente.
+      {{else}}
+        <span class='red'>Existe una actualización disponible: <a href='https://github.com/pilas-engine/pilas-engine/releases' target="_blank">{{version_en_el_servidor}}</a></span>
+      {{/if}}
     {{/if}}
+
   {{/if}}
 </div>
