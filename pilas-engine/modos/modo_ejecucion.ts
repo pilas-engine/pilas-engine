@@ -154,7 +154,12 @@ class ModoEjecucion extends Modo {
       }
     }
 
-    this.pilas.escena.actualizar();
+    try {
+      this.pilas.escena.actualizar();
+    } catch (e) {
+      this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+    }
+
     this.pilas.escena.actualizar_actores();
   }
 

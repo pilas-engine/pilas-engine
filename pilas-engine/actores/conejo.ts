@@ -14,11 +14,37 @@ class Conejo extends Actor {
   };
 
   iniciar() {
-    this.crear_animacion("camina", ["camina1", "camina2"], 20);
-    this.reproducir_animacion("camina");
+    this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
+    this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
+    this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
+    this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
+
+    this.estado = "parado";
   }
 
-  actualizar() {
+  actualizar() {}
+
+  parado_iniciar() {
+    this.reproducir_animacion("conejo_parado");
+  }
+
+  parado_actualizar() {
+    if (this.pilas.control.izquierda || this.pilas.control.derecha) {
+      this.estado = "camina";
+    }
+
+    if (this.pilas.control.arriba) {
+      if (this.velocidad_y < 1 && this.velocidad_y > -1) {
+        this.estado = "salta";
+      }
+    }
+  }
+
+  camina_iniciar() {
+    this.reproducir_animacion("conejo_camina");
+  }
+
+  camina_actualizar() {
     if (this.pilas.control.izquierda) {
       this.x -= 5;
       this.espejado = true;
@@ -29,10 +55,29 @@ class Conejo extends Actor {
       this.espejado = false;
     }
 
+    if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {
+      this.estado = "parado";
+    }
+
     if (this.pilas.control.arriba) {
       if (this.velocidad_y < 1 && this.velocidad_y > -1) {
-        this.impulsar(0, 10);
+        this.estado = "salta";
       }
+    }
+  }
+
+  salta_iniciar() {
+    this.reproducir_animacion("conejo_salta");
+    this.impulsar(0, 10);
+  }
+
+  salta_actualizar() {
+    if (this.pilas.control.izquierda) {
+      this.x -= 5;
+    }
+
+    if (this.pilas.control.derecha) {
+      this.x += 5;
     }
   }
 }

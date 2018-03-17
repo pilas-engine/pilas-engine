@@ -54,6 +54,45 @@ var Animaciones = (function () {
     };
     return Animaciones;
 }());
+var Automata = (function () {
+    function Automata(actor) {
+        this.actor = actor;
+        this._estado = "";
+    }
+    Object.defineProperty(Automata.prototype, "estado", {
+        get: function () {
+            return this._estado;
+        },
+        set: function (nombre) {
+            this._estado = nombre;
+            this.validar_que_existen_los_metodos_de_estado(nombre);
+            this.iniciar_estado(nombre);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Automata.prototype.iniciar_estado = function (nombre) {
+        this.actor[nombre + "_iniciar"]();
+    };
+    Automata.prototype.actualizar = function () {
+        if (this._estado !== "") {
+            this.actor[this._estado + "_actualizar"]();
+        }
+    };
+    Automata.prototype.validar_que_existen_los_metodos_de_estado = function (nombre) {
+        var nombre_del_metodo_iniciar = nombre + "_iniciar";
+        var nombre_del_metodo_actualizar = nombre + "_actualizar";
+        if (!this.actor[nombre_del_metodo_iniciar]) {
+            console.log("no hay metodo iniciar");
+            throw new Error("Imposible usar el estado '" + nombre + "', porque no existe un m\u00E9todo llamado '" + nombre_del_metodo_iniciar + "'");
+        }
+        if (!this.actor[nombre_del_metodo_actualizar]) {
+            console.log("no hay metodo actualizar");
+            throw new Error("Imposible usar el estado '" + nombre + "', porque no existe un m\u00E9todo llamado '" + nombre_del_metodo_actualizar + "'");
+        }
+    };
+    return Automata;
+}());
 var Camara = (function () {
     function Camara(pilas) {
         this.pilas = pilas;
@@ -478,6 +517,7 @@ var ActorBase = (function () {
             figura: ""
         };
         this.pilas = pilas;
+        this.automata = new Automata(this);
     }
     Object.defineProperty(ActorBase.prototype, "propiedades_iniciales", {
         get: function () {
@@ -564,6 +604,20 @@ var ActorBase = (function () {
         if (this.figura && this.sin_rotacion) {
             this.sprite.setAngularVelocity(0);
         }
+        this.automata.actualizar();
+    };
+    Object.defineProperty(ActorBase.prototype, "estado", {
+        get: function () {
+            return this.automata.estado;
+        },
+        set: function (estado) {
+            return (this.automata.estado = estado);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ActorBase.prototype.crear_estado = function (nombre) {
+        this.automata.crear_estado(nombre);
     };
     ActorBase.prototype.actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "imagen", {
@@ -932,10 +986,30 @@ var Conejo = (function (_super) {
         return _this;
     }
     Conejo.prototype.iniciar = function () {
-        this.crear_animacion("camina", ["camina1", "camina2"], 20);
-        this.reproducir_animacion("camina");
+        this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
+        this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
+        this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
+        this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
+        this.estado = "parado";
     };
-    Conejo.prototype.actualizar = function () {
+    Conejo.prototype.actualizar = function () { };
+    Conejo.prototype.parado_iniciar = function () {
+        this.reproducir_animacion("conejo_parado");
+    };
+    Conejo.prototype.parado_actualizar = function () {
+        if (this.pilas.control.izquierda || this.pilas.control.derecha) {
+            this.estado = "camina";
+        }
+        if (this.pilas.control.arriba) {
+            if (this.velocidad_y < 1 && this.velocidad_y > -1) {
+                this.estado = "salta";
+            }
+        }
+    };
+    Conejo.prototype.camina_iniciar = function () {
+        this.reproducir_animacion("conejo_camina");
+    };
+    Conejo.prototype.camina_actualizar = function () {
         if (this.pilas.control.izquierda) {
             this.x -= 5;
             this.espejado = true;
@@ -944,10 +1018,25 @@ var Conejo = (function (_super) {
             this.x += 5;
             this.espejado = false;
         }
+        if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {
+            this.estado = "parado";
+        }
         if (this.pilas.control.arriba) {
             if (this.velocidad_y < 1 && this.velocidad_y > -1) {
-                this.impulsar(0, 10);
+                this.estado = "salta";
             }
+        }
+    };
+    Conejo.prototype.salta_iniciar = function () {
+        this.reproducir_animacion("conejo_salta");
+        this.impulsar(0, 10);
+    };
+    Conejo.prototype.salta_actualizar = function () {
+        if (this.pilas.control.izquierda) {
+            this.x -= 5;
+        }
+        if (this.pilas.control.derecha) {
+            this.x += 5;
         }
     };
     return Conejo;
@@ -1023,6 +1112,7 @@ var EscenaBase = (function () {
                 actor.actualizar();
             }
             catch (e) {
+                console.error(e);
                 _this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
             }
         });
@@ -1112,12 +1202,12 @@ var ModoCargador = (function (_super) {
         this.load.image("nave", "imagenes/nave.png");
         this.load.image("nave", "imagenes/nave.png");
         this.load.image("conejo", "imagenes/conejo.png");
-        this.load.image("muere", "imagenes/conejo/muere.png");
-        this.load.image("salta", "imagenes/conejo/salta.png");
-        this.load.image("parado1", "imagenes/conejo/parado1.png");
-        this.load.image("parado2", "imagenes/conejo/parado2.png");
-        this.load.image("camina1", "imagenes/conejo/camina1.png");
-        this.load.image("camina2", "imagenes/conejo/camina2.png");
+        this.load.image("conejo_muere", "imagenes/conejo/muere.png");
+        this.load.image("conejo_salta", "imagenes/conejo/salta.png");
+        this.load.image("conejo_parado1", "imagenes/conejo/parado1.png");
+        this.load.image("conejo_parado2", "imagenes/conejo/parado2.png");
+        this.load.image("conejo_camina1", "imagenes/conejo/camina1.png");
+        this.load.image("conejo_camina2", "imagenes/conejo/camina2.png");
         this.load.audio("laser", "sonidos/laser.wav", {});
         this.load.audio("moneda", "sonidos/moneda.wav", {});
         this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});
@@ -1364,7 +1454,12 @@ var ModoEjecucion = (function (_super) {
                 this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
             }
         }
-        this.pilas.escena.actualizar();
+        try {
+            this.pilas.escena.actualizar();
+        }
+        catch (e) {
+            this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+        }
         this.pilas.escena.actualizar_actores();
     };
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {

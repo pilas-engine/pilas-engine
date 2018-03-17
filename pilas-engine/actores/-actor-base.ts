@@ -5,6 +5,7 @@ class ActorBase {
   id_color: string;
   figura = "";
   sin_rotacion: false;
+  automata: Automata;
 
   propiedades_base = {
     x: 0,
@@ -39,6 +40,7 @@ class ActorBase {
 
   constructor(pilas) {
     this.pilas = pilas;
+    this.automata = new Automata(this);
   }
 
   get propiedades_iniciales() {
@@ -145,6 +147,20 @@ class ActorBase {
     if (this.figura && this.sin_rotacion) {
       this.sprite.setAngularVelocity(0);
     }
+
+    this.automata.actualizar();
+  }
+
+  get estado() {
+    return this.automata.estado;
+  }
+
+  set estado(estado) {
+    return (this.automata.estado = estado);
+  }
+
+  crear_estado(nombre) {
+    this.automata.crear_estado(nombre);
   }
 
   actualizar() {}

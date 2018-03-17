@@ -29,6 +29,7 @@ class EscenaBase {
         actor.pre_actualizar();
         actor.actualizar();
       } catch (e) {
+        console.error(e);
         this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
       }
     });

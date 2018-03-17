@@ -12,6 +12,15 @@ declare class Animaciones {
     constructor(pilas: any);
     crear_o_sustituir(nombre: any, cuadros: any, velocidad: any): void;
 }
+declare class Automata {
+    actor: Actor;
+    _estado: string;
+    constructor(actor: any);
+    estado: string;
+    iniciar_estado(nombre: any): void;
+    actualizar(): void;
+    validar_que_existen_los_metodos_de_estado(nombre: any): void;
+}
 declare class Camara {
     pilas: Pilas;
     constructor(pilas: Pilas);
@@ -159,6 +168,7 @@ declare class ActorBase {
     id_color: string;
     figura: string;
     sin_rotacion: false;
+    automata: Automata;
     propiedades_base: {
         x: number;
         y: number;
@@ -201,6 +211,8 @@ declare class ActorBase {
     };
     generar_color_para_depurar(): any;
     pre_actualizar(): void;
+    estado: string;
+    crear_estado(nombre: any): void;
     actualizar(): void;
     imagen: string;
     x: number;
@@ -267,6 +279,12 @@ declare class Conejo extends Actor {
     };
     iniciar(): void;
     actualizar(): void;
+    parado_iniciar(): void;
+    parado_actualizar(): void;
+    camina_iniciar(): void;
+    camina_actualizar(): void;
+    salta_iniciar(): void;
+    salta_actualizar(): void;
 }
 declare class Logo extends Actor {
     iniciar(): void;
