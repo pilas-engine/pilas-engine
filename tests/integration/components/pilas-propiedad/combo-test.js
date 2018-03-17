@@ -1,24 +1,41 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
+import { moduleForComponent, test } from "ember-qunit";
+import hbs from "htmlbars-inline-precompile";
+import Ember from "ember";
 
-moduleForComponent('pilas-propiedad/combo', 'Integration | Component | pilas propiedad/combo', {
+moduleForComponent("pilas-propiedad/combo", "Integration | Component | pilas propiedad/combo", {
   integration: true
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test("it renders", function(assert) {
+  let objeto = Ember.Object.create({ figura: "circulo" });
+  let propiedad = {
+    tipo: "combo",
+    propiedad: "figura",
+    opciones: [
+      {
+        valor: "",
+        texto: "ninguna"
+      },
+      {
+        valor: "circulo",
+        texto: "círculo"
+      },
+      {
+        valor: "rectangulo",
+        texto: "rectángulo"
+      }
+    ]
+  };
 
-  this.render(hbs`{{pilas-propiedad/combo}}`);
+  this.set("propiedad", propiedad);
+  this.set("objeto", objeto);
 
-  assert.equal(this.$().text().trim(), '');
+  this.render(hbs`{{pilas-propiedad/combo objeto=objeto propiedad=propiedad opciones=propiedad.opciones}}`);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#pilas-propiedad/combo}}
-      template block text
-    {{/pilas-propiedad/combo}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(
+    this.$("select option:selected")
+      .text()
+      .trim(),
+    "círculo"
+  );
 });

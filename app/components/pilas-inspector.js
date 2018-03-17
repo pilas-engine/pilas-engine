@@ -64,7 +64,7 @@ export default Component.extend({
         },
         {
           valor: "circulo",
-          texto: "circulo"
+          texto: "círculo"
         },
         {
           valor: "rectangulo",
