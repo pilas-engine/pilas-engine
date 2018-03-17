@@ -1,6 +1,6 @@
-import Ember from "ember";
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: "",
   class: `
     ba link br2 ma1 pa3 w-30

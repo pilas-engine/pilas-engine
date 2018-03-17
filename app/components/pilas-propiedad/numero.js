@@ -1,5 +1,6 @@
+import { later } from '@ember/runloop';
+import $ from 'jquery';
 import Component from "@ember/component";
-import Ember from "ember";
 
 export default Component.extend({
   original_value: 0,
@@ -14,7 +15,7 @@ export default Component.extend({
       initialX = mouse_down_event.pageX;
       this.set("original_value", this.get("value"));
 
-      Ember.$("html").on("mousemove", event => {
+      $("html").on("mousemove", event => {
         var intensidad = this.get("intensidad");
 
         var mouse_dx = (event.pageX - initialX) * intensidad;
@@ -25,12 +26,12 @@ export default Component.extend({
         return false;
       });
 
-      Ember.$("html").on("mouseup", () => {
+      $("html").on("mouseup", () => {
         this.disconnectEvents();
         return false;
       });
 
-      Ember.$("html").on("mouseleave", () => {
+      $("html").on("mouseleave", () => {
         this.disconnectEvents();
         return false;
       });
@@ -38,8 +39,8 @@ export default Component.extend({
   },
 
   disconnectEvents: function() {
-    Ember.$("html").unbind("mousemove");
-    Ember.$("html").unbind("mouseup");
+    $("html").unbind("mousemove");
+    $("html").unbind("mouseup");
   },
 
   willDestroyElement() {
@@ -74,7 +75,7 @@ export default Component.extend({
     comenzar_a_editar() {
       this.set("editando", true);
 
-      Ember.run.later(() => {
+      later(() => {
         this.$("input").focus();
         this.$("input")[0].select();
       });

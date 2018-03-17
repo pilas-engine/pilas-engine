@@ -1,6 +1,6 @@
+import EmberObject from '@ember/object';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
 
 moduleForComponent('pilas-propiedad/numero', 'Integration | Component | pilas propiedad', {
   integration: true
@@ -8,7 +8,7 @@ moduleForComponent('pilas-propiedad/numero', 'Integration | Component | pilas pr
 
 test('it renders', function(assert) {
   let propiedad_rotacion = { propiedad: "rotacion", incremento: 10 };
-  let objeto = Ember.Object.create({
+  let objeto = EmberObject.create({
     x: 0,
     y: 0,
     rotacion: 100

@@ -1,9 +1,10 @@
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
 import Component from "@ember/component";
-import Ember from "ember";
 
 export default Component.extend({
   tagName: "",
-  style: Ember.computed("ancho", "alto", function() {
+  style: computed("ancho", "alto", function() {
     let { ancho, alto } = this.getProperties("ancho", "alto");
 
     if (!isNaN(ancho)) {
@@ -14,6 +15,6 @@ export default Component.extend({
       alto += "px";
     }
 
-    return Ember.String.htmlSafe(`width: ${ancho}; height: ${alto};`);
+    return htmlSafe(`width: ${ancho}; height: ${alto};`);
   })
 });

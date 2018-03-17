@@ -1,4 +1,6 @@
-import Ember from "ember";
+import EmberObject from '@ember/object';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 import json_a_string from "../utils/json-a-string";
 import string_a_json from "../utils/string-a-json";
 import QueryParams from "ember-parachute";
@@ -19,9 +21,9 @@ const queryParams = new QueryParams({
   permitir_modo_pausa: { defaultValue: true, replace: true }
 });
 
-export default Ember.Controller.extend(queryParams.Mixin, {
+export default Controller.extend(queryParams.Mixin, {
   proyecto: null,
-  bus: Ember.inject.service(),
+  bus: service(),
 
   setup(event) {
     let params = event.queryParams;
@@ -46,19 +48,19 @@ export default Ember.Controller.extend(queryParams.Mixin, {
   },
 
   convertirEscenaEnObjetoEmber(proyecto) {
-    let proyectoComoObjetoEmber = Ember.Object.create(proyecto);
+    let proyectoComoObjetoEmber = EmberObject.create(proyecto);
 
     proyectoComoObjetoEmber.escenas = proyecto.escenas.map(escena => {
-      escena.actores = escena.actores.map(a => Ember.Object.create(a));
-      return Ember.Object.create(escena);
+      escena.actores = escena.actores.map(a => EmberObject.create(a));
+      return EmberObject.create(escena);
     });
 
     proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
-      return Ember.Object.create(tipo);
+      return EmberObject.create(tipo);
     });
 
     proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(tipo => {
-      return Ember.Object.create(tipo);
+      return EmberObject.create(tipo);
     });
 
     return proyectoComoObjetoEmber;

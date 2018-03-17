@@ -1,15 +1,16 @@
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Controller from "@ember/controller";
 import QueryParams from "ember-parachute";
-import Ember from "ember";
 
 const queryParams = new QueryParams({
   actor_seleccionado: { defaultValue: null, refresh: true, replace: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {
-  actores: Ember.inject.service(),
+  actores: service(),
 
-  actor: Ember.computed("actor_seleccionado", function() {
+  actor: computed("actor_seleccionado", function() {
     let actor_seleccionado = this.get("actor_seleccionado");
 
     if (actor_seleccionado) {

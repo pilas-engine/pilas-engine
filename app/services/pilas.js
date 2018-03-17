@@ -1,5 +1,5 @@
+import { Promise as EmberPromise } from 'rsvp';
 import Service from "@ember/service";
-import Ember from "ember";
 
 export default Service.extend({
   cargando: true,
@@ -8,7 +8,7 @@ export default Service.extend({
     this.set("iframe", iframeElement);
     this.set("cargando", true);
 
-    return new Ember.RSVP.Promise(success => {
+    return new EmberPromise(success => {
       var codigo = "pilasengine.iniciar('canvas')";
       let pilas = iframeElement.contentWindow.eval(codigo);
 

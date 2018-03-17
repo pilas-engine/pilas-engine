@@ -1,13 +1,13 @@
+import EmberObject from '@ember/object';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
 
 moduleForComponent('pilas-propiedad/interruptor', 'Integration | Component | pilas propiedad/interruptor', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  let objeto = Ember.Object.create({ invertir: true });
+  let objeto = EmberObject.create({ invertir: true });
   let propiedad = {
     tipo: "interruptor",
     propiedad: "invertir",

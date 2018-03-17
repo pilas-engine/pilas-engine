@@ -1,14 +1,16 @@
+import EmberObject from '@ember/object';
+import { alias } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 import Component from "@ember/component";
-import Ember from "ember";
 import estados from "../estados/estados-de-pilas-editor";
 import aplicar_nombre from "../utils/aplicar-nombre";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
 import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
 
 export default Component.extend({
-  bus: Ember.inject.service(),
-  log: Ember.inject.service(),
-  compilador: Ember.inject.service(),
+  bus: service(),
+  log: service(),
+  compilador: service(),
   codigo: "",
   tagName: "",
   actorSeleccionado: -1, //deprecated
@@ -21,7 +23,7 @@ export default Component.extend({
   historiaPosicion: 10,
   historiaMinimo: 0,
   historiaMaximo: 10,
-  cantidadDeEscenas: Ember.computed.alias("proyecto.escenas.length"),
+  cantidadDeEscenas: alias("proyecto.escenas.length"),
 
   lista_de_eventos: ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa"],
 
@@ -171,7 +173,7 @@ export default Component.extend({
     let proyecto = this.get("proyecto");
 
     proyecto.codigos.actores.pushObject(
-      Ember.Object.create({
+      EmberObject.create({
         tipo: tipo,
         codigo: aplicar_nombre(tipo, codigo)
       })
@@ -182,7 +184,7 @@ export default Component.extend({
     let proyecto = this.get("proyecto");
 
     proyecto.codigos.escenas.pushObject(
-      Ember.Object.create({
+      EmberObject.create({
         nombre: nombre,
         codigo: aplicar_nombre(nombre, codigo)
       })
@@ -262,7 +264,7 @@ export default Component.extend({
       let id = this.generar_id();
 
       model.escenas.pushObject(
-        Ember.Object.create({
+        EmberObject.create({
           id: id,
           nombre: nombre,
           camara_x: 0,
@@ -290,7 +292,7 @@ export default Component.extend({
       actor.propiedades.tipo = actor.tipo;
 
       escena.actores.pushObject(
-        Ember.Object.create(actor.propiedades)
+        EmberObject.create(actor.propiedades)
       );
 
       this.registrar_codigo_de_actor(nombre, actor.codigo);

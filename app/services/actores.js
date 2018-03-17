@@ -1,6 +1,6 @@
+import $ from 'jquery';
 import Service from "@ember/service";
 import config from "pilas-engine/config/environment";
-import Ember from "ember";
 import { task, timeout } from "ember-concurrency";
 
 export default Service.extend({
@@ -11,13 +11,13 @@ export default Service.extend({
   tareaConseguirActores: task(function*() {
     yield timeout(500);
 
-    let metadata = yield Ember.$.ajax({
+    let metadata = yield $.ajax({
       mimeType: "application/json",
       dataType: "json",
       url: `${config.rootURL}actores/actores.json`
     });
 
-    let codigo_del_actor_base = yield Ember.$.ajax({
+    let codigo_del_actor_base = yield $.ajax({
       url: `${config.rootURL}actores/-actor-base.ts`
     });
 
@@ -26,7 +26,7 @@ export default Service.extend({
     for (let i = 0; i < metadata.actores.length; i++) {
       let actor = metadata.actores[i];
 
-      let codigo = yield Ember.$.ajax({
+      let codigo = yield $.ajax({
         url: `${config.rootURL}actores/${actor.archivo}`
       });
 

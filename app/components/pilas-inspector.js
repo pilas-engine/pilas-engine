@@ -1,5 +1,5 @@
+import { computed } from '@ember/object';
 import Component from "@ember/component";
-import Ember from "ember";
 
 export default Component.extend({
   tagName: "",
@@ -114,7 +114,7 @@ export default Component.extend({
     }
   ],
 
-  ha_seleccionado_un_actor: Ember.computed("tipo_de_la_instancia_seleccionada", function() {
+  ha_seleccionado_un_actor: computed("tipo_de_la_instancia_seleccionada", function() {
     return this.get("tipo_de_la_instancia_seleccionada") === "actor";
   }),
 

@@ -1,5 +1,7 @@
+import $ from 'jquery';
+import { later } from '@ember/runloop';
+import { computed } from '@ember/object';
 import Component from "@ember/component";
-import Ember from "ember";
 import config from "../config/environment";
 
 const { APP: { version } } = config;
@@ -9,14 +11,14 @@ export default Component.extend({
   version_en_el_servidor: null,
   actualizanda: true,
   version: version,
-  version_simplificada: Ember.computed("version", function() {
+  version_simplificada: computed("version", function() {
     return this.get("version")
       .replace("v", "")
       .split("+")[0];
   }),
 
   didInsertElement() {
-    Ember.run.later(() => {
+    later(() => {
       this.consultar_ultima_version_publicada();
     }, 2000);
   },
@@ -25,7 +27,7 @@ export default Component.extend({
     const base = "https://api.github.com/repos";
     const url = `${base}/pilas-engine/pilas-engine/releases/latest`;
 
-    Ember.$.ajax({
+    $.ajax({
       url: url
     }).then(data => {
       this.set("consultando", false);

@@ -1,21 +1,23 @@
-import Ember from "ember";
+import { observer } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import layout from "ember-monaco-editor/templates/components/monaco-editor";
 import getFrameById from "ember-monaco-editor/utils/get-frame-by-id";
 import formatear from "pilas-engine/utils/formatear";
 import utils from "../utils/utils";
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: ["monaco-editor", "w-100", "flex1", "ba", "b--light-gray"],
   code: "// demo",
   loading: true,
   readOnly: false,
   editor: null,
-  bus: Ember.inject.service(),
-  declaraciones: Ember.inject.service(),
+  bus: service(),
+  declaraciones: service(),
   linenumbers: true,
 
-  cuandoCambiaDeArchivo: Ember.observer("titulo", function() {
+  cuandoCambiaDeArchivo: observer("titulo", function() {
     this.cargarCodigo();
   }),
 
@@ -34,7 +36,7 @@ export default Ember.Component.extend({
    * Se encarga de mantener actualizado el estado del editor con respecto al
    * atributo readOnly.
    */
-  sincronizarReadOnly: Ember.observer("readOnly", function() {
+  sincronizarReadOnly: observer("readOnly", function() {
     if (this.get("editor")) {
       this.get("editor").updateOptions({ readOnly: this.get("readOnly") });
     }

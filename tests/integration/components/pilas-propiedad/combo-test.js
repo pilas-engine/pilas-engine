@@ -1,13 +1,13 @@
+import EmberObject from '@ember/object';
 import { moduleForComponent, test } from "ember-qunit";
 import hbs from "htmlbars-inline-precompile";
-import Ember from "ember";
 
 moduleForComponent("pilas-propiedad/combo", "Integration | Component | pilas propiedad/combo", {
   integration: true
 });
 
 test("it renders", function(assert) {
-  let objeto = Ember.Object.create({ figura: "circulo" });
+  let objeto = EmberObject.create({ figura: "circulo" });
   let propiedad = {
     tipo: "combo",
     propiedad: "figura",

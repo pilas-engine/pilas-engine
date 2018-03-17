@@ -1,10 +1,11 @@
+import { later } from '@ember/runloop';
+import { inject as service } from '@ember/service';
 import Component from "@ember/component";
-import Ember from "ember";
 
 export default Component.extend({
   classNames: ["flex", "absolute", "absolute--fill"],
-  bus: Ember.inject.service(),
-  compilador: Ember.inject.service(),
+  bus: service(),
+  compilador: service(),
   espera: 2,
   proyecto: {
     titulo: "Proyecto para pilas-test",
@@ -59,7 +60,7 @@ export default Component.extend({
     this.get("bus").trigger("ejecutar_proyecto", datos);
 
     if (this.get("cuandoTerminaLaEspera")) {
-      Ember.run.later(() => {
+      later(() => {
         this.get("cuandoTerminaLaEspera")(pilas, this.get("compilador"));
       }, this.get("espera") * 1000);
     }

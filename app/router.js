@@ -1,14 +1,14 @@
+import { inject as service } from '@ember/service';
 import EmberRouter from "@ember/routing/router";
 import config from "./config/environment";
-import Ember from "ember";
 
 const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL
 });
 
-Ember.Router.reopen({
-  estadisticas: Ember.inject.service(),
+EmberRouter.reopen({
+  estadisticas: service(),
   rutaAnterior: "",
 
   didTransition() {

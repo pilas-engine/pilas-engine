@@ -1,9 +1,12 @@
-import Ember from "ember";
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import utils from "../utils/utils";
 
-export default Ember.Component.extend({
-  bus: Ember.inject.service(),
-  log: Ember.inject.service(),
+export default Component.extend({
+  bus: service(),
+  log: service(),
   ancho: 400,
   alto: 400,
   estado: null,
@@ -203,9 +206,9 @@ export default Ember.Component.extend({
     this.set("porcentajeDeCarga", progreso);
   },
 
-  estilo_barra_de_progreso: Ember.computed("porcentajeDeCarga", function() {
+  estilo_barra_de_progreso: computed("porcentajeDeCarga", function() {
     let porcentajeDeCarga = this.get("porcentajeDeCarga");
-    return Ember.String.htmlSafe(`width: ${porcentajeDeCarga}%`);
+    return htmlSafe(`width: ${porcentajeDeCarga}%`);
   }),
 
   cambiar_posicion_desde_el_editor({ posicion }) {

@@ -1,8 +1,9 @@
+import { later } from '@ember/runloop';
+import { inject as service } from '@ember/service';
 import Component from "@ember/component";
-import Ember from "ember";
 
 export default Component.extend({
-  bus: Ember.inject.service(),
+  bus: service(),
   classNames: ["flex1", "overflow-y-auto"],
 
   didInsertElement() {
@@ -14,7 +15,7 @@ export default Component.extend({
   },
 
   realizarScroll() {
-    Ember.run.later(() => {
+    later(() => {
       if (this.$()) {
         let elemento = this.$()[0];
 

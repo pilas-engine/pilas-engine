@@ -1,13 +1,13 @@
+import { inject as service } from '@ember/service';
 import Component from "@ember/component";
-import Ember from "ember";
 import autocompletar from "pilas-engine/utils/autocompletar";
 
 export default Component.extend({
   valor: "",
-  log: Ember.inject.service(),
+  log: service(),
   historial: [],
   posicion_en_el_historial: 0,
-  bus: Ember.inject.service(),
+  bus: service(),
   pilas: null,
   contexto: null,
 

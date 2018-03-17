@@ -1,10 +1,10 @@
+import { inject as service } from '@ember/service';
 import Component from "@ember/component";
-import Ember from "ember";
 import { task, timeout } from "ember-concurrency";
 
 export default Component.extend({
-  bus: Ember.inject.service(),
-  compilador: Ember.inject.service(),
+  bus: service(),
+  compilador: service(),
   proyecto: {
     titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",
     ancho: 200,

@@ -1,10 +1,11 @@
-import Ember from "ember";
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 
 const NOMBRE_DE_LA_ESCENA = "demo";
 
-export default Ember.Controller.extend({
-  bus: Ember.inject.service(),
-  compilador: Ember.inject.service(),
+export default Controller.extend({
+  bus: service(),
+  compilador: service(),
 
   proyecto: {
     titulo: "Proyecto demo",
