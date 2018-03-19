@@ -18,12 +18,17 @@ class Pilas {
   sonidos: any;
   actores: Actores;
   animaciones: Animaciones;
+  Phaser: any;
+
+  fisica: Fisica;
 
   modo: any;
   _ancho: number;
   _alto: number;
 
   constructor() {
+    this.Phaser = Phaser;
+
     this.mensajes = new Mensajes(this);
     this.depurador = new Depurador(this);
     this.utilidades = new Utilidades(this);
@@ -32,6 +37,7 @@ class Pilas {
     this.sonidos = {};
     this.actores = new Actores(this);
     this.animaciones = new Animaciones(this);
+    this.fisica = new Fisica(this);
   }
 
   get escena() {
