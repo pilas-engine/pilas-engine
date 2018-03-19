@@ -103,6 +103,10 @@ export default Component.extend({
         intensidad: 0.01,
         min: 0,
         max: 1.5
+      },
+      {
+        tipo: "interruptor",
+        propiedad: "figura_dinamica"
       }
     ]);
     this.set("propiedades_de_escenas", [
