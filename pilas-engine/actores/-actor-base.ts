@@ -447,4 +447,10 @@ class ActorBase {
   reproducir_animacion(nombre) {
     this.sprite.anims.play(nombre);
   }
+
+  cuando_comienza_una_colision() {}
+
+  cuando_se_mantiene_una_colision() {}
+
+  cuando_termina_una_colision() {}
 }

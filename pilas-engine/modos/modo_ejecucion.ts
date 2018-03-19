@@ -40,6 +40,40 @@ class ModoEjecucion extends Modo {
     if (this.pilas.depurador.mostrar_fisica) {
       this.matter.systems.matterPhysics.world.createDebugGraphic();
     }
+
+    this.vincular_eventos_de_colision();
+  }
+
+  vincular_eventos_de_colision() {
+    this.matter.world.on("collisionstart", (event, a, b) => {
+      if (a.gameObject && a.gameObject.actor) {
+        a.gameObject.actor.cuando_comienza_una_colision();
+      }
+
+      if (b.gameObject && b.gameObject.actor) {
+        b.gameObject.actor.cuando_comienza_una_colision();
+      }
+    });
+
+    this.matter.world.on("collisionactive", (event, a, b) => {
+      if (a.gameObject && a.gameObject.actor) {
+        a.gameObject.actor.cuando_se_mantiene_una_colision();
+      }
+
+      if (b.gameObject && b.gameObject.actor) {
+        b.gameObject.actor.cuando_se_mantiene_una_colision();
+      }
+    });
+
+    this.matter.world.on("collisionend", (event, a, b) => {
+      if (a.gameObject && a.gameObject.actor) {
+        a.gameObject.actor.cuando_termina_una_colision();
+      }
+
+      if (b.gameObject && b.gameObject.actor) {
+        b.gameObject.actor.cuando_termina_una_colision();
+      }
+    });
   }
 
   instanciar_escena(nombre) {
@@ -150,14 +184,20 @@ class ModoEjecucion extends Modo {
       try {
         this.guardar_foto_de_entidades();
       } catch (e) {
-        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
+          mensaje: e.message,
+          stack: e.stack.toString()
+        });
       }
     }
 
     try {
       this.pilas.escena.actualizar();
     } catch (e) {
-      this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+      this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
+        mensaje: e.message,
+        stack: e.stack.toString()
+      });
     }
 
     this.pilas.escena.actualizar_actores();

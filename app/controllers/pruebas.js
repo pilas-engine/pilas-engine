@@ -20,10 +20,11 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                pilas.actores.Conejo();
+                this.pilas.conejo = pilas.actores.Conejo();
               }
 
               actualizar() {
+
               }
             }`
           }

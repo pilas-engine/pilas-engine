@@ -57,6 +57,19 @@ declare class Escenas {
     vincular(escena: any): void;
     definir_escena_actual(escena: any): void;
 }
+declare class Fisica {
+    pilas: Pilas;
+    constructor(pilas: any);
+    readonly figuras: any;
+    realizar_rayo_desde_figura(figura: any, hasta_x: any, hasta_y: any): {
+        contactos: any;
+        fuente: any;
+    };
+    realizar_rayo_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number, figuras?: any): {
+        contactos: any;
+        fuente: any;
+    };
+}
 declare class Historia {
     pilas: Pilas;
     fotos: any;
@@ -110,6 +123,7 @@ declare class Utilidades {
         y: number;
     };
     combinar_propiedades(propiedades_iniciales: any, propiedades: any): any;
+    obtener_distancia_entre(desde_x: any, desde_y: any, hasta_x: any, hasta_y: any): number;
 }
 declare var HOST: string;
 declare class Pilas {
@@ -123,6 +137,8 @@ declare class Pilas {
     sonidos: any;
     actores: Actores;
     animaciones: Animaciones;
+    Phaser: any;
+    fisica: Fisica;
     modo: any;
     _ancho: number;
     _alto: number;
@@ -243,6 +259,9 @@ declare class ActorBase {
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
     reproducir_animacion(nombre: any): void;
+    cuando_comienza_una_colision(): void;
+    cuando_se_mantiene_una_colision(): void;
+    cuando_termina_una_colision(): void;
 }
 declare class Actor extends ActorBase {
     propiedades: {};
@@ -277,6 +296,7 @@ declare class Conejo extends Actor {
         figura_dinamica: boolean;
         figura_rebote: number;
     };
+    toca_el_suelo: boolean;
     iniciar(): void;
     actualizar(): void;
     parado_iniciar(): void;
@@ -285,6 +305,9 @@ declare class Conejo extends Actor {
     camina_actualizar(): void;
     salta_iniciar(): void;
     salta_actualizar(): void;
+    cuando_comienza_una_colision(): void;
+    cuando_se_mantiene_una_colision(): void;
+    cuando_termina_una_colision(): void;
 }
 declare class Logo extends Actor {
     iniciar(): void;
@@ -372,6 +395,7 @@ declare class ModoEjecucion extends Modo {
     permitir_modo_pausa: boolean;
     preload(): void;
     create(datos: any): void;
+    vincular_eventos_de_colision(): void;
     instanciar_escena(nombre: any): void;
     crear_escena(datos_de_la_escena: any): void;
     crear_actor(entidad: any): any;

@@ -56,7 +56,7 @@ class Utilidades {
   }
 
   convertir_coordenada_de_phaser_a_pilas(x, y) {
-    return { x: x - this.pilas._ancho / 2, y: this.pilas._ancho / 2 - y };
+    return { x: x - this.pilas._ancho / 2, y: -y + this.pilas._alto / 2 };
   }
 
   combinar_propiedades(propiedades_iniciales, propiedades) {
@@ -68,5 +68,9 @@ class Utilidades {
     }
 
     return extend(JSON.parse(JSON.stringify(propiedades_iniciales)), propiedades);
+  }
+
+  obtener_distancia_entre(desde_x, desde_y, hasta_x, hasta_y) {
+    return Math.sqrt(Math.abs(desde_x - hasta_x) ** 2 + Math.abs(desde_y - hasta_y) ** 2);
   }
 }

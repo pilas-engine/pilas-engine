@@ -13,6 +13,8 @@ class Conejo extends Actor {
     figura_rebote: 0
   };
 
+  toca_el_suelo = false;
+
   iniciar() {
     this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
     this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
@@ -79,5 +81,21 @@ class Conejo extends Actor {
     if (this.pilas.control.derecha) {
       this.x += 5;
     }
+
+    if (this.toca_el_suelo) {
+      this.estado = "parado";
+    }
+  }
+
+  cuando_comienza_una_colision() {
+    this.toca_el_suelo = true;
+  }
+
+  cuando_se_mantiene_una_colision() {
+    this.toca_el_suelo = true;
+  }
+
+  cuando_termina_una_colision() {
+    this.toca_el_suelo = false;
   }
 }

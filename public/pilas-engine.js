@@ -218,6 +218,52 @@ var Escenas = (function () {
     };
     return Escenas;
 }());
+var Fisica = (function () {
+    function Fisica(pilas) {
+        this.pilas = pilas;
+    }
+    Object.defineProperty(Fisica.prototype, "figuras", {
+        get: function () {
+            return Phaser.Physics.Matter.Matter.Composite.allBodies(this.pilas.modo.matter.world.localWorld);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Fisica.prototype.realizar_rayo_desde_figura = function (figura, hasta_x, hasta_y) {
+        var posicion = {
+            x: figura.gameObject.actor.x,
+            y: figura.gameObject.actor.y,
+        };
+        var figuras = this.figuras;
+        var indice = figuras.indexOf(figura);
+        figuras.splice(indice, 1);
+        return this.realizar_rayo_entre(posicion.x, posicion.y, hasta_x, hasta_y, figuras);
+    };
+    Fisica.prototype.realizar_rayo_entre = function (desde_x, desde_y, hasta_x, hasta_y, figuras) {
+        var _this = this;
+        if (figuras === void 0) { figuras = undefined; }
+        var desde = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(desde_x, desde_y);
+        var hasta = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(hasta_x, hasta_y);
+        var figuras = figuras || this.figuras;
+        var data = Phaser.Physics.Matter.Matter.Query.ray(figuras, desde, hasta);
+        return {
+            contactos: data.map(function (p) {
+                var posicion_phaser = p.body.position;
+                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(posicion_phaser.x, posicion_phaser.y);
+                return {
+                    x: posicion.x,
+                    y: posicion.y,
+                    desde_x: desde_x,
+                    desde_y: desde_y,
+                    distancia: p.depth,
+                    figura: p.body
+                };
+            }),
+            fuente: data
+        };
+    };
+    return Fisica;
+}());
 var Historia = (function () {
     function Historia(pilas) {
         this.pilas = pilas;
@@ -380,7 +426,7 @@ var Utilidades = (function () {
         return { x: x + this.pilas._ancho / 2, y: this.pilas._alto / 2 - y };
     };
     Utilidades.prototype.convertir_coordenada_de_phaser_a_pilas = function (x, y) {
-        return { x: x - this.pilas._ancho / 2, y: this.pilas._ancho / 2 - y };
+        return { x: x - this.pilas._ancho / 2, y: -y + this.pilas._alto / 2 };
     };
     Utilidades.prototype.combinar_propiedades = function (propiedades_iniciales, propiedades) {
         function extend(obj, src) {
@@ -392,6 +438,9 @@ var Utilidades = (function () {
         }
         return extend(JSON.parse(JSON.stringify(propiedades_iniciales)), propiedades);
     };
+    Utilidades.prototype.obtener_distancia_entre = function (desde_x, desde_y, hasta_x, hasta_y) {
+        return Math.sqrt(Math.pow(Math.abs(desde_x - hasta_x), 2) + Math.pow(Math.abs(desde_y - hasta_y), 2));
+    };
     return Utilidades;
 }());
 var HOST = "file://";
@@ -400,6 +449,7 @@ if (window.location.host) {
 }
 var Pilas = (function () {
     function Pilas() {
+        this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
         this.depurador = new Depurador(this);
         this.utilidades = new Utilidades(this);
@@ -408,6 +458,7 @@ var Pilas = (function () {
         this.sonidos = {};
         this.actores = new Actores(this);
         this.animaciones = new Animaciones(this);
+        this.fisica = new Fisica(this);
     }
     Object.defineProperty(Pilas.prototype, "escena", {
         get: function () {
@@ -925,6 +976,9 @@ var ActorBase = (function () {
     ActorBase.prototype.reproducir_animacion = function (nombre) {
         this.sprite.anims.play(nombre);
     };
+    ActorBase.prototype.cuando_comienza_una_colision = function () { };
+    ActorBase.prototype.cuando_se_mantiene_una_colision = function () { };
+    ActorBase.prototype.cuando_termina_una_colision = function () { };
     return ActorBase;
 }());
 var Actor = (function (_super) {
@@ -983,6 +1037,7 @@ var Conejo = (function (_super) {
             figura_dinamica: true,
             figura_rebote: 0
         };
+        _this.toca_el_suelo = false;
         return _this;
     }
     Conejo.prototype.iniciar = function () {
@@ -1038,6 +1093,18 @@ var Conejo = (function (_super) {
         if (this.pilas.control.derecha) {
             this.x += 5;
         }
+        if (this.toca_el_suelo) {
+            this.estado = "parado";
+        }
+    };
+    Conejo.prototype.cuando_comienza_una_colision = function () {
+        this.toca_el_suelo = true;
+    };
+    Conejo.prototype.cuando_se_mantiene_una_colision = function () {
+        this.toca_el_suelo = true;
+    };
+    Conejo.prototype.cuando_termina_una_colision = function () {
+        this.toca_el_suelo = false;
     };
     return Conejo;
 }(Actor));
@@ -1371,6 +1438,33 @@ var ModoEjecucion = (function (_super) {
         if (this.pilas.depurador.mostrar_fisica) {
             this.matter.systems.matterPhysics.world.createDebugGraphic();
         }
+        this.vincular_eventos_de_colision();
+    };
+    ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
+        this.matter.world.on("collisionstart", function (event, a, b) {
+            if (a.gameObject && a.gameObject.actor) {
+                a.gameObject.actor.cuando_comienza_una_colision();
+            }
+            if (b.gameObject && b.gameObject.actor) {
+                b.gameObject.actor.cuando_comienza_una_colision();
+            }
+        });
+        this.matter.world.on("collisionactive", function (event, a, b) {
+            if (a.gameObject && a.gameObject.actor) {
+                a.gameObject.actor.cuando_se_mantiene_una_colision();
+            }
+            if (b.gameObject && b.gameObject.actor) {
+                b.gameObject.actor.cuando_se_mantiene_una_colision();
+            }
+        });
+        this.matter.world.on("collisionend", function (event, a, b) {
+            if (a.gameObject && a.gameObject.actor) {
+                a.gameObject.actor.cuando_termina_una_colision();
+            }
+            if (b.gameObject && b.gameObject.actor) {
+                b.gameObject.actor.cuando_termina_una_colision();
+            }
+        });
     };
     ModoEjecucion.prototype.instanciar_escena = function (nombre) {
         var escena = this.proyecto.escenas.filter(function (e) { return e.nombre == nombre; })[0];
@@ -1451,14 +1545,20 @@ var ModoEjecucion = (function (_super) {
                 this.guardar_foto_de_entidades();
             }
             catch (e) {
-                this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+                this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
+                    mensaje: e.message,
+                    stack: e.stack.toString()
+                });
             }
         }
         try {
             this.pilas.escena.actualizar();
         }
         catch (e) {
-            this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+            this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
+                mensaje: e.message,
+                stack: e.stack.toString()
+            });
         }
         this.pilas.escena.actualizar_actores();
     };
