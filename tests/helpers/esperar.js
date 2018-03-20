@@ -1,8 +1,9 @@
+import { later } from '@ember/runloop';
+import { Promise as EmberPromise } from 'rsvp';
 import { registerAsyncHelper } from "@ember/test";
-import Ember from "ember";
 
 export default registerAsyncHelper("esperar", function(app, segundos) {
-  return new Ember.RSVP.Promise(success => {
-    Ember.run.later(success, segundos * 1000);
+  return new EmberPromise(success => {
+    later(success, segundos * 1000);
   });
 });

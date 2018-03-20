@@ -1,9 +1,14 @@
 <button id='boton-eliminar-{{tipo}}' class='ba f7 fr bn o-50 pointer' {{action "mostrar"}}>×{{yield}}</button>
 
-{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id=idDialogo titulo=titulo}}
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id=idDialogo titulo="Cuidado" reducido=true}}
 
+  <div>
+    {{titulo}}
+  </div>
 
-  {{pilas-boton accion=(action "ocultarEjecutandoAccion") texto="Si"}}
-  {{pilas-boton accion=(action "ocultar") texto="No"}}
+  <div class="tc">
+    {{pilas-boton accion=(action "ocultarEjecutandoAccion") texto="Si"}}
+    {{pilas-boton accion=(action "ocultar") texto="No"}}
+  </div>
 
 {{/pilas-modal}}

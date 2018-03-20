@@ -1,12 +1,12 @@
+import { later } from '@ember/runloop';
 import Service from "@ember/service";
-import Ember from "ember";
 
 export default Service.extend({
   iniciar() {},
 
   notificar_transicion(ruta) {
     if (ga) {
-      Ember.run.later(() => {
+      later(() => {
         let params = {
           page: ruta,
           title: ruta

@@ -1,9 +1,10 @@
+import $ from 'jquery';
+import { Promise as EmberPromise } from 'rsvp';
 import { registerAsyncHelper } from "@ember/test";
-import Ember from "ember";
 
 export default registerAsyncHelper("pulsar", function(app, texto) {
-  return new Ember.RSVP.Promise(success => {
-    let elemento = Ember.$(`a:contains('${texto}')`);
+  return new EmberPromise(success => {
+    let elemento = $(`a:contains('${texto}')`);
 
     if (elemento.length === 0) {
       throw new Error(`No existe un tag a con el texto: '${texto}'.`);

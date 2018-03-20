@@ -1,13 +1,14 @@
-import Ember from "ember";
+import $ from 'jquery';
+import { inject as service } from '@ember/service';
 import Route from "@ember/routing/route";
 import config from "../config/environment";
 
 export default Route.extend({
-  electron: Ember.inject.service(),
-  bus: Ember.inject.service(),
-  log: Ember.inject.service(),
-  actores: Ember.inject.service(),
-  estadisticas: Ember.inject.service(),
+  electron: service(),
+  bus: service(),
+  log: service(),
+  actores: service(),
+  estadisticas: service(),
 
   model() {
     this.get("electron").iniciar();
@@ -19,6 +20,6 @@ export default Route.extend({
   },
 
   afterModel() {
-    return Ember.$().get(`${config.rootURL}spritesheet.png`);
+    return $().get(`${config.rootURL}spritesheet.png`);
   }
 });

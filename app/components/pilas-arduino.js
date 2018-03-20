@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Component from "@ember/component";
 import { task, timeout } from "ember-concurrency";
 let serialport = {};
 let five = {};
@@ -8,9 +8,9 @@ if (window.enElectron) {
   five = requireNode("johnny-five");
 }
 
-export default Ember.Component.extend({
+export default Component.extend({
   conectado: false,
-  dispositivos: [],
+  dispositivos: null,
 
   haConectadoAlgunaVez: false,
   mostrarErrorDeReConexion: false,
@@ -47,6 +47,7 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement() {
+    this.set("dispositivos", []);
     if (window.inElectron) {
       this.get("tareaListarDispositivos").perform({});
 

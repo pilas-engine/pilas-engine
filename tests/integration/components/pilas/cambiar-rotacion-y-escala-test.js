@@ -15,13 +15,13 @@ test("it renders", function(assert) {
     let actor = pilas.actores.Aceituna(0, 0);
 
     actor.rotacion = 45;
-    assert.equal(actor.rotacion, 45, "Tiene que haber un actor.");
+    assert.equal(Math.round(actor.rotacion), 45, "Tiene que haber un actor.");
 
     actor.rotacion = 360 + 20;
-    assert.equal(actor.rotacion, 20, "Un angulo que supera 360 tiene un equivalente.");
+    assert.equal(Math.round(actor.rotacion), 20, "Un angulo que supera 360 tiene un equivalente.");
 
     actor.rotacion = 390;
-    assert.equal(actor.rotacion, 30, "Un angulo de 390 grados tiene un equivalente de 30 grados.");
+    assert.equal(Math.round(actor.rotacion), 30, "Un angulo de 390 grados tiene un equivalente de 30 grados.");
   });
 
   this.set("cuandoTerminaLaEspera", pilas => {

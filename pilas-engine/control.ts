@@ -1,22 +1,23 @@
 class Control {
   pilas: Pilas;
 
-  teclaIzquierda;
-  teclaDerecha;
-  teclaArriba;
-  teclaAbajo;
+  _izquierda;
+  _derecha;
+  _arriba;
+  _abajo;
 
   constructor(pilas: Pilas) {
+    const codigos = Phaser.Input.Keyboard.KeyCodes;
     this.pilas = pilas;
 
-    this.teclaIzquierda = pilas.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    this.teclaDerecha = pilas.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    this.teclaArriba = pilas.game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    this.teclaAbajo = pilas.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    this._izquierda = pilas.game.input.keyboard.addKey(codigos.LEFT);
+    this._derecha = pilas.game.input.keyboard.addKey(codigos.RIGHT);
+    this._arriba = pilas.game.input.keyboard.addKey(codigos.UP);
+    this._abajo = pilas.game.input.keyboard.addKey(codigos.DOWN);
   }
 
   get izquierda() {
-    return this.teclaIzquierda.isDown;
+    return this._izquierda.isDown;
   }
 
   set izquierda(v) {
@@ -24,7 +25,7 @@ class Control {
   }
 
   get derecha() {
-    return this.teclaDerecha.isDown;
+    return this._derecha.isDown;
   }
 
   set derecha(v) {
@@ -32,7 +33,7 @@ class Control {
   }
 
   get arriba() {
-    return this.teclaArriba.isDown;
+    return this._arriba.isDown;
   }
 
   set arriba(v) {
@@ -40,7 +41,7 @@ class Control {
   }
 
   get abajo() {
-    return this.teclaAbajo.isDown;
+    return this._abajo.isDown;
   }
 
   set abajo(v) {

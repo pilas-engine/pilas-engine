@@ -29,6 +29,12 @@
       "tipo": "Nave",
       "imagen": "nave",
       "archivo": "nave.ts"
+    },
+    {
+      "nombre": "Conejo",
+      "tipo": "Conejo",
+      "imagen": "conejo",
+      "archivo": "conejo.ts"
     }
   ]
 }

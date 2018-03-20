@@ -13,7 +13,9 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "compilar_pilas": "tsc -p pilas-engine --pretty -d",
+    "compilar_pilas_live": "tsc -p pilas-engine --watch --pretty -d"
   },
   "main": "electron.js",
   "devDependencies": {
@@ -50,10 +52,10 @@
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.16.0",
     "ember-truth-helpers": "^2.0.0",
+    "eslint-plugin-ember": "^5.1.0",
     "gitbook-cli": "^2.3.0",
     "johnny-five": "^0.11.6",
     "loader.js": "^4.2.3",
-    "phaser-ce": "^2.9.3",
     "prettier": "^1.9.2",
     "qunit-dom": "^0.4.0",
     "spritesheet-js": "^1.2.6",
@@ -66,6 +68,7 @@
   },
   "dependencies": {
     "js-beautify": "^1.7.5",
+    "phaser": "^3.2.1",
     "typescript": "2.7.1"
   }
 }

@@ -1,12 +1,13 @@
-import Service from "@ember/service";
-import Ember from "ember";
+import Service, { inject as service } from "@ember/service";
 
 export default Service.extend({
-  bus: Ember.inject.service(),
-  items: [],
+  bus: service(),
+  items: null,
   iniciado: false,
 
   iniciar() {
+    this.set("items", []);
+
     if (this.get("iniciado")) {
       return;
     }

@@ -1,4 +1,4 @@
-export default function obtenerNombreSinRepetir(nombres, tipo) {
+export default function obtener_nombre_sin_repetir(nombres, tipo) {
   let nombresQueColisionan = nombres.filter(nombre => nombre.indexOf(tipo) > -1);
 
   if (nombresQueColisionan.length === 0) {

@@ -1,6 +1,6 @@
+import $ from 'jquery';
 import { test } from "qunit";
 import moduleForAcceptance from "pilas-engine/tests/helpers/module-for-acceptance";
-import Ember from "ember";
 
 moduleForAcceptance("Acceptance | puede ingresar al editor");
 
@@ -30,7 +30,7 @@ test("puede ingresar a la pantalla principal", async function(assert) {
   await esperar(PAUSA);
 
   function cambiar_input(valor) {
-    Ember.$("input#posicion")
+    $("input#posicion")
       .val(valor)
       .trigger("input");
     return esperar(0.01);

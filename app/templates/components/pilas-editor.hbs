@@ -27,7 +27,7 @@
 
         <div class='unselectable'>
           {{pilas-boton desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
-          {{pilas-crear-actor desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=(action "agregarActor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
+          {{pilas-crear-actor desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=(action "agregar_actor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
         </div>
 
         {{pilas-panel-de-escenas
@@ -36,7 +36,7 @@
 
             seleccion=seleccion
             cuandoSelecciona=(action "cuandoSelecciona")
-            cuandoIntentaEliminar=(action "cuandoIntentaEliminar")
+            cuando_intenta_eliminar=(action "cuando_intenta_eliminar")
             ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
             desactivado=(not estado.puede_editar)
 
@@ -104,12 +104,14 @@
                   cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                   pos=pos
                   fps=fps
+                  fisica=fisica
                 }}
 
                 <div class="h2 ba br b--gray bg-light-gray mt2">
                   {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
-                  <div class="fr">
+                  <div class="fr {{if estado.puedeEjecutar '' 'o-60 disabled'}}">
+                    {{pilas-interruptor texto="fisica" variable=fisica}}
                     {{pilas-interruptor texto="fps" variable=fps}}
                     {{pilas-interruptor texto="pos" variable=pos}}
                   </div>

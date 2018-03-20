@@ -1,9 +1,12 @@
-import Ember from "ember";
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import utils from "../utils/utils";
 
-export default Ember.Component.extend({
-  bus: Ember.inject.service(),
-  log: Ember.inject.service(),
+export default Component.extend({
+  bus: service(),
+  log: service(),
   ancho: 400,
   alto: 400,
   estado: null,
@@ -12,6 +15,7 @@ export default Ember.Component.extend({
   mantenerFoco: false,
   classNames: ["flex1", "overflow-hidden", "unseletable"],
   porcentajeDeCarga: 0,
+  cuando_termina_de_cargar: null,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
@@ -42,18 +46,18 @@ export default Ember.Component.extend({
 
       window.addEventListener("message", this.get("funcionParaAtenderMensajes"), false);
 
-      this.get("bus").on("cargarEscena", this, "cargarEscena");
-      this.get("bus").on("finalizaCarga", this, "finalizaCarga");
-      this.get("bus").on("ejecutarEscena", this, "ejecutarEscena");
+      this.get("bus").on("cargar_escena", this, "cargar_escena");
+      this.get("bus").on("finaliza_carga", this, "finaliza_carga");
+      this.get("bus").on("ejecutar_escena", this, "ejecutar_escena");
       this.get("bus").on("ejecutar_proyecto", this, "ejecutar_proyecto");
-      this.get("bus").on("pausarEscena", this, "pausarEscena");
-      this.get("bus").on("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
+      this.get("bus").on("pausar_escena", this, "pausar_escena");
+      this.get("bus").on("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
       this.get("bus").on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
       this.get("bus").on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
       this.get("bus").on("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
 
-      this.get("bus").on("hacerFocoEnPilas", this, "hacerFocoEnPilas");
-      this.get("bus").on("progresoDeCarga", this, "progresoDeCarga");
+      this.get("bus").on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
+      this.get("bus").on("progreso_de_carga", this, "progreso_de_carga");
       this.get("bus").on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
       this.get("bus").on("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
     };
@@ -68,22 +72,22 @@ export default Ember.Component.extend({
   willDestroyElement() {
     window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
 
-    this.get("bus").off("cargarEscena", this, "cargarEscena");
-    this.get("bus").off("finalizaCarga", this, "finalizaCarga");
-    this.get("bus").off("ejecutarEscena", this, "ejecutarEscena");
+    this.get("bus").off("cargar_escena", this, "cargar_escena");
+    this.get("bus").off("finaliza_carga", this, "finaliza_carga");
+    this.get("bus").off("ejecutar_escena", this, "ejecutar_escena");
     this.get("bus").off("ejecutar_proyecto", this, "ejecutar_proyecto");
-    this.get("bus").off("pausarEscena", this, "pausarEscena");
-    this.get("bus").off("cambiarPosicionDesdeElEditor", this, "cambiarPosicionDesdeElEditor");
+    this.get("bus").off("pausar_escena", this, "pausar_escena");
+    this.get("bus").off("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
     this.get("bus").off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
     this.get("bus").off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
     this.get("bus").off("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
-    this.get("bus").off("hacerFocoEnPilas", this, "hacerFocoEnPilas");
-    this.get("bus").off("progresoDeCarga", this, "progresoDeCarga");
+    this.get("bus").off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
+    this.get("bus").off("progreso_de_carga", this, "progreso_de_carga");
     this.get("bus").off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
     this.get("bus").off("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
   },
 
-  cargarEscena({ escena }) {
+  cargar_escena({ escena }) {
     let data = {
       tipo: "define_escena",
       nombre: "editorState",
@@ -98,12 +102,13 @@ export default Ember.Component.extend({
     let data = {
       tipo: "definir_estados_de_depuracion",
       pos: this.get("pos"),
-      fps: this.get("fps")
+      fps: this.get("fps"),
+      fisica: this.get("fisica")
     };
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  ejecutarEscena({ escena, codigo }) {
+  ejecutar_escena({ escena, codigo }) {
     console.warn("Deprecated");
 
     let data = {
@@ -173,11 +178,15 @@ export default Ember.Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  finalizaCarga() {
+  finaliza_carga() {
     this.set("cargando", false);
+
+    if (this.get("cuando_termina_de_cargar")) {
+      this.get("cuando_termina_de_cargar")();
+    }
   },
 
-  pausarEscena({ escena }) {
+  pausar_escena({ escena }) {
     let data = {
       tipo: "pausar_escena",
       escena: escena
@@ -186,18 +195,23 @@ export default Ember.Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  hacerFocoEnPilas() {
+  hacer_foco_en_pilas() {
     let iframe = this.$("iframe")[0];
     setTimeout(function() {
       iframe.contentWindow.focus();
     }, 10);
   },
 
-  progresoDeCarga({ progreso }) {
+  progreso_de_carga({ progreso }) {
     this.set("porcentajeDeCarga", progreso);
   },
 
-  cambiarPosicionDesdeElEditor({ posicion }) {
+  estilo_barra_de_progreso: computed("porcentajeDeCarga", function() {
+    let porcentajeDeCarga = this.get("porcentajeDeCarga");
+    return htmlSafe(`width: ${porcentajeDeCarga}%`);
+  }),
+
+  cambiar_posicion_desde_el_editor({ posicion }) {
     let data = {
       tipo: "cambiar_posicion",
       posicion: posicion
@@ -212,28 +226,28 @@ export default Ember.Component.extend({
     }
 
     if (e.data.tipo === "finaliza_carga_de_recursos") {
-      this.get("bus").trigger("finalizaCarga", contexto.pilas, contexto);
+      this.get("bus").trigger("finaliza_carga", contexto.pilas, contexto);
       window["pilas"] = contexto.pilas;
     }
 
     if (e.data.tipo === "progreso_de_carga") {
-      this.get("bus").trigger("progresoDeCarga", e.data);
+      this.get("bus").trigger("progreso_de_carga", e.data);
     }
 
     if (e.data.tipo === "termina_de_mover_un_actor") {
-      this.get("bus").trigger("moverActor", e.data);
+      this.get("bus").trigger("termina_de_mover_un_actor", e.data);
     }
 
     if (e.data.tipo === "comienza_a_mover_un_actor") {
-      this.get("bus").trigger("comienzaAMoverActor", e.data);
+      this.get("bus").trigger("comienza_a_mover_un_actor", e.data);
     }
 
     if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
-      this.get("bus").trigger("iniciaModoDepuracionEnPausa", e.data);
+      this.get("bus").trigger("inicia_modo_depuracion_en_pausa", e.data);
     }
 
     if (e.data.tipo === "cambia_posicion_dentro_del_modo_pausa") {
-      this.get("bus").trigger("cuandoCambiaPosicionDentroDelModoPausa", e.data);
+      this.get("bus").trigger("cuando_cambia_posicion_dentro_del_modo_pausa", e.data);
     }
 
     if (e.data.tipo === "error_de_ejecucion") {
@@ -241,7 +255,7 @@ export default Ember.Component.extend({
     }
 
     if (e.data.tipo === "termina_de_iniciar_ejecucion") {
-      this.get("bus").trigger("cuandoTerminaDeIniciarEjecucion", contexto.pilas, contexto);
+      this.get("bus").trigger("cuando_termina_de_iniciar_ejecucion", contexto.pilas, contexto);
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {

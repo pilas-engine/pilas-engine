@@ -89,7 +89,7 @@ s: serve
 
 serve:
 	$(call log, "Iniciando ember s")
-	${BIN_EMBER} s
+	yarn start
 
 ejecutar: serve
 
@@ -120,11 +120,11 @@ api:
 
 compilar_pilas:
 	$(call log, "Compilando pilas-engine")
-	cd pilas-engine; ../${BIN_TYPESCRIPT} --pretty -d
+	yarn compilar_pilas
 
 compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
-	cd pilas-engine; ../${BIN_TYPESCRIPT} --watch --pretty -d
+	yarn compilar_pilas_live
 
 pilas_sprites:
 	$(call log, "Actualizando imagenes para usar en pilas ...")
@@ -240,9 +240,7 @@ actualizar_phaser:
 	@echo "${Y} - Ejecutar npm install.${N}"
 	@echo "${Y} - Copiar phaser al directorio public:${N}"
 	@echo "${Y}${N}"
-	@echo "${Y}        cp node_modules/phaser-ce/build/phaser.js public/${N}"
-	@echo "${Y}        cp node_modules/phaser-ce/typescript/p2.d.ts public/${N}"
-	@echo "${Y}        cp node_modules/phaser-ce/typescript/phaser.d.ts public/${N}"
+	@echo "${Y}        cp node_modules/phaser/dist/phaser.js public/${N}"
 	@echo "${Y}${N}"
 
 actualizar_typescript:

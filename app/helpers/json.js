@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
 export function json(params) {
   return JSON.stringify(params[0], null, 2);
 }
 
-export default Ember.Helper.helper(json);
+export default helper(json);

@@ -1,12 +1,15 @@
 import Service from "@ember/service";
+import json_a_string from "../utils/json-a-string";
+import string_a_json from "../utils/string-a-json";
 
 export default Service.extend({
-  compilar(codigoTypescript) {
+  compilar(codigoTypescript, proyecto) {
     let compilerOptions = {};
 
     let codigo = ts.transpile(codigoTypescript, compilerOptions, "codigo.js", /*diagnostics*/ undefined, /*moduleName*/ undefined);
+    let proyecto_serializado = string_a_json(json_a_string(proyecto));
 
-    return { codigo: codigo };
+    return { codigo, proyecto_serializado };
   },
 
   compilar_proyecto(proyecto) {
@@ -16,6 +19,6 @@ export default Service.extend({
     //let codigo_completo = ["// Escenas:", codigo_de_escenas, "//Actores: ", codigo_de_actores].join("\n\n");
     let codigo_completo = codigo_de_escenas + codigo_de_actores;
 
-    return this.compilar(codigo_completo);
+    return this.compilar(codigo_completo, proyecto);
   }
 });

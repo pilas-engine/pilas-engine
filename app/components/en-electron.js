@@ -1,7 +1,9 @@
-import Ember from "ember";
+import { alias } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: "",
-  electron: Ember.inject.service(),
-  enElectron: Ember.computed.alias("electron.enElectron")
+  electron: service(),
+  enElectron: alias("electron.enElectron")
 });
