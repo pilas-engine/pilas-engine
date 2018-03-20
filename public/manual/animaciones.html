@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introducción · Manual de Pilas Engine 2</title>
+        <title>Animaciones · Manual de Pilas Engine 2</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,8 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="primeros_pasos.html" />
     
+    <link rel="prev" href="automatas_y_estados.html" />
     
 
     </head>
@@ -87,7 +87,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -126,7 +126,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="animaciones.html">
+        <li class="chapter active" data-level="1.4" data-path="animaciones.html">
             
                 <a href="animaciones.html">
             
@@ -169,7 +169,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introducción</a>
+        <a href="." >Animaciones</a>
     </h1>
 </div>
 
@@ -184,10 +184,33 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="manual-de-pilas-engine-2">Manual de Pilas Engine 2</h1>
-<p><img src="imagenes/logo.png" alt="logo"></p>
-<p>&#xA1;Hola!, este es el manual de Pilas. Desde aqu&#xED; te vamos a contar c&#xF3;mo utilizar este motor de videojuegos, daremos algunos conceptos importantes y otras cosas m&#xE1;s.</p>
-<p>Desde el men&#xFA; lateral vas a poder acceder a cada una de las secciones del manual. Si est&#xE1;s en duda, o es la primera vez que utilizas pilas, te recomendamos ver la secci&#xF3;n <a href="primeros_pasos.html">Primeros Pasos</a>.</p>
+                                <h1 id="animaciones">Animaciones</h1>
+<p>Para crear y asignar animaciones se tienen que definir previamente en el c&#xF3;digo del actor.</p>
+<p>El m&#xE9;todo &quot;crear_animacion&quot; se puede llamar especificando el nombre de la animaci&#xF3;n, los cuadros que se deben mostrar y la velocidad.</p>
+<p>Por ejemplo, para crear una animaci&#xF3;n de un actor mientras est&#xE1; esperando us&#xE9; lo siguiente:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;conejo_parado1&quot;</span>, <span class="hljs-string">&quot;conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
+</code></pre>
+<p>El valor &quot;2&quot; significa que la animaci&#xF3;n se debe mostrar a una velocidad de 2 cuadros por segundo.</p>
+<p>Luego, una vez creada la animaci&#xF3;n, se puede reproducir usando esta llamada:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.reproducir_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>);
+</code></pre>
+<p>La creaci&#xF3;n de animaciones generalmente se realiza en el m&#xE9;todo iniciar de esta forma:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Conejo extends Actor {
+    iniciar() {
+        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;conejo_parado1&quot;</span>, <span class="hljs-string">&quot;conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
+        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_camina&quot;</span>, [<span class="hljs-string">&quot;conejo_camina1&quot;</span>, <span class="hljs-string">&quot;conejo_camina2&quot;</span>], <span class="hljs-number">20</span>);
+        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
+        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;conejo_muere&quot;</span>], <span class="hljs-number">1</span>);
+
+        <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
+    }
+
+    actualizar() {
+
+    }
+}
+</code></pre>
+<p>&#x200B;    </p>
 
                                 
                                 </section>
@@ -215,10 +238,10 @@
 
             
                 
-                
-                <a href="primeros_pasos.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Primeros pasos">
-                    <i class="fa fa-angle-right"></i>
+                <a href="automatas_y_estados.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Autómatas y estados">
+                    <i class="fa fa-angle-left"></i>
                 </a>
+                
                 
             
         
@@ -227,7 +250,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introducción","level":"1.1","depth":1,"next":{"title":"Primeros pasos","level":"1.2","depth":1,"path":"primeros_pasos.md","ref":"primeros_pasos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"README.md","mtime":"2018-03-20T03:27:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-20T23:39:11.013Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Animaciones","level":"1.4","depth":1,"previous":{"title":"Autómatas y estados","level":"1.3","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"animaciones.md","mtime":"2018-03-20T23:31:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-20T23:39:11.013Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

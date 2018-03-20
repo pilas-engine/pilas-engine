@@ -33,12 +33,16 @@ El botón "ejecutar" que aparece arriba nos permite poner en funcionamiento el j
 
 Así que hagamos la prueba, pulsá el botón ejecutar una vez. Deberías ver que los objetos en pantalla comienzan a caer y la nave se puede mover usando el teclado:
 
-> TODO: agregar imagen del juego con una nave y dos objetos cayendo
+![ave-157592](imagenes/nave-1575920.png)
 
-Cuando pulsás el botón "ejecutar" además de ponerse en funcioanmiento el juego sucede algo más: el editor por completo ingresará en un modo llamado "ejecución", así que no vamos a poder editar el código o cambiar la escena. Todo lo que suceda en ese momento es parte de la experiencia de usuario de nuestros juegadores. Una vez que exportemos el juego, nuestros usuarios solo van a ver el juego, no el editor.
+Cuando pulsas el botón "ejecutar" además de ponerse en funcionamiento el juego sucede algo más: el editor por completo ingresará en un modo llamado "ejecución", así que no vamos a poder editar el código o cambiar la escena. Todo lo que suceda en ese momento es parte de la experiencia de usuario de nuestros juegos. Una vez que exportemos el juego, nuestros usuarios solo van a ver el juego, no el editor.
 
 Esto es importante porque nos lleva a ponernos en un rol de diseñador de juegos. ¿Tiene sentido ver una nave y unos objetos cayendo para nuestros usuarios?. ¡Claro que no!.
 
 Para nuestro primer juego vamos a pensar en algo más interesante, queremos que el fondo del juego sea un cielo lleno de estrellas, que el usuario sepa que pueda mover la nave con el teclado; y que luego de unos segundos comiencen a aparecer algunos enemigos.
 
 Pulsá el botón que dice "detener" en el editor (o pulsá la tecla Escape), tendrías que volver a ver el resto de los elementos del editor nuevamente habilitados.
+
+
+
+> > TODO: completar.
