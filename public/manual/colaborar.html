@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Animaciones · Manual de Pilas Engine 2</title>
+        <title>Colaborar con pilas · Manual de Pilas Engine 2</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="colaborar.html" />
+    <link rel="next" href="entorno.html" />
     
     
-    <link rel="prev" href="automatas_y_estados.html" />
+    <link rel="prev" href="animaciones.html" />
     
 
     </head>
@@ -128,7 +128,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4" data-path="animaciones.html">
+        <li class="chapter " data-level="1.4" data-path="animaciones.html">
             
                 <a href="animaciones.html">
             
@@ -148,7 +148,7 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="colaborar.html">
+        <li class="chapter active" data-level="2.1" data-path="colaborar.html">
             
                 <a href="colaborar.html">
             
@@ -204,7 +204,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Animaciones</a>
+        <a href="." >Colaborar con pilas</a>
     </h1>
 </div>
 
@@ -219,33 +219,23 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="animaciones">Animaciones</h1>
-<p>Para crear y asignar animaciones se tienen que definir previamente en el c&#xF3;digo del actor.</p>
-<p>El m&#xE9;todo &quot;crear_animacion&quot; se puede llamar especificando el nombre de la animaci&#xF3;n, los cuadros que se deben mostrar y la velocidad.</p>
-<p>Por ejemplo, para crear una animaci&#xF3;n de un actor mientras est&#xE1; esperando us&#xE9; lo siguiente:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;conejo_parado1&quot;</span>, <span class="hljs-string">&quot;conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
-</code></pre>
-<p>El valor &quot;2&quot; significa que la animaci&#xF3;n se debe mostrar a una velocidad de 2 cuadros por segundo.</p>
-<p>Luego, una vez creada la animaci&#xF3;n, se puede reproducir usando esta llamada:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.reproducir_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>);
-</code></pre>
-<p>La creaci&#xF3;n de animaciones generalmente se realiza en el m&#xE9;todo iniciar de esta forma:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Conejo extends Actor {
-    iniciar() {
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;conejo_parado1&quot;</span>, <span class="hljs-string">&quot;conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_camina&quot;</span>, [<span class="hljs-string">&quot;conejo_camina1&quot;</span>, <span class="hljs-string">&quot;conejo_camina2&quot;</span>], <span class="hljs-number">20</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;conejo_muere&quot;</span>], <span class="hljs-number">1</span>);
-
-        <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
-    }
-
-    actualizar() {
-
-    }
-}
-</code></pre>
-<p>&#x200B;    </p>
+                                <h1 id="colaborar-con-pilas-engine">Colaborar con Pilas Engine</h1>
+<p>Pilas Engine es un proyecto de Software Libre, que se desarrolla de forma colaborativa por un equipo de varios colaboradores, personas del equipo de desarrollo y la comunidad de usuarios.</p>
+<p><img src="assets/colabora.png" alt="olabor"></p>
+<p>Todas las personas que quieran participar del desarrollo son bienvenidas, Pilas nos es solo una herramienta de software, es un proyecto colaborativo que sostiene un equipo de personas amigables y respetuosas que buscan mejorar la calidad de la educaci&#xF3;n brind&#xE1;ndole a los J&#xF3;venes la posibilidad de volverse protagonistas en el uso de la tecnolog&#xED;a.</p>
+<p>Por ese motivo, queremos invitarte a participar. &#xA1;Vos tambi&#xE9;n podes formar parte del equipo de Pilas!.</p>
+<p>Te damos algunas ideas de participaci&#xF3;n que podr&#xED;an interesante:</p>
+<h2 id="participar-en-el-foro-de-pilas-engine">Participar en el foro de Pilas Engine</h2>
+<p>La tarea mas recomendable para quienes reci&#xE9;n comienzan es dar de alta una cuenta en nuestro foro (<a href="http://foro.pilas-engine.com.ar/" target="_blank">http://foro.pilas-engine.com.ar</a>), presentarse y ayudarnos a resolver preguntas de otros usuarios.</p>
+<p>No hace falta experiencia previa para colaborar en el foro, podes ingresar, saludar y contarnos qu&#xE9; te parece Pilas, c&#xF3;mo lo conociste; vas a notar que el foro es el lugar ideal para aportar ideas, conversar, y publicar juegos.</p>
+<h2 id="ayudar-a-difundir-pilas">Ayudar a difundir Pilas</h2>
+<p>Muchas personas no conocen Pilas, y creemos que podr&#xED;a interesarles. As&#xED; que otra forma de colaborar es difundir la existencia de Pilas entre las personas que conoces.</p>
+<p>Adem&#xE1;s, si conoces escuelas o proyectos donde se utilice Pilas dales &#xE1;nimo para que nos cuenten sus proyectos, queremos ayudar y mejorar Pilas con cada posibilidad que se nos presente.</p>
+<p>Tambi&#xE9;n es super &#xFA;til si tienes la posibilidad de mencionar Pilas las redes sociales: twitter, facebook, youtube o &#xA1;donde quieras!</p>
+<h2 id="cre&#xE1;-juegos-cursos-o-tutoriales">Cre&#xE1; juegos, cursos o tutoriales</h2>
+<p>Necesitamos tutoriales, juegos y cursos sobre Pilas Engine.</p>
+<p>Si est&#xE1;s haciendo un juego con Pilas, contanos de qu&#xE9; se trata; puedes escribirnos directamente desde el foro de mensajes de la web (<a href="http://foro.pilas-engine.com.ar" target="_blank">http://foro.pilas-engine.com.ar</a>).</p>
+<p>Si te gusta ense&#xF1;ar y contar tus experiencias con la herramienta, te invitamos a escribir y proponer cursos dentro del foro; adem&#xE1;s, en la web tenemos una secci&#xF3;n en donde podemos publicar art&#xED;culos, as&#xED; que seguramente tambi&#xE9;n podamos ayudarte a subirlos ah&#xED;.</p>
 
                                 
                                 </section>
@@ -273,12 +263,12 @@
 
             
                 
-                <a href="automatas_y_estados.html" class="navigation navigation-prev " aria-label="Previous page: Autómatas y estados">
+                <a href="animaciones.html" class="navigation navigation-prev " aria-label="Previous page: Animaciones">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="colaborar.html" class="navigation navigation-next " aria-label="Next page: Colaborar con pilas">
+                <a href="entorno.html" class="navigation navigation-next " aria-label="Next page: Entorno para colaboradores de Pilas">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -289,7 +279,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Animaciones","level":"1.4","depth":1,"next":{"title":"Colaborar con pilas","level":"2.1","depth":1,"path":"colaborar.md","ref":"colaborar.md","articles":[]},"previous":{"title":"Autómatas y estados","level":"1.3","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"animaciones.md","mtime":"2018-03-20T23:31:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-21T02:29:16.374Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Colaborar con pilas","level":"2.1","depth":1,"next":{"title":"Entorno para colaboradores de Pilas","level":"2.2","depth":1,"path":"entorno.md","ref":"entorno.md","articles":[]},"previous":{"title":"Animaciones","level":"1.4","depth":1,"path":"animaciones.md","ref":"animaciones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"colaborar.md","mtime":"2018-03-21T01:08:35.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-21T02:29:16.374Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

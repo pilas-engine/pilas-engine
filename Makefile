@@ -43,7 +43,7 @@ comandos:
 	@echo "    ${G}compilar${N}               Compila la aplicación."
 	@echo "    ${G}compilar_live${N}          Compila la aplicación en modo continuo."
 	@echo "    ${G}electron${N}               Ejecuta la aplicación en electron (sin compilar)."
-	@echo "    ${G}serve${N}                  Ejecuta la aplicación en modo desarrollo."
+	@echo "    ${G}ejecutar${N}               Ejecuta la aplicación en modo desarrollo."
 	@echo "    ${G}test${N}                   Ejecuta los tests de la aplicación."
 	@echo "    ${G}sprites_ember${N}          Genera las imágenes de la aplicación."
 	@echo "    ${G}prettier${N}               Corrige el formato y la sintaxis de todos los archivos."
@@ -66,7 +66,6 @@ comandos:
 	@echo "    ${G}version_minor${N}          Genera una versión MINOR."
 	@echo "    ${G}version_major${N}          Genera una versión MAJOR."
 	@echo "    ${G}binarios${N}               Genera los binarios de la aplicación."
-	@echo "    ${G}deploy_a_surge${N}         Sube la versión más reciente a surge."
 	@echo ""
 	@echo ""
 

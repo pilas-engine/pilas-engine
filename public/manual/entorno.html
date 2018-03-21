@@ -1,0 +1,362 @@
+
+<!DOCTYPE HTML>
+<html lang="es" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Entorno para colaboradores de Pilas · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="El equipo de Pilas Engine">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="colaborar.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Escribe para buscar" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introducción
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="primeros_pasos.html">
+            
+                <a href="primeros_pasos.html">
+            
+                    
+                    Primeros pasos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="automatas_y_estados.html">
+            
+                <a href="automatas_y_estados.html">
+            
+                    
+                    Autómatas y estados
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="animaciones.html">
+            
+                <a href="animaciones.html">
+            
+                    
+                    Animaciones
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="colaborar.html">
+            
+                <a href="colaborar.html">
+            
+                    
+                    Colaborar con pilas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2" data-path="entorno.html">
+            
+                <a href="entorno.html">
+            
+                    
+                    Entorno para colaboradores de Pilas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Publicado con GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Entorno para colaboradores de Pilas</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="entorno-para-colaboradores-de-pilas">Entorno para colaboradores de Pilas</h1>
+<p>Si sos desarrollador y queres replicar el entorno completo para editar el c&#xF3;digo de Pilas te recomendamos una serie de pasos para tener un entorno completo de desarrollo.</p>
+<p>Ten en cuenta que si bien esta es una secci&#xF3;n muy avanzada del manual de Pilas, cualquier duda que te surja al respecto podes realizarla en el foro de Pilas (<a href="http://foro.pilas-engine.com.ar/" target="_blank">http://foro.pilas-engine.com.ar/</a>) para que podemos mejorar el manual.</p>
+<h2 id="&#xBF;qu&#xE9;-software-se-utiliza-internamente-en-pilas">&#xBF;Qu&#xE9; software se utiliza internamente en Pilas?</h2>
+<p>Para realizar Pilas usamos principalmente Javascript junto a varios Frameworks y utilidades. Las m&#xE1;s importantes son:</p>
+<ul>
+<li><strong>Phaser</strong>: Es la biblioteca multimedia que utilizamos para dibujar el espacio de juego de pilas, Phaser nos permite cargar im&#xE1;genes, dibujarlas en pantalla, reproducir sonidos, detectar colisiones, realizar simulaciones f&#xED;sicas etc&#x2026;</li>
+<li><strong>ember-js</strong>: Es el framework web que utilizamos para crear la estructura visual y de interacci&#xF3;n de la aplicaci&#xF3;n; incluye componentes, rutas, controladores y complementos. Ember tambi&#xE9;n nos permite empaquetar toda la aplicaci&#xF3;n y publicarla en la web.</li>
+<li><strong>Typescript</strong>: Lo utilizamos para el c&#xF3;digo fuente del motor Pilas. El motor de Pilas es el encargado de declarar todos los actores existentes, es donde vive la estructura de escenas, y donde se encapsulan todas las llamadas a Phaser.</li>
+<li><strong>gitbook</strong>: Es la herramienta que usamos para componer el manual de pilas. B&#xE1;sicamente gittbok convierte archivos markdown en archivos .html que se pueden abrir desde la aplicaci&#xF3;n y la web.</li>
+</ul>
+<h3 id="estructura-de-directorios">Estructura de directorios</h3>
+<p>Estos son los archivos principales del repositorio y qu&#xE9; funci&#xF3;n cumplen:</p>
+<table>
+<thead>
+<tr>
+<th>Directorio</th>
+<th>&#xBF;Qu&#xE9; funci&#xF3;n cumple?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_docs</td>
+<td>Almacena el resultado de la documentaci&#xF3;n autom&#xE1;tica. Si ejecut&#xE1;s &quot;make api&quot; vas a ver c&#xF3;mo se recorre el c&#xF3;digo de Pilas y se genera esta documentaci&#xF3;n.</td>
+</tr>
+<tr>
+<td><strong>app</strong></td>
+<td>Es un directorio importante, aqu&#xED; est&#xE1; todo el c&#xF3;digo fuente de la aplicaci&#xF3;n realizado con Ember. Dentro est&#xE1;n las plantillas, los controladores, componentes y rutas. M&#xE1;s adelante en este tutorial damos detalles sobre c&#xF3;mo editar los archivos de este directorio. Pero a grandes razgos, con &quot;make ejecutar&quot; o &quot;make compilar&quot; se puede invocar a Ember para que convierta todo ese directorio en una aplicaci&#xF3;n web.</td>
+</tr>
+<tr>
+<td><strong>manual</strong></td>
+<td>Contiene todo el manual de Pilas en formato markdown. Podes editar el contenido con cualquier editor de textos, y para convertirlo en html y que se vea dentro de la aplicaci&#xF3;n deber&#xED;as ejecutar el comando &quot;make pilas_manual&quot;.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="repositorio-y-modelo-de-trabajo">Repositorio y modelo de trabajo</h2>
+<p>Antes de iniciar, necesitas tener instalado NodeJS 8 y el gestor de paquetes &quot;yarn&quot;.</p>
+<p>Si quieres asegurarte de tener todo correctamente instalado escrib&#xED; los siguientes comandos:</p>
+<pre><code>npm install -g yarn
+node -v
+</code></pre><p>El c&#xF3;digo completo de Pilas est&#xE1; almacenado en Github dentro del siguiente repositorio:</p>
+<ul>
+<li><a href="https://github.com/pilas-engine/pilas-engine" target="_blank">https://github.com/pilas-engine/pilas-engine</a></li>
+</ul>
+<p>Te recomendamos iniciar un fork del repositorio antes de continuar, hay instrucciones sobre c&#xF3;mo realizar un fork del repositorio aqu&#xED;: <a href="https://help.github.com/articles/fork-a-repo/" target="_blank">https://help.github.com/articles/fork-a-repo/</a></p>
+<p>Una vez que tengas realizado el fork, clon&#xE1; el repositorio con estos comandos e instal&#xE1; las dependencias del proyecto:</p>
+<pre><code>make iniciar
+</code></pre><p>Deber&#xED;as ver c&#xF3;mo se van instalando todas las dependencias dentro del directorio &quot;node_modules&quot;. Esto puede demorar varios minutos:</p>
+<p><img src="assets/instalar.png" alt="nstala"></p>
+<p>Una vez finalizada la instalaci&#xF3;n de dependencias podes ejecutar el comando &quot;make&quot;. Cuando lo escribas, van a aparecer en pantalla todos los atajos que usamos dentro del proyecto:</p>
+<p><img src="assets/make-1597532.png" alt="ake-159753"></p>
+<p>Obviamente en la mayor&#xED;a de los casos usamos solo algunos comandos, pero siempre vamos a mantener actualizado este listado para simplificar el desarrollo.</p>
+<p>Para poner en funcionamiento el servidor de Ember podes ejecutar este comando:</p>
+<pre><code>make ejecutar
+</code></pre><p>y luego abr&#xED; esta direcci&#xF3;n en el navegador: <a href="http://localhost:4200" target="_blank">http://localhost:4200</a></p>
+<p><img src="assets/navegador.png" alt="avegado"></p>
+<p>Ten en cuenta que el servidor de Ember va a estar en ejecuci&#xF3;n; cada vez que modifiques un archivo del c&#xF3;digo de la aplicaci&#xF3;n Ember se va a encargar de actualizar el navegador autom&#xE1;ticamente.</p>
+<h2 id="estilo-de-programaci&#xF3;n">Estilo de programaci&#xF3;n</h2>
+<p>Te recomendamos escribir el c&#xF3;digo en espa&#xF1;ol siempre que sea posible, y aquellas variables o m&#xE9;todos que tienen varias palabras intentaremos escribirlas como &quot;nombre_del_metodo&quot; en lugar de &quot;nombreDelMetodo&quot;.</p>
+<p>Adem&#xE1;s, es muy importante que tengas configurado tu editor para usar autom&#xE1;ticamente prettier (<a href="https://prettier.io/" target="_blank">https://prettier.io/</a>).</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="colaborar.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Colaborar con pilas">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Entorno para colaboradores de Pilas","level":"2.2","depth":1,"previous":{"title":"Colaborar con pilas","level":"2.1","depth":1,"path":"colaborar.md","ref":"colaborar.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"entorno.md","mtime":"2018-03-21T02:29:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-21T02:29:16.374Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
