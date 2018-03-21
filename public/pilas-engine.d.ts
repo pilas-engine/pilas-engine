@@ -60,6 +60,7 @@ declare class Escenas {
 declare class Fisica {
     pilas: Pilas;
     constructor(pilas: any);
+    readonly Matter: any;
     readonly figuras: any;
     realizar_rayo_desde_figura(figura: any, hasta_x: any, hasta_y: any): {
         contactos: any;

@@ -222,9 +222,16 @@ var Fisica = (function () {
     function Fisica(pilas) {
         this.pilas = pilas;
     }
+    Object.defineProperty(Fisica.prototype, "Matter", {
+        get: function () {
+            return Phaser.Physics.Matter["Matter"];
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Fisica.prototype, "figuras", {
         get: function () {
-            return Phaser.Physics.Matter.Matter.Composite.allBodies(this.pilas.modo.matter.world.localWorld);
+            return this.Matter.Composite.allBodies(this.pilas.modo.matter.world.localWorld);
         },
         enumerable: true,
         configurable: true
@@ -232,7 +239,7 @@ var Fisica = (function () {
     Fisica.prototype.realizar_rayo_desde_figura = function (figura, hasta_x, hasta_y) {
         var posicion = {
             x: figura.gameObject.actor.x,
-            y: figura.gameObject.actor.y,
+            y: figura.gameObject.actor.y
         };
         var figuras = this.figuras;
         var indice = figuras.indexOf(figura);
@@ -244,8 +251,8 @@ var Fisica = (function () {
         if (figuras === void 0) { figuras = undefined; }
         var desde = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(desde_x, desde_y);
         var hasta = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(hasta_x, hasta_y);
-        var figuras = figuras || this.figuras;
-        var data = Phaser.Physics.Matter.Matter.Query.ray(figuras, desde, hasta);
+        figuras = figuras || this.figuras;
+        var data = this.Matter.Query.ray(figuras, desde, hasta);
         return {
             contactos: data.map(function (p) {
                 var posicion_phaser = p.body.position;
