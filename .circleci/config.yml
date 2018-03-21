@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Ejecutando test
           command: make test
+      - run:
+          name: Actualiza el manual de manual-pilas-engine.surge.sh
+          command: make pilas_manual_web
   binarios:
     docker:
       - image: circleci/node:8.9.4-stretch-browsers
