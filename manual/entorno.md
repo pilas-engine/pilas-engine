@@ -18,13 +18,14 @@ Para realizar Pilas usamos principalmente Javascript junto a varios Frameworks y
 
 Estos son los archivos principales del repositorio y qué función cumplen:
 
-| Directorio | ¿Qué función cumple?                                         |
-| ---------- | ------------------------------------------------------------ |
-| api_docs   | Almacena el resultado de la documentación automática. Si ejecutás "make api" vas a ver cómo se recorre el código de Pilas y se genera esta documentación. |
-| **app**    | Es un directorio importante, aquí está todo el código fuente de la aplicación realizado con Ember. Dentro están las plantillas, los controladores, componentes y rutas. Más adelante en este tutorial damos detalles sobre cómo editar los archivos de este directorio. Pero a grandes razgos, con "make ejecutar" o "make compilar" se puede invocar a Ember para que convierta todo ese directorio en una aplicación web. |
-| **manual** | Contiene todo el manual de Pilas en formato markdown. Podes editar el contenido con cualquier editor de textos, y para convertirlo en html y que se vea dentro de la aplicación deberías ejecutar el comando "make pilas_manual". |
-|            |                                                              |
-|            |                                                              |
+| Directorio       | ¿Qué función cumple?                                         |
+| ---------------- | ------------------------------------------------------------ |
+| api_docs         | Almacena el resultado de la documentación automática. Si ejecutás "make api" vas a ver cómo se recorre el código de Pilas y se genera esta documentación. |
+| **app**          | Es un directorio importante, aquí está todo el código fuente de la aplicación realizado con Ember. Dentro están las plantillas, los controladores, componentes y rutas. Más adelante en este tutorial damos detalles sobre cómo editar los archivos de este directorio. Pero a grandes razgos, con "make ejecutar" o "make compilar" se puede invocar a Ember para que convierta todo ese directorio en una aplicación web. |
+| **manual**       | Contiene todo el manual de Pilas en formato markdown. Podes editar el contenido con cualquier editor de textos, y para convertirlo en html y que se vea dentro de la aplicación deberías ejecutar el comando "make pilas_manual". |
+| **pilas-engine** | Contiene el código fuente del motor de pilas. El código está diseñado usando typescript, por ese motivo para compilarlo hay que ejecutar el comando "make compilar_pilas" o "make compilar_pilas_live" para hacerlo de forma continua. |
+| **public**       | Almacena todos los archivos que se deben servir desde la aplicación emberjs sin procesar. Por ejemplo imágenes, fuentes y sonidos. Pero además, este directorio también se actualiza desde otros comandos. Por ejemplo, cuando compilamos el código del directorio *pilas-engine* con el comando "make compilar_pilas", el archivo generado se copia a este directorio "public". |
+| **tests**        | Almacena todos los tests de unidad, integración y aceptación. Estos tests se ejecutan cuando se invoca el comando "make test" o cuando se ejecuta "make ejecutar" y luego se ingresa a http://localhost:4200/tests. Además, se ejecutan en remoto cada vez que se hace un push al repositorio. Más adelante en este documento se describe cómo funcionan los tests en la estructura del proyecto. |
 
 ## Repositorio y modelo de trabajo
 

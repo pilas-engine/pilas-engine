@@ -6,6 +6,16 @@ Prototipo de la nueva versión de pilas-engine
 
 La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
 
+## Links útiles
+
+
+* http://pilas-engine.surge.sh/ - La versión más reciente de pilas.
+- http://manual-pilas-engine.surge.sh - El manual actualizado al día de la fecha.
+- https://circleci.com/gh/pilas-engine/pilas-engine - El resultado de los tests de integración.
+- https://trello.com/b/eQJOjpOF/pilas-engine-2 - Nuestra planificación de tareas.
+- http://foro.pilas-engine.com.ar/ - El foro donde debatimos ideas y anunciamos las versiones nuevas.
+- https://github.com/pilas-engine/pilas-engine/releases - Las versiones descargables de Pilas offline y los manuales. 
+
 ## Primeros pasos
 
 Para comenzar a utilizar este repositorio deberías tener instalado git, Make, nodejs
