@@ -29,4 +29,16 @@ class Actores {
   Conejo() {
     return this.crear_actor("Conejo");
   }
+
+  suelo() {
+    return this.crear_actor("suelo");
+  }
+
+  pared() {
+    return this.crear_actor("pared");
+  }
+
+  techo() {
+    return this.crear_actor("techo");
+  }
 }

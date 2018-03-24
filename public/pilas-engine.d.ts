@@ -5,6 +5,9 @@ declare class Actores {
     crear_actor(nombre: any): any;
     Aceituna(x?: number, y?: number): any;
     Conejo(): any;
+    suelo(): any;
+    pared(): any;
+    techo(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -186,6 +189,7 @@ declare class ActorBase {
     figura: string;
     sin_rotacion: false;
     automata: Automata;
+    colisiones: Actor[];
     propiedades_base: {
         x: number;
         y: number;
@@ -260,9 +264,10 @@ declare class ActorBase {
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
     reproducir_animacion(nombre: any): void;
-    cuando_comienza_una_colision(): void;
-    cuando_se_mantiene_una_colision(): void;
-    cuando_termina_una_colision(): void;
+    cuando_comienza_una_colision(actor: Actor): void;
+    cuando_se_mantiene_una_colision(actor: Actor): void;
+    cuando_termina_una_colision(actor: Actor): void;
+    readonly cantidad_de_colisiones: number;
 }
 declare class Actor extends ActorBase {
     propiedades: {};
@@ -306,9 +311,9 @@ declare class Conejo extends Actor {
     camina_actualizar(): void;
     salta_iniciar(): void;
     salta_actualizar(): void;
-    cuando_comienza_una_colision(): void;
-    cuando_se_mantiene_una_colision(): void;
-    cuando_termina_una_colision(): void;
+    cuando_comienza_una_colision(actor: any): void;
+    cuando_se_mantiene_una_colision(actor: any): void;
+    cuando_termina_una_colision(actor: any): void;
 }
 declare class Logo extends Actor {
     iniciar(): void;
@@ -318,10 +323,43 @@ declare class Nave extends Actor {
     iniciar(): void;
     actualizar(): void;
 }
+declare class pared extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        y: number;
+        figura_ancho: number;
+        figura_alto: number;
+        figura_dinamica: boolean;
+    };
+    iniciar(): void;
+}
 declare class Pelota extends Actor {
     propiedades: {
         figura: string;
         figura_radio: number;
+    };
+    iniciar(): void;
+}
+declare class suelo extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        y: number;
+        figura_ancho: number;
+        figura_alto: number;
+        figura_dinamica: boolean;
+    };
+    iniciar(): void;
+}
+declare class techo extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        y: number;
+        figura_ancho: number;
+        figura_alto: number;
+        figura_dinamica: boolean;
     };
     iniciar(): void;
 }

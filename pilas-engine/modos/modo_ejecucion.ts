@@ -22,7 +22,7 @@ class ModoEjecucion extends Modo {
 
   create(datos) {
     this.actores = [];
-    this.matter.world.setBounds(0, 0, this.ancho, this.alto);
+    //this.matter.world.setBounds(0, 0, this.ancho, this.alto, 2);
 
     this.guardar_parametros_en_atributos(datos);
     this.crear_fondo();
@@ -45,33 +45,65 @@ class ModoEjecucion extends Modo {
   }
 
   vincular_eventos_de_colision() {
-    this.matter.world.on("collisionstart", (event, a, b) => {
-      if (a.gameObject && a.gameObject.actor) {
-        a.gameObject.actor.cuando_comienza_una_colision();
-      }
+    this.matter.world.on("collisionstart", (event /*, a, b*/) => {
+      for (let i = 0; i < event.pairs.length; i++) {
+        let colision = event.pairs[i];
+        let figura_1 = colision.bodyA;
+        let figura_2 = colision.bodyB;
 
-      if (b.gameObject && b.gameObject.actor) {
-        b.gameObject.actor.cuando_comienza_una_colision();
+        if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+          let actor_a = figura_1.gameObject.actor;
+          let actor_b = figura_2.gameObject.actor;
+
+          actor_a.colisiones.push(actor_b);
+          actor_b.colisiones.push(actor_a);
+
+          actor_a.cuando_comienza_una_colision(actor_b);
+          actor_b.cuando_comienza_una_colision(actor_a);
+        }
       }
     });
 
     this.matter.world.on("collisionactive", (event, a, b) => {
-      if (a.gameObject && a.gameObject.actor) {
-        a.gameObject.actor.cuando_se_mantiene_una_colision();
-      }
+      for (let i = 0; i < event.pairs.length; i++) {
+        let colision = event.pairs[i];
+        let figura_1 = colision.bodyA;
+        let figura_2 = colision.bodyB;
 
-      if (b.gameObject && b.gameObject.actor) {
-        b.gameObject.actor.cuando_se_mantiene_una_colision();
+        if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+          let actor_a = figura_1.gameObject.actor;
+          let actor_b = figura_2.gameObject.actor;
+
+          if (actor_a.colisiones.indexOf(actor_b) === -1) {
+            actor_a.colisiones.push(actor_b);
+          }
+
+          if (actor_b.colisiones.indexOf(actor_a) === -1) {
+            actor_b.colisiones.push(actor_a);
+          }
+
+          actor_a.cuando_se_mantiene_una_colision(actor_b);
+          actor_b.cuando_se_mantiene_una_colision(actor_a);
+        }
       }
     });
 
     this.matter.world.on("collisionend", (event, a, b) => {
-      if (a.gameObject && a.gameObject.actor) {
-        a.gameObject.actor.cuando_termina_una_colision();
-      }
+      for (let i = 0; i < event.pairs.length; i++) {
+        let colision = event.pairs[i];
+        let figura_1 = colision.bodyA;
+        let figura_2 = colision.bodyB;
 
-      if (b.gameObject && b.gameObject.actor) {
-        b.gameObject.actor.cuando_termina_una_colision();
+        if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+          let actor_a = figura_1.gameObject.actor;
+          let actor_b = figura_2.gameObject.actor;
+
+          actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
+          actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
+
+          actor_a.cuando_termina_una_colision(actor_b);
+          actor_b.cuando_termina_una_colision(actor_a);
+        }
       }
     });
   }

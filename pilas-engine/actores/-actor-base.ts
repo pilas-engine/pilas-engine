@@ -6,6 +6,7 @@ class ActorBase {
   figura = "";
   sin_rotacion: false;
   automata: Automata;
+  colisiones: Actor[];
 
   propiedades_base = {
     x: 0,
@@ -41,6 +42,7 @@ class ActorBase {
   constructor(pilas) {
     this.pilas = pilas;
     this.automata = new Automata(this);
+    this.colisiones = [];
   }
 
   get propiedades_iniciales() {
@@ -448,9 +450,13 @@ class ActorBase {
     this.sprite.anims.play(nombre);
   }
 
-  cuando_comienza_una_colision() {}
+  cuando_comienza_una_colision(actor: Actor) {}
 
-  cuando_se_mantiene_una_colision() {}
+  cuando_se_mantiene_una_colision(actor: Actor) {}
 
-  cuando_termina_una_colision() {}
+  cuando_termina_una_colision(actor: Actor) {}
+
+  get cantidad_de_colisiones() {
+    return this.colisiones.length;
+  }
 }

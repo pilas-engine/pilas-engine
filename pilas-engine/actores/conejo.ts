@@ -24,7 +24,13 @@ class Conejo extends Actor {
     this.estado = "parado";
   }
 
-  actualizar() {}
+  actualizar() {
+    if (this.cantidad_de_colisiones === 0) {
+      this.toca_el_suelo = false;
+    } else {
+      this.toca_el_suelo = true;
+    }
+  }
 
   parado_iniciar() {
     this.reproducir_animacion("conejo_parado");
@@ -35,10 +41,13 @@ class Conejo extends Actor {
       this.estado = "camina";
     }
 
-    if (this.pilas.control.arriba) {
-      if (this.velocidad_y < 1 && this.velocidad_y > -1) {
-        this.estado = "salta";
-      }
+    if (this.pilas.control.arriba && this.toca_el_suelo) {
+      this.impulsar(0, 10);
+      this.estado = "salta";
+    }
+
+    if (!this.toca_el_suelo) {
+      this.estado = "salta";
     }
   }
 
@@ -59,18 +68,21 @@ class Conejo extends Actor {
 
     if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {
       this.estado = "parado";
+      return;
     }
 
-    if (this.pilas.control.arriba) {
-      if (this.velocidad_y < 1 && this.velocidad_y > -1) {
-        this.estado = "salta";
-      }
+    if (this.pilas.control.arriba && this.toca_el_suelo) {
+      this.impulsar(0, 10);
+      this.estado = "salta";
+    }
+
+    if (!this.toca_el_suelo) {
+      this.estado = "salta";
     }
   }
 
   salta_iniciar() {
     this.reproducir_animacion("conejo_salta");
-    this.impulsar(0, 10);
   }
 
   salta_actualizar() {
@@ -87,15 +99,9 @@ class Conejo extends Actor {
     }
   }
 
-  cuando_comienza_una_colision() {
-    this.toca_el_suelo = true;
-  }
+  cuando_comienza_una_colision(actor) {}
 
-  cuando_se_mantiene_una_colision() {
-    this.toca_el_suelo = true;
-  }
+  cuando_se_mantiene_una_colision(actor) {}
 
-  cuando_termina_una_colision() {
-    this.toca_el_suelo = false;
-  }
+  cuando_termina_una_colision(actor) {}
 }

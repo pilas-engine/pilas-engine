@@ -31,6 +31,15 @@ var Actores = (function () {
     Actores.prototype.Conejo = function () {
         return this.crear_actor("Conejo");
     };
+    Actores.prototype.suelo = function () {
+        return this.crear_actor("suelo");
+    };
+    Actores.prototype.pared = function () {
+        return this.crear_actor("pared");
+    };
+    Actores.prototype.techo = function () {
+        return this.crear_actor("techo");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -576,6 +585,7 @@ var ActorBase = (function () {
         };
         this.pilas = pilas;
         this.automata = new Automata(this);
+        this.colisiones = [];
     }
     Object.defineProperty(ActorBase.prototype, "propiedades_iniciales", {
         get: function () {
@@ -983,9 +993,16 @@ var ActorBase = (function () {
     ActorBase.prototype.reproducir_animacion = function (nombre) {
         this.sprite.anims.play(nombre);
     };
-    ActorBase.prototype.cuando_comienza_una_colision = function () { };
-    ActorBase.prototype.cuando_se_mantiene_una_colision = function () { };
-    ActorBase.prototype.cuando_termina_una_colision = function () { };
+    ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
+    ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
+    ActorBase.prototype.cuando_termina_una_colision = function (actor) { };
+    Object.defineProperty(ActorBase.prototype, "cantidad_de_colisiones", {
+        get: function () {
+            return this.colisiones.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ActorBase;
 }());
 var Actor = (function (_super) {
@@ -1054,7 +1071,14 @@ var Conejo = (function (_super) {
         this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
         this.estado = "parado";
     };
-    Conejo.prototype.actualizar = function () { };
+    Conejo.prototype.actualizar = function () {
+        if (this.cantidad_de_colisiones === 0) {
+            this.toca_el_suelo = false;
+        }
+        else {
+            this.toca_el_suelo = true;
+        }
+    };
     Conejo.prototype.parado_iniciar = function () {
         this.reproducir_animacion("conejo_parado");
     };
@@ -1062,10 +1086,12 @@ var Conejo = (function (_super) {
         if (this.pilas.control.izquierda || this.pilas.control.derecha) {
             this.estado = "camina";
         }
-        if (this.pilas.control.arriba) {
-            if (this.velocidad_y < 1 && this.velocidad_y > -1) {
-                this.estado = "salta";
-            }
+        if (this.pilas.control.arriba && this.toca_el_suelo) {
+            this.impulsar(0, 10);
+            this.estado = "salta";
+        }
+        if (!this.toca_el_suelo) {
+            this.estado = "salta";
         }
     };
     Conejo.prototype.camina_iniciar = function () {
@@ -1082,16 +1108,18 @@ var Conejo = (function (_super) {
         }
         if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {
             this.estado = "parado";
+            return;
         }
-        if (this.pilas.control.arriba) {
-            if (this.velocidad_y < 1 && this.velocidad_y > -1) {
-                this.estado = "salta";
-            }
+        if (this.pilas.control.arriba && this.toca_el_suelo) {
+            this.impulsar(0, 10);
+            this.estado = "salta";
+        }
+        if (!this.toca_el_suelo) {
+            this.estado = "salta";
         }
     };
     Conejo.prototype.salta_iniciar = function () {
         this.reproducir_animacion("conejo_salta");
-        this.impulsar(0, 10);
     };
     Conejo.prototype.salta_actualizar = function () {
         if (this.pilas.control.izquierda) {
@@ -1104,15 +1132,9 @@ var Conejo = (function (_super) {
             this.estado = "parado";
         }
     };
-    Conejo.prototype.cuando_comienza_una_colision = function () {
-        this.toca_el_suelo = true;
-    };
-    Conejo.prototype.cuando_se_mantiene_una_colision = function () {
-        this.toca_el_suelo = true;
-    };
-    Conejo.prototype.cuando_termina_una_colision = function () {
-        this.toca_el_suelo = false;
-    };
+    Conejo.prototype.cuando_comienza_una_colision = function (actor) { };
+    Conejo.prototype.cuando_se_mantiene_una_colision = function (actor) { };
+    Conejo.prototype.cuando_termina_una_colision = function (actor) { };
     return Conejo;
 }(Actor));
 var Logo = (function (_super) {
@@ -1147,6 +1169,23 @@ var Nave = (function (_super) {
     };
     return Nave;
 }(Actor));
+var pared = (function (_super) {
+    __extends(pared, _super);
+    function pared() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            figura: "rectangulo",
+            imagen: "pared",
+            y: 0,
+            figura_ancho: 20,
+            figura_alto: 600,
+            figura_dinamica: false
+        };
+        return _this;
+    }
+    pared.prototype.iniciar = function () { };
+    return pared;
+}(Actor));
 var Pelota = (function (_super) {
     __extends(Pelota, _super);
     function Pelota() {
@@ -1160,6 +1199,40 @@ var Pelota = (function (_super) {
     Pelota.prototype.iniciar = function () {
     };
     return Pelota;
+}(Actor));
+var suelo = (function (_super) {
+    __extends(suelo, _super);
+    function suelo() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            figura: "rectangulo",
+            imagen: "suelo",
+            y: -250,
+            figura_ancho: 600,
+            figura_alto: 25,
+            figura_dinamica: false
+        };
+        return _this;
+    }
+    suelo.prototype.iniciar = function () { };
+    return suelo;
+}(Actor));
+var techo = (function (_super) {
+    __extends(techo, _super);
+    function techo() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            figura: "rectangulo",
+            imagen: "techo",
+            y: +220,
+            figura_ancho: 600,
+            figura_alto: 25,
+            figura_dinamica: false
+        };
+        return _this;
+    }
+    techo.prototype.iniciar = function () { };
+    return techo;
 }(Actor));
 var EscenaBase = (function () {
     function EscenaBase(pilas) {
@@ -1282,6 +1355,9 @@ var ModoCargador = (function (_super) {
         this.load.image("conejo_parado2", "imagenes/conejo/parado2.png");
         this.load.image("conejo_camina1", "imagenes/conejo/camina1.png");
         this.load.image("conejo_camina2", "imagenes/conejo/camina2.png");
+        this.load.image("suelo", "imagenes/suelo.png");
+        this.load.image("techo", "imagenes/techo.png");
+        this.load.image("pared", "imagenes/pared.png");
         this.load.audio("laser", "sonidos/laser.wav", {});
         this.load.audio("moneda", "sonidos/moneda.wav", {});
         this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});
@@ -1430,7 +1506,6 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.create = function (datos) {
         this.actores = [];
-        this.matter.world.setBounds(0, 0, this.ancho, this.alto);
         this.guardar_parametros_en_atributos(datos);
         this.crear_fondo();
         this.clases = this.obtener_referencias_a_clases();
@@ -1448,28 +1523,53 @@ var ModoEjecucion = (function (_super) {
         this.vincular_eventos_de_colision();
     };
     ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
-        this.matter.world.on("collisionstart", function (event, a, b) {
-            if (a.gameObject && a.gameObject.actor) {
-                a.gameObject.actor.cuando_comienza_una_colision();
-            }
-            if (b.gameObject && b.gameObject.actor) {
-                b.gameObject.actor.cuando_comienza_una_colision();
+        this.matter.world.on("collisionstart", function (event) {
+            for (var i = 0; i < event.pairs.length; i++) {
+                var colision = event.pairs[i];
+                var figura_1 = colision.bodyA;
+                var figura_2 = colision.bodyB;
+                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                    var actor_a = figura_1.gameObject.actor;
+                    var actor_b = figura_2.gameObject.actor;
+                    actor_a.colisiones.push(actor_b);
+                    actor_b.colisiones.push(actor_a);
+                    actor_a.cuando_comienza_una_colision(actor_b);
+                    actor_b.cuando_comienza_una_colision(actor_a);
+                }
             }
         });
         this.matter.world.on("collisionactive", function (event, a, b) {
-            if (a.gameObject && a.gameObject.actor) {
-                a.gameObject.actor.cuando_se_mantiene_una_colision();
-            }
-            if (b.gameObject && b.gameObject.actor) {
-                b.gameObject.actor.cuando_se_mantiene_una_colision();
+            for (var i = 0; i < event.pairs.length; i++) {
+                var colision = event.pairs[i];
+                var figura_1 = colision.bodyA;
+                var figura_2 = colision.bodyB;
+                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                    var actor_a = figura_1.gameObject.actor;
+                    var actor_b = figura_2.gameObject.actor;
+                    if (actor_a.colisiones.indexOf(actor_b) === -1) {
+                        actor_a.colisiones.push(actor_b);
+                    }
+                    if (actor_b.colisiones.indexOf(actor_a) === -1) {
+                        actor_b.colisiones.push(actor_a);
+                    }
+                    actor_a.cuando_se_mantiene_una_colision(actor_b);
+                    actor_b.cuando_se_mantiene_una_colision(actor_a);
+                }
             }
         });
         this.matter.world.on("collisionend", function (event, a, b) {
-            if (a.gameObject && a.gameObject.actor) {
-                a.gameObject.actor.cuando_termina_una_colision();
-            }
-            if (b.gameObject && b.gameObject.actor) {
-                b.gameObject.actor.cuando_termina_una_colision();
+            for (var i = 0; i < event.pairs.length; i++) {
+                var colision = event.pairs[i];
+                var figura_1 = colision.bodyA;
+                var figura_2 = colision.bodyB;
+                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                    var actor_a = figura_1.gameObject.actor;
+                    var actor_b = figura_2.gameObject.actor;
+                    actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
+                    actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
+                    actor_a.cuando_termina_una_colision(actor_b);
+                    actor_b.cuando_termina_una_colision(actor_a);
+                }
             }
         });
     };
