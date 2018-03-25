@@ -41,6 +41,12 @@ class ModoEjecucion extends Modo {
       this.matter.systems.matterPhysics.world.createDebugGraphic();
     }
 
+    this.input.on("pointermove", cursor => {
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+      this.pilas.cursor_x = Math.trunc(posicion.x);
+      this.pilas.cursor_y = Math.trunc(posicion.y);
+    });
+
     this.vincular_eventos_de_colision();
   }
 
@@ -60,6 +66,16 @@ class ModoEjecucion extends Modo {
 
           actor_a.cuando_comienza_una_colision(actor_b);
           actor_b.cuando_comienza_una_colision(actor_a);
+        } else {
+          // colisión entre sensor de actor y actor
+
+          if (figura_2.sensor_del_actor && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+            figura_2.colisiones.push(figura_1.gameObject.actor);
+          }
+
+          if (figura_1.sensor_del_actor && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+            figura_1.colisiones.push(figura_2.gameObject.actor);
+          }
         }
       }
     });
@@ -69,6 +85,8 @@ class ModoEjecucion extends Modo {
         let colision = event.pairs[i];
         let figura_1 = colision.bodyA;
         let figura_2 = colision.bodyB;
+
+        // colisión entre actores.
 
         if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
           let actor_a = figura_1.gameObject.actor;
@@ -84,6 +102,7 @@ class ModoEjecucion extends Modo {
 
           actor_a.cuando_se_mantiene_una_colision(actor_b);
           actor_b.cuando_se_mantiene_una_colision(actor_a);
+        } else {
         }
       }
     });
@@ -103,6 +122,16 @@ class ModoEjecucion extends Modo {
 
           actor_a.cuando_termina_una_colision(actor_b);
           actor_b.cuando_termina_una_colision(actor_a);
+        } else {
+          // colisión entre sensor de actor y actor
+
+          if (figura_2.sensor_del_actor && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+            figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
+          }
+
+          if (figura_1.sensor_del_actor && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+            figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
+          }
         }
       }
     });

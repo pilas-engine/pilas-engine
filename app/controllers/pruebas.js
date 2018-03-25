@@ -21,13 +21,16 @@ export default Controller.extend({
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
                 this.pilas.conejo = pilas.actores.Conejo();
-                this.pilas.conejo = pilas.actores.suelo());
-                this.pilas.conejo = pilas.actores.techo();
+
+                let suelo = pilas.actores.suelo());
+                let techo = pilas.actores.techo();
+
                 let pared_izquierda = pilas.actores.pared();
                 let pared_derecha = pilas.actores.pared();
 
                 pared_izquierda.x = -300;
                 pared_derecha.x = 300;
+
               }
 
               actualizar() {
@@ -75,7 +78,7 @@ export default Controller.extend({
               transparencia: 0,
               figura: "circulo",
               figura_radio: 25,
-              figura_dinamica: false
+              figura_dinamica: true
             }
           ]
         }

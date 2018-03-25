@@ -64,15 +64,6 @@ declare class Fisica {
     pilas: Pilas;
     constructor(pilas: any);
     readonly Matter: any;
-    readonly figuras: any;
-    realizar_rayo_desde_figura(figura: any, hasta_x: any, hasta_y: any): {
-        contactos: any;
-        fuente: any;
-    };
-    realizar_rayo_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number, figuras?: any): {
-        contactos: any;
-        fuente: any;
-    };
 }
 declare class Historia {
     pilas: Pilas;
@@ -146,6 +137,8 @@ declare class Pilas {
     modo: any;
     _ancho: number;
     _alto: number;
+    cursor_x: number;
+    cursor_y: number;
     constructor();
     readonly escena: Escena;
     iniciar_phaser(ancho: number, alto: number): void;
@@ -190,6 +183,7 @@ declare class ActorBase {
     sin_rotacion: false;
     automata: Automata;
     colisiones: Actor[];
+    sensores: any[];
     propiedades_base: {
         x: number;
         y: number;
@@ -235,6 +229,7 @@ declare class ActorBase {
     estado: string;
     crear_estado(nombre: any): void;
     actualizar(): void;
+    actualizar_sensores(): void;
     imagen: string;
     x: number;
     y: number;
@@ -268,6 +263,7 @@ declare class ActorBase {
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
     readonly cantidad_de_colisiones: number;
+    agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
 }
 declare class Actor extends ActorBase {
     propiedades: {};
@@ -303,6 +299,7 @@ declare class Conejo extends Actor {
         figura_rebote: number;
     };
     toca_el_suelo: boolean;
+    pies: any;
     iniciar(): void;
     actualizar(): void;
     parado_iniciar(): void;
@@ -311,6 +308,7 @@ declare class Conejo extends Actor {
     camina_actualizar(): void;
     salta_iniciar(): void;
     salta_actualizar(): void;
+    readonly distancia_al_suelo: any;
     cuando_comienza_una_colision(actor: any): void;
     cuando_se_mantiene_una_colision(actor: any): void;
     cuando_termina_una_colision(actor: any): void;
@@ -331,6 +329,7 @@ declare class pared extends Actor {
         figura_ancho: number;
         figura_alto: number;
         figura_dinamica: boolean;
+        figura_rebote: number;
     };
     iniciar(): void;
 }

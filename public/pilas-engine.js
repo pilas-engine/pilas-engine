@@ -238,46 +238,6 @@ var Fisica = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Fisica.prototype, "figuras", {
-        get: function () {
-            return this.Matter.Composite.allBodies(this.pilas.modo.matter.world.localWorld);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Fisica.prototype.realizar_rayo_desde_figura = function (figura, hasta_x, hasta_y) {
-        var posicion = {
-            x: figura.gameObject.actor.x,
-            y: figura.gameObject.actor.y
-        };
-        var figuras = this.figuras;
-        var indice = figuras.indexOf(figura);
-        figuras.splice(indice, 1);
-        return this.realizar_rayo_entre(posicion.x, posicion.y, hasta_x, hasta_y, figuras);
-    };
-    Fisica.prototype.realizar_rayo_entre = function (desde_x, desde_y, hasta_x, hasta_y, figuras) {
-        var _this = this;
-        if (figuras === void 0) { figuras = undefined; }
-        var desde = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(desde_x, desde_y);
-        var hasta = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(hasta_x, hasta_y);
-        figuras = figuras || this.figuras;
-        var data = this.Matter.Query.ray(figuras, desde, hasta);
-        return {
-            contactos: data.map(function (p) {
-                var posicion_phaser = p.body.position;
-                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(posicion_phaser.x, posicion_phaser.y);
-                return {
-                    x: posicion.x,
-                    y: posicion.y,
-                    desde_x: desde_x,
-                    desde_y: desde_y,
-                    distancia: p.depth,
-                    figura: p.body
-                };
-            }),
-            fuente: data
-        };
-    };
     return Fisica;
 }());
 var Historia = (function () {
@@ -370,7 +330,7 @@ var Mensajes = (function () {
             mensaje: error.message,
             stack: error.stack.toString()
         };
-        console.warn("TODO: aquí deberia pausar phaser");
+        console.warn("TODO: aquí deberia pausar phaser porque ocurrió un error y no se debería continuar.");
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.warn("Se produjo una llamada a pilas.emitir_excepcion_al_editor desde " + origen);
         console.error(error);
@@ -465,6 +425,8 @@ if (window.location.host) {
 }
 var Pilas = (function () {
     function Pilas() {
+        this.cursor_x = 0;
+        this.cursor_y = 0;
         this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
         this.depurador = new Depurador(this);
@@ -598,6 +560,7 @@ var ActorBase = (function () {
         var _this = this;
         var figura = propiedades.figura || "";
         var imagen = propiedades.imagen;
+        this.sensores = [];
         switch (figura) {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
@@ -688,6 +651,13 @@ var ActorBase = (function () {
         this.automata.crear_estado(nombre);
     };
     ActorBase.prototype.actualizar = function () { };
+    ActorBase.prototype.actualizar_sensores = function () {
+        var _this = this;
+        this.sensores.map(function (s) {
+            var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_this.x, _this.y), x = _a.x, y = _a.y;
+            _this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, { x: x + s.distancia_x, y: y - s.distancia_y });
+        });
+    };
     Object.defineProperty(ActorBase.prototype, "imagen", {
         get: function () {
             return this.sprite.texture.key;
@@ -1003,6 +973,19 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype.agregar_sensor = function (ancho, alto, x, y) {
+        var pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
+        var figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
+            isSensor: true,
+            isStatic: false
+        });
+        figura.distancia_x = x;
+        figura.distancia_y = y;
+        figura.sensor_del_actor = this;
+        figura.colisiones = [];
+        this.sensores.push(figura);
+        return figura;
+    };
     return ActorBase;
 }());
 var Actor = (function (_super) {
@@ -1062,6 +1045,7 @@ var Conejo = (function (_super) {
             figura_rebote: 0
         };
         _this.toca_el_suelo = false;
+        _this.pies = null;
         return _this;
     }
     Conejo.prototype.iniciar = function () {
@@ -1070,13 +1054,14 @@ var Conejo = (function (_super) {
         this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
         this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
         this.estado = "parado";
+        this.pies = this.agregar_sensor(30, 10, 0, -50);
     };
     Conejo.prototype.actualizar = function () {
-        if (this.cantidad_de_colisiones === 0) {
-            this.toca_el_suelo = false;
+        if (this.pies.colisiones.length > 0) {
+            this.toca_el_suelo = true;
         }
         else {
-            this.toca_el_suelo = true;
+            this.toca_el_suelo = false;
         }
     };
     Conejo.prototype.parado_iniciar = function () {
@@ -1132,6 +1117,16 @@ var Conejo = (function (_super) {
             this.estado = "parado";
         }
     };
+    Object.defineProperty(Conejo.prototype, "distancia_al_suelo", {
+        get: function () {
+            var distancia = this.pilas.fisica.obtener_distancia_hacia_otro_actor_fisico(this, this.x, this.y - 50 - 200);
+            if (distancia) {
+                return distancia.y;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Conejo.prototype.cuando_comienza_una_colision = function (actor) { };
     Conejo.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     Conejo.prototype.cuando_termina_una_colision = function (actor) { };
@@ -1179,7 +1174,8 @@ var pared = (function (_super) {
             y: 0,
             figura_ancho: 20,
             figura_alto: 600,
-            figura_dinamica: false
+            figura_dinamica: false,
+            figura_rebote: 0
         };
         return _this;
     }
@@ -1256,6 +1252,7 @@ var EscenaBase = (function () {
         this.actores.map(function (actor) {
             try {
                 actor.pre_actualizar();
+                actor.actualizar_sensores();
                 actor.actualizar();
             }
             catch (e) {
@@ -1505,6 +1502,7 @@ var ModoEjecucion = (function (_super) {
         this.load.image("pelota", "imagenes/pelota.png");
     };
     ModoEjecucion.prototype.create = function (datos) {
+        var _this = this;
         this.actores = [];
         this.guardar_parametros_en_atributos(datos);
         this.crear_fondo();
@@ -1520,6 +1518,11 @@ var ModoEjecucion = (function (_super) {
         if (this.pilas.depurador.mostrar_fisica) {
             this.matter.systems.matterPhysics.world.createDebugGraphic();
         }
+        this.input.on("pointermove", function (cursor) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+            _this.pilas.cursor_x = Math.trunc(posicion.x);
+            _this.pilas.cursor_y = Math.trunc(posicion.y);
+        });
         this.vincular_eventos_de_colision();
     };
     ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
@@ -1535,6 +1538,14 @@ var ModoEjecucion = (function (_super) {
                     actor_b.colisiones.push(actor_a);
                     actor_a.cuando_comienza_una_colision(actor_b);
                     actor_b.cuando_comienza_una_colision(actor_a);
+                }
+                else {
+                    if (figura_2.sensor_del_actor && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+                        figura_2.colisiones.push(figura_1.gameObject.actor);
+                    }
+                    if (figura_1.sensor_del_actor && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+                        figura_1.colisiones.push(figura_2.gameObject.actor);
+                    }
                 }
             }
         });
@@ -1555,6 +1566,8 @@ var ModoEjecucion = (function (_super) {
                     actor_a.cuando_se_mantiene_una_colision(actor_b);
                     actor_b.cuando_se_mantiene_una_colision(actor_a);
                 }
+                else {
+                }
             }
         });
         this.matter.world.on("collisionend", function (event, a, b) {
@@ -1569,6 +1582,14 @@ var ModoEjecucion = (function (_super) {
                     actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
                     actor_a.cuando_termina_una_colision(actor_b);
                     actor_b.cuando_termina_una_colision(actor_a);
+                }
+                else {
+                    if (figura_2.sensor_del_actor && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+                        figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
+                    }
+                    if (figura_1.sensor_del_actor && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+                        figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
+                    }
                 }
             }
         });

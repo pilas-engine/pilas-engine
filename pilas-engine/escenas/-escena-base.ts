@@ -27,6 +27,7 @@ class EscenaBase {
     this.actores.map(actor => {
       try {
         actor.pre_actualizar();
+        actor.actualizar_sensores();
         actor.actualizar();
       } catch (e) {
         console.error(e);

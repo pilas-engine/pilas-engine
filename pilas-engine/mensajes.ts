@@ -73,7 +73,7 @@ class Mensajes {
     };
 
     //this.game.paused = true;
-    console.warn("TODO: aquí deberia pausar phaser");
+    console.warn("TODO: aquí deberia pausar phaser porque ocurrió un error y no se debería continuar.");
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
     console.warn("Se produjo una llamada a pilas.emitir_excepcion_al_editor desde " + origen);
     console.error(error);

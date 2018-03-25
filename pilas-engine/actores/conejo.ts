@@ -14,6 +14,7 @@ class Conejo extends Actor {
   };
 
   toca_el_suelo = false;
+  pies = null;
 
   iniciar() {
     this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
@@ -22,13 +23,14 @@ class Conejo extends Actor {
     this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
 
     this.estado = "parado";
+    this.pies = this.agregar_sensor(30, 10, 0, -50);
   }
 
   actualizar() {
-    if (this.cantidad_de_colisiones === 0) {
-      this.toca_el_suelo = false;
-    } else {
+    if (this.pies.colisiones.length > 0) {
       this.toca_el_suelo = true;
+    } else {
+      this.toca_el_suelo = false;
     }
   }
 
@@ -96,6 +98,14 @@ class Conejo extends Actor {
 
     if (this.toca_el_suelo) {
       this.estado = "parado";
+    }
+  }
+
+  get distancia_al_suelo() {
+    let distancia = this.pilas.fisica.obtener_distancia_hacia_otro_actor_fisico(this, this.x, this.y - 50 - 200);
+
+    if (distancia) {
+      return distancia.y;
     }
   }
 

@@ -7,6 +7,7 @@ class ActorBase {
   sin_rotacion: false;
   automata: Automata;
   colisiones: Actor[];
+  sensores: any[];
 
   propiedades_base = {
     x: 0,
@@ -52,6 +53,7 @@ class ActorBase {
   pre_iniciar(propiedades) {
     let figura = propiedades.figura || "";
     let imagen = propiedades.imagen;
+    this.sensores = [];
 
     switch (figura) {
       case "rectangulo":
@@ -166,6 +168,13 @@ class ActorBase {
   }
 
   actualizar() {}
+
+  actualizar_sensores() {
+    this.sensores.map(s => {
+      let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
+      this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, { x: x + s.distancia_x, y: y - s.distancia_y });
+    });
+  }
 
   get imagen(): string {
     return this.sprite.texture.key;
@@ -458,5 +467,23 @@ class ActorBase {
 
   get cantidad_de_colisiones() {
     return this.colisiones.length;
+  }
+
+  agregar_sensor(ancho, alto, x, y) {
+    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
+
+    let figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
+      isSensor: true,
+      isStatic: false
+    });
+
+    figura.distancia_x = x;
+    figura.distancia_y = y;
+
+    figura.sensor_del_actor = this;
+    figura.colisiones = [];
+
+    this.sensores.push(figura);
+    return figura;
   }
 }

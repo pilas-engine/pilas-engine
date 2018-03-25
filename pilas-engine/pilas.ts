@@ -26,6 +26,9 @@ class Pilas {
   _ancho: number;
   _alto: number;
 
+  cursor_x: number = 0;
+  cursor_y: number = 0;
+
   constructor() {
     this.Phaser = Phaser;
 
