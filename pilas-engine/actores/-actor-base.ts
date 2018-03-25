@@ -20,6 +20,7 @@ class ActorBase {
     escala_x: 1,
     escala_y: 1,
     transparencia: 0,
+    etiqueta: "actor",
 
     espejado: false,
     espejado_vertical: false,

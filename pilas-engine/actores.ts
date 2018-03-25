@@ -41,4 +41,8 @@ class Actores {
   techo() {
     return this.crear_actor("techo");
   }
+
+  plataforma() {
+    return this.crear_actor("plataforma");
+  }
 }

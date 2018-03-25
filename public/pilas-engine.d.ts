@@ -8,6 +8,7 @@ declare class Actores {
     suelo(): any;
     pared(): any;
     techo(): any;
+    plataforma(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -172,6 +173,8 @@ declare class Pilas {
     obtener_cantidad_de_actores(): number;
     obtener_actores_en(_x: number, _y: number): Actor[];
     escena_actual(): Escena;
+    pausar(): void;
+    continuar(): void;
 }
 declare var pilas: Pilas;
 declare class ActorBase {
@@ -194,6 +197,7 @@ declare class ActorBase {
         escala_x: number;
         escala_y: number;
         transparencia: number;
+        etiqueta: string;
         espejado: boolean;
         espejado_vertical: boolean;
         figura: string;
@@ -308,7 +312,6 @@ declare class Conejo extends Actor {
     camina_actualizar(): void;
     salta_iniciar(): void;
     salta_actualizar(): void;
-    readonly distancia_al_suelo: any;
     cuando_comienza_una_colision(actor: any): void;
     cuando_se_mantiene_una_colision(actor: any): void;
     cuando_termina_una_colision(actor: any): void;
@@ -337,6 +340,18 @@ declare class Pelota extends Actor {
     propiedades: {
         figura: string;
         figura_radio: number;
+    };
+    iniciar(): void;
+}
+declare class plataforma extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        y: number;
+        figura_ancho: number;
+        figura_alto: number;
+        figura_dinamica: boolean;
+        figura_rebote: number;
     };
     iniciar(): void;
 }
@@ -431,6 +446,7 @@ declare class ModoEjecucion extends Modo {
     codigo: any;
     nombre_de_la_escena_inicial: string;
     permitir_modo_pausa: boolean;
+    pausar: boolean;
     preload(): void;
     create(datos: any): void;
     vincular_eventos_de_colision(): void;

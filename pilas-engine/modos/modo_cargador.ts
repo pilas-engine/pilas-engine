@@ -28,6 +28,8 @@ class ModoCargador extends Modo {
     this.load.image("techo", "imagenes/techo.png");
     this.load.image("pared", "imagenes/pared.png");
 
+    this.load.image("plataforma", "imagenes/plataforma.png");
+
     this.load.audio("laser", "sonidos/laser.wav", {});
     this.load.audio("moneda", "sonidos/moneda.wav", {});
     this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});

@@ -72,10 +72,12 @@ class Mensajes {
       stack: error.stack.toString()
     };
 
-    //this.game.paused = true;
-    console.warn("TODO: aquí deberia pausar phaser porque ocurrió un error y no se debería continuar.");
+    this.pilas.modo.add.text(5, 5, "Se ha producido un error. Vea el intérprete por favor.", { font: "16px verdana" });
+    this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, { font: "14px verdana", fill: "#ddd" });
+    this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, { font: "10px verdana" });
+
+    this.pilas.pausar();
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
-    console.warn("Se produjo una llamada a pilas.emitir_excepcion_al_editor desde " + origen);
     console.error(error);
   }
 

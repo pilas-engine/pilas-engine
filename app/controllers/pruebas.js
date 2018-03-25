@@ -21,6 +21,15 @@ export default Controller.extend({
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
                 this.pilas.conejo = pilas.actores.Conejo();
+                this.pilas.conejo.y = 200;
+
+                let plataforma = pilas.actores.plataforma();
+                plataforma.x = 0;
+                plataforma.y = -100;
+
+                let moneda = pilas.actores.moneda();
+                moneda.x = 200;
+
 
                 let suelo = pilas.actores.suelo());
                 let techo = pilas.actores.techo();

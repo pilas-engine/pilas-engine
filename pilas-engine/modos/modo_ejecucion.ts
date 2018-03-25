@@ -15,6 +15,7 @@ class ModoEjecucion extends Modo {
   codigo: any;
   nombre_de_la_escena_inicial: string = null;
   permitir_modo_pausa: boolean;
+  pausar = false;
 
   preload() {
     this.load.image("pelota", "imagenes/pelota.png");
@@ -24,30 +25,31 @@ class ModoEjecucion extends Modo {
     this.actores = [];
     //this.matter.world.setBounds(0, 0, this.ancho, this.alto, 2);
 
-    this.guardar_parametros_en_atributos(datos);
-    this.crear_fondo();
-    this.clases = this.obtener_referencias_a_clases();
-
     try {
+      this.guardar_parametros_en_atributos(datos);
+      this.crear_fondo();
+      this.clases = this.obtener_referencias_a_clases();
+
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
+
+      this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+      this.pilas.historia.limpiar();
+
+      if (this.pilas.depurador.mostrar_fisica) {
+        this.matter.systems.matterPhysics.world.createDebugGraphic();
+      }
+
+      this.input.on("pointermove", cursor => {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+        this.pilas.cursor_x = Math.trunc(posicion.x);
+        this.pilas.cursor_y = Math.trunc(posicion.y);
+      });
+
+      this.vincular_eventos_de_colision();
     } catch (e) {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
+      this.pausar = true;
     }
-
-    this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
-    this.pilas.historia.limpiar();
-
-    if (this.pilas.depurador.mostrar_fisica) {
-      this.matter.systems.matterPhysics.world.createDebugGraphic();
-    }
-
-    this.input.on("pointermove", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-      this.pilas.cursor_x = Math.trunc(posicion.x);
-      this.pilas.cursor_y = Math.trunc(posicion.y);
-    });
-
-    this.vincular_eventos_de_colision();
   }
 
   vincular_eventos_de_colision() {
@@ -184,12 +186,7 @@ class ModoEjecucion extends Modo {
     let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
     let codigo_completo = this.codigo + codigoDeExportacion;
 
-    try {
-      return eval(codigo_completo);
-    } catch (e) {
-      //this.pilas.emitir_excepcion_al_editor(e, "ejecutar el proyecto");
-      console.error("TODO: emitir error al editor", e, "ejecutar el proyecto");
-    }
+    return eval(codigo_completo);
   }
 
   /**
@@ -241,27 +238,25 @@ class ModoEjecucion extends Modo {
   }
 
   update() {
-    if (this.permitir_modo_pausa) {
-      try {
-        this.guardar_foto_de_entidades();
-      } catch (e) {
-        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
-          mensaje: e.message,
-          stack: e.stack.toString()
-        });
-      }
+    console.log(this.pausar);
+    if (this.pausar) {
+      this.pilas.pausar();
+      return;
     }
 
     try {
+      if (this.permitir_modo_pausa) {
+        this.guardar_foto_de_entidades();
+      }
+
       this.pilas.escena.actualizar();
+      this.pilas.escena.actualizar_actores();
     } catch (e) {
       this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
         mensaje: e.message,
         stack: e.stack.toString()
       });
     }
-
-    this.pilas.escena.actualizar_actores();
   }
 
   guardar_foto_de_entidades() {

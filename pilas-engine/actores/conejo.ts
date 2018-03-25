@@ -101,14 +101,6 @@ class Conejo extends Actor {
     }
   }
 
-  get distancia_al_suelo() {
-    let distancia = this.pilas.fisica.obtener_distancia_hacia_otro_actor_fisico(this, this.x, this.y - 50 - 200);
-
-    if (distancia) {
-      return distancia.y;
-    }
-  }
-
   cuando_comienza_una_colision(actor) {}
 
   cuando_se_mantiene_una_colision(actor) {}

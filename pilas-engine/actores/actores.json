@@ -35,6 +35,12 @@
       "tipo": "Conejo",
       "imagen": "conejo",
       "archivo": "conejo.ts"
+    },
+    {
+      "nombre": "plataforma",
+      "tipo": "plataforma",
+      "imagen": "plataforma",
+      "archivo": "plataforma.ts"
     }
   ]
 }

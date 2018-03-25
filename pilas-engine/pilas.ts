@@ -127,6 +127,14 @@ class Pilas {
   escena_actual() {
     return this.escena;
   }
+
+  pausar() {
+    this.pilas.game.loop.sleep();
+  }
+
+  continuar() {
+    this.pilas.game.loop.wake();
+  }
 }
 
 var pilas = new Pilas();
