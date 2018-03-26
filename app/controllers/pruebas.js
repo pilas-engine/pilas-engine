@@ -28,7 +28,8 @@ export default Controller.extend({
                 plataforma.y = -100;
 
                 let moneda = pilas.actores.moneda();
-                moneda.x = 200;
+                moneda.x = 100;
+
 
 
                 let suelo = pilas.actores.suelo());
@@ -43,7 +44,6 @@ export default Controller.extend({
               }
 
               actualizar() {
-
               }
             }`
           }

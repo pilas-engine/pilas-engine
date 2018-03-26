@@ -10,6 +10,7 @@ declare class Actores {
     techo(): any;
     plataforma(): any;
     actor(): any;
+    moneda(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -189,6 +190,7 @@ declare class ActorBase {
     colisiones: Actor[];
     sensores: any[];
     _etiqueta: string;
+    _vivo: boolean;
     propiedades_base: {
         x: number;
         y: number;
@@ -209,6 +211,7 @@ declare class ActorBase {
         figura_radio: number;
         figura_sin_rotacion: boolean;
         figura_rebote: number;
+        figura_sensor: boolean;
     };
     propiedades: any;
     constructor(pilas: any);
@@ -258,7 +261,8 @@ declare class ActorBase {
     impulsar(x: any, y: any): void;
     velocidad_x: number;
     velocidad_y: number;
-    rebote: boolean;
+    rebote: number;
+    sensor: boolean;
     fijo: boolean;
     espejado: boolean;
     espejado_vertical: boolean;
@@ -271,6 +275,7 @@ declare class ActorBase {
     cuando_termina_una_colision(actor: Actor): void;
     readonly cantidad_de_colisiones: number;
     agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
+    eliminar(): void;
 }
 declare class Actor extends ActorBase {
     propiedades: {};
@@ -322,6 +327,16 @@ declare class Conejo extends Actor {
 }
 declare class Logo extends Actor {
     iniciar(): void;
+}
+declare class moneda extends Actor {
+    propiedades: {
+        imagen: string;
+        etiqueta: string;
+        figura: string;
+        figura_radio: number;
+        figura_dinamica: boolean;
+        figura_sensor: boolean;
+    };
 }
 declare class Nave extends Actor {
     velocidad: number;
@@ -393,6 +408,7 @@ declare class EscenaBase {
         camara_y: any;
     };
     actualizar_actores(): void;
+    quitar_actor_luego_de_eliminar(actor: Actor): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;

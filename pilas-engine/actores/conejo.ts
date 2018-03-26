@@ -101,7 +101,12 @@ class Conejo extends Actor {
     }
   }
 
-  cuando_comienza_una_colision(actor) {}
+  cuando_comienza_una_colision(actor) {
+    if (actor.etiqueta === "moneda") {
+      this.pilas.reproducir_sonido("moneda");
+      actor.eliminar();
+    }
+  }
 
   cuando_se_mantiene_una_colision(actor) {}
 

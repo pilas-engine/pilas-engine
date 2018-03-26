@@ -9,6 +9,7 @@ class ActorBase {
   colisiones: Actor[];
   sensores: any[];
   _etiqueta: string = null;
+  _vivo: boolean = true;
 
   propiedades_base = {
     x: 0,
@@ -32,7 +33,8 @@ class ActorBase {
     figura_alto: 100,
     figura_radio: 40,
     figura_sin_rotacion: false,
-    figura_rebote: 1
+    figura_rebote: 1,
+    figura_sensor: false
   };
 
   propiedades: any = {
@@ -66,6 +68,7 @@ class ActorBase {
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
         this.rebote = propiedades.figura_rebote;
+        this.sensor = propiedades.figura_sensor;
         break;
 
       case "circulo":
@@ -76,6 +79,7 @@ class ActorBase {
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
         this.rebote = propiedades.figura_rebote;
+        this.sensor = propiedades.figura_sensor;
         break;
 
       case "ninguna":
@@ -176,6 +180,9 @@ class ActorBase {
     this.sensores.map(s => {
       let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
       this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, { x: x + s.distancia_x, y: y - s.distancia_y });
+
+      // Descarta colisiones con actores que ya no están en la escena.
+      s.colisiones = s.colisiones.filter(a => a._vivo);
     });
   }
 
@@ -404,7 +411,7 @@ class ActorBase {
     return this.sprite.setVelocityX(-valor);
   }
 
-  set rebote(valor: boolean) {
+  set rebote(valor: number) {
     this.pilas.utilidades.validar_numero(valor);
     this.fallar_si_no_tiene_figura();
     this.sprite.setBounce(valor);
@@ -413,6 +420,16 @@ class ActorBase {
   get rebote() {
     this.fallar_si_no_tiene_figura();
     return this.sprite.body.restitution;
+  }
+
+  set sensor(valor: boolean) {
+    this.fallar_si_no_tiene_figura();
+    this.sprite.setSensor(valor);
+  }
+
+  get sensor() {
+    this.fallar_si_no_tiene_figura();
+    return this.sprite.body.isSensor;
   }
 
   get fijo() {
@@ -488,5 +505,9 @@ class ActorBase {
 
     this.sensores.push(figura);
     return figura;
+  }
+
+  eliminar() {
+    this._vivo = false;
   }
 }

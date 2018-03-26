@@ -129,11 +129,11 @@ class Pilas {
   }
 
   pausar() {
-    this.pilas.game.loop.sleep();
+    this.game.loop.sleep();
   }
 
   continuar() {
-    this.pilas.game.loop.wake();
+    this.game.loop.wake();
   }
 }
 

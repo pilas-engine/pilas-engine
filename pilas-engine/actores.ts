@@ -49,4 +49,8 @@ class Actores {
   actor() {
     return this.crear_actor("Actor");
   }
+
+  moneda() {
+    return this.crear_actor("moneda");
+  }
 }

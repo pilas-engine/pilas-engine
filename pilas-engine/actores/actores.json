@@ -41,6 +41,13 @@
       "tipo": "plataforma",
       "imagen": "plataforma",
       "archivo": "plataforma.ts"
+    },
+
+    {
+      "nombre": "moneda",
+      "tipo": "moneda",
+      "imagen": "moneda",
+      "archivo": "moneda.ts"
     }
   ]
 }
