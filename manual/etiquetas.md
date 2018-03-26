@@ -1,6 +1,6 @@
 # Etiquetas
 
-Las etiquetas son útiles para clasificar actores y simplificar interacciones. 
+Las etiquetas son útiles para clasificar actores y simplificar interacciones.
 
 Por ejemplo, en un juego podríamos tener 10, 20 o 30 actores diferentes que tengan el rol de "enemigos". En cuyo caso simplemente podríamos asignarle a todos la misma etiqueta para distinguirlos de los demás.
 
@@ -10,13 +10,13 @@ Las etiquetas se pueden definir directamente en el inspector de pilas:
 
 O bien, también se puede directamente desde el editor código usando el atributo **etiqueta** así:
 
-```type
+```typescript
 class Caja extends ActorBase {
-    iniciar() {
-        this.etiqueta = "enemigo";
-    }
+  iniciar() {
+    this.etiqueta = "enemigo";
+  }
 
-    actualizar() {}
+  actualizar() {}
 }
 ```
 
@@ -24,29 +24,26 @@ class Caja extends ActorBase {
 
 Vamos describir un uso típico de las etiquetas: las etiquetas son muy útiles para distinguir colisiones.
 
-Cuando pilas detecta una colisión entre dos actores llamará a la función *cuando_comienza_una_colision* y enviará el parámetro *actor* como referencia al actor que entró en contacto.
+Cuando pilas detecta una colisión entre dos actores llamará a la función _cuando_comienza_una_colision_ y enviará el parámetro _actor_ como referencia al actor que entró en contacto.
 
-Así que esto es lo que se suele hacer, imaginemos que nuestro actor *protagonista* pueda capturar moneras pero debe perder vidas si toca un enemigo. Podríamos hacer algo así:
+Así que esto es lo que se suele hacer, imaginemos que nuestro actor _protagonista_ pueda capturar moneras pero debe perder vidas si toca un enemigo. Podríamos hacer algo así:
 
 ```typescript
 class Protagonista extends Actor {
+  // otras funciones...
 
-    // otras funciones...
-    
-    cuando_comienza_una_colision(actor) {
-        if (actor.etiqueta === "moneda") {
-            actor.eliminar();
-            this.pilas.reproducir_sonido('moneda');
-            // sumar puntaje, emitir particulas etc...
-        }
-
-        if (actor.etiqueta === "enemigo") {
-            this.estado = "perder";
-            this.vidas -= 1;
-            // emitir sonido de game over, mostrar textos etc...
-        }
+  cuando_comienza_una_colision(actor) {
+    if (actor.etiqueta === "moneda") {
+      actor.eliminar();
+      this.pilas.reproducir_sonido("moneda");
+      // sumar puntaje, emitir particulas etc...
     }
 
+    if (actor.etiqueta === "enemigo") {
+      this.estado = "perder";
+      this.vidas -= 1;
+      // emitir sonido de game over, mostrar textos etc...
+    }
+  }
 }
 ```
-
