@@ -22,7 +22,7 @@ test("it renders", function(assert) {
     actor_demo.etiqueta = "personalizada";
   });
 
-  this.set("cuandoTerminaLaEspera", pilas => {
+  this.set("cuandoTerminaLaEspera", () => {
     assert.equal(actor_caja.etiqueta, "caja");
     assert.equal(actor_actor.etiqueta, "actor");
     assert.equal(actor_demo.etiqueta, "personalizada");

@@ -45,4 +45,8 @@ class Actores {
   plataforma() {
     return this.crear_actor("plataforma");
   }
+
+  actor() {
+    return this.crear_actor("Actor");
+  }
 }
