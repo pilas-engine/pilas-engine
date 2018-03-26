@@ -171,7 +171,6 @@ class ModoEjecucion extends Modo {
       p = this.pilas.utilidades.combinar_propiedades(p, entidad);
 
       actor.pre_iniciar(p);
-
       actor.iniciar();
     } else {
       console.error(this.clases);
@@ -238,7 +237,6 @@ class ModoEjecucion extends Modo {
   }
 
   update() {
-    console.log(this.pausar);
     if (this.pausar) {
       this.pilas.pausar();
       return;

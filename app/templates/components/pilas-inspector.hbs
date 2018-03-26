@@ -30,7 +30,14 @@
               propiedad=propiedad
               modificarAtributo=(action "modificarAtributo")}}
 
+        {{else if (eq propiedad.tipo "cadena")}}
+
+          {{pilas-propiedad/cadena objeto=instancia_seleccionada
+              propiedad=propiedad
+              modificarAtributo=(action "modificarAtributo")}}
+
         {{else}}
+
 
           <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
 

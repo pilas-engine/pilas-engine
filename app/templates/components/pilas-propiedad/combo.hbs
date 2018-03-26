@@ -1,4 +1,4 @@
-<div class="truncate h2">
+<div class="h2">
 
   <div class="dib w4">
 
@@ -10,7 +10,7 @@
 
   <div class="dib w3 v-top">
 
-    <select class="bn" onchange={{action "al_seleccionar" value="target.value"}}>
+    <select class="w-100" onchange={{action "al_seleccionar" value="target.value"}}>
       {{#each opciones as |opcion|}}
         <option value="{{opcion.valor}}" selected={{eq (get objeto propiedad.propiedad) opcion.valor}}>{{opcion.texto}}</option>
       {{/each}}

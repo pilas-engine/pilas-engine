@@ -8,6 +8,7 @@ class ActorBase {
   automata: Automata;
   colisiones: Actor[];
   sensores: any[];
+  _etiqueta: string = null;
 
   propiedades_base = {
     x: 0,
@@ -89,6 +90,7 @@ class ActorBase {
 
     this.rotacion = propiedades.rotacion || 0;
     this.id_color = this.generar_color_para_depurar();
+    this.etiqueta = propiedades.etiqueta;
 
     this.escala_x = propiedades.escala_x || 1;
     this.escala_y = propiedades.escala_y || 1;
@@ -103,14 +105,6 @@ class ActorBase {
     this.espejado_vertical = propiedades.espejado_vertical;
 
     this.sprite["actor"] = this;
-
-    /*
-    try {
-      this.iniciar();
-    } catch (e) {
-      this.pilas.mensajes.emitir_excepcion_al_editor(e, "iniciar actor");
-    }
-    */
 
     this.sprite.update = () => {
       try {
@@ -141,6 +135,14 @@ class ActorBase {
       transparencia: this.transparencia,
       id_color: this.id_color
     };
+  }
+
+  set etiqueta(etiqueta) {
+    this._etiqueta = etiqueta;
+  }
+
+  get etiqueta(etiqueta) {
+    return this._etiqueta;
   }
 
   generar_color_para_depurar() {

@@ -43,6 +43,9 @@ var Actores = (function () {
     Actores.prototype.plataforma = function () {
         return this.crear_actor("plataforma");
     };
+    Actores.prototype.actor = function () {
+        return this.crear_actor("Actor");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -530,6 +533,7 @@ var pilas = new Pilas();
 var ActorBase = (function () {
     function ActorBase(pilas) {
         this.figura = "";
+        this._etiqueta = null;
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -600,6 +604,7 @@ var ActorBase = (function () {
         }
         this.rotacion = propiedades.rotacion || 0;
         this.id_color = this.generar_color_para_depurar();
+        this.etiqueta = propiedades.etiqueta;
         this.escala_x = propiedades.escala_x || 1;
         this.escala_y = propiedades.escala_y || 1;
         this.tipo = propiedades.tipo;
@@ -639,6 +644,16 @@ var ActorBase = (function () {
             id_color: this.id_color
         };
     };
+    Object.defineProperty(ActorBase.prototype, "etiqueta", {
+        get: function (etiqueta) {
+            return this._etiqueta;
+        },
+        set: function (etiqueta) {
+            this._etiqueta = etiqueta;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ActorBase.prototype.generar_color_para_depurar = function () {
         var opacidad = "FF";
         return this.pilas.utilidades.obtener_color_al_azar(opacidad);
@@ -1029,10 +1044,11 @@ var Caja = (function (_super) {
             x: 0,
             y: 0,
             imagen: "caja",
+            etiqueta: "caja",
             figura: "rectangulo",
             figura_ancho: 45,
             figura_alto: 45,
-            figura_rebote: 0.9,
+            figura_rebote: 0.9
         };
         return _this;
     }
@@ -1686,7 +1702,6 @@ var ModoEjecucion = (function (_super) {
         this.fondo.setOrigin(0);
     };
     ModoEjecucion.prototype.update = function () {
-        console.log(this.pausar);
         if (this.pausar) {
             this.pilas.pausar();
             return;

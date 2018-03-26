@@ -9,6 +9,7 @@ declare class Actores {
     pared(): any;
     techo(): any;
     plataforma(): any;
+    actor(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -187,6 +188,7 @@ declare class ActorBase {
     automata: Automata;
     colisiones: Actor[];
     sensores: any[];
+    _etiqueta: string;
     propiedades_base: {
         x: number;
         y: number;
@@ -228,6 +230,7 @@ declare class ActorBase {
         transparencia: number;
         id_color: string;
     };
+    etiqueta: string;
     generar_color_para_depurar(): any;
     pre_actualizar(): void;
     estado: string;
@@ -282,6 +285,7 @@ declare class Caja extends Actor {
         x: number;
         y: number;
         imagen: string;
+        etiqueta: string;
         figura: string;
         figura_ancho: number;
         figura_alto: number;

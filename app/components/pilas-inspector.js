@@ -9,6 +9,10 @@ export default Component.extend({
   didInsertElement() {
     this.set("propiedades_de_actores", [
       {
+        tipo: "cadena",
+        propiedad: "etiqueta"
+      },
+      {
         tipo: "numero",
         propiedad: "centro_x",
         intensidad: 0.1
