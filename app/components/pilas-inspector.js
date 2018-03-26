@@ -111,6 +111,10 @@ export default Component.extend({
       {
         tipo: "interruptor",
         propiedad: "figura_dinamica"
+      },
+      {
+        tipo: "interruptor",
+        propiedad: "figura_sensor"
       }
     ]);
     this.set("propiedades_de_escenas", [
