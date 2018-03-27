@@ -28,7 +28,7 @@ export default Component.extend({
   lista_de_eventos: null,
 
   didInsertElement() {
-    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa"]);
+    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
@@ -75,6 +75,12 @@ export default Component.extend({
     this.set("cargando", false);
     this.mostrar_la_escena_actual_sobre_pilas();
     this.set("estado", this.get("estado").cuandoTerminoDeCargarPilas());
+  },
+
+  pulsa_la_tecla_escape() {
+    if (this.get("estado.puedeDetener")) {
+      this.send("detener");
+    }
   },
 
   termina_de_mover_un_actor(datos) {

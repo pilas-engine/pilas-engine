@@ -247,6 +247,10 @@ export default Component.extend({
       window["pilas"] = contexto.pilas;
     }
 
+    if (e.data.tipo === "pulsa_la_tecla_escape") {
+      this.get("bus").trigger("pulsa_la_tecla_escape", e.data);
+    }
+
     if (e.data.tipo === "progreso_de_carga") {
       this.get("bus").trigger("progreso_de_carga", e.data);
     }

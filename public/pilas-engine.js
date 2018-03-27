@@ -1625,9 +1625,9 @@ var ModoEjecucion = (function (_super) {
                 _this.pilas.cursor_x = Math.trunc(posicion.x);
                 _this.pilas.cursor_y = Math.trunc(posicion.y);
             });
-            this.input.keyboard.on("keydown", function (evento) {
+            this.input.keyboard.on("keyup", function (evento) {
                 if (evento.key === "Escape") {
-                    console.log("Ha pulsado ESCAPE!");
+                    _this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
                 }
             });
             this.vincular_eventos_de_colision();

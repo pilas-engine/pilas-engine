@@ -45,6 +45,12 @@ class ModoEjecucion extends Modo {
         this.pilas.cursor_y = Math.trunc(posicion.y);
       });
 
+      this.input.keyboard.on("keyup", evento => {
+        if (evento.key === "Escape") {
+          this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
+        }
+      });
+
       this.vincular_eventos_de_colision();
     } catch (e) {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
