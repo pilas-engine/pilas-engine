@@ -85,6 +85,16 @@ class Mensajes {
     this.pilas.modo.destacar_actor_por_id(datos.id);
   }
 
+  atender_mensaje_alterar_estado_de_maximizacion(datos) {
+    let elemento_canvas = document.getElementsByTagName("canvas")[0];
+
+    if (datos.maximizar) {
+      elemento_canvas.classList.add("maximizar");
+    } else {
+      elemento_canvas.classList.remove("maximizar");
+    }
+  }
+
   atender_mensaje_actualizar_actor_desde_el_editor(datos) {
     let sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
     this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);

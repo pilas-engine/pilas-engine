@@ -349,6 +349,15 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_selecciona_actor_desde_el_editor = function (datos) {
         this.pilas.modo.destacar_actor_por_id(datos.id);
     };
+    Mensajes.prototype.atender_mensaje_alterar_estado_de_maximizacion = function (datos) {
+        var elemento_canvas = document.getElementsByTagName("canvas")[0];
+        if (datos.maximizar) {
+            elemento_canvas.classList.add("maximizar");
+        }
+        else {
+            elemento_canvas.classList.remove("maximizar");
+        }
+    };
     Mensajes.prototype.atender_mensaje_actualizar_actor_desde_el_editor = function (datos) {
         var sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
         this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
@@ -1615,6 +1624,11 @@ var ModoEjecucion = (function (_super) {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.pilas.cursor_x = Math.trunc(posicion.x);
                 _this.pilas.cursor_y = Math.trunc(posicion.y);
+            });
+            this.input.keyboard.on("keydown", function (evento) {
+                if (evento.key === "Escape") {
+                    console.log("Ha pulsado ESCAPE!");
+                }
             });
             this.vincular_eventos_de_colision();
         }

@@ -61,6 +61,11 @@
                 <div class='mb2 flex'>
                   {{#if estado.puedeEjecutar}}
                     {{pilas-boton id='ejecutar' accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
+
+                      <div class="dib f6 flex1 tr">
+                        {{pilas-interruptor texto="maximizar" variable=maximizar}}
+                      </div>
+
                   {{/if}}
 
                   {{#if estado.puedeDetener}}
@@ -105,6 +110,7 @@
                   pos=pos
                   fps=fps
                   fisica=fisica
+                  maximizar=maximizar
                 }}
 
                 <div class="h2 ba br b--gray bg-light-gray mt2">

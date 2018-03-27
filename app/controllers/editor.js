@@ -1,6 +1,6 @@
-import EmberObject from '@ember/object';
-import { inject as service } from '@ember/service';
-import Controller from '@ember/controller';
+import EmberObject from "@ember/object";
+import { inject as service } from "@ember/service";
+import Controller from "@ember/controller";
 import json_a_string from "../utils/json-a-string";
 import string_a_json from "../utils/string-a-json";
 import QueryParams from "ember-parachute";
@@ -18,7 +18,8 @@ const queryParams = new QueryParams({
   pos: { defaultValue: true, replace: true },
   fps: { defaultValue: true, replace: true },
   fisica: { defaultValue: true, replace: true },
-  permitir_modo_pausa: { defaultValue: true, replace: true }
+  permitir_modo_pausa: { defaultValue: true, replace: true },
+  maximizar: { defaultValue: false, replace: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {

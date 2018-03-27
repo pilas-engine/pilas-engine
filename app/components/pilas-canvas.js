@@ -1,7 +1,7 @@
-import { htmlSafe } from '@ember/string';
-import { computed } from '@ember/object';
-import { inject as service } from '@ember/service';
-import Component from '@ember/component';
+import { htmlSafe } from "@ember/string";
+import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
+import Component from "@ember/component";
 import utils from "../utils/utils";
 
 export default Component.extend({
@@ -16,6 +16,7 @@ export default Component.extend({
   classNames: ["flex1", "overflow-hidden", "unseletable"],
   porcentajeDeCarga: 0,
   cuando_termina_de_cargar: null,
+  valor_anterior_de_maximizar: false,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
@@ -60,12 +61,19 @@ export default Component.extend({
       this.get("bus").on("progreso_de_carga", this, "progreso_de_carga");
       this.get("bus").on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
       this.get("bus").on("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
+
+      this.alterar_estado_de_maximizacion(this.get("maximizar"));
     };
   },
 
   didReceiveAttrs() {
     if (this.get("contexto")) {
       this.emitir_estados_de_depuracion_a_pilas();
+
+      if (this.get("maximizar") !== this.get("valor_anterior_de_maximizar")) {
+        this.alterar_estado_de_maximizacion(this.get("maximizar"));
+        this.set("valor_anterior_de_maximizar", this.get("maximizar"));
+      }
     }
   },
 
@@ -136,6 +144,15 @@ export default Component.extend({
     let data = {
       tipo: "selecciona_actor_desde_el_editor",
       id
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  alterar_estado_de_maximizacion(maximizar) {
+    let data = {
+      tipo: "alterar_estado_de_maximizacion",
+      maximizar
     };
 
     this.contexto.postMessage(data, utils.HOST);

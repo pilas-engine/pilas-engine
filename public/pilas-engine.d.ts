@@ -92,6 +92,7 @@ declare class Mensajes {
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
     emitir_excepcion_al_editor(error: any, origen: any): void;
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
+    atender_mensaje_alterar_estado_de_maximizacion(datos: any): void;
     atender_mensaje_actualizar_actor_desde_el_editor(datos: any): void;
     atender_mensaje_quitar_pausa_de_phaser(): void;
     atender_mensaje_pausar_escena(): void;
