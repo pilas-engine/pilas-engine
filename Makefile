@@ -128,12 +128,12 @@ compilar_pilas_live:
 
 pilas_sprites:
 	$(call log, "Actualizando imagenes para usar en pilas ...")
-	${BIN_SPRITESHEET} pilas-engine/data/src/* -p public/data/ -f pixi.js --padding=10
+	${BIN_SPRITESHEET} sprites/* -p public/imagenes_agrupadas/ -f pixi.js --padding=10
 	@echo ""
 	@echo "${G}Listo, las archivos que se generaron son:"
 	@echo ""
-	@echo "    public/data/spritesheet.json"
-	@echo "    public/data/spritesheet.png"
+	@echo "    public/imagenes_agrupadas/spritesheet.json"
+	@echo "    public/imagenes_agrupadas/spritesheet.png"
 	@echo "${N}"
 
 
@@ -198,7 +198,7 @@ endif
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
-	@./node_modules/.bin/spritesheet-js images/sprites/* -p public/assets/ -f css --padding=2
+	@./node_modules/.bin/spritesheet-js imagenes/* -p public/assets/ -f css --padding=2
 	@echo ""
 	@echo "${G}Listo, las archivos que se generaron son:"
 	@echo ""

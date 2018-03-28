@@ -59,10 +59,18 @@ var Animaciones = (function () {
     Animaciones.prototype.crear_o_sustituir = function (nombre, cuadros, velocidad) {
         if (!this.animaciones[nombre]) {
             var frames_1 = cuadros.map(function (nombre) {
-                return { key: nombre };
+                if (nombre.indexOf(".") > -1) {
+                    return {
+                        key: nombre.split(".")[1],
+                        frame: nombre.split(".")[0]
+                    };
+                }
+                else {
+                    return { key: nombre };
+                }
             });
             var animacion = pilas.modo.anims.create({
-                key: nombre,
+                key: nombre.split(".")[0],
                 frames: frames_1,
                 frameRate: velocidad,
                 repeat: -1
@@ -589,11 +597,20 @@ var ActorBase = (function () {
     ActorBase.prototype.pre_iniciar = function (propiedades) {
         var _this = this;
         var figura = propiedades.figura || "";
-        var imagen = propiedades.imagen;
+        var imagen = null;
+        var cuadro = null;
+        if (propiedades.imagen.indexOf(".") > -1) {
+            imagen = propiedades.imagen;
+            cuadro = null;
+        }
+        else {
+            imagen = propiedades.imagen.split(".")[0];
+            cuadro = propiedades.imagen.split(".")[1];
+        }
         this.sensores = [];
         switch (figura) {
             case "rectangulo":
-                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
+                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
                 this.figura = figura;
                 this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.escala_x, propiedades.escala_y);
                 this.dinamico = propiedades.figura_dinamica;
@@ -602,7 +619,7 @@ var ActorBase = (function () {
                 this.sensor = propiedades.figura_sensor;
                 break;
             case "circulo":
-                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
+                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
                 this.figura = figura;
                 this.crear_figura_circular(propiedades.figura_radio);
                 this.dinamico = propiedades.figura_dinamica;
@@ -613,7 +630,7 @@ var ActorBase = (function () {
             case "ninguna":
             case "":
                 this.figura = figura;
-                this.sprite = this.pilas.modo.add.sprite(0, 0, imagen);
+                this.sprite = this.pilas.modo.add.sprite(0, 0, imagen, cuadro);
                 break;
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
@@ -661,7 +678,7 @@ var ActorBase = (function () {
         };
     };
     Object.defineProperty(ActorBase.prototype, "etiqueta", {
-        get: function (etiqueta) {
+        get: function () {
             return this._etiqueta;
         },
         set: function (etiqueta) {
@@ -704,10 +721,22 @@ var ActorBase = (function () {
     };
     Object.defineProperty(ActorBase.prototype, "imagen", {
         get: function () {
-            return this.sprite.texture.key;
+            if (this.sprite.frame.name === "__BASE") {
+                return this.sprite.texture.key;
+            }
+            else {
+                return this.sprite.frame.name + "." + this.sprite.texture.key;
+            }
         },
         set: function (nombre) {
-            this.sprite.setTexture(nombre);
+            debugger;
+            if (nombre.indexOf(".") > -1) {
+                var partes = nombre.split(".");
+                this.sprite.setTexture(partes[0], partes[1]);
+            }
+            else {
+                this.sprite.setTexture(nombre);
+            }
         },
         enumerable: true,
         configurable: true
@@ -1095,7 +1124,7 @@ var Conejo = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "salta",
+            imagen: "conejo_parado1",
             figura: "rectangulo",
             figura_ancho: 50,
             figura_alto: 100,
@@ -1114,7 +1143,7 @@ var Conejo = (function (_super) {
         this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
         this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
         this.estado = "parado";
-        this.pies = this.agregar_sensor(30, 10, 0, -50);
+        this.pies = this.agregar_sensor(50, 10, 0, -50);
     };
     Conejo.prototype.actualizar = function () {
         if (this.pies.colisiones.length > 0) {
@@ -1460,6 +1489,7 @@ var ModoCargador = (function (_super) {
         this.load.image("pared", "imagenes/pared.png");
         this.load.image("plataforma", "imagenes/plataforma.png");
         this.load.image("moneda", "imagenes/moneda.png");
+        this.load.atlas("spritesheet", "imagenes_agrupadas/spritesheet.png", "imagenes_agrupadas/spritesheet.json");
         this.load.audio("laser", "sonidos/laser.wav", {});
         this.load.audio("moneda", "sonidos/moneda.wav", {});
         this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});

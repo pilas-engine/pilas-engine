@@ -56,12 +56,26 @@ class ActorBase {
 
   pre_iniciar(propiedades) {
     let figura = propiedades.figura || "";
-    let imagen = propiedades.imagen;
+    let imagen = null;
+    let cuadro = null;
+
+    // Como las imágenes pueden ser cadenas que representen cuadros
+    // dentro de un spritesheet (caso "spritesheet.imagen") o el nombre de una
+    // imagen normal (caso "imagen") se utiliza esta comprobación para
+    // distinguir cualquiera de estos casos.
+    if (propiedades.imagen.indexOf(".") > -1) {
+      imagen = propiedades.imagen;
+      cuadro = null;
+    } else {
+      imagen = propiedades.imagen.split(".")[0];
+      cuadro = propiedades.imagen.split(".")[1];
+    }
+
     this.sensores = [];
 
     switch (figura) {
       case "rectangulo":
-        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
+        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
         this.figura = figura;
         this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.escala_x, propiedades.escala_y);
 
@@ -72,7 +86,7 @@ class ActorBase {
         break;
 
       case "circulo":
-        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
+        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
         this.figura = figura;
         this.crear_figura_circular(propiedades.figura_radio);
 
@@ -85,7 +99,7 @@ class ActorBase {
       case "ninguna":
       case "":
         this.figura = figura;
-        this.sprite = this.pilas.modo.add.sprite(0, 0, imagen);
+        this.sprite = this.pilas.modo.add.sprite(0, 0, imagen, cuadro);
         break;
 
       default:
@@ -145,7 +159,7 @@ class ActorBase {
     this._etiqueta = etiqueta;
   }
 
-  get etiqueta(etiqueta) {
+  get etiqueta() {
     return this._etiqueta;
   }
 
@@ -187,11 +201,21 @@ class ActorBase {
   }
 
   get imagen(): string {
-    return this.sprite.texture.key;
+    if (this.sprite.frame.name === "__BASE") {
+      return this.sprite.texture.key;
+    } else {
+      return `${this.sprite.frame.name}.${this.sprite.texture.key}`;
+    }
   }
 
   set imagen(nombre: string) {
-    this.sprite.setTexture(nombre);
+    debugger;
+    if (nombre.indexOf(".") > -1) {
+      let partes = nombre.split(".");
+      this.sprite.setTexture(partes[0], partes[1]);
+    } else {
+      this.sprite.setTexture(nombre);
+    }
   }
 
   set x(_x: number) {

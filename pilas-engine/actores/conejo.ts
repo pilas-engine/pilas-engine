@@ -2,7 +2,7 @@ class Conejo extends Actor {
   propiedades = {
     x: 0,
     y: 0,
-    imagen: "salta",
+    imagen: "conejo_parado1",
 
     figura: "rectangulo",
     figura_ancho: 50,
@@ -23,7 +23,7 @@ class Conejo extends Actor {
     this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
 
     this.estado = "parado";
-    this.pies = this.agregar_sensor(30, 10, 0, -50);
+    this.pies = this.agregar_sensor(50, 10, 0, -50);
   }
 
   actualizar() {
