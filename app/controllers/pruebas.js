@@ -30,6 +30,8 @@ export default Controller.extend({
                 let moneda = pilas.actores.moneda();
                 moneda.x = 100;
 
+                pilas.actores.nave();
+
 
 
                 let suelo = pilas.actores.suelo());

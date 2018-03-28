@@ -10,6 +10,7 @@ class ActorBase {
   sensores: any[];
   _etiqueta: string = null;
   _vivo: boolean = true;
+  _animacion_en_curso: string = "";
 
   propiedades_base = {
     x: 0,
@@ -509,6 +510,17 @@ class ActorBase {
 
   reproducir_animacion(nombre) {
     this.sprite.anims.play(nombre);
+  }
+
+  set animacion(nombre) {
+    if (this._animacion_en_curso !== nombre) {
+      this.reproducir_animacion(nombre);
+      this._animacion_en_curso = nombre;
+    }
+  }
+
+  get animacion() {
+    return this._animacion_en_curso;
   }
 
   cuando_comienza_una_colision(actor: Actor) {}

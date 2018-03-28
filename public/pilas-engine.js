@@ -49,6 +49,9 @@ var Actores = (function () {
     Actores.prototype.moneda = function () {
         return this.crear_actor("moneda");
     };
+    Actores.prototype.nave = function () {
+        return this.crear_actor("Nave");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -555,6 +558,7 @@ var ActorBase = (function () {
         this.figura = "";
         this._etiqueta = null;
         this._vivo = true;
+        this._animacion_en_curso = "";
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -1056,6 +1060,19 @@ var ActorBase = (function () {
     ActorBase.prototype.reproducir_animacion = function (nombre) {
         this.sprite.anims.play(nombre);
     };
+    Object.defineProperty(ActorBase.prototype, "animacion", {
+        get: function () {
+            return this._animacion_en_curso;
+        },
+        set: function (nombre) {
+            if (this._animacion_en_curso !== nombre) {
+                this.reproducir_animacion(nombre);
+                this._animacion_en_curso = nombre;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     ActorBase.prototype.cuando_termina_una_colision = function (actor) { };
@@ -1256,18 +1273,29 @@ var Nave = (function (_super) {
         return _this;
     }
     Nave.prototype.iniciar = function () {
-        this.imagen = "nave";
-        this.pilas.reproducir_sonido("moneda");
+        this.crear_animacion("nave_en_reposo", ["nave_en_reposo"], 2);
+        this.crear_animacion("nave_avanzando", ["nave_avanza_1", "nave_avanza_2"], 20);
+        this.crear_animacion("nave_girando_a_la_izquierda", ["nave_izquierda_1", "nave_izquierda_2"], 20);
+        this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
+        this.animacion = "nave_en_reposo";
     };
     Nave.prototype.actualizar = function () {
         if (this.pilas.control.izquierda) {
             this.rotacion += this.velocidad;
+            this.animacion = "nave_girando_a_la_izquierda";
         }
         if (this.pilas.control.derecha) {
             this.rotacion -= this.velocidad;
+            this.animacion = "nave_girando_a_la_derecha";
         }
         if (this.pilas.control.arriba) {
             this.avanzar(this.rotacion + 90, this.velocidad);
+            this.animacion = "nave_avanzando";
+        }
+        else {
+            if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {
+                this.animacion = "nave_en_reposo";
+            }
         }
     };
     return Nave;
@@ -1492,6 +1520,13 @@ var ModoCargador = (function (_super) {
         this.load.image("conejo_parado2", "imagenes/conejo/parado2.png");
         this.load.image("conejo_camina1", "imagenes/conejo/camina1.png");
         this.load.image("conejo_camina2", "imagenes/conejo/camina2.png");
+        this.load.image("nave_en_reposo", "imagenes/nave/nave_reposo.png");
+        this.load.image("nave_avanza_1", "imagenes/nave/nave_avanza_1.png");
+        this.load.image("nave_avanza_2", "imagenes/nave/nave_avanza_2.png");
+        this.load.image("nave_derecha_1", "imagenes/nave/nave_derecha_1.png");
+        this.load.image("nave_derecha_2", "imagenes/nave/nave_derecha_2.png");
+        this.load.image("nave_izquierda_1", "imagenes/nave/nave_izquierda_1.png");
+        this.load.image("nave_izquierda_2", "imagenes/nave/nave_izquierda_2.png");
         this.load.image("suelo", "imagenes/suelo.png");
         this.load.image("techo", "imagenes/techo.png");
         this.load.image("pared", "imagenes/pared.png");

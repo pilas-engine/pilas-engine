@@ -11,6 +11,7 @@ declare class Actores {
     plataforma(): any;
     actor(): any;
     moneda(): any;
+    nave(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -192,6 +193,7 @@ declare class ActorBase {
     sensores: any[];
     _etiqueta: string;
     _vivo: boolean;
+    _animacion_en_curso: string;
     propiedades_base: {
         x: number;
         y: number;
@@ -271,6 +273,7 @@ declare class ActorBase {
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
     reproducir_animacion(nombre: any): void;
+    animacion: string;
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
