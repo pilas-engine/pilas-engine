@@ -135,15 +135,6 @@ export default Controller.extend(queryParams.Mixin, {
               }
 
               actualizar() {
-                if (pilas.control.izquierda) {
-                  this.x -= 5;
-                  this.rotacion += 10;
-                }
-
-                if (pilas.control.derecha) {
-                  this.x += 5;
-                  this.rotacion -= 10;
-                }
               }
 
             }`
