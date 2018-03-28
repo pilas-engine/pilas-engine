@@ -605,7 +605,10 @@ var ActorBase = (function () {
         }
         else {
             imagen = propiedades.imagen.split(".")[0];
-            cuadro = propiedades.imagen.split(".")[1];
+            cuadro = propiedades.imagen
+                .split(".")
+                .slice(1)
+                .join(".");
         }
         this.sensores = [];
         switch (figura) {
@@ -729,10 +732,13 @@ var ActorBase = (function () {
             }
         },
         set: function (nombre) {
-            debugger;
             if (nombre.indexOf(".") > -1) {
-                var partes = nombre.split(".");
-                this.sprite.setTexture(partes[0], partes[1]);
+                var key = nombre.split(".")[0];
+                var frame = nombre
+                    .split(".")
+                    .slice(1)
+                    .join(".");
+                this.sprite.setTexture(key, frame);
             }
             else {
                 this.sprite.setTexture(nombre);
@@ -1489,7 +1495,11 @@ var ModoCargador = (function (_super) {
         this.load.image("pared", "imagenes/pared.png");
         this.load.image("plataforma", "imagenes/plataforma.png");
         this.load.image("moneda", "imagenes/moneda.png");
-        this.load.atlas("spritesheet", "imagenes_agrupadas/spritesheet.png", "imagenes_agrupadas/spritesheet.json");
+        this.load.atlas({
+            key: "spritesheet",
+            texture: "imagenes_agrupadas/spritesheet.png",
+            data: "imagenes_agrupadas/spritesheet.json"
+        });
         this.load.audio("laser", "sonidos/laser.wav", {});
         this.load.audio("moneda", "sonidos/moneda.wav", {});
         this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});

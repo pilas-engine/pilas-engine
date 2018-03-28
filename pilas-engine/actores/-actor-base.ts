@@ -68,7 +68,10 @@ class ActorBase {
       cuadro = null;
     } else {
       imagen = propiedades.imagen.split(".")[0];
-      cuadro = propiedades.imagen.split(".")[1];
+      cuadro = propiedades.imagen
+        .split(".")
+        .slice(1)
+        .join(".");
     }
 
     this.sensores = [];
@@ -209,10 +212,13 @@ class ActorBase {
   }
 
   set imagen(nombre: string) {
-    debugger;
     if (nombre.indexOf(".") > -1) {
-      let partes = nombre.split(".");
-      this.sprite.setTexture(partes[0], partes[1]);
+      let key = nombre.split(".")[0];
+      let frame = nombre
+        .split(".")
+        .slice(1)
+        .join(".");
+      this.sprite.setTexture(key, frame);
     } else {
       this.sprite.setTexture(nombre);
     }

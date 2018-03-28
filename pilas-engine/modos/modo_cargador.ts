@@ -31,7 +31,11 @@ class ModoCargador extends Modo {
     this.load.image("plataforma", "imagenes/plataforma.png");
     this.load.image("moneda", "imagenes/moneda.png");
 
-    this.load.atlas("spritesheet", "imagenes_agrupadas/spritesheet.png", "imagenes_agrupadas/spritesheet.json");
+    this.load.atlas({
+      key: "spritesheet",
+      texture: "imagenes_agrupadas/spritesheet.png",
+      data: "imagenes_agrupadas/spritesheet.json"
+    });
 
     this.load.audio("laser", "sonidos/laser.wav", {});
     this.load.audio("moneda", "sonidos/moneda.wav", {});
