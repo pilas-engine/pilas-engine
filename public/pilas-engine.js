@@ -1043,7 +1043,9 @@ var ActorBase = (function () {
     ActorBase.prototype.avanzar = function (rotacion, velocidad) {
         if (rotacion === void 0) { rotacion = null; }
         if (velocidad === void 0) { velocidad = 1; }
-        rotacion = rotacion || this.rotacion;
+        if (rotacion === null) {
+            rotacion = this.rotacion;
+        }
         var r = this.pilas.utilidades.convertir_angulo_a_radianes(rotacion);
         this.x += Math.cos(r) * velocidad;
         this.y += Math.sin(r) * velocidad;

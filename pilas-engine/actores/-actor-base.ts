@@ -493,7 +493,9 @@ class ActorBase {
   cada_segundo() {}
 
   avanzar(rotacion: number = null, velocidad: number = 1) {
-    rotacion = rotacion || this.rotacion;
+    if (rotacion === null) {
+      rotacion = this.rotacion;
+    }
 
     let r = this.pilas.utilidades.convertir_angulo_a_radianes(rotacion);
 
