@@ -135,3 +135,7 @@ body {
 .margin-right-auto {
   margin-right: auto;
 }
+
+.mh-100 {
+  max-height: 100%;
+}
