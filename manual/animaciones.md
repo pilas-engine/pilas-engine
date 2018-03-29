@@ -30,12 +30,42 @@ class Conejo extends Actor {
 
         this.animacion = "conejo_parado";
 	}
-    
+
     actualizar() {
-        
+
     }
 }
 ```
 
-​	
 
+Luego, para cambiar de animación, se puede re-definir el valor del atributo
+animación así:
+
+```typescript
+class Conejo extends Actor {
+	iniciar() {
+        this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
+        this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
+        this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
+        this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
+
+        this.animacion = "conejo_parado";
+	}
+
+    actualizar() {
+        if (this.pilas.control.izquierda) {
+					this.animacion = "conejo_camina";
+					this.x -= 5;
+				}
+
+				if (this.pilas.control.derecha) {
+					this.animacion = "conejo_camina";
+					this.x += 5;
+				}
+
+				if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {
+					this.animacion = "conejo_parado";
+				}
+    }
+}
+```
