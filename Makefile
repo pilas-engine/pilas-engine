@@ -57,7 +57,7 @@ comandos:
 	@echo "    ${G}api${N}                    Genera la documentación de API para pilas."
 	@echo "    ${G}pilas_manual${N}           Genera el manual de pilas."
 	@echo "    ${G}pilas_manuales_descargables${N}  Genera los pdf, epub y mobi del manual."
-	@echo "    ${G}pilas_manual_web${N}     Sube el manual a la web.
+	@echo "    ${G}pilas_manual_web${N}     Sube el manual a la web."
 	@echo "    ${G}pilas_sprites${N}          Genera los spritesheets."
 	@echo "    ${G}actualizar_phaser${N}      Actualiza phaser a una versión más reciente."
 	@echo ""
