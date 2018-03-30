@@ -3,13 +3,22 @@
 
 {{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id='dialogoPreferencias' titulo="Preferencias"}}
 
-  {{pilas-interruptor variable=permitir_modo_pausa texto="Permitir el modo pausa y depuración paso a paso *"}}
+  <div class="">
+    {{pilas-interruptor variable=oscuro texto="Usar el editor en modo oscuro"}}
+  </div>
 
 
-  <p class='gray f6'>* El modo pausa permite inpeccionar paso a paso el recorrido de cada actor, lo cual es bastante útil
-    para depurar y encontrar errores. Sin embargo, puede hacer un poco lenta la ejecución del juego. Si deshabilitás
-    este modo, la ejecución va a ir mucho más fluida.
-  </p>
+  <div class="">
+    {{pilas-interruptor variable=permitir_modo_pausa texto="Permitir el modo pausa y depuración paso a paso *"}}
+
+    <p class='gray f7'>* El modo pausa permite inpeccionar paso a paso el recorrido de cada actor, lo cual es bastante útil
+      para depurar y encontrar errores. Sin embargo, puede hacer un poco lenta la ejecución del juego. Si deshabilitás
+      este modo, la ejecución va a ir mucho más fluida.
+    </p>
+  </div>
+
+
+
 {{/pilas-modal}}
 
 {{yield}}

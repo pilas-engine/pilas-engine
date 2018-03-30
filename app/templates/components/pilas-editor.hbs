@@ -6,7 +6,7 @@
         {{pilas-boton-regresar}}
         {{pilas-boton desactivado=cargando accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
 
-        {{pilas-boton-preferencias permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
+        {{pilas-boton-preferencias oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
       </div>
 
       <div class="flex1">
@@ -133,6 +133,7 @@
         {{monaco-editor
             titulo=tituloDelCodigo
             code=codigo
+            oscuro=oscuro
             desactivado=(not estado.puede_editar)
             cuandoCarga=(action "cuando_termino_de_cargar_monaco_editor")
             onSave=(action "cuandoGuardaDesdeElEditor")

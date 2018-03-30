@@ -19,7 +19,8 @@ const queryParams = new QueryParams({
   fps: { defaultValue: true, replace: true },
   fisica: { defaultValue: true, replace: true },
   permitir_modo_pausa: { defaultValue: true, replace: true },
-  maximizar: { defaultValue: false, replace: true }
+  maximizar: { defaultValue: false, replace: true },
+  oscuro: { defaultValue: false, replace: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {
@@ -56,13 +57,17 @@ export default Controller.extend(queryParams.Mixin, {
       return EmberObject.create(escena);
     });
 
-    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
-      return EmberObject.create(tipo);
-    });
+    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(
+      tipo => {
+        return EmberObject.create(tipo);
+      }
+    );
 
-    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(tipo => {
-      return EmberObject.create(tipo);
-    });
+    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(
+      tipo => {
+        return EmberObject.create(tipo);
+      }
+    );
 
     return proyectoComoObjetoEmber;
   },

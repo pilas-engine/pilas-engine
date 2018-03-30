@@ -1,6 +1,6 @@
-import { observer } from '@ember/object';
-import { inject as service } from '@ember/service';
-import Component from '@ember/component';
+import { observer } from "@ember/object";
+import { inject as service } from "@ember/service";
+import Component from "@ember/component";
 import layout from "ember-monaco-editor/templates/components/monaco-editor";
 import getFrameById from "ember-monaco-editor/utils/get-frame-by-id";
 import formatear from "pilas-engine/utils/formatear";
@@ -42,6 +42,18 @@ export default Component.extend({
     }
   }),
 
+  sincronizarOscuro: observer("oscuro", function() {
+    var theme = "vs";
+
+    if (this.get("oscuro")) {
+      theme = "vs-dark";
+    }
+
+    if (this.get("editor")) {
+      this.get("editor").updateOptions({ theme: theme });
+    }
+  }),
+
   init() {
     this._super(...arguments);
 
@@ -50,13 +62,21 @@ export default Component.extend({
         return;
       }
 
-      if (event.source === this.get("frame") && event.data && event.data.updatedCode) {
+      if (
+        event.source === this.get("frame") &&
+        event.data &&
+        event.data.updatedCode
+      ) {
         if (this.get("onChange")) {
           this.get("onChange")(event.data.updatedCode);
         }
       }
 
-      if (event.source === this.get("frame") && event.data && event.data.message) {
+      if (
+        event.source === this.get("frame") &&
+        event.data &&
+        event.data.message
+      ) {
         if (event.data.message === "load-complete") {
           this.onLoadEditor(this.get("frame").editor);
         }
@@ -86,6 +106,7 @@ export default Component.extend({
     }
     const frame = getFrameById(this.get("elementId"));
     const frameDoc = frame.document;
+    let oscuro = this.get("oscuro");
     this.set("frame", frame);
 
     let declaraciones_de_pilas_engine_ts = this.get("declaraciones").obtener();
@@ -138,11 +159,18 @@ export default Component.extend({
 
               monaco.languages.typescript.typescriptDefaults.addExtraLib(\`'${declaraciones_de_pilas_engine_ts}\`, 'pilas-engine.d.ts');
 
+              var theme = 'vs';
+
+              if (${oscuro}) {
+                theme = 'vs-dark';
+              }
+
+
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
                 minimap: false,
                 fontSize: 14,
-                theme: 'vs', // 'vs-dark',
+                theme: theme,
                 tabSize: 2,
                 insertSpaces: true,
                 tabWidth: 2,
@@ -205,6 +233,7 @@ export default Component.extend({
 
     if (editor) {
       editor.focus();
+      window.editor = editor;
     }
   },
 
