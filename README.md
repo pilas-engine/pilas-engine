@@ -28,6 +28,11 @@ La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
 
 ## Primeros pasos
 
+Antes de comenzar, te recomendamos tener en cuenta este video en donde
+explicamos cómo crear el entorno de pilas-engine y hacer algunas tareas básicas: https://www.youtube.com/watch?v=ASKYT7OoLos
+
+También vas a encontrar instrucciones para colaborar aquí: http://manual-pilas-engine.surge.sh/entorno.html
+
 Para comenzar a utilizar este repositorio deberías tener instalado git, Make, nodejs
 (versión 6 o superior) y ejecutar estos comandos:
 
