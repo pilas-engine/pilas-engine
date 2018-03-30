@@ -695,8 +695,7 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.generar_color_para_depurar = function () {
-        var opacidad = "FF";
-        return this.pilas.utilidades.obtener_color_al_azar(opacidad);
+        return this.pilas.utilidades.obtener_color_al_azar();
     };
     ActorBase.prototype.pre_actualizar = function () {
         if (this.figura && this.sin_rotacion) {
@@ -709,14 +708,11 @@ var ActorBase = (function () {
             return this.automata.estado;
         },
         set: function (estado) {
-            return (this.automata.estado = estado);
+            this.automata.estado = estado;
         },
         enumerable: true,
         configurable: true
     });
-    ActorBase.prototype.crear_estado = function (nombre) {
-        this.automata.crear_estado(nombre);
-    };
     ActorBase.prototype.actualizar = function () { };
     ActorBase.prototype.actualizar_sensores = function () {
         var _this = this;

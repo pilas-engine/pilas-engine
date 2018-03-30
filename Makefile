@@ -48,6 +48,7 @@ comandos:
 	@echo "    ${G}sprites_ember${N}          Genera las imágenes de la aplicación."
 	@echo "    ${G}prettier${N}               Corrige el formato y la sintaxis de todos los archivos."
 	@echo "    ${G}actualizar_typescript${N}  Actualiza typescript a una versión más reciente."
+	@echo "    ${G}actualizar_definiciones${N}Actualiza las definiciones de typescript para phaser."
 	@echo "    ${G}actualizar_jsbeautify${N}  Actualiza jsbeautify a una versión más reciente."
 	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
@@ -255,6 +256,10 @@ actualizar_typescript:
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/typescript/lib/typescript.js public${N}"
 	@echo "${Y}${N}"
+
+actualizar_definiciones:
+	@wget https://raw.githubusercontent.com/photonstorm/phaser3-docs/master/typescript/phaser.d.ts -O pilas-engine/declaraciones/phaser.d.ts
+
 
 actualizar_jsbeautify:
 	@echo "${Y}Para actualizar jsbeautify, hay que seguir estos pasos:${N}"

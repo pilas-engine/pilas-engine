@@ -2,7 +2,7 @@ class ActorBase {
   tipo: String;
   sprite: Phaser.GameObjects.Sprite;
   pilas: Pilas;
-  id_color: string;
+  id_color: number;
   figura = "";
   sin_rotacion: false;
   automata: Automata;
@@ -168,8 +168,7 @@ class ActorBase {
   }
 
   generar_color_para_depurar() {
-    let opacidad = "FF";
-    return this.pilas.utilidades.obtener_color_al_azar(opacidad);
+    return this.pilas.utilidades.obtener_color_al_azar();
   }
 
   pre_actualizar() {
@@ -185,11 +184,7 @@ class ActorBase {
   }
 
   set estado(estado) {
-    return (this.automata.estado = estado);
-  }
-
-  crear_estado(nombre) {
-    this.automata.crear_estado(nombre);
+    this.automata.estado = estado;
   }
 
   actualizar() {}

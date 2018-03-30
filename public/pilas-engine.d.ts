@@ -185,7 +185,7 @@ declare class ActorBase {
     tipo: String;
     sprite: Phaser.GameObjects.Sprite;
     pilas: Pilas;
-    id_color: string;
+    id_color: number;
     figura: string;
     sin_rotacion: false;
     automata: Automata;
@@ -234,13 +234,12 @@ declare class ActorBase {
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
-        id_color: string;
+        id_color: number;
     };
     etiqueta: string;
-    generar_color_para_depurar(): any;
+    generar_color_para_depurar(): number;
     pre_actualizar(): void;
     estado: string;
-    crear_estado(nombre: any): void;
     actualizar(): void;
     actualizar_sensores(): void;
     imagen: string;
@@ -498,7 +497,7 @@ declare class ModoPausa extends Modo {
     preload(): void;
     create(datos: any): void;
     private crear_sprites_desde_historia(posicion);
-    crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
+    crear_sprite_desde_entidad(entidad: any): any;
     actualizar_posicion(posicion: any): void;
     crear_canvas_de_depuracion(): void;
 }
