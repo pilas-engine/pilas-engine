@@ -1,11 +1,9 @@
-class Pelota extends Actor {
+class pelota extends Actor {
   propiedades = {
+    imagen: "pelota",
     figura: "circulo",
-    figura_radio: 25,
+    figura_radio: 25
   };
 
-
-  iniciar() {
-    //this.crear_figura_circular(20, false);
-  }
+  iniciar() {}
 }

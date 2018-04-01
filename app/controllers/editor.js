@@ -57,17 +57,13 @@ export default Controller.extend(queryParams.Mixin, {
       return EmberObject.create(escena);
     });
 
-    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(
-      tipo => {
-        return EmberObject.create(tipo);
-      }
-    );
+    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
+      return EmberObject.create(tipo);
+    });
 
-    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(
-      tipo => {
-        return EmberObject.create(tipo);
-      }
-    );
+    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(tipo => {
+      return EmberObject.create(tipo);
+    });
 
     return proyectoComoObjetoEmber;
   },
@@ -80,8 +76,8 @@ export default Controller.extend(queryParams.Mixin, {
       codigos: {
         escenas: [
           {
-            nombre: "Escena1",
-            codigo: `class Escena1 extends Escena {
+            nombre: "escena1",
+            codigo: `class escena1 extends Escena {
               iniciar() {
               }
 
@@ -90,8 +86,8 @@ export default Controller.extend(queryParams.Mixin, {
             }`
           },
           {
-            nombre: "Escena2",
-            codigo: `class Escena2 extends Escena {
+            nombre: "escena2",
+            codigo: `class escena2 extends Escena {
               iniciar() {
               }
 
@@ -102,8 +98,8 @@ export default Controller.extend(queryParams.Mixin, {
         ],
         actores: [
           {
-            tipo: "Pelota",
-            codigo: `class Pelota  extends ActorBase {
+            nombre: "pelota",
+            codigo: `class pelota extends ActorBase {
 
             iniciar() {
             }
@@ -113,42 +109,20 @@ export default Controller.extend(queryParams.Mixin, {
           }`
           },
           {
-            tipo: "Caja",
-            codigo: `class Caja extends ActorBase {
+            nombre: "caja",
+            codigo: `class caja extends ActorBase {
             iniciar() {
             }
 
             actualizar() {
             }
           }`
-          },
-          {
-            tipo: "Actor",
-            codigo: `class Actor extends ActorBase {
-              iniciar() {
-              }
-
-              actualizar() {
-              }
-          }`
-          },
-          {
-            tipo: "Aceituna",
-            codigo: `class Aceituna extends ActorBase {
-
-              iniciar() {
-              }
-
-              actualizar() {
-              }
-
-            }`
           }
         ]
       },
       escenas: [
         {
-          nombre: "Escena1",
+          nombre: "escena1",
           id: 1,
           camara_x: 0,
           camara_y: 0,
@@ -162,7 +136,7 @@ export default Controller.extend(queryParams.Mixin, {
               rotacion: 30,
               escala_x: 1,
               escala_y: 1,
-              tipo: "Pelota",
+              nombre: "pelota",
               imagen: "pelota",
               transparencia: 0,
               espejado: false,
@@ -171,80 +145,14 @@ export default Controller.extend(queryParams.Mixin, {
               figura_dinamica: true,
               figura_ancho: 100,
               figura_alto: 100,
-              figura_radio: 40,
-              figura_sin_rotacion: false,
-              figura_rebote: 1
-            },
-            {
-              id: 3,
-              x: 250,
-              y: 140,
-              centro_x: 0.5,
-              centro_y: 0.5,
-              rotacion: 30,
-              escala_x: 1,
-              escala_y: 1,
-              tipo: "Caja",
-              imagen: "caja",
-              transparencia: 0,
-              espejado: false,
-              espejado_vertical: false,
-              figura: "",
-              figura_dinamica: true,
-              figura_ancho: 100,
-              figura_alto: 100,
-              figura_radio: 40,
-              figura_sin_rotacion: false,
-              figura_rebote: 1
-            },
-            {
-              id: 4,
-              x: 100,
-              y: 0,
-              centro_x: 0.5,
-              centro_y: 0.5,
-              rotacion: 30,
-              escala_x: 1,
-              escala_y: 1,
-              tipo: "Actor",
-              imagen: "sin_imagen",
-              transparencia: 0,
-              espejado: false,
-              espejado_vertical: false,
-              figura: "rectangulo",
-              figura_dinamica: true,
-              figura_ancho: 100,
-              figura_alto: 100,
-              figura_radio: 40,
-              figura_sin_rotacion: false,
-              figura_rebote: 0.9
-            },
-            {
-              id: 5,
-              x: 0,
-              y: 40,
-              centro_x: 0.5,
-              centro_y: 0.5,
-              rotacion: 10,
-              escala_x: 1,
-              escala_y: 1,
-              tipo: "Aceituna",
-              imagen: "aceituna",
-              transparencia: 0,
-              espejado: false,
-              espejado_vertical: false,
-              figura: "",
-              figura_dinamica: true,
-              figura_ancho: 100,
-              figura_alto: 100,
-              figura_radio: 40,
+              figura_radio: 25,
               figura_sin_rotacion: false,
               figura_rebote: 1
             }
           ]
         },
         {
-          nombre: "Escena2",
+          nombre: "escena2",
           id: 6,
           camara_x: 0,
           camara_y: 0,

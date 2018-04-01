@@ -85,21 +85,21 @@ export default Component.extend({
         propiedad: "figura_ancho",
         intensidad: 1,
         min: 1,
-        max: 100
+        max: 1000
       },
       {
         tipo: "numero",
         propiedad: "figura_alto",
         intensidad: 1,
         min: 1,
-        max: 100
+        max: 1000
       },
       {
         tipo: "numero",
         propiedad: "figura_radio",
         intensidad: 1,
         min: 1,
-        max: 100
+        max: 1000
       },
       {
         tipo: "numero",

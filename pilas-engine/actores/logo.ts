@@ -1,3 +1,3 @@
-class Logo extends Actor {
+class logo extends Actor {
   iniciar() {}
 }

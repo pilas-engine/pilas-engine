@@ -14,6 +14,8 @@ export default Component.extend({
   cargando: true,
   mantenerFoco: false,
   classNames: ["flex1", "overflow-hidden", "unseletable"],
+  classNameBindings: ["altoFijo:h250"],
+  altoFijo: false,
   porcentajeDeCarga: 0,
   cuando_termina_de_cargar: null,
   valor_anterior_de_maximizar: false,

@@ -1,4 +1,4 @@
-class Aceituna extends Actor {
+class aceituna extends Actor {
   iniciar() {
     this.imagen = "aceituna";
   }

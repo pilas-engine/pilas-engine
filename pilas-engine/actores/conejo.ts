@@ -1,4 +1,4 @@
-class Conejo extends Actor {
+class conejo extends Actor {
   propiedades = {
     x: 0,
     y: 0,

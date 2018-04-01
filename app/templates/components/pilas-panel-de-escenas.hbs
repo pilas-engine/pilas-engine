@@ -19,14 +19,10 @@
       {{#if (eq ultimaEscenaSeleccionada escena.id)}}
         <ul>
           {{#each escena.actores as |actor|}}
-            <li class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}> {{actor.tipo}} {{!actor.nombre}}
-
-        {{#if (eq seleccion actor.id)}}
-          {{pilas-boton-eliminar-con-confirmacion tipo="actor" titulo="¿Realmente quieres eliminar este actor?" accion=(action cuando_intenta_eliminar actor.id)}}
-        {{/if}}
-
-
-
+            <li class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}> {{actor.nombre}}
+              {{#if (eq seleccion actor.id)}}
+                {{pilas-boton-eliminar-con-confirmacion tipo="actor" titulo="¿Realmente quieres eliminar este actor?" accion=(action cuando_intenta_eliminar actor.id)}}
+              {{/if}}
             </li>
           {{else}}
             <li class='truncate pa1'>sin actores</li >

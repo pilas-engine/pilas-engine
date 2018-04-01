@@ -27,10 +27,11 @@ export default Service.extend({
       let actor = metadata.actores[i];
 
       let codigo = yield $.ajax({
-        url: `${config.rootURL}actores/${actor.archivo}`
+        url: `${config.rootURL}actores/${actor.nombre}.ts`
       });
 
       actor.codigo = codigo;
+      actor.imagen = actor.nombre;
 
       let propiedades = this.extraer_diccionario("propiedades", codigo);
       actor.propiedades = this.combinar_propiedades(propiedades_base, propiedades);

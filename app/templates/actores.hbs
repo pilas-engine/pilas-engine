@@ -20,11 +20,11 @@
     {{#if actor}}
       {{pilas-previsualizacion-de-actor actor=actor}}
 
-      <div class='lato pt1 pb2 f6'>{{actor.nombre}} (del archivo {{actor.archivo}})</div>
+      <div class='lato pt1 pb2 f6'>{{actor.nombre}} (del archivo {{actor.nombre}}.ts)</div>
 
 
       {{monaco-editor
-        titulo=actor.archivo
+        titulo=actor.nombre
         code=actor.codigo
         readOnly=true}}
 

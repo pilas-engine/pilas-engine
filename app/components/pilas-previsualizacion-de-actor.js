@@ -14,13 +14,15 @@ export default Component.extend({
     this.set("proyecto", {
       titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",
       ancho: 400,
-      alto: 200,
+      alto: 250,
       codigos: {
         escenas: [
           {
             nombre: "principal",
             codigo: `class principal extends Escena {
               iniciar() {
+                let suelo = pilas.actores.suelo();
+                suelo.y = -130;
               }
             }`
           }
@@ -90,7 +92,7 @@ export default Component.extend({
   agregar_actor_al_proyecto(proyecto, actor) {
     proyecto.codigos.actores = [
       {
-        tipo: actor.nombre,
+        nombre: actor.nombre,
         codigo: actor.codigo
       }
     ];
@@ -105,8 +107,8 @@ export default Component.extend({
         rotacion: 0,
         escala_x: 1,
         escala_y: 1,
-        tipo: actor.nombre,
-        imagen: actor.imagen,
+        nombre: actor.nombre,
+        imagen: actor.nombre,
         transparencia: 0
       }
     ];

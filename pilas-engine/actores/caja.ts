@@ -1,4 +1,4 @@
-class Caja extends Actor {
+class caja extends Actor {
   propiedades = {
     x: 0,
     y: 0,
@@ -10,7 +10,5 @@ class Caja extends Actor {
     figura_rebote: 0.9
   };
 
-  iniciar() {
-    //this.crear_figura_rectangular();
-  }
+  iniciar() {}
 }

@@ -1108,19 +1108,19 @@ var Actor = (function (_super) {
     Actor.prototype.actualizar = function () { };
     return Actor;
 }(ActorBase));
-var Aceituna = (function (_super) {
-    __extends(Aceituna, _super);
-    function Aceituna() {
+var aceituna = (function (_super) {
+    __extends(aceituna, _super);
+    function aceituna() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Aceituna.prototype.iniciar = function () {
+    aceituna.prototype.iniciar = function () {
         this.imagen = "aceituna";
     };
-    return Aceituna;
+    return aceituna;
 }(Actor));
-var Caja = (function (_super) {
-    __extends(Caja, _super);
-    function Caja() {
+var caja = (function (_super) {
+    __extends(caja, _super);
+    function caja() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             x: 0,
@@ -1134,13 +1134,12 @@ var Caja = (function (_super) {
         };
         return _this;
     }
-    Caja.prototype.iniciar = function () {
-    };
-    return Caja;
+    caja.prototype.iniciar = function () { };
+    return caja;
 }(Actor));
-var Conejo = (function (_super) {
-    __extends(Conejo, _super);
-    function Conejo() {
+var conejo = (function (_super) {
+    __extends(conejo, _super);
+    function conejo() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             x: 0,
@@ -1158,7 +1157,7 @@ var Conejo = (function (_super) {
         _this.pies = null;
         return _this;
     }
-    Conejo.prototype.iniciar = function () {
+    conejo.prototype.iniciar = function () {
         this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
         this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
         this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
@@ -1166,7 +1165,7 @@ var Conejo = (function (_super) {
         this.estado = "parado";
         this.pies = this.agregar_sensor(50, 10, 0, -50);
     };
-    Conejo.prototype.actualizar = function () {
+    conejo.prototype.actualizar = function () {
         if (this.pies.colisiones.length > 0) {
             this.toca_el_suelo = true;
         }
@@ -1174,10 +1173,10 @@ var Conejo = (function (_super) {
             this.toca_el_suelo = false;
         }
     };
-    Conejo.prototype.parado_iniciar = function () {
+    conejo.prototype.parado_iniciar = function () {
         this.reproducir_animacion("conejo_parado");
     };
-    Conejo.prototype.parado_actualizar = function () {
+    conejo.prototype.parado_actualizar = function () {
         if (this.pilas.control.izquierda || this.pilas.control.derecha) {
             this.estado = "camina";
         }
@@ -1189,10 +1188,10 @@ var Conejo = (function (_super) {
             this.estado = "salta";
         }
     };
-    Conejo.prototype.camina_iniciar = function () {
+    conejo.prototype.camina_iniciar = function () {
         this.reproducir_animacion("conejo_camina");
     };
-    Conejo.prototype.camina_actualizar = function () {
+    conejo.prototype.camina_actualizar = function () {
         if (this.pilas.control.izquierda) {
             this.x -= 5;
             this.espejado = true;
@@ -1213,10 +1212,10 @@ var Conejo = (function (_super) {
             this.estado = "salta";
         }
     };
-    Conejo.prototype.salta_iniciar = function () {
+    conejo.prototype.salta_iniciar = function () {
         this.reproducir_animacion("conejo_salta");
     };
-    Conejo.prototype.salta_actualizar = function () {
+    conejo.prototype.salta_actualizar = function () {
         if (this.pilas.control.izquierda) {
             this.x -= 5;
         }
@@ -1227,23 +1226,23 @@ var Conejo = (function (_super) {
             this.estado = "parado";
         }
     };
-    Conejo.prototype.cuando_comienza_una_colision = function (actor) {
+    conejo.prototype.cuando_comienza_una_colision = function (actor) {
         if (actor.etiqueta === "moneda") {
             this.pilas.reproducir_sonido("moneda");
             actor.eliminar();
         }
     };
-    Conejo.prototype.cuando_se_mantiene_una_colision = function (actor) { };
-    Conejo.prototype.cuando_termina_una_colision = function (actor) { };
-    return Conejo;
+    conejo.prototype.cuando_se_mantiene_una_colision = function (actor) { };
+    conejo.prototype.cuando_termina_una_colision = function (actor) { };
+    return conejo;
 }(Actor));
-var Logo = (function (_super) {
-    __extends(Logo, _super);
-    function Logo() {
+var logo = (function (_super) {
+    __extends(logo, _super);
+    function logo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Logo.prototype.iniciar = function () { };
-    return Logo;
+    logo.prototype.iniciar = function () { };
+    return logo;
 }(Actor));
 var moneda = (function (_super) {
     __extends(moneda, _super);
@@ -1261,21 +1260,21 @@ var moneda = (function (_super) {
     }
     return moneda;
 }(Actor));
-var Nave = (function (_super) {
-    __extends(Nave, _super);
-    function Nave() {
+var nave = (function (_super) {
+    __extends(nave, _super);
+    function nave() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.velocidad = 5;
         return _this;
     }
-    Nave.prototype.iniciar = function () {
+    nave.prototype.iniciar = function () {
         this.crear_animacion("nave_en_reposo", ["nave_en_reposo"], 2);
         this.crear_animacion("nave_avanzando", ["nave_avanza_1", "nave_avanza_2"], 20);
         this.crear_animacion("nave_girando_a_la_izquierda", ["nave_izquierda_1", "nave_izquierda_2"], 20);
         this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
         this.animacion = "nave_en_reposo";
     };
-    Nave.prototype.actualizar = function () {
+    nave.prototype.actualizar = function () {
         if (this.pilas.control.izquierda) {
             this.rotacion += this.velocidad;
             this.animacion = "nave_girando_a_la_izquierda";
@@ -1294,7 +1293,7 @@ var Nave = (function (_super) {
             }
         }
     };
-    return Nave;
+    return nave;
 }(Actor));
 var pared = (function (_super) {
     __extends(pared, _super);
@@ -1314,19 +1313,19 @@ var pared = (function (_super) {
     pared.prototype.iniciar = function () { };
     return pared;
 }(Actor));
-var Pelota = (function (_super) {
-    __extends(Pelota, _super);
-    function Pelota() {
+var pelota = (function (_super) {
+    __extends(pelota, _super);
+    function pelota() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
+            imagen: "pelota",
             figura: "circulo",
-            figura_radio: 25,
+            figura_radio: 25
         };
         return _this;
     }
-    Pelota.prototype.iniciar = function () {
-    };
-    return Pelota;
+    pelota.prototype.iniciar = function () { };
+    return pelota;
 }(Actor));
 var plataforma = (function (_super) {
     __extends(plataforma, _super);
@@ -1811,9 +1810,9 @@ var ModoEjecucion = (function (_super) {
         var y = entidad.y;
         var imagen = entidad.imagen;
         var actor = null;
-        var clase = this.clases[entidad.tipo];
+        var clase = this.clases[entidad.nombre];
         if (clase) {
-            actor = new this.clases[entidad.tipo](this.pilas);
+            actor = new this.clases[entidad.nombre](this.pilas);
             var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
             actor.pre_iniciar(p);

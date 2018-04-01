@@ -1,4 +1,4 @@
-class Nave extends Actor {
+class nave extends Actor {
   velocidad = 5;
 
   iniciar() {

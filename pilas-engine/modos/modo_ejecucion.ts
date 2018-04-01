@@ -178,10 +178,10 @@ class ModoEjecucion extends Modo {
     let imagen = entidad.imagen;
     let actor = null;
 
-    let clase = this.clases[entidad.tipo];
+    let clase = this.clases[entidad.nombre];
 
     if (clase) {
-      actor = new this.clases[entidad.tipo](this.pilas);
+      actor = new this.clases[entidad.nombre](this.pilas);
 
       let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
       p = this.pilas.utilidades.combinar_propiedades(p, entidad);

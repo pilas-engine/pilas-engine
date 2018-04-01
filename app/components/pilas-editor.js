@@ -89,6 +89,7 @@ export default Component.extend({
 
     actor.set("x", datos.x);
     actor.set("y", datos.y);
+    /*
 
     this.get("log").grupo(
       "Cambió la posición del actor desde el editor:",
@@ -98,6 +99,7 @@ export default Component.extend({
       actor.y = ${Math.round(datos.y)};
     `
     );
+    */
   },
 
   comienza_a_mover_un_actor(datos) {
@@ -176,13 +178,14 @@ export default Component.extend({
     this.send("cuandoSelecciona", primer_escena.get("id"));
   },
 
-  registrar_codigo_de_actor(tipo, codigo) {
+  registrar_codigo_de_actor(nombre, codigo) {
     let proyecto = this.get("proyecto");
+    let codigo_modificado = aplicar_nombre(nombre, codigo);
 
     proyecto.codigos.actores.pushObject(
       EmberObject.create({
-        tipo: tipo,
-        codigo: aplicar_nombre(tipo, codigo)
+        nombre: nombre,
+        codigo: codigo_modificado
       })
     );
   },
@@ -202,8 +205,8 @@ export default Component.extend({
     return Math.floor(Math.random() * 999) + 1000;
   },
 
-  obtenerTipoDeActor(tipoDelActor) {
-    return this.get("proyecto.codigos.actores").findBy("tipo", tipoDelActor);
+  obtener_actor_por_nombre(nombre) {
+    return this.get("proyecto.codigos.actores").findBy("nombre", nombre);
   },
 
   obtenerDetalleDeActorPorIndice(indice) {
@@ -235,7 +238,7 @@ export default Component.extend({
   obtener_todos_los_nombres_de_actores() {
     let escenas = this.get("proyecto.escenas");
     let actores = escenas.map(e => e.actores);
-    return actores.reduce(e => e.concat()).map(e => e.get("tipo"));
+    return actores.reduce(e => e.concat()).map(e => e.get("nombre"));
   },
 
   obtener_nombres_de_escenas(proyecto) {
@@ -246,8 +249,8 @@ export default Component.extend({
     return this.get("proyecto.codigos.escenas").findBy("nombre", nombre).codigo;
   },
 
-  obtener_codigo_para_el_actor({ tipo }) {
-    return this.obtenerTipoDeActor(tipo).get("codigo");
+  obtener_codigo_para_el_actor({ nombre }) {
+    return this.obtener_actor_por_nombre(nombre).get("codigo");
   },
 
   definir_codigo_para_la_escena({ nombre }, codigo) {
@@ -260,14 +263,14 @@ export default Component.extend({
     this.set("existe_un_error_reciente", true);
   },
 
-  definir_codigo_para_el_actor({ tipo }, codigo) {
-    this.obtenerTipoDeActor(tipo).set("codigo", codigo);
+  definir_codigo_para_el_actor({ nombre }, codigo) {
+    this.obtener_actor_por_nombre(nombre).set("codigo", codigo);
   },
 
   actions: {
     agregarEscena(model) {
       let nombres_de_escenas = this.obtener_nombres_de_escenas(model);
-      let nombre = obtener_nombre_sin_repetir(nombres_de_escenas, "Escena");
+      let nombre = obtener_nombre_sin_repetir(nombres_de_escenas, "escena");
       let id = this.generar_id();
 
       model.escenas.pushObject(
@@ -292,11 +295,12 @@ export default Component.extend({
       let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
       let id = this.generar_id();
-      let nombre = obtener_nombre_sin_repetir(nombres, actor.tipo);
+      let nombre = obtener_nombre_sin_repetir(nombres, actor.nombre);
 
       actor.propiedades.id = id;
       actor.propiedades.imagen = actor.imagen;
-      actor.propiedades.tipo = actor.tipo;
+
+      actor.propiedades.nombre = nombre;
 
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 

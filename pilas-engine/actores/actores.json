@@ -1,53 +1,28 @@
 {
   "actores": [
     {
-      "nombre": "Aceituna",
-      "tipo": "Aceituna",
-      "imagen": "aceituna",
-      "archivo": "aceituna.ts"
+      "nombre": "aceituna"
     },
     {
-      "nombre": "Caja",
-      "tipo": "Caja",
-      "imagen": "caja",
-      "archivo": "caja.ts"
+      "nombre": "caja"
     },
     {
-      "nombre": "Logo",
-      "tipo": "ActorBasico",
-      "imagen": "logo",
-      "archivo": "logo.ts"
+      "nombre": "logo"
     },
     {
-      "nombre": "Pelota",
-      "tipo": "Pelota",
-      "imagen": "pelota",
-      "archivo": "pelota.ts"
+      "nombre": "pelota"
     },
     {
-      "nombre": "Nave",
-      "tipo": "Nave",
-      "imagen": "nave",
-      "archivo": "nave.ts"
+      "nombre": "nave"
     },
     {
-      "nombre": "Conejo",
-      "tipo": "Conejo",
-      "imagen": "conejo",
-      "archivo": "conejo.ts"
+      "nombre": "conejo"
     },
     {
-      "nombre": "plataforma",
-      "tipo": "plataforma",
-      "imagen": "plataforma",
-      "archivo": "plataforma.ts"
+      "nombre": "plataforma"
     },
-
     {
-      "nombre": "moneda",
-      "tipo": "moneda",
-      "imagen": "moneda",
-      "archivo": "moneda.ts"
+      "nombre": "moneda"
     }
   ]
 }

@@ -285,10 +285,10 @@ declare class Actor extends ActorBase {
     iniciar(): void;
     actualizar(): void;
 }
-declare class Aceituna extends Actor {
+declare class aceituna extends Actor {
     iniciar(): void;
 }
-declare class Caja extends Actor {
+declare class caja extends Actor {
     propiedades: {
         x: number;
         y: number;
@@ -301,7 +301,7 @@ declare class Caja extends Actor {
     };
     iniciar(): void;
 }
-declare class Conejo extends Actor {
+declare class conejo extends Actor {
     propiedades: {
         x: number;
         y: number;
@@ -328,7 +328,7 @@ declare class Conejo extends Actor {
     cuando_se_mantiene_una_colision(actor: any): void;
     cuando_termina_una_colision(actor: any): void;
 }
-declare class Logo extends Actor {
+declare class logo extends Actor {
     iniciar(): void;
 }
 declare class moneda extends Actor {
@@ -341,7 +341,7 @@ declare class moneda extends Actor {
         figura_sensor: boolean;
     };
 }
-declare class Nave extends Actor {
+declare class nave extends Actor {
     velocidad: number;
     iniciar(): void;
     actualizar(): void;
@@ -358,8 +358,9 @@ declare class pared extends Actor {
     };
     iniciar(): void;
 }
-declare class Pelota extends Actor {
+declare class pelota extends Actor {
     propiedades: {
+        imagen: string;
         figura: string;
         figura_radio: number;
     };
