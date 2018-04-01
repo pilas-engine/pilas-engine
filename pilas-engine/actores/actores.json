@@ -23,6 +23,12 @@
     },
     {
       "nombre": "moneda"
+    },
+    {
+      "nombre": "suelo"
+    },
+    {
+      "nombre": "techo"
     }
   ]
 }
