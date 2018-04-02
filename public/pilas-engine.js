@@ -495,8 +495,8 @@ var Pilas = (function () {
         this.game.scene.stop("ModoEjecucion");
         this.game.scene.stop("ModoEditor");
         this.game.scene.stop("ModoPausa");
-        this.game.scene.start(nombre, datos);
         this.modo = this.game.scene.getScene(nombre);
+        this.game.scene.start(nombre, datos);
     };
     Pilas.prototype.crear_configuracion = function (ancho, alto) {
         return {
@@ -1527,6 +1527,9 @@ var ModoCargador = (function (_super) {
         this.load.image("pared", "imagenes/pared.png");
         this.load.image("plataforma", "imagenes/plataforma.png");
         this.load.image("moneda", "imagenes/moneda.png");
+        this.load.image("nube1", "imagenes/nubes/nube1.png");
+        this.load.image("nube2", "imagenes/nubes/nube2.png");
+        this.load.image("fondo_cielo_1", "imagenes/nubes/nubes.png");
         this.load.atlas({
             key: "spritesheet",
             texture: "imagenes_agrupadas/spritesheet.png",
@@ -1676,9 +1679,7 @@ var ModoEjecucion = (function (_super) {
         _this.pausar = false;
         return _this;
     }
-    ModoEjecucion.prototype.preload = function () {
-        this.load.image("pelota", "imagenes/pelota.png");
-    };
+    ModoEjecucion.prototype.preload = function () { };
     ModoEjecucion.prototype.create = function (datos) {
         var _this = this;
         this.actores = [];
