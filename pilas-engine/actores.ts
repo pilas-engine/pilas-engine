@@ -5,8 +5,8 @@ class Actores {
     this.pilas = pilas;
   }
 
-  Caja(x, y) {
-    return this.crear_actor("Caja");
+  caja(x, y) {
+    return this.crear_actor("caja");
   }
 
   crear_actor(nombre) {
@@ -22,12 +22,12 @@ class Actores {
     return actor;
   }
 
-  Aceituna(x: number = 0, y: number = 0) {
-    return this.crear_actor("Aceituna");
+  aceituna(x: number = 0, y: number = 0) {
+    return this.crear_actor("aceituna");
   }
 
-  Conejo() {
-    return this.crear_actor("Conejo");
+  conejo() {
+    return this.crear_actor("conejo");
   }
 
   suelo() {
@@ -55,6 +55,6 @@ class Actores {
   }
 
   nave() {
-    return this.crear_actor("Nave");
+    return this.crear_actor("nave");
   }
 }

@@ -15,7 +15,7 @@ test("puede crear escenas y actores", function(assert) {
     let escena = pilas.escenas.Normal();
     assert.equal(escena.actores.length, 0, "La escena comienza sin actores");
 
-    pilas.actores.Caja();
+    pilas.actores.caja();
 
     assert.equal(escena.actores.length, 1, "El actor se agrega a la escena automáticamente");
     assert.equal(escena.id, pilas.escena_actual().id);

@@ -16,7 +16,7 @@ test("it renders", function(assert) {
   let actor_demo = null;
 
   this.set("cuandoInicia", pilas => {
-    actor_caja = pilas.actores.Caja(100, 200);
+    actor_caja = pilas.actores.caja(100, 200);
     actor_actor = pilas.actores.actor(0, 0);
     actor_demo = pilas.actores.actor(10, 0);
     actor_demo.etiqueta = "personalizada";

@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $ from "jquery";
 import { test } from "qunit";
 import moduleForAcceptance from "pilas-engine/tests/helpers/module-for-acceptance";
 
@@ -20,10 +20,10 @@ test("puede ingresar al editor y eliminar una escena", async function(assert) {
   await pulsar("Detener");
   await esperar(PAUSA);
 
-  assert.equal($("[data-test='nombre-de-escena']").text(), "Escena1Escena2");
+  assert.equal($("[data-test='nombre-de-escena']").text(), "escena1escena2");
 
   await click("#boton-eliminar-escena");
   await pulsar("Si");
-  assert.equal($("[data-test='nombre-de-escena']").text(), "Escena2");
+  assert.equal($("[data-test='nombre-de-escena']").text(), "escena2");
   await esperar(PAUSA);
 });

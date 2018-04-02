@@ -12,7 +12,7 @@ test("it renders", function(assert) {
   this.set("codigo", ``);
 
   this.set("cuandoInicia", pilas => {
-    pilas.actores.Caja(100, 200);
+    pilas.actores.caja(100, 200);
   });
 
   this.set("cuandoTerminaLaEspera", pilas => {

@@ -78,6 +78,10 @@ export default Controller.extend(queryParams.Mixin, {
           {
             nombre: "escena1",
             codigo: "class escena1 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+          },
+          {
+            nombre: "escena2",
+            codigo: "class escena2 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
           }
         ],
         actores: [
@@ -259,6 +263,13 @@ export default Controller.extend(queryParams.Mixin, {
               nombre: "suelo"
             }
           ]
+        },
+        {
+          nombre: "escena2",
+          id: 2,
+          camara_x: 0,
+          camara_y: 0,
+          actores: []
         }
       ]
     };

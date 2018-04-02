@@ -1,6 +1,5 @@
 class Actor extends ActorBase {
-  propiedades = {
-  };
+  propiedades = {};
 
   iniciar() {}
 

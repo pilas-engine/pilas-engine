@@ -12,7 +12,7 @@ test("it renders", function(assert) {
   this.set("codigo", ``);
 
   this.set("cuandoInicia", pilas => {
-    let actor = pilas.actores.Aceituna(0, 0);
+    let actor = pilas.actores.aceituna(0, 0);
     actor.transparencia = 50;
     assert.equal(actor.transparencia, 50);
   });

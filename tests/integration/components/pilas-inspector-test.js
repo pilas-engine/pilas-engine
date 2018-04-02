@@ -23,8 +23,8 @@ test("it renders", function(assert) {
 
   this.set("tipo_de_la_instancia_seleccionada", "actor");
 
-  this.render(hbs`{{pilas-inspector 
-    instancia_seleccionada=instancia_seleccionada 
+  this.render(hbs`{{pilas-inspector
+    instancia_seleccionada=instancia_seleccionada
     tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}`);
 
   function tiene_texto(t, texto) {
@@ -36,7 +36,7 @@ test("it renders", function(assert) {
     );
   }
 
-  assert.ok(tiene_texto(this, "tipo"));
+  assert.ok(tiene_texto(this, "nombre"));
   assert.ok(tiene_texto(this, "imagen"));
   assert.ok(tiene_texto(this, "demo"));
   assert.ok(tiene_texto(this, "x"));

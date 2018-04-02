@@ -1,10 +1,10 @@
 declare class Actores {
     pilas: Pilas;
     constructor(pilas: any);
-    Caja(x: any, y: any): any;
+    caja(x: any, y: any): any;
     crear_actor(nombre: any): any;
-    Aceituna(x?: number, y?: number): any;
-    Conejo(): any;
+    aceituna(x?: number, y?: number): any;
+    conejo(): any;
     suelo(): any;
     pared(): any;
     techo(): any;

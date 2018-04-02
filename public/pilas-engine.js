@@ -12,8 +12,8 @@ var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
     }
-    Actores.prototype.Caja = function (x, y) {
-        return this.crear_actor("Caja");
+    Actores.prototype.caja = function (x, y) {
+        return this.crear_actor("caja");
     };
     Actores.prototype.crear_actor = function (nombre) {
         var clase = window[nombre];
@@ -23,13 +23,13 @@ var Actores = (function () {
         actor.iniciar();
         return actor;
     };
-    Actores.prototype.Aceituna = function (x, y) {
+    Actores.prototype.aceituna = function (x, y) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
-        return this.crear_actor("Aceituna");
+        return this.crear_actor("aceituna");
     };
-    Actores.prototype.Conejo = function () {
-        return this.crear_actor("Conejo");
+    Actores.prototype.conejo = function () {
+        return this.crear_actor("conejo");
     };
     Actores.prototype.suelo = function () {
         return this.crear_actor("suelo");
@@ -50,7 +50,7 @@ var Actores = (function () {
         return this.crear_actor("moneda");
     };
     Actores.prototype.nave = function () {
-        return this.crear_actor("Nave");
+        return this.crear_actor("nave");
     };
     return Actores;
 }());

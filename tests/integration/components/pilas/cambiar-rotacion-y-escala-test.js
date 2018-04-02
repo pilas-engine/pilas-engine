@@ -12,7 +12,7 @@ test("it renders", function(assert) {
   this.set("codigo", ``);
 
   this.set("cuandoInicia", pilas => {
-    let actor = pilas.actores.Aceituna(0, 0);
+    let actor = pilas.actores.aceituna(0, 0);
 
     actor.rotacion = 45;
     assert.equal(Math.round(actor.rotacion), 45, "Tiene que haber un actor.");
