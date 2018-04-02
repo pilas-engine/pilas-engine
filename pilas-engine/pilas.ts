@@ -71,8 +71,8 @@ class Pilas {
     this.game.scene.stop("ModoEditor");
     this.game.scene.stop("ModoPausa");
 
-    this.game.scene.start(nombre, datos);
     this.modo = this.game.scene.getScene(nombre);
+    this.game.scene.start(nombre, datos);
   }
 
   crear_configuracion(ancho, alto) {

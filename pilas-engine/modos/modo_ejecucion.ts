@@ -17,9 +17,7 @@ class ModoEjecucion extends Modo {
   permitir_modo_pausa: boolean;
   pausar = false;
 
-  preload() {
-    this.load.image("pelota", "imagenes/pelota.png");
-  }
+  preload() {}
 
   create(datos) {
     this.actores = [];
