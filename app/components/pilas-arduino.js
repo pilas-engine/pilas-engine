@@ -48,7 +48,8 @@ export default Component.extend({
 
   didInsertElement() {
     this.set("dispositivos", []);
-    if (window.inElectron) {
+
+    if (window.enElectron) {
       this.get("tareaListarDispositivos").perform({});
 
       var board = new five.Board({

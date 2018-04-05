@@ -109,6 +109,10 @@ version_major:
 
 electron:
 	@echo "${G}Iniciando electron ... (pero sin compilar desde cero).${N}"
+	@tar xvzf extras/serialport-v5.1.0-beta5-electron-v53-darwin-x64.tar.gz
+	@cp build/Release/serialport.node node_modules/serialport/build/Release/
+	@rm -rf build
+	@echo "${G}Inyectando serialport compilado para osx...${N}"
 	${BIN_ELECTRON} .
 
 changelog:
@@ -136,7 +140,6 @@ pilas_sprites:
 	@echo "    public/imagenes_agrupadas/spritesheet.json"
 	@echo "    public/imagenes_agrupadas/spritesheet.png"
 	@echo "${N}"
-
 
 test:
 	$(call log, "Ejecutando test...")
@@ -207,7 +210,6 @@ sprites_ember:
 	@echo "    public/assets/spritesheet.png"
 	@echo "${N}"
 
-
 .PHONY: tmp docs binarios
 
 pilas_manual:
@@ -236,7 +238,6 @@ pilas_manuales_descargables:
 	@echo "${G}OK, los archivos generados están en el directorio manuales"
 	@echo ""
 
-
 actualizar_phaser:
 	@echo "${Y}Para actualizar phaser, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"
@@ -259,7 +260,6 @@ actualizar_typescript:
 
 actualizar_definiciones:
 	@wget https://raw.githubusercontent.com/photonstorm/phaser3-docs/master/typescript/phaser.d.ts -O pilas-engine/declaraciones/phaser.d.ts
-
 
 actualizar_jsbeautify:
 	@echo "${Y}Para actualizar jsbeautify, hay que seguir estos pasos:${N}"
