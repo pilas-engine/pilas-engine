@@ -12,6 +12,7 @@ La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
 
 - http://examplelab.com.ar/comenzamos-pilas-engine-2/ - Anuncio del comienzo del proyecto
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-01/1366 - Resumen del sprint 1
+- http://foro.pilas-engine.com.ar/t/resumen-del-sprint-02/1375 - Resumen del sprint 2
 
 
 
