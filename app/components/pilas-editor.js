@@ -28,7 +28,15 @@ export default Component.extend({
   lista_de_eventos: null,
 
   didInsertElement() {
-    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
+    this.set("lista_de_eventos", [
+      "finaliza_carga",
+      "error",
+      "termina_de_mover_un_actor",
+      "comienza_a_mover_un_actor",
+      "inicia_modo_depuracion_en_pausa",
+      "cuando_cambia_posicion_dentro_del_modo_pausa",
+      "pulsa_la_tecla_escape"
+    ]);
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
@@ -137,7 +145,9 @@ export default Component.extend({
 
   eliminar_escena_actual() {
     let escenaActual = this.obtener_la_escena_actual();
-    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
+    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(
+      escenaActual
+    );
     this.set("proyecto.escenas", escenasSinLaEscenaActual);
 
     if (this.el_proyecto_no_tiene_escena()) {
@@ -279,6 +289,7 @@ export default Component.extend({
           nombre: nombre,
           camara_x: 0,
           camara_y: 0,
+          fondo: "plano",
           actores: []
         })
       );
@@ -326,7 +337,9 @@ export default Component.extend({
 
       let escena = this.obtener_la_escena_actual();
 
-      let resultado = this.get("compilador").compilar_proyecto(this.get("proyecto"));
+      let resultado = this.get("compilador").compilar_proyecto(
+        this.get("proyecto")
+      );
 
       let datos = {
         nombre_de_la_escena_inicial: escena.nombre,

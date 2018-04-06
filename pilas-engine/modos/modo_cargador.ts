@@ -41,7 +41,7 @@ class ModoCargador extends Modo {
 
     this.load.image("nube1", "imagenes/nubes/nube1.png");
     this.load.image("nube2", "imagenes/nubes/nube2.png");
-    this.load.image("fondo_cielo_1", "imagenes/nubes/nubes.png");
+    this.load.image("fondo_cielo_1", "imagenes/fondos/cielo.png");
 
     this.load.atlas({
       key: "spritesheet",
@@ -56,18 +56,37 @@ class ModoCargador extends Modo {
     this.load.audio("seleccion-aguda", "sonidos/seleccion-aguda.wav", {});
     this.load.audio("seleccion-grave", "sonidos/seleccion-grave.wav", {});
 
-    this.load.bitmapFont("font", "fuentes/font.png", "fuentes/font.fnt", null, null);
-    this.load.bitmapFont("verdana3", "fuentes/verdana3.png", "fuentes/verdana3.fnt", null, null);
+    this.load.bitmapFont(
+      "font",
+      "fuentes/font.png",
+      "fuentes/font.fnt",
+      null,
+      null
+    );
+    this.load.bitmapFont(
+      "verdana3",
+      "fuentes/verdana3.png",
+      "fuentes/verdana3.fnt",
+      null,
+      null
+    );
 
     this.load.on("progress", this.cuando_progresa_la_carga, this);
   }
 
   create() {
     this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
-    this.add.bitmapText(5, 5, "verdana3", "Carga finalizada\nEnviá la señal 'ejecutar_proyecto' para continuar.");
+    this.add.bitmapText(
+      5,
+      5,
+      "verdana3",
+      "Carga finalizada\nEnviá la señal 'ejecutar_proyecto' para continuar."
+    );
   }
 
   cuando_progresa_la_carga(progreso) {
-    this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", { progreso: Math.ceil(progreso * 100) });
+    this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
+      progreso: Math.ceil(progreso * 100)
+    });
   }
 }

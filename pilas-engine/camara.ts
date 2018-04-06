@@ -14,20 +14,20 @@ class Camara {
   }
 
   get x() {
-    return -this.camara_principal.x;
+    return this.camara_principal.scrollX;
   }
 
   set x(x) {
     this.pilas.utilidades.validar_numero(x);
-    this.camara_principal.x = -x;
+    this.camara_principal.setScroll(x, -this.y);
   }
 
   get y() {
-    return this.camara_principal.y;
+    return -this.camara_principal.scrollY;
   }
 
   set y(y) {
     this.pilas.utilidades.validar_numero(y);
-    this.camara_principal.y = y;
+    this.camara_principal.setScroll(this.x, -y);
   }
 }

@@ -35,8 +35,13 @@
               propiedad=propiedad
               modificarAtributo=(action "modificarAtributo")}}
 
-        {{else}}
+        {{else if (eq propiedad.tipo "imagen")}}
 
+          {{pilas-propiedad/imagen objeto=instancia_seleccionada
+              propiedad=propiedad
+              modificarAtributo=(action "modificarAtributo")}}
+
+        {{else}}
 
           <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
 
@@ -49,10 +54,26 @@
       <div class="pb1 truncate h2"><div class="dib w4">nombre</div> {{instancia_seleccionada.nombre}}</div>
 
       {{#each propiedades_de_escenas as |propiedad|}}
-        {{pilas-propiedad/numero objeto=instancia_seleccionada
-            min=propiedad.min
-            max=propiedad.max
-            propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modifica_atributo_de_escena")}}
+
+        {{#if (eq propiedad.tipo "numero")}}
+
+          {{pilas-propiedad/numero objeto=instancia_seleccionada
+              min=propiedad.min
+              max=propiedad.max
+              propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modifica_atributo_de_escena")}}
+
+        {{else if (eq propiedad.tipo "imagen")}}
+
+          {{pilas-propiedad/imagen objeto=instancia_seleccionada
+              propiedad=propiedad
+              modificarAtributo=(action "modificarAtributo")}}
+
+        {{else}}
+
+          <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+
+        {{/if}}
+
       {{/each}}
 
 

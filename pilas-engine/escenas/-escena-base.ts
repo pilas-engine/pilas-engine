@@ -3,6 +3,7 @@ class EscenaBase {
   actores: Actor[];
   id: number;
   camara: Camara;
+  fondo: string;
 
   constructor(pilas) {
     this.pilas = pilas;
@@ -19,7 +20,8 @@ class EscenaBase {
   serializar() {
     return {
       camara_x: this.camara.x,
-      camara_y: this.camara.y
+      camara_y: this.camara.y,
+      fondo: this.fondo
     };
   }
 
@@ -37,7 +39,10 @@ class EscenaBase {
         actor.actualizar();
       } catch (e) {
         console.error(e);
-        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", { mensaje: e.message, stack: e.stack.toString() });
+        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
+          mensaje: e.message,
+          stack: e.stack.toString()
+        });
       }
     });
   }
@@ -48,7 +53,11 @@ class EscenaBase {
     if (posicion !== -1) {
       this.actores.splice(posicion, 1);
     } else {
-      throw Error(`Se intentó eliminar un actor inexistente en la escena: id=${actor.id} etiqueta=${actor.etiqueta}.`);
+      throw Error(
+        `Se intentó eliminar un actor inexistente en la escena: id=${
+          actor.id
+        } etiqueta=${actor.etiqueta}.`
+      );
     }
   }
 }

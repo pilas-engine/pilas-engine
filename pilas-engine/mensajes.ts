@@ -2,6 +2,7 @@ const DEPURAR_MENSAJES = false;
 
 class Mensajes {
   pilas: Pilas;
+  fondo: Phaser.GameObjects.TileSprite;
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
@@ -47,7 +48,14 @@ class Mensajes {
   }
 
   atender_mensaje_define_escena(datos) {
-    this.pilas.definir_modo("ModoEditor", { pilas: this.pilas, escena: datos.escena });
+    this.pilas.definir_modo("ModoEditor", {
+      pilas: this.pilas,
+      escena: datos.escena
+    });
+  }
+
+  atender_mensaje_actualizar_escena_desde_el_editor(datos) {
+    this.pilas.modo.posicionar_la_camara(datos.escena);
   }
 
   atender_mensaje_ejecutar_proyecto(datos) {
@@ -62,19 +70,25 @@ class Mensajes {
     this.pilas.definir_modo("ModoEjecucion", parametros);
   }
 
-  atender_mensaje_actualizar_escena_desde_el_editor(datos) {
-    this.pilas.modo.posicionar_la_camara(datos.escena);
-  }
-
   emitir_excepcion_al_editor(error, origen) {
     let detalle = {
       mensaje: error.message,
       stack: error.stack.toString()
     };
 
-    this.pilas.modo.add.text(5, 5, "Se ha producido un error. Vea el intérprete por favor.", { font: "16px verdana" });
-    this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, { font: "14px verdana", fill: "#ddd" });
-    this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, { font: "10px verdana" });
+    this.pilas.modo.add.text(
+      5,
+      5,
+      "Se ha producido un error. Vea el intérprete por favor.",
+      { font: "16px verdana" }
+    );
+    this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, {
+      font: "14px verdana",
+      fill: "#ddd"
+    });
+    this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, {
+      font: "10px verdana"
+    });
 
     this.pilas.pausar();
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);

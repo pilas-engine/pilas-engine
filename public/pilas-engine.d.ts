@@ -33,8 +33,8 @@ declare class Camara {
     constructor(pilas: Pilas);
     readonly camara_principal: any;
     vibrar(intensidad?: number, tiempo?: number): void;
-    x: number;
-    y: any;
+    x: any;
+    y: number;
 }
 declare class Control {
     pilas: Pilas;
@@ -82,6 +82,7 @@ declare class Historia {
 declare const DEPURAR_MENSAJES: boolean;
 declare class Mensajes {
     pilas: Pilas;
+    fondo: Phaser.GameObjects.TileSprite;
     constructor(pilas: Pilas);
     private agregar_manejador_de_eventos();
     atender_mensaje(e: any): void;
@@ -89,8 +90,8 @@ declare class Mensajes {
     atender_mensaje_definir_estados_de_depuracion(datos: any): void;
     emitir_mensaje_al_editor(nombre: any, datos?: any): void;
     atender_mensaje_define_escena(datos: any): void;
-    atender_mensaje_ejecutar_proyecto(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
+    atender_mensaje_ejecutar_proyecto(datos: any): void;
     emitir_excepcion_al_editor(error: any, origen: any): void;
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
     atender_mensaje_alterar_estado_de_maximizacion(datos: any): void;
@@ -405,11 +406,13 @@ declare class EscenaBase {
     actores: Actor[];
     id: number;
     camara: Camara;
+    fondo: string;
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
     serializar(): {
-        camara_x: number;
-        camara_y: any;
+        camara_x: any;
+        camara_y: number;
+        fondo: string;
     };
     actualizar_actores(): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
@@ -428,6 +431,7 @@ declare class Modo extends Phaser.Scene {
     matter: any;
     actores: any;
     destacar_actor_por_id(id: any): void;
+    crear_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     posicionar_la_camara(datos_de_la_escena: any): void;
@@ -441,14 +445,12 @@ declare class ModoCargador extends Modo {
 }
 declare class ModoEditor extends Modo {
     pilas: Pilas;
-    fondo: Phaser.GameObjects.TileSprite;
     ancho: number;
     alto: number;
     graphics: any;
     fps: any;
     preload(): void;
     create(datos: any): void;
-    crear_fondo(): void;
     crear_manejadores_para_hacer_arrastrables_los_actores(): void;
     crear_actores_desde_los_datos_de_la_escena(escena: any): void;
     crear_sprite_desde_actor(actor: any): void;
@@ -474,21 +476,22 @@ declare class ModoEjecucion extends Modo {
     preload(): void;
     create(datos: any): void;
     vincular_eventos_de_colision(): void;
+    obtener_escena_inicial(): any;
     instanciar_escena(nombre: any): void;
     crear_escena(datos_de_la_escena: any): void;
     crear_actor(entidad: any): any;
     obtener_referencias_a_clases(): any;
     obtener_codigo_para_exportar_clases(codigo: any): string;
     guardar_parametros_en_atributos(datos: any): void;
-    crear_fondo(): void;
     update(): void;
     guardar_foto_de_entidades(): void;
 }
 declare class ModoPausa extends Modo {
     pilas: Pilas;
-    fondo: Phaser.GameObjects.TileSprite;
     graphics: any;
     fps: any;
+    ancho: number;
+    alto: number;
     posicion: number;
     sprites: any;
     texto: any;

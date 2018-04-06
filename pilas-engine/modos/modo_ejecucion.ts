@@ -21,16 +21,20 @@ class ModoEjecucion extends Modo {
 
   create(datos) {
     this.actores = [];
-    //this.matter.world.setBounds(0, 0, this.ancho, this.alto, 2);
 
     try {
       this.guardar_parametros_en_atributos(datos);
-      this.crear_fondo();
+      let escena = this.obtener_escena_inicial();
+
+      this.crear_fondo(escena.fondo);
       this.clases = this.obtener_referencias_a_clases();
 
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
 
-      this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+      this.pilas.mensajes.emitir_mensaje_al_editor(
+        "termina_de_iniciar_ejecucion",
+        {}
+      );
       this.pilas.historia.limpiar();
 
       if (this.pilas.depurador.mostrar_fisica) {
@@ -38,14 +42,20 @@ class ModoEjecucion extends Modo {
       }
 
       this.input.on("pointermove", cursor => {
-        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+          cursor.x,
+          cursor.y
+        );
         this.pilas.cursor_x = Math.trunc(posicion.x);
         this.pilas.cursor_y = Math.trunc(posicion.y);
       });
 
       this.input.keyboard.on("keyup", evento => {
         if (evento.key === "Escape") {
-          this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
+          this.pilas.mensajes.emitir_mensaje_al_editor(
+            "pulsa_la_tecla_escape",
+            {}
+          );
         }
       });
 
@@ -64,7 +74,12 @@ class ModoEjecucion extends Modo {
           let figura_1 = colision.bodyA;
           let figura_2 = colision.bodyB;
 
-          if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+          if (
+            figura_1.gameObject &&
+            figura_1.gameObject.actor &&
+            figura_2.gameObject &&
+            figura_2.gameObject.actor
+          ) {
             let actor_a = figura_1.gameObject.actor;
             let actor_b = figura_2.gameObject.actor;
 
@@ -76,11 +91,17 @@ class ModoEjecucion extends Modo {
           } else {
             // colisión entre sensor de actor y actor
 
-            if (figura_2.sensor_del_actor && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+            if (
+              figura_2.sensor_del_actor &&
+              figura_2.sensor_del_actor !== figura_1.gameObject.actor
+            ) {
               figura_2.colisiones.push(figura_1.gameObject.actor);
             }
 
-            if (figura_1.sensor_del_actor && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+            if (
+              figura_1.sensor_del_actor &&
+              figura_1.sensor_del_actor !== figura_2.gameObject.actor
+            ) {
               figura_1.colisiones.push(figura_2.gameObject.actor);
             }
           }
@@ -99,7 +120,12 @@ class ModoEjecucion extends Modo {
 
         // colisión entre actores.
 
-        if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+        if (
+          figura_1.gameObject &&
+          figura_1.gameObject.actor &&
+          figura_2.gameObject &&
+          figura_2.gameObject.actor
+        ) {
           let actor_a = figura_1.gameObject.actor;
           let actor_b = figura_2.gameObject.actor;
 
@@ -125,7 +151,12 @@ class ModoEjecucion extends Modo {
           let figura_1 = colision.bodyA;
           let figura_2 = colision.bodyB;
 
-          if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+          if (
+            figura_1.gameObject &&
+            figura_1.gameObject.actor &&
+            figura_2.gameObject &&
+            figura_2.gameObject.actor
+          ) {
             let actor_a = figura_1.gameObject.actor;
             let actor_b = figura_2.gameObject.actor;
 
@@ -137,12 +168,26 @@ class ModoEjecucion extends Modo {
           } else {
             // colisión entre sensor de actor y actor
 
-            if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
-              figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
+            if (
+              figura_2.sensor_del_actor &&
+              figura_1.gameObject &&
+              figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1
+            ) {
+              figura_2.colisiones.splice(
+                figura_2.colisiones.indexOf(figura_1.gameObject.actor),
+                1
+              );
             }
 
-            if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
-              figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
+            if (
+              figura_1.sensor_del_actor &&
+              figura_2.gameObject &&
+              figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1
+            ) {
+              figura_1.colisiones.splice(
+                figura_1.colisiones.indexOf(figura_2.gameObject.actor),
+                1
+              );
             }
           }
         }
@@ -153,8 +198,13 @@ class ModoEjecucion extends Modo {
     });
   }
 
+  obtener_escena_inicial() {
+    let nombre = this.nombre_de_la_escena_inicial;
+    return this.proyecto.escenas.filter(e => e.nombre == nombre)[0];
+  }
+
   instanciar_escena(nombre) {
-    let escena = this.proyecto.escenas.filter(e => e.nombre == nombre)[0];
+    let escena = this.obtener_escena_inicial();
     this.crear_escena(escena);
   }
 
@@ -163,6 +213,7 @@ class ModoEjecucion extends Modo {
 
     escena.camara.x = datos_de_la_escena.camara_x;
     escena.camara.y = datos_de_la_escena.camara_y;
+    escena.fondo = datos_de_la_escena.fondo;
     escena.iniciar();
 
     this.actores = datos_de_la_escena.actores.map(e => {
@@ -181,7 +232,10 @@ class ModoEjecucion extends Modo {
     if (clase) {
       actor = new this.clases[entidad.nombre](this.pilas);
 
-      let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
+      let p = this.pilas.utilidades.combinar_propiedades(
+        actor.propiedades_base,
+        actor.propiedades
+      );
       p = this.pilas.utilidades.combinar_propiedades(p, entidad);
 
       actor.pre_iniciar(p);
@@ -189,14 +243,20 @@ class ModoEjecucion extends Modo {
     } else {
       console.error(this.clases);
       let nombres_de_clases = Object.getOwnPropertyNames(this.clases);
-      throw new Error(`No existe código para crear un actor de la clase ${entidad.tipo}. Las clases disponibles son [${nombres_de_clases.join(", ")}]`);
+      throw new Error(
+        `No existe código para crear un actor de la clase ${
+          entidad.tipo
+        }. Las clases disponibles son [${nombres_de_clases.join(", ")}]`
+      );
     }
 
     return actor;
   }
 
   obtener_referencias_a_clases() {
-    let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
+    let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(
+      this.codigo
+    );
     let codigo_completo = this.codigo + codigoDeExportacion;
 
     return eval(codigo_completo);
@@ -218,7 +278,9 @@ class ModoEjecucion extends Modo {
     let lista_de_clases = [];
 
     if (codigo.match(re_creacion_de_clase)) {
-      lista_de_clases = codigo.match(re_creacion_de_clase).map(e => e.match(re_solo_clase)[1]);
+      lista_de_clases = codigo
+        .match(re_creacion_de_clase)
+        .map(e => e.match(re_solo_clase)[1]);
     }
 
     let diccionario = {};
@@ -242,12 +304,6 @@ class ModoEjecucion extends Modo {
     this.proyecto = datos.proyecto;
     this.codigo = datos.codigo;
     this.permitir_modo_pausa = datos.permitir_modo_pausa;
-  }
-
-  crear_fondo() {
-    this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, "plano");
-    this.fondo.depth = -1000;
-    this.fondo.setOrigin(0);
   }
 
   update() {

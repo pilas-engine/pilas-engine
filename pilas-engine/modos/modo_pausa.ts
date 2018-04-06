@@ -2,10 +2,11 @@
 
 class ModoPausa extends Modo {
   pilas: Pilas;
-  fondo: Phaser.GameObjects.TileSprite;
 
   graphics: any;
   fps: any;
+  ancho: number;
+  alto: number;
 
   posicion: number;
   sprites: any;
@@ -28,7 +29,10 @@ class ModoPausa extends Modo {
 
     let t = this.pilas.historia.obtener_cantidad_de_posiciones();
     let datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
-    this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
+    this.pilas.mensajes.emitir_mensaje_al_editor(
+      "comienza_a_depurar_en_modo_pausa",
+      datos_para_el_editor
+    );
   }
 
   private crear_sprites_desde_historia(posicion) {
@@ -37,14 +41,20 @@ class ModoPausa extends Modo {
     this.sprites.map(sprite => sprite.destroy());
 
     this.posicionar_la_camara(foto.escena);
+    //this.crear_fondo(foto.escena.fondo);
 
     this.sprites = foto.actores.map(entidad => {
       return this.crear_sprite_desde_entidad(entidad);
     });
+
+    //this.sprites.push(this.fondo);
   }
 
   crear_sprite_desde_entidad(entidad) {
-    let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
+    let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      entidad.x,
+      entidad.y
+    );
     let sprite = this.add.sprite(x, y, entidad.imagen);
 
     sprite.angle = -entidad.rotacion;

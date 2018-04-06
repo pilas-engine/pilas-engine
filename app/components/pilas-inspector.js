@@ -127,13 +127,20 @@ export default Component.extend({
         tipo: "numero",
         propiedad: "camara_y",
         intensidad: 1
+      },
+      {
+        tipo: "imagen",
+        propiedad: "fondo"
       }
     ]);
   },
 
-  ha_seleccionado_un_actor: computed("tipo_de_la_instancia_seleccionada", function() {
-    return this.get("tipo_de_la_instancia_seleccionada") === "actor";
-  }),
+  ha_seleccionado_un_actor: computed(
+    "tipo_de_la_instancia_seleccionada",
+    function() {
+      return this.get("tipo_de_la_instancia_seleccionada") === "actor";
+    }
+  ),
 
   actions: {
     modificarAtributo(propiedad, valor) {

@@ -2,7 +2,6 @@
 
 class ModoEditor extends Modo {
   pilas: Pilas;
-  fondo: Phaser.GameObjects.TileSprite;
 
   // TODO: este debería ser el tamaño de la escena o el proyecto.
   ancho: number = 500;
@@ -16,7 +15,8 @@ class ModoEditor extends Modo {
   create(datos) {
     this.actores = [];
     this.pilas = datos.pilas;
-    this.crear_fondo();
+
+    this.crear_fondo(datos.escena.fondo);
     this.crear_canvas_de_depuracion();
     this.posicionar_la_camara(datos.escena);
 
@@ -26,17 +26,14 @@ class ModoEditor extends Modo {
     this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
   }
 
-  crear_fondo() {
-    this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, "plano");
-    this.fondo.depth = -1000;
-    this.fondo.setOrigin(0);
-  }
-
   crear_manejadores_para_hacer_arrastrables_los_actores() {
     let escena = this;
 
     this.input.on("dragstart", function(pointer, gameObject) {
-      escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
+      escena.pilas.mensajes.emitir_mensaje_al_editor(
+        "comienza_a_mover_un_actor",
+        { id: gameObject.id }
+      );
 
       if (escena.pilas.utilidades.es_firefox()) {
         escena.pilas.game.canvas.style.cursor = "grabbing";
@@ -52,8 +49,14 @@ class ModoEditor extends Modo {
 
     this.input.on("dragend", function(pointer, gameObject) {
       escena.pilas.game.canvas.style.cursor = "default";
-      let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
-      escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
+      let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+        gameObject.x,
+        gameObject.y
+      );
+      escena.pilas.mensajes.emitir_mensaje_al_editor(
+        "termina_de_mover_un_actor",
+        { id: gameObject.id, x: posicion.x, y: posicion.y }
+      );
     });
   }
 

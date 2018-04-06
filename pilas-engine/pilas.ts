@@ -116,7 +116,10 @@ class Pilas {
   }
 
   obtener_actores_en(_x: number, _y: number) {
-    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
+    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      _x,
+      _y
+    );
     let actores = this.obtener_actores();
 
     return actores.filter(actor => {
