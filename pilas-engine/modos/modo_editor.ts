@@ -9,6 +9,7 @@ class ModoEditor extends Modo {
 
   graphics: any;
   fps: any;
+  modo_fisica_activado: boolean;
 
   preload() {}
 
@@ -24,6 +25,13 @@ class ModoEditor extends Modo {
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
     this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
+
+    this.modo_fisica_activado = false;
+
+    if (this.pilas.depurador.mostrar_fisica) {
+      this.modo_fisica_activado = true;
+      this.matter.systems.matterPhysics.world.createDebugGraphic();
+    }
   }
 
   crear_manejadores_para_hacer_arrastrables_los_actores() {
@@ -42,9 +50,18 @@ class ModoEditor extends Modo {
       }
     });
 
+    let matter = this.pilas.Phaser.Physics.Matter.Matter;
+
     this.input.on("drag", function(pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;
       gameObject.y = dragY;
+
+      if (gameObject.figura) {
+        matter.Body.setPosition(gameObject.figura, {
+          x: dragX,
+          y: dragY
+        });
+      }
     });
 
     this.input.on("dragend", function(pointer, gameObject) {
@@ -69,8 +86,12 @@ class ModoEditor extends Modo {
   crear_sprite_desde_actor(actor) {
     let sprite = this.add.sprite(0, 0, actor.imagen);
 
+    //let figura = this.matter.add.circle(0, 0, 30, { isStatic: true });
+    //sprite2.setStatic(true);
+
     sprite["setInteractive"]();
     sprite["actor"] = actor;
+    //sprite["figura"] = figura;
     sprite["destacandose"] = false;
 
     sprite["destacar"] = () => {
@@ -123,6 +144,18 @@ class ModoEditor extends Modo {
       this.actores.map(sprite => {
         this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
       });
+    }
+
+    if (this.pilas.depurador.mostrar_fisica) {
+      if (!this.modo_fisica_activado) {
+        this.modo_fisica_activado = true;
+        this.matter.systems.matterPhysics.world.createDebugGraphic();
+      }
+    } else {
+      if (this.modo_fisica_activado) {
+        this.modo_fisica_activado = false;
+        this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+      }
     }
   }
 

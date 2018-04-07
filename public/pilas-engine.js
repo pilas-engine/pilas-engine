@@ -1485,10 +1485,10 @@ var Modo = (function (_super) {
         this.fondo.setOrigin(0);
     };
     Modo.prototype.obtener_actor_por_id = function (id) {
-        return pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
+        return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
     };
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
-        var coordenada = pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+        var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -1497,6 +1497,19 @@ var Modo = (function (_super) {
         sprite.scaleY = actor.escala_y;
         sprite.setOrigin(actor.centro_x, actor.centro_y);
         sprite.alpha = 1 - actor.transparencia / 100;
+        if (sprite.figura) {
+            this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
+        }
+        var angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
+        if (actor.figura === "rectangulo") {
+            sprite.figura = this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
+                isStatic: true,
+                angle: angulo
+            });
+        }
+        if (actor.figura === "circulo") {
+            sprite.figura = this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true });
+        }
         sprite.setFlipX(actor.espejado);
         sprite.setFlipY(actor.espejado_vertical);
     };
@@ -1590,6 +1603,11 @@ var ModoEditor = (function (_super) {
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
         this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
+        this.modo_fisica_activado = false;
+        if (this.pilas.depurador.mostrar_fisica) {
+            this.modo_fisica_activado = true;
+            this.matter.systems.matterPhysics.world.createDebugGraphic();
+        }
     };
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores = function () {
         var escena = this;
@@ -1602,9 +1620,16 @@ var ModoEditor = (function (_super) {
                 escena.pilas.game.canvas.style.cursor = "-webkit-grabbing";
             }
         });
+        var matter = this.pilas.Phaser.Physics.Matter.Matter;
         this.input.on("drag", function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;
+            if (gameObject.figura) {
+                matter.Body.setPosition(gameObject.figura, {
+                    x: dragX,
+                    y: dragY
+                });
+            }
         });
         this.input.on("dragend", function (pointer, gameObject) {
             escena.pilas.game.canvas.style.cursor = "default";
@@ -1668,6 +1693,18 @@ var ModoEditor = (function (_super) {
             this.actores.map(function (sprite) {
                 _this.dibujar_punto_de_control(_this.graphics, sprite.x, sprite.y);
             });
+        }
+        if (this.pilas.depurador.mostrar_fisica) {
+            if (!this.modo_fisica_activado) {
+                this.modo_fisica_activado = true;
+                this.matter.systems.matterPhysics.world.createDebugGraphic();
+            }
+        }
+        else {
+            if (this.modo_fisica_activado) {
+                this.modo_fisica_activado = false;
+                this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+            }
         }
     };
     ModoEditor.prototype.dibujar_punto_de_control = function (graphics, x, y) {

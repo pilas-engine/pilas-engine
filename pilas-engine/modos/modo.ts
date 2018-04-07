@@ -17,11 +17,11 @@ class Modo extends Phaser.Scene {
   }
 
   obtener_actor_por_id(id) {
-    return pilas.modo.actores.filter(e => e.id === id)[0];
+    return this.pilas.modo.actores.filter(e => e.id === id)[0];
   }
 
   actualizar_sprite_desde_datos(sprite, actor) {
-    let coordenada = pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
       actor.x,
       actor.y
     );
@@ -34,6 +34,48 @@ class Modo extends Phaser.Scene {
     sprite.scaleY = actor.escala_y;
     sprite.setOrigin(actor.centro_x, actor.centro_y);
     sprite.alpha = 1 - actor.transparencia / 100;
+
+    if (sprite.figura) {
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
+        this.pilas.modo.matter.world.localWorld,
+        sprite.figura
+      );
+    }
+
+    let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(
+      -actor.rotacion
+    );
+
+    if (actor.figura === "rectangulo") {
+      sprite.figura = this.matter.add.rectangle(
+        coordenada.x,
+        coordenada.y,
+        actor.figura_ancho,
+        actor.figura_alto,
+        {
+          isStatic: true,
+          angle: angulo
+        }
+      );
+    }
+
+    if (actor.figura === "circulo") {
+      sprite.figura = this.matter.add.circle(
+        coordenada.x,
+        coordenada.y,
+        actor.figura_radio,
+        { isStatic: true }
+      );
+    }
+
+    /*
+    if (sprite.figura) {
+      this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(sprite.figura, {
+        x: coordenada.x,
+        y: coordenada.y
+      });
+    }
+    */
 
     sprite.setFlipX(actor.espejado);
     sprite.setFlipY(actor.espejado_vertical);

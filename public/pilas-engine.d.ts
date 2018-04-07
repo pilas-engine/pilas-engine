@@ -449,6 +449,7 @@ declare class ModoEditor extends Modo {
     alto: number;
     graphics: any;
     fps: any;
+    modo_fisica_activado: boolean;
     preload(): void;
     create(datos: any): void;
     crear_manejadores_para_hacer_arrastrables_los_actores(): void;
