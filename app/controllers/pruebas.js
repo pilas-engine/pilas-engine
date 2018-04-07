@@ -20,7 +20,7 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                this.pilas.conejo = pilas.actores.Conejo();
+                this.pilas.conejo = pilas.actores.conejo();
                 this.pilas.conejo.y = 200;
 
                 let plataforma = pilas.actores.plataforma();
@@ -52,8 +52,8 @@ export default Controller.extend({
         ],
         actores: [
           {
-            tipo: "Pelota",
-            codigo: `class Pelota  extends ActorBase {
+            nombre: "pelota",
+            codigo: `class pelota  extends ActorBase {
             propiedades = {
               figura: 'rectangulo',
               transparencia: 50
@@ -84,7 +84,7 @@ export default Controller.extend({
               rotacion: 45,
               escala_x: 1,
               escala_y: 1,
-              tipo: "Pelota",
+              nombre: "pelota",
               imagen: "pelota",
               transparencia: 0,
               figura: "circulo",
@@ -99,7 +99,9 @@ export default Controller.extend({
 
   actions: {
     cuando_termina_de_cargar() {
-      let resultado = this.get("compilador").compilar_proyecto(this.get("proyecto"));
+      let resultado = this.get("compilador").compilar_proyecto(
+        this.get("proyecto")
+      );
 
       let datos = {
         nombre_de_la_escena_inicial: NOMBRE_DE_LA_ESCENA,
