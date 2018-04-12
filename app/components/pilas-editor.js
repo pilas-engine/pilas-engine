@@ -174,6 +174,12 @@ export default Component.extend({
     }
   },
 
+  seleccionar_ultimo_actor_de_la_escena_actual() {
+    let escena_actual = this.obtener_la_escena_actual();
+    let actor = escena.actores[escena.actores.length - 1];
+    this.send("cuandoSelecciona", actor.id);
+  },
+
   tiene_actores(escena) {
     return escena.actores.length > 0;
   },
@@ -428,6 +434,23 @@ export default Component.extend({
         id: escena.id,
         escena: escena
       });
+    },
+    cuando_intenta_duplicar(id) {
+      let actor_original = this.obtenerDetalleDeActorPorIndice(id);
+      let codigo = this.obtener_codigo_para_el_actor(actor_original);
+
+      let actor = {
+        nombre: actor_original.get("nombre"),
+        codigo: codigo,
+        imagen: actor_original.get("imagen"),
+        propiedades: JSON.parse(JSON.stringify(actor_original))
+      };
+
+      actor.propiedades.x += 20;
+      actor.propiedades.y -= 20;
+
+      this.send("agregar_actor", this.get("proyecto"), actor);
+      this.seleccionar_ultimo_actor_de_la_escena_actual();
     },
     cuando_intenta_eliminar(id) {
       let actor = this.obtenerDetalleDeActorPorIndice(id);
