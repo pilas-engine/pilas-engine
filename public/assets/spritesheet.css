@@ -19,7 +19,7 @@
 	background-size: 270px 252px;
 }
 
-.electron {
+.pilas_logo_60 {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -69px -134px;
@@ -33,7 +33,7 @@
 	background-size: 270px 252px;
 }
 
-.pilas_logo_60 {
+.electron {
     width: 60px;
     height: 60px;
     background: url("spritesheet.png") -208px -2px;
@@ -47,7 +47,7 @@
 	background-size: 270px 252px;
 }
 
-.info_squared {
+.ejemplos {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -120px;
@@ -61,45 +61,45 @@
 	background-size: 270px 252px;
 }
 
-.manual {
+.add_folder {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -208px -149px;
 	background-size: 270px 252px;
 }
 
-.settings {
+.info_squared {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -237px -149px;
 	background-size: 270px 252px;
 }
 
-.test {
+.manual {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -134px -76px;
 	background-size: 270px 252px;
 }
 
-.computadora {
+.settings {
     width: 25px;
     height: 25px;
     background: url("spritesheet.png") -163px -76px;
 	background-size: 270px 252px;
 }
 
-.off {
-    width: 16px;
-    height: 14px;
-    background: url("spritesheet.png") -228px -178px;
+.test {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -134px -105px;
 	background-size: 270px 252px;
 }
 
-.add_folder {
-    width: 25px;
-    height: 25px;
-    background: url("spritesheet.png") -163px -105px;
+.off {
+    width: 16px;
+    height: 14px;
+    background: url("spritesheet.png") -30px -226px;
 	background-size: 270px 252px;
 }
 
@@ -110,49 +110,49 @@
 	background-size: 270px 252px;
 }
 
-.demo {
+.ejecutar {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -30px -198px;
 	background-size: 270px 252px;
 }
 
-.error {
+.arduino {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -58px -198px;
 	background-size: 270px 252px;
 }
 
-.pausa {
+.demo {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -86px -198px;
 	background-size: 270px 252px;
 }
 
-.detener {
+.preferencias {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -114px -198px;
 	background-size: 270px 252px;
 }
 
-.ejecutar {
+.pausa {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -142px -198px;
 	background-size: 270px 252px;
 }
 
-.arduino {
+.detener {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -170px -198px;
 	background-size: 270px 252px;
 }
 
-.preferencias {
+.error {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -198px -198px;
@@ -173,17 +173,31 @@
 	background-size: 270px 252px;
 }
 
-.on {
+.duplicar {
     width: 16px;
-    height: 14px;
+    height: 16px;
     background: url("spritesheet.png") -208px -178px;
 	background-size: 270px 252px;
 }
 
-.ejemplos {
+.borrar {
+    width: 16px;
+    height: 16px;
+    background: url("spritesheet.png") -228px -178px;
+	background-size: 270px 252px;
+}
+
+.on {
+    width: 16px;
+    height: 14px;
+    background: url("spritesheet.png") -248px -178px;
+	background-size: 270px 252px;
+}
+
+.computadora {
     width: 25px;
     height: 25px;
-    background: url("spritesheet.png") -134px -105px;
+    background: url("spritesheet.png") -163px -105px;
 	background-size: 270px 252px;
 }
 

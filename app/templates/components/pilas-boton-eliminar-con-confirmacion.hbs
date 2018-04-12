@@ -1,4 +1,4 @@
-<button id='boton-eliminar-{{tipo}}' class='ba f7 bn o-50 pointer' {{action "mostrar"}}>×{{yield}}</button>
+<button id='boton-eliminar-{{tipo}}' class='bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0' {{action "mostrar" bubbles=false}}>{{pilas-icono icono="borrar"}}{{yield}}</button>
 
 {{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id=idDialogo titulo="Cuidado" reducido=true}}
 
