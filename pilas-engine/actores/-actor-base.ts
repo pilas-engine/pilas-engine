@@ -81,7 +81,11 @@ class ActorBase {
       case "rectangulo":
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
         this.figura = figura;
-        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.escala_x, propiedades.escala_y);
+
+        this.crear_figura_rectangular(
+          propiedades.figura_ancho,
+          propiedades.figura_alto
+        );
 
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
@@ -191,8 +195,17 @@ class ActorBase {
 
   actualizar_sensores() {
     this.sensores.map(s => {
-      let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
-      this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, { x: x + s.distancia_x, y: y - s.distancia_y });
+      let {
+        x,
+        y
+      } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+        this.x,
+        this.y
+      );
+      this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, {
+        x: x + s.distancia_x,
+        y: y - s.distancia_y
+      });
 
       // Descarta colisiones con actores que ya no están en la escena.
       s.colisiones = s.colisiones.filter(a => a._vivo);
@@ -222,23 +235,35 @@ class ActorBase {
 
   set x(_x: number) {
     this.pilas.utilidades.validar_numero(_x);
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      _x,
+      0
+    );
     this.sprite.x = x;
   }
 
   get x() {
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+      this.sprite.x,
+      0
+    );
     return x;
   }
 
   set y(_y: number) {
     this.pilas.utilidades.validar_numero(_y);
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      0,
+      _y
+    );
     this.sprite.y = y;
   }
 
   get y() {
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+      0,
+      this.sprite.y
+    );
     return y;
   }
 
@@ -254,6 +279,14 @@ class ActorBase {
   set escala_x(s) {
     this.pilas.utilidades.validar_numero(s);
     this.sprite.scaleX = s;
+
+    if (this.figura) {
+      pilas.Phaser.Physics.Matter.Matter.Body.scale(
+        this.sprite.body,
+        1 / this.escala_x,
+        1 / this.escala_y
+      );
+    }
   }
 
   get escala_x() {
@@ -263,6 +296,14 @@ class ActorBase {
   set escala_y(s) {
     this.pilas.utilidades.validar_numero(s);
     this.sprite.scaleY = s;
+
+    if (this.figura) {
+      pilas.Phaser.Physics.Matter.Matter.Body.scale(
+        this.sprite.body,
+        1 / this.escala_x,
+        1 / this.escala_y
+      );
+    }
   }
 
   get escala_y() {
@@ -336,27 +377,19 @@ class ActorBase {
 
   fallar_si_no_tiene_figura() {
     if (!this.figura) {
-      throw Error(`Este actor no tiene figura física, no se puede llamar a este método`);
+      throw Error(
+        `Este actor no tiene figura física, no se puede llamar a este método`
+      );
     }
   }
 
-  crear_figura_rectangular(ancho: number = 0, alto: number = 0, escala_x: number = 0, escala_y: number = 0) {
+  crear_figura_rectangular(ancho: number = 0, alto: number = 0) {
     this.fallar_si_no_tiene_figura();
 
     this.pilas.utilidades.validar_numero(ancho);
     this.pilas.utilidades.validar_numero(alto);
 
-    if (!escala_x) {
-      escala_x = this.escala_x;
-    }
-
-    if (!escala_y) {
-      escala_y = this.escala_y;
-    }
-
-    // FIX: no tengo claro porqué debo dividir por escala_x aquí, salió por prueba
-    //      y error, no le veo mucho sentido, pero funciona así :|
-    this.sprite.setRectangle(ancho * escala_x, alto * escala_y);
+    this.sprite.setRectangle(ancho, alto);
   }
 
   crear_figura_circular(radio: number = 0) {
@@ -529,12 +562,21 @@ class ActorBase {
   }
 
   agregar_sensor(ancho, alto, x, y) {
-    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
+    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      x,
+      y
+    );
 
-    let figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
-      isSensor: true,
-      isStatic: false
-    });
+    let figura = this.pilas.modo.matter.add.rectangle(
+      pos.x,
+      pos.y,
+      ancho,
+      alto,
+      {
+        isSensor: true,
+        isStatic: false
+      }
+    );
 
     figura.distancia_x = x;
     figura.distancia_y = y;

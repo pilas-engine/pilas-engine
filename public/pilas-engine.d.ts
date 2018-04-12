@@ -255,7 +255,7 @@ declare class ActorBase {
     transparencia: number;
     toString(): string;
     fallar_si_no_tiene_figura(): void;
-    crear_figura_rectangular(ancho?: number, alto?: number, escala_x?: number, escala_y?: number): void;
+    crear_figura_rectangular(ancho?: number, alto?: number): void;
     crear_figura_circular(radio?: number): void;
     ancho: number;
     alto: number;
@@ -325,7 +325,7 @@ declare class conejo extends Actor {
     camina_actualizar(): void;
     salta_iniciar(): void;
     salta_actualizar(): void;
-    cuando_comienza_una_colision(actor: any): void;
+    cuando_comienza_una_colision(actor: any): boolean;
     cuando_se_mantiene_una_colision(actor: any): void;
     cuando_termina_una_colision(actor: any): void;
 }
@@ -371,6 +371,7 @@ declare class plataforma extends Actor {
     propiedades: {
         figura: string;
         imagen: string;
+        etiqueta: string;
         y: number;
         figura_ancho: number;
         figura_alto: number;
@@ -430,7 +431,10 @@ declare class Normal extends Escena {
 declare class Modo extends Phaser.Scene {
     matter: any;
     actores: any;
+    fps: any;
+    create(datos: any): void;
     destacar_actor_por_id(id: any): void;
+    update(): void;
     crear_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
@@ -448,7 +452,6 @@ declare class ModoEditor extends Modo {
     ancho: number;
     alto: number;
     graphics: any;
-    fps: any;
     modo_fisica_activado: boolean;
     preload(): void;
     create(datos: any): void;
@@ -502,6 +505,7 @@ declare class ModoPausa extends Modo {
     preload(): void;
     create(datos: any): void;
     private crear_sprites_desde_historia(posicion);
+    update(): void;
     crear_sprite_desde_entidad(entidad: any): any;
     actualizar_posicion(posicion: any): void;
     crear_canvas_de_depuracion(): void;

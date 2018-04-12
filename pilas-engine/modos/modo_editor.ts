@@ -8,12 +8,12 @@ class ModoEditor extends Modo {
   alto: number = 500;
 
   graphics: any;
-  fps: any;
   modo_fisica_activado: boolean;
 
   preload() {}
 
   create(datos) {
+    super.create(datos);
     this.actores = [];
     this.pilas = datos.pilas;
 
@@ -23,8 +23,6 @@ class ModoEditor extends Modo {
 
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
-
-    this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
 
     this.modo_fisica_activado = false;
 
@@ -86,9 +84,6 @@ class ModoEditor extends Modo {
   crear_sprite_desde_actor(actor) {
     let sprite = this.add.sprite(0, 0, actor.imagen);
 
-    //let figura = this.matter.add.circle(0, 0, 30, { isStatic: true });
-    //sprite2.setStatic(true);
-
     sprite["setInteractive"]();
     sprite["actor"] = actor;
     //sprite["figura"] = figura;
@@ -132,13 +127,7 @@ class ModoEditor extends Modo {
 
   update() {
     this.graphics.clear();
-
-    if (this.pilas.depurador.mostrar_fps) {
-      this.fps.alpha = 1;
-      this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
-    } else {
-      this.fps.alpha = 0;
-    }
+    super.update();
 
     if (this.pilas.depurador.modo_posicion_activado) {
       this.actores.map(sprite => {
@@ -169,6 +158,14 @@ class ModoEditor extends Modo {
   eliminar_actor_por_id(id) {
     let indice = this.actores.findIndex(e => e.id === id);
     let actor_a_eliminar = this.actores.splice(indice, 1);
+
+    if (actor_a_eliminar[0].figura) {
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
+        this.pilas.modo.matter.world.localWorld,
+        actor_a_eliminar[0].figura
+      );
+    }
+
     actor_a_eliminar[0].destroy();
   }
 }
