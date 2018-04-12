@@ -174,12 +174,6 @@ export default Component.extend({
     }
   },
 
-  seleccionar_ultimo_actor_de_la_escena_actual() {
-    let escena_actual = this.obtener_la_escena_actual();
-    let actor = escena.actores[escena.actores.length - 1];
-    this.send("cuandoSelecciona", actor.id);
-  },
-
   tiene_actores(escena) {
     return escena.actores.length > 0;
   },
@@ -323,10 +317,10 @@ export default Component.extend({
 
       this.registrar_codigo_de_actor(nombre, actor.codigo);
 
-      this.send("cuandoSelecciona", id);
       this.set("mostrarModalCreacionDeActor", false);
 
       this.mostrar_la_escena_actual_sobre_pilas();
+      this.send("cuandoSelecciona", id);
     },
 
     cuando_termino_de_cargar_monaco_editor() {},
@@ -450,7 +444,6 @@ export default Component.extend({
       actor.propiedades.y -= 20;
 
       this.send("agregar_actor", this.get("proyecto"), actor);
-      this.seleccionar_ultimo_actor_de_la_escena_actual();
     },
     cuando_intenta_eliminar(id) {
       let actor = this.obtenerDetalleDeActorPorIndice(id);
