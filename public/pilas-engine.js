@@ -627,7 +627,7 @@ var ActorBase = (function () {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
                 this.figura = figura;
-                this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto, propiedades.escala_x, propiedades.escala_y);
+                this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
                 this.dinamico = propiedades.figura_dinamica;
                 this.sin_rotacion = propiedades.figura_sin_rotacion;
                 this.rebote = propiedades.figura_rebote;
@@ -726,7 +726,10 @@ var ActorBase = (function () {
         var _this = this;
         this.sensores.map(function (s) {
             var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_this.x, _this.y), x = _a.x, y = _a.y;
-            _this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, { x: x + s.distancia_x, y: y - s.distancia_y });
+            _this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, {
+                x: x + s.distancia_x,
+                y: y - s.distancia_y
+            });
             s.colisiones = s.colisiones.filter(function (a) { return a._vivo; });
         });
     };
@@ -799,6 +802,9 @@ var ActorBase = (function () {
         set: function (s) {
             this.pilas.utilidades.validar_numero(s);
             this.sprite.scaleX = s;
+            if (this.figura) {
+                pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+            }
         },
         enumerable: true,
         configurable: true
@@ -810,6 +816,9 @@ var ActorBase = (function () {
         set: function (s) {
             this.pilas.utilidades.validar_numero(s);
             this.sprite.scaleY = s;
+            if (this.figura) {
+                pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+            }
         },
         enumerable: true,
         configurable: true
@@ -887,21 +896,13 @@ var ActorBase = (function () {
             throw Error("Este actor no tiene figura f\u00EDsica, no se puede llamar a este m\u00E9todo");
         }
     };
-    ActorBase.prototype.crear_figura_rectangular = function (ancho, alto, escala_x, escala_y) {
+    ActorBase.prototype.crear_figura_rectangular = function (ancho, alto) {
         if (ancho === void 0) { ancho = 0; }
         if (alto === void 0) { alto = 0; }
-        if (escala_x === void 0) { escala_x = 0; }
-        if (escala_y === void 0) { escala_y = 0; }
         this.fallar_si_no_tiene_figura();
         this.pilas.utilidades.validar_numero(ancho);
         this.pilas.utilidades.validar_numero(alto);
-        if (!escala_x) {
-            escala_x = this.escala_x;
-        }
-        if (!escala_y) {
-            escala_y = this.escala_y;
-        }
-        this.sprite.setRectangle(ancho * escala_x, alto * escala_y);
+        this.sprite.setRectangle(ancho, alto);
     };
     ActorBase.prototype.crear_figura_circular = function (radio) {
         if (radio === void 0) { radio = 0; }
@@ -1239,6 +1240,11 @@ var conejo = (function (_super) {
             this.pilas.reproducir_sonido("moneda");
             actor.eliminar();
         }
+        if (actor.etiqueta === "plataforma") {
+            if (this.velocidad_y > 0.1) {
+                return true;
+            }
+        }
     };
     conejo.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     conejo.prototype.cuando_termina_una_colision = function (actor) { };
@@ -1342,6 +1348,7 @@ var plataforma = (function (_super) {
         _this.propiedades = {
             figura: "rectangulo",
             imagen: "plataforma",
+            etiqueta: "plataforma",
             y: 0,
             figura_ancho: 250,
             figura_alto: 40,
@@ -1473,10 +1480,24 @@ var Modo = (function (_super) {
     function Modo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Modo.prototype.create = function (datos) {
+        this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+    };
     Modo.prototype.destacar_actor_por_id = function (id) {
         var actor = this.obtener_actor_por_id(id);
         if (actor) {
             actor.destacar();
+        }
+    };
+    Modo.prototype.update = function () {
+        if (this.fps) {
+            if (this.pilas.depurador.mostrar_fps) {
+                this.fps.alpha = 1;
+                this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
+            }
+            else {
+                this.fps.alpha = 0;
+            }
         }
     };
     Modo.prototype.crear_fondo = function (fondo) {
@@ -1485,10 +1506,10 @@ var Modo = (function (_super) {
         this.fondo.setOrigin(0);
     };
     Modo.prototype.obtener_actor_por_id = function (id) {
-        return pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
+        return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
     };
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
-        var coordenada = pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+        var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -1497,6 +1518,19 @@ var Modo = (function (_super) {
         sprite.scaleY = actor.escala_y;
         sprite.setOrigin(actor.centro_x, actor.centro_y);
         sprite.alpha = 1 - actor.transparencia / 100;
+        if (sprite.figura) {
+            this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
+        }
+        var angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
+        if (actor.figura === "rectangulo") {
+            sprite.figura = this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
+                isStatic: true,
+                angle: angulo
+            });
+        }
+        if (actor.figura === "circulo") {
+            sprite.figura = this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true });
+        }
         sprite.setFlipX(actor.espejado);
         sprite.setFlipY(actor.espejado_vertical);
     };
@@ -1559,6 +1593,8 @@ var ModoCargador = (function (_super) {
         this.load.audio("seleccion-grave", "sonidos/seleccion-grave.wav", {});
         this.load.bitmapFont("font", "fuentes/font.png", "fuentes/font.fnt", null, null);
         this.load.bitmapFont("verdana3", "fuentes/verdana3.png", "fuentes/verdana3.fnt", null, null);
+        this.load.bitmapFont("azul", "fuentes/azul.png", "fuentes/azul.fnt", null, null);
+        this.load.bitmapFont("impact", "fuentes/impact.png", "fuentes/impact.fnt", null, null);
         this.load.on("progress", this.cuando_progresa_la_carga, this);
     };
     ModoCargador.prototype.create = function () {
@@ -1582,6 +1618,7 @@ var ModoEditor = (function (_super) {
     }
     ModoEditor.prototype.preload = function () { };
     ModoEditor.prototype.create = function (datos) {
+        _super.prototype.create.call(this, datos);
         this.actores = [];
         this.pilas = datos.pilas;
         this.crear_fondo(datos.escena.fondo);
@@ -1589,7 +1626,11 @@ var ModoEditor = (function (_super) {
         this.posicionar_la_camara(datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
-        this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
+        this.modo_fisica_activado = false;
+        if (this.pilas.depurador.mostrar_fisica) {
+            this.modo_fisica_activado = true;
+            this.matter.systems.matterPhysics.world.createDebugGraphic();
+        }
     };
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores = function () {
         var escena = this;
@@ -1602,9 +1643,16 @@ var ModoEditor = (function (_super) {
                 escena.pilas.game.canvas.style.cursor = "-webkit-grabbing";
             }
         });
+        var matter = this.pilas.Phaser.Physics.Matter.Matter;
         this.input.on("drag", function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;
+            if (gameObject.figura) {
+                matter.Body.setPosition(gameObject.figura, {
+                    x: dragX,
+                    y: dragY
+                });
+            }
         });
         this.input.on("dragend", function (pointer, gameObject) {
             escena.pilas.game.canvas.style.cursor = "default";
@@ -1657,17 +1705,23 @@ var ModoEditor = (function (_super) {
     ModoEditor.prototype.update = function () {
         var _this = this;
         this.graphics.clear();
-        if (this.pilas.depurador.mostrar_fps) {
-            this.fps.alpha = 1;
-            this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
-        }
-        else {
-            this.fps.alpha = 0;
-        }
+        _super.prototype.update.call(this);
         if (this.pilas.depurador.modo_posicion_activado) {
             this.actores.map(function (sprite) {
                 _this.dibujar_punto_de_control(_this.graphics, sprite.x, sprite.y);
             });
+        }
+        if (this.pilas.depurador.mostrar_fisica) {
+            if (!this.modo_fisica_activado) {
+                this.modo_fisica_activado = true;
+                this.matter.systems.matterPhysics.world.createDebugGraphic();
+            }
+        }
+        else {
+            if (this.modo_fisica_activado) {
+                this.modo_fisica_activado = false;
+                this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+            }
         }
     };
     ModoEditor.prototype.dibujar_punto_de_control = function (graphics, x, y) {
@@ -1679,6 +1733,9 @@ var ModoEditor = (function (_super) {
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
         var actor_a_eliminar = this.actores.splice(indice, 1);
+        if (actor_a_eliminar[0].figura) {
+            this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
+        }
         actor_a_eliminar[0].destroy();
     };
     return ModoEditor;
@@ -1695,6 +1752,7 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.preload = function () { };
     ModoEjecucion.prototype.create = function (datos) {
         var _this = this;
+        _super.prototype.create.call(this, datos);
         this.actores = [];
         try {
             this.guardar_parametros_en_atributos(datos);
@@ -1740,15 +1798,20 @@ var ModoEjecucion = (function (_super) {
                         var actor_b = figura_2.gameObject.actor;
                         actor_a.colisiones.push(actor_b);
                         actor_b.colisiones.push(actor_a);
-                        actor_a.cuando_comienza_una_colision(actor_b);
-                        actor_b.cuando_comienza_una_colision(actor_a);
+                        var cancelar_1 = actor_a.cuando_comienza_una_colision(actor_b);
+                        var cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
+                        if (cancelar_1 || cancelar_2) {
+                            colision.isActive = false;
+                        }
                     }
                     else {
                         if (figura_2.sensor_del_actor &&
+                            figura_1.gameObject &&
                             figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
                             figura_2.colisiones.push(figura_1.gameObject.actor);
                         }
                         if (figura_1.sensor_del_actor &&
+                            figura_2.gameObject &&
                             figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
                             figura_1.colisiones.push(figura_2.gameObject.actor);
                         }
@@ -1892,6 +1955,7 @@ var ModoEjecucion = (function (_super) {
         this.permitir_modo_pausa = datos.permitir_modo_pausa;
     };
     ModoEjecucion.prototype.update = function () {
+        _super.prototype.update.call(this);
         try {
             if (this.permitir_modo_pausa) {
                 this.guardar_foto_de_entidades();
@@ -1918,6 +1982,7 @@ var ModoPausa = (function (_super) {
     }
     ModoPausa.prototype.preload = function () { };
     ModoPausa.prototype.create = function (datos) {
+        _super.prototype.create.call(this, datos);
         this.pilas = datos.pilas;
         this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
@@ -1936,6 +2001,12 @@ var ModoPausa = (function (_super) {
         this.sprites = foto.actores.map(function (entidad) {
             return _this.crear_sprite_desde_entidad(entidad);
         });
+    };
+    ModoPausa.prototype.update = function () {
+        _super.prototype.update.call(this);
+        if (this.fps) {
+            this.fps.alpha = 0;
+        }
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
         var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;

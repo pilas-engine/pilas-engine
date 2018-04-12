@@ -8,11 +8,12 @@ class ModoEditor extends Modo {
   alto: number = 500;
 
   graphics: any;
-  fps: any;
+  modo_fisica_activado: boolean;
 
   preload() {}
 
   create(datos) {
+    super.create(datos);
     this.actores = [];
     this.pilas = datos.pilas;
 
@@ -23,7 +24,12 @@ class ModoEditor extends Modo {
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
-    this.fps = this.add.bitmapText(5, 5, "verdana3", "FPS");
+    this.modo_fisica_activado = false;
+
+    if (this.pilas.depurador.mostrar_fisica) {
+      this.modo_fisica_activado = true;
+      this.matter.systems.matterPhysics.world.createDebugGraphic();
+    }
   }
 
   crear_manejadores_para_hacer_arrastrables_los_actores() {
@@ -42,9 +48,18 @@ class ModoEditor extends Modo {
       }
     });
 
+    let matter = this.pilas.Phaser.Physics.Matter.Matter;
+
     this.input.on("drag", function(pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;
       gameObject.y = dragY;
+
+      if (gameObject.figura) {
+        matter.Body.setPosition(gameObject.figura, {
+          x: dragX,
+          y: dragY
+        });
+      }
     });
 
     this.input.on("dragend", function(pointer, gameObject) {
@@ -71,6 +86,7 @@ class ModoEditor extends Modo {
 
     sprite["setInteractive"]();
     sprite["actor"] = actor;
+    //sprite["figura"] = figura;
     sprite["destacandose"] = false;
 
     sprite["destacar"] = () => {
@@ -111,18 +127,24 @@ class ModoEditor extends Modo {
 
   update() {
     this.graphics.clear();
-
-    if (this.pilas.depurador.mostrar_fps) {
-      this.fps.alpha = 1;
-      this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
-    } else {
-      this.fps.alpha = 0;
-    }
+    super.update();
 
     if (this.pilas.depurador.modo_posicion_activado) {
       this.actores.map(sprite => {
         this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
       });
+    }
+
+    if (this.pilas.depurador.mostrar_fisica) {
+      if (!this.modo_fisica_activado) {
+        this.modo_fisica_activado = true;
+        this.matter.systems.matterPhysics.world.createDebugGraphic();
+      }
+    } else {
+      if (this.modo_fisica_activado) {
+        this.modo_fisica_activado = false;
+        this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+      }
     }
   }
 
@@ -136,6 +158,14 @@ class ModoEditor extends Modo {
   eliminar_actor_por_id(id) {
     let indice = this.actores.findIndex(e => e.id === id);
     let actor_a_eliminar = this.actores.splice(indice, 1);
+
+    if (actor_a_eliminar[0].figura) {
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
+        this.pilas.modo.matter.world.localWorld,
+        actor_a_eliminar[0].figura
+      );
+    }
+
     actor_a_eliminar[0].destroy();
   }
 }

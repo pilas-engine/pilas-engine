@@ -70,6 +70,20 @@ class ModoCargador extends Modo {
       null,
       null
     );
+    this.load.bitmapFont(
+      "azul",
+      "fuentes/azul.png",
+      "fuentes/azul.fnt",
+      null,
+      null
+    );
+    this.load.bitmapFont(
+      "impact",
+      "fuentes/impact.png",
+      "fuentes/impact.fnt",
+      null,
+      null
+    );
 
     this.load.on("progress", this.cuando_progresa_la_carga, this);
   }

@@ -1,4 +1,5 @@
 {
+  "imagenes": ["demo", "otro"],
   "actores": [
     {
       "nombre": "aceituna"

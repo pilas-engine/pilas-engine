@@ -164,7 +164,7 @@ export default Controller.extend(queryParams.Mixin, {
               escala_x: 1,
               escala_y: 1,
               transparencia: 0,
-              etiqueta: "actor",
+              etiqueta: "plataforma",
               espejado: false,
               espejado_vertical: false,
               figura: "rectangulo",

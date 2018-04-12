@@ -6,6 +6,7 @@
 /binarios
 /manuales
 
+dump.rdb
 .DS_Store
 
 # dependencies
@@ -27,3 +28,5 @@ bower.json.ember-try
 package.json.ember-try
 
 electron-out/
+
+phaser

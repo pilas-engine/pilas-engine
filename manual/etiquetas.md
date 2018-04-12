@@ -47,3 +47,5 @@ class Protagonista extends Actor {
   }
 }
 ```
+
+Ten en cuenta que en la función `cuando_comienza_una_colision` también se puede cancelar una colisión retornando `true`. Por ejemplo si quieres que un actor pueda sobrepasar a otro.

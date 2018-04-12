@@ -17,8 +17,16 @@ class conejo extends Actor {
   pies = null;
 
   iniciar() {
-    this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
-    this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
+    this.crear_animacion(
+      "conejo_parado",
+      ["conejo_parado1", "conejo_parado2"],
+      2
+    );
+    this.crear_animacion(
+      "conejo_camina",
+      ["conejo_camina1", "conejo_camina2"],
+      20
+    );
     this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
     this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
 
@@ -105,6 +113,12 @@ class conejo extends Actor {
     if (actor.etiqueta === "moneda") {
       this.pilas.reproducir_sonido("moneda");
       actor.eliminar();
+    }
+
+    if (actor.etiqueta === "plataforma") {
+      if (this.velocidad_y > 0.1) {
+        return true;
+      }
     }
   }
 
