@@ -20,6 +20,7 @@ class ModoEjecucion extends Modo {
   preload() {}
 
   create(datos) {
+    super.create(datos);
     this.actores = [];
 
     try {
@@ -86,13 +87,18 @@ class ModoEjecucion extends Modo {
             actor_a.colisiones.push(actor_b);
             actor_b.colisiones.push(actor_a);
 
-            actor_a.cuando_comienza_una_colision(actor_b);
-            actor_b.cuando_comienza_una_colision(actor_a);
+            let cancelar_1 = actor_a.cuando_comienza_una_colision(actor_b);
+            let cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
+
+            if (cancelar_1 || cancelar_2) {
+              colision.isActive = false;
+            }
           } else {
             // colisión entre sensor de actor y actor
 
             if (
               figura_2.sensor_del_actor &&
+              figura_1.gameObject &&
               figura_2.sensor_del_actor !== figura_1.gameObject.actor
             ) {
               figura_2.colisiones.push(figura_1.gameObject.actor);
@@ -100,6 +106,7 @@ class ModoEjecucion extends Modo {
 
             if (
               figura_1.sensor_del_actor &&
+              figura_2.gameObject &&
               figura_1.sensor_del_actor !== figura_2.gameObject.actor
             ) {
               figura_1.colisiones.push(figura_2.gameObject.actor);
@@ -307,6 +314,8 @@ class ModoEjecucion extends Modo {
   }
 
   update() {
+    super.update();
+
     try {
       if (this.permitir_modo_pausa) {
         this.guardar_foto_de_entidades();

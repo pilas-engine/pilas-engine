@@ -5,11 +5,9 @@
 * [Autómatas y estados](automatas_y_estados.md)
 * [Animaciones](animaciones.md)
 * [Etiquetas](etiquetas.md)
-
-
+* [Colisiones](colisiones.md)
 
 Sección avanzada
 
-- [Colaborar con pilas](colaborar.md)
-- [Entorno para colaboradores de Pilas](entorno.md)
-
+* [Colaborar con pilas](colaborar.md)
+* [Entorno para colaboradores de Pilas](entorno.md)
