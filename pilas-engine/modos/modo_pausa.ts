@@ -19,6 +19,7 @@ class ModoPausa extends Modo {
   preload() {}
 
   create(datos) {
+    super.create(datos);
     this.pilas = datos.pilas;
     this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
@@ -48,6 +49,13 @@ class ModoPausa extends Modo {
     });
 
     //this.sprites.push(this.fondo);
+  }
+
+  update() {
+    super.update();
+    if (this.fps) {
+      this.fps.alpha = 0;
+    }
   }
 
   crear_sprite_desde_entidad(entidad) {

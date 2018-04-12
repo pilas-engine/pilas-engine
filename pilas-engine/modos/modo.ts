@@ -2,11 +2,28 @@ class Modo extends Phaser.Scene {
   matter: any;
   actores: any;
 
+  fps: any;
+
+  create(datos) {
+    this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+  }
+
   destacar_actor_por_id(id) {
     let actor = this.obtener_actor_por_id(id);
 
     if (actor) {
       actor.destacar();
+    }
+  }
+
+  update() {
+    if (this.fps) {
+      if (this.pilas.depurador.mostrar_fps) {
+        this.fps.alpha = 1;
+        this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
+      } else {
+        this.fps.alpha = 0;
+      }
     }
   }
 
