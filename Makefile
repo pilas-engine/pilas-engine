@@ -9,7 +9,6 @@ ELIMINAR_MAPS=1
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
 BIN_TYPEDOC=./node_modules/.bin/typedoc
-BIN_TYPESCRIPT=./node_modules/typescript/bin/tsc
 BIN_SPRITESHEET=./node_modules/.bin/spritesheet-js
 BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_EMBER=./node_modules/.bin/ember

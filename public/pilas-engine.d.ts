@@ -162,7 +162,7 @@ declare class Pilas {
             touch: boolean;
             gamepad: boolean;
         };
-        pixelart: boolean;
+        scene: (typeof ModoCargador | typeof ModoEditor | typeof ModoEjecucion | typeof ModoPausa)[];
         physics: {
             default: string;
             matter: {
@@ -431,7 +431,9 @@ declare class Normal extends Escena {
 declare class Modo extends Phaser.Scene {
     matter: any;
     actores: any;
+    pilas: Pilas;
     fps: any;
+    constructor(data: any);
     create(datos: any): void;
     destacar_actor_por_id(id: any): void;
     update(): void;
@@ -443,6 +445,7 @@ declare class Modo extends Phaser.Scene {
 }
 declare class ModoCargador extends Modo {
     pilas: Pilas;
+    constructor();
     preload(): void;
     create(): void;
     cuando_progresa_la_carga(progreso: any): void;
@@ -453,6 +456,7 @@ declare class ModoEditor extends Modo {
     alto: number;
     graphics: any;
     modo_fisica_activado: boolean;
+    constructor();
     preload(): void;
     create(datos: any): void;
     crear_manejadores_para_hacer_arrastrables_los_actores(): void;
@@ -477,6 +481,7 @@ declare class ModoEjecucion extends Modo {
     nombre_de_la_escena_inicial: string;
     permitir_modo_pausa: boolean;
     pausar: boolean;
+    constructor();
     preload(): void;
     create(datos: any): void;
     vincular_eventos_de_colision(): void;
@@ -502,11 +507,12 @@ declare class ModoPausa extends Modo {
     total: number;
     izquierda: any;
     derecha: any;
+    constructor();
     preload(): void;
     create(datos: any): void;
     private crear_sprites_desde_historia(posicion);
     update(): void;
-    crear_sprite_desde_entidad(entidad: any): any;
+    crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
     actualizar_posicion(posicion: any): void;
     crear_canvas_de_depuracion(): void;
 }

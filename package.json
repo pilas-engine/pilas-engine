@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "js-beautify": "^1.7.5",
-    "phaser": "3.3.0",
+    "phaser": "3.5.0",
     "typescript": "2.7.1"
   }
 }

@@ -10,10 +10,13 @@ class ModoEditor extends Modo {
   graphics: any;
   modo_fisica_activado: boolean;
 
+  constructor() {
+    super({ key: "ModoEditor" });
+  }
+
   preload() {}
 
   create(datos) {
-    super.create(datos);
     this.actores = [];
     this.pilas = datos.pilas;
 

@@ -52,17 +52,12 @@ class Pilas {
     var configuracion = this.crear_configuracion(ancho, alto);
 
     var game = new Phaser.Game(configuracion);
+
     this._ancho = ancho;
     this._alto = alto;
     this.game = game;
 
-    game.scene.add("ModoEditor", ModoEditor, false);
-    game.scene.add("ModoCargador", ModoCargador, false);
-    game.scene.add("ModoEjecucion", ModoEjecucion, false);
-    game.scene.add("ModoPausa", ModoPausa, false);
-
     this.control = new Control(this);
-    this.definir_modo("ModoCargador", { pilas: this });
   }
 
   definir_modo(nombre, datos) {
@@ -70,7 +65,6 @@ class Pilas {
     this.game.scene.stop("ModoEjecucion");
     this.game.scene.stop("ModoEditor");
     this.game.scene.stop("ModoPausa");
-
     this.modo = this.game.scene.getScene(nombre);
     this.game.scene.start(nombre, datos);
   }
@@ -89,7 +83,7 @@ class Pilas {
         touch: true,
         gamepad: true
       },
-      pixelart: true,
+      scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
       physics: {
         default: "matter",
         matter: {

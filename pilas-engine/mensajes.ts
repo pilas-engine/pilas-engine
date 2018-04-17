@@ -76,19 +76,22 @@ class Mensajes {
       stack: error.stack.toString()
     };
 
-    this.pilas.modo.add.text(
-      5,
-      5,
-      "Se ha producido un error. Vea el intérprete por favor.",
-      { font: "16px verdana" }
-    );
-    this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, {
+    let fuente_principal = {
       font: "14px verdana",
       fill: "#ddd"
-    });
-    this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, {
+    };
+
+    let fuente_grande = {
+      font: "16px verdana"
+    };
+
+    let fuente_pequena = {
       font: "10px verdana"
-    });
+    };
+
+    this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
+    this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
+    this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
 
     this.pilas.pausar();
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);

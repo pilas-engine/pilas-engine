@@ -12,7 +12,8 @@
     "noLib": false,
     "skipLibCheck": true,
     "outFile": "../public/pilas-engine.js",
-    "noStrictGenericChecks": true
+    "noStrictGenericChecks": true,
+    "lib": ["es5", "dom", "es2015.core"]
   },
   "exclude": ["data", "public"],
   "filesGlob": ["**/*.ts"],

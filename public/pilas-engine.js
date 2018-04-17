@@ -353,14 +353,19 @@ var Mensajes = (function () {
             mensaje: error.message,
             stack: error.stack.toString()
         };
-        this.pilas.modo.add.text(5, 5, "Se ha producido un error. Vea el intérprete por favor.", { font: "16px verdana" });
-        this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, {
+        var fuente_principal = {
             font: "14px verdana",
             fill: "#ddd"
-        });
-        this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, {
+        };
+        var fuente_grande = {
+            font: "16px verdana"
+        };
+        var fuente_pequena = {
             font: "10px verdana"
-        });
+        };
+        this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
+        this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
+        this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
         this.pilas.pausar();
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.error(error);
@@ -491,12 +496,7 @@ var Pilas = (function () {
         this._ancho = ancho;
         this._alto = alto;
         this.game = game;
-        game.scene.add("ModoEditor", ModoEditor, false);
-        game.scene.add("ModoCargador", ModoCargador, false);
-        game.scene.add("ModoEjecucion", ModoEjecucion, false);
-        game.scene.add("ModoPausa", ModoPausa, false);
         this.control = new Control(this);
-        this.definir_modo("ModoCargador", { pilas: this });
     };
     Pilas.prototype.definir_modo = function (nombre, datos) {
         this.game.scene.stop("ModoCargador");
@@ -520,7 +520,7 @@ var Pilas = (function () {
                 touch: true,
                 gamepad: true
             },
-            pixelart: true,
+            scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
             physics: {
                 default: "matter",
                 matter: {
@@ -1477,11 +1477,12 @@ var Normal = (function (_super) {
 }(Escena));
 var Modo = (function (_super) {
     __extends(Modo, _super);
-    function Modo() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Modo(data) {
+        return _super.call(this, data) || this;
     }
     Modo.prototype.create = function (datos) {
         this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+        this.pilas = datos.pilas;
     };
     Modo.prototype.destacar_actor_por_id = function (id) {
         var actor = this.obtener_actor_por_id(id);
@@ -1546,7 +1547,7 @@ var Modo = (function (_super) {
 var ModoCargador = (function (_super) {
     __extends(ModoCargador, _super);
     function ModoCargador() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this, { key: "ModoCargador" }) || this;
     }
     ModoCargador.prototype.preload = function () {
         this.pilas = pilas;
@@ -1599,7 +1600,8 @@ var ModoCargador = (function (_super) {
     };
     ModoCargador.prototype.create = function () {
         this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
-        this.add.bitmapText(5, 5, "verdana3", "Carga finalizada\nEnviá la señal 'ejecutar_proyecto' para continuar.");
+        var msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
+        this.add.bitmapText(5, 5, "impact", msg);
     };
     ModoCargador.prototype.cuando_progresa_la_carga = function (progreso) {
         this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
@@ -1611,14 +1613,13 @@ var ModoCargador = (function (_super) {
 var ModoEditor = (function (_super) {
     __extends(ModoEditor, _super);
     function ModoEditor() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this, { key: "ModoEditor" }) || this;
         _this.ancho = 500;
         _this.alto = 500;
         return _this;
     }
     ModoEditor.prototype.preload = function () { };
     ModoEditor.prototype.create = function (datos) {
-        _super.prototype.create.call(this, datos);
         this.actores = [];
         this.pilas = datos.pilas;
         this.crear_fondo(datos.escena.fondo);
@@ -1743,7 +1744,7 @@ var ModoEditor = (function (_super) {
 var ModoEjecucion = (function (_super) {
     __extends(ModoEjecucion, _super);
     function ModoEjecucion() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this, { key: "ModoEjecucion" }) || this;
         _this.proyecto = {};
         _this.nombre_de_la_escena_inicial = null;
         _this.pausar = false;
@@ -1978,7 +1979,7 @@ var ModoEjecucion = (function (_super) {
 var ModoPausa = (function (_super) {
     __extends(ModoPausa, _super);
     function ModoPausa() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this, { key: "ModoPausa" }) || this;
     }
     ModoPausa.prototype.preload = function () { };
     ModoPausa.prototype.create = function (datos) {

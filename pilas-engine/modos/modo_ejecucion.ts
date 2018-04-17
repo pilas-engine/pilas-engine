@@ -17,6 +17,10 @@ class ModoEjecucion extends Modo {
   permitir_modo_pausa: boolean;
   pausar = false;
 
+  constructor() {
+    super({ key: "ModoEjecucion" });
+  }
+
   preload() {}
 
   create(datos) {

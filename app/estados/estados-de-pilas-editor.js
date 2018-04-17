@@ -36,6 +36,10 @@ class ModoEdicion {
   ejecutar() {
     return new ModoEjecucion();
   }
+
+  cuandoTerminoDeCargarPilas() {
+    console.warn("No aplica, este es el ModoEdicion");
+  }
 }
 
 class ModoEjecucion {
@@ -59,6 +63,10 @@ class ModoEjecucion {
   pausar() {
     return new ModoPausa();
   }
+
+  cuandoTerminoDeCargarPilas() {
+    console.warn("No aplica, este es el ModoEjecucion");
+  }
 }
 
 class ModoPausa {
@@ -77,6 +85,10 @@ class ModoPausa {
 
   detener() {
     return new ModoEdicion();
+  }
+
+  cuandoTerminoDeCargarPilas() {
+    console.warn("No aplica, este es el ModoPausa");
   }
 }
 

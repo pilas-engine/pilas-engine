@@ -3,6 +3,10 @@
 class ModoCargador extends Modo {
   pilas: Pilas;
 
+  constructor() {
+    super({ key: "ModoCargador" });
+  }
+
   preload() {
     this.pilas = pilas;
 
@@ -90,12 +94,9 @@ class ModoCargador extends Modo {
 
   create() {
     this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
-    this.add.bitmapText(
-      5,
-      5,
-      "verdana3",
-      "Carga finalizada\nEnviá la señal 'ejecutar_proyecto' para continuar."
-    );
+
+    let msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
+    this.add.bitmapText(5, 5, "impact", msg);
   }
 
   cuando_progresa_la_carga(progreso) {

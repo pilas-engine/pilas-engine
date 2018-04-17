@@ -1,11 +1,16 @@
 class Modo extends Phaser.Scene {
   matter: any;
   actores: any;
-
+  pilas: Pilas;
   fps: any;
+
+  constructor(data) {
+    super(data);
+  }
 
   create(datos) {
     this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+    this.pilas = datos.pilas;
   }
 
   destacar_actor_por_id(id) {

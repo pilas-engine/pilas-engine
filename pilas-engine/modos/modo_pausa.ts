@@ -16,6 +16,10 @@ class ModoPausa extends Modo {
   izquierda: any;
   derecha: any;
 
+  constructor() {
+    super({ key: "ModoPausa" });
+  }
+
   preload() {}
 
   create(datos) {
