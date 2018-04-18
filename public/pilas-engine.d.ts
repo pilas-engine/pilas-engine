@@ -1,17 +1,20 @@
 declare class Actores {
     pilas: Pilas;
     constructor(pilas: any);
-    caja(x: any, y: any): any;
     crear_actor(nombre: any): any;
-    aceituna(x?: number, y?: number): any;
-    conejo(): any;
-    suelo(): any;
-    pared(): any;
-    techo(): any;
-    plataforma(): any;
     actor(): any;
+    aceituna(x?: number, y?: number): any;
+    caja(x: any, y: any): any;
+    conejo(): any;
+    logo(): any;
     moneda(): any;
     nave(): any;
+    nube(): any;
+    pared(): any;
+    pelota(): any;
+    plataforma(): any;
+    suelo(): any;
+    techo(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -346,6 +349,12 @@ declare class nave extends Actor {
     velocidad: number;
     iniciar(): void;
     actualizar(): void;
+}
+declare class nube extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    iniciar(): void;
 }
 declare class pared extends Actor {
     propiedades: {

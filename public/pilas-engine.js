@@ -12,9 +12,6 @@ var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
     }
-    Actores.prototype.caja = function (x, y) {
-        return this.crear_actor("caja");
-    };
     Actores.prototype.crear_actor = function (nombre) {
         var clase = window[nombre];
         var actor = new clase(this.pilas);
@@ -23,34 +20,46 @@ var Actores = (function () {
         actor.iniciar();
         return actor;
     };
+    Actores.prototype.actor = function () {
+        return this.crear_actor("Actor");
+    };
     Actores.prototype.aceituna = function (x, y) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
         return this.crear_actor("aceituna");
     };
+    Actores.prototype.caja = function (x, y) {
+        return this.crear_actor("caja");
+    };
     Actores.prototype.conejo = function () {
         return this.crear_actor("conejo");
     };
-    Actores.prototype.suelo = function () {
-        return this.crear_actor("suelo");
-    };
-    Actores.prototype.pared = function () {
-        return this.crear_actor("pared");
-    };
-    Actores.prototype.techo = function () {
-        return this.crear_actor("techo");
-    };
-    Actores.prototype.plataforma = function () {
-        return this.crear_actor("plataforma");
-    };
-    Actores.prototype.actor = function () {
-        return this.crear_actor("Actor");
+    Actores.prototype.logo = function () {
+        return this.crear_actor("logo");
     };
     Actores.prototype.moneda = function () {
         return this.crear_actor("moneda");
     };
     Actores.prototype.nave = function () {
         return this.crear_actor("nave");
+    };
+    Actores.prototype.nube = function () {
+        return this.crear_actor("nube");
+    };
+    Actores.prototype.pared = function () {
+        return this.crear_actor("pared");
+    };
+    Actores.prototype.pelota = function () {
+        return this.crear_actor("pelota");
+    };
+    Actores.prototype.plataforma = function () {
+        return this.crear_actor("plataforma");
+    };
+    Actores.prototype.suelo = function () {
+        return this.crear_actor("suelo");
+    };
+    Actores.prototype.techo = function () {
+        return this.crear_actor("techo");
     };
     return Actores;
 }());
@@ -1309,6 +1318,18 @@ var nave = (function (_super) {
     };
     return nave;
 }(Actor));
+var nube = (function (_super) {
+    __extends(nube, _super);
+    function nube() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "nube"
+        };
+        return _this;
+    }
+    nube.prototype.iniciar = function () { };
+    return nube;
+}(Actor));
 var pared = (function (_super) {
     __extends(pared, _super);
     function pared() {
@@ -1578,8 +1599,7 @@ var ModoCargador = (function (_super) {
         this.load.image("pared", "imagenes/pared.png");
         this.load.image("plataforma", "imagenes/plataforma.png");
         this.load.image("moneda", "imagenes/moneda.png");
-        this.load.image("nube1", "imagenes/nubes/nube1.png");
-        this.load.image("nube2", "imagenes/nubes/nube2.png");
+        this.load.image("nube", "imagenes/nubes/nube.png");
         this.load.image("fondo_cielo_1", "imagenes/fondos/cielo.png");
         this.load.atlas({
             key: "spritesheet",

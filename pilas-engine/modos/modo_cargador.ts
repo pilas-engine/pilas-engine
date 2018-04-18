@@ -43,8 +43,7 @@ class ModoCargador extends Modo {
     this.load.image("plataforma", "imagenes/plataforma.png");
     this.load.image("moneda", "imagenes/moneda.png");
 
-    this.load.image("nube1", "imagenes/nubes/nube1.png");
-    this.load.image("nube2", "imagenes/nubes/nube2.png");
+    this.load.image("nube", "imagenes/nubes/nube.png");
     this.load.image("fondo_cielo_1", "imagenes/fondos/cielo.png");
 
     this.load.atlas({
