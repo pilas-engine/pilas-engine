@@ -1,4 +1,4 @@
-import { inject as service } from '@ember/service';
+import { inject as service } from "@ember/service";
 import EmberRouter from "@ember/routing/router";
 import config from "./config/environment";
 
@@ -26,7 +26,9 @@ Router.map(function() {
   this.route("pruebas");
   this.route("arduino");
   this.route("editor");
-  this.route("ejemplos");
+  this.route("ejemplos", function() {
+    this.route("ver", { path: ":nombre" });
+  });
   this.route("actores");
 });
 

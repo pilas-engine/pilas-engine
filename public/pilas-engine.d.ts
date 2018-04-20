@@ -442,15 +442,18 @@ declare class Modo extends Phaser.Scene {
     actores: any;
     pilas: Pilas;
     fps: any;
+    graphics: any;
     constructor(data: any);
     create(datos: any): void;
     destacar_actor_por_id(id: any): void;
+    crear_canvas_de_depuracion(): void;
     update(): void;
     crear_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     posicionar_la_camara(datos_de_la_escena: any): void;
     actualizar_posicion(posicion?: any): void;
+    dibujar_punto_de_control(graphics: any, x: any, y: any): void;
 }
 declare class ModoCargador extends Modo {
     pilas: Pilas;
@@ -458,12 +461,12 @@ declare class ModoCargador extends Modo {
     preload(): void;
     create(): void;
     cuando_progresa_la_carga(progreso: any): void;
+    update(): void;
 }
 declare class ModoEditor extends Modo {
     pilas: Pilas;
     ancho: number;
     alto: number;
-    graphics: any;
     modo_fisica_activado: boolean;
     constructor();
     preload(): void;
@@ -472,9 +475,7 @@ declare class ModoEditor extends Modo {
     crear_actores_desde_los_datos_de_la_escena(escena: any): void;
     crear_sprite_desde_actor(actor: any): void;
     aplicar_atributos_de_actor_a_sprite(actor: any, sprite: any): void;
-    crear_canvas_de_depuracion(): void;
     update(): void;
-    dibujar_punto_de_control(graphics: any, x: any, y: any): void;
     eliminar_actor_por_id(id: any): void;
 }
 declare class ModoEjecucion extends Modo {
@@ -503,10 +504,11 @@ declare class ModoEjecucion extends Modo {
     guardar_parametros_en_atributos(datos: any): void;
     update(): void;
     guardar_foto_de_entidades(): void;
+    dibujar_punto_de_control(graphics: any, x: any, y: any): void;
 }
 declare class ModoPausa extends Modo {
     pilas: Pilas;
-    graphics: any;
+    graphics_modo_pausa: any;
     fps: any;
     ancho: number;
     alto: number;
@@ -523,5 +525,5 @@ declare class ModoPausa extends Modo {
     update(): void;
     crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
     actualizar_posicion(posicion: any): void;
-    crear_canvas_de_depuracion(): void;
+    crear_canvas_de_depuracion_modo_pausa(): void;
 }

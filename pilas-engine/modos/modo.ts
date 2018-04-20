@@ -3,6 +3,7 @@ class Modo extends Phaser.Scene {
   actores: any;
   pilas: Pilas;
   fps: any;
+  graphics: any;
 
   constructor(data) {
     super(data);
@@ -10,6 +11,7 @@ class Modo extends Phaser.Scene {
 
   create(datos) {
     this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+    this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
   }
 
@@ -21,7 +23,21 @@ class Modo extends Phaser.Scene {
     }
   }
 
+  crear_canvas_de_depuracion() {
+    let graphics = this.add.graphics({ x: 0, y: 0 });
+    graphics.depth = 200;
+    this.graphics = graphics;
+  }
+
   update() {
+    this.graphics.clear();
+
+    if (this.pilas.depurador.modo_posicion_activado) {
+      this.actores.map(sprite => {
+        this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
+      });
+    }
+
     if (this.fps) {
       if (this.pilas.depurador.mostrar_fps) {
         this.fps.alpha = 1;
@@ -114,5 +130,12 @@ class Modo extends Phaser.Scene {
     throw Error(
       "No se puede actualizar posicion en este modo. Solo se puede en el modo pausa."
     );
+  }
+
+  dibujar_punto_de_control(graphics, x, y) {
+    graphics.fillStyle(0xffffff, 1);
+    graphics.fillRect(x - 3, y - 3, 6, 6);
+    graphics.fillStyle(0x000000, 1);
+    graphics.fillRect(x - 2, y - 2, 4, 4);
   }
 }

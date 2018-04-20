@@ -3,7 +3,7 @@
 class ModoPausa extends Modo {
   pilas: Pilas;
 
-  graphics: any;
+  graphics_modo_pausa: any;
   fps: any;
   ancho: number;
   alto: number;
@@ -30,7 +30,7 @@ class ModoPausa extends Modo {
     this.sprites = [];
     this.crear_sprites_desde_historia(this.posicion);
 
-    this.crear_canvas_de_depuracion();
+    this.crear_canvas_de_depuracion_modo_pausa();
 
     let t = this.pilas.historia.obtener_cantidad_de_posiciones();
     let datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
@@ -56,9 +56,25 @@ class ModoPausa extends Modo {
   }
 
   update() {
-    super.update();
+    this.graphics.clear();
+
     if (this.fps) {
       this.fps.alpha = 0;
+    }
+
+    if (this.pilas.depurador.modo_posicion_activado) {
+      let foto = this.pilas.historia.obtener_foto(this.posicion);
+      foto.actores.map(sprite => {
+        let {
+          x,
+          y
+        } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+          sprite.x,
+          sprite.y
+        );
+
+        this.dibujar_punto_de_control(this.graphics, x, y);
+      });
     }
   }
 
@@ -96,11 +112,13 @@ class ModoPausa extends Modo {
     this.crear_texto();
     */
 
-  crear_canvas_de_depuracion() {
-    let graphics = this.add.graphics({ x: 0, y: 0 });
-    graphics.depth = 200;
-    this.graphics = graphics;
+  crear_canvas_de_depuracion_modo_pausa() {
+    let graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });
+    graphics_modo_pausa.depth = 190;
+    this.graphics_modo_pausa = graphics_modo_pausa;
 
-    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics);
+    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(
+      graphics_modo_pausa
+    );
   }
 }

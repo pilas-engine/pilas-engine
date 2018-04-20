@@ -35,6 +35,8 @@ export default Controller.extend(queryParams.Mixin, {
     } else {
       this.crearProyectoInicial();
     }
+
+    console.info("Nota: Se puede acceder a la variable 'pilas' desde aquí.");
   },
 
   reset(_, isExiting) {

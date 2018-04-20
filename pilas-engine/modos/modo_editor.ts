@@ -7,7 +7,6 @@ class ModoEditor extends Modo {
   ancho: number = 500;
   alto: number = 500;
 
-  graphics: any;
   modo_fisica_activado: boolean;
 
   constructor() {
@@ -17,11 +16,11 @@ class ModoEditor extends Modo {
   preload() {}
 
   create(datos) {
+    super.create(datos);
     this.actores = [];
     this.pilas = datos.pilas;
 
     this.crear_fondo(datos.escena.fondo);
-    this.crear_canvas_de_depuracion();
     this.posicionar_la_camara(datos.escena);
 
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
@@ -32,6 +31,8 @@ class ModoEditor extends Modo {
     if (this.pilas.depurador.mostrar_fisica) {
       this.modo_fisica_activado = true;
       this.matter.systems.matterPhysics.world.createDebugGraphic();
+    } else {
+      this.matter.systems.matterPhysics.world.destroy();
     }
   }
 
@@ -122,21 +123,8 @@ class ModoEditor extends Modo {
     this.actualizar_sprite_desde_datos(sprite, actor);
   }
 
-  crear_canvas_de_depuracion() {
-    let graphics = this.add.graphics({ x: 0, y: 0 });
-    graphics.depth = 200;
-    this.graphics = graphics;
-  }
-
   update() {
-    this.graphics.clear();
     super.update();
-
-    if (this.pilas.depurador.modo_posicion_activado) {
-      this.actores.map(sprite => {
-        this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
-      });
-    }
 
     if (this.pilas.depurador.mostrar_fisica) {
       if (!this.modo_fisica_activado) {
@@ -144,18 +132,8 @@ class ModoEditor extends Modo {
         this.matter.systems.matterPhysics.world.createDebugGraphic();
       }
     } else {
-      if (this.modo_fisica_activado) {
-        this.modo_fisica_activado = false;
-        this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
-      }
+      this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
     }
-  }
-
-  dibujar_punto_de_control(graphics, x, y) {
-    graphics.fillStyle(0xffffff, 1);
-    graphics.fillRect(x - 3, y - 3, 6, 6);
-    graphics.fillStyle(0x000000, 1);
-    graphics.fillRect(x - 2, y - 2, 4, 4);
   }
 
   eliminar_actor_por_id(id) {

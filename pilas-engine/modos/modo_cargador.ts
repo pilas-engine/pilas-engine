@@ -8,7 +8,7 @@ class ModoCargador extends Modo {
   }
 
   preload() {
-    this.pilas = pilas;
+    this.pilas = pilas; // TODO: Este acceso no debería existir, pilas es una variable global a fines de depuración en chrome, el código de pilas no debería asumir que esta variable exista de forma global.
 
     this.load.image("pelota", "imagenes/pelota.png");
     this.load.image("logo", "imagenes/logo.png");
@@ -92,6 +92,7 @@ class ModoCargador extends Modo {
   }
 
   create() {
+    super.create({pilas: this.pilas});
     this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
 
     let msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
@@ -102,5 +103,9 @@ class ModoCargador extends Modo {
     this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
       progreso: Math.ceil(progreso * 100)
     });
+  }
+
+  update() {
+    
   }
 }

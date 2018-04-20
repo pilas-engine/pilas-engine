@@ -1503,6 +1503,7 @@ var Modo = (function (_super) {
     }
     Modo.prototype.create = function (datos) {
         this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+        this.crear_canvas_de_depuracion();
         this.pilas = datos.pilas;
     };
     Modo.prototype.destacar_actor_por_id = function (id) {
@@ -1511,7 +1512,19 @@ var Modo = (function (_super) {
             actor.destacar();
         }
     };
+    Modo.prototype.crear_canvas_de_depuracion = function () {
+        var graphics = this.add.graphics({ x: 0, y: 0 });
+        graphics.depth = 200;
+        this.graphics = graphics;
+    };
     Modo.prototype.update = function () {
+        var _this = this;
+        this.graphics.clear();
+        if (this.pilas.depurador.modo_posicion_activado) {
+            this.actores.map(function (sprite) {
+                _this.dibujar_punto_de_control(_this.graphics, sprite.x, sprite.y);
+            });
+        }
         if (this.fps) {
             if (this.pilas.depurador.mostrar_fps) {
                 this.fps.alpha = 1;
@@ -1562,6 +1575,12 @@ var Modo = (function (_super) {
     Modo.prototype.actualizar_posicion = function (posicion) {
         if (posicion === void 0) { posicion = null; }
         throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
+    };
+    Modo.prototype.dibujar_punto_de_control = function (graphics, x, y) {
+        graphics.fillStyle(0xffffff, 1);
+        graphics.fillRect(x - 3, y - 3, 6, 6);
+        graphics.fillStyle(0x000000, 1);
+        graphics.fillRect(x - 2, y - 2, 4, 4);
     };
     return Modo;
 }(Phaser.Scene));
@@ -1619,6 +1638,7 @@ var ModoCargador = (function (_super) {
         this.load.on("progress", this.cuando_progresa_la_carga, this);
     };
     ModoCargador.prototype.create = function () {
+        _super.prototype.create.call(this, { pilas: this.pilas });
         this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
         var msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
         this.add.bitmapText(5, 5, "impact", msg);
@@ -1627,6 +1647,8 @@ var ModoCargador = (function (_super) {
         this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
             progreso: Math.ceil(progreso * 100)
         });
+    };
+    ModoCargador.prototype.update = function () {
     };
     return ModoCargador;
 }(Modo));
@@ -1640,10 +1662,10 @@ var ModoEditor = (function (_super) {
     }
     ModoEditor.prototype.preload = function () { };
     ModoEditor.prototype.create = function (datos) {
+        _super.prototype.create.call(this, datos);
         this.actores = [];
         this.pilas = datos.pilas;
         this.crear_fondo(datos.escena.fondo);
-        this.crear_canvas_de_depuracion();
         this.posicionar_la_camara(datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
@@ -1651,6 +1673,9 @@ var ModoEditor = (function (_super) {
         if (this.pilas.depurador.mostrar_fisica) {
             this.modo_fisica_activado = true;
             this.matter.systems.matterPhysics.world.createDebugGraphic();
+        }
+        else {
+            this.matter.systems.matterPhysics.world.destroy();
         }
     };
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores = function () {
@@ -1718,20 +1743,8 @@ var ModoEditor = (function (_super) {
     ModoEditor.prototype.aplicar_atributos_de_actor_a_sprite = function (actor, sprite) {
         this.actualizar_sprite_desde_datos(sprite, actor);
     };
-    ModoEditor.prototype.crear_canvas_de_depuracion = function () {
-        var graphics = this.add.graphics({ x: 0, y: 0 });
-        graphics.depth = 200;
-        this.graphics = graphics;
-    };
     ModoEditor.prototype.update = function () {
-        var _this = this;
-        this.graphics.clear();
         _super.prototype.update.call(this);
-        if (this.pilas.depurador.modo_posicion_activado) {
-            this.actores.map(function (sprite) {
-                _this.dibujar_punto_de_control(_this.graphics, sprite.x, sprite.y);
-            });
-        }
         if (this.pilas.depurador.mostrar_fisica) {
             if (!this.modo_fisica_activado) {
                 this.modo_fisica_activado = true;
@@ -1739,17 +1752,8 @@ var ModoEditor = (function (_super) {
             }
         }
         else {
-            if (this.modo_fisica_activado) {
-                this.modo_fisica_activado = false;
-                this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
-            }
+            this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
         }
-    };
-    ModoEditor.prototype.dibujar_punto_de_control = function (graphics, x, y) {
-        graphics.fillStyle(0xffffff, 1);
-        graphics.fillRect(x - 3, y - 3, 6, 6);
-        graphics.fillStyle(0x000000, 1);
-        graphics.fillRect(x - 2, y - 2, 4, 4);
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
@@ -1783,7 +1787,9 @@ var ModoEjecucion = (function (_super) {
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
             this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
             this.pilas.historia.limpiar();
+            this.modo_fisica_activado = false;
             if (this.pilas.depurador.mostrar_fisica) {
+                this.modo_fisica_activado = true;
                 this.matter.systems.matterPhysics.world.createDebugGraphic();
             }
             this.input.on("pointermove", function (cursor) {
@@ -1799,6 +1805,7 @@ var ModoEjecucion = (function (_super) {
             this.vincular_eventos_de_colision();
         }
         catch (e) {
+            console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
             this.pausar = true;
         }
@@ -1811,10 +1818,7 @@ var ModoEjecucion = (function (_super) {
                     var colision = event.pairs[i];
                     var figura_1 = colision.bodyA;
                     var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject &&
-                        figura_1.gameObject.actor &&
-                        figura_2.gameObject &&
-                        figura_2.gameObject.actor) {
+                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                         var actor_a = figura_1.gameObject.actor;
                         var actor_b = figura_2.gameObject.actor;
                         actor_a.colisiones.push(actor_b);
@@ -1826,14 +1830,10 @@ var ModoEjecucion = (function (_super) {
                         }
                     }
                     else {
-                        if (figura_2.sensor_del_actor &&
-                            figura_1.gameObject &&
-                            figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
                             figura_2.colisiones.push(figura_1.gameObject.actor);
                         }
-                        if (figura_1.sensor_del_actor &&
-                            figura_2.gameObject &&
-                            figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
                             figura_1.colisiones.push(figura_2.gameObject.actor);
                         }
                     }
@@ -1849,10 +1849,7 @@ var ModoEjecucion = (function (_super) {
                 var colision = event.pairs[i];
                 var figura_1 = colision.bodyA;
                 var figura_2 = colision.bodyB;
-                if (figura_1.gameObject &&
-                    figura_1.gameObject.actor &&
-                    figura_2.gameObject &&
-                    figura_2.gameObject.actor) {
+                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                     var actor_a = figura_1.gameObject.actor;
                     var actor_b = figura_2.gameObject.actor;
                     if (actor_a.colisiones.indexOf(actor_b) === -1) {
@@ -1874,10 +1871,7 @@ var ModoEjecucion = (function (_super) {
                     var colision = event.pairs[i];
                     var figura_1 = colision.bodyA;
                     var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject &&
-                        figura_1.gameObject.actor &&
-                        figura_2.gameObject &&
-                        figura_2.gameObject.actor) {
+                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                         var actor_a = figura_1.gameObject.actor;
                         var actor_b = figura_2.gameObject.actor;
                         actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
@@ -1886,14 +1880,10 @@ var ModoEjecucion = (function (_super) {
                         actor_b.cuando_termina_una_colision(actor_a);
                     }
                     else {
-                        if (figura_2.sensor_del_actor &&
-                            figura_1.gameObject &&
-                            figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
                             figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
                         }
-                        if (figura_1.sensor_del_actor &&
-                            figura_2.gameObject &&
-                            figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
                             figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
                         }
                     }
@@ -1938,7 +1928,6 @@ var ModoEjecucion = (function (_super) {
             actor.iniciar();
         }
         else {
-            console.error(this.clases);
             var nombres_de_clases = Object.getOwnPropertyNames(this.clases);
             throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.tipo + ". Las clases disponibles son [" + nombres_de_clases.join(", ") + "]");
         }
@@ -1954,9 +1943,7 @@ var ModoEjecucion = (function (_super) {
         var re_solo_clase = /var\ (\w+)/;
         var lista_de_clases = [];
         if (codigo.match(re_creacion_de_clase)) {
-            lista_de_clases = codigo
-                .match(re_creacion_de_clase)
-                .map(function (e) { return e.match(re_solo_clase)[1]; });
+            lista_de_clases = codigo.match(re_creacion_de_clase).map(function (e) { return e.match(re_solo_clase)[1]; });
         }
         var diccionario = {};
         for (var i = 0; i < lista_de_clases.length; i++) {
@@ -1977,6 +1964,15 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.update = function () {
         _super.prototype.update.call(this);
+        if (this.pilas.depurador.mostrar_fisica) {
+            if (!this.modo_fisica_activado) {
+                this.modo_fisica_activado = true;
+                this.matter.systems.matterPhysics.world.createDebugGraphic();
+            }
+        }
+        else {
+            this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+        }
         try {
             if (this.permitir_modo_pausa) {
                 this.guardar_foto_de_entidades();
@@ -1994,6 +1990,13 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
         this.pilas.historia.serializar_escena(this.pilas.escena);
     };
+    ModoEjecucion.prototype.dibujar_punto_de_control = function (graphics, x, y) {
+        graphics.fillStyle(0xffffff, 1);
+        var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y), x = _a.x, y = _a.y;
+        graphics.fillRect(x - 3, y - 3, 6, 6);
+        graphics.fillStyle(0x000000, 1);
+        graphics.fillRect(x - 2, y - 2, 4, 4);
+    };
     return ModoEjecucion;
 }(Modo));
 var ModoPausa = (function (_super) {
@@ -2009,7 +2012,7 @@ var ModoPausa = (function (_super) {
         this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.sprites = [];
         this.crear_sprites_desde_historia(this.posicion);
-        this.crear_canvas_de_depuracion();
+        this.crear_canvas_de_depuracion_modo_pausa();
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
         var datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
         this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
@@ -2024,9 +2027,17 @@ var ModoPausa = (function (_super) {
         });
     };
     ModoPausa.prototype.update = function () {
-        _super.prototype.update.call(this);
+        var _this = this;
+        this.graphics.clear();
         if (this.fps) {
             this.fps.alpha = 0;
+        }
+        if (this.pilas.depurador.modo_posicion_activado) {
+            var foto = this.pilas.historia.obtener_foto(this.posicion);
+            foto.actores.map(function (sprite) {
+                var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(sprite.x, sprite.y), x = _a.x, y = _a.y;
+                _this.dibujar_punto_de_control(_this.graphics, x, y);
+            });
         }
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
@@ -2047,11 +2058,11 @@ var ModoPausa = (function (_super) {
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
     };
-    ModoPausa.prototype.crear_canvas_de_depuracion = function () {
-        var graphics = this.add.graphics({ x: 0, y: 0 });
-        graphics.depth = 200;
-        this.graphics = graphics;
-        this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics);
+    ModoPausa.prototype.crear_canvas_de_depuracion_modo_pausa = function () {
+        var graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });
+        graphics_modo_pausa.depth = 190;
+        this.graphics_modo_pausa = graphics_modo_pausa;
+        this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa);
     };
     return ModoPausa;
 }(Modo));
