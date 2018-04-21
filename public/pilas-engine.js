@@ -695,6 +695,10 @@ var ActorBase = (function () {
             escala_x: this.escala_x,
             escala_y: this.escala_y,
             imagen: this.imagen,
+            figura: this.figura,
+            figura_ancho: 20,
+            figura_alto: 20,
+            figura_radio: 20,
             espejado: this.espejado,
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
@@ -1556,18 +1560,25 @@ var Modo = (function (_super) {
         if (sprite.figura) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
         }
+        if (actor.figura) {
+            sprite.figura = this.crear_figura_estatica_para(actor);
+        }
+        sprite.setFlipX(actor.espejado);
+        sprite.setFlipY(actor.espejado_vertical);
+    };
+    Modo.prototype.crear_figura_estatica_para = function (actor) {
+        var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
         var angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
         if (actor.figura === "rectangulo") {
-            sprite.figura = this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
+            return this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
                 isStatic: true,
                 angle: angulo
             });
         }
         if (actor.figura === "circulo") {
-            sprite.figura = this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true });
+            return this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true });
         }
-        sprite.setFlipX(actor.espejado);
-        sprite.setFlipY(actor.espejado_vertical);
+        throw Error("No se reconoce la figura " + actor.figura + " en este modo.");
     };
     Modo.prototype.posicionar_la_camara = function (datos_de_la_escena) {
         this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
@@ -1669,14 +1680,7 @@ var ModoEditor = (function (_super) {
         this.posicionar_la_camara(datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
-        this.modo_fisica_activado = false;
-        if (this.pilas.depurador.mostrar_fisica) {
-            this.modo_fisica_activado = true;
-            this.matter.systems.matterPhysics.world.createDebugGraphic();
-        }
-        else {
-            this.matter.systems.matterPhysics.world.destroy();
-        }
+        this.matter.systems.matterPhysics.world.createDebugGraphic();
     };
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores = function () {
         var escena = this;
@@ -1746,13 +1750,10 @@ var ModoEditor = (function (_super) {
     ModoEditor.prototype.update = function () {
         _super.prototype.update.call(this);
         if (this.pilas.depurador.mostrar_fisica) {
-            if (!this.modo_fisica_activado) {
-                this.modo_fisica_activado = true;
-                this.matter.systems.matterPhysics.world.createDebugGraphic();
-            }
+            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
         }
         else {
-            this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
         }
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
@@ -2013,6 +2014,7 @@ var ModoPausa = (function (_super) {
         this.sprites = [];
         this.crear_sprites_desde_historia(this.posicion);
         this.crear_canvas_de_depuracion_modo_pausa();
+        this.matter.systems.matterPhysics.world.createDebugGraphic();
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
         var datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
         this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
@@ -2020,7 +2022,12 @@ var ModoPausa = (function (_super) {
     ModoPausa.prototype.crear_sprites_desde_historia = function (posicion) {
         var _this = this;
         var foto = this.pilas.historia.obtener_foto(posicion);
-        this.sprites.map(function (sprite) { return sprite.destroy(); });
+        this.sprites.map(function (sprite) {
+            if (sprite.figura) {
+                _this.pilas.Phaser.Physics.Matter.Matter.World.remove(_this.pilas.modo.matter.world.localWorld, sprite.figura);
+            }
+            sprite.destroy();
+        });
         this.posicionar_la_camara(foto.escena);
         this.sprites = foto.actores.map(function (entidad) {
             return _this.crear_sprite_desde_entidad(entidad);
@@ -2031,6 +2038,12 @@ var ModoPausa = (function (_super) {
         this.graphics.clear();
         if (this.fps) {
             this.fps.alpha = 0;
+        }
+        if (this.pilas.depurador.mostrar_fisica) {
+            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
+        }
+        else {
+            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
         }
         if (this.pilas.depurador.modo_posicion_activado) {
             var foto = this.pilas.historia.obtener_foto(this.posicion);
@@ -2050,6 +2063,9 @@ var ModoPausa = (function (_super) {
         sprite.alpha = 1 - entidad.transparencia / 100;
         sprite.setFlipX(entidad.espejado);
         sprite.setFlipY(entidad.espejado_vertical);
+        if (entidad.figura) {
+            sprite.figura = this.crear_figura_estatica_para(entidad);
+        }
         return sprite;
     };
     ModoPausa.prototype.actualizar_posicion = function (posicion) {

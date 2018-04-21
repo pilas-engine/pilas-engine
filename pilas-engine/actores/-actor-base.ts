@@ -82,10 +82,7 @@ class ActorBase {
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
         this.figura = figura;
 
-        this.crear_figura_rectangular(
-          propiedades.figura_ancho,
-          propiedades.figura_alto
-        );
+        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
 
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
@@ -156,6 +153,12 @@ class ActorBase {
       escala_x: this.escala_x,
       escala_y: this.escala_y,
       imagen: this.imagen,
+      figura: this.figura,
+
+      figura_ancho: 20,
+      figura_alto: 20,
+      figura_radio: 20,
+
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,
       transparencia: this.transparencia,
@@ -195,13 +198,7 @@ class ActorBase {
 
   actualizar_sensores() {
     this.sensores.map(s => {
-      let {
-        x,
-        y
-      } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-        this.x,
-        this.y
-      );
+      let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
       this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, {
         x: x + s.distancia_x,
         y: y - s.distancia_y
@@ -235,35 +232,23 @@ class ActorBase {
 
   set x(_x: number) {
     this.pilas.utilidades.validar_numero(_x);
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      _x,
-      0
-    );
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
     this.sprite.x = x;
   }
 
   get x() {
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-      this.sprite.x,
-      0
-    );
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
     return x;
   }
 
   set y(_y: number) {
     this.pilas.utilidades.validar_numero(_y);
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      0,
-      _y
-    );
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
     this.sprite.y = y;
   }
 
   get y() {
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-      0,
-      this.sprite.y
-    );
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
     return y;
   }
 
@@ -281,11 +266,7 @@ class ActorBase {
     this.sprite.scaleX = s;
 
     if (this.figura) {
-      pilas.Phaser.Physics.Matter.Matter.Body.scale(
-        this.sprite.body,
-        1 / this.escala_x,
-        1 / this.escala_y
-      );
+      pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
     }
   }
 
@@ -298,11 +279,7 @@ class ActorBase {
     this.sprite.scaleY = s;
 
     if (this.figura) {
-      pilas.Phaser.Physics.Matter.Matter.Body.scale(
-        this.sprite.body,
-        1 / this.escala_x,
-        1 / this.escala_y
-      );
+      pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
     }
   }
 
@@ -377,9 +354,7 @@ class ActorBase {
 
   fallar_si_no_tiene_figura() {
     if (!this.figura) {
-      throw Error(
-        `Este actor no tiene figura física, no se puede llamar a este método`
-      );
+      throw Error(`Este actor no tiene figura física, no se puede llamar a este método`);
     }
   }
 
@@ -562,21 +537,12 @@ class ActorBase {
   }
 
   agregar_sensor(ancho, alto, x, y) {
-    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      x,
-      y
-    );
+    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
 
-    let figura = this.pilas.modo.matter.add.rectangle(
-      pos.x,
-      pos.y,
-      ancho,
-      alto,
-      {
-        isSensor: true,
-        isStatic: false
-      }
-    );
+    let figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
+      isSensor: true,
+      isStatic: false
+    });
 
     figura.distancia_x = x;
     figura.distancia_y = y;

@@ -59,10 +59,7 @@ class Modo extends Phaser.Scene {
   }
 
   actualizar_sprite_desde_datos(sprite, actor) {
-    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      actor.x,
-      actor.y
-    );
+    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
 
     sprite.id = actor.id;
     sprite.x = coordenada.x;
@@ -74,62 +71,41 @@ class Modo extends Phaser.Scene {
     sprite.alpha = 1 - actor.transparencia / 100;
 
     if (sprite.figura) {
-      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
-        this.pilas.modo.matter.world.localWorld,
-        sprite.figura
-      );
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
     }
 
-    let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(
-      -actor.rotacion
-    );
-
-    if (actor.figura === "rectangulo") {
-      sprite.figura = this.matter.add.rectangle(
-        coordenada.x,
-        coordenada.y,
-        actor.figura_ancho,
-        actor.figura_alto,
-        {
-          isStatic: true,
-          angle: angulo
-        }
-      );
+    if (actor.figura) {
+      sprite.figura = this.crear_figura_estatica_para(actor);
     }
-
-    if (actor.figura === "circulo") {
-      sprite.figura = this.matter.add.circle(
-        coordenada.x,
-        coordenada.y,
-        actor.figura_radio,
-        { isStatic: true }
-      );
-    }
-
-    /*
-    if (sprite.figura) {
-      this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(sprite.figura, {
-        x: coordenada.x,
-        y: coordenada.y
-      });
-    }
-    */
 
     sprite.setFlipX(actor.espejado);
     sprite.setFlipY(actor.espejado_vertical);
   }
 
+  crear_figura_estatica_para(actor) {
+    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+    let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
+
+    if (actor.figura === "rectangulo") {
+      return this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
+        isStatic: true,
+        angle: angulo
+      });
+    }
+
+    if (actor.figura === "circulo") {
+      return this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true });
+    }
+
+    throw Error(`No se reconoce la figura ${actor.figura} en este modo.`);
+  }
+
   posicionar_la_camara(datos_de_la_escena) {
-    this.cameras.cameras[0].setScroll(
-      datos_de_la_escena.camara_x,
-      -datos_de_la_escena.camara_y
-    );
+    this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
   }
 
   actualizar_posicion(posicion: any = null) {
-    throw Error(
-      "No se puede actualizar posicion en este modo. Solo se puede en el modo pausa."
-    );
+    throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
   }
 
   dibujar_punto_de_control(graphics, x, y) {

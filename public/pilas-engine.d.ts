@@ -235,6 +235,10 @@ declare class ActorBase {
         escala_x: number;
         escala_y: number;
         imagen: string;
+        figura: string;
+        figura_ancho: number;
+        figura_alto: number;
+        figura_radio: number;
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
@@ -451,6 +455,7 @@ declare class Modo extends Phaser.Scene {
     crear_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
+    crear_figura_estatica_para(actor: any): any;
     posicionar_la_camara(datos_de_la_escena: any): void;
     actualizar_posicion(posicion?: any): void;
     dibujar_punto_de_control(graphics: any, x: any, y: any): void;
@@ -467,7 +472,6 @@ declare class ModoEditor extends Modo {
     pilas: Pilas;
     ancho: number;
     alto: number;
-    modo_fisica_activado: boolean;
     constructor();
     preload(): void;
     create(datos: any): void;

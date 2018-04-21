@@ -7,8 +7,6 @@ class ModoEditor extends Modo {
   ancho: number = 500;
   alto: number = 500;
 
-  modo_fisica_activado: boolean;
-
   constructor() {
     super({ key: "ModoEditor" });
   }
@@ -26,24 +24,14 @@ class ModoEditor extends Modo {
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
-    this.modo_fisica_activado = false;
-
-    if (this.pilas.depurador.mostrar_fisica) {
-      this.modo_fisica_activado = true;
-      this.matter.systems.matterPhysics.world.createDebugGraphic();
-    } else {
-      this.matter.systems.matterPhysics.world.destroy();
-    }
+    this.matter.systems.matterPhysics.world.createDebugGraphic();
   }
 
   crear_manejadores_para_hacer_arrastrables_los_actores() {
     let escena = this;
 
     this.input.on("dragstart", function(pointer, gameObject) {
-      escena.pilas.mensajes.emitir_mensaje_al_editor(
-        "comienza_a_mover_un_actor",
-        { id: gameObject.id }
-      );
+      escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
 
       if (escena.pilas.utilidades.es_firefox()) {
         escena.pilas.game.canvas.style.cursor = "grabbing";
@@ -68,14 +56,8 @@ class ModoEditor extends Modo {
 
     this.input.on("dragend", function(pointer, gameObject) {
       escena.pilas.game.canvas.style.cursor = "default";
-      let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-        gameObject.x,
-        gameObject.y
-      );
-      escena.pilas.mensajes.emitir_mensaje_al_editor(
-        "termina_de_mover_un_actor",
-        { id: gameObject.id, x: posicion.x, y: posicion.y }
-      );
+      let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
+      escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
     });
   }
 
@@ -114,6 +96,8 @@ class ModoEditor extends Modo {
       });
     };
 
+    // la siguiente función además de definir atributos genera la figura para
+    // el actor, si aplica.
     this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
     this.input.setDraggable(sprite, undefined);
     this.actores.push(sprite);
@@ -127,12 +111,9 @@ class ModoEditor extends Modo {
     super.update();
 
     if (this.pilas.depurador.mostrar_fisica) {
-      if (!this.modo_fisica_activado) {
-        this.modo_fisica_activado = true;
-        this.matter.systems.matterPhysics.world.createDebugGraphic();
-      }
+      this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
     } else {
-      this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+      this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
     }
   }
 
@@ -141,10 +122,7 @@ class ModoEditor extends Modo {
     let actor_a_eliminar = this.actores.splice(indice, 1);
 
     if (actor_a_eliminar[0].figura) {
-      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
-        this.pilas.modo.matter.world.localWorld,
-        actor_a_eliminar[0].figura
-      );
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
     }
 
     actor_a_eliminar[0].destroy();
