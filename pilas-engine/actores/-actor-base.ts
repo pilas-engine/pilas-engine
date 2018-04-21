@@ -565,7 +565,7 @@ class ActorBase {
   }
 
   set figura_ancho(valor: number) {
-    this._figura_ancho = valor;
+    throw new Error("No puede definir este atributo");
   }
 
   get figura_ancho() {
@@ -573,14 +573,15 @@ class ActorBase {
   }
 
   set figura_alto(valor: number) {
-    this._figura_alto = valor;
+    throw new Error("No puede definir este atributo");
   }
+
   get figura_alto() {
     return this._figura_alto;
   }
 
   set figura_radio(valor: number) {
-    this._figura_radio = valor;
+    throw new Error("No puede definir este atributo");
   }
 
   get figura_radio() {

@@ -1130,7 +1130,7 @@ var ActorBase = (function () {
             return this._figura_ancho;
         },
         set: function (valor) {
-            this._figura_ancho = valor;
+            throw new Error("No puede definir este atributo");
         },
         enumerable: true,
         configurable: true
@@ -1140,7 +1140,7 @@ var ActorBase = (function () {
             return this._figura_alto;
         },
         set: function (valor) {
-            this._figura_alto = valor;
+            throw new Error("No puede definir este atributo");
         },
         enumerable: true,
         configurable: true
@@ -1150,7 +1150,7 @@ var ActorBase = (function () {
             return this._figura_radio;
         },
         set: function (valor) {
-            this._figura_radio = valor;
+            throw new Error("No puede definir este atributo");
         },
         enumerable: true,
         configurable: true
