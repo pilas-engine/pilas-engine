@@ -457,7 +457,7 @@ declare class Modo extends Phaser.Scene {
     create(datos: any): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
-    update(): void;
+    update(actores: any): void;
     crear_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;

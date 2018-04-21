@@ -1559,11 +1559,12 @@ var Modo = (function (_super) {
         graphics.depth = 200;
         this.graphics = graphics;
     };
-    Modo.prototype.update = function () {
+    Modo.prototype.update = function (actores) {
         var _this = this;
         this.graphics.clear();
+        actores = actores || this.actores;
         if (this.pilas.depurador.modo_posicion_activado) {
-            this.actores.map(function (sprite) {
+            actores.map(function (sprite) {
                 _this.dibujar_punto_de_control(_this.graphics, sprite.x, sprite.y);
             });
         }
@@ -2002,7 +2003,7 @@ var ModoEjecucion = (function (_super) {
         this.permitir_modo_pausa = datos.permitir_modo_pausa;
     };
     ModoEjecucion.prototype.update = function () {
-        _super.prototype.update.call(this);
+        _super.prototype.update.call(this, this.pilas.escena.actores);
         if (this.pilas.depurador.mostrar_fisica) {
             if (!this.modo_fisica_activado) {
                 this.modo_fisica_activado = true;

@@ -29,11 +29,13 @@ class Modo extends Phaser.Scene {
     this.graphics = graphics;
   }
 
-  update() {
+  update(actores) {
     this.graphics.clear();
 
+    actores = actores || this.actores;
+
     if (this.pilas.depurador.modo_posicion_activado) {
-      this.actores.map(sprite => {
+      actores.map(sprite => {
         this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
       });
     }

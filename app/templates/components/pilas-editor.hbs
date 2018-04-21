@@ -118,9 +118,9 @@
                 <div class="h2 ba br b--gray bg-light-gray mt2">
                   {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
-                  <div class="fr {{if estado.puedeEjecutar '' 'o-60 disabled'}}">
+                  <div class="fr {{if estado.puede_modificar_depurador '' 'o-60 disabled'}}">
                     {{pilas-interruptor texto="fisica" variable=fisica}}
-                    {{pilas-interruptor texto="fps" variable=fps}}
+                    {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
                     {{pilas-interruptor texto="pos" variable=pos}}
                   </div>
 

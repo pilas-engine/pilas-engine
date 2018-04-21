@@ -264,7 +264,7 @@ class ModoEjecucion extends Modo {
   }
 
   update() {
-    super.update();
+    super.update(this.pilas.escena.actores);
 
     if (this.pilas.depurador.mostrar_fisica) {
       if (!this.modo_fisica_activado) {

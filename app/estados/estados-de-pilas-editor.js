@@ -11,6 +11,7 @@ class ModoCargando {
     this.mantenerFoco = false;
     this.puedePausar = false;
     this.puede_usar_el_interprete = false;
+    this.puede_modificar_depurador = false;
   }
 
   cuandoTerminoDeCargarPilas() {
@@ -31,6 +32,7 @@ class ModoEdicion {
     this.mantenerFoco = false;
     this.puedePausar = false;
     this.puede_usar_el_interprete = false;
+    this.puede_modificar_depurador = true;
   }
 
   ejecutar() {
@@ -54,6 +56,7 @@ class ModoEjecucion {
     this.mantenerFoco = true;
     this.puedePausar = true;
     this.puede_usar_el_interprete = true;
+    this.puede_modificar_depurador = false;
   }
 
   detener() {
@@ -81,6 +84,7 @@ class ModoPausa {
     this.mantenerFoco = true;
     this.puedePausar = false;
     this.puede_usar_el_interprete = false;
+    this.puede_modificar_depurador = true;
   }
 
   detener() {
