@@ -508,10 +508,15 @@ var Pilas = (function () {
         this.control = new Control(this);
     };
     Pilas.prototype.definir_modo = function (nombre, datos) {
-        this.game.scene.stop("ModoCargador");
-        this.game.scene.stop("ModoEjecucion");
-        this.game.scene.stop("ModoEditor");
-        this.game.scene.stop("ModoPausa");
+        try {
+            this.game.scene.stop("ModoCargador");
+            this.game.scene.stop("ModoEjecucion");
+            this.game.scene.stop("ModoEditor");
+            this.game.scene.stop("ModoPausa");
+        }
+        catch (e) {
+            console.warn(e);
+        }
         this.modo = this.game.scene.getScene(nombre);
         this.game.scene.start(nombre, datos);
     };
@@ -632,6 +637,9 @@ var ActorBase = (function () {
                 .join(".");
         }
         this.sensores = [];
+        this._figura_ancho = propiedades.figura_ancho;
+        this._figura_alto = propiedades.figura_alto;
+        this._figura_radio = propiedades.figura_radio;
         switch (figura) {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
@@ -696,9 +704,9 @@ var ActorBase = (function () {
             escala_y: this.escala_y,
             imagen: this.imagen,
             figura: this.figura,
-            figura_ancho: 20,
-            figura_alto: 20,
-            figura_radio: 20,
+            figura_ancho: this.figura_ancho,
+            figura_alto: this.figura_alto,
+            figura_radio: this.figura_radio,
             espejado: this.espejado,
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
@@ -1117,6 +1125,36 @@ var ActorBase = (function () {
     ActorBase.prototype.eliminar = function () {
         this._vivo = false;
     };
+    Object.defineProperty(ActorBase.prototype, "figura_ancho", {
+        get: function () {
+            return this._figura_ancho;
+        },
+        set: function (valor) {
+            this._figura_ancho = valor;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "figura_alto", {
+        get: function () {
+            return this._figura_alto;
+        },
+        set: function (valor) {
+            this._figura_alto = valor;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "figura_radio", {
+        get: function () {
+            return this._figura_radio;
+        },
+        set: function (valor) {
+            this._figura_radio = valor;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ActorBase;
 }());
 var Actor = (function (_super) {

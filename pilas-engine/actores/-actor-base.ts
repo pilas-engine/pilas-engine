@@ -11,6 +11,9 @@ class ActorBase {
   _etiqueta: string = null;
   _vivo: boolean = true;
   _animacion_en_curso: string = "";
+  _figura_ancho: number;
+  _figura_alto: number;
+  _figura_radio: number;
 
   propiedades_base = {
     x: 0,
@@ -76,6 +79,9 @@ class ActorBase {
     }
 
     this.sensores = [];
+    this._figura_ancho = propiedades.figura_ancho;
+    this._figura_alto = propiedades.figura_alto;
+    this._figura_radio = propiedades.figura_radio;
 
     switch (figura) {
       case "rectangulo":
@@ -153,11 +159,11 @@ class ActorBase {
       escala_x: this.escala_x,
       escala_y: this.escala_y,
       imagen: this.imagen,
-      figura: this.figura,
 
-      figura_ancho: 20,
-      figura_alto: 20,
-      figura_radio: 20,
+      figura: this.figura,
+      figura_ancho: this.figura_ancho,
+      figura_alto: this.figura_alto,
+      figura_radio: this.figura_radio,
 
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,
@@ -556,5 +562,28 @@ class ActorBase {
 
   eliminar() {
     this._vivo = false;
+  }
+
+  set figura_ancho(valor: number) {
+    this._figura_ancho = valor;
+  }
+
+  get figura_ancho() {
+    return this._figura_ancho;
+  }
+
+  set figura_alto(valor: number) {
+    this._figura_alto = valor;
+  }
+  get figura_alto() {
+    return this._figura_alto;
+  }
+
+  set figura_radio(valor: number) {
+    this._figura_radio = valor;
+  }
+
+  get figura_radio() {
+    return this._figura_radio;
   }
 }

@@ -198,6 +198,9 @@ declare class ActorBase {
     _etiqueta: string;
     _vivo: boolean;
     _animacion_en_curso: string;
+    _figura_ancho: number;
+    _figura_alto: number;
+    _figura_radio: number;
     propiedades_base: {
         x: number;
         y: number;
@@ -287,6 +290,9 @@ declare class ActorBase {
     readonly cantidad_de_colisiones: number;
     agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
     eliminar(): void;
+    figura_ancho: number;
+    figura_alto: number;
+    figura_radio: number;
 }
 declare class Actor extends ActorBase {
     propiedades: {};

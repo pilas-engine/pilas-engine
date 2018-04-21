@@ -61,10 +61,15 @@ class Pilas {
   }
 
   definir_modo(nombre, datos) {
-    this.game.scene.stop("ModoCargador");
-    this.game.scene.stop("ModoEjecucion");
-    this.game.scene.stop("ModoEditor");
-    this.game.scene.stop("ModoPausa");
+    try {
+      this.game.scene.stop("ModoCargador");
+      this.game.scene.stop("ModoEjecucion");
+      this.game.scene.stop("ModoEditor");
+      this.game.scene.stop("ModoPausa");
+    } catch (e) {
+      console.warn(e);
+    }
+
     this.modo = this.game.scene.getScene(nombre);
     this.game.scene.start(nombre, datos);
   }
@@ -110,10 +115,7 @@ class Pilas {
   }
 
   obtener_actores_en(_x: number, _y: number) {
-    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      _x,
-      _y
-    );
+    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
     let actores = this.obtener_actores();
 
     return actores.filter(actor => {
