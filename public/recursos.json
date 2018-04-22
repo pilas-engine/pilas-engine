@@ -1,0 +1,176 @@
+{
+  "imagenes": [
+    {
+      "nombre": "fondo_cielo_1",
+      "ruta": "imagenes/fondos/cielo.png"
+    },
+    {
+      "nombre": "plano",
+      "ruta": "imagenes/fondos/plano.png"
+    },
+    {
+      "nombre": "pelota",
+      "ruta": "imagenes/pelota.png"
+    },
+    {
+      "nombre": "logo",
+      "ruta": "imagenes/logo.png"
+    },
+    {
+      "nombre": "sin_imagen",
+      "ruta": "imagenes/sin_imagen.png"
+    },
+    {
+      "nombre": "caja",
+      "ruta": "imagenes/caja.png"
+    },
+    {
+      "nombre": "aceituna",
+      "ruta": "imagenes/aceituna.png"
+    },
+    {
+      "nombre": "nave",
+      "ruta": "imagenes/nave.png"
+    },
+
+    {
+      "nombre": "nave",
+      "ruta": "imagenes/nave.png"
+    },
+
+    {
+      "nombre": "conejo",
+      "ruta": "imagenes/conejo.png"
+    },
+    {
+      "nombre": "conejo_muere",
+      "ruta": "imagenes/conejo/muere.png"
+    },
+    {
+      "nombre": "conejo_salta",
+      "ruta": "imagenes/conejo/salta.png"
+    },
+    {
+      "nombre": "conejo_parado1",
+      "ruta": "imagenes/conejo/parado1.png"
+    },
+    {
+      "nombre": "conejo_parado2",
+      "ruta": "imagenes/conejo/parado2.png"
+    },
+    {
+      "nombre": "conejo_camina1",
+      "ruta": "imagenes/conejo/camina1.png"
+    },
+    {
+      "nombre": "conejo_camina2",
+      "ruta": "imagenes/conejo/camina2.png"
+    },
+
+    {
+      "nombre": "nave_en_reposo",
+      "ruta": "imagenes/nave/nave_reposo.png"
+    },
+    {
+      "nombre": "nave_avanza_1",
+      "ruta": "imagenes/nave/nave_avanza_1.png"
+    },
+    {
+      "nombre": "nave_avanza_2",
+      "ruta": "imagenes/nave/nave_avanza_2.png"
+    },
+    {
+      "nombre": "nave_derecha_1",
+      "ruta": "imagenes/nave/nave_derecha_1.png"
+    },
+    {
+      "nombre": "nave_derecha_2",
+      "ruta": "imagenes/nave/nave_derecha_2.png"
+    },
+    {
+      "nombre": "nave_izquierda_1",
+      "ruta": "imagenes/nave/nave_izquierda_1.png"
+    },
+    {
+      "nombre": "nave_izquierda_2",
+      "ruta": "imagenes/nave/nave_izquierda_2.png"
+    },
+
+    {
+      "nombre": "suelo",
+      "ruta": "imagenes/suelo.png"
+    },
+    {
+      "nombre": "techo",
+      "ruta": "imagenes/techo.png"
+    },
+    {
+      "nombre": "pared",
+      "ruta": "imagenes/pared.png"
+    },
+
+    {
+      "nombre": "plataforma",
+      "ruta": "imagenes/plataforma.png"
+    },
+    {
+      "nombre": "moneda",
+      "ruta": "imagenes/moneda.png"
+    },
+
+    {
+      "nombre": "nube",
+      "ruta": "imagenes/nubes/nube.png"
+    }
+  ],
+
+  "fuentes": [
+    {
+      "nombre": "font",
+      "imagen": "fuentes/font.png",
+      "fuente": "fuentes/font.fnt"
+    },
+    {
+      "nombre": "verdana3",
+      "imagen": "fuentes/verdana3.png",
+      "fuente": "fuentes/verdana3.fnt"
+    },
+    {
+      "nombre": "azul",
+      "imagen": "fuentes/azul.png",
+      "fuente": "fuentes/azul.fnt"
+    },
+    {
+      "nombre": "impact",
+      "imagen": "fuentes/impact.png",
+      "fuente": "fuentes/impact.fnt"
+    }
+  ],
+
+  "sonidos": [
+    {
+      "nombre": "laser",
+      "ruta": "sonidos/laser.wav"
+    },
+    {
+      "nombre": "moneda",
+      "ruta": "sonidos/moneda.wav"
+    },
+    {
+      "nombre": "salto-corto",
+      "ruta": "sonidos/salto-corto.wav"
+    },
+    {
+      "nombre": "salto-largo",
+      "ruta": "sonidos/salto-largo.wav"
+    },
+    {
+      "nombre": "seleccion-aguda",
+      "ruta": "sonidos/seleccion-aguda.wav"
+    },
+    {
+      "nombre": "seleccion-grave",
+      "ruta": "sonidos/seleccion-grave.wav"
+    }
+  ]
+}

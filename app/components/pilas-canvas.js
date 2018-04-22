@@ -7,6 +7,7 @@ import utils from "../utils/utils";
 export default Component.extend({
   bus: service(),
   log: service(),
+  recursos: service(),
   ancho: 400,
   alto: 400,
   estado: null,
@@ -38,7 +39,8 @@ export default Component.extend({
       let data = {
         tipo: "iniciar_pilas",
         ancho: this.get("ancho"),
-        alto: this.get("alto")
+        alto: this.get("alto"),
+        recursos: this.get("recursos.data")
       };
 
       this.set("funcionParaAtenderMensajes", e => {

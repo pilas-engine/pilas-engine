@@ -142,6 +142,7 @@ declare class Pilas {
     actores: Actores;
     animaciones: Animaciones;
     Phaser: any;
+    recursos: any;
     fisica: Fisica;
     modo: any;
     _ancho: number;
@@ -150,7 +151,7 @@ declare class Pilas {
     cursor_y: number;
     constructor();
     readonly escena: Escena;
-    iniciar_phaser(ancho: number, alto: number): void;
+    iniciar_phaser(ancho: number, alto: number, recursos: any): void;
     definir_modo(nombre: any, datos: any): void;
     crear_configuracion(ancho: any, alto: any): {
         type: number;

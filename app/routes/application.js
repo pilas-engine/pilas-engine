@@ -1,5 +1,6 @@
-import $ from 'jquery';
-import { inject as service } from '@ember/service';
+import $ from "jquery";
+import { inject as service } from "@ember/service";
+import { hash } from "rsvp";
 import Route from "@ember/routing/route";
 import config from "../config/environment";
 
@@ -9,6 +10,7 @@ export default Route.extend({
   log: service(),
   actores: service(),
   estadisticas: service(),
+  recursos: service(),
 
   model() {
     this.get("electron").iniciar();
@@ -16,7 +18,10 @@ export default Route.extend({
     this.get("log").iniciar();
     this.get("estadisticas").iniciar();
 
-    return this.get("actores").iniciar();
+    return hash({
+      actores: this.get("actores").iniciar(),
+      recursos: this.get("recursos").iniciar()
+    });
   },
 
   afterModel() {

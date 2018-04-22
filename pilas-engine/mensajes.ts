@@ -29,7 +29,7 @@ class Mensajes {
   }
 
   atender_mensaje_iniciar_pilas(datos) {
-    this.pilas.iniciar_phaser(datos.ancho, datos.alto);
+    this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos);
   }
 
   atender_mensaje_definir_estados_de_depuracion(datos) {

@@ -324,7 +324,7 @@ var Mensajes = (function () {
         }
     };
     Mensajes.prototype.atender_mensaje_iniciar_pilas = function (datos) {
-        this.pilas.iniciar_phaser(datos.ancho, datos.alto);
+        this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos);
     };
     Mensajes.prototype.atender_mensaje_definir_estados_de_depuracion = function (datos) {
         this.pilas.depurador.definir_estados_de_depuracion(datos);
@@ -498,8 +498,9 @@ var Pilas = (function () {
         enumerable: true,
         configurable: true
     });
-    Pilas.prototype.iniciar_phaser = function (ancho, alto) {
+    Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos) {
         var self = this;
+        this.recursos = recursos;
         var configuracion = this.crear_configuracion(ancho, alto);
         var game = new Phaser.Game(configuracion);
         this._ancho = ancho;
@@ -1641,50 +1642,18 @@ var ModoCargador = (function (_super) {
     }
     ModoCargador.prototype.preload = function () {
         this.pilas = pilas;
-        this.load.image("pelota", "imagenes/pelota.png");
-        this.load.image("logo", "imagenes/logo.png");
-        this.load.image("sin_imagen", "imagenes/sin_imagen.png");
-        this.load.image("caja", "imagenes/caja.png");
-        this.load.image("aceituna", "imagenes/aceituna.png");
-        this.load.image("plano", "imagenes/fondos/plano.png");
-        this.load.image("nave", "imagenes/nave.png");
-        this.load.image("nave", "imagenes/nave.png");
-        this.load.image("conejo", "imagenes/conejo.png");
-        this.load.image("conejo_muere", "imagenes/conejo/muere.png");
-        this.load.image("conejo_salta", "imagenes/conejo/salta.png");
-        this.load.image("conejo_parado1", "imagenes/conejo/parado1.png");
-        this.load.image("conejo_parado2", "imagenes/conejo/parado2.png");
-        this.load.image("conejo_camina1", "imagenes/conejo/camina1.png");
-        this.load.image("conejo_camina2", "imagenes/conejo/camina2.png");
-        this.load.image("nave_en_reposo", "imagenes/nave/nave_reposo.png");
-        this.load.image("nave_avanza_1", "imagenes/nave/nave_avanza_1.png");
-        this.load.image("nave_avanza_2", "imagenes/nave/nave_avanza_2.png");
-        this.load.image("nave_derecha_1", "imagenes/nave/nave_derecha_1.png");
-        this.load.image("nave_derecha_2", "imagenes/nave/nave_derecha_2.png");
-        this.load.image("nave_izquierda_1", "imagenes/nave/nave_izquierda_1.png");
-        this.load.image("nave_izquierda_2", "imagenes/nave/nave_izquierda_2.png");
-        this.load.image("suelo", "imagenes/suelo.png");
-        this.load.image("techo", "imagenes/techo.png");
-        this.load.image("pared", "imagenes/pared.png");
-        this.load.image("plataforma", "imagenes/plataforma.png");
-        this.load.image("moneda", "imagenes/moneda.png");
-        this.load.image("nube", "imagenes/nubes/nube.png");
-        this.load.image("fondo_cielo_1", "imagenes/fondos/cielo.png");
-        this.load.atlas({
-            key: "spritesheet",
-            texture: "imagenes_agrupadas/spritesheet.png",
-            data: "imagenes_agrupadas/spritesheet.json"
-        });
-        this.load.audio("laser", "sonidos/laser.wav", {});
-        this.load.audio("moneda", "sonidos/moneda.wav", {});
-        this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});
-        this.load.audio("salto-largo", "sonidos/salto-largo.wav", {});
-        this.load.audio("seleccion-aguda", "sonidos/seleccion-aguda.wav", {});
-        this.load.audio("seleccion-grave", "sonidos/seleccion-grave.wav", {});
-        this.load.bitmapFont("font", "fuentes/font.png", "fuentes/font.fnt", null, null);
-        this.load.bitmapFont("verdana3", "fuentes/verdana3.png", "fuentes/verdana3.fnt", null, null);
-        this.load.bitmapFont("azul", "fuentes/azul.png", "fuentes/azul.fnt", null, null);
-        this.load.bitmapFont("impact", "fuentes/impact.png", "fuentes/impact.fnt", null, null);
+        for (var i = 0; i < pilas.recursos.imagenes.length; i++) {
+            var item = pilas.recursos.imagenes[i];
+            this.load.image(item.nombre, item.ruta);
+        }
+        for (var i = 0; i < pilas.recursos.sonidos.length; i++) {
+            var sonido = pilas.recursos.sonidos[i];
+            this.load.audio(sonido.nombre, sonido.ruta, {});
+        }
+        for (var i = 0; i < pilas.recursos.fuentes.length; i++) {
+            var fuente = pilas.recursos.fuentes[i];
+            this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
+        }
         this.load.on("progress", this.cuando_progresa_la_carga, this);
     };
     ModoCargador.prototype.create = function () {
@@ -1698,8 +1667,7 @@ var ModoCargador = (function (_super) {
             progreso: Math.ceil(progreso * 100)
         });
     };
-    ModoCargador.prototype.update = function () {
-    };
+    ModoCargador.prototype.update = function () { };
     return ModoCargador;
 }(Modo));
 var ModoEditor = (function (_super) {

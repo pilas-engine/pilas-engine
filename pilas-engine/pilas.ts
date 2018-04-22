@@ -20,6 +20,8 @@ class Pilas {
   animaciones: Animaciones;
   Phaser: any;
 
+  recursos: any;
+
   fisica: Fisica;
 
   modo: any;
@@ -47,8 +49,10 @@ class Pilas {
     return this.escenas.escena_actual;
   }
 
-  iniciar_phaser(ancho: number, alto: number) {
+  iniciar_phaser(ancho: number, alto: number, recursos: any) {
     let self = this;
+
+    this.recursos = recursos;
     var configuracion = this.crear_configuracion(ancho, alto);
 
     var game = new Phaser.Game(configuracion);

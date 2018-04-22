@@ -10,89 +10,36 @@ class ModoCargador extends Modo {
   preload() {
     this.pilas = pilas; // TODO: Este acceso no debería existir, pilas es una variable global a fines de depuración en chrome, el código de pilas no debería asumir que esta variable exista de forma global.
 
-    this.load.image("pelota", "imagenes/pelota.png");
-    this.load.image("logo", "imagenes/logo.png");
-    this.load.image("sin_imagen", "imagenes/sin_imagen.png");
-    this.load.image("caja", "imagenes/caja.png");
-    this.load.image("aceituna", "imagenes/aceituna.png");
-    this.load.image("plano", "imagenes/fondos/plano.png");
-    this.load.image("nave", "imagenes/nave.png");
+    for (let i = 0; i < pilas.recursos.imagenes.length; i++) {
+      let item = pilas.recursos.imagenes[i];
+      this.load.image(item.nombre, item.ruta);
+    }
 
-    this.load.image("nave", "imagenes/nave.png");
+    for (let i = 0; i < pilas.recursos.sonidos.length; i++) {
+      let sonido = pilas.recursos.sonidos[i];
+      this.load.audio(sonido.nombre, sonido.ruta, {});
+    }
 
-    this.load.image("conejo", "imagenes/conejo.png");
-    this.load.image("conejo_muere", "imagenes/conejo/muere.png");
-    this.load.image("conejo_salta", "imagenes/conejo/salta.png");
-    this.load.image("conejo_parado1", "imagenes/conejo/parado1.png");
-    this.load.image("conejo_parado2", "imagenes/conejo/parado2.png");
-    this.load.image("conejo_camina1", "imagenes/conejo/camina1.png");
-    this.load.image("conejo_camina2", "imagenes/conejo/camina2.png");
-
-    this.load.image("nave_en_reposo", "imagenes/nave/nave_reposo.png");
-    this.load.image("nave_avanza_1", "imagenes/nave/nave_avanza_1.png");
-    this.load.image("nave_avanza_2", "imagenes/nave/nave_avanza_2.png");
-    this.load.image("nave_derecha_1", "imagenes/nave/nave_derecha_1.png");
-    this.load.image("nave_derecha_2", "imagenes/nave/nave_derecha_2.png");
-    this.load.image("nave_izquierda_1", "imagenes/nave/nave_izquierda_1.png");
-    this.load.image("nave_izquierda_2", "imagenes/nave/nave_izquierda_2.png");
-
-    this.load.image("suelo", "imagenes/suelo.png");
-    this.load.image("techo", "imagenes/techo.png");
-    this.load.image("pared", "imagenes/pared.png");
-
-    this.load.image("plataforma", "imagenes/plataforma.png");
-    this.load.image("moneda", "imagenes/moneda.png");
-
-    this.load.image("nube", "imagenes/nubes/nube.png");
-    this.load.image("fondo_cielo_1", "imagenes/fondos/cielo.png");
-
+    /*
     this.load.atlas({
       key: "spritesheet",
       texture: "imagenes_agrupadas/spritesheet.png",
       data: "imagenes_agrupadas/spritesheet.json"
     });
 
-    this.load.audio("laser", "sonidos/laser.wav", {});
-    this.load.audio("moneda", "sonidos/moneda.wav", {});
-    this.load.audio("salto-corto", "sonidos/salto-corto.wav", {});
-    this.load.audio("salto-largo", "sonidos/salto-largo.wav", {});
-    this.load.audio("seleccion-aguda", "sonidos/seleccion-aguda.wav", {});
-    this.load.audio("seleccion-grave", "sonidos/seleccion-grave.wav", {});
+;
+    */
 
-    this.load.bitmapFont(
-      "font",
-      "fuentes/font.png",
-      "fuentes/font.fnt",
-      null,
-      null
-    );
-    this.load.bitmapFont(
-      "verdana3",
-      "fuentes/verdana3.png",
-      "fuentes/verdana3.fnt",
-      null,
-      null
-    );
-    this.load.bitmapFont(
-      "azul",
-      "fuentes/azul.png",
-      "fuentes/azul.fnt",
-      null,
-      null
-    );
-    this.load.bitmapFont(
-      "impact",
-      "fuentes/impact.png",
-      "fuentes/impact.fnt",
-      null,
-      null
-    );
+    for (let i = 0; i < pilas.recursos.fuentes.length; i++) {
+      let fuente = pilas.recursos.fuentes[i];
+      this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
+    }
 
     this.load.on("progress", this.cuando_progresa_la_carga, this);
   }
 
   create() {
-    super.create({pilas: this.pilas});
+    super.create({ pilas: this.pilas });
     this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
 
     let msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
@@ -105,7 +52,5 @@ class ModoCargador extends Modo {
     });
   }
 
-  update() {
-    
-  }
+  update() {}
 }
