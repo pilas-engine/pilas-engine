@@ -14,13 +14,13 @@ export default Component.extend({
   error: false,
 
   version_simplificada: computed("version", function() {
-    return this.get("version")
+    return this.version
       .replace("v", "")
       .split("+")[0];
   }),
 
   didInsertElement() {
-    this.get("consultar_ultima_version_publicada").perform();
+    this.consultar_ultima_version_publicada.perform();
   },
 
   consultar_ultima_version_publicada: task(function*() {
@@ -32,7 +32,7 @@ export default Component.extend({
     try {
       let data = yield $.ajax({ url: url });
       this.set("version_en_el_servidor", data.tag_name);
-      this.set("actualizada", "v" + this.get("version") >= data.tag_name);
+      this.set("actualizada", "v" + this.version >= data.tag_name);
     } catch (e) {
       this.set("error", "No se puede consultar la última versión.");
     } finally {

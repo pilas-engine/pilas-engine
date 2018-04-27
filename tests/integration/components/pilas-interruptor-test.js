@@ -1,16 +1,17 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-interruptor", "Integration | Component | pilas interruptor", {
-  integration: true
-});
+module("Integration | Component | pilas interruptor", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.render(hbs`{{pilas-interruptor variable=true texto='demo'}}`);
-  assert.ok(
-    this.$()
-      .text()
-      .trim()
-      .indexOf("demo") > -1
-  );
+  test("it renders", async function(assert) {
+    await render(hbs`{{pilas-interruptor variable=true texto='demo'}}`);
+    assert.ok(
+      find('*').textContent
+        .trim()
+        .indexOf("demo") > -1
+    );
+  });
 });

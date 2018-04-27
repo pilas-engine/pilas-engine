@@ -1,29 +1,35 @@
+import { click, currentURL, visit } from "@ember/test-helpers";
 import $ from "jquery";
-import { test } from "qunit";
-import moduleForAcceptance from "pilas-engine/tests/helpers/module-for-acceptance";
+import { module, test } from "qunit";
+import { setupApplicationTest } from "ember-qunit";
+import pulsar from "../helpers/pulsar";
+import esperarElemento from "../helpers/esperar-elemento";
+import esperar from "../helpers/esperar";
 
-moduleForAcceptance("Acceptance | puede ingresar al editor");
+module("Acceptance | puede ingresar al editor", function(hooks) {
+  setupApplicationTest(hooks);
 
-const PAUSA = 2;
+  const PAUSA = 2;
 
-test("puede ingresar al editor y eliminar una escena", async function(assert) {
-  await visit("/");
+  test("puede ingresar al editor y eliminar una escena", async function(assert) {
+    await visit("/");
 
-  await pulsar("Abrir el editor");
-  assert.equal(currentURL(), "/editor");
+    await pulsar("Abrir el editor");
+    assert.equal(currentURL(), "/editor");
 
-  await esperarElemento("a#ejecutar");
+    await esperarElemento("a#ejecutar");
 
-  await pulsar("Ejecutar");
-  await esperar(PAUSA);
+    await pulsar("Ejecutar");
+    await esperar(PAUSA);
 
-  await pulsar("Detener");
-  await esperar(PAUSA);
+    await pulsar("Detener");
+    await esperar(PAUSA);
 
-  assert.equal($("[data-test='nombre-de-escena']").text(), "escena1escena2");
+    assert.equal($("[data-test='nombre-de-escena']").text(), "escena1escena2");
 
-  await click("#boton-eliminar-escena");
-  await pulsar("Si");
-  assert.equal($("[data-test='nombre-de-escena']").text(), "escena2");
-  await esperar(PAUSA);
+    await click("#boton-eliminar-escena");
+    await pulsar("Si");
+    assert.equal($("[data-test='nombre-de-escena']").text(), "escena2");
+    await esperar(PAUSA);
+  });
 });

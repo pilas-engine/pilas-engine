@@ -7,8 +7,8 @@ export default Component.extend({
       // Solo si se especifica una acción, intenta respetar
       // "data down, actions ups" sin tocar por si mismo el argumento que
       // recibe.
-      if (this.get("cuandoCambia")) {
-        this.get("cuandoCambia")(!this.get("variable"));
+      if (this.cuandoCambia) {
+        this.cuandoCambia(!this.variable);
       } else {
         this.toggleProperty("variable");
       }

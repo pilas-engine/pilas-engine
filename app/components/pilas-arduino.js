@@ -32,7 +32,7 @@ export default Component.extend({
 
         for (let i = 0; i < dispositivos.length; i++) {
           if (/Arduino/.test(dispositivos[i].manufacturer)) {
-            if (this.get("haConectadoAlgunaVez")) {
+            if (this.haConectadoAlgunaVez) {
               this.set("mostrarErrorDeReConexion", true);
             }
 
@@ -50,7 +50,7 @@ export default Component.extend({
     this.set("dispositivos", []);
 
     if (window.enElectron) {
-      this.get("tareaListarDispositivos").perform({});
+      this.tareaListarDispositivos.perform({});
 
       var board = new five.Board({
         repl: false,
@@ -83,13 +83,13 @@ export default Component.extend({
   },
   actions: {
     prenderLed() {
-      let five = this.get("five");
+      let five = this.five;
       var led = new five.Led(13);
       led.on();
     },
 
     apagarLed() {
-      let five = this.get("five");
+      let five = this.five;
       var led = new five.Led(13);
       led.off();
     }

@@ -21,8 +21,8 @@ export default Component.extend({
       }
     });
 
-    this.get("bus").on("finaliza_carga", this, "finaliza_carga");
-    this.get("log").limpiar();
+    this.bus.on("finaliza_carga", this, "finaliza_carga");
+    this.log.limpiar();
   },
 
   finaliza_carga(pilas, contexto) {
@@ -31,20 +31,20 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this.get("bus").off("finaliza_carga", this, "finaliza_carga");
+    this.bus.off("finaliza_carga", this, "finaliza_carga");
   },
 
   autocompletar(termino, success) {
-    success(autocompletar(this.get("contexto"), termino));
+    success(autocompletar(this.contexto, termino));
   },
 
   actions: {
     cuandoPulsaEnter() {
-      let v = this.get("valor");
+      let v = this.valor;
 
-      if (!this.get("habilitado")) {
-        this.get("log").limpiar();
-        this.get("log").info("Pulse Ejecutar para usar el intérprete.");
+      if (!this.habilitado) {
+        this.log.limpiar();
+        this.log.info("Pulse Ejecutar para usar el intérprete.");
         return;
       }
 
@@ -55,10 +55,10 @@ export default Component.extend({
         let resultado = null;
 
         try {
-          resultado = this.get("contexto").eval(v);
-          this.get("log").info(resultado);
+          resultado = this.contexto.eval(v);
+          this.log.info(resultado);
         } catch (error) {
-          this.get("log").error(error);
+          this.log.error(error);
         }
       }
     },
@@ -77,17 +77,17 @@ export default Component.extend({
   },
 
   cargar_al_historial(sentencia) {
-    this.get("historial").pushObject(sentencia);
-    this.set("posicion_en_el_historial", this.get("historial").length);
+    this.historial.pushObject(sentencia);
+    this.set("posicion_en_el_historial", this.historial.length);
   },
 
   cargar_sentencia_del_historial(desplazamiento) {
-    let historial = this.get("historial");
-    let posicionSolicitada = this.get("posicion_en_el_historial") + desplazamiento;
+    let historial = this.historial;
+    let posicionSolicitada = this.posicion_en_el_historial + desplazamiento;
     let posicion = Math.min(Math.max(0, posicionSolicitada), historial.length);
 
-    if (this.get("posicion_en_el_historial") !== posicion) {
-      this.set("valor", this.get("historial")[posicion]);
+    if (this.posicion_en_el_historial !== posicion) {
+      this.set("valor", this.historial[posicion]);
       this.set("posicion_en_el_historial", posicion);
     }
   }

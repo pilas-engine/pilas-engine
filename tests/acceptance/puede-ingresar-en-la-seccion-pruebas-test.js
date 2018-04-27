@@ -1,12 +1,13 @@
-import { test } from "qunit";
-import moduleForAcceptance from "pilas-engine/tests/helpers/module-for-acceptance";
+import { currentURL, visit } from '@ember/test-helpers';
+import { module, test } from "qunit";
+import { setupApplicationTest } from 'ember-qunit';
 
-moduleForAcceptance("Acceptance | puede ingresar en la seccion pruebas");
+module("Acceptance | puede ingresar en la seccion pruebas", function(hooks) {
+  setupApplicationTest(hooks);
 
-test("visiting /puede-ingresar-en-la-seccion-pruebas", function(assert) {
-  visit("/pruebas");
+  test("visiting /puede-ingresar-en-la-seccion-pruebas", async function(assert) {
+    await visit("/pruebas");
 
-  andThen(function() {
     assert.equal(currentURL(), "/pruebas");
   });
 });

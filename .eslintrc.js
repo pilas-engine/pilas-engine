@@ -9,6 +9,9 @@ module.exports = {
   env: {
     browser: true
   },
+  rules: {
+    "no-console": 0
+  },
   globals: {
     requireNode: true,
     ts: true,
@@ -17,10 +20,8 @@ module.exports = {
     pulsar: true,
     autoComplete: true,
     ga: true,
+    hacerClick: true,
     esperarElemento: true
-  },
-  rules: {
-    "no-console": 0
   },
   overrides: [
     // node files

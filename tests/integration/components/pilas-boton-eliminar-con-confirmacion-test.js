@@ -1,16 +1,20 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, click, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-boton-eliminar-con-confirmacion", "Integration | Component | pilas boton eliminar con confirmacion", {
-  integration: true
-});
+module("Integration | Component | pilas boton eliminar con confirmacion", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.set("accion", () => {});
+  test("it renders", async function(assert) {
+    this.set("accion", () => {});
 
-  this.render(hbs`{{pilas-boton-eliminar-con-confirmacion tipo='escena' titulo="¿Realmente quieres eliminar la escena?" accion=accion}}`);
-  assert.ok(this.$().text());
+    await render(
+      hbs`{{pilas-boton-eliminar-con-confirmacion tipo='escena' titulo="¿Realmente quieres eliminar la escena?" accion=accion}}`
+    );
+    assert.ok(find('*').textContent);
 
-  this.$("#boton-eliminar-escena").click();
-  assert.equal(this.$("#titulo").text(), "Cuidado");
+    await click("#boton-eliminar-escena");
+    assert.equal(find("#titulo").textContent, "Cuidado");
+  });
 });

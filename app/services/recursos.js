@@ -2,9 +2,9 @@ import $ from "jquery";
 import Service from "@ember/service";
 import config from "pilas-engine/config/environment";
 import { task, timeout } from "ember-concurrency";
+import { Promise as EmberPromise } from "rsvp";
 
 export default Service.extend({
-  iniciado: false,
   data: null,
   lista_de_actores: null,
 
@@ -22,6 +22,16 @@ export default Service.extend({
   }).drop(),
 
   iniciar() {
-    return this.get("tarea").perform();
+    if (!this.get("data")) {
+      return this.tarea.perform();
+    } else {
+      return this.generar_respuesta_como_promesa_inmediata();
+    }
+  },
+
+  generar_respuesta_como_promesa_inmediata() {
+    return new EmberPromise(success => {
+      success(this.get("data"));
+    });
   }
 });

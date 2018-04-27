@@ -1,7 +1,5 @@
 export default function obtener_nombre_sin_repetir(todos_los_nombres, nombre) {
-  let nombres_que_podrian_colisionar = todos_los_nombres.filter(
-    nombre => nombre.indexOf(nombre) > -1
-  );
+  let nombres_que_podrian_colisionar = todos_los_nombres.filter(nombre => nombre.indexOf(nombre) > -1);
 
   nombre = nombre.replace(/[0-9]/g, "");
 
@@ -9,7 +7,7 @@ export default function obtener_nombre_sin_repetir(todos_los_nombres, nombre) {
     return nombre;
   }
 
-  colisiona = nombres_que_podrian_colisionar.includes(nombre);
+  let colisiona = nombres_que_podrian_colisionar.includes(nombre);
 
   if (!colisiona) {
     return nombre;
@@ -17,7 +15,7 @@ export default function obtener_nombre_sin_repetir(todos_los_nombres, nombre) {
 
   let idPropuesto = 0;
   let nombrePropuesto = null;
-  let colisiona = true;
+  colisiona = true;
 
   while (colisiona) {
     idPropuesto += 1;

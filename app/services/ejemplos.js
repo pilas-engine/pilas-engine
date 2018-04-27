@@ -7,8 +7,8 @@ export default Service.extend({
   cache: null,
 
   tarea: task(function*() {
-    if (this.get('cache')) {
-      return this.get('cache');
+    if (this.cache) {
+      return this.cache;
     }
 
     yield timeout(500);
@@ -34,6 +34,6 @@ export default Service.extend({
   }).drop(),
 
   obtener() {
-    return this.get("tarea").perform();
+    return this.tarea.perform();
   }
 });

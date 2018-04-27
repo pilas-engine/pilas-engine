@@ -1,13 +1,15 @@
 
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('plus', 'helper:plus', {
-  integration: true
-});
+module('helper:plus', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.set('inputValue', '2');
-  this.render(hbs`{{plus inputValue}}`);
-  assert.equal(this.$().text().trim(), '3');
+  test('it renders', async function(assert) {
+    this.set('inputValue', '2');
+    await render(hbs`{{plus inputValue}}`);
+    assert.equal(find('*').textContent.trim(), '3');
+  });
 });

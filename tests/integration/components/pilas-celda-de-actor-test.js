@@ -1,18 +1,20 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, findAll } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-celda-de-actor", "Integration | Component | pilas celda de actor", {
-  integration: true
-});
+module("Integration | Component | pilas celda de actor", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.set("actor", {
-    nombre: "aceituna",
-    imagen: "aceituna"
+  test("it renders", async function(assert) {
+    this.set("actor", {
+      nombre: "aceituna",
+      imagen: "aceituna"
+    });
+
+    this.set("f", function() {});
+
+    await render(hbs`{{pilas-celda-de-actor actor=actor cuandoQuiereCrearActor=f}}`);
+    assert.ok(findAll("img").length, 1);
   });
-
-  this.set("f", function() {});
-
-  this.render(hbs`{{pilas-celda-de-actor actor=actor cuandoQuiereCrearActor=f}}`);
-  assert.ok(this.$("img").length, 1);
 });

@@ -1,15 +1,16 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-version", "Integration | Component | pilas version", {
-  integration: true
-});
+module("Integration | Component | pilas version", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.render(hbs`{{pilas-version}}`);
-  assert.ok(
-    this.$()
-      .text()
-      .indexOf("versión")
-  );
+  test("it renders", async function(assert) {
+    await render(hbs`{{pilas-version}}`);
+    assert.ok(
+      find('*').textContent
+        .indexOf("versión")
+    );
+  });
 });

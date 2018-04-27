@@ -11,9 +11,11 @@ export default Component.extend({
       let element = this.$("iframe").get(0);
       let url = element.contentDocument.location.href;
 
-      if (this.get("currentURL") != url && url != "about:blank") {
+      if (this.currentURL != url && url != "about:blank") {
         this.set("currentURL", url);
-        this.get("cuandoCambiaURL")(url);
+        if (this.cuandoCambiaURL) {
+          this.cuandoCambiaURL(url);
+        }
       }
 
       yield timeout(500);
@@ -21,7 +23,7 @@ export default Component.extend({
   }),
 
   didInsertElement() {
-    this.get("observarURL").perform({});
-    this.set("iframeURL", this.get("url"));
+    this.observarURL.perform({});
+    this.set("iframeURL", this.url);
   }
 });

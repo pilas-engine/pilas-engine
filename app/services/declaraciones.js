@@ -7,7 +7,7 @@ export default Service.extend({
   data: "",
 
   iniciar() {
-    let data = this.get("data");
+    let data = this.data;
 
     if (!data) {
       return hash({
@@ -15,7 +15,7 @@ export default Service.extend({
         //typescript: this._obtener_archivo("phaser.d.ts"),
         //p2: this._obtener_archivo("p2.d.ts")
       }).then(result => {
-        if (!(this.get("isDestroyed") || this.get("isDestroying"))) {
+        if (!(this.isDestroyed || this.isDestroying)) {
           this.set("data", [result.typescript, result.p2, result.pilas].join("\n"));
           return result;
         } else {
@@ -34,6 +34,6 @@ export default Service.extend({
   },
 
   obtener() {
-    return this.get("data");
+    return this.data;
   }
 });

@@ -5,7 +5,7 @@ export default Component.extend({
     cuando_cambia(valor) {
       let nombre_de_la_propiedad = this.get("propiedad.propiedad");
 
-      this.get("modificarAtributo")(nombre_de_la_propiedad, valor);
+      this.modificarAtributo(nombre_de_la_propiedad, valor);
     }
   }
 });

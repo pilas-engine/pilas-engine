@@ -1,16 +1,17 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-boton-regresar", "Integration | Component | pilas boton regresar", {
-  integration: true
-});
+module("Integration | Component | pilas boton regresar", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.render(hbs`{{pilas-boton-regresar}}`);
+  test("it renders", async function(assert) {
+    await render(hbs`{{pilas-boton-regresar}}`);
 
-  assert.ok(
-    this.$()
-      .text()
-      .trim()
-  );
+    assert.ok(
+      find('*').textContent
+        .trim()
+    );
+  });
 });

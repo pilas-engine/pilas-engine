@@ -7,11 +7,11 @@ export default Component.extend({
   classNames: ["flex1", "overflow-y-auto"],
 
   didInsertElement() {
-    this.get("bus").on("se_actualiza_el_log", this, "realizarScroll");
+    this.bus.on("se_actualiza_el_log", this, "realizarScroll");
   },
 
   willDestroyElement() {
-    this.get("bus").off("se_actualiza_el_log", this, "realizarScroll");
+    this.bus.off("se_actualiza_el_log", this, "realizarScroll");
   },
 
   realizarScroll() {

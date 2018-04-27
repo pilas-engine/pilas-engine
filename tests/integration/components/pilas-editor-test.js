@@ -1,28 +1,51 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from "qunit";
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-editor", "Integration | Component | pilas editor nuevo", {
-  integration: true
-});
+module("Integration | Component | pilas editor", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.set("proyecto", {});
-  this.set("ocultarEditor", false);
-  this.set("ocultarPropiedades", false);
-  this.set("escenaActual", 1);
-  this.set("alGuardar", () => {});
+  test("it renders", async function(assert) {
+    this.set("proyecto", {});
+    this.set("ocultarEditor", false);
+    this.set("ocultarPropiedades", false);
+    this.set("escenaActual", 1);
+    this.set("alGuardar", () => {});
 
-  this.render(hbs`{{pilas-editor
-    proyecto=proyecto
-    ocultarEditor=ocultarEditor
-    ocultarPropiedades=ocultarPropiedades
-    escenaActual=escenaActual
-    cuandoIntentaGuardar=alGuardar
-  }}`);
+    this.set("recursos", {
+      data: {
+        imagenes: [
+          {
+            nombre: "plano",
+            ruta: "imagenes/fondos/plano.png"
+          }
+        ],
+        fuentes: [
+          {
+            nombre: "font",
+            imagen: "fuentes/font.png",
+            fuente: "fuentes/font.fnt"
+          }
+        ],
+        sonidos: [
+          {
+            nombre: "laser",
+            ruta: "sonidos/laser.wav"
+          }
+        ]
+      }
+    });
 
-  assert.ok(
-    this.$()
-      .text()
-      .trim()
-  );
+    await render(hbs`{{pilas-editor
+      recursos=recursos
+      proyecto=proyecto
+      ocultarEditor=ocultarEditor
+      ocultarPropiedades=ocultarPropiedades
+      escenaActual=escenaActual
+      cuandoIntentaGuardar=alGuardar
+    }}`);
+
+    assert.ok(find("*").textContent.trim());
+  });
 });

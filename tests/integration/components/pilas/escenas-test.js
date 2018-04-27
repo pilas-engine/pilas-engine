@@ -1,73 +1,75 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas", "Integration | Pilas | escenas", {
-  integration: true
-});
+module("Integration | Pilas | escenas", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("puede crear escenas y actores", function(assert) {
-  const done = assert.async();
+  test("puede crear escenas y actores", async function(assert) {
+    const done = assert.async();
 
-  this.set("cuandoInicia", pilas => {
-    assert.ok(pilas.escenas, "Existe el acceso a las escenas");
-    assert.ok(pilas.escenas.Normal, "Existe la escena Normal");
+    this.set("cuandoInicia", pilas => {
+      assert.ok(pilas.escenas, "Existe el acceso a las escenas");
+      assert.ok(pilas.escenas.Normal, "Existe la escena Normal");
 
-    let escena = pilas.escenas.Normal();
-    assert.equal(escena.actores.length, 0, "La escena comienza sin actores");
+      let escena = pilas.escenas.Normal();
+      assert.equal(escena.actores.length, 0, "La escena comienza sin actores");
 
-    pilas.actores.caja();
+      pilas.actores.caja();
 
-    assert.equal(escena.actores.length, 1, "El actor se agrega a la escena automáticamente");
-    assert.equal(escena.id, pilas.escena_actual().id);
+      assert.equal(escena.actores.length, 1, "El actor se agrega a la escena automáticamente");
+      assert.equal(escena.id, pilas.escena_actual().id);
 
-    escena = pilas.escenas.Normal();
-    assert.equal(escena.actores.length, 0, "Al crear otra escena vuelve a estar limpia de actores");
+      escena = pilas.escenas.Normal();
+      assert.equal(escena.actores.length, 0, "Al crear otra escena vuelve a estar limpia de actores");
 
-    done();
+      done();
+    });
+
+    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia}}`);
   });
 
-  this.render(hbs`{{pilas-test cuandoInicia=cuandoInicia}}`);
-});
+  test("puede crear escenas personalizadas", async function(assert) {
+    const done = assert.async();
 
-test("puede crear escenas personalizadas", function(assert) {
-  const done = assert.async();
+    this.set("proyecto", {
+      titulo: "Proyecto para pilas-test",
+      ancho: 500,
+      alto: 500,
+      codigos: {
+        escenas: [
+          {
+            nombre: "principal",
+            codigo: `class principal extends Escena {
+              iniciar() {
+              }
 
-  this.set("proyecto", {
-    titulo: "Proyecto para pilas-test",
-    ancho: 500,
-    alto: 500,
-    codigos: {
+            }`
+          }
+        ],
+        actores: []
+      },
       escenas: [
         {
           nombre: "principal",
-          codigo: `class principal extends Escena {
-            iniciar() {
-            }
-
-          }`
+          id: 1,
+          camara_x: 0,
+          camara_y: 0,
+          actores: []
         }
-      ],
-      actores: []
-    },
-    escenas: [
-      {
-        nombre: "principal",
-        id: 1,
-        camara_x: 0,
-        camara_y: 0,
-        actores: []
-      }
-    ]
+      ]
+    });
+
+    this.set("cuandoInicia", (pilas, contexto) => {
+      assert.ok(pilas.escenas, "Existe el acceso a las escenas");
+
+      pilas.escenas.vincular(contexto.__clases.principal);
+      pilas.escenas.principal();
+
+      done();
+    });
+
+    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia proyecto=proyecto}}`);
   });
-
-  this.set("cuandoInicia", (pilas, contexto) => {
-    assert.ok(pilas.escenas, "Existe el acceso a las escenas");
-
-    pilas.escenas.vincular(contexto.__clases.principal);
-    pilas.escenas.principal();
-
-    done();
-  });
-
-  this.render(hbs`{{pilas-test cuandoInicia=cuandoInicia proyecto=proyecto}}`);
 });

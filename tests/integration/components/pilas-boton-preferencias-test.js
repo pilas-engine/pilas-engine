@@ -1,15 +1,16 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-boton-preferencias", "Integration | Component | pilas boton preferencias", {
-  integration: true
-});
+module("Integration | Component | pilas boton preferencias", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.render(hbs`{{pilas-boton-preferencias}}`);
-  assert.ok(
-    this.$()
-      .text()
-      .trim()
-  );
+  test("it renders", async function(assert) {
+    await render(hbs`{{pilas-boton-preferencias}}`);
+    assert.ok(
+      find('*').textContent
+        .trim()
+    );
+  });
 });

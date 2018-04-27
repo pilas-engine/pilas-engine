@@ -5,7 +5,7 @@ export default Route.extend({
   ejemplos: service(),
 
   model(params) {
-    return this.get("ejemplos")
+    return this.ejemplos
       .obtener()
       .then(data => {
         return data.ejemplos.findBy("nombre", params.nombre);

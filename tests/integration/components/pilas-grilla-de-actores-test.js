@@ -1,27 +1,24 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from "qunit";
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-grilla-de-actores", "Integration | Component | pilas grilla de actores", {
-  integration: true
-});
+module("Integration | Component | pilas grilla de actores", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.set("actores", [
-    {
-      nombre: "aceituna",
-      imagen: "aceituna",
-      tipo: "Aceituna"
-    }
-  ]);
+  test("it renders", async function(assert) {
+    this.set("actores", [
+      {
+        nombre: "aceituna",
+        imagen: "aceituna",
+        tipo: "Aceituna"
+      }
+    ]);
 
-  this.set("f", function() {});
+    this.set("f", function() {});
 
-  this.render(hbs`{{pilas-grilla-de-actores actores=actores cuandoQuiereCrearActor=f}}`);
+    await render(hbs`{{pilas-grilla-de-actores actores=actores cuandoQuiereCrearActor=f}}`);
 
-  assert.equal(
-    this.$("")
-      .text()
-      .trim(),
-    "aceituna"
-  );
+    assert.equal(find("[test-celda-actor]").textContent.trim(), "aceituna");
+  });
 });

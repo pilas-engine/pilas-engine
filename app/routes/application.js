@@ -13,14 +13,14 @@ export default Route.extend({
   recursos: service(),
 
   model() {
-    this.get("electron").iniciar();
-    this.get("bus").iniciar();
-    this.get("log").iniciar();
-    this.get("estadisticas").iniciar();
+    this.electron.iniciar();
+    this.bus.iniciar();
+    this.log.iniciar();
+    this.estadisticas.iniciar();
 
     return hash({
-      actores: this.get("actores").iniciar(),
-      recursos: this.get("recursos").iniciar()
+      actores: this.actores.iniciar(),
+      recursos: this.recursos.iniciar()
     });
   },
 

@@ -1,6 +1,10 @@
 {{yield}}
 
-{{pilas-canvas
-    ancho=proyecto.ancho
-    alto=proyecto.alto
-}}
+{{#if recursos.data}}
+
+  {{pilas-canvas
+      ancho=proyecto.ancho
+      alto=proyecto.alto
+  }}
+
+{{/if}}

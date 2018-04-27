@@ -14,11 +14,11 @@ export default Component.extend({
     element.on("mousedown", mouse_down_event => {
       later(() => {
         initialX = mouse_down_event.pageX;
-        this.set("original_value", this.get("value"));
+        this.set("original_value", this.value);
 
         $("html").on("mousemove", event => {
           later(() => {
-            var intensidad = this.get("intensidad");
+            var intensidad = this.intensidad;
 
             var mouse_dx = (event.pageX - initialX) * intensidad;
 
@@ -57,17 +57,17 @@ export default Component.extend({
 
   modificar(delta) {
     let propiedad = this.get("propiedad.propiedad");
-    let valorActual = this.get("objeto").get(propiedad);
+    let valorActual = this.objeto.get(propiedad);
 
     let valor_a_asignar = +valorActual + delta;
     valor_a_asignar = this.aplicar_limites_mayor_y_menor(valor_a_asignar);
 
-    this.get("modificarAtributo")(propiedad, valor_a_asignar);
+    this.modificarAtributo(propiedad, valor_a_asignar);
   },
 
   aplicar_limites_mayor_y_menor(valor) {
-    if (this.get("min") !== undefined && this.get("max") !== undefined) {
-      return Math.min(Math.max(valor, this.get("min")), this.get("max"));
+    if (this.min !== undefined && this.max !== undefined) {
+      return Math.min(Math.max(valor, this.min), this.max);
     } else {
       return valor;
     }
@@ -77,7 +77,7 @@ export default Component.extend({
     modificar_desde_input(objeto, propiedad, valor) {
       if (!isNaN(+valor) && isFinite(+valor)) {
         valor = this.aplicar_limites_mayor_y_menor(valor);
-        this.get("modificarAtributo")(propiedad, +valor);
+        this.modificarAtributo(propiedad, +valor);
       }
     },
     comenzar_a_editar() {

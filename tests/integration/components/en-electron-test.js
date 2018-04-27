@@ -1,21 +1,23 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("en-electron", "Integration | Component | en electron", {
-  integration: true
-});
+module("Integration | Component | en electron", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  test("it renders", async function(assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`
-    {{#en-electron}}
-      demo
-    {{else}}
-      otro
-    {{/en-electron}}
-  `);
+    await render(hbs`
+      {{#en-electron}}
+        demo
+      {{else}}
+        otro
+      {{/en-electron}}
+    `);
 
-  assert.equal(this.$().text().trim(), "otro");
+    assert.equal(find('*').textContent.trim(), "otro");
+  });
 });

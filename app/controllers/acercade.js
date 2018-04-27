@@ -6,10 +6,10 @@ export default Controller.extend({
 
   actions: {
     abrirSitioDePilas() {
-      this.get("electron").abrir_en_un_navegador("http://pilas-engine.com.ar");
+      this.electron.abrir_en_un_navegador("http://pilas-engine.com.ar");
     },
     abrirInspector() {
-      this.get("electron").abrirInspector();
+      this.electron.abrirInspector();
     }
   }
 });

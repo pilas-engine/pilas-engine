@@ -5,12 +5,15 @@ import { task, timeout } from "ember-concurrency";
 export default Component.extend({
   bus: service(),
   compilador: service(),
+  recursos: service(),
   proyecto: null,
   actor: null,
   primer_carga: true,
   mantener_foco: true,
 
   didInsertElement() {
+    this.get("recursos").iniciar();
+
     this.set("proyecto", {
       titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",
       ancho: 400,
@@ -39,11 +42,11 @@ export default Component.extend({
         }
       ]
     });
-    this.get("bus").on("finaliza_carga", this, "finaliza_carga");
-    this.get("bus").on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
+    this.bus.on("finaliza_carga", this, "finaliza_carga");
+    this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
 
-    if (this.get("mantener_foco")) {
-      this.get("tarea_para_mantener_foco").perform();
+    if (this.mantener_foco) {
+      this.tarea_para_mantener_foco.perform();
     }
   },
 
@@ -55,18 +58,18 @@ export default Component.extend({
   }),
 
   hacer_foco_en_pilas() {
-    this.get("bus").trigger("hacer_foco_en_pilas", {});
+    this.bus.trigger("hacer_foco_en_pilas", {});
   },
 
   didReceiveAttrs() {
-    if (this.get("pilas")) {
+    if (this.pilas) {
       this.compilar_proyecto_y_ejecutar();
     }
   },
 
   willDestroyElement() {
-    this.get("bus").off("finaliza_carga", this, "finaliza_carga");
-    this.get("bus").off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
+    this.bus.off("finaliza_carga", this, "finaliza_carga");
+    this.bus.off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
   finaliza_carga() {
@@ -74,11 +77,11 @@ export default Component.extend({
   },
 
   compilar_proyecto_y_ejecutar() {
-    let proyecto = this.get("proyecto");
+    let proyecto = this.proyecto;
 
-    this.agregar_actor_al_proyecto(proyecto, this.get("actor"));
+    this.agregar_actor_al_proyecto(proyecto, this.actor);
 
-    let resultado = this.get("compilador").compilar_proyecto(proyecto);
+    let resultado = this.compilador.compilar_proyecto(proyecto);
 
     let datos = {
       nombre_de_la_escena_inicial: "principal",
@@ -86,7 +89,7 @@ export default Component.extend({
       proyecto: proyecto
     };
 
-    this.get("bus").trigger("ejecutar_proyecto", datos);
+    this.bus.trigger("ejecutar_proyecto", datos);
   },
 
   agregar_actor_al_proyecto(proyecto, actor) {

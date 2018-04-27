@@ -11,7 +11,7 @@ export default Controller.extend(queryParams.Mixin, {
   actores: service(),
 
   actor: computed("actor_seleccionado", function() {
-    let actor_seleccionado = this.get("actor_seleccionado");
+    let actor_seleccionado = this.actor_seleccionado;
 
     if (actor_seleccionado) {
       return this.get("actores.lista_de_actores").findBy("nombre", actor_seleccionado);

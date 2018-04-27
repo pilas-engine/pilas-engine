@@ -22,8 +22,8 @@ export default Component.extend({
   }),
 
   cargarCodigo() {
-    let editor = this.get("editor");
-    let code = this.get("code");
+    let editor = this.editor;
+    let code = this.code;
     let codigoFormateado = formatear(code);
     if (editor) {
       let pos = editor.getPosition();
@@ -37,20 +37,20 @@ export default Component.extend({
    * atributo readOnly.
    */
   sincronizarReadOnly: observer("readOnly", function() {
-    if (this.get("editor")) {
-      this.get("editor").updateOptions({ readOnly: this.get("readOnly") });
+    if (this.editor) {
+      this.editor.updateOptions({ readOnly: this.readOnly });
     }
   }),
 
   sincronizarOscuro: observer("oscuro", function() {
     var theme = "vs";
 
-    if (this.get("oscuro")) {
+    if (this.oscuro) {
       theme = "vs-dark";
     }
 
-    if (this.get("editor")) {
-      this.get("editor").updateOptions({ theme: theme });
+    if (this.editor) {
+      this.editor.updateOptions({ theme: theme });
     }
   }),
 
@@ -63,27 +63,27 @@ export default Component.extend({
       }
 
       if (
-        event.source === this.get("frame") &&
+        event.source === this.frame &&
         event.data &&
         event.data.updatedCode
       ) {
-        if (this.get("onChange")) {
-          this.get("onChange")(event.data.updatedCode);
+        if (this.onChange) {
+          this.onChange(event.data.updatedCode);
         }
       }
 
       if (
-        event.source === this.get("frame") &&
+        event.source === this.frame &&
         event.data &&
         event.data.message
       ) {
         if (event.data.message === "load-complete") {
-          this.onLoadEditor(this.get("frame").editor);
+          this.onLoadEditor(this.frame.editor);
         }
 
         if (event.data.message === "on-save") {
           this.cargarCodigo();
-          this.onSave(this.get("frame").editor);
+          this.onSave(this.frame.editor);
         }
       }
     };
@@ -93,7 +93,7 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    this.get("declaraciones")
+    this.declaraciones
       .iniciar()
       .then(() => {
         this.iniciarEditor();
@@ -101,16 +101,16 @@ export default Component.extend({
   },
 
   iniciarEditor() {
-    if (this.get("isDestroyed") || this.get("isDestroying")) {
+    if (this.isDestroyed || this.isDestroying) {
       return;
     }
-    const frame = getFrameById(this.get("elementId"));
+    const frame = getFrameById(this.elementId);
     const frameDoc = frame.document;
-    let oscuro = this.get("oscuro");
+    let oscuro = this.oscuro;
     this.set("frame", frame);
 
-    let declaraciones_de_pilas_engine_ts = this.get("declaraciones").obtener();
-    let rootURL = this.get("rootURL");
+    let declaraciones_de_pilas_engine_ts = this.declaraciones.obtener();
+    let rootURL = this.rootURL;
 
     frameDoc.open();
     frameDoc.write(`
@@ -174,8 +174,8 @@ export default Component.extend({
                 tabSize: 2,
                 insertSpaces: true,
                 tabWidth: 2,
-                lineNumbers: ${this.get("linenumbers")},
-                readOnly: ${this.get("readOnly")},
+                lineNumbers: ${this.linenumbers},
+                readOnly: ${this.readOnly},
               });
 
 
@@ -206,25 +206,25 @@ export default Component.extend({
       `);
     frameDoc.close();
 
-    this.get("bus").on("hacerFocoEnElEditor", this, "hacerFoco");
+    this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
   },
 
   onLoadEditor(editor) {
     this.set("editor", editor);
 
-    if (this.get("code")) {
+    if (this.code) {
       this.cargarCodigo();
     }
 
-    if (this.get("cuandoCarga")) {
-      this.get("cuandoCarga")();
+    if (this.cuandoCarga) {
+      this.cuandoCarga();
     }
 
     this.set("loading", false);
   },
 
   hacerFoco() {
-    let editor = this.get("editor");
+    let editor = this.editor;
     let iframe = this.$("iframe");
 
     if (iframe) {
@@ -239,7 +239,7 @@ export default Component.extend({
 
   willDestroyElement() {
     this._super(...arguments);
-    window.removeEventListener("message", this.get("_subscription"));
-    this.get("bus").on("hacerFocoEnElEditor", this, "hacerFoco");
+    window.removeEventListener("message", this._subscription);
+    this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
   }
 });

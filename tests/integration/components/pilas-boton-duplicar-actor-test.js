@@ -1,18 +1,16 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent(
-  "pilas-boton-duplicar-actor",
-  "Integration | Component | pilas boton duplicar actor",
-  {
-    integration: true
-  }
-);
+module("Integration | Component | pilas boton duplicar actor", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.set("accion", function() {});
+  test("it renders", async function(assert) {
+    this.set("accion", function() {});
 
-  this.render(hbs`{{pilas-boton-duplicar-actor accion=accion}}`);
+    await render(hbs`{{pilas-boton-duplicar-actor accion=accion}}`);
 
-  assert.ok(this.$().text());
+    assert.ok(find('*').textContent);
+  });
 });

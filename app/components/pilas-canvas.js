@@ -24,6 +24,10 @@ export default Component.extend({
   didInsertElement() {
     let iframe = this.$("iframe")[0];
 
+    if (!this.get("recursos.data")) {
+      throw Error("No se inicializó el servicio recursos. Tienes que llamar a iniciar antes.");
+    }
+
     iframe.onclick = () => {
       this.hacerFoco();
     };
@@ -38,8 +42,8 @@ export default Component.extend({
 
       let data = {
         tipo: "iniciar_pilas",
-        ancho: this.get("ancho"),
-        alto: this.get("alto"),
+        ancho: this.ancho,
+        alto: this.alto,
         recursos: this.get("recursos.data")
       };
 
@@ -49,54 +53,54 @@ export default Component.extend({
 
       contexto.postMessage(data, utils.HOST);
 
-      window.addEventListener("message", this.get("funcionParaAtenderMensajes"), false);
+      window.addEventListener("message", this.funcionParaAtenderMensajes, false);
 
-      this.get("bus").on("cargar_escena", this, "cargar_escena");
-      this.get("bus").on("finaliza_carga", this, "finaliza_carga");
-      this.get("bus").on("ejecutar_escena", this, "ejecutar_escena");
-      this.get("bus").on("ejecutar_proyecto", this, "ejecutar_proyecto");
-      this.get("bus").on("pausar_escena", this, "pausar_escena");
-      this.get("bus").on("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
-      this.get("bus").on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
-      this.get("bus").on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
-      this.get("bus").on("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
+      this.bus.on("cargar_escena", this, "cargar_escena");
+      this.bus.on("finaliza_carga", this, "finaliza_carga");
+      this.bus.on("ejecutar_escena", this, "ejecutar_escena");
+      this.bus.on("ejecutar_proyecto", this, "ejecutar_proyecto");
+      this.bus.on("pausar_escena", this, "pausar_escena");
+      this.bus.on("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
+      this.bus.on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
+      this.bus.on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
+      this.bus.on("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
 
-      this.get("bus").on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
-      this.get("bus").on("progreso_de_carga", this, "progreso_de_carga");
-      this.get("bus").on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
-      this.get("bus").on("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
+      this.bus.on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
+      this.bus.on("progreso_de_carga", this, "progreso_de_carga");
+      this.bus.on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+      this.bus.on("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
 
-      this.alterar_estado_de_maximizacion(this.get("maximizar"));
+      this.alterar_estado_de_maximizacion(this.maximizar);
     };
   },
 
   didReceiveAttrs() {
-    if (this.get("contexto")) {
+    if (this.contexto) {
       this.emitir_estados_de_depuracion_a_pilas();
 
-      if (this.get("maximizar") !== this.get("valor_anterior_de_maximizar")) {
-        this.alterar_estado_de_maximizacion(this.get("maximizar"));
-        this.set("valor_anterior_de_maximizar", this.get("maximizar"));
+      if (this.maximizar !== this.valor_anterior_de_maximizar) {
+        this.alterar_estado_de_maximizacion(this.maximizar);
+        this.set("valor_anterior_de_maximizar", this.maximizar);
       }
     }
   },
 
   willDestroyElement() {
-    window.removeEventListener("message", this.get("funcionParaAtenderMensajes"));
+    window.removeEventListener("message", this.funcionParaAtenderMensajes);
 
-    this.get("bus").off("cargar_escena", this, "cargar_escena");
-    this.get("bus").off("finaliza_carga", this, "finaliza_carga");
-    this.get("bus").off("ejecutar_escena", this, "ejecutar_escena");
-    this.get("bus").off("ejecutar_proyecto", this, "ejecutar_proyecto");
-    this.get("bus").off("pausar_escena", this, "pausar_escena");
-    this.get("bus").off("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
-    this.get("bus").off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
-    this.get("bus").off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
-    this.get("bus").off("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
-    this.get("bus").off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
-    this.get("bus").off("progreso_de_carga", this, "progreso_de_carga");
-    this.get("bus").off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
-    this.get("bus").off("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
+    this.bus.off("cargar_escena", this, "cargar_escena");
+    this.bus.off("finaliza_carga", this, "finaliza_carga");
+    this.bus.off("ejecutar_escena", this, "ejecutar_escena");
+    this.bus.off("ejecutar_proyecto", this, "ejecutar_proyecto");
+    this.bus.off("pausar_escena", this, "pausar_escena");
+    this.bus.off("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
+    this.bus.off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
+    this.bus.off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
+    this.bus.off("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
+    this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
+    this.bus.off("progreso_de_carga", this, "progreso_de_carga");
+    this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+    this.bus.off("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
   },
 
   cargar_escena({ escena }) {
@@ -113,9 +117,9 @@ export default Component.extend({
   emitir_estados_de_depuracion_a_pilas() {
     let data = {
       tipo: "definir_estados_de_depuracion",
-      pos: this.get("pos"),
-      fps: this.get("fps"),
-      fisica: this.get("fisica")
+      pos: this.pos,
+      fps: this.fps,
+      fisica: this.fisica
     };
     this.contexto.postMessage(data, utils.HOST);
   },
@@ -202,8 +206,8 @@ export default Component.extend({
   finaliza_carga() {
     this.set("cargando", false);
 
-    if (this.get("cuando_termina_de_cargar")) {
-      this.get("cuando_termina_de_cargar")();
+    if (this.cuando_termina_de_cargar) {
+      this.cuando_termina_de_cargar();
     }
   },
 
@@ -228,7 +232,7 @@ export default Component.extend({
   },
 
   estilo_barra_de_progreso: computed("porcentajeDeCarga", function() {
-    let porcentajeDeCarga = this.get("porcentajeDeCarga");
+    let porcentajeDeCarga = this.porcentajeDeCarga;
     return htmlSafe(`width: ${porcentajeDeCarga}%`);
   }),
 
@@ -247,40 +251,40 @@ export default Component.extend({
     }
 
     if (e.data.tipo === "finaliza_carga_de_recursos") {
-      this.get("bus").trigger("finaliza_carga", contexto.pilas, contexto);
+      this.bus.trigger("finaliza_carga", contexto.pilas, contexto);
       window["pilas"] = contexto.pilas;
     }
 
     if (e.data.tipo === "pulsa_la_tecla_escape") {
-      this.get("bus").trigger("pulsa_la_tecla_escape", e.data);
+      this.bus.trigger("pulsa_la_tecla_escape", e.data);
     }
 
     if (e.data.tipo === "progreso_de_carga") {
-      this.get("bus").trigger("progreso_de_carga", e.data);
+      this.bus.trigger("progreso_de_carga", e.data);
     }
 
     if (e.data.tipo === "termina_de_mover_un_actor") {
-      this.get("bus").trigger("termina_de_mover_un_actor", e.data);
+      this.bus.trigger("termina_de_mover_un_actor", e.data);
     }
 
     if (e.data.tipo === "comienza_a_mover_un_actor") {
-      this.get("bus").trigger("comienza_a_mover_un_actor", e.data);
+      this.bus.trigger("comienza_a_mover_un_actor", e.data);
     }
 
     if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
-      this.get("bus").trigger("inicia_modo_depuracion_en_pausa", e.data);
+      this.bus.trigger("inicia_modo_depuracion_en_pausa", e.data);
     }
 
     if (e.data.tipo === "cambia_posicion_dentro_del_modo_pausa") {
-      this.get("bus").trigger("cuando_cambia_posicion_dentro_del_modo_pausa", e.data);
+      this.bus.trigger("cuando_cambia_posicion_dentro_del_modo_pausa", e.data);
     }
 
     if (e.data.tipo === "error_de_ejecucion") {
-      this.get("bus").trigger("error", e.data);
+      this.bus.trigger("error", e.data);
     }
 
     if (e.data.tipo === "termina_de_iniciar_ejecucion") {
-      this.get("bus").trigger("cuando_termina_de_iniciar_ejecucion", contexto.pilas, contexto);
+      this.bus.trigger("cuando_termina_de_iniciar_ejecucion", contexto.pilas, contexto);
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {
@@ -289,7 +293,7 @@ export default Component.extend({
   },
   actions: {
     detener() {
-      this.set("estado", this.get("estado").detener());
+      this.set("estado", this.estado.detener());
     }
   }
 });

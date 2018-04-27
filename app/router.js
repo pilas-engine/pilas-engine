@@ -13,7 +13,7 @@ EmberRouter.reopen({
 
   didTransition() {
     this._super(...arguments);
-    this.get("estadisticas").notificar_transicion(this.get("url"));
+    this.estadisticas.notificar_transicion(this.url);
   }
 });
 

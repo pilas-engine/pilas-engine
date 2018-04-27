@@ -1,24 +1,24 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-crear-actor", "Integration | Component | pilas crear actor", {
-  integration: true
-});
+module("Integration | Component | pilas crear actor", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.render(hbs`{{pilas-crear-actor}}`);
-  assert.equal(
-    this.$()
-      .text()
-      .trim(),
-    "+ Actor"
-  );
+  test("it renders", async function(assert) {
+    await render(hbs`{{pilas-crear-actor}}`);
+    assert.equal(
+      find('*').textContent
+        .trim(),
+      "+ Actor"
+    );
 
-  this.render(hbs`{{pilas-crear-actor cuandoQuiereCrearActor=f modalVisible=true}}`);
-  assert.equal(
-    this.$("#dialogoCrearActor #titulo")
-      .text()
-      .trim(),
-    "Agregar un actor a la escena"
-  );
+    await render(hbs`{{pilas-crear-actor cuandoQuiereCrearActor=f modalVisible=true}}`);
+    assert.equal(
+      find("#dialogoCrearActor #titulo").textContent
+        .trim(),
+      "Agregar un actor a la escena"
+    );
+  });
 });

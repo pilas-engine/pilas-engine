@@ -10,7 +10,7 @@ export default Controller.extend({
     },
 
     abrirEnUnaVentanaNueva() {
-      window.open(this.get("url"));
+      window.open(this.url);
     }
   }
 });

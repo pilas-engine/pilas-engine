@@ -99,8 +99,8 @@ export default Controller.extend({
 
   actions: {
     cuando_termina_de_cargar() {
-      let resultado = this.get("compilador").compilar_proyecto(
-        this.get("proyecto")
+      let resultado = this.compilador.compilar_proyecto(
+        this.proyecto
       );
 
       let datos = {
@@ -110,8 +110,8 @@ export default Controller.extend({
         proyecto: resultado.proyecto_serializado
       };
 
-      this.get("bus").trigger("ejecutar_proyecto", datos);
-      this.get("bus").trigger("hacer_foco_en_pilas", {});
+      this.bus.trigger("ejecutar_proyecto", datos);
+      this.bus.trigger("hacer_foco_en_pilas", {});
     }
   }
 });

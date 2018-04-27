@@ -1,35 +1,35 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, click, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-modal", "Integration | Component | pilas modal", {
-  integration: true
-});
+module("Integration | Component | pilas modal", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.set("visible", false);
-
-  this.set("cerrar", () => {
+  test("it renders", async function(assert) {
     this.set("visible", false);
+
+    this.set("cerrar", () => {
+      this.set("visible", false);
+    });
+
+    await render(hbs`{{pilas-modal visible=visible  itulo="Demo" alCerrar=cerrar}}`);
+    assert.equal(
+      find('*').textContent
+        .trim(),
+      ""
+    );
+
+    this.set("visible", true);
+
+    await render(hbs`{{pilas-modal visible=visible titulo="Demo" alCerrar=cerrar}}`);
+    assert.equal(find("#titulo").textContent, "Demo");
+
+    await click("#cerrar");
+    assert.equal(
+      find('*').textContent
+        .trim(),
+      ""
+    );
   });
-
-  this.render(hbs`{{pilas-modal visible=visible  itulo="Demo" alCerrar=cerrar}}`);
-  assert.equal(
-    this.$()
-      .text()
-      .trim(),
-    ""
-  );
-
-  this.set("visible", true);
-
-  this.render(hbs`{{pilas-modal visible=visible titulo="Demo" alCerrar=cerrar}}`);
-  assert.equal(this.$("#titulo").text(), "Demo");
-
-  this.$("#cerrar").click();
-  assert.equal(
-    this.$()
-      .text()
-      .trim(),
-    ""
-  );
 });

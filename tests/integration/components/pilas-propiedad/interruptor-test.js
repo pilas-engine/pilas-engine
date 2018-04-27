@@ -1,28 +1,30 @@
 import EmberObject from '@ember/object';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('pilas-propiedad/interruptor', 'Integration | Component | pilas propiedad/interruptor', {
-  integration: true
-});
+module('Integration | Component | pilas propiedad/interruptor', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  let objeto = EmberObject.create({ invertir: true });
-  let propiedad = {
-    tipo: "interruptor",
-    propiedad: "invertir",
-  };
+  test('it renders', async function(assert) {
+    let objeto = EmberObject.create({ invertir: true });
+    let propiedad = {
+      tipo: "interruptor",
+      propiedad: "invertir",
+    };
 
-  this.set("propiedad", propiedad);
-  this.set("objeto", objeto);
+    this.set("propiedad", propiedad);
+    this.set("objeto", objeto);
 
 
-  this.render(hbs`
-    {{pilas-propiedad/interruptor objeto=objeto
-      propiedad=propiedad
-    }}
-    `);
+    await render(hbs`
+      {{pilas-propiedad/interruptor objeto=objeto
+        propiedad=propiedad
+      }}
+      `);
 
-  assert.equal(this.$().text().trim(), 'invertir');
+    assert.equal(find('*').textContent.trim(), 'invertir');
 
+  });
 });

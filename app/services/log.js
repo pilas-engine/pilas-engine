@@ -8,30 +8,30 @@ export default Service.extend({
   iniciar() {
     this.set("items", []);
 
-    if (this.get("iniciado")) {
+    if (this.iniciado) {
       return;
     }
 
-    this.get("bus").on("error", this, "alRecibirUnErrorDesdeElBus");
+    this.bus.on("error", this, "alRecibirUnErrorDesdeElBus");
   },
 
   error(mensaje, detalle) {
-    this.get("items").pushObject({
+    this.items.pushObject({
       tipo: "error",
       mensaje: mensaje,
       detalle: detalle,
       tiempo: this._obtener_tiempo()
     });
-    this.get("bus").trigger("se_actualiza_el_log");
+    this.bus.trigger("se_actualiza_el_log");
   },
 
   info(mensaje) {
-    this.get("items").pushObject({
+    this.items.pushObject({
       tipo: "info",
       mensaje: mensaje,
       tiempo: this._obtener_tiempo()
     });
-    this.get("bus").trigger("se_actualiza_el_log");
+    this.bus.trigger("se_actualiza_el_log");
   },
 
   _obtener_tiempo() {
@@ -50,17 +50,17 @@ export default Service.extend({
 
   limpiar() {
     this.set("items", []);
-    this.get("bus").trigger("se_actualiza_el_log");
+    this.bus.trigger("se_actualiza_el_log");
   },
 
   grupo(titulo, texto_multilinea) {
-    this.get("items").pushObject({
+    this.items.pushObject({
       tipo: "grupo",
       titulo: titulo,
       lineas: texto_multilinea.split("\n"),
       tiempo: this._obtener_tiempo()
     });
-    this.get("bus").trigger("se_actualiza_el_log");
+    this.bus.trigger("se_actualiza_el_log");
   },
 
   alRecibirUnErrorDesdeElBus(datos) {

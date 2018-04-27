@@ -5,6 +5,6 @@ export default Component.extend({
   ejemplos: service(),
 
   didInsertElement() {
-    this.get("ejemplos").obtener();
+    this.ejemplos.obtener();
   }
 });

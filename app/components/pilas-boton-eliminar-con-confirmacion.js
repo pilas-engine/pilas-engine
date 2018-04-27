@@ -6,7 +6,7 @@ export default Component.extend({
   modalVisible: false,
 
   idDialogo: computed("tipo", function() {
-    return "dialogoEliminar" + this.get("tipo");
+    return "dialogoEliminar" + this.tipo;
   }),
 
   actions: {
@@ -18,7 +18,7 @@ export default Component.extend({
     },
     ocultarEjecutandoAccion() {
       this.send("ocultar");
-      this.get("accion")();
+      this.accion();
     }
   }
 });

@@ -1,16 +1,17 @@
-import { moduleForComponent, test } from "ember-qunit";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from "ember-qunit";
+import { render, find } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
-moduleForComponent("pilas-panel-de-escenas", "Integration | Component | pilas panel de escenas", {
-  integration: true
-});
+module("Integration | Component | pilas panel de escenas", function(hooks) {
+  setupRenderingTest(hooks);
 
-test("it renders", function(assert) {
-  this.render(hbs`{{pilas-panel-de-escenas}}`);
-  assert.equal(
-    this.$()
-      .text()
-      .trim(),
-    "sin escenas"
-  );
+  test("it renders", async function(assert) {
+    await render(hbs`{{pilas-panel-de-escenas}}`);
+    assert.equal(
+      find('*').textContent
+        .trim(),
+      "sin escenas"
+    );
+  });
 });

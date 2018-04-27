@@ -76,6 +76,6 @@ export default Service.extend({
   },
 
   iniciar() {
-    return this.get("tareaConseguirActores").perform();
+    return this.tareaConseguirActores.perform();
   }
 });

@@ -5,7 +5,7 @@ import Component from "@ember/component";
 export default Component.extend({
   tagName: "",
   style: computed("ancho", "alto", function() {
-    let { ancho, alto } = this.getProperties("ancho", "alto");
+    let { ancho, alto } = this;
 
     if (!isNaN(ancho)) {
       ancho += "px";

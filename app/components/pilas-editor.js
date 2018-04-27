@@ -11,6 +11,7 @@ export default Component.extend({
   bus: service(),
   log: service(),
   compilador: service(),
+  recursos: service(),
   codigo: "",
   tagName: "",
   actorSeleccionado: -1, //deprecated
@@ -28,29 +29,21 @@ export default Component.extend({
   lista_de_eventos: null,
 
   didInsertElement() {
-    this.set("lista_de_eventos", [
-      "finaliza_carga",
-      "error",
-      "termina_de_mover_un_actor",
-      "comienza_a_mover_un_actor",
-      "inicia_modo_depuracion_en_pausa",
-      "cuando_cambia_posicion_dentro_del_modo_pausa",
-      "pulsa_la_tecla_escape"
-    ]);
+    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
-    if (this.get("seleccion") != -1) {
-      if (!this.existe_actor_o_escena_con_id(this.get("seleccion"))) {
+    if (this.seleccion != -1) {
+      if (!this.existe_actor_o_escena_con_id(this.seleccion)) {
         this.set("seleccion", 1);
       }
 
-      this.send("cuandoSelecciona", this.get("seleccion"));
+      this.send("cuandoSelecciona", this.seleccion);
     }
 
     document.addEventListener("keydown", this.alPulsarTecla.bind(this));
 
-    this.get("bus").trigger("hacer_foco_en_pilas", {});
+    this.bus.trigger("hacer_foco_en_pilas", {});
   },
 
   existe_actor_o_escena_con_id(id) {
@@ -68,21 +61,21 @@ export default Component.extend({
   },
 
   conectar_eventos() {
-    this.get("lista_de_eventos").map(evento => {
-      this.get("bus").on(evento, this, evento);
+    this.lista_de_eventos.map(evento => {
+      this.bus.on(evento, this, evento);
     });
   },
 
   desconectar_eventos() {
-    this.get("lista_de_eventos").map(evento => {
-      this.get("bus").off(evento, this, evento);
+    this.lista_de_eventos.map(evento => {
+      this.bus.off(evento, this, evento);
     });
   },
 
   finaliza_carga() {
     this.set("cargando", false);
     this.mostrar_la_escena_actual_sobre_pilas();
-    this.set("estado", this.get("estado").cuandoTerminoDeCargarPilas());
+    this.set("estado", this.estado.cuandoTerminoDeCargarPilas());
   },
 
   pulsa_la_tecla_escape() {
@@ -135,36 +128,34 @@ export default Component.extend({
     }
 
     let escenaComoJSON = JSON.parse(JSON.stringify(escena));
-    this.get("bus").trigger("cargar_escena", { escena: escenaComoJSON });
+    this.bus.trigger("cargar_escena", { escena: escenaComoJSON });
   },
 
   obtener_la_escena_actual() {
-    let indice = this.get("ultimaEscenaSeleccionada");
+    let indice = this.ultimaEscenaSeleccionada;
     return this.get("proyecto.escenas").findBy("id", indice);
   },
 
   eliminar_escena_actual() {
     let escenaActual = this.obtener_la_escena_actual();
-    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(
-      escenaActual
-    );
+    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
     this.set("proyecto.escenas", escenasSinLaEscenaActual);
 
     if (this.el_proyecto_no_tiene_escena()) {
-      this.send("agregarEscena", this.get("proyecto"));
+      this.send("agregarEscena", this.proyecto);
     } else {
       this.seleccionar_primer_escena_del_proyecto();
     }
   },
 
   el_proyecto_no_tiene_escena() {
-    return this.get("cantidadDeEscenas") === 0;
+    return this.cantidadDeEscenas === 0;
   },
 
   eliminar_actor(id) {
     let escenaActual = this.obtener_la_escena_actual();
     let actor = escenaActual.actores.findBy("id", id);
-    this.get("bus").trigger("eliminar_actor_desde_el_editor", { id: actor.id });
+    this.bus.trigger("eliminar_actor_desde_el_editor", { id: actor.id });
     escenaActual.actores.removeObject(actor);
 
     if (this.tiene_actores(escenaActual)) {
@@ -189,7 +180,7 @@ export default Component.extend({
   },
 
   registrar_codigo_de_actor(nombre, codigo) {
-    let proyecto = this.get("proyecto");
+    let proyecto = this.proyecto;
     let codigo_modificado = aplicar_nombre(nombre, codigo);
 
     proyecto.codigos.actores.pushObject(
@@ -201,7 +192,7 @@ export default Component.extend({
   },
 
   registrar_codigo_de_escena(nombre, codigo) {
-    let proyecto = this.get("proyecto");
+    let proyecto = this.proyecto;
 
     proyecto.codigos.escenas.pushObject(
       EmberObject.create({
@@ -306,6 +297,7 @@ export default Component.extend({
       let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
       let id = this.generar_id();
+
       let nombre = obtener_nombre_sin_repetir(nombres, actor.nombre);
 
       actor.propiedades.id = id;
@@ -327,54 +319,52 @@ export default Component.extend({
 
     cuando_cambia_el_codigo(codigo) {
       this.set("codigo", codigo);
-      this.guardar_codigo_en_el_proyecto(this.get("seleccion"), codigo);
+      this.guardar_codigo_en_el_proyecto(this.seleccion, codigo);
     },
 
     ejecutar() {
-      this.get("bus").trigger("quitar_pausa", {});
+      this.bus.trigger("quitar_pausa", {});
       this.set("existe_un_error_reciente", false);
-      this.set("estado", this.get("estado").ejecutar());
+      this.set("estado", this.estado.ejecutar());
 
       let escena = this.obtener_la_escena_actual();
 
-      let resultado = this.get("compilador").compilar_proyecto(
-        this.get("proyecto")
-      );
+      let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
       let datos = {
         nombre_de_la_escena_inicial: escena.nombre,
         codigo: resultado.codigo,
-        permitir_modo_pausa: this.get("permitir_modo_pausa"),
+        permitir_modo_pausa: this.permitir_modo_pausa,
         proyecto: resultado.proyecto_serializado
       };
 
-      this.get("bus").trigger("ejecutar_proyecto", datos);
-      this.get("bus").trigger("hacer_foco_en_pilas", {});
+      this.bus.trigger("ejecutar_proyecto", datos);
+      this.bus.trigger("hacer_foco_en_pilas", {});
 
-      this.get("log").limpiar();
-      this.get("log").info("Ingresando en modo ejecución");
+      this.log.limpiar();
+      this.log.info("Ingresando en modo ejecución");
     },
     detener() {
-      this.get("bus").trigger("quitar_pausa_de_phaser", {});
+      this.bus.trigger("quitar_pausa_de_phaser", {});
       this.set("existe_un_error_reciente", false);
       this.mostrar_la_escena_actual_sobre_pilas();
-      this.set("estado", this.get("estado").detener());
-      this.get("bus").trigger("hacerFocoEnElEditor", {});
-      this.get("log").limpiar();
-      this.get("log").info("Ingreando al modo edición");
+      this.set("estado", this.estado.detener());
+      this.bus.trigger("hacerFocoEnElEditor", {});
+      this.log.limpiar();
+      this.log.info("Ingreando al modo edición");
     },
     pausar() {
-      this.get("bus").trigger("quitar_pausa_de_phaser", {});
+      this.bus.trigger("quitar_pausa_de_phaser", {});
       this.set("existe_un_error_reciente", false);
-      this.set("estado", this.get("estado").pausar());
-      this.get("bus").trigger("pausar_escena", {});
-      this.get("bus").trigger("hacer_foco_en_pilas", {});
-      this.get("log").limpiar();
-      this.get("log").info("Ingresando en modo pausa");
+      this.set("estado", this.estado.pausar());
+      this.bus.trigger("pausar_escena", {});
+      this.bus.trigger("hacer_foco_en_pilas", {});
+      this.log.limpiar();
+      this.log.info("Ingresando en modo pausa");
     },
     cambiarPosicion(valorNuevo) {
       this.set("posicion", valorNuevo);
-      this.get("bus").trigger("cambiar_posicion_desde_el_editor", {
+      this.bus.trigger("cambiar_posicion_desde_el_editor", {
         posicion: valorNuevo
       });
     },
@@ -382,7 +372,7 @@ export default Component.extend({
       this.send("alternarEstadoDeEjecucion");
     },
     alternarEstadoDeEjecucion() {
-      let estado = this.get("estado");
+      let estado = this.estado;
 
       if (estado.puedeEjecutar) {
         this.send("ejecutar");
@@ -413,18 +403,18 @@ export default Component.extend({
         this.set("tituloDelCodigo", `Código de la escena: ${seleccion}`);
       }
 
-      this.get("bus").trigger("selecciona_actor_desde_el_editor", {
+      this.bus.trigger("selecciona_actor_desde_el_editor", {
         id: seleccion
       });
     },
     cuandoModificaObjeto(objeto) {
-      this.get("bus").trigger("actualizar_actor_desde_el_editor", {
+      this.bus.trigger("actualizar_actor_desde_el_editor", {
         id: objeto.id,
         actor: objeto
       });
     },
     cuando_modifica_escena(escena) {
-      this.get("bus").trigger("actualizar_escena_desde_el_editor", {
+      this.bus.trigger("actualizar_escena_desde_el_editor", {
         id: escena.id,
         escena: escena
       });
@@ -443,7 +433,7 @@ export default Component.extend({
       actor.propiedades.x += 20;
       actor.propiedades.y -= 20;
 
-      this.send("agregar_actor", this.get("proyecto"), actor);
+      this.send("agregar_actor", this.proyecto, actor);
     },
     cuando_intenta_eliminar(id) {
       let actor = this.obtenerDetalleDeActorPorIndice(id);

@@ -138,21 +138,21 @@ export default Component.extend({
   ha_seleccionado_un_actor: computed(
     "tipo_de_la_instancia_seleccionada",
     function() {
-      return this.get("tipo_de_la_instancia_seleccionada") === "actor";
+      return this.tipo_de_la_instancia_seleccionada === "actor";
     }
   ),
 
   actions: {
     modificarAtributo(propiedad, valor) {
-      let actor = this.get("instancia_seleccionada");
+      let actor = this.instancia_seleccionada;
       actor.set(propiedad, valor);
-      this.get("cuandoModificaObjeto")(actor);
+      this.cuandoModificaObjeto(actor);
     },
 
     modifica_atributo_de_escena(propiedad, valor) {
-      let escena = this.get("instancia_seleccionada");
+      let escena = this.instancia_seleccionada;
       escena.set(propiedad, valor);
-      this.get("cuando_modifica_escena")(escena);
+      this.cuando_modifica_escena(escena);
     }
   }
 });

@@ -1,10 +1,9 @@
-import { later } from '@ember/runloop';
-import $ from 'jquery';
-import { Promise as EmberPromise } from 'rsvp';
-import { registerAsyncHelper } from "@ember/test";
+import { later } from "@ember/runloop";
+import $ from "jquery";
+import { Promise as EmberPromise } from "rsvp";
 
-export default registerAsyncHelper("esperarElemento", function(app, selector) {
-  return new EmberPromise((success, fail) => {
+export default async function esperarElemento(selector) {
+  await new EmberPromise((success, fail) => {
     let cantidadDeIntentos = 0;
 
     function existeElemento() {
@@ -29,4 +28,4 @@ export default registerAsyncHelper("esperarElemento", function(app, selector) {
       }, 1000);
     }
   });
-});
+}
