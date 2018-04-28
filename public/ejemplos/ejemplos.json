@@ -2,6 +2,9 @@
   "ejemplos": [
     {
       "nombre": "nubes"
+    },
+    {
+      "nombre": "plataformas"
     }
   ]
 }
