@@ -5,12 +5,8 @@
   "codigos": {
     "escenas": [
       {
-        "nombre": "escena1",
-        "codigo": "class escena1 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
-      },
-      {
-        "nombre": "escena2",
-        "codigo": "class escena2 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+        "nombre": "principal",
+        "codigo": "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
       }
     ],
     "actores": [
@@ -82,7 +78,7 @@
   },
   "escenas": [
     {
-      "nombre": "escena1",
+      "nombre": "principal",
       "id": 1,
       "camara_x": 0,
       "camara_y": 0,
@@ -377,14 +373,6 @@
           "nombre": "moneda4"
         }
       ]
-    },
-    {
-      "nombre": "escena2",
-      "id": 2,
-      "camara_x": 0,
-      "camara_y": 0,
-      "fondo": "plano",
-      "actores": []
     }
   ]
 }
