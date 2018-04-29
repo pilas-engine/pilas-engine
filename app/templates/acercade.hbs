@@ -1,59 +1,69 @@
-{{outlet}}
+<div class="vh-100 w-100 dt">
+  <div class="flex flex-column vh-100">
 
-<div class="pa2">
-  {{pilas-boton-regresar}}
-</div>
+    <div class='bb b--black-10 pa2'>
+      {{pilas-boton-regresar}}
+    </div>
 
-<div class="center mw7 mt4 pa2 lato pl2 lh-copy pr2">
-  <h1>Acerca de Pilas Engine 2</h1>
+    <div class="overflow-auto">
+      <div class="center mw7 pa4 lato lh-copy">
 
-  <h2>¿Que es Pilas Engine?</h2>
+      <h1>Acerca de Pilas Engine 2</h1>
 
-  <p>Pilas es una herramienta para construir videojuegos de manera
-    sencilla y divertida.
-  </p>
+      <h2>¿Que es Pilas Engine?</h2>
 
-  <p>
-    Ideamos esta herramienta para que los jóvenes puedan descubrir y
-    aprender a programar computadoras. Creemos que aprender a programar videojuegos
-    es algo tan espectacular que todas las personas deberían tener la posibilidad
-    de hacerlo. Programar te permite tomar el control de las
-    computadoras para inventar, compartir y desarrollar cualquier tipo de software.
-  </p>
+      <p>Pilas es una herramienta para construir videojuegos de manera
+        sencilla y divertida.
+      </p>
 
-  <p>
-    Visitá el sitio
+      <p>
+        Ideamos esta herramienta para que los jóvenes puedan descubrir y
+        aprender a programar computadoras. Creemos que aprender a programar videojuegos
+        es algo tan espectacular que todas las personas deberían tener la posibilidad
+        de hacerlo. Programar te permite tomar el control de las
+        computadoras para inventar, compartir y desarrollar cualquier tipo de software.
+      </p>
 
-    {{#en-electron}}
-      <a href="#" {{action "abrir_el_sitio_de_pilas"}}>pilas-engine.com.ar</a>
-    {{else}}
-      <a href='http://pilas-engine.com.ar' target="_blank">pilas-engine.com.ar</a>
-    {{/en-electron}}
+      <p>
+        Visitá el sitio
 
-    para conocer más sobre acerca de este proyecto, o escribinos directamente en
-    en nuestro
+        {{#en-electron}}
+          <a href="#" {{action "abrir_el_sitio_de_pilas"}}>pilas-engine.com.ar</a>
+        {{else}}
+          <a href='http://pilas-engine.com.ar' target="_blank">pilas-engine.com.ar</a>
+        {{/en-electron}}
 
-    {{#en-electron}}
-      <a href="#" {{action "abrir_el_foro_de_pilas"}}>foro de mensajes</a>
-    {{else}}
-      <a href='http://foro.pilas-engine.com.ar/' target="_blank">foro de mensajes</a>
-    {{/en-electron}}
+        para conocer más sobre acerca de este proyecto, o escribinos directamente en
+        en nuestro
 
-    si te surge alguna duda.
-  </p>
+        {{#en-electron}}
+          <a href="#" {{action "abrir_el_foro_de_pilas"}}>foro de mensajes</a>
+        {{else}}
+          <a href='http://foro.pilas-engine.com.ar/' target="_blank">foro de mensajes</a>
+        {{/en-electron}}
 
-
-  <p>Los íconos de la interfaz han sido creados
-    <a href="https://icons8.com/ios-icons" target="_blank">por Icons8</a>, mientras
-    que los gráficos de juegos de incluidos han sido desarrollados
-    por Walter Velazquez y el proyecto kenney.
-  </p>
-
-  {{#en-electron}}
-    <p>Este proyecto utiliza electron, incluso desde aquí se puede <a href="" {{action "abrirInspector"}}>abrir las herramientas de desarrollo</a> para inspeccionar la aplicación.</p>
-  {{/en-electron}}
+        si te surge alguna duda.
+      </p>
 
 
-  <p class='tc gray pt4'>© Hugo Ruscitti</p>
+      <p>Los íconos de la interfaz han sido creados
+        <a href="https://icons8.com/ios-icons" target="_blank">por Icons8</a>, mientras
+        que los gráficos de juegos de incluidos han sido desarrollados
+        por Walter Velazquez y el proyecto kenney.
+      </p>
+
+      {{#en-electron}}
+        <p>Este proyecto utiliza electron, incluso desde aquí se puede <a href="" {{action "abrirInspector"}}>abrir las herramientas de desarrollo</a> para inspeccionar la aplicación.</p>
+      {{/en-electron}}
+
+
+      <p class='tc gray pt4'>© Hugo Ruscitti</p>
+
+      </div>
+    </div>
+
+  </div>
+
+  {{outlet}}
 
 </div>
