@@ -1,8 +1,11 @@
 <ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba b--silver mt2 mb2 {{if desactivado 'o-40 disabled'}}">
-  {{#each escenas as |escena|}}
-    <li class="pointer truncate pa1 {{if (eq ultimaEscenaSeleccionada escena.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona escena.id}}>
 
-        {{# if (eq escenaActual escena.id)}}
+  <li class="pointer truncate pa1 {{if (eq seleccion 0) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona "proyecto"}}>◆ proyecto</li>
+
+  {{#each escenas as |escena|}}
+    <li class="pointer truncate pa1 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona escena.id}}>
+
+        {{# if (eq ultimaEscenaSeleccionada escena.id)}}
           ▾
         {{else}}
           ▸
@@ -11,7 +14,7 @@
         <span data-test='nombre-de-escena'>{{escena.nombre}}</span>
 
         <div class='dib fr f7'>
-          {{#if (eq ultimaEscenaSeleccionada escena.id)}}
+          {{#if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0))}}
             {{pilas-boton-eliminar-con-confirmacion tipo="escena" titulo="¿Realmente quieres eliminar la escena?" accion=(action cuando_intenta_eliminar escena.id)}}
           {{/if}}
         </div>

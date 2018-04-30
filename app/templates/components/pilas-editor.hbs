@@ -51,6 +51,7 @@
 
           cuandoModificaObjeto=(action "cuandoModificaObjeto")
           cuando_modifica_escena=(action "cuando_modifica_escena")
+          cuando_modifica_proyecto=(action "cuando_modifica_proyecto")
           desactivado=(not estado.puede_editar)
         }}
 
@@ -131,7 +132,7 @@
 
       </div>
 
-      <div class="flex1 {{if mostrarEditor 'flex flex-column' 'dn'}} bl b--light-silver">
+      <div class="flex1 {{if mostrarEditor 'flex flex-column' 'dn'}} bl b--light-silver {{if oscuro 'bg-black'}}">
 
         {{monaco-editor
             titulo=tituloDelCodigo

@@ -50,7 +50,8 @@ class Mensajes {
   atender_mensaje_define_escena(datos) {
     this.pilas.definir_modo("ModoEditor", {
       pilas: this.pilas,
-      escena: datos.escena
+      escena: datos.escena,
+      proyecto: datos.proyecto
     });
   }
 
@@ -135,5 +136,10 @@ class Mensajes {
 
   atender_mensaje_eliminar_actor_desde_el_editor(datos) {
     this.pilas.modo.eliminar_actor_por_id(datos.id);
+  }
+
+  atender_mensaje_actualizar_proyecto_desde_el_editor(datos) {
+    let proyecto = datos.proyecto;
+    this.pilas.game.resize(proyecto.ancho, proyecto.alto);
   }
 }

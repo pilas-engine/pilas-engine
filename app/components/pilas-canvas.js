@@ -64,6 +64,7 @@ export default Component.extend({
       this.bus.on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
       this.bus.on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
       this.bus.on("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
+      this.bus.on("actualizar_proyecto_desde_el_editor", this, "actualizar_proyecto_desde_el_editor");
 
       this.bus.on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
       this.bus.on("progreso_de_carga", this, "progreso_de_carga");
@@ -97,17 +98,19 @@ export default Component.extend({
     this.bus.off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
     this.bus.off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
     this.bus.off("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
+    this.bus.off("actualizar_proyecto_desde_el_editor", this, "actualizar_proyecto_desde_el_editor");
     this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
     this.bus.off("progreso_de_carga", this, "progreso_de_carga");
     this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
     this.bus.off("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
   },
 
-  cargar_escena({ escena }) {
+  cargar_escena({ escena, proyecto }) {
     let data = {
       tipo: "define_escena",
       nombre: "editorState",
-      escena: escena
+      escena: escena,
+      proyecto: proyecto
     };
 
     this.contexto.postMessage(data, utils.HOST);
@@ -198,6 +201,15 @@ export default Component.extend({
       tipo: "actualizar_escena_desde_el_editor",
       id,
       escena
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  actualizar_proyecto_desde_el_editor({ proyecto }) {
+    let data = {
+      tipo: "actualizar_proyecto_desde_el_editor",
+      proyecto
     };
 
     this.contexto.postMessage(data, utils.HOST);

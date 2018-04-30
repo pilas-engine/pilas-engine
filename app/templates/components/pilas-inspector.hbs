@@ -2,7 +2,7 @@
 
   {{#if instancia_seleccionada}}
 
-    {{#if ha_seleccionado_un_actor}}
+    {{#if (eq tipo_de_la_instancia_seleccionada 'actor')}}
 
       <div class="pb1 truncate h2"><div class="dib w4">nombre</div> {{instancia_seleccionada.nombre}}</div>
       <div class="pb1 truncate h2"><div class="dib w4">imagen</div> {{instancia_seleccionada.imagen}}</div>
@@ -49,7 +49,7 @@
 
       {{/each}}
 
-    {{else}}
+    {{else if (eq tipo_de_la_instancia_seleccionada 'escena')}}
 
       <div class="pb1 truncate h2"><div class="dib w4">nombre</div> {{instancia_seleccionada.nombre}}</div>
 
@@ -76,7 +76,27 @@
 
       {{/each}}
 
+    {{else if (eq tipo_de_la_instancia_seleccionada 'proyecto')}}
 
+      {{#each propiedades_de_proyecto as |propiedad|}}
+
+        {{#if (eq propiedad.tipo "numero")}}
+
+          {{pilas-propiedad/numero objeto=instancia_seleccionada
+              min=propiedad.min
+              max=propiedad.max
+              propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modifica_atributo_del_proyecto")}}
+
+        {{else}}
+
+          <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+
+        {{/if}}
+
+      {{/each}}
+
+    {{else}}
+      <p class='red'>No se reconoce este tipo de instancia seleccionada</p>
     {{/if}}
 
   {{/if}}

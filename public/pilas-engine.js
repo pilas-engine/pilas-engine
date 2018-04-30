@@ -341,7 +341,8 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_define_escena = function (datos) {
         this.pilas.definir_modo("ModoEditor", {
             pilas: this.pilas,
-            escena: datos.escena
+            escena: datos.escena,
+            proyecto: datos.proyecto
         });
     };
     Mensajes.prototype.atender_mensaje_actualizar_escena_desde_el_editor = function (datos) {
@@ -409,6 +410,10 @@ var Mensajes = (function () {
     };
     Mensajes.prototype.atender_mensaje_eliminar_actor_desde_el_editor = function (datos) {
         this.pilas.modo.eliminar_actor_por_id(datos.id);
+    };
+    Mensajes.prototype.atender_mensaje_actualizar_proyecto_desde_el_editor = function (datos) {
+        var proyecto = datos.proyecto;
+        this.pilas.game.resize(proyecto.ancho, proyecto.alto);
     };
     return Mensajes;
 }());
@@ -1673,16 +1678,15 @@ var ModoCargador = (function (_super) {
 var ModoEditor = (function (_super) {
     __extends(ModoEditor, _super);
     function ModoEditor() {
-        var _this = _super.call(this, { key: "ModoEditor" }) || this;
-        _this.ancho = 500;
-        _this.alto = 500;
-        return _this;
+        return _super.call(this, { key: "ModoEditor" }) || this;
     }
     ModoEditor.prototype.preload = function () { };
     ModoEditor.prototype.create = function (datos) {
         _super.prototype.create.call(this, datos);
         this.actores = [];
         this.pilas = datos.pilas;
+        this.ancho = datos.proyecto.ancho;
+        this.alto = datos.proyecto.alto;
         this.crear_fondo(datos.escena.fondo);
         this.posicionar_la_camara(datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);

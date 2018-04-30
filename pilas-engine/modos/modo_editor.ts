@@ -3,9 +3,8 @@
 class ModoEditor extends Modo {
   pilas: Pilas;
 
-  // TODO: este debería ser el tamaño de la escena o el proyecto.
-  ancho: number = 500;
-  alto: number = 500;
+  ancho: number;
+  alto: number;
 
   constructor() {
     super({ key: "ModoEditor" });
@@ -17,6 +16,9 @@ class ModoEditor extends Modo {
     super.create(datos);
     this.actores = [];
     this.pilas = datos.pilas;
+
+    this.ancho = datos.proyecto.ancho;
+    this.alto = datos.proyecto.alto;
 
     this.crear_fondo(datos.escena.fondo);
     this.posicionar_la_camara(datos.escena);

@@ -128,7 +128,7 @@ export default Component.extend({
     }
 
     let escenaComoJSON = JSON.parse(JSON.stringify(escena));
-    this.bus.trigger("cargar_escena", { escena: escenaComoJSON });
+    this.bus.trigger("cargar_escena", { escena: escenaComoJSON, proyecto: this.proyecto });
   },
 
   obtener_la_escena_actual() {
@@ -268,6 +268,10 @@ export default Component.extend({
     this.obtener_actor_por_nombre(nombre).set("codigo", codigo);
   },
 
+  reiniciar_escena_actual() {
+    this.send("cuandoSelecciona", this.escenaActual);
+  },
+
   actions: {
     agregarEscena(model) {
       let nombres_de_escenas = this.obtener_nombres_de_escenas(model);
@@ -383,6 +387,13 @@ export default Component.extend({
       }
     },
     cuandoSelecciona(seleccion) {
+      if (seleccion === "proyecto") {
+        this.set("seleccion", 0);
+        this.set("instancia_seleccionada", this.proyecto);
+        this.set("tipo_de_la_instancia_seleccionada", "proyecto");
+        return;
+      }
+
       this.set("seleccion", seleccion);
 
       let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
@@ -393,7 +404,13 @@ export default Component.extend({
         this.set("tipo_de_la_instancia_seleccionada", "actor");
         this.set("codigo", this.obtener_codigo_para_el_actor(actor));
         this.set("tituloDelCodigo", `Código del actor: ${seleccion}`);
-      } else {
+
+        this.bus.trigger("selecciona_actor_desde_el_editor", {
+          id: seleccion
+        });
+      }
+
+      if (escena) {
         this.set("instancia_seleccionada", escena);
         this.set("tipo_de_la_instancia_seleccionada", "escena");
         this.set("ultimaEscenaSeleccionada", seleccion);
@@ -402,10 +419,6 @@ export default Component.extend({
         this.set("codigo", this.obtener_codigo_para_la_escena(escena));
         this.set("tituloDelCodigo", `Código de la escena: ${seleccion}`);
       }
-
-      this.bus.trigger("selecciona_actor_desde_el_editor", {
-        id: seleccion
-      });
     },
     cuandoModificaObjeto(objeto) {
       this.bus.trigger("actualizar_actor_desde_el_editor", {
@@ -418,6 +431,14 @@ export default Component.extend({
         id: escena.id,
         escena: escena
       });
+    },
+    cuando_modifica_proyecto(proyecto) {
+      this.bus.trigger("actualizar_proyecto_desde_el_editor", {
+        proyecto: proyecto
+      });
+
+      this.mostrar_la_escena_actual_sobre_pilas();
+      //this.reiniciar_escena_actual();
     },
     cuando_intenta_duplicar(id) {
       let actor_original = this.obtenerDetalleDeActorPorIndice(id);

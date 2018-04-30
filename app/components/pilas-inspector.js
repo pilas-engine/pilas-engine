@@ -117,6 +117,7 @@ export default Component.extend({
         propiedad: "figura_sensor"
       }
     ]);
+
     this.set("propiedades_de_escenas", [
       {
         tipo: "numero",
@@ -133,14 +134,20 @@ export default Component.extend({
         propiedad: "fondo"
       }
     ]);
-  },
 
-  ha_seleccionado_un_actor: computed(
-    "tipo_de_la_instancia_seleccionada",
-    function() {
-      return this.tipo_de_la_instancia_seleccionada === "actor";
-    }
-  ),
+    this.set("propiedades_de_proyecto", [
+      {
+        tipo: "numero",
+        propiedad: "ancho",
+        intensidad: 1
+      },
+      {
+        tipo: "numero",
+        propiedad: "alto",
+        intensidad: 1
+      }
+    ]);
+  },
 
   actions: {
     modificarAtributo(propiedad, valor) {
@@ -153,6 +160,12 @@ export default Component.extend({
       let escena = this.instancia_seleccionada;
       escena.set(propiedad, valor);
       this.cuando_modifica_escena(escena);
+    },
+
+    modifica_atributo_del_proyecto(propiedad, valor) {
+      let proyecto = this.instancia_seleccionada;
+      proyecto.set(propiedad, valor);
+      this.cuando_modifica_proyecto(proyecto);
     }
   }
 });
