@@ -125,6 +125,7 @@ export default Controller.extend(queryParams.Mixin, {
             {
               x: 0,
               y: 0,
+              z: 0,
               imagen: "conejo",
               centro_x: 0.5,
               centro_y: 0.5,
@@ -147,8 +148,8 @@ export default Controller.extend(queryParams.Mixin, {
               nombre: "conejo"
             },
             {
-              x: -1.9685039370078528,
-              y: -96.45669291338584,
+              x: 0,
+              y: -90,
               imagen: "plataforma",
               centro_x: 0.5,
               centro_y: 0.5,
@@ -171,8 +172,8 @@ export default Controller.extend(queryParams.Mixin, {
               nombre: "plataforma"
             },
             {
-              x: 96.45669291338584,
-              y: 39.37007874015751,
+              x: 96,
+              y: 39,
               imagen: "caja",
               centro_x: 0.5,
               centro_y: 0.5,
@@ -195,8 +196,8 @@ export default Controller.extend(queryParams.Mixin, {
               nombre: "caja"
             },
             {
-              x: -61.02362204724409,
-              y: 57.086614173228355,
+              x: -61,
+              y: 57,
               imagen: "pelota",
               centro_x: 0.5,
               centro_y: 0.5,

@@ -18,6 +18,7 @@ class ActorBase {
   propiedades_base = {
     x: 0,
     y: 0,
+    z: 0,
     imagen: "sin_imagen",
 
     centro_x: 0.5,
@@ -44,6 +45,7 @@ class ActorBase {
   propiedades: any = {
     x: 0,
     y: 0,
+    z: 0,
     imagen: "sin_imagen",
     figura: ""
   };
@@ -130,6 +132,7 @@ class ActorBase {
     this.transparencia = propiedades.transparencia || 0;
     this.x = propiedades.x || 0;
     this.y = propiedades.y || 0;
+    this.z = propiedades.z || 0;
     this.espejado = propiedades.espejado;
     this.espejado_vertical = propiedades.espejado_vertical;
 
@@ -153,6 +156,7 @@ class ActorBase {
       tipo: this.tipo,
       x: Math.round(this.x),
       y: Math.round(this.y),
+      z: Math.round(this.z),
       centro_x: this.centro_x,
       centro_y: this.centro_y,
       rotacion: this.rotacion,
@@ -256,6 +260,15 @@ class ActorBase {
   get y() {
     let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
     return y;
+  }
+
+  set z(_z: number) {
+    this.pilas.utilidades.validar_numero(_z);
+    this.sprite.depth = -_z;
+  }
+
+  get z() {
+    return -this.sprite.depth;
   }
 
   set rotacion(angulo: number) {

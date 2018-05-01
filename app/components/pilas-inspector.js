@@ -8,6 +8,21 @@ export default Component.extend({
   didInsertElement() {
     this.set("propiedades_de_actores", [
       {
+        tipo: "numero",
+        propiedad: "x",
+        intensidad: 1
+      },
+      {
+        tipo: "numero",
+        propiedad: "y",
+        intensidad: 1
+      },
+      {
+        tipo: "numero",
+        propiedad: "z",
+        intensidad: 1
+      },
+      {
         tipo: "cadena",
         propiedad: "etiqueta"
       },
@@ -30,16 +45,6 @@ export default Component.extend({
         tipo: "numero",
         propiedad: "escala_y",
         intensidad: 0.01
-      },
-      {
-        tipo: "numero",
-        propiedad: "x",
-        intensidad: 1
-      },
-      {
-        tipo: "numero",
-        propiedad: "y",
-        intensidad: 1
       },
       {
         tipo: "interruptor",
@@ -110,6 +115,10 @@ export default Component.extend({
       {
         tipo: "interruptor",
         propiedad: "figura_dinamica"
+      },
+      {
+        tipo: "interruptor",
+        propiedad: "figura_sin_rotacion"
       },
       {
         tipo: "interruptor",

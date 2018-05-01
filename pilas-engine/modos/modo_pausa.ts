@@ -93,6 +93,7 @@ class ModoPausa extends Modo {
     sprite.alpha = 1 - entidad.transparencia / 100;
     sprite.setFlipX(entidad.espejado);
     sprite.setFlipY(entidad.espejado_vertical);
+    sprite.depth = -entidad.z;
 
     if (entidad.figura) {
       sprite.figura = this.crear_figura_estatica_para(entidad);

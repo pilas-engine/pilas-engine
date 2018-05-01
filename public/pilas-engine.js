@@ -615,6 +615,7 @@ var ActorBase = (function () {
         this.propiedades_base = {
             x: 0,
             y: 0,
+            z: 0,
             imagen: "sin_imagen",
             centro_x: 0.5,
             centro_y: 0.5,
@@ -637,6 +638,7 @@ var ActorBase = (function () {
         this.propiedades = {
             x: 0,
             y: 0,
+            z: 0,
             imagen: "sin_imagen",
             figura: ""
         };
@@ -709,6 +711,7 @@ var ActorBase = (function () {
         this.transparencia = propiedades.transparencia || 0;
         this.x = propiedades.x || 0;
         this.y = propiedades.y || 0;
+        this.z = propiedades.z || 0;
         this.espejado = propiedades.espejado;
         this.espejado_vertical = propiedades.espejado_vertical;
         this.sprite["actor"] = this;
@@ -728,6 +731,7 @@ var ActorBase = (function () {
             tipo: this.tipo,
             x: Math.round(this.x),
             y: Math.round(this.y),
+            z: Math.round(this.z),
             centro_x: this.centro_x,
             centro_y: this.centro_y,
             rotacion: this.rotacion,
@@ -832,6 +836,17 @@ var ActorBase = (function () {
             this.pilas.utilidades.validar_numero(_y);
             var y = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y).y;
             this.sprite.y = y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "z", {
+        get: function () {
+            return -this.sprite.depth;
+        },
+        set: function (_z) {
+            this.pilas.utilidades.validar_numero(_z);
+            this.sprite.depth = -_z;
         },
         enumerable: true,
         configurable: true
@@ -1619,7 +1634,7 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_canvas_de_depuracion = function () {
         var graphics = this.add.graphics({ x: 0, y: 0 });
-        graphics.depth = 200;
+        graphics.depth = -20000;
         this.graphics = graphics;
     };
     Modo.prototype.update = function (actores) {
@@ -1643,7 +1658,7 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
-        this.fondo.depth = -1000;
+        this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
     };
     Modo.prototype.obtener_actor_por_id = function (id) {
@@ -1657,6 +1672,7 @@ var Modo = (function (_super) {
         sprite.angle = -actor.rotacion;
         sprite.scaleX = actor.escala_x;
         sprite.scaleY = actor.escala_y;
+        sprite.depth = -actor.z || 0;
         sprite.setOrigin(actor.centro_x, actor.centro_y);
         sprite.alpha = 1 - actor.transparencia / 100;
         if (sprite.figura) {
@@ -2131,6 +2147,7 @@ var ModoPausa = (function (_super) {
         sprite.alpha = 1 - entidad.transparencia / 100;
         sprite.setFlipX(entidad.espejado);
         sprite.setFlipY(entidad.espejado_vertical);
+        sprite.depth = -entidad.z;
         if (entidad.figura) {
             sprite.figura = this.crear_figura_estatica_para(entidad);
         }

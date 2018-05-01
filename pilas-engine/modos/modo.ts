@@ -25,7 +25,7 @@ class Modo extends Phaser.Scene {
 
   crear_canvas_de_depuracion() {
     let graphics = this.add.graphics({ x: 0, y: 0 });
-    graphics.depth = 200;
+    graphics.depth = -20000;
     this.graphics = graphics;
   }
 
@@ -52,7 +52,7 @@ class Modo extends Phaser.Scene {
 
   crear_fondo(fondo) {
     this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
-    this.fondo.depth = -1000;
+    this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
   }
 
@@ -69,6 +69,7 @@ class Modo extends Phaser.Scene {
     sprite.angle = -actor.rotacion;
     sprite.scaleX = actor.escala_x;
     sprite.scaleY = actor.escala_y;
+    sprite.depth = -actor.z || 0;
     sprite.setOrigin(actor.centro_x, actor.centro_y);
     sprite.alpha = 1 - actor.transparencia / 100;
 

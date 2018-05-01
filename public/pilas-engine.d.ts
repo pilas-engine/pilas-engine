@@ -209,6 +209,7 @@ declare class ActorBase {
     propiedades_base: {
         x: number;
         y: number;
+        z: number;
         imagen: string;
         centro_x: number;
         centro_y: number;
@@ -237,6 +238,7 @@ declare class ActorBase {
         tipo: String;
         x: number;
         y: number;
+        z: number;
         centro_x: number;
         centro_y: number;
         rotacion: number;
@@ -261,6 +263,7 @@ declare class ActorBase {
     imagen: string;
     x: number;
     y: number;
+    z: number;
     rotacion: number;
     escala_x: number;
     escala_y: number;
