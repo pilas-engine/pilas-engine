@@ -13,8 +13,9 @@
       </div>
 
       <div class="pa2">
-
         {{pilas-interruptor variable=mostrarPropiedades texto="Panel de actores"}}
+
+        {{pilas-interruptor deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir el panel de previsualización"}}
         {{pilas-interruptor variable=mostrarEditor texto="Panel del editor"}}
       </div>
 
@@ -57,15 +58,14 @@
 
       </div>
 
-      <div class="flex flex1 flex-column w-30 bg-white pa2 unselectable">
-
+      <div class="flex {{if debe_expandir_el_panel_de_previsualizacion 'flex1' 'w5'}} flex-column bg-white pa2 unselectable">
         <!-- Canvas -->
 
                 <div class='mb2 flex'>
                   {{#if estado.puedeEjecutar}}
                     {{pilas-boton id='ejecutar' accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
 
-                      <div class="dib f6 flex1 tr">
+                      <div class="dib f6 flex1 tr lh-copy-2">
                         {{pilas-interruptor texto="maximizar" variable=maximizar}}
                       </div>
 
@@ -83,7 +83,8 @@
                     {{#if estado.pausaActivada}}
                       <div class="dib ma2 f6 fr flex1 flex">
 
-                        <div class='truncate w5 f7 unselectable tr pt1 pr1'>
+                        <!-- Detalle del timeline, se oculta si el panel está contraído -->
+                        <div class='truncate w5 f7 unselectable tr pt1 pr1 {{if debe_expandir_el_panel_de_previsualizacion '' 'dn'}}'>
                           Cuadro: {{plus posicion}} / {{tiempo (plus posicion)}}
                         </div>
 
@@ -120,7 +121,7 @@
                 <div class="h2 ba br b--gray bg-light-gray mt2">
                   {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
-                  <div class="fr {{if estado.puede_modificar_depurador '' 'o-60 disabled'}}">
+                  <div class="fr {{if debe_expandir_el_panel_de_previsualizacion '' 'dn'}} {{if estado.puede_modificar_depurador '' 'o-60 disabled'}}">
                     {{pilas-interruptor texto="fisica" variable=fisica}}
                     {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
                     {{pilas-interruptor texto="pos" variable=pos}}

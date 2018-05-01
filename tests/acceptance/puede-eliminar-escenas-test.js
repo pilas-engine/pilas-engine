@@ -28,7 +28,7 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     assert.equal($("[data-test='nombre-de-escena']").text(), "escena1escena2");
 
     await click("#boton-eliminar-escena");
-    await pulsar("Si");
+    await pulsar("Sí");
     assert.equal($("[data-test='nombre-de-escena']").text(), "escena2");
     await esperar(PAUSA);
   });
