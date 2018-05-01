@@ -179,6 +179,7 @@ var Control = (function () {
         this._derecha = pilas.game.input.keyboard.addKey(codigos.RIGHT);
         this._arriba = pilas.game.input.keyboard.addKey(codigos.UP);
         this._abajo = pilas.game.input.keyboard.addKey(codigos.DOWN);
+        this._espacio = pilas.game.input.keyboard.addKey(codigos.SPACE);
     }
     Object.defineProperty(Control.prototype, "izquierda", {
         get: function () {
@@ -213,6 +214,16 @@ var Control = (function () {
     Object.defineProperty(Control.prototype, "abajo", {
         get: function () {
             return this._abajo.isDown;
+        },
+        set: function (v) {
+            this.pilas.utilidades.acceso_incorrecto(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "espacio", {
+        get: function () {
+            return this._espacio.isDown;
         },
         set: function (v) {
             this.pilas.utilidades.acceso_incorrecto(v);

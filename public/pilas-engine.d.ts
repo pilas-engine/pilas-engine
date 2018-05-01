@@ -45,11 +45,13 @@ declare class Control {
     _derecha: any;
     _arriba: any;
     _abajo: any;
+    _espacio: any;
     constructor(pilas: Pilas);
     izquierda: any;
     derecha: any;
     arriba: any;
     abajo: any;
+    espacio: any;
 }
 declare class Depurador {
     pilas: Pilas;
