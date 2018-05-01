@@ -71,6 +71,8 @@ export default Component.extend({
   },
 
   cuando_termina_de_iniciar_ejecucion(pilas, contexto) {
-    this.cuandoInicia(pilas, contexto);
+    if (this.cuandoInicia) {
+      this.cuandoInicia(pilas, contexto);
+    }
   }
 });

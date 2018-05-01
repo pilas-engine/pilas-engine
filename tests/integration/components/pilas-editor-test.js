@@ -26,6 +26,11 @@ module("Integration | Component | pilas editor", function(hooks) {
             nombre: "font",
             imagen: "fuentes/font.png",
             fuente: "fuentes/font.fnt"
+          },
+          {
+            nombre: "impact",
+            imagen: "fuentes/impact.png",
+            fuente: "fuentes/impact.fnt"
           }
         ],
         sonidos: [

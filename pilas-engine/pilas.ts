@@ -49,18 +49,30 @@ class Pilas {
     return this.escenas.escena_actual;
   }
 
-  iniciar_phaser(ancho: number, alto: number, recursos: any) {
-    let self = this;
+  iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
+    if (!recursos) {
+      throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
+    }
+
+    this._ancho = ancho;
+    this._alto = alto;
 
     this.recursos = recursos;
     var configuracion = this.crear_configuracion(ancho, alto);
 
+    if (opciones.esperar_antes_de_iniciar) {
+      console.log("Esperando 5 segundos antes de iniciar ...");
+      setTimeout(() => {
+        this.iniciar_phaser_desde_configuracion(configuracion);
+      }, 5000);
+    } else {
+      this.iniciar_phaser_desde_configuracion(configuracion);
+    }
+  }
+
+  private iniciar_phaser_desde_configuracion(configuracion) {
     var game = new Phaser.Game(configuracion);
-
-    this._ancho = ancho;
-    this._alto = alto;
     this.game = game;
-
     this.control = new Control(this);
   }
 

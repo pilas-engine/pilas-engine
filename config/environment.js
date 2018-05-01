@@ -6,6 +6,9 @@ module.exports = function(environment) {
     environment,
     rootURL: "",
     locationType: "hash",
+    pilas: {
+      esperar_antes_de_iniciar: false
+    },
     EmberENV: {
       FEATURES: {},
       EXTEND_PROTOTYPES: {
@@ -28,6 +31,9 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = "#ember-testing";
     ENV.APP.autoboot = false;
+
+    /* Opciones para depurar pilas en los tests. */
+    ENV.pilas.esperar_antes_de_iniciar = true;
   }
 
   if (environment === "production") {

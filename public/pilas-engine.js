@@ -324,7 +324,7 @@ var Mensajes = (function () {
         }
     };
     Mensajes.prototype.atender_mensaje_iniciar_pilas = function (datos) {
-        this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos);
+        this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones);
     };
     Mensajes.prototype.atender_mensaje_definir_estados_de_depuracion = function (datos) {
         this.pilas.depurador.definir_estados_de_depuracion(datos);
@@ -503,13 +503,27 @@ var Pilas = (function () {
         enumerable: true,
         configurable: true
     });
-    Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos) {
-        var self = this;
-        this.recursos = recursos;
-        var configuracion = this.crear_configuracion(ancho, alto);
-        var game = new Phaser.Game(configuracion);
+    Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos, opciones) {
+        var _this = this;
+        if (!recursos) {
+            throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
+        }
         this._ancho = ancho;
         this._alto = alto;
+        this.recursos = recursos;
+        var configuracion = this.crear_configuracion(ancho, alto);
+        if (opciones.esperar_antes_de_iniciar) {
+            console.log("Esperando 5 segundos antes de iniciar ...");
+            setTimeout(function () {
+                _this.iniciar_phaser_desde_configuracion(configuracion);
+            }, 5000);
+        }
+        else {
+            this.iniciar_phaser_desde_configuracion(configuracion);
+        }
+    };
+    Pilas.prototype.iniciar_phaser_desde_configuracion = function (configuracion) {
+        var game = new Phaser.Game(configuracion);
         this.game = game;
         this.control = new Control(this);
     };

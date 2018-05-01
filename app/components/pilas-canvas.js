@@ -3,6 +3,7 @@ import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import utils from "../utils/utils";
+import ENV from "pilas-engine/config/environment";
 
 export default Component.extend({
   bus: service(),
@@ -37,6 +38,7 @@ export default Component.extend({
     };
 
     iframe.onload = () => {
+      let opciones_de_pilas = ENV.pilas;
       let contexto = iframe.contentWindow;
       this.set("contexto", contexto);
 
@@ -44,7 +46,8 @@ export default Component.extend({
         tipo: "iniciar_pilas",
         ancho: this.ancho,
         alto: this.alto,
-        recursos: this.get("recursos.data")
+        recursos: this.get("recursos.data"),
+        opciones: opciones_de_pilas
       };
 
       this.set("funcionParaAtenderMensajes", e => {
@@ -70,8 +73,6 @@ export default Component.extend({
       this.bus.on("progreso_de_carga", this, "progreso_de_carga");
       this.bus.on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
       this.bus.on("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
-
-      this.alterar_estado_de_maximizacion(this.maximizar);
     };
   },
 
@@ -217,6 +218,7 @@ export default Component.extend({
 
   finaliza_carga() {
     this.set("cargando", false);
+    this.alterar_estado_de_maximizacion(this.maximizar);
 
     if (this.cuando_termina_de_cargar) {
       this.cuando_termina_de_cargar();

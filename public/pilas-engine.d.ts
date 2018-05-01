@@ -152,7 +152,8 @@ declare class Pilas {
     cursor_y: number;
     constructor();
     readonly escena: Escena;
-    iniciar_phaser(ancho: number, alto: number, recursos: any): void;
+    iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
+    private iniciar_phaser_desde_configuracion(configuracion);
     definir_modo(nombre: any, datos: any): void;
     crear_configuracion(ancho: any, alto: any): {
         type: number;

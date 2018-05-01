@@ -133,6 +133,19 @@ export default Component.extend({
 
   obtener_la_escena_actual() {
     let indice = this.ultimaEscenaSeleccionada;
+
+    if (!indice) {
+      throw Error("No se puede acceder a la última escena seleccionada");
+    }
+
+    if (!this.get("proyecto")) {
+      throw Error("No se envió el parámetro proyecto a este componente.");
+    }
+
+    if (!this.get("proyecto.escenas")) {
+      throw Error("El proyecto enviado no tiene escenas.");
+    }
+
     return this.get("proyecto.escenas").findBy("id", indice);
   },
 
