@@ -331,7 +331,7 @@ export default Component.extend({
       let nombre = obtener_nombre_sin_repetir(nombres, actor.nombre);
 
       actor.propiedades.id = id;
-      actor.propiedades.imagen = actor.imagen;
+      actor.propiedades.imagen = actor.imagen || "sin_imagen";
 
       actor.propiedades.nombre = nombre;
 

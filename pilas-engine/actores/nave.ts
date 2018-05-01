@@ -1,4 +1,8 @@
 class nave extends Actor {
+  propiedades = {
+    imagen: "nave_en_reposo"
+  };
+
   velocidad = 5;
 
   iniciar() {

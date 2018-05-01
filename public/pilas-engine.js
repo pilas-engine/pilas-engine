@@ -358,6 +358,7 @@ var Mensajes = (function () {
     };
     Mensajes.prototype.atender_mensaje_actualizar_escena_desde_el_editor = function (datos) {
         this.pilas.modo.posicionar_la_camara(datos.escena);
+        this.pilas.modo.crear_fondo(datos.escena.fondo);
     };
     Mensajes.prototype.atender_mensaje_ejecutar_proyecto = function (datos) {
         var parametros = {
@@ -1217,7 +1218,11 @@ var Actor = (function (_super) {
 var aceituna = (function (_super) {
     __extends(aceituna, _super);
     function aceituna() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "aceituna"
+        };
+        return _this;
     }
     aceituna.prototype.iniciar = function () {
         this.imagen = "aceituna";
@@ -1407,6 +1412,9 @@ var nave = (function (_super) {
     __extends(nave, _super);
     function nave() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "nave_en_reposo"
+        };
         _this.velocidad = 5;
         return _this;
     }
@@ -1508,7 +1516,6 @@ var suelo = (function (_super) {
         _this.propiedades = {
             figura: "rectangulo",
             imagen: "suelo",
-            y: -250,
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false
@@ -1525,7 +1532,6 @@ var techo = (function (_super) {
         _this.propiedades = {
             figura: "rectangulo",
             imagen: "techo",
-            y: +255,
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false

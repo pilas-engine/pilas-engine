@@ -4,6 +4,7 @@ class Modo extends Phaser.Scene {
   pilas: Pilas;
   fps: any;
   graphics: any;
+  fondo: any;
 
   constructor(data) {
     super(data);

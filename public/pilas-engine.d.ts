@@ -308,6 +308,9 @@ declare class Actor extends ActorBase {
     actualizar(): void;
 }
 declare class aceituna extends Actor {
+    propiedades: {
+        imagen: string;
+    };
     iniciar(): void;
 }
 declare class caja extends Actor {
@@ -381,6 +384,9 @@ declare class moneda extends Actor {
     };
 }
 declare class nave extends Actor {
+    propiedades: {
+        imagen: string;
+    };
     velocidad: number;
     iniciar(): void;
     actualizar(): void;
@@ -428,7 +434,6 @@ declare class suelo extends Actor {
     propiedades: {
         figura: string;
         imagen: string;
-        y: number;
         figura_ancho: number;
         figura_alto: number;
         figura_dinamica: boolean;
@@ -439,7 +444,6 @@ declare class techo extends Actor {
     propiedades: {
         figura: string;
         imagen: string;
-        y: number;
         figura_ancho: number;
         figura_alto: number;
         figura_dinamica: boolean;
@@ -478,6 +482,7 @@ declare class Modo extends Phaser.Scene {
     pilas: Pilas;
     fps: any;
     graphics: any;
+    fondo: any;
     constructor(data: any);
     create(datos: any): void;
     destacar_actor_por_id(id: any): void;
