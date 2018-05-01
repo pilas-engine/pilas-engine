@@ -347,6 +347,23 @@ declare class conejo extends Actor {
     cuando_se_mantiene_una_colision(actor: any): void;
     cuando_termina_una_colision(actor: any): void;
 }
+declare class gallina extends Actor {
+    propiedades: {
+        x: number;
+        y: number;
+        imagen: string;
+        figura: string;
+        figura_radio: number;
+        figura_sin_rotacion: boolean;
+        figura_dinamica: boolean;
+        figura_rebote: number;
+    };
+    iniciar(): void;
+    actualizar(): void;
+    vuela_iniciar(): void;
+    vuela_actualizar(): void;
+    vuela_cuando_comienza_una_colision(actor: any): void;
+}
 declare class logo extends Actor {
     iniciar(): void;
 }

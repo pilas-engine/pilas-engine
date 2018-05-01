@@ -21,10 +21,7 @@ export default Service.extend({
       url: `${config.rootURL}actores/-actor-base.ts`
     });
 
-    let propiedades_base = this.extraer_diccionario(
-      "propiedades_base",
-      codigo_del_actor_base
-    );
+    let propiedades_base = this.extraer_diccionario("propiedades_base", codigo_del_actor_base);
 
     for (let i = 0; i < metadata.actores.length; i++) {
       let actor = metadata.actores[i];
@@ -34,13 +31,10 @@ export default Service.extend({
       });
 
       actor.codigo = codigo;
-      actor.imagen = actor.nombre;
 
       let propiedades = this.extraer_diccionario("propiedades", codigo);
-      actor.propiedades = this.combinar_propiedades(
-        propiedades_base,
-        propiedades
-      );
+      actor.imagen = propiedades.imagen;
+      actor.propiedades = this.combinar_propiedades(propiedades_base, propiedades);
     }
 
     this.set("lista_de_actores", metadata.actores);
@@ -69,10 +63,7 @@ export default Service.extend({
       return obj;
     }
 
-    return extend(
-      JSON.parse(JSON.stringify(propiedades_iniciales)),
-      propiedades
-    );
+    return extend(JSON.parse(JSON.stringify(propiedades_iniciales)), propiedades);
   },
 
   iniciar() {

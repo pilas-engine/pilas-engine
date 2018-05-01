@@ -237,8 +237,8 @@ var Depurador = (function () {
     function Depurador(pilas) {
         this.pilas = pilas;
         this.modo_posicion_activado = false;
-        this.mostrar_fps = true;
-        this.mostrar_fisica = true;
+        this.mostrar_fps = false;
+        this.mostrar_fisica = false;
     }
     Depurador.prototype.definir_estados_de_depuracion = function (datos) {
         this.mostrar_fps = datos.fps;
@@ -1331,6 +1331,38 @@ var conejo = (function (_super) {
     conejo.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     conejo.prototype.cuando_termina_una_colision = function (actor) { };
     return conejo;
+}(Actor));
+var gallina = (function (_super) {
+    __extends(gallina, _super);
+    function gallina() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            x: 0,
+            y: 0,
+            imagen: "gallina_vuela_3",
+            figura: "circulo",
+            figura_radio: 30,
+            figura_sin_rotacion: true,
+            figura_dinamica: true,
+            figura_rebote: 0
+        };
+        return _this;
+    }
+    gallina.prototype.iniciar = function () {
+        this.crear_animacion("gallina_vuela", ["gallina_vuela_1", "gallina_vuela_1", "gallina_vuela_2", "gallina_vuela_3", "gallina_vuela_2"], 15);
+        this.crear_animacion("gallina_muere", ["gallina_muere"], 20);
+        this.crear_animacion("gallina_sin_piel", ["gallina_sin_piel"], 20);
+        this.estado = "vuela";
+    };
+    gallina.prototype.actualizar = function () { };
+    gallina.prototype.vuela_iniciar = function () {
+        this.reproducir_animacion("gallina_vuela");
+    };
+    gallina.prototype.vuela_actualizar = function () { };
+    gallina.prototype.vuela_cuando_comienza_una_colision = function (actor) {
+        console.log(actor);
+    };
+    return gallina;
 }(Actor));
 var logo = (function (_super) {
     __extends(logo, _super);

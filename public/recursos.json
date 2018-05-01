@@ -108,7 +108,6 @@
       "nombre": "pared",
       "ruta": "imagenes/pared.png"
     },
-
     {
       "nombre": "plataforma",
       "ruta": "imagenes/plataforma.png"
@@ -117,10 +116,29 @@
       "nombre": "moneda",
       "ruta": "imagenes/moneda.png"
     },
-
     {
       "nombre": "nube",
       "ruta": "imagenes/nubes/nube.png"
+    },
+    {
+      "nombre": "gallina_muere",
+      "ruta": "imagenes/gallina/gallina_muere.png"
+    },
+    {
+      "nombre": "gallina_sin_piel",
+      "ruta": "imagenes/gallina/gallina_sin_piel.png"
+    },
+    {
+      "nombre": "gallina_vuela_1",
+      "ruta": "imagenes/gallina/gallina_vuela_1.png"
+    },
+    {
+      "nombre": "gallina_vuela_2",
+      "ruta": "imagenes/gallina/gallina_vuela_2.png"
+    },
+    {
+      "nombre": "gallina_vuela_3",
+      "ruta": "imagenes/gallina/gallina_vuela_3.png"
     }
   ],
 

@@ -1,5 +1,4 @@
 {
-  "imagenes": ["demo", "otro"],
   "actores": [
     {
       "nombre": "aceituna"
@@ -33,6 +32,9 @@
     },
     {
       "nombre": "nube"
+    },
+    {
+      "nombre": "gallina"
     }
   ]
 }

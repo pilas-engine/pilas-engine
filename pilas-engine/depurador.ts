@@ -7,8 +7,8 @@ class Depurador {
   constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.modo_posicion_activado = false;
-    this.mostrar_fps = true;
-    this.mostrar_fisica = true;
+    this.mostrar_fps = false;
+    this.mostrar_fisica = false;
   }
 
   definir_estados_de_depuracion(datos) {
