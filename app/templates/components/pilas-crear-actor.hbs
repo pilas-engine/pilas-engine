@@ -4,9 +4,10 @@
 
 
 {{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id='dialogoCrearActor' titulo="Agregar un actor a la escena"}}
+<div>
 
   {{#if tarea.isRunning}}
-  
+
     {{pilas-celda-de-actor-skeleton}}
     {{pilas-celda-de-actor-skeleton}}
     {{pilas-celda-de-actor-skeleton}}
@@ -22,4 +23,5 @@
 
   {{/if}}
 
+</div>
 {{/pilas-modal}}

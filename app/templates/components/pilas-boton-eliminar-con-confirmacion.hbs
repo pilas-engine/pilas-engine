@@ -2,13 +2,13 @@
 
 {{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id=idDialogo titulo="Cuidado" reducido=true}}
 
-  <div>
+  <div class="flex1 verdana f6">
     {{titulo}}
   </div>
 
   <div class="tc">
-    {{pilas-boton accion=(action "ocultarEjecutandoAccion") texto="Si"}}
-    {{pilas-boton accion=(action "ocultar") texto="No"}}
+    {{pilas-boton icono="si" accion=(action "ocultarEjecutandoAccion") texto="Sí" atajo="Enter"}}
+    {{pilas-boton icono="no" accion=(action "ocultar") texto="No" atajo="Escape"}}
   </div>
 
 {{/pilas-modal}}

@@ -4,17 +4,17 @@
 
   <div {{action "ocultar"}} class="bg-black-50 z-1 absolute absolute--fill "></div>
 
-  <div class="flex flex-column flex-auto ma5 bg-white z-2 {{if reducido 'h4 margin-left-auto margin-right-auto mw6'}}">
+  <div class="flex flex-column flex-auto ma5 bg-white z-2 {{if reducido 'h4-5 margin-left-auto margin-right-auto mw6'}}">
 
     <div class="flex">
-      <h1 class="f4 pl3 flex1" id='titulo'>{{titulo}}</h1>
+      <h1 class="f4 pl2 flex1" id='titulo'>{{titulo}}</h1>
 
       <button class="pointer ma3 bn" {{action "ocultar"}} id='cerrar'>
         ×
       </button>
     </div>
 
-    <div class="flex1 pa2 overflow-auto">
+    <div class="flex1 pa2 overflow-auto flex flex-column">
       {{yield}}
     </div>
 

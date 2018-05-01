@@ -96,56 +96,56 @@
 	background-size: 270px 252px;
 }
 
+.computadora {
+    width: 25px;
+    height: 25px;
+    background: url("spritesheet.png") -163px -105px;
+	background-size: 270px 252px;
+}
+
 .off {
     width: 16px;
     height: 14px;
-    background: url("spritesheet.png") -30px -226px;
-	background-size: 270px 252px;
-}
-
-.info {
-    width: 24px;
-    height: 24px;
-    background: url("spritesheet.png") -2px -198px;
-	background-size: 270px 252px;
-}
-
-.ejecutar {
-    width: 24px;
-    height: 24px;
-    background: url("spritesheet.png") -30px -198px;
+    background: url("spritesheet.png") -86px -226px;
 	background-size: 270px 252px;
 }
 
 .arduino {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -58px -198px;
+    background: url("spritesheet.png") -30px -198px;
 	background-size: 270px 252px;
 }
 
 .demo {
     width: 24px;
     height: 24px;
+    background: url("spritesheet.png") -58px -198px;
+	background-size: 270px 252px;
+}
+
+.no {
+    width: 24px;
+    height: 24px;
     background: url("spritesheet.png") -86px -198px;
 	background-size: 270px 252px;
 }
 
-.preferencias {
+.si {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -114px -198px;
 	background-size: 270px 252px;
 }
 
-.pausa {
+.detener {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -142px -198px;
 	background-size: 270px 252px;
 }
 
-.detener {
+.pausa {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -170px -198px;
@@ -166,10 +166,24 @@
 	background-size: 270px 252px;
 }
 
-.volver {
+.ejecutar {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -2px -226px;
+	background-size: 270px 252px;
+}
+
+.preferencias {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -30px -226px;
+	background-size: 270px 252px;
+}
+
+.volver {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -58px -226px;
 	background-size: 270px 252px;
 }
 
@@ -194,10 +208,10 @@
 	background-size: 270px 252px;
 }
 
-.computadora {
-    width: 25px;
-    height: 25px;
-    background: url("spritesheet.png") -163px -105px;
+.info {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -2px -198px;
 	background-size: 270px 252px;
 }
 
