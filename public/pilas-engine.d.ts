@@ -313,6 +313,11 @@ declare class aceituna extends Actor {
     };
     iniciar(): void;
 }
+declare class actor extends Actor {
+    propiedades: {};
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class caja extends Actor {
     propiedades: {
         x: number;
@@ -487,8 +492,10 @@ declare class Modo extends Phaser.Scene {
     graphics: any;
     fondo: any;
     _nombre_del_fondo: string;
+    ancho: number;
+    alto: number;
     constructor(data: any);
-    create(datos: any): void;
+    create(datos: any, ancho: any, alto: any): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
     update(actores: any): void;
@@ -511,8 +518,6 @@ declare class ModoCargador extends Modo {
 }
 declare class ModoEditor extends Modo {
     pilas: Pilas;
-    ancho: number;
-    alto: number;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -536,6 +541,7 @@ declare class ModoEjecucion extends Modo {
     nombre_de_la_escena_inicial: string;
     permitir_modo_pausa: boolean;
     pausar: boolean;
+    modo_fisica_activado: boolean;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -549,14 +555,12 @@ declare class ModoEjecucion extends Modo {
     guardar_parametros_en_atributos(datos: any): void;
     update(): void;
     guardar_foto_de_entidades(): void;
-    dibujar_punto_de_control(graphics: any, x: any, y: any): void;
+    dibujar_punto_de_control(graphics: any, _x: any, _y: any): void;
 }
 declare class ModoPausa extends Modo {
     pilas: Pilas;
     graphics_modo_pausa: any;
     fps: any;
-    ancho: number;
-    alto: number;
     posicion: number;
     sprites: any;
     texto: any;

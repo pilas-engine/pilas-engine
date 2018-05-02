@@ -190,7 +190,7 @@ class ActorBase {
 
   pre_actualizar() {
     if (this.figura && this.sin_rotacion) {
-      this.sprite.setAngularVelocity(0);
+      (this.sprite as any).setAngularVelocity(0);
     }
 
     this.automata.actualizar();
@@ -383,7 +383,7 @@ class ActorBase {
     this.pilas.utilidades.validar_numero(ancho);
     this.pilas.utilidades.validar_numero(alto);
 
-    this.sprite.setRectangle(ancho, alto);
+    (this.sprite as any).setRectangle(ancho, alto);
   }
 
   crear_figura_circular(radio: number = 0) {
@@ -392,9 +392,9 @@ class ActorBase {
     this.pilas.utilidades.validar_numero(radio);
 
     if (radio) {
-      this.sprite.setCircle(radio);
+      (this.sprite as any).setCircle(radio);
     } else {
-      this.sprite.setCircle();
+      (this.sprite as any).setCircle();
     }
   }
 
@@ -417,14 +417,14 @@ class ActorBase {
   get estatico() {
     this.fallar_si_no_tiene_figura();
 
-    return this.sprite.isStatic();
+    return (this.sprite as any).isStatic();
   }
 
   set estatico(estatico: boolean) {
     this.fallar_si_no_tiene_figura();
 
-    this.sprite.setStatic(estatico);
-    this.sprite.setVelocity(0, 0);
+    (this.sprite as any).setStatic(estatico);
+    (this.sprite as any).setVelocity(0, 0);
   }
 
   set dinamico(dinamico: boolean) {
@@ -441,48 +441,48 @@ class ActorBase {
 
   impulsar(x, y) {
     this.fallar_si_no_tiene_figura();
-    this.sprite.setVelocity(x, -y);
+    (this.sprite as any).setVelocity(x, -y);
   }
 
   get velocidad_x() {
     this.fallar_si_no_tiene_figura();
-    return this.sprite.body.velocity.x;
+    return (this.sprite.body as any).velocity.x;
   }
 
   set velocidad_x(valor: number) {
     this.fallar_si_no_tiene_figura();
-    return this.sprite.setVelocityX(valor);
+    (this.sprite as any).setVelocityX(valor);
   }
 
   get velocidad_y() {
     this.fallar_si_no_tiene_figura();
-    return -this.sprite.body.velocity.y;
+    return -(this.sprite.body as any).velocity.y;
   }
 
   set velocidad_y(valor: number) {
     this.fallar_si_no_tiene_figura();
-    return this.sprite.setVelocityX(-valor);
+    (this.sprite as any).setVelocityX(-valor);
   }
 
   set rebote(valor: number) {
     this.pilas.utilidades.validar_numero(valor);
     this.fallar_si_no_tiene_figura();
-    this.sprite.setBounce(valor);
+    (this.sprite as any).setBounce(valor);
   }
 
   get rebote() {
     this.fallar_si_no_tiene_figura();
-    return this.sprite.body.restitution;
+    return (this.sprite.body as any).restitution;
   }
 
   set sensor(valor: boolean) {
     this.fallar_si_no_tiene_figura();
-    this.sprite.setSensor(valor);
+    (this.sprite as any).setSensor(valor);
   }
 
   get sensor() {
     this.fallar_si_no_tiene_figura();
-    return this.sprite.body.isSensor;
+    return (this.sprite.body as any).isSensor;
   }
 
   get fijo() {

@@ -39,7 +39,7 @@ class ModoCargador extends Modo {
   }
 
   create() {
-    super.create({ pilas: this.pilas });
+    super.create({ pilas: this.pilas }, 500, 500);
     this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
 
     let msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";

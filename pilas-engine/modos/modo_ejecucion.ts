@@ -16,6 +16,7 @@ class ModoEjecucion extends Modo {
   nombre_de_la_escena_inicial: string = null;
   permitir_modo_pausa: boolean;
   pausar = false;
+  modo_fisica_activado: boolean;
 
   constructor() {
     super({ key: "ModoEjecucion" });
@@ -24,7 +25,7 @@ class ModoEjecucion extends Modo {
   preload() {}
 
   create(datos) {
-    super.create(datos);
+    super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
 
     try {
@@ -294,9 +295,9 @@ class ModoEjecucion extends Modo {
     this.pilas.historia.serializar_escena(this.pilas.escena);
   }
 
-  dibujar_punto_de_control(graphics, x, y) {
+  dibujar_punto_de_control(graphics, _x, _y) {
     graphics.fillStyle(0xffffff, 1);
-    let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
+    let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
     graphics.fillRect(x - 3, y - 3, 6, 6);
     graphics.fillStyle(0x000000, 1);
     graphics.fillRect(x - 2, y - 2, 4, 4);

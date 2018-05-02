@@ -1039,7 +1039,7 @@ var ActorBase = (function () {
         },
         set: function (valor) {
             this.fallar_si_no_tiene_figura();
-            return this.sprite.setVelocityX(valor);
+            this.sprite.setVelocityX(valor);
         },
         enumerable: true,
         configurable: true
@@ -1051,7 +1051,7 @@ var ActorBase = (function () {
         },
         set: function (valor) {
             this.fallar_si_no_tiene_figura();
-            return this.sprite.setVelocityX(-valor);
+            this.sprite.setVelocityX(-valor);
         },
         enumerable: true,
         configurable: true
@@ -1228,6 +1228,17 @@ var aceituna = (function (_super) {
         this.imagen = "aceituna";
     };
     return aceituna;
+}(Actor));
+var actor = (function (_super) {
+    __extends(actor, _super);
+    function actor() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {};
+        return _this;
+    }
+    actor.prototype.iniciar = function () { };
+    actor.prototype.actualizar = function () { };
+    return actor;
 }(Actor));
 var caja = (function (_super) {
     __extends(caja, _super);
@@ -1587,11 +1598,12 @@ var EscenaBase = (function () {
     };
     EscenaBase.prototype.quitar_actor_luego_de_eliminar = function (actor) {
         var posicion = this.actores.indexOf(actor);
+        var id = actor["id"];
         if (posicion !== -1) {
             this.actores.splice(posicion, 1);
         }
         else {
-            throw Error("Se intent\u00F3 eliminar un actor inexistente en la escena: id=" + actor.id + " etiqueta=" + actor.etiqueta + ".");
+            throw Error("Se intent\u00F3 eliminar un actor inexistente en la escena: id=" + id + " etiqueta=" + actor.etiqueta + ".");
         }
     };
     return EscenaBase;
@@ -1633,7 +1645,9 @@ var Modo = (function (_super) {
         _this._nombre_del_fondo = "";
         return _this;
     }
-    Modo.prototype.create = function (datos) {
+    Modo.prototype.create = function (datos, ancho, alto) {
+        this.ancho = ancho;
+        this.alto = alto;
         this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
         this.crear_canvas_de_depuracion();
         this.pilas = datos.pilas;
@@ -1670,6 +1684,8 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this._nombre_del_fondo = fondo;
+        console.log(this.add.tileSprite);
+        console.log({ ancho: this.ancho, alto: this.alto });
         this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
@@ -1756,7 +1772,7 @@ var ModoCargador = (function (_super) {
         this.load.on("progress", this.cuando_progresa_la_carga, this);
     };
     ModoCargador.prototype.create = function () {
-        _super.prototype.create.call(this, { pilas: this.pilas });
+        _super.prototype.create.call(this, { pilas: this.pilas }, 500, 500);
         this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
         var msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
         this.add.bitmapText(5, 5, "impact", msg);
@@ -1776,11 +1792,9 @@ var ModoEditor = (function (_super) {
     }
     ModoEditor.prototype.preload = function () { };
     ModoEditor.prototype.create = function (datos) {
-        _super.prototype.create.call(this, datos);
+        _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.pilas = datos.pilas;
-        this.ancho = datos.proyecto.ancho;
-        this.alto = datos.proyecto.alto;
         this.crear_fondo(datos.escena.fondo);
         this.posicionar_la_camara(datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
@@ -1853,7 +1867,7 @@ var ModoEditor = (function (_super) {
         this.actualizar_sprite_desde_datos(sprite, actor);
     };
     ModoEditor.prototype.update = function () {
-        _super.prototype.update.call(this);
+        _super.prototype.update.call(this, this.actores);
         if (this.pilas.depurador.mostrar_fisica) {
             this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
         }
@@ -1883,7 +1897,7 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.preload = function () { };
     ModoEjecucion.prototype.create = function (datos) {
         var _this = this;
-        _super.prototype.create.call(this, datos);
+        _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         try {
             this.guardar_parametros_en_atributos(datos);
@@ -2096,9 +2110,9 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
         this.pilas.historia.serializar_escena(this.pilas.escena);
     };
-    ModoEjecucion.prototype.dibujar_punto_de_control = function (graphics, x, y) {
+    ModoEjecucion.prototype.dibujar_punto_de_control = function (graphics, _x, _y) {
         graphics.fillStyle(0xffffff, 1);
-        var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y), x = _a.x, y = _a.y;
+        var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y), x = _a.x, y = _a.y;
         graphics.fillRect(x - 3, y - 3, 6, 6);
         graphics.fillStyle(0x000000, 1);
         graphics.fillRect(x - 2, y - 2, 4, 4);
@@ -2112,7 +2126,7 @@ var ModoPausa = (function (_super) {
     }
     ModoPausa.prototype.preload = function () { };
     ModoPausa.prototype.create = function (datos) {
-        _super.prototype.create.call(this, datos);
+        _super.prototype.create.call(this, datos, 100, 100);
         this.pilas = datos.pilas;
         this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
@@ -2170,7 +2184,7 @@ var ModoPausa = (function (_super) {
         sprite.setFlipY(entidad.espejado_vertical);
         sprite.depth = -entidad.z;
         if (entidad.figura) {
-            sprite.figura = this.crear_figura_estatica_para(entidad);
+            sprite["figura"] = this.crear_figura_estatica_para(entidad);
         }
         return sprite;
     };

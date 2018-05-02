@@ -3,9 +3,6 @@
 class ModoEditor extends Modo {
   pilas: Pilas;
 
-  ancho: number;
-  alto: number;
-
   constructor() {
     super({ key: "ModoEditor" });
   }
@@ -13,12 +10,9 @@ class ModoEditor extends Modo {
   preload() {}
 
   create(datos) {
-    super.create(datos);
+    super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
     this.pilas = datos.pilas;
-
-    this.ancho = datos.proyecto.ancho;
-    this.alto = datos.proyecto.alto;
 
     this.crear_fondo(datos.escena.fondo);
     this.posicionar_la_camara(datos.escena);
@@ -108,7 +102,7 @@ class ModoEditor extends Modo {
   }
 
   update() {
-    super.update();
+    super.update(this.actores);
 
     if (this.pilas.depurador.mostrar_fisica) {
       this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);

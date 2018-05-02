@@ -5,8 +5,6 @@ class ModoPausa extends Modo {
 
   graphics_modo_pausa: any;
   fps: any;
-  ancho: number;
-  alto: number;
 
   posicion: number;
   sprites: any;
@@ -23,7 +21,7 @@ class ModoPausa extends Modo {
   preload() {}
 
   create(datos) {
-    super.create(datos);
+    super.create(datos, 100, 100);
     this.pilas = datos.pilas;
     this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
@@ -96,7 +94,7 @@ class ModoPausa extends Modo {
     sprite.depth = -entidad.z;
 
     if (entidad.figura) {
-      sprite.figura = this.crear_figura_estatica_para(entidad);
+      sprite["figura"] = this.crear_figura_estatica_para(entidad);
     }
 
     return sprite;

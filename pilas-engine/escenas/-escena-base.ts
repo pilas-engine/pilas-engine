@@ -49,15 +49,12 @@ class EscenaBase {
 
   quitar_actor_luego_de_eliminar(actor: Actor) {
     let posicion = this.actores.indexOf(actor);
+    let id = actor["id"];
 
     if (posicion !== -1) {
       this.actores.splice(posicion, 1);
     } else {
-      throw Error(
-        `Se intentó eliminar un actor inexistente en la escena: id=${
-          actor.id
-        } etiqueta=${actor.etiqueta}.`
-      );
+      throw Error(`Se intentó eliminar un actor inexistente en la escena: id=${id} etiqueta=${actor.etiqueta}.`);
     }
   }
 }

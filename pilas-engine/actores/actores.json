@@ -35,6 +35,9 @@
     },
     {
       "nombre": "gallina"
+    },
+    {
+      "nombre": "actor"
     }
   ]
 }

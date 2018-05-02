@@ -6,12 +6,16 @@ class Modo extends Phaser.Scene {
   graphics: any;
   fondo: any;
   _nombre_del_fondo: string = "";
+  ancho: number;
+  alto: number;
 
   constructor(data) {
     super(data);
   }
 
-  create(datos) {
+  create(datos, ancho, alto) {
+    this.ancho = ancho;
+    this.alto = alto;
     this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
@@ -54,6 +58,8 @@ class Modo extends Phaser.Scene {
 
   crear_fondo(fondo) {
     this._nombre_del_fondo = fondo;
+    console.log(this.add.tileSprite);
+    console.log({ ancho: this.ancho, alto: this.alto });
     this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
