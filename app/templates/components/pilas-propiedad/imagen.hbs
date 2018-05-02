@@ -8,15 +8,15 @@
 
   </div>
 
-  <div class="dib w3 v-top">
+  <div class="dib w3 v-top pointer truncate" {{action 'mostrar'}}>
+    {{pilas-icono icono="imagen"}}
     {{get objeto propiedad.propiedad}}
-
-    <!--
-    <input class="w-100"
-      value={{get objeto propiedad.propiedad}}
-      oninput={{action "al_cambiar" value="target.value"}}
-      />
-    -->
   </div>
+
+  {{#pilas-modal alCerrar=(action "ocultar") visible=mostrar id='dialogo_cambiar_imagen' titulo="Cambiar imagen"}}
+    <div>
+      {{pilas-grilla-de-imagenes cuando_selecciona=(action 'cuando_selecciona_imagen')}}
+    </div>
+  {{/pilas-modal}}
 
 </div>

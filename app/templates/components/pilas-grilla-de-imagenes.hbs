@@ -1,0 +1,37 @@
+{{yield}}
+
+{{#if recursos.tarea.isRunning}}
+  Cargando ...
+{{else}}
+
+  {{#each recursos.tarea.lastSuccessful.value.imagenes as |imagen|}}
+
+    <div test-celda-imagen class="w4 dib
+        ba pa2 button
+        br2
+        verdana f6 link pointer
+        black bg-animate b--black-20
+        unselectable
+        v-top
+        mb1
+        hover-bg-black-10
+    " {{action cuando_selecciona imagen}}
+    >
+    <div class="flex flex-column h-100 w-100">
+
+      {{yield}}
+
+      <div class="flex1 tc w-100 h3">
+        <img class='mw-100 mh-100' src="{{rootURL}}{{imagen.ruta}}" alt="">
+      </div>
+
+      <div class="f6 tc mt2 h1 truncate">
+        {{imagen.nombre}}
+      </div>
+
+    </div>
+    </div>
+
+  {{/each}}
+
+{{/if}}

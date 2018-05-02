@@ -357,8 +357,8 @@ var Mensajes = (function () {
         });
     };
     Mensajes.prototype.atender_mensaje_actualizar_escena_desde_el_editor = function (datos) {
+        this.pilas.modo.cambiar_fondo(datos.escena.fondo);
         this.pilas.modo.posicionar_la_camara(datos.escena);
-        this.pilas.modo.crear_fondo(datos.escena.fondo);
     };
     Mensajes.prototype.atender_mensaje_ejecutar_proyecto = function (datos) {
         var parametros = {
@@ -1387,7 +1387,11 @@ var gallina = (function (_super) {
 var logo = (function (_super) {
     __extends(logo, _super);
     function logo() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "logo"
+        };
+        return _this;
     }
     logo.prototype.iniciar = function () { };
     return logo;
@@ -1625,7 +1629,9 @@ var Normal = (function (_super) {
 var Modo = (function (_super) {
     __extends(Modo, _super);
     function Modo(data) {
-        return _super.call(this, data) || this;
+        var _this = _super.call(this, data) || this;
+        _this._nombre_del_fondo = "";
+        return _this;
     }
     Modo.prototype.create = function (datos) {
         this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
@@ -1663,15 +1669,24 @@ var Modo = (function (_super) {
         }
     };
     Modo.prototype.crear_fondo = function (fondo) {
+        this._nombre_del_fondo = fondo;
         this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
+    };
+    Modo.prototype.cambiar_fondo = function (fondo) {
+        if (fondo !== this._nombre_del_fondo) {
+            this.fondo.destroy();
+            this.fondo = null;
+            this.crear_fondo(fondo);
+        }
     };
     Modo.prototype.obtener_actor_por_id = function (id) {
         return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
     };
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+        sprite.setTexture(actor.imagen);
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -1773,6 +1788,7 @@ var ModoEditor = (function (_super) {
         this.matter.systems.matterPhysics.world.createDebugGraphic();
     };
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores = function () {
+        var matter = this.pilas.Phaser.Physics.Matter.Matter;
         var escena = this;
         this.input.on("dragstart", function (pointer, gameObject) {
             escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
@@ -1783,7 +1799,6 @@ var ModoEditor = (function (_super) {
                 escena.pilas.game.canvas.style.cursor = "-webkit-grabbing";
             }
         });
-        var matter = this.pilas.Phaser.Physics.Matter.Matter;
         this.input.on("drag", function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;

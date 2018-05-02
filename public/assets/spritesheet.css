@@ -103,35 +103,35 @@
 	background-size: 270px 252px;
 }
 
+.info {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -2px -198px;
+	background-size: 270px 252px;
+}
+
 .off {
     width: 16px;
     height: 14px;
-    background: url("spritesheet.png") -86px -226px;
+    background: url("spritesheet.png") -106px -226px;
 	background-size: 270px 252px;
 }
 
 .arduino {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -30px -198px;
+    background: url("spritesheet.png") -58px -198px;
 	background-size: 270px 252px;
 }
 
 .demo {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -58px -198px;
-	background-size: 270px 252px;
-}
-
-.no {
-    width: 24px;
-    height: 24px;
     background: url("spritesheet.png") -86px -198px;
 	background-size: 270px 252px;
 }
 
-.si {
+.no {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -114px -198px;
@@ -145,35 +145,35 @@
 	background-size: 270px 252px;
 }
 
-.pausa {
+.preferencias {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -170px -198px;
 	background-size: 270px 252px;
 }
 
-.error {
+.pausa {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -198px -198px;
 	background-size: 270px 252px;
 }
 
-.actores {
+.error {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -226px -198px;
 	background-size: 270px 252px;
 }
 
-.ejecutar {
+.actores {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -2px -226px;
 	background-size: 270px 252px;
 }
 
-.preferencias {
+.si {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -30px -226px;
@@ -187,31 +187,38 @@
 	background-size: 270px 252px;
 }
 
-.duplicar {
+.imagen {
     width: 16px;
     height: 16px;
     background: url("spritesheet.png") -208px -178px;
 	background-size: 270px 252px;
 }
 
-.borrar {
+.duplicar {
     width: 16px;
     height: 16px;
     background: url("spritesheet.png") -228px -178px;
 	background-size: 270px 252px;
 }
 
-.on {
+.borrar {
     width: 16px;
-    height: 14px;
+    height: 16px;
     background: url("spritesheet.png") -248px -178px;
 	background-size: 270px 252px;
 }
 
-.info {
+.on {
+    width: 16px;
+    height: 14px;
+    background: url("spritesheet.png") -86px -226px;
+	background-size: 270px 252px;
+}
+
+.ejecutar {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -2px -198px;
+    background: url("spritesheet.png") -30px -198px;
 	background-size: 270px 252px;
 }
 

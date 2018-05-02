@@ -37,7 +37,6 @@
       "nombre": "nave",
       "ruta": "imagenes/nave.png"
     },
-
     {
       "nombre": "conejo",
       "ruta": "imagenes/conejo.png"
@@ -66,7 +65,6 @@
       "nombre": "conejo_camina2",
       "ruta": "imagenes/conejo/camina2.png"
     },
-
     {
       "nombre": "nave_en_reposo",
       "ruta": "imagenes/nave/nave_reposo.png"
@@ -95,7 +93,6 @@
       "nombre": "nave_izquierda_2",
       "ruta": "imagenes/nave/nave_izquierda_2.png"
     },
-
     {
       "nombre": "suelo",
       "ruta": "imagenes/suelo.png"
@@ -139,6 +136,38 @@
     {
       "nombre": "gallina_vuela_3",
       "ruta": "imagenes/gallina/gallina_vuela_3.png"
+    },
+    {
+      "ruta": "imagenes/fondos/azul.png",
+      "nombre": "fondo_azul"
+    },
+    {
+      "ruta": "imagenes/fondos/cesped.png",
+      "nombre": "fondo_cesped"
+    },
+    {
+      "ruta": "imagenes/fondos/madera.png",
+      "nombre": "fondo_madera"
+    },
+    {
+      "ruta": "imagenes/fondos/rojo.png",
+      "nombre": "fondo_rojo"
+    },
+    {
+      "ruta": "imagenes/fondos/verde.png",
+      "nombre": "fondo_verde"
+    },
+    {
+      "ruta": "imagenes/fondos/espacio_1.png",
+      "nombre": "espacio_1"
+    },
+    {
+      "ruta": "imagenes/fondos/espacio_2.png",
+      "nombre": "espacio_2"
+    },
+    {
+      "ruta": "imagenes/fondos/nubes.jpg",
+      "nombre": "nubes"
     }
   ],
 

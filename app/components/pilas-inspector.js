@@ -8,6 +8,10 @@ export default Component.extend({
   didInsertElement() {
     this.set("propiedades_de_actores", [
       {
+        tipo: "imagen",
+        propiedad: "imagen"
+      },
+      {
         tipo: "numero",
         propiedad: "x",
         intensidad: 1

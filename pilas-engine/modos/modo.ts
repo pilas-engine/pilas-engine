@@ -5,6 +5,7 @@ class Modo extends Phaser.Scene {
   fps: any;
   graphics: any;
   fondo: any;
+  _nombre_del_fondo: string = "";
 
   constructor(data) {
     super(data);
@@ -52,9 +53,18 @@ class Modo extends Phaser.Scene {
   }
 
   crear_fondo(fondo) {
+    this._nombre_del_fondo = fondo;
     this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
+  }
+
+  cambiar_fondo(fondo) {
+    if (fondo !== this._nombre_del_fondo) {
+      this.fondo.destroy();
+      this.fondo = null;
+      this.crear_fondo(fondo);
+    }
   }
 
   obtener_actor_por_id(id) {
@@ -63,6 +73,7 @@ class Modo extends Phaser.Scene {
 
   actualizar_sprite_desde_datos(sprite, actor) {
     let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+    sprite.setTexture(actor.imagen);
 
     sprite.id = actor.id;
     sprite.x = coordenada.x;

@@ -30,6 +30,7 @@ class ModoEditor extends Modo {
   }
 
   crear_manejadores_para_hacer_arrastrables_los_actores() {
+    let matter = this.pilas.Phaser.Physics.Matter.Matter;
     let escena = this;
 
     this.input.on("dragstart", function(pointer, gameObject) {
@@ -41,8 +42,6 @@ class ModoEditor extends Modo {
         escena.pilas.game.canvas.style.cursor = "-webkit-grabbing";
       }
     });
-
-    let matter = this.pilas.Phaser.Physics.Matter.Matter;
 
     this.input.on("drag", function(pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;
@@ -74,7 +73,6 @@ class ModoEditor extends Modo {
 
     sprite["setInteractive"]();
     sprite["actor"] = actor;
-    //sprite["figura"] = figura;
     sprite["destacandose"] = false;
 
     sprite["destacar"] = () => {

@@ -371,6 +371,9 @@ declare class gallina extends Actor {
     vuela_cuando_comienza_una_colision(actor: any): void;
 }
 declare class logo extends Actor {
+    propiedades: {
+        imagen: string;
+    };
     iniciar(): void;
 }
 declare class moneda extends Actor {
@@ -483,12 +486,14 @@ declare class Modo extends Phaser.Scene {
     fps: any;
     graphics: any;
     fondo: any;
+    _nombre_del_fondo: string;
     constructor(data: any);
     create(datos: any): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
     update(actores: any): void;
     crear_fondo(fondo: any): void;
+    cambiar_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     crear_figura_estatica_para(actor: any): any;

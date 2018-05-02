@@ -56,8 +56,8 @@ class Mensajes {
   }
 
   atender_mensaje_actualizar_escena_desde_el_editor(datos) {
+    this.pilas.modo.cambiar_fondo(datos.escena.fondo);
     this.pilas.modo.posicionar_la_camara(datos.escena);
-    this.pilas.modo.crear_fondo(datos.escena.fondo);
   }
 
   atender_mensaje_ejecutar_proyecto(datos) {
