@@ -138,36 +138,56 @@
       "ruta": "imagenes/gallina/gallina_vuela_3.png"
     },
     {
-      "ruta": "imagenes/fondos/azul.png",
-      "nombre": "fondo_azul"
+      "nombre": "fondo_azul",
+      "ruta": "imagenes/fondos/azul.png"
     },
     {
-      "ruta": "imagenes/fondos/cesped.png",
-      "nombre": "fondo_cesped"
+      "nombre": "fondo_cesped_1",
+      "ruta": "imagenes/fondos/cesped_1.png"
     },
     {
-      "ruta": "imagenes/fondos/madera.png",
-      "nombre": "fondo_madera"
+      "nombre": "fondo_cesped_2",
+      "ruta": "imagenes/fondos/cesped_2.png"
     },
     {
-      "ruta": "imagenes/fondos/rojo.png",
-      "nombre": "fondo_rojo"
+      "nombre": "fondo_tierra_1",
+      "ruta": "imagenes/fondos/tierra_1.png"
     },
     {
-      "ruta": "imagenes/fondos/verde.png",
-      "nombre": "fondo_verde"
+      "nombre": "fondo_madera",
+      "ruta": "imagenes/fondos/madera.png"
     },
     {
-      "ruta": "imagenes/fondos/espacio_1.png",
-      "nombre": "espacio_1"
+      "nombre": "fondo_rojo",
+      "ruta": "imagenes/fondos/rojo.png"
     },
     {
-      "ruta": "imagenes/fondos/espacio_2.png",
-      "nombre": "espacio_2"
+      "nombre": "fondo_verde",
+      "ruta": "imagenes/fondos/verde.png"
     },
     {
-      "ruta": "imagenes/fondos/nubes.jpg",
-      "nombre": "nubes"
+      "nombre": "espacio_1",
+      "ruta": "imagenes/fondos/espacio_1.png"
+    },
+    {
+      "nombre": "espacio_2",
+      "ruta": "imagenes/fondos/espacio_2.png"
+    },
+    {
+      "nombre": "nubes",
+      "ruta": "imagenes/fondos/nubes.jpg"
+    },
+    {
+      "nombre": "arbol_1",
+      "ruta": "imagenes/arbol_1.png"
+    },
+    {
+      "nombre": "arbol_2",
+      "ruta": "imagenes/arbol_2.png"
+    },
+    {
+      "nombre": "hierba_2",
+      "ruta": "imagenes/hierba_1.png"
     }
   ],
 

@@ -5,7 +5,9 @@
 <p class="lato">Lista de ejemplos</p>
 
 {{#if ejemplos.tarea.last.isRunning}}
-  <p class='lato'>Cargando ...</p>
+  {{#each (range 0 3) as |number|}}
+    <div class="dib bg-light-gray" style="width: 180px; height: 140px;"></div>
+  {{/each}}
 {{else}}
   {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
     {{#link-to "ejemplos.ver" ejemplo.nombre tagName='div' class="dib pointer"}}
@@ -15,6 +17,8 @@
     </div>
     {{/link-to}}
   {{/each}}
+
+
 {{/if}}
 
 </div>

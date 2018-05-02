@@ -1,7 +1,7 @@
 import Component from "@ember/component";
-import Ember from "ember";
+import { inject as service } from "@ember/service";
 
 export default Component.extend({
   tagName: "",
-  recursos: Ember.inject.service()
+  recursos: service()
 });
