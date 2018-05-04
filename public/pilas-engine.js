@@ -613,6 +613,7 @@ var ActorBase = (function () {
         this._etiqueta = null;
         this._vivo = true;
         this._animacion_en_curso = "";
+        this._texto = null;
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -674,6 +675,7 @@ var ActorBase = (function () {
         this._figura_ancho = propiedades.figura_ancho;
         this._figura_alto = propiedades.figura_alto;
         this._figura_radio = propiedades.figura_radio;
+        this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
         switch (figura) {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
@@ -767,6 +769,10 @@ var ActorBase = (function () {
             this.sprite.setAngularVelocity(0);
         }
         this.automata.actualizar();
+        this._texto.x = this.sprite.x;
+        this._texto.y = this.sprite.y;
+        this._texto.depth = this.sprite.depth + 1;
+        this._texto.angle = this.sprite.angle;
     };
     Object.defineProperty(ActorBase.prototype, "estado", {
         get: function () {
@@ -1395,6 +1401,23 @@ var gallina = (function (_super) {
     };
     return gallina;
 }(Actor));
+var globo = (function (_super) {
+    __extends(globo, _super);
+    function globo() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "aceituna",
+            figura: "circulo",
+            texto: "hola mundo!"
+        };
+        return _this;
+    }
+    globo.prototype.iniciar = function () {
+        this.definir_texto("Hola mundo!");
+    };
+    globo.prototype.actualizar = function () { };
+    return globo;
+}(Actor));
 var logo = (function (_super) {
     __extends(logo, _super);
     function logo() {
@@ -1579,6 +1602,9 @@ var EscenaBase = (function () {
         this.actores.map(function (actor) {
             if (!actor._vivo) {
                 actor.sprite.destroy();
+                if (actor._texto) {
+                    actor._texto.destroy();
+                }
                 _this.quitar_actor_luego_de_eliminar(actor);
                 return;
             }

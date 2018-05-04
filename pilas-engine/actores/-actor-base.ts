@@ -15,6 +15,8 @@ class ActorBase {
   _figura_alto: number;
   _figura_radio: number;
 
+  _texto: any = null;
+
   propiedades_base = {
     x: 0,
     y: 0,
@@ -84,6 +86,8 @@ class ActorBase {
     this._figura_ancho = propiedades.figura_ancho;
     this._figura_alto = propiedades.figura_alto;
     this._figura_radio = propiedades.figura_radio;
+
+    this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
 
     switch (figura) {
       case "rectangulo":
@@ -194,6 +198,11 @@ class ActorBase {
     }
 
     this.automata.actualizar();
+
+    this._texto.x = this.sprite.x;
+    this._texto.y = this.sprite.y;
+    this._texto.depth = this.sprite.depth + 1;
+    this._texto.angle = this.sprite.angle;
   }
 
   get estado() {

@@ -29,6 +29,11 @@ class EscenaBase {
     this.actores.map(actor => {
       if (!actor._vivo) {
         actor.sprite.destroy();
+
+        if (actor._texto) {
+          actor._texto.destroy();
+        }
+
         this.quitar_actor_luego_de_eliminar(actor);
         return;
       }

@@ -206,6 +206,7 @@ declare class ActorBase {
     _figura_ancho: number;
     _figura_alto: number;
     _figura_radio: number;
+    _texto: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -374,6 +375,15 @@ declare class gallina extends Actor {
     vuela_iniciar(): void;
     vuela_actualizar(): void;
     vuela_cuando_comienza_una_colision(actor: any): void;
+}
+declare class globo extends Actor {
+    propiedades: {
+        imagen: string;
+        figura: string;
+        texto: string;
+    };
+    iniciar(): void;
+    actualizar(): void;
 }
 declare class logo extends Actor {
     propiedades: {
