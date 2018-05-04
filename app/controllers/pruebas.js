@@ -32,15 +32,16 @@ export default Controller.extend({
 
                 pilas.actores.nave();
 
-
-
                 let suelo = pilas.actores.suelo());
+                suelo.y = -250;
+
                 let techo = pilas.actores.techo();
+                techo.y = 250;
 
                 let pared_izquierda = pilas.actores.pared();
-                let pared_derecha = pilas.actores.pared();
-
                 pared_izquierda.x = -300;
+
+                let pared_derecha = pilas.actores.pared();
                 pared_derecha.x = 300;
 
               }
@@ -99,9 +100,7 @@ export default Controller.extend({
 
   actions: {
     cuando_termina_de_cargar() {
-      let resultado = this.compilador.compilar_proyecto(
-        this.proyecto
-      );
+      let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
       let datos = {
         nombre_de_la_escena_inicial: NOMBRE_DE_LA_ESCENA,
