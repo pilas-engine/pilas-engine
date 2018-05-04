@@ -1,6 +1,14 @@
 {
   "imagenes": [
     {
+      "nombre": "sin_imagen",
+      "ruta": "imagenes/sin_imagen.png"
+    },
+    {
+      "nombre": "invisible",
+      "ruta": "imagenes/invisible.png"
+    },
+    {
       "nombre": "fondo_cielo_1",
       "ruta": "imagenes/fondos/cielo.png"
     },
@@ -15,10 +23,6 @@
     {
       "nombre": "logo",
       "ruta": "imagenes/logo.png"
-    },
-    {
-      "nombre": "sin_imagen",
-      "ruta": "imagenes/sin_imagen.png"
     },
     {
       "nombre": "caja",
