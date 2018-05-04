@@ -111,7 +111,7 @@ export default Component.extend({
         escala_x: 1,
         escala_y: 1,
         nombre: actor.nombre,
-        imagen: actor.nombre,
+        //imagen: actor.nombre,   // en este caso se respeta la imagen que sugiere el código.
         transparencia: 0
       }
     ];
