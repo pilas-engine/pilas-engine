@@ -15,6 +15,8 @@ declare class Actores {
     plataforma(): any;
     suelo(): any;
     techo(): any;
+    pizarra(): any;
+    texto(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -118,6 +120,7 @@ declare class Utilidades {
     obtener_color_al_azar(): number;
     limitar(valor: number, minimo: number, maximo: number): number;
     validar_numero(valor: number): void;
+    es_animacion(valor: any): boolean;
     convertir_angulo_a_radianes(grados: number): number;
     convertir_radianes_a_angulos(radianes: number): number;
     es_firefox(): boolean;
@@ -188,6 +191,7 @@ declare class Pilas {
     escena_actual(): Escena;
     pausar(): void;
     continuar(): void;
+    animar(actor: any, propiedad: any, valor: any, duracion?: number): void;
 }
 declare var pilas: Pilas;
 declare class ActorBase {
@@ -206,7 +210,6 @@ declare class ActorBase {
     _figura_ancho: number;
     _figura_alto: number;
     _figura_radio: number;
-    _texto: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -234,6 +237,7 @@ declare class ActorBase {
     constructor(pilas: any);
     readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;
+    private copiar_atributos_de_sprite(origen, destino);
     iniciar(): void;
     serializar(): {
         tipo: String;
@@ -435,6 +439,17 @@ declare class pelota extends Actor {
     };
     iniciar(): void;
 }
+declare class pizarra extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    canvas: any;
+    iniciar(): void;
+    pre_actualizar(): void;
+    actualizar(): void;
+    linea(desde_x: any, desde_y: any, hasta_x: any, hasta_y: any): void;
+    limpiar(): void;
+}
 declare class plataforma extends Actor {
     propiedades: {
         figura: string;
@@ -467,6 +482,18 @@ declare class techo extends Actor {
         figura_dinamica: boolean;
     };
     iniciar(): void;
+}
+declare class texto extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    _texto: any;
+    iniciar(): void;
+    pre_actualizar(): void;
+    actualizar(): void;
+    texto: string;
+    magnitud: number;
+    color: string;
 }
 declare class EscenaBase {
     pilas: Pilas;

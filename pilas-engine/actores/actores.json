@@ -38,6 +38,12 @@
     },
     {
       "nombre": "actor"
+    },
+    {
+      "nombre": "pizarra"
+    },
+    {
+      "nombre": "texto"
     }
   ]
 }

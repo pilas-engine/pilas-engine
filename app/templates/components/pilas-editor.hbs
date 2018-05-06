@@ -2,7 +2,7 @@
 
   <div class="h2-5 flex">
 
-      <div class="pa2">
+      <div class="pa2 truncate">
         {{pilas-boton-regresar}}
         {{pilas-boton desactivado=cargando accion=(action cuandoIntentaGuardar proyecto) texto="Guardar"}}
 
@@ -12,7 +12,7 @@
       <div class="flex1">
       </div>
 
-      <div class="pa2">
+      <div class="pa2 truncate">
         {{pilas-interruptor variable=mostrarPropiedades texto="Panel de actores"}}
 
         {{pilas-interruptor deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir el panel de previsualización"}}
@@ -65,7 +65,7 @@
                   {{#if estado.puedeEjecutar}}
                     {{pilas-boton id='ejecutar' accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
 
-                      <div class="dib f6 flex1 tr lh-copy-2">
+                      <div class="dib f6 flex1 tr">
                         {{pilas-interruptor texto="maximizar" variable=maximizar}}
                       </div>
 

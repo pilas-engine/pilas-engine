@@ -150,6 +150,22 @@ class Pilas {
   continuar() {
     this.game.loop.wake();
   }
+
+  animar(actor, propiedad, valor, duracion: number = 0.5) {
+    let configuracion = {
+      targets: actor,
+      ease: "Power1",
+      duration: duracion * 1000
+    };
+    configuracion[propiedad] = valor[0];
+
+    console.log(configuracion);
+    this.modo.tweens.add(configuracion);
+  }
+
+  luego(duracion: number, tarea: function) {
+    this.modo.time.delayedCall(duracion * 1000, tarea);
+  }
 }
 
 var pilas = new Pilas();

@@ -20,8 +20,43 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                this.pilas.conejo = pilas.actores.conejo();
-                this.pilas.conejo.y = 200;
+                let pizarra = pilas.actores.pizarra()
+
+                pizarra.linea(0, 0, 100, 100)
+                pizarra.linea(0, 0, 0, 100)
+                pizarra.linea(100, 100, 100, -100)
+
+                let b = pilas.actores.texto()
+                b.texto = "Has click sobre algún actor para ver que dicen";
+                b.sombra = true;
+
+                let texto = pilas.actores.texto()
+
+                texto.y = 100
+                texto.texto = "hola"
+                texto.color = "white"
+                texto.magnitud = 30
+                texto.x = [100]
+
+                texto.escala = 0;
+                texto.escala = [1]
+
+                pilas.luego(3, (e) => {
+                  texto.x = [-200];
+                })
+
+                pilas.luego(6, (e) => {
+                  texto.eliminar();
+                })
+
+
+                let t = pilas.actores.aceituna();
+                t.y=100;
+                t.decir("hola mundo !!!")
+
+
+
+                /*
 
                 let plataforma = pilas.actores.plataforma();
                 plataforma.x = 0;
@@ -43,6 +78,7 @@ export default Controller.extend({
 
                 let pared_derecha = pilas.actores.pared();
                 pared_derecha.x = 300;
+                */
 
               }
 
@@ -76,6 +112,7 @@ export default Controller.extend({
           camara_x: 0,
           camara_y: 0,
           actores: [
+            /*
             {
               id: 3,
               x: 100,
@@ -92,6 +129,7 @@ export default Controller.extend({
               figura_radio: 25,
               figura_dinamica: true
             }
+            */
           ]
         }
       ]

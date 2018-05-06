@@ -15,8 +15,6 @@ class ActorBase {
   _figura_alto: number;
   _figura_radio: number;
 
-  _texto: any = null;
-
   propiedades_base = {
     x: 0,
     y: 0,
@@ -87,8 +85,6 @@ class ActorBase {
     this._figura_alto = propiedades.figura_alto;
     this._figura_radio = propiedades.figura_radio;
 
-    this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
-
     switch (figura) {
       case "rectangulo":
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
@@ -153,6 +149,14 @@ class ActorBase {
     this.pilas.escena.agregar_actor(this);
   }
 
+  private copiar_atributos_de_sprite(origen, destino) {
+    destino.x = origen.x;
+    destino.y = origen.y;
+    destino.angle = origen.angle;
+    destino.scaleX = origen.scaleX;
+    destino.scaleY = origen.scaleY;
+  }
+
   iniciar() {}
 
   serializar() {
@@ -198,11 +202,6 @@ class ActorBase {
     }
 
     this.automata.actualizar();
-
-    this._texto.x = this.sprite.x;
-    this._texto.y = this.sprite.y;
-    this._texto.depth = this.sprite.depth + 1;
-    this._texto.angle = this.sprite.angle;
   }
 
   get estado() {
@@ -250,9 +249,13 @@ class ActorBase {
   }
 
   set x(_x: number) {
-    this.pilas.utilidades.validar_numero(_x);
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
-    this.sprite.x = x;
+    if (this.pilas.utilidades.es_animacion(_x)) {
+      this.pilas.animar(this, "x", _x);
+    } else {
+      this.pilas.utilidades.validar_numero(_x);
+      let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
+      this.sprite.x = x;
+    }
   }
 
   get x() {
@@ -261,9 +264,13 @@ class ActorBase {
   }
 
   set y(_y: number) {
-    this.pilas.utilidades.validar_numero(_y);
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
-    this.sprite.y = y;
+    if (this.pilas.utilidades.es_animacion(_y)) {
+      this.pilas.animar(this, "y", _y);
+    } else {
+      this.pilas.utilidades.validar_numero(_y);
+      let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
+      this.sprite.y = y;
+    }
   }
 
   get y() {
@@ -281,8 +288,12 @@ class ActorBase {
   }
 
   set rotacion(angulo: number) {
-    this.pilas.utilidades.validar_numero(angulo);
-    this.sprite.angle = -(angulo % 360);
+    if (this.pilas.utilidades.es_animacion(angulo)) {
+      this.pilas.animar(this, "rotacion", angulo);
+    } else {
+      this.pilas.utilidades.validar_numero(angulo);
+      this.sprite.angle = -(angulo % 360);
+    }
   }
 
   get rotacion() {
@@ -290,11 +301,15 @@ class ActorBase {
   }
 
   set escala_x(s) {
-    this.pilas.utilidades.validar_numero(s);
-    this.sprite.scaleX = s;
+    if (this.pilas.utilidades.es_animacion(s)) {
+      this.pilas.animar(this, "escala_x", s);
+    } else {
+      this.pilas.utilidades.validar_numero(s);
+      this.sprite.scaleX = s;
 
-    if (this.figura) {
-      pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      if (this.figura) {
+        pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      }
     }
   }
 
@@ -303,11 +318,15 @@ class ActorBase {
   }
 
   set escala_y(s) {
-    this.pilas.utilidades.validar_numero(s);
-    this.sprite.scaleY = s;
+    if (this.pilas.utilidades.es_animacion(s)) {
+      this.pilas.animar(this, "escala_y", s);
+    } else {
+      this.pilas.utilidades.validar_numero(s);
+      this.sprite.scaleY = s;
 
-    if (this.figura) {
-      pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      if (this.figura) {
+        pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      }
     }
   }
 
@@ -320,9 +339,13 @@ class ActorBase {
   }
 
   set escala(escala) {
-    this.pilas.utilidades.validar_numero(escala);
-    this.escala_x = escala;
-    this.escala_y = escala;
+    if (this.pilas.utilidades.es_animacion(escala)) {
+      this.pilas.animar(this, "escala", escala);
+    } else {
+      this.pilas.utilidades.validar_numero(escala);
+      this.escala_x = escala;
+      this.escala_y = escala;
+    }
   }
 
   get centro_y() {
@@ -366,9 +389,13 @@ class ActorBase {
   }
 
   set transparencia(t) {
-    this.pilas.utilidades.validar_numero(t);
-    t = this.pilas.utilidades.limitar(t, 0, 100);
-    this.sprite.alpha = 1 - t / 100;
+    if (this.pilas.utilidades.es_animacion(t)) {
+      this.pilas.animar(this, "transparencia", t);
+    } else {
+      this.pilas.utilidades.validar_numero(t);
+      t = this.pilas.utilidades.limitar(t, 0, 100);
+      this.sprite.alpha = 1 - t / 100;
+    }
   }
 
   get transparencia() {
@@ -608,5 +635,20 @@ class ActorBase {
 
   get figura_radio() {
     return this._figura_radio;
+  }
+
+  decir(mensaje: string) {
+    let texto = this.pilas.actores.texto();
+    texto.texto = mensaje;
+    texto.x = this.x + 15;
+    texto.y = this.y + this.alto + 15;
+    texto.escala = 0;
+    texto.rotacion = 30;
+    texto.rotacion = [0];
+    texto.escala = [1];
+
+    this.pilas.luego(5, () => {
+      texto.eliminar();
+    });
   }
 }
