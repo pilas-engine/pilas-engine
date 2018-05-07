@@ -31,7 +31,7 @@ class Modo extends Phaser.Scene {
 
   crear_canvas_de_depuracion() {
     let graphics = this.add.graphics({ x: 0, y: 0 });
-    graphics.depth = -20000;
+    graphics.depth = 20000;
     this.graphics = graphics;
   }
 
@@ -58,8 +58,6 @@ class Modo extends Phaser.Scene {
 
   crear_fondo(fondo) {
     this._nombre_del_fondo = fondo;
-    console.log(this.add.tileSprite);
-    console.log({ ancho: this.ancho, alto: this.alto });
     this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
@@ -80,6 +78,21 @@ class Modo extends Phaser.Scene {
   actualizar_sprite_desde_datos(sprite, actor) {
     let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
     sprite.setTexture(actor.imagen);
+
+    if (actor.texto) {
+      if (!sprite["texto"]) {
+        sprite["texto"] = this.add.text(0, 0, actor.texto);
+        sprite["texto"].setFontFamily("verdana");
+
+        sprite.update = () => {
+          sprite["texto"].x = sprite.x;
+          sprite["texto"].y = sprite.y;
+          sprite["texto"].angle = sprite.angle;
+          sprite["texto"].scaleX = sprite.scaleX;
+          sprite["texto"].scaleY = sprite.scaleY;
+        };
+      }
+    }
 
     sprite.id = actor.id;
     sprite.x = coordenada.x;

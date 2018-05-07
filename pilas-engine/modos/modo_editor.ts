@@ -109,6 +109,10 @@ class ModoEditor extends Modo {
     } else {
       this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
     }
+
+    this.actores.map(a => {
+      a.update();
+    });
   }
 
   eliminar_actor_por_id(id) {
@@ -120,5 +124,8 @@ class ModoEditor extends Modo {
     }
 
     actor_a_eliminar[0].destroy();
+    if (actor_a_eliminar[0]["texto"]) {
+      actor_a_eliminar[0]["texto"].destroy();
+    }
   }
 }

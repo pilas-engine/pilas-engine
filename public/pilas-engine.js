@@ -1845,7 +1845,7 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_canvas_de_depuracion = function () {
         var graphics = this.add.graphics({ x: 0, y: 0 });
-        graphics.depth = -20000;
+        graphics.depth = 20000;
         this.graphics = graphics;
     };
     Modo.prototype.update = function (actores) {
@@ -1869,8 +1869,6 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this._nombre_del_fondo = fondo;
-        console.log(this.add.tileSprite);
-        console.log({ ancho: this.ancho, alto: this.alto });
         this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
@@ -1888,6 +1886,19 @@ var Modo = (function (_super) {
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
         sprite.setTexture(actor.imagen);
+        if (actor.texto) {
+            if (!sprite["texto"]) {
+                sprite["texto"] = this.add.text(0, 0, actor.texto);
+                sprite["texto"].setFontFamily("verdana");
+                sprite.update = function () {
+                    sprite["texto"].x = sprite.x;
+                    sprite["texto"].y = sprite.y;
+                    sprite["texto"].angle = sprite.angle;
+                    sprite["texto"].scaleX = sprite.scaleX;
+                    sprite["texto"].scaleY = sprite.scaleY;
+                };
+            }
+        }
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -2059,6 +2070,9 @@ var ModoEditor = (function (_super) {
         else {
             this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
         }
+        this.actores.map(function (a) {
+            a.update();
+        });
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
@@ -2067,6 +2081,9 @@ var ModoEditor = (function (_super) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
         }
         actor_a_eliminar[0].destroy();
+        if (actor_a_eliminar[0]["texto"]) {
+            actor_a_eliminar[0]["texto"].destroy();
+        }
     };
     return ModoEditor;
 }(Modo));
