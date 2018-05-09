@@ -1,5 +1,10 @@
 var HOST = window.location.origin;
 
+
+if (window.location.host) {
+  HOST = window.location.origin;
+}
+
 /*
 if (window.location.host) {
   HOST = "*";
