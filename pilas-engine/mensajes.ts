@@ -1,4 +1,4 @@
-const DEPURAR_MENSAJES = false;
+const DEPURAR_MENSAJES = true;
 
 class Mensajes {
   pilas: Pilas;

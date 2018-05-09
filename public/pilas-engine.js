@@ -318,7 +318,7 @@ var Historia = (function () {
     };
     return Historia;
 }());
-var DEPURAR_MENSAJES = false;
+var DEPURAR_MENSAJES = true;
 var Mensajes = (function () {
     function Mensajes(pilas) {
         this.pilas = pilas;
@@ -500,7 +500,7 @@ var Utilidades = (function () {
 }());
 var HOST = "file://";
 if (window.location.host) {
-    HOST = "http://" + window.location.host;
+    HOST = window.location.origin;
 }
 var Pilas = (function () {
     function Pilas() {

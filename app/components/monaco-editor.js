@@ -58,7 +58,7 @@ export default Component.extend({
     this._super(...arguments);
 
     const subscription = event => {
-      if (event.origin != utils.HOST) {
+      if (event.origin != utils.HOST && event.origin != utils.HOST.replace("http:", "https:")) {
         return;
       }
 
