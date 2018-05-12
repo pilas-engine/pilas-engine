@@ -26,7 +26,11 @@ export default Service.extend({
         url: `${config.rootURL}ejemplos/proyectos/${ejemplo.nombre}.json`
       });
 
-      ejemplo.proyecto = proyecto;
+      if (typeof proyecto === 'string') {
+        ejemplo.proyecto = JSON.parse(proyecto);
+      } else {
+        ejemplo.proyecto = proyecto;
+      }
     }
 
     this.set("cache", data);
