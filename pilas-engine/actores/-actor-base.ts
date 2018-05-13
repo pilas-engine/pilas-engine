@@ -641,13 +641,11 @@ class ActorBase {
     let texto = this.pilas.actores.texto();
     texto.texto = mensaje;
     texto.x = this.x + 15;
-    texto.y = this.y + this.alto + 15;
-    texto.escala = 0;
-    texto.rotacion = 30;
-    texto.rotacion = [0];
-    texto.escala = [1];
+    texto.y = this.y + this.alto;
+    texto.escala_y = 0;
+    texto.escala_y = [1];
 
-    this.pilas.luego(5, () => {
+    this.pilas.luego(4, () => {
       texto.eliminar();
     });
   }

@@ -192,6 +192,7 @@ declare class Pilas {
     pausar(): void;
     continuar(): void;
     animar(actor: any, propiedad: any, valor: any, duracion?: number): void;
+    luego(duracion: number, tarea: any): void;
 }
 declare var pilas: Pilas;
 declare class ActorBase {
@@ -306,6 +307,7 @@ declare class ActorBase {
     figura_ancho: number;
     figura_alto: number;
     figura_radio: number;
+    decir(mensaje: string): void;
 }
 declare class Actor extends ActorBase {
     propiedades: {};
@@ -486,11 +488,13 @@ declare class techo extends Actor {
 declare class texto extends Actor {
     propiedades: {
         imagen: string;
+        texto: string;
     };
     _texto: any;
     iniciar(): void;
     pre_actualizar(): void;
     actualizar(): void;
+    sombra: boolean;
     texto: string;
     magnitud: number;
     color: string;

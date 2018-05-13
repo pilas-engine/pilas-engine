@@ -318,7 +318,7 @@ var Historia = (function () {
     };
     return Historia;
 }());
-var DEPURAR_MENSAJES = true;
+var DEPURAR_MENSAJES = false;
 var Mensajes = (function () {
     function Mensajes(pilas) {
         this.pilas = pilas;
@@ -1271,12 +1271,10 @@ var ActorBase = (function () {
         var texto = this.pilas.actores.texto();
         texto.texto = mensaje;
         texto.x = this.x + 15;
-        texto.y = this.y + this.alto + 15;
-        texto.escala = 0;
-        texto.rotacion = 30;
-        texto.rotacion = [0];
-        texto.escala = [1];
-        this.pilas.luego(5, function () {
+        texto.y = this.y + this.alto;
+        texto.escala_y = 0;
+        texto.escala_y = [1];
+        this.pilas.luego(4, function () {
             texto.eliminar();
         });
     };

@@ -163,7 +163,7 @@ class Pilas {
     this.modo.tweens.add(configuracion);
   }
 
-  luego(duracion: number, tarea: function) {
+  luego(duracion: number, tarea: any) {
     this.modo.time.delayedCall(duracion * 1000, tarea);
   }
 }

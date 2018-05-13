@@ -1,0 +1,17 @@
+{{#each propiedades as |propiedad|}}
+
+  {{#if (eq propiedad.tipo "numero")}}
+
+    {{pilas-propiedad/numero objeto=instancia_seleccionada
+        min=propiedad.min
+        max=propiedad.max
+        propiedad=propiedad intensidad=propiedad.intensidad
+        modificarAtributo=cuando_modifica_atributo_del_proyecto}}
+
+  {{else}}
+
+    <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+
+  {{/if}}
+
+{{/each}}

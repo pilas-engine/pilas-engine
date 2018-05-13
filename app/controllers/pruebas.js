@@ -33,7 +33,7 @@ export default Controller.extend({
                 let texto = pilas.actores.texto()
 
                 texto.y = 100
-                texto.texto = "hola"
+                texto.texto = "..."
                 texto.color = "white"
                 texto.magnitud = 30
                 texto.x = [100]
@@ -49,12 +49,9 @@ export default Controller.extend({
                   texto.eliminar();
                 })
 
-
                 let t = pilas.actores.aceituna();
                 t.y=100;
-                t.decir("hola mundo !!!")
-
-
+                t.decir("hola mundo !!!");
 
                 /*
 
