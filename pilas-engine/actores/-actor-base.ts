@@ -14,6 +14,8 @@ class ActorBase {
   _figura_ancho: number;
   _figura_alto: number;
   _figura_radio: number;
+  _es_texto: boolean = false;
+  _texto: any;
 
   propiedades_base = {
     x: 0,
@@ -39,7 +41,9 @@ class ActorBase {
     figura_radio: 40,
     figura_sin_rotacion: false,
     figura_rebote: 1,
-    figura_sensor: false
+    figura_sensor: false,
+
+    es_texto: false
   };
 
   propiedades: any = {
@@ -84,6 +88,7 @@ class ActorBase {
     this._figura_ancho = propiedades.figura_ancho;
     this._figura_alto = propiedades.figura_alto;
     this._figura_radio = propiedades.figura_radio;
+    this._es_texto = propiedades.es_texto;
 
     switch (figura) {
       case "rectangulo":
@@ -149,12 +154,19 @@ class ActorBase {
     this.pilas.escena.agregar_actor(this);
   }
 
-  private copiar_atributos_de_sprite(origen, destino) {
+  protected copiar_atributos_de_sprite(origen, destino) {
     destino.x = origen.x;
     destino.y = origen.y;
     destino.angle = origen.angle;
     destino.scaleX = origen.scaleX;
     destino.scaleY = origen.scaleY;
+
+    destino.alpha = origen.alpha;
+    destino.flipX = origen.flipX;
+    destino.flipY = origen.flipY;
+
+    destino.originX = origen.originX;
+    destino.originY = origen.originY;
   }
 
   iniciar() {}
@@ -176,6 +188,8 @@ class ActorBase {
       figura_ancho: this.figura_ancho,
       figura_alto: this.figura_alto,
       figura_radio: this.figura_radio,
+
+      es_texto: this._es_texto,
 
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,

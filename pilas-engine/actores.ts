@@ -70,10 +70,6 @@ class Actores {
     return this.crear_actor("techo");
   }
 
-  pizarra() {
-    return this.crear_actor("pizarra");
-  }
-
   texto() {
     return this.crear_actor("texto");
   }

@@ -79,21 +79,6 @@ class Modo extends Phaser.Scene {
     let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
     sprite.setTexture(actor.imagen);
 
-    if (actor.texto) {
-      if (!sprite["texto"]) {
-        sprite["texto"] = this.add.text(0, 0, actor.texto);
-        sprite["texto"].setFontFamily("verdana");
-
-        sprite.update = () => {
-          sprite["texto"].x = sprite.x;
-          sprite["texto"].y = sprite.y;
-          sprite["texto"].angle = sprite.angle;
-          sprite["texto"].scaleX = sprite.scaleX;
-          sprite["texto"].scaleY = sprite.scaleY;
-        };
-      }
-    }
-
     sprite.id = actor.id;
     sprite.x = coordenada.x;
     sprite.y = coordenada.y;
@@ -114,6 +99,33 @@ class Modo extends Phaser.Scene {
 
     sprite.setFlipX(actor.espejado);
     sprite.setFlipY(actor.espejado_vertical);
+
+    if (actor.es_texto) {
+      if (!sprite["texto"]) {
+        sprite["texto"] = this.add.text(0, 0, actor.texto);
+        sprite["texto"].setFontFamily("verdana");
+
+        sprite.update = () => {
+          this.copiar_valores_de_sprite_a_texto(sprite);
+        };
+      }
+
+      sprite["texto"].setText(actor.texto);
+      this.copiar_valores_de_sprite_a_texto(sprite);
+    }
+  }
+
+  copiar_valores_de_sprite_a_texto(sprite) {
+    sprite["texto"].x = sprite.x;
+    sprite["texto"].y = sprite.y;
+    sprite["texto"].angle = sprite.angle;
+    sprite["texto"].scaleX = sprite.scaleX;
+    sprite["texto"].scaleY = sprite.scaleY;
+
+    sprite["texto"].alpha = sprite.alpha;
+    sprite["texto"].flipX = sprite.flipX;
+    sprite["texto"].flipY = sprite.flipY;
+    sprite["texto"].setOrigin(sprite.originX, sprite.originY);
   }
 
   crear_figura_estatica_para(actor) {

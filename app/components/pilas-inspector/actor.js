@@ -1,12 +1,25 @@
 import Component from "@ember/component";
 
 export default Component.extend({
-  didInsertElement() {
-    this.set("propiedades", [
-      {
+  didReceiveAttrs() {
+    let propiedades = [];
+
+    // Solo los actores texto pueden cambiar de mensaje y solamente los
+    // actores normales pueden cambiar de imagen.
+
+    if (this.get("instancia_seleccionada.es_texto")) {
+      propiedades.pushObject({
+        tipo: "cadena",
+        propiedad: "texto"
+      });
+    } else {
+      propiedades.pushObject({
         tipo: "imagen",
         propiedad: "imagen"
-      },
+      });
+    }
+
+    propiedades.addObjects([
       {
         tipo: "numero",
         propiedad: "x",
@@ -125,5 +138,7 @@ export default Component.extend({
         propiedad: "figura_sensor"
       }
     ]);
+
+    this.set("propiedades", propiedades);
   }
 });

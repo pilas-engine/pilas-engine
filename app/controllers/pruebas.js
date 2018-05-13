@@ -20,11 +20,6 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                let pizarra = pilas.actores.pizarra()
-
-                pizarra.linea(0, 0, 100, 100)
-                pizarra.linea(0, 0, 0, 100)
-                pizarra.linea(100, 100, 100, -100)
 
                 let b = pilas.actores.texto()
                 b.texto = "Has click sobre algún actor para ver que dicen";

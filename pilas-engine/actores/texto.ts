@@ -1,15 +1,13 @@
 class texto extends Actor {
   propiedades = {
     imagen: "invisible",
-    texto: "Hola mundo"
+    texto: "Hola mundo",
+    es_texto: true
   };
 
   _texto: any = null;
 
-  iniciar() {
-    this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
-    this._texto.setFontFamily("verdana");
-  }
+  iniciar() {}
 
   pre_actualizar() {
     super.pre_actualizar();
@@ -27,7 +25,12 @@ class texto extends Actor {
   }
 
   set texto(texto: string) {
-    this._texto.setText(texto);
+    if (!this._texto) {
+      this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
+      this._texto.setFontFamily("verdana");
+    } else {
+      this._texto.setText(texto);
+    }
   }
 
   set magnitud(numero: number) {

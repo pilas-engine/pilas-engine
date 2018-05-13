@@ -61,9 +61,6 @@ var Actores = (function () {
     Actores.prototype.techo = function () {
         return this.crear_actor("techo");
     };
-    Actores.prototype.pizarra = function () {
-        return this.crear_actor("pizarra");
-    };
     Actores.prototype.texto = function () {
         return this.crear_actor("texto");
     };
@@ -636,6 +633,7 @@ var ActorBase = (function () {
         this._etiqueta = null;
         this._vivo = true;
         this._animacion_en_curso = "";
+        this._es_texto = false;
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -657,7 +655,8 @@ var ActorBase = (function () {
             figura_radio: 40,
             figura_sin_rotacion: false,
             figura_rebote: 1,
-            figura_sensor: false
+            figura_sensor: false,
+            es_texto: false
         };
         this.propiedades = {
             x: 0,
@@ -697,6 +696,7 @@ var ActorBase = (function () {
         this._figura_ancho = propiedades.figura_ancho;
         this._figura_alto = propiedades.figura_alto;
         this._figura_radio = propiedades.figura_radio;
+        this._es_texto = propiedades.es_texto;
         switch (figura) {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
@@ -755,6 +755,11 @@ var ActorBase = (function () {
         destino.angle = origen.angle;
         destino.scaleX = origen.scaleX;
         destino.scaleY = origen.scaleY;
+        destino.alpha = origen.alpha;
+        destino.flipX = origen.flipX;
+        destino.flipY = origen.flipY;
+        destino.originX = origen.originX;
+        destino.originY = origen.originY;
     };
     ActorBase.prototype.iniciar = function () { };
     ActorBase.prototype.serializar = function () {
@@ -773,6 +778,7 @@ var ActorBase = (function () {
             figura_ancho: this.figura_ancho,
             figura_alto: this.figura_alto,
             figura_radio: this.figura_radio,
+            es_texto: this._es_texto,
             espejado: this.espejado,
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
@@ -1471,23 +1477,6 @@ var gallina = (function (_super) {
     };
     return gallina;
 }(Actor));
-var globo = (function (_super) {
-    __extends(globo, _super);
-    function globo() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.propiedades = {
-            imagen: "aceituna",
-            figura: "circulo",
-            texto: "hola mundo!"
-        };
-        return _this;
-    }
-    globo.prototype.iniciar = function () {
-        this.definir_texto("Hola mundo!");
-    };
-    globo.prototype.actualizar = function () { };
-    return globo;
-}(Actor));
 var logo = (function (_super) {
     __extends(logo, _super);
     function logo() {
@@ -1598,38 +1587,6 @@ var pelota = (function (_super) {
     pelota.prototype.iniciar = function () { };
     return pelota;
 }(Actor));
-var pizarra = (function (_super) {
-    __extends(pizarra, _super);
-    function pizarra() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.propiedades = {
-            imagen: "invisible"
-        };
-        _this.canvas = null;
-        return _this;
-    }
-    pizarra.prototype.iniciar = function () {
-        this.canvas = this.pilas.modo.add.graphics();
-    };
-    pizarra.prototype.pre_actualizar = function () {
-        _super.prototype.pre_actualizar.call(this);
-        this.copiar_atributos_de_sprite(this.sprite, this.canvas);
-    };
-    pizarra.prototype.actualizar = function () { };
-    pizarra.prototype.linea = function (desde_x, desde_y, hasta_x, hasta_y) {
-        this.canvas.beginPath();
-        this.canvas.moveTo(desde_x, -desde_y);
-        this.canvas.lineTo(hasta_x, -hasta_y);
-        this.canvas.closePath();
-        this.canvas.strokePath();
-        this.pilas.canvas = this.canvas;
-        this.pilas.pizarra = this;
-    };
-    pizarra.prototype.limpiar = function () {
-        this.pilas.canvas.clear();
-    };
-    return pizarra;
-}(Actor));
 var plataforma = (function (_super) {
     __extends(plataforma, _super);
     function plataforma() {
@@ -1687,15 +1644,13 @@ var texto = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             imagen: "invisible",
-            texto: "Hola mundo"
+            texto: "Hola mundo",
+            es_texto: true
         };
         _this._texto = null;
         return _this;
     }
-    texto.prototype.iniciar = function () {
-        this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
-        this._texto.setFontFamily("verdana");
-    };
+    texto.prototype.iniciar = function () { };
     texto.prototype.pre_actualizar = function () {
         _super.prototype.pre_actualizar.call(this);
         this.copiar_atributos_de_sprite(this.sprite, this._texto);
@@ -1715,7 +1670,13 @@ var texto = (function (_super) {
     });
     Object.defineProperty(texto.prototype, "texto", {
         set: function (texto) {
-            this._texto.setText(texto);
+            if (!this._texto) {
+                this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
+                this._texto.setFontFamily("verdana");
+            }
+            else {
+                this._texto.setText(texto);
+            }
         },
         enumerable: true,
         configurable: true
@@ -1882,21 +1843,9 @@ var Modo = (function (_super) {
         return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
     };
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
+        var _this = this;
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
         sprite.setTexture(actor.imagen);
-        if (actor.texto) {
-            if (!sprite["texto"]) {
-                sprite["texto"] = this.add.text(0, 0, actor.texto);
-                sprite["texto"].setFontFamily("verdana");
-                sprite.update = function () {
-                    sprite["texto"].x = sprite.x;
-                    sprite["texto"].y = sprite.y;
-                    sprite["texto"].angle = sprite.angle;
-                    sprite["texto"].scaleX = sprite.scaleX;
-                    sprite["texto"].scaleY = sprite.scaleY;
-                };
-            }
-        }
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -1914,6 +1863,28 @@ var Modo = (function (_super) {
         }
         sprite.setFlipX(actor.espejado);
         sprite.setFlipY(actor.espejado_vertical);
+        if (actor.es_texto) {
+            if (!sprite["texto"]) {
+                sprite["texto"] = this.add.text(0, 0, actor.texto);
+                sprite["texto"].setFontFamily("verdana");
+                sprite.update = function () {
+                    _this.copiar_valores_de_sprite_a_texto(sprite);
+                };
+            }
+            sprite["texto"].setText(actor.texto);
+            this.copiar_valores_de_sprite_a_texto(sprite);
+        }
+    };
+    Modo.prototype.copiar_valores_de_sprite_a_texto = function (sprite) {
+        sprite["texto"].x = sprite.x;
+        sprite["texto"].y = sprite.y;
+        sprite["texto"].angle = sprite.angle;
+        sprite["texto"].scaleX = sprite.scaleX;
+        sprite["texto"].scaleY = sprite.scaleY;
+        sprite["texto"].alpha = sprite.alpha;
+        sprite["texto"].flipX = sprite.flipX;
+        sprite["texto"].flipY = sprite.flipY;
+        sprite["texto"].setOrigin(sprite.originX, sprite.originY);
     };
     Modo.prototype.crear_figura_estatica_para = function (actor) {
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);

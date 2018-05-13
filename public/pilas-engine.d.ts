@@ -15,7 +15,6 @@ declare class Actores {
     plataforma(): any;
     suelo(): any;
     techo(): any;
-    pizarra(): any;
     texto(): any;
 }
 declare class Animaciones {
@@ -211,6 +210,8 @@ declare class ActorBase {
     _figura_ancho: number;
     _figura_alto: number;
     _figura_radio: number;
+    _es_texto: boolean;
+    _texto: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -233,12 +234,13 @@ declare class ActorBase {
         figura_sin_rotacion: boolean;
         figura_rebote: number;
         figura_sensor: boolean;
+        es_texto: boolean;
     };
     propiedades: any;
     constructor(pilas: any);
     readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;
-    private copiar_atributos_de_sprite(origen, destino);
+    protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
     serializar(): {
         tipo: String;
@@ -255,6 +257,7 @@ declare class ActorBase {
         figura_ancho: number;
         figura_alto: number;
         figura_radio: number;
+        es_texto: boolean;
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
@@ -382,15 +385,6 @@ declare class gallina extends Actor {
     vuela_actualizar(): void;
     vuela_cuando_comienza_una_colision(actor: any): void;
 }
-declare class globo extends Actor {
-    propiedades: {
-        imagen: string;
-        figura: string;
-        texto: string;
-    };
-    iniciar(): void;
-    actualizar(): void;
-}
 declare class logo extends Actor {
     propiedades: {
         imagen: string;
@@ -441,17 +435,6 @@ declare class pelota extends Actor {
     };
     iniciar(): void;
 }
-declare class pizarra extends Actor {
-    propiedades: {
-        imagen: string;
-    };
-    canvas: any;
-    iniciar(): void;
-    pre_actualizar(): void;
-    actualizar(): void;
-    linea(desde_x: any, desde_y: any, hasta_x: any, hasta_y: any): void;
-    limpiar(): void;
-}
 declare class plataforma extends Actor {
     propiedades: {
         figura: string;
@@ -489,6 +472,7 @@ declare class texto extends Actor {
     propiedades: {
         imagen: string;
         texto: string;
+        es_texto: boolean;
     };
     _texto: any;
     iniciar(): void;
@@ -544,6 +528,7 @@ declare class Modo extends Phaser.Scene {
     cambiar_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
+    copiar_valores_de_sprite_a_texto(sprite: any): void;
     crear_figura_estatica_para(actor: any): any;
     posicionar_la_camara(datos_de_la_escena: any): void;
     actualizar_posicion(posicion?: any): void;
