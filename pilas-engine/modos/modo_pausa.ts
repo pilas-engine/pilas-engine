@@ -11,8 +11,8 @@ class ModoPausa extends Modo {
   texto: any;
   total: number;
 
-  izquierda: any;
-  derecha: any;
+  tecla_izquierda: any;
+  tecla_derecha: any;
 
   constructor() {
     super({ key: "ModoPausa" });
@@ -35,6 +35,9 @@ class ModoPausa extends Modo {
     this.crear_canvas_de_depuracion_modo_pausa();
     this.matter.systems.matterPhysics.world.createDebugGraphic();
 
+    this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
     let t = this.pilas.historia.obtener_cantidad_de_posiciones();
     let datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
     this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
@@ -53,11 +56,6 @@ class ModoPausa extends Modo {
 
     this.posicionar_la_camara(foto.escena);
 
-    //if (this.fondo) {
-    // this.fondo.destroy();
-    //}
-
-    //this.crear_fondo(foto.escena.fondo);
     this.fondo.setAlpha(0.6);
 
     this.sprites = foto.actores.map(entidad => {
@@ -86,6 +84,15 @@ class ModoPausa extends Modo {
         this.dibujar_punto_de_control(this.graphics, x, y);
       });
     }
+
+    if (this.tecla_derecha.isDown) {
+      this.avanzar_posicion();
+    }
+
+    if (this.tecla_izquierda.isDown) {
+      this.retroceder_posicion();
+    }
+
     this.posicionar_fondo();
   }
 
@@ -117,11 +124,17 @@ class ModoPausa extends Modo {
     this.crear_sprites_desde_historia(this.posicion);
   }
 
-  /*
-    this.izquierda = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    this.derecha = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    this.crear_texto();
-    */
+  avanzar_posicion() {
+    this.posicion += 1;
+    this.actualizar_posicion(this.posicion);
+    this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
+  }
+
+  retroceder_posicion() {
+    this.posicion -= 1;
+    this.actualizar_posicion(this.posicion);
+    this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
+  }
 
   crear_canvas_de_depuracion_modo_pausa() {
     let graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });

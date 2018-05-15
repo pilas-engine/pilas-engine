@@ -2322,6 +2322,8 @@ var ModoPausa = (function (_super) {
         this.crear_sprites_desde_historia(this.posicion);
         this.crear_canvas_de_depuracion_modo_pausa();
         this.matter.systems.matterPhysics.world.createDebugGraphic();
+        this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
         var datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
         this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
@@ -2360,6 +2362,12 @@ var ModoPausa = (function (_super) {
                 _this.dibujar_punto_de_control(_this.graphics, x, y);
             });
         }
+        if (this.tecla_derecha.isDown) {
+            this.avanzar_posicion();
+        }
+        if (this.tecla_izquierda.isDown) {
+            this.retroceder_posicion();
+        }
         this.posicionar_fondo();
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
@@ -2383,6 +2391,16 @@ var ModoPausa = (function (_super) {
         this.posicion = Math.min(this.posicion, this.total);
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
+    };
+    ModoPausa.prototype.avanzar_posicion = function () {
+        this.posicion += 1;
+        this.actualizar_posicion(this.posicion);
+        this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
+    };
+    ModoPausa.prototype.retroceder_posicion = function () {
+        this.posicion -= 1;
+        this.actualizar_posicion(this.posicion);
+        this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
     };
     ModoPausa.prototype.crear_canvas_de_depuracion_modo_pausa = function () {
         var graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });

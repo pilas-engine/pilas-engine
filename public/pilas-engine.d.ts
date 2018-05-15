@@ -596,8 +596,8 @@ declare class ModoPausa extends Modo {
     sprites: any;
     texto: any;
     total: number;
-    izquierda: any;
-    derecha: any;
+    tecla_izquierda: any;
+    tecla_derecha: any;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -605,5 +605,7 @@ declare class ModoPausa extends Modo {
     update(): void;
     crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
     actualizar_posicion(posicion: any): void;
+    avanzar_posicion(): void;
+    retroceder_posicion(): void;
     crear_canvas_de_depuracion_modo_pausa(): void;
 }
