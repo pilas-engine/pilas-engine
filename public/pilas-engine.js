@@ -1793,6 +1793,8 @@ var Modo = (function (_super) {
         this.ancho = ancho;
         this.alto = alto;
         this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+        this.fps.scrollFactorX = 0;
+        this.fps.scrollFactorY = 0;
         this.crear_canvas_de_depuracion();
         this.pilas = datos.pilas;
     };
@@ -1825,6 +1827,16 @@ var Modo = (function (_super) {
                 this.fps.alpha = 0;
             }
         }
+        var posicion_de_la_camara = this.obtener_posicion_de_la_camara();
+        this.fondo.x = posicion_de_la_camara.x;
+        this.fondo.y = posicion_de_la_camara.y;
+        this.fondo.tilePositionX = posicion_de_la_camara.x;
+        this.fondo.tilePositionY = posicion_de_la_camara.y;
+    };
+    Modo.prototype.obtener_posicion_de_la_camara = function () {
+        var x = pilas.modo.cameras.cameras[0].scrollX;
+        var y = pilas.modo.cameras.cameras[0].scrollY;
+        return { x: x, y: y };
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this._nombre_del_fondo = fondo;

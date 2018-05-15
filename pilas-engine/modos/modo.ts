@@ -17,6 +17,8 @@ class Modo extends Phaser.Scene {
     this.ancho = ancho;
     this.alto = alto;
     this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+    this.fps.scrollFactorX = 0;
+    this.fps.scrollFactorY = 0;
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
   }
@@ -54,6 +56,19 @@ class Modo extends Phaser.Scene {
         this.fps.alpha = 0;
       }
     }
+
+    let posicion_de_la_camara = this.obtener_posicion_de_la_camara();
+    this.fondo.x = posicion_de_la_camara.x;
+    this.fondo.y = posicion_de_la_camara.y;
+
+    this.fondo.tilePositionX = posicion_de_la_camara.x;
+    this.fondo.tilePositionY = posicion_de_la_camara.y;
+  }
+
+  obtener_posicion_de_la_camara() {
+    let x = pilas.modo.cameras.cameras[0].scrollX;
+    let y = pilas.modo.cameras.cameras[0].scrollY;
+    return { x, y };
   }
 
   crear_fondo(fondo) {
