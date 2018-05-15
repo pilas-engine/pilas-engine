@@ -564,7 +564,7 @@ var Pilas = (function () {
             parent: "game",
             width: ancho,
             height: alto,
-            backgroundColor: "#5d5d5d",
+            backgroundColor: "#000000",
             disableContextMenu: true,
             input: {
                 keyboard: true,
@@ -1827,6 +1827,9 @@ var Modo = (function (_super) {
                 this.fps.alpha = 0;
             }
         }
+        this.posicionar_fondo();
+    };
+    Modo.prototype.posicionar_fondo = function () {
         var posicion_de_la_camara = this.obtener_posicion_de_la_camara();
         this.fondo.x = posicion_de_la_camara.x;
         this.fondo.y = posicion_de_la_camara.y;
@@ -2309,11 +2312,13 @@ var ModoPausa = (function (_super) {
     }
     ModoPausa.prototype.preload = function () { };
     ModoPausa.prototype.create = function (datos) {
-        _super.prototype.create.call(this, datos, 100, 100);
+        _super.prototype.create.call(this, datos, datos.pilas._ancho, datos.pilas._alto);
         this.pilas = datos.pilas;
         this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.sprites = [];
+        var foto = this.pilas.historia.obtener_foto(1);
+        this.crear_fondo(foto.escena.fondo);
         this.crear_sprites_desde_historia(this.posicion);
         this.crear_canvas_de_depuracion_modo_pausa();
         this.matter.systems.matterPhysics.world.createDebugGraphic();
@@ -2331,6 +2336,7 @@ var ModoPausa = (function (_super) {
             sprite.destroy();
         });
         this.posicionar_la_camara(foto.escena);
+        this.fondo.setAlpha(0.6);
         this.sprites = foto.actores.map(function (entidad) {
             return _this.crear_sprite_desde_entidad(entidad);
         });
@@ -2354,6 +2360,7 @@ var ModoPausa = (function (_super) {
                 _this.dibujar_punto_de_control(_this.graphics, x, y);
             });
         }
+        this.posicionar_fondo();
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
         var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;

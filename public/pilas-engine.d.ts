@@ -524,6 +524,7 @@ declare class Modo extends Phaser.Scene {
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
     update(actores: any): void;
+    posicionar_fondo(): void;
     obtener_posicion_de_la_camara(): {
         x: any;
         y: any;

@@ -21,11 +21,15 @@ class ModoPausa extends Modo {
   preload() {}
 
   create(datos) {
-    super.create(datos, 100, 100);
+    super.create(datos, datos.pilas._ancho, datos.pilas._alto);
     this.pilas = datos.pilas;
     this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.sprites = [];
+
+    let foto = this.pilas.historia.obtener_foto(1);
+    this.crear_fondo(foto.escena.fondo);
+
     this.crear_sprites_desde_historia(this.posicion);
 
     this.crear_canvas_de_depuracion_modo_pausa();
@@ -48,13 +52,17 @@ class ModoPausa extends Modo {
     });
 
     this.posicionar_la_camara(foto.escena);
+
+    //if (this.fondo) {
+    // this.fondo.destroy();
+    //}
+
     //this.crear_fondo(foto.escena.fondo);
+    this.fondo.setAlpha(0.6);
 
     this.sprites = foto.actores.map(entidad => {
       return this.crear_sprite_desde_entidad(entidad);
     });
-
-    //this.sprites.push(this.fondo);
   }
 
   update() {
@@ -78,6 +86,7 @@ class ModoPausa extends Modo {
         this.dibujar_punto_de_control(this.graphics, x, y);
       });
     }
+    this.posicionar_fondo();
   }
 
   crear_sprite_desde_entidad(entidad) {
@@ -106,8 +115,6 @@ class ModoPausa extends Modo {
     this.posicion = Math.max(this.posicion, 0);
 
     this.crear_sprites_desde_historia(this.posicion);
-    //this.actualizar_texto();
-    //this.game.world.bringToTop(this.canvas);
   }
 
   /*

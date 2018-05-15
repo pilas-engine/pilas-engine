@@ -57,6 +57,10 @@ class Modo extends Phaser.Scene {
       }
     }
 
+    this.posicionar_fondo();
+  }
+
+  posicionar_fondo() {
     let posicion_de_la_camara = this.obtener_posicion_de_la_camara();
     this.fondo.x = posicion_de_la_camara.x;
     this.fondo.y = posicion_de_la_camara.y;

@@ -96,7 +96,7 @@ class Pilas {
       parent: "game",
       width: ancho,
       height: alto,
-      backgroundColor: "#5d5d5d",
+      backgroundColor: "#000000",
       disableContextMenu: true,
       input: {
         keyboard: true,
