@@ -16,6 +16,7 @@ class ModoEjecucion extends Modo {
   nombre_de_la_escena_inicial: string = null;
   permitir_modo_pausa: boolean;
   modo_fisica_activado: boolean;
+  _escena_en_ejecucion: any = null;
 
   constructor() {
     super({ key: "ModoEjecucion" });
@@ -31,7 +32,6 @@ class ModoEjecucion extends Modo {
       this.guardar_parametros_en_atributos(datos);
       let escena = this.obtener_escena_inicial();
 
-      this.crear_fondo(escena.fondo);
       this.clases = this.obtener_referencias_a_clases();
 
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
@@ -64,6 +64,20 @@ class ModoEjecucion extends Modo {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
       this.pausar();
     }
+  }
+
+  cambiar_escena(nombre: string) {
+    if (this._escena_en_ejecucion) {
+      this._escena_en_ejecucion.terminar();
+
+      //console.log(this.actores);
+      //this.actores.map(e => e.eliminar());
+
+      //this._escena_en_ejecucion.actualizar();
+      //this._escena_en_ejecucion.actualizar_actores();
+    }
+
+    this.instanciar_escena(nombre);
   }
 
   vincular_eventos_de_colision() {
@@ -169,12 +183,32 @@ class ModoEjecucion extends Modo {
   }
 
   obtener_escena_inicial() {
-    let nombre = this.nombre_de_la_escena_inicial;
-    return this.proyecto.escenas.filter(e => e.nombre == nombre)[0];
+    let nombre = this.obtener_nombre_de_la_escena_inicial();
+    return this.obtener_escena_por_nombre(nombre);
+  }
+
+  obtener_nombre_de_la_escena_inicial() {
+    return this.nombre_de_la_escena_inicial;
+  }
+
+  obtener_escena_por_nombre(nombre: string) {
+    let escenas_encontradas = this.proyecto.escenas.filter(e => e.nombre == nombre);
+
+    if (escenas_encontradas.length === 0) {
+      throw Error(`No se puede encontrar la escena '${nombre}'.`);
+    } else {
+      if (escenas_encontradas.length > 1) {
+        throw Error(`Hay más de una escena llamada '${nombre}'.`);
+      }
+    }
+
+    return escenas_encontradas[0];
   }
 
   instanciar_escena(nombre) {
-    let escena = this.obtener_escena_inicial();
+    let escena = this.obtener_escena_por_nombre(nombre);
+    this.crear_fondo(escena.fondo);
+
     this.crear_escena(escena);
   }
 
@@ -189,6 +223,8 @@ class ModoEjecucion extends Modo {
     this.actores = datos_de_la_escena.actores.map(e => {
       return this.crear_actor(e);
     });
+
+    this._escena_en_ejecucion = escena;
   }
 
   crear_actor(entidad) {

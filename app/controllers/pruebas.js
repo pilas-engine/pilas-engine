@@ -20,6 +20,18 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
+
+                console.log("Se va a cambiar de escena");
+
+                pilas.luego(3, (e) => {
+                  console.log("Cambió la escena!");
+                  pilas.cambiar_escena('gameover');
+                });
+
+                let l = pilas.actores.suelo();
+                l.y = -230;
+
+
                 /*
 
                 let b = pilas.actores.texto()
@@ -80,6 +92,17 @@ export default Controller.extend({
               actualizar() {
               }
             }`
+          },
+          {
+            nombre: "gameover",
+            codigo: `class gameover extends Escena {
+              iniciar() {
+                console.log("escena gameover")
+              }
+
+              actualizar() {
+              }
+            }`
           }
         ],
         actores: [
@@ -96,37 +119,24 @@ export default Controller.extend({
 
   iniciar() {}
 
-  pre_actualizar() {
-    super.pre_actualizar();
-    this.copiar_atributos_de_sprite(this.sprite, this._texto);
-  }
+  actualizar() {}
+}`
+          },
+
+          {
+            nombre: "aceituna",
+            codigo: `class aceituna extends Actor {
+  propiedades = {
+    imagen: "invisible",
+    texto: "Hola mundo",
+    es_texto: true
+  };
+
+  _texto: any = null;
+
+  iniciar() {}
 
   actualizar() {}
-
-  set sombra(valor: boolean) {
-    if (valor) {
-      this._texto.setShadow(2, 2, "black", 4);
-    } else {
-      this._texto.setShadow();
-    }
-  }
-
-  set texto(texto: string) {
-    if (!this._texto) {
-      this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
-      this._texto.setFontFamily("verdana");
-    } else {
-      this._texto.setText(texto);
-    }
-  }
-
-  set magnitud(numero: number) {
-    this._texto.setFontSize(numero);
-  }
-
-  set color(color: string) {
-    this._texto.setColor(color);
-  }
 }`
           }
         ]
@@ -149,13 +159,41 @@ export default Controller.extend({
               escala_x: 1,
               escala_y: 1,
               nombre: "pelota",
-              imagen: "invisible",
+              imagen: "sin_imagen",
+              transparencia: 0,
+              figura: "rectangulo",
+              figura_radio: 25,
+              texto: "pepe123",
+              es_texto: false,
+              figura_dinamica: true
+            }
+          ]
+        },
+        {
+          nombre: "gameover",
+          id: 2,
+          camara_x: 0,
+          camara_y: 0,
+          fondo: "nubes",
+          actores: [
+            {
+              id: 3,
+              x: 100,
+              y: -100,
+              centro_x: 0.5,
+              centro_y: 0.5,
+              rotacion: 45,
+              escala_x: 1,
+              escala_y: 1,
+              tipo: "aceituna",
+              nombre: "aceituna",
+              imagen: "aceituna",
               transparencia: 0,
               figura: "",
               figura_radio: 25,
-              texto: "pepe123",
-              es_texto: true,
-              figura_dinamica: false
+              texto: "",
+              es_texto: false,
+              figura_dinamica: true
             }
           ]
         }

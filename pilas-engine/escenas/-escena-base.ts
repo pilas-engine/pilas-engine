@@ -26,6 +26,8 @@ class EscenaBase {
   }
 
   actualizar_actores() {
+    let actores_a_eliminar = [];
+
     this.actores.map(actor => {
       if (!actor._vivo) {
         actor.sprite.destroy();
@@ -34,13 +36,17 @@ class EscenaBase {
           actor._texto.destroy();
         }
 
-        this.quitar_actor_luego_de_eliminar(actor);
+        actores_a_eliminar.push(actor);
         return;
       }
 
       actor.pre_actualizar();
       actor.actualizar_sensores();
       actor.actualizar();
+    });
+
+    actores_a_eliminar.map(actor => {
+      this.quitar_actor_luego_de_eliminar(actor);
     });
   }
 
@@ -53,5 +59,11 @@ class EscenaBase {
     } else {
       throw Error(`Se intentó eliminar un actor inexistente en la escena: id=${id} etiqueta=${actor.etiqueta}.`);
     }
+  }
+
+  terminar() {
+    this.actores.map(e => e.eliminar());
+    this.actualizar();
+    this.actualizar_actores();
   }
 }

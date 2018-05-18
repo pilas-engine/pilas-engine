@@ -90,6 +90,10 @@ class Pilas {
     this.game.scene.start(nombre, datos);
   }
 
+  cambiar_escena(nombre: string) {
+    this.modo.cambiar_escena(nombre);
+  }
+
   crear_configuracion(ancho, alto) {
     return {
       type: Phaser.AUTO,
