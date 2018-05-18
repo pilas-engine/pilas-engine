@@ -72,7 +72,6 @@ export default Component.extend({
       this.bus.on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
       this.bus.on("progreso_de_carga", this, "progreso_de_carga");
       this.bus.on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
-      this.bus.on("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
     };
   },
 
@@ -103,7 +102,6 @@ export default Component.extend({
     this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
     this.bus.off("progreso_de_carga", this, "progreso_de_carga");
     this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
-    this.bus.off("quitar_pausa_de_phaser", this, "quitar_pausa_de_phaser");
   },
 
   cargar_escena({ escena, proyecto }) {
@@ -165,14 +163,6 @@ export default Component.extend({
     let data = {
       tipo: "alterar_estado_de_maximizacion",
       maximizar
-    };
-
-    this.contexto.postMessage(data, utils.HOST);
-  },
-
-  quitar_pausa_de_phaser() {
-    let data = {
-      tipo: "quitar_pausa_de_phaser"
     };
 
     this.contexto.postMessage(data, utils.HOST);

@@ -375,7 +375,6 @@ export default Component.extend({
       this.log.info("Ingresando en modo ejecución");
     },
     detener() {
-      this.bus.trigger("quitar_pausa_de_phaser", {});
       this.set("existe_un_error_reciente", false);
       this.mostrar_la_escena_actual_sobre_pilas();
       this.set("estado", this.estado.detener());
@@ -384,7 +383,6 @@ export default Component.extend({
       this.log.info("Ingreando al modo edición");
     },
     pausar() {
-      this.bus.trigger("quitar_pausa_de_phaser", {});
       this.set("existe_un_error_reciente", false);
       this.set("estado", this.estado.pausar());
       this.bus.trigger("pausar_escena", {});

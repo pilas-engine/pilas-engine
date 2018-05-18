@@ -102,7 +102,6 @@ declare class Mensajes {
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
     atender_mensaje_alterar_estado_de_maximizacion(datos: any): void;
     atender_mensaje_actualizar_actor_desde_el_editor(datos: any): void;
-    atender_mensaje_quitar_pausa_de_phaser(): void;
     atender_mensaje_pausar_escena(): void;
     atender_mensaje_cambiar_posicion(datos: any): void;
     atender_mensaje_eliminar_actor_desde_el_editor(datos: any): void;
@@ -188,8 +187,6 @@ declare class Pilas {
     obtener_cantidad_de_actores(): number;
     obtener_actores_en(_x: number, _y: number): Actor[];
     escena_actual(): Escena;
-    pausar(): void;
-    continuar(): void;
     animar(actor: any, propiedad: any, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
 }
@@ -571,7 +568,6 @@ declare class ModoEjecucion extends Modo {
     codigo: any;
     nombre_de_la_escena_inicial: string;
     permitir_modo_pausa: boolean;
-    pausar: boolean;
     modo_fisica_activado: boolean;
     constructor();
     preload(): void;
@@ -585,6 +581,7 @@ declare class ModoEjecucion extends Modo {
     obtener_codigo_para_exportar_clases(codigo: any): string;
     guardar_parametros_en_atributos(datos: any): void;
     update(): void;
+    pausar(): void;
     guardar_foto_de_entidades(): void;
     dibujar_punto_de_control(graphics: any, _x: any, _y: any): void;
 }

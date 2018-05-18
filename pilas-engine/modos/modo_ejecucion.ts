@@ -15,7 +15,6 @@ class ModoEjecucion extends Modo {
   codigo: any;
   nombre_de_la_escena_inicial: string = null;
   permitir_modo_pausa: boolean;
-  pausar = false;
   modo_fisica_activado: boolean;
 
   constructor() {
@@ -63,7 +62,7 @@ class ModoEjecucion extends Modo {
     } catch (e) {
       console.error(e);
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-      this.pausar = true;
+      this.pausar();
     }
   }
 
@@ -101,8 +100,9 @@ class ModoEjecucion extends Modo {
           }
         }
       } catch (e) {
+        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-        this.pausar = true;
+        this.pausar();
       }
     });
 
@@ -163,7 +163,7 @@ class ModoEjecucion extends Modo {
         }
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-        this.pilas.pausar();
+        this.pausar();
       }
     });
   }
@@ -284,11 +284,18 @@ class ModoEjecucion extends Modo {
       this.pilas.escena.actualizar();
       this.pilas.escena.actualizar_actores();
     } catch (e) {
+      console.error(e);
       this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
         mensaje: e.message,
         stack: e.stack.toString()
       });
+      this.pausar();
     }
+  }
+
+  pausar() {
+    console.warn("Pausando la escena a causa del error anterior.");
+    this.scene.pause(undefined); // tslint:disable-line
   }
 
   guardar_foto_de_entidades() {

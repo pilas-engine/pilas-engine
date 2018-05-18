@@ -143,14 +143,6 @@ class Pilas {
     return this.escena;
   }
 
-  pausar() {
-    this.game.loop.sleep();
-  }
-
-  continuar() {
-    this.game.loop.wake();
-  }
-
   animar(actor, propiedad, valor, duracion: number = 0.5) {
     let configuracion = {
       targets: actor,

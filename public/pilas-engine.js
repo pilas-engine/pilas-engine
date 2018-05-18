@@ -391,7 +391,6 @@ var Mensajes = (function () {
         this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
         this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
         this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
-        this.pilas.pausar();
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.error(error);
     };
@@ -410,9 +409,6 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_actualizar_actor_desde_el_editor = function (datos) {
         var sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
         this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
-    };
-    Mensajes.prototype.atender_mensaje_quitar_pausa_de_phaser = function () {
-        console.log("TODO: quitar modo pausa");
     };
     Mensajes.prototype.atender_mensaje_pausar_escena = function () {
         var parametros = {
@@ -603,12 +599,6 @@ var Pilas = (function () {
     };
     Pilas.prototype.escena_actual = function () {
         return this.escena;
-    };
-    Pilas.prototype.pausar = function () {
-        this.game.loop.sleep();
-    };
-    Pilas.prototype.continuar = function () {
-        this.game.loop.wake();
     };
     Pilas.prototype.animar = function (actor, propiedad, valor, duracion) {
         if (duracion === void 0) { duracion = 0.5; }
@@ -1726,18 +1716,9 @@ var EscenaBase = (function () {
                 _this.quitar_actor_luego_de_eliminar(actor);
                 return;
             }
-            try {
-                actor.pre_actualizar();
-                actor.actualizar_sensores();
-                actor.actualizar();
-            }
-            catch (e) {
-                console.error(e);
-                _this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
-                    mensaje: e.message,
-                    stack: e.stack.toString()
-                });
-            }
+            actor.pre_actualizar();
+            actor.actualizar_sensores();
+            actor.actualizar();
         });
     };
     EscenaBase.prototype.quitar_actor_luego_de_eliminar = function (actor) {
@@ -2077,7 +2058,6 @@ var ModoEjecucion = (function (_super) {
         var _this = _super.call(this, { key: "ModoEjecucion" }) || this;
         _this.proyecto = {};
         _this.nombre_de_la_escena_inicial = null;
-        _this.pausar = false;
         return _this;
     }
     ModoEjecucion.prototype.preload = function () { };
@@ -2113,7 +2093,7 @@ var ModoEjecucion = (function (_super) {
         catch (e) {
             console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-            this.pausar = true;
+            this.pausar();
         }
     };
     ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
@@ -2146,8 +2126,9 @@ var ModoEjecucion = (function (_super) {
                 }
             }
             catch (e) {
+                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-                _this.pausar = true;
+                _this.pausar();
             }
         });
         this.matter.world.on("collisionactive", function (event, a, b) {
@@ -2197,7 +2178,7 @@ var ModoEjecucion = (function (_super) {
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-                _this.pilas.pausar();
+                _this.pausar();
             }
         });
     };
@@ -2287,11 +2268,17 @@ var ModoEjecucion = (function (_super) {
             this.pilas.escena.actualizar_actores();
         }
         catch (e) {
+            console.error(e);
             this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
                 mensaje: e.message,
                 stack: e.stack.toString()
             });
+            this.pausar();
         }
+    };
+    ModoEjecucion.prototype.pausar = function () {
+        console.warn("Pausando la escena a causa del error anterior.");
+        this.scene.pause(undefined);
     };
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
         this.pilas.historia.serializar_escena(this.pilas.escena);

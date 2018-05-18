@@ -20,10 +20,12 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
+                /*
 
                 let b = pilas.actores.texto()
                 b.texto = "Has click sobre algún actor para ver que dicen";
                 b.sombra = true;
+
 
                 let texto = pilas.actores.texto()
 
@@ -47,6 +49,7 @@ export default Controller.extend({
                 let t = pilas.actores.aceituna();
                 t.y=100;
                 t.decir("hola mundo !!!");
+                */
 
                 /*
 
@@ -82,18 +85,49 @@ export default Controller.extend({
         actores: [
           {
             nombre: "pelota",
-            codigo: `class pelota  extends ActorBase {
-            propiedades = {
-              figura: 'rectangulo',
-              transparencia: 50
-            }
+            codigo: `class pelota extends Actor {
+  propiedades = {
+    imagen: "invisible",
+    texto: "Hola mundo",
+    es_texto: true
+  };
 
-            iniciar() {
-            }
+  _texto: any = null;
 
-            actualizar() {
-            }
-          }`
+  iniciar() {}
+
+  pre_actualizar() {
+    super.pre_actualizar();
+    this.copiar_atributos_de_sprite(this.sprite, this._texto);
+  }
+
+  actualizar() {}
+
+  set sombra(valor: boolean) {
+    if (valor) {
+      this._texto.setShadow(2, 2, "black", 4);
+    } else {
+      this._texto.setShadow();
+    }
+  }
+
+  set texto(texto: string) {
+    if (!this._texto) {
+      this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
+      this._texto.setFontFamily("verdana");
+    } else {
+      this._texto.setText(texto);
+    }
+  }
+
+  set magnitud(numero: number) {
+    this._texto.setFontSize(numero);
+  }
+
+  set color(color: string) {
+    this._texto.setColor(color);
+  }
+}`
           }
         ]
       },
@@ -103,8 +137,8 @@ export default Controller.extend({
           id: 1,
           camara_x: 0,
           camara_y: 0,
+          fondo: "plano",
           actores: [
-            /*
             {
               id: 3,
               x: 100,
@@ -115,13 +149,14 @@ export default Controller.extend({
               escala_x: 1,
               escala_y: 1,
               nombre: "pelota",
-              imagen: "pelota",
+              imagen: "invisible",
               transparencia: 0,
-              figura: "circulo",
+              figura: "",
               figura_radio: 25,
-              figura_dinamica: true
+              texto: "pepe123",
+              es_texto: true,
+              figura_dinamica: false
             }
-            */
           ]
         }
       ]

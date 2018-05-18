@@ -95,7 +95,6 @@ class Mensajes {
     this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
     this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
 
-    this.pilas.pausar();
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
     console.error(error);
   }
@@ -117,10 +116,6 @@ class Mensajes {
   atender_mensaje_actualizar_actor_desde_el_editor(datos) {
     let sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
     this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
-  }
-
-  atender_mensaje_quitar_pausa_de_phaser() {
-    console.log("TODO: quitar modo pausa");
   }
 
   atender_mensaje_pausar_escena() {
