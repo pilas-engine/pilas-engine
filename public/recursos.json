@@ -192,6 +192,18 @@
     {
       "nombre": "hierba_2",
       "ruta": "imagenes/hierba_1.png"
+    },
+    {
+      "nombre": "laser",
+      "ruta": "imagenes/laser.png"
+    },
+    {
+      "nombre": "laser_2",
+      "ruta": "imagenes/laser_2.png"
+    },
+    {
+      "nombre": "laser_3",
+      "ruta": "imagenes/laser_3.png"
     }
   ],
 

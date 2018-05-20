@@ -73,4 +73,8 @@ class Actores {
   texto() {
     return this.crear_actor("texto");
   }
+
+  laser() {
+    return this.crear_actor("laser");
+  }
 }
