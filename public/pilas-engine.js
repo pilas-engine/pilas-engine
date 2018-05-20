@@ -757,8 +757,7 @@ var ActorBase = (function () {
         destino.alpha = origen.alpha;
         destino.flipX = origen.flipX;
         destino.flipY = origen.flipY;
-        destino.originX = origen.originX;
-        destino.originY = origen.originY;
+        destino.setOrigin(origen.originX, origen.originY);
     };
     ActorBase.prototype.iniciar = function () { };
     ActorBase.prototype.serializar = function () {
@@ -1290,6 +1289,65 @@ var ActorBase = (function () {
     };
     return ActorBase;
 }());
+var ActorTextoBase = (function (_super) {
+    __extends(ActorTextoBase, _super);
+    function ActorTextoBase() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "invisible",
+            texto: "Hola mundo",
+            es_texto: true
+        };
+        _this._texto = null;
+        return _this;
+    }
+    ActorTextoBase.prototype.iniciar = function () { };
+    ActorTextoBase.prototype.pre_actualizar = function () {
+        _super.prototype.pre_actualizar.call(this);
+        this.copiar_atributos_de_sprite(this.sprite, this._texto);
+    };
+    ActorTextoBase.prototype.actualizar = function () { };
+    Object.defineProperty(ActorTextoBase.prototype, "sombra", {
+        set: function (valor) {
+            if (valor) {
+                this._texto.setShadow(2, 2, "black", 4);
+            }
+            else {
+                this._texto.setShadow();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorTextoBase.prototype, "texto", {
+        set: function (texto) {
+            if (!this._texto) {
+                this._texto = this.pilas.modo.add.text(0, 0, texto);
+                this._texto.setFontFamily("verdana");
+            }
+            else {
+                this._texto.setText(texto);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorTextoBase.prototype, "magnitud", {
+        set: function (numero) {
+            this._texto.setFontSize(numero);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorTextoBase.prototype, "color", {
+        set: function (color) {
+            this._texto.setColor(color);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ActorTextoBase;
+}(ActorBase));
 var Actor = (function (_super) {
     __extends(Actor, _super);
     function Actor() {
@@ -1683,56 +1741,10 @@ var texto = (function (_super) {
             texto: "Hola mundo",
             es_texto: true
         };
-        _this._texto = null;
         return _this;
     }
-    texto.prototype.iniciar = function () { };
-    texto.prototype.pre_actualizar = function () {
-        _super.prototype.pre_actualizar.call(this);
-        this.copiar_atributos_de_sprite(this.sprite, this._texto);
-    };
-    texto.prototype.actualizar = function () { };
-    Object.defineProperty(texto.prototype, "sombra", {
-        set: function (valor) {
-            if (valor) {
-                this._texto.setShadow(2, 2, "black", 4);
-            }
-            else {
-                this._texto.setShadow();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(texto.prototype, "texto", {
-        set: function (texto) {
-            if (!this._texto) {
-                this._texto = this.pilas.modo.add.text(0, 0, "Hola mundo");
-                this._texto.setFontFamily("verdana");
-            }
-            else {
-                this._texto.setText(texto);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(texto.prototype, "magnitud", {
-        set: function (numero) {
-            this._texto.setFontSize(numero);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(texto.prototype, "color", {
-        set: function (color) {
-            this._texto.setColor(color);
-        },
-        enumerable: true,
-        configurable: true
-    });
     return texto;
-}(Actor));
+}(ActorTextoBase));
 var EscenaBase = (function () {
     function EscenaBase(pilas) {
         this.pilas = pilas;
@@ -2401,6 +2413,9 @@ var ModoPausa = (function (_super) {
             if (sprite.figura) {
                 _this.pilas.Phaser.Physics.Matter.Matter.World.remove(_this.pilas.modo.matter.world.localWorld, sprite.figura);
             }
+            if (sprite["texto"]) {
+                sprite["texto"].destroy();
+            }
             sprite.destroy();
         });
         this.posicionar_la_camara(foto.escena);
@@ -2447,9 +2462,10 @@ var ModoPausa = (function (_super) {
         sprite.setFlipX(entidad.espejado);
         sprite.setFlipY(entidad.espejado_vertical);
         sprite.depth = -entidad.z;
-        console.log(entidad);
         if (entidad.texto) {
-            this.pilas.modo.add.text(0, 0, entidad.texto);
+            sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
+            sprite["texto"].setFontFamily("verdana");
+            this.copiar_valores_de_sprite_a_texto(sprite);
         }
         if (entidad.figura) {
             sprite["figura"] = this.crear_figura_estatica_para(entidad);

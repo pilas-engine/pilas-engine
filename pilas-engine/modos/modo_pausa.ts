@@ -51,6 +51,10 @@ class ModoPausa extends Modo {
         this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
       }
 
+      if (sprite["texto"]) {
+        sprite["texto"].destroy();
+      }
+
       sprite.destroy();
     });
 
@@ -110,7 +114,9 @@ class ModoPausa extends Modo {
     sprite.depth = -entidad.z;
 
     if (entidad.texto) {
-      this.pilas.modo.add.text(0, 0, entidad.texto);
+      sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
+      sprite["texto"].setFontFamily("verdana");
+      this.copiar_valores_de_sprite_a_texto(sprite);
     }
 
     if (entidad.figura) {

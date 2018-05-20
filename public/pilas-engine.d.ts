@@ -313,6 +313,21 @@ declare class ActorBase {
     figura_radio: number;
     decir(mensaje: string): void;
 }
+declare class ActorTextoBase extends ActorBase {
+    propiedades: {
+        imagen: string;
+        texto: string;
+        es_texto: boolean;
+    };
+    _texto: any;
+    iniciar(): void;
+    pre_actualizar(): void;
+    actualizar(): void;
+    sombra: boolean;
+    texto: string;
+    magnitud: number;
+    color: string;
+}
 declare class Actor extends ActorBase {
     propiedades: {};
     iniciar(): void;
@@ -478,20 +493,12 @@ declare class techo extends Actor {
     };
     iniciar(): void;
 }
-declare class texto extends Actor {
+declare class texto extends ActorTextoBase {
     propiedades: {
         imagen: string;
         texto: string;
         es_texto: boolean;
     };
-    _texto: any;
-    iniciar(): void;
-    pre_actualizar(): void;
-    actualizar(): void;
-    sombra: boolean;
-    texto: string;
-    magnitud: number;
-    color: string;
 }
 declare class EscenaBase {
     pilas: Pilas;

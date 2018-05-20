@@ -170,8 +170,7 @@ class ActorBase {
     destino.flipX = origen.flipX;
     destino.flipY = origen.flipY;
 
-    destino.originX = origen.originX;
-    destino.originY = origen.originY;
+    destino.setOrigin(origen.originX, origen.originY);
   }
 
   iniciar() {}
