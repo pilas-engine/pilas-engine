@@ -69,12 +69,6 @@ class ModoEjecucion extends Modo {
   cambiar_escena(nombre: string) {
     if (this._escena_en_ejecucion) {
       this._escena_en_ejecucion.terminar();
-
-      //console.log(this.actores);
-      //this.actores.map(e => e.eliminar());
-
-      //this._escena_en_ejecucion.actualizar();
-      //this._escena_en_ejecucion.actualizar_actores();
     }
 
     this.instanciar_escena(nombre);

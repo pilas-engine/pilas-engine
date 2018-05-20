@@ -16,6 +16,7 @@ declare class Actores {
     suelo(): any;
     techo(): any;
     texto(): any;
+    laser(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -158,6 +159,7 @@ declare class Pilas {
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
     private iniciar_phaser_desde_configuracion(configuracion);
     definir_modo(nombre: any, datos: any): void;
+    cambiar_escena(nombre: string): void;
     crear_configuracion(ancho: any, alto: any): {
         type: number;
         parent: string;
@@ -209,6 +211,7 @@ declare class ActorBase {
     _figura_radio: number;
     _es_texto: boolean;
     _texto: any;
+    texto: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -255,6 +258,7 @@ declare class ActorBase {
         figura_alto: number;
         figura_radio: number;
         es_texto: boolean;
+        texto: string;
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
@@ -382,6 +386,14 @@ declare class gallina extends Actor {
     vuela_actualizar(): void;
     vuela_cuando_comienza_una_colision(actor: any): void;
 }
+declare class laser extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    velocidad: any;
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class logo extends Actor {
     propiedades: {
         imagen: string;
@@ -403,6 +415,7 @@ declare class nave extends Actor {
         imagen: string;
     };
     velocidad: number;
+    cuadros_desde_el_ultimo_disparo: any;
     iniciar(): void;
     actualizar(): void;
 }
@@ -493,8 +506,10 @@ declare class EscenaBase {
         camara_y: number;
         fondo: string;
     };
+    actualizar(): void;
     actualizar_actores(): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
+    terminar(): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;
@@ -569,11 +584,15 @@ declare class ModoEjecucion extends Modo {
     nombre_de_la_escena_inicial: string;
     permitir_modo_pausa: boolean;
     modo_fisica_activado: boolean;
+    _escena_en_ejecucion: any;
     constructor();
     preload(): void;
     create(datos: any): void;
+    cambiar_escena(nombre: string): void;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;
+    obtener_nombre_de_la_escena_inicial(): string;
+    obtener_escena_por_nombre(nombre: string): any;
     instanciar_escena(nombre: any): void;
     crear_escena(datos_de_la_escena: any): void;
     crear_actor(entidad: any): any;

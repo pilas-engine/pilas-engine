@@ -35,6 +35,7 @@ export default Component.extend({
       escenas: [
         {
           nombre: "principal",
+          fondo: "plano",
           camara_x: 0,
           camara_y: 0,
           id: 1,
@@ -111,7 +112,7 @@ export default Component.extend({
         escala_x: 1,
         escala_y: 1,
         nombre: actor.nombre,
-        //imagen: actor.nombre,   // en este caso se respeta la imagen que sugiere el código.
+        // imagen: actor.nombre,   // en este caso se respeta la imagen que sugiere el código.
         transparencia: 0
       }
     ];

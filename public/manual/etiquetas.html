@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Colaborar con pilas · Manual de Pilas Engine 2</title>
+        <title>Etiquetas · Manual de Pilas Engine 2</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="entorno.html" />
+    <link rel="next" href="colisiones.html" />
     
     
-    <link rel="prev" href="escenas.html" />
+    <link rel="prev" href="animaciones.html" />
     
 
     </head>
@@ -141,7 +141,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="etiquetas.html">
+        <li class="chapter active" data-level="1.5" data-path="etiquetas.html">
             
                 <a href="etiquetas.html">
             
@@ -187,7 +187,7 @@
         
         
     
-        <li class="chapter active" data-level="2.1" data-path="colaborar.html">
+        <li class="chapter " data-level="2.1" data-path="colaborar.html">
             
                 <a href="colaborar.html">
             
@@ -243,7 +243,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Colaborar con pilas</a>
+        <a href="." >Etiquetas</a>
     </h1>
 </div>
 
@@ -258,23 +258,43 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="colaborar-con-pilas-engine">Colaborar con Pilas Engine</h1>
-<p>Pilas Engine es un proyecto de Software Libre, que se desarrolla de forma colaborativa por un equipo de varios colaboradores, personas del equipo de desarrollo y la comunidad de usuarios.</p>
-<p><img src="assets/colabora.png" alt="olabor"></p>
-<p>Todas las personas que quieran participar del desarrollo son bienvenidas, Pilas nos es solo una herramienta de software, es un proyecto colaborativo que sostiene un equipo de personas amigables y respetuosas que buscan mejorar la calidad de la educaci&#xF3;n brind&#xE1;ndole a los J&#xF3;venes la posibilidad de volverse protagonistas en el uso de la tecnolog&#xED;a.</p>
-<p>Por ese motivo, queremos invitarte a participar. &#xA1;Vos tambi&#xE9;n podes formar parte del equipo de Pilas!.</p>
-<p>Te damos algunas ideas de participaci&#xF3;n que podr&#xED;an interesante:</p>
-<h2 id="participar-en-el-foro-de-pilas-engine">Participar en el foro de Pilas Engine</h2>
-<p>La tarea mas recomendable para quienes reci&#xE9;n comienzan es dar de alta una cuenta en nuestro foro (<a href="http://foro.pilas-engine.com.ar/" target="_blank">http://foro.pilas-engine.com.ar</a>), presentarse y ayudarnos a resolver preguntas de otros usuarios.</p>
-<p>No hace falta experiencia previa para colaborar en el foro, podes ingresar, saludar y contarnos qu&#xE9; te parece Pilas, c&#xF3;mo lo conociste; vas a notar que el foro es el lugar ideal para aportar ideas, conversar, y publicar juegos.</p>
-<h2 id="ayudar-a-difundir-pilas">Ayudar a difundir Pilas</h2>
-<p>Muchas personas no conocen Pilas, y creemos que podr&#xED;a interesarles. As&#xED; que otra forma de colaborar es difundir la existencia de Pilas entre las personas que conoces.</p>
-<p>Adem&#xE1;s, si conoces escuelas o proyectos donde se utilice Pilas dales &#xE1;nimo para que nos cuenten sus proyectos, queremos ayudar y mejorar Pilas con cada posibilidad que se nos presente.</p>
-<p>Tambi&#xE9;n es super &#xFA;til si tienes la posibilidad de mencionar Pilas las redes sociales: twitter, facebook, youtube o &#xA1;donde quieras!</p>
-<h2 id="cre&#xE1;-juegos-cursos-o-tutoriales">Cre&#xE1; juegos, cursos o tutoriales</h2>
-<p>Necesitamos tutoriales, juegos y cursos sobre Pilas Engine.</p>
-<p>Si est&#xE1;s haciendo un juego con Pilas, contanos de qu&#xE9; se trata; puedes escribirnos directamente desde el foro de mensajes de la web (<a href="http://foro.pilas-engine.com.ar" target="_blank">http://foro.pilas-engine.com.ar</a>).</p>
-<p>Si te gusta ense&#xF1;ar y contar tus experiencias con la herramienta, te invitamos a escribir y proponer cursos dentro del foro; adem&#xE1;s, en la web tenemos una secci&#xF3;n en donde podemos publicar art&#xED;culos, as&#xED; que seguramente tambi&#xE9;n podamos ayudarte a subirlos ah&#xED;.</p>
+                                <h1 id="etiquetas">Etiquetas</h1>
+<p>Las etiquetas son &#xFA;tiles para clasificar actores y simplificar interacciones.</p>
+<p>Por ejemplo, en un juego podr&#xED;amos tener 10, 20 o 30 actores diferentes que tengan el rol de &quot;enemigos&quot;. En cuyo caso simplemente podr&#xED;amos asignarle a todos la misma etiqueta para distinguirlos de los dem&#xE1;s.</p>
+<p>Las etiquetas se pueden definir directamente en el inspector de pilas:</p>
+<p><img src="assets/PilasEngine 2018-03-25 22-40-02.png" alt="ilasEngine 2018-03-25 22-40-0"></p>
+<p>O bien, tambi&#xE9;n se puede directamente desde el editor c&#xF3;digo usando el atributo <strong>etiqueta</strong> as&#xED;:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Caja extends ActorBase {
+  iniciar() {
+    <span class="hljs-keyword">this</span>.etiqueta = <span class="hljs-string">&quot;enemigo&quot;</span>;
+  }
+
+  actualizar() {}
+}
+</code></pre>
+<h2 id="etiquetas-para-distinguir-colisiones">Etiquetas para distinguir colisiones</h2>
+<p>Vamos describir un uso t&#xED;pico de las etiquetas: las etiquetas son muy &#xFA;tiles para distinguir colisiones.</p>
+<p>Cuando pilas detecta una colisi&#xF3;n entre dos actores llamar&#xE1; a la funci&#xF3;n <em>cuando_comienza_una_colision</em> y enviar&#xE1; el par&#xE1;metro <em>actor</em> como referencia al actor que entr&#xF3; en contacto.</p>
+<p>As&#xED; que esto es lo que se suele hacer, imaginemos que nuestro actor <em>protagonista</em> pueda capturar moneras pero debe perder vidas si toca un enemigo. Podr&#xED;amos hacer algo as&#xED;:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Protagonista extends Actor {
+  <span class="hljs-comment">// otras funciones...</span>
+
+  cuando_comienza_una_colision(actor) {
+    <span class="hljs-keyword">if</span> (actor.etiqueta === <span class="hljs-string">&quot;moneda&quot;</span>) {
+      actor.eliminar();
+      <span class="hljs-keyword">this</span>.pilas.reproducir_sonido(<span class="hljs-string">&quot;moneda&quot;</span>);
+      <span class="hljs-comment">// sumar puntaje, emitir particulas etc...</span>
+    }
+
+    <span class="hljs-keyword">if</span> (actor.etiqueta === <span class="hljs-string">&quot;enemigo&quot;</span>) {
+      <span class="hljs-keyword">this</span>.estado = <span class="hljs-string">&quot;perder&quot;</span>;
+      <span class="hljs-keyword">this</span>.vidas -= <span class="hljs-number">1</span>;
+      <span class="hljs-comment">// emitir sonido de game over, mostrar textos etc...</span>
+    }
+  }
+}
+</code></pre>
+<p>Ten en cuenta que en la funci&#xF3;n <code>cuando_comienza_una_colision</code> tambi&#xE9;n se puede cancelar una colisi&#xF3;n retornando <code>true</code>. Por ejemplo si quieres que un actor pueda sobrepasar a otro.</p>
 
                                 
                                 </section>
@@ -302,12 +322,12 @@
 
             
                 
-                <a href="escenas.html" class="navigation navigation-prev " aria-label="Previous page: Escenas">
+                <a href="animaciones.html" class="navigation navigation-prev " aria-label="Previous page: Animaciones">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="entorno.html" class="navigation navigation-next " aria-label="Next page: Entorno para colaboradores de Pilas">
+                <a href="colisiones.html" class="navigation navigation-next " aria-label="Next page: Colisiones">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -318,7 +338,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Colaborar con pilas","level":"2.1","depth":1,"next":{"title":"Entorno para colaboradores de Pilas","level":"2.2","depth":1,"path":"entorno.md","ref":"entorno.md","articles":[]},"previous":{"title":"Escenas","level":"1.7","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"colaborar.md","mtime":"2018-04-25T22:03:44.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-19T20:15:41.634Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Etiquetas","level":"1.5","depth":1,"next":{"title":"Colisiones","level":"1.6","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"previous":{"title":"Animaciones","level":"1.4","depth":1,"path":"animaciones.md","ref":"animaciones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"etiquetas.md","mtime":"2018-04-25T22:03:44.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-19T20:15:41.634Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

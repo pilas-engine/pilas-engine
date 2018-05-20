@@ -25,6 +25,8 @@ class EscenaBase {
     };
   }
 
+  actualizar() {}
+
   actualizar_actores() {
     let actores_a_eliminar = [];
 
