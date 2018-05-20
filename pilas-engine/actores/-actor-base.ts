@@ -16,6 +16,7 @@ class ActorBase {
   _figura_radio: number;
   _es_texto: boolean = false;
   _texto: any;
+  texto: any;
 
   propiedades_base = {
     x: 0,
@@ -89,6 +90,10 @@ class ActorBase {
     this._figura_alto = propiedades.figura_alto;
     this._figura_radio = propiedades.figura_radio;
     this._es_texto = propiedades.es_texto;
+
+    if (propiedades.es_texto) {
+      this.texto = propiedades.texto;
+    }
 
     switch (figura) {
       case "rectangulo":
@@ -172,6 +177,12 @@ class ActorBase {
   iniciar() {}
 
   serializar() {
+    let texto = "";
+
+    if (this._es_texto) {
+      texto = this._texto.text;
+    }
+
     return {
       tipo: this.tipo,
       x: Math.round(this.x),
@@ -190,6 +201,7 @@ class ActorBase {
       figura_radio: this.figura_radio,
 
       es_texto: this._es_texto,
+      texto: texto,
 
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,

@@ -109,6 +109,10 @@ class ModoPausa extends Modo {
     sprite.setFlipY(entidad.espejado_vertical);
     sprite.depth = -entidad.z;
 
+    if (entidad.texto) {
+      this.pilas.modo.add.text(0, 0, entidad.texto);
+    }
+
     if (entidad.figura) {
       sprite["figura"] = this.crear_figura_estatica_para(entidad);
     }

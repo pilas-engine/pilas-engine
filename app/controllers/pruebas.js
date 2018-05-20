@@ -107,8 +107,8 @@ export default Controller.extend({
         ],
         actores: [
           {
-            nombre: "pelota",
-            codigo: `class pelota extends Actor {
+            nombre: "texto",
+            codigo: `class texto extends Actor {
   propiedades = {
     imagen: "invisible",
     texto: "Hola mundo",
@@ -150,7 +150,7 @@ export default Controller.extend({
           fondo: "plano",
           actores: [
             {
-              id: 3,
+              id: 4,
               x: 100,
               y: -100,
               centro_x: 0.5,
@@ -158,12 +158,13 @@ export default Controller.extend({
               rotacion: 45,
               escala_x: 1,
               escala_y: 1,
-              nombre: "pelota",
-              imagen: "sin_imagen",
+              tipo: "aceituna",
+              nombre: "aceituna",
+              imagen: "aceituna",
               transparencia: 0,
-              figura: "rectangulo",
+              figura: "circulo",
               figura_radio: 25,
-              texto: "pepe123",
+              texto: "",
               es_texto: false,
               figura_dinamica: true
             }
