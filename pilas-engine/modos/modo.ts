@@ -17,6 +17,8 @@ class Modo extends Phaser.Scene {
     this.ancho = ancho;
     this.alto = alto;
     this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+    this.fps.scrollFactorX = 0;
+    this.fps.scrollFactorY = 0;
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
   }
@@ -31,7 +33,7 @@ class Modo extends Phaser.Scene {
 
   crear_canvas_de_depuracion() {
     let graphics = this.add.graphics({ x: 0, y: 0 });
-    graphics.depth = -20000;
+    graphics.depth = 20000;
     this.graphics = graphics;
   }
 
@@ -54,12 +56,27 @@ class Modo extends Phaser.Scene {
         this.fps.alpha = 0;
       }
     }
+
+    this.posicionar_fondo();
+  }
+
+  posicionar_fondo() {
+    let posicion_de_la_camara = this.obtener_posicion_de_la_camara();
+    this.fondo.x = posicion_de_la_camara.x;
+    this.fondo.y = posicion_de_la_camara.y;
+
+    this.fondo.tilePositionX = posicion_de_la_camara.x;
+    this.fondo.tilePositionY = posicion_de_la_camara.y;
+  }
+
+  obtener_posicion_de_la_camara() {
+    let x = pilas.modo.cameras.cameras[0].scrollX;
+    let y = pilas.modo.cameras.cameras[0].scrollY;
+    return { x, y };
   }
 
   crear_fondo(fondo) {
     this._nombre_del_fondo = fondo;
-    console.log(this.add.tileSprite);
-    console.log({ ancho: this.ancho, alto: this.alto });
     this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
@@ -101,6 +118,33 @@ class Modo extends Phaser.Scene {
 
     sprite.setFlipX(actor.espejado);
     sprite.setFlipY(actor.espejado_vertical);
+
+    if (actor.es_texto) {
+      if (!sprite["texto"]) {
+        sprite["texto"] = this.add.text(0, 0, actor.texto);
+        sprite["texto"].setFontFamily("verdana");
+
+        sprite.update = () => {
+          this.copiar_valores_de_sprite_a_texto(sprite);
+        };
+      }
+
+      sprite["texto"].setText(actor.texto);
+      this.copiar_valores_de_sprite_a_texto(sprite);
+    }
+  }
+
+  copiar_valores_de_sprite_a_texto(sprite) {
+    sprite["texto"].x = sprite.x;
+    sprite["texto"].y = sprite.y;
+    sprite["texto"].angle = sprite.angle;
+    sprite["texto"].scaleX = sprite.scaleX;
+    sprite["texto"].scaleY = sprite.scaleY;
+
+    sprite["texto"].alpha = sprite.alpha;
+    sprite["texto"].flipX = sprite.flipX;
+    sprite["texto"].flipY = sprite.flipY;
+    sprite["texto"].setOrigin(sprite.originX, sprite.originY);
   }
 
   crear_figura_estatica_para(actor) {

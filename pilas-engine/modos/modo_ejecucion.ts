@@ -15,8 +15,8 @@ class ModoEjecucion extends Modo {
   codigo: any;
   nombre_de_la_escena_inicial: string = null;
   permitir_modo_pausa: boolean;
-  pausar = false;
   modo_fisica_activado: boolean;
+  _escena_en_ejecucion: any = null;
 
   constructor() {
     super({ key: "ModoEjecucion" });
@@ -32,7 +32,6 @@ class ModoEjecucion extends Modo {
       this.guardar_parametros_en_atributos(datos);
       let escena = this.obtener_escena_inicial();
 
-      this.crear_fondo(escena.fondo);
       this.clases = this.obtener_referencias_a_clases();
 
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
@@ -63,8 +62,16 @@ class ModoEjecucion extends Modo {
     } catch (e) {
       console.error(e);
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-      this.pausar = true;
+      this.pausar();
     }
+  }
+
+  cambiar_escena(nombre: string) {
+    if (this._escena_en_ejecucion) {
+      this._escena_en_ejecucion.terminar();
+    }
+
+    this.instanciar_escena(nombre);
   }
 
   vincular_eventos_de_colision() {
@@ -101,8 +108,9 @@ class ModoEjecucion extends Modo {
           }
         }
       } catch (e) {
+        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-        this.pausar = true;
+        this.pausar();
       }
     });
 
@@ -163,18 +171,38 @@ class ModoEjecucion extends Modo {
         }
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-        this.pilas.pausar();
+        this.pausar();
       }
     });
   }
 
   obtener_escena_inicial() {
-    let nombre = this.nombre_de_la_escena_inicial;
-    return this.proyecto.escenas.filter(e => e.nombre == nombre)[0];
+    let nombre = this.obtener_nombre_de_la_escena_inicial();
+    return this.obtener_escena_por_nombre(nombre);
+  }
+
+  obtener_nombre_de_la_escena_inicial() {
+    return this.nombre_de_la_escena_inicial;
+  }
+
+  obtener_escena_por_nombre(nombre: string) {
+    let escenas_encontradas = this.proyecto.escenas.filter(e => e.nombre == nombre);
+
+    if (escenas_encontradas.length === 0) {
+      throw Error(`No se puede encontrar la escena '${nombre}'.`);
+    } else {
+      if (escenas_encontradas.length > 1) {
+        throw Error(`Hay más de una escena llamada '${nombre}'.`);
+      }
+    }
+
+    return escenas_encontradas[0];
   }
 
   instanciar_escena(nombre) {
-    let escena = this.obtener_escena_inicial();
+    let escena = this.obtener_escena_por_nombre(nombre);
+    this.crear_fondo(escena.fondo);
+
     this.crear_escena(escena);
   }
 
@@ -189,6 +217,8 @@ class ModoEjecucion extends Modo {
     this.actores = datos_de_la_escena.actores.map(e => {
       return this.crear_actor(e);
     });
+
+    this._escena_en_ejecucion = escena;
   }
 
   crear_actor(entidad) {
@@ -284,11 +314,18 @@ class ModoEjecucion extends Modo {
       this.pilas.escena.actualizar();
       this.pilas.escena.actualizar_actores();
     } catch (e) {
+      console.error(e);
       this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
         mensaje: e.message,
         stack: e.stack.toString()
       });
+      this.pausar();
     }
+  }
+
+  pausar() {
+    console.warn("Pausando la escena a causa del error anterior.");
+    this.scene.pause(undefined); // tslint:disable-line
   }
 
   guardar_foto_de_entidades() {

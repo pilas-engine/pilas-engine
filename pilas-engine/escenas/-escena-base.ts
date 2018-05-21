@@ -25,25 +25,30 @@ class EscenaBase {
     };
   }
 
+  actualizar() {}
+
   actualizar_actores() {
+    let actores_a_eliminar = [];
+
     this.actores.map(actor => {
       if (!actor._vivo) {
         actor.sprite.destroy();
-        this.quitar_actor_luego_de_eliminar(actor);
+
+        if (actor._texto) {
+          actor._texto.destroy();
+        }
+
+        actores_a_eliminar.push(actor);
         return;
       }
 
-      try {
-        actor.pre_actualizar();
-        actor.actualizar_sensores();
-        actor.actualizar();
-      } catch (e) {
-        console.error(e);
-        this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
-          mensaje: e.message,
-          stack: e.stack.toString()
-        });
-      }
+      actor.pre_actualizar();
+      actor.actualizar_sensores();
+      actor.actualizar();
+    });
+
+    actores_a_eliminar.map(actor => {
+      this.quitar_actor_luego_de_eliminar(actor);
     });
   }
 
@@ -56,5 +61,11 @@ class EscenaBase {
     } else {
       throw Error(`Se intentó eliminar un actor inexistente en la escena: id=${id} etiqueta=${actor.etiqueta}.`);
     }
+  }
+
+  terminar() {
+    this.actores.map(e => e.eliminar());
+    this.actualizar();
+    this.actualizar_actores();
   }
 }

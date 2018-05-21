@@ -61,6 +61,12 @@ var Actores = (function () {
     Actores.prototype.techo = function () {
         return this.crear_actor("techo");
     };
+    Actores.prototype.texto = function () {
+        return this.crear_actor("texto");
+    };
+    Actores.prototype.laser = function () {
+        return this.crear_actor("laser");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -68,7 +74,8 @@ var Animaciones = (function () {
         this.animaciones = {};
         this.pilas = pilas;
     }
-    Animaciones.prototype.crear_o_sustituir = function (nombre, cuadros, velocidad) {
+    Animaciones.prototype.crear_animacion = function (actor, nombre_de_la_animacion, cuadros, velocidad) {
+        var nombre = actor.id + "-" + nombre_de_la_animacion;
         if (!this.animaciones[nombre]) {
             var frames_1 = cuadros.map(function (nombre) {
                 if (nombre.indexOf(".") > -1) {
@@ -312,7 +319,7 @@ var Historia = (function () {
     };
     return Historia;
 }());
-var DEPURAR_MENSAJES = true;
+var DEPURAR_MENSAJES = false;
 var Mensajes = (function () {
     function Mensajes(pilas) {
         this.pilas = pilas;
@@ -388,7 +395,6 @@ var Mensajes = (function () {
         this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
         this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
         this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
-        this.pilas.pausar();
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.error(error);
     };
@@ -407,9 +413,6 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_actualizar_actor_desde_el_editor = function (datos) {
         var sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
         this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
-    };
-    Mensajes.prototype.atender_mensaje_quitar_pausa_de_phaser = function () {
-        console.log("TODO: quitar modo pausa");
     };
     Mensajes.prototype.atender_mensaje_pausar_escena = function () {
         var parametros = {
@@ -458,6 +461,9 @@ var Utilidades = (function () {
         if (typeof valor !== "number") {
             throw new Error("El valor enviado no corresponde con un n\u00FAmero: " + valor);
         }
+    };
+    Utilidades.prototype.es_animacion = function (valor) {
+        return Array.isArray(valor) && valor.every(function (e) { return Number.isInteger(e); });
     };
     Utilidades.prototype.convertir_angulo_a_radianes = function (grados) {
         return grados * Math.PI / 180;
@@ -552,13 +558,16 @@ var Pilas = (function () {
         this.modo = this.game.scene.getScene(nombre);
         this.game.scene.start(nombre, datos);
     };
+    Pilas.prototype.cambiar_escena = function (nombre) {
+        this.modo.cambiar_escena(nombre);
+    };
     Pilas.prototype.crear_configuracion = function (ancho, alto) {
         return {
             type: Phaser.AUTO,
             parent: "game",
             width: ancho,
             height: alto,
-            backgroundColor: "#5d5d5d",
+            backgroundColor: "#000000",
             disableContextMenu: true,
             input: {
                 keyboard: true,
@@ -598,11 +607,19 @@ var Pilas = (function () {
     Pilas.prototype.escena_actual = function () {
         return this.escena;
     };
-    Pilas.prototype.pausar = function () {
-        this.game.loop.sleep();
+    Pilas.prototype.animar = function (actor, propiedad, valor, duracion) {
+        if (duracion === void 0) { duracion = 0.5; }
+        var configuracion = {
+            targets: actor,
+            ease: "Power1",
+            duration: duracion * 1000
+        };
+        configuracion[propiedad] = valor[0];
+        console.log(configuracion);
+        this.modo.tweens.add(configuracion);
     };
-    Pilas.prototype.continuar = function () {
-        this.game.loop.wake();
+    Pilas.prototype.luego = function (duracion, tarea) {
+        this.modo.time.delayedCall(duracion * 1000, tarea);
     };
     return Pilas;
 }());
@@ -613,6 +630,7 @@ var ActorBase = (function () {
         this._etiqueta = null;
         this._vivo = true;
         this._animacion_en_curso = "";
+        this._es_texto = false;
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -634,7 +652,8 @@ var ActorBase = (function () {
             figura_radio: 40,
             figura_sin_rotacion: false,
             figura_rebote: 1,
-            figura_sensor: false
+            figura_sensor: false,
+            es_texto: false
         };
         this.propiedades = {
             x: 0,
@@ -670,10 +689,16 @@ var ActorBase = (function () {
                 .slice(1)
                 .join(".");
         }
+        this._id = propiedades.id;
+        this._nombre = propiedades.nombre;
         this.sensores = [];
         this._figura_ancho = propiedades.figura_ancho;
         this._figura_alto = propiedades.figura_alto;
         this._figura_radio = propiedades.figura_radio;
+        this._es_texto = propiedades.es_texto;
+        if (propiedades.es_texto) {
+            this.texto = propiedades.texto;
+        }
         switch (figura) {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
@@ -726,8 +751,23 @@ var ActorBase = (function () {
         };
         this.pilas.escena.agregar_actor(this);
     };
+    ActorBase.prototype.copiar_atributos_de_sprite = function (origen, destino) {
+        destino.x = origen.x;
+        destino.y = origen.y;
+        destino.angle = origen.angle;
+        destino.scaleX = origen.scaleX;
+        destino.scaleY = origen.scaleY;
+        destino.alpha = origen.alpha;
+        destino.flipX = origen.flipX;
+        destino.flipY = origen.flipY;
+        destino.setOrigin(origen.originX, origen.originY);
+    };
     ActorBase.prototype.iniciar = function () { };
     ActorBase.prototype.serializar = function () {
+        var texto = "";
+        if (this._es_texto) {
+            texto = this._texto.text;
+        }
         return {
             tipo: this.tipo,
             x: Math.round(this.x),
@@ -743,6 +783,8 @@ var ActorBase = (function () {
             figura_ancho: this.figura_ancho,
             figura_alto: this.figura_alto,
             figura_radio: this.figura_radio,
+            es_texto: this._es_texto,
+            texto: texto,
             espejado: this.espejado,
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
@@ -815,15 +857,40 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ActorBase.prototype, "nombre", {
+        get: function () {
+            return this._nombre;
+        },
+        set: function (a) {
+            throw new Error("No puede definir este atributo");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (a) {
+            throw new Error("No puede definir este atributo");
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ActorBase.prototype, "x", {
         get: function () {
             var x = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
             return x;
         },
         set: function (_x) {
-            this.pilas.utilidades.validar_numero(_x);
-            var x = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0).x;
-            this.sprite.x = x;
+            if (this.pilas.utilidades.es_animacion(_x)) {
+                this.pilas.animar(this, "x", _x);
+            }
+            else {
+                this.pilas.utilidades.validar_numero(_x);
+                var x = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0).x;
+                this.sprite.x = x;
+            }
         },
         enumerable: true,
         configurable: true
@@ -834,9 +901,14 @@ var ActorBase = (function () {
             return y;
         },
         set: function (_y) {
-            this.pilas.utilidades.validar_numero(_y);
-            var y = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y).y;
-            this.sprite.y = y;
+            if (this.pilas.utilidades.es_animacion(_y)) {
+                this.pilas.animar(this, "y", _y);
+            }
+            else {
+                this.pilas.utilidades.validar_numero(_y);
+                var y = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y).y;
+                this.sprite.y = y;
+            }
         },
         enumerable: true,
         configurable: true
@@ -857,8 +929,13 @@ var ActorBase = (function () {
             return -this.sprite.angle % 360;
         },
         set: function (angulo) {
-            this.pilas.utilidades.validar_numero(angulo);
-            this.sprite.angle = -(angulo % 360);
+            if (this.pilas.utilidades.es_animacion(angulo)) {
+                this.pilas.animar(this, "rotacion", angulo);
+            }
+            else {
+                this.pilas.utilidades.validar_numero(angulo);
+                this.sprite.angle = -(angulo % 360);
+            }
         },
         enumerable: true,
         configurable: true
@@ -868,10 +945,15 @@ var ActorBase = (function () {
             return this.sprite.scaleX;
         },
         set: function (s) {
-            this.pilas.utilidades.validar_numero(s);
-            this.sprite.scaleX = s;
-            if (this.figura) {
-                pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+            if (this.pilas.utilidades.es_animacion(s)) {
+                this.pilas.animar(this, "escala_x", s);
+            }
+            else {
+                this.pilas.utilidades.validar_numero(s);
+                this.sprite.scaleX = s;
+                if (this.figura) {
+                    pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+                }
             }
         },
         enumerable: true,
@@ -882,10 +964,15 @@ var ActorBase = (function () {
             return this.sprite.scaleY;
         },
         set: function (s) {
-            this.pilas.utilidades.validar_numero(s);
-            this.sprite.scaleY = s;
-            if (this.figura) {
-                pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+            if (this.pilas.utilidades.es_animacion(s)) {
+                this.pilas.animar(this, "escala_y", s);
+            }
+            else {
+                this.pilas.utilidades.validar_numero(s);
+                this.sprite.scaleY = s;
+                if (this.figura) {
+                    pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+                }
             }
         },
         enumerable: true,
@@ -896,9 +983,14 @@ var ActorBase = (function () {
             return this.escala_x;
         },
         set: function (escala) {
-            this.pilas.utilidades.validar_numero(escala);
-            this.escala_x = escala;
-            this.escala_y = escala;
+            if (this.pilas.utilidades.es_animacion(escala)) {
+                this.pilas.animar(this, "escala", escala);
+            }
+            else {
+                this.pilas.utilidades.validar_numero(escala);
+                this.escala_x = escala;
+                this.escala_y = escala;
+            }
         },
         enumerable: true,
         configurable: true
@@ -948,9 +1040,14 @@ var ActorBase = (function () {
             return (1 - this.sprite.alpha) * 100;
         },
         set: function (t) {
-            this.pilas.utilidades.validar_numero(t);
-            t = this.pilas.utilidades.limitar(t, 0, 100);
-            this.sprite.alpha = 1 - t / 100;
+            if (this.pilas.utilidades.es_animacion(t)) {
+                this.pilas.animar(this, "transparencia", t);
+            }
+            else {
+                this.pilas.utilidades.validar_numero(t);
+                t = this.pilas.utilidades.limitar(t, 0, 100);
+                this.sprite.alpha = 1 - t / 100;
+            }
         },
         enumerable: true,
         configurable: true
@@ -1128,9 +1225,10 @@ var ActorBase = (function () {
         this.y += Math.sin(r) * velocidad;
     };
     ActorBase.prototype.crear_animacion = function (nombre, cuadros, velocidad) {
-        this.pilas.animaciones.crear_o_sustituir(nombre, cuadros, velocidad);
+        this.pilas.animaciones.crear_animacion(this, nombre, cuadros, velocidad);
     };
-    ActorBase.prototype.reproducir_animacion = function (nombre) {
+    ActorBase.prototype.reproducir_animacion = function (nombre_de_la_animacion) {
+        var nombre = this.id + "-" + nombre_de_la_animacion;
         this.sprite.anims.play(nombre);
     };
     Object.defineProperty(ActorBase.prototype, "animacion", {
@@ -1202,8 +1300,78 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype.decir = function (mensaje) {
+        var texto = this.pilas.actores.texto();
+        texto.texto = mensaje;
+        texto.x = this.x + 15;
+        texto.y = this.y + this.alto;
+        texto.escala_y = 0;
+        texto.escala_y = [1];
+        this.pilas.luego(4, function () {
+            texto.eliminar();
+        });
+    };
     return ActorBase;
 }());
+var ActorTextoBase = (function (_super) {
+    __extends(ActorTextoBase, _super);
+    function ActorTextoBase() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "invisible",
+            texto: "Hola mundo",
+            es_texto: true
+        };
+        _this._texto = null;
+        return _this;
+    }
+    ActorTextoBase.prototype.iniciar = function () { };
+    ActorTextoBase.prototype.pre_actualizar = function () {
+        _super.prototype.pre_actualizar.call(this);
+        this.copiar_atributos_de_sprite(this.sprite, this._texto);
+    };
+    ActorTextoBase.prototype.actualizar = function () { };
+    Object.defineProperty(ActorTextoBase.prototype, "sombra", {
+        set: function (valor) {
+            if (valor) {
+                this._texto.setShadow(2, 2, "black", 4);
+            }
+            else {
+                this._texto.setShadow();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorTextoBase.prototype, "texto", {
+        set: function (texto) {
+            if (!this._texto) {
+                this._texto = this.pilas.modo.add.text(0, 0, texto);
+                this._texto.setFontFamily("verdana");
+            }
+            else {
+                this._texto.setText(texto);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorTextoBase.prototype, "magnitud", {
+        set: function (numero) {
+            this._texto.setFontSize(numero);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorTextoBase.prototype, "color", {
+        set: function (color) {
+            this._texto.setColor(color);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ActorTextoBase;
+}(ActorBase));
 var Actor = (function (_super) {
     __extends(Actor, _super);
     function Actor() {
@@ -1395,6 +1563,28 @@ var gallina = (function (_super) {
     };
     return gallina;
 }(Actor));
+var laser = (function (_super) {
+    __extends(laser, _super);
+    function laser() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "laser"
+        };
+        return _this;
+    }
+    laser.prototype.iniciar = function () {
+        this.centro_x = 0.3;
+        this.velocidad = 10;
+        this.pilas.reproducir_sonido("laser");
+    };
+    laser.prototype.actualizar = function () {
+        this.avanzar(this.rotacion, this.velocidad);
+        if (this.x > 400 || this.x < -400 || this.y > 400 || this.y < -400) {
+            this.eliminar();
+        }
+    };
+    return laser;
+}(Actor));
 var logo = (function (_super) {
     __extends(logo, _super);
     function logo() {
@@ -1439,8 +1629,10 @@ var nave = (function (_super) {
         this.crear_animacion("nave_girando_a_la_izquierda", ["nave_izquierda_1", "nave_izquierda_2"], 20);
         this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
         this.animacion = "nave_en_reposo";
+        this.cuadros_desde_el_ultimo_disparo = 0;
     };
     nave.prototype.actualizar = function () {
+        this.cuadros_desde_el_ultimo_disparo += 1;
         if (this.pilas.control.izquierda) {
             this.rotacion += this.velocidad;
             this.animacion = "nave_girando_a_la_izquierda";
@@ -1449,8 +1641,16 @@ var nave = (function (_super) {
             this.rotacion -= this.velocidad;
             this.animacion = "nave_girando_a_la_derecha";
         }
+        if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {
+            var laser_1 = this.pilas.actores.laser();
+            laser_1.x = this.x;
+            laser_1.y = this.y;
+            laser_1.rotacion = this.rotacion;
+            laser_1.z = this.z + 1;
+            this.cuadros_desde_el_ultimo_disparo = 0;
+        }
         if (this.pilas.control.arriba) {
-            this.avanzar(this.rotacion + 90, this.velocidad);
+            this.avanzar(this.rotacion, this.velocidad);
             this.animacion = "nave_avanzando";
         }
         else {
@@ -1556,6 +1756,19 @@ var techo = (function (_super) {
     techo.prototype.iniciar = function () { };
     return techo;
 }(Actor));
+var texto = (function (_super) {
+    __extends(texto, _super);
+    function texto() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "invisible",
+            texto: "Hola mundo",
+            es_texto: true
+        };
+        return _this;
+    }
+    return texto;
+}(ActorTextoBase));
 var EscenaBase = (function () {
     function EscenaBase(pilas) {
         this.pilas = pilas;
@@ -1574,26 +1787,25 @@ var EscenaBase = (function () {
             fondo: this.fondo
         };
     };
+    EscenaBase.prototype.actualizar = function () { };
     EscenaBase.prototype.actualizar_actores = function () {
         var _this = this;
+        var actores_a_eliminar = [];
         this.actores.map(function (actor) {
             if (!actor._vivo) {
                 actor.sprite.destroy();
-                _this.quitar_actor_luego_de_eliminar(actor);
+                if (actor._texto) {
+                    actor._texto.destroy();
+                }
+                actores_a_eliminar.push(actor);
                 return;
             }
-            try {
-                actor.pre_actualizar();
-                actor.actualizar_sensores();
-                actor.actualizar();
-            }
-            catch (e) {
-                console.error(e);
-                _this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
-                    mensaje: e.message,
-                    stack: e.stack.toString()
-                });
-            }
+            actor.pre_actualizar();
+            actor.actualizar_sensores();
+            actor.actualizar();
+        });
+        actores_a_eliminar.map(function (actor) {
+            _this.quitar_actor_luego_de_eliminar(actor);
         });
     };
     EscenaBase.prototype.quitar_actor_luego_de_eliminar = function (actor) {
@@ -1605,6 +1817,11 @@ var EscenaBase = (function () {
         else {
             throw Error("Se intent\u00F3 eliminar un actor inexistente en la escena: id=" + id + " etiqueta=" + actor.etiqueta + ".");
         }
+    };
+    EscenaBase.prototype.terminar = function () {
+        this.actores.map(function (e) { return e.eliminar(); });
+        this.actualizar();
+        this.actualizar_actores();
     };
     return EscenaBase;
 }());
@@ -1649,6 +1866,8 @@ var Modo = (function (_super) {
         this.ancho = ancho;
         this.alto = alto;
         this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+        this.fps.scrollFactorX = 0;
+        this.fps.scrollFactorY = 0;
         this.crear_canvas_de_depuracion();
         this.pilas = datos.pilas;
     };
@@ -1660,7 +1879,7 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_canvas_de_depuracion = function () {
         var graphics = this.add.graphics({ x: 0, y: 0 });
-        graphics.depth = -20000;
+        graphics.depth = 20000;
         this.graphics = graphics;
     };
     Modo.prototype.update = function (actores) {
@@ -1681,11 +1900,22 @@ var Modo = (function (_super) {
                 this.fps.alpha = 0;
             }
         }
+        this.posicionar_fondo();
+    };
+    Modo.prototype.posicionar_fondo = function () {
+        var posicion_de_la_camara = this.obtener_posicion_de_la_camara();
+        this.fondo.x = posicion_de_la_camara.x;
+        this.fondo.y = posicion_de_la_camara.y;
+        this.fondo.tilePositionX = posicion_de_la_camara.x;
+        this.fondo.tilePositionY = posicion_de_la_camara.y;
+    };
+    Modo.prototype.obtener_posicion_de_la_camara = function () {
+        var x = pilas.modo.cameras.cameras[0].scrollX;
+        var y = pilas.modo.cameras.cameras[0].scrollY;
+        return { x: x, y: y };
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this._nombre_del_fondo = fondo;
-        console.log(this.add.tileSprite);
-        console.log({ ancho: this.ancho, alto: this.alto });
         this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
@@ -1701,6 +1931,7 @@ var Modo = (function (_super) {
         return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
     };
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
+        var _this = this;
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
         sprite.setTexture(actor.imagen);
         sprite.id = actor.id;
@@ -1720,6 +1951,28 @@ var Modo = (function (_super) {
         }
         sprite.setFlipX(actor.espejado);
         sprite.setFlipY(actor.espejado_vertical);
+        if (actor.es_texto) {
+            if (!sprite["texto"]) {
+                sprite["texto"] = this.add.text(0, 0, actor.texto);
+                sprite["texto"].setFontFamily("verdana");
+                sprite.update = function () {
+                    _this.copiar_valores_de_sprite_a_texto(sprite);
+                };
+            }
+            sprite["texto"].setText(actor.texto);
+            this.copiar_valores_de_sprite_a_texto(sprite);
+        }
+    };
+    Modo.prototype.copiar_valores_de_sprite_a_texto = function (sprite) {
+        sprite["texto"].x = sprite.x;
+        sprite["texto"].y = sprite.y;
+        sprite["texto"].angle = sprite.angle;
+        sprite["texto"].scaleX = sprite.scaleX;
+        sprite["texto"].scaleY = sprite.scaleY;
+        sprite["texto"].alpha = sprite.alpha;
+        sprite["texto"].flipX = sprite.flipX;
+        sprite["texto"].flipY = sprite.flipY;
+        sprite["texto"].setOrigin(sprite.originX, sprite.originY);
     };
     Modo.prototype.crear_figura_estatica_para = function (actor) {
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
@@ -1874,6 +2127,9 @@ var ModoEditor = (function (_super) {
         else {
             this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
         }
+        this.actores.map(function (a) {
+            a.update();
+        });
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
@@ -1882,6 +2138,9 @@ var ModoEditor = (function (_super) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
         }
         actor_a_eliminar[0].destroy();
+        if (actor_a_eliminar[0]["texto"]) {
+            actor_a_eliminar[0]["texto"].destroy();
+        }
     };
     return ModoEditor;
 }(Modo));
@@ -1891,7 +2150,7 @@ var ModoEjecucion = (function (_super) {
         var _this = _super.call(this, { key: "ModoEjecucion" }) || this;
         _this.proyecto = {};
         _this.nombre_de_la_escena_inicial = null;
-        _this.pausar = false;
+        _this._escena_en_ejecucion = null;
         return _this;
     }
     ModoEjecucion.prototype.preload = function () { };
@@ -1902,7 +2161,6 @@ var ModoEjecucion = (function (_super) {
         try {
             this.guardar_parametros_en_atributos(datos);
             var escena = this.obtener_escena_inicial();
-            this.crear_fondo(escena.fondo);
             this.clases = this.obtener_referencias_a_clases();
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
             this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
@@ -1927,8 +2185,14 @@ var ModoEjecucion = (function (_super) {
         catch (e) {
             console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-            this.pausar = true;
+            this.pausar();
         }
+    };
+    ModoEjecucion.prototype.cambiar_escena = function (nombre) {
+        if (this._escena_en_ejecucion) {
+            this._escena_en_ejecucion.terminar();
+        }
+        this.instanciar_escena(nombre);
     };
     ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
         var _this = this;
@@ -1960,8 +2224,9 @@ var ModoEjecucion = (function (_super) {
                 }
             }
             catch (e) {
+                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-                _this.pausar = true;
+                _this.pausar();
             }
         });
         this.matter.world.on("collisionactive", function (event, a, b) {
@@ -2011,16 +2276,32 @@ var ModoEjecucion = (function (_super) {
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-                _this.pilas.pausar();
+                _this.pausar();
             }
         });
     };
     ModoEjecucion.prototype.obtener_escena_inicial = function () {
-        var nombre = this.nombre_de_la_escena_inicial;
-        return this.proyecto.escenas.filter(function (e) { return e.nombre == nombre; })[0];
+        var nombre = this.obtener_nombre_de_la_escena_inicial();
+        return this.obtener_escena_por_nombre(nombre);
+    };
+    ModoEjecucion.prototype.obtener_nombre_de_la_escena_inicial = function () {
+        return this.nombre_de_la_escena_inicial;
+    };
+    ModoEjecucion.prototype.obtener_escena_por_nombre = function (nombre) {
+        var escenas_encontradas = this.proyecto.escenas.filter(function (e) { return e.nombre == nombre; });
+        if (escenas_encontradas.length === 0) {
+            throw Error("No se puede encontrar la escena '" + nombre + "'.");
+        }
+        else {
+            if (escenas_encontradas.length > 1) {
+                throw Error("Hay m\u00E1s de una escena llamada '" + nombre + "'.");
+            }
+        }
+        return escenas_encontradas[0];
     };
     ModoEjecucion.prototype.instanciar_escena = function (nombre) {
-        var escena = this.obtener_escena_inicial();
+        var escena = this.obtener_escena_por_nombre(nombre);
+        this.crear_fondo(escena.fondo);
         this.crear_escena(escena);
     };
     ModoEjecucion.prototype.crear_escena = function (datos_de_la_escena) {
@@ -2033,6 +2314,7 @@ var ModoEjecucion = (function (_super) {
         this.actores = datos_de_la_escena.actores.map(function (e) {
             return _this.crear_actor(e);
         });
+        this._escena_en_ejecucion = escena;
     };
     ModoEjecucion.prototype.crear_actor = function (entidad) {
         var x = entidad.x;
@@ -2101,11 +2383,17 @@ var ModoEjecucion = (function (_super) {
             this.pilas.escena.actualizar_actores();
         }
         catch (e) {
+            console.error(e);
             this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
                 mensaje: e.message,
                 stack: e.stack.toString()
             });
+            this.pausar();
         }
+    };
+    ModoEjecucion.prototype.pausar = function () {
+        console.warn("Pausando la escena a causa del error anterior.");
+        this.scene.pause(undefined);
     };
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
         this.pilas.historia.serializar_escena(this.pilas.escena);
@@ -2126,14 +2414,18 @@ var ModoPausa = (function (_super) {
     }
     ModoPausa.prototype.preload = function () { };
     ModoPausa.prototype.create = function (datos) {
-        _super.prototype.create.call(this, datos, 100, 100);
+        _super.prototype.create.call(this, datos, datos.pilas._ancho, datos.pilas._alto);
         this.pilas = datos.pilas;
         this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.sprites = [];
+        var foto = this.pilas.historia.obtener_foto(1);
+        this.crear_fondo(foto.escena.fondo);
         this.crear_sprites_desde_historia(this.posicion);
         this.crear_canvas_de_depuracion_modo_pausa();
         this.matter.systems.matterPhysics.world.createDebugGraphic();
+        this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
         var datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
         this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
@@ -2145,9 +2437,13 @@ var ModoPausa = (function (_super) {
             if (sprite.figura) {
                 _this.pilas.Phaser.Physics.Matter.Matter.World.remove(_this.pilas.modo.matter.world.localWorld, sprite.figura);
             }
+            if (sprite["texto"]) {
+                sprite["texto"].destroy();
+            }
             sprite.destroy();
         });
         this.posicionar_la_camara(foto.escena);
+        this.fondo.setAlpha(0.6);
         this.sprites = foto.actores.map(function (entidad) {
             return _this.crear_sprite_desde_entidad(entidad);
         });
@@ -2171,6 +2467,13 @@ var ModoPausa = (function (_super) {
                 _this.dibujar_punto_de_control(_this.graphics, x, y);
             });
         }
+        if (this.tecla_derecha.isDown) {
+            this.avanzar_posicion();
+        }
+        if (this.tecla_izquierda.isDown) {
+            this.retroceder_posicion();
+        }
+        this.posicionar_fondo();
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
         var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
@@ -2183,6 +2486,11 @@ var ModoPausa = (function (_super) {
         sprite.setFlipX(entidad.espejado);
         sprite.setFlipY(entidad.espejado_vertical);
         sprite.depth = -entidad.z;
+        if (entidad.texto) {
+            sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
+            sprite["texto"].setFontFamily("verdana");
+            this.copiar_valores_de_sprite_a_texto(sprite);
+        }
         if (entidad.figura) {
             sprite["figura"] = this.crear_figura_estatica_para(entidad);
         }
@@ -2193,6 +2501,16 @@ var ModoPausa = (function (_super) {
         this.posicion = Math.min(this.posicion, this.total);
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
+    };
+    ModoPausa.prototype.avanzar_posicion = function () {
+        this.posicion += 1;
+        this.actualizar_posicion(this.posicion);
+        this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
+    };
+    ModoPausa.prototype.retroceder_posicion = function () {
+        this.posicion -= 1;
+        this.actualizar_posicion(this.posicion);
+        this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
     };
     ModoPausa.prototype.crear_canvas_de_depuracion_modo_pausa = function () {
         var graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });

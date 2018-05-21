@@ -90,13 +90,17 @@ class Pilas {
     this.game.scene.start(nombre, datos);
   }
 
+  cambiar_escena(nombre: string) {
+    this.modo.cambiar_escena(nombre);
+  }
+
   crear_configuracion(ancho, alto) {
     return {
       type: Phaser.AUTO,
       parent: "game",
       width: ancho,
       height: alto,
-      backgroundColor: "#5d5d5d",
+      backgroundColor: "#000000",
       disableContextMenu: true,
       input: {
         keyboard: true,
@@ -143,12 +147,20 @@ class Pilas {
     return this.escena;
   }
 
-  pausar() {
-    this.game.loop.sleep();
+  animar(actor, propiedad, valor, duracion: number = 0.5) {
+    let configuracion = {
+      targets: actor,
+      ease: "Power1",
+      duration: duracion * 1000
+    };
+    configuracion[propiedad] = valor[0];
+
+    console.log(configuracion);
+    this.modo.tweens.add(configuracion);
   }
 
-  continuar() {
-    this.game.loop.wake();
+  luego(duracion: number, tarea: any) {
+    this.modo.time.delayedCall(duracion * 1000, tarea);
   }
 }
 

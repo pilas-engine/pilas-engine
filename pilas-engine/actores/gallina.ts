@@ -27,6 +27,7 @@ class gallina extends Actor {
 
   vuela_actualizar() {}
 
+  // # TODO: Implementar este tipo de manejadores, para que desde los estados de autómata se puedan crear colisiones.
   vuela_cuando_comienza_una_colision(actor) {
     console.log(actor);
   }

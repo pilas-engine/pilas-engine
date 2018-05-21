@@ -11,8 +11,8 @@ class ModoPausa extends Modo {
   texto: any;
   total: number;
 
-  izquierda: any;
-  derecha: any;
+  tecla_izquierda: any;
+  tecla_derecha: any;
 
   constructor() {
     super({ key: "ModoPausa" });
@@ -21,15 +21,22 @@ class ModoPausa extends Modo {
   preload() {}
 
   create(datos) {
-    super.create(datos, 100, 100);
+    super.create(datos, datos.pilas._ancho, datos.pilas._alto);
     this.pilas = datos.pilas;
     this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.sprites = [];
+
+    let foto = this.pilas.historia.obtener_foto(1);
+    this.crear_fondo(foto.escena.fondo);
+
     this.crear_sprites_desde_historia(this.posicion);
 
     this.crear_canvas_de_depuracion_modo_pausa();
     this.matter.systems.matterPhysics.world.createDebugGraphic();
+
+    this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
     let t = this.pilas.historia.obtener_cantidad_de_posiciones();
     let datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
@@ -44,17 +51,20 @@ class ModoPausa extends Modo {
         this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
       }
 
+      if (sprite["texto"]) {
+        sprite["texto"].destroy();
+      }
+
       sprite.destroy();
     });
 
     this.posicionar_la_camara(foto.escena);
-    //this.crear_fondo(foto.escena.fondo);
+
+    this.fondo.setAlpha(0.6);
 
     this.sprites = foto.actores.map(entidad => {
       return this.crear_sprite_desde_entidad(entidad);
     });
-
-    //this.sprites.push(this.fondo);
   }
 
   update() {
@@ -78,6 +88,16 @@ class ModoPausa extends Modo {
         this.dibujar_punto_de_control(this.graphics, x, y);
       });
     }
+
+    if (this.tecla_derecha.isDown) {
+      this.avanzar_posicion();
+    }
+
+    if (this.tecla_izquierda.isDown) {
+      this.retroceder_posicion();
+    }
+
+    this.posicionar_fondo();
   }
 
   crear_sprite_desde_entidad(entidad) {
@@ -93,6 +113,12 @@ class ModoPausa extends Modo {
     sprite.setFlipY(entidad.espejado_vertical);
     sprite.depth = -entidad.z;
 
+    if (entidad.texto) {
+      sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
+      sprite["texto"].setFontFamily("verdana");
+      this.copiar_valores_de_sprite_a_texto(sprite);
+    }
+
     if (entidad.figura) {
       sprite["figura"] = this.crear_figura_estatica_para(entidad);
     }
@@ -106,15 +132,19 @@ class ModoPausa extends Modo {
     this.posicion = Math.max(this.posicion, 0);
 
     this.crear_sprites_desde_historia(this.posicion);
-    //this.actualizar_texto();
-    //this.game.world.bringToTop(this.canvas);
   }
 
-  /*
-    this.izquierda = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    this.derecha = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    this.crear_texto();
-    */
+  avanzar_posicion() {
+    this.posicion += 1;
+    this.actualizar_posicion(this.posicion);
+    this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
+  }
+
+  retroceder_posicion() {
+    this.posicion -= 1;
+    this.actualizar_posicion(this.posicion);
+    this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
+  }
 
   crear_canvas_de_depuracion_modo_pausa() {
     let graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });

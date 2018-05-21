@@ -39,6 +39,10 @@ class Utilidades {
     }
   }
 
+  es_animacion(valor: any) {
+    return Array.isArray(valor) && valor.every(e => Number.isInteger(e));
+  }
+
   convertir_angulo_a_radianes(grados: number) {
     return grados * Math.PI / 180;
   }

@@ -20,8 +20,50 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                this.pilas.conejo = pilas.actores.conejo();
-                this.pilas.conejo.y = 200;
+
+                console.log("Se va a cambiar de escena");
+
+                pilas.luego(3, (e) => {
+                  console.log("Cambió la escena!");
+                  pilas.cambiar_escena('gameover');
+                });
+
+                let l = pilas.actores.suelo();
+                l.y = -230;
+
+
+                /*
+
+                let b = pilas.actores.texto()
+                b.texto = "Has click sobre algún actor para ver que dicen";
+                b.sombra = true;
+
+
+                let texto = pilas.actores.texto()
+
+                texto.y = 100
+                texto.texto = "..."
+                texto.color = "white"
+                texto.magnitud = 30
+                texto.x = [100]
+
+                texto.escala = 0;
+                texto.escala = [1]
+
+                pilas.luego(3, (e) => {
+                  texto.x = [-200];
+                })
+
+                pilas.luego(6, (e) => {
+                  texto.eliminar();
+                })
+
+                let t = pilas.actores.aceituna();
+                t.y=100;
+                t.decir("hola mundo !!!");
+                */
+
+                /*
 
                 let plataforma = pilas.actores.plataforma();
                 plataforma.x = 0;
@@ -43,7 +85,19 @@ export default Controller.extend({
 
                 let pared_derecha = pilas.actores.pared();
                 pared_derecha.x = 300;
+                */
 
+              }
+
+              actualizar() {
+              }
+            }`
+          },
+          {
+            nombre: "gameover",
+            codigo: `class gameover extends Escena {
+              iniciar() {
+                console.log("escena gameover")
               }
 
               actualizar() {
@@ -53,19 +107,37 @@ export default Controller.extend({
         ],
         actores: [
           {
-            nombre: "pelota",
-            codigo: `class pelota  extends ActorBase {
-            propiedades = {
-              figura: 'rectangulo',
-              transparencia: 50
-            }
+            nombre: "texto",
+            codigo: `class texto extends Actor {
+  propiedades = {
+    imagen: "invisible",
+    texto: "Hola mundo",
+    es_texto: true
+  };
 
-            iniciar() {
-            }
+  _texto: any = null;
 
-            actualizar() {
-            }
-          }`
+  iniciar() {}
+
+  actualizar() {}
+}`
+          },
+
+          {
+            nombre: "aceituna",
+            codigo: `class aceituna extends Actor {
+  propiedades = {
+    imagen: "invisible",
+    texto: "Hola mundo",
+    es_texto: true
+  };
+
+  _texto: any = null;
+
+  iniciar() {}
+
+  actualizar() {}
+}`
           }
         ]
       },
@@ -75,6 +147,35 @@ export default Controller.extend({
           id: 1,
           camara_x: 0,
           camara_y: 0,
+          fondo: "plano",
+          actores: [
+            {
+              id: 4,
+              x: 100,
+              y: -100,
+              centro_x: 0.5,
+              centro_y: 0.5,
+              rotacion: 45,
+              escala_x: 1,
+              escala_y: 1,
+              tipo: "aceituna",
+              nombre: "aceituna",
+              imagen: "aceituna",
+              transparencia: 0,
+              figura: "circulo",
+              figura_radio: 25,
+              texto: "",
+              es_texto: false,
+              figura_dinamica: true
+            }
+          ]
+        },
+        {
+          nombre: "gameover",
+          id: 2,
+          camara_x: 0,
+          camara_y: 0,
+          fondo: "nubes",
           actores: [
             {
               id: 3,
@@ -85,11 +186,14 @@ export default Controller.extend({
               rotacion: 45,
               escala_x: 1,
               escala_y: 1,
-              nombre: "pelota",
-              imagen: "pelota",
+              tipo: "aceituna",
+              nombre: "aceituna",
+              imagen: "aceituna",
               transparencia: 0,
-              figura: "circulo",
+              figura: "",
               figura_radio: 25,
+              texto: "",
+              es_texto: false,
               figura_dinamica: true
             }
           ]

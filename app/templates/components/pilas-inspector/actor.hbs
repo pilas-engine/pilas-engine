@@ -1,0 +1,49 @@
+<div class="pb1 truncate h2"><div class="dib w4">nombre</div> {{instancia_seleccionada.nombre}}</div>
+
+{{#each propiedades as |propiedad|}}
+
+  {{#if (eq propiedad.tipo "numero")}}
+
+    {{pilas-propiedad/numero objeto=instancia_seleccionada
+        min=propiedad.min
+        max=propiedad.max
+        propiedad=propiedad intensidad=propiedad.intensidad
+        modificarAtributo=cuando_modifica_atributo_de_actor
+      }}
+
+  {{else if (eq propiedad.tipo "interruptor")}}
+
+    {{pilas-propiedad/interruptor objeto=instancia_seleccionada
+        propiedad=propiedad
+        modificarAtributo=cuando_modifica_atributo_de_actor
+    }}
+
+  {{else if (eq propiedad.tipo "combo")}}
+
+    {{pilas-propiedad/combo objeto=instancia_seleccionada
+        opciones=propiedad.opciones
+        propiedad=propiedad
+        modificarAtributo=cuando_modifica_atributo_de_actor
+      }}
+
+  {{else if (eq propiedad.tipo "cadena")}}
+
+    {{pilas-propiedad/cadena objeto=instancia_seleccionada
+        propiedad=propiedad
+        modificarAtributo=cuando_modifica_atributo_de_actor
+      }}
+
+  {{else if (eq propiedad.tipo "imagen")}}
+
+    {{pilas-propiedad/imagen objeto=instancia_seleccionada
+        propiedad=propiedad
+        modificarAtributo=cuando_modifica_atributo_de_actor
+      }}
+
+  {{else}}
+
+    <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+
+  {{/if}}
+
+{{/each}}

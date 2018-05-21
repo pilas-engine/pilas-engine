@@ -2,104 +2,15 @@
 
   {{#if instancia_seleccionada}}
 
-    {{#if (eq tipo_de_la_instancia_seleccionada 'actor')}}
+    {{component componente_a_renderizar
+        instancia_seleccionada=instancia_seleccionada
+        modificarAtributo=modificarAtributo
 
-      <div class="pb1 truncate h2"><div class="dib w4">nombre</div> {{instancia_seleccionada.nombre}}</div>
-
-      {{#each propiedades_de_actores as |propiedad|}}
-
-        {{#if (eq propiedad.tipo "numero")}}
-
-          {{pilas-propiedad/numero objeto=instancia_seleccionada
-              min=propiedad.min
-              max=propiedad.max
-              propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modificarAtributo")}}
-
-        {{else if (eq propiedad.tipo "interruptor")}}
-
-          {{pilas-propiedad/interruptor objeto=instancia_seleccionada
-            propiedad=propiedad modificarAtributo=(action "modificarAtributo")
-          }}
-
-        {{else if (eq propiedad.tipo "combo")}}
-
-          {{pilas-propiedad/combo objeto=instancia_seleccionada
-              opciones=propiedad.opciones
-              propiedad=propiedad
-              modificarAtributo=(action "modificarAtributo")}}
-
-        {{else if (eq propiedad.tipo "cadena")}}
-
-          {{pilas-propiedad/cadena objeto=instancia_seleccionada
-              propiedad=propiedad
-              modificarAtributo=(action "modificarAtributo")}}
-
-        {{else if (eq propiedad.tipo "imagen")}}
-
-          {{pilas-propiedad/imagen objeto=instancia_seleccionada
-              propiedad=propiedad
-              modificarAtributo=(action "modificarAtributo")}}
-
-        {{else}}
-
-          <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
-
-        {{/if}}
-
-      {{/each}}
-
-    {{else if (eq tipo_de_la_instancia_seleccionada 'escena')}}
-
-      <div class="pb1 truncate h2"><div class="dib w4">nombre</div> {{instancia_seleccionada.nombre}}</div>
-
-      {{#each propiedades_de_escenas as |propiedad|}}
-
-        {{#if (eq propiedad.tipo "numero")}}
-
-          {{pilas-propiedad/numero objeto=instancia_seleccionada
-              min=propiedad.min
-              max=propiedad.max
-              propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modifica_atributo_de_escena")}}
-
-        {{else if (eq propiedad.tipo "imagen")}}
-
-          {{pilas-propiedad/imagen objeto=instancia_seleccionada
-              propiedad=propiedad
-              modificarAtributo=(action "modifica_atributo_de_escena")}}
-
-        {{else}}
-
-          <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
-
-        {{/if}}
-
-      {{/each}}
-
-    {{else if (eq tipo_de_la_instancia_seleccionada 'proyecto')}}
-
-      {{#each propiedades_de_proyecto as |propiedad|}}
-
-        {{#if (eq propiedad.tipo "numero")}}
-
-          {{pilas-propiedad/numero objeto=instancia_seleccionada
-              min=propiedad.min
-              max=propiedad.max
-              propiedad=propiedad intensidad=propiedad.intensidad modificarAtributo=(action "modifica_atributo_del_proyecto")}}
-
-        {{else}}
-
-          <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
-
-        {{/if}}
-
-      {{/each}}
-
-    {{else}}
-      <p class='red'>No se reconoce este tipo de instancia seleccionada</p>
-    {{/if}}
+        cuando_modifica_atributo_de_actor=(action "modificarAtributo")
+        cuando_modifica_atributo_de_escena=(action "modifica_atributo_de_escena")
+        cuando_modifica_atributo_del_proyecto=(action "modifica_atributo_del_proyecto")
+      }}
 
   {{/if}}
-
-
 
 </div>

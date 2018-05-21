@@ -11,9 +11,9 @@
 {{else}}
   {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
     {{#link-to "ejemplos.ver" ejemplo.nombre tagName='div' class="dib pointer"}}
-    <div class="relative unselectable">
+    <div class="relative unselectable ma1 ba b--light-gray">
       <img width=180 height=140 src="{{rootURL}}ejemplos/imagenes/{{ejemplo.nombre}}.png" alt="">
-      <div class="text-shadow-1 absolute bottom-1 left-0 right-0 white tc lato f7  ">{{ejemplo.nombre}}</div>
+      <div class="text-shadow-1 absolute bottom-1 left-0 right-0 white tc lato f7">{{ejemplo.nombre}}</div>
     </div>
     {{/link-to}}
   {{/each}}

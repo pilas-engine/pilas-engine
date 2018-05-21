@@ -4,6 +4,7 @@ class nave extends Actor {
   };
 
   velocidad = 5;
+  cuadros_desde_el_ultimo_disparo;
 
   iniciar() {
     this.crear_animacion("nave_en_reposo", ["nave_en_reposo"], 2);
@@ -12,9 +13,12 @@ class nave extends Actor {
     this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
 
     this.animacion = "nave_en_reposo";
+    this.cuadros_desde_el_ultimo_disparo = 0;
   }
 
   actualizar() {
+    this.cuadros_desde_el_ultimo_disparo += 1;
+
     if (this.pilas.control.izquierda) {
       this.rotacion += this.velocidad;
       this.animacion = "nave_girando_a_la_izquierda";
@@ -25,8 +29,17 @@ class nave extends Actor {
       this.animacion = "nave_girando_a_la_derecha";
     }
 
+    if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {
+      let laser = this.pilas.actores.laser();
+      laser.x = this.x;
+      laser.y = this.y;
+      laser.rotacion = this.rotacion;
+      laser.z = this.z + 1;
+      this.cuadros_desde_el_ultimo_disparo = 0;
+    }
+
     if (this.pilas.control.arriba) {
-      this.avanzar(this.rotacion + 90, this.velocidad);
+      this.avanzar(this.rotacion, this.velocidad);
       this.animacion = "nave_avanzando";
     } else {
       if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {

@@ -15,12 +15,14 @@ declare class Actores {
     plataforma(): any;
     suelo(): any;
     techo(): any;
+    texto(): any;
+    laser(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
     animaciones: {};
     constructor(pilas: any);
-    crear_o_sustituir(nombre: any, cuadros: any, velocidad: any): void;
+    crear_animacion(actor: any, nombre_de_la_animacion: any, cuadros: any, velocidad: any): void;
 }
 declare class Automata {
     actor: Actor;
@@ -101,7 +103,6 @@ declare class Mensajes {
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
     atender_mensaje_alterar_estado_de_maximizacion(datos: any): void;
     atender_mensaje_actualizar_actor_desde_el_editor(datos: any): void;
-    atender_mensaje_quitar_pausa_de_phaser(): void;
     atender_mensaje_pausar_escena(): void;
     atender_mensaje_cambiar_posicion(datos: any): void;
     atender_mensaje_eliminar_actor_desde_el_editor(datos: any): void;
@@ -118,6 +119,7 @@ declare class Utilidades {
     obtener_color_al_azar(): number;
     limitar(valor: number, minimo: number, maximo: number): number;
     validar_numero(valor: number): void;
+    es_animacion(valor: any): boolean;
     convertir_angulo_a_radianes(grados: number): number;
     convertir_radianes_a_angulos(radianes: number): number;
     es_firefox(): boolean;
@@ -157,6 +159,7 @@ declare class Pilas {
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
     private iniciar_phaser_desde_configuracion(configuracion);
     definir_modo(nombre: any, datos: any): void;
+    cambiar_escena(nombre: string): void;
     crear_configuracion(ancho: any, alto: any): {
         type: number;
         parent: string;
@@ -186,8 +189,8 @@ declare class Pilas {
     obtener_cantidad_de_actores(): number;
     obtener_actores_en(_x: number, _y: number): Actor[];
     escena_actual(): Escena;
-    pausar(): void;
-    continuar(): void;
+    animar(actor: any, propiedad: any, valor: any, duracion?: number): void;
+    luego(duracion: number, tarea: any): void;
 }
 declare var pilas: Pilas;
 declare class ActorBase {
@@ -206,6 +209,11 @@ declare class ActorBase {
     _figura_ancho: number;
     _figura_alto: number;
     _figura_radio: number;
+    _es_texto: boolean;
+    _texto: any;
+    texto: any;
+    _id: any;
+    _nombre: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -228,11 +236,13 @@ declare class ActorBase {
         figura_sin_rotacion: boolean;
         figura_rebote: number;
         figura_sensor: boolean;
+        es_texto: boolean;
     };
     propiedades: any;
     constructor(pilas: any);
     readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;
+    protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
     serializar(): {
         tipo: String;
@@ -249,6 +259,8 @@ declare class ActorBase {
         figura_ancho: number;
         figura_alto: number;
         figura_radio: number;
+        es_texto: boolean;
+        texto: string;
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
@@ -261,6 +273,8 @@ declare class ActorBase {
     actualizar(): void;
     actualizar_sensores(): void;
     imagen: string;
+    nombre: any;
+    id: any;
     x: number;
     y: number;
     z: number;
@@ -290,7 +304,7 @@ declare class ActorBase {
     cada_segundo(): void;
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
-    reproducir_animacion(nombre: any): void;
+    reproducir_animacion(nombre_de_la_animacion: any): void;
     animacion: string;
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
@@ -301,6 +315,22 @@ declare class ActorBase {
     figura_ancho: number;
     figura_alto: number;
     figura_radio: number;
+    decir(mensaje: string): void;
+}
+declare class ActorTextoBase extends ActorBase {
+    propiedades: {
+        imagen: string;
+        texto: string;
+        es_texto: boolean;
+    };
+    _texto: any;
+    iniciar(): void;
+    pre_actualizar(): void;
+    actualizar(): void;
+    sombra: boolean;
+    texto: string;
+    magnitud: number;
+    color: string;
 }
 declare class Actor extends ActorBase {
     propiedades: {};
@@ -375,6 +405,14 @@ declare class gallina extends Actor {
     vuela_actualizar(): void;
     vuela_cuando_comienza_una_colision(actor: any): void;
 }
+declare class laser extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    velocidad: any;
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class logo extends Actor {
     propiedades: {
         imagen: string;
@@ -396,6 +434,7 @@ declare class nave extends Actor {
         imagen: string;
     };
     velocidad: number;
+    cuadros_desde_el_ultimo_disparo: any;
     iniciar(): void;
     actualizar(): void;
 }
@@ -458,6 +497,13 @@ declare class techo extends Actor {
     };
     iniciar(): void;
 }
+declare class texto extends ActorTextoBase {
+    propiedades: {
+        imagen: string;
+        texto: string;
+        es_texto: boolean;
+    };
+}
 declare class EscenaBase {
     pilas: Pilas;
     actores: Actor[];
@@ -471,8 +517,10 @@ declare class EscenaBase {
         camara_y: number;
         fondo: string;
     };
+    actualizar(): void;
     actualizar_actores(): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
+    terminar(): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;
@@ -499,10 +547,16 @@ declare class Modo extends Phaser.Scene {
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
     update(actores: any): void;
+    posicionar_fondo(): void;
+    obtener_posicion_de_la_camara(): {
+        x: any;
+        y: any;
+    };
     crear_fondo(fondo: any): void;
     cambiar_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
+    copiar_valores_de_sprite_a_texto(sprite: any): void;
     crear_figura_estatica_para(actor: any): any;
     posicionar_la_camara(datos_de_la_escena: any): void;
     actualizar_posicion(posicion?: any): void;
@@ -540,13 +594,16 @@ declare class ModoEjecucion extends Modo {
     codigo: any;
     nombre_de_la_escena_inicial: string;
     permitir_modo_pausa: boolean;
-    pausar: boolean;
     modo_fisica_activado: boolean;
+    _escena_en_ejecucion: any;
     constructor();
     preload(): void;
     create(datos: any): void;
+    cambiar_escena(nombre: string): void;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;
+    obtener_nombre_de_la_escena_inicial(): string;
+    obtener_escena_por_nombre(nombre: string): any;
     instanciar_escena(nombre: any): void;
     crear_escena(datos_de_la_escena: any): void;
     crear_actor(entidad: any): any;
@@ -554,6 +611,7 @@ declare class ModoEjecucion extends Modo {
     obtener_codigo_para_exportar_clases(codigo: any): string;
     guardar_parametros_en_atributos(datos: any): void;
     update(): void;
+    pausar(): void;
     guardar_foto_de_entidades(): void;
     dibujar_punto_de_control(graphics: any, _x: any, _y: any): void;
 }
@@ -565,8 +623,8 @@ declare class ModoPausa extends Modo {
     sprites: any;
     texto: any;
     total: number;
-    izquierda: any;
-    derecha: any;
+    tecla_izquierda: any;
+    tecla_derecha: any;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -574,5 +632,7 @@ declare class ModoPausa extends Modo {
     update(): void;
     crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
     actualizar_posicion(posicion: any): void;
+    avanzar_posicion(): void;
+    retroceder_posicion(): void;
     crear_canvas_de_depuracion_modo_pausa(): void;
 }

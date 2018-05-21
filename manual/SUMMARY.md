@@ -6,6 +6,7 @@
 * [Animaciones](animaciones.md)
 * [Etiquetas](etiquetas.md)
 * [Colisiones](colisiones.md)
+* [Escenas](escenas.md)
 
 Sección avanzada
 

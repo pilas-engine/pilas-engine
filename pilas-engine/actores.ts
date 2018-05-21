@@ -11,10 +11,7 @@ class Actores {
 
     // Toma las propiedades del actor pero como una extensión de las
     // propiedades iniciales.
-    let p = this.pilas.utilidades.combinar_propiedades(
-      actor.propiedades_base,
-      actor.propiedades
-    );
+    let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
 
     actor.pre_iniciar(p);
     actor.iniciar();
@@ -71,5 +68,13 @@ class Actores {
 
   techo() {
     return this.crear_actor("techo");
+  }
+
+  texto() {
+    return this.crear_actor("texto");
+  }
+
+  laser() {
+    return this.crear_actor("laser");
   }
 }

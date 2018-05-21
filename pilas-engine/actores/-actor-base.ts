@@ -14,6 +14,11 @@ class ActorBase {
   _figura_ancho: number;
   _figura_alto: number;
   _figura_radio: number;
+  _es_texto: boolean = false;
+  _texto: any;
+  texto: any;
+  _id: any;
+  _nombre: any;
 
   propiedades_base = {
     x: 0,
@@ -39,7 +44,9 @@ class ActorBase {
     figura_radio: 40,
     figura_sin_rotacion: false,
     figura_rebote: 1,
-    figura_sensor: false
+    figura_sensor: false,
+
+    es_texto: false
   };
 
   propiedades: any = {
@@ -80,10 +87,18 @@ class ActorBase {
         .join(".");
     }
 
+    this._id = propiedades.id;
+    this._nombre = propiedades.nombre;
+
     this.sensores = [];
     this._figura_ancho = propiedades.figura_ancho;
     this._figura_alto = propiedades.figura_alto;
     this._figura_radio = propiedades.figura_radio;
+    this._es_texto = propiedades.es_texto;
+
+    if (propiedades.es_texto) {
+      this.texto = propiedades.texto;
+    }
 
     switch (figura) {
       case "rectangulo":
@@ -149,9 +164,29 @@ class ActorBase {
     this.pilas.escena.agregar_actor(this);
   }
 
+  protected copiar_atributos_de_sprite(origen, destino) {
+    destino.x = origen.x;
+    destino.y = origen.y;
+    destino.angle = origen.angle;
+    destino.scaleX = origen.scaleX;
+    destino.scaleY = origen.scaleY;
+
+    destino.alpha = origen.alpha;
+    destino.flipX = origen.flipX;
+    destino.flipY = origen.flipY;
+
+    destino.setOrigin(origen.originX, origen.originY);
+  }
+
   iniciar() {}
 
   serializar() {
+    let texto = "";
+
+    if (this._es_texto) {
+      texto = this._texto.text;
+    }
+
     return {
       tipo: this.tipo,
       x: Math.round(this.x),
@@ -168,6 +203,9 @@ class ActorBase {
       figura_ancho: this.figura_ancho,
       figura_alto: this.figura_alto,
       figura_radio: this.figura_radio,
+
+      es_texto: this._es_texto,
+      texto: texto,
 
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,
@@ -227,6 +265,22 @@ class ActorBase {
     }
   }
 
+  get nombre() {
+    return this._nombre;
+  }
+
+  set nombre(a: any) {
+    throw new Error("No puede definir este atributo");
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  set id(a: any) {
+    throw new Error("No puede definir este atributo");
+  }
+
   set imagen(nombre: string) {
     if (nombre.indexOf(".") > -1) {
       let key = nombre.split(".")[0];
@@ -241,9 +295,13 @@ class ActorBase {
   }
 
   set x(_x: number) {
-    this.pilas.utilidades.validar_numero(_x);
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
-    this.sprite.x = x;
+    if (this.pilas.utilidades.es_animacion(_x)) {
+      this.pilas.animar(this, "x", _x);
+    } else {
+      this.pilas.utilidades.validar_numero(_x);
+      let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
+      this.sprite.x = x;
+    }
   }
 
   get x() {
@@ -252,9 +310,13 @@ class ActorBase {
   }
 
   set y(_y: number) {
-    this.pilas.utilidades.validar_numero(_y);
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
-    this.sprite.y = y;
+    if (this.pilas.utilidades.es_animacion(_y)) {
+      this.pilas.animar(this, "y", _y);
+    } else {
+      this.pilas.utilidades.validar_numero(_y);
+      let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
+      this.sprite.y = y;
+    }
   }
 
   get y() {
@@ -272,8 +334,12 @@ class ActorBase {
   }
 
   set rotacion(angulo: number) {
-    this.pilas.utilidades.validar_numero(angulo);
-    this.sprite.angle = -(angulo % 360);
+    if (this.pilas.utilidades.es_animacion(angulo)) {
+      this.pilas.animar(this, "rotacion", angulo);
+    } else {
+      this.pilas.utilidades.validar_numero(angulo);
+      this.sprite.angle = -(angulo % 360);
+    }
   }
 
   get rotacion() {
@@ -281,11 +347,15 @@ class ActorBase {
   }
 
   set escala_x(s) {
-    this.pilas.utilidades.validar_numero(s);
-    this.sprite.scaleX = s;
+    if (this.pilas.utilidades.es_animacion(s)) {
+      this.pilas.animar(this, "escala_x", s);
+    } else {
+      this.pilas.utilidades.validar_numero(s);
+      this.sprite.scaleX = s;
 
-    if (this.figura) {
-      pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      if (this.figura) {
+        pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      }
     }
   }
 
@@ -294,11 +364,15 @@ class ActorBase {
   }
 
   set escala_y(s) {
-    this.pilas.utilidades.validar_numero(s);
-    this.sprite.scaleY = s;
+    if (this.pilas.utilidades.es_animacion(s)) {
+      this.pilas.animar(this, "escala_y", s);
+    } else {
+      this.pilas.utilidades.validar_numero(s);
+      this.sprite.scaleY = s;
 
-    if (this.figura) {
-      pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      if (this.figura) {
+        pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+      }
     }
   }
 
@@ -311,9 +385,13 @@ class ActorBase {
   }
 
   set escala(escala) {
-    this.pilas.utilidades.validar_numero(escala);
-    this.escala_x = escala;
-    this.escala_y = escala;
+    if (this.pilas.utilidades.es_animacion(escala)) {
+      this.pilas.animar(this, "escala", escala);
+    } else {
+      this.pilas.utilidades.validar_numero(escala);
+      this.escala_x = escala;
+      this.escala_y = escala;
+    }
   }
 
   get centro_y() {
@@ -357,9 +435,13 @@ class ActorBase {
   }
 
   set transparencia(t) {
-    this.pilas.utilidades.validar_numero(t);
-    t = this.pilas.utilidades.limitar(t, 0, 100);
-    this.sprite.alpha = 1 - t / 100;
+    if (this.pilas.utilidades.es_animacion(t)) {
+      this.pilas.animar(this, "transparencia", t);
+    } else {
+      this.pilas.utilidades.validar_numero(t);
+      t = this.pilas.utilidades.limitar(t, 0, 100);
+      this.sprite.alpha = 1 - t / 100;
+    }
   }
 
   get transparencia() {
@@ -527,10 +609,11 @@ class ActorBase {
   }
 
   crear_animacion(nombre, cuadros, velocidad) {
-    this.pilas.animaciones.crear_o_sustituir(nombre, cuadros, velocidad);
+    this.pilas.animaciones.crear_animacion(this, nombre, cuadros, velocidad);
   }
 
-  reproducir_animacion(nombre) {
+  reproducir_animacion(nombre_de_la_animacion) {
+    let nombre = `${this.id}-${nombre_de_la_animacion}`;
     this.sprite.anims.play(nombre);
   }
 
@@ -599,5 +682,18 @@ class ActorBase {
 
   get figura_radio() {
     return this._figura_radio;
+  }
+
+  decir(mensaje: string) {
+    let texto = this.pilas.actores.texto();
+    texto.texto = mensaje;
+    texto.x = this.x + 15;
+    texto.y = this.y + this.alto;
+    texto.escala_y = 0;
+    texto.escala_y = [1];
+
+    this.pilas.luego(4, () => {
+      texto.eliminar();
+    });
   }
 }
