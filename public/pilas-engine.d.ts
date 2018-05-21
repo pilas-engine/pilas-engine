@@ -22,7 +22,7 @@ declare class Animaciones {
     pilas: Pilas;
     animaciones: {};
     constructor(pilas: any);
-    crear_o_sustituir(nombre: any, cuadros: any, velocidad: any): void;
+    crear_animacion(actor: any, nombre_de_la_animacion: any, cuadros: any, velocidad: any): void;
 }
 declare class Automata {
     actor: Actor;
@@ -212,6 +212,8 @@ declare class ActorBase {
     _es_texto: boolean;
     _texto: any;
     texto: any;
+    _id: any;
+    _nombre: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -271,6 +273,8 @@ declare class ActorBase {
     actualizar(): void;
     actualizar_sensores(): void;
     imagen: string;
+    nombre: any;
+    id: any;
     x: number;
     y: number;
     z: number;
@@ -300,7 +304,7 @@ declare class ActorBase {
     cada_segundo(): void;
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
-    reproducir_animacion(nombre: any): void;
+    reproducir_animacion(nombre_de_la_animacion: any): void;
     animacion: string;
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;

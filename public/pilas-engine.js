@@ -74,7 +74,8 @@ var Animaciones = (function () {
         this.animaciones = {};
         this.pilas = pilas;
     }
-    Animaciones.prototype.crear_o_sustituir = function (nombre, cuadros, velocidad) {
+    Animaciones.prototype.crear_animacion = function (actor, nombre_de_la_animacion, cuadros, velocidad) {
+        var nombre = actor.id + "-" + nombre_de_la_animacion;
         if (!this.animaciones[nombre]) {
             var frames_1 = cuadros.map(function (nombre) {
                 if (nombre.indexOf(".") > -1) {
@@ -688,6 +689,8 @@ var ActorBase = (function () {
                 .slice(1)
                 .join(".");
         }
+        this._id = propiedades.id;
+        this._nombre = propiedades.nombre;
         this.sensores = [];
         this._figura_ancho = propiedades.figura_ancho;
         this._figura_alto = propiedades.figura_alto;
@@ -850,6 +853,26 @@ var ActorBase = (function () {
             else {
                 this.sprite.setTexture(nombre);
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "nombre", {
+        get: function () {
+            return this._nombre;
+        },
+        set: function (a) {
+            throw new Error("No puede definir este atributo");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (a) {
+            throw new Error("No puede definir este atributo");
         },
         enumerable: true,
         configurable: true
@@ -1202,9 +1225,10 @@ var ActorBase = (function () {
         this.y += Math.sin(r) * velocidad;
     };
     ActorBase.prototype.crear_animacion = function (nombre, cuadros, velocidad) {
-        this.pilas.animaciones.crear_o_sustituir(nombre, cuadros, velocidad);
+        this.pilas.animaciones.crear_animacion(this, nombre, cuadros, velocidad);
     };
-    ActorBase.prototype.reproducir_animacion = function (nombre) {
+    ActorBase.prototype.reproducir_animacion = function (nombre_de_la_animacion) {
+        var nombre = this.id + "-" + nombre_de_la_animacion;
         this.sprite.anims.play(nombre);
     };
     Object.defineProperty(ActorBase.prototype, "animacion", {
