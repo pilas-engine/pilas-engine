@@ -17,6 +17,8 @@ class ActorBase {
   _es_texto: boolean = false;
   _texto: any;
   texto: any;
+  _id: any;
+  _nombre: any;
 
   propiedades_base = {
     x: 0,
@@ -84,6 +86,9 @@ class ActorBase {
         .slice(1)
         .join(".");
     }
+
+    this._id = propiedades.id;
+    this._nombre = propiedades.nombre;
 
     this.sensores = [];
     this._figura_ancho = propiedades.figura_ancho;
@@ -258,6 +263,22 @@ class ActorBase {
     } else {
       return `${this.sprite.frame.name}.${this.sprite.texture.key}`;
     }
+  }
+
+  get nombre() {
+    return this._nombre;
+  }
+
+  set nombre(a: any) {
+    throw new Error("No puede definir este atributo");
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  set id(a: any) {
+    throw new Error("No puede definir este atributo");
   }
 
   set imagen(nombre: string) {
@@ -588,10 +609,11 @@ class ActorBase {
   }
 
   crear_animacion(nombre, cuadros, velocidad) {
-    this.pilas.animaciones.crear_o_sustituir(nombre, cuadros, velocidad);
+    this.pilas.animaciones.crear_animacion(this, nombre, cuadros, velocidad);
   }
 
-  reproducir_animacion(nombre) {
+  reproducir_animacion(nombre_de_la_animacion) {
+    let nombre = `${this.id}-${nombre_de_la_animacion}`;
     this.sprite.anims.play(nombre);
   }
 

@@ -5,6 +5,9 @@
     },
     {
       "nombre": "plataformas"
+    },
+    {
+      "nombre": "nave"
     }
   ]
 }

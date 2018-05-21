@@ -6,7 +6,9 @@ class Animaciones {
     this.pilas = pilas;
   }
 
-  crear_o_sustituir(nombre, cuadros, velocidad) {
+  crear_animacion(actor, nombre_de_la_animacion, cuadros, velocidad) {
+    let nombre = `${actor.id}-${nombre_de_la_animacion}`;
+
     if (!this.animaciones[nombre]) {
       let frames = cuadros.map(nombre => {
         if (nombre.indexOf(".") > -1) {

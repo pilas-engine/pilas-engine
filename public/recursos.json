@@ -21,6 +21,10 @@
       "ruta": "imagenes/pelota.png"
     },
     {
+      "nombre": "pelota_de_voley",
+      "ruta": "imagenes/pelota_de_voley.png"
+    },
+    {
       "nombre": "logo",
       "ruta": "imagenes/logo.png"
     },
