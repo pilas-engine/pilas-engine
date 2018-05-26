@@ -216,6 +216,45 @@
     {
       "nombre": "boton_jugar",
       "ruta": "imagenes/boton_jugar.png"
+    },
+
+    {
+      "nombre": "dado_1",
+      "ruta": "imagenes/dado_1.png"
+    },
+    {
+      "nombre": "dado_2",
+      "ruta": "imagenes/dado_2.png"
+    },
+    {
+      "nombre": "dado_3",
+      "ruta": "imagenes/dado_3.png"
+    },
+    {
+      "nombre": "dado_4",
+      "ruta": "imagenes/dado_4.png"
+    },
+    {
+      "nombre": "dado_5",
+      "ruta": "imagenes/dado_5.png"
+    },
+    {
+      "nombre": "dado_6",
+      "ruta": "imagenes/dado_6.png"
+    },
+    {
+      "nombre": "carta",
+      "ruta": "imagenes/carta.png"
+    },
+
+    {
+      "nombre": "carta_azul",
+      "ruta": "imagenes/carta_azul.png"
+    },
+
+    {
+      "nombre": "carta_verde",
+      "ruta": "imagenes/carta_verde.png"
     }
   ],
 
