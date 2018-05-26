@@ -97,6 +97,8 @@ prettier:
 	${BIN_PRETTIER} --write 'app/**/*.js'
 	${BIN_PRETTIER} ./node_modules/.bin/prettier --write 'tests/**/*.js'
 
+version: version_patch
+
 version_patch:
 	${BIN_EMBER} release
 
