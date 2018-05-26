@@ -2180,6 +2180,26 @@ var ModoEjecucion = (function (_super) {
                     _this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
                 }
             });
+            this.input.keyboard.on('keydown', function (evento) {
+                console.log("keydown", evento);
+            });
+            this.input.keyboard.on('keyup', function (evento) {
+                console.log("keyup", evento);
+            });
+            this.input.on('pointerdown', function (pointer) {
+                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(pointer.x, pointer.y);
+                console.log('pointerdown', posicion);
+                if (_this._escena_en_ejecucion) {
+                    try {
+                        _this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y);
+                    }
+                    catch (e) {
+                        console.error(e);
+                        _this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
+                        _this.pausar();
+                    }
+                }
+            });
             this.vincular_eventos_de_colision();
         }
         catch (e) {

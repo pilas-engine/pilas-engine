@@ -8,6 +8,9 @@
     },
     {
       "nombre": "nave"
+    },
+    {
+      "nombre": "click"
     }
   ]
 }

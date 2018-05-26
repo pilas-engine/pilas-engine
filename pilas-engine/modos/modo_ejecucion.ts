@@ -58,6 +58,31 @@ class ModoEjecucion extends Modo {
         }
       });
 
+      this.input.keyboard.on('keydown', evento => {
+        console.log("keydown", evento);
+      });
+
+      this.input.keyboard.on('keyup', evento => {
+        console.log("keyup", evento);
+      });
+
+      this.input.on('pointerdown', pointer => {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(pointer.x, pointer.y);
+        console.log('pointerdown', posicion);
+
+        if (this._escena_en_ejecucion) {
+          try {
+            this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y);
+          } catch(e) {
+            console.error(e);
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
+            this.pausar();
+          }
+        }
+
+        //if (pointer.leftButtonDown() && pointer.rightButtonDown())
+      });
+
       this.vincular_eventos_de_colision();
     } catch (e) {
       console.error(e);
