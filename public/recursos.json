@@ -208,6 +208,14 @@
     {
       "nombre": "laser_3",
       "ruta": "imagenes/laser_3.png"
+    },
+    {
+      "nombre": "copa",
+      "ruta": "imagenes/copa.png"
+    },
+    {
+      "nombre": "boton_jugar",
+      "ruta": "imagenes/boton_jugar.png"
     }
   ],
 
