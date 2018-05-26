@@ -11,6 +11,9 @@
     },
     {
       "nombre": "click"
+    },
+    {
+      "nombre": "click_actor"
     }
   ]
 }

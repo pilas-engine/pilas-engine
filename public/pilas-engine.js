@@ -615,7 +615,6 @@ var Pilas = (function () {
             duration: duracion * 1000
         };
         configuracion[propiedad] = valor[0];
-        console.log(configuracion);
         this.modo.tweens.add(configuracion);
     };
     Pilas.prototype.luego = function (duracion, tarea) {
@@ -726,6 +725,7 @@ var ActorBase = (function () {
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
         }
+        this.sprite.setInteractive();
         this.rotacion = propiedades.rotacion || 0;
         this.id_color = this.generar_color_para_depurar();
         this.etiqueta = propiedades.etiqueta;
@@ -749,6 +749,18 @@ var ActorBase = (function () {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
             }
         };
+        this.sprite.on("pointerdown", function (cursor) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+            _this.cuando_hace_click(posicion.x, posicion.y, cursor);
+        });
+        this.sprite.on("pointerout", function (cursor) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+            _this.cuando_sale(posicion.x, posicion.y, cursor);
+        });
+        this.sprite.on("pointermove", function (cursor) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+            _this.cuando_mueve(posicion.x, posicion.y, cursor);
+        });
         this.pilas.escena.agregar_actor(this);
     };
     ActorBase.prototype.copiar_atributos_de_sprite = function (origen, destino) {
@@ -1247,6 +1259,9 @@ var ActorBase = (function () {
     ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     ActorBase.prototype.cuando_termina_una_colision = function (actor) { };
+    ActorBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
+    ActorBase.prototype.cuando_sale = function (x, y, evento_original) { };
+    ActorBase.prototype.cuando_mueve = function (x, y, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "cantidad_de_colisiones", {
         get: function () {
             return this.colisiones.length;
@@ -1823,6 +1838,8 @@ var EscenaBase = (function () {
         this.actualizar();
         this.actualizar_actores();
     };
+    EscenaBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
+    EscenaBase.prototype.cuando_mueve = function (x, y, evento_original) { };
     return EscenaBase;
 }());
 var Escena = (function (_super) {
@@ -2174,24 +2191,33 @@ var ModoEjecucion = (function (_super) {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.pilas.cursor_x = Math.trunc(posicion.x);
                 _this.pilas.cursor_y = Math.trunc(posicion.y);
+                if (_this._escena_en_ejecucion) {
+                    try {
+                        _this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, cursor);
+                    }
+                    catch (e) {
+                        console.error(e);
+                        _this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
+                        _this.pausar();
+                    }
+                }
             });
             this.input.keyboard.on("keyup", function (evento) {
                 if (evento.key === "Escape") {
                     _this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
                 }
             });
-            this.input.keyboard.on('keydown', function (evento) {
+            this.input.keyboard.on("keydown", function (evento) {
                 console.log("keydown", evento);
             });
-            this.input.keyboard.on('keyup', function (evento) {
+            this.input.keyboard.on("keyup", function (evento) {
                 console.log("keyup", evento);
             });
-            this.input.on('pointerdown', function (pointer) {
-                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(pointer.x, pointer.y);
-                console.log('pointerdown', posicion);
+            this.input.on("pointerdown", function (cursor) {
+                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 if (_this._escena_en_ejecucion) {
                     try {
-                        _this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y);
+                        _this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, cursor);
                     }
                     catch (e) {
                         console.error(e);

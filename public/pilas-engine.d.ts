@@ -309,6 +309,9 @@ declare class ActorBase {
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
+    cuando_hace_click(x: any, y: any, evento_original: any): void;
+    cuando_sale(x: any, y: any, evento_original: any): void;
+    cuando_mueve(x: any, y: any, evento_original: any): void;
     readonly cantidad_de_colisiones: number;
     agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
     eliminar(): void;
@@ -521,6 +524,8 @@ declare class EscenaBase {
     actualizar_actores(): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
     terminar(): void;
+    cuando_hace_click(x: any, y: any, evento_original: any): void;
+    cuando_mueve(x: any, y: any, evento_original: any): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;
