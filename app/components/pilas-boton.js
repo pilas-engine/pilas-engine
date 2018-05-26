@@ -3,6 +3,7 @@ import { EKMixin } from "ember-keyboard";
 import { getCode } from "ember-keyboard";
 import { keyUp } from "ember-keyboard";
 import { on } from "@ember/object/evented";
+import { later } from "@ember/runloop";
 
 /*
 
@@ -24,6 +25,8 @@ export default Component.extend(EKMixin, {
     black bg-animate hover-bg-black-10 b--black-20
     unselectable
   `,
+  demora: 0,
+  ejecutando: false,
 
   didInsertElement() {
     if (this.atajo) {
@@ -39,5 +42,20 @@ export default Component.extend(EKMixin, {
     }
   }),
 
-  accion: () => {}
+  accion: () => {},
+
+  actions: {
+    ejecutar_accion() {
+      if (this.demora) {
+        this.set("ejecutando", true);
+
+        later(() => {
+          this.set("ejecutando", false);
+          this.get("accion")();
+        }, this.demora * 1000);
+      } else {
+        this.get("accion")();
+      }
+    }
+  }
 });
