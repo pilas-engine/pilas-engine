@@ -211,7 +211,11 @@ sprites_ember:
 	@echo "    public/assets/spritesheet.png"
 	@echo "${N}"
 
-.PHONY: tmp docs binarios
+.PHONY: tmp docs binarios manual
+
+manual: pilas_manual
+compilar_manual: pilas_manual
+
 
 pilas_manual:
 	$(call log, "Generando documentación")
