@@ -155,7 +155,6 @@ class Pilas {
     };
     configuracion[propiedad] = valor[0];
 
-    console.log(configuracion);
     this.modo.tweens.add(configuracion);
   }
 

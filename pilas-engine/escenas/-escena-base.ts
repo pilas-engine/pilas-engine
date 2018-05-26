@@ -68,4 +68,8 @@ class EscenaBase {
     this.actualizar();
     this.actualizar_actores();
   }
+
+  cuando_hace_click(x, y, evento_original) {}
+
+  cuando_mueve(x, y, evento_original) {}
 }

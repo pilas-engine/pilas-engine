@@ -134,6 +134,8 @@ class ActorBase {
         throw Error(`No se conoce el tipo de figura ${figura}`);
     }
 
+    this.sprite.setInteractive();
+
     this.rotacion = propiedades.rotacion || 0;
     this.id_color = this.generar_color_para_depurar();
     this.etiqueta = propiedades.etiqueta;
@@ -160,6 +162,21 @@ class ActorBase {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
       }
     };
+
+    this.sprite.on("pointerdown", cursor => {
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+      this.cuando_hace_click(posicion.x, posicion.y, cursor);
+    });
+
+    this.sprite.on("pointerout", cursor => {
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+      this.cuando_sale(posicion.x, posicion.y, cursor);
+    });
+
+    this.sprite.on("pointermove", cursor => {
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+      this.cuando_mueve(posicion.x, posicion.y, cursor);
+    });
 
     this.pilas.escena.agregar_actor(this);
   }
@@ -633,6 +650,12 @@ class ActorBase {
   cuando_se_mantiene_una_colision(actor: Actor) {}
 
   cuando_termina_una_colision(actor: Actor) {}
+
+  cuando_hace_click(x, y, evento_original) {}
+
+  cuando_sale(x, y, evento_original) {}
+
+  cuando_mueve(x, y, evento_original) {}
 
   get cantidad_de_colisiones() {
     return this.colisiones.length;

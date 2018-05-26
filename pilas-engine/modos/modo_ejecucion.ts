@@ -50,6 +50,16 @@ class ModoEjecucion extends Modo {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.pilas.cursor_x = Math.trunc(posicion.x);
         this.pilas.cursor_y = Math.trunc(posicion.y);
+
+        if (this._escena_en_ejecucion) {
+          try {
+            this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, cursor);
+          } catch (e) {
+            console.error(e);
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
+            this.pausar();
+          }
+        }
       });
 
       this.input.keyboard.on("keyup", evento => {
@@ -58,29 +68,26 @@ class ModoEjecucion extends Modo {
         }
       });
 
-      this.input.keyboard.on('keydown', evento => {
+      this.input.keyboard.on("keydown", evento => {
         console.log("keydown", evento);
       });
 
-      this.input.keyboard.on('keyup', evento => {
+      this.input.keyboard.on("keyup", evento => {
         console.log("keyup", evento);
       });
 
-      this.input.on('pointerdown', pointer => {
-        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(pointer.x, pointer.y);
-        console.log('pointerdown', posicion);
+      this.input.on("pointerdown", cursor => {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
 
         if (this._escena_en_ejecucion) {
           try {
-            this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y);
-          } catch(e) {
+            this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, cursor);
+          } catch (e) {
             console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
             this.pausar();
           }
         }
-
-        //if (pointer.leftButtonDown() && pointer.rightButtonDown())
       });
 
       this.vincular_eventos_de_colision();
