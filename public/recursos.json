@@ -192,6 +192,14 @@
     {
       "nombre": "hierba_2",
       "ruta": "imagenes/hierba_1.png"
+    },
+    {
+      "nombre": "copa",
+      "ruta": "imagenes/copa.png"
+    },
+    {
+      "nombre": "boton_jugar",
+      "ruta": "imagenes/boton_jugar.png"
     }
   ],
 

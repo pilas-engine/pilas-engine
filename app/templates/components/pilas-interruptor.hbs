@@ -13,8 +13,8 @@
   {{action "alternar"}}
 >
   {{#if variable}}
-    {{pilas-icono icono='on'}} {{texto}} {{yield}}
+    {{pilas-icono icono='on'}} <span class='dn di-ns'>{{texto}}</span> <span class='di dn-ns'>{{texto_corto}}</span>{{yield}}
   {{else}}
-    {{pilas-icono icono='off'}} {{texto}} {{yield}}
+    {{pilas-icono icono='off'}} <span class='dn di-ns'>{{texto}}</span> <span class='di dn-ns'>{{texto_corto}}</span>{{yield}}
   {{/if}}
 </div>
