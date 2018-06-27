@@ -1,3 +1,3 @@
 <a {{action 'ejecutar_accion'}} class="{{class}} {{extraClass}} {{if truncate 'truncate' ''}} {{if ejecutando 'disabled o-50'}} {{if desactivado 'disabled o-50'}}" id={{id}}>
-{{#if ejecutando}}{{pilas-spinner}}{{/if}}{{#if icono}}{{pilas-icono icono=icono}}{{/if}}{{texto}}{{yield}}
+{{#if ejecutando}}{{pilas-spinner}}{{/if}}{{#if icono}}{{pilas-icono icono=icono}} {{/if}}<span class='dn di-ns'>{{texto}}</span>{{yield}}
 </a>

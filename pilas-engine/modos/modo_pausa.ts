@@ -147,7 +147,7 @@ class ModoPausa extends Modo {
   }
 
   crear_canvas_de_depuracion_modo_pausa() {
-    let graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });
+    let graphics_modo_pausa = this.add.graphics();
     graphics_modo_pausa.depth = 190;
     this.graphics_modo_pausa = graphics_modo_pausa;
 

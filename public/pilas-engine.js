@@ -182,11 +182,12 @@ var Control = (function () {
     function Control(pilas) {
         var codigos = Phaser.Input.Keyboard.KeyCodes;
         this.pilas = pilas;
-        this._izquierda = pilas.game.input.keyboard.addKey(codigos.LEFT);
-        this._derecha = pilas.game.input.keyboard.addKey(codigos.RIGHT);
-        this._arriba = pilas.game.input.keyboard.addKey(codigos.UP);
-        this._abajo = pilas.game.input.keyboard.addKey(codigos.DOWN);
-        this._espacio = pilas.game.input.keyboard.addKey(codigos.SPACE);
+        var keyboard = pilas.game.input["keyboard"];
+        this._izquierda = keyboard.addKey(codigos.LEFT);
+        this._derecha = keyboard.addKey(codigos.RIGHT);
+        this._arriba = keyboard.addKey(codigos.UP);
+        this._abajo = keyboard.addKey(codigos.DOWN);
+        this._espacio = keyboard.addKey(codigos.SPACE);
     }
     Object.defineProperty(Control.prototype, "izquierda", {
         get: function () {
@@ -1895,7 +1896,7 @@ var Modo = (function (_super) {
         }
     };
     Modo.prototype.crear_canvas_de_depuracion = function () {
-        var graphics = this.add.graphics({ x: 0, y: 0 });
+        var graphics = this.add.graphics();
         graphics.depth = 20000;
         this.graphics = graphics;
     };
@@ -2559,7 +2560,7 @@ var ModoPausa = (function (_super) {
         this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
     };
     ModoPausa.prototype.crear_canvas_de_depuracion_modo_pausa = function () {
-        var graphics_modo_pausa = this.add.graphics({ x: 0, y: 0 });
+        var graphics_modo_pausa = this.add.graphics();
         graphics_modo_pausa.depth = 190;
         this.graphics_modo_pausa = graphics_modo_pausa;
         this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa);

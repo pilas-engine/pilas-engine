@@ -1,14 +1,12 @@
-import Component from '@ember/component';
+import Component from "@ember/component";
 
 export default Component.extend({
+  router: Ember.inject.service(),
   tagName: "",
-  class: `
-    ba pa2 button
-    dib br2
-    verdana f6 link pointer
-    hover-bg-black-10
-    black bg-animate hover-bg-black-10 b--black-20
-    unselectable
-    v-top
-  `
+
+  actions: {
+    regresar() {
+      this.router.transitionTo("index");
+    }
+  }
 });

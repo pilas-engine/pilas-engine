@@ -7,7 +7,7 @@ import QueryParams from "ember-parachute";
 
 const queryParams = new QueryParams({
   serializado: { defaultValue: null, refresh: true, replace: true },
-  mostrarEditor: { as: "p3", defaultValue: true, replace: true },
+  mostrarEditor: { as: "p3", defaultValue: false, replace: true },
   expandirJuego: { as: "p2", defaultValue: true, replace: true },
   mostrarPropiedades: { as: "p1", defaultValue: true, replace: true },
   escenaActual: { defaultValue: 1, replace: true },

@@ -32,7 +32,7 @@ class Modo extends Phaser.Scene {
   }
 
   crear_canvas_de_depuracion() {
-    let graphics = this.add.graphics({ x: 0, y: 0 });
+    let graphics = this.add.graphics();
     graphics.depth = 20000;
     this.graphics = graphics;
   }

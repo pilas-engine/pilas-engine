@@ -10,12 +10,13 @@ class Control {
   constructor(pilas: Pilas) {
     const codigos = Phaser.Input.Keyboard.KeyCodes;
     this.pilas = pilas;
+    let keyboard = pilas.game.input["keyboard"];
 
-    this._izquierda = pilas.game.input.keyboard.addKey(codigos.LEFT);
-    this._derecha = pilas.game.input.keyboard.addKey(codigos.RIGHT);
-    this._arriba = pilas.game.input.keyboard.addKey(codigos.UP);
-    this._abajo = pilas.game.input.keyboard.addKey(codigos.DOWN);
-    this._espacio = pilas.game.input.keyboard.addKey(codigos.SPACE);
+    this._izquierda = keyboard.addKey(codigos.LEFT);
+    this._derecha = keyboard.addKey(codigos.RIGHT);
+    this._arriba = keyboard.addKey(codigos.UP);
+    this._abajo = keyboard.addKey(codigos.DOWN);
+    this._espacio = keyboard.addKey(codigos.SPACE);
   }
 
   get izquierda() {

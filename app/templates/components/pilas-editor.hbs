@@ -4,9 +4,9 @@
 
       <div class="pa2 truncate">
         {{pilas-boton-regresar}}
-        {{pilas-boton desactivado=cargando accion=(action cuandoIntentaGuardar proyecto) demora=1 texto="Guardar"}}
+        {{pilas-boton icono="guardar" desactivado=cargando accion=(action cuandoIntentaGuardar proyecto) demora=1 texto="Guardar"}}
 
-        {{pilas-boton-preferencias oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
+        {{pilas-boton-preferencias icono='preferencias' oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
       </div>
 
       <div class="flex1">
@@ -24,11 +24,11 @@
   <section class="flex1 flex bt b--silver">
     <div class="columns">
 
-      <div class="w5 {{if mostrarPropiedades 'flex flex-column' 'dn'}} br b--light-silver pa2 ">
+      <div class="w6 {{if mostrarPropiedades 'flex flex-column' 'dn'}} br b--light-silver pa2 ">
 
         <div class='unselectable'>
-          {{pilas-boton desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="+ Escena"}}
-          {{pilas-crear-actor desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=(action "agregar_actor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
+          {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="Crear Escena"}}
+          {{pilas-crear-actor icono="actor" desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=(action "agregar_actor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
         </div>
 
         {{pilas-panel-de-escenas
