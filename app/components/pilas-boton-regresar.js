@@ -1,7 +1,8 @@
 import Component from "@ember/component";
+import { inject } from "@ember/service";
 
 export default Component.extend({
-  router: Ember.inject.service(),
+  router: inject(),
   tagName: "",
 
   actions: {
