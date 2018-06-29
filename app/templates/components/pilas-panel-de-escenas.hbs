@@ -24,7 +24,7 @@
       {{#if (eq ultimaEscenaSeleccionada escena.id)}}
         <ul>
           {{#each escena.actores as |actor|}}
-            <li class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}> {{actor.nombre}}
+            <li class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}>{{pilas-icono-de-actor actor=actor}} {{actor.nombre}}
 
               <div class='dib fr f7'>
                 {{#if (eq seleccion actor.id)}}
