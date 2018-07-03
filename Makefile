@@ -194,12 +194,18 @@ endif
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=x64 --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+	$(call log, "Compilando para ARM ...")
+	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-linux-x64.tar.gz
+	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
+	cd dist; rm -rf build
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=arm --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
 	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
 	@zip -qr binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
 	@zip -qr binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
+	@zip -qr binarios/${NOMBREBIN}-linux-arm.zip binarios/${NOMBREBIN}-arm
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
