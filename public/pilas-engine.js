@@ -570,6 +570,7 @@ var Pilas = (function () {
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
+            pixelArt: true,
             input: {
                 keyboard: true,
                 mouse: true,

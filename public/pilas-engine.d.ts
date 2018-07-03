@@ -167,6 +167,7 @@ declare class Pilas {
         height: any;
         backgroundColor: string;
         disableContextMenu: boolean;
+        pixelArt: boolean;
         input: {
             keyboard: boolean;
             mouse: boolean;
