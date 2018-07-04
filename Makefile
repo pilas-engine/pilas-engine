@@ -198,7 +198,7 @@ endif
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-linux-x64.tar.gz
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
-	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=arm --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=armv7l --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
