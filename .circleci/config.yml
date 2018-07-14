@@ -44,6 +44,9 @@ jobs:
         - run:
             name: "Subiendo archivos a surge..."
             command: make deploy_a_surge
+        - run:
+            name: "Subiendo archivos a dokku..."
+            command: make deploy_a_dokku
 workflows:
   version: 2
   compilar-y-subir:
