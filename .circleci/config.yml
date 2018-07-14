@@ -44,6 +44,7 @@ jobs:
         - run:
             name: "Subiendo archivos a surge..."
             command: make deploy_a_surge
+        - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
         - run:
             name: "Subiendo archivos a dokku..."
             command: make deploy_a_dokku
