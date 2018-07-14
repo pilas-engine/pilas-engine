@@ -153,6 +153,18 @@ deploy_a_surge:
 	@echo "Subiendo contenido al sitio de surge."
 	${BIN_SURGE} dist pilas-engine.surge.sh
 
+deploy_a_dokku:
+	rm -rf dist
+	@echo "Compilando la aplicación en modo producción..."
+	${BIN_EMBER} build --prod
+	@echo "Subiendo contenido al sitio de surge."
+	rm -rf pilas-engine-en-dokku
+	git clone dokku@hugoruscitti.com.ar:pilas-engine pilas-engine-en-dokku
+	rm -rf pilas-engine-en-dokku/*
+	cp -rf dist/* pilas-engine-en-dokku/
+	cd pilas-engine-en-dokku; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git push -f
+	rm -rf pilas-engine-en-dokku
+
 binarios:
 	$(call task, "Comenzando a generar binarios.")
 	$(call log, "Limpiando directorio de binarios ...")
