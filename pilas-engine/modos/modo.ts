@@ -3,6 +3,7 @@ class Modo extends Phaser.Scene {
   actores: any;
   pilas: Pilas;
   fps: any;
+  fps_actores: any;
   graphics: any;
   fondo: any;
   _nombre_del_fondo: string = "";

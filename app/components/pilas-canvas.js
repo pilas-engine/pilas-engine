@@ -29,14 +29,6 @@ export default Component.extend({
       throw Error("No se inicializó el servicio recursos. Tienes que llamar a iniciar antes.");
     }
 
-    iframe.onclick = () => {
-      this.hacerFoco();
-    };
-
-    iframe.contentWindow.click = () => {
-      this.hacerFoco();
-    };
-
     iframe.onload = () => {
       let opciones_de_pilas = ENV.pilas;
       let contexto = iframe.contentWindow;
@@ -72,6 +64,7 @@ export default Component.extend({
       this.bus.on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
       this.bus.on("progreso_de_carga", this, "progreso_de_carga");
       this.bus.on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+      this.bus.on("hace_click_sobre_el_canvas", this, "hace_click_sobre_el_canvas");
     };
   },
 
@@ -102,6 +95,7 @@ export default Component.extend({
     this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
     this.bus.off("progreso_de_carga", this, "progreso_de_carga");
     this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+    this.bus.off("hace_click_sobre_el_canvas", this, "hace_click_sobre_el_canvas");
   },
 
   cargar_escena({ escena, proyecto }) {
@@ -175,6 +169,10 @@ export default Component.extend({
     };
 
     this.contexto.postMessage(data, utils.HOST);
+  },
+
+  hace_click_sobre_el_canvas({}) {
+    this.hacer_foco_en_pilas();
   },
 
   actualizar_actor_desde_el_editor({ id, actor }) {
@@ -293,6 +291,10 @@ export default Component.extend({
 
     if (e.data.tipo === "cuando_pulsa_escape") {
       this.cuandoPulsaEscapeEnModoEjecucion();
+    }
+
+    if (e.data.tipo === "hace_click_sobre_el_canvas") {
+      this.bus.trigger("hace_click_sobre_el_canvas", contexto.pilas, contexto);
     }
   },
   actions: {

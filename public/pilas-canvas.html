@@ -30,4 +30,10 @@ canvas.maximizar {
 <script src="phaser.js"></script>
 <script src="pilas-engine.js"></script>
 
-<div id='game'></div>
+<script>
+function notificar_click_sobre_el_canvas() {
+  window.parent.postMessage({ tipo: "hace_click_sobre_el_canvas" }, HOST);
+}
+</script>
+
+<div id='game' onclick="notificar_click_sobre_el_canvas();"></div>
