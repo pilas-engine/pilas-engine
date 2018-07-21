@@ -171,7 +171,7 @@ export default Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  hace_click_sobre_el_canvas({}) {
+  hace_click_sobre_el_canvas() {
     this.hacer_foco_en_pilas();
   },
 
@@ -294,7 +294,7 @@ export default Component.extend({
     }
 
     if (e.data.tipo === "hace_click_sobre_el_canvas") {
-      this.bus.trigger("hace_click_sobre_el_canvas", contexto.pilas, contexto);
+      this.bus.trigger("hace_click_sobre_el_canvas");
     }
   },
   actions: {
