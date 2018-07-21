@@ -16,7 +16,8 @@ class Modo extends Phaser.Scene {
   create(datos, ancho, alto) {
     this.ancho = ancho;
     this.alto = alto;
-    this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+    this.fps = this.add.bitmapText(5, 10, "impact", "FPS");
+    this.fps_actores = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
     this.fps.scrollFactorX = 0;
     this.fps.scrollFactorY = 0;
     this.crear_canvas_de_depuracion();
@@ -52,8 +53,12 @@ class Modo extends Phaser.Scene {
       if (this.pilas.depurador.mostrar_fps) {
         this.fps.alpha = 1;
         this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
+
+        this.fps_actores.alpha = 1;
+        this.fps_actores.text = "ACTORES: " + actores.length;
       } else {
         this.fps.alpha = 0;
+        this.fps_actores.alpha = 0;
       }
     }
 

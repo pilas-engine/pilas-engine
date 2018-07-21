@@ -102,7 +102,7 @@ class Pilas {
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: true,
+      pixelArt: false,
       input: {
         keyboard: true,
         mouse: true,

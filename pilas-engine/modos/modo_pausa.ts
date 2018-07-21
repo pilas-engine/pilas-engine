@@ -72,6 +72,7 @@ class ModoPausa extends Modo {
 
     if (this.fps) {
       this.fps.alpha = 0;
+      this.fps_actores.alpha = 0;
     }
 
     if (this.pilas.depurador.mostrar_fisica) {

@@ -570,7 +570,7 @@ var Pilas = (function () {
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
-            pixelArt: true,
+            pixelArt: false,
             input: {
                 keyboard: true,
                 mouse: true,
@@ -1884,7 +1884,8 @@ var Modo = (function (_super) {
     Modo.prototype.create = function (datos, ancho, alto) {
         this.ancho = ancho;
         this.alto = alto;
-        this.fps = this.add.bitmapText(5, 5, "impact", "FPS");
+        this.fps = this.add.bitmapText(5, 10, "impact", "FPS");
+        this.fps_actores = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
         this.fps.scrollFactorX = 0;
         this.fps.scrollFactorY = 0;
         this.crear_canvas_de_depuracion();
@@ -1914,9 +1915,12 @@ var Modo = (function (_super) {
             if (this.pilas.depurador.mostrar_fps) {
                 this.fps.alpha = 1;
                 this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
+                this.fps_actores.alpha = 1;
+                this.fps_actores.text = "ACTORES: " + actores.length;
             }
             else {
                 this.fps.alpha = 0;
+                this.fps_actores.alpha = 0;
             }
         }
         this.posicionar_fondo();
@@ -2501,6 +2505,7 @@ var ModoPausa = (function (_super) {
         this.graphics.clear();
         if (this.fps) {
             this.fps.alpha = 0;
+            this.fps_actores.alpha = 0;
         }
         if (this.pilas.depurador.mostrar_fisica) {
             this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);

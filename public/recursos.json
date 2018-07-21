@@ -278,6 +278,11 @@
       "nombre": "impact",
       "imagen": "fuentes/impact.png",
       "fuente": "fuentes/impact.fnt"
+    },
+    {
+      "nombre": "mini-impact",
+      "imagen": "fuentes/mini-impact.png",
+      "fuente": "fuentes/mini-impact.fnt"
     }
   ],
 
