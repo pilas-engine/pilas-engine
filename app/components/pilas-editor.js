@@ -87,8 +87,26 @@ export default Component.extend({
 
   finaliza_carga() {
     this.set("cargando", false);
-    this.mostrar_la_escena_actual_sobre_pilas();
+    //this.mostrar_la_escena_actual_sobre_pilas();
+    this.mostrar_la_escena_inicial();
     this.set("estado", this.estado.cuandoTerminoDeCargarPilas());
+  },
+
+  mostrar_la_escena_inicial() {
+    if (!this.get("proyecto")) {
+      throw Error("No se envió el parámetro proyecto a este componente.");
+    }
+
+    if (!this.get("proyecto.escenas")) {
+      throw Error("El proyecto enviado no tiene escenas.");
+    }
+
+    if (!this.get("proyecto.escena_inicial")) {
+      throw Error("El proyecto enviado no tiene una escena inicial.");
+    }
+
+    this.set("ultimaEscenaSeleccionada", this.get("proyecto.escena_inicial"));
+    this.mostrar_la_escena_actual_sobre_pilas();
   },
 
   pulsa_la_tecla_escape() {

@@ -1,5 +1,9 @@
+{{#if tareaCargarProyecto.isRunning}}
+  <div class='pa2 gray verdana f6 tc'>Cargando proyecto ...</div>
+{{else}}
+
 {{pilas-editor
-  proyecto=proyecto
+  proyecto=tareaCargarProyecto.last.value
 
   mostrarEditor=mostrarEditor
   expandirJuego=expandirJuego
@@ -20,3 +24,5 @@
   fps=fps
   fisica=fisica
 }}
+
+{{/if}}

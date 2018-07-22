@@ -4,9 +4,8 @@ import Controller from "@ember/controller";
 import json_a_string from "../utils/json-a-string";
 import string_a_json from "../utils/string-a-json";
 import QueryParams from "ember-parachute";
+import { task } from "ember-concurrency";
 import proyecto from "../fixtures/proyecto-inicial";
-
-console.log(proyecto);
 
 const queryParams = new QueryParams({
   serializado: { defaultValue: null, refresh: true, replace: true },
@@ -24,24 +23,30 @@ const queryParams = new QueryParams({
   fisica: { defaultValue: true, replace: true },
   permitir_modo_pausa: { defaultValue: true, replace: true },
   maximizar: { defaultValue: false, replace: true },
-  oscuro: { defaultValue: false, replace: true }
+  oscuro: { defaultValue: false, replace: true },
+  ejemplo: { defaultValue: null, replace: true, refresh: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {
   proyecto: null,
   bus: service(),
+  ejemplos: service(),
 
   setup(event) {
-    let params = event.queryParams;
+    this.tareaCargarProyecto.perform(event.queryParams);
+  },
 
+  tareaCargarProyecto: task(function*(params) {
     if (params.serializado) {
-      this.cargarProyectoDesdeQueryParams(params);
-    } else {
-      this.crearProyectoInicial();
+      return this.cargarProyectoDesdeQueryParams(params);
     }
 
-    console.info("Nota: Se puede acceder a la variable 'pilas' desde aquí.");
-  },
+    if (params.ejemplo) {
+      return yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
+    }
+
+    return this.crearProyectoInicial();
+  }),
 
   reset(_, isExiting) {
     if (isExiting) {
@@ -52,8 +57,14 @@ export default Controller.extend(queryParams.Mixin, {
   cargarProyectoDesdeQueryParams(params) {
     let proyecto = string_a_json(params.serializado);
     let proyectoComoObjetoEmber = this.convertirEscenaEnObjetoEmber(proyecto);
-    this.set("proyecto", proyectoComoObjetoEmber);
+    return proyectoComoObjetoEmber;
   },
+
+  cargarProyectoDesdeEjemplo: task(function*(nombre) {
+    let ejemplos = yield this.ejemplos.obtener();
+    let proyecto = ejemplos.ejemplos.findBy("nombre", nombre).proyecto;
+    return this.convertirEscenaEnObjetoEmber(proyecto);
+  }),
 
   convertirEscenaEnObjetoEmber(proyecto) {
     let proyectoComoObjetoEmber = EmberObject.create(proyecto);
@@ -76,7 +87,7 @@ export default Controller.extend(queryParams.Mixin, {
 
   crearProyectoInicial() {
     let proyectoComoObjetoEmber = this.convertirEscenaEnObjetoEmber(proyecto);
-    this.set("proyecto", proyectoComoObjetoEmber);
+    return proyectoComoObjetoEmber;
   },
 
   actions: {

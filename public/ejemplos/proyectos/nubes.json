@@ -2,6 +2,7 @@
   "titulo": "Proyecto demo",
   "ancho": 500,
   "alto": 500,
+  "escena_inicial": 2,
   "codigos": {
     "escenas": [
       {
