@@ -73,7 +73,7 @@ comandos:
 iniciar:
 	$(call task, "Iniciando el proyecto.")
 	$(call log, "Instalando dependencias.")
-	@npm install
+	@yarn install
 	$(call log, "Preparando dependencias binarias para electron")
 	./node_modules/.bin/electron-rebuild
 
