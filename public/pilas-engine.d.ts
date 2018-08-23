@@ -42,18 +42,21 @@ declare class Camara {
     y: number;
 }
 declare class Control {
-    pilas: Pilas;
-    _izquierda: any;
-    _derecha: any;
-    _arriba: any;
-    _abajo: any;
-    _espacio: any;
+    private pilas;
+    private _izquierda;
+    private _derecha;
+    private _arriba;
+    private _abajo;
+    private _espacio;
     constructor(pilas: Pilas);
-    izquierda: any;
-    derecha: any;
-    arriba: any;
-    abajo: any;
-    espacio: any;
+    terminar(): void;
+    private conectar_teclas;
+    private desconectar_teclas;
+    izquierda: boolean;
+    derecha: boolean;
+    arriba: boolean;
+    abajo: boolean;
+    espacio: boolean;
 }
 declare class Depurador {
     pilas: Pilas;
@@ -91,7 +94,7 @@ declare class Mensajes {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;
     constructor(pilas: Pilas);
-    private agregar_manejador_de_eventos();
+    private agregar_manejador_de_eventos;
     atender_mensaje(e: any): void;
     atender_mensaje_iniciar_pilas(datos: any): void;
     atender_mensaje_definir_estados_de_depuracion(datos: any): void;
@@ -141,7 +144,6 @@ declare class Pilas {
     depurador: Depurador;
     utilidades: Utilidades;
     escenas: Escenas;
-    control: Control;
     historia: Historia;
     sonidos: any;
     actores: Actores;
@@ -155,9 +157,10 @@ declare class Pilas {
     cursor_x: number;
     cursor_y: number;
     constructor();
-    readonly escena: Escena;
+    escena: Escena;
+    control: Control;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
-    private iniciar_phaser_desde_configuracion(configuracion);
+    private iniciar_phaser_desde_configuracion;
     definir_modo(nombre: any, datos: any): void;
     cambiar_escena(nombre: string): void;
     crear_configuracion(ancho: any, alto: any): {
@@ -267,7 +270,7 @@ declare class ActorBase {
         transparencia: number;
         id_color: number;
     };
-    etiqueta: string;
+    etiqueta: any;
     generar_color_para_depurar(): number;
     pre_actualizar(): void;
     estado: string;
@@ -280,12 +283,12 @@ declare class ActorBase {
     y: number;
     z: number;
     rotacion: number;
-    escala_x: number;
-    escala_y: number;
+    escala_x: any;
+    escala_y: any;
     escala: number;
     centro_y: number;
     centro_x: number;
-    transparencia: number;
+    transparencia: any;
     toString(): string;
     fallar_si_no_tiene_figura(): void;
     crear_figura_rectangular(ancho?: number, alto?: number): void;
@@ -306,7 +309,7 @@ declare class ActorBase {
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
     reproducir_animacion(nombre_de_la_animacion: any): void;
-    animacion: string;
+    animacion: any;
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
@@ -514,6 +517,7 @@ declare class EscenaBase {
     id: number;
     camara: Camara;
     fondo: string;
+    control: Control;
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
     serializar(): {
@@ -635,7 +639,7 @@ declare class ModoPausa extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
-    private crear_sprites_desde_historia(posicion);
+    private crear_sprites_desde_historia;
     update(): void;
     crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
     actualizar_posicion(posicion: any): void;

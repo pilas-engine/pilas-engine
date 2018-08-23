@@ -68,6 +68,7 @@ class ModoEjecucion extends Modo {
         }
       });
 
+      /*
       this.input.keyboard.on("keydown", evento => {
         console.log("keydown", evento);
       });
@@ -75,6 +76,7 @@ class ModoEjecucion extends Modo {
       this.input.keyboard.on("keyup", evento => {
         console.log("keyup", evento);
       });
+      */
 
       this.input.on("pointerdown", cursor => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);

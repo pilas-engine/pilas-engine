@@ -4,6 +4,7 @@ class EscenaBase {
   id: number;
   camara: Camara;
   fondo: string;
+  control: Control;
 
   constructor(pilas) {
     this.pilas = pilas;
@@ -11,6 +12,7 @@ class EscenaBase {
     this.pilas.utilidades.obtener_id_autoincremental();
     this.camara = new Camara(pilas);
     this.pilas.escenas.definir_escena_actual(this);
+    this.control = new Control(pilas);
   }
 
   agregar_actor(actor: Actor) {
@@ -67,6 +69,7 @@ class EscenaBase {
     this.actores.map(e => e.eliminar());
     this.actualizar();
     this.actualizar_actores();
+    this.control.terminar();
   }
 
   cuando_hace_click(x, y, evento_original) {}

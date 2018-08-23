@@ -13,7 +13,6 @@ class Pilas {
   depurador: Depurador;
   utilidades: Utilidades;
   escenas: Escenas;
-  control: Control;
   historia: Historia;
   sonidos: any;
   actores: Actores;
@@ -45,8 +44,20 @@ class Pilas {
     this.fisica = new Fisica(this);
   }
 
-  get escena() {
+  get escena(): Escena {
     return this.escenas.escena_actual;
+  }
+
+  set escena(v) {
+    this.utilidades.acceso_incorrecto("escena");
+  }
+
+  get control(): Control {
+    return this.escena.control;
+  }
+
+  set control(c) {
+    this.utilidades.acceso_incorrecto("control");
   }
 
   iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
@@ -73,7 +84,6 @@ class Pilas {
   private iniciar_phaser_desde_configuracion(configuracion) {
     var game = new Phaser.Game(configuracion);
     this.game = game;
-    this.control = new Control(this);
   }
 
   definir_modo(nombre, datos) {

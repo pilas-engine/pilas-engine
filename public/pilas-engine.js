@@ -1,7 +1,10 @@
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -180,21 +183,35 @@ var Camara = (function () {
 }());
 var Control = (function () {
     function Control(pilas) {
-        var codigos = Phaser.Input.Keyboard.KeyCodes;
         this.pilas = pilas;
-        var keyboard = pilas.game.input["keyboard"];
-        this._izquierda = keyboard.addKey(codigos.LEFT);
-        this._derecha = keyboard.addKey(codigos.RIGHT);
-        this._arriba = keyboard.addKey(codigos.UP);
-        this._abajo = keyboard.addKey(codigos.DOWN);
-        this._espacio = keyboard.addKey(codigos.SPACE);
+        this.conectar_teclas();
     }
+    Control.prototype.terminar = function () {
+        this.desconectar_teclas();
+    };
+    Control.prototype.conectar_teclas = function () {
+        var keyboard = this.pilas.modo.input.keyboard;
+        this._izquierda = keyboard.addKey("LEFT");
+        this._derecha = keyboard.addKey("RIGHT");
+        this._arriba = keyboard.addKey("UP");
+        this._abajo = keyboard.addKey("DOWN");
+        this._espacio = keyboard.addKey("SPACE");
+    };
+    Control.prototype.desconectar_teclas = function () {
+        var keyboard = this.pilas.modo.input.keyboard;
+        keyboard.removeKey(this.espacio);
+        keyboard.removeKey(this._izquierda);
+        keyboard.removeKey(this._derecha);
+        keyboard.removeKey(this._arriba);
+        keyboard.removeKey(this._abajo);
+        keyboard.removeKey(this._espacio);
+    };
     Object.defineProperty(Control.prototype, "izquierda", {
         get: function () {
             return this._izquierda.isDown;
         },
         set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto(v);
+            this.pilas.utilidades.acceso_incorrecto("izquierda");
         },
         enumerable: true,
         configurable: true
@@ -204,7 +221,7 @@ var Control = (function () {
             return this._derecha.isDown;
         },
         set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto(v);
+            this.pilas.utilidades.acceso_incorrecto("derecha");
         },
         enumerable: true,
         configurable: true
@@ -214,7 +231,7 @@ var Control = (function () {
             return this._arriba.isDown;
         },
         set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto(v);
+            this.pilas.utilidades.acceso_incorrecto("arriba");
         },
         enumerable: true,
         configurable: true
@@ -224,7 +241,7 @@ var Control = (function () {
             return this._abajo.isDown;
         },
         set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto(v);
+            this.pilas.utilidades.acceso_incorrecto("abajo");
         },
         enumerable: true,
         configurable: true
@@ -234,7 +251,7 @@ var Control = (function () {
             return this._espacio.isDown;
         },
         set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto(v);
+            this.pilas.utilidades.acceso_incorrecto("espacio");
         },
         enumerable: true,
         configurable: true
@@ -519,6 +536,19 @@ var Pilas = (function () {
         get: function () {
             return this.escenas.escena_actual;
         },
+        set: function (v) {
+            this.utilidades.acceso_incorrecto("escena");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Pilas.prototype, "control", {
+        get: function () {
+            return this.escena.control;
+        },
+        set: function (c) {
+            this.utilidades.acceso_incorrecto("control");
+        },
         enumerable: true,
         configurable: true
     });
@@ -544,7 +574,6 @@ var Pilas = (function () {
     Pilas.prototype.iniciar_phaser_desde_configuracion = function (configuracion) {
         var game = new Phaser.Game(configuracion);
         this.game = game;
-        this.control = new Control(this);
     };
     Pilas.prototype.definir_modo = function (nombre, datos) {
         try {
@@ -1793,6 +1822,7 @@ var EscenaBase = (function () {
         this.pilas.utilidades.obtener_id_autoincremental();
         this.camara = new Camara(pilas);
         this.pilas.escenas.definir_escena_actual(this);
+        this.control = new Control(pilas);
     }
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
@@ -1839,6 +1869,7 @@ var EscenaBase = (function () {
         this.actores.map(function (e) { return e.eliminar(); });
         this.actualizar();
         this.actualizar_actores();
+        this.control.terminar();
     };
     EscenaBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
     EscenaBase.prototype.cuando_mueve = function (x, y, evento_original) { };
@@ -2212,12 +2243,6 @@ var ModoEjecucion = (function (_super) {
                 if (evento.key === "Escape") {
                     _this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
                 }
-            });
-            this.input.keyboard.on("keydown", function (evento) {
-                console.log("keydown", evento);
-            });
-            this.input.keyboard.on("keyup", function (evento) {
-                console.log("keyup", evento);
             });
             this.input.on("pointerdown", function (cursor) {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
