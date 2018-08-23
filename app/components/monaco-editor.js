@@ -62,21 +62,13 @@ export default Component.extend({
         return;
       }
 
-      if (
-        event.source === this.frame &&
-        event.data &&
-        event.data.updatedCode
-      ) {
+      if (event.source === this.frame && event.data && event.data.updatedCode) {
         if (this.onChange) {
           this.onChange(event.data.updatedCode);
         }
       }
 
-      if (
-        event.source === this.frame &&
-        event.data &&
-        event.data.message
-      ) {
+      if (event.source === this.frame && event.data && event.data.message) {
         if (event.data.message === "load-complete") {
           this.onLoadEditor(this.frame.editor);
         }
@@ -93,11 +85,9 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    this.declaraciones
-      .iniciar()
-      .then(() => {
-        this.iniciarEditor();
-      });
+    this.declaraciones.iniciar().then(() => {
+      this.iniciarEditor();
+    });
   },
 
   iniciarEditor() {
@@ -172,6 +162,7 @@ export default Component.extend({
                 fontSize: 14,
                 theme: theme,
                 tabSize: 2,
+                folding: true,
                 insertSpaces: true,
                 tabWidth: 2,
                 lineNumbers: ${this.linenumbers},
