@@ -1,5 +1,19 @@
 {{outlet}}
 
+<div class="pa2 verdana">
+  <div class="pointer hover-bg-red dib pa2" {{action "abrir_proyecto"}}>
+    Abrir proyecto
+  </div>
+
+  <div class="pointer hover-bg-red dib pa2" {{action "guardar_proyecto"}}>
+    Guardar proyecto
+  </div>
+
+</div>
+
+
+
+
 <div class="h-100 flex">
   {{pilas-canvas
     ancho=proyecto.ancho

@@ -6,6 +6,7 @@ const NOMBRE_DE_LA_ESCENA = "demo";
 export default Controller.extend({
   bus: service(),
   compilador: service(),
+  electron: service(),
 
   proyecto: null,
 
@@ -215,6 +216,22 @@ export default Controller.extend({
 
       this.bus.trigger("ejecutar_proyecto", datos);
       this.bus.trigger("hacer_foco_en_pilas", {});
+    },
+
+    abrir_proyecto() {
+      this.get("electron")
+        .abrir_proyecto()
+        .then(ruta => {
+          alert("debo abrir el proyecto " + ruta);
+        });
+    },
+
+    guardar_proyecto() {
+      this.get("electron")
+        .guardar_proyecto()
+        .then(ruta => {
+          alert("debo guardar el proyecto en " + ruta);
+        });
     }
   }
 });
