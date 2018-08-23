@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupTest } from "ember-qunit";
 
 module("Unit | Service | compilador", function(hooks) {
@@ -25,6 +25,6 @@ module("Unit | Service | compilador", function(hooks) {
     assert.equal(eliminarEspacios(resultado.codigo), eliminarEspacios(codigoEsperado));
 
     resultado = compilador.compilar(`class MiActor extends Actor {}`, proyecto);
-    assert.ok(resultado.codigo.indexOf("var extendStatics = Object.setPrototypeOf") > -1);
+    assert.ok(resultado.codigo.indexOf("@class") > -1);
   });
 });
