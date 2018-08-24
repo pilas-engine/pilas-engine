@@ -4,11 +4,15 @@
 const electron = require("electron");
 const path = require("path");
 const app = electron.app;
+const ipcMain = electron.ipcMain;
 const BrowserWindow = electron.BrowserWindow;
 const dirname = __dirname || path.resolve(path.dirname());
 const emberAppLocation = `file://${dirname}/dist/index.html`;
+const fs = require("fs");
 
 let mainWindow = null;
+
+global.sharedObj = { desarrollo: true };
 
 app.on("window-all-closed", function onWindowAllClosed() {
   app.quit();
@@ -22,6 +26,22 @@ app.on("ready", function onReady() {
     minHeight: 650
   });
 
+  var rutas = [`${dirname}/dist/index.html`, `${dirname}/dist/assets/pilas-engine.js`, `${dirname}/dist/assets/vendor.js`, `${dirname}/dist/assets/pilas-engine.css`];
+  let ultima_actualizacion = new Date();
+
+  rutas.map(function(ruta) {
+    fs.watch(ruta, function() {
+      let ahora = new Date();
+      let tiempo_desde_ultima_actualizacion = (ahora - ultima_actualizacion) / 1000;
+
+      // Previene hacer multiples actualizaciones cuando ember compila varias cosas.
+      if (tiempo_desde_ultima_actualizacion > 3) {
+        ultima_actualizacion = ahora;
+        mainWindow.webContents.send("reload", {});
+      }
+    });
+  });
+
   delete mainWindow.module;
 
   mainWindow.loadURL(emberAppLocation);
@@ -31,18 +51,12 @@ app.on("ready", function onReady() {
   });
 
   mainWindow.webContents.on("crashed", () => {
-    console.log(
-      "Your Ember app (or other code) in the main window has crashed."
-    );
-    console.log(
-      "This is a serious issue that needs to be handled and/or debugged."
-    );
+    console.log("Your Ember app (or other code) in the main window has crashed.");
+    console.log("This is a serious issue that needs to be handled and/or debugged.");
   });
 
   mainWindow.on("unresponsive", () => {
-    console.log(
-      "Your Ember app (or other code) has made the window unresponsive."
-    );
+    console.log("Your Ember app (or other code) has made the window unresponsive.");
   });
 
   mainWindow.on("responsive", () => {
@@ -55,9 +69,7 @@ app.on("ready", function onReady() {
 
   process.on("uncaughtException", err => {
     console.log("An exception in the main thread was not handled.");
-    console.log(
-      "This is a serious issue that needs to be handled and/or debugged."
-    );
+    console.log("This is a serious issue that needs to be handled and/or debugged.");
     console.log(`Exception: ${err}`);
   });
 });

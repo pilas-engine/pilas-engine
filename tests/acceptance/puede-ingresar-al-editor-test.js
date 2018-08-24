@@ -58,6 +58,6 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     await esperar(PAUSA);
 
     await pulsar("Volver");
-    assert.equal(currentURL(), "/", "Pudo regresar a la ruta inicial.");
+    assert.equal(currentURL(), "/?livereload=false", "Pudo regresar a la ruta inicial.");
   });
 });

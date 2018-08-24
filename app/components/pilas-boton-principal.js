@@ -11,5 +11,6 @@ export default Component.extend({
     bg-primario
     truncate
     unselectable
+    undraggable
   `
 });

@@ -1,7 +1,7 @@
 {{yield}}
 
 {{#en-electron}}
-  <img id='enjambre' {{action "abrir"}} class="v-mid dim {{if animar 'animacion-aparecer'}} pointer" src="{{rootURL}}{{imagen}}">
+  <img id='enjambre' {{action "abrir"}} class="v-mid dim undraggable {{if animar 'animacion-aparecer'}} pointer" src="{{rootURL}}{{imagen}}">
 {{else}}
   <a href='http://enjambrelab.com.ar/' target="_blank"><img id='enjambre' class="v-mid dim {{if animar 'animacion-aparecer'}} pointer" src="{{rootURL}}{{imagen}}"></a>
 {{/en-electron}}

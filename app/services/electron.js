@@ -3,10 +3,14 @@ import { Promise } from "rsvp";
 
 export default Service.extend({
   enElectron: false,
+  en_desarrollo: null,
 
   iniciar() {
     if (window.enElectron) {
+      let electron = requireNode("electron");
+
       this.set("enElectron", true);
+      this.set("en_desarrollo", electron.remote.getGlobal("sharedObj").desarrollo);
     }
   },
 
