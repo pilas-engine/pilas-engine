@@ -15,10 +15,14 @@
 
 
 <div class="h-100 flex">
-  {{pilas-canvas
-    ancho=proyecto.ancho
-    alto=proyecto.alto
-    proyecto=proyecto
-    cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
-  }}
+  {{#unless ocultar_canvas}}
+    {{pilas-canvas
+      ancho=proyecto.ancho
+      alto=proyecto.alto
+      proyecto=proyecto
+      cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
+    }}
+  {{else}}
+    Cargando ...
+  {{/unless}}
 </div>

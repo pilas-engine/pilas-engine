@@ -3,8 +3,9 @@
   <div class="h2-5 flex">
 
       <div class="pa2 truncate">
-        {{pilas-boton-regresar}}
-        {{pilas-boton icono="guardar" desactivado=cargando accion=(action cuandoIntentaGuardar proyecto) demora=1 texto="Guardar"}}
+        {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
+
+        {{pilas-boton icono="guardar" desactivado=cargando accion=(action 'cuando_guarda'  proyecto) demora=1 texto="Guardar"}}
 
         {{pilas-boton-preferencias icono='preferencias' oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
       </div>

@@ -1,5 +1,6 @@
 import { inject as service } from "@ember/service";
 import Controller from "@ember/controller";
+import { later } from '@ember/runloop';
 
 const NOMBRE_DE_LA_ESCENA = "demo";
 
@@ -222,7 +223,24 @@ export default Controller.extend({
       this.get("electron")
         .abrir_proyecto()
         .then(ruta => {
-          alert("debo abrir el proyecto " + ruta);
+          let electron = this.get('electron');
+          try {
+            let proyecto = electron.abrir_proyecto_desde_archivo(ruta);
+
+            this.set('ocultar_canvas', true);
+
+            later(() => {
+              this.set('proyecto', proyecto);
+              this.set('ocultar_canvas', false);
+            }, 10);
+
+          } catch (err) {
+            console.error(err);
+            alert("Error, el archivo está mal formateado: " + err.name);
+          }
+
+
+
         });
     },
 
@@ -230,7 +248,10 @@ export default Controller.extend({
       this.get("electron")
         .guardar_proyecto()
         .then(ruta => {
-          alert("debo guardar el proyecto en " + ruta);
+          let proyecto  = this.get('proyecto');
+          let electron = this.get('electron');
+
+          electron.guardar_proyecto_en_archivo(proyecto, ruta);
         });
     }
   }

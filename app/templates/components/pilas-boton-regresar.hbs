@@ -1,1 +1,13 @@
-{{pilas-boton icono="volver" accion=(action "regresar") texto="Volver"}}
+[{{confirmar}}] mostrar [{{mostrar}}]
+{{pilas-boton extraClass="test-regresar" icono="volver" accion=(action "regresar") texto=""}}
+
+{{#if mostrar}}
+
+{{#pilas-modal alCerrar=(action "ocultar") visible=true id='dialogo_confirmar' titulo="¿Quieres salir sin guardar?"}}
+<div class="">
+
+  demo
+</div>
+{{/pilas-modal}}
+
+{{/if}}

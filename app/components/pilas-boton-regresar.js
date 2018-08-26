@@ -4,10 +4,19 @@ import { inject } from "@ember/service";
 export default Component.extend({
   router: inject(),
   tagName: "",
+  mostrar: false,
 
   actions: {
     regresar() {
-      this.router.transitionTo("index");
+
+      if (this.confirmar) {
+        this.set('mostrar', true);
+      } else {
+        this.router.transitionTo("index");
+      }
+    },
+    ocultar() {
+      this.set('mostrar', false);
     }
   }
 });

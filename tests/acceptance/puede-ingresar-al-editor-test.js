@@ -1,4 +1,4 @@
-import { currentURL, visit } from "@ember/test-helpers";
+import { currentURL, visit, click } from "@ember/test-helpers";
 import $ from "jquery";
 import { module, test } from "qunit";
 import { setupApplicationTest } from "ember-qunit";
@@ -57,7 +57,7 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     await pulsar("Detener");
     await esperar(PAUSA);
 
-    await pulsar("Volver");
+    await click(".test-regresar");
     assert.equal(currentURL(), "/?livereload=false", "Pudo regresar a la ruta inicial.");
   });
 });

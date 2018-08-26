@@ -7,6 +7,7 @@ import estados from "../estados/estados-de-pilas-editor";
 import aplicar_nombre from "../utils/aplicar-nombre";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
 import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
+import { observer } from '@ember/object';
 
 export default Component.extend({
   bus: service(),
@@ -28,6 +29,18 @@ export default Component.extend({
   cantidadDeEscenas: alias("proyecto.escenas.length"),
 
   lista_de_eventos: null,
+
+  hay_cambios_por_guardar: false,
+
+  actualizar_titulo: observer('hay_cambios_por_guardar', function() {
+    let titulo = "PilasEngine";
+
+    if (this.get('hay_cambios_por_guardar')) {
+      titulo += " *";
+    }
+
+    window.document.title = titulo;
+  }),
 
   didInsertElement() {
     this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
@@ -116,6 +129,8 @@ export default Component.extend({
   },
 
   termina_de_mover_un_actor(datos) {
+    this.set('hay_cambios_por_guardar', true);
+
     let escena = this.obtener_la_escena_actual();
     let actor = escena.actores.findBy("id", datos.id);
 
@@ -181,6 +196,8 @@ export default Component.extend({
   },
 
   eliminar_escena_actual() {
+    this.set('hay_cambios_por_guardar', true);
+
     let escenaActual = this.obtener_la_escena_actual();
     let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
     this.set("proyecto.escenas", escenasSinLaEscenaActual);
@@ -197,6 +214,8 @@ export default Component.extend({
   },
 
   eliminar_actor(id) {
+    this.set('hay_cambios_por_guardar', true);
+
     let escenaActual = this.obtener_la_escena_actual();
     let actor = escenaActual.actores.findBy("id", id);
     this.bus.trigger("eliminar_actor_desde_el_editor", { id: actor.id });
@@ -318,6 +337,7 @@ export default Component.extend({
 
   actions: {
     agregarEscena(model) {
+      this.set('hay_cambios_por_guardar', true);
       let nombres_de_escenas = this.obtener_nombres_de_escenas(model);
       let nombre = obtener_nombre_sin_repetir(nombres_de_escenas, "escena");
       let id = this.generar_id();
@@ -342,6 +362,7 @@ export default Component.extend({
     },
 
     agregar_actor(proyecto, actor) {
+      this.set('hay_cambios_por_guardar', true);
       let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
       let id = this.generar_id();
@@ -366,6 +387,7 @@ export default Component.extend({
     cuando_termino_de_cargar_monaco_editor() {},
 
     cuando_cambia_el_codigo(codigo) {
+      this.set('hay_cambios_por_guardar', true);
       this.set("codigo", codigo);
       this.guardar_codigo_en_el_proyecto(this.seleccion, codigo);
     },
@@ -409,6 +431,7 @@ export default Component.extend({
       this.log.info("Ingresando en modo pausa");
     },
     cambiarPosicion(valorNuevo) {
+      this.set('hay_cambios_por_guardar', true);
       this.set("posicion", valorNuevo);
       this.bus.trigger("cambiar_posicion_desde_el_editor", {
         posicion: valorNuevo
@@ -463,18 +486,21 @@ export default Component.extend({
       }
     },
     cuandoModificaObjeto(objeto) {
+      this.set('hay_cambios_por_guardar', true);
       this.bus.trigger("actualizar_actor_desde_el_editor", {
         id: objeto.id,
         actor: objeto
       });
     },
     cuando_modifica_escena(escena) {
+      this.set('hay_cambios_por_guardar', true);
       this.bus.trigger("actualizar_escena_desde_el_editor", {
         id: escena.id,
         escena: escena
       });
     },
     cuando_modifica_proyecto(proyecto) {
+      this.set('hay_cambios_por_guardar', true);
       this.bus.trigger("actualizar_proyecto_desde_el_editor", {
         proyecto: proyecto
       });
@@ -483,6 +509,7 @@ export default Component.extend({
       //this.reiniciar_escena_actual();
     },
     cuando_intenta_duplicar(id) {
+      this.set('hay_cambios_por_guardar', true);
       let actor_original = this.obtenerDetalleDeActorPorIndice(id);
       let codigo = this.obtener_codigo_para_el_actor(actor_original);
 
@@ -499,6 +526,8 @@ export default Component.extend({
       this.send("agregar_actor", this.proyecto, actor);
     },
     cuando_intenta_eliminar(id) {
+      this.set('hay_cambios_por_guardar', true);
+
       let actor = this.obtenerDetalleDeActorPorIndice(id);
 
       if (actor) {
@@ -506,6 +535,11 @@ export default Component.extend({
       } else {
         this.eliminar_escena_actual();
       }
+    },
+
+    cuando_guarda(proyecto) {
+      this.set('hay_cambios_por_guardar', false);
+      this.get('cuandoIntentaGuardar')(proyecto);
     }
   }
 });
