@@ -8,15 +8,17 @@ export default Component.extend({
 
   actions: {
     regresar() {
-
       if (this.confirmar) {
-        this.set('mostrar', true);
+        this.set("mostrar", true);
       } else {
         this.router.transitionTo("index");
       }
     },
     ocultar() {
-      this.set('mostrar', false);
+      this.set("mostrar", false);
+    },
+    confirmar_regreso() {
+      this.router.transitionTo("index");
     }
   }
 });

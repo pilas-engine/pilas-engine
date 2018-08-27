@@ -188,3 +188,33 @@ body {
   background-color: #eee;
   border: 1px solid gray;
 }
+
+.animacion-bajar {
+  animation: bajar 0.2s linear;
+}
+
+@keyframes bajar {
+  from {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.animacion-aparecer {
+  animation: aparecer 0.2s linear;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
