@@ -31,6 +31,7 @@ export default Controller.extend(queryParams.Mixin, {
   proyecto: null,
   bus: service(),
   ejemplos: service(),
+  electron: service(),
 
   setup(event) {
     this.tareaCargarProyecto.perform(event.queryParams);
@@ -91,11 +92,19 @@ export default Controller.extend(queryParams.Mixin, {
   },
 
   actions: {
-    alGuardar(proyecto) {
+    al_guardar(proyecto) {
       let str = json_a_string(proyecto);
       this.set("serializado", str);
       let json = string_a_json(str);
       console.log(json);
-    }
+
+      if (this.electron.enElectron) {
+        console.log("En electron, guardar....");
+      } else {
+        console.log("En un navegador, serializar....");
+      }
+
+
+    },
   }
 });
