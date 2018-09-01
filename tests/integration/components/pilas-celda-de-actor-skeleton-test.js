@@ -7,20 +7,7 @@ module("Integration | Component | pilas celda de actor skeleton", function(hooks
   setupRenderingTest(hooks);
 
   test("it renders", async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-
     await render(hbs`{{pilas-celda-de-actor-skeleton}}`);
-
-    assert.dom("*").hasText("");
-
-    // Template block usage:
-    await render(hbs`
-      {{#pilas-celda-de-actor-skeleton}}
-        template block text
-      {{/pilas-celda-de-actor-skeleton}}
-    `);
-
-    assert.dom("*").hasText("template block text");
+    assert.dom("*").exists("");
   });
 });
