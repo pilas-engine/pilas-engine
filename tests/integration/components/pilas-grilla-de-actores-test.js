@@ -1,6 +1,6 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, find } from "@ember/test-helpers";
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Component | pilas grilla de actores", function(hooks) {
@@ -19,6 +19,6 @@ module("Integration | Component | pilas grilla de actores", function(hooks) {
 
     await render(hbs`{{pilas-grilla-de-actores actores=actores cuandoQuiereCrearActor=f}}`);
 
-    assert.equal(find("[test-celda-actor]").textContent.trim(), "aceituna");
+    assert.dom("[test-celda-actor]").hasText("aceituna");
   });
 });

@@ -220,10 +220,10 @@ export default Controller.extend({
     },
 
     abrir_proyecto() {
-      this.get("electron")
+      this.electron
         .abrir_proyecto()
         .then(ruta => {
-          let electron = this.get('electron');
+          let electron = this.electron;
           try {
             let proyecto = electron.abrir_proyecto_desde_archivo(ruta);
 
@@ -245,11 +245,11 @@ export default Controller.extend({
     },
 
     guardar_proyecto() {
-      this.get("electron")
+      this.electron
         .guardar_proyecto()
         .then(ruta => {
-          let proyecto  = this.get('proyecto');
-          let electron = this.get('electron');
+          let proyecto  = this.proyecto;
+          let electron = this.electron;
 
           electron.guardar_proyecto_en_archivo(proyecto, ruta);
         });

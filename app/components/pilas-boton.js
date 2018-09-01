@@ -37,7 +37,7 @@ export default Component.extend(EKMixin, {
   cuando_suelta_tecla: on(keyUp(), function(event) {
     if (this.atajo) {
       if (this.atajo === getCode(event)) {
-        this.get("accion")();
+        this.accion();
       }
     }
   }),
@@ -51,10 +51,10 @@ export default Component.extend(EKMixin, {
 
         later(() => {
           this.set("ejecutando", false);
-          this.get("accion")();
+          this.accion();
         }, this.demora * 1000);
       } else {
-        this.get("accion")();
+        this.accion();
       }
     }
   }

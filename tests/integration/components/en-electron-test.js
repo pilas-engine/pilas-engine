@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, find } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Component | en electron", function(hooks) {
@@ -18,6 +18,6 @@ module("Integration | Component | en electron", function(hooks) {
       {{/en-electron}}
     `);
 
-    assert.equal(find('*').textContent.trim(), "otro");
+    assert.dom("*").hasText("otro");
   });
 });

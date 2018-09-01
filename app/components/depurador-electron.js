@@ -16,7 +16,7 @@ export default Component.extend({
       let electron = requireNode("electron");
 
       electron.ipcRenderer.on("reload", () => {
-        if (this.get("livereload")) {
+        if (this.livereload) {
           window.location.reload();
         } else {
           console.log("Evitando actualizar, livereload desactivado.");

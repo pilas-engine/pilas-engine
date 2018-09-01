@@ -35,7 +35,7 @@ export default Component.extend({
   actualizar_titulo: observer('hay_cambios_por_guardar', function() {
     let titulo = "PilasEngine";
 
-    if (this.get('hay_cambios_por_guardar')) {
+    if (this.hay_cambios_por_guardar) {
       titulo += " *";
     }
 
@@ -106,7 +106,7 @@ export default Component.extend({
   },
 
   mostrar_la_escena_inicial() {
-    if (!this.get("proyecto")) {
+    if (!this.proyecto) {
       throw Error("No se envió el parámetro proyecto a este componente.");
     }
 
@@ -184,7 +184,7 @@ export default Component.extend({
       throw Error("No se puede acceder a la última escena seleccionada");
     }
 
-    if (!this.get("proyecto")) {
+    if (!this.proyecto) {
       throw Error("No se envió el parámetro proyecto a este componente.");
     }
 
@@ -539,7 +539,7 @@ export default Component.extend({
 
     cuando_guarda(proyecto) {
       this.set('hay_cambios_por_guardar', false);
-      this.get('cuandoIntentaGuardar')(proyecto);
+      this.cuandoIntentaGuardar(proyecto);
     }
   }
 });

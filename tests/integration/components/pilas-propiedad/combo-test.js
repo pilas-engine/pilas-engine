@@ -1,7 +1,7 @@
-import EmberObject from '@ember/object';
-import { module, test } from 'qunit';
+import EmberObject from "@ember/object";
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, find } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Component | pilas propiedad/combo", function(hooks) {
@@ -33,10 +33,6 @@ module("Integration | Component | pilas propiedad/combo", function(hooks) {
 
     await render(hbs`{{pilas-propiedad/combo objeto=objeto propiedad=propiedad opciones=propiedad.opciones}}`);
 
-    assert.equal(
-      find('select option:checked').textContent
-        .trim(),
-      "círculo"
-    );
+    assert.dom("select option:checked").hasText("círculo");
   });
 });

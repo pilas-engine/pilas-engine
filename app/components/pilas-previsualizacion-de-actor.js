@@ -12,7 +12,7 @@ export default Component.extend({
   mantener_foco: true,
 
   didInsertElement() {
-    this.get("recursos").iniciar();
+    this.recursos.iniciar();
 
     this.set("proyecto", {
       titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",

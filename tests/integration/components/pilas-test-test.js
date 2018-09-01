@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, find } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Component | pilas test", function(hooks) {
@@ -8,10 +8,6 @@ module("Integration | Component | pilas test", function(hooks) {
 
   test("it renders", async function(assert) {
     await render(hbs`{{pilas-test}}`);
-    assert.equal(
-      find('*').textContent
-        .trim(),
-      "Iniciando: 0 %"
-    );
+    assert.dom("*").hasText("Iniciando: 0 %");
   });
 });

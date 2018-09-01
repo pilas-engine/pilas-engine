@@ -9,6 +9,6 @@ module("Integration | Component | pilas-icono-de-actor", function(hooks) {
   test("it renders", async function(assert) {
     this.set("actor", { imagen: "" });
     await render(hbs`{{pilas-icono-de-actor actor=actor}}`);
-    assert.equal(this.element.textContent.trim(), "");
+    assert.dom(this.element).hasText('');
   });
 });

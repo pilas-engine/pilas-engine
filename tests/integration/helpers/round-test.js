@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, find } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("helper:round", function(hooks) {
@@ -10,10 +10,6 @@ module("helper:round", function(hooks) {
   test("it renders", async function(assert) {
     this.set("inputValue", "15.444");
     await render(hbs`{{round inputValue}}`);
-    assert.equal(
-      find('*').textContent
-        .trim(),
-      "15.44"
-    );
+    assert.dom("*").hasText("15.44");
   });
 });

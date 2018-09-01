@@ -10,12 +10,12 @@ export default Component.extend({
   debe_mantener_foco: false,
 
   didInsertElement() {
-    this.get("recursos").iniciar();
+    this.recursos.iniciar();
 
     this.bus.on("finaliza_carga", this, "finaliza_carga");
     this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
 
-    if (this.get("debe_mantener_foco")) {
+    if (this.debe_mantener_foco) {
       this.tarea_para_mantener_foco.perform();
     }
   },

@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, find } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Component | pilas api", function(hooks) {
@@ -12,7 +12,7 @@ module("Integration | Component | pilas api", function(hooks) {
 
     await render(hbs`{{pilas-api}}`);
 
-    assert.equal(find('*').textContent.trim(), "");
+    assert.dom("*").hasText("");
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module("Integration | Component | pilas api", function(hooks) {
       {{/pilas-api}}
     `);
 
-    assert.equal(find('*').textContent.trim(), "template block text");
+    assert.dom("*").hasText("template block text");
   });
 });

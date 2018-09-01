@@ -11,7 +11,7 @@ export default Component.extend({
   proyecto: null,
 
   didInsertElement() {
-    this.get("recursos").iniciar();
+    this.recursos.iniciar();
 
     this.set("proyecto", {
       titulo: "Proyecto para pilas-test",

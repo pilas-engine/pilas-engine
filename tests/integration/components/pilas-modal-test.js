@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, click, find } from '@ember/test-helpers';
+import { render, click } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Component | pilas modal", function(hooks) {
@@ -14,22 +14,14 @@ module("Integration | Component | pilas modal", function(hooks) {
     });
 
     await render(hbs`{{pilas-modal visible=visible  itulo="Demo" alCerrar=cerrar}}`);
-    assert.equal(
-      find('*').textContent
-        .trim(),
-      ""
-    );
+    assert.dom("*").hasText("");
 
     this.set("visible", true);
 
     await render(hbs`{{pilas-modal visible=visible titulo="Demo" alCerrar=cerrar}}`);
-    assert.equal(find("#titulo").textContent, "Demo");
+    assert.dom("#titulo").hasText("Demo");
 
     await click("#cerrar");
-    assert.equal(
-      find('*').textContent
-        .trim(),
-      ""
-    );
+    assert.dom("*").hasText("");
   });
 });

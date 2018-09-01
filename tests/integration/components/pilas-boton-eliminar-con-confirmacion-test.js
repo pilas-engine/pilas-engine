@@ -15,6 +15,6 @@ module("Integration | Component | pilas boton eliminar con confirmacion", functi
     assert.ok(find('*').textContent);
 
     await click("#boton-eliminar-escena");
-    assert.equal(find("#titulo").textContent, "Cuidado");
+    assert.dom("#titulo").hasText('Cuidado');
   });
 });

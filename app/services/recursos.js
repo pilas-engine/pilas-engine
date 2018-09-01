@@ -22,7 +22,7 @@ export default Service.extend({
   }).drop(),
 
   iniciar() {
-    if (!this.get("data")) {
+    if (!this.data) {
       return this.tarea.perform();
     } else {
       return this.generar_respuesta_como_promesa_inmediata();
@@ -31,7 +31,7 @@ export default Service.extend({
 
   generar_respuesta_como_promesa_inmediata() {
     return new EmberPromise(success => {
-      success(this.get("data"));
+      success(this.data);
     });
   }
 });
