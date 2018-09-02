@@ -4,11 +4,12 @@ import Controller from "@ember/controller";
 import json_a_string from "../utils/json-a-string";
 import string_a_json from "../utils/string-a-json";
 import QueryParams from "ember-parachute";
-import { task } from "ember-concurrency";
+import { task, timeout } from "ember-concurrency";
 import proyecto from "../fixtures/proyecto-inicial";
 
 const queryParams = new QueryParams({
   serializado: { defaultValue: null, refresh: true, replace: true },
+  ruta: { defaultValue: null, refresh: true, replace: true },
   mostrarEditor: { as: "p3", defaultValue: false, replace: true },
   expandirJuego: { as: "p2", defaultValue: true, replace: true },
   mostrarPropiedades: { as: "p1", defaultValue: true, replace: true },
@@ -32,6 +33,7 @@ export default Controller.extend(queryParams.Mixin, {
   bus: service(),
   ejemplos: service(),
   electron: service(),
+  router: service(),
 
   setup(event) {
     this.tareaCargarProyecto.perform(event.queryParams);
@@ -44,6 +46,11 @@ export default Controller.extend(queryParams.Mixin, {
 
     if (params.ejemplo) {
       return yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
+    }
+
+    if (params.ruta) {
+      alert("se tiene que cargar desde una ruta!");
+      return yield this.cargar_proyecto_desde_ruta_archivo.perform(params.ruta);
     }
 
     return this.crearProyectoInicial();
@@ -64,6 +71,13 @@ export default Controller.extend(queryParams.Mixin, {
   cargarProyectoDesdeEjemplo: task(function*(nombre) {
     let ejemplos = yield this.ejemplos.obtener();
     let proyecto = ejemplos.ejemplos.findBy("nombre", nombre).proyecto;
+    return this.convertirEscenaEnObjetoEmber(proyecto);
+  }),
+
+  cargar_proyecto_desde_ruta_archivo: task(function*(ruta) {
+    let proyecto = this.electron.abrir_proyecto_desde_archivo(ruta);
+    yield timeout(100);
+    console.log(proyecto);
     return this.convertirEscenaEnObjetoEmber(proyecto);
   }),
 
@@ -94,17 +108,28 @@ export default Controller.extend(queryParams.Mixin, {
   actions: {
     al_guardar(proyecto) {
       let str = json_a_string(proyecto);
-      this.set("serializado", str);
-      let json = string_a_json(str);
-      console.log(json);
 
       if (this.electron.enElectron) {
-        console.log("En electron, guardar....");
+        let json = string_a_json(str);
+
+        this.electron.guardar_proyecto().then(ruta => {
+          let proyecto = json;
+          this.electron.guardar_proyecto_en_archivo(proyecto, ruta);
+        });
       } else {
-        console.log("En un navegador, serializar....");
+        this.set("serializado", str);
       }
-
-
     },
+
+    al_abrir() {
+      this.electron.abrir_proyecto().then(ruta => {
+        try {
+          this.router.transitionTo("app.abrir_proyecto", ruta);
+        } catch (err) {
+          console.error(err);
+          alert("Error, el archivo está mal formateado: " + err.name);
+        }
+      });
+    }
   }
 });

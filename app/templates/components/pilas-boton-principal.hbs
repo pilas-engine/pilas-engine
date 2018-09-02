@@ -1,3 +1,12 @@
+{{#if queryParams}}
+{{#link-to ruta (query-params queryParams) class=class id=id}}
+  {{pilas-icono icono=icono conSeparacion=true}}
+
+  {{texto}}
+  {{yield}}
+
+{{/link-to}}
+{{else}}
 {{#link-to ruta class=class id=id}}
   {{pilas-icono icono=icono conSeparacion=true}}
 
@@ -5,3 +14,4 @@
   {{yield}}
 
 {{/link-to}}
+{{/if}}
