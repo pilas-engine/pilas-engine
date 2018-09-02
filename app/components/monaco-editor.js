@@ -1,13 +1,22 @@
 import { observer } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
-import layout from "ember-monaco-editor/templates/components/monaco-editor";
-import getFrameById from "ember-monaco-editor/utils/get-frame-by-id";
 import formatear from "pilas-engine/utils/formatear";
 import utils from "../utils/utils";
 
+function getFrameById(id) {
+  for (var i = 0; i < window.frames.length; i++) {
+    try {
+      if (window.frames[i].name === id) {
+        return window.frames[i];
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
 export default Component.extend({
-  layout,
   classNames: ["monaco-editor", "w-100", "flex1", "ba", "b--light-gray"],
   code: "// demo",
   loading: true,
@@ -49,8 +58,8 @@ export default Component.extend({
       theme = "vs-dark";
     }
 
-    if (this.editor) {
-      this.editor.updateOptions({ theme: theme });
+    if (this.monaco) {
+      this.monaco.editor.setTheme(theme);
     }
   }),
 
@@ -70,7 +79,7 @@ export default Component.extend({
 
       if (event.source === this.frame && event.data && event.data.message) {
         if (event.data.message === "load-complete") {
-          this.onLoadEditor(this.frame.editor);
+          this.onLoadEditor(this.frame.editor, this.frame.monaco);
         }
 
         if (event.data.message === "on-save") {
@@ -129,6 +138,10 @@ export default Component.extend({
             padding: 0;
             overflow: hidden;
           }
+
+          .view-overlays {
+            opacity: 0.0;
+          }
         </style>
 
         <script>
@@ -158,17 +171,19 @@ export default Component.extend({
 
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
-                minimap: false,
+                minimap: {
+                  enabled: false
+                },
                 fontSize: 14,
                 theme: theme,
-                tabSize: 2,
+                tabSize: 4,
+                autoClosingBrackets: true,
                 folding: true,
                 insertSpaces: true,
-                tabWidth: 2,
+                tabWidth: 4,
                 lineNumbers: ${this.linenumbers},
                 readOnly: ${this.readOnly},
               });
-
 
               editor.onDidChangeModelContent(function (event) {
                 window.top.postMessage({updatedCode: editor.getValue()}, HOST);
@@ -176,6 +191,7 @@ export default Component.extend({
 
               window.top.postMessage({message: "load-complete"}, HOST);
               window.editor = editor;
+              window.monaco = monaco;
 
               window.onresize = function() {
                 editor.layout();
@@ -188,6 +204,7 @@ export default Component.extend({
             }
           });
           </script>
+
       </head>
       <body>
         <div id="monaco-editor-wrapper" style="width:100%;height:100%"></div>
@@ -200,8 +217,9 @@ export default Component.extend({
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
   },
 
-  onLoadEditor(editor) {
+  onLoadEditor(editor, monaco) {
     this.set("editor", editor);
+    this.set("monaco", monaco);
 
     if (this.code) {
       this.cargarCodigo();
