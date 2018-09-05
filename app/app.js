@@ -11,6 +11,15 @@ const App = Application.extend({
   Resolver
 });
 
+window['Ember'].onerror = function(error){
+  if (!window['Ember'].testing) {
+    console.error(error);
+    throw error;
+  } else {
+    throw error;
+  }
+};
+
 Controller.reopen({
   rootURL: config.rootURL
 });
