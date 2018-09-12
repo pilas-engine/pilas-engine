@@ -1,20 +1,30 @@
 <div class="button
     dib
     truncate
-    {{if sin_margenes '' 'pa2'}}
+    {{if padding padding 'pa2'}}
     verdana f7 link pointer
     black bg-animate b--black-20
     unselectable
     m0
     {{if deshabilitado "o-60 disabled"}}
-    {{if variable "bg-black-10"}}
+    {{if debe_resaltar_el_fondo "bg-black-10"}}
     {{if rojo "white bg-red"}}
     "
   {{action "alternar"}}
 >
-  {{#if variable}}
-    {{pilas-icono icono='on'}} <span class='dn di-ns'>{{texto}}</span> <span class='di dn-ns'>{{texto_corto}}</span>{{yield}}
+  {{#if icono}}
+    {{#if variable}}
+      {{pilas-icono icono=icono_on}}{{yield}}
+    {{else}}
+      {{pilas-icono icono=icono_off}}{{yield}}
+    {{/if}}
   {{else}}
-    {{pilas-icono icono='off'}} <span class='dn di-ns'>{{texto}}</span> <span class='di dn-ns'>{{texto_corto}}</span>{{yield}}
+    {{#if variable}}
+      {{pilas-icono icono='on'}} <span class='dn di-ns'>{{texto}}</span> <span class='di dn-ns'>{{texto_corto}}</span>{{yield}}
+    {{else}}
+      {{pilas-icono icono='off'}} <span class='dn di-ns'>{{texto}}</span> <span class='di dn-ns'>{{texto_corto}}</span>{{yield}}
+    {{/if}}
   {{/if}}
+
+
 </div>

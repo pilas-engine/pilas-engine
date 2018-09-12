@@ -18,10 +18,9 @@
       </div>
 
       <div class="pa2 truncate">
-        {{pilas-interruptor variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
-
-        {{pilas-interruptor deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir previsualización" texto_corto="Previs."}}
-        {{pilas-interruptor variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
+        {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
+        {{pilas-interruptor padding="pa1" resaltar=false icono="panel-central" deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir previsualización" texto_corto="Previs."}}
+        {{pilas-interruptor padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
       </div>
 
   </div>
