@@ -1907,9 +1907,11 @@ var Modo = (function (_super) {
         this.ancho = ancho;
         this.alto = alto;
         this.fps = this.add.bitmapText(5, 10, "impact", "FPS");
-        this.fps_actores = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
         this.fps.scrollFactorX = 0;
         this.fps.scrollFactorY = 0;
+        this.fps_actores = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
+        this.fps_actores.scrollFactorX = 0;
+        this.fps_actores.scrollFactorY = 0;
         this.crear_canvas_de_depuracion();
         this.pilas = datos.pilas;
     };

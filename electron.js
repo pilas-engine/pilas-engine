@@ -26,7 +26,7 @@ app.on("ready", function onReady() {
     minHeight: 650
   });
 
-  var rutas = [`${dirname}/dist/index.html`, `${dirname}/dist/assets/pilas-engine.js`, `${dirname}/dist/assets/vendor.js`, `${dirname}/dist/assets/pilas-engine.css`];
+  var rutas = [`${dirname}/dist/index.html`, `${dirname}/dist/pilas-engine.js`, `${dirname}/dist/assets/pilas-engine.js`, `${dirname}/dist/assets/vendor.js`, `${dirname}/dist/assets/pilas-engine.css`];
   let ultima_actualizacion = new Date();
 
   rutas.map(function(ruta) {
