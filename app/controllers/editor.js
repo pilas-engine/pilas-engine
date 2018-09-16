@@ -48,7 +48,6 @@ export default Controller.extend(queryParams.Mixin, {
     }
 
     if (params.ruta) {
-      alert("se tiene que cargar desde una ruta!");
       return yield this.cargar_proyecto_desde_ruta_archivo.perform(params.ruta);
     }
 
@@ -111,7 +110,7 @@ export default Controller.extend(queryParams.Mixin, {
       if (this.electron.enElectron) {
         let json = string_a_json(str);
 
-        this.electron.guardar_proyecto().then(ruta => {
+        this.electron.guardar_proyecto(this.ruta).then(ruta => {
           let proyecto = json;
           this.electron.guardar_proyecto_en_archivo(proyecto, ruta);
         });
