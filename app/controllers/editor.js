@@ -23,7 +23,6 @@ const queryParams = new QueryParams({
   fps: { defaultValue: true, replace: true },
   fisica: { defaultValue: true, replace: true },
   permitir_modo_pausa: { defaultValue: true, replace: true },
-  maximizar: { defaultValue: false, replace: true },
   oscuro: { defaultValue: false, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true }
 });
