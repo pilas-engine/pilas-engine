@@ -23,10 +23,10 @@ export default Service.extend({
       let ejemplo = data.ejemplos[i];
 
       let proyecto = yield $.ajax({
-        url: `${config.rootURL}ejemplos/proyectos/${ejemplo.nombre}.json`
+        url: `${config.rootURL}ejemplos/proyectos/${ejemplo.nombre}.pilas`
       });
 
-      if (typeof proyecto === 'string') {
+      if (typeof proyecto === "string") {
         ejemplo.proyecto = JSON.parse(proyecto);
       } else {
         ejemplo.proyecto = proyecto;
