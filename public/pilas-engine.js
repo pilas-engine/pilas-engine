@@ -419,15 +419,6 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_selecciona_actor_desde_el_editor = function (datos) {
         this.pilas.modo.destacar_actor_por_id(datos.id);
     };
-    Mensajes.prototype.atender_mensaje_alterar_estado_de_maximizacion = function (datos) {
-        var elemento_canvas = document.getElementsByTagName("canvas")[0];
-        if (datos.maximizar) {
-            elemento_canvas.classList.add("maximizar");
-        }
-        else {
-            elemento_canvas.classList.remove("maximizar");
-        }
-    };
     Mensajes.prototype.atender_mensaje_actualizar_actor_desde_el_editor = function (datos) {
         var sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
         this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
@@ -2064,6 +2055,7 @@ var ModoCargador = (function (_super) {
     }
     ModoCargador.prototype.preload = function () {
         this.pilas = pilas;
+        this.load.crossOrigin = "anonymous";
         for (var i = 0; i < pilas.recursos.imagenes.length; i++) {
             var item = pilas.recursos.imagenes[i];
             this.load.image(item.nombre, item.ruta);

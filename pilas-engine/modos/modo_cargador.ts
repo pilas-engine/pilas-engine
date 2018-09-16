@@ -9,6 +9,7 @@ class ModoCargador extends Modo {
 
   preload() {
     this.pilas = pilas; // TODO: Este acceso no debería existir, pilas es una variable global a fines de depuración en chrome, el código de pilas no debería asumir que esta variable exista de forma global.
+    this.load.crossOrigin = "anonymous";
 
     for (let i = 0; i < pilas.recursos.imagenes.length; i++) {
       let item = pilas.recursos.imagenes[i];

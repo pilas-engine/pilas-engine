@@ -20,7 +20,6 @@ export default Component.extend({
   altoFijo: false,
   porcentajeDeCarga: 0,
   cuando_termina_de_cargar: null,
-  valor_anterior_de_maximizar: false,
 
   didInsertElement() {
     let iframe = this.$("iframe")[0];
@@ -71,11 +70,6 @@ export default Component.extend({
   didReceiveAttrs() {
     if (this.contexto) {
       this.emitir_estados_de_depuracion_a_pilas();
-
-      if (this.maximizar !== this.valor_anterior_de_maximizar) {
-        this.alterar_estado_de_maximizacion(this.maximizar);
-        this.set("valor_anterior_de_maximizar", this.maximizar);
-      }
     }
   },
 
@@ -153,15 +147,6 @@ export default Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  alterar_estado_de_maximizacion(maximizar) {
-    let data = {
-      tipo: "alterar_estado_de_maximizacion",
-      maximizar
-    };
-
-    this.contexto.postMessage(data, utils.HOST);
-  },
-
   eliminar_actor_desde_el_editor({ id }) {
     let data = {
       tipo: "eliminar_actor_desde_el_editor",
@@ -206,7 +191,6 @@ export default Component.extend({
 
   finaliza_carga() {
     this.set("cargando", false);
-    this.alterar_estado_de_maximizacion(this.maximizar);
 
     if (this.cuando_termina_de_cargar) {
       this.cuando_termina_de_cargar();

@@ -9,7 +9,11 @@
           {{pilas-boton icono="abrir" desactivado=cargando accion=(action 'cuando_abre') demora=0 texto="Abrir"}}
         {{/en-electron}}
 
-        {{pilas-boton icono="guardar" desactivado=cargando accion=(action 'cuando_guarda'  proyecto) demora=1 texto="Guardar"}}
+        {{#en-electron}}
+          {{pilas-boton icono="guardar" desactivado=cargando accion=(action 'cuando_guarda'  proyecto) demora=0 texto="Guardar"}}
+        {{else}}
+          {{pilas-boton icono="guardar" desactivado=cargando accion=(action 'cuando_guarda'  proyecto) demora=1 texto="Guardar"}}
+        {{/en-electron}}
 
         {{pilas-boton-preferencias icono='preferencias' oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
       </div>
@@ -70,7 +74,6 @@
                     {{pilas-boton id='ejecutar' accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
 
                       <div class="dib f6 flex1 tr">
-                        {{pilas-interruptor texto="maximizar" variable=maximizar}}
                       </div>
 
                   {{/if}}
@@ -119,7 +122,6 @@
                   pos=pos
                   fps=fps
                   fisica=fisica
-                  maximizar=maximizar
                 }}
 
                 <div class="h2 ba br b--gray bg-light-gray mt2">
