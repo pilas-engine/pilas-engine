@@ -44,6 +44,17 @@ app.on("ready", function onReady() {
 
   delete mainWindow.module;
 
+  /*
+  let path_de_datos = app.getPath("userData");
+
+  var ruta_de_actualizacion = path.join(path_de_datos, "actualizaciones", "ultima", "index.html");
+
+  if (fs.existsSync(ruta_de_actualizacion)) {
+    emberAppLocation = "file://" + ruta_de_actualizacion;
+  }
+  */
+
+
   mainWindow.loadURL(emberAppLocation);
 
   mainWindow.webContents.on("did-fail-load", () => {
