@@ -122,7 +122,7 @@ export default Component.extend({
         var HOST = "file://";
 
         if (window.location.host) {
-          HOST = "http://" + window.location.host;
+          HOST = window.location.protocol + "//" + window.location.host;
         }
         </script>
 
