@@ -17,6 +17,7 @@ BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
 BIN_ELECTRON_REBUILD=./node_modules/.bin/electron-rebuild
 BIN_PRETTIER=./node_modules/.bin/prettier
 FLAGS_ELECTRON_PACKAGER=--asar
+VERSION_DE_ELECTRON_PARA_DISTRIBUIR=1.6.16
 
 N=[0m
 G=[01;32m
@@ -180,37 +181,37 @@ endif
 	cp prod-electron.js dist/electron.js
 	cp prod-package.json dist/package.json
 	cd dist/; npm install
-	cd dist; ../${BIN_ELECTRON_REBUILD} --arch=x64 --electron-version=1.6.10
+	cd dist; ../${BIN_ELECTRON_REBUILD} --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR}
 	$(call log, "Compilando para osx - 64 bits ...")
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-darwin-x64.tar.gz
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
-	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=darwin --arch=x64 --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.icn
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=darwin --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.icn
 	$(call log, "Compilando para windows - 32 bits ...")
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-win32-ia32.tar.gz
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
-	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=ia32 --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.ico
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=ia32 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.ico
 	$(call log, "Compilando para windows - 64 bits ...")
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-win32-x64.tar.gz
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
-	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=x64 --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.ico
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.ico
 	$(call log, "Compilando para linux - 32 bits ...")
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-linux-ia32.tar.gz
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
-	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=ia32 --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=ia32 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 	$(call log, "Compilando para linux - 64 bits ...")
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-linux-x64.tar.gz
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
-	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=x64 --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 	$(call log, "Compilando para ARM ...")
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-linux-x64.tar.gz
 	cd dist; cp build/Release/serialport.node node_modules/serialport/build/Release/
 	cd dist; rm -rf build
-	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=armv7l --electron-version=1.6.10 --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=armv7l --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
