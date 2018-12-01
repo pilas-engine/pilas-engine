@@ -67,7 +67,10 @@ export default Component.extend({
     this._super(...arguments);
 
     const subscription = event => {
-      if (event.origin != utils.HOST && event.origin != utils.HOST.replace("http:", "https:")) {
+      if (
+        event.origin != utils.HOST &&
+        event.origin != utils.HOST.replace("http:", "https:")
+      ) {
         return;
       }
 
@@ -139,9 +142,17 @@ export default Component.extend({
             overflow: hidden;
           }
 
-          .view-overlays {
-            opacity: 0.0;
+
+          /* Oculta las barras verticales para indicar identación */
+
+          .monaco-editor .lines-content .cigr {
+            box-shadow: 1px 0 0 0 transparent inset !important;
           }
+
+          .monaco-editor .lines-content .cigra {
+            box-shadow: 1px 0 0 0 transparent inset !important;
+          }
+
         </style>
 
         <script>
