@@ -5,21 +5,3 @@
 </div>
 
 {{pilas-experimentos}}
-
-<div class="ba dib relative usn">
-  Contenedor relativo para el dialogo.
-
-  {{#if mostrarDialogo}}
-    <div class="animacion-aparecer to-1 pa3 bg-white ba b-gray top-1 left-1 absolute shadow-3 z-2">
-      <h1>Contenido</h1>
-
-      <p>Este es el contenido del dialogo modal.</p>
-    </div>
-
-    <div {{action "alternar"}} class="fixed top-0 bottom-0 left-0 right-0 z-0 bg-black o-50">
-    </div>
-  {{/if}}
-
-</div>
-
-<a class="f6 link dim br2 ba bw1 ph3 pv2 mb2 dib black pointer" {{action "alternar"}}>Mostrar dialogo</a>
