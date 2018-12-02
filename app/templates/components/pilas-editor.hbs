@@ -15,7 +15,7 @@
           {{pilas-boton icono="guardar" desactivado=cargando accion=(action 'cuando_guarda'  proyecto) demora=1 texto="Guardar"}}
         {{/en-electron}}
 
-        {{pilas-boton-preferencias icono='preferencias' oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
+        {{pilas-boton-preferencias icono='preferencias' oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa modoVim=modoVim desactivado=(not estado.puedeEjecutar)}}
       </div>
 
       <div class="flex1">
@@ -146,6 +146,7 @@
             code=codigo
             oscuro=oscuro
             desactivado=(not estado.puede_editar)
+            modoVim=modoVim
             cuandoCarga=(action "cuando_termino_de_cargar_monaco_editor")
             onSave=(action "cuandoGuardaDesdeElEditor")
             onChange=(action "cuando_cambia_el_codigo")}}

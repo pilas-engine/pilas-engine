@@ -1,3 +1,9 @@
 {{yield}}
 
-{{monaco-editor}}
+
+<button {{action (mut modoVim) true}}>Activar el modo vim</button>
+<button {{action (mut modoVim) false}}>Desactivar el modo vim</button>
+
+<p>Modo vim activado: {{modoVim}}</p>
+
+{{monaco-editor modoVim=modoVim}}

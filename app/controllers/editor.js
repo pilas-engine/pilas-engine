@@ -24,6 +24,7 @@ const queryParams = new QueryParams({
   fisica: { defaultValue: true, replace: true },
   permitir_modo_pausa: { defaultValue: true, replace: true },
   oscuro: { defaultValue: false, replace: true },
+  modoVim: { defaultValue: false, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true }
 });
 
@@ -87,13 +88,17 @@ export default Controller.extend(queryParams.Mixin, {
       return EmberObject.create(escena);
     });
 
-    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
-      return EmberObject.create(tipo);
-    });
+    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(
+      tipo => {
+        return EmberObject.create(tipo);
+      }
+    );
 
-    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(tipo => {
-      return EmberObject.create(tipo);
-    });
+    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(
+      tipo => {
+        return EmberObject.create(tipo);
+      }
+    );
 
     return proyectoComoObjetoEmber;
   },

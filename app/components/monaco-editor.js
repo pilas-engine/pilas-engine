@@ -25,6 +25,8 @@ export default Component.extend({
   bus: service(),
   declaraciones: service(),
   linenumbers: true,
+  modoVim: false,
+  window: null,
 
   cuandoCambiaDeArchivo: observer("titulo", function() {
     this.cargarCodigo();
@@ -63,6 +65,16 @@ export default Component.extend({
     }
   }),
 
+  sincronizarModoVim: observer("modoVim", function() {
+    if (this.window) {
+      if (this.modoVim) {
+        this.window.activar_vim();
+      } else {
+        this.window.desactivar_vim();
+      }
+    }
+  }),
+
   init() {
     this._super(...arguments);
 
@@ -82,7 +94,11 @@ export default Component.extend({
 
       if (event.source === this.frame && event.data && event.data.message) {
         if (event.data.message === "load-complete") {
-          this.onLoadEditor(this.frame.editor, this.frame.monaco);
+          this.onLoadEditor(
+            this.frame.editor,
+            this.frame.monaco,
+            this.frame.window
+          );
         }
 
         if (event.data.message === "on-save") {
@@ -113,6 +129,7 @@ export default Component.extend({
 
     let declaraciones_de_pilas_engine_ts = this.declaraciones.obtener();
     let rootURL = this.rootURL;
+    let modoVim = this.modoVim;
 
     frameDoc.open();
     frameDoc.write(`
@@ -142,7 +159,6 @@ export default Component.extend({
             overflow: hidden;
           }
 
-
           /* Oculta las barras verticales para indicar identación */
 
           .monaco-editor .lines-content .cigr {
@@ -153,9 +169,21 @@ export default Component.extend({
             box-shadow: 1px 0 0 0 transparent inset !important;
           }
 
+          #status {
+            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-family: monospace;
+            padding: 5px;
+          }
         </style>
 
         <script>
+
+        window.onload = function() {
+
           window.require.config({
             'vs/nls' : {
               availableLanguages: {
@@ -163,11 +191,12 @@ export default Component.extend({
               }
             },
             paths: {
-              'vs': '${rootURL}vs'
+              'vs': '${rootURL}vs',
+              'monaco-vim': '${rootURL}monaco-vim',
             }
           });
 
-          window.require(['${rootURL}vs/editor/editor.main'], function () {
+          window.require(['${rootURL}vs/editor/editor.main', '${rootURL}monaco-vim/monaco-vim'], function (a, MonacoVim) {
 
             if (typeof monaco !== "undefined") {
 
@@ -196,9 +225,37 @@ export default Component.extend({
                 readOnly: ${this.readOnly},
               });
 
+              //var statusNode = document.getElementById('status');
+              //var vimMode = MonacoVim.initVimMode(editor, statusNode);
+
+
+              window.activar_vim = function() {
+                if (!window.vimMode) {
+                  var statusNode = document.getElementById('status');
+                  statusNode.innerHTML = "";
+                  var vimMode = MonacoVim.initVimMode(editor, statusNode);
+                  window.vimMode = vimMode;
+                } else {
+                  console.error("Vim ya se había activado previamente.");
+                }
+              }
+
+              window.desactivar_vim = function() {
+                if (window.vimMode) {
+                  window.vimMode.dispose();
+                  delete window.vimMode
+                } else {
+                  console.error("Vim no estaba activado.");
+                }
+              }
+
               editor.onDidChangeModelContent(function (event) {
                 window.top.postMessage({updatedCode: editor.getValue()}, HOST);
               });
+
+              if (${modoVim}) {
+                activar_vim();
+              }
 
               window.top.postMessage({message: "load-complete"}, HOST);
               window.editor = editor;
@@ -214,12 +271,19 @@ export default Component.extend({
 
             }
           });
+        }
           </script>
 
+
+
+
       </head>
+
       <body>
         <div id="monaco-editor-wrapper" style="width:100%;height:100%"></div>
+        <div id="status"></div>
       </body>
+
       </html>
 
       `);
@@ -228,9 +292,10 @@ export default Component.extend({
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
   },
 
-  onLoadEditor(editor, monaco) {
+  onLoadEditor(editor, monaco, window) {
     this.set("editor", editor);
     this.set("monaco", monaco);
+    this.set("window", window);
 
     if (this.code) {
       this.cargarCodigo();
