@@ -180,7 +180,7 @@ endif
 	$(call log, "Instalando dependencias de produccion ...")
 	cp prod-electron.js dist/electron.js
 	cp prod-package.json dist/package.json
-	cd dist/; npm install
+	cd dist/; yarn install
 	cd dist; ../${BIN_ELECTRON_REBUILD} --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR}
 	$(call log, "Compilando para osx - 64 bits ...")
 	cd dist; tar xvzf ../extras/serialport-v5.1.0-beta5-electron-v53-darwin-x64.tar.gz
@@ -266,7 +266,7 @@ actualizar_phaser:
 	@echo "${Y}Para actualizar phaser, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y} - Subir el número de versión de package.json.${N}"
-	@echo "${Y} - Ejecutar npm install.${N}"
+	@echo "${Y} - Ejecutar yarn install.${N}"
 	@echo "${Y} - Copiar phaser al directorio public:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/phaser/dist/phaser.js public/${N}"
@@ -276,7 +276,7 @@ actualizar_typescript:
 	@echo "${Y}Para actualizar typescript, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y} - Subir el número de versión de package.json.${N}"
-	@echo "${Y} - Ejecutar npm install.${N}"
+	@echo "${Y} - Ejecutar yarn install.${N}"
 	@echo "${Y} - Copiar typescript.js al directorio public:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/typescript/lib/typescript.js public${N}"
@@ -289,7 +289,7 @@ actualizar_jsbeautify:
 	@echo "${Y}Para actualizar jsbeautify, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y} - Subir el número de versión de package.json.${N}"
-	@echo "${Y} - Ejecutar npm install.${N}"
+	@echo "${Y} - Ejecutar yarn install.${N}"
 	@echo "${Y} - Copiar el archivo beautify.js al directorio vendor:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/js-beautify/js/lib/beautify.js vendor${N}"
