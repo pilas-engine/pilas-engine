@@ -2,6 +2,7 @@
 
 * [Introducción](README.md)
 * [Primeros pasos](primeros_pasos.md)
+* [El intérprete](interprete.md)
 * [Autómatas y estados](automatas_y_estados.md)
 * [Animaciones](animaciones.md)
 * [Etiquetas](etiquetas.md)
