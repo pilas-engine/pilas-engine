@@ -15,7 +15,7 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     await visit("/");
 
     await pulsar("Abrir el editor");
-    assert.equal(currentURL(), "/editor");
+    assert.equal(currentURL(), "/editor", "accede al editor correctamente");
 
     await esperarElemento("a#ejecutar");
 
@@ -25,11 +25,12 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     await pulsar("Detener");
     await esperar(PAUSA);
 
-    assert.equal($("[data-test='nombre-de-escena']").text(), "escena1escena2");
+    assert.equal($("[data-test='nombre-de-escena']").text(), "escena1escena2", "Corrobora que hay dos escenas (escena1 y escena2)");
 
     await click("#boton-eliminar-escena");
     await pulsar("Sí");
-    assert.equal($("[data-test='nombre-de-escena']").text(), "escena2");
+
+    assert.equal($("[data-test='nombre-de-escena']").text(), "escena2", "Quedó una sola escena (escena2)");
     await esperar(PAUSA);
   });
 });

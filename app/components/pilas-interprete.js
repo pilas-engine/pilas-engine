@@ -2,6 +2,7 @@ import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import autocompletar from "pilas-engine/utils/autocompletar";
 import {task, timeout} from "ember-concurrency";
+import ENV from "pilas-engine/config/environment";
 
 /*
  *
@@ -51,6 +52,11 @@ export default Component.extend({
   },
 
   actualizar_diccionario_de_actores: task(function*() {
+    if (ENV.environment === "test") {
+      console.warn("Evitando actualizar el intérprete en modo test.");
+      return null;
+    }
+
     while (true) {
       yield timeout(2000);
 
@@ -87,7 +93,7 @@ export default Component.extend({
             //       diccionario como "actores".
             resultado = JSON.stringify(resultado);
           } catch(_) {
-
+            console.warn("No se puede convertir este objeto a json");
           }
 
           this.log.info(resultado);
