@@ -279,6 +279,7 @@ class ModoEjecucion extends Modo {
     return actor;
   }
 
+
   obtener_referencias_a_clases() {
     let codigoDeExportacion = this.obtener_codigo_para_exportar_clases(this.codigo);
     let codigo_completo = this.codigo + codigoDeExportacion;

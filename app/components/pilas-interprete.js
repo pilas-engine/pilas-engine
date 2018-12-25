@@ -1,7 +1,15 @@
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import autocompletar from "pilas-engine/utils/autocompletar";
+import {task, timeout} from "ember-concurrency";
 
+/*
+ *
+ * Nota: este componente también se encarga de mantener actualizada la
+ *       variable `actores` para que siempre referencie al diccionario que
+ *       contiene acceso a todos los actores de la escena en ese momento
+ *       particular.
+ */
 export default Component.extend({
   valor: "",
   log: service(),
@@ -13,6 +21,7 @@ export default Component.extend({
 
   didInsertElement() {
     this.set("historial", []);
+
     new autoComplete({
       selector: this.$("#input")[0],
       minChars: 1,
@@ -21,22 +30,35 @@ export default Component.extend({
       }
     });
 
-    this.bus.on("finaliza_carga", this, "finaliza_carga");
+    this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "activar_interprete");
+
+    this.actualizar_diccionario_de_actores.perform();
     this.log.limpiar();
   },
 
-  finaliza_carga(pilas, contexto) {
+  activar_interprete(pilas, contexto) {
     this.set("pilas", pilas);
+
     this.set("contexto", contexto);
   },
 
   willDestroyElement() {
-    this.bus.off("finaliza_carga", this, "finaliza_carga");
+    this.bus.off("cuando_termina_de_iniciar_ejecucion", this, "activar_interprete");
   },
 
   autocompletar(termino, success) {
     success(autocompletar(this.contexto, termino));
   },
+
+  actualizar_diccionario_de_actores: task(function*() {
+    while (true) {
+      yield timeout(2000);
+
+      if (this.contexto) {
+        this.contexto.eval("window.actores = pilas.obtener_diccionario_de_actores();");
+      }
+    }
+  }),
 
   actions: {
     cuandoPulsaEnter() {
@@ -56,7 +78,20 @@ export default Component.extend({
 
         try {
           resultado = this.contexto.eval(v);
+
+          try {
+            // Intenta poner en una representación de texto legible
+            // algo como un diccionario serializable.
+            //
+            // TODO: esto debería poder convertir un objeto más complejo o un
+            //       diccionario como "actores".
+            resultado = JSON.stringify(resultado);
+          } catch(_) {
+
+          }
+
           this.log.info(resultado);
+
         } catch (error) {
           this.log.error(error);
         }

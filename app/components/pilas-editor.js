@@ -413,6 +413,7 @@ export default Component.extend({
 
       this.log.limpiar();
       this.log.info("Ingresando en modo ejecución");
+      this.log.info("Puedes usar las variables pilas o actores.");
     },
     detener() {
       this.set("existe_un_error_reciente", false);
@@ -420,7 +421,7 @@ export default Component.extend({
       this.set("estado", this.estado.detener());
       this.bus.trigger("hacerFocoEnElEditor", {});
       this.log.limpiar();
-      this.log.info("Ingreando al modo edición");
+      this.log.info("Ingresando al modo edición");
     },
     pausar() {
       this.set("existe_un_error_reciente", false);

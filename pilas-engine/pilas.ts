@@ -106,13 +106,13 @@ class Pilas {
 
   crear_configuracion(ancho, alto) {
     return {
-      type: Phaser.AUTO,
+      type: Phaser.AUTO, // CANVAS, WEBGL o AUTO
       parent: "game",
       width: ancho,
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: false,
+      pixelArt: false, // true es más rápido
       input: {
         keyboard: true,
         mouse: true,
@@ -141,8 +141,22 @@ class Pilas {
     return this.escena.actores;
   }
 
+  obtener_actor_por_nombre(nombre: string) {
+    return this.obtener_actores().find(actor => actor.nombre === nombre);
+  }
+
   obtener_cantidad_de_actores() {
     return this.obtener_actores().length;
+  }
+
+  obtener_diccionario_de_actores() {
+    let diccionario = {};
+
+    this.obtener_actores().map(actor => {
+      diccionario[actor.nombre] = actor;
+    });
+
+    return diccionario;
   }
 
   obtener_actores_en(_x: number, _y: number) {

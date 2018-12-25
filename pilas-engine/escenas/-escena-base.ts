@@ -19,6 +19,26 @@ class EscenaBase {
     this.actores.push(actor);
   }
 
+  /*
+   * Retorna un posible nombre para un actor sin que se repita con uno existente.
+   *
+   * Por ejemplo si se invoca con un nombre propuesto tipo 'nave' en una
+   * escena que ya tiene dos actores llamados 'nave1' y 'nave2' esta función
+   * retornará el nombre 'nave3'.
+   */
+  obtener_nombre_para(nombre_propuesto: string) {
+    let nombres_que_pueden_colisionar = this.actores.map(e=> e.nombre).filter(e => e.startsWith(nombre_propuesto))
+    let contador = 1;
+    let nombre_a_sugerir = nombre_propuesto;
+
+    while (nombres_que_pueden_colisionar.indexOf(nombre_a_sugerir) > -1) {
+      contador += 1;
+      nombre_a_sugerir = nombre_propuesto + contador;
+    }
+
+    return nombre_a_sugerir;
+  }
+
   serializar() {
     return {
       camara_x: this.camara.x,

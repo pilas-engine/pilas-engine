@@ -13,6 +13,11 @@ class Actores {
     // propiedades iniciales.
     let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
 
+    if (!p.nombre) {
+      let nombre_asignado = this.pilas.escena.obtener_nombre_para(nombre)
+      p.nombre = nombre_asignado;
+    }
+
     actor.pre_iniciar(p);
     actor.iniciar();
     return actor;
