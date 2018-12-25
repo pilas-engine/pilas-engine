@@ -19,6 +19,10 @@ var Actores = (function () {
         var clase = window[nombre];
         var actor = new clase(this.pilas);
         var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
+        if (!p.nombre) {
+            var nombre_asignado = this.pilas.escena.obtener_nombre_para(nombre);
+            p.nombre = nombre_asignado;
+        }
         actor.pre_iniciar(p);
         actor.iniciar();
         return actor;
@@ -616,8 +620,18 @@ var Pilas = (function () {
     Pilas.prototype.obtener_actores = function () {
         return this.escena.actores;
     };
+    Pilas.prototype.obtener_actor_por_nombre = function (nombre) {
+        return this.obtener_actores().find(function (actor) { return actor.nombre === nombre; });
+    };
     Pilas.prototype.obtener_cantidad_de_actores = function () {
         return this.obtener_actores().length;
+    };
+    Pilas.prototype.obtener_diccionario_de_actores = function () {
+        var diccionario = {};
+        this.obtener_actores().map(function (actor) {
+            diccionario[actor.nombre] = actor;
+        });
+        return diccionario;
     };
     Pilas.prototype.obtener_actores_en = function (_x, _y) {
         var _a = this.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y), x = _a.x, y = _a.y;
@@ -1817,6 +1831,16 @@ var EscenaBase = (function () {
     }
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
+    };
+    EscenaBase.prototype.obtener_nombre_para = function (nombre_propuesto) {
+        var nombres_que_pueden_colisionar = this.actores.map(function (e) { return e.nombre; }).filter(function (e) { return e.startsWith(nombre_propuesto); });
+        var contador = 1;
+        var nombre_a_sugerir = nombre_propuesto;
+        while (nombres_que_pueden_colisionar.indexOf(nombre_a_sugerir) > -1) {
+            contador += 1;
+            nombre_a_sugerir = nombre_propuesto + contador;
+        }
+        return nombre_a_sugerir;
     };
     EscenaBase.prototype.serializar = function () {
         return {

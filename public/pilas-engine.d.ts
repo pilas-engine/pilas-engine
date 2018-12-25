@@ -189,7 +189,9 @@ declare class Pilas {
     };
     reproducir_sonido(nombre: string): void;
     obtener_actores(): Actor[];
+    obtener_actor_por_nombre(nombre: string): Actor;
     obtener_cantidad_de_actores(): number;
+    obtener_diccionario_de_actores(): {};
     obtener_actores_en(_x: number, _y: number): Actor[];
     escena_actual(): Escena;
     animar(actor: any, propiedad: any, valor: any, duracion?: number): void;
@@ -519,6 +521,7 @@ declare class EscenaBase {
     control: Control;
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
+    obtener_nombre_para(nombre_propuesto: string): string;
     serializar(): {
         camara_x: any;
         camara_y: number;
