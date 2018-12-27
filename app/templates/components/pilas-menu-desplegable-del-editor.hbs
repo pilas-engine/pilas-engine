@@ -1,0 +1,21 @@
+{{pilas-boton dataTest="boton-preferencias-del-editor" icono="preferencias" accion=(action "mostrar")}}
+
+{{#if mostrar}}
+  <div class="fixed z-1 absolute--fill" {{action "ocultar"}}></div>
+
+  <div class="absolute bg-white ba b--light-gray shadow-4 right-1 top-1 pa2 w5 f7 z-999">
+
+    <div class="">
+      {{pilas-interruptor dataTest="boton-modo-oscuro" variable=oscuro texto="Modo oscuro"}}
+    </div>
+
+    <div>
+      Tamaño de texto: {{pilas-boton dataTest="boton-disminuir" texto="-" accion=(action "disminuir")}} <div class='dib pointer' {{action "restaurar"}}>{{tamano}}pt</div> {{pilas-boton dataTest="boton-aumentar" texto="+" accion=(action "aumentar")}}
+    </div>
+
+    <div class="">
+      {{pilas-interruptor dataTest="boton-modo-vim" variable=modoVim texto="Modo VIM (experimental)"}}
+    </div>
+
+  </div>
+{{/if}}

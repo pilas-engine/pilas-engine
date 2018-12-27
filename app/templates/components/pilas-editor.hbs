@@ -15,7 +15,7 @@
           {{pilas-boton icono="guardar" desactivado=cargando accion=(action 'cuando_guarda'  proyecto) demora=1 texto="Guardar"}}
         {{/en-electron}}
 
-        {{pilas-boton-preferencias icono='preferencias' oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa modoVim=modoVim desactivado=(not estado.puedeEjecutar)}}
+        {{pilas-boton-preferencias icono='preferencias' permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
       </div>
 
       <div class="flex1">
@@ -24,7 +24,7 @@
       <div class="pa2 truncate">
         {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
         {{pilas-interruptor padding="pa1" resaltar=false icono="panel-central" deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir previsualización" texto_corto="Previs."}}
-        {{pilas-interruptor padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
+        {{pilas-interruptor dataTest='panel-derecho' padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
       </div>
 
   </div>
@@ -69,7 +69,7 @@
       <div class="flex {{if debe_expandir_el_panel_de_previsualizacion 'flex1' 'w5'}} flex-column bg-white pa2 unselectable">
         <!-- Canvas -->
 
-                <div class='mb2 flex'>
+                <div class='mb2 flex' style="padding-bottom: 3px ">
                   {{#if estado.puedeEjecutar}}
                     {{pilas-boton id='ejecutar' accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
 
@@ -109,7 +109,10 @@
                   {{/if}}
 
                   {{#if estado.ModoCargando}}
-                    {{pilas-skeleton ancho=80 alto=30}}
+                    {{pilas-skeleton ancho=100 alto=40}}
+                    <div style='height: 30px; display: inline-block'>
+                      &nbsp;
+                    </div>
                   {{/if}}
                 </div>
 
@@ -141,16 +144,25 @@
 
       <div class="flex1 {{if mostrarEditor 'flex flex-column' 'dn'}} bl b--light-silver {{if oscuro 'bg-black'}}">
 
+        <div class="unselectable pa2 flex bg-white">
+          <div class="flex1">
+          </div>
+
+          <div class="relative">
+            {{pilas-menu-desplegable-del-editor tamano=tamano modoVim=modoVim oscuro=oscuro}}
+          </div>
+        </div>
+
         {{monaco-editor
             titulo=tituloDelCodigo
             code=codigo
             oscuro=oscuro
             desactivado=(not estado.puede_editar)
             modoVim=modoVim
+            tamano=tamano
             cuandoCarga=(action "cuando_termino_de_cargar_monaco_editor")
             onSave=(action "cuandoGuardaDesdeElEditor")
             onChange=(action "cuando_cambia_el_codigo")}}
-
       </div>
 
     </div>

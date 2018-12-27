@@ -43,7 +43,15 @@ export default Component.extend({
   }),
 
   didInsertElement() {
-    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
+    this.set("lista_de_eventos", [
+      "finaliza_carga",
+      "error",
+      "termina_de_mover_un_actor",
+      "comienza_a_mover_un_actor",
+      "inicia_modo_depuracion_en_pausa",
+      "cuando_cambia_posicion_dentro_del_modo_pausa",
+      "pulsa_la_tecla_escape"
+    ]);
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
@@ -60,17 +68,26 @@ export default Component.extend({
     this.bus.trigger("hacer_foco_en_pilas", {});
   },
 
-  debe_expandir_el_panel_de_previsualizacion: computed("expandirJuego", "mostrarEditor", "mostrarPropiedades", function() {
-    if (this.mostrarEditor) {
-      return this.expandirJuego;
-    } else {
-      return true;
+  debe_expandir_el_panel_de_previsualizacion: computed(
+    "expandirJuego",
+    "mostrarEditor",
+    "mostrarPropiedades",
+    function() {
+      if (this.mostrarEditor) {
+        return this.expandirJuego;
+      } else {
+        return true;
+      }
     }
-  }),
+  ),
 
-  puede_intentar_expandir_el_panel_de_previsualizacion: computed("mostrarEditor", "mostrarPropiedades", function() {
-    return this.mostrarEditor;
-  }),
+  puede_intentar_expandir_el_panel_de_previsualizacion: computed(
+    "mostrarEditor",
+    "mostrarPropiedades",
+    function() {
+      return this.mostrarEditor;
+    }
+  ),
 
   existe_actor_o_escena_con_id(id) {
     let escena = this.obtenerDetalleDeEscenaPorIndice(id);
@@ -174,7 +191,10 @@ export default Component.extend({
     }
 
     let escenaComoJSON = JSON.parse(JSON.stringify(escena));
-    this.bus.trigger("cargar_escena", { escena: escenaComoJSON, proyecto: this.proyecto });
+    this.bus.trigger("cargar_escena", {
+      escena: escenaComoJSON,
+      proyecto: this.proyecto
+    });
   },
 
   obtener_la_escena_actual() {
@@ -199,7 +219,9 @@ export default Component.extend({
     this.set("hay_cambios_por_guardar", true);
 
     let escenaActual = this.obtener_la_escena_actual();
-    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
+    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(
+      escenaActual
+    );
     this.set("proyecto.escenas", escenasSinLaEscenaActual);
 
     if (this.el_proyecto_no_tiene_escena()) {

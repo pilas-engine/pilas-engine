@@ -62,7 +62,9 @@ class Pilas {
 
   iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
     if (!recursos) {
-      throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
+      throw Error(
+        "No se puede iniciar phaser sin especificar una lista de recursos"
+      );
     }
 
     this._ancho = ancho;
@@ -72,10 +74,10 @@ class Pilas {
     var configuracion = this.crear_configuracion(ancho, alto);
 
     if (opciones.esperar_antes_de_iniciar) {
-      console.log("Esperando 5 segundos antes de iniciar ...");
+      console.log("Esperando 1 segundo antes de iniciar ...");
       setTimeout(() => {
         this.iniciar_phaser_desde_configuracion(configuracion);
-      }, 5000);
+      }, 1000);
     } else {
       this.iniciar_phaser_desde_configuracion(configuracion);
     }
@@ -160,7 +162,10 @@ class Pilas {
   }
 
   obtener_actores_en(_x: number, _y: number) {
-    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
+    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      _x,
+      _y
+    );
     let actores = this.obtener_actores();
 
     return actores.filter(actor => {

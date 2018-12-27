@@ -75,6 +75,12 @@ export default Component.extend({
     }
   }),
 
+  sincronizarTamano: observer("tamano", function() {
+    if (this.monaco) {
+      this.editor.updateOptions({ fontSize: this.get("tamano") });
+    }
+  }),
+
   init() {
     this._super(...arguments);
 
@@ -214,7 +220,7 @@ export default Component.extend({
                 minimap: {
                   enabled: false
                 },
-                fontSize: 14,
+                fontSize: ${this.tamano},
                 theme: theme,
                 tabSize: 4,
                 autoClosingBrackets: true,
