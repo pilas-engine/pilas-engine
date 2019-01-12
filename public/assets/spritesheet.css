@@ -103,45 +103,52 @@
 	background-size: 290px 270px;
 }
 
-.error {
+.demo {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -2px -198px;
 	background-size: 290px 270px;
 }
 
-.escena {
+.error {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -30px -198px;
 	background-size: 290px 270px;
 }
 
-.detener {
+.escena {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -58px -198px;
 	background-size: 290px 270px;
 }
 
-.guardar {
+.desplegar {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -86px -198px;
 	background-size: 290px 270px;
 }
 
-.si {
+.guardar {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -114px -198px;
 	background-size: 290px 270px;
 }
 
-.info {
+.si {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -142px -198px;
+	background-size: 290px 270px;
+}
+
+.info {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -170px -198px;
 	background-size: 290px 270px;
 }
 
@@ -152,70 +159,77 @@
 	background-size: 290px 270px;
 }
 
-.arduino {
-    width: 24px;
-    height: 24px;
-    background: url("spritesheet.png") -198px -198px;
-	background-size: 290px 270px;
-}
-
-.no {
+.detener {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -226px -198px;
 	background-size: 290px 270px;
 }
 
-.ejecutar {
+.no {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -2px -226px;
 	background-size: 290px 270px;
 }
 
-.preferencias {
+.arduino {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -30px -226px;
 	background-size: 290px 270px;
 }
 
-.abrir {
+.preferencias {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -58px -226px;
 	background-size: 290px 270px;
 }
 
-.actores {
+.plegar {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -86px -226px;
 	background-size: 290px 270px;
 }
 
-.demo {
+.ejecutar {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -114px -226px;
 	background-size: 290px 270px;
 }
 
-.pausa {
+.abrir {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -142px -226px;
 	background-size: 290px 270px;
 }
 
-.volver {
+.actores {
     width: 24px;
     height: 24px;
     background: url("spritesheet.png") -170px -226px;
 	background-size: 290px 270px;
 }
 
-.panel-izquierdo-off {
+.pausa {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -198px -226px;
+	background-size: 290px 270px;
+}
+
+.volver {
+    width: 24px;
+    height: 24px;
+    background: url("spritesheet.png") -226px -226px;
+	background-size: 290px 270px;
+}
+
+.panel-izquierdo-on {
     width: 18px;
     height: 14px;
     background: url("spritesheet.png") -208px -178px;
@@ -232,28 +246,28 @@
 .panel-derecho-off {
     width: 18px;
     height: 14px;
-    background: url("spritesheet.png") -198px -226px;
+    background: url("spritesheet.png") -2px -254px;
 	background-size: 290px 270px;
 }
 
 .panel-central-on {
     width: 18px;
     height: 14px;
-    background: url("spritesheet.png") -220px -226px;
+    background: url("spritesheet.png") -24px -254px;
 	background-size: 290px 270px;
 }
 
 .panel-central-off {
     width: 18px;
     height: 14px;
-    background: url("spritesheet.png") -242px -226px;
+    background: url("spritesheet.png") -46px -254px;
 	background-size: 290px 270px;
 }
 
-.panel-izquierdo-on {
+.panel-izquierdo-off {
     width: 18px;
     height: 14px;
-    background: url("spritesheet.png") -2px -254px;
+    background: url("spritesheet.png") -68px -254px;
 	background-size: 290px 270px;
 }
 
@@ -288,7 +302,7 @@
 .actor {
     width: 24px;
     height: 24px;
-    background: url("spritesheet.png") -170px -198px;
+    background: url("spritesheet.png") -198px -198px;
 	background-size: 290px 270px;
 }
 

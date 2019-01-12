@@ -1,5 +1,5 @@
-import Evented from '@ember/object/evented';
-import Service from '@ember/service';
+import Evented from "@ember/object/evented";
+import Service from "@ember/service";
 
 /*
  * Este servicio permite mantener en comunicación varias partes del sistema
@@ -30,6 +30,8 @@ import Service from '@ember/service';
  * - se_actualiza_el_log
  * - selecciona_actor_desde_el_editor
  * - termina_de_mover_un_actor
+ * - plegar_codigo
+ * - expandir_codigo
  *
  */
 

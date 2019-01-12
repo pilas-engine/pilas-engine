@@ -296,6 +296,8 @@ export default Component.extend({
     frameDoc.close();
 
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
+    this.bus.on("plegar_codigo", this, "plegar_codigo");
+    this.bus.on("expandir_codigo", this, "expandir_codigo");
   },
 
   onLoadEditor(editor, monaco, window) {
@@ -328,9 +330,19 @@ export default Component.extend({
     }
   },
 
+  plegar_codigo() {
+    this.editor.getAction("editor.foldLevel2").run();
+  },
+
+  expandir_codigo() {
+    this.editor.getAction("editor.unfoldAll").run();
+  },
+
   willDestroyElement() {
     this._super(...arguments);
     window.removeEventListener("message", this._subscription);
-    this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
+    this.bus.off("hacerFocoEnElEditor", this, "hacerFoco");
+    this.bus.off("plegar_codigo", this, "plegar_codigo");
+    this.bus.off("expandir_codigo", this, "expandir_codigo");
   }
 });

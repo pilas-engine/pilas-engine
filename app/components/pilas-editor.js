@@ -567,6 +567,14 @@ export default Component.extend({
 
     cuando_abre() {
       this.cuandoIntentaAbrir();
+    },
+
+    plegar_codigo() {
+      this.bus.trigger("plegar_codigo");
+    },
+
+    expandir_codigo() {
+      this.bus.trigger("expandir_codigo");
     }
   }
 });
