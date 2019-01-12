@@ -3,7 +3,7 @@ class Modo extends Phaser.Scene {
   actores: any;
   pilas: Pilas;
   fps: any;
-  fps_actores: any;
+  fps_extra: any;
   graphics: any;
   fondo: any;
   _nombre_del_fondo: string = "";
@@ -22,9 +22,9 @@ class Modo extends Phaser.Scene {
     this.fps.scrollFactorX = 0;
     this.fps.scrollFactorY = 0;
 
-    this.fps_actores = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
-    this.fps_actores.scrollFactorX = 0;
-    this.fps_actores.scrollFactorY = 0;
+    this.fps_extra = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
+    this.fps_extra.scrollFactorX = 0;
+    this.fps_extra.scrollFactorY = 0;
 
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
@@ -60,11 +60,18 @@ class Modo extends Phaser.Scene {
         this.fps.alpha = 1;
         this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
 
-        this.fps_actores.alpha = 1;
-        this.fps_actores.text = "ACTORES: " + actores.length;
+        let x = this.pilas.cursor_x;
+        let y = this.pilas.cursor_y;
+
+        this.fps_extra.alpha = 1;
+        this.fps_extra.text = [
+          `ACTORES: ${actores.length}`,
+          `CURSOR X: ${x}`,
+          `CURSOR Y: ${y}`
+        ].join("\n");
       } else {
         this.fps.alpha = 0;
-        this.fps_actores.alpha = 0;
+        this.fps_extra.alpha = 0;
       }
     }
 
@@ -106,7 +113,10 @@ class Modo extends Phaser.Scene {
   }
 
   actualizar_sprite_desde_datos(sprite, actor) {
-    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      actor.x,
+      actor.y
+    );
     sprite.setTexture(actor.imagen);
 
     sprite.id = actor.id;
@@ -120,7 +130,10 @@ class Modo extends Phaser.Scene {
     sprite.alpha = 1 - actor.transparencia / 100;
 
     if (sprite.figura) {
-      this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
+        this.pilas.modo.matter.world.localWorld,
+        sprite.figura
+      );
     }
 
     if (actor.figura) {
@@ -159,29 +172,50 @@ class Modo extends Phaser.Scene {
   }
 
   crear_figura_estatica_para(actor) {
-    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
-    let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
+    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      actor.x,
+      actor.y
+    );
+    let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(
+      -actor.rotacion
+    );
 
     if (actor.figura === "rectangulo") {
-      return this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
-        isStatic: true,
-        angle: angulo
-      });
+      return this.matter.add.rectangle(
+        coordenada.x,
+        coordenada.y,
+        actor.figura_ancho,
+        actor.figura_alto,
+        {
+          isStatic: true,
+          angle: angulo
+        }
+      );
     }
 
     if (actor.figura === "circulo") {
-      return this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true });
+      return this.matter.add.circle(
+        coordenada.x,
+        coordenada.y,
+        actor.figura_radio,
+        { isStatic: true }
+      );
     }
 
     throw Error(`No se reconoce la figura ${actor.figura} en este modo.`);
   }
 
   posicionar_la_camara(datos_de_la_escena) {
-    this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
+    this.cameras.cameras[0].setScroll(
+      datos_de_la_escena.camara_x,
+      -datos_de_la_escena.camara_y
+    );
   }
 
   actualizar_posicion(posicion: any = null) {
-    throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
+    throw Error(
+      "No se puede actualizar posicion en este modo. Solo se puede en el modo pausa."
+    );
   }
 
   dibujar_punto_de_control(graphics, x, y) {
