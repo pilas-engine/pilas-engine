@@ -9,8 +9,11 @@
       {{pilas-interruptor dataTest="boton-modo-oscuro" variable=oscuro texto="Modo oscuro"}}
     </div>
 
-    <div>
-      Tamaño de texto: {{pilas-boton dataTest="boton-disminuir" texto="-" accion=(action "disminuir")}} <div class='dib pointer' {{action "restaurar"}}>{{tamano}}pt</div> {{pilas-boton dataTest="boton-aumentar" texto="+" accion=(action "aumentar")}}
+    <div class="pa2">
+      Tamaño de texto:
+        {{pilas-boton dataTest="boton-disminuir" class="button link pointer hover-bg-black-10 unselectable ph1 mh1" texto="-" accion=(action "disminuir")}}
+        <div class='dib pointer' {{action "restaurar"}}>{{tamano}}pt</div>
+        {{pilas-boton dataTest="boton-aumentar" class="button link pointer hover-bg-black-10 unselectable ph1 mh1" texto="+" accion=(action "aumentar")}}
     </div>
 
     <div class="">
