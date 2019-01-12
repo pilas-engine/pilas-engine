@@ -203,3 +203,11 @@ body {
     display: none !important;
   }
 }
+
+.hover-border {
+  border-color: white;
+}
+
+.hover-border:hover {
+  border-color: black;
+}
