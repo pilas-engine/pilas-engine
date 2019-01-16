@@ -9,40 +9,38 @@ export default function autocompletar(contexto, texto) {
     return atributos;
   }
 
-  function comienza_con(cadena, texto_a_consultar) {
-    return cadena.indexOf(texto_a_consultar) === 0;
+  function adjuntar_prefijo(prefijo, elemento) {
+    if (prefijo) {
+      return `${prefijo}.${elemento}`;
+    } else {
+      return elemento;
+    }
   }
 
-
-  function completar(contexto, tokens) {
-
-    if (!contexto) {
-      return [];
-    }
-
-    if (!tokens) {
-      return obtener_atributos(contexto);
-    }
-
+  function autocompletar(tokens, contexto, finaliza_con_punto, prefijo) {
     let primer_elemento = tokens.shift();
 
-    if (!contexto[primer_elemento]) {
-      return obtener_atributos(contexto).filter(e => comienza_con(e, primer_elemento));
+    if (tokens.length > 0) {
+      return autocompletar(
+        tokens,
+        contexto[primer_elemento],
+        finaliza_con_punto,
+        prefijo
+      );
     }
 
-    return completar(contexto[primer_elemento], tokens);
+    if (!finaliza_con_punto) {
+      return obtener_atributos(contexto)
+        .filter(e => e.startsWith(primer_elemento))
+        .map(e => adjuntar_prefijo(prefijo, e));
+    } else {
+      return obtener_atributos(contexto).map(e => adjuntar_prefijo(prefijo, e));
+    }
   }
 
-  let tokens = texto.split('.');
-  let items = completar(contexto, tokens);
+  let tokens = texto.split(".");
+  let finaliza_con_punto = texto.endsWith(".");
+  let prefijo = texto.substring(0, texto.lastIndexOf("."));
 
-  let prefijo = texto.split('.');
-  prefijo.pop();
-
-  if (prefijo.length >= 1) {
-    return items.map(e => prefijo.join(".") + "." + e);
-  } else {
-    return items;
-  }
-
+  return autocompletar(tokens, contexto, finaliza_con_punto, prefijo);
 }
