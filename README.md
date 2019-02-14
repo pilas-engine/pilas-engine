@@ -94,6 +94,15 @@ Además, es muy importante que tengas configurado tu editor para usar
 automáticamente prettier (https://prettier.io/).
 
 
+## Créditos
+
+Este proyecto es posible gracias a la comunidad de pilas-engine, y a la existencia
+de varias herramientas y bibliotecas como:
+
+- https://phaser.io/
+- https://github.com/jdotrjs/phaser3-nineslice/
+- https://electronjs.org/
+
 
 ## Próximas tareas a desarrollar
 

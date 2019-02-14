@@ -251,10 +251,17 @@
       "nombre": "carta_azul",
       "ruta": "imagenes/carta_azul.png"
     },
-
     {
       "nombre": "carta_verde",
       "ruta": "imagenes/carta_verde.png"
+    },
+    {
+      "nombre": "gris",
+      "ruta": "imagenes/redimensionables/gris.png"
+    },
+    {
+      "nombre": "dialogo",
+      "ruta": "imagenes/redimensionables/dialogo.png"
     }
   ],
 
