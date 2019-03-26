@@ -9,7 +9,7 @@
       </div>
 
       <div class="tc lato">
-        <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong></p>
+        <p>{{t 'principal.bienvenida' htmlSafe=true}}</p>
       </div>
 
 
@@ -18,7 +18,7 @@
         <div class="flex items-center justify-center">
           {{pilas-boton-principal
             icono="computadora"
-            texto="Abrir el editor"
+            texto=(t "principal.abrir_editor")
             ruta="editor"
             queryParams=(query-params ruta=null)
             id='abrir-editor'
@@ -26,7 +26,7 @@
 
           {{pilas-boton-principal
             icono="manual"
-            texto="Abrir el manual"
+            texto=(t 'principal.abrir_manual')
             ruta="manual"
           }}
         </div>
@@ -34,15 +34,15 @@
         <div class="flex items-center justify-center">
           {{pilas-boton-principal
             icono="ejemplos"
-            texto="Explorar ejemplos"
+            texto=(t "principal.explorar_ejemplos")
             ruta="ejemplos"
           }}
 
           {{pilas-boton-principal
             icono="actores"
-            texto="Explorar actores"
+            texto=(t 'principal.explorar_actores')
             ruta="actores"
-            id='abrir-actores'
+            id="abrir-actores"
           }}
 
         </div>
@@ -50,13 +50,13 @@
         <div class="flex items-center justify-center">
           {{pilas-boton-principal
             icono="api"
-            texto="Manual avanzado"
+            texto=(t "principal.manual_avanzado")
             ruta="api"
           }}
 
           {{pilas-boton-principal
             icono="info_squared"
-            texto="Acerca de pilas"
+            texto=(t "principal.acerca_de")
             ruta="acercade"
           }}
 

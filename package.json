@@ -48,6 +48,7 @@
     "ember-concurrency": "^0.8.12",
     "ember-data": "~3.3.0",
     "ember-export-application-global": "^2.0.0",
+    "ember-intl": "^3.5.2",
     "ember-keyboard": "^3.0.2",
     "ember-load-initializers": "^1.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",

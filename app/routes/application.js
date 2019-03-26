@@ -11,12 +11,14 @@ export default Route.extend({
   actores: service(),
   estadisticas: service(),
   recursos: service(),
+  intl: service(),
 
   model() {
     this.electron.iniciar();
     this.bus.iniciar();
     this.log.iniciar();
     this.estadisticas.iniciar();
+    this.intl.setLocale(["es"]);
 
     return hash({
       actores: this.actores.iniciar(),
