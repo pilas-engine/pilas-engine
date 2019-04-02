@@ -17,12 +17,16 @@ module.exports = function(environment) {
     },
 
     APP: {}
+
+    /*
+    keyManagerConfig: {
+      isDisabledOnInput: true
+    }
+    */
   };
 
   if (environment === "development") {
   }
-
-
 
   if (environment === "test") {
     ENV.locationType = "none";

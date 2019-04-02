@@ -211,3 +211,7 @@ body {
 .hover-border:hover {
   border-color: black;
 }
+
+span {
+  outline: 0;
+}

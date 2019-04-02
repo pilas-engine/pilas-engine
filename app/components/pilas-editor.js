@@ -548,6 +548,12 @@ export default Component.extend({
 
       this.send("agregar_actor", this.proyecto, actor);
     },
+    cuando_intenta_duplicar_x10(id) {},
+    /*
+    cuando_intenta_duplicar_x10(id) {
+      alert("duplicar x10!");
+    },
+    */
     cuando_intenta_eliminar(id) {
       this.set("hay_cambios_por_guardar", true);
 

@@ -1,1 +1,4 @@
-<button data-test='boton-duplicar' class='bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0' {{action accion bubbles=false}}>{{pilas-icono icono="duplicar"}}</button>
+<button
+  data-test='boton-duplicar'
+  class='bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0'
+  {{action "ejecutarAccion" bubbles=false}}>{{pilas-icono icono="duplicar"}}{{#if x10}}x10{{/if}}</button>
