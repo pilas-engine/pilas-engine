@@ -2,14 +2,23 @@ import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 
 export default Component.extend({
-  tagName: "",
+  tagName: "div",
+  classNames: "dib",
   keyManager: service(),
-  x10: false,
+  x5: false,
+
+  mouseDown: function(e) {
+    if (e.metaKey) {
+      this.accionx5();
+    } else {
+      this.accion();
+    }
+  },
 
   didInsertElement() {
     const cuandoPulsaTecla = this.keyManager.addMacro({
       callback: () => {
-        this.set("x10", true);
+        this.set("x5", true);
       },
       executionKey: "Meta",
       priority: 10,
@@ -20,7 +29,7 @@ export default Component.extend({
 
     const cuandoSueltaTecla = this.keyManager.addMacro({
       callback: () => {
-        this.set("x10", false);
+        this.set("x5", false);
       },
       executionKey: "Meta",
       priority: 10,
@@ -33,15 +42,5 @@ export default Component.extend({
   willDestroyElement() {
     this.keyManager.removeMacro(this.cuandoPulsaTecla);
     this.keyManager.removeMacro(this.cuandoSueltaTecla);
-  },
-
-  actions: {
-    ejecutarAccion() {
-      if (this.x10) {
-        this.accionx10();
-      } else {
-        this.accion();
-      }
-    }
   }
 });

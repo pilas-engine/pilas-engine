@@ -16,13 +16,11 @@ module.exports = function(environment) {
       }
     },
 
-    APP: {}
+    APP: {},
 
-    /*
     keyManagerConfig: {
       isDisabledOnInput: true
     }
-    */
   };
 
   if (environment === "development") {

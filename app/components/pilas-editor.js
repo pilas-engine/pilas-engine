@@ -531,7 +531,9 @@ export default Component.extend({
       this.mostrar_la_escena_actual_sobre_pilas();
       //this.reiniciar_escena_actual();
     },
-    cuando_intenta_duplicar(id) {
+    cuando_intenta_duplicar(id, aleatorio) {
+      aleatorio = aleatorio || false;
+
       this.set("hay_cambios_por_guardar", true);
       let actor_original = this.obtenerDetalleDeActorPorIndice(id);
       let codigo = this.obtener_codigo_para_el_actor(actor_original);
@@ -543,17 +545,23 @@ export default Component.extend({
         propiedades: JSON.parse(JSON.stringify(actor_original))
       };
 
-      actor.propiedades.x += 20;
-      actor.propiedades.y -= 20;
+      if (aleatorio) {
+        actor.propiedades.x = parseInt(Math.random() * 400) - 200;
+        actor.propiedades.y = parseInt(Math.random() * 400) - 200;
+      } else {
+        actor.propiedades.x += 20;
+        actor.propiedades.y -= 20;
+      }
 
       this.send("agregar_actor", this.proyecto, actor);
     },
-    cuando_intenta_duplicar_x10(id) {},
-    /*
-    cuando_intenta_duplicar_x10(id) {
-      alert("duplicar x10!");
+
+    cuando_intenta_duplicar_x5(id) {
+      for (let i = 0; i < 5; i++) {
+        this.send("cuando_intenta_duplicar", id, true);
+      }
     },
-    */
+
     cuando_intenta_eliminar(id) {
       this.set("hay_cambios_por_guardar", true);
 
