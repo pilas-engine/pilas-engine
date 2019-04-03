@@ -28,7 +28,10 @@
 
               <div class='dib fr f7'>
                 {{#if (eq seleccion actor.id)}}
-                  {{pilas-boton-duplicar-actor accion=(action cuando_intenta_duplicar actor.id)}}
+                  {{pilas-boton-duplicar-actor
+                      accion=(action cuando_intenta_duplicar actor.id)
+                      accionx5=(action cuando_intenta_duplicar_x5 actor.id)
+                    }}
                   {{pilas-boton-eliminar-con-confirmacion tipo="actor" titulo="¿Realmente quieres eliminar este actor?" accion=(action cuando_intenta_eliminar actor.id)}}
                 {{/if}}
               </div>
