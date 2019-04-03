@@ -789,7 +789,9 @@ class ActorBase {
           } porque el actor ya la tenía vinculada.`
         );
       } else {
-        this._habilidades.push(new clase(this));
+        let instancia = new clase(this.pilas, this);
+        instancia.iniciar();
+        this._habilidades.push(instancia);
       }
     }
   }

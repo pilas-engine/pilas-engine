@@ -39,6 +39,7 @@ export default Controller.extend({
 
                 a.aprender("rotar constantemente");
                 a.aprender("rotar constantemente");
+                a.aprender("arrastrable");
 
 
                 /*
