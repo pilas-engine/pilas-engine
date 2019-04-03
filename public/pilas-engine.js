@@ -354,12 +354,12 @@ var Habilidades = (function () {
     };
     Habilidades.prototype.vincular = function (clase) {
         var encontrado = this._habilidades.find(function (h) {
-            return h.nombre = clase.name;
+            return (h.nombre = clase.name);
         });
         if (!encontrado) {
             this._habilidades.push({
                 nombre: clase.name,
-                clase: clase,
+                clase: clase
             });
         }
         else {
@@ -1477,7 +1477,7 @@ var ActorBase = (function () {
     ActorBase.prototype.aprender = function (habilidad) {
         var clase = this.pilas.habilidades.buscar(habilidad);
         if (clase) {
-            if (this.tieneHabilidad(clase)) {
+            if (this.tieneHabilidad(clase.name)) {
                 console.warn("No se aplica la habilidad " + clase.name + " porque el actor ya la ten\u00EDa vinculada.");
             }
             else {
@@ -1487,7 +1487,7 @@ var ActorBase = (function () {
     };
     ActorBase.prototype.tieneHabilidad = function (habilidad) {
         return (this._habilidades.filter(function (h) {
-            return h.constructor.name === habilidad.name;
+            return h.constructor.name === habilidad;
         }).length > 0);
     };
     return ActorBase;

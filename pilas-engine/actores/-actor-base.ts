@@ -782,7 +782,7 @@ class ActorBase {
     let clase = this.pilas.habilidades.buscar(habilidad);
 
     if (clase) {
-      if (this.tieneHabilidad(clase)) {
+      if (this.tieneHabilidad(clase.name)) {
         console.warn(
           `No se aplica la habilidad ${
             clase.name
@@ -797,7 +797,7 @@ class ActorBase {
   tieneHabilidad(habilidad: string) {
     return (
       this._habilidades.filter(h => {
-        return h.constructor.name === habilidad.name;
+        return h.constructor.name === habilidad;
       }).length > 0
     );
   }

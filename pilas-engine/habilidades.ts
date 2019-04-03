@@ -24,10 +24,13 @@ class Habilidades {
   generar_lista_de_similitudes(habilidad) {
     return this._habilidades.map(h => {
       return {
-        similitud: this.pilas.utilidades.obtener_similaridad(h.nombre, habilidad);
+        similitud: this.pilas.utilidades.obtener_similaridad(
+          h.nombre,
+          habilidad
+        ),
         habilidad: h
-      }
-    })
+      };
+    });
   }
 
   listar() {
@@ -36,16 +39,20 @@ class Habilidades {
 
   vincular(clase) {
     let encontrado = this._habilidades.find(function(h) {
-      return h.nombre = clase.name;
-    }
+      return (h.nombre = clase.name);
+    });
 
     if (!encontrado) {
       this._habilidades.push({
         nombre: clase.name,
-        clase: clase,
+        clase: clase
       });
     } else {
-      console.warn(`No se vinculó la clase ${clase.name} porque ya estaba vinculada con anterioridad.`);
+      console.warn(
+        `No se vinculó la clase ${
+          clase.name
+        } porque ya estaba vinculada con anterioridad.`
+      );
     }
   }
 }
