@@ -1,7 +1,9 @@
 class Habilidad {
+  pilas: Pilas;
   actor: Actor;
 
-  constructor(actor: Actor) {
+  constructor(pilas: Pilas, actor: Actor) {
+    this.pilas = pilas;
     this.actor = actor;
   }
 

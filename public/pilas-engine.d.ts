@@ -80,12 +80,17 @@ declare class Fisica {
     readonly Matter: any;
 }
 declare class Habilidad {
+    pilas: Pilas;
     actor: Actor;
-    constructor(actor: Actor);
+    constructor(pilas: Pilas, actor: Actor);
     iniciar(): void;
     actualizar(): void;
 }
 declare class RotarConstantemente extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class Arrastrable extends Habilidad {
     iniciar(): void;
     actualizar(): void;
 }

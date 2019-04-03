@@ -310,7 +310,8 @@ var Fisica = (function () {
     return Fisica;
 }());
 var Habilidad = (function () {
-    function Habilidad(actor) {
+    function Habilidad(pilas, actor) {
+        this.pilas = pilas;
         this.actor = actor;
     }
     Habilidad.prototype.iniciar = function () { };
@@ -330,14 +331,41 @@ var RotarConstantemente = (function (_super) {
     };
     return RotarConstantemente;
 }(Habilidad));
+var Arrastrable = (function (_super) {
+    __extends(Arrastrable, _super);
+    function Arrastrable() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Arrastrable.prototype.iniciar = function () {
+        var input = this.pilas.modo.input;
+        this.actor.sprite.setInteractive();
+        input.setDraggable(this.actor.sprite);
+        console.log("iniciando arrastrable");
+        input.on("drag", function (pointer, gameObject, dragX, dragY) {
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+        });
+    };
+    Arrastrable.prototype.actualizar = function () { };
+    return Arrastrable;
+}(Habilidad));
 var Habilidades = (function () {
     function Habilidades(pilas) {
         this.pilas = pilas;
         this._habilidades = [];
         this.vincular(RotarConstantemente);
+        this.vincular(Arrastrable);
     }
     Habilidades.prototype.buscar = function (habilidad) {
         var lista = this.generar_lista_de_similitudes(habilidad);
+        lista = lista.sort(function (a, b) {
+            if (a.similitud > b.similitud) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        });
         return lista[0].habilidad.clase;
     };
     Habilidades.prototype.generar_lista_de_similitudes = function (habilidad) {
@@ -354,7 +382,7 @@ var Habilidades = (function () {
     };
     Habilidades.prototype.vincular = function (clase) {
         var encontrado = this._habilidades.find(function (h) {
-            return (h.nombre = clase.name);
+            return h.nombre === clase.name;
         });
         if (!encontrado) {
             this._habilidades.push({
@@ -1481,7 +1509,9 @@ var ActorBase = (function () {
                 console.warn("No se aplica la habilidad " + clase.name + " porque el actor ya la ten\u00EDa vinculada.");
             }
             else {
-                this._habilidades.push(new clase(this));
+                var instancia = new clase(this.pilas, this);
+                instancia.iniciar();
+                this._habilidades.push(instancia);
             }
         }
     };
