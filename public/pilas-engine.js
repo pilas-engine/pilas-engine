@@ -309,6 +309,65 @@ var Fisica = (function () {
     });
     return Fisica;
 }());
+var Habilidad = (function () {
+    function Habilidad(actor) {
+        this.actor = actor;
+    }
+    Habilidad.prototype.iniciar = function () { };
+    Habilidad.prototype.actualizar = function () { };
+    return Habilidad;
+}());
+var RotarConstantemente = (function (_super) {
+    __extends(RotarConstantemente, _super);
+    function RotarConstantemente() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    RotarConstantemente.prototype.iniciar = function () {
+        console.log("iniciando rotarConstantemente");
+    };
+    RotarConstantemente.prototype.actualizar = function () {
+        this.actor.rotacion += 10;
+    };
+    return RotarConstantemente;
+}(Habilidad));
+var Habilidades = (function () {
+    function Habilidades(pilas) {
+        this.pilas = pilas;
+        this._habilidades = [];
+        this.vincular(RotarConstantemente);
+    }
+    Habilidades.prototype.buscar = function (habilidad) {
+        var lista = this.generar_lista_de_similitudes(habilidad);
+        return lista[0].habilidad.clase;
+    };
+    Habilidades.prototype.generar_lista_de_similitudes = function (habilidad) {
+        var _this = this;
+        return this._habilidades.map(function (h) {
+            return {
+                similitud: _this.pilas.utilidades.obtener_similaridad(h.nombre, habilidad),
+                habilidad: h
+            };
+        });
+    };
+    Habilidades.prototype.listar = function () {
+        return this._habilidades.map(function (h) { return h.nombre; });
+    };
+    Habilidades.prototype.vincular = function (clase) {
+        var encontrado = this._habilidades.find(function (h) {
+            return h.nombre = clase.name;
+        });
+        if (!encontrado) {
+            this._habilidades.push({
+                nombre: clase.name,
+                clase: clase,
+            });
+        }
+        else {
+            console.warn("No se vincul\u00F3 la clase " + clase.name + " porque ya estaba vinculada con anterioridad.");
+        }
+    };
+    return Habilidades;
+}());
 var Historia = (function () {
     function Historia(pilas) {
         this.pilas = pilas;
@@ -466,7 +525,17 @@ var Utilidades = (function () {
         console.error("No se puede definir esta propiedad (valor " + v + ") porque es de solo lectura.");
     };
     Utilidades.prototype.obtener_rampa_de_colores = function () {
-        var colores = [0x82e0aa, 0xf8c471, 0xf0b27a, 0xf4f6f7, 0xb2babb, 0x85c1e9, 0xbb8fce, 0xf1948a, 0xd98880];
+        var colores = [
+            0x82e0aa,
+            0xf8c471,
+            0xf0b27a,
+            0xf4f6f7,
+            0xb2babb,
+            0x85c1e9,
+            0xbb8fce,
+            0xf1948a,
+            0xd98880
+        ];
         return colores;
     };
     Utilidades.prototype.obtener_color_al_azar = function () {
@@ -486,10 +555,10 @@ var Utilidades = (function () {
         return Array.isArray(valor) && valor.every(function (e) { return Number.isInteger(e); });
     };
     Utilidades.prototype.convertir_angulo_a_radianes = function (grados) {
-        return grados * Math.PI / 180;
+        return (grados * Math.PI) / 180;
     };
     Utilidades.prototype.convertir_radianes_a_angulos = function (radianes) {
-        return radianes * 180 / Math.PI;
+        return (radianes * 180) / Math.PI;
     };
     Utilidades.prototype.es_firefox = function () {
         return /Firefox/.test(navigator.userAgent);
@@ -513,6 +582,35 @@ var Utilidades = (function () {
     Utilidades.prototype.obtener_distancia_entre = function (desde_x, desde_y, hasta_x, hasta_y) {
         return Math.sqrt(Math.pow(Math.abs(desde_x - hasta_x), 2) + Math.pow(Math.abs(desde_y - hasta_y), 2));
     };
+    Utilidades.prototype.obtener_similaridad = function (cadena1, cadena2) {
+        function levenshtein_distance_b(a, b) {
+            if (a.length == 0)
+                return b.length;
+            if (b.length == 0)
+                return a.length;
+            var matrix = [];
+            var i;
+            for (i = 0; i <= b.length; i++) {
+                matrix[i] = [i];
+            }
+            var j;
+            for (j = 0; j <= a.length; j++) {
+                matrix[0][j] = j;
+            }
+            for (i = 1; i <= b.length; i++) {
+                for (j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) == a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    }
+                    else {
+                        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
+                    }
+                }
+            }
+            return matrix[b.length][a.length];
+        }
+        return levenshtein_distance_b(cadena1, cadena2);
+    };
     return Utilidades;
 }());
 var HOST = "file://";
@@ -533,6 +631,7 @@ var Pilas = (function () {
         this.actores = new Actores(this);
         this.animaciones = new Animaciones(this);
         this.fisica = new Fisica(this);
+        this.habilidades = new Habilidades(this);
     }
     Object.defineProperty(Pilas.prototype, "escena", {
         get: function () {
@@ -707,6 +806,7 @@ var ActorBase = (function () {
         this.pilas = pilas;
         this.automata = new Automata(this);
         this.colisiones = [];
+        this._habilidades = [];
     }
     Object.defineProperty(ActorBase.prototype, "propiedades_iniciales", {
         get: function () {
@@ -876,6 +976,11 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.actualizar = function () { };
+    ActorBase.prototype.actualizar_habilidades = function () {
+        this._habilidades.map(function (h) {
+            h.actualizar();
+        });
+    };
     ActorBase.prototype.actualizar_sensores = function () {
         var _this = this;
         this.sensores.map(function (s) {
@@ -1369,6 +1474,22 @@ var ActorBase = (function () {
             texto.eliminar();
         });
     };
+    ActorBase.prototype.aprender = function (habilidad) {
+        var clase = this.pilas.habilidades.buscar(habilidad);
+        if (clase) {
+            if (this.tieneHabilidad(clase)) {
+                console.warn("No se aplica la habilidad " + clase.name + " porque el actor ya la ten\u00EDa vinculada.");
+            }
+            else {
+                this._habilidades.push(new clase(this));
+            }
+        }
+    };
+    ActorBase.prototype.tieneHabilidad = function (habilidad) {
+        return (this._habilidades.filter(function (h) {
+            return h.constructor.name === habilidad.name;
+        }).length > 0);
+    };
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -1840,7 +1961,9 @@ var EscenaBase = (function () {
         this.actores.push(actor);
     };
     EscenaBase.prototype.obtener_nombre_para = function (nombre_propuesto) {
-        var nombres_que_pueden_colisionar = this.actores.map(function (e) { return e.nombre; }).filter(function (e) { return e.startsWith(nombre_propuesto); });
+        var nombres_que_pueden_colisionar = this.actores
+            .map(function (e) { return e.nombre; })
+            .filter(function (e) { return e.startsWith(nombre_propuesto); });
         var contador = 1;
         var nombre_a_sugerir = nombre_propuesto;
         while (nombres_que_pueden_colisionar.indexOf(nombre_a_sugerir) > -1) {
@@ -1871,6 +1994,7 @@ var EscenaBase = (function () {
             }
             actor.pre_actualizar();
             actor.actualizar_sensores();
+            actor.actualizar_habilidades();
             actor.actualizar();
         });
         actores_a_eliminar.map(function (actor) {

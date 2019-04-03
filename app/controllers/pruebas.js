@@ -1,6 +1,6 @@
 import { inject as service } from "@ember/service";
 import Controller from "@ember/controller";
-import { later } from '@ember/runloop';
+import { later } from "@ember/runloop";
 
 const NOMBRE_DE_LA_ESCENA = "demo";
 
@@ -23,6 +23,7 @@ export default Controller.extend({
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
 
+                /*
                 console.log("Se va a cambiar de escena");
 
                 pilas.luego(3, (e) => {
@@ -32,6 +33,12 @@ export default Controller.extend({
 
                 let l = pilas.actores.suelo();
                 l.y = -230;
+                */
+
+                let a = pilas.actores.nave();
+
+                a.aprender("rotar constantemente");
+                a.aprender("rotar constantemente");
 
 
                 /*
@@ -220,39 +227,31 @@ export default Controller.extend({
     },
 
     abrir_proyecto() {
-      this.electron
-        .abrir_proyecto()
-        .then(ruta => {
-          let electron = this.electron;
-          try {
-            let proyecto = electron.abrir_proyecto_desde_archivo(ruta);
+      this.electron.abrir_proyecto().then(ruta => {
+        let electron = this.electron;
+        try {
+          let proyecto = electron.abrir_proyecto_desde_archivo(ruta);
 
-            this.set('ocultar_canvas', true);
+          this.set("ocultar_canvas", true);
 
-            later(() => {
-              this.set('proyecto', proyecto);
-              this.set('ocultar_canvas', false);
-            }, 10);
-
-          } catch (err) {
-            console.error(err);
-            alert("Error, el archivo está mal formateado: " + err.name);
-          }
-
-
-
-        });
+          later(() => {
+            this.set("proyecto", proyecto);
+            this.set("ocultar_canvas", false);
+          }, 10);
+        } catch (err) {
+          console.error(err);
+          alert("Error, el archivo está mal formateado: " + err.name);
+        }
+      });
     },
 
     guardar_proyecto() {
-      this.electron
-        .guardar_proyecto()
-        .then(ruta => {
-          let proyecto  = this.proyecto;
-          let electron = this.electron;
+      this.electron.guardar_proyecto().then(ruta => {
+        let proyecto = this.proyecto;
+        let electron = this.electron;
 
-          electron.guardar_proyecto_en_archivo(proyecto, ruta);
-        });
+        electron.guardar_proyecto_en_archivo(proyecto, ruta);
+      });
     }
   }
 });

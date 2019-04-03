@@ -27,7 +27,9 @@ class EscenaBase {
    * retornará el nombre 'nave3'.
    */
   obtener_nombre_para(nombre_propuesto: string) {
-    let nombres_que_pueden_colisionar = this.actores.map(e=> e.nombre).filter(e => e.startsWith(nombre_propuesto))
+    let nombres_que_pueden_colisionar = this.actores
+      .map(e => e.nombre)
+      .filter(e => e.startsWith(nombre_propuesto));
     let contador = 1;
     let nombre_a_sugerir = nombre_propuesto;
 
@@ -66,6 +68,7 @@ class EscenaBase {
 
       actor.pre_actualizar();
       actor.actualizar_sensores();
+      actor.actualizar_habilidades();
       actor.actualizar();
     });
 
@@ -81,7 +84,11 @@ class EscenaBase {
     if (posicion !== -1) {
       this.actores.splice(posicion, 1);
     } else {
-      throw Error(`Se intentó eliminar un actor inexistente en la escena: id=${id} etiqueta=${actor.etiqueta}.`);
+      throw Error(
+        `Se intentó eliminar un actor inexistente en la escena: id=${id} etiqueta=${
+          actor.etiqueta
+        }.`
+      );
     }
   }
 

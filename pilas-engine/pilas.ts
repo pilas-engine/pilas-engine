@@ -22,6 +22,7 @@ class Pilas {
   recursos: any;
 
   fisica: Fisica;
+  habilidades: Habilidades;
 
   modo: any;
   _ancho: number;
@@ -42,6 +43,7 @@ class Pilas {
     this.actores = new Actores(this);
     this.animaciones = new Animaciones(this);
     this.fisica = new Fisica(this);
+    this.habilidades = new Habilidades(this);
   }
 
   get escena(): Escena {

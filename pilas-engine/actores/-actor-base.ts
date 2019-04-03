@@ -20,6 +20,8 @@ class ActorBase {
   _id: any;
   _nombre: any;
 
+  _habilidades: any[];
+
   propiedades_base = {
     x: 0,
     y: 0,
@@ -61,6 +63,7 @@ class ActorBase {
     this.pilas = pilas;
     this.automata = new Automata(this);
     this.colisiones = [];
+    this._habilidades = [];
   }
 
   get propiedades_iniciales() {
@@ -105,7 +108,10 @@ class ActorBase {
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
         this.figura = figura;
 
-        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
+        this.crear_figura_rectangular(
+          propiedades.figura_ancho,
+          propiedades.figura_alto
+        );
 
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
@@ -164,17 +170,26 @@ class ActorBase {
     };
 
     this.sprite.on("pointerdown", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+        cursor.x,
+        cursor.y
+      );
       this.cuando_hace_click(posicion.x, posicion.y, cursor);
     });
 
     this.sprite.on("pointerout", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+        cursor.x,
+        cursor.y
+      );
       this.cuando_sale(posicion.x, posicion.y, cursor);
     });
 
     this.sprite.on("pointermove", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+        cursor.x,
+        cursor.y
+      );
       this.cuando_mueve(posicion.x, posicion.y, cursor);
     });
 
@@ -261,9 +276,21 @@ class ActorBase {
 
   actualizar() {}
 
+  actualizar_habilidades() {
+    this._habilidades.map(h => {
+      h.actualizar();
+    });
+  }
+
   actualizar_sensores() {
     this.sensores.map(s => {
-      let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
+      let {
+        x,
+        y
+      } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+        this.x,
+        this.y
+      );
       this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, {
         x: x + s.distancia_x,
         y: y - s.distancia_y
@@ -316,13 +343,19 @@ class ActorBase {
       this.pilas.animar(this, "x", _x);
     } else {
       this.pilas.utilidades.validar_numero(_x);
-      let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
+      let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+        _x,
+        0
+      );
       this.sprite.x = x;
     }
   }
 
   get x() {
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+      this.sprite.x,
+      0
+    );
     return x;
   }
 
@@ -331,13 +364,19 @@ class ActorBase {
       this.pilas.animar(this, "y", _y);
     } else {
       this.pilas.utilidades.validar_numero(_y);
-      let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
+      let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+        0,
+        _y
+      );
       this.sprite.y = y;
     }
   }
 
   get y() {
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+      0,
+      this.sprite.y
+    );
     return y;
   }
 
@@ -371,7 +410,11 @@ class ActorBase {
       this.sprite.scaleX = s;
 
       if (this.figura) {
-        pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+        pilas.Phaser.Physics.Matter.Matter.Body.scale(
+          this.sprite.body,
+          1 / this.escala_x,
+          1 / this.escala_y
+        );
       }
     }
   }
@@ -388,7 +431,11 @@ class ActorBase {
       this.sprite.scaleY = s;
 
       if (this.figura) {
-        pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+        pilas.Phaser.Physics.Matter.Matter.Body.scale(
+          this.sprite.body,
+          1 / this.escala_x,
+          1 / this.escala_y
+        );
       }
     }
   }
@@ -472,7 +519,9 @@ class ActorBase {
 
   fallar_si_no_tiene_figura() {
     if (!this.figura) {
-      throw Error(`Este actor no tiene figura física, no se puede llamar a este método`);
+      throw Error(
+        `Este actor no tiene figura física, no se puede llamar a este método`
+      );
     }
   }
 
@@ -662,12 +711,21 @@ class ActorBase {
   }
 
   agregar_sensor(ancho, alto, x, y) {
-    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
+    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
+      x,
+      y
+    );
 
-    let figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
-      isSensor: true,
-      isStatic: false
-    });
+    let figura = this.pilas.modo.matter.add.rectangle(
+      pos.x,
+      pos.y,
+      ancho,
+      alto,
+      {
+        isSensor: true,
+        isStatic: false
+      }
+    );
 
     figura.distancia_x = x;
     figura.distancia_y = y;
@@ -718,5 +776,29 @@ class ActorBase {
     this.pilas.luego(4, () => {
       texto.eliminar();
     });
+  }
+
+  aprender(habilidad: string) {
+    let clase = this.pilas.habilidades.buscar(habilidad);
+
+    if (clase) {
+      if (this.tieneHabilidad(clase)) {
+        console.warn(
+          `No se aplica la habilidad ${
+            clase.name
+          } porque el actor ya la tenía vinculada.`
+        );
+      } else {
+        this._habilidades.push(new clase(this));
+      }
+    }
+  }
+
+  tieneHabilidad(habilidad: string) {
+    return (
+      this._habilidades.filter(h => {
+        return h.constructor.name === habilidad.name;
+      }).length > 0
+    );
   }
 }

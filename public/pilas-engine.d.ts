@@ -79,6 +79,28 @@ declare class Fisica {
     constructor(pilas: any);
     readonly Matter: any;
 }
+declare class Habilidad {
+    actor: Actor;
+    constructor(actor: Actor);
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class RotarConstantemente extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class Habilidades {
+    pilas: Pilas;
+    _habilidades: any[];
+    constructor(pilas: any);
+    buscar(habilidad: String): any;
+    generar_lista_de_similitudes(habilidad: any): {
+        similitud: any;
+        habilidad: any;
+    }[];
+    listar(): any[];
+    vincular(clase: any): void;
+}
 declare class Historia {
     pilas: Pilas;
     fotos: any;
@@ -135,6 +157,7 @@ declare class Utilidades {
     };
     combinar_propiedades(propiedades_iniciales: any, propiedades: any): any;
     obtener_distancia_entre(desde_x: any, desde_y: any, hasta_x: any, hasta_y: any): number;
+    obtener_similaridad(cadena1: string, cadena2: string): any;
 }
 declare var HOST: string;
 declare class Pilas {
@@ -150,6 +173,7 @@ declare class Pilas {
     Phaser: any;
     recursos: any;
     fisica: Fisica;
+    habilidades: Habilidades;
     modo: any;
     _ancho: number;
     _alto: number;
@@ -219,6 +243,7 @@ declare class ActorBase {
     texto: any;
     _id: any;
     _nombre: any;
+    _habilidades: any[];
     propiedades_base: {
         x: number;
         y: number;
@@ -276,6 +301,7 @@ declare class ActorBase {
     pre_actualizar(): void;
     estado: string;
     actualizar(): void;
+    actualizar_habilidades(): void;
     actualizar_sensores(): void;
     imagen: string;
     nombre: any;
@@ -324,6 +350,8 @@ declare class ActorBase {
     figura_alto: number;
     figura_radio: number;
     decir(mensaje: string): void;
+    aprender(habilidad: string): void;
+    tieneHabilidad(habilidad: string): boolean;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
