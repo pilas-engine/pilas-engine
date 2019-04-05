@@ -1,13 +1,10 @@
 # pilas-engine 2
 
-
 Prototipo de la nueva versión de pilas-engine
 
 [![CircleCI](https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg)](https://circleci.com/gh/pilas-engine/pilas-engine)
 
 La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
-
-
 
 ## Artículos
 
@@ -18,11 +15,7 @@ La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-02/1375 - Resumen del sprint 2 (31 de Marzo del 2018)
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-01/1366 - Resumen del sprint 1 (20 de Marzo del 2018)
 
-
-
-
 ## Links útiles
-
 
 - http://app.pilas-engine.com.ar - La versión más reciente de pilas.
 - http://pilas-engine.surge.sh - La versión más reciente de pilas (mirror).
@@ -30,8 +23,7 @@ La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
 - https://circleci.com/gh/pilas-engine/pilas-engine - El resultado de los tests de integración.
 - https://trello.com/b/eQJOjpOF/pilas-engine-2 - Nuestra planificación de tareas.
 - http://foro.pilas-engine.com.ar - El foro donde debatimos ideas y anunciamos las versiones nuevas.
-- https://pilas-engine.slack.com - Canal de Slack
-- https://github.com/pilas-engine/pilas-engine/releases - Las versiones descargables de Pilas offline y los manuales. 
+- https://github.com/pilas-engine/pilas-engine/releases - Las versiones descargables de Pilas offline y los manuales.
 
 ## Primeros pasos
 
@@ -63,12 +55,12 @@ prueba de concepto. Sin embargo, cada vez que hacemos un push a este repositorio
 se ejecutan todos los tests sobre [circle.ci](https://circleci.com/gh/pilas-engine)
 y se realiza una instalación en:
 
-* http://pilas-engine.surge.sh/
+- http://pilas-engine.surge.sh/
 
 Si el push viene acompañado de un número de versión (como tag), también
 se generan los binarios para cada plataforma en esta dirección:
 
-* https://github.com/pilas-engine/pilas-engine/releases
+- https://github.com/pilas-engine/pilas-engine/releases
 
 Si se quieren generar los binarios directamente de forma local, hay que tener
 instalado wine con anterioridad y luego ejecutar `make binarios`:
@@ -93,7 +85,6 @@ separadas por guiones bajos (por ejemplo "cantidad_de_actores")
 Además, es muy importante que tengas configurado tu editor para usar
 automáticamente prettier (https://prettier.io/).
 
-
 ## Créditos
 
 Este proyecto es posible gracias a la comunidad de pilas-engine, y a la existencia
@@ -103,10 +94,8 @@ de varias herramientas y bibliotecas como:
 - https://github.com/jdotrjs/phaser3-nineslice/
 - https://electronjs.org/
 
-
 ## Próximas tareas a desarrollar
 
 Tenemos un board de trello con todas las tareas que estamos desarrollando:
 
 - https://trello.com/b/eQJOjpOF/pilas-engine-2
-
