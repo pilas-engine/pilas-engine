@@ -15,6 +15,6 @@ module("Integration | Component | pilas-inspector/actor", function(hooks) {
 
     assert.ok(this.element.textContent.includes("200"));
     assert.ok(this.element.textContent.includes("300"));
-    assert.ok(this.element.textContent.includes("centro_x"));
+    assert.ok(this.element.textContent.includes("Centro x"));
   });
 });

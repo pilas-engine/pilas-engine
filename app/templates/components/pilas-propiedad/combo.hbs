@@ -3,14 +3,14 @@
   <div class="dib w4">
 
     <div class='dib'>
-      {{propiedad.propiedad}}
+      {{etiqueta propiedad.propiedad}}
     </div>
 
   </div>
 
   <div class="dib w3 v-top">
 
-    <select class="w-100" onchange={{action "al_seleccionar" value="target.value"}}>
+    <select class="w104" onchange={{action "al_seleccionar" value="target.value"}}>
       {{#each opciones as |opcion|}}
         <option value="{{opcion.valor}}" selected={{eq (get objeto propiedad.propiedad) opcion.valor}}>{{opcion.texto}}</option>
       {{/each}}

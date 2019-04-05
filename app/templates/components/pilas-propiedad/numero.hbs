@@ -3,7 +3,7 @@
   <div class="dib w4">
 
     <div class='dib bl-0 br-0 bt-0 bb hover-border b--dashed cursor-resize'>
-      {{propiedad.propiedad}}
+      {{etiqueta propiedad.propiedad}}
     </div>
 
   </div>
@@ -11,7 +11,7 @@
     {{#if editando}}
       <div class="dib w3">
         <input
-              class='w-100 v-top outline-0'
+              class='w3 v-top outline-0'
               value={{round (get objeto propiedad.propiedad)}}
               oninput={{action (action "modificar_desde_input" objeto propiedad.propiedad) value="target.value"}}
               onblur={{action "cuando_pierde_foco"}}

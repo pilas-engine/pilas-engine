@@ -4,7 +4,9 @@ import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
-module("Integration | Component | pilas propiedad/interruptor", function(hooks) {
+module("Integration | Component | pilas propiedad/interruptor", function(
+  hooks
+) {
   setupRenderingTest(hooks);
 
   test("it renders", async function(assert) {
@@ -23,6 +25,6 @@ module("Integration | Component | pilas propiedad/interruptor", function(hooks) 
       }}
       `);
 
-    assert.dom("*").hasText("invertir");
+    assert.dom("*").hasText("Invertir");
   });
 });

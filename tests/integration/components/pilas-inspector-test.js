@@ -28,7 +28,8 @@ module("Integration | Component | pilas inspector", function(hooks) {
         t
           .$()
           .text()
-          .indexOf(texto) > -1
+          .toLowerCase()
+          .indexOf(texto.toLowerCase()) > -1
       );
     }
 
