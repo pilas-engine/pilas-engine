@@ -6,11 +6,11 @@ export default Component.extend({
 
   actions: {
     disminuir() {
-      this.set("tamano", Math.max(10, this.get("tamano") - 1));
+      this.set("tamano", Math.max(10, this.tamano - 1));
     },
 
     aumentar() {
-      this.set("tamano", Math.min(24, this.get("tamano") + 1));
+      this.set("tamano", Math.min(24, this.tamano + 1));
     },
 
     restaurar() {

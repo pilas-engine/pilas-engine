@@ -1,7 +1,7 @@
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import autocompletar from "pilas-engine/utils/autocompletar";
-import {task, timeout} from "ember-concurrency";
+import { task, timeout } from "ember-concurrency";
 import ENV from "pilas-engine/config/environment";
 
 /*

@@ -12,6 +12,6 @@ module('Integration | Helper | etiqueta', function(hooks) {
 
     await render(hbs`{{etiqueta inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.dom(this.element).hasText('1234');
   });
 });

@@ -77,7 +77,7 @@ export default Component.extend({
 
   sincronizarTamano: observer("tamano", function() {
     if (this.monaco) {
-      this.editor.updateOptions({ fontSize: this.get("tamano") });
+      this.editor.updateOptions({ fontSize: this.tamano });
     }
   }),
 
