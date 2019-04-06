@@ -1,10 +1,10 @@
 declare class Actores {
     pilas: Pilas;
     constructor(pilas: any);
-    crear_actor(nombre: any): any;
+    crear_actor(nombre: string): any;
     actor(): any;
     aceituna(x?: number, y?: number): any;
-    caja(x: any, y: any): any;
+    caja(x: number, y: number): any;
     conejo(): any;
     logo(): any;
     moneda(): any;
@@ -21,24 +21,24 @@ declare class Actores {
 declare class Animaciones {
     pilas: Pilas;
     animaciones: {};
-    constructor(pilas: any);
-    crear_animacion(actor: any, nombre_de_la_animacion: any, cuadros: any, velocidad: any): void;
+    constructor(pilas: Pilas);
+    crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number): void;
 }
 declare class Automata {
     actor: Actor;
     _estado: string;
-    constructor(actor: any);
+    constructor(actor: Actor);
     estado: string;
-    iniciar_estado(nombre: any): void;
+    iniciar_estado(nombre: string): void;
     actualizar(): void;
-    validar_que_existen_los_metodos_de_estado(nombre: any): void;
+    validar_que_existen_los_metodos_de_estado(nombre: string): void;
 }
 declare class Camara {
     pilas: Pilas;
     constructor(pilas: Pilas);
     readonly camara_principal: any;
     vibrar(intensidad?: number, tiempo?: number): void;
-    x: any;
+    x: number;
     y: number;
 }
 declare class Control {
@@ -69,14 +69,14 @@ declare class Depurador {
 declare class Escenas {
     pilas: Pilas;
     escena_actual: Escena;
-    constructor(pilas: any);
+    constructor(pilas: Pilas);
     Normal(): Normal;
-    vincular(escena: any): void;
-    definir_escena_actual(escena: any): void;
+    vincular(escena: Escena): void;
+    definir_escena_actual(escena: Escena): void;
 }
 declare class Fisica {
     pilas: Pilas;
-    constructor(pilas: any);
+    constructor(pilas: Pilas);
     readonly Matter: any;
 }
 declare class Habilidad {
@@ -125,7 +125,7 @@ declare class Mensajes {
     atender_mensaje(e: any): void;
     atender_mensaje_iniciar_pilas(datos: any): void;
     atender_mensaje_definir_estados_de_depuracion(datos: any): void;
-    emitir_mensaje_al_editor(nombre: any, datos?: any): void;
+    emitir_mensaje_al_editor(nombre: string, datos?: any): void;
     atender_mensaje_define_escena(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
     atender_mensaje_ejecutar_proyecto(datos: any): void;
@@ -141,7 +141,7 @@ declare class Utilidades {
     pilas: Pilas;
     id: number;
     navegador: string;
-    constructor(pilas: any);
+    constructor(pilas: Pilas);
     obtener_id_autoincremental(): number;
     acceso_incorrecto(v: any): void;
     obtener_rampa_de_colores(): number[];
@@ -152,16 +152,16 @@ declare class Utilidades {
     convertir_angulo_a_radianes(grados: number): number;
     convertir_radianes_a_angulos(radianes: number): number;
     es_firefox(): boolean;
-    convertir_coordenada_de_pilas_a_phaser(x: any, y: any): {
-        x: any;
+    convertir_coordenada_de_pilas_a_phaser(x: number, y: number): {
+        x: number;
         y: number;
     };
-    convertir_coordenada_de_phaser_a_pilas(x: any, y: any): {
+    convertir_coordenada_de_phaser_a_pilas(x: number, y: number): {
         x: number;
         y: number;
     };
     combinar_propiedades(propiedades_iniciales: any, propiedades: any): any;
-    obtener_distancia_entre(desde_x: any, desde_y: any, hasta_x: any, hasta_y: any): number;
+    obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number): number;
     obtener_similaridad(cadena1: string, cadena2: string): any;
 }
 declare var HOST: string;
@@ -189,13 +189,13 @@ declare class Pilas {
     control: Control;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
     private iniciar_phaser_desde_configuracion;
-    definir_modo(nombre: any, datos: any): void;
+    definir_modo(nombre: string, datos: any): void;
     cambiar_escena(nombre: string): void;
-    crear_configuracion(ancho: any, alto: any): {
+    crear_configuracion(ancho: number, alto: number): {
         type: number;
         parent: string;
-        width: any;
-        height: any;
+        width: number;
+        height: number;
         backgroundColor: string;
         disableContextMenu: boolean;
         pixelArt: boolean;
@@ -223,7 +223,7 @@ declare class Pilas {
     obtener_diccionario_de_actores(): {};
     obtener_actores_en(_x: number, _y: number): Actor[];
     escena_actual(): Escena;
-    animar(actor: any, propiedad: any, valor: any, duracion?: number): void;
+    animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
 }
 declare var pilas: Pilas;
@@ -556,7 +556,7 @@ declare class EscenaBase {
     agregar_actor(actor: Actor): void;
     obtener_nombre_para(nombre_propuesto: string): string;
     serializar(): {
-        camara_x: any;
+        camara_x: number;
         camara_y: number;
         fondo: string;
     };

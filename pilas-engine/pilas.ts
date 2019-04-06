@@ -50,7 +50,7 @@ class Pilas {
     return this.escenas.escena_actual;
   }
 
-  set escena(v) {
+  set escena(v: Escena) {
     this.utilidades.acceso_incorrecto("escena");
   }
 
@@ -58,7 +58,7 @@ class Pilas {
     return this.escena.control;
   }
 
-  set control(c) {
+  set control(c: Control) {
     this.utilidades.acceso_incorrecto("control");
   }
 
@@ -90,7 +90,7 @@ class Pilas {
     this.game = game;
   }
 
-  definir_modo(nombre, datos) {
+  definir_modo(nombre: string, datos) {
     try {
       this.game.scene.stop("ModoCargador");
       this.game.scene.stop("ModoEjecucion");
@@ -108,7 +108,7 @@ class Pilas {
     this.modo.cambiar_escena(nombre);
   }
 
-  crear_configuracion(ancho, alto) {
+  crear_configuracion(ancho: number, alto: number) {
     return {
       type: Phaser.AUTO, // CANVAS, WEBGL o AUTO
       parent: "game",
@@ -179,7 +179,7 @@ class Pilas {
     return this.escena;
   }
 
-  animar(actor, propiedad, valor, duracion: number = 0.5) {
+  animar(actor, propiedad: string, valor, duracion: number = 0.5) {
     let configuracion = {
       targets: actor,
       ease: "Power1",

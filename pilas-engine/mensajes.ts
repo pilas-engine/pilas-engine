@@ -13,7 +13,7 @@ class Mensajes {
     window.addEventListener("message", this.atender_mensaje.bind(this), false);
   }
 
-  atender_mensaje(e) {
+  atender_mensaje(e: any) {
     let metodo = "atender_mensaje_" + e.data.tipo;
     let datos = e.data;
 
@@ -36,7 +36,7 @@ class Mensajes {
     this.pilas.depurador.definir_estados_de_depuracion(datos);
   }
 
-  emitir_mensaje_al_editor(nombre, datos = null) {
+  emitir_mensaje_al_editor(nombre: string, datos = null) {
     datos = datos || {};
     datos.tipo = nombre;
 

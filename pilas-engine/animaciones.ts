@@ -2,11 +2,11 @@ class Animaciones {
   pilas: Pilas;
   animaciones = {};
 
-  constructor(pilas) {
+  constructor(pilas: Pilas) {
     this.pilas = pilas;
   }
 
-  crear_animacion(actor, nombre_de_la_animacion, cuadros, velocidad) {
+  crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number) {
     let nombre = `${actor.id}-${nombre_de_la_animacion}`;
 
     if (!this.animaciones[nombre]) {

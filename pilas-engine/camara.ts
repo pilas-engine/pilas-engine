@@ -17,7 +17,7 @@ class Camara {
     return this.camara_principal.scrollX;
   }
 
-  set x(x) {
+  set x(x: number) {
     this.pilas.utilidades.validar_numero(x);
     this.camara_principal.setScroll(x, -this.y);
   }
@@ -26,7 +26,7 @@ class Camara {
     return -this.camara_principal.scrollY;
   }
 
-  set y(y) {
+  set y(y: number) {
     this.pilas.utilidades.validar_numero(y);
     this.camara_principal.setScroll(this.x, -y);
   }

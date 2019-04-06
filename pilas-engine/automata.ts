@@ -2,7 +2,7 @@ class Automata {
   actor: Actor;
   _estado: string;
 
-  constructor(actor) {
+  constructor(actor: Actor) {
     this.actor = actor;
     this._estado = "";
   }
@@ -11,13 +11,13 @@ class Automata {
     return this._estado;
   }
 
-  set estado(nombre) {
+  set estado(nombre: string) {
     this._estado = nombre;
     this.validar_que_existen_los_metodos_de_estado(nombre);
     this.iniciar_estado(nombre);
   }
 
-  iniciar_estado(nombre) {
+  iniciar_estado(nombre: string) {
     this.actor[`${nombre}_iniciar`]();
   }
 
@@ -27,7 +27,7 @@ class Automata {
     }
   }
 
-  validar_que_existen_los_metodos_de_estado(nombre) {
+  validar_que_existen_los_metodos_de_estado(nombre: string) {
     let nombre_del_metodo_iniciar = `${nombre}_iniciar`;
     let nombre_del_metodo_actualizar = `${nombre}_actualizar`;
 

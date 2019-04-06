@@ -3,7 +3,7 @@ class Utilidades {
   id: number;
   navegador: string;
 
-  constructor(pilas) {
+  constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.id = 1;
     this.navegador = navigator.appCodeName;
@@ -69,11 +69,11 @@ class Utilidades {
     return /Firefox/.test(navigator.userAgent);
   }
 
-  convertir_coordenada_de_pilas_a_phaser(x, y) {
+  convertir_coordenada_de_pilas_a_phaser(x: number, y: number) {
     return { x: x + this.pilas._ancho / 2, y: this.pilas._alto / 2 - y };
   }
 
-  convertir_coordenada_de_phaser_a_pilas(x, y) {
+  convertir_coordenada_de_phaser_a_pilas(x: number, y: number) {
     return { x: x - this.pilas._ancho / 2, y: -y + this.pilas._alto / 2 };
   }
 
@@ -91,7 +91,7 @@ class Utilidades {
     );
   }
 
-  obtener_distancia_entre(desde_x, desde_y, hasta_x, hasta_y) {
+  obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number) {
     return Math.sqrt(
       Math.abs(desde_x - hasta_x) ** 2 + Math.abs(desde_y - hasta_y) ** 2
     );

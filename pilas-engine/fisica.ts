@@ -1,7 +1,7 @@
 class Fisica {
   pilas: Pilas;
 
-  constructor(pilas) {
+  constructor(pilas: Pilas) {
     this.pilas = pilas;
   }
 

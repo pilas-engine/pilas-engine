@@ -5,7 +5,7 @@ class Actores {
     this.pilas = pilas;
   }
 
-  crear_actor(nombre) {
+  crear_actor(nombre: string) {
     let clase = window[nombre];
     let actor = new clase(this.pilas);
 
@@ -31,7 +31,7 @@ class Actores {
     return this.crear_actor("aceituna");
   }
 
-  caja(x, y) {
+  caja(x: number, y: number) {
     return this.crear_actor("caja");
   }
 

@@ -11,7 +11,7 @@ class Depurador {
     this.mostrar_fisica = false;
   }
 
-  definir_estados_de_depuracion(datos) {
+  definir_estados_de_depuracion(datos: any) {
     this.mostrar_fps = datos.fps;
     this.modo_posicion_activado = datos.pos;
     this.mostrar_fisica = datos.fisica;
