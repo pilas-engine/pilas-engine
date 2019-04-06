@@ -340,7 +340,6 @@ var Arrastrable = (function (_super) {
         var input = this.pilas.modo.input;
         this.actor.sprite.setInteractive();
         input.setDraggable(this.actor.sprite);
-        console.log("iniciando arrastrable");
         input.on("drag", function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;
@@ -353,8 +352,8 @@ var Habilidades = (function () {
     function Habilidades(pilas) {
         this.pilas = pilas;
         this._habilidades = [];
-        this.vincular(RotarConstantemente);
-        this.vincular(Arrastrable);
+        this.vincular("rotar constantemente", RotarConstantemente);
+        this.vincular("arrastrable", Arrastrable);
     }
     Habilidades.prototype.buscar = function (habilidad) {
         var lista = this.generar_lista_de_similitudes(habilidad);
@@ -380,18 +379,18 @@ var Habilidades = (function () {
     Habilidades.prototype.listar = function () {
         return this._habilidades.map(function (h) { return h.nombre; });
     };
-    Habilidades.prototype.vincular = function (clase) {
-        var encontrado = this._habilidades.find(function (h) {
-            return h.nombre === clase.name;
+    Habilidades.prototype.vincular = function (nombre, clase) {
+        var encontrado = this._habilidades.find(function (habilidad) {
+            return habilidad.nombre === nombre;
         });
         if (!encontrado) {
             this._habilidades.push({
-                nombre: clase.name,
+                nombre: nombre,
                 clase: clase
             });
         }
         else {
-            console.warn("No se vincul\u00F3 la clase " + clase.name + " porque ya estaba vinculada con anterioridad.");
+            console.warn("No se vincul\u00F3 la clase " + nombre + " porque ya estaba vinculada con anterioridad.");
         }
     };
     return Habilidades;
@@ -728,7 +727,7 @@ var Pilas = (function () {
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
-            pixelArt: false,
+            pixelArt: true,
             input: {
                 keyboard: true,
                 mouse: true,
@@ -2470,7 +2469,10 @@ var ModoEjecucion = (function (_super) {
                     var colision = event.pairs[i];
                     var figura_1 = colision.bodyA;
                     var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                    if (figura_1.gameObject &&
+                        figura_1.gameObject.actor &&
+                        figura_2.gameObject &&
+                        figura_2.gameObject.actor) {
                         var actor_a = figura_1.gameObject.actor;
                         var actor_b = figura_2.gameObject.actor;
                         actor_a.colisiones.push(actor_b);
@@ -2482,10 +2484,14 @@ var ModoEjecucion = (function (_super) {
                         }
                     }
                     else {
-                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+                        if (figura_2.sensor_del_actor &&
+                            figura_1.gameObject &&
+                            figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
                             figura_2.colisiones.push(figura_1.gameObject.actor);
                         }
-                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+                        if (figura_1.sensor_del_actor &&
+                            figura_2.gameObject &&
+                            figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
                             figura_1.colisiones.push(figura_2.gameObject.actor);
                         }
                     }
@@ -2502,7 +2508,10 @@ var ModoEjecucion = (function (_super) {
                 var colision = event.pairs[i];
                 var figura_1 = colision.bodyA;
                 var figura_2 = colision.bodyB;
-                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                if (figura_1.gameObject &&
+                    figura_1.gameObject.actor &&
+                    figura_2.gameObject &&
+                    figura_2.gameObject.actor) {
                     var actor_a = figura_1.gameObject.actor;
                     var actor_b = figura_2.gameObject.actor;
                     if (actor_a.colisiones.indexOf(actor_b) === -1) {
@@ -2524,7 +2533,10 @@ var ModoEjecucion = (function (_super) {
                     var colision = event.pairs[i];
                     var figura_1 = colision.bodyA;
                     var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                    if (figura_1.gameObject &&
+                        figura_1.gameObject.actor &&
+                        figura_2.gameObject &&
+                        figura_2.gameObject.actor) {
                         var actor_a = figura_1.gameObject.actor;
                         var actor_b = figura_2.gameObject.actor;
                         actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
@@ -2533,10 +2545,14 @@ var ModoEjecucion = (function (_super) {
                         actor_b.cuando_termina_una_colision(actor_a);
                     }
                     else {
-                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+                        if (figura_2.sensor_del_actor &&
+                            figura_1.gameObject &&
+                            figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
                             figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
                         }
-                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+                        if (figura_1.sensor_del_actor &&
+                            figura_2.gameObject &&
+                            figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
                             figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
                         }
                     }
@@ -2613,7 +2629,9 @@ var ModoEjecucion = (function (_super) {
         var re_solo_clase = /var\ (\w+)/;
         var lista_de_clases = [];
         if (codigo.match(re_creacion_de_clase)) {
-            lista_de_clases = codigo.match(re_creacion_de_clase).map(function (e) { return e.match(re_solo_clase)[1]; });
+            lista_de_clases = codigo
+                .match(re_creacion_de_clase)
+                .map(function (e) { return e.match(re_solo_clase)[1]; });
         }
         var diccionario = {};
         for (var i = 0; i < lista_de_clases.length; i++) {
@@ -2621,7 +2639,7 @@ var ModoEjecucion = (function (_super) {
             diccionario[item] = item;
         }
         var diccionario_como_cadena = JSON.stringify(diccionario).replace(/"/g, "");
-        return "\n__clases = " + diccionario_como_cadena + ";\n__clases;";
+        return "\nvar __clases = " + diccionario_como_cadena + ";\n__clases;";
     };
     ModoEjecucion.prototype.guardar_parametros_en_atributos = function (datos) {
         this.pilas = datos.pilas;

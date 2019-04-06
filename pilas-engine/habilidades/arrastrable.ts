@@ -6,7 +6,6 @@ class Arrastrable extends Habilidad {
     this.actor.sprite.setInteractive();
 
     input.setDraggable(this.actor.sprite);
-    console.log("iniciando arrastrable");
 
     input.on("drag", function(pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;

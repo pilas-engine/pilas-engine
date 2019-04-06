@@ -9,8 +9,8 @@ class Habilidades {
     this.pilas = pilas;
     this._habilidades = [];
 
-    this.vincular(RotarConstantemente);
-    this.vincular(Arrastrable);
+    this.vincular("rotar constantemente", RotarConstantemente);
+    this.vincular("arrastrable", Arrastrable);
   }
 
   buscar(habilidad: String) {
@@ -42,21 +42,19 @@ class Habilidades {
     return this._habilidades.map(h => h.nombre);
   }
 
-  vincular(clase) {
-    let encontrado = this._habilidades.find(function(h) {
-      return h.nombre === clase.name;
+  vincular(nombre: string, clase: any) {
+    let encontrado = this._habilidades.find(function(habilidad) {
+      return habilidad.nombre === nombre;
     });
 
     if (!encontrado) {
       this._habilidades.push({
-        nombre: clase.name,
+        nombre: nombre,
         clase: clase
       });
     } else {
       console.warn(
-        `No se vinculó la clase ${
-          clase.name
-        } porque ya estaba vinculada con anterioridad.`
+        `No se vinculó la clase ${nombre} porque ya estaba vinculada con anterioridad.`
       );
     }
   }

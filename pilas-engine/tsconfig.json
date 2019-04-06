@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "outFile": "../public/pilas-engine.js",
     "noStrictGenericChecks": true,
-    "lib": ["es5", "dom", "es2015.core"]
+    "lib": ["es6", "dom", "es2015"]
   },
   "exclude": ["data", "public"],
   "filesGlob": ["**/*.ts"],

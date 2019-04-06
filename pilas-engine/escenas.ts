@@ -1,6 +1,6 @@
 class Escenas {
   pilas: Pilas;
-  escena_actual: Escena = null;
+  escena_actual: EscenaBase = null;
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
@@ -11,14 +11,13 @@ class Escenas {
   }
 
   vincular(escena: Escena) {
-    console.log(escena.name, "ESCENA");
     this[escena.name] = () => {
       this.escena_actual = new escena(this.pilas);
       return this.escena_actual;
     };
   }
 
-  definir_escena_actual(escena: Escena) {
+  definir_escena_actual(escena: EscenaBase) {
     this.escena_actual = escena;
   }
 }

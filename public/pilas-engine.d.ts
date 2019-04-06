@@ -68,11 +68,11 @@ declare class Depurador {
 }
 declare class Escenas {
     pilas: Pilas;
-    escena_actual: Escena;
+    escena_actual: EscenaBase;
     constructor(pilas: Pilas);
     Normal(): Normal;
     vincular(escena: Escena): void;
-    definir_escena_actual(escena: Escena): void;
+    definir_escena_actual(escena: EscenaBase): void;
 }
 declare class Fisica {
     pilas: Pilas;
@@ -104,7 +104,7 @@ declare class Habilidades {
         habilidad: any;
     }[];
     listar(): any[];
-    vincular(clase: any): void;
+    vincular(nombre: string, clase: any): void;
 }
 declare class Historia {
     pilas: Pilas;
@@ -185,7 +185,7 @@ declare class Pilas {
     cursor_x: number;
     cursor_y: number;
     constructor();
-    escena: Escena;
+    escena: EscenaBase;
     control: Control;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
     private iniciar_phaser_desde_configuracion;
@@ -222,7 +222,7 @@ declare class Pilas {
     obtener_cantidad_de_actores(): number;
     obtener_diccionario_de_actores(): {};
     obtener_actores_en(_x: number, _y: number): Actor[];
-    escena_actual(): Escena;
+    escena_actual(): EscenaBase;
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
 }
