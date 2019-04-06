@@ -1,16 +1,12 @@
 {{yield}}
 
-
 <h2>¿Cómo usar esta sección?</h2>
 
-<p>Esta es una sección experimental, donde buscamos
-  integrar pilas con arduino. Para comenzar, conectá
-  tu plaqueta arduino con un led en el pin 13 así:</p>
+<p>Esta es una sección experimental, donde buscamos integrar pilas con arduino. Para comenzar, conectá tu plaqueta arduino con un led en el pin 13 así:</p>
 
-<p><img src="{{rootURL}}plaqueta_arduino.png"></p>
+<p><img alt="" src="{{rootURL}}plaqueta_arduino.png"></p>
 
-<p>Una vez que conectes la placa, vas a ver información
-  sobre la misma a continuación:</p>
+<p>Una vez que conectes la placa, vas a ver información sobre la misma a continuación:</p>
 
 <p>
   {{#if conectado}}
@@ -31,7 +27,7 @@
   <ul>
     {{#each dispositivos as |d|}}
       <li>
-          <li>{{d.comName}} {{#if d.esArduino}}(¡Es un arduino!){{/if}}</li>
+        <li>{{d.comName}} {{#if d.esArduino}}(¡Es un arduino!){{/if}}</li>
       </li>
     {{/each}}
   </ul>
@@ -43,6 +39,6 @@
 
 
 <div>
-  <button {{action "prenderLed"}} class="ui {{if conectado '' 'disabled'}} basic primary button">Encender led 13</button>
-  <button {{action "apagarLed"}} class="ui {{if conectado '' 'disabled'}} basic red button">Apagar led 13</button>
+  <button {{action "prenderLed"}} class="ui {{if conectado "" "disabled"}} basic primary button">Encender led 13</button>
+  <button {{action "apagarLed"}} class="ui {{if conectado "" "disabled"}} basic red button">Apagar led 13</button>
 </div>

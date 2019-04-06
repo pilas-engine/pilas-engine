@@ -1,42 +1,38 @@
 <div class="vh-100 flex flex-column">
 
-<div class="ma2">
-  {{pilas-boton-regresar}}
-</div>
+  <div class="ma2">
+    {{pilas-boton-regresar}}
+  </div>
 
+  <div class="flex flex1 pl2 pr2 pb2">
 
-<div class="flex flex1 pl2 pr2 pb2">
-
-  <div class="flex1 overflow-auto h-100">
-    {{pilas-grilla-de-actores
+    <div class="flex1 overflow-auto h-100">
+      {{pilas-grilla-de-actores
         actores=actores.lista_de_actores
         actor_seleccionado=actor
         cuandoQuiereCrearActor=(action "al_seleccionar_un_actor")
     }}
-  </div>
+    </div>
 
-  <div class="flex flex-column flex1 lato">
+    <div class="flex flex-column flex1 lato">
 
-    {{#if actor}}
-      {{pilas-previsualizacion-de-actor actor=actor}}
+      {{#if actor}}
+        {{pilas-previsualizacion-de-actor actor=actor}}
 
-      <div class='lato pt1 pb2 f6'>{{actor.nombre}} (del archivo {{actor.nombre}}.ts)</div>
+        <div class="lato pt1 pb2 f6">{{actor.nombre}} (del archivo {{actor.nombre}}.ts)</div>
 
-
-      {{monaco-editor
+        {{monaco-editor
         titulo=actor.nombre
         code=actor.codigo
         readOnly=true}}
 
+      {{else}}
+        <p class="lato f5 ma0">Seleccioná un actor de la izquierda para verlo en detalle.</p>
+      {{/if}}
 
-    {{else}}
-      <p class='lato f5 ma0'>Seleccioná un actor de la izquierda para
-        verlo en detalle.</p>
-    {{/if}}
+      {{outlet}}
+    </div>
 
-    {{outlet}}
   </div>
-
-</div>
 
 </div>

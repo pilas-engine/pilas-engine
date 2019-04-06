@@ -2,26 +2,21 @@
 
   <div class="dib w4">
 
-    <div class='dib bl-0 br-0 bt-0 bb hover-border b--dashed cursor-resize'>
+    <div class="dib bl-0 br-0 bt-0 bb hover-border b--dashed cursor-resize">
       {{etiqueta propiedad.propiedad}}
     </div>
 
   </div>
 
-    {{#if editando}}
-      <div class="dib w3">
-        <input
-              class='w3 v-top outline-0'
-              value={{round (get objeto propiedad.propiedad)}}
-              oninput={{action (action "modificar_desde_input" objeto propiedad.propiedad) value="target.value"}}
-              onblur={{action "cuando_pierde_foco"}}
-              onkeyup={{action "cuando_suelta_tecla"}}
-              >
-      </div>
-    {{else}}
-      <div class="dib w3 pointer v-top" {{action "comenzar_a_editar"}}>
-        {{round (get objeto propiedad.propiedad)}}
-      </div>
-    {{/if}}
+  {{#if editando}}
+    <div class="dib w3">
+      <input class="w3 v-top outline-0" value={{round (get objeto propiedad.propiedad)}} oninput={{action (action "modificar_desde_input" objeto propiedad.propiedad) value="target.value"}} onblur={{action "cuando_pierde_foco"}} role="button"
+        onkeyup={{action "cuando_suelta_tecla"}}>
+    </div>
+  {{else}}
+    <div class="dib w3 pointer v-top" role="button" {{action "comenzar_a_editar"}}>
+      {{round (get objeto propiedad.propiedad)}}
+    </div>
+  {{/if}}
 
 </div>

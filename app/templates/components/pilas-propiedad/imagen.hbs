@@ -2,20 +2,20 @@
 
   <div class="dib w4">
 
-    <div class='dib'>
+    <div class="dib">
       {{etiqueta propiedad.propiedad}}
     </div>
 
   </div>
 
-  <div class="dib w104 v-top pointer truncate" {{action 'mostrar'}}>
+  <div class="dib w104 v-top pointer truncate" role="button" {{action "mostrar"}}>
     {{pilas-icono icono="imagen"}}
     {{get objeto propiedad.propiedad}}
   </div>
 
-  {{#pilas-modal alCerrar=(action "ocultar") visible=mostrar id='dialogo_cambiar_imagen' titulo="Cambiar imagen"}}
+  {{#pilas-modal alCerrar=(action "ocultar") visible=mostrar id="dialogo_cambiar_imagen" titulo="Cambiar imagen"}}
     <div>
-      {{pilas-grilla-de-imagenes cuando_selecciona=(action 'cuando_selecciona_imagen')}}
+      {{pilas-grilla-de-imagenes cuando_selecciona=(action "cuando_selecciona_imagen")}}
     </div>
   {{/pilas-modal}}
 

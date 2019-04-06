@@ -10,12 +10,12 @@
   {{else}}
 
     {{#if error}}
-      <span class='gray'>{{error}}</span>
+      <span class="gray">{{error}}</span>
     {{else}}
       {{#if actualizada}}
         Tienes la versión más reciente.
       {{else}}
-        <span class='red'>Existe una actualización disponible: <a href='https://github.com/pilas-engine/pilas-engine/releases' target="_blank">{{version_en_el_servidor}}</a></span>
+        <span class="red">Existe una actualización disponible: <a href="https://github.com/pilas-engine/pilas-engine/releases" rel="noopener" target="_blank">{{version_en_el_servidor}}</a></span>
       {{/if}}
     {{/if}}
 

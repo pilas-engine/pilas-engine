@@ -1,17 +1,17 @@
 {{#if queryParams}}
-{{#link-to ruta queryParams class=class id=id}}
-  {{pilas-icono icono=icono conSeparacion=true}}
+  {{#link-to ruta queryParams class=class id=id}}
+    {{pilas-icono icono=icono conSeparacion=true}}
 
-  {{texto}}
-  {{yield}}
+    {{texto}}
+    {{yield}}
 
-{{/link-to}}
+  {{/link-to}}
 {{else}}
-{{#link-to ruta class=class id=id}}
-  {{pilas-icono icono=icono conSeparacion=true}}
+  {{#link-to ruta class=class id=id}}
+    {{pilas-icono icono=icono conSeparacion=true}}
 
-  {{texto}}
-  {{yield}}
+    {{texto}}
+    {{yield}}
 
-{{/link-to}}
+  {{/link-to}}
 {{/if}}

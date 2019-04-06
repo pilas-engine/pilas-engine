@@ -1,10 +1,10 @@
-<div class="h4 menlo bl br bb b--gray {{if mostrar 'flex flex-column' 'dn'}}">
+<div class="h4 menlo bl br bb b--gray {{if mostrar "flex flex-column" "dn"}}">
 
   {{pilas-contenido-de-log log=log}}
 
   <div class="w-100 flex flex-row bt b--light-silver">
-    <div class='dib {{if habilitado 'blue' 'gray'}} pa1 unselectable'>→</div>
-    {{input id='input' keyDown=(action "pulsaTecla") value=valor class="flex1 menlo pa1 bn no-outline" enter="cuandoPulsaEnter"}}
+    <div class="dib {{if habilitado "blue" "gray"}} pa1 unselectable">→</div>
+    {{input id="input" keyDown=(action "pulsaTecla") value=valor class="flex1 menlo pa1 bn no-outline" enter=(action "cuandoPulsaEnter")}}
   </div>
 
 </div>

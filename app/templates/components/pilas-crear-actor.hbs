@@ -3,25 +3,25 @@
 {{pilas-boton icono=icono desactivado=desactivado accion=(action "abrirModal") texto="Crear actor"}}
 
 
-{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id='dialogoCrearActor' titulo="Agregar un actor a la escena"}}
-<div>
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoCrearActor" titulo="Agregar un actor a la escena"}}
+  <div>
 
-  {{#if tarea.isRunning}}
+    {{#if tarea.isRunning}}
 
-    {{pilas-celda-de-actor-skeleton}}
-    {{pilas-celda-de-actor-skeleton}}
-    {{pilas-celda-de-actor-skeleton}}
-    {{pilas-celda-de-actor-skeleton}}
-    {{pilas-celda-de-actor-skeleton}}
+      {{pilas-celda-de-actor-skeleton}}
+      {{pilas-celda-de-actor-skeleton}}
+      {{pilas-celda-de-actor-skeleton}}
+      {{pilas-celda-de-actor-skeleton}}
+      {{pilas-celda-de-actor-skeleton}}
 
-  {{else}}
+    {{else}}
 
-    {{pilas-grilla-de-actores
+      {{pilas-grilla-de-actores
         actores=tarea.last.value.actores
         cuandoQuiereCrearActor=cuandoQuiereCrearActor
     }}
 
-  {{/if}}
+    {{/if}}
 
-</div>
+  </div>
 {{/pilas-modal}}

@@ -1,3 +1,11 @@
-<a {{action 'ejecutar_accion'}} data-test={{dataTest}} class="{{class}} {{extraClass}} {{if truncate 'truncate' ''}} {{if ejecutando 'disabled o-50'}} {{if desactivado 'disabled o-50'}}" id={{id}}>
-{{#if ejecutando}}{{pilas-spinner}}{{/if}}{{#if icono}}{{pilas-icono icono=icono}} <span class='dn di-ns'>{{texto}}</span>{{else}}<span>{{texto}}</span>{{/if}}{{yield}}
+<a role="button" {{action "ejecutar_accion"}} data-test={{dataTest}} class="{{class}} {{extraClass}} {{if truncate "truncate" ""}} {{if ejecutando "disabled o-50"}} {{if desactivado "disabled o-50"}}" id={{id}}>
+  {{#if ejecutando}}
+    {{pilas-spinner}}
+  {{/if}}
+  {{#if icono}}
+    {{pilas-icono icono=icono}} <span class="dn di-ns">{{texto}}</span>
+  {{else}}
+    <span>{{texto}}</span>
+  {{/if}}
+  {{yield}}
 </a>

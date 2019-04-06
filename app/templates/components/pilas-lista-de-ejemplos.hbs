@@ -2,23 +2,23 @@
 
 <div class="ma2">
 
-<p class="lato">Lista de ejemplos</p>
+  <p class="lato">Lista de ejemplos</p>
 
-{{#if ejemplos.tarea.last.isRunning}}
-  {{#each (range 0 5) as |number|}}
-    <div class="dib bg-light-gray" style="width: 180px; height: 140px;"></div>
-  {{/each}}
-{{else}}
-  {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
-    {{#link-to "ejemplos.ver" ejemplo.nombre tagName='div' class="dib pointer"}}
-    <div class="relative unselectable ma1 ba b--light-gray">
-      <img width=180 height=140 src="{{rootURL}}ejemplos/imagenes/{{ejemplo.nombre}}.png" alt="">
-      <div class="text-shadow-1 absolute bottom-1 left-0 right-0 white tc lato f7">{{ejemplo.nombre}}</div>
-    </div>
-    {{/link-to}}
-  {{/each}}
+  {{#if ejemplos.tarea.last.isRunning}}
+    {{#each (range 0 5)}}
+      <div class="dib bg-light-gray" style="width: 180px; height: 140px;"></div>
+    {{/each}}
+  {{else}}
+    {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
+      {{#link-to "ejemplos.ver" ejemplo.nombre tagName="div" class="dib pointer"}}
+        <div class="relative unselectable ma1 ba b--light-gray">
+          <img width="180" height="140" src="{{rootURL}}ejemplos/imagenes/{{ejemplo.nombre}}.png" alt="">
+          <div class="text-shadow-1 absolute bottom-1 left-0 right-0 white tc lato f7">{{ejemplo.nombre}}</div>
+        </div>
+      {{/link-to}}
+    {{/each}}
 
 
-{{/if}}
+  {{/if}}
 
 </div>

@@ -1,28 +1,26 @@
 {{outlet}}
 
 <div class="pa2 verdana">
-  <div class="pointer hover-bg-red dib pa2" {{action "abrir_proyecto"}}>
+  <div role="button" class="pointer hover-bg-red dib pa2" {{action "abrir_proyecto"}}>
     Abrir proyecto
   </div>
 
-  <div class="pointer hover-bg-red dib pa2" {{action "guardar_proyecto"}}>
+  <div role="button" class="pointer hover-bg-red dib pa2" {{action "guardar_proyecto"}}>
     Guardar proyecto
   </div>
 
 </div>
 
 
-
-
 <div class="h-100 flex">
-  {{#unless ocultar_canvas}}
+  {{#if ocultar_canvas}}
+    Cargando ...
+  {{else}}
     {{pilas-canvas
       ancho=proyecto.ancho
       alto=proyecto.alto
       proyecto=proyecto
       cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
     }}
-  {{else}}
-    Cargando ...
-  {{/unless}}
+  {{/if}}
 </div>

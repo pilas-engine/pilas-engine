@@ -11,9 +11,12 @@ EmberRouter.reopen({
   estadisticas: service(),
   rutaAnterior: "",
 
-  didTransition() {
+  init() {
     this._super(...arguments);
-    this.estadisticas.notificar_transicion(this.url);
+
+    this.on("routeDidChange", transition => {
+      this.estadisticas.notificar_transicion(transition.to.name);
+    });
   }
 });
 

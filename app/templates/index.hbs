@@ -1,89 +1,66 @@
 <div class="h-100 overflow-auto">
 
-{{outlet}}
+  {{outlet}}
 
-<div class="center mw7 mt4 pa2 unselectable">
+  <div class="center mw7 mt4 pa2 unselectable">
 
-      <div class="tc">
-        {{pilas-logo}}
-      </div>
+    <div class="tc">
+      {{pilas-logo}}
+    </div>
 
-      <div class="tc lato">
-        <p>{{t 'principal.bienvenida' htmlSafe=true}}</p>
-      </div>
+    <div class="tc lato">
+      <p>{{t "principal.bienvenida" htmlSafe=true}}</p>
+    </div>
 
 
-      <div class="flex flex-column mt4">
+    <div class="flex flex-column mt4">
 
-        <div class="flex items-center justify-center">
-          {{pilas-boton-principal
+      <div class="flex items-center justify-center">
+        {{pilas-boton-principal
             icono="computadora"
             texto=(t "principal.abrir_editor")
             ruta="editor"
             queryParams=(query-params ruta=null)
-            id='abrir-editor'
+            id="abrir-editor"
           }}
 
-          {{pilas-boton-principal
+        {{pilas-boton-principal
             icono="manual"
-            texto=(t 'principal.abrir_manual')
+            texto=(t "principal.abrir_manual")
             ruta="manual"
           }}
-        </div>
+      </div>
 
-        <div class="flex items-center justify-center">
-          {{pilas-boton-principal
+      <div class="flex items-center justify-center">
+        {{pilas-boton-principal
             icono="ejemplos"
             texto=(t "principal.explorar_ejemplos")
             ruta="ejemplos"
           }}
 
-          {{pilas-boton-principal
+        {{pilas-boton-principal
             icono="actores"
-            texto=(t 'principal.explorar_actores')
+            texto=(t "principal.explorar_actores")
             ruta="actores"
             id="abrir-actores"
           }}
 
-        </div>
+      </div>
 
-        <div class="flex items-center justify-center">
-          {{pilas-boton-principal
+      <div class="flex items-center justify-center">
+        {{pilas-boton-principal
             icono="api"
             texto=(t "principal.manual_avanzado")
             ruta="api"
           }}
 
-          {{pilas-boton-principal
+        {{pilas-boton-principal
             icono="info_squared"
             texto=(t "principal.acerca_de")
             ruta="acercade"
           }}
 
-          <!--
-          {{pilas-boton-principal
-            icono="test"
-            texto="Experimentos"
-            ruta="experimentos"
-          }}
-        -->
-        </div>
-
-
-        <!--
-        <div class="flex items-center justify-center">
-
-          <div class="w-30 ma2 pa3">
-
-          </div>
-
-          {{pilas-boton-principal
-            icono="arduino"
-            texto="Pruebas Arduino"
-            ruta="arduino"
-          }}
-        </div>
-      -->
+      </div>
 
     </div>
 
@@ -92,5 +69,5 @@
     {{pilas-enjambre}}
 
 
-</div>
+  </div>
 </div>

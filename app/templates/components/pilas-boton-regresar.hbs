@@ -2,17 +2,17 @@
 
 {{#if mostrar}}
 
-{{#pilas-modal reducido=true alCerrar=(action "ocultar") visible=true id='dialogo_confirmar' titulo="¿Quieres salir sin guardar?"}}
-<div class="f6">
-  <p>Estás por abandonar sin haber guardado.</p>
-  <p>¿Que quieres hacer?</p>
+  {{#pilas-modal reducido=true alCerrar=(action "ocultar") visible=true id="dialogo_confirmar" titulo="¿Quieres salir sin guardar?"}}
+    <div class="f6">
+      <p>Estás por abandonar sin haber guardado.</p>
+      <p>¿Que quieres hacer?</p>
 
-  <div class="tr pt2">
-    {{pilas-boton accion=(action "confirmar_regreso") texto="Salir de todas formas"}}
-    {{pilas-boton accion=(action "ocultar") texto="Cancelar, y volver al editor"}}
-  </div>
+      <div class="tr pt2">
+        {{pilas-boton accion=(action "confirmar_regreso") texto="Salir de todas formas"}}
+        {{pilas-boton accion=(action "ocultar") texto="Cancelar, y volver al editor"}}
+      </div>
 
-</div>
-{{/pilas-modal}}
+    </div>
+  {{/pilas-modal}}
 
 {{/if}}

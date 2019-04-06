@@ -1,10 +1,9 @@
 {{#if cargando}}
   <div class="relative gray lato">
-    <div class='absolute tc left-0 right-0 mt3'>Iniciando: {{porcentajeDeCarga}} %</div>
+    <div class="absolute tc left-0 right-0 mt3">Iniciando: {{porcentajeDeCarga}} %</div>
 
-    <!-- barra de progreso -->
     <div class="absolute mt5 left-2 right-2">
-      <div class='pa1 w-100 bg-white'>
+      <div class="pa1 w-100 bg-white">
         <div class="bg-light-gray">
           <div style={{estilo_barra_de_progreso}} class="bg-blue h1"></div>
         </div>
@@ -13,7 +12,7 @@
 
   </div>
 
-  {{pilas-skeleton ancho='100%' alto=alto}}
+  {{pilas-skeleton ancho="100%" alto=alto}}
 {{/if}}
 
-<iframe class='bn {{if cargando 'dn'}}' src="{{rootURL}}pilas-canvas.html" width='100%' height='100%'></iframe>
+<iframe class="bn {{if cargando "dn"}}" src="{{rootURL}}pilas-canvas.html" width="100%" height="100%"></iframe>
