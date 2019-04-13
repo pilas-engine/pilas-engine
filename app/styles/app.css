@@ -266,6 +266,10 @@ span {
   text-shadow: 0 1px #eee;
 }
 
+.theme-claro .bg-skeleton {
+  background-color: #bbb;
+}
+
 /* THEME OSCURO */
 
 .theme-oscuro .boton {
@@ -320,6 +324,10 @@ span {
 
 .theme-oscuro .b--invisible:hover {
   border-color: white;
+}
+
+.theme-oscuro .bg-skeleton {
+  background-color: #444;
 }
 
 .bg-fondo {

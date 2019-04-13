@@ -6,7 +6,7 @@
 
   {{#if ejemplos.tarea.last.isRunning}}
     {{#each (range 0 5)}}
-      <div class="dib bg-light-gray" style="width: 180px; height: 140px;"></div>
+      <div class="dib bg-skeleton" style="width: 180px; height: 140px;"></div>
     {{/each}}
   {{else}}
     {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
