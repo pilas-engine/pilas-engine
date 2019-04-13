@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import Service from "@ember/service";
 import config from "pilas-engine/config/environment";
 import { task, timeout } from "ember-concurrency";
@@ -11,7 +11,7 @@ export default Service.extend({
   tarea: task(function*() {
     yield timeout(500);
 
-    let data = yield $.ajax({
+    let data = yield jQuery.ajax({
       mimeType: "application/json",
       dataType: "json",
       url: `${config.rootURL}recursos.json`

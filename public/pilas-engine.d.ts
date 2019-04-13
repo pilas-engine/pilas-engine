@@ -116,7 +116,7 @@ declare class Historia {
     obtener_cantidad_de_posiciones(): number;
     obtener_foto(posicion: number): any;
 }
-declare const DEPURAR_MENSAJES: boolean;
+declare const DEPURAR_MENSAJES = false;
 declare class Mensajes {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;

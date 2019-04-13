@@ -1,10 +1,12 @@
-import $ from "jquery";
 import { computed } from "@ember/object";
 import Component from "@ember/component";
 import config from "../config/environment";
 import { task, timeout } from "ember-concurrency";
+import jQuery from "jquery";
 
-const { APP: { version } } = config;
+const {
+  APP: { version }
+} = config;
 
 export default Component.extend({
   consultando: true,
@@ -14,9 +16,7 @@ export default Component.extend({
   error: false,
 
   version_simplificada: computed("version", function() {
-    return this.version
-      .replace("v", "")
-      .split("+")[0];
+    return this.version.replace("v", "").split("+")[0];
   }),
 
   didInsertElement() {
@@ -30,7 +30,7 @@ export default Component.extend({
     yield timeout(1000);
 
     try {
-      let data = yield $.ajax({ url: url });
+      let data = yield jQuery.ajax({ url: url });
       this.set("version_en_el_servidor", data.tag_name);
       this.set("actualizada", "v" + this.version >= data.tag_name);
     } catch (e) {

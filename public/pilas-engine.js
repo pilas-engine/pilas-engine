@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -286,6 +286,7 @@ var Escenas = (function () {
     };
     Escenas.prototype.vincular = function (escena) {
         var _this = this;
+        console.log(escena.name);
         this[escena.name] = function () {
             _this.escena_actual = new escena(_this.pilas);
             return _this.escena_actual;
@@ -727,7 +728,7 @@ var Pilas = (function () {
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
-            pixelArt: true,
+            pixelArt: false,
             input: {
                 keyboard: true,
                 mouse: true,
@@ -2639,7 +2640,8 @@ var ModoEjecucion = (function (_super) {
             diccionario[item] = item;
         }
         var diccionario_como_cadena = JSON.stringify(diccionario).replace(/"/g, "");
-        return "\nvar __clases = " + diccionario_como_cadena + ";\n__clases;";
+        console.log(diccionario_como_cadena);
+        return "__clases = " + diccionario_como_cadena + ";\n__clases;";
     };
     ModoEjecucion.prototype.guardar_parametros_en_atributos = function (datos) {
         this.pilas = datos.pilas;

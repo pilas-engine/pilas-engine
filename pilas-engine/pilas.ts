@@ -46,12 +46,10 @@ class Pilas {
     this.habilidades = new Habilidades(this);
   }
 
-  get escena(): Escena {
   get escena(): EscenaBase {
     return this.escenas.escena_actual;
   }
 
-  set escena(v: Escena) {
   set escena(v: EscenaBase) {
     this.utilidades.acceso_incorrecto("escena");
   }

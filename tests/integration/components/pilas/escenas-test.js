@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Pilas | escenas", function(hooks) {
@@ -18,11 +18,19 @@ module("Integration | Pilas | escenas", function(hooks) {
 
       pilas.actores.caja();
 
-      assert.equal(escena.actores.length, 1, "El actor se agrega a la escena automáticamente");
+      assert.equal(
+        escena.actores.length,
+        1,
+        "El actor se agrega a la escena automáticamente"
+      );
       assert.equal(escena.id, pilas.escena_actual().id);
 
       escena = pilas.escenas.Normal();
-      assert.equal(escena.actores.length, 0, "Al crear otra escena vuelve a estar limpia de actores");
+      assert.equal(
+        escena.actores.length,
+        0,
+        "Al crear otra escena vuelve a estar limpia de actores"
+      );
 
       done();
     });
@@ -70,6 +78,8 @@ module("Integration | Pilas | escenas", function(hooks) {
       done();
     });
 
-    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia proyecto=proyecto}}`);
+    await render(
+      hbs`{{pilas-test cuandoInicia=cuandoInicia proyecto=proyecto}}`
+    );
   });
 });
