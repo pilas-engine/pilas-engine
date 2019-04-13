@@ -1,4 +1,4 @@
-<div class="vh-100 wrapper verdana bg-white flex flex-column">
+<div class="{{if oscuro 'theme-oscuro' 'theme-claro'}} bg-fondo vh-100 wrapper verdana flex flex-column">
 
   <div class="h2-5 flex">
 
@@ -67,7 +67,7 @@
 
       </div>
 
-      <div class="flex {{if debe_expandir_el_panel_de_previsualizacion "flex1" "w5"}} flex-column bg-white pa2 unselectable">
+      <div class="flex {{if debe_expandir_el_panel_de_previsualizacion "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
 
         <div class="mb2 flex" style="padding-bottom: 3px ">
           {{#if estado.puedeEjecutar}}
@@ -90,7 +90,7 @@
             {{#if estado.pausaActivada}}
               <div class="dib ma2 f6 fr flex1 flex">
 
-                <div class="truncate w5 f7 unselectable tr pt1 pr1 {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}}">
+                <div class="truncate texto w5 f7 unselectable tr pt1 pr1 {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}}">
                   Cuadro: {{plus posicion}} / {{tiempo (plus posicion)}}
                 </div>
 
@@ -120,7 +120,7 @@
                   fisica=fisica
                 }}
 
-        <div class="h2 ba br b--gray bg-light-gray mt2">
+        <div class="h2 ba br b--gray mt2">
           {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
           <div class="fr {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}} {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
@@ -137,7 +137,7 @@
 
       <div class="flex1 {{if mostrarEditor "flex flex-column" "dn"}} bl b--light-silver {{if oscuro "bg-black"}}">
 
-        <div class="unselectable pa2 flex bg-white">
+        <div class="unselectable pa2 flex bg-fondo">
           <div class="flex1">
           </div>
 

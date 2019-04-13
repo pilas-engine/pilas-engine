@@ -1,11 +1,11 @@
 <ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba b--silver mt2 mb2 {{if desactivado "o-40 disabled"}}">
 
-  <li role="button" class="pointer truncate pa1 {{if (eq seleccion 0) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona "proyecto"}}>
+  <li role="button" class="pointer texto truncate pa1 {{if (eq seleccion 0) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona "proyecto"}}>
     ◆ proyecto
   </li>
 
   {{#each escenas as |escena|}}
-    <li role="button" class="pointer truncate pa1 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona escena.id}}>
+    <li role="button" class="pointer texto truncate pa1 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona escena.id}}>
 
       {{#if (eq ultimaEscenaSeleccionada escena.id)}}
         ▾
@@ -26,7 +26,7 @@
     {{#if (eq ultimaEscenaSeleccionada escena.id)}}
       <ul>
         {{#each escena.actores as |actor|}}
-          <li role="button" class="truncate pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}>
+          <li role="button" class="truncate texto pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}>
             {{pilas-icono-de-actor actor=actor}} {{actor.nombre}}
 
             <div class="dib fr f7">
@@ -38,12 +38,12 @@
 
           </li>
         {{else}}
-          <li class="truncate pa1">sin actores</li>
+          <li class="truncate texto pa1">sin actores</li>
         {{/each}}
       </ul>
     {{/if}}
 
   {{else}}
-    <div class="orange ph3 pt2">sin escenas</div>
+    <div class="orange texto ph3 pt2">sin escenas</div>
   {{/each}}
 </ul>

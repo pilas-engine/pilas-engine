@@ -3,13 +3,13 @@
 {{#if mostrar}}
   <div role="button" class="fixed z-1 absolute--fill" {{action "ocultar"}}></div>
 
-  <div class="absolute bg-white ba b--light-gray shadow-4 right-1 top-1 pa2 w5 f7 z-999">
+  <div class="absolute bg-fondo ba b--light-gray shadow-4 right-1 top-1 pa2 w5 f7 z-999">
 
     <div class="">
       {{pilas-interruptor dataTest="boton-modo-oscuro" variable=oscuro texto="Modo oscuro"}}
     </div>
 
-    <div class="pa2">
+    <div class="pa2 texto">
       Tamaño de texto:
       {{pilas-boton dataTest="boton-disminuir" class="button link pointer hover-bg-black-10 unselectable ph1 mh1" texto="-" accion=(action "disminuir")}}
       <div role="button" class="dib pointer" {{action "restaurar"}}>{{tamano}}pt</div>

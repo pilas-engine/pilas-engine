@@ -219,3 +219,113 @@ span {
 .w104 {
   width: 104px;
 }
+
+.b--invisible {
+  border-color: rgba(1, 1, 1, 0);
+}
+
+/* THEME CLARO */
+
+.theme-claro .boton {
+  color: #454545;
+  text-shadow: 0 1px #fff;
+  vertical-align: top;
+  background-color: #e5e9e8;
+  box-shadow: inset 0 1px #fff;
+  border: 1px solid #9daca9;
+  border-radius: 4px;
+}
+
+.theme-claro .boton:hover {
+  background-color: #eff1f1;
+}
+
+.theme-claro .boton:focus {
+  border: 1px solid #0036ff;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.36), 0 0 0 2px #6fb5f1;
+  outline: 0;
+}
+
+.theme-claro .boton:active {
+  border: 1px solid #9daca9;
+  background-color: #d2d6d6;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.theme-claro.bg-fondo,
+.theme-claro .bg-fondo {
+  background-color: #dfe2e2;
+}
+
+.theme-claro .b--invisible:hover {
+  border-color: black;
+}
+
+.theme-claro .texto {
+  color: black;
+  text-shadow: 0 1px #eee;
+}
+
+/* THEME OSCURO */
+
+.theme-oscuro .boton {
+  color: #c6c8c8;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.69);
+  vertical-align: top;
+  background-color: #595b5b;
+  box-shadow: inset 0 1px #737373;
+  border: 1px solid #333434;
+  border-radius: 4px;
+}
+
+.theme-oscuro .boton:hover {
+  background-color: #626465;
+}
+
+.theme-oscuro .boton:focus {
+  border: 1px solid #0036ff;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.36), 0 0 0 2px #6fb5f1;
+  outline: 0;
+}
+
+.theme-oscuro .boton:active {
+  border: 1px solid #333434;
+  background-color: #3f4041;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.theme-oscuro.bg-fondo,
+.theme-oscuro .bg-fondo {
+  background-color: #4a4d4e;
+}
+
+.theme-oscuro .texto {
+  color: #c6c8c8;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.69);
+}
+
+.theme-oscuro .borrar,
+.theme-oscuro .imagen,
+.theme-oscuro .off,
+.theme-oscuro .on,
+.theme-oscuro .duplicar {
+  filter: invert(1);
+}
+
+.theme-oscuro .panel-izquierdo-on,
+.theme-oscuro .panel-central-on,
+.theme-oscuro .panel-derecho-on {
+  filter: grayscale(1) brightness(2);
+}
+
+.theme-oscuro .b--invisible:hover {
+  border-color: white;
+}
+
+.bg-fondo {
+  transition: background-color 500ms ease;
+}
+
+.boton {
+  transition: background-color 750ms ease;
+}
