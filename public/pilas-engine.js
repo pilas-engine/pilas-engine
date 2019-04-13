@@ -286,7 +286,6 @@ var Escenas = (function () {
     };
     Escenas.prototype.vincular = function (escena) {
         var _this = this;
-        console.log(escena.name);
         this[escena.name] = function () {
             _this.escena_actual = new escena(_this.pilas);
             return _this.escena_actual;
@@ -1757,7 +1756,13 @@ var gallina = (function (_super) {
         return _this;
     }
     gallina.prototype.iniciar = function () {
-        this.crear_animacion("gallina_vuela", ["gallina_vuela_1", "gallina_vuela_1", "gallina_vuela_2", "gallina_vuela_3", "gallina_vuela_2"], 15);
+        this.crear_animacion("gallina_vuela", [
+            "gallina_vuela_1",
+            "gallina_vuela_1",
+            "gallina_vuela_2",
+            "gallina_vuela_3",
+            "gallina_vuela_2"
+        ], 15);
         this.crear_animacion("gallina_muere", ["gallina_muere"], 20);
         this.crear_animacion("gallina_sin_piel", ["gallina_sin_piel"], 20);
         this.estado = "vuela";
@@ -1767,9 +1772,7 @@ var gallina = (function (_super) {
         this.reproducir_animacion("gallina_vuela");
     };
     gallina.prototype.vuela_actualizar = function () { };
-    gallina.prototype.vuela_cuando_comienza_una_colision = function (actor) {
-        console.log(actor);
-    };
+    gallina.prototype.vuela_cuando_comienza_una_colision = function (actor) { };
     return gallina;
 }(Actor));
 var laser = (function (_super) {
@@ -2640,7 +2643,6 @@ var ModoEjecucion = (function (_super) {
             diccionario[item] = item;
         }
         var diccionario_como_cadena = JSON.stringify(diccionario).replace(/"/g, "");
-        console.log(diccionario_como_cadena);
         return "__clases = " + diccionario_como_cadena + ";\n__clases;";
     };
     ModoEjecucion.prototype.guardar_parametros_en_atributos = function (datos) {

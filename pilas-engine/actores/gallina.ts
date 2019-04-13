@@ -12,7 +12,17 @@ class gallina extends Actor {
   };
 
   iniciar() {
-    this.crear_animacion("gallina_vuela", ["gallina_vuela_1", "gallina_vuela_1", "gallina_vuela_2", "gallina_vuela_3", "gallina_vuela_2"], 15);
+    this.crear_animacion(
+      "gallina_vuela",
+      [
+        "gallina_vuela_1",
+        "gallina_vuela_1",
+        "gallina_vuela_2",
+        "gallina_vuela_3",
+        "gallina_vuela_2"
+      ],
+      15
+    );
     this.crear_animacion("gallina_muere", ["gallina_muere"], 20);
     this.crear_animacion("gallina_sin_piel", ["gallina_sin_piel"], 20);
 
@@ -28,7 +38,5 @@ class gallina extends Actor {
   vuela_actualizar() {}
 
   // # TODO: Implementar este tipo de manejadores, para que desde los estados de autómata se puedan crear colisiones.
-  vuela_cuando_comienza_una_colision(actor) {
-    console.log(actor);
-  }
+  vuela_cuando_comienza_una_colision(actor) {}
 }

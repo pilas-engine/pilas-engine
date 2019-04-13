@@ -389,8 +389,6 @@ class ModoEjecucion extends Modo {
     }
 
     let diccionario_como_cadena = JSON.stringify(diccionario).replace(/"/g, "");
-    console.log(diccionario_como_cadena);
-
     return `__clases = ${diccionario_como_cadena};\n__clases;`;
   }
 

@@ -11,7 +11,6 @@ class Escenas {
   }
 
   vincular(escena: Escena) {
-    console.log(escena.name);
     this[escena.name] = () => {
       //@ts-ignore
       this.escena_actual = new escena(this.pilas);
