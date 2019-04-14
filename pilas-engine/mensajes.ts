@@ -29,7 +29,12 @@ class Mensajes {
   }
 
   atender_mensaje_iniciar_pilas(datos) {
-    this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones);
+    this.pilas.iniciar_phaser(
+      datos.ancho,
+      datos.alto,
+      datos.recursos,
+      datos.opciones
+    );
   }
 
   atender_mensaje_definir_estados_de_depuracion(datos) {
@@ -73,9 +78,13 @@ class Mensajes {
   }
 
   emitir_excepcion_al_editor(error, origen) {
+    // Simplifica el stacktrace para que no tenga referencia a la url
+    // local, sino que solamente muestre el nombre de archivo:
+    let stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en ");
+
     let detalle = {
       mensaje: error.message,
-      stack: error.stack.toString()
+      stack: stacktrace
     };
 
     let fuente_principal = {
@@ -90,6 +99,10 @@ class Mensajes {
     let fuente_pequena = {
       font: "10px verdana"
     };
+
+    let fondo = this.pilas.modo.add.graphics();
+    fondo.fillStyle(0x000000, 0.5);
+    fondo.fillRect(2, 2, 600, 600);
 
     this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
     this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
