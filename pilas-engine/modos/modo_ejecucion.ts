@@ -25,6 +25,7 @@ class ModoEjecucion extends Modo {
   preload() {}
 
   create(datos) {
+    console.log(datos);
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
 

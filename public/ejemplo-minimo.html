@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <script src="phaser.js"></script>
+    <script src="nineslice.js"></script>
+    <script src="pilas-engine.js"></script>
+  </head>
+
+  <body>
+    <script>
+      //pilas = new Pilas();
+      //pilas.iniciar({ ancho: 320, alto: 240, data_path: "../dist/data" });
+      var pilas = pilasengine.iniciar(
+        640,
+        480,
+        {
+          imagenes: [
+            { nombre: "sin_imagen", ruta: "imagenes/sin_imagen.png" },
+            { nombre: "pelota", ruta: "imagenes/pelota.png" }
+          ],
+          fuentes: [
+            {
+              nombre: "font",
+              imagen: "fuentes/font.png",
+              fuente: "fuentes/font.fnt"
+            },
+
+            // NOTA: estas dos fuentes (impact y mini-impact) son indispensables, se utilizan en la pantalla de carga.
+            // Sería ideal que exista una escena anterior a ModoCargador que ya tenga esos recursos, serializados
+            // por ejemplo, o que directamente no los use ni los necesite.
+            {
+              nombre: "impact",
+              imagen: "fuentes/impact.png",
+              fuente: "fuentes/impact.fnt"
+            },
+            {
+              nombre: "mini-impact",
+              imagen: "fuentes/mini-impact.png",
+              fuente: "fuentes/mini-impact.fnt"
+            }
+          ],
+          sonidos: [{ nombre: "laser", ruta: "sonidos/laser.wav" }]
+        },
+        {
+          alto: 200,
+          ancho: 200,
+          titulo: "sin usar",
+          escena_inicial: 3,
+          escenas: [
+            {
+              nombre: "principal",
+              id: 3,
+              actores: [],
+              camara_x: 0,
+              camara_y: 0
+            }
+          ]
+        }
+      );
+
+      pilas.onready = function() {
+        var fondo = new pilas.fondos.Plano();
+        window.nave = new pilas.actores.Nave();
+        pilas.definir_modos({ puntos_de_control: true });
+      };
+
+      // pilas.ejecutar pasa a estar en desuso, solo imprime un warning.
+      //pilas.ejecutar();
+    </script>
+  </body>
+</html>

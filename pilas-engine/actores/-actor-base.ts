@@ -410,7 +410,7 @@ class ActorBase {
       this.sprite.scaleX = s;
 
       if (this.figura) {
-        pilas.Phaser.Physics.Matter.Matter.Body.scale(
+        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(
           this.sprite.body,
           1 / this.escala_x,
           1 / this.escala_y
@@ -431,7 +431,7 @@ class ActorBase {
       this.sprite.scaleY = s;
 
       if (this.figura) {
-        pilas.Phaser.Physics.Matter.Matter.Body.scale(
+        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(
           this.sprite.body,
           1 / this.escala_x,
           1 / this.escala_y

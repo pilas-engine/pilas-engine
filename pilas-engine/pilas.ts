@@ -30,6 +30,7 @@ class Pilas {
 
   cursor_x: number = 0;
   cursor_y: number = 0;
+  opciones: any;
 
   constructor() {
     this.Phaser = Phaser;
@@ -63,6 +64,8 @@ class Pilas {
   }
 
   iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
+    this.opciones = opciones;
+
     if (!recursos) {
       throw Error(
         "No se puede iniciar phaser sin especificar una lista de recursos"
@@ -75,19 +78,43 @@ class Pilas {
     this.recursos = recursos;
     var configuracion = this.crear_configuracion(ancho, alto);
 
+    // Opción para simular una espera o demora al iniciar el componente de
+    // pilas, se utiliza desde el editor cuando corren los tests.
     if (opciones.esperar_antes_de_iniciar) {
       console.log("Esperando 1 segundo antes de iniciar ...");
       setTimeout(() => {
-        this.iniciar_phaser_desde_configuracion(configuracion);
+        this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
       }, 1000);
     } else {
-      this.iniciar_phaser_desde_configuracion(configuracion);
+      this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
     }
   }
 
-  private iniciar_phaser_desde_configuracion(configuracion) {
+  iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}) {
+    // modo_simple indica que pilas debe iniciar asumiendo que se está
+    // usando fuera del editor, sin señales ni iframes.
+    opciones.modo_simple = true;
+    this.iniciar_phaser(ancho, alto, recursos, opciones);
+    return this;
+  }
+
+  private iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion) {
     var game = new Phaser.Game(configuracion);
+
+    game.scene.add("ModoCargador", ModoCargador);
+    game.scene.add("ModoEditor", ModoEditor);
+    game.scene.add("ModoEjecucion", ModoEjecucion);
+    game.scene.add("ModoPausa", ModoPausa);
+
+    game.scene.start("ModoCargador", { pilas: this });
+
     this.game = game;
+  }
+
+  ejecutar() {
+    console.warn(
+      "La función pilas.ejecutar() entró en desuso, no hace falta invocarla."
+    );
   }
 
   definir_modo(nombre: string, datos) {
@@ -116,14 +143,15 @@ class Pilas {
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: false, // true es más rápido
+      pixelArt: true, // true es más rápido
+      autostart: false,
       input: {
         keyboard: true,
         mouse: true,
         touch: true,
         gamepad: true
       },
-      scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
+      //scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
       physics: {
         default: "matter",
         matter: {
@@ -195,4 +223,5 @@ class Pilas {
   }
 }
 
-var pilas = new Pilas();
+//var pilas = new Pilas();
+var pilasengine = new Pilas();
