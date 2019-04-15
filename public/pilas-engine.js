@@ -2469,7 +2469,6 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.preload = function () { };
     ModoEjecucion.prototype.create = function (datos) {
         var _this = this;
-        console.log(datos);
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         try {
@@ -2477,7 +2476,17 @@ var ModoEjecucion = (function (_super) {
             var escena = this.obtener_escena_inicial();
             this.clases = this.obtener_referencias_a_clases();
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
-            this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+            if (this.pilas.opciones.modo_simple) {
+                if (this.pilas["onready"]) {
+                    this.pilas["onready"](this.pilas);
+                }
+                else {
+                    console.warn("Estas usando pilas en modo simple, pero no has indicado pilas.onready = () => { /* codigo */}");
+                }
+            }
+            else {
+                this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+            }
             this.pilas.historia.limpiar();
             this.modo_fisica_activado = false;
             if (this.pilas.depurador.mostrar_fisica) {

@@ -25,7 +25,6 @@ class ModoEjecucion extends Modo {
   preload() {}
 
   create(datos) {
-    console.log(datos);
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
 
@@ -37,10 +36,21 @@ class ModoEjecucion extends Modo {
 
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
 
-      this.pilas.mensajes.emitir_mensaje_al_editor(
-        "termina_de_iniciar_ejecucion",
-        {}
-      );
+      if (this.pilas.opciones.modo_simple) {
+        if (this.pilas["onready"]) {
+          this.pilas["onready"](this.pilas);
+        } else {
+          console.warn(
+            "Estas usando pilas en modo simple, pero no has indicado pilas.onready = () => { /* codigo */}"
+          );
+        }
+      } else {
+        this.pilas.mensajes.emitir_mensaje_al_editor(
+          "termina_de_iniciar_ejecucion",
+          {}
+        );
+      }
+
       this.pilas.historia.limpiar();
 
       this.modo_fisica_activado = false;

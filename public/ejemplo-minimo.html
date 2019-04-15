@@ -18,7 +18,39 @@
         {
           imagenes: [
             { nombre: "sin_imagen", ruta: "imagenes/sin_imagen.png" },
-            { nombre: "pelota", ruta: "imagenes/pelota.png" }
+            { nombre: "pelota", ruta: "imagenes/pelota.png" },
+            {
+              nombre: "nave",
+              ruta: "imagenes/nave.png"
+            },
+            {
+              nombre: "nave_en_reposo",
+              ruta: "imagenes/nave/nave_reposo.png"
+            },
+            {
+              nombre: "nave_avanza_1",
+              ruta: "imagenes/nave/nave_avanza_1.png"
+            },
+            {
+              nombre: "nave_avanza_2",
+              ruta: "imagenes/nave/nave_avanza_2.png"
+            },
+            {
+              nombre: "nave_derecha_1",
+              ruta: "imagenes/nave/nave_derecha_1.png"
+            },
+            {
+              nombre: "nave_derecha_2",
+              ruta: "imagenes/nave/nave_derecha_2.png"
+            },
+            {
+              nombre: "nave_izquierda_1",
+              ruta: "imagenes/nave/nave_izquierda_1.png"
+            },
+            {
+              nombre: "nave_izquierda_2",
+              ruta: "imagenes/nave/nave_izquierda_2.png"
+            }
           ],
           fuentes: [
             {
@@ -61,9 +93,12 @@
       );
 
       pilas.onready = function() {
-        var fondo = new pilas.fondos.Plano();
-        window.nave = new pilas.actores.Nave();
-        pilas.definir_modos({ puntos_de_control: true });
+        let nave = pilas.actores.nave();
+
+        nave.aprender("arrastrable");
+
+        pilas.actores.pelota();
+        //pilas.definir_modos({ puntos_de_control: true });
       };
 
       // pilas.ejecutar pasa a estar en desuso, solo imprime un warning.
