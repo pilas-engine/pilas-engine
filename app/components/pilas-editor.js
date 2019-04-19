@@ -370,6 +370,8 @@ export default Component.extend({
           nombre: nombre,
           camara_x: 0,
           camara_y: 0,
+          gravedad_x: 0,
+          gravedad_y: 1,
           fondo: "plano",
           actores: []
         })

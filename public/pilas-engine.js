@@ -296,6 +296,54 @@ var Escenas = (function () {
     };
     return Escenas;
 }());
+var Eventos = (function () {
+    function Eventos(pilas) {
+        this.pilas = pilas;
+    }
+    Eventos.prototype.conectar = function (nombre_del_evento, funcion) {
+        return this.pilas.escena.eventos.conectar(nombre_del_evento, funcion);
+    };
+    Eventos.prototype.desconectar = function (identificador_del_evento) {
+        return this.pilas.escena.eventos.desconectar(identificador_del_evento);
+    };
+    Eventos.prototype.emitir_evento = function (identificador, datos) {
+        return this.pilas.escena.eventos.emitir_evento(identificador, datos);
+    };
+    return Eventos;
+}());
+var EventosDeEscena = (function () {
+    function EventosDeEscena(pilas) {
+        this.pilas = pilas;
+        this.conexiones = [];
+    }
+    EventosDeEscena.prototype.conectar = function (nombre_del_evento, funcion) {
+        if (nombre_del_evento === "mueve_mouse") {
+            var id = this.generar_id(nombre_del_evento);
+            this.conexiones.push({
+                id: id,
+                nombre_del_evento: nombre_del_evento,
+                funcion: funcion
+            });
+            return id;
+        }
+        console.log("Debo conectar", nombre_del_evento, funcion);
+    };
+    EventosDeEscena.prototype.desconectar = function (identificador_del_evento) {
+        console.log("TODO: Buscar el evento con id: " + identificador_del_evento + " y eliminarlo.");
+    };
+    EventosDeEscena.prototype.generar_id = function (nombre) {
+        var id = this.pilas.utilidades.obtener_id_autoincremental();
+        return "evento_conectado:" + nombre + ":" + id;
+    };
+    EventosDeEscena.prototype.emitir_evento = function (identificador, datos) {
+        this.conexiones.map(function (c) {
+            if (c.nombre_del_evento === identificador) {
+                c.funcion(datos);
+            }
+        });
+    };
+    return EventosDeEscena;
+}());
 var Fisica = (function () {
     function Fisica(pilas) {
         this.pilas = pilas;
@@ -303,6 +351,26 @@ var Fisica = (function () {
     Object.defineProperty(Fisica.prototype, "Matter", {
         get: function () {
             return Phaser.Physics.Matter["Matter"];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Fisica.prototype, "gravedad_x", {
+        get: function () {
+            return this.pilas.escena.gravedad_x;
+        },
+        set: function (v) {
+            this.pilas.escena.gravedad_x = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Fisica.prototype, "gravedad_y", {
+        get: function () {
+            return this.pilas.escena.gravedad_y;
+        },
+        set: function (v) {
+            this.pilas.escena.gravedad_y = v;
         },
         enumerable: true,
         configurable: true
@@ -659,6 +727,7 @@ var Pilas = (function () {
         this.animaciones = new Animaciones(this);
         this.fisica = new Fisica(this);
         this.habilidades = new Habilidades(this);
+        this.eventos = new Eventos(this);
     }
     Object.defineProperty(Pilas.prototype, "escena", {
         get: function () {
@@ -1983,15 +2052,43 @@ var texto = (function (_super) {
 }(ActorTextoBase));
 var EscenaBase = (function () {
     function EscenaBase(pilas) {
+        this._gravedad_x = 0;
+        this._gravedad_y = 1;
         this.pilas = pilas;
         this.actores = [];
         this.pilas.utilidades.obtener_id_autoincremental();
         this.camara = new Camara(pilas);
         this.pilas.escenas.definir_escena_actual(this);
         this.control = new Control(pilas);
+        this.eventos = new EventosDeEscena(pilas);
     }
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
+    };
+    Object.defineProperty(EscenaBase.prototype, "gravedad_x", {
+        get: function () {
+            return this._gravedad_x;
+        },
+        set: function (v) {
+            this._gravedad_x = v;
+            this.actualizar_gravedad();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EscenaBase.prototype, "gravedad_y", {
+        get: function () {
+            return this._gravedad_y;
+        },
+        set: function (v) {
+            this._gravedad_y = v;
+            this.actualizar_gravedad();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    EscenaBase.prototype.actualizar_gravedad = function () {
+        this.pilas.modo.matter.world.setGravity(this._gravedad_x, this._gravedad_y);
     };
     EscenaBase.prototype.obtener_nombre_para = function (nombre_propuesto) {
         var nombres_que_pueden_colisionar = this.actores
@@ -2418,6 +2515,7 @@ var ModoEjecucion = (function (_super) {
                 this.modo_fisica_activado = true;
                 this.matter.systems.matterPhysics.world.createDebugGraphic();
             }
+            this.conectar_eventos();
             this.input.on("pointermove", function (cursor) {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.pilas.cursor_x = Math.trunc(posicion.x);
@@ -2458,6 +2556,16 @@ var ModoEjecucion = (function (_super) {
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
             this.pausar();
         }
+    };
+    ModoEjecucion.prototype.conectar_eventos = function () {
+        var _this = this;
+        this.input.on("pointermove", function (p) {
+            _this.pilas.eventos.emitir_evento("mueve_mouse", {
+                x: p.x,
+                y: p.y,
+                evento: p
+            });
+        });
     };
     ModoEjecucion.prototype.cambiar_escena = function (nombre) {
         if (this._escena_en_ejecucion) {
@@ -2598,6 +2706,12 @@ var ModoEjecucion = (function (_super) {
         escena.camara.x = datos_de_la_escena.camara_x;
         escena.camara.y = datos_de_la_escena.camara_y;
         escena.fondo = datos_de_la_escena.fondo;
+        if (datos_de_la_escena.gravedad_x !== undefined) {
+            escena.gravedad_x = datos_de_la_escena.gravedad_x;
+        }
+        if (datos_de_la_escena.gravedad_y !== undefined) {
+            escena.gravedad_y = datos_de_la_escena.gravedad_y;
+        }
         escena.iniciar();
         this.actores = datos_de_la_escena.actores.map(function (e) {
             return _this.crear_actor(e);

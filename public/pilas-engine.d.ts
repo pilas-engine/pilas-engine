@@ -74,10 +74,28 @@ declare class Escenas {
     vincular(escena: Escena): void;
     definir_escena_actual(escena: EscenaBase): void;
 }
+declare class Eventos {
+    pilas: Pilas;
+    constructor(pilas: any);
+    conectar(nombre_del_evento: string, funcion: any): string;
+    desconectar(identificador_del_evento: string): void;
+    emitir_evento(identificador: any, datos: any): void;
+}
+declare class EventosDeEscena {
+    pilas: Pilas;
+    conexiones: any;
+    constructor(pilas: any);
+    conectar(nombre_del_evento: string, funcion: any): string;
+    desconectar(identificador_del_evento: string): void;
+    generar_id(nombre: any): string;
+    emitir_evento(identificador: any, datos: any): void;
+}
 declare class Fisica {
     pilas: Pilas;
     constructor(pilas: Pilas);
     readonly Matter: any;
+    gravedad_x: number;
+    gravedad_y: number;
 }
 declare class Habilidad {
     pilas: Pilas;
@@ -176,6 +194,7 @@ declare class Pilas {
     actores: Actores;
     animaciones: Animaciones;
     Phaser: any;
+    eventos: Eventos;
     recursos: any;
     fisica: Fisica;
     habilidades: Habilidades;
@@ -552,8 +571,14 @@ declare class EscenaBase {
     camara: Camara;
     fondo: string;
     control: Control;
+    _gravedad_x: number;
+    _gravedad_y: number;
+    eventos: EventosDeEscena;
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
+    gravedad_x: number;
+    gravedad_y: number;
+    private actualizar_gravedad;
     obtener_nombre_para(nombre_propuesto: string): string;
     serializar(): {
         camara_x: number;
@@ -645,6 +670,7 @@ declare class ModoEjecucion extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
+    private conectar_eventos;
     cambiar_escena(nombre: string): void;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;

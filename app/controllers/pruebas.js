@@ -35,12 +35,27 @@ export default Controller.extend({
                 l.y = -230;
                 */
 
+                /*
                 let a = pilas.actores.nave();
 
                 a.aprender("rotar constantemente");
                 a.aprender("rotar constantemente");
                 a.aprender("arrastrable");
+                */
 
+                let id = pilas.eventos.conectar("mueve_mouse", (datos) => {
+                  console.log("mueve", datos);
+                });
+
+                console.log(id)
+
+                pilas.eventos.conectar("click_de_mouse", (x, y) => {
+                  console.log("mueve", x, y);
+                });
+
+                pilas.eventos.conectar("termina_click", (x, y) => {
+                  console.log("mueve", x, y);
+                });
 
                 /*
 
@@ -172,7 +187,7 @@ export default Controller.extend({
               nombre: "aceituna",
               imagen: "aceituna",
               transparencia: 0,
-              figura: "circulo",
+              figura: "", // "circulo"
               figura_radio: 25,
               texto: "",
               es_texto: false,

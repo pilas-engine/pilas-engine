@@ -14,3 +14,24 @@ indicando el nombre de la escena que se quiere cambiar. Por ejemplo:
 ```
 pilas.cambiar_escena("escena2");
 ```
+
+## Gravedad y sistema de física
+
+Cada escena tiene asociado su propio entorno de simulación
+de física. Así que si estás haciendo un juego que involucra
+física es probable que quieras ajustar algunos parámetros
+como `gravedad_x` y `gravedad_y`. Estos parámetros se
+encuentran en el inspector de la escena y también se pueden
+cambiar desde el código así:
+
+```
+pilas.fisica.gravedad_x = 1;
+pilas.fisica.gravedad_y = 1;
+```
+
+o bien:
+
+```
+pilas.escena.gravedad_x = 0;
+pilas.escena.gravedad_y = -2;
+```

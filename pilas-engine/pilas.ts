@@ -19,6 +19,8 @@ class Pilas {
   animaciones: Animaciones;
   Phaser: any;
 
+  eventos: Eventos;
+
   recursos: any;
 
   fisica: Fisica;
@@ -44,6 +46,7 @@ class Pilas {
     this.animaciones = new Animaciones(this);
     this.fisica = new Fisica(this);
     this.habilidades = new Habilidades(this);
+    this.eventos = new Eventos(this);
   }
 
   get escena(): EscenaBase {

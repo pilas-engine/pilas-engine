@@ -17,7 +17,7 @@ function getFrameById(id) {
 }
 
 export default Component.extend({
-  classNames: ["monaco-editor", "w-100", "flex1", "ba", "b--light-gray"],
+  classNames: ["monaco-editor", "w-100", "flex1"],
   code: "// demo",
   loading: true,
   readOnly: false,

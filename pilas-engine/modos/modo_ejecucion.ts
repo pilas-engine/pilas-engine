@@ -49,6 +49,8 @@ class ModoEjecucion extends Modo {
         this.matter.systems.matterPhysics.world.createDebugGraphic();
       }
 
+      this.conectar_eventos();
+
       this.input.on("pointermove", cursor => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
           cursor.x,
@@ -124,6 +126,16 @@ class ModoEjecucion extends Modo {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
       this.pausar();
     }
+  }
+
+  private conectar_eventos() {
+    this.input.on("pointermove", p => {
+      this.pilas.eventos.emitir_evento("mueve_mouse", {
+        x: p.x,
+        y: p.y,
+        evento: p
+      });
+    });
   }
 
   cambiar_escena(nombre: string) {
@@ -311,6 +323,15 @@ class ModoEjecucion extends Modo {
     escena.camara.x = datos_de_la_escena.camara_x;
     escena.camara.y = datos_de_la_escena.camara_y;
     escena.fondo = datos_de_la_escena.fondo;
+
+    if (datos_de_la_escena.gravedad_x !== undefined) {
+      escena.gravedad_x = datos_de_la_escena.gravedad_x;
+    }
+
+    if (datos_de_la_escena.gravedad_y !== undefined) {
+      escena.gravedad_y = datos_de_la_escena.gravedad_y;
+    }
+
     escena.iniciar();
 
     this.actores = datos_de_la_escena.actores.map(e => {
