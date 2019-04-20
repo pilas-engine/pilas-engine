@@ -6,9 +6,12 @@ export default Component.extend({
   propiedades_de_actores: null,
   propiedades_de_escenas: null,
 
-  componente_a_renderizar: computed("tipo_de_la_instancia_seleccionada", function() {
-    return `pilas-inspector/${this.tipo_de_la_instancia_seleccionada}`;
-  }),
+  componente_a_renderizar: computed(
+    "tipo_de_la_instancia_seleccionada",
+    function() {
+      return `pilas-inspector/${this.tipo_de_la_instancia_seleccionada}`;
+    }
+  ),
 
   actions: {
     modificarAtributo(propiedad, valor) {

@@ -5,6 +5,9 @@ class EscenaBase {
   camara: Camara;
   fondo: string;
   control: Control;
+  _gravedad_x: number = 0;
+  _gravedad_y: number = 1;
+  eventos: EventosDeEscena;
 
   constructor(pilas) {
     this.pilas = pilas;
@@ -13,10 +16,33 @@ class EscenaBase {
     this.camara = new Camara(pilas);
     this.pilas.escenas.definir_escena_actual(this);
     this.control = new Control(pilas);
+    this.eventos = new EventosDeEscena(pilas);
   }
 
   agregar_actor(actor: Actor) {
     this.actores.push(actor);
+  }
+
+  get gravedad_x() {
+    return this._gravedad_x;
+  }
+
+  set gravedad_x(v: number) {
+    this._gravedad_x = v;
+    this.actualizar_gravedad();
+  }
+
+  get gravedad_y() {
+    return this._gravedad_y;
+  }
+
+  set gravedad_y(v: number) {
+    this._gravedad_y = v;
+    this.actualizar_gravedad();
+  }
+
+  private actualizar_gravedad() {
+    this.pilas.modo.matter.world.setGravity(this._gravedad_x, this._gravedad_y);
   }
 
   /*

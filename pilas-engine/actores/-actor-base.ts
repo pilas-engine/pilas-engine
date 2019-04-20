@@ -140,7 +140,7 @@ class ActorBase {
         throw Error(`No se conoce el tipo de figura ${figura}`);
     }
 
-    this.sprite.setInteractive();
+    this.interactivo = true;
 
     this.rotacion = propiedades.rotacion || 0;
     this.id_color = this.generar_color_para_depurar();
@@ -211,6 +211,18 @@ class ActorBase {
   }
 
   iniciar() {}
+
+  get interactivo() {
+    return this.sprite.input.enabled;
+  }
+
+  set interactivo(activo: boolean) {
+    if (activo) {
+      this.sprite.setInteractive();
+    } else {
+      this.sprite.disableInteractive();
+    }
+  }
 
   serializar() {
     let texto = "";

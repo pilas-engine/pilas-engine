@@ -29,10 +29,10 @@
 
   </div>
 
-  <section class="flex1 flex bt b--silver h-50">
+  <section class="flex1 flex bt borde h-50">
     <div class="columns">
 
-      <div class="w6 {{if mostrarPropiedades "flex flex-column" "dn"}} br b--light-silver pa2 ">
+      <div class="w6 {{if mostrarPropiedades "flex flex-column" "dn"}} br borde pa2 ">
 
         <div class="unselectable">
           {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="Crear Escena"}}
@@ -120,7 +120,7 @@
                   fisica=fisica
                 }}
 
-        <div class="h2 ba br b--gray mt2">
+        <div class="h2 ba br borde mt2">
           {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
           <div class="fr {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}} {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
@@ -135,7 +135,7 @@
 
       </div>
 
-      <div class="flex1 {{if mostrarEditor "flex flex-column" "dn"}} bl b--light-silver {{if oscuro "bg-black"}}">
+      <div class="flex1 {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
 
         <div class="unselectable pa2 flex bg-fondo">
           <div class="flex1">
@@ -163,6 +163,6 @@
     </div>
   </section>
 
-  <footer class="h2 tr bt b--light-silver"></footer>
+  <footer class="h2 tr bt borde"></footer>
 
 </div>

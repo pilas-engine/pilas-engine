@@ -93,6 +93,7 @@ de varias herramientas y bibliotecas como:
 - https://phaser.io/
 - https://github.com/jdotrjs/phaser3-nineslice/
 - https://electronjs.org/
+- https://github.com/koffsyrup/FileSaver.js
 
 ## Próximas tareas a desarrollar
 

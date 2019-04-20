@@ -8,8 +8,18 @@
 
   </div>
 
-  <div class="dib w3 v-top">
-    <input class="w104" value={{get objeto propiedad.propiedad}} oninput={{action "al_cambiar" value="target.value"}}>
-  </div>
+  {{#if editando}}
+    <div class="dib w3">
+      <input class="w104 v-top outline-0"
+        value={{get objeto propiedad.propiedad}}
+        oninput={{action "al_cambiar" value="target.value"}}
+        onblur={{action "cuando_pierde_foco"}}
+        onkeyup={{action "cuando_suelta_tecla"}}>
+    </div>
+  {{else}}
+    <div class="dib texto w3 pointer truncate v-top" role="button" {{action "comenzar_a_editar"}}>
+      {{get objeto propiedad.propiedad}}&nbsp;
+    </div>
+  {{/if}}
 
 </div>

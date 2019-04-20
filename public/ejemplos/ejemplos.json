@@ -14,6 +14,14 @@
     },
     {
       "nombre": "click_actor"
+    },
+    {
+      "nombre": "gravedad",
+      "desde": "2.0.72"
+    },
+    {
+      "nombre": "arrastrables",
+      "desde": "2.0.72"
     }
   ]
 }

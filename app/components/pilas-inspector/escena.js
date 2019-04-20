@@ -16,6 +16,16 @@ export default Component.extend({
       {
         tipo: "imagen",
         propiedad: "fondo"
+      },
+      {
+        tipo: "numero",
+        propiedad: "gravedad_x",
+        intensidad: 0.1
+      },
+      {
+        tipo: "numero",
+        propiedad: "gravedad_y",
+        intensidad: 0.1
       }
     ]);
   }

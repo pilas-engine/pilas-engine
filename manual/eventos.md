@@ -8,8 +8,8 @@ Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acc
 
 Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el código:
 
-* cuando_hace_click(x, y, evento_original)
-* cuando_mueve(x, y, evento_original)
+- cuando_hace_click(x, y, evento_original)
+- cuando_mueve(x, y, evento_original)
 
 Estas funciones se pueden crear en el código de una escena o de un actor. La diferencia es que en las escenas el "click" o el movimiento se van a detectar en toda la pantalla, mientras que en el código del actor solo se detectarán si el mouse apunta al actor.
 
@@ -68,3 +68,28 @@ class actor extends Actor {
 ```
 
 Los manejadores de eventos como `cuando_mueve`, `cuando_sale` y `cuando_hace_click` van a ser llamados internamente cuando se produzcan esos eventos sobre el actor.
+
+## Capturar eventos de forma global, con manejadores
+
+Otra forma de capturar eventos más sofisticada es utilizando
+el módulo `eventos` de la escena.
+
+```
+pilas.eventos.conectar("mueve_mouse", (x, y) => {
+  console.log("mueve", x, y);
+});
+
+pilas.eventos.conectar("click_de_mouse", (x, y) => {
+  console.log("mueve", x, y);
+});
+
+pilas.eventos.conectar("termina_click", (x, y) => {
+  console.log("mueve", x, y);
+});
+```
+
+Esta es la lista de eventos completa:
+
+- `mueve_mouse`: x, y
+- `click_de_mouse`: x, y, boton_izquierdo, boton_derecho
+- `termina_click`: x, y, boton_izquierdo, boton_derecho
