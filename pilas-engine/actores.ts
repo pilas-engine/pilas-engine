@@ -11,10 +11,13 @@ class Actores {
 
     // Toma las propiedades del actor pero como una extensión de las
     // propiedades iniciales.
-    let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
+    let p = this.pilas.utilidades.combinar_propiedades(
+      actor.propiedades_base,
+      actor.propiedades
+    );
 
     if (!p.nombre) {
-      let nombre_asignado = this.pilas.escena.obtener_nombre_para(nombre)
+      let nombre_asignado = this.pilas.escena.obtener_nombre_para(nombre);
       p.nombre = nombre_asignado;
     }
 
@@ -81,5 +84,9 @@ class Actores {
 
   laser() {
     return this.crear_actor("laser");
+  }
+
+  deslizador() {
+    return this.crear_actor("deslizador");
   }
 }

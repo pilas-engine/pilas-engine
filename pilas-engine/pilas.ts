@@ -148,6 +148,10 @@ class Pilas {
     return this.escena.actores;
   }
 
+  buscar_actor(nombre: string) {
+    return this.obtener_actor_por_nombre(nombre);
+  }
+
   obtener_actor_por_nombre(nombre: string) {
     return this.obtener_actores().find(actor => actor.nombre === nombre);
   }
