@@ -43,22 +43,25 @@ export default Controller.extend({
                 a.aprender("arrastrable");
                 */
 
+                /*
                 let id = pilas.eventos.conectar("mueve_mouse", (datos) => {
                   console.log("mueve", datos);
                 });
 
-                console.log(id)
+                pilas.eventos.desconectar(id);
 
                 pilas.eventos.conectar("click_de_mouse", (x, y) => {
-                  console.log("mueve", x, y);
+                  console.log("click de mouse", x, y);
                 });
 
                 pilas.eventos.conectar("termina_click", (x, y) => {
-                  console.log("mueve", x, y);
+                  console.log("termina click", x, y);
                 });
+                */
+
+                pilas.actores.deslizador();
 
                 /*
-
                 let b = pilas.actores.texto()
                 b.texto = "Has click sobre algún actor para ver que dicen";
                 b.sombra = true;
@@ -89,7 +92,6 @@ export default Controller.extend({
                 */
 
                 /*
-
                 let plataforma = pilas.actores.plataforma();
                 plataforma.x = 0;
                 plataforma.y = -100;
