@@ -119,7 +119,7 @@ class Pilas {
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: false, // true es más rápido
+      pixelArt: true, // true es más rápido
       input: {
         keyboard: true,
         mouse: true,

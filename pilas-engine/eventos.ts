@@ -13,7 +13,7 @@ class Eventos {
     return this.pilas.escena.eventos.desconectar(identificador_del_evento);
   }
 
-  /*
+  /**
    * Lo invoca pilas de forma interna, aunque también se puede llamar
    * desde tests para simular un evento externo.
    */

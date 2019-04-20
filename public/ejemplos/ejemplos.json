@@ -14,6 +14,12 @@
     },
     {
       "nombre": "click_actor"
+    },
+    {
+      "nombre": "gravedad"
+    },
+    {
+      "nombre": "arrastrables"
     }
   ]
 }

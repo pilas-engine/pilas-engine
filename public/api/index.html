@@ -67,10 +67,32 @@
 				<h1 id="pilas-engine-2">pilas-engine 2</h1>
 				<p>Prototipo de la nueva versión de pilas-engine</p>
 				<p><a href="https://circleci.com/gh/pilas-engine/pilas-engine"><img src="https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg" alt="CircleCI"></a></p>
-				<p><a href="http://waffle.io/pilas-engine/pilas-engine"><img src="https://badge.waffle.io/pilas-engine/pilas-engine.svg?label=ready&amp;title=Ready" alt="Stories in Ready"></a></p>
+				<p>La versión original de pilas se puede ver aquí: <a href="http://www.pilas-engine.com.ar">http://www.pilas-engine.com.ar</a></p>
+				<h2 id="art-culos">Artículos</h2>
+				<ul>
+					<li><a href="http://examplelab.com.ar/comenzamos-pilas-engine-2/">http://examplelab.com.ar/comenzamos-pilas-engine-2/</a> - Anuncio del comienzo del proyecto</li>
+					<li><a href="http://foro.pilas-engine.com.ar/t/resumen-del-sprint-05/1592">http://foro.pilas-engine.com.ar/t/resumen-del-sprint-05/1592</a> - Resumen del sprint 5 (1 de Diciembre de 2018)</li>
+					<li><a href="http://foro.pilas-engine.com.ar/t/resumen-del-sprint-04/1401/2">http://foro.pilas-engine.com.ar/t/resumen-del-sprint-04/1401/2</a> - Resumen del sprint 4 (5 de Junio de 2018)</li>
+					<li><a href="http://foro.pilas-engine.com.ar/t/resumen-del-sprint-03/1389">http://foro.pilas-engine.com.ar/t/resumen-del-sprint-03/1389</a> - Resumen del sprint 3 (28 de Abril del 2018)</li>
+					<li><a href="http://foro.pilas-engine.com.ar/t/resumen-del-sprint-02/1375">http://foro.pilas-engine.com.ar/t/resumen-del-sprint-02/1375</a> - Resumen del sprint 2 (31 de Marzo del 2018)</li>
+					<li><a href="http://foro.pilas-engine.com.ar/t/resumen-del-sprint-01/1366">http://foro.pilas-engine.com.ar/t/resumen-del-sprint-01/1366</a> - Resumen del sprint 1 (20 de Marzo del 2018)</li>
+				</ul>
+				<h2 id="links-tiles">Links útiles</h2>
+				<ul>
+					<li><a href="http://app.pilas-engine.com.ar">http://app.pilas-engine.com.ar</a> - La versión más reciente de pilas.</li>
+					<li><a href="http://pilas-engine.surge.sh">http://pilas-engine.surge.sh</a> - La versión más reciente de pilas (mirror).</li>
+					<li><a href="http://manual-pilas-engine.surge.sh">http://manual-pilas-engine.surge.sh</a> - El manual actualizado al día de la fecha.</li>
+					<li><a href="https://circleci.com/gh/pilas-engine/pilas-engine">https://circleci.com/gh/pilas-engine/pilas-engine</a> - El resultado de los tests de integración.</li>
+					<li><a href="https://trello.com/b/eQJOjpOF/pilas-engine-2">https://trello.com/b/eQJOjpOF/pilas-engine-2</a> - Nuestra planificación de tareas.</li>
+					<li><a href="http://foro.pilas-engine.com.ar">http://foro.pilas-engine.com.ar</a> - El foro donde debatimos ideas y anunciamos las versiones nuevas.</li>
+					<li><a href="https://github.com/pilas-engine/pilas-engine/releases">https://github.com/pilas-engine/pilas-engine/releases</a> - Las versiones descargables de Pilas offline y los manuales.</li>
+				</ul>
 				<h2 id="primeros-pasos">Primeros pasos</h2>
-				<p>Para comenzar a utilizar este repositorio deberías tener instalado git, Make
-				y ejecutar estos comandos:</p>
+				<p>Antes de comenzar, te recomendamos tener en cuenta este video en donde
+				explicamos cómo crear el entorno de pilas-engine y hacer algunas tareas básicas: <a href="https://www.youtube.com/watch?v=ASKYT7OoLos">https://www.youtube.com/watch?v=ASKYT7OoLos</a></p>
+				<p>También vas a encontrar instrucciones para colaborar aquí: <a href="http://manual-pilas-engine.surge.sh/entorno.html">http://manual-pilas-engine.surge.sh/entorno.html</a></p>
+				<p>Para comenzar a utilizar este repositorio deberías tener instalado git, Make, nodejs
+				(versión 6 o superior) y ejecutar estos comandos:</p>
 				<pre><code>git clone http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/pilas-engine/pilas-engine.git
 <span class="hljs-keyword">cd</span> pilas-engine
 <span class="hljs-keyword">make</span> iniciar
@@ -99,6 +121,26 @@ make <span class="hljs-keyword">binarios</span>
 </code></pre><h2 id="nota">Nota</h2>
 				<p>Los binarios de serialport corresponden a la versión de electron v53, y se
 				obtuvieron desde: <a href="https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/tag/v5.1.0-beta5">https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/tag/v5.1.0-beta5</a></p>
+				<h2 id="estilo-de-programaci-n">Estilo de programación</h2>
+				<p>Si estás con ganas de participar del proyecto o enviar correcciones, tené
+					en cuenta que el código enviado debería estar en español (siempre que sea
+					posible) y que las variables o métodos con varias palabras tienen que estar
+				separadas por guiones bajos (por ejemplo &quot;cantidad_de_actores&quot;)</p>
+				<p>Además, es muy importante que tengas configurado tu editor para usar
+				automáticamente prettier (<a href="https://prettier.io/)">https://prettier.io/)</a>.</p>
+				<h2 id="cr-ditos">Créditos</h2>
+				<p>Este proyecto es posible gracias a la comunidad de pilas-engine, y a la existencia
+				de varias herramientas y bibliotecas como:</p>
+				<ul>
+					<li><a href="https://phaser.io/">https://phaser.io/</a></li>
+					<li><a href="https://github.com/jdotrjs/phaser3-nineslice/">https://github.com/jdotrjs/phaser3-nineslice/</a></li>
+					<li><a href="https://electronjs.org/">https://electronjs.org/</a></li>
+				</ul>
+				<h2 id="pr-ximas-tareas-a-desarrollar">Próximas tareas a desarrollar</h2>
+				<p>Tenemos un board de trello con todas las tareas que estamos desarrollando:</p>
+				<ul>
+					<li><a href="https://trello.com/b/eQJOjpOF/pilas-engine-2">https://trello.com/b/eQJOjpOF/pilas-engine-2</a></li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -111,40 +153,136 @@ make <span class="hljs-keyword">binarios</span>
 						<a href="modules/_actores_.html">"actores"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores__actor_.html">"actores/-<wbr>actor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores__actor_base_.html">"actores/-<wbr>actor-<wbr>base"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores__actor_texto_base_.html">"actores/-<wbr>actor-<wbr>texto-<wbr>base"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_aceituna_.html">"actores/aceituna"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_actores_actor_.html">"actores/actor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_actores_caja_.html">"actores/caja"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_conejo_.html">"actores/conejo"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_gallina_.html">"actores/gallina"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_laser_.html">"actores/laser"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_logo_.html">"actores/logo"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_moneda_.html">"actores/moneda"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_nave_.html">"actores/nave"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_nube_.html">"actores/nube"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_pared_.html">"actores/pared"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_actores_pelota_.html">"actores/pelota"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_plataforma_.html">"actores/plataforma"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_suelo_.html">"actores/suelo"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_techo_.html">"actores/techo"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_actores_texto_.html">"actores/texto"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_animaciones_.html">"animaciones"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_automata_.html">"automata"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_camara_.html">"camara"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_control_.html">"control"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_editor_sprite_.html">"editor/sprite"</a>
+						<a href="modules/_depurador_.html">"depurador"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_editor_spritesimple_.html">"editor/sprite<wbr>Simple"</a>
+						<a href="modules/_escenas_.html">"escenas"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_estados_editor_.html">"estados/editor"</a>
+						<a href="modules/_escenas__escena_.html">"escenas/-<wbr>escena"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_estados_ejecucion_.html">"estados/ejecucion"</a>
+						<a href="modules/_escenas__escena_base_.html">"escenas/-<wbr>escena-<wbr>base"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_estados_estado_.html">"estados/estado"</a>
+						<a href="modules/_escenas_normal_.html">"escenas/normal"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_estados_pausa_.html">"estados/pausa"</a>
+						<a href="modules/_eventos_.html">"eventos"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_log_.html">"log"</a>
+						<a href="modules/_eventos_de_escena_.html">"eventos_<wbr>de_<wbr>escena"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_fisica_.html">"fisica"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_habilidades_.html">"habilidades"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_habilidades__habilidad_.html">"habilidades/-<wbr>habilidad"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_habilidades_arrastrable_.html">"habilidades/arrastrable"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_habilidades_rotar_constantemente_.html">"habilidades/rotar-<wbr>constantemente"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_historia_.html">"historia"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_mensajes_.html">"mensajes"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modos_modo_.html">"modos/modo"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modos_modo_cargador_.html">"modos/modo_<wbr>cargador"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modos_modo_editor_.html">"modos/modo_<wbr>editor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modos_modo_ejecucion_.html">"modos/modo_<wbr>ejecucion"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modos_modo_pausa_.html">"modos/modo_<wbr>pausa"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_pilas_.html">"pilas"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utilidades_.html">"utilidades"</a>
 					</li>
 				</ul>
 			</nav>

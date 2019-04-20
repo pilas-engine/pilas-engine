@@ -17,6 +17,7 @@ declare class Actores {
     techo(): any;
     texto(): any;
     laser(): any;
+    deslizador(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -84,10 +85,11 @@ declare class Eventos {
 declare class EventosDeEscena {
     pilas: Pilas;
     conexiones: any;
+    nombres_de_eventos: string[];
     constructor(pilas: any);
     conectar(nombre_del_evento: string, funcion: any): string;
     desconectar(identificador_del_evento: string): void;
-    generar_id(nombre: any): string;
+    private generar_id;
     emitir_evento(identificador: any, datos: any): void;
 }
 declare class Fisica {
@@ -237,6 +239,7 @@ declare class Pilas {
     };
     reproducir_sonido(nombre: string): void;
     obtener_actores(): Actor[];
+    buscar_actor(nombre: string): Actor;
     obtener_actor_por_nombre(nombre: string): Actor;
     obtener_cantidad_de_actores(): number;
     obtener_diccionario_de_actores(): {};
@@ -298,6 +301,7 @@ declare class ActorBase {
     pre_iniciar(propiedades: any): void;
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
+    interactivo: boolean;
     serializar(): {
         tipo: String;
         x: number;
@@ -447,6 +451,26 @@ declare class conejo extends Actor {
     cuando_comienza_una_colision(actor: any): boolean;
     cuando_se_mantiene_una_colision(actor: any): void;
     cuando_termina_una_colision(actor: any): void;
+}
+declare class deslizador extends Actor {
+    propiedades: {
+        x: number;
+        y: number;
+        imagen: string;
+        etiqueta: string;
+        figura: string;
+    };
+    valor: number;
+    marca: Actor;
+    esta_arrastrando_el_deslizador: any;
+    iniciar(): void;
+    conectar_eventos(): void;
+    crear_marca(): void;
+    cuando_hace_click(x: any, y: any): void;
+    private cuando_mueve_el_mouse;
+    private cuando_termina_de_hacer_click;
+    actualizar(): void;
+    private ajustar_marca;
 }
 declare class gallina extends Actor {
     propiedades: {
@@ -671,6 +695,9 @@ declare class ModoEjecucion extends Modo {
     preload(): void;
     create(datos: any): void;
     private conectar_eventos;
+    private manejar_evento_click_de_mouse;
+    private manejar_evento_termina_click;
+    private manejar_evento_muevemouse;
     cambiar_escena(nombre: string): void;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;
