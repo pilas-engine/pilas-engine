@@ -19,6 +19,8 @@ class Pilas {
   animaciones: Animaciones;
   Phaser: any;
 
+  eventos: Eventos;
+
   recursos: any;
 
   fisica: Fisica;
@@ -45,6 +47,7 @@ class Pilas {
     this.animaciones = new Animaciones(this);
     this.fisica = new Fisica(this);
     this.habilidades = new Habilidades(this);
+    this.eventos = new Eventos(this);
   }
 
   get escena(): EscenaBase {
@@ -171,6 +174,10 @@ class Pilas {
 
   obtener_actores() {
     return this.escena.actores;
+  }
+
+  buscar_actor(nombre: string) {
+    return this.obtener_actor_por_nombre(nombre);
   }
 
   obtener_actor_por_nombre(nombre: string) {

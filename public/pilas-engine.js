@@ -74,6 +74,9 @@ var Actores = (function () {
     Actores.prototype.laser = function () {
         return this.crear_actor("laser");
     };
+    Actores.prototype.deslizador = function () {
+        return this.crear_actor("deslizador");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -296,6 +299,67 @@ var Escenas = (function () {
     };
     return Escenas;
 }());
+var Eventos = (function () {
+    function Eventos(pilas) {
+        this.pilas = pilas;
+    }
+    Eventos.prototype.conectar = function (nombre_del_evento, funcion) {
+        return this.pilas.escena.eventos.conectar(nombre_del_evento, funcion);
+    };
+    Eventos.prototype.desconectar = function (identificador_del_evento) {
+        return this.pilas.escena.eventos.desconectar(identificador_del_evento);
+    };
+    Eventos.prototype.emitir_evento = function (identificador, datos) {
+        return this.pilas.escena.eventos.emitir_evento(identificador, datos);
+    };
+    return Eventos;
+}());
+var EventosDeEscena = (function () {
+    function EventosDeEscena(pilas) {
+        this.pilas = pilas;
+        this.conexiones = [];
+        this.nombres_de_eventos = [
+            "mueve_mouse",
+            "click_de_mouse",
+            "termina_click"
+        ];
+    }
+    EventosDeEscena.prototype.conectar = function (nombre_del_evento, funcion) {
+        if (this.nombres_de_eventos.indexOf(nombre_del_evento) === -1) {
+            console.warn("No se puede conectar el evento " + nombre_del_evento);
+            console.warn("Los eventos que existen son", this.nombres_de_eventos);
+            return;
+        }
+        var id = this.generar_id(nombre_del_evento);
+        this.conexiones.push({
+            id: id,
+            nombre_del_evento: nombre_del_evento,
+            funcion: funcion
+        });
+        return id;
+    };
+    EventosDeEscena.prototype.desconectar = function (identificador_del_evento) {
+        var indice = this.conexiones.findIndex(function (a) { return a.id === identificador_del_evento; });
+        if (indice > -1) {
+            this.conexiones.splice(indice, 1);
+        }
+        else {
+            console.warn("No se encontr\u00F3 en evento " + identificador_del_evento);
+        }
+    };
+    EventosDeEscena.prototype.generar_id = function (nombre) {
+        var id = this.pilas.utilidades.obtener_id_autoincremental();
+        return "evento_conectado:" + nombre + ":" + id;
+    };
+    EventosDeEscena.prototype.emitir_evento = function (identificador, datos) {
+        this.conexiones.map(function (c) {
+            if (c.nombre_del_evento === identificador) {
+                c.funcion(datos);
+            }
+        });
+    };
+    return EventosDeEscena;
+}());
 var Fisica = (function () {
     function Fisica(pilas) {
         this.pilas = pilas;
@@ -303,6 +367,26 @@ var Fisica = (function () {
     Object.defineProperty(Fisica.prototype, "Matter", {
         get: function () {
             return Phaser.Physics.Matter["Matter"];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Fisica.prototype, "gravedad_x", {
+        get: function () {
+            return this.pilas.escena.gravedad_x;
+        },
+        set: function (v) {
+            this.pilas.escena.gravedad_x = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Fisica.prototype, "gravedad_y", {
+        get: function () {
+            return this.pilas.escena.gravedad_y;
+        },
+        set: function (v) {
+            this.pilas.escena.gravedad_y = v;
         },
         enumerable: true,
         configurable: true
@@ -337,12 +421,20 @@ var Arrastrable = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Arrastrable.prototype.iniciar = function () {
+        var _this = this;
         var input = this.pilas.modo.input;
+        var valor_inicial_dinamico = this.actor.dinamico;
         this.actor.sprite.setInteractive();
         input.setDraggable(this.actor.sprite);
-        input.on("drag", function (pointer, gameObject, dragX, dragY) {
-            gameObject.x = dragX;
-            gameObject.y = dragY;
+        input.on("dragstart", function (_, objeto, x, y) {
+            _this.actor.dinamico = false;
+        });
+        input.on("drag", function (_, objeto, x, y) {
+            objeto.x = x;
+            objeto.y = y;
+        });
+        input.on("dragend", function () {
+            _this.actor.dinamico = valor_inicial_dinamico;
         });
     };
     Arrastrable.prototype.actualizar = function () { };
@@ -663,6 +755,7 @@ var Pilas = (function () {
         this.animaciones = new Animaciones(this);
         this.fisica = new Fisica(this);
         this.habilidades = new Habilidades(this);
+        this.eventos = new Eventos(this);
     }
     Object.defineProperty(Pilas.prototype, "escena", {
         get: function () {
@@ -771,6 +864,9 @@ var Pilas = (function () {
     };
     Pilas.prototype.obtener_actores = function () {
         return this.escena.actores;
+    };
+    Pilas.prototype.buscar_actor = function (nombre) {
+        return this.obtener_actor_por_nombre(nombre);
     };
     Pilas.prototype.obtener_actor_por_nombre = function (nombre) {
         return this.obtener_actores().find(function (actor) { return actor.nombre === nombre; });
@@ -914,7 +1010,7 @@ var ActorBase = (function () {
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
         }
-        this.sprite.setInteractive();
+        this.interactivo = true;
         this.rotacion = propiedades.rotacion || 0;
         this.id_color = this.generar_color_para_depurar();
         this.etiqueta = propiedades.etiqueta;
@@ -964,6 +1060,21 @@ var ActorBase = (function () {
         destino.setOrigin(origen.originX, origen.originY);
     };
     ActorBase.prototype.iniciar = function () { };
+    Object.defineProperty(ActorBase.prototype, "interactivo", {
+        get: function () {
+            return this.sprite.input.enabled;
+        },
+        set: function (activo) {
+            if (activo) {
+                this.sprite.setInteractive();
+            }
+            else {
+                this.sprite.disableInteractive();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     ActorBase.prototype.serializar = function () {
         var texto = "";
         if (this._es_texto) {
@@ -1758,6 +1869,64 @@ var conejo = (function (_super) {
     conejo.prototype.cuando_termina_una_colision = function (actor) { };
     return conejo;
 }(Actor));
+var deslizador = (function (_super) {
+    __extends(deslizador, _super);
+    function deslizador() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            x: 0,
+            y: 0,
+            imagen: "interfaz/linea",
+            etiqueta: "deslizador",
+            figura: ""
+        };
+        _this.valor = 0;
+        return _this;
+    }
+    deslizador.prototype.iniciar = function () {
+        this.imagen = "interfaz/linea";
+        this.esta_arrastrando_el_deslizador = false;
+        this.crear_marca();
+        this.conectar_eventos();
+    };
+    deslizador.prototype.conectar_eventos = function () {
+        var _this = this;
+        this.pilas.eventos.conectar("mueve_mouse", function (datos) {
+            _this.cuando_mueve_el_mouse(datos);
+        });
+        this.pilas.eventos.conectar("termina_click", function () {
+            _this.cuando_termina_de_hacer_click();
+        });
+    };
+    deslizador.prototype.crear_marca = function () {
+        this.marca = this.pilas.actores.actor();
+        this.marca.imagen = "interfaz/deslizador";
+        this.marca.interactivo = false;
+    };
+    deslizador.prototype.cuando_hace_click = function (x, y) {
+        this.esta_arrastrando_el_deslizador = true;
+        this.ajustar_marca(x);
+    };
+    deslizador.prototype.cuando_mueve_el_mouse = function (datos) {
+        if (this.esta_arrastrando_el_deslizador) {
+            this.ajustar_marca(datos.x);
+        }
+    };
+    deslizador.prototype.cuando_termina_de_hacer_click = function () {
+        this.esta_arrastrando_el_deslizador = false;
+    };
+    deslizador.prototype.actualizar = function () {
+        this.marca.x = this.x - 90 + 1.8 * this.valor;
+        this.marca.y = this.y;
+    };
+    deslizador.prototype.ajustar_marca = function (x) {
+        var dx = x - this.x;
+        dx = Math.max(dx, -90);
+        dx = Math.min(dx, 90);
+        this.valor = (dx + 90) / 1.8;
+    };
+    return deslizador;
+}(Actor));
 var gallina = (function (_super) {
     __extends(gallina, _super);
     function gallina() {
@@ -2002,15 +2171,43 @@ var texto = (function (_super) {
 }(ActorTextoBase));
 var EscenaBase = (function () {
     function EscenaBase(pilas) {
+        this._gravedad_x = 0;
+        this._gravedad_y = 1;
         this.pilas = pilas;
         this.actores = [];
         this.pilas.utilidades.obtener_id_autoincremental();
         this.camara = new Camara(pilas);
         this.pilas.escenas.definir_escena_actual(this);
         this.control = new Control(pilas);
+        this.eventos = new EventosDeEscena(pilas);
     }
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
+    };
+    Object.defineProperty(EscenaBase.prototype, "gravedad_x", {
+        get: function () {
+            return this._gravedad_x;
+        },
+        set: function (v) {
+            this._gravedad_x = v;
+            this.actualizar_gravedad();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EscenaBase.prototype, "gravedad_y", {
+        get: function () {
+            return this._gravedad_y;
+        },
+        set: function (v) {
+            this._gravedad_y = v;
+            this.actualizar_gravedad();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    EscenaBase.prototype.actualizar_gravedad = function () {
+        this.pilas.modo.matter.world.setGravity(this._gravedad_x, this._gravedad_y);
     };
     EscenaBase.prototype.obtener_nombre_para = function (nombre_propuesto) {
         var nombres_que_pueden_colisionar = this.actores
@@ -2493,6 +2690,7 @@ var ModoEjecucion = (function (_super) {
                 this.modo_fisica_activado = true;
                 this.matter.systems.matterPhysics.world.createDebugGraphic();
             }
+            this.conectar_eventos();
             this.input.on("pointermove", function (cursor) {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.pilas.cursor_x = Math.trunc(posicion.x);
@@ -2533,6 +2731,41 @@ var ModoEjecucion = (function (_super) {
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
             this.pausar();
         }
+    };
+    ModoEjecucion.prototype.conectar_eventos = function () {
+        this.input.on("pointermove", this.manejar_evento_muevemouse.bind(this));
+        this.input.on("pointerdown", this.manejar_evento_click_de_mouse.bind(this));
+        this.input.on("pointerup", this.manejar_evento_termina_click.bind(this));
+    };
+    ModoEjecucion.prototype.manejar_evento_click_de_mouse = function (evento) {
+        var x = evento.x;
+        var y = evento.y;
+        var p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+        this.pilas.eventos.emitir_evento("click_de_mouse", {
+            x: p.x,
+            y: p.y,
+            evento: evento
+        });
+    };
+    ModoEjecucion.prototype.manejar_evento_termina_click = function (evento) {
+        var x = evento.x;
+        var y = evento.y;
+        var p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+        this.pilas.eventos.emitir_evento("termina_click", {
+            x: p.x,
+            y: p.y,
+            evento: evento
+        });
+    };
+    ModoEjecucion.prototype.manejar_evento_muevemouse = function (evento) {
+        var x = evento.x;
+        var y = evento.y;
+        var p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+        this.pilas.eventos.emitir_evento("mueve_mouse", {
+            x: p.x,
+            y: p.y,
+            evento: evento
+        });
     };
     ModoEjecucion.prototype.cambiar_escena = function (nombre) {
         if (this._escena_en_ejecucion) {
@@ -2652,8 +2885,9 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.obtener_escena_por_nombre = function (nombre) {
         var escenas_encontradas = this.proyecto.escenas.filter(function (e) { return e.nombre == nombre; });
+        var nombres = this.proyecto.escenas.map(function (e) { return e.nombre; }).join(",");
         if (escenas_encontradas.length === 0) {
-            throw Error("No se puede encontrar la escena '" + nombre + "'.");
+            throw Error("No se puede encontrar la escena '" + nombre + "' en " + nombres);
         }
         else {
             if (escenas_encontradas.length > 1) {
@@ -2669,15 +2903,25 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.crear_escena = function (datos_de_la_escena) {
         var _this = this;
-        var escena = new this.clases[datos_de_la_escena.nombre](this.pilas);
+        var nombre = datos_de_la_escena.nombre;
+        if (!this.clases[nombre]) {
+            throw new Error("No hay una clase con el nombre " + nombre);
+        }
+        var escena = new this.clases[nombre](this.pilas);
         escena.camara.x = datos_de_la_escena.camara_x;
         escena.camara.y = datos_de_la_escena.camara_y;
         escena.fondo = datos_de_la_escena.fondo;
-        escena.iniciar();
+        if (datos_de_la_escena.gravedad_x !== undefined) {
+            escena.gravedad_x = datos_de_la_escena.gravedad_x;
+        }
+        if (datos_de_la_escena.gravedad_y !== undefined) {
+            escena.gravedad_y = datos_de_la_escena.gravedad_y;
+        }
         this.actores = datos_de_la_escena.actores.map(function (e) {
             return _this.crear_actor(e);
         });
         this._escena_en_ejecucion = escena;
+        escena.iniciar();
     };
     ModoEjecucion.prototype.crear_actor = function (entidad) {
         var x = entidad.x;

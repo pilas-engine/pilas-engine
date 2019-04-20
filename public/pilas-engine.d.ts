@@ -17,6 +17,7 @@ declare class Actores {
     techo(): any;
     texto(): any;
     laser(): any;
+    deslizador(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -74,10 +75,29 @@ declare class Escenas {
     vincular(escena: Escena): void;
     definir_escena_actual(escena: EscenaBase): void;
 }
+declare class Eventos {
+    pilas: Pilas;
+    constructor(pilas: any);
+    conectar(nombre_del_evento: string, funcion: any): string;
+    desconectar(identificador_del_evento: string): void;
+    emitir_evento(identificador: any, datos: any): void;
+}
+declare class EventosDeEscena {
+    pilas: Pilas;
+    conexiones: any;
+    nombres_de_eventos: string[];
+    constructor(pilas: any);
+    conectar(nombre_del_evento: string, funcion: any): string;
+    desconectar(identificador_del_evento: string): void;
+    private generar_id;
+    emitir_evento(identificador: any, datos: any): void;
+}
 declare class Fisica {
     pilas: Pilas;
     constructor(pilas: Pilas);
     readonly Matter: any;
+    gravedad_x: number;
+    gravedad_y: number;
 }
 declare class Habilidad {
     pilas: Pilas;
@@ -176,6 +196,7 @@ declare class Pilas {
     actores: Actores;
     animaciones: Animaciones;
     Phaser: any;
+    eventos: Eventos;
     recursos: any;
     fisica: Fisica;
     habilidades: Habilidades;
@@ -221,6 +242,7 @@ declare class Pilas {
     };
     reproducir_sonido(nombre: string): void;
     obtener_actores(): Actor[];
+    buscar_actor(nombre: string): Actor;
     obtener_actor_por_nombre(nombre: string): Actor;
     obtener_cantidad_de_actores(): number;
     obtener_diccionario_de_actores(): {};
@@ -282,6 +304,7 @@ declare class ActorBase {
     pre_iniciar(propiedades: any): void;
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
+    interactivo: boolean;
     serializar(): {
         tipo: String;
         x: number;
@@ -432,6 +455,26 @@ declare class conejo extends Actor {
     cuando_se_mantiene_una_colision(actor: any): void;
     cuando_termina_una_colision(actor: any): void;
 }
+declare class deslizador extends Actor {
+    propiedades: {
+        x: number;
+        y: number;
+        imagen: string;
+        etiqueta: string;
+        figura: string;
+    };
+    valor: number;
+    marca: Actor;
+    esta_arrastrando_el_deslizador: any;
+    iniciar(): void;
+    conectar_eventos(): void;
+    crear_marca(): void;
+    cuando_hace_click(x: any, y: any): void;
+    private cuando_mueve_el_mouse;
+    private cuando_termina_de_hacer_click;
+    actualizar(): void;
+    private ajustar_marca;
+}
 declare class gallina extends Actor {
     propiedades: {
         x: number;
@@ -555,8 +598,14 @@ declare class EscenaBase {
     camara: Camara;
     fondo: string;
     control: Control;
+    _gravedad_x: number;
+    _gravedad_y: number;
+    eventos: EventosDeEscena;
     constructor(pilas: any);
     agregar_actor(actor: Actor): void;
+    gravedad_x: number;
+    gravedad_y: number;
+    private actualizar_gravedad;
     obtener_nombre_para(nombre_propuesto: string): string;
     serializar(): {
         camara_x: number;
@@ -650,6 +699,10 @@ declare class ModoEjecucion extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
+    private conectar_eventos;
+    private manejar_evento_click_de_mouse;
+    private manejar_evento_termina_click;
+    private manejar_evento_muevemouse;
     cambiar_escena(nombre: string): void;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;

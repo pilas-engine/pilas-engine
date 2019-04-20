@@ -5,7 +5,7 @@ import json_a_string from "../utils/json-a-string";
 import string_a_json from "../utils/string-a-json";
 import QueryParams from "ember-parachute";
 import { task, timeout } from "ember-concurrency";
-import proyecto from "../fixtures/proyecto-inicial";
+import fixtureDeProyecto from "../fixtures/proyecto-inicial";
 
 const queryParams = new QueryParams({
   serializado: { defaultValue: null, refresh: true, replace: true },
@@ -105,8 +105,8 @@ export default Controller.extend(queryParams.Mixin, {
   },
 
   crearProyectoInicial() {
-    let proyectoComoObjetoEmber = this.convertirEscenaEnObjetoEmber(proyecto);
-    return proyectoComoObjetoEmber;
+    let proyecto = this.convertirEscenaEnObjetoEmber(fixtureDeProyecto);
+    return proyecto;
   },
 
   actions: {
@@ -122,6 +122,7 @@ export default Controller.extend(queryParams.Mixin, {
         });
       } else {
         this.set("serializado", str);
+        saveTextAs(JSON.stringify(proyecto, null, 2), "proyecto.pilas");
       }
     },
 

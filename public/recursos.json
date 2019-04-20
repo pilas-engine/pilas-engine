@@ -257,6 +257,18 @@
     {
       "nombre": "dialogo",
       "ruta": "imagenes/redimensionables/dialogo.png"
+    },
+    {
+      "nombre": "interfaz/linea",
+      "ruta": "imagenes/interfaz/linea.png"
+    },
+    {
+      "nombre": "interfaz/punto",
+      "ruta": "imagenes/interfaz/punto.png"
+    },
+    {
+      "nombre": "interfaz/deslizador",
+      "ruta": "imagenes/interfaz/deslizador.png"
     }
   ],
 

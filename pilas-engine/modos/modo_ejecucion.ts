@@ -60,6 +60,8 @@ class ModoEjecucion extends Modo {
         this.matter.systems.matterPhysics.world.createDebugGraphic();
       }
 
+      this.conectar_eventos();
+
       this.input.on("pointermove", cursor => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
           cursor.x,
@@ -135,6 +137,48 @@ class ModoEjecucion extends Modo {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
       this.pausar();
     }
+  }
+
+  private conectar_eventos() {
+    this.input.on("pointermove", this.manejar_evento_muevemouse.bind(this));
+    this.input.on("pointerdown", this.manejar_evento_click_de_mouse.bind(this));
+    this.input.on("pointerup", this.manejar_evento_termina_click.bind(this));
+  }
+
+  private manejar_evento_click_de_mouse(evento) {
+    let x = evento.x;
+    let y = evento.y;
+    let p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+
+    this.pilas.eventos.emitir_evento("click_de_mouse", {
+      x: p.x,
+      y: p.y,
+      evento
+    });
+  }
+
+  private manejar_evento_termina_click(evento) {
+    let x = evento.x;
+    let y = evento.y;
+    let p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+
+    this.pilas.eventos.emitir_evento("termina_click", {
+      x: p.x,
+      y: p.y,
+      evento
+    });
+  }
+
+  private manejar_evento_muevemouse(evento) {
+    let x = evento.x;
+    let y = evento.y;
+    let p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+
+    this.pilas.eventos.emitir_evento("mueve_mouse", {
+      x: p.x,
+      y: p.y,
+      evento
+    });
   }
 
   cambiar_escena(nombre: string) {
@@ -298,8 +342,10 @@ class ModoEjecucion extends Modo {
       e => e.nombre == nombre
     );
 
+    let nombres = this.proyecto.escenas.map(e => e.nombre).join(",");
+
     if (escenas_encontradas.length === 0) {
-      throw Error(`No se puede encontrar la escena '${nombre}'.`);
+      throw Error(`No se puede encontrar la escena '${nombre}' en ${nombres}`);
     } else {
       if (escenas_encontradas.length > 1) {
         throw Error(`Hay más de una escena llamada '${nombre}'.`);
@@ -317,18 +363,33 @@ class ModoEjecucion extends Modo {
   }
 
   crear_escena(datos_de_la_escena) {
-    let escena = new this.clases[datos_de_la_escena.nombre](this.pilas);
+    let nombre = datos_de_la_escena.nombre;
+
+    if (!this.clases[nombre]) {
+      throw new Error(`No hay una clase con el nombre ${nombre}`);
+    }
+
+    let escena = new this.clases[nombre](this.pilas);
 
     escena.camara.x = datos_de_la_escena.camara_x;
     escena.camara.y = datos_de_la_escena.camara_y;
     escena.fondo = datos_de_la_escena.fondo;
-    escena.iniciar();
+
+    if (datos_de_la_escena.gravedad_x !== undefined) {
+      escena.gravedad_x = datos_de_la_escena.gravedad_x;
+    }
+
+    if (datos_de_la_escena.gravedad_y !== undefined) {
+      escena.gravedad_y = datos_de_la_escena.gravedad_y;
+    }
 
     this.actores = datos_de_la_escena.actores.map(e => {
       return this.crear_actor(e);
     });
 
     this._escena_en_ejecucion = escena;
+
+    escena.iniciar();
   }
 
   crear_actor(entidad) {
