@@ -122,6 +122,7 @@ export default Controller.extend(queryParams.Mixin, {
         });
       } else {
         this.set("serializado", str);
+        saveTextAs(JSON.stringify(proyecto, null, 2), "proyecto.pilas");
       }
     },
 
