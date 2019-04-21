@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Pilas | avanzar y conversion de grados", function(hooks) {
@@ -22,11 +22,18 @@ module("Integration | Pilas | avanzar y conversion de grados", function(hooks) {
 
       actor.avanzar(0, 50);
       assert.equal(actor.y, 1, "Mantiene y=1.");
-      assert.equal(actor.x, 50, "Avanzó 50 pixeles porque se movió en el ángulo 0.");
+      assert.equal(
+        actor.x,
+        50,
+        "Avanzó 50 pixeles porque se movió en el ángulo 0."
+      );
 
       assert.equal(pilas.utilidades.convertir_radianes_a_angulos(0), 0);
       assert.equal(pilas.utilidades.convertir_radianes_a_angulos(Math.PI), 180);
-      assert.equal(pilas.utilidades.convertir_angulo_a_radianes(90), Math.PI / 2);
+      assert.equal(
+        pilas.utilidades.convertir_angulo_a_radianes(90),
+        Math.PI / 2
+      );
       assert.equal(pilas.utilidades.convertir_angulo_a_radianes(180), Math.PI);
     });
 

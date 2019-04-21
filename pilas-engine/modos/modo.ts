@@ -18,11 +18,11 @@ class Modo extends Phaser.Scene {
     this.ancho = ancho;
     this.alto = alto;
 
-    this.fps = this.add.bitmapText(5, 10, "impact", "FPS");
+    this.fps = this.add.bitmapText(5, 10, "impact", "");
     this.fps.scrollFactorX = 0;
     this.fps.scrollFactorY = 0;
 
-    this.fps_extra = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
+    this.fps_extra = this.add.bitmapText(5, 34, "mini-impact", "");
     this.fps_extra.scrollFactorX = 0;
     this.fps_extra.scrollFactorY = 0;
 
@@ -88,8 +88,8 @@ class Modo extends Phaser.Scene {
   }
 
   obtener_posicion_de_la_camara() {
-    let x = pilas.modo.cameras.cameras[0].scrollX;
-    let y = pilas.modo.cameras.cameras[0].scrollY;
+    let x = this.pilas.modo.cameras.cameras[0].scrollX;
+    let y = this.pilas.modo.cameras.cameras[0].scrollY;
     return { x, y };
   }
 

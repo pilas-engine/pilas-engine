@@ -205,28 +205,33 @@ declare class Pilas {
     _alto: number;
     cursor_x: number;
     cursor_y: number;
+    opciones: any;
     constructor();
     escena: EscenaBase;
     control: Control;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
-    private iniciar_phaser_desde_configuracion;
+    iniciar(ancho: number, alto: number, recursos: any, opciones?: any): this;
+    private iniciar_phaser_desde_configuracion_y_cargar_escenas;
+    ejecutar(): void;
     definir_modo(nombre: string, datos: any): void;
     cambiar_escena(nombre: string): void;
-    crear_configuracion(ancho: number, alto: number): {
+    reiniciar_escena(): void;
+    crear_configuracion(ancho: number, alto: number, maximizar: boolean): {
         type: number;
         parent: string;
+        scale: any;
         width: number;
         height: number;
         backgroundColor: string;
         disableContextMenu: boolean;
         pixelArt: boolean;
+        autostart: boolean;
         input: {
             keyboard: boolean;
             mouse: boolean;
             touch: boolean;
             gamepad: boolean;
         };
-        scene: (typeof ModoCargador | typeof ModoEditor | typeof ModoEjecucion | typeof ModoPausa)[];
         physics: {
             default: string;
             matter: {
@@ -248,7 +253,7 @@ declare class Pilas {
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
 }
-declare var pilas: Pilas;
+declare var pilasengine: Pilas;
 declare class ActorBase {
     tipo: String;
     sprite: Phaser.GameObjects.Sprite;
@@ -659,11 +664,13 @@ declare class Modo extends Phaser.Scene {
 }
 declare class ModoCargador extends Modo {
     pilas: Pilas;
+    contador: number;
     constructor();
+    init(data: any): void;
     preload(): void;
+    update(): void;
     create(): void;
     cuando_progresa_la_carga(progreso: any): void;
-    update(): void;
 }
 declare class ModoEditor extends Modo {
     pilas: Pilas;

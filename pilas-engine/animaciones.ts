@@ -6,7 +6,12 @@ class Animaciones {
     this.pilas = pilas;
   }
 
-  crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number) {
+  crear_animacion(
+    actor: Actor,
+    nombre_de_la_animacion: string,
+    cuadros: any[],
+    velocidad: number
+  ) {
     let nombre = `${actor.id}-${nombre_de_la_animacion}`;
 
     if (!this.animaciones[nombre]) {
@@ -21,7 +26,7 @@ class Animaciones {
         }
       });
 
-      let animacion = pilas.modo.anims.create({
+      let animacion = this.pilas.modo.anims.create({
         key: nombre.split(".")[0],
         frames: frames,
         frameRate: velocidad,

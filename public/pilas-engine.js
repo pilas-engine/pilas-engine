@@ -98,7 +98,7 @@ var Animaciones = (function () {
                     return { key: nombre };
                 }
             });
-            var animacion = pilas.modo.anims.create({
+            var animacion = this.pilas.modo.anims.create({
                 key: nombre.split(".")[0],
                 frames: frames_1,
                 frameRate: velocidad,
@@ -585,9 +585,10 @@ var Mensajes = (function () {
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {
+        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en ");
         var detalle = {
             mensaje: error.message,
-            stack: error.stack.toString()
+            stack: stacktrace
         };
         var fuente_principal = {
             font: "14px verdana",
@@ -599,6 +600,9 @@ var Mensajes = (function () {
         var fuente_pequena = {
             font: "10px verdana"
         };
+        var fondo = this.pilas.modo.add.graphics();
+        fondo.fillStyle(0x000000, 0.5);
+        fondo.fillRect(2, 2, 600, 600);
         this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
         this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
         this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
@@ -775,26 +779,75 @@ var Pilas = (function () {
     });
     Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos, opciones) {
         var _this = this;
+        if (opciones.maximizar === undefined) {
+            opciones.maximizar = true;
+        }
+        this.opciones = opciones;
         if (!recursos) {
             throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
         }
         this._ancho = ancho;
         this._alto = alto;
         this.recursos = recursos;
-        var configuracion = this.crear_configuracion(ancho, alto);
+        var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar);
         if (opciones.esperar_antes_de_iniciar) {
             console.log("Esperando 1 segundo antes de iniciar ...");
             setTimeout(function () {
-                _this.iniciar_phaser_desde_configuracion(configuracion);
+                _this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
             }, 1000);
         }
         else {
-            this.iniciar_phaser_desde_configuracion(configuracion);
+            this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
         }
     };
-    Pilas.prototype.iniciar_phaser_desde_configuracion = function (configuracion) {
+    Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones) {
+        if (opciones === void 0) { opciones = {}; }
+        if (opciones === undefined || recursos === null) {
+            opciones = {};
+        }
+        if (recursos === undefined || recursos === null) {
+            recursos = {
+                imagenes: [
+                    {
+                        nombre: "sin_imagen",
+                        ruta: "imagenes/sin_imagen.png"
+                    }
+                ],
+                sonidos: [],
+                fuentes: [
+                    {
+                        nombre: "font",
+                        imagen: "fuentes/font.png",
+                        fuente: "fuentes/font.fnt"
+                    },
+                    {
+                        nombre: "impact",
+                        imagen: "fuentes/impact.png",
+                        fuente: "fuentes/impact.fnt"
+                    },
+                    {
+                        nombre: "mini-impact",
+                        imagen: "fuentes/mini-impact.png",
+                        fuente: "fuentes/mini-impact.fnt"
+                    }
+                ]
+            };
+        }
+        opciones.modo_simple = true;
+        this.iniciar_phaser(ancho, alto, recursos, opciones);
+        return this;
+    };
+    Pilas.prototype.iniciar_phaser_desde_configuracion_y_cargar_escenas = function (configuracion) {
         var game = new Phaser.Game(configuracion);
+        game.scene.add("ModoCargador", ModoCargador);
+        game.scene.add("ModoEditor", ModoEditor);
+        game.scene.add("ModoEjecucion", ModoEjecucion);
+        game.scene.add("ModoPausa", ModoPausa);
+        game.scene.start("ModoCargador", { pilas: this });
         this.game = game;
+    };
+    Pilas.prototype.ejecutar = function () {
+        console.warn("La función pilas.ejecutar() entró en desuso, no hace falta invocarla.");
     };
     Pilas.prototype.definir_modo = function (nombre, datos) {
         try {
@@ -812,22 +865,33 @@ var Pilas = (function () {
     Pilas.prototype.cambiar_escena = function (nombre) {
         this.modo.cambiar_escena(nombre);
     };
-    Pilas.prototype.crear_configuracion = function (ancho, alto) {
+    Pilas.prototype.reiniciar_escena = function () {
+        this.modo.cambiar_escena(this.escena.constructor.name);
+    };
+    Pilas.prototype.crear_configuracion = function (ancho, alto, maximizar) {
+        var escala = undefined;
+        if (maximizar) {
+            escala = {
+                mode: Phaser.Scale.FIT,
+                autoCenter: Phaser.Scale.CENTER_BOTH
+            };
+        }
         return {
             type: Phaser.AUTO,
             parent: "game",
+            scale: escala,
             width: ancho,
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
             pixelArt: true,
+            autostart: false,
             input: {
                 keyboard: true,
                 mouse: true,
                 touch: true,
                 gamepad: true
             },
-            scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
             physics: {
                 default: "matter",
                 matter: {
@@ -887,7 +951,7 @@ var Pilas = (function () {
     };
     return Pilas;
 }());
-var pilas = new Pilas();
+var pilasengine = new Pilas();
 var ActorBase = (function () {
     function ActorBase(pilas) {
         this.figura = "";
@@ -1250,7 +1314,7 @@ var ActorBase = (function () {
                 this.pilas.utilidades.validar_numero(s);
                 this.sprite.scaleX = s;
                 if (this.figura) {
-                    pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+                    this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
                 }
             }
         },
@@ -1269,7 +1333,7 @@ var ActorBase = (function () {
                 this.pilas.utilidades.validar_numero(s);
                 this.sprite.scaleY = s;
                 if (this.figura) {
-                    pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
+                    this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
                 }
             }
         },
@@ -1400,24 +1464,31 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "estatico", {
         get: function () {
-            this.fallar_si_no_tiene_figura();
-            return this.sprite.isStatic();
+            if (this.sprite.isStatic !== undefined) {
+                return this.sprite.isStatic();
+            }
+            else {
+                console.warn("Este actor no tiene figura, se asume que no es estático.");
+                return false;
+            }
         },
         set: function (estatico) {
-            this.fallar_si_no_tiene_figura();
-            this.sprite.setStatic(estatico);
-            this.sprite.setVelocity(0, 0);
+            if (this.sprite.setStatic !== undefined) {
+                this.sprite.setStatic(estatico);
+                this.sprite.setVelocity(0, 0);
+            }
+            else {
+                console.warn("Este actor no tiene figura, ignorando valor estatico/dinámico.");
+            }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "dinamico", {
         get: function () {
-            this.fallar_si_no_tiene_figura();
             return !this.estatico;
         },
         set: function (dinamico) {
-            this.fallar_si_no_tiene_figura();
             this.estatico = !dinamico;
         },
         enumerable: true,
@@ -1569,7 +1640,11 @@ var ActorBase = (function () {
         return figura;
     };
     ActorBase.prototype.eliminar = function () {
+        var _this = this;
         this._vivo = false;
+        this.sensores.map(function (s) {
+            _this.pilas.modo.matter.world.remove(s);
+        });
     };
     Object.defineProperty(ActorBase.prototype, "figura_ancho", {
         get: function () {
@@ -1872,10 +1947,10 @@ var deslizador = (function (_super) {
     };
     deslizador.prototype.conectar_eventos = function () {
         var _this = this;
-        pilas.eventos.conectar("mueve_mouse", function (datos) {
+        this.pilas.eventos.conectar("mueve_mouse", function (datos) {
             _this.cuando_mueve_el_mouse(datos);
         });
-        pilas.eventos.conectar("termina_click", function () {
+        this.pilas.eventos.conectar("termina_click", function () {
             _this.cuando_termina_de_hacer_click();
         });
     };
@@ -2291,10 +2366,10 @@ var Modo = (function (_super) {
     Modo.prototype.create = function (datos, ancho, alto) {
         this.ancho = ancho;
         this.alto = alto;
-        this.fps = this.add.bitmapText(5, 10, "impact", "FPS");
+        this.fps = this.add.bitmapText(5, 10, "impact", "");
         this.fps.scrollFactorX = 0;
         this.fps.scrollFactorY = 0;
-        this.fps_extra = this.add.bitmapText(5, 34, "mini-impact", "ACTORES:");
+        this.fps_extra = this.add.bitmapText(5, 34, "mini-impact", "");
         this.fps_extra.scrollFactorX = 0;
         this.fps_extra.scrollFactorY = 0;
         this.crear_canvas_de_depuracion();
@@ -2348,8 +2423,8 @@ var Modo = (function (_super) {
         this.fondo.tilePositionY = posicion_de_la_camara.y;
     };
     Modo.prototype.obtener_posicion_de_la_camara = function () {
-        var x = pilas.modo.cameras.cameras[0].scrollX;
-        var y = pilas.modo.cameras.cameras[0].scrollY;
+        var x = this.pilas.modo.cameras.cameras[0].scrollX;
+        var y = this.pilas.modo.cameras.cameras[0].scrollY;
         return { x: x, y: y };
     };
     Modo.prototype.crear_fondo = function (fondo) {
@@ -2446,35 +2521,81 @@ var ModoCargador = (function (_super) {
     function ModoCargador() {
         return _super.call(this, { key: "ModoCargador" }) || this;
     }
+    ModoCargador.prototype.init = function (data) {
+        this.pilas = data.pilas;
+    };
     ModoCargador.prototype.preload = function () {
-        this.pilas = pilas;
         this.load.crossOrigin = "anonymous";
-        for (var i = 0; i < pilas.recursos.imagenes.length; i++) {
-            var item = pilas.recursos.imagenes[i];
+        this.contador = 0;
+        for (var i = 0; i < this.pilas.recursos.imagenes.length; i++) {
+            var item = this.pilas.recursos.imagenes[i];
             this.load.image(item.nombre, item.ruta);
         }
-        for (var i = 0; i < pilas.recursos.sonidos.length; i++) {
-            var sonido = pilas.recursos.sonidos[i];
+        for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
+            var sonido = this.pilas.recursos.sonidos[i];
             this.load.audio(sonido.nombre, sonido.ruta, {});
         }
-        for (var i = 0; i < pilas.recursos.fuentes.length; i++) {
-            var fuente = pilas.recursos.fuentes[i];
+        for (var i = 0; i < this.pilas.recursos.fuentes.length; i++) {
+            var fuente = this.pilas.recursos.fuentes[i];
             this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
         }
         this.load.on("progress", this.cuando_progresa_la_carga, this);
     };
+    ModoCargador.prototype.update = function () {
+        this.contador += 1;
+        if (this.contador === 60) {
+            var msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
+            this.add.bitmapText(5, 5, "impact", msg);
+        }
+    };
     ModoCargador.prototype.create = function () {
         _super.prototype.create.call(this, { pilas: this.pilas }, 500, 500);
-        this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
-        var msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
-        this.add.bitmapText(5, 5, "impact", msg);
+        if (this.pilas.opciones.modo_simple) {
+            console.log("Finalizó la carga en modo simple");
+            this.pilas.definir_modo("ModoEjecucion", {
+                pilas: this.pilas,
+                nombre_de_la_escena_inicial: "principal",
+                codigo: "\n        var __extends = (this && this.__extends) || (function () {\n          var extendStatics = function (d, b) {\n              extendStatics = Object.setPrototypeOf ||\n                  ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n                  function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n              return extendStatics(d, b);\n          }\n          return function (d, b) {\n              extendStatics(d, b);\n              function __() { this.constructor = d; }\n              d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n          };\n      })();\n      var principal = /** @class */ (function (_super) {\n          __extends(principal, _super);\n          function principal() {\n              return _super !== null && _super.apply(this, arguments) || this;\n          }\n          principal.prototype.iniciar = function () {\n          };\n          principal.prototype.actualizar = function () {\n          };\n          return principal;\n      }(Escena));\n      ",
+                proyecto: {
+                    alto: 200,
+                    ancho: 200,
+                    titulo: "sin usar",
+                    escena_inicial: 3,
+                    codigos: {
+                        escenas: [
+                            {
+                                nombre: "principal",
+                                codigo: "\n                  class principal extends Escena {\n                    iniciar() {\n\n                    }\n\n                    actualizar() {\n\n                    }\n                  }"
+                            }
+                        ],
+                        actores: []
+                    },
+                    escenas: [
+                        {
+                            nombre: "principal",
+                            id: 3,
+                            actores: [],
+                            camara_x: 0,
+                            camara_y: 0
+                        }
+                    ]
+                }
+            });
+        }
+        else {
+            this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
+        }
     };
     ModoCargador.prototype.cuando_progresa_la_carga = function (progreso) {
-        this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
-            progreso: Math.ceil(progreso * 100)
-        });
+        if (this.pilas.opciones.modo_simple) {
+            console.log("Progreso: " + progreso);
+        }
+        else {
+            this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
+                progreso: Math.ceil(progreso * 100)
+            });
+        }
     };
-    ModoCargador.prototype.update = function () { };
     return ModoCargador;
 }(Modo));
 var ModoEditor = (function (_super) {
@@ -2608,7 +2729,17 @@ var ModoEjecucion = (function (_super) {
             var escena = this.obtener_escena_inicial();
             this.clases = this.obtener_referencias_a_clases();
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
-            this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+            if (this.pilas.opciones.modo_simple) {
+                if (this.pilas["onready"]) {
+                    this.pilas["onready"](this.pilas);
+                }
+                else {
+                    console.warn("Estas usando pilas en modo simple, pero no has indicado pilas.onready = () => { /* codigo */}");
+                }
+            }
+            else {
+                this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
+            }
             this.pilas.historia.limpiar();
             this.modo_fisica_activado = false;
             if (this.pilas.depurador.mostrar_fisica) {

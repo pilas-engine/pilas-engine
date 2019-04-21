@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <script src="phaser.js"></script>
+    <script src="nineslice.js"></script>
+    <script src="pilas-engine.js"></script>
+    <style media="screen">
+      body {
+        margin: 0;
+        background-color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      var recursos = {
+        imagenes: [
+          { nombre: "sin_imagen", ruta: "imagenes/sin_imagen.png" },
+          { nombre: "pelota", ruta: "imagenes/pelota.png" },
+          {
+            nombre: "nave",
+            ruta: "imagenes/nave.png"
+          },
+          {
+            nombre: "nave_en_reposo",
+            ruta: "imagenes/nave/nave_reposo.png"
+          },
+          {
+            nombre: "nave_avanza_1",
+            ruta: "imagenes/nave/nave_avanza_1.png"
+          },
+          {
+            nombre: "nave_avanza_2",
+            ruta: "imagenes/nave/nave_avanza_2.png"
+          },
+          {
+            nombre: "nave_derecha_1",
+            ruta: "imagenes/nave/nave_derecha_1.png"
+          },
+          {
+            nombre: "nave_derecha_2",
+            ruta: "imagenes/nave/nave_derecha_2.png"
+          },
+          {
+            nombre: "nave_izquierda_1",
+            ruta: "imagenes/nave/nave_izquierda_1.png"
+          },
+          {
+            nombre: "interfaz/linea",
+            ruta: "imagenes/interfaz/linea.png"
+          },
+          {
+            nombre: "interfaz/punto",
+            ruta: "imagenes/interfaz/punto.png"
+          },
+          {
+            nombre: "interfaz/deslizador",
+            ruta: "imagenes/interfaz/deslizador.png"
+          },
+          {
+            nombre: "nave_izquierda_2",
+            ruta: "imagenes/nave/nave_izquierda_2.png"
+          },
+          {
+            nombre: "plataforma",
+            ruta: "imagenes/plataforma.png"
+          }
+        ],
+        fuentes: [
+          {
+            nombre: "font",
+            imagen: "fuentes/font.png",
+            fuente: "fuentes/font.fnt"
+          },
+
+          // NOTA: estas dos fuentes (impact y mini-impact) son indispensables, se utilizan en la pantalla de carga.
+          // Sería ideal que exista una escena anterior a ModoCargador que ya tenga esos recursos, serializados
+          // por ejemplo, o que directamente no los use ni los necesite.
+          {
+            nombre: "impact",
+            imagen: "fuentes/impact.png",
+            fuente: "fuentes/impact.fnt"
+          },
+          {
+            nombre: "mini-impact",
+            imagen: "fuentes/mini-impact.png",
+            fuente: "fuentes/mini-impact.fnt"
+          }
+        ],
+        sonidos: [{ nombre: "laser", ruta: "sonidos/laser.wav" }]
+      };
+      var opciones = {
+        alto: 200,
+        ancho: 200,
+        titulo: "sin usar",
+        maximizar: true,
+        escena_inicial: 3,
+        escenas: [
+          {
+            nombre: "principal",
+            id: 3,
+            actores: [],
+            camara_x: 0,
+            camara_y: 0
+          }
+        ]
+      };
+      var pilas = pilasengine.iniciar(640, 480, recursos, opciones);
+
+      pilas.onready = function() {
+        let pelota = pilas.actores.pelota();
+        pelota.aprender("arrastrable");
+
+        let plataforma = pilas.actores.plataforma();
+        plataforma.y = -100;
+
+        let deslizador = pilas.actores.deslizador();
+        deslizador.y = 200;
+        deslizador.y = [70];
+      };
+    </script>
+  </body>
+</html>

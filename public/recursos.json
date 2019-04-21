@@ -40,11 +40,6 @@
       "nombre": "nave",
       "ruta": "imagenes/nave.png"
     },
-
-    {
-      "nombre": "nave",
-      "ruta": "imagenes/nave.png"
-    },
     {
       "nombre": "conejo",
       "ruta": "imagenes/conejo.png"

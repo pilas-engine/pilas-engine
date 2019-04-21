@@ -32,6 +32,7 @@ class Pilas {
 
   cursor_x: number = 0;
   cursor_y: number = 0;
+  opciones: any;
 
   constructor() {
     this.Phaser = Phaser;
@@ -66,6 +67,12 @@ class Pilas {
   }
 
   iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
+    if (opciones.maximizar === undefined) {
+      opciones.maximizar = true;
+    }
+
+    this.opciones = opciones;
+
     if (!recursos) {
       throw Error(
         "No se puede iniciar phaser sin especificar una lista de recursos"
@@ -76,21 +83,82 @@ class Pilas {
     this._alto = alto;
 
     this.recursos = recursos;
-    var configuracion = this.crear_configuracion(ancho, alto);
+    var configuracion = this.crear_configuracion(
+      ancho,
+      alto,
+      opciones.maximizar
+    );
 
+    // Opción para simular una espera o demora al iniciar el componente de
+    // pilas, se utiliza desde el editor cuando corren los tests.
     if (opciones.esperar_antes_de_iniciar) {
       console.log("Esperando 1 segundo antes de iniciar ...");
       setTimeout(() => {
-        this.iniciar_phaser_desde_configuracion(configuracion);
+        this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
       }, 1000);
     } else {
-      this.iniciar_phaser_desde_configuracion(configuracion);
+      this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
     }
   }
 
-  private iniciar_phaser_desde_configuracion(configuracion) {
+  iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}) {
+    if (opciones === undefined || recursos === null) {
+      opciones = {};
+    }
+
+    if (recursos === undefined || recursos === null) {
+      recursos = {
+        imagenes: [
+          {
+            nombre: "sin_imagen",
+            ruta: "imagenes/sin_imagen.png"
+          }
+        ],
+        sonidos: [],
+
+        fuentes: [
+          {
+            nombre: "font",
+            imagen: "fuentes/font.png",
+            fuente: "fuentes/font.fnt"
+          },
+          {
+            nombre: "impact",
+            imagen: "fuentes/impact.png",
+            fuente: "fuentes/impact.fnt"
+          },
+          {
+            nombre: "mini-impact",
+            imagen: "fuentes/mini-impact.png",
+            fuente: "fuentes/mini-impact.fnt"
+          }
+        ]
+      };
+    }
+    // modo_simple indica que pilas debe iniciar asumiendo que se está
+    // usando fuera del editor, sin señales ni iframes.
+    opciones.modo_simple = true;
+    this.iniciar_phaser(ancho, alto, recursos, opciones);
+    return this;
+  }
+
+  private iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion) {
     var game = new Phaser.Game(configuracion);
+
+    game.scene.add("ModoCargador", ModoCargador);
+    game.scene.add("ModoEditor", ModoEditor);
+    game.scene.add("ModoEjecucion", ModoEjecucion);
+    game.scene.add("ModoPausa", ModoPausa);
+
+    game.scene.start("ModoCargador", { pilas: this });
+
     this.game = game;
+  }
+
+  ejecutar() {
+    console.warn(
+      "La función pilas.ejecutar() entró en desuso, no hace falta invocarla."
+    );
   }
 
   definir_modo(nombre: string, datos) {
@@ -111,22 +179,37 @@ class Pilas {
     this.modo.cambiar_escena(nombre);
   }
 
-  crear_configuracion(ancho: number, alto: number) {
+  reiniciar_escena() {
+    this.modo.cambiar_escena(this.escena.constructor.name);
+  }
+
+  crear_configuracion(ancho: number, alto: number, maximizar: boolean) {
+    let escala = undefined;
+
+    if (maximizar) {
+      escala = {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+      };
+    }
+
     return {
       type: Phaser.AUTO, // CANVAS, WEBGL o AUTO
       parent: "game",
+      scale: escala,
       width: ancho,
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
       pixelArt: true, // true es más rápido
+      autostart: false,
       input: {
         keyboard: true,
         mouse: true,
         touch: true,
         gamepad: true
       },
-      scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
+      //scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
       physics: {
         default: "matter",
         matter: {
@@ -202,4 +285,5 @@ class Pilas {
   }
 }
 
-var pilas = new Pilas();
+//var pilas = new Pilas();
+var pilasengine = new Pilas();

@@ -6,7 +6,7 @@ Un juego típico tendrá al menos una escena como el menú principal, una presen
 
 ![](assets/escenas_juego.png)
 
-## Cambiar de escena
+## Cambiar o reiniciar escenas
 
 Para cambiar la escena actual se puede llamar a la función `cambiar_escena`
 indicando el nombre de la escena que se quiere cambiar. Por ejemplo:
@@ -15,7 +15,14 @@ indicando el nombre de la escena que se quiere cambiar. Por ejemplo:
 pilas.cambiar_escena("escena2");
 ```
 
-## Gravedad y sistema de física
+También se puede reiniciar la escena actual llamando a esta
+función:
+
+```
+pilas.reiniciar_escena();
+```
+
+## Gravedad y simulación física
 
 Cada escena tiene asociado su propio entorno de simulación
 de física. Así que si estás haciendo un juego que involucra

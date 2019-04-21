@@ -19,11 +19,11 @@ class deslizador extends Actor {
   }
 
   conectar_eventos() {
-    pilas.eventos.conectar("mueve_mouse", datos => {
+    this.pilas.eventos.conectar("mueve_mouse", datos => {
       this.cuando_mueve_el_mouse(datos);
     });
 
-    pilas.eventos.conectar("termina_click", () => {
+    this.pilas.eventos.conectar("termina_click", () => {
       this.cuando_termina_de_hacer_click();
     });
   }
