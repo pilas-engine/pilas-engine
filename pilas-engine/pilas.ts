@@ -102,6 +102,39 @@ class Pilas {
   }
 
   iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}) {
+    if (opciones === undefined || recursos === null) {
+      opciones = {};
+    }
+
+    if (recursos === undefined || recursos === null) {
+      recursos = {
+        imagenes: [
+          {
+            nombre: "sin_imagen",
+            ruta: "imagenes/sin_imagen.png"
+          }
+        ],
+        sonidos: [],
+
+        fuentes: [
+          {
+            nombre: "font",
+            imagen: "fuentes/font.png",
+            fuente: "fuentes/font.fnt"
+          },
+          {
+            nombre: "impact",
+            imagen: "fuentes/impact.png",
+            fuente: "fuentes/impact.fnt"
+          },
+          {
+            nombre: "mini-impact",
+            imagen: "fuentes/mini-impact.png",
+            fuente: "fuentes/mini-impact.fnt"
+          }
+        ]
+      };
+    }
     // modo_simple indica que pilas debe iniciar asumiendo que se está
     // usando fuera del editor, sin señales ni iframes.
     opciones.modo_simple = true;
