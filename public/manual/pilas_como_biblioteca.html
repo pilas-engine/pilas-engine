@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Eventos · Manual de Pilas Engine 2</title>
+        <title>Pilas como biblioteca · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="pilas_como_biblioteca.html" />
+    <link rel="next" href="colaborar.html" />
     
     
-    <link rel="prev" href="escenas.html" />
+    <link rel="prev" href="eventos.html" />
     
 
     </head>
@@ -193,7 +193,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="eventos.html">
+        <li class="chapter " data-level="1.9" data-path="eventos.html">
             
                 <a href="eventos.html">
             
@@ -206,7 +206,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="pilas_como_biblioteca.html">
+        <li class="chapter active" data-level="1.10" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -282,7 +282,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Eventos</a>
+        <a href="." >Pilas como biblioteca</a>
     </h1>
 </div>
 
@@ -297,65 +297,46 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="eventos">Eventos</h1><p>En pilas llamamos &quot;eventos&quot; a las se&#xF1;ales que emiten el mouse o el teclado. Por ejemplo, un &quot;click&quot; del mouse es un evento al igual que la pulsaci&#xF3;n de una tecla.</p><p>Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acci&#xF3;n dentro del juego para responder. Por ejemplo, en un juego de acci&#xF3;n, el &quot;click&quot; del mouse podr&#xED;a realizar una explosi&#xF3;n o hacer que un personaje salte.</p><h2 id="&#xBF;c&#xF3;mo-capturar-un-evento-del-mouse">&#xBF;C&#xF3;mo capturar un evento del mouse?</h2><p>Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el c&#xF3;digo:</p><ul><li>cuando_hace_click(x, y, evento_original)
-</li>
-<li>cuando_mueve(x, y, evento_original)
+                                <h1 id="pilas-como-biblioteca-externa">Pilas como biblioteca externa</h1><p>Pilas se puede usar como una biblioteca externa para permitir un uso avanzado
+y muy personalizado de pilas.</p><p>Esta opci&#xF3;n es ideal si quieres poner tu juego en blogs, fotos o incluso
+en dispositivos m&#xF3;viles como tables o celulares con herramientas como
+cordova o phonegap.</p><p>El primer paso para incorporar pilas como biblioteca es descargar los
+archivos <code>phaser.js</code>, <code>nineslice.js</code> y <code>pilas-engine.js</code> del directorio
+<code>public</code> de nuestro repositorio y colocarlos en un directorio local:</p><ul><li><a href="https://github.com/pilas-engine/pilas-engine/tree/master/public" target="_blank">https://github.com/pilas-engine/pilas-engine/tree/master/public</a>
 </li></ul>
-<p>Estas funciones se pueden crear en el c&#xF3;digo de una escena o de un actor. La diferencia es que en las escenas el &quot;click&quot; o el movimiento se van a detectar en toda la pantalla, mientras que en el c&#xF3;digo del actor solo se detectar&#xE1;n si el mouse apunta al actor.</p><p>Veamos un ejemplo, imagin&#xE1; que queremos crear actores de la clase &quot;Pelota&quot; cada vez que el usuario hace &quot;click&quot; sobre la pantalla. Podr&#xED;amos hacerlo colocando este c&#xF3;digo en la escena:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> escena2 extends Escena {
-  iniciar() {}
+<p>Luego, deber&#xED;as agregar en ese mismo directorio los archivos
+&quot;imagenes/sin_imagen.png&quot; y el directorio &quot;fuentes&quot; que tambi&#xE9;n aparencen
+en el link anterior.</p><p>Por &#xFA;ltimo, deber&#xED;as crear un archivo index.html con la estructura inicial
+que necesita pilas.</p><pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> /&gt;</span>
 
-  actualizar() {}
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;phaser.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;nineslice.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;pilas-engine.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
 
-  cuando_mueve(x, y, evento_original) {}
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+      <span class="hljs-keyword">var</span> pilas = pilasengine.iniciar(<span class="hljs-number">600</span>, <span class="hljs-number">600</span>);
 
-  cuando_hace_click(x, y, evento_original) {
-    <span class="hljs-keyword">let</span> pelota = <span class="hljs-keyword">this</span>.pilas.actores.pelota();
-    pelota.x = x;
-    pelota.y = y;
-  }
-}</code></pre>
-<h2 id="&#xBF;c&#xF3;mo-capturar-eventos-del-mouse-en-un-actor">&#xBF;C&#xF3;mo capturar eventos del mouse en un actor?</h2><p>Para capturar eventos en el contexto de un actor, tenemos que usar las mismas funciones, pero declar&#xE1;ndolas dentro del c&#xF3;digo del actor.</p><p>Por ejemplo, imagin&#xE1; que estamos haciendo un juego de cartas y queremos que la carta se pueda hacer girar con un &quot;click&quot; de mouse y que cambie de transparencia cuando el mouse est&#xE9; sobre ella:</p><p><img src="assets/carta_con_eventos.gif"></p><p>El c&#xF3;digo del actor deber&#xED;a quedarnos algo similar a lo siguiente:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> actor extends Actor {
-  propiedades = {};
-
-  iniciar() {
-    <span class="hljs-keyword">this</span>.transparencia = <span class="hljs-number">50</span>;
-  }
-
-  actualizar() {}
-
-  cuando_mueve(x, y, evento_original) {
-    <span class="hljs-keyword">this</span>.escala = <span class="hljs-number">1.2</span>;
-    <span class="hljs-keyword">this</span>.transparencia = <span class="hljs-number">0</span>;
-  }
-
-  cuando_sale(x, y, evento_original) {
-    <span class="hljs-keyword">this</span>.transparencia = <span class="hljs-number">50</span>;
-    <span class="hljs-keyword">this</span>.escala = <span class="hljs-number">1</span>;
-  }
-
-  cuando_hace_click(x, y, evento_original) {
-    <span class="hljs-keyword">this</span>.rotacion = [<span class="hljs-number">360</span>];
-  }
-}</code></pre>
-<p>Los manejadores de eventos como <code>cuando_mueve</code>, <code>cuando_sale</code> y <code>cuando_hace_click</code> van a ser llamados internamente cuando se produzcan esos eventos sobre el actor.</p><h2 id="capturar-eventos-de-forma-global-con-manejadores">Capturar eventos de forma global, con manejadores</h2><p>Otra forma de capturar eventos m&#xE1;s sofisticada es utilizando
-el m&#xF3;dulo <code>eventos</code> de la escena.</p><pre><code>pilas.eventos.conectar(&quot;mueve_mouse&quot;, (x, y) =&gt; {
-  console.log(&quot;mueve&quot;, x, y);
-});
-
-pilas.eventos.conectar(&quot;click_de_mouse&quot;, (x, y) =&gt; {
-  console.log(&quot;mueve&quot;, x, y);
-});
-
-pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
-  console.log(&quot;mueve&quot;, x, y);
-});</code></pre>
-<p>Esta es la lista de eventos completa:</p><ul><li><code>mueve_mouse</code>: x, y
-</li>
-<li><code>click_de_mouse</code>: x, y, boton_izquierdo, boton_derecho
-</li>
-<li><code>termina_click</code>: x, y, boton_izquierdo, boton_derecho
+      pilas.onready = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">let</span> actor = pilas.actores.actor();
+      };
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+<p>Este archivo <code>index.html</code> se tiene que cargar en un navegador usando
+un webserver y no directamente abriendo el archivo <code>index.html</code>.
+Esto se tiene que hacer debido a que pilas (y phaser) usan ajax para cargar
+im&#xE1;genes y otros recursos.</p><p>Adicionalmente, si tu juego utiliza recursos propios, u otros actores de
+pilas, te recomendamos ver este otro ejemplo en donde se cargan varios
+recursos:</p><ul><li><a href="https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html" target="_blank">https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html</a>
 </li></ul>
-
+<p>Vas a notar que la diferencia m&#xE1;s grande de este otro ejemplo es que usamos
+un par&#xE1;metro para especificar la lista de recursos a cargar y opcionalmente
+enumeramos los detalles del proyecto.</p>
                                 
                                 </section>
                             
@@ -382,12 +363,12 @@ pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
 
             
                 
-                <a href="escenas.html" class="navigation navigation-prev " aria-label="Previous page: Escenas">
+                <a href="eventos.html" class="navigation navigation-prev " aria-label="Previous page: Eventos">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="pilas_como_biblioteca.html" class="navigation navigation-next " aria-label="Next page: Pilas como biblioteca">
+                <a href="colaborar.html" class="navigation navigation-next " aria-label="Next page: Colaborar con pilas">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -398,7 +379,7 @@ pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Eventos","level":"1.9","depth":1,"next":{"title":"Pilas como biblioteca","level":"1.10","depth":1,"path":"pilas_como_biblioteca.md","ref":"pilas_como_biblioteca.md","articles":[]},"previous":{"title":"Escenas","level":"1.8","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos.md","mtime":"2019-04-20T19:56:58.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-04-21T20:45:23.271Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"typora-copy-images-to":"./imagenes","title":"Pilas como biblioteca","level":"1.10","depth":1,"next":{"title":"Colaborar con pilas","level":"2.1","depth":1,"path":"colaborar.md","ref":"colaborar.md","articles":[]},"previous":{"title":"Eventos","level":"1.9","depth":1,"path":"eventos.md","ref":"eventos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"pilas_como_biblioteca.md","mtime":"2019-04-21T20:45:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-04-21T20:45:23.271Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

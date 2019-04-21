@@ -802,6 +802,37 @@ var Pilas = (function () {
     };
     Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones) {
         if (opciones === void 0) { opciones = {}; }
+        if (opciones === undefined || recursos === null) {
+            opciones = {};
+        }
+        if (recursos === undefined || recursos === null) {
+            recursos = {
+                imagenes: [
+                    {
+                        nombre: "sin_imagen",
+                        ruta: "imagenes/sin_imagen.png"
+                    }
+                ],
+                sonidos: [],
+                fuentes: [
+                    {
+                        nombre: "font",
+                        imagen: "fuentes/font.png",
+                        fuente: "fuentes/font.fnt"
+                    },
+                    {
+                        nombre: "impact",
+                        imagen: "fuentes/impact.png",
+                        fuente: "fuentes/impact.fnt"
+                    },
+                    {
+                        nombre: "mini-impact",
+                        imagen: "fuentes/mini-impact.png",
+                        fuente: "fuentes/mini-impact.fnt"
+                    }
+                ]
+            };
+        }
         opciones.modo_simple = true;
         this.iniciar_phaser(ancho, alto, recursos, opciones);
         return this;
