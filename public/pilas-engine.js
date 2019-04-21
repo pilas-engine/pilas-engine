@@ -1433,24 +1433,31 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "estatico", {
         get: function () {
-            this.fallar_si_no_tiene_figura();
-            return this.sprite.isStatic();
+            if (this.sprite.isStatic !== undefined) {
+                return this.sprite.isStatic();
+            }
+            else {
+                console.warn("Este actor no tiene figura, se asume que no es estático.");
+                return false;
+            }
         },
         set: function (estatico) {
-            this.fallar_si_no_tiene_figura();
-            this.sprite.setStatic(estatico);
-            this.sprite.setVelocity(0, 0);
+            if (this.sprite.setStatic !== undefined) {
+                this.sprite.setStatic(estatico);
+                this.sprite.setVelocity(0, 0);
+            }
+            else {
+                console.warn("Este actor no tiene figura, ignorando valor estatico/dinámico.");
+            }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "dinamico", {
         get: function () {
-            this.fallar_si_no_tiene_figura();
             return !this.estatico;
         },
         set: function (dinamico) {
-            this.fallar_si_no_tiene_figura();
             this.estatico = !dinamico;
         },
         enumerable: true,
@@ -1602,7 +1609,11 @@ var ActorBase = (function () {
         return figura;
     };
     ActorBase.prototype.eliminar = function () {
+        var _this = this;
         this._vivo = false;
+        this.sensores.map(function (s) {
+            _this.pilas.modo.matter.world.remove(s);
+        });
     };
     Object.defineProperty(ActorBase.prototype, "figura_ancho", {
         get: function () {
