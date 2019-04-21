@@ -575,27 +575,30 @@ class ActorBase {
   }
 
   get estatico() {
-    this.fallar_si_no_tiene_figura();
-
-    return (this.sprite as any).isStatic();
+    if ((this.sprite as any).isStatic !== undefined) {
+      return (this.sprite as any).isStatic();
+    } else {
+      console.warn("Este actor no tiene figura, se asume que no es estático.");
+      return false;
+    }
   }
 
   set estatico(estatico: boolean) {
-    this.fallar_si_no_tiene_figura();
-
-    (this.sprite as any).setStatic(estatico);
-    (this.sprite as any).setVelocity(0, 0);
+    if ((this.sprite as any).setStatic !== undefined) {
+      (this.sprite as any).setStatic(estatico);
+      (this.sprite as any).setVelocity(0, 0);
+    } else {
+      console.warn(
+        "Este actor no tiene figura, ignorando valor estatico/dinámico."
+      );
+    }
   }
 
   set dinamico(dinamico: boolean) {
-    this.fallar_si_no_tiene_figura();
-
     this.estatico = !dinamico;
   }
 
   get dinamico() {
-    this.fallar_si_no_tiene_figura();
-
     return !this.estatico;
   }
 
@@ -751,6 +754,9 @@ class ActorBase {
 
   eliminar() {
     this._vivo = false;
+    this.sensores.map(s => {
+      this.pilas.modo.matter.world.remove(s);
+    });
   }
 
   set figura_ancho(valor: number) {
