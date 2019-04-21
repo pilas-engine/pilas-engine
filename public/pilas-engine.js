@@ -779,6 +779,9 @@ var Pilas = (function () {
     });
     Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos, opciones) {
         var _this = this;
+        if (opciones.maximizar === undefined) {
+            opciones.maximizar = true;
+        }
         this.opciones = opciones;
         if (!recursos) {
             throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
@@ -786,7 +789,7 @@ var Pilas = (function () {
         this._ancho = ancho;
         this._alto = alto;
         this.recursos = recursos;
-        var configuracion = this.crear_configuracion(ancho, alto);
+        var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar);
         if (opciones.esperar_antes_de_iniciar) {
             console.log("Esperando 1 segundo antes de iniciar ...");
             setTimeout(function () {
@@ -831,10 +834,21 @@ var Pilas = (function () {
     Pilas.prototype.cambiar_escena = function (nombre) {
         this.modo.cambiar_escena(nombre);
     };
-    Pilas.prototype.crear_configuracion = function (ancho, alto) {
+    Pilas.prototype.reiniciar_escena = function () {
+        this.modo.cambiar_escena(this.escena.constructor.name);
+    };
+    Pilas.prototype.crear_configuracion = function (ancho, alto, maximizar) {
+        var escala = undefined;
+        if (maximizar) {
+            escala = {
+                mode: Phaser.Scale.FIT,
+                autoCenter: Phaser.Scale.CENTER_BOTH
+            };
+        }
         return {
             type: Phaser.AUTO,
             parent: "game",
+            scale: escala,
             width: ancho,
             height: alto,
             backgroundColor: "#000000",

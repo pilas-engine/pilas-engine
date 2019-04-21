@@ -6,6 +6,12 @@
     <script src="phaser.js"></script>
     <script src="nineslice.js"></script>
     <script src="pilas-engine.js"></script>
+    <style media="screen">
+      body {
+        margin: 0;
+        background-color: gray;
+      }
+    </style>
   </head>
 
   <body>
@@ -13,8 +19,8 @@
       //pilas = new Pilas();
       //pilas.iniciar({ ancho: 320, alto: 240, data_path: "../dist/data" });
       var pilas = pilasengine.iniciar(
-        640,
-        480,
+        320,
+        240,
         {
           imagenes: [
             { nombre: "sin_imagen", ruta: "imagenes/sin_imagen.png" },
@@ -48,8 +54,24 @@
               ruta: "imagenes/nave/nave_izquierda_1.png"
             },
             {
+              nombre: "interfaz/linea",
+              ruta: "imagenes/interfaz/linea.png"
+            },
+            {
+              nombre: "interfaz/punto",
+              ruta: "imagenes/interfaz/punto.png"
+            },
+            {
+              nombre: "interfaz/deslizador",
+              ruta: "imagenes/interfaz/deslizador.png"
+            },
+            {
               nombre: "nave_izquierda_2",
               ruta: "imagenes/nave/nave_izquierda_2.png"
+            },
+            {
+              nombre: "plataforma",
+              ruta: "imagenes/plataforma.png"
             }
           ],
           fuentes: [
@@ -79,6 +101,7 @@
           alto: 200,
           ancho: 200,
           titulo: "sin usar",
+          maximizar: true,
           escena_inicial: 3,
           escenas: [
             {
@@ -93,11 +116,18 @@
       );
 
       pilas.onready = function() {
-        let nave = pilas.actores.nave();
+        //let nave = pilas.actores.nave();
 
-        nave.aprender("arrastrable");
+        //pilas.game.canvas[pilas.game.device.fullscreen.request]();
+        //nave.aprender("arrastrable");
 
-        pilas.actores.pelota();
+        let pelota = pilas.actores.pelota();
+
+        pelota.aprender("arrastrable");
+        let p = pilas.actores.plataforma();
+        p.y = -100;
+        pilas.actores.deslizador();
+
         //pilas.definir_modos({ puntos_de_control: true });
       };
 

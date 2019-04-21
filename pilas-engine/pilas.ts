@@ -67,6 +67,10 @@ class Pilas {
   }
 
   iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
+    if (opciones.maximizar === undefined) {
+      opciones.maximizar = true;
+    }
+
     this.opciones = opciones;
 
     if (!recursos) {
@@ -79,7 +83,11 @@ class Pilas {
     this._alto = alto;
 
     this.recursos = recursos;
-    var configuracion = this.crear_configuracion(ancho, alto);
+    var configuracion = this.crear_configuracion(
+      ancho,
+      alto,
+      opciones.maximizar
+    );
 
     // Opción para simular una espera o demora al iniciar el componente de
     // pilas, se utiliza desde el editor cuando corren los tests.
@@ -138,10 +146,24 @@ class Pilas {
     this.modo.cambiar_escena(nombre);
   }
 
-  crear_configuracion(ancho: number, alto: number) {
+  reiniciar_escena() {
+    this.modo.cambiar_escena(this.escena.constructor.name);
+  }
+
+  crear_configuracion(ancho: number, alto: number, maximizar: boolean) {
+    let escala = undefined;
+
+    if (maximizar) {
+      escala = {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+      };
+    }
+
     return {
       type: Phaser.AUTO, // CANVAS, WEBGL o AUTO
       parent: "game",
+      scale: escala,
       width: ancho,
       height: alto,
       backgroundColor: "#000000",

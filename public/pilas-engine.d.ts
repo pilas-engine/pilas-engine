@@ -215,9 +215,11 @@ declare class Pilas {
     ejecutar(): void;
     definir_modo(nombre: string, datos: any): void;
     cambiar_escena(nombre: string): void;
-    crear_configuracion(ancho: number, alto: number): {
+    reiniciar_escena(): void;
+    crear_configuracion(ancho: number, alto: number, maximizar: boolean): {
         type: number;
         parent: string;
+        scale: any;
         width: number;
         height: number;
         backgroundColor: string;
