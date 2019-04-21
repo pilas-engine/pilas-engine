@@ -31,7 +31,11 @@ export default Component.extend({
       }
     });
 
-    this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "activar_interprete");
+    this.bus.on(
+      "cuando_termina_de_iniciar_ejecucion",
+      this,
+      "activar_interprete"
+    );
 
     this.actualizar_diccionario_de_actores.perform();
     this.log.limpiar();
@@ -39,12 +43,17 @@ export default Component.extend({
 
   activar_interprete(pilas, contexto) {
     this.set("pilas", pilas);
-
     this.set("contexto", contexto);
+
+    this.contexto.eval("pilas = pilasengine");
   },
 
   willDestroyElement() {
-    this.bus.off("cuando_termina_de_iniciar_ejecucion", this, "activar_interprete");
+    this.bus.off(
+      "cuando_termina_de_iniciar_ejecucion",
+      this,
+      "activar_interprete"
+    );
   },
 
   autocompletar(termino, success) {
@@ -61,7 +70,9 @@ export default Component.extend({
       yield timeout(2000);
 
       if (this.contexto) {
-        this.contexto.eval("window.actores = pilas.obtener_diccionario_de_actores();");
+        this.contexto.eval(
+          "window.actores = pilasengine.obtener_diccionario_de_actores();"
+        );
       }
     }
   }),
@@ -92,12 +103,11 @@ export default Component.extend({
             // TODO: esto debería poder convertir un objeto más complejo o un
             //       diccionario como "actores".
             resultado = JSON.stringify(resultado);
-          } catch(_) {
+          } catch (_) {
             console.warn("No se puede convertir este objeto a json");
           }
 
           this.log.info(resultado);
-
         } catch (error) {
           this.log.error(error);
         }

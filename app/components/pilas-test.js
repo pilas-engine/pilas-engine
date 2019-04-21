@@ -43,12 +43,20 @@ export default Component.extend({
       ]
     });
     this.bus.on("finaliza_carga", this, "finaliza_carga");
-    this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
+    this.bus.on(
+      "cuando_termina_de_iniciar_ejecucion",
+      this,
+      "cuando_termina_de_iniciar_ejecucion"
+    );
   },
 
   willDestroyElement() {
     this.bus.off("finaliza_carga", this, "finaliza_carga");
-    this.bus.off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
+    this.bus.off(
+      "cuando_termina_de_iniciar_ejecucion",
+      this,
+      "cuando_termina_de_iniciar_ejecucion"
+    );
   },
 
   finaliza_carga(pilas) {
