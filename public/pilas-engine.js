@@ -423,18 +423,25 @@ var Arrastrable = (function (_super) {
     Arrastrable.prototype.iniciar = function () {
         var _this = this;
         var input = this.pilas.modo.input;
-        var valor_inicial_dinamico = this.actor.dinamico;
+        var valor_inicial_dinamico = null;
         this.actor.sprite.setInteractive();
         input.setDraggable(this.actor.sprite);
-        input.on("dragstart", function (_, objeto, x, y) {
-            _this.actor.dinamico = false;
+        input.on("dragstart", function (_, objeto) {
+            if (_this.actor !== objeto.actor) {
+                return;
+            }
+            valor_inicial_dinamico = objeto.actor.dinamico;
+            objeto.actor.dinamico = false;
         });
         input.on("drag", function (_, objeto, x, y) {
             objeto.x = x;
             objeto.y = y;
         });
-        input.on("dragend", function () {
-            _this.actor.dinamico = valor_inicial_dinamico;
+        input.on("dragend", function (_, objeto) {
+            if (_this.actor !== objeto.actor) {
+                return;
+            }
+            objeto.actor.dinamico = valor_inicial_dinamico;
         });
     };
     Arrastrable.prototype.actualizar = function () { };
