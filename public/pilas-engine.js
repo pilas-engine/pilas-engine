@@ -2998,6 +2998,11 @@ var ModoEjecucion = (function (_super) {
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
             actor.pre_iniciar(p);
             actor.iniciar();
+            if (entidad.habilidades) {
+                entidad.habilidades.map(function (habilidad) {
+                    actor.aprender(habilidad);
+                });
+            }
         }
         else {
             var nombres_de_clases = Object.getOwnPropertyNames(this.clases);

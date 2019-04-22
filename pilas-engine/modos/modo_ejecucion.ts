@@ -411,6 +411,12 @@ class ModoEjecucion extends Modo {
 
       actor.pre_iniciar(p);
       actor.iniciar();
+
+      if (entidad.habilidades) {
+        entidad.habilidades.map(habilidad => {
+          actor.aprender(habilidad);
+        });
+      }
     } else {
       let nombres_de_clases = Object.getOwnPropertyNames(this.clases);
       throw new Error(

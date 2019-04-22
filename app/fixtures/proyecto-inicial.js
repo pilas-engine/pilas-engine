@@ -62,6 +62,7 @@ export default {
           x: 0,
           y: 0,
           z: 0,
+          habilidades: [],
           imagen: "conejo",
           centro_x: 0.5,
           centro_y: 0.5,
@@ -86,6 +87,8 @@ export default {
         {
           x: 0,
           y: -90,
+          z: 0,
+          habilidades: [],
           imagen: "plataforma",
           centro_x: 0.5,
           centro_y: 0.5,
@@ -110,6 +113,8 @@ export default {
         {
           x: 96,
           y: 39,
+          z: 0,
+          habilidades: [],
           imagen: "caja",
           centro_x: 0.5,
           centro_y: 0.5,
@@ -134,6 +139,8 @@ export default {
         {
           x: -61,
           y: 57,
+          z: 0,
+          habilidades: [],
           imagen: "pelota",
           centro_x: 0.5,
           centro_y: 0.5,
@@ -158,6 +165,8 @@ export default {
         {
           x: 0,
           y: 255,
+          z: 0,
+          habilidades: [],
           imagen: "techo",
           centro_x: 0.5,
           centro_y: 0.5,
@@ -182,6 +191,8 @@ export default {
         {
           x: 0,
           y: -250,
+          z: 0,
+          habilidades: [],
           imagen: "suelo",
           centro_x: 0.5,
           centro_y: 0.5,

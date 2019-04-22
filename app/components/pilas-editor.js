@@ -397,6 +397,7 @@ export default Component.extend({
       actor.propiedades.imagen = actor.imagen || "sin_imagen";
 
       actor.propiedades.nombre = nombre;
+      actor.propiedades.habilidades = [];
 
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 

@@ -41,7 +41,7 @@
 
 :root,
 .ember-application,
-.ember-application > div {
+.ember-application > div.ember-view {
   height: 100%;
 }
 
@@ -381,4 +381,26 @@ span {
 }
 ::-webkit-resizer {
   background-color: #666;
+}
+
+.ember-power-select-trigger,
+.ember-power-select-options {
+  font-family: verdana;
+  font-size: small;
+}
+
+.ember-power-select-multiple-option {
+  /* w-90 */
+  width: 90%;
+  /* .truncate */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ember-power-select-option {
+  /* .truncate */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

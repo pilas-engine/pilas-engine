@@ -36,6 +36,10 @@ export default Component.extend({
         intensidad: 1
       },
       {
+        tipo: "habilidades",
+        propiedad: "habilidades"
+      },
+      {
         tipo: "cadena",
         propiedad: "etiqueta"
       },

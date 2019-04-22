@@ -40,9 +40,19 @@
         modificarAtributo=cuando_modifica_atributo_de_actor
       }}
 
+  {{else if (eq propiedad.tipo "habilidades")}}
+
+    {{pilas-propiedad/habilidades objeto=instancia_seleccionada
+        propiedad=propiedad
+        modificarAtributo=cuando_modifica_atributo_de_actor
+      }}
+
   {{else}}
 
-    <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+    <div class="pv2">
+      <div class="red f7">No hay manejador para '{{propiedad.propiedad}}'</div>
+      <div class="red f7">en pilas-inspector/actor.hbs</div>
+    </div>
 
   {{/if}}
 
