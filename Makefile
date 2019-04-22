@@ -166,6 +166,18 @@ deploy_a_dokku:
 	cd pilas-engine-en-dokku; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git push -f
 	rm -rf pilas-engine-en-dokku
 
+deploy_a_dokku_dev:
+	rm -rf dist
+	@echo "Compilando la aplicación en modo producción a entorno de pruebas..."
+	${BIN_EMBER} build --prod
+	@echo "Subiendo contenido al sitio de surge."
+	rm -rf pilas-engine-en-dokku-dev
+	git clone dokku@hugoruscitti.com.ar:app-dev pilas-engine-en-dokku-dev
+	rm -rf pilas-engine-en-dokku-dev/*
+	cp -rf dist/* pilas-engine-en-dokku-dev/
+	cd pilas-engine-en-dokku-dev; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git push -f
+	rm -rf pilas-engine-en-dokku-dev
+
 binarios:
 	$(call task, "Comenzando a generar binarios.")
 	$(call log, "Limpiando directorio de binarios ...")

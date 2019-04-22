@@ -49,11 +49,23 @@ jobs:
         - run:
             name: "Subiendo archivos a dokku..."
             command: make deploy_a_dokku
+  actualizar-sitio-dev:
+    docker:
+      - image: circleci/node:8.9.4-stretch-browsers
+    steps:
+        - checkout
+        - run: make iniciar
+        - run: make test
+        - run:
+            name: "Subiendo archivos a surge..."
+            command: make deploy_a_dokku_dev
+        - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 workflows:
   version: 2
   compilar-y-subir:
     jobs:
       - compilar
+      - actualizar-sitio-dev
       - binarios:
           filters:
             tags:
