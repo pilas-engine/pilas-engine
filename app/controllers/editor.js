@@ -23,7 +23,7 @@ const queryParams = new QueryParams({
   fps: { defaultValue: true, replace: true },
   fisica: { defaultValue: true, replace: true },
   permitir_modo_pausa: { defaultValue: true, replace: true },
-  oscuro: { defaultValue: false, replace: true },
+  oscuro: { defaultValue: true, replace: true },
   modoVim: { defaultValue: false, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true },
   tamano: { defaultValue: 14, replace: true, refresh: true }
