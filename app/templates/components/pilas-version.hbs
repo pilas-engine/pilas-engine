@@ -1,23 +1,34 @@
 {{yield}}
 
 <div class="tc mt4 lato gray">
-  versión {{version_simplificada}}
-</div>
-
-<div class="tc mt2 f7 lato gray">
-  {{#if consultando}}
-    Consultando si existe una versión más reciente en el servidor ...
+  {{#if enDesarrollo}}
+    versión en desarrollo
+    <br/>
+    <a class="f7 link gray" href="https://github.com/pilas-engine/pilas-engine/commits/master" target="_blank">{{version}} (más información)</a>
   {{else}}
-
-    {{#if error}}
-      <span class="gray">{{error}}</span>
-    {{else}}
-      {{#if actualizada}}
-        Tienes la versión más reciente.
-      {{else}}
-        <span class="red">Existe una actualización disponible: <a href="https://github.com/pilas-engine/pilas-engine/releases" rel="noopener" target="_blank">{{version_en_el_servidor}}</a></span>
-      {{/if}}
-    {{/if}}
-
+    versión {{version_simplificada}}
   {{/if}}
 </div>
+
+{{#if enDesarrollo}}
+  <div class="tc mt2 f7 lato gray">
+  </div>
+{{else}}
+  <div class="tc mt2 f7 lato gray">
+    {{#if consultando}}
+      Consultando si existe una versión más reciente en el servidor ...
+    {{else}}
+
+      {{#if error}}
+        <span class="gray">{{error}}</span>
+      {{else}}
+        {{#if actualizada}}
+          Tienes la versión más reciente.
+        {{else}}
+          <span class="red">Existe una actualización disponible: <a href="https://github.com/pilas-engine/pilas-engine/releases" rel="noopener" target="_blank">{{version_en_el_servidor}}</a></span>
+        {{/if}}
+      {{/if}}
+
+    {{/if}}
+  </div>
+{{/if}}

@@ -19,6 +19,10 @@ export default Component.extend({
     return this.version.replace("v", "").split("+")[0];
   }),
 
+  enDesarrollo: computed("version", function() {
+    return /app-dev/.test(window.location.href);
+  }),
+
   didInsertElement() {
     this.consultar_ultima_version_publicada.perform();
   },
