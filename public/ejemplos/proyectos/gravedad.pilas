@@ -7,7 +7,7 @@
     "escenas": [
       {
         "nombre": "principal",
-        "codigo": "class principal extends Escena {\n    iniciar() {\n        let deslizador_x = this.pilas.buscar_actor(\"deslizador\");\n        deslizador_x.valor = 50;\n\n        let deslizador_y = this.pilas.buscar_actor(\"deslizador1\");\n        deslizador_y.valor = 50;\n    }\n\n    actualizar() {\n        let deslizador_x = this.pilas.buscar_actor(\"deslizador\");\n        this.pilas.fisica.gravedad_x = (deslizador_x.valor - 50) / 30;\n\n        let deslizador_y = this.pilas.buscar_actor(\"deslizador1\");\n        this.pilas.fisica.gravedad_y = (deslizador_y.valor - 50) / 30;\n    }\n}"
+        "codigo": "class principal extends Escena {\n    iniciar() {\n        let deslizador_x = this.pilas.buscar_actor(\"deslizador\");\n        deslizador_x.valor = 50;\n\n        let deslizador_y = this.pilas.buscar_actor(\"deslizador1\");\n        deslizador_y.valor = 51;\n    }\n\n    actualizar() {\n        let deslizador_x = this.pilas.buscar_actor(\"deslizador\");\n        this.pilas.fisica.gravedad_x = (deslizador_x.valor - 50) / 30;\n\n        let deslizador_y = this.pilas.buscar_actor(\"deslizador1\");\n        this.pilas.fisica.gravedad_y = (deslizador_y.valor - 50) / 30;\n    }\n}"
       }
     ],
     "actores": [
