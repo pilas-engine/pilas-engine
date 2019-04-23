@@ -56,10 +56,10 @@ jobs:
         - checkout
         - run: make iniciar
         - run: make test
+        - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
         - run:
             name: "Subiendo archivos a surge..."
             command: make deploy_a_dokku_dev
-        - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 workflows:
   version: 2
   compilar-y-subir:
