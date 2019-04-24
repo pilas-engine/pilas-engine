@@ -1,15 +1,20 @@
 <div class="button
     dib
-    truncate
     {{if padding padding "pa2"}}
     verdana f7 link pointer
     black bg-animate b--black-20
     unselectable
     m0
+    relative
     {{if deshabilitado "o-60 disabled"}}
     {{if debe_resaltar_el_fondo "bg-black-10"}}
     {{if rojo "white bg-red"}}
-    " role="button" {{action "alternar"}} data-test={{dataTest}}>
+    "
+    role="button"
+    {{action "alternar"}} data-test={{dataTest}}>
+
+
+
   {{#if icono}}
     {{#if variable}}
       {{pilas-icono icono=icono_on}}{{yield}}
@@ -23,6 +28,5 @@
       {{pilas-icono icono="off"}} <span class="dn texto di-ns">{{texto}}</span> <span class="di dn-ns">{{texto_corto}}</span>{{yield}}
     {{/if}}
   {{/if}}
-
 
 </div>

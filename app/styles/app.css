@@ -83,7 +83,8 @@ body {
   outline: none;
 }
 
-.disabled {
+.disabled,
+.no-pointer-events {
   pointer-events: none;
 }
 
