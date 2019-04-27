@@ -17,11 +17,11 @@
     },
     {
       "nombre": "gravedad",
-      "desde": "2.0.73"
+      "desde": "2.0.74"
     },
     {
       "nombre": "arrastrables",
-      "desde": "2.0.73"
+      "desde": "2.0.74"
     }
   ]
 }
