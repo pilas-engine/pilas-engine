@@ -12,7 +12,7 @@ en dispositivos móviles como tables o celulares con herramientas como
 cordova o phonegap.
 
 El primer paso para incorporar pilas como biblioteca es descargar los
-archivos `phaser.js`, `nineslice.js` y `pilas-engine.js` del directorio
+archivos javascript `phaser`, `nineslice` y `pilas-engine` del directorio
 `public` de nuestro repositorio y colocarlos en un directorio local:
 
 - https://github.com/pilas-engine/pilas-engine/tree/master/public
@@ -30,9 +30,9 @@ que necesita pilas.
   <head>
     <meta charset="utf-8" />
 
-    <script src="phaser.js"></script>
-    <script src="nineslice.js"></script>
-    <script src="pilas-engine.js"></script>
+    <script src="archivo_phaser.js"></script>
+    <script src="archivo_nineslice.js"></script>
+    <script src="archivo_pilas-engine.js"></script>
   </head>
 
   <body>
