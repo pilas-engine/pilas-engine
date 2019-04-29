@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Colisiones · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Colisiones · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -297,7 +297,14 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="colisiones">Colisiones</h1><p>El sistema de colisiones de pilas es super simple, pero muy &#xFA;til.</p><p>Las colisiones permiten ejecutar funciones como respuesta al contacto entre diferentes actores. Las funciones se pueden personalizar para hacer casi cualquier cosa: reproducir un sonido para magnificar el impacto, eliminar alguno de los actores en contacto, emitir efectos etc&#x2026;</p><p>Por ejemplo, imagin&#xE1; que tenemos estos tres actores:</p><p><img alt="olisiones.md 2018-04-11 23-53-0" src="assets/colisiones.md 2018-04-11 23-53-00.png"></p><p>Cuando el juego se ejecute, la plataforma va a quedar fija en pantalla. Mientras que la pelota y la caja van a moverse hacia abajo y colisionar&#xE1;n.</p><p>Pilas va a llamar autom&#xE1;ticamente a la funci&#xF3;n <code>cuando_comienza_una_colision</code> ni bien entren en contacto dos actores. Por ejemplo en este caso, pilas va a llamar a la funci&#xF3;n <code>cuando_comienza_una_colision</code> cuando la pelota colisione con la caja, y luego la plataforma.</p><pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">pelota</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Actor</span> </span>{
+                                <h1 id="colisiones">Colisiones</h1>
+<p>El sistema de colisiones de pilas es super simple, pero muy &#xFA;til.</p>
+<p>Las colisiones permiten ejecutar funciones como respuesta al contacto entre diferentes actores. Las funciones se pueden personalizar para hacer casi cualquier cosa: reproducir un sonido para magnificar el impacto, eliminar alguno de los actores en contacto, emitir efectos etc&#x2026;</p>
+<p>Por ejemplo, imagin&#xE1; que tenemos estos tres actores:</p>
+<p><img src="assets/colisiones.md 2018-04-11 23-53-00.png" alt="olisiones.md 2018-04-11 23-53-0"></p>
+<p>Cuando el juego se ejecute, la plataforma va a quedar fija en pantalla. Mientras que la pelota y la caja van a moverse hacia abajo y colisionar&#xE1;n.</p>
+<p>Pilas va a llamar autom&#xE1;ticamente a la funci&#xF3;n <code>cuando_comienza_una_colision</code> ni bien entren en contacto dos actores. Por ejemplo en este caso, pilas va a llamar a la funci&#xF3;n <code>cuando_comienza_una_colision</code> cuando la pelota colisione con la caja, y luego la plataforma.</p>
+<pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">pelota</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Actor</span> </span>{
     propiedades = {
         imagen: <span class="hljs-string">&quot;pelota&quot;</span>,
         figura: <span class="hljs-string">&quot;circulo&quot;</span>,
@@ -313,18 +320,22 @@
             <span class="hljs-keyword">this</span>.decir(<span class="hljs-string">&quot;Oh, colision&#xE9; con una plataforma!&quot;</span>);
         }
     }
-}</code></pre>
-<p>En el c&#xF3;digo hay dos cosas interesantes, tenemos la funci&#xF3;n <code>cuando_comienza_una_colision</code> dentro de la clase &quot;pelota&quot; para detectar colisiones y adem&#xE1;s intentamos distinguir contra qu&#xE9; actores se produce la colisi&#xF3;n usando <a href="etiquetas.html">etiquetas</a>. :</p><ul><li>Si la pelota colisiona con una caja, le indicamos a pilas que ignore la colisi&#xF3;n, y contin&#xFA;e. Esto se hace simplemente retornando <code>true</code>.
-</li>
-<li>Si la pelota colisiona con una plataforma, emitimos un mensaje para que el usuario pueda reconocer que la pelota detect&#xF3; la colisi&#xF3;n.
-</li></ul>
-<h2 id="tipos-de-colisiones">Tipos de colisiones</h2><p>Hay 3 instantes muy importantes cuando se producen colisiones:</p><ul><li>Cuando se detecta el contacto inicial.
-</li>
-<li>Cuando los dos actores permanecen en contacto prolongado. Por ejemplo cuando un actor se posa sobre una plataforma.
-</li>
-<li>El instante en donde la colisi&#xF3;n desaparece porque los actores dejan de estar en contacto. Por ejemplo cuando un actor posando sobre una plataforma &quot;salta&quot; y deja de estar en contacto.
-</li></ul>
-<p>Para distinguir estos 3 casos pilas llamar&#xE1; a tres funciones diferentes. Este es un ejemplo de c&#xF3;mo se declaran esas funciones en el c&#xF3;digo de un actor:</p><pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">mi_actor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Actor</span> </span>{
+}
+</code></pre>
+<p>En el c&#xF3;digo hay dos cosas interesantes, tenemos la funci&#xF3;n <code>cuando_comienza_una_colision</code> dentro de la clase &quot;pelota&quot; para detectar colisiones y adem&#xE1;s intentamos distinguir contra qu&#xE9; actores se produce la colisi&#xF3;n usando <a href="etiquetas.html">etiquetas</a>. : </p>
+<ul>
+<li>Si la pelota colisiona con una caja, le indicamos a pilas que ignore la colisi&#xF3;n, y contin&#xFA;e. Esto se hace simplemente retornando <code>true</code>.</li>
+<li>Si la pelota colisiona con una plataforma, emitimos un mensaje para que el usuario pueda reconocer que la pelota detect&#xF3; la colisi&#xF3;n.</li>
+</ul>
+<h2 id="tipos-de-colisiones">Tipos de colisiones</h2>
+<p>Hay 3 instantes muy importantes cuando se producen colisiones:</p>
+<ul>
+<li>Cuando se detecta el contacto inicial.</li>
+<li>Cuando los dos actores permanecen en contacto prolongado. Por ejemplo cuando un actor se posa sobre una plataforma.</li>
+<li>El instante en donde la colisi&#xF3;n desaparece porque los actores dejan de estar en contacto. Por ejemplo cuando un actor posando sobre una plataforma &quot;salta&quot; y deja de estar en contacto.</li>
+</ul>
+<p>Para distinguir estos 3 casos pilas llamar&#xE1; a tres funciones diferentes. Este es un ejemplo de c&#xF3;mo se declaran esas funciones en el c&#xF3;digo de un actor:</p>
+<pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">mi_actor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Actor</span> </span>{
 
     cuando_comienza_una_colision(actor) {
         <span class="hljs-keyword">if</span> (actor.etiqueta === <span class="hljs-string">&quot;moneda&quot;</span>) {
@@ -340,7 +351,8 @@
     cuando_termina_una_colision(actor) {
 
     }
-}</code></pre>
+}
+</code></pre>
 
                                 
                                 </section>
@@ -384,7 +396,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Colisiones","level":"1.7","depth":1,"next":{"title":"Escenas","level":"1.8","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"previous":{"title":"Etiquetas","level":"1.6","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"colisiones.md","mtime":"2018-08-31T23:41:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-04-27T23:09:56.518Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Colisiones","level":"1.7","depth":1,"next":{"title":"Escenas","level":"1.8","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"previous":{"title":"Etiquetas","level":"1.6","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"colisiones.md","mtime":"2019-04-11T18:56:17.413Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T13:51:02.686Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
