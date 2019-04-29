@@ -30,9 +30,9 @@ que necesita pilas.
   <head>
     <meta charset="utf-8" />
 
-    <script src="archivo_phaser.js"></script>
-    <script src="archivo_nineslice.js"></script>
-    <script src="archivo_pilas-engine.js"></script>
+    <script src="archivo phaser js"></script>
+    <script src="archivo nineslice js"></script>
+    <script src="archivo pilas-engine js"></script>
   </head>
 
   <body>
