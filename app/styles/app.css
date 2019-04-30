@@ -405,3 +405,8 @@ span {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* hack para que se puedan cerrar los modales en mobile. */
+[data-ember-action] {
+  cursor: pointer;
+}
