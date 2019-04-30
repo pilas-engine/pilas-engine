@@ -410,3 +410,7 @@ span {
 [data-ember-action] {
   cursor: pointer;
 }
+
+.height-revert {
+  height: revert !important;
+}
