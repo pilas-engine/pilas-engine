@@ -1,38 +1,49 @@
-<style>
-* {
-  padding: 0;
-  margin: 0;
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-body {
-  overflow: hidden;
-}
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
 
-#game {
-  width: 100%;
-  height: 100%;
-  background-color: #424242;
-  text-align: center;
-}
+      html,
+      body {
+        height: 100%;
+      }
 
-canvas {
-  width: auto;
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-}
+      body {
+        overflow: hidden;
+      }
 
+      #game {
+        width: 100%;
+        height: 100%;
+        background-color: #424242;
+        text-align: center;
+      }
 
-</style>
+      canvas {
+        width: auto;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+    </style>
 
-<script src="phaser.js"></script>
-<script src="nineslice.js"></script>
-<script src="pilas-engine.js"></script>
+    <script src="phaser.js"></script>
+    <script src="nineslice.js"></script>
+    <script src="pilas-engine.js"></script>
 
-<script>
-function notificar_click_sobre_el_canvas() {
-  window.parent.postMessage({ tipo: "hace_click_sobre_el_canvas" }, HOST);
-}
-</script>
+    <script></script>
+  </head>
 
-<div id='game' onclick="notificar_click_sobre_el_canvas();"></div>
+  <body>
+    <div id="game"></div>
+  </body>
+</html>
