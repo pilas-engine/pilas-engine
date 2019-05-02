@@ -637,7 +637,7 @@ var Mensajes = (function () {
     };
     Mensajes.prototype.atender_mensaje_actualizar_proyecto_desde_el_editor = function (datos) {
         var proyecto = datos.proyecto;
-        this.pilas.game.resize(proyecto.ancho, proyecto.alto);
+        this.pilas.game.scale.resize(proyecto.ancho, proyecto.alto);
     };
     return Mensajes;
 }());
