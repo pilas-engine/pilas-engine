@@ -2504,7 +2504,7 @@ var Modo = (function (_super) {
             });
         }
         if (actor.figura === "circulo") {
-            return this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true });
+            return this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true }, 25);
         }
         throw Error("No se reconoce la figura " + actor.figura + " en este modo.");
     };

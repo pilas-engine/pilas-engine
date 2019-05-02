@@ -657,7 +657,7 @@ declare class Modo extends Phaser.Scene {
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     copiar_valores_de_sprite_a_texto(sprite: any): void;
-    crear_figura_estatica_para(actor: any): any;
+    crear_figura_estatica_para(actor: any): MatterJS.Body;
     posicionar_la_camara(datos_de_la_escena: any): void;
     actualizar_posicion(posicion?: any): void;
     dibujar_punto_de_control(graphics: any, x: any, y: any): void;
