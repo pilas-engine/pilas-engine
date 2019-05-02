@@ -9,6 +9,6 @@ module("helper:tiempo", function(hooks) {
   test("it renders", async function(assert) {
     this.set("inputValue", "88");
     await render(hbs`{{tiempo inputValue}}`);
-    assert.dom("*").hasText("00:01:28");
+    assert.dom("*").hasText("00 min 01 seg");
   });
 });
