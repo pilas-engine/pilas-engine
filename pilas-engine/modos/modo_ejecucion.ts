@@ -57,7 +57,7 @@ class ModoEjecucion extends Modo {
 
       if (this.pilas.depurador.mostrar_fisica) {
         this.modo_fisica_activado = true;
-        this.matter.systems.matterPhysics.world.createDebugGraphic();
+        this.matter.world.createDebugGraphic();
       }
 
       this.conectar_eventos();
@@ -487,10 +487,10 @@ class ModoEjecucion extends Modo {
     if (this.pilas.depurador.mostrar_fisica) {
       if (!this.modo_fisica_activado) {
         this.modo_fisica_activado = true;
-        this.matter.systems.matterPhysics.world.createDebugGraphic();
+        this.matter.world.createDebugGraphic();
       }
     } else {
-      this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+      this.pilas.modo.matter.world.debugGraphic.destroy();
     }
 
     try {

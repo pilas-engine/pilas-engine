@@ -20,7 +20,7 @@ class ModoEditor extends Modo {
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
-    this.matter.systems.matterPhysics.world.createDebugGraphic();
+    this.matter.world.createDebugGraphic();
 
     this.input.on("pointermove", cursor => {
       let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
@@ -123,9 +123,9 @@ class ModoEditor extends Modo {
     super.update(this.actores);
 
     if (this.pilas.depurador.mostrar_fisica) {
-      this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
+      this.matter.world.debugGraphic.setAlpha(1);
     } else {
-      this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
+      this.matter.world.debugGraphic.setAlpha(0);
     }
 
     this.actores.map(a => {

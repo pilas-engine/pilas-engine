@@ -1,5 +1,5 @@
 class Modo extends Phaser.Scene {
-  matter: any;
+  matter: Phaser.Physics.Matter.MatterPhysics;
   actores: any;
   pilas: Pilas;
   fps: any;
@@ -198,7 +198,10 @@ class Modo extends Phaser.Scene {
         coordenada.x,
         coordenada.y,
         actor.figura_radio,
-        { isStatic: true }
+        { isStatic: true },
+        25
+        // Valor por defecto de `Bodies.circle` en `Matter.js`, ver
+        // https://github.com/liabru/matter-js/blob/2ec247b7af1c6b5da6ee05c73274ed5822c73503/src/factory/Bodies.js#L123.
       );
     }
 
