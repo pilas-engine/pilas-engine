@@ -632,7 +632,7 @@ declare class Normal extends Escena {
     actualizar(): void;
 }
 declare class Modo extends Phaser.Scene {
-    matter: any;
+    matter: Phaser.Physics.Matter.MatterPhysics;
     actores: any;
     pilas: Pilas;
     fps: any;
