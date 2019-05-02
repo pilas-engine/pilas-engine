@@ -33,7 +33,7 @@ class ModoPausa extends Modo {
     this.crear_sprites_desde_historia(this.posicion);
 
     this.crear_canvas_de_depuracion_modo_pausa();
-    this.matter.systems.matterPhysics.world.createDebugGraphic();
+    this.matter.world.createDebugGraphic();
 
     this.tecla_izquierda = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.LEFT
@@ -86,9 +86,9 @@ class ModoPausa extends Modo {
     }
 
     if (this.pilas.depurador.mostrar_fisica) {
-      this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
+      this.matter.world.debugGraphic.setAlpha(1);
     } else {
-      this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
+      this.matter.world.debugGraphic.setAlpha(0);
     }
 
     if (this.pilas.depurador.modo_posicion_activado) {

@@ -2620,7 +2620,7 @@ var ModoEditor = (function (_super) {
         this.posicionar_la_camara(datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
-        this.matter.systems.matterPhysics.world.createDebugGraphic();
+        this.matter.world.createDebugGraphic();
         this.input.on("pointermove", function (cursor) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.pilas.cursor_x = Math.trunc(posicion.x);
@@ -2695,10 +2695,10 @@ var ModoEditor = (function (_super) {
     ModoEditor.prototype.update = function () {
         _super.prototype.update.call(this, this.actores);
         if (this.pilas.depurador.mostrar_fisica) {
-            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
+            this.matter.world.debugGraphic.setAlpha(1);
         }
         else {
-            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
+            this.matter.world.debugGraphic.setAlpha(0);
         }
         this.actores.map(function (a) {
             a.update();
@@ -2751,7 +2751,7 @@ var ModoEjecucion = (function (_super) {
             this.modo_fisica_activado = false;
             if (this.pilas.depurador.mostrar_fisica) {
                 this.modo_fisica_activado = true;
-                this.matter.systems.matterPhysics.world.createDebugGraphic();
+                this.matter.world.createDebugGraphic();
             }
             this.conectar_eventos();
             this.input.on("pointermove", function (cursor) {
@@ -3046,11 +3046,11 @@ var ModoEjecucion = (function (_super) {
         if (this.pilas.depurador.mostrar_fisica) {
             if (!this.modo_fisica_activado) {
                 this.modo_fisica_activado = true;
-                this.matter.systems.matterPhysics.world.createDebugGraphic();
+                this.matter.world.createDebugGraphic();
             }
         }
         else {
-            this.pilas.modo.matter.systems.matterPhysics.world.debugGraphic.destroy();
+            this.pilas.modo.matter.world.debugGraphic.destroy();
         }
         try {
             if (this.permitir_modo_pausa) {
@@ -3100,7 +3100,7 @@ var ModoPausa = (function (_super) {
         this.crear_fondo(foto.escena.fondo);
         this.crear_sprites_desde_historia(this.posicion);
         this.crear_canvas_de_depuracion_modo_pausa();
-        this.matter.systems.matterPhysics.world.createDebugGraphic();
+        this.matter.world.createDebugGraphic();
         this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
@@ -3133,10 +3133,10 @@ var ModoPausa = (function (_super) {
             this.fps_extra.alpha = 0;
         }
         if (this.pilas.depurador.mostrar_fisica) {
-            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(1);
+            this.matter.world.debugGraphic.setAlpha(1);
         }
         else {
-            this.matter.systems.matterPhysics.world.debugGraphic.setAlpha(0);
+            this.matter.world.debugGraphic.setAlpha(0);
         }
         if (this.pilas.depurador.modo_posicion_activado) {
             var foto = this.pilas.historia.obtener_foto(this.posicion);
