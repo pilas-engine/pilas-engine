@@ -93,11 +93,6 @@ export default Component.extend({
         this,
         "eliminar_actor_desde_el_editor"
       );
-      this.bus.on(
-        "hace_click_sobre_el_canvas",
-        this,
-        "hace_click_sobre_el_canvas"
-      );
     };
   },
 
@@ -146,11 +141,6 @@ export default Component.extend({
       "eliminar_actor_desde_el_editor",
       this,
       "eliminar_actor_desde_el_editor"
-    );
-    this.bus.off(
-      "hace_click_sobre_el_canvas",
-      this,
-      "hace_click_sobre_el_canvas"
     );
   },
 
@@ -221,10 +211,6 @@ export default Component.extend({
     };
 
     this.contexto.postMessage(data, utils.HOST);
-  },
-
-  hace_click_sobre_el_canvas() {
-    this.hacer_foco_en_pilas();
   },
 
   actualizar_actor_desde_el_editor({ id, actor }) {
@@ -346,10 +332,6 @@ export default Component.extend({
 
     if (e.data.tipo === "cuando_pulsa_escape") {
       this.cuandoPulsaEscapeEnModoEjecucion();
-    }
-
-    if (e.data.tipo === "hace_click_sobre_el_canvas") {
-      this.bus.trigger("hace_click_sobre_el_canvas");
     }
   },
   actions: {
