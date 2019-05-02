@@ -16,6 +16,15 @@
 {{/if}}
 
 <iframe
-  class="bn height-revert {{if cargando "dn"}}"
+  class="
+    bn
+    height-revert
+    animar-width
+    {{if cargando "dn"}}
+    center
+    mw-100
+    flex1
+  "
   src="{{rootURL}}pilas-canvas.html"
-  width="100%" height="100%"></iframe>
+  width={{widthParaElModoZoomEnviado}}
+  height={{heightParaElModoZoomEnviado}}></iframe>

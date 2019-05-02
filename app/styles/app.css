@@ -414,3 +414,11 @@ span {
 .height-revert {
   height: revert !important;
 }
+
+.bg-fondo-canvas {
+  background-color: #424242;
+}
+
+.animar-width {
+  transition: width 500ms ease;
+}

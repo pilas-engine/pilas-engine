@@ -81,8 +81,9 @@
           {{#if estado.puedeEjecutar}}
             {{pilas-boton id="ejecutar" accion=(action "ejecutar") texto="Ejecutar" icono="ejecutar"}}
 
-            <div class="dib f6 flex1 tr">
-            </div>
+            <div class="dib f6 flex1 tr"></div>
+
+            {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
 
           {{/if}}
 
@@ -93,6 +94,10 @@
           {{#if permitir_modo_pausa}}
             {{#if estado.puedePausar}}
               {{pilas-boton id="pausar" extraClass="ml2" desactivado=existe_un_error_reciente accion=(action "pausar") texto="Pausar" icono="pausa"}}
+
+              <div class="dib f6 flex1 tr"></div>
+
+              {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
             {{/if}}
 
             {{#if estado.pausaActivada}}
@@ -104,8 +109,11 @@
 
                 <input class="v-btm w-100" type="range" id="posicion" min={{historiaMinimo}} max={{historiaMaximo}} oninput={{action "cambiarPosicion" value="target.value"}} value={{historiaPosicion}}>
 
+
+
               </div>
 
+              {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
             {{/if}}
           {{/if}}
 
@@ -122,6 +130,7 @@
                   alto=proyecto.alto
                   recursos=recursos
                   mantenerFoco=estado.mantenerFoco
+                  modoZoom=modoZoom
                   cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                   pos=pos
                   fps=fps

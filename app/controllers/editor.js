@@ -25,6 +25,7 @@ const queryParams = new QueryParams({
   permitir_modo_pausa: { defaultValue: true, replace: true },
   oscuro: { defaultValue: true, replace: true },
   modoVim: { defaultValue: false, replace: true },
+  modoZoom: { defaultValue: 1, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true },
   tamano: { defaultValue: 14, replace: true, refresh: true }
 });

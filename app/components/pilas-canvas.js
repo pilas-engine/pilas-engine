@@ -15,7 +15,13 @@ export default Component.extend({
   contexto: null,
   cargando: true,
   mantenerFoco: false,
-  classNames: ["flex1", "flex", "overflow-hidden", "unseletable"],
+  classNames: [
+    "flex1",
+    "flex",
+    "overflow-hidden",
+    "unseletable",
+    "bg-fondo-canvas"
+  ],
   classNameBindings: ["altoFijo:h250"],
   altoFijo: false,
   porcentajeDeCarga: 0,
@@ -143,6 +149,30 @@ export default Component.extend({
       "eliminar_actor_desde_el_editor"
     );
   },
+
+  widthParaElModoZoomEnviado: computed("modoZoom", "ancho", function() {
+    if (this.modoZoom === 1) {
+      return htmlSafe("100%");
+    }
+
+    if (this.modoZoom === 2) {
+      return htmlSafe(`${this.ancho}px`);
+    }
+
+    return Error(`No se puede usar el modoZoom ${this.modoZoom}`);
+  }),
+
+  heightParaElModoZoomEnviado: computed("modoZoom", "alto", function() {
+    if (this.modoZoom === 1) {
+      return htmlSafe("100%");
+    }
+
+    if (this.modoZoom === 2) {
+      return htmlSafe(`${this.alto}px`);
+    }
+
+    return Error(`No se puede usar el modoZoom ${this.modoZoom}`);
+  }),
 
   cargar_escena({ escena, proyecto }) {
     let data = {
