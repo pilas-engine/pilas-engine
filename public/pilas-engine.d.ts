@@ -232,6 +232,9 @@ declare class Pilas {
             touch: boolean;
             gamepad: boolean;
         };
+        plugins: {
+            global: any[];
+        };
         physics: {
             default: string;
             matter: {

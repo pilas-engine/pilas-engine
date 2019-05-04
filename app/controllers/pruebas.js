@@ -24,42 +24,42 @@ export default Controller.extend({
               iniciar() {
 
                 /*
-                console.log("Se va a cambiar de escena");
-
                 pilas.luego(3, (e) => {
-                  console.log("Cambió la escena!");
                   pilas.cambiar_escena('gameover');
                 });
-
-                let l = pilas.actores.suelo();
-                l.y = -230;
                 */
 
-                /*
-                let a = pilas.actores.nave();
+                this.dlg = this.pilas.modo.add.nineslice(
+                  50, 50,
+                  50, 50,
+                  'gris',
+                  10,
+                  10
+                )
 
-                a.aprender("rotar constantemente");
-                a.aprender("rotar constantemente");
-                a.aprender("arrastrable");
-                */
+                this.dlg = this.pilas.modo.add.nineslice(
+                  100, 100,
+                  90, 90,
+                  'dialogo',
+                  10,
+                  10
+                )
 
-                /*
-                let id = pilas.eventos.conectar("mueve_mouse", (datos) => {
-                  console.log("mueve", datos);
-                });
+                this.pilas.actores.deslizador();
 
-                pilas.eventos.desconectar(id);
+                let actor = this.pilas.actores.texto();
+                actor.texto = "demo";
+                actor.color = "negro";
+                actor.magnitud = 16;
+                actor.x = 130;
+                actor.y = 130;
 
-                pilas.eventos.conectar("click_de_mouse", (x, y) => {
-                  console.log("click de mouse", x, y);
-                });
+                actor.aprender("arrastrable");
 
-                pilas.eventos.conectar("termina_click", (x, y) => {
-                  console.log("termina click", x, y);
-                });
-                */
+                console.log(actor.ancho)
 
-                pilas.actores.deslizador();
+                window.actor = actor;
+
 
                 /*
                 let b = pilas.actores.texto()
@@ -90,30 +90,6 @@ export default Controller.extend({
                 t.y=100;
                 t.decir("hola mundo !!!");
                 */
-
-                /*
-                let plataforma = pilas.actores.plataforma();
-                plataforma.x = 0;
-                plataforma.y = -100;
-
-                let moneda = pilas.actores.moneda();
-                moneda.x = 100;
-
-                pilas.actores.nave();
-
-                let suelo = pilas.actores.suelo());
-                suelo.y = -250;
-
-                let techo = pilas.actores.techo();
-                techo.y = 250;
-
-                let pared_izquierda = pilas.actores.pared();
-                pared_izquierda.x = -300;
-
-                let pared_derecha = pilas.actores.pared();
-                pared_derecha.x = 300;
-                */
-
               }
 
               actualizar() {

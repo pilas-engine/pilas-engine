@@ -201,13 +201,16 @@ class Pilas {
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: true, // true es más rápido
+      pixelArt: false, // true es más rápido
       autostart: false,
       input: {
         keyboard: true,
         mouse: true,
         touch: true,
         gamepad: true
+      },
+      plugins: {
+        global: [NineSlice.Plugin.DefaultCfg]
       },
       //scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
       physics: {
