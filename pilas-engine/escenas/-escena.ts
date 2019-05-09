@@ -3,7 +3,7 @@ class Escena extends EscenaBase {
 
   iniciar() {}
 
-  actualizar() {
+  pre_actualizar() {
     this.cuadro += 1;
 
     if (this.cuadro % 60 === 0) {

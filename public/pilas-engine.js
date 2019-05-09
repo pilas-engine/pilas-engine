@@ -407,9 +407,7 @@ var RotarConstantemente = (function (_super) {
     function RotarConstantemente() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    RotarConstantemente.prototype.iniciar = function () {
-        console.log("iniciando rotarConstantemente");
-    };
+    RotarConstantemente.prototype.iniciar = function () { };
     RotarConstantemente.prototype.actualizar = function () {
         this.actor.rotacion += 10;
     };
@@ -899,6 +897,9 @@ var Pilas = (function () {
                 touch: true,
                 gamepad: true
             },
+            plugins: {
+                global: [NineSlice.Plugin.DefaultCfg]
+            },
             physics: {
                 default: "matter",
                 matter: {
@@ -966,6 +967,8 @@ var ActorBase = (function () {
         this._vivo = true;
         this._animacion_en_curso = "";
         this._es_texto = false;
+        this._fondo = null;
+        this._fondo_imagen = "";
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -1032,9 +1035,6 @@ var ActorBase = (function () {
         this._figura_alto = propiedades.figura_alto;
         this._figura_radio = propiedades.figura_radio;
         this._es_texto = propiedades.es_texto;
-        if (propiedades.es_texto) {
-            this.texto = propiedades.texto;
-        }
         switch (figura) {
             case "rectangulo":
                 this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
@@ -1078,6 +1078,12 @@ var ActorBase = (function () {
         this.espejado = propiedades.espejado;
         this.espejado_vertical = propiedades.espejado_vertical;
         this.sprite["actor"] = this;
+        if (propiedades.es_texto) {
+            this.texto = propiedades.texto;
+            if (propiedades.fondo) {
+                this.fondo = propiedades.fondo;
+            }
+        }
         this.sprite.update = function () {
             try {
                 _this.actualizar();
@@ -1109,6 +1115,7 @@ var ActorBase = (function () {
         destino.alpha = origen.alpha;
         destino.flipX = origen.flipX;
         destino.flipY = origen.flipY;
+        destino.depth = origen.depth;
         destino.setOrigin(origen.originX, origen.originY);
     };
     ActorBase.prototype.iniciar = function () { };
@@ -1127,10 +1134,42 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ActorBase.prototype, "area_de_interactividad", {
+        get: function () {
+            var ancho = this.sprite.input.hitArea.width;
+            var alto = this.sprite.input.hitArea.height;
+            return { ancho: ancho, alto: alto };
+        },
+        set: function (v) {
+            console.warn("No pude definir el area así, use definir_area_de_interactividad");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ActorBase.prototype.definir_area_de_interactividad = function (ancho, alto) {
+        if (this.sprite) {
+            this.sprite.width = ancho;
+            this.sprite.height = alto;
+            this.sprite.input.hitArea.width = ancho;
+            this.sprite.input.hitArea.height = alto;
+            this.sprite.setOrigin(this.centro_x, this.centro_y);
+            console.log("listo!!!");
+        }
+        else {
+            console.log("aún no tiene sprite");
+        }
+    };
+    Object.defineProperty(ActorBase.prototype, "fondo", {
+        set: function (fondo) { },
+        enumerable: true,
+        configurable: true
+    });
     ActorBase.prototype.serializar = function () {
         var texto = "";
+        var fondo = "";
         if (this._es_texto) {
             texto = this._texto.text;
+            fondo = this._fondo_imagen;
         }
         return {
             tipo: this.tipo,
@@ -1149,6 +1188,7 @@ var ActorBase = (function () {
             figura_radio: this.figura_radio,
             es_texto: this._es_texto,
             texto: texto,
+            fondo: fondo,
             espejado: this.espejado,
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
@@ -1686,10 +1726,17 @@ var ActorBase = (function () {
     ActorBase.prototype.decir = function (mensaje) {
         var texto = this.pilas.actores.texto();
         texto.texto = mensaje;
-        texto.x = this.x + 15;
+        texto.x = this.x - 15;
         texto.y = this.y + this.alto;
-        texto.escala_y = 0;
-        texto.escala_y = [1];
+        texto.transparencia = 100;
+        texto.transparencia = [0];
+        texto.fondo = "dialogo";
+        texto.color = "black";
+        texto.escala = 0.9;
+        texto.escala = [1];
+        texto.centro_x = 1;
+        texto.centro_y = 1;
+        texto.texto = mensaje;
         this.pilas.luego(4, function () {
             texto.eliminar();
         });
@@ -1723,19 +1770,29 @@ var ActorTextoBase = (function (_super) {
             texto: "Hola mundo",
             es_texto: true
         };
-        _this._texto = null;
+        _this.margen_interno = 30;
         return _this;
     }
-    ActorTextoBase.prototype.iniciar = function () { };
+    ActorTextoBase.prototype.iniciar = function () {
+        this.color = "black";
+    };
     ActorTextoBase.prototype.pre_actualizar = function () {
         _super.prototype.pre_actualizar.call(this);
         this.copiar_atributos_de_sprite(this.sprite, this._texto);
+        if (this._fondo) {
+            this.copiar_atributos_de_sprite(this.sprite, this._fondo);
+            this._texto.depth = this._texto.depth + 1;
+            this._fondo.x +=
+                this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
+            this._fondo.y +=
+                this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
+        }
     };
     ActorTextoBase.prototype.actualizar = function () { };
     Object.defineProperty(ActorTextoBase.prototype, "sombra", {
         set: function (valor) {
             if (valor) {
-                this._texto.setShadow(2, 2, "black", 4);
+                this._texto.setShadow(1, 1, "white", 2);
             }
             else {
                 this._texto.setShadow();
@@ -1745,6 +1802,9 @@ var ActorTextoBase = (function (_super) {
         configurable: true
     });
     Object.defineProperty(ActorTextoBase.prototype, "texto", {
+        get: function () {
+            return this._texto.text;
+        },
         set: function (texto) {
             if (!this._texto) {
                 this._texto = this.pilas.modo.add.text(0, 0, texto);
@@ -1753,13 +1813,43 @@ var ActorTextoBase = (function (_super) {
             else {
                 this._texto.setText(texto);
             }
+            this.actualizar_tamano_del_fondo();
         },
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ActorTextoBase.prototype, "fondo", {
+        set: function (fondo) {
+            this._fondo_imagen = fondo;
+            if (!this._fondo) {
+                this.crear_fondo(fondo);
+            }
+            else {
+                this._fondo.destroy();
+                this.crear_fondo(fondo);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ActorTextoBase.prototype.crear_fondo = function (fondo) {
+        this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, fondo, 10, 10);
+        this.actualizar_tamano_del_fondo();
+    };
+    ActorTextoBase.prototype.actualizar_tamano_del_fondo = function () {
+        this.definir_area_de_interactividad(this._texto.width, this._texto.height);
+        if (!this._fondo) {
+            return;
+        }
+        var ancho = this._texto.width + this.margen_interno;
+        var alto = this._texto.height + this.margen_interno;
+        this._fondo.resize(ancho, alto);
+        this.definir_area_de_interactividad(ancho, alto);
+    };
     Object.defineProperty(ActorTextoBase.prototype, "magnitud", {
         set: function (numero) {
             this._texto.setFontSize(numero);
+            this.actualizar_tamano_del_fondo();
         },
         enumerable: true,
         configurable: true
@@ -1771,6 +1861,9 @@ var ActorTextoBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ActorTextoBase.prototype.eliminar = function () {
+        _super.prototype.eliminar.call(this);
+    };
     return ActorTextoBase;
 }(ActorBase));
 var Actor = (function (_super) {
@@ -2291,6 +2384,7 @@ var EscenaBase = (function () {
             fondo: this.fondo
         };
     };
+    EscenaBase.prototype.pre_actualizar = function () { };
     EscenaBase.prototype.actualizar = function () { };
     EscenaBase.prototype.actualizar_actores = function () {
         var _this = this;
@@ -2300,6 +2394,9 @@ var EscenaBase = (function () {
                 actor.sprite.destroy();
                 if (actor._texto) {
                     actor._texto.destroy();
+                }
+                if (actor._fondo) {
+                    actor._fondo.destroy();
                 }
                 actores_a_eliminar.push(actor);
                 return;
@@ -2341,7 +2438,7 @@ var Escena = (function (_super) {
         return _this;
     }
     Escena.prototype.iniciar = function () { };
-    Escena.prototype.actualizar = function () {
+    Escena.prototype.pre_actualizar = function () {
         this.cuadro += 1;
         if (this.cuadro % 60 === 0) {
             this.actores.map(function (actor) {
@@ -2478,21 +2575,65 @@ var Modo = (function (_super) {
                 sprite.update = function () {
                     _this.copiar_valores_de_sprite_a_texto(sprite);
                 };
+                if (actor.fondo) {
+                    var f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+                    sprite["fondo"] = f;
+                    sprite["fondo_imagen"] = actor.fondo;
+                }
             }
             sprite["texto"].setText(actor.texto);
+            if (actor.fondo !== sprite["fondo_imagen"]) {
+                if (sprite["fondo"]) {
+                    sprite["fondo"].destroy();
+                }
+                if (actor.fondo) {
+                    var f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+                    sprite["fondo"] = f;
+                    sprite["fondo_imagen"] = actor.fondo;
+                }
+            }
             this.copiar_valores_de_sprite_a_texto(sprite);
         }
     };
     Modo.prototype.copiar_valores_de_sprite_a_texto = function (sprite) {
-        sprite["texto"].x = sprite.x;
-        sprite["texto"].y = sprite.y;
-        sprite["texto"].angle = sprite.angle;
-        sprite["texto"].scaleX = sprite.scaleX;
-        sprite["texto"].scaleY = sprite.scaleY;
-        sprite["texto"].alpha = sprite.alpha;
-        sprite["texto"].flipX = sprite.flipX;
-        sprite["texto"].flipY = sprite.flipY;
-        sprite["texto"].setOrigin(sprite.originX, sprite.originY);
+        var texto = sprite["texto"];
+        var fondo = sprite["fondo"];
+        texto.x = sprite.x;
+        texto.y = sprite.y;
+        texto.angle = sprite.angle;
+        texto.scaleX = sprite.scaleX;
+        texto.scaleY = sprite.scaleY;
+        texto.alpha = sprite.alpha;
+        texto.flipX = sprite.flipX;
+        texto.flipY = sprite.flipY;
+        texto.setOrigin(sprite.originX, sprite.originY);
+        texto.depth = sprite.z;
+        texto.setColor("black");
+        if (sprite.input) {
+            sprite.input.hitArea.width = texto.width;
+            sprite.input.hitArea.height = texto.height;
+        }
+        if (fondo) {
+            var margen = 30;
+            fondo.x = sprite.x;
+            fondo.y = sprite.y;
+            fondo.angle = sprite.angle;
+            fondo.scaleX = sprite.scaleX;
+            fondo.scaleY = sprite.scaleY;
+            fondo.setOrigin(sprite.originX, sprite.originY);
+            fondo.alpha = sprite.alpha;
+            fondo.flipX = sprite.flipX;
+            fondo.flipY = sprite.flipY;
+            fondo.resize(texto.width + margen, texto.height + margen);
+            fondo.depth = texto.depth - 1;
+            sprite.width = texto.width + margen;
+            sprite.height = texto.height + margen;
+            if (sprite.input) {
+                sprite.setOrigin(sprite.originX, sprite.originY);
+                sprite.input.hitArea.width = texto.width + margen;
+                sprite.input.hitArea.height = texto.height + margen;
+            }
+        }
     };
     Modo.prototype.crear_figura_estatica_para = function (actor) {
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
@@ -2710,10 +2851,13 @@ var ModoEditor = (function (_super) {
         if (actor_a_eliminar[0].figura) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
         }
-        actor_a_eliminar[0].destroy();
         if (actor_a_eliminar[0]["texto"]) {
             actor_a_eliminar[0]["texto"].destroy();
         }
+        if (actor_a_eliminar[0]["fondo"]) {
+            actor_a_eliminar[0]["fondo"].destroy();
+        }
+        actor_a_eliminar[0].destroy();
     };
     return ModoEditor;
 }(Modo));
@@ -3056,6 +3200,7 @@ var ModoEjecucion = (function (_super) {
             if (this.permitir_modo_pausa) {
                 this.guardar_foto_de_entidades();
             }
+            this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
             this.pilas.escena.actualizar_actores();
         }
@@ -3117,6 +3262,9 @@ var ModoPausa = (function (_super) {
             if (sprite["texto"]) {
                 sprite["texto"].destroy();
             }
+            if (sprite["fondo"]) {
+                sprite["fondo"].destroy();
+            }
             sprite.destroy();
         });
         this.posicionar_la_camara(foto.escena);
@@ -3167,7 +3315,17 @@ var ModoPausa = (function (_super) {
         if (entidad.texto) {
             sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
             sprite["texto"].setFontFamily("verdana");
+            sprite["texto"].depth = sprite.depth;
+            if (entidad.fondo) {
+                var f = this.pilas.modo.add.nineslice(40, 0, 30, 20, entidad.fondo, 10, 10);
+                sprite["fondo"] = f;
+                sprite["fondo_imagen"] = entidad.fondo;
+            }
             this.copiar_valores_de_sprite_a_texto(sprite);
+            if (sprite["fondo"]) {
+                sprite["fondo"].depth = sprite["texto"].depth - 1;
+                sprite["fondo"].setOrigin(sprite["texto"].originX, sprite["texto"].originY);
+            }
         }
         if (entidad.figura) {
             sprite["figura"] = this.crear_figura_estatica_para(entidad);

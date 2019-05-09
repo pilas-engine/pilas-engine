@@ -12,6 +12,11 @@ export default Component.extend({
         tipo: "cadena",
         propiedad: "texto"
       });
+
+      propiedades.pushObject({
+        tipo: "imagen",
+        propiedad: "fondo"
+      });
     } else {
       propiedades.pushObject({
         tipo: "imagen",

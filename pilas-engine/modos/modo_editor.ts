@@ -144,9 +144,14 @@ class ModoEditor extends Modo {
       );
     }
 
-    actor_a_eliminar[0].destroy();
     if (actor_a_eliminar[0]["texto"]) {
       actor_a_eliminar[0]["texto"].destroy();
     }
+
+    if (actor_a_eliminar[0]["fondo"]) {
+      actor_a_eliminar[0]["fondo"].destroy();
+    }
+
+    actor_a_eliminar[0].destroy();
   }
 }

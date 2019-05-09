@@ -29,30 +29,25 @@ export default Controller.extend({
                 });
                 */
 
-                this.dlg = this.pilas.modo.add.nineslice(
-                  50, 50,
-                  50, 50,
-                  'gris',
-                  10,
-                  10
-                )
-
-                this.dlg = this.pilas.modo.add.nineslice(
-                  100, 100,
-                  90, 90,
-                  'dialogo',
-                  10,
-                  10
-                )
-
                 this.pilas.actores.deslizador();
 
                 let actor = this.pilas.actores.texto();
-                actor.texto = "demo";
+                actor.texto = "demo texto\\nsuper\\nsuper\\nsuper \\nsuper largo en varias lineas";
                 actor.color = "negro";
                 actor.magnitud = 16;
                 actor.x = 130;
                 actor.y = 130;
+                actor.fondo = "dialogo";
+                actor.fondo = "gris";
+                actor.z = 2;
+
+                actor.escala_y = 0
+                actor.escala_y = [1]
+
+                window.actor = actor;
+
+                this.pilas.obtener_actor_por_nombre("aceituna").decir("¿hola?\\n¿cómo estás?");
+
 
                 actor.aprender("arrastrable");
 

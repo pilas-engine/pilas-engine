@@ -1,4 +1,5 @@
 /// <reference path="utilidades.ts"/>
+declare var NineSlice: any;
 
 var HOST = "file://";
 
@@ -201,7 +202,7 @@ class Pilas {
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: false, // true es más rápido
+      pixelArt: true, // true es más rápido
       autostart: false,
       input: {
         keyboard: true,

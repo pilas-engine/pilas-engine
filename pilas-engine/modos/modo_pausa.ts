@@ -65,6 +65,10 @@ class ModoPausa extends Modo {
         sprite["texto"].destroy();
       }
 
+      if (sprite["fondo"]) {
+        sprite["fondo"].destroy();
+      }
+
       sprite.destroy();
     });
 
@@ -136,7 +140,31 @@ class ModoPausa extends Modo {
     if (entidad.texto) {
       sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
       sprite["texto"].setFontFamily("verdana");
+      sprite["texto"].depth = sprite.depth;
+
+      if (entidad.fondo) {
+        let f = this.pilas.modo.add.nineslice(
+          40,
+          0,
+          30,
+          20,
+          entidad.fondo,
+          10,
+          10
+        );
+        sprite["fondo"] = f;
+        sprite["fondo_imagen"] = entidad.fondo;
+      }
+
       this.copiar_valores_de_sprite_a_texto(sprite);
+
+      if (sprite["fondo"]) {
+        sprite["fondo"].depth = sprite["texto"].depth - 1;
+        sprite["fondo"].setOrigin(
+          sprite["texto"].originX,
+          sprite["texto"].originY
+        );
+      }
     }
 
     if (entidad.figura) {

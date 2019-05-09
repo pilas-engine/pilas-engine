@@ -6,7 +6,9 @@
 
   {{#each recursos.tarea.lastSuccessful.value.imagenes as |imagen|}}
 
-    <div role="button" test-celda-imagen class="w4 dib
+    <div role="button" test-celda-imagen
+      class="
+        w4 h4 dib
         ba pa2 button
         br2
         verdana f6 link pointer
@@ -16,7 +18,7 @@
         mb1
         hover-bg-black-10
         texto
-    " {{action cuando_selecciona imagen}}>
+        " {{action cuando_selecciona imagen}}>
       <div class="flex flex-column h-100 w-100">
 
         {{yield}}

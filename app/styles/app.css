@@ -422,3 +422,19 @@ span {
 .animar-width {
   transition: width 500ms ease;
 }
+
+.theme-oscuro .spinner-color-de-fondo {
+  fill: white;
+}
+
+.theme-oscuro .spinner-color {
+  fill: white;
+}
+
+.theme-claro .spinner-color-de-fondo {
+  fill: #aaa;
+}
+
+.theme-claro .spinner-color {
+  fill: black;
+}

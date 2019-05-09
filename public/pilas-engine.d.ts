@@ -184,6 +184,7 @@ declare class Utilidades {
     obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number): number;
     obtener_similaridad(cadena1: string, cadena2: string): any;
 }
+declare var NineSlice: any;
 declare var HOST: string;
 declare class Pilas {
     game: Phaser.Game;
@@ -279,6 +280,8 @@ declare class ActorBase {
     _id: any;
     _nombre: any;
     _habilidades: any[];
+    _fondo: any;
+    _fondo_imagen: string;
     propiedades_base: {
         x: number;
         y: number;
@@ -310,6 +313,9 @@ declare class ActorBase {
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
     interactivo: boolean;
+    area_de_interactividad: any;
+    definir_area_de_interactividad(ancho: number, alto: number): void;
+    fondo: string;
     serializar(): {
         tipo: String;
         x: number;
@@ -327,6 +333,7 @@ declare class ActorBase {
         figura_radio: number;
         es_texto: boolean;
         texto: string;
+        fondo: string;
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
@@ -395,14 +402,18 @@ declare class ActorTextoBase extends ActorBase {
         texto: string;
         es_texto: boolean;
     };
-    _texto: any;
+    margen_interno: number;
     iniciar(): void;
     pre_actualizar(): void;
     actualizar(): void;
     sombra: boolean;
     texto: string;
+    fondo: string;
+    private crear_fondo;
+    private actualizar_tamano_del_fondo;
     magnitud: number;
     color: string;
+    eliminar(): void;
 }
 declare class Actor extends ActorBase {
     propiedades: {};
@@ -617,6 +628,7 @@ declare class EscenaBase {
         camara_y: number;
         fondo: string;
     };
+    pre_actualizar(): void;
     actualizar(): void;
     actualizar_actores(): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
@@ -627,7 +639,7 @@ declare class EscenaBase {
 declare class Escena extends EscenaBase {
     cuadro: number;
     iniciar(): void;
-    actualizar(): void;
+    pre_actualizar(): void;
     obtener_oscilacion(velocidad: any, intensidad: any): number;
 }
 declare class Normal extends Escena {

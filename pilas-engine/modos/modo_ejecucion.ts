@@ -498,6 +498,7 @@ class ModoEjecucion extends Modo {
         this.guardar_foto_de_entidades();
       }
 
+      this.pilas.escena.pre_actualizar();
       this.pilas.escena.actualizar();
       this.pilas.escena.actualizar_actores();
     } catch (e) {

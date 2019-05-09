@@ -151,24 +151,80 @@ class Modo extends Phaser.Scene {
         sprite.update = () => {
           this.copiar_valores_de_sprite_a_texto(sprite);
         };
+
+        if (actor.fondo) {
+          let f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+          sprite["fondo"] = f;
+          sprite["fondo_imagen"] = actor.fondo;
+        }
       }
 
       sprite["texto"].setText(actor.texto);
+
+      if (actor.fondo !== sprite["fondo_imagen"]) {
+        if (sprite["fondo"]) {
+          sprite["fondo"].destroy();
+        }
+
+        if (actor.fondo) {
+          let f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+          sprite["fondo"] = f;
+          sprite["fondo_imagen"] = actor.fondo;
+        }
+      }
+
       this.copiar_valores_de_sprite_a_texto(sprite);
     }
   }
 
   copiar_valores_de_sprite_a_texto(sprite) {
-    sprite["texto"].x = sprite.x;
-    sprite["texto"].y = sprite.y;
-    sprite["texto"].angle = sprite.angle;
-    sprite["texto"].scaleX = sprite.scaleX;
-    sprite["texto"].scaleY = sprite.scaleY;
+    let texto = sprite["texto"];
+    let fondo = sprite["fondo"];
 
-    sprite["texto"].alpha = sprite.alpha;
-    sprite["texto"].flipX = sprite.flipX;
-    sprite["texto"].flipY = sprite.flipY;
-    sprite["texto"].setOrigin(sprite.originX, sprite.originY);
+    texto.x = sprite.x;
+    texto.y = sprite.y;
+    texto.angle = sprite.angle;
+    texto.scaleX = sprite.scaleX;
+    texto.scaleY = sprite.scaleY;
+
+    texto.alpha = sprite.alpha;
+    texto.flipX = sprite.flipX;
+    texto.flipY = sprite.flipY;
+    texto.setOrigin(sprite.originX, sprite.originY);
+    texto.depth = sprite.z;
+    texto.setColor("black");
+
+    if (sprite.input) {
+      sprite.input.hitArea.width = texto.width;
+      sprite.input.hitArea.height = texto.height;
+    }
+
+    if (fondo) {
+      let margen = 30;
+      fondo.x = sprite.x;
+      fondo.y = sprite.y;
+
+      fondo.angle = sprite.angle;
+      fondo.scaleX = sprite.scaleX;
+      fondo.scaleY = sprite.scaleY;
+      fondo.setOrigin(sprite.originX, sprite.originY);
+
+      fondo.alpha = sprite.alpha;
+      fondo.flipX = sprite.flipX;
+      fondo.flipY = sprite.flipY;
+      fondo.resize(texto.width + margen, texto.height + margen);
+
+      fondo.depth = texto.depth - 1;
+
+      sprite.width = texto.width + margen;
+      sprite.height = texto.height + margen;
+
+      if (sprite.input) {
+        sprite.setOrigin(sprite.originX, sprite.originY);
+        sprite.input.hitArea.width = texto.width + margen;
+        sprite.input.hitArea.height = texto.height + margen;
+      }
+    }
   }
 
   crear_figura_estatica_para(actor) {

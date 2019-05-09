@@ -22,6 +22,9 @@ class ActorBase {
 
   _habilidades: any[];
 
+  _fondo: any = null;
+  _fondo_imagen: string = "";
+
   propiedades_base = {
     x: 0,
     y: 0,
@@ -99,10 +102,6 @@ class ActorBase {
     this._figura_radio = propiedades.figura_radio;
     this._es_texto = propiedades.es_texto;
 
-    if (propiedades.es_texto) {
-      this.texto = propiedades.texto;
-    }
-
     switch (figura) {
       case "rectangulo":
         this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
@@ -161,6 +160,14 @@ class ActorBase {
 
     this.sprite["actor"] = this;
 
+    if (propiedades.es_texto) {
+      this.texto = propiedades.texto;
+
+      if (propiedades.fondo) {
+        this.fondo = propiedades.fondo;
+      }
+    }
+
     this.sprite.update = () => {
       try {
         this.actualizar();
@@ -206,6 +213,7 @@ class ActorBase {
     destino.alpha = origen.alpha;
     destino.flipX = origen.flipX;
     destino.flipY = origen.flipY;
+    destino.depth = origen.depth;
 
     destino.setOrigin(origen.originX, origen.originY);
   }
@@ -224,11 +232,42 @@ class ActorBase {
     }
   }
 
+  set area_de_interactividad(v: any) {
+    console.warn(
+      "No pude definir el area así, use definir_area_de_interactividad"
+    );
+  }
+
+  definir_area_de_interactividad(ancho: number, alto: number) {
+    // TODO: usar hitArea.setSize cuando actualicemos phaser > 3.16.2
+    if (this.sprite) {
+      this.sprite.width = ancho;
+      this.sprite.height = alto;
+      this.sprite.input.hitArea.width = ancho;
+      this.sprite.input.hitArea.height = alto;
+      this.sprite.setOrigin(this.centro_x, this.centro_y);
+      console.log("listo!!!");
+    } else {
+      console.log("aún no tiene sprite");
+    }
+  }
+
+  get area_de_interactividad() {
+    let ancho = this.sprite.input.hitArea.width;
+    let alto = this.sprite.input.hitArea.height;
+
+    return { ancho, alto };
+  }
+
+  set fondo(fondo: string) {}
+
   serializar() {
     let texto = "";
+    let fondo = "";
 
     if (this._es_texto) {
       texto = this._texto.text;
+      fondo = this._fondo_imagen;
     }
 
     return {
@@ -250,6 +289,7 @@ class ActorBase {
 
       es_texto: this._es_texto,
       texto: texto,
+      fondo: fondo,
 
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,
@@ -786,10 +826,18 @@ class ActorBase {
   decir(mensaje: string) {
     let texto = this.pilas.actores.texto();
     texto.texto = mensaje;
-    texto.x = this.x + 15;
+    texto.x = this.x - 15;
     texto.y = this.y + this.alto;
-    texto.escala_y = 0;
-    texto.escala_y = [1];
+    texto.transparencia = 100;
+    texto.transparencia = [0];
+    texto.fondo = "dialogo";
+    texto.color = "black";
+    texto.escala = 0.9;
+    texto.escala = [1];
+    texto.centro_x = 1;
+    texto.centro_y = 1;
+
+    texto.texto = mensaje;
 
     this.pilas.luego(4, () => {
       texto.eliminar();

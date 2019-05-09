@@ -75,6 +75,8 @@ class EscenaBase {
     };
   }
 
+  pre_actualizar() {}
+
   actualizar() {}
 
   actualizar_actores() {
@@ -86,6 +88,10 @@ class EscenaBase {
 
         if (actor._texto) {
           actor._texto.destroy();
+        }
+
+        if (actor._fondo) {
+          actor._fondo.destroy();
         }
 
         actores_a_eliminar.push(actor);
