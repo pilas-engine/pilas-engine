@@ -1,5 +1,4 @@
 "use strict";
-const Funnel = require("broccoli-funnel");
 const EmberApp = require("ember-cli/lib/broccoli/ember-app");
 
 module.exports = function(defaults) {
@@ -22,10 +21,5 @@ module.exports = function(defaults) {
   app.import("vendor/auto-complete.js");
   app.import("vendor/FileSaver.js");
 
-  var assetsExtra = new Funnel("pilas-engine/actores", {
-    srcDir: "/",
-    destDir: "/actores"
-  });
-
-  return app.toTree(assetsExtra);
+  return app.toTree();
 };

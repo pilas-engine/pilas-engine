@@ -14,12 +14,10 @@ export default Service.extend({
     let metadata = yield jQuery.ajax({
       mimeType: "application/json",
       dataType: "json",
-      url: `${config.rootURL}actores/actores.json`
+      url: `${config.rootURL}actores.json`
     });
 
-    let codigo_del_actor_base = yield jQuery.ajax({
-      url: `${config.rootURL}actores/-actor-base.ts`
-    });
+    let codigo_del_actor_base = metadata.actores[0].codigo;
 
     let propiedades_base = this.extraer_diccionario(
       "propiedades_base",
@@ -29,13 +27,7 @@ export default Service.extend({
     for (let i = 0; i < metadata.actores.length; i++) {
       let actor = metadata.actores[i];
 
-      let codigo = yield jQuery.ajax({
-        url: `${config.rootURL}actores/${actor.nombre}.ts`
-      });
-
-      actor.codigo = codigo;
-
-      let propiedades = this.extraer_diccionario("propiedades", codigo);
+      let propiedades = this.extraer_diccionario("propiedades", actor.codigo);
       actor.imagen = propiedades.imagen;
       actor.propiedades = this.combinar_propiedades(
         propiedades_base,
@@ -43,9 +35,13 @@ export default Service.extend({
       );
     }
 
-    this.set("lista_de_actores", metadata.actores);
+    let actores_accesibles = metadata.actores.filter(actor => {
+      return !actor.nombre.startsWith("-");
+    });
 
-    return metadata;
+    this.set("lista_de_actores", actores_accesibles);
+
+    return { actores: actores_accesibles };
   }).drop(),
 
   extraer_diccionario(diccionario, codigo) {
