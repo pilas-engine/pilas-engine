@@ -60,7 +60,6 @@ comandos:
 	@echo "    ${G}pilas_manual${N}                 Genera el manual de pilas."
 	@echo "    ${G}pilas_manuales_descargables${N}  Genera los pdf, epub y mobi del manual."
 	@echo "    ${G}pilas_manual_web${N}             Sube el manual a la web."
-	@echo "    ${G}pilas_sprites${N}                Genera los spritesheets."
 	@echo "    ${G}actualizar_phaser${N}            Actualiza phaser a una versión más reciente."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
@@ -97,7 +96,7 @@ ejecutar: serve
 
 actualizar_actores:
 	yarn actualizar_actores
-	
+
 prettier:
 	${BIN_PRETTIER} --write 'app/**/*.js'
 	${BIN_PRETTIER} ./node_modules/.bin/prettier --write 'tests/**/*.js'
@@ -137,15 +136,6 @@ compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
 	yarn compilar_pilas_live
 
-pilas_sprites:
-	$(call log, "Actualizando imagenes para usar en pilas ...")
-	${BIN_SPRITESHEET} sprites/* -p public/imagenes_agrupadas/ -f pixi.js --padding=10
-	@echo ""
-	@echo "${G}Listo, las archivos que se generaron son:"
-	@echo ""
-	@echo "    public/imagenes_agrupadas/spritesheet.json"
-	@echo "    public/imagenes_agrupadas/spritesheet.png"
-	@echo "${N}"
 
 test:
 	$(call log, "Ejecutando test...")
@@ -238,7 +228,7 @@ endif
 
 sprites_ember:
 	$(call log, "Generando Spritesheets para la aplicación ember...")
-	@./node_modules/.bin/spritesheet-js imagenes/* -p public/assets/ -f css --padding=2
+	@./node_modules/.bin/spritesheet-js recursos/iconos/* -p public/assets/ -f css --padding=2
 	@echo ""
 	@echo "${G}Listo, las archivos que se generaron son:"
 	@echo ""
