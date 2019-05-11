@@ -81,7 +81,7 @@ class ModoEditor extends Modo {
   }
 
   crear_sprite_desde_actor(actor) {
-    let sprite = this.add.sprite(0, 0, actor.imagen);
+    let sprite = this.add.sprite(0, 0, "imagenes", actor.imagen + ".png");
 
     sprite["setInteractive"]();
     sprite["actor"] = actor;

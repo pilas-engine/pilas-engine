@@ -29,6 +29,16 @@ export default Controller.extend({
                 });
                 */
 
+                this.pilas.actores.pelota();
+                this.pilas.actores.nave();
+
+
+                let plataforma = this.pilas.actores.plataforma();
+                plataforma.y = -200;
+                plataforma.aprender("arrastrable");
+
+                /*
+
                 this.pilas.actores.deslizador();
 
                 let actor = this.pilas.actores.texto();
@@ -54,6 +64,7 @@ export default Controller.extend({
                 console.log(actor.ancho)
 
                 window.actor = actor;
+                */
 
 
                 /*
@@ -125,7 +136,7 @@ export default Controller.extend({
             nombre: "aceituna",
             codigo: `class aceituna extends Actor {
   propiedades = {
-    imagen: "invisible",
+    imagen: "invisible.png",
     texto: "Hola mundo",
     es_texto: true
   };
@@ -145,7 +156,7 @@ export default Controller.extend({
           id: 1,
           camara_x: 0,
           camara_y: 0,
-          fondo: "plano",
+          fondo: "imagenes:fondo-plano.png",
           actores: [
             {
               id: 4,
@@ -158,7 +169,7 @@ export default Controller.extend({
               escala_y: 1,
               tipo: "aceituna",
               nombre: "aceituna",
-              imagen: "aceituna",
+              imagen: "imagenes:aceituna.png",
               transparencia: 0,
               figura: "", // "circulo"
               figura_radio: 25,
@@ -213,8 +224,9 @@ export default Controller.extend({
 
       this.bus.trigger("ejecutar_proyecto", datos);
       this.bus.trigger("hacer_foco_en_pilas", {});
-    },
+    }
 
+    /*
     abrir_proyecto() {
       this.electron.abrir_proyecto().then(ruta => {
         let electron = this.electron;
@@ -242,5 +254,6 @@ export default Controller.extend({
         electron.guardar_proyecto_en_archivo(proyecto, ruta);
       });
     }
+    */
   }
 });

@@ -10,9 +10,9 @@ export default Component.extend({
 
   imagen: computed("incluirLogo", function() {
     if (this.incluirLogo) {
-      return "enjambre.png";
+      return "enjambre";
     } else {
-      return "enjambre-texto.png";
+      return "enjambre-texto";
     }
   }),
 

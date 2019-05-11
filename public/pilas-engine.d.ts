@@ -310,6 +310,7 @@ declare class ActorBase {
     constructor(pilas: any);
     readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;
+    private crear_sprite;
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
     interactivo: boolean;
@@ -539,6 +540,7 @@ declare class nave extends Actor {
     velocidad: number;
     cuadros_desde_el_ultimo_disparo: any;
     iniciar(): void;
+    crear_animaciones(): void;
     actualizar(): void;
 }
 declare class nube extends Actor {

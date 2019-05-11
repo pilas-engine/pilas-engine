@@ -1,7 +1,7 @@
 class plataforma extends Actor {
   propiedades = {
     figura: "rectangulo",
-    imagen: "plataforma",
+    imagen: "imagenes:plataforma.png",
     etiqueta: "plataforma",
     y: 0,
     figura_ancho: 250,

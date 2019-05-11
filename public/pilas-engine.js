@@ -88,10 +88,10 @@ var Animaciones = (function () {
         var nombre = actor.id + "-" + nombre_de_la_animacion;
         if (!this.animaciones[nombre]) {
             var frames_1 = cuadros.map(function (nombre) {
-                if (nombre.indexOf(".") > -1) {
+                if (nombre.indexOf(":") > -1) {
                     return {
-                        key: nombre.split(".")[1],
-                        frame: nombre.split(".")[0]
+                        frame: nombre.split(":")[0],
+                        key: nombre.split(":")[1]
                     };
                 }
                 else {
@@ -99,7 +99,7 @@ var Animaciones = (function () {
                 }
             });
             var animacion = this.pilas.modo.anims.create({
-                key: nombre.split(".")[0],
+                key: nombre.split(":")[0],
                 frames: frames_1,
                 frameRate: velocidad,
                 repeat: -1
@@ -595,22 +595,22 @@ var Mensajes = (function () {
             mensaje: error.message,
             stack: stacktrace
         };
+        var fuente_grande = {
+            font: "18px verdana"
+        };
         var fuente_principal = {
-            font: "14px verdana",
+            font: "16px verdana",
             fill: "#ddd"
         };
-        var fuente_grande = {
-            font: "16px verdana"
-        };
         var fuente_pequena = {
-            font: "10px verdana"
+            font: "14px verdana"
         };
         var fondo = this.pilas.modo.add.graphics();
         fondo.fillStyle(0x000000, 0.5);
-        fondo.fillRect(2, 2, 600, 600);
-        this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
-        this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
-        this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
+        fondo.fillRect(0, 0, 3000, 3000);
+        this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
+        this.pilas.modo.add.text(5, 5 + 25, detalle.mensaje, fuente_principal);
+        this.pilas.modo.add.text(5, 5 + 60, detalle.stack, fuente_pequena);
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.error(error);
     };
@@ -973,7 +973,7 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "sin_imagen",
+            imagen: "sin_imagen.png",
             centro_x: 0.5,
             centro_y: 0.5,
             rotacion: 0,
@@ -997,7 +997,7 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "sin_imagen",
+            imagen: "sin_imagen.png",
             figura: ""
         };
         this.pilas = pilas;
@@ -1015,19 +1015,6 @@ var ActorBase = (function () {
     ActorBase.prototype.pre_iniciar = function (propiedades) {
         var _this = this;
         var figura = propiedades.figura || "";
-        var imagen = null;
-        var cuadro = null;
-        if (propiedades.imagen.indexOf(".") > -1) {
-            imagen = propiedades.imagen;
-            cuadro = null;
-        }
-        else {
-            imagen = propiedades.imagen.split(".")[0];
-            cuadro = propiedades.imagen
-                .split(".")
-                .slice(1)
-                .join(".");
-        }
         this._id = propiedades.id;
         this._nombre = propiedades.nombre;
         this.sensores = [];
@@ -1037,7 +1024,7 @@ var ActorBase = (function () {
         this._es_texto = propiedades.es_texto;
         switch (figura) {
             case "rectangulo":
-                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+                this.sprite = this.crear_sprite("matter", propiedades.imagen);
                 this.figura = figura;
                 this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
                 this.dinamico = propiedades.figura_dinamica;
@@ -1046,7 +1033,7 @@ var ActorBase = (function () {
                 this.sensor = propiedades.figura_sensor;
                 break;
             case "circulo":
-                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+                this.sprite = this.crear_sprite("matter", propiedades.imagen);
                 this.figura = figura;
                 this.crear_figura_circular(propiedades.figura_radio);
                 this.dinamico = propiedades.figura_dinamica;
@@ -1057,7 +1044,7 @@ var ActorBase = (function () {
             case "ninguna":
             case "":
                 this.figura = figura;
-                this.sprite = this.pilas.modo.add.sprite(0, 0, imagen, cuadro);
+                this.sprite = this.crear_sprite("sprite", propiedades.imagen);
                 break;
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
@@ -1105,6 +1092,38 @@ var ActorBase = (function () {
             _this.cuando_mueve(posicion.x, posicion.y, cursor);
         });
         this.pilas.escena.agregar_actor(this);
+    };
+    ActorBase.prototype.crear_sprite = function (tipo, imagen_inicial) {
+        var galeria = null;
+        var imagen = null;
+        if (imagen_inicial.indexOf(":") > -1) {
+            galeria = imagen_inicial.split(":")[0];
+            imagen = imagen_inicial.split(":")[1];
+        }
+        else {
+            galeria = null;
+            imagen = imagen_inicial;
+        }
+        switch (tipo) {
+            case "matter":
+                if (galeria) {
+                    return this.pilas.modo.matter.add.sprite(0, 0, galeria, imagen);
+                }
+                else {
+                    return this.pilas.modo.matter.add.sprite(0, 0, imagen);
+                }
+                break;
+            case "sprite":
+                if (galeria) {
+                    return this.pilas.modo.add.sprite(0, 0, galeria, imagen);
+                }
+                else {
+                    return this.pilas.modo.add.sprite(0, 0, imagen);
+                }
+                break;
+            default:
+                throw Error("No se puede crear un sprite de tipo " + tipo);
+        }
     };
     ActorBase.prototype.copiar_atributos_de_sprite = function (origen, destino) {
         destino.x = origen.x;
@@ -1260,7 +1279,7 @@ var ActorBase = (function () {
                 this.sprite.setTexture(key, frame);
             }
             else {
-                this.sprite.setTexture(nombre);
+                this.sprite.setTexture("imagenes", nombre + ".png");
             }
         },
         enumerable: true,
@@ -2180,12 +2199,15 @@ var nave = (function (_super) {
         return _this;
     }
     nave.prototype.iniciar = function () {
-        this.crear_animacion("nave_en_reposo", ["nave_en_reposo"], 2);
-        this.crear_animacion("nave_avanzando", ["nave_avanza_1", "nave_avanza_2"], 20);
-        this.crear_animacion("nave_girando_a_la_izquierda", ["nave_izquierda_1", "nave_izquierda_2"], 20);
-        this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
+        this.crear_animaciones();
         this.animacion = "nave_en_reposo";
         this.cuadros_desde_el_ultimo_disparo = 0;
+    };
+    nave.prototype.crear_animaciones = function () {
+        this.crear_animacion("nave_en_reposo", ["imagenes:nave_en_reposo.png"], 2);
+        this.crear_animacion("nave_avanzando", ["imagenes:nave_avanza_1", "imagenes:nave_avanza_2"], 20);
+        this.crear_animacion("nave_girando_a_la_izquierda", ["nave_izquierda_1", "nave_izquierda_2"], 20);
+        this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
     };
     nave.prototype.actualizar = function () {
         this.cuadros_desde_el_ultimo_disparo += 1;
@@ -2197,7 +2219,8 @@ var nave = (function (_super) {
             this.rotacion -= this.velocidad;
             this.animacion = "nave_girando_a_la_derecha";
         }
-        if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {
+        if (this.pilas.control.espacio &&
+            this.cuadros_desde_el_ultimo_disparo > 5) {
             var laser_1 = this.pilas.actores.laser();
             laser_1.x = this.x;
             laser_1.y = this.y;
@@ -2252,7 +2275,7 @@ var pelota = (function (_super) {
     function pelota() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "pelota",
+            imagen: "imagenes:pelota.png",
             figura: "circulo",
             figura_radio: 25
         };
@@ -2267,7 +2290,7 @@ var plataforma = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "plataforma",
+            imagen: "imagenes:plataforma.png",
             etiqueta: "plataforma",
             y: 0,
             figura_ancho: 250,
@@ -2533,7 +2556,14 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this._nombre_del_fondo = fondo;
-        this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
+        if (fondo.indexOf(":") > -1) {
+            var galeria = fondo.split(":")[0];
+            var imagen = fondo.split(":")[1];
+            this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, galeria, imagen);
+        }
+        else {
+            this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
+        }
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
     };
@@ -2550,7 +2580,7 @@ var Modo = (function (_super) {
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
         var _this = this;
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
-        sprite.setTexture(actor.imagen);
+        sprite.setTexture("imagenes", actor.imagen + ".png");
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -2675,10 +2705,7 @@ var ModoCargador = (function (_super) {
     ModoCargador.prototype.preload = function () {
         this.load.crossOrigin = "anonymous";
         this.contador = 0;
-        for (var i = 0; i < this.pilas.recursos.imagenes.length; i++) {
-            var item = this.pilas.recursos.imagenes[i];
-            this.load.image(item.nombre, item.ruta);
-        }
+        this.load.multiatlas("imagenes", "imagenes.json", "./");
         for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
             var sonido = this.pilas.recursos.sonidos[i];
             this.load.audio(sonido.nombre, sonido.ruta, {});
@@ -2804,7 +2831,7 @@ var ModoEditor = (function (_super) {
     };
     ModoEditor.prototype.crear_sprite_desde_actor = function (actor) {
         var _this = this;
-        var sprite = this.add.sprite(0, 0, actor.imagen);
+        var sprite = this.add.sprite(0, 0, "imagenes", actor.imagen + ".png");
         sprite["setInteractive"]();
         sprite["actor"] = actor;
         sprite["destacandose"] = false;

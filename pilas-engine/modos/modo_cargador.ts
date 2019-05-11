@@ -16,10 +16,14 @@ class ModoCargador extends Modo {
     this.load.crossOrigin = "anonymous";
     this.contador = 0;
 
+    this.load.multiatlas("imagenes", "imagenes.json", "./");
+
+    /*
     for (let i = 0; i < this.pilas.recursos.imagenes.length; i++) {
       let item = this.pilas.recursos.imagenes[i];
       this.load.image(item.nombre, item.ruta);
     }
+    */
 
     for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
       let sonido = this.pilas.recursos.sonidos[i];

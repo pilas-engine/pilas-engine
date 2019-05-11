@@ -56,7 +56,7 @@ export default {
       camara_y: 0,
       gravedad_x: 0,
       gravedad_y: 1,
-      fondo: "fondo_cielo_1",
+      fondo: "fondo-plano",
       actores: [
         {
           x: 0,
@@ -221,7 +221,7 @@ export default {
       id: 2,
       camara_x: 0,
       camara_y: 0,
-      fondo: "plano",
+      fondo: "fondo-plano",
       actores: []
     }
   ]

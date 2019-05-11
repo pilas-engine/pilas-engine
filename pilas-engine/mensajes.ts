@@ -87,26 +87,26 @@ class Mensajes {
       stack: stacktrace
     };
 
+    let fuente_grande = {
+      font: "18px verdana"
+    };
+
     let fuente_principal = {
-      font: "14px verdana",
+      font: "16px verdana",
       fill: "#ddd"
     };
 
-    let fuente_grande = {
-      font: "16px verdana"
-    };
-
     let fuente_pequena = {
-      font: "10px verdana"
+      font: "14px verdana"
     };
 
     let fondo = this.pilas.modo.add.graphics();
     fondo.fillStyle(0x000000, 0.5);
-    fondo.fillRect(2, 2, 600, 600);
+    fondo.fillRect(0, 0, 3000, 3000);
 
-    this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
-    this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
-    this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
+    this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
+    this.pilas.modo.add.text(5, 5 + 25, detalle.mensaje, fuente_principal);
+    this.pilas.modo.add.text(5, 5 + 60, detalle.stack, fuente_pequena);
 
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
     console.error(error);

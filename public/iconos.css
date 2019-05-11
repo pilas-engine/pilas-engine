@@ -1,0 +1,99 @@
+/* -----------------------------------------------------
+   created with https://www.codeandweb.com/texturepacker 
+   -----------------------------------------------------
+   $TexturePacker:SmartUpdate:93fd4c7dcf16271e0420431ef6a192c1:2180891b01f092e3a3007778b362f1f1:467c798a4e4a5265189118ecb556e0a2$
+   -----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(iconos.png);}
+
+.abrir {width:24px; height:24px; background-position: -621px -453px}
+.aceituna {width:10px; height:10px; background-position: -721px -61px}
+.actor {width:24px; height:24px; background-position: -647px -453px}
+.actor_aceituna {width:37px; height:37px; background-position: -694px -22px}
+.actor_actor {width:100px; height:100px; background-position: -392px -312px}
+.actor_caja {width:48px; height:48px; background-position: -634px -356px}
+.actor_conejo {width:60px; height:106px; background-position: -392px -490px}
+.actor_deslizador {width:60px; height:60px; background-position: -559px -428px}
+.actor_gallina {width:66px; height:64px; background-position: -566px -356px}
+.actor_laser {width:37px; height:9px; background-position: -454px -592px}
+.actor_logo {width:60px; height:60px; background-position: -454px -530px}
+.actor_moneda {width:13px; height:16px; background-position: -710px -356px}
+.actor_nave {width:46px; height:45px; background-position: -634px -406px}
+.actor_nube {width:64px; height:48px; background-position: -640px -530px}
+.actor_pared {width:25px; height:600px; background-position: -1px -1px}
+.actor_pelota {width:55px; height:54px; background-position: -642px -170px}
+.actor_plataforma {width:256px; height:38px; background-position: -454px -490px}
+.actor_suelo {width:600px; height:25px; background-position: -28px -1px}
+.actor_techo {width:600px; height:25px; background-position: -28px -1px}
+.actor_texto {width:154px; height:54px; background-position: -512px -300px}
+.actores {width:24px; height:24px; background-position: -680px -278px}
+.actortexto {width:10px; height:10px; background-position: -720px -582px}
+.add_folder {width:25px; height:25px; background-position: -694px -61px}
+.api {width:25px; height:25px; background-position: -694px -88px}
+.arduino {width:24px; height:24px; background-position: -706px -277px}
+.arrastrables {width:180px; height:140px; background-position: -28px -315px}
+.borrar {width:16px; height:16px; background-position: -494px -312px}
+.caja {width:10px; height:10px; background-position: -712px -502px}
+.click {width:180px; height:140px; background-position: -330px -28px}
+.click_actor {width:180px; height:140px; background-position: -28px -457px}
+.computadora {width:25px; height:25px; background-position: -694px -115px}
+.conejo {width:10px; height:10px; background-position: -721px -73px}
+.demo {width:24px; height:24px; background-position: -668px -304px}
+.deslizador {width:10px; height:10px; background-position: -712px -514px}
+.desplegar {width:24px; height:24px; background-position: -668px -330px}
+.detener {width:24px; height:24px; background-position: -694px -304px}
+.duplicar {width:16px; height:16px; background-position: -494px -330px}
+.ejecutar {width:24px; height:24px; background-position: -694px -330px}
+.ejemplo-nave {width:180px; height:140px; background-position: -330px -170px}
+.ejemplos {width:25px; height:25px; background-position: -694px -142px}
+.electron {width:60px; height:60px; background-position: -516px -530px}
+.ember {width:63px; height:60px; background-position: -494px -428px}
+.enjambre {width:100px; height:74px; background-position: -392px -414px}
+.enjambre-texto {width:100px; height:19px; background-position: -630px -1px}
+.error {width:24px; height:24px; background-position: -684px -356px}
+.escena {width:24px; height:24px; background-position: -684px -382px}
+.github {width:60px; height:50px; background-position: -642px -226px}
+.gravedad {width:180px; height:140px; background-position: -210px -315px}
+.guardar {width:24px; height:24px; background-position: -682px -408px}
+.imagen {width:16px; height:16px; background-position: -642px -278px}
+.info {width:24px; height:24px; background-position: -708px -408px}
+.info_squared {width:25px; height:25px; background-position: -699px -169px}
+.laser {width:10px; height:10px; background-position: -721px -85px}
+.logo {width:10px; height:10px; background-position: -721px -97px}
+.manual {width:25px; height:25px; background-position: -699px -196px}
+.moneda {width:10px; height:10px; background-position: -721px -109px}
+.nave {width:10px; height:10px; background-position: -721px -121px}
+.no {width:24px; height:24px; background-position: -682px -434px}
+.nube {width:10px; height:10px; background-position: -721px -133px}
+.nubes {width:180px; height:140px; background-position: -210px -457px}
+.off {width:16px; height:14px; background-position: -710px -374px}
+.on {width:16px; height:14px; background-position: -710px -390px}
+.panel-central-off {width:18px; height:14px; background-position: -660px -278px}
+.panel-central-on {width:18px; height:14px; background-position: -640px -580px}
+.panel-derecho-off {width:18px; height:14px; background-position: -660px -580px}
+.panel-derecho-on {width:18px; height:14px; background-position: -680px -580px}
+.panel-izquierdo-off {width:18px; height:14px; background-position: -700px -582px}
+.panel-izquierdo-on {width:18px; height:14px; background-position: -712px -486px}
+.pausa {width:24px; height:24px; background-position: -708px -434px}
+.pelota {width:10px; height:10px; background-position: -721px -145px}
+.phaser {width:70px; height:70px; background-position: -494px -356px}
+.pilas_logo_128 {width:128px; height:128px; background-position: -512px -170px}
+.pilas_logo_60 {width:60px; height:60px; background-position: -454px -530px}
+.plaqueta_arduino {width:300px; height:285px; background-position: -28px -28px}
+.plataforma {width:10px; height:10px; background-position: -721px -157px}
+.plataformas {width:180px; height:140px; background-position: -512px -28px}
+.plegar {width:24px; height:24px; background-position: -673px -460px}
+.preferencias {width:24px; height:24px; background-position: -699px -460px}
+.settings {width:25px; height:25px; background-position: -704px -223px}
+.si {width:24px; height:24px; background-position: -706px -530px}
+.suelo {width:10px; height:10px; background-position: -720px -303px}
+.techo {width:10px; height:10px; background-position: -720px -303px}
+.test {width:25px; height:25px; background-position: -704px -250px}
+.typescript {width:60px; height:60px; background-position: -578px -530px}
+.volver {width:24px; height:24px; background-position: -706px -556px}

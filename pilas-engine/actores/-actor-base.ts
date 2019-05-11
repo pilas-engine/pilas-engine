@@ -29,7 +29,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "sin_imagen",
+    imagen: "sin_imagen.png",
 
     centro_x: 0.5,
     centro_y: 0.5,
@@ -58,7 +58,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "sin_imagen",
+    imagen: "sin_imagen.png",
     figura: ""
   };
 
@@ -75,23 +75,6 @@ class ActorBase {
 
   pre_iniciar(propiedades) {
     let figura = propiedades.figura || "";
-    let imagen = null;
-    let cuadro = null;
-
-    // Como las imágenes pueden ser cadenas que representen cuadros
-    // dentro de un spritesheet (caso "spritesheet.imagen") o el nombre de una
-    // imagen normal (caso "imagen") se utiliza esta comprobación para
-    // distinguir cualquiera de estos casos.
-    if (propiedades.imagen.indexOf(".") > -1) {
-      imagen = propiedades.imagen;
-      cuadro = null;
-    } else {
-      imagen = propiedades.imagen.split(".")[0];
-      cuadro = propiedades.imagen
-        .split(".")
-        .slice(1)
-        .join(".");
-    }
 
     this._id = propiedades.id;
     this._nombre = propiedades.nombre;
@@ -104,7 +87,7 @@ class ActorBase {
 
     switch (figura) {
       case "rectangulo":
-        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+        this.sprite = this.crear_sprite("matter", propiedades.imagen);
         this.figura = figura;
 
         this.crear_figura_rectangular(
@@ -119,7 +102,7 @@ class ActorBase {
         break;
 
       case "circulo":
-        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+        this.sprite = this.crear_sprite("matter", propiedades.imagen);
         this.figura = figura;
         this.crear_figura_circular(propiedades.figura_radio);
 
@@ -132,7 +115,7 @@ class ActorBase {
       case "ninguna":
       case "":
         this.figura = figura;
-        this.sprite = this.pilas.modo.add.sprite(0, 0, imagen, cuadro);
+        this.sprite = this.crear_sprite("sprite", propiedades.imagen);
         break;
 
       default:
@@ -201,6 +184,44 @@ class ActorBase {
     });
 
     this.pilas.escena.agregar_actor(this);
+  }
+
+  private crear_sprite(tipo, imagen_inicial) {
+    let galeria = null;
+    let imagen = null;
+
+    // Como las imágenes pueden ser cadenas que representen cuadros
+    // dentro de un spritesheet (caso "spritesheet:imagen") o el nombre de una
+    // imagen normal (caso "imagen") se utiliza esta comprobación para
+    // distinguir cualquiera de estos casos.
+    if (imagen_inicial.indexOf(":") > -1) {
+      galeria = imagen_inicial.split(":")[0];
+      imagen = imagen_inicial.split(":")[1];
+    } else {
+      galeria = null;
+      imagen = imagen_inicial;
+    }
+
+    switch (tipo) {
+      case "matter":
+        if (galeria) {
+          return this.pilas.modo.matter.add.sprite(0, 0, galeria, imagen);
+        } else {
+          return this.pilas.modo.matter.add.sprite(0, 0, imagen);
+        }
+        break;
+
+      case "sprite":
+        if (galeria) {
+          return this.pilas.modo.add.sprite(0, 0, galeria, imagen);
+        } else {
+          return this.pilas.modo.add.sprite(0, 0, imagen);
+        }
+        break;
+
+      default:
+        throw Error(`No se puede crear un sprite de tipo ${tipo}`);
+    }
   }
 
   protected copiar_atributos_de_sprite(origen, destino) {
@@ -386,7 +407,7 @@ class ActorBase {
         .join(".");
       this.sprite.setTexture(key, frame);
     } else {
-      this.sprite.setTexture(nombre);
+      this.sprite.setTexture("imagenes", nombre + ".png");
     }
   }
 

@@ -16,10 +16,10 @@ class Animaciones {
 
     if (!this.animaciones[nombre]) {
       let frames = cuadros.map(nombre => {
-        if (nombre.indexOf(".") > -1) {
+        if (nombre.indexOf(":") > -1) {
           return {
-            key: nombre.split(".")[1],
-            frame: nombre.split(".")[0]
+            frame: nombre.split(":")[0],
+            key: nombre.split(":")[1]
           };
         } else {
           return { key: nombre };
@@ -27,7 +27,7 @@ class Animaciones {
       });
 
       let animacion = this.pilas.modo.anims.create({
-        key: nombre.split(".")[0],
+        key: nombre.split(":")[0],
         frames: frames,
         frameRate: velocidad,
         repeat: -1

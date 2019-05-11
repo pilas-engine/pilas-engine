@@ -9,7 +9,6 @@ ELIMINAR_MAPS=1
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
 BIN_TYPEDOC=./node_modules/.bin/typedoc
-BIN_SPRITESHEET=./node_modules/.bin/spritesheet-js
 BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_EMBER=./node_modules/.bin/ember
 BIN_SURGE=./node_modules/.bin/surge
@@ -45,7 +44,6 @@ comandos:
 	@echo "    ${G}electron${N}                     Ejecuta la aplicación en electron (sin compilar)."
 	@echo "    ${G}ejecutar${N}                     Ejecuta la aplicación en modo desarrollo."
 	@echo "    ${G}test${N}                         Ejecuta los tests de la aplicación."
-	@echo "    ${G}sprites_ember${N}                Genera las imágenes de la aplicación."
 	@echo "    ${G}prettier${N}                     Corrige el formato y la sintaxis de todos los archivos."
 	@echo "    ${G}actualizar_typescript${N}        Actualiza typescript a una versión más reciente."
 	@echo "    ${G}actualizar_actores${N}           Actualiza el listado de actores implementados."
@@ -225,16 +223,6 @@ endif
 	@zip -qr binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
 	@zip -qr binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
 	@zip -qr binarios/${NOMBREBIN}-linux-arm.zip binarios/${NOMBREBIN}-linux-armv7l
-
-sprites_ember:
-	$(call log, "Generando Spritesheets para la aplicación ember...")
-	@./node_modules/.bin/spritesheet-js recursos/iconos/* -p public/assets/ -f css --padding=2
-	@echo ""
-	@echo "${G}Listo, las archivos que se generaron son:"
-	@echo ""
-	@echo "    public/assets/spritesheet.json"
-	@echo "    public/assets/spritesheet.png"
-	@echo "${N}"
 
 .PHONY: tmp docs binarios manual
 
