@@ -30,9 +30,8 @@
     "broccoli-asset-rev": "^2.7.0",
     "broccoli-funnel": "^2.0.2",
     "devtron": "^1.4.0",
-    "electron": "1.6.16",
+    "electron": "5.0.1",
     "electron-packager": "^10.1.0",
-    "electron-rebuild": "^1.8.4",
     "ember-ajax": "^5.0.0",
     "ember-cli": "~3.8.2",
     "ember-cli-app-version": "^3.2.0",
@@ -77,6 +76,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
+    "electron-rebuild": "^1.8.4",
     "js-beautify": "^1.9.1",
     "phaser": "3.16.2",
     "typescript": "3.4.3"

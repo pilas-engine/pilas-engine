@@ -2358,7 +2358,7 @@ var suelo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "suelo",
+            imagen: "imagenes:suelo.png",
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false
