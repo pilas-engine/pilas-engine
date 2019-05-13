@@ -35,6 +35,8 @@ class Pilas {
   cursor_y: number = 0;
   opciones: any;
 
+  imagenes_precargadas: string[] = [];
+
   constructor() {
     this.Phaser = Phaser;
 
@@ -141,6 +143,10 @@ class Pilas {
     opciones.modo_simple = true;
     this.iniciar_phaser(ancho, alto, recursos, opciones);
     return this;
+  }
+
+  listar_imagenes() {
+    return this.imagenes_precargadas;
   }
 
   private iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion) {

@@ -101,7 +101,14 @@ class Modo extends Phaser.Scene {
       let galeria = fondo.split(":")[0];
       let imagen = fondo.split(":")[1];
 
-      this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, galeria, imagen);
+      this.fondo = this.add.tileSprite(
+        0,
+        0,
+        this.ancho,
+        this.alto,
+        galeria,
+        imagen
+      );
     } else {
       this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
     }
@@ -127,6 +134,7 @@ class Modo extends Phaser.Scene {
       actor.x,
       actor.y
     );
+    console.log(actor);
     sprite.setTexture("imagenes", actor.imagen + ".png");
 
     sprite.id = actor.id;

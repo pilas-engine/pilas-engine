@@ -29,7 +29,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "sin_imagen.png",
+    imagen: "imagenes:sin_imagen.png",
 
     centro_x: 0.5,
     centro_y: 0.5,
@@ -76,7 +76,8 @@ class ActorBase {
   pre_iniciar(propiedades) {
     let figura = propiedades.figura || "";
 
-    this._id = propiedades.id;
+    this._id =
+      propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
     this._nombre = propiedades.nombre;
 
     this.sensores = [];
@@ -189,6 +190,8 @@ class ActorBase {
   private crear_sprite(tipo, imagen_inicial) {
     let galeria = null;
     let imagen = null;
+
+    this._validar_que_existe_imagen(imagen_inicial);
 
     // Como las imágenes pueden ser cadenas que representen cuadros
     // dentro de un spritesheet (caso "spritesheet:imagen") o el nombre de una
@@ -378,7 +381,7 @@ class ActorBase {
     if (this.sprite.frame.name === "__BASE") {
       return this.sprite.texture.key;
     } else {
-      return `${this.sprite.frame.name}.${this.sprite.texture.key}`;
+      return `${this.sprite.texture.key}:${this.sprite.frame.name}`;
     }
   }
 
@@ -398,16 +401,36 @@ class ActorBase {
     throw new Error("No puede definir este atributo");
   }
 
+  private _validar_que_existe_imagen(nombre) {
+    if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
+      let sugerencia = this.pilas.utilidades.obtener_mas_similar(
+        nombre,
+        this.pilas.imagenes_precargadas
+      );
+      throw Error(
+        `No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`
+      );
+    }
+  }
+
   set imagen(nombre: string) {
-    if (nombre.indexOf(".") > -1) {
-      let key = nombre.split(".")[0];
-      let frame = nombre
-        .split(".")
-        .slice(1)
-        .join(".");
-      this.sprite.setTexture(key, frame);
+    let galeria = null;
+    let imagen = null;
+
+    this._validar_que_existe_imagen(nombre);
+
+    if (nombre.indexOf(":") > -1) {
+      galeria = nombre.split(":")[0];
+      imagen = nombre.split(":")[1];
     } else {
-      this.sprite.setTexture("imagenes", nombre + ".png");
+      galeria = null;
+      imagen = nombre;
+    }
+
+    if (galeria) {
+      this.sprite.setTexture(galeria, imagen);
+    } else {
+      this.sprite.setTexture(imagen);
     }
   }
 
@@ -761,8 +784,12 @@ class ActorBase {
 
   set animacion(nombre) {
     if (this._animacion_en_curso !== nombre) {
-      this.reproducir_animacion(nombre);
-      this._animacion_en_curso = nombre;
+      if (this.pilas.animaciones.existe_animacion(this, nombre)) {
+        this.reproducir_animacion(nombre);
+        this._animacion_en_curso = nombre;
+      } else {
+        throw Error(`No se ha creado la animación '${nombre}' previamente`);
+      }
     }
   }
 

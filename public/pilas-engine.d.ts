@@ -24,6 +24,7 @@ declare class Animaciones {
     animaciones: {};
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number): void;
+    existe_animacion(actor: any, nombre: any): boolean;
 }
 declare class Automata {
     actor: Actor;
@@ -183,6 +184,7 @@ declare class Utilidades {
     combinar_propiedades(propiedades_iniciales: any, propiedades: any): any;
     obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number): number;
     obtener_similaridad(cadena1: string, cadena2: string): any;
+    obtener_mas_similar(nombre: any, posibilidades: any): any;
 }
 declare var NineSlice: any;
 declare var HOST: string;
@@ -207,11 +209,13 @@ declare class Pilas {
     cursor_x: number;
     cursor_y: number;
     opciones: any;
+    imagenes_precargadas: string[];
     constructor();
     escena: EscenaBase;
     control: Control;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
     iniciar(ancho: number, alto: number, recursos: any, opciones?: any): this;
+    listar_imagenes(): string[];
     private iniciar_phaser_desde_configuracion_y_cargar_escenas;
     ejecutar(): void;
     definir_modo(nombre: string, datos: any): void;
@@ -350,6 +354,7 @@ declare class ActorBase {
     imagen: string;
     nombre: any;
     id: any;
+    private _validar_que_existe_imagen;
     x: number;
     y: number;
     z: number;
@@ -682,10 +687,14 @@ declare class Modo extends Phaser.Scene {
 declare class ModoCargador extends Modo {
     pilas: Pilas;
     contador: number;
+    barra_de_progreso: any;
+    x: number;
     constructor();
     init(data: any): void;
+    private crear_indicador_de_carga;
     preload(): void;
     update(): void;
+    notificar_imagenes_cargadas(): void;
     create(): void;
     cuando_progresa_la_carga(progreso: any): void;
 }

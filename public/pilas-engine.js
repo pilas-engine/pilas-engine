@@ -85,27 +85,35 @@ var Animaciones = (function () {
         this.pilas = pilas;
     }
     Animaciones.prototype.crear_animacion = function (actor, nombre_de_la_animacion, cuadros, velocidad) {
+        var _this = this;
         var nombre = actor.id + "-" + nombre_de_la_animacion;
         if (!this.animaciones[nombre]) {
-            var frames_1 = cuadros.map(function (nombre) {
-                if (nombre.indexOf(":") > -1) {
+            var frames_1 = cuadros.map(function (cuadro) {
+                if (_this.pilas.imagenes_precargadas.indexOf(cuadro) === -1) {
+                    throw Error("No se puede crear la animcaci\u00F3n \"" + nombre_de_la_animacion + "\"\nEl cuadro " + cuadro + " no existe.");
+                }
+                if (cuadro.indexOf(":") > -1) {
                     return {
-                        frame: nombre.split(":")[0],
-                        key: nombre.split(":")[1]
+                        key: cuadro.split(":")[0],
+                        frame: cuadro.split(":")[1]
                     };
                 }
                 else {
-                    return { key: nombre };
+                    return { key: cuadro };
                 }
             });
             var animacion = this.pilas.modo.anims.create({
-                key: nombre.split(":")[0],
+                key: nombre,
                 frames: frames_1,
                 frameRate: velocidad,
                 repeat: -1
             });
             this.animaciones[nombre] = animacion;
         }
+    };
+    Animaciones.prototype.existe_animacion = function (actor, nombre) {
+        var animacion = actor.id + "-" + nombre;
+        return this.animaciones[animacion] !== undefined;
     };
     return Animaciones;
 }());
@@ -590,7 +598,7 @@ var Mensajes = (function () {
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {
-        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en ");
+        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ");
         var detalle = {
             mensaje: error.message,
             stack: stacktrace
@@ -609,8 +617,8 @@ var Mensajes = (function () {
         fondo.fillStyle(0x000000, 0.5);
         fondo.fillRect(0, 0, 3000, 3000);
         this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
-        this.pilas.modo.add.text(5, 5 + 25, detalle.mensaje, fuente_principal);
-        this.pilas.modo.add.text(5, 5 + 60, detalle.stack, fuente_pequena);
+        var texto = this.pilas.modo.add.text(5, 30, detalle.mensaje, fuente_principal);
+        this.pilas.modo.add.text(5, 5 + 30 + texto.height, detalle.stack, fuente_pequena);
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.error(error);
     };
@@ -739,6 +747,24 @@ var Utilidades = (function () {
         }
         return levenshtein_distance_b(cadena1, cadena2);
     };
+    Utilidades.prototype.obtener_mas_similar = function (nombre, posibilidades) {
+        var _this = this;
+        var similitudes = posibilidades.map(function (h) {
+            return {
+                similitud: _this.obtener_similaridad(h, nombre),
+                posiblidad: h
+            };
+        });
+        similitudes = similitudes.sort(function (a, b) {
+            if (a.similitud > b.similitud) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        });
+        return similitudes[0].posiblidad;
+    };
     return Utilidades;
 }());
 var HOST = "file://";
@@ -749,6 +775,7 @@ var Pilas = (function () {
     function Pilas() {
         this.cursor_x = 0;
         this.cursor_y = 0;
+        this.imagenes_precargadas = [];
         this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
         this.depurador = new Depurador(this);
@@ -841,6 +868,9 @@ var Pilas = (function () {
         opciones.modo_simple = true;
         this.iniciar_phaser(ancho, alto, recursos, opciones);
         return this;
+    };
+    Pilas.prototype.listar_imagenes = function () {
+        return this.imagenes_precargadas;
     };
     Pilas.prototype.iniciar_phaser_desde_configuracion_y_cargar_escenas = function (configuracion) {
         var game = new Phaser.Game(configuracion);
@@ -973,7 +1003,7 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "sin_imagen.png",
+            imagen: "imagenes:sin_imagen.png",
             centro_x: 0.5,
             centro_y: 0.5,
             rotacion: 0,
@@ -1015,7 +1045,8 @@ var ActorBase = (function () {
     ActorBase.prototype.pre_iniciar = function (propiedades) {
         var _this = this;
         var figura = propiedades.figura || "";
-        this._id = propiedades.id;
+        this._id =
+            propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
         this._nombre = propiedades.nombre;
         this.sensores = [];
         this._figura_ancho = propiedades.figura_ancho;
@@ -1096,6 +1127,7 @@ var ActorBase = (function () {
     ActorBase.prototype.crear_sprite = function (tipo, imagen_inicial) {
         var galeria = null;
         var imagen = null;
+        this._validar_que_existe_imagen(imagen_inicial);
         if (imagen_inicial.indexOf(":") > -1) {
             galeria = imagen_inicial.split(":")[0];
             imagen = imagen_inicial.split(":")[1];
@@ -1266,20 +1298,26 @@ var ActorBase = (function () {
                 return this.sprite.texture.key;
             }
             else {
-                return this.sprite.frame.name + "." + this.sprite.texture.key;
+                return this.sprite.texture.key + ":" + this.sprite.frame.name;
             }
         },
         set: function (nombre) {
-            if (nombre.indexOf(".") > -1) {
-                var key = nombre.split(".")[0];
-                var frame = nombre
-                    .split(".")
-                    .slice(1)
-                    .join(".");
-                this.sprite.setTexture(key, frame);
+            var galeria = null;
+            var imagen = null;
+            this._validar_que_existe_imagen(nombre);
+            if (nombre.indexOf(":") > -1) {
+                galeria = nombre.split(":")[0];
+                imagen = nombre.split(":")[1];
             }
             else {
-                this.sprite.setTexture("imagenes", nombre + ".png");
+                galeria = null;
+                imagen = nombre;
+            }
+            if (galeria) {
+                this.sprite.setTexture(galeria, imagen);
+            }
+            else {
+                this.sprite.setTexture(imagen);
             }
         },
         enumerable: true,
@@ -1305,6 +1343,12 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype._validar_que_existe_imagen = function (nombre) {
+        if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
+            var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
+            throw Error("No se encuentra la imagen \"" + nombre + "\"\n\u00BFQuisiste decir \"" + sugerencia + "\"?");
+        }
+    };
     Object.defineProperty(ActorBase.prototype, "x", {
         get: function () {
             var x = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
@@ -1672,8 +1716,13 @@ var ActorBase = (function () {
         },
         set: function (nombre) {
             if (this._animacion_en_curso !== nombre) {
-                this.reproducir_animacion(nombre);
-                this._animacion_en_curso = nombre;
+                if (this.pilas.animaciones.existe_animacion(this, nombre)) {
+                    this.reproducir_animacion(nombre);
+                    this._animacion_en_curso = nombre;
+                }
+                else {
+                    throw Error("No se ha creado la animaci\u00F3n '" + nombre + "' previamente");
+                }
             }
         },
         enumerable: true,
@@ -2143,7 +2192,7 @@ var laser = (function (_super) {
     function laser() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "laser"
+            imagen: "imagenes:laser.png"
         };
         return _this;
     }
@@ -2193,7 +2242,7 @@ var nave = (function (_super) {
     function nave() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "nave_en_reposo"
+            imagen: "imagenes:nave_reposo.png"
         };
         _this.velocidad = 5;
         return _this;
@@ -2204,10 +2253,10 @@ var nave = (function (_super) {
         this.cuadros_desde_el_ultimo_disparo = 0;
     };
     nave.prototype.crear_animaciones = function () {
-        this.crear_animacion("nave_en_reposo", ["imagenes:nave_en_reposo.png"], 2);
-        this.crear_animacion("nave_avanzando", ["imagenes:nave_avanza_1", "imagenes:nave_avanza_2"], 20);
-        this.crear_animacion("nave_girando_a_la_izquierda", ["nave_izquierda_1", "nave_izquierda_2"], 20);
-        this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
+        this.crear_animacion("nave_en_reposo", ["imagenes:nave_reposo.png"], 2);
+        this.crear_animacion("nave_avanzando", ["imagenes:nave_avanza_1.png", "imagenes:nave_avanza_2.png"], 20);
+        this.crear_animacion("nave_girando_a_la_izquierda", ["imagenes:nave_izquierda_1.png", "imagenes:nave_izquierda_2.png"], 20);
+        this.crear_animacion("nave_girando_a_la_derecha", ["imagenes:nave_derecha_1.png", "imagenes:nave_derecha_2.png"], 20);
     };
     nave.prototype.actualizar = function () {
         this.cuadros_desde_el_ultimo_disparo += 1;
@@ -2580,6 +2629,7 @@ var Modo = (function (_super) {
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
         var _this = this;
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+        console.log(actor);
         sprite.setTexture("imagenes", actor.imagen + ".png");
         sprite.id = actor.id;
         sprite.x = coordenada.x;
@@ -2702,9 +2752,32 @@ var ModoCargador = (function (_super) {
     ModoCargador.prototype.init = function (data) {
         this.pilas = data.pilas;
     };
+    ModoCargador.prototype.crear_indicador_de_carga = function () {
+        var progressBox = this.add.graphics();
+        var borde = this.add.graphics();
+        this.barra_de_progreso = this.add.graphics();
+        var width = this.cameras.main.width;
+        var height = this.cameras.main.height;
+        var loadingText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 50,
+            text: "Iniciando ...",
+            style: {
+                font: "14px verdana",
+                fill: "#ffffff"
+            }
+        });
+        loadingText.setOrigin(0.5, 0.5);
+        this.x = width / 2 - 310 / 2;
+        borde.lineStyle(1, 0x555555, 1);
+        borde.strokeRect(this.x, 220, 310, 20);
+        progressBox.fillStyle(0x222222, 1);
+        progressBox.fillRect(this.x, 220, 310, 20);
+    };
     ModoCargador.prototype.preload = function () {
         this.load.crossOrigin = "anonymous";
         this.contador = 0;
+        this.crear_indicador_de_carga();
         this.load.multiatlas("imagenes", "imagenes.json", "./");
         for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
             var sonido = this.pilas.recursos.sonidos[i];
@@ -2723,8 +2796,27 @@ var ModoCargador = (function (_super) {
             this.add.bitmapText(5, 5, "impact", msg);
         }
     };
+    ModoCargador.prototype.notificar_imagenes_cargadas = function () {
+        var imagenes = [];
+        for (var key in this.game.textures.list) {
+            if (key.indexOf("__") === -1 && key) {
+                var contenido = this.game.textures.list[key];
+                if (contenido.frameTotal === 1) {
+                    imagenes.push(key);
+                }
+                else {
+                    var frames_2 = contenido.getFrameNames();
+                    for (var i = 0; i < frames_2.length; i++) {
+                        imagenes.push(key + ":" + frames_2[i]);
+                    }
+                }
+            }
+        }
+        this.pilas.imagenes_precargadas = imagenes;
+    };
     ModoCargador.prototype.create = function () {
         _super.prototype.create.call(this, { pilas: this.pilas }, 500, 500);
+        this.notificar_imagenes_cargadas();
         if (this.pilas.opciones.modo_simple) {
             console.log("Finalizó la carga en modo simple");
             this.pilas.definir_modo("ModoEjecucion", {
@@ -2762,6 +2854,9 @@ var ModoCargador = (function (_super) {
         }
     };
     ModoCargador.prototype.cuando_progresa_la_carga = function (progreso) {
+        this.barra_de_progreso.clear();
+        this.barra_de_progreso.fillStyle(0xffffff, 1);
+        this.barra_de_progreso.fillRect(this.x + 5, 220 + 5, 300 * progreso, 10);
         if (this.pilas.opciones.modo_simple) {
             console.log("Progreso: " + progreso);
         }

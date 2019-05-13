@@ -1,6 +1,6 @@
 class nave extends Actor {
   propiedades = {
-    imagen: "nave_en_reposo"
+    imagen: "imagenes:nave_reposo.png"
   };
 
   velocidad = 5;
@@ -8,28 +8,27 @@ class nave extends Actor {
 
   iniciar() {
     this.crear_animaciones();
-
     this.animacion = "nave_en_reposo";
     this.cuadros_desde_el_ultimo_disparo = 0;
   }
 
   crear_animaciones() {
-    this.crear_animacion("nave_en_reposo", ["imagenes:nave_en_reposo.png"], 2);
+    this.crear_animacion("nave_en_reposo", ["imagenes:nave_reposo.png"], 2);
 
     this.crear_animacion(
       "nave_avanzando",
-      ["imagenes:nave_avanza_1", "imagenes:nave_avanza_2"],
+      ["imagenes:nave_avanza_1.png", "imagenes:nave_avanza_2.png"],
       20
     );
 
     this.crear_animacion(
       "nave_girando_a_la_izquierda",
-      ["nave_izquierda_1", "nave_izquierda_2"],
+      ["imagenes:nave_izquierda_1.png", "imagenes:nave_izquierda_2.png"],
       20
     );
     this.crear_animacion(
       "nave_girando_a_la_derecha",
-      ["nave_derecha_1", "nave_derecha_2"],
+      ["imagenes:nave_derecha_1.png", "imagenes:nave_derecha_2.png"],
       20
     );
   }

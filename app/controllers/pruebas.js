@@ -1,6 +1,5 @@
 import { inject as service } from "@ember/service";
 import Controller from "@ember/controller";
-import { later } from "@ember/runloop";
 
 const NOMBRE_DE_LA_ESCENA = "demo";
 
@@ -14,7 +13,7 @@ export default Controller.extend({
   iniciar() {
     this.set("proyecto", {
       titulo: "Proyecto demo",
-      ancho: 640,
+      ancho: 480,
       alto: 480,
       codigos: {
         escenas: [
@@ -29,13 +28,18 @@ export default Controller.extend({
                 });
                 */
 
+                let a = this.pilas.actores.nave();
+
+                //console.log(this.pilas.listar_imagenes())
+
+                /*
                 this.pilas.actores.pelota();
                 this.pilas.actores.nave();
-
 
                 let plataforma = this.pilas.actores.plataforma();
                 plataforma.y = -200;
                 plataforma.aprender("arrastrable");
+                */
 
                 /*
 

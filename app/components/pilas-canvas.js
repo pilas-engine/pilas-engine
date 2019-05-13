@@ -13,7 +13,6 @@ export default Component.extend({
   alto: 400,
   estado: null,
   contexto: null,
-  cargando: true,
   mantenerFoco: false,
   classNames: [
     "flex1",
@@ -273,8 +272,6 @@ export default Component.extend({
   },
 
   finaliza_carga() {
-    this.set("cargando", false);
-
     if (this.cuando_termina_de_cargar) {
       this.cuando_termina_de_cargar();
     }

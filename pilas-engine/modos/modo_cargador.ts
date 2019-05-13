@@ -3,6 +3,8 @@
 class ModoCargador extends Modo {
   pilas: Pilas;
   contador: number;
+  barra_de_progreso: any;
+  x: number;
 
   constructor() {
     super({ key: "ModoCargador" });
@@ -12,9 +14,38 @@ class ModoCargador extends Modo {
     this.pilas = data.pilas;
   }
 
+  private crear_indicador_de_carga() {
+    var progressBox = this.add.graphics();
+    var borde = this.add.graphics();
+    this.barra_de_progreso = this.add.graphics();
+
+    var width = this.cameras.main.width;
+    var height = this.cameras.main.height;
+    var loadingText = this.make.text({
+      x: width / 2,
+      y: height / 2 - 50,
+      text: "Iniciando ...",
+      style: {
+        font: "14px verdana",
+        fill: "#ffffff"
+      }
+    });
+    loadingText.setOrigin(0.5, 0.5);
+
+    this.x = width / 2 - 310 / 2;
+
+    borde.lineStyle(1, 0x555555, 1);
+    borde.strokeRect(this.x, 220, 310, 20);
+
+    progressBox.fillStyle(0x222222, 1);
+    progressBox.fillRect(this.x, 220, 310, 20);
+  }
+
   preload() {
     this.load.crossOrigin = "anonymous";
     this.contador = 0;
+
+    this.crear_indicador_de_carga();
 
     this.load.multiatlas("imagenes", "imagenes.json", "./");
 
@@ -66,11 +97,36 @@ class ModoCargador extends Modo {
     }
   }
 
+  notificar_imagenes_cargadas() {
+    let imagenes = [];
+
+    for (let key in this.game.textures.list) {
+      if (key.indexOf("__") === -1 && key) {
+        let contenido = this.game.textures.list[key];
+
+        if (contenido.frameTotal === 1) {
+          imagenes.push(key);
+        } else {
+          let frames = contenido.getFrameNames();
+
+          for (let i = 0; i < frames.length; i++) {
+            imagenes.push(key + ":" + frames[i]);
+          }
+        }
+      }
+    }
+
+    this.pilas.imagenes_precargadas = imagenes;
+  }
+
   create() {
     super.create({ pilas: this.pilas }, 500, 500);
 
+    this.notificar_imagenes_cargadas();
+
     if (this.pilas.opciones.modo_simple) {
       console.log("Finalizó la carga en modo simple");
+
       this.pilas.definir_modo("ModoEjecucion", {
         pilas: this.pilas,
         nombre_de_la_escena_inicial: "principal",
@@ -142,9 +198,14 @@ class ModoCargador extends Modo {
   }
 
   cuando_progresa_la_carga(progreso) {
+    this.barra_de_progreso.clear();
+    this.barra_de_progreso.fillStyle(0xffffff, 1);
+    this.barra_de_progreso.fillRect(this.x + 5, 220 + 5, 300 * progreso, 10);
+
     if (this.pilas.opciones.modo_simple) {
       console.log(`Progreso: ${progreso}`);
     } else {
+      // TODO: eliminar esta señal
       this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
         progreso: Math.ceil(progreso * 100)
       });
