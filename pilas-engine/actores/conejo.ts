@@ -17,11 +17,12 @@ class conejo extends Actor {
   pies = null;
 
   iniciar() {
-    this.crear_animacion(
-      "conejo_parado",
-      ["conejo_parado1", "conejo_parado2"],
-      2
-    );
+    let cuadros_animacion_parado = [
+      "imagenes:conejo_parado_1.png",
+      "imagenes:conejo_parado_2.png"
+    ];
+    this.crear_animacion("conejo_parado", cuadros_animacion_parado, 2);
+
     this.crear_animacion(
       "conejo_camina",
       ["conejo_camina1", "conejo_camina2"],

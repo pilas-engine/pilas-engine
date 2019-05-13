@@ -191,7 +191,7 @@ class ActorBase {
     let galeria = null;
     let imagen = null;
 
-    this._validar_que_existe_imagen(imagen_inicial);
+    this.pilas.utilidades.validar_que_existe_imagen(imagen_inicial);
 
     // Como las imágenes pueden ser cadenas que representen cuadros
     // dentro de un spritesheet (caso "spritesheet:imagen") o el nombre de una
@@ -401,23 +401,11 @@ class ActorBase {
     throw new Error("No puede definir este atributo");
   }
 
-  private _validar_que_existe_imagen(nombre) {
-    if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
-      let sugerencia = this.pilas.utilidades.obtener_mas_similar(
-        nombre,
-        this.pilas.imagenes_precargadas
-      );
-      throw Error(
-        `No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`
-      );
-    }
-  }
-
   set imagen(nombre: string) {
     let galeria = null;
     let imagen = null;
 
-    this._validar_que_existe_imagen(nombre);
+    this.pilas.utilidades.validar_que_existe_imagen(nombre);
 
     if (nombre.indexOf(":") > -1) {
       galeria = nombre.split(":")[0];

@@ -81,7 +81,17 @@ class ModoEditor extends Modo {
   }
 
   crear_sprite_desde_actor(actor) {
-    let sprite = this.add.sprite(0, 0, "imagenes", actor.imagen + ".png");
+    this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+    let sprite = null;
+
+    if (actor.imagen.indexOf(":") > -1) {
+      let g = actor.imagen.split(":")[0];
+      let i = actor.imagen.split(":")[1];
+
+      sprite = this.add.sprite(0, 0, g, i);
+    } else {
+      sprite = this.add.sprite(0, 0, actor.imagen);
+    }
 
     sprite["setInteractive"]();
     sprite["actor"] = actor;

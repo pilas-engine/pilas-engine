@@ -765,6 +765,12 @@ var Utilidades = (function () {
         });
         return similitudes[0].posiblidad;
     };
+    Utilidades.prototype.validar_que_existe_imagen = function (nombre) {
+        if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
+            var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
+            throw Error("No se encuentra la imagen \"" + nombre + "\"\n\u00BFQuisiste decir \"" + sugerencia + "\"?");
+        }
+    };
     return Utilidades;
 }());
 var HOST = "file://";
@@ -1127,7 +1133,7 @@ var ActorBase = (function () {
     ActorBase.prototype.crear_sprite = function (tipo, imagen_inicial) {
         var galeria = null;
         var imagen = null;
-        this._validar_que_existe_imagen(imagen_inicial);
+        this.pilas.utilidades.validar_que_existe_imagen(imagen_inicial);
         if (imagen_inicial.indexOf(":") > -1) {
             galeria = imagen_inicial.split(":")[0];
             imagen = imagen_inicial.split(":")[1];
@@ -1304,7 +1310,7 @@ var ActorBase = (function () {
         set: function (nombre) {
             var galeria = null;
             var imagen = null;
-            this._validar_que_existe_imagen(nombre);
+            this.pilas.utilidades.validar_que_existe_imagen(nombre);
             if (nombre.indexOf(":") > -1) {
                 galeria = nombre.split(":")[0];
                 imagen = nombre.split(":")[1];
@@ -1343,12 +1349,6 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
-    ActorBase.prototype._validar_que_existe_imagen = function (nombre) {
-        if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
-            var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
-            throw Error("No se encuentra la imagen \"" + nombre + "\"\n\u00BFQuisiste decir \"" + sugerencia + "\"?");
-        }
-    };
     Object.defineProperty(ActorBase.prototype, "x", {
         get: function () {
             var x = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
@@ -2010,7 +2010,11 @@ var conejo = (function (_super) {
         return _this;
     }
     conejo.prototype.iniciar = function () {
-        this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
+        var cuadros_animacion_parado = [
+            "imagenes:conejo_parado_1.png",
+            "imagenes:conejo_parado_2.png"
+        ];
+        this.crear_animacion("conejo_parado", cuadros_animacion_parado, 2);
         this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
         this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
         this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
@@ -2605,10 +2609,11 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this._nombre_del_fondo = fondo;
+        this.pilas.utilidades.validar_que_existe_imagen(fondo);
         if (fondo.indexOf(":") > -1) {
-            var galeria = fondo.split(":")[0];
-            var imagen = fondo.split(":")[1];
-            this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, galeria, imagen);
+            var g = fondo.split(":")[0];
+            var i = fondo.split(":")[1];
+            this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, g, i);
         }
         else {
             this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
@@ -2629,8 +2634,15 @@ var Modo = (function (_super) {
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
         var _this = this;
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
-        console.log(actor);
-        sprite.setTexture("imagenes", actor.imagen + ".png");
+        this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+        if (actor.imagen.indexOf(":") > -1) {
+            var g = actor.imagen.split(":")[0];
+            var i = actor.imagen.split(":")[1];
+            sprite.setTexture(g, i);
+        }
+        else {
+            sprite.setTexture(actor.imagen);
+        }
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -2926,7 +2938,16 @@ var ModoEditor = (function (_super) {
     };
     ModoEditor.prototype.crear_sprite_desde_actor = function (actor) {
         var _this = this;
-        var sprite = this.add.sprite(0, 0, "imagenes", actor.imagen + ".png");
+        this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+        var sprite = null;
+        if (actor.imagen.indexOf(":") > -1) {
+            var g = actor.imagen.split(":")[0];
+            var i = actor.imagen.split(":")[1];
+            sprite = this.add.sprite(0, 0, g, i);
+        }
+        else {
+            sprite = this.add.sprite(0, 0, actor.imagen);
+        }
         sprite["setInteractive"]();
         sprite["actor"] = actor;
         sprite["destacandose"] = false;

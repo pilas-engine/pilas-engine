@@ -95,20 +95,14 @@ class Modo extends Phaser.Scene {
 
   crear_fondo(fondo) {
     this._nombre_del_fondo = fondo;
+    this.pilas.utilidades.validar_que_existe_imagen(fondo);
 
     // TODO: reemplazar por una función propia que obtenga la galería
     if (fondo.indexOf(":") > -1) {
-      let galeria = fondo.split(":")[0];
-      let imagen = fondo.split(":")[1];
+      let g = fondo.split(":")[0];
+      let i = fondo.split(":")[1];
 
-      this.fondo = this.add.tileSprite(
-        0,
-        0,
-        this.ancho,
-        this.alto,
-        galeria,
-        imagen
-      );
+      this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, g, i);
     } else {
       this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
     }
@@ -134,8 +128,17 @@ class Modo extends Phaser.Scene {
       actor.x,
       actor.y
     );
-    console.log(actor);
-    sprite.setTexture("imagenes", actor.imagen + ".png");
+
+    this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+
+    if (actor.imagen.indexOf(":") > -1) {
+      let g = actor.imagen.split(":")[0];
+      let i = actor.imagen.split(":")[1];
+
+      sprite.setTexture(g, i);
+    } else {
+      sprite.setTexture(actor.imagen);
+    }
 
     sprite.id = actor.id;
     sprite.x = coordenada.x;

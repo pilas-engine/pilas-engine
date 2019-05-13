@@ -185,6 +185,7 @@ declare class Utilidades {
     obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number): number;
     obtener_similaridad(cadena1: string, cadena2: string): any;
     obtener_mas_similar(nombre: any, posibilidades: any): any;
+    validar_que_existe_imagen(nombre: any): void;
 }
 declare var NineSlice: any;
 declare var HOST: string;
@@ -354,7 +355,6 @@ declare class ActorBase {
     imagen: string;
     nombre: any;
     id: any;
-    private _validar_que_existe_imagen;
     x: number;
     y: number;
     z: number;

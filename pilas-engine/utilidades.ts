@@ -172,4 +172,16 @@ class Utilidades {
 
     return similitudes[0].posiblidad;
   }
+
+  validar_que_existe_imagen(nombre) {
+    if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
+      let sugerencia = this.pilas.utilidades.obtener_mas_similar(
+        nombre,
+        this.pilas.imagenes_precargadas
+      );
+      throw Error(
+        `No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`
+      );
+    }
+  }
 }
