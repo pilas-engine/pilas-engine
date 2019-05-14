@@ -263,7 +263,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/conejo/camina1.png</key>
+            <key type="filename">imagenes/conejo/conejo_camina1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -276,7 +276,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/conejo/camina2.png</key>
+            <key type="filename">imagenes/conejo/conejo_camina2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -289,7 +289,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/conejo/muere.png</key>
+            <key type="filename">imagenes/conejo/conejo_muere.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -302,8 +302,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/conejo/parado1.png</key>
-            <key type="filename">imagenes/conejo/parado2.png</key>
+            <key type="filename">imagenes/conejo/conejo_parado1.png</key>
+            <key type="filename">imagenes/conejo/conejo_parado2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -316,7 +316,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/conejo/salta.png</key>
+            <key type="filename">imagenes/conejo/conejo_salta.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -511,7 +511,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/interfaz/deslizador.png</key>
+            <key type="filename">imagenes/interfaz/interfaz_deslizador.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -524,7 +524,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/interfaz/linea.png</key>
+            <key type="filename">imagenes/interfaz/interfaz_linea.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -537,7 +537,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/interfaz/punto.png</key>
+            <key type="filename">imagenes/interfaz/interfaz_punto.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
