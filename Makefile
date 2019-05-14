@@ -47,6 +47,7 @@ comandos:
 	@echo "    ${G}prettier${N}                     Corrige el formato y la sintaxis de todos los archivos."
 	@echo "    ${G}actualizar_typescript${N}        Actualiza typescript a una versión más reciente."
 	@echo "    ${G}actualizar_actores${N}           Actualiza el listado de actores implementados."
+	@echo "    ${G}actualizar_actores_live${N}      Actualiza el listado de actores en modo continuo."
 	@echo "    ${G}actualizar_definiciones${N}      Actualiza las definiciones de typescript para phaser."
 	@echo "    ${G}actualizar_jsbeautify${N}        Actualiza jsbeautify a una versión más reciente."
 	@echo ""
@@ -94,6 +95,9 @@ ejecutar: serve
 
 actualizar_actores:
 	yarn actualizar_actores
+
+actualizar_actores_live:
+	yarn actualizar_actores_live
 
 prettier:
 	${BIN_PRETTIER} --write 'app/**/*.js'

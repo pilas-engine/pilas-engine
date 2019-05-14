@@ -18,7 +18,8 @@
     "test": "ember test",
     "compilar_pilas": "tsc -p pilas-engine --pretty -d",
     "compilar_pilas_live": "tsc -p pilas-engine --watch --pretty -d",
-    "actualizar_actores": "node scripts/actualizar-actores.js"
+    "actualizar_actores": "node scripts/actualizar-actores.js",
+    "actualizar_actores_live": "node scripts/actualizar-actores-live.js"
   },
   "main": "electron.js",
   "devDependencies": {
