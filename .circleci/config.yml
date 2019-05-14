@@ -51,7 +51,7 @@ jobs:
             command: make deploy_a_dokku
   actualizar-sitio-dev:
     docker:
-      - image: circleci/node:8.9.4-stretch-browsers
+      - image: circleci/node:8.16.0-stretch-browsers
     steps:
         - checkout
         - run: make iniciar
