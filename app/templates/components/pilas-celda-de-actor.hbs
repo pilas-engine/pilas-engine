@@ -1,6 +1,6 @@
 <div test-celda-actor
   class="
-    w4 h4 dib
+    celda-actor dib
     ba pa2 button
     br2
     verdana f6 link pointer
@@ -18,9 +18,8 @@
 
     {{yield}}
 
-    <div class="flex1 tc w-100 h3">
-      <div class="sprite actor_{{actor.nombre}} mw-100 mh-100"></div>
-      <img class="mw-100 mh-100" src="{{rootURL}}imagenes/{{actor.nombre}}.png" alt="">
+    <div class="flex1 tc w-100 h2">
+      <div class="sprite grilla_actor_{{actor.nombre}} mw-100 mh-100"></div>
     </div>
 
     <div class="f6 tc mt2 h1 texto">

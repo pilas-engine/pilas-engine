@@ -438,3 +438,8 @@ span {
 .theme-claro .spinner-color {
   fill: black;
 }
+
+.celda-actor {
+  width: 130px;
+  height: 100px;
+}
