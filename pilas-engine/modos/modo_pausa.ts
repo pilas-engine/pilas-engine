@@ -122,11 +122,26 @@ class ModoPausa extends Modo {
   }
 
   crear_sprite_desde_entidad(entidad) {
+    let nombre = entidad.imagen;
+    let sprite = null;
     let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
       entidad.x,
       entidad.y
     );
-    let sprite = this.add.sprite(x, y, entidad.imagen);
+
+    if (nombre.indexOf(":") > -1) {
+      galeria = nombre.split(":")[0];
+      imagen = nombre.split(":")[1];
+    } else {
+      galeria = null;
+      imagen = nombre;
+    }
+
+    if (galeria) {
+      sprite = this.add.sprite(x, y, galeria, imagen);
+    } else {
+      sprite = this.add.sprite(x, y, imagen);
+    }
 
     sprite.angle = -entidad.rotacion;
     sprite.setOrigin(entidad.centro_x, entidad.centro_y);

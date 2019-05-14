@@ -1,7 +1,7 @@
 class pared extends Actor {
   propiedades = {
     figura: "rectangulo",
-    imagen: "pared",
+    imagen: "imagenes:pared.png",
     y: 0,
     figura_ancho: 20,
     figura_alto: 600,

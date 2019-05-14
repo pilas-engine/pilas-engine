@@ -23,13 +23,13 @@
       "id": 2,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "plano",
+      "fondo": "imagenes:fondo-plano.png",
       "actores": [
         {
           "x": 0,
           "y": 0,
           "z": 0,
-          "imagen": "carta",
+          "imagen": "imagenes:carta.png",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

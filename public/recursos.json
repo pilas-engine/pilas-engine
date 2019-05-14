@@ -9,7 +9,7 @@
       "ruta": "imagenes/invisible.png"
     },
     {
-      "nombre": "fondo_cielo_1",
+      "nombre": "imagenes:fondo-cielo.png",
       "ruta": "imagenes/fondos/cielo.png"
     },
     {
@@ -169,7 +169,7 @@
       "ruta": "imagenes/fondos/verde.png"
     },
     {
-      "nombre": "espacio_1",
+      "nombre": "imagenes:fondo-espacio_1.png",
       "ruta": "imagenes/fondos/espacio_1.png"
     },
     {

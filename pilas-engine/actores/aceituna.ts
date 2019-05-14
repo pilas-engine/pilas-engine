@@ -1,9 +1,9 @@
 class aceituna extends Actor {
   propiedades = {
-    imagen: "aceituna"
+    imagen: "imagenes:aceituna.png"
   };
 
   iniciar() {
-    this.imagen = "aceituna";
+    this.imagen = "imagenes:aceituna.png";
   }
 }

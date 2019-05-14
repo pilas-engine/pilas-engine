@@ -2,7 +2,7 @@ class gallina extends Actor {
   propiedades = {
     x: 0,
     y: 0,
-    imagen: "gallina_vuela_3",
+    imagen: "imagenes:gallina_vuela_3.png",
 
     figura: "circulo",
     figura_radio: 30,
@@ -15,16 +15,20 @@ class gallina extends Actor {
     this.crear_animacion(
       "gallina_vuela",
       [
-        "gallina_vuela_1",
-        "gallina_vuela_1",
-        "gallina_vuela_2",
-        "gallina_vuela_3",
-        "gallina_vuela_2"
+        "imagenes:gallina_vuela_1.png",
+        "imagenes:gallina_vuela_1.png",
+        "imagenes:gallina_vuela_2.png",
+        "imagenes:gallina_vuela_3.png",
+        "imagenes:gallina_vuela_2.png"
       ],
       15
     );
-    this.crear_animacion("gallina_muere", ["gallina_muere"], 20);
-    this.crear_animacion("gallina_sin_piel", ["gallina_sin_piel"], 20);
+    this.crear_animacion("gallina_muere", ["imagenes:gallina_muere.png"], 20);
+    this.crear_animacion(
+      "gallina_sin_piel",
+      ["imagenes:gallina_sin_piel.png"],
+      20
+    );
 
     this.estado = "vuela";
   }

@@ -18,10 +18,6 @@ export default {
     ],
     actores: [
       {
-        nombre: "conejo",
-        codigo: `class conejo extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: "conejo_parado1",\n\n        figura: "rectangulo",\n        figura_ancho: 50,\n        figura_alto: 100,\n        figura_radio: 50,\n        figura_sin_rotacion: true,\n        figura_dinamica: true,\n        figura_rebote: 0\n    };\n\n    toca_el_suelo = false;\n    pies = null;\n\n    iniciar() {\n        this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);\n        this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);\n        this.crear_animacion("conejo_salta", ["conejo_salta"], 20);\n        this.crear_animacion("conejo_muere", ["conejo_muere"], 1);\n\n        this.estado = "parado";\n        this.pies = this.agregar_sensor(50, 10, 0, -50);\n    }\n\n    actualizar() {\n        if (this.pies.colisiones.length > 0) {\n            this.toca_el_suelo = true;\n        } else {\n            this.toca_el_suelo = false;\n        }\n    }\n\n    parado_iniciar() {\n        this.reproducir_animacion("conejo_parado");\n    }\n\n    parado_actualizar() {\n        if (this.pilas.control.izquierda || this.pilas.control.derecha) {\n            this.estado = "camina";\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = "salta";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = "salta";\n        }\n    }\n\n    camina_iniciar() {\n        this.reproducir_animacion("conejo_camina");\n    }\n\n    camina_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n            this.espejado = true;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n            this.espejado = false;\n        }\n\n        if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {\n            this.estado = "parado";\n            return;\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = "salta";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = "salta";\n        }\n    }\n\n    salta_iniciar() {\n        this.reproducir_animacion("conejo_salta");\n    }\n\n    salta_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n        }\n\n        if (this.toca_el_suelo) {\n            this.estado = "parado";\n        }\n    }\n\n    cuando_comienza_una_colision(actor) {\n        if (actor.etiqueta === "moneda") {\n            this.pilas.reproducir_sonido("moneda");\n            actor.eliminar();\n        }\n    }\n\n    cuando_se_mantiene_una_colision(actor) {}\n\n    cuando_termina_una_colision(actor) {}\n}`
-      },
-      {
         nombre: "plataforma",
         codigo:
           'class plataforma extends Actor {\n    propiedades = {\n        figura: "rectangulo",\n        imagen: "plataforma",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}'
@@ -58,32 +54,6 @@ export default {
       gravedad_y: 1,
       fondo: "imagenes:fondo-plano.png",
       actores: [
-        {
-          x: 0,
-          y: 0,
-          z: 0,
-          habilidades: [],
-          imagen: "imagenes:parado1.png",
-          centro_x: 0.5,
-          centro_y: 0.5,
-          rotacion: 0,
-          escala_x: 1,
-          escala_y: 1,
-          transparencia: 0,
-          etiqueta: "actor",
-          espejado: false,
-          espejado_vertical: false,
-          figura: "rectangulo",
-          figura_dinamica: true,
-          figura_ancho: 50,
-          figura_alto: 100,
-          figura_radio: 50,
-          figura_sin_rotacion: true,
-          figura_rebote: 0,
-          figura_sensor: false,
-          id: 1143,
-          nombre: "conejo"
-        },
         {
           x: 0,
           y: -90,

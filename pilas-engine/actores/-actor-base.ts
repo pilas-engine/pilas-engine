@@ -58,7 +58,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "sin_imagen.png",
+    imagen: "imagenes:sin_imagen.png",
     figura: ""
   };
 

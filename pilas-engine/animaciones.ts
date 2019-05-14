@@ -17,9 +17,10 @@ class Animaciones {
     if (!this.animaciones[nombre]) {
       let frames = cuadros.map(cuadro => {
         if (this.pilas.imagenes_precargadas.indexOf(cuadro) === -1) {
-          throw Error(
-            `No se puede crear la animcación "${nombre_de_la_animacion}"\nEl cuadro ${cuadro} no existe.`
-          );
+          let titulo = `No se puede crear la animación "${nombre_de_la_animacion}"`;
+          let detalle = `El cuadro ${cuadro} no existe.`;
+
+          throw Error(`${titulo}\n${detalle}`);
         }
 
         if (cuadro.indexOf(":") > -1) {

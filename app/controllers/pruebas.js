@@ -28,7 +28,12 @@ export default Controller.extend({
                 });
                 */
 
-                let a = this.pilas.actores.nave();
+                this.pilas.actores.conejo();
+
+                let p = this.pilas.actores.plataforma();
+                p.y = -200;
+
+                //let a = this.pilas.actores.nave();
 
                 //console.log(this.pilas.listar_imagenes())
 
