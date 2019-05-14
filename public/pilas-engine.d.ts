@@ -115,6 +115,18 @@ declare class Arrastrable extends Habilidad {
     iniciar(): void;
     actualizar(): void;
 }
+declare class MoverConElTeclado extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class SeguirAlMouse extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class SeguirAlMouseLentamente extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class Habilidades {
     pilas: Pilas;
     _habilidades: any[];
@@ -466,6 +478,7 @@ declare class conejo extends Actor {
     toca_el_suelo: boolean;
     pies: any;
     iniciar(): void;
+    crear_animaciones(): void;
     actualizar(): void;
     parado_iniciar(): void;
     parado_actualizar(): void;
@@ -703,9 +716,12 @@ declare class ModoEditor extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
+    private conectar_movimiento_del_mouse;
     crear_manejadores_para_hacer_arrastrables_los_actores(): void;
     crear_actores_desde_los_datos_de_la_escena(escena: any): void;
     crear_sprite_desde_actor(actor: any): void;
+    private crear_destello;
+    private copiar_atributos_excepto_alpha;
     aplicar_atributos_de_actor_a_sprite(actor: any, sprite: any): void;
     update(): void;
     eliminar_actor_por_id(id: any): void;
@@ -762,7 +778,7 @@ declare class ModoPausa extends Modo {
     create(datos: any): void;
     private crear_sprites_desde_historia;
     update(): void;
-    crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
+    crear_sprite_desde_entidad(entidad: any): any;
     actualizar_posicion(posicion: any): void;
     avanzar_posicion(): void;
     retroceder_posicion(): void;

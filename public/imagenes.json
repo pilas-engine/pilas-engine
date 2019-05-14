@@ -262,7 +262,7 @@
 					}
 				},
 				{
-					"filename": "linea.png",
+					"filename": "interfaz_linea.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -472,7 +472,7 @@
 					}
 				},
 				{
-					"filename": "muere.png",
+					"filename": "conejo_muere.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -493,7 +493,7 @@
 					}
 				},
 				{
-					"filename": "salta.png",
+					"filename": "conejo_salta.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -514,7 +514,7 @@
 					}
 				},
 				{
-					"filename": "camina1.png",
+					"filename": "conejo_camina1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -535,7 +535,7 @@
 					}
 				},
 				{
-					"filename": "camina2.png",
+					"filename": "conejo_camina2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -661,7 +661,7 @@
 					}
 				},
 				{
-					"filename": "parado2.png",
+					"filename": "conejo_parado2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -724,7 +724,7 @@
 					}
 				},
 				{
-					"filename": "parado1.png",
+					"filename": "conejo_parado1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -997,7 +997,7 @@
 					}
 				},
 				{
-					"filename": "deslizador.png",
+					"filename": "interfaz_deslizador.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1375,7 +1375,7 @@
 					}
 				},
 				{
-					"filename": "punto.png",
+					"filename": "interfaz_punto.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1443,6 +1443,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:783b06c011062715df255218fcfa6831:4a66f7a9d7d6f9da3248b73c9c2e9b0d:090f076f11af587180320e0b2e5117de$"
+		"smartupdate": "$TexturePacker:SmartUpdate:740ae902f95f9badd3839fab6bc8e6b6:a6390a9455c3bdd4e81a48a8818b84e5:090f076f11af587180320e0b2e5117de$"
 	}
 }

@@ -90,7 +90,9 @@ var Animaciones = (function () {
         if (!this.animaciones[nombre]) {
             var frames_1 = cuadros.map(function (cuadro) {
                 if (_this.pilas.imagenes_precargadas.indexOf(cuadro) === -1) {
-                    throw Error("No se puede crear la animcaci\u00F3n \"" + nombre_de_la_animacion + "\"\nEl cuadro " + cuadro + " no existe.");
+                    var titulo = "No se puede crear la animaci\u00F3n \"" + nombre_de_la_animacion + "\"";
+                    var detalle = "El cuadro " + cuadro + " no existe.";
+                    throw Error(titulo + "\n" + detalle);
                 }
                 if (cuadro.indexOf(":") > -1) {
                     return {
@@ -453,12 +455,64 @@ var Arrastrable = (function (_super) {
     Arrastrable.prototype.actualizar = function () { };
     return Arrastrable;
 }(Habilidad));
+var MoverConElTeclado = (function (_super) {
+    __extends(MoverConElTeclado, _super);
+    function MoverConElTeclado() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MoverConElTeclado.prototype.iniciar = function () { };
+    MoverConElTeclado.prototype.actualizar = function () {
+        var velocidad = 5;
+        if (this.pilas.control.izquierda) {
+            this.actor.x -= velocidad;
+        }
+        if (this.pilas.control.derecha) {
+            this.actor.x += velocidad;
+        }
+        if (this.pilas.control.arriba) {
+            this.actor.y += velocidad;
+        }
+        if (this.pilas.control.abajo) {
+            this.actor.y -= velocidad;
+        }
+    };
+    return MoverConElTeclado;
+}(Habilidad));
+var SeguirAlMouse = (function (_super) {
+    __extends(SeguirAlMouse, _super);
+    function SeguirAlMouse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    SeguirAlMouse.prototype.iniciar = function () { };
+    SeguirAlMouse.prototype.actualizar = function () {
+        this.actor.x = this.pilas.cursor_x;
+        this.actor.y = this.pilas.cursor_y;
+    };
+    return SeguirAlMouse;
+}(Habilidad));
+var SeguirAlMouseLentamente = (function (_super) {
+    __extends(SeguirAlMouseLentamente, _super);
+    function SeguirAlMouseLentamente() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    SeguirAlMouseLentamente.prototype.iniciar = function () { };
+    SeguirAlMouseLentamente.prototype.actualizar = function () {
+        var destino_x = this.pilas.cursor_x;
+        var destino_y = this.pilas.cursor_y;
+        this.actor.x += (destino_x - this.actor.x) / 10;
+        this.actor.y += (destino_y - this.actor.y) / 10;
+    };
+    return SeguirAlMouseLentamente;
+}(Habilidad));
 var Habilidades = (function () {
     function Habilidades(pilas) {
         this.pilas = pilas;
         this._habilidades = [];
         this.vincular("rotar constantemente", RotarConstantemente);
         this.vincular("arrastrable", Arrastrable);
+        this.vincular("mover con el teclado", MoverConElTeclado);
+        this.vincular("seguir al mouse", SeguirAlMouse);
+        this.vincular("seguir al mouse lentamente", SeguirAlMouseLentamente);
     }
     Habilidades.prototype.buscar = function (habilidad) {
         var lista = this.generar_lista_de_similitudes(habilidad);
@@ -1033,7 +1087,7 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "sin_imagen.png",
+            imagen: "imagenes:sin_imagen.png",
             figura: ""
         };
         this.pilas = pilas;
@@ -1834,7 +1888,7 @@ var ActorTextoBase = (function (_super) {
     function ActorTextoBase() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "invisible",
+            imagen: "imagenes:invisible.png",
             texto: "Hola mundo",
             es_texto: true
         };
@@ -1950,12 +2004,12 @@ var aceituna = (function (_super) {
     function aceituna() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "aceituna"
+            imagen: "imagenes:aceituna.png"
         };
         return _this;
     }
     aceituna.prototype.iniciar = function () {
-        this.imagen = "aceituna";
+        this.imagen = "imagenes:aceituna.png";
     };
     return aceituna;
 }(Actor));
@@ -1977,7 +2031,7 @@ var caja = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "caja",
+            imagen: "imagenes:caja.png",
             etiqueta: "caja",
             figura: "rectangulo",
             figura_ancho: 45,
@@ -1996,7 +2050,7 @@ var conejo = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "conejo_parado1",
+            imagen: "imagenes:conejo_parado1.png",
             figura: "rectangulo",
             figura_ancho: 50,
             figura_alto: 100,
@@ -2010,16 +2064,15 @@ var conejo = (function (_super) {
         return _this;
     }
     conejo.prototype.iniciar = function () {
-        var cuadros_animacion_parado = [
-            "imagenes:conejo_parado_1.png",
-            "imagenes:conejo_parado_2.png"
-        ];
-        this.crear_animacion("conejo_parado", cuadros_animacion_parado, 2);
-        this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
-        this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
-        this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
+        this.crear_animaciones();
         this.estado = "parado";
         this.pies = this.agregar_sensor(50, 10, 0, -50);
+    };
+    conejo.prototype.crear_animaciones = function () {
+        this.crear_animacion("conejo_parado", ["imagenes:conejo_parado1.png", "imagenes:conejo_parado2.png"], 2);
+        this.crear_animacion("conejo_camina", ["imagenes:conejo_camina1.png", "imagenes:conejo_camina2.png"], 20);
+        this.crear_animacion("conejo_salta", ["imagenes:conejo_salta.png"], 20);
+        this.crear_animacion("conejo_muere", ["imagenes:conejo_muere.png"], 1);
     };
     conejo.prototype.actualizar = function () {
         if (this.pies.colisiones.length > 0) {
@@ -2104,7 +2157,7 @@ var deslizador = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "interfaz/linea",
+            imagen: "imagenes:interfaz_linea.png",
             etiqueta: "deslizador",
             figura: ""
         };
@@ -2112,7 +2165,7 @@ var deslizador = (function (_super) {
         return _this;
     }
     deslizador.prototype.iniciar = function () {
-        this.imagen = "interfaz/linea";
+        this.imagen = "imagenes:interfaz_linea.png";
         this.esta_arrastrando_el_deslizador = false;
         this.crear_marca();
         this.conectar_eventos();
@@ -2128,7 +2181,7 @@ var deslizador = (function (_super) {
     };
     deslizador.prototype.crear_marca = function () {
         this.marca = this.pilas.actores.actor();
-        this.marca.imagen = "interfaz/deslizador";
+        this.marca.imagen = "imagenes:interfaz_deslizador.png";
         this.marca.interactivo = false;
     };
     deslizador.prototype.cuando_hace_click = function (x, y) {
@@ -2162,7 +2215,7 @@ var gallina = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "gallina_vuela_3",
+            imagen: "imagenes:gallina_vuela_3.png",
             figura: "circulo",
             figura_radio: 30,
             figura_sin_rotacion: true,
@@ -2173,14 +2226,14 @@ var gallina = (function (_super) {
     }
     gallina.prototype.iniciar = function () {
         this.crear_animacion("gallina_vuela", [
-            "gallina_vuela_1",
-            "gallina_vuela_1",
-            "gallina_vuela_2",
-            "gallina_vuela_3",
-            "gallina_vuela_2"
+            "imagenes:gallina_vuela_1.png",
+            "imagenes:gallina_vuela_1.png",
+            "imagenes:gallina_vuela_2.png",
+            "imagenes:gallina_vuela_3.png",
+            "imagenes:gallina_vuela_2.png"
         ], 15);
-        this.crear_animacion("gallina_muere", ["gallina_muere"], 20);
-        this.crear_animacion("gallina_sin_piel", ["gallina_sin_piel"], 20);
+        this.crear_animacion("gallina_muere", ["imagenes:gallina_muere.png"], 20);
+        this.crear_animacion("gallina_sin_piel", ["imagenes:gallina_sin_piel.png"], 20);
         this.estado = "vuela";
     };
     gallina.prototype.actualizar = function () { };
@@ -2218,7 +2271,7 @@ var logo = (function (_super) {
     function logo() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "logo"
+            imagen: "imagenes:logo.png"
         };
         return _this;
     }
@@ -2230,7 +2283,7 @@ var moneda = (function (_super) {
     function moneda() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "moneda",
+            imagen: "imagenes:moneda.png",
             etiqueta: "moneda",
             figura: "circulo",
             figura_radio: 10,
@@ -2298,7 +2351,7 @@ var nube = (function (_super) {
     function nube() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "nube"
+            imagen: "imagenes:nube.png"
         };
         return _this;
     }
@@ -2311,7 +2364,7 @@ var pared = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "pared",
+            imagen: "imagenes:pared.png",
             y: 0,
             figura_ancho: 20,
             figura_alto: 600,
@@ -2378,7 +2431,7 @@ var techo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "techo",
+            imagen: "imagenes:techo.png",
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false
@@ -2393,7 +2446,7 @@ var texto = (function (_super) {
     function texto() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "invisible",
+            imagen: "imagenes:invisible.png",
             texto: "Hola mundo",
             es_texto: true
         };
@@ -2887,7 +2940,6 @@ var ModoEditor = (function (_super) {
     }
     ModoEditor.prototype.preload = function () { };
     ModoEditor.prototype.create = function (datos) {
-        var _this = this;
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.pilas = datos.pilas;
@@ -2896,6 +2948,10 @@ var ModoEditor = (function (_super) {
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
         this.matter.world.createDebugGraphic();
+        this.conectar_movimiento_del_mouse();
+    };
+    ModoEditor.prototype.conectar_movimiento_del_mouse = function () {
+        var _this = this;
         this.input.on("pointermove", function (cursor) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.pilas.cursor_x = Math.trunc(posicion.x);
@@ -2908,10 +2964,10 @@ var ModoEditor = (function (_super) {
         this.input.on("dragstart", function (pointer, gameObject) {
             escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
             if (escena.pilas.utilidades.es_firefox()) {
-                escena.pilas.game.canvas.style.cursor = "grabbing";
+                escena.input.setDefaultCursor("grabbing");
             }
             else {
-                escena.pilas.game.canvas.style.cursor = "-webkit-grabbing";
+                escena.input.setDefaultCursor("-webkit-grabbing");
             }
         });
         this.input.on("drag", function (pointer, gameObject, dragX, dragY) {
@@ -2925,7 +2981,7 @@ var ModoEditor = (function (_super) {
             }
         });
         this.input.on("dragend", function (pointer, gameObject) {
-            escena.pilas.game.canvas.style.cursor = "default";
+            escena.input.setDefaultCursor("default");
             var posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
             escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
         });
@@ -2952,26 +3008,55 @@ var ModoEditor = (function (_super) {
         sprite["actor"] = actor;
         sprite["destacandose"] = false;
         sprite["destacar"] = function () {
-            if (sprite["destacandose"]) {
-                return;
-            }
             sprite["destacandose"] = true;
-            _this.tweens.add({
-                targets: sprite,
-                scaleX: sprite.scaleX + 0.1,
-                scaleY: sprite.scaleY + 0.1,
-                duration: 100,
-                ease: "Power2",
-                yoyo: true,
-                delay: 0,
-                onComplete: function () {
-                    sprite["destacandose"] = false;
-                }
+            _this.crear_destello(sprite, actor.imagen, function () {
+                sprite["destacandose"] = false;
             });
         };
         this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
         this.input.setDraggable(sprite, undefined);
         this.actores.push(sprite);
+    };
+    ModoEditor.prototype.crear_destello = function (sprite, imagen, cuando_termina) {
+        var _this = this;
+        var sprite2;
+        if (imagen.indexOf(":") > -1) {
+            var g = imagen.split(":")[0];
+            var i = imagen.split(":")[1];
+            sprite2 = this.add.sprite(0, 0, g, i);
+        }
+        else {
+            sprite2 = this.add.sprite(0, 0, imagen);
+        }
+        this.copiar_atributos_excepto_alpha(sprite, sprite2);
+        sprite2.setTintFill(0xffffff);
+        sprite2.setAlpha(0.4);
+        this.tweens.add({
+            targets: sprite2,
+            alpha: 0.7,
+            duration: 100,
+            ease: "Power2",
+            yoyo: true,
+            delay: 0,
+            onUpdate: function () {
+                _this.copiar_atributos_excepto_alpha(sprite, sprite2);
+            },
+            onComplete: function () {
+                sprite2.destroy();
+                cuando_termina();
+            }
+        });
+    };
+    ModoEditor.prototype.copiar_atributos_excepto_alpha = function (origen, destino) {
+        destino.x = origen.x;
+        destino.y = origen.y;
+        destino.angle = origen.angle;
+        destino.scaleX = origen.scaleX;
+        destino.scaleY = origen.scaleY;
+        destino.flipX = origen.flipX;
+        destino.flipY = origen.flipY;
+        destino.depth = origen.depth;
+        destino.setOrigin(origen.originX, origen.originY);
     };
     ModoEditor.prototype.aplicar_atributos_de_actor_a_sprite = function (actor, sprite) {
         this.actualizar_sprite_desde_datos(sprite, actor);
@@ -3248,7 +3333,12 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.instanciar_escena = function (nombre) {
         var escena = this.obtener_escena_por_nombre(nombre);
-        this.crear_fondo(escena.fondo);
+        if (escena.fondo) {
+            this.crear_fondo(escena.fondo);
+        }
+        else {
+            console.warn("Cuidado, la escena no tiene un fondo definido");
+        }
         this.crear_escena(escena);
     };
     ModoEjecucion.prototype.crear_escena = function (datos_de_la_escena) {
@@ -3445,8 +3535,23 @@ var ModoPausa = (function (_super) {
         this.posicionar_fondo();
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
+        var nombre = entidad.imagen;
+        var sprite = null;
         var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
-        var sprite = this.add.sprite(x, y, entidad.imagen);
+        if (nombre.indexOf(":") > -1) {
+            galeria = nombre.split(":")[0];
+            imagen = nombre.split(":")[1];
+        }
+        else {
+            galeria = null;
+            imagen = nombre;
+        }
+        if (galeria) {
+            sprite = this.add.sprite(x, y, galeria, imagen);
+        }
+        else {
+            sprite = this.add.sprite(x, y, imagen);
+        }
         sprite.angle = -entidad.rotacion;
         sprite.setOrigin(entidad.centro_x, entidad.centro_y);
         sprite.scaleX = entidad.escala_x;
