@@ -30,7 +30,7 @@ module("Integration | Component | pilas ejemplo", function(hooks) {
         id: 2,
         camara_x: 0,
         camara_y: 0,
-        fondo: "fondo_cielo_1",
+        fondo: "imagenes:fondo-cielo.png",
         actores: [
           {
             x: -30.785562632696383,
