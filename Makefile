@@ -277,7 +277,7 @@ actualizar_typescript:
 	@echo "${Y}${N}"
 
 actualizar_definiciones:
-	@wget https://raw.githubusercontent.com/photonstorm/phaser3-docs/master/typescript/phaser.d.ts -O pilas-engine/declaraciones/phaser.d.ts
+	@wget https://raw.githubusercontent.com/photonstorm/phaser/master/types/phaser.d.ts -O pilas-engine/declaraciones/phaser.d.ts
 
 actualizar_jsbeautify:
 	@echo "${Y}Para actualizar jsbeautify, hay que seguir estos pasos:${N}"

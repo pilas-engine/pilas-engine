@@ -78,7 +78,7 @@
   "dependencies": {
     "electron-rebuild": "^1.8.4",
     "js-beautify": "^1.9.1",
-    "phaser": "3.16.2",
+    "phaser": "3.17.0",
     "typescript": "3.4.3"
   }
 }
