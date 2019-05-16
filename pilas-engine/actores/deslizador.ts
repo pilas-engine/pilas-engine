@@ -2,7 +2,7 @@ class deslizador extends Actor {
   propiedades = {
     x: 0,
     y: 0,
-    imagen: "interfaz/linea",
+    imagen: "imagenes:interfaz_linea.png",
     etiqueta: "deslizador",
     figura: ""
   };
@@ -12,7 +12,7 @@ class deslizador extends Actor {
   esta_arrastrando_el_deslizador;
 
   iniciar() {
-    this.imagen = "interfaz/linea";
+    this.imagen = "imagenes:interfaz_linea.png";
     this.esta_arrastrando_el_deslizador = false;
     this.crear_marca();
     this.conectar_eventos();
@@ -30,7 +30,7 @@ class deslizador extends Actor {
 
   crear_marca() {
     this.marca = this.pilas.actores.actor();
-    this.marca.imagen = "interfaz/deslizador";
+    this.marca.imagen = "imagenes:interfaz_deslizador.png";
 
     // Hacer que la marca del deslizador ignore clicks.
     this.marca.interactivo = false;
@@ -47,7 +47,7 @@ class deslizador extends Actor {
     }
   }
 
-  private cuando_termina_de_hacer_click() {
+  cuando_termina_de_hacer_click() {
     this.esta_arrastrando_el_deslizador = false;
   }
 

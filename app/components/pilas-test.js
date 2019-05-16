@@ -38,7 +38,8 @@ export default Component.extend({
           id: 1,
           camara_x: 0,
           camara_y: 0,
-          actores: []
+          actores: [],
+          fondo: "imagenes:fondo-plano.png"
         }
       ]
     });

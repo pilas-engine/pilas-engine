@@ -2,7 +2,7 @@ class caja extends Actor {
   propiedades = {
     x: 0,
     y: 0,
-    imagen: "caja",
+    imagen: "imagenes:caja.png",
     etiqueta: "caja",
     figura: "rectangulo",
     figura_ancho: 45,

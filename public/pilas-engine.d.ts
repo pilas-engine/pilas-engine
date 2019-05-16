@@ -24,6 +24,7 @@ declare class Animaciones {
     animaciones: {};
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number): void;
+    existe_animacion(actor: any, nombre: any): boolean;
 }
 declare class Automata {
     actor: Actor;
@@ -114,6 +115,18 @@ declare class Arrastrable extends Habilidad {
     iniciar(): void;
     actualizar(): void;
 }
+declare class MoverConElTeclado extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class SeguirAlMouse extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class SeguirAlMouseLentamente extends Habilidad {
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class Habilidades {
     pilas: Pilas;
     _habilidades: any[];
@@ -183,6 +196,8 @@ declare class Utilidades {
     combinar_propiedades(propiedades_iniciales: any, propiedades: any): any;
     obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number): number;
     obtener_similaridad(cadena1: string, cadena2: string): any;
+    obtener_mas_similar(nombre: any, posibilidades: any): any;
+    validar_que_existe_imagen(nombre: any): void;
 }
 declare var NineSlice: any;
 declare var HOST: string;
@@ -207,11 +222,13 @@ declare class Pilas {
     cursor_x: number;
     cursor_y: number;
     opciones: any;
+    imagenes_precargadas: string[];
     constructor();
     escena: EscenaBase;
     control: Control;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
     iniciar(ancho: number, alto: number, recursos: any, opciones?: any): this;
+    listar_imagenes(): string[];
     private iniciar_phaser_desde_configuracion_y_cargar_escenas;
     ejecutar(): void;
     definir_modo(nombre: string, datos: any): void;
@@ -256,6 +273,7 @@ declare class Pilas {
     escena_actual(): EscenaBase;
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
+    azar(desde: number, hasta: number): number;
 }
 declare var pilasengine: Pilas;
 declare class ActorBase {
@@ -282,6 +300,7 @@ declare class ActorBase {
     _habilidades: any[];
     _fondo: any;
     _fondo_imagen: string;
+    _dialogo: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -310,6 +329,7 @@ declare class ActorBase {
     constructor(pilas: any);
     readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;
+    private crear_sprite;
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
     interactivo: boolean;
@@ -384,11 +404,13 @@ declare class ActorBase {
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
     cuando_hace_click(x: any, y: any, evento_original: any): void;
+    cuando_termina_de_hacer_click(x: any, y: any, evento_original: any): void;
     cuando_sale(x: any, y: any, evento_original: any): void;
     cuando_mueve(x: any, y: any, evento_original: any): void;
     readonly cantidad_de_colisiones: number;
     agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
     eliminar(): void;
+    esta_vivo(): boolean;
     figura_ancho: number;
     figura_alto: number;
     figura_radio: number;
@@ -460,6 +482,7 @@ declare class conejo extends Actor {
     toca_el_suelo: boolean;
     pies: any;
     iniciar(): void;
+    crear_animaciones(): void;
     actualizar(): void;
     parado_iniciar(): void;
     parado_actualizar(): void;
@@ -487,7 +510,7 @@ declare class deslizador extends Actor {
     crear_marca(): void;
     cuando_hace_click(x: any, y: any): void;
     private cuando_mueve_el_mouse;
-    private cuando_termina_de_hacer_click;
+    cuando_termina_de_hacer_click(): void;
     actualizar(): void;
     private ajustar_marca;
 }
@@ -539,6 +562,7 @@ declare class nave extends Actor {
     velocidad: number;
     cuadros_desde_el_ultimo_disparo: any;
     iniciar(): void;
+    crear_animaciones(): void;
     actualizar(): void;
 }
 declare class nube extends Actor {
@@ -671,6 +695,7 @@ declare class Modo extends Phaser.Scene {
     cambiar_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
+    obtener_imagen_para_nineslice(imagen: any): any;
     copiar_valores_de_sprite_a_texto(sprite: any): void;
     crear_figura_estatica_para(actor: any): MatterJS.Body;
     posicionar_la_camara(datos_de_la_escena: any): void;
@@ -680,10 +705,14 @@ declare class Modo extends Phaser.Scene {
 declare class ModoCargador extends Modo {
     pilas: Pilas;
     contador: number;
+    barra_de_progreso: any;
+    x: number;
     constructor();
     init(data: any): void;
+    private crear_indicador_de_carga;
     preload(): void;
     update(): void;
+    notificar_imagenes_cargadas(): void;
     create(): void;
     cuando_progresa_la_carga(progreso: any): void;
 }
@@ -692,9 +721,12 @@ declare class ModoEditor extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
+    private conectar_movimiento_del_mouse;
     crear_manejadores_para_hacer_arrastrables_los_actores(): void;
     crear_actores_desde_los_datos_de_la_escena(escena: any): void;
     crear_sprite_desde_actor(actor: any): void;
+    private crear_destello;
+    private copiar_atributos_excepto_alpha;
     aplicar_atributos_de_actor_a_sprite(actor: any, sprite: any): void;
     update(): void;
     eliminar_actor_por_id(id: any): void;
@@ -751,7 +783,7 @@ declare class ModoPausa extends Modo {
     create(datos: any): void;
     private crear_sprites_desde_historia;
     update(): void;
-    crear_sprite_desde_entidad(entidad: any): Phaser.GameObjects.Sprite;
+    crear_sprite_desde_entidad(entidad: any): any;
     actualizar_posicion(posicion: any): void;
     avanzar_posicion(): void;
     retroceder_posicion(): void;

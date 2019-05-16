@@ -9,7 +9,9 @@ Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acc
 Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el código:
 
 - cuando_hace_click(x, y, evento_original)
+- cuando_termina_de_hacer_click(x, y, evento_original)
 - cuando_mueve(x, y, evento_original)
+- cuando_sale(x, y, evento_original)
 
 Estas funciones se pueden crear en el código de una escena o de un actor. La diferencia es que en las escenas el "click" o el movimiento se van a detectar en toda la pantalla, mientras que en el código del actor solo se detectarán si el mouse apunta al actor.
 
@@ -64,6 +66,8 @@ class actor extends Actor {
   cuando_hace_click(x, y, evento_original) {
     this.rotacion = [360];
   }
+
+  cuando_termina_de_hacer_click(x, y, evento_original) {}
 }
 ```
 

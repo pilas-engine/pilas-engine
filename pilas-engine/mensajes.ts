@@ -80,33 +80,45 @@ class Mensajes {
   emitir_excepcion_al_editor(error, origen) {
     // Simplifica el stacktrace para que no tenga referencia a la url
     // local, sino que solamente muestre el nombre de archivo:
-    let stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en ");
+    let stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ");
 
     let detalle = {
       mensaje: error.message,
       stack: stacktrace
     };
 
+    let fuente_grande = {
+      font: "18px verdana"
+    };
+
     let fuente_principal = {
-      font: "14px verdana",
+      font: "16px verdana",
       fill: "#ddd"
     };
 
-    let fuente_grande = {
-      font: "16px verdana"
-    };
-
     let fuente_pequena = {
-      font: "10px verdana"
+      font: "14px verdana"
     };
 
     let fondo = this.pilas.modo.add.graphics();
     fondo.fillStyle(0x000000, 0.5);
-    fondo.fillRect(2, 2, 600, 600);
+    fondo.fillRect(0, 0, 3000, 3000);
 
-    this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
-    this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
-    this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
+    this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
+
+    let texto = this.pilas.modo.add.text(
+      5,
+      30,
+      detalle.mensaje,
+      fuente_principal
+    );
+
+    this.pilas.modo.add.text(
+      5,
+      5 + 30 + texto.height,
+      detalle.stack,
+      fuente_pequena
+    );
 
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
     console.error(error);

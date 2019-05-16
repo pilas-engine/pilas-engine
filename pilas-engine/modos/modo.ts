@@ -95,7 +95,18 @@ class Modo extends Phaser.Scene {
 
   crear_fondo(fondo) {
     this._nombre_del_fondo = fondo;
-    this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
+    this.pilas.utilidades.validar_que_existe_imagen(fondo);
+
+    // TODO: reemplazar por una función propia que obtenga la galería
+    if (fondo.indexOf(":") > -1) {
+      let g = fondo.split(":")[0];
+      let i = fondo.split(":")[1];
+
+      this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, g, i);
+    } else {
+      this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
+    }
+
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
   }
@@ -117,7 +128,17 @@ class Modo extends Phaser.Scene {
       actor.x,
       actor.y
     );
-    sprite.setTexture(actor.imagen);
+
+    this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+
+    if (actor.imagen.indexOf(":") > -1) {
+      let g = actor.imagen.split(":")[0];
+      let i = actor.imagen.split(":")[1];
+
+      sprite.setTexture(g, i);
+    } else {
+      sprite.setTexture(actor.imagen);
+    }
 
     sprite.id = actor.id;
     sprite.x = coordenada.x;
@@ -153,7 +174,8 @@ class Modo extends Phaser.Scene {
         };
 
         if (actor.fondo) {
-          let f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+          let imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+          let f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
           sprite["fondo"] = f;
           sprite["fondo_imagen"] = actor.fondo;
         }
@@ -167,13 +189,23 @@ class Modo extends Phaser.Scene {
         }
 
         if (actor.fondo) {
-          let f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+          let imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+          let f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
           sprite["fondo"] = f;
           sprite["fondo_imagen"] = actor.fondo;
         }
       }
 
       this.copiar_valores_de_sprite_a_texto(sprite);
+    }
+  }
+
+  obtener_imagen_para_nineslice(imagen) {
+    if (imagen.indexOf(":") > -1) {
+      let partes = imagen.split(":");
+      return { key: partes[0], frame: partes[1] };
+    } else {
+      return imagen;
     }
   }
 

@@ -122,11 +122,28 @@ class ModoPausa extends Modo {
   }
 
   crear_sprite_desde_entidad(entidad) {
+    let nombre = entidad.imagen;
+    let sprite = null;
+    let galeria = null;
+    let imagen = null;
     let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
       entidad.x,
       entidad.y
     );
-    let sprite = this.add.sprite(x, y, entidad.imagen);
+
+    if (nombre.indexOf(":") > -1) {
+      galeria = nombre.split(":")[0];
+      imagen = nombre.split(":")[1];
+    } else {
+      galeria = null;
+      imagen = nombre;
+    }
+
+    if (galeria) {
+      sprite = this.add.sprite(x, y, galeria, imagen);
+    } else {
+      sprite = this.add.sprite(x, y, imagen);
+    }
 
     sprite.angle = -entidad.rotacion;
     sprite.setOrigin(entidad.centro_x, entidad.centro_y);
@@ -143,15 +160,8 @@ class ModoPausa extends Modo {
       sprite["texto"].depth = sprite.depth;
 
       if (entidad.fondo) {
-        let f = this.pilas.modo.add.nineslice(
-          40,
-          0,
-          30,
-          20,
-          entidad.fondo,
-          10,
-          10
-        );
+        let imagen = this.obtener_imagen_para_nineslice(entidad.fondo);
+        let f = this.pilas.modo.add.nineslice(40, 0, 30, 20, imagen, 10, 10);
         sprite["fondo"] = f;
         sprite["fondo_imagen"] = entidad.fondo;
       }

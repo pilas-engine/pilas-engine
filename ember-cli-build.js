@@ -10,7 +10,6 @@ module.exports = function(defaults) {
         "api",
         "imagenes",
         "fuentes",
-        "iconos_actores",
         "sonidos",
         "monaco-vim"
       ]

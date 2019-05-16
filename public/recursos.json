@@ -1,274 +1,245 @@
 {
   "imagenes": [
     {
-      "nombre": "sin_imagen",
-      "ruta": "imagenes/sin_imagen.png"
+      "nombre": "imagenes:sin_imagen.png",
+      "sprite": "imagenes_sin_imagen"
     },
     {
-      "nombre": "invisible",
-      "ruta": "imagenes/invisible.png"
+      "nombre": "imagenes:invisible.png",
+      "sprite": "imagenes_invisible"
     },
     {
-      "nombre": "fondo_cielo_1",
-      "ruta": "imagenes/fondos/cielo.png"
+      "nombre": "imagenes:fondo-cielo.png",
+      "sprite": "fondos-imagenes_fondo-cielo"
     },
     {
-      "nombre": "plano",
-      "ruta": "imagenes/fondos/plano.png"
+      "nombre": "imagenes:fondo-plano.png",
+      "sprite": "fondos-imagenes_fondo-plano"
     },
     {
-      "nombre": "pelota",
-      "ruta": "imagenes/pelota.png"
+      "nombre": "imagenes:pelota.png",
+      "sprite": "imagenes_pelota"
     },
     {
-      "nombre": "pelota_de_voley",
-      "ruta": "imagenes/pelota_de_voley.png"
+      "nombre": "imagenes:pelota_de_voley.png",
+      "sprite": "imagenes_pelota_de_voley"
     },
     {
-      "nombre": "logo",
-      "ruta": "imagenes/logo.png"
+      "nombre": "imagenes:logo.png",
+      "sprite": "imagenes_logo"
     },
     {
-      "nombre": "caja",
-      "ruta": "imagenes/caja.png"
+      "nombre": "imagenes:caja.png",
+      "sprite": "imagenes_caja"
     },
     {
-      "nombre": "aceituna",
-      "ruta": "imagenes/aceituna.png"
+      "nombre": "imagenes:aceituna.png",
+      "sprite": "imagenes_aceituna"
     },
     {
-      "nombre": "nave",
-      "ruta": "imagenes/nave.png"
+      "nombre": "imagenes:conejo_muere.png",
+      "sprite": "conejo-imagenes_conejo_muere"
     },
     {
-      "nombre": "conejo",
-      "ruta": "imagenes/conejo.png"
+      "nombre": "imagenes:conejo_salta.png",
+      "sprite": "conejo-imagenes_conejo_salta"
     },
     {
-      "nombre": "conejo_muere",
-      "ruta": "imagenes/conejo/muere.png"
+      "nombre": "imagenes:conejo_parado1.png",
+      "sprite": "conejo-imagenes_conejo_parado1"
     },
     {
-      "nombre": "conejo_salta",
-      "ruta": "imagenes/conejo/salta.png"
+      "nombre": "imagenes:conejo_parado2.png",
+      "sprite": "conejo-imagenes_conejo_parado2"
     },
     {
-      "nombre": "conejo_parado1",
-      "ruta": "imagenes/conejo/parado1.png"
+      "nombre": "imagenes:conejo_camina1.png",
+      "sprite": "conejo-imagenes_conejo_camina1"
     },
     {
-      "nombre": "conejo_parado2",
-      "ruta": "imagenes/conejo/parado2.png"
+      "nombre": "imagenes:conejo_camina2.png",
+      "sprite": "conejo-imagenes_conejo_camina2"
     },
     {
-      "nombre": "conejo_camina1",
-      "ruta": "imagenes/conejo/camina1.png"
+      "nombre": "imagenes:nave_reposo.png",
+      "sprite": "nave-imagenes_nave_reposo"
     },
     {
-      "nombre": "conejo_camina2",
-      "ruta": "imagenes/conejo/camina2.png"
+      "nombre": "imagenes:nave_avanza_1.png",
+      "sprite": "nave-imagenes_nave_avanza_1"
     },
     {
-      "nombre": "nave_en_reposo",
-      "ruta": "imagenes/nave/nave_reposo.png"
+      "nombre": "imagenes:nave_avanza_2.png",
+      "sprite": "nave-imagenes_nave_avanza_2"
     },
     {
-      "nombre": "nave_avanza_1",
-      "ruta": "imagenes/nave/nave_avanza_1.png"
+      "nombre": "imagenes:nave_derecha_1.png",
+      "sprite": "nave-imagenes_nave_derecha_1"
     },
     {
-      "nombre": "nave_avanza_2",
-      "ruta": "imagenes/nave/nave_avanza_2.png"
+      "nombre": "imagenes:nave_derecha_2.png",
+      "sprite": "nave-imagenes_nave_derecha_2"
     },
     {
-      "nombre": "nave_derecha_1",
-      "ruta": "imagenes/nave/nave_derecha_1.png"
+      "nombre": "imagenes:nave_izquierda_1.png",
+      "sprite": "nave-imagenes_nave_izquierda_1"
     },
     {
-      "nombre": "nave_derecha_2",
-      "ruta": "imagenes/nave/nave_derecha_2.png"
+      "nombre": "imagenes:nave_izquierda_2.png",
+      "sprite": "nave-imagenes_nave_izquierda_2"
     },
     {
-      "nombre": "nave_izquierda_1",
-      "ruta": "imagenes/nave/nave_izquierda_1.png"
+      "nombre": "imagenes:suelo.png",
+      "sprite": "imagenes_suelo"
     },
     {
-      "nombre": "nave_izquierda_2",
-      "ruta": "imagenes/nave/nave_izquierda_2.png"
+      "nombre": "imagenes:techo.png",
+      "sprite": "imagenes_techo"
     },
     {
-      "nombre": "suelo",
-      "ruta": "imagenes/suelo.png"
+      "nombre": "imagenes:pared.png",
+      "sprite": "imagenes_pared"
     },
     {
-      "nombre": "techo",
-      "ruta": "imagenes/techo.png"
+      "nombre": "imagenes:plataforma.png",
+      "sprite": "imagenes_plataforma"
     },
     {
-      "nombre": "pared",
-      "ruta": "imagenes/pared.png"
+      "nombre": "imagenes:moneda.png",
+      "sprite": "imagenes_moneda"
     },
     {
-      "nombre": "plataforma",
-      "ruta": "imagenes/plataforma.png"
+      "nombre": "imagenes:nube.png",
+      "sprite": "nubes-imagenes_nube"
     },
     {
-      "nombre": "moneda",
-      "ruta": "imagenes/moneda.png"
+      "nombre": "imagenes:gallina_muere.png",
+      "sprite": "gallina-imagenes_gallina_muere"
     },
     {
-      "nombre": "nube",
-      "ruta": "imagenes/nubes/nube.png"
+      "nombre": "imagenes:gallina_sin_piel.png",
+      "sprite": "gallina-imagenes_gallina_sin_piel"
     },
     {
-      "nombre": "gallina_muere",
-      "ruta": "imagenes/gallina/gallina_muere.png"
+      "nombre": "imagenes:gallina_vuela_1.png",
+      "sprite": "gallina-imagenes_gallina_vuela_1"
     },
     {
-      "nombre": "gallina_sin_piel",
-      "ruta": "imagenes/gallina/gallina_sin_piel.png"
+      "nombre": "imagenes:gallina_vuela_2.png",
+      "sprite": "gallina-imagenes_gallina_vuela_2"
     },
     {
-      "nombre": "gallina_vuela_1",
-      "ruta": "imagenes/gallina/gallina_vuela_1.png"
+      "nombre": "imagenes:gallina_vuela_3.png",
+      "sprite": "gallina-imagenes_gallina_vuela_3"
     },
     {
-      "nombre": "gallina_vuela_2",
-      "ruta": "imagenes/gallina/gallina_vuela_2.png"
+      "nombre": "imagenes:fondo-azul.png",
+      "sprite": "fondos-imagenes_fondo-azul"
     },
     {
-      "nombre": "gallina_vuela_3",
-      "ruta": "imagenes/gallina/gallina_vuela_3.png"
+      "nombre": "imagenes:fondo-cesped_1.png",
+      "sprite": "fondos-imagenes_fondo-cesped_1"
     },
     {
-      "nombre": "fondo_azul",
-      "ruta": "imagenes/fondos/azul.png"
+      "nombre": "imagenes:fondo-cesped_2.png",
+      "sprite": "fondos-imagenes_fondo-cesped_2"
     },
     {
-      "nombre": "fondo_cesped_1",
-      "ruta": "imagenes/fondos/cesped_1.png"
+      "nombre": "imagenes:fondo-tierra_1.png",
+      "sprite": "fondos-imagenes_fondo-tierra_1"
     },
     {
-      "nombre": "fondo_cesped_2",
-      "ruta": "imagenes/fondos/cesped_2.png"
+      "nombre": "imagenes:fondo-madera.png",
+      "sprite": "fondos-imagenes_fondo-madera"
     },
     {
-      "nombre": "fondo_tierra_1",
-      "ruta": "imagenes/fondos/tierra_1.png"
+      "nombre": "imagenes:fondo-rojo.png",
+      "sprite": "fondos-imagenes_fondo-rojo"
     },
     {
-      "nombre": "fondo_madera",
-      "ruta": "imagenes/fondos/madera.png"
+      "nombre": "imagenes:fondo-verde.png",
+      "sprite": "fondos-imagenes_fondo-verde"
     },
     {
-      "nombre": "fondo_rojo",
-      "ruta": "imagenes/fondos/rojo.png"
+      "nombre": "imagenes:fondo-espacio_1.png",
+      "sprite": "fondos-imagenes_fondo-espacio_1"
     },
     {
-      "nombre": "fondo_verde",
-      "ruta": "imagenes/fondos/verde.png"
+      "nombre": "imagenes:fondo-espacio_2.png",
+      "sprite": "fondos-imagenes_fondo-espacio_2"
     },
     {
-      "nombre": "espacio_1",
-      "ruta": "imagenes/fondos/espacio_1.png"
+      "nombre": "imagenes:fondo-nubes.png",
+      "sprite": "fondos-imagenes_fondo-nubes"
     },
     {
-      "nombre": "espacio_2",
-      "ruta": "imagenes/fondos/espacio_2.png"
+      "nombre": "imagenes:arbol_1.png",
+      "sprite": "imagenes_arbol_1"
     },
     {
-      "nombre": "nubes",
-      "ruta": "imagenes/fondos/nubes.jpg"
+      "nombre": "imagenes:arbol_2.png",
+      "sprite": "imagenes_arbol_2"
     },
     {
-      "nombre": "arbol_1",
-      "ruta": "imagenes/arbol_1.png"
+      "nombre": "imagenes:hierba_1.png",
+      "sprite": "imagenes_hierba_1"
     },
     {
-      "nombre": "arbol_2",
-      "ruta": "imagenes/arbol_2.png"
+      "nombre": "imagenes:laser.png",
+      "sprite": "imagenes_laser"
     },
     {
-      "nombre": "hierba_2",
-      "ruta": "imagenes/hierba_1.png"
+      "nombre": "imagenes:laser_2.png",
+      "sprite": "imagenes_laser_2"
     },
     {
-      "nombre": "laser",
-      "ruta": "imagenes/laser.png"
+      "nombre": "imagenes:laser_3.png",
+      "sprite": "imagenes_laser_3"
     },
     {
-      "nombre": "laser_2",
-      "ruta": "imagenes/laser_2.png"
+      "nombre": "imagenes:copa.png",
+      "sprite": "imagenes_copa"
     },
     {
-      "nombre": "laser_3",
-      "ruta": "imagenes/laser_3.png"
-    },
-    {
-      "nombre": "copa",
-      "ruta": "imagenes/copa.png"
-    },
-    {
-      "nombre": "boton_jugar",
-      "ruta": "imagenes/boton_jugar.png"
+      "nombre": "imagenes:carta.png",
+      "sprite": "imagenes_carta"
     },
 
     {
-      "nombre": "dado_1",
-      "ruta": "imagenes/dado_1.png"
+      "nombre": "imagenes:carta_azul.png",
+      "sprite": "imagenes_carta_azul"
     },
     {
-      "nombre": "dado_2",
-      "ruta": "imagenes/dado_2.png"
+      "nombre": "imagenes:carta_verde.png",
+      "sprite": "imagenes_carta_verde"
     },
     {
-      "nombre": "dado_3",
-      "ruta": "imagenes/dado_3.png"
+      "nombre": "imagenes:redimensionables_boton-amarillo.png",
+      "sprite": "redimensionables-imagenes_boton-amarillo"
     },
     {
-      "nombre": "dado_4",
-      "ruta": "imagenes/dado_4.png"
+      "nombre": "imagenes:redimensionables_boton-amarillo-pulsado.png",
+      "sprite": "redimensionables-imagenes_boton-amarillo-pulsado"
     },
     {
-      "nombre": "dado_5",
-      "ruta": "imagenes/dado_5.png"
+      "nombre": "imagenes:redimensionables_gris.png",
+      "sprite": "redimensionables-imagenes_gris"
     },
     {
-      "nombre": "dado_6",
-      "ruta": "imagenes/dado_6.png"
+      "nombre": "imagenes:redimensionables_dialogo.png",
+      "sprite": "redimensionables-imagenes_dialogo"
     },
     {
-      "nombre": "carta",
-      "ruta": "imagenes/carta.png"
-    },
-
-    {
-      "nombre": "carta_azul",
-      "ruta": "imagenes/carta_azul.png"
+      "nombre": "imagenes:interfaz_linea.png",
+      "sprite": "interfaz-imagenes_interfaz_linea"
     },
     {
-      "nombre": "carta_verde",
-      "ruta": "imagenes/carta_verde.png"
+      "nombre": "imagenes:interfaz_punto.png",
+      "sprite": "interfaz-imagenes_interfaz_punto"
     },
     {
-      "nombre": "gris",
-      "ruta": "imagenes/redimensionables/gris.png"
-    },
-    {
-      "nombre": "dialogo",
-      "ruta": "imagenes/redimensionables/dialogo.png"
-    },
-    {
-      "nombre": "interfaz/linea",
-      "ruta": "imagenes/interfaz/linea.png"
-    },
-    {
-      "nombre": "interfaz/punto",
-      "ruta": "imagenes/interfaz/punto.png"
-    },
-    {
-      "nombre": "interfaz/deslizador",
-      "ruta": "imagenes/interfaz/deslizador.png"
+      "nombre": "imagenes:interfaz_deslizador.png",
+      "sprite": "interfaz-imagenes_interfaz_deslizador"
     }
   ],
 

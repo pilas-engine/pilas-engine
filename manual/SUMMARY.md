@@ -6,6 +6,8 @@
 - [Autómatas y estados](automatas_y_estados.md)
 - [Animaciones](animaciones.md)
 - [Etiquetas](etiquetas.md)
+- [Habilidades](habilidades.md)
+- [Azar o cálculos aleatorios](azar.md)
 - [Colisiones](colisiones.md)
 - [Escenas](escenas.md)
 - [Eventos](eventos.md)

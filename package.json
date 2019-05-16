@@ -18,7 +18,8 @@
     "test": "ember test",
     "compilar_pilas": "tsc -p pilas-engine --pretty -d",
     "compilar_pilas_live": "tsc -p pilas-engine --watch --pretty -d",
-    "actualizar_actores": "node scripts/actualizar-actores.js"
+    "actualizar_actores": "node scripts/actualizar-actores.js",
+    "actualizar_actores_live": "node scripts/actualizar-actores-live.js"
   },
   "main": "electron.js",
   "devDependencies": {
@@ -30,9 +31,8 @@
     "broccoli-asset-rev": "^2.7.0",
     "broccoli-funnel": "^2.0.2",
     "devtron": "^1.4.0",
-    "electron": "1.6.16",
+    "electron": "5.0.1",
     "electron-packager": "^10.1.0",
-    "electron-rebuild": "^1.8.4",
     "ember-ajax": "^5.0.0",
     "ember-cli": "~3.8.2",
     "ember-cli-app-version": "^3.2.0",
@@ -43,6 +43,7 @@
     "ember-cli-htmlbars-inline-precompile": "^1.0.3",
     "ember-cli-inject-live-reload": "^1.8.2",
     "ember-cli-release": "^1.0.0-beta.2",
+    "ember-cli-sass": "^10.0.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-tachyons-shim": "^4.9.0",
     "ember-cli-template-lint": "^1.0.0-beta.1",
@@ -68,6 +69,7 @@
     "loader.js": "^4.7.0",
     "prettier": "^1.16.4",
     "qunit-dom": "^0.8.0",
+    "sass": "^1.20.1",
     "spritesheet-js": "^1.2.6",
     "surge": "^0.20.3",
     "tachyons": "^4.11.1",
@@ -77,6 +79,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
+    "electron-rebuild": "^1.8.4",
     "js-beautify": "^1.9.1",
     "phaser": "3.16.2",
     "typescript": "3.4.3"

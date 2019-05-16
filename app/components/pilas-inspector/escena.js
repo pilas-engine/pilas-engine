@@ -15,7 +15,8 @@ export default Component.extend({
       },
       {
         tipo: "imagen",
-        propiedad: "fondo"
+        propiedad: "fondo",
+        filtroPropuesto: "fondo"
       },
       {
         tipo: "numero",

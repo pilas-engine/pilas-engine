@@ -35,6 +35,8 @@ class Pilas {
   cursor_y: number = 0;
   opciones: any;
 
+  imagenes_precargadas: string[] = [];
+
   constructor() {
     this.Phaser = Phaser;
 
@@ -141,6 +143,10 @@ class Pilas {
     opciones.modo_simple = true;
     this.iniciar_phaser(ancho, alto, recursos, opciones);
     return this;
+  }
+
+  listar_imagenes() {
+    return this.imagenes_precargadas;
   }
 
   private iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion) {
@@ -286,6 +292,20 @@ class Pilas {
 
   luego(duracion: number, tarea: any) {
     this.modo.time.delayedCall(duracion * 1000, tarea);
+  }
+
+  /**
+   * Retorna un número aleatorio en el rango que va desde el primer argumento
+   * al segundo (incluyendo los extremos).
+   *
+   * Por ejemplo, esta llamada puede retornar uno de 5 valores:
+   *
+   * ```
+   *  pilas.azar(1, 5); // posible resultado 1, 2, 3, 4 o 5.
+   * ```
+   */
+  azar(desde: number, hasta: number) {
+    return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
   }
 }
 

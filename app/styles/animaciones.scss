@@ -1,0 +1,44 @@
+.animacion-aparecer {
+  animation-duration: 0.75s;
+  animation-name: slidein;
+}
+@keyframes slidein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animacion-bajar {
+  animation: bajar 0.2s linear;
+}
+@keyframes bajar {
+  from {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.animacion-aparecer {
+  animation: aparecer 0.2s linear;
+}
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animar-width {
+  transition: width 500ms ease;
+}

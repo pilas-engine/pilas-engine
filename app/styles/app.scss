@@ -1,0 +1,13 @@
+@import "ui";
+@import "fuentes";
+@import "autocomplete";
+@import "utilidades";
+@import "theme-claro";
+@import "theme-oscuro";
+@import "animaciones";
+@import "scroll";
+
+$ember-power-select-border-color: gray;
+$ember-power-select-border-radius: 0;
+
+@import "ember-power-select";

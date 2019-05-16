@@ -4,7 +4,13 @@ export default Component.extend({
   habilidades: null,
   init() {
     this._super(...arguments);
-    this.set("habilidades", ["arrastrable", "rotar constantemente"]);
+    this.set("habilidades", [
+      "arrastrable",
+      "rotar constantemente",
+      "moverse con el teclado",
+      "seguir al mouse lentamente",
+      "seguir al mouse"
+    ]);
   },
   actions: {
     cuando_selecciona(valor) {

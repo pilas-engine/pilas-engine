@@ -1,1 +1,31 @@
-{{yield}}
+<div role="button" test-celda-imagen
+  class="
+    w4 h4
+    {{if debeMostrar "dib" "dn"}}
+    ba pa2 button
+    br2
+    verdana f6 link pointer
+    black bg-animate b--black-20
+    unselectable
+    v-top
+    mb1
+    hover-bg-black-10
+    texto
+
+    " {{action "cuando_selecciona" imagen}}>
+  <div class="flex flex-column h-100 w-100">
+
+    {{yield}}
+
+    {{#pilas-tooltip class="" texto=imagen.nombre}}
+      <div class="flex1 tc w-100 h3">
+        <div class="sprite {{imagen.sprite}}"></div>
+      </div>
+
+      <div class="f6 tc mt2 h1 truncate">
+        {{imagen.nombre}}
+      </div>
+    {{/pilas-tooltip}}
+
+  </div>
+</div>

@@ -24,12 +24,13 @@ class ActorBase {
 
   _fondo: any = null;
   _fondo_imagen: string = "";
+  _dialogo: any = null;
 
   propiedades_base = {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "sin_imagen",
+    imagen: "imagenes:sin_imagen.png",
 
     centro_x: 0.5,
     centro_y: 0.5,
@@ -58,7 +59,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "sin_imagen",
+    imagen: "imagenes:sin_imagen.png",
     figura: ""
   };
 
@@ -75,25 +76,9 @@ class ActorBase {
 
   pre_iniciar(propiedades) {
     let figura = propiedades.figura || "";
-    let imagen = null;
-    let cuadro = null;
 
-    // Como las imágenes pueden ser cadenas que representen cuadros
-    // dentro de un spritesheet (caso "spritesheet.imagen") o el nombre de una
-    // imagen normal (caso "imagen") se utiliza esta comprobación para
-    // distinguir cualquiera de estos casos.
-    if (propiedades.imagen.indexOf(".") > -1) {
-      imagen = propiedades.imagen;
-      cuadro = null;
-    } else {
-      imagen = propiedades.imagen.split(".")[0];
-      cuadro = propiedades.imagen
-        .split(".")
-        .slice(1)
-        .join(".");
-    }
-
-    this._id = propiedades.id;
+    this._id =
+      propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
     this._nombre = propiedades.nombre;
 
     this.sensores = [];
@@ -104,7 +89,7 @@ class ActorBase {
 
     switch (figura) {
       case "rectangulo":
-        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+        this.sprite = this.crear_sprite("matter", propiedades.imagen);
         this.figura = figura;
 
         this.crear_figura_rectangular(
@@ -119,7 +104,7 @@ class ActorBase {
         break;
 
       case "circulo":
-        this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+        this.sprite = this.crear_sprite("matter", propiedades.imagen);
         this.figura = figura;
         this.crear_figura_circular(propiedades.figura_radio);
 
@@ -132,7 +117,7 @@ class ActorBase {
       case "ninguna":
       case "":
         this.figura = figura;
-        this.sprite = this.pilas.modo.add.sprite(0, 0, imagen, cuadro);
+        this.sprite = this.crear_sprite("sprite", propiedades.imagen);
         break;
 
       default:
@@ -184,6 +169,14 @@ class ActorBase {
       this.cuando_hace_click(posicion.x, posicion.y, cursor);
     });
 
+    this.sprite.on("pointerup", cursor => {
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+        cursor.x,
+        cursor.y
+      );
+      this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+    });
+
     this.sprite.on("pointerout", cursor => {
       let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
         cursor.x,
@@ -201,6 +194,46 @@ class ActorBase {
     });
 
     this.pilas.escena.agregar_actor(this);
+  }
+
+  private crear_sprite(tipo, imagen_inicial) {
+    let galeria = null;
+    let imagen = null;
+
+    this.pilas.utilidades.validar_que_existe_imagen(imagen_inicial);
+
+    // Como las imágenes pueden ser cadenas que representen cuadros
+    // dentro de un spritesheet (caso "spritesheet:imagen") o el nombre de una
+    // imagen normal (caso "imagen") se utiliza esta comprobación para
+    // distinguir cualquiera de estos casos.
+    if (imagen_inicial.indexOf(":") > -1) {
+      galeria = imagen_inicial.split(":")[0];
+      imagen = imagen_inicial.split(":")[1];
+    } else {
+      galeria = null;
+      imagen = imagen_inicial;
+    }
+
+    switch (tipo) {
+      case "matter":
+        if (galeria) {
+          return this.pilas.modo.matter.add.sprite(0, 0, galeria, imagen);
+        } else {
+          return this.pilas.modo.matter.add.sprite(0, 0, imagen);
+        }
+        break;
+
+      case "sprite":
+        if (galeria) {
+          return this.pilas.modo.add.sprite(0, 0, galeria, imagen);
+        } else {
+          return this.pilas.modo.add.sprite(0, 0, imagen);
+        }
+        break;
+
+      default:
+        throw Error(`No se puede crear un sprite de tipo ${tipo}`);
+    }
   }
 
   protected copiar_atributos_de_sprite(origen, destino) {
@@ -246,7 +279,6 @@ class ActorBase {
       this.sprite.input.hitArea.width = ancho;
       this.sprite.input.hitArea.height = alto;
       this.sprite.setOrigin(this.centro_x, this.centro_y);
-      console.log("listo!!!");
     } else {
       console.log("aún no tiene sprite");
     }
@@ -357,7 +389,7 @@ class ActorBase {
     if (this.sprite.frame.name === "__BASE") {
       return this.sprite.texture.key;
     } else {
-      return `${this.sprite.frame.name}.${this.sprite.texture.key}`;
+      return `${this.sprite.texture.key}:${this.sprite.frame.name}`;
     }
   }
 
@@ -378,15 +410,23 @@ class ActorBase {
   }
 
   set imagen(nombre: string) {
-    if (nombre.indexOf(".") > -1) {
-      let key = nombre.split(".")[0];
-      let frame = nombre
-        .split(".")
-        .slice(1)
-        .join(".");
-      this.sprite.setTexture(key, frame);
+    let galeria = null;
+    let imagen = null;
+
+    this.pilas.utilidades.validar_que_existe_imagen(nombre);
+
+    if (nombre.indexOf(":") > -1) {
+      galeria = nombre.split(":")[0];
+      imagen = nombre.split(":")[1];
     } else {
-      this.sprite.setTexture(nombre);
+      galeria = null;
+      imagen = nombre;
+    }
+
+    if (galeria) {
+      this.sprite.setTexture(galeria, imagen);
+    } else {
+      this.sprite.setTexture(imagen);
     }
   }
 
@@ -740,8 +780,12 @@ class ActorBase {
 
   set animacion(nombre) {
     if (this._animacion_en_curso !== nombre) {
-      this.reproducir_animacion(nombre);
-      this._animacion_en_curso = nombre;
+      if (this.pilas.animaciones.existe_animacion(this, nombre)) {
+        this.reproducir_animacion(nombre);
+        this._animacion_en_curso = nombre;
+      } else {
+        throw Error(`No se ha creado la animación '${nombre}' previamente`);
+      }
     }
   }
 
@@ -756,6 +800,8 @@ class ActorBase {
   cuando_termina_una_colision(actor: Actor) {}
 
   cuando_hace_click(x, y, evento_original) {}
+
+  cuando_termina_de_hacer_click(x, y, evento_original) {}
 
   cuando_sale(x, y, evento_original) {}
 
@@ -799,6 +845,10 @@ class ActorBase {
     });
   }
 
+  esta_vivo() {
+    return this._vivo;
+  }
+
   set figura_ancho(valor: number) {
     throw new Error("No puede definir este atributo");
   }
@@ -823,24 +873,39 @@ class ActorBase {
     return this._figura_radio;
   }
 
+  /**
+   * Muestra un mensaje como si se tratara de un globo de historieta. Llamar
+   * a este método borra el dialogo anterior si existiera.
+   */
   decir(mensaje: string) {
+    if (this._dialogo) {
+      this._dialogo.eliminar();
+      this._dialogo = null;
+    }
+
     let texto = this.pilas.actores.texto();
     texto.texto = mensaje;
     texto.x = this.x - 15;
     texto.y = this.y + this.alto;
     texto.transparencia = 100;
     texto.transparencia = [0];
-    texto.fondo = "dialogo";
+    texto.fondo = "imagenes:redimensionables_dialogo.png";
     texto.color = "black";
-    texto.escala = 0.9;
-    texto.escala = [1];
     texto.centro_x = 1;
     texto.centro_y = 1;
 
     texto.texto = mensaje;
 
+    this._dialogo = texto;
+
     this.pilas.luego(4, () => {
-      texto.eliminar();
+      if (texto.esta_vivo()) {
+        texto.eliminar();
+
+        if (texto === this._dialogo) {
+          this._dialogo = null;
+        }
+      }
     });
   }
 

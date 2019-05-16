@@ -21,7 +21,10 @@ class ModoEditor extends Modo {
     this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
     this.matter.world.createDebugGraphic();
+    this.conectar_movimiento_del_mouse();
+  }
 
+  private conectar_movimiento_del_mouse() {
     this.input.on("pointermove", cursor => {
       let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
         cursor.x,
@@ -43,9 +46,9 @@ class ModoEditor extends Modo {
       );
 
       if (escena.pilas.utilidades.es_firefox()) {
-        escena.pilas.game.canvas.style.cursor = "grabbing";
+        escena.input.setDefaultCursor("grabbing");
       } else {
-        escena.pilas.game.canvas.style.cursor = "-webkit-grabbing";
+        escena.input.setDefaultCursor("-webkit-grabbing");
       }
     });
 
@@ -62,7 +65,8 @@ class ModoEditor extends Modo {
     });
 
     this.input.on("dragend", function(pointer, gameObject) {
-      escena.pilas.game.canvas.style.cursor = "default";
+      escena.input.setDefaultCursor("default");
+
       let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
         gameObject.x,
         gameObject.y
@@ -81,30 +85,27 @@ class ModoEditor extends Modo {
   }
 
   crear_sprite_desde_actor(actor) {
-    let sprite = this.add.sprite(0, 0, actor.imagen);
+    this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+    let sprite = null;
+
+    if (actor.imagen.indexOf(":") > -1) {
+      let g = actor.imagen.split(":")[0];
+      let i = actor.imagen.split(":")[1];
+
+      sprite = this.add.sprite(0, 0, g, i);
+    } else {
+      sprite = this.add.sprite(0, 0, actor.imagen);
+    }
 
     sprite["setInteractive"]();
     sprite["actor"] = actor;
     sprite["destacandose"] = false;
 
     sprite["destacar"] = () => {
-      if (sprite["destacandose"]) {
-        return;
-      }
-
       sprite["destacandose"] = true;
 
-      this.tweens.add({
-        targets: sprite,
-        scaleX: sprite.scaleX + 0.1,
-        scaleY: sprite.scaleY + 0.1,
-        duration: 100,
-        ease: "Power2",
-        yoyo: true,
-        delay: 0,
-        onComplete: function() {
-          sprite["destacandose"] = false;
-        }
+      this.crear_destello(sprite, () => {
+        sprite["destacandose"] = false;
       });
     };
 
@@ -113,6 +114,49 @@ class ModoEditor extends Modo {
     this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
     this.input.setDraggable(sprite, undefined);
     this.actores.push(sprite);
+  }
+
+  /**
+   * Realiza un efecto de destello blanco para indicar que se selecciona al actor.
+   */
+  private crear_destello(sprite, cuando_termina) {
+    let t = sprite.texture;
+    let cuadro = sprite.frame.name;
+    let sprite2 = this.add.sprite(0, 0, t.key, cuadro);
+
+    this.copiar_atributos_excepto_alpha(sprite, sprite2);
+    sprite2.setTintFill(0xffffff);
+    sprite2.setAlpha(0.4);
+
+    this.tweens.add({
+      targets: sprite2,
+      alpha: 0.7,
+      duration: 100,
+      ease: "Power2",
+      yoyo: true,
+      delay: 0,
+      onUpdate: () => {
+        this.copiar_atributos_excepto_alpha(sprite, sprite2);
+      },
+      onComplete: function() {
+        sprite2.destroy();
+        cuando_termina();
+      }
+    });
+  }
+
+  private copiar_atributos_excepto_alpha(origen, destino) {
+    destino.x = origen.x;
+    destino.y = origen.y;
+    destino.angle = origen.angle;
+    destino.scaleX = origen.scaleX;
+    destino.scaleY = origen.scaleY;
+
+    destino.flipX = origen.flipX;
+    destino.flipY = origen.flipY;
+    destino.depth = origen.depth;
+
+    destino.setOrigin(origen.originX, origen.originY);
   }
 
   aplicar_atributos_de_actor_a_sprite(actor, sprite) {

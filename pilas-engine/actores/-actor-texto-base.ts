@@ -1,6 +1,6 @@
 class ActorTextoBase extends ActorBase {
   propiedades = {
-    imagen: "invisible",
+    imagen: "imagenes:invisible.png",
     texto: "Hola mundo",
     es_texto: true
   };
@@ -65,7 +65,24 @@ class ActorTextoBase extends ActorBase {
   }
 
   private crear_fondo(fondo) {
-    this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, fondo, 10, 10);
+    let imagen = null;
+
+    if (fondo.indexOf(":") > -1) {
+      let partes = fondo.split(":");
+      imagen = { key: partes[0], frame: partes[1] };
+    } else {
+      imagen = fondo;
+    }
+
+    this._fondo = this.pilas.modo.add["nineslice"](
+      0,
+      0,
+      30,
+      20,
+      imagen,
+      10,
+      10
+    );
     this.actualizar_tamano_del_fondo();
   }
 

@@ -1,5 +1,8 @@
 /// <reference path="habilidades/rotar-constantemente"/>
 /// <reference path="habilidades/arrastrable"/>
+/// <reference path="habilidades/mover-con-el-teclado"/>
+/// <reference path="habilidades/seguir-al-mouse"/>
+/// <reference path="habilidades/seguir-al-mouse-lentamente"/>
 
 class Habilidades {
   pilas: Pilas;
@@ -11,6 +14,9 @@ class Habilidades {
 
     this.vincular("rotar constantemente", RotarConstantemente);
     this.vincular("arrastrable", Arrastrable);
+    this.vincular("mover con el teclado", MoverConElTeclado);
+    this.vincular("seguir al mouse", SeguirAlMouse);
+    this.vincular("seguir al mouse lentamente", SeguirAlMouseLentamente);
   }
 
   buscar(habilidad: String) {

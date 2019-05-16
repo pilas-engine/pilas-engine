@@ -357,7 +357,12 @@ class ModoEjecucion extends Modo {
 
   instanciar_escena(nombre) {
     let escena = this.obtener_escena_por_nombre(nombre);
-    this.crear_fondo(escena.fondo);
+
+    if (escena.fondo) {
+      this.crear_fondo(escena.fondo);
+    } else {
+      console.warn("Cuidado, la escena no tiene un fondo definido");
+    }
 
     this.crear_escena(escena);
   }

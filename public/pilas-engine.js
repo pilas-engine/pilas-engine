@@ -85,27 +85,37 @@ var Animaciones = (function () {
         this.pilas = pilas;
     }
     Animaciones.prototype.crear_animacion = function (actor, nombre_de_la_animacion, cuadros, velocidad) {
+        var _this = this;
         var nombre = actor.id + "-" + nombre_de_la_animacion;
         if (!this.animaciones[nombre]) {
-            var frames_1 = cuadros.map(function (nombre) {
-                if (nombre.indexOf(".") > -1) {
+            var frames_1 = cuadros.map(function (cuadro) {
+                if (_this.pilas.imagenes_precargadas.indexOf(cuadro) === -1) {
+                    var titulo = "No se puede crear la animaci\u00F3n \"" + nombre_de_la_animacion + "\"";
+                    var detalle = "El cuadro " + cuadro + " no existe.";
+                    throw Error(titulo + "\n" + detalle);
+                }
+                if (cuadro.indexOf(":") > -1) {
                     return {
-                        key: nombre.split(".")[1],
-                        frame: nombre.split(".")[0]
+                        key: cuadro.split(":")[0],
+                        frame: cuadro.split(":")[1]
                     };
                 }
                 else {
-                    return { key: nombre };
+                    return { key: cuadro };
                 }
             });
             var animacion = this.pilas.modo.anims.create({
-                key: nombre.split(".")[0],
+                key: nombre,
                 frames: frames_1,
                 frameRate: velocidad,
                 repeat: -1
             });
             this.animaciones[nombre] = animacion;
         }
+    };
+    Animaciones.prototype.existe_animacion = function (actor, nombre) {
+        var animacion = actor.id + "-" + nombre;
+        return this.animaciones[animacion] !== undefined;
     };
     return Animaciones;
 }());
@@ -445,12 +455,64 @@ var Arrastrable = (function (_super) {
     Arrastrable.prototype.actualizar = function () { };
     return Arrastrable;
 }(Habilidad));
+var MoverConElTeclado = (function (_super) {
+    __extends(MoverConElTeclado, _super);
+    function MoverConElTeclado() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MoverConElTeclado.prototype.iniciar = function () { };
+    MoverConElTeclado.prototype.actualizar = function () {
+        var velocidad = 5;
+        if (this.pilas.control.izquierda) {
+            this.actor.x -= velocidad;
+        }
+        if (this.pilas.control.derecha) {
+            this.actor.x += velocidad;
+        }
+        if (this.pilas.control.arriba) {
+            this.actor.y += velocidad;
+        }
+        if (this.pilas.control.abajo) {
+            this.actor.y -= velocidad;
+        }
+    };
+    return MoverConElTeclado;
+}(Habilidad));
+var SeguirAlMouse = (function (_super) {
+    __extends(SeguirAlMouse, _super);
+    function SeguirAlMouse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    SeguirAlMouse.prototype.iniciar = function () { };
+    SeguirAlMouse.prototype.actualizar = function () {
+        this.actor.x = this.pilas.cursor_x;
+        this.actor.y = this.pilas.cursor_y;
+    };
+    return SeguirAlMouse;
+}(Habilidad));
+var SeguirAlMouseLentamente = (function (_super) {
+    __extends(SeguirAlMouseLentamente, _super);
+    function SeguirAlMouseLentamente() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    SeguirAlMouseLentamente.prototype.iniciar = function () { };
+    SeguirAlMouseLentamente.prototype.actualizar = function () {
+        var destino_x = this.pilas.cursor_x;
+        var destino_y = this.pilas.cursor_y;
+        this.actor.x += (destino_x - this.actor.x) / 10;
+        this.actor.y += (destino_y - this.actor.y) / 10;
+    };
+    return SeguirAlMouseLentamente;
+}(Habilidad));
 var Habilidades = (function () {
     function Habilidades(pilas) {
         this.pilas = pilas;
         this._habilidades = [];
         this.vincular("rotar constantemente", RotarConstantemente);
         this.vincular("arrastrable", Arrastrable);
+        this.vincular("mover con el teclado", MoverConElTeclado);
+        this.vincular("seguir al mouse", SeguirAlMouse);
+        this.vincular("seguir al mouse lentamente", SeguirAlMouseLentamente);
     }
     Habilidades.prototype.buscar = function (habilidad) {
         var lista = this.generar_lista_de_similitudes(habilidad);
@@ -590,27 +652,27 @@ var Mensajes = (function () {
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {
-        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en ");
+        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ");
         var detalle = {
             mensaje: error.message,
             stack: stacktrace
         };
+        var fuente_grande = {
+            font: "18px verdana"
+        };
         var fuente_principal = {
-            font: "14px verdana",
+            font: "16px verdana",
             fill: "#ddd"
         };
-        var fuente_grande = {
-            font: "16px verdana"
-        };
         var fuente_pequena = {
-            font: "10px verdana"
+            font: "14px verdana"
         };
         var fondo = this.pilas.modo.add.graphics();
         fondo.fillStyle(0x000000, 0.5);
-        fondo.fillRect(2, 2, 600, 600);
-        this.pilas.modo.add.text(5, 5, "Se ha producido un error.", fuente_grande);
-        this.pilas.modo.add.text(5, 5 + 20, detalle.mensaje, fuente_principal);
-        this.pilas.modo.add.text(5, 5 + 20 + 20, detalle.stack, fuente_pequena);
+        fondo.fillRect(0, 0, 3000, 3000);
+        this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
+        var texto = this.pilas.modo.add.text(5, 30, detalle.mensaje, fuente_principal);
+        this.pilas.modo.add.text(5, 5 + 30 + texto.height, detalle.stack, fuente_pequena);
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.error(error);
     };
@@ -739,6 +801,30 @@ var Utilidades = (function () {
         }
         return levenshtein_distance_b(cadena1, cadena2);
     };
+    Utilidades.prototype.obtener_mas_similar = function (nombre, posibilidades) {
+        var _this = this;
+        var similitudes = posibilidades.map(function (h) {
+            return {
+                similitud: _this.obtener_similaridad(h, nombre),
+                posiblidad: h
+            };
+        });
+        similitudes = similitudes.sort(function (a, b) {
+            if (a.similitud > b.similitud) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        });
+        return similitudes[0].posiblidad;
+    };
+    Utilidades.prototype.validar_que_existe_imagen = function (nombre) {
+        if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
+            var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
+            throw Error("No se encuentra la imagen \"" + nombre + "\"\n\u00BFQuisiste decir \"" + sugerencia + "\"?");
+        }
+    };
     return Utilidades;
 }());
 var HOST = "file://";
@@ -749,6 +835,7 @@ var Pilas = (function () {
     function Pilas() {
         this.cursor_x = 0;
         this.cursor_y = 0;
+        this.imagenes_precargadas = [];
         this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
         this.depurador = new Depurador(this);
@@ -841,6 +928,9 @@ var Pilas = (function () {
         opciones.modo_simple = true;
         this.iniciar_phaser(ancho, alto, recursos, opciones);
         return this;
+    };
+    Pilas.prototype.listar_imagenes = function () {
+        return this.imagenes_precargadas;
     };
     Pilas.prototype.iniciar_phaser_desde_configuracion_y_cargar_escenas = function (configuracion) {
         var game = new Phaser.Game(configuracion);
@@ -957,6 +1047,9 @@ var Pilas = (function () {
     Pilas.prototype.luego = function (duracion, tarea) {
         this.modo.time.delayedCall(duracion * 1000, tarea);
     };
+    Pilas.prototype.azar = function (desde, hasta) {
+        return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
+    };
     return Pilas;
 }());
 var pilasengine = new Pilas();
@@ -969,11 +1062,12 @@ var ActorBase = (function () {
         this._es_texto = false;
         this._fondo = null;
         this._fondo_imagen = "";
+        this._dialogo = null;
         this.propiedades_base = {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "sin_imagen",
+            imagen: "imagenes:sin_imagen.png",
             centro_x: 0.5,
             centro_y: 0.5,
             rotacion: 0,
@@ -997,7 +1091,7 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "sin_imagen",
+            imagen: "imagenes:sin_imagen.png",
             figura: ""
         };
         this.pilas = pilas;
@@ -1015,20 +1109,8 @@ var ActorBase = (function () {
     ActorBase.prototype.pre_iniciar = function (propiedades) {
         var _this = this;
         var figura = propiedades.figura || "";
-        var imagen = null;
-        var cuadro = null;
-        if (propiedades.imagen.indexOf(".") > -1) {
-            imagen = propiedades.imagen;
-            cuadro = null;
-        }
-        else {
-            imagen = propiedades.imagen.split(".")[0];
-            cuadro = propiedades.imagen
-                .split(".")
-                .slice(1)
-                .join(".");
-        }
-        this._id = propiedades.id;
+        this._id =
+            propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
         this._nombre = propiedades.nombre;
         this.sensores = [];
         this._figura_ancho = propiedades.figura_ancho;
@@ -1037,7 +1119,7 @@ var ActorBase = (function () {
         this._es_texto = propiedades.es_texto;
         switch (figura) {
             case "rectangulo":
-                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+                this.sprite = this.crear_sprite("matter", propiedades.imagen);
                 this.figura = figura;
                 this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
                 this.dinamico = propiedades.figura_dinamica;
@@ -1046,7 +1128,7 @@ var ActorBase = (function () {
                 this.sensor = propiedades.figura_sensor;
                 break;
             case "circulo":
-                this.sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen, cuadro);
+                this.sprite = this.crear_sprite("matter", propiedades.imagen);
                 this.figura = figura;
                 this.crear_figura_circular(propiedades.figura_radio);
                 this.dinamico = propiedades.figura_dinamica;
@@ -1057,7 +1139,7 @@ var ActorBase = (function () {
             case "ninguna":
             case "":
                 this.figura = figura;
-                this.sprite = this.pilas.modo.add.sprite(0, 0, imagen, cuadro);
+                this.sprite = this.crear_sprite("sprite", propiedades.imagen);
                 break;
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
@@ -1096,6 +1178,10 @@ var ActorBase = (function () {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.cuando_hace_click(posicion.x, posicion.y, cursor);
         });
+        this.sprite.on("pointerup", function (cursor) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+            _this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+        });
         this.sprite.on("pointerout", function (cursor) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.cuando_sale(posicion.x, posicion.y, cursor);
@@ -1105,6 +1191,39 @@ var ActorBase = (function () {
             _this.cuando_mueve(posicion.x, posicion.y, cursor);
         });
         this.pilas.escena.agregar_actor(this);
+    };
+    ActorBase.prototype.crear_sprite = function (tipo, imagen_inicial) {
+        var galeria = null;
+        var imagen = null;
+        this.pilas.utilidades.validar_que_existe_imagen(imagen_inicial);
+        if (imagen_inicial.indexOf(":") > -1) {
+            galeria = imagen_inicial.split(":")[0];
+            imagen = imagen_inicial.split(":")[1];
+        }
+        else {
+            galeria = null;
+            imagen = imagen_inicial;
+        }
+        switch (tipo) {
+            case "matter":
+                if (galeria) {
+                    return this.pilas.modo.matter.add.sprite(0, 0, galeria, imagen);
+                }
+                else {
+                    return this.pilas.modo.matter.add.sprite(0, 0, imagen);
+                }
+                break;
+            case "sprite":
+                if (galeria) {
+                    return this.pilas.modo.add.sprite(0, 0, galeria, imagen);
+                }
+                else {
+                    return this.pilas.modo.add.sprite(0, 0, imagen);
+                }
+                break;
+            default:
+                throw Error("No se puede crear un sprite de tipo " + tipo);
+        }
     };
     ActorBase.prototype.copiar_atributos_de_sprite = function (origen, destino) {
         destino.x = origen.x;
@@ -1153,7 +1272,6 @@ var ActorBase = (function () {
             this.sprite.input.hitArea.width = ancho;
             this.sprite.input.hitArea.height = alto;
             this.sprite.setOrigin(this.centro_x, this.centro_y);
-            console.log("listo!!!");
         }
         else {
             console.log("aún no tiene sprite");
@@ -1247,20 +1365,26 @@ var ActorBase = (function () {
                 return this.sprite.texture.key;
             }
             else {
-                return this.sprite.frame.name + "." + this.sprite.texture.key;
+                return this.sprite.texture.key + ":" + this.sprite.frame.name;
             }
         },
         set: function (nombre) {
-            if (nombre.indexOf(".") > -1) {
-                var key = nombre.split(".")[0];
-                var frame = nombre
-                    .split(".")
-                    .slice(1)
-                    .join(".");
-                this.sprite.setTexture(key, frame);
+            var galeria = null;
+            var imagen = null;
+            this.pilas.utilidades.validar_que_existe_imagen(nombre);
+            if (nombre.indexOf(":") > -1) {
+                galeria = nombre.split(":")[0];
+                imagen = nombre.split(":")[1];
             }
             else {
-                this.sprite.setTexture(nombre);
+                galeria = null;
+                imagen = nombre;
+            }
+            if (galeria) {
+                this.sprite.setTexture(galeria, imagen);
+            }
+            else {
+                this.sprite.setTexture(imagen);
             }
         },
         enumerable: true,
@@ -1653,8 +1777,13 @@ var ActorBase = (function () {
         },
         set: function (nombre) {
             if (this._animacion_en_curso !== nombre) {
-                this.reproducir_animacion(nombre);
-                this._animacion_en_curso = nombre;
+                if (this.pilas.animaciones.existe_animacion(this, nombre)) {
+                    this.reproducir_animacion(nombre);
+                    this._animacion_en_curso = nombre;
+                }
+                else {
+                    throw Error("No se ha creado la animaci\u00F3n '" + nombre + "' previamente");
+                }
             }
         },
         enumerable: true,
@@ -1664,6 +1793,7 @@ var ActorBase = (function () {
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     ActorBase.prototype.cuando_termina_una_colision = function (actor) { };
     ActorBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
+    ActorBase.prototype.cuando_termina_de_hacer_click = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_sale = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_mueve = function (x, y, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "cantidad_de_colisiones", {
@@ -1692,6 +1822,9 @@ var ActorBase = (function () {
         this.sensores.map(function (s) {
             _this.pilas.modo.matter.world.remove(s);
         });
+    };
+    ActorBase.prototype.esta_vivo = function () {
+        return this._vivo;
     };
     Object.defineProperty(ActorBase.prototype, "figura_ancho", {
         get: function () {
@@ -1724,21 +1857,30 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.decir = function (mensaje) {
+        var _this = this;
+        if (this._dialogo) {
+            this._dialogo.eliminar();
+            this._dialogo = null;
+        }
         var texto = this.pilas.actores.texto();
         texto.texto = mensaje;
         texto.x = this.x - 15;
         texto.y = this.y + this.alto;
         texto.transparencia = 100;
         texto.transparencia = [0];
-        texto.fondo = "dialogo";
+        texto.fondo = "imagenes:redimensionables_dialogo.png";
         texto.color = "black";
-        texto.escala = 0.9;
-        texto.escala = [1];
         texto.centro_x = 1;
         texto.centro_y = 1;
         texto.texto = mensaje;
+        this._dialogo = texto;
         this.pilas.luego(4, function () {
-            texto.eliminar();
+            if (texto.esta_vivo()) {
+                texto.eliminar();
+                if (texto === _this._dialogo) {
+                    _this._dialogo = null;
+                }
+            }
         });
     };
     ActorBase.prototype.aprender = function (habilidad) {
@@ -1766,7 +1908,7 @@ var ActorTextoBase = (function (_super) {
     function ActorTextoBase() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "invisible",
+            imagen: "imagenes:invisible.png",
             texto: "Hola mundo",
             es_texto: true
         };
@@ -1833,7 +1975,15 @@ var ActorTextoBase = (function (_super) {
         configurable: true
     });
     ActorTextoBase.prototype.crear_fondo = function (fondo) {
-        this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, fondo, 10, 10);
+        var imagen = null;
+        if (fondo.indexOf(":") > -1) {
+            var partes = fondo.split(":");
+            imagen = { key: partes[0], frame: partes[1] };
+        }
+        else {
+            imagen = fondo;
+        }
+        this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
         this.actualizar_tamano_del_fondo();
     };
     ActorTextoBase.prototype.actualizar_tamano_del_fondo = function () {
@@ -1882,12 +2032,12 @@ var aceituna = (function (_super) {
     function aceituna() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "aceituna"
+            imagen: "imagenes:aceituna.png"
         };
         return _this;
     }
     aceituna.prototype.iniciar = function () {
-        this.imagen = "aceituna";
+        this.imagen = "imagenes:aceituna.png";
     };
     return aceituna;
 }(Actor));
@@ -1909,7 +2059,7 @@ var caja = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "caja",
+            imagen: "imagenes:caja.png",
             etiqueta: "caja",
             figura: "rectangulo",
             figura_ancho: 45,
@@ -1928,7 +2078,7 @@ var conejo = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "conejo_parado1",
+            imagen: "imagenes:conejo_parado1.png",
             figura: "rectangulo",
             figura_ancho: 50,
             figura_alto: 100,
@@ -1942,12 +2092,15 @@ var conejo = (function (_super) {
         return _this;
     }
     conejo.prototype.iniciar = function () {
-        this.crear_animacion("conejo_parado", ["conejo_parado1", "conejo_parado2"], 2);
-        this.crear_animacion("conejo_camina", ["conejo_camina1", "conejo_camina2"], 20);
-        this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
-        this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
+        this.crear_animaciones();
         this.estado = "parado";
         this.pies = this.agregar_sensor(50, 10, 0, -50);
+    };
+    conejo.prototype.crear_animaciones = function () {
+        this.crear_animacion("conejo_parado", ["imagenes:conejo_parado1.png", "imagenes:conejo_parado2.png"], 2);
+        this.crear_animacion("conejo_camina", ["imagenes:conejo_camina1.png", "imagenes:conejo_camina2.png"], 20);
+        this.crear_animacion("conejo_salta", ["imagenes:conejo_salta.png"], 20);
+        this.crear_animacion("conejo_muere", ["imagenes:conejo_muere.png"], 1);
     };
     conejo.prototype.actualizar = function () {
         if (this.pies.colisiones.length > 0) {
@@ -2032,7 +2185,7 @@ var deslizador = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "interfaz/linea",
+            imagen: "imagenes:interfaz_linea.png",
             etiqueta: "deslizador",
             figura: ""
         };
@@ -2040,7 +2193,7 @@ var deslizador = (function (_super) {
         return _this;
     }
     deslizador.prototype.iniciar = function () {
-        this.imagen = "interfaz/linea";
+        this.imagen = "imagenes:interfaz_linea.png";
         this.esta_arrastrando_el_deslizador = false;
         this.crear_marca();
         this.conectar_eventos();
@@ -2056,7 +2209,7 @@ var deslizador = (function (_super) {
     };
     deslizador.prototype.crear_marca = function () {
         this.marca = this.pilas.actores.actor();
-        this.marca.imagen = "interfaz/deslizador";
+        this.marca.imagen = "imagenes:interfaz_deslizador.png";
         this.marca.interactivo = false;
     };
     deslizador.prototype.cuando_hace_click = function (x, y) {
@@ -2090,7 +2243,7 @@ var gallina = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "gallina_vuela_3",
+            imagen: "imagenes:gallina_vuela_3.png",
             figura: "circulo",
             figura_radio: 30,
             figura_sin_rotacion: true,
@@ -2101,14 +2254,14 @@ var gallina = (function (_super) {
     }
     gallina.prototype.iniciar = function () {
         this.crear_animacion("gallina_vuela", [
-            "gallina_vuela_1",
-            "gallina_vuela_1",
-            "gallina_vuela_2",
-            "gallina_vuela_3",
-            "gallina_vuela_2"
+            "imagenes:gallina_vuela_1.png",
+            "imagenes:gallina_vuela_1.png",
+            "imagenes:gallina_vuela_2.png",
+            "imagenes:gallina_vuela_3.png",
+            "imagenes:gallina_vuela_2.png"
         ], 15);
-        this.crear_animacion("gallina_muere", ["gallina_muere"], 20);
-        this.crear_animacion("gallina_sin_piel", ["gallina_sin_piel"], 20);
+        this.crear_animacion("gallina_muere", ["imagenes:gallina_muere.png"], 20);
+        this.crear_animacion("gallina_sin_piel", ["imagenes:gallina_sin_piel.png"], 20);
         this.estado = "vuela";
     };
     gallina.prototype.actualizar = function () { };
@@ -2124,7 +2277,7 @@ var laser = (function (_super) {
     function laser() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "laser"
+            imagen: "imagenes:laser.png"
         };
         return _this;
     }
@@ -2146,7 +2299,7 @@ var logo = (function (_super) {
     function logo() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "logo"
+            imagen: "imagenes:logo.png"
         };
         return _this;
     }
@@ -2158,7 +2311,7 @@ var moneda = (function (_super) {
     function moneda() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "moneda",
+            imagen: "imagenes:moneda.png",
             etiqueta: "moneda",
             figura: "circulo",
             figura_radio: 10,
@@ -2174,18 +2327,21 @@ var nave = (function (_super) {
     function nave() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "nave_en_reposo"
+            imagen: "imagenes:nave_reposo.png"
         };
         _this.velocidad = 5;
         return _this;
     }
     nave.prototype.iniciar = function () {
-        this.crear_animacion("nave_en_reposo", ["nave_en_reposo"], 2);
-        this.crear_animacion("nave_avanzando", ["nave_avanza_1", "nave_avanza_2"], 20);
-        this.crear_animacion("nave_girando_a_la_izquierda", ["nave_izquierda_1", "nave_izquierda_2"], 20);
-        this.crear_animacion("nave_girando_a_la_derecha", ["nave_derecha_1", "nave_derecha_2"], 20);
+        this.crear_animaciones();
         this.animacion = "nave_en_reposo";
         this.cuadros_desde_el_ultimo_disparo = 0;
+    };
+    nave.prototype.crear_animaciones = function () {
+        this.crear_animacion("nave_en_reposo", ["imagenes:nave_reposo.png"], 2);
+        this.crear_animacion("nave_avanzando", ["imagenes:nave_avanza_1.png", "imagenes:nave_avanza_2.png"], 20);
+        this.crear_animacion("nave_girando_a_la_izquierda", ["imagenes:nave_izquierda_1.png", "imagenes:nave_izquierda_2.png"], 20);
+        this.crear_animacion("nave_girando_a_la_derecha", ["imagenes:nave_derecha_1.png", "imagenes:nave_derecha_2.png"], 20);
     };
     nave.prototype.actualizar = function () {
         this.cuadros_desde_el_ultimo_disparo += 1;
@@ -2197,7 +2353,8 @@ var nave = (function (_super) {
             this.rotacion -= this.velocidad;
             this.animacion = "nave_girando_a_la_derecha";
         }
-        if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {
+        if (this.pilas.control.espacio &&
+            this.cuadros_desde_el_ultimo_disparo > 5) {
             var laser_1 = this.pilas.actores.laser();
             laser_1.x = this.x;
             laser_1.y = this.y;
@@ -2222,7 +2379,7 @@ var nube = (function (_super) {
     function nube() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "nube"
+            imagen: "imagenes:nube.png"
         };
         return _this;
     }
@@ -2235,7 +2392,7 @@ var pared = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "pared",
+            imagen: "imagenes:pared.png",
             y: 0,
             figura_ancho: 20,
             figura_alto: 600,
@@ -2252,7 +2409,7 @@ var pelota = (function (_super) {
     function pelota() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "pelota",
+            imagen: "imagenes:pelota.png",
             figura: "circulo",
             figura_radio: 25
         };
@@ -2267,7 +2424,7 @@ var plataforma = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "plataforma",
+            imagen: "imagenes:plataforma.png",
             etiqueta: "plataforma",
             y: 0,
             figura_ancho: 250,
@@ -2286,7 +2443,7 @@ var suelo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "suelo",
+            imagen: "imagenes:suelo.png",
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false
@@ -2302,7 +2459,7 @@ var techo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "techo",
+            imagen: "imagenes:techo.png",
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false
@@ -2317,7 +2474,7 @@ var texto = (function (_super) {
     function texto() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "invisible",
+            imagen: "imagenes:invisible.png",
             texto: "Hola mundo",
             es_texto: true
         };
@@ -2533,7 +2690,15 @@ var Modo = (function (_super) {
     };
     Modo.prototype.crear_fondo = function (fondo) {
         this._nombre_del_fondo = fondo;
-        this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
+        this.pilas.utilidades.validar_que_existe_imagen(fondo);
+        if (fondo.indexOf(":") > -1) {
+            var g = fondo.split(":")[0];
+            var i = fondo.split(":")[1];
+            this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, g, i);
+        }
+        else {
+            this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
+        }
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
     };
@@ -2550,7 +2715,15 @@ var Modo = (function (_super) {
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
         var _this = this;
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
-        sprite.setTexture(actor.imagen);
+        this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+        if (actor.imagen.indexOf(":") > -1) {
+            var g = actor.imagen.split(":")[0];
+            var i = actor.imagen.split(":")[1];
+            sprite.setTexture(g, i);
+        }
+        else {
+            sprite.setTexture(actor.imagen);
+        }
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -2576,7 +2749,8 @@ var Modo = (function (_super) {
                     _this.copiar_valores_de_sprite_a_texto(sprite);
                 };
                 if (actor.fondo) {
-                    var f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+                    var imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+                    var f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
                     sprite["fondo"] = f;
                     sprite["fondo_imagen"] = actor.fondo;
                 }
@@ -2587,12 +2761,22 @@ var Modo = (function (_super) {
                     sprite["fondo"].destroy();
                 }
                 if (actor.fondo) {
-                    var f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+                    var imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+                    var f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
                     sprite["fondo"] = f;
                     sprite["fondo_imagen"] = actor.fondo;
                 }
             }
             this.copiar_valores_de_sprite_a_texto(sprite);
+        }
+    };
+    Modo.prototype.obtener_imagen_para_nineslice = function (imagen) {
+        if (imagen.indexOf(":") > -1) {
+            var partes = imagen.split(":");
+            return { key: partes[0], frame: partes[1] };
+        }
+        else {
+            return imagen;
         }
     };
     Modo.prototype.copiar_valores_de_sprite_a_texto = function (sprite) {
@@ -2672,13 +2856,33 @@ var ModoCargador = (function (_super) {
     ModoCargador.prototype.init = function (data) {
         this.pilas = data.pilas;
     };
+    ModoCargador.prototype.crear_indicador_de_carga = function () {
+        var progressBox = this.add.graphics();
+        var borde = this.add.graphics();
+        this.barra_de_progreso = this.add.graphics();
+        var width = this.cameras.main.width;
+        var height = this.cameras.main.height;
+        var loadingText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 50,
+            text: "Iniciando ...",
+            style: {
+                font: "14px verdana",
+                fill: "#ffffff"
+            }
+        });
+        loadingText.setOrigin(0.5, 0.5);
+        this.x = width / 2 - 310 / 2;
+        borde.lineStyle(1, 0x555555, 1);
+        borde.strokeRect(this.x, 220, 310, 20);
+        progressBox.fillStyle(0x222222, 1);
+        progressBox.fillRect(this.x, 220, 310, 20);
+    };
     ModoCargador.prototype.preload = function () {
         this.load.crossOrigin = "anonymous";
         this.contador = 0;
-        for (var i = 0; i < this.pilas.recursos.imagenes.length; i++) {
-            var item = this.pilas.recursos.imagenes[i];
-            this.load.image(item.nombre, item.ruta);
-        }
+        this.crear_indicador_de_carga();
+        this.load.multiatlas("imagenes", "imagenes.json", "./");
         for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
             var sonido = this.pilas.recursos.sonidos[i];
             this.load.audio(sonido.nombre, sonido.ruta, {});
@@ -2696,8 +2900,27 @@ var ModoCargador = (function (_super) {
             this.add.bitmapText(5, 5, "impact", msg);
         }
     };
+    ModoCargador.prototype.notificar_imagenes_cargadas = function () {
+        var imagenes = [];
+        for (var key in this.game.textures.list) {
+            if (key.indexOf("__") === -1 && key) {
+                var contenido = this.game.textures.list[key];
+                if (contenido.frameTotal === 1) {
+                    imagenes.push(key);
+                }
+                else {
+                    var frames_2 = contenido.getFrameNames();
+                    for (var i = 0; i < frames_2.length; i++) {
+                        imagenes.push(key + ":" + frames_2[i]);
+                    }
+                }
+            }
+        }
+        this.pilas.imagenes_precargadas = imagenes;
+    };
     ModoCargador.prototype.create = function () {
         _super.prototype.create.call(this, { pilas: this.pilas }, 500, 500);
+        this.notificar_imagenes_cargadas();
         if (this.pilas.opciones.modo_simple) {
             console.log("Finalizó la carga en modo simple");
             this.pilas.definir_modo("ModoEjecucion", {
@@ -2735,6 +2958,9 @@ var ModoCargador = (function (_super) {
         }
     };
     ModoCargador.prototype.cuando_progresa_la_carga = function (progreso) {
+        this.barra_de_progreso.clear();
+        this.barra_de_progreso.fillStyle(0xffffff, 1);
+        this.barra_de_progreso.fillRect(this.x + 5, 220 + 5, 300 * progreso, 10);
         if (this.pilas.opciones.modo_simple) {
             console.log("Progreso: " + progreso);
         }
@@ -2753,7 +2979,6 @@ var ModoEditor = (function (_super) {
     }
     ModoEditor.prototype.preload = function () { };
     ModoEditor.prototype.create = function (datos) {
-        var _this = this;
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.pilas = datos.pilas;
@@ -2762,6 +2987,10 @@ var ModoEditor = (function (_super) {
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.crear_manejadores_para_hacer_arrastrables_los_actores();
         this.matter.world.createDebugGraphic();
+        this.conectar_movimiento_del_mouse();
+    };
+    ModoEditor.prototype.conectar_movimiento_del_mouse = function () {
+        var _this = this;
         this.input.on("pointermove", function (cursor) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.pilas.cursor_x = Math.trunc(posicion.x);
@@ -2774,10 +3003,10 @@ var ModoEditor = (function (_super) {
         this.input.on("dragstart", function (pointer, gameObject) {
             escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
             if (escena.pilas.utilidades.es_firefox()) {
-                escena.pilas.game.canvas.style.cursor = "grabbing";
+                escena.input.setDefaultCursor("grabbing");
             }
             else {
-                escena.pilas.game.canvas.style.cursor = "-webkit-grabbing";
+                escena.input.setDefaultCursor("-webkit-grabbing");
             }
         });
         this.input.on("drag", function (pointer, gameObject, dragX, dragY) {
@@ -2791,7 +3020,7 @@ var ModoEditor = (function (_super) {
             }
         });
         this.input.on("dragend", function (pointer, gameObject) {
-            escena.pilas.game.canvas.style.cursor = "default";
+            escena.input.setDefaultCursor("default");
             var posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
             escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
         });
@@ -2804,31 +3033,63 @@ var ModoEditor = (function (_super) {
     };
     ModoEditor.prototype.crear_sprite_desde_actor = function (actor) {
         var _this = this;
-        var sprite = this.add.sprite(0, 0, actor.imagen);
+        this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
+        var sprite = null;
+        if (actor.imagen.indexOf(":") > -1) {
+            var g = actor.imagen.split(":")[0];
+            var i = actor.imagen.split(":")[1];
+            sprite = this.add.sprite(0, 0, g, i);
+        }
+        else {
+            sprite = this.add.sprite(0, 0, actor.imagen);
+        }
         sprite["setInteractive"]();
         sprite["actor"] = actor;
         sprite["destacandose"] = false;
         sprite["destacar"] = function () {
-            if (sprite["destacandose"]) {
-                return;
-            }
             sprite["destacandose"] = true;
-            _this.tweens.add({
-                targets: sprite,
-                scaleX: sprite.scaleX + 0.1,
-                scaleY: sprite.scaleY + 0.1,
-                duration: 100,
-                ease: "Power2",
-                yoyo: true,
-                delay: 0,
-                onComplete: function () {
-                    sprite["destacandose"] = false;
-                }
+            _this.crear_destello(sprite, function () {
+                sprite["destacandose"] = false;
             });
         };
         this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
         this.input.setDraggable(sprite, undefined);
         this.actores.push(sprite);
+    };
+    ModoEditor.prototype.crear_destello = function (sprite, cuando_termina) {
+        var _this = this;
+        var t = sprite.texture;
+        var cuadro = sprite.frame.name;
+        var sprite2 = this.add.sprite(0, 0, t.key, cuadro);
+        this.copiar_atributos_excepto_alpha(sprite, sprite2);
+        sprite2.setTintFill(0xffffff);
+        sprite2.setAlpha(0.4);
+        this.tweens.add({
+            targets: sprite2,
+            alpha: 0.7,
+            duration: 100,
+            ease: "Power2",
+            yoyo: true,
+            delay: 0,
+            onUpdate: function () {
+                _this.copiar_atributos_excepto_alpha(sprite, sprite2);
+            },
+            onComplete: function () {
+                sprite2.destroy();
+                cuando_termina();
+            }
+        });
+    };
+    ModoEditor.prototype.copiar_atributos_excepto_alpha = function (origen, destino) {
+        destino.x = origen.x;
+        destino.y = origen.y;
+        destino.angle = origen.angle;
+        destino.scaleX = origen.scaleX;
+        destino.scaleY = origen.scaleY;
+        destino.flipX = origen.flipX;
+        destino.flipY = origen.flipY;
+        destino.depth = origen.depth;
+        destino.setOrigin(origen.originX, origen.originY);
     };
     ModoEditor.prototype.aplicar_atributos_de_actor_a_sprite = function (actor, sprite) {
         this.actualizar_sprite_desde_datos(sprite, actor);
@@ -3105,7 +3366,12 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.instanciar_escena = function (nombre) {
         var escena = this.obtener_escena_por_nombre(nombre);
-        this.crear_fondo(escena.fondo);
+        if (escena.fondo) {
+            this.crear_fondo(escena.fondo);
+        }
+        else {
+            console.warn("Cuidado, la escena no tiene un fondo definido");
+        }
         this.crear_escena(escena);
     };
     ModoEjecucion.prototype.crear_escena = function (datos_de_la_escena) {
@@ -3302,8 +3568,25 @@ var ModoPausa = (function (_super) {
         this.posicionar_fondo();
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
+        var nombre = entidad.imagen;
+        var sprite = null;
+        var galeria = null;
+        var imagen = null;
         var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
-        var sprite = this.add.sprite(x, y, entidad.imagen);
+        if (nombre.indexOf(":") > -1) {
+            galeria = nombre.split(":")[0];
+            imagen = nombre.split(":")[1];
+        }
+        else {
+            galeria = null;
+            imagen = nombre;
+        }
+        if (galeria) {
+            sprite = this.add.sprite(x, y, galeria, imagen);
+        }
+        else {
+            sprite = this.add.sprite(x, y, imagen);
+        }
         sprite.angle = -entidad.rotacion;
         sprite.setOrigin(entidad.centro_x, entidad.centro_y);
         sprite.scaleX = entidad.escala_x;
@@ -3317,7 +3600,8 @@ var ModoPausa = (function (_super) {
             sprite["texto"].setFontFamily("verdana");
             sprite["texto"].depth = sprite.depth;
             if (entidad.fondo) {
-                var f = this.pilas.modo.add.nineslice(40, 0, 30, 20, entidad.fondo, 10, 10);
+                var imagen_1 = this.obtener_imagen_para_nineslice(entidad.fondo);
+                var f = this.pilas.modo.add.nineslice(40, 0, 30, 20, imagen_1, 10, 10);
                 sprite["fondo"] = f;
                 sprite["fondo_imagen"] = entidad.fondo;
             }

@@ -91,7 +91,12 @@ class Utilidades {
     );
   }
 
-  obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number) {
+  obtener_distancia_entre(
+    desde_x: number,
+    desde_y: number,
+    hasta_x: number,
+    hasta_y: number
+  ) {
     return Math.sqrt(
       Math.abs(desde_x - hasta_x) ** 2 + Math.abs(desde_y - hasta_y) ** 2
     );
@@ -137,5 +142,46 @@ class Utilidades {
     }
 
     return levenshtein_distance_b(cadena1, cadena2);
+  }
+
+  /**
+   * Dado un nombre y una lista de posibilidades retorna la mas similar.
+   *
+   * Por ejemplo:
+   *
+   *  > let opciones =  ["¡hola mundo!", "¡hola mundo, este es otro mensaje!"]
+   *  > pilas.utilidades.obtener_mas_similar("holamund", opciones)
+   *  "¡hola mundo!"
+   */
+
+  obtener_mas_similar(nombre, posibilidades) {
+    let similitudes = posibilidades.map(h => {
+      return {
+        similitud: this.obtener_similaridad(h, nombre),
+        posiblidad: h
+      };
+    });
+
+    similitudes = similitudes.sort((a, b) => {
+      if (a.similitud > b.similitud) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+
+    return similitudes[0].posiblidad;
+  }
+
+  validar_que_existe_imagen(nombre) {
+    if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
+      let sugerencia = this.pilas.utilidades.obtener_mas_similar(
+        nombre,
+        this.pilas.imagenes_precargadas
+      );
+      throw Error(
+        `No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`
+      );
+    }
   }
 }
