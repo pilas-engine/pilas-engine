@@ -176,14 +176,9 @@ export default Component.extend({
           }
 
           #status {
-            display: block;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            font-family: monospace;
-            padding: 5px;
+            display: none;
           }
+
         </style>
 
         <script>
