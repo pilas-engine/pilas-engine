@@ -47,7 +47,7 @@ class deslizador extends Actor {
     }
   }
 
-  private cuando_termina_de_hacer_click() {
+  cuando_termina_de_hacer_click() {
     this.esta_arrastrando_el_deslizador = false;
   }
 
