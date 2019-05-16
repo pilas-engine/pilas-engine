@@ -106,7 +106,9 @@ export default Controller.extend(queryParams.Mixin, {
   },
 
   crearProyectoInicial() {
-    let proyecto = this.convertirEscenaEnObjetoEmber(fixtureDeProyecto);
+    let fixtureComoString = JSON.stringify(fixtureDeProyecto);
+    let fixture = JSON.parse(fixtureComoString);
+    let proyecto = this.convertirEscenaEnObjetoEmber(fixture);
     return proyecto;
   },
 
