@@ -15,7 +15,7 @@
 
   {{#pilas-modal alCerrar=(action "ocultar") visible=mostrar id="dialogo_cambiar_imagen" titulo="Cambiar imagen"}}
     <div>
-      {{pilas-grilla-de-imagenes cuando_selecciona=(action "cuando_selecciona_imagen")}}
+      {{pilas-grilla-de-imagenes filtro=filtroPropuesto cuando_selecciona=(action "cuando_selecciona_imagen")}}
     </div>
   {{/pilas-modal}}
 

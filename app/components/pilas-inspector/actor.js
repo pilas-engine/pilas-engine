@@ -15,7 +15,8 @@ export default Component.extend({
 
       propiedades.pushObject({
         tipo: "imagen",
-        propiedad: "fondo"
+        propiedad: "fondo",
+        filtroPropuesto: "redimensionable"
       });
     } else {
       propiedades.pushObject({
