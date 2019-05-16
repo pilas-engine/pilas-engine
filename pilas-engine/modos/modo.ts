@@ -174,7 +174,8 @@ class Modo extends Phaser.Scene {
         };
 
         if (actor.fondo) {
-          let f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+          let imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+          let f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
           sprite["fondo"] = f;
           sprite["fondo_imagen"] = actor.fondo;
         }
@@ -188,13 +189,23 @@ class Modo extends Phaser.Scene {
         }
 
         if (actor.fondo) {
-          let f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+          let imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+          let f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
           sprite["fondo"] = f;
           sprite["fondo_imagen"] = actor.fondo;
         }
       }
 
       this.copiar_valores_de_sprite_a_texto(sprite);
+    }
+  }
+
+  obtener_imagen_para_nineslice(imagen) {
+    if (imagen.indexOf(":") > -1) {
+      let partes = imagen.split(":");
+      return { key: partes[0], frame: partes[1] };
+    } else {
+      return imagen;
     }
   }
 
