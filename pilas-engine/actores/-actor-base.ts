@@ -24,6 +24,7 @@ class ActorBase {
 
   _fondo: any = null;
   _fondo_imagen: string = "";
+  _dialogo: any = null;
 
   propiedades_base = {
     x: 0,
@@ -168,6 +169,14 @@ class ActorBase {
       this.cuando_hace_click(posicion.x, posicion.y, cursor);
     });
 
+    this.sprite.on("pointerup", cursor => {
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
+        cursor.x,
+        cursor.y
+      );
+      this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+    });
+
     this.sprite.on("pointerout", cursor => {
       let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
         cursor.x,
@@ -270,7 +279,6 @@ class ActorBase {
       this.sprite.input.hitArea.width = ancho;
       this.sprite.input.hitArea.height = alto;
       this.sprite.setOrigin(this.centro_x, this.centro_y);
-      console.log("listo!!!");
     } else {
       console.log("aún no tiene sprite");
     }
@@ -793,6 +801,8 @@ class ActorBase {
 
   cuando_hace_click(x, y, evento_original) {}
 
+  cuando_termina_de_hacer_click(x, y, evento_original) {}
+
   cuando_sale(x, y, evento_original) {}
 
   cuando_mueve(x, y, evento_original) {}
@@ -835,6 +845,10 @@ class ActorBase {
     });
   }
 
+  esta_vivo() {
+    return this._vivo;
+  }
+
   set figura_ancho(valor: number) {
     throw new Error("No puede definir este atributo");
   }
@@ -859,24 +873,39 @@ class ActorBase {
     return this._figura_radio;
   }
 
+  /**
+   * Muestra un mensaje como si se tratara de un globo de historieta. Llamar
+   * a este método borra el dialogo anterior si existiera.
+   */
   decir(mensaje: string) {
+    if (this._dialogo) {
+      this._dialogo.eliminar();
+      this._dialogo = null;
+    }
+
     let texto = this.pilas.actores.texto();
     texto.texto = mensaje;
     texto.x = this.x - 15;
     texto.y = this.y + this.alto;
     texto.transparencia = 100;
     texto.transparencia = [0];
-    texto.fondo = "dialogo";
+    texto.fondo = "imagenes:redimensionables_dialogo.png";
     texto.color = "black";
-    texto.escala = 0.9;
-    texto.escala = [1];
     texto.centro_x = 1;
     texto.centro_y = 1;
 
     texto.texto = mensaje;
 
+    this._dialogo = texto;
+
     this.pilas.luego(4, () => {
-      texto.eliminar();
+      if (texto.esta_vivo()) {
+        texto.eliminar();
+
+        if (texto === this._dialogo) {
+          this._dialogo = null;
+        }
+      }
     });
   }
 
