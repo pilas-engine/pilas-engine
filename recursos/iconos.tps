@@ -201,6 +201,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_aceituna.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_aceituna.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -214,6 +215,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_actor.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_sin_imagen.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -228,6 +230,10 @@
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_caja.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_gallina.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_caja.png</key>
+            <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_dialogo.png</key>
+            <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_gris.png</key>
+            <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_gris_claro.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -241,6 +247,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_conejo.png</key>
+            <key type="filename">iconos/grilla-imagenes/conejo/imagenes_conejo_camina1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -255,6 +262,7 @@
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_deslizador.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_logo.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_logo.png</key>
             <key type="filename">iconos/logos/electron.png</key>
             <key type="filename">iconos/logos/pilas_logo_60.png</key>
             <key type="filename">iconos/logos/typescript.png</key>
@@ -271,6 +279,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_laser.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_laser.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -284,6 +293,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_moneda.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_moneda.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -297,6 +307,13 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_nave.png</key>
+            <key type="filename">iconos/grilla-imagenes/nave/imagenes_nave_avanza_1.png</key>
+            <key type="filename">iconos/grilla-imagenes/nave/imagenes_nave_avanza_2.png</key>
+            <key type="filename">iconos/grilla-imagenes/nave/imagenes_nave_derecha_1.png</key>
+            <key type="filename">iconos/grilla-imagenes/nave/imagenes_nave_derecha_2.png</key>
+            <key type="filename">iconos/grilla-imagenes/nave/imagenes_nave_izquierda_1.png</key>
+            <key type="filename">iconos/grilla-imagenes/nave/imagenes_nave_izquierda_2.png</key>
+            <key type="filename">iconos/grilla-imagenes/nave/imagenes_nave_reposo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -323,6 +340,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_pared.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_pared.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -336,6 +354,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_pelota.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_pelota.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -349,6 +368,7 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_plataforma.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_plataforma.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -363,6 +383,8 @@
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_suelo.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_techo.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_suelo.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_techo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -388,6 +410,120 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">iconos/grilla-imagenes/conejo/imagenes_conejo_camina2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,26,30,52</rect>
+                <key>scale9Paddings</key>
+                <rect>15,26,30,52</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/conejo/imagenes_conejo_muere.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>19,22,37,43</rect>
+                <key>scale9Paddings</key>
+                <rect>19,22,37,43</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/conejo/imagenes_conejo_parado1.png</key>
+            <key type="filename">iconos/grilla-imagenes/conejo/imagenes_conejo_parado2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,25,30,51</rect>
+                <key>scale9Paddings</key>
+                <rect>15,25,30,51</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/conejo/imagenes_conejo_salta.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>19,23,37,45</rect>
+                <key>scale9Paddings</key>
+                <rect>19,23,37,45</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-azul.png</key>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-cesped_1.png</key>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-madera.png</key>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-rojo.png</key>
+            <key type="filename">iconos/logos/pilas_logo_128.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9Paddings</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-cesped_2.png</key>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-tierra_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9Paddings</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-cielo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,120,9,240</rect>
+                <key>scale9Paddings</key>
+                <rect>5,120,9,240</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-espacio_1.png</key>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-espacio_2.png</key>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-nubes.jpg</key>
+            <key type="filename">iconos/grilla-imagenes/nubes/imagenes_nube.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9Paddings</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-plano.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_aceituna.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_actortexto.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_caja.png</key>
@@ -412,6 +548,275 @@
                 <rect>3,3,5,5</rect>
                 <key>scale9Paddings</key>
                 <rect>3,3,5,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-verde.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>40,40,80,80</rect>
+                <key>scale9Paddings</key>
+                <rect>40,40,80,80</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/gallina/imagenes_gallina_muere.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>21,23,41,46</rect>
+                <key>scale9Paddings</key>
+                <rect>21,23,41,46</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/gallina/imagenes_gallina_sin_piel.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>17,19,33,39</rect>
+                <key>scale9Paddings</key>
+                <rect>17,19,33,39</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/gallina/imagenes_gallina_vuela_1.png</key>
+            <key type="filename">iconos/grilla-imagenes/gallina/imagenes_gallina_vuela_3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>19,18,37,36</rect>
+                <key>scale9Paddings</key>
+                <rect>19,18,37,36</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/gallina/imagenes_gallina_vuela_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>23,17,47,33</rect>
+                <key>scale9Paddings</key>
+                <rect>23,17,47,33</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_arbol_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>26,52,51,103</rect>
+                <key>scale9Paddings</key>
+                <rect>26,52,51,103</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_arbol_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>31,52,61,104</rect>
+                <key>scale9Paddings</key>
+                <rect>31,52,61,104</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_carta.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_carta_azul.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_carta_verde.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>18,24,35,47</rect>
+                <key>scale9Paddings</key>
+                <rect>18,24,35,47</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_copa.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9Paddings</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_dado_1.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_dado_2.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_dado_3.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_dado_4.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_dado_5.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_dado_6.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>9,9,17,17</rect>
+                <key>scale9Paddings</key>
+                <rect>9,9,17,17</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_hierba_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,11,26,23</rect>
+                <key>scale9Paddings</key>
+                <rect>13,11,26,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_invisible.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_pizarra.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,2,4,4</rect>
+                <key>scale9Paddings</key>
+                <rect>2,2,4,4</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_laser_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>14,2,27,5</rect>
+                <key>scale9Paddings</key>
+                <rect>14,2,27,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_laser_3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>9,3,19,7</rect>
+                <key>scale9Paddings</key>
+                <rect>9,3,19,7</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/imagenes_pelota_de_voley.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,13,25,25</rect>
+                <key>scale9Paddings</key>
+                <rect>12,13,25,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/interfaz/imagenes_interfaz_deslizador.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>7,11,14,21</rect>
+                <key>scale9Paddings</key>
+                <rect>7,11,14,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/interfaz/imagenes_interfaz_linea.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>48,8,95,15</rect>
+                <key>scale9Paddings</key>
+                <rect>48,8,95,15</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/interfaz/imagenes_interfaz_punto.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,3,4,5</rect>
+                <key>scale9Paddings</key>
+                <rect>2,3,4,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_boton-amarillo-pulsado.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,11,25,23</rect>
+                <key>scale9Paddings</key>
+                <rect>12,11,25,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_boton-amarillo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,12,25,25</rect>
+                <key>scale9Paddings</key>
+                <rect>12,12,25,25</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -510,19 +915,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">iconos/logos/pilas_logo_128.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>32,32,64,64</rect>
-                <key>scale9Paddings</key>
-                <rect>32,32,64,64</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">iconos/principal/api.png</key>
             <key type="filename">iconos/principal/computadora.png</key>
             <key type="filename">iconos/principal/ejemplos.png</key>
@@ -600,6 +992,7 @@
             <filename>iconos/ejemplos</filename>
             <filename>iconos/grilla-actores</filename>
             <filename>iconos/icono-actores</filename>
+            <filename>iconos/grilla-imagenes</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

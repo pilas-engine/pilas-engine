@@ -177,7 +177,7 @@
             <key>defaultPivotPoint</key>
             <point_f>0.5,0.5</point_f>
             <key>writePivotPoints</key>
-            <false/>
+            <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
@@ -220,22 +220,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/boton_jugar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>57,25,115,50</rect>
-                <key>scale9Paddings</key>
-                <rect>57,25,115,50</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">imagenes/caja.png</key>
-            <key type="filename">imagenes/redimensionables/dialogo.png</key>
-            <key type="filename">imagenes/redimensionables/gris.png</key>
+            <key type="filename">imagenes/redimensionables/redimensionables_dialogo.png</key>
+            <key type="filename">imagenes/redimensionables/redimensionables_gris.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -342,24 +329,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/dado_1.png</key>
-            <key type="filename">imagenes/dado_2.png</key>
-            <key type="filename">imagenes/dado_3.png</key>
-            <key type="filename">imagenes/dado_4.png</key>
-            <key type="filename">imagenes/dado_5.png</key>
-            <key type="filename">imagenes/dado_6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>9,9,17,17</rect>
-                <key>scale9Paddings</key>
-                <rect>9,9,17,17</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">imagenes/fondos/fondo-azul.png</key>
             <key type="filename">imagenes/fondos/fondo-cesped_1.png</key>
             <key type="filename">imagenes/fondos/fondo-madera.png</key>
@@ -405,7 +374,6 @@
             </struct>
             <key type="filename">imagenes/fondos/fondo-espacio_1.png</key>
             <key type="filename">imagenes/fondos/fondo-espacio_2.png</key>
-            <key type="filename">imagenes/fondos/fondo-nubes.jpg</key>
             <key type="filename">imagenes/nubes/nube.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -416,6 +384,19 @@
                 <rect>64,64,128,128</rect>
                 <key>scale9Paddings</key>
                 <rect>64,64,128,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">imagenes/fondos/fondo-nubes.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>20,20,40,40</rect>
+                <key>scale9Paddings</key>
+                <rect>20,20,40,40</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -700,7 +681,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/redimensionables/boton-amarillo-pulsado.png</key>
+            <key type="filename">imagenes/redimensionables/redimensionables_boton-amarillo-pulsado.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -713,7 +694,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/redimensionables/boton-amarillo.png</key>
+            <key type="filename">imagenes/redimensionables/redimensionables_boton-amarillo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -761,19 +742,12 @@
             <filename>imagenes/aceituna.png</filename>
             <filename>imagenes/arbol_1.png</filename>
             <filename>imagenes/arbol_2.png</filename>
-            <filename>imagenes/boton_jugar.png</filename>
             <filename>imagenes/caja.png</filename>
             <filename>imagenes/carta_azul.png</filename>
             <filename>imagenes/carta_verde.png</filename>
             <filename>imagenes/carta.png</filename>
             <filename>imagenes/conejo</filename>
             <filename>imagenes/copa.png</filename>
-            <filename>imagenes/dado_1.png</filename>
-            <filename>imagenes/dado_2.png</filename>
-            <filename>imagenes/dado_3.png</filename>
-            <filename>imagenes/dado_4.png</filename>
-            <filename>imagenes/dado_5.png</filename>
-            <filename>imagenes/dado_6.png</filename>
             <filename>imagenes/fondos</filename>
             <filename>imagenes/gallina</filename>
             <filename>imagenes/hierba_1.png</filename>
