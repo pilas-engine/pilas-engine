@@ -273,6 +273,7 @@ declare class Pilas {
     escena_actual(): EscenaBase;
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
+    azar(desde: number, hasta: number): number;
 }
 declare var pilasengine: Pilas;
 declare class ActorBase {
@@ -299,6 +300,7 @@ declare class ActorBase {
     _habilidades: any[];
     _fondo: any;
     _fondo_imagen: string;
+    _dialogo: any;
     propiedades_base: {
         x: number;
         y: number;
@@ -402,11 +404,13 @@ declare class ActorBase {
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
     cuando_hace_click(x: any, y: any, evento_original: any): void;
+    cuando_termina_de_hacer_click(x: any, y: any, evento_original: any): void;
     cuando_sale(x: any, y: any, evento_original: any): void;
     cuando_mueve(x: any, y: any, evento_original: any): void;
     readonly cantidad_de_colisiones: number;
     agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
     eliminar(): void;
+    esta_vivo(): boolean;
     figura_ancho: number;
     figura_alto: number;
     figura_radio: number;
@@ -506,7 +510,7 @@ declare class deslizador extends Actor {
     crear_marca(): void;
     cuando_hace_click(x: any, y: any): void;
     private cuando_mueve_el_mouse;
-    private cuando_termina_de_hacer_click;
+    cuando_termina_de_hacer_click(): void;
     actualizar(): void;
     private ajustar_marca;
 }
@@ -691,6 +695,7 @@ declare class Modo extends Phaser.Scene {
     cambiar_fondo(fondo: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
+    obtener_imagen_para_nineslice(imagen: any): any;
     copiar_valores_de_sprite_a_texto(sprite: any): void;
     crear_figura_estatica_para(actor: any): MatterJS.Body;
     posicionar_la_camara(datos_de_la_escena: any): void;

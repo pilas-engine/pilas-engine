@@ -28,7 +28,12 @@ export default Controller.extend({
                 });
                 */
 
-                this.pilas.actores.conejo();
+                a = this.pilas.actores.conejo();
+                a.decir("hola?")
+
+                //this.pilas.modo.add.sprite(300, 300, "dialogo.png")
+
+                //this.pilas.modo.add.nineslice(100, 0, 100, 100, "dialogo.png", 2, 2);
 
                 let p = this.pilas.actores.plataforma();
                 p.y = -200;

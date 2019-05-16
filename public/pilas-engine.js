@@ -1047,6 +1047,9 @@ var Pilas = (function () {
     Pilas.prototype.luego = function (duracion, tarea) {
         this.modo.time.delayedCall(duracion * 1000, tarea);
     };
+    Pilas.prototype.azar = function (desde, hasta) {
+        return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
+    };
     return Pilas;
 }());
 var pilasengine = new Pilas();
@@ -1059,6 +1062,7 @@ var ActorBase = (function () {
         this._es_texto = false;
         this._fondo = null;
         this._fondo_imagen = "";
+        this._dialogo = null;
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -1174,6 +1178,10 @@ var ActorBase = (function () {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.cuando_hace_click(posicion.x, posicion.y, cursor);
         });
+        this.sprite.on("pointerup", function (cursor) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+            _this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+        });
         this.sprite.on("pointerout", function (cursor) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.cuando_sale(posicion.x, posicion.y, cursor);
@@ -1264,7 +1272,6 @@ var ActorBase = (function () {
             this.sprite.input.hitArea.width = ancho;
             this.sprite.input.hitArea.height = alto;
             this.sprite.setOrigin(this.centro_x, this.centro_y);
-            console.log("listo!!!");
         }
         else {
             console.log("aún no tiene sprite");
@@ -1786,6 +1793,7 @@ var ActorBase = (function () {
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     ActorBase.prototype.cuando_termina_una_colision = function (actor) { };
     ActorBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
+    ActorBase.prototype.cuando_termina_de_hacer_click = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_sale = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_mueve = function (x, y, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "cantidad_de_colisiones", {
@@ -1814,6 +1822,9 @@ var ActorBase = (function () {
         this.sensores.map(function (s) {
             _this.pilas.modo.matter.world.remove(s);
         });
+    };
+    ActorBase.prototype.esta_vivo = function () {
+        return this._vivo;
     };
     Object.defineProperty(ActorBase.prototype, "figura_ancho", {
         get: function () {
@@ -1846,21 +1857,30 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.decir = function (mensaje) {
+        var _this = this;
+        if (this._dialogo) {
+            this._dialogo.eliminar();
+            this._dialogo = null;
+        }
         var texto = this.pilas.actores.texto();
         texto.texto = mensaje;
         texto.x = this.x - 15;
         texto.y = this.y + this.alto;
         texto.transparencia = 100;
         texto.transparencia = [0];
-        texto.fondo = "dialogo";
+        texto.fondo = "imagenes:redimensionables_dialogo.png";
         texto.color = "black";
-        texto.escala = 0.9;
-        texto.escala = [1];
         texto.centro_x = 1;
         texto.centro_y = 1;
         texto.texto = mensaje;
+        this._dialogo = texto;
         this.pilas.luego(4, function () {
-            texto.eliminar();
+            if (texto.esta_vivo()) {
+                texto.eliminar();
+                if (texto === _this._dialogo) {
+                    _this._dialogo = null;
+                }
+            }
         });
     };
     ActorBase.prototype.aprender = function (habilidad) {
@@ -1955,7 +1975,15 @@ var ActorTextoBase = (function (_super) {
         configurable: true
     });
     ActorTextoBase.prototype.crear_fondo = function (fondo) {
-        this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, fondo, 10, 10);
+        var imagen = null;
+        if (fondo.indexOf(":") > -1) {
+            var partes = fondo.split(":");
+            imagen = { key: partes[0], frame: partes[1] };
+        }
+        else {
+            imagen = fondo;
+        }
+        this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
         this.actualizar_tamano_del_fondo();
     };
     ActorTextoBase.prototype.actualizar_tamano_del_fondo = function () {
@@ -2721,7 +2749,8 @@ var Modo = (function (_super) {
                     _this.copiar_valores_de_sprite_a_texto(sprite);
                 };
                 if (actor.fondo) {
-                    var f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+                    var imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+                    var f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
                     sprite["fondo"] = f;
                     sprite["fondo_imagen"] = actor.fondo;
                 }
@@ -2732,12 +2761,22 @@ var Modo = (function (_super) {
                     sprite["fondo"].destroy();
                 }
                 if (actor.fondo) {
-                    var f = this.add["nineslice"](0, 0, 30, 20, actor.fondo, 10, 10);
+                    var imagen = this.obtener_imagen_para_nineslice(actor.fondo);
+                    var f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
                     sprite["fondo"] = f;
                     sprite["fondo_imagen"] = actor.fondo;
                 }
             }
             this.copiar_valores_de_sprite_a_texto(sprite);
+        }
+    };
+    Modo.prototype.obtener_imagen_para_nineslice = function (imagen) {
+        if (imagen.indexOf(":") > -1) {
+            var partes = imagen.split(":");
+            return { key: partes[0], frame: partes[1] };
+        }
+        else {
+            return imagen;
         }
     };
     Modo.prototype.copiar_valores_de_sprite_a_texto = function (sprite) {
@@ -3009,7 +3048,7 @@ var ModoEditor = (function (_super) {
         sprite["destacandose"] = false;
         sprite["destacar"] = function () {
             sprite["destacandose"] = true;
-            _this.crear_destello(sprite, actor.imagen, function () {
+            _this.crear_destello(sprite, function () {
                 sprite["destacandose"] = false;
             });
         };
@@ -3017,17 +3056,11 @@ var ModoEditor = (function (_super) {
         this.input.setDraggable(sprite, undefined);
         this.actores.push(sprite);
     };
-    ModoEditor.prototype.crear_destello = function (sprite, imagen, cuando_termina) {
+    ModoEditor.prototype.crear_destello = function (sprite, cuando_termina) {
         var _this = this;
-        var sprite2;
-        if (imagen.indexOf(":") > -1) {
-            var g = imagen.split(":")[0];
-            var i = imagen.split(":")[1];
-            sprite2 = this.add.sprite(0, 0, g, i);
-        }
-        else {
-            sprite2 = this.add.sprite(0, 0, imagen);
-        }
+        var t = sprite.texture;
+        var cuadro = sprite.frame.name;
+        var sprite2 = this.add.sprite(0, 0, t.key, cuadro);
         this.copiar_atributos_excepto_alpha(sprite, sprite2);
         sprite2.setTintFill(0xffffff);
         sprite2.setAlpha(0.4);
@@ -3537,6 +3570,8 @@ var ModoPausa = (function (_super) {
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
         var nombre = entidad.imagen;
         var sprite = null;
+        var galeria = null;
+        var imagen = null;
         var _a = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
         if (nombre.indexOf(":") > -1) {
             galeria = nombre.split(":")[0];
@@ -3565,7 +3600,8 @@ var ModoPausa = (function (_super) {
             sprite["texto"].setFontFamily("verdana");
             sprite["texto"].depth = sprite.depth;
             if (entidad.fondo) {
-                var f = this.pilas.modo.add.nineslice(40, 0, 30, 20, entidad.fondo, 10, 10);
+                var imagen_1 = this.obtener_imagen_para_nineslice(entidad.fondo);
+                var f = this.pilas.modo.add.nineslice(40, 0, 30, 20, imagen_1, 10, 10);
                 sprite["fondo"] = f;
                 sprite["fondo_imagen"] = entidad.fondo;
             }
