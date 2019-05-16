@@ -293,6 +293,20 @@ class Pilas {
   luego(duracion: number, tarea: any) {
     this.modo.time.delayedCall(duracion * 1000, tarea);
   }
+
+  /**
+   * Retorna un número aleatorio en el rango que va desde el primer argumento
+   * al segundo (incluyendo los extremos).
+   *
+   * Por ejemplo, esta llamada puede retornar uno de 5 valores:
+   *
+   * ```
+   *  pilas.azar(1, 5); // posible resultado 1, 2, 3, 4 o 5.
+   * ```
+   */
+  azar(desde: number, hasta: number) {
+    return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
+  }
 }
 
 //var pilas = new Pilas();
