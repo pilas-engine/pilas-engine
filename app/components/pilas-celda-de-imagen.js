@@ -11,5 +11,10 @@ export default Component.extend({
     } else {
       return true;
     }
-  })
+  }),
+  actions: {
+    cuando_selecciona_imagen(imagen) {
+      this.cuando_selecciona(imagen);
+    }
+  }
 });
