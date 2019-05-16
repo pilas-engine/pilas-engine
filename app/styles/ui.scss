@@ -1,0 +1,93 @@
+.sprite {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
+.bg-primario {
+  background-color: rgb(245, 245, 245);
+}
+
+:root,
+.ember-application,
+.ember-application > div.ember-view {
+  height: 100%;
+}
+
+.columns {
+  display: flex;
+  flex: 1;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+body {
+  overflow: hidden;
+}
+
+.icono-de-actor {
+  width: 12px;
+  height: 12px;
+  background-color: #eee;
+  border: 1px solid gray;
+}
+
+.hover-border {
+  border-color: white;
+}
+
+.hover-border:hover {
+  border-color: black;
+}
+
+span {
+  outline: 0;
+}
+
+.bg-fondo {
+  transition: background-color 500ms ease;
+}
+
+.boton {
+  transition: background-color 750ms ease;
+}
+
+.ember-power-select-trigger,
+.ember-power-select-options {
+  font-family: verdana;
+  font-size: small;
+}
+
+.ember-power-select-multiple-option {
+  /* .truncate */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ember-power-select-option {
+  /* .truncate */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* hack para que se puedan cerrar los modales en mobile. */
+[data-ember-action] {
+  cursor: pointer;
+}
+
+.height-revert {
+  height: revert !important;
+}
+
+.bg-fondo-canvas {
+  background-color: #424242;
+}
+
+.celda-actor {
+  width: 130px;
+  height: 100px;
+}
