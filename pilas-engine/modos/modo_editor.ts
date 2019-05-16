@@ -104,7 +104,7 @@ class ModoEditor extends Modo {
     sprite["destacar"] = () => {
       sprite["destacandose"] = true;
 
-      this.crear_destello(sprite, actor.imagen, () => {
+      this.crear_destello(sprite, () => {
         sprite["destacandose"] = false;
       });
     };
@@ -119,17 +119,10 @@ class ModoEditor extends Modo {
   /**
    * Realiza un efecto de destello blanco para indicar que se selecciona al actor.
    */
-  private crear_destello(sprite, imagen, cuando_termina) {
-    let sprite2;
-
-    if (imagen.indexOf(":") > -1) {
-      let g = imagen.split(":")[0];
-      let i = imagen.split(":")[1];
-
-      sprite2 = this.add.sprite(0, 0, g, i);
-    } else {
-      sprite2 = this.add.sprite(0, 0, imagen);
-    }
+  private crear_destello(sprite, cuando_termina) {
+    let t = sprite.texture;
+    let cuadro = sprite.frame.name;
+    let sprite2 = this.add.sprite(0, 0, t.key, cuadro);
 
     this.copiar_atributos_excepto_alpha(sprite, sprite2);
     sprite2.setTintFill(0xffffff);
