@@ -329,6 +329,20 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">imagenes/cursores/cursor_disparo_negro.png</key>
+            <key type="filename">imagenes/cursores/cursor_disparo_rojo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">imagenes/fondos/fondo-azul.png</key>
             <key type="filename">imagenes/fondos/fondo-cesped_1.png</key>
             <key type="filename">imagenes/fondos/fondo-madera.png</key>
@@ -734,6 +748,58 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">imagenes/tanque/tanque_base.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>21,12,41,25</rect>
+                <key>scale9Paddings</key>
+                <rect>21,12,41,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">imagenes/tanque/tanque_disparo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,7,19,13</rect>
+                <key>scale9Paddings</key>
+                <rect>10,7,19,13</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">imagenes/tanque/tanque_ruedas.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>19,9,37,17</rect>
+                <key>scale9Paddings</key>
+                <rect>19,9,37,17</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">imagenes/tanque/tanque_torreta.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,3,20,6</rect>
+                <key>scale9Paddings</key>
+                <rect>10,3,20,6</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
@@ -767,6 +833,8 @@
             <filename>imagenes/sin_imagen.png</filename>
             <filename>imagenes/suelo.png</filename>
             <filename>imagenes/techo.png</filename>
+            <filename>imagenes/cursores</filename>
+            <filename>imagenes/tanque</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -181,9 +181,12 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">iconos/ejemplos/angulo.png</key>
             <key type="filename">iconos/ejemplos/arrastrables.png</key>
+            <key type="filename">iconos/ejemplos/azar.png</key>
             <key type="filename">iconos/ejemplos/click.png</key>
             <key type="filename">iconos/ejemplos/click_actor.png</key>
+            <key type="filename">iconos/ejemplos/cursores.png</key>
             <key type="filename">iconos/ejemplos/ejemplo-nave.png</key>
             <key type="filename">iconos/ejemplos/gravedad.png</key>
             <key type="filename">iconos/ejemplos/nubes.png</key>
@@ -228,12 +231,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">iconos/grilla-actores/grilla_actor_boton.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_caja.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_gallina.png</key>
             <key type="filename">iconos/grilla-imagenes/imagenes_caja.png</key>
             <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_dialogo.png</key>
             <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_gris.png</key>
-            <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_gris_claro.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -463,6 +466,20 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">iconos/grilla-imagenes/cursores/imagenes_cursor_disparo_negro.png</key>
+            <key type="filename">iconos/grilla-imagenes/cursores/imagenes_cursor_disparo_rojo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-azul.png</key>
             <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-cesped_1.png</key>
             <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-madera.png</key>
@@ -526,6 +543,7 @@
             <key type="filename">iconos/grilla-imagenes/fondos/imagenes_fondo-plano.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_aceituna.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_actortexto.png</key>
+            <key type="filename">iconos/icono-actores/icono_actor_boton.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_caja.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_conejo.png</key>
             <key type="filename">iconos/icono-actores/icono_actor_deslizador.png</key>
@@ -817,6 +835,58 @@
                 <rect>12,12,25,25</rect>
                 <key>scale9Paddings</key>
                 <rect>12,12,25,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/tanque/imagenes_tanque_base.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>21,12,41,25</rect>
+                <key>scale9Paddings</key>
+                <rect>21,12,41,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/tanque/imagenes_tanque_disparo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,7,19,13</rect>
+                <key>scale9Paddings</key>
+                <rect>10,7,19,13</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/tanque/imagenes_tanque_ruedas.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>19,9,37,17</rect>
+                <key>scale9Paddings</key>
+                <rect>19,9,37,17</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/tanque/imagenes_tanque_torreta.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,3,20,6</rect>
+                <key>scale9Paddings</key>
+                <rect>10,3,20,6</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

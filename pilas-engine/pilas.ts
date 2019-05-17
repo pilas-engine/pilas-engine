@@ -179,6 +179,7 @@ class Pilas {
     }
 
     this.modo = this.game.scene.getScene(nombre);
+    this.definir_cursor("default");
     this.game.scene.start(nombre, datos);
   }
 
@@ -306,6 +307,20 @@ class Pilas {
    */
   azar(desde: number, hasta: number) {
     return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
+  }
+
+  ocultar_cursor() {
+    this.modo.input.setDefaultCursor("none");
+  }
+
+  definir_cursor(nombre: string) {
+    let nombres = {
+      normal: "default",
+      pulsable: "hand",
+      mano: "hand"
+    };
+
+    this.modo.input.setDefaultCursor(nombres[nombre] || nombre);
   }
 }
 

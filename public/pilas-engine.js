@@ -77,6 +77,9 @@ var Actores = (function () {
     Actores.prototype.deslizador = function () {
         return this.crear_actor("deslizador");
     };
+    Actores.prototype.boton = function () {
+        return this.crear_actor("boton");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -955,6 +958,7 @@ var Pilas = (function () {
             console.warn(e);
         }
         this.modo = this.game.scene.getScene(nombre);
+        this.definir_cursor("default");
         this.game.scene.start(nombre, datos);
     };
     Pilas.prototype.cambiar_escena = function (nombre) {
@@ -1049,6 +1053,17 @@ var Pilas = (function () {
     };
     Pilas.prototype.azar = function (desde, hasta) {
         return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
+    };
+    Pilas.prototype.ocultar_cursor = function () {
+        this.modo.input.setDefaultCursor("none");
+    };
+    Pilas.prototype.definir_cursor = function (nombre) {
+        var nombres = {
+            normal: "default",
+            pulsable: "hand",
+            mano: "hand"
+        };
+        this.modo.input.setDefaultCursor(nombres[nombre] || nombre);
     };
     return Pilas;
 }());
@@ -2045,13 +2060,43 @@ var actor = (function (_super) {
     __extends(actor, _super);
     function actor() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.propiedades = {};
+        _this.propiedades = {
+            imagen: "imagenes:sin_imagen.png"
+        };
         return _this;
     }
     actor.prototype.iniciar = function () { };
     actor.prototype.actualizar = function () { };
     return actor;
 }(Actor));
+var boton = (function (_super) {
+    __extends(boton, _super);
+    function boton() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:invisible.png",
+            fondo: "imagenes:redimensionables_gris.png",
+            texto: "Botón",
+            es_texto: true
+        };
+        return _this;
+    }
+    boton.prototype.cuando_hace_click = function () {
+        var _this = this;
+        this.decir("¡has hecho click!");
+        this.y -= 2;
+        this.pilas.luego(0.2, function () {
+            _this.y += 2;
+        });
+    };
+    boton.prototype.cuando_mueve = function () {
+        this.pilas.definir_cursor("pointer");
+    };
+    boton.prototype.cuando_sale = function () {
+        this.pilas.definir_cursor("normal");
+    };
+    return boton;
+}(ActorTextoBase));
 var caja = (function (_super) {
     __extends(caja, _super);
     function caja() {

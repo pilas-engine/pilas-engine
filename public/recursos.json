@@ -240,6 +240,30 @@
     {
       "nombre": "imagenes:interfaz_deslizador.png",
       "sprite": "interfaz-imagenes_interfaz_deslizador"
+    },
+    {
+      "nombre": "imagenes:tanque_base.png",
+      "sprite": "tanque-imagenes_tanque_base"
+    },
+    {
+      "nombre": "imagenes:tanque_disparo.png",
+      "sprite": "tanque-imagenes_tanque_disparo"
+    },
+    {
+      "nombre": "imagenes:tanque_ruedas.png",
+      "sprite": "tanque-imagenes_tanque_ruedas"
+    },
+    {
+      "nombre": "imagenes:tanque_torreta.png",
+      "sprite": "tanque-imagenes_tanque_torreta"
+    },
+    {
+      "nombre": "imagenes:cursor_disparo_negro.png",
+      "sprite": "cursores-imagenes_cursor_disparo_negro"
+    },
+    {
+      "nombre": "imagenes:cursor_disparo_rojo.png",
+      "sprite": "cursores-imagenes_cursor_disparo_rojo"
     }
   ],
 

@@ -18,6 +18,7 @@ declare class Actores {
     texto(): any;
     laser(): any;
     deslizador(): any;
+    boton(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -274,6 +275,8 @@ declare class Pilas {
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
     azar(desde: number, hasta: number): number;
+    ocultar_cursor(): void;
+    definir_cursor(nombre: string): void;
 }
 declare var pilasengine: Pilas;
 declare class ActorBase {
@@ -449,9 +452,22 @@ declare class aceituna extends Actor {
     iniciar(): void;
 }
 declare class actor extends Actor {
-    propiedades: {};
+    propiedades: {
+        imagen: string;
+    };
     iniciar(): void;
     actualizar(): void;
+}
+declare class boton extends ActorTextoBase {
+    propiedades: {
+        imagen: string;
+        fondo: string;
+        texto: string;
+        es_texto: boolean;
+    };
+    cuando_hace_click(): void;
+    cuando_mueve(): void;
+    cuando_sale(): void;
 }
 declare class caja extends Actor {
     propiedades: {

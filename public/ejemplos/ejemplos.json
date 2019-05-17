@@ -22,6 +22,18 @@
     {
       "nombre": "arrastrables",
       "desde": "2.0.74"
+    },
+    {
+      "nombre": "cursores",
+      "desde": "2.0.75"
+    },
+    {
+      "nombre": "azar",
+      "desde": "2.0.75"
+    },
+    {
+      "nombre": "angulo",
+      "desde": "2.0.75"
     }
   ]
 }
