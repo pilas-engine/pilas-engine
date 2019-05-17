@@ -8,7 +8,8 @@ export default Route.extend({
     return this.ejemplos.obtener().then(data => {
       return {
         nombre: params.nombre,
-        ejemplo: data.ejemplos.findBy("nombre", params.nombre)
+        ejemplo: data.ejemplos.findBy("nombre", params.nombre),
+        modoZoom: 2
       };
     });
   }
