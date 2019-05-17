@@ -11,7 +11,5 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "johnny-five": "0.11.6"
-  }
+  "dependencies": {}
 }

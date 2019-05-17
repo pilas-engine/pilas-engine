@@ -25,19 +25,19 @@
     },
     {
       "nombre": "cursores",
-      "desde": "2.0.76"
+      "desde": "2.0.77"
     },
     {
       "nombre": "azar",
-      "desde": "2.0.76"
+      "desde": "2.0.77"
     },
     {
       "nombre": "angulo",
-      "desde": "2.0.76"
+      "desde": "2.0.77"
     },
     {
       "nombre": "angulo-entre-actores",
-      "desde": "2.0.76"
+      "desde": "2.0.77"
     }
   ]
 }
