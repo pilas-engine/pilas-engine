@@ -246,8 +246,29 @@ class Pilas {
     return this.obtener_actor_por_nombre(nombre);
   }
 
+  /**
+   * Retorna el actor que tenga el nombre solicitado.
+   */
   obtener_actor_por_nombre(nombre: string) {
     return this.obtener_actores().find(actor => actor.nombre === nombre);
+  }
+
+  /**
+   * Retorna el primer actor que encuentre con la etiqueta solicitada.
+   */
+  obtener_actor_por_etiqueta(etiqueta: string) {
+    return this.obtener_actores().find(actor => {
+      return actor.tiene_etiqueta(etiqueta);
+    });
+  }
+
+  /**
+   * Retorna una lista con todos los actores que tienen esa etiqueta.
+   */
+  obtener_todos_los_actores_con_la_etiqueta(etiqueta: string) {
+    return this.obtener_actores().filter(actor => {
+      return actor.tiene_etiqueta(etiqueta);
+    });
   }
 
   obtener_cantidad_de_actores() {
@@ -306,7 +327,53 @@ class Pilas {
    * ```
    */
   azar(desde: number, hasta: number) {
+    if (desde > hasta) {
+      throw Error(
+        `Rango inválido, el número desde (${desde} en este caso) debe ser menor al hasta (${hasta}).`
+      );
+    }
     return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
+  }
+
+  obtener_distancia_entre_puntos(x: number, y: number, x2: number, y2: number) {
+    var dx = x - x2;
+    var dy = y - y2;
+
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  obtener_distancia_entre_actores(actor1: ActorBase, actor2: ActorBase) {
+    return this.obtener_distancia_entre_puntos(
+      actor1.x,
+      actor1.y,
+      actor2.x,
+      actor2.y
+    );
+  }
+
+  obtener_angulo_entre_puntos(x: number, y: number, x2: number, y2: number) {
+    let dx = x2 - x;
+    let dy = y2 - y;
+
+    let radianes = Math.atan(dy / dx);
+
+    if (1 / dx < 0) {
+      radianes += Math.PI;
+    }
+    if (1 / radianes < 0) {
+      radianes += 2 * Math.PI;
+    }
+
+    return radianes * (180 / Math.PI);
+  }
+
+  obtener_angulo_entre_actores(actor1: ActorBase, actor2: ActorBase) {
+    return this.obtener_angulo_entre_puntos(
+      actor1.x,
+      actor1.y,
+      actor2.x,
+      actor2.y
+    );
   }
 
   ocultar_cursor() {

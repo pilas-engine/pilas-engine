@@ -338,6 +338,10 @@ class ActorBase {
     return this._etiqueta;
   }
 
+  tiene_etiqueta(etiqueta: string) {
+    return this.etiqueta === etiqueta;
+  }
+
   generar_color_para_depurar() {
     return this.pilas.utilidades.obtener_color_al_azar();
   }
@@ -430,7 +434,7 @@ class ActorBase {
     }
   }
 
-  set x(_x: number) {
+  set x(_x) {
     if (this.pilas.utilidades.es_animacion(_x)) {
       this.pilas.animar(this, "x", _x);
     } else {
@@ -451,7 +455,7 @@ class ActorBase {
     return x;
   }
 
-  set y(_y: number) {
+  set y(_y: any) {
     if (this.pilas.utilidades.es_animacion(_y)) {
       this.pilas.animar(this, "y", _y);
     } else {
@@ -481,7 +485,7 @@ class ActorBase {
     return -this.sprite.depth;
   }
 
-  set rotacion(angulo: number) {
+  set rotacion(angulo: any) {
     if (this.pilas.utilidades.es_animacion(angulo)) {
       this.pilas.animar(this, "rotacion", angulo);
     } else {

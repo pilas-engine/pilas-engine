@@ -402,6 +402,7 @@
                 <false/>
             </struct>
             <key type="filename">imagenes/fondos/fondo-nubes.png</key>
+            <key type="filename">imagenes/planeta.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -835,6 +836,7 @@
             <filename>imagenes/techo.png</filename>
             <filename>imagenes/cursores</filename>
             <filename>imagenes/tanque</filename>
+            <filename>imagenes/planeta.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

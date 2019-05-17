@@ -1018,6 +1018,16 @@ var Pilas = (function () {
     Pilas.prototype.obtener_actor_por_nombre = function (nombre) {
         return this.obtener_actores().find(function (actor) { return actor.nombre === nombre; });
     };
+    Pilas.prototype.obtener_actor_por_etiqueta = function (etiqueta) {
+        return this.obtener_actores().find(function (actor) {
+            return actor.tiene_etiqueta(etiqueta);
+        });
+    };
+    Pilas.prototype.obtener_todos_los_actores_con_la_etiqueta = function (etiqueta) {
+        return this.obtener_actores().filter(function (actor) {
+            return actor.tiene_etiqueta(etiqueta);
+        });
+    };
     Pilas.prototype.obtener_cantidad_de_actores = function () {
         return this.obtener_actores().length;
     };
@@ -1052,7 +1062,33 @@ var Pilas = (function () {
         this.modo.time.delayedCall(duracion * 1000, tarea);
     };
     Pilas.prototype.azar = function (desde, hasta) {
+        if (desde > hasta) {
+            throw Error("Rango inv\u00E1lido, el n\u00FAmero desde (" + desde + " en este caso) debe ser menor al hasta (" + hasta + ").");
+        }
         return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
+    };
+    Pilas.prototype.obtener_distancia_entre_puntos = function (x, y, x2, y2) {
+        var dx = x - x2;
+        var dy = y - y2;
+        return Math.sqrt(dx * dx + dy * dy);
+    };
+    Pilas.prototype.obtener_distancia_entre_actores = function (actor1, actor2) {
+        return this.obtener_distancia_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
+    };
+    Pilas.prototype.obtener_angulo_entre_puntos = function (x, y, x2, y2) {
+        var dx = x2 - x;
+        var dy = y2 - y;
+        var radianes = Math.atan(dy / dx);
+        if (1 / dx < 0) {
+            radianes += Math.PI;
+        }
+        if (1 / radianes < 0) {
+            radianes += 2 * Math.PI;
+        }
+        return radianes * (180 / Math.PI);
+    };
+    Pilas.prototype.obtener_angulo_entre_actores = function (actor1, actor2) {
+        return this.obtener_angulo_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
     };
     Pilas.prototype.ocultar_cursor = function () {
         this.modo.input.setDefaultCursor("none");
@@ -1338,6 +1374,9 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype.tiene_etiqueta = function (etiqueta) {
+        return this.etiqueta === etiqueta;
+    };
     ActorBase.prototype.generar_color_para_depurar = function () {
         return this.pilas.utilidades.obtener_color_al_azar();
     };

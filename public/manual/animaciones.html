@@ -167,7 +167,46 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="colisiones.html">
+        <li class="chapter " data-level="1.7" data-path="habilidades.html">
+            
+                <a href="habilidades.html">
+            
+                    
+                    Habilidades
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="azar.html">
+            
+                <a href="azar.html">
+            
+                    
+                    Azar o cálculos aleatorios
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="angulos-distancias.html">
+            
+                <a href="angulos-distancias.html">
+            
+                    
+                    Angulos y distancias
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="colisiones.html">
             
                 <a href="colisiones.html">
             
@@ -180,7 +219,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="escenas.html">
+        <li class="chapter " data-level="1.11" data-path="escenas.html">
             
                 <a href="escenas.html">
             
@@ -193,7 +232,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="eventos.html">
+        <li class="chapter " data-level="1.12" data-path="eventos.html">
             
                 <a href="eventos.html">
             
@@ -206,7 +245,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.13" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -301,7 +340,11 @@
 <p>Para crear y asignar animaciones se tienen que definir previamente en el c&#xF3;digo del actor.</p>
 <p>El m&#xE9;todo &quot;crear_animacion&quot; se puede llamar especificando el nombre de la animaci&#xF3;n, los cuadros que se deben mostrar y la velocidad.</p>
 <p>Por ejemplo, para crear una animaci&#xF3;n de un actor mientras est&#xE1; esperando us&#xE9; lo siguiente:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;conejo_parado1&quot;</span>, <span class="hljs-string">&quot;conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
+<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.crear_animacion(
+  <span class="hljs-string">&quot;conejo_parado&quot;</span>,
+  [<span class="hljs-string">&quot;imagenes:conejo_parado1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_parado2.png&quot;</span>],
+  <span class="hljs-number">2</span>
+);
 </code></pre>
 <p>El valor &quot;2&quot; significa que la animaci&#xF3;n se debe mostrar a una velocidad de 2 cuadros por segundo.</p>
 <p>Luego, una vez creada la animaci&#xF3;n, se puede reproducir usando esta llamada:</p>
@@ -309,47 +352,61 @@
 </code></pre>
 <p>La creaci&#xF3;n de animaciones generalmente se realiza en el m&#xE9;todo iniciar de esta forma:</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Conejo extends Actor {
-    iniciar() {
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;conejo_parado1&quot;</span>, <span class="hljs-string">&quot;conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_camina&quot;</span>, [<span class="hljs-string">&quot;conejo_camina1&quot;</span>, <span class="hljs-string">&quot;conejo_camina2&quot;</span>], <span class="hljs-number">20</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;conejo_muere&quot;</span>], <span class="hljs-number">1</span>);
+  iniciar() {
+    <span class="hljs-keyword">this</span>.crear_animacion(
+      <span class="hljs-string">&quot;conejo_parado&quot;</span>,
+      [<span class="hljs-string">&quot;imagenes:conejo_parado1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_parado2.png&quot;</span>],
+      <span class="hljs-number">2</span>
+    );
+    <span class="hljs-keyword">this</span>.crear_animacion(
+      <span class="hljs-string">&quot;conejo_camina&quot;</span>,
+      [<span class="hljs-string">&quot;imagenes:conejo_camina1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_camina2.png&quot;</span>],
+      <span class="hljs-number">20</span>
+    );
+    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo_salta.png&quot;</span>], <span class="hljs-number">20</span>);
+    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo_muere.png&quot;</span>], <span class="hljs-number">1</span>);
 
-        <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
-    }
+    <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
+  }
 
-    actualizar() {
-
-    }
+  actualizar() {}
 }
 </code></pre>
 <p>Luego, para cambiar de animaci&#xF3;n, se puede re-definir el valor del atributo
 animaci&#xF3;n as&#xED;:</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Conejo extends Actor {
-    iniciar() {
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;conejo_parado1&quot;</span>, <span class="hljs-string">&quot;conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_camina&quot;</span>, [<span class="hljs-string">&quot;conejo_camina1&quot;</span>, <span class="hljs-string">&quot;conejo_camina2&quot;</span>], <span class="hljs-number">20</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
-        <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;conejo_muere&quot;</span>], <span class="hljs-number">1</span>);
+  iniciar() {
+    <span class="hljs-keyword">this</span>.crear_animacion(
+      <span class="hljs-string">&quot;conejo_parado&quot;</span>,
+      [<span class="hljs-string">&quot;imagenes:conejo_parado1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_parado2.png&quot;</span>],
+      <span class="hljs-number">2</span>
+    );
+    <span class="hljs-keyword">this</span>.crear_animacion(
+      <span class="hljs-string">&quot;conejo_camina&quot;</span>,
+      [<span class="hljs-string">&quot;imagenes:conejo_camina1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_camina2.png&quot;</span>],
+      <span class="hljs-number">20</span>
+    );
+    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
+    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;conejo_muere&quot;</span>], <span class="hljs-number">1</span>);
 
-        <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
+    <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
+  }
+
+  actualizar() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pilas.control.izquierda) {
+      <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_camina&quot;</span>;
+      <span class="hljs-keyword">this</span>.x -= <span class="hljs-number">5</span>;
     }
 
-    actualizar() {
-        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pilas.control.izquierda) {
-                    <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_camina&quot;</span>;
-                    <span class="hljs-keyword">this</span>.x -= <span class="hljs-number">5</span>;
-                }
-
-                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pilas.control.derecha) {
-                    <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_camina&quot;</span>;
-                    <span class="hljs-keyword">this</span>.x += <span class="hljs-number">5</span>;
-                }
-
-                <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.pilas.control.izquierda &amp;&amp; !<span class="hljs-keyword">this</span>.pilas.control.derecha) {
-                    <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
-                }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pilas.control.derecha) {
+      <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_camina&quot;</span>;
+      <span class="hljs-keyword">this</span>.x += <span class="hljs-number">5</span>;
     }
+
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.pilas.control.izquierda &amp;&amp; !<span class="hljs-keyword">this</span>.pilas.control.derecha) {
+      <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
+    }
+  }
 }
 </code></pre>
 
@@ -395,7 +452,7 @@ animaci&#xF3;n as&#xED;:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Animaciones","level":"1.5","depth":1,"next":{"title":"Etiquetas","level":"1.6","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"previous":{"title":"Autómatas y estados","level":"1.4","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"animaciones.md","mtime":"2019-04-11T18:56:17.390Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T13:51:02.686Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Animaciones","level":"1.5","depth":1,"next":{"title":"Etiquetas","level":"1.6","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"previous":{"title":"Autómatas y estados","level":"1.4","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"animaciones.md","mtime":"2019-05-16T03:15:26.189Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-17T17:11:01.916Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

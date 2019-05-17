@@ -264,6 +264,10 @@
     {
       "nombre": "imagenes:cursor_disparo_rojo.png",
       "sprite": "cursores-imagenes_cursor_disparo_rojo"
+    },
+    {
+      "nombre": "imagenes:planeta.png",
+      "sprite": "imagenes_planeta"
     }
   ],
 

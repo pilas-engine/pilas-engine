@@ -181,6 +181,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">iconos/ejemplos/angulo-entre-actores.png</key>
             <key type="filename">iconos/ejemplos/angulo.png</key>
             <key type="filename">iconos/ejemplos/arrastrables.png</key>
             <key type="filename">iconos/ejemplos/azar.png</key>
@@ -235,6 +236,7 @@
             <key type="filename">iconos/grilla-actores/grilla_actor_caja.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_gallina.png</key>
             <key type="filename">iconos/grilla-imagenes/imagenes_caja.png</key>
+            <key type="filename">iconos/grilla-imagenes/imagenes_planeta.png</key>
             <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_dialogo.png</key>
             <key type="filename">iconos/grilla-imagenes/redimensionables/imagenes_gris.png</key>
             <struct type="IndividualSpriteSettings">

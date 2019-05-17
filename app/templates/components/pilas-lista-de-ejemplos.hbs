@@ -1,7 +1,7 @@
 {{yield}}
 
 {{#if ejemplos.tarea.last.isRunning}}
-  {{#each (range 0 7)}}
+  {{#each (range 0 11)}}
     <div class="dib">
       <div class="relative bg-light-gray ml1 mt1" style="width: 180px; height: 140px;"></div>
     </div>
@@ -11,7 +11,7 @@
     {{#link-to "ejemplos.ver" ejemplo.nombre tagName="div" class="dib pointer"}}
       <div class="relative unselectable ma1" style="width: 180px; height: 140px;">
         <div class="sprite {{ejemplo.nombre}}"></div>
-        
+
         <div class="text-shadow-1 absolute bottom-0 left-0 right-0 bg-black-50 pa1 white tc lato f7">{{ejemplo.nombre}}</div>
 
         {{#pilas-ejemplos-es-nuevo ejemplo=ejemplo}}

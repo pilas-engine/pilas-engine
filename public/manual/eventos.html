@@ -167,7 +167,46 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="colisiones.html">
+        <li class="chapter " data-level="1.7" data-path="habilidades.html">
+            
+                <a href="habilidades.html">
+            
+                    
+                    Habilidades
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="azar.html">
+            
+                <a href="azar.html">
+            
+                    
+                    Azar o cálculos aleatorios
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="angulos-distancias.html">
+            
+                <a href="angulos-distancias.html">
+            
+                    
+                    Angulos y distancias
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="colisiones.html">
             
                 <a href="colisiones.html">
             
@@ -180,7 +219,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="escenas.html">
+        <li class="chapter " data-level="1.11" data-path="escenas.html">
             
                 <a href="escenas.html">
             
@@ -193,7 +232,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="eventos.html">
+        <li class="chapter active" data-level="1.12" data-path="eventos.html">
             
                 <a href="eventos.html">
             
@@ -206,7 +245,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.13" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -304,7 +343,9 @@
 <p>Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el c&#xF3;digo:</p>
 <ul>
 <li>cuando_hace_click(x, y, evento_original)</li>
+<li>cuando_termina_de_hacer_click(x, y, evento_original)</li>
 <li>cuando_mueve(x, y, evento_original)</li>
+<li>cuando_sale(x, y, evento_original)</li>
 </ul>
 <p>Estas funciones se pueden crear en el c&#xF3;digo de una escena o de un actor. La diferencia es que en las escenas el &quot;click&quot; o el movimiento se van a detectar en toda la pantalla, mientras que en el c&#xF3;digo del actor solo se detectar&#xE1;n si el mouse apunta al actor.</p>
 <p>Veamos un ejemplo, imagin&#xE1; que queremos crear actores de la clase &quot;Pelota&quot; cada vez que el usuario hace &quot;click&quot; sobre la pantalla. Podr&#xED;amos hacerlo colocando este c&#xF3;digo en la escena:</p>
@@ -349,6 +390,8 @@
   cuando_hace_click(x, y, evento_original) {
     <span class="hljs-keyword">this</span>.rotacion = [<span class="hljs-number">360</span>];
   }
+
+  cuando_termina_de_hacer_click(x, y, evento_original) {}
 }
 </code></pre>
 <p>Los manejadores de eventos como <code>cuando_mueve</code>, <code>cuando_sale</code> y <code>cuando_hace_click</code> van a ser llamados internamente cuando se produzcan esos eventos sobre el actor.</p>
@@ -415,7 +458,7 @@ pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Eventos","level":"1.9","depth":1,"next":{"title":"Pilas como biblioteca","level":"1.10","depth":1,"path":"pilas_como_biblioteca.md","ref":"pilas_como_biblioteca.md","articles":[]},"previous":{"title":"Escenas","level":"1.8","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos.md","mtime":"2019-04-21T23:58:40.355Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T13:51:02.686Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Eventos","level":"1.12","depth":1,"next":{"title":"Pilas como biblioteca","level":"1.13","depth":1,"path":"pilas_como_biblioteca.md","ref":"pilas_como_biblioteca.md","articles":[]},"previous":{"title":"Escenas","level":"1.11","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos.md","mtime":"2019-05-16T03:15:26.190Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-17T17:11:01.916Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

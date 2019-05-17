@@ -41,7 +41,7 @@
       },
       {
         "nombre": "actor2",
-        "codigo": "class actor2 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:sin_imagen.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        let dx = this.pilas.cursor_x - this.x;\n        let dy = this.pilas.cursor_y - this.y;\n\n        let radianes = Math.atan(dy / dx);\n\n        if (1 / dx < 0) {\n            radianes += Math.PI;\n        }\n        if (1 / radianes < 0) {\n\n            radianes += 2 * Math.PI;\n        }\n\n        this.rotacion = radianes * (180 / Math.PI);\n\n    }\n}"
+        "codigo": "class actor2 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:sin_imagen.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.rotacion = this.pilas.obtener_angulo_entre_puntos(this.x, this.y,\n            this.pilas.cursor_x, this.pilas.cursor_y)\n    }\n}"
       },
       {
         "nombre": "actor3",

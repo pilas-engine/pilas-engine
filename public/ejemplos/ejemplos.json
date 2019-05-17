@@ -34,6 +34,10 @@
     {
       "nombre": "angulo",
       "desde": "2.0.75"
+    },
+    {
+      "nombre": "angulo-entre-actores",
+      "desde": "2.0.75"
     }
   ]
 }

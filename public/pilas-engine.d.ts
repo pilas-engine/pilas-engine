@@ -268,6 +268,8 @@ declare class Pilas {
     obtener_actores(): Actor[];
     buscar_actor(nombre: string): Actor;
     obtener_actor_por_nombre(nombre: string): Actor;
+    obtener_actor_por_etiqueta(etiqueta: string): Actor;
+    obtener_todos_los_actores_con_la_etiqueta(etiqueta: string): Actor[];
     obtener_cantidad_de_actores(): number;
     obtener_diccionario_de_actores(): {};
     obtener_actores_en(_x: number, _y: number): Actor[];
@@ -275,6 +277,10 @@ declare class Pilas {
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): void;
     azar(desde: number, hasta: number): number;
+    obtener_distancia_entre_puntos(x: number, y: number, x2: number, y2: number): number;
+    obtener_distancia_entre_actores(actor1: ActorBase, actor2: ActorBase): number;
+    obtener_angulo_entre_puntos(x: number, y: number, x2: number, y2: number): number;
+    obtener_angulo_entre_actores(actor1: ActorBase, actor2: ActorBase): number;
     ocultar_cursor(): void;
     definir_cursor(nombre: string): void;
 }
@@ -346,7 +352,7 @@ declare class ActorBase {
         z: number;
         centro_x: number;
         centro_y: number;
-        rotacion: number;
+        rotacion: any;
         escala_x: number;
         escala_y: number;
         imagen: string;
@@ -363,6 +369,7 @@ declare class ActorBase {
         id_color: number;
     };
     etiqueta: any;
+    tiene_etiqueta(etiqueta: string): boolean;
     generar_color_para_depurar(): number;
     pre_actualizar(): void;
     estado: string;
@@ -372,10 +379,10 @@ declare class ActorBase {
     imagen: string;
     nombre: any;
     id: any;
-    x: number;
-    y: number;
+    x: any;
+    y: any;
     z: number;
-    rotacion: number;
+    rotacion: any;
     escala_x: any;
     escala_y: any;
     escala: number;
