@@ -1,5 +1,7 @@
 class actor extends Actor {
-  propiedades = {};
+  propiedades = {
+    imagen: "imagenes:sin_imagen.png"
+  };
 
   iniciar() {}
 

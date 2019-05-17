@@ -89,4 +89,8 @@ class Actores {
   deslizador() {
     return this.crear_actor("deslizador");
   }
+
+  boton() {
+    return this.crear_actor("boton");
+  }
 }
