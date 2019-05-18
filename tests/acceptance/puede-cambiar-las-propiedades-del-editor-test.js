@@ -1,5 +1,4 @@
 import { currentURL, visit } from "@ember/test-helpers";
-import $ from "jquery";
 import { module, test } from "qunit";
 import { setupApplicationTest } from "ember-qunit";
 import pulsar from "../helpers/pulsar";
@@ -15,29 +14,31 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     await visit("/");
 
     await pulsar("Abrir el editor");
-    assert.equal(currentURL(), "/editor", "accede al editor correctamente");
+    assert.equal(currentURL(), "/editor", "accede al editor correctamente 2");
 
     await esperarElemento("a#ejecutar");
 
-    $("[data-test='panel-derecho']").click();
+    document.querySelector("[data-test='panel-derecho']").click();
 
     await esperar(PAUSA);
-    $("[data-test='boton-preferencias-del-editor']").click();
+    document
+      .querySelector("[data-test='boton-preferencias-del-editor']")
+      .click();
 
     await esperar(PAUSA);
-    $("[data-test='boton-modo-oscuro']").click();
+    document.querySelector("[data-test='boton-modo-oscuro']").click();
 
     await esperar(PAUSA);
-    $("[data-test='boton-modo-vim']").click();
+    document.querySelector("[data-test='boton-modo-vim']").click();
 
     for (let i = 0; i < 3; i++) {
       await esperar(PAUSA / 5);
-      $("[data-test='boton-disminuir']").click();
+      document.querySelector("[data-test='boton-disminuir']").click();
     }
 
     for (let i = 0; i < 5; i++) {
       await esperar(PAUSA / 5);
-      $("[data-test='boton-aumentar']").click();
+      document.querySelector("[data-test='boton-aumentar']").click();
     }
   });
 });

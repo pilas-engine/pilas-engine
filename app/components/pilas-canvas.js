@@ -27,7 +27,7 @@ export default Component.extend({
   cuando_termina_de_cargar: null,
 
   didInsertElement() {
-    let iframe = this.$("iframe")[0];
+    let iframe = this.element.querySelector("iframe");
 
     if (!this.get("recursos.data")) {
       throw Error(
@@ -287,7 +287,7 @@ export default Component.extend({
   },
 
   hacer_foco_en_pilas() {
-    let iframe = this.$("iframe")[0];
+    let iframe = this.element.querySelector("iframe");
     setTimeout(function() {
       iframe.contentWindow.focus();
     }, 10);

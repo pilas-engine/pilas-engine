@@ -8,7 +8,7 @@ export default Component.extend({
 
   observarURL: task(function*() {
     while (true) {
-      let element = this.$("iframe").get(0);
+      let element = this.element.querySelector("iframe");
       let url = element.contentDocument.location.href;
 
       if (this.currentURL != url && url != "about:blank") {

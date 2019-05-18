@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
 module("Integration | Component | pilas lista de ejemplos", function(hooks) {
@@ -8,6 +8,6 @@ module("Integration | Component | pilas lista de ejemplos", function(hooks) {
 
   test("it renders", async function(assert) {
     await render(hbs`{{pilas-lista-de-ejemplos}}`);
-    assert.ok(this.$());
+    assert.ok(this.element);
   });
 });

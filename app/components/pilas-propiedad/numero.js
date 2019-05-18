@@ -1,5 +1,4 @@
 import { later } from "@ember/runloop";
-import $ from "jquery";
 import Component from "@ember/component";
 
 export default Component.extend({
@@ -8,51 +7,60 @@ export default Component.extend({
   editando: false,
 
   didInsertElement() {
-    let element = this.$(".cursor-resize");
+    /*
+    let element = this.element.querySelector(".cursor-resize");
     var initialX = 0;
 
-    element.on("mousedown", mouse_down_event => {
+    element.addEventListener("mousedown", mouse_down_event => {
       later(() => {
         initialX = mouse_down_event.pageX;
+        this.set("initialX", mouse_down_event.pageX);
         this.set("original_value", this.value);
 
-        $("html").on("mousemove", event => {
-          later(() => {
-            var intensidad = this.intensidad;
+        let html = document.querySelector("html");
+        html.addEventListener("mousemove", this.al_mover.bind(this));
 
-            var mouse_dx = (event.pageX - initialX) * intensidad;
-
-            this.modificar(mouse_dx);
-            initialX = event.pageX;
-
-            return false;
-          });
-        });
-
-        $("html").on("mouseup", () => {
+        html.addEventListener("mouseup", () => {
           later(() => {
             this.disconnectEvents();
             return false;
           });
         });
 
-        $("html").on("mouseleave", () => {
+        html.onmouseleave = () => {
           later(() => {
             this.disconnectEvents();
             return false;
           });
-        });
+        };
       });
+    });
+    */
+  },
+
+  al_mover(event) {
+    later(() => {
+      var mouse_dx = (event.pageX - this.initialX) * this.intensidad;
+
+      this.modificar(mouse_dx);
+      this.set("initialX", event.pageX);
+
+      return false;
     });
   },
 
   disconnectEvents: function() {
-    $("html").unbind("mousemove");
-    $("html").unbind("mouseup");
+    /*
+    let html = document.querySelector("html");
+    html.removeEventListener("mousedown", this.al_mover);
+    //html.onmouseup;
+    */
   },
 
   willDestroyElement() {
+    /*
     this.disconnectEvents();
+    */
   },
 
   modificar(delta) {
@@ -84,8 +92,8 @@ export default Component.extend({
       this.set("editando", true);
 
       later(() => {
-        this.$("input").focus();
-        this.$("input")[0].select();
+        this.element.querySelector("input").focus();
+        this.element.querySelector("input").select();
       });
     },
     cuando_pierde_foco() {

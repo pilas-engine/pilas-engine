@@ -14,13 +14,15 @@ module("Integration | Component | pilas ejemplo", function(hooks) {
       escenas: [
         {
           nombre: "principal",
-          codigo: "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+          codigo:
+            "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
         }
       ],
       actores: [
         {
           nombre: "nube",
-          codigo: 'class nube extends Actor {\n    propiedades = {\n        imagen: "nube"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 1;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}'
+          codigo:
+            'class nube extends Actor {\n    propiedades = {\n        imagen: "nube"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 1;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}'
         }
       ]
     },
@@ -64,7 +66,9 @@ module("Integration | Component | pilas ejemplo", function(hooks) {
   test("it renders", async function(assert) {
     this.set("proyecto", proyecto);
 
-    await render(hbs`{{pilas-ejemplo debe_mantener_foco=false proyecto=proyecto}}`);
-    assert.ok(this.$());
+    await render(
+      hbs`{{pilas-ejemplo debe_mantener_foco=false proyecto=proyecto}}`
+    );
+    assert.ok(this.element);
   });
 });

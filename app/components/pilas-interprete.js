@@ -24,7 +24,7 @@ export default Component.extend({
     this.set("historial", []);
 
     new autoComplete({
-      selector: this.$("#input")[0],
+      selector: this.element.querySelector("#input"),
       minChars: 1,
       source: (termino, suggest) => {
         return this.autocompletar(termino, suggest);

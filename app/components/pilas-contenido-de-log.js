@@ -1,5 +1,5 @@
-import { later } from '@ember/runloop';
-import { inject as service } from '@ember/service';
+import { later } from "@ember/runloop";
+import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 
 export default Component.extend({
@@ -16,8 +16,8 @@ export default Component.extend({
 
   realizarScroll() {
     later(() => {
-      if (this.$()) {
-        let elemento = this.$()[0];
+      if (this.element) {
+        let elemento = this.element;
 
         if (elemento && elemento.scroll) {
           elemento.scroll(0, elemento.scrollHeight);

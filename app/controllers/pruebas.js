@@ -11,6 +11,9 @@ export default Controller.extend({
   proyecto: null,
 
   iniciar() {
+    this.set("instancia_seleccionada", { numero: 3 });
+    this.set("propiedad", { propiedad: "Un número" });
+
     this.set("proyecto", {
       titulo: "Proyecto demo",
       ancho: 480,

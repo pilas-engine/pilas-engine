@@ -313,10 +313,10 @@ export default Component.extend({
 
   hacerFoco() {
     let editor = this.editor;
-    let iframe = this.$("iframe");
+    let iframe = this.element.querySelector("iframe");
 
     if (iframe) {
-      iframe[0].contentWindow.focus();
+      iframe.contentWindow.focus();
     }
 
     if (editor) {

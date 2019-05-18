@@ -26,6 +26,12 @@ class Modo extends Phaser.Scene {
     this.fps_extra.scrollFactorX = 0;
     this.fps_extra.scrollFactorY = 0;
 
+    /*
+    this.pilas.game.input.onDown.addOnce(() => {
+     this.pilas.game.sound.context.resume();
+});
+*/
+
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
   }

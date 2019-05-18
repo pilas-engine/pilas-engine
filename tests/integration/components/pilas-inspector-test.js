@@ -25,11 +25,7 @@ module("Integration | Component | pilas inspector", function(hooks) {
 
     function tiene_texto(t, texto) {
       return (
-        t
-          .$()
-          .text()
-          .toLowerCase()
-          .indexOf(texto.toLowerCase()) > -1
+        t.element.innerHTML.toLowerCase().indexOf(texto.toLowerCase()) > -1
       );
     }
 

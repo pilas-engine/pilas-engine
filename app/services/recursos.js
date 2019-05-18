@@ -1,4 +1,3 @@
-import jQuery from "jquery";
 import Service from "@ember/service";
 import config from "pilas-engine/config/environment";
 import { task, timeout } from "ember-concurrency";
@@ -11,11 +10,7 @@ export default Service.extend({
   tarea: task(function*() {
     yield timeout(500);
 
-    let data = yield jQuery.ajax({
-      mimeType: "application/json",
-      dataType: "json",
-      url: `${config.rootURL}recursos.json`
-    });
+    let data = yield this.obtenerRecursos();
 
     this.set("data", data);
     return data;
@@ -27,6 +22,25 @@ export default Service.extend({
     } else {
       return this.generar_respuesta_como_promesa_inmediata();
     }
+  },
+
+  obtenerRecursos() {
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open("GET", `${config.rootURL}recursos.json`);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          reject(xhr.status);
+        }
+      };
+
+      xhr.send();
+    });
   },
 
   generar_respuesta_como_promesa_inmediata() {

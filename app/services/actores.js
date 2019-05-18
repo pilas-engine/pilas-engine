@@ -1,7 +1,7 @@
 import Service from "@ember/service";
 import config from "pilas-engine/config/environment";
 import { task, timeout } from "ember-concurrency";
-import jQuery from "jquery";
+import { Promise } from "rsvp";
 
 export default Service.extend({
   iniciado: false,
@@ -11,11 +11,14 @@ export default Service.extend({
   tareaConseguirActores: task(function*() {
     yield timeout(500);
 
-    let metadata = yield jQuery.ajax({
+    let metadata = yield this.obtenerActores();
+    /*
+    jQuery.ajax({
       mimeType: "application/json",
       dataType: "json",
       url: `${config.rootURL}actores.json`
     });
+    */
 
     let codigo_del_actor_base = metadata.actores[0].codigo;
 
@@ -43,6 +46,25 @@ export default Service.extend({
 
     return { actores: actores_accesibles };
   }).drop(),
+
+  obtenerActores() {
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open("GET", `${config.rootURL}actores.json`);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          reject(xhr.status);
+        }
+      };
+
+      xhr.send();
+    });
+  },
 
   extraer_diccionario(diccionario, codigo) {
     let regex = new RegExp(`${diccionario}\\s+=\\s+(\\{[\\s\\S]*?\\})`, "g");

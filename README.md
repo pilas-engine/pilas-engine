@@ -8,13 +8,14 @@ La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
 
 ## Artículos
 
-- http://examplelab.com.ar/comenzamos-pilas-engine-2/ - Anuncio del comienzo del proyecto
+- http://foro.pilas-engine.com.ar/t/resumen-del-sprint-07/1656 - Resumen del sprint 7 (18 de Mayo de 2019)
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-06/1648 - Resumen del sprint 6 (27 de Abril de 2019)
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-05/1592 - Resumen del sprint 5 (1 de Diciembre de 2018)
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-04/1401 - Resumen del sprint 4 (5 de Junio de 2018)
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-03/1389 - Resumen del sprint 3 (28 de Abril del 2018)
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-02/1375 - Resumen del sprint 2 (31 de Marzo del 2018)
 - http://foro.pilas-engine.com.ar/t/resumen-del-sprint-01/1366 - Resumen del sprint 1 (20 de Marzo del 2018)
+- http://examplelab.com.ar/comenzamos-pilas-engine-2/ - Anuncio del comienzo del proyecto
 
 ## Links útiles
 

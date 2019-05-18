@@ -10,8 +10,8 @@ export default Component.extend({
       this.set("editando", true);
 
       later(() => {
-        this.$("input").focus();
-        this.$("input")[0].select();
+        this.element.querySelector("input").focus();
+        this.element.querySelector("input").select();
       });
     },
     cuando_pierde_foco() {
