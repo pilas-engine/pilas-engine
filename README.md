@@ -96,6 +96,8 @@ de varias herramientas y bibliotecas como:
 - https://github.com/jdotrjs/phaser3-nineslice/
 - https://electronjs.org/
 - https://github.com/koffsyrup/FileSaver.js
+- https://github.com/lukeed/polka
+- https://github.com/lukeed/sirv
 
 ## Próximas tareas a desarrollar
 

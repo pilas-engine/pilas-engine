@@ -32,6 +32,10 @@ import Service from "@ember/service";
  * - plegar_codigo
  * - expandir_codigo
  *
+ * Otra señal que se emite para avisarle al webserver que cambió el código es:
+ *
+ * - recargar_proyecto
+ *
  */
 
 export default Service.extend(Evented, {

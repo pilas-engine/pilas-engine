@@ -2762,10 +2762,12 @@ var Modo = (function (_super) {
     };
     Modo.prototype.posicionar_fondo = function () {
         var posicion_de_la_camara = this.obtener_posicion_de_la_camara();
-        this.fondo.x = posicion_de_la_camara.x;
-        this.fondo.y = posicion_de_la_camara.y;
-        this.fondo.tilePositionX = posicion_de_la_camara.x;
-        this.fondo.tilePositionY = posicion_de_la_camara.y;
+        if (this.fondo) {
+            this.fondo.x = posicion_de_la_camara.x;
+            this.fondo.y = posicion_de_la_camara.y;
+            this.fondo.tilePositionX = posicion_de_la_camara.x;
+            this.fondo.tilePositionY = posicion_de_la_camara.y;
+        }
     };
     Modo.prototype.obtener_posicion_de_la_camara = function () {
         var x = this.pilas.modo.cameras.cameras[0].scrollX;

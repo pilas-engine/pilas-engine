@@ -433,6 +433,20 @@ export default Component.extend({
         proyecto: resultado.proyecto_serializado
       };
 
+      function b64EncodeUnicode(str) {
+        return btoa(
+          encodeURIComponent(str).replace(
+            /%([0-9A-F]{2})/g,
+            function toSolidBytes(match, p1) {
+              return String.fromCharCode("0x" + p1);
+            }
+          )
+        );
+      }
+
+      let hash = b64EncodeUnicode(JSON.stringify(datos));
+
+      this.bus.trigger("recargar_proyecto", hash);
       this.bus.trigger("ejecutar_proyecto", datos);
       this.bus.trigger("hacer_foco_en_pilas", {});
 

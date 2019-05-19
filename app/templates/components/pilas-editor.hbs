@@ -16,6 +16,10 @@
       {{/en-electron}}
 
       {{pilas-boton-preferencias icono="preferencias" permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
+
+      {{#en-electron}}
+        {{pilas-boton-webserver cargando=cargando}}
+      {{/en-electron}}
     </div>
 
     <div class="flex1">

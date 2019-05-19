@@ -1,0 +1,16 @@
+{{yield}}
+
+{{#if iniciando}}
+  {{pilas-boton icono="webserver" desactivado=true texto="Iniciando servidor web ..."}}
+{{else}}
+  {{#if deteniendo}}
+    {{pilas-boton icono="webserver" desactivado=true texto="Deteniendo servidor web ..."}}
+  {{else}}
+    {{#if activado}}
+      {{pilas-boton icono="webserver" texto="Detener servidor web" accion=(action "detener_servidor")}}
+      <span class="texto f7 pt2 mt1 dib unselectable pointer" {{action "abrir_en_un_navegador"}} role="button">{{direccion}}</span>
+    {{else}}
+      {{pilas-boton icono="webserver" desactivado=cargando accion=(action "cuando_activa_webserver") texto="Iniciar servidor web"}}
+    {{/if}}
+  {{/if}}
+{{/if}}

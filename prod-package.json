@@ -11,5 +11,8 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "polka": "^0.5.2",
+    "sirv": "^0.4.2"
+  }
 }
