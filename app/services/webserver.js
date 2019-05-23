@@ -229,12 +229,32 @@ export default Service.extend({
     return `
         let tickAnterior = null;
 
+        function get(url) {
+          return new Promise((resolve, reject) => {
+            var request = new XMLHttpRequest();
+
+            request.onreadystatechange = function() {
+              if (request.readyState === 4) {
+                if (request.status === 200) {
+                  resolve(JSON.parse(request.responseText));
+                } else {
+                  reject("error: " + request.statusText);
+                }
+              }
+            }
+
+            request.open('GET', url);
+            request.send();
+          });
+        }
+
+
+        window.fetch = null;
+
         function consultar_tick() {
           console.log("Consultando tick para saber si deber actualizar página...");
 
-          fetch("/tick").then(response => {
-            return response.json();
-          }).then((data) => {
+          get("/tick").then((data) => {
             if (tickAnterior) {
               if (tickAnterior !== data.tick) {
                 console.log("El tick ha cambiando, reiniciando");
@@ -284,7 +304,7 @@ export default Service.extend({
         }
 
         function planificar_consulta_de_tick() {
-          setTimeout(consultar_tick, 1000);
+          setTimeout(consultar_tick, 2000);
         }
 
         consultar_tick();
