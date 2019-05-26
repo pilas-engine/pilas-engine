@@ -7,7 +7,7 @@
     "escenas": [
       {
         "nombre": "principal",
-        "codigo": "class principal extends Escena {\n    iniciar() {\n        this.pilas.ocultar_cursor();\n    }\n\n    actualizar() {\n\n    }\n}"
+        "codigo": "class principal extends Escena {\n    iniciar() {\n        this.pilas.ocultar_cursor();\n    }\n\n    actualizar() {\n        this.pilas.observar(\"cursor x\", this.pilas.cursor_x);\n        this.pilas.observar(\"cursor y\", this.pilas.cursor_y);\n    }\n}"
       }
     ],
     "actores": [
@@ -41,7 +41,7 @@
       },
       {
         "nombre": "actor2",
-        "codigo": "class actor2 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:sin_imagen.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.rotacion = this.pilas.obtener_angulo_entre_puntos(this.x, this.y,\n            this.pilas.cursor_x, this.pilas.cursor_y)\n    }\n}"
+        "codigo": "class actor2 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:sin_imagen.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        let cursor_x = this.pilas.cursor_x;\n        let cursor_y = this.pilas.cursor_y;\n        this.rotacion = this.pilas.obtener_angulo_entre_puntos(this.x, this.y, cursor_x, cursor_y);\n        this.pilas.observar(\"rotación del cañon\", this.rotacion)\n\n        let distancia = this.pilas.obtener_distancia_entre_puntos(this.x, this.y, cursor_x, cursor_y);\n        this.pilas.observar(\"distancia entre el cañon y el mouse\", distancia)\n\n    }\n}"
       },
       {
         "nombre": "actor3",
