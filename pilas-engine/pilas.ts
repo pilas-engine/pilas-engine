@@ -389,6 +389,10 @@ class Pilas {
 
     this.modo.input.setDefaultCursor(nombres[nombre] || nombre);
   }
+
+  observar(nombre: string, variable: any) {
+    this.escena.observar(nombre, variable);
+  }
 }
 
 //var pilas = new Pilas();

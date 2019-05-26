@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.12.1</string>
+        <string>5.0.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -187,6 +187,7 @@
             <key type="filename">iconos/ejemplos/azar.png</key>
             <key type="filename">iconos/ejemplos/click.png</key>
             <key type="filename">iconos/ejemplos/click_actor.png</key>
+            <key type="filename">iconos/ejemplos/controles.png</key>
             <key type="filename">iconos/ejemplos/cursores.png</key>
             <key type="filename">iconos/ejemplos/ejemplo-nave.png</key>
             <key type="filename">iconos/ejemplos/gravedad.png</key>
@@ -233,6 +234,11 @@
                 <false/>
             </struct>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_abajo.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_arriba.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_derecha.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_espacio.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_izquierda.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_caja.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_gallina.png</key>
             <key type="filename">iconos/grilla-imagenes/imagenes_caja.png</key>
@@ -412,6 +418,24 @@
                 <rect>39,14,77,27</rect>
                 <key>scale9Paddings</key>
                 <rect>39,14,77,27</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">iconos/grilla-imagenes/botones/imagenes_botones_a.png</key>
+            <key type="filename">iconos/grilla-imagenes/botones/imagenes_botones_abajo.png</key>
+            <key type="filename">iconos/grilla-imagenes/botones/imagenes_botones_arriba.png</key>
+            <key type="filename">iconos/grilla-imagenes/botones/imagenes_botones_b.png</key>
+            <key type="filename">iconos/grilla-imagenes/botones/imagenes_botones_derecha.png</key>
+            <key type="filename">iconos/grilla-imagenes/botones/imagenes_botones_izquierda.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>20,20,40,40</rect>
+                <key>scale9Paddings</key>
+                <rect>20,20,40,40</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -995,6 +1019,7 @@
             <key type="filename">iconos/principal/settings.png</key>
             <key type="filename">iconos/principal/test.png</key>
             <key type="filename">iconos/ui/add_folder.png</key>
+            <key type="filename">iconos/ui/webserver.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

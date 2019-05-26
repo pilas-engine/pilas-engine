@@ -19,6 +19,11 @@ declare class Actores {
     laser(): any;
     deslizador(): any;
     boton(): any;
+    boton_de_control_izquierda(): any;
+    boton_de_control_derecha(): any;
+    boton_de_control_arriba(): any;
+    boton_de_control_abajo(): any;
+    boton_de_control_espacio(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -51,6 +56,7 @@ declare class Control {
     private _arriba;
     private _abajo;
     private _espacio;
+    private _simulaciones;
     constructor(pilas: Pilas);
     terminar(): void;
     private conectar_teclas;
@@ -60,6 +66,7 @@ declare class Control {
     arriba: boolean;
     abajo: boolean;
     espacio: boolean;
+    simular_pulsacion(nombre: string, pulsacion: boolean): void;
 }
 declare class Depurador {
     pilas: Pilas;
@@ -283,6 +290,7 @@ declare class Pilas {
     obtener_angulo_entre_actores(actor1: ActorBase, actor2: ActorBase): number;
     ocultar_cursor(): void;
     definir_cursor(nombre: string): void;
+    observar(nombre: string, variable: any): void;
 }
 declare var pilasengine: Pilas;
 declare class ActorBase {
@@ -476,6 +484,66 @@ declare class boton extends ActorTextoBase {
     cuando_mueve(): void;
     cuando_sale(): void;
 }
+declare class boton_de_control_abajo extends Actor {
+    propiedades: {
+        imagen: string;
+        z: number;
+    };
+    pulsado: boolean;
+    iniciar(): void;
+    actualizar(): void;
+    cuando_hace_click(): void;
+    cuando_sale(): void;
+    cuando_termina_de_hacer_click(): void;
+}
+declare class boton_de_control_arriba extends Actor {
+    propiedades: {
+        imagen: string;
+        z: number;
+    };
+    pulsado: boolean;
+    iniciar(): void;
+    actualizar(): void;
+    cuando_hace_click(): void;
+    cuando_sale(): void;
+    cuando_termina_de_hacer_click(): void;
+}
+declare class boton_de_control_derecha extends Actor {
+    propiedades: {
+        imagen: string;
+        z: number;
+    };
+    pulsado: boolean;
+    iniciar(): void;
+    actualizar(): void;
+    cuando_hace_click(): void;
+    cuando_sale(): void;
+    cuando_termina_de_hacer_click(): void;
+}
+declare class boton_de_control_espacio extends Actor {
+    propiedades: {
+        imagen: string;
+        z: number;
+    };
+    pulsado: boolean;
+    iniciar(): void;
+    actualizar(): void;
+    cuando_hace_click(): void;
+    cuando_sale(): void;
+    cuando_termina_de_hacer_click(): void;
+}
+declare class boton_de_control_izquierda extends Actor {
+    propiedades: {
+        imagen: string;
+        z: number;
+    };
+    pulsado: boolean;
+    iniciar(): void;
+    actualizar(): void;
+    cuando_hace_click(): void;
+    cuando_sale(): void;
+    cuando_termina_de_hacer_click(): void;
+}
 declare class caja extends Actor {
     propiedades: {
         x: number;
@@ -664,7 +732,10 @@ declare class EscenaBase {
     _gravedad_x: number;
     _gravedad_y: number;
     eventos: EventosDeEscena;
+    _observables: any;
+    _actor_visor_observables: any;
     constructor(pilas: any);
+    observar(nombre: string, variable: any): void;
     agregar_actor(actor: Actor): void;
     gravedad_x: number;
     gravedad_y: number;

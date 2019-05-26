@@ -25,97 +25,34 @@ export default Controller.extend({
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
 
-                /*
-                pilas.luego(3, (e) => {
-                  pilas.cambiar_escena('gameover');
-                });
-                */
+                //this.crear_nave_simulada();
+              }
 
-                a = this.pilas.actores.conejo();
-                a.decir("hola?")
-
-                //this.pilas.modo.add.sprite(300, 300, "dialogo.png")
-
-                //this.pilas.modo.add.nineslice(100, 0, 100, 100, "dialogo.png", 2, 2);
-
-                let p = this.pilas.actores.plataforma();
-                p.y = -200;
-
-                //let a = this.pilas.actores.nave();
-
-                //console.log(this.pilas.listar_imagenes())
-
-                /*
-                this.pilas.actores.pelota();
+              crear_nave_simulada() {
                 this.pilas.actores.nave();
 
-                let plataforma = this.pilas.actores.plataforma();
-                plataforma.y = -200;
-                plataforma.aprender("arrastrable");
-                */
+                this.pilas.control.simular_pulsacion('arriba', true);
 
-                /*
+                this.pilas.luego(0.5, () => {
+                  this.pilas.control.simular_pulsacion('arriba', false);
+                  this.pilas.control.simular_pulsacion('izquierda', true);
+                });
 
-                this.pilas.actores.deslizador();
+                this.pilas.luego(1, () => {
+                  this.pilas.control.simular_pulsacion('izquierda', false);
+                  this.pilas.control.simular_pulsacion('espacio', true);
+                });
 
-                let actor = this.pilas.actores.texto();
-                actor.texto = "demo texto\\nsuper\\nsuper\\nsuper \\nsuper largo en varias lineas";
-                actor.color = "negro";
-                actor.magnitud = 16;
-                actor.x = 130;
-                actor.y = 130;
-                actor.fondo = "dialogo";
-                actor.fondo = "gris";
-                actor.z = 2;
+                this.pilas.luego(1.1, () => {
+                  this.pilas.control.simular_pulsacion('espacio', false);
+                });
 
-                actor.escala_y = 0
-                actor.escala_y = [1]
-
-                window.actor = actor;
-
-                this.pilas.obtener_actor_por_nombre("aceituna").decir("¿hola?\\n¿cómo estás?");
-
-
-                actor.aprender("arrastrable");
-
-                console.log(actor.ancho)
-
-                window.actor = actor;
-                */
-
-
-                /*
-                let b = pilas.actores.texto()
-                b.texto = "Has click sobre algún actor para ver que dicen";
-                b.sombra = true;
-
-
-                let texto = pilas.actores.texto()
-
-                texto.y = 100
-                texto.texto = "..."
-                texto.color = "white"
-                texto.magnitud = 30
-                texto.x = [100]
-
-                texto.escala = 0;
-                texto.escala = [1]
-
-                pilas.luego(3, (e) => {
-                  texto.x = [-200];
-                })
-
-                pilas.luego(6, (e) => {
-                  texto.eliminar();
-                })
-
-                let t = pilas.actores.aceituna();
-                t.y=100;
-                t.decir("hola mundo !!!");
-                */
               }
 
               actualizar() {
+                this.pilas.observar("cursor_x", this.pilas.cursor_x);
+                this.pilas.observar("cursor_y", this.pilas.cursor_y);
+                this.pilas.observar("¿pulsa la tecla arriba?", this.pilas.control.arriba);
               }
             }`
           },
@@ -160,9 +97,16 @@ export default Controller.extend({
 
   _texto: any = null;
 
-  iniciar() {}
+  iniciar() {
+    this.x = -100;
+    this.y = 70;
+  }
 
-  actualizar() {}
+  actualizar() {
+    this.x += 0.1;
+    this.pilas.observar("mi actor", this)
+    this.pilas.observar("rotación", this.rotacion)
+  }
 }`
           }
         ]

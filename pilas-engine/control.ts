@@ -7,6 +7,8 @@ class Control {
   private _abajo: any;
   private _espacio: any;
 
+  private _simulaciones: any;
+
   constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.conectar_teclas();
@@ -24,6 +26,14 @@ class Control {
     this._arriba = keyboard.addKey("UP");
     this._abajo = keyboard.addKey("DOWN");
     this._espacio = keyboard.addKey("SPACE");
+
+    this._simulaciones = {
+      izquierda: false,
+      derecha: false,
+      arriba: false,
+      abajo: false,
+      espacio: false
+    };
   }
 
   private desconectar_teclas() {
@@ -38,7 +48,7 @@ class Control {
   }
 
   get izquierda(): boolean {
-    return this._izquierda.isDown;
+    return this._izquierda.isDown || this._simulaciones["izquierda"];
   }
 
   set izquierda(v) {
@@ -46,7 +56,7 @@ class Control {
   }
 
   get derecha(): boolean {
-    return this._derecha.isDown;
+    return this._derecha.isDown || this._simulaciones["derecha"];
   }
 
   set derecha(v) {
@@ -54,7 +64,7 @@ class Control {
   }
 
   get arriba(): boolean {
-    return this._arriba.isDown;
+    return this._arriba.isDown || this._simulaciones["arriba"];
   }
 
   set arriba(v) {
@@ -62,7 +72,7 @@ class Control {
   }
 
   get abajo(): boolean {
-    return this._abajo.isDown;
+    return this._abajo.isDown || this._simulaciones["abajo"];
   }
 
   set abajo(v) {
@@ -70,10 +80,35 @@ class Control {
   }
 
   get espacio(): boolean {
-    return this._espacio.isDown;
+    return this._espacio.isDown || this._simulaciones["espacio"];
   }
 
   set espacio(v) {
     this.pilas.utilidades.acceso_incorrecto("espacio");
+  }
+
+  /**
+   * Permite simular la pulsación de una tecla como si lo hiciera el usuario.
+   *
+   * Esta función es útil para generar eventos de teclado desde una pantalla
+   * touch o simulación de juego.
+   *
+   * Por ejemplo, si se quiere simular que el usuario pulsa la tecla arriba
+   * durante medio segundo y luego se suelta se puede hacer algo así:
+   *
+   * ```
+   * this.pilas.control.simular_pulsacion('arriba', true);
+   *
+   * this.pilas.luego(0.5, () => {
+   *    this.pilas.control.simular_pulsacion('arriba', false);
+   * });
+   * ```
+   */
+  simular_pulsacion(nombre: string, pulsacion: boolean) {
+    if (this._simulaciones[nombre] === undefined) {
+      throw Error(`No se puede simular la tecla ${nombre}`);
+    }
+
+    this._simulaciones[nombre] = pulsacion;
   }
 }

@@ -199,6 +199,7 @@ class ActorBase {
   private crear_sprite(tipo, imagen_inicial) {
     let galeria = null;
     let imagen = null;
+    let sprite = null;
 
     this.pilas.utilidades.validar_que_existe_imagen(imagen_inicial);
 
@@ -217,23 +218,25 @@ class ActorBase {
     switch (tipo) {
       case "matter":
         if (galeria) {
-          return this.pilas.modo.matter.add.sprite(0, 0, galeria, imagen);
+          sprite = this.pilas.modo.matter.add.sprite(0, 0, galeria, imagen);
         } else {
-          return this.pilas.modo.matter.add.sprite(0, 0, imagen);
+          sprite = this.pilas.modo.matter.add.sprite(0, 0, imagen);
         }
         break;
 
       case "sprite":
         if (galeria) {
-          return this.pilas.modo.add.sprite(0, 0, galeria, imagen);
+          sprite = this.pilas.modo.add.sprite(0, 0, galeria, imagen);
         } else {
-          return this.pilas.modo.add.sprite(0, 0, imagen);
+          sprite = this.pilas.modo.add.sprite(0, 0, imagen);
         }
         break;
 
       default:
         throw Error(`No se puede crear un sprite de tipo ${tipo}`);
     }
+
+    return sprite;
   }
 
   protected copiar_atributos_de_sprite(origen, destino) {
@@ -610,7 +613,9 @@ class ActorBase {
 
   toString() {
     let clase = this.constructor["name"];
-    return `<${clase} en (${this.x}, ${this.y})>`;
+    let x = this.x.toFixed(2);
+    let y = this.y.toFixed(2);
+    return `<${clase} en (${x}, ${y})>`;
   }
 
   fallar_si_no_tiene_figura() {

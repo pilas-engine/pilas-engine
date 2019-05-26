@@ -8,6 +8,8 @@ class EscenaBase {
   _gravedad_x: number = 0;
   _gravedad_y: number = 1;
   eventos: EventosDeEscena;
+  _observables: any;
+  _actor_visor_observables: any;
 
   constructor(pilas) {
     this.pilas = pilas;
@@ -17,6 +19,40 @@ class EscenaBase {
     this.pilas.escenas.definir_escena_actual(this);
     this.control = new Control(pilas);
     this.eventos = new EventosDeEscena(pilas);
+    this._observables = null;
+  }
+
+  observar(nombre: string, variable: any) {
+    if (this._observables === null) {
+      this._actor_visor_observables = this.pilas.actores.texto();
+      this._actor_visor_observables.fondo =
+        "imagenes:redimensionables_blanco.png";
+
+      this._actor_visor_observables.centro_x = 0;
+      this._actor_visor_observables.centro_y = 0;
+      this._actor_visor_observables.x = -210;
+      this._actor_visor_observables.y = 210;
+
+      //this._actor_visor_observables.color = "white";
+      this._observables = {};
+      let self = this;
+
+      this._actor_visor_observables.actualizar = function() {
+        let texto = JSON.stringify(self._observables, null, 4)
+          .replace(/{|}|"/g, "")
+          .replace(/,\n/g, "\n")
+          .replace(/    /g, "")
+          .trim();
+
+        this.texto = texto;
+      };
+    }
+
+    if (typeof variable == "number" && !Number.isInteger(variable)) {
+      this._observables[nombre] = variable.toFixed(2);
+    } else {
+      this._observables[nombre] = `${variable}`;
+    }
   }
 
   agregar_actor(actor: Actor) {

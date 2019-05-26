@@ -8,6 +8,7 @@
 - [Etiquetas](etiquetas.md)
 - [Habilidades](habilidades.md)
 - [Azar o cálculos aleatorios](azar.md)
+- [Observables](observables.md)
 - [Angulos y distancias](angulos-distancias.md)
 - [Colisiones](colisiones.md)
 - [Escenas](escenas.md)

@@ -93,4 +93,24 @@ class Actores {
   boton() {
     return this.crear_actor("boton");
   }
+
+  boton_de_control_izquierda() {
+    return this.crear_actor("boton_de_control_izquierda");
+  }
+
+  boton_de_control_derecha() {
+    return this.crear_actor("boton_de_control_derecha");
+  }
+
+  boton_de_control_arriba() {
+    return this.crear_actor("boton_de_control_arriba");
+  }
+
+  boton_de_control_abajo() {
+    return this.crear_actor("boton_de_control_abajo");
+  }
+
+  boton_de_control_espacio() {
+    return this.crear_actor("boton_de_control_espacio");
+  }
 }

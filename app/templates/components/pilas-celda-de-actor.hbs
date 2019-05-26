@@ -18,13 +18,15 @@
 
     {{yield}}
 
-    <div class="flex1 tc w-100 h2">
-      <div class="sprite grilla_actor_{{actor.nombre}} mw-100 mh-100"></div>
-    </div>
+    {{#pilas-tooltip class="" texto=actor.nombre}}
+      <div class="flex1 tc w-100 h3">
+        <div class="sprite grilla_actor_{{actor.nombre}} mw-100 mh-100"></div>
+      </div>
 
-    <div class="f6 tc mt2 h1 texto">
-      {{actor.nombre}}
-    </div>
+      <div class="f6 tc mt2 h1 texto truncate">
+        {{actor.nombre}}
+      </div>
+    {{/pilas-tooltip}}
 
   </div>
 </div>

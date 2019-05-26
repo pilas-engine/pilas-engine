@@ -38,6 +38,10 @@
     {
       "nombre": "angulo-entre-actores",
       "desde": "2.0.77"
+    },
+    {
+      "nombre": "controles",
+      "desde": "2.0.78"
     }
   ]
 }

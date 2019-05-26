@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.12.1</string>
+        <string>5.0.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -220,7 +220,28 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">imagenes/botones/botones_a.png</key>
+            <key type="filename">imagenes/botones/botones_abajo.png</key>
+            <key type="filename">imagenes/botones/botones_arriba.png</key>
+            <key type="filename">imagenes/botones/botones_b.png</key>
+            <key type="filename">imagenes/botones/botones_derecha.png</key>
+            <key type="filename">imagenes/botones/botones_izquierda.png</key>
+            <key type="filename">imagenes/fondos/fondo-nubes.png</key>
+            <key type="filename">imagenes/planeta.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>20,20,40,40</rect>
+                <key>scale9Paddings</key>
+                <rect>20,20,40,40</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">imagenes/caja.png</key>
+            <key type="filename">imagenes/redimensionables/redimensionables_blanco.png</key>
             <key type="filename">imagenes/redimensionables/redimensionables_dialogo.png</key>
             <key type="filename">imagenes/redimensionables/redimensionables_gris.png</key>
             <struct type="IndividualSpriteSettings">
@@ -398,20 +419,6 @@
                 <rect>64,64,128,128</rect>
                 <key>scale9Paddings</key>
                 <rect>64,64,128,128</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">imagenes/fondos/fondo-nubes.png</key>
-            <key type="filename">imagenes/planeta.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>20,20,40,40</rect>
-                <key>scale9Paddings</key>
-                <rect>20,20,40,40</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -837,6 +844,7 @@
             <filename>imagenes/cursores</filename>
             <filename>imagenes/tanque</filename>
             <filename>imagenes/planeta.png</filename>
+            <filename>imagenes/botones</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
