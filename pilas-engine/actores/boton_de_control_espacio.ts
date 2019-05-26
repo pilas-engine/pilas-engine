@@ -1,6 +1,6 @@
 class boton_de_control_espacio extends Actor {
   propiedades = {
-    imagen: "imagenes:botones_a.png",
+    imagen: "imagenes:botones/botones_a",
     z: -100
   };
 

@@ -30,7 +30,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "imagenes:sin_imagen.png",
+    imagen: "imagenes:basicos/sin_imagen",
 
     centro_x: 0.5,
     centro_y: 0.5,
@@ -59,7 +59,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "imagenes:sin_imagen.png",
+    imagen: "imagenes:basicos/sin_imagen",
     figura: ""
   };
 

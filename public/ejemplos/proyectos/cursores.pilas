@@ -13,47 +13,47 @@
     "actores": [
       {
         "nombre": "texto",
-        "codigo": "class texto extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto1",
-        "codigo": "class texto1 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n}"
+        "codigo": "class texto1 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n}"
       },
       {
         "nombre": "texto2",
-        "codigo": "class texto2 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"none\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto2 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"none\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto3",
-        "codigo": "class texto3 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"help\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto3 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"help\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto4",
-        "codigo": "class texto4 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto4 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto5",
-        "codigo": "class texto5 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"wait\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto5 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"wait\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto6",
-        "codigo": "class texto6 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"text\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto6 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"text\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto7",
-        "codigo": "class texto7 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"cell\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto7 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"cell\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto8",
-        "codigo": "class texto8 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"move\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto8 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"move\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto9",
-        "codigo": "class texto9 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"crosshair\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto9 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"crosshair\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       },
       {
         "nombre": "texto10",
-        "codigo": "class texto10 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:invisible.png\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"no-drop\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+        "codigo": "class texto10 extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        texto: \"Hola mundo\",\n        es_texto: true\n    };\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"no-drop\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
       }
     ]
   },
@@ -65,13 +65,13 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondo-plano.png",
+      "fondo": "imagenes:fondos/fondo-plano",
       "actores": [
         {
           "x": -54.71604938271605,
           "y": 105,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -94,13 +94,13 @@
           "id": 1795,
           "nombre": "texto",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": -60,
           "y": 190,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -128,7 +128,7 @@
           "x": 163.3950617283951,
           "y": 105,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -151,13 +151,13 @@
           "id": 1695,
           "nombre": "texto2",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": 58.419753086419746,
           "y": 105,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -180,13 +180,13 @@
           "id": 1216,
           "nombre": "texto3",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": -182.1481481481481,
           "y": 105,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -209,13 +209,13 @@
           "id": 1736,
           "nombre": "texto4",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": -193.88888888888889,
           "y": 24,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -238,13 +238,13 @@
           "id": 1698,
           "nombre": "texto5",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": -194.037037037037,
           "y": -58,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -267,13 +267,13 @@
           "id": 1948,
           "nombre": "texto6",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": 46.55555555555554,
           "y": 24,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -296,13 +296,13 @@
           "id": 1784,
           "nombre": "texto7",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": 148.34567901234567,
           "y": 24,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -325,13 +325,13 @@
           "id": 1354,
           "nombre": "texto8",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": -73.93827160493825,
           "y": 24,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -354,13 +354,13 @@
           "id": 1330,
           "nombre": "texto9",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         },
         {
           "x": -78.44444444444443,
           "y": -58,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -383,7 +383,7 @@
           "id": 1502,
           "nombre": "texto10",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables_gris.png"
+          "fondo": "imagenes:redimensionables/gris"
         }
       ]
     }

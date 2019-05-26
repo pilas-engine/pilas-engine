@@ -1,7 +1,7 @@
 class suelo extends Actor {
   propiedades = {
     figura: "rectangulo",
-    imagen: "imagenes:suelo.png",
+    imagen: "imagenes:plataformas/suelo",
     figura_ancho: 600,
     figura_alto: 25,
     figura_dinamica: false

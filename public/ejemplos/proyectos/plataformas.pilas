@@ -17,7 +17,7 @@
       },
       {
         "nombre": "plataforma",
-        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "caja",
@@ -45,15 +45,15 @@
       },
       {
         "nombre": "plataforma1",
-        "codigo": "class plataforma1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "plataforma2",
-        "codigo": "class plataforma2 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma2 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "plataforma3",
-        "codigo": "class plataforma3 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma3 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "moneda",
@@ -112,7 +112,7 @@
         {
           "x": -32.96850393700785,
           "y": -98.45669291338584,
-          "imagen": "imagenes:plataforma.png",
+          "imagen": "imagenes:plataformas/plataforma",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -136,7 +136,7 @@
         {
           "x": -262,
           "y": -31,
-          "imagen": "imagenes:techo.png",
+          "imagen": "imagenes:plataformas/techo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 90,
@@ -160,7 +160,7 @@
         {
           "x": 0,
           "y": -250,
-          "imagen": "imagenes:suelo.png",
+          "imagen": "imagenes:plataformas/suelo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -184,7 +184,7 @@
         {
           "x": 20,
           "y": -270,
-          "imagen": "imagenes:suelo.png",
+          "imagen": "imagenes:plataformas/suelo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -208,7 +208,7 @@
         {
           "x": 259,
           "y": -5,
-          "imagen": "imagenes:techo.png",
+          "imagen": "imagenes:plataformas/techo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 90,
@@ -232,7 +232,7 @@
         {
           "x": 98.03149606299212,
           "y": 54.54330708661416,
-          "imagen": "imagenes:plataforma.png",
+          "imagen": "imagenes:plataformas/plataforma",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

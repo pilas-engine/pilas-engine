@@ -1085,7 +1085,6 @@
             <filename>iconos/logos</filename>
             <filename>iconos/principal</filename>
             <filename>iconos/ui</filename>
-            <filename>iconos/otros</filename>
             <filename>iconos/ejemplos</filename>
             <filename>iconos/grilla-actores</filename>
             <filename>iconos/icono-actores</filename>

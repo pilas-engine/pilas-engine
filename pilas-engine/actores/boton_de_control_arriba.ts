@@ -1,6 +1,6 @@
 class boton_de_control_arriba extends Actor {
   propiedades = {
-    imagen: "imagenes:botones_arriba.png",
+    imagen: "imagenes:botones/botones_arriba",
     z: -100
   };
 

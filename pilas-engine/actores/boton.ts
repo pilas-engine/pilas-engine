@@ -1,7 +1,7 @@
 class boton extends ActorTextoBase {
   propiedades = {
-    imagen: "imagenes:invisible.png",
-    fondo: "imagenes:redimensionables_gris.png",
+    imagen: "imagenes:basicos/invisible",
+    fondo: "imagenes:redimensionables/gris",
     texto: "Botón",
     es_texto: true
   };

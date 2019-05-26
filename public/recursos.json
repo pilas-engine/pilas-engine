@@ -1,11 +1,11 @@
 {
   "imagenes": [
     {
-      "nombre": "imagenes:sin_imagen.png",
+      "nombre": "imagenes:basicos/sin_imagen",
       "sprite": "imagenes_sin_imagen"
     },
     {
-      "nombre": "imagenes:invisible.png",
+      "nombre": "imagenes:basicos/invisible",
       "sprite": "imagenes_invisible"
     },
     {
@@ -13,11 +13,11 @@
       "sprite": "fondos-imagenes_fondo-cielo"
     },
     {
-      "nombre": "imagenes:fondo-plano.png",
+      "nombre": "imagenes:fondos/fondo-plano",
       "sprite": "fondos-imagenes_fondo-plano"
     },
     {
-      "nombre": "imagenes:pelota.png",
+      "nombre": "imagenes:objetos/pelota",
       "sprite": "imagenes_pelota"
     },
     {
@@ -25,15 +25,15 @@
       "sprite": "imagenes_pelota_de_voley"
     },
     {
-      "nombre": "imagenes:logo.png",
+      "nombre": "imagenes:basicos/logo",
       "sprite": "imagenes_logo"
     },
     {
-      "nombre": "imagenes:caja.png",
+      "nombre": "imagenes:objetos/caja",
       "sprite": "imagenes_caja"
     },
     {
-      "nombre": "imagenes:aceituna.png",
+      "nombre": "imagenes:objetos/aceituna",
       "sprite": "imagenes_aceituna"
     },
     {
@@ -89,19 +89,19 @@
       "sprite": "nave-imagenes_nave_izquierda_2"
     },
     {
-      "nombre": "imagenes:suelo.png",
+      "nombre": "imagenes:plataformas/suelo",
       "sprite": "imagenes_suelo"
     },
     {
-      "nombre": "imagenes:techo.png",
+      "nombre": "imagenes:plataformas/techo",
       "sprite": "imagenes_techo"
     },
     {
-      "nombre": "imagenes:pared.png",
+      "nombre": "imagenes:plataformas/pared",
       "sprite": "imagenes_pared"
     },
     {
-      "nombre": "imagenes:plataforma.png",
+      "nombre": "imagenes:plataformas/plataforma",
       "sprite": "imagenes_plataforma"
     },
     {
@@ -222,7 +222,7 @@
       "sprite": "redimensionables-imagenes_boton-amarillo-pulsado"
     },
     {
-      "nombre": "imagenes:redimensionables_gris.png",
+      "nombre": "imagenes:redimensionables/gris",
       "sprite": "redimensionables-imagenes_gris"
     },
     {
@@ -266,11 +266,11 @@
       "sprite": "cursores-imagenes_cursor_disparo_rojo"
     },
     {
-      "nombre": "imagenes:planeta.png",
+      "nombre": "imagenes:basicos/planeta",
       "sprite": "imagenes_planeta"
     },
     {
-      "nombre": "imagenes:botones_a.png",
+      "nombre": "imagenes:botones/botones_a",
       "sprite": "botones-imagenes_botones_a"
     },
     {
@@ -278,19 +278,19 @@
       "sprite": "botones-imagenes_botones_b"
     },
     {
-      "nombre": "imagenes:botones_arriba.png",
+      "nombre": "imagenes:botones/botones_arriba",
       "sprite": "botones-imagenes_botones_arriba"
     },
     {
-      "nombre": "imagenes:botones_abajo.png",
+      "nombre": "imagenes:botones/botones_abajo",
       "sprite": "botones-imagenes_botones_abajo"
     },
     {
-      "nombre": "imagenes:botones_izquierda.png",
+      "nombre": "imagenes:botones/botones_izquierda",
       "sprite": "botones-imagenes_botones_izquierda"
     },
     {
-      "nombre": "imagenes:botones_derecha.png",
+      "nombre": "imagenes:botones/botones_derecha",
       "sprite": "botones-imagenes_botones_derecha"
     }
   ],

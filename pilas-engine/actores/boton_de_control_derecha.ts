@@ -1,6 +1,6 @@
 class boton_de_control_derecha extends Actor {
   propiedades = {
-    imagen: "imagenes:botones_derecha.png",
+    imagen: "imagenes:botones/botones_derecha",
     z: -100
   };
 

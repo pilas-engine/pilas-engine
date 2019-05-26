@@ -117,7 +117,7 @@ export default Controller.extend({
           id: 1,
           camara_x: 0,
           camara_y: 0,
-          fondo: "imagenes:fondo-plano.png",
+          fondo: "imagenes:fondos/fondo-plano",
           actores: [
             {
               id: 4,
@@ -130,7 +130,7 @@ export default Controller.extend({
               escala_y: 1,
               tipo: "aceituna",
               nombre: "aceituna",
-              imagen: "imagenes:aceituna.png",
+              imagen: "imagenes:objetos/aceituna",
               transparencia: 0,
               figura: "", // "circulo"
               figura_radio: 25,

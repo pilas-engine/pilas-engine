@@ -35,7 +35,7 @@ export default Component.extend({
       escenas: [
         {
           nombre: "principal",
-          fondo: "imagenes:fondo-plano.png",
+          fondo: "imagenes:fondos/fondo-plano",
           camara_x: 0,
           camara_y: 0,
           id: 1,

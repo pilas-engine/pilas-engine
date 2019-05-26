@@ -17,7 +17,7 @@
       },
       {
         "nombre": "actor",
-        "codigo": "class actor extends Actor {\n    propiedades = {\n        imagen: \"imagenes:sin_imagen.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+        "codigo": "class actor extends Actor {\n    propiedades = {\n        imagen: \"imagenes:basicos/sin_imagen\"\n    };\n\n    iniciar() {}\n\n    actualizar() {}\n}"
       }
     ]
   },
@@ -64,7 +64,7 @@
           "x": 0,
           "y": 0,
           "z": 13,
-          "imagen": "imagenes:planeta.png",
+          "imagen": "imagenes:basicos/planeta",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

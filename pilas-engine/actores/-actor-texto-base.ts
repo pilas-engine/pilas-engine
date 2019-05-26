@@ -1,6 +1,6 @@
 class ActorTextoBase extends ActorBase {
   propiedades = {
-    imagen: "imagenes:invisible.png",
+    imagen: "imagenes:basicos/invisible",
     texto: "Hola mundo",
     es_texto: true
   };
