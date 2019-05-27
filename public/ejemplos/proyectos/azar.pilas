@@ -25,11 +25,11 @@
       },
       {
         "nombre": "moneda",
-        "codigo": "class moneda extends Actor {\n    propiedades = {\n        imagen: \"imagenes:moneda.png\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
+        "codigo": "class moneda extends Actor {\n    propiedades = {\n        imagen: \"imagenes:objetos/moneda\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
       },
       {
         "nombre": "moneda1",
-        "codigo": "class moneda1 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:moneda.png\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
+        "codigo": "class moneda1 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:objetos/moneda\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
       }
     ]
   },
@@ -105,7 +105,7 @@
           "x": 122,
           "y": 73,
           "z": 0,
-          "imagen": "imagenes:moneda.png",
+          "imagen": "imagenes:objetos/moneda",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -132,7 +132,7 @@
           "x": -126,
           "y": 5,
           "z": 0,
-          "imagen": "imagenes:moneda.png",
+          "imagen": "imagenes:objetos/moneda",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

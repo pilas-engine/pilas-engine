@@ -1,6 +1,6 @@
 class laser extends Actor {
   propiedades = {
-    imagen: "imagenes:laser.png"
+    imagen: "imagenes:disparos/laser"
   };
 
   velocidad;

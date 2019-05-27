@@ -9,7 +9,7 @@ Por ejemplo, para crear una animación de un actor mientras está esperando usé
 ```typescript
 this.crear_animacion(
   "conejo_parado",
-  ["imagenes:conejo_parado1.png", "imagenes:conejo_parado2.png"],
+  ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
   2
 );
 ```
@@ -29,16 +29,16 @@ class Conejo extends Actor {
   iniciar() {
     this.crear_animacion(
       "conejo_parado",
-      ["imagenes:conejo_parado1.png", "imagenes:conejo_parado2.png"],
+      ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
       2
     );
     this.crear_animacion(
       "conejo_camina",
-      ["imagenes:conejo_camina1.png", "imagenes:conejo_camina2.png"],
+      ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"],
       20
     );
-    this.crear_animacion("conejo_salta", ["imagenes:conejo_salta.png"], 20);
-    this.crear_animacion("conejo_muere", ["imagenes:conejo_muere.png"], 1);
+    this.crear_animacion("conejo_salta", ["imagenes:conejo/conejo_salta"], 20);
+    this.crear_animacion("conejo_muere", ["imagenes:conejo/conejo_pierde"], 1);
 
     this.animacion = "conejo_parado";
   }
@@ -55,12 +55,12 @@ class Conejo extends Actor {
   iniciar() {
     this.crear_animacion(
       "conejo_parado",
-      ["imagenes:conejo_parado1.png", "imagenes:conejo_parado2.png"],
+      ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
       2
     );
     this.crear_animacion(
       "conejo_camina",
-      ["imagenes:conejo_camina1.png", "imagenes:conejo_camina2.png"],
+      ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"],
       20
     );
     this.crear_animacion("conejo_salta", ["conejo_salta"], 20);

@@ -13,7 +13,7 @@
     "actores": [
       {
         "nombre": "nave",
-        "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave_reposo.png\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    mirar_en_direccion_al_planeta() {\n        let planeta = this.pilas.obtener_actor_por_nombre(\"actor\");\n        this.rotacion = this.pilas.obtener_angulo_entre_actores(this, planeta);\n    }\n\n    actualizar() {\n        this.mirar_en_direccion_al_planeta();\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.puede_disparar()) {\n            this.disparar_laser();\n        }\n    }\n\n    cuando_hace_click() {\n        this.disparar_laser();\n    }\n\n    disparar_laser() {\n        let laser = this.pilas.actores.laser();\n        laser.x = this.x;\n        laser.y = this.y;\n        laser.rotacion = this.rotacion;\n        laser.z = this.z + 1;\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    puede_disparar() {\n        return (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5)\n    }\n}"
+        "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave/nave_reposo\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    mirar_en_direccion_al_planeta() {\n        let planeta = this.pilas.obtener_actor_por_nombre(\"actor\");\n        this.rotacion = this.pilas.obtener_angulo_entre_actores(this, planeta);\n    }\n\n    actualizar() {\n        this.mirar_en_direccion_al_planeta();\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.puede_disparar()) {\n            this.disparar_laser();\n        }\n    }\n\n    cuando_hace_click() {\n        this.disparar_laser();\n    }\n\n    disparar_laser() {\n        let laser = this.pilas.actores.laser();\n        laser.x = this.x;\n        laser.y = this.y;\n        laser.rotacion = this.rotacion;\n        laser.z = this.z + 1;\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    puede_disparar() {\n        return (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5)\n    }\n}"
       },
       {
         "nombre": "actor",
@@ -29,13 +29,13 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondo-espacio_2.png",
+      "fondo": "imagenes:fondos/fondo-espacio_2",
       "actores": [
         {
           "x": -204,
           "y": -214,
           "z": 0,
-          "imagen": "imagenes:nave_reposo.png",
+          "imagen": "imagenes:nave/nave_reposo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

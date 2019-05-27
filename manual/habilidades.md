@@ -27,7 +27,7 @@ mobile. El primer paso es crear el actor, con la imagen que nos interesa:
 
 ```typescript
 let mi_actor = pilas.actores.actor();
-mi_actor.imagen = "imagenes:carta.png";
+mi_actor.imagen = "imagenes:cartas/carta";
 ```
 
 Y aquí lo interesante, para hacer que el usuario pueda mover este actor

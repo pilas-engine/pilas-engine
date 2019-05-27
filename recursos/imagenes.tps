@@ -281,19 +281,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">imagenes/conejo/conejo_muere.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>19,22,37,43</rect>
-                <key>scale9Paddings</key>
-                <rect>19,22,37,43</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">imagenes/conejo/conejo_parado1.png</key>
             <key type="filename">imagenes/conejo/conejo_parado2.png</key>
             <struct type="IndividualSpriteSettings">
@@ -305,6 +292,19 @@
                 <rect>15,25,30,51</rect>
                 <key>scale9Paddings</key>
                 <rect>15,25,30,51</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">imagenes/conejo/conejo_pierde.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>19,22,37,43</rect>
+                <key>scale9Paddings</key>
+                <rect>19,22,37,43</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -484,6 +484,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">imagenes/decoracion/nube.png</key>
+            <key type="filename">imagenes/fondos/fondo-espacio_1.png</key>
+            <key type="filename">imagenes/fondos/fondo-espacio_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9Paddings</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">imagenes/disparos/laser.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -552,21 +567,6 @@
                 <rect>16,16,32,32</rect>
                 <key>scale9Paddings</key>
                 <rect>16,16,32,32</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">imagenes/fondos/fondo-espacio_1.png</key>
-            <key type="filename">imagenes/fondos/fondo-espacio_2.png</key>
-            <key type="filename">imagenes/nubes/nube.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>64,64,128,128</rect>
-                <key>scale9Paddings</key>
-                <rect>64,64,128,128</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

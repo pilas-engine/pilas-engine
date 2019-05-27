@@ -1,6 +1,6 @@
 class moneda extends Actor {
   propiedades = {
-    imagen: "imagenes:moneda.png",
+    imagen: "imagenes:objetos/moneda",
     etiqueta: "moneda",
     figura: "circulo",
     figura_radio: 10,

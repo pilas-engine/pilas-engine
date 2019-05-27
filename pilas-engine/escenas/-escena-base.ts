@@ -26,7 +26,7 @@ class EscenaBase {
     if (this._observables === null) {
       this._actor_visor_observables = this.pilas.actores.texto();
       this._actor_visor_observables.fondo =
-        "imagenes:redimensionables_blanco.png";
+        "imagenes:redimensionables/blanco";
 
       this._actor_visor_observables.centro_x = 0;
       this._actor_visor_observables.centro_y = 0;

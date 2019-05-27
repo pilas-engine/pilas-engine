@@ -898,7 +898,7 @@ class ActorBase {
     texto.y = this.y + this.alto;
     texto.transparencia = 100;
     texto.transparencia = [0];
-    texto.fondo = "imagenes:redimensionables_dialogo.png";
+    texto.fondo = "imagenes:redimensionables/dialogo";
     texto.color = "black";
     texto.centro_x = 1;
     texto.centro_y = 1;
