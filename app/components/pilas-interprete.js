@@ -62,7 +62,7 @@ export default Component.extend({
 
   actualizar_diccionario_de_actores: task(function*() {
     if (ENV.environment === "test") {
-      console.warn("Evitando actualizar el intérprete en modo test.");
+      //console.warn("Evitando actualizar el intérprete en modo test.");
       return null;
     }
 
