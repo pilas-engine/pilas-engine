@@ -264,6 +264,14 @@ actualizar_typescript:
 actualizar_definiciones:
 	@wget https://raw.githubusercontent.com/photonstorm/phaser/master/types/phaser.d.ts -O pilas-engine/declaraciones/phaser.d.ts
 
+actualizar_imagenes:
+	@node scripts/actualizar-imagenes.js
+	TexturePacker recursos/iconos.tps
+	TexturePacker recursos/imagenes.tps
+	TexturePacker recursos/grilla-imagenes.tps
+	@node scripts/corregir-css-de-grilla-de-images.js
+
+
 actualizar_jsbeautify:
 	@echo "${Y}Para actualizar jsbeautify, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"

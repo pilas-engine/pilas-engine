@@ -538,6 +538,20 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">imagenes/disparos/misil.png</key>
+            <key type="filename">imagenes/tanque/tanque_disparo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,7,19,13</rect>
+                <key>scale9Paddings</key>
+                <rect>10,7,19,13</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">imagenes/fondos/fondo-azul.png</key>
             <key type="filename">imagenes/fondos/fondo-cesped_1.png</key>
             <key type="filename">imagenes/fondos/fondo-madera.png</key>
@@ -838,19 +852,6 @@
                 <rect>21,12,41,25</rect>
                 <key>scale9Paddings</key>
                 <rect>21,12,41,25</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">imagenes/tanque/tanque_disparo.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>10,7,19,13</rect>
-                <key>scale9Paddings</key>
-                <rect>10,7,19,13</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

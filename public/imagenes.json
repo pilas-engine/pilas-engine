@@ -1210,7 +1210,7 @@
 					}
 				},
 				{
-					"filename": "tanque/tanque_disparo",
+					"filename": "disparos/misil",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1226,6 +1226,31 @@
 					"frame": {
 						"x": 874,
 						"y": 44,
+						"w": 38,
+						"h": 26
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tanque/tanque_disparo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 26
+					},
+					"frame": {
+						"x": 874,
+						"y": 72,
 						"w": 38,
 						"h": 26
 					},
@@ -1450,7 +1475,7 @@
 					},
 					"frame": {
 						"x": 874,
-						"y": 72,
+						"y": 100,
 						"w": 37,
 						"h": 37
 					},
@@ -1500,7 +1525,7 @@
 					},
 					"frame": {
 						"x": 874,
-						"y": 111,
+						"y": 139,
 						"w": 34,
 						"h": 34
 					},
@@ -1525,32 +1550,7 @@
 					},
 					"frame": {
 						"x": 874,
-						"y": 147,
-						"w": 34,
-						"h": 34
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "dado/dado_3",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 34,
-						"h": 34
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 34,
-						"h": 34
-					},
-					"frame": {
-						"x": 874,
-						"y": 183,
+						"y": 175,
 						"w": 34,
 						"h": 34
 					},
@@ -1760,7 +1760,7 @@
 					}
 				},
 				{
-					"filename": "dado/dado_4",
+					"filename": "dado/dado_3",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1775,7 +1775,7 @@
 					},
 					"frame": {
 						"x": 874,
-						"y": 219,
+						"y": 211,
 						"w": 34,
 						"h": 34
 					},
@@ -1786,56 +1786,6 @@
 				},
 				{
 					"filename": "nave/nave_derecha_1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 46,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 2,
-						"w": 45,
-						"h": 41
-					},
-					"frame": {
-						"x": 853,
-						"y": 255,
-						"w": 45,
-						"h": 41
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "dado/dado_5",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 34,
-						"h": 34
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 34,
-						"h": 34
-					},
-					"frame": {
-						"x": 853,
-						"y": 298,
-						"w": 34,
-						"h": 34
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "nave/nave_izquierda_1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1910,7 +1860,57 @@
 					}
 				},
 				{
+					"filename": "nave/nave_izquierda_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 46,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 45,
+						"h": 41
+					},
+					"frame": {
+						"x": 853,
+						"y": 249,
+						"w": 45,
+						"h": 41
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "nave/nave_derecha_2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 46,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 2,
+						"w": 42,
+						"h": 41
+					},
+					"frame": {
+						"x": 853,
+						"y": 292,
+						"w": 42,
+						"h": 41
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "nave/nave_izquierda_2",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1935,32 +1935,7 @@
 					}
 				},
 				{
-					"filename": "nave/nave_izquierda_2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 46,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 2,
-						"w": 42,
-						"h": 41
-					},
-					"frame": {
-						"x": 840,
-						"y": 843,
-						"w": 42,
-						"h": 41
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "dado/dado_6",
+					"filename": "dado/dado_4",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1974,35 +1949,10 @@
 						"h": 34
 					},
 					"frame": {
-						"x": 851,
-						"y": 886,
-						"w": 34,
-						"h": 34
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "disparos/laser",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 37,
-						"h": 9
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 37,
-						"h": 9
-					},
-					"frame": {
-						"x": 871,
+						"x": 874,
 						"y": 643,
-						"w": 37,
-						"h": 9
+						"w": 34,
+						"h": 34
 					},
 					"anchor": {
 						"x": 0.5,
@@ -2025,9 +1975,84 @@
 					},
 					"frame": {
 						"x": 874,
-						"y": 654,
+						"y": 679,
 						"w": 32,
 						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "disparos/laser",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 37,
+						"h": 9
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 37,
+						"h": 9
+					},
+					"frame": {
+						"x": 1,
+						"y": 952,
+						"w": 37,
+						"h": 9
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "dado/dado_5",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 840,
+						"y": 843,
+						"w": 34,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "dado/dado_6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 876,
+						"y": 843,
+						"w": 34,
+						"h": 34
 					},
 					"anchor": {
 						"x": 0.5,
@@ -2050,7 +2075,7 @@
 					},
 					"frame": {
 						"x": 851,
-						"y": 922,
+						"y": 879,
 						"w": 32,
 						"h": 32
 					},
@@ -2074,7 +2099,7 @@
 						"h": 10
 					},
 					"frame": {
-						"x": 1,
+						"x": 40,
 						"y": 952,
 						"w": 10,
 						"h": 10
@@ -2124,7 +2149,7 @@
 						"h": 10
 					},
 					"frame": {
-						"x": 13,
+						"x": 52,
 						"y": 952,
 						"w": 8,
 						"h": 10
@@ -2190,6 +2215,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:438773d14c98d258ea3065a403f55a27:9fabb66c5fc609735705e269f964e7da:090f076f11af587180320e0b2e5117de$"
+		"smartupdate": "$TexturePacker:SmartUpdate:c1fe18bfa4119ad95797f53d12e9a520:4f2c757daee80c4d5d03026b84b7efce:090f076f11af587180320e0b2e5117de$"
 	}
 }

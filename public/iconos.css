@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
-   created with https://www.codeandweb.com/texturepacker 
+   created with https://www.codeandweb.com/texturepacker
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:07b2e92dce12f2c1a5dff95aea6f8c14:3280d4b72b1b42268484555018cf1532:467c798a4e4a5265189118ecb556e0a2$
+   $TexturePacker:SmartUpdate:d662cb640cbfd2aa917a128c270bc01d:a17890ca3a7a3b06dc1650ce35f67d55:467c798a4e4a5265189118ecb556e0a2$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -10,183 +10,500 @@
 
 */
 
-.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(iconos.png);}
+.sprite {
+  display: inline-block;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-image: url(iconos.png);
+}
 
-.abrir {width:24px; height:24px; background-position: -485px -189px}
-.actor {width:24px; height:24px; background-position: -485px -215px}
-.actores {width:24px; height:24px; background-position: -485px -241px}
-.add_folder {width:25px; height:25px; background-position: -51px -904px}
-.angulo {width:180px; height:140px; background-position: -183px -1px}
-.angulo-entre-actores {width:180px; height:140px; background-position: -1px -1px}
-.api {width:25px; height:25px; background-position: -51px -931px}
-.arduino {width:24px; height:24px; background-position: -459px -265px}
-.arrastrables {width:180px; height:140px; background-position: -1px -143px}
-.azar {width:180px; height:140px; background-position: -183px -143px}
-.borrar {width:16px; height:16px; background-position: -467px -181px}
-.botones-imagenes_botones_a {width:48px; height:48px; background-position: -427px -567px}
-.botones-imagenes_botones_abajo {width:48px; height:48px; background-position: -427px -617px}
-.botones-imagenes_botones_arriba {width:48px; height:48px; background-position: -422px -714px}
-.botones-imagenes_botones_b {width:48px; height:48px; background-position: -365px -717px}
-.botones-imagenes_botones_derecha {width:48px; height:48px; background-position: -415px -764px}
-.botones-imagenes_botones_izquierda {width:48px; height:48px; background-position: -365px -767px}
-.click {width:180px; height:140px; background-position: -1px -285px}
-.click_actor {width:180px; height:140px; background-position: -183px -285px}
-.computadora {width:25px; height:25px; background-position: -331px -853px}
-.conejo-imagenes_conejo_camina1 {width:27px; height:48px; background-position: -477px -571px}
-.conejo-imagenes_conejo_camina2 {width:28px; height:48px; background-position: -481px -371px}
-.conejo-imagenes_conejo_muere {width:41px; height:48px; background-position: -465px -883px}
-.conejo-imagenes_conejo_parado1 {width:29px; height:48px; background-position: -478px -471px}
-.conejo-imagenes_conejo_parado2 {width:29px; height:48px; background-position: -478px -521px}
-.conejo-imagenes_conejo_salta {width:40px; height:48px; background-position: -186px -942px}
-.controles {width:180px; height:140px; background-position: -1px -427px}
-.cursores {width:180px; height:140px; background-position: -183px -427px}
-.cursores-imagenes_cursor_disparo_negro {width:32px; height:32px; background-position: -477px -665px}
-.cursores-imagenes_cursor_disparo_rojo {width:32px; height:32px; background-position: -476px -699px}
-.demo {width:24px; height:24px; background-position: -485px -267px}
-.desplegar {width:24px; height:24px; background-position: -459px -291px}
-.detener {width:24px; height:24px; background-position: -485px -293px}
-.duplicar {width:16px; height:16px; background-position: -467px -199px}
-.ejecutar {width:24px; height:24px; background-position: -485px -319px}
-.ejemplo-nave {width:180px; height:140px; background-position: -1px -569px}
-.ejemplos {width:25px; height:25px; background-position: -331px -880px}
-.electron {width:60px; height:60px; background-position: -365px -423px}
-.ember {width:63px; height:60px; background-position: -365px -361px}
-.enjambre {width:100px; height:74px; background-position: -365px -131px}
-.enjambre-texto {width:100px; height:19px; background-position: -226px -1100px}
-.error {width:24px; height:24px; background-position: -485px -345px}
-.escena {width:24px; height:24px; background-position: -205px -890px}
-.fondos-imagenes_fondo-azul {width:48px; height:48px; background-position: -415px -814px}
-.fondos-imagenes_fondo-cesped_1 {width:48px; height:48px; background-position: -365px -817px}
-.fondos-imagenes_fondo-cesped_2 {width:48px; height:48px; background-position: -415px -864px}
-.fondos-imagenes_fondo-cielo {width:48px; height:48px; background-position: -231px -853px}
-.fondos-imagenes_fondo-espacio_1 {width:48px; height:48px; background-position: -155px -890px}
-.fondos-imagenes_fondo-espacio_2 {width:48px; height:48px; background-position: -86px -903px}
-.fondos-imagenes_fondo-madera {width:48px; height:48px; background-position: -1px -904px}
-.fondos-imagenes_fondo-nubes {width:48px; height:48px; background-position: -1px -954px}
-.fondos-imagenes_fondo-plano {width:48px; height:48px; background-position: -281px -853px}
-.fondos-imagenes_fondo-rojo {width:48px; height:48px; background-position: -358px -867px}
-.fondos-imagenes_fondo-tierra_1 {width:48px; height:48px; background-position: -408px -914px}
-.fondos-imagenes_fondo-verde {width:48px; height:48px; background-position: -458px -933px}
-.gallina-imagenes_gallina_muere {width:43px; height:48px; background-position: -465px -783px}
-.gallina-imagenes_gallina_sin_piel {width:42px; height:48px; background-position: -465px -833px}
-.gallina-imagenes_gallina_vuela_1 {width:49px; height:48px; background-position: -427px -467px}
-.gallina-imagenes_gallina_vuela_2 {width:67px; height:48px; background-position: -86px -853px}
-.gallina-imagenes_gallina_vuela_3 {width:49px; height:48px; background-position: -427px -517px}
-.github {width:60px; height:50px; background-position: -365px -609px}
-.gravedad {width:180px; height:140px; background-position: -183px -569px}
-.grilla_actor_aceituna {width:48px; height:48px; background-position: -231px -903px}
-.grilla_actor_actor {width:48px; height:48px; background-position: -281px -903px}
-.grilla_actor_boton {width:48px; height:48px; background-position: -358px -917px}
-.grilla_actor_boton_de_control_abajo {width:48px; height:48px; background-position: -427px -617px}
-.grilla_actor_boton_de_control_arriba {width:48px; height:48px; background-position: -422px -714px}
-.grilla_actor_boton_de_control_derecha {width:48px; height:48px; background-position: -415px -764px}
-.grilla_actor_boton_de_control_espacio {width:48px; height:48px; background-position: -427px -567px}
-.grilla_actor_boton_de_control_izquierda {width:48px; height:48px; background-position: -365px -767px}
-.grilla_actor_caja {width:48px; height:48px; background-position: -408px -964px}
-.grilla_actor_conejo {width:48px; height:48px; background-position: -458px -983px}
-.grilla_actor_deslizador {width:48px; height:48px; background-position: -136px -940px}
-.grilla_actor_gallina {width:48px; height:48px; background-position: -78px -953px}
-.grilla_actor_laser {width:48px; height:48px; background-position: -1px -1004px}
-.grilla_actor_logo {width:48px; height:48px; background-position: -128px -990px}
-.grilla_actor_moneda {width:48px; height:48px; background-position: -78px -1003px}
-.grilla_actor_nave {width:48px; height:48px; background-position: -1px -1054px}
-.grilla_actor_nube {width:48px; height:48px; background-position: -228px -953px}
-.grilla_actor_pared {width:48px; height:48px; background-position: -178px -992px}
-.grilla_actor_pelota {width:48px; height:48px; background-position: -128px -1040px}
-.grilla_actor_plataforma {width:48px; height:48px; background-position: -77px -1053px}
-.grilla_actor_suelo {width:48px; height:48px; background-position: -1px -1104px}
-.grilla_actor_techo {width:48px; height:48px; background-position: -1px -1104px}
-.grilla_actor_texto {width:48px; height:48px; background-position: -278px -953px}
-.guardar {width:24px; height:24px; background-position: -205px -916px}
-.icono_actor_aceituna {width:10px; height:10px; background-position: -495px -19px}
-.icono_actor_actortexto {width:10px; height:10px; background-position: -495px -31px}
-.icono_actor_boton {width:10px; height:10px; background-position: -495px -43px}
-.icono_actor_caja {width:10px; height:10px; background-position: -495px -55px}
-.icono_actor_conejo {width:10px; height:10px; background-position: -495px -67px}
-.icono_actor_deslizador {width:10px; height:10px; background-position: -495px -79px}
-.icono_actor_gallina {width:10px; height:10px; background-position: -495px -91px}
-.icono_actor_laser {width:10px; height:10px; background-position: -495px -103px}
-.icono_actor_logo {width:10px; height:10px; background-position: -495px -115px}
-.icono_actor_moneda {width:10px; height:10px; background-position: -495px -127px}
-.icono_actor_nave {width:10px; height:10px; background-position: -447px -257px}
-.icono_actor_nube {width:10px; height:10px; background-position: -447px -269px}
-.icono_actor_pelota {width:10px; height:10px; background-position: -447px -281px}
-.icono_actor_plataforma {width:10px; height:10px; background-position: -447px -293px}
-.icono_actor_suelo {width:10px; height:10px; background-position: -447px -305px}
-.icono_actor_techo {width:10px; height:10px; background-position: -447px -305px}
-.imagen {width:16px; height:16px; background-position: -447px -207px}
-.imagenes_aceituna {width:37px; height:37px; background-position: -328px -1097px}
-.imagenes_arbol_1 {width:23px; height:48px; background-position: -467px -131px}
-.imagenes_arbol_2 {width:28px; height:48px; background-position: -481px -421px}
-.imagenes_caja {width:48px; height:48px; background-position: -408px -964px}
-.imagenes_carta {width:35px; height:48px; background-position: -472px -733px}
-.imagenes_carta_azul {width:35px; height:48px; background-position: -408px -1079px}
-.imagenes_carta_verde {width:35px; height:48px; background-position: -445px -1083px}
-.imagenes_copa {width:48px; height:48px; background-position: -354px -967px}
-.imagenes_dado_1 {width:34px; height:34px; background-position: -367px -1097px}
-.imagenes_dado_2 {width:34px; height:34px; background-position: -403px -1129px}
-.imagenes_dado_3 {width:34px; height:34px; background-position: -367px -1133px}
-.imagenes_dado_4 {width:34px; height:34px; background-position: -439px -1133px}
-.imagenes_dado_5 {width:34px; height:34px; background-position: -475px -1133px}
-.imagenes_dado_6 {width:34px; height:34px; background-position: -247px -1132px}
-.imagenes_hierba_1 {width:52px; height:45px; background-position: -422px -667px}
-.imagenes_invisible {width:8px; height:8px; background-position: -437px -301px}
-.imagenes_laser {width:37px; height:9px; background-position: -226px -1121px}
-.imagenes_laser_2 {width:54px; height:9px; background-position: -326px -1071px}
-.imagenes_laser_3 {width:37px; height:13px; background-position: -382px -1064px}
-.imagenes_logo {width:60px; height:60px; background-position: -365px -485px}
-.imagenes_moneda {width:13px; height:16px; background-position: -495px -1px}
-.imagenes_pared {width:15px; height:48px; background-position: -492px -139px}
-.imagenes_pelota {width:55px; height:54px; background-position: -365px -661px}
-.imagenes_pelota_de_voley {width:49px; height:50px; background-position: -430px -364px}
-.imagenes_pizarra {width:8px; height:8px; background-position: -437px -301px}
-.imagenes_planeta {width:48px; height:48px; background-position: -404px -1014px}
-.imagenes_plataforma {width:80px; height:12px; background-position: -326px -1083px}
-.imagenes_sin_imagen {width:48px; height:48px; background-position: -454px -1033px}
-.imagenes_suelo {width:80px; height:25px; background-position: -165px -1139px}
-.imagenes_techo {width:80px; height:25px; background-position: -165px -1139px}
-.info {width:24px; height:24px; background-position: -51px -1039px}
-.info_squared {width:25px; height:25px; background-position: -331px -907px}
-.interfaz-imagenes_interfaz_deslizador {width:28px; height:42px; background-position: -477px -621px}
-.interfaz-imagenes_interfaz_linea {width:80px; height:13px; background-position: -1px -1154px}
-.interfaz-imagenes_interfaz_punto {width:8px; height:10px; background-position: -437px -289px}
-.manual {width:25px; height:25px; background-position: -331px -934px}
-.nave-imagenes_nave_avanza_1 {width:46px; height:45px; background-position: -437px -317px}
-.nave-imagenes_nave_avanza_2 {width:46px; height:45px; background-position: -77px -1103px}
-.nave-imagenes_nave_derecha_1 {width:46px; height:45px; background-position: -278px -1003px}
-.nave-imagenes_nave_derecha_2 {width:46px; height:45px; background-position: -352px -1017px}
-.nave-imagenes_nave_izquierda_1 {width:46px; height:45px; background-position: -278px -1050px}
-.nave-imagenes_nave_izquierda_2 {width:46px; height:45px; background-position: -228px -1053px}
-.nave-imagenes_nave_reposo {width:46px; height:45px; background-position: -178px -1092px}
-.no {width:24px; height:24px; background-position: -51px -1065px}
-.nubes {width:180px; height:140px; background-position: -1px -711px}
-.nubes-imagenes_nube {width:80px; height:80px; background-position: -365px -207px}
-.off {width:16px; height:14px; background-position: -447px -225px}
-.on {width:16px; height:14px; background-position: -447px -241px}
-.panel-central-off {width:18px; height:14px; background-position: -465px -217px}
-.panel-central-on {width:18px; height:14px; background-position: -465px -233px}
-.panel-derecho-off {width:18px; height:14px; background-position: -465px -249px}
-.panel-derecho-on {width:18px; height:14px; background-position: -326px -1039px}
-.panel-izquierdo-off {width:18px; height:14px; background-position: -326px -1055px}
-.panel-izquierdo-on {width:18px; height:14px; background-position: -482px -1083px}
-.pausa {width:24px; height:24px; background-position: -51px -1091px}
-.phaser {width:70px; height:70px; background-position: -365px -289px}
-.pilas_logo_128 {width:128px; height:128px; background-position: -365px -1px}
-.pilas_logo_60 {width:60px; height:60px; background-position: -365px -485px}
-.plataformas {width:180px; height:140px; background-position: -183px -711px}
-.plegar {width:24px; height:24px; background-position: -328px -961px}
-.preferencias {width:24px; height:24px; background-position: -328px -987px}
-.redimensionables-imagenes_boton-amarillo {width:49px; height:49px; background-position: -430px -416px}
-.redimensionables-imagenes_boton-amarillo-pulsado {width:49px; height:45px; background-position: -127px -1090px}
-.redimensionables-imagenes_dialogo {width:48px; height:48px; background-position: -228px -1003px}
-.redimensionables-imagenes_gris {width:48px; height:48px; background-position: -178px -1042px}
-.settings {width:25px; height:25px; background-position: -51px -958px}
-.si {width:24px; height:24px; background-position: -51px -1117px}
-.tanque-imagenes_tanque_base {width:83px; height:49px; background-position: -1px -853px}
-.tanque-imagenes_tanque_disparo {width:38px; height:26px; background-position: -125px -1137px}
-.tanque-imagenes_tanque_ruedas {width:74px; height:35px; background-position: -155px -853px}
-.tanque-imagenes_tanque_torreta {width:40px; height:12px; background-position: -83px -1150px}
-.test {width:25px; height:25px; background-position: -51px -985px}
-.typescript {width:60px; height:60px; background-position: -365px -547px}
-.volver {width:24px; height:24px; background-position: -326px -1013px}
-.webserver {width:25px; height:25px; background-position: -51px -1012px}
+.abrir {
+  width: 24px;
+  height: 24px;
+  background-position: -203px -1831px;
+}
+.actor {
+  width: 24px;
+  height: 24px;
+  background-position: -183px -1594px;
+}
+.actores {
+  width: 24px;
+  height: 24px;
+  background-position: -183px -1620px;
+}
+.add_folder {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1351px;
+}
+.angulo {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -143px;
+}
+.angulo-entre-actores {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -1px;
+}
+.api {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1378px;
+}
+.arduino {
+  width: 24px;
+  height: 24px;
+  background-position: -183px -1646px;
+}
+.arrastrables {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -285px;
+}
+.azar {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -427px;
+}
+.borrar {
+  width: 16px;
+  height: 16px;
+  background-position: -229px -1831px;
+}
+.click {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -569px;
+}
+.click_actor {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -711px;
+}
+.computadora {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1405px;
+}
+.controles {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -853px;
+}
+.cursores {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -995px;
+}
+.demo {
+  width: 24px;
+  height: 24px;
+  background-position: -183px -1672px;
+}
+.desplegar {
+  width: 24px;
+  height: 24px;
+  background-position: -209px -1594px;
+}
+.detener {
+  width: 24px;
+  height: 24px;
+  background-position: -209px -1620px;
+}
+.duplicar {
+  width: 16px;
+  height: 16px;
+  background-position: -233px -1698px;
+}
+.ejecutar {
+  width: 24px;
+  height: 24px;
+  background-position: -209px -1646px;
+}
+.ejemplo-nave {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -1137px;
+}
+.ejemplos {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1432px;
+}
+.electron {
+  width: 60px;
+  height: 60px;
+  background-position: -183px -63px;
+}
+.ember {
+  width: 63px;
+  height: 60px;
+  background-position: -183px -1px;
+}
+.enjambre {
+  width: 100px;
+  height: 74px;
+  background-position: -131px -1705px;
+}
+.enjambre-texto {
+  width: 100px;
+  height: 19px;
+  background-position: -1px -1835px;
+}
+.error {
+  width: 24px;
+  height: 24px;
+  background-position: -209px -1672px;
+}
+.escena {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1351px;
+}
+.github {
+  width: 60px;
+  height: 50px;
+  background-position: -183px -249px;
+}
+.gravedad {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -1279px;
+}
+.grilla_actor_aceituna {
+  width: 48px;
+  height: 48px;
+  background-position: -203px -1781px;
+}
+.grilla_actor_actor {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -301px;
+}
+.grilla_actor_boton {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -351px;
+}
+.grilla_actor_boton_de_control_abajo {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -401px;
+}
+.grilla_actor_boton_de_control_arriba {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -451px;
+}
+.grilla_actor_boton_de_control_derecha {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -501px;
+}
+.grilla_actor_boton_de_control_espacio {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -551px;
+}
+.grilla_actor_boton_de_control_izquierda {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -601px;
+}
+.grilla_actor_caja {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -651px;
+}
+.grilla_actor_conejo {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -701px;
+}
+.grilla_actor_deslizador {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -751px;
+}
+.grilla_actor_gallina {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -801px;
+}
+.grilla_actor_laser {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -851px;
+}
+.grilla_actor_logo {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -901px;
+}
+.grilla_actor_moneda {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -951px;
+}
+.grilla_actor_nave {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1001px;
+}
+.grilla_actor_nube {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1051px;
+}
+.grilla_actor_pared {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1101px;
+}
+.grilla_actor_pelota {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1151px;
+}
+.grilla_actor_plataforma {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1201px;
+}
+.grilla_actor_suelo {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1251px;
+}
+.grilla_actor_techo {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1251px;
+}
+.grilla_actor_texto {
+  width: 48px;
+  height: 48px;
+  background-position: -183px -1301px;
+}
+.guardar {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1377px;
+}
+.icono_actor_aceituna {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -1766px;
+}
+.icono_actor_actortexto {
+  width: 10px;
+  height: 10px;
+  background-position: -235px -1617px;
+}
+.icono_actor_boton {
+  width: 10px;
+  height: 10px;
+  background-position: -235px -1629px;
+}
+.icono_actor_caja {
+  width: 10px;
+  height: 10px;
+  background-position: -235px -1641px;
+}
+.icono_actor_conejo {
+  width: 10px;
+  height: 10px;
+  background-position: -235px -1653px;
+}
+.icono_actor_deslizador {
+  width: 10px;
+  height: 10px;
+  background-position: -235px -1665px;
+}
+.icono_actor_gallina {
+  width: 10px;
+  height: 10px;
+  background-position: -235px -1677px;
+}
+.icono_actor_laser {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -349px;
+}
+.icono_actor_logo {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -361px;
+}
+.icono_actor_moneda {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -373px;
+}
+.icono_actor_nave {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -385px;
+}
+.icono_actor_nube {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -397px;
+}
+.icono_actor_pelota {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -409px;
+}
+.icono_actor_plataforma {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -421px;
+}
+.icono_actor_suelo {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -433px;
+}
+.icono_actor_techo {
+  width: 10px;
+  height: 10px;
+  background-position: -233px -433px;
+}
+.imagen {
+  width: 16px;
+  height: 16px;
+  background-position: -233px -1716px;
+}
+.info {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1403px;
+}
+.info_squared {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1459px;
+}
+.manual {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1486px;
+}
+.no {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1429px;
+}
+.nubes {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -1421px;
+}
+.off {
+  width: 16px;
+  height: 14px;
+  background-position: -235px -1585px;
+}
+.on {
+  width: 16px;
+  height: 14px;
+  background-position: -235px -1601px;
+}
+.panel-central-off {
+  width: 18px;
+  height: 14px;
+  background-position: -103px -1835px;
+}
+.panel-central-on {
+  width: 18px;
+  height: 14px;
+  background-position: -233px -1734px;
+}
+.panel-derecho-off {
+  width: 18px;
+  height: 14px;
+  background-position: -233px -1750px;
+}
+.panel-derecho-on {
+  width: 18px;
+  height: 14px;
+  background-position: -233px -301px;
+}
+.panel-izquierdo-off {
+  width: 18px;
+  height: 14px;
+  background-position: -233px -317px;
+}
+.panel-izquierdo-on {
+  width: 18px;
+  height: 14px;
+  background-position: -233px -333px;
+}
+.pausa {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1455px;
+}
+.phaser {
+  width: 70px;
+  height: 70px;
+  background-position: -131px -1781px;
+}
+.pilas_logo_128 {
+  width: 128px;
+  height: 128px;
+  background-position: -1px -1705px;
+}
+.pilas_logo_60 {
+  width: 60px;
+  height: 60px;
+  background-position: -183px -125px;
+}
+.plataformas {
+  width: 180px;
+  height: 140px;
+  background-position: -1px -1563px;
+}
+.plegar {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1481px;
+}
+.preferencias {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1507px;
+}
+.settings {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1513px;
+}
+.si {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1533px;
+}
+.test {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1540px;
+}
+.typescript {
+  width: 60px;
+  height: 60px;
+  background-position: -183px -187px;
+}
+.volver {
+  width: 24px;
+  height: 24px;
+  background-position: -210px -1559px;
+}
+.webserver {
+  width: 25px;
+  height: 25px;
+  background-position: -183px -1567px;
+}

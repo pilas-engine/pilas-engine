@@ -12,6 +12,9 @@ export default Component.extend({
       return true;
     }
   }),
+  nombreResumido: computed("imagen.nombre", function() {
+    return this.imagen.nombre.split("/").reverse()[0];
+  }),
   actions: {
     cuando_selecciona_imagen(imagen) {
       this.cuando_selecciona(imagen);
