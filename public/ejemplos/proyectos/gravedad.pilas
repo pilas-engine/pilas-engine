@@ -65,15 +65,15 @@
       },
       {
         "nombre": "nave",
-        "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave_reposo.png\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.crear_animacion(\"nave_en_reposo\", [\"imagenes:nave_reposo.png\"], 2);\n        this.crear_animacion(\"nave_avanzando\", [\"imagenes:nave_avanza_1.png\", \"imagenes:nave_avanza_2.png\"], 20);\n        this.crear_animacion(\"nave_girando_a_la_izquierda\", [\"imagenes:nave_izquierda_1.png\", \"imagenes:nave_izquierda_2.png\"], 20);\n        this.crear_animacion(\"nave_girando_a_la_derecha\", [\"imagenes:nave_derecha_1.png\", \"imagenes:nave_derecha_2.png\"], 20);\n\n        this.animacion = \"nave_en_reposo\";\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    actualizar() {\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.pilas.control.izquierda) {\n            this.rotacion += this.velocidad;\n            this.animacion = \"nave_girando_a_la_izquierda\";\n        }\n\n        if (this.pilas.control.derecha) {\n            this.rotacion -= this.velocidad;\n            this.animacion = \"nave_girando_a_la_derecha\";\n        }\n\n        if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {\n            let laser = this.pilas.actores.laser();\n            laser.x = this.x;\n            laser.y = this.y;\n            laser.rotacion = this.rotacion;\n            laser.z = this.z + 1;\n            this.cuadros_desde_el_ultimo_disparo = 0;\n        }\n\n        if (this.pilas.control.arriba) {\n            this.avanzar(this.rotacion, this.velocidad);\n            this.animacion = \"nave_avanzando\";\n        } else {\n            if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {\n                this.animacion = \"nave_en_reposo\";\n            }\n        }\n    }\n}"
+        "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave/nave_reposo\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.crear_animacion(\"nave_en_reposo\", [\"imagenes:nave/nave_reposo\"], 2);\n        this.crear_animacion(\"nave_avanzando\", [\"imagenes:nave/nave_avanza_1\", \"imagenes:nave/nave_avanza_2\"], 20);\n        this.crear_animacion(\"nave_girando_a_la_izquierda\", [\"imagenes:nave/nave_izquierda_1\", \"imagenes:nave/nave_izquierda_2\"], 20);\n        this.crear_animacion(\"nave_girando_a_la_derecha\", [\"imagenes:nave/nave_derecha_1\", \"imagenes:nave/nave_derecha_2\"], 20);\n\n        this.animacion = \"nave_en_reposo\";\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    actualizar() {\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.pilas.control.izquierda) {\n            this.rotacion += this.velocidad;\n            this.animacion = \"nave_girando_a_la_izquierda\";\n        }\n\n        if (this.pilas.control.derecha) {\n            this.rotacion -= this.velocidad;\n            this.animacion = \"nave_girando_a_la_derecha\";\n        }\n\n        if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {\n            let laser = this.pilas.actores.laser();\n            laser.x = this.x;\n            laser.y = this.y;\n            laser.rotacion = this.rotacion;\n            laser.z = this.z + 1;\n            this.cuadros_desde_el_ultimo_disparo = 0;\n        }\n\n        if (this.pilas.control.arriba) {\n            this.avanzar(this.rotacion, this.velocidad);\n            this.animacion = \"nave_avanzando\";\n        } else {\n            if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {\n                this.animacion = \"nave_en_reposo\";\n            }\n        }\n    }\n}"
       },
       {
         "nombre": "deslizador",
-      "codigo": "class deslizador extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"imagenes:interfaz_linea.png\",\n        etiqueta: \"deslizador\",\n        figura: \"\"\n    };\n\n    valor: number = 0;\n    marca: Actor;\n    esta_arrastrando_el_deslizador;\n\n    iniciar() {\n        this.imagen = \"imagenes:interfaz_linea.png\";\n        this.esta_arrastrando_el_deslizador = false;\n        this.crear_marca();\n        this.conectar_eventos();\n    }\n\n    conectar_eventos() {\n        this.pilas.eventos.conectar(\"mueve_mouse\", datos => {\n            this.cuando_mueve_el_mouse(datos);\n        });\n\n        this.pilas.eventos.conectar(\"termina_click\", () => {\n            this.cuando_termina_de_hacer_click();\n        });\n    }\n\n    crear_marca() {\n        this.marca = this.pilas.actores.actor();\n        this.marca.imagen = \"imagenes:interfaz_deslizador.png\";\n\n        // Hacer que la marca del deslizador ignore clicks.\n        this.marca.interactivo = false;\n    }\n\n    cuando_hace_click(x, y) {\n        this.esta_arrastrando_el_deslizador = true;\n        this.ajustar_marca(x);\n    }\n\n    private cuando_mueve_el_mouse(datos) {\n        if (this.esta_arrastrando_el_deslizador) {\n            this.ajustar_marca(datos.x);\n        }\n    }\n\n    private cuando_termina_de_hacer_click() {\n        this.esta_arrastrando_el_deslizador = false;\n    }\n\n    actualizar() {\n        this.marca.x = this.x - 90 + 1.8 * this.valor;\n        this.marca.y = this.y;\n    }\n\n    private ajustar_marca(x) {\n        let dx = x - this.x;\n\n        // aplica límites porque el deslizador es de unos 180 píxeles.\n        dx = Math.max(dx, -90);\n        dx = Math.min(dx, 90);\n\n        this.valor = (dx + 90) / 1.8;\n    }\n}"
+      "codigo": "class deslizador extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"imagenes:interfaz/interfaz_linea\",\n        etiqueta: \"deslizador\",\n        figura: \"\"\n    };\n\n    valor: number = 0;\n    marca: Actor;\n    esta_arrastrando_el_deslizador;\n\n    iniciar() {\n        this.imagen = \"imagenes:interfaz/interfaz_linea\";\n        this.esta_arrastrando_el_deslizador = false;\n        this.crear_marca();\n        this.conectar_eventos();\n    }\n\n    conectar_eventos() {\n        this.pilas.eventos.conectar(\"mueve_mouse\", datos => {\n            this.cuando_mueve_el_mouse(datos);\n        });\n\n        this.pilas.eventos.conectar(\"termina_click\", () => {\n            this.cuando_termina_de_hacer_click();\n        });\n    }\n\n    crear_marca() {\n        this.marca = this.pilas.actores.actor();\n        this.marca.imagen = \"imagenes:interfaz/interfaz_deslizador\";\n\n        // Hacer que la marca del deslizador ignore clicks.\n        this.marca.interactivo = false;\n    }\n\n    cuando_hace_click(x, y) {\n        this.esta_arrastrando_el_deslizador = true;\n        this.ajustar_marca(x);\n    }\n\n    private cuando_mueve_el_mouse(datos) {\n        if (this.esta_arrastrando_el_deslizador) {\n            this.ajustar_marca(datos.x);\n        }\n    }\n\n    private cuando_termina_de_hacer_click() {\n        this.esta_arrastrando_el_deslizador = false;\n    }\n\n    actualizar() {\n        this.marca.x = this.x - 90 + 1.8 * this.valor;\n        this.marca.y = this.y;\n    }\n\n    private ajustar_marca(x) {\n        let dx = x - this.x;\n\n        // aplica límites porque el deslizador es de unos 180 píxeles.\n        dx = Math.max(dx, -90);\n        dx = Math.min(dx, 90);\n\n        this.valor = (dx + 90) / 1.8;\n    }\n}"
       },
       {
         "nombre": "deslizador1",
-      "codigo": "class deslizador1 extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"imagenes:interfaz_linea.png\",\n        etiqueta: \"deslizador\",\n        figura: \"\"\n    };\n\n    valor: number = 0;\n    marca: Actor;\n    esta_arrastrando_el_deslizador;\n\n    iniciar() {\n        this.imagen = \"imagenes:interfaz_linea.png\";\n        this.esta_arrastrando_el_deslizador = false;\n        this.crear_marca();\n        this.conectar_eventos();\n    }\n\n    conectar_eventos() {\n        this.pilas.eventos.conectar(\"mueve_mouse\", datos => {\n            this.cuando_mueve_el_mouse(datos);\n        });\n\n        this.pilas.eventos.conectar(\"termina_click\", () => {\n            this.cuando_termina_de_hacer_click();\n        });\n    }\n\n    crear_marca() {\n        this.marca = this.pilas.actores.actor();\n        this.marca.imagen = \"imagenes:interfaz_deslizador.png\";\n\n        // Hacer que la marca del deslizador ignore clicks.\n        this.marca.interactivo = false;\n    }\n\n    cuando_hace_click(x, y) {\n        this.esta_arrastrando_el_deslizador = true;\n        this.ajustar_marca(x);\n    }\n\n    private cuando_mueve_el_mouse(datos) {\n        if (this.esta_arrastrando_el_deslizador) {\n            this.ajustar_marca(datos.x);\n        }\n    }\n\n    private cuando_termina_de_hacer_click() {\n        this.esta_arrastrando_el_deslizador = false;\n    }\n\n    actualizar() {\n        this.marca.x = this.x - 90 + 1.8 * this.valor;\n        this.marca.y = this.y;\n    }\n\n    private ajustar_marca(x) {\n        let dx = x - this.x;\n\n        // aplica límites porque el deslizador es de unos 180 píxeles.\n        dx = Math.max(dx, -90);\n        dx = Math.min(dx, 90);\n\n        this.valor = (dx + 90) / 1.8;\n    }\n}"
+      "codigo": "class deslizador1 extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"imagenes:interfaz/interfaz_linea\",\n        etiqueta: \"deslizador\",\n        figura: \"\"\n    };\n\n    valor: number = 0;\n    marca: Actor;\n    esta_arrastrando_el_deslizador;\n\n    iniciar() {\n        this.imagen = \"imagenes:interfaz/interfaz_linea\";\n        this.esta_arrastrando_el_deslizador = false;\n        this.crear_marca();\n        this.conectar_eventos();\n    }\n\n    conectar_eventos() {\n        this.pilas.eventos.conectar(\"mueve_mouse\", datos => {\n            this.cuando_mueve_el_mouse(datos);\n        });\n\n        this.pilas.eventos.conectar(\"termina_click\", () => {\n            this.cuando_termina_de_hacer_click();\n        });\n    }\n\n    crear_marca() {\n        this.marca = this.pilas.actores.actor();\n        this.marca.imagen = \"imagenes:interfaz/interfaz_deslizador\";\n\n        // Hacer que la marca del deslizador ignore clicks.\n        this.marca.interactivo = false;\n    }\n\n    cuando_hace_click(x, y) {\n        this.esta_arrastrando_el_deslizador = true;\n        this.ajustar_marca(x);\n    }\n\n    private cuando_mueve_el_mouse(datos) {\n        if (this.esta_arrastrando_el_deslizador) {\n            this.ajustar_marca(datos.x);\n        }\n    }\n\n    private cuando_termina_de_hacer_click() {\n        this.esta_arrastrando_el_deslizador = false;\n    }\n\n    actualizar() {\n        this.marca.x = this.x - 90 + 1.8 * this.valor;\n        this.marca.y = this.y;\n    }\n\n    private ajustar_marca(x) {\n        let dx = x - this.x;\n\n        // aplica límites porque el deslizador es de unos 180 píxeles.\n        dx = Math.max(dx, -90);\n        dx = Math.min(dx, 90);\n\n        this.valor = (dx + 90) / 1.8;\n    }\n}"
       },
       {
         "nombre": "texto",
@@ -93,12 +93,12 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondo-espacio_2.png",
+      "fondo": "imagenes:fondos/fondo-espacio_2",
       "actores": [
         {
           "x": -50.919354838709666,
           "y": -115.37903225806451,
-          "imagen": "imagenes:pelota.png",
+          "imagen": "imagenes:objetos/pelota",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -122,7 +122,7 @@
         {
           "x": 0,
           "y": 255,
-          "imagen": "imagenes:techo.png",
+          "imagen": "imagenes:plataformas/techo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -146,7 +146,7 @@
         {
           "x": 0,
           "y": -250,
-          "imagen": "imagenes:suelo.png",
+          "imagen": "imagenes:plataformas/suelo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -171,7 +171,7 @@
           "x": -257.05645161290323,
           "y": 9.07258064516131,
           "z": 0,
-          "imagen": "imagenes:pared.png",
+          "imagen": "imagenes:plataformas/pared",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -197,7 +197,7 @@
           "x": 256.0483870967742,
           "y": -14.112903225806463,
           "z": 0,
-          "imagen": "imagenes:pared.png",
+          "imagen": "imagenes:plataformas/pared",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -222,7 +222,7 @@
         {
           "x": 63.7822580645161,
           "y": 50.62096774193549,
-          "imagen": "imagenes:pelota.png",
+          "imagen": "imagenes:objetos/pelota",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -246,7 +246,7 @@
         {
           "x": 76.61290322580646,
           "y": -159.71774193548384,
-          "imagen": "imagenes:pelota.png",
+          "imagen": "imagenes:objetos/pelota",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -270,7 +270,7 @@
         {
           "x": -189.49193548387098,
           "y": 72.5806451612903,
-          "imagen": "imagenes:pelota.png",
+          "imagen": "imagenes:objetos/pelota",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -294,7 +294,7 @@
         {
           "x": 198.10483870967744,
           "y": -4.588709677419331,
-          "imagen": "imagenes:pelota.png",
+          "imagen": "imagenes:objetos/pelota",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -318,7 +318,7 @@
         {
           "x": 196.3467741935484,
           "y": -120.15322580645159,
-          "imagen": "imagenes:pelota.png",
+          "imagen": "imagenes:objetos/pelota",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -343,7 +343,7 @@
           "x": -68.5483870967742,
           "y": 11.08870967741936,
           "z": 0,
-          "imagen": "imagenes:nave_reposo.png",
+          "imagen": "imagenes:nave/nave_reposo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -369,7 +369,7 @@
           "x": 50,
           "y": 192,
           "z": 0,
-          "imagen": "imagenes:interfaz_linea.png",
+          "imagen": "imagenes:interfaz/interfaz_linea",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -395,7 +395,7 @@
           "x": 50,
           "y": 145,
           "z": 0,
-          "imagen": "imagenes:interfaz_linea.png",
+          "imagen": "imagenes:interfaz/interfaz_linea",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -421,7 +421,7 @@
           "x": -102,
           "y": 193,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -448,7 +448,7 @@
           "x": -102,
           "y": 146,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

@@ -80,6 +80,7 @@
     "js-beautify": "^1.9.1",
     "phaser": "3.16.2",
     "polka": "^0.5.2",
+    "sharp": "^0.22.1",
     "sirv": "^0.4.2",
     "typescript": "3.4.3"
   }

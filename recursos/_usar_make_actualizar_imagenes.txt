@@ -1,0 +1,2 @@
+Estas imágenes se construyen automáticamente ejecutando el
+comando: make actualizar_grilla_de_imagenes

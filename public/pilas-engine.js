@@ -1149,7 +1149,7 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "imagenes:sin_imagen.png",
+            imagen: "imagenes:basicos/sin_imagen",
             centro_x: 0.5,
             centro_y: 0.5,
             rotacion: 0,
@@ -1173,7 +1173,7 @@ var ActorBase = (function () {
             x: 0,
             y: 0,
             z: 0,
-            imagen: "imagenes:sin_imagen.png",
+            imagen: "imagenes:basicos/sin_imagen",
             figura: ""
         };
         this.pilas = pilas;
@@ -1957,7 +1957,7 @@ var ActorBase = (function () {
         texto.y = this.y + this.alto;
         texto.transparencia = 100;
         texto.transparencia = [0];
-        texto.fondo = "imagenes:redimensionables_dialogo.png";
+        texto.fondo = "imagenes:redimensionables/dialogo";
         texto.color = "black";
         texto.centro_x = 1;
         texto.centro_y = 1;
@@ -1997,7 +1997,7 @@ var ActorTextoBase = (function (_super) {
     function ActorTextoBase() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:invisible.png",
+            imagen: "imagenes:basicos/invisible",
             texto: "Hola mundo",
             es_texto: true
         };
@@ -2121,12 +2121,12 @@ var aceituna = (function (_super) {
     function aceituna() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:aceituna.png"
+            imagen: "imagenes:objetos/aceituna"
         };
         return _this;
     }
     aceituna.prototype.iniciar = function () {
-        this.imagen = "imagenes:aceituna.png";
+        this.imagen = "imagenes:objetos/aceituna";
     };
     return aceituna;
 }(Actor));
@@ -2135,7 +2135,7 @@ var actor = (function (_super) {
     function actor() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:sin_imagen.png"
+            imagen: "imagenes:basicos/sin_imagen"
         };
         return _this;
     }
@@ -2148,8 +2148,8 @@ var boton = (function (_super) {
     function boton() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:invisible.png",
-            fondo: "imagenes:redimensionables_gris.png",
+            imagen: "imagenes:basicos/invisible",
+            fondo: "imagenes:redimensionables/gris",
             texto: "Botón",
             es_texto: true
         };
@@ -2176,7 +2176,7 @@ var boton_de_control_abajo = (function (_super) {
     function boton_de_control_abajo() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:botones_abajo.png",
+            imagen: "imagenes:botones/botones_abajo",
             z: -100
         };
         _this.pulsado = false;
@@ -2208,7 +2208,7 @@ var boton_de_control_arriba = (function (_super) {
     function boton_de_control_arriba() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:botones_arriba.png",
+            imagen: "imagenes:botones/botones_arriba",
             z: -100
         };
         _this.pulsado = false;
@@ -2240,7 +2240,7 @@ var boton_de_control_derecha = (function (_super) {
     function boton_de_control_derecha() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:botones_derecha.png",
+            imagen: "imagenes:botones/botones_derecha",
             z: -100
         };
         _this.pulsado = false;
@@ -2272,7 +2272,7 @@ var boton_de_control_espacio = (function (_super) {
     function boton_de_control_espacio() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:botones_a.png",
+            imagen: "imagenes:botones/botones_a",
             z: -100
         };
         _this.pulsado = false;
@@ -2304,7 +2304,7 @@ var boton_de_control_izquierda = (function (_super) {
     function boton_de_control_izquierda() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:botones_izquierda.png",
+            imagen: "imagenes:botones/botones_izquierda",
             z: -100
         };
         _this.pulsado = false;
@@ -2338,7 +2338,7 @@ var caja = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "imagenes:caja.png",
+            imagen: "imagenes:objetos/caja",
             etiqueta: "caja",
             figura: "rectangulo",
             figura_ancho: 45,
@@ -2357,7 +2357,7 @@ var conejo = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "imagenes:conejo_parado1.png",
+            imagen: "imagenes:conejo/conejo_parado1",
             figura: "rectangulo",
             figura_ancho: 50,
             figura_alto: 100,
@@ -2376,10 +2376,10 @@ var conejo = (function (_super) {
         this.pies = this.agregar_sensor(50, 10, 0, -50);
     };
     conejo.prototype.crear_animaciones = function () {
-        this.crear_animacion("conejo_parado", ["imagenes:conejo_parado1.png", "imagenes:conejo_parado2.png"], 2);
-        this.crear_animacion("conejo_camina", ["imagenes:conejo_camina1.png", "imagenes:conejo_camina2.png"], 20);
-        this.crear_animacion("conejo_salta", ["imagenes:conejo_salta.png"], 20);
-        this.crear_animacion("conejo_muere", ["imagenes:conejo_muere.png"], 1);
+        this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
+        this.crear_animacion("conejo_camina", ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"], 20);
+        this.crear_animacion("conejo_salta", ["imagenes:conejo/conejo_salta"], 20);
+        this.crear_animacion("conejo_muere", ["imagenes:conejo/conejo_pierde"], 1);
     };
     conejo.prototype.actualizar = function () {
         if (this.pies.colisiones.length > 0) {
@@ -2464,7 +2464,7 @@ var deslizador = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "imagenes:interfaz_linea.png",
+            imagen: "imagenes:interfaz/interfaz_linea",
             etiqueta: "deslizador",
             figura: ""
         };
@@ -2472,7 +2472,7 @@ var deslizador = (function (_super) {
         return _this;
     }
     deslizador.prototype.iniciar = function () {
-        this.imagen = "imagenes:interfaz_linea.png";
+        this.imagen = "imagenes:interfaz/interfaz_linea";
         this.esta_arrastrando_el_deslizador = false;
         this.crear_marca();
         this.conectar_eventos();
@@ -2488,7 +2488,7 @@ var deslizador = (function (_super) {
     };
     deslizador.prototype.crear_marca = function () {
         this.marca = this.pilas.actores.actor();
-        this.marca.imagen = "imagenes:interfaz_deslizador.png";
+        this.marca.imagen = "imagenes:interfaz/interfaz_deslizador";
         this.marca.interactivo = false;
     };
     deslizador.prototype.cuando_hace_click = function (x, y) {
@@ -2522,7 +2522,7 @@ var gallina = (function (_super) {
         _this.propiedades = {
             x: 0,
             y: 0,
-            imagen: "imagenes:gallina_vuela_3.png",
+            imagen: "imagenes:gallina/gallina_vuela_3",
             figura: "circulo",
             figura_radio: 30,
             figura_sin_rotacion: true,
@@ -2533,14 +2533,14 @@ var gallina = (function (_super) {
     }
     gallina.prototype.iniciar = function () {
         this.crear_animacion("gallina_vuela", [
-            "imagenes:gallina_vuela_1.png",
-            "imagenes:gallina_vuela_1.png",
-            "imagenes:gallina_vuela_2.png",
-            "imagenes:gallina_vuela_3.png",
-            "imagenes:gallina_vuela_2.png"
+            "imagenes:gallina/gallina_vuela_1",
+            "imagenes:gallina/gallina_vuela_1",
+            "imagenes:gallina/gallina_vuela_2",
+            "imagenes:gallina/gallina_vuela_3",
+            "imagenes:gallina/gallina_vuela_2"
         ], 15);
-        this.crear_animacion("gallina_muere", ["imagenes:gallina_muere.png"], 20);
-        this.crear_animacion("gallina_sin_piel", ["imagenes:gallina_sin_piel.png"], 20);
+        this.crear_animacion("gallina_muere", ["imagenes:gallina/gallina_muere"], 20);
+        this.crear_animacion("gallina_sin_piel", ["imagenes:gallina/gallina_sin_piel"], 20);
         this.estado = "vuela";
     };
     gallina.prototype.actualizar = function () { };
@@ -2556,7 +2556,7 @@ var laser = (function (_super) {
     function laser() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:laser.png"
+            imagen: "imagenes:disparos/laser"
         };
         return _this;
     }
@@ -2578,7 +2578,7 @@ var logo = (function (_super) {
     function logo() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:logo.png"
+            imagen: "imagenes:basicos/logo"
         };
         return _this;
     }
@@ -2590,7 +2590,7 @@ var moneda = (function (_super) {
     function moneda() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:moneda.png",
+            imagen: "imagenes:objetos/moneda",
             etiqueta: "moneda",
             figura: "circulo",
             figura_radio: 10,
@@ -2606,7 +2606,7 @@ var nave = (function (_super) {
     function nave() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:nave_reposo.png"
+            imagen: "imagenes:nave/nave_reposo"
         };
         _this.velocidad = 5;
         return _this;
@@ -2617,10 +2617,10 @@ var nave = (function (_super) {
         this.cuadros_desde_el_ultimo_disparo = 0;
     };
     nave.prototype.crear_animaciones = function () {
-        this.crear_animacion("nave_en_reposo", ["imagenes:nave_reposo.png"], 2);
-        this.crear_animacion("nave_avanzando", ["imagenes:nave_avanza_1.png", "imagenes:nave_avanza_2.png"], 20);
-        this.crear_animacion("nave_girando_a_la_izquierda", ["imagenes:nave_izquierda_1.png", "imagenes:nave_izquierda_2.png"], 20);
-        this.crear_animacion("nave_girando_a_la_derecha", ["imagenes:nave_derecha_1.png", "imagenes:nave_derecha_2.png"], 20);
+        this.crear_animacion("nave_en_reposo", ["imagenes:nave/nave_reposo"], 2);
+        this.crear_animacion("nave_avanzando", ["imagenes:nave/nave_avanza_1", "imagenes:nave/nave_avanza_2"], 20);
+        this.crear_animacion("nave_girando_a_la_izquierda", ["imagenes:nave/nave_izquierda_1", "imagenes:nave/nave_izquierda_2"], 20);
+        this.crear_animacion("nave_girando_a_la_derecha", ["imagenes:nave/nave_derecha_1", "imagenes:nave/nave_derecha_2"], 20);
     };
     nave.prototype.actualizar = function () {
         this.cuadros_desde_el_ultimo_disparo += 1;
@@ -2658,7 +2658,7 @@ var nube = (function (_super) {
     function nube() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:nube.png"
+            imagen: "imagenes:decoracion/nube"
         };
         return _this;
     }
@@ -2671,7 +2671,7 @@ var pared = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "imagenes:pared.png",
+            imagen: "imagenes:plataformas/pared",
             y: 0,
             figura_ancho: 20,
             figura_alto: 600,
@@ -2688,7 +2688,7 @@ var pelota = (function (_super) {
     function pelota() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:pelota.png",
+            imagen: "imagenes:objetos/pelota",
             figura: "circulo",
             figura_radio: 25
         };
@@ -2703,7 +2703,7 @@ var plataforma = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "imagenes:plataforma.png",
+            imagen: "imagenes:plataformas/plataforma",
             etiqueta: "plataforma",
             y: 0,
             figura_ancho: 250,
@@ -2722,7 +2722,7 @@ var suelo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "imagenes:suelo.png",
+            imagen: "imagenes:plataformas/suelo",
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false
@@ -2738,7 +2738,7 @@ var techo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             figura: "rectangulo",
-            imagen: "imagenes:techo.png",
+            imagen: "imagenes:plataformas/techo",
             figura_ancho: 600,
             figura_alto: 25,
             figura_dinamica: false
@@ -2753,7 +2753,7 @@ var texto = (function (_super) {
     function texto() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:invisible.png",
+            imagen: "imagenes:basicos/invisible",
             texto: "Hola mundo",
             es_texto: true
         };
@@ -2778,7 +2778,7 @@ var EscenaBase = (function () {
         if (this._observables === null) {
             this._actor_visor_observables = this.pilas.actores.texto();
             this._actor_visor_observables.fondo =
-                "imagenes:redimensionables_blanco.png";
+                "imagenes:redimensionables/blanco";
             this._actor_visor_observables.centro_x = 0;
             this._actor_visor_observables.centro_y = 0;
             this._actor_visor_observables.x = -210;

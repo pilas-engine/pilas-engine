@@ -13,11 +13,11 @@
     "actores": [
       {
         "nombre": "conejo",
-        "codigo": "class conejo extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"conejo_parado1\",\n\n        figura: \"rectangulo\",\n        figura_ancho: 50,\n        figura_alto: 100,\n        figura_radio: 50,\n        figura_sin_rotacion: true,\n        figura_dinamica: true,\n        figura_rebote: 0\n    };\n\n    toca_el_suelo = false;\n    pies = null;\n\n    iniciar() {\n        this.crear_animacion(\"conejo_parado\", [\"imagenes:conejo_parado1.png\", \"imagenes:conejo_parado2.png\"], 2);\n        this.crear_animacion(\"conejo_camina\", [\"imagenes:conejo_camina1.png\", \"imagenes:conejo_camina2.png\"], 20);\n        this.crear_animacion(\"conejo_salta\", [\"imagenes:conejo_salta.png\"], 20);\n        this.crear_animacion(\"conejo_muere\", [\"imagenes:conejo_muere.png\"], 1);\n\n        this.estado = \"parado\";\n        this.pies = this.agregar_sensor(50, 10, 0, -50);\n    }\n\n    actualizar() {\n        if (this.pies.colisiones.length > 0) {\n            this.toca_el_suelo = true;\n        } else {\n            this.toca_el_suelo = false;\n        }\n    }\n\n    parado_iniciar() {\n        this.reproducir_animacion(\"conejo_parado\");\n    }\n\n    parado_actualizar() {\n        if (this.pilas.control.izquierda || this.pilas.control.derecha) {\n            this.estado = \"camina\";\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = \"salta\";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = \"salta\";\n        }\n    }\n\n    camina_iniciar() {\n        this.reproducir_animacion(\"conejo_camina\");\n    }\n\n    camina_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n            this.espejado = true;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n            this.espejado = false;\n        }\n\n        if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {\n            this.estado = \"parado\";\n            return;\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = \"salta\";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = \"salta\";\n        }\n    }\n\n    salta_iniciar() {\n        this.reproducir_animacion(\"conejo_salta\");\n    }\n\n    salta_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n        }\n\n        if (this.toca_el_suelo) {\n            this.estado = \"parado\";\n        }\n    }\n\n    cuando_comienza_una_colision(actor: Actor) {\n        if (actor.etiqueta === \"moneda\") {\n            this.pilas.reproducir_sonido(\"moneda\");\n            actor.eliminar();\n        }\n\n        if (actor.etiqueta === \"plataforma\" && this.velocidad_y > 0) {\n            return true;\n        }\n    }\n\n    cuando_se_mantiene_una_colision(actor) {}\n\n    cuando_termina_una_colision(actor) {}\n}"
+        "codigo": "class conejo extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"conejo_parado1\",\n\n        figura: \"rectangulo\",\n        figura_ancho: 50,\n        figura_alto: 100,\n        figura_radio: 50,\n        figura_sin_rotacion: true,\n        figura_dinamica: true,\n        figura_rebote: 0\n    };\n\n    toca_el_suelo = false;\n    pies = null;\n\n    iniciar() {\n        this.crear_animacion(\"conejo_parado\", [\"imagenes:conejo/conejo_parado1\", \"imagenes:conejo/conejo_parado2\"], 2);\n        this.crear_animacion(\"conejo_camina\", [\"imagenes:conejo/conejo_camina1\", \"imagenes:conejo/conejo_camina2\"], 20);\n        this.crear_animacion(\"conejo_salta\", [\"imagenes:conejo/conejo_salta\"], 20);\n        this.crear_animacion(\"conejo_muere\", [\"imagenes:conejo/conejo_pierde\"], 1);\n\n        this.estado = \"parado\";\n        this.pies = this.agregar_sensor(50, 10, 0, -50);\n    }\n\n    actualizar() {\n        if (this.pies.colisiones.length > 0) {\n            this.toca_el_suelo = true;\n        } else {\n            this.toca_el_suelo = false;\n        }\n    }\n\n    parado_iniciar() {\n        this.reproducir_animacion(\"conejo_parado\");\n    }\n\n    parado_actualizar() {\n        if (this.pilas.control.izquierda || this.pilas.control.derecha) {\n            this.estado = \"camina\";\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = \"salta\";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = \"salta\";\n        }\n    }\n\n    camina_iniciar() {\n        this.reproducir_animacion(\"conejo_camina\");\n    }\n\n    camina_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n            this.espejado = true;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n            this.espejado = false;\n        }\n\n        if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {\n            this.estado = \"parado\";\n            return;\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = \"salta\";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = \"salta\";\n        }\n    }\n\n    salta_iniciar() {\n        this.reproducir_animacion(\"conejo_salta\");\n    }\n\n    salta_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n        }\n\n        if (this.toca_el_suelo) {\n            this.estado = \"parado\";\n        }\n    }\n\n    cuando_comienza_una_colision(actor: Actor) {\n        if (actor.etiqueta === \"moneda\") {\n            this.pilas.reproducir_sonido(\"moneda\");\n            actor.eliminar();\n        }\n\n        if (actor.etiqueta === \"plataforma\" && this.velocidad_y > 0) {\n            return true;\n        }\n    }\n\n    cuando_se_mantiene_una_colision(actor) {}\n\n    cuando_termina_una_colision(actor) {}\n}"
       },
       {
         "nombre": "plataforma",
-        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "caja",
@@ -45,15 +45,15 @@
       },
       {
         "nombre": "plataforma1",
-        "codigo": "class plataforma1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "plataforma2",
-        "codigo": "class plataforma2 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma2 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "plataforma3",
-        "codigo": "class plataforma3 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma3 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "moneda",
@@ -83,12 +83,12 @@
       "id": 1,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondo-cielo.png",
+      "fondo": "imagenes:fondos/fondo-cielo",
       "actores": [
         {
           "x": -64,
           "y": 4,
-          "imagen": "imagenes:conejo_parado1.png",
+          "imagen": "imagenes:conejo/conejo_parado1",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -112,7 +112,7 @@
         {
           "x": -32.96850393700785,
           "y": -98.45669291338584,
-          "imagen": "imagenes:plataforma.png",
+          "imagen": "imagenes:plataformas/plataforma",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -136,7 +136,7 @@
         {
           "x": -262,
           "y": -31,
-          "imagen": "imagenes:techo.png",
+          "imagen": "imagenes:plataformas/techo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 90,
@@ -160,7 +160,7 @@
         {
           "x": 0,
           "y": -250,
-          "imagen": "imagenes:suelo.png",
+          "imagen": "imagenes:plataformas/suelo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -184,7 +184,7 @@
         {
           "x": 20,
           "y": -270,
-          "imagen": "imagenes:suelo.png",
+          "imagen": "imagenes:plataformas/suelo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -208,7 +208,7 @@
         {
           "x": 259,
           "y": -5,
-          "imagen": "imagenes:techo.png",
+          "imagen": "imagenes:plataformas/techo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 90,
@@ -232,7 +232,7 @@
         {
           "x": 98.03149606299212,
           "y": 54.54330708661416,
-          "imagen": "imagenes:plataforma.png",
+          "imagen": "imagenes:plataformas/plataforma",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -256,7 +256,7 @@
         {
           "x": -157,
           "y": 135,
-          "imagen": "imagenes:moneda.png",
+          "imagen": "imagenes:objetos/moneda",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -280,7 +280,7 @@
         {
           "x": 60,
           "y": -24,
-          "imagen": "imagenes:moneda.png",
+          "imagen": "imagenes:objetos/moneda",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -304,7 +304,7 @@
         {
           "x": -19,
           "y": 157,
-          "imagen": "imagenes:moneda.png",
+          "imagen": "imagenes:objetos/moneda",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -328,7 +328,7 @@
         {
           "x": 148,
           "y": 141,
-          "imagen": "imagenes:moneda.png",
+          "imagen": "imagenes:objetos/moneda",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -352,7 +352,7 @@
         {
           "x": -50,
           "y": -172,
-          "imagen": "imagenes:moneda.png",
+          "imagen": "imagenes:objetos/moneda",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

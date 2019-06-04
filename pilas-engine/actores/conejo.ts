@@ -2,7 +2,7 @@ class conejo extends Actor {
   propiedades = {
     x: 0,
     y: 0,
-    imagen: "imagenes:conejo_parado1.png",
+    imagen: "imagenes:conejo/conejo_parado1",
 
     figura: "rectangulo",
     figura_ancho: 50,
@@ -25,16 +25,16 @@ class conejo extends Actor {
   crear_animaciones() {
     this.crear_animacion(
       "conejo_parado",
-      ["imagenes:conejo_parado1.png", "imagenes:conejo_parado2.png"],
+      ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
       2
     );
     this.crear_animacion(
       "conejo_camina",
-      ["imagenes:conejo_camina1.png", "imagenes:conejo_camina2.png"],
+      ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"],
       20
     );
-    this.crear_animacion("conejo_salta", ["imagenes:conejo_salta.png"], 20);
-    this.crear_animacion("conejo_muere", ["imagenes:conejo_muere.png"], 1);
+    this.crear_animacion("conejo_salta", ["imagenes:conejo/conejo_salta"], 20);
+    this.crear_animacion("conejo_muere", ["imagenes:conejo/conejo_pierde"], 1);
   }
 
   actualizar() {

@@ -342,7 +342,7 @@
 <p>Por ejemplo, para crear una animaci&#xF3;n de un actor mientras est&#xE1; esperando us&#xE9; lo siguiente:</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.crear_animacion(
   <span class="hljs-string">&quot;conejo_parado&quot;</span>,
-  [<span class="hljs-string">&quot;imagenes:conejo_parado1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_parado2.png&quot;</span>],
+  [<span class="hljs-string">&quot;imagenes:conejo/conejo_parado1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_parado2&quot;</span>],
   <span class="hljs-number">2</span>
 );
 </code></pre>
@@ -355,16 +355,16 @@
   iniciar() {
     <span class="hljs-keyword">this</span>.crear_animacion(
       <span class="hljs-string">&quot;conejo_parado&quot;</span>,
-      [<span class="hljs-string">&quot;imagenes:conejo_parado1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_parado2.png&quot;</span>],
+      [<span class="hljs-string">&quot;imagenes:conejo/conejo_parado1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_parado2&quot;</span>],
       <span class="hljs-number">2</span>
     );
     <span class="hljs-keyword">this</span>.crear_animacion(
       <span class="hljs-string">&quot;conejo_camina&quot;</span>,
-      [<span class="hljs-string">&quot;imagenes:conejo_camina1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_camina2.png&quot;</span>],
+      [<span class="hljs-string">&quot;imagenes:conejo/conejo_camina1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_camina2&quot;</span>],
       <span class="hljs-number">20</span>
     );
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo_salta.png&quot;</span>], <span class="hljs-number">20</span>);
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo_muere.png&quot;</span>], <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
+    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_pierde&quot;</span>], <span class="hljs-number">1</span>);
 
     <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
   }
@@ -378,12 +378,12 @@ animaci&#xF3;n as&#xED;:</p>
   iniciar() {
     <span class="hljs-keyword">this</span>.crear_animacion(
       <span class="hljs-string">&quot;conejo_parado&quot;</span>,
-      [<span class="hljs-string">&quot;imagenes:conejo_parado1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_parado2.png&quot;</span>],
+      [<span class="hljs-string">&quot;imagenes:conejo/conejo_parado1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_parado2&quot;</span>],
       <span class="hljs-number">2</span>
     );
     <span class="hljs-keyword">this</span>.crear_animacion(
       <span class="hljs-string">&quot;conejo_camina&quot;</span>,
-      [<span class="hljs-string">&quot;imagenes:conejo_camina1.png&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo_camina2.png&quot;</span>],
+      [<span class="hljs-string">&quot;imagenes:conejo/conejo_camina1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_camina2&quot;</span>],
       <span class="hljs-number">20</span>
     );
     <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;conejo_salta&quot;</span>], <span class="hljs-number">20</span>);

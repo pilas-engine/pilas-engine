@@ -10,7 +10,15 @@ export default Service.extend({
   tarea: task(function*() {
     yield timeout(500);
 
-    let data = yield this.obtenerRecursos();
+    let data = yield this.__deprecated_obtenerRecursos();
+    let imagenes = yield this.obtenerImagenes();
+
+    data.imagenesParaGrilla = imagenes.textures[0].frames.map(e => {
+      return {
+        nombre: "imagenes:" + e.filename,
+        sprite: e.filename.replace("/", "-")
+      };
+    });
 
     this.set("data", data);
     return data;
@@ -24,11 +32,30 @@ export default Service.extend({
     }
   },
 
-  obtenerRecursos() {
+  __deprecated_obtenerRecursos() {
     return new Promise(function(resolve, reject) {
       var xhr = new XMLHttpRequest();
 
       xhr.open("GET", `${config.rootURL}recursos.json`);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          reject(xhr.status);
+        }
+      };
+
+      xhr.send();
+    });
+  },
+
+  obtenerImagenes() {
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open("GET", `${config.rootURL}imagenes.json`);
       xhr.setRequestHeader("Content-Type", "application/json");
 
       xhr.onload = function() {

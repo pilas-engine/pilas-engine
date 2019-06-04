@@ -1,23 +1,23 @@
 {
   "imagenes": [
     {
-      "nombre": "imagenes:sin_imagen.png",
+      "nombre": "imagenes:basicos/sin_imagen",
       "sprite": "imagenes_sin_imagen"
     },
     {
-      "nombre": "imagenes:invisible.png",
+      "nombre": "imagenes:basicos/invisible",
       "sprite": "imagenes_invisible"
     },
     {
-      "nombre": "imagenes:fondo-cielo.png",
+      "nombre": "imagenes:fondos/fondo-cielo",
       "sprite": "fondos-imagenes_fondo-cielo"
     },
     {
-      "nombre": "imagenes:fondo-plano.png",
+      "nombre": "imagenes:fondos/fondo-plano",
       "sprite": "fondos-imagenes_fondo-plano"
     },
     {
-      "nombre": "imagenes:pelota.png",
+      "nombre": "imagenes:objetos/pelota",
       "sprite": "imagenes_pelota"
     },
     {
@@ -25,111 +25,111 @@
       "sprite": "imagenes_pelota_de_voley"
     },
     {
-      "nombre": "imagenes:logo.png",
+      "nombre": "imagenes:basicos/logo",
       "sprite": "imagenes_logo"
     },
     {
-      "nombre": "imagenes:caja.png",
+      "nombre": "imagenes:objetos/caja",
       "sprite": "imagenes_caja"
     },
     {
-      "nombre": "imagenes:aceituna.png",
+      "nombre": "imagenes:objetos/aceituna",
       "sprite": "imagenes_aceituna"
     },
     {
-      "nombre": "imagenes:conejo_muere.png",
+      "nombre": "imagenes:conejo/conejo_pierde",
       "sprite": "conejo-imagenes_conejo_muere"
     },
     {
-      "nombre": "imagenes:conejo_salta.png",
+      "nombre": "imagenes:conejo/conejo_salta",
       "sprite": "conejo-imagenes_conejo_salta"
     },
     {
-      "nombre": "imagenes:conejo_parado1.png",
+      "nombre": "imagenes:conejo/conejo_parado1",
       "sprite": "conejo-imagenes_conejo_parado1"
     },
     {
-      "nombre": "imagenes:conejo_parado2.png",
+      "nombre": "imagenes:conejo/conejo_parado2",
       "sprite": "conejo-imagenes_conejo_parado2"
     },
     {
-      "nombre": "imagenes:conejo_camina1.png",
+      "nombre": "imagenes:conejo/conejo_camina1",
       "sprite": "conejo-imagenes_conejo_camina1"
     },
     {
-      "nombre": "imagenes:conejo_camina2.png",
+      "nombre": "imagenes:conejo/conejo_camina2",
       "sprite": "conejo-imagenes_conejo_camina2"
     },
     {
-      "nombre": "imagenes:nave_reposo.png",
+      "nombre": "imagenes:nave/nave_reposo",
       "sprite": "nave-imagenes_nave_reposo"
     },
     {
-      "nombre": "imagenes:nave_avanza_1.png",
+      "nombre": "imagenes:nave/nave_avanza_1",
       "sprite": "nave-imagenes_nave_avanza_1"
     },
     {
-      "nombre": "imagenes:nave_avanza_2.png",
+      "nombre": "imagenes:nave/nave_avanza_2",
       "sprite": "nave-imagenes_nave_avanza_2"
     },
     {
-      "nombre": "imagenes:nave_derecha_1.png",
+      "nombre": "imagenes:nave/nave_derecha_1",
       "sprite": "nave-imagenes_nave_derecha_1"
     },
     {
-      "nombre": "imagenes:nave_derecha_2.png",
+      "nombre": "imagenes:nave/nave_derecha_2",
       "sprite": "nave-imagenes_nave_derecha_2"
     },
     {
-      "nombre": "imagenes:nave_izquierda_1.png",
+      "nombre": "imagenes:nave/nave_izquierda_1",
       "sprite": "nave-imagenes_nave_izquierda_1"
     },
     {
-      "nombre": "imagenes:nave_izquierda_2.png",
+      "nombre": "imagenes:nave/nave_izquierda_2",
       "sprite": "nave-imagenes_nave_izquierda_2"
     },
     {
-      "nombre": "imagenes:suelo.png",
+      "nombre": "imagenes:plataformas/suelo",
       "sprite": "imagenes_suelo"
     },
     {
-      "nombre": "imagenes:techo.png",
+      "nombre": "imagenes:plataformas/techo",
       "sprite": "imagenes_techo"
     },
     {
-      "nombre": "imagenes:pared.png",
+      "nombre": "imagenes:plataformas/pared",
       "sprite": "imagenes_pared"
     },
     {
-      "nombre": "imagenes:plataforma.png",
+      "nombre": "imagenes:plataformas/plataforma",
       "sprite": "imagenes_plataforma"
     },
     {
-      "nombre": "imagenes:moneda.png",
+      "nombre": "imagenes:objetos/moneda",
       "sprite": "imagenes_moneda"
     },
     {
-      "nombre": "imagenes:nube.png",
+      "nombre": "imagenes:decoracion/nube",
       "sprite": "nubes-imagenes_nube"
     },
     {
-      "nombre": "imagenes:gallina_muere.png",
+      "nombre": "imagenes:gallina/gallina_muere",
       "sprite": "gallina-imagenes_gallina_muere"
     },
     {
-      "nombre": "imagenes:gallina_sin_piel.png",
+      "nombre": "imagenes:gallina/gallina_sin_piel",
       "sprite": "gallina-imagenes_gallina_sin_piel"
     },
     {
-      "nombre": "imagenes:gallina_vuela_1.png",
+      "nombre": "imagenes:gallina/gallina_vuela_1",
       "sprite": "gallina-imagenes_gallina_vuela_1"
     },
     {
-      "nombre": "imagenes:gallina_vuela_2.png",
+      "nombre": "imagenes:gallina/gallina_vuela_2",
       "sprite": "gallina-imagenes_gallina_vuela_2"
     },
     {
-      "nombre": "imagenes:gallina_vuela_3.png",
+      "nombre": "imagenes:gallina/gallina_vuela_3",
       "sprite": "gallina-imagenes_gallina_vuela_3"
     },
     {
@@ -153,19 +153,19 @@
       "sprite": "fondos-imagenes_fondo-madera"
     },
     {
-      "nombre": "imagenes:fondo-rojo.png",
+      "nombre": "imagenes:fondos/fondo-rojo",
       "sprite": "fondos-imagenes_fondo-rojo"
     },
     {
-      "nombre": "imagenes:fondo-verde.png",
+      "nombre": "imagenes:fondos/fondo-verde",
       "sprite": "fondos-imagenes_fondo-verde"
     },
     {
-      "nombre": "imagenes:fondo-espacio_1.png",
+      "nombre": "imagenes:fondos/fondo-espacio_1",
       "sprite": "fondos-imagenes_fondo-espacio_1"
     },
     {
-      "nombre": "imagenes:fondo-espacio_2.png",
+      "nombre": "imagenes:fondos/fondo-espacio_2",
       "sprite": "fondos-imagenes_fondo-espacio_2"
     },
     {
@@ -185,7 +185,7 @@
       "sprite": "imagenes_hierba_1"
     },
     {
-      "nombre": "imagenes:laser.png",
+      "nombre": "imagenes:disparos/laser",
       "sprite": "imagenes_laser"
     },
     {
@@ -201,16 +201,16 @@
       "sprite": "imagenes_copa"
     },
     {
-      "nombre": "imagenes:carta.png",
+      "nombre": "imagenes:cartas/carta",
       "sprite": "imagenes_carta"
     },
 
     {
-      "nombre": "imagenes:carta_azul.png",
+      "nombre": "imagenes:cartas/carta_azul",
       "sprite": "imagenes_carta_azul"
     },
     {
-      "nombre": "imagenes:carta_verde.png",
+      "nombre": "imagenes:cartas/carta_verde",
       "sprite": "imagenes_carta_verde"
     },
     {
@@ -222,55 +222,55 @@
       "sprite": "redimensionables-imagenes_boton-amarillo-pulsado"
     },
     {
-      "nombre": "imagenes:redimensionables_gris.png",
+      "nombre": "imagenes:redimensionables/gris",
       "sprite": "redimensionables-imagenes_gris"
     },
     {
-      "nombre": "imagenes:redimensionables_dialogo.png",
+      "nombre": "imagenes:redimensionables/dialogo",
       "sprite": "redimensionables-imagenes_dialogo"
     },
     {
-      "nombre": "imagenes:interfaz_linea.png",
+      "nombre": "imagenes:interfaz/interfaz_linea",
       "sprite": "interfaz-imagenes_interfaz_linea"
     },
     {
-      "nombre": "imagenes:interfaz_punto.png",
+      "nombre": "imagenes:interfaz/interfaz_punto",
       "sprite": "interfaz-imagenes_interfaz_punto"
     },
     {
-      "nombre": "imagenes:interfaz_deslizador.png",
+      "nombre": "imagenes:interfaz/interfaz_deslizador",
       "sprite": "interfaz-imagenes_interfaz_deslizador"
     },
     {
-      "nombre": "imagenes:tanque_base.png",
+      "nombre": "imagenes:tanque/tanque_base",
       "sprite": "tanque-imagenes_tanque_base"
     },
     {
-      "nombre": "imagenes:tanque_disparo.png",
+      "nombre": "imagenes:tanque/tanque_disparo",
       "sprite": "tanque-imagenes_tanque_disparo"
     },
     {
-      "nombre": "imagenes:tanque_ruedas.png",
+      "nombre": "imagenes:tanque/tanque_ruedas",
       "sprite": "tanque-imagenes_tanque_ruedas"
     },
     {
-      "nombre": "imagenes:tanque_torreta.png",
+      "nombre": "imagenes:tanque/tanque_torreta",
       "sprite": "tanque-imagenes_tanque_torreta"
     },
     {
-      "nombre": "imagenes:cursor_disparo_negro.png",
+      "nombre": "imagenes:cursores/cursor_disparo_negro",
       "sprite": "cursores-imagenes_cursor_disparo_negro"
     },
     {
-      "nombre": "imagenes:cursor_disparo_rojo.png",
+      "nombre": "imagenes:cursores/cursor_disparo_rojo",
       "sprite": "cursores-imagenes_cursor_disparo_rojo"
     },
     {
-      "nombre": "imagenes:planeta.png",
+      "nombre": "imagenes:basicos/planeta",
       "sprite": "imagenes_planeta"
     },
     {
-      "nombre": "imagenes:botones_a.png",
+      "nombre": "imagenes:botones/botones_a",
       "sprite": "botones-imagenes_botones_a"
     },
     {
@@ -278,19 +278,19 @@
       "sprite": "botones-imagenes_botones_b"
     },
     {
-      "nombre": "imagenes:botones_arriba.png",
+      "nombre": "imagenes:botones/botones_arriba",
       "sprite": "botones-imagenes_botones_arriba"
     },
     {
-      "nombre": "imagenes:botones_abajo.png",
+      "nombre": "imagenes:botones/botones_abajo",
       "sprite": "botones-imagenes_botones_abajo"
     },
     {
-      "nombre": "imagenes:botones_izquierda.png",
+      "nombre": "imagenes:botones/botones_izquierda",
       "sprite": "botones-imagenes_botones_izquierda"
     },
     {
-      "nombre": "imagenes:botones_derecha.png",
+      "nombre": "imagenes:botones/botones_derecha",
       "sprite": "botones-imagenes_botones_derecha"
     }
   ],

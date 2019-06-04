@@ -30,7 +30,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "imagenes:sin_imagen.png",
+    imagen: "imagenes:basicos/sin_imagen",
 
     centro_x: 0.5,
     centro_y: 0.5,
@@ -59,7 +59,7 @@ class ActorBase {
     x: 0,
     y: 0,
     z: 0,
-    imagen: "imagenes:sin_imagen.png",
+    imagen: "imagenes:basicos/sin_imagen",
     figura: ""
   };
 
@@ -898,7 +898,7 @@ class ActorBase {
     texto.y = this.y + this.alto;
     texto.transparencia = 100;
     texto.transparencia = [0];
-    texto.fondo = "imagenes:redimensionables_dialogo.png";
+    texto.fondo = "imagenes:redimensionables/dialogo";
     texto.color = "black";
     texto.centro_x = 1;
     texto.centro_y = 1;

@@ -13,27 +13,27 @@
         "actores": [
             {
                 "nombre": "boton_de_control_espacio",
-                "codigo": "class boton_de_control_espacio extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones_a.png\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"espacio\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
+                "codigo": "class boton_de_control_espacio extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones/botones_a\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"espacio\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
             },
             {
                 "nombre": "boton_de_control_izquierda",
-                "codigo": "class boton_de_control_izquierda extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones_izquierda.png\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"izquierda\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
+                "codigo": "class boton_de_control_izquierda extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones/botones_izquierda\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"izquierda\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
             },
             {
                 "nombre": "boton_de_control_derecha",
-                "codigo": "class boton_de_control_derecha extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones_derecha.png\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"derecha\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
+                "codigo": "class boton_de_control_derecha extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones/botones_derecha\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"derecha\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
             },
             {
                 "nombre": "boton_de_control_arriba",
-                "codigo": "class boton_de_control_arriba extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones_arriba.png\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"arriba\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
+                "codigo": "class boton_de_control_arriba extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones/botones_arriba\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"arriba\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
             },
             {
                 "nombre": "nave",
-                "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave_reposo.png\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.crear_animaciones();\n        this.animacion = \"nave_en_reposo\";\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    crear_animaciones() {\n        this.crear_animacion(\"nave_en_reposo\", [\"imagenes:nave_reposo.png\"], 2);\n\n        this.crear_animacion(\n            \"nave_avanzando\", [\"imagenes:nave_avanza_1.png\", \"imagenes:nave_avanza_2.png\"],\n            20\n        );\n\n        this.crear_animacion(\n            \"nave_girando_a_la_izquierda\", [\"imagenes:nave_izquierda_1.png\", \"imagenes:nave_izquierda_2.png\"],\n            20\n        );\n        this.crear_animacion(\n            \"nave_girando_a_la_derecha\", [\"imagenes:nave_derecha_1.png\", \"imagenes:nave_derecha_2.png\"],\n            20\n        );\n    }\n\n    actualizar() {\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.pilas.control.izquierda) {\n            this.rotacion += this.velocidad;\n            this.animacion = \"nave_girando_a_la_izquierda\";\n        }\n\n        if (this.pilas.control.derecha) {\n            this.rotacion -= this.velocidad;\n            this.animacion = \"nave_girando_a_la_derecha\";\n        }\n\n        if (\n            this.pilas.control.espacio &&\n            this.cuadros_desde_el_ultimo_disparo > 5\n        ) {\n            let laser = this.pilas.actores.laser();\n            laser.x = this.x;\n            laser.y = this.y;\n            laser.rotacion = this.rotacion;\n            laser.z = this.z + 1;\n            this.cuadros_desde_el_ultimo_disparo = 0;\n        }\n\n        if (this.pilas.control.arriba) {\n            this.avanzar(this.rotacion, this.velocidad);\n            this.animacion = \"nave_avanzando\";\n        } else {\n            if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {\n                this.animacion = \"nave_en_reposo\";\n            }\n        }\n    }\n}"
+                "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave/nave_reposo\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.crear_animaciones();\n        this.animacion = \"nave_en_reposo\";\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    crear_animaciones() {\n        this.crear_animacion(\"nave_en_reposo\", [\"imagenes:nave/nave_reposo\"], 2);\n\n        this.crear_animacion(\n            \"nave_avanzando\", [\"imagenes:nave/nave_avanza_1\", \"imagenes:nave/nave_avanza_2\"],\n            20\n        );\n\n        this.crear_animacion(\n            \"nave_girando_a_la_izquierda\", [\"imagenes:nave/nave_izquierda_1\", \"imagenes:nave/nave_izquierda_2\"],\n            20\n        );\n        this.crear_animacion(\n            \"nave_girando_a_la_derecha\", [\"imagenes:nave/nave_derecha_1\", \"imagenes:nave/nave_derecha_2\"],\n            20\n        );\n    }\n\n    actualizar() {\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.pilas.control.izquierda) {\n            this.rotacion += this.velocidad;\n            this.animacion = \"nave_girando_a_la_izquierda\";\n        }\n\n        if (this.pilas.control.derecha) {\n            this.rotacion -= this.velocidad;\n            this.animacion = \"nave_girando_a_la_derecha\";\n        }\n\n        if (\n            this.pilas.control.espacio &&\n            this.cuadros_desde_el_ultimo_disparo > 5\n        ) {\n            let laser = this.pilas.actores.laser();\n            laser.x = this.x;\n            laser.y = this.y;\n            laser.rotacion = this.rotacion;\n            laser.z = this.z + 1;\n            this.cuadros_desde_el_ultimo_disparo = 0;\n        }\n\n        if (this.pilas.control.arriba) {\n            this.avanzar(this.rotacion, this.velocidad);\n            this.animacion = \"nave_avanzando\";\n        } else {\n            if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {\n                this.animacion = \"nave_en_reposo\";\n            }\n        }\n    }\n}"
             },
             {
                 "nombre": "boton_de_control_abajo",
-                "codigo": "class boton_de_control_abajo extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones_abajo.png\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"abajo\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
+                "codigo": "class boton_de_control_abajo extends Actor {\n    propiedades = {\n        imagen: \"imagenes:botones/botones_abajo\",\n        z: -100\n    };\n\n    pulsado: boolean = false;\n\n    iniciar() {}\n\n    actualizar() {\n        if (this.pulsado) {\n            this.transparencia = 0;\n        } else {\n            this.transparencia = 50;\n        }\n\n        this.pilas.control.simular_pulsacion(\"abajo\", this.pulsado);\n    }\n\n    cuando_hace_click() {\n        this.pulsado = true;\n    }\n\n    cuando_sale() {\n        this.pulsado = false;\n    }\n\n    cuando_termina_de_hacer_click() {\n        this.pulsado = false;\n    }\n}"
             }
         ]
     },
@@ -45,13 +45,13 @@
             "camara_y": 0,
             "gravedad_x": 0,
             "gravedad_y": 1,
-            "fondo": "imagenes:fondo-plano.png",
+            "fondo": "imagenes:fondos/fondo-plano",
             "actores": [
                 {
                     "x": 340,
                     "y": -190,
                     "z": -100,
-                    "imagen": "imagenes:botones_a.png",
+                    "imagen": "imagenes:botones/botones_a",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -78,7 +78,7 @@
                     "x": -350,
                     "y": -190,
                     "z": -100,
-                    "imagen": "imagenes:botones_izquierda.png",
+                    "imagen": "imagenes:botones/botones_izquierda",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -105,7 +105,7 @@
                     "x": -170,
                     "y": -190,
                     "z": -100,
-                    "imagen": "imagenes:botones_derecha.png",
+                    "imagen": "imagenes:botones/botones_derecha",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -132,7 +132,7 @@
                     "x": -260,
                     "y": -98.5559566787004,
                     "z": -100,
-                    "imagen": "imagenes:botones_arriba.png",
+                    "imagen": "imagenes:botones/botones_arriba",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -159,7 +159,7 @@
                     "x": 3,
                     "y": 46,
                     "z": 0,
-                    "imagen": "imagenes:nave_reposo.png",
+                    "imagen": "imagenes:nave/nave_reposo",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -186,7 +186,7 @@
                     "x": -260,
                     "y": -190,
                     "z": -100,
-                    "imagen": "imagenes:botones_abajo.png",
+                    "imagen": "imagenes:botones/botones_abajo",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,

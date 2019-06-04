@@ -13,19 +13,19 @@
     "actores": [
       {
         "nombre": "plataforma",
-        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "plataforma",
-        "codigo": "class plataforma extends Actor {\n  propiedades = {\n    figura: \"rectangulo\",\n    imagen: \"imagenes:plataforma.png\",\n    etiqueta: \"plataforma\",\n    y: 0,\n    figura_ancho: 250,\n    figura_alto: 40,\n    figura_dinamica: false,\n    figura_rebote: 0\n  };\n\n  iniciar() {}\n}\n"
+        "codigo": "class plataforma extends Actor {\n  propiedades = {\n    figura: \"rectangulo\",\n    imagen: \"imagenes:plataformas/plataforma\",\n    etiqueta: \"plataforma\",\n    y: 0,\n    figura_ancho: 250,\n    figura_alto: 40,\n    figura_dinamica: false,\n    figura_rebote: 0\n  };\n\n  iniciar() {}\n}\n"
       },
       {
         "nombre": "plataforma1",
-        "codigo": "class plataforma1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        etiqueta: \"plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        etiqueta: \"plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "plataforma2",
-        "codigo": "class plataforma2 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataforma.png\",\n        etiqueta: \"plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class plataforma2 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        etiqueta: \"plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "texto",
@@ -33,23 +33,23 @@
       },
       {
         "nombre": "pared",
-        "codigo": "class pared extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:pared.png\",\n        y: 0,\n        figura_ancho: 20,\n        figura_alto: 600,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class pared extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/pared\",\n        y: 0,\n        figura_ancho: 20,\n        figura_alto: 600,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "pared1",
-        "codigo": "class pared1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:pared.png\",\n        y: 0,\n        figura_ancho: 20,\n        figura_alto: 600,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class pared1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/pared\",\n        y: 0,\n        figura_ancho: 20,\n        figura_alto: 600,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "techo",
-        "codigo": "class techo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:techo.png\",\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+        "codigo": "class techo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/techo\",\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
       },
       {
         "nombre": "caja",
-        "codigo": "class caja extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"imagenes:caja.png\",\n        etiqueta: \"caja\",\n        figura: \"rectangulo\",\n        figura_ancho: 45,\n        figura_alto: 45,\n        figura_rebote: 0.9\n    };\n\n    iniciar() {\n        this.aprender(\"arrastrable\");\n    }\n}"
+        "codigo": "class caja extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"imagenes:objetos/caja\",\n        etiqueta: \"caja\",\n        figura: \"rectangulo\",\n        figura_ancho: 45,\n        figura_alto: 45,\n        figura_rebote: 0.9\n    };\n\n    iniciar() {\n        this.aprender(\"arrastrable\");\n    }\n}"
       },
       {
         "nombre": "pelota",
-        "codigo": "class pelota extends Actor {\n  propiedades = {\n    imagen: \"imagenes:pelota.png\",\n    figura: \"circulo\",\n    figura_radio: 25\n  };\n\n  iniciar() {\n        this.aprender(\"arrastrable\");\n    }\n"
+        "codigo": "class pelota extends Actor {\n  propiedades = {\n    imagen: \"imagenes:objetos/pelota\",\n    figura: \"circulo\",\n    figura_radio: 25\n  };\n\n  iniciar() {\n        this.aprender(\"arrastrable\");\n    }\n"
       }
     ]
   },
@@ -59,13 +59,13 @@
       "id": 2,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondo-plano.png",
+      "fondo": "imagenes:fondos/fondo-plano",
       "actores": [
         {
           "x": -125,
           "y": -239,
           "z": 0,
-          "imagen": "imagenes:plataforma.png",
+          "imagen": "imagenes:plataformas/plataforma",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -91,7 +91,7 @@
           "x": 126,
           "y": -239,
           "z": 0,
-          "imagen": "imagenes:plataforma.png",
+          "imagen": "imagenes:plataformas/plataforma",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -117,7 +117,7 @@
           "x": 0,
           "y": 180,
           "z": 0,
-          "imagen": "imagenes:invisible.png",
+          "imagen": "imagenes:basicos/invisible",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -144,7 +144,7 @@
           "x": -258.30021141649047,
           "y": 71.88160676532769,
           "z": 0,
-          "imagen": "imagenes:pared.png",
+          "imagen": "imagenes:plataformas/pared",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -170,7 +170,7 @@
           "x": 259.69978858350953,
           "y": 51.88160676532769,
           "z": 0,
-          "imagen": "imagenes:pared.png",
+          "imagen": "imagenes:plataformas/pared",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -196,7 +196,7 @@
           "x": 29.598308668076072,
           "y": 260.4714587737843,
           "z": 0,
-          "imagen": "imagenes:techo.png",
+          "imagen": "imagenes:plataformas/techo",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -222,7 +222,7 @@
           "x": -99.36575052854121,
           "y": -31.712473572938677,
           "z": 0,
-          "imagen": "imagenes:caja.png",
+          "imagen": "imagenes:objetos/caja",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -248,7 +248,7 @@
           "x": -116.27906976744185,
           "y": -155.3911205073996,
           "z": 0,
-          "imagen": "imagenes:pelota.png",
+          "imagen": "imagenes:objetos/pelota",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,

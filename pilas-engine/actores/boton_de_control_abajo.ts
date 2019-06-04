@@ -1,6 +1,6 @@
 class boton_de_control_abajo extends Actor {
   propiedades = {
-    imagen: "imagenes:botones_abajo.png",
+    imagen: "imagenes:botones/botones_abajo",
     z: -100
   };
 

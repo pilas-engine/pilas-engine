@@ -13,19 +13,19 @@
         "actores": [
             {
                 "nombre": "nube",
-                "codigo": "class nube extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nube.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 1;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+                "codigo": "class nube extends Actor {\n    propiedades = {\n        imagen: \"imagenes:decoracion/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 1;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
             },
             {
                 "nombre": "nube1",
-                "codigo": "class nube1 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nube.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 2;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+                "codigo": "class nube1 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:decoracion/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 2;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
             },
             {
                 "nombre": "nube2",
-                "codigo": "class nube2 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nube.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 3;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+                "codigo": "class nube2 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:decoracion/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 3;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
             },
             {
                 "nombre": "nube3",
-                "codigo": "class nube3 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nube.png\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 2;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+                "codigo": "class nube3 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:decoracion/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 2;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
             }
         ]
     },
@@ -35,12 +35,12 @@
             "id": 2,
             "camara_x": 0,
             "camara_y": 0,
-            "fondo": "imagenes:fondo-cielo.png",
+            "fondo": "imagenes:fondos/fondo-cielo",
             "actores": [
                 {
                     "x": 133.21443736730362,
                     "y": 83.44798301486199,
-                    "imagen": "imagenes:nube.png",
+                    "imagen": "imagenes:decoracion/nube",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -64,7 +64,7 @@
                 {
                     "x": 217.92755212140202,
                     "y": -94.849537646295,
-                    "imagen": "imagenes:nube.png",
+                    "imagen": "imagenes:decoracion/nube",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -88,7 +88,7 @@
                 {
                     "x": -182.59703804253246,
                     "y": 194.53062764296112,
-                    "imagen": "imagenes:nube.png",
+                    "imagen": "imagenes:decoracion/nube",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,
@@ -112,7 +112,7 @@
                 {
                     "x": -206.9085134523685,
                     "y": -188.53548805951817,
-                    "imagen": "imagenes:nube.png",
+                    "imagen": "imagenes:decoracion/nube",
                     "centro_x": 0.5,
                     "centro_y": 0.5,
                     "rotacion": 0,

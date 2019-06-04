@@ -1,6 +1,6 @@
 class pelota extends Actor {
   propiedades = {
-    imagen: "imagenes:pelota.png",
+    imagen: "imagenes:objetos/pelota",
     figura: "circulo",
     figura_radio: 25
   };
