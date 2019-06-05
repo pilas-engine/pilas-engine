@@ -84,6 +84,40 @@
   .bg-fondo {
     background-color: #4a4d4e;
   }
+
+  .ember-power-select-trigger {
+    border: 1px solid #333434;
+    background-color: #454646;
+  }
+
+  .ember-power-select-multiple-option {
+    color: #c6c8c8;
+    background: #3c3c3c;
+    border: 1px solid #2a2a2a;
+  }
+
+  .ember-power-select-option[aria-current="true"] {
+    background-color: #5897fb;
+    color: #ffffff;
+  }
+
+  .ember-power-select-option[aria-selected="true"] {
+    background-color: #212121;
+    color: white;
+  }
+
+  .ember-power-select-option {
+    background-color: #424242;
+    color: #c6c8c8;
+  }
+
+  .ember-power-select-dropdown {
+    border-color: #2c2c2c;
+    border-radius: 0;
+  }
+  .ember-power-select-trigger-multiple-input {
+    color: #c6c8c8;
+  }
 }
 
 .theme-oscuro.bg-fondo {

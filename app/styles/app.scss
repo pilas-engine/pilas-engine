@@ -1,3 +1,4 @@
+@import "ember-power-select";
 @import "ui";
 @import "fuentes";
 @import "autocomplete";
@@ -9,5 +10,3 @@
 
 $ember-power-select-border-color: gray;
 $ember-power-select-border-radius: 0;
-
-@import "ember-power-select";

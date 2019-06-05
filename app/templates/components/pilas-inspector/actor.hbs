@@ -2,6 +2,8 @@
 
 {{#each propiedades as |propiedad|}}
 
+<div class="pb1">
+
   {{#if (eq propiedad.tipo "numero")}}
 
     {{pilas-propiedad/numero objeto=instancia_seleccionada
@@ -56,5 +58,7 @@
     </div>
 
   {{/if}}
+
+</div>
 
 {{/each}}
