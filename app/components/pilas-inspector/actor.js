@@ -7,6 +7,11 @@ export default Component.extend({
     // Solo los actores texto pueden cambiar de mensaje y solamente los
     // actores normales pueden cambiar de imagen.
 
+    propiedades.pushObject({
+      tipo: "cadena",
+      propiedad: "etiqueta"
+    });
+
     if (this.get("instancia_seleccionada.es_texto")) {
       propiedades.pushObject({
         tipo: "cadena",
@@ -27,6 +32,10 @@ export default Component.extend({
 
     propiedades.addObjects([
       {
+        tipo: "separador",
+        nombre: "Posición"
+      },
+      {
         tipo: "numero",
         propiedad: "x",
         intensidad: 1
@@ -41,23 +50,19 @@ export default Component.extend({
         propiedad: "z",
         intensidad: 1
       },
+
+      {
+        tipo: "separador",
+        nombre: "Comportamientos iniciales"
+      },
       {
         tipo: "habilidades",
         propiedad: "habilidades"
       },
+
       {
-        tipo: "cadena",
-        propiedad: "etiqueta"
-      },
-      {
-        tipo: "numero",
-        propiedad: "centro_x",
-        intensidad: 0.1
-      },
-      {
-        tipo: "numero",
-        propiedad: "centro_y",
-        intensidad: 0.1
+        tipo: "separador",
+        nombre: "Transformaciones"
       },
       {
         tipo: "numero",
@@ -70,14 +75,6 @@ export default Component.extend({
         intensidad: 0.01
       },
       {
-        tipo: "interruptor",
-        propiedad: "espejado"
-      },
-      {
-        tipo: "interruptor",
-        propiedad: "espejado_vertical"
-      },
-      {
         tipo: "numero",
         propiedad: "rotacion",
         intensidad: 1
@@ -88,6 +85,31 @@ export default Component.extend({
         intensidad: 1,
         min: 0,
         max: 100
+      },
+      {
+        tipo: "numero",
+        propiedad: "centro_x",
+        intensidad: 0.1
+      },
+      {
+        tipo: "numero",
+        propiedad: "centro_y",
+        intensidad: 0.1
+      },
+      {
+        tipo: "interruptor",
+        propiedad: "espejado",
+        nombreCorto: "Espejado Horizontal"
+      },
+      {
+        tipo: "interruptor",
+        propiedad: "espejado_vertical",
+        nombreCorto: "Espejado Vertical"
+      },
+
+      {
+        tipo: "separador",
+        nombre: "Simulación física"
       },
       {
         tipo: "combo",
@@ -110,6 +132,7 @@ export default Component.extend({
       {
         tipo: "numero",
         propiedad: "figura_ancho",
+        nombreCorto: "Ancho",
         intensidad: 1,
         min: 1,
         max: 1000
@@ -117,6 +140,7 @@ export default Component.extend({
       {
         tipo: "numero",
         propiedad: "figura_alto",
+        nombreCorto: "Alto",
         intensidad: 1,
         min: 1,
         max: 1000
@@ -124,6 +148,7 @@ export default Component.extend({
       {
         tipo: "numero",
         propiedad: "figura_radio",
+        nombreCorto: "Radio",
         intensidad: 1,
         min: 1,
         max: 1000
@@ -131,21 +156,25 @@ export default Component.extend({
       {
         tipo: "numero",
         propiedad: "figura_rebote",
+        nombreCorto: "Rebote",
         intensidad: 0.01,
         min: 0,
         max: 1.5
       },
       {
         tipo: "interruptor",
-        propiedad: "figura_dinamica"
+        propiedad: "figura_dinamica",
+        nombreCorto: "Dinámica"
       },
       {
         tipo: "interruptor",
-        propiedad: "figura_sin_rotacion"
+        propiedad: "figura_sin_rotacion",
+        nombreCorto: "Sin rotación"
       },
       {
         tipo: "interruptor",
-        propiedad: "figura_sensor"
+        propiedad: "figura_sensor",
+        nombreCorto: "¿Es sensor?"
       }
     ]);
 

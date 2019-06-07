@@ -1,26 +1,33 @@
-<div class="pb1 texto truncate h2"><div class="dib w4">{{etiqueta "nombre"}}</div> {{instancia_seleccionada.nombre}}</div>
+{{pilas-propiedad/nombre nombre=instancia_seleccionada.nombre}}
 
 {{#each propiedades as |propiedad|}}
 
-  {{#if (eq propiedad.tipo "numero")}}
+  <div class="pb1">
 
-    {{pilas-propiedad/numero objeto=instancia_seleccionada
-        min=propiedad.min
-        max=propiedad.max
-        propiedad=propiedad intensidad=propiedad.intensidad
-        modificarAtributo=cuando_modifica_atributo_de_escena}}
+    {{#if (eq propiedad.tipo "numero")}}
 
-  {{else if (eq propiedad.tipo "imagen")}}
+      {{pilas-propiedad/numero objeto=instancia_seleccionada
+          min=propiedad.min
+          max=propiedad.max
+          propiedad=propiedad intensidad=propiedad.intensidad
+          modificarAtributo=cuando_modifica_atributo_de_escena}}
 
-    {{pilas-propiedad/imagen objeto=instancia_seleccionada
-        propiedad=propiedad
-        filtroPropuesto=propiedad.filtroPropuesto
-        modificarAtributo=cuando_modifica_atributo_de_escena}}
+    {{else if (eq propiedad.tipo "imagen")}}
 
-  {{else}}
+      {{pilas-propiedad/imagen objeto=instancia_seleccionada
+          propiedad=propiedad
+          filtroPropuesto=propiedad.filtroPropuesto
+          modificarAtributo=cuando_modifica_atributo_de_escena}}
 
-    <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+    {{else if (eq propiedad.tipo "separador")}}
 
-  {{/if}}
+      {{pilas-propiedad/separador propiedad=propiedad}}
 
+    {{else}}
+
+      <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+
+    {{/if}}
+
+  </div>
 {{/each}}

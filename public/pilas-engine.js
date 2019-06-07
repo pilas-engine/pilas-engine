@@ -1011,7 +1011,7 @@ var Pilas = (function () {
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
-            pixelArt: true,
+            pixelArt: false,
             autostart: false,
             input: {
                 keyboard: true,
@@ -3271,7 +3271,6 @@ var ModoCargador = (function (_super) {
         this.barra_de_progreso.fillStyle(0xffffff, 1);
         this.barra_de_progreso.fillRect(this.x + 5, 220 + 5, 300 * progreso, 10);
         if (this.pilas.opciones.modo_simple) {
-            console.log("Progreso: " + progreso);
         }
         else {
             this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {

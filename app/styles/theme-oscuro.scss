@@ -16,6 +16,18 @@
     box-shadow: 0 0 0 2px #6fb5f1;
   }
 
+  .select {
+    color: #c6c8c8;
+    border: 1px solid #333434;
+    background-color: #454646;
+    padding: 2px;
+    outline: 0;
+  }
+
+  .select:focus {
+    color: white;
+  }
+
   .spinner-color-de-fondo {
     fill: white;
   }

@@ -203,7 +203,7 @@ class ModoCargador extends Modo {
     this.barra_de_progreso.fillRect(this.x + 5, 220 + 5, 300 * progreso, 10);
 
     if (this.pilas.opciones.modo_simple) {
-      console.log(`Progreso: ${progreso}`);
+      //console.log(`Progreso: ${progreso}`);
     } else {
       // TODO: eliminar esta señal
       this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {

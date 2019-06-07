@@ -1,6 +1,6 @@
-<div class="h2">
+<div class="flex pv1">
 
-  <div class="dib w4">
+  <div class="w-50">
 
     <div class="dib texto">
       {{etiqueta propiedad.propiedad}}
@@ -8,14 +8,15 @@
 
   </div>
 
-  <div class="dib w3 v-top">
+  <div class="w-50">
 
-    <select class="w104" onchange={{action "al_seleccionar" value="target.value"}}>
+    <select class="w-100 select" onchange={{action "al_seleccionar" value="target.value"}}>
       {{#each opciones as |opcion|}}
         <option value={{opcion.valor}} selected={{eq (get objeto propiedad.propiedad) opcion.valor}}>{{opcion.texto}}</option>
       {{/each}}
     </select>
 
   </div>
+
 
 </div>

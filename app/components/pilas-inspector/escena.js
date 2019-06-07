@@ -4,6 +4,10 @@ export default Component.extend({
   didInsertElement() {
     this.set("propiedades", [
       {
+        tipo: "separador",
+        nombre: "Cámara"
+      },
+      {
         tipo: "numero",
         propiedad: "camara_x",
         intensidad: 1
@@ -14,9 +18,17 @@ export default Component.extend({
         intensidad: 1
       },
       {
+        tipo: "separador",
+        nombre: "Apariencia"
+      },
+      {
         tipo: "imagen",
         propiedad: "fondo",
         filtroPropuesto: "fondo"
+      },
+      {
+        tipo: "separador",
+        nombre: "Simulación Física"
       },
       {
         tipo: "numero",

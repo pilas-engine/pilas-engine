@@ -1,13 +1,19 @@
 <div class="flex">
 
-  <div class="flex1">
-    <div class="texto pa1">
-      {{etiqueta propiedad.propiedad}}
+  <div class="w-50">
+    <div class="texto pv1">
+      {{#if propiedad.nombreCorto}}
+        {{etiqueta propiedad.nombreCorto}}
+      {{else}}
+        {{etiqueta propiedad.propiedad}}
+      {{/if}}
     </div>
   </div>
 
-  <div class="">
+  <div class="w-50">
     {{input-numero
+      min=propiedad.min
+      max=propiedad.max
       valor=(round (get objeto propiedad.propiedad))
       cuandoCambia=(action "modificar_desde_input" objeto propiedad.propiedad)
     }}
