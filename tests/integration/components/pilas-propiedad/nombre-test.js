@@ -3,19 +3,11 @@ import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
-module("Integration | Component | pilas-inspector/proyecto", function(hooks) {
+module("Integration | Component | pilas-propiedad/nombre", function(hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function(assert) {
-    this.set("instancia_seleccionada", {
-      ancho: 640,
-      alto: 480
-    });
-
-    await render(hbs`{{pilas-inspector/proyecto
-      instancia_seleccionada=instancia_seleccionada
-    }}`);
-
+    await render(hbs`{{pilas-propiedad/nombre}}`);
     assert.ok(this.element.textContent);
   });
 });
