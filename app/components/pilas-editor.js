@@ -8,6 +8,7 @@ import aplicar_nombre from "../utils/aplicar-nombre";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
 import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
 import { observer } from "@ember/object";
+import base64_encode from "../utils/base64-encode";
 
 export default Component.extend({
   bus: service(),
@@ -31,6 +32,7 @@ export default Component.extend({
   lista_de_eventos: null,
 
   hay_cambios_por_guardar: false,
+  tamaño_de_pantalla_del_proyecto: null,
 
   actualizar_titulo: observer("hay_cambios_por_guardar", function() {
     let titulo = "PilasEngine";
@@ -433,20 +435,17 @@ export default Component.extend({
         proyecto: resultado.proyecto_serializado
       };
 
-      function b64EncodeUnicode(str) {
-        return btoa(
-          encodeURIComponent(str).replace(
-            /%([0-9A-F]{2})/g,
-            function toSolidBytes(match, p1) {
-              return String.fromCharCode("0x" + p1);
-            }
-          )
-        );
+      let hash = base64_encode(datos);
+
+      let tamaño = `${this.proyecto.ancho}x${this.proyecto.alto}`;
+
+      if (this.tamaño_de_pantalla_del_proyecto !== tamaño) {
+        this.set("tamaño_de_pantalla_del_proyecto", tamaño);
+        this.bus.trigger("recargar_proyecto", hash, true);
+      } else {
+        this.bus.trigger("recargar_proyecto", hash, false);
       }
 
-      let hash = b64EncodeUnicode(JSON.stringify(datos));
-
-      this.bus.trigger("recargar_proyecto", hash);
       this.bus.trigger("ejecutar_proyecto", datos);
       this.bus.trigger("hacer_foco_en_pilas", {});
 

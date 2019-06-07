@@ -936,7 +936,32 @@ var Pilas = (function () {
                         ruta: "imagenes/sin_imagen.png"
                     }
                 ],
-                sonidos: [],
+                sonidos: [
+                    {
+                        nombre: "laser",
+                        ruta: "sonidos/laser.wav"
+                    },
+                    {
+                        nombre: "moneda",
+                        ruta: "sonidos/moneda.wav"
+                    },
+                    {
+                        nombre: "salto-corto",
+                        ruta: "sonidos/salto-corto.wav"
+                    },
+                    {
+                        nombre: "salto-largo",
+                        ruta: "sonidos/salto-largo.wav"
+                    },
+                    {
+                        nombre: "seleccion-aguda",
+                        ruta: "sonidos/seleccion-aguda.wav"
+                    },
+                    {
+                        nombre: "seleccion-grave",
+                        ruta: "sonidos/seleccion-grave.wav"
+                    }
+                ],
                 fuentes: [
                     {
                         nombre: "font",

@@ -49,27 +49,10 @@ class ModoCargador extends Modo {
 
     this.load.multiatlas("imagenes", "imagenes.json", "./");
 
-    /*
-    for (let i = 0; i < this.pilas.recursos.imagenes.length; i++) {
-      let item = this.pilas.recursos.imagenes[i];
-      this.load.image(item.nombre, item.ruta);
-    }
-    */
-
     for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
       let sonido = this.pilas.recursos.sonidos[i];
       this.load.audio(sonido.nombre, sonido.ruta, {});
     }
-
-    /*
-    this.load.atlas({
-      key: "spritesheet",
-      texture: "imagenes_agrupadas/spritesheet.png",
-      data: "imagenes_agrupadas/spritesheet.json"
-    });
-
-;
-    */
 
     for (let i = 0; i < this.pilas.recursos.fuentes.length; i++) {
       let fuente = this.pilas.recursos.fuentes[i];

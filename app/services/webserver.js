@@ -1,7 +1,8 @@
 import Service from "@ember/service";
 import { Promise } from "rsvp";
 import { inject as service } from "@ember/service";
-import fixture from "../fixtures/proyecto-serializado-para-webserver";
+import base64_encode from "../utils/base64-encode";
+import proyecto_inicial_webserver from "../fixtures/proyecto-inicial-webserver";
 
 /**
  * Este servicio se encarga de levantar un servidor web para presentar
@@ -68,10 +69,8 @@ export default Service.extend({
   },
 
   generar_proyecto_inicial() {
-    // TODO: hay varios actores, código e incluso una escena que no se
-    //       usan de este proyecto, habría que simplificarlo y volver a serializar.
-    let proyecto = fixture.proyecto;
-    this.set("proyecto_serializado", proyecto);
+    let proyecto = proyecto_inicial_webserver;
+    this.set("proyecto_serializado", base64_encode(proyecto));
   },
 
   iniciar_servidor(puerto) {
@@ -129,6 +128,10 @@ export default Service.extend({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <script>
+          var proyecto_serializado_inicial = "${this.obtener_codigo_del_proyecto()}";
+        </script>
+
+        <script>
           ${codigo_live_reload}
         </script>
 
@@ -142,8 +145,6 @@ export default Service.extend({
       </head>
 
       <body>
-        <textarea class="dn">${this.obtener_codigo_del_proyecto()}</textarea>
-
         <script>
           function b64DecodeUnicode(str) {
             return decodeURIComponent(atob(str).split('').map(function(c) {
@@ -199,9 +200,9 @@ export default Service.extend({
     `;
   },
 
-  recargar_proyecto(datos) {
+  recargar_proyecto(datos, debe_hacer_hard_refesh) {
     this.set("proyecto_serializado", datos);
-    this.generar_tick(false);
+    this.generar_tick(debe_hacer_hard_refesh);
   },
 
   obtener_codigo_del_proyecto() {
@@ -212,7 +213,7 @@ export default Service.extend({
     return `
       var ha_iniciado = false;
 
-      var proyecto = JSON.parse(b64DecodeUnicode(document.querySelector("textarea").value));
+      var proyecto = JSON.parse(b64DecodeUnicode(proyecto_serializado_inicial));
       var pilas = pilasengine.iniciar(proyecto.proyecto.ancho*1, proyecto.proyecto.alto);
 
       pilas.onready = function() {
@@ -279,6 +280,8 @@ export default Service.extend({
 
                   setTimeout(function() {
                     var proyecto = JSON.parse(b64DecodeUnicode(data.proyecto));
+                    console.log(proyecto);
+
                     proyecto.pilas = pilas;
                     pilas.definir_modo("ModoEjecucion", proyecto);
                   }, 500)
