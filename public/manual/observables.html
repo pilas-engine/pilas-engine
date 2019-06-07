@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>El intérprete · Manual de Pilas Engine 2</title>
+        <title>Observables · Manual de Pilas Engine 2</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="automatas_y_estados.html" />
+    <link rel="next" href="angulos-distancias.html" />
     
     
-    <link rel="prev" href="primeros_pasos.html" />
+    <link rel="prev" href="azar.html" />
     
 
     </head>
@@ -115,7 +115,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="interprete.html">
+        <li class="chapter " data-level="1.3" data-path="interprete.html">
             
                 <a href="interprete.html">
             
@@ -193,7 +193,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="observables.html">
+        <li class="chapter active" data-level="1.9" data-path="observables.html">
             
                 <a href="observables.html">
             
@@ -334,7 +334,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >El intérprete</a>
+        <a href="." >Observables</a>
     </h1>
 </div>
 
@@ -349,45 +349,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="el-int&#xE9;rprete">El int&#xE9;rprete</h1>
-<p>Cuando se habla de programaci&#xF3;n generalmente se dice que la computadora sigue nuestras &#xF3;rdenes, que podemos pedirle que haga lo que nosotros queremos y de qu&#xE9; forma tiene que hacer cada cosa.</p>
-<p>Eso es cierto, de hecho, por eso para controlar las computadores tenemos que aprender al menos un &quot;lenguaje&quot; (como javascript) que entienda la computadora para poder pedirle cosas.</p>
-<p>El int&#xE9;rprete es como un &quot;canal de chat&quot;, en donde podemos comunicarnos directamente con la computadora y esperar respuestas.</p>
-<p>Para mostrar brevemente lo que puede hacer el int&#xE9;rprete puls&#xE1; el bot&#xF3;n &quot;Ejecutar&quot;, para poner el juego en funcionamiento y luego abr&#xED; el int&#xE9;rprete:</p>
-<p><img src="interprete.assets/image-20181225155449714-5764089.png" alt="image-20181225155449714"></p>
-<p>Justo a la derecha de esa flechita az&#xFA;l, escrib&#xED; un mensaje algunos mensajes para ver si la computadora comprende lo que le pedimos:</p>
-<pre><code>2+2
-1231244123+399120930
-</code></pre><p>El int&#xE9;rprete va a responder a cada una de las cuentas con el resultado, como si fuera una calculadora aritm&#xE9;tica.</p>
-<p>Sin embargo, hace m&#xE1;s que eso, si le pedimos incorrectamente algo nos dar&#xE1; un mensaje de error:</p>
-<pre><code>2 + numero
-</code></pre><p><img src="interprete.assets/image-20181225160605415-5764765.png" alt="image-20181225160605415"></p>
-<p>Y esto est&#xE1; bien, si bien el texto rojo parece algo grave, no lo es. La computadora nos explica que no sabe de que se trata &quot;numero&quot; y por lo tanto no sabr&#xED;a decirnos el resultado de esa cuenta.</p>
-<p>Si le indicamos que el &quot;numero&quot; es, por ejemplo <code>10</code> s&#xED; va a poder decirnos el resultado:</p>
-<pre><code>numero = 10
-2 + numero
-</code></pre><p><img src="interprete.assets/image-20181225160853765-5764933.png" alt="image-20181225160853765"></p>
-<p>&#xA1;Claro!, el resultado es <code>12</code> ya que creamos una variable llamada &quot;numero&quot; con el valor de 10.</p>
-<h2 id="accediendo-a-las-variables-pilas-y-actores">Accediendo a las variables pilas y actores</h2>
-<p>Ahora bien, el int&#xE9;rprete no solo puede realizar cuentas aritm&#xE9;ticas, tambi&#xE9;n puede colocar objetos en la pantalla del juego, nos permite realizar pruebas y tambi&#xE9;n cambiar cosas.</p>
-<p>Existe una variable declarada por el propio entorno llama &quot;pilas&quot;. Esta variable nos permite acceder a toda la funcionalidad de pilas de forma &quot;program&#xE1;tica&quot;.</p>
-<p>Hagamos una prueba, escrib&#xED;:</p>
-<pre><code>nave = pilas.actores.nave()
-</code></pre><p><img src="interprete.assets/image-20181225161330731-5765210.png" alt="image-20181225161330731"></p>
-<p>Cuando pulses &quot;enter&quot; deber&#xE1;n pasar dos cosas. Por un lado, aparecer&#xE1; un actor nuevo en la pantalla y por el otro, el int&#xE9;rprete nos dir&#xE1; <code>&lt;nave en (0, 0)&gt;</code>:</p>
-<p><img src="interprete.assets/image-20181225161717860-5765437.png" alt="image-20181225161717860"></p>
-<p>Si haces click en la pantalla, vas a notar que la nave est&#xE1; &quot;viva&quot;, se puede mover y disparar usando el teclado.</p>
-<p>Sin embargo, tambi&#xE9;n se va a poder controlar desde el int&#xE9;rprete, usando c&#xF3;digo.</p>
-<p>Escrib&#xED; lo siguiente para realizar m&#xE1;s pruebas:</p>
-<pre><code>nave.escala = 2
-nave.rotacion = 90
-nave.decir(&quot;hola&quot;)
-</code></pre><p><img src="interprete.assets/image-20181225161954962-5765595.png" alt="image-20181225161954962"></p>
-<p>Esto es bastante &#xFA;til, porque el c&#xF3;digo que escribimos en el int&#xE9;rprete tambi&#xE9;n se puede trasladar al editor. Si tenemos dudas sobre alguna funci&#xF3;n o forma de hacer algo en pilas podemos probar en el int&#xE9;rprete, y si todo sale bien, llevarlo al editor y que forma parte de nuestro juego.</p>
-<p>Tambi&#xE9;n existe otra variable llamada &quot;actores&quot; desde donde podemos acceder a otros actores en la escena. Para usar esta variable simplemente escrib&#xED; &quot;actores.&quot; seguido del nombre del actor que quieras programar.</p>
-<p>Vas a notar que el int&#xE9;rprete viene con una funcionalidad completado de c&#xF3;digo bastante &#xFA;til, as&#xED; que no hace falta escribir todas las letras cada vez.</p>
-<p>Por ejemplo, en mi caso, tengo una escena con 3 actores, as&#xED; que el int&#xE9;rprete ya me adelanta c&#xF3;mo se llaman esos actores con su completado de c&#xF3;digo:</p>
-<p><img src="interprete.assets/image-20181225162435049-5765875.png" alt="image-20181225162435049"></p>
+                                <h1 id="observables">Observables</h1>
+<p>Los observables te permiten visualizar r&#xE1;pidamente en pantalla qu&#xE9; valor tienen los atributos, variables o expresiones dentro de un juego.</p>
+<p>Por ejemplo, imagina que tu juego tiene un personaje que interact&#xFA;a con la posici&#xF3;n <code>x</code> e <code>y</code> del cursor del mouse. Mediante observables vas a poder agregar un visor de variables como este:</p>
+<p><img src="observables.assets/observables.png" alt="observables"></p>
+<p>Es super importante poder visualizar r&#xE1;pidamente variables en un juego, no solo para informarse sino tambi&#xE9;n para detectar errores o incluso saber si estamos accediendo a la informaci&#xF3;n correcta.</p>
+<p>Los observables se pueden crear mediante una llamada a la funci&#xF3;n <code>pilas.observable</code> enviando un nombre (a elecci&#xF3;n tuya) y una variable para observar, por ejemplo:</p>
+<pre><code class="lang-typescript">actualizar() {
+  <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;cursor_x&quot;</span>, <span class="hljs-keyword">this</span>.pilas.cursor_x);
+  <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;cursor_y&quot;</span>, <span class="hljs-keyword">this</span>.pilas.cursor_y);
+  <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;&#xBF;pulsa la tecla arriba?&quot;</span>, <span class="hljs-keyword">this</span>.pilas.control.arriba);
+}
+</code></pre>
+<p>Ten en cuenta que los observables se tienen que crear siempre desde funciones <code>actualizar</code>, ya sea de actores o de la escena, porque esa es la &#xFA;nica forma de que pilas pueda saber el valor m&#xE1;s reciente de esas variables.</p>
+<p>Otro ejemplo &#xFA;til, ser&#xED;a poder saber la posici&#xF3;n exacta de un actor que hemos creado. Incluso podemos imprimir otros atributos menos visibles como la rotaci&#xF3;n o la velocidad vertical:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> un_actor extends Actor {
+  iniciar() {
+    <span class="hljs-keyword">this</span>.x = <span class="hljs-number">-100</span>;
+    <span class="hljs-keyword">this</span>.y = <span class="hljs-number">70</span>;
+  }
+
+  actualizar() {
+    <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;mi actor&quot;</span>, <span class="hljs-keyword">this</span>)
+    <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;rotaci&#xF3;n&quot;</span>, <span class="hljs-keyword">this</span>.rotacion)
+  }
+}
+</code></pre>
+<p>Si buscas un ejemplo aplicado de observables abr&#xED; el ejemplo angulos:</p>
+<p><img src="observables.assets/ejemplo-observable.png" alt="ejemplo-observable"></p>
 
                                 
                                 </section>
@@ -415,12 +404,12 @@ nave.decir(&quot;hola&quot;)
 
             
                 
-                <a href="primeros_pasos.html" class="navigation navigation-prev " aria-label="Previous page: Primeros pasos">
+                <a href="azar.html" class="navigation navigation-prev " aria-label="Previous page: Azar o cálculos aleatorios">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="automatas_y_estados.html" class="navigation navigation-next " aria-label="Next page: Autómatas y estados">
+                <a href="angulos-distancias.html" class="navigation navigation-next " aria-label="Next page: Angulos y distancias">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -431,7 +420,7 @@ nave.decir(&quot;hola&quot;)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"El intérprete","level":"1.3","depth":1,"next":{"title":"Autómatas y estados","level":"1.4","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"previous":{"title":"Primeros pasos","level":"1.2","depth":1,"path":"primeros_pasos.md","ref":"primeros_pasos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"interprete.md","mtime":"2019-05-11T00:43:53.107Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-04T04:42:14.081Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Observables","level":"1.9","depth":1,"next":{"title":"Angulos y distancias","level":"1.10","depth":1,"path":"angulos-distancias.md","ref":"angulos-distancias.md","articles":[]},"previous":{"title":"Azar o cálculos aleatorios","level":"1.8","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"observables.md","mtime":"2019-05-26T13:39:35.612Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-04T04:42:14.081Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
