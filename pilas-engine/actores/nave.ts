@@ -50,12 +50,7 @@ class nave extends Actor {
       this.pilas.control.espacio &&
       this.cuadros_desde_el_ultimo_disparo > 5
     ) {
-      let laser = this.pilas.actores.laser();
-      laser.x = this.x;
-      laser.y = this.y;
-      laser.rotacion = this.rotacion;
-      laser.z = this.z + 1;
-      this.cuadros_desde_el_ultimo_disparo = 0;
+      this.disparar();
     }
 
     if (this.pilas.control.arriba) {
@@ -66,5 +61,14 @@ class nave extends Actor {
         this.animacion = "nave_en_reposo";
       }
     }
+  }
+
+  disparar() {
+    let laser = this.pilas.actores.laser();
+    laser.x = this.x;
+    laser.y = this.y;
+    laser.rotacion = this.rotacion;
+    laser.z = this.z + 1;
+    this.cuadros_desde_el_ultimo_disparo = 0;
   }
 }
