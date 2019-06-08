@@ -19,6 +19,7 @@ module.exports = function(defaults) {
   app.import("vendor/beautify.js");
   app.import("vendor/auto-complete.js");
   app.import("vendor/FileSaver.js");
+  app.import("vendor/scrollbooster.js");
 
   return app.toTree();
 };

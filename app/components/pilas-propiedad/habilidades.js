@@ -9,7 +9,10 @@ export default Component.extend({
       "rotar constantemente",
       "moverse con el teclado",
       "seguir al mouse lentamente",
-      "seguir al mouse"
+      "seguir al mouse",
+      "oscilar verticalmente",
+      "oscilar rotacion",
+      "oscilar transparencia"
     ]);
   },
   actions: {
