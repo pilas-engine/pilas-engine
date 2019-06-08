@@ -19,6 +19,7 @@ module.exports = {
     esperar: true,
     pulsar: true,
     autoComplete: true,
+    ScrollBooster: true,
     ga: true,
     hacerClick: true,
     esperarElemento: true,
