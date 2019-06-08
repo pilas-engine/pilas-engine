@@ -14,13 +14,7 @@ export default Component.extend({
   estado: null,
   contexto: null,
   mantenerFoco: false,
-  classNames: [
-    "flex1",
-    "flex",
-    "overflow-hidden",
-    "unseletable",
-    "bg-fondo-canvas"
-  ],
+  classNames: ["flex1", "flex", "overflow-hidden", "unseletable", "bg-fondo-canvas"],
   classNameBindings: ["altoFijo:h250"],
   altoFijo: false,
   porcentajeDeCarga: 0,
@@ -30,9 +24,7 @@ export default Component.extend({
     let iframe = this.element.querySelector("iframe");
 
     if (!this.get("recursos.data")) {
-      throw Error(
-        "No se inicializó el servicio recursos. Tienes que llamar a iniciar antes."
-      );
+      throw Error("No se inicializó el servicio recursos. Tienes que llamar a iniciar antes.");
     }
 
     iframe.onload = () => {
@@ -54,50 +46,22 @@ export default Component.extend({
 
       contexto.postMessage(data, utils.HOST);
 
-      window.addEventListener(
-        "message",
-        this.funcionParaAtenderMensajes,
-        false
-      );
+      window.addEventListener("message", this.funcionParaAtenderMensajes, false);
 
       this.bus.on("cargar_escena", this, "cargar_escena");
       this.bus.on("finaliza_carga", this, "finaliza_carga");
       this.bus.on("ejecutar_escena", this, "ejecutar_escena");
       this.bus.on("ejecutar_proyecto", this, "ejecutar_proyecto");
       this.bus.on("pausar_escena", this, "pausar_escena");
-      this.bus.on(
-        "cambiar_posicion_desde_el_editor",
-        this,
-        "cambiar_posicion_desde_el_editor"
-      );
-      this.bus.on(
-        "selecciona_actor_desde_el_editor",
-        this,
-        "selecciona_actor_desde_el_editor"
-      );
-      this.bus.on(
-        "actualizar_actor_desde_el_editor",
-        this,
-        "actualizar_actor_desde_el_editor"
-      );
-      this.bus.on(
-        "actualizar_escena_desde_el_editor",
-        this,
-        "actualizar_escena_desde_el_editor"
-      );
-      this.bus.on(
-        "actualizar_proyecto_desde_el_editor",
-        this,
-        "actualizar_proyecto_desde_el_editor"
-      );
+      this.bus.on("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
+      this.bus.on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
+      this.bus.on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
+      this.bus.on("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
+      this.bus.on("actualizar_proyecto_desde_el_editor", this, "actualizar_proyecto_desde_el_editor");
 
       this.bus.on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
       this.bus.on("progreso_de_carga", this, "progreso_de_carga");
-      this.bus.on(
-        "eliminar_actor_desde_el_editor",
-        this,
-        "eliminar_actor_desde_el_editor"
-      );
+      this.bus.on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
     };
   },
 
@@ -115,38 +79,14 @@ export default Component.extend({
     this.bus.off("ejecutar_escena", this, "ejecutar_escena");
     this.bus.off("ejecutar_proyecto", this, "ejecutar_proyecto");
     this.bus.off("pausar_escena", this, "pausar_escena");
-    this.bus.off(
-      "cambiar_posicion_desde_el_editor",
-      this,
-      "cambiar_posicion_desde_el_editor"
-    );
-    this.bus.off(
-      "selecciona_actor_desde_el_editor",
-      this,
-      "selecciona_actor_desde_el_editor"
-    );
-    this.bus.off(
-      "actualizar_actor_desde_el_editor",
-      this,
-      "actualizar_actor_desde_el_editor"
-    );
-    this.bus.off(
-      "actualizar_escena_desde_el_editor",
-      this,
-      "actualizar_escena_desde_el_editor"
-    );
-    this.bus.off(
-      "actualizar_proyecto_desde_el_editor",
-      this,
-      "actualizar_proyecto_desde_el_editor"
-    );
+    this.bus.off("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
+    this.bus.off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
+    this.bus.off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
+    this.bus.off("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
+    this.bus.off("actualizar_proyecto_desde_el_editor", this, "actualizar_proyecto_desde_el_editor");
     this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
     this.bus.off("progreso_de_carga", this, "progreso_de_carga");
-    this.bus.off(
-      "eliminar_actor_desde_el_editor",
-      this,
-      "eliminar_actor_desde_el_editor"
-    );
+    this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
   },
 
   widthParaElModoZoomEnviado: computed("modoZoom", "ancho", function() {
@@ -207,12 +147,7 @@ export default Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  ejecutar_proyecto({
-    proyecto,
-    nombre_de_la_escena_inicial,
-    codigo,
-    permitir_modo_pausa
-  }) {
+  ejecutar_proyecto({ proyecto, nombre_de_la_escena_inicial, codigo, permitir_modo_pausa }) {
     let data = {
       tipo: "ejecutar_proyecto",
       proyecto: proyecto,
@@ -350,11 +285,7 @@ export default Component.extend({
     }
 
     if (e.data.tipo === "termina_de_iniciar_ejecucion") {
-      this.bus.trigger(
-        "cuando_termina_de_iniciar_ejecucion",
-        contexto.pilasengine,
-        contexto
-      );
+      this.bus.trigger("cuando_termina_de_iniciar_ejecucion", contexto.pilasengine, contexto);
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {

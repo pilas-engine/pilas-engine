@@ -45,15 +45,7 @@ export default Component.extend({
   }),
 
   didInsertElement() {
-    this.set("lista_de_eventos", [
-      "finaliza_carga",
-      "error",
-      "termina_de_mover_un_actor",
-      "comienza_a_mover_un_actor",
-      "inicia_modo_depuracion_en_pausa",
-      "cuando_cambia_posicion_dentro_del_modo_pausa",
-      "pulsa_la_tecla_escape"
-    ]);
+    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
@@ -70,26 +62,17 @@ export default Component.extend({
     this.bus.trigger("hacer_foco_en_pilas", {});
   },
 
-  debe_expandir_el_panel_de_previsualizacion: computed(
-    "expandirJuego",
-    "mostrarEditor",
-    "mostrarPropiedades",
-    function() {
-      if (this.mostrarEditor) {
-        return this.expandirJuego;
-      } else {
-        return true;
-      }
+  debe_expandir_el_panel_de_previsualizacion: computed("expandirJuego", "mostrarEditor", "mostrarPropiedades", function() {
+    if (this.mostrarEditor) {
+      return this.expandirJuego;
+    } else {
+      return true;
     }
-  ),
+  }),
 
-  puede_intentar_expandir_el_panel_de_previsualizacion: computed(
-    "mostrarEditor",
-    "mostrarPropiedades",
-    function() {
-      return this.mostrarEditor;
-    }
-  ),
+  puede_intentar_expandir_el_panel_de_previsualizacion: computed("mostrarEditor", "mostrarPropiedades", function() {
+    return this.mostrarEditor;
+  }),
 
   existe_actor_o_escena_con_id(id) {
     let escena = this.obtenerDetalleDeEscenaPorIndice(id);
@@ -221,10 +204,14 @@ export default Component.extend({
     this.set("hay_cambios_por_guardar", true);
 
     let escenaActual = this.obtener_la_escena_actual();
-    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(
-      escenaActual
-    );
+    let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
     this.set("proyecto.escenas", escenasSinLaEscenaActual);
+
+    let codigo = this.proyecto.codigos.escenas.findBy("nombre", escenaActual.nombre);
+
+    if (codigo) {
+      this.proyecto.codigos.escenas.removeObject(codigo);
+    }
 
     if (this.el_proyecto_no_tiene_escena()) {
       this.send("agregarEscena", this.proyecto);
@@ -244,6 +231,12 @@ export default Component.extend({
     let actor = escenaActual.actores.findBy("id", id);
     this.bus.trigger("eliminar_actor_desde_el_editor", { id: actor.id });
     escenaActual.actores.removeObject(actor);
+
+    let codigo = this.proyecto.codigos.actores.findBy("nombre", actor.nombre);
+
+    if (codigo) {
+      this.proyecto.codigos.actores.removeObject(codigo);
+    }
 
     if (this.tiene_actores(escenaActual)) {
       this.seleccionar_primer_actor_de_la_escena(escenaActual);
@@ -374,7 +367,7 @@ export default Component.extend({
           camara_y: 0,
           gravedad_x: 0,
           gravedad_y: 1,
-          fondo: "plano",
+          fondo: "imagenes:fondos/fondo-plano",
           actores: []
         })
       );

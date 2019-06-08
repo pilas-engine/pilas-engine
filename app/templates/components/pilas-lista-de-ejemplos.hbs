@@ -2,13 +2,13 @@
 
 {{#if ejemplos.tarea.last.isRunning}}
   {{#each (range 0 11)}}
-    <div class="dib">
+    <div class="dib v-top">
       <div class="relative bg-light-gray ml1 mt1" style="width: 180px; height: 140px;"></div>
     </div>
   {{/each}}
 {{else}}
   {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
-    {{#link-to "ejemplos.ver" ejemplo.nombre tagName="div" class="dib pointer"}}
+    {{#link-to "ejemplos.ver" ejemplo.nombre tagName="div" class="dib pointer v-top"}}
       <div class="relative unselectable ma1" style="width: 180px; height: 140px;">
         <div class="sprite {{ejemplo.nombre}}"></div>
 

@@ -77,20 +77,14 @@ class Pilas {
     this.opciones = opciones;
 
     if (!recursos) {
-      throw Error(
-        "No se puede iniciar phaser sin especificar una lista de recursos"
-      );
+      throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
     }
 
     this._ancho = ancho;
     this._alto = alto;
 
     this.recursos = recursos;
-    var configuracion = this.crear_configuracion(
-      ancho,
-      alto,
-      opciones.maximizar
-    );
+    var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar);
 
     // Opción para simular una espera o demora al iniciar el componente de
     // pilas, se utiliza desde el editor cuando corren los tests.
@@ -188,9 +182,7 @@ class Pilas {
   }
 
   ejecutar() {
-    console.warn(
-      "La función pilas.ejecutar() entró en desuso, no hace falta invocarla."
-    );
+    console.warn("La función pilas.ejecutar() entró en desuso, no hace falta invocarla.");
   }
 
   definir_modo(nombre: string, datos) {
@@ -234,7 +226,7 @@ class Pilas {
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: false, // true es más rápido
+      pixelArt: true, // true es más rápido
       autostart: false,
       input: {
         keyboard: true,
@@ -310,10 +302,7 @@ class Pilas {
   }
 
   obtener_actores_en(_x: number, _y: number) {
-    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      _x,
-      _y
-    );
+    let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
     let actores = this.obtener_actores();
 
     return actores.filter(actor => {
@@ -352,9 +341,7 @@ class Pilas {
    */
   azar(desde: number, hasta: number) {
     if (desde > hasta) {
-      throw Error(
-        `Rango inválido, el número desde (${desde} en este caso) debe ser menor al hasta (${hasta}).`
-      );
+      throw Error(`Rango inválido, el número desde (${desde} en este caso) debe ser menor al hasta (${hasta}).`);
     }
     return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
   }
@@ -367,12 +354,7 @@ class Pilas {
   }
 
   obtener_distancia_entre_actores(actor1: ActorBase, actor2: ActorBase) {
-    return this.obtener_distancia_entre_puntos(
-      actor1.x,
-      actor1.y,
-      actor2.x,
-      actor2.y
-    );
+    return this.obtener_distancia_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
   }
 
   obtener_angulo_entre_puntos(x: number, y: number, x2: number, y2: number) {
@@ -392,12 +374,7 @@ class Pilas {
   }
 
   obtener_angulo_entre_actores(actor1: ActorBase, actor2: ActorBase) {
-    return this.obtener_angulo_entre_puntos(
-      actor1.x,
-      actor1.y,
-      actor2.x,
-      actor2.y
-    );
+    return this.obtener_angulo_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
   }
 
   ocultar_cursor() {

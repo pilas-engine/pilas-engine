@@ -1081,7 +1081,7 @@ var Pilas = (function () {
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
-            pixelArt: false,
+            pixelArt: true,
             autostart: false,
             input: {
                 keyboard: true,
