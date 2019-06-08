@@ -12,14 +12,6 @@ export default Service.extend({
     yield timeout(500);
 
     let metadata = yield this.obtenerActores();
-    /*
-    jQuery.ajax({
-      mimeType: "application/json",
-      dataType: "json",
-      url: `${config.rootURL}actores.json`
-    });
-    */
-
     let codigo_del_actor_base = metadata.actores[0].codigo;
 
     let propiedades_base = this.extraer_diccionario(

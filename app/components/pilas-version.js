@@ -2,7 +2,7 @@ import { computed } from "@ember/object";
 import Component from "@ember/component";
 import config from "../config/environment";
 import { task, timeout } from "ember-concurrency";
-import jQuery from "jquery";
+import { Promise } from "rsvp";
 
 const {
   APP: { version }
@@ -34,7 +34,7 @@ export default Component.extend({
     yield timeout(1000);
 
     try {
-      let data = yield jQuery.ajax({ url: url });
+      let data = yield this.obtener_datos_desde_github(url);
       this.set("version_en_el_servidor", data.tag_name);
       this.set("actualizada", "v" + this.version >= data.tag_name);
     } catch (e) {
@@ -42,5 +42,24 @@ export default Component.extend({
     } finally {
       this.set("consultando", false);
     }
-  })
+  }),
+
+  obtener_datos_desde_github(url) {
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open("GET", url);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          reject(xhr.status);
+        }
+      };
+
+      xhr.send();
+    });
+  }
 });
