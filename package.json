@@ -21,6 +21,11 @@
     "actualizar_actores": "node scripts/actualizar-actores.js",
     "actualizar_actores_live": "node scripts/actualizar-actores-live.js"
   },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": false,
+    "printWidth": 300
+  },
   "main": "electron.js",
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
