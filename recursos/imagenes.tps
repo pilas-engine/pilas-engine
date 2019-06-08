@@ -240,6 +240,26 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">imagenes/bmo/bmo_agachado.png</key>
+            <key type="filename">imagenes/bmo/bmo_camina_1.png</key>
+            <key type="filename">imagenes/bmo/bmo_camina_2.png</key>
+            <key type="filename">imagenes/bmo/bmo_celebra.png</key>
+            <key type="filename">imagenes/bmo/bmo_escala_1.png</key>
+            <key type="filename">imagenes/bmo/bmo_escala_2.png</key>
+            <key type="filename">imagenes/bmo/bmo_parado.png</key>
+            <key type="filename">imagenes/bmo/bmo_salta.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,24,48,48</rect>
+                <key>scale9Paddings</key>
+                <rect>24,24,48,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">imagenes/cartas/carta.png</key>
             <key type="filename">imagenes/cartas/carta_azul.png</key>
             <key type="filename">imagenes/cartas/carta_verde.png</key>
@@ -318,6 +338,19 @@
                 <rect>19,23,37,45</rect>
                 <key>scale9Paddings</key>
                 <rect>19,23,37,45</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">imagenes/cursores/cursor_circular.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>18,18,36,36</rect>
+                <key>scale9Paddings</key>
+                <rect>18,18,36,36</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -572,6 +605,25 @@
             <key type="filename">imagenes/fondos/fondo-cesped_2.png</key>
             <key type="filename">imagenes/fondos/fondo-cielo.png</key>
             <key type="filename">imagenes/fondos/fondo-tierra_1.png</key>
+            <key type="filename">imagenes/objetos/corazon_completo.png</key>
+            <key type="filename">imagenes/objetos/corazon_medio.png</key>
+            <key type="filename">imagenes/objetos/corazon_vacio.png</key>
+            <key type="filename">imagenes/objetos/diamante_azul.png</key>
+            <key type="filename">imagenes/objetos/diamante_rojo.png</key>
+            <key type="filename">imagenes/objetos/diamante_verde.png</key>
+            <key type="filename">imagenes/objetos/engranaje.png</key>
+            <key type="filename">imagenes/objetos/llave.png</key>
+            <key type="filename">imagenes/plataformas/bloque_azul.png</key>
+            <key type="filename">imagenes/plataformas/bloque_cemento.png</key>
+            <key type="filename">imagenes/plataformas/bloque_escalera.png</key>
+            <key type="filename">imagenes/plataformas/bloque_escalera_superior.png</key>
+            <key type="filename">imagenes/plataformas/bloque_gris.png</key>
+            <key type="filename">imagenes/plataformas/bloque_ladrillo.png</key>
+            <key type="filename">imagenes/plataformas/bloque_para_llave.png</key>
+            <key type="filename">imagenes/plataformas/bloque_pasto.png</key>
+            <key type="filename">imagenes/plataformas/bloque_pulsador_azul_activado.png</key>
+            <key type="filename">imagenes/plataformas/bloque_pulsador_azul_desactivado.png</key>
+            <key type="filename">imagenes/plataformas/bloque_tierra.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -699,6 +751,21 @@
                 <rect>2,3,4,5</rect>
                 <key>scale9Paddings</key>
                 <rect>2,3,4,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">imagenes/mono/mono_gritar.png</key>
+            <key type="filename">imagenes/mono/mono_normal.png</key>
+            <key type="filename">imagenes/mono/mono_reir.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>39,31,79,61</rect>
+                <key>scale9Paddings</key>
+                <rect>39,31,79,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
