@@ -535,6 +535,48 @@ var SeguirAlMouseLentamente = (function (_super) {
     };
     return SeguirAlMouseLentamente;
 }(Habilidad));
+var OscilarVerticalmente = (function (_super) {
+    __extends(OscilarVerticalmente, _super);
+    function OscilarVerticalmente() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.contador = 0;
+        return _this;
+    }
+    OscilarVerticalmente.prototype.iniciar = function () { };
+    OscilarVerticalmente.prototype.actualizar = function () {
+        this.contador++;
+        this.actor.y += Math.sin(this.contador / 20.0) / 4.0;
+    };
+    return OscilarVerticalmente;
+}(Habilidad));
+var OscilarRotacion = (function (_super) {
+    __extends(OscilarRotacion, _super);
+    function OscilarRotacion() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.contador = 0;
+        return _this;
+    }
+    OscilarRotacion.prototype.iniciar = function () { };
+    OscilarRotacion.prototype.actualizar = function () {
+        this.contador++;
+        this.actor.rotacion += Math.cos(this.contador / 20.0) / 2;
+    };
+    return OscilarRotacion;
+}(Habilidad));
+var OscilarTransparencia = (function (_super) {
+    __extends(OscilarTransparencia, _super);
+    function OscilarTransparencia() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.contador = 0;
+        return _this;
+    }
+    OscilarTransparencia.prototype.iniciar = function () { };
+    OscilarTransparencia.prototype.actualizar = function () {
+        this.contador++;
+        this.actor.transparencia = 50 + Math.cos(this.contador / 10.0) * 50;
+    };
+    return OscilarTransparencia;
+}(Habilidad));
 var Habilidades = (function () {
     function Habilidades(pilas) {
         this.pilas = pilas;
@@ -544,6 +586,9 @@ var Habilidades = (function () {
         this.vincular("mover con el teclado", MoverConElTeclado);
         this.vincular("seguir al mouse", SeguirAlMouse);
         this.vincular("seguir al mouse lentamente", SeguirAlMouseLentamente);
+        this.vincular("oscilar verticalmente", OscilarVerticalmente);
+        this.vincular("oscilar rotacion", OscilarRotacion);
+        this.vincular("oscilar transparencia", OscilarTransparencia);
     }
     Habilidades.prototype.buscar = function (habilidad) {
         var lista = this.generar_lista_de_similitudes(habilidad);
@@ -2659,12 +2704,7 @@ var nave = (function (_super) {
         }
         if (this.pilas.control.espacio &&
             this.cuadros_desde_el_ultimo_disparo > 5) {
-            var laser_1 = this.pilas.actores.laser();
-            laser_1.x = this.x;
-            laser_1.y = this.y;
-            laser_1.rotacion = this.rotacion;
-            laser_1.z = this.z + 1;
-            this.cuadros_desde_el_ultimo_disparo = 0;
+            this.disparar();
         }
         if (this.pilas.control.arriba) {
             this.avanzar(this.rotacion, this.velocidad);
@@ -2675,6 +2715,14 @@ var nave = (function (_super) {
                 this.animacion = "nave_en_reposo";
             }
         }
+    };
+    nave.prototype.disparar = function () {
+        var laser = this.pilas.actores.laser();
+        laser.x = this.x;
+        laser.y = this.y;
+        laser.rotacion = this.rotacion;
+        laser.z = this.z + 1;
+        this.cuadros_desde_el_ultimo_disparo = 0;
     };
     return nave;
 }(Actor));

@@ -135,6 +135,21 @@ declare class SeguirAlMouseLentamente extends Habilidad {
     iniciar(): void;
     actualizar(): void;
 }
+declare class OscilarVerticalmente extends Habilidad {
+    contador: number;
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class OscilarRotacion extends Habilidad {
+    contador: number;
+    iniciar(): void;
+    actualizar(): void;
+}
+declare class OscilarTransparencia extends Habilidad {
+    contador: number;
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class Habilidades {
     pilas: Pilas;
     _habilidades: any[];
@@ -655,6 +670,7 @@ declare class nave extends Actor {
     iniciar(): void;
     crear_animaciones(): void;
     actualizar(): void;
+    disparar(): void;
 }
 declare class nube extends Actor {
     propiedades: {
