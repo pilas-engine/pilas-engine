@@ -85,7 +85,10 @@ export default Service.extend({
       }
 
       const polka = requireNode("polka");
-      const serve = requireNode("sirv")("public");
+      const ruta = this.obtener_directorio_de_recursos();
+      const serve = requireNode("sirv")(ruta, {
+        extensions: []
+      });
 
       let app = polka()
         .use(serve)
@@ -111,6 +114,20 @@ export default Service.extend({
 
       this.set("app", app);
     });
+  },
+
+  obtener_directorio_de_recursos() {
+    const fs = requireNode("fs");
+
+    if (fs.existsSync("public")) {
+      return "public";
+    } else {
+      if (window.enElectron) {
+        return requireNode("electron").remote.app.getAppPath();
+      } else {
+        return "./";
+      }
+    }
   },
 
   obtener_pagina_principal() {
