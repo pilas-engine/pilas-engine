@@ -20,6 +20,8 @@ export default Service.extend({
       };
     });
 
+    data.imagenesParaGrilla = data.imagenesParaGrilla.sortBy("nombre");
+
     this.set("data", data);
     return data;
   }).drop(),
