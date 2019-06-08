@@ -21,6 +21,10 @@
 
       {{#en-electron}}
         {{pilas-boton-webserver cargando=cargando}}
+      {{else}}
+        {{#pilas-tooltip class="top-1 right-0" texto="Esta opción solo está disponible en la versión de escritorio (offline)"}}
+          {{pilas-boton icono="webserver" desactivado=true texto="Iniciar servidor web"}}
+        {{/pilas-tooltip}}
       {{/en-electron}}
     </div>
 
@@ -28,15 +32,15 @@
     </div>
 
     <div class="pa2">
-      {{#pilas-tooltip class="right-1" texto="Muestra el panel de escenas y actores"}}
+      {{#pilas-tooltip class="right-1 w4" texto="Muestra el panel de escenas y actores"}}
         {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
       {{/pilas-tooltip}}
 
-      {{#pilas-tooltip class="right-1" texto="Ajusta el tamaño del area de juego"}}
+      {{#pilas-tooltip class="right-1 w4" texto="Ajusta el tamaño del area de juego"}}
         {{pilas-interruptor padding="pa1" resaltar=false icono="panel-central" deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir previsualización" texto_corto="Previs."}}
       {{/pilas-tooltip}}
 
-      {{#pilas-tooltip class="right-1" texto="Muestra el editor de código"}}
+      {{#pilas-tooltip class="right-1 w4" texto="Muestra el editor de código"}}
         {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
       {{/pilas-tooltip}}
     </div>
@@ -147,15 +151,15 @@
           {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
           <div class="fr {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}} {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
-            {{#pilas-tooltip class="right-1 bottom-2" texto="Muestra las figuras físicas"}}
+            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
               {{pilas-interruptor texto="fisica" variable=fisica}}
             {{/pilas-tooltip}}
 
-            {{#pilas-tooltip class="right-1 bottom-2" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
+            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
               {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
             {{/pilas-tooltip}}
 
-            {{#pilas-tooltip class="right-1 bottom-2" texto="Marca los puntos de control de cada actor"}}
+            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
               {{pilas-interruptor texto="pos" variable=pos}}
             {{/pilas-tooltip}}
           </div>

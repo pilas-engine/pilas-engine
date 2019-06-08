@@ -245,7 +245,6 @@ class Pilas {
       plugins: {
         global: [NineSlice.Plugin.DefaultCfg]
       },
-      //scene: [ModoCargador, ModoEditor, ModoEjecucion, ModoPausa],
       physics: {
         default: "matter",
         matter: {
