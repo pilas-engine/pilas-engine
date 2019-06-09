@@ -42,6 +42,10 @@
     {
       "nombre": "controles",
       "desde": "2.0.78"
+    },
+    {
+      "nombre": "flappy",
+      "desde": "2.0.78"
     }
   ]
 }
