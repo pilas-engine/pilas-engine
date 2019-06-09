@@ -297,7 +297,8 @@ declare class Pilas {
     obtener_actores_en(_x: number, _y: number): Actor[];
     escena_actual(): EscenaBase;
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
-    luego(duracion: number, tarea: any): void;
+    luego(duracion: number, tarea: any): any;
+    cada(duracion: number, tarea: any): any;
     azar(desde: number, hasta: number): number;
     obtener_distancia_entre_puntos(x: number, y: number, x2: number, y2: number): number;
     obtener_distancia_entre_actores(actor1: ActorBase, actor2: ActorBase): number;

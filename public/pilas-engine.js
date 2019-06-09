@@ -1157,7 +1157,10 @@ var Pilas = (function () {
         this.modo.tweens.add(configuracion);
     };
     Pilas.prototype.luego = function (duracion, tarea) {
-        this.modo.time.delayedCall(duracion * 1000, tarea);
+        return this.modo.time.delayedCall(duracion * 1000, tarea);
+    };
+    Pilas.prototype.cada = function (duracion, tarea) {
+        return this.modo.time.addEvent({ delay: duracion * 1000, callback: tarea, loop: true });
     };
     Pilas.prototype.azar = function (desde, hasta) {
         if (desde > hasta) {
@@ -3617,10 +3620,14 @@ var ModoEjecucion = (function (_super) {
         });
     };
     ModoEjecucion.prototype.cambiar_escena = function (nombre) {
-        if (this._escena_en_ejecucion) {
-            this._escena_en_ejecucion.terminar();
-        }
-        this.instanciar_escena(nombre);
+        var parametros = {
+            pilas: this.pilas,
+            nombre_de_la_escena_inicial: nombre,
+            permitir_modo_pausa: this.permitir_modo_pausa,
+            codigo: this.codigo,
+            proyecto: this.proyecto
+        };
+        this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
         var _this = this;
@@ -3630,10 +3637,7 @@ var ModoEjecucion = (function (_super) {
                     var colision = event.pairs[i];
                     var figura_1 = colision.bodyA;
                     var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject &&
-                        figura_1.gameObject.actor &&
-                        figura_2.gameObject &&
-                        figura_2.gameObject.actor) {
+                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                         var actor_a = figura_1.gameObject.actor;
                         var actor_b = figura_2.gameObject.actor;
                         actor_a.colisiones.push(actor_b);
@@ -3645,14 +3649,10 @@ var ModoEjecucion = (function (_super) {
                         }
                     }
                     else {
-                        if (figura_2.sensor_del_actor &&
-                            figura_1.gameObject &&
-                            figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
                             figura_2.colisiones.push(figura_1.gameObject.actor);
                         }
-                        if (figura_1.sensor_del_actor &&
-                            figura_2.gameObject &&
-                            figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
                             figura_1.colisiones.push(figura_2.gameObject.actor);
                         }
                     }
@@ -3669,10 +3669,7 @@ var ModoEjecucion = (function (_super) {
                 var colision = event.pairs[i];
                 var figura_1 = colision.bodyA;
                 var figura_2 = colision.bodyB;
-                if (figura_1.gameObject &&
-                    figura_1.gameObject.actor &&
-                    figura_2.gameObject &&
-                    figura_2.gameObject.actor) {
+                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                     var actor_a = figura_1.gameObject.actor;
                     var actor_b = figura_2.gameObject.actor;
                     if (actor_a.colisiones.indexOf(actor_b) === -1) {
@@ -3694,10 +3691,7 @@ var ModoEjecucion = (function (_super) {
                     var colision = event.pairs[i];
                     var figura_1 = colision.bodyA;
                     var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject &&
-                        figura_1.gameObject.actor &&
-                        figura_2.gameObject &&
-                        figura_2.gameObject.actor) {
+                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                         var actor_a = figura_1.gameObject.actor;
                         var actor_b = figura_2.gameObject.actor;
                         actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
@@ -3706,14 +3700,10 @@ var ModoEjecucion = (function (_super) {
                         actor_b.cuando_termina_una_colision(actor_a);
                     }
                     else {
-                        if (figura_2.sensor_del_actor &&
-                            figura_1.gameObject &&
-                            figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
                             figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
                         }
-                        if (figura_1.sensor_del_actor &&
-                            figura_2.gameObject &&
-                            figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
                             figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
                         }
                     }
@@ -3811,9 +3801,7 @@ var ModoEjecucion = (function (_super) {
         var re_solo_clase = /var\ (\w+)/;
         var lista_de_clases = [];
         if (codigo.match(re_creacion_de_clase)) {
-            lista_de_clases = codigo
-                .match(re_creacion_de_clase)
-                .map(function (e) { return e.match(re_solo_clase)[1]; });
+            lista_de_clases = codigo.match(re_creacion_de_clase).map(function (e) { return e.match(re_solo_clase)[1]; });
         }
         var diccionario = {};
         for (var i = 0; i < lista_de_clases.length; i++) {

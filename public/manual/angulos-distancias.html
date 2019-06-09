@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <title>Angulos y distancias · Manual de Pilas Engine 2</title>
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="generator" content="GitBook 3.2.0">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -60,7 +60,7 @@
     <link rel="next" href="colisiones.html" />
     
     
-    <link rel="prev" href="observables.html" />
+    <link rel="prev" href="tiempo.html" />
     
 
     </head>
@@ -206,7 +206,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.10" data-path="angulos-distancias.html">
+        <li class="chapter " data-level="1.10" data-path="tiempo.html">
+            
+                <a href="tiempo.html">
+            
+                    
+                    Manejo de tiempo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.11" data-path="angulos-distancias.html">
             
                 <a href="angulos-distancias.html">
             
@@ -219,7 +232,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="colisiones.html">
+        <li class="chapter " data-level="1.12" data-path="colisiones.html">
             
                 <a href="colisiones.html">
             
@@ -232,7 +245,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="escenas.html">
+        <li class="chapter " data-level="1.13" data-path="escenas.html">
             
                 <a href="escenas.html">
             
@@ -245,7 +258,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="eventos.html">
+        <li class="chapter " data-level="1.14" data-path="eventos.html">
             
                 <a href="eventos.html">
             
@@ -258,7 +271,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.15" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -349,60 +362,42 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#xE1;ngulos-y-distancias">&#xC1;ngulos y distancias</h1>
-<p>Pilas trae varias funciones para realizar c&#xE1;lculos geom&#xE9;tricos sencillos, como
-obtener la distancia entre actores o incluso el &#xE1;ngulos entre ellos.</p>
-<h2 id="&#xE1;ngulo-entre-actores-o-puntos">&#xC1;ngulo entre actores o puntos</h2>
-<p>Un ejemplo pr&#xE1;ctico ser&#xED;a poder mirar en direcci&#xF3;n a donde est&#xE1; el
+                                <h1 id="&#xE1;ngulos-y-distancias">&#xC1;ngulos y distancias</h1><p>Pilas trae varias funciones para realizar c&#xE1;lculos geom&#xE9;tricos sencillos, como
+obtener la distancia entre actores o incluso el &#xE1;ngulos entre ellos.</p><h2 id="&#xE1;ngulo-entre-actores-o-puntos">&#xC1;ngulo entre actores o puntos</h2><p>Un ejemplo pr&#xE1;ctico ser&#xED;a poder mirar en direcci&#xF3;n a donde est&#xE1; el
 puntero del mouse: Observa uno de los ejemplos que trae pilas, el usuario
 puede mover el puntero del mouse y observar c&#xF3;mo el ca&#xF1;on ajusta su rotaci&#xF3;n
-correctamente:</p>
-<p><img src="imagenes/angulo.gif" alt="angulo"></p>
-<p>Este ejemplo hace uso de la funci&#xF3;n <code>obtener_angulo_entre_puntos</code> as&#xED;:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> x = actor_ca&#xF1;on.x;
+correctamente:</p><p><img alt="angulo" src="imagenes/angulo.gif"></p><p>Este ejemplo hace uso de la funci&#xF3;n <code>obtener_angulo_entre_puntos</code> as&#xED;:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> x = actor_ca&#xF1;on.x;
 <span class="hljs-keyword">let</span> y = actor_ca&#xF1;on.x;
 <span class="hljs-keyword">let</span> cx = pilas.cursor_x;
 <span class="hljs-keyword">let</span> cy = pilas.cursor_y;
 
-actor_ca&#xF1;on.rotacion = pilas.obtener_angulo_entre_puntos(x, y, cx, cy);
-</code></pre>
+actor_ca&#xF1;on.rotacion = pilas.obtener_angulo_entre_puntos(x, y, cx, cy);</code></pre>
 <p>La funci&#xF3;n <code>obtener_angulo_entre_puntos</code> espera que le enviemos 4 par&#xE1;metros,
 correspondientes a los dos puntos que nos interesan. El resutado de la funci&#xF3;n
-es el &#xE1;ngulo en grados esperado.</p>
-<p>Tambi&#xE9;n existe una funci&#xF3;n llamada <code>obtener_angulo_entre_actores</code>, que hace
+es el &#xE1;ngulo en grados esperado.</p><p>Tambi&#xE9;n existe una funci&#xF3;n llamada <code>obtener_angulo_entre_actores</code>, que hace
 algo muy similar, solamente que espera que le enviemos dos actores en lugar
-de 4 n&#xFA;meros.</p>
-<p>Un ejemplo que muestra esto es <code>angulo-entre-actores</code>, que nos muestra una
+de 4 n&#xFA;meros.</p><p>Un ejemplo que muestra esto es <code>angulo-entre-actores</code>, que nos muestra una
 nave mirando constantemente al centro de la pantalla, donde est&#xE1; el actor
-planeta:</p>
-<p><img src="imagenes/angulo-entre-actores.jpg" alt="angulo-entre-actores"></p>
-<p>Si observas el c&#xF3;digo, vas a encontrar una llamada a
-<code>obtener_angulo_entre_actores</code> similar a la siguiente:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> nave = pilas.actores.nave();
+planeta:</p><p><img alt="angulo-entre-actores" src="imagenes/angulo-entre-actores.jpg"></p><p>Si observas el c&#xF3;digo, vas a encontrar una llamada a
+<code>obtener_angulo_entre_actores</code> similar a la siguiente:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> nave = pilas.actores.nave();
 <span class="hljs-keyword">let</span> planeta = pilas.obtener_actor_por_nombre(<span class="hljs-string">&quot;planeta&quot;</span>);
-nave.rotacion = pilas.obtener_angulo_entre_actores(nave, planeta);
-</code></pre>
-<h2 id="distancia-entre-puntos-y-actores">Distancia entre puntos y actores</h2>
-<p>Otras dos funciones &#xFA;tiles en esta categor&#xED;a son las funciones
+nave.rotacion = pilas.obtener_angulo_entre_actores(nave, planeta);</code></pre>
+<h2 id="distancia-entre-puntos-y-actores">Distancia entre puntos y actores</h2><p>Otras dos funciones &#xFA;tiles en esta categor&#xED;a son las funciones
 <code>obtener_distancia_entre_puntos</code> y <code>obtener_distancia_entre_actores</code>. Ambas
 reciben los argumentos de manera muy similar a las funciones de &#xE1;ngulos
-anteriores. Aqu&#xED; unos ejemplos:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> actor = pilas.actores.aceituna();
+anteriores. Aqu&#xED; unos ejemplos:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> actor = pilas.actores.aceituna();
 <span class="hljs-keyword">let</span> cx = pilas.cursor_x;
 <span class="hljs-keyword">let</span> cy = pilas.cursor_y;
 
 <span class="hljs-keyword">let</span> distancia = pilas.obtener_distancia_entre_puntos(actor.x, actor.y, cx, cy);
-actor.decir(<span class="hljs-string">`la distancia al mouse es <span class="hljs-subst">${distancia}</span>`</span>);
-</code></pre>
-<p>o entre actores:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> actor = pilas.actores.aceituna();
+actor.decir(<span class="hljs-string">`la distancia al mouse es <span class="hljs-subst">${distancia}</span>`</span>);</code></pre>
+<p>o entre actores:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> actor = pilas.actores.aceituna();
 actor.x = <span class="hljs-number">100</span>;
 
 <span class="hljs-keyword">let</span> nave = pilas.actores.nave();
 
 <span class="hljs-keyword">let</span> distancia = pilas.obtener_distancia_entre_actores(actor, nave);
-nave.decir(<span class="hljs-string">`la distancia al otro actor es <span class="hljs-subst">${distancia}</span>`</span>);
-</code></pre>
+nave.decir(<span class="hljs-string">`la distancia al otro actor es <span class="hljs-subst">${distancia}</span>`</span>);</code></pre>
 
                                 
                                 </section>
@@ -430,7 +425,7 @@ nave.decir(<span class="hljs-string">`la distancia al otro actor es <span class=
 
             
                 
-                <a href="observables.html" class="navigation navigation-prev " aria-label="Previous page: Observables">
+                <a href="tiempo.html" class="navigation navigation-prev " aria-label="Previous page: Manejo de tiempo">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -446,7 +441,7 @@ nave.decir(<span class="hljs-string">`la distancia al otro actor es <span class=
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Angulos y distancias","level":"1.10","depth":1,"next":{"title":"Colisiones","level":"1.11","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"previous":{"title":"Observables","level":"1.9","depth":1,"path":"observables.md","ref":"observables.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"angulos-distancias.md","mtime":"2019-05-17T17:08:26.300Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-04T04:42:14.081Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Angulos y distancias","level":"1.11","depth":1,"next":{"title":"Colisiones","level":"1.12","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"previous":{"title":"Manejo de tiempo","level":"1.10","depth":1,"path":"tiempo.md","ref":"tiempo.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"angulos-distancias.md","mtime":"2019-05-18T21:41:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

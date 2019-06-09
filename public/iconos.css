@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
-   created with https://www.codeandweb.com/texturepacker
+   created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:d662cb640cbfd2aa917a128c270bc01d:a17890ca3a7a3b06dc1650ce35f67d55:467c798a4e4a5265189118ecb556e0a2$
+   $TexturePacker:SmartUpdate:be24880d8cadb1b9a9420a470e869039:0e2cfc902b569f192c01349080f52001:467c798a4e4a5265189118ecb556e0a2$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -10,500 +10,104 @@
 
 */
 
-.sprite {
-  display: inline-block;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-image: url(iconos.png);
-}
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(iconos.png);}
 
-.abrir {
-  width: 24px;
-  height: 24px;
-  background-position: -203px -1831px;
-}
-.actor {
-  width: 24px;
-  height: 24px;
-  background-position: -183px -1594px;
-}
-.actores {
-  width: 24px;
-  height: 24px;
-  background-position: -183px -1620px;
-}
-.add_folder {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1351px;
-}
-.angulo {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -143px;
-}
-.angulo-entre-actores {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -1px;
-}
-.api {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1378px;
-}
-.arduino {
-  width: 24px;
-  height: 24px;
-  background-position: -183px -1646px;
-}
-.arrastrables {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -285px;
-}
-.azar {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -427px;
-}
-.borrar {
-  width: 16px;
-  height: 16px;
-  background-position: -229px -1831px;
-}
-.click {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -569px;
-}
-.click_actor {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -711px;
-}
-.computadora {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1405px;
-}
-.controles {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -853px;
-}
-.cursores {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -995px;
-}
-.demo {
-  width: 24px;
-  height: 24px;
-  background-position: -183px -1672px;
-}
-.desplegar {
-  width: 24px;
-  height: 24px;
-  background-position: -209px -1594px;
-}
-.detener {
-  width: 24px;
-  height: 24px;
-  background-position: -209px -1620px;
-}
-.duplicar {
-  width: 16px;
-  height: 16px;
-  background-position: -233px -1698px;
-}
-.ejecutar {
-  width: 24px;
-  height: 24px;
-  background-position: -209px -1646px;
-}
-.ejemplo-nave {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -1137px;
-}
-.ejemplos {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1432px;
-}
-.electron {
-  width: 60px;
-  height: 60px;
-  background-position: -183px -63px;
-}
-.ember {
-  width: 63px;
-  height: 60px;
-  background-position: -183px -1px;
-}
-.enjambre {
-  width: 100px;
-  height: 74px;
-  background-position: -131px -1705px;
-}
-.enjambre-texto {
-  width: 100px;
-  height: 19px;
-  background-position: -1px -1835px;
-}
-.error {
-  width: 24px;
-  height: 24px;
-  background-position: -209px -1672px;
-}
-.escena {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1351px;
-}
-.github {
-  width: 60px;
-  height: 50px;
-  background-position: -183px -249px;
-}
-.gravedad {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -1279px;
-}
-.grilla_actor_aceituna {
-  width: 48px;
-  height: 48px;
-  background-position: -203px -1781px;
-}
-.grilla_actor_actor {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -301px;
-}
-.grilla_actor_boton {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -351px;
-}
-.grilla_actor_boton_de_control_abajo {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -401px;
-}
-.grilla_actor_boton_de_control_arriba {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -451px;
-}
-.grilla_actor_boton_de_control_derecha {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -501px;
-}
-.grilla_actor_boton_de_control_espacio {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -551px;
-}
-.grilla_actor_boton_de_control_izquierda {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -601px;
-}
-.grilla_actor_caja {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -651px;
-}
-.grilla_actor_conejo {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -701px;
-}
-.grilla_actor_deslizador {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -751px;
-}
-.grilla_actor_gallina {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -801px;
-}
-.grilla_actor_laser {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -851px;
-}
-.grilla_actor_logo {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -901px;
-}
-.grilla_actor_moneda {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -951px;
-}
-.grilla_actor_nave {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1001px;
-}
-.grilla_actor_nube {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1051px;
-}
-.grilla_actor_pared {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1101px;
-}
-.grilla_actor_pelota {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1151px;
-}
-.grilla_actor_plataforma {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1201px;
-}
-.grilla_actor_suelo {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1251px;
-}
-.grilla_actor_techo {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1251px;
-}
-.grilla_actor_texto {
-  width: 48px;
-  height: 48px;
-  background-position: -183px -1301px;
-}
-.guardar {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1377px;
-}
-.icono_actor_aceituna {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -1766px;
-}
-.icono_actor_actortexto {
-  width: 10px;
-  height: 10px;
-  background-position: -235px -1617px;
-}
-.icono_actor_boton {
-  width: 10px;
-  height: 10px;
-  background-position: -235px -1629px;
-}
-.icono_actor_caja {
-  width: 10px;
-  height: 10px;
-  background-position: -235px -1641px;
-}
-.icono_actor_conejo {
-  width: 10px;
-  height: 10px;
-  background-position: -235px -1653px;
-}
-.icono_actor_deslizador {
-  width: 10px;
-  height: 10px;
-  background-position: -235px -1665px;
-}
-.icono_actor_gallina {
-  width: 10px;
-  height: 10px;
-  background-position: -235px -1677px;
-}
-.icono_actor_laser {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -349px;
-}
-.icono_actor_logo {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -361px;
-}
-.icono_actor_moneda {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -373px;
-}
-.icono_actor_nave {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -385px;
-}
-.icono_actor_nube {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -397px;
-}
-.icono_actor_pelota {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -409px;
-}
-.icono_actor_plataforma {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -421px;
-}
-.icono_actor_suelo {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -433px;
-}
-.icono_actor_techo {
-  width: 10px;
-  height: 10px;
-  background-position: -233px -433px;
-}
-.imagen {
-  width: 16px;
-  height: 16px;
-  background-position: -233px -1716px;
-}
-.info {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1403px;
-}
-.info_squared {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1459px;
-}
-.manual {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1486px;
-}
-.no {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1429px;
-}
-.nubes {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -1421px;
-}
-.off {
-  width: 16px;
-  height: 14px;
-  background-position: -235px -1585px;
-}
-.on {
-  width: 16px;
-  height: 14px;
-  background-position: -235px -1601px;
-}
-.panel-central-off {
-  width: 18px;
-  height: 14px;
-  background-position: -103px -1835px;
-}
-.panel-central-on {
-  width: 18px;
-  height: 14px;
-  background-position: -233px -1734px;
-}
-.panel-derecho-off {
-  width: 18px;
-  height: 14px;
-  background-position: -233px -1750px;
-}
-.panel-derecho-on {
-  width: 18px;
-  height: 14px;
-  background-position: -233px -301px;
-}
-.panel-izquierdo-off {
-  width: 18px;
-  height: 14px;
-  background-position: -233px -317px;
-}
-.panel-izquierdo-on {
-  width: 18px;
-  height: 14px;
-  background-position: -233px -333px;
-}
-.pausa {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1455px;
-}
-.phaser {
-  width: 70px;
-  height: 70px;
-  background-position: -131px -1781px;
-}
-.pilas_logo_128 {
-  width: 128px;
-  height: 128px;
-  background-position: -1px -1705px;
-}
-.pilas_logo_60 {
-  width: 60px;
-  height: 60px;
-  background-position: -183px -125px;
-}
-.plataformas {
-  width: 180px;
-  height: 140px;
-  background-position: -1px -1563px;
-}
-.plegar {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1481px;
-}
-.preferencias {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1507px;
-}
-.settings {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1513px;
-}
-.si {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1533px;
-}
-.test {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1540px;
-}
-.typescript {
-  width: 60px;
-  height: 60px;
-  background-position: -183px -187px;
-}
-.volver {
-  width: 24px;
-  height: 24px;
-  background-position: -210px -1559px;
-}
-.webserver {
-  width: 25px;
-  height: 25px;
-  background-position: -183px -1567px;
-}
+.abrir {width:24px; height:24px; background-position: -210px -1581px}
+.actor {width:24px; height:24px; background-position: -210px -1607px}
+.actores {width:24px; height:24px; background-position: -183px -1608px}
+.add_folder {width:25px; height:25px; background-position: -183px -1473px}
+.angulo {width:180px; height:140px; background-position: -1px -143px}
+.angulo-entre-actores {width:180px; height:140px; background-position: -1px -1px}
+.api {width:25px; height:25px; background-position: -210px -1473px}
+.arduino {width:24px; height:24px; background-position: -209px -1633px}
+.arrastrables {width:180px; height:140px; background-position: -1px -285px}
+.azar {width:180px; height:140px; background-position: -1px -427px}
+.borrar {width:16px; height:16px; background-position: -233px -469px}
+.click {width:180px; height:140px; background-position: -1px -569px}
+.click_actor {width:180px; height:140px; background-position: -1px -711px}
+.computadora {width:25px; height:25px; background-position: -183px -1500px}
+.controles {width:180px; height:140px; background-position: -1px -853px}
+.cursores {width:180px; height:140px; background-position: -1px -995px}
+.demo {width:24px; height:24px; background-position: -183px -1634px}
+.desplegar {width:24px; height:24px; background-position: -209px -1659px}
+.detener {width:24px; height:24px; background-position: -183px -1660px}
+.duplicar {width:16px; height:16px; background-position: -233px -487px}
+.ejecutar {width:24px; height:24px; background-position: -209px -1685px}
+.ejemplo-nave {width:180px; height:140px; background-position: -1px -1137px}
+.ejemplos {width:25px; height:25px; background-position: -210px -1500px}
+.electron {width:60px; height:60px; background-position: -183px -135px}
+.ember {width:63px; height:60px; background-position: -183px -73px}
+.enjambre {width:100px; height:74px; background-position: -131px -1847px}
+.enjambre-texto {width:100px; height:19px; background-position: -131px -1923px}
+.error {width:24px; height:24px; background-position: -183px -1686px}
+.escena {width:24px; height:24px; background-position: -209px -1711px}
+.flappy {width:180px; height:140px; background-position: -1px -1279px}
+.github {width:60px; height:50px; background-position: -183px -321px}
+.gravedad {width:180px; height:140px; background-position: -1px -1421px}
+.grilla_actor_aceituna {width:48px; height:48px; background-position: -183px -373px}
+.grilla_actor_actor {width:48px; height:48px; background-position: -183px -423px}
+.grilla_actor_boton {width:48px; height:48px; background-position: -183px -473px}
+.grilla_actor_boton_de_control_abajo {width:48px; height:48px; background-position: -183px -523px}
+.grilla_actor_boton_de_control_arriba {width:48px; height:48px; background-position: -183px -573px}
+.grilla_actor_boton_de_control_derecha {width:48px; height:48px; background-position: -183px -623px}
+.grilla_actor_boton_de_control_espacio {width:48px; height:48px; background-position: -183px -673px}
+.grilla_actor_boton_de_control_izquierda {width:48px; height:48px; background-position: -183px -723px}
+.grilla_actor_caja {width:48px; height:48px; background-position: -183px -773px}
+.grilla_actor_conejo {width:48px; height:48px; background-position: -183px -823px}
+.grilla_actor_deslizador {width:48px; height:48px; background-position: -183px -873px}
+.grilla_actor_gallina {width:48px; height:48px; background-position: -183px -923px}
+.grilla_actor_laser {width:48px; height:48px; background-position: -183px -973px}
+.grilla_actor_logo {width:48px; height:48px; background-position: -183px -1023px}
+.grilla_actor_moneda {width:48px; height:48px; background-position: -183px -1073px}
+.grilla_actor_nave {width:48px; height:48px; background-position: -183px -1123px}
+.grilla_actor_nube {width:48px; height:48px; background-position: -183px -1173px}
+.grilla_actor_pared {width:48px; height:48px; background-position: -183px -1223px}
+.grilla_actor_pelota {width:48px; height:48px; background-position: -183px -1273px}
+.grilla_actor_plataforma {width:48px; height:48px; background-position: -183px -1323px}
+.grilla_actor_suelo {width:48px; height:48px; background-position: -183px -1373px}
+.grilla_actor_techo {width:48px; height:48px; background-position: -183px -1373px}
+.grilla_actor_texto {width:48px; height:48px; background-position: -183px -1423px}
+.guardar {width:24px; height:24px; background-position: -183px -1712px}
+.icono_actor_aceituna {width:10px; height:10px; background-position: -233px -555px}
+.icono_actor_actortexto {width:10px; height:10px; background-position: -233px -567px}
+.icono_actor_boton {width:10px; height:10px; background-position: -233px -579px}
+.icono_actor_caja {width:10px; height:10px; background-position: -233px -591px}
+.icono_actor_conejo {width:10px; height:10px; background-position: -233px -603px}
+.icono_actor_deslizador {width:10px; height:10px; background-position: -233px -615px}
+.icono_actor_gallina {width:10px; height:10px; background-position: -233px -627px}
+.icono_actor_laser {width:10px; height:10px; background-position: -233px -639px}
+.icono_actor_logo {width:10px; height:10px; background-position: -233px -651px}
+.icono_actor_moneda {width:10px; height:10px; background-position: -233px -663px}
+.icono_actor_nave {width:10px; height:10px; background-position: -233px -675px}
+.icono_actor_nube {width:10px; height:10px; background-position: -233px -687px}
+.icono_actor_pelota {width:10px; height:10px; background-position: -233px -699px}
+.icono_actor_plataforma {width:10px; height:10px; background-position: -233px -711px}
+.icono_actor_suelo {width:10px; height:10px; background-position: -233px -723px}
+.icono_actor_techo {width:10px; height:10px; background-position: -233px -723px}
+.imagen {width:16px; height:16px; background-position: -233px -505px}
+.info {width:24px; height:24px; background-position: -209px -1737px}
+.info_squared {width:25px; height:25px; background-position: -183px -1527px}
+.manual {width:25px; height:25px; background-position: -210px -1527px}
+.no {width:24px; height:24px; background-position: -183px -1738px}
+.nubes {width:180px; height:140px; background-position: -1px -1563px}
+.off {width:16px; height:14px; background-position: -233px -523px}
+.on {width:16px; height:14px; background-position: -233px -539px}
+.panel-central-off {width:18px; height:14px; background-position: -233px -373px}
+.panel-central-on {width:18px; height:14px; background-position: -233px -389px}
+.panel-derecho-off {width:18px; height:14px; background-position: -233px -405px}
+.panel-derecho-on {width:18px; height:14px; background-position: -233px -421px}
+.panel-izquierdo-off {width:18px; height:14px; background-position: -233px -437px}
+.panel-izquierdo-on {width:18px; height:14px; background-position: -233px -453px}
+.pausa {width:24px; height:24px; background-position: -209px -1763px}
+.phaser {width:70px; height:70px; background-position: -183px -1px}
+.pilas_logo_128 {width:128px; height:128px; background-position: -1px -1847px}
+.pilas_logo_60 {width:60px; height:60px; background-position: -183px -197px}
+.plataformas {width:180px; height:140px; background-position: -1px -1705px}
+.plegar {width:24px; height:24px; background-position: -183px -1764px}
+.preferencias {width:24px; height:24px; background-position: -209px -1789px}
+.settings {width:25px; height:25px; background-position: -183px -1554px}
+.si {width:24px; height:24px; background-position: -183px -1790px}
+.test {width:25px; height:25px; background-position: -210px -1554px}
+.typescript {width:60px; height:60px; background-position: -183px -259px}
+.volver {width:24px; height:24px; background-position: -209px -1815px}
+.webserver {width:25px; height:25px; background-position: -183px -1581px}

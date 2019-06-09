@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Habilidades · Manual de Pilas Engine 2</title>
+        <title>Manejo de tiempo · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="azar.html" />
+    <link rel="next" href="angulos-distancias.html" />
     
     
-    <link rel="prev" href="etiquetas.html" />
+    <link rel="prev" href="observables.html" />
     
 
     </head>
@@ -167,7 +167,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7" data-path="habilidades.html">
+        <li class="chapter " data-level="1.7" data-path="habilidades.html">
             
                 <a href="habilidades.html">
             
@@ -206,7 +206,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="tiempo.html">
+        <li class="chapter active" data-level="1.10" data-path="tiempo.html">
             
                 <a href="tiempo.html">
             
@@ -347,7 +347,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Habilidades</a>
+        <a href="." >Manejo de tiempo</a>
     </h1>
 </div>
 
@@ -362,21 +362,21 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="habilidades">Habilidades</h1><p>Cuando realizamos juegos hay ciertos comportamientos que son tan comunes
-que ni siquiera necesitamos programarlos escribiendo c&#xF3;digo.</p><p>Un ejemplo de estos comportamientos comunes incluyen &quot;hacer que un actor
-se mueva con el teclado&quot;, &quot;poder arrastrar y soltar un actor con el mouse&quot; etc...</p><p>A todos estos comportamientos los llamamos &quot;habilidades&quot;, y lo interesante
-es que podemos tomar a cualquier actor y &quot;ense&#xF1;arle&quot; cualquier de las
-habilidades para mejorar nuestro juego.</p><h2 id="desde-el-editor">Desde el editor</h2><p>Una opci&#xF3;n para incorporarle habilidades a un actor es usar el inspector
-del actor. Hay una propiedad llamada &quot;Habilidades&quot; en donde cargar una o
-m&#xE1;s habilidades que busquemos ense&#xF1;arle a un actor al momento de iniciar
-la escena.</p><h2 id="desde-el-c&#xF3;digo">Desde el c&#xF3;digo</h2><p>Otra opci&#xF3;n, es ense&#xF1;arle una habilidad al actor desde el c&#xF3;digo.</p><p>Imagin&#xE1; que buscamos crear un juego de cartas, donde el usuario tiene que
-poder mover una carta por la pantalla usando el mouse o gestos del dispositivo
-mobile. El primer paso es crear el actor, con la imagen que nos interesa:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> mi_actor = pilas.actores.actor();
-mi_actor.imagen = <span class="hljs-string">&quot;imagenes:cartas/carta&quot;</span>;</code></pre>
-<p>Y aqu&#xED; lo interesante, para hacer que el usuario pueda mover este actor
-por la pantalla simplemente tenemos que &quot;ense&#xF1;arle&quot; al actor la habilidad
-arrastrable as&#xED;:</p><pre><code class="lang-typescript">mi_actor.aprender(<span class="hljs-string">&quot;arrastrable&quot;</span>);</code></pre>
+                                <h1 id="manejo-de-tiempo">Manejo de tiempo</h1><p>Pilas ofrece varias formas de ejecutar funciones cada determinado tiempo. Esto es &#xFA;til para crear enemigos, crear relojes para hacer m&#xE1;s desafiante un juego o incluso para aumentar la dificultad de un juego.</p><h2 id="funciones-manejar-el-tiempo">Funciones manejar el tiempo</h2><p>Hay dos funciones principales en el temporizador de pilas:</p><ul><li>pilas.luego(cantidad_de_segundos_a_esperar, funci&#xF3;n)
+</li>
+<li>pilas.cada(segundos_para_el_intervalo, funci&#xF3;n)
+</li></ul>
+<p>La primer funci&#xF3;n permite ejecutar una funci&#xF3;n luego de un periodo de tiempo. Por ejemplo, si queremos hacer que un actor diga algo luego de 3 segundos podemos hacerlo as&#xED;:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> mi_actor = pilas.actores.aceituna();
 
+pilas.luego(<span class="hljs-number">3</span>, () =&gt; {
+  mi_actor.decir(<span class="hljs-string">&quot;&#xA1;Han pasado 3 segundos!&quot;</span>)
+})</code></pre>
+<p>Hay que tener en cuenta que esta funci&#xF3;n se ejecutar&#xE1; una sola vez.</p><p>La segunda funci&#xF3;n, llamada <code>pilas.cada</code>, permite invocar una funci&#xF3;n cada determinada cantidad de segundos, muy similar a la anterior, pero invoca la funci&#xF3;n que le pidamos varias veces.</p><p>Por ejemplo, imagin&#xE1; que queremos crear actores <code>pelota</code> cada medio segundo, podemos hacer algo as&#xED;:</p><pre><code class="lang-typescript">pilas.cada(<span class="hljs-number">0.5</span>, () =&gt; {
+  <span class="hljs-keyword">var</span> pelota = pilas.actores.pelota();
+  pelota.y = <span class="hljs-number">100</span>;
+  pelota.x = pilas.azar(<span class="hljs-number">-200</span>, <span class="hljs-number">200</span>);
+})</code></pre>
+<p>Si ejecutas esas instrucciones, vas a ver en pantalla algo as&#xED;. Cada medio segundo se crear&#xE1; un actor pelota en una posici&#xF3;n diferente:</p><p><img alt="PilasEngine * 2019-06-08 21-37-41" src="tiempo.assets/PilasEngine * 2019-06-08 21-37-41.png"></p>
                                 
                                 </section>
                             
@@ -403,12 +403,12 @@ arrastrable as&#xED;:</p><pre><code class="lang-typescript">mi_actor.aprender(<s
 
             
                 
-                <a href="etiquetas.html" class="navigation navigation-prev " aria-label="Previous page: Etiquetas">
+                <a href="observables.html" class="navigation navigation-prev " aria-label="Previous page: Observables">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="azar.html" class="navigation navigation-next " aria-label="Next page: Azar o cálculos aleatorios">
+                <a href="angulos-distancias.html" class="navigation navigation-next " aria-label="Next page: Angulos y distancias">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -419,7 +419,7 @@ arrastrable as&#xED;:</p><pre><code class="lang-typescript">mi_actor.aprender(<s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Habilidades","level":"1.7","depth":1,"next":{"title":"Azar o cálculos aleatorios","level":"1.8","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"previous":{"title":"Etiquetas","level":"1.6","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"habilidades.md","mtime":"2019-06-08T19:58:05.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Manejo de tiempo","level":"1.10","depth":1,"next":{"title":"Angulos y distancias","level":"1.11","depth":1,"path":"angulos-distancias.md","ref":"angulos-distancias.md","articles":[]},"previous":{"title":"Observables","level":"1.9","depth":1,"path":"observables.md","ref":"observables.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"tiempo.md","mtime":"2019-06-09T00:55:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
