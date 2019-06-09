@@ -9,6 +9,7 @@
 - [Habilidades](habilidades.md)
 - [Azar o cálculos aleatorios](azar.md)
 - [Observables](observables.md)
+- [Manejo de tiempo](tiempo.md)
 - [Angulos y distancias](angulos-distancias.md)
 - [Colisiones](colisiones.md)
 - [Escenas](escenas.md)

@@ -325,8 +325,18 @@ class Pilas {
     this.modo.tweens.add(configuracion);
   }
 
+  /**
+   * Ejecuta una función luego de que transcurra una determinada cantidad de segundos.
+   */
   luego(duracion: number, tarea: any) {
-    this.modo.time.delayedCall(duracion * 1000, tarea);
+    return this.modo.time.delayedCall(duracion * 1000, tarea);
+  }
+
+  /**
+   * Ejecuta una función cada un cierto intervalo de tiempo.
+   */
+  cada(duracion: number, tarea: any) {
+    return this.modo.time.addEvent({ delay: duracion * 1000, callback: tarea, loop: true });
   }
 
   /**
