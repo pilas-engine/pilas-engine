@@ -22,7 +22,7 @@
       {{#en-electron}}
         {{pilas-boton-webserver cargando=cargando}}
       {{else}}
-        {{#pilas-tooltip class="top-1 right-0" texto="Esta opción solo está disponible en la versión de escritorio (offline)"}}
+        {{#pilas-tooltip pos="left" texto="Esta opción solo está disponible en la versión de escritorio (offline)"}}
           {{pilas-boton icono="webserver" desactivado=true texto="Iniciar servidor web"}}
         {{/pilas-tooltip}}
       {{/en-electron}}
@@ -32,15 +32,15 @@
     </div>
 
     <div class="pa2">
-      {{#pilas-tooltip class="right-1 w4" texto="Muestra el panel de escenas y actores"}}
+      {{#pilas-tooltip pos="left" texto="Muestra el panel de escenas y actores"}}
         {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
       {{/pilas-tooltip}}
 
-      {{#pilas-tooltip class="right-1 w4" texto="Ajusta el tamaño del area de juego"}}
+      {{#pilas-tooltip pos="left" texto="Ajusta el tamaño del area de juego"}}
         {{pilas-interruptor padding="pa1" resaltar=false icono="panel-central" deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir previsualización" texto_corto="Previs."}}
       {{/pilas-tooltip}}
 
-      {{#pilas-tooltip class="right-1 w4" texto="Muestra el editor de código"}}
+      {{#pilas-tooltip pos="left" texto="Muestra el editor de código"}}
         {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
       {{/pilas-tooltip}}
     </div>

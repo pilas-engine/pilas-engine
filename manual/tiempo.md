@@ -15,8 +15,8 @@ La primer función permite ejecutar una función luego de un periodo de tiempo. 
 let mi_actor = pilas.actores.aceituna();
 
 pilas.luego(3, () => {
-  mi_actor.decir("¡Han pasado 3 segundos!")
-})
+  mi_actor.decir("¡Han pasado 3 segundos!");
+});
 ```
 
 Hay que tener en cuenta que esta función se ejecutará una sola vez.
@@ -30,12 +30,35 @@ pilas.cada(0.5, () => {
   var pelota = pilas.actores.pelota();
   pelota.y = 100;
   pelota.x = pilas.azar(-200, 200);
-})
+});
 ```
 
 Si ejecutas esas instrucciones, vas a ver en pantalla algo así. Cada medio segundo se creará un actor pelota en una posición diferente:
 
-![PilasEngine * 2019-06-08 21-37-41](tiempo.assets/PilasEngine * 2019-06-08 21-37-41.png)
+![PilasEngine * 2019-06-08 21-37-41](tiempo.assets/PilasEngine \* 2019-06-08 21-37-41.png)
 
+## Métodos especiales
 
+También existe un método llamado `cada_segundo` que los actores pueden utilizar
+para disparar una acción cada vez que transcurre un segundo en el juego. Por
+ejemplo, si queremos crear un actor que aumente su tamaño cada un segundo
+podemos definir el método así:
 
+```
+class caja extends Actor {
+  cada_segundo() {
+    this.escala += 0.5;
+  }
+}
+```
+
+O bien, si ya tenemos la referencia al actor también sería válido escribir
+algo así:
+
+```
+let mi_actor = pilas.obtener_actor_por_nombre("caja");
+mi_actor.cada_segundo = () => {
+  mi_actor.escala += 0.5;
+  mi_actor.decir("¡pasó un segundo!");
+}
+```
