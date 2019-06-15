@@ -11,10 +11,7 @@ class Actores {
 
     // Toma las propiedades del actor pero como una extensión de las
     // propiedades iniciales.
-    let p = this.pilas.utilidades.combinar_propiedades(
-      actor.propiedades_base,
-      actor.propiedades
-    );
+    let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
 
     if (!p.nombre) {
       let nombre_asignado = this.pilas.escena.obtener_nombre_para(nombre);
@@ -112,5 +109,9 @@ class Actores {
 
   boton_de_control_espacio() {
     return this.crear_actor("boton_de_control_espacio");
+  }
+
+  ceferino() {
+    return this.crear_actor("ceferino");
   }
 }
