@@ -56,14 +56,13 @@ class ModoCargador extends Modo {
 
     for (let i = 0; i < this.pilas.recursos.fuentes.length; i++) {
       let fuente = this.pilas.recursos.fuentes[i];
-      this.load.bitmapFont(
-        fuente.nombre,
-        fuente.imagen,
-        fuente.fuente,
-        null,
-        null
-      );
+      this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
     }
+
+    this.load.image("p1", "ceferino/p1.png");
+    this.load.image("p2_000", "ceferino/p2.png");
+    this.load.image("torso", "ceferino/torso.png");
+    this.load.json("ceferino", "ceferino/ceferino.scon");
 
     this.load.on("progress", this.cuando_progresa_la_carga, this);
   }
@@ -74,8 +73,7 @@ class ModoCargador extends Modo {
     // Solo si transcurre cerca de 1 segundo sin cambiar esta escena se
     // emite un mensaje de error
     if (this.contador === 60) {
-      let msg =
-        "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
+      let msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
       this.add.bitmapText(5, 5, "impact", msg);
     }
   }
@@ -174,9 +172,7 @@ class ModoCargador extends Modo {
         }
       });
     } else {
-      this.pilas.mensajes.emitir_mensaje_al_editor(
-        "finaliza_carga_de_recursos"
-      );
+      this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
     }
   }
 
