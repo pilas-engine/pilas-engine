@@ -24,6 +24,7 @@ declare class Actores {
     boton_de_control_arriba(): any;
     boton_de_control_abajo(): any;
     boton_de_control_espacio(): any;
+    ceferino(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -573,6 +574,13 @@ declare class caja extends Actor {
     };
     iniciar(): void;
 }
+declare class ceferino extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class conejo extends Actor {
     propiedades: {
         x: number;
@@ -780,6 +788,452 @@ declare class Escena extends EscenaBase {
 declare class Normal extends Escena {
     iniciar(): void;
     actualizar(): void;
+}
+declare function loadBool(json: any, key: string | number, def?: boolean): boolean;
+declare function saveBool(json: any, key: string | number, value: boolean, def?: boolean): void;
+declare function loadFloat(json: any, key: string | number, def?: number): number;
+declare function saveFloat(json: any, key: string | number, value: number, def?: number): void;
+declare function loadInt(json: any, key: string | number, def?: number): number;
+declare function saveInt(json: any, key: string | number, value: number, def?: number): void;
+declare function loadString(json: any, key: string | number, def?: string): string;
+declare function saveString(json: any, key: string | number, value: string, def?: string): void;
+declare function makeArray(value: any): any[];
+declare function wrap(num: number, min: number, max: number): number;
+declare function interpolateLinear(a: any, b: any, t: any): any;
+declare function interpolateQuadratic(a: any, b: any, c: any, t: any): any;
+declare function interpolateCubic(a: any, b: any, c: any, d: any, t: any): any;
+declare function interpolateQuartic(a: any, b: any, c: any, d: any, e: any, t: any): any;
+declare function interpolateQuintic(a: any, b: any, c: any, d: any, e: any, f: any, t: any): any;
+declare function interpolateBezier(x1: any, y1: any, x2: any, y2: any, t: any): number;
+declare function tween(a: any, b: any, t: any): any;
+declare function wrapAngleRadians(angle: any): number;
+declare function tweenAngleRadians(a: any, b: any, t: any, spin: any): any;
+declare class Angle {
+    rad: number;
+    constructor(rad?: number);
+    deg: number;
+    readonly cos: number;
+    readonly sin: number;
+    selfIdentity(): Angle;
+    copy(other: Angle): Angle;
+    static add(a: Angle, b: Angle, out?: Angle): Angle;
+    add(other: Angle, out?: Angle): Angle;
+    selfAdd(other: Angle): Angle;
+    static tween(a: Angle, b: Angle, pct: number, spin: number, out?: Angle): Angle;
+    tween(other: Angle, pct: number, spin: number, out?: Angle): Angle;
+    selfTween(other: Angle, pct: number, spin: number): Angle;
+}
+declare class Vector {
+    x: number;
+    y: number;
+    constructor(x?: number, y?: number);
+    copy(other: Vector): Vector;
+    static equal(a: Vector, b: Vector, epsilon?: number): boolean;
+    static add(a: Vector, b: Vector, out?: Vector): Vector;
+    add(other: Vector, out?: Vector): Vector;
+    selfAdd(other: Vector): Vector;
+    static tween(a: Vector, b: Vector, pct: number, out?: Vector): Vector;
+    tween(other: Vector, pct: number, out?: Vector): Vector;
+    selfTween(other: Vector, pct: number): Vector;
+}
+declare class Position extends Vector {
+    constructor();
+}
+declare class Rotation extends Angle {
+    constructor();
+}
+declare class Scale extends Vector {
+    constructor();
+    selfIdentity(): Scale;
+}
+declare class Pivot extends Vector {
+    constructor();
+    selfIdentity(): Scale;
+}
+declare class Space {
+    position: Position;
+    rotation: Rotation;
+    scale: Scale;
+    copy(other: Space): Space;
+    load(json: any): Space;
+    static equal(a: Space, b: Space, epsilon?: number): boolean;
+    static identity(out?: Space): Space;
+    static translate(space: any, x: any, y: any): any;
+    static rotate(space: any, rad: any): any;
+    static scale(space: any, x: any, y: any): any;
+    static invert(space: any, out: any): any;
+    static combine(a: any, b: any, out: any): any;
+    static extract(ab: any, a: any, out: any): any;
+    static transform(space: any, v: any, out: any): any;
+    static untransform(space: any, v: any, out: any): any;
+    static tween(a: any, b: any, pct: any, spin: any, out: any): any;
+}
+declare class Element {
+    id: number;
+    name: string;
+    load(json: any): Element;
+}
+declare class File extends Element {
+    type: string;
+    constructor(type: string);
+    load(json: any): File;
+}
+declare class ImageFile extends File {
+    width: number;
+    height: number;
+    pivot: Pivot;
+    constructor();
+    load(json: any): ImageFile;
+}
+declare class SoundFile extends File {
+    constructor();
+    load(json: any): SoundFile;
+}
+declare class Folder extends Element {
+    file_array: File[];
+    load(json: any): Folder;
+}
+declare class BaseObject {
+    type: string;
+    name: string;
+    constructor(type: string);
+    load(json: any): BaseObject;
+}
+declare class SpriteObject extends BaseObject {
+    parent_index: number;
+    folder_index: number;
+    file_index: number;
+    local_space: Space;
+    world_space: Space;
+    default_pivot: boolean;
+    pivot: Pivot;
+    z_index: number;
+    alpha: number;
+    constructor();
+    load(json: any): SpriteObject;
+    copy(other: SpriteObject): SpriteObject;
+    tween(other: any, pct: any, spin: any): void;
+}
+declare class Bone extends BaseObject {
+    parent_index: number;
+    local_space: Space;
+    world_space: Space;
+    constructor();
+    load(json: any): Bone;
+    copy(other: Bone): Bone;
+    tween(other: Bone, pct: number, spin: number): void;
+}
+declare class BoxObject extends BaseObject {
+    parent_index: number;
+    local_space: Space;
+    world_space: Space;
+    pivot: Pivot;
+    constructor();
+    load(json: any): BoxObject;
+    copy(other: BoxObject): BoxObject;
+    tween(other: BoxObject, pct: number, spin: number): void;
+}
+declare class PointObject extends BaseObject {
+    parent_index: number;
+    local_space: Space;
+    world_space: Space;
+    constructor();
+    load(json: any): PointObject;
+    copy(other: PointObject): PointObject;
+    tween(other: PointObject, pct: number, spin: number): void;
+}
+declare class SoundObject extends BaseObject {
+    folder_index: number;
+    file_index: number;
+    trigger: boolean;
+    volume: number;
+    panning: number;
+    constructor();
+    load(json: any): SoundObject;
+    copy(other: SoundObject): SoundObject;
+    tween(other: SoundObject, pct: number, spin: number): void;
+}
+declare class EntityObject extends BaseObject {
+    parent_index: number;
+    local_space: Space;
+    world_space: Space;
+    entity_index: number;
+    animation_index: number;
+    animation_time: number;
+    pose: Pose;
+    constructor();
+    load(json: any): EntityObject;
+    copy(other: EntityObject): EntityObject;
+    tween(other: EntityObject, pct: number, spin: number): void;
+}
+declare class VariableObject extends BaseObject {
+    constructor();
+    load(json: any): VariableObject;
+    copy(other: VariableObject): VariableObject;
+    tween(other: VariableObject, pct: number, spin: number): void;
+}
+declare class Ref extends Element {
+    parent_index: number;
+    timeline_index: number;
+    keyframe_index: number;
+    load(json: any): Ref;
+}
+declare class BoneRef extends Ref {
+}
+declare class ObjectRef extends Ref {
+    z_index: number;
+    load(json: any): ObjectRef;
+}
+declare class Keyframe extends Element {
+    time: number;
+    load(json: any): Keyframe;
+    static find(array: Keyframe[], time: number): number;
+    static compare(a: Keyframe, b: Keyframe): number;
+}
+declare class Curve {
+    type: string;
+    c1: number;
+    c2: number;
+    c3: number;
+    c4: number;
+    load(json: any): Curve;
+    evaluate(t: number): number;
+}
+declare class MainlineKeyframe extends Keyframe {
+    curve: Curve;
+    bone_ref_array: BoneRef[];
+    object_ref_array: ObjectRef[];
+    load(json: any): MainlineKeyframe;
+}
+declare class Mainline {
+    keyframe_array: MainlineKeyframe[];
+    load(json: any): Mainline;
+}
+declare class TimelineKeyframe extends Keyframe {
+    type: string;
+    spin: number;
+    curve: Curve;
+    constructor(type: string);
+    load(json: any): TimelineKeyframe;
+}
+declare class SpriteTimelineKeyframe extends TimelineKeyframe {
+    sprite: SpriteObject;
+    constructor();
+    load(json: any): SpriteTimelineKeyframe;
+}
+declare class BoneTimelineKeyframe extends TimelineKeyframe {
+    bone: Bone;
+    constructor();
+    load(json: any): BoneTimelineKeyframe;
+}
+declare class BoxTimelineKeyframe extends TimelineKeyframe {
+    box: BoxObject;
+    constructor();
+    load(json: any): BoxTimelineKeyframe;
+}
+declare class PointTimelineKeyframe extends TimelineKeyframe {
+    point: PointObject;
+    constructor();
+    load(json: any): PointTimelineKeyframe;
+}
+declare class SoundTimelineKeyframe extends TimelineKeyframe {
+    sound: SoundObject;
+    constructor();
+    load(json: any): SoundTimelineKeyframe;
+}
+declare class EntityTimelineKeyframe extends TimelineKeyframe {
+    entity: EntityObject;
+    constructor();
+    load(json: any): EntityTimelineKeyframe;
+}
+declare class VariableTimelineKeyframe extends TimelineKeyframe {
+    variable: VariableObject;
+    constructor();
+    load(json: any): VariableTimelineKeyframe;
+}
+declare class TagDef extends Element {
+    tag_index: number;
+    load(json: any): TagDef;
+}
+declare class Tag extends Element {
+    tag_def_index: number;
+    load(json: any): Tag;
+}
+declare class TaglineKeyframe extends Keyframe {
+    tag_array: Tag[];
+    load(json: any): TaglineKeyframe;
+}
+declare class Tagline extends Element {
+    keyframe_array: TaglineKeyframe[];
+    load(json: any): Tagline;
+}
+declare class VarlineKeyframe extends Keyframe {
+    val: number | string;
+    load(json: any): VarlineKeyframe;
+}
+declare class Varline extends Element {
+    var_def_index: number;
+    keyframe_array: VarlineKeyframe[];
+    load(json: any): Varline;
+}
+declare class Meta extends Element {
+    tagline: Tagline;
+    varline_array: Varline[];
+    load(json: any): Meta;
+}
+declare class Timeline extends Element {
+    type: string;
+    object_index: number;
+    keyframe_array: TimelineKeyframe[];
+    meta: Meta;
+    load(json: any): Timeline;
+}
+declare class SoundlineKeyframe extends Keyframe {
+    sound: SoundObject;
+    load(json: any): SoundlineKeyframe;
+}
+declare class Soundline extends Element {
+    keyframe_array: SoundlineKeyframe[];
+    load(json: any): Soundline;
+}
+declare class EventlineKeyframe extends Keyframe {
+    load(json: any): EventlineKeyframe;
+}
+declare class Eventline extends Element {
+    keyframe_array: EventlineKeyframe[];
+    load(json: any): Eventline;
+}
+declare class MapInstruction {
+    folder_index: number;
+    file_index: number;
+    target_folder_index: number;
+    target_file_index: number;
+    load(json: any): MapInstruction;
+}
+declare class CharacterMap extends Element {
+    map_instruction_array: MapInstruction[];
+    load(json: any): CharacterMap;
+}
+declare class VarDef extends Element {
+    type: string;
+    default_value: number | string;
+    value: number | string;
+    load(json: any): VarDef;
+}
+declare class VarDefs extends Element {
+    var_def_array: VarDef[];
+    load(json: any): VarDefs;
+}
+declare class ObjInfo extends Element {
+    type: string;
+    var_defs: VarDefs;
+    constructor(type: string);
+    load(json: any): ObjInfo;
+}
+declare class SpriteFrame {
+    folder_index: number;
+    file_index: number;
+    load(json: any): SpriteFrame;
+}
+declare class SpriteObjInfo extends ObjInfo {
+    sprite_frame_array: SpriteFrame[];
+    constructor();
+    load(json: any): SpriteObjInfo;
+}
+declare class BoneObjInfo extends ObjInfo {
+    w: number;
+    h: number;
+    constructor();
+    load(json: any): BoneObjInfo;
+}
+declare class BoxObjInfo extends ObjInfo {
+    w: number;
+    h: number;
+    constructor();
+    load(json: any): BoxObjInfo;
+}
+declare class Animation extends Element {
+    length: number;
+    looping: string;
+    loop_to: number;
+    mainline: Mainline;
+    timeline_array: Timeline[];
+    soundline_array: Soundline[];
+    eventline_array: Eventline[];
+    meta: Meta;
+    min_time: number;
+    max_time: number;
+    load(json: any): Animation;
+}
+declare class Entity extends Element {
+    character_map_map: {
+        [key: string]: CharacterMap;
+    };
+    character_map_keys: string[];
+    var_defs: VarDefs;
+    obj_info_map: {
+        [key: string]: ObjInfo;
+    };
+    obj_info_keys: string[];
+    animation_map: {
+        [key: string]: Animation;
+    };
+    animation_keys: string[];
+    load(json: any): Entity;
+}
+declare class Data {
+    folder_array: Folder[];
+    tag_def_array: TagDef[];
+    entity_map: {
+        [key: string]: Entity;
+    };
+    entity_keys: string[];
+    load(json: any): Data;
+    getEntities(): {
+        [key: string]: Entity;
+    };
+    getEntityKeys(): string[];
+    getAnims(entity_key: string): {
+        [key: string]: Animation;
+    };
+    getAnimKeys(entity_key: string): string[];
+}
+declare class Pose {
+    data: Data;
+    entity_key: string;
+    character_map_key_array: string[];
+    anim_key: string;
+    time: number;
+    elapsed_time: number;
+    dirty: boolean;
+    bone_array: Bone[];
+    object_array: BaseObject[];
+    sound_array: any[];
+    event_array: string[];
+    tag_array: string[];
+    var_map: {
+        [key: string]: number | string;
+    };
+    constructor(data: Data);
+    getEntities(): {
+        [key: string]: Entity;
+    };
+    getEntityKeys(): string[];
+    curEntity(): Entity;
+    getEntity(): string;
+    setEntity(entity_key: string): void;
+    getAnims(): {
+        [key: string]: Animation;
+    };
+    getAnimKeys(): string[];
+    curAnim(): Animation;
+    curAnimLength(): number;
+    getAnim(): string;
+    setAnim(anim_key: string): void;
+    getTime(): number;
+    setTime(time: number): void;
+    update(elapsed_time: number): void;
+    strike(): void;
 }
 declare class Modo extends Phaser.Scene {
     matter: Phaser.Physics.Matter.MatterPhysics;
