@@ -2433,6 +2433,7 @@ var ceferino = (function (_super) {
         _this.propiedades = {
             imagen: "imagenes:basicos/invisible"
         };
+        _this.sprites = {};
         return _this;
     }
     ceferino.prototype.iniciar = function () {
@@ -2440,22 +2441,82 @@ var ceferino = (function (_super) {
         var scon = this.pilas.game.cache.json.get("ceferino");
         var data = new Data().load(scon);
         var pose = new Pose(data);
-        pose.setEntity("entidad");
-        pose.setAnim("mueve");
-        pose.update(0);
-        pose.strike();
-        pose.object_array.map(function (data) {
-            console.log(data);
-            var sprite = _this.pilas.modo.add.sprite(0, 0, data.name);
-            sprite.setOrigin(data.pivot.x, data.pivot.y);
-            sprite.x = data.local_space.position.x + 100;
-            sprite.y = data.local_space.position.y + 200;
-            sprite.setRotation(-data.world_space.rotation.rad);
-        });
-        console.log(pose);
-        window.pose = pose;
+        var entidad = Object.keys(pose.getEntities())[0];
+        pose.setEntity(entidad);
+        this.pose = pose;
+        this.definir_animacion(this.obtener_primer_animacion());
+        this.atlas = "atlas-ceferino";
+        this.dt = 0;
+        var boton = this.pilas.actores.boton();
+        boton.texto = "Avanzar animación";
+        boton.y = -100;
+        boton.cuando_hace_click = function () {
+            _this.eliminar_sprites();
+            var animacion = _this.obtener_siguiente_animacion();
+            _this.definir_animacion(animacion);
+        };
+        this.contenedor = this.pilas.modo.add.container();
     };
-    ceferino.prototype.actualizar = function () { };
+    ceferino.prototype.obtener_animaciones = function () {
+        return Object.keys(this.pose.getAnims());
+    };
+    ceferino.prototype.obtener_primer_animacion = function () {
+        var animaciones = this.obtener_animaciones();
+        return animaciones[0];
+    };
+    ceferino.prototype.definir_animacion = function (nombre) {
+        this.animacion_actual = nombre;
+        this.pose.setAnim(nombre);
+    };
+    ceferino.prototype.obtener_siguiente_animacion = function () {
+        var animacion = this.animacion_actual;
+        var animaciones = this.obtener_animaciones();
+        var indice = animaciones.indexOf(animacion);
+        indice += 1;
+        if (indice >= animaciones.length) {
+            indice = 0;
+        }
+        return animaciones[indice];
+    };
+    ceferino.prototype.eliminar_sprites = function () {
+        var items = Object.keys(this.sprites);
+        for (var i = 0; i < items.length; i++) {
+            var sprite = this.sprites[items[i]];
+            this.contenedor.remove(sprite);
+            sprite.destroy();
+        }
+        this.sprites = {};
+    };
+    ceferino.prototype.actualizar = function () {
+        this.pose.update(8);
+        this.pose.strike();
+        this.pilas.observar("animacion", this.animacion_actual);
+        this.actualizar_posicion(this.pose);
+    };
+    ceferino.prototype.obtener_o_crear_sprite = function (nombre, imagen) {
+        if (this.sprites[nombre]) {
+            return this.sprites[nombre];
+        }
+        else {
+            var sprite = this.pilas.modo.add.sprite(0, 0, this.atlas, imagen);
+            this.sprites[nombre] = sprite;
+            return sprite;
+        }
+    };
+    ceferino.prototype.actualizar_posicion = function (pose) {
+        var _this = this;
+        pose.object_array.map(function (data) {
+            var imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
+            var sprite = _this.obtener_o_crear_sprite(data.name, imagen);
+            sprite.setAlpha(data.alpha);
+            sprite.x = data.world_space.position.x + 200;
+            sprite.y = -data.world_space.position.y + 200;
+            sprite.setScale(data.world_space.scale.x, data.world_space.scale.y);
+            sprite.setDepth(data.world_space.z_index);
+            sprite.setRotation(-data.world_space.rotation.rad);
+            _this.contenedor.add(sprite);
+        });
+    };
     return ceferino;
 }(Actor));
 var conejo = (function (_super) {
@@ -5523,6 +5584,25 @@ var ModoCargador = (function (_super) {
     function ModoCargador() {
         return _super.call(this, { key: "ModoCargador" }) || this;
     }
+    ModoCargador.prototype.preload = function () {
+        this.load.crossOrigin = "anonymous";
+        this.contador = 0;
+        this.crear_indicador_de_carga();
+        this.load.multiatlas("imagenes", "imagenes.json", "./");
+        for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
+            var sonido = this.pilas.recursos.sonidos[i];
+            this.load.audio(sonido.nombre, sonido.ruta, {});
+        }
+        for (var i = 0; i < this.pilas.recursos.fuentes.length; i++) {
+            var fuente = this.pilas.recursos.fuentes[i];
+            this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
+        }
+        this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
+        this.load.json("ceferino", "ceferino.scon");
+        this.load.multiatlas("atlas-robot", "robot.json", "./");
+        this.load.json("robot", "robot.scon");
+        this.load.on("progress", this.cuando_progresa_la_carga, this);
+    };
     ModoCargador.prototype.init = function (data) {
         this.pilas = data.pilas;
     };
@@ -5547,25 +5627,6 @@ var ModoCargador = (function (_super) {
         borde.strokeRect(this.x, 220, 310, 20);
         progressBox.fillStyle(0x222222, 1);
         progressBox.fillRect(this.x, 220, 310, 20);
-    };
-    ModoCargador.prototype.preload = function () {
-        this.load.crossOrigin = "anonymous";
-        this.contador = 0;
-        this.crear_indicador_de_carga();
-        this.load.multiatlas("imagenes", "imagenes.json", "./");
-        for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
-            var sonido = this.pilas.recursos.sonidos[i];
-            this.load.audio(sonido.nombre, sonido.ruta, {});
-        }
-        for (var i = 0; i < this.pilas.recursos.fuentes.length; i++) {
-            var fuente = this.pilas.recursos.fuentes[i];
-            this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
-        }
-        this.load.image("p1", "ceferino/p1.png");
-        this.load.image("p2_000", "ceferino/p2.png");
-        this.load.image("torso", "ceferino/torso.png");
-        this.load.json("ceferino", "ceferino/ceferino.scon");
-        this.load.on("progress", this.cuando_progresa_la_carga, this);
     };
     ModoCargador.prototype.update = function () {
         this.contador += 1;

@@ -578,8 +578,21 @@ declare class ceferino extends Actor {
     propiedades: {
         imagen: string;
     };
+    sprites: any;
+    dt: number;
+    pose: any;
+    contenedor: any;
+    atlas: string;
+    animacion_actual: string;
     iniciar(): void;
+    obtener_animaciones(): string[];
+    obtener_primer_animacion(): string;
+    definir_animacion(nombre: string): void;
+    obtener_siguiente_animacion(): string;
+    eliminar_sprites(): void;
     actualizar(): void;
+    obtener_o_crear_sprite(nombre: string, imagen: string): any;
+    actualizar_posicion(pose: any): void;
 }
 declare class conejo extends Actor {
     propiedades: {
@@ -876,7 +889,7 @@ declare class Element {
 declare class File extends Element {
     type: string;
     constructor(type: string);
-    load(json: any): File;
+    load(json: any): any;
 }
 declare class ImageFile extends File {
     width: number;
@@ -896,6 +909,9 @@ declare class Folder extends Element {
 declare class BaseObject {
     type: string;
     name: string;
+    local_space: any;
+    world_space: any;
+    pivot: any;
     constructor(type: string);
     load(json: any): BaseObject;
 }
@@ -1273,9 +1289,9 @@ declare class ModoCargador extends Modo {
     barra_de_progreso: any;
     x: number;
     constructor();
+    preload(): void;
     init(data: any): void;
     private crear_indicador_de_carga;
-    preload(): void;
     update(): void;
     notificar_imagenes_cargadas(): void;
     create(): void;

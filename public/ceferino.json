@@ -1,0 +1,272 @@
+{
+	"textures": [
+		{
+			"image": "ceferino.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 128,
+				"h": 188
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "cara2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 74,
+						"h": 76
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 73,
+						"h": 75
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 73,
+						"h": 75
+					}
+				},
+				{
+					"filename": "torso.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 55,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 51,
+						"h": 51
+					},
+					"frame": {
+						"x": 76,
+						"y": 1,
+						"w": 51,
+						"h": 51
+					}
+				},
+				{
+					"filename": "cara1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 72,
+						"h": 73
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 71,
+						"h": 73
+					},
+					"frame": {
+						"x": 1,
+						"y": 78,
+						"w": 71,
+						"h": 73
+					}
+				},
+				{
+					"filename": "cuerpo.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 49,
+						"h": 57
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 49,
+						"h": 55
+					},
+					"frame": {
+						"x": 76,
+						"y": 54,
+						"w": 49,
+						"h": 55
+					}
+				},
+				{
+					"filename": "p2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 35,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 34
+					},
+					"frame": {
+						"x": 1,
+						"y": 153,
+						"w": 32,
+						"h": 34
+					}
+				},
+				{
+					"filename": "pie2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 29,
+						"h": 27
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 29,
+						"h": 27
+					},
+					"frame": {
+						"x": 35,
+						"y": 153,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "pie1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 26,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 26,
+						"h": 28
+					},
+					"frame": {
+						"x": 74,
+						"y": 111,
+						"w": 26,
+						"h": 28
+					}
+				},
+				{
+					"filename": "mano3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 23,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 23,
+						"h": 23
+					},
+					"frame": {
+						"x": 102,
+						"y": 111,
+						"w": 23,
+						"h": 23
+					}
+				},
+				{
+					"filename": "p1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 27,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 27,
+						"h": 21
+					},
+					"frame": {
+						"x": 74,
+						"y": 141,
+						"w": 27,
+						"h": 21
+					}
+				},
+				{
+					"filename": "pierna1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 24,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 20
+					},
+					"frame": {
+						"x": 103,
+						"y": 136,
+						"w": 24,
+						"h": 20
+					}
+				},
+				{
+					"filename": "pierna2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 23,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 23,
+						"h": 23
+					},
+					"frame": {
+						"x": 66,
+						"y": 164,
+						"w": 23,
+						"h": 23
+					}
+				},
+				{
+					"filename": "mano2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 21,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 21,
+						"h": 23
+					},
+					"frame": {
+						"x": 91,
+						"y": 164,
+						"w": 21,
+						"h": 23
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:86527b76f9d52c2aa27565afc3d3f2e9:b807329ab171fd6a5fbbaef3382f43fd:d4dcf4feabb56e05f0148dc1de18613f$"
+	}
+}

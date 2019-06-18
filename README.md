@@ -99,6 +99,7 @@ de varias herramientas y bibliotecas como:
 - https://github.com/koffsyrup/FileSaver.js
 - https://github.com/lukeed/polka
 - https://github.com/lukeed/sirv
+- https://github.com/flyover/spriter.ts
 
 ## Próximas tareas a desarrollar
 
