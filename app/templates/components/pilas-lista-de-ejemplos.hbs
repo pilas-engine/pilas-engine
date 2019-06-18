@@ -1,23 +1,20 @@
 {{yield}}
 
 {{#if ejemplos.tarea.last.isRunning}}
-  {{#each (range 0 11)}}
-    <div class="dib v-top">
-      <div class="relative bg-light-gray ml1 mt1" style="width: 180px; height: 140px;"></div>
+  {{#each (range 0 13)}}
+    <div class="dib v-top mb2 mr1">
+      <div class="relative bg-light-gray" style="width: 180px; height: 140px;"></div>
     </div>
   {{/each}}
 {{else}}
   {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
-    {{#link-to "ejemplos.ver" ejemplo.nombre tagName="div" class="dib pointer v-top"}}
-      <div class="relative unselectable ma1" style="width: 180px; height: 140px;">
+    {{#link-to "ejemplos.ver" ejemplo.nombre tagName="div" class="dib pointer v-top mb2 mr2"}}
+      <div class="relative unselectable" style="width: 180px; height: 140px;">
         <div class="sprite {{ejemplo.nombre}}"></div>
-
         <div class="text-shadow-1 absolute bottom-0 left-0 right-0 bg-black-50 pa1 white tc lato f7">{{ejemplo.nombre}}</div>
-
         {{#pilas-ejemplos-es-nuevo ejemplo=ejemplo}}
           <div class="absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow">NUEVO</div>
         {{/pilas-ejemplos-es-nuevo}}
-
       </div>
     {{/link-to}}
   {{/each}}
