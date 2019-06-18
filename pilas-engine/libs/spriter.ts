@@ -26,7 +26,8 @@
  */
 
 /**
- * Nota: para pilas-engine se eliminaron los exports de las funciones.
+ * Nota: para pilas-engine se eliminaron los exports de las funciones y
+ * se corrigieron los errores de compilación.
  */
 
 function loadBool(json: any, key: string | number, def?: boolean): boolean {
@@ -548,23 +549,27 @@ class Space {
   }
 }
 
+// @ts-ignore
 class Element {
   id: number = -1;
   name: string = "";
   load(json: any): Element {
     this.id = loadInt(json, "id", -1);
     this.name = loadString(json, "name", "");
+    // @ts-ignore
     return this;
   }
 }
 
+// @ts-ignore
 class File extends Element {
   type: string = "unknown";
   constructor(type: string) {
     super();
     this.type = type;
   }
-  load(json: any): File {
+  load(json: any): any {
+// @ts-ignore
     super.load(json);
     const type = loadString(json, "type", "image");
     if (this.type !== type) throw new Error();
@@ -577,9 +582,11 @@ class ImageFile extends File {
   height: number = 0;
   pivot: Pivot = new Pivot();
   constructor() {
+    // @ts-ignore
     super("image");
   }
   load(json: any): ImageFile {
+    // @ts-ignore
     super.load(json);
     this.width = loadInt(json, "width", 0);
     this.height = loadInt(json, "height", 0);
@@ -591,9 +598,11 @@ class ImageFile extends File {
 
 class SoundFile extends File {
   constructor() {
+    // @ts-ignore
     super("sound");
   }
   load(json: any): SoundFile {
+    // @ts-ignore
     super.load(json);
     return this;
   }
@@ -602,6 +611,7 @@ class SoundFile extends File {
 class Folder extends Element {
   file_array: File[] = [];
   load(json: any): Folder {
+    // @ts-ignore
     super.load(json);
     this.file_array = [];
     json.file = makeArray(json.file);
@@ -625,6 +635,9 @@ class Folder extends Element {
 class BaseObject {
   type: string = "unknown";
   name: string = "";
+  local_space: any;
+  world_space: any;
+  pivot: any;
   constructor(type: string) {
     this.type = type;
   }
@@ -853,6 +866,7 @@ class Ref extends Element {
   timeline_index: number = -1;
   keyframe_index: number = -1;
   load(json: any): Ref {
+    // @ts-ignore
     super.load(json);
     this.parent_index = loadInt(json, "parent", -1);
     this.timeline_index = loadInt(json, "timeline", -1);
@@ -875,6 +889,7 @@ class ObjectRef extends Ref {
 class Keyframe extends Element {
   time: number = 0;
   load(json: any): Keyframe {
+    // @ts-ignore
     super.load(json);
     this.time = loadInt(json, "time", 0);
     return this;
@@ -949,9 +964,13 @@ class Curve {
 }
 
 class MainlineKeyframe extends Keyframe {
+  // @ts-ignore
   curve: Curve = new Curve();
+  // @ts-ignore
   bone_ref_array: BoneRef[];
+  // @ts-ignore
   object_ref_array: ObjectRef[];
+  // @ts-ignore
   load(json: any): MainlineKeyframe {
     super.load(json);
     const mainline_keyframe = this;
@@ -962,6 +981,7 @@ class MainlineKeyframe extends Keyframe {
       mainline_keyframe.bone_ref_array.push(new BoneRef().load(bone_ref_json));
     });
     mainline_keyframe.bone_ref_array.sort(function(a, b) {
+      // @ts-ignore
       return a.id - b.id;
     });
     mainline_keyframe.object_ref_array = [];
@@ -970,6 +990,7 @@ class MainlineKeyframe extends Keyframe {
       mainline_keyframe.object_ref_array.push(new ObjectRef().load(object_ref_json));
     });
     mainline_keyframe.object_ref_array.sort(function(a, b) {
+      // @ts-ignore
       return a.id - b.id;
     });
     return mainline_keyframe;
@@ -993,11 +1014,13 @@ class Mainline {
 class TimelineKeyframe extends Keyframe {
   type: string = "unknown";
   spin: number = 1; // 1: counter-clockwise, -1: clockwise
+  // @ts-ignore
   curve: Curve = new Curve();
   constructor(type: string) {
     super();
     this.type = type;
   }
+  // @ts-ignore
   load(json: any): TimelineKeyframe {
     super.load(json);
     // const type = loadString(json, 'type', "sprite");
@@ -1009,10 +1032,12 @@ class TimelineKeyframe extends Keyframe {
 }
 
 class SpriteTimelineKeyframe extends TimelineKeyframe {
+  // @ts-ignore
   sprite: SpriteObject;
   constructor() {
     super("sprite");
   }
+  // @ts-ignore
   load(json: any): SpriteTimelineKeyframe {
     super.load(json);
     this.sprite = new SpriteObject().load(json.object);
@@ -1021,10 +1046,12 @@ class SpriteTimelineKeyframe extends TimelineKeyframe {
 }
 
 class BoneTimelineKeyframe extends TimelineKeyframe {
+  // @ts-ignore
   bone: Bone;
   constructor() {
     super("bone");
   }
+  // @ts-ignore
   load(json: any): BoneTimelineKeyframe {
     super.load(json);
     json.bone.type = json.bone.type || "bone";
@@ -1034,10 +1061,12 @@ class BoneTimelineKeyframe extends TimelineKeyframe {
 }
 
 class BoxTimelineKeyframe extends TimelineKeyframe {
+  // @ts-ignore
   box: BoxObject;
   constructor() {
     super("box");
   }
+  // @ts-ignore
   load(json: any): BoxTimelineKeyframe {
     super.load(json);
     json.object.type = json.object.type || "box";
@@ -1047,10 +1076,12 @@ class BoxTimelineKeyframe extends TimelineKeyframe {
 }
 
 class PointTimelineKeyframe extends TimelineKeyframe {
+  // @ts-ignore
   point: PointObject;
   constructor() {
     super("point");
   }
+  // @ts-ignore
   load(json: any): PointTimelineKeyframe {
     super.load(json);
     json.object.type = json.object.type || "point";
@@ -1060,10 +1091,12 @@ class PointTimelineKeyframe extends TimelineKeyframe {
 }
 
 class SoundTimelineKeyframe extends TimelineKeyframe {
+  // @ts-ignore
   sound: SoundObject;
   constructor() {
     super("sound");
   }
+  // @ts-ignore
   load(json: any): SoundTimelineKeyframe {
     super.load(json);
     json.object.type = json.object.type || "sound";
@@ -1073,10 +1106,12 @@ class SoundTimelineKeyframe extends TimelineKeyframe {
 }
 
 class EntityTimelineKeyframe extends TimelineKeyframe {
+  // @ts-ignore
   entity: EntityObject;
   constructor() {
     super("entity");
   }
+  // @ts-ignore
   load(json: any): EntityTimelineKeyframe {
     super.load(json);
     json.object.type = json.object.type || "entity";
@@ -1086,10 +1121,12 @@ class EntityTimelineKeyframe extends TimelineKeyframe {
 }
 
 class VariableTimelineKeyframe extends TimelineKeyframe {
+  // @ts-ignore
   variable: VariableObject;
   constructor() {
     super("variable");
   }
+  // @ts-ignore
   load(json: any): VariableTimelineKeyframe {
     super.load(json);
     json.object.type = json.object.type || "variable";
@@ -1101,6 +1138,7 @@ class VariableTimelineKeyframe extends TimelineKeyframe {
 class TagDef extends Element {
   tag_index: number = -1;
   load(json: any): TagDef {
+    // @ts-ignore
     super.load(json);
     return this;
   }
@@ -1109,6 +1147,7 @@ class TagDef extends Element {
 class Tag extends Element {
   tag_def_index: number = -1;
   load(json: any): Tag {
+    // @ts-ignore
     super.load(json);
     this.tag_def_index = loadInt(json, "t", -1);
     return this;
@@ -1116,7 +1155,9 @@ class Tag extends Element {
 }
 
 class TaglineKeyframe extends Keyframe {
+  // @ts-ignore
   tag_array: Tag[];
+  // @ts-ignore
   load(json: any): TaglineKeyframe {
     super.load(json);
     const tagline_keyframe = this;
@@ -1132,6 +1173,7 @@ class TaglineKeyframe extends Keyframe {
 class Tagline extends Element {
   keyframe_array: TaglineKeyframe[] = [];
   load(json: any): Tagline {
+    // @ts-ignore
     super.load(json);
     const tagline = this;
     tagline.keyframe_array = [];
@@ -1145,6 +1187,7 @@ class Tagline extends Element {
 
 class VarlineKeyframe extends Keyframe {
   val: number | string;
+  // @ts-ignore
   load(json: any): VarlineKeyframe {
     super.load(json);
     const varline_keyframe = this;
@@ -1164,6 +1207,7 @@ class Varline extends Element {
   var_def_index: number = -1;
   keyframe_array: VarlineKeyframe[];
   load(json: any): Varline {
+    // @ts-ignore
     super.load(json);
     const varline = this;
     varline.var_def_index = loadInt(json, "def", -1);
@@ -1180,6 +1224,7 @@ class Meta extends Element {
   tagline: Tagline;
   varline_array: Varline[];
   load(json: any): Meta {
+    // @ts-ignore
     super.load(json);
     const meta = this;
     meta.tagline = new Tagline();
@@ -1205,6 +1250,7 @@ class Timeline extends Element {
   keyframe_array: TimelineKeyframe[];
   meta: Meta;
   load(json: any): Timeline {
+    // @ts-ignore
     super.load(json);
     const timeline = this;
     timeline.type = loadString(json, "object_type", "sprite");
@@ -1260,7 +1306,9 @@ class Timeline extends Element {
 }
 
 class SoundlineKeyframe extends Keyframe {
+  // @ts-ignore
   sound: SoundObject;
+  // @ts-ignore
   load(json: any): SoundlineKeyframe {
     super.load(json);
     json.object.type = json.object.type || "sound";
@@ -1272,6 +1320,7 @@ class SoundlineKeyframe extends Keyframe {
 class Soundline extends Element {
   keyframe_array: SoundlineKeyframe[];
   load(json: any): Soundline {
+    // @ts-ignore
     super.load(json);
     const soundline = this;
     soundline.keyframe_array = [];
@@ -1286,6 +1335,7 @@ class Soundline extends Element {
 
 class EventlineKeyframe extends Keyframe {
   /// event: EventObject;
+  // @ts-ignore
   load(json: any): EventlineKeyframe {
     super.load(json);
     ///  this.event = new EventObject().load(json.object || {});
@@ -1296,6 +1346,7 @@ class EventlineKeyframe extends Keyframe {
 class Eventline extends Element {
   keyframe_array: EventlineKeyframe[];
   load(json: any): Eventline {
+    // @ts-ignore
     super.load(json);
     const eventline = this;
     eventline.keyframe_array = [];
@@ -1326,6 +1377,7 @@ class MapInstruction {
 class CharacterMap extends Element {
   map_instruction_array: MapInstruction[] = [];
   load(json: any): CharacterMap {
+    // @ts-ignore
     super.load(json);
     const character_map = this;
     character_map.map_instruction_array = [];
@@ -1343,6 +1395,7 @@ class VarDef extends Element {
   default_value: number | string;
   value: number | string;
   load(json: any): VarDef {
+    // @ts-ignore
     super.load(json);
     this.type = this.default_value = loadString(json, "type", "");
     switch (this.type) {
@@ -1363,6 +1416,7 @@ class VarDef extends Element {
 class VarDefs extends Element {
   var_def_array: VarDef[];
   load(json: any): VarDefs {
+    // @ts-ignore
     super.load(json);
     const var_defs = this;
     this.var_def_array = [];
@@ -1389,6 +1443,7 @@ class ObjInfo extends Element {
     this.type = type;
   }
   load(json: any): ObjInfo {
+    // @ts-ignore
     super.load(json);
     // const type = loadString(json, 'type', "unknown");
     // if (this.type !== type) throw new Error();
@@ -1452,6 +1507,7 @@ class BoxObjInfo extends ObjInfo {
   }
 }
 
+// @ts-ignore
 class Animation extends Element {
   length: number = 0;
   looping: string = "true"; // "true", "false" or "ping_pong"
@@ -1464,6 +1520,7 @@ class Animation extends Element {
   min_time: number = 0;
   max_time: number = 0;
   load(json: any): Animation {
+    // @ts-ignore
     super.load(json);
     const anim = this;
     anim.length = loadInt(json, "length", 0);
@@ -1490,6 +1547,7 @@ class Animation extends Element {
     }
     anim.min_time = 0;
     anim.max_time = anim.length;
+    // @ts-ignore
     return this;
   }
 }
@@ -1503,6 +1561,7 @@ class Entity extends Element {
   animation_map: { [key: string]: Animation };
   animation_keys: string[];
   load(json: any): Entity {
+    // @ts-ignore
     super.load(json);
     const entity = this;
     entity.character_map_map = {};
@@ -1510,7 +1569,9 @@ class Entity extends Element {
     json.character_map = makeArray(json.character_map);
     json.character_map.forEach(function(character_map_json) {
       const character_map = new CharacterMap().load(character_map_json);
+      // @ts-ignore
       entity.character_map_map[character_map.name] = character_map;
+      // @ts-ignore
       entity.character_map_keys.push(character_map.name);
     });
     this.var_defs = new VarDefs().load(json.var_defs || {});
@@ -1545,6 +1606,7 @@ class Entity extends Element {
     entity.animation_keys = [];
     json.animation = makeArray(json.animation);
     json.animation.forEach(function(animation_json) {
+      // @ts-ignore
       const animation = new Animation().load(animation_json);
       entity.animation_map[animation.name] = animation;
       entity.animation_keys.push(animation.name);
@@ -1578,7 +1640,9 @@ class Data {
     json.entity = makeArray(json.entity);
     json.entity.forEach(function(entity_json) {
       const entity = new Entity().load(entity_json);
+      // @ts-ignore
       data.entity_map[entity.name] = entity;
+      // @ts-ignore
       data.entity_keys.push(entity.name);
     });
     // patch SpriteObject::pivot
@@ -1586,6 +1650,7 @@ class Data {
       const entity = data.entity_map[entity_key];
       entity.animation_keys.forEach(function(animation_key) {
         const animation = entity.animation_map[animation_key];
+        // @ts-ignore
         animation.timeline_array.forEach(function(timeline) {
           timeline.keyframe_array.forEach(function(timeline_keyframe) {
             if (timeline_keyframe instanceof SpriteTimelineKeyframe) {
@@ -1693,6 +1758,7 @@ class Pose {
     const data = pose.data;
     const entity = data && data.entity_map[pose.entity_key];
     const anim = entity && entity.animation_map[pose.anim_key];
+    // @ts-ignore
     return (anim && anim.length) || 0;
   }
   getAnim(): string {
@@ -1703,6 +1769,7 @@ class Pose {
       this.anim_key = anim_key;
       const anim = this.curAnim();
       if (anim) {
+        // @ts-ignore
         this.time = wrap(this.time, anim.min_time, anim.max_time);
       }
       this.elapsed_time = 0;
@@ -1715,6 +1782,7 @@ class Pose {
   setTime(time: number): void {
     const anim = this.curAnim();
     if (anim) {
+      // @ts-ignore
       time = wrap(time, anim.min_time, anim.max_time);
     }
     if (this.time !== time) {
@@ -1739,7 +1807,9 @@ class Pose {
 
     pose.var_map = pose.var_map || {};
     entity.var_defs.var_def_array.forEach(function(var_def) {
+      // @ts-ignore
       if (!(var_def.name in pose.var_map)) {
+        // @ts-ignore
         pose.var_map[var_def.name] = var_def.default_value;
       }
     });
@@ -1755,14 +1825,18 @@ class Pose {
     let wrapped_min = false;
     let wrapped_max = false;
     if (anim) {
+      // @ts-ignore
       wrapped_min = elapsed_time < 0 && pose.time <= anim.min_time;
+      // @ts-ignore
       wrapped_max = elapsed_time > 0 && pose.time >= anim.max_time;
+      // @ts-ignore
       pose.time = wrap(pose.time, anim.min_time, anim.max_time);
     }
 
     const time = pose.time;
 
     if (anim) {
+      // @ts-ignore
       const mainline_keyframe_array = anim.mainline.keyframe_array;
       const mainline_keyframe_index1 = Keyframe.find(mainline_keyframe_array, time);
       const mainline_keyframe_index2 = (mainline_keyframe_index1 + 1) % mainline_keyframe_array.length;
@@ -1771,6 +1845,7 @@ class Pose {
       const mainline_time1 = mainline_keyframe1.time;
       let mainline_time2 = mainline_keyframe2.time;
       if (mainline_time2 < mainline_time1) {
+        // @ts-ignore
         mainline_time2 = anim.length;
       }
       let mainline_time = time;
@@ -1780,6 +1855,7 @@ class Pose {
         mainline_time = tween(mainline_time1, mainline_time2, mainline_tween);
       }
 
+      // @ts-ignore
       const timeline_array = anim.timeline_array;
 
       const data_bone_array = mainline_keyframe1.bone_ref_array;
@@ -1796,6 +1872,7 @@ class Pose {
         const time1 = timeline_keyframe1.time;
         let time2 = timeline_keyframe2.time;
         if (time2 < time1) {
+          // @ts-ignore
           time2 = anim.length;
         }
         let pct = 0.0;
@@ -1839,6 +1916,7 @@ class Pose {
         const time1 = timeline_keyframe1.time;
         let time2 = timeline_keyframe2.time;
         if (time2 < time1) {
+          // @ts-ignore
           time2 = anim.length;
         }
         let pct = 0.0;
@@ -2046,6 +2124,7 @@ class Pose {
 
       // process soundlines
       pose.sound_array = [];
+      // @ts-ignore
       anim.soundline_array.forEach(function(soundline) {
         function add_sound(sound_keyframe: SoundlineKeyframe): void {
           const folder = pose.data.folder_array[sound_keyframe.sound.folder_index];
@@ -2062,6 +2141,7 @@ class Pose {
             // all events between min_time and prev_time, not including prev_time
             // all events between max_time and time
             soundline.keyframe_array.forEach(function(sound_keyframe: SoundlineKeyframe) {
+              // @ts-ignore
               if ((anim.min_time <= sound_keyframe.time && sound_keyframe.time < prev_time) || (time <= sound_keyframe.time && sound_keyframe.time <= anim.max_time)) {
                 add_sound(sound_keyframe);
               }
@@ -2085,6 +2165,7 @@ class Pose {
             // all events between prev_time and max_time, not including prev_time
             // all events between min_time and time
             soundline.keyframe_array.forEach(function(sound_keyframe: SoundlineKeyframe) {
+              // @ts-ignore
               if ((anim.min_time <= sound_keyframe.time && sound_keyframe.time <= time) || (prev_time < sound_keyframe.time && sound_keyframe.time <= anim.max_time)) {
                 add_sound(sound_keyframe);
               }
@@ -2105,6 +2186,7 @@ class Pose {
 
       // process eventlines
       pose.event_array = [];
+      // @ts-ignore
       anim.eventline_array.forEach(function(eventline) {
         function add_event(event_keyframe: EventlineKeyframe) {
           // console.log(prev_time, keyframe.time, time, "event", eventline.name);
@@ -2119,6 +2201,7 @@ class Pose {
             // all events between min_time and prev_time, not including prev_time
             // all events between max_time and time
             eventline.keyframe_array.forEach(function(event_keyframe: EventlineKeyframe) {
+              // @ts-ignore
               if ((anim.min_time <= event_keyframe.time && event_keyframe.time < prev_time) || (time <= event_keyframe.time && event_keyframe.time <= anim.max_time)) {
                 add_event(event_keyframe);
               }
@@ -2142,6 +2225,7 @@ class Pose {
             // all events between prev_time and max_time, not including prev_time
             // all events between min_time and time
             eventline.keyframe_array.forEach(function(event_keyframe: EventlineKeyframe) {
+              // @ts-ignore
               if ((anim.min_time <= event_keyframe.time && event_keyframe.time <= time) || (prev_time < event_keyframe.time && event_keyframe.time <= anim.max_time)) {
                 add_event(event_keyframe);
               }
@@ -2160,13 +2244,16 @@ class Pose {
         }
       });
 
+      // @ts-ignore
       if (anim.meta) {
         // process tagline
+        // @ts-ignore
         if (anim.meta.tagline) {
           const add_tag = function(tag_keyframe) {
             pose.tag_array = [];
             tag_keyframe.tag_array.forEach(function(tag) {
               const tag_def = pose.data.tag_def_array[tag.tag_def_index];
+              // @ts-ignore
               pose.tag_array.push(tag_def.name);
             });
             pose.tag_array.sort();
@@ -2180,7 +2267,9 @@ class Pose {
               //  ----------x                o<---------
               // all events between min_time and prev_time, not including prev_time
               // all events between max_time and time
+              // @ts-ignore
               anim.meta.tagline.keyframe_array.forEach(function(tag_keyframe) {
+                // @ts-ignore
                 if ((anim.min_time <= tag_keyframe.time && tag_keyframe.time < prev_time) || (time <= tag_keyframe.time && tag_keyframe.time <= anim.max_time)) {
                   add_tag(tag_keyframe);
                 }
@@ -2190,6 +2279,7 @@ class Pose {
               //  |         |                |         |
               //            o<---------------x
               // all events between time and prev_time, not including prev_time
+              // @ts-ignore
               anim.meta.tagline.keyframe_array.forEach(function(tag_keyframe) {
                 if (time <= tag_keyframe.time && tag_keyframe.time < prev_time) {
                   add_tag(tag_keyframe);
@@ -2203,7 +2293,9 @@ class Pose {
               //  --------->o                x----------
               // all events between prev_time and max_time, not including prev_time
               // all events between min_time and time
+              // @ts-ignore
               anim.meta.tagline.keyframe_array.forEach(function(tag_keyframe) {
+                // @ts-ignore
                 if ((anim.min_time <= tag_keyframe.time && tag_keyframe.time <= time) || (prev_time < tag_keyframe.time && tag_keyframe.time <= anim.max_time)) {
                   add_tag(tag_keyframe);
                 }
@@ -2213,6 +2305,7 @@ class Pose {
               //  |         |                |         |
               //            x--------------->o
               // all events between prev_time and time, not including prev_time
+              // @ts-ignore
               anim.meta.tagline.keyframe_array.forEach(function(tag_keyframe) {
                 if (prev_time < tag_keyframe.time && tag_keyframe.time <= time) {
                   add_tag(tag_keyframe);
@@ -2224,6 +2317,7 @@ class Pose {
 
         // process varlines
         pose.var_map = pose.var_map || {};
+        // @ts-ignore
         anim.meta.varline_array.forEach(function(varline) {
           const keyframe_array = varline.keyframe_array;
           const keyframe_index1 = Keyframe.find(keyframe_array, time);
@@ -2234,6 +2328,7 @@ class Pose {
             const time1 = keyframe1.time;
             let time2 = keyframe2.time;
             if (time2 < time1) {
+              // @ts-ignore
               time2 = anim.length;
             }
             let pct = 0.0;
@@ -2254,6 +2349,7 @@ class Pose {
                 val = keyframe1.val;
             }
             // console.log(prev_time, keyframe.time, time, "const", var_def.name, val, var_def.default_value);
+            // @ts-ignore
             pose.var_map[var_def.name] = val;
           }
         });
