@@ -24,11 +24,18 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                window.ceferino = this.pilas.actores.ceferino();
+                let ceferino = this.pilas.actores.ceferino();
+                ceferino.x = -100;
+
+                let robot = this.pilas.actores.robot();
+                robot.x = 100;
+
+                this.ceferino = ceferino;
+                ceferino.z = -100;
               }
 
               actualizar() {
-
+                this.pilas.observar("animacion", this.ceferino.huesos.animacion_actual);
               }
 
             }`

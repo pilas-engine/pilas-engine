@@ -114,4 +114,8 @@ class Actores {
   ceferino() {
     return this.crear_actor("ceferino");
   }
+
+  robot() {
+    return this.crear_actor("robot");
+  }
 }

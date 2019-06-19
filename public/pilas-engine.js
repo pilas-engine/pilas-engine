@@ -98,6 +98,9 @@ var Actores = (function () {
     Actores.prototype.ceferino = function () {
         return this.crear_actor("ceferino");
     };
+    Actores.prototype.robot = function () {
+        return this.crear_actor("robot");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -672,6 +675,87 @@ var Historia = (function () {
     };
     return Historia;
 }());
+var Huesos = (function () {
+    function Huesos(pilas, nombre_de_datos_json, nombre_de_atlas, contenedor) {
+        this.sprites = {};
+        this.contenedor = contenedor;
+        this.atlas = nombre_de_atlas;
+        this.pilas = pilas;
+        var scon = this.pilas.game.cache.json.get(nombre_de_datos_json);
+        var data = new Data().load(scon);
+        var pose = new Pose(data);
+        var entidad = Object.keys(pose.getEntities())[0];
+        pose.setEntity(entidad);
+        this.pose = pose;
+        this.definir_animacion(this.obtener_primer_animacion());
+    }
+    Huesos.prototype.obtener_animaciones = function () {
+        return Object.keys(this.pose.getAnims());
+    };
+    Huesos.prototype.obtener_primer_animacion = function () {
+        var animaciones = this.obtener_animaciones();
+        return animaciones[0];
+    };
+    Huesos.prototype.definir_animacion = function (nombre) {
+        if (nombre != this.animacion_actual) {
+            this.eliminar_sprites();
+            this.animacion_actual = nombre;
+            this.pose.setAnim(nombre);
+            this.pose.update(0);
+            this.pose.strike();
+            this.actualizar_posicion(this.pose);
+        }
+    };
+    Huesos.prototype.obtener_siguiente_animacion = function () {
+        var animacion = this.animacion_actual;
+        var animaciones = this.obtener_animaciones();
+        var indice = animaciones.indexOf(animacion);
+        indice += 1;
+        if (indice >= animaciones.length) {
+            indice = 0;
+        }
+        return animaciones[indice];
+    };
+    Huesos.prototype.actualizar_animacion = function (dt) {
+        this.pose.update(dt);
+        this.pose.strike();
+        this.actualizar_posicion(this.pose);
+    };
+    Huesos.prototype.obtener_o_crear_sprite = function (nombre, imagen) {
+        if (this.sprites[nombre]) {
+            return this.sprites[nombre];
+        }
+        else {
+            var sprite = this.pilas.modo.add.sprite(0, 0, this.atlas, imagen);
+            this.sprites[nombre] = sprite;
+            return sprite;
+        }
+    };
+    Huesos.prototype.actualizar_posicion = function (pose) {
+        var _this = this;
+        pose.object_array.map(function (data) {
+            var imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
+            var sprite = _this.obtener_o_crear_sprite(data.name, imagen);
+            sprite.setAlpha(data.alpha);
+            sprite.x = data.world_space.position.x;
+            sprite.y = -data.world_space.position.y;
+            sprite.setScale(data.world_space.scale.x, data.world_space.scale.y);
+            sprite.setDepth(data.world_space.z_index);
+            sprite.setRotation(-data.world_space.rotation.rad);
+            _this.contenedor.add(sprite);
+        });
+    };
+    Huesos.prototype.eliminar_sprites = function () {
+        var items = Object.keys(this.sprites);
+        for (var i = 0; i < items.length; i++) {
+            var sprite = this.sprites[items[i]];
+            this.contenedor.remove(sprite);
+            sprite.destroy();
+        }
+        this.sprites = {};
+    };
+    return Huesos;
+}());
 var DEPURAR_MENSAJES = false;
 var Mensajes = (function () {
     function Mensajes(pilas) {
@@ -794,17 +878,7 @@ var Utilidades = (function () {
         console.error("No se puede definir esta propiedad (valor " + v + ") porque es de solo lectura.");
     };
     Utilidades.prototype.obtener_rampa_de_colores = function () {
-        var colores = [
-            0x82e0aa,
-            0xf8c471,
-            0xf0b27a,
-            0xf4f6f7,
-            0xb2babb,
-            0x85c1e9,
-            0xbb8fce,
-            0xf1948a,
-            0xd98880
-        ];
+        var colores = [0x82e0aa, 0xf8c471, 0xf0b27a, 0xf4f6f7, 0xb2babb, 0x85c1e9, 0xbb8fce, 0xf1948a, 0xd98880];
         return colores;
     };
     Utilidades.prototype.obtener_color_al_azar = function () {
@@ -903,6 +977,23 @@ var Utilidades = (function () {
             var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
             throw Error("No se encuentra la imagen \"" + nombre + "\"\n\u00BFQuisiste decir \"" + sugerencia + "\"?");
         }
+    };
+    Utilidades.prototype.sincronizar_contenedor = function (contenedor, sprite) {
+        contenedor.x = sprite.x;
+        contenedor.y = sprite.y;
+        if (sprite.flipX) {
+            contenedor.scaleX = -sprite.scaleX;
+        }
+        else {
+            contenedor.scaleX = sprite.scaleX;
+        }
+        if (sprite.flipY) {
+            contenedor.scaleY = -sprite.scaleY;
+        }
+        else {
+            contenedor.scaleY = sprite.scaleY;
+        }
+        contenedor.setDepth(sprite.depth);
     };
     return Utilidades;
 }());
@@ -2433,89 +2524,32 @@ var ceferino = (function (_super) {
         _this.propiedades = {
             imagen: "imagenes:basicos/invisible"
         };
-        _this.sprites = {};
         return _this;
     }
     ceferino.prototype.iniciar = function () {
-        var _this = this;
-        var scon = this.pilas.game.cache.json.get("ceferino");
-        var data = new Data().load(scon);
-        var pose = new Pose(data);
-        var entidad = Object.keys(pose.getEntities())[0];
-        pose.setEntity(entidad);
-        this.pose = pose;
-        this.definir_animacion(this.obtener_primer_animacion());
-        this.atlas = "atlas-ceferino";
-        this.dt = 0;
-        var boton = this.pilas.actores.boton();
-        boton.texto = "Avanzar animación";
-        boton.y = -100;
-        boton.cuando_hace_click = function () {
-            _this.eliminar_sprites();
-            var animacion = _this.obtener_siguiente_animacion();
-            _this.definir_animacion(animacion);
-        };
         this.contenedor = this.pilas.modo.add.container();
-    };
-    ceferino.prototype.obtener_animaciones = function () {
-        return Object.keys(this.pose.getAnims());
-    };
-    ceferino.prototype.obtener_primer_animacion = function () {
-        var animaciones = this.obtener_animaciones();
-        return animaciones[0];
-    };
-    ceferino.prototype.definir_animacion = function (nombre) {
-        this.animacion_actual = nombre;
-        this.pose.setAnim(nombre);
-    };
-    ceferino.prototype.obtener_siguiente_animacion = function () {
-        var animacion = this.animacion_actual;
-        var animaciones = this.obtener_animaciones();
-        var indice = animaciones.indexOf(animacion);
-        indice += 1;
-        if (indice >= animaciones.length) {
-            indice = 0;
-        }
-        return animaciones[indice];
-    };
-    ceferino.prototype.eliminar_sprites = function () {
-        var items = Object.keys(this.sprites);
-        for (var i = 0; i < items.length; i++) {
-            var sprite = this.sprites[items[i]];
-            this.contenedor.remove(sprite);
-            sprite.destroy();
-        }
-        this.sprites = {};
+        this.huesos = new Huesos(this.pilas, "ceferino", "atlas-ceferino", this.contenedor);
     };
     ceferino.prototype.actualizar = function () {
-        this.pose.update(8);
-        this.pose.strike();
-        this.pilas.observar("animacion", this.animacion_actual);
-        this.actualizar_posicion(this.pose);
-    };
-    ceferino.prototype.obtener_o_crear_sprite = function (nombre, imagen) {
-        if (this.sprites[nombre]) {
-            return this.sprites[nombre];
+        this.huesos.actualizar_animacion(8);
+        if (this.pilas.control.izquierda || this.pilas.control.derecha) {
+            if (this.pilas.control.izquierda) {
+                this.x -= 5;
+                this.espejado = true;
+                this.huesos.definir_animacion("camina");
+            }
+            if (this.pilas.control.derecha) {
+                this.x += 5;
+                this.espejado = false;
+                this.huesos.definir_animacion("camina");
+            }
         }
         else {
-            var sprite = this.pilas.modo.add.sprite(0, 0, this.atlas, imagen);
-            this.sprites[nombre] = sprite;
-            return sprite;
+            this.huesos.definir_animacion("mueve");
         }
     };
-    ceferino.prototype.actualizar_posicion = function (pose) {
-        var _this = this;
-        pose.object_array.map(function (data) {
-            var imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
-            var sprite = _this.obtener_o_crear_sprite(data.name, imagen);
-            sprite.setAlpha(data.alpha);
-            sprite.x = data.world_space.position.x + 200;
-            sprite.y = -data.world_space.position.y + 200;
-            sprite.setScale(data.world_space.scale.x, data.world_space.scale.y);
-            sprite.setDepth(data.world_space.z_index);
-            sprite.setRotation(-data.world_space.rotation.rad);
-            _this.contenedor.add(sprite);
-        });
+    ceferino.prototype.pre_actualizar = function () {
+        this.pilas.utilidades.sincronizar_contenedor(this.contenedor, this.sprite);
     };
     return ceferino;
 }(Actor));
@@ -2887,6 +2921,28 @@ var plataforma = (function (_super) {
     }
     plataforma.prototype.iniciar = function () { };
     return plataforma;
+}(Actor));
+var robot = (function (_super) {
+    __extends(robot, _super);
+    function robot() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:basicos/invisible"
+        };
+        return _this;
+    }
+    robot.prototype.iniciar = function () {
+        this.contenedor = this.pilas.modo.add.container();
+        this.huesos = new Huesos(this.pilas, "robot", "atlas-robot", this.contenedor);
+        this.huesos.definir_animacion("run");
+    };
+    robot.prototype.actualizar = function () {
+        this.huesos.actualizar_animacion(20);
+    };
+    robot.prototype.pre_actualizar = function () {
+        this.pilas.utilidades.sincronizar_contenedor(this.contenedor, this.sprite);
+    };
+    return robot;
 }(Actor));
 var suelo = (function (_super) {
     __extends(suelo, _super);

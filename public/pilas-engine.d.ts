@@ -25,6 +25,7 @@ declare class Actores {
     boton_de_control_abajo(): any;
     boton_de_control_espacio(): any;
     ceferino(): any;
+    robot(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -173,6 +174,23 @@ declare class Historia {
     obtener_cantidad_de_posiciones(): number;
     obtener_foto(posicion: number): any;
 }
+declare class Huesos {
+    pose: any;
+    contenedor: any;
+    atlas: string;
+    animacion_actual: string;
+    pilas: Pilas;
+    sprites: any;
+    constructor(pilas: Pilas, nombre_de_datos_json: string, nombre_de_atlas: string, contenedor: any);
+    obtener_animaciones(): string[];
+    obtener_primer_animacion(): string;
+    definir_animacion(nombre: string): void;
+    obtener_siguiente_animacion(): string;
+    actualizar_animacion(dt: any): void;
+    obtener_o_crear_sprite(nombre: string, imagen: string): any;
+    actualizar_posicion(pose: any): void;
+    eliminar_sprites(): void;
+}
 declare const DEPURAR_MENSAJES = false;
 declare class Mensajes {
     pilas: Pilas;
@@ -222,6 +240,7 @@ declare class Utilidades {
     obtener_similaridad(cadena1: string, cadena2: string): any;
     obtener_mas_similar(nombre: any, posibilidades: any): any;
     validar_que_existe_imagen(nombre: any): void;
+    sincronizar_contenedor(contenedor: any, sprite: any): void;
 }
 declare var NineSlice: any;
 declare var HOST: string;
@@ -578,21 +597,11 @@ declare class ceferino extends Actor {
     propiedades: {
         imagen: string;
     };
-    sprites: any;
-    dt: number;
-    pose: any;
     contenedor: any;
-    atlas: string;
-    animacion_actual: string;
+    huesos: Huesos;
     iniciar(): void;
-    obtener_animaciones(): string[];
-    obtener_primer_animacion(): string;
-    definir_animacion(nombre: string): void;
-    obtener_siguiente_animacion(): string;
-    eliminar_sprites(): void;
     actualizar(): void;
-    obtener_o_crear_sprite(nombre: string, imagen: string): any;
-    actualizar_posicion(pose: any): void;
+    pre_actualizar(): void;
 }
 declare class conejo extends Actor {
     propiedades: {
@@ -732,6 +741,16 @@ declare class plataforma extends Actor {
         figura_rebote: number;
     };
     iniciar(): void;
+}
+declare class robot extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    contenedor: any;
+    huesos: Huesos;
+    iniciar(): void;
+    actualizar(): void;
+    pre_actualizar(): void;
 }
 declare class suelo extends Actor {
     propiedades: {
