@@ -10,6 +10,33 @@ class ModoCargador extends Modo {
     super({ key: "ModoCargador" });
   }
 
+  preload() {
+    this.load.crossOrigin = "anonymous";
+    this.contador = 0;
+
+    this.crear_indicador_de_carga();
+
+    this.load.multiatlas("imagenes", "imagenes.json", "./");
+
+    for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
+      let sonido = this.pilas.recursos.sonidos[i];
+      this.load.audio(sonido.nombre, sonido.ruta, {});
+    }
+
+    for (let i = 0; i < this.pilas.recursos.fuentes.length; i++) {
+      let fuente = this.pilas.recursos.fuentes[i];
+      this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
+    }
+
+    this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
+    this.load.json("ceferino", "ceferino.scon");
+
+    this.load.multiatlas("atlas-robot", "robot.json", "./");
+    this.load.json("robot", "robot.scon");
+
+    this.load.on("progress", this.cuando_progresa_la_carga, this);
+  }
+
   init(data) {
     this.pilas = data.pilas;
   }
@@ -41,41 +68,13 @@ class ModoCargador extends Modo {
     progressBox.fillRect(this.x, 220, 310, 20);
   }
 
-  preload() {
-    this.load.crossOrigin = "anonymous";
-    this.contador = 0;
-
-    this.crear_indicador_de_carga();
-
-    this.load.multiatlas("imagenes", "imagenes.json", "./");
-
-    for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
-      let sonido = this.pilas.recursos.sonidos[i];
-      this.load.audio(sonido.nombre, sonido.ruta, {});
-    }
-
-    for (let i = 0; i < this.pilas.recursos.fuentes.length; i++) {
-      let fuente = this.pilas.recursos.fuentes[i];
-      this.load.bitmapFont(
-        fuente.nombre,
-        fuente.imagen,
-        fuente.fuente,
-        null,
-        null
-      );
-    }
-
-    this.load.on("progress", this.cuando_progresa_la_carga, this);
-  }
-
   update() {
     this.contador += 1;
 
     // Solo si transcurre cerca de 1 segundo sin cambiar esta escena se
     // emite un mensaje de error
     if (this.contador === 60) {
-      let msg =
-        "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
+      let msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
       this.add.bitmapText(5, 5, "impact", msg);
     }
   }
@@ -174,9 +173,7 @@ class ModoCargador extends Modo {
         }
       });
     } else {
-      this.pilas.mensajes.emitir_mensaje_al_editor(
-        "finaliza_carga_de_recursos"
-      );
+      this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
     }
   }
 

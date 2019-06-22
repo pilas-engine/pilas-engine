@@ -265,11 +265,18 @@ actualizar_definiciones:
 	@wget https://raw.githubusercontent.com/photonstorm/phaser/master/types/phaser.d.ts -O pilas-engine/declaraciones/phaser.d.ts
 
 actualizar_imagenes:
+	$(call log, "Actualizando grillas")
 	@node scripts/actualizar-imagenes.js
+	@node scripts/corregir-css-de-grilla-de-images.js
+	$(call log, "Copiando animaciones de huesos")
+	@cp recursos/huesos/robot/robot.scon public
+	@cp recursos/huesos/ceferino/ceferino.scon public
+	$(call log, "Creando spritesheets de imágenes")
 	TexturePacker recursos/iconos.tps
 	TexturePacker recursos/imagenes.tps
 	TexturePacker recursos/grilla-imagenes.tps
-	@node scripts/corregir-css-de-grilla-de-images.js
+	TexturePacker recursos/huesos/robot.tps
+	TexturePacker recursos/huesos/ceferino.tps
 
 
 actualizar_jsbeautify:

@@ -24,36 +24,20 @@ export default Controller.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
+                let ceferino = this.pilas.actores.ceferino();
+                ceferino.x = -100;
 
-                //this.crear_nave_simulada();
-              }
+                let robot = this.pilas.actores.robot();
+                robot.x = 100;
 
-              crear_nave_simulada() {
-                this.pilas.actores.nave();
-
-                this.pilas.control.simular_pulsacion('arriba', true);
-
-                this.pilas.luego(0.5, () => {
-                  this.pilas.control.simular_pulsacion('arriba', false);
-                  this.pilas.control.simular_pulsacion('izquierda', true);
-                });
-
-                this.pilas.luego(1, () => {
-                  this.pilas.control.simular_pulsacion('izquierda', false);
-                  this.pilas.control.simular_pulsacion('espacio', true);
-                });
-
-                this.pilas.luego(1.1, () => {
-                  this.pilas.control.simular_pulsacion('espacio', false);
-                });
-
+                this.ceferino = ceferino;
+                ceferino.z = -100;
               }
 
               actualizar() {
-                this.pilas.observar("cursor_x", this.pilas.cursor_x);
-                this.pilas.observar("cursor_y", this.pilas.cursor_y);
-                this.pilas.observar("¿pulsa la tecla arriba?", this.pilas.control.arriba);
+                this.pilas.observar("animacion", this.ceferino.huesos.animacion_actual);
               }
+
             }`
           },
           {
@@ -119,6 +103,7 @@ export default Controller.extend({
           camara_y: 0,
           fondo: "imagenes:fondos/fondo-plano",
           actores: [
+            /*
             {
               id: 4,
               x: 100,
@@ -138,6 +123,7 @@ export default Controller.extend({
               es_texto: false,
               figura_dinamica: true
             }
+            */
           ]
         },
         {

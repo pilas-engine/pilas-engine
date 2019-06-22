@@ -46,6 +46,10 @@
     {
       "nombre": "flappy",
       "desde": "2.0.78"
+    },
+    {
+      "nombre": "huesos",
+      "desde": "2.0.79"
     }
   ]
 }

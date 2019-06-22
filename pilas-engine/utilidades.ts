@@ -15,23 +15,11 @@ class Utilidades {
   }
 
   acceso_incorrecto(v) {
-    console.error(
-      `No se puede definir esta propiedad (valor ${v}) porque es de solo lectura.`
-    );
+    console.error(`No se puede definir esta propiedad (valor ${v}) porque es de solo lectura.`);
   }
 
   obtener_rampa_de_colores() {
-    let colores = [
-      0x82e0aa,
-      0xf8c471,
-      0xf0b27a,
-      0xf4f6f7,
-      0xb2babb,
-      0x85c1e9,
-      0xbb8fce,
-      0xf1948a,
-      0xd98880
-    ];
+    let colores = [0x82e0aa, 0xf8c471, 0xf0b27a, 0xf4f6f7, 0xb2babb, 0x85c1e9, 0xbb8fce, 0xf1948a, 0xd98880];
     return colores;
   }
 
@@ -47,9 +35,7 @@ class Utilidades {
 
   validar_numero(valor: number) {
     if (typeof valor !== "number") {
-      throw new Error(
-        `El valor enviado no corresponde con un número: ${valor}`
-      );
+      throw new Error(`El valor enviado no corresponde con un número: ${valor}`);
     }
   }
 
@@ -85,21 +71,11 @@ class Utilidades {
       return obj;
     }
 
-    return extend(
-      JSON.parse(JSON.stringify(propiedades_iniciales)),
-      propiedades
-    );
+    return extend(JSON.parse(JSON.stringify(propiedades_iniciales)), propiedades);
   }
 
-  obtener_distancia_entre(
-    desde_x: number,
-    desde_y: number,
-    hasta_x: number,
-    hasta_y: number
-  ) {
-    return Math.sqrt(
-      Math.abs(desde_x - hasta_x) ** 2 + Math.abs(desde_y - hasta_y) ** 2
-    );
+  obtener_distancia_entre(desde_x: number, desde_y: number, hasta_x: number, hasta_y: number) {
+    return Math.sqrt(Math.abs(desde_x - hasta_x) ** 2 + Math.abs(desde_y - hasta_y) ** 2);
   }
 
   obtener_similaridad(cadena1: string, cadena2: string) {
@@ -175,13 +151,31 @@ class Utilidades {
 
   validar_que_existe_imagen(nombre) {
     if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
-      let sugerencia = this.pilas.utilidades.obtener_mas_similar(
-        nombre,
-        this.pilas.imagenes_precargadas
-      );
-      throw Error(
-        `No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`
-      );
+      let sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
+      throw Error(`No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`);
     }
+  }
+
+  /**
+   * Se asegura de sincronizar las propiedades del contenedor respecto del
+   * sprite. Copia propiedades como escala, posición etc...
+   */
+  sincronizar_contenedor(contenedor, sprite) {
+    contenedor.x = sprite.x;
+    contenedor.y = sprite.y;
+
+    if (sprite.flipX) {
+      contenedor.scaleX = -sprite.scaleX;
+    } else {
+      contenedor.scaleX = sprite.scaleX;
+    }
+
+    if (sprite.flipY) {
+      contenedor.scaleY = -sprite.scaleY;
+    } else {
+      contenedor.scaleY = sprite.scaleY;
+    }
+
+    contenedor.setDepth(sprite.depth);
   }
 }
