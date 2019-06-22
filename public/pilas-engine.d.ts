@@ -596,6 +596,8 @@ declare class caja extends Actor {
 declare class ceferino extends Actor {
     propiedades: {
         imagen: string;
+        centro_x: number;
+        centro_y: number;
     };
     contenedor: any;
     huesos: Huesos;
@@ -745,6 +747,7 @@ declare class plataforma extends Actor {
 declare class robot extends Actor {
     propiedades: {
         imagen: string;
+        centro_y: number;
     };
     contenedor: any;
     huesos: Huesos;

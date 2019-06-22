@@ -1,12 +1,15 @@
 class ceferino extends Actor {
   propiedades = {
-    imagen: "imagenes:basicos/invisible"
+    imagen: "imagenes:objetos/ceferino",
+    centro_x: 0.48,
+    centro_y: 0.62
   };
 
   contenedor: any;
   huesos: Huesos;
 
   iniciar() {
+    this.imagen = "imagenes:basicos/invisible";
     this.contenedor = this.pilas.modo.add.container();
     this.huesos = new Huesos(this.pilas, "ceferino", "atlas-ceferino", this.contenedor);
   }

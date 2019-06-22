@@ -2522,11 +2522,14 @@ var ceferino = (function (_super) {
     function ceferino() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:basicos/invisible"
+            imagen: "imagenes:objetos/ceferino",
+            centro_x: 0.48,
+            centro_y: 0.62
         };
         return _this;
     }
     ceferino.prototype.iniciar = function () {
+        this.imagen = "imagenes:basicos/invisible";
         this.contenedor = this.pilas.modo.add.container();
         this.huesos = new Huesos(this.pilas, "ceferino", "atlas-ceferino", this.contenedor);
     };
@@ -2927,11 +2930,13 @@ var robot = (function (_super) {
     function robot() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:basicos/invisible"
+            imagen: "imagenes:objetos/robot",
+            centro_y: 1
         };
         return _this;
     }
     robot.prototype.iniciar = function () {
+        this.imagen = "imagenes:basicos/invisible";
         this.contenedor = this.pilas.modo.add.container();
         this.huesos = new Huesos(this.pilas, "robot", "atlas-robot", this.contenedor);
         this.huesos.definir_animacion("run");
