@@ -17,10 +17,8 @@ module("Integration | Component | pilas grilla de actores", function(hooks) {
 
     this.set("f", function() {});
 
-    await render(
-      hbs`{{pilas-grilla-de-actores actores=actores cuandoQuiereCrearActor=f}}`
-    );
+    await render(hbs`{{pilas-grilla-de-actores actores=actores cuandoQuiereCrearActor=f}}`);
 
-    assert.dom("[test-celda-actor]").hasText("aceituna aceituna");
+    assert.dom("[test-celda-actor]").hasText("aceituna");
   });
 });
