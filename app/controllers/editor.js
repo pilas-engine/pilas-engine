@@ -10,7 +10,7 @@ import fixtureDeProyecto from "../fixtures/proyecto-inicial";
 const queryParams = new QueryParams({
   serializado: { defaultValue: null, refresh: true, replace: true },
   ruta: { defaultValue: null, refresh: true, replace: true },
-  mostrarEditor: { as: "p3", defaultValue: false, replace: true },
+  mostrarEditor: { as: "p3", defaultValue: true, replace: true },
   expandirJuego: { as: "p2", defaultValue: true, replace: true },
   mostrarPropiedades: { as: "p1", defaultValue: true, replace: true },
   escenaActual: { defaultValue: 1, replace: true },
@@ -90,17 +90,13 @@ export default Controller.extend(queryParams.Mixin, {
       return EmberObject.create(escena);
     });
 
-    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(
-      tipo => {
-        return EmberObject.create(tipo);
-      }
-    );
+    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
+      return EmberObject.create(tipo);
+    });
 
-    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(
-      tipo => {
-        return EmberObject.create(tipo);
-      }
-    );
+    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(tipo => {
+      return EmberObject.create(tipo);
+    });
 
     return proyectoComoObjetoEmber;
   },

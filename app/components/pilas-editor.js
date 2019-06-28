@@ -9,6 +9,7 @@ import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
 import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
 import { observer } from "@ember/object";
 import base64_encode from "../utils/base64-encode";
+import { run } from "@ember/runloop";
 
 export default Component.extend({
   bus: service(),
@@ -60,7 +61,29 @@ export default Component.extend({
     document.addEventListener("keydown", this.alPulsarTecla.bind(this));
 
     this.bus.trigger("hacer_foco_en_pilas", {});
+    this.instanciarSplitJS();
   },
+
+  instanciarSplitJS() {
+    let splitjs = Split(["#panel-canvas", "#panel-editor"], {
+      sizes: [50, 50],
+      minSize: [320, 200],
+      expandToMin: false
+    });
+
+    this.set("splitjs", splitjs);
+  },
+
+  instanciarSplitJSSoloCuandoEsNecesario: observer("mostrarEditor", function() {
+    if (this.mostrarEditor && !this.splitjs) {
+      run.scheduleOnce("afterRender", () => {
+        this.instanciarSplitJS();
+      });
+    } else {
+      this.splitjs.destroy();
+      this.set("splitjs", null);
+    }
+  }),
 
   debe_expandir_el_panel_de_previsualizacion: computed("expandirJuego", "mostrarEditor", "mostrarPropiedades", function() {
     if (this.mostrarEditor) {
@@ -102,7 +125,6 @@ export default Component.extend({
 
   finaliza_carga() {
     this.set("cargando", false);
-    //this.mostrar_la_escena_actual_sobre_pilas();
     this.mostrar_la_escena_inicial();
     this.set("estado", this.estado.cuandoTerminoDeCargarPilas());
   },
@@ -138,17 +160,6 @@ export default Component.extend({
 
     actor.set("x", datos.x);
     actor.set("y", datos.y);
-    /*
-
-    this.get("log").grupo(
-      "Cambió la posición del actor desde el editor:",
-      `
-      let actor = pilas.obtener_actor(${datos.id});
-      actor.x = ${Math.round(datos.x)};
-      actor.y = ${Math.round(datos.y)};
-    `
-    );
-    */
   },
 
   comienza_a_mover_un_actor(datos) {

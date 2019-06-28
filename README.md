@@ -100,10 +100,10 @@ de varias herramientas y bibliotecas como:
 - https://github.com/lukeed/polka
 - https://github.com/lukeed/sirv
 - https://github.com/flyover/spriter.ts
+- https://github.com/nathancahill/split/tree/master/packages/splitjs
 
 ## Próximas tareas a desarrollar
 
 Tenemos un board de trello con todas las tareas que estamos desarrollando:
 
 - https://trello.com/b/eQJOjpOF/pilas-engine-2
-

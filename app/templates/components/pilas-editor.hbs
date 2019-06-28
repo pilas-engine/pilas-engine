@@ -50,7 +50,7 @@
   <section class="flex1 flex bt borde h-50">
     <div class="columns">
 
-      <div class="w6 {{if mostrarPropiedades "flex flex-column" "dn"}} br borde pa2 ">
+      <div class="ancho-panel-propiedades {{if mostrarPropiedades "flex flex-column" "dn"}} br borde pa2 ">
 
         <div class="unselectable">
           {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="Crear Escena"}}
@@ -85,7 +85,7 @@
 
       </div>
 
-      <div class="flex {{if debe_expandir_el_panel_de_previsualizacion "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
+      <div id="panel-canvas" class="flex {{if (and debe_expandir_el_panel_de_previsualizacion (not mostrarEditor)) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
 
         <div class="mb2 flex" style="padding-bottom: 3px ">
           {{#if estado.puedeEjecutar}}
@@ -118,8 +118,6 @@
                 </div>
 
                 <input class="v-btm w-100" type="range" id="posicion" min={{historiaMinimo}} max={{historiaMaximo}} oninput={{action "cambiarPosicion" value="target.value"}} value={{historiaPosicion}}>
-
-
 
               </div>
 
@@ -170,7 +168,7 @@
 
       </div>
 
-      <div class="flex1 {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
+      <div id="panel-editor" class="{{if mostrarEditor "" "flex1"}} {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
 
         <div class="unselectable pa2 flex bg-fondo">
           <div class="flex1">

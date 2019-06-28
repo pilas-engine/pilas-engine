@@ -20,6 +20,7 @@ module.exports = function(defaults) {
   app.import("vendor/auto-complete.js");
   app.import("vendor/FileSaver.js");
   app.import("vendor/scrollbooster.js");
+  app.import("vendor/split.js");
 
   return app.toTree();
 };
