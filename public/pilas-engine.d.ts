@@ -515,6 +515,7 @@ declare class boton extends ActorTextoBase {
         fondo: string;
         texto: string;
         es_texto: boolean;
+        z: number;
     };
     cuando_hace_click(): void;
     cuando_mueve(): void;
@@ -780,6 +781,7 @@ declare class texto extends ActorTextoBase {
         imagen: string;
         texto: string;
         es_texto: boolean;
+        z: number;
     };
 }
 declare class EscenaBase {

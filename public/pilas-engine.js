@@ -1358,8 +1358,7 @@ var ActorBase = (function () {
     ActorBase.prototype.pre_iniciar = function (propiedades) {
         var _this = this;
         var figura = propiedades.figura || "";
-        this._id =
-            propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
+        this._id = propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
         this._nombre = propiedades.nombre;
         this.sensores = [];
         this._figura_ancho = propiedades.figura_ancho;
@@ -2180,10 +2179,8 @@ var ActorTextoBase = (function (_super) {
         if (this._fondo) {
             this.copiar_atributos_de_sprite(this.sprite, this._fondo);
             this._texto.depth = this._texto.depth + 1;
-            this._fondo.x +=
-                this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
-            this._fondo.y +=
-                this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
+            this._fondo.x += this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
+            this._fondo.y += this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
         }
     };
     ActorTextoBase.prototype.actualizar = function () { };
@@ -2318,7 +2315,8 @@ var boton = (function (_super) {
             imagen: "imagenes:basicos/invisible",
             fondo: "imagenes:redimensionables/gris",
             texto: "Botón",
-            es_texto: true
+            es_texto: true,
+            z: -10
         };
         return _this;
     }
@@ -2988,7 +2986,8 @@ var texto = (function (_super) {
         _this.propiedades = {
             imagen: "imagenes:basicos/invisible",
             texto: "Hola mundo",
-            es_texto: true
+            es_texto: true,
+            z: -10
         };
         return _this;
     }
@@ -5453,11 +5452,7 @@ var Modo = (function (_super) {
                 var x = this.pilas.cursor_x;
                 var y = this.pilas.cursor_y;
                 this.fps_extra.alpha = 1;
-                this.fps_extra.text = [
-                    "ACTORES: " + actores.length,
-                    "CURSOR X: " + x,
-                    "CURSOR Y: " + y
-                ].join("\n");
+                this.fps_extra.text = ["ACTORES: " + actores.length, "CURSOR X: " + x, "CURSOR Y: " + y].join("\n");
             }
             else {
                 this.fps.alpha = 0;
@@ -5583,7 +5578,7 @@ var Modo = (function (_super) {
         texto.flipX = sprite.flipX;
         texto.flipY = sprite.flipY;
         texto.setOrigin(sprite.originX, sprite.originY);
-        texto.depth = sprite.z;
+        texto.depth = sprite.depth + 0.1;
         texto.setColor("black");
         if (sprite.input) {
             sprite.input.hitArea.width = texto.width;

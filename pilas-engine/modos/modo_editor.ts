@@ -148,7 +148,7 @@ class ModoEditor extends Modo {
   }
 
   aplicar_atributos_de_actor_a_sprite(actor, sprite) {
-    this.actualizar_sprite_desde_datos(sprite, actor);
+    this.actualizar_sprite_desde_datos(sprite, actor); // ver superclase 'modo'
   }
 
   update() {
