@@ -267,7 +267,9 @@ export default Component.extend({
 
   seleccionar_primer_escena_del_proyecto() {
     let primer_escena = this.get("proyecto.escenas")[0];
-    this.send("cuandoSelecciona", primer_escena.get("id"));
+    let id = primer_escena.get("id");
+    this.set("proyecto.escena_inicial", id);
+    this.send("cuandoSelecciona", id);
   },
 
   registrar_codigo_de_actor(nombre, codigo) {
