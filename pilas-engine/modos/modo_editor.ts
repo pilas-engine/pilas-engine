@@ -26,10 +26,7 @@ class ModoEditor extends Modo {
 
   private conectar_movimiento_del_mouse() {
     this.input.on("pointermove", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-        cursor.x,
-        cursor.y
-      );
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
       this.pilas.cursor_x = Math.trunc(posicion.x);
       this.pilas.cursor_y = Math.trunc(posicion.y);
     });
@@ -40,10 +37,7 @@ class ModoEditor extends Modo {
     let escena = this;
 
     this.input.on("dragstart", function(pointer, gameObject) {
-      escena.pilas.mensajes.emitir_mensaje_al_editor(
-        "comienza_a_mover_un_actor",
-        { id: gameObject.id }
-      );
+      escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
 
       if (escena.pilas.utilidades.es_firefox()) {
         escena.input.setDefaultCursor("grabbing");
@@ -67,14 +61,8 @@ class ModoEditor extends Modo {
     this.input.on("dragend", function(pointer, gameObject) {
       escena.input.setDefaultCursor("default");
 
-      let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-        gameObject.x,
-        gameObject.y
-      );
-      escena.pilas.mensajes.emitir_mensaje_al_editor(
-        "termina_de_mover_un_actor",
-        { id: gameObject.id, x: posicion.x, y: posicion.y }
-      );
+      let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
+      escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
     });
   }
 
@@ -182,10 +170,7 @@ class ModoEditor extends Modo {
     let actor_a_eliminar = this.actores.splice(indice, 1);
 
     if (actor_a_eliminar[0].figura) {
-      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
-        this.pilas.modo.matter.world.localWorld,
-        actor_a_eliminar[0].figura
-      );
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
     }
 
     if (actor_a_eliminar[0]["texto"]) {
