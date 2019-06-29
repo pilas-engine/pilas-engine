@@ -77,8 +77,7 @@ class ActorBase {
   pre_iniciar(propiedades) {
     let figura = propiedades.figura || "";
 
-    this._id =
-      propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
+    this._id = propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
     this._nombre = propiedades.nombre;
 
     this.sensores = [];
@@ -92,10 +91,7 @@ class ActorBase {
         this.sprite = this.crear_sprite("matter", propiedades.imagen);
         this.figura = figura;
 
-        this.crear_figura_rectangular(
-          propiedades.figura_ancho,
-          propiedades.figura_alto
-        );
+        this.crear_figura_rectangular(propiedades.figura_ancho, propiedades.figura_alto);
 
         this.dinamico = propiedades.figura_dinamica;
         this.sin_rotacion = propiedades.figura_sin_rotacion;
@@ -162,34 +158,22 @@ class ActorBase {
     };
 
     this.sprite.on("pointerdown", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-        cursor.x,
-        cursor.y
-      );
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
       this.cuando_hace_click(posicion.x, posicion.y, cursor);
     });
 
     this.sprite.on("pointerup", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-        cursor.x,
-        cursor.y
-      );
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
       this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
     });
 
     this.sprite.on("pointerout", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-        cursor.x,
-        cursor.y
-      );
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
       this.cuando_sale(posicion.x, posicion.y, cursor);
     });
 
     this.sprite.on("pointermove", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-        cursor.x,
-        cursor.y
-      );
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
       this.cuando_mueve(posicion.x, posicion.y, cursor);
     });
 
@@ -269,9 +253,7 @@ class ActorBase {
   }
 
   set area_de_interactividad(v: any) {
-    console.warn(
-      "No pude definir el area así, use definir_area_de_interactividad"
-    );
+    console.warn("No pude definir el area así, use definir_area_de_interactividad");
   }
 
   definir_area_de_interactividad(ancho: number, alto: number) {
@@ -375,13 +357,7 @@ class ActorBase {
 
   actualizar_sensores() {
     this.sensores.map(s => {
-      let {
-        x,
-        y
-      } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-        this.x,
-        this.y
-      );
+      let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
       this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, {
         x: x + s.distancia_x,
         y: y - s.distancia_y
@@ -442,19 +418,13 @@ class ActorBase {
       this.pilas.animar(this, "x", _x);
     } else {
       this.pilas.utilidades.validar_numero(_x);
-      let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-        _x,
-        0
-      );
+      let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
       this.sprite.x = x;
     }
   }
 
   get x() {
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-      this.sprite.x,
-      0
-    );
+    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
     return x;
   }
 
@@ -463,19 +433,13 @@ class ActorBase {
       this.pilas.animar(this, "y", _y);
     } else {
       this.pilas.utilidades.validar_numero(_y);
-      let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-        0,
-        _y
-      );
+      let { y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(0, _y);
       this.sprite.y = y;
     }
   }
 
   get y() {
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(
-      0,
-      this.sprite.y
-    );
+    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
     return y;
   }
 
@@ -509,11 +473,7 @@ class ActorBase {
       this.sprite.scaleX = s;
 
       if (this.figura) {
-        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(
-          this.sprite.body,
-          1 / this.escala_x,
-          1 / this.escala_y
-        );
+        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
       }
     }
   }
@@ -530,11 +490,7 @@ class ActorBase {
       this.sprite.scaleY = s;
 
       if (this.figura) {
-        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(
-          this.sprite.body,
-          1 / this.escala_x,
-          1 / this.escala_y
-        );
+        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
       }
     }
   }
@@ -620,9 +576,7 @@ class ActorBase {
 
   fallar_si_no_tiene_figura() {
     if (!this.figura) {
-      throw Error(
-        `Este actor no tiene figura física, no se puede llamar a este método`
-      );
+      throw Error(`Este actor no tiene figura física, no se puede llamar a este método`);
     }
   }
 
@@ -677,9 +631,7 @@ class ActorBase {
       (this.sprite as any).setStatic(estatico);
       (this.sprite as any).setVelocity(0, 0);
     } else {
-      console.warn(
-        "Este actor no tiene figura, ignorando valor estatico/dinámico."
-      );
+      console.warn("Este actor no tiene figura, ignorando valor estatico/dinámico.");
     }
   }
 
@@ -821,21 +773,12 @@ class ActorBase {
   }
 
   agregar_sensor(ancho, alto, x, y) {
-    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      x,
-      y
-    );
+    let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
 
-    let figura = this.pilas.modo.matter.add.rectangle(
-      pos.x,
-      pos.y,
-      ancho,
-      alto,
-      {
-        isSensor: true,
-        isStatic: false
-      }
-    );
+    let figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
+      isSensor: true,
+      isStatic: false
+    });
 
     figura.distancia_x = x;
     figura.distancia_y = y;
@@ -923,11 +866,7 @@ class ActorBase {
 
     if (clase) {
       if (this.tieneHabilidad(clase.name)) {
-        console.warn(
-          `No se aplica la habilidad ${
-            clase.name
-          } porque el actor ya la tenía vinculada.`
-        );
+        console.warn(`No se aplica la habilidad ${clase.name} porque el actor ya la tenía vinculada.`);
       } else {
         let instancia = new clase(this.pilas, this);
         instancia.iniciar();

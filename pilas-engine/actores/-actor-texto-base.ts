@@ -21,10 +21,8 @@ class ActorTextoBase extends ActorBase {
     if (this._fondo) {
       this.copiar_atributos_de_sprite(this.sprite, this._fondo);
       this._texto.depth = this._texto.depth + 1;
-      this._fondo.x +=
-        this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
-      this._fondo.y +=
-        this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
+      this._fondo.x += this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
+      this._fondo.y += this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
     }
   }
 
@@ -74,15 +72,7 @@ class ActorTextoBase extends ActorBase {
       imagen = fondo;
     }
 
-    this._fondo = this.pilas.modo.add["nineslice"](
-      0,
-      0,
-      30,
-      20,
-      imagen,
-      10,
-      10
-    );
+    this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
     this.actualizar_tamano_del_fondo();
   }
 
