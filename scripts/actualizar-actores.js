@@ -20,15 +20,11 @@ fs.readdir(src, (err, files) => {
     });
   });
 
-  fs.writeFile(
-    "public/actores.json",
-    JSON.stringify({ actores: actores }, null, 2),
-    err => {
-      if (err) {
-        throw err;
-      }
-
-      console.log("Generando el archivo public/actores.json");
+  fs.writeFile("public/actores.json", JSON.stringify({ actores: actores }, null, 2), err => {
+    if (err) {
+      throw err;
     }
-  );
+
+    console.log("Generando el archivo public/actores.json");
+  });
 });

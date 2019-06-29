@@ -7,40 +7,33 @@ export default {
     escenas: [
       {
         nombre: "escena1",
-        codigo:
-          "class escena1 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+        codigo: "class escena1 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
       },
       {
         nombre: "escena2",
-        codigo:
-          "class escena2 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+        codigo: "class escena2 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
       }
     ],
     actores: [
       {
         nombre: "plataforma",
-        codigo:
-          'class plataforma extends Actor {\n    propiedades = {\n        figura: "rectangulo",\n        imagen: "plataforma",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}'
+        codigo: "// @ts-ignore\nclass plataforma extends Actor {\n    iniciar() {}\n}"
       },
       {
         nombre: "caja",
-        codigo:
-          'class caja extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: "caja",\n        etiqueta: "caja",\n        figura: "rectangulo",\n        figura_ancho: 45,\n        figura_alto: 45,\n        figura_rebote: 0.9\n    };\n\n    iniciar() {}\n}'
+        codigo: "// @ts-ignore\nclass caja extends Actor {\n    iniciar() {}\n}"
       },
       {
         nombre: "pelota",
-        codigo:
-          'class pelota extends Actor {\n    propiedades = {\n        imagen: "pelota",\n        figura: "circulo",\n        figura_radio: 25\n    };\n\n    iniciar() {}\n}'
+        codigo: "// @ts-ignore\nclass pelota extends Actor {\n    iniciar() {}\n}"
       },
       {
         nombre: "techo",
-        codigo:
-          'class techo extends Actor {\n    propiedades = {\n        figura: "rectangulo",\n        imagen: "techo",\n        y: +255,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}'
+        codigo: "// @ts-ignore\nclass techo extends Actor {\n    iniciar() {}\n}"
       },
       {
         nombre: "suelo",
-        codigo:
-          'class suelo extends Actor {\n    propiedades = {\n        figura: "rectangulo",\n        imagen: "suelo",\n        y: -250,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}'
+        codigo: "// @ts-ignore\nclass suelo extends Actor {\n    iniciar() {}\n}"
       }
     ]
   },

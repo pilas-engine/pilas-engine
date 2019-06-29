@@ -7,6 +7,7 @@ import estados from "../estados/estados-de-pilas-editor";
 import aplicar_nombre from "../utils/aplicar-nombre";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
 import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
+import preparar_codigo_para_el_editor from "../utils/preparar-codigo-para-el-editor";
 import { observer } from "@ember/object";
 import base64_encode from "../utils/base64-encode";
 import { run } from "@ember/runloop";
@@ -409,7 +410,7 @@ export default Component.extend({
 
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 
-      this.registrar_codigo_de_actor(nombre, actor.codigo);
+      this.registrar_codigo_de_actor(nombre, preparar_codigo_para_el_editor(actor.codigo));
 
       this.set("mostrarModalCreacionDeActor", false);
 

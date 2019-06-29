@@ -26,12 +26,6 @@ class Modo extends Phaser.Scene {
     this.fps_extra.scrollFactorX = 0;
     this.fps_extra.scrollFactorY = 0;
 
-    /*
-    this.pilas.game.input.onDown.addOnce(() => {
-     this.pilas.game.sound.context.resume();
-});
-*/
-
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
   }
@@ -70,11 +64,7 @@ class Modo extends Phaser.Scene {
         let y = this.pilas.cursor_y;
 
         this.fps_extra.alpha = 1;
-        this.fps_extra.text = [
-          `ACTORES: ${actores.length}`,
-          `CURSOR X: ${x}`,
-          `CURSOR Y: ${y}`
-        ].join("\n");
+        this.fps_extra.text = [`ACTORES: ${actores.length}`, `CURSOR X: ${x}`, `CURSOR Y: ${y}`].join("\n");
       } else {
         this.fps.alpha = 0;
         this.fps_extra.alpha = 0;
@@ -132,10 +122,7 @@ class Modo extends Phaser.Scene {
   }
 
   actualizar_sprite_desde_datos(sprite, actor) {
-    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      actor.x,
-      actor.y
-    );
+    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
 
     this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
 
@@ -159,10 +146,7 @@ class Modo extends Phaser.Scene {
     sprite.alpha = 1 - actor.transparencia / 100;
 
     if (sprite.figura) {
-      this.pilas.Phaser.Physics.Matter.Matter.World.remove(
-        this.pilas.modo.matter.world.localWorld,
-        sprite.figura
-      );
+      this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
     }
 
     if (actor.figura) {
@@ -231,7 +215,7 @@ class Modo extends Phaser.Scene {
     texto.flipX = sprite.flipX;
     texto.flipY = sprite.flipY;
     texto.setOrigin(sprite.originX, sprite.originY);
-    texto.depth = sprite.z;
+    texto.depth = sprite.depth + 0.1;
     texto.setColor("black");
 
     if (sprite.input) {
@@ -268,25 +252,14 @@ class Modo extends Phaser.Scene {
   }
 
   crear_figura_estatica_para(actor) {
-    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      actor.x,
-      actor.y
-    );
-    let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(
-      -actor.rotacion
-    );
+    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+    let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
 
     if (actor.figura === "rectangulo") {
-      return this.matter.add.rectangle(
-        coordenada.x,
-        coordenada.y,
-        actor.figura_ancho,
-        actor.figura_alto,
-        {
-          isStatic: true,
-          angle: angulo
-        }
-      );
+      return this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
+        isStatic: true,
+        angle: angulo
+      });
     }
 
     if (actor.figura === "circulo") {
@@ -305,16 +278,11 @@ class Modo extends Phaser.Scene {
   }
 
   posicionar_la_camara(datos_de_la_escena) {
-    this.cameras.cameras[0].setScroll(
-      datos_de_la_escena.camara_x,
-      -datos_de_la_escena.camara_y
-    );
+    this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
   }
 
   actualizar_posicion(posicion: any = null) {
-    throw Error(
-      "No se puede actualizar posicion en este modo. Solo se puede en el modo pausa."
-    );
+    throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
   }
 
   dibujar_punto_de_control(graphics, x, y) {
