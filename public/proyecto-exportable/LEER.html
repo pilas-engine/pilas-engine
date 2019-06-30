@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Instrucciones para exportar juegos</title>
+
+    <style>
+
+      * {
+        font-family: 'verdana';
+        max-width: 40em;
+      }
+
+      li {
+        margin-bottom: 1em;
+
+      }
+
+      .codigo {
+        border: 1px solid gray;
+        padding: 8px;
+        border-radius: 5px;
+        background-color: #eee;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <h1>¡Hola!</h1>
+
+    <p>Este directorio contiene tu juego generado con
+      <a href="https://www.pilas-engine.com.ar" target="_blank">pilas-engine</a>
+      listo para empaquetar o distribuir. Este archivo en particular solo contiene
+      instrucciones iniciales.</p>
+
+      <p>Pero antes de usarlo, algunas aclaraciones importantes:</p>
+
+      <ul>
+        <li>La carpeta "proyecto" tiene todos los archivos
+          que necesita tu juego para funcionar: imágenes, fuentes,
+          animaciones, bibliotecas etc...
+        </li>
+
+        <li>Necesitas un webserver para ejecutar el juego de forma
+          local. Mirá esta documentación para más detalles:
+
+          <a href="https://app.pilas-engine.com.ar/manual/exportar_juegos.html" target="_blank">Cómo exportar juegos</a>
+        </li>
+
+
+        <li>Para generar un ejecutable .exe de tu juego, una aplicación mobile
+          o subirlo a web mirá esta documentación con consejos e instrucciones:
+
+          <a href="https://app.pilas-engine.com.ar/manual/exportar_juegos.html" target="_blank">Cómo exportar juegos</a>
+        </li>
+
+        <li>Si tienes <a href="https://nodejs.org/es/" target="_blank">Node.js</a> instalado en tu equipo, simplemente ingresá en la
+          carpeta "proyecto" y ejecuta:
+
+
+<pre class="codigo">
+para instalar dependencias:
+
+  npm install
+
+para ejecutar en un navegador local:
+
+  npm start
+
+para publicar en los servidores gratuitos de https://surge.sh:
+
+  npm run surge
+
+para probar offline:
+
+  npm run electron
+</pre>
+
+
+        </li>
+
+
+      </ul>
+  </body>
+</html>

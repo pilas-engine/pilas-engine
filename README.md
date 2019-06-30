@@ -101,6 +101,7 @@ de varias herramientas y bibliotecas como:
 - https://github.com/lukeed/sirv
 - https://github.com/flyover/spriter.ts
 - https://github.com/nathancahill/split/tree/master/packages/splitjs
+- https://stuk.github.io/jszip/
 
 ## Próximas tareas a desarrollar
 

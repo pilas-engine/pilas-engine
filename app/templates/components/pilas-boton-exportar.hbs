@@ -1,0 +1,29 @@
+{{yield}}
+
+{{pilas-boton ejecutando=tareaExportar.last.isRunning icono="exportar" desactivado=desactivado accion=(action "exportar") texto="Exportar"}}
+
+{{#pilas-modal alCerrar=(action "cerrar") puede_cerrar=tareaExportar.last.isSuccessful visible=mostrar_mensajes titulo="Exportando ..."}}
+
+  <div class="ba borde bg-fondo-secundario h5 overflow-y-scroll pa2 mb2" id="contenedor-con-scroll">
+    {{#each mensajes as |mensaje|}}
+      <div class="f6 pb1">{{mensaje}}</div>
+      {{pilas-scroll-to-bottom contenedor="contenedor-con-scroll"}}
+    {{/each}}
+
+    {{#if tareaExportar.last.isRunning}}
+      <div class="f5">
+        {{pilas-spinner}}
+      </div>
+    {{/if}}
+  </div>
+
+
+  {{#if mostrar_boton_para_cerrar}}
+    <div class="">
+      {{pilas-boton texto="Cerrar" accion=(action "cerrar")}}
+
+      {{#pilas-link url="https://app.pilas-engine.com.ar/manual/exportar_juegos.html"}}Ver documentación sobre cómo publicar juegos{{/pilas-link}}
+    </div>
+  {{/if}}
+
+{{/pilas-modal}}

@@ -17,6 +17,8 @@
         {{pilas-boton icono="guardar" desactivado=cargando accion=(action "cuando_guarda"  proyecto) demora=1 texto="Guardar"}}
       {{/en-electron}}
 
+      {{pilas-boton-exportar proyecto=proyecto desactivado=(not estado.puedeEjecutar)}}
+
       {{pilas-boton-preferencias icono="preferencias" permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
 
       {{#en-electron}}
@@ -195,7 +197,5 @@
 
     </div>
   </section>
-
-  <footer class="h2 tr bt borde"></footer>
 
 </div>

@@ -2,9 +2,12 @@ import Component from "@ember/component";
 
 export default Component.extend({
   tagName: "",
+  puede_cerrar: true,
   actions: {
     ocultar() {
-      this.alCerrar();
+      if (this.puede_cerrar) {
+        this.alCerrar();
+      }
     }
   }
 });

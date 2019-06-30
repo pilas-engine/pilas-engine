@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:486c490d34d4fb86637b20ea5cd301f3:245cf5519ef4d2b6af673de65639158e:467c798a4e4a5265189118ecb556e0a2$
+   $TexturePacker:SmartUpdate:b571bfe9af026800a6baca94daa1b816:c14d6c7767ec73680b612078477678b2:467c798a4e4a5265189118ecb556e0a2$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -41,6 +41,7 @@
 .enjambre-texto {width:100px; height:19px; background-position: -230px -427px}
 .error {width:24px; height:24px; background-position: -460px -477px}
 .escena {width:24px; height:24px; background-position: -486px -477px}
+.exportar {width:25px; height:25px; background-position: -959px -476px}
 .flappy {width:180px; height:140px; background-position: -365px -285px}
 .github {width:60px; height:50px; background-position: -911px -197px}
 .gravedad {width:180px; height:140px; background-position: -547px -143px}

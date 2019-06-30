@@ -9,9 +9,11 @@
       <div class="flex">
         <h1 class="f4 pl2 flex1" id="titulo">{{titulo}}</h1>
 
-        <button class="pointer ma3 bn bg-fondo texto" {{action "ocultar"}} id="cerrar">
-          ×
-        </button>
+        {{#if puede_cerrar}}
+          <button class="pointer ma3 bn bg-fondo texto" {{action "ocultar"}} id="cerrar">
+            ×
+          </button>
+        {{/if}}
       </div>
 
       <div class="flex1 pa2 overflow-auto flex flex-column">

@@ -214,6 +214,7 @@ export default Service.extend({
         max-width: 100%;
         object-fit: contain;
         margin-left: 0 !important;
+      }
     `;
   },
 

@@ -4,15 +4,7 @@ const EmberApp = require("ember-cli/lib/broccoli/ember-app");
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      exclude: [
-        "vs",
-        "manual",
-        "api",
-        "imagenes",
-        "fuentes",
-        "sonidos",
-        "monaco-vim"
-      ]
+      exclude: ["vs", "manual", "api", "imagenes", "fuentes", "sonidos", "monaco-vim"]
     }
   });
 
@@ -21,6 +13,7 @@ module.exports = function(defaults) {
   app.import("vendor/FileSaver.js");
   app.import("vendor/scrollbooster.js");
   app.import("vendor/split.js");
+  app.import("vendor/jszip.js");
 
   return app.toTree();
 };

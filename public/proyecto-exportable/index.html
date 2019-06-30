@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script>
+      var proyecto_serializado_inicial = "CODIGO_SERIALIZADO";
+    </script>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      #game {
+        width: 100%;
+        height: 100%;
+        background-color: #424242;
+        text-align: center;
+      }
+
+      .dn {
+        display: none;
+      }
+
+      canvas {
+        width: auto;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        margin-left: 0 !important;
+      }
+    </style>
+
+    <script src="phaser.js"></script>
+    <script src="nineslice.js"></script>
+    <script src="pilas-engine.js"></script>
+  </head>
+
+  <body>
+    <script>
+      function b64DecodeUnicode(str) {
+        return decodeURIComponent(
+          atob(str)
+            .split("")
+            .map(function(c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+      }
+    </script>
+
+    <div id="game"></div>
+
+    <script>
+      var ha_iniciado = false;
+
+      var proyecto = JSON.parse(b64DecodeUnicode(proyecto_serializado_inicial));
+      var pilas = pilasengine.iniciar(proyecto.proyecto.ancho * 1, proyecto.proyecto.alto);
+
+      pilas.onready = function() {
+        if (!ha_iniciado) {
+          ha_iniciado = true;
+          proyecto.pilas = pilas;
+          pilas.definir_modo("ModoEjecucion", proyecto);
+        }
+      };
+    </script>
+  </body>
+</html>
+`

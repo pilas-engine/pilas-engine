@@ -812,6 +812,7 @@ var Mensajes = (function () {
             codigo: datos.codigo,
             proyecto: datos.proyecto
         };
+        console.log({parametros})
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {

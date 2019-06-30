@@ -24,7 +24,9 @@ module.exports = {
     hacerClick: true,
     esperarElemento: true,
     saveTextAs: true,
-    Split: true
+    Split: true,
+    JSZip: true,
+    saveAs: true
   },
   overrides: [
     // node files
