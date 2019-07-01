@@ -22,7 +22,12 @@
     <div class="">
       {{pilas-boton texto="Cerrar" accion=(action "cerrar")}}
 
-      {{#pilas-link url="https://app.pilas-engine.com.ar/manual/exportar_juegos.html"}}Ver documentación sobre cómo publicar juegos{{/pilas-link}}
+      <div class="pt2 mt1 pl3 dib">
+        {{#pilas-link 
+            class="white link texto dib f7"
+            url="https://app.pilas-engine.com.ar/manual/exportar_juegos.html"
+          }}Ver documentación sobre cómo publicar juegos{{/pilas-link}}
+      </div>
     </div>
   {{/if}}
 
