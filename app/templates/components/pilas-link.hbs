@@ -1,5 +1,5 @@
 {{#en-electron}}
   <span role="button" {{action "abrir"}}>{{yield}}</span>
 {{else}}
-  <a href={{url}} rel="noopener" target="_blank" class="{{if class class "link blue"}}">{{yield}}</a>
+  <a href={{url}} rel="noopener" target="_blank" class={{if class class "link blue"}}>{{yield}}</a>
 {{/en-electron}}
