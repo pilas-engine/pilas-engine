@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Escenas · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Escenas · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.15" data-path="exportar_juegos.html">
+            
+                <a href="exportar_juegos.html">
+            
+                    
+                    Cómo exportar juegos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -362,20 +375,30 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="escenas">Escenas</h1><p>Las escenas te permiten dividir el juego en partes reconocibles y que interact&#xFA;an de manera diferente con el usuario.</p><p>Un juego t&#xED;pico tendr&#xE1; al menos una escena como el men&#xFA; principal, una presentanci&#xF3;n y una pantalla de juego.</p><p><img src="assets/escenas_juego.png"></p><h2 id="cambiar-o-reiniciar-escenas">Cambiar o reiniciar escenas</h2><p>Para cambiar la escena actual se puede llamar a la funci&#xF3;n <code>cambiar_escena</code>
-indicando el nombre de la escena que se quiere cambiar. Por ejemplo:</p><pre><code>pilas.cambiar_escena(&quot;escena2&quot;);</code></pre>
-<p>Tambi&#xE9;n se puede reiniciar la escena actual llamando a esta
-funci&#xF3;n:</p><pre><code>pilas.reiniciar_escena();</code></pre>
-<h2 id="gravedad-y-simulaci&#xF3;n-f&#xED;sica">Gravedad y simulaci&#xF3;n f&#xED;sica</h2><p>Cada escena tiene asociado su propio entorno de simulaci&#xF3;n
+                                <h1 id="escenas">Escenas</h1>
+<p>Las escenas te permiten dividir el juego en partes reconocibles y que interact&#xFA;an de manera diferente con el usuario.</p>
+<p>Un juego t&#xED;pico tendr&#xE1; al menos una escena como el men&#xFA; principal, una presentanci&#xF3;n y una pantalla de juego.</p>
+<p><img src="assets/escenas_juego.png" alt=""></p>
+<h2 id="cambiar-o-reiniciar-escenas">Cambiar o reiniciar escenas</h2>
+<p>Para cambiar la escena actual se puede llamar a la funci&#xF3;n <code>cambiar_escena</code>
+indicando el nombre de la escena que se quiere cambiar. Por ejemplo:</p>
+<pre><code>pilas.cambiar_escena(&quot;escena2&quot;);
+</code></pre><p>Tambi&#xE9;n se puede reiniciar la escena actual llamando a esta
+funci&#xF3;n:</p>
+<pre><code>pilas.reiniciar_escena();
+</code></pre><h2 id="gravedad-y-simulaci&#xF3;n-f&#xED;sica">Gravedad y simulaci&#xF3;n f&#xED;sica</h2>
+<p>Cada escena tiene asociado su propio entorno de simulaci&#xF3;n
 de f&#xED;sica. As&#xED; que si est&#xE1;s haciendo un juego que involucra
 f&#xED;sica es probable que quieras ajustar algunos par&#xE1;metros
 como <code>gravedad_x</code> y <code>gravedad_y</code>. Estos par&#xE1;metros se
 encuentran en el inspector de la escena y tambi&#xE9;n se pueden
-cambiar desde el c&#xF3;digo as&#xED;:</p><pre><code>pilas.fisica.gravedad_x = 1;
-pilas.fisica.gravedad_y = 1;</code></pre>
-<p>o bien:</p><pre><code>pilas.escena.gravedad_x = 0;
-pilas.escena.gravedad_y = -2;</code></pre>
-
+cambiar desde el c&#xF3;digo as&#xED;:</p>
+<pre><code>pilas.fisica.gravedad_x = 1;
+pilas.fisica.gravedad_y = 1;
+</code></pre><p>o bien:</p>
+<pre><code>pilas.escena.gravedad_x = 0;
+pilas.escena.gravedad_y = -2;
+</code></pre>
                                 
                                 </section>
                             
@@ -418,7 +441,7 @@ pilas.escena.gravedad_y = -2;</code></pre>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Escenas","level":"1.13","depth":1,"next":{"title":"Eventos","level":"1.14","depth":1,"path":"eventos.md","ref":"eventos.md","articles":[]},"previous":{"title":"Colisiones","level":"1.12","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"escenas.md","mtime":"2019-04-21T20:48:23.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Escenas","level":"1.13","depth":1,"next":{"title":"Eventos","level":"1.14","depth":1,"path":"eventos.md","ref":"eventos.md","articles":[]},"previous":{"title":"Colisiones","level":"1.12","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"escenas.md","mtime":"2019-05-11T00:43:53.098Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T02:05:41.280Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

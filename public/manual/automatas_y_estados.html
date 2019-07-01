@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Autómatas y estados · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Autómatas y estados · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.15" data-path="exportar_juegos.html">
+            
+                <a href="exportar_juegos.html">
+            
+                    
+                    Cómo exportar juegos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -362,7 +375,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="aut&#xF3;matas-y-estados">Aut&#xF3;matas y estados</h1><p>Un desaf&#xED;o muy com&#xFA;n en el desarrollo de juegos es lograr que los actores puedan mostrar animaciones y reaccionar de acuerdo a modos particulares: saltar, caminar, quedarse parado, pediendo etc&#x2026;</p><p>Para estas cosas Pilas incorpora un mecanismo de aut&#xF3;matas y estados.</p><p>Un actor puede estar en un estado a la vez, por ejemplo, &quot;parado&quot; podr&#xED;a ser el estado de un actor en un juego de plataformas. Cuando el usuario pulsa hacia arriba, podr&#xED;a pasar al estado &quot;saltando&quot;, pero solo cuando toca el piso podr&#xED;a pasar al estado &quot;parado&quot; nuevamente.</p><p>Este modelo de estados y transiciones es lo que llamamos un aut&#xF3;mata, y si bien puede parece algo complejo al principio, con el tiempo notar&#xE1;s que se trata de algo muy pr&#xE1;ctico y sencillo.</p><p>Para crear un estado simplemente tenemos que editar el c&#xF3;digo de un actor y asignarle un valor a la propiedad &quot;estado&quot; y crear dos m&#xE9;todos para que pilas sepa a qu&#xE9; m&#xE9;todos llamar cuando el actor est&#xE9; en ese estado:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> MiActor extends Actor {
+                                <h1 id="aut&#xF3;matas-y-estados">Aut&#xF3;matas y estados</h1>
+<p>Un desaf&#xED;o muy com&#xFA;n en el desarrollo de juegos es lograr que los actores puedan mostrar animaciones y reaccionar de acuerdo a modos particulares: saltar, caminar, quedarse parado, pediendo etc&#x2026;</p>
+<p>Para estas cosas Pilas incorpora un mecanismo de aut&#xF3;matas y estados.</p>
+<p>Un actor puede estar en un estado a la vez, por ejemplo, &quot;parado&quot; podr&#xED;a ser el estado de un actor en un juego de plataformas. Cuando el usuario pulsa hacia arriba, podr&#xED;a pasar al estado &quot;saltando&quot;, pero solo cuando toca el piso podr&#xED;a pasar al estado &quot;parado&quot; nuevamente.</p>
+<p>Este modelo de estados y transiciones es lo que llamamos un aut&#xF3;mata, y si bien puede parece algo complejo al principio, con el tiempo notar&#xE1;s que se trata de algo muy pr&#xE1;ctico y sencillo. </p>
+<p>Para crear un estado simplemente tenemos que editar el c&#xF3;digo de un actor y asignarle un valor a la propiedad &quot;estado&quot; y crear dos m&#xE9;todos para que pilas sepa a qu&#xE9; m&#xE9;todos llamar cuando el actor est&#xE9; en ese estado:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> MiActor extends Actor {
     iniciar() {
         <span class="hljs-keyword">this</span>.estado = <span class="hljs-string">&quot;parado&quot;</span>;
     }
@@ -378,7 +397,8 @@
           <span class="hljs-comment">// c&#xF3;digo que se ejecutar&#xE1; 60 veces por segundo</span>
         <span class="hljs-comment">// cuando el actor est&#xE9; en el estado &quot;parado&quot;.</span>
     }
-}</code></pre>
+}
+</code></pre>
 
                                 
                                 </section>
@@ -422,7 +442,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Autómatas y estados","level":"1.4","depth":1,"next":{"title":"Animaciones","level":"1.5","depth":1,"path":"animaciones.md","ref":"animaciones.md","articles":[]},"previous":{"title":"El intérprete","level":"1.3","depth":1,"path":"interprete.md","ref":"interprete.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"automatas_y_estados.md","mtime":"2018-08-31T23:41:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Autómatas y estados","level":"1.4","depth":1,"next":{"title":"Animaciones","level":"1.5","depth":1,"path":"animaciones.md","ref":"animaciones.md","articles":[]},"previous":{"title":"El intérprete","level":"1.3","depth":1,"path":"interprete.md","ref":"interprete.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"automatas_y_estados.md","mtime":"2019-05-11T00:43:53.097Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T02:05:41.280Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

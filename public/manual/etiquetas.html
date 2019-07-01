@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Etiquetas · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Etiquetas · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.15" data-path="exportar_juegos.html">
+            
+                <a href="exportar_juegos.html">
+            
+                    
+                    Cómo exportar juegos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -362,14 +375,25 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="etiquetas">Etiquetas</h1><p>Las etiquetas son &#xFA;tiles para clasificar actores y simplificar interacciones.</p><p>Por ejemplo, en un juego podr&#xED;amos tener 10, 20 o 30 actores diferentes que tengan el rol de &quot;enemigos&quot;. En cuyo caso simplemente podr&#xED;amos asignarle a todos la misma etiqueta para distinguirlos de los dem&#xE1;s.</p><p>Las etiquetas se pueden definir directamente en el inspector de pilas:</p><p><img alt="ilasEngine 2018-03-25 22-40-0" src="assets/PilasEngine 2018-03-25 22-40-02.png"></p><p>O bien, tambi&#xE9;n se puede directamente desde el editor c&#xF3;digo usando el atributo <strong>etiqueta</strong> as&#xED;:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Caja extends ActorBase {
+                                <h1 id="etiquetas">Etiquetas</h1>
+<p>Las etiquetas son &#xFA;tiles para clasificar actores y simplificar interacciones.</p>
+<p>Por ejemplo, en un juego podr&#xED;amos tener 10, 20 o 30 actores diferentes que tengan el rol de &quot;enemigos&quot;. En cuyo caso simplemente podr&#xED;amos asignarle a todos la misma etiqueta para distinguirlos de los dem&#xE1;s.</p>
+<p>Las etiquetas se pueden definir directamente en el inspector de pilas:</p>
+<p><img src="assets/PilasEngine 2018-03-25 22-40-02.png" alt="ilasEngine 2018-03-25 22-40-0"></p>
+<p>O bien, tambi&#xE9;n se puede directamente desde el editor c&#xF3;digo usando el atributo <strong>etiqueta</strong> as&#xED;:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Caja extends ActorBase {
   iniciar() {
     <span class="hljs-keyword">this</span>.etiqueta = <span class="hljs-string">&quot;enemigo&quot;</span>;
   }
 
   actualizar() {}
-}</code></pre>
-<h2 id="etiquetas-para-distinguir-colisiones">Etiquetas para distinguir colisiones</h2><p>Vamos describir un uso t&#xED;pico de las etiquetas: las etiquetas son muy &#xFA;tiles para distinguir colisiones.</p><p>Cuando pilas detecta una colisi&#xF3;n entre dos actores llamar&#xE1; a la funci&#xF3;n <em>cuando_comienza_una_colision</em> y enviar&#xE1; el par&#xE1;metro <em>actor</em> como referencia al actor que entr&#xF3; en contacto.</p><p>As&#xED; que esto es lo que se suele hacer, imaginemos que nuestro actor <em>protagonista</em> pueda capturar moneras pero debe perder vidas si toca un enemigo. Podr&#xED;amos hacer algo as&#xED;:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Protagonista extends Actor {
+}
+</code></pre>
+<h2 id="etiquetas-para-distinguir-colisiones">Etiquetas para distinguir colisiones</h2>
+<p>Vamos describir un uso t&#xED;pico de las etiquetas: las etiquetas son muy &#xFA;tiles para distinguir colisiones.</p>
+<p>Cuando pilas detecta una colisi&#xF3;n entre dos actores llamar&#xE1; a la funci&#xF3;n <em>cuando_comienza_una_colision</em> y enviar&#xE1; el par&#xE1;metro <em>actor</em> como referencia al actor que entr&#xF3; en contacto.</p>
+<p>As&#xED; que esto es lo que se suele hacer, imaginemos que nuestro actor <em>protagonista</em> pueda capturar moneras pero debe perder vidas si toca un enemigo. Podr&#xED;amos hacer algo as&#xED;:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Protagonista extends Actor {
   <span class="hljs-comment">// otras funciones...</span>
 
   cuando_comienza_una_colision(actor) {
@@ -385,8 +409,10 @@
       <span class="hljs-comment">// emitir sonido de game over, mostrar textos etc...</span>
     }
   }
-}</code></pre>
+}
+</code></pre>
 <p>Ten en cuenta que en la funci&#xF3;n <code>cuando_comienza_una_colision</code> tambi&#xE9;n se puede cancelar una colisi&#xF3;n retornando <code>true</code>. Por ejemplo si quieres que un actor pueda sobrepasar a otro.</p>
+
                                 
                                 </section>
                             
@@ -429,7 +455,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Etiquetas","level":"1.6","depth":1,"next":{"title":"Habilidades","level":"1.7","depth":1,"path":"habilidades.md","ref":"habilidades.md","articles":[]},"previous":{"title":"Animaciones","level":"1.5","depth":1,"path":"animaciones.md","ref":"animaciones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"etiquetas.md","mtime":"2018-08-31T23:41:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Etiquetas","level":"1.6","depth":1,"next":{"title":"Habilidades","level":"1.7","depth":1,"path":"habilidades.md","ref":"habilidades.md","articles":[]},"previous":{"title":"Animaciones","level":"1.5","depth":1,"path":"animaciones.md","ref":"animaciones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"etiquetas.md","mtime":"2019-05-11T00:43:53.099Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T02:05:41.280Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

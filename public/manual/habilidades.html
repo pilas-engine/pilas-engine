@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Habilidades · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Habilidades · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.15" data-path="exportar_juegos.html">
+            
+                <a href="exportar_juegos.html">
+            
+                    
+                    Cómo exportar juegos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -362,20 +375,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="habilidades">Habilidades</h1><p>Cuando realizamos juegos hay ciertos comportamientos que son tan comunes
-que ni siquiera necesitamos programarlos escribiendo c&#xF3;digo.</p><p>Un ejemplo de estos comportamientos comunes incluyen &quot;hacer que un actor
-se mueva con el teclado&quot;, &quot;poder arrastrar y soltar un actor con el mouse&quot; etc...</p><p>A todos estos comportamientos los llamamos &quot;habilidades&quot;, y lo interesante
+                                <h1 id="habilidades">Habilidades</h1>
+<p>Cuando realizamos juegos hay ciertos comportamientos que son tan comunes
+que ni siquiera necesitamos programarlos escribiendo c&#xF3;digo.</p>
+<p>Un ejemplo de estos comportamientos comunes incluyen &quot;hacer que un actor
+se mueva con el teclado&quot;, &quot;poder arrastrar y soltar un actor con el mouse&quot; etc...</p>
+<p>A todos estos comportamientos los llamamos &quot;habilidades&quot;, y lo interesante
 es que podemos tomar a cualquier actor y &quot;ense&#xF1;arle&quot; cualquier de las
-habilidades para mejorar nuestro juego.</p><h2 id="desde-el-editor">Desde el editor</h2><p>Una opci&#xF3;n para incorporarle habilidades a un actor es usar el inspector
+habilidades para mejorar nuestro juego.</p>
+<h2 id="desde-el-editor">Desde el editor</h2>
+<p>Una opci&#xF3;n para incorporarle habilidades a un actor es usar el inspector
 del actor. Hay una propiedad llamada &quot;Habilidades&quot; en donde cargar una o
 m&#xE1;s habilidades que busquemos ense&#xF1;arle a un actor al momento de iniciar
-la escena.</p><h2 id="desde-el-c&#xF3;digo">Desde el c&#xF3;digo</h2><p>Otra opci&#xF3;n, es ense&#xF1;arle una habilidad al actor desde el c&#xF3;digo.</p><p>Imagin&#xE1; que buscamos crear un juego de cartas, donde el usuario tiene que
+la escena.</p>
+<h2 id="desde-el-c&#xF3;digo">Desde el c&#xF3;digo</h2>
+<p>Otra opci&#xF3;n, es ense&#xF1;arle una habilidad al actor desde el c&#xF3;digo.</p>
+<p>Imagin&#xE1; que buscamos crear un juego de cartas, donde el usuario tiene que
 poder mover una carta por la pantalla usando el mouse o gestos del dispositivo
-mobile. El primer paso es crear el actor, con la imagen que nos interesa:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> mi_actor = pilas.actores.actor();
-mi_actor.imagen = <span class="hljs-string">&quot;imagenes:cartas/carta&quot;</span>;</code></pre>
+mobile. El primer paso es crear el actor, con la imagen que nos interesa:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> mi_actor = pilas.actores.actor();
+mi_actor.imagen = <span class="hljs-string">&quot;imagenes:cartas/carta&quot;</span>;
+</code></pre>
 <p>Y aqu&#xED; lo interesante, para hacer que el usuario pueda mover este actor
 por la pantalla simplemente tenemos que &quot;ense&#xF1;arle&quot; al actor la habilidad
-arrastrable as&#xED;:</p><pre><code class="lang-typescript">mi_actor.aprender(<span class="hljs-string">&quot;arrastrable&quot;</span>);</code></pre>
+arrastrable as&#xED;:</p>
+<pre><code class="lang-typescript">mi_actor.aprender(<span class="hljs-string">&quot;arrastrable&quot;</span>);
+</code></pre>
 
                                 
                                 </section>
@@ -419,7 +444,7 @@ arrastrable as&#xED;:</p><pre><code class="lang-typescript">mi_actor.aprender(<s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Habilidades","level":"1.7","depth":1,"next":{"title":"Azar o cálculos aleatorios","level":"1.8","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"previous":{"title":"Etiquetas","level":"1.6","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"habilidades.md","mtime":"2019-06-08T19:58:05.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Habilidades","level":"1.7","depth":1,"next":{"title":"Azar o cálculos aleatorios","level":"1.8","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"previous":{"title":"Etiquetas","level":"1.6","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"habilidades.md","mtime":"2019-06-04T04:31:43.794Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T02:05:41.280Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Pilas como biblioteca · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Pilas como biblioteca · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -60,7 +60,7 @@
     <link rel="next" href="colaborar.html" />
     
     
-    <link rel="prev" href="eventos.html" />
+    <link rel="prev" href="exportar_juegos.html" />
     
 
     </head>
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.15" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.15" data-path="exportar_juegos.html">
+            
+                <a href="exportar_juegos.html">
+            
+                    
+                    Cómo exportar juegos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.16" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -362,17 +375,24 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pilas-como-biblioteca-externa">Pilas como biblioteca externa</h1><p>Pilas se puede usar como una biblioteca externa para permitir un uso avanzado
-y muy personalizado de pilas.</p><p>Esta opci&#xF3;n es ideal si quieres poner tu juego en blogs, fotos o incluso
+                                <h1 id="pilas-como-biblioteca-externa">Pilas como biblioteca externa</h1>
+<p>Pilas se puede usar como una biblioteca externa para permitir un uso avanzado
+y muy personalizado de pilas.</p>
+<p>Esta opci&#xF3;n es ideal si quieres poner tu juego en blogs, fotos o incluso
 en dispositivos m&#xF3;viles como tables o celulares con herramientas como
-cordova o phonegap.</p><p>El primer paso para incorporar pilas como biblioteca es descargar los
+cordova o phonegap.</p>
+<p>El primer paso para incorporar pilas como biblioteca es descargar los
 archivos javascript <code>phaser</code>, <code>nineslice</code> y <code>pilas-engine</code> del directorio
-<code>public</code> de nuestro repositorio y colocarlos en un directorio local:</p><ul><li><a href="https://github.com/pilas-engine/pilas-engine/tree/master/public" target="_blank">https://github.com/pilas-engine/pilas-engine/tree/master/public</a>
-</li></ul>
+<code>public</code> de nuestro repositorio y colocarlos en un directorio local:</p>
+<ul>
+<li><a href="https://github.com/pilas-engine/pilas-engine/tree/master/public" target="_blank">https://github.com/pilas-engine/pilas-engine/tree/master/public</a></li>
+</ul>
 <p>Luego, deber&#xED;as agregar en ese mismo directorio los archivos
 &quot;imagenes/sin_imagen.png&quot; y el directorio &quot;fuentes&quot; que tambi&#xE9;n aparencen
-en el link anterior.</p><p>Por &#xFA;ltimo, deber&#xED;as crear un archivo index.html con la estructura inicial
-que necesita pilas.</p><pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+en el link anterior.</p>
+<p>Por &#xFA;ltimo, deber&#xED;as crear un archivo index.html con la estructura inicial
+que necesita pilas.</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> /&gt;</span>
@@ -391,17 +411,22 @@ que necesita pilas.</p><pre><code class="lang-html"><span class="hljs-meta">&lt;
       };
     </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
 <p>Este archivo <code>index.html</code> se tiene que cargar en un navegador usando
 un webserver y no directamente abriendo el archivo <code>index.html</code>.
 Esto se tiene que hacer debido a que pilas (y phaser) usan ajax para cargar
-im&#xE1;genes y otros recursos.</p><p>Adicionalmente, si tu juego utiliza recursos propios, u otros actores de
+im&#xE1;genes y otros recursos.</p>
+<p>Adicionalmente, si tu juego utiliza recursos propios, u otros actores de
 pilas, te recomendamos ver este otro ejemplo en donde se cargan varios
-recursos:</p><ul><li><a href="https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html" target="_blank">https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html</a>
-</li></ul>
+recursos:</p>
+<ul>
+<li><a href="https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html" target="_blank">https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html</a></li>
+</ul>
 <p>Vas a notar que la diferencia m&#xE1;s grande de este otro ejemplo es que usamos
 un par&#xE1;metro para especificar la lista de recursos a cargar y opcionalmente
 enumeramos los detalles del proyecto.</p>
+
                                 
                                 </section>
                             
@@ -428,7 +453,7 @@ enumeramos los detalles del proyecto.</p>
 
             
                 
-                <a href="eventos.html" class="navigation navigation-prev " aria-label="Previous page: Eventos">
+                <a href="exportar_juegos.html" class="navigation navigation-prev " aria-label="Previous page: Cómo exportar juegos">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -444,7 +469,7 @@ enumeramos los detalles del proyecto.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"typora-copy-images-to":"./imagenes","title":"Pilas como biblioteca","level":"1.15","depth":1,"next":{"title":"Colaborar con pilas","level":"2.1","depth":1,"path":"colaborar.md","ref":"colaborar.md","articles":[]},"previous":{"title":"Eventos","level":"1.14","depth":1,"path":"eventos.md","ref":"eventos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"pilas_como_biblioteca.md","mtime":"2019-05-04T19:45:35.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"typora-copy-images-to":"./imagenes","title":"Pilas como biblioteca","level":"1.16","depth":1,"next":{"title":"Colaborar con pilas","level":"2.1","depth":1,"path":"colaborar.md","ref":"colaborar.md","articles":[]},"previous":{"title":"Cómo exportar juegos","level":"1.15","depth":1,"path":"exportar_juegos.md","ref":"exportar_juegos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"pilas_como_biblioteca.md","mtime":"2019-05-11T00:43:53.107Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T02:05:41.280Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

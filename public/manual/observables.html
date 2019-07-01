@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Observables · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Observables · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.15" data-path="exportar_juegos.html">
+            
+                <a href="exportar_juegos.html">
+            
+                    
+                    Cómo exportar juegos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -362,12 +375,21 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="observables">Observables</h1><p>Los observables te permiten visualizar r&#xE1;pidamente en pantalla qu&#xE9; valor tienen los atributos, variables o expresiones dentro de un juego.</p><p>Por ejemplo, imagina que tu juego tiene un personaje que interact&#xFA;a con la posici&#xF3;n <code>x</code> e <code>y</code> del cursor del mouse. Mediante observables vas a poder agregar un visor de variables como este:</p><p><img alt="observables" src="observables.assets/observables.png"></p><p>Es super importante poder visualizar r&#xE1;pidamente variables en un juego, no solo para informarse sino tambi&#xE9;n para detectar errores o incluso saber si estamos accediendo a la informaci&#xF3;n correcta.</p><p>Los observables se pueden crear mediante una llamada a la funci&#xF3;n <code>pilas.observable</code> enviando un nombre (a elecci&#xF3;n tuya) y una variable para observar, por ejemplo:</p><pre><code class="lang-typescript">actualizar() {
+                                <h1 id="observables">Observables</h1>
+<p>Los observables te permiten visualizar r&#xE1;pidamente en pantalla qu&#xE9; valor tienen los atributos, variables o expresiones dentro de un juego.</p>
+<p>Por ejemplo, imagina que tu juego tiene un personaje que interact&#xFA;a con la posici&#xF3;n <code>x</code> e <code>y</code> del cursor del mouse. Mediante observables vas a poder agregar un visor de variables como este:</p>
+<p><img src="observables.assets/observables.png" alt="observables"></p>
+<p>Es super importante poder visualizar r&#xE1;pidamente variables en un juego, no solo para informarse sino tambi&#xE9;n para detectar errores o incluso saber si estamos accediendo a la informaci&#xF3;n correcta.</p>
+<p>Los observables se pueden crear mediante una llamada a la funci&#xF3;n <code>pilas.observable</code> enviando un nombre (a elecci&#xF3;n tuya) y una variable para observar, por ejemplo:</p>
+<pre><code class="lang-typescript">actualizar() {
   <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;cursor_x&quot;</span>, <span class="hljs-keyword">this</span>.pilas.cursor_x);
   <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;cursor_y&quot;</span>, <span class="hljs-keyword">this</span>.pilas.cursor_y);
   <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;&#xBF;pulsa la tecla arriba?&quot;</span>, <span class="hljs-keyword">this</span>.pilas.control.arriba);
-}</code></pre>
-<p>Ten en cuenta que los observables se tienen que crear siempre desde funciones <code>actualizar</code>, ya sea de actores o de la escena, porque esa es la &#xFA;nica forma de que pilas pueda saber el valor m&#xE1;s reciente de esas variables.</p><p>Otro ejemplo &#xFA;til, ser&#xED;a poder saber la posici&#xF3;n exacta de un actor que hemos creado. Incluso podemos imprimir otros atributos menos visibles como la rotaci&#xF3;n o la velocidad vertical:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> un_actor extends Actor {
+}
+</code></pre>
+<p>Ten en cuenta que los observables se tienen que crear siempre desde funciones <code>actualizar</code>, ya sea de actores o de la escena, porque esa es la &#xFA;nica forma de que pilas pueda saber el valor m&#xE1;s reciente de esas variables.</p>
+<p>Otro ejemplo &#xFA;til, ser&#xED;a poder saber la posici&#xF3;n exacta de un actor que hemos creado. Incluso podemos imprimir otros atributos menos visibles como la rotaci&#xF3;n o la velocidad vertical:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> un_actor extends Actor {
   iniciar() {
     <span class="hljs-keyword">this</span>.x = <span class="hljs-number">-100</span>;
     <span class="hljs-keyword">this</span>.y = <span class="hljs-number">70</span>;
@@ -377,8 +399,11 @@
     <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;mi actor&quot;</span>, <span class="hljs-keyword">this</span>)
     <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;rotaci&#xF3;n&quot;</span>, <span class="hljs-keyword">this</span>.rotacion)
   }
-}</code></pre>
-<p>Si buscas un ejemplo aplicado de observables abr&#xED; el ejemplo angulos:</p><p><img alt="ejemplo-observable" src="observables.assets/ejemplo-observable.png"></p>
+}
+</code></pre>
+<p>Si buscas un ejemplo aplicado de observables abr&#xED; el ejemplo angulos:</p>
+<p><img src="observables.assets/ejemplo-observable.png" alt="ejemplo-observable"></p>
+
                                 
                                 </section>
                             
@@ -421,7 +446,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Observables","level":"1.9","depth":1,"next":{"title":"Manejo de tiempo","level":"1.10","depth":1,"path":"tiempo.md","ref":"tiempo.md","articles":[]},"previous":{"title":"Azar o cálculos aleatorios","level":"1.8","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"observables.md","mtime":"2019-06-01T22:10:43.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-06-09T00:57:11.668Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Observables","level":"1.9","depth":1,"next":{"title":"Manejo de tiempo","level":"1.10","depth":1,"path":"tiempo.md","ref":"tiempo.md","articles":[]},"previous":{"title":"Azar o cálculos aleatorios","level":"1.8","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"observables.md","mtime":"2019-05-26T13:39:35.612Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T02:05:41.280Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
