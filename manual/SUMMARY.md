@@ -14,6 +14,7 @@
 - [Colisiones](colisiones.md)
 - [Escenas](escenas.md)
 - [Eventos](eventos.md)
+- [Cómo exportar juegos](exportar_juegos.md)
 - [Pilas como biblioteca](pilas_como_biblioteca.md)
 
 Sección avanzada
