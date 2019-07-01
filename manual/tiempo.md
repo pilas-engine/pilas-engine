@@ -35,7 +35,7 @@ pilas.cada(0.5, () => {
 
 Si ejecutas esas instrucciones, vas a ver en pantalla algo así. Cada medio segundo se creará un actor pelota en una posición diferente:
 
-![PilasEngine * 2019-06-08 21-37-41](tiempo.assets/PilasEngine \* 2019-06-08 21-37-41.png)
+![PilasEngine_tiempo](tiempo.assets/PilasEngine_tiempo.png)
 
 ## Métodos especiales
 
