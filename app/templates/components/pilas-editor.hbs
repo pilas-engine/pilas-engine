@@ -5,13 +5,10 @@
   <div class="h2-5 flex">
 
     <div class="pa2 truncate">
+      <input class="dn" type="file" id="input-abrir-archivo">
       {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
 
-      {{#en-electron}}
-        {{pilas-boton icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
-      {{else}}
-        {{pilas-boton icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
-      {{/en-electron}}
+      {{pilas-boton icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
 
       {{#en-electron}}
         {{pilas-boton icono="guardar" desactivado=cargando accion=(action "cuando_guarda"  proyecto) demora=0 texto="Guardar"}}

@@ -111,6 +111,8 @@ export default Controller.extend(queryParams.Mixin, {
   actions: {
     al_guardar(proyecto) {
       let str = json_a_string(proyecto);
+      console.log(proyecto);
+      console.log(str);
 
       if (this.electron.enElectron) {
         let json = string_a_json(str);
@@ -126,14 +128,36 @@ export default Controller.extend(queryParams.Mixin, {
     },
 
     al_abrir() {
-      this.electron.abrir_proyecto().then(ruta => {
-        try {
-          this.router.transitionTo("app.abrir_proyecto", ruta);
-        } catch (err) {
-          console.error(err);
-          alert("Error, el archivo está mal formateado: " + err.name);
-        }
-      });
+      if (this.electron.enElectron) {
+        this.electron.abrir_proyecto().then(ruta => {
+          try {
+            this.router.transitionTo("app.abrir_proyecto", ruta);
+          } catch (err) {
+            console.error(err);
+            alert("Error, el archivo está mal formateado: " + err.name);
+          }
+        });
+      } else {
+        let input = window.document.getElementById("input-abrir-archivo");
+
+        input.onchange = e => {
+          var file = e.target.files[0];
+
+          if (file.name.indexOf(".pilas") === -1) {
+            alert("Solo puede abrir con extensión .pilas");
+          } else {
+            const reader = new FileReader();
+            reader.onload = event => {
+              let proyecto = JSON.parse(event.target.result);
+              let serializado = json_a_string(proyecto);
+              this.router.transitionTo("app.abrir_proyecto_serializado", serializado);
+            };
+            reader.readAsText(file);
+          }
+        };
+
+        input.click();
+      }
     }
   }
 });
