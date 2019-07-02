@@ -179,8 +179,13 @@
           </div>
 
           <div class="relative">
-            {{pilas-boton id="plegar" extraClass="" desactivado=false accion=(action "plegar_codigo") texto="" icono="plegar"}}
-            {{pilas-boton id="plegar" extraClass="" desactivado=false accion=(action "expandir_codigo") texto="" icono="desplegar"}}
+            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Plegar código"}}
+              {{pilas-boton id="plegar" extraClass="" desactivado=false accion=(action "plegar_codigo") texto="" icono="plegar"}}
+            {{/pilas-tooltip}}
+
+            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Desplegar código"}}
+              {{pilas-boton id="plegar" extraClass="" desactivado=false accion=(action "expandir_codigo") texto="" icono="desplegar"}}
+            {{/pilas-tooltip}}
             {{pilas-menu-desplegable-del-editor tamano=tamano modoVim=modoVim oscuro=oscuro}}
           </div>
         </div>
