@@ -2,23 +2,27 @@ import Component from "@ember/component";
 import { task, timeout } from "ember-concurrency";
 import json_a_string from "../utils/json-a-string";
 import string_a_json from "../utils/string-a-json";
-import { inject as service } from '@ember/service';
+import { inject as service } from "@ember/service";
+import { computed } from "@ember/object";
 
 export default Component.extend({
   tagName: "",
-  mostrar_mensajes: false,
+  mostrar_modal: false,
   mensajes: null,
   mostrar_boton_para_cerrar: false,
   electron: service(),
   compilador: service(),
+  paso: 1,
 
-  tareaExportar: task(function*() {
-    this.set("mostrar_boton_para_cerrar", false);
-    this.set("mostrar_mensajes", true);
-    this.set("mensajes", []);
+  api: service(),
 
+  tareaExportarZip: task(function*() {
     this.agregar_mensaje("Comenzando exportación del proyecto ...");
     yield timeout(1000);
+
+    let serializado = json_a_string(this.proyecto);
+    let proyecto = string_a_json(serializado);
+    let proyecto_como_string = JSON.stringify(proyecto, null, 2);
 
     let zip = new JSZip();
     var carpeta_del_juego = zip.folder("proyecto");
@@ -45,14 +49,10 @@ export default Component.extend({
     yield this.agregar_archivo(carpeta_del_juego, "./imagenes-0.png");
     yield this.agregar_archivo(carpeta_del_juego, "./imagenes.json");
 
-    let serializado = json_a_string(this.proyecto);
-    let proyecto = string_a_json(serializado);
-
-    yield carpeta_del_juego.file("proyecto.pilas", JSON.stringify(proyecto, null, 2));
-
+    yield carpeta_del_juego.file("proyecto.pilas", proyecto_como_string);
 
     let archivo_index = yield this.obtener_archivo("./proyecto-exportable/index.html", "text");
-    let resultado = this.compilador.compilar_proyecto(proyecto)
+    let resultado = this.compilador.compilar_proyecto(proyecto);
 
     let escena_principal = proyecto.escenas.findBy("id", proyecto.escena_inicial);
 
@@ -61,7 +61,7 @@ export default Component.extend({
       codigo: resultado.codigo,
       permitir_modo_pausa: false,
       proyecto: proyecto
-    }
+    };
 
     yield carpeta_del_juego.file("index.html", archivo_index.replace("CODIGO_SERIALIZADO", json_a_string(proyecto_completo)));
 
@@ -91,6 +91,7 @@ export default Component.extend({
       this.agregar_mensaje("Listo, descargue el archivo");
     } else {
       this.agregar_mensaje("Listo, se descargó el archivo .zip");
+      this.agregar_mensaje({ mensaje: "Recordá ver las instrucciones para usar ese .zip en otros medios", link: "https://app.pilas-engine.com.ar/manual/exportar_juegos.html" });
     }
 
     this.set("mostrar_boton_para_cerrar", true);
@@ -98,6 +99,38 @@ export default Component.extend({
     saveAs(datos, "mi-proyecto.zip");
   }),
 
+  tareaExportarYPublicar: task(function*() {
+    this.agregar_mensaje("Comenzando exportación del proyecto ...");
+    yield timeout(1000);
+
+    let serializado = json_a_string(this.proyecto);
+    let proyecto = string_a_json(serializado);
+    let proyecto_como_string = JSON.stringify(proyecto, null, 2);
+
+    let resultado = this.compilador.compilar_proyecto(proyecto);
+    let escena_principal = proyecto.escenas.findBy("id", proyecto.escena_inicial);
+
+    let proyecto_completo = {
+      nombre_de_la_escena_inicial: escena_principal.nombre,
+      codigo: resultado.codigo,
+      permitir_modo_pausa: false,
+      proyecto: proyecto
+    };
+
+    let data = "";
+
+    try {
+      data = yield this.api.publicar_juego(proyecto_como_string, json_a_string(proyecto_completo));
+    } catch (url) {
+      this.agregar_mensaje(`Error, el servidor en "${url}" no responde o hay un problema de conexión a Internet.`);
+    }
+
+    this.agregar_mensaje(`¡Listo!`);
+    this.agregar_mensaje({ mensaje: `Tu juego se ha publicado aquí`, link: data.url });
+    this.agregar_mensaje(`Visitá esa dirección o compartila para mostrar tu creación :P`);
+
+    this.set("mostrar_boton_para_cerrar", true);
+  }),
 
   agregar_mensaje(mensaje) {
     this.get("mensajes").pushObject(mensaje);
@@ -136,12 +169,30 @@ export default Component.extend({
     });
   },
 
+  puede_cerrar: computed("tareaExportar.last.isSuccessful", function() {
+    return !this.tareaExportarZip.isRunning && !this.tareaExportarYPublicar.isRunning;
+  }),
+
   actions: {
-    exportar() {
-      this.tareaExportar.perform();
+    abrir_modal_par_exportar() {
+      this.set("paso", 1);
+      this.set("mostrar_modal", true);
+      this.set("mostrar_boton_para_cerrar", false);
+      this.set("mostrar_mensajes", true);
+      this.set("mensajes", []);
+    },
+    exportar_zip() {
+      this.set("paso", 2);
+      this.tareaExportarZip.perform();
+      this.set("tareaExportar", this.tareaExportarZip);
+    },
+    exportar_y_publicar() {
+      this.set("paso", 2);
+      this.tareaExportarYPublicar.perform();
+      this.set("tareaExportar", this.tareaExportarYPublicar);
     },
     cerrar() {
-      this.set("mostrar_mensajes", false);
-    },
+      this.set("mostrar_modal", false);
+    }
   }
 });

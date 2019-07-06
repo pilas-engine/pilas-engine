@@ -1,21 +1,31 @@
 {{yield}}
 
-{{pilas-boton ejecutando=tareaExportar.last.isRunning icono="exportar" desactivado=desactivado accion=(action "exportar") texto="Exportar"}}
+{{pilas-boton ejecutando=tareaExportar.last.isRunning icono="exportar" desactivado=desactivado accion=(action "abrir_modal_par_exportar") texto="Exportar"}}
 
-{{#pilas-modal medio=true alCerrar=(action "cerrar") puede_cerrar=tareaExportar.last.isSuccessful visible=mostrar_mensajes titulo="Exportando ..."}}
+{{#pilas-modal medio=true alCerrar=(action "cerrar") puede_cerrar=puede_cerrar visible=mostrar_modal titulo="Exportando ..."}}
 
-  <div class="flex1 ba borde bg-fondo-secundario overflow-y-scroll pa2 mb2" id="contenedor-con-scroll">
-    {{#each mensajes as |mensaje|}}
-      <div class="f6 pb1">{{mensaje}}</div>
-      {{pilas-scroll-to-bottom contenedor="contenedor-con-scroll"}}
-    {{/each}}
+  {{#if (eq paso 1)}}
+    <div class="flex1">
+      <p>Existen dos formas de exportar tu proyecto en pilas, ¿Cuál te gustaría usar?</p>
 
-    {{#if tareaExportar.last.isRunning}}
-      <div class="f5">
-        {{pilas-spinner}}
-      </div>
-    {{/if}}
-  </div>
+      {{pilas-boton texto="Exportar como zip" accion=(action "exportar_zip")}}
+      {{pilas-boton texto="Exportar y publicar en la web" accion=(action "exportar_y_publicar")}}
+    </div>
+  {{else}}
+    <div class="flex1 ba borde bg-fondo-secundario overflow-y-scroll pa2 mb2" id="contenedor-con-scroll">
+
+      {{#each mensajes as |mensaje|}}
+        {{pilas-mensaje-exportador mensaje=mensaje}}
+        {{pilas-scroll-to-bottom contenedor="contenedor-con-scroll"}}
+      {{/each}}
+
+      {{#if tareaExportar.last.isRunning}}
+        <div class="f5">
+          {{pilas-spinner}}
+        </div>
+      {{/if}}
+    </div>
+  {{/if}}
 
   <div class="h2 mv2">
     {{#if mostrar_boton_para_cerrar}}

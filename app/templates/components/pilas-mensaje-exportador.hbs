@@ -1,0 +1,7 @@
+{{yield}}
+
+{{#if mensaje.link}}
+  <div class="f6 pb1">{{mensaje.mensaje}}: <a href={{mensaje.link}} target="_blank" rel="noopener" class="link texto dim">{{mensaje.link}}</a></div>
+{{else}}
+  <div class="f6 pb1">{{mensaje}}</div>
+{{/if}}
