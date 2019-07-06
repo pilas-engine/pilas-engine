@@ -1,7 +1,8 @@
 import Service from "@ember/service";
 
 export default Service.extend({
-  url: "http://127.0.0.1:8000/proyecto/subir",
+  //url: "http://127.0.0.1:8000/proyecto/subir",
+  url: "https://backend.pilas-engine.com.ar/proyecto/subir",
 
   publicar_juego(proyecto_como_string, serializado) {
     return new Promise((resolve, reject) => {
