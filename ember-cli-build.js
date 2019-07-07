@@ -4,7 +4,7 @@ const EmberApp = require("ember-cli/lib/broccoli/ember-app");
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      exclude: ["vs", "manual", "api", "imagenes", "fuentes", "sonidos", "monaco-vim"]
+      exclude: ["vs", "manual", "api", "imagenes", "fuentes", "sonidos", "monaco-vim", "ceferino", "robot"]
     }
   });
 
