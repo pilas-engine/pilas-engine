@@ -16,6 +16,9 @@ module.exports = function(environment) {
       }
     },
 
+    remoteBackendURL: "https://backend.pilas-engine.com.ar",
+    remoteFrontendURL: "https://app.pilas-engine.com.ar",
+
     APP: {},
 
     keyManagerConfig: {
@@ -43,8 +46,8 @@ module.exports = function(environment) {
   }
 
   if (environment === "production") {
-    ENV.backendURL = "https://backend.pilas-engine.com.ar";
-    ENV.frontendURL = "https://app.pilas-engine.com.ar";
+    ENV.backendURL = ENV.remoteBackendURL;
+    ENV.frontendURL = ENV.remoteFrontendURL;
   }
 
   return ENV;

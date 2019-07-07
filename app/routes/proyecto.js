@@ -18,8 +18,7 @@ export default Route.extend({
     model.modoZoom = 2;
     let proyecto = string_a_json(model.proyecto.serializado);
 
-    // TODO: tomar esta configuración del backend;
-    model.ver_codigo = true;
+    model.ver_codigo = model.proyecto.ver_codigo;
     model.proyecto = proyecto.proyecto;
   }
 });

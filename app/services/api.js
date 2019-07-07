@@ -1,11 +1,22 @@
 import Service from "@ember/service";
 import ENV from "pilas-engine/config/environment";
+import { inject as service } from "@ember/service";
+import { alias } from "@ember/object/computed";
 
 export default Service.extend({
+  electron: service(),
+  enElectron: alias("electron.enElectron"),
+
   publicar_juego(proyecto_como_string, serializado) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
-      let url = `${ENV.backendURL}/proyecto/subir`;
+      let url = null;
+
+      if (this.enElectron) {
+        url = `${ENV.remoteBackendURL}/proyecto/subir`;
+      } else {
+        url = `${ENV.backendURL}/proyecto/subir`;
+      }
 
       xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-type", "application/json");
@@ -25,7 +36,8 @@ export default Service.extend({
 
       var data = JSON.stringify({
         codigo: proyecto_como_string,
-        codigo_serializado: serializado
+        codigo_serializado: serializado,
+        ver_codigo: true
       });
 
       xhr.send(data);
