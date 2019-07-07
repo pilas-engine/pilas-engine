@@ -7,7 +7,7 @@ export default Service.extend({
   electron: service(),
   enElectron: alias("electron.enElectron"),
 
-  publicar_juego(proyecto_como_string, serializado) {
+  publicar_juego(proyecto_como_string, serializado, ver_codigo) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -37,7 +37,7 @@ export default Service.extend({
       var data = JSON.stringify({
         codigo: proyecto_como_string,
         codigo_serializado: serializado,
-        ver_codigo: true
+        ver_codigo: ver_codigo
       });
 
       xhr.send(data);

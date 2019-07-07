@@ -53,7 +53,14 @@ export default Controller.extend(queryParams.Mixin, {
     }
 
     if (params.hash) {
-      return yield this.cargarProyectoDesdeHashDelBackend.perform(params.hash);
+      let datos = yield this.cargarProyectoDesdeHashDelBackend.perform(params.hash);
+
+      if (!datos.ver_codigo) {
+        alert("Lo siento, el código de este proyecto no se puede acceder.");
+        return this.router.transitionTo("index");
+      } else {
+        return datos;
+      }
     }
 
     if (params.ruta) {
@@ -84,13 +91,14 @@ export default Controller.extend(queryParams.Mixin, {
   cargarProyectoDesdeHashDelBackend: task(function*(hash) {
     let proyecto_serializado = yield this.api.obtener_proyecto(hash);
     let proyecto = string_a_json(proyecto_serializado.serializado);
-    return this.convertirEscenaEnObjetoEmber(proyecto.proyecto);
+    let objeto = this.convertirEscenaEnObjetoEmber(proyecto.proyecto);
+    objeto.set("ver_codigo", proyecto_serializado.ver_codigo);
+    return objeto;
   }),
 
   cargar_proyecto_desde_ruta_archivo: task(function*(ruta) {
     let proyecto = this.electron.abrir_proyecto_desde_archivo(ruta);
     yield timeout(100);
-    console.log(proyecto);
     return this.convertirEscenaEnObjetoEmber(proyecto);
   }),
 

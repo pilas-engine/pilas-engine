@@ -10,7 +10,17 @@
       <p>¿Cuál te gustaría usar?</p>
 
       {{pilas-boton texto="Exportar como zip" accion=(action "exportar_zip")}}
-      {{pilas-boton texto="Exportar y publicar en la web" accion=(action "exportar_y_publicar")}}
+
+      <div class="dib relative">
+        {{pilas-boton texto="Exportar y publicar en la web" accion=(action "exportar_y_publicar")}}
+
+        <div class="f6 tr verdana pt2">
+          {{input type="checkbox" id="ver_codigo" checked=ver_codigo}}
+          <label for="ver_codigo" class="unselectable pointer">
+            Incluir código visible
+          </label>
+        </div>
+      </div>
     </div>
   {{else}}
     <div class="flex1 ba borde bg-fondo-secundario overflow-y-scroll pa2 mb2" id="contenedor-con-scroll">

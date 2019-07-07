@@ -21,5 +21,9 @@ export default function preparar_codigo_para_el_editor(texto) {
     }
   }
 
-  return "// @ts-ignore\n" + lineas_seleccionadas.join("\n");
+  if (lineas_seleccionadas.length > 0 && lineas_seleccionadas[0].indexOf("ts-ignore") === -1) {
+    return "// @ts-ignore\n" + lineas_seleccionadas.join("\n");
+  } else {
+    return lineas_seleccionadas.join("\n");
+  }
 }

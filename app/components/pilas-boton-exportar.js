@@ -13,6 +13,7 @@ export default Component.extend({
   electron: service(),
   compilador: service(),
   paso: 1,
+  ver_codigo: true,
 
   api: service(),
 
@@ -120,14 +121,14 @@ export default Component.extend({
     let data = "";
 
     try {
-      data = yield this.api.publicar_juego(proyecto_como_string, json_a_string(proyecto_completo));
+      data = yield this.api.publicar_juego(proyecto_como_string, json_a_string(proyecto_completo), this.ver_codigo);
+
+      this.agregar_mensaje(`¡Listo!`);
+      this.agregar_mensaje({ mensaje: `Tu juego se ha publicado aquí`, link: data.url });
+      this.agregar_mensaje(`Visitá esa dirección o compartila para mostrar tu creación :P`);
     } catch (url) {
       this.agregar_mensaje(`Error, el servidor en "${url}" no responde o hay un problema de conexión a Internet.`);
     }
-
-    this.agregar_mensaje(`¡Listo!`);
-    this.agregar_mensaje({ mensaje: `Tu juego se ha publicado aquí`, link: data.url });
-    this.agregar_mensaje(`Visitá esa dirección o compartila para mostrar tu creación :P`);
 
     this.set("mostrar_boton_para_cerrar", true);
   }),
@@ -176,6 +177,7 @@ export default Component.extend({
   actions: {
     abrir_modal_par_exportar() {
       this.set("paso", 1);
+      this.set("ver_codigo", true);
       this.set("mostrar_modal", true);
       this.set("mostrar_boton_para_cerrar", false);
       this.set("mostrar_mensajes", true);
