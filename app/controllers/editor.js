@@ -27,6 +27,7 @@ const queryParams = new QueryParams({
   modoVim: { defaultValue: false, replace: true },
   modoZoom: { defaultValue: 2, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true },
+  hash: { defaultValue: null, replace: true, refresh: true },
   tamano: { defaultValue: 14, replace: true, refresh: true }
 });
 
@@ -36,6 +37,7 @@ export default Controller.extend(queryParams.Mixin, {
   ejemplos: service(),
   electron: service(),
   router: service(),
+  api: service(),
 
   setup(event) {
     this.tareaCargarProyecto.perform(event.queryParams);
@@ -48,6 +50,10 @@ export default Controller.extend(queryParams.Mixin, {
 
     if (params.ejemplo) {
       return yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
+    }
+
+    if (params.hash) {
+      return yield this.cargarProyectoDesdeHashDelBackend.perform(params.hash);
     }
 
     if (params.ruta) {
@@ -73,6 +79,12 @@ export default Controller.extend(queryParams.Mixin, {
     let ejemplos = yield this.ejemplos.obtener();
     let proyecto = ejemplos.ejemplos.findBy("nombre", nombre).proyecto;
     return this.convertirEscenaEnObjetoEmber(proyecto);
+  }),
+
+  cargarProyectoDesdeHashDelBackend: task(function*(hash) {
+    let proyecto_serializado = yield this.api.obtener_proyecto(hash);
+    let proyecto = string_a_json(proyecto_serializado.serializado);
+    return this.convertirEscenaEnObjetoEmber(proyecto.proyecto);
   }),
 
   cargar_proyecto_desde_ruta_archivo: task(function*(ruta) {

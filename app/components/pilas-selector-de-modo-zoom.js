@@ -3,6 +3,7 @@ import { computed } from "@ember/object";
 
 export default Component.extend({
   tagName: "",
+  pos: "up",
 
   modoZoomReal: computed("modoZoom", function() {
     return this.modoZoom === 2;

@@ -1,4 +1,21 @@
 {{outlet}}
-<div class="flex vh-100">
+
+<div class="h-header ph2 flex unselectable">
+  <div class="verdana f7 pt2">
+    Proyecto
+    {{#if model.ver_codigo}}
+      {{#link-to "editor" (query-params hash=model.hash) class="gray dim link pointer black unselectable"}}- ver código{{/link-to}}
+    {{/if}}
+  </div>
+
+  <div class="flex1">
+  </div>
+
+  <div class="dib">
+    {{pilas-selector-de-modo-zoom pos="left" modoZoom=model.modoZoom}}
+  </div>
+</div>
+
+<div class="flex vh-100-min-header">
   {{pilas-ejemplo modoZoom=model.modoZoom proyecto=model.proyecto}}
 </div>

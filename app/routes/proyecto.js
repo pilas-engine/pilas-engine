@@ -6,12 +6,20 @@ export default Route.extend({
   api: service(),
 
   model(params) {
-    return this.api.obtener_proyecto(params.hash);
+    return this.api.obtener_proyecto(params.hash).then(data => {
+      return {
+        hash: params.hash,
+        proyecto: data
+      };
+    });
   },
 
   afterModel(model) {
     model.modoZoom = 2;
-    let proyecto = string_a_json(model.serializado);
+    let proyecto = string_a_json(model.proyecto.serializado);
+
+    // TODO: tomar esta configuración del backend;
+    model.ver_codigo = true;
     model.proyecto = proyecto.proyecto;
   }
 });

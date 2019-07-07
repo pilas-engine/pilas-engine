@@ -109,3 +109,11 @@ span {
 .dialogo-medio {
   max-height: 30em;
 }
+
+.vh-100-min-header {
+  height: calc(100vh - 30px);
+}
+
+.h-header {
+  height: 3/0px;
+}
