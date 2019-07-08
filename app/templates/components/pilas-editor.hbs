@@ -18,8 +18,6 @@
 
       {{pilas-boton-exportar proyecto=proyecto desactivado=(not estado.puedeEjecutar)}}
 
-      {{pilas-boton-preferencias icono="preferencias" permitir_modo_pausa=permitir_modo_pausa desactivado=(not estado.puedeEjecutar)}}
-
       {{#en-electron}}
         {{pilas-boton-webserver cargando=cargando}}
       {{else}}
@@ -183,7 +181,8 @@
             {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Desplegar código"}}
               {{pilas-boton id="plegar" extraClass="" desactivado=false accion=(action "expandir_codigo") texto="" icono="desplegar"}}
             {{/pilas-tooltip}}
-            {{pilas-menu-desplegable-del-editor tamano=tamano modoVim=modoVim oscuro=oscuro}}
+
+            {{pilas-menu-desplegable-del-editor tamano=tamano modoVim=modoVim oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa}}
           </div>
         </div>
 
