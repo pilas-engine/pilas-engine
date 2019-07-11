@@ -28,76 +28,94 @@ export default Component.extend({
     let zip = new JSZip();
     var carpeta_del_juego = zip.folder("proyecto");
 
-    yield this.agregar_archivo(zip, "./proyecto-exportable/LEER.html");
+    try {
+      yield this.agregar_archivo(zip, "./proyecto-exportable/LEER.html");
 
-    yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/package.json");
-    yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/package-lock.json");
-    yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/index.js");
+      yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/package.json");
+      yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/package-lock.json");
+      yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/index.js");
 
-    yield this.agregar_archivo(carpeta_del_juego, "./robot.png");
-    yield this.agregar_archivo(carpeta_del_juego, "./robot.json");
-    yield this.agregar_archivo(carpeta_del_juego, "./robot.scon");
+      yield this.agregar_archivo(carpeta_del_juego, "./robot.png");
+      yield this.agregar_archivo(carpeta_del_juego, "./robot.json");
+      yield this.agregar_archivo(carpeta_del_juego, "./robot.scon");
 
-    yield this.agregar_archivo(carpeta_del_juego, "./ceferino.png");
-    yield this.agregar_archivo(carpeta_del_juego, "./ceferino.json");
-    yield this.agregar_archivo(carpeta_del_juego, "./ceferino.scon");
+      yield this.agregar_archivo(carpeta_del_juego, "./ceferino.png");
+      yield this.agregar_archivo(carpeta_del_juego, "./ceferino.json");
+      yield this.agregar_archivo(carpeta_del_juego, "./ceferino.scon");
 
-    yield this.agregar_archivo(carpeta_del_juego, "./pilas-engine.js");
-    yield this.agregar_archivo(carpeta_del_juego, "./phaser.js");
+      // Previene un caso particular: en producción hay dos archivos
+      // pilas-engine.js, con diferente fingerprint, el que se necesita
+      // empaquetar es el que está referenciado dentro del archivo
+      // pilas-canvas.html
+      let contenido_pilas_canvas = yield this.obtener_archivo("./pilas-canvas.html", "text");
+      let expresion = contenido_pilas_canvas.match(/pilas-engine-\w*.js/);
+      let archivo_pilas = "pilas-engine.js";
 
-    yield this.agregar_archivo(carpeta_del_juego, "./nineslice.js");
+      if (expresion) {
+        archivo_pilas = expresion[0];
+      }
 
-    yield this.agregar_archivo(carpeta_del_juego, "./imagenes-0.png");
-    yield this.agregar_archivo(carpeta_del_juego, "./imagenes.json");
+      yield this.agregar_archivo(carpeta_del_juego, `./${archivo_pilas}`);
 
-    yield carpeta_del_juego.file("proyecto.pilas", proyecto_como_string);
+      yield this.agregar_archivo(carpeta_del_juego, "./phaser.js");
 
-    let archivo_index = yield this.obtener_archivo("./proyecto-exportable/index.html", "text");
-    let resultado = this.compilador.compilar_proyecto(proyecto);
+      yield this.agregar_archivo(carpeta_del_juego, "./nineslice.js");
 
-    let escena_principal = proyecto.escenas.findBy("id", proyecto.escena_inicial);
+      yield this.agregar_archivo(carpeta_del_juego, "./imagenes-0.png");
+      yield this.agregar_archivo(carpeta_del_juego, "./imagenes.json");
 
-    let proyecto_completo = {
-      nombre_de_la_escena_inicial: escena_principal.nombre,
-      codigo: resultado.codigo,
-      permitir_modo_pausa: false,
-      proyecto: proyecto
-    };
+      yield carpeta_del_juego.file("proyecto.pilas", proyecto_como_string);
 
-    yield carpeta_del_juego.file("index.html", archivo_index.replace("CODIGO_SERIALIZADO", json_a_string(proyecto_completo)));
+      let archivo_index = yield this.obtener_archivo("./proyecto-exportable/index.html", "text");
+      let resultado = this.compilador.compilar_proyecto(proyecto);
 
-    var carpeta_sonidos = carpeta_del_juego.folder("sonidos");
+      let escena_principal = proyecto.escenas.findBy("id", proyecto.escena_inicial);
 
-    yield this.agregar_archivo(carpeta_sonidos, "./sonidos/laser.wav");
-    yield this.agregar_archivo(carpeta_sonidos, "./sonidos/moneda.wav");
-    yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-corto.wav");
-    yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-largo.wav");
-    yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-aguda.wav");
-    yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-grave.wav");
+      let proyecto_completo = {
+        nombre_de_la_escena_inicial: escena_principal.nombre,
+        codigo: resultado.codigo,
+        permitir_modo_pausa: false,
+        proyecto: proyecto
+      };
 
-    var carpeta_fuentes = carpeta_del_juego.folder("fuentes");
+      yield carpeta_del_juego.file("index.html", archivo_index.replace("CODIGO_SERIALIZADO", json_a_string(proyecto_completo)));
 
-    yield this.agregar_archivo(carpeta_fuentes, "./fuentes/font.png");
-    yield this.agregar_archivo(carpeta_fuentes, "./fuentes/font.fnt");
-    yield this.agregar_archivo(carpeta_fuentes, "./fuentes/impact.png");
-    yield this.agregar_archivo(carpeta_fuentes, "./fuentes/impact.fnt");
-    yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.png");
-    yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.fnt");
+      var carpeta_sonidos = carpeta_del_juego.folder("sonidos");
 
-    this.agregar_mensaje("Comprimiendo archivo .zip ...");
-    let datos = yield zip.generateAsync({ type: "blob" });
-    this.agregar_mensaje("Proceso de exportación finalizado");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/laser.wav");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/moneda.wav");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-corto.wav");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-largo.wav");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-aguda.wav");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-grave.wav");
 
-    if (this.electron.enElectron) {
-      this.agregar_mensaje("Listo, descargue el archivo");
-    } else {
-      this.agregar_mensaje("Listo, se descargó el archivo .zip");
-      this.agregar_mensaje({ mensaje: "Recordá ver las instrucciones para usar ese .zip en otros medios", link: "https://app.pilas-engine.com.ar/manual/exportar_juegos.html" });
+      var carpeta_fuentes = carpeta_del_juego.folder("fuentes");
+
+      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/font.png");
+      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/font.fnt");
+      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/impact.png");
+      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/impact.fnt");
+      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.png");
+      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.fnt");
+
+      this.agregar_mensaje("Comprimiendo archivo .zip ...");
+      let datos = yield zip.generateAsync({ type: "blob" });
+      this.agregar_mensaje("Proceso de exportación finalizado");
+
+      if (this.electron.enElectron) {
+        this.agregar_mensaje("Listo, descargue el archivo");
+      } else {
+        this.agregar_mensaje("Listo, se descargó el archivo .zip");
+        this.agregar_mensaje({ mensaje: "Recordá ver las instrucciones para usar ese .zip en otros medios", link: "https://app.pilas-engine.com.ar/manual/exportar_juegos.html" });
+      }
+
+      this.set("mostrar_boton_para_cerrar", true);
+
+      saveAs(datos, "mi-proyecto.zip");
+    } catch (e) {
+      this.agregar_mensaje(`Error, ${e}`);
+      this.set("mostrar_boton_para_cerrar", true);
     }
-
-    this.set("mostrar_boton_para_cerrar", true);
-
-    saveAs(datos, "mi-proyecto.zip");
   }),
 
   tareaExportarYPublicar: task(function*() {
@@ -162,7 +180,7 @@ export default Component.extend({
         if (xhr.status === 200) {
           resolve(xhr.response);
         } else {
-          reject(xhr.status);
+          reject(`Imposible obtener ${url} (${xhr.status} - ${xhr.statusText}}`);
         }
       };
 
