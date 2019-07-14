@@ -8,21 +8,21 @@
       <input class="dn" type="file" id="input-abrir-archivo">
       {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
 
-      {{pilas-boton icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
+      {{pilas-boton responsive=true icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
 
       {{#en-electron}}
-        {{pilas-boton icono="guardar" desactivado=cargando accion=(action "cuando_guarda"  proyecto) demora=0 texto="Guardar"}}
+        {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=(action "cuando_guarda"  proyecto) demora=0 texto="Guardar"}}
       {{else}}
-        {{pilas-boton icono="guardar" desactivado=cargando accion=(action "cuando_guarda"  proyecto) demora=1 texto="Guardar"}}
+        {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=(action "cuando_guarda"  proyecto) demora=1 texto="Guardar"}}
       {{/en-electron}}
 
-      {{pilas-boton-exportar proyecto=proyecto desactivado=(not estado.puedeEjecutar)}}
+      {{pilas-boton-exportar responsive=true proyecto=proyecto desactivado=(not estado.puedeEjecutar)}}
 
       {{#en-electron}}
         {{pilas-boton-webserver cargando=cargando}}
       {{else}}
         {{#pilas-tooltip pos="left" texto="Esta opción solo está disponible en la versión de escritorio (offline)"}}
-          {{pilas-boton icono="webserver" desactivado=true texto="Iniciar servidor web"}}
+          {{pilas-boton responsive=true icono="webserver" desactivado=true texto="Iniciar servidor web"}}
         {{/pilas-tooltip}}
       {{/en-electron}}
     </div>
@@ -169,20 +169,26 @@
 
       <div id="panel-editor" class="{{if mostrarEditor "" "flex1"}} {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
 
-        <div class="unselectable pa2 flex bg-fondo">
+        <div class="unselectable pr2 pv2 flex bg-fondo">
+          <div class="relative">
+            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Usar una receta de código"}}
+              {{pilas-editor/boton-receta desactivado=(not estado.puede_editar) tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}
+            {{/pilas-tooltip}}
+          </div>
+
           <div class="flex1">
           </div>
 
           <div class="relative">
             {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Plegar código"}}
-              {{pilas-boton id="plegar" extraClass="" desactivado=false accion=(action "plegar_codigo") texto="" icono="plegar"}}
+              {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=(action "plegar_codigo") texto="" icono="plegar"}}
             {{/pilas-tooltip}}
 
             {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Desplegar código"}}
-              {{pilas-boton id="plegar" extraClass="" desactivado=false accion=(action "expandir_codigo") texto="" icono="desplegar"}}
+              {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=(action "expandir_codigo") texto="" icono="desplegar"}}
             {{/pilas-tooltip}}
 
-            {{pilas-menu-desplegable-del-editor tamano=tamano modoVim=modoVim oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa}}
+            {{pilas-menu-desplegable-del-editor desactivado=(not estado.puede_editar) tamano=tamano modoVim=modoVim oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa}}
           </div>
         </div>
 

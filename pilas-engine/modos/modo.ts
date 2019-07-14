@@ -135,6 +135,12 @@ class Modo extends Phaser.Scene {
       sprite.setTexture(actor.imagen);
     }
 
+    if (actor.activo === false) {
+      sprite.alpha = 0.5;
+    } else {
+      sprite.alpha = 1 - actor.transparencia / 100;
+    }
+
     sprite.id = actor.id;
     sprite.x = coordenada.x;
     sprite.y = coordenada.y;
@@ -143,7 +149,6 @@ class Modo extends Phaser.Scene {
     sprite.scaleY = actor.escala_y;
     sprite.depth = -actor.z || 0;
     sprite.setOrigin(actor.centro_x, actor.centro_y);
-    sprite.alpha = 1 - actor.transparencia / 100;
 
     if (sprite.figura) {
       this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);

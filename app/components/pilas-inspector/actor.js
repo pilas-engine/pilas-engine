@@ -6,6 +6,11 @@ export default Component.extend({
 
     // Solo los actores texto pueden cambiar de mensaje y solamente los
     // actores normales pueden cambiar de imagen.
+    propiedades.pushObject({
+      tipo: "interruptor",
+      propiedad: "activo",
+      nombreCorto: "Activo"
+    });
 
     propiedades.pushObject({
       tipo: "cadena",

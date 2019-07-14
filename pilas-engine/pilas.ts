@@ -404,6 +404,22 @@ class Pilas {
   observar(nombre: string, variable: any) {
     this.escena.observar(nombre, variable);
   }
+
+  clonar(nombre: string) {
+    return this.modo.clonar_actor_por_nombre(nombre);
+  }
+
+  /**
+   * Determina si un numero es múltiplo de otro.
+   *
+   * Por ejemplo, esta función retorna true si se consulta
+   * así `pilas.es_multiplo(12, 3)` porque 12 es multiplo de 3 (ya que 3x4=12)
+   * mientras que `pilas.es_multiplo(3, 2)` retornará false, porque 3 no es
+   * múltiplo de 2.
+   */
+  es_multiplo(a: number, b: number) {
+    return a % b === 0;
+  }
 }
 
 //var pilas = new Pilas();

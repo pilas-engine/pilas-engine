@@ -31,7 +31,7 @@ class Actores {
     return this.crear_actor("aceituna");
   }
 
-  caja(x: number, y: number) {
+  caja() {
     return this.crear_actor("caja");
   }
 

@@ -2,10 +2,17 @@
   {{#if ejecutando}}
     {{pilas-spinner}}
   {{/if}}
+
   {{#if icono}}
-    {{pilas-icono icono=icono}} <span class="dn di-ns">{{texto}}</span>
+    {{pilas-icono icono=icono}}
+    {{#if responsive}}
+      <span class="dn dib-l">{{texto}}</span>
+    {{else}}
+      <span>{{texto}}</span>
+    {{/if}}
   {{else}}
     <span>{{texto}}</span>
   {{/if}}
+
   {{yield}}
 </a>

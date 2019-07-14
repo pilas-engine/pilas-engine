@@ -85,10 +85,7 @@ export default Component.extend({
     this._super(...arguments);
 
     const subscription = event => {
-      if (
-        event.origin != utils.HOST &&
-        event.origin != utils.HOST.replace("http:", "https:")
-      ) {
+      if (event.origin != utils.HOST && event.origin != utils.HOST.replace("http:", "https:")) {
         return;
       }
 
@@ -100,11 +97,7 @@ export default Component.extend({
 
       if (event.source === this.frame && event.data && event.data.message) {
         if (event.data.message === "load-complete") {
-          this.onLoadEditor(
-            this.frame.editor,
-            this.frame.monaco,
-            this.frame.window
-          );
+          this.onLoadEditor(this.frame.editor, this.frame.monaco, this.frame.window);
         }
 
         if (event.data.message === "on-save") {
@@ -176,7 +169,7 @@ export default Component.extend({
           }
 
           #status {
-            display: none;
+            display: none !important;
           }
 
         </style>
@@ -293,6 +286,7 @@ export default Component.extend({
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
     this.bus.on("plegar_codigo", this, "plegar_codigo");
     this.bus.on("expandir_codigo", this, "expandir_codigo");
+    this.bus.on("usar_receta", this, "usar_receta");
   },
 
   onLoadEditor(editor, monaco, window) {
@@ -331,6 +325,22 @@ export default Component.extend({
 
   expandir_codigo() {
     this.editor.getAction("editor.unfoldAll").run();
+  },
+
+  /*
+   * Inserta la receta de código al final del código actual.
+   */
+  usar_receta(receta) {
+    let codigo = this.editor.getModel().getValue();
+
+    let posicionFinal = codigo.lastIndexOf("}");
+    codigo = codigo.substring(0, posicionFinal) + "\n" + receta.codigo + "\n}";
+
+    let codigoFormateado = formatear(codigo);
+
+    let pos = this.editor.getPosition();
+    this.editor.getModel().setValue(codigoFormateado);
+    this.editor.setPosition(pos);
   },
 
   willDestroyElement() {

@@ -35,7 +35,7 @@ var Actores = (function () {
         if (y === void 0) { y = 0; }
         return this.crear_actor("aceituna");
     };
-    Actores.prototype.caja = function (x, y) {
+    Actores.prototype.caja = function () {
         return this.crear_actor("caja");
     };
     Actores.prototype.conejo = function () {
@@ -812,7 +812,6 @@ var Mensajes = (function () {
             codigo: datos.codigo,
             proyecto: datos.proyecto
         };
-        console.log({parametros})
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {
@@ -1299,6 +1298,12 @@ var Pilas = (function () {
     };
     Pilas.prototype.observar = function (nombre, variable) {
         this.escena.observar(nombre, variable);
+    };
+    Pilas.prototype.clonar = function (nombre) {
+        return this.modo.clonar_actor_por_nombre(nombre);
+    };
+    Pilas.prototype.es_multiplo = function (a, b) {
+        return a % b === 0;
     };
     return Pilas;
 }());
@@ -2009,7 +2014,7 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
-    ActorBase.prototype.cada_segundo = function () { };
+    ActorBase.prototype.cada_segundo = function (segundos_transcurridos) { };
     ActorBase.prototype.avanzar = function (rotacion, velocidad) {
         if (rotacion === void 0) { rotacion = null; }
         if (velocidad === void 0) { velocidad = 1; }
@@ -3010,8 +3015,7 @@ var EscenaBase = (function () {
     EscenaBase.prototype.observar = function (nombre, variable) {
         if (this._observables === null) {
             this._actor_visor_observables = this.pilas.actores.texto();
-            this._actor_visor_observables.fondo =
-                "imagenes:redimensionables/blanco";
+            this._actor_visor_observables.fondo = "imagenes:redimensionables/blanco";
             this._actor_visor_observables.centro_x = 0;
             this._actor_visor_observables.centro_y = 0;
             this._actor_visor_observables.x = -210;
@@ -3063,9 +3067,7 @@ var EscenaBase = (function () {
         this.pilas.modo.matter.world.setGravity(this._gravedad_x, this._gravedad_y);
     };
     EscenaBase.prototype.obtener_nombre_para = function (nombre_propuesto) {
-        var nombres_que_pueden_colisionar = this.actores
-            .map(function (e) { return e.nombre; })
-            .filter(function (e) { return e.startsWith(nombre_propuesto); });
+        var nombres_que_pueden_colisionar = this.actores.map(function (e) { return e.nombre; }).filter(function (e) { return e.startsWith(nombre_propuesto); });
         var contador = 1;
         var nombre_a_sugerir = nombre_propuesto;
         while (nombres_que_pueden_colisionar.indexOf(nombre_a_sugerir) > -1) {
@@ -3125,6 +3127,7 @@ var EscenaBase = (function () {
     };
     EscenaBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
     EscenaBase.prototype.cuando_mueve = function (x, y, evento_original) { };
+    EscenaBase.prototype.cada_segundo = function (segundos_transcurridos) { };
     return EscenaBase;
 }());
 var Escena = (function (_super) {
@@ -3138,8 +3141,10 @@ var Escena = (function (_super) {
     Escena.prototype.pre_actualizar = function () {
         this.cuadro += 1;
         if (this.cuadro % 60 === 0) {
+            var segundos_transcurridos_1 = Math.floor(this.cuadro / 60);
+            this.cada_segundo(segundos_transcurridos_1);
             this.actores.map(function (actor) {
-                actor.cada_segundo();
+                actor.cada_segundo(segundos_transcurridos_1);
             });
         }
     };
@@ -5512,6 +5517,12 @@ var Modo = (function (_super) {
         else {
             sprite.setTexture(actor.imagen);
         }
+        if (actor.activo === false) {
+            sprite.alpha = 0.5;
+        }
+        else {
+            sprite.alpha = 1 - actor.transparencia / 100;
+        }
         sprite.id = actor.id;
         sprite.x = coordenada.x;
         sprite.y = coordenada.y;
@@ -5520,7 +5531,6 @@ var Modo = (function (_super) {
         sprite.scaleY = actor.escala_y;
         sprite.depth = -actor.z || 0;
         sprite.setOrigin(actor.centro_x, actor.centro_y);
-        sprite.alpha = 1 - actor.transparencia / 100;
         if (sprite.figura) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
         }
@@ -6168,11 +6178,35 @@ var ModoEjecucion = (function (_super) {
         if (datos_de_la_escena.gravedad_y !== undefined) {
             escena.gravedad_y = datos_de_la_escena.gravedad_y;
         }
-        this.actores = datos_de_la_escena.actores.map(function (e) {
+        this.actores = datos_de_la_escena.actores
+            .map(function (e) {
+            if (e.activo === false) {
+                return false;
+            }
             return _this.crear_actor(e);
-        });
+        })
+            .filter(function (e) { return e; });
         this._escena_en_ejecucion = escena;
         escena.iniciar();
+    };
+    ModoEjecucion.prototype.clonar_actor_por_nombre = function (nombre) {
+        var nombres_de_todos_los_actores = this.obtener_nombres_de_actores();
+        if (nombres_de_todos_los_actores.indexOf(nombre) === -1) {
+            var nombre_mas_similar = this.pilas.utilidades.obtener_mas_similar(nombre, nombres_de_todos_los_actores);
+            throw new Error("No se encuentra el actor \"" + nombre + "\", \u00BFquisiste decir \"" + nombre_mas_similar + "\"?");
+        }
+        var entidad = this.obtener_definicion_de_actor_por_nombre(nombre);
+        return this.crear_actor(entidad);
+    };
+    ModoEjecucion.prototype.obtener_nombres_de_actores = function () {
+        return this.obtener_entidades_de_actores_de_todas_las_escenas().map(function (entidad) { return entidad.nombre; });
+    };
+    ModoEjecucion.prototype.obtener_entidades_de_actores_de_todas_las_escenas = function () {
+        return this.proyecto.escenas.map(function (escena) { return escena.actores; }).reduce(function (a, b) { return a.concat(b); });
+    };
+    ModoEjecucion.prototype.obtener_definicion_de_actor_por_nombre = function (nombre) {
+        var entidades = this.obtener_entidades_de_actores_de_todas_las_escenas();
+        return entidades.filter(function (entidad) { return entidad.nombre === nombre; })[0];
     };
     ModoEjecucion.prototype.crear_actor = function (entidad) {
         var x = entidad.x;

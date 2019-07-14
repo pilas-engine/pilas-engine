@@ -4,7 +4,7 @@ declare class Actores {
     crear_actor(nombre: string): any;
     actor(): any;
     aceituna(x?: number, y?: number): any;
-    caja(x: number, y: number): any;
+    caja(): any;
     conejo(): any;
     logo(): any;
     moneda(): any;
@@ -327,6 +327,8 @@ declare class Pilas {
     ocultar_cursor(): void;
     definir_cursor(nombre: string): void;
     observar(nombre: string, variable: any): void;
+    clonar(nombre: string): any;
+    es_multiplo(a: number, b: number): boolean;
 }
 declare var pilasengine: Pilas;
 declare class ActorBase {
@@ -449,7 +451,7 @@ declare class ActorBase {
     fijo: boolean;
     espejado: boolean;
     espejado_vertical: boolean;
-    cada_segundo(): void;
+    cada_segundo(segundos_transcurridos: number): void;
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
     reproducir_animacion(nombre_de_la_animacion: any): void;
@@ -815,6 +817,7 @@ declare class EscenaBase {
     terminar(): void;
     cuando_hace_click(x: any, y: any, evento_original: any): void;
     cuando_mueve(x: any, y: any, evento_original: any): void;
+    cada_segundo(segundos_transcurridos: number): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;
@@ -1364,6 +1367,10 @@ declare class ModoEjecucion extends Modo {
     obtener_escena_por_nombre(nombre: string): any;
     instanciar_escena(nombre: any): void;
     crear_escena(datos_de_la_escena: any): void;
+    clonar_actor_por_nombre(nombre: string): any;
+    obtener_nombres_de_actores(): any;
+    obtener_entidades_de_actores_de_todas_las_escenas(): any;
+    obtener_definicion_de_actor_por_nombre(nombre: string): any;
     crear_actor(entidad: any): any;
     obtener_referencias_a_clases(): any;
     obtener_codigo_para_exportar_clases(codigo: any): string;

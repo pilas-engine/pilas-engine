@@ -333,7 +333,7 @@ export default Component.extend({
   obtener_todos_los_nombres_de_actores() {
     let escenas = this.get("proyecto.escenas");
     let actores = escenas.map(e => e.actores);
-    return actores.reduce(e => e.concat()).map(e => e.get("nombre"));
+    return actores.reduce((a, b) => a.concat(b)).map(e => e.get("nombre"));
   },
 
   obtener_nombres_de_escenas(proyecto) {
@@ -405,6 +405,7 @@ export default Component.extend({
       actor.propiedades.id = id;
       actor.propiedades.imagen = actor.imagen || "sin_imagen";
 
+      actor.propiedades.activo = true;
       actor.propiedades.nombre = nombre;
       actor.propiedades.habilidades = [];
 

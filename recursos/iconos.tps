@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.0.0</string>
+        <string>4.12.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -190,7 +190,9 @@
             <key type="filename">iconos/ejemplos/controles.png</key>
             <key type="filename">iconos/ejemplos/cursores.png</key>
             <key type="filename">iconos/ejemplos/ejemplo-nave.png</key>
+            <key type="filename">iconos/ejemplos/flappy.png</key>
             <key type="filename">iconos/ejemplos/gravedad.png</key>
+            <key type="filename">iconos/ejemplos/huesos.png</key>
             <key type="filename">iconos/ejemplos/nubes.png</key>
             <key type="filename">iconos/ejemplos/plataformas.png</key>
             <struct type="IndividualSpriteSettings">
@@ -238,7 +240,9 @@
             <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_espacio.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_izquierda.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_caja.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_ceferino.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_gallina.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_robot.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -542,7 +546,11 @@
             <key type="filename">iconos/principal/manual.png</key>
             <key type="filename">iconos/principal/settings.png</key>
             <key type="filename">iconos/principal/test.png</key>
+            <key type="filename">iconos/recetas/receta_colision.png</key>
+            <key type="filename">iconos/recetas/receta_tiempo.png</key>
             <key type="filename">iconos/ui/add_folder.png</key>
+            <key type="filename">iconos/ui/exportar.png</key>
+            <key type="filename">iconos/ui/receta.png</key>
             <key type="filename">iconos/ui/webserver.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -612,6 +620,7 @@
             <filename>iconos/ejemplos</filename>
             <filename>iconos/grilla-actores</filename>
             <filename>iconos/icono-actores</filename>
+            <filename>iconos/recetas</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

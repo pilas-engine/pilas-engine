@@ -717,7 +717,7 @@ class ActorBase {
     return this.sprite.flipY;
   }
 
-  cada_segundo() {}
+  cada_segundo(segundos_transcurridos: number) {}
 
   avanzar(rotacion: number = null, velocidad: number = 1) {
     if (rotacion === null) {

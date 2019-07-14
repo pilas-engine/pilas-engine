@@ -315,13 +315,48 @@ class ModoEjecucion extends Modo {
       escena.gravedad_y = datos_de_la_escena.gravedad_y;
     }
 
-    this.actores = datos_de_la_escena.actores.map(e => {
-      return this.crear_actor(e);
-    });
+    this.actores = datos_de_la_escena.actores
+      .map(e => {
+        if (e.activo === false) {
+          return false;
+        }
+
+        return this.crear_actor(e);
+      })
+      .filter(e => e);
 
     this._escena_en_ejecucion = escena;
 
     escena.iniciar();
+  }
+
+  clonar_actor_por_nombre(nombre: string) {
+    let nombres_de_todos_los_actores = this.obtener_nombres_de_actores();
+
+    if (nombres_de_todos_los_actores.indexOf(nombre) === -1) {
+      let nombre_mas_similar = this.pilas.utilidades.obtener_mas_similar(nombre, nombres_de_todos_los_actores);
+      throw new Error(`No se encuentra el actor "${nombre}", ¿quisiste decir "${nombre_mas_similar}"?`);
+    }
+
+    let entidad = this.obtener_definicion_de_actor_por_nombre(nombre);
+
+    return this.crear_actor(entidad);
+  }
+
+  /**
+   * Obtiene los nombres de los actores de todas las escenas.
+   */
+  obtener_nombres_de_actores() {
+    return this.obtener_entidades_de_actores_de_todas_las_escenas().map(entidad => entidad.nombre);
+  }
+
+  obtener_entidades_de_actores_de_todas_las_escenas() {
+    return this.proyecto.escenas.map(escena => escena.actores).reduce((a, b) => a.concat(b));
+  }
+
+  obtener_definicion_de_actor_por_nombre(nombre: string) {
+    let entidades = this.obtener_entidades_de_actores_de_todas_las_escenas();
+    return entidades.filter(entidad => entidad.nombre === nombre)[0];
   }
 
   crear_actor(entidad) {

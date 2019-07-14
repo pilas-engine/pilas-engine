@@ -25,8 +25,7 @@ class EscenaBase {
   observar(nombre: string, variable: any) {
     if (this._observables === null) {
       this._actor_visor_observables = this.pilas.actores.texto();
-      this._actor_visor_observables.fondo =
-        "imagenes:redimensionables/blanco";
+      this._actor_visor_observables.fondo = "imagenes:redimensionables/blanco";
 
       this._actor_visor_observables.centro_x = 0;
       this._actor_visor_observables.centro_y = 0;
@@ -89,9 +88,7 @@ class EscenaBase {
    * retornará el nombre 'nave3'.
    */
   obtener_nombre_para(nombre_propuesto: string) {
-    let nombres_que_pueden_colisionar = this.actores
-      .map(e => e.nombre)
-      .filter(e => e.startsWith(nombre_propuesto));
+    let nombres_que_pueden_colisionar = this.actores.map(e => e.nombre).filter(e => e.startsWith(nombre_propuesto));
     let contador = 1;
     let nombre_a_sugerir = nombre_propuesto;
 
@@ -152,11 +149,7 @@ class EscenaBase {
     if (posicion !== -1) {
       this.actores.splice(posicion, 1);
     } else {
-      throw Error(
-        `Se intentó eliminar un actor inexistente en la escena: id=${id} etiqueta=${
-          actor.etiqueta
-        }.`
-      );
+      throw Error(`Se intentó eliminar un actor inexistente en la escena: id=${id} etiqueta=${actor.etiqueta}.`);
     }
   }
 
@@ -170,4 +163,6 @@ class EscenaBase {
   cuando_hace_click(x, y, evento_original) {}
 
   cuando_mueve(x, y, evento_original) {}
+
+  cada_segundo(segundos_transcurridos: number) {}
 }

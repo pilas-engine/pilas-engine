@@ -1,0 +1,24 @@
+{{yield}}
+
+{{pilas-boton id="receta" extraClass="" desactivado=desactivado accion=(action "mostrar") texto="Recetas" responsive=true icono="receta"}}
+
+
+{{#if mostrar}}
+  <div role="button" class="fixed z-1 absolute--fill" {{action "ocultar"}}></div>
+
+  <div class="absolute bg-fondo ba borde shadow-4 top-1 pa2 f7 z-999">
+
+    {{#each recetas_filtradas_por_tipo as |receta|}}
+      <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action "usar_receta" receta}}>
+        {{pilas-icono icono=receta.icono class="v-top"}} {{receta.titulo}}
+      </div>
+    {{/each}}
+
+    {{#if es_proyecto}}
+      <div class="pa2 texto f7 truncate">
+        Seleccioná un actor o una escena para ver recetas.
+      </div>
+    {{/if}}
+
+  </div>
+{{/if}}

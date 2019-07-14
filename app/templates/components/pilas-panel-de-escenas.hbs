@@ -27,7 +27,13 @@
       <ul>
         {{#each escena.actores as |actor|}}
           <li role="button" class="truncate texto pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}>
-            {{pilas-icono-de-actor actor=actor}} {{actor.nombre}}
+            {{pilas-icono-de-actor actor=actor}}
+
+            {{#if (eq actor.activo false)}}
+              <span class="o-50">{{actor.nombre}} - inactivo</span>
+            {{else}}
+              {{actor.nombre}}
+            {{/if}}
 
             <div class="dib fr f7">
               {{#if (eq seleccion actor.id)}}

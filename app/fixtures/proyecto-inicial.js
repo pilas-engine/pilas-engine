@@ -48,6 +48,7 @@ export default {
       fondo: "imagenes:fondos/fondo-plano",
       actores: [
         {
+          activo: true,
           x: 0,
           y: -90,
           z: 0,
@@ -74,6 +75,7 @@ export default {
           nombre: "plataforma"
         },
         {
+          activo: true,
           x: 96,
           y: 39,
           z: 0,
@@ -100,6 +102,7 @@ export default {
           nombre: "caja"
         },
         {
+          activo: true,
           x: -61,
           y: 57,
           z: 0,
@@ -126,6 +129,7 @@ export default {
           nombre: "pelota"
         },
         {
+          activo: true,
           x: 0,
           y: 255,
           z: 0,
@@ -152,6 +156,7 @@ export default {
           nombre: "techo"
         },
         {
+          activo: true,
           x: 0,
           y: -250,
           z: 0,
