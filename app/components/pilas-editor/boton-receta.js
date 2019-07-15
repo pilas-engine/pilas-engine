@@ -2,6 +2,24 @@ import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 
+// recetas de actores
+import reproducir_sonido_al_comenzar from "pilas-engine/utils/recetas/actor/reproducir-sonido-al-comenzar";
+import detecta_el_paso_del_tiempo_en_segundos from "pilas-engine/utils/recetas/actor/detecta-el-paso-del-tiempo-en-segundos";
+import cuando_colisiona_emitir_mensaje from "pilas-engine/utils/recetas/actor/cuando-colisiona-emitir-mensaje";
+import cuando_colisiona_eliminar_al_otro_actor from "pilas-engine/utils/recetas/actor/cuando-colisiona-eliminar-al-otro-actor";
+import mover_al_actor_a_la_izquierda from "pilas-engine/utils/recetas/actor/mover-al-actor-a-la-izquierda";
+import clonar_cuando_hacen_click_sobre_el_actor from "pilas-engine/utils/recetas/actor/clonar-cuando-hacen-click-sobre-el-actor";
+import controlar_al_actor_como_si_fuera_un_automovil from "pilas-engine/utils/recetas/actor/controlar-al-actor-como-si-fuera-un-automovil";
+import saltar_o_impulsar_cuando_hacen_click from "pilas-engine/utils/recetas/actor/saltar-o-impulsar-cuando-hacen-click";
+import controlar_el_movimiento_del_actor from "pilas-engine/utils/recetas/actor/controlar-el-movimiento-del-actor";
+import cambiar_la_posicion_del_actor_al_azar from "pilas-engine/utils/recetas/actor/cambiar-la-posicion-del-actor-al-azar";
+
+// recetas de escenas
+import crear_actores_cada_determinado_tiempo_en_segundos from "pilas-engine/utils/recetas/escena/crear-actores-cada-determinado-tiempo-en-segundos";
+import crear_actor_en_la_posicion_en_donde_se_hace_click from "pilas-engine/utils/recetas/escena/crear-actor-en-la-posicion-en-donde-se-hace-click";
+import observar_el_movimiento_del_mouse_o_cursor from "pilas-engine/utils/recetas/escena/observar-el-movimiento-del-mouse-o-cursor";
+import crear_10_actores_en_posiciones_al_azar_cuando_comienza from "pilas-engine/utils/recetas/escena/crear-10-actores-en-posiciones-al-azar-cuando-comienza";
+
 export default Component.extend({
   tagName: "",
   mostrar: false,
@@ -18,241 +36,23 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.set("recetas", [
-      {
-        titulo: "Crear actores cada determinado tiempo en segundos",
-        icono: "receta_tiempo",
-        para: "escena",
-        etiquetas: ["tiempo", "crear", "contar", "temporizado", "paso", "segundos"],
-        codigo: `
-          cada_segundo(segundos) {
-              this.pilas.observar("Segundos transcurridos", segundos);
+      // recetas de actores
+      detecta_el_paso_del_tiempo_en_segundos(),
+      cuando_colisiona_emitir_mensaje(),
+      cuando_colisiona_eliminar_al_otro_actor(),
+      mover_al_actor_a_la_izquierda(),
+      controlar_el_movimiento_del_actor(),
+      clonar_cuando_hacen_click_sobre_el_actor(),
+      controlar_al_actor_como_si_fuera_un_automovil(),
+      saltar_o_impulsar_cuando_hacen_click(),
+      cambiar_la_posicion_del_actor_al_azar(),
+      reproducir_sonido_al_comenzar(),
 
-              // Crea un actor Caja cada 5 segundos.
-              if (this.pilas.es_multiplo(segundos, 5)) {
-                  this.pilas.actores.caja();
-              }
-
-              // Crea un actor Pelota cada 3 segundos.
-              if (this.pilas.es_multiplo(segundos, 3)) {
-                  this.pilas.actores.pelota()
-              }
-          }
-      `
-      },
-      {
-        titulo: "Detecta el paso del tiempo en segundos",
-        icono: "receta_tiempo",
-        para: "actor",
-        etiquetas: ["tiempo", "crear", "contar", "temporizado", "paso", "segundos"],
-        codigo: `
-          cada_segundo(segundos) {
-              this.decir("Pasaron " + segundos + " segundos")
-
-              // cada 5 segundos cambia el mensaje
-              if (this.pilas.es_multiplo(segundos, 5)) {
-                  this.decir("Múltiplo de 5 !!!")
-              }
-          }
-      `
-      },
-
-      {
-        titulo: "Cuando colisiona emitir un mensaje y eliminar si es enemigo",
-        icono: "receta_colision",
-        para: "actor",
-        etiquetas: ["colisión", "toca", "golpea"],
-        codigo: `
-          // Se invoca si entran en contacto dos actores con figuras dinámicas
-          // o uno con figura dinámica y otro con figura no dinámica.
-          cuando_comienza_una_colision(otro_actor: Actor) {
-
-            this.decir("He colisionado con actor de etiqueta: " + otro_actor.etiqueta);
-
-            if (otro_actor.etiqueta == "enemigo") {
-              this.eliminar();
-            }
-          }
-      `
-      },
-      {
-        titulo: "Cuando colisiona eliminar al otro actor",
-        icono: "receta_colision",
-        para: "actor",
-        etiquetas: ["colisión", "toca", "golpea"],
-        codigo: `
-          // Se invoca si entran en contacto dos actores con figuras dinámicas
-          // o uno con figura dinámica y otro con figura no dinámica.
-          cuando_comienza_una_colision(otro_actor: Actor) {
-            otro_actor.eliminar();
-          }
-      `
-      },
-      {
-        titulo: "Crear un actor en la posición en donde se hace click",
-        icono: "receta_click",
-        para: "escena",
-        etiquetas: ["mouse", "cursor", "crear", "actor", "click"],
-        codigo: `
-          cuando_hace_click(x: number, y: number, evento) {
-            let actor = this.pilas.actores.pelota();
-            actor.x = x;
-            actor.y = y;
-        }
-      `
-      },
-      {
-        titulo: "Observar el movimiento del mouse o cursor",
-        icono: "receta_mueve",
-        para: "escena",
-        etiquetas: ["mouse", "cursor", "mover", "observar"],
-        codigo: `
-        cuando_mueve(x: number, y: number, evento: any) {
-          this.pilas.observar("Posición x", x);
-          this.pilas.observar("Posición y", y);
-        }
-      `
-      },
-
-      {
-        titulo: "Mover al actor hacia la izquierda y eliminar si sale de la pantalla",
-        icono: "receta_mover_izquierda",
-        para: "actor",
-        etiquetas: ["mover"],
-        codigo: `
-        actualizar() {
-          let velocidad = 5;
-          this.x -= velocidad;
-
-          if (this.x < -250) {
-            this.eliminar();
-          }
-        }
-      `
-      },
-      {
-        titulo: "Controlar el movimiento del actor",
-        icono: "receta_pad",
-        para: "actor",
-        etiquetas: ["mover"],
-        codigo: `
-      actualizar() {
-        let velocidad = 5;
-
-        if (this.pilas.control.izquierda) {
-          this.x -= velocidad;
-        }
-
-        if (this.pilas.control.derecha) {
-          this.x += velocidad;
-        }
-
-        if (this.pilas.control.arriba) {
-          this.y += velocidad;
-        }
-
-        if (this.pilas.control.abajo) {
-          this.y -= velocidad;
-        }
-      }
-    `
-      },
-      {
-        titulo: "Clonar cuando hacen click sobre este actor",
-        icono: "receta_clonar",
-        para: "actor",
-        etiquetas: ["click", "clonar"],
-        codigo: `
-      cuando_hace_click(x: number, y: number, evento) {
-        let clonacion = this.pilas.clonar(this.nombre);
-
-        // Pone al actor clonado en una posición muy similar
-        // a la del actor actual (del que se genera la clonación).
-        clonacion.x = this.x + 5;
-        clonacion.y = this.y;
-      }
-    `
-      },
-      {
-        titulo: "Controlar al actor como si fuera un automóvil",
-        icono: "receta_pad",
-        para: "actor",
-        etiquetas: ["mover", "control"],
-        codigo: `
-          actualizar() {
-             let velocidad = 5;
-             let velocidad_para_doblar = 5;
-
-             if (this.pilas.control.arriba) {
-                 this.avanzar(this.rotacion, velocidad)
-             }
-
-             if (this.pilas.control.izquierda) {
-                 this.rotacion += velocidad_para_doblar;
-             }
-
-             if (this.pilas.control.derecha) {
-                 this.rotacion -= velocidad_para_doblar;
-             }
-         }
-      `
-      },
-
-      {
-        titulo: "Saltar o impulsar cuando hacen click",
-        icono: "receta_saltar",
-        para: "actor",
-        etiquetas: ["fisica", "impulsar", "saltar"],
-        codigo: `
-          cuando_hace_click(x: number, y: number, evento) {
-            this.impulsar(0, 10);
-          }
-      `
-      },
-      {
-        titulo: "Cambiar la posición del actor al azar cuando comienza",
-        icono: "receta_azar",
-        para: "actor",
-        etiquetas: ["azar"],
-        codigo: `
-        iniciar() {
-          this.x = this.pilas.azar(-200, 200);
-          this.y = this.pilas.azar(-230, 230);
-        }
-    `
-      },
-      {
-        titulo: "Crear 10 actores en posiciones al azar cuando comienza",
-        icono: "receta_azar",
-        para: "escena",
-        etiquetas: ["azar", "crear"],
-        codigo: `
-        iniciar() {
-          for (i=0; i<10; i++) {
-            let actor: Actor = this.pilas.actores.aceituna();
-            actor.x = this.pilas.azar(-200, 200);
-            actor.y = this.pilas.azar(-230, 230);
-          }
-        }
-    `
-      },
-
-      {
-        titulo: "Reproducir sonido al comenzar",
-        icono: "receta_sonido",
-        para: "actor",
-        etiquetas: ["sonido"],
-        codigo: `
-        iniciar() {
-          this.pilas.reproducir_sonido("moneda");
-
-          // Otras opciones:
-
-          //this.pilas.reproducir_sonido("laser");
-          //this.pilas.reproducir_sonido("salto-largo");
-          //this.pilas.reproducir_sonido("salto-corto");
-        }
-    `
-      }
+      // recetas de escenas
+      crear_actores_cada_determinado_tiempo_en_segundos(),
+      crear_actor_en_la_posicion_en_donde_se_hace_click(),
+      observar_el_movimiento_del_mouse_o_cursor(),
+      crear_10_actores_en_posiciones_al_azar_cuando_comienza()
     ]);
   },
 
