@@ -121,6 +121,11 @@
       "archivo": "plataforma.ts"
     },
     {
+      "nombre": "puntaje",
+      "codigo": "class puntaje extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    texto: \"PUNTAJE: 0\",\n    color: \"white\",\n    es_texto: true,\n    z: -10\n  };\n  puntaje: number = 0;\n\n  iniciar() {\n    this._texto.setFontSize(20);\n    this._texto.setStroke(\"#fff\", 1);\n    this._texto.setShadow(1, 1, \"#333333\", 2, true, true);\n    this.actualizar_texto();\n  }\n\n  aumentar(cantidad: number = 1) {\n    this.puntaje += cantidad;\n    this.actualizar_texto();\n  }\n\n  actualizar_texto() {\n    this.texto = `PUNTAJE: ${this.puntaje}`;\n  }\n}\n",
+      "archivo": "puntaje.ts"
+    },
+    {
       "nombre": "robot",
       "codigo": "class robot extends Actor {\n  propiedades = {\n    imagen: \"imagenes:objetos/robot\",\n    centro_y: 1\n  };\n\n  contenedor: any;\n  huesos: Huesos;\n\n  iniciar() {\n    this.imagen = \"imagenes:basicos/invisible\";\n    this.contenedor = this.pilas.modo.add.container();\n    this.huesos = new Huesos(this.pilas, \"robot\", \"atlas-robot\", this.contenedor);\n    this.huesos.definir_animacion(\"run\");\n  }\n\n  actualizar() {\n    this.huesos.actualizar_animacion(20);\n  }\n\n  pre_actualizar() {\n    this.pilas.utilidades.sincronizar_contenedor(this.contenedor, this.sprite);\n  }\n}\n",
       "archivo": "robot.ts"

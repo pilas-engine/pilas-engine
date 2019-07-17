@@ -101,6 +101,9 @@ var Actores = (function () {
     Actores.prototype.robot = function () {
         return this.crear_actor("robot");
     };
+    Actores.prototype.puntaje = function () {
+        return this.crear_actor("puntaje");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -1533,6 +1536,7 @@ var ActorBase = (function () {
             console.log("aún no tiene sprite");
         }
     };
+    ActorBase.prototype.cuando_hace_click_en_la_pantalla = function (x, y, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "fondo", {
         set: function (fondo) { },
         enumerable: true,
@@ -2929,6 +2933,36 @@ var plataforma = (function (_super) {
     plataforma.prototype.iniciar = function () { };
     return plataforma;
 }(Actor));
+var puntaje = (function (_super) {
+    __extends(puntaje, _super);
+    function puntaje() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:basicos/invisible",
+            texto: "PUNTAJE: 0",
+            color: "white",
+            es_texto: true,
+            z: -10
+        };
+        _this.puntaje = 0;
+        return _this;
+    }
+    puntaje.prototype.iniciar = function () {
+        this._texto.setFontSize(20);
+        this._texto.setStroke("#fff", 1);
+        this._texto.setShadow(1, 1, "#333333", 2, true, true);
+        this.actualizar_texto();
+    };
+    puntaje.prototype.aumentar = function (cantidad) {
+        if (cantidad === void 0) { cantidad = 1; }
+        this.puntaje += cantidad;
+        this.actualizar_texto();
+    };
+    puntaje.prototype.actualizar_texto = function () {
+        this.texto = "PUNTAJE: " + this.puntaje;
+    };
+    return puntaje;
+}(ActorTextoBase));
 var robot = (function (_super) {
     __extends(robot, _super);
     function robot() {
@@ -3107,6 +3141,11 @@ var EscenaBase = (function () {
         });
         actores_a_eliminar.map(function (actor) {
             _this.quitar_actor_luego_de_eliminar(actor);
+        });
+    };
+    EscenaBase.prototype.avisar_click_en_la_pantalla_a_los_actores = function (x, y, evento_original) {
+        this.actores.map(function (actor) {
+            actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
         });
     };
     EscenaBase.prototype.quitar_actor_luego_de_eliminar = function (actor) {
@@ -5985,6 +6024,7 @@ var ModoEjecucion = (function (_super) {
                 if (_this._escena_en_ejecucion) {
                     try {
                         _this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, cursor);
+                        _this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores();
                     }
                     catch (e) {
                         console.error(e);

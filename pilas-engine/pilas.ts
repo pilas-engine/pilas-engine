@@ -15,7 +15,7 @@ class Pilas {
   utilidades: Utilidades;
   escenas: Escenas;
   historia: Historia;
-  sonidos: any;
+  sonidos: { [key: string]: any };
   actores: Actores;
   animaciones: Animaciones;
   Phaser: any;

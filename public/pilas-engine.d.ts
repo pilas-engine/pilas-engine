@@ -26,6 +26,7 @@ declare class Actores {
     boton_de_control_espacio(): any;
     ceferino(): any;
     robot(): any;
+    puntaje(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -251,7 +252,9 @@ declare class Pilas {
     utilidades: Utilidades;
     escenas: Escenas;
     historia: Historia;
-    sonidos: any;
+    sonidos: {
+        [key: string]: any;
+    };
     actores: Actores;
     animaciones: Animaciones;
     Phaser: any;
@@ -390,6 +393,7 @@ declare class ActorBase {
     interactivo: boolean;
     area_de_interactividad: any;
     definir_area_de_interactividad(ancho: number, alto: number): void;
+    cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any): void;
     fondo: string;
     serializar(): {
         tipo: String;
@@ -747,6 +751,19 @@ declare class plataforma extends Actor {
     };
     iniciar(): void;
 }
+declare class puntaje extends ActorTextoBase {
+    propiedades: {
+        imagen: string;
+        texto: string;
+        color: string;
+        es_texto: boolean;
+        z: number;
+    };
+    puntaje: number;
+    iniciar(): void;
+    aumentar(cantidad?: number): void;
+    actualizar_texto(): void;
+}
 declare class robot extends Actor {
     propiedades: {
         imagen: string;
@@ -813,6 +830,7 @@ declare class EscenaBase {
     pre_actualizar(): void;
     actualizar(): void;
     actualizar_actores(): void;
+    avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
     terminar(): void;
     cuando_hace_click(x: any, y: any, evento_original: any): void;

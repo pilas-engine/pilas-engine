@@ -269,6 +269,8 @@ class ActorBase {
     }
   }
 
+  cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any) {}
+
   get area_de_interactividad() {
     let ancho = this.sprite.input.hitArea.width;
     let alto = this.sprite.input.hitArea.height;

@@ -142,6 +142,12 @@ class EscenaBase {
     });
   }
 
+  avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any) {
+    this.actores.map(actor => {
+      actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+    });
+  }
+
   quitar_actor_luego_de_eliminar(actor: Actor) {
     let posicion = this.actores.indexOf(actor);
     let id = actor["id"];

@@ -118,4 +118,8 @@ class Actores {
   robot() {
     return this.crear_actor("robot");
   }
+
+  puntaje() {
+    return this.crear_actor("puntaje");
+  }
 }
