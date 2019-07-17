@@ -10,7 +10,7 @@
 
 */
 
-.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(grilla-imagenes.png);}
+.sprite-grilla-de-imagenes {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(grilla-imagenes.png);}
 
 .aliens-alien_azul {width:41px; height:48px; background-position: -996px -149px}
 .aliens-alien_verde {width:48px; height:47px; background-position: -851px -51px}
