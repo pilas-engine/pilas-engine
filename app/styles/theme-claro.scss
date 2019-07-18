@@ -68,6 +68,14 @@
   .bg-fondo-secundario {
     background-color: #aaa;
   }
+
+  .bb-dashed-on-hover:hover {
+    border-bottom: 1px dashed black;
+  }
+
+  .bb-dashed-on-hover {
+    border-bottom: 1px solid invisible;
+  }
 }
 
 .theme-claro.bg-fondo {

@@ -7,12 +7,12 @@ export default Controller.extend({
   bus: service(),
   compilador: service(),
   electron: service(),
+  objeto: null,
 
   proyecto: null,
 
   iniciar() {
     this.set("instancia_seleccionada", { numero: 3 });
-    this.set("propiedad", { propiedad: "Un número" });
 
     this.set("proyecto", {
       titulo: "Proyecto demo",
@@ -172,35 +172,5 @@ export default Controller.extend({
       this.bus.trigger("ejecutar_proyecto", datos);
       this.bus.trigger("hacer_foco_en_pilas", {});
     }
-
-    /*
-    abrir_proyecto() {
-      this.electron.abrir_proyecto().then(ruta => {
-        let electron = this.electron;
-        try {
-          let proyecto = electron.abrir_proyecto_desde_archivo(ruta);
-
-          this.set("ocultar_canvas", true);
-
-          later(() => {
-            this.set("proyecto", proyecto);
-            this.set("ocultar_canvas", false);
-          }, 10);
-        } catch (err) {
-          console.error(err);
-          alert("Error, el archivo está mal formateado: " + err.name);
-        }
-      });
-    },
-
-    guardar_proyecto() {
-      this.electron.guardar_proyecto().then(ruta => {
-        let proyecto = this.proyecto;
-        let electron = this.electron;
-
-        electron.guardar_proyecto_en_archivo(proyecto, ruta);
-      });
-    }
-    */
   }
 });

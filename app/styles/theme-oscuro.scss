@@ -139,6 +139,14 @@
   .bg-fondo-secundario {
     background-color: #454646;
   }
+
+  .bb-dashed-on-hover:hover {
+    border-bottom: 1px dashed #c6c8c8;
+  }
+
+  .bb-dashed-on-hover {
+    border-bottom: 1px solid invisible;
+  }
 }
 
 .theme-oscuro.bg-fondo {

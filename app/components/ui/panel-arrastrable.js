@@ -19,10 +19,7 @@ export default Component.extend({
       content: contenido,
       emulateScroll: false,
       shouldScroll: (data, event) => {
-        if (
-          event.target.classList.contains("input") ||
-          event.target.classList.contains("select")
-        ) {
+        if (event.target.classList.contains("input") || event.target.classList.contains("select") || event.target.classList.contains("data-etiqueta")) {
           return false;
         } else {
           return true;

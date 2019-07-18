@@ -1,66 +1,52 @@
 import { later } from "@ember/runloop";
 import Component from "@ember/component";
 
+// fallback para navegadores que no soportan .bind en las funciones.
+var bind = function(fn, me) {
+  return function() {
+    return fn.apply(me, arguments);
+  };
+};
+
 export default Component.extend({
   original_value: 0,
   intensidad: 0.01,
   editando: false,
+  posicion_inicial_x: null,
+  valor_inicial_al_comenzar_a_arrastrar: null,
+
+  cuando_pulsa(e) {
+    this.set("posicion_inicial_x", e.clientX);
+    this.set("valor_inicial_al_comenzar_a_arrastrar", this.value);
+
+    document.addEventListener("mousemove", this.cuando_mueve, false);
+    document.addEventListener("mouseup", this.cuando_suelta, false);
+  },
+
+  cuando_mueve(e) {
+    let delta = (e.clientX - this.get("posicion_inicial_x")) * this.intensidad;
+    this.set("posicion_inicial_x", e.clientX);
+
+    this.modificar(delta);
+  },
+
+  cuando_suelta() {
+    document.removeEventListener("mousemove", this.cuando_mueve, false);
+    document.removeEventListener("mouseup", this.cuando_suelta, false);
+  },
 
   didInsertElement() {
-    /*
-    let element = this.element.querySelector(".cursor-resize");
-    var initialX = 0;
+    let etiqueta = this.element.querySelector(".data-etiqueta");
+    this.cuando_pulsa = bind(this.cuando_pulsa, this);
+    this.cuando_mueve = bind(this.cuando_mueve, this);
+    this.cuando_suelta = bind(this.cuando_suelta, this);
 
-    element.addEventListener("mousedown", mouse_down_event => {
-      later(() => {
-        initialX = mouse_down_event.pageX;
-        this.set("initialX", mouse_down_event.pageX);
-        this.set("original_value", this.value);
-
-        let html = document.querySelector("html");
-        html.addEventListener("mousemove", this.al_mover.bind(this));
-
-        html.addEventListener("mouseup", () => {
-          later(() => {
-            this.disconnectEvents();
-            return false;
-          });
-        });
-
-        html.onmouseleave = () => {
-          later(() => {
-            this.disconnectEvents();
-            return false;
-          });
-        };
-      });
-    });
-    */
-  },
-
-  al_mover(event) {
-    later(() => {
-      var mouse_dx = (event.pageX - this.initialX) * this.intensidad;
-
-      this.modificar(mouse_dx);
-      this.set("initialX", event.pageX);
-
-      return false;
-    });
-  },
-
-  disconnectEvents: function() {
-    /*
-    let html = document.querySelector("html");
-    html.removeEventListener("mousedown", this.al_mover);
-    //html.onmouseup;
-    */
+    etiqueta.addEventListener("mousedown", this.cuando_pulsa, false);
   },
 
   willDestroyElement() {
-    /*
-    this.disconnectEvents();
-    */
+    let etiqueta = this.element.querySelector(".data-etiqueta");
+    etiqueta.removeEventListener("mousedown", this.cuando_pulsa, false);
   },
 
   modificar(delta) {
