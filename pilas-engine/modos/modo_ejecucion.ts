@@ -451,13 +451,13 @@ class ModoEjecucion extends Modo {
     }
 
     try {
-      if (this.permitir_modo_pausa) {
-        this.guardar_foto_de_entidades();
-      }
-
       this.pilas.escena.pre_actualizar();
       this.pilas.escena.actualizar();
       this.pilas.escena.actualizar_actores();
+
+      if (this.permitir_modo_pausa) {
+        this.guardar_foto_de_entidades();
+      }
     } catch (e) {
       console.error(e);
       this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
