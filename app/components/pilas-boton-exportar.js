@@ -82,6 +82,7 @@ export default Component.extend({
 
       var carpeta_sonidos = carpeta_del_juego.folder("sonidos");
 
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/gallina.wav");
       yield this.agregar_archivo(carpeta_sonidos, "./sonidos/laser.wav");
       yield this.agregar_archivo(carpeta_sonidos, "./sonidos/moneda.wav");
       yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-corto.wav");
