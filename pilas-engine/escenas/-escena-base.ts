@@ -32,7 +32,6 @@ class EscenaBase {
       this._actor_visor_observables.x = -210;
       this._actor_visor_observables.y = 210;
 
-      //this._actor_visor_observables.color = "white";
       this._observables = {};
       let self = this;
 
@@ -45,6 +44,9 @@ class EscenaBase {
 
         this.texto = texto;
       };
+
+      // se asegura de actualizar el actor por primera vez.
+      this._actor_visor_observables.actualizar();
     }
 
     if (typeof variable == "number" && !Number.isInteger(variable)) {
