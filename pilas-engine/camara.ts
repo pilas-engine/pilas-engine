@@ -10,7 +10,27 @@ class Camara {
   }
 
   vibrar(intensidad: number = 1, tiempo: number = 1) {
-    this.camara_principal.shake(250 * tiempo, 0.05 * intensidad);
+    let actor = this.pilas.actores.actor();
+    actor.imagen = "imagenes:basicos/invisible";
+    let posicion_inicial_x = this.x;
+    let posicion_inicial_y = this.y;
+
+    actor.actualizar = function() {
+      if (this.contador === undefined) {
+        this.contador = 0;
+      }
+
+      this.contador += 1;
+
+      if (this.contador > tiempo * 60) {
+        this.pilas.camara.x = posicion_inicial_x;
+        this.pilas.camara.y = posicion_inicial_y;
+        this.eliminar();
+      } else {
+        this.pilas.camara.x = posicion_inicial_x + this.pilas.azar(-1, 1) * intensidad;
+        this.pilas.camara.y = posicion_inicial_y + this.pilas.azar(-1, 1) * intensidad;
+      }
+    };
   }
 
   get x() {
