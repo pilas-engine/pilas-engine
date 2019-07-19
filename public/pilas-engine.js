@@ -199,7 +199,25 @@ var Camara = (function () {
     Camara.prototype.vibrar = function (intensidad, tiempo) {
         if (intensidad === void 0) { intensidad = 1; }
         if (tiempo === void 0) { tiempo = 1; }
-        this.camara_principal.shake(250 * tiempo, 0.05 * intensidad);
+        var actor = this.pilas.actores.actor();
+        actor.imagen = "imagenes:basicos/invisible";
+        var posicion_inicial_x = this.x;
+        var posicion_inicial_y = this.y;
+        actor.actualizar = function () {
+            if (this.contador === undefined) {
+                this.contador = 0;
+            }
+            this.contador += 1;
+            if (this.contador > tiempo * 60) {
+                this.pilas.camara.x = posicion_inicial_x;
+                this.pilas.camara.y = posicion_inicial_y;
+                this.eliminar();
+            }
+            else {
+                this.pilas.camara.x = posicion_inicial_x + this.pilas.azar(-1, 1) * intensidad;
+                this.pilas.camara.y = posicion_inicial_y + this.pilas.azar(-1, 1) * intensidad;
+            }
+        };
     };
     Object.defineProperty(Camara.prototype, "x", {
         get: function () {
@@ -1042,6 +1060,13 @@ var Pilas = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Pilas.prototype, "camara", {
+        get: function () {
+            return this.escena.camara;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos, opciones) {
         var _this = this;
         if (opciones.maximizar === undefined) {
@@ -1079,6 +1104,10 @@ var Pilas = (function () {
                     }
                 ],
                 sonidos: [
+                    {
+                        nombre: "laser",
+                        ruta: "sonidos/gallina.wav"
+                    },
                     {
                         nombre: "laser",
                         ruta: "sonidos/laser.wav"
@@ -2137,7 +2166,14 @@ var ActorBase = (function () {
         texto.color = "black";
         texto.centro_x = 1;
         texto.centro_y = 1;
+        texto.z = this.z - 1;
         texto.texto = mensaje;
+        texto.actualizar = function () {
+            if (_this.esta_vivo()) {
+                texto.x = _this.x - 15;
+                texto.y = _this.y + _this.alto;
+            }
+        };
         this._dialogo = texto;
         this.pilas.luego(4, function () {
             if (texto.esta_vivo()) {
@@ -3064,6 +3100,7 @@ var EscenaBase = (function () {
                     .trim();
                 this.texto = texto;
             };
+            this._actor_visor_observables.actualizar();
         }
         if (typeof variable == "number" && !Number.isInteger(variable)) {
             this._observables[nombre] = variable.toFixed(2);
@@ -6313,12 +6350,12 @@ var ModoEjecucion = (function (_super) {
             this.pilas.modo.matter.world.debugGraphic.destroy();
         }
         try {
-            if (this.permitir_modo_pausa) {
-                this.guardar_foto_de_entidades();
-            }
             this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
             this.pilas.escena.actualizar_actores();
+            if (this.permitir_modo_pausa) {
+                this.guardar_foto_de_entidades();
+            }
         }
         catch (e) {
             console.error(e);
@@ -6458,6 +6495,10 @@ var ModoPausa = (function (_super) {
             this.copiar_valores_de_sprite_a_texto(sprite);
             if (sprite["fondo"]) {
                 sprite["fondo"].depth = sprite["texto"].depth - 1;
+                sprite["fondo"].x = sprite["texto"].x;
+                sprite["fondo"].y = sprite["texto"].y;
+                sprite["fondo"].x += 30 * sprite["texto"].originX - 30 * 0.5;
+                sprite["fondo"].y += 30 * sprite["texto"].originY - 30 * 0.5;
                 sprite["fondo"].setOrigin(sprite["texto"].originX, sprite["texto"].originY);
             }
         }

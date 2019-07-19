@@ -69,6 +69,10 @@ class Pilas {
     this.utilidades.acceso_incorrecto("control");
   }
 
+  get camara() {
+    return this.escena.camara;
+  }
+
   iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
     if (opciones.maximizar === undefined) {
       opciones.maximizar = true;
@@ -112,6 +116,10 @@ class Pilas {
           }
         ],
         sonidos: [
+          {
+            nombre: "laser",
+            ruta: "sonidos/gallina.wav"
+          },
           {
             nombre: "laser",
             ruta: "sonidos/laser.wav"

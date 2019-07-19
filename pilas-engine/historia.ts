@@ -28,13 +28,7 @@ class Historia {
       let historia = historia_reciente[i];
 
       historia.actores.map(entidad => {
-        let {
-          x,
-          y
-        } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-          entidad.x,
-          entidad.y
-        );
+        let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
 
         graphics.fillStyle(entidad.id_color, i / cantidad_total);
         graphics.fillRect(x, y, 2, 2);

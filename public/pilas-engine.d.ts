@@ -272,6 +272,7 @@ declare class Pilas {
     constructor();
     escena: EscenaBase;
     control: Control;
+    readonly camara: Camara;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
     iniciar(ancho: number, alto: number, recursos: any, opciones?: any): this;
     listar_imagenes(): string[];

@@ -35,19 +35,12 @@ class ModoPausa extends Modo {
     this.crear_canvas_de_depuracion_modo_pausa();
     this.matter.world.createDebugGraphic();
 
-    this.tecla_izquierda = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.LEFT
-    );
-    this.tecla_derecha = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.RIGHT
-    );
+    this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
     let t = this.pilas.historia.obtener_cantidad_de_posiciones();
     let datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
-    this.pilas.mensajes.emitir_mensaje_al_editor(
-      "comienza_a_depurar_en_modo_pausa",
-      datos_para_el_editor
-    );
+    this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
   }
 
   private crear_sprites_desde_historia(posicion) {
@@ -55,10 +48,7 @@ class ModoPausa extends Modo {
 
     this.sprites.map(sprite => {
       if (sprite.figura) {
-        this.pilas.Phaser.Physics.Matter.Matter.World.remove(
-          this.pilas.modo.matter.world.localWorld,
-          sprite.figura
-        );
+        this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
       }
 
       if (sprite["texto"]) {
@@ -98,13 +88,7 @@ class ModoPausa extends Modo {
     if (this.pilas.depurador.modo_posicion_activado) {
       let foto = this.pilas.historia.obtener_foto(this.posicion);
       foto.actores.map(sprite => {
-        let {
-          x,
-          y
-        } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-          sprite.x,
-          sprite.y
-        );
+        let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(sprite.x, sprite.y);
 
         this.dibujar_punto_de_control(this.graphics, x, y);
       });
@@ -126,10 +110,7 @@ class ModoPausa extends Modo {
     let sprite = null;
     let galeria = null;
     let imagen = null;
-    let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(
-      entidad.x,
-      entidad.y
-    );
+    let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
 
     if (nombre.indexOf(":") > -1) {
       galeria = nombre.split(":")[0];
@@ -170,10 +151,12 @@ class ModoPausa extends Modo {
 
       if (sprite["fondo"]) {
         sprite["fondo"].depth = sprite["texto"].depth - 1;
-        sprite["fondo"].setOrigin(
-          sprite["texto"].originX,
-          sprite["texto"].originY
-        );
+        sprite["fondo"].x = sprite["texto"].x;
+        sprite["fondo"].y = sprite["texto"].y;
+
+        sprite["fondo"].x += 30 * sprite["texto"].originX - 30 * 0.5;
+        sprite["fondo"].y += 30 * sprite["texto"].originY - 30 * 0.5;
+        sprite["fondo"].setOrigin(sprite["texto"].originX, sprite["texto"].originY);
       }
     }
 
@@ -195,19 +178,13 @@ class ModoPausa extends Modo {
   avanzar_posicion() {
     this.posicion += 1;
     this.actualizar_posicion(this.posicion);
-    this.pilas.mensajes.emitir_mensaje_al_editor(
-      "cambia_posicion_dentro_del_modo_pausa",
-      { posicion: this.posicion }
-    );
+    this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
   }
 
   retroceder_posicion() {
     this.posicion -= 1;
     this.actualizar_posicion(this.posicion);
-    this.pilas.mensajes.emitir_mensaje_al_editor(
-      "cambia_posicion_dentro_del_modo_pausa",
-      { posicion: this.posicion }
-    );
+    this.pilas.mensajes.emitir_mensaje_al_editor("cambia_posicion_dentro_del_modo_pausa", { posicion: this.posicion });
   }
 
   crear_canvas_de_depuracion_modo_pausa() {
@@ -215,8 +192,6 @@ class ModoPausa extends Modo {
     graphics_modo_pausa.depth = 190;
     this.graphics_modo_pausa = graphics_modo_pausa;
 
-    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(
-      graphics_modo_pausa
-    );
+    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa);
   }
 }
