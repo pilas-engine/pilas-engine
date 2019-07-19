@@ -847,8 +847,16 @@ class ActorBase {
     texto.color = "black";
     texto.centro_x = 1;
     texto.centro_y = 1;
+    texto.z = this.z - 1;
 
     texto.texto = mensaje;
+
+    texto.actualizar = () => {
+      if (this.esta_vivo()) {
+        texto.x = this.x - 15;
+        texto.y = this.y + this.alto;
+      }
+    };
 
     this._dialogo = texto;
 
