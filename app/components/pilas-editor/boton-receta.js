@@ -19,6 +19,7 @@ import crear_actores_cada_determinado_tiempo_en_segundos from "pilas-engine/util
 import crear_actor_en_la_posicion_en_donde_se_hace_click from "pilas-engine/utils/recetas/escena/crear-actor-en-la-posicion-en-donde-se-hace-click";
 import observar_el_movimiento_del_mouse_o_cursor from "pilas-engine/utils/recetas/escena/observar-el-movimiento-del-mouse-o-cursor";
 import crear_10_actores_en_posiciones_al_azar_cuando_comienza from "pilas-engine/utils/recetas/escena/crear-10-actores-en-posiciones-al-azar-cuando-comienza";
+import crear_copias_de_un_actor_cada_determinado_tiempo from "pilas-engine/utils/recetas/escena/crear-copias-de-un-actor-cada-determinado-tiempo";
 
 export default Component.extend({
   tagName: "",
@@ -52,7 +53,8 @@ export default Component.extend({
       crear_actores_cada_determinado_tiempo_en_segundos(),
       crear_actor_en_la_posicion_en_donde_se_hace_click(),
       observar_el_movimiento_del_mouse_o_cursor(),
-      crear_10_actores_en_posiciones_al_azar_cuando_comienza()
+      crear_10_actores_en_posiciones_al_azar_cuando_comienza(),
+      crear_copias_de_un_actor_cada_determinado_tiempo()
     ]);
   },
 
