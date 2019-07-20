@@ -4,7 +4,8 @@ class boton extends ActorTextoBase {
     fondo: "imagenes:redimensionables/gris",
     texto: "Botón",
     es_texto: true,
-    z: -10
+    z: -10,
+    color: "black"
   };
 
   cuando_hace_click() {

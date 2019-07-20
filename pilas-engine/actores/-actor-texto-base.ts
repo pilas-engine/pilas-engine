@@ -7,10 +7,19 @@ class ActorTextoBase extends ActorBase {
 
   margen_interno: number = 30;
 
-  iniciar() {
-    // TODO: convertir en una propiedad y llevar al método pre_iniciar didDestroyElement() {
-    // actor base
-    this.color = "black";
+  iniciar() {}
+
+  set con_borde(con_borde: boolean) {
+    this._texto_con_borde = con_borde;
+
+    if (con_borde) {
+      this._texto.setStroke("#fff", 1);
+      this._texto.setShadow(1, 1, "#333333", 2, true, true);
+    }
+  }
+
+  get con_borde() {
+    return this._texto_con_borde;
   }
 
   pre_actualizar() {
@@ -92,11 +101,17 @@ class ActorTextoBase extends ActorBase {
 
   set magnitud(numero: number) {
     this._texto.setFontSize(numero);
+    this._magnitud = numero;
     this.actualizar_tamano_del_fondo();
+  }
+
+  get magnitud() {
+    return this._magnitud;
   }
 
   set color(color: string) {
     this._texto.setColor(color);
+    this._color_de_texto = color;
   }
 
   eliminar() {

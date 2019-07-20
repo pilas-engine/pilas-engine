@@ -26,6 +26,10 @@ class ActorBase {
   _fondo_imagen: string = "";
   _dialogo: any = null;
 
+  _texto_con_borde: boolean = false;
+  _color_de_texto: string = "white";
+  _magnitud: number = 18;
+
   propiedades_base = {
     x: 0,
     y: 0,
@@ -52,7 +56,10 @@ class ActorBase {
     figura_rebote: 1,
     figura_sensor: false,
 
-    es_texto: false
+    es_texto: false,
+    texto_con_borde: false,
+    color: "white",
+    magnitud: 18
   };
 
   propiedades: any = {
@@ -143,6 +150,9 @@ class ActorBase {
 
     if (propiedades.es_texto) {
       this.texto = propiedades.texto;
+      this.magnitud = propiedades.magnitud;
+      this.color = propiedades.color;
+      this.con_borde = propiedades.texto_con_borde;
 
       if (propiedades.fondo) {
         this.fondo = propiedades.fondo;
@@ -309,6 +319,9 @@ class ActorBase {
       es_texto: this._es_texto,
       texto: texto,
       fondo: fondo,
+      texto_con_borde: this._texto_con_borde,
+      color_de_texto: this._color_de_texto,
+      magnitud: this._magnitud,
 
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,
@@ -891,5 +904,22 @@ class ActorBase {
         return h.constructor.name === habilidad;
       }).length > 0
     );
+  }
+
+  aumentar(cantidad: number = 1) {}
+
+  set con_borde(con_borde: boolean) {
+    // ver ActorTextoBase.con_borde
+    this._texto_con_borde = con_borde;
+  }
+
+  set magnitud(numero: number) {
+    // ver ActorTextoBase.magnitud
+    this._magnitud = numero;
+  }
+
+  set color(color: string) {
+    // ver ActorTextoBase.color
+    this._color_de_texto = color;
   }
 }

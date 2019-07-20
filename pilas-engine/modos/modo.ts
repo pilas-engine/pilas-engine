@@ -165,6 +165,13 @@ class Modo extends Phaser.Scene {
       if (!sprite["texto"]) {
         sprite["texto"] = this.add.text(0, 0, actor.texto);
         sprite["texto"].setFontFamily("verdana");
+        sprite["texto"].setColor(actor.color);
+        sprite["texto"].setFontSize(actor.magnitud);
+
+        if (actor.texto && actor.texto_con_borde) {
+          sprite["texto"].setStroke("#fff", 1);
+          sprite["texto"].setShadow(1, 1, "#333333", 2, true, true);
+        }
 
         sprite.update = () => {
           this.copiar_valores_de_sprite_a_texto(sprite);
@@ -221,7 +228,6 @@ class Modo extends Phaser.Scene {
     texto.flipY = sprite.flipY;
     texto.setOrigin(sprite.originX, sprite.originY);
     texto.depth = sprite.depth + 0.1;
-    texto.setColor("black");
 
     if (sprite.input) {
       sprite.input.hitArea.width = texto.width;

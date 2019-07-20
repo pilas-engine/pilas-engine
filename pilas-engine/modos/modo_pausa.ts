@@ -138,6 +138,14 @@ class ModoPausa extends Modo {
     if (entidad.texto) {
       sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
       sprite["texto"].setFontFamily("verdana");
+      sprite["texto"].setFontSize(entidad.magnitud);
+      sprite["texto"].setColor(entidad.color_de_texto);
+
+      if (entidad.texto_con_borde) {
+        sprite["texto"].setStroke("#fff", 1);
+        sprite["texto"].setShadow(1, 1, "#333333", 2, true, true);
+      }
+
       sprite["texto"].depth = sprite.depth;
 
       if (entidad.fondo) {

@@ -104,6 +104,12 @@ var Actores = (function () {
     Actores.prototype.puntaje = function () {
         return this.crear_actor("puntaje");
     };
+    Actores.prototype.reiniciar_escena = function () {
+        return this.crear_actor("reiniciar_escena");
+    };
+    Actores.prototype.nube_animada = function () {
+        return this.crear_actor("nube_animada");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -1079,7 +1085,7 @@ var Pilas = (function () {
         this._ancho = ancho;
         this._alto = alto;
         this.recursos = recursos;
-        var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar);
+        var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart);
         if (opciones.esperar_antes_de_iniciar) {
             console.log("Esperando 1 segundo antes de iniciar ...");
             setTimeout(function () {
@@ -1092,6 +1098,7 @@ var Pilas = (function () {
     };
     Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones) {
         if (opciones === void 0) { opciones = {}; }
+        console.log("iniciar");
         if (opciones === undefined || recursos === null) {
             opciones = {};
         }
@@ -1191,13 +1198,16 @@ var Pilas = (function () {
     Pilas.prototype.reiniciar_escena = function () {
         this.modo.cambiar_escena(this.escena.constructor.name);
     };
-    Pilas.prototype.crear_configuracion = function (ancho, alto, maximizar) {
+    Pilas.prototype.crear_configuracion = function (ancho, alto, maximizar, pixelart) {
         var escala = undefined;
         if (maximizar) {
             escala = {
                 mode: Phaser.Scale.FIT,
                 autoCenter: Phaser.Scale.CENTER_BOTH
             };
+        }
+        if (pixelart === undefined) {
+            pixelart = true;
         }
         return {
             type: Phaser.AUTO,
@@ -1207,7 +1217,7 @@ var Pilas = (function () {
             height: alto,
             backgroundColor: "#000000",
             disableContextMenu: true,
-            pixelArt: true,
+            pixelArt: pixelart,
             autostart: false,
             input: {
                 keyboard: true,
@@ -1350,6 +1360,9 @@ var ActorBase = (function () {
         this._fondo = null;
         this._fondo_imagen = "";
         this._dialogo = null;
+        this._texto_con_borde = false;
+        this._color_de_texto = "white";
+        this._magnitud = 18;
         this.propiedades_base = {
             x: 0,
             y: 0,
@@ -1372,7 +1385,10 @@ var ActorBase = (function () {
             figura_sin_rotacion: false,
             figura_rebote: 1,
             figura_sensor: false,
-            es_texto: false
+            es_texto: false,
+            texto_con_borde: false,
+            color: "white",
+            magnitud: 18
         };
         this.propiedades = {
             x: 0,
@@ -1448,6 +1464,9 @@ var ActorBase = (function () {
         this.sprite["actor"] = this;
         if (propiedades.es_texto) {
             this.texto = propiedades.texto;
+            this.magnitud = propiedades.magnitud;
+            this.color = propiedades.color;
+            this.con_borde = propiedades.texto_con_borde;
             if (propiedades.fondo) {
                 this.fondo = propiedades.fondo;
             }
@@ -1596,6 +1615,9 @@ var ActorBase = (function () {
             es_texto: this._es_texto,
             texto: texto,
             fondo: fondo,
+            texto_con_borde: this._texto_con_borde,
+            color_de_texto: this._color_de_texto,
+            magnitud: this._magnitud,
             espejado: this.espejado,
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
@@ -2202,6 +2224,30 @@ var ActorBase = (function () {
             return h.constructor.name === habilidad;
         }).length > 0);
     };
+    ActorBase.prototype.aumentar = function (cantidad) {
+        if (cantidad === void 0) { cantidad = 1; }
+    };
+    Object.defineProperty(ActorBase.prototype, "con_borde", {
+        set: function (con_borde) {
+            this._texto_con_borde = con_borde;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "magnitud", {
+        set: function (numero) {
+            this._magnitud = numero;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "color", {
+        set: function (color) {
+            this._color_de_texto = color;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -2216,9 +2262,21 @@ var ActorTextoBase = (function (_super) {
         _this.margen_interno = 30;
         return _this;
     }
-    ActorTextoBase.prototype.iniciar = function () {
-        this.color = "black";
-    };
+    ActorTextoBase.prototype.iniciar = function () { };
+    Object.defineProperty(ActorTextoBase.prototype, "con_borde", {
+        get: function () {
+            return this._texto_con_borde;
+        },
+        set: function (con_borde) {
+            this._texto_con_borde = con_borde;
+            if (con_borde) {
+                this._texto.setStroke("#fff", 1);
+                this._texto.setShadow(1, 1, "#333333", 2, true, true);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     ActorTextoBase.prototype.pre_actualizar = function () {
         _super.prototype.pre_actualizar.call(this);
         this.copiar_atributos_de_sprite(this.sprite, this._texto);
@@ -2296,8 +2354,12 @@ var ActorTextoBase = (function (_super) {
         this.definir_area_de_interactividad(ancho, alto);
     };
     Object.defineProperty(ActorTextoBase.prototype, "magnitud", {
+        get: function () {
+            return this._magnitud;
+        },
         set: function (numero) {
             this._texto.setFontSize(numero);
+            this._magnitud = numero;
             this.actualizar_tamano_del_fondo();
         },
         enumerable: true,
@@ -2306,6 +2368,7 @@ var ActorTextoBase = (function (_super) {
     Object.defineProperty(ActorTextoBase.prototype, "color", {
         set: function (color) {
             this._texto.setColor(color);
+            this._color_de_texto = color;
         },
         enumerable: true,
         configurable: true
@@ -2362,7 +2425,8 @@ var boton = (function (_super) {
             fondo: "imagenes:redimensionables/gris",
             texto: "Botón",
             es_texto: true,
-            z: -10
+            z: -10,
+            color: "black"
         };
         return _this;
     }
@@ -2918,6 +2982,29 @@ var nube = (function (_super) {
     nube.prototype.iniciar = function () { };
     return nube;
 }(Actor));
+var nube_animada = (function (_super) {
+    __extends(nube_animada, _super);
+    function nube_animada() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:decoracion/decoracion_nube_1",
+            z: 30
+        };
+        return _this;
+    }
+    nube_animada.prototype.iniciar = function () {
+        this.z = 50;
+        this.velocidad = 2;
+    };
+    nube_animada.prototype.actualizar = function () {
+        this.x -= this.velocidad;
+        if (this.x < -400) {
+            this.x = 400;
+            this.y = this.pilas.azar(-200, 200);
+        }
+    };
+    return nube_animada;
+}(Actor));
 var pared = (function (_super) {
     __extends(pared, _super);
     function pared() {
@@ -2978,15 +3065,14 @@ var puntaje = (function (_super) {
             texto: "PUNTAJE: 0",
             color: "white",
             es_texto: true,
-            z: -10
+            z: -10,
+            texto_con_borde: true,
+            magnitud: 20
         };
         _this.puntaje = 0;
         return _this;
     }
     puntaje.prototype.iniciar = function () {
-        this._texto.setFontSize(20);
-        this._texto.setStroke("#fff", 1);
-        this._texto.setShadow(1, 1, "#333333", 2, true, true);
         this.actualizar_texto();
     };
     puntaje.prototype.aumentar = function (cantidad) {
@@ -2998,6 +3084,31 @@ var puntaje = (function (_super) {
         this.texto = "PUNTAJE: " + this.puntaje;
     };
     return puntaje;
+}(ActorTextoBase));
+var reiniciar_escena = (function (_super) {
+    __extends(reiniciar_escena, _super);
+    function reiniciar_escena() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:basicos/invisible",
+            fondo: "imagenes:redimensionables/gris",
+            texto: "Reiniciar escena",
+            es_texto: true,
+            z: -10,
+            color: "black"
+        };
+        return _this;
+    }
+    reiniciar_escena.prototype.cuando_hace_click = function () {
+        this.pilas.reiniciar_escena();
+    };
+    reiniciar_escena.prototype.cuando_mueve = function () {
+        this.pilas.definir_cursor("pointer");
+    };
+    reiniciar_escena.prototype.cuando_sale = function () {
+        this.pilas.definir_cursor("normal");
+    };
+    return reiniciar_escena;
 }(ActorTextoBase));
 var robot = (function (_super) {
     __extends(robot, _super);
@@ -3063,7 +3174,8 @@ var texto = (function (_super) {
             imagen: "imagenes:basicos/invisible",
             texto: "Hola mundo",
             es_texto: true,
-            z: -10
+            z: -10,
+            color: "white"
         };
         return _this;
     }
@@ -5619,6 +5731,12 @@ var Modo = (function (_super) {
             if (!sprite["texto"]) {
                 sprite["texto"] = this.add.text(0, 0, actor.texto);
                 sprite["texto"].setFontFamily("verdana");
+                sprite["texto"].setColor(actor.color);
+                sprite["texto"].setFontSize(actor.magnitud);
+                if (actor.texto && actor.texto_con_borde) {
+                    sprite["texto"].setStroke("#fff", 1);
+                    sprite["texto"].setShadow(1, 1, "#333333", 2, true, true);
+                }
                 sprite.update = function () {
                     _this.copiar_valores_de_sprite_a_texto(sprite);
                 };
@@ -5666,7 +5784,6 @@ var Modo = (function (_super) {
         texto.flipY = sprite.flipY;
         texto.setOrigin(sprite.originX, sprite.originY);
         texto.depth = sprite.depth + 0.1;
-        texto.setColor("black");
         if (sprite.input) {
             sprite.input.hitArea.width = texto.width;
             sprite.input.hitArea.height = texto.height;
@@ -6295,6 +6412,7 @@ var ModoEjecucion = (function (_super) {
             actor = new this.clases[entidad.nombre](this.pilas);
             var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
+            console.log(p);
             actor.pre_iniciar(p);
             actor.iniciar();
             if (entidad.habilidades) {
@@ -6485,6 +6603,12 @@ var ModoPausa = (function (_super) {
         if (entidad.texto) {
             sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
             sprite["texto"].setFontFamily("verdana");
+            sprite["texto"].setFontSize(entidad.magnitud);
+            sprite["texto"].setColor(entidad.color_de_texto);
+            if (entidad.texto_con_borde) {
+                sprite["texto"].setStroke("#fff", 1);
+                sprite["texto"].setShadow(1, 1, "#333333", 2, true, true);
+            }
             sprite["texto"].depth = sprite.depth;
             if (entidad.fondo) {
                 var imagen_1 = this.obtener_imagen_para_nineslice(entidad.fondo);

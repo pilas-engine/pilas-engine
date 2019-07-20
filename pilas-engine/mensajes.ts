@@ -29,12 +29,7 @@ class Mensajes {
   }
 
   atender_mensaje_iniciar_pilas(datos) {
-    this.pilas.iniciar_phaser(
-      datos.ancho,
-      datos.alto,
-      datos.recursos,
-      datos.opciones
-    );
+    this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones);
   }
 
   atender_mensaje_definir_estados_de_depuracion(datos) {
@@ -106,19 +101,9 @@ class Mensajes {
 
     this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
 
-    let texto = this.pilas.modo.add.text(
-      5,
-      30,
-      detalle.mensaje,
-      fuente_principal
-    );
+    let texto = this.pilas.modo.add.text(5, 30, detalle.mensaje, fuente_principal);
 
-    this.pilas.modo.add.text(
-      5,
-      5 + 30 + texto.height,
-      detalle.stack,
-      fuente_pequena
-    );
+    this.pilas.modo.add.text(5, 5 + 30 + texto.height, detalle.stack, fuente_pequena);
 
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
     console.error(error);

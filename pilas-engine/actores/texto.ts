@@ -3,6 +3,7 @@ class texto extends ActorTextoBase {
     imagen: "imagenes:basicos/invisible",
     texto: "Hola mundo",
     es_texto: true,
-    z: -10
+    z: -10,
+    color: "white"
   };
 }

@@ -27,6 +27,8 @@ declare class Actores {
     ceferino(): any;
     robot(): any;
     puntaje(): any;
+    reiniciar_escena(): any;
+    nube_animada(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -281,7 +283,7 @@ declare class Pilas {
     definir_modo(nombre: string, datos: any): void;
     cambiar_escena(nombre: string): void;
     reiniciar_escena(): void;
-    crear_configuracion(ancho: number, alto: number, maximizar: boolean): {
+    crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean): {
         type: number;
         parent: string;
         scale: any;
@@ -360,6 +362,9 @@ declare class ActorBase {
     _fondo: any;
     _fondo_imagen: string;
     _dialogo: any;
+    _texto_con_borde: boolean;
+    _color_de_texto: string;
+    _magnitud: number;
     propiedades_base: {
         x: number;
         y: number;
@@ -383,6 +388,9 @@ declare class ActorBase {
         figura_rebote: number;
         figura_sensor: boolean;
         es_texto: boolean;
+        texto_con_borde: boolean;
+        color: string;
+        magnitud: number;
     };
     propiedades: any;
     constructor(pilas: any);
@@ -414,6 +422,9 @@ declare class ActorBase {
         es_texto: boolean;
         texto: string;
         fondo: string;
+        texto_con_borde: boolean;
+        color_de_texto: string;
+        magnitud: number;
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
@@ -478,6 +489,10 @@ declare class ActorBase {
     decir(mensaje: string): void;
     aprender(habilidad: string): void;
     tieneHabilidad(habilidad: string): boolean;
+    aumentar(cantidad?: number): void;
+    con_borde: boolean;
+    magnitud: number;
+    color: string;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -487,6 +502,7 @@ declare class ActorTextoBase extends ActorBase {
     };
     margen_interno: number;
     iniciar(): void;
+    con_borde: boolean;
     pre_actualizar(): void;
     actualizar(): void;
     sombra: boolean;
@@ -523,6 +539,7 @@ declare class boton extends ActorTextoBase {
         texto: string;
         es_texto: boolean;
         z: number;
+        color: string;
     };
     cuando_hace_click(): void;
     cuando_mueve(): void;
@@ -719,6 +736,15 @@ declare class nube extends Actor {
     };
     iniciar(): void;
 }
+declare class nube_animada extends Actor {
+    propiedades: {
+        imagen: string;
+        z: number;
+    };
+    velocidad: number;
+    iniciar(): void;
+    actualizar(): void;
+}
 declare class pared extends Actor {
     propiedades: {
         figura: string;
@@ -759,11 +785,26 @@ declare class puntaje extends ActorTextoBase {
         color: string;
         es_texto: boolean;
         z: number;
+        texto_con_borde: boolean;
+        magnitud: number;
     };
     puntaje: number;
     iniciar(): void;
     aumentar(cantidad?: number): void;
     actualizar_texto(): void;
+}
+declare class reiniciar_escena extends ActorTextoBase {
+    propiedades: {
+        imagen: string;
+        fondo: string;
+        texto: string;
+        es_texto: boolean;
+        z: number;
+        color: string;
+    };
+    cuando_hace_click(): void;
+    cuando_mueve(): void;
+    cuando_sale(): void;
 }
 declare class robot extends Actor {
     propiedades: {
@@ -802,6 +843,7 @@ declare class texto extends ActorTextoBase {
         texto: string;
         es_texto: boolean;
         z: number;
+        color: string;
     };
 }
 declare class EscenaBase {
