@@ -88,7 +88,7 @@ class Pilas {
     this._alto = alto;
 
     this.recursos = recursos;
-    var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar);
+    var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart);
 
     // Opción para simular una espera o demora al iniciar el componente de
     // pilas, se utiliza desde el editor cuando corren los tests.
@@ -216,7 +216,7 @@ class Pilas {
     this.modo.cambiar_escena(this.escena.constructor.name);
   }
 
-  crear_configuracion(ancho: number, alto: number, maximizar: boolean) {
+  crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean) {
     let escala = undefined;
 
     if (maximizar) {
@@ -224,6 +224,10 @@ class Pilas {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
       };
+    }
+
+    if (pixelart === undefined) {
+      pixelart = true;
     }
 
     return {
@@ -234,7 +238,7 @@ class Pilas {
       height: alto,
       backgroundColor: "#000000",
       disableContextMenu: true,
-      pixelArt: true, // true es más rápido
+      pixelArt: pixelart,
       autostart: false,
       input: {
         keyboard: true,
