@@ -122,4 +122,12 @@ class Actores {
   puntaje() {
     return this.crear_actor("puntaje");
   }
+
+  reiniciar_escena() {
+    return this.crear_actor("reiniciar_escena");
+  }
+
+  nube_animada() {
+    return this.crear_actor("nube_animada");
+  }
 }
