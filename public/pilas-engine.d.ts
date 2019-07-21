@@ -29,6 +29,7 @@ declare class Actores {
     puntaje(): any;
     reiniciar_escena(): any;
     nube_animada(): any;
+    pizarra(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -53,6 +54,13 @@ declare class Camara {
     vibrar(intensidad?: number, tiempo?: number): void;
     x: number;
     y: number;
+}
+declare class Colores {
+    pilas: Pilas;
+    constructor(pilas: Pilas);
+    convertir_a_hexa(color: string): any;
+    validar_color(color: string): boolean;
+    readonly colores: any;
 }
 declare class Control {
     private pilas;
@@ -261,6 +269,7 @@ declare class Pilas {
     animaciones: Animaciones;
     Phaser: any;
     eventos: Eventos;
+    colores: Colores;
     recursos: any;
     fisica: Fisica;
     habilidades: Habilidades;
@@ -764,6 +773,18 @@ declare class pelota extends Actor {
         figura_radio: number;
     };
     iniciar(): void;
+}
+declare class pizarra extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    _canvas: any;
+    iniciar(): void;
+    dibujar_circulo(x?: number, y?: number, radio?: number, color?: string): void;
+    dibujar_borde_de_circulo(x?: number, y?: number, radio?: number, color?: string, grosor?: number): void;
+    limpiar(): void;
+    actualizar(): void;
+    pre_actualizar(): void;
 }
 declare class plataforma extends Actor {
     propiedades: {

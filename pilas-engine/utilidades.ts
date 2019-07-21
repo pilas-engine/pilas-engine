@@ -176,6 +176,8 @@ class Utilidades {
       contenedor.scaleY = sprite.scaleY;
     }
 
+    contenedor.angle = sprite.angle;
+
     contenedor.setDepth(sprite.depth);
   }
 }

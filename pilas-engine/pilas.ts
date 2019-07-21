@@ -21,6 +21,7 @@ class Pilas {
   Phaser: any;
 
   eventos: Eventos;
+  colores: Colores;
 
   recursos: any;
 
@@ -41,6 +42,7 @@ class Pilas {
     this.Phaser = Phaser;
 
     this.mensajes = new Mensajes(this);
+    this.colores = new Colores(this);
     this.depurador = new Depurador(this);
     this.utilidades = new Utilidades(this);
     this.escenas = new Escenas(this);

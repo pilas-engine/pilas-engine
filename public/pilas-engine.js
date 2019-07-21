@@ -110,6 +110,9 @@ var Actores = (function () {
     Actores.prototype.nube_animada = function () {
         return this.crear_actor("nube_animada");
     };
+    Actores.prototype.pizarra = function () {
+        return this.crear_actor("pizarra");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -248,6 +251,54 @@ var Camara = (function () {
         configurable: true
     });
     return Camara;
+}());
+var Colores = (function () {
+    function Colores(pilas) {
+        this.pilas = pilas;
+        this._lista_de_colores = [
+            {
+                nombre: "rojo",
+                hexa: 0xff0000,
+                ingles: "red"
+            },
+            {
+                nombre: "verde",
+                hexa: 0x00ff00,
+                ingles: "green"
+            },
+            {
+                nombre: "azul",
+                hexa: 0x0000ff,
+                ingles: "blue"
+            },
+            {
+                nombre: "negro",
+                hexa: 0x000000,
+                ingles: "black"
+            }
+        ];
+    }
+    Colores.prototype.convertir_a_hexa = function (color) {
+        this.validar_color(color);
+        var elemento = this._lista_de_colores.filter(function (e) { return e.nombre == color.toLowerCase(); });
+        return elemento[0].hexa;
+    };
+    Colores.prototype.validar_color = function (color) {
+        if (this.colores.indexOf(color) > -1) {
+            return true;
+        }
+        else {
+            throw Error("El color " + color + " es inv\u00E1lido");
+        }
+    };
+    Object.defineProperty(Colores.prototype, "colores", {
+        get: function () {
+            return this._lista_de_colores.map(function (e) { return e.nombre; });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Colores;
 }());
 var Control = (function () {
     function Control(pilas) {
@@ -1020,6 +1071,7 @@ var Utilidades = (function () {
         else {
             contenedor.scaleY = sprite.scaleY;
         }
+        contenedor.angle = sprite.angle;
         contenedor.setDepth(sprite.depth);
     };
     return Utilidades;
@@ -1035,6 +1087,7 @@ var Pilas = (function () {
         this.imagenes_precargadas = [];
         this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
+        this.colores = new Colores(this);
         this.depurador = new Depurador(this);
         this.utilidades = new Utilidades(this);
         this.escenas = new Escenas(this);
@@ -1098,7 +1151,6 @@ var Pilas = (function () {
     };
     Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones) {
         if (opciones === void 0) { opciones = {}; }
-        console.log("iniciar");
         if (opciones === undefined || recursos === null) {
             opciones = {};
         }
@@ -3037,6 +3089,51 @@ var pelota = (function (_super) {
     pelota.prototype.iniciar = function () { };
     return pelota;
 }(Actor));
+var pizarra = (function (_super) {
+    __extends(pizarra, _super);
+    function pizarra() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:basicos/invisible"
+        };
+        return _this;
+    }
+    pizarra.prototype.iniciar = function () {
+        this._canvas = this.pilas.modo.add.graphics();
+        this.limpiar();
+        this.dibujar_circulo(0, 0, 40, "rojo");
+        this.dibujar_circulo(50, 50, 30, "verde");
+        this.dibujar_circulo(100, 100, 20, "azul");
+        this.dibujar_borde_de_circulo(0, 0, 40, "negro", 3);
+    };
+    pizarra.prototype.dibujar_circulo = function (x, y, radio, color) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (radio === void 0) { radio = 20; }
+        if (color === void 0) { color = "negro"; }
+        var color = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.fillStyle(color, 1);
+        this._canvas.fillCircle(x, y, radio);
+    };
+    pizarra.prototype.dibujar_borde_de_circulo = function (x, y, radio, color, grosor) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (radio === void 0) { radio = 20; }
+        if (color === void 0) { color = "negro"; }
+        if (grosor === void 0) { grosor = 1; }
+        var color = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.lineStyle(grosor, color, 1);
+        this._canvas.strokeCircle(x, y, radio);
+    };
+    pizarra.prototype.limpiar = function () {
+        this._canvas.clear();
+    };
+    pizarra.prototype.actualizar = function () { };
+    pizarra.prototype.pre_actualizar = function () {
+        this.pilas.utilidades.sincronizar_contenedor(this._canvas, this.sprite);
+    };
+    return pizarra;
+}(Actor));
 var plataforma = (function (_super) {
     __extends(plataforma, _super);
     function plataforma() {
@@ -3198,6 +3295,7 @@ var EscenaBase = (function () {
         if (this._observables === null) {
             this._actor_visor_observables = this.pilas.actores.texto();
             this._actor_visor_observables.fondo = "imagenes:redimensionables/blanco";
+            this._actor_visor_observables.color = "black";
             this._actor_visor_observables.centro_x = 0;
             this._actor_visor_observables.centro_y = 0;
             this._actor_visor_observables.x = -210;
@@ -6412,7 +6510,6 @@ var ModoEjecucion = (function (_super) {
             actor = new this.clases[entidad.nombre](this.pilas);
             var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
-            console.log(p);
             actor.pre_iniciar(p);
             actor.iniciar();
             if (entidad.habilidades) {

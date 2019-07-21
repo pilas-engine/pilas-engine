@@ -130,4 +130,8 @@ class Actores {
   nube_animada() {
     return this.crear_actor("nube_animada");
   }
+
+  pizarra() {
+    return this.crear_actor("pizarra");
+  }
 }
