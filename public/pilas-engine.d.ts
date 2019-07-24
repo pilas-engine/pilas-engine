@@ -55,12 +55,18 @@ declare class Camara {
     x: number;
     y: number;
 }
+interface Color {
+    nombre: string;
+    hexa: number;
+    ingles: string;
+}
 declare class Colores {
     pilas: Pilas;
+    _lista_de_colores: Color[];
     constructor(pilas: Pilas);
-    convertir_a_hexa(color: string): any;
+    convertir_a_hexa(color: string): number;
     validar_color(color: string): boolean;
-    readonly colores: any;
+    readonly colores: string[];
 }
 declare class Control {
     private pilas;
@@ -1371,6 +1377,7 @@ declare class Modo extends Phaser.Scene {
     _nombre_del_fondo: string;
     ancho: number;
     alto: number;
+    es_modo_ejecucion: boolean;
     constructor(data: any);
     create(datos: any, ancho: any, alto: any): void;
     destacar_actor_por_id(id: any): void;

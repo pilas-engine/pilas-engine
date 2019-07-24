@@ -9,9 +9,11 @@ class Modo extends Phaser.Scene {
   _nombre_del_fondo: string = "";
   ancho: number;
   alto: number;
+  es_modo_ejecucion: boolean;
 
   constructor(data) {
     super(data);
+    this.es_modo_ejecucion = false;
   }
 
   create(datos, ancho, alto) {
@@ -49,14 +51,14 @@ class Modo extends Phaser.Scene {
 
     actores = actores || this.actores;
 
-    if (this.pilas.depurador.modo_posicion_activado) {
+    if (this.pilas.depurador.modo_posicion_activado && !this.es_modo_ejecucion) {
       actores.map(sprite => {
         this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
       });
     }
 
     if (this.fps) {
-      if (this.pilas.depurador.mostrar_fps) {
+      if (this.pilas.depurador.mostrar_fps && !this.es_modo_ejecucion) {
         this.fps.alpha = 1;
         this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
 

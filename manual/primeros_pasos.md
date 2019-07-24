@@ -72,4 +72,12 @@ Ahora bien, con la escena completamente limpia, agreguemos un actor para represe
 
 Pilas viene con varios actores diseñados para que puedas comenzar a realizar tus juegos rápidamente, sin embargo, esto no es una limitación, porque cada actor que ves en pantalla se puede cambiar complemente.
 
-> >  TODO
+Ahora sí pulsas el botón "Ejecutar", vas a ver que la nave aparece en el centro de la pantalla. Proba pulsar las teclas de dirección del teclado y espacio para controlar a la nave:
+
+![PilasEngine * 🔊 2019-07-21 22-22-31](imagenes/PilasEngine * 🔊 2019-07-21 22-22-31.png)
+
+Vas a notar que aparece un rectángulo negro borde blanco en cada actor, ese punto es lo que se conoce como punto de control, y sirve para el punto de referencia de cada actor.
+
+Podes hacer que ese punto de control no se vea pulsando el interruptor "pos" que aparece abajo en la pantalla (pulsa "Detener" antes, así te deja cambiarlo):
+
+![PilasEngine * 2019-07-21 22-24-40](imagenes/PilasEngine * 2019-07-21 22-24-40.png)

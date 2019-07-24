@@ -1,5 +1,12 @@
+interface Color {
+  nombre: string;
+  hexa: number;
+  ingles: string;
+}
+
 class Colores {
   pilas: Pilas;
+  _lista_de_colores: Color[];
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;

@@ -20,6 +20,7 @@ class ModoEjecucion extends Modo {
 
   constructor() {
     super({ key: "ModoEjecucion" });
+    this.es_modo_ejecucion = true;
   }
 
   preload() {}
@@ -441,6 +442,7 @@ class ModoEjecucion extends Modo {
   update() {
     super.update(this.pilas.escena.actores);
 
+    /*
     if (this.pilas.depurador.mostrar_fisica) {
       if (!this.modo_fisica_activado) {
         this.modo_fisica_activado = true;
@@ -449,6 +451,8 @@ class ModoEjecucion extends Modo {
     } else {
       this.pilas.modo.matter.world.debugGraphic.destroy();
     }
+    */
+    this.pilas.modo.matter.world.debugGraphic.destroy();
 
     try {
       this.pilas.escena.pre_actualizar();

@@ -17,16 +17,16 @@ class pizarra extends Actor {
   }
 
   dibujar_circulo(x: number = 0, y: number = 0, radio: number = 20, color: string = "negro") {
-    let color = this.pilas.colores.convertir_a_hexa(color);
+    let colorHexa = this.pilas.colores.convertir_a_hexa(color);
 
-    this._canvas.fillStyle(color, 1);
+    this._canvas.fillStyle(colorHexa, 1);
     this._canvas.fillCircle(x, y, radio);
   }
 
   dibujar_borde_de_circulo(x: number = 0, y: number = 0, radio: number = 20, color: string = "negro", grosor: number = 1) {
-    let color = this.pilas.colores.convertir_a_hexa(color);
+    let colorHexa = this.pilas.colores.convertir_a_hexa(color);
 
-    this._canvas.lineStyle(grosor, color, 1);
+    this._canvas.lineStyle(grosor, colorHexa, 1);
     this._canvas.strokeCircle(x, y, radio);
   }
 

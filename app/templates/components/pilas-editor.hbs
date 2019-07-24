@@ -148,17 +148,32 @@
           {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
           <div class="fr {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}} {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
-            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
-              {{pilas-interruptor texto="fisica" variable=fisica}}
-            {{/pilas-tooltip}}
 
-            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
-              {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
-            {{/pilas-tooltip}}
+            {{#if (eq estado.nombreDeEstado "ModoEjecucion")}}
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
+                {{pilas-interruptor deshabilitado=true texto="fisica" variable=false}}
+              {{/pilas-tooltip}}
 
-            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
-              {{pilas-interruptor texto="pos" variable=pos}}
-            {{/pilas-tooltip}}
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
+                {{pilas-interruptor deshabilitado=true texto="fps" variable=false}}
+              {{/pilas-tooltip}}
+
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
+                {{pilas-interruptor deshabilitado=true texto="pos" variable=false}}
+              {{/pilas-tooltip}}
+            {{else}}
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
+                {{pilas-interruptor texto="fisica" variable=fisica}}
+              {{/pilas-tooltip}}
+
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
+                {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
+              {{/pilas-tooltip}}
+
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
+                {{pilas-interruptor texto="pos" variable=pos}}
+              {{/pilas-tooltip}}
+            {{/if}}
           </div>
 
         </div>

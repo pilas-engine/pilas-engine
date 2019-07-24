@@ -3111,8 +3111,8 @@ var pizarra = (function (_super) {
         if (y === void 0) { y = 0; }
         if (radio === void 0) { radio = 20; }
         if (color === void 0) { color = "negro"; }
-        var color = this.pilas.colores.convertir_a_hexa(color);
-        this._canvas.fillStyle(color, 1);
+        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.fillStyle(colorHexa, 1);
         this._canvas.fillCircle(x, y, radio);
     };
     pizarra.prototype.dibujar_borde_de_circulo = function (x, y, radio, color, grosor) {
@@ -3121,8 +3121,8 @@ var pizarra = (function (_super) {
         if (radio === void 0) { radio = 20; }
         if (color === void 0) { color = "negro"; }
         if (grosor === void 0) { grosor = 1; }
-        var color = this.pilas.colores.convertir_a_hexa(color);
-        this._canvas.lineStyle(grosor, color, 1);
+        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.lineStyle(grosor, colorHexa, 1);
         this._canvas.strokeCircle(x, y, radio);
     };
     pizarra.prototype.limpiar = function () {
@@ -5703,6 +5703,7 @@ var Modo = (function (_super) {
     function Modo(data) {
         var _this = _super.call(this, data) || this;
         _this._nombre_del_fondo = "";
+        _this.es_modo_ejecucion = false;
         return _this;
     }
     Modo.prototype.create = function (datos, ancho, alto) {
@@ -5732,13 +5733,13 @@ var Modo = (function (_super) {
         var _this = this;
         this.graphics.clear();
         actores = actores || this.actores;
-        if (this.pilas.depurador.modo_posicion_activado) {
+        if (this.pilas.depurador.modo_posicion_activado && !this.es_modo_ejecucion) {
             actores.map(function (sprite) {
                 _this.dibujar_punto_de_control(_this.graphics, sprite.x, sprite.y);
             });
         }
         if (this.fps) {
-            if (this.pilas.depurador.mostrar_fps) {
+            if (this.pilas.depurador.mostrar_fps && !this.es_modo_ejecucion) {
                 this.fps.alpha = 1;
                 this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
                 var x = this.pilas.cursor_x;
@@ -6221,6 +6222,7 @@ var ModoEjecucion = (function (_super) {
         _this.proyecto = {};
         _this.nombre_de_la_escena_inicial = null;
         _this._escena_en_ejecucion = null;
+        _this.es_modo_ejecucion = true;
         return _this;
     }
     ModoEjecucion.prototype.preload = function () { };
@@ -6555,15 +6557,7 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.update = function () {
         _super.prototype.update.call(this, this.pilas.escena.actores);
-        if (this.pilas.depurador.mostrar_fisica) {
-            if (!this.modo_fisica_activado) {
-                this.modo_fisica_activado = true;
-                this.matter.world.createDebugGraphic();
-            }
-        }
-        else {
-            this.pilas.modo.matter.world.debugGraphic.destroy();
-        }
+        this.pilas.modo.matter.world.debugGraphic.destroy();
         try {
             this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
