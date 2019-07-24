@@ -11,6 +11,7 @@ import mover_al_actor_a_la_izquierda from "pilas-engine/utils/recetas/actor/move
 import clonar_cuando_hacen_click_sobre_el_actor from "pilas-engine/utils/recetas/actor/clonar-cuando-hacen-click-sobre-el-actor";
 import controlar_al_actor_como_si_fuera_un_automovil from "pilas-engine/utils/recetas/actor/controlar-al-actor-como-si-fuera-un-automovil";
 import saltar_o_impulsar_cuando_hacen_click from "pilas-engine/utils/recetas/actor/saltar-o-impulsar-cuando-hacen-click";
+import saltar_o_impulsar_cuando_hacen_click_en_la_pantalla from "pilas-engine/utils/recetas/actor/saltar-o-impulsar-cuando-hacen-click-en-la-pantalla";
 import controlar_el_movimiento_del_actor from "pilas-engine/utils/recetas/actor/controlar-el-movimiento-del-actor";
 import cambiar_la_posicion_del_actor_al_azar from "pilas-engine/utils/recetas/actor/cambiar-la-posicion-del-actor-al-azar";
 
@@ -46,6 +47,7 @@ export default Component.extend({
       clonar_cuando_hacen_click_sobre_el_actor(),
       controlar_al_actor_como_si_fuera_un_automovil(),
       saltar_o_impulsar_cuando_hacen_click(),
+      saltar_o_impulsar_cuando_hacen_click_en_la_pantalla(),
       cambiar_la_posicion_del_actor_al_azar(),
       reproducir_sonido_al_comenzar(),
 
