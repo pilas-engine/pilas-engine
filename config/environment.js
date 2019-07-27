@@ -7,8 +7,7 @@ module.exports = function(environment) {
     rootURL: "",
     locationType: "hash",
     pilas: {
-      esperar_antes_de_iniciar: false,
-      pixelart: true
+      esperar_antes_de_iniciar: false
     },
     EmberENV: {
       FEATURES: {},

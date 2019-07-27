@@ -32,6 +32,8 @@ export default Component.extend({
       let contexto = iframe.contentWindow;
       this.set("contexto", contexto);
 
+      opciones_de_pilas.pixelart = this.convertir_a_boolean(this.pixelart);
+
       let data = {
         tipo: "iniciar_pilas",
         ancho: this.ancho,
@@ -87,6 +89,18 @@ export default Component.extend({
     this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
     this.bus.off("progreso_de_carga", this, "progreso_de_carga");
     this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+  },
+
+  convertir_a_boolean(valor) {
+    if (valor === "true") {
+      return true;
+    }
+
+    if (valor === "false") {
+      return false;
+    }
+
+    return valor;
   },
 
   widthParaElModoZoomEnviado: computed("modoZoom", "ancho", function() {

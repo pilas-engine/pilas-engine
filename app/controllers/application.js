@@ -1,6 +1,7 @@
 import Controller from "@ember/controller";
 
 export default Controller.extend({
-  queryParams: ["livereload"],
-  livereload: false
+  queryParams: ["livereload", "pixelart"],
+  livereload: false,
+  pixelart: true
 });
