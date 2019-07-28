@@ -74,10 +74,6 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
 
     await pulsar("Salir de todas formas");
 
-    assert.equal(
-      currentURL(),
-      "/?livereload=false",
-      "Pudo regresar a la ruta inicial."
-    );
+    assert.equal(currentURL(), "/?livereload=false&pixelart=true", "Pudo regresar a la ruta inicial.");
   });
 });
