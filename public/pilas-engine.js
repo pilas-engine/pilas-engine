@@ -130,8 +130,7 @@ var Animaciones = (function () {
             var animacion = this.pilas.modo.anims.create({
                 key: nombre,
                 frames: frames,
-                frameRate: velocidad,
-                repeat: -1
+                frameRate: velocidad
             });
             this.animaciones[nombre] = animacion;
         }
@@ -1226,6 +1225,10 @@ var Pilas = (function () {
                 ],
                 sonidos: [
                     {
+                        nombre: "explosion",
+                        ruta: "sonidos/explosion.wav"
+                    },
+                    {
                         nombre: "laser",
                         ruta: "sonidos/gallina.wav"
                     },
@@ -1354,8 +1357,7 @@ var Pilas = (function () {
         };
     };
     Pilas.prototype.reproducir_sonido = function (nombre) {
-        var music = this.modo.sound.add(nombre);
-        music.play();
+        this.escena.reproducir_sonido(nombre);
     };
     Pilas.prototype.obtener_actores = function () {
         return this.escena.actores;
@@ -1604,6 +1606,13 @@ var ActorBase = (function () {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
             }
         };
+        this.sprite.on("animationcomplete", function (anim, frame) {
+            if (frame.isLast) {
+                var nombre = anim.key.split("-")[1];
+                _this.cuando_finaliza_animacion(nombre);
+                _this.sprite.anims.play(anim.key);
+            }
+        });
         this.sprite.on("pointerdown", function (cursor) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
             _this.cuando_hace_click(posicion.x, posicion.y, cursor);
@@ -2212,6 +2221,7 @@ var ActorBase = (function () {
         var nombre = this.id + "-" + nombre_de_la_animacion;
         this.sprite.anims.play(nombre);
     };
+    ActorBase.prototype.cuando_finaliza_animacion = function (animacion) { };
     Object.defineProperty(ActorBase.prototype, "animacion", {
         get: function () {
             return this._animacion_en_curso;
@@ -3039,8 +3049,8 @@ var explosion = (function (_super) {
     }
     explosion.prototype.iniciar = function () {
         this.cargar_animacion();
-        this.contador = 0;
         this.reproducir_animacion("explosion");
+        this.pilas.reproducir_sonido("explosion");
     };
     explosion.prototype.cargar_animacion = function () {
         this.crear_animacion("explosion", [
@@ -3062,11 +3072,9 @@ var explosion = (function (_super) {
         ], 30);
         this.reproducir_animacion("explosion");
     };
-    explosion.prototype.actualizar = function () {
-        this.contador += 1;
-        if (this.contador > 30) {
-            this.eliminar();
-        }
+    explosion.prototype.actualizar = function () { };
+    explosion.prototype.cuando_finaliza_animacion = function (nombre) {
+        this.eliminar();
     };
     return explosion;
 }(Actor));
@@ -3459,7 +3467,12 @@ var EscenaBase = (function () {
         this.control = new Control(pilas);
         this.eventos = new EventosDeEscena(pilas);
         this._observables = null;
+        this._sonidos_para_reproducir = [];
+        this._sonidos_en_reproduccion = {};
     }
+    EscenaBase.prototype.reproducir_sonido = function (sonido) {
+        this._sonidos_para_reproducir.push(sonido);
+    };
     EscenaBase.prototype.observar = function (nombre, variable) {
         if (this._observables === null) {
             this._actor_visor_observables = this.pilas.actores.texto();
@@ -3558,6 +3571,30 @@ var EscenaBase = (function () {
         actores_a_eliminar.map(function (actor) {
             _this.quitar_actor_luego_de_eliminar(actor);
         });
+    };
+    EscenaBase.prototype.reproducir_sonidos_pendientes = function () {
+        var _this = this;
+        var sonidos = this._sonidos_para_reproducir;
+        sonidos = sonidos.filter(function (v, i) { return sonidos.indexOf(v) === i; });
+        var maximo = 20;
+        var _loop_2 = function (i) {
+            if (!this_1._sonidos_en_reproduccion[sonidos[i]]) {
+                this_1._sonidos_en_reproduccion[sonidos[i]] = 0;
+            }
+            if (this_1._sonidos_en_reproduccion[sonidos[i]] < maximo) {
+                this_1._sonidos_en_reproduccion[sonidos[i]] += 1;
+                sonido = this_1.pilas.modo.sound.add(sonidos[i]);
+                sonido.play();
+                sonido.once("complete", function (music) {
+                    _this._sonidos_en_reproduccion[sonidos[i]] -= 1;
+                });
+            }
+        };
+        var this_1 = this, sonido;
+        for (var i = 0; i < sonidos.length; i++) {
+            _loop_2(i);
+        }
+        this._sonidos_para_reproducir = [];
     };
     EscenaBase.prototype.avisar_click_en_la_pantalla_a_los_actores = function (x, y, evento_original) {
         this.actores.map(function (actor) {
@@ -6659,6 +6696,7 @@ var ModoEjecucion = (function (_super) {
             throw new Error("No se encuentra el actor \"" + nombre + "\", \u00BFquisiste decir \"" + nombre_mas_similar + "\"?");
         }
         var entidad = this.obtener_definicion_de_actor_por_nombre(nombre);
+        entidad.id = undefined;
         return this.crear_actor(entidad);
     };
     ModoEjecucion.prototype.obtener_nombres_de_actores = function () {
@@ -6731,6 +6769,7 @@ var ModoEjecucion = (function (_super) {
             this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
             this.pilas.escena.actualizar_actores();
+            this.pilas.escena.reproducir_sonidos_pendientes();
             if (this.permitir_modo_pausa) {
                 this.guardar_foto_de_entidades();
             }

@@ -491,6 +491,7 @@ declare class ActorBase {
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
     reproducir_animacion(nombre_de_la_animacion: any): void;
+    cuando_finaliza_animacion(animacion: string): void;
     animacion: any;
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
@@ -719,10 +720,10 @@ declare class explosion extends Actor {
         imagen: string;
         etiqueta: string;
     };
-    contador: number;
     iniciar(): void;
     cargar_animacion(): void;
     actualizar(): void;
+    cuando_finaliza_animacion(nombre: string): void;
 }
 declare class gallina extends Actor {
     propiedades: {
@@ -911,7 +912,10 @@ declare class EscenaBase {
     eventos: EventosDeEscena;
     _observables: any;
     _actor_visor_observables: any;
+    _sonidos_para_reproducir: any[];
+    _sonidos_en_reproduccion: any;
     constructor(pilas: any);
+    reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
     agregar_actor(actor: Actor): void;
     gravedad_x: number;
@@ -926,6 +930,7 @@ declare class EscenaBase {
     pre_actualizar(): void;
     actualizar(): void;
     actualizar_actores(): void;
+    reproducir_sonidos_pendientes(): void;
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
     terminar(): void;
