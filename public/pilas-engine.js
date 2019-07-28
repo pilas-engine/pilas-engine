@@ -124,33 +124,46 @@ var Animaciones = (function () {
         this.pilas = pilas;
     }
     Animaciones.prototype.crear_animacion = function (actor, nombre_de_la_animacion, cuadros, velocidad) {
-        var _this = this;
         var nombre = actor.id + "-" + nombre_de_la_animacion;
+        var frames = this.crear_frames_de_animacion(cuadros, nombre);
         if (!this.animaciones[nombre]) {
-            var frames_1 = cuadros.map(function (cuadro) {
-                if (_this.pilas.imagenes_precargadas.indexOf(cuadro) === -1) {
-                    var titulo = "No se puede crear la animaci\u00F3n \"" + nombre_de_la_animacion + "\"";
-                    var detalle = "El cuadro " + cuadro + " no existe.";
-                    throw Error(titulo + "\n" + detalle);
-                }
-                if (cuadro.indexOf(":") > -1) {
-                    return {
-                        key: cuadro.split(":")[0],
-                        frame: cuadro.split(":")[1]
-                    };
-                }
-                else {
-                    return { key: cuadro };
-                }
-            });
             var animacion = this.pilas.modo.anims.create({
                 key: nombre,
-                frames: frames_1,
+                frames: frames,
                 frameRate: velocidad,
                 repeat: -1
             });
             this.animaciones[nombre] = animacion;
         }
+        else {
+            var animacion = this.pilas.modo.anims.get(nombre);
+            var cantidad = animacion.frames.length;
+            for (var i = 0; i < cantidad; i++) {
+                animacion.removeFrameAt(0);
+            }
+            animacion.addFrame(frames);
+            animacion.msPerFrame = 1000 / velocidad;
+        }
+    };
+    Animaciones.prototype.crear_frames_de_animacion = function (cuadros, nombre_de_la_animacion) {
+        var _this = this;
+        var frames = cuadros.map(function (cuadro) {
+            if (_this.pilas.imagenes_precargadas.indexOf(cuadro) === -1) {
+                var titulo = "No se puede crear la animaci\u00F3n \"" + nombre_de_la_animacion + "\"";
+                var detalle = "El cuadro " + cuadro + " no existe.";
+                throw Error(titulo + "\n" + detalle);
+            }
+            if (cuadro.indexOf(":") > -1) {
+                return {
+                    key: cuadro.split(":")[0],
+                    frame: cuadro.split(":")[1]
+                };
+            }
+            else {
+                return { key: cuadro };
+            }
+        });
+        return frames;
     };
     Animaciones.prototype.existe_animacion = function (actor, nombre) {
         var animacion = actor.id + "-" + nombre;
@@ -3032,8 +3045,6 @@ var explosion = (function (_super) {
     explosion.prototype.cargar_animacion = function () {
         this.crear_animacion("explosion", [
             "imagenes:explosion/explosion_001",
-            "imagenes:explosion/explosion_001",
-            "imagenes:explosion/explosion_002",
             "imagenes:explosion/explosion_002",
             "imagenes:explosion/explosion_003",
             "imagenes:explosion/explosion_004",
@@ -3053,7 +3064,7 @@ var explosion = (function (_super) {
     };
     explosion.prototype.actualizar = function () {
         this.contador += 1;
-        if (this.contador > 34) {
+        if (this.contador > 30) {
             this.eliminar();
         }
     };
@@ -6161,9 +6172,9 @@ var ModoCargador = (function (_super) {
                     imagenes.push(key);
                 }
                 else {
-                    var frames_2 = contenido.getFrameNames();
-                    for (var i = 0; i < frames_2.length; i++) {
-                        imagenes.push(key + ":" + frames_2[i]);
+                    var frames_1 = contenido.getFrameNames();
+                    for (var i = 0; i < frames_1.length; i++) {
+                        imagenes.push(key + ":" + frames_1[i]);
                     }
                 }
             }

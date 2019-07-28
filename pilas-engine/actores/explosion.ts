@@ -18,8 +18,6 @@ class explosion extends Actor {
       "explosion",
       [
         "imagenes:explosion/explosion_001",
-        "imagenes:explosion/explosion_001",
-        "imagenes:explosion/explosion_002",
         "imagenes:explosion/explosion_002",
         "imagenes:explosion/explosion_003",
         "imagenes:explosion/explosion_004",
@@ -43,7 +41,7 @@ class explosion extends Actor {
   actualizar() {
     this.contador += 1;
 
-    if (this.contador > 34) {
+    if (this.contador > 30) {
       this.eliminar();
     }
   }
