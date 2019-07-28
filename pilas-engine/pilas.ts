@@ -423,6 +423,19 @@ class Pilas {
     return this.modo.clonar_actor_por_nombre(nombre);
   }
 
+  clonar_en(nombre: string, x: number, y: number) {
+    let actor = this.modo.clonar_actor_por_nombre(nombre);
+    actor.x = x;
+    actor.y = y;
+    return actor;
+  }
+
+  clonar_en_posicion_al_azar(nombre: string) {
+    let x = this.azar(-200, 200);
+    let y = this.azar(-200, 200);
+    return this.clonar_en(nombre, x, y);
+  }
+
   /**
    * Determina si un numero es múltiplo de otro.
    *
