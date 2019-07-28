@@ -7,11 +7,7 @@ El método "crear_animacion" se puede llamar especificando el nombre de la anima
 Por ejemplo, para crear una animación de un actor mientras está esperando usé lo siguiente:
 
 ```typescript
-this.crear_animacion(
-  "conejo_parado",
-  ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
-  2
-);
+this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
 ```
 
 El valor "2" significa que la animación se debe mostrar a una velocidad de 2 cuadros por segundo.
@@ -27,16 +23,8 @@ La creación de animaciones generalmente se realiza en el método iniciar de est
 ```typescript
 class Conejo extends Actor {
   iniciar() {
-    this.crear_animacion(
-      "conejo_parado",
-      ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
-      2
-    );
-    this.crear_animacion(
-      "conejo_camina",
-      ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"],
-      20
-    );
+    this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
+    this.crear_animacion("conejo_camina", ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"], 20);
     this.crear_animacion("conejo_salta", ["imagenes:conejo/conejo_salta"], 20);
     this.crear_animacion("conejo_muere", ["imagenes:conejo/conejo_pierde"], 1);
 
@@ -53,16 +41,8 @@ animación así:
 ```typescript
 class Conejo extends Actor {
   iniciar() {
-    this.crear_animacion(
-      "conejo_parado",
-      ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
-      2
-    );
-    this.crear_animacion(
-      "conejo_camina",
-      ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"],
-      20
-    );
+    this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
+    this.crear_animacion("conejo_camina", ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"], 20);
     this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
     this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
 
@@ -83,6 +63,30 @@ class Conejo extends Actor {
     if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {
       this.animacion = "conejo_parado";
     }
+  }
+}
+```
+
+## Detectar la finalización de las animaciones
+
+Las animaciones siempre se muestran de forma cíclica, es decir, cuanto terminan
+vuelven a empezar desde cero. Si tu animación es tradicional, como un personaje
+caminando, no tienes que hacer nada adicional para que continue la animación
+automáticamente.
+
+Si quieres detectar el momento exacto cuando la animación llega a su final,
+deberías crear un método llamado `cuando_finaliza_animacion` y colocar ahí
+algún código para reaccionar ante la finalización de la animación. Por ejemplo,
+el actor "explosión" se elimina de la pantalla automáticamente cuando
+finaliza su animación:
+
+```
+class explosion extends Actor {
+
+  // Otros métodos
+
+  cuando_finaliza_animacion(nombre: string) {
+    this.eliminar();
   }
 }
 ```
