@@ -342,6 +342,12 @@ class ModoEjecucion extends Modo {
 
     let entidad = this.obtener_definicion_de_actor_por_nombre(nombre);
 
+    // Se elimina el "id" original del actor para que al clonarse, el
+    // método "pre_actualizar" del actor le asigne un id autoincremental
+    // nuevo.
+
+    entidad.id = undefined;
+
     return this.crear_actor(entidad);
   }
 
