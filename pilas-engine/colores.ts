@@ -30,11 +30,55 @@ class Colores {
         nombre: "negro",
         hexa: 0x000000,
         ingles: "black"
+      },
+      {
+        nombre: "amarillo",
+        hexa: 0xffff00,
+        ingles: "yellow"
+      },
+      {
+        nombre: "rosa",
+        hexa: 0xffc0cb,
+        ingles: "PINK"
+      },
+      {
+        nombre: "naranja",
+        hexa: 0xffa500,
+        ingles: "orange"
+      },
+      {
+        nombre: "violeta",
+        hexa: 0xee82ee,
+        ingles: "violet"
+      },
+      {
+        nombre: "cyan",
+        hexa: 0x00ffff,
+        ingles: "cyan"
+      },
+      {
+        nombre: "marron",
+        hexa: 0xa52a2a,
+        ingles: "brown"
+      },
+      {
+        nombre: "blanco",
+        hexa: 0xffffff,
+        ingles: "white"
+      },
+      {
+        nombre: "gris",
+        hexa: 0x808080,
+        ingles: "gray"
       }
     ];
   }
 
-  convertir_a_hexa(color: string) {
+  convertir_a_hexa(color: any) {
+    if (typeof color === "number") {
+      return color;
+    }
+
     this.validar_color(color);
     let elemento = this._lista_de_colores.filter(e => e.nombre == color.toLowerCase());
     return elemento[0].hexa;
@@ -50,5 +94,9 @@ class Colores {
 
   get colores() {
     return this._lista_de_colores.map(e => e.nombre);
+  }
+
+  generar(rojo: number, verde: number, azul: number) {
+    return Phaser.Display.Color.GetColor(rojo, verde, azul);
   }
 }
