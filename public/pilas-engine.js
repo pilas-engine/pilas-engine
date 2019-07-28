@@ -275,10 +275,53 @@ var Colores = (function () {
                 nombre: "negro",
                 hexa: 0x000000,
                 ingles: "black"
+            },
+            {
+                nombre: "amarillo",
+                hexa: 0xffff00,
+                ingles: "yellow"
+            },
+            {
+                nombre: "rosa",
+                hexa: 0xffc0cb,
+                ingles: "PINK"
+            },
+            {
+                nombre: "naranja",
+                hexa: 0xffa500,
+                ingles: "orange"
+            },
+            {
+                nombre: "violeta",
+                hexa: 0xee82ee,
+                ingles: "violet"
+            },
+            {
+                nombre: "cyan",
+                hexa: 0x00ffff,
+                ingles: "cyan"
+            },
+            {
+                nombre: "marron",
+                hexa: 0xa52a2a,
+                ingles: "brown"
+            },
+            {
+                nombre: "blanco",
+                hexa: 0xffffff,
+                ingles: "white"
+            },
+            {
+                nombre: "gris",
+                hexa: 0x808080,
+                ingles: "gray"
             }
         ];
     }
     Colores.prototype.convertir_a_hexa = function (color) {
+        if (typeof color === "number") {
+            return color;
+        }
         this.validar_color(color);
         var elemento = this._lista_de_colores.filter(function (e) { return e.nombre == color.toLowerCase(); });
         return elemento[0].hexa;
@@ -298,6 +341,9 @@ var Colores = (function () {
         enumerable: true,
         configurable: true
     });
+    Colores.prototype.generar = function (rojo, verde, azul) {
+        return Phaser.Display.Color.GetColor(rojo, verde, azul);
+    };
     return Colores;
 }());
 var Control = (function () {
@@ -2441,6 +2487,78 @@ var Actor = (function (_super) {
     Actor.prototype.actualizar = function () { };
     return Actor;
 }(ActorBase));
+var PizarraBase = (function (_super) {
+    __extends(PizarraBase, _super);
+    function PizarraBase() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:basicos/sin_imagen"
+        };
+        return _this;
+    }
+    PizarraBase.prototype.iniciar = function () {
+        this._canvas = this.pilas.modo.add.graphics();
+    };
+    PizarraBase.prototype.dibujar_circulo = function (x, y, radio, color) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (radio === void 0) { radio = 20; }
+        if (color === void 0) { color = "negro"; }
+        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.fillStyle(colorHexa, 1);
+        this._canvas.fillCircle(x, -y, radio);
+    };
+    PizarraBase.prototype.dibujar_borde_de_circulo = function (x, y, radio, color, grosor) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (radio === void 0) { radio = 20; }
+        if (color === void 0) { color = "negro"; }
+        if (grosor === void 0) { grosor = 1; }
+        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.lineStyle(grosor, colorHexa, 1);
+        this._canvas.strokeCircle(x, -y, radio);
+    };
+    PizarraBase.prototype.dibujar_rectangulo = function (x, y, ancho, alto, color) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (ancho === void 0) { ancho = 20; }
+        if (alto === void 0) { alto = 20; }
+        if (color === void 0) { color = "negro"; }
+        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.fillStyle(colorHexa, 1);
+        this._canvas.fillRect(x, -y, ancho, alto);
+    };
+    PizarraBase.prototype.dibujar_borde_de_rectangulo = function (x, y, ancho, alto, color, grosor) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (ancho === void 0) { ancho = 20; }
+        if (alto === void 0) { alto = 20; }
+        if (color === void 0) { color = "negro"; }
+        if (grosor === void 0) { grosor = 1; }
+        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.lineStyle(grosor, colorHexa, 1);
+        this._canvas.strokeRect(x, -y, ancho, alto);
+    };
+    PizarraBase.prototype.dibujar_linea = function (x, y, x1, y1, color, grosor) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (x1 === void 0) { x1 = 100; }
+        if (y1 === void 0) { y1 = 100; }
+        if (color === void 0) { color = "negro"; }
+        if (grosor === void 0) { grosor = 1; }
+        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
+        this._canvas.lineStyle(grosor, colorHexa, 1);
+        this._canvas.lineBetween(x, -y, x1, -y1);
+    };
+    PizarraBase.prototype.limpiar = function () {
+        this._canvas.clear();
+    };
+    PizarraBase.prototype.actualizar = function () { };
+    PizarraBase.prototype.pre_actualizar = function () {
+        this.pilas.utilidades.sincronizar_contenedor(this._canvas, this.sprite);
+    };
+    return PizarraBase;
+}(Actor));
 var aceituna = (function (_super) {
     __extends(aceituna, _super);
     function aceituna() {
@@ -3094,46 +3212,26 @@ var pizarra = (function (_super) {
     function pizarra() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:basicos/invisible"
+            imagen: "imagenes:basicos/sin_imagen"
         };
         return _this;
     }
     pizarra.prototype.iniciar = function () {
-        this._canvas = this.pilas.modo.add.graphics();
+        _super.prototype.iniciar.call(this);
+        this.imagen = "imagenes:basicos/invisible";
         this.limpiar();
-        this.dibujar_circulo(0, 0, 40, "rojo");
-        this.dibujar_circulo(50, 50, 30, "verde");
-        this.dibujar_circulo(100, 100, 20, "azul");
-        this.dibujar_borde_de_circulo(0, 0, 40, "negro", 3);
-    };
-    pizarra.prototype.dibujar_circulo = function (x, y, radio, color) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        if (radio === void 0) { radio = 20; }
-        if (color === void 0) { color = "negro"; }
-        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
-        this._canvas.fillStyle(colorHexa, 1);
-        this._canvas.fillCircle(x, y, radio);
-    };
-    pizarra.prototype.dibujar_borde_de_circulo = function (x, y, radio, color, grosor) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        if (radio === void 0) { radio = 20; }
-        if (color === void 0) { color = "negro"; }
-        if (grosor === void 0) { grosor = 1; }
-        var colorHexa = this.pilas.colores.convertir_a_hexa(color);
-        this._canvas.lineStyle(grosor, colorHexa, 1);
-        this._canvas.strokeCircle(x, y, radio);
-    };
-    pizarra.prototype.limpiar = function () {
-        this._canvas.clear();
+        var color = this.pilas.colores.generar(255, 100, 0);
+        this.dibujar_circulo(100, 0, 40, color);
+        this.dibujar_borde_de_circulo(100, 0, 40, "negro", 2);
+        this.dibujar_circulo(100, 100, 20, "amarillo");
+        this.dibujar_borde_de_circulo(100, 100, 20, "negro", 2);
+        this.dibujar_rectangulo(-50, -50, 40, 90, "verde");
+        this.dibujar_borde_de_rectangulo(-50, -50, 40, 90, "negro", 2);
+        this.dibujar_linea(-100, 0, 200, 200, "rojo", 6);
     };
     pizarra.prototype.actualizar = function () { };
-    pizarra.prototype.pre_actualizar = function () {
-        this.pilas.utilidades.sincronizar_contenedor(this._canvas, this.sprite);
-    };
     return pizarra;
-}(Actor));
+}(PizarraBase));
 var plataforma = (function (_super) {
     __extends(plataforma, _super);
     function plataforma() {

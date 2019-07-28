@@ -64,9 +64,10 @@ declare class Colores {
     pilas: Pilas;
     _lista_de_colores: Color[];
     constructor(pilas: Pilas);
-    convertir_a_hexa(color: string): number;
+    convertir_a_hexa(color: any): number;
     validar_color(color: string): boolean;
     readonly colores: string[];
+    generar(rojo: number, verde: number, azul: number): number;
 }
 declare class Control {
     private pilas;
@@ -534,6 +535,21 @@ declare class Actor extends ActorBase {
     iniciar(): void;
     actualizar(): void;
 }
+declare class PizarraBase extends Actor {
+    propiedades: {
+        imagen: string;
+    };
+    _canvas: any;
+    iniciar(): void;
+    dibujar_circulo(x?: number, y?: number, radio?: number, color?: any): void;
+    dibujar_borde_de_circulo(x?: number, y?: number, radio?: number, color?: any, grosor?: number): void;
+    dibujar_rectangulo(x?: number, y?: number, ancho?: number, alto?: number, color?: any): void;
+    dibujar_borde_de_rectangulo(x?: number, y?: number, ancho?: number, alto?: number, color?: any, grosor?: number): void;
+    dibujar_linea(x?: number, y?: number, x1?: number, y1?: number, color?: any, grosor?: number): void;
+    limpiar(): void;
+    actualizar(): void;
+    pre_actualizar(): void;
+}
 declare class aceituna extends Actor {
     propiedades: {
         imagen: string;
@@ -780,17 +796,12 @@ declare class pelota extends Actor {
     };
     iniciar(): void;
 }
-declare class pizarra extends Actor {
+declare class pizarra extends PizarraBase {
     propiedades: {
         imagen: string;
     };
-    _canvas: any;
     iniciar(): void;
-    dibujar_circulo(x?: number, y?: number, radio?: number, color?: string): void;
-    dibujar_borde_de_circulo(x?: number, y?: number, radio?: number, color?: string, grosor?: number): void;
-    limpiar(): void;
     actualizar(): void;
-    pre_actualizar(): void;
 }
 declare class plataforma extends Actor {
     propiedades: {

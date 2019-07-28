@@ -16,6 +16,11 @@
       "archivo": "-actor.ts"
     },
     {
+      "nombre": "-pizarra-base",
+      "codigo": "class PizarraBase extends Actor {\n  propiedades = {\n    imagen: \"imagenes:basicos/sin_imagen\"\n  };\n\n  _canvas: any;\n\n  iniciar() {\n    this._canvas = this.pilas.modo.add.graphics();\n  }\n\n  dibujar_circulo(x: number = 0, y: number = 0, radio: number = 20, color: string = \"negro\") {\n    let colorHexa = this.pilas.colores.convertir_a_hexa(color);\n\n    this._canvas.fillStyle(colorHexa, 1);\n    this._canvas.fillCircle(x, y, radio);\n  }\n\n  dibujar_borde_de_circulo(x: number = 0, y: number = 0, radio: number = 20, color: string = \"negro\", grosor: number = 1) {\n    let colorHexa = this.pilas.colores.convertir_a_hexa(color);\n\n    this._canvas.lineStyle(grosor, colorHexa, 1);\n    this._canvas.strokeCircle(x, y, radio);\n  }\n\n  limpiar() {\n    this._canvas.clear();\n  }\n\n  actualizar() {}\n\n  pre_actualizar() {\n    this.pilas.utilidades.sincronizar_contenedor(this._canvas, this.sprite);\n  }\n}\n",
+      "archivo": "-pizarra-base.ts"
+    },
+    {
       "nombre": "aceituna",
       "codigo": "class aceituna extends Actor {\n  propiedades = {\n    imagen: \"imagenes:objetos/aceituna\"\n  };\n\n  iniciar() {\n    this.imagen = \"imagenes:objetos/aceituna\";\n  }\n}\n",
       "archivo": "aceituna.ts"
@@ -122,7 +127,7 @@
     },
     {
       "nombre": "pizarra",
-      "codigo": "class pizarra extends Actor {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\"\n  };\n\n  _canvas: any;\n\n  iniciar() {\n    this._canvas = this.pilas.modo.add.graphics();\n\n    this.limpiar();\n    this.dibujar_circulo(0, 0, 40, \"rojo\");\n    this.dibujar_circulo(50, 50, 30, \"verde\");\n    this.dibujar_circulo(100, 100, 20, \"azul\");\n\n    this.dibujar_borde_de_circulo(0, 0, 40, \"negro\", 3);\n  }\n\n  dibujar_circulo(x: number = 0, y: number = 0, radio: number = 20, color: string = \"negro\") {\n    let colorHexa = this.pilas.colores.convertir_a_hexa(color);\n\n    this._canvas.fillStyle(colorHexa, 1);\n    this._canvas.fillCircle(x, y, radio);\n  }\n\n  dibujar_borde_de_circulo(x: number = 0, y: number = 0, radio: number = 20, color: string = \"negro\", grosor: number = 1) {\n    let colorHexa = this.pilas.colores.convertir_a_hexa(color);\n\n    this._canvas.lineStyle(grosor, colorHexa, 1);\n    this._canvas.strokeCircle(x, y, radio);\n  }\n\n  limpiar() {\n    this._canvas.clear();\n  }\n\n  actualizar() {}\n\n  pre_actualizar() {\n    this.pilas.utilidades.sincronizar_contenedor(this._canvas, this.sprite);\n  }\n}\n",
+      "codigo": "class pizarra extends PizarraBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/sin_imagen\"\n  };\n\n  iniciar() {\n    super.iniciar();\n    this.imagen = \"imagenes:basicos/invisible\";\n\n    this.limpiar();\n    this.dibujar_circulo(0, 0, 40, \"rojo\");\n    this.dibujar_circulo(50, 50, 30, \"verde\");\n    this.dibujar_circulo(100, 100, 20, \"azul\");\n\n    this.dibujar_borde_de_circulo(0, 0, 40, \"negro\", 3);\n  }\n\n  actualizar() {}\n}\n",
       "archivo": "pizarra.ts"
     },
     {
