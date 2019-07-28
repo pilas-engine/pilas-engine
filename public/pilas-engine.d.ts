@@ -30,6 +30,7 @@ declare class Actores {
     reiniciar_escena(): any;
     nube_animada(): any;
     pizarra(): any;
+    explosion(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -350,6 +351,8 @@ declare class Pilas {
     definir_cursor(nombre: string): void;
     observar(nombre: string, variable: any): void;
     clonar(nombre: string): any;
+    clonar_en(nombre: string, x: number, y: number): any;
+    clonar_en_posicion_al_azar(nombre: string): any;
     es_multiplo(a: number, b: number): boolean;
 }
 declare var pilasengine: Pilas;
@@ -708,6 +711,17 @@ declare class deslizador extends Actor {
     cuando_termina_de_hacer_click(): void;
     actualizar(): void;
     private ajustar_marca;
+}
+declare class explosion extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        etiqueta: string;
+    };
+    contador: number;
+    iniciar(): void;
+    cargar_animacion(): void;
+    actualizar(): void;
 }
 declare class gallina extends Actor {
     propiedades: {

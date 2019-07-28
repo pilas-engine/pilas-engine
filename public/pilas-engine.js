@@ -113,6 +113,9 @@ var Actores = (function () {
     Actores.prototype.pizarra = function () {
         return this.crear_actor("pizarra");
     };
+    Actores.prototype.explosion = function () {
+        return this.crear_actor("explosion");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -1441,6 +1444,17 @@ var Pilas = (function () {
     };
     Pilas.prototype.clonar = function (nombre) {
         return this.modo.clonar_actor_por_nombre(nombre);
+    };
+    Pilas.prototype.clonar_en = function (nombre, x, y) {
+        var actor = this.modo.clonar_actor_por_nombre(nombre);
+        actor.x = x;
+        actor.y = y;
+        return actor;
+    };
+    Pilas.prototype.clonar_en_posicion_al_azar = function (nombre) {
+        var x = this.azar(-200, 200);
+        var y = this.azar(-200, 200);
+        return this.clonar_en(nombre, x, y);
     };
     Pilas.prototype.es_multiplo = function (a, b) {
         return a % b === 0;
@@ -2998,6 +3012,52 @@ var deslizador = (function (_super) {
         this.valor = (dx + 90) / 1.8;
     };
     return deslizador;
+}(Actor));
+var explosion = (function (_super) {
+    __extends(explosion, _super);
+    function explosion() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            figura: "",
+            imagen: "imagenes:explosion/explosion_001",
+            etiqueta: "explosion"
+        };
+        return _this;
+    }
+    explosion.prototype.iniciar = function () {
+        this.cargar_animacion();
+        this.contador = 0;
+        this.reproducir_animacion("explosion");
+    };
+    explosion.prototype.cargar_animacion = function () {
+        this.crear_animacion("explosion", [
+            "imagenes:explosion/explosion_001",
+            "imagenes:explosion/explosion_001",
+            "imagenes:explosion/explosion_002",
+            "imagenes:explosion/explosion_002",
+            "imagenes:explosion/explosion_003",
+            "imagenes:explosion/explosion_004",
+            "imagenes:explosion/explosion_005",
+            "imagenes:explosion/explosion_006",
+            "imagenes:explosion/explosion_007",
+            "imagenes:explosion/explosion_008",
+            "imagenes:explosion/explosion_009",
+            "imagenes:explosion/explosion_010",
+            "imagenes:explosion/explosion_011",
+            "imagenes:explosion/explosion_012",
+            "imagenes:explosion/explosion_013",
+            "imagenes:explosion/explosion_014",
+            "imagenes:explosion/explosion_015"
+        ], 30);
+        this.reproducir_animacion("explosion");
+    };
+    explosion.prototype.actualizar = function () {
+        this.contador += 1;
+        if (this.contador > 34) {
+            this.eliminar();
+        }
+    };
+    return explosion;
 }(Actor));
 var gallina = (function (_super) {
     __extends(gallina, _super);

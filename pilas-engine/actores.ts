@@ -134,4 +134,8 @@ class Actores {
   pizarra() {
     return this.crear_actor("pizarra");
   }
+
+  explosion() {
+    return this.crear_actor("explosion");
+  }
 }
