@@ -62,3 +62,45 @@ this.dibujar_circulo(+50, 50, 40, color_verde_oscuro);
 ```
 
 ![circulos](dibujado_en_pantalla.assets/circulos.png)
+
+## Rectángulos
+
+De forma similar a los círculos, también existen funciones para dibujar rectángulos y bordes de rectángulos.
+
+```
+this.dibujar_rectangulo(0, 0, 120, 50, "naranja");
+this.dibujar_borde_de_rectangulo(0, 0, 120, 50, "rojo", 5);
+```
+
+![image-20190728093001144](dibujado_en_pantalla.assets/image-20190728093001144.png)
+
+Los argumentos de estas funciones son: el punto de originen, en este caso `x=0 y=0`, luego el ancho y alto del rectángulo y por último el color.
+
+## Lineas
+
+Para dibujar lineas, tenemos que especificar dos coordenadas, color y grosor de la linea:
+
+Por ejemplo, para dibujar una linea de color "verde" desde el punto (0, 0) al punto (200, 100) podemos escribir:
+
+```
+this.dibujar_linea(0, 0, 200, 100, "verde", 10);
+```
+
+![image-20190728093336422](dibujado_en_pantalla.assets/image-20190728093336422.png)
+
+## Animaciones
+
+Si bien el actor pizarra pude moverse en pantalla, tener una figura física e incluso ser utilizado como cualquier otro actor. También es posible usarlo para crear animaciones cuadro a cuadro.
+
+El actor Pizarra incluye una función llamada `limpiar` que si se combina con funciones de dibujado se pueden hacer algunas animaciones simples.
+
+Por ejemplo, si queremos dibujar una linea que señale la posición del mouse constántemente podemos hacerlo así, usando la función actualizar:
+
+```
+actualizar() {
+    this.limpiar();
+    this.dibujar_linea(0, 0, this.pilas.cursor_x, this.pilas.cursor_y, "verde", 10);
+}
+```
+
+![image-20190728094930911](dibujado_en_pantalla.assets/image-20190728094930911.png)
