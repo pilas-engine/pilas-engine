@@ -11,6 +11,7 @@ class EscenaBase {
   _observables: any;
   _actor_visor_observables: any;
   _sonidos_para_reproducir: any[];
+  _sonidos_en_reproduccion: any;
 
   constructor(pilas) {
     this.pilas = pilas;
@@ -22,6 +23,7 @@ class EscenaBase {
     this.eventos = new EventosDeEscena(pilas);
     this._observables = null;
     this._sonidos_para_reproducir = [];
+    this._sonidos_en_reproduccion = {};
   }
 
   reproducir_sonido(sonido: string) {
@@ -155,14 +157,29 @@ class EscenaBase {
    * Función interna que invoca el modo ejecución. Su objetivo es comenzar
    * a reproducir todos los sonidos pendientes, pero evitando reproducir
    * varias veces los mismos sonidos.
+   *
+   * También impone un límite de 20 sonidos sonidos repetidos en reproducción,
+   * aunque se hallan comenzado a reproducir en instantes diferentes.
    */
   reproducir_sonidos_pendientes() {
     let sonidos = this._sonidos_para_reproducir;
     sonidos = sonidos.filter((v, i) => sonidos.indexOf(v) === i);
+    const maximo = 20;
 
     for (let i = 0; i < sonidos.length; i++) {
-      var sonido = this.pilas.modo.sound.add(sonidos[i]);
-      sonido.play();
+      if (!this._sonidos_en_reproduccion[sonidos[i]]) {
+        this._sonidos_en_reproduccion[sonidos[i]] = 0;
+      }
+
+      if (this._sonidos_en_reproduccion[sonidos[i]] < maximo) {
+        this._sonidos_en_reproduccion[sonidos[i]] += 1;
+
+        var sonido = this.pilas.modo.sound.add(sonidos[i]);
+        sonido.play();
+        sonido.once("complete", music => {
+          this._sonidos_en_reproduccion[sonidos[i]] -= 1;
+        });
+      }
     }
 
     this._sonidos_para_reproducir = [];
