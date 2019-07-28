@@ -119,6 +119,10 @@ class Pilas {
         ],
         sonidos: [
           {
+            nombre: "explosion",
+            ruta: "sonidos/explosion.wav"
+          },
+          {
             nombre: "laser",
             ruta: "sonidos/gallina.wav"
           },
@@ -264,8 +268,7 @@ class Pilas {
   }
 
   reproducir_sonido(nombre: string) {
-    var music = this.modo.sound.add(nombre);
-    music.play();
+    this.escena.reproducir_sonido(nombre);
   }
 
   obtener_actores() {

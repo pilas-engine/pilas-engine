@@ -10,6 +10,7 @@ class EscenaBase {
   eventos: EventosDeEscena;
   _observables: any;
   _actor_visor_observables: any;
+  _sonidos_para_reproducir: any[];
 
   constructor(pilas) {
     this.pilas = pilas;
@@ -20,6 +21,11 @@ class EscenaBase {
     this.control = new Control(pilas);
     this.eventos = new EventosDeEscena(pilas);
     this._observables = null;
+    this._sonidos_para_reproducir = [];
+  }
+
+  reproducir_sonido(sonido: string) {
+    this._sonidos_para_reproducir.push(sonido);
   }
 
   observar(nombre: string, variable: any) {
@@ -143,6 +149,23 @@ class EscenaBase {
     actores_a_eliminar.map(actor => {
       this.quitar_actor_luego_de_eliminar(actor);
     });
+  }
+
+  /**
+   * Función interna que invoca el modo ejecución. Su objetivo es comenzar
+   * a reproducir todos los sonidos pendientes, pero evitando reproducir
+   * varias veces los mismos sonidos.
+   */
+  reproducir_sonidos_pendientes() {
+    let sonidos = this._sonidos_para_reproducir;
+    sonidos = sonidos.filter((v, i) => sonidos.indexOf(v) === i);
+
+    for (let i = 0; i < sonidos.length; i++) {
+      var sonido = this.pilas.modo.sound.add(sonidos[i]);
+      sonido.play();
+    }
+
+    this._sonidos_para_reproducir = [];
   }
 
   avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any) {

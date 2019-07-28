@@ -458,6 +458,7 @@ class ModoEjecucion extends Modo {
       this.pilas.escena.pre_actualizar();
       this.pilas.escena.actualizar();
       this.pilas.escena.actualizar_actores();
+      this.pilas.escena.reproducir_sonidos_pendientes();
 
       if (this.permitir_modo_pausa) {
         this.guardar_foto_de_entidades();

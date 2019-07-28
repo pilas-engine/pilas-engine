@@ -32,6 +32,10 @@
       "ruta": "sonidos/laser.wav"
     },
     {
+      "nombre": "explosion",
+      "ruta": "sonidos/explosion.wav"
+    },
+    {
       "nombre": "gallina",
       "ruta": "sonidos/gallina.wav"
     },
