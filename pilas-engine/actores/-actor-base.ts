@@ -167,6 +167,15 @@ class ActorBase {
       }
     };
 
+    this.sprite.on("animationcomplete", (anim, frame) => {
+      if (frame.isLast) {
+        let nombre = anim.key.split("-")[1];
+        this.cuando_finaliza_animacion(nombre);
+        // una vez que avisó que terminó la animación la repite.
+        this.sprite.anims.play(anim.key);
+      }
+    });
+
     this.sprite.on("pointerdown", cursor => {
       let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
       this.cuando_hace_click(posicion.x, posicion.y, cursor);
@@ -751,8 +760,11 @@ class ActorBase {
 
   reproducir_animacion(nombre_de_la_animacion) {
     let nombre = `${this.id}-${nombre_de_la_animacion}`;
+
     this.sprite.anims.play(nombre);
   }
+
+  cuando_finaliza_animacion(animacion: string) {}
 
   set animacion(nombre) {
     if (this._animacion_en_curso !== nombre) {

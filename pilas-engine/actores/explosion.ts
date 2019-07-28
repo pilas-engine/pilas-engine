@@ -5,11 +5,8 @@ class explosion extends Actor {
     etiqueta: "explosion"
   };
 
-  contador: number;
-
   iniciar() {
     this.cargar_animacion();
-    this.contador = 0;
     this.reproducir_animacion("explosion");
     this.pilas.reproducir_sonido("explosion");
   }
@@ -39,11 +36,9 @@ class explosion extends Actor {
     this.reproducir_animacion("explosion");
   }
 
-  actualizar() {
-    this.contador += 1;
+  actualizar() {}
 
-    if (this.contador > 29) {
-      this.eliminar();
-    }
+  cuando_finaliza_animacion(nombre: string) {
+    this.eliminar();
   }
 }
