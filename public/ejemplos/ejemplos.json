@@ -50,6 +50,10 @@
     {
       "nombre": "huesos",
       "desde": "2.0.79"
+    },
+    {
+      "nombre": "explosion_al_colisionar",
+      "desde": "2.0.84"
     }
   ]
 }
