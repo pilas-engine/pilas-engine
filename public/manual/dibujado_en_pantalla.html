@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Observables · Manual de Pilas Engine 2</title>
+        <title>Dibujado simple en pantalla · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="tiempo.html" />
+    <link rel="next" href="exportar_juegos.html" />
     
     
-    <link rel="prev" href="azar.html" />
+    <link rel="prev" href="eventos.html" />
     
 
     </head>
@@ -193,7 +193,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="observables.html">
+        <li class="chapter " data-level="1.9" data-path="observables.html">
             
                 <a href="observables.html">
             
@@ -271,7 +271,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="dibujado_en_pantalla.html">
+        <li class="chapter active" data-level="1.15" data-path="dibujado_en_pantalla.html">
             
                 <a href="dibujado_en_pantalla.html">
             
@@ -373,7 +373,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Observables</a>
+        <a href="." >Dibujado simple en pantalla</a>
     </h1>
 </div>
 
@@ -388,23 +388,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="observables">Observables</h1><p>Los observables te permiten visualizar r&#xE1;pidamente en pantalla qu&#xE9; valor tienen los atributos, variables o expresiones dentro de un juego.</p><p>Por ejemplo, imagina que tu juego tiene un personaje que interact&#xFA;a con la posici&#xF3;n <code>x</code> e <code>y</code> del cursor del mouse. Mediante observables vas a poder agregar un visor de variables como este:</p><p><img alt="observables" src="observables.assets/observables.png"></p><p>Es super importante poder visualizar r&#xE1;pidamente variables en un juego, no solo para informarse sino tambi&#xE9;n para detectar errores o incluso saber si estamos accediendo a la informaci&#xF3;n correcta.</p><p>Los observables se pueden crear mediante una llamada a la funci&#xF3;n <code>pilas.observable</code> enviando un nombre (a elecci&#xF3;n tuya) y una variable para observar, por ejemplo:</p><pre><code class="lang-typescript">actualizar() {
-  <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;cursor_x&quot;</span>, <span class="hljs-keyword">this</span>.pilas.cursor_x);
-  <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;cursor_y&quot;</span>, <span class="hljs-keyword">this</span>.pilas.cursor_y);
-  <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;&#xBF;pulsa la tecla arriba?&quot;</span>, <span class="hljs-keyword">this</span>.pilas.control.arriba);
+                                <h1 id="dibujado-simple-en-pantalla">Dibujado simple en pantalla</h1><p>En esta secci&#xF3;n veremos como dibujar libremente, ya sean lineas, c&#xED;rculos, etc..</p><p>Comenzaremos con una forma de dibujado muy sencilla, existe un actor llamado
+Pizarra que podemos colocar en una escena para dibujar figuras geom&#xE9;tricas
+sencillas.</p><p>Cuando se agrega el actor pizarra, vas a observar que soporta algunos
+m&#xE9;todos para dibujar. Esta es una lista de los m&#xE1;s utilizados:</p><h2 id="dibujar-c&#xED;rculos">Dibujar c&#xED;rculos</h2><p>Para dibujar c&#xED;rculos tenemos una funci&#xF3;n que pinta el contenido de un c&#xED;rculo en base a 4 par&#xE1;metros:</p><ul><li>x: la posici&#xF3;n horizontal del centro del c&#xED;rculo.
+</li>
+<li>y: la posici&#xF3;n vertical del centro del c&#xED;rculo.
+</li>
+<li>radio: el radio del c&#xED;rculo.
+</li>
+<li>color: el color de relleno que tendr&#xE1; el c&#xED;rculo.
+</li></ul>
+<p>Por ejemplo, esta llamada a la funci&#xF3;n generar&#xE1;
+un c&#xED;rculo en la posici&#xF3;n <code>x=100 y=0</code> con un radio de 40 p&#xED;xeles y de color rojo:</p><pre><code>this.dibujar_circulo(100, 0, 40, &quot;rojo&quot;);</code></pre>
+<p><img alt="circulo_rojo" src="dibujado_en_pantalla.assets/circulo_rojo.png"></p><p>Opcionalmente, si quieres dibujar el contorno del c&#xED;rculo de otro color o con un grosor en particular podr&#xED;as llamar a esta funci&#xF3;n:</p><pre><code>this.dibujar_borde_de_circulo(100, 0, 40, &quot;negro&quot;, 2);</code></pre>
+<p><img alt="circulo_con_borde" src="dibujado_en_pantalla.assets/circulo_con_borde.png"></p><p>Los primeros 3 par&#xE1;metros son id&#xE9;nticos al de la funci&#xF3;n anterior, corresponden a los par&#xE1;metros <code>x</code>, <code>y</code> y <code>radio</code>, mientras que el argumento que le sigue ser&#xE1; el color del borde y el &#xFA;ltimo el grosor en p&#xED;xeles.</p><h2 id="colores">Colores</h2><p>En los ejemplos anteriores utilic&#xE9; colores como &quot;rojo&quot;, &quot;negro&quot; y &quot;verde&quot;; sin embargo esta no es
+la &#xFA;nica forma de especificar colores. Los nombres de colores
+son &#xFA;tiles y f&#xE1;ciles de recordar, pero no ofrecen mucha variedad.</p><p>Otra forma de definir colores con mucha flexibilidad es mediante la funci&#xF3;n <code>pilas.colores.generar</code>. Esta funci&#xF3;n genera un color &quot;mezclando&quot; tres componentes de color (rojo, verde y az&#xFA;l).</p><p>Cada componente de color tienen que ser un n&#xFA;mero entre 0 y 255, por ejemplo:</p><pre><code>let color_verde_oscuro = this.pilas.colores.generar(0, 100, 0);
+let color_verde_claro = this.pilas.colores.generar(0, 200, 0);</code></pre>
+<p>A su vez, una vez que tenemos el color generado, podemos usarlo
+en las funciones para dibujar. Por ejemplo, si queremos dibujar
+dos c&#xED;rculos con estos colores podemos escribir lo siguiente:</p><pre><code>this.dibujar_circulo(-50, 50, 40, color_verde_claro);
+this.dibujar_circulo(+50, 50, 40, color_verde_oscuro);</code></pre>
+<p><img alt="circulos" src="dibujado_en_pantalla.assets/circulos.png"></p><h2 id="rect&#xE1;ngulos">Rect&#xE1;ngulos</h2><p>De forma similar a los c&#xED;rculos, tambi&#xE9;n existen funciones para dibujar rect&#xE1;ngulos y bordes de rect&#xE1;ngulos.</p><pre><code>this.dibujar_rectangulo(0, 0, 120, 50, &quot;naranja&quot;);
+this.dibujar_borde_de_rectangulo(0, 0, 120, 50, &quot;rojo&quot;, 5);</code></pre>
+<p><img alt="image-20190728093001144" src="dibujado_en_pantalla.assets/image-20190728093001144.png"></p><p>Los argumentos de estas funciones son: el punto de originen, en este caso <code>x=0 y=0</code>, luego el ancho y alto del rect&#xE1;ngulo y por &#xFA;ltimo el color.</p><h2 id="lineas">Lineas</h2><p>Para dibujar lineas, tenemos que especificar dos coordenadas, color y grosor de la linea:</p><p>Por ejemplo, para dibujar una linea de color &quot;verde&quot; desde el punto (0, 0) al punto (200, 100) podemos escribir:</p><pre><code>this.dibujar_linea(0, 0, 200, 100, &quot;verde&quot;, 10);</code></pre>
+<p><img alt="image-20190728093336422" src="dibujado_en_pantalla.assets/image-20190728093336422.png"></p><h2 id="animaciones">Animaciones</h2><p>Si bien el actor pizarra pude moverse en pantalla, tener una figura f&#xED;sica e incluso ser utilizado como cualquier otro actor. Tambi&#xE9;n es posible usarlo para crear animaciones cuadro a cuadro.</p><p>El actor Pizarra incluye una funci&#xF3;n llamada <code>limpiar</code> que si se combina con funciones de dibujado se pueden hacer algunas animaciones simples.</p><p>Por ejemplo, si queremos dibujar una linea que se&#xF1;ale la posici&#xF3;n del mouse const&#xE1;ntemente podemos hacerlo as&#xED;, usando la funci&#xF3;n actualizar:</p><pre><code>actualizar() {
+    this.limpiar();
+    this.dibujar_linea(0, 0, this.pilas.cursor_x, this.pilas.cursor_y, &quot;verde&quot;, 10);
 }</code></pre>
-<p>Ten en cuenta que los observables se tienen que crear siempre desde funciones <code>actualizar</code>, ya sea de actores o de la escena, porque esa es la &#xFA;nica forma de que pilas pueda saber el valor m&#xE1;s reciente de esas variables.</p><p>Otro ejemplo &#xFA;til, ser&#xED;a poder saber la posici&#xF3;n exacta de un actor que hemos creado. Incluso podemos imprimir otros atributos menos visibles como la rotaci&#xF3;n o la velocidad vertical:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> un_actor extends Actor {
-  iniciar() {
-    <span class="hljs-keyword">this</span>.x = <span class="hljs-number">-100</span>;
-    <span class="hljs-keyword">this</span>.y = <span class="hljs-number">70</span>;
-  }
-
-  actualizar() {
-    <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;mi actor&quot;</span>, <span class="hljs-keyword">this</span>)
-    <span class="hljs-keyword">this</span>.pilas.observar(<span class="hljs-string">&quot;rotaci&#xF3;n&quot;</span>, <span class="hljs-keyword">this</span>.rotacion)
-  }
-}</code></pre>
-<p>Si buscas un ejemplo aplicado de observables abr&#xED; el ejemplo angulos:</p><p><img alt="ejemplo-observable" src="observables.assets/ejemplo-observable.png"></p>
+<p><img alt="image-20190728094930911" src="dibujado_en_pantalla.assets/image-20190728094930911.png"></p>
                                 
                                 </section>
                             
@@ -431,12 +444,12 @@
 
             
                 
-                <a href="azar.html" class="navigation navigation-prev " aria-label="Previous page: Azar o cálculos aleatorios">
+                <a href="eventos.html" class="navigation navigation-prev " aria-label="Previous page: Eventos">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="tiempo.html" class="navigation navigation-next " aria-label="Next page: Manejo de tiempo">
+                <a href="exportar_juegos.html" class="navigation navigation-next " aria-label="Next page: Cómo exportar juegos">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -447,7 +460,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Observables","level":"1.9","depth":1,"next":{"title":"Manejo de tiempo","level":"1.10","depth":1,"path":"tiempo.md","ref":"tiempo.md","articles":[]},"previous":{"title":"Azar o cálculos aleatorios","level":"1.8","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"observables.md","mtime":"2019-05-26T13:53:14.128Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-07-29T03:43:21.149Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Dibujado simple en pantalla","level":"1.15","depth":1,"next":{"title":"Cómo exportar juegos","level":"1.16","depth":1,"path":"exportar_juegos.md","ref":"exportar_juegos.md","articles":[]},"previous":{"title":"Eventos","level":"1.14","depth":1,"path":"eventos.md","ref":"eventos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"dibujado_en_pantalla.md","mtime":"2019-07-28T12:53:44.427Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-07-29T03:43:21.149Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

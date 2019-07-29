@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <title>Cómo exportar juegos · Manual de Pilas Engine 2</title>
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="generator" content="GitBook 3.2.0">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -60,7 +60,7 @@
     <link rel="next" href="pilas_como_biblioteca.html" />
     
     
-    <link rel="prev" href="eventos.html" />
+    <link rel="prev" href="dibujado_en_pantalla.html" />
     
 
     </head>
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.15" data-path="exportar_juegos.html">
+        <li class="chapter " data-level="1.15" data-path="dibujado_en_pantalla.html">
+            
+                <a href="dibujado_en_pantalla.html">
+            
+                    
+                    Dibujado simple en pantalla
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.16" data-path="exportar_juegos.html">
             
                 <a href="exportar_juegos.html">
             
@@ -284,7 +297,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.17" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -375,71 +388,24 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="c&#xF3;mo-exportar-juegos">C&#xF3;mo exportar juegos</h1>
-<p>El editor de pilas incluye la posibilidad de exportar proyectos completos para ser utilizados sin el editor.</p>
-<p>Para exportar un juego simplemente hay que pulsar el bot&#xF3;n Exportar del editor:</p>
-<p><img src="exportar_juegos.assets/exportar.png" alt="exportar"></p>
-<p>A continuaci&#xF3;n se nos va a mostrar una pantalla de exportaci&#xF3;n, que demora unos minutos ya que tiene que recopilar todos los recursos necesarios, y luego obtendremos un archivo comprimido con el proyecto:</p>
-<p><img src="exportar_juegos.assets/archivo-exportado.png" alt="archivo-exportado"></p>
-<p>Este archivo .zip aloja el proyecto completo, as&#xED; que podemos utilizarlo para punto de partida para llevar nuestro juego a otro lugar.</p>
-<p>A continuaci&#xF3;n se muestran algunas alternativas de publicaci&#xF3;n:</p>
-<h3 id="&#xBF;qu&#xE9;-contiene-el-archivo-exportado">&#xBF;Qu&#xE9; contiene el archivo exportado?</h3>
-<p>El archivo .zip se puede descomprimir f&#xE1;cilmente con las herramientas que vienen instaladas en cualquier sistema operativo.</p>
-<p>Una vez que se descomprime, vamos a observar un archivo de ayuda y una carpeta llamada &quot;proyecto&quot; con todos los recursos de nuestro juego:</p>
-<p><img src="exportar_juegos.assets/arbol.png" alt="arbol"></p>
-<h3 id="c&#xF3;mo-ejecutar-mi-juego-sin-el-editor">C&#xF3;mo ejecutar mi juego sin el editor</h3>
-<p>El primer paso es tener instalado <a href="https://nodejs.org/es/" target="_blank">Node.JS</a> y acceso a un terminal para ejecutar comandos.</p>
-<p>Luego, se tiene que ingresar en el directorio &quot;proyecto&quot; y ejecutar el comando:</p>
-<pre><code>npm install
-</code></pre><p>Si todo va bien, deber&#xED;amos ver que el instalador de paquetes de node trabaja unos segundos para descargar todo lo necesario para seguir trabajando:</p>
-<p><img src="exportar_juegos.assets/instalando-dependencias.png" alt="instalando-dependencias"></p>
-<p>A partir de este punto, vas a tener la posiblidad de hacer alguna de estas cosas:</p>
-<h3 id="probar-la-aplicaci&#xF3;n-en-un-servidor-local">Probar la aplicaci&#xF3;n en un servidor local</h3>
-<p>Para iniciar el juego directamente en un navegador podr&#xED;as escribir este comando en el mismo directorio &quot;proyecto&quot;:</p>
-<pre><code>npm start
-</code></pre><p>A continuaci&#xF3;n se va a abrir el navegador y tu juego.</p>
-<p><img src="exportar_juegos.assets/web.png" alt="web"></p>
-<p>Ten en cuenta que pilas no funciona directamente abriendo el archivo index.html en un navegador, la raz&#xF3;n por la que no puede andar directamente es porque necesita cargar archivos mientras se inicializa usando ajax (algo que los navegadores no pueden hacer si se inicializan abriendo un archivo .html de forma directa).</p>
-<h3 id="ejecutar-tu-juego-en-electron-de-forma-offline">Ejecutar tu juego en electron de forma offline</h3>
-<p>Otra opci&#xF3;n es lanzar el juego como si se tratara de una aplicaci&#xF3;n dedicada, sin necesidad de un navegador.</p>
-<p>Para eso, tendr&#xED;as que ejecutar este comando:</p>
-<pre><code>npm run electron
-</code></pre><p><img src="exportar_juegos.assets/electron-ejecucion.png" alt="electron-ejecucion"></p>
-<h3 id="c&#xF3;mo-crear-versiones-empaquetas-para-distribuir-exe-dmg-etc">C&#xF3;mo crear versiones empaquetas para distribuir (.exe, dmg etc)</h3>
-<p>Una opci&#xF3;n muy solicitada a la hora de exportar juegos es poder hacerlos completamente portables, y que la persona que recibe el juego no tenga que instalar o configurar nada para jugar al juego, solamente hacer &quot;doble click&quot; en un archivo y jugar.</p>
-<p>Pilas permite hacer esto mediante la herramienta que mencionamos antes llamada electron y una serie de scripts.</p>
-<p>Tomemos el ejemplo m&#xE1;s solicitado, hagamos que nuestro juego se pueda compilar para windows y distribuirse como un archivo .exe. Lo que tenemos que hacer es ejecutar estos comandos:</p>
-<pre><code>npm install electron-packager --save-dev
+                                <h1 id="c&#xF3;mo-exportar-juegos">C&#xF3;mo exportar juegos</h1><p>El editor de pilas incluye la posibilidad de exportar proyectos completos para ser utilizados sin el editor.</p><p>Para exportar un juego simplemente hay que pulsar el bot&#xF3;n Exportar del editor:</p><p><img alt="exportar" src="exportar_juegos.assets/exportar.png"></p><p>A continuaci&#xF3;n se nos va a mostrar una pantalla de exportaci&#xF3;n, que demora unos minutos ya que tiene que recopilar todos los recursos necesarios, y luego obtendremos un archivo comprimido con el proyecto:</p><p><img alt="archivo-exportado" src="exportar_juegos.assets/archivo-exportado.png"></p><p>Este archivo .zip aloja el proyecto completo, as&#xED; que podemos utilizarlo para punto de partida para llevar nuestro juego a otro lugar.</p><p>A continuaci&#xF3;n se muestran algunas alternativas de publicaci&#xF3;n:</p><h3 id="&#xBF;qu&#xE9;-contiene-el-archivo-exportado">&#xBF;Qu&#xE9; contiene el archivo exportado?</h3><p>El archivo .zip se puede descomprimir f&#xE1;cilmente con las herramientas que vienen instaladas en cualquier sistema operativo.</p><p>Una vez que se descomprime, vamos a observar un archivo de ayuda y una carpeta llamada &quot;proyecto&quot; con todos los recursos de nuestro juego:</p><p><img alt="arbol" src="exportar_juegos.assets/arbol.png"></p><h3 id="c&#xF3;mo-ejecutar-mi-juego-sin-el-editor">C&#xF3;mo ejecutar mi juego sin el editor</h3><p>El primer paso es tener instalado <a href="https://nodejs.org/es/" target="_blank">Node.JS</a> y acceso a un terminal para ejecutar comandos.</p><p>Luego, se tiene que ingresar en el directorio &quot;proyecto&quot; y ejecutar el comando:</p><pre><code>npm install</code></pre>
+<p>Si todo va bien, deber&#xED;amos ver que el instalador de paquetes de node trabaja unos segundos para descargar todo lo necesario para seguir trabajando:</p><p><img alt="instalando-dependencias" src="exportar_juegos.assets/instalando-dependencias.png"></p><p>A partir de este punto, vas a tener la posiblidad de hacer alguna de estas cosas:</p><h3 id="probar-la-aplicaci&#xF3;n-en-un-servidor-local">Probar la aplicaci&#xF3;n en un servidor local</h3><p>Para iniciar el juego directamente en un navegador podr&#xED;as escribir este comando en el mismo directorio &quot;proyecto&quot;:</p><pre><code>npm start</code></pre>
+<p>A continuaci&#xF3;n se va a abrir el navegador y tu juego.</p><p><img alt="web" src="exportar_juegos.assets/web.png"></p><p>Ten en cuenta que pilas no funciona directamente abriendo el archivo index.html en un navegador, la raz&#xF3;n por la que no puede andar directamente es porque necesita cargar archivos mientras se inicializa usando ajax (algo que los navegadores no pueden hacer si se inicializan abriendo un archivo .html de forma directa).</p><h3 id="ejecutar-tu-juego-en-electron-de-forma-offline">Ejecutar tu juego en electron de forma offline</h3><p>Otra opci&#xF3;n es lanzar el juego como si se tratara de una aplicaci&#xF3;n dedicada, sin necesidad de un navegador.</p><p>Para eso, tendr&#xED;as que ejecutar este comando:</p><pre><code>npm run electron</code></pre>
+<p><img alt="electron-ejecucion" src="exportar_juegos.assets/electron-ejecucion.png"></p><h3 id="c&#xF3;mo-crear-versiones-empaquetas-para-distribuir-exe-dmg-etc">C&#xF3;mo crear versiones empaquetas para distribuir (.exe, dmg etc)</h3><p>Una opci&#xF3;n muy solicitada a la hora de exportar juegos es poder hacerlos completamente portables, y que la persona que recibe el juego no tenga que instalar o configurar nada para jugar al juego, solamente hacer &quot;doble click&quot; en un archivo y jugar.</p><p>Pilas permite hacer esto mediante la herramienta que mencionamos antes llamada electron y una serie de scripts.</p><p>Tomemos el ejemplo m&#xE1;s solicitado, hagamos que nuestro juego se pueda compilar para windows y distribuirse como un archivo .exe. Lo que tenemos que hacer es ejecutar estos comandos:</p><pre><code>npm install electron-packager --save-dev
 
-./node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32
-</code></pre><p>El comando demorar&#xE1; unos segundos, cuando termine aparecer&#xE1; un mensaje indicando que los archivos est&#xE1;n listos:</p>
-<p><img src="exportar_juegos.assets/image-20190630234419298.png" alt="image-20190630234419298"></p>
-<p>En mi caso, los archivos se generaron en un directorio llamado &quot;mijuego-win32-ia32&quot;. Ese directorio completo es el que se puede entregar a los usuarios de windows para que puedan ejecutar el juego haciendo doble click en el archivo .exe:</p>
-<p><img src="exportar_juegos.assets/juego-exe.png" alt="juego-exe"></p>
-<p>Si adem&#xE1;s de windows est&#xE1;s buscando llevar tu juego a otras plataformas como gnu/linux, mac/osx o raspberry tambi&#xE9;n hay un par&#xE1;metro para lanzar la compilaci&#xF3;n en todas las plataformas soportadas as&#xED;:</p>
-<pre><code>./node_modules/.bin/electron-packager . mijuego --all
-</code></pre><p>Hay varios par&#xE1;metros m&#xE1;s, pero para no extendernos mucho te dejamos la <a href="https://github.com/electron-userland/electron-packager#usage" target="_blank">documentaci&#xF3;n detallada de electron-packager</a></p>
-<p>Por cierto, si quieres investigar exactamente qu&#xE9; hacen estos scripts podr&#xED;as profundizar tu investigaci&#xF3;n mirando la <a href="https://electronjs.org/docs/tutorial/application-distribution" target="_blank">documentaci&#xF3;n de electron sobre distribuci&#xF3;n de binarios</a> ya que se describe cada uno de los pasos de compilaci&#xF3;n de forma manual.</p>
-<h3 id="c&#xF3;mo-llevar-mi-juego-a-celulares-tablets-y-tiendas-oficiales-de-apple-o-google">C&#xF3;mo llevar mi juego a celulares, tablets y tiendas oficiales de apple o google</h3>
-<p>Pilas incluye una forma sencilla de probar juegos en celulares y tablets, si solo quieres probar tus juegos te recomendamos mirar ah&#xED; primero.</p>
-<p>Ahora bien, si en realidad lo que buscas es llevar tu juego de forma permanente a un celular o tablet, ya sea para t&#xED;, amigos o para publicar en un tienda oficial, lo que necesitas es instalar cordova, los SDK oficiales para tu tipo de dispositivo (android o ios) y compilar tu juego por completo.</p>
-<pre><code>npm install cordova -g
+./node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32</code></pre>
+<p>El comando demorar&#xE1; unos segundos, cuando termine aparecer&#xE1; un mensaje indicando que los archivos est&#xE1;n listos:</p><p><img alt="image-20190630234419298" src="exportar_juegos.assets/image-20190630234419298.png"></p><p>En mi caso, los archivos se generaron en un directorio llamado &quot;mijuego-win32-ia32&quot;. Ese directorio completo es el que se puede entregar a los usuarios de windows para que puedan ejecutar el juego haciendo doble click en el archivo .exe:</p><p><img alt="juego-exe" src="exportar_juegos.assets/juego-exe.png"></p><p>Si adem&#xE1;s de windows est&#xE1;s buscando llevar tu juego a otras plataformas como gnu/linux, mac/osx o raspberry tambi&#xE9;n hay un par&#xE1;metro para lanzar la compilaci&#xF3;n en todas las plataformas soportadas as&#xED;:</p><pre><code>./node_modules/.bin/electron-packager . mijuego --all</code></pre>
+<p>Hay varios par&#xE1;metros m&#xE1;s, pero para no extendernos mucho te dejamos la <a href="https://github.com/electron-userland/electron-packager#usage" target="_blank">documentaci&#xF3;n detallada de electron-packager</a></p><p>Por cierto, si quieres investigar exactamente qu&#xE9; hacen estos scripts podr&#xED;as profundizar tu investigaci&#xF3;n mirando la <a href="https://electronjs.org/docs/tutorial/application-distribution" target="_blank">documentaci&#xF3;n de electron sobre distribuci&#xF3;n de binarios</a> ya que se describe cada uno de los pasos de compilaci&#xF3;n de forma manual.</p><h3 id="c&#xF3;mo-llevar-mi-juego-a-celulares-tablets-y-tiendas-oficiales-de-apple-o-google">C&#xF3;mo llevar mi juego a celulares, tablets y tiendas oficiales de apple o google</h3><p>Pilas incluye una forma sencilla de probar juegos en celulares y tablets, si solo quieres probar tus juegos te recomendamos mirar ah&#xED; primero.</p><p>Ahora bien, si en realidad lo que buscas es llevar tu juego de forma permanente a un celular o tablet, ya sea para t&#xED;, amigos o para publicar en un tienda oficial, lo que necesitas es instalar cordova, los SDK oficiales para tu tipo de dispositivo (android o ios) y compilar tu juego por completo.</p><pre><code>npm install cordova -g
 
-cordova create cordova
-</code></pre><p>Luego, tendr&#xED;as que mover todos los archivos del directorio &quot;proyecto&quot; (index.html, pilas-engine.js etc&#x2026;) dentro del directorio &quot;cordova/www&quot;.</p>
-<p>Por &#xFA;ltimo, tendr&#xED;as que agregar la plataforma principal (android o ios) y luego iniciar la compilaci&#xF3;n:</p>
-<p>Por ejemplo, para ios:</p>
-<pre><code>cd cordova
+cordova create cordova</code></pre>
+<p>Luego, tendr&#xED;as que mover todos los archivos del directorio &quot;proyecto&quot; (index.html, pilas-engine.js etc&#x2026;) dentro del directorio &quot;cordova/www&quot;.</p><p>Por &#xFA;ltimo, tendr&#xED;as que agregar la plataforma principal (android o ios) y luego iniciar la compilaci&#xF3;n:</p><p>Por ejemplo, para ios:</p><pre><code>cd cordova
 cordova platform add ios
 cordova build ios
-</code></pre><p>y luego abrir el proyecto desde el directorio &quot;platforms/ios&quot; en xcode y ejecutar: </p>
-<p><img src="exportar_juegos.assets/xcode.png" alt="xcode"></p>
-<p>Y para android:</p>
-<pre><code>cd cordova
+</code></pre>
+<p>y luego abrir el proyecto desde el directorio &quot;platforms/ios&quot; en xcode y ejecutar:</p><p><img alt="xcode" src="exportar_juegos.assets/xcode.png"></p><p>Y para android:</p><pre><code>cd cordova
 cordova platform add android
-cordova build android
-</code></pre><p>y luego abrir el proyecto del directorio &quot;platforms/android&quot; con Android Studio y compilar.</p>
-
+cordova build android</code></pre>
+<p>y luego abrir el proyecto del directorio &quot;platforms/android&quot; con Android Studio y compilar.</p>
                                 
                                 </section>
                             
@@ -466,7 +432,7 @@ cordova build android
 
             
                 
-                <a href="eventos.html" class="navigation navigation-prev " aria-label="Previous page: Eventos">
+                <a href="dibujado_en_pantalla.html" class="navigation navigation-prev " aria-label="Previous page: Dibujado simple en pantalla">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -482,7 +448,7 @@ cordova build android
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Cómo exportar juegos","level":"1.15","depth":1,"next":{"title":"Pilas como biblioteca","level":"1.16","depth":1,"path":"pilas_como_biblioteca.md","ref":"pilas_como_biblioteca.md","articles":[]},"previous":{"title":"Eventos","level":"1.14","depth":1,"path":"eventos.md","ref":"eventos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"exportar_juegos.md","mtime":"2019-07-01T04:28:09.968Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T05:30:20.498Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Cómo exportar juegos","level":"1.16","depth":1,"next":{"title":"Pilas como biblioteca","level":"1.17","depth":1,"path":"pilas_como_biblioteca.md","ref":"pilas_como_biblioteca.md","articles":[]},"previous":{"title":"Dibujado simple en pantalla","level":"1.15","depth":1,"path":"dibujado_en_pantalla.md","ref":"dibujado_en_pantalla.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"exportar_juegos.md","mtime":"2019-07-01T19:39:06.754Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-07-29T03:43:21.149Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

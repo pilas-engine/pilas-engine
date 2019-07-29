@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <title>El intérprete · Manual de Pilas Engine 2</title>
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="generator" content="GitBook 3.2.0">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -271,7 +271,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="exportar_juegos.html">
+        <li class="chapter " data-level="1.15" data-path="dibujado_en_pantalla.html">
+            
+                <a href="dibujado_en_pantalla.html">
+            
+                    
+                    Dibujado simple en pantalla
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="exportar_juegos.html">
             
                 <a href="exportar_juegos.html">
             
@@ -284,7 +297,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.17" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -375,46 +388,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="el-int&#xE9;rprete">El int&#xE9;rprete</h1>
-<p>Cuando se habla de programaci&#xF3;n generalmente se dice que la computadora sigue nuestras &#xF3;rdenes, que podemos pedirle que haga lo que nosotros queremos y de qu&#xE9; forma tiene que hacer cada cosa.</p>
-<p>Eso es cierto, de hecho, por eso para controlar las computadores tenemos que aprender al menos un &quot;lenguaje&quot; (como javascript) que entienda la computadora para poder pedirle cosas.</p>
-<p>El int&#xE9;rprete es como un &quot;canal de chat&quot;, en donde podemos comunicarnos directamente con la computadora y esperar respuestas.</p>
-<p>Para mostrar brevemente lo que puede hacer el int&#xE9;rprete puls&#xE1; el bot&#xF3;n &quot;Ejecutar&quot;, para poner el juego en funcionamiento y luego abr&#xED; el int&#xE9;rprete:</p>
-<p><img src="interprete.assets/image-20181225155449714-5764089.png" alt="image-20181225155449714"></p>
-<p>Justo a la derecha de esa flechita az&#xFA;l, escrib&#xED; un mensaje algunos mensajes para ver si la computadora comprende lo que le pedimos:</p>
-<pre><code>2+2
-1231244123+399120930
-</code></pre><p>El int&#xE9;rprete va a responder a cada una de las cuentas con el resultado, como si fuera una calculadora aritm&#xE9;tica.</p>
-<p>Sin embargo, hace m&#xE1;s que eso, si le pedimos incorrectamente algo nos dar&#xE1; un mensaje de error:</p>
-<pre><code>2 + numero
-</code></pre><p><img src="interprete.assets/image-20181225160605415-5764765.png" alt="image-20181225160605415"></p>
-<p>Y esto est&#xE1; bien, si bien el texto rojo parece algo grave, no lo es. La computadora nos explica que no sabe de que se trata &quot;numero&quot; y por lo tanto no sabr&#xED;a decirnos el resultado de esa cuenta.</p>
-<p>Si le indicamos que el &quot;numero&quot; es, por ejemplo <code>10</code> s&#xED; va a poder decirnos el resultado:</p>
-<pre><code>numero = 10
-2 + numero
-</code></pre><p><img src="interprete.assets/image-20181225160853765-5764933.png" alt="image-20181225160853765"></p>
-<p>&#xA1;Claro!, el resultado es <code>12</code> ya que creamos una variable llamada &quot;numero&quot; con el valor de 10.</p>
-<h2 id="accediendo-a-las-variables-pilas-y-actores">Accediendo a las variables pilas y actores</h2>
-<p>Ahora bien, el int&#xE9;rprete no solo puede realizar cuentas aritm&#xE9;ticas, tambi&#xE9;n puede colocar objetos en la pantalla del juego, nos permite realizar pruebas y tambi&#xE9;n cambiar cosas.</p>
-<p>Existe una variable declarada por el propio entorno llama &quot;pilas&quot;. Esta variable nos permite acceder a toda la funcionalidad de pilas de forma &quot;program&#xE1;tica&quot;.</p>
-<p>Hagamos una prueba, escrib&#xED;:</p>
-<pre><code>nave = pilas.actores.nave()
-</code></pre><p><img src="interprete.assets/image-20181225161330731-5765210.png" alt="image-20181225161330731"></p>
-<p>Cuando pulses &quot;enter&quot; deber&#xE1;n pasar dos cosas. Por un lado, aparecer&#xE1; un actor nuevo en la pantalla y por el otro, el int&#xE9;rprete nos dir&#xE1; <code>&lt;nave en (0, 0)&gt;</code>:</p>
-<p><img src="interprete.assets/image-20181225161717860-5765437.png" alt="image-20181225161717860"></p>
-<p>Si haces click en la pantalla, vas a notar que la nave est&#xE1; &quot;viva&quot;, se puede mover y disparar usando el teclado.</p>
-<p>Sin embargo, tambi&#xE9;n se va a poder controlar desde el int&#xE9;rprete, usando c&#xF3;digo.</p>
-<p>Escrib&#xED; lo siguiente para realizar m&#xE1;s pruebas:</p>
-<pre><code>nave.escala = 2
+                                <h1 id="el-int&#xE9;rprete">El int&#xE9;rprete</h1><p>Cuando se habla de programaci&#xF3;n generalmente se dice que la computadora sigue nuestras &#xF3;rdenes, que podemos pedirle que haga lo que nosotros queremos y de qu&#xE9; forma tiene que hacer cada cosa.</p><p>Eso es cierto, de hecho, por eso para controlar las computadores tenemos que aprender al menos un &quot;lenguaje&quot; (como javascript) que entienda la computadora para poder pedirle cosas.</p><p>El int&#xE9;rprete es como un &quot;canal de chat&quot;, en donde podemos comunicarnos directamente con la computadora y esperar respuestas.</p><p>Para mostrar brevemente lo que puede hacer el int&#xE9;rprete puls&#xE1; el bot&#xF3;n &quot;Ejecutar&quot;, para poner el juego en funcionamiento y luego abr&#xED; el int&#xE9;rprete:</p><p><img alt="image-20181225155449714" src="interprete.assets/image-20181225155449714-5764089.png"></p><p>Justo a la derecha de esa flechita az&#xFA;l, escrib&#xED; un mensaje algunos mensajes para ver si la computadora comprende lo que le pedimos:</p><pre><code>2+2
+1231244123+399120930</code></pre>
+<p>El int&#xE9;rprete va a responder a cada una de las cuentas con el resultado, como si fuera una calculadora aritm&#xE9;tica.</p><p>Sin embargo, hace m&#xE1;s que eso, si le pedimos incorrectamente algo nos dar&#xE1; un mensaje de error:</p><pre><code>2 + numero</code></pre>
+<p><img alt="image-20181225160605415" src="interprete.assets/image-20181225160605415-5764765.png"></p><p>Y esto est&#xE1; bien, si bien el texto rojo parece algo grave, no lo es. La computadora nos explica que no sabe de que se trata &quot;numero&quot; y por lo tanto no sabr&#xED;a decirnos el resultado de esa cuenta.</p><p>Si le indicamos que el &quot;numero&quot; es, por ejemplo <code>10</code> s&#xED; va a poder decirnos el resultado:</p><pre><code>numero = 10
+2 + numero</code></pre>
+<p><img alt="image-20181225160853765" src="interprete.assets/image-20181225160853765-5764933.png"></p><p>&#xA1;Claro!, el resultado es <code>12</code> ya que creamos una variable llamada &quot;numero&quot; con el valor de 10.</p><h2 id="accediendo-a-las-variables-pilas-y-actores">Accediendo a las variables pilas y actores</h2><p>Ahora bien, el int&#xE9;rprete no solo puede realizar cuentas aritm&#xE9;ticas, tambi&#xE9;n puede colocar objetos en la pantalla del juego, nos permite realizar pruebas y tambi&#xE9;n cambiar cosas.</p><p>Existe una variable declarada por el propio entorno llama &quot;pilas&quot;. Esta variable nos permite acceder a toda la funcionalidad de pilas de forma &quot;program&#xE1;tica&quot;.</p><p>Hagamos una prueba, escrib&#xED;:</p><pre><code>nave = pilas.actores.nave()</code></pre>
+<p><img alt="image-20181225161330731" src="interprete.assets/image-20181225161330731-5765210.png"></p><p>Cuando pulses &quot;enter&quot; deber&#xE1;n pasar dos cosas. Por un lado, aparecer&#xE1; un actor nuevo en la pantalla y por el otro, el int&#xE9;rprete nos dir&#xE1; <code>&lt;nave en (0, 0)&gt;</code>:</p><p><img alt="image-20181225161717860" src="interprete.assets/image-20181225161717860-5765437.png"></p><p>Si haces click en la pantalla, vas a notar que la nave est&#xE1; &quot;viva&quot;, se puede mover y disparar usando el teclado.</p><p>Sin embargo, tambi&#xE9;n se va a poder controlar desde el int&#xE9;rprete, usando c&#xF3;digo.</p><p>Escrib&#xED; lo siguiente para realizar m&#xE1;s pruebas:</p><pre><code>nave.escala = 2
 nave.rotacion = 90
-nave.decir(&quot;hola&quot;)
-</code></pre><p><img src="interprete.assets/image-20181225161954962-5765595.png" alt="image-20181225161954962"></p>
-<p>Esto es bastante &#xFA;til, porque el c&#xF3;digo que escribimos en el int&#xE9;rprete tambi&#xE9;n se puede trasladar al editor. Si tenemos dudas sobre alguna funci&#xF3;n o forma de hacer algo en pilas podemos probar en el int&#xE9;rprete, y si todo sale bien, llevarlo al editor y que forma parte de nuestro juego.</p>
-<p>Tambi&#xE9;n existe otra variable llamada &quot;actores&quot; desde donde podemos acceder a otros actores en la escena. Para usar esta variable simplemente escrib&#xED; &quot;actores.&quot; seguido del nombre del actor que quieras programar.</p>
-<p>Vas a notar que el int&#xE9;rprete viene con una funcionalidad completado de c&#xF3;digo bastante &#xFA;til, as&#xED; que no hace falta escribir todas las letras cada vez.</p>
-<p>Por ejemplo, en mi caso, tengo una escena con 3 actores, as&#xED; que el int&#xE9;rprete ya me adelanta c&#xF3;mo se llaman esos actores con su completado de c&#xF3;digo:</p>
-<p><img src="interprete.assets/image-20181225162435049-5765875.png" alt="image-20181225162435049"></p>
-
+nave.decir(&quot;hola&quot;)</code></pre>
+<p><img alt="image-20181225161954962" src="interprete.assets/image-20181225161954962-5765595.png"></p><p>Esto es bastante &#xFA;til, porque el c&#xF3;digo que escribimos en el int&#xE9;rprete tambi&#xE9;n se puede trasladar al editor. Si tenemos dudas sobre alguna funci&#xF3;n o forma de hacer algo en pilas podemos probar en el int&#xE9;rprete, y si todo sale bien, llevarlo al editor y que forma parte de nuestro juego.</p><p>Tambi&#xE9;n existe otra variable llamada &quot;actores&quot; desde donde podemos acceder a otros actores en la escena. Para usar esta variable simplemente escrib&#xED; &quot;actores.&quot; seguido del nombre del actor que quieras programar.</p><p>Vas a notar que el int&#xE9;rprete viene con una funcionalidad completado de c&#xF3;digo bastante &#xFA;til, as&#xED; que no hace falta escribir todas las letras cada vez.</p><p>Por ejemplo, en mi caso, tengo una escena con 3 actores, as&#xED; que el int&#xE9;rprete ya me adelanta c&#xF3;mo se llaman esos actores con su completado de c&#xF3;digo:</p><p><img alt="image-20181225162435049" src="interprete.assets/image-20181225162435049-5765875.png"></p>
                                 
                                 </section>
                             
@@ -457,7 +440,7 @@ nave.decir(&quot;hola&quot;)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"El intérprete","level":"1.3","depth":1,"next":{"title":"Autómatas y estados","level":"1.4","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"previous":{"title":"Primeros pasos","level":"1.2","depth":1,"path":"primeros_pasos.md","ref":"primeros_pasos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"interprete.md","mtime":"2019-05-11T00:43:53.107Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-01T05:30:20.498Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"El intérprete","level":"1.3","depth":1,"next":{"title":"Autómatas y estados","level":"1.4","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"previous":{"title":"Primeros pasos","level":"1.2","depth":1,"path":"primeros_pasos.md","ref":"primeros_pasos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"interprete.md","mtime":"2019-02-12T18:05:23.666Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-07-29T03:43:21.149Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
