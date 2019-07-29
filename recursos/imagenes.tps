@@ -1351,7 +1351,6 @@
         <key>fileList</key>
         <array>
             <filename>imagenes</filename>
-            <filename>imagenes/explosion</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
