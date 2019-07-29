@@ -235,31 +235,6 @@
 					}
 				},
 				{
-					"filename": "explosion_014",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 52,
-						"y": 0,
-						"w": 145,
-						"h": 144
-					},
-					"frame": {
-						"x": 874,
-						"y": 1,
-						"w": 145,
-						"h": 144
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "decoracion/decoracion_arbol_2",
 					"rotated": false,
 					"trimmed": false,
@@ -460,31 +435,6 @@
 					}
 				},
 				{
-					"filename": "explosion_006",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 64,
-						"y": 16,
-						"w": 122,
-						"h": 111
-					},
-					"frame": {
-						"x": 286,
-						"y": 542,
-						"w": 122,
-						"h": 111
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "explosion/explosion_015",
 					"rotated": false,
 					"trimmed": true,
@@ -510,57 +460,7 @@
 					}
 				},
 				{
-					"filename": "explosion_015",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 48,
-						"y": 0,
-						"w": 137,
-						"h": 144
-					},
-					"frame": {
-						"x": 1,
-						"y": 1124,
-						"w": 137,
-						"h": 144
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "explosion/explosion_013",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 56,
-						"y": 1,
-						"w": 141,
-						"h": 143
-					},
-					"frame": {
-						"x": 874,
-						"y": 147,
-						"w": 141,
-						"h": 143
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion_013",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -660,31 +560,6 @@
 					}
 				},
 				{
-					"filename": "explosion_012",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 56,
-						"y": 2,
-						"w": 139,
-						"h": 141
-					},
-					"frame": {
-						"x": 553,
-						"y": 594,
-						"w": 139,
-						"h": 141
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "interfaz/interfaz_linea",
 					"rotated": false,
 					"trimmed": true,
@@ -711,31 +586,6 @@
 				},
 				{
 					"filename": "explosion/explosion_011",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 57,
-						"y": 3,
-						"w": 138,
-						"h": 140
-					},
-					"frame": {
-						"x": 105,
-						"y": 915,
-						"w": 138,
-						"h": 140
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion_011",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -860,57 +710,7 @@
 					}
 				},
 				{
-					"filename": "explosion_010",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 57,
-						"y": 6,
-						"w": 137,
-						"h": 134
-					},
-					"frame": {
-						"x": 293,
-						"y": 785,
-						"w": 137,
-						"h": 134
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "explosion/explosion_009",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 59,
-						"y": 7,
-						"w": 134,
-						"h": 131
-					},
-					"frame": {
-						"x": 432,
-						"y": 737,
-						"w": 134,
-						"h": 131
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion_009",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -985,57 +785,7 @@
 					}
 				},
 				{
-					"filename": "explosion_008",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 60,
-						"y": 9,
-						"w": 133,
-						"h": 126
-					},
-					"frame": {
-						"x": 245,
-						"y": 921,
-						"w": 133,
-						"h": 126
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "explosion/explosion_007",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 61,
-						"y": 13,
-						"w": 130,
-						"h": 119
-					},
-					"frame": {
-						"x": 432,
-						"y": 870,
-						"w": 130,
-						"h": 119
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion_007",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1160,57 +910,7 @@
 					}
 				},
 				{
-					"filename": "explosion_005",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 67,
-						"y": 17,
-						"w": 117,
-						"h": 107
-					},
-					"frame": {
-						"x": 672,
-						"y": 249,
-						"w": 117,
-						"h": 107
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "explosion/explosion_004",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 70,
-						"y": 19,
-						"w": 111,
-						"h": 98
-					},
-					"frame": {
-						"x": 668,
-						"y": 358,
-						"w": 111,
-						"h": 98
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion_004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1411,31 +1111,6 @@
 				},
 				{
 					"filename": "explosion/explosion_003",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 79,
-						"y": 26,
-						"w": 96,
-						"h": 86
-					},
-					"frame": {
-						"x": 863,
-						"y": 292,
-						"w": 96,
-						"h": 86
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion_003",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2211,31 +1886,6 @@
 				},
 				{
 					"filename": "explosion/explosion_002",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 86,
-						"y": 33,
-						"w": 82,
-						"h": 72
-					},
-					"frame": {
-						"x": 432,
-						"y": 991,
-						"w": 82,
-						"h": 72
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion_002",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -4110,31 +3760,6 @@
 					}
 				},
 				{
-					"filename": "explosion_001",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 256,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 110,
-						"y": 51,
-						"w": 31,
-						"h": 29
-					},
-					"frame": {
-						"x": 898,
-						"y": 1357,
-						"w": 31,
-						"h": 29
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "nave/nave_avanza_2",
 					"rotated": false,
 					"trimmed": true,
@@ -4940,6 +4565,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:5895c4708164a6816e455fd994fbccb2:e06b05d50c9e5a879fba443e9d3e0100:090f076f11af587180320e0b2e5117de$"
+		"smartupdate": "$TexturePacker:SmartUpdate:70b7e62755d26baa12446dc839474ed9:cd54a228d711b807e2c711c3264b6115:090f076f11af587180320e0b2e5117de$"
 	}
 }
