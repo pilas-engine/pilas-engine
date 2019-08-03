@@ -6,6 +6,7 @@ import { computed } from "@ember/object";
 export default Component.extend({
   mostrar: false,
   proyecto: service(),
+  tagName: "span",
 
   hacer_foco() {
     this.element.getElementsByTagName("input")[0].focus();

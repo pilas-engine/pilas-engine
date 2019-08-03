@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:6c8699810627286b51fadf36952e018b:75423a249f19bca8dbf365b881e8c0f1:467c798a4e4a5265189118ecb556e0a2$
+   $TexturePacker:SmartUpdate:e866f0663b6676ecfe0153f17e49267f:763c3cc52413194ad9746f0180d099d5:467c798a4e4a5265189118ecb556e0a2$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -32,6 +32,7 @@
 .desplegar {width:24px; height:24px; background-position: -675px -477px}
 .detener {width:24px; height:24px; background-position: -701px -477px}
 .duplicar {width:16px; height:16px; background-position: -986px -468px}
+.editar {width:16px; height:16px; background-position: -299px -489px}
 .ejecutar {width:24px; height:24px; background-position: -1085px -142px}
 .ejemplo-nave {width:180px; height:140px; background-position: -547px -1px}
 .ejemplos {width:25px; height:25px; background-position: -1036px -445px}
@@ -94,7 +95,7 @@
 .icono_actor_plataforma {width:10px; height:10px; background-position: -145px -498px}
 .icono_actor_suelo {width:10px; height:10px; background-position: -157px -498px}
 .icono_actor_techo {width:10px; height:10px; background-position: -157px -498px}
-.imagen {width:16px; height:16px; background-position: -299px -489px}
+.imagen {width:16px; height:16px; background-position: -1093px -19px}
 .info {width:24px; height:24px; background-position: -1063px -440px}
 .info_squared {width:25px; height:25px; background-position: -745px -465px}
 .manual {width:25px; height:25px; background-position: -772px -465px}
@@ -107,7 +108,7 @@
 .panel-derecho-off {width:18px; height:14px; background-position: -357px -489px}
 .panel-derecho-on {width:18px; height:14px; background-position: -1076px -295px}
 .panel-izquierdo-off {width:18px; height:14px; background-position: -1085px -194px}
-.panel-izquierdo-on {width:18px; height:14px; background-position: -1093px -19px}
+.panel-izquierdo-on {width:18px; height:14px; background-position: -1093px -37px}
 .pausa {width:24px; height:24px; background-position: -1084px -466px}
 .phaser {width:70px; height:70px; background-position: -1013px -142px}
 .pilas_logo_128 {width:128px; height:128px; background-position: -729px -285px}
