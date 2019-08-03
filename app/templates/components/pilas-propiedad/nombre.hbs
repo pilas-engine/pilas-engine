@@ -1,5 +1,40 @@
 {{yield}}
-<div class="pv1 flex texto">
+<div class="pv1 flex texto relative">
   <div class="w-50">{{etiqueta "nombre"}}</div>
-  <div class="w-50 pb2">{{nombre}}</div>
+  <div class="w-50 pb2 pointer" {{action "cambiarNombre"}}>{{nombre}}</div>
+
+  {{#if mostrar}}
+    <div class="absolute ba borde shadow-4 pa2 top-1 left-2 right-1 z-9999 bg-fondo texto shadow-1">
+
+      {{input
+        enter=(action "confirmar")
+        value=nombreSugerido
+        type="text"
+        class="input w-100 v-top pa1 br2"
+      }}
+
+      {{nombreSugerido}}
+
+      [{{invalido_por_duplicado}}]
+
+      <div class="flex pt2">
+        <div class="flex1"></div>
+
+        <div class="">
+          <button class="boton" {{action "ocultar"}}>Cancelar</button>
+          <button class="boton" {{action "confirmar"}}>OK</button>
+        </div>
+      </div>
+
+      {{#if invalido_por_duplicado}}
+        <div class="red pt2">
+          Nombre existente
+        </div>
+      {{/if}}
+
+    </div>
+
+    <div role="button" class="fixed z-1 absolute--fill pointer" {{action "ocultar"}}></div>
+  {{/if}}
+
 </div>
