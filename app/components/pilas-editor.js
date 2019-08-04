@@ -613,6 +613,25 @@ export default Component.extend({
 
     expandir_codigo() {
       this.bus.trigger("expandir_codigo");
+    },
+
+    cuando_cambia_un_nombre_de_actor(nombre) {
+      // Intenta recargar el editor, para eso vuelve a seleccionar el actor
+      // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
+      let actor = this.obtenerDetalleDeActorPorIndice(this.seleccion);
+
+      this.set("instancia_seleccionada", actor);
+      this.set("tipo_de_la_instancia_seleccionada", "actor");
+      this.set("codigo", this.obtener_codigo_para_el_actor(actor));
+
+      let r = Math.random();
+      this.set("tituloDelCodigo", `Código del actor: ${this.seleccion} ${r}`);
+
+      /*
+      this.bus.trigger("selecciona_actor_desde_el_editor", {
+        id: this.seleccion
+      });
+      */
     }
   }
 });

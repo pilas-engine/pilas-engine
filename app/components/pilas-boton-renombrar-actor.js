@@ -54,6 +54,7 @@ export default Component.extend({
 
       this.proyecto.renombrar_actor(this.nombre, this.nombreSugerido);
       this.send("ocultar");
+      this.cuando_cambia(this.nombre);
     }
   }
 });
