@@ -615,7 +615,7 @@ export default Component.extend({
       this.bus.trigger("expandir_codigo");
     },
 
-    cuando_cambia_un_nombre_de_actor(nombre) {
+    cuando_cambia_un_nombre_de_actor(/*nombre*/) {
       // Intenta recargar el editor, para eso vuelve a seleccionar el actor
       // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
       let actor = this.obtenerDetalleDeActorPorIndice(this.seleccion);
