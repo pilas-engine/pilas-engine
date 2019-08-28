@@ -1,7 +1,8 @@
 declare class Actores {
     pilas: Pilas;
     constructor(pilas: any);
-    crear_actor(nombre: string): any;
+    crear_actor(nombre: string, clase?: any): any;
+    vincular(nombre: string, clase: any): void;
     actor(): any;
     aceituna(x?: number, y?: number): any;
     caja(): any;

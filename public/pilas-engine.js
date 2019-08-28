@@ -15,8 +15,11 @@ var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
     }
-    Actores.prototype.crear_actor = function (nombre) {
-        var clase = window[nombre];
+    Actores.prototype.crear_actor = function (nombre, clase) {
+        if (clase === void 0) { clase = null; }
+        if (!clase) {
+            clase = window[nombre];
+        }
         var actor = new clase(this.pilas);
         var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
         if (!p.nombre) {
@@ -26,6 +29,15 @@ var Actores = (function () {
         actor.pre_iniciar(p);
         actor.iniciar();
         return actor;
+    };
+    Actores.prototype.vincular = function (nombre, clase) {
+        var _this = this;
+        if (!nombre || !clase) {
+            throw new Error("Tiene que especificar el nombre del actor y la clase para vincularlo.");
+        }
+        this[nombre] = function () {
+            return _this.crear_actor(nombre, clase);
+        };
     };
     Actores.prototype.actor = function () {
         return this.crear_actor("Actor");
@@ -6161,6 +6173,12 @@ var ModoCargador = (function (_super) {
         for (var i = 0; i < this.pilas.recursos.fuentes.length; i++) {
             var fuente = this.pilas.recursos.fuentes[i];
             this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
+        }
+        if (this.pilas.recursos.atlas) {
+            for (var i = 0; i < this.pilas.recursos.atlas.length; i++) {
+                var atlas = this.pilas.recursos.atlas[i];
+                this.load.multiatlas(atlas.nombre, atlas.archivo, atlas.ruta);
+            }
         }
         this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
         this.load.json("ceferino", "ceferino.scon");

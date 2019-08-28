@@ -28,6 +28,13 @@ class ModoCargador extends Modo {
       this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
     }
 
+    if (this.pilas.recursos.atlas) {
+      for (let i = 0; i < this.pilas.recursos.atlas.length; i++) {
+        let atlas = this.pilas.recursos.atlas[i];
+        this.load.multiatlas(atlas.nombre, atlas.archivo, atlas.ruta);
+      }
+    }
+
     this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
     this.load.json("ceferino", "ceferino.scon");
 

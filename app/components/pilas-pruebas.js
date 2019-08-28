@@ -22,16 +22,35 @@ export default Component.extend({
         escenas: [
           {
             nombre: NOMBRE_DE_LA_ESCENA,
-            codigo: `class ${NOMBRE_DE_LA_ESCENA} extends Escena {
+            codigo: `
+
+
+            class ActorDePrueba extends Actor {
+              iniciar() {
+
+              }
+
+              actualizar() {
+                this.rotacion += 1;
+              }
+            }
+
+
+            class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
                 let ceferino = this.pilas.actores.pizarra();
+                this.pilas.actores.vincular('actor_de_prueba', ActorDePrueba);
+                this.pilas.actores.actor_de_prueba();
               }
 
               actualizar() {
                 this.pilas.observar("posicion", "1")
               }
 
-            }`
+            }
+
+
+            `
           }
         ],
         actores: []

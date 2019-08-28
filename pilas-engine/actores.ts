@@ -5,8 +5,11 @@ class Actores {
     this.pilas = pilas;
   }
 
-  crear_actor(nombre: string) {
-    let clase = window[nombre];
+  crear_actor(nombre: string, clase: any = null) {
+    if (!clase) {
+      clase = window[nombre];
+    }
+
     let actor = new clase(this.pilas);
 
     // Toma las propiedades del actor pero como una extensión de las
@@ -21,6 +24,16 @@ class Actores {
     actor.pre_iniciar(p);
     actor.iniciar();
     return actor;
+  }
+
+  vincular(nombre: string, clase: any) {
+    if (!nombre || !clase) {
+      throw new Error("Tiene que especificar el nombre del actor y la clase para vincularlo.");
+    }
+
+    this[nombre] = () => {
+      return this.crear_actor(nombre, clase);
+    };
   }
 
   actor() {
