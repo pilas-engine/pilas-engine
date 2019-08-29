@@ -72,6 +72,55 @@ declare class Colores {
     readonly colores: string[];
     generar(rojo: number, verde: number, azul: number): number;
 }
+declare class Comportamiento {
+    pilas: Pilas;
+    actor: Actor;
+    constructor(pilas: Pilas, actor: Actor);
+    iniciar(parametros: any): void;
+    actualizar(): void;
+    terminar(): void;
+}
+declare class ComportamientoAparecer extends Comportamiento {
+    velocidad: number;
+    iniciar(argumentos: any): void;
+    actualizar(): boolean;
+    terminar(): void;
+}
+declare class ComportamientoDesaparecer extends Comportamiento {
+    velocidad: number;
+    iniciar(argumentos: any): void;
+    actualizar(): boolean;
+    terminar(): void;
+}
+declare class ComportamientoEliminar extends Comportamiento {
+    iniciar(): void;
+    actualizar(): boolean;
+    terminar(): void;
+}
+declare class ComportamientoMover extends Comportamiento {
+    demora: number;
+    destino_x: number;
+    destino_y: number;
+    dx: number;
+    dy: number;
+    tiempo: number;
+    iniciar(argumentos: any): void;
+    actualizar(): boolean;
+    terminar(): void;
+}
+declare class Comportamientos {
+    pilas: Pilas;
+    _comportamientos: any[];
+    constructor(pilas: any);
+    buscar(comportamiento: String): any;
+    generar_lista_de_similitudes(comportamiento: any): {
+        similitud: any;
+        comportamiento: any;
+    }[];
+    listar(): any[];
+    vincular(nombre: string, clase: any): void;
+    validar_si_existe(nombre: string): void;
+}
 declare class Control {
     private pilas;
     private _izquierda;
@@ -283,6 +332,7 @@ declare class Pilas {
     recursos: any;
     fisica: Fisica;
     habilidades: Habilidades;
+    comportamientos: Comportamientos;
     modo: any;
     _ancho: number;
     _alto: number;
@@ -380,6 +430,8 @@ declare class ActorBase {
     _id: any;
     _nombre: any;
     _habilidades: any[];
+    _comportamientos: Comportamiento[];
+    _comportamiento_actual: Comportamiento;
     _fondo: any;
     _fondo_imagen: string;
     _dialogo: any;
@@ -455,6 +507,9 @@ declare class ActorBase {
     tiene_etiqueta(etiqueta: string): boolean;
     generar_color_para_depurar(): number;
     pre_actualizar(): void;
+    actualizar_comportamientos(): void;
+    private _adoptar_siguiente_comportamiento;
+    hacer(nombre_del_comportamiento: any, argumentos: any): void;
     estado: string;
     actualizar(): void;
     actualizar_habilidades(): void;

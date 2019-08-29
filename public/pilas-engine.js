@@ -373,6 +373,171 @@ var Colores = (function () {
     };
     return Colores;
 }());
+var Comportamiento = (function () {
+    function Comportamiento(pilas, actor) {
+        this.pilas = pilas;
+        this.actor = actor;
+    }
+    Comportamiento.prototype.iniciar = function (parametros) { };
+    Comportamiento.prototype.actualizar = function () { };
+    Comportamiento.prototype.terminar = function () { };
+    return Comportamiento;
+}());
+var ComportamientoAparecer = (function (_super) {
+    __extends(ComportamientoAparecer, _super);
+    function ComportamientoAparecer() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.velocidad = 1;
+        return _this;
+    }
+    ComportamientoAparecer.prototype.iniciar = function (argumentos) {
+        if (argumentos) {
+            this.velocidad = argumentos.velocidad || 1;
+        }
+        else {
+            this.velocidad = 1;
+        }
+    };
+    ComportamientoAparecer.prototype.actualizar = function () {
+        this.actor.transparencia -= this.velocidad;
+        if (this.actor.transparencia <= 0) {
+            return true;
+        }
+    };
+    ComportamientoAparecer.prototype.terminar = function () { };
+    return ComportamientoAparecer;
+}(Comportamiento));
+var ComportamientoDesaparecer = (function (_super) {
+    __extends(ComportamientoDesaparecer, _super);
+    function ComportamientoDesaparecer() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.velocidad = 1;
+        return _this;
+    }
+    ComportamientoDesaparecer.prototype.iniciar = function (argumentos) {
+        if (argumentos) {
+            this.velocidad = argumentos.velocidad || 1;
+        }
+        else {
+            this.velocidad = 1;
+        }
+    };
+    ComportamientoDesaparecer.prototype.actualizar = function () {
+        this.actor.transparencia += this.velocidad;
+        if (this.actor.transparencia >= 100) {
+            return true;
+        }
+    };
+    ComportamientoDesaparecer.prototype.terminar = function () { };
+    return ComportamientoDesaparecer;
+}(Comportamiento));
+var ComportamientoEliminar = (function (_super) {
+    __extends(ComportamientoEliminar, _super);
+    function ComportamientoEliminar() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ComportamientoEliminar.prototype.iniciar = function () { };
+    ComportamientoEliminar.prototype.actualizar = function () {
+        this.actor.eliminar();
+        return true;
+    };
+    ComportamientoEliminar.prototype.terminar = function () { };
+    return ComportamientoEliminar;
+}(Comportamiento));
+var ComportamientoMover = (function (_super) {
+    __extends(ComportamientoMover, _super);
+    function ComportamientoMover() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.demora = 1;
+        _this.destino_x = 0;
+        _this.destino_y = 0;
+        return _this;
+    }
+    ComportamientoMover.prototype.iniciar = function (argumentos) {
+        if (!argumentos) {
+            argumentos = {};
+        }
+        this.destino_x = argumentos.x || 0;
+        this.destino_y = argumentos.y || 0;
+        this.demora = argumentos.demora || 1;
+        var pixels_x = this.destino_x - this.actor.x;
+        var pixels_y = this.destino_y - this.actor.y;
+        this.dx = pixels_x / 60 / this.demora;
+        this.dy = pixels_y / 60 / this.demora;
+        this.tiempo = 0;
+    };
+    ComportamientoMover.prototype.actualizar = function () {
+        this.tiempo += 1;
+        this.actor.x += this.dx;
+        this.actor.y += this.dy;
+        if (this.tiempo >= this.demora * 60) {
+            this.actor.x = this.destino_x;
+            this.actor.y = this.destino_y;
+            return true;
+        }
+    };
+    ComportamientoMover.prototype.terminar = function () { };
+    return ComportamientoMover;
+}(Comportamiento));
+var Comportamientos = (function () {
+    function Comportamientos(pilas) {
+        this.pilas = pilas;
+        this._comportamientos = [];
+        this.vincular("desaparecer", ComportamientoDesaparecer);
+        this.vincular("aparecer", ComportamientoAparecer);
+        this.vincular("eliminar", ComportamientoEliminar);
+        this.vincular("mover", ComportamientoMover);
+    }
+    Comportamientos.prototype.buscar = function (comportamiento) {
+        var lista = this.generar_lista_de_similitudes(comportamiento);
+        lista = lista.sort(function (a, b) {
+            if (a.similitud > b.similitud) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        });
+        return lista[0].comportamiento.clase;
+    };
+    Comportamientos.prototype.generar_lista_de_similitudes = function (comportamiento) {
+        var _this = this;
+        return this._comportamientos.map(function (h) {
+            return {
+                similitud: _this.pilas.utilidades.obtener_similaridad(h.nombre, comportamiento),
+                comportamiento: h
+            };
+        });
+    };
+    Comportamientos.prototype.listar = function () {
+        return this._comportamientos.map(function (h) { return h.nombre; });
+    };
+    Comportamientos.prototype.vincular = function (nombre, clase) {
+        var encontrado = this._comportamientos.find(function (comportamiento) {
+            return comportamiento.nombre === nombre;
+        });
+        if (!clase || !nombre) {
+            throw new Error("Para vincular un comportamiento tiene que especificar nombre y clase, envi\u00F3 nombre=" + nombre + " y clase=" + clase);
+        }
+        if (!encontrado) {
+            this._comportamientos.push({
+                nombre: nombre,
+                clase: clase
+            });
+        }
+        else {
+            console.warn("No se vincul\u00F3 la clase " + nombre + " porque ya estaba vinculada con anterioridad.");
+        }
+    };
+    Comportamientos.prototype.validar_si_existe = function (nombre) {
+        var todos_los_nombres = this._comportamientos.map(function (c) { return c.nombre; });
+        if (todos_los_nombres.indexOf(nombre) === -1) {
+            var alternativa = this.pilas.utilidades.obtener_mas_similar(nombre, todos_los_nombres);
+            throw new Error("No existe un comportamiento llamado \"" + nombre + "\", \u00BFquisiste decir \"" + alternativa + "\" o te falt\u00F3 vincularlo?");
+        }
+    };
+    return Comportamientos;
+}());
 var Control = (function () {
     function Control(pilas) {
         this.pilas = pilas;
@@ -966,7 +1131,7 @@ var Mensajes = (function () {
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {
-        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ");
+        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ").replace(/  at /g, "⇾ ");
         var detalle = {
             mensaje: error.message,
             stack: stacktrace
@@ -976,7 +1141,8 @@ var Mensajes = (function () {
         };
         var fuente_principal = {
             font: "16px verdana",
-            fill: "#ddd"
+            fill: "#ddd",
+            wordWrap: { width: 400, useAdvancedWrap: true }
         };
         var fuente_pequena = {
             font: "14px verdana"
@@ -1170,6 +1336,7 @@ var Pilas = (function () {
         this.animaciones = new Animaciones(this);
         this.fisica = new Fisica(this);
         this.habilidades = new Habilidades(this);
+        this.comportamientos = new Comportamientos(this);
         this.eventos = new Eventos(this);
     }
     Object.defineProperty(Pilas.prototype, "escena", {
@@ -1496,6 +1663,7 @@ var ActorBase = (function () {
         this._vivo = true;
         this._animacion_en_curso = "";
         this._es_texto = false;
+        this._comportamiento_actual = null;
         this._fondo = null;
         this._fondo_imagen = "";
         this._dialogo = null;
@@ -1554,6 +1722,7 @@ var ActorBase = (function () {
         this._id = propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
         this._nombre = propiedades.nombre;
         this.sensores = [];
+        this._comportamientos = [];
         this._figura_ancho = propiedades.figura_ancho;
         this._figura_alto = propiedades.figura_alto;
         this._figura_radio = propiedades.figura_radio;
@@ -1790,7 +1959,37 @@ var ActorBase = (function () {
         if (this.figura && this.sin_rotacion) {
             this.sprite.setAngularVelocity(0);
         }
+        this.actualizar_comportamientos();
         this.automata.actualizar();
+    };
+    ActorBase.prototype.actualizar_comportamientos = function () {
+        if (this._comportamiento_actual) {
+            var termina = this._comportamiento_actual.actualizar();
+            if (termina) {
+                if (this._comportamientos.length > 0) {
+                    this._adoptar_siguiente_comportamiento();
+                }
+            }
+        }
+        else {
+            if (this._comportamientos.length > 0) {
+                this._adoptar_siguiente_comportamiento();
+            }
+        }
+    };
+    ActorBase.prototype._adoptar_siguiente_comportamiento = function () {
+        var datos = this._comportamientos.shift();
+        var nombre = datos.nombre_del_comportamiento;
+        var clase = this.pilas.comportamientos.buscar(nombre);
+        if (clase) {
+            var instancia = new clase(this.pilas, this);
+            instancia.iniciar(datos.argumentos);
+            this._comportamiento_actual = instancia;
+        }
+    };
+    ActorBase.prototype.hacer = function (nombre_del_comportamiento, argumentos) {
+        this.pilas.comportamientos.validar_si_existe(nombre_del_comportamiento);
+        this._comportamientos.push({ nombre_del_comportamiento: nombre_del_comportamiento, argumentos: argumentos });
     };
     Object.defineProperty(ActorBase.prototype, "estado", {
         get: function () {

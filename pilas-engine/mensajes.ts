@@ -75,7 +75,7 @@ class Mensajes {
   emitir_excepcion_al_editor(error, origen) {
     // Simplifica el stacktrace para que no tenga referencia a la url
     // local, sino que solamente muestre el nombre de archivo:
-    let stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ");
+    let stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ").replace(/  at /g, "⇾ ");
 
     let detalle = {
       mensaje: error.message,
@@ -88,7 +88,8 @@ class Mensajes {
 
     let fuente_principal = {
       font: "16px verdana",
-      fill: "#ddd"
+      fill: "#ddd",
+      wordWrap: { width: 400, useAdvancedWrap: true }
     };
 
     let fuente_pequena = {

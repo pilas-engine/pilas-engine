@@ -21,6 +21,8 @@ class ActorBase {
   _nombre: any;
 
   _habilidades: any[];
+  _comportamientos: Comportamiento[];
+  _comportamiento_actual: Comportamiento = null;
 
   _fondo: any = null;
   _fondo_imagen: string = "";
@@ -88,6 +90,7 @@ class ActorBase {
     this._nombre = propiedades.nombre;
 
     this.sensores = [];
+    this._comportamientos = [];
     this._figura_ancho = propiedades.figura_ancho;
     this._figura_alto = propiedades.figura_alto;
     this._figura_radio = propiedades.figura_radio;
@@ -360,7 +363,43 @@ class ActorBase {
       (this.sprite as any).setAngularVelocity(0);
     }
 
+    this.actualizar_comportamientos();
     this.automata.actualizar();
+  }
+
+  actualizar_comportamientos() {
+    if (this._comportamiento_actual) {
+      let termina = this._comportamiento_actual.actualizar();
+
+      if (termina) {
+        if (this._comportamientos.length > 0) {
+          this._adoptar_siguiente_comportamiento();
+        }
+      }
+    } else {
+      if (this._comportamientos.length > 0) {
+        this._adoptar_siguiente_comportamiento();
+      }
+    }
+  }
+
+  private _adoptar_siguiente_comportamiento() {
+    let datos = this._comportamientos.shift();
+    let nombre = datos.nombre_del_comportamiento;
+
+    let clase = this.pilas.comportamientos.buscar(nombre);
+
+    if (clase) {
+      let instancia = new clase(this.pilas, this);
+      instancia.iniciar(datos.argumentos);
+      this._comportamiento_actual = instancia;
+    }
+  }
+
+  hacer(nombre_del_comportamiento, argumentos) {
+    this.pilas.comportamientos.validar_si_existe(nombre_del_comportamiento);
+
+    this._comportamientos.push({ nombre_del_comportamiento, argumentos });
   }
 
   get estado() {

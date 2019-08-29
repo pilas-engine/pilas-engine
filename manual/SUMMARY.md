@@ -7,6 +7,7 @@
 - [Animaciones](animaciones.md)
 - [Etiquetas](etiquetas.md)
 - [Habilidades](habilidades.md)
+- [Comportamientos](comportamientos.md)
 - [Azar o cálculos aleatorios](azar.md)
 - [Observables](observables.md)
 - [Manejo de tiempo](tiempo.md)

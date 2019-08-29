@@ -31,20 +31,35 @@ export default Component.extend({
               }
 
               actualizar() {
-                this.rotacion += 1;
+                //this.rotacion += 1;
               }
             }
 
 
             class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                let ceferino = this.pilas.actores.pizarra();
+                //let ceferino = this.pilas.actores.pizarra();
                 this.pilas.actores.vincular('actor_de_prueba', ActorDePrueba);
-                this.pilas.actores.actor_de_prueba();
+                let actor = this.pilas.actores.actor_de_prueba();
+
+
+                actor.hacer("mover", {x: 100, y: 100, demora: 1});
+                actor.hacer("mover", {x: 0, y: 0, demora: 1});
+
+                for (i=0; i<50; i++) {
+                  actor.hacer("aparecer", {velocidad: 10});
+                  actor.hacer("desaparecer", {velocidad: 10});
+                }
+
+                //actor.hacer("aparecer", {velocidad: 1});
+                //actor.hacer("eliminar");
+
+                this.actor = actor;
               }
 
               actualizar() {
                 this.pilas.observar("posicion", "1")
+                this.pilas.observar("transparencia", this.actor.transparencia);
               }
 
             }
