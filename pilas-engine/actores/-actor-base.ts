@@ -21,7 +21,7 @@ class ActorBase {
   _nombre: any;
 
   _habilidades: any[];
-  _comportamientos: Comportamiento[];
+  _comportamientos: { nombre_del_comportamiento: string; argumentos: any }[];
   _comportamiento_actual: Comportamiento = null;
 
   _fondo: any = null;
@@ -374,6 +374,8 @@ class ActorBase {
       if (termina) {
         if (this._comportamientos.length > 0) {
           this._adoptar_siguiente_comportamiento();
+        } else {
+          this._comportamiento_actual = null;
         }
       }
     } else {

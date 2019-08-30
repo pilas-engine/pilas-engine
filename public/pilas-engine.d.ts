@@ -77,7 +77,7 @@ declare class Comportamiento {
     actor: Actor;
     constructor(pilas: Pilas, actor: Actor);
     iniciar(parametros: any): void;
-    actualizar(): void;
+    actualizar(): boolean;
     terminar(): void;
 }
 declare class ComportamientoAparecer extends Comportamiento {
@@ -430,7 +430,10 @@ declare class ActorBase {
     _id: any;
     _nombre: any;
     _habilidades: any[];
-    _comportamientos: Comportamiento[];
+    _comportamientos: {
+        nombre_del_comportamiento: string;
+        argumentos: any;
+    }[];
     _comportamiento_actual: Comportamiento;
     _fondo: any;
     _fondo_imagen: string;

@@ -9,7 +9,9 @@ class Comportamiento {
 
   iniciar(parametros: any) {}
 
-  actualizar() {}
+  actualizar(): boolean {
+    return false;
+  }
 
   terminar() {}
 }

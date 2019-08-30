@@ -379,7 +379,9 @@ var Comportamiento = (function () {
         this.actor = actor;
     }
     Comportamiento.prototype.iniciar = function (parametros) { };
-    Comportamiento.prototype.actualizar = function () { };
+    Comportamiento.prototype.actualizar = function () {
+        return false;
+    };
     Comportamiento.prototype.terminar = function () { };
     return Comportamiento;
 }());
@@ -1968,6 +1970,9 @@ var ActorBase = (function () {
             if (termina) {
                 if (this._comportamientos.length > 0) {
                     this._adoptar_siguiente_comportamiento();
+                }
+                else {
+                    this._comportamiento_actual = null;
                 }
             }
         }
