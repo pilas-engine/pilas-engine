@@ -35,11 +35,25 @@ class ModoCargador extends Modo {
       }
     }
 
-    this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
-    this.load.json("ceferino", "ceferino.scon");
+    if (this.pilas.recursos.huesos) {
+      for (let i = 0; i < this.pilas.recursos.huesos.length; i++) {
+        let hueso = this.pilas.recursos.huesos[i];
+        this.load.json(hueso.nombre, hueso.ruta);
+      }
+    } else {
+      this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
+      this.load.json("ceferino", "ceferino.scon");
 
-    this.load.multiatlas("atlas-robot", "robot.json", "./");
-    this.load.json("robot", "robot.scon");
+      this.load.multiatlas("atlas-robot", "robot.json", "./");
+      this.load.json("robot", "robot.scon");
+    }
+
+    if (this.pilas.recursos.imagenes) {
+      for (let i = 0; i < this.pilas.recursos.imagenes.length; i++) {
+        let imagen = this.pilas.recursos.imagenes[i];
+        this.load.image(imagen.nombre, imagen.ruta);
+      }
+    }
 
     this.load.on("progress", this.cuando_progresa_la_carga, this);
   }
@@ -57,7 +71,7 @@ class ModoCargador extends Modo {
     var height = this.cameras.main.height;
     var loadingText = this.make.text({
       x: width / 2,
-      y: height / 2 - 50,
+      y: height / 2 - 80,
       text: "Iniciando ...",
       style: {
         font: "14px verdana",

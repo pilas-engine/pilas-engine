@@ -26,13 +26,25 @@ export default Component.extend({
 
 
             class ActorDePrueba extends Actor {
-              iniciar() {
 
-              }
+                contenedor: any;
+                huesos: Huesos;
 
-              actualizar() {
-                //this.rotacion += 1;
-              }
+                iniciar() {
+                  this.imagen = "imagenes:basicos/invisible";
+                  this.contenedor = this.pilas.modo.add.container();
+                  this.huesos = new Huesos(this.pilas, "protagonista", undefined, this.contenedor);
+                  this.huesos.definir_animacion("idle");
+                }
+
+                actualizar() {
+                  this.huesos.actualizar_animacion(20);
+                }
+
+                pre_actualizar() {
+                  this.pilas.utilidades.sincronizar_contenedor(this.contenedor, this.sprite);
+                }
+
             }
 
 
@@ -42,7 +54,9 @@ export default Component.extend({
                 this.pilas.actores.vincular('actor_de_prueba', ActorDePrueba);
                 let actor = this.pilas.actores.actor_de_prueba();
 
+                actor.transparencia = 50;
 
+                /*
                 actor.hacer("mover", {x: 100, y: 100, demora: 1});
                 actor.hacer("mover", {x: 0, y: 0, demora: 1});
 
@@ -50,6 +64,7 @@ export default Component.extend({
                   actor.hacer("aparecer", {velocidad: 10});
                   actor.hacer("desaparecer", {velocidad: 10});
                 }
+                */
 
                 //actor.hacer("aparecer", {velocidad: 1});
                 //actor.hacer("eliminar");

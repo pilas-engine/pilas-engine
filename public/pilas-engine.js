@@ -1044,7 +1044,13 @@ var Huesos = (function () {
             return this.sprites[nombre];
         }
         else {
-            var sprite = this.pilas.modo.add.sprite(0, 0, this.atlas, imagen);
+            var sprite = null;
+            if (this.atlas) {
+                sprite = this.pilas.modo.add.sprite(0, 0, this.atlas, imagen);
+            }
+            else {
+                sprite = this.pilas.modo.add.sprite(0, 0, imagen);
+            }
             this.sprites[nombre] = sprite;
             return sprite;
         }
@@ -2693,6 +2699,7 @@ var ActorTextoBase = (function (_super) {
         }
         this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
         this.actualizar_tamano_del_fondo();
+        this.pre_actualizar();
     };
     ActorTextoBase.prototype.actualizar_tamano_del_fondo = function () {
         this.definir_area_de_interactividad(this._texto.width, this._texto.height);
@@ -6384,10 +6391,24 @@ var ModoCargador = (function (_super) {
                 this.load.multiatlas(atlas.nombre, atlas.archivo, atlas.ruta);
             }
         }
-        this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
-        this.load.json("ceferino", "ceferino.scon");
-        this.load.multiatlas("atlas-robot", "robot.json", "./");
-        this.load.json("robot", "robot.scon");
+        if (this.pilas.recursos.huesos) {
+            for (var i = 0; i < this.pilas.recursos.huesos.length; i++) {
+                var hueso = this.pilas.recursos.huesos[i];
+                this.load.json(hueso.nombre, hueso.ruta);
+            }
+        }
+        else {
+            this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
+            this.load.json("ceferino", "ceferino.scon");
+            this.load.multiatlas("atlas-robot", "robot.json", "./");
+            this.load.json("robot", "robot.scon");
+        }
+        if (this.pilas.recursos.imagenes) {
+            for (var i = 0; i < this.pilas.recursos.imagenes.length; i++) {
+                var imagen = this.pilas.recursos.imagenes[i];
+                this.load.image(imagen.nombre, imagen.ruta);
+            }
+        }
         this.load.on("progress", this.cuando_progresa_la_carga, this);
     };
     ModoCargador.prototype.init = function (data) {
@@ -6401,7 +6422,7 @@ var ModoCargador = (function (_super) {
         var height = this.cameras.main.height;
         var loadingText = this.make.text({
             x: width / 2,
-            y: height / 2 - 50,
+            y: height / 2 - 80,
             text: "Iniciando ...",
             style: {
                 font: "14px verdana",

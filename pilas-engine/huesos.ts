@@ -12,7 +12,6 @@ class Huesos {
     this.pilas = pilas;
 
     let scon = this.pilas.game.cache.json.get(nombre_de_datos_json);
-    //let scon = this.pilas.game.cache.json.get("robot");
     var data = new Data().load(scon);
     var pose = new Pose(data);
 
@@ -68,7 +67,14 @@ class Huesos {
     if (this.sprites[nombre]) {
       return this.sprites[nombre];
     } else {
-      let sprite = this.pilas.modo.add.sprite(0, 0, this.atlas, imagen);
+      let sprite = null;
+
+      if (this.atlas) {
+        sprite = this.pilas.modo.add.sprite(0, 0, this.atlas, imagen);
+      } else {
+        sprite = this.pilas.modo.add.sprite(0, 0, imagen);
+      }
+
       this.sprites[nombre] = sprite;
       return sprite;
     }
