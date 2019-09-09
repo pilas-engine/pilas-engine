@@ -386,7 +386,7 @@ class ActorBase {
   }
 
   private _adoptar_siguiente_comportamiento() {
-    let datos = this._comportamientos.shift();
+    let datos = this._comportamientos[0];
     let nombre = datos.nombre_del_comportamiento;
 
     let clase = this.pilas.comportamientos.buscar(nombre);
@@ -394,14 +394,31 @@ class ActorBase {
     if (clase) {
       let instancia = new clase(this.pilas, this);
       instancia.iniciar(datos.argumentos);
-      this._comportamiento_actual = instancia;
+
+      // Nota: solo comienza a actualizar el comportamiento si no se limpió la lista
+      //       de comportamientos desde la función iniciar. Por ejemplo, si el usuario
+      //       en iniciar llama a "hacer_inmediatamente" o "limpiar_comportamientos" no se
+      //       tiene que seguir actualizando este comportamiento.
+      if (this._comportamientos.length > 0) {
+        this._comportamientos.shift();
+        this._comportamiento_actual = instancia;
+      }
     }
   }
 
-  hacer(nombre_del_comportamiento, argumentos) {
+  hacer(nombre_del_comportamiento, argumentos: any = undefined) {
     this.pilas.comportamientos.validar_si_existe(nombre_del_comportamiento);
-
     this._comportamientos.push({ nombre_del_comportamiento, argumentos });
+  }
+
+  eliminar_comportamientos() {
+    this._comportamientos = [];
+    this._comportamiento_actual = null;
+  }
+
+  hacer_inmediatamente(nombre_del_comportamiento, argumentos: any = undefined) {
+    this.eliminar_comportamientos();
+    this.hacer(nombre_del_comportamiento, argumentos);
   }
 
   get estado() {

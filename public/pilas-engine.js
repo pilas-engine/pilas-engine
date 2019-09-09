@@ -1989,18 +1989,31 @@ var ActorBase = (function () {
         }
     };
     ActorBase.prototype._adoptar_siguiente_comportamiento = function () {
-        var datos = this._comportamientos.shift();
+        var datos = this._comportamientos[0];
         var nombre = datos.nombre_del_comportamiento;
         var clase = this.pilas.comportamientos.buscar(nombre);
         if (clase) {
             var instancia = new clase(this.pilas, this);
             instancia.iniciar(datos.argumentos);
-            this._comportamiento_actual = instancia;
+            if (this._comportamientos.length > 0) {
+                this._comportamientos.shift();
+                this._comportamiento_actual = instancia;
+            }
         }
     };
     ActorBase.prototype.hacer = function (nombre_del_comportamiento, argumentos) {
+        if (argumentos === void 0) { argumentos = undefined; }
         this.pilas.comportamientos.validar_si_existe(nombre_del_comportamiento);
         this._comportamientos.push({ nombre_del_comportamiento: nombre_del_comportamiento, argumentos: argumentos });
+    };
+    ActorBase.prototype.eliminar_comportamientos = function () {
+        this._comportamientos = [];
+        this._comportamiento_actual = null;
+    };
+    ActorBase.prototype.hacer_inmediatamente = function (nombre_del_comportamiento, argumentos) {
+        if (argumentos === void 0) { argumentos = undefined; }
+        this.eliminar_comportamientos();
+        this.hacer(nombre_del_comportamiento, argumentos);
     };
     Object.defineProperty(ActorBase.prototype, "estado", {
         get: function () {

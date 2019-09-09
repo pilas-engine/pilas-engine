@@ -512,7 +512,9 @@ declare class ActorBase {
     pre_actualizar(): void;
     actualizar_comportamientos(): void;
     private _adoptar_siguiente_comportamiento;
-    hacer(nombre_del_comportamiento: any, argumentos: any): void;
+    hacer(nombre_del_comportamiento: any, argumentos?: any): void;
+    eliminar_comportamientos(): void;
+    hacer_inmediatamente(nombre_del_comportamiento: any, argumentos?: any): void;
     estado: string;
     actualizar(): void;
     actualizar_habilidades(): void;
