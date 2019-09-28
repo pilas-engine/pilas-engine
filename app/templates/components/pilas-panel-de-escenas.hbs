@@ -30,13 +30,18 @@
             {{pilas-icono-de-actor actor=actor}}
 
             {{#if (eq actor.activo false)}}
-              <span class="o-50">{{actor.nombre}} - inactivo</span>
+              <span class="o-50">{{actor.nombre}}</span>
             {{else}}
               {{actor.nombre}}
             {{/if}}
 
             <div class="dib fr f7">
               {{#if (eq seleccion actor.id)}}
+
+                {{#if (eq actor.activo false)}}
+                  {{pilas-indicador-inactivo}}
+                {{/if}}
+
                 {{pilas-boton-duplicar-actor accion=(action cuando_intenta_duplicar actor.id) accionx5=(action cuando_intenta_duplicar_x5 actor.id)}}
                 {{pilas-boton-eliminar-con-confirmacion tipo="actor" titulo="¿Realmente quieres eliminar este actor?" accion=(action cuando_intenta_eliminar actor.id)}}
               {{/if}}
