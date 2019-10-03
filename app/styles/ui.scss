@@ -121,3 +121,8 @@ span {
 .break-all {
   word-break: break-all;
 }
+
+.truncate-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

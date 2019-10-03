@@ -1,0 +1,29 @@
+<div role="button" id="boton-mover-actor-de-escena" class="pa2 relative texto pointer hover-bg-black-10 f7" {{action "mostrar" bubbles=false}}>
+  {{pilas-icono icono="mover"}} Mover a otra escena
+
+  {{#if modalVisible}}
+    <div role="button" class="fixed z-1 absolute--fill" {{action "ocultar"}}></div>
+
+    <div class="absolute bg-fondo ba borde shadow-4 top-1 right-0 pa2 f7 z-999">
+
+      {{#each escenas as |escena|}}
+        {{#if (eq escena_id escena.id)}}
+          <div role="button" class="pa2 texto f7 truncate o-50">
+            Mover a {{escena.nombre}}
+          </div>
+        {{else}}
+          <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action accionCuandoIntentaMoverAUnaEscena escena}}>
+            Mover a {{escena.nombre}}
+          </div>
+        {{/if}}
+
+      {{/each}}
+
+      <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action accionCuandoIntentaMoverAEscenaNueva}}>
+        {{pilas-icono icono="mas"}} Mover a una escena nueva
+      </div>
+
+    </div>
+  {{/if}}
+
+</div>

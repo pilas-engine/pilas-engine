@@ -366,32 +366,55 @@ export default Component.extend({
     this.send("cuandoSelecciona", this.escenaActual);
   },
 
+  crear_escena_nueva(proyecto) {
+    let model = proyecto;
+
+    this.set("hay_cambios_por_guardar", true);
+    let nombres_de_escenas = this.obtener_nombres_de_escenas(model);
+    let nombre = obtener_nombre_sin_repetir(nombres_de_escenas, "escena");
+    let id = this.generar_id();
+    let escena = EmberObject.create({
+      id: id,
+      nombre: nombre,
+      camara_x: 0,
+      camara_y: 0,
+      gravedad_x: 0,
+      gravedad_y: 1,
+      fondo: "imagenes:fondos/fondo-plano",
+      actores: []
+    });
+
+    model.escenas.pushObject(escena);
+
+    let plantilla = obtener_plantilla_de_escena();
+
+    this.registrar_codigo_de_escena(nombre, plantilla);
+    return escena;
+  },
+
+  obtener_escena_por_id(proyecto, id) {
+    return proyecto.escenas.findBy("id", id);
+  },
+
   actions: {
-    agregarEscena(model) {
-      this.set("hay_cambios_por_guardar", true);
-      let nombres_de_escenas = this.obtener_nombres_de_escenas(model);
-      let nombre = obtener_nombre_sin_repetir(nombres_de_escenas, "escena");
-      let id = this.generar_id();
-
-      model.escenas.pushObject(
-        EmberObject.create({
-          id: id,
-          nombre: nombre,
-          camara_x: 0,
-          camara_y: 0,
-          gravedad_x: 0,
-          gravedad_y: 1,
-          fondo: "imagenes:fondos/fondo-plano",
-          actores: []
-        })
-      );
-
-      let plantilla = obtener_plantilla_de_escena();
-
-      this.registrar_codigo_de_escena(nombre, plantilla);
-      this.send("cuandoSelecciona", id);
-
+    agregarEscena(proyecto) {
+      let escena = this.crear_escena_nueva(proyecto);
+      this.send("cuandoSelecciona", escena.id);
       this.mostrar_la_escena_actual_sobre_pilas();
+    },
+
+    mover_actor_a_escena_nueva(proyecto, actor, escena_origen_id) {
+      let escena_origen = this.obtener_escena_por_id(proyecto, escena_origen_id);
+      let escena_nueva = this.crear_escena_nueva(proyecto);
+
+      escena_origen.actores.removeObject(actor);
+      escena_nueva.actores.pushObject(actor);
+    },
+
+    mover_actor_a_una_escena(proyecto, actor, escena_origen_id, escena_seleccionada) {
+      let escena_origen = this.obtener_escena_por_id(proyecto, escena_origen_id);
+      escena_origen.actores.removeObject(actor);
+      escena_seleccionada.actores.pushObject(actor);
     },
 
     agregar_actor(proyecto, actor) {
@@ -461,6 +484,7 @@ export default Component.extend({
       this.log.info("Ingresando en modo ejecución");
       this.log.info("Puedes usar las variables pilas o actores.");
     },
+
     detener() {
       this.set("existe_un_error_reciente", false);
       this.mostrar_la_escena_actual_sobre_pilas();
@@ -469,6 +493,7 @@ export default Component.extend({
       this.log.limpiar();
       this.log.info("Ingresando al modo edición");
     },
+
     pausar() {
       this.set("existe_un_error_reciente", false);
       this.set("estado", this.estado.pausar());
@@ -477,6 +502,7 @@ export default Component.extend({
       this.log.limpiar();
       this.log.info("Ingresando en modo pausa");
     },
+
     cambiarPosicion(valorNuevo) {
       this.set("hay_cambios_por_guardar", true);
       this.set("posicion", valorNuevo);
@@ -484,9 +510,11 @@ export default Component.extend({
         posicion: valorNuevo
       });
     },
+
     cuandoGuardaDesdeElEditor(/*editor*/) {
       this.send("alternarEstadoDeEjecucion");
     },
+
     alternarEstadoDeEjecucion() {
       let estado = this.estado;
 
@@ -498,6 +526,7 @@ export default Component.extend({
         }
       }
     },
+
     cuandoSelecciona(seleccion) {
       if (seleccion === "proyecto") {
         this.set("seleccion", 0);
@@ -532,6 +561,7 @@ export default Component.extend({
         this.set("tituloDelCodigo", `Código de la escena: ${seleccion}`);
       }
     },
+
     cuandoModificaObjeto(objeto) {
       this.set("hay_cambios_por_guardar", true);
       this.bus.trigger("actualizar_actor_desde_el_editor", {
@@ -539,6 +569,7 @@ export default Component.extend({
         actor: objeto
       });
     },
+
     cuando_modifica_escena(escena) {
       this.set("hay_cambios_por_guardar", true);
       this.bus.trigger("actualizar_escena_desde_el_editor", {
@@ -546,6 +577,7 @@ export default Component.extend({
         escena: escena
       });
     },
+
     cuando_modifica_proyecto(proyecto) {
       this.set("hay_cambios_por_guardar", true);
       this.bus.trigger("actualizar_proyecto_desde_el_editor", {
@@ -555,6 +587,7 @@ export default Component.extend({
       this.mostrar_la_escena_actual_sobre_pilas();
       //this.reiniciar_escena_actual();
     },
+
     cuando_intenta_duplicar(id, aleatorio) {
       aleatorio = aleatorio || false;
 

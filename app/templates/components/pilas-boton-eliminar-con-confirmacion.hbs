@@ -1,6 +1,12 @@
-<button id="boton-eliminar-{{tipo}}" class="bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0" {{action "mostrar" bubbles=false}}>{{pilas-icono icono="borrar"}}{{yield}}</button>
+{{#if comoCelda}}
+  <div role="button" id="boton-eliminar-{{tipo}}" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action "mostrar" bubbles=false}}>
+    {{pilas-icono icono="borrar"}} Eliminar
+  </div>
+{{else}}
+  <button id="boton-eliminar-{{tipo}}" class="bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0" {{action "mostrar" bubbles=false}}>{{pilas-icono icono="borrar"}}{{yield}}</button>
+{{/if}}
 
-{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id=idDialogo titulo="Cuidado" reducido=true}}
+{{#pilas-modal fixed=modalFixed alCerrar=(action "ocultar") visible=modalVisible id=idDialogo titulo="Cuidado" reducido=true}}
 
   <div class="flex1 verdana f6">
     {{titulo}}
