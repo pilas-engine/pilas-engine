@@ -747,7 +747,7 @@ class ActorBase {
 
   set velocidad_y(valor: number) {
     this.fallar_si_no_tiene_figura();
-    (this.sprite as any).setVelocityX(-valor);
+    (this.sprite as any).setVelocityY(-valor);
   }
 
   set rebote(valor: number) {

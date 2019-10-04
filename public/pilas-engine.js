@@ -2373,7 +2373,7 @@ var ActorBase = (function () {
         },
         set: function (valor) {
             this.fallar_si_no_tiene_figura();
-            this.sprite.setVelocityX(-valor);
+            this.sprite.setVelocityY(-valor);
         },
         enumerable: true,
         configurable: true
