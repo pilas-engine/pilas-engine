@@ -1,5 +1,9 @@
 {{#ui/panel-arrastrable}}
-  {{pilas-propiedad/nombre nombre=instancia_seleccionada.nombre}}
+  {{pilas-propiedad/nombre
+      nombre=instancia_seleccionada.nombre
+      objeto=instancia_seleccionada
+      cuando_cambia=cuando_cambia_un_nombre_de_escena
+  }}
 
   {{#each propiedades as |propiedad|}}
 

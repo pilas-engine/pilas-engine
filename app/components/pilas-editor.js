@@ -659,12 +659,19 @@ export default Component.extend({
 
       let r = Math.random();
       this.set("tituloDelCodigo", `Código del actor: ${this.seleccion} ${r}`);
+    },
 
-      /*
-      this.bus.trigger("selecciona_actor_desde_el_editor", {
-        id: this.seleccion
-      });
-      */
+    cuando_cambia_un_nombre_de_escena(/*nombre*/) {
+      // Intenta recargar el editor, para eso vuelve a seleccionar la escena
+      // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
+      let escena = this.obtenerDetalleDeEscenaPorIndice(this.seleccion);
+
+      this.set("instancia_seleccionada", escena);
+      this.set("tipo_de_la_instancia_seleccionada", "escena");
+      this.set("codigo", this.obtener_codigo_para_la_escena(escena));
+
+      let r = Math.random();
+      this.set("tituloDelCodigo", `Código de la escena: ${this.seleccion} ${r}`);
     }
   }
 });

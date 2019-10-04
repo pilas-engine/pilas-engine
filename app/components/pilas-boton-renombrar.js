@@ -14,7 +14,7 @@ export default Component.extend({
   },
 
   invalido_por_duplicado: computed("nombreSugerido", function() {
-    return this.nombres_de_actores.indexOf(this.nombreSugerido) > -1;
+    return this.nombres_no_permitidos.indexOf(this.nombreSugerido) > -1;
   }),
 
   invalido_por_vacio: computed("nombreSugerido", function() {
@@ -35,11 +35,21 @@ export default Component.extend({
     return actores;
   },
 
+  obtener_nombres_de_las_otras_escenas() {
+    let escenas = this.proyecto.obtener_nombres_de_todas_las_escenas();
+    escenas.removeObject(this.nombre);
+    return escenas;
+  },
+
   actions: {
     cambiarNombre() {
       this.set("mostrar", true);
       this.set("nombreSugerido", this.nombre);
-      this.set("nombres_de_actores", this.obtener_nombres_de_los_otros_actores());
+      if (this.es_actor) {
+        this.set("nombres_no_permitidos", this.obtener_nombres_de_los_otros_actores());
+      } else {
+        this.set("nombres_no_permitidos", this.obtener_nombres_de_las_otras_escenas());
+      }
       later(this, this.hacer_foco, 1);
     },
 
@@ -52,9 +62,15 @@ export default Component.extend({
         return;
       }
 
-      this.proyecto.renombrar_actor(this.nombre, this.nombreSugerido);
-      this.send("ocultar");
-      this.cuando_cambia(this.nombre);
+      if (this.es_actor) {
+        this.proyecto.renombrar_actor(this.nombre, this.nombreSugerido);
+        this.send("ocultar");
+        this.cuando_cambia(this.nombre);
+      } else {
+        this.proyecto.renombrar_escena(this.nombre, this.nombreSugerido);
+        this.send("ocultar");
+        this.cuando_cambia(this.nombre);
+      }
     }
   }
 });
