@@ -1,5 +1,8 @@
-<div role="button" id="boton-mover-actor-de-escena" class="pa2 relative texto pointer hover-bg-black-10 f7" {{action "mostrar" bubbles=false}}>
-  {{pilas-icono icono="mover"}} Mover a otra escena
+<div class="relative">
+
+  <div role="button" id="boton-mover-actor-de-escena" class="pa2 texto pointer hover-bg-black-10 f7" {{action "mostrar" bubbles=false}}>
+    {{pilas-icono icono="mover"}} Mover a otra escena
+  </div>
 
   {{#if modalVisible}}
     <div role="button" class="fixed z-1 absolute--fill" {{action "ocultar"}}></div>
