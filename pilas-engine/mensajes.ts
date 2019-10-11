@@ -24,7 +24,10 @@ class Mensajes {
     if (this[metodo]) {
       this[metodo](datos);
     } else {
-      console.error(`Imposible llamar al evento ${metodo}`, datos);
+      // FIXME: este evento debe estar en una whitelist de parte de pilas-engine con bloques
+      if (metodo !== "atender_mensaje_cambiar_prefijo_de_variante" && metodo !== "atender_mensaje_cambiar_animacion") {
+        console.error(`Imposible llamar al evento ${metodo}`, datos);
+      }
     }
   }
 

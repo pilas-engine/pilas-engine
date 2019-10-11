@@ -5,6 +5,7 @@ class Huesos {
   animacion_actual: string;
   pilas: Pilas;
   sprites: any = {};
+  prefijo_de_imagenes: string = "";
 
   constructor(pilas: Pilas, nombre_de_datos_json: string, nombre_de_atlas: string, contenedor: any) {
     this.contenedor = contenedor;
@@ -83,7 +84,11 @@ class Huesos {
   actualizar_posicion(pose) {
     pose.object_array.map(data => {
       let imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
-      let sprite = this.obtener_o_crear_sprite(data.name, imagen);
+      let sprite = this.obtener_o_crear_sprite(data.name, this.prefijo_de_imagenes + imagen);
+
+      // FIXME: este cambio se realiza a causa de pilas-engine con bloques, en donde necesitamos
+      // cambiar la textura de cada una de las partes a partir del prefijo.
+      sprite.setTexture(this.prefijo_de_imagenes + imagen);
 
       sprite.setAlpha(data.alpha);
       sprite.x = data.world_space.position.x;
