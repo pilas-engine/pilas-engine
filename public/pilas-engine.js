@@ -996,6 +996,7 @@ var Historia = (function () {
 var Huesos = (function () {
     function Huesos(pilas, nombre_de_datos_json, nombre_de_atlas, contenedor) {
         this.sprites = {};
+        this.prefijo_de_imagenes = "";
         this.contenedor = contenedor;
         this.atlas = nombre_de_atlas;
         this.pilas = pilas;
@@ -1059,7 +1060,8 @@ var Huesos = (function () {
         var _this = this;
         pose.object_array.map(function (data) {
             var imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
-            var sprite = _this.obtener_o_crear_sprite(data.name, imagen);
+            var sprite = _this.obtener_o_crear_sprite(data.name, _this.prefijo_de_imagenes + imagen);
+            sprite.setTexture(_this.prefijo_de_imagenes + imagen);
             sprite.setAlpha(data.alpha);
             sprite.x = data.world_space.position.x;
             sprite.y = -data.world_space.position.y;
@@ -1099,7 +1101,9 @@ var Mensajes = (function () {
             this[metodo](datos);
         }
         else {
-            console.error("Imposible llamar al evento " + metodo, datos);
+            if (metodo !== "atender_mensaje_cambiar_prefijo_de_variante" && metodo !== "atender_mensaje_cambiar_animacion") {
+                console.error("Imposible llamar al evento " + metodo, datos);
+            }
         }
     };
     Mensajes.prototype.atender_mensaje_iniciar_pilas = function (datos) {
@@ -2291,12 +2295,10 @@ var ActorBase = (function () {
         if (radio === void 0) { radio = 0; }
         this.fallar_si_no_tiene_figura();
         this.pilas.utilidades.validar_numero(radio);
-        if (radio) {
-            this.sprite.setCircle(radio);
+        if (radio < 1) {
+            radio = 30;
         }
-        else {
-            this.sprite.setCircle();
-        }
+        this.sprite.setCircle(radio);
     };
     Object.defineProperty(ActorBase.prototype, "ancho", {
         get: function () {
