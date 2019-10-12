@@ -24,57 +24,17 @@ export default Component.extend({
             nombre: NOMBRE_DE_LA_ESCENA,
             codigo: `
 
-
-            class ActorDePrueba extends Actor {
-
-                contenedor: any;
-                huesos: Huesos;
-
-                iniciar() {
-                  this.imagen = "imagenes:basicos/invisible";
-                  this.contenedor = this.pilas.modo.add.container();
-                  this.huesos = new Huesos(this.pilas, "protagonista", undefined, this.contenedor);
-                  this.huesos.definir_animacion("idle");
-                }
-
-                actualizar() {
-                  this.huesos.actualizar_animacion(20);
-                }
-
-                pre_actualizar() {
-                  this.pilas.utilidades.sincronizar_contenedor(this.contenedor, this.sprite);
-                }
-
-            }
-
-
             class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                //let ceferino = this.pilas.actores.pizarra();
-                this.pilas.actores.vincular('actor_de_prueba', ActorDePrueba);
-                let actor = this.pilas.actores.actor_de_prueba();
-
-                actor.transparencia = 50;
-
-                /*
-                actor.hacer("mover", {x: 100, y: 100, demora: 1});
-                actor.hacer("mover", {x: 0, y: 0, demora: 1});
-
-                for (i=0; i<50; i++) {
-                  actor.hacer("aparecer", {velocidad: 10});
-                  actor.hacer("desaparecer", {velocidad: 10});
-                }
-                */
-
-                //actor.hacer("aparecer", {velocidad: 1});
-                //actor.hacer("eliminar");
-
+                let actor = this.pilas.actores.aceituna();
                 this.actor = actor;
+
+                actor.figura = "circulo";
+
+                window.actor = actor;
               }
 
               actualizar() {
-                this.pilas.observar("posicion", "1")
-                this.pilas.observar("transparencia", this.actor.transparencia);
               }
 
             }

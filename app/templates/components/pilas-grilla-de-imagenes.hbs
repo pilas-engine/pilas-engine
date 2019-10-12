@@ -8,13 +8,20 @@
     {{pilas-input-filtro filtro=filtro}}
   </div>
 
-  {{#each recursos.tarea.lastSuccessful.value.imagenesParaGrilla as |imagen|}}
+  <div class="">
+    <div class="dib pa2">Imágenes incluías en pilas</div>
+    <div class="dib pa2">Imágenes personalizadas</div>
+  </div>
 
-    {{pilas-celda-de-imagen
-        imagen=imagen
-        filtro=filtro
-        cuando_selecciona=cuando_selecciona}}
+  <div class="">
+    {{#each recursos.tarea.lastSuccessful.value.imagenesParaGrilla as |imagen|}}
 
-  {{/each}}
+      {{pilas-celda-de-imagen
+          imagen=imagen
+          filtro=filtro
+          cuando_selecciona=cuando_selecciona}}
+
+    {{/each}}
+  </div>
 
 {{/if}}

@@ -251,6 +251,7 @@ declare class Huesos {
     animacion_actual: string;
     pilas: Pilas;
     sprites: any;
+    prefijo_de_imagenes: string;
     constructor(pilas: Pilas, nombre_de_datos_json: string, nombre_de_atlas: string, contenedor: any);
     obtener_animaciones(): string[];
     obtener_primer_animacion(): string;

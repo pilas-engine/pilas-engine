@@ -669,6 +669,7 @@ class ActorBase {
     this.pilas.utilidades.validar_numero(alto);
 
     (this.sprite as any).setRectangle(ancho, alto);
+    //(this.sprite as any).setFriction(0, 0, 0);
   }
 
   crear_figura_circular(radio: number = 0) {
@@ -676,11 +677,12 @@ class ActorBase {
 
     this.pilas.utilidades.validar_numero(radio);
 
-    if (radio) {
-      (this.sprite as any).setCircle(radio);
-    } else {
-      (this.sprite as any).setCircle();
+    if (radio < 1) {
+      radio = 30;
     }
+
+    (this.sprite as any).setCircle(radio);
+    //(this.sprite as any).setFriction(0, 0, 0);
   }
 
   get ancho() {
