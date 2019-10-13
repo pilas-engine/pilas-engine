@@ -137,18 +137,21 @@
           {{/if}}
         </div>
 
-        {{pilas-canvas
-                  ancho=proyecto.ancho
-                  alto=proyecto.alto
-                  recursos=recursos
-                  mantenerFoco=estado.mantenerFoco
-                  modoZoom=modoZoom
-                  cuandoPulsaEscapeEnModoEjecucion=(action "detener")
-                  pos=pos
-                  fps=fps
-                  fisica=fisica
-                  pixelart=pixelart
-                }}
+        {{#pilas-reiniciador}}
+          {{pilas-canvas
+                    ancho=proyecto.ancho
+                    alto=proyecto.alto
+                    recursos=recursos
+                    mantenerFoco=estado.mantenerFoco
+                    proyecto=proyecto
+                    modoZoom=modoZoom
+                    cuandoPulsaEscapeEnModoEjecucion=(action "detener")
+                    pos=pos
+                    fps=fps
+                    fisica=fisica
+                    pixelart=pixelart
+                  }}
+        {{/pilas-reiniciador}}
 
         <div class="h2 ba br borde mt2">
           {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}

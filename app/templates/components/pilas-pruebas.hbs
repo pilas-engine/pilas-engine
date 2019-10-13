@@ -1,11 +1,18 @@
 {{yield}}
 
 <div class="h-100 flex">
-  {{pilas-canvas
-      ancho=proyecto.ancho
-      alto=proyecto.alto
-      proyecto=proyecto
-      modoZoom=2
-      cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
-  }}
+  {{#pilas-reiniciador}}
+    {{pilas-canvas
+        ancho=proyecto.ancho
+        alto=proyecto.alto
+        proyecto=proyecto
+        modoZoom=2
+        cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
+    }}
+  {{/pilas-reiniciador}}
+
+  <div class="pa3 theme-oscuro bg-fondo vh-100 wrapper verdana flex flex-column">
+    {{ui/importar-imagen cuando_procesa_archivos=(action "incorporar_imagenes_al_proyecto")}}
+  </div>
+
 </div>

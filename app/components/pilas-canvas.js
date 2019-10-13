@@ -34,12 +34,19 @@ export default Component.extend({
 
       opciones_de_pilas.pixelart = this.convertir_a_boolean(this.pixelart);
 
+      let imagenes_para_cargar_desde_el_proyecto = [];
+
+      if (this.proyecto && this.proyecto.imagenes) {
+        imagenes_para_cargar_desde_el_proyecto = this.proyecto.imagenes;
+      }
+
       let data = {
         tipo: "iniciar_pilas",
         ancho: this.ancho,
         alto: this.alto,
         recursos: this.get("recursos.data"),
-        opciones: opciones_de_pilas
+        opciones: opciones_de_pilas,
+        imagenes: imagenes_para_cargar_desde_el_proyecto
       };
 
       this.set("funcionParaAtenderMensajes", e => {

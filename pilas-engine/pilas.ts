@@ -38,6 +38,7 @@ class Pilas {
   opciones: any;
 
   imagenes_precargadas: string[] = [];
+  imagenes: any = [];
 
   constructor() {
     this.Phaser = Phaser;
@@ -77,12 +78,13 @@ class Pilas {
     return this.escena.camara;
   }
 
-  iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any) {
+  iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any, imagenes: any) {
     if (opciones.maximizar === undefined) {
       opciones.maximizar = true;
     }
 
     this.opciones = opciones;
+    this.imagenes = imagenes;
 
     if (!recursos) {
       throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
@@ -106,7 +108,7 @@ class Pilas {
     }
   }
 
-  iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}) {
+  iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}, imagenes: any = []) {
     if (opciones === undefined || recursos === null) {
       opciones = {};
     }
@@ -176,7 +178,7 @@ class Pilas {
     // modo_simple indica que pilas debe iniciar asumiendo que se está
     // usando fuera del editor, sin señales ni iframes.
     opciones.modo_simple = true;
-    this.iniciar_phaser(ancho, alto, recursos, opciones);
+    this.iniciar_phaser(ancho, alto, recursos, opciones, imagenes);
     return this;
   }
 

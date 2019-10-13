@@ -3,6 +3,7 @@ export default {
   ancho: 500,
   alto: 500,
   escena_inicial: 1,
+  imagenes: [],
   codigos: {
     escenas: [
       {

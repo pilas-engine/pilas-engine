@@ -341,12 +341,13 @@ declare class Pilas {
     cursor_y: number;
     opciones: any;
     imagenes_precargadas: string[];
+    imagenes: any;
     constructor();
     escena: EscenaBase;
     control: Control;
     readonly camara: Camara;
-    iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any): void;
-    iniciar(ancho: number, alto: number, recursos: any, opciones?: any): this;
+    iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any, imagenes: any): void;
+    iniciar(ancho: number, alto: number, recursos: any, opciones?: any, imagenes?: any): this;
     listar_imagenes(): string[];
     private iniciar_phaser_desde_configuracion_y_cargar_escenas;
     ejecutar(): void;

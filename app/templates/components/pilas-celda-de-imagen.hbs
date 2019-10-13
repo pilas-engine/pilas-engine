@@ -11,7 +11,6 @@
     mb1
     hover-bg-black-10
     texto
-
     " {{action "cuando_selecciona_imagen" imagen}}>
   <div class="flex flex-column h-100 w-100">
 
@@ -19,7 +18,11 @@
 
     {{#pilas-tooltip class="" texto=imagen.nombre}}
       <div class="flex1 tc w-100 h3">
-        <div class="sprite-grilla-de-imagenes {{imagen.sprite}}"></div>
+        {{#if imagen.contenido}}
+          <img src={{imagen.contenido}} alt="" class="object-fit-contain" width={{48}} height={{48}}>
+        {{else}}
+          <div class="sprite-grilla-de-imagenes {{imagen.sprite}}"></div>
+        {{/if}}
       </div>
 
       <div class="f6 tc mt2 h1 truncate">

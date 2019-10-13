@@ -70,7 +70,7 @@
       var ha_iniciado = false;
 
       var proyecto = JSON.parse(b64DecodeUnicode(proyecto_serializado_inicial));
-      var pilas = pilasengine.iniciar(proyecto.proyecto.ancho * 1, proyecto.proyecto.alto);
+      var pilas = pilasengine.iniciar(proyecto.proyecto.ancho * 1, proyecto.proyecto.alto, null, {}, proyecto.proyecto.imagenes);
 
       pilas.onready = function() {
         if (!ha_iniciado) {

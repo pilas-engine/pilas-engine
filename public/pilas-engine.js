@@ -1107,7 +1107,7 @@ var Mensajes = (function () {
         }
     };
     Mensajes.prototype.atender_mensaje_iniciar_pilas = function (datos) {
-        this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones);
+        this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones, datos.imagenes);
     };
     Mensajes.prototype.atender_mensaje_definir_estados_de_depuracion = function (datos) {
         this.pilas.depurador.definir_estados_de_depuracion(datos);
@@ -1336,6 +1336,7 @@ var Pilas = (function () {
         this.cursor_x = 0;
         this.cursor_y = 0;
         this.imagenes_precargadas = [];
+        this.imagenes = [];
         this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
         this.colores = new Colores(this);
@@ -1378,12 +1379,13 @@ var Pilas = (function () {
         enumerable: true,
         configurable: true
     });
-    Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos, opciones) {
+    Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos, opciones, imagenes) {
         var _this = this;
         if (opciones.maximizar === undefined) {
             opciones.maximizar = true;
         }
         this.opciones = opciones;
+        this.imagenes = imagenes;
         if (!recursos) {
             throw Error("No se puede iniciar phaser sin especificar una lista de recursos");
         }
@@ -1401,8 +1403,9 @@ var Pilas = (function () {
             this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
         }
     };
-    Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones) {
+    Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones, imagenes) {
         if (opciones === void 0) { opciones = {}; }
+        if (imagenes === void 0) { imagenes = []; }
         if (opciones === undefined || recursos === null) {
             opciones = {};
         }
@@ -1468,7 +1471,7 @@ var Pilas = (function () {
             };
         }
         opciones.modo_simple = true;
-        this.iniciar_phaser(ancho, alto, recursos, opciones);
+        this.iniciar_phaser(ancho, alto, recursos, opciones, imagenes);
         return this;
     };
     Pilas.prototype.listar_imagenes = function () {
@@ -6389,6 +6392,7 @@ var ModoCargador = (function (_super) {
         return _super.call(this, { key: "ModoCargador" }) || this;
     }
     ModoCargador.prototype.preload = function () {
+        var _this = this;
         this.load.crossOrigin = "anonymous";
         this.contador = 0;
         this.crear_indicador_de_carga();
@@ -6424,6 +6428,12 @@ var ModoCargador = (function (_super) {
                 var imagen = this.pilas.recursos.imagenes[i];
                 this.load.image(imagen.nombre, imagen.ruta);
             }
+        }
+        if (this.pilas.imagenes) {
+            console.log("hay " + this.pilas.imagenes.length + " im\u00E1genes para cargar");
+            this.pilas.imagenes.map(function (item) {
+                _this.textures.addBase64(item.nombre, item.contenido);
+            });
         }
         this.load.on("progress", this.cuando_progresa_la_carga, this);
     };

@@ -1,6 +1,10 @@
 import Service from "@ember/service";
+import { set } from "@ember/object";
+import { inject as service } from "@ember/service";
 
 export default Service.extend({
+  bus: service(),
+
   vincular(proyecto) {
     this.set("proyecto", proyecto);
   },
@@ -63,5 +67,22 @@ export default Service.extend({
 
   obtener_todas_las_escenas() {
     return this.proyecto.escenas;
+  },
+
+  incorporar_imagenes_al_proyecto(lista_de_archivos) {
+    lista_de_archivos.map(item => {
+      // si el archivo ya estaba en el proyecto ...
+      let anterior = this.proyecto.imagenes.findBy("nombre", item.nombre);
+
+      // ... reemplaza su contenido.
+      if (anterior) {
+        set(anterior, "contenido", item.contenido);
+      } else {
+        // si no estaba, lo carga por primera vez.
+        this.proyecto.imagenes.pushObject(item);
+      }
+    });
+
+    this.bus.trigger("recargarCanvasDePilas");
   }
 });

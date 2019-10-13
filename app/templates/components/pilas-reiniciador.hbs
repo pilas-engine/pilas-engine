@@ -1,0 +1,9 @@
+{{#if activo}}
+  {{yield}}
+{{else}}
+  <div class="flex1 textp">
+    Reiniciando ...
+  </div>
+{{/if}}
+
+<button type="button" name="button" {{action "reiniciar"}}>Reiniciar</button>

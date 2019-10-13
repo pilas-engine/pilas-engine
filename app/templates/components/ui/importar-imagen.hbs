@@ -1,0 +1,6 @@
+{{yield}}
+{{pilas-boton accion=(action "seleccionar_imagen") texto="Importar imagen"}}
+
+<div class="dn">
+  <input multiple="true" onchange={{action "upload"}} accept="image/png" type="file">
+</div>

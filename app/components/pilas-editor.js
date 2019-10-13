@@ -127,7 +127,12 @@ export default Component.extend({
   finaliza_carga() {
     this.set("cargando", false);
     this.mostrar_la_escena_inicial();
-    this.set("estado", this.estado.cuandoTerminoDeCargarPilas());
+
+    if (this.estado.ModoCargando) {
+      this.set("estado", this.estado.cuandoTerminoDeCargarPilas());
+    } else {
+      console.warn("Se ha reiniciando el canvas, se omite cambiar el autómata de estados.");
+    }
   },
 
   mostrar_la_escena_inicial() {

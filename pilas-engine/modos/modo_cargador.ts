@@ -55,6 +55,14 @@ class ModoCargador extends Modo {
       }
     }
 
+    if (this.pilas.imagenes) {
+      console.log(`hay ${this.pilas.imagenes.length} imágenes para cargar`);
+
+      this.pilas.imagenes.map(item => {
+        this.textures.addBase64(item.nombre, item.contenido);
+      });
+    }
+
     this.load.on("progress", this.cuando_progresa_la_carga, this);
   }
 
