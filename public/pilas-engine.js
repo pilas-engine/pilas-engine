@@ -2480,6 +2480,7 @@ var ActorBase = (function () {
     ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     ActorBase.prototype.cuando_termina_una_colision = function (actor) { };
+    ActorBase.prototype.cuando_colisiona = function (actor) { };
     ActorBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_termina_de_hacer_click = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_sale = function (x, y, evento_original) { };
@@ -6806,6 +6807,27 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
         var _this = this;
+        var pilas = this.pilas;
+        this.matter.world.on("beforeupdate", function (listener) {
+            var cuerpos_estaticos = this.engine.world.bodies.filter(function (e) { return e.isStatic; });
+            cuerpos_estaticos.map(function (cuerpo) {
+                var otros_cuerpos = cuerpos_estaticos.filter(function (c) { return c.id !== cuerpo.id; });
+                var colisiones = pilas.Phaser.Physics.Matter.Matter.Query.collides(cuerpo, otros_cuerpos);
+                colisiones.map(function (colision) {
+                    var figura_1 = colision.bodyA;
+                    var figura_2 = colision.bodyB;
+                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                        var actor_a = figura_1.gameObject.actor;
+                        var actor_b = figura_2.gameObject.actor;
+                        var cancelar_1 = actor_a.cuando_colisiona(actor_b);
+                        var cancelar_2 = actor_b.cuando_colisiona(actor_a);
+                        if (cancelar_1 || cancelar_2) {
+                            colision.isActive = false;
+                        }
+                    }
+                });
+            });
+        });
         this.matter.world.on("collisionstart", function (event) {
             try {
                 for (var i = 0; i < event.pairs.length; i++) {

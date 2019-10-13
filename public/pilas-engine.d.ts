@@ -558,6 +558,7 @@ declare class ActorBase {
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
+    cuando_colisiona(actor: Actor): void;
     cuando_hace_click(x: any, y: any, evento_original: any): void;
     cuando_termina_de_hacer_click(x: any, y: any, evento_original: any): void;
     cuando_sale(x: any, y: any, evento_original: any): void;

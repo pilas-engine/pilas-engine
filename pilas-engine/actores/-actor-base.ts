@@ -847,6 +847,11 @@ class ActorBase {
 
   cuando_termina_una_colision(actor: Actor) {}
 
+  /**
+   * Se llama en todo momento en que se produce una colisión.
+   */
+  cuando_colisiona(actor: Actor) {}
+
   cuando_hace_click(x, y, evento_original) {}
 
   cuando_termina_de_hacer_click(x, y, evento_original) {}

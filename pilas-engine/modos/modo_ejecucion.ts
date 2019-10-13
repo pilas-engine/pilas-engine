@@ -158,6 +158,37 @@ class ModoEjecucion extends Modo {
   }
 
   vincular_eventos_de_colision() {
+    let pilas = this.pilas;
+
+    this.matter.world.on("beforeupdate", function(listener) {
+      let cuerpos_estaticos = this.engine.world.bodies.filter(e => e.isStatic);
+
+      cuerpos_estaticos.map(cuerpo => {
+        let otros_cuerpos = cuerpos_estaticos.filter(c => c.id !== cuerpo.id);
+        let colisiones = pilas.Phaser.Physics.Matter.Matter.Query.collides(cuerpo, otros_cuerpos);
+
+        colisiones.map(colision => {
+          let figura_1 = colision.bodyA;
+          let figura_2 = colision.bodyB;
+
+          if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+            let actor_a = figura_1.gameObject.actor;
+            let actor_b = figura_2.gameObject.actor;
+
+            //actor_a.colisiones.push(actor_b);
+            //actor_b.colisiones.push(actor_a);
+
+            let cancelar_1 = actor_a.cuando_colisiona(actor_b);
+            let cancelar_2 = actor_b.cuando_colisiona(actor_a);
+
+            if (cancelar_1 || cancelar_2) {
+              colision.isActive = false;
+            }
+          }
+        });
+      });
+    });
+
     this.matter.world.on("collisionstart", (event /*, a, b*/) => {
       try {
         for (let i = 0; i < event.pairs.length; i++) {
