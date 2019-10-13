@@ -18,50 +18,50 @@ jobs:
     docker:
       - image: circleci/node:8.16.0-stretch-browsers
     steps:
-        - checkout
-        - run: make iniciar
-        - run: make test
-        - run: echo "Instalando wine ..."
-        - run: sudo dpkg --add-architecture i386 && sudo apt update
-        - run: sudo apt install wine wine32 wine64 libwine libwine:i386 fonts-wine
-        - run: make binarios
-        - run: echo "Instalando go y ghr ..."
-        - run: sudo apt-get install golang
-        - run: wget https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz; tar -xvf go1.10.3.linux-amd64.tar.gz; sudo mv go /usr/local
-        - run: GOPATH="/tmp/go" GOROOT=/usr/local/go /usr/local/go/bin/go get github.com/tcnksm/ghr
-        - run: echo "Subiendo binarios"
-        - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
-        - run: echo "Subiendo para servidor estatico"
-        - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` pilas-engine-compilado.zip
-        - run: echo "Generando manuales..."
-        - run: sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
-        - run: make pilas_manuales_descargables
-        - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` manuales/
+      - checkout
+      - run: make iniciar
+      - run: make test
+      - run: echo "Instalando wine ..."
+      - run: sudo dpkg --add-architecture i386 && sudo apt update
+      - run: sudo apt install wine wine32 wine64 libwine libwine:i386 fonts-wine
+      - run: make binarios
+      - run: echo "Instalando go y ghr ..."
+      - run: sudo apt-get install golang
+      - run: wget https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz; tar -xvf go1.10.3.linux-amd64.tar.gz; sudo mv go /usr/local
+      - run: GOPATH="/tmp/go" GOROOT=/usr/local/go /usr/local/go/bin/go get github.com/tcnksm/ghr
+      - run: echo "Subiendo binarios"
+      - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` binarios/
+      - run: echo "Subiendo para servidor estatico"
+      - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` pilas-engine-compilado.zip
+      - run: echo "Generando manuales..."
+      - run: sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+      - run: make pilas_manuales_descargables
+      - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` manuales/
   actualizar-sitio:
     docker:
       - image: circleci/node:8.16.0-stretch-browsers
     steps:
-        - checkout
-        - run: make iniciar
-        - run: make test
-        - run:
-            name: "Subiendo archivos a surge..."
-            command: make deploy_a_surge
-        - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-        - run:
-            name: "Subiendo archivos a dokku..."
-            command: make deploy_a_dokku
+      - checkout
+      - run: make iniciar
+      - run: make test
+      - run:
+          name: "Realizando deploy a surge..."
+          command: make deploy_a_surge
+      - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+      - run:
+          name: "Realizando deploy a dokku producción..."
+          command: make deploy_a_dokku
   actualizar-sitio-dev:
     docker:
       - image: circleci/node:8.16.0-stretch-browsers
     steps:
-        - checkout
-        - run: make iniciar
-        - run: make test
-        - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-        - run:
-            name: "Subiendo archivos a surge..."
-            command: make deploy_a_dokku_dev
+      - checkout
+      - run: make iniciar
+      - run: make test
+      - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+      - run:
+          name: "Realizando deploy a dokku dev..."
+          command: make deploy_a_dokku_dev
 workflows:
   version: 2
   compilar-y-subir:
