@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Eventos · Manual de Pilas Engine 2</title>
+        <title>Comportamientos · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="dibujado_en_pantalla.html" />
+    <link rel="next" href="azar.html" />
     
     
-    <link rel="prev" href="escenas.html" />
+    <link rel="prev" href="habilidades.html" />
     
 
     </head>
@@ -180,7 +180,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="comportamientos.html">
+        <li class="chapter active" data-level="1.8" data-path="comportamientos.html">
             
                 <a href="comportamientos.html">
             
@@ -271,7 +271,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.15" data-path="eventos.html">
+        <li class="chapter " data-level="1.15" data-path="eventos.html">
             
                 <a href="eventos.html">
             
@@ -386,7 +386,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Eventos</a>
+        <a href="." >Comportamientos</a>
     </h1>
 </div>
 
@@ -401,73 +401,53 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="eventos">Eventos</h1><p>En pilas llamamos &quot;eventos&quot; a las se&#xF1;ales que emiten el mouse o el teclado. Por ejemplo, un &quot;click&quot; del mouse es un evento al igual que la pulsaci&#xF3;n de una tecla.</p><p>Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acci&#xF3;n dentro del juego para responder. Por ejemplo, en un juego de acci&#xF3;n, el &quot;click&quot; del mouse podr&#xED;a realizar una explosi&#xF3;n o hacer que un personaje salte.</p><h2 id="&#xBF;c&#xF3;mo-capturar-un-evento-del-mouse">&#xBF;C&#xF3;mo capturar un evento del mouse?</h2><p>Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el c&#xF3;digo:</p><ul><li>cuando_hace_click(x, y, evento_original)
+                                <h1 id="comportamientos">Comportamientos</h1><p>En el desarrollo de videojuegos es conveniente tener una forma de indicarle a los actores una rutina o tarea para que la realicen.</p><p>En pilas usamos el concepto de comportamiento. Un comportamiento es un objeto que simboliza una acci&#xF3;n a realizar por un actor.</p><p>La utilidad de usar componentes es que puedes asociarlos y intercambiarlos libremente para lograr efectos &#xFA;tiles.</p><p>Por ejemplo: un guardia de un juego de acci&#xF3;n puede ir de un lado a otro en un pasillo:</p><ul><li>caminar hacia la izquierda hasta el fin del pasillo.
 </li>
-<li>cuando_termina_de_hacer_click(x, y, evento_original)
+<li>dar una vuelta completa.
 </li>
-<li>cuando_mueve(x, y, evento_original)
+<li>caminar hacia la derecha hasta el fin del pasillo.
 </li>
-<li>cuando_sale(x, y, evento_original)
+<li>dar una vuelta completa.
+</li>
+<li>etc...
 </li></ul>
-<p>Estas funciones se pueden crear en el c&#xF3;digo de una escena o de un actor. La diferencia es que en las escenas el &quot;click&quot; o el movimiento se van a detectar en toda la pantalla, mientras que en el c&#xF3;digo del actor solo se detectar&#xE1;n si el mouse apunta al actor.</p><p>Si desde un actor necesitas detectar el click del mouse en la pantalla deber&#xED;as
-usar este otro m&#xE9;todo:</p><ul><li>cuando_hace_click_en_la_pantalla(x, y, evento_original)
-</li></ul>
-<p>Veamos un ejemplo, imagin&#xE1; que queremos crear actores de la clase &quot;Pelota&quot; cada vez que el usuario hace &quot;click&quot; sobre la pantalla. Podr&#xED;amos hacerlo colocando este c&#xF3;digo en la escena:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> escena2 extends Escena {
-  iniciar() {}
+<p>En este caso hay 4 comportamientos, y queda en nuestro control si queremos que luego de los 4 comportamientos comience nuevamente.</p><h2 id="realizando-comportamientos">Realizando comportamientos</h2><p>Para indicarle a un actor que realice un comportamiento tenemos que llamar a la funci&#xF3;n
+<code>hacer</code> indic&#xE1;ndole el nombre del comportamiento:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> mi_actor = pilas.actores.actor();
+mi_actor.hacer(<span class="hljs-string">&quot;aparecer&quot;</span>);</code></pre>
+<p>Ten en cuenta que los comportamientos se pueden encadenar para lograr efectos o animaciones
+una detr&#xE1;s de otra. Por ejemplo, si queremos mostrar y ocultar un actor podemos hacerlo
+as&#xED;:</p><pre><code>let mi_actor = pilas.actores.actor();
+mi_actor.hacer(&quot;aparecer&quot;);
+mi_actor.hacer(&quot;desaparecer&quot;);</code></pre>
+<p>Incluso, algunas habilidades reciben par&#xE1;metros para indicar velocidad, posici&#xF3;n etc...</p><p>Por ejemplo, si queremos hacer que el actor desaparezca y aparezca varias veces muy r&#xE1;pidamente
+podemos escribir algo as&#xED;:</p><pre><code>let mi_actor = pilas.actores.actor();
 
-  actualizar() {}
-
-  cuando_mueve(x, y, evento_original) {}
-
-  cuando_hace_click(x, y, evento_original) {
-    <span class="hljs-keyword">let</span> pelota = <span class="hljs-keyword">this</span>.pilas.actores.pelota();
-    pelota.x = x;
-    pelota.y = y;
-  }
+for (i=0; i&lt;50; i++) {
+  mi_actor.hacer(&quot;aparecer&quot;, {velocidad: 10});
+  mi_actor.hacer(&quot;desaparecer&quot;, {velocidad: 10});
 }</code></pre>
-<h2 id="&#xBF;c&#xF3;mo-capturar-eventos-del-mouse-en-un-actor">&#xBF;C&#xF3;mo capturar eventos del mouse en un actor?</h2><p>Para capturar eventos en el contexto de un actor, tenemos que usar las mismas funciones, pero declar&#xE1;ndolas dentro del c&#xF3;digo del actor.</p><p>Por ejemplo, imagin&#xE1; que estamos haciendo un juego de cartas y queremos que la carta se pueda hacer girar con un &quot;click&quot; de mouse y que cambie de transparencia cuando el mouse est&#xE9; sobre ella:</p><p><img src="assets/carta_con_eventos.gif"></p><p>El c&#xF3;digo del actor deber&#xED;a quedarnos algo similar a lo siguiente:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> actor extends Actor {
-  propiedades = {};
-
-  iniciar() {
-    <span class="hljs-keyword">this</span>.transparencia = <span class="hljs-number">50</span>;
-  }
-
-  actualizar() {}
-
-  cuando_mueve(x, y, evento_original) {
-    <span class="hljs-keyword">this</span>.escala = <span class="hljs-number">1.2</span>;
-    <span class="hljs-keyword">this</span>.transparencia = <span class="hljs-number">0</span>;
-  }
-
-  cuando_sale(x, y, evento_original) {
-    <span class="hljs-keyword">this</span>.transparencia = <span class="hljs-number">50</span>;
-    <span class="hljs-keyword">this</span>.escala = <span class="hljs-number">1</span>;
-  }
-
-  cuando_hace_click(x, y, evento_original) {
-    <span class="hljs-keyword">this</span>.rotacion = [<span class="hljs-number">360</span>];
-  }
-
-  cuando_termina_de_hacer_click(x, y, evento_original) {}
-}</code></pre>
-<p>Los manejadores de eventos como <code>cuando_mueve</code>, <code>cuando_sale</code> y <code>cuando_hace_click</code> van a ser llamados internamente cuando se produzcan esos eventos sobre el actor.</p><h2 id="capturar-eventos-de-forma-global-con-manejadores">Capturar eventos de forma global, con manejadores</h2><p>Otra forma de capturar eventos m&#xE1;s sofisticada es utilizando
-el m&#xF3;dulo <code>eventos</code> de la escena.</p><pre><code>pilas.eventos.conectar(&quot;mueve_mouse&quot;, (x, y) =&gt; {
-  console.log(&quot;mueve&quot;, x, y);
-});
-
-pilas.eventos.conectar(&quot;click_de_mouse&quot;, (x, y) =&gt; {
-  console.log(&quot;mueve&quot;, x, y);
-});
-
-pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
-  console.log(&quot;mueve&quot;, x, y);
-});</code></pre>
-<p>Esta es la lista de eventos completa:</p><ul><li><code>mueve_mouse</code>: x, y
+<h2 id="comportamientos-incluidos-en-pilas">Comportamientos incluidos en pilas</h2><p>Esta es la lista de comportamientos que incluye pilas:</p><ul><li>desaparecer (par&#xE1;metros: velocidad)
 </li>
-<li><code>click_de_mouse</code>: x, y, boton_izquierdo, boton_derecho
+<li>aparecer (par&#xE1;metros: velocidad)
 </li>
-<li><code>termina_click</code>: x, y, boton_izquierdo, boton_derecho
+<li>eliminar (sin par&#xE1;metros)
+</li>
+<li>mover (par&#xE1;metros: x, y, demora)
 </li></ul>
+<h2 id="comportamientos-personalizados">Comportamientos personalizados</h2><p>Si quieres crear tus propios comportamientos podr&#xED;as abordarlo de la siguiente forma:</p><p>Primero, deber&#xED;as crear una clase que herede de <code>Comportamientos</code> y tenga al menos
+un m&#xE9;todo iniciar y actualizar as&#xED;:</p><pre><code>class MiComportamiento extends Comportamiento {
+
+  iniciar(argumentos) {
+  }
+
+  actualizar() {
+    // retornar true para detener el comportamiento.
+  }
+
+  terminar() {}
+}</code></pre>
+<p>Luego, deber&#xED;as vincularlo al m&#xF3;dulo de comportamientos:</p><pre><code>pilas.comportamientos.vincular(&quot;mi comportamiento&quot;, MiComportamiento);</code></pre>
+<p>y por &#xFA;ltimo asign&#xE1;rselo a un actor:</p><pre><code>mi_actor.hacer(&quot;mi_comportamiento&quot;);</code></pre>
 
                                 
                                 </section>
@@ -495,12 +475,12 @@ pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
 
             
                 
-                <a href="escenas.html" class="navigation navigation-prev " aria-label="Previous page: Escenas">
+                <a href="habilidades.html" class="navigation navigation-prev " aria-label="Previous page: Habilidades">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="dibujado_en_pantalla.html" class="navigation navigation-next " aria-label="Next page: Dibujado simple en pantalla">
+                <a href="azar.html" class="navigation navigation-next " aria-label="Next page: Azar o cálculos aleatorios">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -511,7 +491,7 @@ pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Eventos","level":"1.15","depth":1,"next":{"title":"Dibujado simple en pantalla","level":"1.16","depth":1,"path":"dibujado_en_pantalla.md","ref":"dibujado_en_pantalla.md","articles":[]},"previous":{"title":"Escenas","level":"1.14","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos.md","mtime":"2019-07-23T17:04:00.955Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-10-13T18:36:15.131Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Comportamientos","level":"1.8","depth":1,"next":{"title":"Azar o cálculos aleatorios","level":"1.9","depth":1,"path":"azar.md","ref":"azar.md","articles":[]},"previous":{"title":"Habilidades","level":"1.7","depth":1,"path":"habilidades.md","ref":"habilidades.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"comportamientos.md","mtime":"2019-09-03T22:27:38.459Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-10-13T18:36:15.131Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
