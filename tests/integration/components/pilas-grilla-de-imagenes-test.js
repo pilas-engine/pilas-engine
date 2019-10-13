@@ -1,26 +1,13 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { module, test } from "qunit";
+import { setupRenderingTest } from "ember-qunit";
+import { render } from "@ember/test-helpers";
+import hbs from "htmlbars-inline-precompile";
 
-module('Integration | Component | pilas-grilla-de-imagenes', function(hooks) {
+module("Integration | Component | pilas-grilla-de-imagenes", function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
+  test("it renders", async function(assert) {
     await render(hbs`{{pilas-grilla-de-imagenes}}`);
-
-    assert.dom(this.element).hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#pilas-grilla-de-imagenes}}
-        template block text
-      {{/pilas-grilla-de-imagenes}}
-    `);
-
-    assert.dom(this.element).hasText('template block text');
+    assert.ok(this.element);
   });
 });
