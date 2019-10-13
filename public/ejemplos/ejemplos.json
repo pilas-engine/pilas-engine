@@ -54,6 +54,10 @@
     {
       "nombre": "explosion_al_colisionar",
       "desde": "2.0.84"
+    },
+    {
+      "nombre": "nave_contra_aliens",
+      "desde": "2.0.90"
     }
   ]
 }
