@@ -6252,6 +6252,8 @@ var Modo = (function (_super) {
         else {
             sprite.setTexture(actor.imagen);
         }
+        sprite.input.hitArea.width = sprite.width;
+        sprite.input.hitArea.height = sprite.height;
         if (actor.activo === false) {
             sprite.alpha = 0.5;
         }

@@ -137,6 +137,11 @@ class Modo extends Phaser.Scene {
       sprite.setTexture(actor.imagen);
     }
 
+    // Arreglo: se cambia el area de contacto para poder
+    // arrastrar correctamente al actor luego de cambiar su textura.
+    sprite.input.hitArea.width = sprite.width;
+    sprite.input.hitArea.height = sprite.height;
+
     if (actor.activo === false) {
       sprite.alpha = 0.5;
     } else {
