@@ -5,6 +5,7 @@ import { inject as service } from "@ember/service";
 export default Component.extend({
   activo: true,
   bus: service(),
+  tagName: "",
 
   didInsertElement() {
     this.bus.on("recargarCanvasDePilas", this, "recargarCanvasDePilas");
