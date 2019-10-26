@@ -1061,7 +1061,9 @@ var Huesos = (function () {
         pose.object_array.map(function (data) {
             var imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
             var sprite = _this.obtener_o_crear_sprite(data.name, _this.prefijo_de_imagenes + imagen);
-            sprite.setTexture(_this.prefijo_de_imagenes + imagen);
+            if (_this.prefijo_de_imagenes) {
+                sprite.setTexture(_this.prefijo_de_imagenes + imagen);
+            }
             sprite.setAlpha(data.alpha);
             sprite.x = data.world_space.position.x;
             sprite.y = -data.world_space.position.y;

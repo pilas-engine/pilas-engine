@@ -58,7 +58,7 @@ class Huesos {
     return animaciones[indice];
   }
 
-  actualizar_animacion(dt) {
+  actualizar_animacion(dt: any) {
     this.pose.update(dt);
     this.pose.strike();
     this.actualizar_posicion(this.pose);
@@ -82,13 +82,15 @@ class Huesos {
   }
 
   actualizar_posicion(pose) {
-    pose.object_array.map(data => {
+    pose.object_array.map((data:any) => {
       let imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
       let sprite = this.obtener_o_crear_sprite(data.name, this.prefijo_de_imagenes + imagen);
 
       // FIXME: este cambio se realiza a causa de pilas-engine con bloques, en donde necesitamos
       // cambiar la textura de cada una de las partes a partir del prefijo.
-      sprite.setTexture(this.prefijo_de_imagenes + imagen);
+      if (this.prefijo_de_imagenes) {
+        sprite.setTexture(this.prefijo_de_imagenes + imagen);
+      }
 
       sprite.setAlpha(data.alpha);
       sprite.x = data.world_space.position.x;
