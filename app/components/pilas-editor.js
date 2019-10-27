@@ -66,13 +66,15 @@ export default Component.extend({
   },
 
   instanciarSplitJS() {
-    let splitjs = Split(["#panel-canvas", "#panel-editor"], {
-      sizes: [50, 50],
-      minSize: [320, 200],
-      expandToMin: false
-    });
+    if (this.mostrarEditor && !this.splitjs) {
+      let splitjs = Split(["#panel-canvas", "#panel-editor"], {
+        sizes: [50, 50],
+        minSize: [320, 200],
+        expandToMin: false
+      });
 
-    this.set("splitjs", splitjs);
+      this.set("splitjs", splitjs);
+    }
   },
 
   instanciarSplitJSSoloCuandoEsNecesario: observer("mostrarEditor", function() {
