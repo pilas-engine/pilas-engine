@@ -56,8 +56,6 @@ class ModoCargador extends Modo {
     }
 
     if (this.pilas.imagenes) {
-      console.log(`hay ${this.pilas.imagenes.length} imágenes para cargar`);
-
       this.pilas.imagenes.map(item => {
         this.textures.addBase64(item.nombre, item.contenido);
       });

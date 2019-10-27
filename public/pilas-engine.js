@@ -6434,7 +6434,6 @@ var ModoCargador = (function (_super) {
             }
         }
         if (this.pilas.imagenes) {
-            console.log("hay " + this.pilas.imagenes.length + " im\u00E1genes para cargar");
             this.pilas.imagenes.map(function (item) {
                 _this.textures.addBase64(item.nombre, item.contenido);
             });

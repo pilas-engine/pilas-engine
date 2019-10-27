@@ -7,6 +7,7 @@
 
     <div class="pa2 truncate">
       <input class="dn" type="file" id="input-abrir-archivo">
+
       {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
 
       {{pilas-boton responsive=true icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
@@ -26,6 +27,8 @@
           {{pilas-boton responsive=true icono="webserver" desactivado=true texto="Iniciar servidor web"}}
         {{/pilas-tooltip}}
       {{/en-electron}}
+
+      {{pilas-boton-animaciones desactivado=(not estado.puede_editar) modalVisible=mostrarModalDeAnimaciones}}
     </div>
 
     <div class="flex1">
@@ -50,7 +53,15 @@
   <section class="flex1 flex bt borde h-50">
     <div class="columns">
 
+      <div class="{{if mostrarPropiedades "dn" "flex flex-column w-panel-colapsado borde br pa2"}}">
+        {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
+      </div>
+
       <div class="ancho-panel-propiedades {{if mostrarPropiedades "flex flex-column" "dn"}} br borde pa2 ">
+
+        <div class="texto">
+          {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
+        </div>
 
         <div class="unselectable">
           {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="Crear Escena"}}
@@ -90,6 +101,10 @@
       </div>
 
       <div id="panel-canvas" class="flex {{if (and debe_expandir_el_panel_de_previsualizacion (not mostrarEditor)) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
+
+        <div class="texto">
+          {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
+        </div>
 
         <div class="mb2 flex" style="padding-bottom: 3px ">
           {{#if estado.puedeEjecutar}}
@@ -191,7 +206,16 @@
 
       </div>
 
+
+      <div class="{{if mostrarEditor "dn" "flex flex-column w-panel-colapsado"}} bl borde pl2 pa2">
+        {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
+      </div>
+
       <div id="panel-editor" class="{{if mostrarEditor "" "flex1"}} {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
+
+        <div class="texto">
+          {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
+        </div>
 
         <div class="unselectable pr2 pv2 flex bg-fondo">
           <div class="relative">

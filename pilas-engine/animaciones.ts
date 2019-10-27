@@ -55,7 +55,7 @@ class Animaciones {
     return frames;
   }
 
-  existe_animacion(actor, nombre) {
+  existe_animacion(actor: Actor, nombre: string) {
     let animacion = `${actor.id}-${nombre}`;
     return this.animaciones[animacion] !== undefined;
   }

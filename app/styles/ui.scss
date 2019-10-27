@@ -52,6 +52,11 @@ span {
 
 .boton {
   transition: background-color 750ms ease;
+  height: 37px;
+}
+
+.boton-principal {
+  height: 55px !important;
 }
 
 .ember-power-select-trigger,
@@ -129,4 +134,8 @@ span {
 
 .flex11 {
   flex: 1 1;
+}
+
+.w-panel-colapsado {
+  width: 45px;
 }

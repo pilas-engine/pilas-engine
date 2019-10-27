@@ -71,6 +71,7 @@ export default Component.extend({
       this.bus.on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
       this.bus.on("progreso_de_carga", this, "progreso_de_carga");
       this.bus.on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+      this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar");
     };
   },
 
@@ -96,6 +97,7 @@ export default Component.extend({
     this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
     this.bus.off("progreso_de_carga", this, "progreso_de_carga");
     this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
+    this.bus.off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar");
   },
 
   convertir_a_boolean(valor) {
@@ -227,9 +229,15 @@ export default Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  finaliza_carga() {
+  finaliza_carga(pilas, contexto) {
     if (this.cuando_termina_de_cargar) {
-      this.cuando_termina_de_cargar();
+      this.cuando_termina_de_cargar(pilas, contexto, this.id_canvas);
+    }
+  },
+
+  cuando_termina_de_iniciar(pilas, contexto) {
+    if (this.cuando_termina_de_iniciar_ejecucion) {
+      this.cuando_termina_de_iniciar_ejecucion(pilas, contexto);
     }
   },
 

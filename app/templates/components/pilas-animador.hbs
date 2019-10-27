@@ -1,0 +1,44 @@
+{{yield}}
+
+<div class="pa2">
+  <span class="texto">Cuadros por segundo:</span>
+  {{input value=animacion.velocidad type="number"}}
+</div>
+
+<div class="pa2">
+  {{#each animacion.cuadros as |cuadro|}}
+    <div class="ba b--red dib ma1">
+      {{#if tiene_mas_de_un_cuadro}}
+        <button type="button" name="button" {{action "eliminar_cuadro" cuadro}}>x</button>
+      {{/if}}
+
+      <div class="sprite-grilla-de-imagenes {{cuadro.sprite}}"></div>
+    </div>
+  {{/each}}
+
+  <button {{action "abrir_modal_para_agregar_imagen"}}>+ Agregar cuadro</button>
+
+  {{#pilas-modal alCerrar=(action "ocultar") visible=mostrarModalDeImagenes titulo="Agregar imagen"}}
+    <div>
+      {{pilas-grilla-de-imagenes filtro=filtro cuando_selecciona=(action "cuando_selecciona_imagen_en_el_modal")}}
+    </div>
+  {{/pilas-modal}}
+</div>
+
+<div class="pa2 unselectable">
+  {{#if pausado}}
+    <button {{action "resumir"}} name="button">Resumir</button>
+  {{else}}
+    <button {{action "pausar"}} name="button">Pausar</button>
+  {{/if}}
+</div>
+
+{{pilas-canvas
+    ancho=proyecto.ancho
+    alto=proyecto.alto
+    proyecto=proyecto
+    modoZoom=2
+    id_canvas="animador"
+    cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
+    cuando_termina_de_iniciar_ejecucion=(action "cuando_termina_de_iniciar_ejecucion")
+}}

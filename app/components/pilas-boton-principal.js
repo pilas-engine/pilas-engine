@@ -11,6 +11,6 @@ export default Component.extend({
     truncate
     unselectable
     undraggable
-    boton
+    boton boton-principal
   `
 });

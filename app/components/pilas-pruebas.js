@@ -10,6 +10,7 @@ export default Component.extend({
   objeto: null,
 
   proyecto: null,
+  demoraSuperada: false,
 
   didInsertElement() {
     this.set("instancia_seleccionada", { numero: 3 });
@@ -64,23 +65,7 @@ export default Component.extend({
   },
 
   actions: {
-    incorporar_imagenes_al_proyecto(lista_de_archivos) {
-      console.log(this.proyecto.imagenes);
-
-      lista_de_archivos.map(item => {
-        // si el archivo ya estaba en el proyecto ...
-        let anterior = this.proyecto.imagenes.findBy("nombre", item.nombre);
-
-        // ... reemplaza su contenido.
-        if (anterior) {
-          anterior.contenido = item.contenido;
-        } else {
-          // si no estaba, lo carga por primera vez.
-          this.proyecto.imagenes.pushObject(item);
-        }
-      });
-    },
-    cuando_termina_de_cargar() {
+    cuando_termina_de_cargar(/*pilas, contexto*/) {
       let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
       let datos = {

@@ -28,7 +28,8 @@ const queryParams = new QueryParams({
   modoZoom: { defaultValue: 2, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true },
   hash: { defaultValue: null, replace: true, refresh: true },
-  tamano: { defaultValue: 14, replace: true, refresh: true }
+  tamano: { defaultValue: 14, replace: true, refresh: true },
+  mostrarModalDeAnimaciones: { defaultValue: false, replace: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {

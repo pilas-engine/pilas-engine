@@ -39,7 +39,7 @@ declare class Animaciones {
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number): void;
     private crear_frames_de_animacion;
-    existe_animacion(actor: any, nombre: any): boolean;
+    existe_animacion(actor: Actor, nombre: string): boolean;
 }
 declare class Automata {
     actor: Actor;
