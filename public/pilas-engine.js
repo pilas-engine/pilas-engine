@@ -765,6 +765,7 @@ var Habilidad = (function () {
     }
     Habilidad.prototype.iniciar = function () { };
     Habilidad.prototype.actualizar = function () { };
+    Habilidad.prototype.eliminar = function () { };
     return Habilidad;
 }());
 var RotarConstantemente = (function (_super) {
@@ -2594,6 +2595,18 @@ var ActorBase = (function () {
                 var instancia = new clase(this.pilas, this);
                 instancia.iniciar();
                 this._habilidades.push(instancia);
+            }
+        }
+    };
+    ActorBase.prototype.olvidar = function (habilidad) {
+        var clase = this.pilas.habilidades.buscar(habilidad);
+        if (clase) {
+            if (!this.tieneHabilidad(clase.name)) {
+                console.warn("No se puede olvidar la habilidad '" + clase.name + "' porque el actor no la tiene.");
+            }
+            else {
+                var indice = this._habilidades.findIndex(function (e) { return e.constructor.name == clase.name; });
+                this._habilidades.splice(indice, 1);
             }
         }
     };

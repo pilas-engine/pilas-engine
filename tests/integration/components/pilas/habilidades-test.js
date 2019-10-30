@@ -18,15 +18,19 @@ module("Integration | Pilas | habilidades", function(hooks) {
       actor.aprender("oscilar verticalmente");
       actor.aprender("oscilar rotacion");
       actor.aprender("oscilar transparencia");
+
+      assert.equal(actor._habilidades.length, 3);
+      actor.olvidar("oscilar transparencia");
     });
 
     this.set("cuandoTerminaLaEspera", pilas => {
+      let actor = pilas.obtener_actor_por_nombre("aceituna");
+      actor.aprender("oscilar transparencia");
+      assert.equal(actor._habilidades.length, 3);
       assert.equal(pilas.obtener_cantidad_de_actores(), 1);
       done();
     });
 
-    await render(
-      hbs`{{pilas-test cuandoInicia=cuandoInicia codigo=codigo espera=espera cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`
-    );
+    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia codigo=codigo espera=espera cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
   });
 });

@@ -186,6 +186,7 @@ declare class Habilidad {
     constructor(pilas: Pilas, actor: Actor);
     iniciar(): void;
     actualizar(): void;
+    eliminar(): void;
 }
 declare class RotarConstantemente extends Habilidad {
     iniciar(): void;
@@ -573,6 +574,7 @@ declare class ActorBase {
     figura_radio: number;
     decir(mensaje: string): void;
     aprender(habilidad: string): void;
+    olvidar(habilidad: string): void;
     tieneHabilidad(habilidad: string): boolean;
     aumentar(cantidad?: number): void;
     con_borde: boolean;

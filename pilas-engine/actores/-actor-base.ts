@@ -975,6 +975,19 @@ class ActorBase {
     }
   }
 
+  olvidar(habilidad: string) {
+    let clase = this.pilas.habilidades.buscar(habilidad);
+
+    if (clase) {
+      if (!this.tieneHabilidad(clase.name)) {
+        console.warn(`No se puede olvidar la habilidad '${clase.name}' porque el actor no la tiene.`);
+      } else {
+        let indice = this._habilidades.findIndex(e => e.constructor.name == clase.name);
+        this._habilidades.splice(indice, 1);
+      }
+    }
+  }
+
   tieneHabilidad(habilidad: string) {
     return (
       this._habilidades.filter(h => {
