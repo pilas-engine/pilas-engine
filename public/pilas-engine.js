@@ -4552,7 +4552,7 @@ var SpriteObject = (function (_super) {
         else {
             this.default_pivot = true;
         }
-        this.z_index = loadInt(json, "z_index", 0);
+        this.z_index = 99;
         this.alpha = loadFloat(json, "a", 1.0);
         return this;
     };
@@ -5817,6 +5817,7 @@ var Pose = (function () {
                         pose_sprite.copy(sprite_timeline_keyframe1.sprite).tween(sprite_timeline_keyframe2.sprite, pct, timeline_keyframe1.spin);
                         pose_sprite.name = timeline.name;
                         pose_sprite.parent_index = data_object.parent_index;
+                        pose_sprite.z_index_secundario = data_object.z_index;
                         break;
                     case "bone":
                         var pose_bone = (pose_object_array_1[object_index] = pose_object_array_1[object_index] || new Bone());

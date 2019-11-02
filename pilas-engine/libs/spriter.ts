@@ -569,7 +569,7 @@ class File extends Element {
     this.type = type;
   }
   load(json: any): any {
-// @ts-ignore
+    // @ts-ignore
     super.load(json);
     const type = loadString(json, "type", "image");
     if (this.type !== type) throw new Error();
@@ -674,7 +674,9 @@ class SpriteObject extends BaseObject {
     } else {
       this.default_pivot = true;
     }
-    this.z_index = loadInt(json, "z_index", 0);
+    //debugger;
+    //this.z_index = loadInt(json, "z_index", 0);
+    this.z_index = 99;
     this.alpha = loadFloat(json, "a", 1.0);
     return this;
   }
@@ -1040,6 +1042,7 @@ class SpriteTimelineKeyframe extends TimelineKeyframe {
   // @ts-ignore
   load(json: any): SpriteTimelineKeyframe {
     super.load(json);
+    //debugger;
     this.sprite = new SpriteObject().load(json.object);
     return this;
   }
@@ -1933,6 +1936,7 @@ class Pose {
             pose_sprite.copy(sprite_timeline_keyframe1.sprite).tween(sprite_timeline_keyframe2.sprite, pct, timeline_keyframe1.spin);
             pose_sprite.name = timeline.name; // set name from timeline
             pose_sprite.parent_index = data_object.parent_index; // set parent from object_ref
+            pose_sprite.z_index_secundario = data_object.z_index;
             break;
           case "bone":
             const pose_bone = <Bone>(pose_object_array[object_index] = pose_object_array[object_index] || new Bone());

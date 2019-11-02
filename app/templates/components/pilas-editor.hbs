@@ -54,13 +54,13 @@
     <div class="columns">
 
       <div class="{{if mostrarPropiedades "dn" "flex flex-column w-panel-colapsado borde br pa2"}}">
-        {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
+        {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
       </div>
 
       <div class="ancho-panel-propiedades {{if mostrarPropiedades "flex flex-column" "dn"}} br borde pa2 ">
 
-        <div class="texto">
-          {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
+        <div class="texto pv2">
+          {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
         </div>
 
         <div class="unselectable">
@@ -102,7 +102,7 @@
 
       <div id="panel-canvas" class="flex {{if (and debe_expandir_el_panel_de_previsualizacion (not mostrarEditor)) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
 
-        <div class="texto">
+        <div class="texto pb2">
           {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
         </div>
 
@@ -208,13 +208,13 @@
 
 
       <div class="{{if mostrarEditor "dn" "flex flex-column w-panel-colapsado"}} bl borde pl2 pa2">
-        {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
+        {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
       </div>
 
       <div id="panel-editor" class="{{if mostrarEditor "" "flex1"}} {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
 
-        <div class="texto">
-          {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
+        <div class="texto pv2">
+          {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
         </div>
 
         <div class="unselectable pr2 pv2 flex bg-fondo">

@@ -82,7 +82,7 @@ class Huesos {
   }
 
   actualizar_posicion(pose) {
-    pose.object_array.map((data:any) => {
+    pose.object_array.map((data: any) => {
       let imagen = pose.data.folder_array[data.folder_index].file_array[data.file_index].name;
       let sprite = this.obtener_o_crear_sprite(data.name, this.prefijo_de_imagenes + imagen);
 
