@@ -37,3 +37,12 @@ arrastrable así:
 ```typescript
 mi_actor.aprender("arrastrable");
 ```
+
+## Olvidar o eliminar habilidades
+
+Si en algún momento quieres eliminar una habilidad de un actor, simplemente
+se puede llamar a la función `olvidar` así:
+
+```typescript
+mi_actor.olvidar("arrastrable");
+```

@@ -10,6 +10,10 @@ class boton extends ActorTextoBase {
 
   cuando_hace_click() {
     this.decir("¡has hecho click!");
+    this.realizar_animacion_de_pulsacion();
+  }
+
+  realizar_animacion_de_pulsacion() {
     this.y -= 2;
 
     this.pilas.luego(0.2, () => {

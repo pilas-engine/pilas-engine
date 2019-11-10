@@ -1936,7 +1936,7 @@ class Pose {
             pose_sprite.copy(sprite_timeline_keyframe1.sprite).tween(sprite_timeline_keyframe2.sprite, pct, timeline_keyframe1.spin);
             pose_sprite.name = timeline.name; // set name from timeline
             pose_sprite.parent_index = data_object.parent_index; // set parent from object_ref
-            pose_sprite.z_index_secundario = data_object.z_index;
+            pose_sprite['z_index_secundario'] = data_object.z_index;
             break;
           case "bone":
             const pose_bone = <Bone>(pose_object_array[object_index] = pose_object_array[object_index] || new Bone());

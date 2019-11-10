@@ -193,8 +193,13 @@ declare class RotarConstantemente extends Habilidad {
     actualizar(): void;
 }
 declare class Arrastrable extends Habilidad {
+    valor_inicial_dinamico: any;
     iniciar(): void;
     actualizar(): void;
+    eliminar(): void;
+    private cuando_comienza_a_arrastrar;
+    private cuando_mueve;
+    private cuando_suelta;
 }
 declare class MoverConElTeclado extends Habilidad {
     iniciar(): void;
@@ -644,6 +649,7 @@ declare class boton extends ActorTextoBase {
         color: string;
     };
     cuando_hace_click(): void;
+    realizar_animacion_de_pulsacion(): void;
     cuando_mueve(): void;
     cuando_sale(): void;
 }

@@ -782,33 +782,43 @@ var RotarConstantemente = (function (_super) {
 var Arrastrable = (function (_super) {
     __extends(Arrastrable, _super);
     function Arrastrable() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.valor_inicial_dinamico = null;
+        return _this;
     }
     Arrastrable.prototype.iniciar = function () {
-        var _this = this;
         var input = this.pilas.modo.input;
-        var valor_inicial_dinamico = null;
         this.actor.sprite.setInteractive();
         input.setDraggable(this.actor.sprite);
-        input.on("dragstart", function (_, objeto) {
-            if (_this.actor !== objeto.actor) {
-                return;
-            }
-            valor_inicial_dinamico = objeto.actor.dinamico;
-            objeto.actor.dinamico = false;
-        });
-        input.on("drag", function (_, objeto, x, y) {
-            objeto.x = x;
-            objeto.y = y;
-        });
-        input.on("dragend", function (_, objeto) {
-            if (_this.actor !== objeto.actor) {
-                return;
-            }
-            objeto.actor.dinamico = valor_inicial_dinamico;
-        });
+        input.on("dragstart", this.cuando_comienza_a_arrastrar, this);
+        input.on("drag", this.cuando_mueve, this);
+        input.on("dragend", this.cuando_suelta, this);
     };
     Arrastrable.prototype.actualizar = function () { };
+    Arrastrable.prototype.eliminar = function () {
+        var input = this.pilas.modo.input;
+        input.setDraggable(this.actor.sprite, false);
+        input.off("dragstart", this.cuando_comienza_a_arrastrar, this);
+        input.off("drag", this.cuando_mueve, this);
+        input.off("dragend", this.cuando_suelta, this);
+    };
+    Arrastrable.prototype.cuando_comienza_a_arrastrar = function (_, objeto) {
+        if (this.actor !== objeto.actor) {
+            return;
+        }
+        this.valor_inicial_dinamico = objeto.actor.dinamico;
+        objeto.actor.dinamico = false;
+    };
+    Arrastrable.prototype.cuando_mueve = function (_, objeto, x, y) {
+        objeto.x = x;
+        objeto.y = y;
+    };
+    Arrastrable.prototype.cuando_suelta = function (_, objeto) {
+        if (this.actor !== objeto.actor) {
+            return;
+        }
+        objeto.actor.dinamico = this.valor_inicial_dinamico;
+    };
     return Arrastrable;
 }(Habilidad));
 var MoverConElTeclado = (function (_super) {
@@ -2606,6 +2616,8 @@ var ActorBase = (function () {
             }
             else {
                 var indice = this._habilidades.findIndex(function (e) { return e.constructor.name == clase.name; });
+                var habilidad_a_eliminar = this._habilidades[indice];
+                habilidad_a_eliminar.eliminar();
                 this._habilidades.splice(indice, 1);
             }
         }
@@ -2895,8 +2907,11 @@ var boton = (function (_super) {
         return _this;
     }
     boton.prototype.cuando_hace_click = function () {
-        var _this = this;
         this.decir("¡has hecho click!");
+        this.realizar_animacion_de_pulsacion();
+    };
+    boton.prototype.realizar_animacion_de_pulsacion = function () {
+        var _this = this;
         this.y -= 2;
         this.pilas.luego(0.2, function () {
             _this.y += 2;
@@ -5817,7 +5832,7 @@ var Pose = (function () {
                         pose_sprite.copy(sprite_timeline_keyframe1.sprite).tween(sprite_timeline_keyframe2.sprite, pct, timeline_keyframe1.spin);
                         pose_sprite.name = timeline.name;
                         pose_sprite.parent_index = data_object.parent_index;
-                        pose_sprite.z_index_secundario = data_object.z_index;
+                        pose_sprite['z_index_secundario'] = data_object.z_index;
                         break;
                     case "bone":
                         var pose_bone = (pose_object_array_1[object_index] = pose_object_array_1[object_index] || new Bone());

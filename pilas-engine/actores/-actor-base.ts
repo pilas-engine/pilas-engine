@@ -983,6 +983,8 @@ class ActorBase {
         console.warn(`No se puede olvidar la habilidad '${clase.name}' porque el actor no la tiene.`);
       } else {
         let indice = this._habilidades.findIndex(e => e.constructor.name == clase.name);
+        let habilidad_a_eliminar = this._habilidades[indice];
+        habilidad_a_eliminar.eliminar();
         this._habilidades.splice(indice, 1);
       }
     }

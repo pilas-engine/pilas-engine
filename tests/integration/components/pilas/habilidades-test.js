@@ -21,6 +21,7 @@ module("Integration | Pilas | habilidades", function(hooks) {
 
       assert.equal(actor._habilidades.length, 3);
       actor.olvidar("oscilar transparencia");
+      assert.equal(actor._habilidades.length, 2);
     });
 
     this.set("cuandoTerminaLaEspera", pilas => {

@@ -1,6 +1,5 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
-import { later } from "@ember/runloop";
 import { computed } from "@ember/object";
 import { observer } from "@ember/object";
 
@@ -101,8 +100,8 @@ export default Component.extend({
   },
 
   actions: {
-    cuando_termina_de_cargar(pilas, contexto) {
-      let mensaje = "listo";
+    cuando_termina_de_cargar(/*pilas, contexto*/) {
+      //let mensaje = "listo";
       let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
       let datos = {

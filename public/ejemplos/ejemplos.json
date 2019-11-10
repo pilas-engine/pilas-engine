@@ -58,6 +58,10 @@
     {
       "nombre": "nave_contra_aliens",
       "desde": "2.0.90"
+    },
+    {
+      "nombre": "aprender-y-olvidar",
+      "desde": "2.0.91"
     }
   ]
 }
