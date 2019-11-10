@@ -25,6 +25,7 @@ export default Component.extend({
   existe_un_error_reciente: false,
   instancia_seleccionada: null,
   tipo_de_la_instancia_seleccionada: null,
+  nombre_del_contexto: "prueba-editor",
 
   historiaPosicion: 10,
   historiaMinimo: 0,
@@ -61,7 +62,7 @@ export default Component.extend({
 
     document.addEventListener("keydown", this.alPulsarTecla.bind(this));
 
-    this.bus.trigger("hacer_foco_en_pilas", {});
+    this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
     this.instanciarSplitJS();
   },
 
@@ -116,13 +117,13 @@ export default Component.extend({
 
   conectar_eventos() {
     this.lista_de_eventos.map(evento => {
-      this.bus.on(evento, this, evento);
+      this.bus.on(`${this.nombre_del_contexto}:${evento}`, this, evento);
     });
   },
 
   desconectar_eventos() {
     this.lista_de_eventos.map(evento => {
-      this.bus.off(evento, this, evento);
+      this.bus.off(`${this.nombre_del_contexto}:${evento}`, this, evento);
     });
   },
 
@@ -195,7 +196,7 @@ export default Component.extend({
     }
 
     let escenaComoJSON = JSON.parse(JSON.stringify(escena));
-    this.bus.trigger("cargar_escena", {
+    this.bus.trigger(`${this.nombre_del_contexto}:cargar_escena`, {
       escena: escenaComoJSON,
       proyecto: this.proyecto
     });
@@ -248,7 +249,7 @@ export default Component.extend({
 
     let escenaActual = this.obtener_la_escena_actual();
     let actor = escenaActual.actores.findBy("id", id);
-    this.bus.trigger("eliminar_actor_desde_el_editor", { id: actor.id });
+    this.bus.trigger(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, { id: actor.id });
     escenaActual.actores.removeObject(actor);
 
     let codigo = this.proyecto.codigos.actores.findBy("nombre", actor.nombre);
@@ -458,7 +459,7 @@ export default Component.extend({
     },
 
     ejecutar() {
-      this.bus.trigger("quitar_pausa", {});
+      this.bus.trigger(`${this.nombre_del_contexto}:quitar_pausa`, {});
       this.set("existe_un_error_reciente", false);
       this.set("estado", this.estado.ejecutar());
 
@@ -479,13 +480,13 @@ export default Component.extend({
 
       if (this.tamaño_de_pantalla_del_proyecto !== tamaño) {
         this.set("tamaño_de_pantalla_del_proyecto", tamaño);
-        this.bus.trigger("recargar_proyecto", hash, true);
+        this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, true);
       } else {
-        this.bus.trigger("recargar_proyecto", hash, false);
+        this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, false);
       }
 
-      this.bus.trigger("ejecutar_proyecto", datos);
-      this.bus.trigger("hacer_foco_en_pilas", {});
+      this.bus.trigger(`${this.nombre_del_contexto}:ejecutar_proyecto`, datos);
+      this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
 
       this.log.limpiar();
       this.log.info("Ingresando en modo ejecución");
@@ -496,7 +497,7 @@ export default Component.extend({
       this.set("existe_un_error_reciente", false);
       this.mostrar_la_escena_actual_sobre_pilas();
       this.set("estado", this.estado.detener());
-      this.bus.trigger("hacerFocoEnElEditor", {});
+      this.bus.trigger(`${this.nombre_del_contexto}:hacerFocoEnElEditor`, {});
       this.log.limpiar();
       this.log.info("Ingresando al modo edición");
     },
@@ -504,8 +505,8 @@ export default Component.extend({
     pausar() {
       this.set("existe_un_error_reciente", false);
       this.set("estado", this.estado.pausar());
-      this.bus.trigger("pausar_escena", {});
-      this.bus.trigger("hacer_foco_en_pilas", {});
+      this.bus.trigger(`${this.nombre_del_contexto}:pausar_escena`, {});
+      this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
       this.log.limpiar();
       this.log.info("Ingresando en modo pausa");
     },
@@ -513,7 +514,7 @@ export default Component.extend({
     cambiarPosicion(valorNuevo) {
       this.set("hay_cambios_por_guardar", true);
       this.set("posicion", valorNuevo);
-      this.bus.trigger("cambiar_posicion_desde_el_editor", {
+      this.bus.trigger(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, {
         posicion: valorNuevo
       });
     },
@@ -553,7 +554,7 @@ export default Component.extend({
         this.set("codigo", this.obtener_codigo_para_el_actor(actor));
         this.set("tituloDelCodigo", `Código del actor: ${seleccion}`);
 
-        this.bus.trigger("selecciona_actor_desde_el_editor", {
+        this.bus.trigger(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, {
           id: seleccion
         });
       }
@@ -571,7 +572,7 @@ export default Component.extend({
 
     cuandoModificaObjeto(objeto) {
       this.set("hay_cambios_por_guardar", true);
-      this.bus.trigger("actualizar_actor_desde_el_editor", {
+      this.bus.trigger(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, {
         id: objeto.id,
         actor: objeto
       });
@@ -579,7 +580,7 @@ export default Component.extend({
 
     cuando_modifica_escena(escena) {
       this.set("hay_cambios_por_guardar", true);
-      this.bus.trigger("actualizar_escena_desde_el_editor", {
+      this.bus.trigger(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, {
         id: escena.id,
         escena: escena
       });
@@ -587,7 +588,7 @@ export default Component.extend({
 
     cuando_modifica_proyecto(proyecto) {
       this.set("hay_cambios_por_guardar", true);
-      this.bus.trigger("actualizar_proyecto_desde_el_editor", {
+      this.bus.trigger(`${this.nombre_del_contexto}:actualizar_proyecto_desde_el_editor`, {
         proyecto: proyecto
       });
 
@@ -648,11 +649,11 @@ export default Component.extend({
     },
 
     plegar_codigo() {
-      this.bus.trigger("plegar_codigo");
+      this.bus.trigger(`${this.nombre_del_contexto}:plegar_codigo`);
     },
 
     expandir_codigo() {
-      this.bus.trigger("expandir_codigo");
+      this.bus.trigger(`${this.nombre_del_contexto}:expandir_codigo`);
     },
 
     cuando_cambia_un_nombre_de_actor(/*nombre*/) {

@@ -7,6 +7,7 @@ export default Component.extend({
   bus: service(),
   compilador: service(),
   electron: service(),
+  recursos: service(),
   objeto: null,
 
   proyecto: null,
@@ -70,6 +71,7 @@ export default Component.extend({
 
       let datos = {
         nombre_de_la_escena_inicial: NOMBRE_DE_LA_ESCENA,
+        contexto: "prueba",
         codigo: resultado.codigo,
         permitir_modo_pausa: false,
         proyecto: resultado.proyecto_serializado

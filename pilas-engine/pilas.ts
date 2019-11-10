@@ -20,6 +20,8 @@ class Pilas {
   animaciones: Animaciones;
   Phaser: any;
 
+  nombre_del_contexto: string; // nombre del contexto para identificar mensajes.
+
   eventos: Eventos;
   colores: Colores;
 

@@ -70,7 +70,7 @@ export default Component.extend({
     },
 
     usar_receta(receta) {
-      this.bus.trigger("usar_receta", receta);
+      this.bus.trigger(`${this.nombre_del_contexto}:usar_receta`, receta);
       this.send("ocultar");
     }
   }

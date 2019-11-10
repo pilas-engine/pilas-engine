@@ -19,6 +19,7 @@ export default Component.extend({
   altoFijo: false,
   porcentajeDeCarga: 0,
   cuando_termina_de_cargar: null,
+  nombre_del_contexto: null,
 
   didInsertElement() {
     let iframe = this.element.querySelector("iframe");
@@ -40,10 +41,15 @@ export default Component.extend({
         imagenes_para_cargar_desde_el_proyecto = this.proyecto.imagenes;
       }
 
+      if (!this.nombre_del_contexto) {
+        throw new Error(`Imposible iniciar pilas-canvas sin nombre de contexto.`);
+      }
+
       let data = {
         tipo: "iniciar_pilas",
         ancho: this.ancho,
         alto: this.alto,
+        nombre_del_contexto: this.nombre_del_contexto,
         recursos: this.get("recursos.data"),
         opciones: opciones_de_pilas,
         imagenes: imagenes_para_cargar_desde_el_proyecto
@@ -57,21 +63,20 @@ export default Component.extend({
 
       window.addEventListener("message", this.funcionParaAtenderMensajes, false);
 
-      this.bus.on("cargar_escena", this, "cargar_escena");
-      this.bus.on("finaliza_carga", this, "finaliza_carga");
-      this.bus.on("ejecutar_escena", this, "ejecutar_escena");
-      this.bus.on("ejecutar_proyecto", this, "ejecutar_proyecto");
-      this.bus.on("pausar_escena", this, "pausar_escena");
-      this.bus.on("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
-      this.bus.on("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
-      this.bus.on("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
-      this.bus.on("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
-      this.bus.on("actualizar_proyecto_desde_el_editor", this, "actualizar_proyecto_desde_el_editor");
+      this.bus.on(`${this.nombre_del_contexto}:cargar_escena`, this, "cargar_escena");
+      this.bus.on(`${this.nombre_del_contexto}:finaliza_carga`, this, "finaliza_carga");
+      this.bus.on(`${this.nombre_del_contexto}:ejecutar_proyecto`, this, "ejecutar_proyecto");
+      this.bus.on(`${this.nombre_del_contexto}:pausar_escena`, this, "pausar_escena");
+      this.bus.on(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, this, "cambiar_posicion_desde_el_editor");
+      this.bus.on(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, this, "selecciona_actor_desde_el_editor");
+      this.bus.on(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, this, "actualizar_actor_desde_el_editor");
+      this.bus.on(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, this, "actualizar_escena_desde_el_editor");
+      this.bus.on(`${this.nombre_del_contexto}:actualizar_proyecto_desde_el_editor`, this, "actualizar_proyecto_desde_el_editor");
 
-      this.bus.on("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
-      this.bus.on("progreso_de_carga", this, "progreso_de_carga");
-      this.bus.on("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
-      this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar");
+      this.bus.on(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, this, "hacer_foco_en_pilas");
+      this.bus.on(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
+      this.bus.on(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
+      this.bus.on(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
     };
   },
 
@@ -84,20 +89,19 @@ export default Component.extend({
   willDestroyElement() {
     window.removeEventListener("message", this.funcionParaAtenderMensajes);
 
-    this.bus.off("cargar_escena", this, "cargar_escena");
-    this.bus.off("finaliza_carga", this, "finaliza_carga");
-    this.bus.off("ejecutar_escena", this, "ejecutar_escena");
-    this.bus.off("ejecutar_proyecto", this, "ejecutar_proyecto");
-    this.bus.off("pausar_escena", this, "pausar_escena");
-    this.bus.off("cambiar_posicion_desde_el_editor", this, "cambiar_posicion_desde_el_editor");
-    this.bus.off("selecciona_actor_desde_el_editor", this, "selecciona_actor_desde_el_editor");
-    this.bus.off("actualizar_actor_desde_el_editor", this, "actualizar_actor_desde_el_editor");
-    this.bus.off("actualizar_escena_desde_el_editor", this, "actualizar_escena_desde_el_editor");
-    this.bus.off("actualizar_proyecto_desde_el_editor", this, "actualizar_proyecto_desde_el_editor");
-    this.bus.off("hacer_foco_en_pilas", this, "hacer_foco_en_pilas");
-    this.bus.off("progreso_de_carga", this, "progreso_de_carga");
-    this.bus.off("eliminar_actor_desde_el_editor", this, "eliminar_actor_desde_el_editor");
-    this.bus.off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar");
+    this.bus.off(`${this.nombre_del_contexto}:cargar_escena`, this, "cargar_escena");
+    this.bus.off(`${this.nombre_del_contexto}:finaliza_carga`, this, "finaliza_carga");
+    this.bus.off(`${this.nombre_del_contexto}:ejecutar_proyecto`, this, "ejecutar_proyecto");
+    this.bus.off(`${this.nombre_del_contexto}:pausar_escena`, this, "pausar_escena");
+    this.bus.off(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, this, "cambiar_posicion_desde_el_editor");
+    this.bus.off(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, this, "selecciona_actor_desde_el_editor");
+    this.bus.off(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, this, "actualizar_actor_desde_el_editor");
+    this.bus.off(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, this, "actualizar_escena_desde_el_editor");
+    this.bus.off(`${this.nombre_del_contexto}:actualizar_proyecto_desde_el_editor`, this, "actualizar_proyecto_desde_el_editor");
+    this.bus.off(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, this, "hacer_foco_en_pilas");
+    this.bus.off(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
+    this.bus.off(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
+    this.bus.off(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
   },
 
   convertir_a_boolean(valor) {
@@ -140,6 +144,7 @@ export default Component.extend({
     let data = {
       tipo: "define_escena",
       nombre: "editorState",
+      nombre_del_contexto: this.nombre_del_contexto,
       escena: escena,
       proyecto: proyecto
     };
@@ -151,6 +156,7 @@ export default Component.extend({
   emitir_estados_de_depuracion_a_pilas() {
     let data = {
       tipo: "definir_estados_de_depuracion",
+      nombre_del_contexto: this.nombre_del_contexto,
       pos: this.pos,
       fps: this.fps,
       fisica: this.fisica
@@ -158,21 +164,10 @@ export default Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  ejecutar_escena({ escena, codigo }) {
-    console.warn("Deprecated");
-
-    let data = {
-      tipo: "ejecutar_escena",
-      escena: escena,
-      codigo: codigo
-    };
-
-    this.contexto.postMessage(data, utils.HOST);
-  },
-
   ejecutar_proyecto({ proyecto, nombre_de_la_escena_inicial, codigo, permitir_modo_pausa }) {
     let data = {
       tipo: "ejecutar_proyecto",
+      nombre_del_contexto: this.nombre_del_contexto,
       proyecto: proyecto,
       nombre_de_la_escena_inicial: nombre_de_la_escena_inicial,
       permitir_modo_pausa: permitir_modo_pausa,
@@ -185,6 +180,7 @@ export default Component.extend({
   selecciona_actor_desde_el_editor({ id }) {
     let data = {
       tipo: "selecciona_actor_desde_el_editor",
+      nombre_del_contexto: this.nombre_del_contexto,
       id
     };
 
@@ -194,6 +190,7 @@ export default Component.extend({
   eliminar_actor_desde_el_editor({ id }) {
     let data = {
       tipo: "eliminar_actor_desde_el_editor",
+      nombre_del_contexto: this.nombre_del_contexto,
       id
     };
 
@@ -203,6 +200,7 @@ export default Component.extend({
   actualizar_actor_desde_el_editor({ id, actor }) {
     let data = {
       tipo: "actualizar_actor_desde_el_editor",
+      nombre_del_contexto: this.nombre_del_contexto,
       id,
       actor
     };
@@ -213,6 +211,7 @@ export default Component.extend({
   actualizar_escena_desde_el_editor({ id, escena }) {
     let data = {
       tipo: "actualizar_escena_desde_el_editor",
+      nombre_del_contexto: this.nombre_del_contexto,
       id,
       escena
     };
@@ -223,6 +222,7 @@ export default Component.extend({
   actualizar_proyecto_desde_el_editor({ proyecto }) {
     let data = {
       tipo: "actualizar_proyecto_desde_el_editor",
+      nombre_del_contexto: this.nombre_del_contexto,
       proyecto
     };
 
@@ -230,12 +230,14 @@ export default Component.extend({
   },
 
   finaliza_carga(pilas, contexto) {
+    console.log("111111", " ha finalizado la carga!!!");
     if (this.cuando_termina_de_cargar) {
       this.cuando_termina_de_cargar(pilas, contexto, this.id_canvas);
     }
   },
 
   cuando_termina_de_iniciar(pilas, contexto) {
+    console.log("111111", " ha terminado de iniciar!!!");
     if (this.cuando_termina_de_iniciar_ejecucion) {
       this.cuando_termina_de_iniciar_ejecucion(pilas, contexto);
     }
@@ -269,6 +271,7 @@ export default Component.extend({
   cambiar_posicion_desde_el_editor({ posicion }) {
     let data = {
       tipo: "cambiar_posicion",
+      nombre_del_contexto: this.nombre_del_contexto,
       posicion: posicion
     };
 
@@ -276,45 +279,57 @@ export default Component.extend({
   },
 
   atenderMensajesDePilas(contexto, e) {
+    let nombre_del_contexto = e.data.nombre_del_contexto;
+
     if (e.origin !== utils.HOST) {
       return;
     }
 
+    // Evita atenerder mensajes que provien de otro iframe.
+    if (e.data.tipo) {
+      if (nombre_del_contexto !== this.nombre_del_contexto) {
+        return;
+      }
+    }
+
+    console.log("000", e.data.tipo, nombre_del_contexto, this.nombre_del_contexto);
+
     if (e.data.tipo === "finaliza_carga_de_recursos") {
-      this.bus.trigger("finaliza_carga", contexto.pilasengine, contexto);
+      console.log("1111-enviando mensaje:" + `${nombre_del_contexto}:finaliza_carga`);
+      this.bus.trigger(`${nombre_del_contexto}:finaliza_carga`, contexto.pilasengine, contexto);
       //window["pilas"] = contexto.pilas;
     }
 
     if (e.data.tipo === "pulsa_la_tecla_escape") {
-      this.bus.trigger("pulsa_la_tecla_escape", e.data);
+      this.bus.trigger(`${this.nombre_del_contexto}:pulsa_la_tecla_escape`, e.data);
     }
 
     if (e.data.tipo === "progreso_de_carga") {
-      this.bus.trigger("progreso_de_carga", e.data);
+      this.bus.trigger(`${nombre_del_contexto}:progreso_de_carga`, e.data);
     }
 
     if (e.data.tipo === "termina_de_mover_un_actor") {
-      this.bus.trigger("termina_de_mover_un_actor", e.data);
+      this.bus.trigger(`${this.nombre_del_contexto}:termina_de_mover_un_actor`, e.data);
     }
 
     if (e.data.tipo === "comienza_a_mover_un_actor") {
-      this.bus.trigger("comienza_a_mover_un_actor", e.data);
+      this.bus.trigger(`${this.nombre_del_contexto}:comienza_a_mover_un_actor`, e.data);
     }
 
     if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
-      this.bus.trigger("inicia_modo_depuracion_en_pausa", e.data);
+      this.bus.trigger(`${this.nombre_del_contexto}:inicia_modo_depuracion_en_pausa`, e.data);
     }
 
     if (e.data.tipo === "cambia_posicion_dentro_del_modo_pausa") {
-      this.bus.trigger("cuando_cambia_posicion_dentro_del_modo_pausa", e.data);
+      this.bus.trigger(`${this.nombre_del_contexto}:cuando_cambia_posicion_dentro_del_modo_pausa`, e.data);
     }
 
     if (e.data.tipo === "error_de_ejecucion") {
-      this.bus.trigger("error", e.data);
+      this.bus.trigger(`${this.nombre_del_contexto}:error`, e.data);
     }
 
     if (e.data.tipo === "termina_de_iniciar_ejecucion") {
-      this.bus.trigger("cuando_termina_de_iniciar_ejecucion", contexto.pilasengine, contexto);
+      this.bus.trigger(`${nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, contexto.pilasengine, contexto);
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {

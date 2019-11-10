@@ -1095,7 +1095,8 @@ var Huesos = (function () {
     };
     return Huesos;
 }());
-var DEPURAR_MENSAJES = false;
+var DEPURAR_MENSAJES = true;
+var DEPURAR_MENSAJES_DE_CARGA = true;
 var Mensajes = (function () {
     function Mensajes(pilas) {
         this.pilas = pilas;
@@ -1105,10 +1106,15 @@ var Mensajes = (function () {
         window.addEventListener("message", this.atender_mensaje.bind(this), false);
     };
     Mensajes.prototype.atender_mensaje = function (e) {
-        var metodo = "atender_mensaje_" + e.data.tipo;
+        var nombre = e.data.tipo;
+        var contexto = e.data.nombre_del_contexto;
+        var metodo = "atender_mensaje_" + nombre;
         var datos = e.data;
+        if (!contexto) {
+            throw new Error("No lleg\u00F3 el nombre de contexto con el mensaje " + nombre);
+        }
         if (DEPURAR_MENSAJES) {
-            console.log("[IN] llega el mensaje " + metodo);
+            console.log("[editor \u2192 pilas] [contexto: " + contexto + "] llega el mensaje: " + nombre);
         }
         if (this[metodo]) {
             this[metodo](datos);
@@ -1120,6 +1126,7 @@ var Mensajes = (function () {
         }
     };
     Mensajes.prototype.atender_mensaje_iniciar_pilas = function (datos) {
+        this.pilas.nombre_del_contexto = datos.nombre_del_contexto;
         this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones, datos.imagenes);
     };
     Mensajes.prototype.atender_mensaje_definir_estados_de_depuracion = function (datos) {
@@ -1128,9 +1135,18 @@ var Mensajes = (function () {
     Mensajes.prototype.emitir_mensaje_al_editor = function (nombre, datos) {
         if (datos === void 0) { datos = null; }
         datos = datos || {};
+        var contexto = this.pilas.nombre_del_contexto;
         datos.tipo = nombre;
-        if (DEPURAR_MENSAJES) {
-            console.log("[OUT] Emitiendo el mensaje " + nombre);
+        datos.nombre_del_contexto = contexto;
+        if (nombre === "progreso_de_carga") {
+            if (DEPURAR_MENSAJES_DE_CARGA) {
+                console.log("[pilas \u2192 editor] [contexto: " + contexto + "] Emitiendo el mensaje de carga: " + nombre);
+            }
+        }
+        else {
+            if (DEPURAR_MENSAJES) {
+                console.log("[pilas \u2192 editor] [contexto: " + contexto + "] Emitiendo el mensaje: " + nombre);
+            }
         }
         window.parent.postMessage(datos, HOST);
     };
@@ -6498,7 +6514,7 @@ var ModoCargador = (function (_super) {
         this.contador += 1;
         if (this.contador === 60) {
             var msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
-            this.add.bitmapText(5, 5, "impact", msg);
+            this.add.text(5, 5, msg);
         }
     };
     ModoCargador.prototype.notificar_imagenes_cargadas = function () {

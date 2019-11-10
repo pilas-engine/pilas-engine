@@ -11,6 +11,7 @@ export default Component.extend({
   pilas: null,
   pausado: false,
   mostrarModalDeImagenes: false,
+  nombre_del_contexto: "pilas-en-el-animador",
   filtro: "",
 
   bus: service(),
@@ -101,7 +102,6 @@ export default Component.extend({
 
   actions: {
     cuando_termina_de_cargar(/*pilas, contexto*/) {
-      //let mensaje = "listo";
       let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
       let datos = {
@@ -111,8 +111,8 @@ export default Component.extend({
         proyecto: resultado.proyecto_serializado
       };
 
-      this.bus.trigger("ejecutar_proyecto", datos);
-      this.bus.trigger("hacer_foco_en_pilas", {});
+      this.bus.trigger(`${this.nombre_del_contexto}:ejecutar_proyecto`, datos);
+      this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
     },
 
     cuando_termina_de_iniciar_ejecucion(pilas, contexto) {

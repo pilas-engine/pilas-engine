@@ -1,4 +1,5 @@
-const DEPURAR_MENSAJES = false;
+const DEPURAR_MENSAJES = true;
+const DEPURAR_MENSAJES_DE_CARGA = true;
 
 class Mensajes {
   pilas: Pilas;
@@ -14,11 +15,17 @@ class Mensajes {
   }
 
   atender_mensaje(e: any) {
-    let metodo = "atender_mensaje_" + e.data.tipo;
+    let nombre = e.data.tipo;
+    let contexto = e.data.nombre_del_contexto;
+    let metodo = "atender_mensaje_" + nombre;
     let datos = e.data;
 
+    if (!contexto) {
+      throw new Error(`No llegó el nombre de contexto con el mensaje ${nombre}`);
+    }
+
     if (DEPURAR_MENSAJES) {
-      console.log("[IN] llega el mensaje " + metodo);
+      console.log(`[editor → pilas] [contexto: ${contexto}] llega el mensaje: ${nombre}`);
     }
 
     if (this[metodo]) {
@@ -32,6 +39,7 @@ class Mensajes {
   }
 
   atender_mensaje_iniciar_pilas(datos) {
+    this.pilas.nombre_del_contexto = datos.nombre_del_contexto;
     this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones, datos.imagenes);
   }
 
@@ -41,10 +49,18 @@ class Mensajes {
 
   emitir_mensaje_al_editor(nombre: string, datos = null) {
     datos = datos || {};
+    let contexto = this.pilas.nombre_del_contexto;
     datos.tipo = nombre;
+    datos.nombre_del_contexto = contexto;
 
-    if (DEPURAR_MENSAJES) {
-      console.log("[OUT] Emitiendo el mensaje " + nombre);
+    if (nombre === "progreso_de_carga") {
+      if (DEPURAR_MENSAJES_DE_CARGA) {
+        console.log(`[pilas → editor] [contexto: ${contexto}] Emitiendo el mensaje de carga: ${nombre}`);
+      }
+    } else {
+      if (DEPURAR_MENSAJES) {
+        console.log(`[pilas → editor] [contexto: ${contexto}] Emitiendo el mensaje: ${nombre}`);
+      }
     }
 
     window.parent.postMessage(datos, HOST);

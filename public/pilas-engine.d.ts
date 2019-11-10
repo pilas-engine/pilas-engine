@@ -268,7 +268,8 @@ declare class Huesos {
     actualizar_posicion(pose: any): void;
     eliminar_sprites(): void;
 }
-declare const DEPURAR_MENSAJES = false;
+declare const DEPURAR_MENSAJES = true;
+declare const DEPURAR_MENSAJES_DE_CARGA = true;
 declare class Mensajes {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;
@@ -334,6 +335,7 @@ declare class Pilas {
     actores: Actores;
     animaciones: Animaciones;
     Phaser: any;
+    nombre_del_contexto: string;
     eventos: Eventos;
     colores: Colores;
     recursos: any;
