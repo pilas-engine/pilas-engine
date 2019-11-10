@@ -102,7 +102,7 @@ class ModoCargador extends Modo {
     // emite un mensaje de error
     if (this.contador === 60) {
       let msg = "Carga finalizada\nTiene que enviar la señal 'ejecutar_proyecto'";
-      this.add.bitmapText(5, 5, "impact", msg);
+      this.add.text(5, 5, msg);
     }
   }
 

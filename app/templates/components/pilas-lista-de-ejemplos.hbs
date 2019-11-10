@@ -9,7 +9,7 @@
 {{else}}
   {{#each ejemplos.tarea.last.value.ejemplos as |ejemplo|}}
     {{#link-to "ejemplos.ver" ejemplo.nombre tagName="div" class="dib pointer v-top mb2 mr2"}}
-      <div class="relative unselectable" style="width: 180px; height: 140px;">
+      <div class="relative unselectable bg-light-gray" style="width: 180px; height: 140px;">
         <div class="sprite {{ejemplo.nombre}}"></div>
         <div class="text-shadow-1 absolute bottom-0 left-0 right-0 bg-black-50 pa1 white tc lato f7">{{ejemplo.nombre}}</div>
         {{#pilas-ejemplos-es-nuevo ejemplo=ejemplo}}
