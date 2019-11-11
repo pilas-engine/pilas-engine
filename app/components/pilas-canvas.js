@@ -72,7 +72,6 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, this, "actualizar_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, this, "actualizar_escena_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:actualizar_proyecto_desde_el_editor`, this, "actualizar_proyecto_desde_el_editor");
-
       this.bus.on(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, this, "hacer_foco_en_pilas");
       this.bus.on(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
       this.bus.on(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
@@ -230,14 +229,12 @@ export default Component.extend({
   },
 
   finaliza_carga(pilas, contexto) {
-    console.log("111111", " ha finalizado la carga!!!");
     if (this.cuando_termina_de_cargar) {
       this.cuando_termina_de_cargar(pilas, contexto, this.id_canvas);
     }
   },
 
   cuando_termina_de_iniciar(pilas, contexto) {
-    console.log("111111", " ha terminado de iniciar!!!");
     if (this.cuando_termina_de_iniciar_ejecucion) {
       this.cuando_termina_de_iniciar_ejecucion(pilas, contexto);
     }
@@ -246,6 +243,7 @@ export default Component.extend({
   pausar_escena({ escena }) {
     let data = {
       tipo: "pausar_escena",
+      nombre_del_contexto: this.nombre_del_contexto,
       escena: escena
     };
 

@@ -28,7 +28,10 @@
         {{/pilas-tooltip}}
       {{/en-electron}}
 
-      {{pilas-boton-animaciones desactivado=(not estado.puede_editar) modalVisible=mostrarModalDeAnimaciones}}
+      {{pilas-boton-animaciones
+        desactivado=(not estado.puede_editar)
+        pixelart=pixelart
+        modalVisible=mostrarModalDeAnimaciones}}
     </div>
 
     <div class="flex1">
