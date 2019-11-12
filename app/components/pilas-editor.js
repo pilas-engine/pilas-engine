@@ -1,6 +1,5 @@
 import EmberObject from "@ember/object";
 import { alias } from "@ember/object/computed";
-import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import estados from "../estados/estados-de-pilas-editor";
@@ -87,18 +86,6 @@ export default Component.extend({
       this.splitjs.destroy();
       this.set("splitjs", null);
     }
-  }),
-
-  debe_expandir_el_panel_de_previsualizacion: computed("expandirJuego", "mostrarEditor", "mostrarPropiedades", function() {
-    if (this.mostrarEditor) {
-      return this.expandirJuego;
-    } else {
-      return true;
-    }
-  }),
-
-  puede_intentar_expandir_el_panel_de_previsualizacion: computed("mostrarEditor", "mostrarPropiedades", function() {
-    return this.mostrarEditor;
   }),
 
   existe_actor_o_escena_con_id(id) {

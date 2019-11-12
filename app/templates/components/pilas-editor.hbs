@@ -42,10 +42,6 @@
         {{pilas-interruptor padding="pa1" resaltar=false icono="panel-izquierdo" variable=mostrarPropiedades texto="Panel de actores" texto_corto="Actores"}}
       {{/pilas-tooltip}}
 
-      {{#pilas-tooltip pos="left" texto="Ajusta el tamaño del area de juego"}}
-        {{pilas-interruptor padding="pa1" resaltar=false icono="panel-central" deshabilitado=(not puede_intentar_expandir_el_panel_de_previsualizacion) variable=expandirJuego texto="Expandir previsualización" texto_corto="Previs."}}
-      {{/pilas-tooltip}}
-
       {{#pilas-tooltip pos="left" texto="Muestra el editor de código"}}
         {{pilas-interruptor dataTest="panel-derecho" padding="pa1" resaltar=false icono="panel-derecho" variable=mostrarEditor texto="Panel del editor" texto_corto="Editor"}}
       {{/pilas-tooltip}}
@@ -112,7 +108,7 @@
 
       </div>
 
-      <div id="panel-canvas" class="flex {{if (and debe_expandir_el_panel_de_previsualizacion (not mostrarEditor)) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
+      <div id="panel-canvas" class="flex {{if (not mostrarEditor) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
 
         <div class="texto separador-vertical">
         </div>
@@ -143,7 +139,7 @@
             {{#if estado.pausaActivada}}
               <div class="dib ma2 f6 fr flex1 flex">
 
-                <div class="truncate texto w5 f7 unselectable tr pt1 pr1 {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}}">
+                <div class="truncate texto w5 f7 unselectable tr pt1 pr1 dn">
                   Cuadro: {{plus posicion}} / {{tiempo (plus posicion)}}
                 </div>
 
@@ -183,7 +179,7 @@
         <div class="h2 ba br borde mt2">
           {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
-          <div class="fr {{if debe_expandir_el_panel_de_previsualizacion "" "dn"}} {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
+          <div class="fr {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
 
             {{#if (eq estado.nombreDeEstado "ModoEjecucion")}}
               {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
