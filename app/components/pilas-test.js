@@ -43,21 +43,13 @@ export default Component.extend({
         }
       ]
     });
-    this.bus.on("finaliza_carga", this, "finaliza_carga");
-    this.bus.on(
-      "cuando_termina_de_iniciar_ejecucion",
-      this,
-      "cuando_termina_de_iniciar_ejecucion"
-    );
+    this.bus.on("pilas-test:finaliza_carga", this, "finaliza_carga");
+    this.bus.on("pilas-test:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
   willDestroyElement() {
-    this.bus.off("finaliza_carga", this, "finaliza_carga");
-    this.bus.off(
-      "cuando_termina_de_iniciar_ejecucion",
-      this,
-      "cuando_termina_de_iniciar_ejecucion"
-    );
+    this.bus.off("pilas-test:finaliza_carga", this, "finaliza_carga");
+    this.bus.off("pilas-test:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
   finaliza_carga(pilas) {
@@ -70,7 +62,7 @@ export default Component.extend({
       proyecto: proyecto
     };
 
-    this.bus.trigger("ejecutar_proyecto", datos);
+    this.bus.trigger("pilas-test:ejecutar_proyecto", datos);
 
     if (this.cuandoTerminaLaEspera) {
       later(() => {
