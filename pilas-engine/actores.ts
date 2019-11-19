@@ -151,4 +151,8 @@ class Actores {
   explosion() {
     return this.crear_actor("explosion");
   }
+
+  boton_activable() {
+    return this.crear_actor("boton_activable");
+  }
 }

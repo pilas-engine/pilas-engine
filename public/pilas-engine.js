@@ -128,6 +128,9 @@ var Actores = (function () {
     Actores.prototype.explosion = function () {
         return this.crear_actor("explosion");
     };
+    Actores.prototype.boton_activable = function () {
+        return this.crear_actor("boton_activable");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -1714,22 +1717,6 @@ var Pilas = (function () {
     return Pilas;
 }());
 var pilasengine = new Pilas();
-var Tareas = (function () {
-    function Tareas(pilas) {
-        this.pilas = pilas;
-        this.id = 0;
-        this.segundos = 0;
-    }
-    Tareas.prototype.agregar = function (tiempo, funcion) {
-        this.id += 1;
-        this.tareas.push({
-            id: this.id,
-            tiempo: tiempo,
-            proxima_ejecucion: this.segundos + tiempo
-        });
-    };
-    return Tareas;
-}());
 var ActorBase = (function () {
     function ActorBase(pilas) {
         this.figura = "";
@@ -2970,6 +2957,61 @@ var boton = (function (_super) {
         this.pilas.definir_cursor("normal");
     };
     return boton;
+}(ActorTextoBase));
+var boton_activable = (function (_super) {
+    __extends(boton_activable, _super);
+    function boton_activable() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:basicos/invisible",
+            fondo: "imagenes:redimensionables/gris",
+            texto: "Botón",
+            es_texto: true,
+            z: -10,
+            color: "black"
+        };
+        _this.habilitado = true;
+        return _this;
+    }
+    boton_activable.prototype.cuando_hace_click = function () {
+        if (this.habilitado) {
+            this.decir("¡has hecho click!");
+            this.realizar_animacion_de_pulsacion();
+        }
+    };
+    boton_activable.prototype.realizar_animacion_de_pulsacion = function () {
+        var _this = this;
+        this.y -= 2;
+        this.pilas.luego(0.2, function () {
+            _this.y += 2;
+        });
+    };
+    boton_activable.prototype.cuando_mueve = function () {
+        if (this.habilitado) {
+            this.pilas.definir_cursor("pointer");
+        }
+    };
+    boton_activable.prototype.cuando_sale = function () {
+        if (this.habilitado) {
+            this.pilas.definir_cursor("normal");
+        }
+    };
+    boton_activable.prototype.habilitar = function () {
+        this.habilitado = true;
+        this.transparencia = 0;
+    };
+    boton_activable.prototype.deshabilitar = function () {
+        this.habilitado = false;
+        this.transparencia = 30;
+        this.pilas.definir_cursor("normal");
+    };
+    boton_activable.prototype.activar = function () {
+        this.habilitar();
+    };
+    boton_activable.prototype.desactivar = function () {
+        this.deshabilitar();
+    };
+    return boton_activable;
 }(ActorTextoBase));
 var boton_de_control_abajo = (function (_super) {
     __extends(boton_de_control_abajo, _super);

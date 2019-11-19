@@ -32,6 +32,7 @@ declare class Actores {
     nube_animada(): any;
     pizarra(): any;
     explosion(): any;
+    boton_activable(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -418,13 +419,6 @@ declare class Pilas {
     es_multiplo(a: number, b: number): boolean;
 }
 declare var pilasengine: Pilas;
-declare class Tareas {
-    pilas: Pilas;
-    tareas: [];
-    id: number;
-    constructor(pilas: any);
-    agregar(tiempo: any, funcion: any): void;
-}
 declare class ActorBase {
     tipo: String;
     sprite: Phaser.GameObjects.Sprite;
@@ -661,6 +655,25 @@ declare class boton extends ActorTextoBase {
     realizar_animacion_de_pulsacion(): void;
     cuando_mueve(): void;
     cuando_sale(): void;
+}
+declare class boton_activable extends ActorTextoBase {
+    propiedades: {
+        imagen: string;
+        fondo: string;
+        texto: string;
+        es_texto: boolean;
+        z: number;
+        color: string;
+    };
+    habilitado: boolean;
+    cuando_hace_click(): void;
+    realizar_animacion_de_pulsacion(): void;
+    cuando_mueve(): void;
+    cuando_sale(): void;
+    habilitar(): void;
+    deshabilitar(): void;
+    activar(): void;
+    desactivar(): void;
 }
 declare class boton_de_control_abajo extends Actor {
     propiedades: {
