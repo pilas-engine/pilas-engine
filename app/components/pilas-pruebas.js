@@ -39,6 +39,15 @@ export default Component.extend({
                 this.actor = actor;
 
                 window.actor = actor;
+
+                this.pilas.cada(3, (a) => {
+                  console.log(a)
+                  actor.decir("pasaron 5 segundos");
+                  //return true;
+                }, 2);
+
+
+
               }
 
               actualizar() {
@@ -77,8 +86,8 @@ export default Component.extend({
         proyecto: resultado.proyecto_serializado
       };
 
-      this.bus.trigger("ejecutar_proyecto", datos);
-      this.bus.trigger("hacer_foco_en_pilas", {});
+      this.bus.trigger("pruebas:ejecutar_proyecto", datos);
+      this.bus.trigger("pruebas:hacer_foco_en_pilas", {});
     }
   }
 });

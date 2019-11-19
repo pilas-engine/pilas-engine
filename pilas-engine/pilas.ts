@@ -1,4 +1,5 @@
 /// <reference path="utilidades.ts"/>
+
 declare var NineSlice: any;
 
 var HOST = "file://";
@@ -358,8 +359,27 @@ class Pilas {
   /**
    * Ejecuta una función cada un cierto intervalo de tiempo.
    */
-  cada(duracion: number, tarea: any) {
-    return this.modo.time.addEvent({ delay: duracion * 1000, callback: tarea, loop: true });
+  cada(duracion: number, tarea: any, veces: number) {
+    let veces_que_se_ejecuto = 0;
+    let time = this.modo.time.addEvent({
+      delay: duracion * 1000,
+      callback: () => {
+        // Si la tarea retorna 'true' se asume que de debe detener la tarea.
+        if (tarea()) {
+          time.remove();
+        }
+        // Permite detener la tarea si se especifica la cantidad de veces
+        // que se tiene que ejecutar.
+        veces_que_se_ejecuto += 1;
+
+        if (veces && veces_que_se_ejecuto >= veces) {
+          time.remove();
+        }
+      },
+      loop: true
+    });
+
+    return time;
   }
 
   /**

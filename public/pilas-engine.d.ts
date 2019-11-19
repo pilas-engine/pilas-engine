@@ -403,7 +403,7 @@ declare class Pilas {
     escena_actual(): EscenaBase;
     animar(actor: any, propiedad: string, valor: any, duracion?: number): void;
     luego(duracion: number, tarea: any): any;
-    cada(duracion: number, tarea: any): any;
+    cada(duracion: number, tarea: any, veces: number): any;
     azar(desde: number, hasta: number): number;
     obtener_distancia_entre_puntos(x: number, y: number, x2: number, y2: number): number;
     obtener_distancia_entre_actores(actor1: ActorBase, actor2: ActorBase): number;
@@ -418,6 +418,13 @@ declare class Pilas {
     es_multiplo(a: number, b: number): boolean;
 }
 declare var pilasengine: Pilas;
+declare class Tareas {
+    pilas: Pilas;
+    tareas: [];
+    id: number;
+    constructor(pilas: any);
+    agregar(tiempo: any, funcion: any): void;
+}
 declare class ActorBase {
     tipo: String;
     sprite: Phaser.GameObjects.Sprite;

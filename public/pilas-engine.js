@@ -1634,8 +1634,22 @@ var Pilas = (function () {
     Pilas.prototype.luego = function (duracion, tarea) {
         return this.modo.time.delayedCall(duracion * 1000, tarea);
     };
-    Pilas.prototype.cada = function (duracion, tarea) {
-        return this.modo.time.addEvent({ delay: duracion * 1000, callback: tarea, loop: true });
+    Pilas.prototype.cada = function (duracion, tarea, veces) {
+        var veces_que_se_ejecuto = 0;
+        var time = this.modo.time.addEvent({
+            delay: duracion * 1000,
+            callback: function () {
+                if (tarea()) {
+                    time.remove();
+                }
+                veces_que_se_ejecuto += 1;
+                if (veces && veces_que_se_ejecuto >= veces) {
+                    time.remove();
+                }
+            },
+            loop: true
+        });
+        return time;
     };
     Pilas.prototype.azar = function (desde, hasta) {
         if (desde > hasta) {
@@ -1700,6 +1714,22 @@ var Pilas = (function () {
     return Pilas;
 }());
 var pilasengine = new Pilas();
+var Tareas = (function () {
+    function Tareas(pilas) {
+        this.pilas = pilas;
+        this.id = 0;
+        this.segundos = 0;
+    }
+    Tareas.prototype.agregar = function (tiempo, funcion) {
+        this.id += 1;
+        this.tareas.push({
+            id: this.id,
+            tiempo: tiempo,
+            proxima_ejecucion: this.segundos + tiempo
+        });
+    };
+    return Tareas;
+}());
 var ActorBase = (function () {
     function ActorBase(pilas) {
         this.figura = "";

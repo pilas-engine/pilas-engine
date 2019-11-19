@@ -1,4 +1,14 @@
 {{yield}}
 
-<div class="theme-oscuro bg-fondo verdana texto vh-100">
+<div class="h-100 flex">
+  {{#pilas-reiniciador}}
+    {{pilas-canvas
+      nombre_del_contexto="pruebas"
+        ancho=proyecto.ancho
+        alto=proyecto.alto
+        proyecto=proyecto
+        modoZoom=2
+        cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
+    }}
+  {{/pilas-reiniciador}}
 </div>
