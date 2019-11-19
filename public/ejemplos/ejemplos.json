@@ -62,6 +62,10 @@
     {
       "nombre": "aprender-y-olvidar",
       "desde": "2.0.91"
+    },
+    {
+      "nombre": "temporizadores",
+      "desde": "2.0.91"
     }
   ]
 }
