@@ -12,8 +12,8 @@ export default Component.extend({
   didInsertElement() {
     this.recursos.iniciar();
 
-    this.bus.on("finaliza_carga", this, "finaliza_carga");
-    this.bus.on("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
+    this.bus.on("ejemplo:finaliza_carga", this, "finaliza_carga");
+    this.bus.on("ejemplo:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
 
     if (this.debe_mantener_foco) {
       this.tarea_para_mantener_foco.perform();
@@ -28,7 +28,7 @@ export default Component.extend({
   }),
 
   hacer_foco_en_pilas() {
-    this.bus.trigger("hacer_foco_en_pilas", {});
+    this.bus.trigger("ejemplo:hacer_foco_en_pilas", {});
   },
 
   didReceiveAttrs() {
@@ -38,8 +38,8 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this.bus.off("finaliza_carga", this, "finaliza_carga");
-    this.bus.off("cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
+    this.bus.off("ejemplo:finaliza_carga", this, "finaliza_carga");
+    this.bus.off("ejemplo:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
   finaliza_carga() {
@@ -57,7 +57,7 @@ export default Component.extend({
       proyecto: proyecto
     };
 
-    this.bus.trigger("ejecutar_proyecto", datos);
+    this.bus.trigger("ejemplo:ejecutar_proyecto", datos);
   },
 
   cuando_termina_de_iniciar_ejecucion(pilas) {
