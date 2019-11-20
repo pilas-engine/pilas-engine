@@ -1,5 +1,7 @@
 {{pilas-proyecto proyecto=proyecto}}
 <div class="{{if oscuro "theme-oscuro" "theme-claro"}} bg-fondo vh-100 wrapper verdana flex flex-column">
+  <div id="modal"></div>
+  
   <div id="ember-basic-dropdown-wormhole" class={{if oscuro "theme-oscuro" "theme-claro"}}></div>
 
 
@@ -120,6 +122,8 @@
             <div class="dib f6 flex1 tr"></div>
 
             {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
+
+
 
           {{/if}}
 

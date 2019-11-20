@@ -59,8 +59,8 @@ export default Component.extend({
   crear_proyecto() {
     this.set("proyecto", {
       titulo: "Proyecto demo",
-      ancho: 480,
-      alto: 480,
+      ancho: 350,
+      alto: 350,
       imagenes: [],
       codigos: {
         escenas: [

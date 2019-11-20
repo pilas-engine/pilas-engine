@@ -67,6 +67,7 @@
     "ember-resolver": "^5.0.1",
     "ember-source": "~3.9.1",
     "ember-truth-helpers": "^2.1.0",
+    "ember-wormhole": "^0.5.5",
     "eslint-plugin-ember": "^5.2.0",
     "gitbook-cli": "^2.3.0",
     "loader.js": "^4.7.0",

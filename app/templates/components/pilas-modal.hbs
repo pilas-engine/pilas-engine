@@ -1,27 +1,27 @@
 {{#if visible}}
+  {{#ember-wormhole to="modal"}}
+    <div class="flex {{if fixed "fixed" "absolute"}} absolute--fill default-cursor" id={{id}}>
 
-  <div class="flex {{if fixed "fixed" "absolute"}} absolute--fill default-cursor" id={{id}}>
+      <div {{action "ocultar"}} role="button" class="bg-black-50 z-1 animacion-aparecer absolute absolute--fill"></div>
 
-    <div {{action "ocultar"}} role="button" class="bg-black-50 z-1 animacion-aparecer absolute absolute--fill"></div>
+      <div class="flex texto borde ba shadow-3 flex-column flex-auto ma5 bg-fondo z-2 {{if medio "dialogo-medio"}} {{if reducido "h4-5 margin-left-auto margin-right-auto mw6"}}">
 
-    <div class="flex texto borde ba h5 shadow-3 flex-column flex-auto ma5 bg-fondo z-2 {{if medio "dialogo-medio"}} {{if reducido "h4-5 margin-left-auto margin-right-auto mw6"}}">
+        <div class="flex">
+          <h1 class="f4 pl2 flex1" id="titulo">{{titulo}}</h1>
 
-      <div class="flex">
-        <h1 class="f4 pl2 flex1" id="titulo">{{titulo}}</h1>
+          {{#if puede_cerrar}}
+            <button class="pointer ma3 bn bg-fondo texto" {{action "ocultar"}} id="cerrar">
+              ×
+            </button>
+          {{/if}}
+        </div>
 
-        {{#if puede_cerrar}}
-          <button class="pointer ma3 bn bg-fondo texto" {{action "ocultar"}} id="cerrar">
-            ×
-          </button>
-        {{/if}}
-      </div>
+        <div class="flex1 pa2 overflow-auto flex flex-column">
+          {{yield}}
+        </div>
 
-      <div class="flex1 pa2 overflow-auto flex flex-column">
-        {{yield}}
       </div>
 
     </div>
-
-  </div>
-
+  {{/ember-wormhole}}
 {{/if}}
