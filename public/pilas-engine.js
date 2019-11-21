@@ -1098,8 +1098,8 @@ var Huesos = (function () {
     };
     return Huesos;
 }());
-var DEPURAR_MENSAJES = true;
-var DEPURAR_MENSAJES_DE_CARGA = true;
+var DEPURAR_MENSAJES = false;
+var DEPURAR_MENSAJES_DE_CARGA = false;
 var Mensajes = (function () {
     function Mensajes(pilas) {
         this.pilas = pilas;
@@ -1424,7 +1424,7 @@ var Pilas = (function () {
         this._ancho = ancho;
         this._alto = alto;
         this.recursos = recursos;
-        var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart);
+        var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
         if (opciones.esperar_antes_de_iniciar) {
             console.log("Esperando 1 segundo antes de iniciar ...");
             setTimeout(function () {
@@ -1541,8 +1541,9 @@ var Pilas = (function () {
     Pilas.prototype.reiniciar_escena = function () {
         this.modo.cambiar_escena(this.escena.constructor.name);
     };
-    Pilas.prototype.crear_configuracion = function (ancho, alto, maximizar, pixelart) {
+    Pilas.prototype.crear_configuracion = function (ancho, alto, maximizar, pixelart, transparente) {
         var escala = undefined;
+        var color_de_fondo = "#000000";
         if (maximizar) {
             escala = {
                 mode: Phaser.Scale.FIT,
@@ -1552,16 +1553,24 @@ var Pilas = (function () {
         if (pixelart === undefined) {
             pixelart = true;
         }
+        if (transparente === undefined) {
+            transparente = false;
+        }
+        if (transparente) {
+            color_de_fondo = "rgba(0,0,0,0)";
+        }
         return {
             type: Phaser.AUTO,
             parent: "game",
             scale: escala,
             width: ancho,
             height: alto,
-            backgroundColor: "#000000",
+            backgroundColor: color_de_fondo,
             disableContextMenu: true,
             pixelArt: pixelart,
             autostart: false,
+            transparent: transparente,
+            backgroundColor: color_de_fondo,
             input: {
                 keyboard: true,
                 mouse: true,

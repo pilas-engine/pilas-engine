@@ -97,7 +97,7 @@ class Pilas {
     this._alto = alto;
 
     this.recursos = recursos;
-    var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart);
+    var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
 
     // Opción para simular una espera o demora al iniciar el componente de
     // pilas, se utiliza desde el editor cuando corren los tests.
@@ -229,8 +229,9 @@ class Pilas {
     this.modo.cambiar_escena(this.escena.constructor.name);
   }
 
-  crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean) {
+  crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean, transparente: boolean) {
     let escala = undefined;
+    let color_de_fondo = "#000000";
 
     if (maximizar) {
       escala = {
@@ -243,16 +244,26 @@ class Pilas {
       pixelart = true;
     }
 
+    if (transparente === undefined) {
+      transparente = false;
+    }
+
+    if (transparente) {
+      color_de_fondo = "rgba(0,0,0,0)";
+    }
+
     return {
       type: Phaser.AUTO, // CANVAS, WEBGL o AUTO
       parent: "game",
       scale: escala,
       width: ancho,
       height: alto,
-      backgroundColor: "#000000",
+      backgroundColor: color_de_fondo,
       disableContextMenu: true,
       pixelArt: pixelart,
       autostart: false,
+      transparent: transparente,
+      backgroundColor: color_de_fondo,
       input: {
         keyboard: true,
         mouse: true,

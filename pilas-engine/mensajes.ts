@@ -1,5 +1,5 @@
-const DEPURAR_MENSAJES = true;
-const DEPURAR_MENSAJES_DE_CARGA = true;
+const DEPURAR_MENSAJES = false;
+const DEPURAR_MENSAJES_DE_CARGA = false;
 
 class Mensajes {
   pilas: Pilas;

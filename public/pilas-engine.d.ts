@@ -269,8 +269,8 @@ declare class Huesos {
     actualizar_posicion(pose: any): void;
     eliminar_sprites(): void;
 }
-declare const DEPURAR_MENSAJES = true;
-declare const DEPURAR_MENSAJES_DE_CARGA = true;
+declare const DEPURAR_MENSAJES = false;
+declare const DEPURAR_MENSAJES_DE_CARGA = false;
 declare class Mensajes {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;
@@ -363,7 +363,7 @@ declare class Pilas {
     definir_modo(nombre: string, datos: any): void;
     cambiar_escena(nombre: string): void;
     reiniciar_escena(): void;
-    crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean): {
+    crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean, transparente: boolean): {
         type: number;
         parent: string;
         scale: any;
@@ -373,6 +373,7 @@ declare class Pilas {
         disableContextMenu: boolean;
         pixelArt: boolean;
         autostart: boolean;
+        transparent: boolean;
         input: {
             keyboard: boolean;
             mouse: boolean;
