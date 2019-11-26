@@ -58,6 +58,10 @@ declare class Camara {
     vibrar(intensidad?: number, tiempo?: number): void;
     x: number;
     y: number;
+    readonly borde_izquierdo: number;
+    readonly borde_derecho: any;
+    readonly borde_arriba: any;
+    readonly borde_abajo: number;
 }
 interface Color {
     nombre: string;

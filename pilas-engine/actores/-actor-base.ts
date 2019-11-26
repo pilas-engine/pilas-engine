@@ -940,11 +940,35 @@ class ActorBase {
     texto.z = this.z - 1;
 
     texto.texto = mensaje;
+    mantener_en_pantalla();
+
+    function mantener_en_pantalla() {
+      // Evita que salga por el borde izquierdo.
+      if (texto.x - texto.sprite.width < texto.pilas.camara.borde_izquierdo) {
+        texto.x = texto.pilas.camara.borde_izquierdo + texto.sprite.width;
+      }
+
+      // Evita que salga por el borde derecho.
+      if (texto.x + 20 > texto.pilas.camara.borde_derecho) {
+        texto.x = texto.pilas.camara.borde_derecho - 20;
+      }
+
+      // Evita que salga por el borde de arriba.
+      if (texto.y + texto.sprite.height > texto.pilas.camara.borde_arriba) {
+        texto.y = texto.pilas.camara.borde_arriba - texto.sprite.height;
+      }
+
+      // Evita que salga por el borde de abajo.
+      if (texto.y - 15 < texto.pilas.camara.borde_abajo) {
+        texto.y = texto.pilas.camara.borde_abajo + 15;
+      }
+    }
 
     texto.actualizar = () => {
       if (this.esta_vivo()) {
         texto.x = this.x - 15;
         texto.y = this.y + this.alto;
+        mantener_en_pantalla();
       }
     };
 

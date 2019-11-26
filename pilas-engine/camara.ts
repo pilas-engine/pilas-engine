@@ -50,4 +50,20 @@ class Camara {
     this.pilas.utilidades.validar_numero(y);
     this.camara_principal.setScroll(this.x, -y);
   }
+
+  get borde_izquierdo() {
+    return -this.camara_principal.midPoint.x;
+  }
+
+  get borde_derecho() {
+    return this.camara_principal.midPoint.x;
+  }
+
+  get borde_arriba() {
+    return this.camara_principal.midPoint.y;
+  }
+
+  get borde_abajo() {
+    return -this.camara_principal.midPoint.y;
+  }
 }

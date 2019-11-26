@@ -280,6 +280,34 @@ var Camara = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Camara.prototype, "borde_izquierdo", {
+        get: function () {
+            return -this.camara_principal.midPoint.x;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Camara.prototype, "borde_derecho", {
+        get: function () {
+            return this.camara_principal.midPoint.x;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Camara.prototype, "borde_arriba", {
+        get: function () {
+            return this.camara_principal.midPoint.y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Camara.prototype, "borde_abajo", {
+        get: function () {
+            return -this.camara_principal.midPoint.y;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Camara;
 }());
 var Colores = (function () {
@@ -1570,7 +1598,6 @@ var Pilas = (function () {
             pixelArt: pixelart,
             autostart: false,
             transparent: transparente,
-            backgroundColor: color_de_fondo,
             input: {
                 keyboard: true,
                 mouse: true,
@@ -2621,10 +2648,26 @@ var ActorBase = (function () {
         texto.centro_y = 1;
         texto.z = this.z - 1;
         texto.texto = mensaje;
+        mantener_en_pantalla();
+        function mantener_en_pantalla() {
+            if (texto.x - texto.sprite.width < texto.pilas.camara.borde_izquierdo) {
+                texto.x = texto.pilas.camara.borde_izquierdo + texto.sprite.width;
+            }
+            if (texto.x + 20 > texto.pilas.camara.borde_derecho) {
+                texto.x = texto.pilas.camara.borde_derecho - 20;
+            }
+            if (texto.y + texto.sprite.height > texto.pilas.camara.borde_arriba) {
+                texto.y = texto.pilas.camara.borde_arriba - texto.sprite.height;
+            }
+            if (texto.y - 15 < texto.pilas.camara.borde_abajo) {
+                texto.y = texto.pilas.camara.borde_abajo + 15;
+            }
+        }
         texto.actualizar = function () {
             if (_this.esta_vivo()) {
                 texto.x = _this.x - 15;
                 texto.y = _this.y + _this.alto;
+                mantener_en_pantalla();
             }
         };
         this._dialogo = texto;

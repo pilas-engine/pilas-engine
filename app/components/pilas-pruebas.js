@@ -37,15 +37,9 @@ export default Component.extend({
               iniciar() {
                 let actor = this.pilas.actores.aceituna();
                 this.actor = actor;
+                this.actor.aprender("moverse con el teclado");
 
-                window.actor = actor;
-
-                this.pilas.cada(3, (a) => {
-                  console.log(a)
-                  actor.decir("pasaron 5 segundos");
-                  //return true;
-                }, 2);
-
+                actor.decir("Texto largo")
 
 
               }

@@ -263,7 +263,6 @@ class Pilas {
       pixelArt: pixelart,
       autostart: false,
       transparent: transparente,
-      backgroundColor: color_de_fondo,
       input: {
         keyboard: true,
         mouse: true,
