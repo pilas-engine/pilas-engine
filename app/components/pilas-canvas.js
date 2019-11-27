@@ -290,12 +290,8 @@ export default Component.extend({
       }
     }
 
-    console.log("000", e.data.tipo, nombre_del_contexto, this.nombre_del_contexto);
-
     if (e.data.tipo === "finaliza_carga_de_recursos") {
-      console.log("1111-enviando mensaje:" + `${nombre_del_contexto}:finaliza_carga`);
       this.bus.trigger(`${nombre_del_contexto}:finaliza_carga`, contexto.pilasengine, contexto);
-      //window["pilas"] = contexto.pilas;
     }
 
     if (e.data.tipo === "pulsa_la_tecla_escape") {

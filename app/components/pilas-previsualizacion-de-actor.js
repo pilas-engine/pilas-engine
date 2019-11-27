@@ -43,12 +43,8 @@ export default Component.extend({
         }
       ]
     });
-    this.bus.on("finaliza_carga", this, "finaliza_carga");
-    this.bus.on(
-      "cuando_termina_de_iniciar_ejecucion",
-      this,
-      "cuando_termina_de_iniciar_ejecucion"
-    );
+    this.bus.on("actor:finaliza_carga", this, "finaliza_carga");
+    this.bus.on("actor:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
 
     if (this.mantener_foco) {
       this.tarea_para_mantener_foco.perform();
@@ -73,12 +69,8 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this.bus.off("finaliza_carga", this, "finaliza_carga");
-    this.bus.off(
-      "cuando_termina_de_iniciar_ejecucion",
-      this,
-      "cuando_termina_de_iniciar_ejecucion"
-    );
+    this.bus.off("actor:finaliza_carga", this, "finaliza_carga");
+    this.bus.off("actor:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
   },
 
   finaliza_carga() {
@@ -98,7 +90,7 @@ export default Component.extend({
       proyecto: proyecto
     };
 
-    this.bus.trigger("ejecutar_proyecto", datos);
+    this.bus.trigger("actor:ejecutar_proyecto", datos);
   },
 
   agregar_actor_al_proyecto(proyecto, actor) {

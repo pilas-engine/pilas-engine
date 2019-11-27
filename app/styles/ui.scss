@@ -155,3 +155,9 @@ span {
 .separador-vertical {
   height: 26px;
 }
+
+.pilas-grilla-de-actores {
+  height: calc(100vh - 57px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
