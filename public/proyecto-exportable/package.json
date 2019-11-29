@@ -2,7 +2,7 @@
   "name": "proyecto",
   "version": "1.0.0",
   "description": "",
-  "main": "electron.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "surge": "surge",
@@ -15,5 +15,8 @@
     "electron": "^5.0.6",
     "http-server": "^0.11.1",
     "surge": "^0.21.3"
+  },
+  "dependencies": {
+    "electron-packager": "^14.1.1"
   }
 }
