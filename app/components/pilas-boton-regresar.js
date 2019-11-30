@@ -18,7 +18,7 @@ export default Component.extend({
       this.set("mostrar", false);
     },
     confirmar_regreso() {
-      this.router.transitionTo("index");
+      this.router.transitionTo("app.editor.abandonar-proyecto");
     }
   }
 });

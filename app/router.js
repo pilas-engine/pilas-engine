@@ -37,6 +37,10 @@ Router.map(function() {
   this.route("app", function() {
     this.route("abrir_proyecto", { path: "abrir_proyecto/:ruta" });
     this.route("abrir_proyecto_serializado", { path: "abrir_proyecto_serializado/:hash" });
+
+    this.route('editor', function() {
+      this.route('abandonar-proyecto');
+    });
   });
   this.route("proyecto", { path: "proyecto/:hash" });
 });
