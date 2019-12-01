@@ -53,12 +53,23 @@
 
 </div>
 
-<div class="pv2 unselectable">
-  {{#if pausado}}
-    {{pilas-boton desactivado=iniciando id="reproducir" accion=(action "resumir") texto="Reproducir" icono="ejecutar"}}
-  {{else}}
-    {{pilas-boton desactivado=iniciando id="pausar" accion=(action "pausar") texto="Pausar" icono="pausa"}}
-  {{/if}}
+<div class="pv2 unselectable flex">
+  <div class="">
+    {{#if pausado}}
+      {{pilas-boton desactivado=iniciando id="reproducir" accion=(action "resumir") texto="Reproducir" icono="ejecutar"}}
+    {{else}}
+      {{pilas-boton desactivado=iniciando id="pausar" accion=(action "pausar") texto="Pausar" icono="pausa"}}
+    {{/if}}
+  </div>
+
+  <div class="flex1">
+  </div>
+
+  <div class="flex">
+    <div class="pt1">Aumento</div>
+    {{pilas-zoom-de-canvas nombre_del_contexto=nombre_del_contexto}}
+  </div>
+
 </div>
 
 {{#pilas-reiniciador}}

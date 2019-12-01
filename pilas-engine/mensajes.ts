@@ -38,6 +38,10 @@ class Mensajes {
     }
   }
 
+  atender_mensaje_cambiar_zoom(datos) {
+    this.pilas.modo.cameras.main.setZoom(datos.zoom);
+  }
+
   atender_mensaje_iniciar_pilas(datos) {
     this.pilas.nombre_del_contexto = datos.nombre_del_contexto;
     this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones, datos.imagenes);

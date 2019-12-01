@@ -76,6 +76,7 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
       this.bus.on(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
+      this.bus.on(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
     };
   },
 
@@ -101,6 +102,7 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
     this.bus.off(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
+    this.bus.off(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
   },
 
   convertir_a_boolean(valor) {
@@ -191,6 +193,16 @@ export default Component.extend({
       tipo: "eliminar_actor_desde_el_editor",
       nombre_del_contexto: this.nombre_del_contexto,
       id
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  cuando_cambia_zoom(cantidad) {
+    let data = {
+      tipo: "cambiar_zoom",
+      nombre_del_contexto: this.nombre_del_contexto,
+      zoom: cantidad
     };
 
     this.contexto.postMessage(data, utils.HOST);

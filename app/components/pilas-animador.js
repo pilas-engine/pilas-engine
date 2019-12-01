@@ -159,6 +159,9 @@ export default Component.extend({
       run.scheduleOnce("afterRender", this, () => {
         this.set("lista_visible", true);
       });
+
+      this.cargar_animacion_en_el_canvas();
+      this.set("cuadro_actual", 0);
     },
     cuando_termina_de_cargar(/*pilas, contexto*/) {
       this.crear_proyecto();
