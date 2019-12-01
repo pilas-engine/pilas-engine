@@ -162,7 +162,24 @@ span {
   overflow-x: hidden;
 }
 
-.boton-borrar-cuadro {
+.contenedor-boton-borrar-cuadro {
   right: -8px;
   top: -8px;
+}
+
+.boton-borrar-cuadro {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+}
+
+.contenedor-boton-mover {
+  left: 11px;
+  bottom: -8px;
+  z-index: 99;
+}
+
+.boton-mover {
+  width: 40px;
+  height: 16px;
 }
