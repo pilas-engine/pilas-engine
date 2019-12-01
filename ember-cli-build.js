@@ -19,6 +19,7 @@ module.exports = function(defaults) {
   app.import("vendor/scrollbooster.js");
   app.import("vendor/split.js");
   app.import("vendor/jszip.js");
+  app.import("vendor/Sortable.min.js");
 
   return app.toTree();
 };

@@ -24,6 +24,7 @@ module.exports = {
     hacerClick: true,
     esperarElemento: true,
     saveTextAs: true,
+    Sortable: true,
     Split: true,
     JSZip: true,
     saveAs: true

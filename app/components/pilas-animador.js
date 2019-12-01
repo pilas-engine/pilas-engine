@@ -2,6 +2,7 @@ import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 import { computed } from "@ember/object";
 import { observer } from "@ember/object";
+import { run } from "@ember/runloop";
 
 const NOMBRE_DE_LA_ESCENA = "demo";
 
@@ -16,6 +17,7 @@ export default Component.extend({
   iniciando: true,
   recursos: service(),
   servicioProyecto: service("proyecto"),
+  lista_visible: true,
 
   bus: service(),
   compilador: service(),
@@ -32,29 +34,12 @@ export default Component.extend({
           sprite: "conejo-conejo_camina1"
         },
         {
-          nombre: "imagenes:conejo/conejo_camina2",
-          sprite: "conejo-conejo_camina2"
-        },
-
-        {
-          nombre: "imagenes:conejo/conejo_camina2",
-          sprite: "conejo-conejo_camina2"
+          nombre: "imagenes:aliens/alien_verde",
+          sprite: "aliens-alien_verde"
         },
         {
-          nombre: "imagenes:conejo/conejo_camina1",
-          sprite: "conejo-conejo_camina1"
-        },
-        {
-          nombre: "imagenes:conejo/conejo_camina2",
-          sprite: "conejo-conejo_camina2"
-        },
-        {
-          nombre: "imagenes:conejo/conejo_camina1",
-          sprite: "conejo-conejo_camina1"
-        },
-        {
-          nombre: "imagenes:conejo/conejo_camina2",
-          sprite: "conejo-conejo_camina2"
+          nombre: "imagenes:aliens/alien_azul",
+          sprite: "aliens-alien_azul"
         }
       ],
       velocidad: 15
@@ -160,6 +145,21 @@ export default Component.extend({
   },
 
   actions: {
+    cuando_cambia_orden(orden) {
+      this.set("lista_visible", false);
+      let cuadros_originales = this.animacion.cuadros;
+      let cuadros_ordenados = [];
+
+      orden.map(indice => {
+        cuadros_ordenados.pushObject(cuadros_originales[indice]);
+      });
+
+      this.set("animacion.cuadros", cuadros_ordenados);
+
+      run.scheduleOnce("afterRender", this, () => {
+        this.set("lista_visible", true);
+      });
+    },
     cuando_termina_de_cargar(/*pilas, contexto*/) {
       this.crear_proyecto();
       let resultado = this.compilador.compilar_proyecto(this.proyecto);
@@ -215,6 +215,7 @@ export default Component.extend({
       let indice = this.animacion.cuadros.indexOf(cuadro);
       this.animacion.cuadros.removeAt(indice);
       this.cargar_animacion_en_el_canvas();
+      this.set("cuadro_actual", 0);
     },
 
     seleccionar_cuadro(indice) {
