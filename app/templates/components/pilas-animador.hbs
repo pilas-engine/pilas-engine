@@ -1,45 +1,60 @@
 {{yield}}
 
-<div class="pa2">
+<div class="pa2 {{if iniciando "o-50"}}">
   <span class="texto">Cuadros por segundo:</span>
-  {{input value=animacion.velocidad type="number" min=1}}
+  {{input disabled=iniciando value=animacion.velocidad type="number" min=1}}
 </div>
 
-<div class="pa2">
-  {{#each animacion.cuadros as |cuadro|}}
-    <div class="ba b--red dib ma1">
-      {{#if tiene_mas_de_un_cuadro}}
-        <button type="button" name="button" {{action "eliminar_cuadro" cuadro}}>x</button>
-      {{/if}}
+<div class="pa2 unselectable ba borde overflow-x-scroll">
+  <div class="w-max-content {{if iniciando "no-pointer-events o-50"}}">
+    {{#each animacion.cuadros as |cuadro index|}}
+      <div class="v-top ba borde dib ma1 hide-child relative w3 h3 tc pointer" {{action "seleccionar_cuadro" index}} role="button">
 
-      <div class="sprite-grilla-de-imagenes {{cuadro.sprite}}"></div>
+        <div class="absolute boton-borrar-cuadro child">
+          {{#if tiene_mas_de_un_cuadro}}
+            <button type="button" name="button" class="br-100 bn bg-red white f7" {{action "eliminar_cuadro" cuadro}}>×</button>
+          {{/if}}
+        </div>
+
+        <div class="sprite-grilla-de-imagenes {{cuadro.sprite}}"></div>
+
+        <div class="ba b--white absolute bottom-0 left-0 right-0 {{if (eq index cuadro_actual) "bg-white" "o-0"}}">
+        </div>
+
+      </div>
+    {{/each}}
+
+    <div role="button" {{action "abrir_modal_para_agregar_imagen"}} class="dim v-top ba borde dib ma1 relative w3 h3 tc pt3">
+      <span class="v-mid">+</span>
     </div>
-  {{/each}}
-
-  <button {{action "abrir_modal_para_agregar_imagen"}}>+ Agregar cuadro</button>
+  </div>
 
   {{#pilas-modal alCerrar=(action "ocultar") visible=mostrarModalDeImagenes titulo="Agregar imagen"}}
     <div>
       {{pilas-grilla-de-imagenes filtro=filtro cuando_selecciona=(action "cuando_selecciona_imagen_en_el_modal")}}
     </div>
   {{/pilas-modal}}
+
 </div>
 
-<div class="pa2 unselectable">
+<div class="pv2 unselectable">
   {{#if pausado}}
-    <button {{action "resumir"}} name="button">Resumir</button>
+    {{pilas-boton desactivado=iniciando id="reproducir" accion=(action "resumir") texto="Reproducir" icono="ejecutar"}}
   {{else}}
-    <button {{action "pausar"}} name="button">Pausar</button>
+    {{pilas-boton desactivado=iniciando id="pausar" accion=(action "pausar") texto="Pausar" icono="pausa"}}
   {{/if}}
 </div>
 
-{{pilas-canvas
-    ancho=proyecto.ancho
-    nombre_del_contexto=nombre_del_contexto
-    alto=proyecto.alto
-    proyecto=proyecto
-    modoZoom=2
-    pixelart=pixelart
-    cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
-    cuando_termina_de_iniciar_ejecucion=(action "cuando_termina_de_iniciar_ejecucion")
-}}
+{{#pilas-reiniciador}}
+  {{pilas-canvas
+      ancho=proyecto.ancho
+      nombre_del_contexto=nombre_del_contexto
+      alto=proyecto.alto
+      recursos=recursos
+      proyecto=proyecto
+      modoZoom=2
+      pixelart=pixelart
+      cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
+      cuando_termina_de_iniciar_ejecucion=(action "cuando_termina_de_iniciar_ejecucion")
+  }}
+{{/pilas-reiniciador}}

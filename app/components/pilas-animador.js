@@ -9,13 +9,17 @@ export default Component.extend({
   animacion: null,
   contexto: null,
   pilas: null,
-  pausado: false,
+  pausado: true,
   mostrarModalDeImagenes: false,
   nombre_del_contexto: "pilas-en-el-animador",
   filtro: "",
+  iniciando: true,
+  recursos: service(),
+  servicioProyecto: service("proyecto"),
 
   bus: service(),
   compilador: service(),
+  cuadro_actual: 0,
 
   init() {
     this._super(...arguments);
@@ -30,17 +34,50 @@ export default Component.extend({
         {
           nombre: "imagenes:conejo/conejo_camina2",
           sprite: "conejo-conejo_camina2"
+        },
+
+        {
+          nombre: "imagenes:conejo/conejo_camina2",
+          sprite: "conejo-conejo_camina2"
+        },
+        {
+          nombre: "imagenes:conejo/conejo_camina1",
+          sprite: "conejo-conejo_camina1"
+        },
+        {
+          nombre: "imagenes:conejo/conejo_camina2",
+          sprite: "conejo-conejo_camina2"
+        },
+        {
+          nombre: "imagenes:conejo/conejo_camina1",
+          sprite: "conejo-conejo_camina1"
+        },
+        {
+          nombre: "imagenes:conejo/conejo_camina2",
+          sprite: "conejo-conejo_camina2"
         }
       ],
-      velocidad: 6
+      velocidad: 15
     });
 
     this.crear_proyecto();
   },
 
+  didInsertElement() {
+    this.bus.on(`${this.nombre_del_contexto}:cuando_cambia_cuadro_de_animacion`, this, "cuando_cambia_cuadro");
+  },
+
+  didDestroyElement() {
+    this.bus.off(`${this.nombre_del_contexto}:cuando_cambia_cuadro_de_animacion`, this, "cuando_cambia_cuadro");
+  },
+
   tiene_mas_de_un_cuadro: computed("animacion.cuadros.length", function() {
     return this.animacion.cuadros.length > 1;
   }),
+
+  cuando_cambia_cuadro(pilas, datos) {
+    this.set("cuadro_actual", datos.cuadro);
+  },
 
   cargar_animacion_en_el_canvas() {
     let r = Math.random();
@@ -49,7 +86,9 @@ export default Component.extend({
     actor.crear_animacion("demo" + r, nombres, this.animacion.velocidad);
     actor.animacion = "demo" + r;
     window.actor = actor;
-    this.set("pausado", false);
+
+    actor.transparencia = 0;
+    this.send("pausar");
   },
 
   cuando_cambia_velocidad: observer("animacion.velocidad", function() {
@@ -57,11 +96,19 @@ export default Component.extend({
   }),
 
   crear_proyecto() {
+    let imagenes_heredadas = [];
+
+    if (this.servicioProyecto.proyecto) {
+      imagenes_heredadas = this.servicioProyecto.proyecto.imagenes;
+    }
+
+    console.log("imagenes heredadas", imagenes_heredadas);
+
     this.set("proyecto", {
       titulo: "Proyecto demo",
       ancho: 350,
       alto: 350,
-      imagenes: [],
+      imagenes: imagenes_heredadas,
       codigos: {
         escenas: [
           {
@@ -69,14 +116,26 @@ export default Component.extend({
             codigo: `
 
               class ${NOMBRE_DE_LA_ESCENA} extends Escena {
+                index: number = -1;
+
                 iniciar() {
                   let actor = this.pilas.actores.aceituna();
                   this.actor = actor;
+                  this.actor.transparencia = 100;
 
                   window.actor = actor;
                 }
 
                 actualizar() {
+                  if (this.actor.sprite.anims.currentFrame) {
+                    let cuadro_actual = this.actor.sprite.anims.currentFrame.index -1;
+                    //this.pilas.mensajes.emitir_mensaje_al_editor("cambia_cuadro_de_animacion", {cuadro: cuadro_actual});
+
+                    if (this.index != cuadro_actual)  {
+                      this.index = cuadro_actual;
+                      this.pilas.mensajes.emitir_mensaje_al_editor("cambia_cuadro_de_animacion", {cuadro: cuadro_actual});
+                    }
+                  }
                 }
 
               }
@@ -102,6 +161,7 @@ export default Component.extend({
 
   actions: {
     cuando_termina_de_cargar(/*pilas, contexto*/) {
+      this.crear_proyecto();
       let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
       let datos = {
@@ -118,6 +178,7 @@ export default Component.extend({
     cuando_termina_de_iniciar_ejecucion(pilas, contexto) {
       this.set("contexto", contexto);
       this.set("pilas", pilas);
+      this.set("iniciando", false);
       this.cargar_animacion_en_el_canvas();
     },
 
@@ -131,6 +192,9 @@ export default Component.extend({
       let actor = this.pilas.obtener_actor_por_nombre("aceituna");
       this.pilas.animaciones.animaciones[actor.id + "-" + actor.animacion].resume();
       this.set("pausado", false);
+
+      // reinicia la animación del actor.
+      actor.sprite.anims.restart();
     },
 
     ocultar() {
@@ -151,6 +215,19 @@ export default Component.extend({
       let indice = this.animacion.cuadros.indexOf(cuadro);
       this.animacion.cuadros.removeAt(indice);
       this.cargar_animacion_en_el_canvas();
+    },
+
+    seleccionar_cuadro(indice) {
+      this.send("pausar");
+      let actor = this.pilas.obtener_actor_por_nombre("aceituna");
+      var frame = actor.sprite.anims.currentAnim.getFrameAt(indice);
+
+      if (frame.textureFrame) {
+        actor.imagen = `${frame.textureKey}:${frame.textureFrame}`;
+      } else {
+        actor.imagen = frame.textureKey;
+      }
+      this.set("cuadro_actual", indice);
     }
   }
 });

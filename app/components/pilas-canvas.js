@@ -326,6 +326,11 @@ export default Component.extend({
       this.bus.trigger(`${nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, contexto.pilasengine, contexto);
     }
 
+    // Evento personalizado que solo se usa en el editor de animaciones.
+    if (e.data.tipo === "cambia_cuadro_de_animacion") {
+      this.bus.trigger(`${nombre_del_contexto}:cuando_cambia_cuadro_de_animacion`, contexto.pilasengine, e.data);
+    }
+
     if (e.data.tipo === "cuando_pulsa_escape") {
       this.cuandoPulsaEscapeEnModoEjecucion();
     }
