@@ -66,6 +66,10 @@
     {
       "nombre": "temporizadores",
       "desde": "2.0.91"
+    },
+    {
+      "nombre": "laser-y-misil",
+      "desde": "2.0.92"
     }
   ]
 }
