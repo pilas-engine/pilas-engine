@@ -167,6 +167,7 @@ class ActorBase {
         this.actualizar();
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
+        this.pilas.modo.pausar();
       }
     };
 

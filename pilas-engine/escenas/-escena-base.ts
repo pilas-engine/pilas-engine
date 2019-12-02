@@ -33,7 +33,6 @@ class EscenaBase {
   observar(nombre: string, variable: any) {
     if (this._observables === null) {
       this._actor_visor_observables = this.pilas.actores.texto();
-      this._actor_visor_observables.fondo = "imagenes:redimensionables/blanco";
       this._actor_visor_observables.color = "black";
 
       this._actor_visor_observables.centro_x = 0;
@@ -50,6 +49,12 @@ class EscenaBase {
           .replace(/,\n/g, "\n")
           .replace(/    /g, "")
           .trim();
+
+        // asigna el fondo blanco una vez que el actor observador tiene texto y está
+        // posicionado correctamente en la pantalla.
+        if (!self._actor_visor_observables.fondo) {
+          self._actor_visor_observables.fondo = "imagenes:redimensionables/blanco";
+        }
 
         this.texto = texto;
       };
@@ -127,25 +132,31 @@ class EscenaBase {
     let actores_a_eliminar = [];
 
     this.actores.map(actor => {
-      if (!actor._vivo) {
-        actor.sprite.destroy();
+      try {
+        if (!actor._vivo) {
+          actor.sprite.destroy();
 
-        if (actor._texto) {
-          actor._texto.destroy();
+          if (actor._texto) {
+            actor._texto.destroy();
+          }
+
+          if (actor._fondo) {
+            actor._fondo.destroy();
+          }
+
+          actores_a_eliminar.push(actor);
+          return;
         }
 
-        if (actor._fondo) {
-          actor._fondo.destroy();
-        }
-
-        actores_a_eliminar.push(actor);
-        return;
+        actor.pre_actualizar();
+        actor.actualizar_sensores();
+        actor.actualizar_habilidades();
+        actor.actualizar();
+      } catch (e) {
+        console.error(e);
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
+        this.pilas.modo.pausar();
       }
-
-      actor.pre_actualizar();
-      actor.actualizar_sensores();
-      actor.actualizar_habilidades();
-      actor.actualizar();
     });
 
     actores_a_eliminar.map(actor => {

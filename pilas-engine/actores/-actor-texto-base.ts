@@ -82,8 +82,8 @@ class ActorTextoBase extends ActorBase {
     }
 
     this._fondo = this.pilas.modo.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
-    this.actualizar_tamano_del_fondo();
     this.pre_actualizar();
+    this.actualizar_tamano_del_fondo();
   }
 
   private actualizar_tamano_del_fondo() {

@@ -111,23 +111,26 @@ class Mensajes {
 
     let fuente_principal = {
       font: "16px verdana",
-      fill: "#ddd",
       wordWrap: { width: 400, useAdvancedWrap: true }
     };
 
     let fuente_pequena = {
-      font: "14px verdana"
+      font: "14px verdana",
+      fill: "#ddd"
     };
 
     let fondo = this.pilas.modo.add.graphics();
-    fondo.fillStyle(0x000000, 0.5);
+    fondo.fillStyle(0x000000, 0.75);
     fondo.fillRect(0, 0, 3000, 3000);
+    fondo.setDepth(500000);
 
-    this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
+    let texto_titulo = this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
+    let texto_detalle = this.pilas.modo.add.text(5, 30, detalle.mensaje, fuente_principal);
+    let texto_stack = this.pilas.modo.add.text(5, 5 + 30 + texto_detalle.height, detalle.stack, fuente_pequena);
 
-    let texto = this.pilas.modo.add.text(5, 30, detalle.mensaje, fuente_principal);
-
-    this.pilas.modo.add.text(5, 5 + 30 + texto.height, detalle.stack, fuente_pequena);
+    texto_titulo.setDepth(500001);
+    texto_detalle.setDepth(500001);
+    texto_stack.setDepth(500001);
 
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
     console.error(error);
