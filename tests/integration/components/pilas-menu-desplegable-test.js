@@ -7,7 +7,7 @@ module("Integration | Component | pilas-menu-desplegable", function(hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function(assert) {
-    await render(hbs`{{pilas-menu-desplegable-del-editor}}`);
+    await render(hbs`{{pilas-boton-configuracion}}`);
     assert.ok(this.element.textContent);
   });
 });

@@ -22,6 +22,7 @@ export default Component.extend({
   bus: service(),
   compilador: service(),
   cuadro_actual: 0,
+  tagName: "",
 
   init() {
     this._super(...arguments);
