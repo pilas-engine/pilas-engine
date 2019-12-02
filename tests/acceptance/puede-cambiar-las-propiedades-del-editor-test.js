@@ -14,16 +14,12 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     await visit("/");
 
     await pulsar("Abrir el editor");
-    assert.equal(currentURL(), "/editor", "accede al editor correctamente 2");
+    assert.equal(currentURL(), "/editor", "accede al editor correctamente");
 
     await esperarElemento("a#ejecutar");
 
-    document.querySelector("[data-test='panel-derecho']").click();
-
     await esperar(PAUSA);
-    document
-      .querySelector("[data-test='boton-preferencias-del-editor']")
-      .click();
+    document.querySelector("[data-test='boton-preferencias-del-editor']").click();
 
     await esperar(PAUSA);
     document.querySelector("[data-test='boton-modo-oscuro']").click();
