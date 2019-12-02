@@ -300,7 +300,21 @@ class Pilas {
    * Retorna el actor que tenga el nombre solicitado.
    */
   obtener_actor_por_nombre(nombre: string) {
-    return this.obtener_actores().find(actor => actor.nombre === nombre);
+    let actor = this.obtener_actores().find(actor => actor.nombre === nombre);
+
+    if (actor === undefined) {
+      throw Error(`No se puede obtener un actor con el nombre '${nombre}', ¿Tal vez se eliminó?`);
+    } else {
+      return actor;
+    }
+  }
+
+  /**
+   * Retorna true si existe un actor llamado de la forma indicada por el argumento.
+   */
+  existe_un_actor_llamado(nombre: string) {
+    let actor = this.obtener_actores().find(actor => actor.nombre === nombre);
+    return actor !== undefined;
   }
 
   /**

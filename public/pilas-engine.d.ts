@@ -402,6 +402,7 @@ declare class Pilas {
     obtener_actores(): Actor[];
     buscar_actor(nombre: string): Actor;
     obtener_actor_por_nombre(nombre: string): Actor;
+    existe_un_actor_llamado(nombre: string): boolean;
     obtener_actor_por_etiqueta(etiqueta: string): Actor;
     obtener_todos_los_actores_con_la_etiqueta(etiqueta: string): Actor[];
     obtener_cantidad_de_actores(): number;
