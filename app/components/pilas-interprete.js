@@ -31,11 +31,7 @@ export default Component.extend({
       }
     });
 
-    this.bus.on(
-      "cuando_termina_de_iniciar_ejecucion",
-      this,
-      "activar_interprete"
-    );
+    this.bus.on(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "activar_interprete");
 
     this.actualizar_diccionario_de_actores.perform();
     this.log.limpiar();
@@ -49,11 +45,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this.bus.off(
-      "cuando_termina_de_iniciar_ejecucion",
-      this,
-      "activar_interprete"
-    );
+    this.bus.off(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "activar_interprete");
   },
 
   autocompletar(termino, success) {
@@ -70,9 +62,7 @@ export default Component.extend({
       yield timeout(2000);
 
       if (this.contexto) {
-        this.contexto.eval(
-          "window.actores = pilasengine.obtener_diccionario_de_actores();"
-        );
+        this.contexto.eval("window.actores = pilasengine.obtener_diccionario_de_actores();");
       }
     }
   }),
