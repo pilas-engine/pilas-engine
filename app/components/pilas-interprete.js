@@ -19,11 +19,12 @@ export default Component.extend({
   bus: service(),
   pilas: null,
   contexto: null,
+  autocompletado: null,
 
   didInsertElement() {
     this.set("historial", []);
 
-    new autoComplete({
+    this.autocompletado = new autoComplete({
       selector: this.element.querySelector("#input"),
       minChars: 1,
       source: (termino, suggest) => {
@@ -45,6 +46,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
+    this.autocompletado.destroy();
     this.bus.off(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "activar_interprete");
   },
 
