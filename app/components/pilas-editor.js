@@ -349,7 +349,8 @@ export default Component.extend({
       .set("codigo", codigo);
   },
 
-  error(/* data */) {
+  error(data) {
+    this.log.error(data.mensaje, "");
     this.set("existe_un_error_reciente", true);
   },
 

@@ -7265,11 +7265,8 @@ var ModoEjecucion = (function (_super) {
         }
         catch (e) {
             console.error(e);
-            this.pilas.mensajes.emitir_mensaje_al_editor("error_de_ejecucion", {
-                mensaje: e.message,
-                stack: e.stack.toString()
-            });
-            this.pausar();
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
+            this.pilas.modo.pausar();
         }
     };
     ModoEjecucion.prototype.pausar = function () {
