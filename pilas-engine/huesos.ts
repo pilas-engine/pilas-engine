@@ -38,6 +38,7 @@ class Huesos {
       this.animacion_actual = nombre;
       this.pose.setAnim(nombre);
       this.pose.update(0);
+      this.pose.setTime(0);
       this.pose.strike();
       this.actualizar_posicion(this.pose);
     }
