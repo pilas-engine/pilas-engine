@@ -69,6 +69,11 @@ export default Component.extend({
     let r = Math.random();
     let actor = this.pilas.obtener_actor_por_nombre("aceituna");
     let nombres = this.animacion.cuadros.map(e => e.nombre);
+
+    if (nombres.length === 0) {
+      nombres = ["imagenes:basicos/invisible"];
+    }
+
     actor.crear_animacion("demo" + r, nombres, this.animacion.velocidad);
     actor.animacion = "demo" + r;
     window.actor = actor;
@@ -115,7 +120,6 @@ export default Component.extend({
                 actualizar() {
                   if (this.actor.sprite.anims.currentFrame) {
                     let cuadro_actual = this.actor.sprite.anims.currentFrame.index -1;
-                    //this.pilas.mensajes.emitir_mensaje_al_editor("cambia_cuadro_de_animacion", {cuadro: cuadro_actual});
 
                     if (this.index != cuadro_actual)  {
                       this.index = cuadro_actual;

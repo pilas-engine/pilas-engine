@@ -15,13 +15,13 @@
         <div class="bg-fondo v-top ba borde dib ma1 hide-child relative w3 h3 tc pointer" {{action "seleccionar_cuadro" index}} role="button" data-index={{index}}>
 
           <div class="absolute contenedor-boton-borrar-cuadro child">
-            {{#if tiene_mas_de_un_cuadro}}
-              <button type="button" name="button" class="boton-borrar-cuadro bn bg-red white f7" {{action "eliminar_cuadro" cuadro}}>×</button>
-            {{/if}}
+            <button type="button" name="button" class="boton-borrar-cuadro bn bg-red white f7" {{action "eliminar_cuadro" cuadro}}>×</button>
           </div>
 
           <div class="absolute contenedor-boton-mover child z-99">
-            <div class="boton-mover bn bg-blue white f7 my-handle">⟷</div>
+            {{#if tiene_mas_de_un_cuadro}}
+              <div class="boton-mover bn bg-blue white f7 my-handle">⟷</div>
+            {{/if}}
           </div>
 
 
