@@ -6,8 +6,7 @@ class Animaciones {
     this.pilas = pilas;
   }
 
-  crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number) {
-    let nombre = `${actor.id}-${nombre_de_la_animacion}`;
+  crear_animacion(nombre: string, cuadros: any[], velocidad: number) {
     let frames = this.crear_frames_de_animacion(cuadros, nombre);
 
     if (!this.animaciones[nombre]) {
@@ -55,8 +54,7 @@ class Animaciones {
     return frames;
   }
 
-  existe_animacion(actor: Actor, nombre: string) {
-    let animacion = `${actor.id}-${nombre}`;
-    return this.animaciones[animacion] !== undefined;
+  existe_animacion(nombre: string) {
+    return this.animaciones[nombre] !== undefined;
   }
 }

@@ -1,0 +1,47 @@
+{{yield}}
+<div class="flex vh-100">
+
+  <div class="w5 pl2 pr3 flex flex-column">
+    <div class="">
+      {{pilas-boton accion=(action "crear_animación_nueva") texto="Crear una animación" icono="mas"}}
+    </div>
+
+    <div class="h1">
+    </div>
+
+    {{#each proyecto.animaciones as |item_animación|}}
+
+      <div class="flex hide-child {{if (eq item_animación.nombre animación.nombre) "bg-black-20" "hover-bg-black-10"}}">
+        <div class="pa2 f6 flex1 truncate pointer" role="button" {{action "previsualizar" item_animación}}>
+          {{item_animación.nombre}}
+        </div>
+        <div class="child">
+          {{pilas-boton accion=(action "editar" item_animación) texto="Editar" icono="editar"}}
+        </div>
+      </div>
+
+    {{/each}}
+  </div>
+
+  <div class="flex1 flex flex-column tc">
+    <div class="tl f6">
+      <div class="lh-copy">
+        Ayuda: para mostrar esta animación escribe el siguiente código en un actor:
+      </div>
+
+      <pre class="ba borde pa2 bg-fondo-secundario">this.animacion = "{{animación.nombre}}";</pre>
+
+    </div>
+
+    {{pilas-previsualizacion-de-animacion
+      iniciando=iniciando
+      animación=animación
+      recursos=recursos
+    }}
+
+  </div>
+</div>
+
+{{#pilas-modal alCerrar=(action "ocultar") visible=modal_editor_de_animaciones id="dialogoEditorAnimacion" titulo="Editar animación"}}
+  {{pilas-animador pixelart=pixelart animacion=animación animaciones=proyecto.animaciones}}
+{{/pilas-modal}}

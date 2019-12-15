@@ -1,8 +1,23 @@
 {{yield}}
 
-<div class="pa2 {{if iniciando "o-50"}}">
-  <span class="texto">Cuadros por segundo:</span>
-  {{input disabled=iniciando value=animacion.velocidad type="number" min=1}}
+<div class="pb2 f6 {{if iniciando "o-50"}}">
+
+  <table>
+    <tbody>
+      <tr>
+        <td class="texto dib pt1">Nombre:</td>
+        <td>
+          {{pilas-nombre-de-animacion animación=animacion animaciones=animaciones iniciando=iniciando}}
+        </td>
+      </tr>
+
+      <tr>
+        <td class="texto dib pt1">Cuadros por segundo:</td>
+        <td>{{input class="input v-top pa1 br2" disabled=iniciando value=animacion.velocidad type="number" min=1}}</td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
 
 <div class="pa2 unselectable ba borde overflow-x-scroll">
@@ -66,7 +81,7 @@
   </div>
 
   <div class="flex">
-    <div class="pt1">Aumento</div>
+    <div class="pt1 f6">Aumento</div>
     {{pilas-zoom-de-canvas nombre_del_contexto=nombre_del_contexto}}
   </div>
 

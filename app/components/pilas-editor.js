@@ -668,6 +668,10 @@ export default Component.extend({
 
       let r = Math.random();
       this.set("tituloDelCodigo", `Código de la escena: ${this.seleccion} ${r}`);
+    },
+
+    alternar(propiedad) {
+      this.toggleProperty(propiedad);
     }
   }
 });

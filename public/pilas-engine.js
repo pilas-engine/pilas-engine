@@ -138,8 +138,7 @@ var Animaciones = (function () {
         this.animaciones = {};
         this.pilas = pilas;
     }
-    Animaciones.prototype.crear_animacion = function (actor, nombre_de_la_animacion, cuadros, velocidad) {
-        var nombre = actor.id + "-" + nombre_de_la_animacion;
+    Animaciones.prototype.crear_animacion = function (nombre, cuadros, velocidad) {
         var frames = this.crear_frames_de_animacion(cuadros, nombre);
         if (!this.animaciones[nombre]) {
             var animacion = this.pilas.modo.anims.create({
@@ -179,9 +178,8 @@ var Animaciones = (function () {
         });
         return frames;
     };
-    Animaciones.prototype.existe_animacion = function (actor, nombre) {
-        var animacion = actor.id + "-" + nombre;
-        return this.animaciones[animacion] !== undefined;
+    Animaciones.prototype.existe_animacion = function (nombre) {
+        return this.animaciones[nombre] !== undefined;
     };
     return Animaciones;
 }());
@@ -2556,11 +2554,10 @@ var ActorBase = (function () {
         this.y += Math.sin(r) * velocidad;
     };
     ActorBase.prototype.crear_animacion = function (nombre, cuadros, velocidad) {
-        this.pilas.animaciones.crear_animacion(this, nombre, cuadros, velocidad);
+        this.pilas.animaciones.crear_animacion(nombre, cuadros, velocidad);
     };
     ActorBase.prototype.reproducir_animacion = function (nombre_de_la_animacion) {
-        var nombre = this.id + "-" + nombre_de_la_animacion;
-        this.sprite.anims.play(nombre);
+        this.sprite.anims.play(nombre_de_la_animacion);
     };
     ActorBase.prototype.cuando_finaliza_animacion = function (animacion) { };
     Object.defineProperty(ActorBase.prototype, "animacion", {
@@ -2569,7 +2566,7 @@ var ActorBase = (function () {
         },
         set: function (nombre) {
             if (this._animacion_en_curso !== nombre) {
-                if (this.pilas.animaciones.existe_animacion(this, nombre)) {
+                if (this.pilas.animaciones.existe_animacion(nombre)) {
                     this.reproducir_animacion(nombre);
                     this._animacion_en_curso = nombre;
                 }
@@ -6909,6 +6906,7 @@ var ModoEjecucion = (function (_super) {
             this.guardar_parametros_en_atributos(datos);
             var escena = this.obtener_escena_inicial();
             this.clases = this.obtener_referencias_a_clases();
+            this.cargar_animaciones(datos);
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
             if (this.pilas.opciones.modo_simple) {
                 if (this.pilas["onready"]) {
@@ -6968,6 +6966,16 @@ var ModoEjecucion = (function (_super) {
             console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
             this.pausar();
+        }
+    };
+    ModoEjecucion.prototype.cargar_animaciones = function (datos) {
+        var animaciones = datos.proyecto.animaciones;
+        if (animaciones) {
+            for (var i = 0; i < animaciones.length; i++) {
+                var animación = animaciones[i];
+                var cuadros_de_animacion = animación.cuadros.map(function (e) { return e.nombre; });
+                this.pilas.animaciones.crear_animacion(animación.nombre, cuadros_de_animacion, animación.velocidad);
+            }
         }
     };
     ModoEjecucion.prototype.conectar_eventos = function () {

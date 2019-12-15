@@ -33,6 +33,7 @@
       {{pilas-boton-animaciones
         desactivado=(not estado.puede_editar)
         pixelart=pixelart
+        proyecto=proyecto
         modalVisible=mostrarModalDeAnimaciones}}
     </div>
 
@@ -59,7 +60,7 @@
       <div class={{if mostrarPropiedades "dn" "flex flex-column w-panel-colapsado borde br pa2"}}>
         {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
         <div class="relative">
-          <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-de-escenas">
+          <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-de-escenas" {{action "alternar" "mostrarPropiedades"}} role="button">
             ESCENAS Y ACTORES
           </div>
         </div>
@@ -70,7 +71,7 @@
         <div class="texto pb2">
           {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
 
-          <div class="f7 unselectable texto pl2 dib">
+          <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarPropiedades"}} role="button">
             ESCENAS Y ACTORES
           </div>
         </div>
@@ -227,7 +228,7 @@
 
       <div class="{{if mostrarEditor "dn" "flex flex-column w-panel-colapsado"}} bl borde pl2 pa2">
         {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
-        <div class="relative">
+        <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
           <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor">
             EDITOR DE CÓDIGO
           </div>
@@ -238,7 +239,7 @@
 
         <div class="texto pt2">
           {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
-          <div class="f7 unselectable texto pl2 dib">
+          <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarEditor"}} role="button">
             EDITOR DE CÓDIGO
           </div>
         </div>

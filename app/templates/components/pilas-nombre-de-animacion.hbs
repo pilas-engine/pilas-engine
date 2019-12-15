@@ -1,0 +1,58 @@
+{{yield}}
+
+<button id="boton-editar-nombre-de-animacion"
+  {{action "cambiarNombre"}}
+  class="bg-transparent no-outline p0 texto pointer glow bn pa0">
+  {{pilas-icono icono="editar"}}
+
+  <span>
+    {{animación.nombre}}
+  </span>
+
+</button>
+
+{{#if mostrar}}
+  <div class="absolute ba borde shadow-4 w5 pa2 top-1 left-2 right-1 z-9999 bg-fondo texto shadow-1">
+
+    {{input
+      enter=(action "confirmar")
+      value=nombre_sugerido
+      type="text"
+      class="input w-100 v-top pa1 br2"
+    }}
+
+    <div class="flex pt2">
+      <div class="flex1"></div>
+
+      <div class="">
+        <button class="boton" {{action "ocultar"}}>Cancelar</button>
+        <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>OK</button>
+      </div>
+    </div>
+
+    <div class="tc f7 lh-copy">
+
+      {{#if invalido_por_duplicado}}
+        <div class="pt2">
+          Error: Nombre existente
+        </div>
+      {{/if}}
+
+      {{#if invalido_por_vacio}}
+        <div class="pt2">
+          Error: No puede ser vacío
+        </div>
+      {{/if}}
+
+      {{#if invalido_por_caracteres}}
+        <div class="pt2">
+          Error: Nombre inválido (solo se permite letras)
+        </div>
+      {{/if}}
+
+    </div>
+
+  </div>
+
+  <div role="button" class="fixed z-1 absolute--fill pointer" {{action "ocultar"}}></div>
+{{/if}}

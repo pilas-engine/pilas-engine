@@ -1,7 +1,7 @@
 {{yield}}
 
-{{pilas-boton icono="actor" desactivado=desactivado accion=(action "abrirModal") texto="Editar animaciones"}}
+{{pilas-boton icono="actor" desactivado=desactivado accion=(action "abrirModal") texto="Animaciones"}}
 
-{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoAnimacion" titulo="Editar animaciones"}}
-  {{pilas-animador pixelart=pixelart}}
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoAnimacion" titulo="Animaciones"}}
+  {{pilas-selector-de-animaciones proyecto=proyecto pixelart=pixelart}}
 {{/pilas-modal}}

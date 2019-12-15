@@ -1,0 +1,15 @@
+{{yield}}
+
+{{#pilas-reiniciador}}
+  {{pilas-canvas
+      ancho=proyecto.ancho
+      nombre_del_contexto=nombre_del_contexto
+      alto=proyecto.alto
+      recursos=recursos
+      proyecto=proyecto
+      modoZoom=2
+      pixelart=pixelart
+      cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
+      cuando_termina_de_iniciar_ejecucion=(action "cuando_termina_de_iniciar_ejecucion")
+  }}
+{{/pilas-reiniciador}}

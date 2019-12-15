@@ -4,6 +4,36 @@ export default {
   alto: 500,
   escena_inicial: 1,
   imagenes: [],
+  animaciones: [
+    {
+      nombre: "caminar",
+      velocidad: 15,
+      cuadros: [
+        {
+          nombre: "imagenes:conejo/conejo_camina1",
+          sprite: "conejo-conejo_camina1"
+        },
+        {
+          nombre: "imagenes:conejo/conejo_camina2",
+          sprite: "conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      nombre: "bmo camina",
+      velocidad: 15,
+      cuadros: [
+        {
+          nombre: "imagenes:bmo/bmo_camina_1",
+          sprite: "bmo-bmo_camina_1"
+        },
+        {
+          nombre: "imagenes:bmo/bmo_camina_2",
+          sprite: "bmo-bmo_camina_2"
+        }
+      ]
+    }
+  ],
   codigos: {
     escenas: [
       {

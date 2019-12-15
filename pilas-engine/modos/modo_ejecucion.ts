@@ -35,6 +35,7 @@ class ModoEjecucion extends Modo {
 
       this.clases = this.obtener_referencias_a_clases();
 
+      this.cargar_animaciones(datos);
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
 
       if (this.pilas.opciones.modo_simple) {
@@ -100,6 +101,18 @@ class ModoEjecucion extends Modo {
       console.error(e);
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
       this.pausar();
+    }
+  }
+
+  private cargar_animaciones(datos) {
+    let animaciones = datos.proyecto.animaciones;
+
+    if (animaciones) {
+      for (let i = 0; i < animaciones.length; i++) {
+        let animación = animaciones[i];
+        let cuadros_de_animacion = animación.cuadros.map(e => e.nombre);
+        this.pilas.animaciones.crear_animacion(animación.nombre, cuadros_de_animacion, animación.velocidad);
+      }
     }
   }
 

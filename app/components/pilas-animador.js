@@ -27,6 +27,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
+    /*
     this.set("animacion", {
       nombre: "caminar",
       cuadros: [
@@ -45,6 +46,7 @@ export default Component.extend({
       ],
       velocidad: 15
     });
+    */
 
     this.crear_proyecto();
   },
@@ -92,8 +94,6 @@ export default Component.extend({
     if (this.servicioProyecto.proyecto) {
       imagenes_heredadas = this.servicioProyecto.proyecto.imagenes;
     }
-
-    console.log("imagenes heredadas", imagenes_heredadas);
 
     this.set("proyecto", {
       titulo: "Proyecto demo",
@@ -192,13 +192,13 @@ export default Component.extend({
 
     pausar() {
       let actor = this.pilas.obtener_actor_por_nombre("aceituna");
-      this.pilas.animaciones.animaciones[actor.id + "-" + actor.animacion].pause();
+      this.pilas.animaciones.animaciones[actor.animacion].pause();
       this.set("pausado", true);
     },
 
     resumir() {
       let actor = this.pilas.obtener_actor_por_nombre("aceituna");
-      this.pilas.animaciones.animaciones[actor.id + "-" + actor.animacion].resume();
+      this.pilas.animaciones.animaciones[actor.animacion].resume();
       this.set("pausado", false);
 
       // reinicia la animación del actor.

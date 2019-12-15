@@ -38,9 +38,9 @@ declare class Animaciones {
     pilas: Pilas;
     animaciones: {};
     constructor(pilas: Pilas);
-    crear_animacion(actor: Actor, nombre_de_la_animacion: string, cuadros: any[], velocidad: number): void;
+    crear_animacion(nombre: string, cuadros: any[], velocidad: number): void;
     private crear_frames_de_animacion;
-    existe_animacion(actor: Actor, nombre: string): boolean;
+    existe_animacion(nombre: string): boolean;
 }
 declare class Automata {
     actor: Actor;
@@ -1577,6 +1577,7 @@ declare class ModoEjecucion extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
+    private cargar_animaciones;
     private conectar_eventos;
     private manejar_evento_click_de_mouse;
     private manejar_evento_termina_click;

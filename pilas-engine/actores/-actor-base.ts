@@ -816,20 +816,18 @@ class ActorBase {
   }
 
   crear_animacion(nombre, cuadros, velocidad) {
-    this.pilas.animaciones.crear_animacion(this, nombre, cuadros, velocidad);
+    this.pilas.animaciones.crear_animacion(nombre, cuadros, velocidad);
   }
 
   reproducir_animacion(nombre_de_la_animacion) {
-    let nombre = `${this.id}-${nombre_de_la_animacion}`;
-
-    this.sprite.anims.play(nombre);
+    this.sprite.anims.play(nombre_de_la_animacion);
   }
 
   cuando_finaliza_animacion(animacion: string) {}
 
   set animacion(nombre) {
     if (this._animacion_en_curso !== nombre) {
-      if (this.pilas.animaciones.existe_animacion(this, nombre)) {
+      if (this.pilas.animaciones.existe_animacion(nombre)) {
         this.reproducir_animacion(nombre);
         this._animacion_en_curso = nombre;
       } else {
