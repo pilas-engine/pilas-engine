@@ -163,44 +163,60 @@ class ActorBase {
     }
 
     this.sprite.update = () => {
-      try {
+      this.ejecutar_de_modo_seguro(() => {
         this.actualizar();
-      } catch (e) {
-        this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
-        this.pilas.modo.pausar();
-      }
+      });
     };
 
     this.sprite.on("animationcomplete", (anim, frame) => {
-      if (frame.isLast) {
-        let nombre = anim.key.split("-")[1];
-        this.cuando_finaliza_animacion(nombre);
-        // una vez que avisó que terminó la animación la repite.
-        this.sprite.anims.play(anim.key);
-      }
+      this.ejecutar_de_modo_seguro(() => {
+        if (frame.isLast) {
+          let nombre = anim.key.split("-")[1];
+          // una vez que avisó que terminó la animación la repite.
+          this.sprite.anims.play(anim.key);
+          this.cuando_finaliza_animacion(nombre);
+        }
+      });
     });
 
     this.sprite.on("pointerdown", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-      this.cuando_hace_click(posicion.x, posicion.y, cursor);
+      this.ejecutar_de_modo_seguro(() => {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+        this.cuando_hace_click(posicion.x, posicion.y, cursor);
+      });
     });
 
     this.sprite.on("pointerup", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-      this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+      this.ejecutar_de_modo_seguro(() => {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+        this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+      });
     });
 
     this.sprite.on("pointerout", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-      this.cuando_sale(posicion.x, posicion.y, cursor);
+      this.ejecutar_de_modo_seguro(() => {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+        this.cuando_sale(posicion.x, posicion.y, cursor);
+      });
     });
 
     this.sprite.on("pointermove", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-      this.cuando_mueve(posicion.x, posicion.y, cursor);
+      this.ejecutar_de_modo_seguro(() => {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+        this.cuando_mueve(posicion.x, posicion.y, cursor);
+      });
     });
 
     this.pilas.escena.agregar_actor(this);
+  }
+
+  ejecutar_de_modo_seguro(funcion) {
+    try {
+      funcion();
+    } catch (e) {
+      this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
+      this.pilas.modo.pausar();
+    }
   }
 
   private crear_sprite(tipo, imagen_inicial) {

@@ -422,6 +422,7 @@ declare class Pilas {
     observar(nombre: string, variable: any): void;
     clonar(nombre: string): any;
     clonar_en(nombre: string, x: number, y: number): any;
+    clonar_en_la_posión_del_cursor(nombre: string): any;
     clonar_en_posicion_al_azar(nombre: string): any;
     es_multiplo(a: number, b: number): boolean;
 }
@@ -490,6 +491,7 @@ declare class ActorBase {
     constructor(pilas: any);
     readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;
+    ejecutar_de_modo_seguro(funcion: any): void;
     private crear_sprite;
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
@@ -822,7 +824,6 @@ declare class explosion extends Actor {
         etiqueta: string;
     };
     iniciar(): void;
-    cargar_animacion(): void;
     actualizar(): void;
     cuando_finaliza_animacion(nombre: string): void;
 }

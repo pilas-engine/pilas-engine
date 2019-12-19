@@ -4,6 +4,7 @@ import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import utils from "../utils/utils";
 import ENV from "pilas-engine/config/environment";
+import animaciones_iniciales from "../fixtures/animaciones-iniciales";
 
 export default Component.extend({
   bus: service(),
@@ -166,6 +167,8 @@ export default Component.extend({
   },
 
   ejecutar_proyecto({ proyecto, nombre_de_la_escena_inicial, codigo, permitir_modo_pausa }) {
+    this.agregar_animaciones_iniciales_al_proyecto_si_no_las_tiene(proyecto);
+
     let data = {
       tipo: "ejecutar_proyecto",
       nombre_del_contexto: this.nombre_del_contexto,
@@ -176,6 +179,12 @@ export default Component.extend({
     };
 
     this.contexto.postMessage(data, utils.HOST);
+  },
+
+  agregar_animaciones_iniciales_al_proyecto_si_no_las_tiene(proyecto) {
+    if (!proyecto.animaciones) {
+      proyecto.animaciones = animaciones_iniciales;
+    }
   },
 
   selecciona_actor_desde_el_editor({ id }) {

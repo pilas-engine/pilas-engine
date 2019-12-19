@@ -1758,6 +1758,12 @@ var Pilas = (function () {
         actor.y = y;
         return actor;
     };
+    Pilas.prototype.clonar_en_la_posión_del_cursor = function (nombre) {
+        var actor = this.modo.clonar_actor_por_nombre(nombre);
+        actor.x = this.cursor_x;
+        actor.y = this.cursor_y;
+        return actor;
+    };
     Pilas.prototype.clonar_en_posicion_al_azar = function (nombre) {
         var x = this.azar(-200, 200);
         var y = this.azar(-200, 200);
@@ -1893,38 +1899,53 @@ var ActorBase = (function () {
             }
         }
         this.sprite.update = function () {
-            try {
+            _this.ejecutar_de_modo_seguro(function () {
                 _this.actualizar();
-            }
-            catch (e) {
-                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
-                _this.pilas.modo.pausar();
-            }
+            });
         };
         this.sprite.on("animationcomplete", function (anim, frame) {
-            if (frame.isLast) {
-                var nombre = anim.key.split("-")[1];
-                _this.cuando_finaliza_animacion(nombre);
-                _this.sprite.anims.play(anim.key);
-            }
+            _this.ejecutar_de_modo_seguro(function () {
+                if (frame.isLast) {
+                    var nombre = anim.key.split("-")[1];
+                    _this.sprite.anims.play(anim.key);
+                    _this.cuando_finaliza_animacion(nombre);
+                }
+            });
         });
         this.sprite.on("pointerdown", function (cursor) {
-            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-            _this.cuando_hace_click(posicion.x, posicion.y, cursor);
+            _this.ejecutar_de_modo_seguro(function () {
+                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+                _this.cuando_hace_click(posicion.x, posicion.y, cursor);
+            });
         });
         this.sprite.on("pointerup", function (cursor) {
-            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-            _this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+            _this.ejecutar_de_modo_seguro(function () {
+                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+                _this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+            });
         });
         this.sprite.on("pointerout", function (cursor) {
-            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-            _this.cuando_sale(posicion.x, posicion.y, cursor);
+            _this.ejecutar_de_modo_seguro(function () {
+                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+                _this.cuando_sale(posicion.x, posicion.y, cursor);
+            });
         });
         this.sprite.on("pointermove", function (cursor) {
-            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-            _this.cuando_mueve(posicion.x, posicion.y, cursor);
+            _this.ejecutar_de_modo_seguro(function () {
+                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+                _this.cuando_mueve(posicion.x, posicion.y, cursor);
+            });
         });
         this.pilas.escena.agregar_actor(this);
+    };
+    ActorBase.prototype.ejecutar_de_modo_seguro = function (funcion) {
+        try {
+            funcion();
+        }
+        catch (e) {
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
+            this.pilas.modo.pausar();
+        }
     };
     ActorBase.prototype.crear_sprite = function (tipo, imagen_inicial) {
         var galeria = null;
@@ -3476,29 +3497,8 @@ var explosion = (function (_super) {
         return _this;
     }
     explosion.prototype.iniciar = function () {
-        this.cargar_animacion();
-        this.reproducir_animacion("explosion");
+        this.animacion = "explosion";
         this.pilas.reproducir_sonido("explosion");
-    };
-    explosion.prototype.cargar_animacion = function () {
-        this.crear_animacion("explosion", [
-            "imagenes:explosion/explosion_001",
-            "imagenes:explosion/explosion_002",
-            "imagenes:explosion/explosion_003",
-            "imagenes:explosion/explosion_004",
-            "imagenes:explosion/explosion_005",
-            "imagenes:explosion/explosion_006",
-            "imagenes:explosion/explosion_007",
-            "imagenes:explosion/explosion_008",
-            "imagenes:explosion/explosion_009",
-            "imagenes:explosion/explosion_010",
-            "imagenes:explosion/explosion_011",
-            "imagenes:explosion/explosion_012",
-            "imagenes:explosion/explosion_013",
-            "imagenes:explosion/explosion_014",
-            "imagenes:explosion/explosion_015"
-        ], 30);
-        this.reproducir_animacion("explosion");
     };
     explosion.prototype.actualizar = function () { };
     explosion.prototype.cuando_finaliza_animacion = function (nombre) {
