@@ -3341,15 +3341,8 @@ var conejo = (function (_super) {
         return _this;
     }
     conejo.prototype.iniciar = function () {
-        this.crear_animaciones();
         this.estado = "parado";
         this.pies = this.agregar_sensor(50, 10, 0, -50);
-    };
-    conejo.prototype.crear_animaciones = function () {
-        this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
-        this.crear_animacion("conejo_camina", ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"], 20);
-        this.crear_animacion("conejo_salta", ["imagenes:conejo/conejo_salta"], 20);
-        this.crear_animacion("conejo_muere", ["imagenes:conejo/conejo_pierde"], 1);
     };
     conejo.prototype.actualizar = function () {
         if (this.pies.colisiones.length > 0) {
@@ -3603,15 +3596,8 @@ var nave = (function (_super) {
         return _this;
     }
     nave.prototype.iniciar = function () {
-        this.crear_animaciones();
         this.animacion = "nave_en_reposo";
         this.cuadros_desde_el_ultimo_disparo = 0;
-    };
-    nave.prototype.crear_animaciones = function () {
-        this.crear_animacion("nave_en_reposo", ["imagenes:nave/nave_reposo"], 2);
-        this.crear_animacion("nave_avanzando", ["imagenes:nave/nave_avanza_1", "imagenes:nave/nave_avanza_2"], 20);
-        this.crear_animacion("nave_girando_a_la_izquierda", ["imagenes:nave/nave_izquierda_1", "imagenes:nave/nave_izquierda_2"], 20);
-        this.crear_animacion("nave_girando_a_la_derecha", ["imagenes:nave/nave_derecha_1", "imagenes:nave/nave_derecha_2"], 20);
     };
     nave.prototype.actualizar = function () {
         this.cuadros_desde_el_ultimo_disparo += 1;
@@ -3623,8 +3609,7 @@ var nave = (function (_super) {
             this.rotacion -= this.velocidad;
             this.animacion = "nave_girando_a_la_derecha";
         }
-        if (this.pilas.control.espacio &&
-            this.cuadros_desde_el_ultimo_disparo > 5) {
+        if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {
             this.disparar();
         }
         if (this.pilas.control.arriba) {
@@ -3845,6 +3830,7 @@ var suelo = (function (_super) {
             imagen: "imagenes:plataformas/suelo",
             figura_ancho: 600,
             figura_alto: 25,
+            figura_rebote: 0,
             figura_dinamica: false
         };
         return _this;

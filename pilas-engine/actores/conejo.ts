@@ -17,24 +17,8 @@ class conejo extends Actor {
   pies = null;
 
   iniciar() {
-    this.crear_animaciones();
     this.estado = "parado";
     this.pies = this.agregar_sensor(50, 10, 0, -50);
-  }
-
-  crear_animaciones() {
-    this.crear_animacion(
-      "conejo_parado",
-      ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"],
-      2
-    );
-    this.crear_animacion(
-      "conejo_camina",
-      ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"],
-      20
-    );
-    this.crear_animacion("conejo_salta", ["imagenes:conejo/conejo_salta"], 20);
-    this.crear_animacion("conejo_muere", ["imagenes:conejo/conejo_pierde"], 1);
   }
 
   actualizar() {

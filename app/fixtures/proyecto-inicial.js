@@ -182,7 +182,7 @@ export default {
           figura_alto: 25,
           figura_radio: 40,
           figura_sin_rotacion: false,
-          figura_rebote: 1,
+          figura_rebote: 0,
           figura_sensor: false,
           id: 1019,
           nombre: "suelo"

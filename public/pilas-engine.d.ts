@@ -785,7 +785,6 @@ declare class conejo extends Actor {
     toca_el_suelo: boolean;
     pies: any;
     iniciar(): void;
-    crear_animaciones(): void;
     actualizar(): void;
     parado_iniciar(): void;
     parado_actualizar(): void;
@@ -875,7 +874,6 @@ declare class nave extends Actor {
     velocidad: number;
     cuadros_desde_el_ultimo_disparo: any;
     iniciar(): void;
-    crear_animaciones(): void;
     actualizar(): void;
     disparar(): void;
 }
@@ -979,6 +977,7 @@ declare class suelo extends Actor {
         imagen: string;
         figura_ancho: number;
         figura_alto: number;
+        figura_rebote: number;
         figura_dinamica: boolean;
     };
     iniciar(): void;

@@ -7,30 +7,8 @@ class nave extends Actor {
   cuadros_desde_el_ultimo_disparo;
 
   iniciar() {
-    this.crear_animaciones();
     this.animacion = "nave_en_reposo";
     this.cuadros_desde_el_ultimo_disparo = 0;
-  }
-
-  crear_animaciones() {
-    this.crear_animacion("nave_en_reposo", ["imagenes:nave/nave_reposo"], 2);
-
-    this.crear_animacion(
-      "nave_avanzando",
-      ["imagenes:nave/nave_avanza_1", "imagenes:nave/nave_avanza_2"],
-      20
-    );
-
-    this.crear_animacion(
-      "nave_girando_a_la_izquierda",
-      ["imagenes:nave/nave_izquierda_1", "imagenes:nave/nave_izquierda_2"],
-      20
-    );
-    this.crear_animacion(
-      "nave_girando_a_la_derecha",
-      ["imagenes:nave/nave_derecha_1", "imagenes:nave/nave_derecha_2"],
-      20
-    );
   }
 
   actualizar() {
@@ -46,10 +24,7 @@ class nave extends Actor {
       this.animacion = "nave_girando_a_la_derecha";
     }
 
-    if (
-      this.pilas.control.espacio &&
-      this.cuadros_desde_el_ultimo_disparo > 5
-    ) {
+    if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {
       this.disparar();
     }
 

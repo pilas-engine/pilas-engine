@@ -1,6 +1,7 @@
 import Service from "@ember/service";
 import { set } from "@ember/object";
 import { inject as service } from "@ember/service";
+import ENV from "pilas-engine/config/environment";
 
 export default Service.extend({
   bus: service(),
@@ -8,7 +9,11 @@ export default Service.extend({
 
   vincular(proyecto) {
     this.set("proyecto", proyecto);
-    window.proyecto = proyecto;
+
+    if (ENV.environment === "development") {
+      window.proyecto = proyecto;
+    }
+
     this.bus.on("prueba-editor:finaliza_carga", this, "finaliza_carga");
   },
 

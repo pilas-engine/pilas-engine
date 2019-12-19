@@ -1,5 +1,57 @@
 export default [
   {
+    nombre: "nave_girando_a_la_derecha",
+    cuadros: [
+      {
+        nombre: "imagenes:nave/nave_derecha_1",
+        sprite: "nave-nave_derecha_1"
+      },
+      {
+        nombre: "imagenes:nave/nave_derecha_2",
+        sprite: "nave-nave_derecha_2"
+      }
+    ],
+    velocidad: "20"
+  },
+  {
+    nombre: "nave_girando_a_la_izquierda",
+    cuadros: [
+      {
+        nombre: "imagenes:nave/nave_izquierda_1",
+        sprite: "nave-nave_izquierda_1"
+      },
+      {
+        nombre: "imagenes:nave/nave_izquierda_2",
+        sprite: "nave-nave_izquierda_2"
+      }
+    ],
+    velocidad: "20"
+  },
+  {
+    nombre: "nave_avanzando",
+    cuadros: [
+      {
+        nombre: "imagenes:nave/nave_avanza_1",
+        sprite: "nave-nave_avanza_1"
+      },
+      {
+        nombre: "imagenes:nave/nave_avanza_2",
+        sprite: "nave-nave_avanza_2"
+      }
+    ],
+    velocidad: "20"
+  },
+  {
+    nombre: "nave_en_reposo",
+    cuadros: [
+      {
+        nombre: "imagenes:nave/nave_reposo",
+        sprite: "nave-nave_reposo"
+      }
+    ],
+    velocidad: 10
+  },
+  {
     nombre: "explosion",
     cuadros: [
       {
