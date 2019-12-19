@@ -4,9 +4,12 @@ import { inject as service } from "@ember/service";
 
 export default Service.extend({
   bus: service(),
+  canvas_disponible: true,
 
   vincular(proyecto) {
     this.set("proyecto", proyecto);
+    window.proyecto = proyecto;
+    this.bus.on("prueba-editor:finaliza_carga", this, "finaliza_carga");
   },
 
   obtener_nombres_de_actores() {
@@ -70,6 +73,8 @@ export default Service.extend({
   },
 
   incorporar_imagenes_al_proyecto(lista_de_archivos) {
+    this.set("canvas_disponible", false);
+
     lista_de_archivos.map(item => {
       // si el archivo ya estaba en el proyecto ...
       let anterior = this.proyecto.imagenes.findBy("nombre", item.nombre);
@@ -84,5 +89,9 @@ export default Service.extend({
     });
 
     this.bus.trigger("recargarCanvasDePilas");
+  },
+
+  finaliza_carga() {
+    this.set("canvas_disponible", true);
   }
 });
