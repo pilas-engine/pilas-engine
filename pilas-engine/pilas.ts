@@ -483,6 +483,13 @@ class Pilas {
     return actor;
   }
 
+  clonar_en_la_posión_del_cursor(nombre: string) {
+    let actor = this.modo.clonar_actor_por_nombre(nombre);
+    actor.x = this.cursor_x;
+    actor.y = this.cursor_y;
+    return actor;
+  }
+
   clonar_en_posicion_al_azar(nombre: string) {
     let x = this.azar(-200, 200);
     let y = this.azar(-200, 200);
