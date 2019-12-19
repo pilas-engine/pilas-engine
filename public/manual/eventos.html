@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Eventos · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Eventos · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -401,18 +401,25 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="eventos">Eventos</h1><p>En pilas llamamos &quot;eventos&quot; a las se&#xF1;ales que emiten el mouse o el teclado. Por ejemplo, un &quot;click&quot; del mouse es un evento al igual que la pulsaci&#xF3;n de una tecla.</p><p>Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acci&#xF3;n dentro del juego para responder. Por ejemplo, en un juego de acci&#xF3;n, el &quot;click&quot; del mouse podr&#xED;a realizar una explosi&#xF3;n o hacer que un personaje salte.</p><h2 id="&#xBF;c&#xF3;mo-capturar-un-evento-del-mouse">&#xBF;C&#xF3;mo capturar un evento del mouse?</h2><p>Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el c&#xF3;digo:</p><ul><li>cuando_hace_click(x, y, evento_original)
-</li>
-<li>cuando_termina_de_hacer_click(x, y, evento_original)
-</li>
-<li>cuando_mueve(x, y, evento_original)
-</li>
-<li>cuando_sale(x, y, evento_original)
-</li></ul>
-<p>Estas funciones se pueden crear en el c&#xF3;digo de una escena o de un actor. La diferencia es que en las escenas el &quot;click&quot; o el movimiento se van a detectar en toda la pantalla, mientras que en el c&#xF3;digo del actor solo se detectar&#xE1;n si el mouse apunta al actor.</p><p>Si desde un actor necesitas detectar el click del mouse en la pantalla deber&#xED;as
-usar este otro m&#xE9;todo:</p><ul><li>cuando_hace_click_en_la_pantalla(x, y, evento_original)
-</li></ul>
-<p>Veamos un ejemplo, imagin&#xE1; que queremos crear actores de la clase &quot;Pelota&quot; cada vez que el usuario hace &quot;click&quot; sobre la pantalla. Podr&#xED;amos hacerlo colocando este c&#xF3;digo en la escena:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> escena2 extends Escena {
+                                <h1 id="eventos">Eventos</h1>
+<p>En pilas llamamos &quot;eventos&quot; a las se&#xF1;ales que emiten el mouse o el teclado. Por ejemplo, un &quot;click&quot; del mouse es un evento al igual que la pulsaci&#xF3;n de una tecla.</p>
+<p>Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acci&#xF3;n dentro del juego para responder. Por ejemplo, en un juego de acci&#xF3;n, el &quot;click&quot; del mouse podr&#xED;a realizar una explosi&#xF3;n o hacer que un personaje salte.</p>
+<h2 id="&#xBF;c&#xF3;mo-capturar-un-evento-del-mouse">&#xBF;C&#xF3;mo capturar un evento del mouse?</h2>
+<p>Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el c&#xF3;digo:</p>
+<ul>
+<li>cuando_hace_click(x, y, evento_original)</li>
+<li>cuando_termina_de_hacer_click(x, y, evento_original)</li>
+<li>cuando_mueve(x, y, evento_original)</li>
+<li>cuando_sale(x, y, evento_original)</li>
+</ul>
+<p>Estas funciones se pueden crear en el c&#xF3;digo de una escena o de un actor. La diferencia es que en las escenas el &quot;click&quot; o el movimiento se van a detectar en toda la pantalla, mientras que en el c&#xF3;digo del actor solo se detectar&#xE1;n si el mouse apunta al actor.</p>
+<p>Si desde un actor necesitas detectar el click del mouse en la pantalla deber&#xED;as
+usar este otro m&#xE9;todo:</p>
+<ul>
+<li>cuando_hace_click_en_la_pantalla(x, y, evento_original)</li>
+</ul>
+<p>Veamos un ejemplo, imagin&#xE1; que queremos crear actores de la clase &quot;Pelota&quot; cada vez que el usuario hace &quot;click&quot; sobre la pantalla. Podr&#xED;amos hacerlo colocando este c&#xF3;digo en la escena:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> escena2 extends Escena {
   iniciar() {}
 
   actualizar() {}
@@ -424,8 +431,14 @@ usar este otro m&#xE9;todo:</p><ul><li>cuando_hace_click_en_la_pantalla(x, y, ev
     pelota.x = x;
     pelota.y = y;
   }
-}</code></pre>
-<h2 id="&#xBF;c&#xF3;mo-capturar-eventos-del-mouse-en-un-actor">&#xBF;C&#xF3;mo capturar eventos del mouse en un actor?</h2><p>Para capturar eventos en el contexto de un actor, tenemos que usar las mismas funciones, pero declar&#xE1;ndolas dentro del c&#xF3;digo del actor.</p><p>Por ejemplo, imagin&#xE1; que estamos haciendo un juego de cartas y queremos que la carta se pueda hacer girar con un &quot;click&quot; de mouse y que cambie de transparencia cuando el mouse est&#xE9; sobre ella:</p><p><img src="assets/carta_con_eventos.gif"></p><p>El c&#xF3;digo del actor deber&#xED;a quedarnos algo similar a lo siguiente:</p><pre><code class="lang-typescript"><span class="hljs-keyword">class</span> actor extends Actor {
+}
+</code></pre>
+<h2 id="&#xBF;c&#xF3;mo-capturar-eventos-del-mouse-en-un-actor">&#xBF;C&#xF3;mo capturar eventos del mouse en un actor?</h2>
+<p>Para capturar eventos en el contexto de un actor, tenemos que usar las mismas funciones, pero declar&#xE1;ndolas dentro del c&#xF3;digo del actor.</p>
+<p>Por ejemplo, imagin&#xE1; que estamos haciendo un juego de cartas y queremos que la carta se pueda hacer girar con un &quot;click&quot; de mouse y que cambie de transparencia cuando el mouse est&#xE9; sobre ella:</p>
+<p><img src="assets/carta_con_eventos.gif" alt=""></p>
+<p>El c&#xF3;digo del actor deber&#xED;a quedarnos algo similar a lo siguiente:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> actor extends Actor {
   propiedades = {};
 
   iniciar() {
@@ -449,9 +462,13 @@ usar este otro m&#xE9;todo:</p><ul><li>cuando_hace_click_en_la_pantalla(x, y, ev
   }
 
   cuando_termina_de_hacer_click(x, y, evento_original) {}
-}</code></pre>
-<p>Los manejadores de eventos como <code>cuando_mueve</code>, <code>cuando_sale</code> y <code>cuando_hace_click</code> van a ser llamados internamente cuando se produzcan esos eventos sobre el actor.</p><h2 id="capturar-eventos-de-forma-global-con-manejadores">Capturar eventos de forma global, con manejadores</h2><p>Otra forma de capturar eventos m&#xE1;s sofisticada es utilizando
-el m&#xF3;dulo <code>eventos</code> de la escena.</p><pre><code>pilas.eventos.conectar(&quot;mueve_mouse&quot;, (x, y) =&gt; {
+}
+</code></pre>
+<p>Los manejadores de eventos como <code>cuando_mueve</code>, <code>cuando_sale</code> y <code>cuando_hace_click</code> van a ser llamados internamente cuando se produzcan esos eventos sobre el actor.</p>
+<h2 id="capturar-eventos-de-forma-global-con-manejadores">Capturar eventos de forma global, con manejadores</h2>
+<p>Otra forma de capturar eventos m&#xE1;s sofisticada es utilizando
+el m&#xF3;dulo <code>eventos</code> de la escena.</p>
+<pre><code>pilas.eventos.conectar(&quot;mueve_mouse&quot;, (x, y) =&gt; {
   console.log(&quot;mueve&quot;, x, y);
 });
 
@@ -461,13 +478,13 @@ pilas.eventos.conectar(&quot;click_de_mouse&quot;, (x, y) =&gt; {
 
 pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
   console.log(&quot;mueve&quot;, x, y);
-});</code></pre>
-<p>Esta es la lista de eventos completa:</p><ul><li><code>mueve_mouse</code>: x, y
-</li>
-<li><code>click_de_mouse</code>: x, y, boton_izquierdo, boton_derecho
-</li>
-<li><code>termina_click</code>: x, y, boton_izquierdo, boton_derecho
-</li></ul>
+});
+</code></pre><p>Esta es la lista de eventos completa:</p>
+<ul>
+<li><code>mueve_mouse</code>: x, y</li>
+<li><code>click_de_mouse</code>: x, y, boton_izquierdo, boton_derecho</li>
+<li><code>termina_click</code>: x, y, boton_izquierdo, boton_derecho</li>
+</ul>
 
                                 
                                 </section>
@@ -511,7 +528,7 @@ pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Eventos","level":"1.15","depth":1,"next":{"title":"Dibujado simple en pantalla","level":"1.16","depth":1,"path":"dibujado_en_pantalla.md","ref":"dibujado_en_pantalla.md","articles":[]},"previous":{"title":"Escenas","level":"1.14","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos.md","mtime":"2019-07-23T17:04:00.955Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2019-11-19T18:26:30.050Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Eventos","level":"1.15","depth":1,"next":{"title":"Dibujado simple en pantalla","level":"1.16","depth":1,"path":"dibujado_en_pantalla.md","ref":"dibujado_en_pantalla.md","articles":[]},"previous":{"title":"Escenas","level":"1.14","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos.md","mtime":"2019-07-17T02:44:53.510Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-19T03:10:33.643Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

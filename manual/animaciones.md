@@ -1,8 +1,62 @@
 # Animaciones
 
-Para crear y asignar animaciones se tienen que definir previamente en el código del actor.
+Para crear animaciones se tiene que utilizar el editor que aparece en la parte superior de la pantalla:
 
-El método "crear_animacion" se puede llamar especificando el nombre de la animación, los cuadros que se deben mostrar y la velocidad.
+![image-20191218235021115](animaciones.assets/image-20191218235021115.png)
+
+Este botón abrirá una ventana en donde se pueden previsualizar todas la animaciones del proyecto:
+
+![image-20191218235117098](animaciones.assets/image-20191218235117098.png)
+
+Estas animaciones también se pueden editar fácilmente, solo tienes que pasar el mouse sobre el nombre de la animación y pulsar el  botón "editar":
+
+![image-20191218235228151](animaciones.assets/image-20191218235228151.png)
+
+Las animaciones son simplemente una lista de imágenes que pilas mostrará una detrás de la otra, a determinada velocidad. Vas ver toda esta información en el editor de animaciones:
+
+![image-20191218235340936](animaciones.assets/image-20191218235340936.png)
+
+## Crear animaciones desde el editor
+
+Para crear animaciones hay que pulsar el botón "Crear una animación":
+
+![image-20191218235448801](animaciones.assets/image-20191218235448801.png)
+
+y luego cargar cada uno de los cuadros de animación pulsando el botón "+" que aparece en la parte superior de la ventana:
+
+![image-20191218235623632](animaciones.assets/image-20191218235623632.png)
+
+Por ejemplo, aquí incluí algunos cuadros de animación de un personaje corriendo:
+
+![image-20191219000155013](animaciones.assets/image-20191219000155013.png)
+
+Podes utilizar el botón "Reproducir" y la propiedad "Cuadros por segundo" para ajustar la velocidad de la animación y dejarla como quieras:
+
+![screencast 2019-12-19 00-04-05](animaciones.assets/screencast 2019-12-19 00-04-05.gif)
+
+Por último es muy importante que le asignes un nombre a la animación, por ejemplo "shaolin_corre":
+
+![image-20191219000635690](animaciones.assets/image-20191219000635690.png)
+
+Esto es muy importante porque tu juego puede tener un montón de animaciones, y el nombre que le asignes será la única forma de identificar cada una de las animaciones.
+
+Ahora sí, podes cerrar la ventana del editor y continuar con la siguiente sección.
+
+## Cómo usar las animaciones
+
+Una vez que tienes creada la animación, lo único que hace falta es copiar el código que aparece como ayuda en el visor de animaciones dentro del código:
+
+![image-20191219000753983](animaciones.assets/image-20191219000753983.png)
+
+Ese código, sirve para indicarle al actor qué animación tiene que reproducir. Por ejemplo, si quieres que el actor muestre esta animación al comenzar deberías colocarlo dentro de la función "iniciar" así:
+
+![image-20191219000913347](animaciones.assets/image-20191219000913347.png)
+
+## Crear animaciones desde el código
+
+Para crear y asignar animaciones también se puede usar directamente el código del editor. Esto es algo más difícil, pero en algunas situaciones puede ser útil.
+
+Existe un método llamado "crear_animacion" que se puede invocar especificando el nombre de la animación, los cuadros que se deben mostrar y la velocidad.
 
 Por ejemplo, para crear una animación de un actor mientras está esperando usé lo siguiente:
 
@@ -15,7 +69,7 @@ El valor "2" significa que la animación se debe mostrar a una velocidad de 2 cu
 Luego, una vez creada la animación, se puede reproducir usando esta llamada:
 
 ```typescript
-this.reproducir_animacion("conejo_parado");
+this.animacion = "conejo_parado";
 ```
 
 La creación de animaciones generalmente se realiza en el método iniciar de esta forma:
