@@ -45,6 +45,14 @@ export default Component.extend({
       this.proyecto.animaciones.insertAt(0, animación);
       this.send("editar", animación);
     },
-    eliminar(animación) {}
+    cuando_quiere_eliminar_animacion(animacion) {
+      this.proyecto.animaciones.removeObject(animacion);
+
+      if (this.proyecto.animaciones.lenght > 0) {
+        this.send("previsualizar", this.proyecto.animaciones[0]);
+      }
+
+      this.send("ocultar");
+    }
   }
 });

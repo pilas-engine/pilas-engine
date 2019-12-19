@@ -1,6 +1,25 @@
 {{yield}}
 
-<div class="pb2 f6 {{if iniciando "o-50"}}">
+<div class="pb2 f6 {{if iniciando "o-50"}} cf">
+
+  <div class="fr">
+
+    {{pilas-boton icono="no" accion=(action "mostrar_dialogo_para_eliminar") texto="Eliminar esta animación"}}
+
+    {{#pilas-modal cancelarWormhole=true fixed=true alCerrar=(action "ocultar_dialogo_de_eliminacion_de_animacion") visible=modalParaEliminarAnimacionVisible titulo="Cuidado" reducido=true}}
+
+      <div class="flex1 verdana f6">
+        ¿Realmente quieres eliminar esta animación?
+      </div>
+
+      <div class="tc">
+        {{pilas-boton icono="si" accion=(action cuando_quiere_eliminar_animacion animacion) texto="Sí" atajo="Enter"}}
+        {{pilas-boton icono="no" accion=(action "ocultar_dialogo_de_eliminacion_de_animacion") texto="No" atajo="Escape"}}
+      </div>
+
+    {{/pilas-modal}}
+
+  </div>
 
   <table>
     <tbody>

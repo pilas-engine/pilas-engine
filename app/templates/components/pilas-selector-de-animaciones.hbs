@@ -46,5 +46,5 @@
 </div>
 
 {{#pilas-modal alCerrar=(action "ocultar") visible=modal_editor_de_animaciones id="dialogoEditorAnimacion" titulo="Editar animación"}}
-  {{pilas-animador pixelart=pixelart animacion=animación animaciones=proyecto.animaciones}}
+  {{pilas-animador pixelart=pixelart animacion=animación animaciones=proyecto.animaciones cuando_quiere_eliminar_animacion=(action "cuando_quiere_eliminar_animacion")}}
 {{/pilas-modal}}
