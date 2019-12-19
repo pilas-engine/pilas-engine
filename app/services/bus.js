@@ -19,6 +19,7 @@ import Service from "@ember/service";
  * - eliminar_actor_desde_el_editor
  * - error
  * - finaliza_carga
+ * - finaliza_carga_de_recursos
  * - hacerFocoEnElEditor
  * - hacer_foco_en_pilas
  * - inicia_modo_depuracion_en_pausa

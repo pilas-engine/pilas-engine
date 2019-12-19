@@ -44,6 +44,7 @@ export default Component.extend({
 
       this.proyecto.animaciones.insertAt(0, animación);
       this.send("editar", animación);
-    }
+    },
+    eliminar(animación) {}
   }
 });

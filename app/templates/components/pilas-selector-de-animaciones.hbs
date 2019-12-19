@@ -9,18 +9,21 @@
     <div class="h1">
     </div>
 
-    {{#each proyecto.animaciones as |item_animación|}}
+    <div class="">
+      {{#each proyecto.animaciones as |item_animación|}}
 
-      <div class="flex hide-child {{if (eq item_animación.nombre animación.nombre) "bg-black-20" "hover-bg-black-10"}}">
-        <div class="pa2 f6 flex1 truncate pointer" role="button" {{action "previsualizar" item_animación}}>
-          {{item_animación.nombre}}
+        <div class="flex hide-child {{if (eq item_animación.nombre animación.nombre) "bg-black-20" "hover-bg-black-10"}}">
+          <div class="pa2 f6 flex1 truncate pointer" role="button" {{action "previsualizar" item_animación}}>
+            {{item_animación.nombre}}
+          </div>
+          <div class="child f7">
+            {{pilas-boton accion=(action "editar" item_animación) texto="Editar" icono="editar"}}
+          </div>
         </div>
-        <div class="child">
-          {{pilas-boton accion=(action "editar" item_animación) texto="Editar" icono="editar"}}
-        </div>
-      </div>
 
-    {{/each}}
+      {{/each}}
+    </div>
+
   </div>
 
   <div class="flex1 flex flex-column tc">

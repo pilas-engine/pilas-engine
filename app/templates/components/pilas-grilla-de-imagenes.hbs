@@ -8,6 +8,10 @@
     {{pilas-input-filtro filtro=filtro}}
   </div>
 
+  {{#if (not proyecto.canvas_disponible)}}
+    {{pilas-esperar}}
+  {{/if}}
+
   <div class="texto pv2">
     Imágenes personalizadas:
   </div>
