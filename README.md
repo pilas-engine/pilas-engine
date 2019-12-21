@@ -8,6 +8,7 @@ La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
 
 ## Artículos y noticias
 
+- [Resumen del sprint 12 (21 de Diciembre de 2019)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-12/1802)
 - [Resumen del sprint 11 (16 de Octubre de 2019)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-11/1745)
 - [Resumen del sprint 10 (31 de Julio de 2019)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-10/1702)
 - [Resumen del sprint 9 (11 de Julio de 2019)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-09/1688)
