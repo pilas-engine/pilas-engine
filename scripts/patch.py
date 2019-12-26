@@ -28,8 +28,8 @@ archivo_de_entrada.close()
 if contenido.find(buscar_scale_x) == -1:
     print("Parece que ya se aplicó el patch")
 else:
-    contenido = contenido.replace(buscar_scale_x, "// Desactivando escalado de body")
-    contenido = contenido.replace(buscar_scale_y, "// Desactivando escalado de body")
+    contenido = contenido.replace(buscar_scale_x, "\n// Desactivando escalado de body\n")
+    contenido = contenido.replace(buscar_scale_y, "\n// Desactivando escalado de body\n")
 
     archivo_de_salida = open(ruta, "wt")
     archivo_de_salida.write(contenido)
