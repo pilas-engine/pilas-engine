@@ -257,6 +257,10 @@ actualizar_phaser:
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/phaser/dist/phaser.js public/${N}"
 	@echo "${Y}${N}"
+	@echo "${Y} - Por último, ejecutar este script:${N}"
+	@echo "${Y}${N}"
+	@echo "${Y}        make corregir_phaser_js"
+	@echo "${Y}${N}"
 
 actualizar_typescript:
 	@echo "${Y}Para actualizar typescript, hay que seguir estos pasos:${N}"
@@ -270,6 +274,9 @@ actualizar_typescript:
 
 actualizar_definiciones:
 	@wget https://raw.githubusercontent.com/photonstorm/phaser/master/types/phaser.d.ts -O pilas-engine/declaraciones/phaser.d.ts
+
+corregir_phaser_js:
+	python3 scripts/patch.py
 
 actualizar_imagenes:
 	$(call log, "Actualizando grillas")

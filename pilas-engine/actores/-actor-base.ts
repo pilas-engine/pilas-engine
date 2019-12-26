@@ -571,9 +571,11 @@ class ActorBase {
       this.pilas.utilidades.validar_numero(s);
       this.sprite.scaleX = s;
 
+      /*
       if (this.figura) {
         this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
       }
+      */
     }
   }
 
@@ -588,9 +590,11 @@ class ActorBase {
       this.pilas.utilidades.validar_numero(s);
       this.sprite.scaleY = s;
 
+      /*
       if (this.figura) {
         this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
       }
+      */
     }
   }
 
