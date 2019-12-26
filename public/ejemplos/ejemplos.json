@@ -70,6 +70,10 @@
     {
       "nombre": "laser-y-misil",
       "desde": "2.0.92"
+    },
+    {
+      "nombre": "pacman",
+      "desde": "2.0.92"
     }
   ]
 }
