@@ -1560,6 +1560,7 @@ declare class ModoEditor extends Modo {
     update(): void;
     eliminar_actor_por_id(id: any): void;
 }
+declare const ACTIVAR_MODO_FISICA_EN_EJECUCION = false;
 declare class ModoEjecucion extends Modo {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;

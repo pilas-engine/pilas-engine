@@ -1,5 +1,7 @@
 /// <reference path="modo.ts"/>
 
+const ACTIVAR_MODO_FISICA_EN_EJECUCION = false;
+
 class ModoEjecucion extends Modo {
   pilas: Pilas;
   fondo: Phaser.GameObjects.TileSprite;
@@ -28,6 +30,10 @@ class ModoEjecucion extends Modo {
   create(datos) {
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
+
+    if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
+      this.matter.world.createDebugGraphic();
+    }
 
     try {
       this.guardar_parametros_en_atributos(datos);
@@ -492,17 +498,11 @@ class ModoEjecucion extends Modo {
   update() {
     super.update(this.pilas.escena.actores);
 
-    /*
-    if (this.pilas.depurador.mostrar_fisica) {
-      if (!this.modo_fisica_activado) {
-        this.modo_fisica_activado = true;
-        this.matter.world.createDebugGraphic();
-      }
+    if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
+      this.matter.world.debugGraphic.setAlpha(1);
     } else {
-      this.pilas.modo.matter.world.debugGraphic.destroy();
+      this.matter.world.debugGraphic.setAlpha(0);
     }
-    */
-    this.pilas.modo.matter.world.debugGraphic.destroy();
 
     try {
       this.pilas.escena.pre_actualizar();

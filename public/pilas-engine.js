@@ -2294,9 +2294,6 @@ var ActorBase = (function () {
             else {
                 this.pilas.utilidades.validar_numero(s);
                 this.sprite.scaleX = s;
-                if (this.figura) {
-                    this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
-                }
             }
         },
         enumerable: true,
@@ -2313,9 +2310,6 @@ var ActorBase = (function () {
             else {
                 this.pilas.utilidades.validar_numero(s);
                 this.sprite.scaleY = s;
-                if (this.figura) {
-                    this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
-                }
             }
         },
         enumerable: true,
@@ -6873,6 +6867,7 @@ var ModoEditor = (function (_super) {
     };
     return ModoEditor;
 }(Modo));
+var ACTIVAR_MODO_FISICA_EN_EJECUCION = false;
 var ModoEjecucion = (function (_super) {
     __extends(ModoEjecucion, _super);
     function ModoEjecucion() {
@@ -6888,6 +6883,9 @@ var ModoEjecucion = (function (_super) {
         var _this = this;
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
+        if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
+            this.matter.world.createDebugGraphic();
+        }
         try {
             this.guardar_parametros_en_atributos(datos);
             var escena = this.obtener_escena_inicial();
@@ -7248,7 +7246,12 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.update = function () {
         _super.prototype.update.call(this, this.pilas.escena.actores);
-        this.pilas.modo.matter.world.debugGraphic.destroy();
+        if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
+            this.matter.world.debugGraphic.setAlpha(1);
+        }
+        else {
+            this.matter.world.debugGraphic.setAlpha(0);
+        }
         try {
             this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
