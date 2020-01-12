@@ -19,6 +19,7 @@ class ModoEjecucion extends Modo {
   permitir_modo_pausa: boolean;
   modo_fisica_activado: boolean;
   _escena_en_ejecucion: any = null;
+  teclas: Set<string> = null;
 
   constructor() {
     super({ key: "ModoEjecucion" });
@@ -30,6 +31,7 @@ class ModoEjecucion extends Modo {
   create(datos) {
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
+    this.teclas = new Set();
 
     if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
       this.matter.world.createDebugGraphic();
@@ -65,43 +67,6 @@ class ModoEjecucion extends Modo {
 
       this.conectar_eventos();
 
-      this.input.on("pointermove", cursor => {
-        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-        this.pilas.cursor_x = Math.trunc(posicion.x);
-        this.pilas.cursor_y = Math.trunc(posicion.y);
-
-        if (this._escena_en_ejecucion) {
-          try {
-            this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, cursor);
-          } catch (e) {
-            console.error(e);
-            this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
-            this.pausar();
-          }
-        }
-      });
-
-      this.input.keyboard.on("keyup", evento => {
-        if (evento.key === "Escape") {
-          this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
-        }
-      });
-
-      this.input.on("pointerdown", cursor => {
-        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-
-        if (this._escena_en_ejecucion) {
-          try {
-            this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, cursor);
-            this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores();
-          } catch (e) {
-            console.error(e);
-            this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
-            this.pausar();
-          }
-        }
-      });
-
       this.vincular_eventos_de_colision();
     } catch (e) {
       console.error(e);
@@ -126,18 +91,31 @@ class ModoEjecucion extends Modo {
     this.input.on("pointermove", this.manejar_evento_muevemouse.bind(this));
     this.input.on("pointerdown", this.manejar_evento_click_de_mouse.bind(this));
     this.input.on("pointerup", this.manejar_evento_termina_click.bind(this));
+    this.input.keyboard.on("keydown", this.manejar_evento_key_down.bind(this));
+    this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
   }
 
   private manejar_evento_click_de_mouse(evento) {
     let x = evento.x;
     let y = evento.y;
-    let p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+    let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
 
     this.pilas.eventos.emitir_evento("click_de_mouse", {
-      x: p.x,
-      y: p.y,
+      x: posicion.x,
+      y: posicion.y,
       evento
     });
+
+    if (this._escena_en_ejecucion) {
+      try {
+        this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, evento);
+        this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores(posicion.x, posicion.y, evento);
+      } catch (e) {
+        console.error(e);
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
+        this.pausar();
+      }
+    }
   }
 
   private manejar_evento_termina_click(evento) {
@@ -153,15 +131,49 @@ class ModoEjecucion extends Modo {
   }
 
   private manejar_evento_muevemouse(evento) {
-    let x = evento.x;
-    let y = evento.y;
-    let p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+    let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.x, evento.y);
+    this.pilas.cursor_x = Math.trunc(posicion.x);
+    this.pilas.cursor_y = Math.trunc(posicion.y);
 
     this.pilas.eventos.emitir_evento("mueve_mouse", {
-      x: p.x,
-      y: p.y,
+      x: posicion.x,
+      y: posicion.y,
       evento
     });
+
+    if (this._escena_en_ejecucion) {
+      try {
+        this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, evento);
+      } catch (e) {
+        console.error(e);
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
+        this.pausar();
+      }
+    }
+  }
+
+  private manejar_evento_key_down(evento) {
+    if (!this.teclas.has(evento.code)) {
+      this.teclas.add(evento.code);
+
+      let tecla = this.pilas.utilidades.obtener_nombre_de_la_tecla_desde_un_evento(evento);
+
+      this._escena_en_ejecucion.cuando_pulsa_tecla(tecla, evento);
+      this._escena_en_ejecucion.avisar_cuando_pulsa_tecla_a_los_actores(tecla, evento);
+    }
+  }
+
+  private manejar_evento_key_up(evento) {
+    this.teclas.delete(evento.code);
+
+    if (evento.key === "Escape") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
+    }
+
+    let tecla = this.pilas.utilidades.obtener_nombre_de_la_tecla_desde_un_evento(evento);
+
+    this._escena_en_ejecucion.cuando_suelta_tecla(tecla, evento);
+    this._escena_en_ejecucion.avisar_cuando_suelta_tecla_a_los_actores(tecla, evento);
   }
 
   cambiar_escena(nombre: string) {

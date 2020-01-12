@@ -8,6 +8,7 @@ class Control {
   private _espacio: any;
 
   private _simulaciones: any;
+  private teclas: any;
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
@@ -15,17 +16,13 @@ class Control {
   }
 
   terminar() {
-    this.desconectar_teclas();
+    // TODO: desconectar teclas.
   }
 
   private conectar_teclas() {
     let keyboard = this.pilas.modo.input.keyboard;
 
-    this._izquierda = keyboard.addKey("LEFT");
-    this._derecha = keyboard.addKey("RIGHT");
-    this._arriba = keyboard.addKey("UP");
-    this._abajo = keyboard.addKey("DOWN");
-    this._espacio = keyboard.addKey("SPACE");
+    this.teclas = keyboard.addKeys("LEFT,RIGHT,UP,DOWN,SPACE,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,SEMICOLON");
 
     this._simulaciones = {
       izquierda: false,
@@ -36,55 +33,176 @@ class Control {
     };
   }
 
-  private desconectar_teclas() {
-    let keyboard = this.pilas.modo.input.keyboard;
-
-    keyboard.removeKey(this.espacio);
-    keyboard.removeKey(this._izquierda);
-    keyboard.removeKey(this._derecha);
-    keyboard.removeKey(this._arriba);
-    keyboard.removeKey(this._abajo);
-    keyboard.removeKey(this._espacio);
-  }
-
-  get izquierda(): boolean {
-    return this._izquierda.isDown || this._simulaciones["izquierda"];
-  }
-
-  set izquierda(v) {
-    this.pilas.utilidades.acceso_incorrecto("izquierda");
-  }
-
-  get derecha(): boolean {
-    return this._derecha.isDown || this._simulaciones["derecha"];
-  }
-
-  set derecha(v) {
-    this.pilas.utilidades.acceso_incorrecto("derecha");
+  private se_pulsa_tecla(nombre, simulacion = undefined) {
+    if (simulacion) {
+      return this.teclas[nombre].isDown || this._simulaciones[simulacion];
+    } else {
+      return this.teclas[nombre].isDown;
+    }
   }
 
   get arriba(): boolean {
-    return this._arriba.isDown || this._simulaciones["arriba"];
-  }
-
-  set arriba(v) {
-    this.pilas.utilidades.acceso_incorrecto("arriba");
+    return this.se_pulsa_tecla("UP", "arriba");
   }
 
   get abajo(): boolean {
-    return this._abajo.isDown || this._simulaciones["abajo"];
+    return this.se_pulsa_tecla("DOWN", "abajo");
   }
 
-  set abajo(v) {
-    this.pilas.utilidades.acceso_incorrecto("abajo");
+  get izquierda(): boolean {
+    return this.se_pulsa_tecla("LEFT", "izquierda");
+  }
+
+  get derecha(): boolean {
+    return this.se_pulsa_tecla("RIGHT", "derecha");
   }
 
   get espacio(): boolean {
-    return this._espacio.isDown || this._simulaciones["espacio"];
+    return this.se_pulsa_tecla("SPACE", "espacio");
   }
 
-  set espacio(v) {
-    this.pilas.utilidades.acceso_incorrecto("espacio");
+  get tecla_a() {
+    return this.se_pulsa_tecla("A");
+  }
+
+  get tecla_b() {
+    return this.se_pulsa_tecla("B");
+  }
+
+  get tecla_c() {
+    return this.se_pulsa_tecla("C");
+  }
+
+  get tecla_d() {
+    return this.se_pulsa_tecla("D");
+  }
+
+  get tecla_e() {
+    return this.se_pulsa_tecla("E");
+  }
+
+  get tecla_f() {
+    return this.se_pulsa_tecla("F");
+  }
+
+  get tecla_g() {
+    return this.se_pulsa_tecla("G");
+  }
+
+  get tecla_h() {
+    return this.se_pulsa_tecla("H");
+  }
+
+  get tecla_i() {
+    return this.se_pulsa_tecla("I");
+  }
+
+  get tecla_j() {
+    return this.se_pulsa_tecla("J");
+  }
+
+  get tecla_k() {
+    return this.se_pulsa_tecla("K");
+  }
+
+  get tecla_l() {
+    return this.se_pulsa_tecla("L");
+  }
+
+  get tecla_m() {
+    return this.se_pulsa_tecla("M");
+  }
+
+  get tecla_n() {
+    return this.se_pulsa_tecla("N");
+  }
+
+  get tecla_ñ() {
+    return this.se_pulsa_tecla("SEMICOLON");
+  }
+
+  get tecla_o() {
+    return this.se_pulsa_tecla("O");
+  }
+
+  get tecla_p() {
+    return this.se_pulsa_tecla("P");
+  }
+
+  get tecla_q() {
+    return this.se_pulsa_tecla("Q");
+  }
+
+  get tecla_r() {
+    return this.se_pulsa_tecla("R");
+  }
+
+  get tecla_s() {
+    return this.se_pulsa_tecla("S");
+  }
+
+  get tecla_t() {
+    return this.se_pulsa_tecla("T");
+  }
+
+  get tecla_u() {
+    return this.se_pulsa_tecla("U");
+  }
+
+  get tecla_v() {
+    return this.se_pulsa_tecla("V");
+  }
+
+  get tecla_w() {
+    return this.se_pulsa_tecla("W");
+  }
+
+  get tecla_x() {
+    return this.se_pulsa_tecla("X");
+  }
+
+  get tecla_y() {
+    return this.se_pulsa_tecla("Y");
+  }
+
+  get tecla_z() {
+    return this.se_pulsa_tecla("Z");
+  }
+
+  get tecla_1() {
+    return this.se_pulsa_tecla("1");
+  }
+
+  get tecla_2() {
+    return this.se_pulsa_tecla("2");
+  }
+
+  get tecla_3() {
+    return this.se_pulsa_tecla("3");
+  }
+
+  get tecla_4() {
+    return this.se_pulsa_tecla("4");
+  }
+
+  get tecla_5() {
+    return this.se_pulsa_tecla("5");
+  }
+
+  get tecla_6() {
+    return this.se_pulsa_tecla("6");
+  }
+
+  get tecla_7() {
+    return this.se_pulsa_tecla("7");
+  }
+
+  get tecla_8() {
+    return this.se_pulsa_tecla("8");
+  }
+
+  get tecla_9() {
+    return this.se_pulsa_tecla("9");
   }
 
   /**

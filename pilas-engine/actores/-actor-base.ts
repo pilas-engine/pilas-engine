@@ -879,6 +879,10 @@ class ActorBase {
 
   cuando_mueve(x, y, evento_original) {}
 
+  cuando_pulsa_tecla(tecla: string, evento_original: any) {}
+
+  cuando_suelta_tecla(tecla: string, evento_original: any) {}
+
   get cantidad_de_colisiones() {
     return this.colisiones.length;
   }
@@ -1008,7 +1012,7 @@ class ActorBase {
     let clase = this.pilas.habilidades.buscar(habilidad);
 
     if (clase) {
-      if (this.tieneHabilidad(clase.name)) {
+      if (this.tiene_habilidad(clase.name)) {
         console.warn(`No se aplica la habilidad ${clase.name} porque el actor ya la tenía vinculada.`);
       } else {
         let instancia = new clase(this.pilas, this);
@@ -1022,7 +1026,7 @@ class ActorBase {
     let clase = this.pilas.habilidades.buscar(habilidad);
 
     if (clase) {
-      if (!this.tieneHabilidad(clase.name)) {
+      if (!this.tiene_habilidad(clase.name)) {
         console.warn(`No se puede olvidar la habilidad '${clase.name}' porque el actor no la tiene.`);
       } else {
         let indice = this._habilidades.findIndex(e => e.constructor.name == clase.name);
@@ -1033,7 +1037,7 @@ class ActorBase {
     }
   }
 
-  tieneHabilidad(habilidad: string) {
+  tiene_habilidad(habilidad: string) {
     return (
       this._habilidades.filter(h => {
         return h.constructor.name === habilidad;
@@ -1056,5 +1060,9 @@ class ActorBase {
   set color(color: string) {
     // ver ActorTextoBase.color
     this._color_de_texto = color;
+  }
+
+  get control() {
+    return this.pilas.control;
   }
 }

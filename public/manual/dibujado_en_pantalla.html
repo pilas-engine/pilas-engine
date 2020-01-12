@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <title>Dibujado simple en pantalla · Manual de Pilas Engine 2</title>
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="generator" content="GitBook 3.2.0">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -60,7 +60,7 @@
     <link rel="next" href="exportar_juegos.html" />
     
     
-    <link rel="prev" href="eventos.html" />
+    <link rel="prev" href="uso-del-teclado.html" />
     
 
     </head>
@@ -271,12 +271,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="eventos.html">
+        <li class="chapter " data-level="1.15" data-path="eventos-de-mouse.html">
             
-                <a href="eventos.html">
+                <a href="eventos-de-mouse.html">
             
                     
-                    Eventos
+                    Eventos de mouse o touch
             
                 </a>
             
@@ -284,7 +284,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.16" data-path="dibujado_en_pantalla.html">
+        <li class="chapter " data-level="1.16" data-path="uso-del-teclado.html">
+            
+                <a href="uso-del-teclado.html">
+            
+                    
+                    Uso del teclado
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.17" data-path="dibujado_en_pantalla.html">
             
                 <a href="dibujado_en_pantalla.html">
             
@@ -297,7 +310,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17" data-path="exportar_juegos.html">
+        <li class="chapter " data-level="1.18" data-path="exportar_juegos.html">
             
                 <a href="exportar_juegos.html">
             
@@ -310,7 +323,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.18" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.19" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -401,64 +414,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="dibujado-simple-en-pantalla">Dibujado simple en pantalla</h1>
-<p>En esta secci&#xF3;n veremos como dibujar libremente, ya sean lineas, c&#xED;rculos, etc..</p>
-<p>Comenzaremos con una forma de dibujado muy sencilla, existe un actor llamado
+                                <h1 id="dibujado-simple-en-pantalla">Dibujado simple en pantalla</h1><p>En esta secci&#xF3;n veremos como dibujar libremente, ya sean lineas, c&#xED;rculos, etc..</p><p>Comenzaremos con una forma de dibujado muy sencilla, existe un actor llamado
 Pizarra que podemos colocar en una escena para dibujar figuras geom&#xE9;tricas
-sencillas.</p>
-<p>Cuando se agrega el actor pizarra, vas a observar que soporta algunos
-m&#xE9;todos para dibujar. Esta es una lista de los m&#xE1;s utilizados:</p>
-<h2 id="dibujar-c&#xED;rculos">Dibujar c&#xED;rculos</h2>
-<p>Para dibujar c&#xED;rculos tenemos una funci&#xF3;n que pinta el contenido de un c&#xED;rculo en base a 4 par&#xE1;metros:</p>
-<ul>
-<li>x: la posici&#xF3;n horizontal del centro del c&#xED;rculo.</li>
-<li>y: la posici&#xF3;n vertical del centro del c&#xED;rculo.</li>
-<li>radio: el radio del c&#xED;rculo.</li>
-<li>color: el color de relleno que tendr&#xE1; el c&#xED;rculo.</li>
-</ul>
+sencillas.</p><p>Cuando se agrega el actor pizarra, vas a observar que soporta algunos
+m&#xE9;todos para dibujar. Esta es una lista de los m&#xE1;s utilizados:</p><h2 id="dibujar-c&#xED;rculos">Dibujar c&#xED;rculos</h2><p>Para dibujar c&#xED;rculos tenemos una funci&#xF3;n que pinta el contenido de un c&#xED;rculo en base a 4 par&#xE1;metros:</p><ul><li>x: la posici&#xF3;n horizontal del centro del c&#xED;rculo.
+</li>
+<li>y: la posici&#xF3;n vertical del centro del c&#xED;rculo.
+</li>
+<li>radio: el radio del c&#xED;rculo.
+</li>
+<li>color: el color de relleno que tendr&#xE1; el c&#xED;rculo.
+</li></ul>
 <p>Por ejemplo, esta llamada a la funci&#xF3;n generar&#xE1;
-un c&#xED;rculo en la posici&#xF3;n <code>x=100 y=0</code> con un radio de 40 p&#xED;xeles y de color rojo:</p>
-<pre><code>this.dibujar_circulo(100, 0, 40, &quot;rojo&quot;);
-</code></pre><p><img src="dibujado_en_pantalla.assets/circulo_rojo.png" alt="circulo_rojo"></p>
-<p>Opcionalmente, si quieres dibujar el contorno del c&#xED;rculo de otro color o con un grosor en particular podr&#xED;as llamar a esta funci&#xF3;n:</p>
-<pre><code>this.dibujar_borde_de_circulo(100, 0, 40, &quot;negro&quot;, 2);
-</code></pre><p><img src="dibujado_en_pantalla.assets/circulo_con_borde.png" alt="circulo_con_borde"></p>
-<p>Los primeros 3 par&#xE1;metros son id&#xE9;nticos al de la funci&#xF3;n anterior, corresponden a los par&#xE1;metros <code>x</code>, <code>y</code> y <code>radio</code>, mientras que el argumento que le sigue ser&#xE1; el color del borde y el &#xFA;ltimo el grosor en p&#xED;xeles.</p>
-<h2 id="colores">Colores</h2>
-<p>En los ejemplos anteriores utilic&#xE9; colores como &quot;rojo&quot;, &quot;negro&quot; y &quot;verde&quot;; sin embargo esta no es
+un c&#xED;rculo en la posici&#xF3;n <code>x=100 y=0</code> con un radio de 40 p&#xED;xeles y de color rojo:</p><pre><code>this.dibujar_circulo(100, 0, 40, &quot;rojo&quot;);</code></pre>
+<p><img alt="circulo_rojo" src="dibujado_en_pantalla.assets/circulo_rojo.png"></p><p>Opcionalmente, si quieres dibujar el contorno del c&#xED;rculo de otro color o con un grosor en particular podr&#xED;as llamar a esta funci&#xF3;n:</p><pre><code>this.dibujar_borde_de_circulo(100, 0, 40, &quot;negro&quot;, 2);</code></pre>
+<p><img alt="circulo_con_borde" src="dibujado_en_pantalla.assets/circulo_con_borde.png"></p><p>Los primeros 3 par&#xE1;metros son id&#xE9;nticos al de la funci&#xF3;n anterior, corresponden a los par&#xE1;metros <code>x</code>, <code>y</code> y <code>radio</code>, mientras que el argumento que le sigue ser&#xE1; el color del borde y el &#xFA;ltimo el grosor en p&#xED;xeles.</p><h2 id="colores">Colores</h2><p>En los ejemplos anteriores utilic&#xE9; colores como &quot;rojo&quot;, &quot;negro&quot; y &quot;verde&quot;; sin embargo esta no es
 la &#xFA;nica forma de especificar colores. Los nombres de colores
-son &#xFA;tiles y f&#xE1;ciles de recordar, pero no ofrecen mucha variedad.</p>
-<p>Otra forma de definir colores con mucha flexibilidad es mediante la funci&#xF3;n <code>pilas.colores.generar</code>. Esta funci&#xF3;n genera un color &quot;mezclando&quot; tres componentes de color (rojo, verde y az&#xFA;l).</p>
-<p>Cada componente de color tienen que ser un n&#xFA;mero entre 0 y 255, por ejemplo:</p>
-<pre><code>let color_verde_oscuro = this.pilas.colores.generar(0, 100, 0);
-let color_verde_claro = this.pilas.colores.generar(0, 200, 0);
-</code></pre><p>A su vez, una vez que tenemos el color generado, podemos usarlo
+son &#xFA;tiles y f&#xE1;ciles de recordar, pero no ofrecen mucha variedad.</p><p>Otra forma de definir colores con mucha flexibilidad es mediante la funci&#xF3;n <code>pilas.colores.generar</code>. Esta funci&#xF3;n genera un color &quot;mezclando&quot; tres componentes de color (rojo, verde y az&#xFA;l).</p><p>Cada componente de color tienen que ser un n&#xFA;mero entre 0 y 255, por ejemplo:</p><pre><code>let color_verde_oscuro = this.pilas.colores.generar(0, 100, 0);
+let color_verde_claro = this.pilas.colores.generar(0, 200, 0);</code></pre>
+<p>A su vez, una vez que tenemos el color generado, podemos usarlo
 en las funciones para dibujar. Por ejemplo, si queremos dibujar
-dos c&#xED;rculos con estos colores podemos escribir lo siguiente:</p>
-<pre><code>this.dibujar_circulo(-50, 50, 40, color_verde_claro);
-this.dibujar_circulo(+50, 50, 40, color_verde_oscuro);
-</code></pre><p><img src="dibujado_en_pantalla.assets/circulos.png" alt="circulos"></p>
-<h2 id="rect&#xE1;ngulos">Rect&#xE1;ngulos</h2>
-<p>De forma similar a los c&#xED;rculos, tambi&#xE9;n existen funciones para dibujar rect&#xE1;ngulos y bordes de rect&#xE1;ngulos.</p>
-<pre><code>this.dibujar_rectangulo(0, 0, 120, 50, &quot;naranja&quot;);
-this.dibujar_borde_de_rectangulo(0, 0, 120, 50, &quot;rojo&quot;, 5);
-</code></pre><p><img src="dibujado_en_pantalla.assets/image-20190728093001144.png" alt="image-20190728093001144"></p>
-<p>Los argumentos de estas funciones son: el punto de originen, en este caso <code>x=0 y=0</code>, luego el ancho y alto del rect&#xE1;ngulo y por &#xFA;ltimo el color.</p>
-<h2 id="lineas">Lineas</h2>
-<p>Para dibujar lineas, tenemos que especificar dos coordenadas, color y grosor de la linea:</p>
-<p>Por ejemplo, para dibujar una linea de color &quot;verde&quot; desde el punto (0, 0) al punto (200, 100) podemos escribir:</p>
-<pre><code>this.dibujar_linea(0, 0, 200, 100, &quot;verde&quot;, 10);
-</code></pre><p><img src="dibujado_en_pantalla.assets/image-20190728093336422.png" alt="image-20190728093336422"></p>
-<h2 id="animaciones">Animaciones</h2>
-<p>Si bien el actor pizarra pude moverse en pantalla, tener una figura f&#xED;sica e incluso ser utilizado como cualquier otro actor. Tambi&#xE9;n es posible usarlo para crear animaciones cuadro a cuadro.</p>
-<p>El actor Pizarra incluye una funci&#xF3;n llamada <code>limpiar</code> que si se combina con funciones de dibujado se pueden hacer algunas animaciones simples.</p>
-<p>Por ejemplo, si queremos dibujar una linea que se&#xF1;ale la posici&#xF3;n del mouse const&#xE1;ntemente podemos hacerlo as&#xED;, usando la funci&#xF3;n actualizar:</p>
-<pre><code>actualizar() {
+dos c&#xED;rculos con estos colores podemos escribir lo siguiente:</p><pre><code>this.dibujar_circulo(-50, 50, 40, color_verde_claro);
+this.dibujar_circulo(+50, 50, 40, color_verde_oscuro);</code></pre>
+<p><img alt="circulos" src="dibujado_en_pantalla.assets/circulos.png"></p><h2 id="rect&#xE1;ngulos">Rect&#xE1;ngulos</h2><p>De forma similar a los c&#xED;rculos, tambi&#xE9;n existen funciones para dibujar rect&#xE1;ngulos y bordes de rect&#xE1;ngulos.</p><pre><code>this.dibujar_rectangulo(0, 0, 120, 50, &quot;naranja&quot;);
+this.dibujar_borde_de_rectangulo(0, 0, 120, 50, &quot;rojo&quot;, 5);</code></pre>
+<p><img alt="image-20190728093001144" src="dibujado_en_pantalla.assets/image-20190728093001144.png"></p><p>Los argumentos de estas funciones son: el punto de originen, en este caso <code>x=0 y=0</code>, luego el ancho y alto del rect&#xE1;ngulo y por &#xFA;ltimo el color.</p><h2 id="lineas">Lineas</h2><p>Para dibujar lineas, tenemos que especificar dos coordenadas, color y grosor de la linea:</p><p>Por ejemplo, para dibujar una linea de color &quot;verde&quot; desde el punto (0, 0) al punto (200, 100) podemos escribir:</p><pre><code>this.dibujar_linea(0, 0, 200, 100, &quot;verde&quot;, 10);</code></pre>
+<p><img alt="image-20190728093336422" src="dibujado_en_pantalla.assets/image-20190728093336422.png"></p><h2 id="animaciones">Animaciones</h2><p>Si bien el actor pizarra pude moverse en pantalla, tener una figura f&#xED;sica e incluso ser utilizado como cualquier otro actor. Tambi&#xE9;n es posible usarlo para crear animaciones cuadro a cuadro.</p><p>El actor Pizarra incluye una funci&#xF3;n llamada <code>limpiar</code> que si se combina con funciones de dibujado se pueden hacer algunas animaciones simples.</p><p>Por ejemplo, si queremos dibujar una linea que se&#xF1;ale la posici&#xF3;n del mouse const&#xE1;ntemente podemos hacerlo as&#xED;, usando la funci&#xF3;n actualizar:</p><pre><code>actualizar() {
     this.limpiar();
     this.dibujar_linea(0, 0, this.pilas.cursor_x, this.pilas.cursor_y, &quot;verde&quot;, 10);
-}
-</code></pre><p><img src="dibujado_en_pantalla.assets/image-20190728094930911.png" alt="image-20190728094930911"></p>
-
+}</code></pre>
+<p><img alt="image-20190728094930911" src="dibujado_en_pantalla.assets/image-20190728094930911.png"></p>
                                 
                                 </section>
                             
@@ -485,7 +470,7 @@ this.dibujar_borde_de_rectangulo(0, 0, 120, 50, &quot;rojo&quot;, 5);
 
             
                 
-                <a href="eventos.html" class="navigation navigation-prev " aria-label="Previous page: Eventos">
+                <a href="uso-del-teclado.html" class="navigation navigation-prev " aria-label="Previous page: Uso del teclado">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -501,7 +486,7 @@ this.dibujar_borde_de_rectangulo(0, 0, 120, 50, &quot;rojo&quot;, 5);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Dibujado simple en pantalla","level":"1.16","depth":1,"next":{"title":"Cómo exportar juegos","level":"1.17","depth":1,"path":"exportar_juegos.md","ref":"exportar_juegos.md","articles":[]},"previous":{"title":"Eventos","level":"1.15","depth":1,"path":"eventos.md","ref":"eventos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"dibujado_en_pantalla.md","mtime":"2019-07-28T21:58:31.083Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-19T03:10:33.643Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Dibujado simple en pantalla","level":"1.17","depth":1,"next":{"title":"Cómo exportar juegos","level":"1.18","depth":1,"path":"exportar_juegos.md","ref":"exportar_juegos.md","articles":[]},"previous":{"title":"Uso del teclado","level":"1.16","depth":1,"path":"uso-del-teclado.md","ref":"uso-del-teclado.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"dibujado_en_pantalla.md","mtime":"2019-08-03T19:01:05.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2020-01-12T04:49:27.337Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

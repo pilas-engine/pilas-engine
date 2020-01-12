@@ -74,6 +74,14 @@
     {
       "nombre": "pacman",
       "desde": "2.0.92"
+    },
+    {
+      "nombre": "cuando-pulsa-tecla",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "dos-jugadores",
+      "desde": "2.0.92"
     }
   ]
 }

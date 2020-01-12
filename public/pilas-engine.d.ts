@@ -134,15 +134,52 @@ declare class Control {
     private _abajo;
     private _espacio;
     private _simulaciones;
+    private teclas;
     constructor(pilas: Pilas);
     terminar(): void;
     private conectar_teclas;
-    private desconectar_teclas;
-    izquierda: boolean;
-    derecha: boolean;
-    arriba: boolean;
-    abajo: boolean;
-    espacio: boolean;
+    private se_pulsa_tecla;
+    readonly arriba: boolean;
+    readonly abajo: boolean;
+    readonly izquierda: boolean;
+    readonly derecha: boolean;
+    readonly espacio: boolean;
+    readonly tecla_a: any;
+    readonly tecla_b: any;
+    readonly tecla_c: any;
+    readonly tecla_d: any;
+    readonly tecla_e: any;
+    readonly tecla_f: any;
+    readonly tecla_g: any;
+    readonly tecla_h: any;
+    readonly tecla_i: any;
+    readonly tecla_j: any;
+    readonly tecla_k: any;
+    readonly tecla_l: any;
+    readonly tecla_m: any;
+    readonly tecla_n: any;
+    readonly tecla_ñ: any;
+    readonly tecla_o: any;
+    readonly tecla_p: any;
+    readonly tecla_q: any;
+    readonly tecla_r: any;
+    readonly tecla_s: any;
+    readonly tecla_t: any;
+    readonly tecla_u: any;
+    readonly tecla_v: any;
+    readonly tecla_w: any;
+    readonly tecla_x: any;
+    readonly tecla_y: any;
+    readonly tecla_z: any;
+    readonly tecla_1: any;
+    readonly tecla_2: any;
+    readonly tecla_3: any;
+    readonly tecla_4: any;
+    readonly tecla_5: any;
+    readonly tecla_6: any;
+    readonly tecla_7: any;
+    readonly tecla_8: any;
+    readonly tecla_9: any;
     simular_pulsacion(nombre: string, pulsacion: boolean): void;
 }
 declare class Depurador {
@@ -325,6 +362,7 @@ declare class Utilidades {
     obtener_mas_similar(nombre: any, posibilidades: any): any;
     validar_que_existe_imagen(nombre: any): void;
     sincronizar_contenedor(contenedor: any, sprite: any): void;
+    obtener_nombre_de_la_tecla_desde_un_evento(evento: any): any;
 }
 declare var NineSlice: any;
 declare var HOST: string;
@@ -582,6 +620,8 @@ declare class ActorBase {
     cuando_termina_de_hacer_click(x: any, y: any, evento_original: any): void;
     cuando_sale(x: any, y: any, evento_original: any): void;
     cuando_mueve(x: any, y: any, evento_original: any): void;
+    cuando_pulsa_tecla(tecla: string, evento_original: any): void;
+    cuando_suelta_tecla(tecla: string, evento_original: any): void;
     readonly cantidad_de_colisiones: number;
     agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
     eliminar(): void;
@@ -592,11 +632,12 @@ declare class ActorBase {
     decir(mensaje: string): void;
     aprender(habilidad: string): void;
     olvidar(habilidad: string): void;
-    tieneHabilidad(habilidad: string): boolean;
+    tiene_habilidad(habilidad: string): boolean;
     aumentar(cantidad?: number): void;
     con_borde: boolean;
     magnitud: number;
     color: string;
+    readonly control: Control;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1033,11 +1074,15 @@ declare class EscenaBase {
     actualizar_actores(): void;
     reproducir_sonidos_pendientes(): void;
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
+    avisar_cuando_pulsa_tecla_a_los_actores(tecla: string, evento_original: any): void;
+    avisar_cuando_suelta_tecla_a_los_actores(tecla: string, evento_original: any): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
     terminar(): void;
-    cuando_hace_click(x: any, y: any, evento_original: any): void;
-    cuando_mueve(x: any, y: any, evento_original: any): void;
+    cuando_hace_click(x: number, y: number, evento_original: any): void;
+    cuando_mueve(x: number, y: number, evento_original: any): void;
     cada_segundo(segundos_transcurridos: number): void;
+    cuando_pulsa_tecla(tecla: string, evento: any): void;
+    cuando_suelta_tecla(tecla: string, evento: any): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;
@@ -1575,6 +1620,7 @@ declare class ModoEjecucion extends Modo {
     permitir_modo_pausa: boolean;
     modo_fisica_activado: boolean;
     _escena_en_ejecucion: any;
+    teclas: Set<string>;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -1583,6 +1629,8 @@ declare class ModoEjecucion extends Modo {
     private manejar_evento_click_de_mouse;
     private manejar_evento_termina_click;
     private manejar_evento_muevemouse;
+    private manejar_evento_key_down;
+    private manejar_evento_key_up;
     cambiar_escena(nombre: string): void;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;

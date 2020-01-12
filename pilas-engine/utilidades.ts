@@ -180,4 +180,34 @@ class Utilidades {
 
     contenedor.setDepth(sprite.depth);
   }
+
+  obtener_nombre_de_la_tecla_desde_un_evento(evento) {
+    let tecla = evento.key;
+
+    if (!tecla) {
+      tecla = tecla.code;
+    }
+
+    let traducciones = {
+      " ": "espacio",
+      ArrowLeft: "izquierda",
+      ArrowRight: "derecha",
+      ArrowUp: "arriba",
+      ArrowDown: "abajo",
+      Alt: "alt",
+      Control: "control",
+      Shift: "shift",
+      Tab: "tab",
+      Backspace: "backspace",
+      Meta: "meta",
+      Escape: "escape",
+      Enter: "enter"
+    };
+
+    if (traducciones[tecla]) {
+      return traducciones[tecla];
+    }
+
+    return tecla;
+  }
 }

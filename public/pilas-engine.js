@@ -575,15 +575,10 @@ var Control = (function () {
         this.conectar_teclas();
     }
     Control.prototype.terminar = function () {
-        this.desconectar_teclas();
     };
     Control.prototype.conectar_teclas = function () {
         var keyboard = this.pilas.modo.input.keyboard;
-        this._izquierda = keyboard.addKey("LEFT");
-        this._derecha = keyboard.addKey("RIGHT");
-        this._arriba = keyboard.addKey("UP");
-        this._abajo = keyboard.addKey("DOWN");
-        this._espacio = keyboard.addKey("SPACE");
+        this.teclas = keyboard.addKeys("LEFT,RIGHT,UP,DOWN,SPACE,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,SEMICOLON");
         this._simulaciones = {
             izquierda: false,
             derecha: false,
@@ -592,61 +587,298 @@ var Control = (function () {
             espacio: false
         };
     };
-    Control.prototype.desconectar_teclas = function () {
-        var keyboard = this.pilas.modo.input.keyboard;
-        keyboard.removeKey(this.espacio);
-        keyboard.removeKey(this._izquierda);
-        keyboard.removeKey(this._derecha);
-        keyboard.removeKey(this._arriba);
-        keyboard.removeKey(this._abajo);
-        keyboard.removeKey(this._espacio);
+    Control.prototype.se_pulsa_tecla = function (nombre, simulacion) {
+        if (simulacion === void 0) { simulacion = undefined; }
+        if (simulacion) {
+            return this.teclas[nombre].isDown || this._simulaciones[simulacion];
+        }
+        else {
+            return this.teclas[nombre].isDown;
+        }
     };
-    Object.defineProperty(Control.prototype, "izquierda", {
-        get: function () {
-            return this._izquierda.isDown || this._simulaciones["izquierda"];
-        },
-        set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto("izquierda");
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Control.prototype, "derecha", {
-        get: function () {
-            return this._derecha.isDown || this._simulaciones["derecha"];
-        },
-        set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto("derecha");
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(Control.prototype, "arriba", {
         get: function () {
-            return this._arriba.isDown || this._simulaciones["arriba"];
-        },
-        set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto("arriba");
+            return this.se_pulsa_tecla("UP", "arriba");
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "abajo", {
         get: function () {
-            return this._abajo.isDown || this._simulaciones["abajo"];
+            return this.se_pulsa_tecla("DOWN", "abajo");
         },
-        set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto("abajo");
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "izquierda", {
+        get: function () {
+            return this.se_pulsa_tecla("LEFT", "izquierda");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "derecha", {
+        get: function () {
+            return this.se_pulsa_tecla("RIGHT", "derecha");
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "espacio", {
         get: function () {
-            return this._espacio.isDown || this._simulaciones["espacio"];
+            return this.se_pulsa_tecla("SPACE", "espacio");
         },
-        set: function (v) {
-            this.pilas.utilidades.acceso_incorrecto("espacio");
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_a", {
+        get: function () {
+            return this.se_pulsa_tecla("A");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_b", {
+        get: function () {
+            return this.se_pulsa_tecla("B");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_c", {
+        get: function () {
+            return this.se_pulsa_tecla("C");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_d", {
+        get: function () {
+            return this.se_pulsa_tecla("D");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_e", {
+        get: function () {
+            return this.se_pulsa_tecla("E");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_f", {
+        get: function () {
+            return this.se_pulsa_tecla("F");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_g", {
+        get: function () {
+            return this.se_pulsa_tecla("G");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_h", {
+        get: function () {
+            return this.se_pulsa_tecla("H");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_i", {
+        get: function () {
+            return this.se_pulsa_tecla("I");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_j", {
+        get: function () {
+            return this.se_pulsa_tecla("J");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_k", {
+        get: function () {
+            return this.se_pulsa_tecla("K");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_l", {
+        get: function () {
+            return this.se_pulsa_tecla("L");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_m", {
+        get: function () {
+            return this.se_pulsa_tecla("M");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_n", {
+        get: function () {
+            return this.se_pulsa_tecla("N");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_\u00F1", {
+        get: function () {
+            return this.se_pulsa_tecla("SEMICOLON");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_o", {
+        get: function () {
+            return this.se_pulsa_tecla("O");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_p", {
+        get: function () {
+            return this.se_pulsa_tecla("P");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_q", {
+        get: function () {
+            return this.se_pulsa_tecla("Q");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_r", {
+        get: function () {
+            return this.se_pulsa_tecla("R");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_s", {
+        get: function () {
+            return this.se_pulsa_tecla("S");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_t", {
+        get: function () {
+            return this.se_pulsa_tecla("T");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_u", {
+        get: function () {
+            return this.se_pulsa_tecla("U");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_v", {
+        get: function () {
+            return this.se_pulsa_tecla("V");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_w", {
+        get: function () {
+            return this.se_pulsa_tecla("W");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_x", {
+        get: function () {
+            return this.se_pulsa_tecla("X");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_y", {
+        get: function () {
+            return this.se_pulsa_tecla("Y");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_z", {
+        get: function () {
+            return this.se_pulsa_tecla("Z");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_1", {
+        get: function () {
+            return this.se_pulsa_tecla("1");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_2", {
+        get: function () {
+            return this.se_pulsa_tecla("2");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_3", {
+        get: function () {
+            return this.se_pulsa_tecla("3");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_4", {
+        get: function () {
+            return this.se_pulsa_tecla("4");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_5", {
+        get: function () {
+            return this.se_pulsa_tecla("5");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_6", {
+        get: function () {
+            return this.se_pulsa_tecla("6");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_7", {
+        get: function () {
+            return this.se_pulsa_tecla("7");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_8", {
+        get: function () {
+            return this.se_pulsa_tecla("8");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Control.prototype, "tecla_9", {
+        get: function () {
+            return this.se_pulsa_tecla("9");
         },
         enumerable: true,
         configurable: true
@@ -1390,6 +1622,31 @@ var Utilidades = (function () {
         }
         contenedor.angle = sprite.angle;
         contenedor.setDepth(sprite.depth);
+    };
+    Utilidades.prototype.obtener_nombre_de_la_tecla_desde_un_evento = function (evento) {
+        var tecla = evento.key;
+        if (!tecla) {
+            tecla = tecla.code;
+        }
+        var traducciones = {
+            " ": "espacio",
+            ArrowLeft: "izquierda",
+            ArrowRight: "derecha",
+            ArrowUp: "arriba",
+            ArrowDown: "abajo",
+            Alt: "alt",
+            Control: "control",
+            Shift: "shift",
+            Tab: "tab",
+            Backspace: "backspace",
+            Meta: "meta",
+            Escape: "escape",
+            Enter: "enter"
+        };
+        if (traducciones[tecla]) {
+            return traducciones[tecla];
+        }
+        return tecla;
     };
     return Utilidades;
 }());
@@ -2601,6 +2858,8 @@ var ActorBase = (function () {
     ActorBase.prototype.cuando_termina_de_hacer_click = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_sale = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_mueve = function (x, y, evento_original) { };
+    ActorBase.prototype.cuando_pulsa_tecla = function (tecla, evento_original) { };
+    ActorBase.prototype.cuando_suelta_tecla = function (tecla, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "cantidad_de_colisiones", {
         get: function () {
             return this.colisiones.length;
@@ -2714,7 +2973,7 @@ var ActorBase = (function () {
     ActorBase.prototype.aprender = function (habilidad) {
         var clase = this.pilas.habilidades.buscar(habilidad);
         if (clase) {
-            if (this.tieneHabilidad(clase.name)) {
+            if (this.tiene_habilidad(clase.name)) {
                 console.warn("No se aplica la habilidad " + clase.name + " porque el actor ya la ten\u00EDa vinculada.");
             }
             else {
@@ -2727,7 +2986,7 @@ var ActorBase = (function () {
     ActorBase.prototype.olvidar = function (habilidad) {
         var clase = this.pilas.habilidades.buscar(habilidad);
         if (clase) {
-            if (!this.tieneHabilidad(clase.name)) {
+            if (!this.tiene_habilidad(clase.name)) {
                 console.warn("No se puede olvidar la habilidad '" + clase.name + "' porque el actor no la tiene.");
             }
             else {
@@ -2738,7 +2997,7 @@ var ActorBase = (function () {
             }
         }
     };
-    ActorBase.prototype.tieneHabilidad = function (habilidad) {
+    ActorBase.prototype.tiene_habilidad = function (habilidad) {
         return (this._habilidades.filter(function (h) {
             return h.constructor.name === habilidad;
         }).length > 0);
@@ -2763,6 +3022,13 @@ var ActorBase = (function () {
     Object.defineProperty(ActorBase.prototype, "color", {
         set: function (color) {
             this._color_de_texto = color;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActorBase.prototype, "control", {
+        get: function () {
+            return this.pilas.control;
         },
         enumerable: true,
         configurable: true
@@ -4014,8 +4280,42 @@ var EscenaBase = (function () {
         this._sonidos_para_reproducir = [];
     };
     EscenaBase.prototype.avisar_click_en_la_pantalla_a_los_actores = function (x, y, evento_original) {
+        var _this = this;
         this.actores.map(function (actor) {
-            actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+            try {
+                actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+            }
+            catch (e) {
+                console.error(e);
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+                _this.pilas.modo.pausar();
+            }
+        });
+    };
+    EscenaBase.prototype.avisar_cuando_pulsa_tecla_a_los_actores = function (tecla, evento_original) {
+        var _this = this;
+        this.actores.map(function (e) {
+            try {
+                e.cuando_pulsa_tecla(tecla, evento_original);
+            }
+            catch (e) {
+                console.error(e);
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
+                _this.pilas.modo.pausar();
+            }
+        });
+    };
+    EscenaBase.prototype.avisar_cuando_suelta_tecla_a_los_actores = function (tecla, evento_original) {
+        var _this = this;
+        this.actores.map(function (e) {
+            try {
+                e.cuando_suelta_tecla(tecla, evento_original);
+            }
+            catch (e) {
+                console.error(e);
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
+                _this.pilas.modo.pausar();
+            }
         });
     };
     EscenaBase.prototype.quitar_actor_luego_de_eliminar = function (actor) {
@@ -4029,7 +4329,17 @@ var EscenaBase = (function () {
         }
     };
     EscenaBase.prototype.terminar = function () {
-        this.actores.map(function (e) { return e.eliminar(); });
+        var _this = this;
+        this.actores.map(function (e) {
+            try {
+                e.eliminar();
+            }
+            catch (e) {
+                console.error(e);
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+                _this.pilas.modo.pausar();
+            }
+        });
         this.actualizar();
         this.actualizar_actores();
         this.control.terminar();
@@ -4037,6 +4347,8 @@ var EscenaBase = (function () {
     EscenaBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
     EscenaBase.prototype.cuando_mueve = function (x, y, evento_original) { };
     EscenaBase.prototype.cada_segundo = function (segundos_transcurridos) { };
+    EscenaBase.prototype.cuando_pulsa_tecla = function (tecla, evento) { };
+    EscenaBase.prototype.cuando_suelta_tecla = function (tecla, evento) { };
     return EscenaBase;
 }());
 var Escena = (function (_super) {
@@ -6875,14 +7187,15 @@ var ModoEjecucion = (function (_super) {
         _this.proyecto = {};
         _this.nombre_de_la_escena_inicial = null;
         _this._escena_en_ejecucion = null;
+        _this.teclas = null;
         _this.es_modo_ejecucion = true;
         return _this;
     }
     ModoEjecucion.prototype.preload = function () { };
     ModoEjecucion.prototype.create = function (datos) {
-        var _this = this;
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
+        this.teclas = new Set();
         if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
             this.matter.world.createDebugGraphic();
         }
@@ -6910,40 +7223,6 @@ var ModoEjecucion = (function (_super) {
                 this.matter.world.createDebugGraphic();
             }
             this.conectar_eventos();
-            this.input.on("pointermove", function (cursor) {
-                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-                _this.pilas.cursor_x = Math.trunc(posicion.x);
-                _this.pilas.cursor_y = Math.trunc(posicion.y);
-                if (_this._escena_en_ejecucion) {
-                    try {
-                        _this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, cursor);
-                    }
-                    catch (e) {
-                        console.error(e);
-                        _this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
-                        _this.pausar();
-                    }
-                }
-            });
-            this.input.keyboard.on("keyup", function (evento) {
-                if (evento.key === "Escape") {
-                    _this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
-                }
-            });
-            this.input.on("pointerdown", function (cursor) {
-                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
-                if (_this._escena_en_ejecucion) {
-                    try {
-                        _this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, cursor);
-                        _this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores();
-                    }
-                    catch (e) {
-                        console.error(e);
-                        _this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
-                        _this.pausar();
-                    }
-                }
-            });
             this.vincular_eventos_de_colision();
         }
         catch (e) {
@@ -6966,16 +7245,29 @@ var ModoEjecucion = (function (_super) {
         this.input.on("pointermove", this.manejar_evento_muevemouse.bind(this));
         this.input.on("pointerdown", this.manejar_evento_click_de_mouse.bind(this));
         this.input.on("pointerup", this.manejar_evento_termina_click.bind(this));
+        this.input.keyboard.on("keydown", this.manejar_evento_key_down.bind(this));
+        this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
     };
     ModoEjecucion.prototype.manejar_evento_click_de_mouse = function (evento) {
         var x = evento.x;
         var y = evento.y;
-        var p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+        var posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
         this.pilas.eventos.emitir_evento("click_de_mouse", {
-            x: p.x,
-            y: p.y,
+            x: posicion.x,
+            y: posicion.y,
             evento: evento
         });
+        if (this._escena_en_ejecucion) {
+            try {
+                this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, evento);
+                this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores(posicion.x, posicion.y, evento);
+            }
+            catch (e) {
+                console.error(e);
+                this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
+                this.pausar();
+            }
+        }
     };
     ModoEjecucion.prototype.manejar_evento_termina_click = function (evento) {
         var x = evento.x;
@@ -6988,14 +7280,41 @@ var ModoEjecucion = (function (_super) {
         });
     };
     ModoEjecucion.prototype.manejar_evento_muevemouse = function (evento) {
-        var x = evento.x;
-        var y = evento.y;
-        var p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
+        var posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.x, evento.y);
+        this.pilas.cursor_x = Math.trunc(posicion.x);
+        this.pilas.cursor_y = Math.trunc(posicion.y);
         this.pilas.eventos.emitir_evento("mueve_mouse", {
-            x: p.x,
-            y: p.y,
+            x: posicion.x,
+            y: posicion.y,
             evento: evento
         });
+        if (this._escena_en_ejecucion) {
+            try {
+                this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, evento);
+            }
+            catch (e) {
+                console.error(e);
+                this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
+                this.pausar();
+            }
+        }
+    };
+    ModoEjecucion.prototype.manejar_evento_key_down = function (evento) {
+        if (!this.teclas.has(evento.code)) {
+            this.teclas.add(evento.code);
+            var tecla = this.pilas.utilidades.obtener_nombre_de_la_tecla_desde_un_evento(evento);
+            this._escena_en_ejecucion.cuando_pulsa_tecla(tecla, evento);
+            this._escena_en_ejecucion.avisar_cuando_pulsa_tecla_a_los_actores(tecla, evento);
+        }
+    };
+    ModoEjecucion.prototype.manejar_evento_key_up = function (evento) {
+        this.teclas.delete(evento.code);
+        if (evento.key === "Escape") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
+        }
+        var tecla = this.pilas.utilidades.obtener_nombre_de_la_tecla_desde_un_evento(evento);
+        this._escena_en_ejecucion.cuando_suelta_tecla(tecla, evento);
+        this._escena_en_ejecucion.avisar_cuando_suelta_tecla_a_los_actores(tecla, evento);
     };
     ModoEjecucion.prototype.cambiar_escena = function (nombre) {
         var parametros = {

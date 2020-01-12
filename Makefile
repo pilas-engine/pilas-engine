@@ -219,6 +219,7 @@ endif
 .PHONY: tmp docs binarios manual
 
 manual: pilas_manual
+actualizar_manual: pilas_manual
 compilar_manual: pilas_manual
 
 

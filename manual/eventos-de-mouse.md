@@ -1,6 +1,7 @@
-# Eventos
+# Eventos del mouse
 
-En pilas llamamos "eventos" a las señales que emiten el mouse o el teclado. Por ejemplo, un "click" del mouse es un evento al igual que la pulsación de una tecla.
+En pilas llamamos "eventos" a las señales que emiten desde
+dispositivos como el mouse o teclado. Por ejemplo, un "click" del mouse es un evento al igual que la pulsación de una tecla.
 
 Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acción dentro del juego para responder. Por ejemplo, en un juego de acción, el "click" del mouse podría realizar una explosión o hacer que un personaje salte.
 

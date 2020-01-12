@@ -198,7 +198,37 @@ class EscenaBase {
 
   avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any) {
     this.actores.map(actor => {
-      actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+      try {
+        actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+      } catch (e) {
+        console.error(e);
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+        this.pilas.modo.pausar();
+      }
+    });
+  }
+
+  avisar_cuando_pulsa_tecla_a_los_actores(tecla: string, evento_original: any) {
+    this.actores.map(e => {
+      try {
+        e.cuando_pulsa_tecla(tecla, evento_original);
+      } catch (e) {
+        console.error(e);
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
+        this.pilas.modo.pausar();
+      }
+    });
+  }
+
+  avisar_cuando_suelta_tecla_a_los_actores(tecla: string, evento_original: any) {
+    this.actores.map(e => {
+      try {
+        e.cuando_suelta_tecla(tecla, evento_original);
+      } catch (e) {
+        console.error(e);
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
+        this.pilas.modo.pausar();
+      }
     });
   }
 
@@ -214,15 +244,46 @@ class EscenaBase {
   }
 
   terminar() {
-    this.actores.map(e => e.eliminar());
+    this.actores.map(e => {
+      try {
+        e.eliminar();
+      } catch (e) {
+        console.error(e);
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+        this.pilas.modo.pausar();
+      }
+    });
     this.actualizar();
     this.actualizar_actores();
     this.control.terminar();
   }
 
-  cuando_hace_click(x, y, evento_original) {}
+  /**
+   * Se ejecuta cuando el usuario hace click con el mouse sobre la escena.
+   */
+  cuando_hace_click(x: number, y: number, evento_original: any) {}
 
-  cuando_mueve(x, y, evento_original) {}
+  /**
+   * Se ejecuta cuando se mueve el puntedo del mouse sobre la escena.
+   */
+  cuando_mueve(x: number, y: number, evento_original: any) {}
 
+  /**
+   * Se ejecuta una vez por segundo.
+   */
   cada_segundo(segundos_transcurridos: number) {}
+
+  /**
+   * Se ejecuta en el momento en que el usuario pulsa una tecla del teclado.
+   *
+   * Esta función se llamará una sola vez por pulsación de tecla, sin importar
+   * la repetición del teclado o si la tecla queda pulsada, solo se llamará
+   * una sola vez.
+   */
+  cuando_pulsa_tecla(tecla: string, evento: any) {}
+
+  /**
+   * Se ejecuta en el momento en que una tecla pulsada se suelta.
+   */
+  cuando_suelta_tecla(tecla: string, evento: any) {}
 }
