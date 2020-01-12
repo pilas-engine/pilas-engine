@@ -69,7 +69,7 @@ export default Component.extend({
     if (this.mostrarEditor && !this.splitjs) {
       let splitjs = Split(["#panel-canvas", "#panel-editor"], {
         sizes: [50, 50],
-        minSize: [320, 200],
+        minSize: [150, 200],
         expandToMin: false
       });
 
