@@ -415,7 +415,30 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="eventos-del-mouse">Eventos del mouse</h1><p>En pilas llamamos &quot;eventos&quot; a las se&#xF1;ales que emiten desde
-dispositivos como el mouse o teclado. Por ejemplo, un &quot;click&quot; del mouse es un evento al igual que la pulsaci&#xF3;n de una tecla.</p><p>Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acci&#xF3;n dentro del juego para responder. Por ejemplo, en un juego de acci&#xF3;n, el &quot;click&quot; del mouse podr&#xED;a realizar una explosi&#xF3;n o hacer que un personaje salte.</p><h2 id="&#xBF;c&#xF3;mo-capturar-un-evento-del-mouse">&#xBF;C&#xF3;mo capturar un evento del mouse?</h2><p>Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el c&#xF3;digo:</p><ul><li>cuando_hace_click(x, y, evento_original)
+dispositivos como el mouse o teclado. Por ejemplo, un &quot;click&quot; del mouse es un evento al igual que la pulsaci&#xF3;n de una tecla.</p><p>Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acci&#xF3;n dentro del juego para responder. Por ejemplo, en un juego de acci&#xF3;n, el &quot;click&quot; del mouse podr&#xED;a realizar una explosi&#xF3;n o hacer que un personaje salte.</p><h2 id="antes-de-empezar-el-caso-m&#xE1;s-com&#xFA;n">Antes de empezar, el caso m&#xE1;s com&#xFA;n</h2><p>Si bien esta secci&#xF3;n habla de eventos y c&#xF3;mo hacer uso por completo
+del mouse, casi siempre se quiere saber la posici&#xF3;n del mouse para
+mover actores o crear objetos. Si ese es tu caso, te comentamos que
+pilas tiene 4 atributos para conocer en qu&#xE9; posici&#xF3;n se encuentra
+el cursor del mouse en todo momento:</p><ul><li>pilas.cursor_x: posici&#xF3;n horizontal del mouse.
+</li>
+<li>pilas.cursor_y: posici&#xF3;n vertical del mouse.
+</li>
+<li>pilas.cursor_x_absoluta: posici&#xF3;n horizontal del mouse pero sin tener en cuenta la posici&#xF3;n de la c&#xE1;mara. La coordenada corresponder&#xE1; a la coordenada f&#xED;sica de la ventana.
+</li>
+<li>pilas.cursor_y_absoluta: posici&#xF3;n vertical del mouse pero sin tener en cuenta la posici&#xF3;n de la c&#xE1;mara.
+</li></ul>
+<p>Y estos atributos, se puede usar generalmente directamente desde la funci&#xF3;n
+actualizar de los actores:</p><pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">actor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Actor</span> </span>{
+  iniciar() {}
+
+  actualizar() {
+    <span class="hljs-comment">// la sentencias a continuaci&#xF3;n hacen que el actor siga la</span>
+    <span class="hljs-comment">// posici&#xF3;n del cursor del mouse en todo momento</span>
+    <span class="hljs-keyword">this</span>.x = <span class="hljs-keyword">this</span>.pilas.cursor_x;
+    <span class="hljs-keyword">this</span>.y = <span class="hljs-keyword">this</span>.pilas.cursor_y;
+  }
+}</code></pre>
+<h2 id="&#xBF;c&#xF3;mo-capturar-un-evento-del-mouse">&#xBF;C&#xF3;mo capturar un evento del mouse?</h2><p>Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el c&#xF3;digo:</p><ul><li>cuando_hace_click(x, y, evento_original)
 </li>
 <li>cuando_termina_de_hacer_click(x, y, evento_original)
 </li>
@@ -525,7 +548,7 @@ pilas.eventos.conectar(&quot;termina_click&quot;, (x, y) =&gt; {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Eventos de mouse o touch","level":"1.15","depth":1,"next":{"title":"Uso del teclado","level":"1.16","depth":1,"path":"uso-del-teclado.md","ref":"uso-del-teclado.md","articles":[]},"previous":{"title":"Escenas","level":"1.14","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos-de-mouse.md","mtime":"2020-01-11T23:23:35.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2020-01-12T04:49:27.337Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Eventos de mouse o touch","level":"1.15","depth":1,"next":{"title":"Uso del teclado","level":"1.16","depth":1,"path":"uso-del-teclado.md","ref":"uso-del-teclado.md","articles":[]},"previous":{"title":"Escenas","level":"1.14","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"eventos-de-mouse.md","mtime":"2020-01-13T01:16:15.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2020-01-13T14:58:48.625Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
