@@ -801,8 +801,16 @@ class ActorBase {
   set fijo(valor: boolean) {
     if (valor) {
       this.sprite.setScrollFactor(0, 0);
+
+      if (this._texto) {
+        this._texto.setScrollFactor(0, 0);
+      }
     } else {
       this.sprite.setScrollFactor(1, 1);
+
+      if (this._texto) {
+        this._texto.setScrollFactor(1, 1);
+      }
     }
   }
 
@@ -1064,5 +1072,28 @@ class ActorBase {
 
   get control() {
     return this.pilas.control;
+  }
+
+  /**
+   * Retorna la distancia en pixels entre este actor y otro punto
+   * de la pantalla.
+   */
+  obtener_distancia_al_punto(x: number, y: number) {
+    return this.pilas.utilidades.obtener_distancia_entre(this.x, this.y, x, y);
+  }
+
+  /**
+   * Retorna la distancia en pixels de este actor a otro.
+   */
+  obtener_distancia_al_actor(actor: Actor) {
+    return this.obtener_distancia_al_punto(actor.x, actor.y);
+  }
+
+  /**
+   * Mueve el personaje en la dirección indicada.
+   */
+  mover_hacia_el_punto(x: number, y: number, velocidad: number = 10) {
+    let angulo = this.pilas.obtener_angulo_entre_puntos(this.x, this.y, x, y);
+    this.avanzar(angulo, velocidad);
   }
 }

@@ -391,6 +391,8 @@ declare class Pilas {
     _alto: number;
     cursor_x: number;
     cursor_y: number;
+    cursor_x_absoluta: number;
+    cursor_y_absoluta: number;
     opciones: any;
     imagenes_precargadas: string[];
     imagenes: any;
@@ -638,6 +640,9 @@ declare class ActorBase {
     magnitud: number;
     color: string;
     readonly control: Control;
+    obtener_distancia_al_punto(x: number, y: number): number;
+    obtener_distancia_al_actor(actor: Actor): number;
+    mover_hacia_el_punto(x: number, y: number, velocidad?: number): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {

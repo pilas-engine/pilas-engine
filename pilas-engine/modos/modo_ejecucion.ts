@@ -96,8 +96,8 @@ class ModoEjecucion extends Modo {
   }
 
   private manejar_evento_click_de_mouse(evento) {
-    let x = evento.x;
-    let y = evento.y;
+    let x = evento.worldX;
+    let y = evento.worldY;
     let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
 
     this.pilas.eventos.emitir_evento("click_de_mouse", {
@@ -119,8 +119,8 @@ class ModoEjecucion extends Modo {
   }
 
   private manejar_evento_termina_click(evento) {
-    let x = evento.x;
-    let y = evento.y;
+    let x = evento.worldX;
+    let y = evento.worldX;
     let p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
 
     this.pilas.eventos.emitir_evento("termina_click", {
@@ -131,9 +131,13 @@ class ModoEjecucion extends Modo {
   }
 
   private manejar_evento_muevemouse(evento) {
-    let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.x, evento.y);
+    let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
     this.pilas.cursor_x = Math.trunc(posicion.x);
     this.pilas.cursor_y = Math.trunc(posicion.y);
+
+    let posicion_absoluta = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
+    this.pilas.cursor_x_absoluta = Math.trunc(posicion_absoluta.x);
+    this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
 
     this.pilas.eventos.emitir_evento("mueve_mouse", {
       x: posicion.x,

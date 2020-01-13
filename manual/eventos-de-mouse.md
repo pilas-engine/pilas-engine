@@ -5,6 +5,35 @@ dispositivos como el mouse o teclado. Por ejemplo, un "click" del mouse es un ev
 
 Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acción dentro del juego para responder. Por ejemplo, en un juego de acción, el "click" del mouse podría realizar una explosión o hacer que un personaje salte.
 
+## Antes de empezar, el caso más común
+
+Si bien esta sección habla de eventos y cómo hacer uso por completo
+del mouse, casi siempre se quiere saber la posición del mouse para
+mover actores o crear objetos. Si ese es tu caso, te comentamos que
+pilas tiene 4 atributos para conocer en qué posición se encuentra
+el cursor del mouse en todo momento:
+
+- pilas.cursor_x: posición horizontal del mouse.
+- pilas.cursor_y: posición vertical del mouse.
+- pilas.cursor_x_absoluta: posición horizontal del mouse pero sin tener en cuenta la posición de la cámara. La coordenada corresponderá a la coordenada física de la ventana.
+- pilas.cursor_y_absoluta: posición vertical del mouse pero sin tener en cuenta la posición de la cámara.
+
+Y estos atributos, se puede usar generalmente directamente desde la función
+actualizar de los actores:
+
+```javascript
+class actor extends Actor {
+  iniciar() {}
+
+  actualizar() {
+    // la sentencias a continuación hacen que el actor siga la
+    // posición del cursor del mouse en todo momento
+    this.x = this.pilas.cursor_x;
+    this.y = this.pilas.cursor_y;
+  }
+}
+```
+
 ## ¿Cómo capturar un evento del mouse?
 
 Para capturar un evento desde el mouse simplemente hay que declarar alguna de estas funciones en el código:

@@ -25,10 +25,14 @@ class ModoEditor extends Modo {
   }
 
   private conectar_movimiento_del_mouse() {
-    this.input.on("pointermove", cursor => {
-      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+    this.input.on("pointermove", evento => {
+      let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
       this.pilas.cursor_x = Math.trunc(posicion.x);
       this.pilas.cursor_y = Math.trunc(posicion.y);
+
+      let posicion_absoluta = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
+      this.pilas.cursor_x_absoluta = Math.trunc(posicion_absoluta.x);
+      this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
     });
   }
 

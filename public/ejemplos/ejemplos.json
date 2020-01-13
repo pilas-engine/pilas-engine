@@ -82,6 +82,10 @@
     {
       "nombre": "dos-jugadores",
       "desde": "2.0.92"
+    },
+    {
+      "nombre": "camara-seguir-clicks",
+      "desde": "2.0.92"
     }
   ]
 }

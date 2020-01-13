@@ -132,6 +132,11 @@ class Mensajes {
     texto_detalle.setDepth(500001);
     texto_stack.setDepth(500001);
 
+    fondo.setScrollFactor(0, 0);
+    texto_titulo.setScrollFactor(0, 0);
+    texto_detalle.setScrollFactor(0, 0);
+    texto_stack.setScrollFactor(0, 0);
+
     this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
     console.error(error);
   }

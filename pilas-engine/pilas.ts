@@ -38,6 +38,10 @@ class Pilas {
 
   cursor_x: number = 0;
   cursor_y: number = 0;
+
+  cursor_x_absoluta: number = 0;
+  cursor_y_absoluta: number = 0;
+
   opciones: any;
 
   imagenes_precargadas: string[] = [];

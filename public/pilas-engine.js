@@ -1463,6 +1463,10 @@ var Mensajes = (function () {
         texto_titulo.setDepth(500001);
         texto_detalle.setDepth(500001);
         texto_stack.setDepth(500001);
+        fondo.setScrollFactor(0, 0);
+        texto_titulo.setScrollFactor(0, 0);
+        texto_detalle.setScrollFactor(0, 0);
+        texto_stack.setScrollFactor(0, 0);
         this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
         console.error(error);
     };
@@ -1658,6 +1662,8 @@ var Pilas = (function () {
     function Pilas() {
         this.cursor_x = 0;
         this.cursor_y = 0;
+        this.cursor_x_absoluta = 0;
+        this.cursor_y_absoluta = 0;
         this.imagenes_precargadas = [];
         this.imagenes = [];
         this.Phaser = Phaser;
@@ -2786,9 +2792,15 @@ var ActorBase = (function () {
         set: function (valor) {
             if (valor) {
                 this.sprite.setScrollFactor(0, 0);
+                if (this._texto) {
+                    this._texto.setScrollFactor(0, 0);
+                }
             }
             else {
                 this.sprite.setScrollFactor(1, 1);
+                if (this._texto) {
+                    this._texto.setScrollFactor(1, 1);
+                }
             }
         },
         enumerable: true,
@@ -3033,6 +3045,17 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype.obtener_distancia_al_punto = function (x, y) {
+        return this.pilas.utilidades.obtener_distancia_entre(this.x, this.y, x, y);
+    };
+    ActorBase.prototype.obtener_distancia_al_actor = function (actor) {
+        return this.obtener_distancia_al_punto(actor.x, actor.y);
+    };
+    ActorBase.prototype.mover_hacia_el_punto = function (x, y, velocidad) {
+        if (velocidad === void 0) { velocidad = 10; }
+        var angulo = this.pilas.obtener_angulo_entre_puntos(this.x, this.y, x, y);
+        this.avanzar(angulo, velocidad);
+    };
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -7048,10 +7071,13 @@ var ModoEditor = (function (_super) {
     };
     ModoEditor.prototype.conectar_movimiento_del_mouse = function () {
         var _this = this;
-        this.input.on("pointermove", function (cursor) {
-            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+        this.input.on("pointermove", function (evento) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
             _this.pilas.cursor_x = Math.trunc(posicion.x);
             _this.pilas.cursor_y = Math.trunc(posicion.y);
+            var posicion_absoluta = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
+            _this.pilas.cursor_x_absoluta = Math.trunc(posicion_absoluta.x);
+            _this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
         });
     };
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores = function () {
@@ -7249,8 +7275,8 @@ var ModoEjecucion = (function (_super) {
         this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
     };
     ModoEjecucion.prototype.manejar_evento_click_de_mouse = function (evento) {
-        var x = evento.x;
-        var y = evento.y;
+        var x = evento.worldX;
+        var y = evento.worldY;
         var posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
         this.pilas.eventos.emitir_evento("click_de_mouse", {
             x: posicion.x,
@@ -7270,8 +7296,8 @@ var ModoEjecucion = (function (_super) {
         }
     };
     ModoEjecucion.prototype.manejar_evento_termina_click = function (evento) {
-        var x = evento.x;
-        var y = evento.y;
+        var x = evento.worldX;
+        var y = evento.worldX;
         var p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
         this.pilas.eventos.emitir_evento("termina_click", {
             x: p.x,
@@ -7280,9 +7306,12 @@ var ModoEjecucion = (function (_super) {
         });
     };
     ModoEjecucion.prototype.manejar_evento_muevemouse = function (evento) {
-        var posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.x, evento.y);
+        var posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
         this.pilas.cursor_x = Math.trunc(posicion.x);
         this.pilas.cursor_y = Math.trunc(posicion.y);
+        var posicion_absoluta = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
+        this.pilas.cursor_x_absoluta = Math.trunc(posicion_absoluta.x);
+        this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
         this.pilas.eventos.emitir_evento("mueve_mouse", {
             x: posicion.x,
             y: posicion.y,
