@@ -13,6 +13,7 @@
 - [Manejo de tiempo](tiempo.md)
 - [Angulos y distancias](angulos-distancias.md)
 - [Colisiones](colisiones.md)
+- [Mensajes](mensajes.md)
 - [Escenas](escenas.md)
 - [Eventos de mouse o touch](eventos-de-mouse.md)
 - [Uso del teclado](uso-del-teclado.md)

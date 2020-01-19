@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Azar o cálculos aleatorios · Manual de Pilas Engine 2</title>
+        <title>Mensajes · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="observables.html" />
+    <link rel="next" href="escenas.html" />
     
     
-    <link rel="prev" href="comportamientos.html" />
+    <link rel="prev" href="colisiones.html" />
     
 
     </head>
@@ -193,7 +193,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="azar.html">
+        <li class="chapter " data-level="1.9" data-path="azar.html">
             
                 <a href="azar.html">
             
@@ -258,7 +258,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="mensajes.html">
+        <li class="chapter active" data-level="1.14" data-path="mensajes.html">
             
                 <a href="mensajes.html">
             
@@ -412,7 +412,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Azar o cálculos aleatorios</a>
+        <a href="." >Mensajes</a>
     </h1>
 </div>
 
@@ -427,13 +427,56 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="azar-o-c&#xE1;lculos-aleatorios">Azar o c&#xE1;lculos aleatorios</h1><p>Una utilidad muy utilizada en los juegos son las funciones para obtener
-n&#xFA;meros aleatorios. Pilas incluye una funci&#xF3;n muy simple para esto llamada
-<code>pilas.azar</code>:</p><p>La funci&#xF3;n <code>pilas.azar</code> retorna un n&#xFA;mero aleatorio entre dos n&#xFA;meros. Por
-ejemplo, si buscas que pilas retorne un n&#xFA;mero al hacer entre 1 y 5 podr&#xED;as
-llamar a la funci&#xF3;n as&#xED;:</p><pre><code>pilas.azar(1, 5)</code></pre>
-<p>Es importante mencionar que el rango de valores incluye los extremos. En el
-caso anterior la funci&#xF3;n podr&#xED;a retorna 1, 2, 3, 4 o 5.</p>
+                                <h1 id="mensajes-entre-actores-y-escenas">Mensajes entre actores y escenas</h1><p>Dentro de un juego se puede producir varias comunicaciones
+entre actores. Si un personaje protagonista pierde, tal vez queremos
+que el contador de puntajes se entere y cambie de color, o que
+los enemigos conjuntamente dejen de seguir al protagonista; tal vez
+incluso vamos a querer que la escena se notifique de esto y ponga
+un cartel en pantalla o pase a otra escena.</p><p>Los mensajes sirven para implementar este tipo de comunicaciones entre
+distintos objetos de nuestro juego. Y tienen una ventaja, porque podemos
+hacer que un actor no tenga que conocer todo lo que lo rodea, sino que
+simplemente emita un mensaje &quot;y qui&#xE9;n escuche puede hacer algo al respecto&quot;.</p><h2 id="enviar-mensajes-globalmente">Enviar mensajes globalmente</h2><p>Un ejemplo t&#xED;pico que se suele dar de mensajes son los mensajes globales,
+estos mensajes se pueden enviar desde un actor a todos los dem&#xE1;s, estos
+mensajes globales incluso llegan a la escenas.</p><p>Para enviar un mensaje global tenemos que escribir este c&#xF3;digo en
+el actor emisor:</p><pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.pilas.enviar_mensaje_global(<span class="hljs-string">&quot;mi_mensaje&quot;</span>);</code></pre>
+<p>Y para que otros actores puedan atender este mensaje simplemente tenemos
+que crear un m&#xE9;todo que se llame &quot;cuando<em>llega_el_mensaje</em>&quot; seguido del
+nombre del mensaje as&#xED;:</p><pre><code class="lang-typescript">cuando_llega_el_mensaje_mi_mensaje() {
+  <span class="hljs-keyword">this</span>.decir(<span class="hljs-string">&quot;Alg&#xFA;n actor envi&#xF3; el mensaje &apos;mi_mensaje&apos;&quot;</span>);
+}</code></pre>
+<p>opcionalmente, si queremos un actor o escena que capture todos los mensajes
+podemos usar este m&#xE9;todo:</p><pre><code class="lang-typescript">cuando_llega_un_mensaje(mensaje:<span class="hljs-built_in">string</span>) {
+  <span class="hljs-keyword">this</span>.decir(<span class="hljs-string">&quot;lleg&#xF3; el mensaje &quot;</span> + mensaje);
+}</code></pre>
+<h2 id="mensajes-dirigidos-a-actores-particulares">Mensajes dirigidos a actores particulares</h2><p>Si no queremos enviar el mensajes a todos los actores y escenas, lo que
+podemos hacer es obtener la referencia a un actor en particular y enviarle
+el mensaje de forma directa:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> puntaje = <span class="hljs-keyword">this</span>.pilas.obtener_actor_por_nombre(<span class="hljs-string">&quot;puntaje&quot;</span>);
+puntaje.enviar_mensaje(<span class="hljs-string">&quot;aumentar&quot;</span>);</code></pre>
+<p>Y de forma similar a como mencionamos antes, el puntaje deber&#xED;a tener
+un m&#xE9;todo llamado <code>cuando_llega_el_mensaje_aumentar</code> para reaccionar
+al mensaje:</p><pre><code class="lang-typescript">cuando_llega_el_mensaje_aumentar() {
+  <span class="hljs-keyword">this</span>.puntaje_acumulado += <span class="hljs-number">1</span>;
+}</code></pre>
+<h2 id="mensajes-con-par&#xE1;metros">Mensajes con par&#xE1;metros</h2><p>A veces junto con el mensaje necesitamos enviar par&#xE1;metros para ser m&#xE1;s
+espec&#xED;ficos. Para eso podemos usar el segundo argumento de las funciones
+de mensajes.</p><p>Por ejemplo, imagina que tenemos un actor que cuando colisiona con una
+moneda sume 5 puntos, pero cuando colisiona con un diamante sume 10 puntos.</p><p>Por un lado, cuando se produce la colisi&#xF3;n podemos emitir el mensaje
+&quot;aumentar_puntaje&quot; con la cantidad de puntos que le corresponden:</p><pre><code class="lang-typescript">cuando_colisiona(actor: Actor) {
+  <span class="hljs-keyword">if</span> (actor.tiene_etiqueta(<span class="hljs-string">&quot;moneda&quot;</span>)) {
+    actor.eliminar();
+    <span class="hljs-keyword">this</span>.pilas.enviar_mensaje_global(<span class="hljs-string">&quot;aumentar_puntaje&quot;</span>, {cantidad: <span class="hljs-number">5</span>});
+  }
+
+  <span class="hljs-keyword">if</span> (actor.tiene_etiqueta(<span class="hljs-string">&quot;diamante&quot;</span>)) {
+    actor.eliminar();
+    <span class="hljs-keyword">this</span>.pilas.enviar_mensaje_global(<span class="hljs-string">&quot;aumentar_puntaje&quot;</span>, {cantidad: <span class="hljs-number">10</span>});
+  }
+}</code></pre>
+<p>Luego, del lado del receptor (o los receptores) del mensaje, tenemos que
+leer los par&#xE1;metros adicionales as&#xED;:</p><pre><code class="lang-typescript">cuando_llega_el_mensaje_aumentar_puntaje(datos) {
+  <span class="hljs-keyword">this</span>.puntaje_acumulado += datos.cantidad;
+}</code></pre>
+
                                 
                                 </section>
                             
@@ -460,12 +503,12 @@ caso anterior la funci&#xF3;n podr&#xED;a retorna 1, 2, 3, 4 o 5.</p>
 
             
                 
-                <a href="comportamientos.html" class="navigation navigation-prev " aria-label="Previous page: Comportamientos">
+                <a href="colisiones.html" class="navigation navigation-prev " aria-label="Previous page: Colisiones">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="observables.html" class="navigation navigation-next " aria-label="Next page: Observables">
+                <a href="escenas.html" class="navigation navigation-next " aria-label="Next page: Escenas">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -476,7 +519,7 @@ caso anterior la funci&#xF3;n podr&#xED;a retorna 1, 2, 3, 4 o 5.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Azar o cálculos aleatorios","level":"1.9","depth":1,"next":{"title":"Observables","level":"1.10","depth":1,"path":"observables.md","ref":"observables.md","articles":[]},"previous":{"title":"Comportamientos","level":"1.8","depth":1,"path":"comportamientos.md","ref":"comportamientos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"azar.md","mtime":"2019-05-10T05:01:39.242Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2020-01-19T23:48:07.253Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Mensajes","level":"1.14","depth":1,"next":{"title":"Escenas","level":"1.15","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"previous":{"title":"Colisiones","level":"1.13","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"mensajes.md","mtime":"2020-01-19T23:48:01.225Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2020-01-19T23:48:07.253Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
