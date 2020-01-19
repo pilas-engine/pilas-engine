@@ -465,6 +465,7 @@ declare class Pilas {
     clonar_en_la_posión_del_cursor(nombre: string): any;
     clonar_en_posicion_al_azar(nombre: string): any;
     es_multiplo(a: number, b: number): boolean;
+    enviar_mensaje_global(mensaje: string, datos?: any): void;
 }
 declare var pilasengine: Pilas;
 declare class ActorBase {
@@ -643,6 +644,9 @@ declare class ActorBase {
     obtener_distancia_al_punto(x: number, y: number): number;
     obtener_distancia_al_actor(actor: Actor): number;
     mover_hacia_el_punto(x: number, y: number, velocidad?: number): void;
+    enviar_mensaje(mensaje: string, datos?: any): void;
+    cuando_llega_un_mensaje(mensaje: string, datos?: any): void;
+    enviar_mensaje_global(mensaje: string, datos?: any): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1088,6 +1092,8 @@ declare class EscenaBase {
     cada_segundo(segundos_transcurridos: number): void;
     cuando_pulsa_tecla(tecla: string, evento: any): void;
     cuando_suelta_tecla(tecla: string, evento: any): void;
+    enviar_mensaje(mensaje: string, datos?: any): void;
+    cuando_llega_un_mensaje(mensaje: string, datos?: any): void;
 }
 declare class Escena extends EscenaBase {
     cuadro: number;

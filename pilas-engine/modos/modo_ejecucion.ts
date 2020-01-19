@@ -215,11 +215,13 @@ class ModoEjecucion extends Modo {
               ///actor_a.colisiones.push(actor_b);
               ///actor_b.colisiones.push(actor_a);
 
-              let cancelar_1 = actor_a.cuando_colisiona(actor_b);
-              let cancelar_2 = actor_b.cuando_colisiona(actor_a);
+              if (actor_a._vivo && actor_b._vivo) {
+                let cancelar_1 = actor_a.cuando_colisiona(actor_b);
+                let cancelar_2 = actor_b.cuando_colisiona(actor_a);
 
-              if (cancelar_1 || cancelar_2) {
-                colision.isActive = false;
+                if (cancelar_1 || cancelar_2) {
+                  colision.isActive = false;
+                }
               }
             }
           });

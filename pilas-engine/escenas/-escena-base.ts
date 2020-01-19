@@ -286,4 +286,15 @@ class EscenaBase {
    * Se ejecuta en el momento en que una tecla pulsada se suelta.
    */
   cuando_suelta_tecla(tecla: string, evento: any) {}
+
+  enviar_mensaje(mensaje: string, datos: any = {}) {
+    this.cuando_llega_un_mensaje(mensaje, datos);
+
+    // Intenta llamar a un método específico para este mensaje.
+    if (this[`cuando_llega_el_mensaje_${mensaje}`]) {
+      this[`cuando_llega_el_mensaje_${mensaje}`](datos);
+    }
+  }
+
+  cuando_llega_un_mensaje(mensaje: string, datos: any = {}) {}
 }

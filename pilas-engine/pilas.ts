@@ -335,7 +335,9 @@ class Pilas {
    */
   obtener_todos_los_actores_con_la_etiqueta(etiqueta: string) {
     return this.obtener_actores().filter(actor => {
-      return actor.tiene_etiqueta(etiqueta);
+      if (actor._vivo) {
+        return actor.tiene_etiqueta(etiqueta);
+      }
     });
   }
 
@@ -510,6 +512,27 @@ class Pilas {
    */
   es_multiplo(a: number, b: number) {
     return a % b === 0;
+  }
+
+  /**
+   * Envía un mensaje a todos los actores y la escena actual.
+   *
+   * Para capturar estos mensajes desde actores o la escena, se tiene
+   * que crear un método de la forma "cuando_llega_el_mensaje_nombre" donde
+   * "nombre" tiene que ser mensaje que se quiere capturar.
+   *
+   * Por ejemplo, si un actor llama al código "this.pilas.enviar_mensaje_global('ganar')"
+   * deberías poder capturar ese mensaje desde cualquier actor o escena
+   * declarando el método "cuando_llega_el_mensaje_ganar".
+   */
+  enviar_mensaje_global(mensaje: string, datos: any = {}) {
+    this.escena_actual().enviar_mensaje(mensaje, datos);
+
+    let actores = this.obtener_actores();
+
+    for (let i = 0; i < actores.length; i++) {
+      actores[i].enviar_mensaje(mensaje, datos);
+    }
   }
 }
 

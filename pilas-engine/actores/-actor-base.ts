@@ -1096,4 +1096,30 @@ class ActorBase {
     let angulo = this.pilas.obtener_angulo_entre_puntos(this.x, this.y, x, y);
     this.avanzar(angulo, velocidad);
   }
+
+  enviar_mensaje(mensaje: string, datos: any = {}) {
+    this.cuando_llega_un_mensaje(mensaje, datos);
+
+    // Intenta llamar a un método específico para este mensaje.
+    if (this[`cuando_llega_el_mensaje_${mensaje}`]) {
+      this[`cuando_llega_el_mensaje_${mensaje}`](datos);
+    }
+  }
+
+  cuando_llega_un_mensaje(mensaje: string, datos: any = {}) {}
+
+  /**
+   * Envía un mensaje a todos los actores y la escena actual.
+   *
+   * Para capturar estos mensajes desde actores o la escena, se tiene
+   * que crear un método de la forma "cuando_llega_el_mensaje_nombre" donde
+   * "nombre" tiene que ser mensaje que se quiere capturar.
+   *
+   * Por ejemplo, si un actor llama al código "this.enviar_mensaje_global('ganar')"
+   * deberías poder capturar ese mensaje desde cualquier actor o escena
+   * declarando el método "cuando_llega_el_mensaje_ganar".
+   */
+  enviar_mensaje_global(mensaje: string, datos: any = {}) {
+    this.pilas.enviar_mensaje_global(mensaje, datos);
+  }
 }

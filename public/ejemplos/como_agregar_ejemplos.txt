@@ -10,6 +10,12 @@ Luego se tiene que hacer una captura de pantalla del
 ejemplo (del tamaño 180x140) y colocarlo dentro
 del directorio "recursos/iconos/ejemplos".
 
+Después hay que editar el archivo:
+
+- app/components/pilas-lista-de-ejemplos.js
+
+e incrementar el contador.
+
 Y finalmente, se tiene que ejecutar el comando:
 
 "make actualizar_imagenes"

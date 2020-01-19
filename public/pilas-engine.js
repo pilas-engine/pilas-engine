@@ -1916,7 +1916,9 @@ var Pilas = (function () {
     };
     Pilas.prototype.obtener_todos_los_actores_con_la_etiqueta = function (etiqueta) {
         return this.obtener_actores().filter(function (actor) {
-            return actor.tiene_etiqueta(etiqueta);
+            if (actor._vivo) {
+                return actor.tiene_etiqueta(etiqueta);
+            }
         });
     };
     Pilas.prototype.obtener_cantidad_de_actores = function () {
@@ -2034,6 +2036,14 @@ var Pilas = (function () {
     };
     Pilas.prototype.es_multiplo = function (a, b) {
         return a % b === 0;
+    };
+    Pilas.prototype.enviar_mensaje_global = function (mensaje, datos) {
+        if (datos === void 0) { datos = {}; }
+        this.escena_actual().enviar_mensaje(mensaje, datos);
+        var actores = this.obtener_actores();
+        for (var i = 0; i < actores.length; i++) {
+            actores[i].enviar_mensaje(mensaje, datos);
+        }
     };
     return Pilas;
 }());
@@ -3055,6 +3065,20 @@ var ActorBase = (function () {
         if (velocidad === void 0) { velocidad = 10; }
         var angulo = this.pilas.obtener_angulo_entre_puntos(this.x, this.y, x, y);
         this.avanzar(angulo, velocidad);
+    };
+    ActorBase.prototype.enviar_mensaje = function (mensaje, datos) {
+        if (datos === void 0) { datos = {}; }
+        this.cuando_llega_un_mensaje(mensaje, datos);
+        if (this["cuando_llega_el_mensaje_" + mensaje]) {
+            this["cuando_llega_el_mensaje_" + mensaje](datos);
+        }
+    };
+    ActorBase.prototype.cuando_llega_un_mensaje = function (mensaje, datos) {
+        if (datos === void 0) { datos = {}; }
+    };
+    ActorBase.prototype.enviar_mensaje_global = function (mensaje, datos) {
+        if (datos === void 0) { datos = {}; }
+        this.pilas.enviar_mensaje_global(mensaje, datos);
     };
     return ActorBase;
 }());
@@ -4372,6 +4396,16 @@ var EscenaBase = (function () {
     EscenaBase.prototype.cada_segundo = function (segundos_transcurridos) { };
     EscenaBase.prototype.cuando_pulsa_tecla = function (tecla, evento) { };
     EscenaBase.prototype.cuando_suelta_tecla = function (tecla, evento) { };
+    EscenaBase.prototype.enviar_mensaje = function (mensaje, datos) {
+        if (datos === void 0) { datos = {}; }
+        this.cuando_llega_un_mensaje(mensaje, datos);
+        if (this["cuando_llega_el_mensaje_" + mensaje]) {
+            this["cuando_llega_el_mensaje_" + mensaje](datos);
+        }
+    };
+    EscenaBase.prototype.cuando_llega_un_mensaje = function (mensaje, datos) {
+        if (datos === void 0) { datos = {}; }
+    };
     return EscenaBase;
 }());
 var Escena = (function (_super) {
@@ -7371,10 +7405,12 @@ var ModoEjecucion = (function (_super) {
                         if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                             var actor_a = figura_1.gameObject.actor;
                             var actor_b = figura_2.gameObject.actor;
-                            var cancelar_1 = actor_a.cuando_colisiona(actor_b);
-                            var cancelar_2 = actor_b.cuando_colisiona(actor_a);
-                            if (cancelar_1 || cancelar_2) {
-                                colision.isActive = false;
+                            if (actor_a._vivo && actor_b._vivo) {
+                                var cancelar_1 = actor_a.cuando_colisiona(actor_b);
+                                var cancelar_2 = actor_b.cuando_colisiona(actor_a);
+                                if (cancelar_1 || cancelar_2) {
+                                    colision.isActive = false;
+                                }
                             }
                         }
                     });

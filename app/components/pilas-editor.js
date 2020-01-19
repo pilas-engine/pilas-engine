@@ -485,7 +485,7 @@ export default Component.extend({
       this.set("existe_un_error_reciente", false);
       this.mostrar_la_escena_actual_sobre_pilas();
       this.set("estado", this.estado.detener());
-      this.bus.trigger(`${this.nombre_del_contexto}:hacerFocoEnElEditor`, {});
+      this.bus.trigger(`hacerFocoEnElEditor`, {});
       this.log.limpiar();
       this.log.info("Ingresando al modo edición");
     },

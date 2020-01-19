@@ -86,6 +86,14 @@
     {
       "nombre": "camara-seguir-clicks",
       "desde": "2.0.92"
+    },
+    {
+      "nombre": "arkanoid",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "mensaje_global",
+      "desde": "2.0.92"
     }
   ]
 }
