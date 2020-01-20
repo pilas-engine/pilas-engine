@@ -11,7 +11,6 @@ BIN_ELECTRON=./node_modules/.bin/electron
 BIN_TYPEDOC=./node_modules/.bin/typedoc
 BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_EMBER=./node_modules/.bin/ember
-BIN_SURGE=./node_modules/.bin/surge
 BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
 BIN_PRETTIER=./node_modules/.bin/prettier
 FLAGS_ELECTRON_PACKAGER=--asar
@@ -58,7 +57,6 @@ comandos:
 	@echo "    ${G}api${N}                          Genera la documentación de API para pilas."
 	@echo "    ${G}pilas_manual${N}                 Genera el manual de pilas."
 	@echo "    ${G}pilas_manuales_descargables${N}  Genera los pdf, epub y mobi del manual."
-	@echo "    ${G}pilas_manual_web${N}             Sube el manual a la web."
 	@echo "    ${G}actualizar_phaser${N}            Actualiza phaser a una versión más reciente."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
@@ -137,18 +135,11 @@ test:
 	$(call log, "Ejecutando test...")
 	${BIN_EMBER} test
 
-deploy_a_surge:
-	rm -rf dist
-	@echo "Compilando la aplicación en modo producción..."
-	${BIN_EMBER} build --prod
-	@echo "Subiendo contenido al sitio de surge."
-	${BIN_SURGE} dist pilas-engine.surge.sh
-
 deploy_a_dokku:
 	rm -rf dist
 	@echo "Compilando la aplicación en modo producción..."
 	${BIN_EMBER} build --prod
-	@echo "Subiendo contenido al sitio de surge."
+	@echo "Subiendo contenido al sitio de pilas (producción)."
 	rm -rf pilas-engine-en-dokku
 	git clone dokku@hugoruscitti.com.ar:pilas-engine pilas-engine-en-dokku
 	rm -rf pilas-engine-en-dokku/*
@@ -160,7 +151,7 @@ deploy_a_dokku_dev:
 	rm -rf dist
 	@echo "Compilando la aplicación en modo producción a entorno de pruebas..."
 	${BIN_EMBER} build --prod
-	@echo "Subiendo contenido al sitio de surge."
+	@echo "Subiendo contenido al sitio de pilas (desarrollo)."
 	rm -rf pilas-engine-en-dokku-dev
 	git clone dokku@hugoruscitti.com.ar:app-dev pilas-engine-en-dokku-dev
 	rm -rf pilas-engine-en-dokku-dev/*
@@ -231,9 +222,6 @@ pilas_manual:
 	@echo ""
 	@echo "${G}OK, la documentación quedó en public/manual"
 	@echo ""
-
-pilas_manual_web: pilas_manual
-	${BIN_SURGE} public/manual manual-pilas-engine.surge.sh
 
 pilas_manuales_descargables:
 	$(call log, "Generando archivos de documentación")

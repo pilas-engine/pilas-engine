@@ -11,9 +11,6 @@ jobs:
       - run:
           name: Ejecutando test
           command: make test
-      - run:
-          name: Actualiza el manual de manual-pilas-engine.surge.sh
-          command: make pilas_manual_web
   binarios:
     docker:
       - image: circleci/node:8.16.0-stretch-browsers
@@ -44,12 +41,9 @@ jobs:
       - checkout
       - run: make iniciar
       - run: make test
-      - run:
-          name: "Realizando deploy a surge..."
-          command: make deploy_a_surge
       - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
       - run:
-          name: "Realizando deploy a dokku producción..."
+          name: "Realizando deploy a dokku producción ..."
           command: make deploy_a_dokku
   actualizar-sitio-dev:
     docker:
@@ -60,7 +54,7 @@ jobs:
       - run: make test
       - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
       - run:
-          name: "Realizando deploy a dokku dev..."
+          name: "Realizando deploy a dokku desarrollo ..."
           command: make deploy_a_dokku_dev
 workflows:
   version: 2
