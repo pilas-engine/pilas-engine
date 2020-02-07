@@ -70,12 +70,18 @@ Una opción muy solicitada a la hora de exportar juegos es poder hacerlos comple
 
 Pilas permite hacer esto mediante la herramienta que mencionamos antes llamada electron y una serie de scripts.
 
-Tomemos el ejemplo más solicitado, hagamos que nuestro juego se pueda compilar para windows y distribuirse como un archivo .exe. Lo que tenemos que hacer es ejecutar estos comandos:
+Tomemos el ejemplo más solicitado, hagamos que nuestro juego se pueda compilar para windows y distribuirse como un archivo .exe. Lo que tenemos que hacer es hacer doble click en los archivos:
+
+- instalar_dependencias.bat
+- generar_version_exe.bat
+
+o bien, abrir el comando "cmd", ingresar en el directorio del juego
+exportado y ejecutar estos comandos:
 
 ```
 npm install electron-packager --save-dev
 
-./node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32
+node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32
 ```
 
 El comando demorará unos segundos, cuando termine aparecerá un mensaje indicando que los archivos están listos:
@@ -89,7 +95,7 @@ En mi caso, los archivos se generaron en un directorio llamado "mijuego-win32-ia
 Si además de windows estás buscando llevar tu juego a otras plataformas como gnu/linux, mac/osx o raspberry también hay un parámetro para lanzar la compilación en todas las plataformas soportadas así:
 
 ```
-./node_modules/.bin/electron-packager . mijuego --all
+node_modules/.bin/electron-packager . mijuego --all
 ```
 
 Hay varios parámetros más, pero para no extendernos mucho te dejamos la [documentación detallada de electron-packager](https://github.com/electron-userland/electron-packager#usage)
@@ -121,7 +127,7 @@ cordova build ios
 
 ```
 
-y luego abrir el proyecto desde el directorio "platforms/ios" en xcode y ejecutar: 
+y luego abrir el proyecto desde el directorio "platforms/ios" en xcode y ejecutar:
 
 ![xcode](exportar_juegos.assets/xcode.png)
 
