@@ -132,7 +132,7 @@ export default Component.extend({
 
   heightParaElModoZoomEnviado: computed("modoZoom", "alto", function() {
     if (this.modoZoom === 1) {
-      return htmlSafe("100%");
+      return htmlSafe("");
     }
 
     if (this.modoZoom === 2) {
@@ -325,6 +325,10 @@ export default Component.extend({
 
     if (e.data.tipo === "termina_de_mover_un_actor") {
       this.bus.trigger(`${this.nombre_del_contexto}:termina_de_mover_un_actor`, e.data);
+    }
+
+    if (e.data.tipo === "mientras_mueve_la_camara") {
+      this.bus.trigger(`${this.nombre_del_contexto}:mientras_mueve_la_camara`, e.data);
     }
 
     if (e.data.tipo === "comienza_a_mover_un_actor") {

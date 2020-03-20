@@ -46,11 +46,13 @@ export default Controller.extend(queryParams.Mixin, {
 
   tareaCargarProyecto: task(function*(params) {
     if (params.serializado) {
-      return this.cargarProyectoDesdeQueryParams(params);
+      let proyecto = this.cargarProyectoDesdeQueryParams(params);
+      return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
     }
 
     if (params.ejemplo) {
-      return yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
+      let proyecto = yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
+      return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
     }
 
     if (params.hash) {
@@ -60,16 +62,37 @@ export default Controller.extend(queryParams.Mixin, {
         alert("Lo siento, el código de este proyecto no se puede acceder.");
         return this.router.transitionTo("index");
       } else {
-        return datos;
+        return this.migrar_proyecto_al_formato_de_la_version_actual(datos);
       }
     }
 
     if (params.ruta) {
-      return yield this.cargar_proyecto_desde_ruta_archivo.perform(params.ruta);
+      let proyecto = yield this.cargar_proyecto_desde_ruta_archivo.perform(params.ruta);
+      return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
     }
 
-    return this.crearProyectoInicial();
+    let proyecto = this.crearProyectoInicial();
+    return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
   }),
+
+  /**
+   * Adapta el código del proyecto a esta versión asumiendo que se
+   * pudo haber creado con una versión anterior de pilas. Este código
+   * de migración o migraciones se ejecutará siempre que se abra
+   * un proyecto.
+   */
+  migrar_proyecto_al_formato_de_la_version_actual(proyecto) {
+    // Migración 2020-03-19: hacer que las escenas tengan definida el area
+    //                       del escenario.
+    proyecto.get("escenas").forEach(escena => {
+      if (!escena.get("ancho")) {
+        escena.set("ancho", 1000);
+        escena.set("alto", 1000);
+      }
+    });
+
+    return proyecto;
+  },
 
   reset(_, isExiting) {
     if (isExiting) {

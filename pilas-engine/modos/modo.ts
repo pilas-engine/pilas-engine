@@ -20,6 +20,13 @@ class Modo extends Phaser.Scene {
     this.ancho = ancho;
     this.alto = alto;
 
+    this.crear_indicadores_de_rendimiento_fps();
+
+    this.crear_canvas_de_depuracion();
+    this.pilas = datos.pilas;
+  }
+
+  crear_indicadores_de_rendimiento_fps() {
     this.fps = this.add.bitmapText(5, 10, "impact", "");
     this.fps.scrollFactorX = 0;
     this.fps.scrollFactorY = 0;
@@ -28,8 +35,8 @@ class Modo extends Phaser.Scene {
     this.fps_extra.scrollFactorX = 0;
     this.fps_extra.scrollFactorY = 0;
 
-    this.crear_canvas_de_depuracion();
-    this.pilas = datos.pilas;
+    this.fps.depth = 999999;
+    this.fps_extra.depth = 999999;
   }
 
   destacar_actor_por_id(id) {
@@ -72,19 +79,6 @@ class Modo extends Phaser.Scene {
         this.fps_extra.alpha = 0;
       }
     }
-
-    this.posicionar_fondo();
-  }
-
-  posicionar_fondo() {
-    let posicion_de_la_camara = this.obtener_posicion_de_la_camara();
-    if (this.fondo) {
-      this.fondo.x = posicion_de_la_camara.x;
-      this.fondo.y = posicion_de_la_camara.y;
-
-      this.fondo.tilePositionX = posicion_de_la_camara.x;
-      this.fondo.tilePositionY = posicion_de_la_camara.y;
-    }
   }
 
   obtener_posicion_de_la_camara() {
@@ -93,29 +87,35 @@ class Modo extends Phaser.Scene {
     return { x, y };
   }
 
-  crear_fondo(fondo) {
+  crear_fondo(fondo, ancho = null, alto = null) {
     this._nombre_del_fondo = fondo;
     this.pilas.utilidades.validar_que_existe_imagen(fondo);
+
+    // Espera el tamaño de escenario de la escena, pero si no
+    // se define una el area de pantalla del proyecto.
+    ancho = ancho || this.ancho;
+    alto = alto || this.alto;
 
     // TODO: reemplazar por una función propia que obtenga la galería
     if (fondo.indexOf(":") > -1) {
       let g = fondo.split(":")[0];
       let i = fondo.split(":")[1];
 
-      this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, g, i);
+      this.fondo = this.add.tileSprite(0, 0, ancho, alto, g, i);
     } else {
-      this.fondo = this.add.tileSprite(0, 0, this.ancho, this.alto, fondo);
+      this.fondo = this.add.tileSprite(0, 0, ancho, alto, fondo);
     }
 
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
   }
 
-  cambiar_fondo(fondo) {
+  cambiar_fondo(fondo, ancho = null, alto = null) {
+    // Este método se re-define en la clase modo_editor
     if (fondo !== this._nombre_del_fondo) {
       this.fondo.destroy();
       this.fondo = null;
-      this.crear_fondo(fondo);
+      this.crear_fondo(fondo, ancho, alto);
     }
   }
 
@@ -296,6 +296,7 @@ class Modo extends Phaser.Scene {
   }
 
   posicionar_la_camara(datos_de_la_escena) {
+    // Este método se sobre-escribe en modo_editor
     this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
   }
 

@@ -47,7 +47,7 @@ export default Component.extend({
   }),
 
   didInsertElement() {
-    this.set("lista_de_eventos", ["finaliza_carga", "error", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
+    this.set("lista_de_eventos", ["finaliza_carga", "error", "mientras_mueve_la_camara", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
@@ -156,6 +156,12 @@ export default Component.extend({
 
     actor.set("x", datos.x);
     actor.set("y", datos.y);
+  },
+
+  mientras_mueve_la_camara(datos) {
+    let escena = this.obtener_la_escena_actual();
+    escena.set("camara_x", datos.x);
+    escena.set("camara_y", datos.y);
   },
 
   comienza_a_mover_un_actor(datos) {
@@ -372,6 +378,8 @@ export default Component.extend({
     let escena = EmberObject.create({
       id: id,
       nombre: nombre,
+      ancho: 1000,
+      alto: 1000,
       camara_x: 0,
       camara_y: 0,
       gravedad_x: 0,

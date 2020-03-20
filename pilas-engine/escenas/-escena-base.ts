@@ -120,6 +120,8 @@ class EscenaBase {
     return {
       camara_x: this.camara.x,
       camara_y: this.camara.y,
+      ancho: this.ancho,
+      alto: this.alto,
       fondo: this.fondo
     };
   }

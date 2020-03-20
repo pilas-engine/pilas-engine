@@ -363,7 +363,7 @@ class ModoEjecucion extends Modo {
     let escena = this.obtener_escena_por_nombre(nombre);
 
     if (escena.fondo) {
-      this.crear_fondo(escena.fondo);
+      this.crear_fondo(escena.fondo, escena.ancho, escena.alto);
     } else {
       console.warn("Cuidado, la escena no tiene un fondo definido");
     }
@@ -383,6 +383,8 @@ class ModoEjecucion extends Modo {
     escena.camara.x = datos_de_la_escena.camara_x;
     escena.camara.y = datos_de_la_escena.camara_y;
     escena.fondo = datos_de_la_escena.fondo;
+    escena.ancho = datos_de_la_escena.ancho;
+    escena.alto = datos_de_la_escena.alto;
 
     if (datos_de_la_escena.gravedad_x !== undefined) {
       escena.gravedad_x = datos_de_la_escena.gravedad_x;

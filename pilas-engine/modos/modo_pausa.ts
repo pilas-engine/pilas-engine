@@ -13,6 +13,7 @@ class ModoPausa extends Modo {
 
   tecla_izquierda: any;
   tecla_derecha: any;
+  fondo_anterior: any = null;
 
   constructor() {
     super({ key: "ModoPausa" });
@@ -28,7 +29,8 @@ class ModoPausa extends Modo {
     this.sprites = [];
 
     let foto = this.pilas.historia.obtener_foto(1);
-    this.crear_fondo(foto.escena.fondo);
+
+    this.crear_fondo(foto.escena.fondo, foto.escena.ancho, foto.escena.alto);
 
     this.crear_sprites_desde_historia(this.posicion);
 
@@ -101,8 +103,6 @@ class ModoPausa extends Modo {
     if (this.tecla_izquierda.isDown) {
       this.retroceder_posicion();
     }
-
-    this.posicionar_fondo();
   }
 
   crear_sprite_desde_entidad(entidad) {

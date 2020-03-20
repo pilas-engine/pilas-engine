@@ -1076,6 +1076,8 @@ declare class EscenaBase {
     serializar(): {
         camara_x: number;
         camara_y: number;
+        ancho: any;
+        alto: any;
         fondo: string;
     };
     pre_actualizar(): void;
@@ -1568,16 +1570,16 @@ declare class Modo extends Phaser.Scene {
     es_modo_ejecucion: boolean;
     constructor(data: any);
     create(datos: any, ancho: any, alto: any): void;
+    crear_indicadores_de_rendimiento_fps(): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
     update(actores: any): void;
-    posicionar_fondo(): void;
     obtener_posicion_de_la_camara(): {
         x: any;
         y: any;
     };
-    crear_fondo(fondo: any): void;
-    cambiar_fondo(fondo: any): void;
+    crear_fondo(fondo: any, ancho?: any, alto?: any): void;
+    cambiar_fondo(fondo: any, ancho?: any, alto?: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     obtener_imagen_para_nineslice(imagen: any): any;
@@ -1603,11 +1605,28 @@ declare class ModoCargador extends Modo {
 }
 declare class ModoEditor extends Modo {
     pilas: Pilas;
+    minimap: Phaser.Cameras.Scene2D.Camera;
+    sprite_borde_de_la_camara: Phaser.GameObjects.Sprite;
+    posicion_anterior_de_arrastre: any;
     constructor();
     preload(): void;
     create(datos: any): void;
+    crear_minimap(escena: any): void;
+    crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }: {
+        camara_x: any;
+        camara_y: any;
+    }): void;
+    hacer_que_el_fondo_se_pueda_arrastrar(): void;
+    aplicar_limites_a_la_camara(escena: any): void;
     private conectar_movimiento_del_mouse;
-    crear_manejadores_para_hacer_arrastrables_los_actores(): void;
+    crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara(): void;
+    desplazar_la_camara_desde_el_evento_drag(pointer: any): void;
+    actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento?: boolean): void;
+    desplazar_actor_desde_el_evento_drag(gameObject: any, dragX: any, dragY: any): void;
+    obtener_posicion_de_desplazamiento_de_la_camara(): {
+        x: number;
+        y: number;
+    };
     crear_actores_desde_los_datos_de_la_escena(escena: any): void;
     crear_sprite_desde_actor(actor: any): void;
     private crear_destello;
@@ -1615,6 +1634,8 @@ declare class ModoEditor extends Modo {
     aplicar_atributos_de_actor_a_sprite(actor: any, sprite: any): void;
     update(): void;
     eliminar_actor_por_id(id: any): void;
+    posicionar_la_camara(datos_de_la_escena: any): void;
+    cambiar_fondo(fondo: any): void;
 }
 declare const ACTIVAR_MODO_FISICA_EN_EJECUCION = false;
 declare class ModoEjecucion extends Modo {
@@ -1672,6 +1693,7 @@ declare class ModoPausa extends Modo {
     total: number;
     tecla_izquierda: any;
     tecla_derecha: any;
+    fondo_anterior: any;
     constructor();
     preload(): void;
     create(datos: any): void;

@@ -46,6 +46,8 @@ export default {
     {
       nombre: "escena1",
       id: 1,
+      ancho: 1000,
+      alto: 1000,
       camara_x: 0,
       camara_y: 0,
       gravedad_x: 0,
@@ -192,8 +194,12 @@ export default {
     {
       nombre: "escena2",
       id: 2,
+      ancho: 1000,
+      alto: 1000,
       camara_x: 0,
       camara_y: 0,
+      gravedad_x: 0,
+      gravedad_y: 1,
       fondo: "imagenes:fondos/fondo-plano",
       actores: []
     }

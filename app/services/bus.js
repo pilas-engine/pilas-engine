@@ -30,6 +30,7 @@ import Service from "@ember/service";
  * - se_actualiza_el_log
  * - selecciona_actor_desde_el_editor
  * - termina_de_mover_un_actor
+ * - mientras_mueve_la_camara
  * - plegar_codigo
  * - expandir_codigo
  *

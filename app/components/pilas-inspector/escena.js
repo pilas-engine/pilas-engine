@@ -5,6 +5,22 @@ export default Component.extend({
     this.set("propiedades", [
       {
         tipo: "separador",
+        nombre: "Escenario"
+      },
+      {
+        tipo: "numero",
+        propiedad: "ancho",
+        intensidad: 1,
+        min: 500
+      },
+      {
+        tipo: "numero",
+        propiedad: "alto",
+        intensidad: 1,
+        min: 500
+      },
+      {
+        tipo: "separador",
         nombre: "Cámara"
       },
       {
