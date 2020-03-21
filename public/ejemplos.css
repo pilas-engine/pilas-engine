@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:13086956d48e159abaa5c84a04c4eb95:e4b901a4d7978e4f96ed2270611d7546:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:e714788fe838961634ba8cea331fb425:fa8d6b911860b1caa02cb91649b6408e:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -15,26 +15,27 @@
 .capturas-acceder-a-actores {width:180px; height:140px; background-position: -183px -1px}
 .capturas-angulo {width:180px; height:140px; background-position: -183px -143px}
 .capturas-angulo-entre-actores {width:180px; height:140px; background-position: -1px -142px}
-.capturas-aprender-y-olvidar {width:180px; height:140px; background-position: -1px -284px}
-.capturas-arkanoid {width:180px; height:140px; background-position: -183px -285px}
-.capturas-arrastrables {width:180px; height:140px; background-position: -1px -426px}
-.capturas-azar {width:180px; height:140px; background-position: -183px -427px}
-.capturas-camara-seguir-clicks {width:180px; height:140px; background-position: -1px -568px}
-.capturas-click {width:180px; height:140px; background-position: -183px -569px}
-.capturas-click_actor {width:180px; height:140px; background-position: -1px -710px}
-.capturas-controles {width:180px; height:140px; background-position: -183px -711px}
-.capturas-cuando-pulsa-tecla {width:180px; height:140px; background-position: -1px -852px}
-.capturas-cursores {width:180px; height:140px; background-position: -183px -853px}
-.capturas-dos-jugadores {width:180px; height:140px; background-position: -1px -994px}
-.capturas-ejemplo-nave {width:180px; height:140px; background-position: -183px -995px}
+.capturas-apilador-de-cajas {width:180px; height:140px; background-position: -1px -284px}
+.capturas-aprender-y-olvidar {width:180px; height:140px; background-position: -183px -285px}
+.capturas-arkanoid {width:180px; height:140px; background-position: -1px -426px}
+.capturas-arrastrables {width:180px; height:140px; background-position: -183px -427px}
+.capturas-azar {width:180px; height:140px; background-position: -1px -568px}
+.capturas-camara-seguir-clicks {width:180px; height:140px; background-position: -183px -569px}
+.capturas-click {width:180px; height:140px; background-position: -1px -710px}
+.capturas-click_actor {width:180px; height:140px; background-position: -183px -711px}
+.capturas-controles {width:180px; height:140px; background-position: -1px -852px}
+.capturas-cuando-pulsa-tecla {width:180px; height:140px; background-position: -183px -853px}
+.capturas-cursores {width:180px; height:140px; background-position: -1px -994px}
+.capturas-dos-jugadores {width:180px; height:140px; background-position: -183px -995px}
+.capturas-ejemplo-nave {width:180px; height:140px; background-position: -1px -1136px}
 .capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -1px -1px}
-.capturas-flappy {width:180px; height:140px; background-position: -1px -1136px}
-.capturas-gravedad {width:180px; height:140px; background-position: -183px -1137px}
-.capturas-huesos {width:180px; height:140px; background-position: -1px -1278px}
-.capturas-laser-y-misil {width:180px; height:140px; background-position: -183px -1279px}
-.capturas-mensaje_global {width:180px; height:140px; background-position: -1px -1420px}
-.capturas-nave_contra_aliens {width:180px; height:140px; background-position: -183px -1421px}
-.capturas-nubes {width:180px; height:140px; background-position: -1px -1562px}
-.capturas-pacman {width:180px; height:140px; background-position: -183px -1563px}
-.capturas-plataformas {width:180px; height:140px; background-position: -1px -1704px}
-.capturas-temporizadores {width:180px; height:140px; background-position: -183px -1705px}
+.capturas-flappy {width:180px; height:140px; background-position: -183px -1137px}
+.capturas-gravedad {width:180px; height:140px; background-position: -1px -1278px}
+.capturas-huesos {width:180px; height:140px; background-position: -183px -1279px}
+.capturas-laser-y-misil {width:180px; height:140px; background-position: -1px -1420px}
+.capturas-mensaje_global {width:180px; height:140px; background-position: -183px -1421px}
+.capturas-nave_contra_aliens {width:180px; height:140px; background-position: -1px -1562px}
+.capturas-nubes {width:180px; height:140px; background-position: -183px -1563px}
+.capturas-pacman {width:180px; height:140px; background-position: -1px -1704px}
+.capturas-plataformas {width:180px; height:140px; background-position: -183px -1705px}
+.capturas-temporizadores {width:180px; height:140px; background-position: -1px -1846px}

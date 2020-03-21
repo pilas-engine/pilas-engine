@@ -12,6 +12,8 @@ class EscenaBase {
   _actor_visor_observables: any;
   _sonidos_para_reproducir: any[];
   _sonidos_en_reproduccion: any;
+  ancho: number;
+  alto: number;
 
   constructor(pilas) {
     this.pilas = pilas;

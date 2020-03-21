@@ -1526,7 +1526,10 @@ var Utilidades = (function () {
         }
     };
     Utilidades.prototype.es_animacion = function (valor) {
-        return Array.isArray(valor) && valor.every(function (e) { return Number.isInteger(e); });
+        return (Array.isArray(valor) &&
+            valor.every(function (e) {
+                return typeof e === "number";
+            }));
     };
     Utilidades.prototype.convertir_angulo_a_radianes = function (grados) {
         return (grados * Math.PI) / 180;

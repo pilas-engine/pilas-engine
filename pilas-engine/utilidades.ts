@@ -40,7 +40,12 @@ class Utilidades {
   }
 
   es_animacion(valor: any) {
-    return Array.isArray(valor) && valor.every(e => Number.isInteger(e));
+    return (
+      Array.isArray(valor) &&
+      valor.every(e => {
+        return typeof e === "number";
+      })
+    );
   }
 
   convertir_angulo_a_radianes(grados: number) {

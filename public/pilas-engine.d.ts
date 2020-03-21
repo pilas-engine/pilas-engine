@@ -1065,6 +1065,8 @@ declare class EscenaBase {
     _actor_visor_observables: any;
     _sonidos_para_reproducir: any[];
     _sonidos_en_reproduccion: any;
+    ancho: number;
+    alto: number;
     constructor(pilas: any);
     reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
@@ -1076,8 +1078,8 @@ declare class EscenaBase {
     serializar(): {
         camara_x: number;
         camara_y: number;
-        ancho: any;
-        alto: any;
+        ancho: number;
+        alto: number;
         fondo: string;
     };
     pre_actualizar(): void;

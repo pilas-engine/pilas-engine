@@ -1,103 +1,107 @@
 {
-	"ejemplos": [
-		{
-			"nombre": "nubes"
-		},
-		{
-			"nombre": "plataformas"
-		},
-		{
-			"nombre": "ejemplo-nave"
-		},
-		{
-			"nombre": "click"
-		},
-		{
-			"nombre": "click_actor"
-		},
-		{
-			"nombre": "gravedad",
-			"desde": "2.0.74"
-		},
-		{
-			"nombre": "arrastrables",
-			"desde": "2.0.74"
-		},
-		{
-			"nombre": "cursores",
-			"desde": "2.0.77"
-		},
-		{
-			"nombre": "azar",
-			"desde": "2.0.77"
-		},
-		{
-			"nombre": "angulo",
-			"desde": "2.0.77"
-		},
-		{
-			"nombre": "angulo-entre-actores",
-			"desde": "2.0.77"
-		},
-		{
-			"nombre": "controles",
-			"desde": "2.0.78"
-		},
-		{
-			"nombre": "flappy",
-			"desde": "2.0.78"
-		},
-		{
-			"nombre": "huesos",
-			"desde": "2.0.79"
-		},
-		{
-			"nombre": "explosion_al_colisionar",
-			"desde": "2.0.84"
-		},
-		{
-			"nombre": "nave_contra_aliens",
-			"desde": "2.0.90"
-		},
-		{
-			"nombre": "aprender-y-olvidar",
-			"desde": "2.0.91"
-		},
-		{
-			"nombre": "temporizadores",
-			"desde": "2.0.91"
-		},
-		{
-			"nombre": "laser-y-misil",
-			"desde": "2.0.92"
-		},
-		{
-			"nombre": "pacman",
-			"desde": "2.0.92"
-		},
-		{
-			"nombre": "cuando-pulsa-tecla",
-			"desde": "2.0.92"
-		},
-		{
-			"nombre": "dos-jugadores",
-			"desde": "2.0.92"
-		},
-		{
-			"nombre": "camara-seguir-clicks",
-			"desde": "2.0.92"
-		},
-		{
-			"nombre": "arkanoid",
-			"desde": "2.0.92"
-		},
-		{
-			"nombre": "mensaje_global",
-			"desde": "2.0.92"
-		},
-		{
-			"nombre": "acceder-a-actores",
-			"desde": "2.0.93"
-		}
-	]
+  "ejemplos": [
+    {
+      "nombre": "nubes"
+    },
+    {
+      "nombre": "plataformas"
+    },
+    {
+      "nombre": "ejemplo-nave"
+    },
+    {
+      "nombre": "click"
+    },
+    {
+      "nombre": "click_actor"
+    },
+    {
+      "nombre": "gravedad",
+      "desde": "2.0.74"
+    },
+    {
+      "nombre": "arrastrables",
+      "desde": "2.0.74"
+    },
+    {
+      "nombre": "cursores",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "azar",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "angulo",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "angulo-entre-actores",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "controles",
+      "desde": "2.0.78"
+    },
+    {
+      "nombre": "flappy",
+      "desde": "2.0.78"
+    },
+    {
+      "nombre": "huesos",
+      "desde": "2.0.79"
+    },
+    {
+      "nombre": "explosion_al_colisionar",
+      "desde": "2.0.84"
+    },
+    {
+      "nombre": "nave_contra_aliens",
+      "desde": "2.0.90"
+    },
+    {
+      "nombre": "aprender-y-olvidar",
+      "desde": "2.0.91"
+    },
+    {
+      "nombre": "temporizadores",
+      "desde": "2.0.91"
+    },
+    {
+      "nombre": "laser-y-misil",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "pacman",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "cuando-pulsa-tecla",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "dos-jugadores",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "camara-seguir-clicks",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "arkanoid",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "mensaje_global",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "acceder-a-actores",
+      "desde": "2.0.93"
+    },
+    {
+      "nombre": "apilador-de-cajas",
+      "desde": "2.0.94"
+    }
+  ]
 }
