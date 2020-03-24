@@ -54,6 +54,7 @@ declare class Automata {
 declare class Camara {
     pilas: Pilas;
     constructor(pilas: Pilas);
+    seguir_al_actor(actor: Actor, suavidad?: number, ignorar_limites?: boolean): void;
     readonly camara_principal: any;
     vibrar(intensidad?: number, tiempo?: number): void;
     x: number;

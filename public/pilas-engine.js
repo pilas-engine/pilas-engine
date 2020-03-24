@@ -226,6 +226,18 @@ var Camara = (function () {
     function Camara(pilas) {
         this.pilas = pilas;
     }
+    Camara.prototype.seguir_al_actor = function (actor, suavidad, ignorar_limites) {
+        if (suavidad === void 0) { suavidad = 10; }
+        if (ignorar_limites === void 0) { ignorar_limites = false; }
+        var dx = actor.x - this.pilas.camara.x;
+        var dy = actor.y - this.pilas.camara.y;
+        this.pilas.camara.x += dx / suavidad;
+        this.pilas.camara.y += dy / suavidad;
+        if (!ignorar_limites) {
+            this.pilas.camara.x = Math.max(this.pilas.camara.x, 0);
+            this.pilas.camara.y = Math.min(this.pilas.camara.y, 0);
+        }
+    };
     Object.defineProperty(Camara.prototype, "camara_principal", {
         get: function () {
             return this.pilas.modo.cameras.main;
