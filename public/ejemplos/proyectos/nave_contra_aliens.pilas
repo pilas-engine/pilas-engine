@@ -41,7 +41,7 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondos/fondo-espacio_1",
+      "fondo": "decoracion:fondos/fondo-espacio_1",
       "actores": [
         {
           "x": 17.034068136272538,
@@ -175,7 +175,7 @@
       "id": 2,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondos/fondo-plano",
+      "fondo": "decoracion:fondos/fondo-plano",
       "actores": []
     }
   ],

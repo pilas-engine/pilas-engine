@@ -1,2 +1,5 @@
 Estas imágenes se construyen automáticamente ejecutando el
 comando: make actualizar_grilla_de_imagenes
+
+El objetivo de ese script es replicar todas las imágenes
+de pilas en este directorio pero hechas miniaturas.

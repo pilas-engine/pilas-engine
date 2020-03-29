@@ -117,12 +117,12 @@
     },
     {
       "nombre": "nube",
-      "codigo": "class nube extends Actor {\n  propiedades = {\n    imagen: \"imagenes:decoracion/nube\"\n  };\n\n  iniciar() {}\n}\n",
+      "codigo": "class nube extends Actor {\n  propiedades = {\n    imagen: \"decoracion:objetos/nube\"\n  };\n\n  iniciar() {}\n}\n",
       "archivo": "nube.ts"
     },
     {
       "nombre": "nube_animada",
-      "codigo": "class nube_animada extends Actor {\n  propiedades = {\n    imagen: \"imagenes:decoracion/decoracion_nube_1\",\n    z: 30\n  };\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 2;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n",
+      "codigo": "class nube_animada extends Actor {\n  propiedades = {\n    imagen: \"decoracion:objetos/decoracion_nube_1\",\n    z: 30\n  };\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 2;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n",
       "archivo": "nube_animada.ts"
     },
     {

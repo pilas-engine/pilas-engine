@@ -142,7 +142,7 @@ export default Component.extend({
           id: 1,
           camara_x: 0,
           camara_y: 0,
-          fondo: "imagenes:fondos/fondo-plano",
+          fondo: "decoracion:fondos/fondo-plano",
           actores: []
         }
       ]

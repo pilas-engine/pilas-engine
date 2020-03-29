@@ -17,6 +17,8 @@ class ModoCargador extends Modo {
     this.crear_indicador_de_carga();
 
     this.load.multiatlas("imagenes", "imagenes.json", "./");
+    this.load.multiatlas("bloques", "bloques.json", "./");
+    this.load.multiatlas("decoracion", "decoracion.json", "./");
 
     for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
       let sonido = this.pilas.recursos.sonidos[i];

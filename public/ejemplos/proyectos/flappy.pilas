@@ -69,7 +69,7 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondos/fondo-cielo",
+      "fondo": "decoracion:fondos/fondo-cielo",
       "actores": [
         {
           "activo": true,
@@ -309,7 +309,7 @@
           "x": 299,
           "y": 189,
           "z": 30,
-          "imagen": "imagenes:decoracion/decoracion_nube_1",
+          "imagen": "decoracion:objetos/decoracion_nube_1",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -340,7 +340,7 @@
           "x": 105,
           "y": -146,
           "z": 30,
-          "imagen": "imagenes:decoracion/decoracion_nube_1",
+          "imagen": "decoracion:objetos/decoracion_nube_1",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -371,7 +371,7 @@
           "x": -169,
           "y": 125,
           "z": 30,
-          "imagen": "imagenes:decoracion/decoracion_nube_1",
+          "imagen": "decoracion:objetos/decoracion_nube_1",
           "centro_x": 0.5,
           "centro_y": 0.5,
           "rotacion": 0,
@@ -405,7 +405,7 @@
       "id": 2,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondos/fondo-plano",
+      "fondo": "decoracion:fondos/fondo-plano",
       "actores": []
     }
   ]

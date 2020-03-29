@@ -3959,7 +3959,7 @@ var nube = (function (_super) {
     function nube() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:decoracion/nube"
+            imagen: "decoracion:objetos/nube"
         };
         return _this;
     }
@@ -3971,7 +3971,7 @@ var nube_animada = (function (_super) {
     function nube_animada() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:decoracion/decoracion_nube_1",
+            imagen: "decoracion:objetos/decoracion_nube_1",
             z: 30
         };
         return _this;
@@ -6962,6 +6962,8 @@ var ModoCargador = (function (_super) {
         this.contador = 0;
         this.crear_indicador_de_carga();
         this.load.multiatlas("imagenes", "imagenes.json", "./");
+        this.load.multiatlas("bloques", "bloques.json", "./");
+        this.load.multiatlas("decoracion", "decoracion.json", "./");
         for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
             var sonido = this.pilas.recursos.sonidos[i];
             this.load.audio(sonido.nombre, sonido.ruta, {});
@@ -7332,6 +7334,8 @@ var ModoEditor = (function (_super) {
         this.actores.map(function (a) {
             a.update();
         });
+        this.minimap.y = this.scale.baseSize.height - 75;
+        this.minimap.x = this.scale.baseSize.width - 105;
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
         var indice = this.actores.findIndex(function (e) { return e.id === id; });

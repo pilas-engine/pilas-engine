@@ -458,7 +458,7 @@
       "id": 2,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondos/fondo-madera",
+      "fondo": "decoracion:fondos/fondo-madera",
       "actores": [
         {
           "x": 0,
@@ -628,7 +628,7 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondos/fondo-plano",
+      "fondo": "decoracion:fondos/fondo-plano",
       "actores": [
         {
           "x": 0,
@@ -735,7 +735,7 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondos/fondo-plano",
+      "fondo": "decoracion:fondos/fondo-plano",
       "actores": [
         {
           "x": 0,

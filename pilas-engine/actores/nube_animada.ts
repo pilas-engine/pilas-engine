@@ -1,6 +1,6 @@
 class nube_animada extends Actor {
   propiedades = {
-    imagen: "imagenes:decoracion/decoracion_nube_1",
+    imagen: "decoracion:objetos/decoracion_nube_1",
     z: 30
   };
 

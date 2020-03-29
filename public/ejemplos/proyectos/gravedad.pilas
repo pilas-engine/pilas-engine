@@ -93,7 +93,7 @@
       "camara_y": 0,
       "gravedad_x": 0,
       "gravedad_y": 1,
-      "fondo": "imagenes:fondos/fondo-espacio_2",
+      "fondo": "decoracion:fondos/fondo-espacio_2",
       "actores": [
         {
           "x": -50.919354838709666,

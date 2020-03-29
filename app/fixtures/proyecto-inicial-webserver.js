@@ -37,7 +37,7 @@ export default {
         camara_y: 0,
         gravedad_x: 0,
         gravedad_y: 1,
-        fondo: "imagenes:fondos/fondo-plano",
+        fondo: "decoracion:fondos/fondo-plano",
         actores: [
           {
             x: 0,

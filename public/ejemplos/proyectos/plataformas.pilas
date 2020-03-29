@@ -83,7 +83,7 @@
       "id": 1,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondos/fondo-cielo",
+      "fondo": "decoracion:fondos/fondo-cielo",
       "actores": [
         {
           "x": -64,

@@ -442,7 +442,7 @@
       "id": 2,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondos/fondo-plano",
+      "fondo": "decoracion:fondos/fondo-plano",
       "actores": [
         {
           "x": -1,

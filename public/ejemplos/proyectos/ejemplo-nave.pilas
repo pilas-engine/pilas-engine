@@ -23,7 +23,7 @@
       "id": 1,
       "camara_x": 0,
       "camara_y": 0,
-      "fondo": "imagenes:fondos/fondo-espacio_1",
+      "fondo": "decoracion:fondos/fondo-espacio_1",
       "actores": [
         {
           "x": 0,

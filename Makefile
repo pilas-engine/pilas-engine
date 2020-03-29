@@ -268,7 +268,11 @@ corregir_phaser_js:
 	python3 scripts/patch.py
 
 actualizar_imagenes:
-	$(call log, "Actualizando grillas")
+	$(call log, "Creando spritesheets de imágenes de pilas")
+	TexturePacker recursos/imagenes.tps
+	TexturePacker recursos/bloques.tps
+	TexturePacker recursos/decoracion.tps
+	$(call log, "Actualizando grillas para poder previsualizar imágenes en el editor.")
 	@node scripts/actualizar-imagenes.js
 	$(call log, "Copiando animaciones de huesos")
 	@cp recursos/huesos/robot/robot.scon public
@@ -276,7 +280,6 @@ actualizar_imagenes:
 	$(call log, "Creando spritesheets de imágenes")
 	TexturePacker recursos/iconos.tps
 	TexturePacker recursos/ejemplos.tps
-	TexturePacker recursos/imagenes.tps
 	TexturePacker recursos/grilla-imagenes.tps
 	TexturePacker recursos/huesos/robot.tps
 	TexturePacker recursos/huesos/ceferino.tps
