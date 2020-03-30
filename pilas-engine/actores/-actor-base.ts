@@ -1122,4 +1122,8 @@ class ActorBase {
   enviar_mensaje_global(mensaje: string, datos: any = {}) {
     this.pilas.enviar_mensaje_global(mensaje, datos);
   }
+
+  get camara() {
+    return this.pilas.camara;
+  }
 }
