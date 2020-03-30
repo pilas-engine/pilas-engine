@@ -24,7 +24,7 @@ const queryParams = new QueryParams({
   permitir_modo_pausa: { defaultValue: true, replace: true },
   oscuro: { defaultValue: true, replace: true },
   modoVim: { defaultValue: false, replace: true },
-  modoZoom: { defaultValue: 2, replace: true },
+  modoZoom: { defaultValue: 1, replace: true },
   pixelart: { defaultValue: false, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true },
   hash: { defaultValue: null, replace: true, refresh: true },
