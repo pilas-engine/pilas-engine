@@ -432,6 +432,11 @@ export default Component.extend({
       actor.propiedades.id = id;
       actor.propiedades.imagen = actor.imagen || "sin_imagen";
 
+      if (!actor.propiedades.x && !actor.propiedades.y) {
+        actor.propiedades.x = escena.get("camara_x");
+        actor.propiedades.y = escena.get("camara_y");
+      }
+
       actor.propiedades.activo = true;
       actor.propiedades.nombre = nombre;
       actor.propiedades.habilidades = [];
