@@ -135,6 +135,10 @@ class ModoPausa extends Modo {
     sprite.setFlipY(entidad.espejado_vertical);
     sprite.depth = -entidad.z;
 
+    if (entidad.fijo) {
+      sprite.setScrollFactor(0, 0);
+    }
+
     if (entidad.texto) {
       sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
       sprite["texto"].setFontFamily("verdana");
@@ -165,6 +169,14 @@ class ModoPausa extends Modo {
         sprite["fondo"].x += 30 * sprite["texto"].originX - 30 * 0.5;
         sprite["fondo"].y += 30 * sprite["texto"].originY - 30 * 0.5;
         sprite["fondo"].setOrigin(sprite["texto"].originX, sprite["texto"].originY);
+
+        if (entidad.fijo) {
+          sprite["fondo"].setScrollFactor(0, 0);
+        }
+      }
+
+      if (entidad.fijo) {
+        sprite["texto"].setScrollFactor(0, 0);
       }
     }
 

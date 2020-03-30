@@ -345,6 +345,8 @@ class ActorBase {
       figura_alto: this.figura_alto,
       figura_radio: this.figura_radio,
 
+      fijo: this.fijo,
+
       es_texto: this._es_texto,
       texto: texto,
       fondo: fondo,
