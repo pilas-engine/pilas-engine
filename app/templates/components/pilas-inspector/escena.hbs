@@ -1,39 +1,37 @@
-{{#ui/panel-arrastrable}}
-  {{pilas-propiedad/nombre
-      nombre=instancia_seleccionada.nombre
-      objeto=instancia_seleccionada
-      cuando_cambia=cuando_cambia_un_nombre_de_escena
-  }}
+{{pilas-propiedad/nombre
+    nombre=instancia_seleccionada.nombre
+    objeto=instancia_seleccionada
+    cuando_cambia=cuando_cambia_un_nombre_de_escena
+}}
 
-  {{#each propiedades as |propiedad|}}
+{{#each propiedades as |propiedad|}}
 
-    <div class="pb1">
+  <div class="pb1">
 
-      {{#if (eq propiedad.tipo "numero")}}
+    {{#if (eq propiedad.tipo "numero")}}
 
-        {{pilas-propiedad/numero objeto=instancia_seleccionada
-            min=propiedad.min
-            max=propiedad.max
-            propiedad=propiedad intensidad=propiedad.intensidad
-            modificarAtributo=cuando_modifica_atributo_de_escena}}
+      {{pilas-propiedad/numero objeto=instancia_seleccionada
+          min=propiedad.min
+          max=propiedad.max
+          propiedad=propiedad intensidad=propiedad.intensidad
+          modificarAtributo=cuando_modifica_atributo_de_escena}}
 
-      {{else if (eq propiedad.tipo "imagen")}}
+    {{else if (eq propiedad.tipo "imagen")}}
 
-        {{pilas-propiedad/imagen objeto=instancia_seleccionada
-            propiedad=propiedad
-            filtroPropuesto=propiedad.filtroPropuesto
-            modificarAtributo=cuando_modifica_atributo_de_escena}}
+      {{pilas-propiedad/imagen objeto=instancia_seleccionada
+          propiedad=propiedad
+          filtroPropuesto=propiedad.filtroPropuesto
+          modificarAtributo=cuando_modifica_atributo_de_escena}}
 
-      {{else if (eq propiedad.tipo "separador")}}
+    {{else if (eq propiedad.tipo "separador")}}
 
-        {{pilas-propiedad/separador propiedad=propiedad}}
+      {{pilas-propiedad/separador propiedad=propiedad}}
 
-      {{else}}
+    {{else}}
 
-        <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
+      <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
 
-      {{/if}}
+    {{/if}}
 
-    </div>
-  {{/each}}
-{{/ui/panel-arrastrable}}
+  </div>
+{{/each}}

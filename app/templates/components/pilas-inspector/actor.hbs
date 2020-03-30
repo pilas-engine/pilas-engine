@@ -1,74 +1,72 @@
-{{#ui/panel-arrastrable}}
-  {{pilas-propiedad/nombre
-      es_actor=true
-      cuando_cambia=cuando_cambia_un_nombre_de_actor
-      objeto=instancia_seleccionada
-      nombre=instancia_seleccionada.nombre}}
+{{pilas-propiedad/nombre
+    es_actor=true
+    cuando_cambia=cuando_cambia_un_nombre_de_actor
+    objeto=instancia_seleccionada
+    nombre=instancia_seleccionada.nombre}}
 
-  {{#each propiedades as |propiedad|}}
+{{#each propiedades as |propiedad|}}
 
-    <div class="pb1">
+  <div class="pb1">
 
-      {{#if (eq propiedad.tipo "numero")}}
+    {{#if (eq propiedad.tipo "numero")}}
 
-        {{pilas-propiedad/numero objeto=instancia_seleccionada
-            min=propiedad.min
-            max=propiedad.max
-            propiedad=propiedad intensidad=propiedad.intensidad
-            modificarAtributo=cuando_modifica_atributo_de_actor
-          }}
-
-      {{else if (eq propiedad.tipo "interruptor")}}
-
-        {{pilas-propiedad/interruptor objeto=instancia_seleccionada
-            propiedad=propiedad
-            modificarAtributo=cuando_modifica_atributo_de_actor
+      {{pilas-propiedad/numero objeto=instancia_seleccionada
+          min=propiedad.min
+          max=propiedad.max
+          propiedad=propiedad intensidad=propiedad.intensidad
+          modificarAtributo=cuando_modifica_atributo_de_actor
         }}
 
-      {{else if (eq propiedad.tipo "combo")}}
+    {{else if (eq propiedad.tipo "interruptor")}}
 
-        {{pilas-propiedad/combo objeto=instancia_seleccionada
-            opciones=propiedad.opciones
-            propiedad=propiedad
-            modificarAtributo=cuando_modifica_atributo_de_actor
-          }}
+      {{pilas-propiedad/interruptor objeto=instancia_seleccionada
+          propiedad=propiedad
+          modificarAtributo=cuando_modifica_atributo_de_actor
+      }}
 
-      {{else if (eq propiedad.tipo "cadena")}}
+    {{else if (eq propiedad.tipo "combo")}}
 
-        {{pilas-propiedad/cadena objeto=instancia_seleccionada
-            propiedad=propiedad
-            modificarAtributo=cuando_modifica_atributo_de_actor
-          }}
+      {{pilas-propiedad/combo objeto=instancia_seleccionada
+          opciones=propiedad.opciones
+          propiedad=propiedad
+          modificarAtributo=cuando_modifica_atributo_de_actor
+        }}
 
-      {{else if (eq propiedad.tipo "imagen")}}
+    {{else if (eq propiedad.tipo "cadena")}}
 
-        {{pilas-propiedad/imagen objeto=instancia_seleccionada
-            propiedad=propiedad
-            filtroPropuesto=propiedad.filtroPropuesto
-            modificarAtributo=cuando_modifica_atributo_de_actor
-          }}
+      {{pilas-propiedad/cadena objeto=instancia_seleccionada
+          propiedad=propiedad
+          modificarAtributo=cuando_modifica_atributo_de_actor
+        }}
 
-      {{else if (eq propiedad.tipo "habilidades")}}
+    {{else if (eq propiedad.tipo "imagen")}}
 
-        {{pilas-propiedad/habilidades objeto=instancia_seleccionada
-            propiedad=propiedad
-            modificarAtributo=cuando_modifica_atributo_de_actor
-          }}
+      {{pilas-propiedad/imagen objeto=instancia_seleccionada
+          propiedad=propiedad
+          filtroPropuesto=propiedad.filtroPropuesto
+          modificarAtributo=cuando_modifica_atributo_de_actor
+        }}
 
-      {{else if (eq propiedad.tipo "separador")}}
+    {{else if (eq propiedad.tipo "habilidades")}}
 
-        {{pilas-propiedad/separador propiedad=propiedad}}
+      {{pilas-propiedad/habilidades objeto=instancia_seleccionada
+          propiedad=propiedad
+          modificarAtributo=cuando_modifica_atributo_de_actor
+        }}
 
-      {{else}}
+    {{else if (eq propiedad.tipo "separador")}}
 
-        <div class="pv2">
-          <div class="red f7">No hay manejador para '{{propiedad.propiedad}}'</div>
-          <div class="red f7">en pilas-inspector/actor.hbs</div>
-        </div>
+      {{pilas-propiedad/separador propiedad=propiedad}}
 
-      {{/if}}
+    {{else}}
 
-    </div>
+      <div class="pv2">
+        <div class="red f7">No hay manejador para '{{propiedad.propiedad}}'</div>
+        <div class="red f7">en pilas-inspector/actor.hbs</div>
+      </div>
 
-  {{/each}}
-{{/ui/panel-arrastrable}}
+    {{/if}}
+
+  </div>
+
+{{/each}}
