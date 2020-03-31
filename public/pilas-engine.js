@@ -1434,6 +1434,12 @@ var Mensajes = (function () {
             proyecto: datos.proyecto
         });
     };
+    Mensajes.prototype.atender_mensaje_definir_zoom_inicial_para_el_modo_editor = function (datos) {
+        this.pilas.modo.cameras.main.setZoom(datos.zoom);
+    };
+    Mensajes.prototype.atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual = function (datos) {
+        this.pilas.modo.cameras.main.setZoom(datos.zoom);
+    };
     Mensajes.prototype.atender_mensaje_actualizar_escena_desde_el_editor = function (datos) {
         this.pilas.modo.cambiar_fondo(datos.escena.fondo);
         this.pilas.modo.posicionar_la_camara(datos.escena);
@@ -2350,6 +2356,7 @@ var ActorBase = (function () {
             figura_ancho: this.figura_ancho,
             figura_alto: this.figura_alto,
             figura_radio: this.figura_radio,
+            fijo: this.fijo,
             es_texto: this._es_texto,
             texto: texto,
             fondo: fondo,
@@ -3095,6 +3102,13 @@ var ActorBase = (function () {
         if (datos === void 0) { datos = {}; }
         this.pilas.enviar_mensaje_global(mensaje, datos);
     };
+    Object.defineProperty(ActorBase.prototype, "camara", {
+        get: function () {
+            return this.pilas.camara;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -3132,6 +3146,12 @@ var ActorTextoBase = (function (_super) {
             this._texto.depth = this._texto.depth + 1;
             this._fondo.x += this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
             this._fondo.y += this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
+            if (this.fijo) {
+                this._fondo.setScrollFactor(0, 0);
+            }
+            else {
+                this._fondo.setScrollFactor(1, 1);
+            }
         }
     };
     ActorTextoBase.prototype.actualizar = function () { };
@@ -4213,6 +4233,7 @@ var EscenaBase = (function () {
         if (this._observables === null) {
             this._actor_visor_observables = this.pilas.actores.texto();
             this._actor_visor_observables.color = "black";
+            this._actor_visor_observables.fijo = true;
             this._actor_visor_observables.centro_x = 0;
             this._actor_visor_observables.centro_y = 0;
             this._actor_visor_observables.x = -210;
@@ -7124,8 +7145,11 @@ var ModoEditor = (function (_super) {
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.hacer_que_el_fondo_se_pueda_arrastrar();
         this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
+        this.crear_manejadores_para_controlar_el_zoom();
         this.matter.world.createDebugGraphic();
         this.conectar_movimiento_del_mouse();
+        this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
+        this.pilas.game.scale.resize(this.ancho, this.alto);
     };
     ModoEditor.prototype.crear_minimap = function (escena) {
         var game = this;
@@ -7141,9 +7165,26 @@ var ModoEditor = (function (_super) {
         this.minimap.setBackgroundColor(0x002244);
         this.minimap.scrollX = 0;
         this.minimap.scrollY = 0;
+        this.minimap.inputEnabled = false;
         this.minimap.ignore(this.fondo);
         this.minimap.ignore(this.fps);
         this.minimap.ignore(this.fps_extra);
+    };
+    ModoEditor.prototype.crear_manejadores_para_controlar_el_zoom = function () {
+        var escena = this;
+        this.input.on("wheel", function (pointer, currentlyOver, dx, dy, dz, event) {
+            var zoom = this.cameras.main.zoom;
+            if (dy > 0) {
+                zoom += 0.25;
+            }
+            else {
+                zoom -= 0.25;
+            }
+            zoom = Math.max(1, zoom);
+            zoom = Math.min(5, zoom);
+            escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
+            this.cameras.main.setZoom(zoom);
+        });
     };
     ModoEditor.prototype.crear_sprite_con_el_borde_de_la_camara = function (_a) {
         var camara_x = _a.camara_x, camara_y = _a.camara_y;
@@ -7176,10 +7217,8 @@ var ModoEditor = (function (_super) {
         var _this = this;
         var escena = this;
         this.input.on("dragstart", function (pointer, gameObject) {
-            if (gameObject["es_fondo"]) {
-                _this.posicion_anterior_de_arrastre = pointer.position.clone();
-            }
-            else {
+            _this.posicion_anterior_de_arrastre = pointer.position.clone();
+            if (!gameObject["es_fondo"]) {
                 escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
             }
             if (escena.pilas.utilidades.es_firefox()) {
@@ -7194,7 +7233,7 @@ var ModoEditor = (function (_super) {
                 _this.desplazar_la_camara_desde_el_evento_drag(pointer);
             }
             else {
-                _this.desplazar_actor_desde_el_evento_drag(gameObject, dragX, dragY);
+                _this.desplazar_actor_desde_el_evento_drag(gameObject, pointer);
             }
         });
         this.input.on("dragend", function (pointer, gameObject) {
@@ -7206,10 +7245,36 @@ var ModoEditor = (function (_super) {
         });
     };
     ModoEditor.prototype.desplazar_la_camara_desde_el_evento_drag = function (pointer) {
-        this.cameras.main.scrollX += this.posicion_anterior_de_arrastre.x - pointer.position.x;
-        this.cameras.main.scrollY += this.posicion_anterior_de_arrastre.y - pointer.position.y;
+        var zoom = this.cameras.main.zoom;
+        var factor = this.obtener_factores();
+        var dx = this.posicion_anterior_de_arrastre.x - pointer.position.x;
+        var dy = this.posicion_anterior_de_arrastre.y - pointer.position.y;
+        this.cameras.main.scrollX += dx / factor.x / zoom;
+        this.cameras.main.scrollY += dy / factor.y / zoom;
         this.posicion_anterior_de_arrastre = pointer.position.clone();
         this.actualizar_posicion_del_minimap_y_el_borde_de_camara();
+    };
+    ModoEditor.prototype.obtener_factores = function () {
+        var factor_horizontal = Math.min(1, this.ancho / this.alto);
+        var factor_vertical = Math.min(1, this.alto / this.ancho);
+        return { x: factor_horizontal, y: factor_vertical };
+    };
+    ModoEditor.prototype.desplazar_actor_desde_el_evento_drag = function (gameObject, pointer) {
+        var zoom = this.cameras.main.zoom;
+        var matter = this.pilas.Phaser.Physics.Matter.Matter;
+        var factor = this.obtener_factores();
+        var dx = (pointer.position.x - this.posicion_anterior_de_arrastre.x) / factor.x / zoom;
+        var dy = (pointer.position.y - this.posicion_anterior_de_arrastre.y) / factor.y / zoom;
+        gameObject.x += dx;
+        gameObject.y += dy;
+        if (gameObject.figura) {
+            var figura = gameObject.figura;
+            matter.Body.setPosition(figura, {
+                x: figura.position.x + dx,
+                y: figura.position.y + dy
+            });
+        }
+        this.posicion_anterior_de_arrastre = pointer.position.clone();
     };
     ModoEditor.prototype.actualizar_posicion_del_minimap_y_el_borde_de_camara = function (emitir_evento) {
         if (emitir_evento === void 0) { emitir_evento = true; }
@@ -7220,17 +7285,6 @@ var ModoEditor = (function (_super) {
         this.minimap.scrollY = y + this.alto / 2;
         if (emitir_evento) {
             this.pilas.mensajes.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x: x, y: -y });
-        }
-    };
-    ModoEditor.prototype.desplazar_actor_desde_el_evento_drag = function (gameObject, dragX, dragY) {
-        var matter = this.pilas.Phaser.Physics.Matter.Matter;
-        gameObject.x = dragX;
-        gameObject.y = dragY;
-        if (gameObject.figura) {
-            matter.Body.setPosition(gameObject.figura, {
-                x: dragX,
-                y: dragY
-            });
         }
     };
     ModoEditor.prototype.obtener_posicion_de_desplazamiento_de_la_camara = function () {
@@ -7413,12 +7467,17 @@ var ModoEjecucion = (function (_super) {
             }
             this.conectar_eventos();
             this.vincular_eventos_de_colision();
+            this.modificar_modo_de_pantalla();
         }
         catch (e) {
             console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
             this.pausar();
         }
+    };
+    ModoEjecucion.prototype.modificar_modo_de_pantalla = function () {
+        this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
+        this.pilas.game.scale.resize(this.ancho, this.alto);
     };
     ModoEjecucion.prototype.cargar_animaciones = function (datos) {
         var animaciones = datos.proyecto.animaciones;
@@ -7907,6 +7966,9 @@ var ModoPausa = (function (_super) {
         sprite.setFlipX(entidad.espejado);
         sprite.setFlipY(entidad.espejado_vertical);
         sprite.depth = -entidad.z;
+        if (entidad.fijo) {
+            sprite.setScrollFactor(0, 0);
+        }
         if (entidad.texto) {
             sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
             sprite["texto"].setFontFamily("verdana");
@@ -7931,6 +7993,12 @@ var ModoPausa = (function (_super) {
                 sprite["fondo"].x += 30 * sprite["texto"].originX - 30 * 0.5;
                 sprite["fondo"].y += 30 * sprite["texto"].originY - 30 * 0.5;
                 sprite["fondo"].setOrigin(sprite["texto"].originX, sprite["texto"].originY);
+                if (entidad.fijo) {
+                    sprite["fondo"].setScrollFactor(0, 0);
+                }
+            }
+            if (entidad.fijo) {
+                sprite["texto"].setScrollFactor(0, 0);
             }
         }
         if (entidad.figura) {

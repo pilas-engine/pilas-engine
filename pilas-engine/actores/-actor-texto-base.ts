@@ -32,12 +32,12 @@ class ActorTextoBase extends ActorBase {
       this._texto.depth = this._texto.depth + 1;
       this._fondo.x += this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
       this._fondo.y += this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
-    }
 
-    if (this.fijo) {
-      this._fondo.setScrollFactor(0, 0);
-    } else {
-      this._fondo.setScrollFactor(1, 1);
+      if (this.fijo) {
+        this._fondo.setScrollFactor(0, 0);
+      } else {
+        this._fondo.setScrollFactor(1, 1);
+      }
     }
   }
 

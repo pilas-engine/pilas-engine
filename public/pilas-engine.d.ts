@@ -324,6 +324,8 @@ declare class Mensajes {
     atender_mensaje_definir_estados_de_depuracion(datos: any): void;
     emitir_mensaje_al_editor(nombre: string, datos?: any): void;
     atender_mensaje_define_escena(datos: any): void;
+    atender_mensaje_definir_zoom_inicial_para_el_modo_editor(datos: any): void;
+    atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
     atender_mensaje_ejecutar_proyecto(datos: any): void;
     emitir_excepcion_al_editor(error: any, origen: any): void;
@@ -557,6 +559,7 @@ declare class ActorBase {
         figura_ancho: number;
         figura_alto: number;
         figura_radio: number;
+        fijo: boolean;
         es_texto: boolean;
         texto: string;
         fondo: string;
@@ -648,6 +651,7 @@ declare class ActorBase {
     enviar_mensaje(mensaje: string, datos?: any): void;
     cuando_llega_un_mensaje(mensaje: string, datos?: any): void;
     enviar_mensaje_global(mensaje: string, datos?: any): void;
+    readonly camara: Camara;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1615,6 +1619,7 @@ declare class ModoEditor extends Modo {
     preload(): void;
     create(datos: any): void;
     crear_minimap(escena: any): void;
+    crear_manejadores_para_controlar_el_zoom(): void;
     crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }: {
         camara_x: any;
         camara_y: any;
@@ -1624,8 +1629,12 @@ declare class ModoEditor extends Modo {
     private conectar_movimiento_del_mouse;
     crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara(): void;
     desplazar_la_camara_desde_el_evento_drag(pointer: any): void;
+    obtener_factores(): {
+        x: number;
+        y: number;
+    };
+    desplazar_actor_desde_el_evento_drag(gameObject: any, pointer: any): void;
     actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento?: boolean): void;
-    desplazar_actor_desde_el_evento_drag(gameObject: any, dragX: any, dragY: any): void;
     obtener_posicion_de_desplazamiento_de_la_camara(): {
         x: number;
         y: number;
@@ -1659,6 +1668,7 @@ declare class ModoEjecucion extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
+    modificar_modo_de_pantalla(): void;
     private cargar_animaciones;
     private conectar_eventos;
     private manejar_evento_click_de_mouse;

@@ -68,11 +68,17 @@ class ModoEjecucion extends Modo {
       this.conectar_eventos();
 
       this.vincular_eventos_de_colision();
+      this.modificar_modo_de_pantalla();
     } catch (e) {
       console.error(e);
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
       this.pausar();
     }
+  }
+
+  modificar_modo_de_pantalla() {
+    this.pilas.game.scale.scaleMode = Phaser.Scale.FIT; // O bien Phaser.Scale.NONE
+    this.pilas.game.scale.resize(this.ancho, this.alto);
   }
 
   private cargar_animaciones(datos) {

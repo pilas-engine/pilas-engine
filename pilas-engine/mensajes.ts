@@ -78,6 +78,14 @@ class Mensajes {
     });
   }
 
+  atender_mensaje_definir_zoom_inicial_para_el_modo_editor(datos) {
+    this.pilas.modo.cameras.main.setZoom(datos.zoom);
+  }
+
+  atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual(datos) {
+    this.pilas.modo.cameras.main.setZoom(datos.zoom);
+  }
+
   atender_mensaje_actualizar_escena_desde_el_editor(datos) {
     this.pilas.modo.cambiar_fondo(datos.escena.fondo);
     this.pilas.modo.posicionar_la_camara(datos.escena);

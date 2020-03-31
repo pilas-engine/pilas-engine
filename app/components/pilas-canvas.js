@@ -78,6 +78,7 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
       this.bus.on(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
+      this.bus.on(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
     };
   },
 
@@ -104,6 +105,7 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
     this.bus.off(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
+    this.bus.off(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
   },
 
   convertir_a_boolean(valor) {
@@ -153,6 +155,16 @@ export default Component.extend({
 
     this.contexto.postMessage(data, utils.HOST);
     this.emitir_estados_de_depuracion_a_pilas();
+    this.definir_zoom_inicial_para_el_modo_editor();
+  },
+
+  definir_zoom_inicial_para_el_modo_editor() {
+    let data = {
+      tipo: "definir_zoom_inicial_para_el_modo_editor",
+      nombre_del_contexto: this.nombre_del_contexto,
+      zoom: this.zoom
+    };
+    this.contexto.postMessage(data, utils.HOST);
   },
 
   emitir_estados_de_depuracion_a_pilas() {
@@ -212,6 +224,16 @@ export default Component.extend({
       tipo: "cambiar_zoom",
       nombre_del_contexto: this.nombre_del_contexto,
       zoom: cantidad
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  cuando_cambia_zoom_desde_el_selector_manual(zoom) {
+    let data = {
+      tipo: "cuando_cambia_zoom_desde_el_selector_manual",
+      nombre_del_contexto: this.nombre_del_contexto,
+      zoom: zoom
     };
 
     this.contexto.postMessage(data, utils.HOST);
@@ -358,6 +380,10 @@ export default Component.extend({
 
     if (e.data.tipo === "cuando_pulsa_escape") {
       this.cuandoPulsaEscapeEnModoEjecucion();
+    }
+
+    if (e.data.tipo === "cambia_zoom") {
+      this.bus.trigger(`cuando_cambia_zoom`, e.data);
     }
   },
   actions: {

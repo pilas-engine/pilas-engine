@@ -1,0 +1,7 @@
+{{#pilas-tooltip class="right-1 w4" texto="Zoom del editor"}}
+  <select class="w-100 select f7 mt1 verdana" onchange={{action "cuandoCambia" value="target.value"}} >
+    {{#each items as |item|}}
+      <option value={{item.valor}} selected={{eq zoom item.valor}}>{{item.etiqueta}}</option>
+    {{/each}}
+  </select>
+{{/pilas-tooltip}}

@@ -25,6 +25,7 @@ const queryParams = new QueryParams({
   oscuro: { defaultValue: true, replace: true },
   modoVim: { defaultValue: false, replace: true },
   modoZoom: { defaultValue: 1, replace: true },
+  zoom: { defaultValue: 1, replace: true },
   pixelart: { defaultValue: false, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true },
   hash: { defaultValue: null, replace: true, refresh: true },
@@ -91,7 +92,20 @@ export default Controller.extend(queryParams.Mixin, {
       }
     });
 
+    // Migracion 2020-03-29: hacer cambios de nombres de imágenes
+    proyecto.get("escenas").forEach(escena => {
+      escena.set("fondo", this.convertir_nombre_de_imagenes_de_fondo(escena.get("fondo")));
+    });
+
     return proyecto;
+  },
+
+  convertir_nombre_de_imagenes_de_fondo(fondo) {
+    if (fondo === "imagenes:fondos/fondo-plano") {
+      return "decoracion:fondos/fondo-plano";
+    } else {
+      return fondo;
+    }
   },
 
   reset(_, isExiting) {

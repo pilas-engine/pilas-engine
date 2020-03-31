@@ -29,9 +29,19 @@ class ModoEditor extends Modo {
     this.hacer_que_el_fondo_se_pueda_arrastrar();
 
     this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
+    this.crear_manejadores_para_controlar_el_zoom();
 
     this.matter.world.createDebugGraphic();
     this.conectar_movimiento_del_mouse();
+
+    this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
+    this.pilas.game.scale.resize(this.ancho, this.alto);
+
+    // Para que el canvas ocupe toda el area visible deberían ejecutarse
+    // estas sentencias.
+    //this.pilas.game.scale.scaleMode = Phaser.Scale.RESIZE;
+    //(<any>this.pilas.game.scale).resize();
+    //(<any>this.pilas.game.canvas.style) = "";
   }
 
   crear_minimap(escena) {
@@ -50,9 +60,30 @@ class ModoEditor extends Modo {
     this.minimap.scrollX = 0;
     this.minimap.scrollY = 0;
 
+    this.minimap.inputEnabled = false;
     this.minimap.ignore(this.fondo);
     this.minimap.ignore(this.fps);
     this.minimap.ignore(this.fps_extra);
+  }
+
+  crear_manejadores_para_controlar_el_zoom() {
+    let escena = this;
+
+    this.input.on("wheel", function(pointer, currentlyOver, dx, dy, dz, event) {
+      let zoom = this.cameras.main.zoom;
+
+      if (dy > 0) {
+        zoom += 0.25;
+      } else {
+        zoom -= 0.25;
+      }
+
+      zoom = Math.max(1, zoom);
+      zoom = Math.min(5, zoom);
+
+      escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
+      this.cameras.main.setZoom(zoom);
+    });
   }
 
   crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }) {
@@ -93,9 +124,9 @@ class ModoEditor extends Modo {
     let escena = this;
 
     this.input.on("dragstart", (pointer, gameObject) => {
-      if (gameObject["es_fondo"]) {
-        this.posicion_anterior_de_arrastre = pointer.position.clone();
-      } else {
+      this.posicion_anterior_de_arrastre = pointer.position.clone();
+
+      if (!gameObject["es_fondo"]) {
         escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
       }
 
@@ -110,7 +141,7 @@ class ModoEditor extends Modo {
       if (gameObject["es_fondo"]) {
         this.desplazar_la_camara_desde_el_evento_drag(pointer);
       } else {
-        this.desplazar_actor_desde_el_evento_drag(gameObject, dragX, dragY);
+        this.desplazar_actor_desde_el_evento_drag(gameObject, pointer);
       }
     });
 
@@ -125,12 +156,46 @@ class ModoEditor extends Modo {
   }
 
   desplazar_la_camara_desde_el_evento_drag(pointer) {
-    this.cameras.main.scrollX += this.posicion_anterior_de_arrastre.x - pointer.position.x;
-    this.cameras.main.scrollY += this.posicion_anterior_de_arrastre.y - pointer.position.y;
+    let zoom = this.cameras.main.zoom;
+    let factor = this.obtener_factores();
+    let dx = this.posicion_anterior_de_arrastre.x - pointer.position.x;
+    let dy = this.posicion_anterior_de_arrastre.y - pointer.position.y;
+
+    this.cameras.main.scrollX += dx / factor.x / zoom;
+    this.cameras.main.scrollY += dy / factor.y / zoom;
 
     this.posicion_anterior_de_arrastre = pointer.position.clone();
 
     this.actualizar_posicion_del_minimap_y_el_borde_de_camara();
+  }
+
+  obtener_factores() {
+    let factor_horizontal = Math.min(1, this.ancho / this.alto);
+    let factor_vertical = Math.min(1, this.alto / this.ancho);
+    return { x: factor_horizontal, y: factor_vertical };
+  }
+
+  desplazar_actor_desde_el_evento_drag(gameObject, pointer) {
+    let zoom = this.cameras.main.zoom;
+    let matter = this.pilas.Phaser.Physics.Matter.Matter;
+    let factor = this.obtener_factores();
+
+    let dx = (pointer.position.x - this.posicion_anterior_de_arrastre.x) / factor.x / zoom;
+    let dy = (pointer.position.y - this.posicion_anterior_de_arrastre.y) / factor.y / zoom;
+
+    gameObject.x += dx;
+    gameObject.y += dy;
+
+    if (gameObject.figura) {
+      let figura = gameObject.figura;
+
+      matter.Body.setPosition(figura, {
+        x: figura.position.x + dx,
+        y: figura.position.y + dy
+      });
+    }
+
+    this.posicion_anterior_de_arrastre = pointer.position.clone();
   }
 
   actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento = true) {
@@ -144,19 +209,6 @@ class ModoEditor extends Modo {
 
     if (emitir_evento) {
       this.pilas.mensajes.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x, y: -y });
-    }
-  }
-
-  desplazar_actor_desde_el_evento_drag(gameObject, dragX, dragY) {
-    let matter = this.pilas.Phaser.Physics.Matter.Matter;
-    gameObject.x = dragX;
-    gameObject.y = dragY;
-
-    if (gameObject.figura) {
-      matter.Body.setPosition(gameObject.figura, {
-        x: dragX,
-        y: dragY
-      });
     }
   }
 
@@ -286,6 +338,9 @@ class ModoEditor extends Modo {
     this.actores.map(a => {
       a.update();
     });
+
+    this.minimap.y = this.scale.baseSize.height - 75;
+    this.minimap.x = this.scale.baseSize.width - 105;
   }
 
   eliminar_actor_por_id(id) {
