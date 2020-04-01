@@ -79,6 +79,7 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
       this.bus.on(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
       this.bus.on(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
+      this.bus.on(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
     };
   },
 
@@ -106,6 +107,7 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
     this.bus.off(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
     this.bus.off(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
+    this.bus.off(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
   },
 
   convertir_a_boolean(valor) {
@@ -156,6 +158,7 @@ export default Component.extend({
     this.contexto.postMessage(data, utils.HOST);
     this.emitir_estados_de_depuracion_a_pilas();
     this.definir_zoom_inicial_para_el_modo_editor();
+    this.definir_grilla_inicial_para_el_modo_editor();
   },
 
   definir_zoom_inicial_para_el_modo_editor() {
@@ -165,6 +168,10 @@ export default Component.extend({
       zoom: this.zoom
     };
     this.contexto.postMessage(data, utils.HOST);
+  },
+
+  definir_grilla_inicial_para_el_modo_editor() {
+    this.cuando_cambia_grilla_desde_el_selector_manual(this.grilla);
   },
 
   emitir_estados_de_depuracion_a_pilas() {
@@ -234,6 +241,16 @@ export default Component.extend({
       tipo: "cuando_cambia_zoom_desde_el_selector_manual",
       nombre_del_contexto: this.nombre_del_contexto,
       zoom: zoom
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  cuando_cambia_grilla_desde_el_selector_manual(grilla) {
+    let data = {
+      tipo: "cuando_cambia_grilla_desde_el_selector_manual",
+      nombre_del_contexto: this.nombre_del_contexto,
+      grilla: grilla
     };
 
     this.contexto.postMessage(data, utils.HOST);

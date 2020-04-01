@@ -5,6 +5,9 @@ class ModoEditor extends Modo {
   minimap: Phaser.Cameras.Scene2D.Camera;
   sprite_borde_de_la_camara: Phaser.GameObjects.Sprite;
   posicion_anterior_de_arrastre: any;
+  usar_grilla: boolean;
+  sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
+  tamaño_de_la_grilla: number;
 
   constructor() {
     super({ key: "ModoEditor" });
@@ -16,6 +19,12 @@ class ModoEditor extends Modo {
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
     this.pilas = datos.pilas;
+
+    // Estos valores se re-definen ni bien el editor carga la
+    // escena de edición, con la señal cuando_cambia_grilla_desde_el_selector_manual.
+    this.usar_grilla = false;
+    this.tamaño_de_la_grilla = 256;
+    this.crear_sprite_para_el_cursor_de_la_grilla();
 
     this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
     this.posicionar_la_camara(datos.escena);
@@ -42,6 +51,24 @@ class ModoEditor extends Modo {
     //this.pilas.game.scale.scaleMode = Phaser.Scale.RESIZE;
     //(<any>this.pilas.game.scale).resize();
     //(<any>this.pilas.game.canvas.style) = "";
+  }
+
+  crear_sprite_para_el_cursor_de_la_grilla() {
+    let x = 0;
+    let y = 0;
+
+    if (this.sprite_cursor_de_la_grilla) {
+      x = this.sprite_cursor_de_la_grilla.x;
+      y = this.sprite_cursor_de_la_grilla.y;
+
+      this.sprite_cursor_de_la_grilla.destroy();
+    }
+
+    let sprite = <any>this.add.rectangle(x, y, this.tamaño_de_la_grilla, this.tamaño_de_la_grilla);
+    (<any>sprite).setStrokeStyle(1, 0xffffff);
+    sprite.depth = 9999999;
+
+    this.sprite_cursor_de_la_grilla = sprite;
   }
 
   crear_minimap(escena) {
@@ -124,6 +151,7 @@ class ModoEditor extends Modo {
     let escena = this;
 
     this.input.on("dragstart", (pointer, gameObject) => {
+      this.mover_cursor_de_la_grilla(pointer.worldX, pointer.worldY);
       this.posicion_anterior_de_arrastre = pointer.position.clone();
 
       if (!gameObject["es_fondo"]) {
@@ -149,10 +177,38 @@ class ModoEditor extends Modo {
       escena.input.setDefaultCursor("default");
 
       if (!gameObject["es_fondo"]) {
+        if (this.usar_grilla) {
+          this.ajustar_posicion_a_la_grilla(gameObject);
+        }
+
         let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
         escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
       }
     });
+  }
+
+  ajustar_posicion_a_la_grilla(gameObject) {
+    gameObject.x = this.sprite_cursor_de_la_grilla.x;
+    gameObject.y = this.sprite_cursor_de_la_grilla.y;
+    this.ajustar_figura(gameObject);
+  }
+
+  cuando_cambia_grilla_desde_el_selector_manual(grilla) {
+    if (grilla === 0) {
+      this.usar_grilla = false;
+      this.tamaño_de_la_grilla = 0;
+    } else {
+      this.usar_grilla = true;
+      this.tamaño_de_la_grilla = grilla;
+    }
+
+    this.crear_sprite_para_el_cursor_de_la_grilla();
+
+    if (grilla === 0) {
+      this.sprite_cursor_de_la_grilla.alpha = 0;
+    } else {
+      this.sprite_cursor_de_la_grilla.alpha = 1;
+    }
   }
 
   desplazar_la_camara_desde_el_evento_drag(pointer) {
@@ -177,7 +233,6 @@ class ModoEditor extends Modo {
 
   desplazar_actor_desde_el_evento_drag(gameObject, pointer) {
     let zoom = this.cameras.main.zoom;
-    let matter = this.pilas.Phaser.Physics.Matter.Matter;
     let factor = this.obtener_factores();
 
     let dx = (pointer.position.x - this.posicion_anterior_de_arrastre.x) / factor.x / zoom;
@@ -186,16 +241,28 @@ class ModoEditor extends Modo {
     gameObject.x += dx;
     gameObject.y += dy;
 
+    this.mover_cursor_de_la_grilla(gameObject.x, gameObject.y);
+
+    this.ajustar_figura(gameObject);
+
+    this.posicion_anterior_de_arrastre = pointer.position.clone();
+  }
+
+  ajustar_figura(gameObject) {
+    let matter = this.pilas.Phaser.Physics.Matter.Matter;
     if (gameObject.figura) {
       let figura = gameObject.figura;
 
       matter.Body.setPosition(figura, {
-        x: figura.position.x + dx,
-        y: figura.position.y + dy
+        x: gameObject.x,
+        y: gameObject.y
       });
     }
+  }
 
-    this.posicion_anterior_de_arrastre = pointer.position.clone();
+  mover_cursor_de_la_grilla(x, y) {
+    this.sprite_cursor_de_la_grilla.x = Math.round(x / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
+    this.sprite_cursor_de_la_grilla.y = Math.round(y / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
   }
 
   actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento = true) {

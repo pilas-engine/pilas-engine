@@ -125,8 +125,13 @@
             <div class="dib f6 flex1 tr"></div>
 
             <div class="pr2">
+              {{pilas-selector-de-grilla grilla=grilla}}
+            </div>
+
+            <div class="pr2">
               {{pilas-selector-de-zoom zoom=zoom}}
             </div>
+
             {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
 
           {{/if}}
@@ -176,6 +181,7 @@
                     mantenerFoco=estado.mantenerFoco
                     proyecto=proyecto
                     zoom=zoom
+                    grilla=grilla
                     modoZoom=modoZoom
                     cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                     pos=pos

@@ -1440,6 +1440,9 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual = function (datos) {
         this.pilas.modo.cameras.main.setZoom(datos.zoom);
     };
+    Mensajes.prototype.atender_mensaje_cuando_cambia_grilla_desde_el_selector_manual = function (datos) {
+        this.pilas.modo.cuando_cambia_grilla_desde_el_selector_manual(datos.grilla);
+    };
     Mensajes.prototype.atender_mensaje_actualizar_escena_desde_el_editor = function (datos) {
         this.pilas.modo.cambiar_fondo(datos.escena.fondo);
         this.pilas.modo.posicionar_la_camara(datos.escena);
@@ -7035,7 +7038,7 @@ var ModoCargador = (function (_super) {
         var height = this.cameras.main.height;
         var loadingText = this.make.text({
             x: width / 2,
-            y: height / 2 - 80,
+            y: height / 2 - 100,
             text: "Iniciando ...",
             style: {
                 font: "14px verdana",
@@ -7137,6 +7140,9 @@ var ModoEditor = (function (_super) {
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.pilas = datos.pilas;
+        this.usar_grilla = false;
+        this.tamaño_de_la_grilla = 256;
+        this.crear_sprite_para_el_cursor_de_la_grilla();
         this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
         this.posicionar_la_camara(datos.escena);
         this.aplicar_limites_a_la_camara(datos.escena);
@@ -7150,6 +7156,19 @@ var ModoEditor = (function (_super) {
         this.conectar_movimiento_del_mouse();
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
         this.pilas.game.scale.resize(this.ancho, this.alto);
+    };
+    ModoEditor.prototype.crear_sprite_para_el_cursor_de_la_grilla = function () {
+        var x = 0;
+        var y = 0;
+        if (this.sprite_cursor_de_la_grilla) {
+            x = this.sprite_cursor_de_la_grilla.x;
+            y = this.sprite_cursor_de_la_grilla.y;
+            this.sprite_cursor_de_la_grilla.destroy();
+        }
+        var sprite = this.add.rectangle(x, y, this.tamaño_de_la_grilla, this.tamaño_de_la_grilla);
+        sprite.setStrokeStyle(1, 0xffffff);
+        sprite.depth = 9999999;
+        this.sprite_cursor_de_la_grilla = sprite;
     };
     ModoEditor.prototype.crear_minimap = function (escena) {
         var game = this;
@@ -7217,6 +7236,7 @@ var ModoEditor = (function (_super) {
         var _this = this;
         var escena = this;
         this.input.on("dragstart", function (pointer, gameObject) {
+            _this.mover_cursor_de_la_grilla(pointer.worldX, pointer.worldY);
             _this.posicion_anterior_de_arrastre = pointer.position.clone();
             if (!gameObject["es_fondo"]) {
                 escena.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { id: gameObject.id });
@@ -7239,10 +7259,35 @@ var ModoEditor = (function (_super) {
         this.input.on("dragend", function (pointer, gameObject) {
             escena.input.setDefaultCursor("default");
             if (!gameObject["es_fondo"]) {
+                if (_this.usar_grilla) {
+                    _this.ajustar_posicion_a_la_grilla(gameObject);
+                }
                 var posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
                 escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
             }
         });
+    };
+    ModoEditor.prototype.ajustar_posicion_a_la_grilla = function (gameObject) {
+        gameObject.x = this.sprite_cursor_de_la_grilla.x;
+        gameObject.y = this.sprite_cursor_de_la_grilla.y;
+        this.ajustar_figura(gameObject);
+    };
+    ModoEditor.prototype.cuando_cambia_grilla_desde_el_selector_manual = function (grilla) {
+        if (grilla === 0) {
+            this.usar_grilla = false;
+            this.tamaño_de_la_grilla = 0;
+        }
+        else {
+            this.usar_grilla = true;
+            this.tamaño_de_la_grilla = grilla;
+        }
+        this.crear_sprite_para_el_cursor_de_la_grilla();
+        if (grilla === 0) {
+            this.sprite_cursor_de_la_grilla.alpha = 0;
+        }
+        else {
+            this.sprite_cursor_de_la_grilla.alpha = 1;
+        }
     };
     ModoEditor.prototype.desplazar_la_camara_desde_el_evento_drag = function (pointer) {
         var zoom = this.cameras.main.zoom;
@@ -7261,20 +7306,28 @@ var ModoEditor = (function (_super) {
     };
     ModoEditor.prototype.desplazar_actor_desde_el_evento_drag = function (gameObject, pointer) {
         var zoom = this.cameras.main.zoom;
-        var matter = this.pilas.Phaser.Physics.Matter.Matter;
         var factor = this.obtener_factores();
         var dx = (pointer.position.x - this.posicion_anterior_de_arrastre.x) / factor.x / zoom;
         var dy = (pointer.position.y - this.posicion_anterior_de_arrastre.y) / factor.y / zoom;
         gameObject.x += dx;
         gameObject.y += dy;
+        this.mover_cursor_de_la_grilla(gameObject.x, gameObject.y);
+        this.ajustar_figura(gameObject);
+        this.posicion_anterior_de_arrastre = pointer.position.clone();
+    };
+    ModoEditor.prototype.ajustar_figura = function (gameObject) {
+        var matter = this.pilas.Phaser.Physics.Matter.Matter;
         if (gameObject.figura) {
             var figura = gameObject.figura;
             matter.Body.setPosition(figura, {
-                x: figura.position.x + dx,
-                y: figura.position.y + dy
+                x: gameObject.x,
+                y: gameObject.y
             });
         }
-        this.posicion_anterior_de_arrastre = pointer.position.clone();
+    };
+    ModoEditor.prototype.mover_cursor_de_la_grilla = function (x, y) {
+        this.sprite_cursor_de_la_grilla.x = Math.round(x / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
+        this.sprite_cursor_de_la_grilla.y = Math.round(y / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
     };
     ModoEditor.prototype.actualizar_posicion_del_minimap_y_el_borde_de_camara = function (emitir_evento) {
         if (emitir_evento === void 0) { emitir_evento = true; }

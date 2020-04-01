@@ -326,6 +326,7 @@ declare class Mensajes {
     atender_mensaje_define_escena(datos: any): void;
     atender_mensaje_definir_zoom_inicial_para_el_modo_editor(datos: any): void;
     atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual(datos: any): void;
+    atender_mensaje_cuando_cambia_grilla_desde_el_selector_manual(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
     atender_mensaje_ejecutar_proyecto(datos: any): void;
     emitir_excepcion_al_editor(error: any, origen: any): void;
@@ -1615,9 +1616,13 @@ declare class ModoEditor extends Modo {
     minimap: Phaser.Cameras.Scene2D.Camera;
     sprite_borde_de_la_camara: Phaser.GameObjects.Sprite;
     posicion_anterior_de_arrastre: any;
+    usar_grilla: boolean;
+    sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
+    tamaño_de_la_grilla: number;
     constructor();
     preload(): void;
     create(datos: any): void;
+    crear_sprite_para_el_cursor_de_la_grilla(): void;
     crear_minimap(escena: any): void;
     crear_manejadores_para_controlar_el_zoom(): void;
     crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }: {
@@ -1628,12 +1633,16 @@ declare class ModoEditor extends Modo {
     aplicar_limites_a_la_camara(escena: any): void;
     private conectar_movimiento_del_mouse;
     crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara(): void;
+    ajustar_posicion_a_la_grilla(gameObject: any): void;
+    cuando_cambia_grilla_desde_el_selector_manual(grilla: any): void;
     desplazar_la_camara_desde_el_evento_drag(pointer: any): void;
     obtener_factores(): {
         x: number;
         y: number;
     };
     desplazar_actor_desde_el_evento_drag(gameObject: any, pointer: any): void;
+    ajustar_figura(gameObject: any): void;
+    mover_cursor_de_la_grilla(x: any, y: any): void;
     actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento?: boolean): void;
     obtener_posicion_de_desplazamiento_de_la_camara(): {
         x: number;
