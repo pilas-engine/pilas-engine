@@ -7476,7 +7476,6 @@ var ModoEditor = (function (_super) {
         var ancho = this.cameras.main.getBounds().width;
         var alto = this.cameras.main.getBounds().height;
         _super.prototype.cambiar_fondo.call(this, fondo, ancho, alto);
-        console.log(ancho, alto);
         this.minimap.ignore(this.fondo);
         this.hacer_que_el_fondo_se_pueda_arrastrar();
     };

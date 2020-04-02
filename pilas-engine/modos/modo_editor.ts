@@ -443,7 +443,6 @@ class ModoEditor extends Modo {
     let alto = this.cameras.main.getBounds().height;
 
     super.cambiar_fondo(fondo, ancho, alto);
-    console.log(ancho, alto);
     this.minimap.ignore(this.fondo);
     this.hacer_que_el_fondo_se_pueda_arrastrar();
   }
