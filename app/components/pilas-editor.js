@@ -298,7 +298,8 @@ export default Component.extend({
   },
 
   generar_id() {
-    return Math.floor(Math.random() * 999) + 1000;
+    const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
+    return uint32.toString(16);
   },
 
   obtener_actor_por_nombre(nombre) {
