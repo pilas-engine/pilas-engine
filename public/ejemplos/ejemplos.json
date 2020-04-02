@@ -101,7 +101,11 @@
     },
     {
       "nombre": "apilador-de-cajas",
-      "desde": "2.0.94"
+      "desde": "2.0.93"
+    },
+    {
+      "nombre": "sokoban",
+      "desde": "2.0.93"
     }
   ]
 }

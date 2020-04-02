@@ -22,8 +22,16 @@ export default Component.extend({
 
     modifica_atributo_de_escena(propiedad, valor) {
       let escena = this.instancia_seleccionada;
+      let recargar_escena = false;
       escena.set(propiedad, valor);
-      this.cuando_modifica_escena(escena);
+
+      // Solo en caso de que se modifique el tamaño del escena
+      // se recarga la escena.
+      if (["ancho", "alto"].includes(propiedad)) {
+        recargar_escena = true;
+      }
+
+      this.cuando_modifica_escena(escena, recargar_escena);
     },
 
     modifica_atributo_del_proyecto(propiedad, valor) {

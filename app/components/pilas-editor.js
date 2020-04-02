@@ -580,12 +580,16 @@ export default Component.extend({
       });
     },
 
-    cuando_modifica_escena(escena) {
+    cuando_modifica_escena(escena, recargar) {
       this.set("hay_cambios_por_guardar", true);
       this.bus.trigger(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, {
         id: escena.id,
         escena: escena
       });
+
+      if (recargar) {
+        this.mostrar_la_escena_actual_sobre_pilas();
+      }
     },
 
     cuando_modifica_proyecto(proyecto) {
