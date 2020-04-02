@@ -11,13 +11,15 @@ export default Component.extend({
         tipo: "numero",
         propiedad: "ancho",
         intensidad: 1,
-        min: 500
+        min: 200,
+        max: 99999
       },
       {
         tipo: "numero",
         propiedad: "alto",
         intensidad: 1,
-        min: 500
+        min: 200,
+        max: 99999
       },
       {
         tipo: "separador",
@@ -26,12 +28,16 @@ export default Component.extend({
       {
         tipo: "numero",
         propiedad: "camara_x",
-        intensidad: 1
+        intensidad: 1,
+        min: 0,
+        max: 99999
       },
       {
         tipo: "numero",
         propiedad: "camara_y",
-        intensidad: 1
+        intensidad: 1,
+        min: -99999,
+        max: 0
       },
       {
         tipo: "separador",

@@ -3180,8 +3180,15 @@ var ActorTextoBase = (function (_super) {
                 this._texto.setFontFamily("verdana");
             }
             else {
-                this._texto.setText(texto);
+                if (texto != this._anterior_texto) {
+                    this._texto.destroy();
+                    this._texto = this.pilas.modo.add.text(0, 0, texto);
+                    this._texto.setFontFamily("verdana");
+                    this.x = this.x;
+                    this.y = this.y;
+                }
             }
+            this._anterior_texto = texto;
             this.actualizar_tamano_del_fondo();
         },
         enumerable: true,

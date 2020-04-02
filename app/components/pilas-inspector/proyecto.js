@@ -10,12 +10,16 @@ export default Component.extend({
       {
         tipo: "numero",
         propiedad: "ancho",
-        intensidad: 1
+        intensidad: 1,
+        min: 200,
+        max: 1920
       },
       {
         tipo: "numero",
         propiedad: "alto",
-        intensidad: 1
+        intensidad: 1,
+        min: 200,
+        max: 1080
       }
     ]);
   }

@@ -661,6 +661,7 @@ declare class ActorTextoBase extends ActorBase {
         es_texto: boolean;
     };
     margen_interno: number;
+    _anterior_texto: string;
     iniciar(): void;
     con_borde: boolean;
     pre_actualizar(): void;
