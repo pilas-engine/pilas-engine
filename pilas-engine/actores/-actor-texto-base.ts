@@ -6,6 +6,7 @@ class ActorTextoBase extends ActorBase {
   };
 
   margen_interno: number = 30;
+  _anterior_texto: string;
 
   iniciar() {}
 
@@ -56,8 +57,24 @@ class ActorTextoBase extends ActorBase {
       this._texto = this.pilas.modo.add.text(0, 0, texto);
       this._texto.setFontFamily("verdana");
     } else {
-      this._texto.setText(texto);
+      if (texto != this._anterior_texto) {
+        // TODO: Cambiar el texto en lugar de re-hacerlo si
+        //       se llega a resolver este issue de phaser3:
+        //
+        //       https://github.com/photonstorm/phaser/issues/5064#issuecomment-607478749
+        this._texto.destroy();
+        this._texto = this.pilas.modo.add.text(0, 0, texto);
+        this._texto.setFontFamily("verdana");
+
+        this.x = this.x;
+        this.y = this.y;
+        //this.magnitud = this.magnitud;
+        //this.con_borde = this.con_borde;
+        //this.sombra = this.sombra;
+      }
     }
+
+    this._anterior_texto = texto;
 
     this.actualizar_tamano_del_fondo();
   }
