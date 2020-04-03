@@ -180,7 +180,8 @@ export default Component.extend({
       nombre_del_contexto: this.nombre_del_contexto,
       pos: this.pos,
       fps: this.fps,
-      fisica: this.fisica
+      fisica: this.fisica,
+      minimapa: this.minimapa
     };
     this.contexto.postMessage(data, utils.HOST);
   },

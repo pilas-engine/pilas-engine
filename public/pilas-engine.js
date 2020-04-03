@@ -914,6 +914,7 @@ var Depurador = (function () {
         this.mostrar_fps = datos.fps;
         this.modo_posicion_activado = datos.pos;
         this.mostrar_fisica = datos.fisica;
+        this.minimapa = datos.minimapa;
     };
     return Depurador;
 }());
@@ -7444,6 +7445,12 @@ var ModoEditor = (function (_super) {
         }
         else {
             this.matter.world.debugGraphic.setAlpha(0);
+        }
+        if (this.pilas.depurador.minimapa) {
+            this.minimap.setAlpha(1);
+        }
+        else {
+            this.minimap.setAlpha(0);
         }
         this.actores.map(function (a) {
             a.update();

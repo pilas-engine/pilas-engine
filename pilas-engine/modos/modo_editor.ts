@@ -402,6 +402,12 @@ class ModoEditor extends Modo {
       this.matter.world.debugGraphic.setAlpha(0);
     }
 
+    if (this.pilas.depurador.minimapa) {
+      this.minimap.setAlpha(1);
+    } else {
+      this.minimap.setAlpha(0);
+    }
+
     this.actores.map(a => {
       a.update();
     });

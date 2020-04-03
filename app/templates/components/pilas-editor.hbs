@@ -186,6 +186,7 @@
                     cuandoPulsaEscapeEnModoEjecucion=(action "detener")
                     pos=pos
                     fps=fps
+                    minimapa=minimapa
                     fisica=fisica
                     pixelart=pixelart
                   }}
@@ -205,6 +206,10 @@
                 {{pilas-interruptor deshabilitado=true texto="fps" variable=false}}
               {{/pilas-tooltip}}
 
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
+                {{pilas-interruptor deshabilitado=true texto="mapa" variable=false}}
+              {{/pilas-tooltip}}
+
               {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
                 {{pilas-interruptor deshabilitado=true texto="pos" variable=false}}
               {{/pilas-tooltip}}
@@ -215,6 +220,10 @@
 
               {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
                 {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
+              {{/pilas-tooltip}}
+
+              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
+                {{pilas-interruptor deshabilitado=estado.pausaActivada texto="mapa" variable=minimapa}}
               {{/pilas-tooltip}}
 
               {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}

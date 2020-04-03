@@ -188,6 +188,7 @@ declare class Depurador {
     modo_posicion_activado: boolean;
     mostrar_fps: boolean;
     mostrar_fisica: boolean;
+    minimapa: boolean;
     constructor(pilas: Pilas);
     definir_estados_de_depuracion(datos: any): void;
 }
