@@ -66,6 +66,12 @@ export default Component.extend({
       yield this.agregar_archivo(carpeta_del_juego, "./imagenes-0.png");
       yield this.agregar_archivo(carpeta_del_juego, "./imagenes.json");
 
+      yield this.agregar_archivo(carpeta_del_juego, "./bloques-0.png");
+      yield this.agregar_archivo(carpeta_del_juego, "./bloques.json");
+
+      yield this.agregar_archivo(carpeta_del_juego, "./decoracion-0.png");
+      yield this.agregar_archivo(carpeta_del_juego, "./decoracion.json");
+
       yield carpeta_del_juego.file("proyecto.pilas", proyecto_como_string);
 
       let archivo_index = yield this.obtener_archivo("./proyecto-exportable/index.html", "text");
@@ -101,6 +107,10 @@ export default Component.extend({
       yield this.agregar_archivo(carpeta_fuentes, "./fuentes/impact.fnt");
       yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.png");
       yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.fnt");
+
+      var carpeta_imagenes = carpeta_del_juego.folder("imagenes");
+
+      yield this.agregar_archivo(carpeta_imagenes, "./sin_imagen.png");
 
       this.agregar_mensaje("Comprimiendo archivo .zip ...");
       let datos = yield zip.generateAsync({ type: "blob" });
