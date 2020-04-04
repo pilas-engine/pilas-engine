@@ -53,6 +53,29 @@ class ModoEditor extends Modo {
     //(<any>this.pilas.game.canvas.style) = "";
   }
 
+  crear_fondo(fondo, ancho = null, alto = null) {
+    this._nombre_del_fondo = fondo;
+    this.pilas.utilidades.validar_que_existe_imagen(fondo);
+
+    // Espera el tamaño de escenario de la escena, pero si no
+    // se define una el area de pantalla del proyecto.
+    ancho = ancho || this.ancho;
+    alto = alto || this.alto;
+
+    // TODO: reemplazar por una función propia que obtenga la galería
+    if (fondo.indexOf(":") > -1) {
+      let g = fondo.split(":")[0];
+      let i = fondo.split(":")[1];
+
+      this.fondo = this.add.tileSprite(0, 0, ancho, alto, g, i);
+    } else {
+      this.fondo = this.add.tileSprite(0, 0, ancho, alto, fondo);
+    }
+
+    this.fondo.depth = -20000;
+    this.fondo.setOrigin(0);
+  }
+
   crear_sprite_para_el_cursor_de_la_grilla() {
     let x = 0;
     let y = 0;

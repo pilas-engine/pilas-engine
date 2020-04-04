@@ -15,6 +15,8 @@ class ModoPausa extends Modo {
   tecla_derecha: any;
   fondo_anterior: any = null;
 
+  _anterior_valor_del_modo_posicion_activado: boolean;
+
   constructor() {
     super({ key: "ModoPausa" });
   }
@@ -27,6 +29,8 @@ class ModoPausa extends Modo {
     this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.sprites = [];
+
+    this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
 
     let foto = this.pilas.historia.obtener_foto(1);
 
@@ -65,35 +69,35 @@ class ModoPausa extends Modo {
     });
 
     this.posicionar_la_camara(foto.escena);
+    this.posicionar_fondo(foto.escena.desplazamiento_del_fondo_x, foto.escena.desplazamiento_del_fondo_y);
 
     this.fondo.setAlpha(0.6);
 
+    // limpia el canvas con los puntos de control de los
+    // actores.
+    this.graphics.clear();
+
     this.sprites = foto.actores.map(entidad => {
+      if (this.pilas.depurador.modo_posicion_activado) {
+        let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
+
+        this.dibujar_punto_de_control(this.graphics, x, y);
+      }
+
       return this.crear_sprite_desde_entidad(entidad);
     });
   }
 
   update() {
-    this.graphics.clear();
-
-    if (this.fps) {
-      this.fps.alpha = 0;
-      this.fps_extra.alpha = 0;
-    }
-
     if (this.pilas.depurador.mostrar_fisica) {
       this.matter.world.debugGraphic.setAlpha(1);
     } else {
       this.matter.world.debugGraphic.setAlpha(0);
     }
 
-    if (this.pilas.depurador.modo_posicion_activado) {
-      let foto = this.pilas.historia.obtener_foto(this.posicion);
-      foto.actores.map(sprite => {
-        let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(sprite.x, sprite.y);
-
-        this.dibujar_punto_de_control(this.graphics, x, y);
-      });
+    if (this._anterior_valor_del_modo_posicion_activado !== this.pilas.depurador.modo_posicion_activado) {
+      this.actualizar_posicion(this.posicion);
+      this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
     }
 
     if (this.tecla_derecha.isDown) {

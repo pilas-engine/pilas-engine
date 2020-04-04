@@ -87,12 +87,10 @@ class Modo extends Phaser.Scene {
     return { x, y };
   }
 
-  crear_fondo(fondo, ancho = null, alto = null) {
+  crear_fondo(fondo, ancho, alto) {
     this._nombre_del_fondo = fondo;
     this.pilas.utilidades.validar_que_existe_imagen(fondo);
 
-    // Espera el tamaño de escenario de la escena, pero si no
-    // se define una el area de pantalla del proyecto.
     ancho = ancho || this.ancho;
     alto = alto || this.alto;
 
@@ -108,6 +106,26 @@ class Modo extends Phaser.Scene {
 
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
+  }
+
+  posicionar_fondo(dx, dy) {
+    if (!dx) {
+      dx = 0;
+    }
+
+    if (!dy) {
+      dy = 0;
+    }
+
+    let posicion_de_la_camara = this.obtener_posicion_de_la_camara();
+
+    if (this.fondo) {
+      this.fondo.x = posicion_de_la_camara.x;
+      this.fondo.y = posicion_de_la_camara.y;
+
+      this.fondo.tilePositionX = posicion_de_la_camara.x + dx;
+      this.fondo.tilePositionY = posicion_de_la_camara.y + dy;
+    }
   }
 
   cambiar_fondo(fondo, ancho = null, alto = null) {

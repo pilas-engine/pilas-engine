@@ -4236,6 +4236,8 @@ var EscenaBase = (function () {
         this._observables = null;
         this._sonidos_para_reproducir = [];
         this._sonidos_en_reproduccion = {};
+        this.desplazamiento_del_fondo_x = 0;
+        this.desplazamiento_del_fondo_y = 0;
     }
     EscenaBase.prototype.reproducir_sonido = function (sonido) {
         this._sonidos_para_reproducir.push(sonido);
@@ -4315,7 +4317,9 @@ var EscenaBase = (function () {
             camara_y: this.camara.y,
             ancho: this.ancho,
             alto: this.alto,
-            fondo: this.fondo
+            fondo: this.fondo,
+            desplazamiento_del_fondo_x: this.desplazamiento_del_fondo_x,
+            desplazamiento_del_fondo_y: this.desplazamiento_del_fondo_y
         };
     };
     EscenaBase.prototype.pre_actualizar = function () { };
@@ -6806,8 +6810,6 @@ var Modo = (function (_super) {
         return { x: x, y: y };
     };
     Modo.prototype.crear_fondo = function (fondo, ancho, alto) {
-        if (ancho === void 0) { ancho = null; }
-        if (alto === void 0) { alto = null; }
         this._nombre_del_fondo = fondo;
         this.pilas.utilidades.validar_que_existe_imagen(fondo);
         ancho = ancho || this.ancho;
@@ -6822,6 +6824,21 @@ var Modo = (function (_super) {
         }
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
+    };
+    Modo.prototype.posicionar_fondo = function (dx, dy) {
+        if (!dx) {
+            dx = 0;
+        }
+        if (!dy) {
+            dy = 0;
+        }
+        var posicion_de_la_camara = this.obtener_posicion_de_la_camara();
+        if (this.fondo) {
+            this.fondo.x = posicion_de_la_camara.x;
+            this.fondo.y = posicion_de_la_camara.y;
+            this.fondo.tilePositionX = posicion_de_la_camara.x + dx;
+            this.fondo.tilePositionY = posicion_de_la_camara.y + dy;
+        }
     };
     Modo.prototype.cambiar_fondo = function (fondo, ancho, alto) {
         if (ancho === void 0) { ancho = null; }
@@ -7164,6 +7181,24 @@ var ModoEditor = (function (_super) {
         this.conectar_movimiento_del_mouse();
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
         this.pilas.game.scale.resize(this.ancho, this.alto);
+    };
+    ModoEditor.prototype.crear_fondo = function (fondo, ancho, alto) {
+        if (ancho === void 0) { ancho = null; }
+        if (alto === void 0) { alto = null; }
+        this._nombre_del_fondo = fondo;
+        this.pilas.utilidades.validar_que_existe_imagen(fondo);
+        ancho = ancho || this.ancho;
+        alto = alto || this.alto;
+        if (fondo.indexOf(":") > -1) {
+            var g = fondo.split(":")[0];
+            var i = fondo.split(":")[1];
+            this.fondo = this.add.tileSprite(0, 0, ancho, alto, g, i);
+        }
+        else {
+            this.fondo = this.add.tileSprite(0, 0, ancho, alto, fondo);
+        }
+        this.fondo.depth = -20000;
+        this.fondo.setOrigin(0);
     };
     ModoEditor.prototype.crear_sprite_para_el_cursor_de_la_grilla = function () {
         var x = 0;
@@ -7894,6 +7929,7 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.update = function () {
         _super.prototype.update.call(this, this.pilas.escena.actores);
+        this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
         if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
             this.matter.world.debugGraphic.setAlpha(1);
         }
@@ -7945,6 +7981,7 @@ var ModoPausa = (function (_super) {
         this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
         this.sprites = [];
+        this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
         var foto = this.pilas.historia.obtener_foto(1);
         this.crear_fondo(foto.escena.fondo, foto.escena.ancho, foto.escena.alto);
         this.crear_sprites_desde_historia(this.posicion);
@@ -7972,30 +8009,27 @@ var ModoPausa = (function (_super) {
             sprite.destroy();
         });
         this.posicionar_la_camara(foto.escena);
+        this.posicionar_fondo(foto.escena.desplazamiento_del_fondo_x, foto.escena.desplazamiento_del_fondo_y);
         this.fondo.setAlpha(0.6);
+        this.graphics.clear();
         this.sprites = foto.actores.map(function (entidad) {
+            if (_this.pilas.depurador.modo_posicion_activado) {
+                var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
+                _this.dibujar_punto_de_control(_this.graphics, x, y);
+            }
             return _this.crear_sprite_desde_entidad(entidad);
         });
     };
     ModoPausa.prototype.update = function () {
-        var _this = this;
-        this.graphics.clear();
-        if (this.fps) {
-            this.fps.alpha = 0;
-            this.fps_extra.alpha = 0;
-        }
         if (this.pilas.depurador.mostrar_fisica) {
             this.matter.world.debugGraphic.setAlpha(1);
         }
         else {
             this.matter.world.debugGraphic.setAlpha(0);
         }
-        if (this.pilas.depurador.modo_posicion_activado) {
-            var foto = this.pilas.historia.obtener_foto(this.posicion);
-            foto.actores.map(function (sprite) {
-                var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(sprite.x, sprite.y), x = _a.x, y = _a.y;
-                _this.dibujar_punto_de_control(_this.graphics, x, y);
-            });
+        if (this._anterior_valor_del_modo_posicion_activado !== this.pilas.depurador.modo_posicion_activado) {
+            this.actualizar_posicion(this.posicion);
+            this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
         }
         if (this.tecla_derecha.isDown) {
             this.avanzar_posicion();

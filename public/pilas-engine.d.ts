@@ -1075,6 +1075,8 @@ declare class EscenaBase {
     _sonidos_en_reproduccion: any;
     ancho: number;
     alto: number;
+    desplazamiento_del_fondo_x: number;
+    desplazamiento_del_fondo_y: number;
     constructor(pilas: any);
     reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
@@ -1089,6 +1091,8 @@ declare class EscenaBase {
         ancho: number;
         alto: number;
         fondo: string;
+        desplazamiento_del_fondo_x: number;
+        desplazamiento_del_fondo_y: number;
     };
     pre_actualizar(): void;
     actualizar(): void;
@@ -1588,7 +1592,8 @@ declare class Modo extends Phaser.Scene {
         x: any;
         y: any;
     };
-    crear_fondo(fondo: any, ancho?: any, alto?: any): void;
+    crear_fondo(fondo: any, ancho: any, alto: any): void;
+    posicionar_fondo(dx: any, dy: any): void;
     cambiar_fondo(fondo: any, ancho?: any, alto?: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
@@ -1624,6 +1629,7 @@ declare class ModoEditor extends Modo {
     constructor();
     preload(): void;
     create(datos: any): void;
+    crear_fondo(fondo: any, ancho?: any, alto?: any): void;
     crear_sprite_para_el_cursor_de_la_grilla(): void;
     crear_minimap(escena: any): void;
     crear_manejadores_para_controlar_el_zoom(): void;
@@ -1718,6 +1724,7 @@ declare class ModoPausa extends Modo {
     tecla_izquierda: any;
     tecla_derecha: any;
     fondo_anterior: any;
+    _anterior_valor_del_modo_posicion_activado: boolean;
     constructor();
     preload(): void;
     create(datos: any): void;

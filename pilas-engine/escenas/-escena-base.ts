@@ -14,6 +14,8 @@ class EscenaBase {
   _sonidos_en_reproduccion: any;
   ancho: number;
   alto: number;
+  desplazamiento_del_fondo_x: number;
+  desplazamiento_del_fondo_y: number;
 
   constructor(pilas) {
     this.pilas = pilas;
@@ -26,6 +28,8 @@ class EscenaBase {
     this._observables = null;
     this._sonidos_para_reproducir = [];
     this._sonidos_en_reproduccion = {};
+    this.desplazamiento_del_fondo_x = 0;
+    this.desplazamiento_del_fondo_y = 0;
   }
 
   reproducir_sonido(sonido: string) {
@@ -125,7 +129,9 @@ class EscenaBase {
       camara_y: this.camara.y,
       ancho: this.ancho,
       alto: this.alto,
-      fondo: this.fondo
+      fondo: this.fondo,
+      desplazamiento_del_fondo_x: this.desplazamiento_del_fondo_x,
+      desplazamiento_del_fondo_y: this.desplazamiento_del_fondo_y
     };
   }
 
