@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Mensajes · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Mensajes · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -154,7 +154,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="etiquetas.html">
+        <li class="chapter " data-level="1.6" data-path="camara.html">
+            
+                <a href="camara.html">
+            
+                    
+                    Cámara
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="etiquetas.html">
             
                 <a href="etiquetas.html">
             
@@ -167,7 +180,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="habilidades.html">
+        <li class="chapter " data-level="1.8" data-path="habilidades.html">
             
                 <a href="habilidades.html">
             
@@ -180,7 +193,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="comportamientos.html">
+        <li class="chapter " data-level="1.9" data-path="comportamientos.html">
             
                 <a href="comportamientos.html">
             
@@ -193,7 +206,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="azar.html">
+        <li class="chapter " data-level="1.10" data-path="azar.html">
             
                 <a href="azar.html">
             
@@ -206,7 +219,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="observables.html">
+        <li class="chapter " data-level="1.11" data-path="observables.html">
             
                 <a href="observables.html">
             
@@ -219,7 +232,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="tiempo.html">
+        <li class="chapter " data-level="1.12" data-path="tiempo.html">
             
                 <a href="tiempo.html">
             
@@ -232,7 +245,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="angulos-distancias.html">
+        <li class="chapter " data-level="1.13" data-path="angulos-distancias.html">
             
                 <a href="angulos-distancias.html">
             
@@ -245,7 +258,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="colisiones.html">
+        <li class="chapter " data-level="1.14" data-path="colisiones.html">
             
                 <a href="colisiones.html">
             
@@ -258,7 +271,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.14" data-path="mensajes.html">
+        <li class="chapter active" data-level="1.15" data-path="mensajes.html">
             
                 <a href="mensajes.html">
             
@@ -271,7 +284,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="escenas.html">
+        <li class="chapter " data-level="1.16" data-path="escenas.html">
             
                 <a href="escenas.html">
             
@@ -284,7 +297,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16" data-path="eventos-de-mouse.html">
+        <li class="chapter " data-level="1.17" data-path="eventos-de-mouse.html">
             
                 <a href="eventos-de-mouse.html">
             
@@ -297,7 +310,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17" data-path="uso-del-teclado.html">
+        <li class="chapter " data-level="1.18" data-path="uso-del-teclado.html">
             
                 <a href="uso-del-teclado.html">
             
@@ -310,7 +323,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.18" data-path="dibujado_en_pantalla.html">
+        <li class="chapter " data-level="1.19" data-path="dibujado_en_pantalla.html">
             
                 <a href="dibujado_en_pantalla.html">
             
@@ -323,7 +336,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.19" data-path="exportar_juegos.html">
+        <li class="chapter " data-level="1.20" data-path="exportar_juegos.html">
             
                 <a href="exportar_juegos.html">
             
@@ -336,7 +349,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.21" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -427,41 +440,61 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="mensajes-entre-actores-y-escenas">Mensajes entre actores y escenas</h1><p>Dentro de un juego se puede producir varias comunicaciones
+                                <h1 id="mensajes-entre-actores-y-escenas">Mensajes entre actores y escenas</h1>
+<p>Dentro de un juego se puede producir varias comunicaciones
 entre actores. Si un personaje protagonista pierde, tal vez queremos
 que el contador de puntajes se entere y cambie de color, o que
 los enemigos conjuntamente dejen de seguir al protagonista; tal vez
 incluso vamos a querer que la escena se notifique de esto y ponga
-un cartel en pantalla o pase a otra escena.</p><p>Los mensajes sirven para implementar este tipo de comunicaciones entre
+un cartel en pantalla o pase a otra escena.</p>
+<p>Los mensajes sirven para implementar este tipo de comunicaciones entre
 distintos objetos de nuestro juego. Y tienen una ventaja, porque podemos
 hacer que un actor no tenga que conocer todo lo que lo rodea, sino que
-simplemente emita un mensaje &quot;y qui&#xE9;n escuche puede hacer algo al respecto&quot;.</p><h2 id="enviar-mensajes-globalmente">Enviar mensajes globalmente</h2><p>Un ejemplo t&#xED;pico que se suele dar de mensajes son los mensajes globales,
+simplemente emita un mensaje &quot;y qui&#xE9;n escuche puede hacer algo al respecto&quot;.</p>
+<h2 id="enviar-mensajes-globalmente">Enviar mensajes globalmente</h2>
+<p>Un ejemplo t&#xED;pico que se suele dar de mensajes son los mensajes globales,
 estos mensajes se pueden enviar desde un actor a todos los dem&#xE1;s, estos
-mensajes globales incluso llegan a la escenas.</p><p>Para enviar un mensaje global tenemos que escribir este c&#xF3;digo en
-el actor emisor:</p><pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.pilas.enviar_mensaje_global(<span class="hljs-string">&quot;mi_mensaje&quot;</span>);</code></pre>
+mensajes globales incluso llegan a la escenas.</p>
+<p>Para enviar un mensaje global tenemos que escribir este c&#xF3;digo en
+el actor emisor:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.pilas.enviar_mensaje_global(<span class="hljs-string">&quot;mi_mensaje&quot;</span>);
+</code></pre>
 <p>Y para que otros actores puedan atender este mensaje simplemente tenemos
 que crear un m&#xE9;todo que se llame &quot;cuando<em>llega_el_mensaje</em>&quot; seguido del
-nombre del mensaje as&#xED;:</p><pre><code class="lang-typescript">cuando_llega_el_mensaje_mi_mensaje() {
+nombre del mensaje as&#xED;:</p>
+<pre><code class="lang-typescript">cuando_llega_el_mensaje_mi_mensaje() {
   <span class="hljs-keyword">this</span>.decir(<span class="hljs-string">&quot;Alg&#xFA;n actor envi&#xF3; el mensaje &apos;mi_mensaje&apos;&quot;</span>);
-}</code></pre>
+}
+</code></pre>
 <p>opcionalmente, si queremos un actor o escena que capture todos los mensajes
-podemos usar este m&#xE9;todo:</p><pre><code class="lang-typescript">cuando_llega_un_mensaje(mensaje:<span class="hljs-built_in">string</span>) {
+podemos usar este m&#xE9;todo:</p>
+<pre><code class="lang-typescript">cuando_llega_un_mensaje(mensaje:<span class="hljs-built_in">string</span>) {
   <span class="hljs-keyword">this</span>.decir(<span class="hljs-string">&quot;lleg&#xF3; el mensaje &quot;</span> + mensaje);
-}</code></pre>
-<h2 id="mensajes-dirigidos-a-actores-particulares">Mensajes dirigidos a actores particulares</h2><p>Si no queremos enviar el mensajes a todos los actores y escenas, lo que
+}
+</code></pre>
+<h2 id="mensajes-dirigidos-a-actores-particulares">Mensajes dirigidos a actores particulares</h2>
+<p>Si no queremos enviar el mensajes a todos los actores y escenas, lo que
 podemos hacer es obtener la referencia a un actor en particular y enviarle
-el mensaje de forma directa:</p><pre><code class="lang-typescript"><span class="hljs-keyword">let</span> puntaje = <span class="hljs-keyword">this</span>.pilas.obtener_actor_por_nombre(<span class="hljs-string">&quot;puntaje&quot;</span>);
-puntaje.enviar_mensaje(<span class="hljs-string">&quot;aumentar&quot;</span>);</code></pre>
+el mensaje de forma directa:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> puntaje = <span class="hljs-keyword">this</span>.pilas.obtener_actor_por_nombre(<span class="hljs-string">&quot;puntaje&quot;</span>);
+puntaje.enviar_mensaje(<span class="hljs-string">&quot;aumentar&quot;</span>);
+</code></pre>
 <p>Y de forma similar a como mencionamos antes, el puntaje deber&#xED;a tener
 un m&#xE9;todo llamado <code>cuando_llega_el_mensaje_aumentar</code> para reaccionar
-al mensaje:</p><pre><code class="lang-typescript">cuando_llega_el_mensaje_aumentar() {
+al mensaje:</p>
+<pre><code class="lang-typescript">cuando_llega_el_mensaje_aumentar() {
   <span class="hljs-keyword">this</span>.puntaje_acumulado += <span class="hljs-number">1</span>;
-}</code></pre>
-<h2 id="mensajes-con-par&#xE1;metros">Mensajes con par&#xE1;metros</h2><p>A veces junto con el mensaje necesitamos enviar par&#xE1;metros para ser m&#xE1;s
+}
+</code></pre>
+<h2 id="mensajes-con-par&#xE1;metros">Mensajes con par&#xE1;metros</h2>
+<p>A veces junto con el mensaje necesitamos enviar par&#xE1;metros para ser m&#xE1;s
 espec&#xED;ficos. Para eso podemos usar el segundo argumento de las funciones
-de mensajes.</p><p>Por ejemplo, imagina que tenemos un actor que cuando colisiona con una
-moneda sume 5 puntos, pero cuando colisiona con un diamante sume 10 puntos.</p><p>Por un lado, cuando se produce la colisi&#xF3;n podemos emitir el mensaje
-&quot;aumentar_puntaje&quot; con la cantidad de puntos que le corresponden:</p><pre><code class="lang-typescript">cuando_colisiona(actor: Actor) {
+de mensajes.</p>
+<p>Por ejemplo, imagina que tenemos un actor que cuando colisiona con una
+moneda sume 5 puntos, pero cuando colisiona con un diamante sume 10 puntos.</p>
+<p>Por un lado, cuando se produce la colisi&#xF3;n podemos emitir el mensaje
+&quot;aumentar_puntaje&quot; con la cantidad de puntos que le corresponden:</p>
+<pre><code class="lang-typescript">cuando_colisiona(actor: Actor) {
   <span class="hljs-keyword">if</span> (actor.tiene_etiqueta(<span class="hljs-string">&quot;moneda&quot;</span>)) {
     actor.eliminar();
     <span class="hljs-keyword">this</span>.pilas.enviar_mensaje_global(<span class="hljs-string">&quot;aumentar_puntaje&quot;</span>, {cantidad: <span class="hljs-number">5</span>});
@@ -471,11 +504,14 @@ moneda sume 5 puntos, pero cuando colisiona con un diamante sume 10 puntos.</p><
     actor.eliminar();
     <span class="hljs-keyword">this</span>.pilas.enviar_mensaje_global(<span class="hljs-string">&quot;aumentar_puntaje&quot;</span>, {cantidad: <span class="hljs-number">10</span>});
   }
-}</code></pre>
+}
+</code></pre>
 <p>Luego, del lado del receptor (o los receptores) del mensaje, tenemos que
-leer los par&#xE1;metros adicionales as&#xED;:</p><pre><code class="lang-typescript">cuando_llega_el_mensaje_aumentar_puntaje(datos) {
+leer los par&#xE1;metros adicionales as&#xED;:</p>
+<pre><code class="lang-typescript">cuando_llega_el_mensaje_aumentar_puntaje(datos) {
   <span class="hljs-keyword">this</span>.puntaje_acumulado += datos.cantidad;
-}</code></pre>
+}
+</code></pre>
 
                                 
                                 </section>
@@ -519,7 +555,7 @@ leer los par&#xE1;metros adicionales as&#xED;:</p><pre><code class="lang-typescr
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Mensajes","level":"1.14","depth":1,"next":{"title":"Escenas","level":"1.15","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"previous":{"title":"Colisiones","level":"1.13","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"mensajes.md","mtime":"2020-01-19T23:52:43.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2020-01-20T00:04:58.379Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Mensajes","level":"1.15","depth":1,"next":{"title":"Escenas","level":"1.16","depth":1,"path":"escenas.md","ref":"escenas.md","articles":[]},"previous":{"title":"Colisiones","level":"1.14","depth":1,"path":"colisiones.md","ref":"colisiones.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"mensajes.md","mtime":"2020-04-04T21:36:55.375Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-04T22:00:03.230Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="es" >
     <head>
-        <title>Uso del teclado · Manual de Pilas Engine 2</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Uso del teclado · Manual de Pilas Engine 2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         <meta name="author" content="El equipo de Pilas Engine">
         
         
@@ -154,7 +154,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="etiquetas.html">
+        <li class="chapter " data-level="1.6" data-path="camara.html">
+            
+                <a href="camara.html">
+            
+                    
+                    Cámara
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="etiquetas.html">
             
                 <a href="etiquetas.html">
             
@@ -167,7 +180,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="habilidades.html">
+        <li class="chapter " data-level="1.8" data-path="habilidades.html">
             
                 <a href="habilidades.html">
             
@@ -180,7 +193,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="comportamientos.html">
+        <li class="chapter " data-level="1.9" data-path="comportamientos.html">
             
                 <a href="comportamientos.html">
             
@@ -193,7 +206,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="azar.html">
+        <li class="chapter " data-level="1.10" data-path="azar.html">
             
                 <a href="azar.html">
             
@@ -206,7 +219,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="observables.html">
+        <li class="chapter " data-level="1.11" data-path="observables.html">
             
                 <a href="observables.html">
             
@@ -219,7 +232,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="tiempo.html">
+        <li class="chapter " data-level="1.12" data-path="tiempo.html">
             
                 <a href="tiempo.html">
             
@@ -232,7 +245,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="angulos-distancias.html">
+        <li class="chapter " data-level="1.13" data-path="angulos-distancias.html">
             
                 <a href="angulos-distancias.html">
             
@@ -245,7 +258,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="colisiones.html">
+        <li class="chapter " data-level="1.14" data-path="colisiones.html">
             
                 <a href="colisiones.html">
             
@@ -258,7 +271,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="mensajes.html">
+        <li class="chapter " data-level="1.15" data-path="mensajes.html">
             
                 <a href="mensajes.html">
             
@@ -271,7 +284,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="escenas.html">
+        <li class="chapter " data-level="1.16" data-path="escenas.html">
             
                 <a href="escenas.html">
             
@@ -284,7 +297,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16" data-path="eventos-de-mouse.html">
+        <li class="chapter " data-level="1.17" data-path="eventos-de-mouse.html">
             
                 <a href="eventos-de-mouse.html">
             
@@ -297,7 +310,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17" data-path="uso-del-teclado.html">
+        <li class="chapter active" data-level="1.18" data-path="uso-del-teclado.html">
             
                 <a href="uso-del-teclado.html">
             
@@ -310,7 +323,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.18" data-path="dibujado_en_pantalla.html">
+        <li class="chapter " data-level="1.19" data-path="dibujado_en_pantalla.html">
             
                 <a href="dibujado_en_pantalla.html">
             
@@ -323,7 +336,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.19" data-path="exportar_juegos.html">
+        <li class="chapter " data-level="1.20" data-path="exportar_juegos.html">
             
                 <a href="exportar_juegos.html">
             
@@ -336,7 +349,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20" data-path="pilas_como_biblioteca.html">
+        <li class="chapter " data-level="1.21" data-path="pilas_como_biblioteca.html">
             
                 <a href="pilas_como_biblioteca.html">
             
@@ -427,12 +440,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="uso-del-teclado">Uso del teclado</h1><p>El teclado se puede utilizar de dos formas b&#xE1;sicas: por consulta para mover
-personajes o mediante eventos para responder a pulsaciones de teclas espec&#xED;ficas:</p><h2 id="primer-forma-&#xBF;c&#xF3;mo-mover-un-personaje-con-el-teclado">Primer forma: &#xBF;C&#xF3;mo mover un personaje con el teclado?</h2><p>En la mayor&#xED;a de los juegos para computadoras se puede controlar al
-protagonista del juego usando el teclado.</p><p>Pilas hace bastante sencillo esto mediante un objeto llamado &quot;control&quot; que
-nos va a permitir acceder a las teclas b&#xE1;sicas para controlar personajes.</p><p>Por ejemplo, para mover un actor hacia izquierda y derecha usando las
+                                <h1 id="uso-del-teclado">Uso del teclado</h1>
+<p>El teclado se puede utilizar de dos formas b&#xE1;sicas: por consulta para mover
+personajes o mediante eventos para responder a pulsaciones de teclas espec&#xED;ficas:</p>
+<h2 id="primer-forma-&#xBF;c&#xF3;mo-mover-un-personaje-con-el-teclado">Primer forma: &#xBF;C&#xF3;mo mover un personaje con el teclado?</h2>
+<p>En la mayor&#xED;a de los juegos para computadoras se puede controlar al
+protagonista del juego usando el teclado.</p>
+<p>Pilas hace bastante sencillo esto mediante un objeto llamado &quot;control&quot; que
+nos va a permitir acceder a las teclas b&#xE1;sicas para controlar personajes.</p>
+<p>Por ejemplo, para mover un actor hacia izquierda y derecha usando las
 flechitas del teclado podemos editar el m&#xE9;todo &quot;actualizar&quot; del actor
-y colocar estas lineas de c&#xF3;digo:</p><pre><code class="lang-typescript">
+y colocar estas lineas de c&#xF3;digo:</p>
+<pre><code class="lang-typescript">
 actualizar() {
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.control.izquierda) {
     <span class="hljs-keyword">this</span>.x -= <span class="hljs-number">5</span>;
@@ -441,170 +460,278 @@ actualizar() {
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.control.derecha) {
     <span class="hljs-keyword">this</span>.x += <span class="hljs-number">5</span>;
   }
-}</code></pre>
+}
+</code></pre>
 <p>El objeto &quot;control&quot; tiene varios atributos que podemos consultar (mediante
 la palabra &quot;if&quot;) para saber si en ese instante la tecla est&#xE1; pulsada o
-no.</p><p>Estas son otros atributos que tiene el objeto &quot;control&quot;:</p><table>
+no.</p>
+<p>Estas son otros atributos que tiene el objeto &quot;control&quot;:</p>
+<table>
 <thead>
-<tr><th>Tecla</th>
+<tr>
+<th>Tecla</th>
 <th>C&#xF3;digo para consultar la tecla</th>
 <th>nombre</th>
-</tr></thead><tbody>
-<tr><td>Flecha izquierda</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flecha izquierda</td>
 <td>this.control.izquierda</td>
 <td>&quot;izquierda&quot;</td>
-</tr><tr><td>Flecha derecha</td>
+</tr>
+<tr>
+<td>Flecha derecha</td>
 <td>this.control.derecha</td>
 <td>&quot;derecha&quot;</td>
-</tr><tr><td>Flecha arriba</td>
+</tr>
+<tr>
+<td>Flecha arriba</td>
 <td>this.control.arriba</td>
 <td>&quot;arriba&quot;</td>
-</tr><tr><td>Flecha abajo</td>
+</tr>
+<tr>
+<td>Flecha abajo</td>
 <td>this.control.abajo</td>
 <td>&quot;abajo&quot;</td>
-</tr><tr><td>Tecla Space</td>
+</tr>
+<tr>
+<td>Tecla Space</td>
 <td>this.control.espacio</td>
 <td>&quot;espacio&quot;</td>
-</tr><tr><td>Alt</td>
+</tr>
+<tr>
+<td>Alt</td>
 <td>this.control.alt</td>
 <td>&quot;alt&quot;</td>
-</tr><tr><td>Control</td>
+</tr>
+<tr>
+<td>Control</td>
 <td>this.control.control</td>
 <td>&quot;control&quot;</td>
-</tr><tr><td>Shift</td>
+</tr>
+<tr>
+<td>Shift</td>
 <td>this.control.shift</td>
 <td>&quot;shift&quot;</td>
-</tr><tr><td>Tab</td>
+</tr>
+<tr>
+<td>Tab</td>
 <td>this.control.tab</td>
 <td>&quot;tab&quot;</td>
-</tr><tr><td>Backspace</td>
+</tr>
+<tr>
+<td>Backspace</td>
 <td>this.control.backspace</td>
 <td>&quot;backspace&quot;</td>
-</tr><tr><td>Meta</td>
+</tr>
+<tr>
+<td>Meta</td>
 <td>this.control.meta</td>
 <td>&quot;meta&quot;</td>
-</tr><tr><td>Escape</td>
+</tr>
+<tr>
+<td>Escape</td>
 <td>this.control.escape</td>
 <td>&quot;escape&quot;</td>
-</tr><tr><td>Enter</td>
+</tr>
+<tr>
+<td>Enter</td>
 <td>this.control.enter</td>
 <td>&quot;enter&quot;</td>
-</tr><tr><td>Tecla a</td>
+</tr>
+<tr>
+<td>Tecla a</td>
 <td>this.control.tecla_a</td>
 <td>&quot;a&quot;</td>
-</tr><tr><td>Tecla b</td>
+</tr>
+<tr>
+<td>Tecla b</td>
 <td>this.control.tecla_b</td>
 <td>&quot;b&quot;</td>
-</tr><tr><td>Tecla c</td>
+</tr>
+<tr>
+<td>Tecla c</td>
 <td>this.control.tecla_c</td>
 <td>&quot;c&quot;</td>
-</tr><tr><td>Tecla d</td>
+</tr>
+<tr>
+<td>Tecla d</td>
 <td>this.control.tecla_d</td>
 <td>&quot;d&quot;</td>
-</tr><tr><td>Tecla e</td>
+</tr>
+<tr>
+<td>Tecla e</td>
 <td>this.control.tecla_e</td>
 <td>&quot;e&quot;</td>
-</tr><tr><td>Tecla f</td>
+</tr>
+<tr>
+<td>Tecla f</td>
 <td>this.control.tecla_f</td>
 <td>&quot;f&quot;</td>
-</tr><tr><td>Tecla g</td>
+</tr>
+<tr>
+<td>Tecla g</td>
 <td>this.control.tecla_g</td>
 <td>&quot;g&quot;</td>
-</tr><tr><td>Tecla h</td>
+</tr>
+<tr>
+<td>Tecla h</td>
 <td>this.control.tecla_h</td>
 <td>&quot;h&quot;</td>
-</tr><tr><td>Tecla i</td>
+</tr>
+<tr>
+<td>Tecla i</td>
 <td>this.control.tecla_i</td>
 <td>&quot;i&quot;</td>
-</tr><tr><td>Tecla j</td>
+</tr>
+<tr>
+<td>Tecla j</td>
 <td>this.control.tecla_j</td>
 <td>&quot;j&quot;</td>
-</tr><tr><td>Tecla k</td>
+</tr>
+<tr>
+<td>Tecla k</td>
 <td>this.control.tecla_k</td>
 <td>&quot;k&quot;</td>
-</tr><tr><td>Tecla l</td>
+</tr>
+<tr>
+<td>Tecla l</td>
 <td>this.control.tecla_l</td>
 <td>&quot;l&quot;</td>
-</tr><tr><td>Tecla m</td>
+</tr>
+<tr>
+<td>Tecla m</td>
 <td>this.control.tecla_m</td>
 <td>&quot;m&quot;</td>
-</tr><tr><td>Tecla n</td>
+</tr>
+<tr>
+<td>Tecla n</td>
 <td>this.control.tecla_n</td>
 <td>&quot;n&quot;</td>
-</tr><tr><td>Tecla &#xF1;</td>
+</tr>
+<tr>
+<td>Tecla &#xF1;</td>
 <td>this.control.tecla_&#xF1;</td>
 <td>&quot;&#xF1;&quot;</td>
-</tr><tr><td>Tecla o</td>
+</tr>
+<tr>
+<td>Tecla o</td>
 <td>this.control.tecla_o</td>
 <td>&quot;o&quot;</td>
-</tr><tr><td>Tecla p</td>
+</tr>
+<tr>
+<td>Tecla p</td>
 <td>this.control.tecla_p</td>
 <td>&quot;p&quot;</td>
-</tr><tr><td>Tecla q</td>
+</tr>
+<tr>
+<td>Tecla q</td>
 <td>this.control.tecla_q</td>
 <td>&quot;q&quot;</td>
-</tr><tr><td>Tecla r</td>
+</tr>
+<tr>
+<td>Tecla r</td>
 <td>this.control.tecla_r</td>
 <td>&quot;r&quot;</td>
-</tr><tr><td>Tecla s</td>
+</tr>
+<tr>
+<td>Tecla s</td>
 <td>this.control.tecla_s</td>
 <td>&quot;s&quot;</td>
-</tr><tr><td>Tecla t</td>
+</tr>
+<tr>
+<td>Tecla t</td>
 <td>this.control.tecla_t</td>
 <td>&quot;t&quot;</td>
-</tr><tr><td>Tecla u</td>
+</tr>
+<tr>
+<td>Tecla u</td>
 <td>this.control.tecla_u</td>
 <td>&quot;u&quot;</td>
-</tr><tr><td>Tecla v</td>
+</tr>
+<tr>
+<td>Tecla v</td>
 <td>this.control.tecla_v</td>
 <td>&quot;v&quot;</td>
-</tr><tr><td>Tecla w</td>
+</tr>
+<tr>
+<td>Tecla w</td>
 <td>this.control.tecla_w</td>
 <td>&quot;w&quot;</td>
-</tr><tr><td>Tecla x</td>
+</tr>
+<tr>
+<td>Tecla x</td>
 <td>this.control.tecla_x</td>
 <td>&quot;x&quot;</td>
-</tr><tr><td>Tecla y</td>
+</tr>
+<tr>
+<td>Tecla y</td>
 <td>this.control.tecla_y</td>
 <td>&quot;y&quot;</td>
-</tr><tr><td>Tecla z</td>
+</tr>
+<tr>
+<td>Tecla z</td>
 <td>this.control.tecla_z</td>
 <td>&quot;z&quot;</td>
-</tr><tr><td>Tecla 1</td>
+</tr>
+<tr>
+<td>Tecla 1</td>
 <td>this.control.tecla_1</td>
 <td>&quot;1&quot;</td>
-</tr><tr><td>Tecla 2</td>
+</tr>
+<tr>
+<td>Tecla 2</td>
 <td>this.control.tecla_2</td>
 <td>&quot;2&quot;</td>
-</tr><tr><td>Tecla 3</td>
+</tr>
+<tr>
+<td>Tecla 3</td>
 <td>this.control.tecla_3</td>
 <td>&quot;3&quot;</td>
-</tr><tr><td>Tecla 4</td>
+</tr>
+<tr>
+<td>Tecla 4</td>
 <td>this.control.tecla_4</td>
 <td>&quot;4&quot;</td>
-</tr><tr><td>Tecla 5</td>
+</tr>
+<tr>
+<td>Tecla 5</td>
 <td>this.control.tecla_5</td>
 <td>&quot;5&quot;</td>
-</tr><tr><td>Tecla 6</td>
+</tr>
+<tr>
+<td>Tecla 6</td>
 <td>this.control.tecla_6</td>
 <td>&quot;6&quot;</td>
-</tr><tr><td>Tecla 7</td>
+</tr>
+<tr>
+<td>Tecla 7</td>
 <td>this.control.tecla_7</td>
 <td>&quot;7&quot;</td>
-</tr><tr><td>Tecla 8</td>
+</tr>
+<tr>
+<td>Tecla 8</td>
 <td>this.control.tecla_8</td>
 <td>&quot;8&quot;</td>
-</tr><tr><td>Tecla 9</td>
+</tr>
+<tr>
+<td>Tecla 9</td>
 <td>this.control.tecla_9</td>
 <td>&quot;9&quot;</td>
-</tr></tbody></table>
-
-<h2 id="segunda-forma-&#xBF;c&#xF3;mo-reaccionar-a-eventos-del-teclado">Segunda forma: &#xBF;C&#xF3;mo reaccionar a eventos del teclado?</h2><p>Otra forma de acceder al teclado es mediante eventos, para ejecutar
-una funci&#xF3;n justo cuando se pulsa una tecla o se suelta.</p><p>Esto es &#xFA;til por ejemplo en los juegos por turnos o cuando queremos que
+</tr>
+</tbody>
+</table>
+<h2 id="segunda-forma-&#xBF;c&#xF3;mo-reaccionar-a-eventos-del-teclado">Segunda forma: &#xBF;C&#xF3;mo reaccionar a eventos del teclado?</h2>
+<p>Otra forma de acceder al teclado es mediante eventos, para ejecutar
+una funci&#xF3;n justo cuando se pulsa una tecla o se suelta.</p>
+<p>Esto es &#xFA;til por ejemplo en los juegos por turnos o cuando queremos que
 el teclado funcione sin repetici&#xF3;n, imagin&#xE1; que si hacemos un juego donde
 el jugador pueda disparar, queremos que pulse y suelte la tecla de disparo
-muchas veces, no que la deje pulsada y eso dispare autom&#xE1;ticamente.</p><p>Para capturar eventos de teclado de esta forma tendr&#xED;as que definir
-los m&#xE9;todos <code>cuando_pulsa_tecla</code> y <code>cuando_suelta_tecla</code> as&#xED;:</p><pre><code class="lang-javascript">
+muchas veces, no que la deje pulsada y eso dispare autom&#xE1;ticamente.</p>
+<p>Para capturar eventos de teclado de esta forma tendr&#xED;as que definir
+los m&#xE9;todos <code>cuando_pulsa_tecla</code> y <code>cuando_suelta_tecla</code> as&#xED;:</p>
+<pre><code class="lang-javascript">
   cuando_pulsa_tecla(tecla) {
     <span class="hljs-keyword">if</span> (tecla == <span class="hljs-string">&quot;espacio&quot;</span>) {
       <span class="hljs-keyword">this</span>.disparar();
@@ -618,7 +745,9 @@ los m&#xE9;todos <code>cuando_pulsa_tecla</code> y <code>cuando_suelta_tecla</co
   }
 </code></pre>
 <p>Estos m&#xE9;todos est&#xE1;n disponibles tanto en las escenas como en los
-actores. Puedes comprobarlo escribiendo &quot;cuando&quot; en el editor y viendo c&#xF3;mo se sugieren las opciones:</p><p><img alt="PilasEngine * 2020-01-11 22-35-26" src="uso-del-teclado.assets/autocompleta.png"></p>
+actores. Puedes comprobarlo escribiendo &quot;cuando&quot; en el editor y viendo c&#xF3;mo se sugieren las opciones:</p>
+<p><img src="uso-del-teclado.assets/autocompleta.png" alt="PilasEngine * 2020-01-11 22-35-26"></p>
+
                                 
                                 </section>
                             
@@ -661,7 +790,7 @@ actores. Puedes comprobarlo escribiendo &quot;cuando&quot; en el editor y viendo
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Uso del teclado","level":"1.17","depth":1,"next":{"title":"Dibujado simple en pantalla","level":"1.18","depth":1,"path":"dibujado_en_pantalla.md","ref":"dibujado_en_pantalla.md","articles":[]},"previous":{"title":"Eventos de mouse o touch","level":"1.16","depth":1,"path":"eventos-de-mouse.md","ref":"eventos-de-mouse.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"uso-del-teclado.md","mtime":"2020-01-12T04:49:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2020-01-20T00:04:58.379Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Uso del teclado","level":"1.18","depth":1,"next":{"title":"Dibujado simple en pantalla","level":"1.19","depth":1,"path":"dibujado_en_pantalla.md","ref":"dibujado_en_pantalla.md","articles":[]},"previous":{"title":"Eventos de mouse o touch","level":"1.17","depth":1,"path":"eventos-de-mouse.md","ref":"eventos-de-mouse.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"uso-del-teclado.md","mtime":"2020-01-14T13:52:17.279Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-04T22:00:03.230Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

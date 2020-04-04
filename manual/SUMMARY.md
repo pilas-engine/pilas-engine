@@ -5,6 +5,7 @@
 - [El intérprete](interprete.md)
 - [Autómatas y estados](automatas_y_estados.md)
 - [Animaciones](animaciones.md)
+- [Cámara](camara.md)
 - [Etiquetas](etiquetas.md)
 - [Habilidades](habilidades.md)
 - [Comportamientos](comportamientos.md)
