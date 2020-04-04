@@ -96,18 +96,37 @@ export default Controller.extend(queryParams.Mixin, {
 
     // Migracion 2020-03-29: hacer cambios de nombres de imágenes
     proyecto.get("escenas").forEach(escena => {
-      escena.set("fondo", this.convertir_nombre_de_imagenes_de_fondo(escena.get("fondo")));
+      escena.set("fondo", this.convertir_nombre_de_imagenes(escena.get("fondo")));
+
+      escena.get("actores").forEach(actor => {
+        actor.set("imagen", this.convertir_nombre_de_imagenes(actor.get("imagen")));
+      });
     });
 
     return proyecto;
   },
 
-  convertir_nombre_de_imagenes_de_fondo(fondo) {
-    if (fondo === "imagenes:fondos/fondo-plano") {
-      return "decoracion:fondos/fondo-plano";
-    } else {
-      return fondo;
+  convertir_nombre_de_imagenes(imagen) {
+    let reemplazos = [
+      {
+        origen: "imagenes:fondos/",
+        destino: "decoracion:fondos/"
+      },
+      {
+        origen: "imagenes:decoracion/",
+        destino: "decoracion:objetos/"
+      }
+    ];
+
+    for (let i = 0; i < reemplazos.length; i++) {
+      let item = reemplazos[i];
+
+      if (imagen.includes(item.origen)) {
+        return imagen.replace(item.origen, item.destino);
+      }
     }
+
+    return imagen;
   },
 
   reset(_, isExiting) {
