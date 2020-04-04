@@ -530,7 +530,6 @@ class ModoEjecucion extends Modo {
 
   update() {
     super.update(this.pilas.escena.actores);
-    this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
 
     if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
       this.matter.world.debugGraphic.setAlpha(1);
@@ -552,6 +551,7 @@ class ModoEjecucion extends Modo {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
       this.pilas.modo.pausar();
     }
+    this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
   }
 
   pausar() {
