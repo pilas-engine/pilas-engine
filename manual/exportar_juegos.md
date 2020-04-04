@@ -136,7 +136,18 @@ Y para android:
 ```
 cd cordova
 cordova platform add android
+```
+
+En este punto, asegúrate de haber movido todos los archivos del directorio "proyecto" (index.html, pilas-engine.js etc…) dentro del directorio "cordova/www".
+
+Luego tienes que generar el proyecto para android con este comando:
+
+```
 cordova build android
 ```
 
-y luego abrir el proyecto del directorio "platforms/android" con Android Studio y compilar.
+y luego abrir el proyecto del directorio "platforms/android" con Android Studio y pulsar el botón ejecutar para lanzar el emulador:
+
+![android-play](exportar_juegos.assets/android-play.png)
+
+O bien, abrí el menú "Build" y luego "Build APK(s)" o "Generate Signed APK" para crear el un archivo `.apk` e instalarlo directamente en tu equipo o subirlo a la tienda Play Store de Google.
