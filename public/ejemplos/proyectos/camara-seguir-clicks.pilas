@@ -396,7 +396,7 @@
       },
       {
         "nombre": "protagonista",
-        "codigo": "// @ts-ignore\nclass protagonista extends Actor {\n    destino_x: number;\n    destino_y: number;\n\n    iniciar() {\n        this.estado = \"esperando\";\n    }\n\n    esperando_iniciar() {\n        this.animacion = \"hombre_pixel_parado\";\n    }\n\n    esperando_actualizar() {\n\n    }\n\n    caminando_iniciar() {\n        this.animacion = \"hombre_pixel_camina\";\n    }\n\n    caminando_actualizar() {\n        let velocidad = 10;\n        let distancia = this.obtener_distancia_al_punto(this.destino_x, this.destino_y);\n\n        if (distancia > velocidad) {\n            this.mover_hacia_el_punto(this.destino_x, this.destino_y, velocidad);\n        } else {\n            this.estado = \"esperando\";\n        }\n    }\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n\n        // Hacer que la cámara siga al protagonista.\n        this.pilas.camara.x += (this.x - this.pilas.camara.x) / 5;\n        this.pilas.camara.y += (this.y - this.pilas.camara.y) / 5;\n    }\n\n    cuando_hace_click_en_la_pantalla(x, y) {\n        this.destino_x = x;\n        this.destino_y = y;\n\n        // Hace que el actor mire en dirección al punto que tiene\n        // que alcanzar.\n        if (this.destino_x > this.x) {\n            this.espejado = false;\n        } else {\n            this.espejado = true;\n        }\n\n        this.estado = \"caminando\";\n    }\n}"
+        "codigo": "// @ts-ignore\nclass protagonista extends Actor {\n    destino_x: number;\n    destino_y: number;\n\n    iniciar() {\n        this.estado = \"esperando\";\n    }\n\n    esperando_iniciar() {\n        this.animacion = \"hombre_pixel_parado\";\n    }\n\n    esperando_actualizar() {\n\n    }\n\n    caminando_iniciar() {\n        this.animacion = \"hombre_pixel_camina\";\n    }\n\n    caminando_actualizar() {\n        let velocidad = 10;\n        let distancia = this.obtener_distancia_al_punto(this.destino_x, this.destino_y);\n\n        if (distancia > velocidad) {\n            this.mover_hacia_el_punto(this.destino_x, this.destino_y, velocidad);\n        } else {\n            this.estado = \"esperando\";\n        }\n    }\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n\n        // Hacer que la cámara siga al protagonista.\n        this.pilas.camara.seguir_al_actor(this, 5, true);\n    }\n\n    cuando_hace_click_en_la_pantalla(x, y) {\n        this.destino_x = x;\n        this.destino_y = y;\n\n        // Hace que el actor mire en dirección al punto que tiene\n        // que alcanzar.\n        if (this.destino_x > this.x) {\n            this.espejado = false;\n        } else {\n            this.espejado = true;\n        }\n\n        this.estado = \"caminando\";\n    }\n}"
       },
       {
         "nombre": "descripcion",
@@ -466,8 +466,8 @@
           "habilidades": []
         },
         {
-          "x": -3,
-          "y": 3,
+          "x": -18.209125475285163,
+          "y": -16.011406844106318,
           "z": 0,
           "imagen": "imagenes:pixelados/pixel_player_0",
           "centro_x": 0.5,
@@ -683,7 +683,9 @@
           "nombre": "cactus5",
           "habilidades": []
         }
-      ]
+      ],
+      "ancho": 1000,
+      "alto": 1000
     },
     {
       "nombre": "escena2",
@@ -691,7 +693,9 @@
       "camara_x": 0,
       "camara_y": 0,
       "fondo": "decoracion:fondos/fondo-plano",
-      "actores": []
+      "actores": [],
+      "ancho": 1000,
+      "alto": 1000
     }
   ]
 }
