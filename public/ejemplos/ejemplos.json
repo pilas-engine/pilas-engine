@@ -97,31 +97,31 @@
     },
     {
       "nombre": "acceder-a-actores",
-      "desde": "2.0.93"
+      "desde": "2.1.0"
     },
     {
       "nombre": "apilador-de-cajas",
-      "desde": "2.0.93"
+      "desde": "2.1.0"
     },
     {
       "nombre": "sokoban",
-      "desde": "2.0.93"
+      "desde": "2.1.0"
     },
     {
       "nombre": "recorrido-simple",
-      "desde": "2.0.93"
+      "desde": "2.1.0"
     },
     {
       "nombre": "recorrido-de-curva",
-      "desde": "2.0.93"
+      "desde": "2.1.0"
     },
     {
       "nombre": "naves",
-      "desde": "2.0.93"
+      "desde": "2.1.0"
     },
     {
       "nombre": "recorrido-con-orientacion",
-      "desde": "2.0.93"
+      "desde": "2.1.0"
     }
   ]
 }
