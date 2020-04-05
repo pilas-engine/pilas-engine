@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introducción · Manual de Pilas Engine 2</title>
+        <title>Recorridos · Manual de Pilas Engine 2</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="primeros_pasos.html" />
+    <link rel="next" href="etiquetas.html" />
     
+    
+    <link rel="prev" href="camara.html" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -165,7 +167,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="recorridos.html">
+        <li class="chapter active" data-level="1.7" data-path="recorridos.html">
             
                 <a href="recorridos.html">
             
@@ -436,7 +438,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introducción</a>
+        <a href="." >Recorridos</a>
     </h1>
 </div>
 
@@ -451,11 +453,43 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="manual-de-pilas-engine-2">Manual de Pilas Engine 2</h1>
-<p><img src="imagenes/logo.png" alt="logo"></p>
-<p>&#xA1;Hola!, este es el manual de Pilas</p>
-<p>Pilas Engine es una herramienta que te permite crear tus propios videojuegos y aprender a programar. Est&#xE1; dise&#xF1;ada por desarrolladores de habla hispana y cuenta con el respaldo de docentes y profesionales especialistas en desarrollo de Software.</p>
-<p>Desde el men&#xFA; lateral vas a poder acceder a cada una de las secciones del manual. Si est&#xE1;s en duda, o es la primera vez que utilizas pilas, te recomendamos ver la secci&#xF3;n <a href="primeros_pasos.html">Primeros Pasos</a>.</p>
+                                <h1 id="recorridos">Recorridos</h1>
+<p>Los recorridos nos permite realizar movimientos de actores
+de manera muy simple, lo que tenemos que hacer es enumerar
+todos los puntos &quot;x&quot; e &quot;y&quot; que queremos recorrer y llamar
+a una sola funci&#xF3;n.</p>
+<h2 id="usando-la-funci&#xF3;n-hacerrecorrido">Usando la funci&#xF3;n hacer_recorrido</h2>
+<p>Por ejemplo, imagina que tenemos un enemigo de juego de naves, un
+ovni con un alien, y queremos que se mueva por la pantalla de
+izquierda a derecha.</p>
+<p>Primero tenemos que tener en cuenta qu&#xE9; puntos de la pantalla
+queremos que recorra. Por ejemplo, que primero visite la posici&#xF3;n
+<code>(x= -200, y=0)</code>, luego hacia abajo a la posici&#xF3;n <code>(x=0, y=-100)</code>,
+luego a la derecha <code>(x=200, y=0)</code> y por &#xFA;ltimo que regrese al punto
+de origen <code>(x=0, y=0)</code>:</p>
+<p><img src="recorridos.assets/posiciones-1.png" alt="movimiento"></p>
+<p>Y por &#xFA;ltimo, tenemos que llamar a la funci&#xF3;n <code>hacer_recorrido</code> de
+esta forma dentro de una actor:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.hacer_recorrido([<span class="hljs-number">-200</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], <span class="hljs-number">7</span>, <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>);
+</code></pre>
+<p>El primer par&#xE1;metro tiene que ser una lista con todas las coordenadas
+que queremos que recorra. Tenemos que ingresar el n&#xFA;mero de la coordenada
+<code>x</code>, luego en de la coordenada <code>y</code> y seguir as&#xED;. Esta lista tiene que tener
+la forma <code>[x_punto_1, y_punto_1, x_punto_2, y_punto_2 ....]</code></p>
+<p>El segundo argumento, que en este ejemplo es <code>7</code>, tiene que ser un n&#xFA;mero
+indicando cuantos segundos tiene que durar el movimiento. En este caso
+se pide que el movimiento dure 7 segundos.</p>
+<p>El ante &#xFA;ltimo argumento es el n&#xFA;mero que indicar&#xE1; las repeticiones de esta
+animaci&#xF3;n, si le pasamos <code>0</code> el movimiento se va a repetir constantemente.</p>
+<p>Y el &#xFA;ltimo argumento indica si el actor deber rotar en direcci&#xF3;n al camino
+o no. Es &#xFA;til poner este argumento en <code>true</code> cuando el actor es una nave vista
+desde arriba o un autom&#xF3;vil:</p>
+<p><img src="recorridos.assets/recorrido-con-orientacion.png" alt="recorrido-con-orientacion"></p>
+<p>Ten en cuenta que el actor va a visitar todos los puntos pero de manera
+gradual, siguiendo el recorrido pero realizando una curva de movimiento
+muy suave:</p>
+<p><img src="recorridos.assets/posiciones-2.png" alt="movimiento"></p>
+<p><img src="recorridos.assets/posiciones-3.png" alt="movimiento"></p>
 
                                 
                                 </section>
@@ -483,8 +517,12 @@
 
             
                 
+                <a href="camara.html" class="navigation navigation-prev " aria-label="Previous page: Cámara">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="primeros_pasos.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Primeros pasos">
+                
+                <a href="etiquetas.html" class="navigation navigation-next " aria-label="Next page: Etiquetas">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -495,7 +533,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introducción","level":"1.1","depth":1,"next":{"title":"Primeros pasos","level":"1.2","depth":1,"path":"primeros_pasos.md","ref":"primeros_pasos.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"README.md","mtime":"2019-05-11T00:43:53.080Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-05T21:46:29.102Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Recorridos","level":"1.7","depth":1,"next":{"title":"Etiquetas","level":"1.8","depth":1,"path":"etiquetas.md","ref":"etiquetas.md","articles":[]},"previous":{"title":"Cámara","level":"1.6","depth":1,"path":"camara.md","ref":"camara.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"recorridos.md","mtime":"2020-04-05T21:46:23.925Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-05T21:46:29.102Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

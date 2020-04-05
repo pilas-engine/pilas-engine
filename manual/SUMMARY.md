@@ -6,6 +6,7 @@
 - [Autómatas y estados](automatas_y_estados.md)
 - [Animaciones](animaciones.md)
 - [Cámara](camara.md)
+- [Recorridos](recorridos.md)
 - [Etiquetas](etiquetas.md)
 - [Habilidades](habilidades.md)
 - [Comportamientos](comportamientos.md)

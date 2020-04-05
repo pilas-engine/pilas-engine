@@ -3,7 +3,7 @@ import { inject as service } from "@ember/service";
 
 export default Component.extend({
   ejemplos: service(),
-  cantidad_de_ejemplos: 28,
+  cantidad_de_ejemplos: 32,
 
   didInsertElement() {
     this.ejemplos.obtener();

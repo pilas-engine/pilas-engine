@@ -106,6 +106,22 @@
     {
       "nombre": "sokoban",
       "desde": "2.0.93"
+    },
+    {
+      "nombre": "recorrido-simple",
+      "desde": "2.0.93"
+    },
+    {
+      "nombre": "recorrido-de-curva",
+      "desde": "2.0.93"
+    },
+    {
+      "nombre": "naves",
+      "desde": "2.0.93"
+    },
+    {
+      "nombre": "recorrido-con-orientacion",
+      "desde": "2.0.93"
     }
   ]
 }
