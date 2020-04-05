@@ -556,7 +556,7 @@ class ModoEjecucion extends Modo {
 
   pausar() {
     console.warn("Pausando la escena a causa del error anterior.");
-    this.scene.pause(undefined); // tslint:disable-line
+    this.scene.pause(); // tslint:disable-line
   }
 
   guardar_foto_de_entidades() {
