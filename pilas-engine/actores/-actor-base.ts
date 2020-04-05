@@ -954,7 +954,7 @@ class ActorBase {
    * Muestra un mensaje como si se tratara de un globo de historieta. Llamar
    * a este método borra el dialogo anterior si existiera.
    */
-  decir(mensaje: string) {
+  decir(mensaje: string, duracion: number = 4) {
     if (this._dialogo) {
       this._dialogo.eliminar();
       this._dialogo = null;
@@ -1007,7 +1007,7 @@ class ActorBase {
 
     this._dialogo = texto;
 
-    this.pilas.luego(4, () => {
+    this.pilas.luego(duracion, () => {
       if (texto.esta_vivo()) {
         texto.eliminar();
 
@@ -1127,5 +1127,42 @@ class ActorBase {
 
   get camara() {
     return this.pilas.camara;
+  }
+
+  hacer_recorrido(posiciones, duracion = 1, veces = 1, seguir_rotacion = false) {
+    this.pilas.utilidades.validar_parametro_lista_de_numeros_pares("posiciones", posiciones);
+    this.pilas.utilidades.validar_parametro_numero_positivo("duracion", duracion);
+    this.pilas.utilidades.validar_parametro_numero_entero_cero_o_positivo("veces", veces);
+
+    let puntos_a_recorrer = [this.x, this.y].concat(posiciones);
+    let curve = new Phaser.Curves.Spline(puntos_a_recorrer);
+
+    let anterior_x = this.x;
+    let anterior_y = this.y;
+
+    this.pilas.modo.tweens.add({
+      targets: { t: 0 },
+      t: 1,
+      ease: "Linear",
+      duration: duracion * 1000,
+      yoyo: false,
+      repeat: veces - 1,
+      onUpdate: (tween, target) => {
+        let { x, y } = curve.getPoint(target.t);
+        if (this.esta_vivo()) {
+          this.x = x;
+          this.y = y;
+
+          if (seguir_rotacion) {
+            let dx = this.x - anterior_x;
+            let dy = this.y - anterior_y;
+            this.rotacion = this.pilas.utilidades.convertir_radianes_a_angulos(Math.atan2(dy, dx));
+          }
+
+          anterior_x = x;
+          anterior_y = y;
+        }
+      }
+    });
   }
 }
