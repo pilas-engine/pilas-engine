@@ -383,7 +383,15 @@ class Pilas {
    * Ejecuta una función luego de que transcurra una determinada cantidad de segundos.
    */
   luego(duracion: number, tarea: any) {
-    return this.modo.time.delayedCall(duracion * 1000, tarea);
+    return this.modo.time.delayedCall(duracion * 1000, () => {
+      try {
+        tarea();
+      } catch (e) {
+        console.error(e);
+        this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'luego'");
+        this.modo.pausar();
+      }
+    });
   }
 
   /**
@@ -394,16 +402,22 @@ class Pilas {
     let time = this.modo.time.addEvent({
       delay: duracion * 1000,
       callback: () => {
-        // Si la tarea retorna 'true' se asume que de debe detener la tarea.
-        if (tarea()) {
-          time.remove();
-        }
-        // Permite detener la tarea si se especifica la cantidad de veces
-        // que se tiene que ejecutar.
-        veces_que_se_ejecuto += 1;
+        try {
+          // Si la tarea retorna 'true' se asume que de debe detener la tarea.
+          if (tarea()) {
+            time.remove();
+          }
+          // Permite detener la tarea si se especifica la cantidad de veces
+          // que se tiene que ejecutar.
+          veces_que_se_ejecuto += 1;
 
-        if (veces && veces_que_se_ejecuto >= veces) {
-          time.remove();
+          if (veces && veces_que_se_ejecuto >= veces) {
+            time.remove();
+          }
+        } catch (e) {
+          console.error(e);
+          this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'cada'");
+          this.modo.pausar();
         }
       },
       loop: true

@@ -1553,6 +1553,29 @@ var Utilidades = (function () {
                 return typeof e === "number";
             }));
     };
+    Utilidades.prototype.validar_parametro_numero_positivo = function (parametro, valor) {
+        if (typeof valor !== "number" || valor < 0) {
+            throw new Error("El valor enviado como par\u00E1metro \"" + parametro + "\" tiene que ser un n\u00FAmero mayor a 0, se envi\u00F3: " + valor);
+        }
+    };
+    Utilidades.prototype.validar_parametro_booleano = function (parametro, valor) {
+        if (typeof valor !== "boolean") {
+            throw new Error("El valor enviado como par\u00E1metro \"" + parametro + "\" tiene que ser true o false, se envi\u00F3: " + valor);
+        }
+    };
+    Utilidades.prototype.validar_parametro_lista_de_numeros_pares = function (parametro, valor) {
+        if (!Array.isArray(valor)) {
+            throw new Error("El valor enviado como par\u00E1metro \"" + parametro + "\" tiene que ser una lista de n\u00FAmeros, se envi\u00F3: " + valor);
+        }
+        if (valor.length % 2 !== 0) {
+            throw new Error("El valor enviado como par\u00E1metro \"" + parametro + "\" tiene que tener una cantidad par de n\u00FAmeros, se contaron " + valor.length + " n\u00FAmeros en la lista enviada.");
+        }
+    };
+    Utilidades.prototype.validar_parametro_numero_entero_cero_o_positivo = function (parametro, valor) {
+        if (typeof valor !== "number" || valor !== parseInt("" + valor, 10) || valor < 0) {
+            throw new Error("El valor enviado como par\u00E1metro \"" + parametro + "\" tiene que ser un n\u00FAmero entero mayor o igual a 0, se envi\u00F3: " + valor);
+        }
+    };
     Utilidades.prototype.convertir_angulo_a_radianes = function (grados) {
         return (grados * Math.PI) / 180;
     };
@@ -1977,19 +2000,37 @@ var Pilas = (function () {
         this.modo.tweens.add(configuracion);
     };
     Pilas.prototype.luego = function (duracion, tarea) {
-        return this.modo.time.delayedCall(duracion * 1000, tarea);
+        var _this = this;
+        return this.modo.time.delayedCall(duracion * 1000, function () {
+            try {
+                tarea();
+            }
+            catch (e) {
+                console.error(e);
+                _this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'luego'");
+                _this.modo.pausar();
+            }
+        });
     };
     Pilas.prototype.cada = function (duracion, tarea, veces) {
+        var _this = this;
         var veces_que_se_ejecuto = 0;
         var time = this.modo.time.addEvent({
             delay: duracion * 1000,
             callback: function () {
-                if (tarea()) {
-                    time.remove();
+                try {
+                    if (tarea()) {
+                        time.remove();
+                    }
+                    veces_que_se_ejecuto += 1;
+                    if (veces && veces_que_se_ejecuto >= veces) {
+                        time.remove();
+                    }
                 }
-                veces_que_se_ejecuto += 1;
-                if (veces && veces_que_se_ejecuto >= veces) {
-                    time.remove();
+                catch (e) {
+                    console.error(e);
+                    _this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'cada'");
+                    _this.modo.pausar();
                 }
             },
             loop: true
@@ -2968,8 +3009,9 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
-    ActorBase.prototype.decir = function (mensaje) {
+    ActorBase.prototype.decir = function (mensaje, duracion) {
         var _this = this;
+        if (duracion === void 0) { duracion = 4; }
         if (this._dialogo) {
             this._dialogo.eliminar();
             this._dialogo = null;
@@ -3009,7 +3051,7 @@ var ActorBase = (function () {
             }
         };
         this._dialogo = texto;
-        this.pilas.luego(4, function () {
+        this.pilas.luego(duracion, function () {
             if (texto.esta_vivo()) {
                 texto.eliminar();
                 if (texto === _this._dialogo) {
@@ -3113,6 +3155,41 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype.hacer_recorrido = function (posiciones, duracion, veces, seguir_rotacion) {
+        var _this = this;
+        if (duracion === void 0) { duracion = 1; }
+        if (veces === void 0) { veces = 1; }
+        if (seguir_rotacion === void 0) { seguir_rotacion = false; }
+        this.pilas.utilidades.validar_parametro_lista_de_numeros_pares("posiciones", posiciones);
+        this.pilas.utilidades.validar_parametro_numero_positivo("duracion", duracion);
+        this.pilas.utilidades.validar_parametro_numero_entero_cero_o_positivo("veces", veces);
+        var puntos_a_recorrer = [this.x, this.y].concat(posiciones);
+        var curve = new Phaser.Curves.Spline(puntos_a_recorrer);
+        var anterior_x = this.x;
+        var anterior_y = this.y;
+        this.pilas.modo.tweens.add({
+            targets: { t: 0 },
+            t: 1,
+            ease: "Linear",
+            duration: duracion * 1000,
+            yoyo: false,
+            repeat: veces - 1,
+            onUpdate: function (tween, target) {
+                var _a = curve.getPoint(target.t), x = _a.x, y = _a.y;
+                if (_this.esta_vivo()) {
+                    _this.x = x;
+                    _this.y = y;
+                    if (seguir_rotacion) {
+                        var dx = _this.x - anterior_x;
+                        var dy = _this.y - anterior_y;
+                        _this.rotacion = _this.pilas.utilidades.convertir_radianes_a_angulos(Math.atan2(dy, dx));
+                    }
+                    anterior_x = x;
+                    anterior_y = y;
+                }
+            }
+        });
+    };
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -7953,7 +8030,7 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.pausar = function () {
         console.warn("Pausando la escena a causa del error anterior.");
-        this.scene.pause(undefined);
+        this.scene.pause();
     };
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
         this.pilas.historia.serializar_escena(this.pilas.escena);

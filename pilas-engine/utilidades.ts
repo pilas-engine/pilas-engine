@@ -48,6 +48,34 @@ class Utilidades {
     );
   }
 
+  validar_parametro_numero_positivo(parametro: string, valor: number) {
+    if (typeof valor !== "number" || valor < 0) {
+      throw new Error(`El valor enviado como parámetro "${parametro}" tiene que ser un número mayor a 0, se envió: ${valor}`);
+    }
+  }
+
+  validar_parametro_booleano(parametro: string, valor: number) {
+    if (typeof valor !== "boolean") {
+      throw new Error(`El valor enviado como parámetro "${parametro}" tiene que ser true o false, se envió: ${valor}`);
+    }
+  }
+
+  validar_parametro_lista_de_numeros_pares(parametro: string, valor: Array<any>) {
+    if (!Array.isArray(valor)) {
+      throw new Error(`El valor enviado como parámetro "${parametro}" tiene que ser una lista de números, se envió: ${valor}`);
+    }
+
+    if (valor.length % 2 !== 0) {
+      throw new Error(`El valor enviado como parámetro "${parametro}" tiene que tener una cantidad par de números, se contaron ${valor.length} números en la lista enviada.`);
+    }
+  }
+
+  validar_parametro_numero_entero_cero_o_positivo(parametro: string, valor: number) {
+    if (typeof valor !== "number" || valor !== parseInt(`${valor}`, 10) || valor < 0) {
+      throw new Error(`El valor enviado como parámetro "${parametro}" tiene que ser un número entero mayor o igual a 0, se envió: ${valor}`);
+    }
+  }
+
   convertir_angulo_a_radianes(grados: number) {
     return (grados * Math.PI) / 180;
   }

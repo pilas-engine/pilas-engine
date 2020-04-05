@@ -350,6 +350,10 @@ declare class Utilidades {
     limitar(valor: number, minimo: number, maximo: number): number;
     validar_numero(valor: number): void;
     es_animacion(valor: any): boolean;
+    validar_parametro_numero_positivo(parametro: string, valor: number): void;
+    validar_parametro_booleano(parametro: string, valor: number): void;
+    validar_parametro_lista_de_numeros_pares(parametro: string, valor: Array<any>): void;
+    validar_parametro_numero_entero_cero_o_positivo(parametro: string, valor: number): void;
     convertir_angulo_a_radianes(grados: number): number;
     convertir_radianes_a_angulos(radianes: number): number;
     es_firefox(): boolean;
@@ -638,7 +642,7 @@ declare class ActorBase {
     figura_ancho: number;
     figura_alto: number;
     figura_radio: number;
-    decir(mensaje: string): void;
+    decir(mensaje: string, duracion?: number): void;
     aprender(habilidad: string): void;
     olvidar(habilidad: string): void;
     tiene_habilidad(habilidad: string): boolean;
@@ -654,6 +658,7 @@ declare class ActorBase {
     cuando_llega_un_mensaje(mensaje: string, datos?: any): void;
     enviar_mensaje_global(mensaje: string, datos?: any): void;
     readonly camara: Camara;
+    hacer_recorrido(posiciones: any, duracion?: number, veces?: number, seguir_rotacion?: boolean): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
