@@ -5,7 +5,8 @@ class boton_activable extends ActorTextoBase {
     texto: "Botón",
     es_texto: true,
     z: -10,
-    color: "black"
+    color: "black",
+    fuente: ""
   };
 
   habilitado: boolean = true;

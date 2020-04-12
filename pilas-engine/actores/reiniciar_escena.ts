@@ -5,7 +5,8 @@ class reiniciar_escena extends ActorTextoBase {
     texto: "Reiniciar escena",
     es_texto: true,
     z: -10,
-    color: "black"
+    color: "black",
+    fuente: ""
   };
 
   cuando_hace_click() {

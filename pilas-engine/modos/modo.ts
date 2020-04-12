@@ -3,7 +3,6 @@ class Modo extends Phaser.Scene {
   actores: any;
   pilas: Pilas;
   fps: any;
-  fps_extra: any;
   graphics: any;
   fondo: any;
   _nombre_del_fondo: string = "";
@@ -27,16 +26,10 @@ class Modo extends Phaser.Scene {
   }
 
   crear_indicadores_de_rendimiento_fps() {
-    this.fps = this.add.bitmapText(5, 10, "impact", "");
+    this.fps = this.add.bitmapText(5, 10, "color-blanco-con-sombra", "");
     this.fps.scrollFactorX = 0;
     this.fps.scrollFactorY = 0;
-
-    this.fps_extra = this.add.bitmapText(5, 34, "mini-impact", "");
-    this.fps_extra.scrollFactorX = 0;
-    this.fps_extra.scrollFactorY = 0;
-
     this.fps.depth = 999999;
-    this.fps_extra.depth = 999999;
   }
 
   destacar_actor_por_id(id) {
@@ -67,16 +60,18 @@ class Modo extends Phaser.Scene {
     if (this.fps) {
       if (this.pilas.depurador.mostrar_fps && !this.es_modo_ejecucion) {
         this.fps.alpha = 1;
-        this.fps.text = "FPS: " + Math.round(this.pilas.game.loop["actualFps"]);
 
         let x = this.pilas.cursor_x;
         let y = this.pilas.cursor_y;
 
-        this.fps_extra.alpha = 1;
-        this.fps_extra.text = [`ACTORES: ${actores.length}`, `CURSOR X: ${x}`, `CURSOR Y: ${y}`].join("\n");
+        this.fps.text = [
+          `FPS: ${Math.round(this.pilas.game.loop["actualFps"])}`, // fila inicial
+          `Cantidad de actores: ${actores.length}`,
+          `Cursor X: ${x}`,
+          `Cursor Y: ${y}`
+        ].join("\n");
       } else {
         this.fps.alpha = 0;
-        this.fps_extra.alpha = 0;
       }
     }
   }
@@ -187,16 +182,18 @@ class Modo extends Phaser.Scene {
     sprite.setFlipY(actor.espejado_vertical);
 
     if (actor.es_texto) {
-      if (!sprite["texto"]) {
-        sprite["texto"] = this.add.text(0, 0, actor.texto);
-        sprite["texto"].setFontFamily("verdana");
-        sprite["texto"].setColor(actor.color);
-        sprite["texto"].setFontSize(actor.magnitud);
+      if (sprite["texto"] && sprite["texto_fuente"] !== actor.fuente) {
+        sprite["texto"].destroy();
+        sprite["texto"] = undefined;
 
-        if (actor.texto && actor.texto_con_borde) {
-          sprite["texto"].setStroke("#fff", 1);
-          sprite["texto"].setShadow(1, 1, "#333333", 2, true, true);
+        if (sprite["fondo"]) {
+          sprite["fondo"].destroy();
         }
+      }
+
+      if (!sprite["texto"]) {
+        sprite["texto"] = this.add.bitmapText(0, 0, actor.fuente, actor.texto);
+        sprite["texto_fuente"] = actor.fuente;
 
         sprite.update = () => {
           this.copiar_valores_de_sprite_a_texto(sprite);
@@ -210,7 +207,7 @@ class Modo extends Phaser.Scene {
         }
       }
 
-      sprite["texto"].setText(actor.texto);
+      sprite["texto"].text = actor.texto;
 
       if (actor.fondo !== sprite["fondo_imagen"]) {
         if (sprite["fondo"]) {
@@ -273,6 +270,12 @@ class Modo extends Phaser.Scene {
       fondo.flipX = sprite.flipX;
       fondo.flipY = sprite.flipY;
       fondo.resize(texto.width + margen, texto.height + margen);
+
+      // el dialogo es un tipo de fondo especial, que queda mal
+      // si el texto está muy arriba.
+      if (sprite["fondo_imagen"].includes("dialogo")) {
+        fondo.y += 4;
+      }
 
       fondo.depth = texto.depth - 1;
 

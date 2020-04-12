@@ -58,6 +58,8 @@ comandos:
 	@echo "    ${G}pilas_manual${N}                 Genera el manual de pilas."
 	@echo "    ${G}pilas_manuales_descargables${N}  Genera los pdf, epub y mobi del manual."
 	@echo "    ${G}actualizar_phaser${N}            Actualiza phaser a una versión más reciente."
+	@echo "    ${G}actualizar_fuentes${N}           "
+	@echo "    ${G}actualizar_fuentes_live${N}      "
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
 	@echo ""
@@ -266,6 +268,14 @@ actualizar_definiciones:
 
 corregir_phaser_js:
 	python3 scripts/patch.py
+
+actualizar_fuentes:
+	$(call log, "Actualizando spritesheets de fuentes")
+	@node scripts/actualizar-fuentes.js
+	TexturePacker recursos/fuentes.tps
+
+actualizar_fuentes_live:
+	@node scripts/actualizar-fuentes-live.js
 
 actualizar_imagenes:
 	$(call log, "Creando spritesheets de imágenes de pilas")

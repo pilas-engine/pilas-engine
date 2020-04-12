@@ -20,14 +20,12 @@ class ModoCargador extends Modo {
     this.load.multiatlas("bloques", "bloques.json", "./");
     this.load.multiatlas("decoracion", "decoracion.json", "./");
 
+    this.load.multiatlas("fuentes", "fuentes.json", "./");
+    this.load.json("fuentes-datos-json", "fuentes-datos.json");
+
     for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
       let sonido = this.pilas.recursos.sonidos[i];
       this.load.audio(sonido.nombre, sonido.ruta, {});
-    }
-
-    for (let i = 0; i < this.pilas.recursos.fuentes.length; i++) {
-      let fuente = this.pilas.recursos.fuentes[i];
-      this.load.bitmapFont(fuente.nombre, fuente.imagen, fuente.fuente, null, null);
     }
 
     if (this.pilas.recursos.atlas) {
@@ -131,8 +129,14 @@ class ModoCargador extends Modo {
   }
 
   create() {
-    super.create({ pilas: this.pilas }, 500, 500);
+    this.crear_fuente_bitmap("color-negro");
+    this.crear_fuente_bitmap("color-blanco");
+    this.crear_fuente_bitmap("color-blanco-con-sombra-grande");
+    this.crear_fuente_bitmap("color-blanco-con-sombra");
+    this.crear_fuente_bitmap("pixel-color-negro");
+    this.crear_fuente_bitmap("pixel-color-blanco");
 
+    super.create({ pilas: this.pilas }, 500, 500);
     this.notificar_imagenes_cargadas();
 
     if (this.pilas.opciones.modo_simple) {
@@ -204,6 +208,18 @@ class ModoCargador extends Modo {
     } else {
       this.pilas.mensajes.emitir_mensaje_al_editor("finaliza_carga_de_recursos");
     }
+  }
+
+  private crear_fuente_bitmap(nombre) {
+    let ParseXMLBitmapFont = Phaser.GameObjects.BitmapText.ParseXMLBitmapFont;
+    let frame = this.sys.textures.getFrame("fuentes", nombre);
+    let json = this.sys.cache.json.get("fuentes-datos-json");
+
+    let parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(json[nombre].contenido, "application/xml");
+
+    var data = ParseXMLBitmapFont(xmlDoc, undefined, undefined, nombre);
+    this.sys.cache.bitmapFont.add(nombre, { data: data, texture: "fuentes", frame: nombre });
   }
 
   cuando_progresa_la_carga(progreso) {

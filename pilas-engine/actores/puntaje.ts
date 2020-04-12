@@ -6,7 +6,7 @@ class puntaje extends ActorTextoBase {
     es_texto: true,
     z: -10,
     texto_con_borde: true,
-    magnitud: 20
+    fuente: ""
   };
   puntaje: number = 0;
 

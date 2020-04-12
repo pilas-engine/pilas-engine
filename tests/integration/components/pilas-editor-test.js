@@ -21,18 +21,6 @@ module("Integration | Component | pilas editor", function(hooks) {
             ruta: "imagenes/fondos/plano.png"
           }
         ],
-        fuentes: [
-          {
-            nombre: "font",
-            imagen: "fuentes/font.png",
-            fuente: "fuentes/font.fnt"
-          },
-          {
-            nombre: "impact",
-            imagen: "fuentes/impact.png",
-            fuente: "fuentes/impact.fnt"
-          }
-        ],
         sonidos: [
           {
             nombre: "laser",

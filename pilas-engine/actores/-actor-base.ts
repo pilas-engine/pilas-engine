@@ -27,10 +27,10 @@ class ActorBase {
   _fondo: any = null;
   _fondo_imagen: string = "";
   _dialogo: any = null;
+  _fuente: string = "color-blanco-con-sombra";
 
   _texto_con_borde: boolean = false;
   _color_de_texto: string = "white";
-  _magnitud: number = 18;
 
   propiedades_base = {
     x: 0,
@@ -60,8 +60,7 @@ class ActorBase {
 
     es_texto: false,
     texto_con_borde: false,
-    color: "white",
-    magnitud: 18
+    color: "white"
   };
 
   propiedades: any = {
@@ -153,9 +152,7 @@ class ActorBase {
 
     if (propiedades.es_texto) {
       this.texto = propiedades.texto;
-      this.magnitud = propiedades.magnitud;
-      this.color = propiedades.color;
-      this.con_borde = propiedades.texto_con_borde;
+      this.fuente = propiedades.fuente;
 
       if (propiedades.fondo) {
         this.fondo = propiedades.fondo;
@@ -322,10 +319,12 @@ class ActorBase {
   serializar() {
     let texto = "";
     let fondo = "";
+    let fuente = "";
 
     if (this._es_texto) {
       texto = this._texto.text;
       fondo = this._fondo_imagen;
+      fuente = this._fuente;
     }
 
     return {
@@ -350,9 +349,9 @@ class ActorBase {
       es_texto: this._es_texto,
       texto: texto,
       fondo: fondo,
+      fuente: fuente,
       texto_con_borde: this._texto_con_borde,
       color_de_texto: this._color_de_texto,
-      magnitud: this._magnitud,
 
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,
@@ -926,6 +925,12 @@ class ActorBase {
     return this._vivo;
   }
 
+  get fuente() {
+    return "";
+  }
+
+  set fuente(fuente: string) {}
+
   set figura_ancho(valor: number) {
     throw new Error("No puede definir este atributo");
   }
@@ -964,6 +969,7 @@ class ActorBase {
     texto.texto = mensaje;
     texto.x = this.x - 15;
     texto.y = this.y + this.alto;
+    texto.fuente = "color-negro";
     texto.transparencia = 100;
     texto.transparencia = [0];
     texto.fondo = "imagenes:redimensionables/dialogo";
@@ -1060,11 +1066,6 @@ class ActorBase {
   set con_borde(con_borde: boolean) {
     // ver ActorTextoBase.con_borde
     this._texto_con_borde = con_borde;
-  }
-
-  set magnitud(numero: number) {
-    // ver ActorTextoBase.magnitud
-    this._magnitud = numero;
   }
 
   set color(color: string) {

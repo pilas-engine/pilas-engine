@@ -428,6 +428,7 @@ declare class Pilas {
         pixelArt: boolean;
         autostart: boolean;
         transparent: boolean;
+        fps: {};
         input: {
             keyboard: boolean;
             mouse: boolean;
@@ -507,9 +508,9 @@ declare class ActorBase {
     _fondo: any;
     _fondo_imagen: string;
     _dialogo: any;
+    _fuente: string;
     _texto_con_borde: boolean;
     _color_de_texto: string;
-    _magnitud: number;
     propiedades_base: {
         x: number;
         y: number;
@@ -535,7 +536,6 @@ declare class ActorBase {
         es_texto: boolean;
         texto_con_borde: boolean;
         color: string;
-        magnitud: number;
     };
     propiedades: any;
     constructor(pilas: any);
@@ -569,9 +569,9 @@ declare class ActorBase {
         es_texto: boolean;
         texto: string;
         fondo: string;
+        fuente: string;
         texto_con_borde: boolean;
         color_de_texto: string;
-        magnitud: number;
         espejado: boolean;
         espejado_vertical: boolean;
         transparencia: number;
@@ -639,6 +639,7 @@ declare class ActorBase {
     agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
     eliminar(): void;
     esta_vivo(): boolean;
+    fuente: string;
     figura_ancho: number;
     figura_alto: number;
     figura_radio: number;
@@ -648,7 +649,6 @@ declare class ActorBase {
     tiene_habilidad(habilidad: string): boolean;
     aumentar(cantidad?: number): void;
     con_borde: boolean;
-    magnitud: number;
     color: string;
     readonly control: Control;
     obtener_distancia_al_punto(x: number, y: number): number;
@@ -665,20 +665,17 @@ declare class ActorTextoBase extends ActorBase {
         imagen: string;
         texto: string;
         es_texto: boolean;
+        fuente: string;
     };
     margen_interno: number;
-    _anterior_texto: string;
     iniciar(): void;
-    con_borde: boolean;
     pre_actualizar(): void;
     actualizar(): void;
-    sombra: boolean;
     texto: string;
+    fuente: string;
     fondo: string;
     private crear_fondo;
     private actualizar_tamano_del_fondo;
-    magnitud: number;
-    color: string;
     eliminar(): void;
 }
 declare class Actor extends ActorBase {
@@ -722,6 +719,7 @@ declare class boton extends ActorTextoBase {
         es_texto: boolean;
         z: number;
         color: string;
+        fuente: string;
     };
     cuando_hace_click(): void;
     realizar_animacion_de_pulsacion(): void;
@@ -736,6 +734,7 @@ declare class boton_activable extends ActorTextoBase {
         es_texto: boolean;
         z: number;
         color: string;
+        fuente: string;
     };
     habilitado: boolean;
     cuando_hace_click(): void;
@@ -1003,7 +1002,7 @@ declare class puntaje extends ActorTextoBase {
         es_texto: boolean;
         z: number;
         texto_con_borde: boolean;
-        magnitud: number;
+        fuente: string;
     };
     puntaje: number;
     iniciar(): void;
@@ -1018,6 +1017,7 @@ declare class reiniciar_escena extends ActorTextoBase {
         es_texto: boolean;
         z: number;
         color: string;
+        fuente: string;
     };
     cuando_hace_click(): void;
     cuando_mueve(): void;
@@ -1061,7 +1061,7 @@ declare class texto extends ActorTextoBase {
         texto: string;
         es_texto: boolean;
         z: number;
-        color: string;
+        fuente: string;
     };
 }
 declare class EscenaBase {
@@ -1580,7 +1580,6 @@ declare class Modo extends Phaser.Scene {
     actores: any;
     pilas: Pilas;
     fps: any;
-    fps_extra: any;
     graphics: any;
     fondo: any;
     _nombre_del_fondo: string;
@@ -1621,6 +1620,7 @@ declare class ModoCargador extends Modo {
     update(): void;
     notificar_imagenes_cargadas(): void;
     create(): void;
+    private crear_fuente_bitmap;
     cuando_progresa_la_carga(progreso: any): void;
 }
 declare class ModoEditor extends Modo {
@@ -1721,7 +1721,7 @@ declare class ModoEjecucion extends Modo {
 declare class ModoPausa extends Modo {
     pilas: Pilas;
     graphics_modo_pausa: any;
-    fps: any;
+    indicador_de_texto: any;
     posicion: number;
     sprites: any;
     texto: any;
@@ -1731,6 +1731,7 @@ declare class ModoPausa extends Modo {
     fondo_anterior: any;
     _anterior_valor_del_modo_posicion_activado: boolean;
     constructor();
+    private crear_indicador_de_texto;
     preload(): void;
     create(datos: any): void;
     private crear_sprites_desde_historia;

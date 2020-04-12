@@ -113,7 +113,6 @@ class ModoEditor extends Modo {
     this.minimap.inputEnabled = false;
     this.minimap.ignore(this.fondo);
     this.minimap.ignore(this.fps);
-    this.minimap.ignore(this.fps_extra);
   }
 
   crear_manejadores_para_controlar_el_zoom() {

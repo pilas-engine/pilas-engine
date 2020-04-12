@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
+import { debounce } from "@ember/runloop";
 
 export default Component.extend({
   bus: service(),
@@ -34,7 +35,13 @@ export default Component.extend({
   },
 
   definirZoom({ zoom }) {
-    this.set("zoom", zoom);
+    debounce(this, "definirZoomInmediatamente", zoom, 1000);
+  },
+
+  definirZoomInmediatamente(zoom) {
+    if (this.zoom !== zoom) {
+      this.set("zoom", zoom);
+    }
   },
 
   willDestroyElement() {

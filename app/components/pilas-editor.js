@@ -424,6 +424,7 @@ export default Component.extend({
 
     agregar_actor(proyecto, actor) {
       this.set("hay_cambios_por_guardar", true);
+
       let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
       let id = this.generar_id();

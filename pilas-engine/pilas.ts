@@ -161,24 +161,6 @@ class Pilas {
             nombre: "seleccion-grave",
             ruta: "sonidos/seleccion-grave.wav"
           }
-        ],
-
-        fuentes: [
-          {
-            nombre: "font",
-            imagen: "fuentes/font.png",
-            fuente: "fuentes/font.fnt"
-          },
-          {
-            nombre: "impact",
-            imagen: "fuentes/impact.png",
-            fuente: "fuentes/impact.fnt"
-          },
-          {
-            nombre: "mini-impact",
-            imagen: "fuentes/mini-impact.png",
-            fuente: "fuentes/mini-impact.fnt"
-          }
         ]
       };
     }
@@ -267,6 +249,10 @@ class Pilas {
       pixelArt: pixelart,
       autostart: false,
       transparent: transparente,
+      fps: {
+        //target: 60,
+        //forceSetTimeOut: true
+      },
       input: {
         keyboard: true,
         mouse: true,

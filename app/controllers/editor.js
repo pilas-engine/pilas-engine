@@ -100,6 +100,11 @@ export default Controller.extend(queryParams.Mixin, {
 
       escena.get("actores").forEach(actor => {
         actor.set("imagen", this.convertir_nombre_de_imagenes(actor.get("imagen")));
+
+        // miración 2020-04-12: hacer que los actores de texto tengan una fuente por omisión.
+        if (actor.get("es_texto") && !actor.get("fuente")) {
+          actor.set("fuente", "color-blanco-con-sombra");
+        }
       });
     });
 

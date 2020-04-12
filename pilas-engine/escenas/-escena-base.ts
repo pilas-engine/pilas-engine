@@ -57,12 +57,6 @@ class EscenaBase {
           .replace(/    /g, "")
           .trim();
 
-        // asigna el fondo blanco una vez que el actor observador tiene texto y está
-        // posicionado correctamente en la pantalla.
-        if (!self._actor_visor_observables.fondo) {
-          self._actor_visor_observables.fondo = "imagenes:redimensionables/blanco";
-        }
-
         this.texto = texto;
       };
 

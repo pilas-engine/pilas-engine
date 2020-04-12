@@ -5,7 +5,8 @@ class boton extends ActorTextoBase {
     texto: "Botón",
     es_texto: true,
     z: -10,
-    color: "black"
+    color: "black",
+    fuente: "color-negro"
   };
 
   cuando_hace_click() {

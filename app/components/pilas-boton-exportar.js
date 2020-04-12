@@ -72,6 +72,13 @@ export default Component.extend({
       yield this.agregar_archivo(carpeta_del_juego, "./decoracion-0.png");
       yield this.agregar_archivo(carpeta_del_juego, "./decoracion.json");
 
+      yield this.agregar_archivo(carpeta_del_juego, "./decoracion-0.png");
+      yield this.agregar_archivo(carpeta_del_juego, "./decoracion.json");
+
+      yield this.agregar_archivo(carpeta_del_juego, "./fuentes-0.png");
+      yield this.agregar_archivo(carpeta_del_juego, "./fuentes.json");
+      yield this.agregar_archivo(carpeta_del_juego, "./fuentes-datos.json");
+
       yield carpeta_del_juego.file("proyecto.pilas", proyecto_como_string);
 
       let archivo_index = yield this.obtener_archivo("./proyecto-exportable/index.html", "text");
@@ -98,15 +105,6 @@ export default Component.extend({
       yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-largo.wav");
       yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-aguda.wav");
       yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-grave.wav");
-
-      var carpeta_fuentes = carpeta_del_juego.folder("fuentes");
-
-      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/font.png");
-      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/font.fnt");
-      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/impact.png");
-      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/impact.fnt");
-      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.png");
-      yield this.agregar_archivo(carpeta_fuentes, "./fuentes/mini-impact.fnt");
 
       var carpeta_imagenes = carpeta_del_juego.folder("imagenes");
 

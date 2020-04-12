@@ -1,31 +1,4 @@
 {
-  "fuentes": [
-    {
-      "nombre": "font",
-      "imagen": "fuentes/font.png",
-      "fuente": "fuentes/font.fnt"
-    },
-    {
-      "nombre": "verdana3",
-      "imagen": "fuentes/verdana3.png",
-      "fuente": "fuentes/verdana3.fnt"
-    },
-    {
-      "nombre": "azul",
-      "imagen": "fuentes/azul.png",
-      "fuente": "fuentes/azul.fnt"
-    },
-    {
-      "nombre": "impact",
-      "imagen": "fuentes/impact.png",
-      "fuente": "fuentes/impact.fnt"
-    },
-    {
-      "nombre": "mini-impact",
-      "imagen": "fuentes/mini-impact.png",
-      "fuente": "fuentes/mini-impact.fnt"
-    }
-  ],
   "sonidos": [
     {
       "nombre": "laser",

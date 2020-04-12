@@ -4,6 +4,6 @@ class texto extends ActorTextoBase {
     texto: "Hola mundo",
     es_texto: true,
     z: -10,
-    color: "white"
+    fuente: "color-blanco-con-sombra"
   };
 }

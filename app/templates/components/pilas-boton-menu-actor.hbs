@@ -1,13 +1,14 @@
 {{yield}}
 <div class="dib relative">
-  {{#pilas-tooltip pos="up-right" texto="Más opciones para este actor"}}
-    <button data-test="boton-menu" class="texto bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0" {{action "mostrar"}}>{{pilas-icono icono="menu"}}</button>
-  {{/pilas-tooltip}}
 
-  {{#if mostrar}}
-    <div role="button" class="fixed z-1 absolute--fill" {{action "ocultar"}}></div>
+  {{#basic-dropdown as |dd|}}
+    {{#pilas-tooltip pos="up-right" texto="Más opciones para este actor"}}
+      {{#dd.trigger}}
+        <button data-test="boton-menu" class="texto bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0">{{pilas-icono icono="menu"}}</button>
+      {{/dd.trigger}}
+    {{/pilas-tooltip}}
 
-    <div class="absolute bg-fondo ba borde shadow-4 top-1 right-0 pa2 f7 z-999">
+    {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
 
       <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action accionClonar}}>
         {{pilas-icono icono="duplicar" class="v-top"}} Duplicar este actor
@@ -17,7 +18,8 @@
         {{pilas-icono icono="duplicar" class="v-top"}} Duplicar 5 veces este actor
       </div>
 
-      {{pilas-boton-eliminar-con-confirmacion modalFixed=true comoCelda=true tipo="actor" titulo="¿Realmente quieres eliminar este actor?" accion=accionEliminar}}
+      {{pilas-boton-eliminar-con-confirmacion comoCelda=true tipo="actor" titulo="¿Realmente quieres eliminar este actor?" accion=accionEliminar}}
+
       {{pilas-mover-actor-de-escena
           escenas=escenas
           actor_id=actor_id
@@ -25,6 +27,7 @@
           accionCuandoIntentaMoverAEscenaNueva=accionCuandoIntentaMoverAEscenaNueva
           accionCuandoIntentaMoverAUnaEscena=accionCuandoIntentaMoverAUnaEscena
         }}
-    </div>
-  {{/if}}
+    {{/dd.content}}
+  {{/basic-dropdown}}
+
 </div>

@@ -2,26 +2,13 @@ class ActorTextoBase extends ActorBase {
   propiedades = {
     imagen: "imagenes:basicos/invisible",
     texto: "Hola mundo",
-    es_texto: true
+    es_texto: true,
+    fuente: "color-blanco-con-sombra-grande"
   };
 
   margen_interno: number = 30;
-  _anterior_texto: string;
 
   iniciar() {}
-
-  set con_borde(con_borde: boolean) {
-    this._texto_con_borde = con_borde;
-
-    if (con_borde) {
-      this._texto.setStroke("#fff", 1);
-      this._texto.setShadow(1, 1, "#333333", 2, true, true);
-    }
-  }
-
-  get con_borde() {
-    return this._texto_con_borde;
-  }
 
   pre_actualizar() {
     super.pre_actualizar();
@@ -34,6 +21,12 @@ class ActorTextoBase extends ActorBase {
       this._fondo.x += this.margen_interno * this.sprite.originX - this.margen_interno * 0.5;
       this._fondo.y += this.margen_interno * this.sprite.originY - this.margen_interno * 0.5;
 
+      // el dialogo es un tipo de fondo especial, que queda mal
+      // si el texto está muy arriba.
+      if (this._fondo_imagen.includes("dialogo")) {
+        this._fondo.y += 4;
+      }
+
       if (this.fijo) {
         this._fondo.setScrollFactor(0, 0);
       } else {
@@ -44,38 +37,28 @@ class ActorTextoBase extends ActorBase {
 
   actualizar() {}
 
-  set sombra(valor: boolean) {
-    if (valor) {
-      this._texto.setShadow(1, 1, "white", 2);
-    } else {
-      this._texto.setShadow();
-    }
-  }
-
   set texto(texto: string) {
     if (!this._texto) {
-      this._texto = this.pilas.modo.add.text(0, 0, texto);
-      this._texto.setFontFamily("verdana");
+      this._texto = this.pilas.modo.add.bitmapText(0, 0, this._fuente, texto);
     } else {
-      if (texto != this._anterior_texto) {
-        // TODO: Cambiar el texto en lugar de re-hacerlo si
-        //       se llega a resolver este issue de phaser3:
-        //
-        //       https://github.com/photonstorm/phaser/issues/5064#issuecomment-607478749
-        this._texto.destroy();
-        this._texto = this.pilas.modo.add.text(0, 0, texto);
-        this._texto.setFontFamily("verdana");
-
-        this.x = this.x;
-        this.y = this.y;
-        //this.magnitud = this.magnitud;
-        //this.con_borde = this.con_borde;
-        //this.sombra = this.sombra;
-      }
+      this._texto.text = texto;
     }
 
-    this._anterior_texto = texto;
+    this.actualizar_tamano_del_fondo();
+  }
 
+  get fuente() {
+    return this._fuente;
+  }
+
+  set fuente(fuente: string) {
+    let texto = this.texto;
+    if (this._texto) {
+      this._texto.destroy();
+    }
+
+    this._texto = this.pilas.modo.add.bitmapText(0, 0, fuente, texto);
+    this._fuente = fuente;
     this.actualizar_tamano_del_fondo();
   }
 
@@ -121,21 +104,6 @@ class ActorTextoBase extends ActorBase {
 
     this._fondo.resize(ancho, alto);
     this.definir_area_de_interactividad(ancho, alto);
-  }
-
-  set magnitud(numero: number) {
-    this._texto.setFontSize(numero);
-    this._magnitud = numero;
-    this.actualizar_tamano_del_fondo();
-  }
-
-  get magnitud() {
-    return this._magnitud;
-  }
-
-  set color(color: string) {
-    this._texto.setColor(color);
-    this._color_de_texto = color;
   }
 
   eliminar() {

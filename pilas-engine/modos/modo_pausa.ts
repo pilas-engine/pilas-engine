@@ -4,7 +4,7 @@ class ModoPausa extends Modo {
   pilas: Pilas;
 
   graphics_modo_pausa: any;
-  fps: any;
+  indicador_de_texto: any;
 
   posicion: number;
   sprites: any;
@@ -21,6 +21,15 @@ class ModoPausa extends Modo {
     super({ key: "ModoPausa" });
   }
 
+  private crear_indicador_de_texto() {
+    this.indicador_de_texto = this.add.bitmapText(5, 10, "color-blanco-con-sombra", "");
+    this.indicador_de_texto.scrollFactorX = 0;
+    this.indicador_de_texto.scrollFactorY = 0;
+    this.indicador_de_texto.depth = 999999;
+
+    this.indicador_de_texto.align = 2;
+  }
+
   preload() {}
 
   create(datos) {
@@ -29,6 +38,7 @@ class ModoPausa extends Modo {
     this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.total = this.pilas.historia.obtener_cantidad_de_posiciones();
     this.sprites = [];
+    this.crear_indicador_de_texto();
 
     this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
 
@@ -52,6 +62,7 @@ class ModoPausa extends Modo {
   private crear_sprites_desde_historia(posicion) {
     let foto = this.pilas.historia.obtener_foto(posicion);
 
+    // Elimina a todos los sprites de la escena.
     this.sprites.map(sprite => {
       if (sprite.figura) {
         this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
@@ -77,6 +88,7 @@ class ModoPausa extends Modo {
     // actores.
     this.graphics.clear();
 
+    // Crea a todos los actores desde la foto actual.
     this.sprites = foto.actores.map(entidad => {
       if (this.pilas.depurador.modo_posicion_activado) {
         let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
@@ -86,6 +98,26 @@ class ModoPausa extends Modo {
 
       return this.crear_sprite_desde_entidad(entidad);
     });
+
+    let minutos_como_numero = Math.floor(posicion / 60 / 60);
+    let segundos_como_numero = Math.floor(posicion / 60) % 60;
+
+    let minutos = `0${minutos_como_numero}`.slice(-2);
+    let segundos = `0${segundos_como_numero}`.slice(-2);
+
+    let sufijo_minutos = "minutos";
+    let sufijo_segundos = "segundos";
+
+    if (minutos_como_numero === 1) {
+      sufijo_minutos = "minuto";
+    }
+
+    if (segundos_como_numero === 1) {
+      sufijo_segundos = "segundo";
+    }
+
+    this.indicador_de_texto.text = `Tiempo: ${minutos} ${sufijo_minutos} ${segundos} ${sufijo_segundos}\nCuadro: ${posicion}\nCantidad de actores: ${foto.actores.length}`;
+    this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
   }
 
   update() {
@@ -144,16 +176,7 @@ class ModoPausa extends Modo {
     }
 
     if (entidad.texto) {
-      sprite["texto"] = this.pilas.modo.add.text(0, 0, entidad.texto);
-      sprite["texto"].setFontFamily("verdana");
-      sprite["texto"].setFontSize(entidad.magnitud);
-      sprite["texto"].setColor(entidad.color_de_texto);
-
-      if (entidad.texto_con_borde) {
-        sprite["texto"].setStroke("#fff", 1);
-        sprite["texto"].setShadow(1, 1, "#333333", 2, true, true);
-      }
-
+      sprite["texto"] = this.pilas.modo.add.bitmapText(0, 0, entidad.fuente, entidad.texto);
       sprite["texto"].depth = sprite.depth;
 
       if (entidad.fondo) {
@@ -173,6 +196,12 @@ class ModoPausa extends Modo {
         sprite["fondo"].x += 30 * sprite["texto"].originX - 30 * 0.5;
         sprite["fondo"].y += 30 * sprite["texto"].originY - 30 * 0.5;
         sprite["fondo"].setOrigin(sprite["texto"].originX, sprite["texto"].originY);
+
+        // el dialogo es un tipo de fondo especial, que queda mal
+        // si el texto está muy arriba.
+        if (entidad.fondo.includes("dialogo")) {
+          sprite["fondo"].y += 4;
+        }
 
         if (entidad.fijo) {
           sprite["fondo"].setScrollFactor(0, 0);

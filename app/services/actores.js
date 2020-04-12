@@ -14,20 +14,14 @@ export default Service.extend({
     let metadata = yield this.obtenerActores();
     let codigo_del_actor_base = metadata.actores[0].codigo;
 
-    let propiedades_base = this.extraer_diccionario(
-      "propiedades_base",
-      codigo_del_actor_base
-    );
+    let propiedades_base = this.extraer_diccionario("propiedades_base", codigo_del_actor_base);
 
     for (let i = 0; i < metadata.actores.length; i++) {
       let actor = metadata.actores[i];
 
       let propiedades = this.extraer_diccionario("propiedades", actor.codigo);
       actor.imagen = propiedades.imagen;
-      actor.propiedades = this.combinar_propiedades(
-        propiedades_base,
-        propiedades
-      );
+      actor.propiedades = this.combinar_propiedades(propiedades_base, propiedades);
     }
 
     let actores_accesibles = metadata.actores.filter(actor => {
@@ -79,10 +73,7 @@ export default Service.extend({
       return obj;
     }
 
-    return extend(
-      JSON.parse(JSON.stringify(propiedades_iniciales)),
-      propiedades
-    );
+    return extend(JSON.parse(JSON.stringify(propiedades_iniciales)), propiedades);
   },
 
   iniciar() {

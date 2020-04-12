@@ -24,6 +24,37 @@ export default Component.extend({
       });
 
       propiedades.pushObject({
+        tipo: "combo",
+        propiedad: "fuente",
+        opciones: [
+          {
+            valor: "color-negro",
+            texto: "color-negro"
+          },
+          {
+            valor: "color-blanco",
+            texto: "color-blanco"
+          },
+          {
+            valor: "color-blanco-con-sombra-grande",
+            texto: "color-blanco-con-sombra-grande"
+          },
+          {
+            valor: "color-blanco-con-sombra",
+            texto: "color-blanco-con-sombra"
+          },
+          {
+            valor: "pixel-color-negro",
+            texto: "pixel-color-negro"
+          },
+          {
+            valor: "pixel-color-blanco",
+            texto: "pixel-color-blanco"
+          }
+        ]
+      });
+
+      propiedades.pushObject({
         tipo: "imagen",
         propiedad: "fondo",
         filtroPropuesto: "redimensionable"
