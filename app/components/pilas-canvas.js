@@ -36,7 +36,9 @@ export default Component.extend({
 
       opciones_de_pilas.pixelart = this.convertir_a_boolean(this.pixelart);
 
-      opciones_de_pilas.fps = this.proyecto.fps;
+      if (this.proyecto && this.proyecto.fps) {
+        opciones_de_pilas.fps = this.proyecto.fps;
+      }
 
       let imagenes_para_cargar_desde_el_proyecto = [];
 

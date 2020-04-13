@@ -593,9 +593,8 @@ export default Component.extend({
       }
     },
 
-    cuando_modifica_proyecto(proyecto) {
+    cuando_modifica_proyecto() {
       this.set("hay_cambios_por_guardar", true);
-
       this.bus.trigger("recargarCanvasDePilas");
     },
 
