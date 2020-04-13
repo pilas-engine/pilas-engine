@@ -2,7 +2,7 @@ version: 2
 jobs:
   compilar:
     docker:
-      - image: circleci/node:8.16.0-stretch-browsers
+      - image: circleci/node:12.16.1-stretch-browsers
     steps:
       - checkout
       - run:
@@ -13,7 +13,7 @@ jobs:
           command: make test
   binarios:
     docker:
-      - image: circleci/node:8.16.0-stretch-browsers
+      - image: circleci/node:12.16.1-stretch-browsers
     steps:
       - checkout
       - run: make iniciar
@@ -36,7 +36,7 @@ jobs:
       - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` manuales/
   actualizar-sitio:
     docker:
-      - image: circleci/node:8.16.0-stretch-browsers
+      - image: circleci/node:12.16.1-stretch-browsers
     steps:
       - checkout
       - run: make iniciar
@@ -47,7 +47,7 @@ jobs:
           command: make deploy_a_dokku
   actualizar-sitio-dev:
     docker:
-      - image: circleci/node:8.16.0-stretch-browsers
+      - image: circleci/node:12.16.1-stretch-browsers
     steps:
       - checkout
       - run: make iniciar
