@@ -108,6 +108,11 @@ export default Controller.extend(queryParams.Mixin, {
       });
     });
 
+    // migración 2020-04-12: hacer que el proyecto tenga almacenados los FPS
+    if (!proyecto.get("fps")) {
+      proyecto.set("fps", 60);
+    }
+
     return proyecto;
   },
 

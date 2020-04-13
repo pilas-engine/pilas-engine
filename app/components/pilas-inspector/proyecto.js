@@ -4,22 +4,41 @@ export default Component.extend({
   didInsertElement() {
     this.set("propiedades", [
       {
-        tipo: "separador",
-        nombre: "Tamaño de la pantalla"
+        tipo: "combo",
+        propiedad: "tamaño",
+        opciones: [
+          {
+            valor: "500x500",
+            texto: "500x500"
+          },
+          {
+            valor: "320x240",
+            texto: "320x240"
+          },
+          {
+            valor: "800x600",
+            texto: "800x600"
+          }
+        ]
       },
+
       {
-        tipo: "numero",
-        propiedad: "ancho",
-        intensidad: 1,
-        min: 200,
-        max: 1920
-      },
-      {
-        tipo: "numero",
-        propiedad: "alto",
-        intensidad: 1,
-        min: 200,
-        max: 1080
+        tipo: "combo",
+        propiedad: "fps",
+        opciones: [
+          {
+            valor: 60,
+            texto: "60 (recomendado)"
+          },
+          {
+            valor: 30,
+            texto: "30"
+          },
+          {
+            valor: 20,
+            texto: "20"
+          }
+        ]
       }
     ]);
   }

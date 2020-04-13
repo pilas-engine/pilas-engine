@@ -36,6 +36,8 @@ export default Component.extend({
 
       opciones_de_pilas.pixelart = this.convertir_a_boolean(this.pixelart);
 
+      opciones_de_pilas.fps = this.proyecto.fps;
+
       let imagenes_para_cargar_desde_el_proyecto = [];
 
       if (this.proyecto && this.proyecto.imagenes) {
@@ -72,7 +74,6 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, this, "selecciona_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, this, "actualizar_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, this, "actualizar_escena_desde_el_editor");
-      this.bus.on(`${this.nombre_del_contexto}:actualizar_proyecto_desde_el_editor`, this, "actualizar_proyecto_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, this, "hacer_foco_en_pilas");
       this.bus.on(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
       this.bus.on(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
@@ -100,7 +101,6 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, this, "selecciona_actor_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, this, "actualizar_actor_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, this, "actualizar_escena_desde_el_editor");
-    this.bus.off(`${this.nombre_del_contexto}:actualizar_proyecto_desde_el_editor`, this, "actualizar_proyecto_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, this, "hacer_foco_en_pilas");
     this.bus.off(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
     this.bus.off(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
@@ -274,16 +274,6 @@ export default Component.extend({
       nombre_del_contexto: this.nombre_del_contexto,
       id,
       escena
-    };
-
-    this.contexto.postMessage(data, utils.HOST);
-  },
-
-  actualizar_proyecto_desde_el_editor({ proyecto }) {
-    let data = {
-      tipo: "actualizar_proyecto_desde_el_editor",
-      nombre_del_contexto: this.nombre_del_contexto,
-      proyecto
     };
 
     this.contexto.postMessage(data, utils.HOST);

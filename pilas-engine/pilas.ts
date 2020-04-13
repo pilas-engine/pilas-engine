@@ -103,6 +103,13 @@ class Pilas {
     this.recursos = recursos;
     var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
 
+    if (opciones.fps !== 60) {
+      configuracion["fps"] = {
+        target: opciones.fps,
+        forceSetTimeOut: true
+      };
+    }
+
     // Opción para simular una espera o demora al iniciar el componente de
     // pilas, se utiliza desde el editor cuando corren los tests.
     if (opciones.esperar_antes_de_iniciar) {

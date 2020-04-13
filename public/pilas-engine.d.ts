@@ -336,7 +336,6 @@ declare class Mensajes {
     atender_mensaje_pausar_escena(): void;
     atender_mensaje_cambiar_posicion(datos: any): void;
     atender_mensaje_eliminar_actor_desde_el_editor(datos: any): void;
-    atender_mensaje_actualizar_proyecto_desde_el_editor(datos: any): void;
 }
 declare class Utilidades {
     pilas: Pilas;

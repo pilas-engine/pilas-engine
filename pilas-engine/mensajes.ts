@@ -177,9 +177,4 @@ class Mensajes {
   atender_mensaje_eliminar_actor_desde_el_editor(datos) {
     this.pilas.modo.eliminar_actor_por_id(datos.id);
   }
-
-  atender_mensaje_actualizar_proyecto_desde_el_editor(datos) {
-    let proyecto = datos.proyecto;
-    this.pilas.game.scale.resize(proyecto.ancho, proyecto.alto);
-  }
 }

@@ -9,7 +9,6 @@ import Service from "@ember/service";
  *
  * - actualizar_actor_desde_el_editor
  * - actualizar_escena_desde_el_editor
- * - actualizar_proyecto_desde_el_editor
  * - cambiar_posicion_desde_el_editor
  * - cargar_escena
  * - comienza_a_mover_un_actor

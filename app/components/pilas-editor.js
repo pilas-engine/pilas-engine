@@ -595,12 +595,8 @@ export default Component.extend({
 
     cuando_modifica_proyecto(proyecto) {
       this.set("hay_cambios_por_guardar", true);
-      this.bus.trigger(`${this.nombre_del_contexto}:actualizar_proyecto_desde_el_editor`, {
-        proyecto: proyecto
-      });
 
-      this.mostrar_la_escena_actual_sobre_pilas();
-      //this.reiniciar_escena_actual();
+      this.bus.trigger("recargarCanvasDePilas");
     },
 
     cuando_intenta_duplicar(id, aleatorio) {

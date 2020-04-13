@@ -6,12 +6,9 @@ export default Component.extend({
   propiedades_de_actores: null,
   propiedades_de_escenas: null,
 
-  componente_a_renderizar: computed(
-    "tipo_de_la_instancia_seleccionada",
-    function() {
-      return `pilas-inspector/${this.tipo_de_la_instancia_seleccionada}`;
-    }
-  ),
+  componente_a_renderizar: computed("tipo_de_la_instancia_seleccionada", function() {
+    return `pilas-inspector/${this.tipo_de_la_instancia_seleccionada}`;
+  }),
 
   actions: {
     modificarAtributo(propiedad, valor) {
@@ -36,7 +33,23 @@ export default Component.extend({
 
     modifica_atributo_del_proyecto(propiedad, valor) {
       let proyecto = this.instancia_seleccionada;
+
+      // El valor de la propiedad fps proviene de un combo, así
+      // que hay que convertilo a número.
+      if (propiedad === "fps") {
+        valor = +valor;
+      }
+
+      if (propiedad === "tamaño") {
+        let ancho = valor.split("x")[0];
+        let alto = valor.split("x")[1];
+
+        proyecto.set("ancho", +ancho);
+        proyecto.set("alto", +alto);
+      }
+
       proyecto.set(propiedad, valor);
+
       this.cuando_modifica_proyecto(proyecto);
     }
   }

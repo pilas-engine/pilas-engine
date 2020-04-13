@@ -1511,10 +1511,6 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_eliminar_actor_desde_el_editor = function (datos) {
         this.pilas.modo.eliminar_actor_por_id(datos.id);
     };
-    Mensajes.prototype.atender_mensaje_actualizar_proyecto_desde_el_editor = function (datos) {
-        var proyecto = datos.proyecto;
-        this.pilas.game.scale.resize(proyecto.ancho, proyecto.alto);
-    };
     return Mensajes;
 }());
 var Utilidades = (function () {
@@ -1770,6 +1766,12 @@ var Pilas = (function () {
         this._alto = alto;
         this.recursos = recursos;
         var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
+        if (opciones.fps !== 60) {
+            configuracion["fps"] = {
+                target: opciones.fps,
+                forceSetTimeOut: true
+            };
+        }
         if (opciones.esperar_antes_de_iniciar) {
             console.log("Esperando 1 segundo antes de iniciar ...");
             setTimeout(function () {
