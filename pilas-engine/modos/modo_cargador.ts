@@ -131,7 +131,9 @@ class ModoCargador extends Modo {
   create() {
     this.crear_fuente_bitmap("color-negro");
     this.crear_fuente_bitmap("color-blanco");
+    this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
     this.crear_fuente_bitmap("color-blanco-con-sombra-grande");
+    this.crear_fuente_bitmap("color-blanco-con-sombra-medio");
     this.crear_fuente_bitmap("color-blanco-con-sombra");
     this.crear_fuente_bitmap("pixel-color-negro");
     this.crear_fuente_bitmap("pixel-color-blanco");

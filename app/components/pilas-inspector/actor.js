@@ -36,6 +36,14 @@ export default Component.extend({
             texto: "color-blanco"
           },
           {
+            valor: "color-blanco-con-sombra-chico",
+            texto: "color-blanco-con-sombra-chico"
+          },
+          {
+            valor: "color-blanco-con-sombra-medio",
+            texto: "color-blanco-con-sombra-medio"
+          },
+          {
             valor: "color-blanco-con-sombra-grande",
             texto: "color-blanco-con-sombra-grande"
           },
