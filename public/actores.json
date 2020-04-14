@@ -37,7 +37,7 @@
     },
     {
       "nombre": "boton_activable",
-      "codigo": "class boton_activable extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    fondo: \"imagenes:redimensionables/gris\",\n    texto: \"Botón\",\n    es_texto: true,\n    z: -10,\n    color: \"black\",\n    fuente: \"\"\n  };\n\n  habilitado: boolean = true;\n\n  cuando_hace_click() {\n    if (this.habilitado) {\n      this.decir(\"¡has hecho click!\");\n      this.realizar_animacion_de_pulsacion();\n    }\n  }\n\n  realizar_animacion_de_pulsacion() {\n    this.y -= 2;\n\n    this.pilas.luego(0.2, () => {\n      this.y += 2;\n    });\n  }\n\n  cuando_mueve() {\n    if (this.habilitado) {\n      this.pilas.definir_cursor(\"pointer\");\n    }\n  }\n\n  cuando_sale() {\n    if (this.habilitado) {\n      this.pilas.definir_cursor(\"normal\");\n    }\n  }\n\n  habilitar() {\n    this.habilitado = true;\n    this.transparencia = 0;\n  }\n\n  deshabilitar() {\n    this.habilitado = false;\n    this.transparencia = 30;\n    this.pilas.definir_cursor(\"normal\");\n  }\n\n  activar() {\n    this.habilitar();\n  }\n\n  desactivar() {\n    this.deshabilitar();\n  }\n}\n",
+      "codigo": "class boton_activable extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    fondo: \"imagenes:redimensionables/gris\",\n    texto: \"Botón\",\n    es_texto: true,\n    z: -10,\n    color: \"black\",\n    fuente: \"color-negro\"\n  };\n\n  habilitado: boolean = true;\n\n  cuando_hace_click() {\n    if (this.habilitado) {\n      this.decir(\"¡has hecho click!\");\n      this.realizar_animacion_de_pulsacion();\n    }\n  }\n\n  realizar_animacion_de_pulsacion() {\n    this.y -= 2;\n\n    this.pilas.luego(0.2, () => {\n      this.y += 2;\n    });\n  }\n\n  cuando_mueve() {\n    if (this.habilitado) {\n      this.pilas.definir_cursor(\"pointer\");\n    }\n  }\n\n  cuando_sale() {\n    if (this.habilitado) {\n      this.pilas.definir_cursor(\"normal\");\n    }\n  }\n\n  habilitar() {\n    this.habilitado = true;\n    this.transparencia = 0;\n  }\n\n  deshabilitar() {\n    this.habilitado = false;\n    this.transparencia = 30;\n    this.pilas.definir_cursor(\"normal\");\n  }\n\n  activar() {\n    this.habilitar();\n  }\n\n  desactivar() {\n    this.deshabilitar();\n  }\n}\n",
       "archivo": "boton_activable.ts"
     },
     {
@@ -147,12 +147,12 @@
     },
     {
       "nombre": "puntaje",
-      "codigo": "class puntaje extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    texto: \"PUNTAJE: 0\",\n    color: \"white\",\n    es_texto: true,\n    z: -10,\n    texto_con_borde: true,\n    fuente: \"\"\n  };\n  puntaje: number = 0;\n\n  iniciar() {\n    this.actualizar_texto();\n  }\n\n  aumentar(cantidad: number = 1) {\n    this.puntaje += cantidad;\n    this.actualizar_texto();\n  }\n\n  actualizar_texto() {\n    this.texto = `PUNTAJE: ${this.puntaje}`;\n  }\n}\n",
+      "codigo": "class puntaje extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    texto: \"PUNTAJE: 0\",\n    es_texto: true,\n    z: -10,\n    fuente: \"color-blanco-con-sombra-chico\"\n  };\n  puntaje: number = 0;\n\n  iniciar() {\n    this.actualizar_texto();\n  }\n\n  aumentar(cantidad: number = 1) {\n    this.puntaje += cantidad;\n    this.actualizar_texto();\n  }\n\n  actualizar_texto() {\n    this.texto = `PUNTAJE: ${this.puntaje}`;\n  }\n}\n",
       "archivo": "puntaje.ts"
     },
     {
       "nombre": "reiniciar_escena",
-      "codigo": "class reiniciar_escena extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    fondo: \"imagenes:redimensionables/gris\",\n    texto: \"Reiniciar escena\",\n    es_texto: true,\n    z: -10,\n    color: \"black\",\n    fuente: \"\"\n  };\n\n  cuando_hace_click() {\n    this.pilas.reiniciar_escena();\n  }\n\n  cuando_mueve() {\n    this.pilas.definir_cursor(\"pointer\");\n  }\n\n  cuando_sale() {\n    this.pilas.definir_cursor(\"normal\");\n  }\n}\n",
+      "codigo": "class reiniciar_escena extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    fondo: \"imagenes:redimensionables/gris\",\n    texto: \"Reiniciar escena\",\n    es_texto: true,\n    z: -10,\n    fuente: \"color-negro\"\n  };\n\n  cuando_hace_click() {\n    this.pilas.reiniciar_escena();\n  }\n\n  cuando_mueve() {\n    this.pilas.definir_cursor(\"pointer\");\n  }\n\n  cuando_sale() {\n    this.pilas.definir_cursor(\"normal\");\n  }\n}\n",
       "archivo": "reiniciar_escena.ts"
     },
     {

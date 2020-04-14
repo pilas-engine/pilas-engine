@@ -997,10 +997,8 @@ declare class puntaje extends ActorTextoBase {
     propiedades: {
         imagen: string;
         texto: string;
-        color: string;
         es_texto: boolean;
         z: number;
-        texto_con_borde: boolean;
         fuente: string;
     };
     puntaje: number;
@@ -1015,7 +1013,6 @@ declare class reiniciar_escena extends ActorTextoBase {
         texto: string;
         es_texto: boolean;
         z: number;
-        color: string;
         fuente: string;
     };
     cuando_hace_click(): void;

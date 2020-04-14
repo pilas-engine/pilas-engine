@@ -3442,7 +3442,7 @@ var boton_activable = (function (_super) {
             es_texto: true,
             z: -10,
             color: "black",
-            fuente: ""
+            fuente: "color-negro"
         };
         _this.habilitado = true;
         return _this;
@@ -4135,11 +4135,9 @@ var puntaje = (function (_super) {
         _this.propiedades = {
             imagen: "imagenes:basicos/invisible",
             texto: "PUNTAJE: 0",
-            color: "white",
             es_texto: true,
             z: -10,
-            texto_con_borde: true,
-            fuente: ""
+            fuente: "color-blanco-con-sombra-chico"
         };
         _this.puntaje = 0;
         return _this;
@@ -4167,8 +4165,7 @@ var reiniciar_escena = (function (_super) {
             texto: "Reiniciar escena",
             es_texto: true,
             z: -10,
-            color: "black",
-            fuente: ""
+            fuente: "color-negro"
         };
         return _this;
     }
@@ -4278,12 +4275,11 @@ var EscenaBase = (function () {
     EscenaBase.prototype.observar = function (nombre, variable) {
         if (this._observables === null) {
             this._actor_visor_observables = this.pilas.actores.texto();
-            this._actor_visor_observables.color = "black";
             this._actor_visor_observables.fijo = true;
             this._actor_visor_observables.centro_x = 0;
             this._actor_visor_observables.centro_y = 0;
-            this._actor_visor_observables.x = -210;
-            this._actor_visor_observables.y = 210;
+            this._actor_visor_observables.x = 10 - this.pilas._ancho / 2;
+            this._actor_visor_observables.y = -10 + this.pilas._alto / 2;
             this._observables = {};
             var self_1 = this;
             this._actor_visor_observables.actualizar = function () {
@@ -6977,6 +6973,8 @@ var Modo = (function (_super) {
         if (sprite.input) {
             sprite.input.hitArea.width = texto.width;
             sprite.input.hitArea.height = texto.height;
+            sprite.input.hitArea.x = -texto.width / 2;
+            sprite.input.hitArea.y = -texto.height / 2;
         }
         if (fondo) {
             var margen = 30;
@@ -7135,7 +7133,9 @@ var ModoCargador = (function (_super) {
     ModoCargador.prototype.create = function () {
         this.crear_fuente_bitmap("color-negro");
         this.crear_fuente_bitmap("color-blanco");
+        this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
         this.crear_fuente_bitmap("color-blanco-con-sombra-grande");
+        this.crear_fuente_bitmap("color-blanco-con-sombra-medio");
         this.crear_fuente_bitmap("color-blanco-con-sombra");
         this.crear_fuente_bitmap("pixel-color-negro");
         this.crear_fuente_bitmap("pixel-color-blanco");

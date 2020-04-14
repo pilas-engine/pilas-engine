@@ -474,7 +474,8 @@
           "id": 1512,
           "activo": true,
           "nombre": "texto",
-          "habilidades": []
+          "habilidades": [],
+          "fuente": "color-blanco-con-sombra"
         },
         {
           "x": -1,
@@ -506,7 +507,8 @@
           "id": 1891,
           "activo": true,
           "nombre": "texto1",
-          "habilidades": []
+          "habilidades": [],
+          "fuente": "color-blanco-con-sombra"
         },
         {
           "x": -100,
@@ -538,7 +540,8 @@
           "id": 1261,
           "activo": true,
           "nombre": "letra_p",
-          "habilidades": []
+          "habilidades": [],
+          "fuente": "color-blanco-con-sombra-grande"
         },
         {
           "x": -50,
@@ -570,7 +573,8 @@
           "id": 1845,
           "activo": true,
           "nombre": "letra_i",
-          "habilidades": []
+          "habilidades": [],
+          "fuente": "color-blanco-con-sombra-grande"
         },
         {
           "x": 0,
@@ -602,7 +606,8 @@
           "id": 1561,
           "activo": true,
           "nombre": "letra_l",
-          "habilidades": []
+          "habilidades": [],
+          "fuente": "color-blanco-con-sombra-grande"
         },
         {
           "x": 50,
@@ -634,7 +639,8 @@
           "id": 1671,
           "activo": true,
           "nombre": "letra_a",
-          "habilidades": []
+          "habilidades": [],
+          "fuente": "color-blanco-con-sombra-grande"
         },
         {
           "x": 100,
@@ -666,9 +672,13 @@
           "id": 1702,
           "activo": true,
           "nombre": "letra_s",
-          "habilidades": []
+          "habilidades": [],
+          "fuente": "color-blanco-con-sombra-grande"
         }
-      ]
+      ],
+      "ancho": 1000,
+      "alto": 1000
     }
-  ]
+  ],
+  "fps": 60
 }

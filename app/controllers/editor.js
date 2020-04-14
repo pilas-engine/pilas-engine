@@ -42,6 +42,7 @@ export default Controller.extend(queryParams.Mixin, {
   electron: service(),
   router: service(),
   api: service(),
+  migraciones: service(),
 
   setup(event) {
     this.tareaCargarProyecto.perform(event.queryParams);
@@ -50,12 +51,12 @@ export default Controller.extend(queryParams.Mixin, {
   tareaCargarProyecto: task(function*(params) {
     if (params.serializado) {
       let proyecto = this.cargarProyectoDesdeQueryParams(params);
-      return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
+      return this.migraciones.migrar(proyecto);
     }
 
     if (params.ejemplo) {
       let proyecto = yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
-      return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
+      return this.migraciones.migrar(proyecto);
     }
 
     if (params.hash) {
@@ -65,79 +66,18 @@ export default Controller.extend(queryParams.Mixin, {
         alert("Lo siento, el código de este proyecto no se puede acceder.");
         return this.router.transitionTo("index");
       } else {
-        return this.migrar_proyecto_al_formato_de_la_version_actual(datos);
+        return this.migraciones.migrar(datos);
       }
     }
 
     if (params.ruta) {
       let proyecto = yield this.cargar_proyecto_desde_ruta_archivo.perform(params.ruta);
-      return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
+      return this.migraciones.migrar(proyecto);
     }
 
     let proyecto = this.crearProyectoInicial();
-    return this.migrar_proyecto_al_formato_de_la_version_actual(proyecto);
+    return this.migraciones.migrar(proyecto);
   }),
-
-  /**
-   * Adapta el código del proyecto a esta versión asumiendo que se
-   * pudo haber creado con una versión anterior de pilas. Este código
-   * de migración o migraciones se ejecutará siempre que se abra
-   * un proyecto.
-   */
-  migrar_proyecto_al_formato_de_la_version_actual(proyecto) {
-    // Migración 2020-03-19: hacer que las escenas tengan definida el area
-    //                       del escenario.
-    proyecto.get("escenas").forEach(escena => {
-      if (!escena.get("ancho")) {
-        escena.set("ancho", 1000);
-        escena.set("alto", 1000);
-      }
-    });
-
-    // Migracion 2020-03-29: hacer cambios de nombres de imágenes
-    proyecto.get("escenas").forEach(escena => {
-      escena.set("fondo", this.convertir_nombre_de_imagenes(escena.get("fondo")));
-
-      escena.get("actores").forEach(actor => {
-        actor.set("imagen", this.convertir_nombre_de_imagenes(actor.get("imagen")));
-
-        // miración 2020-04-12: hacer que los actores de texto tengan una fuente por omisión.
-        if (actor.get("es_texto") && !actor.get("fuente")) {
-          actor.set("fuente", "color-blanco-con-sombra");
-        }
-      });
-    });
-
-    // migración 2020-04-12: hacer que el proyecto tenga almacenados los FPS
-    if (!proyecto.get("fps")) {
-      proyecto.set("fps", 60);
-    }
-
-    return proyecto;
-  },
-
-  convertir_nombre_de_imagenes(imagen) {
-    let reemplazos = [
-      {
-        origen: "imagenes:fondos/",
-        destino: "decoracion:fondos/"
-      },
-      {
-        origen: "imagenes:decoracion/",
-        destino: "decoracion:objetos/"
-      }
-    ];
-
-    for (let i = 0; i < reemplazos.length; i++) {
-      let item = reemplazos[i];
-
-      if (imagen.includes(item.origen)) {
-        return imagen.replace(item.origen, item.destino);
-      }
-    }
-
-    return imagen;
-  },
 
   reset(_, isExiting) {
     if (isExiting) {
