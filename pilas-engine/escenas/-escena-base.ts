@@ -39,13 +39,13 @@ class EscenaBase {
   observar(nombre: string, variable: any) {
     if (this._observables === null) {
       this._actor_visor_observables = this.pilas.actores.texto();
-      this._actor_visor_observables.color = "black";
       this._actor_visor_observables.fijo = true;
 
       this._actor_visor_observables.centro_x = 0;
       this._actor_visor_observables.centro_y = 0;
-      this._actor_visor_observables.x = -210;
-      this._actor_visor_observables.y = 210;
+
+      this._actor_visor_observables.x = 10 - this.pilas._ancho / 2;
+      this._actor_visor_observables.y = -10 + this.pilas._alto / 2;
 
       this._observables = {};
       let self = this;
