@@ -1,4 +1,3 @@
-import EmberObject from "@ember/object";
 import { inject as service } from "@ember/service";
 import Controller from "@ember/controller";
 import json_a_string from "../utils/json-a-string";
@@ -6,6 +5,7 @@ import string_a_json from "../utils/string-a-json";
 import QueryParams from "ember-parachute";
 import { task, timeout } from "ember-concurrency";
 import fixtureDeProyecto from "../fixtures/proyecto-inicial";
+import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
 
 const queryParams = new QueryParams({
   serializado: { defaultValue: null, refresh: true, replace: true },
@@ -87,20 +87,19 @@ export default Controller.extend(queryParams.Mixin, {
 
   cargarProyectoDesdeQueryParams(params) {
     let proyecto = string_a_json(params.serializado);
-    let proyectoComoObjetoEmber = this.convertirEscenaEnObjetoEmber(proyecto);
+    let proyectoComoObjetoEmber = convertirProyectoEnObjetoEmber(proyecto);
     return proyectoComoObjetoEmber;
   },
 
   cargarProyectoDesdeEjemplo: task(function*(nombre) {
-    let ejemplos = yield this.ejemplos.obtener();
-    let proyecto = ejemplos.ejemplos.findBy("nombre", nombre).proyecto;
-    return this.convertirEscenaEnObjetoEmber(proyecto);
+    let data = yield this.ejemplos.obtener_por_nombre(nombre);
+    return data.ejemplo.proyecto;
   }),
 
   cargarProyectoDesdeHashDelBackend: task(function*(hash) {
     let proyecto_serializado = yield this.api.obtener_proyecto(hash);
     let proyecto = string_a_json(proyecto_serializado.serializado);
-    let objeto = this.convertirEscenaEnObjetoEmber(proyecto.proyecto);
+    let objeto = convertirProyectoEnObjetoEmber(proyecto.proyecto);
     objeto.set("ver_codigo", proyecto_serializado.ver_codigo);
     return objeto;
   }),
@@ -108,32 +107,13 @@ export default Controller.extend(queryParams.Mixin, {
   cargar_proyecto_desde_ruta_archivo: task(function*(ruta) {
     let proyecto = this.electron.abrir_proyecto_desde_archivo(ruta);
     yield timeout(100);
-    return this.convertirEscenaEnObjetoEmber(proyecto);
+    return convertirProyectoEnObjetoEmber(proyecto);
   }),
-
-  convertirEscenaEnObjetoEmber(proyecto) {
-    let proyectoComoObjetoEmber = EmberObject.create(proyecto);
-
-    proyectoComoObjetoEmber.escenas = proyecto.escenas.map(escena => {
-      escena.actores = escena.actores.map(a => EmberObject.create(a));
-      return EmberObject.create(escena);
-    });
-
-    proyectoComoObjetoEmber.codigos.actores = proyecto.codigos.actores.map(tipo => {
-      return EmberObject.create(tipo);
-    });
-
-    proyectoComoObjetoEmber.codigos.escenas = proyecto.codigos.escenas.map(tipo => {
-      return EmberObject.create(tipo);
-    });
-
-    return proyectoComoObjetoEmber;
-  },
 
   crearProyectoInicial() {
     let fixtureComoString = JSON.stringify(fixtureDeProyecto);
     let fixture = JSON.parse(fixtureComoString);
-    let proyecto = this.convertirEscenaEnObjetoEmber(fixture);
+    let proyecto = convertirProyectoEnObjetoEmber(fixture);
     return proyecto;
   },
 

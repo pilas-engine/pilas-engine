@@ -1,10 +1,13 @@
 import Service from "@ember/service";
-import config from "pilas-engine/config/environment";
-import { task, timeout } from "ember-concurrency";
 import { Promise } from "rsvp";
+import { task, timeout } from "ember-concurrency";
+import config from "pilas-engine/config/environment";
+import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
+import { inject as service } from "@ember/service";
 
 export default Service.extend({
   cache: null,
+  migraciones: service(),
 
   tarea: task(function*() {
     if (this.cache) {
@@ -14,20 +17,6 @@ export default Service.extend({
     yield timeout(500);
 
     let data = yield this.obtenerEjemplos();
-
-    for (let i = 0; i < data.ejemplos.length; i++) {
-      let ejemplo = data.ejemplos[i];
-
-      let proyecto = yield this.obtenerEjemplo(
-        `${config.rootURL}ejemplos/proyectos/${ejemplo.nombre}.pilas`
-      );
-
-      if (typeof proyecto === "string") {
-        ejemplo.proyecto = JSON.parse(proyecto);
-      } else {
-        ejemplo.proyecto = proyecto;
-      }
-    }
 
     this.set("cache", data);
     return data;
@@ -52,7 +41,27 @@ export default Service.extend({
     });
   },
 
-  obtenerEjemplo(url) {
+  obtener() {
+    return this.tarea.perform();
+  },
+
+  obtener_por_nombre(nombre) {
+    return this.obtener_ejemplo(nombre).then(data => {
+      let proyecto = this.migraciones.migrar(convertirProyectoEnObjetoEmber(data));
+      return {
+        nombre: nombre,
+        ejemplo: {
+          proyecto: proyecto, //
+          nombre: nombre
+        },
+        modoZoom: 2
+      };
+    });
+  },
+
+  obtener_ejemplo(nombre) {
+    let url = `${config.rootURL}ejemplos/proyectos/${nombre}.pilas`;
+
     return new Promise(function(resolve, reject) {
       var xhr = new XMLHttpRequest();
 
@@ -68,9 +77,5 @@ export default Service.extend({
 
       xhr.send();
     });
-  },
-
-  obtener() {
-    return this.tarea.perform();
   }
 });
