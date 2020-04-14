@@ -2,11 +2,9 @@ class puntaje extends ActorTextoBase {
   propiedades = {
     imagen: "imagenes:basicos/invisible",
     texto: "PUNTAJE: 0",
-    color: "white",
     es_texto: true,
     z: -10,
-    texto_con_borde: true,
-    fuente: ""
+    fuente: "color-blanco-con-sombra-chico"
   };
   puntaje: number = 0;
 
