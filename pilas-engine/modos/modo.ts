@@ -254,6 +254,9 @@ class Modo extends Phaser.Scene {
     if (sprite.input) {
       sprite.input.hitArea.width = texto.width;
       sprite.input.hitArea.height = texto.height;
+
+      sprite.input.hitArea.x = -texto.width / 2;
+      sprite.input.hitArea.y = -texto.height / 2;
     }
 
     if (fondo) {
