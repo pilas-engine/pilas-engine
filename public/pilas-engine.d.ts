@@ -439,12 +439,7 @@ declare class Pilas {
         };
         physics: {
             default: string;
-            matter: {
-                gravity: {
-                    y: number;
-                };
-                debug: boolean;
-            };
+            debug: boolean;
         };
     };
     reproducir_sonido(nombre: string): void;
@@ -564,6 +559,8 @@ declare class ActorBase {
         figura_ancho: number;
         figura_alto: number;
         figura_radio: number;
+        figura_dinamica: boolean;
+        figura_sensor: boolean;
         fijo: boolean;
         es_texto: boolean;
         texto: string;
@@ -575,6 +572,7 @@ declare class ActorBase {
         espejado_vertical: boolean;
         transparencia: number;
         id_color: number;
+        sensores: any[];
     };
     etiqueta: any;
     tiene_etiqueta(etiqueta: string): boolean;
@@ -1582,12 +1580,15 @@ declare class Modo extends Phaser.Scene {
     ancho: number;
     alto: number;
     es_modo_ejecucion: boolean;
+    canvas_fisica: any;
     constructor(data: any);
     create(datos: any, ancho: any, alto: any): void;
     crear_indicadores_de_rendimiento_fps(): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
     update(actores: any): void;
+    actualizar_canvas_fisica(): void;
+    dibujar_figura_desde_vertices(canvas: any, color: any, vertices: any): void;
     obtener_posicion_de_la_camara(): {
         x: any;
         y: any;
@@ -1599,7 +1600,7 @@ declare class Modo extends Phaser.Scene {
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     obtener_imagen_para_nineslice(imagen: any): any;
     copiar_valores_de_sprite_a_texto(sprite: any): void;
-    crear_figura_estatica_para(actor: any): MatterJS.Body;
+    crear_figura_estatica_para(actor: any): any;
     posicionar_la_camara(datos_de_la_escena: any): void;
     actualizar_posicion(posicion?: any): void;
     dibujar_punto_de_control(graphics: any, x: any, y: any): void;
@@ -1667,7 +1668,6 @@ declare class ModoEditor extends Modo {
     posicionar_la_camara(datos_de_la_escena: any): void;
     cambiar_fondo(fondo: any): void;
 }
-declare const ACTIVAR_MODO_FISICA_EN_EJECUCION = false;
 declare class ModoEjecucion extends Modo {
     pilas: Pilas;
     fondo: Phaser.GameObjects.TileSprite;
@@ -1732,6 +1732,7 @@ declare class ModoPausa extends Modo {
     create(datos: any): void;
     private crear_sprites_desde_historia;
     update(): void;
+    dibujar_sensores_sobre_canvas_fisica(posicion: any): void;
     crear_sprite_desde_entidad(entidad: any): any;
     actualizar_posicion(posicion: any): void;
     avanzar_posicion(): void;

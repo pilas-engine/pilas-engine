@@ -9,6 +9,7 @@ class Modo extends Phaser.Scene {
   ancho: number;
   alto: number;
   es_modo_ejecucion: boolean;
+  canvas_fisica: any;
 
   constructor(data) {
     super(data);
@@ -18,6 +19,9 @@ class Modo extends Phaser.Scene {
   create(datos, ancho, alto) {
     this.ancho = ancho;
     this.alto = alto;
+
+    this.canvas_fisica = this.sys.add.graphics({ x: 0, y: 0 });
+    this.canvas_fisica.depth = 99999;
 
     this.crear_indicadores_de_rendimiento_fps();
 
@@ -78,6 +82,56 @@ class Modo extends Phaser.Scene {
         this.fps.alpha = 0;
       }
     }
+  }
+
+  actualizar_canvas_fisica() {
+    let canvas = this.canvas_fisica;
+    let figuras = pilasengine.modo.matter.world.localWorld.bodies;
+
+    canvas.clear();
+
+    for (let i = 0; i < figuras.length; i++) {
+      let figura = figuras[i];
+      let color = null;
+
+      if (figura.es_sensor) {
+        color = 0x00ff00;
+      } else {
+        if (figura.es_dinamica) {
+          color = 0xffffff;
+        } else {
+          color = 0xff0000;
+        }
+      }
+
+      this.dibujar_figura_desde_vertices(canvas, color, figura.vertices);
+    }
+  }
+
+  dibujar_figura_desde_vertices(canvas, color, vertices) {
+    canvas.beginPath();
+    canvas.lineStyle(1.5, color, 1);
+
+    canvas.moveTo(vertices[0].x, vertices[0].y);
+
+    var vertLength = vertices.length;
+
+    for (var j = 1; j < vertLength; j++) {
+      if (!vertices[j - 1].isInternal || showInternalEdges) {
+        canvas.lineTo(vertices[j].x, vertices[j].y);
+      } else {
+        canvas.moveTo(vertices[j].x, vertices[j].y);
+      }
+
+      if (vertices[j].isInternal && !showInternalEdges) {
+        canvas.moveTo(vertices[(j + 1) % vertices.length].x, vertices[(j + 1) % vertices.length].y);
+      }
+    }
+
+    canvas.lineTo(vertices[0].x, vertices[0].y);
+
+    canvas.closePath();
+    canvas.strokePath();
   }
 
   obtener_posicion_de_la_camara() {
@@ -300,24 +354,42 @@ class Modo extends Phaser.Scene {
   crear_figura_estatica_para(actor) {
     let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
     let angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
+    let figura = null;
 
     if (actor.figura === "rectangulo") {
-      return this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
-        isStatic: true,
-        angle: angulo
-      });
+      figura = this.matter.add.rectangle(
+        coordenada.x,
+        coordenada.y,
+        actor.figura_ancho,
+        actor.figura_alto,
+        {
+          isStatic: true,
+          angle: angulo
+        }
+        //
+      );
+
+      figura.es_sensor = actor.figura_sensor;
+      figura.es_dinamica = actor.figura_dinamica;
+      return figura;
     }
 
     if (actor.figura === "circulo") {
-      return this.matter.add.circle(
+      let figura = this.matter.add.circle(
         coordenada.x,
         coordenada.y,
         actor.figura_radio,
-        { isStatic: true },
+        {
+          isStatic: true,
+          angule: angulo //
+        },
         25
-        // Valor por defecto de `Bodies.circle` en `Matter.js`, ver
-        // https://github.com/liabru/matter-js/blob/2ec247b7af1c6b5da6ee05c73274ed5822c73503/src/factory/Bodies.js#L123.
+        //
       );
+
+      figura.es_sensor = actor.figura_sensor;
+      figura.es_dinamica = actor.figura_dinamica;
+      return figura;
     }
 
     throw Error(`No se reconoce la figura ${actor.figura} en este modo.`);

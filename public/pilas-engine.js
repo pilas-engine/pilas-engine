@@ -1710,6 +1710,8 @@ var Pilas = (function () {
         this.cursor_y_absoluta = 0;
         this.imagenes_precargadas = [];
         this.imagenes = [];
+        Phaser.Physics.Matter.World.prototype.renderBodies = function () { };
+        Phaser.Physics.Matter.World.renderBodies = function () { };
         this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
         this.colores = new Colores(this);
@@ -1912,12 +1914,7 @@ var Pilas = (function () {
             },
             physics: {
                 default: "matter",
-                matter: {
-                    gravity: {
-                        y: 1
-                    },
-                    debug: true
-                }
+                debug: false
             }
         };
     };
@@ -2197,6 +2194,8 @@ var ActorBase = (function () {
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
         }
+        this.figura.es_dinamica = propiedades.figura_dinamica;
+        this.figura.es_sensor = propiedades.figura_sensor;
         this.interactivo = true;
         this.rotacion = propiedades.rotacion || 0;
         this.id_color = this.generar_color_para_depurar();
@@ -2371,6 +2370,17 @@ var ActorBase = (function () {
             fondo = this._fondo_imagen;
             fuente = this._fuente;
         }
+        var sensores_serializados = [];
+        if (this.sensores) {
+            sensores_serializados = this.sensores.map(function (e) {
+                return e.vertices.map(function (e) {
+                    return {
+                        x: e.x,
+                        y: e.y
+                    };
+                });
+            });
+        }
         return {
             tipo: this.tipo,
             x: Math.round(this.x),
@@ -2386,6 +2396,8 @@ var ActorBase = (function () {
             figura_ancho: this.figura_ancho,
             figura_alto: this.figura_alto,
             figura_radio: this.figura_radio,
+            figura_dinamica: this.dinamico,
+            figura_sensor: this.sensor,
             fijo: this.fijo,
             es_texto: this._es_texto,
             texto: texto,
@@ -2396,7 +2408,8 @@ var ActorBase = (function () {
             espejado: this.espejado,
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
-            id_color: this.id_color
+            id_color: this.id_color,
+            sensores: sensores_serializados
         };
     };
     Object.defineProperty(ActorBase.prototype, "etiqueta", {
@@ -2485,12 +2498,15 @@ var ActorBase = (function () {
     };
     ActorBase.prototype.actualizar_sensores = function () {
         var _this = this;
+        var Body = this.pilas.Phaser.Physics.Matter.Matter.Body;
         this.sensores.map(function (s) {
             var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_this.x, _this.y), x = _a.x, y = _a.y;
-            _this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, {
+            Body.setPosition(s, {
                 x: x + s.distancia_x,
                 y: y - s.distancia_y
             });
+            Body.setVelocity(s, { x: 0, y: 0 });
+            Body.setAngularVelocity(s, 0);
             s.colisiones = s.colisiones.filter(function (a) { return a._vivo; });
         });
     };
@@ -2767,10 +2783,7 @@ var ActorBase = (function () {
             if (this.sprite.isStatic !== undefined) {
                 return this.sprite.isStatic();
             }
-            else {
-                console.warn("Este actor no tiene figura, se asume que no es estático.");
-                return false;
-            }
+            return false;
         },
         set: function (estatico) {
             if (this.sprite.setStatic !== undefined) {
@@ -2837,8 +2850,10 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "sensor", {
         get: function () {
-            this.fallar_si_no_tiene_figura();
-            return this.sprite.body.isSensor;
+            if (this.sprite.body && this.sprite.body.isSensor !== undefined) {
+                return this.sprite.isStatic();
+            }
+            return false;
         },
         set: function (valor) {
             this.fallar_si_no_tiene_figura();
@@ -6781,9 +6796,14 @@ var Modo = (function (_super) {
     Modo.prototype.create = function (datos, ancho, alto) {
         this.ancho = ancho;
         this.alto = alto;
+        this.canvas_fisica = this.sys.add.graphics({ x: 0, y: 0 });
+        this.canvas_fisica.depth = 99999;
         this.crear_indicadores_de_rendimiento_fps();
         this.crear_canvas_de_depuracion();
         this.pilas = datos.pilas;
+        if (datos.proyecto && datos.proyecto.fps === 30) {
+            this.matter.set30Hz();
+        }
     };
     Modo.prototype.crear_indicadores_de_rendimiento_fps = function () {
         this.fps = this.add.bitmapText(5, 10, "color-blanco-con-sombra", "");
@@ -6827,6 +6847,47 @@ var Modo = (function (_super) {
                 this.fps.alpha = 0;
             }
         }
+    };
+    Modo.prototype.actualizar_canvas_fisica = function () {
+        var canvas = this.canvas_fisica;
+        var figuras = pilasengine.modo.matter.world.localWorld.bodies;
+        canvas.clear();
+        for (var i = 0; i < figuras.length; i++) {
+            var figura = figuras[i];
+            var color = null;
+            if (figura.es_sensor) {
+                color = 0x00ff00;
+            }
+            else {
+                if (figura.es_dinamica) {
+                    color = 0xffffff;
+                }
+                else {
+                    color = 0xff0000;
+                }
+            }
+            this.dibujar_figura_desde_vertices(canvas, color, figura.vertices);
+        }
+    };
+    Modo.prototype.dibujar_figura_desde_vertices = function (canvas, color, vertices) {
+        canvas.beginPath();
+        canvas.lineStyle(1.5, color, 1);
+        canvas.moveTo(vertices[0].x, vertices[0].y);
+        var vertLength = vertices.length;
+        for (var j = 1; j < vertLength; j++) {
+            if (!vertices[j - 1].isInternal || showInternalEdges) {
+                canvas.lineTo(vertices[j].x, vertices[j].y);
+            }
+            else {
+                canvas.moveTo(vertices[j].x, vertices[j].y);
+            }
+            if (vertices[j].isInternal && !showInternalEdges) {
+                canvas.moveTo(vertices[(j + 1) % vertices.length].x, vertices[(j + 1) % vertices.length].y);
+            }
+        }
+        canvas.lineTo(vertices[0].x, vertices[0].y);
+        canvas.closePath();
+        canvas.strokePath();
     };
     Modo.prototype.obtener_posicion_de_la_camara = function () {
         var x = this.pilas.modo.cameras.cameras[0].scrollX;
@@ -7004,14 +7065,24 @@ var Modo = (function (_super) {
     Modo.prototype.crear_figura_estatica_para = function (actor) {
         var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
         var angulo = this.pilas.utilidades.convertir_angulo_a_radianes(-actor.rotacion);
+        var figura = null;
         if (actor.figura === "rectangulo") {
-            return this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
+            figura = this.matter.add.rectangle(coordenada.x, coordenada.y, actor.figura_ancho, actor.figura_alto, {
                 isStatic: true,
                 angle: angulo
             });
+            figura.es_sensor = actor.figura_sensor;
+            figura.es_dinamica = actor.figura_dinamica;
+            return figura;
         }
         if (actor.figura === "circulo") {
-            return this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, { isStatic: true }, 25);
+            var figura_1 = this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, {
+                isStatic: true,
+                angule: angulo
+            }, 25);
+            figura_1.es_sensor = actor.figura_sensor;
+            figura_1.es_dinamica = actor.figura_dinamica;
+            return figura_1;
         }
         throw Error("No se reconoce la figura " + actor.figura + " en este modo.");
     };
@@ -7222,7 +7293,6 @@ var ModoEditor = (function (_super) {
         this.hacer_que_el_fondo_se_pueda_arrastrar();
         this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
         this.crear_manejadores_para_controlar_el_zoom();
-        this.matter.world.createDebugGraphic();
         this.conectar_movimiento_del_mouse();
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
         this.pilas.game.scale.resize(this.ancho, this.alto);
@@ -7519,12 +7589,6 @@ var ModoEditor = (function (_super) {
     };
     ModoEditor.prototype.update = function () {
         _super.prototype.update.call(this, this.actores);
-        if (this.pilas.depurador.mostrar_fisica) {
-            this.matter.world.debugGraphic.setAlpha(1);
-        }
-        else {
-            this.matter.world.debugGraphic.setAlpha(0);
-        }
         if (this.pilas.depurador.minimapa) {
             this.minimap.setAlpha(1);
         }
@@ -7536,6 +7600,13 @@ var ModoEditor = (function (_super) {
         });
         this.minimap.y = this.scale.baseSize.height - 75;
         this.minimap.x = this.scale.baseSize.width - 105;
+        if (this.pilas.depurador.mostrar_fisica) {
+            this.canvas_fisica.setAlpha(1);
+            this.actualizar_canvas_fisica();
+        }
+        else {
+            this.canvas_fisica.setAlpha(0);
+        }
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
@@ -7567,7 +7638,6 @@ var ModoEditor = (function (_super) {
     };
     return ModoEditor;
 }(Modo));
-var ACTIVAR_MODO_FISICA_EN_EJECUCION = false;
 var ModoEjecucion = (function (_super) {
     __extends(ModoEjecucion, _super);
     function ModoEjecucion() {
@@ -7584,9 +7654,6 @@ var ModoEjecucion = (function (_super) {
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.teclas = new Set();
-        if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
-            this.matter.world.createDebugGraphic();
-        }
         try {
             this.guardar_parametros_en_atributos(datos);
             var escena = this.obtener_escena_inicial();
@@ -7608,7 +7675,6 @@ var ModoEjecucion = (function (_super) {
             this.modo_fisica_activado = false;
             if (this.pilas.depurador.mostrar_fisica) {
                 this.modo_fisica_activado = true;
-                this.matter.world.createDebugGraphic();
             }
             this.conectar_eventos();
             this.vincular_eventos_de_colision();
@@ -7973,12 +8039,6 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.update = function () {
         _super.prototype.update.call(this, this.pilas.escena.actores);
-        if (ACTIVAR_MODO_FISICA_EN_EJECUCION) {
-            this.matter.world.debugGraphic.setAlpha(1);
-        }
-        else {
-            this.matter.world.debugGraphic.setAlpha(0);
-        }
         try {
             this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
@@ -8038,7 +8098,6 @@ var ModoPausa = (function (_super) {
         this.crear_fondo(foto.escena.fondo, foto.escena.ancho, foto.escena.alto);
         this.crear_sprites_desde_historia(this.posicion);
         this.crear_canvas_de_depuracion_modo_pausa();
-        this.matter.world.createDebugGraphic();
         this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
@@ -8087,12 +8146,6 @@ var ModoPausa = (function (_super) {
         this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
     };
     ModoPausa.prototype.update = function () {
-        if (this.pilas.depurador.mostrar_fisica) {
-            this.matter.world.debugGraphic.setAlpha(1);
-        }
-        else {
-            this.matter.world.debugGraphic.setAlpha(0);
-        }
         if (this._anterior_valor_del_modo_posicion_activado !== this.pilas.depurador.modo_posicion_activado) {
             this.actualizar_posicion(this.posicion);
             this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
@@ -8103,6 +8156,24 @@ var ModoPausa = (function (_super) {
         if (this.tecla_izquierda.isDown) {
             this.retroceder_posicion();
         }
+        if (this.pilas.depurador.mostrar_fisica) {
+            this.canvas_fisica.setAlpha(1);
+            this.actualizar_canvas_fisica();
+            this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
+        }
+        else {
+            this.canvas_fisica.setAlpha(0);
+        }
+    };
+    ModoPausa.prototype.dibujar_sensores_sobre_canvas_fisica = function (posicion) {
+        var _this = this;
+        var canvas = this.canvas_fisica;
+        var foto = this.pilas.historia.obtener_foto(posicion);
+        foto.actores.map(function (entidad) {
+            entidad.sensores.map(function (sensor) {
+                _this.dibujar_figura_desde_vertices(canvas, 0x00ff00, sensor);
+            });
+        });
     };
     ModoPausa.prototype.crear_sprite_desde_entidad = function (entidad) {
         var nombre = entidad.imagen;
@@ -8165,6 +8236,8 @@ var ModoPausa = (function (_super) {
         }
         if (entidad.figura) {
             sprite["figura"] = this.crear_figura_estatica_para(entidad);
+            sprite["figura"].es_sensor = entidad.figura_sensor;
+            sprite["figura"].es_dinamica = entidad.figura_dinamica;
         }
         return sprite;
     };

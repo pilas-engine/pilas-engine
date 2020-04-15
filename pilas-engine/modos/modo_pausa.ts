@@ -49,7 +49,6 @@ class ModoPausa extends Modo {
     this.crear_sprites_desde_historia(this.posicion);
 
     this.crear_canvas_de_depuracion_modo_pausa();
-    this.matter.world.createDebugGraphic();
 
     this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -121,12 +120,6 @@ class ModoPausa extends Modo {
   }
 
   update() {
-    if (this.pilas.depurador.mostrar_fisica) {
-      this.matter.world.debugGraphic.setAlpha(1);
-    } else {
-      this.matter.world.debugGraphic.setAlpha(0);
-    }
-
     if (this._anterior_valor_del_modo_posicion_activado !== this.pilas.depurador.modo_posicion_activado) {
       this.actualizar_posicion(this.posicion);
       this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
@@ -139,6 +132,25 @@ class ModoPausa extends Modo {
     if (this.tecla_izquierda.isDown) {
       this.retroceder_posicion();
     }
+
+    if (this.pilas.depurador.mostrar_fisica) {
+      this.canvas_fisica.setAlpha(1);
+      this.actualizar_canvas_fisica();
+      this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
+    } else {
+      this.canvas_fisica.setAlpha(0);
+    }
+  }
+
+  dibujar_sensores_sobre_canvas_fisica(posicion) {
+    let canvas = this.canvas_fisica;
+    let foto = this.pilas.historia.obtener_foto(posicion);
+
+    foto.actores.map(entidad => {
+      entidad.sensores.map(sensor => {
+        this.dibujar_figura_desde_vertices(canvas, 0x00ff00, sensor);
+      });
+    });
   }
 
   crear_sprite_desde_entidad(entidad) {
@@ -215,6 +227,8 @@ class ModoPausa extends Modo {
 
     if (entidad.figura) {
       sprite["figura"] = this.crear_figura_estatica_para(entidad);
+      sprite["figura"].es_sensor = entidad.figura_sensor;
+      sprite["figura"].es_dinamica = entidad.figura_dinamica;
     }
 
     return sprite;

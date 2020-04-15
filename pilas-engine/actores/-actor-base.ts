@@ -129,6 +129,9 @@ class ActorBase {
         throw Error(`No se conoce el tipo de figura ${figura}`);
     }
 
+    this.figura.es_dinamica = propiedades.figura_dinamica;
+    this.figura.es_sensor = propiedades.figura_sensor;
+
     this.interactivo = true;
 
     this.rotacion = propiedades.rotacion || 0;
@@ -327,6 +330,20 @@ class ActorBase {
       fuente = this._fuente;
     }
 
+    let sensores_serializados = [];
+
+    if (this.sensores) {
+      sensores_serializados = this.sensores.map(e => {
+        return e.vertices.map(e => {
+          return {
+            x: e.x,
+            y: e.y
+            //
+          };
+        });
+      });
+    }
+
     return {
       tipo: this.tipo,
       x: Math.round(this.x),
@@ -344,6 +361,9 @@ class ActorBase {
       figura_alto: this.figura_alto,
       figura_radio: this.figura_radio,
 
+      figura_dinamica: this.dinamico,
+      figura_sensor: this.sensor,
+
       fijo: this.fijo,
 
       es_texto: this._es_texto,
@@ -356,7 +376,9 @@ class ActorBase {
       espejado: this.espejado,
       espejado_vertical: this.espejado_vertical,
       transparencia: this.transparencia,
-      id_color: this.id_color
+      id_color: this.id_color,
+
+      sensores: sensores_serializados
     };
   }
 
@@ -456,12 +478,17 @@ class ActorBase {
   }
 
   actualizar_sensores() {
+    let Body = this.pilas.Phaser.Physics.Matter.Matter.Body;
     this.sensores.map(s => {
       let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
-      this.pilas.Phaser.Physics.Matter.Matter.Body.setPosition(s, {
+
+      Body.setPosition(s, {
         x: x + s.distancia_x,
         y: y - s.distancia_y
       });
+
+      Body.setVelocity(s, { x: 0, y: 0 });
+      Body.setAngularVelocity(s, 0);
 
       // Descarta colisiones con actores que ya no están en la escena.
       s.colisiones = s.colisiones.filter(a => a._vivo);
@@ -571,12 +598,6 @@ class ActorBase {
     } else {
       this.pilas.utilidades.validar_numero(s);
       this.sprite.scaleX = s;
-
-      /*
-      if (this.figura) {
-        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
-      }
-      */
     }
   }
 
@@ -590,12 +611,6 @@ class ActorBase {
     } else {
       this.pilas.utilidades.validar_numero(s);
       this.sprite.scaleY = s;
-
-      /*
-      if (this.figura) {
-        this.pilas.Phaser.Physics.Matter.Matter.Body.scale(this.sprite.body, 1 / this.escala_x, 1 / this.escala_y);
-      }
-      */
     }
   }
 
@@ -726,10 +741,9 @@ class ActorBase {
   get estatico() {
     if ((this.sprite as any).isStatic !== undefined) {
       return (this.sprite as any).isStatic();
-    } else {
-      console.warn("Este actor no tiene figura, se asume que no es estático.");
-      return false;
     }
+
+    return false;
   }
 
   set estatico(estatico: boolean) {
@@ -791,8 +805,11 @@ class ActorBase {
   }
 
   get sensor() {
-    this.fallar_si_no_tiene_figura();
-    return (this.sprite.body as any).isSensor;
+    if ((this.sprite as any).body && (this.sprite.body as any).isSensor !== undefined) {
+      return (this.sprite as any).isStatic();
+    }
+
+    return false;
   }
 
   get fijo() {

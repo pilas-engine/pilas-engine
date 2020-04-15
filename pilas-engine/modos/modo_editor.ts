@@ -40,7 +40,7 @@ class ModoEditor extends Modo {
     this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
     this.crear_manejadores_para_controlar_el_zoom();
 
-    this.matter.world.createDebugGraphic();
+    //this.matter.world.createDebugGraphic();
     this.conectar_movimiento_del_mouse();
 
     this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
@@ -418,12 +418,6 @@ class ModoEditor extends Modo {
   update() {
     super.update(this.actores);
 
-    if (this.pilas.depurador.mostrar_fisica) {
-      this.matter.world.debugGraphic.setAlpha(1);
-    } else {
-      this.matter.world.debugGraphic.setAlpha(0);
-    }
-
     if (this.pilas.depurador.minimapa) {
       this.minimap.setAlpha(1);
     } else {
@@ -436,6 +430,13 @@ class ModoEditor extends Modo {
 
     this.minimap.y = this.scale.baseSize.height - 75;
     this.minimap.x = this.scale.baseSize.width - 105;
+
+    if (this.pilas.depurador.mostrar_fisica) {
+      this.canvas_fisica.setAlpha(1);
+      this.actualizar_canvas_fisica();
+    } else {
+      this.canvas_fisica.setAlpha(0);
+    }
   }
 
   eliminar_actor_por_id(id) {
