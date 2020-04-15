@@ -1710,8 +1710,6 @@ var Pilas = (function () {
         this.cursor_y_absoluta = 0;
         this.imagenes_precargadas = [];
         this.imagenes = [];
-        Phaser.Physics.Matter.World.prototype.renderBodies = function () { };
-        Phaser.Physics.Matter.World.renderBodies = function () { };
         this.Phaser = Phaser;
         this.mensajes = new Mensajes(this);
         this.colores = new Colores(this);
@@ -2194,8 +2192,8 @@ var ActorBase = (function () {
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
         }
-        this.figura.es_dinamica = propiedades.figura_dinamica;
-        this.figura.es_sensor = propiedades.figura_sensor;
+        this.figura["es_dinamica"] = propiedades.figura_dinamica;
+        this.figura["es_sensor"] = propiedades.figura_sensor;
         this.interactivo = true;
         this.rotacion = propiedades.rotacion || 0;
         this.id_color = this.generar_color_para_depurar();
@@ -2376,7 +2374,8 @@ var ActorBase = (function () {
                 return e.vertices.map(function (e) {
                     return {
                         x: e.x,
-                        y: e.y
+                        y: e.y,
+                        isInternal: e.isInternal
                     };
                 });
             });
@@ -2851,7 +2850,7 @@ var ActorBase = (function () {
     Object.defineProperty(ActorBase.prototype, "sensor", {
         get: function () {
             if (this.sprite.body && this.sprite.body.isSensor !== undefined) {
-                return this.sprite.isStatic();
+                return this.sprite.isSensor();
             }
             return false;
         },
@@ -6856,11 +6855,16 @@ var Modo = (function (_super) {
             var figura = figuras[i];
             var color = null;
             if (figura.es_sensor) {
-                color = 0x00ff00;
+                if (figura.es_dinamica) {
+                    color = 0xff00ff;
+                }
+                else {
+                    color = 0x00ff00;
+                }
             }
             else {
                 if (figura.es_dinamica) {
-                    color = 0xffffff;
+                    color = 0xffff00;
                 }
                 else {
                     color = 0xff0000;
@@ -6875,13 +6879,13 @@ var Modo = (function (_super) {
         canvas.moveTo(vertices[0].x, vertices[0].y);
         var vertLength = vertices.length;
         for (var j = 1; j < vertLength; j++) {
-            if (!vertices[j - 1].isInternal || showInternalEdges) {
+            if (!vertices[j - 1].isInternal) {
                 canvas.lineTo(vertices[j].x, vertices[j].y);
             }
             else {
                 canvas.moveTo(vertices[j].x, vertices[j].y);
             }
-            if (vertices[j].isInternal && !showInternalEdges) {
+            if (vertices[j].isInternal) {
                 canvas.moveTo(vertices[(j + 1) % vertices.length].x, vertices[(j + 1) % vertices.length].y);
             }
         }
@@ -7080,8 +7084,8 @@ var Modo = (function (_super) {
                 isStatic: true,
                 angule: angulo
             }, 25);
-            figura_1.es_sensor = actor.figura_sensor;
-            figura_1.es_dinamica = actor.figura_dinamica;
+            figura_1["es_sensor"] = actor.figura_sensor;
+            figura_1["es_dinamica"] = actor.figura_dinamica;
             return figura_1;
         }
         throw Error("No se reconoce la figura " + actor.figura + " en este modo.");

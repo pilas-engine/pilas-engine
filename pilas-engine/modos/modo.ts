@@ -95,10 +95,14 @@ class Modo extends Phaser.Scene {
       let color = null;
 
       if (figura.es_sensor) {
-        color = 0x00ff00;
+        if (figura.es_dinamica) {
+          color = 0xff00ff;
+        } else {
+          color = 0x00ff00;
+        }
       } else {
         if (figura.es_dinamica) {
-          color = 0xffffff;
+          color = 0xffff00;
         } else {
           color = 0xff0000;
         }
@@ -117,13 +121,13 @@ class Modo extends Phaser.Scene {
     var vertLength = vertices.length;
 
     for (var j = 1; j < vertLength; j++) {
-      if (!vertices[j - 1].isInternal || showInternalEdges) {
+      if (!vertices[j - 1].isInternal) {
         canvas.lineTo(vertices[j].x, vertices[j].y);
       } else {
         canvas.moveTo(vertices[j].x, vertices[j].y);
       }
 
-      if (vertices[j].isInternal && !showInternalEdges) {
+      if (vertices[j].isInternal) {
         canvas.moveTo(vertices[(j + 1) % vertices.length].x, vertices[(j + 1) % vertices.length].y);
       }
     }
@@ -387,8 +391,8 @@ class Modo extends Phaser.Scene {
         //
       );
 
-      figura.es_sensor = actor.figura_sensor;
-      figura.es_dinamica = actor.figura_dinamica;
+      figura["es_sensor"] = actor.figura_sensor;
+      figura["es_dinamica"] = actor.figura_dinamica;
       return figura;
     }
 

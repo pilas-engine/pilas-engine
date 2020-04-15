@@ -129,8 +129,8 @@ class ActorBase {
         throw Error(`No se conoce el tipo de figura ${figura}`);
     }
 
-    this.figura.es_dinamica = propiedades.figura_dinamica;
-    this.figura.es_sensor = propiedades.figura_sensor;
+    this.figura["es_dinamica"] = propiedades.figura_dinamica;
+    this.figura["es_sensor"] = propiedades.figura_sensor;
 
     this.interactivo = true;
 
@@ -337,7 +337,8 @@ class ActorBase {
         return e.vertices.map(e => {
           return {
             x: e.x,
-            y: e.y
+            y: e.y,
+            isInternal: e.isInternal
             //
           };
         });
@@ -806,7 +807,7 @@ class ActorBase {
 
   get sensor() {
     if ((this.sprite as any).body && (this.sprite.body as any).isSensor !== undefined) {
-      return (this.sprite as any).isStatic();
+      return (this.sprite as any).isSensor();
     }
 
     return false;

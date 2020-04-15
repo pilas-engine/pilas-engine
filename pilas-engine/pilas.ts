@@ -48,8 +48,6 @@ class Pilas {
   imagenes: any = [];
 
   constructor() {
-    Phaser.Physics.Matter.World.prototype.renderBodies = function() {};
-    Phaser.Physics.Matter.World.renderBodies = function() {};
     this.Phaser = Phaser;
 
     this.mensajes = new Mensajes(this);
