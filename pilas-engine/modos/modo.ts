@@ -23,6 +23,10 @@ class Modo extends Phaser.Scene {
 
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
+
+    if (datos.proyecto && datos.proyecto.fps === 30) {
+      this.matter.set30Hz();
+    }
   }
 
   crear_indicadores_de_rendimiento_fps() {
