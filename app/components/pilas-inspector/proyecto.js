@@ -45,10 +45,6 @@ export default Component.extend({
           {
             valor: 30,
             texto: "30"
-          },
-          {
-            valor: 20,
-            texto: "20"
           }
         ]
       }
