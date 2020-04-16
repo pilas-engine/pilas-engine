@@ -84,6 +84,7 @@ class ModoPausa extends Modo {
     // limpia el canvas con los puntos de control de los
     // actores.
     this.graphics.clear();
+    this.fondo.setAlpha(0.8);
 
     // Crea a todos los actores desde la foto actual.
     this.sprites = foto.actores.map(entidad => {

@@ -8121,6 +8121,7 @@ var ModoPausa = (function (_super) {
         this.posicionar_la_camara(foto.escena);
         this.posicionar_fondo(foto.escena.desplazamiento_del_fondo_x, foto.escena.desplazamiento_del_fondo_y);
         this.graphics.clear();
+        this.fondo.setAlpha(0.8);
         this.sprites = foto.actores.map(function (entidad) {
             if (_this.pilas.depurador.modo_posicion_activado) {
                 var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
