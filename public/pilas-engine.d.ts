@@ -1588,7 +1588,7 @@ declare class Modo extends Phaser.Scene {
     crear_canvas_de_depuracion(): void;
     update(actores: any): void;
     actualizar_canvas_fisica(): void;
-    dibujar_figura_desde_vertices(canvas: any, color: any, vertices: any): void;
+    dibujar_figura_desde_vertices(canvas: any, linea: any, color: any, vertices: any): void;
     obtener_posicion_de_la_camara(): {
         x: any;
         y: any;

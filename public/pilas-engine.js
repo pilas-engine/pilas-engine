@@ -6855,27 +6855,22 @@ var Modo = (function (_super) {
             var figura = figuras[i];
             var color = null;
             if (figura.es_sensor) {
-                if (figura.es_dinamica) {
-                    color = 0xff00ff;
-                }
-                else {
-                    color = 0x00ff00;
-                }
+                color = 0xff4040;
             }
             else {
                 if (figura.es_dinamica) {
-                    color = 0xffff00;
+                    color = 0x00ff00;
                 }
                 else {
-                    color = 0xff0000;
+                    color = 0x0000ff;
                 }
             }
-            this.dibujar_figura_desde_vertices(canvas, color, figura.vertices);
+            this.dibujar_figura_desde_vertices(canvas, 2, color, figura.vertices);
         }
     };
-    Modo.prototype.dibujar_figura_desde_vertices = function (canvas, color, vertices) {
+    Modo.prototype.dibujar_figura_desde_vertices = function (canvas, linea, color, vertices) {
         canvas.beginPath();
-        canvas.lineStyle(1.5, color, 1);
+        canvas.lineStyle(linea, color, 2);
         canvas.moveTo(vertices[0].x, vertices[0].y);
         var vertLength = vertices.length;
         for (var j = 1; j < vertLength; j++) {
@@ -8100,8 +8095,8 @@ var ModoPausa = (function (_super) {
         this._anterior_valor_del_modo_posicion_activado = this.pilas.depurador.modo_posicion_activado;
         var foto = this.pilas.historia.obtener_foto(1);
         this.crear_fondo(foto.escena.fondo, foto.escena.ancho, foto.escena.alto);
-        this.crear_sprites_desde_historia(this.posicion);
         this.crear_canvas_de_depuracion_modo_pausa();
+        this.actualizar_posicion(this.posicion);
         this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
@@ -8125,7 +8120,6 @@ var ModoPausa = (function (_super) {
         });
         this.posicionar_la_camara(foto.escena);
         this.posicionar_fondo(foto.escena.desplazamiento_del_fondo_x, foto.escena.desplazamiento_del_fondo_y);
-        this.fondo.setAlpha(0.6);
         this.graphics.clear();
         this.sprites = foto.actores.map(function (entidad) {
             if (_this.pilas.depurador.modo_posicion_activado) {
@@ -8162,8 +8156,6 @@ var ModoPausa = (function (_super) {
         }
         if (this.pilas.depurador.mostrar_fisica) {
             this.canvas_fisica.setAlpha(1);
-            this.actualizar_canvas_fisica();
-            this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
         }
         else {
             this.canvas_fisica.setAlpha(0);
@@ -8175,7 +8167,7 @@ var ModoPausa = (function (_super) {
         var foto = this.pilas.historia.obtener_foto(posicion);
         foto.actores.map(function (entidad) {
             entidad.sensores.map(function (sensor) {
-                _this.dibujar_figura_desde_vertices(canvas, 0x00ff00, sensor);
+                _this.dibujar_figura_desde_vertices(canvas, 2, 0xff4040, sensor);
             });
         });
     };
@@ -8250,6 +8242,8 @@ var ModoPausa = (function (_super) {
         this.posicion = Math.min(this.posicion, this.total);
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
+        this.actualizar_canvas_fisica();
+        this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
     };
     ModoPausa.prototype.avanzar_posicion = function () {
         this.posicion += 1;

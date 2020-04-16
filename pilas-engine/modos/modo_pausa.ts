@@ -46,9 +46,9 @@ class ModoPausa extends Modo {
 
     this.crear_fondo(foto.escena.fondo, foto.escena.ancho, foto.escena.alto);
 
-    this.crear_sprites_desde_historia(this.posicion);
-
     this.crear_canvas_de_depuracion_modo_pausa();
+
+    this.actualizar_posicion(this.posicion);
 
     this.tecla_izquierda = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     this.tecla_derecha = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -80,8 +80,6 @@ class ModoPausa extends Modo {
 
     this.posicionar_la_camara(foto.escena);
     this.posicionar_fondo(foto.escena.desplazamiento_del_fondo_x, foto.escena.desplazamiento_del_fondo_y);
-
-    this.fondo.setAlpha(0.6);
 
     // limpia el canvas con los puntos de control de los
     // actores.
@@ -135,8 +133,6 @@ class ModoPausa extends Modo {
 
     if (this.pilas.depurador.mostrar_fisica) {
       this.canvas_fisica.setAlpha(1);
-      this.actualizar_canvas_fisica();
-      this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
     } else {
       this.canvas_fisica.setAlpha(0);
     }
@@ -148,7 +144,7 @@ class ModoPausa extends Modo {
 
     foto.actores.map(entidad => {
       entidad.sensores.map(sensor => {
-        this.dibujar_figura_desde_vertices(canvas, 0x00ff00, sensor);
+        this.dibujar_figura_desde_vertices(canvas, 2, 0xff4040, sensor);
       });
     });
   }
@@ -240,6 +236,9 @@ class ModoPausa extends Modo {
     this.posicion = Math.max(this.posicion, 0);
 
     this.crear_sprites_desde_historia(this.posicion);
+
+    this.actualizar_canvas_fisica();
+    this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
   }
 
   avanzar_posicion() {

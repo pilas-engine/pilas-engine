@@ -95,26 +95,22 @@ class Modo extends Phaser.Scene {
       let color = null;
 
       if (figura.es_sensor) {
-        if (figura.es_dinamica) {
-          color = 0xff00ff;
-        } else {
-          color = 0x00ff00;
-        }
+        color = 0xff4040;
       } else {
         if (figura.es_dinamica) {
-          color = 0xffff00;
+          color = 0x00ff00;
         } else {
-          color = 0xff0000;
+          color = 0x0000ff;
         }
       }
 
-      this.dibujar_figura_desde_vertices(canvas, color, figura.vertices);
+      this.dibujar_figura_desde_vertices(canvas, 2, color, figura.vertices);
     }
   }
 
-  dibujar_figura_desde_vertices(canvas, color, vertices) {
+  dibujar_figura_desde_vertices(canvas, linea, color, vertices) {
     canvas.beginPath();
-    canvas.lineStyle(1.5, color, 1);
+    canvas.lineStyle(linea, color, 2);
 
     canvas.moveTo(vertices[0].x, vertices[0].y);
 

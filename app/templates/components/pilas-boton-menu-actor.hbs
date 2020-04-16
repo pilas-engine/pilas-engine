@@ -2,11 +2,9 @@
 <div class="dib relative">
 
   {{#basic-dropdown as |dd|}}
-    {{#pilas-tooltip pos="up-right" texto="Más opciones para este actor"}}
-      {{#dd.trigger}}
-        <button data-test="boton-menu" class="texto bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0">{{pilas-icono icono="menu"}}</button>
-      {{/dd.trigger}}
-    {{/pilas-tooltip}}
+    {{#dd.trigger}}
+      <button data-test="boton-menu" class="texto bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0">{{pilas-icono icono="menu"}}</button>
+    {{/dd.trigger}}
 
     {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
 
