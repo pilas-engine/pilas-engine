@@ -10,6 +10,7 @@ class Modo extends Phaser.Scene {
   alto: number;
   es_modo_ejecucion: boolean;
   canvas_fisica: any;
+  posicion_anterior_de_arrastre: any;
 
   constructor(data) {
     super(data);
@@ -52,6 +53,29 @@ class Modo extends Phaser.Scene {
     let graphics = this.add.graphics();
     graphics.depth = 20000;
     this.graphics = graphics;
+  }
+
+  crear_manejadores_para_controlar_el_zoom(emitir_mensajes_al_editor) {
+    let escena = this;
+
+    this.input.on("wheel", function(pointer, currentlyOver, dx, dy, dz, event) {
+      let zoom = this.cameras.main.zoom;
+
+      if (dy > 0) {
+        zoom += 0.25;
+      } else {
+        zoom -= 0.25;
+      }
+
+      zoom = Math.max(1, zoom);
+      zoom = Math.min(5, zoom);
+
+      if (emitir_mensajes_al_editor) {
+        escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
+      }
+
+      this.cameras.main.setZoom(zoom);
+    });
   }
 
   update(actores) {
@@ -393,11 +417,6 @@ class Modo extends Phaser.Scene {
     }
 
     throw Error(`No se reconoce la figura ${actor.figura} en este modo.`);
-  }
-
-  posicionar_la_camara(datos_de_la_escena) {
-    // Este método se sobre-escribe en modo_editor
-    this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
   }
 
   actualizar_posicion(posicion: any = null) {

@@ -6821,6 +6821,24 @@ var Modo = (function (_super) {
         graphics.depth = 20000;
         this.graphics = graphics;
     };
+    Modo.prototype.crear_manejadores_para_controlar_el_zoom = function (emitir_mensajes_al_editor) {
+        var escena = this;
+        this.input.on("wheel", function (pointer, currentlyOver, dx, dy, dz, event) {
+            var zoom = this.cameras.main.zoom;
+            if (dy > 0) {
+                zoom += 0.25;
+            }
+            else {
+                zoom -= 0.25;
+            }
+            zoom = Math.max(1, zoom);
+            zoom = Math.min(5, zoom);
+            if (emitir_mensajes_al_editor) {
+                escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
+            }
+            this.cameras.main.setZoom(zoom);
+        });
+    };
     Modo.prototype.update = function (actores) {
         var _this = this;
         this.graphics.clear();
@@ -7085,9 +7103,6 @@ var Modo = (function (_super) {
         }
         throw Error("No se reconoce la figura " + actor.figura + " en este modo.");
     };
-    Modo.prototype.posicionar_la_camara = function (datos_de_la_escena) {
-        this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
-    };
     Modo.prototype.actualizar_posicion = function (posicion) {
         if (posicion === void 0) { posicion = null; }
         throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
@@ -7291,7 +7306,7 @@ var ModoEditor = (function (_super) {
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.hacer_que_el_fondo_se_pueda_arrastrar();
         this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
-        this.crear_manejadores_para_controlar_el_zoom();
+        this.crear_manejadores_para_controlar_el_zoom(true);
         this.conectar_movimiento_del_mouse();
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
         this.pilas.game.scale.resize(this.ancho, this.alto);
@@ -7344,22 +7359,6 @@ var ModoEditor = (function (_super) {
         this.minimap.inputEnabled = false;
         this.minimap.ignore(this.fondo);
         this.minimap.ignore(this.fps);
-    };
-    ModoEditor.prototype.crear_manejadores_para_controlar_el_zoom = function () {
-        var escena = this;
-        this.input.on("wheel", function (pointer, currentlyOver, dx, dy, dz, event) {
-            var zoom = this.cameras.main.zoom;
-            if (dy > 0) {
-                zoom += 0.25;
-            }
-            else {
-                zoom -= 0.25;
-            }
-            zoom = Math.max(1, zoom);
-            zoom = Math.min(5, zoom);
-            escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
-            this.cameras.main.setZoom(zoom);
-        });
     };
     ModoEditor.prototype.crear_sprite_con_el_borde_de_la_camara = function (_a) {
         var camara_x = _a.camara_x, camara_y = _a.camara_y;
@@ -8075,6 +8074,8 @@ var ModoPausa = (function (_super) {
     function ModoPausa() {
         var _this = _super.call(this, { key: "ModoPausa" }) || this;
         _this.fondo_anterior = null;
+        _this._anterior_posicion_x_de_la_camara = 0;
+        _this._anterior_posicion_y_de_la_camara = 0;
         return _this;
     }
     ModoPausa.prototype.crear_indicador_de_texto = function () {
@@ -8102,6 +8103,7 @@ var ModoPausa = (function (_super) {
         var t = this.pilas.historia.obtener_cantidad_de_posiciones();
         var datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
         this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
+        this.crear_manejadores_para_controlar_el_zoom(false);
     };
     ModoPausa.prototype.crear_sprites_desde_historia = function (posicion) {
         var _this = this;
@@ -8118,10 +8120,12 @@ var ModoPausa = (function (_super) {
             }
             sprite.destroy();
         });
-        this.posicionar_la_camara(foto.escena);
-        this.posicionar_fondo(foto.escena.desplazamiento_del_fondo_x, foto.escena.desplazamiento_del_fondo_y);
         this.graphics.clear();
         this.fondo.setAlpha(0.8);
+        this.hacer_arratrable_el_fondo();
+        this.limitar_movimiento_de_la_camara_a_los_bordes_actuales(foto.escena);
+        this.posicionar_la_camara(foto.escena);
+        this.posicionar_fondo(foto.escena);
         this.sprites = foto.actores.map(function (entidad) {
             if (_this.pilas.depurador.modo_posicion_activado) {
                 var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
@@ -8143,6 +8147,69 @@ var ModoPausa = (function (_super) {
         }
         this.indicador_de_texto.text = "Tiempo: " + minutos + " " + sufijo_minutos + " " + segundos + " " + sufijo_segundos + "\nCuadro: " + posicion + "\nCantidad de actores: " + foto.actores.length;
         this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
+    };
+    ModoPausa.prototype.posicionar_fondo = function (escena) {
+        var dx = escena.desplazamiento_del_fondo_x || 0;
+        var dy = escena.desplazamiento_del_fondo_y || 0;
+        var posicion_de_la_camara = {
+            x: escena.camara_x,
+            y: -escena.camara_y
+        };
+        if (this.fondo) {
+            this.fondo.x = posicion_de_la_camara.x;
+            this.fondo.y = posicion_de_la_camara.y;
+            this.fondo.tilePositionX = posicion_de_la_camara.x + dx;
+            this.fondo.tilePositionY = posicion_de_la_camara.y + dy;
+        }
+    };
+    ModoPausa.prototype.posicionar_la_camara = function (datos_de_la_escena) {
+        var x = datos_de_la_escena.camara_x;
+        var y = -datos_de_la_escena.camara_y;
+        if (this._anterior_posicion_x_de_la_camara !== x || this._anterior_posicion_y_de_la_camara !== y) {
+            this.cameras.cameras[0].setScroll(x, y);
+            this._anterior_posicion_x_de_la_camara = x;
+            this._anterior_posicion_y_de_la_camara = y;
+        }
+    };
+    ModoPausa.prototype.limitar_movimiento_de_la_camara_a_los_bordes_actuales = function (escena) {
+        var x = escena.camara_x;
+        var y = -escena.camara_y;
+        this.cameras.cameras[0].setBounds(x, y, this.ancho, this.alto);
+    };
+    ModoPausa.prototype.hacer_arratrable_el_fondo = function () {
+        var _this = this;
+        this.fondo.setInteractive();
+        this.input.setDraggable(this.fondo, undefined);
+        var escena = this;
+        this.input.on("dragstart", function (pointer, gameObject) {
+            _this.posicion_anterior_de_arrastre = pointer.position.clone();
+            if (escena.pilas.utilidades.es_firefox()) {
+                escena.input.setDefaultCursor("grabbing");
+            }
+            else {
+                escena.input.setDefaultCursor("-webkit-grabbing");
+            }
+        });
+        this.input.on("drag", function (pointer, gameObject, dragX, dragY) {
+            _this.desplazar_la_camara_desde_el_evento_drag(pointer);
+        });
+        this.input.on("dragend", function (pointer, gameObject) {
+            escena.input.setDefaultCursor("default");
+        });
+    };
+    ModoPausa.prototype.desplazar_la_camara_desde_el_evento_drag = function (pointer) {
+        var zoom = this.cameras.main.zoom;
+        var factor = this.obtener_factores();
+        var dx = this.posicion_anterior_de_arrastre.x - pointer.position.x;
+        var dy = this.posicion_anterior_de_arrastre.y - pointer.position.y;
+        this.cameras.main.scrollX += dx / factor.x / zoom;
+        this.cameras.main.scrollY += dy / factor.y / zoom;
+        this.posicion_anterior_de_arrastre = pointer.position.clone();
+    };
+    ModoPausa.prototype.obtener_factores = function () {
+        var factor_horizontal = Math.min(1, this.ancho / this.alto);
+        var factor_vertical = Math.min(1, this.alto / this.ancho);
+        return { x: factor_horizontal, y: factor_vertical };
     };
     ModoPausa.prototype.update = function () {
         if (this._anterior_valor_del_modo_posicion_activado !== this.pilas.depurador.modo_posicion_activado) {

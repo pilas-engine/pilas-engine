@@ -4,7 +4,6 @@ class ModoEditor extends Modo {
   pilas: Pilas;
   minimap: Phaser.Cameras.Scene2D.Camera;
   sprite_borde_de_la_camara: Phaser.GameObjects.Sprite;
-  posicion_anterior_de_arrastre: any;
   usar_grilla: boolean;
   sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
   tamaño_de_la_grilla: number;
@@ -38,7 +37,7 @@ class ModoEditor extends Modo {
     this.hacer_que_el_fondo_se_pueda_arrastrar();
 
     this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
-    this.crear_manejadores_para_controlar_el_zoom();
+    this.crear_manejadores_para_controlar_el_zoom(true);
 
     //this.matter.world.createDebugGraphic();
     this.conectar_movimiento_del_mouse();
@@ -113,26 +112,6 @@ class ModoEditor extends Modo {
     this.minimap.inputEnabled = false;
     this.minimap.ignore(this.fondo);
     this.minimap.ignore(this.fps);
-  }
-
-  crear_manejadores_para_controlar_el_zoom() {
-    let escena = this;
-
-    this.input.on("wheel", function(pointer, currentlyOver, dx, dy, dz, event) {
-      let zoom = this.cameras.main.zoom;
-
-      if (dy > 0) {
-        zoom += 0.25;
-      } else {
-        zoom -= 0.25;
-      }
-
-      zoom = Math.max(1, zoom);
-      zoom = Math.min(5, zoom);
-
-      escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
-      this.cameras.main.setZoom(zoom);
-    });
   }
 
   crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }) {

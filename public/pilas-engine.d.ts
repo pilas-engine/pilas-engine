@@ -1581,11 +1581,13 @@ declare class Modo extends Phaser.Scene {
     alto: number;
     es_modo_ejecucion: boolean;
     canvas_fisica: any;
+    posicion_anterior_de_arrastre: any;
     constructor(data: any);
     create(datos: any, ancho: any, alto: any): void;
     crear_indicadores_de_rendimiento_fps(): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
+    crear_manejadores_para_controlar_el_zoom(emitir_mensajes_al_editor: any): void;
     update(actores: any): void;
     actualizar_canvas_fisica(): void;
     dibujar_figura_desde_vertices(canvas: any, linea: any, color: any, vertices: any): void;
@@ -1601,7 +1603,6 @@ declare class Modo extends Phaser.Scene {
     obtener_imagen_para_nineslice(imagen: any): any;
     copiar_valores_de_sprite_a_texto(sprite: any): void;
     crear_figura_estatica_para(actor: any): any;
-    posicionar_la_camara(datos_de_la_escena: any): void;
     actualizar_posicion(posicion?: any): void;
     dibujar_punto_de_control(graphics: any, x: any, y: any): void;
 }
@@ -1624,7 +1625,6 @@ declare class ModoEditor extends Modo {
     pilas: Pilas;
     minimap: Phaser.Cameras.Scene2D.Camera;
     sprite_borde_de_la_camara: Phaser.GameObjects.Sprite;
-    posicion_anterior_de_arrastre: any;
     usar_grilla: boolean;
     sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
     tamaño_de_la_grilla: number;
@@ -1634,7 +1634,6 @@ declare class ModoEditor extends Modo {
     crear_fondo(fondo: any, ancho?: any, alto?: any): void;
     crear_sprite_para_el_cursor_de_la_grilla(): void;
     crear_minimap(escena: any): void;
-    crear_manejadores_para_controlar_el_zoom(): void;
     crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }: {
         camara_x: any;
         camara_y: any;
@@ -1726,11 +1725,22 @@ declare class ModoPausa extends Modo {
     tecla_derecha: any;
     fondo_anterior: any;
     _anterior_valor_del_modo_posicion_activado: boolean;
+    _anterior_posicion_x_de_la_camara: number;
+    _anterior_posicion_y_de_la_camara: number;
     constructor();
     private crear_indicador_de_texto;
     preload(): void;
     create(datos: any): void;
     private crear_sprites_desde_historia;
+    posicionar_fondo(escena: any): void;
+    posicionar_la_camara(datos_de_la_escena: any): void;
+    limitar_movimiento_de_la_camara_a_los_bordes_actuales(escena: any): void;
+    hacer_arratrable_el_fondo(): void;
+    desplazar_la_camara_desde_el_evento_drag(pointer: any): void;
+    obtener_factores(): {
+        x: number;
+        y: number;
+    };
     update(): void;
     dibujar_sensores_sobre_canvas_fisica(posicion: any): void;
     crear_sprite_desde_entidad(entidad: any): any;
