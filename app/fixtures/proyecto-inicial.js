@@ -4,6 +4,7 @@ export default {
   titulo: "Proyecto demo",
   ancho: 500,
   alto: 500,
+  tamaño: "500x500",
   escena_inicial: 1,
   imagenes: [],
   animaciones: animaciones_iniciales,

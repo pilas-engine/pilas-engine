@@ -46,6 +46,7 @@ export default Component.extend({
 
         proyecto.set("ancho", +ancho);
         proyecto.set("alto", +alto);
+        proyecto.set("tamaño", valor);
       }
 
       proyecto.set(propiedad, valor);

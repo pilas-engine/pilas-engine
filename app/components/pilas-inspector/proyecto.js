@@ -33,7 +33,6 @@ export default Component.extend({
         propiedad: "tamaño",
         opciones: resoluciones_como_diccionarios
       },
-
       {
         tipo: "combo",
         propiedad: "fps",
