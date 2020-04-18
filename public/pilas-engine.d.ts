@@ -828,6 +828,16 @@ declare class ceferino extends Actor {
     actualizar(): void;
     pre_actualizar(): void;
 }
+declare class chispa extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        etiqueta: string;
+    };
+    iniciar(): void;
+    actualizar(): void;
+    cuando_finaliza_animacion(nombre: string): void;
+}
 declare class conejo extends Actor {
     propiedades: {
         x: number;
@@ -901,6 +911,26 @@ declare class gallina extends Actor {
     vuela_iniciar(): void;
     vuela_actualizar(): void;
     vuela_cuando_comienza_una_colision(actor: any): void;
+}
+declare class golpe extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        etiqueta: string;
+    };
+    iniciar(): void;
+    actualizar(): void;
+    cuando_finaliza_animacion(nombre: string): void;
+}
+declare class humo extends Actor {
+    propiedades: {
+        figura: string;
+        imagen: string;
+        etiqueta: string;
+    };
+    iniciar(): void;
+    actualizar(): void;
+    cuando_finaliza_animacion(nombre: string): void;
 }
 declare class laser extends Actor {
     propiedades: {

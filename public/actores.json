@@ -76,6 +76,11 @@
       "archivo": "ceferino.ts"
     },
     {
+      "nombre": "chispa",
+      "codigo": "class chispa extends Actor {\n  propiedades = {\n    figura: \"\",\n    imagen: \"imagenes:efectos/chispa-3\",\n    etiqueta: \"chispa\"\n  };\n\n  iniciar() {\n    this.animacion = \"chispa\";\n  }\n\n  actualizar() {}\n\n  cuando_finaliza_animacion(nombre: string) {\n    this.eliminar();\n  }\n}\n",
+      "archivo": "chispa.ts"
+    },
+    {
       "nombre": "conejo",
       "codigo": "class conejo extends Actor {\n  propiedades = {\n    x: 0,\n    y: 0,\n    imagen: \"imagenes:conejo/conejo_parado1\",\n\n    figura: \"rectangulo\",\n    figura_ancho: 50,\n    figura_alto: 100,\n    figura_radio: 50,\n    figura_sin_rotacion: true,\n    figura_dinamica: true,\n    figura_rebote: 0\n  };\n\n  toca_el_suelo = false;\n  pies = null;\n\n  iniciar() {\n    this.estado = \"parado\";\n    this.pies = this.agregar_sensor(50, 10, 0, -50);\n  }\n\n  actualizar() {\n    if (this.pies.colisiones.length > 0) {\n      this.toca_el_suelo = true;\n    } else {\n      this.toca_el_suelo = false;\n    }\n  }\n\n  parado_iniciar() {\n    this.reproducir_animacion(\"conejo_parado\");\n  }\n\n  parado_actualizar() {\n    if (this.pilas.control.izquierda || this.pilas.control.derecha) {\n      this.estado = \"camina\";\n    }\n\n    if (this.pilas.control.arriba && this.toca_el_suelo) {\n      this.impulsar(0, 10);\n      this.estado = \"salta\";\n    }\n\n    if (!this.toca_el_suelo) {\n      this.estado = \"salta\";\n    }\n  }\n\n  camina_iniciar() {\n    this.reproducir_animacion(\"conejo_camina\");\n  }\n\n  camina_actualizar() {\n    if (this.pilas.control.izquierda) {\n      this.x -= 5;\n      this.espejado = true;\n    }\n\n    if (this.pilas.control.derecha) {\n      this.x += 5;\n      this.espejado = false;\n    }\n\n    if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {\n      this.estado = \"parado\";\n      return;\n    }\n\n    if (this.pilas.control.arriba && this.toca_el_suelo) {\n      this.impulsar(0, 10);\n      this.estado = \"salta\";\n    }\n\n    if (!this.toca_el_suelo) {\n      this.estado = \"salta\";\n    }\n  }\n\n  salta_iniciar() {\n    this.reproducir_animacion(\"conejo_salta\");\n  }\n\n  salta_actualizar() {\n    if (this.pilas.control.izquierda) {\n      this.x -= 5;\n    }\n\n    if (this.pilas.control.derecha) {\n      this.x += 5;\n    }\n\n    if (this.toca_el_suelo) {\n      this.estado = \"parado\";\n    }\n  }\n\n  cuando_comienza_una_colision(actor) {\n    if (actor.etiqueta === \"moneda\") {\n      this.pilas.reproducir_sonido(\"moneda\");\n      actor.eliminar();\n    }\n\n    if (actor.etiqueta === \"plataforma\") {\n      if (this.velocidad_y > 0.1) {\n        return true;\n      }\n    }\n  }\n\n  cuando_se_mantiene_una_colision(actor) {}\n\n  cuando_termina_una_colision(actor) {}\n}\n",
       "archivo": "conejo.ts"
@@ -94,6 +99,16 @@
       "nombre": "gallina",
       "codigo": "class gallina extends Actor {\n  propiedades = {\n    x: 0,\n    y: 0,\n    imagen: \"imagenes:gallina/gallina_vuela_3\",\n\n    figura: \"circulo\",\n    figura_radio: 30,\n    figura_sin_rotacion: true,\n    figura_dinamica: true,\n    figura_rebote: 0\n  };\n\n  iniciar() {\n    this.crear_animacion(\n      \"gallina_vuela\",\n      [\n        \"imagenes:gallina/gallina_vuela_1\",\n        \"imagenes:gallina/gallina_vuela_1\",\n        \"imagenes:gallina/gallina_vuela_2\",\n        \"imagenes:gallina/gallina_vuela_3\",\n        \"imagenes:gallina/gallina_vuela_2\"\n      ],\n      15\n    );\n    this.crear_animacion(\"gallina_muere\", [\"imagenes:gallina/gallina_muere\"], 20);\n    this.crear_animacion(\n      \"gallina_sin_piel\",\n      [\"imagenes:gallina/gallina_sin_piel\"],\n      20\n    );\n\n    this.estado = \"vuela\";\n  }\n\n  actualizar() {}\n\n  vuela_iniciar() {\n    this.reproducir_animacion(\"gallina_vuela\");\n  }\n\n  vuela_actualizar() {}\n\n  // # TODO: Implementar este tipo de manejadores, para que desde los estados de autómata se puedan crear colisiones.\n  vuela_cuando_comienza_una_colision(actor) {}\n}\n",
       "archivo": "gallina.ts"
+    },
+    {
+      "nombre": "golpe",
+      "codigo": "class golpe extends Actor {\n  propiedades = {\n    figura: \"\",\n    imagen: \"imagenes:efectos/golpe-3\",\n    etiqueta: \"golpe\"\n  };\n\n  iniciar() {\n    this.animacion = \"golpe\";\n  }\n\n  actualizar() {}\n\n  cuando_finaliza_animacion(nombre: string) {\n    this.eliminar();\n  }\n}\n",
+      "archivo": "golpe.ts"
+    },
+    {
+      "nombre": "humo",
+      "codigo": "class humo extends Actor {\n  propiedades = {\n    figura: \"\",\n    imagen: \"imagenes:efectos/humo-03\",\n    etiqueta: \"humo\"\n  };\n\n  iniciar() {\n    this.animacion = \"humo\";\n  }\n\n  actualizar() {}\n\n  cuando_finaliza_animacion(nombre: string) {\n    this.eliminar();\n  }\n}\n",
+      "archivo": "humo.ts"
     },
     {
       "nombre": "laser",

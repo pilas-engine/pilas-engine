@@ -1,39 +1,5 @@
 export default [
   {
-    nombre: "mini_explosion",
-    cuadros: [
-      {
-        nombre: "imagenes:mini-explosion/explosion_0",
-        sprite: "imagenes-mini-explosion-explosion_0"
-      },
-      {
-        nombre: "imagenes:mini-explosion/explosion_1",
-        sprite: "imagenes-mini-explosion-explosion_1"
-      },
-      {
-        nombre: "imagenes:mini-explosion/explosion_2",
-        sprite: "imagenes-mini-explosion-explosion_2"
-      },
-      {
-        nombre: "imagenes:mini-explosion/explosion_3",
-        sprite: "imagenes-mini-explosion-explosion_3"
-      },
-      {
-        nombre: "imagenes:mini-explosion/explosion_4",
-        sprite: "imagenes-mini-explosion-explosion_4"
-      },
-      {
-        nombre: "imagenes:mini-explosion/explosion_5",
-        sprite: "imagenes-mini-explosion-explosion_5"
-      },
-      {
-        nombre: "imagenes:mini-explosion/explosion_6",
-        sprite: "imagenes-mini-explosion-explosion_6"
-      }
-    ],
-    velocidad: "30"
-  },
-  {
     nombre: "explosion",
     cuadros: [
       {
@@ -98,6 +64,142 @@ export default [
       }
     ],
     velocidad: "30"
+  },
+  {
+    nombre: "mini_explosion",
+    cuadros: [
+      {
+        nombre: "imagenes:mini-explosion/explosion_0",
+        sprite: "imagenes-mini-explosion-explosion_0"
+      },
+      {
+        nombre: "imagenes:mini-explosion/explosion_1",
+        sprite: "imagenes-mini-explosion-explosion_1"
+      },
+      {
+        nombre: "imagenes:mini-explosion/explosion_2",
+        sprite: "imagenes-mini-explosion-explosion_2"
+      },
+      {
+        nombre: "imagenes:mini-explosion/explosion_3",
+        sprite: "imagenes-mini-explosion-explosion_3"
+      },
+      {
+        nombre: "imagenes:mini-explosion/explosion_4",
+        sprite: "imagenes-mini-explosion-explosion_4"
+      },
+      {
+        nombre: "imagenes:mini-explosion/explosion_5",
+        sprite: "imagenes-mini-explosion-explosion_5"
+      },
+      {
+        nombre: "imagenes:mini-explosion/explosion_6",
+        sprite: "imagenes-mini-explosion-explosion_6"
+      }
+    ],
+    velocidad: "30"
+  },
+  {
+    nombre: "golpe",
+    cuadros: [
+      {
+        nombre: "imagenes:efectos/golpe-1",
+        sprite: "imagenes-efectos-golpe-1"
+      },
+      {
+        nombre: "imagenes:efectos/golpe-2",
+        sprite: "imagenes-efectos-golpe-2"
+      },
+      {
+        nombre: "imagenes:efectos/golpe-3",
+        sprite: "imagenes-efectos-golpe-3"
+      },
+      {
+        nombre: "imagenes:efectos/golpe-4",
+        sprite: "imagenes-efectos-golpe-4"
+      },
+      {
+        nombre: "imagenes:efectos/golpe-5",
+        sprite: "imagenes-efectos-golpe-5"
+      },
+      {
+        nombre: "imagenes:efectos/golpe-6",
+        sprite: "imagenes-efectos-golpe-6"
+      }
+    ],
+    velocidad: "15"
+  },
+  {
+    nombre: "chispa",
+    cuadros: [
+      {
+        nombre: "imagenes:efectos/chispa-1",
+        sprite: "imagenes-efectos-chispa-1"
+      },
+      {
+        nombre: "imagenes:efectos/chispa-2",
+        sprite: "imagenes-efectos-chispa-2"
+      },
+      {
+        nombre: "imagenes:efectos/chispa-3",
+        sprite: "imagenes-efectos-chispa-3"
+      },
+      {
+        nombre: "imagenes:efectos/chispa-4",
+        sprite: "imagenes-efectos-chispa-4"
+      },
+      {
+        nombre: "imagenes:efectos/chispa-5",
+        sprite: "imagenes-efectos-chispa-5"
+      }
+    ],
+    velocidad: "20"
+  },
+  {
+    nombre: "humo",
+    cuadros: [
+      {
+        nombre: "imagenes:efectos/humo-01",
+        sprite: "imagenes-efectos-humo-01"
+      },
+      {
+        nombre: "imagenes:efectos/humo-02",
+        sprite: "imagenes-efectos-humo-02"
+      },
+      {
+        nombre: "imagenes:efectos/humo-03",
+        sprite: "imagenes-efectos-humo-03"
+      },
+      {
+        nombre: "imagenes:efectos/humo-04",
+        sprite: "imagenes-efectos-humo-04"
+      },
+      {
+        nombre: "imagenes:efectos/humo-05",
+        sprite: "imagenes-efectos-humo-05"
+      },
+      {
+        nombre: "imagenes:efectos/humo-06",
+        sprite: "imagenes-efectos-humo-06"
+      },
+      {
+        nombre: "imagenes:efectos/humo-07",
+        sprite: "imagenes-efectos-humo-07"
+      },
+      {
+        nombre: "imagenes:efectos/humo-08",
+        sprite: "imagenes-efectos-humo-08"
+      },
+      {
+        nombre: "imagenes:efectos/humo-09",
+        sprite: "imagenes-efectos-humo-09"
+      },
+      {
+        nombre: "imagenes:efectos/humo-10",
+        sprite: "imagenes-efectos-humo-10"
+      }
+    ],
+    velocidad: "15"
   },
   {
     nombre: "hombre_pixel_camina",

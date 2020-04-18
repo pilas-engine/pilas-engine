@@ -3719,6 +3719,26 @@ var ceferino = (function (_super) {
     };
     return ceferino;
 }(Actor));
+var chispa = (function (_super) {
+    __extends(chispa, _super);
+    function chispa() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            figura: "",
+            imagen: "imagenes:efectos/chispa-3",
+            etiqueta: "chispa"
+        };
+        return _this;
+    }
+    chispa.prototype.iniciar = function () {
+        this.animacion = "chispa";
+    };
+    chispa.prototype.actualizar = function () { };
+    chispa.prototype.cuando_finaliza_animacion = function (nombre) {
+        this.eliminar();
+    };
+    return chispa;
+}(Actor));
 var conejo = (function (_super) {
     __extends(conejo, _super);
     function conejo() {
@@ -3933,6 +3953,46 @@ var gallina = (function (_super) {
     gallina.prototype.vuela_actualizar = function () { };
     gallina.prototype.vuela_cuando_comienza_una_colision = function (actor) { };
     return gallina;
+}(Actor));
+var golpe = (function (_super) {
+    __extends(golpe, _super);
+    function golpe() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            figura: "",
+            imagen: "imagenes:efectos/golpe-3",
+            etiqueta: "golpe"
+        };
+        return _this;
+    }
+    golpe.prototype.iniciar = function () {
+        this.animacion = "golpe";
+    };
+    golpe.prototype.actualizar = function () { };
+    golpe.prototype.cuando_finaliza_animacion = function (nombre) {
+        this.eliminar();
+    };
+    return golpe;
+}(Actor));
+var humo = (function (_super) {
+    __extends(humo, _super);
+    function humo() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            figura: "",
+            imagen: "imagenes:efectos/humo-03",
+            etiqueta: "humo"
+        };
+        return _this;
+    }
+    humo.prototype.iniciar = function () {
+        this.animacion = "humo";
+    };
+    humo.prototype.actualizar = function () { };
+    humo.prototype.cuando_finaliza_animacion = function (nombre) {
+        this.eliminar();
+    };
+    return humo;
 }(Actor));
 var laser = (function (_super) {
     __extends(laser, _super);
@@ -4380,8 +4440,8 @@ var EscenaBase = (function () {
                     actores_a_eliminar.push(actor);
                     return;
                 }
-                actor.pre_actualizar();
                 actor.actualizar_sensores();
+                actor.pre_actualizar();
                 actor.actualizar_habilidades();
                 actor.actualizar();
             }
