@@ -2,6 +2,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
+import EmberObject from "@ember/object";
 
 module("Integration | Component | pilas inspector", function(hooks) {
   setupRenderingTest(hooks);
@@ -10,12 +11,16 @@ module("Integration | Component | pilas inspector", function(hooks) {
     await render(hbs`{{pilas-inspector}}`);
     assert.dom("*").hasText("");
 
-    this.set("instancia_seleccionada", {
-      id: 123,
-      x: 20,
-      y: 30,
-      imagen: "demo"
-    });
+    this.set(
+      "instancia_seleccionada",
+      EmberObject.create({
+        id: 123,
+        x: 20,
+        y: 30,
+        imagen: "demo",
+        sensores: []
+      })
+    );
 
     this.set("tipo_de_la_instancia_seleccionada", "actor");
 
@@ -24,9 +29,7 @@ module("Integration | Component | pilas inspector", function(hooks) {
       tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}`);
 
     function tiene_texto(t, texto) {
-      return (
-        t.element.innerHTML.toLowerCase().indexOf(texto.toLowerCase()) > -1
-      );
+      return t.element.innerHTML.toLowerCase().indexOf(texto.toLowerCase()) > -1;
     }
 
     assert.ok(tiene_texto(this, "nombre"));

@@ -909,12 +909,14 @@ var Depurador = (function () {
         this.modo_posicion_activado = false;
         this.mostrar_fps = false;
         this.mostrar_fisica = false;
+        this.fisica_en_modo_ejecucion = false;
     }
     Depurador.prototype.definir_estados_de_depuracion = function (datos) {
         this.mostrar_fps = datos.fps;
         this.modo_posicion_activado = datos.pos;
         this.mostrar_fisica = datos.fisica;
         this.minimapa = datos.minimapa;
+        this.fisica_en_modo_ejecucion = datos.fisica_en_modo_ejecucion;
     };
     return Depurador;
 }());
@@ -2095,6 +2097,34 @@ var Pilas = (function () {
     return Pilas;
 }());
 var pilasengine = new Pilas();
+var Sensor = (function () {
+    function Sensor(figura) {
+        this._figura = figura;
+    }
+    Object.defineProperty(Sensor.prototype, "colisiones", {
+        get: function () {
+            return this._figura.colisiones;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Sensor.prototype.colisiona_con_etiqueta = function (etiqueta) {
+        if (this._figura.colisiones.find(function (actor) { return actor.tiene_etiqueta(etiqueta); })) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    Object.defineProperty(Sensor.prototype, "cantidad_de_colisiones", {
+        get: function () {
+            return this._figura.colisiones.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Sensor;
+}());
 var ActorBase = (function () {
     function ActorBase(pilas) {
         this.figura = "";
@@ -2174,6 +2204,8 @@ var ActorBase = (function () {
                 this.sin_rotacion = propiedades.figura_sin_rotacion;
                 this.rebote = propiedades.figura_rebote;
                 this.sensor = propiedades.figura_sensor;
+                this.sprite.body["es_dinamica"] = this.dinamico;
+                this.sprite.body["es_sensor"] = this.sensor;
                 break;
             case "circulo":
                 this.sprite = this.crear_sprite("matter", propiedades.imagen);
@@ -2183,6 +2215,8 @@ var ActorBase = (function () {
                 this.sin_rotacion = propiedades.figura_sin_rotacion;
                 this.rebote = propiedades.figura_rebote;
                 this.sensor = propiedades.figura_sensor;
+                this.sprite.body["es_dinamica"] = this.dinamico;
+                this.sprite.body["es_sensor"] = this.sensor;
                 break;
             case "ninguna":
             case "":
@@ -2192,8 +2226,6 @@ var ActorBase = (function () {
             default:
                 throw Error("No se conoce el tipo de figura " + figura);
         }
-        this.figura["es_dinamica"] = propiedades.figura_dinamica;
-        this.figura["es_sensor"] = propiedades.figura_sensor;
         this.interactivo = true;
         this.rotacion = propiedades.rotacion || 0;
         this.id_color = this.generar_color_para_depurar();
@@ -2955,7 +2987,14 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
-    ActorBase.prototype.agregar_sensor = function (ancho, alto, x, y) {
+    ActorBase.prototype.agregar_sensores_desde_lista = function (lista_de_sensores) {
+        var _this = this;
+        lista_de_sensores.map(function (sensor) {
+            _this.agregar_sensor(sensor.ancho, sensor.alto, sensor.x, sensor.y, sensor.nombre);
+        });
+    };
+    ActorBase.prototype.agregar_sensor = function (ancho, alto, x, y, nombre) {
+        if (nombre === void 0) { nombre = "sin nombre"; }
         var pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
         var figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
             isSensor: true,
@@ -2963,17 +3002,16 @@ var ActorBase = (function () {
         });
         figura.distancia_x = x;
         figura.distancia_y = y;
+        figura["es_sensor"] = true;
+        figura["es_dinamica"] = true;
         figura.sensor_del_actor = this;
         figura.colisiones = [];
+        figura["nombre"] = nombre;
         this.sensores.push(figura);
         return figura;
     };
     ActorBase.prototype.eliminar = function () {
-        var _this = this;
         this._vivo = false;
-        this.sensores.map(function (s) {
-            _this.pilas.modo.matter.world.remove(s);
-        });
     };
     ActorBase.prototype.esta_vivo = function () {
         return this._vivo;
@@ -3190,6 +3228,22 @@ var ActorBase = (function () {
                 }
             }
         });
+    };
+    ActorBase.prototype.obtener_sensor = function (nombre) {
+        var figura = this.sensores.find(function (e) { return e.nombre === nombre; });
+        if (!figura) {
+            var nombres_de_sensores = this.sensores.map(function (s) { return s.nombre; });
+            if (nombres_de_sensores.length > 0) {
+                var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, nombres_de_sensores);
+                throw Error("No existe un sensor que se llame \"" + nombre + "\". \u00BFQuisiste decir \"" + sugerencia + "\"?");
+            }
+            else {
+                throw Error("No hay sensores creados, as\u00ED que no se busc\u00F3 si exist\u00EDa uno llamado \"" + nombre + "\".");
+            }
+        }
+        if (figura) {
+            return new Sensor(figura);
+        }
     };
     return ActorBase;
 }());
@@ -3753,7 +3807,16 @@ var conejo = (function (_super) {
             figura_radio: 50,
             figura_sin_rotacion: true,
             figura_dinamica: true,
-            figura_rebote: 0
+            figura_rebote: 0,
+            sensores: [
+                {
+                    x: 0,
+                    y: -51,
+                    ancho: 64,
+                    alto: 10,
+                    nombre: "pies"
+                }
+            ]
         };
         _this.toca_el_suelo = false;
         _this.pies = null;
@@ -3761,7 +3824,7 @@ var conejo = (function (_super) {
     }
     conejo.prototype.iniciar = function () {
         this.estado = "parado";
-        this.pies = this.agregar_sensor(50, 10, 0, -50);
+        this.pies = this.obtener_sensor("pies");
     };
     conejo.prototype.actualizar = function () {
         if (this.pies.colisiones.length > 0) {
@@ -4431,6 +4494,9 @@ var EscenaBase = (function () {
             try {
                 if (!actor._vivo) {
                     actor.sprite.destroy();
+                    actor.sensores.map(function (s) {
+                        _this.pilas.modo.matter.world.remove(s);
+                    });
                     if (actor._texto) {
                         actor._texto.destroy();
                     }
@@ -7048,6 +7114,7 @@ var Modo = (function (_super) {
         if (actor.figura) {
             sprite.figura = this.crear_figura_estatica_para(actor);
         }
+        this.actualizar_sensores_del_actor(actor, sprite);
         sprite.setFlipX(actor.espejado);
         sprite.setFlipY(actor.espejado_vertical);
         if (actor.es_texto) {
@@ -7084,6 +7151,25 @@ var Modo = (function (_super) {
                 }
             }
             this.copiar_valores_de_sprite_a_texto(sprite);
+        }
+    };
+    Modo.prototype.actualizar_sensores_del_actor = function (actor, sprite) {
+        var _this = this;
+        if (sprite.sensores) {
+            sprite.sensores.map(function (sensor) {
+                _this.pilas.Phaser.Physics.Matter.Matter.World.remove(_this.pilas.modo.matter.world.localWorld, sensor);
+            });
+        }
+        if (actor.sensores) {
+            sprite.sensores = actor.sensores.map(function (sensor) {
+                var figura = _this.matter.add.rectangle(sensor.x + sprite.x, -sensor.y + sprite.y, sensor.ancho, sensor.alto, {
+                    isStatic: true
+                });
+                figura["es_sensor"] = true;
+                figura["dx"] = sensor.x;
+                figura["dy"] = sensor.y;
+                return figura;
+            });
         }
     };
     Modo.prototype.obtener_imagen_para_nineslice = function (imagen) {
@@ -7528,6 +7614,7 @@ var ModoEditor = (function (_super) {
         gameObject.y += dy;
         this.mover_cursor_de_la_grilla(gameObject.x, gameObject.y);
         this.ajustar_figura(gameObject);
+        this.ajustar_sensores(gameObject);
         this.posicion_anterior_de_arrastre = pointer.position.clone();
     };
     ModoEditor.prototype.ajustar_figura = function (gameObject) {
@@ -7537,6 +7624,17 @@ var ModoEditor = (function (_super) {
             matter.Body.setPosition(figura, {
                 x: gameObject.x,
                 y: gameObject.y
+            });
+        }
+    };
+    ModoEditor.prototype.ajustar_sensores = function (sprite) {
+        var matter = this.pilas.Phaser.Physics.Matter.Matter;
+        if (sprite.sensores) {
+            sprite.sensores.map(function (sensor) {
+                matter.Body.setPosition(sensor, {
+                    x: sprite.x + sensor.dx,
+                    y: sprite.y - sensor.dy
+                });
             });
         }
     };
@@ -7730,10 +7828,6 @@ var ModoEjecucion = (function (_super) {
                 this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_iniciar_ejecucion", {});
             }
             this.pilas.historia.limpiar();
-            this.modo_fisica_activado = false;
-            if (this.pilas.depurador.mostrar_fisica) {
-                this.modo_fisica_activado = true;
-            }
             this.conectar_eventos();
             this.vincular_eventos_de_colision();
             this.modificar_modo_de_pantalla();
@@ -8053,6 +8147,7 @@ var ModoEjecucion = (function (_super) {
             var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
             actor.pre_iniciar(p);
+            actor.agregar_sensores_desde_lista(entidad.sensores);
             actor.iniciar();
             if (entidad.habilidades) {
                 entidad.habilidades.map(function (habilidad) {
@@ -8110,6 +8205,13 @@ var ModoEjecucion = (function (_super) {
             console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
             this.pilas.modo.pausar();
+        }
+        if (this.pilas.depurador.fisica_en_modo_ejecucion) {
+            this.canvas_fisica.setAlpha(1);
+            this.actualizar_canvas_fisica();
+        }
+        else {
+            this.canvas_fisica.setAlpha(0);
         }
         this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
     };
@@ -8197,15 +8299,10 @@ var ModoPausa = (function (_super) {
         var segundos_como_numero = Math.floor(posicion / 60) % 60;
         var minutos = ("0" + minutos_como_numero).slice(-2);
         var segundos = ("0" + segundos_como_numero).slice(-2);
-        var sufijo_minutos = "minutos";
-        var sufijo_segundos = "segundos";
-        if (minutos_como_numero === 1) {
-            sufijo_minutos = "minuto";
-        }
         if (segundos_como_numero === 1) {
             sufijo_segundos = "segundo";
         }
-        this.indicador_de_texto.text = "Tiempo: " + minutos + " " + sufijo_minutos + " " + segundos + " " + sufijo_segundos + "\nCuadro: " + posicion + "\nCantidad de actores: " + foto.actores.length;
+        this.indicador_de_texto.text = "Tiempo: " + minutos + "' " + segundos + "''\nCuadro: " + posicion + "\nCantidad de actores: " + foto.actores.length;
         this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
     };
     ModoPausa.prototype.posicionar_fondo = function (escena) {

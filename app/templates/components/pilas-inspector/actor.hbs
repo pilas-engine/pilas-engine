@@ -58,6 +58,14 @@
 
       {{pilas-propiedad/separador propiedad=propiedad}}
 
+    {{else if (eq propiedad.tipo "sensores")}}
+
+      {{pilas-propiedad/sensores
+          objeto=instancia_seleccionada
+          propiedad=propiedad
+          modificarAtributo=cuando_modifica_atributo_de_actor
+        }}
+
     {{else}}
 
       <div class="pv2">

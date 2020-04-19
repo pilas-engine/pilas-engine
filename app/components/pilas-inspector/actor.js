@@ -222,6 +222,17 @@ export default Component.extend({
       }
     ]);
 
+    propiedades.addObjects([
+    {
+      tipo: "separador",
+      nombre: "Sensores"
+    },
+    {
+      tipo: "sensores",
+      propiedad: "sensores",
+    }
+  ]);
+
     this.set("propiedades", propiedades);
   }
 });

@@ -260,6 +260,8 @@ class Modo extends Phaser.Scene {
       sprite.figura = this.crear_figura_estatica_para(actor);
     }
 
+    this.actualizar_sensores_del_actor(actor, sprite);
+
     sprite.setFlipX(actor.espejado);
     sprite.setFlipY(actor.espejado_vertical);
 
@@ -305,6 +307,37 @@ class Modo extends Phaser.Scene {
       }
 
       this.copiar_valores_de_sprite_a_texto(sprite);
+    }
+  }
+
+  private actualizar_sensores_del_actor(actor, sprite) {
+    if (sprite.sensores) {
+      sprite.sensores.map(sensor => {
+        this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sensor);
+      });
+    }
+
+    if (actor.sensores) {
+      sprite.sensores = actor.sensores.map(sensor => {
+        let figura = this.matter.add.rectangle(
+          sensor.x + sprite.x,
+          -sensor.y + sprite.y,
+          sensor.ancho,
+          sensor.alto,
+          {
+            isStatic: true
+          }
+          //
+        );
+
+        // Se guarda algo de información adicional para el depurador gráfico
+        // de física y par ajustar los sensores al sprite que los contiene.
+        figura["es_sensor"] = true;
+        figura["dx"] = sensor.x;
+        figura["dy"] = sensor.y;
+
+        return figura;
+      });
     }
   }
 

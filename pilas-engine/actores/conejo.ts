@@ -10,7 +10,16 @@ class conejo extends Actor {
     figura_radio: 50,
     figura_sin_rotacion: true,
     figura_dinamica: true,
-    figura_rebote: 0
+    figura_rebote: 0,
+    sensores: [
+      {
+        x: 0,
+        y: -51,
+        ancho: 64,
+        alto: 10,
+        nombre: "pies"
+      }
+    ]
   };
 
   toca_el_suelo = false;
@@ -18,7 +27,7 @@ class conejo extends Actor {
 
   iniciar() {
     this.estado = "parado";
-    this.pies = this.agregar_sensor(50, 10, 0, -50);
+    this.pies = this.obtener_sensor("pies");
   }
 
   actualizar() {

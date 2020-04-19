@@ -1,0 +1,80 @@
+<div class="flex pv1">
+
+  <div class="w-100">
+
+    <div class="">
+      {{#each sensores as |sensor|}}
+
+        <div class="mb3">
+
+          <div class="tr pb2">
+            <a role="button" {{action "eliminar_sensor" sensor}} class="texto o-50 glow dib verdana f6 link pointer unselectable">
+              {{pilas-icono icono="borrar"}}
+            </a>
+          </div>
+
+          <div class="flex items-center flex-end">
+            <div class="texto pa2">Nombre</div>
+
+            {{pilas-propiedad/nombre-de-sensor
+                sensores=sensores
+                sensor=sensor
+                cuandoCambia=(action "al_cambiar_valor" "nombre" sensor)
+            }}
+          </div>
+
+          <div class="flex items-center flex-end">
+
+            {{pilas-input-numero-con-deslizador
+              identificador="X"
+              min=-100
+              max=100
+              valor=(get sensor "x")
+              cuandoCambia=(action "al_cambiar_valor" "x" sensor)
+            }}
+
+            {{pilas-input-numero-con-deslizador
+              identificador="Y"
+              min=-100
+              max=100
+              valor=(get sensor "y")
+              cuandoCambia=(action "al_cambiar_valor" "y" sensor)
+            }}
+
+          </div>
+
+          <div class="flex items-center flex-end">
+
+            {{pilas-input-numero-con-deslizador
+              identificador="↔"
+              min=5
+              max=100
+              valor=(get sensor "ancho")
+              cuandoCambia=(action "al_cambiar_valor" "ancho" sensor)
+            }}
+
+            {{pilas-input-numero-con-deslizador
+              identificador="↕"
+              min=5
+              max=100
+              valor=(get sensor "alto")
+              cuandoCambia=(action "al_cambiar_valor" "alto" sensor)
+            }}
+
+          </div>
+
+        </div>
+
+      {{/each}}
+
+      <div class="tr pt2">
+        <a role="button" {{action "crear_un_sensor"}} class="boton pa2 dib verdana f6 link pointer unselectable truncate">
+          <span>Crear un sensor</span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

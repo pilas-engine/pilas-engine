@@ -106,6 +106,8 @@ class ActorBase {
         this.sin_rotacion = propiedades.figura_sin_rotacion;
         this.rebote = propiedades.figura_rebote;
         this.sensor = propiedades.figura_sensor;
+        this.sprite.body["es_dinamica"] = this.dinamico;
+        this.sprite.body["es_sensor"] = this.sensor;
         break;
 
       case "circulo":
@@ -117,6 +119,8 @@ class ActorBase {
         this.sin_rotacion = propiedades.figura_sin_rotacion;
         this.rebote = propiedades.figura_rebote;
         this.sensor = propiedades.figura_sensor;
+        this.sprite.body["es_dinamica"] = this.dinamico;
+        this.sprite.body["es_sensor"] = this.sensor;
         break;
 
       case "ninguna":
@@ -128,9 +132,6 @@ class ActorBase {
       default:
         throw Error(`No se conoce el tipo de figura ${figura}`);
     }
-
-    this.figura["es_dinamica"] = propiedades.figura_dinamica;
-    this.figura["es_sensor"] = propiedades.figura_sensor;
 
     this.interactivo = true;
 
@@ -914,7 +915,13 @@ class ActorBase {
     return this.colisiones.length;
   }
 
-  agregar_sensor(ancho, alto, x, y) {
+  agregar_sensores_desde_lista(lista_de_sensores) {
+    lista_de_sensores.map(sensor => {
+      this.agregar_sensor(sensor.ancho, sensor.alto, sensor.x, sensor.y, sensor.nombre);
+    });
+  }
+
+  agregar_sensor(ancho, alto, x, y, nombre = "sin nombre") {
     let pos = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(x, y);
 
     let figura = this.pilas.modo.matter.add.rectangle(pos.x, pos.y, ancho, alto, {
@@ -925,8 +932,12 @@ class ActorBase {
     figura.distancia_x = x;
     figura.distancia_y = y;
 
+    figura["es_sensor"] = true;
+    figura["es_dinamica"] = true;
+
     figura.sensor_del_actor = this;
     figura.colisiones = [];
+    figura["nombre"] = nombre;
 
     this.sensores.push(figura);
     return figura;
@@ -934,9 +945,6 @@ class ActorBase {
 
   eliminar() {
     this._vivo = false;
-    this.sensores.map(s => {
-      this.pilas.modo.matter.world.remove(s);
-    });
   }
 
   esta_vivo() {
@@ -1183,5 +1191,24 @@ class ActorBase {
         }
       }
     });
+  }
+
+  obtener_sensor(nombre: string) {
+    let figura = this.sensores.find(e => e.nombre === nombre);
+
+    if (!figura) {
+      let nombres_de_sensores = this.sensores.map(s => s.nombre);
+
+      if (nombres_de_sensores.length > 0) {
+        let sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, nombres_de_sensores);
+        throw Error(`No existe un sensor que se llame "${nombre}". ¿Quisiste decir "${sugerencia}"?`);
+      } else {
+        throw Error(`No hay sensores creados, así que no se buscó si existía uno llamado "${nombre}".`);
+      }
+    }
+
+    if (figura) {
+      return new Sensor(figura);
+    }
   }
 }

@@ -443,6 +443,10 @@ export default Component.extend({
       actor.propiedades.nombre = nombre;
       actor.propiedades.habilidades = [];
 
+      if (!actor.propiedades.sensores) {
+        actor.propiedades.sensores = [];
+      }
+
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 
       this.registrar_codigo_de_actor(nombre, preparar_codigo_para_el_editor(actor.codigo));

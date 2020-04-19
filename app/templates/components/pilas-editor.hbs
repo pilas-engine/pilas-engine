@@ -189,6 +189,7 @@
                     fps=fps
                     minimapa=minimapa
                     fisica=fisica
+                    fisica_en_modo_ejecucion=fisica_en_modo_ejecucion
                     pixelart=pixelart
                   }}
         {{/pilas-reiniciador}}
@@ -196,24 +197,26 @@
         <div class="h2 ba br borde mt2">
           {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
 
-          <div class="fr {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
+          <div class="fr">
 
             {{#if (eq estado.nombreDeEstado "ModoEjecucion")}}
-              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
-                {{pilas-interruptor deshabilitado=true texto="fisica" variable=false}}
-              {{/pilas-tooltip}}
+              {{pilas-interruptor deshabilitado=false texto="fisica en modo ejecución" variable=fisica_en_modo_ejecucion}}
 
-              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
-                {{pilas-interruptor deshabilitado=true texto="fps" variable=false}}
-              {{/pilas-tooltip}}
+              <div class="dib {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
 
-              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
-                {{pilas-interruptor deshabilitado=true texto="mapa" variable=false}}
-              {{/pilas-tooltip}}
+                {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
+                  {{pilas-interruptor deshabilitado=true texto="fps" variable=false}}
+                {{/pilas-tooltip}}
 
-              {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
-                {{pilas-interruptor deshabilitado=true texto="pos" variable=false}}
-              {{/pilas-tooltip}}
+                {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
+                  {{pilas-interruptor deshabilitado=true texto="mapa" variable=false}}
+                {{/pilas-tooltip}}
+
+                {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
+                  {{pilas-interruptor deshabilitado=true texto="pos" variable=false}}
+                {{/pilas-tooltip}}
+              </div>
+
             {{else}}
               {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
                 {{pilas-interruptor texto="fisica" variable=fisica}}

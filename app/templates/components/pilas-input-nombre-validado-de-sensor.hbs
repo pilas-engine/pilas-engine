@@ -1,0 +1,38 @@
+{{yield}}
+
+    {{input
+      enter=(action "confirmar")
+      value=nombreSugerido
+      type="text"
+      class="input w-100 v-top pa1 br2"
+    }}
+
+    <div class="flex pt2">
+      <div class="flex1"></div>
+
+      <div class="">
+        <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>OK</button>
+      </div>
+    </div>
+
+    <div class="tc f7 lh-copy">
+
+      {{#if invalido_por_duplicado}}
+        <div class="pt2">
+          Error: Nombre existente
+        </div>
+      {{/if}}
+
+      {{#if invalido_por_vacio}}
+        <div class="pt2">
+          Error: No puede ser vacío
+        </div>
+      {{/if}}
+
+      {{#if invalido_por_caracteres}}
+        <div class="pt2">
+          Error: Nombre inválido (solo se permite letras)
+        </div>
+      {{/if}}
+
+    </div>

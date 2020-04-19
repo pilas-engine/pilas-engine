@@ -24,6 +24,11 @@ export default Service.extend({
       escena.get("actores").forEach(actor => {
         actor.set("imagen", this.convertir_nombre_de_imagenes(actor.get("imagen")));
 
+        // migracion 2020-04-18: los actores ahora tienen una lista de sensores.
+        if (!actor.get("sensores")) {
+          actor.set("sensores", []);
+        }
+
         // miración 2020-04-12: hacer que los actores de texto tengan una fuente por omisión.
         if (actor.get("es_texto") && !actor.get("fuente")) {
           if (actor.get("fondo") === "imagenes:redimensionables/gris") {

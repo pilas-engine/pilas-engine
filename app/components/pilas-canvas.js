@@ -183,8 +183,10 @@ export default Component.extend({
       pos: this.pos,
       fps: this.fps,
       fisica: this.fisica,
-      minimapa: this.minimapa
+      minimapa: this.minimapa,
+      fisica_en_modo_ejecucion: this.fisica_en_modo_ejecucion
     };
+
     this.contexto.postMessage(data, utils.HOST);
   },
 

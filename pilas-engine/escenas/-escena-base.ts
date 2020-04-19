@@ -141,6 +141,10 @@ class EscenaBase {
         if (!actor._vivo) {
           actor.sprite.destroy();
 
+          actor.sensores.map(s => {
+            this.pilas.modo.matter.world.remove(s);
+          });
+
           if (actor._texto) {
             actor._texto.destroy();
           }
@@ -153,8 +157,8 @@ class EscenaBase {
           return;
         }
 
-        actor.pre_actualizar();
         actor.actualizar_sensores();
+        actor.pre_actualizar();
         actor.actualizar_habilidades();
         actor.actualizar();
       } catch (e) {

@@ -53,13 +53,13 @@ export default Service.extend({
   },
 
   extraer_diccionario(diccionario, codigo) {
-    let regex = new RegExp(`${diccionario}\\s+=\\s+(\\{[\\s\\S]*?\\})`, "g");
+    let regex = new RegExp(`${diccionario}\\s+=\\s+(\\{[\\s\\S]*?\\};)`, "g");
     let resultado = regex.exec(codigo);
 
     let propiedades = {};
 
     if (resultado && resultado.length > 1) {
-      propiedades = eval("(" + resultado[1] + ")");
+      propiedades = eval("(" + resultado[1].replace("};", "}") + ")");
     }
 
     return propiedades;

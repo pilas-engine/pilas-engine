@@ -13,6 +13,7 @@ export default Component.extend({
       "oscilar verticalmente",
       "oscilar rotacion",
       "oscilar transparencia"
+      //
     ]);
   },
   actions: {

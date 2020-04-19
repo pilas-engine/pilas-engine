@@ -189,6 +189,7 @@ declare class Depurador {
     mostrar_fps: boolean;
     mostrar_fisica: boolean;
     minimapa: boolean;
+    fisica_en_modo_ejecucion: boolean;
     constructor(pilas: Pilas);
     definir_estados_de_depuracion(datos: any): void;
 }
@@ -472,6 +473,13 @@ declare class Pilas {
     enviar_mensaje_global(mensaje: string, datos?: any): void;
 }
 declare var pilasengine: Pilas;
+declare class Sensor {
+    private _figura;
+    constructor(figura: any);
+    readonly colisiones: any;
+    colisiona_con_etiqueta(etiqueta: string): boolean;
+    readonly cantidad_de_colisiones: any;
+}
 declare class ActorBase {
     tipo: String;
     sprite: Phaser.GameObjects.Sprite;
@@ -633,7 +641,8 @@ declare class ActorBase {
     cuando_pulsa_tecla(tecla: string, evento_original: any): void;
     cuando_suelta_tecla(tecla: string, evento_original: any): void;
     readonly cantidad_de_colisiones: number;
-    agregar_sensor(ancho: any, alto: any, x: any, y: any): any;
+    agregar_sensores_desde_lista(lista_de_sensores: any): void;
+    agregar_sensor(ancho: any, alto: any, x: any, y: any, nombre?: string): any;
     eliminar(): void;
     esta_vivo(): boolean;
     fuente: string;
@@ -656,6 +665,7 @@ declare class ActorBase {
     enviar_mensaje_global(mensaje: string, datos?: any): void;
     readonly camara: Camara;
     hacer_recorrido(posiciones: any, duracion?: number, veces?: number, seguir_rotacion?: boolean): void;
+    obtener_sensor(nombre: string): Sensor;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -850,6 +860,13 @@ declare class conejo extends Actor {
         figura_sin_rotacion: boolean;
         figura_dinamica: boolean;
         figura_rebote: number;
+        sensores: {
+            x: number;
+            y: number;
+            ancho: number;
+            alto: number;
+            nombre: string;
+        }[];
     };
     toca_el_suelo: boolean;
     pies: any;
@@ -1630,6 +1647,7 @@ declare class Modo extends Phaser.Scene {
     cambiar_fondo(fondo: any, ancho?: any, alto?: any): void;
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
+    private actualizar_sensores_del_actor;
     obtener_imagen_para_nineslice(imagen: any): any;
     copiar_valores_de_sprite_a_texto(sprite: any): void;
     crear_figura_estatica_para(actor: any): any;
@@ -1681,6 +1699,7 @@ declare class ModoEditor extends Modo {
     };
     desplazar_actor_desde_el_evento_drag(gameObject: any, pointer: any): void;
     ajustar_figura(gameObject: any): void;
+    ajustar_sensores(sprite: any): void;
     mover_cursor_de_la_grilla(x: any, y: any): void;
     actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento?: boolean): void;
     obtener_posicion_de_desplazamiento_de_la_camara(): {

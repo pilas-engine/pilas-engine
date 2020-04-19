@@ -52,12 +52,6 @@ class ModoEjecucion extends Modo {
 
       this.pilas.historia.limpiar();
 
-      this.modo_fisica_activado = false;
-
-      if (this.pilas.depurador.mostrar_fisica) {
-        this.modo_fisica_activado = true;
-      }
-
       this.conectar_eventos();
 
       this.vincular_eventos_de_colision();
@@ -458,6 +452,7 @@ class ModoEjecucion extends Modo {
       p = this.pilas.utilidades.combinar_propiedades(p, entidad);
 
       actor.pre_iniciar(p);
+      actor.agregar_sensores_desde_lista(entidad.sensores);
       actor.iniciar();
 
       if (entidad.habilidades) {
@@ -537,6 +532,13 @@ class ModoEjecucion extends Modo {
       console.error(e);
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
       this.pilas.modo.pausar();
+    }
+
+    if (this.pilas.depurador.fisica_en_modo_ejecucion) {
+      this.canvas_fisica.setAlpha(1);
+      this.actualizar_canvas_fisica();
+    } else {
+      this.canvas_fisica.setAlpha(0);
     }
 
     this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);

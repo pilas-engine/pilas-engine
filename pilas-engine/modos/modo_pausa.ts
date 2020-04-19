@@ -110,18 +110,11 @@ class ModoPausa extends Modo {
     let minutos = `0${minutos_como_numero}`.slice(-2);
     let segundos = `0${segundos_como_numero}`.slice(-2);
 
-    let sufijo_minutos = "minutos";
-    let sufijo_segundos = "segundos";
-
-    if (minutos_como_numero === 1) {
-      sufijo_minutos = "minuto";
-    }
-
     if (segundos_como_numero === 1) {
       sufijo_segundos = "segundo";
     }
 
-    this.indicador_de_texto.text = `Tiempo: ${minutos} ${sufijo_minutos} ${segundos} ${sufijo_segundos}\nCuadro: ${posicion}\nCantidad de actores: ${foto.actores.length}`;
+    this.indicador_de_texto.text = `Tiempo: ${minutos}' ${segundos}''\nCuadro: ${posicion}\nCantidad de actores: ${foto.actores.length}`;
     this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
   }
 

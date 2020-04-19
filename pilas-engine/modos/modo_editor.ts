@@ -245,6 +245,7 @@ class ModoEditor extends Modo {
     this.mover_cursor_de_la_grilla(gameObject.x, gameObject.y);
 
     this.ajustar_figura(gameObject);
+    this.ajustar_sensores(gameObject);
 
     this.posicion_anterior_de_arrastre = pointer.position.clone();
   }
@@ -257,6 +258,19 @@ class ModoEditor extends Modo {
       matter.Body.setPosition(figura, {
         x: gameObject.x,
         y: gameObject.y
+      });
+    }
+  }
+
+  ajustar_sensores(sprite) {
+    let matter = this.pilas.Phaser.Physics.Matter.Matter;
+
+    if (sprite.sensores) {
+      sprite.sensores.map(sensor => {
+        matter.Body.setPosition(sensor, {
+          x: sprite.x + sensor.dx,
+          y: sprite.y - sensor.dy
+        });
       });
     }
   }
