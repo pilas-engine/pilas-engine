@@ -32,8 +32,6 @@ La imagen anterior está enumerada para describir los panales principales:
 
 4. Por último, arriba a la derecha aparecen dos interruptores, estos interruptores permiten ocultar los paneles para ganar un poco de espacio mientras estás usando la herramienta. Asegurate de tener todos los paneles visibles mientras realices estos primeros pasos.
 
-   
-
 ## ¡Pongamos en ejecución el juego!
 
 El botón "ejecutar" que aparece arriba en el editor es uno de los más utilizados, ya que nos permite poner en funcionamiento el juego completo. Imaginá que mientras que estamos desarrollando un juego vamos a necesitar ejecutar y probar el juego muchas veces.
@@ -41,8 +39,6 @@ El botón "ejecutar" que aparece arriba en el editor es uno de los más utilizad
 Así que hagamos la prueba, pulsá el botón ejecutar una vez. Deberías ver que los objetos en pantalla comienzan a caer y rebotar por la pantalla:
 
 ![pulsando-el-boton-ejecutar](imagenes/pulsando-el-boton-ejecutar.png)
-
-
 
 ![ejecutar](imagenes/ejecutar.gif)
 
@@ -58,11 +54,11 @@ Pulsá el botón que dice "detener" en el editor (o pulsá la tecla Escape), ten
 
 Borremos cada uno de los actores que aparecen en la pantalla, selección al actor pelota y luego pulsa el botón del cesto de basura que aparece a la izquierda:
 
-![PilasEngine * 2019-07-21 16-24-13](imagenes/PilasEngine * 2019-07-21 16-24-13.png)
+![borrar_actor](imagenes/PilasEngine \* 2019-07-21 16-24-13.png)
 
 Repetí esos pasos hasta que la escena quede limpia, sin ningún actor:
 
-![PilasEngine * 2019-07-21 16-25-19](imagenes/PilasEngine * 2019-07-21 16-25-19.png)
+![escenas](imagenes/escenas.png)
 
 Ahora bien, con la escena completamente limpia, agreguemos un actor para representar a nuestro protagonista. Pulsa el botón "Crear actor" y luego selecciona la nave:
 
@@ -74,10 +70,10 @@ Pilas viene con varios actores diseñados para que puedas comenzar a realizar tu
 
 Ahora sí pulsas el botón "Ejecutar", vas a ver que la nave aparece en el centro de la pantalla. Proba pulsar las teclas de dirección del teclado y espacio para controlar a la nave:
 
-![PilasEngine * 🔊 2019-07-21 22-22-31](imagenes/PilasEngine * 🔊 2019-07-21 22-22-31.png)
+![nave_dispara](imagenes/PilasEngine \* 🔊 2019-07-21 22-22-31.png)
 
 Vas a notar que aparece un rectángulo negro borde blanco en cada actor, ese punto es lo que se conoce como punto de control, y sirve para el punto de referencia de cada actor.
 
 Podes hacer que ese punto de control no se vea pulsando el interruptor "pos" que aparece abajo en la pantalla (pulsa "Detener" antes, así te deja cambiarlo):
 
-![PilasEngine * 2019-07-21 22-24-40](imagenes/PilasEngine * 2019-07-21 22-24-40.png)
+![pos](imagenes/PilasEngine \* 2019-07-21 22-24-40.png)
