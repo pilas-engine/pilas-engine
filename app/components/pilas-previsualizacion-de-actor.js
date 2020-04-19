@@ -1,11 +1,14 @@
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import { task, timeout } from "ember-concurrency";
+import EmberObject from "@ember/object";
+import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
 
 export default Component.extend({
   bus: service(),
   compilador: service(),
   recursos: service(),
+  migraciones: service(),
   proyecto: null,
   actor: null,
   primer_carga: true,
@@ -14,7 +17,18 @@ export default Component.extend({
   didInsertElement() {
     this.recursos.iniciar();
 
-    this.set("proyecto", {
+    this.set("proyecto", this.migraciones.migrar(this.obtener_proyecto()));
+
+    this.bus.on("actor:finaliza_carga", this, "finaliza_carga");
+    this.bus.on("actor:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
+
+    if (this.mantener_foco) {
+      this.tarea_para_mantener_foco.perform();
+    }
+  },
+
+  obtener_proyecto() {
+    return convertirProyectoEnObjetoEmber({
       titulo: "Proyecto dentro de pilas-previsualizacion-de-actor",
       ancho: 400,
       alto: 250,
@@ -43,12 +57,6 @@ export default Component.extend({
         }
       ]
     });
-    this.bus.on("actor:finaliza_carga", this, "finaliza_carga");
-    this.bus.on("actor:cuando_termina_de_iniciar_ejecucion", this, "cuando_termina_de_iniciar_ejecucion");
-
-    if (this.mantener_foco) {
-      this.tarea_para_mantener_foco.perform();
-    }
   },
 
   tarea_para_mantener_foco: task(function*() {
@@ -113,7 +121,8 @@ export default Component.extend({
         escala_y: 1,
         nombre: actor.nombre,
         // imagen: actor.nombre,   // en este caso se respeta la imagen que sugiere el código.
-        transparencia: 0
+        transparencia: 0,
+        sensores: actor.sensores || []
       }
     ];
   },
