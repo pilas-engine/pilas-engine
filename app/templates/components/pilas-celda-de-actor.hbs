@@ -1,0 +1,30 @@
+<div test-celda-actor
+  class="
+    celda-actor dib
+    ba pa2 button
+    br2
+    verdana f6 link pointer
+    black bg-animate b--black-20
+    unselectable
+    v-top
+    mb1
+
+    {{if (eq actor actor_seleccionado) "bg-black-20" "hover-bg-black-10"}}
+"
+  {{action cuandoQuiereCrearActor actor}}
+  role="button"
+>
+  <div class="flex flex-column h-100 w-100">
+
+    {{yield}}
+
+    <div class="flex1 tc w-100 h3">
+      <div class="sprite grilla_actor_{{actor.nombre}} mw-100 mh-100"></div>
+    </div>
+
+    <div class="f6 tc mt2 h1 texto truncate">
+      {{actor.nombre}}
+    </div>
+
+  </div>
+</div>

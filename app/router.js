@@ -32,6 +32,7 @@ Router.map(function() {
   this.route("ejemplos", function() {
     this.route("ver", { path: ":nombre" });
   });
+  this.route("actores");
 
   this.route("app", function() {
     this.route("abrir_proyecto", { path: "abrir_proyecto/:ruta" });
