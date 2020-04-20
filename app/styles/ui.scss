@@ -201,3 +201,7 @@ span {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.ember-basic-dropdown-trigger:focus {
+  outline: none;
+}
