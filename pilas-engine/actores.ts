@@ -124,10 +124,6 @@ class Actores {
     return this.crear_actor("boton_de_control_espacio");
   }
 
-  ceferino() {
-    return this.crear_actor("ceferino");
-  }
-
   robot() {
     return this.crear_actor("robot");
   }

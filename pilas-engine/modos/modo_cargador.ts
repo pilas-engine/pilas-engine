@@ -41,9 +41,6 @@ class ModoCargador extends Modo {
         this.load.json(hueso.nombre, hueso.ruta);
       }
     } else {
-      this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
-      this.load.json("ceferino", "ceferino.scon");
-
       this.load.multiatlas("atlas-robot", "robot.json", "./");
       this.load.json("robot", "robot.scon");
     }

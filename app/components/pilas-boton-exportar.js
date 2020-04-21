@@ -41,10 +41,6 @@ export default Component.extend({
       yield this.agregar_archivo(carpeta_del_juego, "./robot.json");
       yield this.agregar_archivo(carpeta_del_juego, "./robot.scon");
 
-      yield this.agregar_archivo(carpeta_del_juego, "./ceferino.png");
-      yield this.agregar_archivo(carpeta_del_juego, "./ceferino.json");
-      yield this.agregar_archivo(carpeta_del_juego, "./ceferino.scon");
-
       // Previene un caso particular: en producción hay dos archivos
       // pilas-engine.js, con diferente fingerprint, el que se necesita
       // empaquetar es el que está referenciado dentro del archivo

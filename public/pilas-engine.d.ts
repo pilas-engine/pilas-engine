@@ -25,7 +25,6 @@ declare class Actores {
     boton_de_control_arriba(): any;
     boton_de_control_abajo(): any;
     boton_de_control_espacio(): any;
-    ceferino(): any;
     robot(): any;
     puntaje(): any;
     reiniciar_escena(): any;
@@ -825,18 +824,6 @@ declare class caja extends Actor {
         figura_rebote: number;
     };
     iniciar(): void;
-}
-declare class ceferino extends Actor {
-    propiedades: {
-        imagen: string;
-        centro_x: number;
-        centro_y: number;
-    };
-    contenedor: any;
-    huesos: Huesos;
-    iniciar(): void;
-    actualizar(): void;
-    pre_actualizar(): void;
 }
 declare class chispa extends Actor {
     propiedades: {

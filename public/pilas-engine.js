@@ -107,9 +107,6 @@ var Actores = (function () {
     Actores.prototype.boton_de_control_espacio = function () {
         return this.crear_actor("boton_de_control_espacio");
     };
-    Actores.prototype.ceferino = function () {
-        return this.crear_actor("ceferino");
-    };
     Actores.prototype.robot = function () {
         return this.crear_actor("robot");
     };
@@ -3734,45 +3731,6 @@ var caja = (function (_super) {
     caja.prototype.iniciar = function () { };
     return caja;
 }(Actor));
-var ceferino = (function (_super) {
-    __extends(ceferino, _super);
-    function ceferino() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.propiedades = {
-            imagen: "imagenes:objetos/ceferino",
-            centro_x: 0.48,
-            centro_y: 0.62
-        };
-        return _this;
-    }
-    ceferino.prototype.iniciar = function () {
-        this.imagen = "imagenes:basicos/invisible";
-        this.contenedor = this.pilas.modo.add.container();
-        this.huesos = new Huesos(this.pilas, "ceferino", "atlas-ceferino", this.contenedor);
-    };
-    ceferino.prototype.actualizar = function () {
-        this.huesos.actualizar_animacion(8);
-        if (this.pilas.control.izquierda || this.pilas.control.derecha) {
-            if (this.pilas.control.izquierda) {
-                this.x -= 5;
-                this.espejado = true;
-                this.huesos.definir_animacion("camina");
-            }
-            if (this.pilas.control.derecha) {
-                this.x += 5;
-                this.espejado = false;
-                this.huesos.definir_animacion("camina");
-            }
-        }
-        else {
-            this.huesos.definir_animacion("mueve");
-        }
-    };
-    ceferino.prototype.pre_actualizar = function () {
-        this.pilas.utilidades.sincronizar_contenedor(this.contenedor, this.sprite);
-    };
-    return ceferino;
-}(Actor));
 var chispa = (function (_super) {
     __extends(chispa, _super);
     function chispa() {
@@ -7293,8 +7251,6 @@ var ModoCargador = (function (_super) {
             }
         }
         else {
-            this.load.multiatlas("atlas-ceferino", "ceferino.json", "./");
-            this.load.json("ceferino", "ceferino.scon");
             this.load.multiatlas("atlas-robot", "robot.json", "./");
             this.load.json("robot", "robot.scon");
         }
