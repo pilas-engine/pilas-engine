@@ -238,13 +238,5 @@ export default Component.extend({
       }
       this.set("cuadro_actual", indice);
     },
-
-    mostrar_dialogo_para_eliminar() {
-      this.set("modalParaEliminarAnimacionVisible", true);
-    },
-
-    ocultar_dialogo_de_eliminacion_de_animacion() {
-      this.set("modalParaEliminarAnimacionVisible", false);
-    }
   }
 });

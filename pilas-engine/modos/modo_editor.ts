@@ -440,6 +440,12 @@ class ModoEditor extends Modo {
       this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
     }
 
+    if (actor_a_eliminar[0].sensores) {
+      actor_a_eliminar[0].sensores.map(sensor => {
+        this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sensor);
+      })
+    }
+
     if (actor_a_eliminar[0]["texto"]) {
       actor_a_eliminar[0]["texto"].destroy();
     }

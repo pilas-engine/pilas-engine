@@ -4,20 +4,22 @@
 
   <div class="fr">
 
-    {{pilas-boton icono="no" accion=(action "mostrar_dialogo_para_eliminar") texto="Eliminar esta animación"}}
+    {{#basic-dropdown as |dd|}}
+      {{#dd.trigger}}
+        {{pilas-boton icono="no" texto="Eliminar esta animación"}}
+      {{/dd.trigger}}
 
-    {{#pilas-modal cancelarWormhole=true fixed=true alCerrar=(action "ocultar_dialogo_de_eliminacion_de_animacion") visible=modalParaEliminarAnimacionVisible titulo="Cuidado" reducido=true}}
+      {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2"}}
+        <div class="flex1 verdana f6 texto pa2">
+          ¿Realmente quieres eliminar esta animación?
+        </div>
 
-      <div class="flex1 verdana f6">
-        ¿Realmente quieres eliminar esta animación?
-      </div>
-
-      <div class="tc">
-        {{pilas-boton icono="si" accion=(action cuando_quiere_eliminar_animacion animacion) texto="Sí" atajo="Enter"}}
-        {{pilas-boton icono="no" accion=(action "ocultar_dialogo_de_eliminacion_de_animacion") texto="No" atajo="Escape"}}
-      </div>
-
-    {{/pilas-modal}}
+        <div class="tc">
+          {{pilas-boton icono="si" accion=(action cuando_quiere_eliminar_animacion animacion dd) texto="Sí" atajo="Enter"}}
+          {{pilas-boton icono="no" accion=(action dd.actions.close) texto="No" atajo="Escape"}}
+        </div>
+      {{/dd.content}}
+    {{/basic-dropdown}}
 
   </div>
 

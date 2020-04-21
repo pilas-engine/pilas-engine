@@ -7765,10 +7765,16 @@ var ModoEditor = (function (_super) {
         }
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
+        var _this = this;
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
         var actor_a_eliminar = this.actores.splice(indice, 1);
         if (actor_a_eliminar[0].figura) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
+        }
+        if (actor_a_eliminar[0].sensores) {
+            actor_a_eliminar[0].sensores.map(function (sensor) {
+                _this.pilas.Phaser.Physics.Matter.Matter.World.remove(_this.pilas.modo.matter.world.localWorld, sensor);
+            });
         }
         if (actor_a_eliminar[0]["texto"]) {
             actor_a_eliminar[0]["texto"].destroy();
@@ -8299,9 +8305,6 @@ var ModoPausa = (function (_super) {
         var segundos_como_numero = Math.floor(posicion / 60) % 60;
         var minutos = ("0" + minutos_como_numero).slice(-2);
         var segundos = ("0" + segundos_como_numero).slice(-2);
-        if (segundos_como_numero === 1) {
-            sufijo_segundos = "segundo";
-        }
         this.indicador_de_texto.text = "Tiempo: " + minutos + "' " + segundos + "''\nCuadro: " + posicion + "\nCantidad de actores: " + foto.actores.length;
         this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
     };
