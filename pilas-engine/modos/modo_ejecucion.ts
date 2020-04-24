@@ -462,7 +462,7 @@ class ModoEjecucion extends Modo {
       }
     } else {
       let nombres_de_clases = Object.getOwnPropertyNames(this.clases);
-      throw new Error(`No existe código para crear un actor de la clase ${entidad.tipo}. Las clases disponibles son [${nombres_de_clases.join(", ")}]`);
+      throw new Error(`No existe código para crear un actor de la clase ${entidad.nombre}. Las clases disponibles son [${nombres_de_clases.join(", ")}]`);
     }
 
     return actor;

@@ -10,6 +10,7 @@ import preparar_codigo_para_el_editor from "../utils/preparar-codigo-para-el-edi
 import { observer } from "@ember/object";
 import base64_encode from "../utils/base64-encode";
 import { run } from "@ember/runloop";
+import { debounce } from "@ember/runloop";
 
 export default Component.extend({
   bus: service(),
@@ -47,7 +48,19 @@ export default Component.extend({
   }),
 
   didInsertElement() {
-    this.set("lista_de_eventos", ["finaliza_carga", "error", "mientras_mueve_la_camara", "termina_de_mover_un_actor", "comienza_a_mover_un_actor", "inicia_modo_depuracion_en_pausa", "cuando_cambia_posicion_dentro_del_modo_pausa", "pulsa_la_tecla_escape"]);
+    this.set("lista_de_eventos", [
+      //
+      "finaliza_carga",
+      "error",
+      "mientras_mueve_la_camara",
+      "termina_de_mover_un_actor",
+      "comienza_a_mover_un_actor",
+      "inicia_modo_depuracion_en_pausa",
+      "cuando_cambia_posicion_dentro_del_modo_pausa",
+      "pulsa_la_tecla_escape",
+      "duplicar_el_actor_seleccionado"
+    ]);
+
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
 
@@ -104,6 +117,7 @@ export default Component.extend({
 
   conectar_eventos() {
     this.lista_de_eventos.map(evento => {
+      let nombre = `${this.nombre_del_contexto}:${evento}`;
       this.bus.on(`${this.nombre_del_contexto}:${evento}`, this, evento);
     });
   },
@@ -112,6 +126,19 @@ export default Component.extend({
     this.lista_de_eventos.map(evento => {
       this.bus.off(`${this.nombre_del_contexto}:${evento}`, this, evento);
     });
+  },
+
+  duplicar_el_actor_seleccionado() {
+    debounce(
+      this,
+      () => {
+        if (this.get("tipo_de_la_instancia_seleccionada") == "actor") {
+          let actor = this.get("instancia_seleccionada");
+          this.send("cuando_intenta_duplicar", actor.id, false);
+        }
+      },
+      10
+    );
   },
 
   finaliza_carga() {
@@ -620,8 +647,14 @@ export default Component.extend({
         actor.propiedades.x = parseInt(Math.random() * 400) - 200;
         actor.propiedades.y = parseInt(Math.random() * 400) - 200;
       } else {
-        actor.propiedades.x += 20;
-        actor.propiedades.y -= 20;
+        let tamaño_de_grilla = this.get("grilla");
+
+        if (tamaño_de_grilla > 0) {
+          actor.propiedades.x += tamaño_de_grilla;
+        } else {
+          actor.propiedades.x += 20;
+          actor.propiedades.y -= 20;
+        }
       }
 
       this.send("agregar_actor", this.proyecto, actor);

@@ -369,6 +369,10 @@ export default Component.extend({
       this.bus.trigger(`${this.nombre_del_contexto}:comienza_a_mover_un_actor`, e.data);
     }
 
+    if (e.data.tipo === "duplicar_el_actor_seleccionado") {
+      this.bus.trigger(`${this.nombre_del_contexto}:duplicar_el_actor_seleccionado`, e.data);
+    }
+
     if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
       this.bus.trigger(`${this.nombre_del_contexto}:inicia_modo_depuracion_en_pausa`, e.data);
     }

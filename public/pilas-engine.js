@@ -7410,8 +7410,12 @@ var ModoEditor = (function (_super) {
         this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
         this.crear_manejadores_para_controlar_el_zoom(true);
         this.conectar_movimiento_del_mouse();
+        this.conectar_eventos_de_teclado();
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
         this.pilas.game.scale.resize(this.ancho, this.alto);
+    };
+    ModoEditor.prototype.conectar_eventos_de_teclado = function () {
+        this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
     };
     ModoEditor.prototype.crear_fondo = function (fondo, ancho, alto) {
         if (ancho === void 0) { ancho = null; }
@@ -7430,6 +7434,11 @@ var ModoEditor = (function (_super) {
         }
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
+    };
+    ModoEditor.prototype.manejar_evento_key_up = function (evento) {
+        if (evento.key === "d") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado", {});
+        }
     };
     ModoEditor.prototype.crear_sprite_para_el_cursor_de_la_grilla = function () {
         var x = 0;
@@ -8119,7 +8128,7 @@ var ModoEjecucion = (function (_super) {
         }
         else {
             var nombres_de_clases = Object.getOwnPropertyNames(this.clases);
-            throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.tipo + ". Las clases disponibles son [" + nombres_de_clases.join(", ") + "]");
+            throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.nombre + ". Las clases disponibles son [" + nombres_de_clases.join(", ") + "]");
         }
         return actor;
     };

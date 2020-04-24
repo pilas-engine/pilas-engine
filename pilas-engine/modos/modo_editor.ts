@@ -41,6 +41,7 @@ class ModoEditor extends Modo {
 
     //this.matter.world.createDebugGraphic();
     this.conectar_movimiento_del_mouse();
+    this.conectar_eventos_de_teclado();
 
     this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
     this.pilas.game.scale.resize(this.ancho, this.alto);
@@ -50,6 +51,10 @@ class ModoEditor extends Modo {
     //this.pilas.game.scale.scaleMode = Phaser.Scale.RESIZE;
     //(<any>this.pilas.game.scale).resize();
     //(<any>this.pilas.game.canvas.style) = "";
+  }
+
+  private conectar_eventos_de_teclado() {
+    this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
   }
 
   crear_fondo(fondo, ancho = null, alto = null) {
@@ -73,6 +78,12 @@ class ModoEditor extends Modo {
 
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
+  }
+
+  private manejar_evento_key_up(evento) {
+    if (evento.key === "d") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado", {});
+    }
   }
 
   crear_sprite_para_el_cursor_de_la_grilla() {
@@ -443,7 +454,7 @@ class ModoEditor extends Modo {
     if (actor_a_eliminar[0].sensores) {
       actor_a_eliminar[0].sensores.map(sensor => {
         this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sensor);
-      })
+      });
     }
 
     if (actor_a_eliminar[0]["texto"]) {
