@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:f967c0299e4aa34d736ee0dcccb11209:0df97c0a20b677fa9835f31cda9fb67c:467c798a4e4a5265189118ecb556e0a2$
+   $TexturePacker:SmartUpdate:7bc07857d087a00ff01f4df051873645:e727426fef04a3bc93811f687e1c7e91:467c798a4e4a5265189118ecb556e0a2$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -18,13 +18,13 @@
 .add_folder {width:25px; height:25px; background-position: -1px -223px}
 .api {width:25px; height:25px; background-position: -276px -173px}
 .arduino {width:24px; height:24px; background-position: -241px -227px}
-.borrar {width:16px; height:16px; background-position: -397px -239px}
+.borrar {width:16px; height:16px; background-position: -670px -57px}
 .computadora {width:25px; height:25px; background-position: -28px -223px}
 .demo {width:24px; height:24px; background-position: -267px -227px}
 .desplegar {width:24px; height:24px; background-position: -293px -227px}
 .detener {width:24px; height:24px; background-position: -319px -227px}
-.duplicar {width:16px; height:16px; background-position: -415px -239px}
-.editar {width:16px; height:16px; background-position: -433px -239px}
+.duplicar {width:16px; height:16px; background-position: -670px -75px}
+.editar {width:16px; height:16px; background-position: -670px -93px}
 .ejecutar {width:24px; height:24px; background-position: -345px -226px}
 .ejemplos {width:25px; height:25px; background-position: -276px -200px}
 .electron {width:60px; height:60px; background-position: -441px -1px}
@@ -69,47 +69,48 @@
 .grilla_actor_techo {width:48px; height:48px; background-position: -226px -177px}
 .grilla_actor_texto {width:48px; height:48px; background-position: -276px -123px}
 .guardar {width:24px; height:24px; background-position: -423px -213px}
-.icono_actor_aceituna {width:10px; height:10px; background-position: -631px -213px}
-.icono_actor_actortexto {width:10px; height:10px; background-position: -631px -225px}
-.icono_actor_boton {width:10px; height:10px; background-position: -326px -123px}
-.icono_actor_caja {width:10px; height:10px; background-position: -670px -57px}
-.icono_actor_conejo {width:10px; height:10px; background-position: -326px -135px}
-.icono_actor_deslizador {width:10px; height:10px; background-position: -670px -69px}
-.icono_actor_gallina {width:10px; height:10px; background-position: -326px -147px}
-.icono_actor_laser {width:10px; height:10px; background-position: -670px -81px}
-.icono_actor_logo {width:10px; height:10px; background-position: -326px -159px}
-.icono_actor_moneda {width:10px; height:10px; background-position: -670px -93px}
-.icono_actor_nave {width:10px; height:10px; background-position: -670px -105px}
-.icono_actor_nube {width:10px; height:10px; background-position: -670px -117px}
-.icono_actor_pelota {width:10px; height:10px; background-position: -670px -129px}
-.icono_actor_plataforma {width:10px; height:10px; background-position: -670px -141px}
-.icono_actor_suelo {width:10px; height:10px; background-position: -670px -153px}
-.icono_actor_techo {width:10px; height:10px; background-position: -670px -153px}
-.imagen {width:16px; height:16px; background-position: -451px -239px}
-.inactivo {width:16px; height:16px; background-position: -469px -239px}
+.icono_actor_aceituna {width:10px; height:10px; background-position: -326px -123px}
+.icono_actor_actortexto {width:10px; height:10px; background-position: -657px -219px}
+.icono_actor_boton {width:10px; height:10px; background-position: -551px -239px}
+.icono_actor_caja {width:10px; height:10px; background-position: -326px -135px}
+.icono_actor_conejo {width:10px; height:10px; background-position: -657px -231px}
+.icono_actor_deslizador {width:10px; height:10px; background-position: -669px -219px}
+.icono_actor_gallina {width:10px; height:10px; background-position: -563px -239px}
+.icono_actor_laser {width:10px; height:10px; background-position: -326px -147px}
+.icono_actor_logo {width:10px; height:10px; background-position: -669px -231px}
+.icono_actor_moneda {width:10px; height:10px; background-position: -575px -239px}
+.icono_actor_nave {width:10px; height:10px; background-position: -326px -159px}
+.icono_actor_nube {width:10px; height:10px; background-position: -587px -239px}
+.icono_actor_pelota {width:10px; height:10px; background-position: -599px -239px}
+.icono_actor_plataforma {width:10px; height:10px; background-position: -611px -239px}
+.icono_actor_suelo {width:10px; height:10px; background-position: -623px -245px}
+.icono_actor_techo {width:10px; height:10px; background-position: -623px -245px}
+.imagen {width:16px; height:16px; background-position: -670px -111px}
+.inactivo {width:16px; height:16px; background-position: -670px -129px}
 .info {width:24px; height:24px; background-position: -449px -213px}
 .info_squared {width:25px; height:25px; background-position: -55px -223px}
 .manual {width:25px; height:25px; background-position: -303px -173px}
-.mas {width:16px; height:16px; background-position: -487px -239px}
-.menu {width:16px; height:16px; background-position: -505px -239px}
-.mover {width:16px; height:16px; background-position: -523px -239px}
+.mas {width:16px; height:16px; background-position: -670px -147px}
+.menu {width:16px; height:16px; background-position: -670px -165px}
+.mover {width:16px; height:16px; background-position: -670px -183px}
 .no {width:24px; height:24px; background-position: -475px -213px}
-.off {width:16px; height:14px; background-position: -617px -239px}
-.on {width:16px; height:14px; background-position: -635px -237px}
-.panel-abierto {width:16px; height:16px; background-position: -541px -239px}
+.nuevo {width:24px; height:24px; background-position: -501px -213px}
+.off {width:16px; height:14px; background-position: -515px -239px}
+.on {width:16px; height:14px; background-position: -533px -239px}
+.panel-abierto {width:16px; height:16px; background-position: -670px -201px}
 .panel-central-off {width:18px; height:14px; background-position: -103px -202px}
-.panel-central-on {width:18px; height:14px; background-position: -577px -239px}
-.panel-cerrado {width:16px; height:16px; background-position: -559px -239px}
-.panel-derecho-off {width:18px; height:14px; background-position: -597px -239px}
-.panel-derecho-on {width:18px; height:14px; background-position: -643px -219px}
-.panel-izquierdo-off {width:18px; height:14px; background-position: -663px -219px}
-.panel-izquierdo-on {width:18px; height:14px; background-position: -653px -235px}
-.pausa {width:24px; height:24px; background-position: -501px -213px}
+.panel-central-on {width:18px; height:14px; background-position: -415px -239px}
+.panel-cerrado {width:16px; height:16px; background-position: -397px -239px}
+.panel-derecho-off {width:18px; height:14px; background-position: -435px -239px}
+.panel-derecho-on {width:18px; height:14px; background-position: -455px -239px}
+.panel-izquierdo-off {width:18px; height:14px; background-position: -475px -239px}
+.panel-izquierdo-on {width:18px; height:14px; background-position: -495px -239px}
+.pausa {width:24px; height:24px; background-position: -527px -213px}
 .phaser {width:70px; height:70px; background-position: -233px -1px}
 .pilas_logo_128 {width:128px; height:128px; background-position: -1px -1px}
 .pilas_logo_60 {width:60px; height:60px; background-position: -503px -1px}
-.plegar {width:24px; height:24px; background-position: -527px -213px}
-.preferencias {width:24px; height:24px; background-position: -553px -213px}
+.plegar {width:24px; height:24px; background-position: -553px -213px}
+.preferencias {width:24px; height:24px; background-position: -579px -213px}
 .receta {width:25px; height:25px; background-position: -303px -200px}
 .receta_azar {width:25px; height:25px; background-position: -643px -57px}
 .receta_click {width:25px; height:25px; background-position: -643px -84px}
@@ -122,8 +123,8 @@
 .receta_sonido {width:25px; height:25px; background-position: -330px -172px}
 .receta_tiempo {width:25px; height:25px; background-position: -330px -199px}
 .settings {width:25px; height:25px; background-position: -357px -172px}
-.si {width:24px; height:24px; background-position: -579px -213px}
+.si {width:24px; height:24px; background-position: -605px -213px}
 .test {width:25px; height:25px; background-position: -357px -199px}
 .typescript {width:60px; height:60px; background-position: -565px -1px}
-.volver {width:24px; height:24px; background-position: -605px -213px}
+.volver {width:24px; height:24px; background-position: -631px -219px}
 .webserver {width:25px; height:25px; background-position: -214px -229px}

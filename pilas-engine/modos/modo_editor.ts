@@ -203,6 +203,7 @@ class ModoEditor extends Modo {
     gameObject.x = this.sprite_cursor_de_la_grilla.x;
     gameObject.y = this.sprite_cursor_de_la_grilla.y;
     this.ajustar_figura(gameObject);
+    this.ajustar_sensores(gameObject);
   }
 
   cuando_cambia_grilla_desde_el_selector_manual(grilla) {

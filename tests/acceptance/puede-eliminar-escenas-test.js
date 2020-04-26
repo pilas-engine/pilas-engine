@@ -14,6 +14,7 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     await visit("/");
 
     await pulsar("Abrir el editor");
+    localStorage.removeItem("pilas:proyecto_serializado");
     assert.equal(currentURL(), "/editor", "accede al editor correctamente");
 
     await esperarElemento("a#ejecutar");

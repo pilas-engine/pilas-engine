@@ -17,6 +17,14 @@ export default Service.extend({
     this.bus.on("prueba-editor:finaliza_carga", this, "finaliza_carga");
   },
 
+  guardar_proyecto_serializado(proyecto_serializado) {
+    localStorage.setItem("pilas:proyecto_serializado", proyecto_serializado);
+  },
+
+  eliminar_proyectos_guardados() {
+    localStorage.removeItem("pilas:proyecto_serializado");
+  },
+
   obtener_nombres_de_actores() {
     return this.obtener_todos_los_actores().map(a => a.nombre);
   },

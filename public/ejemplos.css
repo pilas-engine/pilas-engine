@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:72bf14ee78ab633779732690bd24fc3c:4112deea9d4136651545ac7854ccc04c:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:1294e95917d6e25b1dbae335a91ba365:5f649fb93aeadf8f3e6ae7e2c8567b2a:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -28,7 +28,7 @@
 .capturas-cursores {width:180px; height:140px; background-position: -729px -143px}
 .capturas-dos-jugadores {width:180px; height:140px; background-position: -729px -285px}
 .capturas-ejemplo-nave {width:180px; height:140px; background-position: -911px -1px}
-.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -1639px -285px}
+.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -1821px -285px}
 .capturas-flappy {width:180px; height:140px; background-position: -911px -143px}
 .capturas-gravedad {width:180px; height:140px; background-position: -911px -285px}
 .capturas-huesos {width:180px; height:140px; background-position: -1093px -1px}
@@ -38,9 +38,10 @@
 .capturas-naves {width:180px; height:140px; background-position: -1275px -143px}
 .capturas-nubes {width:180px; height:140px; background-position: -1275px -285px}
 .capturas-pacman {width:180px; height:140px; background-position: -1457px -1px}
-.capturas-plataformas {width:180px; height:140px; background-position: -1639px -1px}
-.capturas-recorrido-con-orientacion {width:180px; height:140px; background-position: -1821px -1px}
-.capturas-recorrido-de-curva {width:180px; height:140px; background-position: -1457px -143px}
-.capturas-recorrido-simple {width:180px; height:140px; background-position: -1457px -285px}
-.capturas-sokoban {width:180px; height:140px; background-position: -1639px -143px}
-.capturas-temporizadores {width:180px; height:140px; background-position: -1821px -143px}
+.capturas-plataformas {width:180px; height:140px; background-position: -1821px -1px}
+.capturas-plataformas-2 {width:180px; height:140px; background-position: -1639px -1px}
+.capturas-recorrido-con-orientacion {width:180px; height:140px; background-position: -1457px -143px}
+.capturas-recorrido-de-curva {width:180px; height:140px; background-position: -1457px -285px}
+.capturas-recorrido-simple {width:180px; height:140px; background-position: -1639px -143px}
+.capturas-sokoban {width:180px; height:140px; background-position: -1821px -143px}
+.capturas-temporizadores {width:180px; height:140px; background-position: -1639px -285px}

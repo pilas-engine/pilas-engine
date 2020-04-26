@@ -117,7 +117,6 @@ export default Component.extend({
 
   conectar_eventos() {
     this.lista_de_eventos.map(evento => {
-      let nombre = `${this.nombre_del_contexto}:${evento}`;
       this.bus.on(`${this.nombre_del_contexto}:${evento}`, this, evento);
     });
   },
@@ -685,6 +684,10 @@ export default Component.extend({
 
     cuando_abre() {
       this.cuandoIntentaAbrir();
+    },
+
+    cuando_crea_un_proyecto() {
+      this.cuandoIntentaCrearUnProyecto();
     },
 
     plegar_codigo() {

@@ -12,6 +12,7 @@
 
       {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
 
+      {{pilas-boton responsive=true icono="nuevo" desactivado=cargando accion=(action "cuando_crea_un_proyecto") demora=0 texto="Nuevo"}}
       {{pilas-boton responsive=true icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
 
       {{#en-electron}}

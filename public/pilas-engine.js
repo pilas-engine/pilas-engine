@@ -7537,6 +7537,7 @@ var ModoEditor = (function (_super) {
         gameObject.x = this.sprite_cursor_de_la_grilla.x;
         gameObject.y = this.sprite_cursor_de_la_grilla.y;
         this.ajustar_figura(gameObject);
+        this.ajustar_sensores(gameObject);
     };
     ModoEditor.prototype.cuando_cambia_grilla_desde_el_selector_manual = function (grilla) {
         if (grilla === 0) {

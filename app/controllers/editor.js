@@ -8,7 +8,7 @@ import fixtureDeProyecto from "../fixtures/proyecto-inicial";
 import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
 
 const queryParams = new QueryParams({
-  serializado: { defaultValue: null, refresh: true, replace: true },
+  //serializado: { defaultValue: null, refresh: true, replace: true },
   ruta: { defaultValue: null, refresh: true, replace: true },
   mostrarEditor: { as: "p3", defaultValue: false, replace: false },
   mostrarPropiedades: { as: "p1", defaultValue: true, replace: false },
@@ -44,16 +44,13 @@ export default Controller.extend(queryParams.Mixin, {
   router: service(),
   api: service(),
   migraciones: service(),
+  servicioProyecto: service('proyecto'),
 
   setup(event) {
     this.tareaCargarProyecto.perform(event.queryParams);
   },
 
   tareaCargarProyecto: task(function*(params) {
-    if (params.serializado) {
-      let proyecto = this.cargarProyectoDesdeQueryParams(params);
-      return this.migraciones.migrar(proyecto);
-    }
 
     if (params.ejemplo) {
       let proyecto = yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
@@ -76,6 +73,12 @@ export default Controller.extend(queryParams.Mixin, {
       return this.migraciones.migrar(proyecto);
     }
 
+    if (localStorage.getItem("pilas:proyecto_serializado")) {
+      let proyecto_serializado = localStorage.getItem("pilas:proyecto_serializado");
+      let proyecto = this.crear_proyecto_desde_cadena_serializada(proyecto_serializado);
+      return this.migraciones.migrar(proyecto);
+    }
+
     let proyecto = this.crearProyectoInicial();
     return this.migraciones.migrar(proyecto);
   }),
@@ -86,8 +89,8 @@ export default Controller.extend(queryParams.Mixin, {
     }
   },
 
-  cargarProyectoDesdeQueryParams(params) {
-    let proyecto = string_a_json(params.serializado);
+  crear_proyecto_desde_cadena_serializada(serializado) {
+    let proyecto = string_a_json(serializado);
     let proyectoComoObjetoEmber = convertirProyectoEnObjetoEmber(proyecto);
     return proyectoComoObjetoEmber;
   },
@@ -121,8 +124,6 @@ export default Controller.extend(queryParams.Mixin, {
   actions: {
     al_guardar(proyecto) {
       let str = json_a_string(proyecto);
-      console.log(proyecto);
-      console.log(str);
 
       if (this.electron.enElectron) {
         let json = string_a_json(str);
@@ -134,7 +135,12 @@ export default Controller.extend(queryParams.Mixin, {
       } else {
         this.set("serializado", str);
         saveTextAs(JSON.stringify(proyecto, null, 2), "proyecto.pilas");
+        this.servicioProyecto.guardar_proyecto_serializado(str);
       }
+    },
+
+    al_crear_proyecto() {
+      this.router.transitionTo("app.crear_proyecto");
     },
 
     al_abrir() {
