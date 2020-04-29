@@ -1,0 +1,55 @@
+<div class={{if mostrarPropiedades "dn" "flex flex-column w-panel-colapsado borde br pa2"}}>
+  {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
+  <div class="relative">
+    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-de-escenas" {{action "alternar" "mostrarPropiedades"}} role="button">
+      PROPIEDADES
+    </div>
+  </div>
+</div>
+
+<div class="ancho-panel-propiedades {{if mostrarPropiedades "flex flex-column" "dn"}} br borde pa2 ">
+
+  <div class="texto pb2">
+    {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
+
+    <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarPropiedades"}} role="button">
+      PROPIEDADES
+    </div>
+  </div>
+
+  <div class="unselectable">
+    {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=agregar_escena texto="Crear Escena"}}
+    {{pilas-crear-actor icono="actor" desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=agregar_actor modalVisible=mostrarModalCreacionDeActor}}
+  </div>
+
+  {{pilas-panel-de-escenas
+      escenas=proyecto.escenas
+      escenaActual=escenaActual
+
+      seleccion=seleccion
+      cuandoSelecciona=cuandoSelecciona
+      cuando_intenta_eliminar=cuando_intenta_eliminar
+      ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
+      desactivado=(not estado.puede_editar)
+
+      cuando_intenta_duplicar=cuando_intenta_duplicar
+      cuando_intenta_duplicar_x5=cuando_intenta_duplicar_x5
+      cuando_intenta_mover_a_una_escena=cuando_intenta_mover_a_una_escena
+      cuando_intenta_mover_a_escena_nueva=cuando_intenta_mover_a_escena_nueva
+
+      actorSeleccionado=actorSeleccionado
+    }}
+
+  {{pilas-inspector
+    instancia_seleccionada=instancia_seleccionada
+    tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
+
+    cuando_cambia_un_nombre_de_actor=cuando_cambia_un_nombre_de_actor
+    cuando_cambia_un_nombre_de_escena=cuando_cambia_un_nombre_de_escena
+    cuandoModificaObjeto=cuandoModificaObjeto
+    cuando_modifica_escena=cuando_modifica_escena
+    cuando_modifica_proyecto=cuando_modifica_proyecto
+    desactivado=(not estado.puede_editar)
+  }}
+
+</div>

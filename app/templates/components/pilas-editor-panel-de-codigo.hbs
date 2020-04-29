@@ -1,0 +1,53 @@
+<div class="{{if mostrarEditor "dn" "flex flex-column w-panel-colapsado"}} bl borde pl2 pa2">
+  {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
+  <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
+    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor">
+      CÓDIGO
+    </div>
+  </div>
+</div>
+
+<div id="panel-editor" class="{{if mostrarEditor "" "flex1"}} {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
+
+  <div class="texto pt2">
+    {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
+
+    <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarEditor"}} role="button">
+      CÓDIGO
+    </div>
+  </div>
+
+  <div class="unselectable pr2 pv2 flex bg-fondo">
+    <div class="relative">
+      {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Usar una receta de código"}}
+        {{pilas-editor/boton-receta desactivado=(not estado.puede_editar) tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}
+      {{/pilas-tooltip}}
+    </div>
+
+    <div class="flex1">
+    </div>
+
+    <div class="relative">
+      {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Plegar código"}}
+        {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=plegar_codigo texto="" icono="plegar"}}
+      {{/pilas-tooltip}}
+
+      {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Desplegar código"}}
+        {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=expandir_codigo texto="" icono="desplegar"}}
+      {{/pilas-tooltip}}
+
+    </div>
+  </div>
+
+  {{monaco-editor
+      titulo=titulo_del_codigo
+      code=codigo
+      oscuro=oscuro
+      desactivado=(not estado.puede_editar)
+      modoVim=modoVim
+      tamano=tamano
+      cuandoCarga=cuando_termino_de_cargar_monaco_editor
+      onSave=cuandoGuardaDesdeElEditor
+      onChange=cuando_cambia_el_codigo
+    }}
+</div>

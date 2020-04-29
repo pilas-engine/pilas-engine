@@ -1,0 +1,51 @@
+<div class="h2-5 flex">
+
+  <div class="pa2 truncate">
+    <input class="dn" type="file" id="input-abrir-archivo">
+
+    {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
+
+    {{pilas-boton responsive=true icono="nuevo" desactivado=cargando accion=cuando_crea_un_proyecto demora=0 texto="Nuevo"}}
+    {{pilas-boton responsive=true icono="abrir" desactivado=cargando accion=cuando_abre demora=0 texto="Abrir"}}
+
+    {{#en-electron}}
+      {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=cuando_guarda demora=0 texto="Guardar"}}
+    {{else}}
+      {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=cuando_guarda demora=1 texto="Guardar"}}
+    {{/en-electron}}
+
+    {{pilas-boton-exportar responsive=true proyecto=proyecto desactivado=(not estado.puedeEjecutar)}}
+
+    {{#en-electron}}
+      {{pilas-boton-webserver cargando=cargando}}
+    {{else}}
+      {{#pilas-tooltip pos="left" texto="Esta opción solo está disponible en la versión de escritorio (offline)"}}
+        {{pilas-boton responsive=true icono="webserver" desactivado=true texto="Iniciar servidor web"}}
+      {{/pilas-tooltip}}
+    {{/en-electron}}
+
+    {{pilas-boton-animaciones
+      desactivado=(not estado.puede_editar)
+      pixelart=pixelart
+      proyecto=proyecto
+      modalVisible=mostrarModalDeAnimaciones}}
+
+  </div>
+
+  <div class="flex1">
+  </div>
+
+  <div class="pa2">
+
+    {{pilas-boton-configuracion
+        desactivado=(not estado.puede_editar)
+        tamano=tamano
+        modoVim=modoVim
+        oscuro=oscuro
+        permitir_modo_pausa=permitir_modo_pausa
+        pixelart=pixelart
+      }}
+
+  </div>
+
+</div>

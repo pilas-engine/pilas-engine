@@ -1,119 +1,61 @@
 {{pilas-proyecto proyecto=proyecto}}
+
 <div class="{{if oscuro "theme-oscuro" "theme-claro"}} bg-fondo vh-100 wrapper verdana flex flex-column">
   <div id="modal"></div>
 
   <div id="ember-basic-dropdown-wormhole" class={{if oscuro "theme-oscuro" "theme-claro"}}></div>
 
+  {{pilas-editor-header
+      hay_cambios_por_guardar=hay_cambios_por_guardar
+      cargando=cargando
+      proyecto=proyecto
+      estado=estado
+      mostrarModalDeAnimaciones=mostrarModalDeAnimaciones
+      pixelart=pixelart
 
-  <div class="h2-5 flex">
-
-    <div class="pa2 truncate">
-      <input class="dn" type="file" id="input-abrir-archivo">
-
-      {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
-
-      {{pilas-boton responsive=true icono="nuevo" desactivado=cargando accion=(action "cuando_crea_un_proyecto") demora=0 texto="Nuevo"}}
-      {{pilas-boton responsive=true icono="abrir" desactivado=cargando accion=(action "cuando_abre") demora=0 texto="Abrir"}}
-
-      {{#en-electron}}
-        {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=(action "cuando_guarda" proyecto) demora=0 texto="Guardar"}}
-      {{else}}
-        {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=(action "cuando_guarda" proyecto) demora=1 texto="Guardar"}}
-      {{/en-electron}}
-
-      {{pilas-boton-exportar responsive=true proyecto=proyecto desactivado=(not estado.puedeEjecutar)}}
-
-      {{#en-electron}}
-        {{pilas-boton-webserver cargando=cargando}}
-      {{else}}
-        {{#pilas-tooltip pos="left" texto="Esta opción solo está disponible en la versión de escritorio (offline)"}}
-          {{pilas-boton responsive=true icono="webserver" desactivado=true texto="Iniciar servidor web"}}
-        {{/pilas-tooltip}}
-      {{/en-electron}}
-
-      {{pilas-boton-animaciones
-        desactivado=(not estado.puede_editar)
-        pixelart=pixelart
-        proyecto=proyecto
-        modalVisible=mostrarModalDeAnimaciones}}
-
-    </div>
-
-    <div class="flex1">
-    </div>
-
-    <div class="pa2">
-
-      {{pilas-boton-configuracion
-          desactivado=(not estado.puede_editar)
-          tamano=tamano
-          modoVim=modoVim
-          oscuro=oscuro permitir_modo_pausa=permitir_modo_pausa
-          pixelart=pixelart
-        }}
-
-    </div>
-
-  </div>
+      cuando_crea_un_proyecto=(action "cuando_crea_un_proyecto")
+      cuando_abre=(action "cuando_abre")
+      cuando_guarda=(action "cuando_guarda" proyecto)
+      tamano=tamano
+      modoVim=modoVim
+      oscuro=oscuro
+      permitir_modo_pausa=permitir_modo_pausa
+  }}
 
   <section class="flex1 flex bt borde h-50">
     <div class="columns">
 
-      <div class={{if mostrarPropiedades "dn" "flex flex-column w-panel-colapsado borde br pa2"}}>
-        {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
-        <div class="relative">
-          <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-de-escenas" {{action "alternar" "mostrarPropiedades"}} role="button">
-            ESCENAS Y ACTORES
-          </div>
-        </div>
-      </div>
+      {{pilas-editor-panel-de-propiedades
+        mostrarPropiedades=mostrarPropiedades
+        estado=estado
+        proyecto=proyecto
+        escenaActual=escenaActual
+        seleccion=seleccion
+        cuandoSelecciona=(action "cuandoSelecciona")
+        cuando_intenta_eliminar=(action "cuando_intenta_eliminar")
 
-      <div class="ancho-panel-propiedades {{if mostrarPropiedades "flex flex-column" "dn"}} br borde pa2 ">
+        ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
+        instancia_seleccionada=instancia_seleccionada
+        tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
 
-        <div class="texto pb2">
-          {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
+        cuando_intenta_duplicar=(action "cuando_intenta_duplicar")
+        cuando_intenta_duplicar_x5=(action "cuando_intenta_duplicar_x5")
+        cuando_intenta_mover_a_una_escena=(action "mover_actor_a_una_escena" proyecto)
+        cuando_intenta_mover_a_escena_nueva=(action "mover_actor_a_escena_nueva" proyecto)
 
-          <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarPropiedades"}} role="button">
-            ESCENAS Y ACTORES
-          </div>
-        </div>
+        actorSeleccionado=actorSeleccionado
 
-        <div class="unselectable">
-          {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=(action "agregarEscena" proyecto) texto="Crear Escena"}}
-          {{pilas-crear-actor icono="actor" desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=(action "agregar_actor" proyecto) modalVisible=mostrarModalCreacionDeActor}}
-        </div>
+        agregar_escena=(action "agregarEscena" proyecto)
+        agregar_actor=(action "agregar_actor" proyecto)
+        mostrarModalCreacionDeActor=mostrarModalCreacionDeActor
 
-        {{pilas-panel-de-escenas
-            escenas=proyecto.escenas
-            escenaActual=escenaActual
+        cuando_cambia_un_nombre_de_actor=(action "cuando_cambia_un_nombre_de_actor")
+        cuando_cambia_un_nombre_de_escena=(action "cuando_cambia_un_nombre_de_escena")
+        cuandoModificaObjeto=(action "cuandoModificaObjeto")
+        cuando_modifica_escena=(action "cuando_modifica_escena")
+        cuando_modifica_proyecto=(action "cuando_modifica_proyecto")
 
-            seleccion=seleccion
-            cuandoSelecciona=(action "cuandoSelecciona")
-            cuando_intenta_eliminar=(action "cuando_intenta_eliminar")
-            ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
-            desactivado=(not estado.puede_editar)
-
-            cuando_intenta_duplicar=(action "cuando_intenta_duplicar")
-            cuando_intenta_duplicar_x5=(action "cuando_intenta_duplicar_x5")
-            cuando_intenta_mover_a_una_escena=(action "mover_actor_a_una_escena" proyecto)
-            cuando_intenta_mover_a_escena_nueva=(action "mover_actor_a_escena_nueva" proyecto)
-
-            actorSeleccionado=actorSeleccionado
-          }}
-
-        {{pilas-inspector
-          instancia_seleccionada=instancia_seleccionada
-          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
-
-          cuando_cambia_un_nombre_de_actor=(action "cuando_cambia_un_nombre_de_actor")
-          cuando_cambia_un_nombre_de_escena=(action "cuando_cambia_un_nombre_de_escena")
-          cuandoModificaObjeto=(action "cuandoModificaObjeto")
-          cuando_modifica_escena=(action "cuando_modifica_escena")
-          cuando_modifica_proyecto=(action "cuando_modifica_proyecto")
-          desactivado=(not estado.puede_editar)
-        }}
-
-      </div>
+      }}
 
       <div id="panel-canvas" class="flex {{if (not mostrarEditor) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
 
@@ -247,58 +189,27 @@
 
       </div>
 
+      {{pilas-editor-panel-de-codigo
+          mostrarEditor=mostrarEditor
+          estado=estado
 
-      <div class="{{if mostrarEditor "dn" "flex flex-column w-panel-colapsado"}} bl borde pl2 pa2">
-        {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
-        <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
-          <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor">
-            EDITOR DE CÓDIGO
-          </div>
-        </div>
-      </div>
+          instancia_seleccionada=instancia_seleccionada
+          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
 
-      <div id="panel-editor" class="{{if mostrarEditor "" "flex1"}} {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
+          titulo_del_codigo=tituloDelCodigo
+          codigo=codigo
+          oscuro=oscuro
+          modoVim=modoVim
+          tamano=tamano
 
-        <div class="texto pt2">
-          {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
-          <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarEditor"}} role="button">
-            EDITOR DE CÓDIGO
-          </div>
-        </div>
+          cuando_termino_de_cargar_monaco_editor=(action "cuando_termino_de_cargar_monaco_editor")
+          cuandoGuardaDesdeElEditor=(action "cuandoGuardaDesdeElEditor")
+          cuando_cambia_el_codigo=(action "cuando_cambia_el_codigo")
+          plegar_codigo=(action "plegar_codigo")
+          expandir_codigo=(action "expandir_codigo")
 
-        <div class="unselectable pr2 pv2 flex bg-fondo">
-          <div class="relative">
-            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Usar una receta de código"}}
-              {{pilas-editor/boton-receta desactivado=(not estado.puede_editar) tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}
-            {{/pilas-tooltip}}
-          </div>
+      }}
 
-          <div class="flex1">
-          </div>
-
-          <div class="relative">
-            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Plegar código"}}
-              {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=(action "plegar_codigo") texto="" icono="plegar"}}
-            {{/pilas-tooltip}}
-
-            {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Desplegar código"}}
-              {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=(action "expandir_codigo") texto="" icono="desplegar"}}
-            {{/pilas-tooltip}}
-
-          </div>
-        </div>
-
-        {{monaco-editor
-            titulo=tituloDelCodigo
-            code=codigo
-            oscuro=oscuro
-            desactivado=(not estado.puede_editar)
-            modoVim=modoVim
-            tamano=tamano
-            cuandoCarga=(action "cuando_termino_de_cargar_monaco_editor")
-            onSave=(action "cuandoGuardaDesdeElEditor")
-            onChange=(action "cuando_cambia_el_codigo")}}
-      </div>
 
     </div>
   </section>
