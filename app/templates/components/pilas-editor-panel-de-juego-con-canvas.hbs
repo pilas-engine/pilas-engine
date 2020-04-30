@@ -1,0 +1,131 @@
+<div id="panel-canvas" class="flex {{if (not mostrarEditor) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
+
+  <div class="texto separador-vertical">
+  </div>
+
+  <div class="mb2 flex" style="padding-bottom: 3px ">
+    {{#if estado.puedeEjecutar}}
+      {{pilas-boton id="ejecutar" accion=ejecutar texto="Ejecutar" icono="ejecutar"}}
+
+      <div class="dib f6 flex1 tr"></div>
+
+      <div class="pr2">
+        {{pilas-selector-de-grilla grilla=grilla}}
+      </div>
+
+      <div class="pr2">
+        {{pilas-selector-de-zoom zoom=zoom}}
+      </div>
+
+      {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
+
+    {{/if}}
+
+    {{#if estado.puedeDetener}}
+      {{pilas-boton id="detener" accion=detener texto="Detener" icono="detener"}}
+    {{/if}}
+
+    {{#if permitir_modo_pausa}}
+      {{#if estado.puedePausar}}
+        {{pilas-boton id="pausar" extraClass="ml2" desactivado=existe_un_error_reciente accion=pausar texto="Pausar" icono="pausa"}}
+
+        <div class="dib f6 flex1 tr"></div>
+
+        {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
+      {{/if}}
+
+      {{#if estado.pausaActivada}}
+        <div class="dib ma2 f6 fr flex1 flex">
+
+          <div class="truncate texto w5 f7 unselectable tr pt1 pr1 dn">
+            Cuadro: {{plus posicion}} / {{tiempo (plus posicion)}}
+          </div>
+
+          <input class="v-btm w-100" type="range" id="posicion" min={{historiaMinimo}} max={{historiaMaximo}} oninput={{action (action cambiar_posicion) value="target.value"}} value={{historiaPosicion}}>
+
+        </div>
+
+        {{pilas-selector-de-modo-zoom modoZoom=modoZoom}}
+      {{/if}}
+    {{/if}}
+
+    {{#if estado.ModoCargando}}
+      {{pilas-skeleton ancho=100 alto=40}}
+      <div style="height: 30px; display: inline-block">
+        &nbsp;
+      </div>
+    {{/if}}
+  </div>
+
+  {{#pilas-reiniciador}}
+    {{pilas-canvas
+              nombre_del_contexto=nombre_del_contexto
+              ancho=proyecto.ancho
+              alto=proyecto.alto
+              recursos=recursos
+              mantenerFoco=estado.mantenerFoco
+              proyecto=proyecto
+              zoom=zoom
+              grilla=grilla
+              modoZoom=modoZoom
+              cuandoPulsaEscapeEnModoEjecucion=detener
+              pos=pos
+              fps=fps
+              minimapa=minimapa
+              fisica=fisica
+              fisica_en_modo_ejecucion=fisica_en_modo_ejecucion
+              pixelart=pixelart
+    }}
+  {{/pilas-reiniciador}}
+
+  <div class="h2 ba br borde mt2">
+    {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
+
+    <div class="fr">
+
+      {{#if (eq estado.nombreDeEstado "ModoEjecucion")}}
+        {{pilas-interruptor deshabilitado=false texto="fisica en modo ejecución" variable=fisica_en_modo_ejecucion}}
+
+        <div class="dib {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
+
+          {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
+            {{pilas-interruptor deshabilitado=true texto="fps" variable=false}}
+          {{/pilas-tooltip}}
+
+          {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
+            {{pilas-interruptor deshabilitado=true texto="mapa" variable=false}}
+          {{/pilas-tooltip}}
+
+          {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
+            {{pilas-interruptor deshabilitado=true texto="pos" variable=false}}
+          {{/pilas-tooltip}}
+        </div>
+
+      {{else}}
+        {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
+          {{pilas-interruptor texto="fisica" variable=fisica}}
+        {{/pilas-tooltip}}
+
+        {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
+          {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
+        {{/pilas-tooltip}}
+
+        {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
+          {{pilas-interruptor deshabilitado=estado.pausaActivada texto="mapa" variable=minimapa}}
+        {{/pilas-tooltip}}
+
+        {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
+          {{pilas-interruptor texto="pos" variable=pos}}
+        {{/pilas-tooltip}}
+      {{/if}}
+    </div>
+
+  </div>
+
+  {{pilas-interprete
+      nombre_del_contexto=nombre_del_contexto
+      log=log
+      mostrar=mostrarInterprete
+      habilitado=estado.puede_usar_el_interprete}}
+
+</div>
