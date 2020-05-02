@@ -1,4 +1,4 @@
-<div class="{{if mostrarEditor "dn" "flex flex-column w-panel-colapsado"}} bl borde pl2 pa2">
+<div class="{{if maximizar "dn"}} {{claseDelPanelColapsado}} bl borde pl2 pa2">
   {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
   <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
     <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor">
@@ -7,35 +7,41 @@
   </div>
 </div>
 
-<div id="panel-editor" class="{{if mostrarEditor "" "flex1"}} {{if mostrarEditor "flex flex-column" "dn"}} bl borde pl2">
+<div id="panel-editor" class="{{claseDelPanel}} bg-fondo {{if maximizar "panel-maximizado"}} bl borde pl2">
 
-  <div class="texto pt2">
-    {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
+  <div class="texto flex">
+    {{#if maximizar}}
+      <div class="flex1"></div>
+    {{else}}
+      <div class="pt2 flex items-center">
+        {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
 
-    <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarEditor"}} role="button">
-      CÓDIGO
+        <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarEditor"}} role="button">
+          CÓDIGO
+        </div>
+      </div>
+
+      <div class="flex1"></div>
+    {{/if}}
+
+    <div class="pt2 pr2">
+      {{#if maximizar}}
+        {{#pilas-boton-miniatura-pulsable accion=cuandoGuardaDesdeElEditor}}Guardar y ejecutar <span class="atajo">CTRL+S</span>{{/pilas-boton-miniatura-pulsable}}
+      {{/if}}
     </div>
+
+    <div class="pt2 pr2">
+      {{pilas-boton-miniatura desactivado=(not estado.puede_editar) icono="maximizar" pulsado=maximizar alCambiarMaximizado=(action "alCambiarMaximizado")}}
+    </div>
+
   </div>
 
-  <div class="unselectable pr2 pv2 flex bg-fondo">
+  <div class="unselectable pr2 pb2 flex bg-fondo">
     <div class="relative">
-      {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Usar una receta de código"}}
-        {{pilas-editor/boton-receta desactivado=(not estado.puede_editar) tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}
-      {{/pilas-tooltip}}
+      {{pilas-editor/boton-receta desactivado=(not estado.puede_editar) tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}
     </div>
 
     <div class="flex1">
-    </div>
-
-    <div class="relative">
-      {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Plegar código"}}
-        {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=plegar_codigo texto="" icono="plegar"}}
-      {{/pilas-tooltip}}
-
-      {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Desplegar código"}}
-        {{pilas-boton id="plegar" extraClass="" desactivado=(not estado.puede_editar) accion=expandir_codigo texto="" icono="desplegar"}}
-      {{/pilas-tooltip}}
-
     </div>
   </div>
 

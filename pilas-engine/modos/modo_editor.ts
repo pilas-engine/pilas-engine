@@ -132,6 +132,9 @@ class ModoEditor extends Modo {
 
     this.sprite_borde_de_la_camara.x = camara_x + this.ancho / 2;
     this.sprite_borde_de_la_camara.y = -camara_y + this.alto / 2;
+
+    // Evita que el borde se vea en la cámara principal.
+    this.cameras.cameras[0].ignore(this.sprite_borde_de_la_camara);
   }
 
   hacer_que_el_fondo_se_pueda_arrastrar() {

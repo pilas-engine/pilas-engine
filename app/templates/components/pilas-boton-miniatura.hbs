@@ -1,0 +1,11 @@
+{{#if desactivado}}
+  <div class="{{if rojo "boton-miniatura-rojo"}} o-50 f7 dib boton-miniatura {{if pulsado "boton-miniatura-pulsado"}}">
+    {{pilas-mini-icono icono=icono}}
+    {{yield}}
+  </div>
+{{else}}
+  <div {{action "alternar"}} class="{{if rojo "boton-miniatura-rojo"}} pointer f7 dib boton-miniatura {{if pulsado "boton-miniatura-pulsado"}}" role="button">
+    {{pilas-mini-icono icono=icono}}
+    {{yield}}
+  </div>
+{{/if}}

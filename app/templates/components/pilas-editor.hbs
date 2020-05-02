@@ -65,6 +65,7 @@
         zoom=zoom
         modoZoom=modoZoom
         detener=(action "detener")
+        detener_y_volver_al_editor=(action "detener_y_volver_al_editor")
         existe_un_error_reciente=existe_un_error_reciente
         pausar=(action "pausar")
         posicion=posicion
@@ -85,6 +86,9 @@
         historiaMinimo=historiaMinimo
         permitir_modo_pausa=permitir_modo_pausa
         cambiar_posicion=(action "cambiarPosicion")
+
+        panelMaximizado=panelMaximizado
+        maximizar=maximizarCanvas
       }}
 
       {{pilas-editor-panel-de-codigo
@@ -103,9 +107,9 @@
           cuando_termino_de_cargar_monaco_editor=(action "cuando_termino_de_cargar_monaco_editor")
           cuandoGuardaDesdeElEditor=(action "cuandoGuardaDesdeElEditor")
           cuando_cambia_el_codigo=(action "cuando_cambia_el_codigo")
-          plegar_codigo=(action "plegar_codigo")
-          expandir_codigo=(action "expandir_codigo")
 
+          panelMaximizado=panelMaximizado
+          maximizar=maximizarEditor
       }}
 
     </div>

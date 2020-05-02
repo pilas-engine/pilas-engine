@@ -7478,6 +7478,7 @@ var ModoEditor = (function (_super) {
         this.sprite_borde_de_la_camara.depth = 999999;
         this.sprite_borde_de_la_camara.x = camara_x + this.ancho / 2;
         this.sprite_borde_de_la_camara.y = -camara_y + this.alto / 2;
+        this.cameras.cameras[0].ignore(this.sprite_borde_de_la_camara);
     };
     ModoEditor.prototype.hacer_que_el_fondo_se_pueda_arrastrar = function () {
         this.fondo.setInteractive();

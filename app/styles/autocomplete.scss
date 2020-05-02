@@ -13,6 +13,7 @@
   overflow-y: auto;
   box-sizing: border-box;
 }
+
 .autocomplete-suggestion {
   position: relative;
   padding: 0 0.6em;
@@ -23,10 +24,12 @@
   font-size: 1.02em;
   color: #333;
 }
+
 .autocomplete-suggestion b {
   font-weight: normal;
   color: #1f8dd6;
 }
+
 .autocomplete-suggestion.selected {
   background: #c0d4ff;
 }

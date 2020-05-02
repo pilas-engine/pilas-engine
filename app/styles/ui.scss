@@ -53,10 +53,45 @@ span {
 .boton {
   transition: background-color 750ms ease;
   height: 37px;
+  user-select: none;
+}
+
+.boton-miniatura {
+  height: 27px;
+  padding: 6px;
+  user-select: none;
+  text-shadow: none !important;
+}
+
+.boton-miniatura-rojo {
+  color: #ffc0c0 !important;
+  background-color: #962525 !important;
+}
+
+span.atajo {
+  font-size: 10px;
+  border-radius: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.boton-miniatura-pulsable {
+  height: 27px;
+  padding: 6px;
+  user-select: none;
+  text-shadow: none !important;
 }
 
 .boton-principal {
   height: 55px !important;
+}
+
+.icono-boton {
+  width: 12px;
+  height: 12px;
 }
 
 .ember-power-select-trigger,
@@ -204,4 +239,13 @@ span {
 
 .ember-basic-dropdown-trigger:focus {
   outline: none;
+}
+
+.panel-maximizado {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
 }

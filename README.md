@@ -87,13 +87,13 @@ obtuvieron desde: https://github.com/EmergingTechnologyAdvisors/node-serialport/
 
 ## Estilo de programación
 
-Si estás con ganas de participar del proyecto o enviar correcciones, tené
+Si estás con ganas de participar del proyecto o enviar correcciones, ten
 en cuenta que el código enviado debería estar en español (siempre que sea
 posible) y que las variables o métodos con varias palabras tienen que estar
 separadas por guiones bajos (por ejemplo "cantidad_de_actores")
 
 Además, es muy importante que tengas configurado tu editor para usar
-automáticamente prettier (https://prettier.io/).
+automáticamente Prettier (https://prettier.io/).
 
 ## Créditos
 
@@ -108,6 +108,7 @@ de varias herramientas y bibliotecas como:
 - https://github.com/lukeed/sirv
 - https://github.com/flyover/spriter.ts
 - https://github.com/nathancahill/split/tree/master/packages/splitjs
+- https://www.zondicons.com/
 - https://stuk.github.io/jszip/
 
 ## Próximas tareas a desarrollar

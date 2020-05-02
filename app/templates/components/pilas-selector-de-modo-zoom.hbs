@@ -1,42 +1,7 @@
-<div class="nowrap">
+<div class="pt1">
   {{yield}}
-
-  {{#pilas-tooltip pos=pos class="right-1 w4" texto="Cambia el tamaño a la escala real"}}
-    <div class="button
-        dib
-        pa2
-        verdana f7 link pointer
-        black bg-animate b--black-20
-        unselectable
-        m0
-        relative
-        texto
-        {{if modoZoomReal "" "o-50"}}
-        "
-        role="button"
-        {{action "cambiarModo" 2}}
-    >
-      1:1
-    </div>
-  {{/pilas-tooltip}}
-
-
-  {{#pilas-tooltip pos=pos class="right-1 w4" texto="Aplica zoom al visor para ocupar todo el espacio libre"}}
-    <div class="button
-        dib
-        pa2
-        verdana f7 link pointer
-        black bg-animate b--black-20
-        unselectable
-        m0
-        relative
-        texto
-        {{if modoZoomExpandido "" "o-50"}}
-        "
-        role="button"
-        {{action "cambiarModo" 1}}
-    >
-      ↔
-    </div>
-  {{/pilas-tooltip}}
+  <select class="select f7 mt1 verdana" onchange={{action "cambiarModo" value="target.value"}} >
+    <option value={{2}} selected={{eq modoZoom 2}}>1:1</option>
+    <option value={{1}} selected={{eq modoZoom 1}}>Ajustar</option>
+  </select>
 </div>

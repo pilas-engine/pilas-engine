@@ -26,6 +26,7 @@ export default Component.extend({
   instancia_seleccionada: null,
   tipo_de_la_instancia_seleccionada: null,
   nombre_del_contexto: "prueba-editor",
+  panelMaximizado: null,
 
   historiaPosicion: 10,
   historiaMinimo: 0,
@@ -169,9 +170,7 @@ export default Component.extend({
   },
 
   pulsa_la_tecla_escape() {
-    if (this.get("estado.puedeDetener")) {
-      this.send("detener");
-    }
+    this.send("detener_y_volver_al_editor");
   },
 
   termina_de_mover_un_actor(datos) {
@@ -530,7 +529,7 @@ export default Component.extend({
       this.set("existe_un_error_reciente", false);
       this.mostrar_la_escena_actual_sobre_pilas();
       this.set("estado", this.estado.detener());
-      this.bus.trigger(`hacerFocoEnElEditor`, {});
+      this.bus.trigger("hacerFocoEnElEditor", {});
       this.log.limpiar();
       this.log.info("Ingresando al modo edición");
     },
@@ -554,6 +553,12 @@ export default Component.extend({
 
     cuandoGuardaDesdeElEditor(/*editor*/) {
       this.send("alternarEstadoDeEjecucion");
+
+      if (this.get("panelMaximizado")) {
+        this.set("panelMaximizado", "canvas-desde-el-editor");
+        this.set("maximizarCanvas", true);
+        this.set("maximizarEditor", false);
+      }
     },
 
     alternarEstadoDeEjecucion() {
@@ -690,14 +695,6 @@ export default Component.extend({
       this.cuandoIntentaCrearUnProyecto();
     },
 
-    plegar_codigo() {
-      this.bus.trigger(`${this.nombre_del_contexto}:plegar_codigo`);
-    },
-
-    expandir_codigo() {
-      this.bus.trigger(`${this.nombre_del_contexto}:expandir_codigo`);
-    },
-
     cuando_cambia_un_nombre_de_actor(/*nombre*/) {
       // Intenta recargar el editor, para eso vuelve a seleccionar el actor
       // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
@@ -726,6 +723,18 @@ export default Component.extend({
 
     alternar(propiedad) {
       this.toggleProperty(propiedad);
+    },
+
+    detener_y_volver_al_editor() {
+      if (this.get("estado.puedeDetener")) {
+        if (this.get("panelMaximizado") == "canvas-desde-el-editor") {
+          this.set("panelMaximizado", "editor");
+          this.set("maximizarCanvas", false);
+          this.set("maximizarEditor", true);
+        }
+
+        this.send("detener");
+      }
     }
   }
 });

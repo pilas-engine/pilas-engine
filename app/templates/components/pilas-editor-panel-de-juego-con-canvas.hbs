@@ -1,19 +1,25 @@
-<div id="panel-canvas" class="flex {{if (not mostrarEditor) "flex1" "w5"}} flex-column bg-fondo pa2 unselectable">
+<div id="panel-canvas" class="flex {{if (not mostrarEditor) "flex1" "w5"}} {{if maximizar "panel-maximizado"}} flex-column bg-fondo pa2 unselectable">
 
-  <div class="texto separador-vertical">
+  <div class="texto separador-vertical tr">
+    {{#if (eq panelMaximizado "canvas-desde-el-editor")}}
+      {{#pilas-boton-miniatura-pulsable accion=detener_y_volver_al_editor}}Detener y volver al editor <span class="atajo">ESC</span>{{/pilas-boton-miniatura-pulsable}}
+    {{/if}}
+
+    {{pilas-boton-miniatura icono="maximizar" pulsado=maximizar alCambiarMaximizado=(action "alCambiarMaximizado")}}
+
   </div>
 
-  <div class="mb2 flex" style="padding-bottom: 3px ">
+  <div class="mb2 flex" style="padding-bottom: 0px ">
     {{#if estado.puedeEjecutar}}
       {{pilas-boton id="ejecutar" accion=ejecutar texto="Ejecutar" icono="ejecutar"}}
 
       <div class="dib f6 flex1 tr"></div>
 
-      <div class="pr2">
+      <div class="pr2 pl2 pt1">
         {{pilas-selector-de-grilla grilla=grilla}}
       </div>
 
-      <div class="pr2">
+      <div class="pr2 pt1">
         {{pilas-selector-de-zoom zoom=zoom}}
       </div>
 
@@ -78,44 +84,36 @@
     }}
   {{/pilas-reiniciador}}
 
-  <div class="h2 ba br borde mt2">
-    {{pilas-interruptor texto="Intérprete" rojo=existe_un_error_reciente variable=mostrarInterprete}}
+  <div class="h2 mt2">
+
+    {{#pilas-boton-miniatura rojo=existe_un_error_reciente icono="interprete" pulsado=mostrarInterprete}}Intérprete{{/pilas-boton-miniatura}}
 
     <div class="fr">
 
       {{#if (eq estado.nombreDeEstado "ModoEjecucion")}}
-        {{pilas-interruptor deshabilitado=false texto="fisica en modo ejecución" variable=fisica_en_modo_ejecucion}}
 
-        <div class="dib {{if estado.puede_modificar_depurador "" "o-60 disabled"}}">
+        {{pilas-boton-miniatura icono="mundo" pulsado=fisica_en_modo_ejecucion}}
 
-          {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
-            {{pilas-interruptor deshabilitado=true texto="fps" variable=false}}
-          {{/pilas-tooltip}}
-
-          {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
-            {{pilas-interruptor deshabilitado=true texto="mapa" variable=false}}
-          {{/pilas-tooltip}}
-
-          {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
-            {{pilas-interruptor deshabilitado=true texto="pos" variable=false}}
-          {{/pilas-tooltip}}
-        </div>
+        {{pilas-boton-miniatura desactivado=true icono="fps" pulsado=false}}
+        {{pilas-boton-miniatura desactivado=true icono="mapa" pulsado=false}}
+        {{pilas-boton-miniatura desactivado=true icono="pos" pulsado=false}}
 
       {{else}}
+
         {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra las figuras físicas"}}
-          {{pilas-interruptor texto="fisica" variable=fisica}}
+          {{pilas-boton-miniatura icono="mundo" pulsado=fisica}}
         {{/pilas-tooltip}}
 
         {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el rendimiento en cuadros por segundo (FPS)"}}
-          {{pilas-interruptor deshabilitado=estado.pausaActivada texto="fps" variable=fps}}
+          {{pilas-boton-miniatura desactivado=estado.pausaActivada icono="fps" pulsado=fps}}
         {{/pilas-tooltip}}
 
         {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Muestra el minimapa"}}
-          {{pilas-interruptor deshabilitado=estado.pausaActivada texto="mapa" variable=minimapa}}
+          {{pilas-boton-miniatura desactivado=estado.pausaActivada icono="mapa" pulsado=minimapa}}
         {{/pilas-tooltip}}
 
         {{#pilas-tooltip class="right-1 bottom-2 w4" texto="Marca los puntos de control de cada actor"}}
-          {{pilas-interruptor texto="pos" variable=pos}}
+          {{pilas-boton-miniatura icono="pos" pulsado=pos}}
         {{/pilas-tooltip}}
       {{/if}}
     </div>

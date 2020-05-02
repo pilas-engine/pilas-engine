@@ -284,8 +284,6 @@ export default Component.extend({
     frameDoc.close();
 
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
-    this.bus.on("plegar_codigo", this, "plegar_codigo");
-    this.bus.on("expandir_codigo", this, "expandir_codigo");
     this.bus.on("usar_receta", this, "usar_receta");
   },
 
@@ -309,22 +307,18 @@ export default Component.extend({
     let editor = this.editor;
     let iframe = this.element.querySelector("iframe");
 
-    if (iframe) {
-      iframe.contentWindow.focus();
-    }
+    setTimeout(() => {
+      console.log("hacer foro");
 
-    if (editor) {
-      editor.focus();
-      window.editor = editor;
-    }
-  },
+      if (iframe) {
+        iframe.contentWindow.focus();
+      }
 
-  plegar_codigo() {
-    this.editor.getAction("editor.foldLevel2").run();
-  },
-
-  expandir_codigo() {
-    this.editor.getAction("editor.unfoldAll").run();
+      if (editor) {
+        editor.focus();
+        window.editor = editor;
+      }
+    }, 100);
   },
 
   /*
@@ -347,7 +341,5 @@ export default Component.extend({
     this._super(...arguments);
     window.removeEventListener("message", this._subscription);
     this.bus.off("hacerFocoEnElEditor", this, "hacerFoco");
-    this.bus.off("plegar_codigo", this, "plegar_codigo");
-    this.bus.off("expandir_codigo", this, "expandir_codigo");
   }
 });
