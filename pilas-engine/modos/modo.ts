@@ -9,7 +9,7 @@ class Modo extends Phaser.Scene {
   ancho: number;
   alto: number;
   es_modo_ejecucion: boolean;
-  canvas_fisica: any;
+  canvas_fisica: Phaser.GameObjects.Graphics;
   posicion_anterior_de_arrastre: any;
 
   constructor(data) {
@@ -153,7 +153,7 @@ class Modo extends Phaser.Scene {
     }
 
     canvas.lineTo(vertices[0].x, vertices[0].y);
-
+    
     canvas.closePath();
     canvas.strokePath();
   }
