@@ -9,7 +9,6 @@ ELIMINAR_MAPS=1
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
 BIN_TYPEDOC=./node_modules/.bin/typedoc
-BIN_GITBOOK=./node_modules/.bin/gitbook
 BIN_EMBER=./node_modules/.bin/ember
 BIN_ELECTRON_PACKAGER=./node_modules/.bin/electron-packager
 BIN_PRETTIER=./node_modules/.bin/prettier
@@ -218,23 +217,18 @@ compilar_manual: pilas_manual
 
 pilas_manual:
 	$(call log, "Generando documentación")
-	${BIN_GITBOOK} build
 	@rm -rf public/manual
-	@mv _book public/manual
+	@mkdir -p public/manual
+	@cp manual/templates/estilo.css public/manual
+	python3 scripts/generar_manual.py
+	cp -r manual/imagenes public/manual/
 	@echo ""
 	@echo "${G}OK, la documentación quedó en public/manual"
 	@echo ""
 
 pilas_manuales_descargables:
 	$(call log, "Generando archivos de documentación")
-	${BIN_GITBOOK} pdf
-	${BIN_GITBOOK} epub
-	${BIN_GITBOOK} mobi
-	@rm -rf manuales
-	@mkdir manuales
-	@mv book.epub manuales/
-	@mv book.mobi manuales/
-	@mv book.pdf manuales/
+	python3 scripts/generar_manuales_descargables.py
 	@echo ""
 	@echo "${G}OK, los archivos generados están en el directorio manuales"
 	@echo ""

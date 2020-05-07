@@ -1,4 +1,6 @@
-# Autómatas y estados
+---
+title: Autómatas y estados
+---
 
 Un desafío muy común en el desarrollo de juegos es lograr que los actores puedan mostrar animaciones y reaccionar de acuerdo a modos particulares: saltar, caminar, quedarse parado, pediendo etc…
 

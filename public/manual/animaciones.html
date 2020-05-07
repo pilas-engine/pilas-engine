@@ -1,633 +1,184 @@
-
-<!DOCTYPE HTML>
-<html lang="es" >
-    <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Animaciones · Manual de Pilas Engine 2</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        <meta name="author" content="El equipo de Pilas Engine">
-        
-        
-    
-    <link rel="stylesheet" href="gitbook/style.css">
-
-    
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
-
-    
-
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="camara.html" />
-    
-    
-    <link rel="prev" href="automatas_y_estados.html" />
-    
-
-    </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Escribe para buscar" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Introducción
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="primeros_pasos.html">
-            
-                <a href="primeros_pasos.html">
-            
-                    
-                    Primeros pasos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="interprete.html">
-            
-                <a href="interprete.html">
-            
-                    
-                    El intérprete
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="automatas_y_estados.html">
-            
-                <a href="automatas_y_estados.html">
-            
-                    
-                    Autómatas y estados
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.5" data-path="animaciones.html">
-            
-                <a href="animaciones.html">
-            
-                    
-                    Animaciones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="camara.html">
-            
-                <a href="camara.html">
-            
-                    
-                    Cámara
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="recorridos.html">
-            
-                <a href="recorridos.html">
-            
-                    
-                    Recorridos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="etiquetas.html">
-            
-                <a href="etiquetas.html">
-            
-                    
-                    Etiquetas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="habilidades.html">
-            
-                <a href="habilidades.html">
-            
-                    
-                    Habilidades
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.10" data-path="comportamientos.html">
-            
-                <a href="comportamientos.html">
-            
-                    
-                    Comportamientos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.11" data-path="azar.html">
-            
-                <a href="azar.html">
-            
-                    
-                    Azar o cálculos aleatorios
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.12" data-path="observables.html">
-            
-                <a href="observables.html">
-            
-                    
-                    Observables
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.13" data-path="tiempo.html">
-            
-                <a href="tiempo.html">
-            
-                    
-                    Manejo de tiempo
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.14" data-path="angulos-distancias.html">
-            
-                <a href="angulos-distancias.html">
-            
-                    
-                    Angulos y distancias
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.15" data-path="colisiones.html">
-            
-                <a href="colisiones.html">
-            
-                    
-                    Colisiones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.16" data-path="mensajes.html">
-            
-                <a href="mensajes.html">
-            
-                    
-                    Mensajes
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.17" data-path="escenas.html">
-            
-                <a href="escenas.html">
-            
-                    
-                    Escenas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.18" data-path="eventos-de-mouse.html">
-            
-                <a href="eventos-de-mouse.html">
-            
-                    
-                    Eventos de mouse o touch
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.19" data-path="uso-del-teclado.html">
-            
-                <a href="uso-del-teclado.html">
-            
-                    
-                    Uso del teclado
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.20" data-path="dibujado_en_pantalla.html">
-            
-                <a href="dibujado_en_pantalla.html">
-            
-                    
-                    Dibujado simple en pantalla
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.21" data-path="exportar_juegos.html">
-            
-                <a href="exportar_juegos.html">
-            
-                    
-                    Cómo exportar juegos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.22" data-path="pilas_como_biblioteca.html">
-            
-                <a href="pilas_como_biblioteca.html">
-            
-                    
-                    Pilas como biblioteca
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="colaborar.html">
-            
-                <a href="colaborar.html">
-            
-                    
-                    Colaborar con pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="entorno.html">
-            
-                <a href="entorno.html">
-            
-                    
-                    Entorno para colaboradores de Pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Publicado con GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Animaciones</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <h1 id="animaciones">Animaciones</h1>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Animaciones</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cccccc; background-color: #303030; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ffcfaf; } /* Alert */
+    code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+    code span.at { } /* Attribute */
+    code span.bn { color: #dca3a3; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #f0dfaf; } /* ControlFlow */
+    code span.ch { color: #dca3a3; } /* Char */
+    code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+    code span.co { color: #7f9f7f; } /* Comment */
+    code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+    code span.do { color: #7f9f7f; } /* Documentation */
+    code span.dt { color: #dfdfbf; } /* DataType */
+    code span.dv { color: #dcdccc; } /* DecVal */
+    code span.er { color: #c3bf9f; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #c0bed1; } /* Float */
+    code span.fu { color: #efef8f; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+    code span.kw { color: #f0dfaf; } /* Keyword */
+    code span.op { color: #f0efd0; } /* Operator */
+    code span.ot { color: #efef8f; } /* Other */
+    code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+    code span.sc { color: #dca3a3; } /* SpecialChar */
+    code span.ss { color: #cc9393; } /* SpecialString */
+    code span.st { color: #cc9393; } /* String */
+    code span.va { } /* Variable */
+    code span.vs { color: #cc9393; } /* VerbatimString */
+    code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="estilo.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <div class="tc">
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Animaciones</h1>
+</header>
 <p>Para crear animaciones se tiene que utilizar el editor que aparece en la parte superior de la pantalla:</p>
-<p><img src="animaciones.assets/image-20191218235021115.png" alt="image-20191218235021115"></p>
-<p>Este bot&#xF3;n abrir&#xE1; una ventana en donde se pueden previsualizar todas la animaciones del proyecto:</p>
-<p><img src="animaciones.assets/image-20191218235117098.png" alt="image-20191218235117098"></p>
-<p>Estas animaciones tambi&#xE9;n se pueden editar f&#xE1;cilmente, solo tienes que pasar el mouse sobre el nombre de la animaci&#xF3;n y pulsar el  bot&#xF3;n &quot;editar&quot;:</p>
-<p><img src="animaciones.assets/image-20191218235228151.png" alt="image-20191218235228151"></p>
-<p>Las animaciones son simplemente una lista de im&#xE1;genes que pilas mostrar&#xE1; una detr&#xE1;s de la otra, a determinada velocidad. Vas ver toda esta informaci&#xF3;n en el editor de animaciones:</p>
-<p><img src="animaciones.assets/image-20191218235340936.png" alt="image-20191218235340936"></p>
+<p><img src="imagenes/animaciones.assets/image-20191218235021115.png" /></p>
+<p>Este botón abrirá una ventana en donde se pueden previsualizar todas la animaciones del proyecto:</p>
+<p><img src="imagenes/animaciones.assets/image-20191218235117098.png" /></p>
+<p>Estas animaciones también se pueden editar fácilmente, solo tienes que pasar el mouse sobre el nombre de la animación y pulsar el botón “editar”:</p>
+<p><img src="imagenes/animaciones.assets/image-20191218235228151.png" /></p>
+<p>Las animaciones son simplemente una lista de imágenes que pilas mostrará una detrás de la otra, a determinada velocidad. Vas ver toda esta información en el editor de animaciones:</p>
+<p><img src="imagenes/animaciones.assets/image-20191218235340936.png" /></p>
 <h2 id="crear-animaciones-desde-el-editor">Crear animaciones desde el editor</h2>
-<p>Para crear animaciones hay que pulsar el bot&#xF3;n &quot;Crear una animaci&#xF3;n&quot;:</p>
-<p><img src="animaciones.assets/image-20191218235448801.png" alt="image-20191218235448801"></p>
-<p>y luego cargar cada uno de los cuadros de animaci&#xF3;n pulsando el bot&#xF3;n &quot;+&quot; que aparece en la parte superior de la ventana:</p>
-<p><img src="animaciones.assets/image-20191218235623632.png" alt="image-20191218235623632"></p>
-<p>Por ejemplo, aqu&#xED; inclu&#xED; algunos cuadros de animaci&#xF3;n de un personaje corriendo:</p>
-<p><img src="animaciones.assets/image-20191219000155013.png" alt="image-20191219000155013"></p>
-<p>Podes utilizar el bot&#xF3;n &quot;Reproducir&quot; y la propiedad &quot;Cuadros por segundo&quot; para ajustar la velocidad de la animaci&#xF3;n y dejarla como quieras:</p>
-<p><img src="animaciones.assets/screencast 2019-12-19 00-04-05.gif" alt="screencast 2019-12-19 00-04-05"></p>
-<p>Por &#xFA;ltimo es muy importante que le asignes un nombre a la animaci&#xF3;n, por ejemplo &quot;shaolin_corre&quot;:</p>
-<p><img src="animaciones.assets/image-20191219000635690.png" alt="image-20191219000635690"></p>
-<p>Esto es muy importante porque tu juego puede tener un mont&#xF3;n de animaciones, y el nombre que le asignes ser&#xE1; la &#xFA;nica forma de identificar cada una de las animaciones.</p>
-<p>Ahora s&#xED;, podes cerrar la ventana del editor y continuar con la siguiente secci&#xF3;n.</p>
-<h2 id="c&#xF3;mo-usar-las-animaciones">C&#xF3;mo usar las animaciones</h2>
-<p>Una vez que tienes creada la animaci&#xF3;n, lo &#xFA;nico que hace falta es copiar el c&#xF3;digo que aparece como ayuda en el visor de animaciones dentro del c&#xF3;digo:</p>
-<p><img src="animaciones.assets/image-20191219000753983.png" alt="image-20191219000753983"></p>
-<p>Ese c&#xF3;digo, sirve para indicarle al actor qu&#xE9; animaci&#xF3;n tiene que reproducir. Por ejemplo, si quieres que el actor muestre esta animaci&#xF3;n al comenzar deber&#xED;as colocarlo dentro de la funci&#xF3;n &quot;iniciar&quot; as&#xED;:</p>
-<p><img src="animaciones.assets/image-20191219000913347.png" alt="image-20191219000913347"></p>
-<h2 id="crear-animaciones-desde-el-c&#xF3;digo">Crear animaciones desde el c&#xF3;digo</h2>
-<p>Para crear y asignar animaciones tambi&#xE9;n se puede usar directamente el c&#xF3;digo del editor. Esto es algo m&#xE1;s dif&#xED;cil, pero en algunas situaciones puede ser &#xFA;til.</p>
-<p>Existe un m&#xE9;todo llamado &quot;crear_animacion&quot; que se puede invocar especificando el nombre de la animaci&#xF3;n, los cuadros que se deben mostrar y la velocidad.</p>
-<p>Por ejemplo, para crear una animaci&#xF3;n de un actor mientras est&#xE1; esperando us&#xE9; lo siguiente:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_parado1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
-</code></pre>
-<p>El valor &quot;2&quot; significa que la animaci&#xF3;n se debe mostrar a una velocidad de 2 cuadros por segundo.</p>
-<p>Luego, una vez creada la animaci&#xF3;n, se puede reproducir usando esta llamada:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
-</code></pre>
-<p>La creaci&#xF3;n de animaciones generalmente se realiza en el m&#xE9;todo iniciar de esta forma:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Conejo extends Actor {
-  iniciar() {
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_parado1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_camina&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_camina1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_camina2&quot;</span>], <span class="hljs-number">20</span>);
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_pierde&quot;</span>], <span class="hljs-number">1</span>);
-
-    <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
-  }
-
-  actualizar() {}
-}
-</code></pre>
-<p>Luego, para cambiar de animaci&#xF3;n, se puede re-definir el valor del atributo
-animaci&#xF3;n as&#xED;:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> Conejo extends Actor {
-  iniciar() {
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_parado&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_parado1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_parado2&quot;</span>], <span class="hljs-number">2</span>);
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_camina&quot;</span>, [<span class="hljs-string">&quot;imagenes:conejo/conejo_camina1&quot;</span>, <span class="hljs-string">&quot;imagenes:conejo/conejo_camina2&quot;</span>], <span class="hljs-number">20</span>);
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_salta&quot;</span>, [<span class="hljs-string">&quot;conejo_salta&quot;</span>], <span class="hljs-number">20</span>);
-    <span class="hljs-keyword">this</span>.crear_animacion(<span class="hljs-string">&quot;conejo_muere&quot;</span>, [<span class="hljs-string">&quot;conejo_muere&quot;</span>], <span class="hljs-number">1</span>);
-
-    <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
-  }
-
-  actualizar() {
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pilas.control.izquierda) {
-      <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_camina&quot;</span>;
-      <span class="hljs-keyword">this</span>.x -= <span class="hljs-number">5</span>;
-    }
-
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pilas.control.derecha) {
-      <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_camina&quot;</span>;
-      <span class="hljs-keyword">this</span>.x += <span class="hljs-number">5</span>;
-    }
-
-    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.pilas.control.izquierda &amp;&amp; !<span class="hljs-keyword">this</span>.pilas.control.derecha) {
-      <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;conejo_parado&quot;</span>;
-    }
-  }
-}
-</code></pre>
-<h2 id="detectar-la-finalizaci&#xF3;n-de-las-animaciones">Detectar la finalizaci&#xF3;n de las animaciones</h2>
-<p>Las animaciones siempre se muestran de forma c&#xED;clica, es decir, cuanto terminan
-vuelven a empezar desde cero. Si tu animaci&#xF3;n es tradicional, como un personaje
-caminando, no tienes que hacer nada adicional para que continue la animaci&#xF3;n
-autom&#xE1;ticamente.</p>
-<p>Si quieres detectar el momento exacto cuando la animaci&#xF3;n llega a su final,
-deber&#xED;as crear un m&#xE9;todo llamado <code>cuando_finaliza_animacion</code> y colocar ah&#xED;
-alg&#xFA;n c&#xF3;digo para reaccionar ante la finalizaci&#xF3;n de la animaci&#xF3;n. Por ejemplo,
-el actor &quot;explosi&#xF3;n&quot; se elimina de la pantalla autom&#xE1;ticamente cuando
-finaliza su animaci&#xF3;n:</p>
+<p>Para crear animaciones hay que pulsar el botón “Crear una animación”:</p>
+<p><img src="imagenes/animaciones.assets/image-20191218235448801.png" /></p>
+<p>y luego cargar cada uno de los cuadros de animación pulsando el botón “+” que aparece en la parte superior de la ventana:</p>
+<p><img src="imagenes/animaciones.assets/image-20191218235623632.png" /></p>
+<p>Por ejemplo, aquí incluí algunos cuadros de animación de un personaje corriendo:</p>
+<p><img src="imagenes/animaciones.assets/image-20191219000155013.png" /></p>
+<p>Podes utilizar el botón “Reproducir” y la propiedad “Cuadros por segundo” para ajustar la velocidad de la animación y dejarla como quieras:</p>
+<p><img src="imagenes/animaciones.assets/screencast%202019-12-19%2000-04-05.gif" /></p>
+<p>Por último es muy importante que le asignes un nombre a la animación, por ejemplo “shaolin_corre”:</p>
+<p><img src="imagenes/animaciones.assets/image-20191219000635690.png" /></p>
+<p>Esto es muy importante porque tu juego puede tener un montón de animaciones, y el nombre que le asignes será la única forma de identificar cada una de las animaciones.</p>
+<p>Ahora sí, podes cerrar la ventana del editor y continuar con la siguiente sección.</p>
+<h2 id="cómo-usar-las-animaciones">Cómo usar las animaciones</h2>
+<p>Una vez que tienes creada la animación, lo único que hace falta es copiar el código que aparece como ayuda en el visor de animaciones dentro del código:</p>
+<p><img src="imagenes/animaciones.assets/image-20191219000753983.png" /></p>
+<p>Ese código, sirve para indicarle al actor qué animación tiene que reproducir. Por ejemplo, si quieres que el actor muestre esta animación al comenzar deberías colocarlo dentro de la función “iniciar” así:</p>
+<p><img src="imagenes/animaciones.assets/image-20191219000913347.png" /></p>
+<h2 id="crear-animaciones-desde-el-código">Crear animaciones desde el código</h2>
+<p>Para crear y asignar animaciones también se puede usar directamente el código del editor. Esto es algo más difícil, pero en algunas situaciones puede ser útil.</p>
+<p>Existe un método llamado “crear_animacion” que se puede invocar especificando el nombre de la animación, los cuadros que se deben mostrar y la velocidad.</p>
+<p>Por ejemplo, para crear una animación de un actor mientras está esperando usé lo siguiente:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_parado&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_parado1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_parado2&quot;</span>]<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span></code></pre></div>
+<p>El valor “2” significa que la animación se debe mostrar a una velocidad de 2 cuadros por segundo.</p>
+<p>Luego, una vez creada la animación, se puede reproducir usando esta llamada:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span></code></pre></div>
+<p>La creación de animaciones generalmente se realiza en el método iniciar de esta forma:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>class Conejo extends Actor {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  iniciar() {</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_parado&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_parado1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_parado2&quot;</span>]<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_camina&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_camina1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_camina2&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_salta&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_salta&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_muere&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_pierde&quot;</span>]<span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>  }</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  actualizar() {}</span>
+<span id="cb3-12"><a href="#cb3-12"></a>}</span></code></pre></div>
+<p>Luego, para cambiar de animación, se puede re-definir el valor del atributo animación así:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>class Conejo extends Actor {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  iniciar() {</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_parado&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_parado1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_parado2&quot;</span>]<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_camina&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_camina1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_camina2&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_salta&quot;</span><span class="op">,</span> [<span class="st">&quot;conejo_salta&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_muere&quot;</span><span class="op">,</span> [<span class="st">&quot;conejo_muere&quot;</span>]<span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  }</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  actualizar() {</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    if (this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">izquierda</span>) {</span>
+<span id="cb4-13"><a href="#cb4-13"></a>      this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_camina&quot;</span><span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>      this<span class="op">.</span><span class="at">x</span> <span class="op">-=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    }</span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    if (this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">derecha</span>) {</span>
+<span id="cb4-18"><a href="#cb4-18"></a>      this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_camina&quot;</span><span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>      this<span class="op">.</span><span class="at">x</span> <span class="op">+=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>    }</span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a>    if (<span class="op">!</span>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">izquierda</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">derecha</span>) {</span>
+<span id="cb4-23"><a href="#cb4-23"></a>      this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>    }</span>
+<span id="cb4-25"><a href="#cb4-25"></a>  }</span>
+<span id="cb4-26"><a href="#cb4-26"></a>}</span></code></pre></div>
+<h2 id="detectar-la-finalización-de-las-animaciones">Detectar la finalización de las animaciones</h2>
+<p>Las animaciones siempre se muestran de forma cíclica, es decir, cuanto terminan vuelven a empezar desde cero. Si tu animación es tradicional, como un personaje caminando, no tienes que hacer nada adicional para que continue la animación automáticamente.</p>
+<p>Si quieres detectar el momento exacto cuando la animación llega a su final, deberías crear un método llamado <code>cuando_finaliza_animacion</code> y colocar ahí algún código para reaccionar ante la finalización de la animación. Por ejemplo, el actor “explosión” se elimina de la pantalla automáticamente cuando finaliza su animación:</p>
 <pre><code>class explosion extends Actor {
 
-  // Otros m&#xE9;todos
+  // Otros métodos
 
   cuando_finaliza_animacion(nombre: string) {
     this.eliminar();
   }
-}
-</code></pre>
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
+}</code></pre>
+<div class="tc">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
 </div>
-
-                        </div>
-                    </div>
-                
-            </div>
-
-            
-                
-                <a href="automatas_y_estados.html" class="navigation navigation-prev " aria-label="Previous page: Autómatas y estados">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="camara.html" class="navigation navigation-next " aria-label="Next page: Cámara">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
-    </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Animaciones","level":"1.5","depth":1,"next":{"title":"Cámara","level":"1.6","depth":1,"path":"camara.md","ref":"camara.md","articles":[]},"previous":{"title":"Autómatas y estados","level":"1.4","depth":1,"path":"automatas_y_estados.md","ref":"automatas_y_estados.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"animaciones.md","mtime":"2019-12-19T03:10:18.738Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-19T22:27:28.096Z"},"basePath":".","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="gitbook/gitbook.js"></script>
-    <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
-    </body>
+</body>
 </html>
-

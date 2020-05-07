@@ -1,4 +1,6 @@
-# Uso del teclado
+---
+title: Uso del teclado
+---
 
 El teclado se puede utilizar de dos formas básicas: por consulta para mover
 personajes o mediante eventos para responder a pulsaciones de teclas específicas:
@@ -118,4 +120,4 @@ los métodos `cuando_pulsa_tecla` y `cuando_suelta_tecla` así:
 Estos métodos están disponibles tanto en las escenas como en los
 actores. Puedes comprobarlo escribiendo "cuando" en el editor y viendo cómo se sugieren las opciones:
 
-![PilasEngine * 2020-01-11 22-35-26](uso-del-teclado.assets/autocompleta.png)
+![](imagenes/uso-del-teclado.assets/autocompleta.png)

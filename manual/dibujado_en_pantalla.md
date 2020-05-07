@@ -1,4 +1,6 @@
-# Dibujado simple en pantalla
+---
+title: Dibujado simple en pantalla
+---
 
 En esta sección veremos como dibujar libremente, ya sean lineas, círculos, etc..
 
@@ -25,7 +27,7 @@ un círculo en la posición `x=100 y=0` con un radio de 40 píxeles y de color r
 this.dibujar_circulo(100, 0, 40, "rojo");
 ```
 
-![circulo_rojo](dibujado_en_pantalla.assets/circulo_rojo.png)
+![](imagenes/dibujado_en_pantalla.assets/circulo_rojo.png)
 
 Opcionalmente, si quieres dibujar el contorno del círculo de otro color o con un grosor en particular podrías llamar a esta función:
 
@@ -33,7 +35,7 @@ Opcionalmente, si quieres dibujar el contorno del círculo de otro color o con u
 this.dibujar_borde_de_circulo(100, 0, 40, "negro", 2);
 ```
 
-![circulo_con_borde](dibujado_en_pantalla.assets/circulo_con_borde.png)
+![](imagenes/dibujado_en_pantalla.assets/circulo_con_borde.png)
 
 Los primeros 3 parámetros son idénticos al de la función anterior, corresponden a los parámetros `x`, `y` y `radio`, mientras que el argumento que le sigue será el color del borde y el último el grosor en píxeles.
 
@@ -61,7 +63,7 @@ this.dibujar_circulo(-50, 50, 40, color_verde_claro);
 this.dibujar_circulo(+50, 50, 40, color_verde_oscuro);
 ```
 
-![circulos](dibujado_en_pantalla.assets/circulos.png)
+![](imagenes/dibujado_en_pantalla.assets/circulos.png)
 
 ## Rectángulos
 
@@ -72,7 +74,7 @@ this.dibujar_rectangulo(0, 0, 120, 50, "naranja");
 this.dibujar_borde_de_rectangulo(0, 0, 120, 50, "rojo", 5);
 ```
 
-![image-20190728093001144](dibujado_en_pantalla.assets/image-20190728093001144.png)
+![](imagenes/dibujado_en_pantalla.assets/image-20190728093001144.png)
 
 Los argumentos de estas funciones son: el punto de originen, en este caso `x=0 y=0`, luego el ancho y alto del rectángulo y por último el color.
 
@@ -86,7 +88,7 @@ Por ejemplo, para dibujar una linea de color "verde" desde el punto (0, 0) al pu
 this.dibujar_linea(0, 0, 200, 100, "verde", 10);
 ```
 
-![image-20190728093336422](dibujado_en_pantalla.assets/image-20190728093336422.png)
+![](imagenes/dibujado_en_pantalla.assets/image-20190728093336422.png)
 
 ## Animaciones
 
@@ -103,4 +105,4 @@ actualizar() {
 }
 ```
 
-![image-20190728094930911](dibujado_en_pantalla.assets/image-20190728094930911.png)
+![](imagenes/dibujado_en_pantalla.assets/image-20190728094930911.png)

@@ -1,10 +1,12 @@
-# Escenas
+---
+title: Escenas
+---
 
 Las escenas te permiten dividir el juego en partes reconocibles y que interactúan de manera diferente con el usuario.
 
 Un juego típico tendrá al menos una escena como el menú principal, una presentanción y una pantalla de juego.
 
-![](assets/escenas_juego.png)
+![](imagenes/assets/escenas_juego.png)
 
 ## Cambiar o reiniciar escenas
 

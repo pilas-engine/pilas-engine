@@ -1,4 +1,6 @@
-# Eventos del mouse
+---
+title: Eventos del mouse
+---
 
 En pilas llamamos "eventos" a las señales que emiten desde
 dispositivos como el mouse o teclado. Por ejemplo, un "click" del mouse es un evento al igual que la pulsación de una tecla.
@@ -74,7 +76,7 @@ Para capturar eventos en el contexto de un actor, tenemos que usar las mismas fu
 
 Por ejemplo, imaginá que estamos haciendo un juego de cartas y queremos que la carta se pueda hacer girar con un "click" de mouse y que cambie de transparencia cuando el mouse esté sobre ella:
 
-![](assets/carta_con_eventos.gif)
+![](imagenes/assets/carta_con_eventos.gif)
 
 El código del actor debería quedarnos algo similar a lo siguiente:
 

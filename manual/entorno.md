@@ -1,4 +1,6 @@
-# Entorno para colaboradores de Pilas
+---
+title: Entorno para colaboradores de Pilas
+---
 
 Si sos desarrollador y queres replicar el entorno completo para editar el código de Pilas te recomendamos una serie de pasos para tener un entorno completo de desarrollo.
 
@@ -52,11 +54,11 @@ make iniciar
 
 Deberías ver cómo se van instalando todas las dependencias dentro del directorio "node_modules". Esto puede demorar varios minutos:
 
-![nstala](assets/instalar.png)
+![](imagenes/assets/instalar.png)
 
 Una vez finalizada la instalación de dependencias podes ejecutar el comando "make". Cuando lo escribas, van a aparecer en pantalla todos los atajos que usamos dentro del proyecto:
 
-![ake-159753](assets/make-1597532.png)
+![](imagenes/assets/make-1597532.png)
 
 Obviamente en la mayoría de los casos usamos solo algunos comandos, pero siempre vamos a mantener actualizado este listado para simplificar el desarrollo.
 
@@ -68,7 +70,7 @@ make ejecutar
 
 y luego abrí esta dirección en el navegador: http://localhost:4200
 
-![avegado](assets/navegador.png)
+![](imagenes/assets/navegador.png)
 
 Ten en cuenta que el servidor de Ember va a estar en ejecución; cada vez que modifiques un archivo del código de la aplicación Ember se va a encargar de actualizar el navegador automáticamente.
 
@@ -90,7 +92,7 @@ Por ejemplo, el archivo `tests/acceptance/puede-ingresar-al-editor-test.js` se e
 
 Cada sentencia del archivo intenta simular una acción del usuario y viene acompañada de alguna validación:
 
-![ilas-engine 2018-03-20 23-44-0](assets/pilas-engine 2018-03-20 23-44-00.png)
+![](imagenes/assets/pilas-engine 2018-03-20 23-44-00.png)
 
 De esta forma, tenemos la seguridad de que podemos validar el funcionamiento de toda la herramienta de forma automatizada. Nos permite detectar errores y darnos confianza para re-estructurar o mejorar partes internas de la aplicación sabiendo qué funcionalidad podría comprometer.
 
@@ -98,7 +100,7 @@ Si ejecutas el comando "make ejecutar", y abrís la aplicación con un navegador
 
 Tendrías que ingresar a la dirección "http://localhost:4200/tests":
 
-![ilasEngine Tests 2018-03-20 23-48-3](assets/PilasEngine Tests 2018-03-20 23-48-34.png)
+![](imagenes/assets/PilasEngine Tests 2018-03-20 23-48-34.png)
 
 En la imagen marqué dos opciones que me parecen útiles para todas las personas, la primera evita que la pantalla se llene con detalles de tests que corren bien y la segunda es simplemente estética: sirve para ver cómo se ven los tests visualmente al costado de la pantalla.
 
@@ -112,14 +114,14 @@ Por ejemplo, cada vez que se ejecuta un push sobre github, un servicio llamado "
 
 Este servicio no solo ejecuta los tests, sino que nos avisa por email si alguna de las pruebas falló o si alguna fase de la instalación tuvo problemas. Además nos genera un listado histórico para corroborar si un cambio introduce algún tipo de error:
 
-![ircleCI 2018-03-20 23-53-2](assets/CircleCI 2018-03-20 23-53-29.png)
+![](imagenes/assets/CircleCI 2018-03-20 23-53-29.png)
 
 También usamos "circle-ci" cada vez que hacemos un lanzamiento estable de la herramienta para que se generen los binarios y las versiones web de la aplicación.
 
 La forma que utilizamos para marcar que Pilas se puede publicar es realizando un tag. Los tags los va a detectar circle CI para generar binarios y subir una versión actualizada de la aplicación a la web.
 
-![ilas-engine 2018-03-20 23-56-3](assets/pilas-engine 2018-03-20 23-56-30.png)Por ejemplo, en la imagen se ve el tag de la versión v2.0.25. Cuando eso sucedió, "circle-ci" generó estos archivos para que esa versión de pilas esté compilada y disponible para descargar desde aquí:
+![](imagenes/assets/pilas-engine 2018-03-20 23-56-30.png)Por ejemplo, en la imagen se ve el tag de la versión v2.0.25. Cuando eso sucedió, "circle-ci" generó estos archivos para que esa versión de pilas esté compilada y disponible para descargar desde aquí:
 
-![ilas-engine 2018-03-21 00-00-5](assets/pilas-engine 2018-03-21 00-00-56.png)
+![](imagenes/assets/pilas-engine 2018-03-21 00-00-56.png)
 
 Si bien estos pasos son automáticos, todo el detalle de lo que se debe ejecutar está en el archivo  `.circleci/config.yml`.

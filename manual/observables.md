@@ -1,10 +1,12 @@
-# Observables
+---
+title: Observables
+---
 
 Los observables te permiten visualizar rápidamente en pantalla qué valor tienen los atributos, variables o expresiones dentro de un juego.
 
 Por ejemplo, imagina que tu juego tiene un personaje que interactúa con la posición `x` e `y` del cursor del mouse. Mediante observables vas a poder agregar un visor de variables como este:
 
-![observables](observables.assets/observables.png)
+![](imagenes/observables.assets/observables.png)
 
 Es super importante poder visualizar rápidamente variables en un juego, no solo para informarse sino también para detectar errores o incluso saber si estamos accediendo a la información correcta.
 
@@ -38,4 +40,4 @@ class un_actor extends Actor {
 
 Si buscas un ejemplo aplicado de observables abrí el ejemplo angulos:
 
-![ejemplo-observable](observables.assets/ejemplo-observable.png)
+![](imagenes/observables.assets/ejemplo-observable.png)

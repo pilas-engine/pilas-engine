@@ -1,10 +1,12 @@
-# Colisiones
+---
+title: Colisiones
+---
 
 Las colisiones permiten ejecutar funciones como respuesta al contacto entre diferentes actores. Las funciones se pueden personalizar para hacer casi cualquier cosa: reproducir un sonido para magnificar el impacto, eliminar alguno de los actores en contacto, emitir efectos etc…
 
 Por ejemplo, imaginá que tenemos estos tres actores:
 
-![olisiones.md 2018-04-11 23-53-0](assets/colisiones.md 2018-04-11 23-53-00.png)
+![](imagenes/assets/colisiones.md 2018-04-11 23-53-00.png)
 
 Cuando el juego se ejecute, la plataforma va a quedar fija en pantalla. Mientras que la pelota y la caja van a moverse hacia abajo y colisionarán.
 

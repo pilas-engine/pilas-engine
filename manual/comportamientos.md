@@ -1,4 +1,6 @@
-# Comportamientos
+---
+title: Comportamientos
+---
 
 En el desarrollo de videojuegos es conveniente tener una forma de indicarle a los actores una rutina o tarea para que la realicen.
 

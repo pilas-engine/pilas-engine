@@ -1,4 +1,6 @@
-# Etiquetas
+---
+title: Etiquetas
+---
 
 Las etiquetas son útiles para clasificar actores y simplificar interacciones.
 
@@ -6,7 +8,7 @@ Por ejemplo, en un juego podríamos tener 10, 20 o 30 actores diferentes que ten
 
 Las etiquetas se pueden definir directamente en el inspector de pilas:
 
-![ilasEngine 2018-03-25 22-40-0](assets/PilasEngine 2018-03-25 22-40-02.png)
+![](imagenes/assets/PilasEngine 2018-03-25 22-40-02.png)
 
 O bien, también se puede directamente desde el editor código usando el atributo **etiqueta** así:
 

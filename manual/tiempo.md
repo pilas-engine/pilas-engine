@@ -1,4 +1,8 @@
-# Manejo de tiempo
+---
+title: Manejo de tiempo
+---
+
+
 
 Pilas ofrece varias formas de ejecutar funciones cada determinado tiempo. Esto es útil para crear enemigos, crear relojes para hacer más desafiante un juego o incluso para aumentar la dificultad de un juego.
 
@@ -35,7 +39,7 @@ pilas.cada(0.5, () => {
 
 Si ejecutas esas instrucciones, vas a ver en pantalla algo así. Cada medio segundo se creará un actor pelota en una posición diferente:
 
-![PilasEngine_tiempo](tiempo.assets/PilasEngine_tiempo.png)
+![](imagenes/tiempo.assets/PilasEngine_tiempo.png)
 
 ## Cancelar repeticiones o eliminar temporizadores
 

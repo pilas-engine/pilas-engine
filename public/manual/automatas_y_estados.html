@@ -1,559 +1,121 @@
-
-<!DOCTYPE HTML>
-<html lang="es" >
-    <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Autómatas y estados · Manual de Pilas Engine 2</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        <meta name="author" content="El equipo de Pilas Engine">
-        
-        
-    
-    <link rel="stylesheet" href="gitbook/style.css">
-
-    
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
-
-    
-
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="animaciones.html" />
-    
-    
-    <link rel="prev" href="interprete.html" />
-    
-
-    </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Escribe para buscar" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Introducción
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="primeros_pasos.html">
-            
-                <a href="primeros_pasos.html">
-            
-                    
-                    Primeros pasos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="interprete.html">
-            
-                <a href="interprete.html">
-            
-                    
-                    El intérprete
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.4" data-path="automatas_y_estados.html">
-            
-                <a href="automatas_y_estados.html">
-            
-                    
-                    Autómatas y estados
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="animaciones.html">
-            
-                <a href="animaciones.html">
-            
-                    
-                    Animaciones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="camara.html">
-            
-                <a href="camara.html">
-            
-                    
-                    Cámara
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="recorridos.html">
-            
-                <a href="recorridos.html">
-            
-                    
-                    Recorridos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="etiquetas.html">
-            
-                <a href="etiquetas.html">
-            
-                    
-                    Etiquetas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="habilidades.html">
-            
-                <a href="habilidades.html">
-            
-                    
-                    Habilidades
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.10" data-path="comportamientos.html">
-            
-                <a href="comportamientos.html">
-            
-                    
-                    Comportamientos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.11" data-path="azar.html">
-            
-                <a href="azar.html">
-            
-                    
-                    Azar o cálculos aleatorios
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.12" data-path="observables.html">
-            
-                <a href="observables.html">
-            
-                    
-                    Observables
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.13" data-path="tiempo.html">
-            
-                <a href="tiempo.html">
-            
-                    
-                    Manejo de tiempo
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.14" data-path="angulos-distancias.html">
-            
-                <a href="angulos-distancias.html">
-            
-                    
-                    Angulos y distancias
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.15" data-path="colisiones.html">
-            
-                <a href="colisiones.html">
-            
-                    
-                    Colisiones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.16" data-path="mensajes.html">
-            
-                <a href="mensajes.html">
-            
-                    
-                    Mensajes
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.17" data-path="escenas.html">
-            
-                <a href="escenas.html">
-            
-                    
-                    Escenas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.18" data-path="eventos-de-mouse.html">
-            
-                <a href="eventos-de-mouse.html">
-            
-                    
-                    Eventos de mouse o touch
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.19" data-path="uso-del-teclado.html">
-            
-                <a href="uso-del-teclado.html">
-            
-                    
-                    Uso del teclado
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.20" data-path="dibujado_en_pantalla.html">
-            
-                <a href="dibujado_en_pantalla.html">
-            
-                    
-                    Dibujado simple en pantalla
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.21" data-path="exportar_juegos.html">
-            
-                <a href="exportar_juegos.html">
-            
-                    
-                    Cómo exportar juegos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.22" data-path="pilas_como_biblioteca.html">
-            
-                <a href="pilas_como_biblioteca.html">
-            
-                    
-                    Pilas como biblioteca
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="colaborar.html">
-            
-                <a href="colaborar.html">
-            
-                    
-                    Colaborar con pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="entorno.html">
-            
-                <a href="entorno.html">
-            
-                    
-                    Entorno para colaboradores de Pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Publicado con GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Autómatas y estados</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <h1 id="aut&#xF3;matas-y-estados">Aut&#xF3;matas y estados</h1>
-<p>Un desaf&#xED;o muy com&#xFA;n en el desarrollo de juegos es lograr que los actores puedan mostrar animaciones y reaccionar de acuerdo a modos particulares: saltar, caminar, quedarse parado, pediendo etc&#x2026;</p>
-<p>Para estas cosas Pilas incorpora un mecanismo de aut&#xF3;matas y estados.</p>
-<p>Un actor puede estar en un estado a la vez, por ejemplo, &quot;parado&quot; podr&#xED;a ser el estado de un actor en un juego de plataformas. Cuando el usuario pulsa hacia arriba, podr&#xED;a pasar al estado &quot;saltando&quot;, pero solo cuando toca el piso podr&#xED;a pasar al estado &quot;parado&quot; nuevamente.</p>
-<p>Este modelo de estados y transiciones es lo que llamamos un aut&#xF3;mata, y si bien puede parece algo complejo al principio, con el tiempo notar&#xE1;s que se trata de algo muy pr&#xE1;ctico y sencillo. </p>
-<p>Para crear un estado simplemente tenemos que editar el c&#xF3;digo de un actor y asignarle un valor a la propiedad &quot;estado&quot; y crear dos m&#xE9;todos para que pilas sepa a qu&#xE9; m&#xE9;todos llamar cuando el actor est&#xE9; en ese estado:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">class</span> MiActor extends Actor {
-    iniciar() {
-        <span class="hljs-keyword">this</span>.estado = <span class="hljs-string">&quot;parado&quot;</span>;
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Autómatas y estados</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
     }
-
-    actualizar() {
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
-
-    parado_iniciar() {
-        <span class="hljs-keyword">this</span>.animacion = <span class="hljs-string">&quot;parado&quot;</span>;
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cccccc; background-color: #303030; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
+    code span.al { color: #ffcfaf; } /* Alert */
+    code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+    code span.at { } /* Attribute */
+    code span.bn { color: #dca3a3; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #f0dfaf; } /* ControlFlow */
+    code span.ch { color: #dca3a3; } /* Char */
+    code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+    code span.co { color: #7f9f7f; } /* Comment */
+    code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+    code span.do { color: #7f9f7f; } /* Documentation */
+    code span.dt { color: #dfdfbf; } /* DataType */
+    code span.dv { color: #dcdccc; } /* DecVal */
+    code span.er { color: #c3bf9f; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #c0bed1; } /* Float */
+    code span.fu { color: #efef8f; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+    code span.kw { color: #f0dfaf; } /* Keyword */
+    code span.op { color: #f0efd0; } /* Operator */
+    code span.ot { color: #efef8f; } /* Other */
+    code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+    code span.sc { color: #dca3a3; } /* SpecialChar */
+    code span.ss { color: #cc9393; } /* SpecialString */
+    code span.st { color: #cc9393; } /* String */
+    code span.va { } /* Variable */
+    code span.vs { color: #cc9393; } /* VerbatimString */
+    code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="estilo.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <div class="tc">
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Autómatas y estados</h1>
+</header>
+<p>Un desafío muy común en el desarrollo de juegos es lograr que los actores puedan mostrar animaciones y reaccionar de acuerdo a modos particulares: saltar, caminar, quedarse parado, pediendo etc…</p>
+<p>Para estas cosas Pilas incorpora un mecanismo de autómatas y estados.</p>
+<p>Un actor puede estar en un estado a la vez, por ejemplo, “parado” podría ser el estado de un actor en un juego de plataformas. Cuando el usuario pulsa hacia arriba, podría pasar al estado “saltando”, pero solo cuando toca el piso podría pasar al estado “parado” nuevamente.</p>
+<p>Este modelo de estados y transiciones es lo que llamamos un autómata, y si bien puede parece algo complejo al principio, con el tiempo notarás que se trata de algo muy práctico y sencillo.</p>
+<p>Para crear un estado simplemente tenemos que editar el código de un actor y asignarle un valor a la propiedad “estado” y crear dos métodos para que pilas sepa a qué métodos llamar cuando el actor esté en ese estado:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>class MiActor extends Actor {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    iniciar() {</span>
+<span id="cb1-3"><a href="#cb1-3"></a>        this<span class="op">.</span><span class="at">estado</span> <span class="op">=</span> <span class="st">&quot;parado&quot;</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    }</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    actualizar() {</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    }</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    parado_iniciar() {</span>
+<span id="cb1-10"><a href="#cb1-10"></a>        this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;parado&quot;</span><span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    }</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    </span>
+<span id="cb1-13"><a href="#cb1-13"></a>    parado_actualizar() {</span>
+<span id="cb1-14"><a href="#cb1-14"></a>        <span class="co">// código que se ejecutará 60 veces por segundo</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>        <span class="co">// cuando el actor esté en el estado &quot;parado&quot;.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    }</span>
+<span id="cb1-17"><a href="#cb1-17"></a>}</span></code></pre></div>
+<div class="tc">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
 
-    parado_actualizar() {
-          <span class="hljs-comment">// c&#xF3;digo que se ejecutar&#xE1; 60 veces por segundo</span>
-        <span class="hljs-comment">// cuando el actor est&#xE9; en el estado &quot;parado&quot;.</span>
-    }
-}
-</code></pre>
-
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
 </div>
-
-                        </div>
-                    </div>
-                
-            </div>
-
-            
-                
-                <a href="interprete.html" class="navigation navigation-prev " aria-label="Previous page: El intérprete">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="animaciones.html" class="navigation navigation-next " aria-label="Next page: Animaciones">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
-    </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Autómatas y estados","level":"1.4","depth":1,"next":{"title":"Animaciones","level":"1.5","depth":1,"path":"animaciones.md","ref":"animaciones.md","articles":[]},"previous":{"title":"El intérprete","level":"1.3","depth":1,"path":"interprete.md","ref":"interprete.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"automatas_y_estados.md","mtime":"2019-05-11T00:43:53.097Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-19T22:27:28.096Z"},"basePath":".","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="gitbook/gitbook.js"></script>
-    <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
-    </body>
+</body>
 </html>
-

@@ -1,4 +1,6 @@
-# Cámara
+---
+title: Cámara
+---
 
 Si bien el juego tendrá un tamaño fijo en la pantalla, pilas incorpora una cámara que nos permite realizar desplazamientos para mostrar otras partes de la escena.
 
@@ -8,7 +10,7 @@ En esta sección vamos a controlar cámara de la escena tanto desde el editor co
 
 Para desplazar la cámara simplemente tenemos que pulsar y arrastrar con el mouse sobre el fondo de la escena:
 
-![movimiento](camara.assets/movimiento.gif)
+![](imagenes/camara.assets/movimiento.gif)
 
 Vas a notar que en la escena el movimiento de la cámara se refleja en los atributos "Cámara x" y "Cámara Y".
 

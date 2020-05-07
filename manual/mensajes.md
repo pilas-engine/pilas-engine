@@ -1,4 +1,6 @@
-# Mensajes entre actores y escenas
+---
+title: Mensajes entre actores y escenas
+---
 
 Dentro de un juego se puede producir varias comunicaciones
 entre actores. Si un personaje protagonista pierde, tal vez queremos

@@ -1,4 +1,6 @@
-# Ángulos y distancias
+---
+title: Ángulos y distancias
+---
 
 Pilas trae varias funciones para realizar cálculos geométricos sencillos, como
 obtener la distancia entre actores o incluso el ángulos entre ellos.
@@ -10,7 +12,7 @@ puntero del mouse: Observa uno de los ejemplos que trae pilas, el usuario
 puede mover el puntero del mouse y observar cómo el cañon ajusta su rotación
 correctamente:
 
-![angulo](imagenes/angulo.gif)
+![](imagenes/angulos/angulo.gif)
 
 Este ejemplo hace uso de la función `obtener_angulo_entre_puntos` así:
 
@@ -35,7 +37,7 @@ Un ejemplo que muestra esto es `angulo-entre-actores`, que nos muestra una
 nave mirando constantemente al centro de la pantalla, donde está el actor
 planeta:
 
-![angulo-entre-actores](imagenes/angulo-entre-actores.jpg)
+![](imagenes/angulos/angulo-entre-actores.jpg)
 
 Si observas el código, vas a encontrar una llamada a
 `obtener_angulo_entre_actores` similar a la siguiente:

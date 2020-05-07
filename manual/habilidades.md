@@ -1,4 +1,6 @@
-# Habilidades
+---
+title: Habilidades
+---
 
 Cuando realizamos juegos hay ciertos comportamientos que son tan comunes
 que ni siquiera necesitamos programarlos escribiendo código.

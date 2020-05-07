@@ -1,4 +1,6 @@
-# Recorridos
+---
+title: Recorridos
+---
 
 Los recorridos nos permite realizar movimientos de actores
 de manera muy simple, lo que tenemos que hacer es enumerar
@@ -17,7 +19,7 @@ queremos que recorra. Por ejemplo, que primero visite la posición
 luego a la derecha `(x=200, y=0)` y por último que regrese al punto
 de origen `(x=0, y=0)`:
 
-![movimiento](recorridos.assets/posiciones-1.png)
+![](imagenes/recorridos.assets/posiciones-1.png)
 
 Y por último, tenemos que llamar a la función `hacer_recorrido` de
 esta forma dentro de una actor:
@@ -42,12 +44,12 @@ Y el último argumento indica si el actor deber rotar en dirección al camino
 o no. Es útil poner este argumento en `true` cuando el actor es una nave vista
 desde arriba o un automóvil:
 
-![recorrido-con-orientacion](recorridos.assets/recorrido-con-orientacion.png)
+![](imagenes/recorridos.assets/recorrido-con-orientacion.png)
 
 Ten en cuenta que el actor va a visitar todos los puntos pero de manera
 gradual, siguiendo el recorrido pero realizando una curva de movimiento
 muy suave:
 
-![movimiento](recorridos.assets/posiciones-2.png)
+![](imagenes/recorridos.assets/posiciones-2.png)
 
-![movimiento](recorridos.assets/posiciones-3.png)
+![](imagenes/recorridos.assets/posiciones-3.png)

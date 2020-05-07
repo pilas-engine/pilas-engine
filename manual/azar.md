@@ -1,4 +1,6 @@
-# Azar o cálculos aleatorios
+---
+title: Azar o cálculos aleatorios
+---
 
 Una utilidad muy utilizada en los juegos son las funciones para obtener
 números aleatorios. Pilas incluye una función muy simple para esto llamada

@@ -1,613 +1,162 @@
-
-<!DOCTYPE HTML>
-<html lang="es" >
-    <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Manejo de tiempo · Manual de Pilas Engine 2</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        <meta name="author" content="El equipo de Pilas Engine">
-        
-        
-    
-    <link rel="stylesheet" href="gitbook/style.css">
-
-    
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
-
-    
-
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="angulos-distancias.html" />
-    
-    
-    <link rel="prev" href="observables.html" />
-    
-
-    </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Escribe para buscar" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Introducción
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="primeros_pasos.html">
-            
-                <a href="primeros_pasos.html">
-            
-                    
-                    Primeros pasos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="interprete.html">
-            
-                <a href="interprete.html">
-            
-                    
-                    El intérprete
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="automatas_y_estados.html">
-            
-                <a href="automatas_y_estados.html">
-            
-                    
-                    Autómatas y estados
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="animaciones.html">
-            
-                <a href="animaciones.html">
-            
-                    
-                    Animaciones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="camara.html">
-            
-                <a href="camara.html">
-            
-                    
-                    Cámara
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="recorridos.html">
-            
-                <a href="recorridos.html">
-            
-                    
-                    Recorridos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="etiquetas.html">
-            
-                <a href="etiquetas.html">
-            
-                    
-                    Etiquetas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="habilidades.html">
-            
-                <a href="habilidades.html">
-            
-                    
-                    Habilidades
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.10" data-path="comportamientos.html">
-            
-                <a href="comportamientos.html">
-            
-                    
-                    Comportamientos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.11" data-path="azar.html">
-            
-                <a href="azar.html">
-            
-                    
-                    Azar o cálculos aleatorios
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.12" data-path="observables.html">
-            
-                <a href="observables.html">
-            
-                    
-                    Observables
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.13" data-path="tiempo.html">
-            
-                <a href="tiempo.html">
-            
-                    
-                    Manejo de tiempo
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.14" data-path="angulos-distancias.html">
-            
-                <a href="angulos-distancias.html">
-            
-                    
-                    Angulos y distancias
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.15" data-path="colisiones.html">
-            
-                <a href="colisiones.html">
-            
-                    
-                    Colisiones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.16" data-path="mensajes.html">
-            
-                <a href="mensajes.html">
-            
-                    
-                    Mensajes
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.17" data-path="escenas.html">
-            
-                <a href="escenas.html">
-            
-                    
-                    Escenas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.18" data-path="eventos-de-mouse.html">
-            
-                <a href="eventos-de-mouse.html">
-            
-                    
-                    Eventos de mouse o touch
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.19" data-path="uso-del-teclado.html">
-            
-                <a href="uso-del-teclado.html">
-            
-                    
-                    Uso del teclado
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.20" data-path="dibujado_en_pantalla.html">
-            
-                <a href="dibujado_en_pantalla.html">
-            
-                    
-                    Dibujado simple en pantalla
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.21" data-path="exportar_juegos.html">
-            
-                <a href="exportar_juegos.html">
-            
-                    
-                    Cómo exportar juegos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.22" data-path="pilas_como_biblioteca.html">
-            
-                <a href="pilas_como_biblioteca.html">
-            
-                    
-                    Pilas como biblioteca
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="colaborar.html">
-            
-                <a href="colaborar.html">
-            
-                    
-                    Colaborar con pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="entorno.html">
-            
-                <a href="entorno.html">
-            
-                    
-                    Entorno para colaboradores de Pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Publicado con GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Manejo de tiempo</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <h1 id="manejo-de-tiempo">Manejo de tiempo</h1>
-<p>Pilas ofrece varias formas de ejecutar funciones cada determinado tiempo. Esto es &#xFA;til para crear enemigos, crear relojes para hacer m&#xE1;s desafiante un juego o incluso para aumentar la dificultad de un juego.</p>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Manejo de tiempo</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cccccc; background-color: #303030; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ffcfaf; } /* Alert */
+    code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+    code span.at { } /* Attribute */
+    code span.bn { color: #dca3a3; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #f0dfaf; } /* ControlFlow */
+    code span.ch { color: #dca3a3; } /* Char */
+    code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+    code span.co { color: #7f9f7f; } /* Comment */
+    code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+    code span.do { color: #7f9f7f; } /* Documentation */
+    code span.dt { color: #dfdfbf; } /* DataType */
+    code span.dv { color: #dcdccc; } /* DecVal */
+    code span.er { color: #c3bf9f; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #c0bed1; } /* Float */
+    code span.fu { color: #efef8f; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+    code span.kw { color: #f0dfaf; } /* Keyword */
+    code span.op { color: #f0efd0; } /* Operator */
+    code span.ot { color: #efef8f; } /* Other */
+    code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+    code span.sc { color: #dca3a3; } /* SpecialChar */
+    code span.ss { color: #cc9393; } /* SpecialString */
+    code span.st { color: #cc9393; } /* String */
+    code span.va { } /* Variable */
+    code span.vs { color: #cc9393; } /* VerbatimString */
+    code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="estilo.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <div class="tc">
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Manejo de tiempo</h1>
+</header>
+<p>Pilas ofrece varias formas de ejecutar funciones cada determinado tiempo. Esto es útil para crear enemigos, crear relojes para hacer más desafiante un juego o incluso para aumentar la dificultad de un juego.</p>
 <h2 id="funciones-manejar-el-tiempo">Funciones manejar el tiempo</h2>
 <p>Hay dos funciones principales en el temporizador de pilas:</p>
 <ul>
-<li><code>pilas.luego(cantidad_de_segundos_a_esperar, funci&#xF3;n)</code></li>
-<li><code>pilas.cada(segundos_para_el_intervalo, funci&#xF3;n, veces_a_repetir: opcional)</code></li>
+<li><code>pilas.luego(cantidad_de_segundos_a_esperar, función)</code></li>
+<li><code>pilas.cada(segundos_para_el_intervalo, función, veces_a_repetir: opcional)</code></li>
 </ul>
-<p>La primer funci&#xF3;n permite ejecutar una funci&#xF3;n luego de un periodo de tiempo. Por ejemplo, si queremos hacer que un actor diga algo luego de 3 segundos podemos hacerlo as&#xED;:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> mi_actor = pilas.actores.aceituna();
-
-pilas.luego(<span class="hljs-number">3</span>, () =&gt; {
-  mi_actor.decir(<span class="hljs-string">&quot;&#xA1;Han pasado 3 segundos!&quot;</span>);
-});
-</code></pre>
-<p>Hay que tener en cuenta que esta funci&#xF3;n se ejecutar&#xE1; una sola vez.</p>
-<p>La segunda funci&#xF3;n, llamada <code>pilas.cada</code>, permite invocar una funci&#xF3;n cada determinada cantidad de segundos, muy similar a la anterior, pero invoca la funci&#xF3;n que le pidamos varias veces.</p>
-<p>Por ejemplo, imagina que queremos crear actores <code>pelota</code> cada medio segundo, podemos hacer algo as&#xED;:</p>
-<pre><code class="lang-typescript">pilas.cada(<span class="hljs-number">0.5</span>, () =&gt; {
-  <span class="hljs-keyword">var</span> pelota = pilas.actores.pelota();
-  pelota.y = <span class="hljs-number">100</span>;
-  pelota.x = pilas.azar(<span class="hljs-number">-200</span>, <span class="hljs-number">200</span>);
-});
-</code></pre>
-<p>Si ejecutas esas instrucciones, vas a ver en pantalla algo as&#xED;. Cada medio segundo se crear&#xE1; un actor pelota en una posici&#xF3;n diferente:</p>
-<p><img src="tiempo.assets/PilasEngine_tiempo.png" alt="PilasEngine_tiempo"></p>
+<p>La primer función permite ejecutar una función luego de un periodo de tiempo. Por ejemplo, si queremos hacer que un actor diga algo luego de 3 segundos podemos hacerlo así:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>let mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">aceituna</span>()<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>pilas<span class="op">.</span><span class="fu">luego</span>(<span class="dv">3</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  mi_actor<span class="op">.</span><span class="fu">decir</span>(<span class="st">&quot;¡Han pasado 3 segundos!&quot;</span>)<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Hay que tener en cuenta que esta función se ejecutará una sola vez.</p>
+<p>La segunda función, llamada <code>pilas.cada</code>, permite invocar una función cada determinada cantidad de segundos, muy similar a la anterior, pero invoca la función que le pidamos varias veces.</p>
+<p>Por ejemplo, imagina que queremos crear actores <code>pelota</code> cada medio segundo, podemos hacer algo así:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>pilas<span class="op">.</span><span class="fu">cada</span>(<span class="fl">0.5</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  var pelota <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">pelota</span>()<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  pelota<span class="op">.</span><span class="at">y</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  pelota<span class="op">.</span><span class="at">x</span> <span class="op">=</span> pilas<span class="op">.</span><span class="fu">azar</span>(<span class="op">-</span><span class="dv">200</span><span class="op">,</span> <span class="dv">200</span>)<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Si ejecutas esas instrucciones, vas a ver en pantalla algo así. Cada medio segundo se creará un actor pelota en una posición diferente:</p>
+<p><img src="imagenes/tiempo.assets/PilasEngine_tiempo.png" /></p>
 <h2 id="cancelar-repeticiones-o-eliminar-temporizadores">Cancelar repeticiones o eliminar temporizadores</h2>
-<p>Si utilizas la funci&#xF3;n <code>pilas.cada</code> para repetir una acci&#xF3;n varias veces, es
-probable que ante una determinada condici&#xF3;n quieras dejas de repetir
-la ejecuci&#xF3;n de la funci&#xF3;n.</p>
-<p>Una forma de lograr esto es dici&#xE9;ndole a pilas cuantas veces tiene que repetir
-la funci&#xF3;n, por ejemplo, para llamar 5 veces una funci&#xF3;n cada dos segundos
-deber&#xED;as llamar a la funci&#xF3;n as&#xED;:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">var</span> actor = pilas.actores.aceituna();
-
-pilas.cada(
-  <span class="hljs-number">2</span>,
-  () =&gt; {
-    actor.decir(<span class="hljs-string">&quot;prueba&quot;</span>);
-  },
-  <span class="hljs-number">5</span>
-);
-</code></pre>
-<p>Otra opci&#xF3;n, es detener el temporizador directamente desde la funci&#xF3;n
-retornando <code>true</code>:</p>
-<p>Por ejemplo, imagina que tienes un actor que se mueve 50 pixeles a la derecha
-cada 2 segundos, pero que quieres que deje de moverse cuando llegue a la
-posici&#xF3;n x igual a 200. Podr&#xED;as implementarlo de esta forma:</p>
+<p>Si utilizas la función <code>pilas.cada</code> para repetir una acción varias veces, es probable que ante una determinada condición quieras dejas de repetir la ejecución de la función.</p>
+<p>Una forma de lograr esto es diciéndole a pilas cuantas veces tiene que repetir la función, por ejemplo, para llamar 5 veces una función cada dos segundos deberías llamar a la función así:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>var actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">aceituna</span>()<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>pilas<span class="op">.</span><span class="fu">cada</span>(</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dv">2</span><span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    actor<span class="op">.</span><span class="fu">decir</span>(<span class="st">&quot;prueba&quot;</span>)<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  }<span class="op">,</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="dv">5</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>)<span class="op">;</span></span></code></pre></div>
+<p>Otra opción, es detener el temporizador directamente desde la función retornando <code>true</code>:</p>
+<p>Por ejemplo, imagina que tienes un actor que se mueve 50 pixeles a la derecha cada 2 segundos, pero que quieres que deje de moverse cuando llegue a la posición x igual a 200. Podrías implementarlo de esta forma:</p>
 <pre><code>var actor = pilas.actores.aceituna();
 
 pilas.cada(2, () =&gt; {
     actor.x += 50;
 
     if (actor.x &gt; 200) {
-      // retornar este valor &apos;true&apos; hace que la funci&#xF3;n deje de llamarse cada
+      // retornar este valor &#39;true&#39; hace que la función deje de llamarse cada
       // dos segundos.
       return true;
     }
 
-  });
-</code></pre><h2 id="m&#xE9;todos-especiales">M&#xE9;todos especiales</h2>
-<p>Tambi&#xE9;n existe un m&#xE9;todo llamado <code>cada_segundo</code> que los actores pueden utilizar
-para disparar una acci&#xF3;n cada vez que transcurre un segundo en el juego. Por
-ejemplo, si queremos crear un actor que aumente su tama&#xF1;o cada un segundo
-podemos definir el m&#xE9;todo as&#xED;:</p>
+  });</code></pre>
+<h2 id="métodos-especiales">Métodos especiales</h2>
+<p>También existe un método llamado <code>cada_segundo</code> que los actores pueden utilizar para disparar una acción cada vez que transcurre un segundo en el juego. Por ejemplo, si queremos crear un actor que aumente su tamaño cada un segundo podemos definir el método así:</p>
 <pre><code>class caja extends Actor {
   cada_segundo() {
     this.escala += 0.5;
   }
-}
-</code></pre><p>O bien, si ya tenemos la referencia al actor tambi&#xE9;n ser&#xED;a v&#xE1;lido escribir
-algo as&#xED;:</p>
+}</code></pre>
+<p>O bien, si ya tenemos la referencia al actor también sería válido escribir algo así:</p>
 <pre><code>var mi_actor = pilas.obtener_actor_por_nombre(&quot;caja&quot;);
 
 mi_actor.cada_segundo = () =&gt; {
   mi_actor.escala += 0.5;
-  mi_actor.decir(&quot;&#xA1;pas&#xF3; un segundo!&quot;);
-}
-</code></pre>
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
+  mi_actor.decir(&quot;¡pasó un segundo!&quot;);
+}</code></pre>
+<div class="tc">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
 </div>
-
-                        </div>
-                    </div>
-                
-            </div>
-
-            
-                
-                <a href="observables.html" class="navigation navigation-prev " aria-label="Previous page: Observables">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="angulos-distancias.html" class="navigation navigation-next " aria-label="Next page: Angulos y distancias">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
-    </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Manejo de tiempo","level":"1.13","depth":1,"next":{"title":"Angulos y distancias","level":"1.14","depth":1,"path":"angulos-distancias.md","ref":"angulos-distancias.md","articles":[]},"previous":{"title":"Observables","level":"1.12","depth":1,"path":"observables.md","ref":"observables.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"tiempo.md","mtime":"2019-11-20T14:03:31.794Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-19T22:27:28.096Z"},"basePath":".","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="gitbook/gitbook.js"></script>
-    <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
-    </body>
+</body>
 </html>
-

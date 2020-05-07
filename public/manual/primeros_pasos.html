@@ -1,579 +1,78 @@
-
-<!DOCTYPE HTML>
-<html lang="es" >
-    <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Primeros pasos · Manual de Pilas Engine 2</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        <meta name="author" content="El equipo de Pilas Engine">
-        
-        
-    
-    <link rel="stylesheet" href="gitbook/style.css">
-
-    
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
-
-    
-
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="interprete.html" />
-    
-    
-    <link rel="prev" href="./" />
-    
-
-    </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Escribe para buscar" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Introducción
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.2" data-path="primeros_pasos.html">
-            
-                <a href="primeros_pasos.html">
-            
-                    
-                    Primeros pasos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="interprete.html">
-            
-                <a href="interprete.html">
-            
-                    
-                    El intérprete
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="automatas_y_estados.html">
-            
-                <a href="automatas_y_estados.html">
-            
-                    
-                    Autómatas y estados
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="animaciones.html">
-            
-                <a href="animaciones.html">
-            
-                    
-                    Animaciones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="camara.html">
-            
-                <a href="camara.html">
-            
-                    
-                    Cámara
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="recorridos.html">
-            
-                <a href="recorridos.html">
-            
-                    
-                    Recorridos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="etiquetas.html">
-            
-                <a href="etiquetas.html">
-            
-                    
-                    Etiquetas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="habilidades.html">
-            
-                <a href="habilidades.html">
-            
-                    
-                    Habilidades
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.10" data-path="comportamientos.html">
-            
-                <a href="comportamientos.html">
-            
-                    
-                    Comportamientos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.11" data-path="azar.html">
-            
-                <a href="azar.html">
-            
-                    
-                    Azar o cálculos aleatorios
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.12" data-path="observables.html">
-            
-                <a href="observables.html">
-            
-                    
-                    Observables
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.13" data-path="tiempo.html">
-            
-                <a href="tiempo.html">
-            
-                    
-                    Manejo de tiempo
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.14" data-path="angulos-distancias.html">
-            
-                <a href="angulos-distancias.html">
-            
-                    
-                    Angulos y distancias
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.15" data-path="colisiones.html">
-            
-                <a href="colisiones.html">
-            
-                    
-                    Colisiones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.16" data-path="mensajes.html">
-            
-                <a href="mensajes.html">
-            
-                    
-                    Mensajes
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.17" data-path="escenas.html">
-            
-                <a href="escenas.html">
-            
-                    
-                    Escenas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.18" data-path="eventos-de-mouse.html">
-            
-                <a href="eventos-de-mouse.html">
-            
-                    
-                    Eventos de mouse o touch
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.19" data-path="uso-del-teclado.html">
-            
-                <a href="uso-del-teclado.html">
-            
-                    
-                    Uso del teclado
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.20" data-path="dibujado_en_pantalla.html">
-            
-                <a href="dibujado_en_pantalla.html">
-            
-                    
-                    Dibujado simple en pantalla
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.21" data-path="exportar_juegos.html">
-            
-                <a href="exportar_juegos.html">
-            
-                    
-                    Cómo exportar juegos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.22" data-path="pilas_como_biblioteca.html">
-            
-                <a href="pilas_como_biblioteca.html">
-            
-                    
-                    Pilas como biblioteca
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="colaborar.html">
-            
-                <a href="colaborar.html">
-            
-                    
-                    Colaborar con pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="entorno.html">
-            
-                <a href="entorno.html">
-            
-                    
-                    Entorno para colaboradores de Pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Publicado con GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Primeros pasos</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <h1 id="primeros-pasos">Primeros pasos</h1>
-<p>Pilas es un herramienta dise&#xF1;ada para aprender a programar realizando videojuegos, as&#xED; que creemos que la mejor forma de comenzar es haciendo un peque&#xF1;o juego. &#xA1;Veamos c&#xF3;mo hacerlo!</p>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Primeros pasos</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="estilo.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <div class="tc">
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Primeros pasos</h1>
+</header>
+<p>Pilas es un herramienta diseñada para aprender a programar realizando videojuegos, por eso vamos a comenzar haciendo un pequeño juego paso a paso.</p>
 <p>Cuando se abre Pilas por primera vez, aparece esta pantalla que llamamos asistente:</p>
-<p><img src="imagenes/principal.png" alt="principal"></p>
-<p>Desde aqu&#xED; se pueden acceder a todas las secciones de pilas, te recomendamos inpeccionarlas al menos una vez para familiarizarte con el entorno.</p>
-<p>Sin embargo, para comenzar a dar los primeros pasos con este tutorial vamos a ir directo por la opci&#xF3;n principal: &quot;<strong>Abrir el editor</strong>&quot;</p>
-<p>Desde esta secci&#xF3;n, vas a ver una escena principal y varios paneles:</p>
-<p><img src="imagenes/el-editor.png" alt="el-editor"></p>
-<p>A principio puede parecer un poco abrumador&#x2026; pero vamos a ir paso a paso:</p>
-<p><img src="imagenes/editor-enumerado.png" alt="editor-enumerado"></p>
-<p>La imagen anterior est&#xE1; enumerada para describir los panales principales:</p>
-<ol>
-<li><p>El panel de la izquierda es el panel de escenas y actores, desde ah&#xED; vas a poder crear escenas, agregar actores a la escena o incluso eliminar cualquiera de las dos cosas. Desde esta secci&#xF3;n tambi&#xE9;n se pueden editar las propiedades de cualquier cosas que selecciones (vamos a ver esto m&#xE1;s adelante).</p>
-</li>
-<li><p>Justo arriba del area de juego, aparece un bot&#xF3;n con la leyenda &quot;Ejecutar&quot;, si pulsas ese bot&#xF3;n vas a ver el juego en funcionamiento. Desde aqu&#xED; tambi&#xE9;n se va a poder cancelar la ejecuci&#xF3;n y otras cosas m&#xE1;s (las vamos a ver a continuaci&#xF3;n).</p>
-</li>
-<li><p>A la derecha de la pantalla aparece el editor de c&#xF3;digo de pilas, desde donde se puede describir ex&#xE1;camente qu&#xE9; queremos que haga cada actor o escena.</p>
-</li>
-<li><p>Por &#xFA;ltimo, arriba a la derecha aparecen dos interruptores, estos interruptores permiten ocultar los paneles para ganar un poco de espacio mientras est&#xE1;s usando la herramienta. Asegurate de tener todos los paneles visibles mientras realices estos primeros pasos.</p>
-</li>
+<p><img src="imagenes/primeros_pasos/principal.png" /></p>
+<p>Desde aquí se pueden acceder a todas las secciones de pilas, te recomendamos inspeccionarlas al menos una vez para familiarizarte con el entorno.</p>
+<p>Para comenzar a dar los primeros pasos con este tutorial vamos a abrir opción principal: “<strong>Abrir el editor</strong>”</p>
+<p>Desde esta sección, vas a ver una escena principal y varios paneles:</p>
+<p><img src="imagenes/primeros_pasos/el-editor.png" /></p>
+<p>Al principio puede parecer un poco abrumador… pero vamos a ir paso a paso:</p>
+<p><img src="imagenes/primeros_pasos/editor-enumerado.png" /></p>
+<p>La imagen anterior está enumerada para describir los panales principales:</p>
+<ol type="1">
+<li><p>El panel de la izquierda es el panel de escenas y actores, desde ahí vas a poder crear escenas, agregar actores a la escena o incluso eliminar cualquiera de las dos cosas. Desde esta sección también se pueden editar las propiedades de cualquier cosas que selecciones (vamos a ver esto más adelante).</p></li>
+<li><p>Justo arriba del area de juego, aparece un botón con la leyenda “Ejecutar”, si pulsas ese botón vas a ver el juego en funcionamiento. Desde aquí también se va a poder cancelar la ejecución y otras cosas más (las vamos a ver a continuación).</p></li>
+<li><p>A la derecha de la pantalla aparece el editor de código de pilas, desde donde se puede describir exactamente qué queremos que haga cada actor o escena.</p></li>
 </ol>
-<h2 id="&#xA1;pongamos-en-ejecuci&#xF3;n-el-juego">&#xA1;Pongamos en ejecuci&#xF3;n el juego!</h2>
-<p>El bot&#xF3;n &quot;ejecutar&quot; que aparece arriba en el editor es uno de los m&#xE1;s utilizados, ya que nos permite poner en funcionamiento el juego completo. Imagin&#xE1; que mientras que estamos desarrollando un juego vamos a necesitar ejecutar y probar el juego muchas veces.</p>
-<p>As&#xED; que hagamos la prueba, puls&#xE1; el bot&#xF3;n ejecutar una vez. Deber&#xED;as ver que los objetos en pantalla comienzan a caer y rebotar por la pantalla:</p>
-<p><img src="imagenes/pulsando-el-boton-ejecutar.png" alt="pulsando-el-boton-ejecutar"></p>
-<p><img src="imagenes/ejecutar.gif" alt="ejecutar"></p>
-<p>Cuando pulsas el bot&#xF3;n &quot;ejecutar&quot; adem&#xE1;s de ponerse en funcionamiento el juego sucede algo m&#xE1;s: el editor por completo ingresar&#xE1; en un modo llamado &quot;ejecuci&#xF3;n&quot;, as&#xED; que no vamos a poder editar el c&#xF3;digo o cambiar la escena. Todo lo que suceda en ese momento es parte de la experiencia de usuario de nuestros juegos. Una vez que exportemos el juego, nuestros usuarios solo van a ver el juego, no el editor.</p>
-<p>Esto es importante porque nos lleva a ponernos en un rol de dise&#xF1;ador de juegos, y ponernos en el lugar del jugador por un momento. &#xBF;Qu&#xE9; puede hacer qui&#xE9;n juega a este juego?, nada muy interesante a&#xFA;n&#x2026; solo ver c&#xF3;mo rebotan esos dos objetos en la plataforma :|</p>
-<p>Para nuestro primer juego vamos a pensar en algo m&#xE1;s interesante, queremos que el fondo del juego sea un cielo lleno de estrellas, que el usuario sepa que pueda mover la nave con el teclado; y que luego de unos segundos comiencen a aparecer algunos enemigos.</p>
-<p>Puls&#xE1; el bot&#xF3;n que dice &quot;detener&quot; en el editor (o puls&#xE1; la tecla Escape), tendr&#xED;as que volver a ver el resto de los elementos del editor nuevamente habilitados.</p>
-<p><img src="imagenes/editor-nuevamente.png" alt="editor-nuevamente"></p>
-<p>Borremos cada uno de los actores que aparecen en la pantalla, selecci&#xF3;n al actor pelota y luego pulsa el bot&#xF3;n del cesto de basura que aparece a la izquierda:</p>
-<p><img src="imagenes/PilasEngine /* 2019-07-21 16-24-13.png" alt="borrar_actor"></p>
-<p>Repet&#xED; esos pasos hasta que la escena quede limpia, sin ning&#xFA;n actor:</p>
-<p><img src="imagenes/escenas.png" alt="escenas"></p>
-<p>Ahora bien, con la escena completamente limpia, agreguemos un actor para representar a nuestro protagonista. Pulsa el bot&#xF3;n &quot;Crear actor&quot; y luego selecciona la nave:</p>
-<p><img src="imagenes/crear-actor-1.png" alt="crear-actor-1"></p>
-<p><img src="imagenes/crear-actor-2.png" alt="crear-actor-2"></p>
-<p>Pilas viene con varios actores dise&#xF1;ados para que puedas comenzar a realizar tus juegos r&#xE1;pidamente, sin embargo, esto no es una limitaci&#xF3;n, porque cada actor que ves en pantalla se puede cambiar complemente.</p>
-<p>Ahora s&#xED; pulsas el bot&#xF3;n &quot;Ejecutar&quot;, vas a ver que la nave aparece en el centro de la pantalla. Proba pulsar las teclas de direcci&#xF3;n del teclado y espacio para controlar a la nave:</p>
-<p><img src="imagenes/PilasEngine /* &#x1F50A; 2019-07-21 22-22-31.png" alt="nave_dispara"></p>
-<p>Vas a notar que aparece un rect&#xE1;ngulo negro borde blanco en cada actor, ese punto es lo que se conoce como punto de control, y sirve para el punto de referencia de cada actor.</p>
-<p>Podes hacer que ese punto de control no se vea pulsando el interruptor &quot;pos&quot; que aparece abajo en la pantalla (pulsa &quot;Detener&quot; antes, as&#xED; te deja cambiarlo):</p>
-<p><img src="imagenes/PilasEngine /* 2019-07-21 22-24-40.png" alt="pos"></p>
+<h2 id="pongamos-en-ejecución-el-juego">¡Pongamos en ejecución el juego!</h2>
+<p>El botón “ejecutar” que aparece arriba en el editor es uno de los más utilizados, ya que nos permite poner en funcionamiento el juego completo. Imagina que mientras que estamos desarrollando un juego vamos a necesitar ejecutar y probar el juego muchas veces.</p>
+<p>Así que hagamos la prueba, pulsa el botón ejecutar una vez. Deberías ver que los objetos en pantalla comienzan a caer y rebotar por la pantalla:</p>
+<p><img src="imagenes/primeros_pasos/pulsando-el-boton-ejecutar.png" /></p>
+<p><img src="imagenes/primeros_pasos/ejecutar.gif" /></p>
+<p>Cuando pulsas el botón “ejecutar” además de ponerse en funcionamiento el juego sucede algo más: el editor por completo ingresará en un modo llamado “ejecución”, así que no vamos a poder editar el código o cambiar la escena. Todo lo que suceda en ese momento es parte de la experiencia de usuario de nuestros juegos. Una vez que exportemos el juego, nuestros usuarios solo van a ver el juego, no el editor.</p>
+<p>Esto es importante porque nos lleva a pensar en el diseño del juego y hacernos preguntas interesantes: ¿Qué queremos que el usuario haga dentro de nuestro juego?, ¿qué elementos le vamos a mostrar?, ¿cuándo gana y cuando pierde?.</p>
+<p>Pero claro, por el momento solo podemos hacernos las preguntas, porque lo que tenemos en el editor es muy poquito, el usuario no puede hacer nada muy interesante aún… solo ver cómo rebotan esos dos objetos en la plataforma :|</p>
+<h2 id="diseñando-nuestro-juego">Diseñando nuestro juego</h2>
+<p>Para nuestro primer juego vamos a pensar en algo más interesante, queremos que el fondo del juego sea un cielo lleno de estrellas, que el usuario pueda mover una nave con el teclado y que luego de unos segundos comiencen a aparecer algunos enemigos.</p>
+<p>Pulsá el botón que dice “detener” en el editor (o pulsá la tecla Escape), tendrías que volver a ver el resto de los elementos del editor nuevamente habilitados.</p>
+<p><img src="imagenes/primeros_pasos/editor-nuevamente.png" /></p>
+<p>Borremos cada uno de los actores que aparecen en la pantalla, selecciona al actor pelota y luego pulsa el botón del cesto de basura tal y como muestra esta imagen:</p>
+<p><img src="imagenes/primeros_pasos/borrar-actor.png" /></p>
+<p>Repetí esos pasos hasta que la escena quede limpia, sin ningún actor:</p>
+<p><img src="imagenes/primeros_pasos/escenas.png" /></p>
+<p>Ahora bien, con la escena completamente limpia, agreguemos un actor para representar a nuestro protagonista. Pulsa el botón “Crear actor” y luego selecciona la nave:</p>
+<p><img src="imagenes/primeros_pasos/crear-actor-1.png" /></p>
+<p><img src="imagenes/primeros_pasos/crear-actor-2.png" /></p>
+<p>Pilas viene con varios actores diseñados para que puedas comenzar a realizar tus juegos rápidamente, sin embargo, esto no es una limitación, porque cada actor que ves en pantalla se puede cambiar complemente.</p>
+<p>Ahora sí pulsas el botón “Ejecutar”, vas a ver que la nave aparece en el centro de la pantalla. Proba pulsar las teclas de dirección del teclado y espacio para controlar a la nave:</p>
+<p><img src="imagenes/primeros_pasos/nave-en-movimiento.png" /></p>
+<p>Vas a notar que aparece un rectángulo negro borde blanco en cada actor, ese punto es lo que se conoce como punto de control, y sirve para el punto de referencia de cada actor.</p>
+<p>Podes hacer que ese punto de control no se vea pulsando el interruptor “pos” que aparece abajo en la pantalla (pulsa “Detener” antes, así te deja cambiarlo):</p>
+<p><img src="imagenes/primeros_pasos/pos.png" /></p>
+<div class="tc">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
 </div>
-
-                        </div>
-                    </div>
-                
-            </div>
-
-            
-                
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introducción">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="interprete.html" class="navigation navigation-next " aria-label="Next page: El intérprete">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
-    </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"typora-copy-images-to":"./imagenes","title":"Primeros pasos","level":"1.2","depth":1,"next":{"title":"El intérprete","level":"1.3","depth":1,"path":"interprete.md","ref":"interprete.md","articles":[]},"previous":{"title":"Introducción","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"primeros_pasos.md","mtime":"2020-04-19T22:27:00.375Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-19T22:27:28.096Z"},"basePath":".","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="gitbook/gitbook.js"></script>
-    <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
-    </body>
+</body>
 </html>
-

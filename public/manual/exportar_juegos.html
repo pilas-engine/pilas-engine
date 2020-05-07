@@ -1,609 +1,172 @@
-
-<!DOCTYPE HTML>
-<html lang="es" >
-    <head>
-        <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Cómo exportar juegos · Manual de Pilas Engine 2</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        <meta name="author" content="El equipo de Pilas Engine">
-        
-        
-    
-    <link rel="stylesheet" href="gitbook/style.css">
-
-    
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
-
-    
-
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="pilas_como_biblioteca.html" />
-    
-    
-    <link rel="prev" href="dibujado_en_pantalla.html" />
-    
-
-    </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Escribe para buscar" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Introducción
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="primeros_pasos.html">
-            
-                <a href="primeros_pasos.html">
-            
-                    
-                    Primeros pasos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="interprete.html">
-            
-                <a href="interprete.html">
-            
-                    
-                    El intérprete
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="automatas_y_estados.html">
-            
-                <a href="automatas_y_estados.html">
-            
-                    
-                    Autómatas y estados
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="animaciones.html">
-            
-                <a href="animaciones.html">
-            
-                    
-                    Animaciones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="camara.html">
-            
-                <a href="camara.html">
-            
-                    
-                    Cámara
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="recorridos.html">
-            
-                <a href="recorridos.html">
-            
-                    
-                    Recorridos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="etiquetas.html">
-            
-                <a href="etiquetas.html">
-            
-                    
-                    Etiquetas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="habilidades.html">
-            
-                <a href="habilidades.html">
-            
-                    
-                    Habilidades
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.10" data-path="comportamientos.html">
-            
-                <a href="comportamientos.html">
-            
-                    
-                    Comportamientos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.11" data-path="azar.html">
-            
-                <a href="azar.html">
-            
-                    
-                    Azar o cálculos aleatorios
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.12" data-path="observables.html">
-            
-                <a href="observables.html">
-            
-                    
-                    Observables
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.13" data-path="tiempo.html">
-            
-                <a href="tiempo.html">
-            
-                    
-                    Manejo de tiempo
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.14" data-path="angulos-distancias.html">
-            
-                <a href="angulos-distancias.html">
-            
-                    
-                    Angulos y distancias
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.15" data-path="colisiones.html">
-            
-                <a href="colisiones.html">
-            
-                    
-                    Colisiones
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.16" data-path="mensajes.html">
-            
-                <a href="mensajes.html">
-            
-                    
-                    Mensajes
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.17" data-path="escenas.html">
-            
-                <a href="escenas.html">
-            
-                    
-                    Escenas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.18" data-path="eventos-de-mouse.html">
-            
-                <a href="eventos-de-mouse.html">
-            
-                    
-                    Eventos de mouse o touch
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.19" data-path="uso-del-teclado.html">
-            
-                <a href="uso-del-teclado.html">
-            
-                    
-                    Uso del teclado
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.20" data-path="dibujado_en_pantalla.html">
-            
-                <a href="dibujado_en_pantalla.html">
-            
-                    
-                    Dibujado simple en pantalla
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.21" data-path="exportar_juegos.html">
-            
-                <a href="exportar_juegos.html">
-            
-                    
-                    Cómo exportar juegos
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.22" data-path="pilas_como_biblioteca.html">
-            
-                <a href="pilas_como_biblioteca.html">
-            
-                    
-                    Pilas como biblioteca
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="colaborar.html">
-            
-                <a href="colaborar.html">
-            
-                    
-                    Colaborar con pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="entorno.html">
-            
-                <a href="entorno.html">
-            
-                    
-                    Entorno para colaboradores de Pilas
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Publicado con GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Cómo exportar juegos</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <h1 id="c&#xF3;mo-exportar-juegos">C&#xF3;mo exportar juegos</h1>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Cómo exportar juegos</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cccccc; background-color: #303030; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ffcfaf; } /* Alert */
+    code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+    code span.at { } /* Attribute */
+    code span.bn { color: #dca3a3; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #f0dfaf; } /* ControlFlow */
+    code span.ch { color: #dca3a3; } /* Char */
+    code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+    code span.co { color: #7f9f7f; } /* Comment */
+    code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+    code span.do { color: #7f9f7f; } /* Documentation */
+    code span.dt { color: #dfdfbf; } /* DataType */
+    code span.dv { color: #dcdccc; } /* DecVal */
+    code span.er { color: #c3bf9f; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #c0bed1; } /* Float */
+    code span.fu { color: #efef8f; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+    code span.kw { color: #f0dfaf; } /* Keyword */
+    code span.op { color: #f0efd0; } /* Operator */
+    code span.ot { color: #efef8f; } /* Other */
+    code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+    code span.sc { color: #dca3a3; } /* SpecialChar */
+    code span.ss { color: #cc9393; } /* SpecialString */
+    code span.st { color: #cc9393; } /* String */
+    code span.va { } /* Variable */
+    code span.vs { color: #cc9393; } /* VerbatimString */
+    code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="estilo.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <div class="tc">
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Cómo exportar juegos</h1>
+</header>
 <p>El editor de pilas incluye la posibilidad de exportar proyectos completos para ser utilizados sin el editor.</p>
-<p>Para exportar un juego simplemente hay que pulsar el bot&#xF3;n Exportar del editor:</p>
-<p><img src="exportar_juegos.assets/exportar.png" alt="exportar"></p>
-<p>A continuaci&#xF3;n se nos va a mostrar una pantalla de exportaci&#xF3;n, que demora unos minutos ya que tiene que recopilar todos los recursos necesarios, y luego obtendremos un archivo comprimido con el proyecto:</p>
-<p><img src="exportar_juegos.assets/archivo-exportado.png" alt="archivo-exportado"></p>
-<p>Este archivo .zip aloja el proyecto completo, as&#xED; que podemos utilizarlo para punto de partida para llevar nuestro juego a otro lugar.</p>
-<p>A continuaci&#xF3;n se muestran algunas alternativas de publicaci&#xF3;n:</p>
-<h3 id="&#xBF;qu&#xE9;-contiene-el-archivo-exportado">&#xBF;Qu&#xE9; contiene el archivo exportado?</h3>
-<p>El archivo .zip se puede descomprimir f&#xE1;cilmente con las herramientas que vienen instaladas en cualquier sistema operativo.</p>
-<p>Una vez que se descomprime, vamos a observar un archivo de ayuda y una carpeta llamada &quot;proyecto&quot; con todos los recursos de nuestro juego:</p>
-<p><img src="exportar_juegos.assets/arbol.png" alt="arbol"></p>
-<h3 id="c&#xF3;mo-ejecutar-mi-juego-sin-el-editor">C&#xF3;mo ejecutar mi juego sin el editor</h3>
-<p>El primer paso es tener instalado <a href="https://nodejs.org/es/" target="_blank">Node.JS</a> y acceso a un terminal para ejecutar comandos.</p>
-<p>Luego, se tiene que ingresar en el directorio &quot;proyecto&quot; y ejecutar el comando:</p>
-<pre><code>npm install
-</code></pre><p>Si todo va bien, deber&#xED;amos ver que el instalador de paquetes de node trabaja unos segundos para descargar todo lo necesario para seguir trabajando:</p>
-<p><img src="exportar_juegos.assets/instalando-dependencias.png" alt="instalando-dependencias"></p>
+<p>Para exportar un juego simplemente hay que pulsar el botón Exportar del editor:</p>
+<p><img src="imagenes/exportar_juegos.assets/exportar.png" /></p>
+<p>A continuación se nos va a mostrar una pantalla de exportación, que demora unos minutos ya que tiene que recopilar todos los recursos necesarios, y luego obtendremos un archivo comprimido con el proyecto:</p>
+<p><img src="imagenes/exportar_juegos.assets/archivo-exportado.png" /></p>
+<p>Este archivo .zip aloja el proyecto completo, así que podemos utilizarlo para punto de partida para llevar nuestro juego a otro lugar.</p>
+<p>A continuación se muestran algunas alternativas de publicación:</p>
+<h3 id="qué-contiene-el-archivo-exportado">¿Qué contiene el archivo exportado?</h3>
+<p>El archivo .zip se puede descomprimir fácilmente con las herramientas que vienen instaladas en cualquier sistema operativo.</p>
+<p>Una vez que se descomprime, vamos a observar un archivo de ayuda y una carpeta llamada “proyecto” con todos los recursos de nuestro juego:</p>
+<p><img src="imagenes/exportar_juegos.assets/arbol.png" /></p>
+<h3 id="cómo-ejecutar-mi-juego-sin-el-editor">Cómo ejecutar mi juego sin el editor</h3>
+<p>El primer paso es tener instalado <a href="https://nodejs.org/es/">Node.JS</a> y acceso a un terminal para ejecutar comandos.</p>
+<p>Luego, se tiene que ingresar en el directorio “proyecto” y ejecutar el comando:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>npm install</span></code></pre></div>
+<p>Si todo va bien, deberíamos ver que el instalador de paquetes de node trabaja unos segundos para descargar todo lo necesario para seguir trabajando:</p>
+<p><img src="imagenes/exportar_juegos.assets/instalando-dependencias.png" /></p>
 <p>A partir de este punto, vas a tener la posiblidad de hacer alguna de estas cosas:</p>
-<h3 id="probar-la-aplicaci&#xF3;n-en-un-servidor-local">Probar la aplicaci&#xF3;n en un servidor local</h3>
-<p>Para iniciar el juego directamente en un navegador podr&#xED;as escribir este comando en el mismo directorio &quot;proyecto&quot;:</p>
-<pre><code>npm start
-</code></pre><p>A continuaci&#xF3;n se va a abrir el navegador y tu juego.</p>
-<p><img src="exportar_juegos.assets/web.png" alt="web"></p>
-<p>Ten en cuenta que pilas no funciona directamente abriendo el archivo index.html en un navegador, la raz&#xF3;n por la que no puede andar directamente es porque necesita cargar archivos mientras se inicializa usando ajax (algo que los navegadores no pueden hacer si se inicializan abriendo un archivo .html de forma directa).</p>
+<h3 id="probar-la-aplicación-en-un-servidor-local">Probar la aplicación en un servidor local</h3>
+<p>Para iniciar el juego directamente en un navegador podrías escribir este comando en el mismo directorio “proyecto”:</p>
+<pre><code>npm start</code></pre>
+<p>A continuación se va a abrir el navegador y tu juego.</p>
+<p><img src="imagenes/exportar_juegos.assets/web.png" /></p>
+<p>Ten en cuenta que pilas no funciona directamente abriendo el archivo index.html en un navegador, la razón por la que no puede andar directamente es porque necesita cargar archivos mientras se inicializa usando ajax (algo que los navegadores no pueden hacer si se inicializan abriendo un archivo .html de forma directa).</p>
 <h3 id="ejecutar-tu-juego-en-electron-de-forma-offline">Ejecutar tu juego en electron de forma offline</h3>
-<p>Otra opci&#xF3;n es lanzar el juego como si se tratara de una aplicaci&#xF3;n dedicada, sin necesidad de un navegador.</p>
-<p>Para eso, tendr&#xED;as que ejecutar este comando:</p>
-<pre><code>npm run electron
-</code></pre><p><img src="exportar_juegos.assets/electron-ejecucion.png" alt="electron-ejecucion"></p>
-<h3 id="c&#xF3;mo-crear-versiones-empaquetas-para-distribuir-exe-dmg-etc">C&#xF3;mo crear versiones empaquetas para distribuir (.exe, dmg etc)</h3>
-<p>Una opci&#xF3;n muy solicitada a la hora de exportar juegos es poder hacerlos completamente portables, y que la persona que recibe el juego no tenga que instalar o configurar nada para jugar al juego, solamente hacer &quot;doble click&quot; en un archivo y jugar.</p>
+<p>Otra opción es lanzar el juego como si se tratara de una aplicación dedicada, sin necesidad de un navegador.</p>
+<p>Para eso, tendrías que ejecutar este comando:</p>
+<pre><code>npm run electron</code></pre>
+<p><img src="imagenes/exportar_juegos.assets/electron-ejecucion.png" /></p>
+<h3 id="cómo-crear-versiones-empaquetas-para-distribuir-.exe-dmg-etc">Cómo crear versiones empaquetas para distribuir (.exe, dmg etc)</h3>
+<p>Una opción muy solicitada a la hora de exportar juegos es poder hacerlos completamente portables, y que la persona que recibe el juego no tenga que instalar o configurar nada para jugar al juego, solamente hacer “doble click” en un archivo y jugar.</p>
 <p>Pilas permite hacer esto mediante la herramienta que mencionamos antes llamada electron y una serie de scripts.</p>
-<p>Tomemos el ejemplo m&#xE1;s solicitado, hagamos que nuestro juego se pueda compilar para windows y distribuirse como un archivo .exe. Lo que tenemos que hacer es hacer doble click en los archivos:</p>
+<p>Tomemos el ejemplo más solicitado, hagamos que nuestro juego se pueda compilar para windows y distribuirse como un archivo .exe. Lo que tenemos que hacer es hacer doble click en los archivos:</p>
 <ul>
 <li>instalar_dependencias.bat</li>
 <li>generar_version_exe.bat</li>
 </ul>
-<p>o bien, abrir el comando &quot;cmd&quot;, ingresar en el directorio del juego
-exportado y ejecutar estos comandos:</p>
+<p>o bien, abrir el comando “cmd”, ingresar en el directorio del juego exportado y ejecutar estos comandos:</p>
 <pre><code>npm install electron-packager --save-dev
 
-node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32
-</code></pre><p>El comando demorar&#xE1; unos segundos, cuando termine aparecer&#xE1; un mensaje indicando que los archivos est&#xE1;n listos:</p>
-<p><img src="exportar_juegos.assets/image-20190630234419298.png" alt="image-20190630234419298"></p>
-<p>En mi caso, los archivos se generaron en un directorio llamado &quot;mijuego-win32-ia32&quot;. Ese directorio completo es el que se puede entregar a los usuarios de windows para que puedan ejecutar el juego haciendo doble click en el archivo .exe:</p>
-<p><img src="exportar_juegos.assets/juego-exe.png" alt="juego-exe"></p>
-<p>Si adem&#xE1;s de windows est&#xE1;s buscando llevar tu juego a otras plataformas como gnu/linux, mac/osx o raspberry tambi&#xE9;n hay un par&#xE1;metro para lanzar la compilaci&#xF3;n en todas las plataformas soportadas as&#xED;:</p>
-<pre><code>node_modules/.bin/electron-packager . mijuego --all
-</code></pre><p>Hay varios par&#xE1;metros m&#xE1;s, pero para no extendernos mucho te dejamos la <a href="https://github.com/electron-userland/electron-packager#usage" target="_blank">documentaci&#xF3;n detallada de electron-packager</a></p>
-<p>Por cierto, si quieres investigar exactamente qu&#xE9; hacen estos scripts podr&#xED;as profundizar tu investigaci&#xF3;n mirando la <a href="https://electronjs.org/docs/tutorial/application-distribution" target="_blank">documentaci&#xF3;n de electron sobre distribuci&#xF3;n de binarios</a> ya que se describe cada uno de los pasos de compilaci&#xF3;n de forma manual.</p>
-<h3 id="c&#xF3;mo-llevar-mi-juego-a-celulares-tablets-y-tiendas-oficiales-de-apple-o-google">C&#xF3;mo llevar mi juego a celulares, tablets y tiendas oficiales de apple o google</h3>
-<p>Pilas incluye una forma sencilla de probar juegos en celulares y tablets, si solo quieres probar tus juegos te recomendamos mirar ah&#xED; primero.</p>
-<p>Ahora bien, si en realidad lo que buscas es llevar tu juego de forma permanente a un celular o tablet, ya sea para t&#xED;, amigos o para publicar en un tienda oficial, lo que necesitas es instalar cordova, los SDK oficiales para tu tipo de dispositivo (android o ios) y compilar tu juego por completo.</p>
+node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32</code></pre>
+<p>El comando demorará unos segundos, cuando termine aparecerá un mensaje indicando que los archivos están listos:</p>
+<p><img src="imagenes/exportar_juegos.assets/image-20190630234419298.png" /></p>
+<p>En mi caso, los archivos se generaron en un directorio llamado “mijuego-win32-ia32”. Ese directorio completo es el que se puede entregar a los usuarios de windows para que puedan ejecutar el juego haciendo doble click en el archivo .exe:</p>
+<p><img src="imagenes/exportar_juegos.assets/juego-exe.png" /></p>
+<p>Si además de windows estás buscando llevar tu juego a otras plataformas como gnu/linux, mac/osx o raspberry también hay un parámetro para lanzar la compilación en todas las plataformas soportadas así:</p>
+<pre><code>node_modules/.bin/electron-packager . mijuego --all</code></pre>
+<p>Hay varios parámetros más, pero para no extendernos mucho te dejamos la <a href="https://github.com/electron-userland/electron-packager#usage">documentación detallada de electron-packager</a></p>
+<p>Por cierto, si quieres investigar exactamente qué hacen estos scripts podrías profundizar tu investigación mirando la <a href="https://electronjs.org/docs/tutorial/application-distribution">documentación de electron sobre distribución de binarios</a> ya que se describe cada uno de los pasos de compilación de forma manual.</p>
+<h3 id="cómo-llevar-mi-juego-a-celulares-tablets-y-tiendas-oficiales-de-apple-o-google">Cómo llevar mi juego a celulares, tablets y tiendas oficiales de apple o google</h3>
+<p>Pilas incluye una forma sencilla de probar juegos en celulares y tablets, si solo quieres probar tus juegos te recomendamos mirar ahí primero.</p>
+<p>Ahora bien, si en realidad lo que buscas es llevar tu juego de forma permanente a un celular o tablet, ya sea para tí, amigos o para publicar en un tienda oficial, lo que necesitas es instalar cordova, los SDK oficiales para tu tipo de dispositivo (android o ios) y compilar tu juego por completo.</p>
 <pre><code>npm install cordova -g
 
-cordova create cordova
-</code></pre><p>Luego, tendr&#xED;as que mover todos los archivos del directorio &quot;proyecto&quot; (index.html, pilas-engine.js etc&#x2026;) dentro del directorio &quot;cordova/www&quot;.</p>
-<p>Por &#xFA;ltimo, tendr&#xED;as que agregar la plataforma principal (android o ios) y luego iniciar la compilaci&#xF3;n:</p>
+cordova create cordova</code></pre>
+<p>Luego, tendrías que mover todos los archivos del directorio “proyecto” (index.html, pilas-engine.js etc…) dentro del directorio “cordova/www”.</p>
+<p>Por último, tendrías que agregar la plataforma principal (android o ios) y luego iniciar la compilación:</p>
 <p>Por ejemplo, para ios:</p>
 <pre><code>cd cordova
 cordova platform add ios
 cordova build ios
-</code></pre><p>y luego abrir el proyecto desde el directorio &quot;platforms/ios&quot; en xcode y ejecutar:</p>
-<p><img src="exportar_juegos.assets/xcode.png" alt="xcode"></p>
+</code></pre>
+<p>y luego abrir el proyecto desde el directorio “platforms/ios” en xcode y ejecutar:</p>
+<p><img src="imagenes/exportar_juegos.assets/xcode.png" /></p>
 <p>Y para android:</p>
 <pre><code>cd cordova
-cordova platform add android
-</code></pre><p>En este punto, aseg&#xFA;rate de haber movido todos los archivos del directorio &quot;proyecto&quot; (index.html, pilas-engine.js etc&#x2026;) dentro del directorio &quot;cordova/www&quot;.</p>
+cordova platform add android</code></pre>
+<p>En este punto, asegúrate de haber movido todos los archivos del directorio “proyecto” (index.html, pilas-engine.js etc…) dentro del directorio “cordova/www”.</p>
 <p>Luego tienes que generar el proyecto para android con este comando:</p>
-<pre><code>cordova build android
-</code></pre><p>y luego abrir el proyecto del directorio &quot;platforms/android&quot; con Android Studio y pulsar el bot&#xF3;n ejecutar para lanzar el emulador:</p>
-<p><img src="exportar_juegos.assets/android-play.png" alt="android-play"></p>
-<p>O bien, abr&#xED; el men&#xFA; &quot;Build&quot; y luego &quot;Build APK(s)&quot; o &quot;Generate Signed APK&quot; para crear el un archivo <code>.apk</code> e instalarlo directamente en tu equipo o subirlo a la tienda Play Store de Google.</p>
+<pre><code>cordova build android</code></pre>
+<p>y luego abrir el proyecto del directorio “platforms/android” con Android Studio y pulsar el botón ejecutar para lanzar el emulador:</p>
+<p><img src="imagenes/exportar_juegos.assets/android-play.png" /></p>
+<p>O bien, abrí el menú “Build” y luego “Build APK(s)” o “Generate Signed APK” para crear el un archivo <code>.apk</code> e instalarlo directamente en tu equipo o subirlo a la tienda Play Store de Google.</p>
+<div class="tc">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
 </div>
-
-                        </div>
-                    </div>
-                
-            </div>
-
-            
-                
-                <a href="dibujado_en_pantalla.html" class="navigation navigation-prev " aria-label="Previous page: Dibujado simple en pantalla">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="pilas_como_biblioteca.html" class="navigation navigation-next " aria-label="Next page: Pilas como biblioteca">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
-    </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Cómo exportar juegos","level":"1.21","depth":1,"next":{"title":"Pilas como biblioteca","level":"1.22","depth":1,"path":"pilas_como_biblioteca.md","ref":"pilas_como_biblioteca.md","articles":[]},"previous":{"title":"Dibujado simple en pantalla","level":"1.20","depth":1,"path":"dibujado_en_pantalla.md","ref":"dibujado_en_pantalla.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./manual","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"El equipo de Pilas Engine","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Manual de Pilas Engine 2","language":"es","gitbook":"*"},"file":{"path":"exportar_juegos.md","mtime":"2020-04-04T21:16:48.775Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-19T22:27:28.096Z"},"basePath":".","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="gitbook/gitbook.js"></script>
-    <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
-    </body>
+</body>
 </html>
-

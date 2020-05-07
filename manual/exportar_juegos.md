@@ -1,14 +1,16 @@
-# Cómo exportar juegos
+---
+title: Cómo exportar juegos
+---
 
 El editor de pilas incluye la posibilidad de exportar proyectos completos para ser utilizados sin el editor.
 
 Para exportar un juego simplemente hay que pulsar el botón Exportar del editor:
 
-![exportar](exportar_juegos.assets/exportar.png)
+![](imagenes/exportar_juegos.assets/exportar.png)
 
 A continuación se nos va a mostrar una pantalla de exportación, que demora unos minutos ya que tiene que recopilar todos los recursos necesarios, y luego obtendremos un archivo comprimido con el proyecto:
 
-![archivo-exportado](exportar_juegos.assets/archivo-exportado.png)
+![](imagenes/exportar_juegos.assets/archivo-exportado.png)
 
 Este archivo .zip aloja el proyecto completo, así que podemos utilizarlo para punto de partida para llevar nuestro juego a otro lugar.
 
@@ -20,7 +22,7 @@ El archivo .zip se puede descomprimir fácilmente con las herramientas que viene
 
 Una vez que se descomprime, vamos a observar un archivo de ayuda y una carpeta llamada "proyecto" con todos los recursos de nuestro juego:
 
-![arbol](exportar_juegos.assets/arbol.png)
+![](imagenes/exportar_juegos.assets/arbol.png)
 
 ### Cómo ejecutar mi juego sin el editor
 
@@ -28,13 +30,13 @@ El primer paso es tener instalado [Node.JS](https://nodejs.org/es/) y acceso a u
 
 Luego, se tiene que ingresar en el directorio "proyecto" y ejecutar el comando:
 
-```
+```typescript
 npm install
 ```
 
 Si todo va bien, deberíamos ver que el instalador de paquetes de node trabaja unos segundos para descargar todo lo necesario para seguir trabajando:
 
-![instalando-dependencias](exportar_juegos.assets/instalando-dependencias.png)
+![](imagenes/exportar_juegos.assets/instalando-dependencias.png)
 
 A partir de este punto, vas a tener la posiblidad de hacer alguna de estas cosas:
 
@@ -48,7 +50,7 @@ npm start
 
 A continuación se va a abrir el navegador y tu juego.
 
-![web](exportar_juegos.assets/web.png)
+![](imagenes/exportar_juegos.assets/web.png)
 
 Ten en cuenta que pilas no funciona directamente abriendo el archivo index.html en un navegador, la razón por la que no puede andar directamente es porque necesita cargar archivos mientras se inicializa usando ajax (algo que los navegadores no pueden hacer si se inicializan abriendo un archivo .html de forma directa).
 
@@ -62,7 +64,7 @@ Para eso, tendrías que ejecutar este comando:
 npm run electron
 ```
 
-![electron-ejecucion](exportar_juegos.assets/electron-ejecucion.png)
+![](imagenes/exportar_juegos.assets/electron-ejecucion.png)
 
 ### Cómo crear versiones empaquetas para distribuir (.exe, dmg etc)
 
@@ -86,11 +88,11 @@ node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32
 
 El comando demorará unos segundos, cuando termine aparecerá un mensaje indicando que los archivos están listos:
 
-![image-20190630234419298](exportar_juegos.assets/image-20190630234419298.png)
+![](imagenes/exportar_juegos.assets/image-20190630234419298.png)
 
 En mi caso, los archivos se generaron en un directorio llamado "mijuego-win32-ia32". Ese directorio completo es el que se puede entregar a los usuarios de windows para que puedan ejecutar el juego haciendo doble click en el archivo .exe:
 
-![juego-exe](exportar_juegos.assets/juego-exe.png)
+![](imagenes/exportar_juegos.assets/juego-exe.png)
 
 Si además de windows estás buscando llevar tu juego a otras plataformas como gnu/linux, mac/osx o raspberry también hay un parámetro para lanzar la compilación en todas las plataformas soportadas así:
 
@@ -129,7 +131,7 @@ cordova build ios
 
 y luego abrir el proyecto desde el directorio "platforms/ios" en xcode y ejecutar:
 
-![xcode](exportar_juegos.assets/xcode.png)
+![](imagenes/exportar_juegos.assets/xcode.png)
 
 Y para android:
 
@@ -148,6 +150,6 @@ cordova build android
 
 y luego abrir el proyecto del directorio "platforms/android" con Android Studio y pulsar el botón ejecutar para lanzar el emulador:
 
-![android-play](exportar_juegos.assets/android-play.png)
+![](imagenes/exportar_juegos.assets/android-play.png)
 
 O bien, abrí el menú "Build" y luego "Build APK(s)" o "Generate Signed APK" para crear el un archivo `.apk` e instalarlo directamente en tu equipo o subirlo a la tienda Play Store de Google.

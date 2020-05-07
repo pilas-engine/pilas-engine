@@ -1,8 +1,10 @@
-# Colaborar con Pilas Engine
+---
+title: Colaborar con Pilas Engine
+---
 
 Pilas Engine es un proyecto de Software Libre, que se desarrolla de forma colaborativa por un equipo de varios colaboradores, personas del equipo de desarrollo y la comunidad de usuarios.
 
-![olabor](assets/colabora.png)
+![](imagenes/assets/colabora.png)
 
 Todas las personas que quieran participar del desarrollo son bienvenidas, Pilas nos es solo una herramienta de software, es un proyecto colaborativo que sostiene un equipo de personas amigables y respetuosas que buscan mejorar la calidad de la educación brindándole a los Jóvenes la posibilidad de volverse protagonistas en el uso de la tecnología.
 

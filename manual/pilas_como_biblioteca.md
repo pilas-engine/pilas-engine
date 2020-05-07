@@ -1,8 +1,6 @@
 ---
-typora-copy-images-to: ./imagenes
+title: Pilas como biblioteca externa
 ---
-
-# Pilas como biblioteca externa
 
 Pilas se puede usar como una biblioteca externa para permitir un uso avanzado
 y muy personalizado de pilas.

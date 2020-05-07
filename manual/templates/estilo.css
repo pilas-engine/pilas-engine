@@ -1,0 +1,53 @@
+body {
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 720px;
+  margin: auto;
+  padding: 1em;
+  font-family: Verdana;
+}
+
+a {
+  text-decoration: none;
+}
+
+tr.odd {
+  background-color: #ececec;
+}
+
+tr td {
+  padding: 10px;
+  vertical-align: top;
+}
+
+.tc {
+  text-align: center;
+}
+
+h1,
+h2,
+h3 {
+  color: #005590;
+}
+
+pre.sourceCode {
+  margin: 0;
+  padding: 10px;
+  font-size: 16px;
+}
+
+p code {
+  white-space: pre-wrap;
+  font-size: 16px;
+  background-color: #303030;
+  padding: 3px 8px;
+  border-radius: 3px;
+  color: #cccccc;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  padding: 1em;
+  margin: auto;
+}
