@@ -23,21 +23,19 @@
 
   </div>
 
-  <table>
-    <tbody>
-      <tr>
-        <td class="texto dib pt1">Nombre:</td>
-        <td>
-          {{pilas-nombre-de-animacion animación=animacion animaciones=animaciones iniciando=iniciando}}
-        </td>
-      </tr>
+  <div class="flex">
 
-      <tr>
-        <td class="texto dib pt1">Cuadros por segundo:</td>
-        <td>{{input class="input v-top pa1 br2" disabled=iniciando value=animacion.velocidad type="number" min=1}}</td>
-      </tr>
-    </tbody>
-  </table>
+    <div class="flex items-center">
+      <div class="texto pr2">Nombre:</div>
+      {{pilas-nombre-de-animacion animación=animacion animaciones=animaciones iniciando=iniciando}}
+    </div>
+
+    <div class="flex pl4 items-center">
+      <div class="texto pr2">Cuadros por segundo:</div>
+      {{input class="w3 input v-top pa1 br2" disabled=iniciando value=animacion.velocidad type="number" min=1}}
+    </div>
+
+  </div>
 
 </div>
 
@@ -115,7 +113,7 @@
       alto=proyecto.alto
       recursos=recursos
       proyecto=proyecto
-      modoZoom=2
+      modoZoom=1
       pixelart=pixelart
       cuando_termina_de_cargar=(action "cuando_termina_de_cargar")
       cuando_termina_de_iniciar_ejecucion=(action "cuando_termina_de_iniciar_ejecucion")

@@ -3,27 +3,30 @@ import { task, timeout } from "ember-concurrency";
 
 export default Component.extend({
   classNames: ["flex1"],
-  url: "./manual/index.html",
+  seccion: "index.html",
   currentURL: "",
 
   observarURL: task(function*() {
     while (true) {
       let element = this.element.querySelector("iframe");
-      let url = element.contentDocument.location.href;
+      let url = element.contentDocument.location.pathname;
 
-      if (this.currentURL != url && url != "about:blank") {
+      url = url.replace("/manual/", "").replace(/\//g, "__");
+
+      if (this.currentURL != url && url.includes(".html")) {
         this.set("currentURL", url);
+
         if (this.cuandoCambiaURL) {
           this.cuandoCambiaURL(url);
         }
       }
 
-      yield timeout(500);
+      yield timeout(2000);
     }
   }),
 
   didInsertElement() {
     this.observarURL.perform({});
-    this.set("iframeURL", this.url);
+    this.set("iframeURL", "/manual/" + this.seccion.replace(/__/g, "/"));
   }
 });

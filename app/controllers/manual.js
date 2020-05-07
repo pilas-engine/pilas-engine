@@ -1,16 +1,18 @@
 import Controller from "@ember/controller";
 
 export default Controller.extend({
-  url: "./manual/index.html",
-  queryParams: ["url"],
+  seccion: "index.html",
+  queryParams: ["seccion"],
 
   actions: {
     cuandoCambiaURL(url) {
-      this.set("url", url);
+      this.set("seccion", url);
     },
 
     abrirEnUnaVentanaNueva() {
-      window.open(this.url);
+      let protocolo = window.location.protocol;
+      let host = window.location.host;
+      window.open(`${protocolo}//${host}/manual/${this.seccion}`);
     }
   }
 });
