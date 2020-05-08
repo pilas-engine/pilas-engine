@@ -1,39 +1,29 @@
-{{#each propiedades as |propiedad|}}
+<div class="pb1">
+  {{pilas-propiedad/combo
+      objeto=instancia_seleccionada
+      opciones=resoluciones
+      titulo="Tamaño"
+      valor=(get instancia_seleccionada "tamaño")
+      modificarAtributo=(action "cuando_cambia_resolucion")
+  }}
+</div>
 
-  <div class="pb1">
+<div class="pb1">
+  {{pilas-propiedad/combo
+      objeto=instancia_seleccionada
+      opciones=opciones_de_rendimiento
+      titulo="Rendimiento"
+      valor=(get instancia_seleccionada "fps")
+      modificarAtributo=(action "cuando_cambia_rendimiento")
+  }}
+</div>
 
-    {{#if (eq propiedad.tipo "numero")}}
-
-      {{pilas-propiedad/numero
-          objeto=instancia_seleccionada
-          min=propiedad.min
-          max=propiedad.max
-          propiedad=propiedad
-          intensidad=propiedad.intensidad
-          modificarAtributo=cuando_modifica_atributo_del_proyecto
-      }}
-
-    {{else if (eq propiedad.tipo "separador")}}
-
-      {{pilas-propiedad/separador
-          propiedad=propiedad
-      }}
-
-    {{else if (eq propiedad.tipo "combo")}}
-
-      {{pilas-propiedad/combo
-          objeto=instancia_seleccionada
-          opciones=propiedad.opciones
-          propiedad=propiedad
-          modificarAtributo=cuando_modifica_atributo_del_proyecto
-      }}
-
-    {{else}}
-
-      <p class="red">No hay manejador para {{propiedad.propiedad}}</p>
-
-    {{/if}}
-
-  </div>
-
-{{/each}}
+<div class="pb1">
+  {{pilas-propiedad/combo
+      objeto=instancia_seleccionada
+      opciones=lista_de_escenas
+      titulo="Escena inicial"
+      valor=(get instancia_seleccionada "nombre_de_la_escena_inicial")
+      modificarAtributo=(action "cuando_cambia_escena_inicial")
+  }}
+</div>

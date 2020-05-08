@@ -5,7 +5,7 @@ export default {
   ancho: 500,
   alto: 500,
   tamaño: "500x500",
-  escena_inicial: 1,
+  nombre_de_la_escena_inicial: "escena1",
   imagenes: [],
   animaciones: animaciones_iniciales,
 

@@ -46,6 +46,16 @@ export default Service.extend({
       proyecto.set("fps", 60);
     }
 
+    // Migracion 2020-05-08: Agrega el nombre de la escena inicial a ejecutar
+    if (!proyecto.nombre_de_la_escena_inicial) {
+      proyecto.set("nombre_de_la_escena_inicial", proyecto.escenas.firstObject.get("nombre"));
+    }
+
+    // Migracion 2020-05-08: Elimina el atributo escena_inicial si está definido
+    if (proyecto.escena_inicial) {
+      proyecto.set("escena_inicial", undefined);
+    }
+
     return proyecto;
   },
 

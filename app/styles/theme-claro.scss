@@ -10,6 +10,15 @@
     box-shadow: 0 0 0 2px #6fb5f1;
   }
 
+  .select {
+    padding: 2px;
+    outline: 0;
+    height: 26px;
+  }
+
+  .select:focus {
+  }
+
   .spinner-color-de-fondo {
     fill: #aaa;
   }
@@ -20,7 +29,6 @@
 
   .boton {
     color: #454545;
-    text-shadow: 0 1px #fff;
     vertical-align: top;
     background-color: #e5e9e8;
     box-shadow: inset 0 1px #fff;
@@ -90,7 +98,6 @@
 
   .texto {
     color: black;
-    text-shadow: 0 1px #eee;
   }
 
   .bg-skeleton {

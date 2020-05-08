@@ -161,12 +161,19 @@ export default Component.extend({
       throw Error("El proyecto enviado no tiene escenas.");
     }
 
-    if (!this.get("proyecto.escena_inicial")) {
+    if (!this.get("proyecto.nombre_de_la_escena_inicial")) {
       throw Error("El proyecto enviado no tiene una escena inicial.");
     }
 
-    this.set("ultimaEscenaSeleccionada", this.get("proyecto.escena_inicial"));
+    let escena_inicial = this.obtener_la_escena_inicial();
+    this.set("ultimaEscenaSeleccionada", escena_inicial.id);
     this.mostrar_la_escena_actual_sobre_pilas();
+  },
+
+  obtener_la_escena_inicial() {
+    let escenas = this.proyecto.escenas;
+    let escena_incial = this.proyecto.nombre_de_la_escena_inicial;
+    return escenas.find(e => e.nombre === escena_incial);
   },
 
   pulsa_la_tecla_escape() {

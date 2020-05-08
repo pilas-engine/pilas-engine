@@ -2,6 +2,25 @@ import Component from "@ember/component";
 
 export default Component.extend({
   didInsertElement() {
+    this.set("resoluciones", this.crear_opciones_de_resoluciones());
+    this.set("opciones_de_rendimiento", this.crear_opciones_de_rendimiento());
+    this.set("lista_de_escenas", this.crear_lista_de_escenas());
+  },
+
+  crear_opciones_de_rendimiento() {
+    return [
+      {
+        valor: 60,
+        texto: "60 FPS (óptimo)"
+      },
+      {
+        valor: 30,
+        texto: "30 FPS"
+      }
+    ];
+  },
+
+  crear_opciones_de_resoluciones() {
     let resoluciones = [
       "256x224", //
       "256x256",
@@ -23,30 +42,31 @@ export default Component.extend({
       "720x1280"
     ];
 
-    let resoluciones_como_diccionarios = resoluciones.map(e => {
+    return resoluciones.map(e => {
       return { valor: e, texto: e };
     });
+  },
 
-    this.set("propiedades", [
-      {
-        tipo: "combo",
-        propiedad: "tamaño",
-        opciones: resoluciones_como_diccionarios
-      },
-      {
-        tipo: "combo",
-        propiedad: "fps",
-        opciones: [
-          {
-            valor: 60,
-            texto: "60 (recomendado)"
-          },
-          {
-            valor: 30,
-            texto: "30"
-          }
-        ]
-      }
-    ]);
+  crear_lista_de_escenas() {
+    return this.instancia_seleccionada.escenas.map(e => {
+      return {
+        valor: e.nombre,
+        texto: e.nombre
+      };
+    });
+  },
+
+  actions: {
+    cuando_cambia_resolucion(_, valor) {
+      this.cuando_modifica_atributo_del_proyecto("tamaño", valor);
+    },
+
+    cuando_cambia_rendimiento(_, valor) {
+      this.cuando_modifica_atributo_del_proyecto("fps", valor);
+    },
+
+    cuando_cambia_escena_inicial(_, valor) {
+      this.cuando_modifica_atributo_del_proyecto("nombre_de_la_escena_inicial", valor);
+    }
   }
 });

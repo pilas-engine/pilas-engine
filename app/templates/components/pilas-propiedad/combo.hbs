@@ -1,9 +1,13 @@
-<div class="flex pv1">
+<div class="flex items-center">
 
   <div class="w-50">
 
     <div class="dib texto">
-      {{etiqueta propiedad.propiedad}}
+      {{#if titulo}}
+        {{etiqueta titulo}}
+      {{else}}
+        {{etiqueta propiedad.propiedad}}
+      {{/if}}
     </div>
 
   </div>
@@ -12,7 +16,7 @@
 
     <select class="w-100 select" onchange={{action "al_seleccionar" value="target.value"}}>
       {{#each opciones as |opcion|}}
-        <option value={{opcion.valor}} selected={{eq (get objeto propiedad.propiedad) opcion.valor}}>{{opcion.texto}}</option>
+        <option value={{opcion.valor}} selected={{eq valor_actual opcion.valor}}>{{opcion.texto}}</option>
       {{/each}}
     </select>
 

@@ -80,10 +80,8 @@ export default Component.extend({
       let archivo_index = yield this.obtener_archivo("./proyecto-exportable/index.html", "text");
       let resultado = this.compilador.compilar_proyecto(proyecto);
 
-      let escena_principal = proyecto.escenas.findBy("id", proyecto.escena_inicial);
-
       let proyecto_completo = {
-        nombre_de_la_escena_inicial: escena_principal.nombre,
+        nombre_de_la_escena_inicial: proyecto.nombre_de_la_escena_inicial,
         codigo: resultado.codigo,
         permitir_modo_pausa: false,
         proyecto: proyecto
@@ -135,10 +133,9 @@ export default Component.extend({
     let proyecto_como_string = JSON.stringify(proyecto, null, 2);
 
     let resultado = this.compilador.compilar_proyecto(proyecto);
-    let escena_principal = proyecto.escenas.findBy("id", proyecto.escena_inicial);
 
     let proyecto_completo = {
-      nombre_de_la_escena_inicial: escena_principal.nombre,
+      nombre_de_la_escena_inicial: proyecto.nombre_de_la_escena_inicial,
       codigo: resultado.codigo,
       permitir_modo_pausa: false,
       proyecto: proyecto
