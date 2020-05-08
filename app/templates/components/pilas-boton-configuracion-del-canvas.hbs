@@ -1,0 +1,27 @@
+<div class="dib">
+
+  {{#basic-dropdown as |dd|}}
+    {{#dd.trigger}}
+      <div class="pointer f7 dib boton-miniatura" role="button">
+        {{pilas-mini-icono icono="configuracion"}}
+      </div>
+    {{/dd.trigger}}
+
+    {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
+
+      <div class="">
+        {{pilas-interruptor dataTest="boton-modo-oscuro" variable=oscuro texto="Modo oscuro"}}
+      </div>
+
+      <div class="">
+        {{pilas-interruptor dataTest="boton-modo-oscuro" variable=permitir_modo_pausa texto="Permitir el modo pausa"}}
+      </div>
+
+      <div class="">
+        {{pilas-interruptor dataTest="boton-pixelart" variable=pixelart texto="Usar modo baja calidad"}}
+      </div>
+
+    {{/dd.content}}
+  {{/basic-dropdown}}
+
+</div>

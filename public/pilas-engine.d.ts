@@ -1614,7 +1614,7 @@ declare class Modo extends Phaser.Scene {
     ancho: number;
     alto: number;
     es_modo_ejecucion: boolean;
-    canvas_fisica: any;
+    canvas_fisica: Phaser.GameObjects.Graphics;
     posicion_anterior_de_arrastre: any;
     constructor(data: any);
     create(datos: any, ancho: any, alto: any): void;

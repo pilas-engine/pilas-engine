@@ -44,6 +44,42 @@
     box-shadow: inset 0 1px rgba(0, 0, 0, 0.1);
   }
 
+  .boton-miniatura {
+    color: #454545;
+    background-color: #e5e9e8;
+    border: 1px solid #9daca9;
+    border-radius: 4px;
+  }
+
+  .boton-miniatura:hover {
+    background-color: #eff1f1;
+  }
+
+  .boton-miniatura-pulsado {
+    border: 1px solid #9daca9;
+    background-color: #d2d6d6;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.1);
+    outline: 0;
+  }
+
+  .boton-miniatura-pulsable {
+    vertical-align: bottom;
+    color: #454545;
+    background-color: #e5e9e8;
+    border: 1px solid #9daca9;
+    border-radius: 4px;
+  }
+
+  .boton-miniatura-pulsable:hover {
+    background-color: #eff1f1;
+  }
+
+  .boton-miniatura-pulsable:focus {
+    border: 1px solid #0036ff;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.36), 0 0 0 2px #6fb5f1;
+    outline: 0;
+  }
+
   .bg-fondo {
     background-color: #dfe2e2;
   }

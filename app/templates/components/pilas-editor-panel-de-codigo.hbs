@@ -1,5 +1,5 @@
 <div class="{{if maximizar "dn"}} {{claseDelPanelColapsado}} bl borde pl2 pa2">
-  {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
+  {{pilas-boton-para-colapsar-panel dataTest="boton-abrir-panel-de-codigo" variable=mostrarEditor}}
   <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
     <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor">
       CÓDIGO
@@ -31,6 +31,7 @@
     </div>
 
     <div class="pt2 pr2">
+      {{pilas-boton-configuracion-del-editor modoVim=modoVim tamano=tamano}}
       {{pilas-boton-miniatura desactivado=(not estado.puede_editar) icono="maximizar" pulsado=maximizar alCambiarMaximizado=(action "alCambiarMaximizado")}}
     </div>
 

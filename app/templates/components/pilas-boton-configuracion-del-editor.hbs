@@ -1,0 +1,27 @@
+<div class="dib">
+
+  {{#basic-dropdown as |dd|}}
+    {{#dd.trigger}}
+      <div class="pointer f7 dib boton-miniatura" role="button">
+        {{pilas-mini-icono icono="configuracion"}}
+      </div>
+    {{/dd.trigger}}
+
+    {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
+
+      <div class="pa2 texto">
+        Tamaño de texto:
+        {{pilas-boton dataTest="boton-disminuir" class="button link pointer hover-bg-black-10 unselectable ph1 mh1" texto="-" accion=(action "disminuir")}}
+        <div role="button" class="dib pointer" {{action "restaurar"}}>{{tamano}}pt</div>
+        {{pilas-boton dataTest="boton-aumentar" class="button link pointer hover-bg-black-10 unselectable ph1 mh1" texto="+" accion=(action "aumentar")}}
+      </div>
+
+      <div class="">
+        {{pilas-interruptor dataTest="boton-modo-vim" variable=modoVim texto="Modo VIM (experimental)"}}
+      </div>
+
+
+    {{/dd.content}}
+  {{/basic-dropdown}}
+
+</div>
