@@ -1453,7 +1453,8 @@ var Mensajes = (function () {
             nombre_de_la_escena_inicial: datos.nombre_de_la_escena_inicial,
             permitir_modo_pausa: datos.permitir_modo_pausa,
             codigo: datos.codigo,
-            proyecto: datos.proyecto
+            proyecto: datos.proyecto,
+            es_cambio_de_escena: false
         };
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
@@ -7333,6 +7334,7 @@ var ModoCargador = (function (_super) {
             this.pilas.definir_modo("ModoEjecucion", {
                 pilas: this.pilas,
                 nombre_de_la_escena_inicial: "principal",
+                es_cambio_de_escena: false,
                 codigo: "\n        var __extends = (this && this.__extends) || (function () {\n          var extendStatics = function (d, b) {\n              extendStatics = Object.setPrototypeOf ||\n                  ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n                  function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n              return extendStatics(d, b);\n          }\n          return function (d, b) {\n              extendStatics(d, b);\n              function __() { this.constructor = d; }\n              d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n          };\n      })();\n      var principal = /** @class */ (function (_super) {\n          __extends(principal, _super);\n          function principal() {\n              return _super !== null && _super.apply(this, arguments) || this;\n          }\n          principal.prototype.iniciar = function () {\n          };\n          principal.prototype.actualizar = function () {\n          };\n          return principal;\n      }(Escena));\n      ",
                 proyecto: {
                     alto: 200,
@@ -7789,7 +7791,9 @@ var ModoEjecucion = (function (_super) {
             var escena = this.obtener_escena_inicial();
             this.clases = this.obtener_referencias_a_clases();
             this.cargar_animaciones(datos);
-            this.instanciar_proyecto();
+            if (!datos.es_cambio_de_escena) {
+                this.instanciar_proyecto();
+            }
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
             if (this.pilas.opciones.modo_simple) {
                 if (this.pilas["onready"]) {
@@ -7911,7 +7915,8 @@ var ModoEjecucion = (function (_super) {
             nombre_de_la_escena_inicial: nombre,
             permitir_modo_pausa: this.permitir_modo_pausa,
             codigo: this.codigo,
-            proyecto: this.proyecto
+            proyecto: this.proyecto,
+            es_cambio_de_escena: true
         };
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
@@ -8054,7 +8059,9 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.instanciar_proyecto = function () {
         var proyecto = new this.clases["Proyecto"](this.pilas);
-        proyecto.iniciar();
+        if (proyecto.iniciar) {
+            proyecto.iniciar();
+        }
         this.instancia_de_proyecto = proyecto;
     };
     ModoEjecucion.prototype.instanciar_escena = function (nombre) {

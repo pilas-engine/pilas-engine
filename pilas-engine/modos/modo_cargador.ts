@@ -144,6 +144,7 @@ class ModoCargador extends Modo {
       this.pilas.definir_modo("ModoEjecucion", {
         pilas: this.pilas,
         nombre_de_la_escena_inicial: "principal",
+        es_cambio_de_escena: false,
         codigo: `
         var __extends = (this && this.__extends) || (function () {
           var extendStatics = function (d, b) {

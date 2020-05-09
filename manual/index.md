@@ -26,6 +26,7 @@ Pilas Engine es una herramienta que te permite crear tus propios videojuegos y a
 - [Colisiones](colisiones.html)
 - [Mensajes](mensajes.html)
 - [Escenas](escenas.html)
+- [Código de proyecto](codigo-de-proyecto.html)
 - [Eventos de mouse o touch](eventos-de-mouse.html)
 - [Uso del teclado](uso-del-teclado.html)
 - [Dibujado simple en pantalla](dibujado_en_pantalla.html)

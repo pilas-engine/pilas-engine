@@ -126,6 +126,10 @@
     {
       "nombre": "plataformas-2",
       "desde": "2.1.1"
+    },
+    {
+      "nombre": "mantener-valores-entre-escenas",
+      "desde": "2.1.2"
     }
   ]
 }

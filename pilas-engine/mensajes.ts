@@ -101,7 +101,8 @@ class Mensajes {
       nombre_de_la_escena_inicial: datos.nombre_de_la_escena_inicial,
       permitir_modo_pausa: datos.permitir_modo_pausa,
       codigo: datos.codigo,
-      proyecto: datos.proyecto
+      proyecto: datos.proyecto,
+      es_cambio_de_escena: false
     };
 
     this.pilas.definir_modo("ModoEjecucion", parametros);

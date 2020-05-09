@@ -72,7 +72,7 @@
         <key>shapePadding</key>
         <uint>0</uint>
         <key>jpgQuality</key>
-        <uint>80</uint>
+        <uint>90</uint>
         <key>pngOptimizationLevel</key>
         <uint>1</uint>
         <key>webpQualityLevel</key>
@@ -181,8 +181,10 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">ejemplos/capturas/acceder-a-actores.png</key>
             <key type="filename">ejemplos/capturas/angulo-entre-actores.png</key>
             <key type="filename">ejemplos/capturas/angulo.png</key>
+            <key type="filename">ejemplos/capturas/apilador-de-cajas.png</key>
             <key type="filename">ejemplos/capturas/aprender-y-olvidar.png</key>
             <key type="filename">ejemplos/capturas/arkanoid.png</key>
             <key type="filename">ejemplos/capturas/arrastrables.png</key>
@@ -199,11 +201,18 @@
             <key type="filename">ejemplos/capturas/gravedad.png</key>
             <key type="filename">ejemplos/capturas/huesos.png</key>
             <key type="filename">ejemplos/capturas/laser-y-misil.png</key>
+            <key type="filename">ejemplos/capturas/mantener-valores-entre-escenas.png</key>
             <key type="filename">ejemplos/capturas/mensaje_global.png</key>
             <key type="filename">ejemplos/capturas/nave_contra_aliens.png</key>
+            <key type="filename">ejemplos/capturas/naves.png</key>
             <key type="filename">ejemplos/capturas/nubes.png</key>
             <key type="filename">ejemplos/capturas/pacman.png</key>
+            <key type="filename">ejemplos/capturas/plataformas-2.png</key>
             <key type="filename">ejemplos/capturas/plataformas.png</key>
+            <key type="filename">ejemplos/capturas/recorrido-con-orientacion.png</key>
+            <key type="filename">ejemplos/capturas/recorrido-de-curva.png</key>
+            <key type="filename">ejemplos/capturas/recorrido-simple.png</key>
+            <key type="filename">ejemplos/capturas/sokoban.png</key>
             <key type="filename">ejemplos/capturas/temporizadores.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>

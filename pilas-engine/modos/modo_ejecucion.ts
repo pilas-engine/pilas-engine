@@ -40,7 +40,11 @@ class ModoEjecucion extends Modo {
       this.clases = this.obtener_referencias_a_clases();
 
       this.cargar_animaciones(datos);
-      this.instanciar_proyecto();
+
+      if (!datos.es_cambio_de_escena) {
+        this.instanciar_proyecto();
+      }
+
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
 
       if (this.pilas.opciones.modo_simple) {
@@ -182,7 +186,8 @@ class ModoEjecucion extends Modo {
       nombre_de_la_escena_inicial: nombre,
       permitir_modo_pausa: this.permitir_modo_pausa,
       codigo: this.codigo,
-      proyecto: this.proyecto
+      proyecto: this.proyecto,
+      es_cambio_de_escena: true
     };
 
     this.pilas.definir_modo("ModoEjecucion", parametros);
@@ -356,6 +361,7 @@ class ModoEjecucion extends Modo {
   }
 
   instanciar_proyecto() {
+    //if (!this.instancia_de_proyecto) {
     let proyecto = new this.clases["Proyecto"](this.pilas);
 
     if (proyecto.iniciar) {
@@ -363,6 +369,7 @@ class ModoEjecucion extends Modo {
     }
 
     this.instancia_de_proyecto = proyecto;
+    //}
   }
 
   instanciar_escena(nombre) {
