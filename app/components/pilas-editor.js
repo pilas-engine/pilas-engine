@@ -19,7 +19,7 @@ export default Component.extend({
   recursos: service(),
   codigo: "",
   tagName: "",
-  actorSeleccionado: -1, //deprecated
+  actorSeleccionado: -1, //en desuso
   seleccion: -1,
   cargando: true,
   existe_un_error_reciente: false,
@@ -354,13 +354,17 @@ export default Component.extend({
   },
 
   guardar_codigo_en_el_proyecto(seleccion, codigo) {
-    let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
-
-    if (actor) {
-      this.definir_codigo_para_el_actor(actor, codigo);
+    if (seleccion === 0) {
+      this.definir_codigo_para_el_proyecto(codigo);
     } else {
-      let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
-      this.definir_codigo_para_la_escena(escena, codigo);
+      let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+
+      if (actor) {
+        this.definir_codigo_para_el_actor(actor, codigo);
+      } else {
+        let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
+        this.definir_codigo_para_la_escena(escena, codigo);
+      }
     }
   },
 
@@ -386,6 +390,10 @@ export default Component.extend({
     this.get("proyecto.codigos.escenas")
       .findBy("nombre", nombre)
       .set("codigo", codigo);
+  },
+
+  definir_codigo_para_el_proyecto(codigo) {
+    this.proyecto.codigos.proyecto = codigo;
   },
 
   error(data) {
@@ -585,6 +593,10 @@ export default Component.extend({
         this.set("seleccion", 0);
         this.set("instancia_seleccionada", this.proyecto);
         this.set("tipo_de_la_instancia_seleccionada", "proyecto");
+
+        this.set("codigo", this.proyecto.codigos.proyecto);
+        this.set("tituloDelCodigo", `Codigo del proyecto`);
+
         return;
       }
 

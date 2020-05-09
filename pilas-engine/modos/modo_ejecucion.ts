@@ -19,6 +19,8 @@ class ModoEjecucion extends Modo {
   _escena_en_ejecucion: any = null;
   teclas: Set<string> = null;
 
+  instancia_de_proyecto: any = null;
+
   constructor() {
     super({ key: "ModoEjecucion" });
     this.es_modo_ejecucion = true;
@@ -38,6 +40,7 @@ class ModoEjecucion extends Modo {
       this.clases = this.obtener_referencias_a_clases();
 
       this.cargar_animaciones(datos);
+      this.instanciar_proyecto();
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
 
       if (this.pilas.opciones.modo_simple) {
@@ -352,6 +355,16 @@ class ModoEjecucion extends Modo {
     return escenas_encontradas[0];
   }
 
+  instanciar_proyecto() {
+    let proyecto = new this.clases["Proyecto"](this.pilas);
+
+    if (proyecto.iniciar) {
+      proyecto.iniciar();
+    }
+
+    this.instancia_de_proyecto = proyecto;
+  }
+
   instanciar_escena(nombre) {
     let escena = this.obtener_escena_por_nombre(nombre);
 
@@ -372,6 +385,7 @@ class ModoEjecucion extends Modo {
     }
 
     let escena = new this.clases[nombre](this.pilas);
+    escena.proyecto = this.instancia_de_proyecto;
 
     escena.camara.x = datos_de_la_escena.camara_x;
     escena.camara.y = datos_de_la_escena.camara_y;
@@ -447,6 +461,7 @@ class ModoEjecucion extends Modo {
 
     if (clase) {
       actor = new this.clases[entidad.nombre](this.pilas);
+      actor.proyecto = this.instancia_de_proyecto;
 
       let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
       p = this.pilas.utilidades.combinar_propiedades(p, entidad);

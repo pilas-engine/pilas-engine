@@ -7775,6 +7775,7 @@ var ModoEjecucion = (function (_super) {
         _this.nombre_de_la_escena_inicial = null;
         _this._escena_en_ejecucion = null;
         _this.teclas = null;
+        _this.instancia_de_proyecto = null;
         _this.es_modo_ejecucion = true;
         return _this;
     }
@@ -7788,6 +7789,7 @@ var ModoEjecucion = (function (_super) {
             var escena = this.obtener_escena_inicial();
             this.clases = this.obtener_referencias_a_clases();
             this.cargar_animaciones(datos);
+            this.instanciar_proyecto();
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
             if (this.pilas.opciones.modo_simple) {
                 if (this.pilas["onready"]) {
@@ -8050,6 +8052,11 @@ var ModoEjecucion = (function (_super) {
         }
         return escenas_encontradas[0];
     };
+    ModoEjecucion.prototype.instanciar_proyecto = function () {
+        var proyecto = new this.clases["Proyecto"](this.pilas);
+        proyecto.iniciar();
+        this.instancia_de_proyecto = proyecto;
+    };
     ModoEjecucion.prototype.instanciar_escena = function (nombre) {
         var escena = this.obtener_escena_por_nombre(nombre);
         if (escena.fondo) {
@@ -8067,6 +8074,7 @@ var ModoEjecucion = (function (_super) {
             throw new Error("No hay una clase con el nombre " + nombre);
         }
         var escena = new this.clases[nombre](this.pilas);
+        escena.proyecto = this.instancia_de_proyecto;
         escena.camara.x = datos_de_la_escena.camara_x;
         escena.camara.y = datos_de_la_escena.camara_y;
         escena.fondo = datos_de_la_escena.fondo;
@@ -8117,6 +8125,7 @@ var ModoEjecucion = (function (_super) {
         var clase = this.clases[entidad.nombre];
         if (clase) {
             actor = new this.clases[entidad.nombre](this.pilas);
+            actor.proyecto = this.instancia_de_proyecto;
             var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
             actor.pre_iniciar(p);

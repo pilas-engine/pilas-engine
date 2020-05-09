@@ -16,6 +16,7 @@ class EscenaBase {
   alto: number;
   desplazamiento_del_fondo_x: number;
   desplazamiento_del_fondo_y: number;
+  proyecto: any;
 
   constructor(pilas) {
     this.pilas = pilas;

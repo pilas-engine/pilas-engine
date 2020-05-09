@@ -34,6 +34,7 @@ export default Component.extend({
       alto: 350,
       imagenes: imagenes_heredadas,
       codigos: {
+        proyecto: "class Proyecto { iniciar () {} }",
         escenas: [
           {
             nombre: "EscenaDemoDeAnimacion",

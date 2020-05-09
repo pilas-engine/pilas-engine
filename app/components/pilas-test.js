@@ -18,6 +18,7 @@ export default Component.extend({
       ancho: 500,
       alto: 500,
       codigos: {
+        proyecto: "class Proyecto { iniciar() {} }",
         escenas: [
           {
             nombre: "principal",

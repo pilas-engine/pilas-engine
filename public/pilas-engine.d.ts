@@ -500,6 +500,7 @@ declare class ActorBase {
     texto: any;
     _id: any;
     _nombre: any;
+    proyecto: any;
     _habilidades: any[];
     _comportamientos: {
         nombre_del_comportamiento: string;
@@ -1110,6 +1111,7 @@ declare class EscenaBase {
     alto: number;
     desplazamiento_del_fondo_x: number;
     desplazamiento_del_fondo_y: number;
+    proyecto: any;
     constructor(pilas: any);
     reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
@@ -1720,6 +1722,7 @@ declare class ModoEjecucion extends Modo {
     modo_fisica_activado: boolean;
     _escena_en_ejecucion: any;
     teclas: Set<string>;
+    instancia_de_proyecto: any;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -1736,6 +1739,7 @@ declare class ModoEjecucion extends Modo {
     obtener_escena_inicial(): any;
     obtener_nombre_de_la_escena_inicial(): string;
     obtener_escena_por_nombre(nombre: string): any;
+    instanciar_proyecto(): void;
     instanciar_escena(nombre: any): void;
     crear_escena(datos_de_la_escena: any): void;
     clonar_actor_por_nombre(nombre: string): any;

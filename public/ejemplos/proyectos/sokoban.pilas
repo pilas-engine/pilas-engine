@@ -2,7 +2,6 @@
   "titulo": "Proyecto demo",
   "ancho": 600,
   "alto": 600,
-  "escena_inicial": 1,
   "imagenes": [
     {
       "nombre": "player_08",
@@ -421,7 +420,7 @@
     "actores": [
       {
         "nombre": "protagonista",
-        "codigo": "// @ts-ignore\nclass protagonista extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n\n    cuando_pulsa_tecla(tecla) {\n        if (tecla === \"izquierda\") {\n            this.mover(-1, 0);\n            this.imagen = \"player_20\";\n        }\n\n        if (tecla === \"derecha\") {\n            this.mover(1, 0);\n            this.imagen = \"player_17\";\n        }\n\n        if (tecla === \"arriba\") {\n            this.mover(0, 1);\n            this.imagen = \"player_08\";\n        }\n\n        if (tecla == \"abajo\") {\n            this.mover(0, -1);\n            this.imagen = \"player_05\";\n        }\n    }\n\n    mover(x, y) {\n\n        if (this.es_pared(x, y)) {\n            this.decir(\"No puedo empujar la pared.\");\n            return;\n        }\n\n        if (this.es_caja(x, y)) {\n            if (this.puede_empujar_la_caja(x, y)) {\n                this.empujar_caja(x, y);\n\n                // Mueve al personaje.\n                this.x += x * 64;\n                this.y += y * 64;\n                return;\n\n            } else {\n                this.decir(\"Esta caja está bloqueada por la pared\");\n                return true;\n            }\n        }\n\n        // Mueve al personaje si no hay pared ni cajas en su camino.\n        this.x += x * 64;\n        this.y += y * 64;\n    }\n\n    es_pared(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una pared.\n        return actores.find((actor) => actor.tiene_etiqueta(\"pared\"));\n    }\n\n    es_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una caja.\n        return actores.find((actor) => actor.tiene_etiqueta(\"caja\"));\n    }\n\n    empujar_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        let caja = (actores.find((actor) => actor.tiene_etiqueta(\"caja\")));\n\n        caja.x += x * 64;\n        caja.y += y * 64;\n\n    }\n\n    puede_empujar_la_caja(x, y) {\n        // calcula los siguientes dos pasos que dará.\n        let pos_x = this.x + x * 2 * 64;\n        let pos_y = this.y + y * 2 * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, en caso de que a dos pasos exista una pared.\n        // es decir, si hay una pared a dos pasos es que no puede empujar\n        // una caja en esa dirección.\n        if (actores.find((actor) => actor.tiene_etiqueta(\"pared\"))) {\n            return false;\n        } else {\n            return true;\n        }\n    }\n}"
+        "codigo": "// @ts-ignore\nclass protagonista extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n\n    cuando_pulsa_tecla(tecla) {\n        if (tecla === \"izquierda\") {\n            this.mover(-1, 0);\n            this.imagen = \"player_20\";\n        }\n\n        if (tecla === \"derecha\") {\n            this.mover(1, 0);\n            this.imagen = \"player_17\";\n        }\n\n        if (tecla === \"arriba\") {\n            this.mover(0, 1);\n            this.imagen = \"player_08\";\n        }\n\n        if (tecla == \"abajo\") {\n            this.mover(0, -1);\n            this.imagen = \"player_05\";\n        }\n    }\n\n    mover(x, y) {\n\n        if (this.es_pared(x, y)) {\n            this.decir(\"No puedo empujar la pared.\");\n            return;\n        }\n\n        if (this.es_caja(x, y)) {\n            if (this.puede_empujar_la_caja(x, y)) {\n                this.empujar_caja(x, y);\n\n                // Mueve al personaje.\n                this.x += x * 64;\n                this.y += y * 64;\n                return;\n\n            } else {\n                this.decir(\"Esta caja está bloqueada\");\n                return true;\n            }\n        }\n\n        // Mueve al personaje si no hay pared ni cajas en su camino.\n        this.x += x * 64;\n        this.y += y * 64;\n    }\n\n    es_pared(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una pared.\n        return actores.find((actor) => actor.tiene_etiqueta(\"pared\"));\n    }\n\n    es_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una caja.\n        return actores.find((actor) => actor.tiene_etiqueta(\"caja\"));\n    }\n\n    empujar_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        let caja = (actores.find((actor) => actor.tiene_etiqueta(\"caja\")));\n\n        caja.x += x * 64;\n        caja.y += y * 64;\n\n    }\n\n    puede_empujar_la_caja(x, y) {\n        // calcula los siguientes dos pasos que dará.\n        let pos_x = this.x + x * 2 * 64;\n        let pos_y = this.y + y * 2 * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, en caso de que a dos pasos exista una pared.\n        // es decir, si hay una pared a dos pasos es que no puede empujar\n        // una caja en esa dirección.\n        if (actores.find((actor) => {\n                return actor.tiene_etiqueta(\"pared\") || actor.tiene_etiqueta(\"caja\");\n            })) {\n            return false;\n        } else {\n            return true;\n        }\n    }\n}"
       },
       {
         "nombre": "diamante",
@@ -591,7 +590,8 @@
         "nombre": "texto_de_cajas_por_ubicar",
         "codigo": "// @ts-ignore\nclass texto_de_cajas_por_ubicar extends ActorTextoBase {\n    completo_el_nivel = false;\n\n    cada_segundo() {\n        let diamantes = this.pilas.obtener_todos_los_actores_con_la_etiqueta(\"diamante\");\n        let cantidad = diamantes.filter(d => d['pendiente']).length;\n\n        if (cantidad === 1) {\n            this.texto = \"Queda una sola caja ubicar\";\n        } else {\n            if (cantidad === 0) {\n                this.texto = \"¡Lo lograste!\";\n\n                if (!this.completo_el_nivel) {\n                    this.completo_el_nivel = true;\n                    this.pilas.clonar(\"nivel_completado\");\n                }\n\n            } else {\n                this.texto = `Quedan ${cantidad} cajas por ubicar`;\n            }\n        }\n\n    }\n}"
       }
-    ]
+    ],
+    "proyecto": "class Proyecto {\n        iniciar() {\n\n        }\n      }"
   },
   "escenas": [
     {
@@ -634,7 +634,8 @@
           "id": 1663,
           "activo": true,
           "nombre": "protagonista",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -665,7 +666,8 @@
           "id": 1262,
           "activo": true,
           "nombre": "diamante",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 148,
@@ -696,7 +698,8 @@
           "id": 1513,
           "activo": true,
           "nombre": "pared",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -44,
@@ -727,7 +730,8 @@
           "id": 1321,
           "activo": true,
           "nombre": "caja",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -758,7 +762,8 @@
           "id": 1491,
           "activo": true,
           "nombre": "pared1",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -108,
@@ -789,7 +794,8 @@
           "id": 1279,
           "activo": true,
           "nombre": "pared2",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -44,
@@ -820,7 +826,8 @@
           "id": 1973,
           "activo": true,
           "nombre": "pared3",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 20,
@@ -851,7 +858,8 @@
           "id": 1918,
           "activo": true,
           "nombre": "pared4",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 84,
@@ -882,7 +890,8 @@
           "id": 1516,
           "activo": true,
           "nombre": "pared5",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 148,
@@ -913,7 +922,8 @@
           "id": 1546,
           "activo": true,
           "nombre": "pared6",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 20,
@@ -944,7 +954,8 @@
           "id": 1869,
           "activo": true,
           "nombre": "pared7",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 20,
@@ -975,7 +986,8 @@
           "id": 1868,
           "activo": true,
           "nombre": "pared8",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -108,
@@ -1006,7 +1018,8 @@
           "id": 1701,
           "activo": true,
           "nombre": "pared9",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 20,
@@ -1037,7 +1050,8 @@
           "id": 1671,
           "activo": true,
           "nombre": "pared10",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -236,
@@ -1068,7 +1082,8 @@
           "id": 1051,
           "activo": true,
           "nombre": "pared11",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -1099,7 +1114,8 @@
           "id": 1369,
           "activo": true,
           "nombre": "pared12",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -1130,7 +1146,8 @@
           "id": 1597,
           "activo": true,
           "nombre": "pared13",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -236,
@@ -1161,7 +1178,8 @@
           "id": 1382,
           "activo": true,
           "nombre": "pared14",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -1192,7 +1210,8 @@
           "id": 1515,
           "activo": true,
           "nombre": "pared15",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -236,
@@ -1223,7 +1242,8 @@
           "id": 1533,
           "activo": true,
           "nombre": "pared16",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -1254,7 +1274,8 @@
           "id": 1388,
           "activo": true,
           "nombre": "pared17",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -108,
@@ -1285,7 +1306,8 @@
           "id": 1498,
           "activo": true,
           "nombre": "pared18",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -236,
@@ -1316,7 +1338,8 @@
           "id": 1850,
           "activo": true,
           "nombre": "pared19",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -236,
@@ -1347,7 +1370,8 @@
           "id": 1716,
           "activo": true,
           "nombre": "pared20",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 212,
@@ -1378,7 +1402,8 @@
           "id": 1199,
           "activo": true,
           "nombre": "pared21",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 148,
@@ -1409,7 +1434,8 @@
           "id": 18699,
           "activo": true,
           "nombre": "pared22",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 84,
@@ -1440,7 +1466,8 @@
           "id": 1476,
           "activo": true,
           "nombre": "pared23",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -44,
@@ -1471,7 +1498,8 @@
           "id": 1760,
           "activo": true,
           "nombre": "pared24",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 212,
@@ -1502,7 +1530,8 @@
           "id": 1111,
           "activo": true,
           "nombre": "pared25",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 212,
@@ -1533,7 +1562,8 @@
           "id": 1030,
           "activo": true,
           "nombre": "pared26",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -108,
@@ -1564,7 +1594,8 @@
           "id": 1758,
           "activo": true,
           "nombre": "pared27",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -1595,7 +1626,8 @@
           "id": 1609,
           "activo": true,
           "nombre": "diamante1",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -172,
@@ -1626,7 +1658,8 @@
           "id": 1270,
           "activo": true,
           "nombre": "diamante2",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": -108,
@@ -1657,7 +1690,8 @@
           "id": 1490,
           "activo": true,
           "nombre": "caja1",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 84,
@@ -1688,7 +1722,8 @@
           "id": 1459,
           "activo": true,
           "nombre": "caja2",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 212,
@@ -1719,7 +1754,8 @@
           "id": 1998,
           "activo": true,
           "nombre": "pared28",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 212,
@@ -1750,7 +1786,8 @@
           "id": 1711,
           "activo": true,
           "nombre": "pared29",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 148,
@@ -1781,7 +1818,8 @@
           "id": 1660,
           "activo": true,
           "nombre": "pared30",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 84,
@@ -1812,7 +1850,8 @@
           "id": 1108,
           "activo": true,
           "nombre": "pared31",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 20,
@@ -1843,7 +1882,8 @@
           "id": 1251,
           "activo": true,
           "nombre": "pared32",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": []
         },
         {
           "x": 225.49510763209366,
@@ -1876,7 +1916,9 @@
           "id": 1506,
           "activo": true,
           "nombre": "reiniciar_escena",
-          "habilidades": []
+          "habilidades": [],
+          "sensores": [],
+          "fuente": "color-negro"
         },
         {
           "x": 3.5225048923679765,
@@ -1909,7 +1951,9 @@
           "activo": false,
           "nombre": "nivel_completado",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables/con_bordes_2"
+          "fondo": "imagenes:redimensionables/con_bordes_2",
+          "sensores": [],
+          "fuente": "color-blanco-con-sombra"
         },
         {
           "x": 0,
@@ -1942,9 +1986,14 @@
           "activo": true,
           "nombre": "texto_de_cajas_por_ubicar",
           "habilidades": [],
-          "fondo": "imagenes:redimensionables/con_bordes_2"
+          "fondo": "imagenes:redimensionables/con_bordes_2",
+          "sensores": [],
+          "fuente": "color-blanco-con-sombra"
         }
       ]
     }
-  ]
+  ],
+  "fps": 60,
+  "nombre_de_la_escena_inicial": "escena1",
+  "tamaño": "600x600"
 }

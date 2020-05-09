@@ -51,9 +51,23 @@ export default Service.extend({
       proyecto.set("nombre_de_la_escena_inicial", proyecto.escenas.firstObject.get("nombre"));
     }
 
-    // Migracion 2020-05-08: Elimina el atributo escena_inicial si está definido
+    // Migracion 2020-05-08: Elimina el atributo escena_inicial en desuso.
     if (proyecto.escena_inicial) {
       proyecto.set("escena_inicial", undefined);
+    }
+
+    // Migracion 2020-05-08: si el proyecto no tiene código se lo agrega.
+    if (!proyecto.codigos.proyecto) {
+      proyecto.codigos.proyecto = `class Proyecto {
+        iniciar() {
+
+        }
+      }`;
+    }
+
+    // Migracion 2020-05-08: si el proyecto no tiene tamaño lo agrega.
+    if (!proyecto.tamaño) {
+      proyecto.set("tamaño", `${proyecto.ancho}x${proyecto.alto}`);
     }
 
     return proyecto;

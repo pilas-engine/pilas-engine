@@ -97,7 +97,7 @@ export default [
         sprite: "imagenes-mini-explosion-explosion_6"
       }
     ],
-    velocidad: "30"
+    velocidad: "20"
   },
   {
     nombre: "golpe",
@@ -237,7 +237,7 @@ export default [
         sprite: "imagenes-pacman-fantasma_azul_1"
       }
     ],
-    velocidad: "30"
+    velocidad: "10"
   },
   {
     nombre: "fantasma_camina",
@@ -251,7 +251,7 @@ export default [
         sprite: "imagenes-pacman-fantasma_7"
       }
     ],
-    velocidad: "30"
+    velocidad: "10"
   },
   {
     nombre: "moneda",
@@ -307,7 +307,7 @@ export default [
         sprite: "imagenes-pacman-pacman_6"
       }
     ],
-    velocidad: "40"
+    velocidad: "20"
   },
   {
     nombre: "pacman_espera",

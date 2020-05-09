@@ -20,6 +20,8 @@ class ActorBase {
   _id: any;
   _nombre: any;
 
+  proyecto: any;
+
   _habilidades: any[];
   _comportamientos: { nombre_del_comportamiento: string; argumentos: any }[];
   _comportamiento_actual: Comportamiento = null;

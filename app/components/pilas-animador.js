@@ -101,6 +101,7 @@ export default Component.extend({
       alto: 350,
       imagenes: imagenes_heredadas,
       codigos: {
+        proyecto: "class Proyecto { iniciar() {} }",
         escenas: [
           {
             nombre: NOMBRE_DE_LA_ESCENA,
@@ -237,6 +238,6 @@ export default Component.extend({
         actor.imagen = frame.textureKey;
       }
       this.set("cuadro_actual", indice);
-    },
+    }
   }
 });

@@ -308,8 +308,6 @@ export default Component.extend({
     let iframe = this.element.querySelector("iframe");
 
     setTimeout(() => {
-      console.log("hacer foro");
-
       if (iframe) {
         iframe.contentWindow.focus();
       }
