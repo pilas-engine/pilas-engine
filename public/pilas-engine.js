@@ -1669,6 +1669,7 @@ var Utilidades = (function () {
             contenedor.scaleY = sprite.scaleY;
         }
         contenedor.angle = sprite.angle;
+        contenedor.alpha = sprite.alpha;
         contenedor.setDepth(sprite.depth);
     };
     Utilidades.prototype.obtener_nombre_de_la_tecla_desde_un_evento = function (evento) {

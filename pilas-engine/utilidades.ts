@@ -210,6 +210,7 @@ class Utilidades {
     }
 
     contenedor.angle = sprite.angle;
+    contenedor.alpha = sprite.alpha;
 
     contenedor.setDepth(sprite.depth);
   }
