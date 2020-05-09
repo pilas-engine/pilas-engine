@@ -2,7 +2,7 @@
 title: Manual de Pilas Engine 2
 ---
 
-![](imagenes/logos/logo.png)
+![](imagenes/logos/logo.png){width=133px height=148px}
 
 Pilas Engine es una herramienta que te permite crear tus propios videojuegos y aprender a programar. Está diseñada por desarrolladores de habla hispana y cuenta con el respaldo de docentes y profesionales especialistas en desarrollo de Software.
 
