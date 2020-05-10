@@ -130,6 +130,10 @@
     {
       "nombre": "mantener-valores-entre-escenas",
       "desde": "2.1.2"
+    },
+    {
+      "nombre": "pantalla-completa",
+      "desde": "2.1.2"
     }
   ]
 }

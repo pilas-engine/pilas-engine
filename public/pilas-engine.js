@@ -128,6 +128,9 @@ var Actores = (function () {
     Actores.prototype.boton_activable = function () {
         return this.crear_actor("boton_activable");
     };
+    Actores.prototype.pantalla_completa = function () {
+        return this.crear_actor("pantalla_completa");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -1786,7 +1789,7 @@ var Pilas = (function () {
     Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones, imagenes) {
         if (opciones === void 0) { opciones = {}; }
         if (imagenes === void 0) { imagenes = []; }
-        if (opciones === undefined || recursos === null) {
+        if (opciones === undefined) {
             opciones = {};
         }
         if (recursos === undefined || recursos === null) {
@@ -2092,6 +2095,15 @@ var Pilas = (function () {
         for (var i = 0; i < actores.length; i++) {
             actores[i].enviar_mensaje(mensaje, datos);
         }
+    };
+    Pilas.prototype.alternar_modo_pantalla_completa = function () {
+        this.modo.scale.toggleFullscreen();
+    };
+    Pilas.prototype.solicitar_modo_pantalla_completa = function () {
+        this.modo.scale.startFullscreen();
+    };
+    Pilas.prototype.solicitar_modo_ventana = function () {
+        this.modo.scale.stopFullscreen();
     };
     return Pilas;
 }());
@@ -4148,6 +4160,32 @@ var nube_animada = (function (_super) {
         }
     };
     return nube_animada;
+}(Actor));
+var pantalla_completa = (function (_super) {
+    __extends(pantalla_completa, _super);
+    function pantalla_completa() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:botones/pantalla-completa",
+            es_texto: false,
+            z: -10,
+            transparencia: 50
+        };
+        return _this;
+    }
+    pantalla_completa.prototype.iniciar = function () {
+        this.transparencia = 50;
+    };
+    pantalla_completa.prototype.cuando_hace_click = function () {
+        this.pilas.alternar_modo_pantalla_completa();
+    };
+    pantalla_completa.prototype.cuando_mueve = function () {
+        this.transparencia = 0;
+    };
+    pantalla_completa.prototype.cuando_sale = function () {
+        this.transparencia = 0;
+    };
+    return pantalla_completa;
 }(Actor));
 var pared = (function (_super) {
     __extends(pared, _super);
@@ -7336,7 +7374,7 @@ var ModoCargador = (function (_super) {
                 pilas: this.pilas,
                 nombre_de_la_escena_inicial: "principal",
                 es_cambio_de_escena: false,
-                codigo: "\n        var __extends = (this && this.__extends) || (function () {\n          var extendStatics = function (d, b) {\n              extendStatics = Object.setPrototypeOf ||\n                  ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n                  function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n              return extendStatics(d, b);\n          }\n          return function (d, b) {\n              extendStatics(d, b);\n              function __() { this.constructor = d; }\n              d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n          };\n      })();\n      var principal = /** @class */ (function (_super) {\n          __extends(principal, _super);\n          function principal() {\n              return _super !== null && _super.apply(this, arguments) || this;\n          }\n          principal.prototype.iniciar = function () {\n          };\n          principal.prototype.actualizar = function () {\n          };\n          return principal;\n      }(Escena));\n      ",
+                codigo: "\n\n        var __extends = (this && this.__extends) || (function () {\n          var extendStatics = function (d, b) {\n              extendStatics = Object.setPrototypeOf ||\n                  ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n                  function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n              return extendStatics(d, b);\n          }\n          return function (d, b) {\n              extendStatics(d, b);\n              function __() { this.constructor = d; }\n              d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n          };\n      })();\n      var Proyecto = /** @class */ (function () {\n          function Proyecto() {\n          }\n          Proyecto.prototype.iniciar = function () {\n          };\n          return Proyecto;\n      }());\n      var principal = /** @class */ (function (_super) {\n          __extends(principal, _super);\n          function principal() {\n              return _super !== null && _super.apply(this, arguments) || this;\n          }\n          principal.prototype.iniciar = function () {\n          };\n          principal.prototype.actualizar = function () {\n          };\n          return principal;\n      }(Escena));\n      ",
                 proyecto: {
                     alto: 200,
                     ancho: 200,

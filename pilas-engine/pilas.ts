@@ -123,7 +123,7 @@ class Pilas {
   }
 
   iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}, imagenes: any = []) {
-    if (opciones === undefined || recursos === null) {
+    if (opciones === undefined) {
       opciones = {};
     }
 
@@ -536,7 +536,18 @@ class Pilas {
       actores[i].enviar_mensaje(mensaje, datos);
     }
   }
+
+  alternar_modo_pantalla_completa() {
+    this.modo.scale.toggleFullscreen();
+  }
+
+  solicitar_modo_pantalla_completa() {
+    this.modo.scale.startFullscreen();
+  }
+
+  solicitar_modo_ventana() {
+    this.modo.scale.stopFullscreen();
+  }
 }
 
-//var pilas = new Pilas();
 var pilasengine = new Pilas();

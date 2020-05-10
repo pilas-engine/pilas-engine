@@ -151,4 +151,8 @@ class Actores {
   boton_activable() {
     return this.crear_actor("boton_activable");
   }
+
+  pantalla_completa() {
+    return this.crear_actor("pantalla_completa");
+  }
 }

@@ -32,6 +32,7 @@ declare class Actores {
     pizarra(): any;
     explosion(): any;
     boton_activable(): any;
+    pantalla_completa(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -470,6 +471,9 @@ declare class Pilas {
     clonar_en_posicion_al_azar(nombre: string): any;
     es_multiplo(a: number, b: number): boolean;
     enviar_mensaje_global(mensaje: string, datos?: any): void;
+    alternar_modo_pantalla_completa(): void;
+    solicitar_modo_pantalla_completa(): void;
+    solicitar_modo_ventana(): void;
 }
 declare var pilasengine: Pilas;
 declare class Sensor {
@@ -985,6 +989,18 @@ declare class nube_animada extends Actor {
     velocidad: number;
     iniciar(): void;
     actualizar(): void;
+}
+declare class pantalla_completa extends Actor {
+    propiedades: {
+        imagen: string;
+        es_texto: boolean;
+        z: number;
+        transparencia: number;
+    };
+    iniciar(): void;
+    cuando_hace_click(): void;
+    cuando_mueve(): void;
+    cuando_sale(): void;
 }
 declare class pared extends Actor {
     propiedades: {

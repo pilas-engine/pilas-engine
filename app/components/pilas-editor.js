@@ -173,7 +173,13 @@ export default Component.extend({
   obtener_la_escena_inicial() {
     let escenas = this.proyecto.escenas;
     let escena_incial = this.proyecto.nombre_de_la_escena_inicial;
-    return escenas.find(e => e.nombre === escena_incial);
+    let objeto_escena = escenas.find(e => e.nombre === escena_incial);
+
+    if (!objeto_escena) {
+      return escenas.get("firstObject");
+    } else {
+      return objeto_escena;
+    }
   },
 
   pulsa_la_tecla_escape() {
@@ -746,13 +752,13 @@ export default Component.extend({
 
     detener_y_volver_al_editor() {
       if (this.get("estado.puedeDetener")) {
-        if (this.get("panelMaximizado") == "canvas-desde-el-editor") {
-          this.set("panelMaximizado", "editor");
-          this.set("maximizarCanvas", false);
-          this.set("maximizarEditor", true);
-        }
-
         this.send("detener");
+      }
+
+      if (this.get("panelMaximizado") == "canvas-desde-el-editor") {
+        this.set("panelMaximizado", "editor");
+        this.set("maximizarCanvas", false);
+        this.set("maximizarEditor", true);
       }
     }
   }

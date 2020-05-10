@@ -136,6 +136,11 @@
       "archivo": "nube_animada.ts"
     },
     {
+      "nombre": "pantalla_completa",
+      "codigo": "class pantalla_completa extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/pantalla-completa\",\n    es_texto: false,\n    z: -10,\n    transparencia: 50\n  };\n\n  iniciar() {\n    this.transparencia = 50;\n  }\n\n  cuando_hace_click() {\n    this.pilas.alternar_modo_pantalla_completa();\n  }\n\n  cuando_mueve() {\n    this.transparencia = 0;\n  }\n\n  cuando_sale() {\n    this.transparencia = 0;\n  }\n}\n",
+      "archivo": "pantalla_completa.ts"
+    },
+    {
       "nombre": "pared",
       "codigo": "class pared extends Actor {\n  propiedades = {\n    figura: \"rectangulo\",\n    imagen: \"imagenes:plataformas/pared\",\n    y: 0,\n    figura_ancho: 20,\n    figura_alto: 600,\n    figura_dinamica: false,\n    figura_rebote: 0\n  };\n\n  iniciar() {}\n}\n",
       "archivo": "pared.ts"
