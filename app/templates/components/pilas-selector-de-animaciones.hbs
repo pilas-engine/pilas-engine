@@ -32,7 +32,10 @@
         Ayuda: para mostrar esta animación escribe el siguiente código en un actor:
       </div>
 
-      <pre class="ba borde pa2 bg-fondo-secundario">this.animacion = "{{animación.nombre}}";</pre>
+      <div class="flex items-center">
+        <pre class="ba borde pa2 bg-fondo-secundario mr2 flex1">{{helper-animacion animación.nombre}}</pre>
+        {{pilas-boton-copiar texto=(helper-animacion animación.nombre)}}
+      </div>
 
     </div>
 

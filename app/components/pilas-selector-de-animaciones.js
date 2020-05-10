@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
+import { computed } from "@ember/object";
 
 export default Component.extend({
   tagName: "",
@@ -26,12 +27,15 @@ export default Component.extend({
       this.set("modal_editor_de_animaciones", true);
       this.set("animación", animación);
     },
+
     previsualizar(animación) {
       this.set("animación", animación);
     },
+
     ocultar() {
       this.set("modal_editor_de_animaciones", false);
     },
+
     crear_animación_nueva() {
       let nombres_de_las_animaciones = this.obtener_nombres_de_todas_las_animaciones();
       let nombre = obtener_nombre_sin_repetir(nombres_de_las_animaciones, "nueva");
@@ -45,6 +49,7 @@ export default Component.extend({
       this.proyecto.animaciones.insertAt(0, animación);
       this.send("editar", animación);
     },
+
     cuando_quiere_eliminar_animacion(animacion) {
       this.proyecto.animaciones.removeObject(animacion);
 

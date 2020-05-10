@@ -4,8 +4,8 @@
 			"image": "imagenes-0.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 1193,
-				"h": 1017
+				"w": 1194,
+				"h": 1018
 			},
 			"scale": 1,
 			"frames": [
@@ -260,6 +260,31 @@
 					}
 				},
 				{
+					"filename": "basicos/barra_de_energia",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 204,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 204,
+						"h": 19
+					},
+					"frame": {
+						"x": 861,
+						"y": 1,
+						"w": 204,
+						"h": 19
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "efectos/golpe-5",
 					"rotated": false,
 					"trimmed": true,
@@ -325,34 +350,9 @@
 					},
 					"frame": {
 						"x": 861,
-						"y": 1,
+						"y": 22,
 						"w": 190,
 						"h": 6
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion/explosion_015",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 162,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 0,
-						"w": 139,
-						"h": 144
-					},
-					"frame": {
-						"x": 1053,
-						"y": 1,
-						"w": 139,
-						"h": 144
 					},
 					"anchor": {
 						"x": 0.5,
@@ -385,6 +385,31 @@
 					}
 				},
 				{
+					"filename": "explosion/explosion_015",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 162,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 139,
+						"h": 144
+					},
+					"frame": {
+						"x": 1,
+						"y": 705,
+						"w": 139,
+						"h": 144
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "explosion/explosion_011",
 					"rotated": false,
 					"trimmed": true,
@@ -400,7 +425,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 705,
+						"y": 851,
 						"w": 139,
 						"h": 140
 					},
@@ -410,99 +435,24 @@
 					}
 				},
 				{
-					"filename": "efectos/humo-09",
+					"filename": "objetos/paleta",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 161,
-						"h": 162
+						"w": 104,
+						"h": 24
 					},
 					"spriteSourceSize": {
-						"x": 6,
-						"y": 16,
-						"w": 141,
-						"h": 133
+						"x": 0,
+						"y": 0,
+						"w": 104,
+						"h": 24
 					},
 					"frame": {
 						"x": 1,
-						"y": 847,
-						"w": 141,
-						"h": 133
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "efectos/humo-08",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 161,
-						"h": 162
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 17,
-						"w": 139,
-						"h": 131
-					},
-					"frame": {
-						"x": 861,
-						"y": 9,
-						"w": 139,
-						"h": 131
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_0",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 15,
-						"y": 4,
-						"w": 49,
-						"h": 63
-					},
-					"frame": {
-						"x": 1002,
-						"y": 9,
-						"w": 49,
-						"h": 63
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_6",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 15,
-						"y": 4,
-						"w": 49,
-						"h": 63
-					},
-					"frame": {
-						"x": 1002,
-						"y": 74,
-						"w": 49,
-						"h": 63
+						"y": 993,
+						"w": 104,
+						"h": 24
 					},
 					"anchor": {
 						"x": 0.5,
@@ -549,7 +499,7 @@
 						"h": 134
 					},
 					"frame": {
-						"x": 144,
+						"x": 142,
 						"y": 844,
 						"w": 137,
 						"h": 134
@@ -560,23 +510,48 @@
 					}
 				},
 				{
-					"filename": "explosion/explosion_009",
+					"filename": "efectos/humo-09",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 162,
-						"h": 144
+						"w": 161,
+						"h": 162
 					},
 					"spriteSourceSize": {
-						"x": 16,
-						"y": 7,
-						"w": 134,
-						"h": 131
+						"x": 6,
+						"y": 16,
+						"w": 141,
+						"h": 133
 					},
 					"frame": {
 						"x": 183,
 						"y": 154,
-						"w": 134,
+						"w": 141,
+						"h": 133
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "efectos/humo-08",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 161,
+						"h": 162
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 17,
+						"w": 139,
+						"h": 131
+					},
+					"frame": {
+						"x": 326,
+						"y": 165,
+						"w": 139,
 						"h": 131
 					},
 					"anchor": {
@@ -599,8 +574,8 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 319,
-						"y": 149,
+						"x": 467,
+						"y": 165,
 						"w": 71,
 						"h": 120
 					},
@@ -624,8 +599,8 @@
 						"h": 123
 					},
 					"frame": {
-						"x": 392,
-						"y": 165,
+						"x": 540,
+						"y": 175,
 						"w": 138,
 						"h": 123
 					},
@@ -649,10 +624,35 @@
 						"h": 128
 					},
 					"frame": {
-						"x": 532,
-						"y": 175,
+						"x": 680,
+						"y": 185,
 						"w": 136,
 						"h": 128
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "explosion/explosion_009",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 162,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 7,
+						"w": 134,
+						"h": 131
+					},
+					"frame": {
+						"x": 834,
+						"y": 41,
+						"w": 134,
+						"h": 131
 					},
 					"anchor": {
 						"x": 0.5,
@@ -674,8 +674,8 @@
 						"h": 126
 					},
 					"frame": {
-						"x": 670,
-						"y": 185,
+						"x": 970,
+						"y": 30,
 						"w": 133,
 						"h": 126
 					},
@@ -685,24 +685,24 @@
 					}
 				},
 				{
-					"filename": "objetos/madera",
+					"filename": "objetos/tridente_clavado",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 34,
-						"h": 127
+						"w": 60,
+						"h": 150
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 34,
-						"h": 127
+						"x": 4,
+						"y": 6,
+						"w": 56,
+						"h": 125
 					},
 					"frame": {
-						"x": 805,
-						"y": 185,
-						"w": 34,
-						"h": 127
+						"x": 1105,
+						"y": 1,
+						"w": 56,
+						"h": 125
 					},
 					"anchor": {
 						"x": 0.5,
@@ -724,10 +724,85 @@
 						"h": 123
 					},
 					"frame": {
-						"x": 841,
-						"y": 142,
+						"x": 970,
+						"y": 158,
 						"w": 131,
 						"h": 123
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/cuchillo_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 150,
+						"h": 150
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 6,
+						"w": 45,
+						"h": 128
+					},
+					"frame": {
+						"x": 818,
+						"y": 185,
+						"w": 45,
+						"h": 128
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "efectos/humo-03",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 161,
+						"h": 162
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 36,
+						"w": 103,
+						"h": 97
+					},
+					"frame": {
+						"x": 865,
+						"y": 174,
+						"w": 103,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "efectos/chispa-5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 222,
+						"h": 169
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 62,
+						"w": 102,
+						"h": 85
+					},
+					"frame": {
+						"x": 865,
+						"y": 273,
+						"w": 102,
+						"h": 85
 					},
 					"anchor": {
 						"x": 0.5,
@@ -749,8 +824,8 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 841,
-						"y": 267,
+						"x": 969,
+						"y": 283,
 						"w": 130,
 						"h": 120
 					},
@@ -760,24 +835,49 @@
 					}
 				},
 				{
-					"filename": "efectos/humo-05",
+					"filename": "mono/mono_gritar",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 161,
-						"h": 162
+						"w": 90,
+						"h": 70
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 24,
-						"w": 125,
-						"h": 118
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 70
 					},
 					"frame": {
-						"x": 974,
-						"y": 147,
-						"w": 125,
-						"h": 118
+						"x": 1103,
+						"y": 158,
+						"w": 90,
+						"h": 70
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mono/mono_normal",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 70
+					},
+					"frame": {
+						"x": 1103,
+						"y": 230,
+						"w": 90,
+						"h": 70
 					},
 					"anchor": {
 						"x": 0.5,
@@ -800,7 +900,7 @@
 					},
 					"frame": {
 						"x": 1101,
-						"y": 147,
+						"y": 302,
 						"w": 91,
 						"h": 90
 					},
@@ -810,149 +910,24 @@
 					}
 				},
 				{
-					"filename": "explosion/explosion_006",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 162,
-						"h": 144
-					},
-					"spriteSourceSize": {
-						"x": 20,
-						"y": 15,
-						"w": 124,
-						"h": 112
-					},
-					"frame": {
-						"x": 973,
-						"y": 267,
-						"w": 124,
-						"h": 112
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "plataformas/bloque_pulsador_azul_desactivado",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 30,
-						"w": 58,
-						"h": 34
-					},
-					"frame": {
-						"x": 1,
-						"y": 982,
-						"w": 58,
-						"h": 34
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/enemigo-verde-camina-1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 57,
-						"h": 34
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 0,
-						"w": 51,
-						"h": 34
-					},
-					"frame": {
-						"x": 61,
-						"y": 982,
-						"w": 51,
-						"h": 34
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "gallina/gallina_vuela_2",
+					"filename": "objetos/madera",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 93,
-						"h": 67
+						"w": 34,
+						"h": 127
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 93,
-						"h": 67
-					},
-					"frame": {
-						"x": 1099,
-						"y": 267,
-						"w": 93,
-						"h": 67
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "mono/mono_gritar",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 90,
-						"h": 70
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 90,
-						"h": 70
-					},
-					"frame": {
-						"x": 1099,
-						"y": 336,
-						"w": 90,
-						"h": 70
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/cuchillo_1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 150,
-						"h": 150
-					},
-					"spriteSourceSize": {
-						"x": 53,
-						"y": 6,
-						"w": 45,
-						"h": 128
+						"w": 34,
+						"h": 127
 					},
 					"frame": {
 						"x": 171,
 						"y": 442,
-						"w": 45,
-						"h": 128
+						"w": 34,
+						"h": 127
 					},
 					"anchor": {
 						"x": 0.5,
@@ -960,24 +935,24 @@
 					}
 				},
 				{
-					"filename": "objetos/tridente_clavado",
+					"filename": "efectos/humo-05",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 60,
-						"h": 150
+						"w": 161,
+						"h": 162
 					},
 					"spriteSourceSize": {
-						"x": 4,
-						"y": 6,
-						"w": 56,
-						"h": 125
+						"x": 14,
+						"y": 24,
+						"w": 125,
+						"h": 118
 					},
 					"frame": {
 						"x": 173,
-						"y": 572,
-						"w": 56,
-						"h": 125
+						"y": 571,
+						"w": 125,
+						"h": 118
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1000,7 +975,7 @@
 					},
 					"frame": {
 						"x": 198,
-						"y": 699,
+						"y": 691,
 						"w": 117,
 						"h": 114
 					},
@@ -1010,24 +985,24 @@
 					}
 				},
 				{
-					"filename": "objetos/paleta",
+					"filename": "tanque/tanque_ruedas",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 104,
-						"h": 24
+						"w": 74,
+						"h": 35
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 104,
-						"h": 24
+						"w": 74,
+						"h": 35
 					},
 					"frame": {
 						"x": 198,
-						"y": 815,
-						"w": 104,
-						"h": 24
+						"y": 807,
+						"w": 74,
+						"h": 35
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1035,74 +1010,24 @@
 					}
 				},
 				{
-					"filename": "efectos/humo-04",
+					"filename": "explosion/explosion_006",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 161,
-						"h": 162
+						"w": 162,
+						"h": 144
 					},
 					"spriteSourceSize": {
-						"x": 18,
-						"y": 28,
-						"w": 118,
+						"x": 20,
+						"y": 15,
+						"w": 124,
 						"h": 112
 					},
 					"frame": {
-						"x": 283,
-						"y": 841,
-						"w": 118,
+						"x": 183,
+						"y": 289,
+						"w": 124,
 						"h": 112
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/pato",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 61
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 61
-					},
-					"frame": {
-						"x": 283,
-						"y": 955,
-						"w": 64,
-						"h": 61
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 6,
-						"w": 50,
-						"h": 61
-					},
-					"frame": {
-						"x": 349,
-						"y": 955,
-						"w": 50,
-						"h": 61
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1124,8 +1049,8 @@
 						"h": 109
 					},
 					"frame": {
-						"x": 183,
-						"y": 287,
+						"x": 309,
+						"y": 298,
 						"w": 119,
 						"h": 109
 					},
@@ -1149,8 +1074,8 @@
 						"h": 100
 					},
 					"frame": {
-						"x": 218,
-						"y": 398,
+						"x": 207,
+						"y": 403,
 						"w": 100,
 						"h": 100
 					},
@@ -1160,24 +1085,49 @@
 					}
 				},
 				{
-					"filename": "mono/mono_normal",
+					"filename": "efectos/humo-04",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 90,
-						"h": 70
+						"w": 161,
+						"h": 162
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 90,
-						"h": 70
+						"x": 18,
+						"y": 28,
+						"w": 118,
+						"h": 112
 					},
 					"frame": {
-						"x": 218,
-						"y": 500,
-						"w": 90,
-						"h": 70
+						"x": 309,
+						"y": 409,
+						"w": 118,
+						"h": 112
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "efectos/humo-02",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 161,
+						"h": 162
+					},
+					"spriteSourceSize": {
+						"x": 47,
+						"y": 59,
+						"w": 66,
+						"h": 64
+					},
+					"frame": {
+						"x": 207,
+						"y": 505,
+						"w": 66,
+						"h": 64
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1199,8 +1149,8 @@
 						"h": 98
 					},
 					"frame": {
-						"x": 231,
-						"y": 572,
+						"x": 300,
+						"y": 523,
 						"w": 112,
 						"h": 98
 					},
@@ -1210,49 +1160,24 @@
 					}
 				},
 				{
-					"filename": "conejo/conejo_camina1",
+					"filename": "cursores/cursor_circular",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 60,
-						"h": 106
+						"w": 72,
+						"h": 72
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 60,
-						"h": 104
+						"x": 3,
+						"y": 3,
+						"w": 66,
+						"h": 66
 					},
 					"frame": {
-						"x": 304,
-						"y": 287,
-						"w": 60,
-						"h": 104
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "efectos/humo-03",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 161,
-						"h": 162
-					},
-					"spriteSourceSize": {
-						"x": 26,
-						"y": 36,
-						"w": 103,
-						"h": 97
-					},
-					"frame": {
-						"x": 366,
-						"y": 290,
-						"w": 103,
-						"h": 97
+						"x": 300,
+						"y": 623,
+						"w": 66,
+						"h": 66
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1274,8 +1199,8 @@
 						"h": 111
 					},
 					"frame": {
-						"x": 471,
-						"y": 290,
+						"x": 317,
+						"y": 691,
 						"w": 57,
 						"h": 111
 					},
@@ -1285,62 +1210,12 @@
 					}
 				},
 				{
-					"filename": "efectos/chispa-5",
+					"filename": "conejo/conejo_camina1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 222,
-						"h": 169
-					},
-					"spriteSourceSize": {
-						"x": 27,
-						"y": 62,
-						"w": 102,
-						"h": 85
-					},
-					"frame": {
-						"x": 530,
-						"y": 305,
-						"w": 102,
-						"h": 85
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "efectos/chispa-2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 222,
-						"h": 169
-					},
-					"spriteSourceSize": {
-						"x": 88,
-						"y": 33,
-						"w": 105,
-						"h": 77
-					},
-					"frame": {
-						"x": 634,
-						"y": 313,
-						"w": 105,
-						"h": 77
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "conejo/conejo_camina2",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
 						"w": 60,
-						"h": 104
+						"h": 106
 					},
 					"spriteSourceSize": {
 						"x": 0,
@@ -1349,60 +1224,10 @@
 						"h": 104
 					},
 					"frame": {
-						"x": 320,
-						"y": 393,
+						"x": 430,
+						"y": 298,
 						"w": 60,
 						"h": 104
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "gallina/gallina_muere",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 82,
-						"h": 92
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 82,
-						"h": 92
-					},
-					"frame": {
-						"x": 382,
-						"y": 389,
-						"w": 82,
-						"h": 92
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "conejo/conejo_parado2",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 60,
-						"h": 101
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 60,
-						"h": 101
-					},
-					"frame": {
-						"x": 741,
-						"y": 313,
-						"w": 60,
-						"h": 101
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1424,8 +1249,8 @@
 						"h": 86
 					},
 					"frame": {
-						"x": 466,
-						"y": 403,
+						"x": 492,
+						"y": 300,
 						"w": 97,
 						"h": 86
 					},
@@ -1435,24 +1260,24 @@
 					}
 				},
 				{
-					"filename": "conejo/conejo_salta",
+					"filename": "gallina/gallina_muere",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 75,
-						"h": 91
+						"w": 82,
+						"h": 92
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 75,
-						"h": 91
+						"w": 82,
+						"h": 92
 					},
 					"frame": {
-						"x": 565,
-						"y": 392,
-						"w": 75,
-						"h": 91
+						"x": 591,
+						"y": 300,
+						"w": 82,
+						"h": 92
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1460,24 +1285,24 @@
 					}
 				},
 				{
-					"filename": "conejo/conejo_pierde",
+					"filename": "efectos/chispa-2",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 75,
-						"h": 87
+						"w": 222,
+						"h": 169
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 75,
-						"h": 87
+						"x": 88,
+						"y": 33,
+						"w": 105,
+						"h": 77
 					},
 					"frame": {
-						"x": 642,
-						"y": 392,
-						"w": 75,
-						"h": 87
+						"x": 675,
+						"y": 315,
+						"w": 105,
+						"h": 77
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1485,24 +1310,49 @@
 					}
 				},
 				{
-					"filename": "mono/mono_reir",
+					"filename": "basicos/planeta",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 90,
-						"h": 70
+						"w": 80,
+						"h": 80
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 90,
-						"h": 70
+						"w": 80,
+						"h": 80
 					},
 					"frame": {
-						"x": 719,
-						"y": 416,
-						"w": 90,
-						"h": 70
+						"x": 782,
+						"y": 315,
+						"w": 80,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "gallina/gallina_vuela_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 93,
+						"h": 67
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 93,
+						"h": 67
+					},
+					"frame": {
+						"x": 864,
+						"y": 360,
+						"w": 93,
+						"h": 67
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1524,8 +1374,8 @@
 						"h": 14
 					},
 					"frame": {
-						"x": 319,
-						"y": 271,
+						"x": 326,
+						"y": 149,
 						"w": 57,
 						"h": 14
 					},
@@ -1535,24 +1385,49 @@
 					}
 				},
 				{
-					"filename": "enemigos/enemigo-verde-golpea",
+					"filename": "disparos/laser_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 54,
+						"h": 9
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 54,
+						"h": 9
+					},
+					"frame": {
+						"x": 861,
+						"y": 30,
+						"w": 54,
+						"h": 9
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_5",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 57,
-						"h": 34
+						"w": 64,
+						"h": 67
 					},
 					"spriteSourceSize": {
-						"x": 3,
-						"y": 0,
-						"w": 51,
-						"h": 34
+						"x": 16,
+						"y": 1,
+						"w": 45,
+						"h": 66
 					},
 					"frame": {
-						"x": 114,
-						"y": 982,
-						"w": 51,
-						"h": 34
+						"x": 368,
+						"y": 623,
+						"w": 45,
+						"h": 66
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1560,49 +1435,24 @@
 					}
 				},
 				{
-					"filename": "nave/nave_enemiga_2",
+					"filename": "conejo/conejo_camina2",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 50,
-						"h": 70
+						"w": 60,
+						"h": 104
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 50,
-						"h": 70
+						"w": 60,
+						"h": 104
 					},
 					"frame": {
-						"x": 310,
-						"y": 500,
-						"w": 50,
-						"h": 70
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "nave/nave_enemiga_1",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 50,
-						"h": 61
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 50,
-						"h": 61
-					},
-					"frame": {
-						"x": 401,
-						"y": 955,
-						"w": 50,
-						"h": 61
+						"x": 376,
+						"y": 691,
+						"w": 60,
+						"h": 104
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1624,10 +1474,135 @@
 						"h": 97
 					},
 					"frame": {
-						"x": 345,
-						"y": 572,
+						"x": 414,
+						"y": 523,
 						"w": 60,
 						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "bmo/bmo_camina_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 88,
+						"h": 74
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 7,
+						"w": 74,
+						"h": 67
+					},
+					"frame": {
+						"x": 415,
+						"y": 622,
+						"w": 74,
+						"h": 67
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "conejo/conejo_parado2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 60,
+						"h": 101
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 60,
+						"h": 101
+					},
+					"frame": {
+						"x": 438,
+						"y": 691,
+						"w": 60,
+						"h": 101
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mono/mono_reir",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 70
+					},
+					"frame": {
+						"x": 492,
+						"y": 388,
+						"w": 90,
+						"h": 70
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "bmo/bmo_agachado",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 88,
+						"h": 74
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 12,
+						"w": 86,
+						"h": 62
+					},
+					"frame": {
+						"x": 584,
+						"y": 394,
+						"w": 86,
+						"h": 62
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "explosion/explosion_002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 162,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 43,
+						"y": 32,
+						"w": 83,
+						"h": 73
+					},
+					"frame": {
+						"x": 672,
+						"y": 394,
+						"w": 83,
+						"h": 73
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1639,45 +1614,20 @@
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 96,
-						"h": 96
+						"w": 88,
+						"h": 74
 					},
 					"spriteSourceSize": {
-						"x": 7,
-						"y": 25,
+						"x": 3,
+						"y": 3,
 						"w": 82,
 						"h": 71
 					},
 					"frame": {
-						"x": 362,
-						"y": 499,
+						"x": 757,
+						"y": 397,
 						"w": 82,
 						"h": 71
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "cartas/carta",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 70,
-						"h": 95
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 70,
-						"h": 95
-					},
-					"frame": {
-						"x": 407,
-						"y": 572,
-						"w": 70,
-						"h": 95
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1699,10 +1649,135 @@
 						"h": 79
 					},
 					"frame": {
-						"x": 446,
-						"y": 491,
+						"x": 430,
+						"y": 404,
 						"w": 60,
 						"h": 79
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tanque/tanque_base",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 83,
+						"h": 49
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 83,
+						"h": 49
+					},
+					"frame": {
+						"x": 492,
+						"y": 460,
+						"w": 83,
+						"h": 49
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "conejo/conejo_salta",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 75,
+						"h": 91
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 75,
+						"h": 91
+					},
+					"frame": {
+						"x": 476,
+						"y": 511,
+						"w": 75,
+						"h": 91
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "botones/botones_a",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 80
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 80
+					},
+					"frame": {
+						"x": 491,
+						"y": 604,
+						"w": 80,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "cartas/carta",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 95
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 95
+					},
+					"frame": {
+						"x": 500,
+						"y": 686,
+						"w": 70,
+						"h": 95
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "conejo/conejo_pierde",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 75,
+						"h": 87
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 75,
+						"h": 87
+					},
+					"frame": {
+						"x": 553,
+						"y": 511,
+						"w": 75,
+						"h": 87
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1724,8 +1799,8 @@
 						"h": 95
 					},
 					"frame": {
-						"x": 508,
-						"y": 491,
+						"x": 573,
+						"y": 600,
 						"w": 70,
 						"h": 95
 					},
@@ -1749,8 +1824,8 @@
 						"h": 95
 					},
 					"frame": {
-						"x": 580,
-						"y": 485,
+						"x": 572,
+						"y": 697,
 						"w": 70,
 						"h": 95
 					},
@@ -1760,49 +1835,24 @@
 					}
 				},
 				{
-					"filename": "aliens/alien_azul",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 75
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 75
-					},
-					"frame": {
-						"x": 652,
-						"y": 481,
-						"w": 64,
-						"h": 75
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion/explosion_002",
+					"filename": "aliens/martian_4",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 162,
-						"h": 144
+						"w": 64,
+						"h": 67
 					},
 					"spriteSourceSize": {
-						"x": 43,
-						"y": 32,
-						"w": 83,
-						"h": 73
+						"x": 14,
+						"y": 18,
+						"w": 46,
+						"h": 49
 					},
 					"frame": {
-						"x": 718,
-						"y": 488,
-						"w": 83,
-						"h": 73
+						"x": 577,
+						"y": 460,
+						"w": 46,
+						"h": 49
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1810,24 +1860,24 @@
 					}
 				},
 				{
-					"filename": "basicos/planeta",
+					"filename": "bmo/bmo_salta",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 80,
-						"h": 80
+						"w": 88,
+						"h": 74
 					},
 					"spriteSourceSize": {
-						"x": 0,
+						"x": 3,
 						"y": 0,
-						"w": 80,
-						"h": 80
+						"w": 82,
+						"h": 74
 					},
 					"frame": {
-						"x": 479,
-						"y": 588,
-						"w": 80,
-						"h": 80
+						"x": 841,
+						"y": 429,
+						"w": 82,
+						"h": 74
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1835,99 +1885,24 @@
 					}
 				},
 				{
-					"filename": "tanque/tanque_ruedas",
+					"filename": "objetos/bomba",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 74,
-						"h": 35
+						"w": 55,
+						"h": 74
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 74,
-						"h": 35
+						"w": 55,
+						"h": 74
 					},
 					"frame": {
-						"x": 167,
-						"y": 980,
-						"w": 74,
-						"h": 35
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "disparos/misil",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 38,
-						"h": 26
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 38,
-						"h": 26
-					},
-					"frame": {
-						"x": 1101,
-						"y": 239,
-						"w": 38,
-						"h": 26
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "tanque/tanque_disparo",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 38,
-						"h": 26
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 38,
-						"h": 26
-					},
-					"frame": {
-						"x": 1141,
-						"y": 239,
-						"w": 38,
-						"h": 26
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "botones/botones_a",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 80
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 80
-					},
-					"frame": {
-						"x": 811,
-						"y": 389,
-						"w": 80,
-						"h": 80
+						"x": 925,
+						"y": 429,
+						"w": 55,
+						"h": 74
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1949,8 +1924,8 @@
 						"h": 80
 					},
 					"frame": {
-						"x": 893,
-						"y": 389,
+						"x": 982,
+						"y": 405,
 						"w": 80,
 						"h": 80
 					},
@@ -1974,8 +1949,183 @@
 						"h": 80
 					},
 					"frame": {
-						"x": 975,
-						"y": 381,
+						"x": 1064,
+						"y": 405,
+						"w": 80,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_7",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 67
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 4,
+						"w": 47,
+						"h": 63
+					},
+					"frame": {
+						"x": 1146,
+						"y": 394,
+						"w": 47,
+						"h": 63
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "bmo/bmo_camina_2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 88,
+						"h": 74
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 5,
+						"w": 80,
+						"h": 69
+					},
+					"frame": {
+						"x": 982,
+						"y": 487,
+						"w": 80,
+						"h": 69
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "botones/botones_b",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 80
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 80
+					},
+					"frame": {
+						"x": 1064,
+						"y": 487,
+						"w": 80,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_11",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 67
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 3,
+						"w": 46,
+						"h": 63
+					},
+					"frame": {
+						"x": 1146,
+						"y": 459,
+						"w": 46,
+						"h": 63
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "nave/nave_avanza_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 46,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 45,
+						"h": 41
+					},
+					"frame": {
+						"x": 625,
+						"y": 458,
+						"w": 45,
+						"h": 41
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "botones/botones_derecha",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 80
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 80
+					},
+					"frame": {
+						"x": 672,
+						"y": 469,
+						"w": 80,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "botones/botones_izquierda",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 80
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 80
+					},
+					"frame": {
+						"x": 754,
+						"y": 470,
 						"w": 80,
 						"h": 80
 					},
@@ -1999,260 +2149,10 @@
 						"h": 44
 					},
 					"frame": {
-						"x": 1057,
-						"y": 381,
+						"x": 630,
+						"y": 501,
 						"w": 40,
 						"h": 44
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "bmo/bmo_agachado",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 96,
-						"h": 96
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 34,
-						"w": 86,
-						"h": 62
-					},
-					"frame": {
-						"x": 1099,
-						"y": 408,
-						"w": 86,
-						"h": 62
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/enemigo-rojo-camina-2",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 42
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 42
-					},
-					"frame": {
-						"x": 177,
-						"y": 398,
-						"w": 32,
-						"h": 42
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "tanque/tanque_base",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 83,
-						"h": 49
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 83,
-						"h": 49
-					},
-					"frame": {
-						"x": 811,
-						"y": 471,
-						"w": 83,
-						"h": 49
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "bmo/bmo_salta",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 96,
-						"h": 96
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 21,
-						"w": 82,
-						"h": 75
-					},
-					"frame": {
-						"x": 896,
-						"y": 471,
-						"w": 82,
-						"h": 75
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "botones/botones_b",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 80
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 80
-					},
-					"frame": {
-						"x": 980,
-						"y": 463,
-						"w": 80,
-						"h": 80
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "botones/botones_derecha",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 80
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 80
-					},
-					"frame": {
-						"x": 1062,
-						"y": 472,
-						"w": 80,
-						"h": 80
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_3",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 12,
-						"y": 3,
-						"w": 48,
-						"h": 64
-					},
-					"frame": {
-						"x": 1144,
-						"y": 472,
-						"w": 48,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_10",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 13,
-						"y": 4,
-						"w": 48,
-						"h": 63
-					},
-					"frame": {
-						"x": 1144,
-						"y": 538,
-						"w": 48,
-						"h": 63
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "botones/botones_izquierda",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 80
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 80
-					},
-					"frame": {
-						"x": 803,
-						"y": 522,
-						"w": 80,
-						"h": 80
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "bmo/bmo_camina_2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 96,
-						"h": 96
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 27,
-						"w": 80,
-						"h": 69
-					},
-					"frame": {
-						"x": 885,
-						"y": 548,
-						"w": 80,
-						"h": 69
 					},
 					"anchor": {
 						"x": 0.5,
@@ -2264,20 +2164,20 @@
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 96,
-						"h": 96
+						"w": 79,
+						"h": 79
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 16,
+						"x": 2,
+						"y": 0,
 						"w": 77,
-						"h": 80
+						"h": 79
 					},
 					"frame": {
-						"x": 561,
-						"y": 588,
+						"x": 836,
+						"y": 505,
 						"w": 77,
-						"h": 80
+						"h": 79
 					},
 					"anchor": {
 						"x": 0.5,
@@ -2285,7 +2185,32 @@
 					}
 				},
 				{
-					"filename": "objetos/zanahoria_normal",
+					"filename": "carreras/auto_azul",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 65,
+						"h": 39
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 65,
+						"h": 39
+					},
+					"frame": {
+						"x": 915,
+						"y": 505,
+						"w": 65,
+						"h": 39
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_escalera_superior",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2293,41 +2218,16 @@
 						"h": 64
 					},
 					"spriteSourceSize": {
-						"x": 17,
-						"y": 0,
-						"w": 32,
-						"h": 64
-					},
-					"frame": {
-						"x": 803,
-						"y": 314,
-						"w": 32,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/bloque_arkanoid_amarillo",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 32
-					},
-					"spriteSourceSize": {
 						"x": 0,
-						"y": 0,
+						"y": 14,
 						"w": 64,
-						"h": 32
+						"h": 50
 					},
 					"frame": {
-						"x": 652,
-						"y": 558,
+						"x": 915,
+						"y": 546,
 						"w": 64,
-						"h": 32
+						"h": 50
 					},
 					"anchor": {
 						"x": 0.5,
@@ -2339,18 +2239,18 @@
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 96,
-						"h": 96
+						"w": 79,
+						"h": 79
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 18,
+						"x": 2,
+						"y": 1,
 						"w": 76,
 						"h": 78
 					},
 					"frame": {
-						"x": 640,
-						"y": 592,
+						"x": 981,
+						"y": 558,
 						"w": 76,
 						"h": 78
 					},
@@ -2374,8 +2274,8 @@
 						"h": 72
 					},
 					"frame": {
-						"x": 718,
-						"y": 563,
+						"x": 1059,
+						"y": 569,
 						"w": 74,
 						"h": 72
 					},
@@ -2385,524 +2285,24 @@
 					}
 				},
 				{
-					"filename": "gallina/gallina_vuela_3",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 74,
-						"h": 72
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 74,
-						"h": 72
-					},
-					"frame": {
-						"x": 718,
-						"y": 637,
-						"w": 74,
-						"h": 72
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "gallina/gallina_sin_piel",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 67,
-						"h": 77
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 67,
-						"h": 77
-					},
-					"frame": {
-						"x": 794,
-						"y": 604,
-						"w": 67,
-						"h": 77
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "bmo/bmo_camina_1",
+					"filename": "botones/pantalla-completa",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 96,
-						"h": 96
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 29,
-						"w": 74,
-						"h": 67
-					},
-					"frame": {
-						"x": 863,
-						"y": 619,
-						"w": 74,
-						"h": 67
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/fantasma_asustando",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 51,
-						"h": 73
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 51,
-						"h": 73
-					},
-					"frame": {
-						"x": 939,
-						"y": 619,
-						"w": 51,
-						"h": 73
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "cursores/cursor_circular",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 72,
-						"h": 72
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 3,
-						"w": 66,
-						"h": 66
-					},
-					"frame": {
-						"x": 794,
-						"y": 683,
-						"w": 66,
-						"h": 66
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "bmo/bmo_parado",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 96,
-						"h": 96
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 29,
-						"w": 68,
-						"h": 67
-					},
-					"frame": {
-						"x": 862,
-						"y": 688,
-						"w": 68,
-						"h": 67
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "efectos/humo-02",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 161,
-						"h": 162
-					},
-					"spriteSourceSize": {
-						"x": 47,
-						"y": 59,
-						"w": 66,
-						"h": 64
-					},
-					"frame": {
-						"x": 932,
-						"y": 694,
-						"w": 66,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/alien_verde",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 63
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 63
-					},
-					"frame": {
-						"x": 967,
-						"y": 554,
-						"w": 64,
-						"h": 63
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/fantasma_normal",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 51,
-						"h": 73
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 51,
-						"h": 73
-					},
-					"frame": {
-						"x": 992,
-						"y": 619,
-						"w": 51,
-						"h": 73
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_5",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 16,
-						"y": 1,
-						"w": 45,
-						"h": 66
-					},
-					"frame": {
-						"x": 1000,
-						"y": 694,
-						"w": 45,
-						"h": 66
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_7",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 4,
-						"w": 47,
-						"h": 63
-					},
-					"frame": {
-						"x": 1033,
-						"y": 554,
-						"w": 47,
-						"h": 63
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/bomba",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 55,
-						"h": 74
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 55,
-						"h": 74
-					},
-					"frame": {
-						"x": 1082,
-						"y": 554,
-						"w": 55,
-						"h": 74
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/zanahoria_sonrie",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 17,
-						"y": 0,
 						"w": 32,
-						"h": 64
-					},
-					"frame": {
-						"x": 1045,
-						"y": 619,
-						"w": 32,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "carreras/asfalto_1",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 1079,
-						"y": 630,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "carreras/asfalto_2",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 1047,
-						"y": 696,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "carreras/asfalto_3",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 1113,
-						"y": 696,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/enemigo-rojo-camina-golpeado",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 35,
-						"h": 41
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 35,
-						"h": 41
-					},
-					"frame": {
-						"x": 1062,
-						"y": 427,
-						"w": 35,
-						"h": 41
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_11",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 13,
-						"y": 3,
-						"w": 46,
-						"h": 63
-					},
-					"frame": {
-						"x": 1145,
-						"y": 603,
-						"w": 46,
-						"h": 63
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/corazon_completo",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 17,
-						"y": 19,
-						"w": 30,
-						"h": 26
-					},
-					"frame": {
-						"x": 1145,
-						"y": 668,
-						"w": 30,
-						"h": 26
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "plataformas/bloque_pulsador_azul_activado",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 42,
-						"w": 59,
-						"h": 22
-					},
-					"frame": {
-						"x": 231,
-						"y": 672,
-						"w": 59,
-						"h": 22
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "efectos/golpe-1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 173,
-						"h": 169
-					},
-					"spriteSourceSize": {
-						"x": 76,
-						"y": 74,
-						"w": 25,
-						"h": 24
-					},
-					"frame": {
 						"x": 1,
-						"y": 630,
-						"w": 25,
-						"h": 24
+						"y": 1,
+						"w": 30,
+						"h": 30
+					},
+					"frame": {
+						"x": 1163,
+						"y": 1,
+						"w": 30,
+						"h": 30
 					},
 					"anchor": {
 						"x": 0.5,
@@ -2924,8 +2324,8 @@
 						"h": 39
 					},
 					"frame": {
-						"x": 407,
-						"y": 669,
+						"x": 500,
+						"y": 783,
 						"w": 70,
 						"h": 39
 					},
@@ -2949,8 +2349,8 @@
 						"h": 39
 					},
 					"frame": {
-						"x": 479,
-						"y": 670,
+						"x": 572,
+						"y": 794,
 						"w": 70,
 						"h": 39
 					},
@@ -2960,23 +2360,23 @@
 					}
 				},
 				{
-					"filename": "carreras/auto_azul",
+					"filename": "enemigos/rana",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 65,
+						"w": 58,
 						"h": 39
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 65,
+						"w": 58,
 						"h": 39
 					},
 					"frame": {
-						"x": 551,
-						"y": 670,
-						"w": 65,
+						"x": 1135,
+						"y": 569,
+						"w": 58,
 						"h": 39
 					},
 					"anchor": {
@@ -2985,24 +2385,249 @@
 					}
 				},
 				{
-					"filename": "carreras/asfalto_4",
+					"filename": "redimensionables/dialogo",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 5,
+						"w": 44,
+						"h": 43
+					},
+					"frame": {
+						"x": 1146,
+						"y": 524,
+						"w": 44,
+						"h": 43
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_pulsador_azul_desactivado",
+					"rotated": false,
+					"trimmed": true,
 					"sourceSize": {
 						"w": 64,
 						"h": 64
 					},
 					"spriteSourceSize": {
+						"x": 3,
+						"y": 30,
+						"w": 58,
+						"h": 34
+					},
+					"frame": {
+						"x": 1135,
+						"y": 610,
+						"w": 58,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/aceituna",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 37,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 37,
+						"h": 37
+					},
+					"frame": {
+						"x": 142,
+						"y": 980,
+						"w": 37,
+						"h": 37
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/bloque_arkanoid_amarillo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 32
+					},
+					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
 						"w": 64,
-						"h": 64
+						"h": 32
 					},
 					"frame": {
-						"x": 618,
-						"y": 672,
+						"x": 181,
+						"y": 980,
+						"w": 64,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mini-explosion/explosion_6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 28,
+						"h": 28
+					},
+					"frame": {
+						"x": 1105,
+						"y": 128,
+						"w": 28,
+						"h": 28
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "disparos/laser",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 37,
+						"h": 9
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 37,
+						"h": 9
+					},
+					"frame": {
+						"x": 917,
+						"y": 30,
+						"w": 37,
+						"h": 9
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/corazon_completo",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
 						"w": 64,
 						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 19,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 1163,
+						"y": 33,
+						"w": 30,
+						"h": 26
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/corazon_medio",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 19,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 1163,
+						"y": 61,
+						"w": 30,
+						"h": 26
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/corazon_vacio",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 19,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 1163,
+						"y": 89,
+						"w": 30,
+						"h": 26
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "efectos/humo-01",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 161,
+						"h": 162
+					},
+					"spriteSourceSize": {
+						"x": 69,
+						"y": 79,
+						"w": 26,
+						"h": 28
+					},
+					"frame": {
+						"x": 1135,
+						"y": 128,
+						"w": 26,
+						"h": 28
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3024,8 +2649,8 @@
 						"h": 49
 					},
 					"frame": {
-						"x": 684,
-						"y": 672,
+						"x": 630,
+						"y": 547,
 						"w": 32,
 						"h": 49
 					},
@@ -3035,24 +2660,24 @@
 					}
 				},
 				{
-					"filename": "objetos/bloque_arkanoid_azul",
+					"filename": "gallina/gallina_vuela_3",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 64,
-						"h": 32
+						"w": 74,
+						"h": 72
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 64,
-						"h": 32
+						"w": 74,
+						"h": 72
 					},
 					"frame": {
-						"x": 718,
-						"y": 711,
-						"w": 64,
-						"h": 32
+						"x": 664,
+						"y": 551,
+						"w": 74,
+						"h": 72
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3060,24 +2685,24 @@
 					}
 				},
 				{
-					"filename": "dado/dado_1",
+					"filename": "gallina/gallina_sin_piel",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 34,
-						"h": 34
+						"w": 67,
+						"h": 77
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 34,
-						"h": 34
+						"w": 67,
+						"h": 77
 					},
 					"frame": {
-						"x": 243,
-						"y": 980,
-						"w": 34,
-						"h": 34
+						"x": 740,
+						"y": 552,
+						"w": 67,
+						"h": 77
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3085,24 +2710,174 @@
 					}
 				},
 				{
-					"filename": "enemigos/enemigo-rojo-camina-1",
+					"filename": "bmo/bmo_parado",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 88,
+						"h": 74
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 7,
+						"w": 68,
+						"h": 67
+					},
+					"frame": {
+						"x": 645,
+						"y": 625,
+						"w": 68,
+						"h": 67
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/alien_azul",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 32,
-						"h": 44
+						"w": 64,
+						"h": 75
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 32,
-						"h": 44
+						"w": 64,
+						"h": 75
 					},
 					"frame": {
-						"x": 684,
-						"y": 723,
-						"w": 32,
-						"h": 44
+						"x": 715,
+						"y": 631,
+						"w": 64,
+						"h": 75
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/fantasma_asustando",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 73
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 73
+					},
+					"frame": {
+						"x": 781,
+						"y": 631,
+						"w": 51,
+						"h": 73
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "carreras/asfalto_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 834,
+						"y": 586,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "carreras/asfalto_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 834,
+						"y": 652,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "carreras/asfalto_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 900,
+						"y": 598,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "carreras/asfalto_4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 900,
+						"y": 664,
+						"w": 64,
+						"h": 64
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3124,8 +2899,8 @@
 						"h": 64
 					},
 					"frame": {
-						"x": 718,
-						"y": 745,
+						"x": 966,
+						"y": 638,
 						"w": 64,
 						"h": 64
 					},
@@ -3149,8 +2924,8 @@
 						"h": 64
 					},
 					"frame": {
-						"x": 784,
-						"y": 751,
+						"x": 1032,
+						"y": 643,
 						"w": 64,
 						"h": 64
 					},
@@ -3160,348 +2935,23 @@
 					}
 				},
 				{
-					"filename": "figuras/circulo_negro",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 850,
-						"y": 757,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "figuras/circulo_rojo",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 916,
-						"y": 760,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "figuras/circulo_verde",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 982,
-						"y": 762,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "figuras/cuadrado_azul",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 1048,
-						"y": 762,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "figuras/cuadrado_blanco",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 1114,
-						"y": 762,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "particulas/particula_3",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 20,
-						"h": 21
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 20,
-						"h": 21
-					},
-					"frame": {
-						"x": 719,
-						"y": 392,
-						"w": 20,
-						"h": 21
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "disparos/laser_2",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 54,
-						"h": 9
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 54,
-						"h": 9
-					},
-					"frame": {
-						"x": 546,
-						"y": 28,
-						"w": 54,
-						"h": 9
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "figuras/cuadrado_negro",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 317,
-						"y": 672,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "figuras/cuadrado_rojo",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 317,
-						"y": 738,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "figuras/cuadrado_verde",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 383,
-						"y": 710,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/engranaje",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 449,
-						"y": 711,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/mira",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 515,
-						"y": 711,
-						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/banana_0",
+					"filename": "objetos/zanahoria_normal",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 40,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 35,
-						"h": 45
-					},
-					"frame": {
-						"x": 581,
-						"y": 711,
-						"w": 35,
-						"h": 45
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "plataformas/bloque_azul",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
 						"w": 64,
 						"h": 64
 					},
 					"spriteSourceSize": {
-						"x": 0,
+						"x": 17,
 						"y": 0,
-						"w": 64,
+						"w": 32,
 						"h": 64
 					},
 					"frame": {
-						"x": 618,
-						"y": 738,
-						"w": 64,
+						"x": 1098,
+						"y": 643,
+						"w": 32,
 						"h": 64
 					},
 					"anchor": {
@@ -3510,24 +2960,24 @@
 					}
 				},
 				{
-					"filename": "objetos/asteroide_medio",
+					"filename": "objetos/bomba_0",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 35,
-						"h": 36
+						"w": 68,
+						"h": 63
 					},
 					"spriteSourceSize": {
 						"x": 1,
-						"y": 3,
-						"w": 32,
-						"h": 33
+						"y": 1,
+						"w": 61,
+						"h": 56
 					},
 					"frame": {
-						"x": 684,
-						"y": 769,
-						"w": 32,
-						"h": 33
+						"x": 1132,
+						"y": 646,
+						"w": 61,
+						"h": 56
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3535,24 +2985,24 @@
 					}
 				},
 				{
-					"filename": "aliens/martian_8",
+					"filename": "enemigos/rana-golpe",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 64,
-						"h": 67
+						"w": 61,
+						"h": 54
 					},
 					"spriteSourceSize": {
-						"x": 13,
-						"y": 4,
-						"w": 45,
-						"h": 63
+						"x": 0,
+						"y": 0,
+						"w": 61,
+						"h": 54
 					},
 					"frame": {
-						"x": 383,
-						"y": 776,
-						"w": 45,
-						"h": 63
+						"x": 1132,
+						"y": 704,
+						"w": 61,
+						"h": 54
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3560,49 +3010,24 @@
 					}
 				},
 				{
-					"filename": "plataformas/bloque_cemento",
+					"filename": "objetos/bloque_arkanoid_azul",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
 						"w": 64,
-						"h": 64
+						"h": 32
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
 						"w": 64,
-						"h": 64
+						"h": 32
 					},
 					"frame": {
-						"x": 430,
-						"y": 777,
+						"x": 966,
+						"y": 704,
 						"w": 64,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "plataformas/bloque_escalera",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 496,
-						"y": 777,
-						"w": 64,
-						"h": 64
+						"h": 32
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3624,8 +3049,8 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 317,
-						"y": 804,
+						"x": 1032,
+						"y": 709,
 						"w": 64,
 						"h": 32
 					},
@@ -3635,7 +3060,207 @@
 					}
 				},
 				{
-					"filename": "plataformas/bloque_gris",
+					"filename": "objetos/zanahoria_sonrie",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 0,
+						"w": 32,
+						"h": 64
+					},
+					"frame": {
+						"x": 1098,
+						"y": 709,
+						"w": 32,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/rana-salta",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 61,
+						"h": 54
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 61,
+						"h": 54
+					},
+					"frame": {
+						"x": 1132,
+						"y": 760,
+						"w": 61,
+						"h": 54
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_pulsador_azul_activado",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 42,
+						"w": 59,
+						"h": 22
+					},
+					"frame": {
+						"x": 429,
+						"y": 485,
+						"w": 59,
+						"h": 22
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tanque/tanque_torreta",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 12
+					},
+					"frame": {
+						"x": 429,
+						"y": 509,
+						"w": 40,
+						"h": 12
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mini-explosion/explosion_2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 29,
+						"h": 27
+					},
+					"frame": {
+						"x": 1067,
+						"y": 1,
+						"w": 29,
+						"h": 27
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "efectos/golpe-1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 173,
+						"h": 169
+					},
+					"spriteSourceSize": {
+						"x": 76,
+						"y": 74,
+						"w": 25,
+						"h": 24
+					},
+					"frame": {
+						"x": 107,
+						"y": 993,
+						"w": 25,
+						"h": 24
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/enemigo-verde-camina-1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 57,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 51,
+						"h": 34
+					},
+					"frame": {
+						"x": 274,
+						"y": 807,
+						"w": 51,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/fantasma_normal",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 73
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 73
+					},
+					"frame": {
+						"x": 281,
+						"y": 843,
+						"w": 51,
+						"h": 73
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/circulo_negro",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -3649,8 +3274,8 @@
 						"h": 64
 					},
 					"frame": {
-						"x": 403,
-						"y": 843,
+						"x": 281,
+						"y": 918,
 						"w": 64,
 						"h": 64
 					},
@@ -3660,7 +3285,57 @@
 					}
 				},
 				{
-					"filename": "plataformas/bloque_ladrillo",
+					"filename": "enemigos/enemigo-verde-golpea",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 57,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 51,
+						"h": 34
+					},
+					"frame": {
+						"x": 327,
+						"y": 804,
+						"w": 51,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "nave/nave_enemiga_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 70
+					},
+					"frame": {
+						"x": 334,
+						"y": 840,
+						"w": 50,
+						"h": 70
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/circulo_rojo",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -3674,8 +3349,8 @@
 						"h": 64
 					},
 					"frame": {
-						"x": 469,
-						"y": 843,
+						"x": 347,
+						"y": 912,
 						"w": 64,
 						"h": 64
 					},
@@ -3699,10 +3374,510 @@
 						"h": 40
 					},
 					"frame": {
-						"x": 403,
-						"y": 909,
+						"x": 380,
+						"y": 797,
 						"w": 62,
 						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/circulo_verde",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 386,
+						"y": 839,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/cuadrado_azul",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 413,
+						"y": 905,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/enemigo-rojo-camina-3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 49,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 49,
+						"h": 38
+					},
+					"frame": {
+						"x": 444,
+						"y": 794,
+						"w": 49,
+						"h": 38
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/cuadrado_blanco",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 452,
+						"y": 834,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_9",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 67
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 3,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 518,
+						"y": 824,
+						"w": 52,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/cuadrado_negro",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 572,
+						"y": 835,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/cuadrado_rojo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 479,
+						"y": 900,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "figuras/cuadrado_verde",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 545,
+						"y": 901,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/engranaje",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 611,
+						"y": 901,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/mira",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 638,
+						"y": 835,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_azul",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 677,
+						"y": 901,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pixelados/pixel_player_0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 27,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 23,
+						"h": 33
+					},
+					"frame": {
+						"x": 275,
+						"y": 505,
+						"w": 23,
+						"h": 33
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/asteroide_medio",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 35,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 247,
+						"y": 980,
+						"w": 32,
+						"h": 33
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/enemigo-verde-camina-2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 57,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 57,
+						"h": 31
+					},
+					"frame": {
+						"x": 281,
+						"y": 984,
+						"w": 57,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mini-explosion/explosion_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 6,
+						"w": 23,
+						"h": 20
+					},
+					"frame": {
+						"x": 275,
+						"y": 540,
+						"w": 23,
+						"h": 20
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_cemento",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 645,
+						"y": 694,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_escalera",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 644,
+						"y": 760,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_gris",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 711,
+						"y": 708,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "plataformas/bloque_ladrillo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 710,
+						"y": 774,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/bomba_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 68,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 62,
+						"h": 57
+					},
+					"frame": {
+						"x": 704,
+						"y": 840,
+						"w": 62,
+						"h": 57
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3724,8 +3899,8 @@
 						"h": 64
 					},
 					"frame": {
-						"x": 467,
-						"y": 909,
+						"x": 743,
+						"y": 899,
 						"w": 64,
 						"h": 64
 					},
@@ -3735,24 +3910,24 @@
 					}
 				},
 				{
-					"filename": "nave/nave_avanza_1",
+					"filename": "objetos/manzana",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 46,
-						"h": 45
+						"w": 50,
+						"h": 52
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 2,
-						"w": 45,
-						"h": 41
+						"y": 0,
+						"w": 50,
+						"h": 52
 					},
 					"frame": {
-						"x": 453,
-						"y": 975,
-						"w": 45,
-						"h": 41
+						"x": 743,
+						"y": 965,
+						"w": 50,
+						"h": 52
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3760,24 +3935,24 @@
 					}
 				},
 				{
-					"filename": "nave/nave_derecha_1",
+					"filename": "objetos/asteroide_grande",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 46,
-						"h": 45
+						"w": 55,
+						"h": 54
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 2,
-						"w": 45,
-						"h": 41
+						"y": 0,
+						"w": 55,
+						"h": 54
 					},
 					"frame": {
-						"x": 500,
-						"y": 975,
-						"w": 45,
-						"h": 41
+						"x": 777,
+						"y": 708,
+						"w": 55,
+						"h": 54
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3799,8 +3974,8 @@
 						"h": 64
 					},
 					"frame": {
-						"x": 535,
-						"y": 843,
+						"x": 834,
+						"y": 718,
 						"w": 64,
 						"h": 64
 					},
@@ -3824,8 +3999,8 @@
 						"h": 64
 					},
 					"frame": {
-						"x": 533,
-						"y": 909,
+						"x": 900,
+						"y": 730,
 						"w": 64,
 						"h": 64
 					},
@@ -3835,124 +4010,24 @@
 					}
 				},
 				{
-					"filename": "nave/nave_izquierda_1",
+					"filename": "aliens/alien_verde",
 					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 46,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 2,
-						"w": 45,
-						"h": 41
-					},
-					"frame": {
-						"x": 547,
-						"y": 975,
-						"w": 45,
-						"h": 41
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "aliens/martian_9",
-					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 64,
-						"h": 67
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 3,
-						"w": 52,
-						"h": 64
-					},
-					"frame": {
-						"x": 562,
-						"y": 777,
-						"w": 52,
-						"h": 64
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "plataformas/bloque_escalera_superior",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 14,
-						"w": 64,
-						"h": 50
-					},
-					"frame": {
-						"x": 616,
-						"y": 804,
-						"w": 64,
-						"h": 50
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/bomba_1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 68,
 						"h": 63
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 62,
-						"h": 57
-					},
-					"frame": {
-						"x": 601,
-						"y": 856,
-						"w": 62,
-						"h": 57
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/bomba_0",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 68,
+						"w": 64,
 						"h": 63
 					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 61,
-						"h": 56
-					},
 					"frame": {
-						"x": 599,
-						"y": 915,
-						"w": 61,
-						"h": 56
+						"x": 966,
+						"y": 738,
+						"w": 64,
+						"h": 63
 					},
 					"anchor": {
 						"x": 0.5,
@@ -3960,49 +4035,24 @@
 					}
 				},
 				{
-					"filename": "redimensionables/dialogo",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 5,
-						"w": 44,
-						"h": 43
-					},
-					"frame": {
-						"x": 599,
-						"y": 973,
-						"w": 44,
-						"h": 43
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "dado/dado_2",
+					"filename": "objetos/pato",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 34,
-						"h": 34
+						"w": 64,
+						"h": 61
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 34,
-						"h": 34
+						"w": 64,
+						"h": 61
 					},
 					"frame": {
-						"x": 682,
-						"y": 804,
-						"w": 34,
-						"h": 34
+						"x": 1032,
+						"y": 743,
+						"w": 64,
+						"h": 61
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4010,74 +4060,24 @@
 					}
 				},
 				{
-					"filename": "enemigos/rana-golpe",
+					"filename": "enemigos/enemigo-rojo-camina-1",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 61,
-						"h": 54
+						"w": 32,
+						"h": 44
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 61,
-						"h": 54
+						"w": 32,
+						"h": 44
 					},
 					"frame": {
-						"x": 718,
-						"y": 811,
-						"w": 61,
-						"h": 54
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/rana-salta",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 61,
-						"h": 54
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 61,
-						"h": 54
-					},
-					"frame": {
-						"x": 781,
-						"y": 817,
-						"w": 61,
-						"h": 54
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/asteroide_grande",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 55,
-						"h": 54
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 55,
-						"h": 54
-					},
-					"frame": {
-						"x": 844,
-						"y": 823,
-						"w": 55,
-						"h": 54
+						"x": 1098,
+						"y": 775,
+						"w": 32,
+						"h": 44
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4099,8 +4099,8 @@
 						"h": 54
 					},
 					"frame": {
-						"x": 901,
-						"y": 826,
+						"x": 777,
+						"y": 764,
 						"w": 55,
 						"h": 54
 					},
@@ -4124,8 +4124,8 @@
 						"h": 62
 					},
 					"frame": {
-						"x": 958,
-						"y": 828,
+						"x": 834,
+						"y": 784,
 						"w": 52,
 						"h": 62
 					},
@@ -4135,24 +4135,24 @@
 					}
 				},
 				{
-					"filename": "enemigos/pez",
+					"filename": "aliens/martian_2",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 45,
-						"h": 60
+						"w": 64,
+						"h": 67
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 45,
-						"h": 60
+						"x": 14,
+						"y": 6,
+						"w": 50,
+						"h": 61
 					},
 					"frame": {
-						"x": 1012,
-						"y": 828,
-						"w": 45,
-						"h": 60
+						"x": 888,
+						"y": 796,
+						"w": 50,
+						"h": 61
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4160,24 +4160,49 @@
 					}
 				},
 				{
-					"filename": "objetos/manzana",
+					"filename": "nave/nave_enemiga_1",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
 						"w": 50,
-						"h": 52
+						"h": 61
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
 						"w": 50,
-						"h": 52
+						"h": 61
 					},
 					"frame": {
-						"x": 1059,
-						"y": 828,
+						"x": 940,
+						"y": 803,
 						"w": 50,
-						"h": 52
+						"h": 61
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "nave/nave_reposo",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 46,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 2,
+						"w": 38,
+						"h": 41
+					},
+					"frame": {
+						"x": 992,
+						"y": 803,
+						"w": 38,
+						"h": 41
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4199,8 +4224,8 @@
 						"h": 50
 					},
 					"frame": {
-						"x": 1111,
-						"y": 828,
+						"x": 1032,
+						"y": 806,
 						"w": 49,
 						"h": 50
 					},
@@ -4210,32 +4235,7 @@
 					}
 				},
 				{
-					"filename": "botones/pantalla-completa",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 30,
-						"h": 30
-					},
-					"frame": {
-						"x": 1162,
-						"y": 828,
-						"w": 30,
-						"h": 30
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/corazon_medio",
+					"filename": "objetos/llave",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -4243,16 +4243,16 @@
 						"h": 64
 					},
 					"spriteSourceSize": {
-						"x": 17,
-						"y": 19,
-						"w": 30,
-						"h": 26
+						"x": 9,
+						"y": 17,
+						"w": 46,
+						"h": 31
 					},
 					"frame": {
-						"x": 1162,
-						"y": 860,
-						"w": 30,
-						"h": 26
+						"x": 768,
+						"y": 866,
+						"w": 46,
+						"h": 31
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4260,49 +4260,24 @@
 					}
 				},
 				{
-					"filename": "dado/dado_3",
+					"filename": "aliens/martian_3",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 34,
-						"h": 34
+						"w": 64,
+						"h": 67
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 34,
-						"h": 34
+						"x": 12,
+						"y": 3,
+						"w": 48,
+						"h": 64
 					},
 					"frame": {
-						"x": 682,
-						"y": 840,
-						"w": 34,
-						"h": 34
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/rana",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 58,
-						"h": 39
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 58,
-						"h": 39
-					},
-					"frame": {
-						"x": 665,
-						"y": 876,
-						"w": 58,
-						"h": 39
+						"x": 809,
+						"y": 899,
+						"w": 48,
+						"h": 64
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4324,8 +4299,8 @@
 						"h": 48
 					},
 					"frame": {
-						"x": 662,
-						"y": 917,
+						"x": 795,
+						"y": 965,
 						"w": 48,
 						"h": 48
 					},
@@ -4335,7 +4310,32 @@
 					}
 				},
 				{
-					"filename": "aliens/martian_4",
+					"filename": "disparos/misil",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 26
+					},
+					"frame": {
+						"x": 992,
+						"y": 846,
+						"w": 38,
+						"h": 26
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_0",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -4343,16 +4343,266 @@
 						"h": 67
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 18,
-						"w": 46,
-						"h": 49
+						"x": 15,
+						"y": 4,
+						"w": 49,
+						"h": 63
 					},
 					"frame": {
-						"x": 662,
-						"y": 967,
+						"x": 1083,
+						"y": 821,
+						"w": 49,
+						"h": 63
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 67
+					},
+					"spriteSourceSize": {
+						"x": 15,
+						"y": 4,
+						"w": 49,
+						"h": 63
+					},
+					"frame": {
+						"x": 1134,
+						"y": 816,
+						"w": 49,
+						"h": 63
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "redimensionables/boton-amarillo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 49,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 49,
+						"h": 45
+					},
+					"frame": {
+						"x": 1032,
+						"y": 858,
+						"w": 49,
+						"h": 45
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_10",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 67
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 4,
+						"w": 48,
+						"h": 63
+					},
+					"frame": {
+						"x": 1083,
+						"y": 886,
+						"w": 48,
+						"h": 63
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pixelados/pixel_player_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 27,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 27,
+						"h": 33
+					},
+					"frame": {
+						"x": 340,
+						"y": 984,
+						"w": 27,
+						"h": 33
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "monedas/moneda_3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 13,
+						"h": 16
+					},
+					"frame": {
+						"x": 476,
+						"y": 604,
+						"w": 13,
+						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "aliens/martian_8",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 67
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 4,
+						"w": 45,
+						"h": 63
+					},
+					"frame": {
+						"x": 1133,
+						"y": 886,
+						"w": 45,
+						"h": 63
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "nave/nave_derecha_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
 						"w": 46,
-						"h": 49
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 45,
+						"h": 41
+					},
+					"frame": {
+						"x": 776,
+						"y": 820,
+						"w": 45,
+						"h": 41
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "dado/dado_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 816,
+						"y": 863,
+						"w": 34,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "disparos/laser_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 37,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 37,
+						"h": 13
+					},
+					"frame": {
+						"x": 823,
+						"y": 848,
+						"w": 37,
+						"h": 13
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "dado/dado_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 369,
+						"y": 978,
+						"w": 34,
+						"h": 34
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4374,10 +4624,60 @@
 						"h": 48
 					},
 					"frame": {
-						"x": 725,
-						"y": 867,
+						"x": 845,
+						"y": 965,
 						"w": 48,
 						"h": 48
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pixelados/pixel_player_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 27,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 23,
+						"h": 33
+					},
+					"frame": {
+						"x": 809,
+						"y": 552,
+						"w": 23,
+						"h": 33
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mini-explosion/explosion_0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 12,
+						"w": 13,
+						"h": 13
+					},
+					"frame": {
+						"x": 1083,
+						"y": 806,
+						"w": 13,
+						"h": 13
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4399,8 +4699,8 @@
 						"h": 48
 					},
 					"frame": {
-						"x": 712,
-						"y": 917,
+						"x": 479,
+						"y": 966,
 						"w": 48,
 						"h": 48
 					},
@@ -4424,35 +4724,10 @@
 						"h": 48
 					},
 					"frame": {
-						"x": 710,
+						"x": 529,
 						"y": 967,
 						"w": 48,
 						"h": 48
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "redimensionables/boton-amarillo",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 49,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 49,
-						"h": 45
-					},
-					"frame": {
-						"x": 775,
-						"y": 873,
-						"w": 49,
-						"h": 45
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4474,185 +4749,10 @@
 						"h": 48
 					},
 					"frame": {
-						"x": 762,
-						"y": 920,
+						"x": 579,
+						"y": 967,
 						"w": 48,
 						"h": 48
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/enemigo-rojo-camina-3",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 49,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 49,
-						"h": 38
-					},
-					"frame": {
-						"x": 760,
-						"y": 970,
-						"w": 49,
-						"h": 38
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/enemigo-verde-camina-2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 57,
-						"h": 34
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 3,
-						"w": 57,
-						"h": 31
-					},
-					"frame": {
-						"x": 826,
-						"y": 879,
-						"w": 57,
-						"h": 31
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/pelota_azul",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 22,
-						"h": 22
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 22,
-						"h": 22
-					},
-					"frame": {
-						"x": 383,
-						"y": 671,
-						"w": 22,
-						"h": 22
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "mini-explosion/explosion_1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 5,
-						"y": 6,
-						"w": 23,
-						"h": 20
-					},
-					"frame": {
-						"x": 292,
-						"y": 672,
-						"w": 23,
-						"h": 20
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "basicos/logo",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 60,
-						"h": 60
-					},
-					"spriteSourceSize": {
-						"x": 10,
-						"y": 0,
-						"w": 41,
-						"h": 60
-					},
-					"frame": {
-						"x": 812,
-						"y": 920,
-						"w": 41,
-						"h": 60
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "dado/dado_4",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 34,
-						"h": 34
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 34,
-						"h": 34
-					},
-					"frame": {
-						"x": 811,
-						"y": 982,
-						"w": 34,
-						"h": 34
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "dado/dado_5",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 34,
-						"h": 34
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 34,
-						"h": 34
-					},
-					"frame": {
-						"x": 847,
-						"y": 982,
-						"w": 34,
-						"h": 34
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4674,8 +4774,8 @@
 						"h": 48
 					},
 					"frame": {
-						"x": 855,
-						"y": 912,
+						"x": 629,
+						"y": 967,
 						"w": 48,
 						"h": 48
 					},
@@ -4685,32 +4785,7 @@
 					}
 				},
 				{
-					"filename": "mini-explosion/explosion_6",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 3,
-						"w": 28,
-						"h": 28
-					},
-					"frame": {
-						"x": 885,
-						"y": 882,
-						"w": 28,
-						"h": 28
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "nave/nave_reposo",
+					"filename": "nave/nave_izquierda_1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -4718,15 +4793,15 @@
 						"h": 45
 					},
 					"spriteSourceSize": {
-						"x": 7,
+						"x": 0,
 						"y": 2,
-						"w": 38,
+						"w": 45,
 						"h": 41
 					},
 					"frame": {
-						"x": 915,
-						"y": 882,
-						"w": 38,
+						"x": 679,
+						"y": 967,
+						"w": 45,
 						"h": 41
 					},
 					"anchor": {
@@ -4735,99 +4810,24 @@
 					}
 				},
 				{
-					"filename": "objetos/llave",
+					"filename": "monedas/moneda_4",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 64,
-						"h": 64
+						"w": 16,
+						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 9,
-						"y": 17,
-						"w": 46,
-						"h": 31
-					},
-					"frame": {
-						"x": 955,
-						"y": 892,
-						"w": 46,
-						"h": 31
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "nave/nave_avanza_2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 46,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 2,
-						"w": 42,
-						"h": 41
-					},
-					"frame": {
-						"x": 905,
-						"y": 925,
-						"w": 42,
-						"h": 41
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "nave/nave_derecha_2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 46,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 2,
-						"w": 42,
-						"h": 41
-					},
-					"frame": {
-						"x": 949,
-						"y": 925,
-						"w": 42,
-						"h": 41
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "pixelados/pixel_player_0",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 27,
-						"h": 33
-					},
-					"spriteSourceSize": {
-						"x": 2,
+						"x": 4,
 						"y": 0,
-						"w": 23,
-						"h": 33
+						"w": 7,
+						"h": 16
 					},
 					"frame": {
-						"x": 834,
-						"y": 41,
-						"w": 23,
-						"h": 33
+						"x": 300,
+						"y": 505,
+						"w": 7,
+						"h": 16
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4835,24 +4835,24 @@
 					}
 				},
 				{
-					"filename": "pixelados/pixel_player_1",
+					"filename": "efectos/chispa-1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 27,
-						"h": 33
+						"w": 222,
+						"h": 169
 					},
 					"spriteSourceSize": {
-						"x": 2,
-						"y": 0,
-						"w": 23,
-						"h": 33
+						"x": 97,
+						"y": 84,
+						"w": 29,
+						"h": 21
 					},
 					"frame": {
-						"x": 1,
-						"y": 656,
-						"w": 23,
-						"h": 33
+						"x": 1163,
+						"y": 117,
+						"w": 29,
+						"h": 21
 					},
 					"anchor": {
 						"x": 0.5,
@@ -4860,199 +4860,24 @@
 					}
 				},
 				{
-					"filename": "tanque/tanque_torreta",
+					"filename": "monedas/moneda_0",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 40,
-						"h": 12
+						"w": 16,
+						"h": 16
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 40,
-						"h": 12
+						"w": 16,
+						"h": 16
 					},
 					"frame": {
-						"x": 382,
-						"y": 483,
-						"w": 40,
-						"h": 12
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "disparos/laser_3",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 37,
-						"h": 13
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 37,
-						"h": 13
-					},
-					"frame": {
-						"x": 855,
-						"y": 962,
-						"w": 37,
-						"h": 13
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "interfaz/interfaz_deslizador",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 28,
-						"h": 42
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 28,
-						"h": 42
-					},
-					"frame": {
-						"x": 993,
-						"y": 925,
-						"w": 28,
-						"h": 42
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "mini-explosion/explosion_4",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 31,
-						"h": 31
-					},
-					"frame": {
-						"x": 1003,
-						"y": 892,
-						"w": 31,
-						"h": 31
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "pixelados/pixel_player_2",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 27,
-						"h": 33
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 27,
-						"h": 33
-					},
-					"frame": {
-						"x": 1036,
-						"y": 890,
-						"w": 27,
-						"h": 33
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "nave/nave_izquierda_2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 46,
-						"h": 45
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 2,
-						"w": 42,
-						"h": 41
-					},
-					"frame": {
-						"x": 1023,
-						"y": 925,
-						"w": 42,
-						"h": 41
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "enemigos/pinches-flotando",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 42,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 42,
-						"h": 40
-					},
-					"frame": {
-						"x": 1065,
-						"y": 882,
-						"w": 42,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/aceituna",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 37,
-						"h": 37
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 37,
-						"h": 37
-					},
-					"frame": {
-						"x": 1067,
-						"y": 924,
-						"w": 37,
-						"h": 37
+						"x": 1163,
+						"y": 140,
+						"w": 16,
+						"h": 16
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5074,8 +4899,8 @@
 						"h": 16
 					},
 					"frame": {
-						"x": 665,
-						"y": 856,
+						"x": 726,
+						"y": 967,
 						"w": 15,
 						"h": 16
 					},
@@ -5099,8 +4924,8 @@
 						"h": 16
 					},
 					"frame": {
-						"x": 645,
-						"y": 973,
+						"x": 726,
+						"y": 985,
 						"w": 15,
 						"h": 16
 					},
@@ -5110,24 +4935,24 @@
 					}
 				},
 				{
-					"filename": "objetos/tortuga",
+					"filename": "dado/dado_3",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 24,
-						"h": 24
+						"w": 34,
+						"h": 34
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 24,
-						"h": 24
+						"w": 34,
+						"h": 34
 					},
 					"frame": {
-						"x": 834,
-						"y": 76,
-						"w": 24,
-						"h": 24
+						"x": 852,
+						"y": 863,
+						"w": 34,
+						"h": 34
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5135,24 +4960,24 @@
 					}
 				},
 				{
-					"filename": "carreras/carreras_cono",
+					"filename": "enemigos/pez",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 15,
-						"h": 15
+						"w": 45,
+						"h": 60
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 15,
-						"h": 15
+						"w": 45,
+						"h": 60
 					},
 					"frame": {
-						"x": 645,
-						"y": 991,
-						"w": 15,
-						"h": 15
+						"x": 859,
+						"y": 899,
+						"w": 45,
+						"h": 60
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5160,24 +4985,24 @@
 					}
 				},
 				{
-					"filename": "objetos/pelota_gris",
+					"filename": "dado/dado_4",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 22,
-						"h": 22
+						"w": 34,
+						"h": 34
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 22,
-						"h": 22
+						"w": 34,
+						"h": 34
 					},
 					"frame": {
-						"x": 834,
-						"y": 102,
-						"w": 22,
-						"h": 22
+						"x": 888,
+						"y": 859,
+						"w": 34,
+						"h": 34
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5185,74 +5010,24 @@
 					}
 				},
 				{
-					"filename": "objetos/asteroide_chico",
+					"filename": "basicos/logo",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 15,
-						"h": 14
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 14,
-						"h": 14
-					},
-					"frame": {
-						"x": 479,
-						"y": 572,
-						"w": 14,
-						"h": 14
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "monedas/moneda_4",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 0,
-						"w": 7,
-						"h": 16
-					},
-					"frame": {
-						"x": 794,
-						"y": 563,
-						"w": 7,
-						"h": 16
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "mini-explosion/explosion_0",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
+						"w": 60,
+						"h": 60
 					},
 					"spriteSourceSize": {
 						"x": 10,
-						"y": 12,
-						"w": 13,
-						"h": 13
+						"y": 0,
+						"w": 41,
+						"h": 60
 					},
 					"frame": {
-						"x": 863,
-						"y": 604,
-						"w": 13,
-						"h": 13
+						"x": 906,
+						"y": 895,
+						"w": 41,
+						"h": 60
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5260,24 +5035,24 @@
 					}
 				},
 				{
-					"filename": "pacman/pacman_4",
+					"filename": "objetos/banana_0",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 13,
-						"h": 13
+						"w": 40,
+						"h": 45
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 13,
-						"h": 13
+						"w": 35,
+						"h": 45
 					},
 					"frame": {
-						"x": 383,
-						"y": 695,
-						"w": 13,
-						"h": 13
+						"x": 949,
+						"y": 866,
+						"w": 35,
+						"h": 45
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5285,49 +5060,24 @@
 					}
 				},
 				{
-					"filename": "disparos/laser",
+					"filename": "nave/nave_avanza_2",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 37,
-						"h": 9
+						"w": 46,
+						"h": 45
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 37,
-						"h": 9
+						"x": 3,
+						"y": 2,
+						"w": 42,
+						"h": 41
 					},
 					"frame": {
-						"x": 1067,
-						"y": 963,
-						"w": 37,
-						"h": 9
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "dado/dado_6",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 34,
-						"h": 34
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 34,
-						"h": 34
-					},
-					"frame": {
-						"x": 883,
-						"y": 977,
-						"w": 34,
-						"h": 34
+						"x": 949,
+						"y": 913,
+						"w": 42,
+						"h": 41
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5349,8 +5099,8 @@
 						"h": 30
 					},
 					"frame": {
-						"x": 919,
-						"y": 968,
+						"x": 993,
+						"y": 874,
 						"w": 37,
 						"h": 30
 					},
@@ -5360,199 +5110,24 @@
 					}
 				},
 				{
-					"filename": "cursores/cursor_disparo_negro",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 958,
-						"y": 968,
-						"w": 32,
-						"h": 32
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "cursores/cursor_disparo_rojo",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 992,
-						"y": 969,
-						"w": 32,
-						"h": 32
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/diamante_rojo",
+					"filename": "nave/nave_derecha_2",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 64,
-						"h": 64
+						"w": 46,
+						"h": 45
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 17,
-						"w": 37,
-						"h": 30
-					},
-					"frame": {
-						"x": 1026,
-						"y": 968,
-						"w": 37,
-						"h": 30
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/diamante_verde",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 17,
-						"w": 37,
-						"h": 30
-					},
-					"frame": {
-						"x": 1065,
-						"y": 974,
-						"w": 37,
-						"h": 30
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "monedas/moneda_0",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 919,
-						"y": 1000,
-						"w": 16,
-						"h": 16
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "monedas/moneda_1",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 937,
-						"y": 1000,
-						"w": 16,
-						"h": 16
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "monedas/moneda_7",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 1026,
-						"y": 1000,
-						"w": 16,
-						"h": 16
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "pacman/fantasma_6",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 20,
-						"h": 20
-					},
-					"spriteSourceSize": {
-						"x": 2,
+						"x": 3,
 						"y": 2,
-						"w": 16,
-						"h": 16
+						"w": 42,
+						"h": 41
 					},
 					"frame": {
-						"x": 1044,
-						"y": 1000,
-						"w": 16,
-						"h": 16
+						"x": 993,
+						"y": 906,
+						"w": 42,
+						"h": 41
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5560,99 +5135,24 @@
 					}
 				},
 				{
-					"filename": "mini-explosion/explosion_3",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 1106,
-						"y": 924,
-						"w": 32,
-						"h": 32
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "explosion/explosion_001",
+					"filename": "nave/nave_izquierda_2",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 162,
-						"h": 144
+						"w": 46,
+						"h": 45
 					},
 					"spriteSourceSize": {
-						"x": 66,
-						"y": 51,
-						"w": 32,
-						"h": 30
-					},
-					"frame": {
-						"x": 1106,
-						"y": 958,
-						"w": 32,
-						"h": 30
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/corazon_vacio",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 17,
-						"y": 19,
-						"w": 30,
-						"h": 26
-					},
-					"frame": {
-						"x": 1104,
-						"y": 990,
-						"w": 30,
-						"h": 26
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "pacman/fantasma_7",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 20,
-						"h": 20
-					},
-					"spriteSourceSize": {
-						"x": 2,
+						"x": 3,
 						"y": 2,
-						"w": 16,
-						"h": 16
+						"w": 42,
+						"h": 41
 					},
 					"frame": {
-						"x": 581,
-						"y": 758,
-						"w": 16,
-						"h": 16
+						"x": 1037,
+						"y": 905,
+						"w": 42,
+						"h": 41
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5660,274 +5160,24 @@
 					}
 				},
 				{
-					"filename": "pacman/fantasma_azul_0",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 20,
-						"h": 20
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 1,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 599,
-						"y": 758,
-						"w": 16,
-						"h": 16
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "mini-explosion/explosion_5",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 2,
-						"w": 31,
-						"h": 29
-					},
-					"frame": {
-						"x": 1111,
-						"y": 880,
-						"w": 31,
-						"h": 29
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "pacman/fantasma_azul_1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 20,
-						"h": 20
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 1,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 1144,
-						"y": 880,
-						"w": 16,
-						"h": 16
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "efectos/chispa-1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 222,
-						"h": 169
-					},
-					"spriteSourceSize": {
-						"x": 97,
-						"y": 84,
-						"w": 29,
-						"h": 21
-					},
-					"frame": {
-						"x": 1162,
-						"y": 888,
-						"w": 29,
-						"h": 21
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "carreras/carreras_cono_caido",
+					"filename": "objetos/tortuga",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 16,
-						"h": 15
+						"w": 24,
+						"h": 24
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 16,
-						"h": 15
+						"w": 24,
+						"h": 24
 					},
 					"frame": {
-						"x": 1144,
-						"y": 898,
-						"w": 16,
-						"h": 15
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "efectos/humo-01",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 161,
-						"h": 162
-					},
-					"spriteSourceSize": {
-						"x": 69,
-						"y": 79,
-						"w": 26,
-						"h": 28
-					},
-					"frame": {
-						"x": 1140,
-						"y": 915,
-						"w": 26,
-						"h": 28
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "mini-explosion/explosion_2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 3,
-						"w": 29,
-						"h": 27
-					},
-					"frame": {
-						"x": 1140,
-						"y": 945,
-						"w": 29,
-						"h": 27
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "interfaz/interfaz_punto",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 10
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 10
-					},
-					"frame": {
-						"x": 784,
-						"y": 711,
-						"w": 8,
-						"h": 10
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "particulas/particula_1",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 10,
-						"h": 10
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 10,
-						"h": 10
-					},
-					"frame": {
-						"x": 1062,
-						"y": 1006,
-						"w": 10,
-						"h": 10
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "particulas/particula_2",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 10,
-						"h": 10
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 10,
-						"h": 10
-					},
-					"frame": {
-						"x": 1074,
-						"y": 1006,
-						"w": 10,
-						"h": 10
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "monedas/moneda_3",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
 						"x": 1,
-						"y": 0,
-						"w": 13,
-						"h": 16
-					},
-					"frame": {
-						"x": 1177,
-						"y": 668,
-						"w": 13,
-						"h": 16
+						"y": 630,
+						"w": 24,
+						"h": 24
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5949,8 +5199,8 @@
 						"h": 16
 					},
 					"frame": {
-						"x": 1179,
-						"y": 686,
+						"x": 966,
+						"y": 598,
 						"w": 13,
 						"h": 16
 					},
@@ -5974,10 +5224,410 @@
 						"h": 16
 					},
 					"frame": {
-						"x": 1179,
-						"y": 704,
+						"x": 966,
+						"y": 616,
 						"w": 13,
 						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/enemigo-rojo-camina-2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 42
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 42
+					},
+					"frame": {
+						"x": 895,
+						"y": 961,
+						"w": 32,
+						"h": 42
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "interfaz/interfaz_deslizador",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 28,
+						"h": 42
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 28,
+						"h": 42
+					},
+					"frame": {
+						"x": 929,
+						"y": 957,
+						"w": 28,
+						"h": 42
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/enemigo-rojo-camina-golpeado",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 35,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 35,
+						"h": 41
+					},
+					"frame": {
+						"x": 959,
+						"y": 956,
+						"w": 35,
+						"h": 41
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "enemigos/pinches-flotando",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 42,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 42,
+						"h": 40
+					},
+					"frame": {
+						"x": 996,
+						"y": 949,
+						"w": 42,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tanque/tanque_disparo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 26
+					},
+					"frame": {
+						"x": 996,
+						"y": 991,
+						"w": 38,
+						"h": 26
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "dado/dado_5",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 1040,
+						"y": 948,
+						"w": 34,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/diamante_rojo",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 17,
+						"w": 37,
+						"h": 30
+					},
+					"frame": {
+						"x": 1076,
+						"y": 951,
+						"w": 37,
+						"h": 30
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "dado/dado_6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 1076,
+						"y": 983,
+						"w": 34,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/diamante_verde",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 17,
+						"w": 37,
+						"h": 30
+					},
+					"frame": {
+						"x": 1115,
+						"y": 951,
+						"w": 37,
+						"h": 30
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "cursores/cursor_disparo_negro",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1112,
+						"y": 983,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "explosion/explosion_001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 162,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 66,
+						"y": 51,
+						"w": 32,
+						"h": 30
+					},
+					"frame": {
+						"x": 1154,
+						"y": 951,
+						"w": 32,
+						"h": 30
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "cursores/cursor_disparo_rojo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1146,
+						"y": 983,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "particulas/particula_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 10,
+						"h": 10
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 10,
+						"h": 10
+					},
+					"frame": {
+						"x": 888,
+						"y": 784,
+						"w": 10,
+						"h": 10
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/pelota_azul",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 22,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 22
+					},
+					"frame": {
+						"x": 809,
+						"y": 587,
+						"w": 22,
+						"h": 22
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/pelota_gris",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 22,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 22
+					},
+					"frame": {
+						"x": 1,
+						"y": 656,
+						"w": 22,
+						"h": 22
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pacman/pacman_4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 13,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 13
+					},
+					"frame": {
+						"x": 385,
+						"y": 149,
+						"w": 13,
+						"h": 13
 					},
 					"anchor": {
 						"x": 0.5,
@@ -5999,10 +5649,335 @@
 						"h": 13
 					},
 					"frame": {
-						"x": 1179,
-						"y": 722,
+						"x": 862,
+						"y": 848,
 						"w": 13,
 						"h": 13
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "particulas/particula_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 20,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 20,
+						"h": 21
+					},
+					"frame": {
+						"x": 841,
+						"y": 397,
+						"w": 20,
+						"h": 21
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mini-explosion/explosion_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 405,
+						"y": 978,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mini-explosion/explosion_4",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 31,
+						"h": 31
+					},
+					"frame": {
+						"x": 439,
+						"y": 971,
+						"w": 31,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "monedas/moneda_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 929,
+						"y": 1001,
+						"w": 16,
+						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "monedas/moneda_7",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 947,
+						"y": 1001,
+						"w": 16,
+						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "mini-explosion/explosion_5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 31,
+						"h": 29
+					},
+					"frame": {
+						"x": 1040,
+						"y": 984,
+						"w": 31,
+						"h": 29
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/asteroide_chico",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 15,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 14
+					},
+					"frame": {
+						"x": 726,
+						"y": 1003,
+						"w": 14,
+						"h": 14
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "particulas/particula_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 10,
+						"h": 10
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 10,
+						"h": 10
+					},
+					"frame": {
+						"x": 900,
+						"y": 586,
+						"w": 10,
+						"h": 10
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pacman/fantasma_6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 20,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 809,
+						"y": 611,
+						"w": 16,
+						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pacman/fantasma_7",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 20,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 1,
+						"y": 680,
+						"w": 16,
+						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pacman/fantasma_azul_0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 20,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 645,
+						"y": 598,
+						"w": 16,
+						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "pacman/fantasma_azul_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 20,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 965,
+						"y": 999,
+						"w": 16,
+						"h": 16
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "interfaz/interfaz_punto",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 8,
+						"h": 10
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 8,
+						"h": 10
+					},
+					"frame": {
+						"x": 959,
+						"y": 360,
+						"w": 8,
+						"h": 10
 					},
 					"anchor": {
 						"x": 0.5,
@@ -6024,10 +5999,60 @@
 						"h": 13
 					},
 					"frame": {
-						"x": 378,
-						"y": 271,
+						"x": 439,
+						"y": 1004,
 						"w": 10,
 						"h": 13
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "carreras/carreras_cono_caido",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 15
+					},
+					"frame": {
+						"x": 177,
+						"y": 403,
+						"w": 16,
+						"h": 15
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "carreras/carreras_cono",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 177,
+						"y": 420,
+						"w": 15,
+						"h": 15
 					},
 					"anchor": {
 						"x": 0.5,
@@ -6049,8 +6074,8 @@
 						"h": 3
 					},
 					"frame": {
-						"x": 213,
-						"y": 149,
+						"x": 675,
+						"y": 300,
 						"w": 3,
 						"h": 3
 					},
@@ -6074,8 +6099,8 @@
 						"h": 3
 					},
 					"frame": {
-						"x": 213,
-						"y": 149,
+						"x": 675,
+						"y": 300,
 						"w": 3,
 						"h": 3
 					},
@@ -6090,6 +6115,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:aa7939785bacfcdaebbea460f80a0c92:8976d54c6f13c9a372f3ad8116bbe80e:090f076f11af587180320e0b2e5117de$"
+		"smartupdate": "$TexturePacker:SmartUpdate:6cb0ee9b5f5ac0eca4ab91ac2ac9d30f:28758f2519dc2f079fe7987f28b14075:090f076f11af587180320e0b2e5117de$"
 	}
 }

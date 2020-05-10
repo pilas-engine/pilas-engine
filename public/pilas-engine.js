@@ -131,6 +131,9 @@ var Actores = (function () {
     Actores.prototype.pantalla_completa = function () {
         return this.crear_actor("pantalla_completa");
     };
+    Actores.prototype.barra_de_energia = function () {
+        return this.crear_actor("barra_de_energia");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -3476,6 +3479,49 @@ var actor = (function (_super) {
     actor.prototype.actualizar = function () { };
     return actor;
 }(Actor));
+var barra_de_energia = (function (_super) {
+    __extends(barra_de_energia, _super);
+    function barra_de_energia() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:basicos/barra_de_energia"
+        };
+        _this.barra_largo = 200;
+        _this.barra_alto = 15;
+        _this.vida_actual = 100;
+        _this.vida_anterior = 0;
+        return _this;
+    }
+    barra_de_energia.prototype.iniciar = function () {
+        _super.prototype.iniciar.call(this);
+        this.imagen = "imagenes:basicos/invisible";
+    };
+    barra_de_energia.prototype.actualizar = function () {
+        this.dibujar();
+        this.vida_actual -= 0.2;
+    };
+    barra_de_energia.prototype.dibujar = function () {
+        if (this.vida_actual === this.vida_anterior) {
+            return;
+        }
+        this.vida_actual = Math.max(0, this.vida_actual);
+        this.vida_actual = Math.min(100, this.vida_actual);
+        this.vida_anterior = this.vida_actual;
+        this.dibujar_barra();
+    };
+    barra_de_energia.prototype.dibujar_barra = function () {
+        var vida = this.vida_actual;
+        var largo = this.barra_largo;
+        var alto = this.barra_alto;
+        var x = -largo / 2;
+        var y = +alto / 2;
+        this.limpiar();
+        this.dibujar_borde_de_rectangulo(x, y, largo, alto, "blanco", 4);
+        this.dibujar_rectangulo(x, y, largo, alto, "rojo");
+        this.dibujar_rectangulo(x, y, (largo / 100) * vida, alto, "amarillo");
+    };
+    return barra_de_energia;
+}(PizarraBase));
 var boton = (function (_super) {
     __extends(boton, _super);
     function boton() {

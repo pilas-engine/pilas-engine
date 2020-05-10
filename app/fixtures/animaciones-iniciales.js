@@ -472,5 +472,25 @@ export default [
       }
     ],
     velocidad: 10
+  },
+  {
+    nombre: "bmo_salta",
+    cuadros: [
+      {
+        nombre: "imagenes:bmo/bmo_salta",
+        sprite: "imagenes-bmo-bmo_salta"
+      }
+    ],
+    velocidad: 10
+  },
+  {
+    nombre: "bmo_parado",
+    cuadros: [
+      {
+        nombre: "imagenes:bmo/bmo_parado",
+        sprite: "imagenes-bmo-bmo_parado"
+      }
+    ],
+    velocidad: 10
   }
 ];

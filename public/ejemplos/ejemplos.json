@@ -134,6 +134,10 @@
     {
       "nombre": "pantalla-completa",
       "desde": "2.1.2"
+    },
+    {
+      "nombre": "barra-de-energia",
+      "desde": "2.1.2"
     }
   ]
 }

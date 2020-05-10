@@ -33,6 +33,7 @@ declare class Actores {
     explosion(): any;
     boton_activable(): any;
     pantalla_completa(): any;
+    barra_de_energia(): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -721,6 +722,19 @@ declare class actor extends Actor {
     };
     iniciar(): void;
     actualizar(): void;
+}
+declare class barra_de_energia extends PizarraBase {
+    propiedades: {
+        imagen: string;
+    };
+    barra_largo: number;
+    barra_alto: number;
+    vida_actual: number;
+    private vida_anterior;
+    iniciar(): void;
+    actualizar(): void;
+    dibujar(): void;
+    private dibujar_barra;
 }
 declare class boton extends ActorTextoBase {
     propiedades: {

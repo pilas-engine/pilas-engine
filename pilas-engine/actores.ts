@@ -155,4 +155,8 @@ class Actores {
   pantalla_completa() {
     return this.crear_actor("pantalla_completa");
   }
+
+  barra_de_energia() {
+    return this.crear_actor("barra_de_energia");
+  }
 }

@@ -1,35 +1,37 @@
-<div role="button" test-celda-imagen
+<div test-celda-imagen
   class="
-    w4 h4
-    pulsable
     {{if debeMostrar "dib" "dn"}}
-    ba pa2 button
-    br2
-    verdana f6 link pointer
-    black bg-animate b--black-20
+    w3
+    verdana f6
+    black
     unselectable
     v-top
-    mb1
-    hover-bg-black-10
+    mv1
     texto
-    " {{action "cuando_selecciona_imagen" imagen}}>
+    hide-child" >
   <div class="flex flex-column h-100 w-100">
 
     {{yield}}
 
-    {{#pilas-tooltip class="" texto=imagen.nombre}}
-      <div class="flex1 tc w-100 h3">
-        {{#if imagen.contenido}}
-          <img src={{imagen.contenido}} alt="" class="object-fit-contain" width={{48}} height={{48}}>
-        {{else}}
-          <div class="sprite-grilla-de-imagenes {{imagen.sprite}}"></div>
-        {{/if}}
-      </div>
+    <div
+      {{action "cuando_selecciona_imagen" imagen}}
+      class="flex pa2 h3 items-center justify-center w-100 hover-bg-black-10 pulsable bg-animate"
+      role="button"
+      >
+      {{#if imagen.contenido}}
+        <img src={{imagen.contenido}} alt="" class="object-fit-contain" width={{48}} height={{48}}>
+      {{else}}
+        <div class="sprite-grilla-de-imagenes {{imagen.sprite}}"></div>
+      {{/if}}
+    </div>
 
-      <div class="f6 tc mt2 h1 truncate">
-        {{nombre-de-imagen imagen.nombre}}
-      </div>
-    {{/pilas-tooltip}}
+    <div class="child f7 tc mt2 h1 truncate">
+      {{nombre-de-imagen imagen.nombre}}
+    </div>
+
+    <div class="tr dn">
+      {{pilas-boton-copiar texto=(helper-imagen imagen.nombre) miniatura=true}}
+    </div>
 
   </div>
 </div>
