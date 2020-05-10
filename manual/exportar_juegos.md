@@ -104,6 +104,15 @@ Hay varios parámetros más, pero para no extendernos mucho te dejamos la [docum
 
 Por cierto, si quieres investigar exactamente qué hacen estos scripts podrías profundizar tu investigación mirando la [documentación de electron sobre distribución de binarios](https://electronjs.org/docs/tutorial/application-distribution) ya que se describe cada uno de los pasos de compilación de forma manual.
 
+### Cómo ejecutar el juego en pantalla completa
+
+Si empaquetas el juego con electron, como muestra la sección anterior, también
+tienes la posibilidad de configurar la compilación para que funcione en modo
+pantalla completa. Para eso tienes que editar el archivo `index.js` y colocar
+`true` en la variable `pantalla_completa`:
+
+![](imagenes/exportar_juegos.assets/pantalla-completa.png)
+
 ### Cómo llevar mi juego a celulares, tablets y tiendas oficiales de apple o google
 
 Pilas incluye una forma sencilla de probar juegos en celulares y tablets, si solo quieres probar tus juegos te recomendamos mirar ahí primero.

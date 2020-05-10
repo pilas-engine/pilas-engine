@@ -70,6 +70,13 @@ export default Service.extend({
       proyecto.set("tamaño", `${proyecto.ancho}x${proyecto.alto}`);
     }
 
+    // Migracion 2020-05-09: Corrige el nombre de la escena.
+    let escena_encontrada = proyecto.escenas.filterBy("nombre", proyecto.nombre_de_la_escena_inicial);
+
+    if (escena_encontrada.length === 0) {
+      proyecto.set("nombre_de_la_escena_inicial", proyecto.escenas.firstObject.get("nombre"));
+    }
+
     return proyecto;
   },
 

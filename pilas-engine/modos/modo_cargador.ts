@@ -146,6 +146,7 @@ class ModoCargador extends Modo {
         nombre_de_la_escena_inicial: "principal",
         es_cambio_de_escena: false,
         codigo: `
+
         var __extends = (this && this.__extends) || (function () {
           var extendStatics = function (d, b) {
               extendStatics = Object.setPrototypeOf ||
@@ -159,6 +160,13 @@ class ModoCargador extends Modo {
               d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
           };
       })();
+      var Proyecto = /** @class */ (function () {
+          function Proyecto() {
+          }
+          Proyecto.prototype.iniciar = function () {
+          };
+          return Proyecto;
+      }());
       var principal = /** @class */ (function (_super) {
           __extends(principal, _super);
           function principal() {

@@ -53,7 +53,13 @@ export default Component.extend({
         archivo_pilas = expresion[0];
       }
 
-      yield this.agregar_archivo(carpeta_del_juego, `./${archivo_pilas}`);
+      // se le aplica un hash al archivo de pilas para que expire el cache del navegador.
+      let hash = Math.random()
+        .toString()
+        .split(".")[1];
+      let nombre_de_archivo_con_hash = `pilas-engine-${hash}.js`;
+
+      yield this.agregar_archivo(carpeta_del_juego, `./${archivo_pilas}`, nombre_de_archivo_con_hash);
 
       yield this.agregar_archivo(carpeta_del_juego, "./phaser.js");
 
@@ -84,10 +90,13 @@ export default Component.extend({
         nombre_de_la_escena_inicial: proyecto.nombre_de_la_escena_inicial,
         codigo: resultado.codigo,
         permitir_modo_pausa: false,
-        proyecto: proyecto
+        proyecto: proyecto,
+        pixelart: false
       };
 
-      yield carpeta_del_juego.file("index.html", archivo_index.replace("CODIGO_SERIALIZADO", json_a_string(proyecto_completo)));
+      let codigo_index_html = archivo_index.replace("CODIGO_SERIALIZADO", json_a_string(proyecto_completo));
+      codigo_index_html = codigo_index_html.replace("pilas-engine.js", nombre_de_archivo_con_hash);
+      yield carpeta_del_juego.file("index.html", codigo_index_html);
 
       var carpeta_sonidos = carpeta_del_juego.folder("sonidos");
 
@@ -160,8 +169,10 @@ export default Component.extend({
     this.get("mensajes").pushObject(mensaje);
   },
 
-  agregar_archivo(nodo, ruta) {
-    let nombre = ruta.split("/").splice(-1)[0];
+  agregar_archivo(nodo, ruta, nombre) {
+    if (nombre === undefined) {
+      nombre = ruta.split("/").splice(-1)[0];
+    }
 
     return this.obtener_archivo(ruta).then(data => {
       this.agregar_mensaje(`- ${nombre}`);
