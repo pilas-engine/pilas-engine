@@ -1,7 +1,6 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
-import { computed } from "@ember/object";
 
 export default Component.extend({
   tagName: "",
