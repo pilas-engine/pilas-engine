@@ -22,6 +22,7 @@ jobs:
       - run: sudo dpkg --add-architecture i386 && sudo apt update
       - run: sudo apt install wine wine32 wine64 libwine libwine:i386 fonts-wine
       - run: make binarios
+      - run: sudo apt install texlive-latex-extra
       - run: wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb; sudo dpkg -i pandoc-2.9.2.1-1-amd64.deb; rm pandoc-2.9.2.1-1-amd64.deb
       - run: echo "Instalando go y ghr ..."
       - run: sudo apt-get install golang
