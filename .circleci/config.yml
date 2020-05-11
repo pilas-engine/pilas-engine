@@ -63,12 +63,7 @@ workflows:
     jobs:
       - compilar
       - actualizar-sitio-dev
-      - binarios:
-          filters:
-            tags:
-              only: /^v\d+.\d+.\d+/
-            branches:
-              ignore: /.*/
+      - binarios
       - actualizar-sitio:
           filters:
             tags:

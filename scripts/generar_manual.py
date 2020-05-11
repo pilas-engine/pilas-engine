@@ -8,7 +8,7 @@ def convertir_markdown_a_html(fuente, includes):
         opciones = opciones + " --include-in-header=manual/templates/header.html"
         opciones = opciones + " --include-after-body=manual/templates/footer.html"
 
-    os.system(f"pandoc manual/{fuente} -o public/manual/{destino} {opciones}")
+    os.system("pandoc manual/" + fuente + " -o public/manual/" + destino + " " + opciones)
 
 def generar_manual_en_html():
     archivos = os.listdir("manual")

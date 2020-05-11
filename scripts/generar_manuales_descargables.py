@@ -20,7 +20,7 @@ def generar_archivo_tmp_md_contatenado():
     salida = open("manual/tmp.md", "wt")
 
     for nombre in archivos:
-        contenido = obtener_contenido(f"manual/{nombre}")
+        contenido = obtener_contenido("manual/" + nombre)
         salida.write(contenido)
 
     salida.close()
@@ -29,9 +29,9 @@ def generar_archivo_tmp_md_contatenado():
 def crear_libros():
     opciones = '--toc --top-level-division=chapter --metadata title="Manual de Pilas Engine 2"'
     generar_archivo_tmp_md_contatenado()
-    os.system(f"cd manual; pandoc {opciones} tmp.md -o ../manuales/book.pdf")
-    os.system(f"cd manual; pandoc {opciones} tmp.md -o ../manuales/book.epub")
-    os.system(f"rm manual/tmp.md")
+    os.system("cd manual; pandoc " + opciones + " tmp.md -o ../manuales/book.pdf")
+    os.system("cd manual; pandoc " + opciones + " tmp.md -o ../manuales/book.epub")
+    os.system("rm manual/tmp.md")
 
 def extraer_nombre_de_archivo_markdown(linea):
     return re.search('\((.*)\.html\)', linea).group(1) + ".md"
