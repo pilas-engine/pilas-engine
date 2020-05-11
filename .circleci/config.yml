@@ -21,8 +21,8 @@ jobs:
       - run: echo "Instalando wine ..."
       - run: sudo dpkg --add-architecture i386 && sudo apt update
       - run: sudo apt install wine wine32 wine64 libwine libwine:i386 fonts-wine
-      - run: sudo apt install pandoc
       - run: make binarios
+      - run: wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb; sudo dpkg -i pandoc-2.9.2.1-1-amd64.deb; rm pandoc-2.9.2.1-1-amd64.deb
       - run: echo "Instalando go y ghr ..."
       - run: sudo apt-get install golang
       - run: wget https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz; tar -xvf go1.10.3.linux-amd64.tar.gz; sudo mv go /usr/local
@@ -63,12 +63,7 @@ workflows:
     jobs:
       - compilar
       - actualizar-sitio-dev
-      - binarios:
-          filters:
-            tags:
-              only: /^v\d+.\d+.\d+/
-            branches:
-              ignore: /.*/
+      - binarios
       - actualizar-sitio:
           filters:
             tags:
