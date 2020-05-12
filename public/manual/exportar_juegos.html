@@ -135,6 +135,9 @@ node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32</code
 <pre><code>node_modules/.bin/electron-packager . mijuego --all</code></pre>
 <p>Hay varios parámetros más, pero para no extendernos mucho te dejamos la <a href="https://github.com/electron-userland/electron-packager#usage">documentación detallada de electron-packager</a></p>
 <p>Por cierto, si quieres investigar exactamente qué hacen estos scripts podrías profundizar tu investigación mirando la <a href="https://electronjs.org/docs/tutorial/application-distribution">documentación de electron sobre distribución de binarios</a> ya que se describe cada uno de los pasos de compilación de forma manual.</p>
+<h3 id="cómo-ejecutar-el-juego-en-pantalla-completa">Cómo ejecutar el juego en pantalla completa</h3>
+<p>Si empaquetas el juego con electron, como muestra la sección anterior, también tienes la posibilidad de configurar la compilación para que funcione en modo pantalla completa. Para eso tienes que editar el archivo <code>index.js</code> y colocar <code>true</code> en la variable <code>pantalla_completa</code>:</p>
+<p><img src="imagenes/exportar_juegos.assets/pantalla-completa.png" /></p>
 <h3 id="cómo-llevar-mi-juego-a-celulares-tablets-y-tiendas-oficiales-de-apple-o-google">Cómo llevar mi juego a celulares, tablets y tiendas oficiales de apple o google</h3>
 <p>Pilas incluye una forma sencilla de probar juegos en celulares y tablets, si solo quieres probar tus juegos te recomendamos mirar ahí primero.</p>
 <p>Ahora bien, si en realidad lo que buscas es llevar tu juego de forma permanente a un celular o tablet, ya sea para tí, amigos o para publicar en un tienda oficial, lo que necesitas es instalar cordova, los SDK oficiales para tu tipo de dispositivo (android o ios) y compilar tu juego por completo.</p>

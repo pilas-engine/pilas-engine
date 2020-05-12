@@ -10,7 +10,7 @@ La función `pilas.azar` retorna un número aleatorio entre dos números. Por
 ejemplo, si buscas que pilas retorne un número al hacer entre 1 y 5 podrías
 llamar a la función así:
 
-```
+```typescript
 pilas.azar(1, 5)
 ```
 

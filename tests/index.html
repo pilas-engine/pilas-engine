@@ -31,6 +31,12 @@
     <link rel="stylesheet" integrity="" href="{{rootURL}}grilla-imagenes.css" />
 
     {{content-for "head-footer"}} {{content-for "test-head-footer"}}
+
+    <style media="screen">
+      #ember-testing-container {
+        overflow: hidden !important;
+      }
+    </style>
   </head>
   <body style="overflow: scroll">
     {{content-for "body"}} {{content-for "test-body"}}

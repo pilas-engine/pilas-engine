@@ -11,10 +11,14 @@ import { observer } from "@ember/object";
 import base64_encode from "../utils/base64-encode";
 import { run } from "@ember/runloop";
 import { debounce } from "@ember/runloop";
+import convertir_objeto_ember_en_diccionario_simple from "../utils/convertir-proyecto-ember-en-diccionario-simple";
+import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
+import { later } from "@ember/runloop";
 
 export default Component.extend({
   bus: service(),
   log: service(),
+  memento: service(),
   compilador: service(),
   recursos: service(),
   codigo: "",
@@ -64,6 +68,8 @@ export default Component.extend({
 
     this.set("estado", new estados.ModoCargando());
     this.conectar_eventos();
+
+    this.memento.iniciar();
 
     if (this.seleccion != -1) {
       if (!this.existe_actor_o_escena_con_id(this.seleccion)) {
@@ -471,6 +477,10 @@ export default Component.extend({
     agregar_actor(proyecto, actor) {
       this.set("hay_cambios_por_guardar", true);
 
+      let diccionario = convertir_objeto_ember_en_diccionario_simple(this.proyecto);
+
+      this.memento.accion("agrega un actor", diccionario);
+
       let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
       let id = this.generar_id();
@@ -564,9 +574,19 @@ export default Component.extend({
       this.log.info("Ingresando en modo pausa");
     },
 
+    deshacer() {
+      let paso = this.memento.deshacer();
+      let proyecto = convertirProyectoEnObjetoEmber(paso.proyecto);
+      this.set("proyecto", proyecto);
+    },
+
     cambiarPosicion(valorNuevo) {
       this.set("hay_cambios_por_guardar", true);
       this.set("posicion", valorNuevo);
+
+      let diccionario = convertir_objeto_ember_en_diccionario_simple(this.proyecto);
+      this.memento.accion("cambiar la posición de una actor", diccionario);
+
       this.bus.trigger(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, {
         posicion: valorNuevo
       });
@@ -576,9 +596,18 @@ export default Component.extend({
       this.send("alternarEstadoDeEjecucion");
 
       if (this.get("panelMaximizado")) {
-        this.set("panelMaximizado", "canvas-desde-el-editor");
-        this.set("maximizarCanvas", true);
         this.set("maximizarEditor", false);
+        this.set("ocultar_interfaz", true);
+
+        later(
+          this,
+          () => {
+            this.set("ocultar_interfaz", false);
+            this.set("maximizarCanvas", true);
+            this.set("panelMaximizado", "canvas-desde-el-editor");
+          },
+          1
+        );
       }
     },
 

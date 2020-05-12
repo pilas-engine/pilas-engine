@@ -28,6 +28,12 @@ export default Component.extend({
         }
       ],
       codigos: {
+        proyecto: `
+        class Proyecto {
+          iniciar() {
+          }
+
+        }`,
         escenas: [
           {
             nombre: NOMBRE_DE_LA_ESCENA,

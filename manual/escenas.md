@@ -13,14 +13,14 @@ Un juego típico tendrá al menos una escena como el menú principal, una presen
 Para cambiar la escena actual se puede llamar a la función `cambiar_escena`
 indicando el nombre de la escena que se quiere cambiar. Por ejemplo:
 
-```
+```typescript
 pilas.cambiar_escena("escena2");
 ```
 
 También se puede reiniciar la escena actual llamando a esta
 función:
 
-```
+```typescript
 pilas.reiniciar_escena();
 ```
 
@@ -33,14 +33,14 @@ como `gravedad_x` y `gravedad_y`. Estos parámetros se
 encuentran en el inspector de la escena y también se pueden
 cambiar desde el código así:
 
-```
+```typescript
 pilas.fisica.gravedad_x = 1;
 pilas.fisica.gravedad_y = 1;
 ```
 
 o bien:
 
-```
+```typescript
 pilas.escena.gravedad_x = 0;
 pilas.escena.gravedad_y = -2;
 ```

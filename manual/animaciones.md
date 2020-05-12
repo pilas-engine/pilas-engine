@@ -136,7 +136,7 @@ algún código para reaccionar ante la finalización de la animación. Por ejemp
 el actor "explosión" se elimina de la pantalla automáticamente cuando
 finaliza su animación:
 
-```
+```typescript
 class explosion extends Actor {
 
   // Otros métodos

@@ -1,17 +1,38 @@
 <div id="panel-canvas" class="flex {{if (not mostrarEditor) "flex1" "w5"}} {{if maximizar "panel-maximizado"}} flex-column bg-fondo pa2 unselectable">
 
-  <div class="texto separador-vertical tr">
-    {{#if (eq panelMaximizado "canvas-desde-el-editor")}}
-      {{#if estado.puedeDetener}}
-        {{#pilas-boton-miniatura-pulsable accion=detener_y_volver_al_editor}}Detener y volver al editor <span class="atajo">ESC</span>{{/pilas-boton-miniatura-pulsable}}
-      {{else}}
-        {{#pilas-boton-miniatura-pulsable accion=detener_y_volver_al_editor}}Volver al editor <span class="atajo">ESC</span>{{/pilas-boton-miniatura-pulsable}}
+  <div class="separador-vertical flex">
+    <div class="flex">
+      <div class="dn">
+        {{#pilas-boton-miniatura-pulsable class="pulsable f7 texto mr2" accion=deshacer}}
+          {{pilas-mini-icono icono="undo"}}
+        {{/pilas-boton-miniatura-pulsable}}
+
+        {{#pilas-boton-miniatura-pulsable class="pulsable f7 texto mr2" accion=detener_y_volver_al_editor}}
+          {{pilas-mini-icono icono="redo"}}
+        {{/pilas-boton-miniatura-pulsable}}
+
+        <div class="texto f7">
+          {{memento.pasos}}
+        </div>
+      </div>
+    </div>
+
+    <div class="flex1">
+    </div>
+
+    <div class="texto tr">
+      {{#if (eq panelMaximizado "canvas-desde-el-editor")}}
+        {{#if estado.puedeDetener}}
+          {{#pilas-boton-miniatura-pulsable accion=detener_y_volver_al_editor}}Detener y volver al editor <span class="atajo">ESC</span>{{/pilas-boton-miniatura-pulsable}}
+        {{else}}
+          {{#pilas-boton-miniatura-pulsable accion=detener_y_volver_al_editor}}Volver al editor <span class="atajo">ESC</span>{{/pilas-boton-miniatura-pulsable}}
+        {{/if}}
       {{/if}}
-    {{/if}}
 
-    {{pilas-boton-configuracion-del-canvas oscuro=oscuro pixelart=pixelart permitir_modo_pausa=permitir_modo_pausa}}
-    {{pilas-boton-miniatura icono="maximizar" pulsado=maximizar alCambiarMaximizado=(action "alCambiarMaximizado")}}
+      {{pilas-boton-configuracion-del-canvas oscuro=oscuro pixelart=pixelart permitir_modo_pausa=permitir_modo_pausa}}
+      {{pilas-boton-miniatura icono="maximizar" pulsado=maximizar alCambiarMaximizado=(action "alCambiarMaximizado")}}
 
+    </div>
   </div>
 
   <div class="mb2 flex" style="padding-bottom: 0px ">

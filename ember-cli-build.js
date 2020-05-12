@@ -8,7 +8,7 @@ module.exports = function(defaults) {
     },
     minifyJS: {
       options: {
-        exclude: ["**/proyecto-exportable/**"]
+        exclude: ["**/proyecto-exportable/**", "phaser.js"]
       }
     }
   });

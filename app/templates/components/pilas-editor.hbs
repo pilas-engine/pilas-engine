@@ -1,5 +1,16 @@
 {{pilas-proyecto proyecto=proyecto}}
 
+{{#if ocultar_interfaz}}
+  <div class="flex flex-column {{if oscuro "theme-oscuro" "theme-claro"}} pa2 fixed top-0 left-0 right-0 bottom-0 bg-fondo z-9999">
+    <div class="h1">&nbsp;</div>
+    <div class="mt2">
+      {{pilas-skeleton ancho=100 alto=40}}
+    </div>
+    <div class="flex1 bg-skeleton mt1">
+    </div>
+  </div>
+{{/if}}
+
 <div class="{{if oscuro "theme-oscuro" "theme-claro"}} bg-fondo vh-100 wrapper verdana flex flex-column">
   <div id="modal"></div>
 
@@ -64,6 +75,7 @@
         grilla=grilla
         zoom=zoom
         modoZoom=modoZoom
+        deshacer=(action "deshacer")
         detener=(action "detener")
         detener_y_volver_al_editor=(action "detener_y_volver_al_editor")
         existe_un_error_reciente=existe_un_error_reciente

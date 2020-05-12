@@ -163,14 +163,14 @@
 <h2 id="detectar-la-finalización-de-las-animaciones">Detectar la finalización de las animaciones</h2>
 <p>Las animaciones siempre se muestran de forma cíclica, es decir, cuanto terminan vuelven a empezar desde cero. Si tu animación es tradicional, como un personaje caminando, no tienes que hacer nada adicional para que continue la animación automáticamente.</p>
 <p>Si quieres detectar el momento exacto cuando la animación llega a su final, deberías crear un método llamado <code>cuando_finaliza_animacion</code> y colocar ahí algún código para reaccionar ante la finalización de la animación. Por ejemplo, el actor “explosión” se elimina de la pantalla automáticamente cuando finaliza su animación:</p>
-<pre><code>class explosion extends Actor {
-
-  // Otros métodos
-
-  cuando_finaliza_animacion(nombre: string) {
-    this.eliminar();
-  }
-}</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a>class explosion extends Actor {</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="co">// Otros métodos</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  cuando_finaliza_animacion(nombre<span class="op">:</span> <span class="dt">string</span>) {</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    this<span class="op">.</span><span class="fu">eliminar</span>()<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  }</span>
+<span id="cb5-8"><a href="#cb5-8"></a>}</span></code></pre></div>
 <div class="tc">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>

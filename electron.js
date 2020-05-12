@@ -25,24 +25,18 @@ app.on("ready", function onReady() {
     minWidth: 800,
     minHeight: 650,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: true
     }
   });
 
-  var rutas = [
-    `${dirname}/dist/index.html`,
-    `${dirname}/dist/pilas-engine.js`,
-    `${dirname}/dist/assets/pilas-engine.js`,
-    `${dirname}/dist/assets/vendor.js`,
-    `${dirname}/dist/assets/pilas-engine.css`
-  ];
+  var rutas = [`${dirname}/dist/index.html`, `${dirname}/dist/pilas-engine.js`, `${dirname}/dist/assets/pilas-engine.js`, `${dirname}/dist/assets/vendor.js`, `${dirname}/dist/assets/pilas-engine.css`];
   let ultima_actualizacion = new Date();
 
   rutas.map(function(ruta) {
     fs.watch(ruta, function() {
       let ahora = new Date();
-      let tiempo_desde_ultima_actualizacion =
-        (ahora - ultima_actualizacion) / 1000;
+      let tiempo_desde_ultima_actualizacion = (ahora - ultima_actualizacion) / 1000;
 
       // Previene hacer multiples actualizaciones cuando ember compila varias cosas.
       if (tiempo_desde_ultima_actualizacion > 3) {
@@ -66,9 +60,7 @@ app.on("ready", function onReady() {
 
   process.on("uncaughtException", err => {
     console.log("An exception in the main thread was not handled.");
-    console.log(
-      "This is a serious issue that needs to be handled and/or debugged."
-    );
+    console.log("This is a serious issue that needs to be handled and/or debugged.");
     console.log(`Exception: ${err}`);
   });
 });
