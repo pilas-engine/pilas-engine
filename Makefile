@@ -205,7 +205,7 @@ endif
 	${BIN_EMBER} build --prod
 	@echo "Empaquetando para servidor estático: comprimiendo ..."
 	@mv dist/ pilas-engine-compilado
-	@zip -qr pilas-engine-compilado.zip pilas-engine-compilado
+	@zip -qr binarios/pilas-engine-compilado.zip pilas-engine-compilado
 	@rm -rf pilas-engine-compilado
 
 .PHONY: tmp docs binarios manual
