@@ -64,7 +64,7 @@ Sin embargo, también se va a poder controlar desde el intérprete, usando códi
 
 Escribí lo siguiente para realizar más pruebas:
 
-```
+```typescript
 nave.escala = 2
 nave.rotacion = 90
 nave.decir("hola")

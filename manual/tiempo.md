@@ -70,7 +70,7 @@ Por ejemplo, imagina que tienes un actor que se mueve 50 pixeles a la derecha
 cada 2 segundos, pero que quieres que deje de moverse cuando llegue a la
 posición x igual a 200. Podrías implementarlo de esta forma:
 
-```
+```typescript
 var actor = pilas.actores.aceituna();
 
 pilas.cada(2, () => {
@@ -92,7 +92,7 @@ para disparar una acción cada vez que transcurre un segundo en el juego. Por
 ejemplo, si queremos crear un actor que aumente su tamaño cada un segundo
 podemos definir el método así:
 
-```
+```typescript
 class caja extends Actor {
   cada_segundo() {
     this.escala += 0.5;
@@ -103,7 +103,7 @@ class caja extends Actor {
 O bien, si ya tenemos la referencia al actor también sería válido escribir
 algo así:
 
-```
+```typescript
 var mi_actor = pilas.obtener_actor_por_nombre("caja");
 
 mi_actor.cada_segundo = () => {

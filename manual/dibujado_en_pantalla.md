@@ -23,7 +23,7 @@ Para dibujar círculos tenemos una función que pinta el contenido de un círcul
 Por ejemplo, esta llamada a la función generará
 un círculo en la posición `x=100 y=0` con un radio de 40 píxeles y de color rojo:
 
-```
+```typescript
 this.dibujar_circulo(100, 0, 40, "rojo");
 ```
 
@@ -31,7 +31,7 @@ this.dibujar_circulo(100, 0, 40, "rojo");
 
 Opcionalmente, si quieres dibujar el contorno del círculo de otro color o con un grosor en particular podrías llamar a esta función:
 
-```
+```typescript
 this.dibujar_borde_de_circulo(100, 0, 40, "negro", 2);
 ```
 
@@ -49,7 +49,7 @@ Otra forma de definir colores con mucha flexibilidad es mediante la función `pi
 
 Cada componente de color tienen que ser un número entre 0 y 255, por ejemplo:
 
-```
+```typescript
 let color_verde_oscuro = this.pilas.colores.generar(0, 100, 0);
 let color_verde_claro = this.pilas.colores.generar(0, 200, 0);
 ```
@@ -58,7 +58,7 @@ A su vez, una vez que tenemos el color generado, podemos usarlo
 en las funciones para dibujar. Por ejemplo, si queremos dibujar
 dos círculos con estos colores podemos escribir lo siguiente:
 
-```
+```typescript
 this.dibujar_circulo(-50, 50, 40, color_verde_claro);
 this.dibujar_circulo(+50, 50, 40, color_verde_oscuro);
 ```
@@ -69,7 +69,7 @@ this.dibujar_circulo(+50, 50, 40, color_verde_oscuro);
 
 De forma similar a los círculos, también existen funciones para dibujar rectángulos y bordes de rectángulos.
 
-```
+```typescript
 this.dibujar_rectangulo(0, 0, 120, 50, "naranja");
 this.dibujar_borde_de_rectangulo(0, 0, 120, 50, "rojo", 5);
 ```
@@ -84,7 +84,7 @@ Para dibujar lineas, tenemos que especificar dos coordenadas, color y grosor de 
 
 Por ejemplo, para dibujar una linea de color "verde" desde el punto (0, 0) al punto (200, 100) podemos escribir:
 
-```
+```typescript
 this.dibujar_linea(0, 0, 200, 100, "verde", 10);
 ```
 
@@ -98,7 +98,7 @@ El actor Pizarra incluye una función llamada `limpiar` que si se combina con fu
 
 Por ejemplo, si queremos dibujar una linea que señale la posición del mouse constántemente podemos hacerlo así, usando la función actualizar:
 
-```
+```typescript
 actualizar() {
     this.limpiar();
     this.dibujar_linea(0, 0, this.pilas.cursor_x, this.pilas.cursor_y, "verde", 10);

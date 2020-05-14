@@ -23,7 +23,7 @@ el cursor del mouse en todo momento:
 Y estos atributos, se puede usar generalmente directamente desde la función
 actualizar de los actores:
 
-```javascript
+```typescript
 class actor extends Actor {
   iniciar() {}
 
@@ -115,7 +115,7 @@ Los manejadores de eventos como `cuando_mueve`, `cuando_sale` y `cuando_hace_cli
 Otra forma de capturar eventos más sofisticada es utilizando
 el módulo `eventos` de la escena.
 
-```
+```typescript
 pilas.eventos.conectar("mueve_mouse", (x, y) => {
   console.log("mueve", x, y);
 });

@@ -101,7 +101,7 @@ muchas veces, no que la deje pulsada y eso dispare automáticamente.
 Para capturar eventos de teclado de esta forma tendrías que definir
 los métodos `cuando_pulsa_tecla` y `cuando_suelta_tecla` así:
 
-```javascript
+```typescript
 
   cuando_pulsa_tecla(tecla) {
     if (tecla == "espacio") {

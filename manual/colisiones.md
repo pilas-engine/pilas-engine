@@ -47,7 +47,7 @@ Hay 3 instantes muy importantes cuando se producen colisiones:
 
 Para distinguir estos casos pilas llamará a las tres funciones de forma diferente. Este es un ejemplo de cómo se declaran esas funciones en el código de un actor:
 
-```javascript
+```typescript
 class mi_actor extends Actor {
   cuando_comienza_una_colision(actor: Actor) {
     if (actor.etiqueta === "moneda") {
@@ -65,7 +65,7 @@ class mi_actor extends Actor {
 Luego, el tipo de colisión más común que se llamará siempre tiene la siguiente
 forma:
 
-```
+```typescript
   cuando_colisiona(actor: Actor) {
 
   }

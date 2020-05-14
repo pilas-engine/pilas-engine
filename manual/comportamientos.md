@@ -32,7 +32,7 @@ Ten en cuenta que los comportamientos se pueden encadenar para lograr efectos o 
 una detrás de otra. Por ejemplo, si queremos mostrar y ocultar un actor podemos hacerlo
 así:
 
-```
+```typescript
 let mi_actor = pilas.actores.actor();
 mi_actor.hacer("aparecer");
 mi_actor.hacer("desaparecer");
@@ -43,7 +43,7 @@ Incluso, algunas habilidades reciben parámetros para indicar velocidad, posici�
 Por ejemplo, si queremos hacer que el actor desaparezca y aparezca varias veces muy rápidamente
 podemos escribir algo así:
 
-```
+```typescript
 let mi_actor = pilas.actores.actor();
 
 for (i=0; i<50; i++) {
@@ -68,7 +68,7 @@ Si quieres crear tus propios comportamientos podrías abordarlo de la siguiente 
 Primero, deberías crear una clase que herede de `Comportamientos` y tenga al menos
 un método iniciar y actualizar así:
 
-```
+```typescript
 class MiComportamiento extends Comportamiento {
 
   iniciar(argumentos) {
@@ -84,12 +84,12 @@ class MiComportamiento extends Comportamiento {
 
 Luego, deberías vincularlo al módulo de comportamientos:
 
-```
+```typescript
 pilas.comportamientos.vincular("mi comportamiento", MiComportamiento);
 ```
 
 y por último asignárselo a un actor:
 
-```
+```typescript
 mi_actor.hacer("mi_comportamiento");
 ```
