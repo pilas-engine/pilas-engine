@@ -1,6 +1,7 @@
 import Route from "@ember/routing/route";
 import { inject as service } from "@ember/service";
 import string_a_json from "../utils/string-a-json";
+import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
 
 export default Route.extend({
   api: service(),
@@ -20,6 +21,6 @@ export default Route.extend({
     let proyecto = string_a_json(model.proyecto.serializado);
 
     model.ver_codigo = model.proyecto.ver_codigo;
-    model.proyecto = this.migraciones.migrar(proyecto.proyecto);
+    model.proyecto = this.migraciones.migrar(convertirProyectoEnObjetoEmber(proyecto.proyecto));
   }
 });
