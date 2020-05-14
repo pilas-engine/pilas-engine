@@ -202,6 +202,11 @@ endif
 	@zip -qr binarios/${NOMBREBIN}-linux-arm.zip binarios/${NOMBREBIN}-linux-armv7l
 	@echo "Empaquetando para servidor estático ..."
 	@rm -rf dist
+	${BIN_EMBER} build --prod
+	@echo "Empaquetando para servidor estático: comprimiendo ..."
+	@mv dist/ pilas-engine-compilado
+	@zip -qr pilas-engine-compilado.zip pilas-engine-compilado
+	@rm -rf pilas-engine-compilado
 
 .PHONY: tmp docs binarios manual
 
