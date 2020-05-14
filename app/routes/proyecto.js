@@ -4,6 +4,7 @@ import string_a_json from "../utils/string-a-json";
 
 export default Route.extend({
   api: service(),
+  migraciones: service(),
 
   model(params) {
     return this.api.obtener_proyecto(params.hash).then(data => {
@@ -19,6 +20,6 @@ export default Route.extend({
     let proyecto = string_a_json(model.proyecto.serializado);
 
     model.ver_codigo = model.proyecto.ver_codigo;
-    model.proyecto = proyecto.proyecto;
+    model.proyecto = this.migraciones.migrar(proyecto.proyecto);
   }
 });
