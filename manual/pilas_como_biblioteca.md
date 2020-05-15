@@ -6,7 +6,7 @@ Pilas se puede usar como una biblioteca externa para permitir un uso avanzado
 y muy personalizado de pilas.
 
 Esta opción es ideal si quieres poner tu juego en blogs, fotos o incluso
-en dispositivos móviles como tables o celulares con herramientas como
+en dispositivos móviles como tablets o celulares con herramientas como
 cordova o phonegap.
 
 El primer paso para incorporar pilas como biblioteca es descargar los
