@@ -2,7 +2,7 @@
 title: Recorridos
 ---
 
-Los recorridos nos permite realizar movimientos de actores
+Los recorridos nos permiten realizar movimientos de actores
 de manera muy simple, lo que tenemos que hacer es enumerar
 todos los puntos "x" e "y" que queremos recorrer y llamar
 a una sola función.
