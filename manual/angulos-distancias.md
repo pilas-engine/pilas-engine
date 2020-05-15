@@ -3,7 +3,7 @@ title: Ángulos y distancias
 ---
 
 Pilas trae varias funciones para realizar cálculos geométricos sencillos, como
-obtener la distancia entre actores o incluso el ángulos entre ellos.
+obtener la distancia entre actores o incluso el ángulo entre ellos.
 
 ## Ángulo entre actores o puntos
 
@@ -18,7 +18,7 @@ Este ejemplo hace uso de la función `obtener_angulo_entre_puntos` así:
 
 ```typescript
 let x = actor_cañon.x;
-let y = actor_cañon.x;
+let y = actor_cañon.y;
 let cx = pilas.cursor_x;
 let cy = pilas.cursor_y;
 
