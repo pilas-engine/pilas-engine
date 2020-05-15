@@ -28,7 +28,7 @@ Vamos describir un uso típico de las etiquetas: las etiquetas son muy útiles p
 
 Cuando pilas detecta una colisión entre dos actores llamará a la función _cuando_comienza_una_colision_ y enviará el parámetro _actor_ como referencia al actor que entró en contacto.
 
-Así que esto es lo que se suele hacer, imaginemos que nuestro actor _protagonista_ pueda capturar moneras pero debe perder vidas si toca un enemigo. Podríamos hacer algo así:
+Así que esto es lo que se suele hacer, imaginemos que nuestro actor _protagonista_ pueda capturar monedas pero debe perder vidas si toca un enemigo. Podríamos hacer algo así:
 
 ```typescript
 class Protagonista extends Actor {
