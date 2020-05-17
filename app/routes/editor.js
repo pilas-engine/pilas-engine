@@ -1,9 +1,13 @@
 import Route from "@ember/routing/route";
+import { inject as service } from "@ember/service";
 
 export default Route.extend({
+  serviceProyecto: service("proyecto"),
+
   model() {
     return this.paramsFor("application");
   },
+
   actions: {
     willTransition: function(transition) {
       /*
@@ -22,10 +26,14 @@ export default Route.extend({
         return true;
       }
 
-      if (window.confirm("¿Realmente quieres salir?")) {
-        return true;
+      if (this.serviceProyecto.hay_cambios_por_guardar) {
+        if (window.confirm("¿Realmente quieres salir?")) {
+          return true;
+        } else {
+          transition.abort();
+        }
       } else {
-        transition.abort();
+        return true;
       }
     }
   }

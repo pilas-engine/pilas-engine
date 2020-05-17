@@ -84,6 +84,14 @@ class ModoEditor extends Modo {
     if (evento.key === "d") {
       this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado", {});
     }
+
+    if (evento.key === "x") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("eliminar_el_actor_seleccionado", {});
+    }
+
+    if (evento.key === "n") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("crear_un_actor_desde_atajo", {});
+    }
   }
 
   crear_sprite_para_el_cursor_de_la_grilla() {

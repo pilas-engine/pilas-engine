@@ -1,11 +1,24 @@
 import Service from "@ember/service";
 import { set } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { observer } from "@ember/object";
+
 import ENV from "pilas-engine/config/environment";
 
 export default Service.extend({
   bus: service(),
   canvas_disponible: true,
+  hay_cambios_por_guardar: false,
+
+  actualizar_titulo: observer("hay_cambios_por_guardar", function() {
+    let titulo = "PilasEngine";
+
+    if (this.hay_cambios_por_guardar) {
+      titulo += " *";
+    }
+
+    window.document.title = titulo;
+  }),
 
   vincular(proyecto) {
     this.set("proyecto", proyecto);
@@ -19,6 +32,14 @@ export default Service.extend({
 
   guardar_proyecto_serializado(proyecto_serializado) {
     localStorage.setItem("pilas:proyecto_serializado", proyecto_serializado);
+  },
+
+  cuando_guarda() {
+    this.set("hay_cambios_por_guardar", false);
+  },
+
+  cuando_realiza_un_cambio() {
+    this.set("hay_cambios_por_guardar", true);
   },
 
   eliminar_proyectos_guardados() {

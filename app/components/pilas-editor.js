@@ -20,6 +20,8 @@ export default Component.extend({
   memento: service(),
   compilador: service(),
   recursos: service(),
+  serviceProyecto: service("proyecto"),
+
   codigo: "",
   tagName: "",
   actorSeleccionado: -1, //en desuso
@@ -41,16 +43,6 @@ export default Component.extend({
   hay_cambios_por_guardar: false,
   tamaño_de_pantalla_del_proyecto: null,
 
-  actualizar_titulo: observer("hay_cambios_por_guardar", function() {
-    let titulo = "PilasEngine";
-
-    if (this.hay_cambios_por_guardar) {
-      titulo += " *";
-    }
-
-    window.document.title = titulo;
-  }),
-
   didInsertElement() {
     this.set("lista_de_eventos", [
       //
@@ -62,7 +54,9 @@ export default Component.extend({
       "inicia_modo_depuracion_en_pausa",
       "cuando_cambia_posicion_dentro_del_modo_pausa",
       "pulsa_la_tecla_escape",
-      "duplicar_el_actor_seleccionado"
+      "duplicar_el_actor_seleccionado",
+      "eliminar_el_actor_seleccionado",
+      "crear_un_actor_desde_atajo"
     ]);
 
     this.set("estado", new estados.ModoCargando());
@@ -114,7 +108,7 @@ export default Component.extend({
     return actor || escena;
   },
 
-  alPulsarTecla(/*evento*/) {},
+  alPulsarTecla(evento) {},
 
   willDestroyElement() {
     this.desconectar_eventos();
@@ -141,6 +135,29 @@ export default Component.extend({
           let actor = this.get("instancia_seleccionada");
           this.send("cuando_intenta_duplicar", actor.id, false);
         }
+      },
+      10
+    );
+  },
+
+  eliminar_el_actor_seleccionado() {
+    debounce(
+      this,
+      () => {
+        if (this.get("tipo_de_la_instancia_seleccionada") == "actor") {
+          let actor = this.get("instancia_seleccionada");
+          this.send("cuando_intenta_eliminar", actor.id);
+        }
+      },
+      10
+    );
+  },
+
+  crear_un_actor_desde_atajo() {
+    debounce(
+      this,
+      () => {
+        this.bus.trigger(`abrir_dialogo_para_crear_actor`, {});
       },
       10
     );
@@ -192,7 +209,7 @@ export default Component.extend({
   },
 
   termina_de_mover_un_actor(datos) {
-    this.set("hay_cambios_por_guardar", true);
+    this.serviceProyecto.cuando_realiza_un_cambio();
 
     let escena = this.obtener_la_escena_actual();
     let actor = escena.actores.findBy("id", datos.id);
@@ -263,7 +280,7 @@ export default Component.extend({
   },
 
   eliminar_escena_actual() {
-    this.set("hay_cambios_por_guardar", true);
+    this.serviceProyecto.cuando_realiza_un_cambio();
 
     let escenaActual = this.obtener_la_escena_actual();
     let escenasSinLaEscenaActual = this.get("proyecto.escenas").without(escenaActual);
@@ -287,7 +304,7 @@ export default Component.extend({
   },
 
   eliminar_actor(id, omitir_deshacer) {
-    this.set("hay_cambios_por_guardar", true);
+    this.serviceProyecto.cuando_realiza_un_cambio();
 
     let escenaActual = this.obtener_la_escena_actual();
     let actor = escenaActual.actores.findBy("id", id);
@@ -441,7 +458,8 @@ export default Component.extend({
   crear_escena_nueva(proyecto) {
     let model = proyecto;
 
-    this.set("hay_cambios_por_guardar", true);
+    this.serviceProyecto.cuando_realiza_un_cambio();
+
     let nombres_de_escenas = this.obtener_nombres_de_escenas(model);
     let nombre = obtener_nombre_sin_repetir(nombres_de_escenas, "escena");
     let id = this.generar_id();
@@ -492,7 +510,7 @@ export default Component.extend({
     },
 
     agregar_actor(proyecto, actor, omitir_deshacer) {
-      this.set("hay_cambios_por_guardar", true);
+      this.serviceProyecto.cuando_realiza_un_cambio();
 
       let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
@@ -539,7 +557,10 @@ export default Component.extend({
     cuando_termino_de_cargar_monaco_editor() {},
 
     cuando_cambia_el_codigo(codigo) {
-      this.set("hay_cambios_por_guardar", true);
+      if (!this.cargando) {
+        this.serviceProyecto.cuando_realiza_un_cambio();
+      }
+
       this.set("codigo", codigo);
       this.guardar_codigo_en_el_proyecto(this.seleccion, codigo);
     },
@@ -602,7 +623,7 @@ export default Component.extend({
     },
 
     cambiarPosicion(valorNuevo) {
-      this.set("hay_cambios_por_guardar", true);
+      this.serviceProyecto.cuando_realiza_un_cambio();
       this.set("posicion", valorNuevo);
 
       this.bus.trigger(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, {
@@ -682,7 +703,7 @@ export default Component.extend({
     },
 
     cuandoModificaObjeto(objeto) {
-      this.set("hay_cambios_por_guardar", true);
+      this.serviceProyecto.cuando_realiza_un_cambio();
       this.bus.trigger(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, {
         id: objeto.id,
         actor: objeto
@@ -690,7 +711,7 @@ export default Component.extend({
     },
 
     cuando_modifica_escena(escena, recargar) {
-      this.set("hay_cambios_por_guardar", true);
+      this.serviceProyecto.cuando_realiza_un_cambio();
       this.bus.trigger(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, {
         id: escena.id,
         escena: escena
@@ -702,14 +723,14 @@ export default Component.extend({
     },
 
     cuando_modifica_proyecto() {
-      this.set("hay_cambios_por_guardar", true);
+      this.serviceProyecto.cuando_realiza_un_cambio();
       this.bus.trigger("recargarCanvasDePilas");
     },
 
     cuando_intenta_duplicar(id, aleatorio) {
       aleatorio = aleatorio || false;
 
-      this.set("hay_cambios_por_guardar", true);
+      this.serviceProyecto.cuando_realiza_un_cambio();
       let actor_original = this.obtenerDetalleDeActorPorIndice(id);
       let codigo = this.obtener_codigo_para_el_actor(actor_original);
 
@@ -744,7 +765,7 @@ export default Component.extend({
     },
 
     cuando_intenta_eliminar(id) {
-      this.set("hay_cambios_por_guardar", true);
+      this.serviceProyecto.cuando_realiza_un_cambio();
 
       let actor = this.obtenerDetalleDeActorPorIndice(id);
 
@@ -756,7 +777,7 @@ export default Component.extend({
     },
 
     cuando_guarda(proyecto) {
-      this.set("hay_cambios_por_guardar", false);
+      this.serviceProyecto.cuando_guarda();
       this.cuandoIntentaGuardar(proyecto);
     },
 

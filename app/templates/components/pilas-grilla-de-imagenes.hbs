@@ -37,14 +37,34 @@
 
 
   <div class="">
-    {{#each recursos.tarea.lastSuccessful.value.imagenesParaGrilla as |imagen|}}
 
-      {{pilas-celda-de-imagen
-          imagen=imagen
-          filtro=filtro
-          cuando_selecciona=cuando_selecciona}}
+    {{#if cargando}}
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top o-90"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top o-70"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top o-50"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top o-30"></div>
+      <div class="dib bg-skeleton w3 h3 mt1 v-top o-10"></div>
+    {{else}}
+      {{#each recursos.tarea.lastSuccessful.value.imagenesParaGrilla as |imagen|}}
 
-    {{/each}}
+        {{pilas-celda-de-imagen
+            imagen=imagen
+            filtro=filtro
+            cuando_selecciona=cuando_selecciona}}
+
+      {{/each}}
+    {{/if}}
   </div>
 
 {{/if}}

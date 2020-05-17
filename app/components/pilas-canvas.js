@@ -345,62 +345,92 @@ export default Component.extend({
       }
     }
 
+    if (!e.data.tipo) {
+      return;
+    }
+
     if (e.data.tipo === "finaliza_carga_de_recursos") {
       this.bus.trigger(`${nombre_del_contexto}:finaliza_carga`, contexto.pilasengine, contexto);
+      return;
     }
 
     if (e.data.tipo === "pulsa_la_tecla_escape") {
       this.bus.trigger(`${this.nombre_del_contexto}:pulsa_la_tecla_escape`, e.data);
+      return;
     }
 
     if (e.data.tipo === "progreso_de_carga") {
       this.bus.trigger(`${nombre_del_contexto}:progreso_de_carga`, e.data);
+      return;
     }
 
     if (e.data.tipo === "termina_de_mover_un_actor") {
       this.bus.trigger(`${this.nombre_del_contexto}:termina_de_mover_un_actor`, e.data);
+      return;
     }
 
     if (e.data.tipo === "mientras_mueve_la_camara") {
       this.bus.trigger(`${this.nombre_del_contexto}:mientras_mueve_la_camara`, e.data);
+      return;
     }
 
     if (e.data.tipo === "comienza_a_mover_un_actor") {
       this.bus.trigger(`${this.nombre_del_contexto}:comienza_a_mover_un_actor`, e.data);
+      return;
     }
 
     if (e.data.tipo === "duplicar_el_actor_seleccionado") {
       this.bus.trigger(`${this.nombre_del_contexto}:duplicar_el_actor_seleccionado`, e.data);
+      return;
+    }
+
+    if (e.data.tipo === "eliminar_el_actor_seleccionado") {
+      this.bus.trigger(`${this.nombre_del_contexto}:eliminar_el_actor_seleccionado`, e.data);
+      return;
+    }
+
+    if (e.data.tipo === "crear_un_actor_desde_atajo") {
+      this.bus.trigger(`${this.nombre_del_contexto}:crear_un_actor_desde_atajo`, e.data);
+      return;
     }
 
     if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
       this.bus.trigger(`${this.nombre_del_contexto}:inicia_modo_depuracion_en_pausa`, e.data);
+      return;
     }
 
     if (e.data.tipo === "cambia_posicion_dentro_del_modo_pausa") {
       this.bus.trigger(`${this.nombre_del_contexto}:cuando_cambia_posicion_dentro_del_modo_pausa`, e.data);
+      return;
     }
 
     if (e.data.tipo === "error_de_ejecucion") {
       this.bus.trigger(`${this.nombre_del_contexto}:error`, e.data);
+      return;
     }
 
     if (e.data.tipo === "termina_de_iniciar_ejecucion") {
       this.bus.trigger(`${nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, contexto.pilasengine, contexto);
+      return;
     }
 
     // Evento personalizado que solo se usa en el editor de animaciones.
     if (e.data.tipo === "cambia_cuadro_de_animacion") {
       this.bus.trigger(`${nombre_del_contexto}:cuando_cambia_cuadro_de_animacion`, contexto.pilasengine, e.data);
+      return;
     }
 
     if (e.data.tipo === "cuando_pulsa_escape") {
       this.cuandoPulsaEscapeEnModoEjecucion();
+      return;
     }
 
     if (e.data.tipo === "cambia_zoom") {
       this.bus.trigger(`cuando_cambia_zoom`, e.data);
+      return;
     }
+
+    throw Error(`En pilas canvas no se envió la señal ${e.data.tipo} al servicio bus.`);
   },
   actions: {
     detener() {

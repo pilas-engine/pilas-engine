@@ -1,4 +1,4 @@
-<div class="flex f7 texto">
+<div class="f7 texto {{if estado.puedeEjecutar "flex" "dn"}}">
   {{#pilas-tooltip class="right-1 w4" texto=(concat "Deshacer " memento.ultima_accion)}}
     {{#pilas-boton-miniatura-pulsable desactivado=(not memento.puede_deshacer) class="f7 texto pr2" accion=deshacer}}
       {{pilas-mini-icono icono="undo"}}
