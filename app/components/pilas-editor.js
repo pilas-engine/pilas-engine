@@ -4,6 +4,7 @@ import { inject as service } from "@ember/service";
 import Component from "@ember/component";
 import estados from "../estados/estados-de-pilas-editor";
 import aplicar_nombre from "../utils/aplicar-nombre";
+import copiar from "../utils/copiar";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
 import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
 import preparar_codigo_para_el_editor from "../utils/preparar-codigo-para-el-editor";
@@ -11,8 +12,6 @@ import { observer } from "@ember/object";
 import base64_encode from "../utils/base64-encode";
 import { run } from "@ember/runloop";
 import { debounce } from "@ember/runloop";
-import convertir_objeto_ember_en_diccionario_simple from "../utils/convertir-proyecto-ember-en-diccionario-simple";
-import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
 import { later } from "@ember/runloop";
 
 export default Component.extend({
@@ -198,6 +197,12 @@ export default Component.extend({
     let escena = this.obtener_la_escena_actual();
     let actor = escena.actores.findBy("id", datos.id);
 
+    this.memento.accion("mueve_actor", {
+      id: datos.id,
+      x: actor.x,
+      y: actor.y
+    });
+
     actor.set("x", datos.x);
     actor.set("y", datos.y);
   },
@@ -281,15 +286,27 @@ export default Component.extend({
     return this.cantidadDeEscenas === 0;
   },
 
-  eliminar_actor(id) {
+  eliminar_actor(id, omitir_deshacer) {
     this.set("hay_cambios_por_guardar", true);
 
     let escenaActual = this.obtener_la_escena_actual();
     let actor = escenaActual.actores.findBy("id", id);
+    let codigo = this.proyecto.codigos.actores.findBy("nombre", actor.nombre);
+
+    if (!omitir_deshacer) {
+      this.memento.accion("elimina_actor", {
+        actor: {
+          nombre: actor.nombre,
+          codigo: copiar(codigo.codigo),
+          imagen: actor.imagen,
+          propiedades: copiar(actor)
+        },
+        id: id
+      });
+    }
+
     this.bus.trigger(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, { id: actor.id });
     escenaActual.actores.removeObject(actor);
-
-    let codigo = this.proyecto.codigos.actores.findBy("nombre", actor.nombre);
 
     if (codigo) {
       this.proyecto.codigos.actores.removeObject(codigo);
@@ -474,16 +491,18 @@ export default Component.extend({
       escena_seleccionada.actores.pushObject(actor);
     },
 
-    agregar_actor(proyecto, actor) {
+    agregar_actor(proyecto, actor, omitir_deshacer) {
       this.set("hay_cambios_por_guardar", true);
-
-      let diccionario = convertir_objeto_ember_en_diccionario_simple(this.proyecto);
-
-      this.memento.accion("agrega un actor", diccionario);
 
       let escena = this.obtener_la_escena_actual();
       let nombres = this.obtener_todos_los_nombres_de_actores();
       let id = this.generar_id();
+
+      if (omitir_deshacer) {
+        // caso especial, si está creando el actor desde una acción
+        // como "deshacer" tiene que respetar el id original.
+        id = actor.id;
+      }
 
       let nombre = obtener_nombre_sin_repetir(nombres, actor.nombre);
 
@@ -511,6 +530,10 @@ export default Component.extend({
 
       this.mostrar_la_escena_actual_sobre_pilas();
       this.send("cuandoSelecciona", id);
+
+      if (!omitir_deshacer) {
+        this.memento.accion("agrega_actor", { id });
+      }
     },
 
     cuando_termino_de_cargar_monaco_editor() {},
@@ -575,17 +598,12 @@ export default Component.extend({
     },
 
     deshacer() {
-      let paso = this.memento.deshacer();
-      let proyecto = convertirProyectoEnObjetoEmber(paso.proyecto);
-      this.set("proyecto", proyecto);
+      this.memento.deshacer(this);
     },
 
     cambiarPosicion(valorNuevo) {
       this.set("hay_cambios_por_guardar", true);
       this.set("posicion", valorNuevo);
-
-      let diccionario = convertir_objeto_ember_en_diccionario_simple(this.proyecto);
-      this.memento.accion("cambiar la posición de una actor", diccionario);
 
       this.bus.trigger(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, {
         posicion: valorNuevo
@@ -652,6 +670,7 @@ export default Component.extend({
       }
 
       if (escena) {
+        this.memento.limpiar();
         this.set("instancia_seleccionada", escena);
         this.set("tipo_de_la_instancia_seleccionada", "escena");
         this.set("ultimaEscenaSeleccionada", seleccion);

@@ -1,21 +1,8 @@
 <div id="panel-canvas" class="flex {{if (not mostrarEditor) "flex1" "w5"}} {{if maximizar "panel-maximizado"}} flex-column bg-fondo pa2 unselectable">
 
   <div class="separador-vertical flex">
-    <div class="flex">
-      <div class="dn">
-        {{#pilas-boton-miniatura-pulsable class="pulsable f7 texto mr2" accion=deshacer}}
-          {{pilas-mini-icono icono="undo"}}
-        {{/pilas-boton-miniatura-pulsable}}
 
-        {{#pilas-boton-miniatura-pulsable class="pulsable f7 texto mr2" accion=detener_y_volver_al_editor}}
-          {{pilas-mini-icono icono="redo"}}
-        {{/pilas-boton-miniatura-pulsable}}
-
-        <div class="texto f7">
-          {{memento.pasos}}
-        </div>
-      </div>
-    </div>
+    {{pilas-botones-para-deshacer-y-rehacer deshacer=deshacer}}
 
     <div class="flex1">
     </div>

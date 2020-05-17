@@ -27,6 +27,16 @@ class Automata {
     }
   }
 
+  cuando_finaliza_animacion(nombre: string) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cuando_finaliza_animacion`];
+
+      if (metodo) {
+        metodo.call(this, nombre);
+      }
+    }
+  }
+
   validar_que_existen_los_metodos_de_estado(nombre: string) {
     let nombre_del_metodo_iniciar = `${nombre}_iniciar`;
     let nombre_del_metodo_actualizar = `${nombre}_actualizar`;

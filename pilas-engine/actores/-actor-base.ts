@@ -178,6 +178,7 @@ class ActorBase {
           // una vez que avisó que terminó la animación la repite.
           this.sprite.anims.play(anim.key);
           this.cuando_finaliza_animacion(nombre);
+          this.automata.cuando_finaliza_animacion(nombre);
         }
       });
     });

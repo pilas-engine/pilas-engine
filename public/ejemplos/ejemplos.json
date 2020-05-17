@@ -138,6 +138,10 @@
     {
       "nombre": "barra-de-energia",
       "desde": "2.1.3"
+    },
+    {
+      "nombre": "imagenes-como-botones",
+      "desde": "2.1.6"
     }
   ]
 }

@@ -1,10 +1,13 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
+import copiar from "../utils/copiar";
 
 export default Component.extend({
   tagName: "",
   propiedades_de_actores: null,
   propiedades_de_escenas: null,
+  memento: service(),
 
   componente_a_renderizar: computed("tipo_de_la_instancia_seleccionada", function() {
     return `pilas-inspector/${this.tipo_de_la_instancia_seleccionada}`;
@@ -13,6 +16,11 @@ export default Component.extend({
   actions: {
     modificarAtributo(propiedad, valor) {
       let actor = this.instancia_seleccionada;
+
+      let valor_anterior = actor.get(propiedad);
+
+      this.memento.accion_repetida("propiedad_de_actor", { id: actor.id, propiedad, valor: copiar(valor_anterior) });
+
       actor.set(propiedad, valor);
       this.cuandoModificaObjeto(actor);
     },

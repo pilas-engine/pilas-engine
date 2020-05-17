@@ -211,6 +211,14 @@ var Automata = (function () {
             this.actor[this._estado + "_actualizar"]();
         }
     };
+    Automata.prototype.cuando_finaliza_animacion = function (nombre) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cuando_finaliza_animacion"];
+            if (metodo) {
+                metodo.call(this, nombre);
+            }
+        }
+    };
     Automata.prototype.validar_que_existen_los_metodos_de_estado = function (nombre) {
         var nombre_del_metodo_iniciar = nombre + "_iniciar";
         var nombre_del_metodo_actualizar = nombre + "_actualizar";
@@ -2274,6 +2282,7 @@ var ActorBase = (function () {
                     var nombre = anim.key.split("-")[1];
                     _this.sprite.anims.play(anim.key);
                     _this.cuando_finaliza_animacion(nombre);
+                    _this.automata.cuando_finaliza_animacion(nombre);
                 }
             });
         });
@@ -4091,7 +4100,14 @@ var laser = (function (_super) {
     };
     laser.prototype.actualizar = function () {
         this.avanzar(this.rotacion, this.velocidad);
-        if (this.x > 400 || this.x < -400 || this.y > 400 || this.y < -400) {
+        this.eliminar_si_sale_de_la_pantalla();
+    };
+    laser.prototype.eliminar_si_sale_de_la_pantalla = function () {
+        var izquierda = this.pilas.camara.borde_izquierdo;
+        var derecha = this.pilas.camara.borde_derecho;
+        var arriba = this.pilas.camara.borde_arriba;
+        var abajo = this.pilas.camara.borde_abajo;
+        if (this.x > derecha || this.x < izquierda || this.y > arriba || this.y < abajo) {
             this.eliminar();
         }
     };

@@ -50,6 +50,7 @@ declare class Automata {
     estado: string;
     iniciar_estado(nombre: string): void;
     actualizar(): void;
+    cuando_finaliza_animacion(nombre: string): void;
     validar_que_existen_los_metodos_de_estado(nombre: string): void;
 }
 declare class Camara {
@@ -962,6 +963,7 @@ declare class laser extends Actor {
     velocidad: any;
     iniciar(): void;
     actualizar(): void;
+    eliminar_si_sale_de_la_pantalla(): void;
 }
 declare class logo extends Actor {
     propiedades: {
