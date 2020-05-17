@@ -108,7 +108,7 @@ export default Component.extend({
     return actor || escena;
   },
 
-  alPulsarTecla(evento) {},
+  alPulsarTecla(/*evento*/) {},
 
   willDestroyElement() {
     this.desconectar_eventos();
