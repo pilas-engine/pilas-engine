@@ -1,5 +1,6 @@
 import Route from "@ember/routing/route";
 import { inject as service } from "@ember/service";
+import ENV from "pilas-engine/config/environment";
 
 export default Route.extend({
   serviceProyecto: service("proyecto"),
@@ -26,7 +27,7 @@ export default Route.extend({
         return true;
       }
 
-      if (this.serviceProyecto.hay_cambios_por_guardar) {
+      if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
         if (window.confirm("¿Realmente quieres salir?")) {
           return true;
         } else {

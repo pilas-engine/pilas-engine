@@ -5,7 +5,8 @@ import { task, timeout } from "ember-concurrency";
 import { Promise } from "rsvp";
 
 const {
-  APP: { version }
+  APP: { version },
+  environment
 } = config;
 
 export default Component.extend({
@@ -32,6 +33,12 @@ export default Component.extend({
     const url = `${base}/pilas-engine/pilas-engine/releases/latest`;
 
     yield timeout(1000);
+
+    if (environment === "test") {
+      this.set("error", "Omitiendo consultar versión en los tests.");
+      this.set("consultando", false);
+      return;
+    }
 
     try {
       let data = yield this.obtener_datos_desde_github(url);
