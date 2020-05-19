@@ -1,0 +1,56 @@
+<div class="center mw7 mt4 pa2 unselectable">
+
+  <div class="tc">
+    {{pilas-logo}}
+  </div>
+
+  <div class="tc lato">
+    <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong></p>
+  </div>
+
+  <div class="flex flex-column mt4">
+
+    <div class="flex items-center justify-center">
+      {{pilas-boton-principal
+          icono="computadora"
+          texto="Abrir el editor"
+          ruta="editor"
+          queryParams=(query-params ruta=null)
+          id="abrir-editor"
+        }}
+
+      {{pilas-boton-principal
+          icono="manual"
+          texto="Abrir el manual"
+          ruta="manual"
+        }}
+    </div>
+
+    <div class="flex items-center justify-center">
+      {{pilas-boton-principal
+          icono="ejemplos"
+          texto="Explorar ejemplos"
+          ruta="ejemplos"
+        }}
+
+      {{pilas-boton-principal
+          icono="info_squared"
+          texto="Acerca de pilas"
+          ruta="acercade"
+        }}
+    </div>
+
+
+  </div>
+
+  <div class="measure center verdana f7 tc lh-copy gray pt4">
+    <span>Consejo:</span> Podés abrir un proyecto desde tu computadora
+    arrastrando el archivo .pilas aquí.
+  </div>
+
+
+  {{pilas-version}}
+
+  {{pilas-enjambre}}
+
+</div>
