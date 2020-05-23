@@ -30,7 +30,6 @@ export default Component.extend({
   },
 
   atender_fin_de_reproduccion_de_sonido(datos) {
-    let nombre = datos.sonido;
     this.cuando_termina_de_reproducir(datos.sonido);
   },
 
