@@ -556,6 +556,7 @@ class ActorBase {
   }
 
   get x() {
+    this.pilas.utilidades.validar_que_este_vivo(this);
     let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
     return x;
   }
@@ -571,6 +572,7 @@ class ActorBase {
   }
 
   get y() {
+    this.pilas.utilidades.validar_que_este_vivo(this);
     let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
     return y;
   }
@@ -581,6 +583,7 @@ class ActorBase {
   }
 
   get z() {
+    this.pilas.utilidades.validar_que_este_vivo(this);
     return -this.sprite.depth;
   }
 
@@ -594,6 +597,7 @@ class ActorBase {
   }
 
   get rotacion() {
+    this.pilas.utilidades.validar_que_este_vivo(this);
     return -this.sprite.angle % 360;
   }
 
@@ -693,9 +697,14 @@ class ActorBase {
 
   toString() {
     let clase = this.constructor["name"];
-    let x = this.x.toFixed(2);
-    let y = this.y.toFixed(2);
-    return `<${clase} en (${x}, ${y})>`;
+
+    if (this.esta_vivo()) {
+      let x = this.x.toFixed(2);
+      let y = this.y.toFixed(2);
+      return `<${clase} en (${x}, ${y})>`;
+    } else {
+      `<${clase} eliminado>`;
+    }
   }
 
   fallar_si_no_tiene_figura() {
@@ -1213,5 +1222,9 @@ class ActorBase {
     if (figura) {
       return new Sensor(figura);
     }
+  }
+
+  reproducir_sonido(nombre: string) {
+    return this.pilas.reproducir_sonido(nombre);
   }
 }
