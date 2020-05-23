@@ -14,6 +14,7 @@
           </div>
 
           <div class="flex items-center flex-end">
+
             <div class="texto pa2">Nombre</div>
 
             {{pilas-propiedad/nombre-de-sensor
@@ -27,16 +28,16 @@
 
             {{pilas-input-numero-con-deslizador
               identificador="X"
-              min=-100
-              max=100
+              min=-200
+              max=200
               valor=(get sensor "x")
               cuandoCambia=(action "al_cambiar_valor" "x" sensor)
             }}
 
             {{pilas-input-numero-con-deslizador
               identificador="Y"
-              min=-100
-              max=100
+              min=-200
+              max=200
               valor=(get sensor "y")
               cuandoCambia=(action "al_cambiar_valor" "y" sensor)
             }}
@@ -48,7 +49,7 @@
             {{pilas-input-numero-con-deslizador
               identificador="↔"
               min=5
-              max=100
+              max=200
               valor=(get sensor "ancho")
               cuandoCambia=(action "al_cambiar_valor" "ancho" sensor)
             }}
@@ -56,7 +57,7 @@
             {{pilas-input-numero-con-deslizador
               identificador="↕"
               min=5
-              max=100
+              max=200
               valor=(get sensor "alto")
               cuandoCambia=(action "al_cambiar_valor" "alto" sensor)
             }}

@@ -4566,10 +4566,10 @@ var EscenaBase = (function () {
                     actores_a_eliminar.push(actor);
                     return;
                 }
-                actor.actualizar_sensores();
                 actor.pre_actualizar();
                 actor.actualizar_habilidades();
                 actor.actualizar();
+                actor.actualizar_sensores();
             }
             catch (e) {
                 console.error(e);

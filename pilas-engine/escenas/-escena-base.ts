@@ -158,10 +158,10 @@ class EscenaBase {
           return;
         }
 
-        actor.actualizar_sensores();
         actor.pre_actualizar();
         actor.actualizar_habilidades();
         actor.actualizar();
+        actor.actualizar_sensores();
       } catch (e) {
         console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
