@@ -17,7 +17,7 @@
 
       <div class="dib fr f7">
         {{#if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0))}}
-          {{pilas-boton-eliminar-con-confirmacion tipo="escena" titulo="¿Quieres eliminar la escena?" accion=(action cuando_intenta_eliminar escena.id)}}
+          {{pilas-boton-eliminar-con-confirmacion contador=true tipo="escena" titulo="¿Quieres eliminar la escena?" accion=(action cuando_intenta_eliminar escena.id)}}
         {{/if}}
       </div>
 

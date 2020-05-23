@@ -15,9 +15,16 @@
       {{titulo}}
     </div>
 
+    {{#if contador}}
+      <div class="orange pb3 tc">
+        Esta acción no se podrá deshacer
+      </div>
+    {{/if}}
+
+
     <div class="tc">
-      {{pilas-boton icono="si" accion=(action "ocultarEjecutandoAccion") texto="Sí" atajo="Enter"}}
-      {{pilas-boton icono="no" accion=(action "ocultar") texto="No" atajo="Escape"}}
+      {{pilas-boton extraClass="boton-confirmacion" desactivado=tiempo icono="si" accion=(action "ocultarEjecutandoAccion") texto=texto_del_boton atajo="Enter"}}
+      {{pilas-boton extraClass="boton-confirmacion" icono="no" accion=(action "ocultar") texto="No" atajo="Escape"}}
     </div>
 
   </div>
