@@ -14,7 +14,7 @@ class Historia {
   serializar_escena(escena_actual: any) {
     this.fotos.push({
       escena: escena_actual.serializar(),
-      actores: escena_actual.actores.map(e => e.serializar())
+      actores: escena_actual.actores.filter(a => a.esta_vivo()).map(e => e.serializar())
     });
   }
 

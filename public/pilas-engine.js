@@ -1263,7 +1263,7 @@ var Historia = (function () {
     Historia.prototype.serializar_escena = function (escena_actual) {
         this.fotos.push({
             escena: escena_actual.serializar(),
-            actores: escena_actual.actores.map(function (e) { return e.serializar(); })
+            actores: escena_actual.actores.filter(function (a) { return a.esta_vivo(); }).map(function (e) { return e.serializar(); })
         });
     };
     Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (graphics) {
