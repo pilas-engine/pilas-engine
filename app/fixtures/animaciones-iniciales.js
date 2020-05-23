@@ -213,7 +213,7 @@ export default [
         sprite: "imagenes-pixelados-pixel_player_2"
       }
     ],
-    velocidad: "30"
+    velocidad: "15"
   },
   {
     nombre: "hombre_pixel_parado",
