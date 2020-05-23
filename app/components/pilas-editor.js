@@ -501,12 +501,14 @@ export default Component.extend({
 
       escena_origen.actores.removeObject(actor);
       escena_nueva.actores.pushObject(actor);
+      this.send("cuandoSelecciona", escena_nueva.id);
     },
 
     mover_actor_a_una_escena(proyecto, actor, escena_origen_id, escena_seleccionada) {
       let escena_origen = this.obtener_escena_por_id(proyecto, escena_origen_id);
       escena_origen.actores.removeObject(actor);
       escena_seleccionada.actores.pushObject(actor);
+      this.send("cuandoSelecciona", escena_seleccionada.id);
     },
 
     agregar_actor(proyecto, actor, omitir_deshacer) {
