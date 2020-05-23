@@ -1461,6 +1461,7 @@ var Mensajes = (function () {
         this.pilas.modo.cambiar_fondo(datos.escena.fondo);
         this.pilas.modo.posicionar_la_camara(datos.escena);
     };
+    Mensajes.prototype.atender_mensaje_termina_de_reproducir_sonido = function () { };
     Mensajes.prototype.atender_mensaje_ejecutar_proyecto = function (datos) {
         var parametros = {
             pilas: this.pilas,
@@ -1555,6 +1556,11 @@ var Utilidades = (function () {
     Utilidades.prototype.validar_numero = function (valor) {
         if (typeof valor !== "number") {
             throw new Error("El valor enviado no corresponde con un n\u00FAmero: " + valor);
+        }
+    };
+    Utilidades.prototype.validar_que_este_vivo = function (actor) {
+        if (!actor || !actor.esta_vivo()) {
+            throw new Error("El actor \"" + actor.nombre + "\" ha sido eliminado, us\u00E1 el m\u00E9todo esta_vivo() del actor antes de acceder a el.");
         }
     };
     Utilidades.prototype.es_animacion = function (valor) {
@@ -1932,7 +1938,7 @@ var Pilas = (function () {
         };
     };
     Pilas.prototype.reproducir_sonido = function (nombre) {
-        this.escena.reproducir_sonido(nombre);
+        this.escena.planificar_reproducir_sonido(nombre);
     };
     Pilas.prototype.obtener_actores = function () {
         return this.escena.actores;
@@ -2617,6 +2623,7 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "x", {
         get: function () {
+            this.pilas.utilidades.validar_que_este_vivo(this);
             var x = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
             return x;
         },
@@ -2635,6 +2642,7 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "y", {
         get: function () {
+            this.pilas.utilidades.validar_que_este_vivo(this);
             var y = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y).y;
             return y;
         },
@@ -2653,6 +2661,7 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "z", {
         get: function () {
+            this.pilas.utilidades.validar_que_este_vivo(this);
             return -this.sprite.depth;
         },
         set: function (_z) {
@@ -2664,6 +2673,7 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "rotacion", {
         get: function () {
+            this.pilas.utilidades.validar_que_este_vivo(this);
             return -this.sprite.angle % 360;
         },
         set: function (angulo) {
@@ -2786,9 +2796,14 @@ var ActorBase = (function () {
     });
     ActorBase.prototype.toString = function () {
         var clase = this.constructor["name"];
-        var x = this.x.toFixed(2);
-        var y = this.y.toFixed(2);
-        return "<" + clase + " en (" + x + ", " + y + ")>";
+        if (this.esta_vivo()) {
+            var x = this.x.toFixed(2);
+            var y = this.y.toFixed(2);
+            return "<" + clase + " en (" + x + ", " + y + ")>";
+        }
+        else {
+            "<" + clase + " eliminado>";
+        }
     };
     ActorBase.prototype.fallar_si_no_tiene_figura = function () {
         if (!this.figura) {
@@ -3267,6 +3282,9 @@ var ActorBase = (function () {
         if (figura) {
             return new Sensor(figura);
         }
+    };
+    ActorBase.prototype.reproducir_sonido = function (nombre) {
+        return this.pilas.reproducir_sonido(nombre);
     };
     return ActorBase;
 }());
@@ -4466,7 +4484,10 @@ var EscenaBase = (function () {
         this.desplazamiento_del_fondo_x = 0;
         this.desplazamiento_del_fondo_y = 0;
     }
-    EscenaBase.prototype.reproducir_sonido = function (sonido) {
+    EscenaBase.prototype.reproducir_sonido = function (nombre) {
+        return this.pilas.reproducir_sonido(nombre);
+    };
+    EscenaBase.prototype.planificar_reproducir_sonido = function (sonido) {
         this._sonidos_para_reproducir.push(sonido);
     };
     EscenaBase.prototype.observar = function (nombre, variable) {
@@ -4587,15 +4608,17 @@ var EscenaBase = (function () {
         sonidos = sonidos.filter(function (v, i) { return sonidos.indexOf(v) === i; });
         var maximo = 20;
         var _loop_2 = function (i) {
-            if (!this_1._sonidos_en_reproduccion[sonidos[i]]) {
-                this_1._sonidos_en_reproduccion[sonidos[i]] = 0;
+            var nombre = sonidos[i];
+            if (!this_1._sonidos_en_reproduccion[nombre]) {
+                this_1._sonidos_en_reproduccion[nombre] = 0;
             }
-            if (this_1._sonidos_en_reproduccion[sonidos[i]] < maximo) {
-                this_1._sonidos_en_reproduccion[sonidos[i]] += 1;
-                sonido = this_1.pilas.modo.sound.add(sonidos[i]);
+            if (this_1._sonidos_en_reproduccion[nombre] < maximo) {
+                this_1._sonidos_en_reproduccion[nombre] += 1;
+                sonido = this_1.pilas.modo.sound.add(nombre);
                 sonido.play();
                 sonido.once("complete", function (music) {
-                    _this._sonidos_en_reproduccion[sonidos[i]] -= 1;
+                    _this._sonidos_en_reproduccion[nombre] -= 1;
+                    _this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_reproducir_sonido", { sonido: nombre });
                 });
             }
         };

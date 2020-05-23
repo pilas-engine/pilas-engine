@@ -33,7 +33,8 @@ const queryParams = new QueryParams({
   ejemplo: { defaultValue: null, replace: true, refresh: true },
   hash: { defaultValue: null, replace: true, refresh: true },
   tamano: { defaultValue: 14, replace: true, refresh: true },
-  mostrarModalDeAnimaciones: { defaultValue: false, replace: true }
+  mostrarModalDeAnimaciones: { defaultValue: false, replace: true },
+  mostrarModalDeSonidos: { defaultValue: false, replace: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {
@@ -44,14 +45,13 @@ export default Controller.extend(queryParams.Mixin, {
   router: service(),
   api: service(),
   migraciones: service(),
-  servicioProyecto: service('proyecto'),
+  servicioProyecto: service("proyecto"),
 
   setup(event) {
     this.tareaCargarProyecto.perform(event.queryParams);
   },
 
   tareaCargarProyecto: task(function*(params) {
-
     if (params.ejemplo) {
       let proyecto = yield this.cargarProyectoDesdeEjemplo.perform(params.ejemplo);
       return this.migraciones.migrar(proyecto);

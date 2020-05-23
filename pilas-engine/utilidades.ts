@@ -39,6 +39,12 @@ class Utilidades {
     }
   }
 
+  validar_que_este_vivo(actor: ActorBase) {
+    if (!actor || !actor.esta_vivo()) {
+      throw new Error(`El actor "${actor.nombre}" ha sido eliminado, usá el método esta_vivo() del actor antes de acceder a el.`);
+    }
+  }
+
   es_animacion(valor: any) {
     return (
       Array.isArray(valor) &&

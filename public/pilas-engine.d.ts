@@ -332,6 +332,7 @@ declare class Mensajes {
     atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual(datos: any): void;
     atender_mensaje_cuando_cambia_grilla_desde_el_selector_manual(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
+    atender_mensaje_termina_de_reproducir_sonido(): void;
     atender_mensaje_ejecutar_proyecto(datos: any): void;
     emitir_excepcion_al_editor(error: any, origen: any): void;
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
@@ -351,6 +352,7 @@ declare class Utilidades {
     obtener_color_al_azar(): number;
     limitar(valor: number, minimo: number, maximo: number): number;
     validar_numero(valor: number): void;
+    validar_que_este_vivo(actor: ActorBase): void;
     es_animacion(valor: any): boolean;
     validar_parametro_numero_positivo(parametro: string, valor: number): void;
     validar_parametro_booleano(parametro: string, valor: number): void;
@@ -672,6 +674,7 @@ declare class ActorBase {
     readonly camara: Camara;
     hacer_recorrido(posiciones: any, duracion?: number, veces?: number, seguir_rotacion?: boolean): void;
     obtener_sensor(nombre: string): Sensor;
+    reproducir_sonido(nombre: string): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1145,7 +1148,8 @@ declare class EscenaBase {
     desplazamiento_del_fondo_y: number;
     proyecto: any;
     constructor(pilas: any);
-    reproducir_sonido(sonido: string): void;
+    reproducir_sonido(nombre: string): void;
+    planificar_reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
     agregar_actor(actor: Actor): void;
     gravedad_x: number;

@@ -95,6 +95,8 @@ class Mensajes {
     this.pilas.modo.posicionar_la_camara(datos.escena);
   }
 
+  atender_mensaje_termina_de_reproducir_sonido(/*datos*/) {}
+
   atender_mensaje_ejecutar_proyecto(datos) {
     let parametros = {
       pilas: this.pilas,

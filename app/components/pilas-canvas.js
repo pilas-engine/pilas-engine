@@ -83,6 +83,7 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
       this.bus.on(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
       this.bus.on(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
+      this.bus.on(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
     };
   },
 
@@ -110,6 +111,7 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
     this.bus.off(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
     this.bus.off(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
+    this.bus.off(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
   },
 
   convertir_a_boolean(valor) {
@@ -236,6 +238,16 @@ export default Component.extend({
       tipo: "cambiar_zoom",
       nombre_del_contexto: this.nombre_del_contexto,
       zoom: cantidad
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  termina_de_reproducir_sonido(sonido) {
+    let data = {
+      tipo: "termina_de_reproducir_sonido",
+      nombre_del_contexto: this.nombre_del_contexto,
+      sonido: sonido
     };
 
     this.contexto.postMessage(data, utils.HOST);
@@ -427,6 +439,11 @@ export default Component.extend({
 
     if (e.data.tipo === "cambia_zoom") {
       this.bus.trigger(`cuando_cambia_zoom`, e.data);
+      return;
+    }
+
+    if (e.data.tipo === "termina_de_reproducir_sonido") {
+      this.bus.trigger(`${nombre_del_contexto}:termina_de_reproducir_sonido`, e.data);
       return;
     }
 

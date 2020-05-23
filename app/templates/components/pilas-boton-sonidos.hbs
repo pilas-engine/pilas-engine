@@ -1,0 +1,7 @@
+{{yield}}
+
+{{pilas-boton icono="sonidos" desactivado=desactivado accion=(action "abrirModal") texto="Sonidos"}}
+
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoSonidos" titulo="Sonidos"}}
+  {{pilas-gestor-de-sonidos proyecto=proyecto pixelart=pixelart}}
+{{/pilas-modal}}

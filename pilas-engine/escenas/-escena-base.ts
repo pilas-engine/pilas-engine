@@ -33,7 +33,11 @@ class EscenaBase {
     this.desplazamiento_del_fondo_y = 0;
   }
 
-  reproducir_sonido(sonido: string) {
+  reproducir_sonido(nombre: string) {
+    return this.pilas.reproducir_sonido(nombre);
+  }
+
+  planificar_reproducir_sonido(sonido: string) {
     this._sonidos_para_reproducir.push(sonido);
   }
 
@@ -188,17 +192,20 @@ class EscenaBase {
     const maximo = 20;
 
     for (let i = 0; i < sonidos.length; i++) {
-      if (!this._sonidos_en_reproduccion[sonidos[i]]) {
-        this._sonidos_en_reproduccion[sonidos[i]] = 0;
+      let nombre = sonidos[i];
+
+      if (!this._sonidos_en_reproduccion[nombre]) {
+        this._sonidos_en_reproduccion[nombre] = 0;
       }
 
-      if (this._sonidos_en_reproduccion[sonidos[i]] < maximo) {
-        this._sonidos_en_reproduccion[sonidos[i]] += 1;
+      if (this._sonidos_en_reproduccion[nombre] < maximo) {
+        this._sonidos_en_reproduccion[nombre] += 1;
 
-        var sonido = this.pilas.modo.sound.add(sonidos[i]);
+        var sonido = this.pilas.modo.sound.add(nombre);
         sonido.play();
         sonido.once("complete", music => {
-          this._sonidos_en_reproduccion[sonidos[i]] -= 1;
+          this._sonidos_en_reproduccion[nombre] -= 1;
+          this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_reproducir_sonido", { sonido: nombre });
         });
       }
     }

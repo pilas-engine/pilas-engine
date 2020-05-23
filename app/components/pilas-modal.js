@@ -1,7 +1,7 @@
 import Component from "@ember/component";
 
 export default Component.extend({
-  tagName: "",
+  classNames: ["absolute"],
   puede_cerrar: true,
   actions: {
     ocultar() {

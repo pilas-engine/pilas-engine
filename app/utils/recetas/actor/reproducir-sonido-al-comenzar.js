@@ -6,13 +6,13 @@ export default function recetasActorReproducirSonidoAlComenzar() {
     etiquetas: ["sonido"],
     codigo: `
           iniciar() {
-            this.pilas.reproducir_sonido("moneda");
+            this.reproducir_sonido("moneda");
 
             // Otras opciones:
 
-            //this.pilas.reproducir_sonido("laser");
-            //this.pilas.reproducir_sonido("salto-largo");
-            //this.pilas.reproducir_sonido("salto-corto");
+            //this.reproducir_sonido("laser");
+            //this.reproducir_sonido("salto-largo");
+            //this.reproducir_sonido("salto-corto");
           }
       `
   };

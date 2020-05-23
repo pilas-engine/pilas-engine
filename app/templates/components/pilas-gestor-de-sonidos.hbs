@@ -1,0 +1,61 @@
+{{yield}}
+<div class="flex vh-100">
+
+  <div class="w5 pl2 pr3 flex flex-column">
+    <div class="">
+      {{!pilas-boton accion=(action "crear_animación_nueva") texto="Crear una animación" icono="mas"}}
+    </div>
+
+
+
+    <div class="ba borde relative flex1 overflow-y-auto unselectable {{if iniciando "o-50 disabled" ""}}">
+
+      {{#if iniciando}}
+        <div class="absolute right-0 top-0 pa2">
+          {{pilas-spinner}}
+        </div>
+      {{/if}}
+
+
+
+      {{#each sonidos as |sonido|}}
+
+        <div class="flex hide-child {{if (eq sonido.nombre sonido_seleccionado.nombre) "bg-black-20" "hover-bg-black-10"}}">
+          <div class="pa2 f6 flex1 truncate pointer" role="button" {{action "reproducir" sonido}}>
+            {{#if sonido.reproduciendo}}
+              {{pilas-mini-icono icono="pausa"}}
+            {{else}}
+              {{pilas-mini-icono icono="play"}}
+            {{/if}}
+            {{sonido.nombre}}
+          </div>
+        </div>
+
+      {{/each}}
+    </div>
+
+  </div>
+
+  <div class="flex1 flex flex-column tc">
+    <div class="tl f6">
+      <div class="lh-copy">
+        Ayuda: para usar este sonido dentro del juego podes escribir el siguiente código:
+      </div>
+
+      <div class="flex items-center">
+        <pre class="ba borde pa2 bg-fondo-secundario mr2 flex1">{{helper-sonido sonido_seleccionado.nombre}}</pre>
+        {{pilas-boton-copiar texto=(helper-sonido sonido_seleccionado.nombre)}}
+      </div>
+
+    </div>
+
+    {{pilas-previsualizacion-de-sonido
+      iniciando=iniciando
+      sonido=sonido_seleccionado
+      id=id
+      recursos=recursos
+      cuando_termina_de_reproducir=(action "cuando_termina_de_reproducir")
+    }}
+
+  </div>
+</div>

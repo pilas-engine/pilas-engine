@@ -18,10 +18,6 @@
 
     {{#en-electron}}
       {{pilas-boton-webserver cargando=cargando}}
-    {{else}}
-      {{#pilas-tooltip pos="left" texto="Esta opción solo está disponible en la versión de escritorio (offline)"}}
-        {{pilas-boton responsive=true icono="webserver" desactivado=true texto="Iniciar servidor web"}}
-      {{/pilas-tooltip}}
     {{/en-electron}}
 
     {{pilas-boton-animaciones
@@ -29,6 +25,12 @@
       pixelart=pixelart
       proyecto=proyecto
       modalVisible=mostrarModalDeAnimaciones}}
+
+    {{pilas-boton-sonidos
+      desactivado=(not estado.puede_editar)
+      pixelart=pixelart
+      proyecto=proyecto
+      modalVisible=mostrarModalDeSonidos}}
 
   </div>
 

@@ -277,7 +277,7 @@ class Pilas {
   }
 
   reproducir_sonido(nombre: string) {
-    this.escena.reproducir_sonido(nombre);
+    this.escena.planificar_reproducir_sonido(nombre);
   }
 
   obtener_actores() {
