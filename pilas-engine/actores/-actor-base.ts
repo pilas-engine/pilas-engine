@@ -556,7 +556,6 @@ class ActorBase {
   }
 
   get x() {
-    this.pilas.utilidades.validar_que_este_vivo(this);
     let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
     return x;
   }
@@ -572,7 +571,6 @@ class ActorBase {
   }
 
   get y() {
-    this.pilas.utilidades.validar_que_este_vivo(this);
     let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
     return y;
   }
@@ -583,7 +581,6 @@ class ActorBase {
   }
 
   get z() {
-    this.pilas.utilidades.validar_que_este_vivo(this);
     return -this.sprite.depth;
   }
 
@@ -597,7 +594,6 @@ class ActorBase {
   }
 
   get rotacion() {
-    this.pilas.utilidades.validar_que_este_vivo(this);
     return -this.sprite.angle % 360;
   }
 

@@ -2623,7 +2623,6 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "x", {
         get: function () {
-            this.pilas.utilidades.validar_que_este_vivo(this);
             var x = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
             return x;
         },
@@ -2642,7 +2641,6 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "y", {
         get: function () {
-            this.pilas.utilidades.validar_que_este_vivo(this);
             var y = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y).y;
             return y;
         },
@@ -2661,7 +2659,6 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "z", {
         get: function () {
-            this.pilas.utilidades.validar_que_este_vivo(this);
             return -this.sprite.depth;
         },
         set: function (_z) {
@@ -2673,7 +2670,6 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "rotacion", {
         get: function () {
-            this.pilas.utilidades.validar_que_este_vivo(this);
             return -this.sprite.angle % 360;
         },
         set: function (angulo) {
