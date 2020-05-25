@@ -142,6 +142,10 @@
     {
       "nombre": "imagenes-como-botones",
       "desde": "2.1.6"
+    },
+    {
+      "nombre": "barras-de-energia",
+      "desde": "2.2.0"
     }
   ]
 }

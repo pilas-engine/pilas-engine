@@ -142,9 +142,15 @@ class EscenaBase {
     let actores_a_eliminar = [];
 
     this.actores.map(actor => {
+
       try {
+
         if (!actor._vivo) {
           actor.sprite.destroy();
+
+          if (actor["_canvas"]) {
+            actor["_canvas"].destroy();
+          }
 
           actor.sensores.map(s => {
             this.pilas.modo.matter.world.remove(s);

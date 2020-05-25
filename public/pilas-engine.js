@@ -3521,7 +3521,6 @@ var barra_de_energia = (function (_super) {
     };
     barra_de_energia.prototype.actualizar = function () {
         this.dibujar();
-        this.vida_actual -= 0.2;
     };
     barra_de_energia.prototype.dibujar = function () {
         if (this.vida_actual === this.vida_anterior) {
@@ -4571,6 +4570,9 @@ var EscenaBase = (function () {
             try {
                 if (!actor._vivo) {
                     actor.sprite.destroy();
+                    if (actor["_canvas"]) {
+                        actor["_canvas"].destroy();
+                    }
                     actor.sensores.map(function (s) {
                         _this.pilas.modo.matter.world.remove(s);
                     });

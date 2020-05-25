@@ -17,7 +17,7 @@ class barra_de_energia extends PizarraBase {
 
   actualizar() {
     this.dibujar();
-    this.vida_actual -= 0.2;
+    //this.vida_actual -= 0.2;
   }
 
   dibujar() {
