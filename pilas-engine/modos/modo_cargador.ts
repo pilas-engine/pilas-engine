@@ -139,7 +139,6 @@ class ModoCargador extends Modo {
     this.notificar_imagenes_cargadas();
 
     if (this.pilas.opciones.modo_simple) {
-      console.log("Finalizó la carga en modo simple");
 
       this.pilas.definir_modo("ModoEjecucion", {
         pilas: this.pilas,
@@ -206,6 +205,9 @@ class ModoCargador extends Modo {
             {
               nombre: "principal",
               id: 3,
+              ancho: 200,
+              alto: 200,
+              fondo: "decoracion:fondos/fondo-plano",
               actores: [],
               camara_x: 0,
               camara_y: 0

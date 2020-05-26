@@ -1417,7 +1417,7 @@ var Mensajes = (function () {
         this.pilas.modo.cameras.main.setZoom(datos.zoom);
     };
     Mensajes.prototype.atender_mensaje_iniciar_pilas = function (datos) {
-        this.pilas.nombre_del_contexto = datos.nombre_del_contexto;
+        this.pilas.nombre_del_contexto = datos.nombre_del_contexto || "sin_nombre_de_contexto";
         this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones, datos.imagenes);
     };
     Mensajes.prototype.atender_mensaje_definir_estados_de_depuracion = function (datos) {
@@ -1787,7 +1787,7 @@ var Pilas = (function () {
         this._alto = alto;
         this.recursos = recursos;
         var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
-        if (opciones.fps !== 60) {
+        if (opciones.fps === 30) {
             configuracion["fps"] = {
                 target: opciones.fps,
                 forceSetTimeOut: true
@@ -2066,6 +2066,9 @@ var Pilas = (function () {
         return radianes * (180 / Math.PI);
     };
     Pilas.prototype.obtener_angulo_entre_actores = function (actor1, actor2) {
+        if (!actor1.esta_vivo() || !actor2.esta_vivo()) {
+            return 0;
+        }
         return this.obtener_angulo_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
     };
     Pilas.prototype.ocultar_cursor = function () {
@@ -7452,7 +7455,6 @@ var ModoCargador = (function (_super) {
         _super.prototype.create.call(this, { pilas: this.pilas }, 500, 500);
         this.notificar_imagenes_cargadas();
         if (this.pilas.opciones.modo_simple) {
-            console.log("Finalizó la carga en modo simple");
             this.pilas.definir_modo("ModoEjecucion", {
                 pilas: this.pilas,
                 nombre_de_la_escena_inicial: "principal",
@@ -7476,6 +7478,9 @@ var ModoCargador = (function (_super) {
                         {
                             nombre: "principal",
                             id: 3,
+                            ancho: 200,
+                            alto: 200,
+                            fondo: "decoracion:fondos/fondo-plano",
                             actores: [],
                             camara_x: 0,
                             camara_y: 0

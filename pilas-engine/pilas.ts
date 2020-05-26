@@ -103,7 +103,7 @@ class Pilas {
     this.recursos = recursos;
     var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
 
-    if (opciones.fps !== 60) {
+    if (opciones.fps === 30) {
       configuracion["fps"] = {
         target: opciones.fps,
         forceSetTimeOut: true
@@ -459,6 +459,9 @@ class Pilas {
   }
 
   obtener_angulo_entre_actores(actor1: ActorBase, actor2: ActorBase) {
+    if (!actor1.esta_vivo() || !actor2.esta_vivo()) {
+      return 0;
+    }
     return this.obtener_angulo_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
   }
 

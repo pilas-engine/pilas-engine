@@ -43,7 +43,7 @@ class Mensajes {
   }
 
   atender_mensaje_iniciar_pilas(datos) {
-    this.pilas.nombre_del_contexto = datos.nombre_del_contexto;
+    this.pilas.nombre_del_contexto = datos.nombre_del_contexto || "sin_nombre_de_contexto";
     this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones, datos.imagenes);
   }
 
