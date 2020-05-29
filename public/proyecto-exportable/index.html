@@ -70,9 +70,14 @@
       var ha_iniciado = false;
 
       var proyecto = JSON.parse(b64DecodeUnicode(proyecto_serializado_inicial));
+      var pixelart = false;
+
+      if (proyecto.proyecto.modo_de_video === "pixelart") {
+        pixelart = true;
+      }
 
       var opciones = {
-        pixelart: proyecto.pixelart,
+        pixelart: pixelart,
         fps: proyecto.proyecto.fps
       };
 
