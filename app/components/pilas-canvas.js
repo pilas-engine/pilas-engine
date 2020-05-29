@@ -425,6 +425,11 @@ export default Component.extend({
       return;
     }
 
+    if (e.data.tipo === "mover_al_actor_con_el_teclado") {
+      this.bus.trigger(`${this.nombre_del_contexto}:mover_al_actor_con_el_teclado`, e.data);
+      return;
+    }
+
     if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
       this.bus.trigger(`${this.nombre_del_contexto}:inicia_modo_depuracion_en_pausa`, e.data);
       return;

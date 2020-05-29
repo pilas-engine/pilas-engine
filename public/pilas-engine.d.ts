@@ -1719,27 +1719,27 @@ declare class ModoEditor extends Modo {
     aplicar_limites_a_la_camara(escena: any): void;
     private conectar_movimiento_del_mouse;
     crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara(): void;
-    ajustar_posicion_a_la_grilla(gameObject: any): void;
+    ajustar_posicion_a_la_grilla(gameObject: Phaser.GameObjects.Sprite): void;
     cuando_cambia_grilla_desde_el_selector_manual(grilla: any): void;
     desplazar_la_camara_desde_el_evento_drag(pointer: any): void;
     obtener_factores(): {
         x: number;
         y: number;
     };
-    desplazar_actor_desde_el_evento_drag(gameObject: any, pointer: any): void;
+    desplazar_actor_desde_el_evento_drag(gameObject: Phaser.GameObjects.Sprite, pointer: any): void;
     ajustar_figura(gameObject: any): void;
     ajustar_sensores(sprite: any): void;
-    mover_cursor_de_la_grilla(x: any, y: any): void;
+    mover_cursor_de_la_grilla(x: number, y: number): void;
     actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento?: boolean): void;
     obtener_posicion_de_desplazamiento_de_la_camara(): {
         x: number;
         y: number;
     };
-    crear_actores_desde_los_datos_de_la_escena(escena: any): void;
-    crear_sprite_desde_actor(actor: any): void;
+    crear_actores_desde_los_datos_de_la_escena(escena: Escena): void;
+    crear_sprite_desde_actor(actor: Actor): void;
     private crear_destello;
     private copiar_atributos_excepto_alpha;
-    aplicar_atributos_de_actor_a_sprite(actor: any, sprite: any): void;
+    aplicar_atributos_de_actor_a_sprite(actor: Actor, sprite: any): void;
     update(): void;
     eliminar_actor_por_id(id: any): void;
     posicionar_la_camara(datos_de_la_escena: any): void;

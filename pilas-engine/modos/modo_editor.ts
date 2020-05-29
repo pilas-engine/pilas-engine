@@ -92,6 +92,22 @@ class ModoEditor extends Modo {
     if (evento.key === "n") {
       this.pilas.mensajes.emitir_mensaje_al_editor("crear_un_actor_desde_atajo", {});
     }
+
+    if (evento.key === "ArrowLeft") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: -1 });
+    }
+
+    if (evento.key === "ArrowRight") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: 1 });
+    }
+
+    if (evento.key === "ArrowUp") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: 1 });
+    }
+
+    if (evento.key === "ArrowDown") {
+      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: -1 });
+    }
   }
 
   crear_sprite_para_el_cursor_de_la_grilla() {
@@ -210,7 +226,7 @@ class ModoEditor extends Modo {
     });
   }
 
-  ajustar_posicion_a_la_grilla(gameObject) {
+  ajustar_posicion_a_la_grilla(gameObject: Phaser.GameObjects.Sprite) {
     gameObject.x = this.sprite_cursor_de_la_grilla.x;
     gameObject.y = this.sprite_cursor_de_la_grilla.y;
     this.ajustar_figura(gameObject);
@@ -235,7 +251,7 @@ class ModoEditor extends Modo {
     }
   }
 
-  desplazar_la_camara_desde_el_evento_drag(pointer) {
+  desplazar_la_camara_desde_el_evento_drag(pointer: any) {
     let zoom = this.cameras.main.zoom;
     let factor = this.obtener_factores();
     let dx = this.posicion_anterior_de_arrastre.x - pointer.position.x;
@@ -255,7 +271,7 @@ class ModoEditor extends Modo {
     return { x: factor_horizontal, y: factor_vertical };
   }
 
-  desplazar_actor_desde_el_evento_drag(gameObject, pointer) {
+  desplazar_actor_desde_el_evento_drag(gameObject: Phaser.GameObjects.Sprite, pointer: any) {
     let zoom = this.cameras.main.zoom;
     let factor = this.obtener_factores();
 
@@ -273,7 +289,7 @@ class ModoEditor extends Modo {
     this.posicion_anterior_de_arrastre = pointer.position.clone();
   }
 
-  ajustar_figura(gameObject) {
+  ajustar_figura(gameObject: any) {
     let matter = this.pilas.Phaser.Physics.Matter.Matter;
     if (gameObject.figura) {
       let figura = gameObject.figura;
@@ -285,7 +301,7 @@ class ModoEditor extends Modo {
     }
   }
 
-  ajustar_sensores(sprite) {
+  ajustar_sensores(sprite: any) {
     let matter = this.pilas.Phaser.Physics.Matter.Matter;
 
     if (sprite.sensores) {
@@ -298,9 +314,23 @@ class ModoEditor extends Modo {
     }
   }
 
-  mover_cursor_de_la_grilla(x, y) {
-    this.sprite_cursor_de_la_grilla.x = Math.round(x / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
-    this.sprite_cursor_de_la_grilla.y = Math.round(y / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
+  mover_cursor_de_la_grilla(x: number, y: number) {
+    let grilla = this.tamaño_de_la_grilla;
+
+    function normalizar(valor: number) {
+      return Math.round(valor / grilla) * grilla;
+    }
+
+    let x_normalizada = normalizar(x);
+    let y_normalizada = normalizar(y);
+
+    // Corrige el centro del escenario para que el punto (0, 0) sea parte
+    // de las coordenadas normalizadas.
+    x_normalizada += (this.ancho - normalizar(this.ancho)) / 2;
+    y_normalizada += (this.alto - normalizar(this.alto)) / 2;
+
+    this.sprite_cursor_de_la_grilla.x = x_normalizada;
+    this.sprite_cursor_de_la_grilla.y = y_normalizada;
   }
 
   actualizar_posicion_del_minimap_y_el_borde_de_camara(emitir_evento = true) {
@@ -346,13 +376,13 @@ class ModoEditor extends Modo {
     return { x, y };
   }
 
-  crear_actores_desde_los_datos_de_la_escena(escena) {
+  crear_actores_desde_los_datos_de_la_escena(escena: Escena) {
     escena.actores.map(actor => {
       this.crear_sprite_desde_actor(actor);
     });
   }
 
-  crear_sprite_desde_actor(actor) {
+  crear_sprite_desde_actor(actor: Actor) {
     this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
     let sprite = null;
 
@@ -427,7 +457,7 @@ class ModoEditor extends Modo {
     destino.setOrigin(origen.originX, origen.originY);
   }
 
-  aplicar_atributos_de_actor_a_sprite(actor, sprite) {
+  aplicar_atributos_de_actor_a_sprite(actor: Actor, sprite) {
     this.actualizar_sprite_desde_datos(sprite, actor); // ver superclase 'modo'
   }
 

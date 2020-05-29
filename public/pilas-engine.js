@@ -7584,6 +7584,18 @@ var ModoEditor = (function (_super) {
         if (evento.key === "n") {
             this.pilas.mensajes.emitir_mensaje_al_editor("crear_un_actor_desde_atajo", {});
         }
+        if (evento.key === "ArrowLeft") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: -1 });
+        }
+        if (evento.key === "ArrowRight") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: 1 });
+        }
+        if (evento.key === "ArrowUp") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: 1 });
+        }
+        if (evento.key === "ArrowDown") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: -1 });
+        }
     };
     ModoEditor.prototype.crear_sprite_para_el_cursor_de_la_grilla = function () {
         var x = 0;
@@ -7751,8 +7763,16 @@ var ModoEditor = (function (_super) {
         }
     };
     ModoEditor.prototype.mover_cursor_de_la_grilla = function (x, y) {
-        this.sprite_cursor_de_la_grilla.x = Math.round(x / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
-        this.sprite_cursor_de_la_grilla.y = Math.round(y / this.tamaño_de_la_grilla) * this.tamaño_de_la_grilla;
+        var grilla = this.tamaño_de_la_grilla;
+        function normalizar(valor) {
+            return Math.round(valor / grilla) * grilla;
+        }
+        var x_normalizada = normalizar(x);
+        var y_normalizada = normalizar(y);
+        x_normalizada += (this.ancho - normalizar(this.ancho)) / 2;
+        y_normalizada += (this.alto - normalizar(this.alto)) / 2;
+        this.sprite_cursor_de_la_grilla.x = x_normalizada;
+        this.sprite_cursor_de_la_grilla.y = y_normalizada;
     };
     ModoEditor.prototype.actualizar_posicion_del_minimap_y_el_borde_de_camara = function (emitir_evento) {
         if (emitir_evento === void 0) { emitir_evento = true; }

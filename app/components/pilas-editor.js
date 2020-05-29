@@ -56,7 +56,8 @@ export default Component.extend({
       "pulsa_la_tecla_escape",
       "duplicar_el_actor_seleccionado",
       "eliminar_el_actor_seleccionado",
-      "crear_un_actor_desde_atajo"
+      "crear_un_actor_desde_atajo",
+      "mover_al_actor_con_el_teclado"
     ]);
 
     this.set("estado", new estados.ModoCargando());
@@ -161,6 +162,35 @@ export default Component.extend({
       },
       10
     );
+  },
+
+  mover_al_actor_con_el_teclado(data) {
+    if (this.get("tipo_de_la_instancia_seleccionada") == "actor") {
+      let delta = 1;
+
+      if (this.get("grilla") > 0) {
+        delta = this.get("grilla");
+      }
+
+      let actor = this.get("instancia_seleccionada");
+
+      // guarda la posición actual para deshacer en caso de error.
+      this.memento.accion("mueve_actor", {
+        id: actor.id,
+        x: actor.x,
+        y: actor.y
+      });
+
+      if (data.x) {
+        actor.set("x", Math.round(actor.x + delta * data.x));
+      }
+
+      if (data.y) {
+        actor.set("y", Math.round(actor.y + delta * data.y));
+      }
+
+      this.send("cuandoModificaObjeto", actor);
+    }
   },
 
   finaliza_carga() {
