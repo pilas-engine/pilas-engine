@@ -73,7 +73,7 @@ class ActorBase {
     figura: ""
   };
 
-  constructor(pilas) {
+  constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.automata = new Automata(this);
     this.colisiones = [];
@@ -84,7 +84,7 @@ class ActorBase {
     return this.propiedades;
   }
 
-  pre_iniciar(propiedades) {
+  pre_iniciar(propiedades: any) {
     let figura = propiedades.figura || "";
 
     this._id = propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
@@ -183,28 +183,28 @@ class ActorBase {
       });
     });
 
-    this.sprite.on("pointerdown", cursor => {
+    this.sprite.on("pointerdown", (cursor:any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_hace_click(posicion.x, posicion.y, cursor);
       });
     });
 
-    this.sprite.on("pointerup", cursor => {
+    this.sprite.on("pointerup", (cursor:any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
       });
     });
 
-    this.sprite.on("pointerout", cursor => {
+    this.sprite.on("pointerout", (cursor:any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_sale(posicion.x, posicion.y, cursor);
       });
     });
 
-    this.sprite.on("pointermove", cursor => {
+    this.sprite.on("pointermove", (cursor:any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_mueve(posicion.x, posicion.y, cursor);
@@ -677,7 +677,7 @@ class ActorBase {
     this.sprite.setOrigin(x, this.centro_y);
   }
 
-  set transparencia(t) {
+  set transparencia(t: any) {
     if (this.pilas.utilidades.es_animacion(t)) {
       this.pilas.animar(this, "transparencia", t);
     } else {
@@ -1063,11 +1063,14 @@ class ActorBase {
 
     if (clase) {
       if (this.tiene_habilidad(clase.name)) {
-        console.warn(`No se aplica la habilidad ${clase.name} porque el actor ya la tenía vinculada.`);
+        let mensaje =`No se aplica la habilidad ${clase.name} porque el actor ya la tenía vinculada.`
+        console.warn(mensaje);
+        return mensaje;
       } else {
         let instancia = new clase(this.pilas, this);
         instancia.iniciar();
         this._habilidades.push(instancia);
+        return `Enseñando habilidad ${clase.name}`;
       }
     }
   }

@@ -27,3 +27,13 @@
       modificarAtributo=(action "cuando_cambia_escena_inicial")
   }}
 </div>
+
+<div class="pb1">
+  {{pilas-propiedad/combo
+      objeto=instancia_seleccionada
+      opciones=lista_de_modos
+      titulo="Modo de video"
+      valor=(get instancia_seleccionada "modo_de_video")
+      modificarAtributo=(action "cuando_cambia_el_modo_de_video")
+  }}
+</div>

@@ -1,7 +1,7 @@
 class Actores {
   pilas: Pilas;
 
-  constructor(pilas) {
+  constructor(pilas: Pilas) {
     this.pilas = pilas;
   }
 
@@ -10,7 +10,7 @@ class Actores {
       clase = window[nombre];
     }
 
-    let actor = new clase(this.pilas);
+    let actor: Actor = new clase(this.pilas);
 
     // Toma las propiedades del actor pero como una extensión de las
     // propiedades iniciales.
@@ -40,7 +40,7 @@ class Actores {
     return this.crear_actor("Actor");
   }
 
-  aceituna(x: number = 0, y: number = 0) {
+  aceituna() {
     return this.crear_actor("aceituna");
   }
 

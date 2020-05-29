@@ -77,6 +77,11 @@ export default Service.extend({
       proyecto.set("nombre_de_la_escena_inicial", proyecto.escenas.firstObject.get("nombre"));
     }
 
+    // migración 2020-05-28: hacer que el proyecto tenga guardado el modo de video.
+    if (!proyecto.get("modo_de_video")) {
+      proyecto.set("modo_de_video", "suavizado");
+    }
+
     return proyecto;
   },
 

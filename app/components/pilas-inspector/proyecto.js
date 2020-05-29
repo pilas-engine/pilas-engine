@@ -5,6 +5,20 @@ export default Component.extend({
     this.set("resoluciones", this.crear_opciones_de_resoluciones());
     this.set("opciones_de_rendimiento", this.crear_opciones_de_rendimiento());
     this.set("lista_de_escenas", this.crear_lista_de_escenas());
+    this.set("lista_de_modos", this.crear_lista_de_modos())
+  },
+
+  crear_lista_de_modos() {
+    return [
+      {
+        valor: "suavizado",
+        texto: "Suavizado",
+      },
+      {
+        valor: "pixelart",
+        texto: "Pixelado"
+      }
+    ]
   },
 
   crear_opciones_de_rendimiento() {
@@ -67,6 +81,10 @@ export default Component.extend({
 
     cuando_cambia_escena_inicial(_, valor) {
       this.cuando_modifica_atributo_del_proyecto("nombre_de_la_escena_inicial", valor);
+    },
+
+    cuando_cambia_el_modo_de_video(_, valor) {
+      this.cuando_modifica_atributo_del_proyecto("modo_de_video", valor);
     }
   }
 });

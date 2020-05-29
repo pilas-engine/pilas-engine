@@ -34,7 +34,21 @@ export default Component.extend({
       let contexto = iframe.contentWindow;
       this.set("contexto", contexto);
 
-      opciones_de_pilas.pixelart = this.convertir_a_boolean(this.pixelart);
+      switch (this.proyecto.modo_de_video) {
+        case "suavizado":
+          opciones_de_pilas.pixelart = false;
+          break;
+
+        case "pixelart":
+          opciones_de_pilas.pixelart = true;
+          break;
+
+        default:
+          opciones_de_pilas.pixelart = false;
+          let valor = this.proyecto.modo_de_video;
+          console.warn(`Hay un valor incorrecto en modo_de_video del proyecto, dice ${valor}`);
+          break;
+      }
 
       if (this.proyecto && this.proyecto.fps) {
         opciones_de_pilas.fps = this.proyecto.fps;

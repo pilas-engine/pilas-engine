@@ -352,6 +352,25 @@ class Pilas {
     });
   }
 
+  /**
+   * Retorna true si hay un actor en esa coordenada x y.
+   */
+  existe_actor_en(x: number, y: number) {
+    return this.obtener_actores_en(x, y).length > 0;
+  }
+
+  /**
+   * Retorna true si un actor con la etiqueta se encuentra en la posición x y.
+   */
+  existe_actor_con_etiqueta_en(etiqueta: string, x: number, y: number) {
+    let actores = this.obtener_actores_en(x, y);
+    return (
+      actores.filter(actor => {
+        return actor.tiene_etiqueta(etiqueta);
+      }).length > 0
+    );
+  }
+
   escena_actual() {
     return this.escena;
   }

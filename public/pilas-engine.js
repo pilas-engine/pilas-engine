@@ -42,9 +42,7 @@ var Actores = (function () {
     Actores.prototype.actor = function () {
         return this.crear_actor("Actor");
     };
-    Actores.prototype.aceituna = function (x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
+    Actores.prototype.aceituna = function () {
         return this.crear_actor("aceituna");
     };
     Actores.prototype.caja = function () {
@@ -1988,6 +1986,15 @@ var Pilas = (function () {
             return actor.sprite.getBounds()["contains"](x, y);
         });
     };
+    Pilas.prototype.existe_actor_en = function (x, y) {
+        return this.obtener_actores_en(x, y).length > 0;
+    };
+    Pilas.prototype.existe_actor_con_etiqueta_en = function (etiqueta, x, y) {
+        var actores = this.obtener_actores_en(x, y);
+        return (actores.filter(function (actor) {
+            return actor.tiene_etiqueta(etiqueta);
+        }).length > 0);
+    };
     Pilas.prototype.escena_actual = function () {
         return this.escena;
     };
@@ -3147,12 +3154,15 @@ var ActorBase = (function () {
         var clase = this.pilas.habilidades.buscar(habilidad);
         if (clase) {
             if (this.tiene_habilidad(clase.name)) {
-                console.warn("No se aplica la habilidad " + clase.name + " porque el actor ya la ten\u00EDa vinculada.");
+                var mensaje = "No se aplica la habilidad " + clase.name + " porque el actor ya la ten\u00EDa vinculada.";
+                console.warn(mensaje);
+                return mensaje;
             }
             else {
                 var instancia = new clase(this.pilas, this);
                 instancia.iniciar();
                 this._habilidades.push(instancia);
+                return "Ense\u00F1ando habilidad " + clase.name;
             }
         }
     };
