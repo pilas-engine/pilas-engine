@@ -52,7 +52,7 @@ export default Component.extend({
     let resultado = this.compilador.compilar_proyecto(proyecto);
 
     let datos = {
-      nombre_de_la_escena_inicial: proyecto.escenas[0].nombre,
+      nombre_de_la_escena_inicial: proyecto.nombre_de_la_escena_inicial,
       codigo: resultado.codigo,
       proyecto: proyecto
     };

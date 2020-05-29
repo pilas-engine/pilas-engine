@@ -1,0 +1,25 @@
+{{yield}}
+
+<div class="flex verdana unselectable theme-oscuro bg-fondo items-center flex1">
+
+  <div class="flex flex1 pv2 ph2">
+
+    {{#if model.ver_codigo}}
+      {{#pilas-boton-miniatura-pulsable accion=(action "abrir_en_el_editor")}}
+        Ver código en el editor
+      {{/pilas-boton-miniatura-pulsable}}
+    {{/if}}
+
+    <div class="flex1"> </div>
+
+    {{#pilas-boton-miniatura-pulsable accion=(action "pantalla_completa")}}
+      Pantalla completa
+    {{/pilas-boton-miniatura-pulsable}}
+
+  </div>
+
+  <div style="margin-top:-10px; padding-right: 0.5em">
+    {{pilas-selector-de-modo-zoom modoZoom=model.modoZoom}}
+  </div>
+
+</div>
