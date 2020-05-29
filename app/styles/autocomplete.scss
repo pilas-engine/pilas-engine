@@ -1,7 +1,8 @@
 .autocomplete-suggestions {
   text-align: left;
   cursor: default;
-  background: #fff;
+  background: #1f1f1f;
+  border: 1px solid #353535;
   box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.4);
 
   /* core styles should not be changed */
@@ -22,14 +23,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1.02em;
-  color: #333;
+  color: #CACACA;
 }
 
 .autocomplete-suggestion b {
   font-weight: normal;
-  color: #1f8dd6;
+  color: #009AF5;
 }
 
 .autocomplete-suggestion.selected {
-  background: #c0d4ff;
+  background: #003048;
 }

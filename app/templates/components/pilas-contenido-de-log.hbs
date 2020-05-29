@@ -1,5 +1,5 @@
 {{#each log.items as |item|}}
-  <div class="f6 cf pa1 break-all {{if (eq item.tipo "error") "red" "texto"}}">
+  <div style={{estilo}} class="f6 cf pa1 break-all {{if (eq item.tipo "error") "red" "texto"}}">
 
 
     {{#if (eq item.tipo "grupo")}}
@@ -14,7 +14,12 @@
 
     {{else}}
 
-      {{pilas-icono icono=item.tipo}} {{item.mensaje}}
+      {{#if (eq item.tipo "mensaje")}}
+        <div class="w1 dib mr2"></div> {{item.mensaje}}
+      {{else}}
+        {{pilas-icono icono=item.tipo}} {{item.mensaje}}
+      {{/if}}
+
 
       <div class="dib pl3 truncate w4">
         {{item.detalle}}

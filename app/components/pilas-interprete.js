@@ -3,6 +3,8 @@ import Component from "@ember/component";
 import autocompletar from "pilas-engine/utils/autocompletar";
 import { task, timeout } from "ember-concurrency";
 import ENV from "pilas-engine/config/environment";
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
 
 /*
  *
@@ -20,6 +22,16 @@ export default Component.extend({
   pilas: null,
   contexto: null,
   autocompletado: null,
+
+  estilo: computed("tamano", function() {
+    let div_autocompletado = document.querySelector(".autocomplete-suggestions");
+
+    if (div_autocompletado) {
+      div_autocompletado.style.fontSize = `${this.tamano}px`;
+    }
+
+    return htmlSafe(`font-size: ${this.tamano}px`);
+  }),
 
   didInsertElement() {
     this.set("historial", []);
@@ -70,7 +82,17 @@ export default Component.extend({
   }),
 
   actions: {
-    cuandoPulsaEnter() {
+    cuandoPulsaEnter(event) {
+      let dt = new Date() - window.autocomplete_tiempo_en_que_se_oculto;
+
+      // Si las sugerencias de auto-completado se ocultaron hace menos de 1/2
+      // segundo entonces se cancela la pulsación de ENTER porque seguramente
+      // provino de querer autocompeltar. En caso contrario, si transcurrió más
+      // de 1/2 segundo entonces se intenta ejecutar.
+      if (dt < 500) {
+        return;
+      }
+
       let v = this.valor;
 
       if (!this.habilitado) {
@@ -99,7 +121,7 @@ export default Component.extend({
             console.warn("No se puede convertir este objeto a json");
           }
 
-          this.log.info(resultado);
+          this.log.mensaje(resultado || "undefined");
         } catch (error) {
           this.log.error(error);
         }

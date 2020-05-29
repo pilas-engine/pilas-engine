@@ -34,6 +34,15 @@ export default Service.extend({
     this.bus.trigger("se_actualiza_el_log");
   },
 
+  mensaje(mensaje) {
+    this.items.pushObject({
+      tipo: "mensaje",
+      mensaje: mensaje,
+      tiempo: this._obtener_tiempo()
+    });
+    this.bus.trigger("se_actualiza_el_log");
+  },
+
   _obtener_tiempo() {
     let d = new Date();
 

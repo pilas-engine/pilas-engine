@@ -5,6 +5,8 @@
     License: http://www.opensource.org/licenses/mit-license.php
 */
 
+window.autocomplete_tiempo_en_que_se_oculto = new Date();
+
 var autoComplete = (function() {
   // "use strict";
   function autoComplete(options) {
@@ -61,7 +63,7 @@ var autoComplete = (function() {
 
       // create suggestions container "sc"
       that.sc = document.createElement("div");
-      that.sc.className = "autocomplete-suggestions ba b--gray" + o.menuClass;
+      that.sc.className = "autocomplete-suggestions" + o.menuClass;
 
       that.autocompleteAttr = that.getAttribute("autocomplete");
       that.setAttribute("autocomplete", "off");
@@ -71,10 +73,15 @@ var autoComplete = (function() {
       that.updateSC = function(resize, next) {
         var height = 75;
         var rect = that.getBoundingClientRect();
-        that.sc.style.left = Math.round(rect.left - 10 + (window.pageXOffset || document.documentElement.scrollLeft) + o.offsetLeft) + "px";
+        let palabras = that.value.split(".").length;
+
+        let margen = palabras * 40;
+
+        that.sc.style.left = margen + Math.round(rect.left - 10 + (window.pageXOffset || document.documentElement.scrollLeft) + o.offsetLeft) + "px";
         that.sc.style.top = Math.round(rect.top - height + (window.pageYOffset || document.documentElement.scrollTop) + o.offsetTop) + "px";
-        that.sc.style.width = Math.round(rect.right - rect.left) + "px"; // outerWidth
+        that.sc.style.width = Math.round(rect.right - rect.left) - margen + "px"; // outerWidth
         that.sc.style.height = height + "px";
+
         if (!resize) {
           that.sc.style.display = "block";
           if (!that.sc.maxHeight) {
@@ -128,6 +135,7 @@ var autoComplete = (function() {
             that.value = v;
             o.onSelect(e, v, this);
             that.sc.style.display = "none";
+            window.autocomplete_tiempo_en_que_se_oculto = new Date();
           }
         },
         that.sc
@@ -142,9 +150,13 @@ var autoComplete = (function() {
         if (!over_sb) {
           that.last_val = that.value;
           that.sc.style.display = "none";
+          window.autocomplete_tiempo_en_que_se_oculto = new Date();
+
           setTimeout(function() {
             that.sc.style.display = "none";
+            window.autocomplete_tiempo_en_que_se_oculto = new Date();
           }, 350); // hide suggestions on fast input
+
         } else if (that !== document.activeElement)
           setTimeout(function() {
             that.focus();
@@ -160,7 +172,12 @@ var autoComplete = (function() {
           for (var i = 0; i < data.length; i++) s += o.renderItem(data[i], val);
           that.sc.innerHTML = s;
           that.updateSC(0);
-        } else that.sc.style.display = "none";
+        } else {
+          if (that.sc.style.display !== "none") {
+            that.sc.style.display = "none";
+            window.autocomplete_tiempo_en_que_se_oculto = new Date();
+          }
+        }
       };
 
       that.keydownHandler = function(e) {
@@ -168,13 +185,18 @@ var autoComplete = (function() {
         var key = window.event ? e.keyCode : e.which;
         // down (40), up (38), right (39)
         if ((key == 40 || key == 38 || key === 39) && that.sc.innerHTML && el_puppup_esta_visible) {
-          var next,
-            sel = that.sc.querySelector(".autocomplete-suggestion.selected");
+          var next, sel = that.sc.querySelector(".autocomplete-suggestion.selected");
+
           if (!sel) {
             next = key == 40 || key === 39 ? that.sc.querySelector(".autocomplete-suggestion") : that.sc.childNodes[that.sc.childNodes.length - 1]; // first : last
             next.className += " selected";
             that.value = next.getAttribute("data-val");
+
+            that.sc.scrollTo(0, next .offsetTop);
           } else {
+
+            that.sc.scrollTo(0, sel.offsetTop);
+
             next = key == 40 ? sel.nextSibling : sel.previousSibling;
             if (next) {
               sel.className = sel.className.replace("selected", "");
@@ -184,7 +206,10 @@ var autoComplete = (function() {
               sel.className = sel.className.replace("selected", "");
               that.value = that.last_val;
               next = 0;
+              that.sc.scrollTo(0, 0);
             }
+
+
           }
           that.updateSC(0, next);
           return false;
@@ -192,9 +217,32 @@ var autoComplete = (function() {
           // esc
           that.value = that.last_val;
           that.sc.style.display = "none";
+          window.autocomplete_tiempo_en_que_se_oculto = new Date();
+
         } else if (key == 13 || key == 9) {
           // enter
+
+          if (that.sc.style.display !== "none") {
+            window.autocomplete_tiempo_en_que_se_oculto = new Date();
+          } else {
+            return
+          }
+
+          // selecciona la primer opción.
+
+          sel = that.sc.querySelector(".autocomplete-suggestion.selected");
+
+          if (sel) {
+            that.value = sel.getAttribute("data-val");
+          } else {
+            next = that.sc.querySelector(".autocomplete-suggestion")
+            next.className += " selected";
+            that.value = next.getAttribute("data-val");
+          }
+
+          // obtiene el valor.
           var sel = that.sc.querySelector(".autocomplete-suggestion.selected");
+
           if (sel && that.sc.style.display != "none") {
             o.onSelect(e, sel.getAttribute("data-val"), sel);
             setTimeout(function() {
@@ -236,6 +284,8 @@ var autoComplete = (function() {
           } else {
             that.last_val = val;
             that.sc.style.display = "none";
+            window.autocomplete_tiempo_en_que_se_oculto = new Date();
+
           }
         }
       };
