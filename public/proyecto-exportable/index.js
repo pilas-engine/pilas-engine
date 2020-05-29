@@ -11,6 +11,11 @@ function createWindow() {
     fullscreen: pantalla_completa
   });
 
+  // Eliminar el menú principal
+  mainWindow.setMenu(null);
+  mainWindow.removeMenu();
+
+  // Carga el archivo con el juego.
   mainWindow.loadFile("index.html");
 
   // Activa esta linea para abrir las herramientas de desarrollo.
