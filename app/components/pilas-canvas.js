@@ -34,20 +34,25 @@ export default Component.extend({
       let contexto = iframe.contentWindow;
       this.set("contexto", contexto);
 
-      switch (this.proyecto.modo_de_video) {
-        case "suavizado":
-          opciones_de_pilas.pixelart = false;
-          break;
+      if (this.proyecto) {
+        switch (this.proyecto.modo_de_video) {
+          case "suavizado": {
+            opciones_de_pilas.pixelart = false;
+            break;
+          }
 
-        case "pixelart":
-          opciones_de_pilas.pixelart = true;
-          break;
+          case "pixelart": {
+            opciones_de_pilas.pixelart = true;
+            break;
+          }
 
-        default:
-          opciones_de_pilas.pixelart = false;
-          let valor = this.proyecto.modo_de_video;
-          console.warn(`Hay un valor incorrecto en modo_de_video del proyecto, dice ${valor}`);
-          break;
+          default: {
+            opciones_de_pilas.pixelart = false;
+            let valor = this.proyecto.modo_de_video;
+            console.warn(`Hay un valor incorrecto en modo_de_video del proyecto, dice ${valor}`);
+            break;
+          }
+        }
       }
 
       if (this.proyecto && this.proyecto.fps) {

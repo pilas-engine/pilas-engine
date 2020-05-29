@@ -3,8 +3,8 @@ import Component from "@ember/component";
 import autocompletar from "pilas-engine/utils/autocompletar";
 import { task, timeout } from "ember-concurrency";
 import ENV from "pilas-engine/config/environment";
-import { htmlSafe } from '@ember/string';
-import { computed } from '@ember/object';
+import { htmlSafe } from "@ember/string";
+import { computed } from "@ember/object";
 
 /*
  *
@@ -82,7 +82,7 @@ export default Component.extend({
   }),
 
   actions: {
-    cuandoPulsaEnter(event) {
+    cuandoPulsaEnter(/*event*/) {
       let dt = new Date() - window.autocomplete_tiempo_en_que_se_oculto;
 
       // Si las sugerencias de auto-completado se ocultaron hace menos de 1/2

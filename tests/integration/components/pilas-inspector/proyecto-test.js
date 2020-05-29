@@ -11,6 +11,7 @@ module("Integration | Component | pilas-inspector/proyecto", function(hooks) {
       ancho: 640,
       alto: 480,
       tamaño: "640x480",
+      modo_de_video: "suavizado",
       fps: 60,
       nombre_de_la_escena_inicial: "demo",
       escenas: [{ nombre: "demo" }]
