@@ -69,7 +69,7 @@ class Pilas {
     return this.escenas.escena_actual;
   }
 
-  set escena(v: EscenaBase) {
+  set escena(_: EscenaBase) {
     this.utilidades.acceso_incorrecto("escena");
   }
 
@@ -77,7 +77,7 @@ class Pilas {
     return this.escena.control;
   }
 
-  set control(c: Control) {
+  set control(_: Control) {
     this.utilidades.acceso_incorrecto("control");
   }
 

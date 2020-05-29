@@ -1748,7 +1748,7 @@ var Pilas = (function () {
         get: function () {
             return this.escenas.escena_actual;
         },
-        set: function (v) {
+        set: function (_) {
             this.utilidades.acceso_incorrecto("escena");
         },
         enumerable: true,
@@ -1758,7 +1758,7 @@ var Pilas = (function () {
         get: function () {
             return this.escena.control;
         },
-        set: function (c) {
+        set: function (_) {
             this.utilidades.acceso_incorrecto("control");
         },
         enumerable: true,
