@@ -1703,12 +1703,14 @@ declare class ModoEditor extends Modo {
     usar_grilla: boolean;
     sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
     tamaño_de_la_grilla: number;
+    tecla_meta_pulsada: boolean;
     constructor();
     preload(): void;
     create(datos: any): void;
     private conectar_eventos_de_teclado;
     crear_fondo(fondo: any, ancho?: any, alto?: any): void;
     private manejar_evento_key_up;
+    private manejar_evento_key_down;
     crear_sprite_para_el_cursor_de_la_grilla(): void;
     crear_minimap(escena: any): void;
     crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }: {

@@ -55,6 +55,7 @@ export default Component.extend({
       "cuando_cambia_posicion_dentro_del_modo_pausa",
       "pulsa_la_tecla_escape",
       "duplicar_el_actor_seleccionado",
+      "duplicar_el_actor_seleccionado_con_click",
       "eliminar_el_actor_seleccionado",
       "crear_un_actor_desde_atajo",
       "mover_al_actor_con_el_teclado"
@@ -135,6 +136,19 @@ export default Component.extend({
         if (this.get("tipo_de_la_instancia_seleccionada") == "actor") {
           let actor = this.get("instancia_seleccionada");
           this.send("cuando_intenta_duplicar", actor.id, false);
+        }
+      },
+      10
+    );
+  },
+
+  duplicar_el_actor_seleccionado_con_click(data) {
+    debounce(
+      this,
+      () => {
+        if (this.get("tipo_de_la_instancia_seleccionada") == "actor") {
+          let actor = this.get("instancia_seleccionada");
+          this.send("cuando_intenta_duplicar", actor.id, false, data.x, data.y);
         }
       },
       10
@@ -518,6 +532,11 @@ export default Component.extend({
     return proyecto.escenas.findBy("id", id);
   },
 
+  normalizar_a_la_grilla(valor) {
+    let grilla = this.get("grilla") || 1;
+    return Math.round(valor / grilla) * grilla;
+  },
+
   actions: {
     agregarEscena(proyecto) {
       let escena = this.crear_escena_nueva(proyecto);
@@ -759,7 +778,7 @@ export default Component.extend({
       this.bus.trigger("recargarCanvasDePilas");
     },
 
-    cuando_intenta_duplicar(id, aleatorio) {
+    cuando_intenta_duplicar(id, aleatorio, x, y) {
       aleatorio = aleatorio || false;
 
       this.serviceProyecto.cuando_realiza_un_cambio();
@@ -779,11 +798,16 @@ export default Component.extend({
       } else {
         let tamaño_de_grilla = this.get("grilla");
 
-        if (tamaño_de_grilla > 0) {
-          actor.propiedades.x += tamaño_de_grilla;
+        if (x !== undefined && y !== undefined) {
+          actor.propiedades.x = this.normalizar_a_la_grilla(x);
+          actor.propiedades.y = this.normalizar_a_la_grilla(y);
         } else {
-          actor.propiedades.x += 20;
-          actor.propiedades.y -= 20;
+          if (tamaño_de_grilla > 0) {
+            actor.propiedades.x += tamaño_de_grilla;
+          } else {
+            actor.propiedades.x += 20;
+            actor.propiedades.y -= 20;
+          }
         }
       }
 

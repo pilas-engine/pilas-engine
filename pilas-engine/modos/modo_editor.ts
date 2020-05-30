@@ -7,6 +7,7 @@ class ModoEditor extends Modo {
   usar_grilla: boolean;
   sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
   tamaño_de_la_grilla: number;
+  tecla_meta_pulsada: boolean;
 
   constructor() {
     super({ key: "ModoEditor" });
@@ -55,6 +56,7 @@ class ModoEditor extends Modo {
 
   private conectar_eventos_de_teclado() {
     this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
+    this.input.keyboard.on("keydown", this.manejar_evento_key_down.bind(this));
   }
 
   crear_fondo(fondo, ancho = null, alto = null) {
@@ -107,6 +109,16 @@ class ModoEditor extends Modo {
 
     if (evento.key === "ArrowDown") {
       this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: -1 });
+    }
+
+    if (evento.key === "Meta") {
+      this.tecla_meta_pulsada = false;
+    }
+  }
+
+  private manejar_evento_key_down(evento: any) {
+    if (evento.key === "Meta") {
+      this.tecla_meta_pulsada = true;
     }
   }
 
@@ -183,6 +195,13 @@ class ModoEditor extends Modo {
       let posicion_absoluta = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
       this.pilas.cursor_x_absoluta = Math.trunc(posicion_absoluta.x);
       this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
+    });
+
+    this.input.on("pointerdown", evento => {
+      if (this.tecla_meta_pulsada) {
+        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
+        this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado_con_click", { x: posicion.x, y: posicion.y });
+      }
     });
   }
 

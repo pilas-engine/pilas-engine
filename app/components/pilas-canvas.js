@@ -415,6 +415,11 @@ export default Component.extend({
       return;
     }
 
+    if (e.data.tipo === "duplicar_el_actor_seleccionado_con_click") {
+      this.bus.trigger(`${this.nombre_del_contexto}:duplicar_el_actor_seleccionado_con_click`, e.data);
+      return;
+    }
+
     if (e.data.tipo === "eliminar_el_actor_seleccionado") {
       this.bus.trigger(`${this.nombre_del_contexto}:eliminar_el_actor_seleccionado`, e.data);
       return;
