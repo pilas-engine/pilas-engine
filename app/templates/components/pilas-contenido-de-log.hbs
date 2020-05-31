@@ -1,5 +1,5 @@
 {{#each log.items as |item|}}
-  <div style={{estilo}} class="f6 cf pa1 break-all {{if (eq item.tipo "error") "red" "texto"}}">
+  <div style={{estilo}} class="truncate f6 cf pa1 break-all {{if (eq item.tipo "error") "red" "texto"}}">
 
 
     {{#if (eq item.tipo "grupo")}}
@@ -16,6 +16,12 @@
 
       {{#if (eq item.tipo "mensaje")}}
         <div class="w1 dib mr2"></div> {{item.mensaje}}
+      {{else if (eq item.tipo "entrada")}}
+        <div class="pl1 pr2 dib gray tr">›</div>{{item.mensaje}}
+      {{else if (eq item.tipo "salida")}}
+        <div class="pl1 pr2 dib gray tr">‹</div>{{item.mensaje}}
+      {{else if (eq item.tipo "salida-especial")}}
+        <div class="pl1 pr2 dib gray tr">‹</div><span class="i gray">{{item.mensaje}}</span>
       {{else}}
         {{pilas-icono icono=item.tipo}} {{item.mensaje}}
       {{/if}}
@@ -25,13 +31,7 @@
         {{item.detalle}}
       </div>
 
-
-
     {{/if}}
-
-    <div class="fr f7 silver unselectable">
-      {{item.tiempo}}
-    </div>
 
   </div>
 {{/each}}

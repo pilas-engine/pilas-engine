@@ -5,7 +5,7 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 510,
-				"h": 1282
+				"h": 1285
 			},
 			"scale": 1,
 			"frames": [
@@ -285,6 +285,56 @@
 					}
 				},
 				{
+					"filename": "fondos/fondo-amarillo",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 313,
+						"y": 446,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-aqua",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 347,
+						"y": 446,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "objetos/decoracion_nube_1",
 					"rotated": false,
 					"trimmed": false,
@@ -303,6 +353,106 @@
 						"y": 647,
 						"w": 203,
 						"h": 121
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-azul-oscuro",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 464,
+						"y": 647,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-azul-plano",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 464,
+						"y": 681,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-blanco",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 464,
+						"y": 715,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-gris",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 464,
+						"y": 749,
+						"w": 32,
+						"h": 32
 					},
 					"anchor": {
 						"x": 0.5,
@@ -360,6 +510,181 @@
 					}
 				},
 				{
+					"filename": "fondos/fondo-lima",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 461,
+						"y": 783,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-naranja",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 461,
+						"y": 817,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-negro",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 461,
+						"y": 851,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-oliva",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 461,
+						"y": 885,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-plata",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 461,
+						"y": 919,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-rojo-plano",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 461,
+						"y": 953,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-verde-azulado",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 461,
+						"y": 987,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "fondos/fondo-verde",
 					"rotated": false,
 					"trimmed": false,
@@ -378,6 +703,31 @@
 						"y": 981,
 						"w": 160,
 						"h": 160
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "objetos/arbol_desde_arriba",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 141,
+						"h": 141
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 141,
+						"h": 141
+					},
+					"frame": {
+						"x": 1,
+						"y": 1143,
+						"w": 141,
+						"h": 141
 					},
 					"anchor": {
 						"x": 0.5,
@@ -424,7 +774,7 @@
 						"h": 128
 					},
 					"frame": {
-						"x": 1,
+						"x": 144,
 						"y": 1143,
 						"w": 128,
 						"h": 128
@@ -449,8 +799,8 @@
 						"h": 128
 					},
 					"frame": {
-						"x": 131,
-						"y": 1143,
+						"x": 249,
+						"y": 1010,
 						"w": 128,
 						"h": 128
 					},
@@ -474,35 +824,10 @@
 						"h": 128
 					},
 					"frame": {
-						"x": 249,
-						"y": 1010,
+						"x": 379,
+						"y": 1021,
 						"w": 128,
 						"h": 128
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "objetos/arbol_desde_arriba",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 141,
-						"h": 141
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 141,
-						"h": 141
-					},
-					"frame": {
-						"x": 261,
-						"y": 1140,
-						"w": 141,
-						"h": 141
 					},
 					"anchor": {
 						"x": 0.5,
@@ -524,8 +849,8 @@
 						"h": 128
 					},
 					"frame": {
-						"x": 379,
-						"y": 1010,
+						"x": 274,
+						"y": 1151,
 						"w": 128,
 						"h": 128
 					},
@@ -575,7 +900,7 @@
 					},
 					"frame": {
 						"x": 404,
-						"y": 1140,
+						"y": 1151,
 						"w": 64,
 						"h": 64
 					},
@@ -600,9 +925,34 @@
 					},
 					"frame": {
 						"x": 404,
-						"y": 1206,
+						"y": 1217,
 						"w": 64,
 						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fondos/fondo-verde-plano",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 470,
+						"y": 1151,
+						"w": 32,
+						"h": 32
 					},
 					"anchor": {
 						"x": 0.5,
@@ -615,6 +965,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:ef0cf39616f701fe78e2e50924d90bc6:f7fdbac755c1bbfeddb7df6078d1c35f:1254384c92303b71d757c05d7812def1$"
+		"smartupdate": "$TexturePacker:SmartUpdate:afb0d2710e98925a43cd8cbb9c36c8ae:cd2daac3f9bcc451c2b10e2df0100601:1254384c92303b71d757c05d7812def1$"
 	}
 }

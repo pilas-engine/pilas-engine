@@ -4,7 +4,7 @@
 
   <div class="w-100 flex flex-row bt borde">
     <div style={{estilo}} class="dib white pa1 unselectable flex items-center pl2">
-      ▶
+      ›
     </div>
 
     <div style={{estilo}} class={{if habilitado "flex1 flex" "dn"}}>
@@ -12,13 +12,14 @@
         id="input"
         keyDown=(action "pulsaTecla")
         value=valor
+        spellcheck=false
         class="menlo pa1 bn no-outline white bg-fondo-editor flex1"
         enter=(action "cuandoPulsaEnter")
       }}
     </div>
 
     {{#unless habilitado}}
-      <input style={{estilo}} placeholder="Pulsá ejecutar para escribir comandos" disabled="disabled" class="flex1 menlo pa1 bn no-outline white bg-fondo-editor">
+      <input style={{estilo}} spellcheck="false" placeholder="Pulsá ejecutar para escribir comandos" disabled="disabled" class="flex1 menlo pa1 bn no-outline white bg-fondo-editor">
     {{/unless}}
 
   </div>

@@ -19,8 +19,7 @@ export default Service.extend({
     this.items.pushObject({
       tipo: "error",
       mensaje: mensaje,
-      detalle: detalle,
-      tiempo: this._obtener_tiempo()
+      detalle: detalle
     });
     this.bus.trigger("se_actualiza_el_log");
   },
@@ -28,8 +27,7 @@ export default Service.extend({
   info(mensaje) {
     this.items.pushObject({
       tipo: "info",
-      mensaje: mensaje,
-      tiempo: this._obtener_tiempo()
+      mensaje: mensaje
     });
     this.bus.trigger("se_actualiza_el_log");
   },
@@ -37,20 +35,33 @@ export default Service.extend({
   mensaje(mensaje) {
     this.items.pushObject({
       tipo: "mensaje",
-      mensaje: mensaje,
-      tiempo: this._obtener_tiempo()
+      mensaje: mensaje
     });
     this.bus.trigger("se_actualiza_el_log");
   },
 
-  _obtener_tiempo() {
-    let d = new Date();
+  entrada(mensaje) {
+    this.items.pushObject({
+      tipo: "entrada",
+      mensaje: mensaje
+    });
+    this.bus.trigger("se_actualiza_el_log");
+  },
 
-    let horas = this._agregar_ceros(d.getHours());
-    let minutos = this._agregar_ceros(d.getMinutes());
-    let segundos = this._agregar_ceros(d.getSeconds());
+  salida(mensaje) {
+    this.items.pushObject({
+      tipo: "salida",
+      mensaje: mensaje
+    });
+    this.bus.trigger("se_actualiza_el_log");
+  },
 
-    return `${horas}:${minutos}:${segundos}`;
+  salida_especial(mensaje) {
+    this.items.pushObject({
+      tipo: "salida-especial",
+      mensaje: mensaje
+    });
+    this.bus.trigger("se_actualiza_el_log");
   },
 
   _agregar_ceros(numero) {
@@ -66,8 +77,7 @@ export default Service.extend({
     this.items.pushObject({
       tipo: "grupo",
       titulo: titulo,
-      lineas: texto_multilinea.split("\n"),
-      tiempo: this._obtener_tiempo()
+      lineas: texto_multilinea.split("\n")
     });
     this.bus.trigger("se_actualiza_el_log");
   },

@@ -47,7 +47,6 @@ comandos:
 	@echo "    ${G}actualizar_actores${N}           Actualiza el listado de actores implementados."
 	@echo "    ${G}actualizar_actores_live${N}      Actualiza el listado de actores en modo continuo."
 	@echo "    ${G}actualizar_definiciones${N}      Actualiza las definiciones de typescript para phaser."
-	@echo "    ${G}actualizar_jsbeautify${N}        Actualiza jsbeautify a una versión más reciente."
 	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
 	@echo ""
@@ -287,14 +286,3 @@ actualizar_imagenes:
 	TexturePacker recursos/huesos/robot.tps
 	$(call log, "Corrigiendo nombres de clases en los css generados")
 	@node scripts/corregir-css-de-grilla-de-images.js
-
-
-actualizar_jsbeautify:
-	@echo "${Y}Para actualizar jsbeautify, hay que seguir estos pasos:${N}"
-	@echo "${Y}${N}"
-	@echo "${Y} - Subir el número de versión de package.json.${N}"
-	@echo "${Y} - Ejecutar yarn install.${N}"
-	@echo "${Y} - Copiar el archivo beautify.js al directorio vendor:${N}"
-	@echo "${Y}${N}"
-	@echo "${Y}        cp node_modules/js-beautify/js/lib/beautify.js vendor${N}"
-	@echo "${Y}${N}"

@@ -1,20 +1,8 @@
 import { observer } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
-import formatear from "pilas-engine/utils/formatear";
 import utils from "../utils/utils";
-
-function getFrameById(id) {
-  for (var i = 0; i < window.frames.length; i++) {
-    try {
-      if (window.frames[i].name === id) {
-        return window.frames[i];
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-}
+import { later } from "@ember/runloop";
 
 export default Component.extend({
   classNames: ["monaco-editor", "w-100", "flex1", "flex"],
@@ -29,16 +17,15 @@ export default Component.extend({
   window: null,
 
   cuandoCambiaDeArchivo: observer("titulo", function() {
-    this.cargarCodigo();
+    this.cargar_codigo();
   }),
 
-  cargarCodigo() {
+  cargar_codigo() {
     let editor = this.editor;
-    let code = this.code;
-    let codigoFormateado = formatear(code);
+
     if (editor) {
       let pos = editor.getPosition();
-      editor.getModel().setValue(codigoFormateado);
+      editor.getModel().setValue(this.code);
       editor.setPosition(pos);
     }
   },
@@ -101,8 +88,10 @@ export default Component.extend({
         }
 
         if (event.data.message === "on-save") {
-          this.cargarCodigo();
-          this.onSave(this.frame.editor);
+          this.editor.getAction("editor.action.formatDocument").run();
+          later(() => {
+            this.onSave(this.frame.editor);
+          }, 100);
         }
       }
     };
@@ -117,11 +106,23 @@ export default Component.extend({
     });
   },
 
+  getFrameById(id) {
+    for (var i = 0; i < window.frames.length; i++) {
+      try {
+        if (window.frames[i].name === id) {
+          return window.frames[i];
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  },
+
   iniciarEditor() {
     if (this.isDestroyed || this.isDestroying) {
       return;
     }
-    const frame = getFrameById(this.elementId);
+    const frame = this.getFrameById(this.elementId);
     const frameDoc = frame.document;
     let oscuro = this.oscuro;
     this.set("frame", frame);
@@ -146,7 +147,6 @@ export default Component.extend({
         </script>
 
         <script src="${rootURL}vs/loader.js"></script>
-
 
         <style type="text/css">
           html,
@@ -201,7 +201,6 @@ export default Component.extend({
               if (${oscuro}) {
                 theme = 'vs-dark';
               }
-
 
               var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
                 language: 'typescript',
@@ -293,7 +292,7 @@ export default Component.extend({
     this.set("window", window);
 
     if (this.code) {
-      this.cargarCodigo();
+      this.cargar_codigo();
     }
 
     if (this.cuandoCarga) {
@@ -328,11 +327,10 @@ export default Component.extend({
     let posicionFinal = codigo.lastIndexOf("}");
     codigo = codigo.substring(0, posicionFinal) + "\n" + receta.codigo + "\n}";
 
-    let codigoFormateado = formatear(codigo);
-
     let pos = this.editor.getPosition();
-    this.editor.getModel().setValue(codigoFormateado);
+    this.editor.getModel().setValue(codigo);
     this.editor.setPosition(pos);
+    this.editor.getAction("editor.action.formatDocument").run();
   },
 
   willDestroyElement() {

@@ -109,19 +109,39 @@ export default Component.extend({
 
         try {
           resultado = this.contexto.eval(v);
+          this.log.entrada(v);
 
-          try {
-            // Intenta poner en una representación de texto legible
-            // algo como un diccionario serializable.
-            //
-            // TODO: esto debería poder convertir un objeto más complejo o un
-            //       diccionario como "actores".
-            resultado = JSON.stringify(resultado);
-          } catch (_) {
-            console.warn("No se puede convertir este objeto a json");
+          if (typeof resultado === "function") {
+            let cabecera = resultado.toString().split("{")[0];
+            cabecera = cabecera.replace("function", "").trim();
+
+            if (cabecera === "()") {
+              resultado = "Una función sin parámetros";
+            } else {
+              resultado = `Una función con parámetros: ${cabecera}`;
+            }
+
+            this.log.salida_especial(resultado);
+            return;
+          } else {
+            try {
+              // Intenta poner en una representación de texto legible
+              // algo como un diccionario serializable.
+              //
+              // TODO: esto debería poder convertir un objeto más complejo o un
+              //       diccionario como "actores".
+              resultado = JSON.stringify(resultado);
+            } catch (_) {
+              console.warn("No se puede convertir este objeto a json");
+            }
           }
 
-          this.log.mensaje(resultado || "undefined");
+          if (resultado === undefined) {
+            this.log.salida_especial("Sin definir (undefined)");
+            return;
+          }
+
+          this.log.salida(resultado);
         } catch (error) {
           this.log.error(error);
         }
