@@ -35,7 +35,7 @@ class ModoPausa extends Modo {
 
   preload() {}
 
-  create(datos) {
+  create(datos: any) {
     super.create(datos, datos.pilas._ancho, datos.pilas._alto);
     this.pilas = datos.pilas;
     this.posicion = this.pilas.historia.obtener_cantidad_de_posiciones();

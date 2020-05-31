@@ -961,6 +961,15 @@ declare class humo extends Actor {
     actualizar(): void;
     cuando_finaliza_animacion(nombre: string): void;
 }
+declare class interruptor_de_gravedad extends Actor {
+    propiedades: {
+        imagen: string;
+        rotacion: number;
+        z: number;
+    };
+    actualizar(): void;
+    cuando_hace_click(): void;
+}
 declare class laser extends Actor {
     propiedades: {
         imagen: string;

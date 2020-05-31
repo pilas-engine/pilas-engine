@@ -19,7 +19,7 @@ class Historia {
   }
 
   dibujar_puntos_de_las_posiciones_recorridas(graphics) {
-    let cantidad = 60 * 7;
+    let cantidad = 60 * 14;
 
     let historia_reciente = this.fotos.slice(-cantidad);
     let cantidad_total = historia_reciente.length;
@@ -30,7 +30,7 @@ class Historia {
       historia.actores.map(entidad => {
         let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
 
-        graphics.fillStyle(entidad.id_color, i / cantidad_total);
+        graphics.fillStyle(entidad.id_color, i);
         graphics.fillRect(x, y, 2, 2);
       });
     }

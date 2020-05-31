@@ -1266,14 +1266,14 @@ var Historia = (function () {
     };
     Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (graphics) {
         var _this = this;
-        var cantidad = 60 * 7;
+        var cantidad = 60 * 14;
         var historia_reciente = this.fotos.slice(-cantidad);
         var cantidad_total = historia_reciente.length;
         var _loop_1 = function (i) {
             var historia = historia_reciente[i];
             historia.actores.map(function (entidad) {
                 var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
-                graphics.fillStyle(entidad.id_color, i / cantidad_total);
+                graphics.fillStyle(entidad.id_color, i);
                 graphics.fillRect(x, y, 2, 2);
             });
         };
@@ -4109,6 +4109,29 @@ var humo = (function (_super) {
         this.eliminar();
     };
     return humo;
+}(Actor));
+var interruptor_de_gravedad = (function (_super) {
+    __extends(interruptor_de_gravedad, _super);
+    function interruptor_de_gravedad() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:botones/interruptor-si",
+            rotacion: -90,
+            z: -100
+        };
+        return _this;
+    }
+    interruptor_de_gravedad.prototype.actualizar = function () { };
+    interruptor_de_gravedad.prototype.cuando_hace_click = function () {
+        this.pilas.fisica.gravedad_y *= -1;
+        if (this.imagen == "imagenes:botones/interruptor-no") {
+            this.imagen = "imagenes:botones/interruptor-si";
+        }
+        else {
+            this.imagen = "imagenes:botones/interruptor-no";
+        }
+    };
+    return interruptor_de_gravedad;
 }(Actor));
 var laser = (function (_super) {
     __extends(laser, _super);

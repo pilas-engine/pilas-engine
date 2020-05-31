@@ -8,9 +8,16 @@
 
   </div>
 
-  <div class="dib texto w-50 v-top pointer truncate" role="button" {{action "mostrar"}}>
-    {{pilas-icono icono="imagen"}}
-    {{nombre-de-imagen (get objeto propiedad.propiedad)}}
+  <div class="dib texto w-50 v-top pointer flex" role="button" {{action "mostrar"}}>
+    {{#pilas-tooltip class="right-1 bottom-2" texto=(get objeto propiedad.propiedad)}}
+      <div class="">
+        {{pilas-icono icono="imagen"}}
+      </div>
+    {{/pilas-tooltip}}
+
+    <div class="flex1 truncate pl1">
+      {{nombre-de-imagen (get objeto propiedad.propiedad)}}
+    </div>
   </div>
 
   {{#pilas-modal alCerrar=(action "ocultar") visible=mostrar id="dialogo_cambiar_imagen" titulo="Cambiar imagen"}}

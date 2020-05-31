@@ -111,6 +111,11 @@
       "archivo": "humo.ts"
     },
     {
+      "nombre": "interruptor_de_gravedad",
+      "codigo": "class interruptor_de_gravedad extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/interruptor-si\",\n    rotacion: -90,\n    z: -100\n  };\n\n  actualizar() {}\n\n  cuando_hace_click() {\n    this.pilas.fisica.gravedad_y *= -1;\n\n    if (this.imagen == \"imagenes:botones/interruptor-no\") {\n      this.imagen = \"imagenes:botones/interruptor-si\";\n    } else {\n      this.imagen = \"imagenes:botones/interruptor-no\";\n    }\n  }\n}\n",
+      "archivo": "interruptor_de_gravedad.ts"
+    },
+    {
       "nombre": "laser",
       "codigo": "class laser extends Actor {\n  propiedades = {\n    imagen: \"imagenes:disparos/laser\"\n  };\n\n  velocidad;\n\n  iniciar() {\n    this.centro_x = 0.3;\n    this.velocidad = 10;\n    this.pilas.reproducir_sonido(\"laser\");\n  }\n\n  actualizar() {\n    this.avanzar(this.rotacion, this.velocidad);\n    this.eliminar_si_sale_de_la_pantalla();\n  }\n\n  eliminar_si_sale_de_la_pantalla() {\n    let izquierda = this.pilas.camara.borde_izquierdo;\n    let derecha = this.pilas.camara.borde_derecho;\n    let arriba = this.pilas.camara.borde_arriba;\n    let abajo = this.pilas.camara.borde_abajo;\n\n    if (this.x > derecha || this.x < izquierda || this.y > arriba || this.y < abajo) {\n      this.eliminar();\n    }\n  }\n}\n",
       "archivo": "laser.ts"
