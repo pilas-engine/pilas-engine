@@ -1,31 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Primeros pasos</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-  </style>
-  <link rel="stylesheet" href="estilo.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-  <div class="tc">
-    <a href="index.html">Regresar al índice</a>
-  </div>
-</head>
-<body>
-<header id="title-block-header">
-<h1 class="title">Primeros pasos</h1>
-</header>
-<p>Pilas es un herramienta diseñada para aprender a programar realizando videojuegos, por eso vamos a comenzar haciendo un pequeño juego paso a paso.</p>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Primeros pasos</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+    
+    <script type="text/javascript">
+      if (window.location.href.includes("theme-oscuro")) {
+        var style = document.createElement("style");
+        style.innerHTML = `
+          body {color: #ccc; background-color: #3e3e3e;}
+          h1, h2, h3, h4, h5 { color: white; }
+          a { color: #81a7ff; }
+          a:hover { color: #acc5ff; }
+          .odd { background-color: #313131; }
+          .even { background-color: #252525; }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // intercepta todos los links para que incluyan el tema oscuro si
+      // es necesario.
+      document.addEventListener("DOMContentLoaded", function() {
+        if (window.location.href.includes("theme-oscuro")) {
+          var links = document.querySelectorAll("a");
+
+          links.forEach(link => {
+            if (link.href.endsWith("html")) {
+              link.href += "?theme-oscuro=1";
+            }
+          });
+        }
+      });
+    </script>
+
+      <div class="tc">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Primeros pasos</h1>
+            </header>
+      <p>Pilas es un herramienta diseñada para aprender a programar realizando videojuegos, por eso vamos a comenzar haciendo un pequeño juego paso a paso.</p>
 <p>Cuando se abre Pilas por primera vez, aparece esta pantalla que llamamos asistente:</p>
 <p><img src="imagenes/primeros_pasos/principal.png" /></p>
 <p>Desde aquí se pueden acceder a todas las secciones de pilas, te recomendamos inspeccionarlas al menos una vez para familiarizarte con el entorno.</p>
@@ -64,8 +91,7 @@
 <p><img src="imagenes/primeros_pasos/nave-en-movimiento.png" /></p>
 <p>Vas a notar que aparece un rectángulo negro borde blanco en cada actor, ese punto es lo que se conoce como punto de control, y sirve para el punto de referencia de cada actor.</p>
 <p>Podes hacer que ese punto de control no se vea pulsando el interruptor “pos” que aparece abajo en la pantalla (pulsa “Detener” antes, así te deja cambiarlo):</p>
-<p><img src="imagenes/primeros_pasos/pos.png" /></p>
-<div class="tc">
+<p><img src="imagenes/primeros_pasos/pos.png" /></p>  <div class="tc">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>
@@ -73,6 +99,6 @@
   <div>
     <a href="index.html">Regresar al índice</a>
   </div>
-</div>
-</body>
+</div> 
+  </body>
 </html>

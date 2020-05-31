@@ -159,4 +159,8 @@ class Actores {
   barra_de_energia() {
     return this.crear_actor("barra_de_energia");
   }
+
+  interruptor_de_gravedad() {
+    return this.crear_actor("interruptor_de_gravedad");
+  }
 }

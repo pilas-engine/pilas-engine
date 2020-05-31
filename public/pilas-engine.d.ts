@@ -34,6 +34,7 @@ declare class Actores {
     boton_activable(): Actor;
     pantalla_completa(): Actor;
     barra_de_energia(): Actor;
+    interruptor_de_gravedad(): Actor;
 }
 declare class Animaciones {
     pilas: Pilas;

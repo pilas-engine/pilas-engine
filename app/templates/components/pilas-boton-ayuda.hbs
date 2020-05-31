@@ -1,0 +1,35 @@
+{{yield}}
+{{pilas-boton icono="ayuda" accion=(action "mostrar") texto="Manual"}}
+
+{{#ember-wormhole to="modal-ayuda"}}
+  <div class={{if modal_visible "" "dn"}}>
+    <div class="flex absolute absolute--fill default-cursor" id={{id}}>
+
+      <div {{action "ocultar"}} role="button" class="bg-black-50 z-1 animacion-aparecer absolute absolute--fill"></div>
+
+      <div class="flex texto borde ba shadow-3 flex-column flex-auto ma5 bg-fondo z-2 {{if medio "dialogo-medio"}} {{if reducido "h4-5 margin-left-auto margin-right-auto mw6"}}">
+
+        <div class="flex">
+          <h1 class="f4 pl2 flex1" id="titulo">Manual</h1>
+          <button class="pointer w2 h2 ma1 bn bg-fondo texto f3 pr2" {{action "ocultar"}} id="cerrar">×</button>
+        </div>
+
+        <div class="flex1 pa2 overflow-auto flex flex-column">
+          {{yield}}
+
+          <iframe
+            id="manual-en-modal"
+            src="manual/index.html?theme-oscuro=1"
+            sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts"
+            class="bn h-100 w-100 ba borde"
+            ></iframe>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+{{/ember-wormhole}}

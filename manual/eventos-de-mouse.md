@@ -80,7 +80,7 @@ Por ejemplo, imaginá que estamos haciendo un juego de cartas y queremos que la 
 
 El código del actor debería quedarnos algo similar a lo siguiente:
 
-```typescript
+```javascript
 class actor extends Actor {
   propiedades = {};
 

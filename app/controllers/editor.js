@@ -34,7 +34,8 @@ const queryParams = new QueryParams({
   hash: { defaultValue: null, replace: true, refresh: true },
   tamano: { defaultValue: 14, replace: true, refresh: true },
   mostrarModalDeAnimaciones: { defaultValue: false, replace: true },
-  mostrarModalDeSonidos: { defaultValue: false, replace: true }
+  mostrarModalDeSonidos: { defaultValue: false, replace: true },
+  mostrarModalDeAyuda: { defaultValue: true, replace: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {

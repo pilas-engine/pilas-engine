@@ -132,6 +132,9 @@ var Actores = (function () {
     Actores.prototype.barra_de_energia = function () {
         return this.crear_actor("barra_de_energia");
     };
+    Actores.prototype.interruptor_de_gravedad = function () {
+        return this.crear_actor("interruptor_de_gravedad");
+    };
     return Actores;
 }());
 var Animaciones = (function () {
@@ -1269,16 +1272,13 @@ var Historia = (function () {
         var cantidad = 60 * 14;
         var historia_reciente = this.fotos.slice(-cantidad);
         var cantidad_total = historia_reciente.length;
-        var _loop_1 = function (i) {
+        for (var i = 0; i < cantidad_total; i++) {
             var historia = historia_reciente[i];
             historia.actores.map(function (entidad) {
                 var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
-                graphics.fillStyle(entidad.id_color, i);
+                graphics.fillStyle(entidad.id_color, 1);
                 graphics.fillRect(x, y, 2, 2);
             });
-        };
-        for (var i = 0; i < cantidad_total; i++) {
-            _loop_1(i);
         }
     };
     Historia.prototype.obtener_cantidad_de_posiciones = function () {
@@ -4641,7 +4641,7 @@ var EscenaBase = (function () {
         var sonidos = this._sonidos_para_reproducir;
         sonidos = sonidos.filter(function (v, i) { return sonidos.indexOf(v) === i; });
         var maximo = 20;
-        var _loop_2 = function (i) {
+        var _loop_1 = function (i) {
             var nombre = sonidos[i];
             if (!this_1._sonidos_en_reproduccion[nombre]) {
                 this_1._sonidos_en_reproduccion[nombre] = 0;
@@ -4658,7 +4658,7 @@ var EscenaBase = (function () {
         };
         var this_1 = this, sonido;
         for (var i = 0; i < sonidos.length; i++) {
-            _loop_2(i);
+            _loop_1(i);
         }
         this._sonidos_para_reproducir = [];
     };

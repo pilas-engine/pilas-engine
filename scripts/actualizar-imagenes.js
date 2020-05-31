@@ -36,7 +36,7 @@ function es_directorio(ruta) {
 }
 
 function duplicar_estructura_y_archivos(listado, fuente, destino) {
-  console.log(`Creando minuaturas de recursos: ${fuente} → ${destino}`);
+  console.log(`    ${fuente} → ${destino}`);
 
   listado.map(ruta => {
     let ruta_destino = ruta.replace(fuente, destino);
@@ -61,6 +61,8 @@ async function main() {
   let imagenes = await find("recursos/imagenes");
   let bloques = await find("recursos/bloques");
   let decoracion = await find("recursos/decoracion");
+
+  console.log(`Creando miniaturas de recursos:`);
 
   duplicar_estructura_y_archivos(imagenes, "recursos/imagenes", "recursos/grilla-imagenes/imagenes");
   duplicar_estructura_y_archivos(bloques, "recursos/bloques", "recursos/grilla-imagenes/bloques");
