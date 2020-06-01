@@ -24,10 +24,19 @@ tr td {
   text-align: center;
 }
 
+.tr {
+  text-align: right;
+}
+
+.tl {
+  text-align: left;
+}
+
 h1,
 h2,
 h3 {
   color: #005590;
+  font-weight: 200;
 }
 
 pre.sourceCode {
@@ -50,4 +59,25 @@ img {
   display: block;
   padding: 1em;
   margin: auto;
+}
+
+.funcion pre:first-child {
+  margin: 0;
+  margin-top: 2em;
+}
+
+.funcion pre {
+  margin-left: 5em;
+  text-align: justify;
+  padding: 0.5em;
+  background-color: #303030;
+}
+
+.funcion p {
+  margin-left: 5em;
+  text-align: justify;
+}
+
+.dn {
+  display: none;
 }

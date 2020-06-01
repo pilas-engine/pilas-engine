@@ -1,5 +1,5 @@
 {{yield}}
-{{pilas-boton icono="ayuda" accion=(action "mostrar") texto="Manual"}}
+{{pilas-boton icono="ayuda" accion=(action "mostrar") texto="Ayuda"}}
 
 {{#ember-wormhole to="modal-ayuda"}}
   <div class={{if modal_visible "" "dn"}}>
@@ -7,16 +7,45 @@
 
       <div {{action "ocultar"}} role="button" class="bg-black-50 z-1 animacion-aparecer absolute absolute--fill"></div>
 
-      <div class="flex texto borde ba shadow-3 flex-column flex-auto ma5 bg-fondo z-2 {{if medio "dialogo-medio"}} {{if reducido "h4-5 margin-left-auto margin-right-auto mw6"}}">
+      <div class="flex texto borde ba shadow-3 flex-column flex-auto ma5 bg-fondo z-2">
 
         <div class="flex">
-          <h1 class="f4 pl2 flex1" id="titulo">Manual</h1>
-          <button class="pointer w2 h2 ma1 bn bg-fondo texto f3 pr2" {{action "ocultar"}} id="cerrar">×</button>
+          <div class="flex1"></div>
+
+          <div>
+            <div class="flex pt2 pl2">
+
+              {{pilas-solapa-de-ayuda
+                  texto="Manual"
+                  seleccionada=manual_seleccionado
+                  accion=(action "seleccionar_manual")
+              }}
+
+              {{pilas-solapa-de-ayuda
+                  texto="Glosario de funciones"
+                  seleccionada=glosario_seleccionado
+                  accion=(action "seleccionar_glosario")
+              }}
+
+              {{pilas-solapa-de-ayuda
+                  texto="Atajos de teclado"
+                  seleccionada=atajos_seleccionado
+                  accion=(action "seleccionar_atajos")
+              }}
+
+            </div>
+          </div>
+
+          <div class="flex1">
+          </div>
+
+          <div class="">
+            <button class="pointer w2 h2 ma1 bn bg-fondo texto f3 pr2" {{action "ocultar"}} id="cerrar">×</button>
+          </div>
         </div>
 
-        <div class="flex1 pa2 overflow-auto flex flex-column">
-          {{yield}}
 
+        <div class="flex1 ph2 pb2 overflow-auto {{if manual_seleccionado "flex" "dn"}} flex-column">
           <iframe
             id="manual-en-modal"
             src="manual/index.html?theme-oscuro=1"
@@ -24,8 +53,24 @@
             class="bn h-100 w-100 ba borde"
             ></iframe>
 
+        </div>
 
+        <div class="flex1 ph2 pb2 overflow-auto {{if glosario_seleccionado "flex" "dn"}} flex-column">
+          <iframe
+            id="glosario-en-modal"
+            src="manual/glosario.html?theme-oscuro=1&ocultar-navegacion=1"
+            sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts"
+            class="bn h-100 w-100 ba borde"
+            ></iframe>
+        </div>
 
+        <div class="flex1 ph2 pb2 overflow-auto {{if atajos_seleccionado "flex" "dn"}} flex-column">
+          <iframe
+            id="atajos-en-modal"
+            src="manual/atajos.html?theme-oscuro=1&ocultar-navegacion=1"
+            sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts"
+            class="bn h-100 w-100 ba borde"
+            ></iframe>
         </div>
 
       </div>

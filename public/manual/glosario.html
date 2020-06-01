@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="generator" content="pandoc" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-          <title>Colaborar con Pilas Engine</title>
+          <title>Glosario de funciones</title>
     <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -100,24 +100,67 @@
   </head>
   <body>
          <header id="title-block-header">
-      <h1 class="title">Colaborar con Pilas Engine</h1>
+      <h1 class="title">Glosario de funciones</h1>
             </header>
-      <p>Pilas Engine es un proyecto de Software Libre, que se desarrolla de forma colaborativa por un equipo de varios colaboradores, personas del equipo de desarrollo y la comunidad de usuarios.</p>
-<p><img src="imagenes/assets/colabora.png" /></p>
-<p>Todas las personas que quieran participar del desarrollo son bienvenidas, Pilas nos es solo una herramienta de software, es un proyecto colaborativo que sostiene un equipo de personas amigables y respetuosas que buscan mejorar la calidad de la educación brindándole a los Jóvenes la posibilidad de volverse protagonistas en el uso de la tecnología.</p>
-<p>Por ese motivo, queremos invitarte a participar. ¡Vos también podes formar parte del equipo de Pilas!.</p>
-<p>Te damos algunas ideas de participación que podrían interesante:</p>
-<h2 id="participar-en-el-foro-de-pilas-engine">Participar en el foro de Pilas Engine</h2>
-<p>La tarea mas recomendable para quienes recién comienzan es dar de alta una cuenta en nuestro foro (<a href="http://foro.pilas-engine.com.ar/">http://foro.pilas-engine.com.ar</a>), presentarse y ayudarnos a resolver preguntas de otros usuarios.</p>
-<p>No hace falta experiencia previa para colaborar en el foro, podes ingresar, saludar y contarnos qué te parece Pilas, cómo lo conociste; vas a notar que el foro es el lugar ideal para aportar ideas, conversar, y publicar juegos.</p>
-<h2 id="ayudar-a-difundir-pilas">Ayudar a difundir Pilas</h2>
-<p>Muchas personas no conocen Pilas, y creemos que podría interesarles. Así que otra forma de colaborar es difundir la existencia de Pilas entre las personas que conoces.</p>
-<p>Además, si conoces escuelas o proyectos donde se utilice Pilas dales ánimo para que nos cuenten sus proyectos, queremos ayudar y mejorar Pilas con cada posibilidad que se nos presente.</p>
-<p>También es super útil si tienes la posibilidad de mencionar Pilas las redes sociales: twitter, facebook, youtube o ¡donde quieras!</p>
-<h2 id="creá-juegos-cursos-o-tutoriales">Creá juegos, cursos o tutoriales</h2>
-<p>Necesitamos tutoriales, juegos y cursos sobre Pilas Engine.</p>
-<p>Si estás haciendo un juego con Pilas, contanos de qué se trata; puedes escribirnos directamente desde el foro de mensajes de la web (http://foro.pilas-engine.com.ar).</p>
-<p>Si te gusta enseñar y contar tus experiencias con la herramienta, te invitamos a escribir y proponer cursos dentro del foro; además, en la web tenemos una sección en donde podemos publicar artículos, así que seguramente también podamos ayudarte a subirlos ahí.</p>  <div class="tc navegacion">
+      <script>
+document.addEventListener("DOMContentLoaded", function() {
+  var input = document.querySelector("#buscador");
+
+  var timeout = null;
+
+  function debounce(func, wait) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    timeout = setTimeout(() => {
+      func.call(this);  
+      timeout = null;
+    }, 200);
+  }
+
+  function filtrar(valor) {
+    var funciones = document.querySelectorAll(".funcion");
+
+    funciones.forEach(elemento => {
+
+      if (elemento.firstElementChild.textContent.includes(valor)) {
+        elemento.classList.remove("dn");
+      } else {
+        elemento.classList.add("dn");
+      }
+
+    });
+  }
+
+  input.onkeydown = function(e) {
+    debounce(() => {
+      filtrar(this.value);
+    }, 500);
+  }
+
+});
+</script>
+<div class="tr">
+<p><input id="buscador" placeholder="Buscar ..." class="input"></p>
+</div>
+<div class="funcion">
+<pre><code>pilas.actores.clonar(nombre)</code></pre>
+<p>Consulta si existe un actor en la coordenada x e y. La función retorna <code>true</code> si hay un actor en esa posición o <code>false</code> en caso negativo.</p>
+<p>Por ejemplo:</p>
+<pre><code>❯ this.pilas.existe_actor_en(10, 10)
+❮ false</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actores_en(x, y)</code></pre>
+<p>Busca actores en la coordenada <code>x</code> e <code>y</code>. Si existen actores en esa posición retornará una lista con todas las referencias a esos actores. Y si ningún actor está en esa posición entonces retorna una lista vacía <code>[]</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actores_en(0, -94)
+‹ &lt;plataforma en (0.00, -90.00)&gt;
+
+› pilas.obtener_actores_en(200, 0)
+‹ []</code></pre>
+</div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>
