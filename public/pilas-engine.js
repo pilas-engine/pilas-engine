@@ -2979,6 +2979,7 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.cada_segundo = function (segundos_transcurridos) { };
+    ActorBase.prototype.cuando_transcurre_un_segundo = function (segundos_transcurridos) { };
     ActorBase.prototype.avanzar = function (rotacion, velocidad) {
         if (rotacion === void 0) { rotacion = null; }
         if (velocidad === void 0) { velocidad = 1; }
@@ -4138,7 +4139,13 @@ var laser = (function (_super) {
     function laser() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
-            imagen: "imagenes:disparos/laser"
+            imagen: "imagenes:disparos/laser",
+            etiqueta: "laser",
+            figura: "rectangulo",
+            figura_ancho: 38,
+            figura_alto: 12,
+            figura_dinamica: false,
+            figura_rebote: 0
         };
         return _this;
     }
@@ -4730,6 +4737,7 @@ var EscenaBase = (function () {
     EscenaBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
     EscenaBase.prototype.cuando_mueve = function (x, y, evento_original) { };
     EscenaBase.prototype.cada_segundo = function (segundos_transcurridos) { };
+    EscenaBase.prototype.cuando_transcurre_un_segundo = function (segundos_transcurridos) { };
     EscenaBase.prototype.cuando_pulsa_tecla = function (tecla, evento) { };
     EscenaBase.prototype.cuando_suelta_tecla = function (tecla, evento) { };
     EscenaBase.prototype.enviar_mensaje = function (mensaje, datos) {
@@ -4748,17 +4756,19 @@ var Escena = (function (_super) {
     __extends(Escena, _super);
     function Escena() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.cuadro = 0;
+        _this.cuadro = -1;
         return _this;
     }
     Escena.prototype.iniciar = function () { };
     Escena.prototype.pre_actualizar = function () {
         this.cuadro += 1;
-        if (this.cuadro % 60 === 0) {
+        if (this.cuadro > 0 && this.cuadro % 60 === 0) {
             var segundos_transcurridos_1 = Math.floor(this.cuadro / 60);
             this.cada_segundo(segundos_transcurridos_1);
+            this.cuando_transcurre_un_segundo(segundos_transcurridos_1);
             this.actores.map(function (actor) {
                 actor.cada_segundo(segundos_transcurridos_1);
+                actor.cuando_transcurre_un_segundo(segundos_transcurridos_1);
             });
         }
     };

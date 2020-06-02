@@ -75,86 +75,7 @@
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
     </style>
         <link rel="stylesheet" href="estilo.css" />
-    
-    <script type="text/javascript">
-      var estilos = [];
-
-      if (window.location.href.includes("theme-oscuro")) {
-        estilos.push(
-          `
-            body {color: #ccc; background-color: #3e3e3e;}
-            h1, h2, h3, h4, h5 { color: white; }
-            a { color: #81a7ff; }
-            a:hover { color: #acc5ff; }
-            .odd { background-color: #313131 !important; }
-            .even { background-color: #252525 !important; }
-
-            .input {
-              letter-spacing: 0;
-              border: 1px solid #333434;
-              background-color: #454646;
-              box-shadow: inset 0 1px rgba(0, 0, 0, 0.05);
-              color: #c6c8c8;
-              vertical-align: top;
-              outline: 0;
-              padding: 0.5em;
-              font-size: 18px;
-            }
-
-            .input:focus {
-              background-color: #595b5b;
-              color: #fff;
-              border: 1px solid #0036ff;
-              box-shadow: 0 0 0 2px #6fb5f1;
-            }
-          `
-        );
-      } else {
-        estilos.push(`
-          .input {
-            border: 1px solid #aaa;
-            box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-            outline: 0;
-            padding: 0.5em;
-            font-size: 18px;
-          }
-
-          .input:focus {
-            border: 1px solid #0036ff;
-            box-shadow: 0 0 0 2px #6fb5f1;
-          }
-        `);
-      }
-
-      if (window.location.href.includes("ocultar-navegacion")) {
-        estilos.push(`.navegacion {display: none !important; }`);
-      }
-
-      // Genera un tag "style" y agrega todos los estilos personalizados.
-      var style = document.createElement("style");
-
-      estilos.map(estilo => {
-        style.innerHTML += estilo;
-      });
-
-      document.head.appendChild(style);
-
-      // intercepta todos los links para que incluyan el tema oscuro si
-      // es necesario.
-      document.addEventListener("DOMContentLoaded", function() {
-        if (window.location.href.includes("?")) {
-          var links = document.querySelectorAll("a");
-          let parametros = window.location.href.split("?")[1];
-
-          links.forEach(link => {
-            if (link.href.endsWith("html")) {
-              link.href += "?" + parametros;
-            }
-          });
-        }
-      });
-    </script>
-
+        <script src="./manual.js" charset="utf-8"></script>
       <div class="tc navegacion">
   <a href="index.html">Regresar al índice</a>
 </div> 
@@ -203,15 +124,15 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>var actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">aceituna</span>()<span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a>pilas<span class="op">.</span><span class="fu">cada</span>(<span class="dv">2</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    actor<span class="op">.</span><span class="at">x</span> <span class="op">+=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  actor<span class="op">.</span><span class="at">x</span> <span class="op">+=</span> <span class="dv">50</span><span class="op">;</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>    if (actor<span class="op">.</span><span class="at">x</span> <span class="op">&gt;</span> <span class="dv">200</span>) {</span>
-<span id="cb4-7"><a href="#cb4-7"></a>      <span class="co">// retornar este valor &#39;true&#39; hace que la función deje de llamarse cada</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>      <span class="co">// dos segundos.</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>      return true<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>    }</span>
-<span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a>  })<span class="op">;</span></span></code></pre></div>
+<span id="cb4-6"><a href="#cb4-6"></a>  if (actor<span class="op">.</span><span class="at">x</span> <span class="op">&gt;</span> <span class="dv">200</span>) {</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="co">// retornar este valor &#39;true&#39; hace que</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="co">// la función deje de llamarse cada</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="co">// dos segundos.</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    return true<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  }</span>
+<span id="cb4-12"><a href="#cb4-12"></a>})<span class="op">;</span></span></code></pre></div>
 <h2 id="métodos-especiales">Métodos especiales</h2>
 <p>También existe un método llamado <code>cada_segundo</code> que los actores pueden utilizar para disparar una acción cada vez que transcurre un segundo en el juego. Por ejemplo, si queremos crear un actor que aumente su tamaño cada un segundo podemos definir el método así:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a>class caja extends Actor {</span>
@@ -225,7 +146,7 @@
 <span id="cb6-3"><a href="#cb6-3"></a>mi_actor<span class="op">.</span><span class="at">cada_segundo</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb6-4"><a href="#cb6-4"></a>  mi_actor<span class="op">.</span><span class="at">escala</span> <span class="op">+=</span> <span class="fl">0.5</span><span class="op">;</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a>  mi_actor<span class="op">.</span><span class="fu">decir</span>(<span class="st">&quot;¡pasó un segundo!&quot;</span>)<span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>}</span></code></pre></div>  <div class="tc navegacion">
+<span id="cb6-6"><a href="#cb6-6"></a>}<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

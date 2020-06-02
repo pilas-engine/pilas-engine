@@ -218,6 +218,7 @@ pilas_manual:
 	@rm -rf public/manual
 	@mkdir -p public/manual
 	@cp manual/templates/estilo.css public/manual
+	@cp manual/templates/manual.js public/manual
 	python3 scripts/generar_manual.py
 	cp -r manual/imagenes public/manual/
 	@echo ""

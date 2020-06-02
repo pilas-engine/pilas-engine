@@ -2,42 +2,45 @@
 title: Primeros pasos
 ---
 
-Pilas es un herramienta diseñada para aprender a programar realizando videojuegos, por eso vamos a comenzar haciendo un pequeño juego paso a paso.
+En esta sección me gustaría describir los pasos iniciales para comenzar a hacer juegos.
 
-Cuando se abre Pilas por primera vez, aparece esta pantalla que llamamos asistente:
+Pilas ha sido diseñada especialmente para que todas las personas puedan aprender a programar realizando videojuegos, de forma sencilla y totalmente en español.
 
-![](imagenes/primeros_pasos/principal.png)
+Esta es la pantalla inicial que aparecerá cuando abras pilas por primera vez:
+
+![portada](imagenes/primeros-pasos/portada.png)
 
 Desde aquí se pueden acceder a todas las secciones de pilas, te recomendamos inspeccionarlas al menos una vez para familiarizarte con el entorno.
 
-Para comenzar a dar los primeros pasos con este tutorial vamos a abrir opción principal: "**Abrir el editor**"
+Ahora bien, la parte más interesante de la herramienta se puede acceder pulsando el botón que dice "**Abrir el editor**"
 
 Desde esta sección, vas a ver una escena principal y varios paneles:
 
-![](imagenes/primeros_pasos/el-editor.png)
+![editor-1](imagenes/primeros-pasos/editor-1.png)
 
-Al principio puede parecer un poco abrumador… pero vamos a ir paso a paso:
+Al principio puede parecer un poco abrumador… pero vamos a ir paso a paso. Hay dos partes importantes en esta pantalla:
 
-![](imagenes/primeros_pasos/editor-enumerado.png)
+- A la izquierda está el panel de actores y propiedades. Donde vamos a ver listados todos los actores que aparecen en la pantalla. Los actores en este caso son: una plataforma, una pelota, una caja, un techo y suelo.
 
-La imagen anterior está enumerada para describir los panales principales:
+- Luego a la derecha de la pantalla tenemos el area del editor:
 
-1. El panel de la izquierda es el panel de escenas y actores, desde ahí vas a poder crear escenas, agregar actores a la escena o incluso eliminar cualquiera de las dos cosas. Desde esta sección también se pueden editar las propiedades de cualquier cosas que selecciones (vamos a ver esto más adelante).
+  ![editor-partes](imagenes/primeros-pasos/editor-partes.png)
 
-2. Justo arriba del area de juego, aparece un botón con la leyenda "Ejecutar", si pulsas ese botón vas a ver el juego en funcionamiento. Desde aquí también se va a poder cancelar la ejecución y otras cosas más (las vamos a ver a continuación).
+Hay otras cosas importantes en la interface, pero vamos a prestarle mayor atención a estas dos partes.
 
-3. A la derecha de la pantalla aparece el editor de código de pilas, desde donde se puede describir exactamente qué queremos que haga cada actor o escena.
+Sigamos:
 
+## ¡Pongamos el juego en funcionamiento!
 
-## ¡Pongamos en ejecución el juego!
+El botón que aparece arriba del area de juego es muy importante, porque nos permite poner en funcionamiento el juego y hacer una prueba real.
 
-El botón "ejecutar" que aparece arriba en el editor es uno de los más utilizados, ya que nos permite poner en funcionamiento el juego completo. Imagina que mientras que estamos desarrollando un juego vamos a necesitar ejecutar y probar el juego muchas veces.
+Así que hagamos el intento, pulsa el botón ejecutar una vez:
 
-Así que hagamos la prueba, pulsa el botón ejecutar una vez. Deberías ver que los objetos en pantalla comienzan a caer y rebotar por la pantalla:
+![boton-ejecutar](imagenes/primeros-pasos/boton-ejecutar.png)
 
-![](imagenes/primeros_pasos/pulsando-el-boton-ejecutar.png)
+Deberías ver cómo dos de los actores comienzan a rebotar en la plataforma:
 
-![](imagenes/primeros_pasos/ejecutar.gif)
+![primer-ejecucion](imagenes/primeros-pasos/primer-ejecucion.gif)
 
 Cuando pulsas el botón "ejecutar" además de ponerse en funcionamiento el juego sucede algo más: el editor por completo ingresará en un modo llamado "ejecución", así que no vamos a poder editar el código o cambiar la escena. Todo lo que suceda en ese momento es parte de la experiencia de usuario de nuestros juegos. Una vez que exportemos el juego, nuestros usuarios solo van a ver el juego, no el editor.
 
@@ -45,36 +48,142 @@ Esto es importante porque nos lleva a pensar en el diseño del juego y hacernos 
 
 Pero claro, por el momento solo podemos hacernos las preguntas, porque lo que tenemos en el editor es muy poquito, el usuario no puede hacer nada muy interesante aún… solo ver cómo rebotan esos dos objetos en la plataforma :|
 
-## Diseñando nuestro juego
+## Diseñando nuestro primer juego
 
 Para nuestro primer juego vamos a pensar en algo más interesante, queremos que el fondo del juego sea un cielo lleno de estrellas, que el usuario pueda mover una nave con el teclado y que luego de unos segundos comiencen a aparecer algunos enemigos.
 
-Pulsá el botón que dice "detener" en el editor (o pulsá la tecla Escape), tendrías que volver a ver el resto de los elementos del editor nuevamente habilitados.
+Pulsá el botón que dice "detener" en el editor (o pulsá la tecla `Esc`), tendrías que volver a ver el resto de los elementos del editor nuevamente habilitados.
 
-![](imagenes/primeros_pasos/editor-nuevamente.png)
+![editor-1](imagenes/primeros-pasos/editor-1.png)Borremos cada uno de los actores que aparecen en la pantalla, selecciona al actor pelota y luego pulsa el botón del cesto de basura tal y como muestra esta imagen:
 
-Borremos cada uno de los actores que aparecen en la pantalla, selecciona al actor pelota y luego pulsa el botón del cesto de basura tal y como muestra esta imagen:
-
-![](imagenes/primeros_pasos/borrar-actor.png)
+![borrar](imagenes/primeros-pasos/borrar.png)
 
 Repetí esos pasos hasta que la escena quede limpia, sin ningún actor:
 
-![](imagenes/primeros_pasos/escenas.png)
+![image-20200601230444058](imagenes/primeros-pasos/sin-actores.png)
 
-Ahora bien, con la escena completamente limpia, agreguemos un actor para representar a nuestro protagonista. Pulsa el botón "Crear actor" y luego selecciona la nave:
+Ahora bien, con la escena completamente limpia, agreguemos un actor para representar a nuestro protagonista:
 
-![](imagenes/primeros_pasos/crear-actor-1.png)
+Pulsa el botón "Crear actor" y luego selecciona la nave:
 
-![](imagenes/primeros_pasos/crear-actor-2.png)
+![crear-actor-1](imagenes/primeros-pasos/crear-actor-1.png)
 
-Pilas viene con varios actores diseñados para que puedas comenzar a realizar tus juegos rápidamente, sin embargo, esto no es una limitación, porque cada actor que ves en pantalla se puede cambiar complemente.
+![crear-actor-2](imagenes/primeros-pasos/crear-actor-2.png)
 
-Ahora sí pulsas el botón "Ejecutar", vas a ver que la nave aparece en el centro de la pantalla. Proba pulsar las teclas de dirección del teclado y espacio para controlar a la nave:
+Una vez que selecciones el actor vas a verlo formar parte de la escena así:
 
-![](imagenes/primeros_pasos/nave-en-movimiento.png)
+![creacion-de-la-nave](imagenes/primeros-pasos/creacion-de-la-nave.png)
 
-Vas a notar que aparece un rectángulo negro borde blanco en cada actor, ese punto es lo que se conoce como punto de control, y sirve para el punto de referencia de cada actor.
+Ahora pulsemos de nuevo el botón "ejecutar" y pulsa las flechitas del teclado para mover la nave por el escenario (¡y con la barra espaciadora vas a poder disparar!):
 
-Podes hacer que ese punto de control no se vea pulsando el interruptor "pos" que aparece abajo en la pantalla (pulsa "Detener" antes, así te deja cambiarlo):
+![nave](imagenes/primeros-pasos/nave-en-movimiento.gif)
 
-![](imagenes/primeros_pasos/pos.png)
+## Ambientando la escena en el espacio
+
+Al principio te mencioné que queríamos hacer que la nave pareciera estar en el espacio, sin embargo aún tenemos ese fondo azul que no se parece mucho al espacio...
+
+Así que hagamos un cambio, selecciona la escena del panel izquierdo, vas a ver que la parte inferior del panel va a cambiar:
+
+![panel-de-escena](imagenes/primeros-pasos/panel-de-escena.png)
+
+Esa sección que marcamos con el número "2" en la imagen contiene todas las propiedades de la escena. Si moves la barra de desplazamiento hacia abajo vas a ver una propiedad llamada fondo:
+
+![propiedad-fondo](imagenes/primeros-pasos/propiedad-fondo.png)
+
+Hace click sobre esa propiedad, donde está el ícono y vas a ver que pilas te propone varias imágenes para sustituir el fondo:
+
+![cambiar-fondo-1](imagenes/primeros-pasos/cambiar-fondo-1.png)
+
+Selecciona la del espacio:
+
+![fondo-espacio](imagenes/primeros-pasos/fondo-espacio.png)
+
+Vas a notar que el fondo de la pantalla va a cambiar por completo:
+
+![fondo-espacial-en-la-escena](imagenes/primeros-pasos/fondo-espacial-en-la-escena.png)
+
+## Creando más actores
+
+Ahora vamos a darle un poco mas de vida al juego: Nuestra nave está en el espacio pero no parece haber un motivo por el cual está ahí, pensemos una historia:
+
+"A causa de un experimento que se salió de control en la tierra, algunos objetos llegaron al espacio: bananas, manzanas y otras frutas comenzaron a ensuciar el espacio flotando por ahí. Nuestra misión es comandar una nave que tiene como objetivo "limpiar" el desorden de la basura espacial lo antes posible !!!"
+
+Bueno, no es una gran idea... pero es algo, algo que podemos construir, jugar y divertidos. ¡así que vamos a intentarlo!
+
+Pulsá el botón "Crear actor" nuevamente:
+
+![crear-actor](imagenes/primeros-pasos/crear-actor.png)
+
+Pero a diferencia de antes, que elegimos la nave, ahora elegí el actor que no tiene una imagen asignada:
+
+![actor-sin-imagen](imagenes/primeros-pasos/actor-sin-imagen.png)
+
+Luego, podes mover este actor usando el mouse, así no tapa a la nave:
+
+![mover-actor](imagenes/primeros-pasos/mover-actor.png)
+
+Ahora cambiemos la apariencia del actor. Este paso es muy similar al que hicimos antes, tendrías que seleccionar al actor, ir al panel de propiedades pero ahora pulsar la propiedad "imagen":
+
+![cambiando-imagen](imagenes/primeros-pasos/cambiando-imagen.png)
+
+y luego, selecciona alguna de las opciones. Por ejemplo una manzana:
+
+![manzana](imagenes/primeros-pasos/manzana.png)
+
+y te debería quedar así:
+
+![manzana-en-el-espacio](imagenes/primeros-pasos/manzana-en-el-espacio.png)
+
+## Agregando colisiones
+
+Vamos a hacer que la manzana se pueda destruir con los disparos de la nave.
+
+Para eso tenemos que volver a seleccionar el actor con apariencia de manzana y asignarle una figura física así:
+
+![propiedades-de-manzana](imagenes/primeros-pasos/propiedades-de-manzana.png)
+
+Estos parámetros admiten muchas combinaciones, pero te recomiendo que la figura sea "círculo", el radio de "32" y desactives la opción "Dinámica".
+
+Vas a notar que en la pantalla aparecerá un círculo azul al rededor del actor nuevo. Esto significa que el actor tiene un area de contacto para poder interactuar con el resto de los actores:
+
+![image-20200601235938682](imagenes/primeros-pasos/area-de-colision.png)
+
+## Reaccionando a las colisiones
+
+Para hacer que el actor manzana reaccione tenemos que escribir un poquito de código.
+
+Selecciona nuevamente al actor y pulsa la pestaña que aparece en la parte derecha de la pantalla que tiene el texto "Código":
+
+![solapa-codigo](imagenes/primeros-pasos/solapa-codigo.png)
+
+Cuando pulses esa pestaña, vas a ver que se abre un panel nuevo; un panel en donde tenemos código y un botón que dice "Recetas":
+
+![codigo-primera-vista](imagenes/primeros-pasos/codigo-primera-vista.png)
+
+El código es una de las cosas más importantes que incluye pilas, ya que el código nos permite darle órdenes a la computadora para que haga cosas, como eliminar actores, reaccionar al movimiento del mouse, emitir sonidos y todo lo que se te ocurra.
+
+Sin embargo para empezar vamos a tomar un atajo, vamos a pedirle a pilas que nos ayude a escribir el código para que la manzana se pueda eliminar fácilmente.
+
+Pulsa el botón que dice "Recetas":
+
+![receta-1](imagenes/primeros-pasos/receta-1.png)
+
+y luego selecciona la opción que dice "Cuando colisiona explotar":
+
+![receta-2](imagenes/primeros-pasos/receta-2.png)
+
+Cuando hagas eso, vas a notar que pilas escribió por nosotros una porción de código que hace algunas cosas por nosotros:
+
+![codigo-de-la-receta](imagenes/primeros-pasos/codigo-de-la-receta.png)
+
+Mas adelante en el manual vamos a escribir algo de código sin usar recetas, desde cero y comprendiendo cada función y expresión, por ahora lo dejaremos ahí.
+
+Ahora pulsa "Ejecutar" y corrobora cómo los disparos pueden limpiar el espacio de frutas:
+
+![explosion](imagenes/primeros-pasos/explosion.gif)
+
+## Es solo el principio
+
+Pilas es una herramienta super completa, y este mini-tutorial es solo el comienzo de una gran aventura. Seguí leyendo este manual para conocer muchas más cosas que incluye pilas o explora nuestro sitio web, vas a encontrar tutoriales, videos, juegos y muchas cosas más.
+
+¡Te damos la bienvenida a el mundo de la programación!

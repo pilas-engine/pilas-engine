@@ -1,5 +1,5 @@
 body {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.5;
   max-width: 720px;
   margin: auto;
@@ -68,9 +68,14 @@ img {
 
 .funcion pre {
   margin-left: 5em;
-  text-align: justify;
+  text-align: left;
   padding: 0.5em;
   background-color: #303030;
+}
+
+.funcion ul {
+  margin-left: 5em !important;
+  text-align: justify !important;
 }
 
 .funcion p {
@@ -80,4 +85,38 @@ img {
 
 .dn {
   display: none;
+}
+
+.small {
+  font-size: small;
+}
+
+.boton {
+  color: #c6c8c8;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.69);
+  vertical-align: top;
+  background-color: #595b5b;
+  box-shadow: inset 0 1px #737373;
+  border: 1px solid #333434;
+  border-radius: 4px;
+}
+
+.boton:hover {
+  background-color: #626465;
+}
+
+.boton:focus {
+  border: 1px solid #0036ff;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.36), 0 0 0 2px #6fb5f1;
+  outline: 0;
+}
+
+.boton:active {
+  border: 1px solid #333434;
+  background-color: #3f4041;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.v-mid {
+  vertical-align: middle;
 }

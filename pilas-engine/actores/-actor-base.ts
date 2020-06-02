@@ -183,28 +183,28 @@ class ActorBase {
       });
     });
 
-    this.sprite.on("pointerdown", (cursor:any) => {
+    this.sprite.on("pointerdown", (cursor: any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_hace_click(posicion.x, posicion.y, cursor);
       });
     });
 
-    this.sprite.on("pointerup", (cursor:any) => {
+    this.sprite.on("pointerup", (cursor: any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
       });
     });
 
-    this.sprite.on("pointerout", (cursor:any) => {
+    this.sprite.on("pointerout", (cursor: any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_sale(posicion.x, posicion.y, cursor);
       });
     });
 
-    this.sprite.on("pointermove", (cursor:any) => {
+    this.sprite.on("pointermove", (cursor: any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_mueve(posicion.x, posicion.y, cursor);
@@ -860,6 +860,8 @@ class ActorBase {
 
   cada_segundo(segundos_transcurridos: number) {}
 
+  cuando_transcurre_un_segundo(segundos_transcurridos: number) {}
+
   avanzar(rotacion: number = null, velocidad: number = 1) {
     if (rotacion === null) {
       rotacion = this.rotacion;
@@ -1063,7 +1065,7 @@ class ActorBase {
 
     if (clase) {
       if (this.tiene_habilidad(clase.name)) {
-        let mensaje =`No se aplica la habilidad ${clase.name} porque el actor ya la tenía vinculada.`
+        let mensaje = `No se aplica la habilidad ${clase.name} porque el actor ya la tenía vinculada.`;
         console.warn(mensaje);
         return mensaje;
       } else {

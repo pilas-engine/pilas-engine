@@ -142,9 +142,7 @@ class EscenaBase {
     let actores_a_eliminar = [];
 
     this.actores.map(actor => {
-
       try {
-
         if (!actor._vivo) {
           actor.sprite.destroy();
 
@@ -295,6 +293,8 @@ class EscenaBase {
    * Se ejecuta una vez por segundo.
    */
   cada_segundo(segundos_transcurridos: number) {}
+
+  cuando_transcurre_un_segundo(segundos_transcurridos: number) {}
 
   /**
    * Se ejecuta en el momento en que el usuario pulsa una tecla del teclado.

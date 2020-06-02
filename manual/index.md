@@ -30,10 +30,10 @@ Pilas Engine es una herramienta que te permite crear tus propios videojuegos y a
 - [Eventos de mouse o touch](eventos-de-mouse.html)
 - [Uso del teclado](uso-del-teclado.html)
 - [Dibujado simple en pantalla](dibujado_en_pantalla.html)
-- [Cómo exportar juegos](exportar_juegos.html)
-- [Pilas como biblioteca](pilas_como_biblioteca.html)
 
 Sección avanzada
 
+- [Cómo exportar juegos a .exe, web, mobile etc...](exportar_juegos.html)
 - [Colaborar con pilas](colaborar.html)
+- [Pilas como biblioteca](pilas_como_biblioteca.html)
 - [Entorno para colaboradores de Pilas](entorno.html)

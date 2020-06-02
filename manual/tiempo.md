@@ -2,8 +2,6 @@
 title: Manejo de tiempo
 ---
 
-
-
 Pilas ofrece varias formas de ejecutar funciones cada determinado tiempo. Esto es útil para crear enemigos, crear relojes para hacer más desafiante un juego o incluso para aumentar la dificultad de un juego.
 
 ## Funciones manejar el tiempo
@@ -74,15 +72,15 @@ posición x igual a 200. Podrías implementarlo de esta forma:
 var actor = pilas.actores.aceituna();
 
 pilas.cada(2, () => {
-    actor.x += 50;
+  actor.x += 50;
 
-    if (actor.x > 200) {
-      // retornar este valor 'true' hace que la función deje de llamarse cada
-      // dos segundos.
-      return true;
-    }
-
-  });
+  if (actor.x > 200) {
+    // retornar este valor 'true' hace que
+    // la función deje de llamarse cada
+    // dos segundos.
+    return true;
+  }
+});
 ```
 
 ## Métodos especiales
@@ -109,5 +107,5 @@ var mi_actor = pilas.obtener_actor_por_nombre("caja");
 mi_actor.cada_segundo = () => {
   mi_actor.escala += 0.5;
   mi_actor.decir("¡pasó un segundo!");
-}
+};
 ```

@@ -329,10 +329,17 @@ class Pilas {
     });
   }
 
+  /**
+   * Retorna la cantidad de actores en la escena actual.
+   */
   obtener_cantidad_de_actores() {
     return this.obtener_actores().length;
   }
 
+  /**
+   * Retorna una estructura de datos tipo diccionario con todos los nombres
+   * y referencias a los actores.
+   */
   obtener_diccionario_de_actores() {
     let diccionario = {};
 
@@ -343,6 +350,10 @@ class Pilas {
     return diccionario;
   }
 
+  /**
+   * Retorna una lista de todos los actores que están ocupando la coordenada
+   * `x` e `y` enviada por parámetro.
+   */
   obtener_actores_en(_x: number, _y: number) {
     let { x, y } = this.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
     let actores = this.obtener_actores();
@@ -450,6 +461,10 @@ class Pilas {
     return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
   }
 
+  /**
+   * Retorna la cantidad de pixels de distancia entre dos puntos
+   * indicados por parámetros.
+   */
   obtener_distancia_entre_puntos(x: number, y: number, x2: number, y2: number) {
     var dx = x - x2;
     var dy = y - y2;
@@ -461,6 +476,10 @@ class Pilas {
     return this.obtener_distancia_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
   }
 
+  /**
+   * Retorna el ángulo en grados que se forma al trazar una linea
+   * entre los puntos enviados por parámetro.
+   */
   obtener_angulo_entre_puntos(x: number, y: number, x2: number, y2: number) {
     let dx = x2 - x;
     let dy = y2 - y;
@@ -484,10 +503,16 @@ class Pilas {
     return this.obtener_angulo_entre_puntos(actor1.x, actor1.y, actor2.x, actor2.y);
   }
 
+  /**
+   * Hace que el puntero del mouse sea invisible.
+   */
   ocultar_cursor() {
     this.modo.input.setDefaultCursor("none");
   }
 
+  /**
+   * Permite cambiar el puntero del mouse.
+   */
   definir_cursor(nombre: string) {
     let nombres = {
       normal: "default",
@@ -502,10 +527,16 @@ class Pilas {
     this.escena.observar(nombre, variable);
   }
 
+  /**
+   * Permite clonar un actor en la posición inicial.
+   */
   clonar(nombre: string) {
     return this.modo.clonar_actor_por_nombre(nombre);
   }
 
+  /**
+   * Permite clonar un actor en la posición solicitada.
+   */
   clonar_en(nombre: string, x: number, y: number) {
     let actor = this.modo.clonar_actor_por_nombre(nombre);
     actor.x = x;
@@ -513,6 +544,9 @@ class Pilas {
     return actor;
   }
 
+  /**
+   * Permite clonar un actor en la posición del mouse.
+   */
   clonar_en_la_posión_del_cursor(nombre: string) {
     let actor = this.modo.clonar_actor_por_nombre(nombre);
     actor.x = this.cursor_x;
@@ -520,6 +554,9 @@ class Pilas {
     return actor;
   }
 
+  /**
+   * Permite clonar un actor en una posición aleatoria.
+   */
   clonar_en_posicion_al_azar(nombre: string) {
     let x = this.azar(-200, 200);
     let y = this.azar(-200, 200);

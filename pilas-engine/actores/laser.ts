@@ -1,9 +1,15 @@
 class laser extends Actor {
   propiedades = {
-    imagen: "imagenes:disparos/laser"
+    imagen: "imagenes:disparos/laser",
+    etiqueta: "laser",
+    figura: "rectangulo",
+    figura_ancho: 38,
+    figura_alto: 12,
+    figura_dinamica: false,
+    figura_rebote: 0
   };
 
-  velocidad;
+  velocidad: number;
 
   iniciar() {
     this.centro_x = 0.3;

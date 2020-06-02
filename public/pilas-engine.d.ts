@@ -636,6 +636,7 @@ declare class ActorBase {
     espejado: boolean;
     espejado_vertical: boolean;
     cada_segundo(segundos_transcurridos: number): void;
+    cuando_transcurre_un_segundo(segundos_transcurridos: number): void;
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
     reproducir_animacion(nombre_de_la_animacion: any): void;
@@ -974,8 +975,14 @@ declare class interruptor_de_gravedad extends Actor {
 declare class laser extends Actor {
     propiedades: {
         imagen: string;
+        etiqueta: string;
+        figura: string;
+        figura_ancho: number;
+        figura_alto: number;
+        figura_dinamica: boolean;
+        figura_rebote: number;
     };
-    velocidad: any;
+    velocidad: number;
     iniciar(): void;
     actualizar(): void;
     eliminar_si_sale_de_la_pantalla(): void;
@@ -1189,6 +1196,7 @@ declare class EscenaBase {
     cuando_hace_click(x: number, y: number, evento_original: any): void;
     cuando_mueve(x: number, y: number, evento_original: any): void;
     cada_segundo(segundos_transcurridos: number): void;
+    cuando_transcurre_un_segundo(segundos_transcurridos: number): void;
     cuando_pulsa_tecla(tecla: string, evento: any): void;
     cuando_suelta_tecla(tecla: string, evento: any): void;
     enviar_mensaje(mensaje: string, datos?: any): void;
@@ -1198,7 +1206,7 @@ declare class Escena extends EscenaBase {
     cuadro: number;
     iniciar(): void;
     pre_actualizar(): void;
-    obtener_oscilacion(velocidad: any, intensidad: any): number;
+    obtener_oscilacion(velocidad: number, intensidad: number): number;
 }
 declare class Normal extends Escena {
     iniciar(): void;
