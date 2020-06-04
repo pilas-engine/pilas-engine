@@ -7614,7 +7614,7 @@ var ModoCargador = (function (_super) {
             decode: function (input) {
                 input = this.removePaddingChars(input);
                 input = this.removePaddingChars(input);
-                var bytes = parseInt((input.length / 4) * 3, 10);
+                var bytes = parseInt("" + (input.length / 4) * 3, 10);
                 var uarray;
                 var chr1, chr2, chr3;
                 var enc1, enc2, enc3, enc4;

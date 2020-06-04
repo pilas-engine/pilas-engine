@@ -259,20 +259,22 @@ class ModoCargador extends Modo {
     var Base64Binary = {
       _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
 
-      removePaddingChars: function(input) {
+      removePaddingChars: function(input: any) {
         var lkey = this._keyStr.indexOf(input.charAt(input.length - 1));
+
         if (lkey == 64) {
           return input.substring(0, input.length - 1);
         }
+
         return input;
       },
 
-      decode: function(input) {
+      decode: function(input: any) {
         //get last chars to see if are valid
         input = this.removePaddingChars(input);
         input = this.removePaddingChars(input);
 
-        var bytes = parseInt((input.length / 4) * 3, 10);
+        var bytes = parseInt("" + (input.length / 4) * 3, 10);
 
         var uarray;
         var chr1, chr2, chr3;
