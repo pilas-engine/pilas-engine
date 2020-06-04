@@ -18,7 +18,7 @@ class EscenaBase {
   desplazamiento_del_fondo_y: number;
   proyecto: any;
 
-  constructor(pilas) {
+  constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.actores = [];
     this.pilas.utilidades.obtener_id_autoincremental();

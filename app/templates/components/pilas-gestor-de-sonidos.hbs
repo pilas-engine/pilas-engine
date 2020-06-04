@@ -2,11 +2,15 @@
 <div class="flex vh-100">
 
   <div class="w5 pl2 pr3 flex flex-column">
-    <div class="">
-      {{!pilas-boton accion=(action "crear_animación_nueva") texto="Crear una animación" icono="mas"}}
+    <div>
+      {{pilas-boton-importar-sonido
+          sonidos=sonidos
+          cuando_procesa_archivos=(action "incorporar_sonidos_al_proyecto")
+      }}
     </div>
 
-
+    <div class="h1">
+    </div>
 
     <div class="ba borde relative flex1 overflow-y-auto unselectable {{if iniciando "o-50 disabled" ""}}">
 
@@ -15,8 +19,6 @@
           {{pilas-spinner}}
         </div>
       {{/if}}
-
-
 
       {{#each sonidos as |sonido|}}
 
@@ -38,6 +40,7 @@
 
   <div class="flex1 flex flex-column tc">
     <div class="tl f6">
+
       <div class="lh-copy">
         Ayuda: para usar este sonido dentro del juego podes escribir el siguiente código:
       </div>
@@ -47,12 +50,18 @@
         {{pilas-boton-copiar texto=(helper-sonido sonido_seleccionado.nombre)}}
       </div>
 
+      <div class="lh-copy">
+        Ten en cuenta que los sonidos tienen que ocupar menos de 200kb, y estar en un formato
+        de compresión .mp3 para optimizar el tamaño del proyecto.
+      </div>
+
     </div>
 
     {{pilas-previsualizacion-de-sonido
       iniciando=iniciando
       sonido=sonido_seleccionado
       id=id
+      proyectoDelUsuario=proyecto
       recursos=recursos
       cuando_termina_de_reproducir=(action "cuando_termina_de_reproducir")
     }}

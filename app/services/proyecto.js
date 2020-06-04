@@ -110,15 +110,28 @@ export default Service.extend({
     this.set("canvas_disponible", false);
 
     lista_de_archivos.map(item => {
-      // si el archivo ya estaba en el proyecto ...
       let anterior = this.proyecto.imagenes.findBy("nombre", item.nombre);
 
-      // ... reemplaza su contenido.
       if (anterior) {
         set(anterior, "contenido", item.contenido);
       } else {
-        // si no estaba, lo carga por primera vez.
         this.proyecto.imagenes.pushObject(item);
+      }
+    });
+
+    this.bus.trigger("recargarCanvasDePilas");
+  },
+
+  incorporar_sonidos_al_proyecto(lista_de_archivos) {
+    this.set("canvas_disponible", false);
+
+    lista_de_archivos.map(item => {
+      let anterior = this.proyecto.sonidos.findBy("nombre", item.nombre);
+
+      if (anterior) {
+        set(anterior, "contenido", item.contenido);
+      } else {
+        this.proyecto.sonidos.pushObject(item);
       }
     });
 

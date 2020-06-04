@@ -378,6 +378,15 @@ declare class Utilidades {
     sincronizar_contenedor(contenedor: any, sprite: any): void;
     obtener_nombre_de_la_tecla_desde_un_evento(evento: any): any;
 }
+declare class Sonidos {
+    pilas: Pilas;
+    _sonidos: [string?];
+    constructor(pilas: Pilas);
+    agregar_sonido(nombre: string): void;
+    existe_sonido(nombre: string): boolean;
+    obtener_sonido_con_nombre_similar(nombre: string): any;
+    hay_sonidos_cargados(): boolean;
+}
 declare var NineSlice: any;
 declare var HOST: string;
 declare class Pilas {
@@ -387,15 +396,13 @@ declare class Pilas {
     utilidades: Utilidades;
     escenas: Escenas;
     historia: Historia;
-    sonidos: {
-        [key: string]: any;
-    };
     actores: Actores;
     animaciones: Animaciones;
     Phaser: any;
     nombre_del_contexto: string;
     eventos: Eventos;
     colores: Colores;
+    sonidos: Sonidos;
     recursos: any;
     fisica: Fisica;
     habilidades: Habilidades;
@@ -1166,7 +1173,7 @@ declare class EscenaBase {
     desplazamiento_del_fondo_x: number;
     desplazamiento_del_fondo_y: number;
     proyecto: any;
-    constructor(pilas: any);
+    constructor(pilas: Pilas);
     reproducir_sonido(nombre: string): void;
     planificar_reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
@@ -1713,6 +1720,7 @@ declare class ModoCargador extends Modo {
     create(): void;
     private crear_fuente_bitmap;
     cuando_progresa_la_carga(progreso: any): void;
+    convertir_sonido_en_array_buffer(sonido: any, callback: any): void;
 }
 declare class ModoEditor extends Modo {
     pilas: Pilas;

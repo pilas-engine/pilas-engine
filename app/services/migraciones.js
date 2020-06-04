@@ -82,6 +82,48 @@ export default Service.extend({
       proyecto.set("modo_de_video", "suavizado");
     }
 
+    // migración 2020-06-02: agregando sonidos al proyecto para que se puedan editar.
+    if (!proyecto.get("sonidos")) {
+      proyecto.set("sonidos", [
+        {
+          nombre: "laser",
+          ruta: "sonidos/laser.wav"
+        },
+        {
+          nombre: "explosion",
+          ruta: "sonidos/explosion.wav"
+        },
+        {
+          nombre: "gallina",
+          ruta: "sonidos/gallina.wav"
+        },
+        {
+          nombre: "moneda",
+          ruta: "sonidos/moneda.wav"
+        },
+        {
+          nombre: "salto-corto",
+          ruta: "sonidos/salto-corto.wav"
+        },
+        {
+          nombre: "salto-largo",
+          ruta: "sonidos/salto-largo.wav"
+        },
+        {
+          nombre: "seleccion-aguda",
+          ruta: "sonidos/seleccion-aguda.wav"
+        },
+        {
+          nombre: "seleccion-grave",
+          ruta: "sonidos/seleccion-grave.wav"
+        },
+        {
+          nombre: "comer",
+          ruta: "sonidos/comer.wav"
+        }
+      ]);
+    }
+
     return proyecto;
   },
 

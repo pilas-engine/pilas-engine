@@ -1,4 +1,5 @@
 /// <reference path="utilidades.ts"/>
+/// <reference path="sonidos.ts"/>
 
 declare var NineSlice: any;
 
@@ -16,7 +17,6 @@ class Pilas {
   utilidades: Utilidades;
   escenas: Escenas;
   historia: Historia;
-  sonidos: { [key: string]: any };
   actores: Actores;
   animaciones: Animaciones;
   Phaser: any;
@@ -25,6 +25,7 @@ class Pilas {
 
   eventos: Eventos;
   colores: Colores;
+  sonidos: Sonidos;
 
   recursos: any;
 
@@ -56,7 +57,7 @@ class Pilas {
     this.utilidades = new Utilidades(this);
     this.escenas = new Escenas(this);
     this.historia = new Historia(this);
-    this.sonidos = {};
+    this.sonidos = new Sonidos(this);
     this.actores = new Actores(this);
     this.animaciones = new Animaciones(this);
     this.fisica = new Fisica(this);
@@ -277,7 +278,16 @@ class Pilas {
   }
 
   reproducir_sonido(nombre: string) {
-    this.escena.planificar_reproducir_sonido(nombre);
+    if (this.sonidos.existe_sonido(nombre)) {
+      this.escena.planificar_reproducir_sonido(nombre);
+    } else {
+      if (this.sonidos.hay_sonidos_cargados()) {
+        let alternativa = this.sonidos.obtener_sonido_con_nombre_similar(nombre);
+        throw new Error(`No existe un sonido llamado "${nombre}", ¿quisiste decir "${alternativa}"?`);
+      } else {
+        throw new Error(`No se puede reproducir el sonido "${nombre}" porque no hay ningún sonido en el proyecto.`);
+      }
+    }
   }
 
   obtener_actores() {

@@ -1416,6 +1416,7 @@ var Mensajes = (function () {
     };
     Mensajes.prototype.atender_mensaje_iniciar_pilas = function (datos) {
         this.pilas.nombre_del_contexto = datos.nombre_del_contexto || "sin_nombre_de_contexto";
+        datos.recursos.sonidos = datos.sonidos;
         this.pilas.iniciar_phaser(datos.ancho, datos.alto, datos.recursos, datos.opciones, datos.imagenes);
     };
     Mensajes.prototype.atender_mensaje_definir_estados_de_depuracion = function (datos) {
@@ -1717,6 +1718,25 @@ var Utilidades = (function () {
     };
     return Utilidades;
 }());
+var Sonidos = (function () {
+    function Sonidos(pilas) {
+        this.pilas = pilas;
+        this._sonidos = [];
+    }
+    Sonidos.prototype.agregar_sonido = function (nombre) {
+        this._sonidos.push(nombre);
+    };
+    Sonidos.prototype.existe_sonido = function (nombre) {
+        return this._sonidos.indexOf(nombre) > -1;
+    };
+    Sonidos.prototype.obtener_sonido_con_nombre_similar = function (nombre) {
+        return this.pilas.utilidades.obtener_mas_similar(nombre, this._sonidos);
+    };
+    Sonidos.prototype.hay_sonidos_cargados = function () {
+        return this._sonidos.length > 0;
+    };
+    return Sonidos;
+}());
 var HOST = "file://";
 if (window.location.host) {
     HOST = window.location.origin;
@@ -1736,7 +1756,7 @@ var Pilas = (function () {
         this.utilidades = new Utilidades(this);
         this.escenas = new Escenas(this);
         this.historia = new Historia(this);
-        this.sonidos = {};
+        this.sonidos = new Sonidos(this);
         this.actores = new Actores(this);
         this.animaciones = new Animaciones(this);
         this.fisica = new Fisica(this);
@@ -1936,7 +1956,18 @@ var Pilas = (function () {
         };
     };
     Pilas.prototype.reproducir_sonido = function (nombre) {
-        this.escena.planificar_reproducir_sonido(nombre);
+        if (this.sonidos.existe_sonido(nombre)) {
+            this.escena.planificar_reproducir_sonido(nombre);
+        }
+        else {
+            if (this.sonidos.hay_sonidos_cargados()) {
+                var alternativa = this.sonidos.obtener_sonido_con_nombre_similar(nombre);
+                throw new Error("No existe un sonido llamado \"" + nombre + "\", \u00BFquisiste decir \"" + alternativa + "\"?");
+            }
+            else {
+                throw new Error("No se puede reproducir el sonido \"" + nombre + "\" porque no hay ning\u00FAn sonido en el proyecto.");
+            }
+        }
     };
     Pilas.prototype.obtener_actores = function () {
         return this.escena.actores;
@@ -7403,9 +7434,21 @@ var ModoCargador = (function (_super) {
         this.load.multiatlas("decoracion", "decoracion.json", "./");
         this.load.multiatlas("fuentes", "fuentes.json", "./");
         this.load.json("fuentes-datos-json", "fuentes-datos.json");
+        var _loop_2 = function (i) {
+            var sonido = this_2.pilas.recursos.sonidos[i];
+            this_2.pilas.sonidos.agregar_sonido(sonido.nombre);
+            if (sonido.contenido) {
+                this_2.convertir_sonido_en_array_buffer(sonido, function (buffer) {
+                    _this.cache.audio.add(sonido.nombre, buffer);
+                });
+            }
+            else {
+                this_2.load.audio(sonido.nombre, sonido.ruta, {});
+            }
+        };
+        var this_2 = this;
         for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
-            var sonido = this.pilas.recursos.sonidos[i];
-            this.load.audio(sonido.nombre, sonido.ruta, {});
+            _loop_2(i);
         }
         if (this.pilas.recursos.atlas) {
             for (var i = 0; i < this.pilas.recursos.atlas.length; i++) {
@@ -7556,6 +7599,53 @@ var ModoCargador = (function (_super) {
                 progreso: Math.ceil(progreso * 100)
             });
         }
+    };
+    ModoCargador.prototype.convertir_sonido_en_array_buffer = function (sonido, callback) {
+        var _this = this;
+        var Base64Binary = {
+            _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+            removePaddingChars: function (input) {
+                var lkey = this._keyStr.indexOf(input.charAt(input.length - 1));
+                if (lkey == 64) {
+                    return input.substring(0, input.length - 1);
+                }
+                return input;
+            },
+            decode: function (input) {
+                input = this.removePaddingChars(input);
+                input = this.removePaddingChars(input);
+                var bytes = parseInt((input.length / 4) * 3, 10);
+                var uarray;
+                var chr1, chr2, chr3;
+                var enc1, enc2, enc3, enc4;
+                var i = 0;
+                var j = 0;
+                uarray = new Uint8Array(bytes);
+                input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+                for (i = 0; i < bytes; i += 3) {
+                    enc1 = this._keyStr.indexOf(input.charAt(j++));
+                    enc2 = this._keyStr.indexOf(input.charAt(j++));
+                    enc3 = this._keyStr.indexOf(input.charAt(j++));
+                    enc4 = this._keyStr.indexOf(input.charAt(j++));
+                    chr1 = (enc1 << 2) | (enc2 >> 4);
+                    chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                    chr3 = ((enc3 & 3) << 6) | enc4;
+                    uarray[i] = chr1;
+                    if (enc3 != 64)
+                        uarray[i + 1] = chr2;
+                    if (enc4 != 64)
+                        uarray[i + 2] = chr3;
+                }
+                return uarray;
+            }
+        };
+        var buffer2 = Base64Binary.decode(sonido.contenido.split("64,")[1]).buffer;
+        var audioCtx = new (window["AudioContext"] || window["webkitAudioContext"])();
+        audioCtx.decodeAudioData(buffer2, function (buffer) {
+            callback.call(_this, buffer);
+        }, function (e) {
+            console.log("Error with decoding audio data" + e.err);
+        });
     };
     return ModoCargador;
 }(Modo));

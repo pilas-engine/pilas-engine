@@ -1,0 +1,13 @@
+{{pilas-boton
+  accion=(action "seleccionar_sonido")
+  texto="Cargar un sonido mp3"
+  icono="mas"}}
+
+
+<div class="dn">
+  <input
+    multiple="true"
+    onchange={{action "procesar_sonido_seleccionado"}}
+    accept="audio/mp3"
+    type="file">
+</div>

@@ -10,7 +10,7 @@ export default Service.extend({
   tarea: task(function*() {
     yield timeout(500);
 
-    let data = yield this.__deprecated_obtenerRecursos();
+    let data = {};
 
     let imagenes = yield this.obtenerImagenes("imagenes.json");
     let bloques = yield this.obtenerImagenes("bloques.json");
@@ -43,25 +43,6 @@ export default Service.extend({
     } else {
       return this.generar_respuesta_como_promesa_inmediata();
     }
-  },
-
-  __deprecated_obtenerRecursos() {
-    return new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest();
-
-      xhr.open("GET", `${config.rootURL}recursos.json`);
-      xhr.setRequestHeader("Content-Type", "application/json");
-
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          resolve(JSON.parse(xhr.responseText));
-        } else {
-          reject(xhr.status);
-        }
-      };
-
-      xhr.send();
-    });
   },
 
   obtenerImagenes(nombre_del_archivo) {

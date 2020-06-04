@@ -65,6 +65,12 @@ export default Component.extend({
         imagenes_para_cargar_desde_el_proyecto = this.proyecto.imagenes;
       }
 
+      let sonidos_para_cargar_desde_el_proyecto = [];
+
+      if (this.proyecto && this.proyecto.sonidos) {
+        sonidos_para_cargar_desde_el_proyecto = this.proyecto.sonidos;
+      }
+
       if (!this.nombre_del_contexto) {
         throw new Error(`Imposible iniciar pilas-canvas sin nombre de contexto.`);
       }
@@ -76,7 +82,8 @@ export default Component.extend({
         nombre_del_contexto: this.nombre_del_contexto,
         recursos: this.get("recursos.data"),
         opciones: opciones_de_pilas,
-        imagenes: imagenes_para_cargar_desde_el_proyecto
+        imagenes: imagenes_para_cargar_desde_el_proyecto,
+        sonidos: sonidos_para_cargar_desde_el_proyecto
       };
 
       this.set("funcionParaAtenderMensajes", e => {

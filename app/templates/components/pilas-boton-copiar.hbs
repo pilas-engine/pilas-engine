@@ -3,7 +3,11 @@
     {{pilas-mini-icono icono="copiar"}}
   </button>
 {{else}}
-  <button class="f7 boton verdana pointer link unselectable" name="button" {{action "cuando_hace_click"}}>{{texto_del_boton}}</button>
+  <button class="f7 boton verdana link unselectable {{if desactivar "o-50" "pointer"}}"
+          disabled={{desactivar}}
+          name="button" {{action "cuando_hace_click"}}>
+    {{texto_del_boton}}
+  </button>
 {{/if}}
 
-<input id="input-para-copiar" class="o-0 absolute" style="width: 1px" value={{texto}}></input
+<input id="input-para-copiar" class="o-0 absolute" style="width: 1px" value={{texto}}>

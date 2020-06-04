@@ -6,6 +6,7 @@ export default Component.extend({
   tagName: "",
   proyecto: null,
   recursos: service(),
+  servicioProyecto: service("proyecto"),
   iniciando: true,
   id: 1,
 
@@ -17,45 +18,8 @@ export default Component.extend({
   },
 
   cargar_sonidos() {
-    let sonidos = [
-      {
-        nombre: "laser",
-        ruta: "sonidos/laser.wav"
-      },
-      {
-        nombre: "explosion",
-        ruta: "sonidos/explosion.wav"
-      },
-      {
-        nombre: "gallina",
-        ruta: "sonidos/gallina.wav"
-      },
-      {
-        nombre: "moneda",
-        ruta: "sonidos/moneda.wav"
-      },
-      {
-        nombre: "salto-corto",
-        ruta: "sonidos/salto-corto.wav"
-      },
-      {
-        nombre: "salto-largo",
-        ruta: "sonidos/salto-largo.wav"
-      },
-      {
-        nombre: "seleccion-aguda",
-        ruta: "sonidos/seleccion-aguda.wav"
-      },
-      {
-        nombre: "seleccion-grave",
-        ruta: "sonidos/seleccion-grave.wav"
-      }
-    ];
-
-    this.set(
-      "sonidos",
-      sonidos.map(s => EmberObject.create(s))
-    );
+    let sonidos = this.proyecto.sonidos.map(s => EmberObject.create(s));
+    this.set("sonidos", sonidos);
   },
 
   actions: {
@@ -69,6 +33,13 @@ export default Component.extend({
 
     cuando_termina_de_reproducir(nombre) {
       this.sonidos.findBy("nombre", nombre).set("reproduciendo", false);
+    },
+
+    incorporar_sonidos_al_proyecto(lista_de_sonidos) {
+      this.servicioProyecto.incorporar_sonidos_al_proyecto(lista_de_sonidos);
+      this.set("iniciando", true);
+
+      this.cargar_sonidos();
     }
   }
 });

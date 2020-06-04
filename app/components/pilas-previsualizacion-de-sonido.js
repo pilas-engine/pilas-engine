@@ -1,12 +1,14 @@
 import Component from "@ember/component";
 import { observer } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { computed } from "@ember/object";
 
 export default Component.extend({
   nombre_del_contexto: "pilas-previsualizacion-de-sonido",
   servicioProyecto: service("proyecto"),
   compilador: service(),
   bus: service(),
+  proyecto: null,
   pixelart: false,
   tagName: "",
 
@@ -14,6 +16,10 @@ export default Component.extend({
     if (!this.iniciando) {
       this.reproducir_el_sonido_actual();
     }
+  }),
+
+  sonidos: computed("proyectoDelUsuario.sonidos", function() {
+    return this.proyectoDelUsuario.sonidos;
   }),
 
   init() {
@@ -45,6 +51,8 @@ export default Component.extend({
       ancho: 50,
       alto: 50,
       imagenes: imagenes_heredadas,
+      modo_de_video: "pixelart",
+      sonidos: this.sonidos,
       codigos: {
         proyecto: "class Proyecto { iniciar () {} }",
         escenas: [
