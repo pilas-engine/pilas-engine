@@ -5,6 +5,8 @@ DATE=`date +'%y.%m.%d %H:%M:%S'`
 
 # Le indica a la compilación de binarios si puede borrar todos los .map
 ELIMINAR_MAPS=1
+COMPILAR_EN_WINDOWS=1
+EMPAQUETAR_PARA_SERVIDOR_ESTATICO=1
 
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
@@ -176,12 +178,14 @@ endif
 	$(call log, "Compilando para osx - 64 bits ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=darwin --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.icn
+ifeq ($(COMPILAR_EN_WINDOWS), 1)
 	$(call log, "Compilando para windows - 32 bits ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=ia32 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.ico
 	$(call log, "Compilando para windows - 64 bits ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.ico
+endif
 	$(call log, "Compilando para linux - 64 bits ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
@@ -193,11 +197,14 @@ endif
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=armv7l --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
+ifeq ($(COMPILAR_EN_WINDOWS), 1)
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
 	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
+endif
 	@zip -qr binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
 	@zip -qr binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
 	@zip -qr binarios/${NOMBREBIN}-linux-arm.zip binarios/${NOMBREBIN}-linux-armv7l
+ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	@echo "Empaquetando para servidor estático ..."
 	@rm -rf dist
 	${BIN_EMBER} build --prod
@@ -205,6 +212,7 @@ endif
 	@mv dist/ pilas-engine-compilado
 	@zip -qr binarios/pilas-engine-compilado.zip pilas-engine-compilado
 	@rm -rf pilas-engine-compilado
+endif
 
 .PHONY: tmp docs binarios manual
 
