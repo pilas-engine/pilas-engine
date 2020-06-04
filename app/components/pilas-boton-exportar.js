@@ -100,14 +100,14 @@ export default Component.extend({
 
       var carpeta_sonidos = carpeta_del_juego.folder("sonidos");
 
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/explosion.wav");
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/gallina.wav");
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/laser.wav");
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/moneda.wav");
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-corto.wav");
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-largo.wav");
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-aguda.wav");
-      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-grave.wav");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/explosion.mp3");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/gallina.mp3");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/laser.mp3");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/moneda.mp3");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-corto.mp3");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/salto-largo.mp3");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-aguda.mp3");
+      yield this.agregar_archivo(carpeta_sonidos, "./sonidos/seleccion-grave.mp3");
 
       var carpeta_imagenes = carpeta_del_juego.folder("imagenes");
 

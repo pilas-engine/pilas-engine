@@ -48,8 +48,13 @@ export default Service.extend({
   obtener_por_nombre(nombre) {
     return this.obtener_ejemplo(nombre).then(data => {
       let proyecto = this.migraciones.migrar(convertirProyectoEnObjetoEmber(data));
+      let anterior = null;
+      let siguiente = null;
+
       return {
         nombre: nombre,
+        anterior: anterior,
+        siguiente: siguiente,
         ejemplo: {
           proyecto: proyecto, //
           nombre: nombre

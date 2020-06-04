@@ -87,39 +87,39 @@ export default Service.extend({
       proyecto.set("sonidos", [
         {
           nombre: "laser",
-          ruta: "sonidos/laser.wav"
+          ruta: "sonidos/laser.mp3"
         },
         {
           nombre: "explosion",
-          ruta: "sonidos/explosion.wav"
+          ruta: "sonidos/explosion.mp3"
         },
         {
           nombre: "gallina",
-          ruta: "sonidos/gallina.wav"
+          ruta: "sonidos/gallina.mp3"
         },
         {
           nombre: "moneda",
-          ruta: "sonidos/moneda.wav"
+          ruta: "sonidos/moneda.mp3"
         },
         {
           nombre: "salto-corto",
-          ruta: "sonidos/salto-corto.wav"
+          ruta: "sonidos/salto-corto.mp3"
         },
         {
           nombre: "salto-largo",
-          ruta: "sonidos/salto-largo.wav"
+          ruta: "sonidos/salto-largo.mp3"
         },
         {
           nombre: "seleccion-aguda",
-          ruta: "sonidos/seleccion-aguda.wav"
+          ruta: "sonidos/seleccion-aguda.mp3"
         },
         {
           nombre: "seleccion-grave",
-          ruta: "sonidos/seleccion-grave.wav"
+          ruta: "sonidos/seleccion-grave.mp3"
         },
         {
           nombre: "comer",
-          ruta: "sonidos/comer.wav"
+          ruta: "sonidos/comer.mp3"
         }
       ]);
     }

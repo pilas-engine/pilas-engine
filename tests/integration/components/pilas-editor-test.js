@@ -24,7 +24,7 @@ module("Integration | Component | pilas editor", function(hooks) {
         sonidos: [
           {
             nombre: "laser",
-            ruta: "sonidos/laser.wav"
+            ruta: "sonidos/laser.mp3"
           }
         ]
       }
