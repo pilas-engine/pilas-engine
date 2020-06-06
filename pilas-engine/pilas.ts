@@ -373,6 +373,16 @@ class Pilas {
     });
   }
 
+  obtener_actor_en(x: number, y: number) {
+    let actores = this.obtener_actores_en(x, y);
+
+    if (actores.length > 0) {
+      return actores[0];
+    }
+
+    return null;
+  }
+
   /**
    * Retorna true si hay un actor en esa coordenada x y.
    */
@@ -616,6 +626,18 @@ class Pilas {
 
   solicitar_modo_ventana() {
     this.modo.scale.stopFullscreen();
+  }
+
+  ajustar(numero: number, grilla: number) {
+    return this.alinear(numero, grilla);
+  }
+
+  alinear(numero: number, grilla: number) {
+    if (grilla < 1) {
+      throw new Error(`El valor de la grilla tiene que ser mayor a 1`);
+    }
+
+    return Math.round(numero / grilla) * grilla;
   }
 }
 

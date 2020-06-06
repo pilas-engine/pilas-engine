@@ -120,3 +120,7 @@ img {
 .v-mid {
   vertical-align: middle;
 }
+
+figcaption {
+  display: none !important;
+}

@@ -2017,6 +2017,13 @@ var Pilas = (function () {
             return actor.sprite.getBounds()["contains"](x, y);
         });
     };
+    Pilas.prototype.obtener_actor_en = function (x, y) {
+        var actores = this.obtener_actores_en(x, y);
+        if (actores.length > 0) {
+            return actores[0];
+        }
+        return null;
+    };
     Pilas.prototype.existe_actor_en = function (x, y) {
         return this.obtener_actores_en(x, y).length > 0;
     };
@@ -2162,6 +2169,15 @@ var Pilas = (function () {
     };
     Pilas.prototype.solicitar_modo_ventana = function () {
         this.modo.scale.stopFullscreen();
+    };
+    Pilas.prototype.ajustar = function (numero, grilla) {
+        return this.alinear(numero, grilla);
+    };
+    Pilas.prototype.alinear = function (numero, grilla) {
+        if (grilla < 1) {
+            throw new Error("El valor de la grilla tiene que ser mayor a 1");
+        }
+        return Math.round(numero / grilla) * grilla;
     };
     return Pilas;
 }());

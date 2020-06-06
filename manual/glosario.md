@@ -100,10 +100,35 @@ Por ejemplo:
 
 ```
 › pilas.obtener_actores_en(0, -94)
-‹ <plataforma en (0.00, -90.00)>
+‹ [
+    <plataforma en (0.00, -90.00)>,
+    <pacman en (10.00, -92.00)>,
+  ]
 
 › pilas.obtener_actores_en(200, 0)
 ‹ []
+```
+
+</div>
+
+<div class="funcion">
+```
+pilas.obtener_actor_en(x, y)
+```
+
+Busca actores en la coordenada `x` e `y` y si existe al menos uno lo retorna. Si
+existen mas de un actor solo retornará el primero que encuentre.
+
+Si no hay ningún actor retornará `null`.
+
+Por ejemplo:
+
+```
+› pilas.obtener_actor_en(0, -94)
+‹ <plataforma en (0.00, -90.00)>
+
+› pilas.obtener_actor_en(200, 0)
+‹ null
 ```
 
 </div>
@@ -800,6 +825,25 @@ Por ejemplo:
 
 ```
 › pilas.alternar_modo_pantalla_completa()
+```
+
+</div>
+
+<div class="funcion">
+```
+pilas.alinear(numero, grilla)
+pilas.ajustar(numero, grilla)
+```
+
+Ajusta un número a una escala de grilla, muy útil en juegos donde
+el jugador se puede mover por escenarios rígidos tipo mosaico o
+tableros.
+
+Por ejemplo:
+
+```
+› pilas.alienar(130, 64)
+‹ 28
 ```
 
 </div>

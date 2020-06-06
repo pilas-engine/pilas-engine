@@ -465,6 +465,7 @@ declare class Pilas {
     obtener_cantidad_de_actores(): number;
     obtener_diccionario_de_actores(): {};
     obtener_actores_en(_x: number, _y: number): Actor[];
+    obtener_actor_en(x: number, y: number): Actor;
     existe_actor_en(x: number, y: number): boolean;
     existe_actor_con_etiqueta_en(etiqueta: string, x: number, y: number): boolean;
     escena_actual(): EscenaBase;
@@ -488,6 +489,8 @@ declare class Pilas {
     alternar_modo_pantalla_completa(): void;
     solicitar_modo_pantalla_completa(): void;
     solicitar_modo_ventana(): void;
+    ajustar(numero: number, grilla: number): number;
+    alinear(numero: number, grilla: number): number;
 }
 declare var pilasengine: Pilas;
 declare class Sensor {
