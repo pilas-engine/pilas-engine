@@ -1,7 +1,7 @@
 {
 	"textures": [
 		{
-			"image": "decoracion-0.png",
+			"image": "decoracion-0.png?1",
 			"format": "RGBA8888",
 			"size": {
 				"w": 510,
