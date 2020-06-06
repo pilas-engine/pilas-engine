@@ -5,8 +5,11 @@ DATE=`date +'%y.%m.%d %H:%M:%S'`
 
 # Le indica a la compilación de binarios si puede borrar todos los .map
 ELIMINAR_MAPS=1
+COMPILAR_EN_OSX=1
 COMPILAR_EN_WINDOWS=1
-EMPAQUETAR_PARA_SERVIDOR_ESTATICO=1
+COMPILAR_EN_LINUX=1
+COMPILAR_EN_ARM=1
+EMPAQUETAR_PARA_SERVIDOR_ESTATICO=0
 
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
@@ -175,9 +178,11 @@ endif
 	cp prod-electron.js dist/electron.js
 	cp prod-package.json dist/package.json
 	cd dist/; yarn install
+ifeq ($(COMPILAR_EN_OSX), 1)
 	$(call log, "Compilando para osx - 64 bits ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=darwin --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.icn
+endif
 ifeq ($(COMPILAR_EN_WINDOWS), 1)
 	$(call log, "Compilando para windows - 32 bits ...")
 	cd dist; rm -rf build
@@ -186,24 +191,34 @@ ifeq ($(COMPILAR_EN_WINDOWS), 1)
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=win32 --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER} --icon=../extras/icono.ico
 endif
+ifeq ($(COMPILAR_EN_LINUX), 1)
 	$(call log, "Compilando para linux - 64 bits ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=x64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 	$(call log, "Compilando para linux - 32 bits ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=ia32 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR_LINUX_32bits} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+endif
+ifeq ($(COMPILAR_EN_ARM), 1)
 	$(call log, "Compilando para ARM ...")
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=armv7l --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+endif
+ifeq ($(COMPILAR_EN_OSX), 1)
 	$(call log, "Comprimiendo ...")
 	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
+endif
 ifeq ($(COMPILAR_EN_WINDOWS), 1)
 	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
 	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
 endif
+ifeq ($(COMPILAR_EN_LINUX), 1)
 	@zip -qr binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
 	@zip -qr binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
+endif
+ifeq ($(COMPILAR_EN_ARM), 1)
 	@zip -qr binarios/${NOMBREBIN}-linux-arm.zip binarios/${NOMBREBIN}-linux-armv7l
+endif
 ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	@echo "Empaquetando para servidor estático ..."
 	@rm -rf dist
