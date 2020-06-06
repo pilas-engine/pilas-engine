@@ -1,13 +1,17 @@
-# pilas-engine 2
-
-Prototipo de la nueva versión de pilas-engine
+# Pilas Engine 2
 
 [![CircleCI](https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg)](https://circleci.com/gh/pilas-engine/pilas-engine)
 
-La versión original de pilas se puede ver aquí: http://www.pilas-engine.com.ar
+Pilas es un motor para aprender a programar realizando videojuegos, visitá la web
+para obtener más información: 
+
+- http://www.pilas-engine.com.ar
+
+![](extras/editor.png)
 
 ## Artículos y noticias
 
+- [Resumen del sprint 18 (6 de Junio del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-18/1907)
 - [Resumen del sprint 17 (23 de Mayo de 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-17/1876)
 - [Resumen del sprint 16 (11 de Mayo de 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-16/1862)
 - [Resumen del sprint 15 (26 de Abril de 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-15)
