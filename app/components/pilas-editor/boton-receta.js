@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { later } from '@ember/runloop';
 
 // recetas de actores
 import reproducir_sonido_al_comenzar from "pilas-engine/utils/recetas/actor/reproducir-sonido-al-comenzar";
@@ -27,9 +28,18 @@ export default Component.extend({
   tagName: "",
   mostrar: false,
   bus: service(),
+  filtro: "",
 
-  recetas_filtradas_por_tipo: computed("tipo_de_la_instancia_seleccionada", "recetas", function() {
-    return this.recetas.filterBy("para", this.tipo_de_la_instancia_seleccionada).sortBy("titulo");
+  recetas_filtradas_por_tipo: computed("filtro", "tipo_de_la_instancia_seleccionada", "recetas", function() {
+    let valor = this.recetas.filterBy("para", this.tipo_de_la_instancia_seleccionada).sortBy("titulo");
+
+    if (this.filtro) {
+      return valor.filter((e) => {
+        return (e.titulo.toLowerCase().includes(this.filtro.toLowerCase()));
+      });
+    } else {
+      return valor;
+    }
   }),
 
   es_proyecto: computed("tipo_de_la_instancia_seleccionada", function() {
@@ -63,17 +73,15 @@ export default Component.extend({
   },
 
   actions: {
-    ocultar() {
-      this.set("mostrar", false);
-    },
-
-    mostrar() {
-      this.set("mostrar", true);
-    },
-
-    usar_receta(receta) {
+    usar_receta(receta, dd) {
       this.bus.trigger("usar_receta", receta);
-      this.send("ocultar");
-    }
+      dd.actions.close();
+    },
+     cuando_abre() {
+       later(() => {
+         let boton = document.getElementById("boton-receta");
+         boton.focus();
+       }, 1)
+     }
   }
 });
