@@ -100,10 +100,24 @@ document.addEventListener("DOMContentLoaded", function() {
 <p>Busca actores en la coordenada <code>x</code> e <code>y</code>. Si existen actores en esa posición retornará una lista con todas las referencias a esos actores. Y si ningún actor está en esa posición entonces retorna una lista vacía <code>[]</code>.</p>
 <p>Por ejemplo:</p>
 <pre><code>› pilas.obtener_actores_en(0, -94)
-‹ &lt;plataforma en (0.00, -90.00)&gt;
+‹ [
+    &lt;plataforma en (0.00, -90.00)&gt;,
+    &lt;pacman en (10.00, -92.00)&gt;,
+  ]
 
 › pilas.obtener_actores_en(200, 0)
 ‹ []</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actor_en(x, y)</code></pre>
+<p>Busca actores en la coordenada <code>x</code> e <code>y</code> y si existe al menos uno lo retorna. Si existen mas de un actor solo retornará el primero que encuentre.</p>
+<p>Si no hay ningún actor retornará <code>null</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actor_en(0, -94)
+‹ &lt;plataforma en (0.00, -90.00)&gt;
+
+› pilas.obtener_actor_en(200, 0)
+‹ null</code></pre>
 </div>
 <div class="funcion">
 <pre><code>pilas.escena
@@ -436,6 +450,16 @@ if (pilas.existe_un_actor_llamado(&quot;jugador&quot;)) {
 <p>Envía un mensaje a todos los actores y la escena actual.</p>
 <p>Para capturar estos mensajes desde actores o la escena, se tiene que crear un método de la forma “cuando_llega_el_mensaje_nombre” donde “nombre” tiene que ser mensaje que se quiere capturar.</p>
 <p>Por ejemplo, si un actor llama a la siguiente función <code>this.pilas.enviar_mensaje_global('ganar')</code> deberías poder capturar ese mensaje desde cualquier actor o escena declarando el método “cuando_llega_el_mensaje_ganar”.</p>
+<p>El argumento <code>datos</code> es opcional, y se puede utilizar para enviar parámetros adicionales junto con el mensaje. Este argumento datos se va a enviar directamente a todos los actores que atiendan el mensaje, pero es aconsejable que sea un diccionario. Por ejemplo, si se quiere enviar dos valores se podría armar un diccionario así:</p>
+<pre><code>pilas.enviar_mensaje_global(&quot;empujar&quot;, {fuerza: 10, mi_posicion: this.x})</code></pre>
+<p>y desde cualquier otro actor se puede atender esa función creando el siguiente método</p>
+<pre><code>class actor {
+
+  cuando_llega_el_mensaje_empujar(datos) {
+    this.impulsar(0, datos.fuerza);
+
+    this.decir(`el otro parámetro era x: ${datos.mi_posicion}`);
+  }</code></pre>
 </div>
 <div class="funcion">
 <pre><code>pilas.alternar_modo_pantalla_completa()
@@ -445,6 +469,14 @@ pilas.solicitar_modo_ventana()</code></pre>
 <p>Si se pasa al modo pantalla completa, el usuario de todas formas puede volver al modo ventana pulsando la tecla <code>ESC</code>.</p>
 <p>Por ejemplo:</p>
 <pre><code>› pilas.alternar_modo_pantalla_completa()</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.alinear(numero, grilla)
+pilas.ajustar(numero, grilla)</code></pre>
+<p>Ajusta un número a una escala de grilla, muy útil en juegos donde el jugador se puede mover por escenarios rígidos tipo mosaico o tableros.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.alienar(130, 64)
+‹ 28</code></pre>
 </div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
