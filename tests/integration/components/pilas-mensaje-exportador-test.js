@@ -7,20 +7,13 @@ module('Integration | Component | pilas-mensaje-exportador', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    this.set("mensaje1", {mensaje: "Mensaje de prueba", link: '1'})
+    await render(hbs`{{pilas-mensaje-exportador mensaje=mensaje1}}`);
+    let contenido = this.element.textContent;
+    assert.equal(contenido.replace("1", "").trim(), 'Mensaje de prueba');
 
-    await render(hbs`{{pilas-mensaje-exportador}}`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#pilas-mensaje-exportador}}
-        template block text
-      {{/pilas-mensaje-exportador}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    this.set("mensaje2", {codigo: "demo", codigoCompleto: "demo123"})
+    await render(hbs`{{pilas-mensaje-exportador mensaje=mensaje2}}`);
+    assert.equal(this.element.textContent.trim(), 'demo');
   });
 });

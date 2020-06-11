@@ -5,6 +5,11 @@ export default Component.extend({
   tagName: "",
   texto_del_boton: "copiar",
   desactivar: false,
+  id_random: "1",
+
+  didInsertElement() {
+    this.set("id_random", Math.random())
+  },
 
   activar_boton() {
     this.set("texto_del_boton", "copiar");
@@ -12,7 +17,7 @@ export default Component.extend({
   },
 
   copiar() {
-    let input = document.getElementById("input-para-copiar");
+    let input = document.getElementById(`input-para-copiar-${this.id_random}`);
 
     input.focus();
     input.select();

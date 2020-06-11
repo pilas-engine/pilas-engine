@@ -807,6 +807,30 @@ Por ejemplo, si un actor llama a la siguiente función `this.pilas.enviar_mensaj
 deberías poder capturar ese mensaje desde cualquier actor o escena
 declarando el método "cuando_llega_el_mensaje_ganar".
 
+
+El argumento `datos` es opcional, y se puede utilizar para enviar
+parámetros adicionales junto con el mensaje. Este argumento datos
+se va a enviar directamente a todos los actores que atiendan el mensaje,
+pero es aconsejable que sea un diccionario. Por ejemplo, si se quiere
+enviar dos valores se podría armar un diccionario así:
+
+```
+pilas.enviar_mensaje_global("empujar", {fuerza: 10, mi_posicion: this.x})
+```
+
+y desde cualquier otro actor se puede atender esa función creando
+el siguiente método
+
+```
+class actor {
+
+  cuando_llega_el_mensaje_empujar(datos) {
+    this.impulsar(0, datos.fuerza);
+
+    this.decir(`el otro parámetro era x: ${datos.mi_posicion}`);
+  }
+```
+
 </div>
 
 <div class="funcion">

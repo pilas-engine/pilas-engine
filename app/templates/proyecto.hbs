@@ -1,7 +1,11 @@
 {{outlet}}
 
-{{pilas-header-exportacion model=model}}
+{{#if sin_cabecera}}
 
-<div class="flex vh-100-min-header">
+{{else}}
+  {{pilas-header-exportacion model=model}}
+{{/if}}
+
+<div class="flex {{if sin_cabecera "vh-100" "vh-100-min-header"}}">
   {{pilas-ejemplo modoZoom=model.modoZoom proyecto=model.proyecto}}
 </div>

@@ -156,8 +156,17 @@ export default Component.extend({
       data = yield this.api.publicar_juego(proyecto_como_string, json_a_string(proyecto_completo), this.ver_codigo);
 
       this.agregar_mensaje(`¡Listo!`);
-      this.agregar_mensaje({ mensaje: `Tu juego se ha publicado aquí`, link: data.url });
-      this.agregar_mensaje(`Visitá esa dirección o compartila para mostrar tu creación :P`);
+      this.agregar_mensaje("")
+      this.agregar_mensaje({ mensaje: `Tu juego se ha publicado aquí:`, link: data.url });
+      this.agregar_mensaje("")
+      this.agregar_mensaje(`¡Visitá esa dirección o compartila para mostrar tu creación!`);
+      this.agregar_mensaje("")
+      this.agregar_mensaje(`Opcionalmente, también podes mostrar tu juego copiando y pegando este código en el foro u otro sitio:`);
+      this.agregar_mensaje({
+        codigo: `<iframe src="[...]"></iframe>`,
+        codigoCompleto: `<iframe src="${data.url}?sin_cabecera=true" width=${proyecto.ancho} height=${proyecto.alto}></iframe>`,
+      });
+
     } catch (url) {
       this.agregar_mensaje(`Error, el servidor en "${url}" no responde o hay un problema de conexión a Internet.`);
     }

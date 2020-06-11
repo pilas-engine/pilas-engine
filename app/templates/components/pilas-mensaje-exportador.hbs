@@ -1,8 +1,18 @@
-{{yield}}
-
-{{#if mensaje.link}}
-  <div class="f6 pb1">{{mensaje.mensaje}}</div>
-  <div class="f6 pb1">&nbsp; - &nbsp; {{#pilas-link class="link texto dim" url=mensaje.link}}{{mensaje.link}}{{/pilas-link}} {{pilas-boton-copiar texto=mensaje.link}}</div>
+{{#if mensaje}}
+  {{#if mensaje.link}}
+    <div class="f6 pb1">{{mensaje.mensaje}}</div>
+    <div class="f6 pb1 flex items-center pl3 pt2">{{#pilas-link class="link texto pointer" url=mensaje.link}}{{mensaje.link}}{{/pilas-link}} <span class="dib w1"></span>{{pilas-boton-copiar miniatura=true texto=mensaje.link}}</div>
+  {{else if mensaje.codigo}}
+    <div class="f6 pb1 flex items-center pl3">
+      <pre>{{mensaje.codigo}}</pre>
+      <span class="dib w1"></span>
+      {{pilas-boton-copiar miniatura=true texto=mensaje.codigoCompleto}}
+    </div>
+  {{else}}
+    <div class="f6 pb1">{{mensaje}}</div>
+  {{/if}}
 {{else}}
-  <div class="f6 pb1">{{mensaje}}</div>
+  <div>
+    &nbsp;
+  </div>
 {{/if}}
