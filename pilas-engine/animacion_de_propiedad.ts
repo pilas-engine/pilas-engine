@@ -7,13 +7,13 @@ enum Tipo {
 }
 
 class AnimacionDePropiedad {
-  timeline: Phaser.Tweens.Timeline;
-  actor: Actor;
-  pilas: Pilas;
-  tipo_de_animacion: Tipo;
-  data: [any?];
-  veces_que_ejecuto: number = 0;
-  repeticiones: number;
+  private timeline: Phaser.Tweens.Timeline;
+  private actor: Actor;
+  private pilas: Pilas;
+  private tipo_de_animacion: Tipo;
+  private data: [any?];
+  private veces_que_ejecuto: number = 0;
+  private repeticiones: number;
 
   constructor(pilas: Pilas, actor: Actor, tipo: Tipo = Tipo.lineal, repeticiones: number) {
     this.data = [];
@@ -27,7 +27,7 @@ class AnimacionDePropiedad {
     }
   }
 
-  repetir() {
+  private repetir() {
     this.ejecutar();
     return this;
   }
@@ -94,7 +94,7 @@ class AnimacionDePropiedad {
     this.timeline = null;
   }
 
-  ejecutar() {
+  private ejecutar() {
     if (this.timeline) {
       this.timeline.destroy();
     }
@@ -158,7 +158,7 @@ class AnimacionDePropiedad {
 
   escalar_x(escala: number, segundos: number = 1) {
     this.data.push({
-      escala_x: escala,
+      escala_x: "+=" + escala,
       duration: segundos * 1000
     });
 
@@ -167,7 +167,7 @@ class AnimacionDePropiedad {
 
   escalar_y(escala: number, segundos: number = 1) {
     this.data.push({
-      escala_y: escala,
+      escala_y: "+=" + escala,
       duration: segundos * 1000
     });
 
@@ -176,7 +176,24 @@ class AnimacionDePropiedad {
 
   escalar(escala: number, segundos: number = 1) {
     this.data.push({
+      escala: "+=" + escala,
+      duration: segundos * 1000
+    });
+
+    return this;
+  }
+
+  escalar_x_hasta(escala: number, segundos: number = 1) {
+    this.data.push({
       escala_x: escala,
+      duration: segundos * 1000
+    });
+
+    return this;
+  }
+
+  escalar_y_hasta(escala: number, segundos: number = 1) {
+    this.data.push({
       escala_y: escala,
       duration: segundos * 1000
     });
@@ -184,7 +201,16 @@ class AnimacionDePropiedad {
     return this;
   }
 
-  transparencia(valor: number, segundos: number = 1) {
+  escalar_hasta(escala: number, segundos: number = 1) {
+    this.data.push({
+      escala: escala,
+      duration: segundos * 1000
+    });
+
+    return this;
+  }
+
+  transparencia_hasta(valor: number, segundos: number = 1) {
     this.data.push({
       transparencia: valor,
       duration: segundos * 1000

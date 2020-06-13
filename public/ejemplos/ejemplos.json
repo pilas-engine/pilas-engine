@@ -146,6 +146,10 @@
     {
       "nombre": "barras-de-energia",
       "desde": "2.2.0"
+    },
+    {
+      "nombre": "tipos_de_animacion",
+      "desde": "2.3.0"
     }
   ]
 }

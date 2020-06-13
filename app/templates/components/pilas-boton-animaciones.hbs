@@ -1,6 +1,6 @@
 {{yield}}
 
-{{pilas-boton icono="animaciones" desactivado=desactivado accion=(action "abrirModal") texto="Animaciones"}}
+{{pilas-boton responsive=true icono="animaciones" desactivado=desactivado accion=(action "abrirModal") texto="Animaciones"}}
 
 {{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoAnimacion" titulo="Animaciones"}}
   {{pilas-selector-de-animaciones proyecto=proyecto pixelart=pixelart}}

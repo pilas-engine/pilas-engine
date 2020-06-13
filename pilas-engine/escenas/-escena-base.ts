@@ -5,22 +5,24 @@ class EscenaBase {
   camara: Camara;
   fondo: string;
   control: Control;
-  _gravedad_x: number = 0;
-  _gravedad_y: number = 1;
+  private _gravedad_x: number = 0;
+  private _gravedad_y: number = 1;
   eventos: EventosDeEscena;
-  _observables: any;
-  _actor_visor_observables: any;
-  _sonidos_para_reproducir: any[];
-  _sonidos_en_reproduccion: any;
+  private _observables: any;
+  private _actor_visor_observables: any;
+  private _sonidos_para_reproducir: any[];
+  private _sonidos_en_reproduccion: any;
   ancho: number;
   alto: number;
   desplazamiento_del_fondo_x: number;
   desplazamiento_del_fondo_y: number;
   proyecto: any;
+  private animaciones_pendientes_de_ejecucion: [AnimacionDePropiedad?];
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.actores = [];
+    this.animaciones_pendientes_de_ejecucion = [];
     this.pilas.utilidades.obtener_id_autoincremental();
     this.camara = new Camara(pilas);
     this.pilas.escenas.definir_escena_actual(this);
@@ -34,7 +36,9 @@ class EscenaBase {
   }
 
   crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number) {
-    return new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+    let animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+    this.animaciones_pendientes_de_ejecucion.push(animacion);
+    return animacion;
   }
 
   reproducir_sonido(nombre: string) {
@@ -141,6 +145,16 @@ class EscenaBase {
   pre_actualizar() {}
 
   actualizar() {}
+
+  iniciar_animaciones_pendientes() {
+    if (this.animaciones_pendientes_de_ejecucion.length > 0) {
+      this.animaciones_pendientes_de_ejecucion.map(animacion => {
+        animacion.ejecutar();
+      });
+
+      this.animaciones_pendientes_de_ejecucion = [];
+    }
+  }
 
   actualizar_actores() {
     let actores_a_eliminar = [];

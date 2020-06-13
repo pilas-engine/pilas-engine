@@ -542,6 +542,7 @@ class ModoEjecucion extends Modo {
     super.update(this.pilas.escena.actores);
 
     try {
+      this.pilas.escena.iniciar_animaciones_pendientes();
       this.pilas.escena.pre_actualizar();
       this.pilas.escena.actualizar();
       this.pilas.escena.actualizar_actores();

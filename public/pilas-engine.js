@@ -269,7 +269,7 @@ var AnimacionDePropiedad = (function () {
     AnimacionDePropiedad.prototype.escalar_x = function (escala, segundos) {
         if (segundos === void 0) { segundos = 1; }
         this.data.push({
-            escala_x: escala,
+            escala_x: "+=" + escala,
             duration: segundos * 1000
         });
         return this;
@@ -277,7 +277,7 @@ var AnimacionDePropiedad = (function () {
     AnimacionDePropiedad.prototype.escalar_y = function (escala, segundos) {
         if (segundos === void 0) { segundos = 1; }
         this.data.push({
-            escala_y: escala,
+            escala_y: "+=" + escala,
             duration: segundos * 1000
         });
         return this;
@@ -285,13 +285,36 @@ var AnimacionDePropiedad = (function () {
     AnimacionDePropiedad.prototype.escalar = function (escala, segundos) {
         if (segundos === void 0) { segundos = 1; }
         this.data.push({
+            escala: "+=" + escala,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.escalar_x_hasta = function (escala, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
             escala_x: escala,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.escalar_y_hasta = function (escala, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
             escala_y: escala,
             duration: segundos * 1000
         });
         return this;
     };
-    AnimacionDePropiedad.prototype.transparencia = function (valor, segundos) {
+    AnimacionDePropiedad.prototype.escalar_hasta = function (escala, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            escala: escala,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.transparencia_hasta = function (valor, segundos) {
         if (segundos === void 0) { segundos = 1; }
         this.data.push({
             transparencia: valor,
@@ -3238,6 +3261,8 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.animar = function (tipo_de_animacion, repeticiones) {
+        if (tipo_de_animacion === void 0) { tipo_de_animacion = Tipo.suave; }
+        if (repeticiones === void 0) { repeticiones = 1; }
         return this.pilas.escena.crear_animacion(this, tipo_de_animacion, repeticiones);
     };
     ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
@@ -4736,6 +4761,7 @@ var EscenaBase = (function () {
         this._gravedad_y = 1;
         this.pilas = pilas;
         this.actores = [];
+        this.animaciones_pendientes_de_ejecucion = [];
         this.pilas.utilidades.obtener_id_autoincremental();
         this.camara = new Camara(pilas);
         this.pilas.escenas.definir_escena_actual(this);
@@ -4748,7 +4774,9 @@ var EscenaBase = (function () {
         this.desplazamiento_del_fondo_y = 0;
     }
     EscenaBase.prototype.crear_animacion = function (actor, tipo_de_animacion, repeticiones) {
-        return new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+        var animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+        this.animaciones_pendientes_de_ejecucion.push(animacion);
+        return animacion;
     };
     EscenaBase.prototype.reproducir_sonido = function (nombre) {
         return this.pilas.reproducir_sonido(nombre);
@@ -4834,6 +4862,14 @@ var EscenaBase = (function () {
     };
     EscenaBase.prototype.pre_actualizar = function () { };
     EscenaBase.prototype.actualizar = function () { };
+    EscenaBase.prototype.iniciar_animaciones_pendientes = function () {
+        if (this.animaciones_pendientes_de_ejecucion.length > 0) {
+            this.animaciones_pendientes_de_ejecucion.map(function (animacion) {
+                animacion.ejecutar();
+            });
+            this.animaciones_pendientes_de_ejecucion = [];
+        }
+    };
     EscenaBase.prototype.actualizar_actores = function () {
         var _this = this;
         var actores_a_eliminar = [];
@@ -8680,6 +8716,7 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.update = function () {
         _super.prototype.update.call(this, this.pilas.escena.actores);
         try {
+            this.pilas.escena.iniciar_animaciones_pendientes();
             this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
             this.pilas.escena.actualizar_actores();

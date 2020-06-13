@@ -44,15 +44,15 @@ declare enum Tipo {
     desborde = "Back"
 }
 declare class AnimacionDePropiedad {
-    timeline: Phaser.Tweens.Timeline;
-    actor: Actor;
-    pilas: Pilas;
-    tipo_de_animacion: Tipo;
-    data: [any?];
-    veces_que_ejecuto: number;
-    repeticiones: number;
+    private timeline;
+    private actor;
+    private pilas;
+    private tipo_de_animacion;
+    private data;
+    private veces_que_ejecuto;
+    private repeticiones;
     constructor(pilas: Pilas, actor: Actor, tipo: Tipo, repeticiones: number);
-    repetir(): this;
+    private repetir;
     cuando_finaliza(): void;
     explotar(): this;
     mover(x: number, y: number, segundos?: number): this;
@@ -60,16 +60,19 @@ declare class AnimacionDePropiedad {
     rotar(angulo: number, segundos?: number): this;
     rotar_hasta(angulo: number, segundos?: number): this;
     eliminar(): void;
-    ejecutar(): this;
+    private ejecutar;
     funcion(funcion_a_ejecutar: any): this;
     decir(mensaje: any): this;
     esperar(segundos: number): this;
     escalar_x(escala: number, segundos?: number): this;
     escalar_y(escala: number, segundos?: number): this;
     escalar(escala: number, segundos?: number): this;
-    transparencia(valor: number, segundos?: number): this;
-    ocultar(segundos?: number): this;
-    mostrar(segundos?: number): this;
+    escalar_x_hasta(escala: number, segundos?: number): this;
+    escalar_y_hasta(escala: number, segundos?: number): this;
+    escalar_hasta(escala: number, segundos?: number): this;
+    transparencia_hasta(valor: number, segundos?: number): this;
+    ocultar(segundos?: number): any;
+    mostrar(segundos?: number): any;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -688,7 +691,7 @@ declare class ActorBase {
     reproducir_animacion(nombre_de_la_animacion: any): void;
     cuando_finaliza_animacion(animacion: string): void;
     animacion: any;
-    animar(tipo_de_animacion: Tipo, repeticiones: number): any;
+    animar(tipo_de_animacion?: Tipo, repeticiones?: number): AnimacionDePropiedad;
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
@@ -1201,18 +1204,19 @@ declare class EscenaBase {
     camara: Camara;
     fondo: string;
     control: Control;
-    _gravedad_x: number;
-    _gravedad_y: number;
+    private _gravedad_x;
+    private _gravedad_y;
     eventos: EventosDeEscena;
-    _observables: any;
-    _actor_visor_observables: any;
-    _sonidos_para_reproducir: any[];
-    _sonidos_en_reproduccion: any;
+    private _observables;
+    private _actor_visor_observables;
+    private _sonidos_para_reproducir;
+    private _sonidos_en_reproduccion;
     ancho: number;
     alto: number;
     desplazamiento_del_fondo_x: number;
     desplazamiento_del_fondo_y: number;
     proyecto: any;
+    private animaciones_pendientes_de_ejecucion;
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number): AnimacionDePropiedad;
     reproducir_sonido(nombre: string): void;
@@ -1234,6 +1238,7 @@ declare class EscenaBase {
     };
     pre_actualizar(): void;
     actualizar(): void;
+    iniciar_animaciones_pendientes(): void;
     actualizar_actores(): void;
     reproducir_sonidos_pendientes(): void;
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
