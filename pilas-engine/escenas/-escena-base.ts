@@ -33,6 +33,10 @@ class EscenaBase {
     this.desplazamiento_del_fondo_y = 0;
   }
 
+  crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number) {
+    return new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+  }
+
   reproducir_sonido(nombre: string) {
     return this.pilas.reproducir_sonido(nombre);
   }

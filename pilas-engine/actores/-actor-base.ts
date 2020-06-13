@@ -894,6 +894,10 @@ class ActorBase {
     }
   }
 
+  animar(tipo_de_animacion: Tipo, repeticiones: number) {
+    return this.pilas.escena.crear_animacion(this, tipo_de_animacion, repeticiones);
+  }
+
   get animacion() {
     return this._animacion_en_curso;
   }

@@ -36,6 +36,41 @@ declare class Actores {
     barra_de_energia(): Actor;
     interruptor_de_gravedad(): Actor;
 }
+declare enum Tipo {
+    lineal = "Linear",
+    suave = "Cubic",
+    elastico = "Elastic",
+    rebote = "Bounce",
+    desborde = "Back"
+}
+declare class AnimacionDePropiedad {
+    timeline: Phaser.Tweens.Timeline;
+    actor: Actor;
+    pilas: Pilas;
+    tipo_de_animacion: Tipo;
+    data: [any?];
+    veces_que_ejecuto: number;
+    repeticiones: number;
+    constructor(pilas: Pilas, actor: Actor, tipo: Tipo, repeticiones: number);
+    repetir(): this;
+    cuando_finaliza(): void;
+    explotar(): this;
+    mover(x: number, y: number, segundos?: number): this;
+    mover_hasta(x: number, y: number, segundos?: number): this;
+    rotar(angulo: number, segundos?: number): this;
+    rotar_hasta(angulo: number, segundos?: number): this;
+    eliminar(): void;
+    ejecutar(): this;
+    funcion(funcion_a_ejecutar: any): this;
+    decir(mensaje: any): this;
+    esperar(segundos: number): this;
+    escalar_x(escala: number, segundos?: number): this;
+    escalar_y(escala: number, segundos?: number): this;
+    escalar(escala: number, segundos?: number): this;
+    transparencia(valor: number, segundos?: number): this;
+    ocultar(segundos?: number): this;
+    mostrar(segundos?: number): this;
+}
 declare class Animaciones {
     pilas: Pilas;
     animaciones: {};
@@ -418,6 +453,7 @@ declare class Pilas {
     imagenes_precargadas: string[];
     imagenes: any;
     constructor();
+    crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number): AnimacionDePropiedad;
     escena: EscenaBase;
     control: Control;
     readonly camara: Camara;
@@ -652,6 +688,7 @@ declare class ActorBase {
     reproducir_animacion(nombre_de_la_animacion: any): void;
     cuando_finaliza_animacion(animacion: string): void;
     animacion: any;
+    animar(tipo_de_animacion: Tipo, repeticiones: number): any;
     cuando_comienza_una_colision(actor: Actor): void;
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
@@ -1177,6 +1214,7 @@ declare class EscenaBase {
     desplazamiento_del_fondo_y: number;
     proyecto: any;
     constructor(pilas: Pilas);
+    crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number): AnimacionDePropiedad;
     reproducir_sonido(nombre: string): void;
     planificar_reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;

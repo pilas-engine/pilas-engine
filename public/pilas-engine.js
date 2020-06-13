@@ -137,6 +137,178 @@ var Actores = (function () {
     };
     return Actores;
 }());
+var Tipo;
+(function (Tipo) {
+    Tipo["lineal"] = "Linear";
+    Tipo["suave"] = "Cubic";
+    Tipo["elastico"] = "Elastic";
+    Tipo["rebote"] = "Bounce";
+    Tipo["desborde"] = "Back";
+})(Tipo || (Tipo = {}));
+var AnimacionDePropiedad = (function () {
+    function AnimacionDePropiedad(pilas, actor, tipo, repeticiones) {
+        if (tipo === void 0) { tipo = Tipo.lineal; }
+        this.veces_que_ejecuto = 0;
+        this.data = [];
+        this.pilas = pilas;
+        this.actor = actor;
+        this.tipo_de_animacion = tipo;
+        this.repeticiones = repeticiones;
+        if (repeticiones < -1 || repeticiones === 0) {
+            throw Error("La cantidad de repeticiones tiene que ser -1 o un n\u00FAmero mayor a 0. Se envi\u00F3 el valor " + repeticiones);
+        }
+    }
+    AnimacionDePropiedad.prototype.repetir = function () {
+        this.ejecutar();
+        return this;
+    };
+    AnimacionDePropiedad.prototype.cuando_finaliza = function () { };
+    AnimacionDePropiedad.prototype.explotar = function () {
+        var _this = this;
+        this.funcion(function () {
+            var explosion = _this.pilas.actores.explosion();
+            explosion.x = _this.actor.x;
+            explosion.y = _this.actor.y;
+            _this.actor.eliminar();
+            _this.eliminar();
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.mover = function (x, y, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            x: "+=" + x,
+            y: "+=" + y,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.mover_hasta = function (x, y, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            x: x,
+            y: y,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.rotar = function (angulo, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            rotacion: "+=" + angulo,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.rotar_hasta = function (angulo, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            rotacion: angulo,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.eliminar = function () {
+        if (this.timeline) {
+            this.timeline.destroy();
+        }
+        this.data = [];
+        this.timeline = null;
+    };
+    AnimacionDePropiedad.prototype.ejecutar = function () {
+        var _this = this;
+        if (this.timeline) {
+            this.timeline.destroy();
+        }
+        this.timeline = this.pilas.modo.tweens.createTimeline();
+        this.data.map(function (d) {
+            var item = JSON.parse(JSON.stringify(d));
+            item.targets = _this.actor;
+            item.ease = _this.tipo_de_animacion;
+            if (d.onStart) {
+                item.onStart = d.onStart;
+            }
+            _this.timeline.add(item);
+        });
+        this.timeline.on("complete", function () {
+            _this.veces_que_ejecuto += 1;
+            if (_this.veces_que_ejecuto == _this.repeticiones) {
+                _this.cuando_finaliza();
+            }
+            else {
+                _this.repetir();
+            }
+        });
+        this.timeline.play();
+        return this;
+    };
+    AnimacionDePropiedad.prototype.funcion = function (funcion_a_ejecutar) {
+        this.data.push({
+            demo: 0,
+            duration: 1,
+            onStart: function () {
+                funcion_a_ejecutar.call(this);
+            }
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.decir = function (mensaje) {
+        var _this = this;
+        this.funcion(function () {
+            _this.actor.decir(mensaje);
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.esperar = function (segundos) {
+        this.data.push({
+            demo: 0,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.escalar_x = function (escala, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            escala_x: escala,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.escalar_y = function (escala, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            escala_y: escala,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.escalar = function (escala, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            escala_x: escala,
+            escala_y: escala,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.transparencia = function (valor, segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        this.data.push({
+            transparencia: valor,
+            duration: segundos * 1000
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.ocultar = function (segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        return this.transparencia(100, segundos);
+    };
+    AnimacionDePropiedad.prototype.mostrar = function (segundos) {
+        if (segundos === void 0) { segundos = 1; }
+        return this.transparencia(0, segundos);
+    };
+    return AnimacionDePropiedad;
+}());
 var Animaciones = (function () {
     function Animaciones(pilas) {
         this.animaciones = {};
@@ -1764,6 +1936,9 @@ var Pilas = (function () {
         this.comportamientos = new Comportamientos(this);
         this.eventos = new Eventos(this);
     }
+    Pilas.prototype.crear_animacion = function (actor, tipo_de_animacion, repeticiones) {
+        return this.escena.crear_animacion(actor, tipo_de_animacion, repeticiones);
+    };
     Object.defineProperty(Pilas.prototype, "escena", {
         get: function () {
             return this.escenas.escena_actual;
@@ -3062,6 +3237,9 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
+    ActorBase.prototype.animar = function (tipo_de_animacion, repeticiones) {
+        return this.pilas.escena.crear_animacion(this, tipo_de_animacion, repeticiones);
+    };
     ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
     ActorBase.prototype.cuando_termina_una_colision = function (actor) { };
@@ -4569,6 +4747,9 @@ var EscenaBase = (function () {
         this.desplazamiento_del_fondo_x = 0;
         this.desplazamiento_del_fondo_y = 0;
     }
+    EscenaBase.prototype.crear_animacion = function (actor, tipo_de_animacion, repeticiones) {
+        return new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+    };
     EscenaBase.prototype.reproducir_sonido = function (nombre) {
         return this.pilas.reproducir_sonido(nombre);
     };
