@@ -220,10 +220,10 @@ class AnimacionDePropiedad {
   }
 
   ocultar(segundos: number = 1) {
-    return this.transparencia(100, segundos);
+    return this.transparencia_hasta(100, segundos);
   }
 
   mostrar(segundos: number = 1) {
-    return this.transparencia(0, segundos);
+    return this.transparencia_hasta(0, segundos);
   }
 }

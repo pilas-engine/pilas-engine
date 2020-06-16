@@ -324,11 +324,11 @@ var AnimacionDePropiedad = (function () {
     };
     AnimacionDePropiedad.prototype.ocultar = function (segundos) {
         if (segundos === void 0) { segundos = 1; }
-        return this.transparencia(100, segundos);
+        return this.transparencia_hasta(100, segundos);
     };
     AnimacionDePropiedad.prototype.mostrar = function (segundos) {
         if (segundos === void 0) { segundos = 1; }
-        return this.transparencia(0, segundos);
+        return this.transparencia_hasta(0, segundos);
     };
     return AnimacionDePropiedad;
 }());
@@ -1668,38 +1668,19 @@ var Mensajes = (function () {
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {
-        var stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ").replace(/  at /g, "⇾ ");
-        var detalle = {
+        var stacktrace = error.stack.replace(/\(.*\)/g, "").replace(/  at /g, " - ");
+        var parametros = {
+            pilas: this.pilas,
+            error: error,
+            stacktrace: stacktrace,
+            origen: origen
+        };
+        this.pilas.modo.con_error = true;
+        this.pilas.definir_modo("ModoError", parametros);
+        this.emitir_mensaje_al_editor("error_de_ejecucion", {
             mensaje: error.message,
             stack: stacktrace
-        };
-        var fuente_grande = {
-            font: "18px verdana"
-        };
-        var fuente_principal = {
-            font: "16px verdana",
-            wordWrap: { width: 400, useAdvancedWrap: true }
-        };
-        var fuente_pequena = {
-            font: "14px verdana",
-            fill: "#ddd"
-        };
-        var fondo = this.pilas.modo.add.graphics();
-        fondo.fillStyle(0x000000, 0.75);
-        fondo.fillRect(0, 0, 3000, 3000);
-        fondo.setDepth(500000);
-        var texto_titulo = this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
-        var texto_detalle = this.pilas.modo.add.text(5, 30, detalle.mensaje, fuente_principal);
-        var texto_stack = this.pilas.modo.add.text(5, 5 + 30 + texto_detalle.height, detalle.stack, fuente_pequena);
-        texto_titulo.setDepth(500001);
-        texto_detalle.setDepth(500001);
-        texto_stack.setDepth(500001);
-        fondo.setScrollFactor(0, 0);
-        texto_titulo.setScrollFactor(0, 0);
-        texto_detalle.setScrollFactor(0, 0);
-        texto_stack.setScrollFactor(0, 0);
-        this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
-        console.error(error);
+        });
     };
     Mensajes.prototype.atender_mensaje_selecciona_actor_desde_el_editor = function (datos) {
         this.pilas.modo.destacar_actor_por_id(datos.id);
@@ -2082,6 +2063,7 @@ var Pilas = (function () {
         game.scene.add("ModoEditor", ModoEditor);
         game.scene.add("ModoEjecucion", ModoEjecucion);
         game.scene.add("ModoPausa", ModoPausa);
+        game.scene.add("ModoError", ModoError);
         game.scene.start("ModoCargador", { pilas: this });
         this.game = game;
     };
@@ -2094,6 +2076,7 @@ var Pilas = (function () {
             this.game.scene.stop("ModoEjecucion");
             this.game.scene.stop("ModoEditor");
             this.game.scene.stop("ModoPausa");
+            this.game.scene.stop("ModoError");
         }
         catch (e) {
             console.warn(e);
@@ -2251,9 +2234,7 @@ var Pilas = (function () {
                 tarea();
             }
             catch (e) {
-                console.error(e);
                 _this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'luego'");
-                _this.modo.pausar();
             }
         });
     };
@@ -2273,9 +2254,7 @@ var Pilas = (function () {
                     }
                 }
                 catch (e) {
-                    console.error(e);
                     _this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'cada'");
-                    _this.modo.pausar();
                 }
             },
             loop: true
@@ -2579,7 +2558,6 @@ var ActorBase = (function () {
         }
         catch (e) {
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizar actor");
-            this.pilas.modo.pausar();
         }
     };
     ActorBase.prototype.crear_sprite = function (tipo, imagen_inicial) {
@@ -4898,9 +4876,7 @@ var EscenaBase = (function () {
                 actor.actualizar_sensores();
             }
             catch (e) {
-                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
-                _this.pilas.modo.pausar();
             }
         });
         actores_a_eliminar.map(function (actor) {
@@ -4940,9 +4916,7 @@ var EscenaBase = (function () {
                 actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
             }
             catch (e) {
-                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
-                _this.pilas.modo.pausar();
             }
         });
     };
@@ -4953,9 +4927,7 @@ var EscenaBase = (function () {
                 e.cuando_pulsa_tecla(tecla, evento_original);
             }
             catch (e) {
-                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
-                _this.pilas.modo.pausar();
             }
         });
     };
@@ -4966,9 +4938,7 @@ var EscenaBase = (function () {
                 e.cuando_suelta_tecla(tecla, evento_original);
             }
             catch (e) {
-                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
-                _this.pilas.modo.pausar();
             }
         });
     };
@@ -4989,9 +4959,7 @@ var EscenaBase = (function () {
                 e.eliminar();
             }
             catch (e) {
-                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
-                _this.pilas.modo.pausar();
             }
         });
         this.actualizar();
@@ -8320,9 +8288,9 @@ var ModoEjecucion = (function (_super) {
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.teclas = new Set();
+        this.con_error = false;
         try {
             this.guardar_parametros_en_atributos(datos);
-            var escena = this.obtener_escena_inicial();
             this.clases = this.obtener_referencias_a_clases();
             this.cargar_animaciones(datos);
             if (!datos.es_cambio_de_escena) {
@@ -8346,9 +8314,7 @@ var ModoEjecucion = (function (_super) {
             this.modificar_modo_de_pantalla();
         }
         catch (e) {
-            console.error(e);
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-            this.pausar();
         }
     };
     ModoEjecucion.prototype.modificar_modo_de_pantalla = function () {
@@ -8387,9 +8353,7 @@ var ModoEjecucion = (function (_super) {
                 this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores(posicion.x, posicion.y, evento);
             }
             catch (e) {
-                console.error(e);
                 this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
-                this.pausar();
             }
         }
     };
@@ -8420,9 +8384,7 @@ var ModoEjecucion = (function (_super) {
                 this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, evento);
             }
             catch (e) {
-                console.error(e);
                 this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
-                this.pausar();
             }
         }
     };
@@ -8481,9 +8443,7 @@ var ModoEjecucion = (function (_super) {
                     });
                 }
                 catch (e) {
-                    console.error(e);
                     pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
-                    modo.pausar();
                 }
             });
         });
@@ -8515,9 +8475,7 @@ var ModoEjecucion = (function (_super) {
                 }
             }
             catch (e) {
-                console.error(e);
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-                _this.pausar();
             }
         });
         this.matter.world.on("collisionactive", function (event, a, b) {
@@ -8567,7 +8525,6 @@ var ModoEjecucion = (function (_super) {
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-                _this.pausar();
             }
         });
     };
@@ -8659,9 +8616,6 @@ var ModoEjecucion = (function (_super) {
         return entidades.filter(function (entidad) { return entidad.nombre === nombre; })[0];
     };
     ModoEjecucion.prototype.crear_actor = function (entidad) {
-        var x = entidad.x;
-        var y = entidad.y;
-        var imagen = entidad.imagen;
         var actor = null;
         var clase = this.clases[entidad.nombre];
         if (clase) {
@@ -8714,6 +8668,9 @@ var ModoEjecucion = (function (_super) {
         this.permitir_modo_pausa = datos.permitir_modo_pausa;
     };
     ModoEjecucion.prototype.update = function () {
+        if (this.con_error) {
+            return;
+        }
         _super.prototype.update.call(this, this.pilas.escena.actores);
         try {
             this.pilas.escena.iniciar_animaciones_pendientes();
@@ -8724,24 +8681,18 @@ var ModoEjecucion = (function (_super) {
             if (this.permitir_modo_pausa) {
                 this.guardar_foto_de_entidades();
             }
+            if (this.pilas.depurador.fisica_en_modo_ejecucion) {
+                this.canvas_fisica.setAlpha(1);
+                this.actualizar_canvas_fisica();
+            }
+            else {
+                this.canvas_fisica.setAlpha(0);
+            }
+            this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
         }
         catch (e) {
-            console.error(e);
-            this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
-            this.pilas.modo.pausar();
+            return this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
         }
-        if (this.pilas.depurador.fisica_en_modo_ejecucion) {
-            this.canvas_fisica.setAlpha(1);
-            this.actualizar_canvas_fisica();
-        }
-        else {
-            this.canvas_fisica.setAlpha(0);
-        }
-        this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
-    };
-    ModoEjecucion.prototype.pausar = function () {
-        console.warn("Pausando la escena a causa del error anterior.");
-        this.scene.pause();
     };
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
         this.pilas.historia.serializar_escena(this.pilas.escena);
@@ -8754,6 +8705,84 @@ var ModoEjecucion = (function (_super) {
         graphics.fillRect(x - 2, y - 2, 4, 4);
     };
     return ModoEjecucion;
+}(Modo));
+var ModoError = (function (_super) {
+    __extends(ModoError, _super);
+    function ModoError() {
+        return _super.call(this, { key: "ModoError" }) || this;
+    }
+    ModoError.prototype.preload = function () {
+        this.permitir_modo_pausa = true;
+    };
+    ModoError.prototype.create = function (datos) {
+        var espaciado;
+        this.pilas = datos.pilas;
+        this.conectar_eventos();
+        this.crear_fondo();
+        this.crear_titulo();
+        espaciado = this.crear_subtitulo(datos.pilas._ancho, datos.error.message);
+        this.crear_detalle_del_error(espaciado, datos);
+        console.error(datos.error);
+    };
+    ModoError.prototype.traducir_mensaje_de_error = function (mensaje) {
+        var error_undefined = /(.*) is not defined/;
+        var error_position = /Cannot read property 'position' of undefined/;
+        if (mensaje.match(error_undefined)) {
+            return mensaje.replace(error_undefined, "La variable '$1' no est\u00E1 definida");
+        }
+        if (mensaje.match(error_position)) {
+            return mensaje.replace(error_position, "Se intent\u00F3 acceder a un actor eliminado");
+        }
+        return mensaje;
+    };
+    ModoError.prototype.crear_fondo = function () {
+        var fondo = this.add.graphics();
+        fondo.fillStyle(0x588bae, 0.75);
+        fondo.fillRect(0, 0, 3000, 3000);
+        fondo.setDepth(500000);
+        fondo.setScrollFactor(0, 0);
+    };
+    ModoError.prototype.crear_titulo = function () {
+        var texto = this.add.bitmapText(10, 10, "color-blanco-con-sombra-grande", "uy!");
+        texto.setDepth(500001);
+        texto.setScrollFactor(0, 0);
+    };
+    ModoError.prototype.crear_subtitulo = function (ancho, mensaje) {
+        mensaje = this.traducir_mensaje_de_error(mensaje);
+        var texto = this.add.bitmapText(10, 90, "color-blanco-con-sombra-chico", mensaje);
+        texto.setMaxWidth(ancho - 20);
+        texto.setDepth(500001);
+        texto.setScrollFactor(0, 0);
+        return 20 + texto.y + texto.getTextBounds().local.height;
+    };
+    ModoError.prototype.crear_detalle_del_error = function (espaciado, datos) {
+        var texto = "Hacé click en este mensaje para ver el mensaje de error completo.";
+        var funcion = datos.stacktrace
+            .split("\n")[1]
+            .trim()
+            .replace("- ", "") + "(...)";
+        texto = "El error se produjo cuando se llam\u00F3 al m\u00E9todo: \n" + funcion + " \n\n" + texto;
+        var fuente = "color-blanco-con-sombra";
+        var texto_stack = this.add.bitmapText(10, espaciado, fuente, texto).setInteractive({ cursor: "pointer" });
+        var modo = this;
+        texto_stack.on("pointerdown", function () {
+            this.destroy();
+            modo.add.bitmapText(10, espaciado, "color-blanco-con-sombra", datos.stacktrace).setDepth(500000);
+        });
+        texto_stack.setDepth(500001);
+        texto_stack.setScrollFactor(0, 0);
+    };
+    ModoError.prototype.update = function () { };
+    ModoError.prototype.guardar_foto_de_entidades = function () { };
+    ModoError.prototype.conectar_eventos = function () {
+        this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
+    };
+    ModoError.prototype.manejar_evento_key_up = function (evento) {
+        if (evento.key === "Escape") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_la_tecla_escape", {});
+        }
+    };
+    return ModoError;
 }(Modo));
 var ModoPausa = (function (_super) {
     __extends(ModoPausa, _super);

@@ -1,7 +1,7 @@
 {
 	"textures": [
 		{
-			"image": "decoracion-0.png?1",
+			"image": "decoracion-0.png",
 			"format": "RGBA8888",
 			"size": {
 				"w": 510,
@@ -965,6 +965,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:afb0d2710e98925a43cd8cbb9c36c8ae:cd2daac3f9bcc451c2b10e2df0100601:1254384c92303b71d757c05d7812def1$"
+		"smartupdate": "$TexturePacker:SmartUpdate:4c2936f0edb790da2b12c7d061ae58ca:cd2daac3f9bcc451c2b10e2df0100601:1254384c92303b71d757c05d7812def1$"
 	}
 }

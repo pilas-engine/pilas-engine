@@ -149,7 +149,7 @@ class EscenaBase {
   iniciar_animaciones_pendientes() {
     if (this.animaciones_pendientes_de_ejecucion.length > 0) {
       this.animaciones_pendientes_de_ejecucion.map(animacion => {
-        animacion.ejecutar();
+        (<any>animacion).ejecutar();
       });
 
       this.animaciones_pendientes_de_ejecucion = [];
@@ -189,9 +189,7 @@ class EscenaBase {
         actor.actualizar();
         actor.actualizar_sensores();
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
-        this.pilas.modo.pausar();
       }
     });
 
@@ -240,9 +238,7 @@ class EscenaBase {
       try {
         actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
-        this.pilas.modo.pausar();
       }
     });
   }
@@ -252,9 +248,7 @@ class EscenaBase {
       try {
         e.cuando_pulsa_tecla(tecla, evento_original);
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
-        this.pilas.modo.pausar();
       }
     });
   }
@@ -264,9 +258,7 @@ class EscenaBase {
       try {
         e.cuando_suelta_tecla(tecla, evento_original);
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
-        this.pilas.modo.pausar();
       }
     });
   }
@@ -287,9 +279,7 @@ class EscenaBase {
       try {
         e.eliminar();
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
-        this.pilas.modo.pausar();
       }
     });
     this.actualizar();

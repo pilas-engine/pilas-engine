@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:dde0b0cd6494e627f405853d64c8772d:2e542f955b15268a306a13611f47f661:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:b1b0b3656cfffd4c9a68e8dd2fe413bf:ec238160849dd6a218da57c1b8583fe1:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -30,7 +30,7 @@
 .capturas-cursores {width:180px; height:140px; background-position: -1px -427px}
 .capturas-dos-jugadores {width:180px; height:140px; background-position: -183px -427px}
 .capturas-ejemplo-nave {width:180px; height:140px; background-position: -365px -427px}
-.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -365px -995px}
+.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -547px -995px}
 .capturas-flappy {width:180px; height:140px; background-position: -547px -427px}
 .capturas-gravedad {width:180px; height:140px; background-position: -729px -427px}
 .capturas-huesos {width:180px; height:140px; background-position: -1px -569px}
@@ -50,3 +50,4 @@
 .capturas-recorrido-simple {width:180px; height:140px; background-position: -729px -853px}
 .capturas-sokoban {width:180px; height:140px; background-position: -1px -995px}
 .capturas-temporizadores {width:180px; height:140px; background-position: -183px -995px}
+.capturas-tipos_de_animacion {width:180px; height:140px; background-position: -365px -995px}

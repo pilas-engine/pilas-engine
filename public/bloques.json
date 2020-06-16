@@ -1,7 +1,7 @@
 {
 	"textures": [
 		{
-			"image": "bloques-0.png?1",
+			"image": "bloques-0.png",
 			"format": "RGBA8888",
 			"size": {
 				"w": 510,
@@ -2790,6 +2790,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:00832741ce43ce8f9be8a90eeaa55213:f7cb9c60afd7341498b057daf183323c:91eb4810d6a7242dbd3ae43b84c1955f$"
+		"smartupdate": "$TexturePacker:SmartUpdate:e48cd645fdc8597dfa8ea2c896885526:f7cb9c60afd7341498b057daf183323c:91eb4810d6a7242dbd3ae43b84c1955f$"
 	}
 }

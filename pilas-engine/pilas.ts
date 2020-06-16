@@ -194,6 +194,7 @@ class Pilas {
     game.scene.add("ModoEditor", ModoEditor);
     game.scene.add("ModoEjecucion", ModoEjecucion);
     game.scene.add("ModoPausa", ModoPausa);
+    game.scene.add("ModoError", ModoError);
 
     game.scene.start("ModoCargador", { pilas: this });
 
@@ -204,12 +205,13 @@ class Pilas {
     console.warn("La función pilas.ejecutar() entró en desuso, no hace falta invocarla.");
   }
 
-  definir_modo(nombre: string, datos) {
+  definir_modo(nombre: string, datos: any) {
     try {
       this.game.scene.stop("ModoCargador");
       this.game.scene.stop("ModoEjecucion");
       this.game.scene.stop("ModoEditor");
       this.game.scene.stop("ModoPausa");
+      this.game.scene.stop("ModoError");
     } catch (e) {
       console.warn(e);
     }
@@ -429,9 +431,7 @@ class Pilas {
       try {
         tarea();
       } catch (e) {
-        console.error(e);
         this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'luego'");
-        this.modo.pausar();
       }
     });
   }
@@ -457,9 +457,7 @@ class Pilas {
             time.remove();
           }
         } catch (e) {
-          console.error(e);
           this.mensajes.emitir_excepcion_al_editor(e, "Al ejecutar la tarea 'cada'");
-          this.modo.pausar();
         }
       },
       loop: true

@@ -20,6 +20,7 @@ class ModoEjecucion extends Modo {
   teclas: Set<string> = null;
 
   instancia_de_proyecto: any = null;
+  con_error: boolean;
 
   constructor() {
     super({ key: "ModoEjecucion" });
@@ -32,10 +33,10 @@ class ModoEjecucion extends Modo {
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
     this.teclas = new Set();
+    this.con_error = false;
 
     try {
       this.guardar_parametros_en_atributos(datos);
-      let escena = this.obtener_escena_inicial();
 
       this.clases = this.obtener_referencias_a_clases();
 
@@ -64,9 +65,7 @@ class ModoEjecucion extends Modo {
       this.vincular_eventos_de_colision();
       this.modificar_modo_de_pantalla();
     } catch (e) {
-      console.error(e);
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-      this.pausar();
     }
   }
 
@@ -111,9 +110,7 @@ class ModoEjecucion extends Modo {
         this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, evento);
         this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores(posicion.x, posicion.y, evento);
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
-        this.pausar();
       }
     }
   }
@@ -149,9 +146,7 @@ class ModoEjecucion extends Modo {
       try {
         this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, evento);
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
-        this.pausar();
       }
     }
   }
@@ -227,9 +222,7 @@ class ModoEjecucion extends Modo {
             }
           });
         } catch (e) {
-          console.error(e);
           pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
-          modo.pausar();
         }
       });
     });
@@ -267,9 +260,7 @@ class ModoEjecucion extends Modo {
           }
         }
       } catch (e) {
-        console.error(e);
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-        this.pausar();
       }
     });
 
@@ -330,7 +321,6 @@ class ModoEjecucion extends Modo {
         }
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-        this.pausar();
       }
     });
   }
@@ -345,9 +335,9 @@ class ModoEjecucion extends Modo {
   }
 
   obtener_escena_por_nombre(nombre: string) {
-    let escenas_encontradas = this.proyecto.escenas.filter(e => e.nombre == nombre);
+    let escenas_encontradas = this.proyecto.escenas.filter((e: any) => e.nombre == nombre);
 
-    let nombres = this.proyecto.escenas.map(e => e.nombre).join(",");
+    let nombres = this.proyecto.escenas.map((e: any) => e.nombre).join(",");
 
     if (escenas_encontradas.length === 0) {
       throw Error(`No se puede encontrar la escena '${nombre}' en ${nombres}`);
@@ -361,7 +351,6 @@ class ModoEjecucion extends Modo {
   }
 
   instanciar_proyecto() {
-    //if (!this.instancia_de_proyecto) {
     let proyecto = new this.clases["Proyecto"](this.pilas);
 
     if (proyecto.iniciar) {
@@ -369,10 +358,9 @@ class ModoEjecucion extends Modo {
     }
 
     this.instancia_de_proyecto = proyecto;
-    //}
   }
 
-  instanciar_escena(nombre) {
+  instanciar_escena(nombre: string) {
     let escena = this.obtener_escena_por_nombre(nombre);
 
     if (escena.fondo) {
@@ -384,7 +372,7 @@ class ModoEjecucion extends Modo {
     this.crear_escena(escena);
   }
 
-  crear_escena(datos_de_la_escena) {
+  crear_escena(datos_de_la_escena: any) {
     let nombre = datos_de_la_escena.nombre;
 
     if (!this.clases[nombre]) {
@@ -409,14 +397,14 @@ class ModoEjecucion extends Modo {
     }
 
     this.actores = datos_de_la_escena.actores
-      .map(e => {
+      .map((e: any) => {
         if (e.activo === false) {
           return false;
         }
 
         return this.crear_actor(e);
       })
-      .filter(e => e);
+      .filter((e: any) => e);
 
     this._escena_en_ejecucion = escena;
 
@@ -442,26 +430,20 @@ class ModoEjecucion extends Modo {
     return this.crear_actor(entidad);
   }
 
-  /**
-   * Obtiene los nombres de los actores de todas las escenas.
-   */
   obtener_nombres_de_actores() {
-    return this.obtener_entidades_de_actores_de_todas_las_escenas().map(entidad => entidad.nombre);
+    return this.obtener_entidades_de_actores_de_todas_las_escenas().map((entidad: any) => entidad.nombre);
   }
 
   obtener_entidades_de_actores_de_todas_las_escenas() {
-    return this.proyecto.escenas.map(escena => escena.actores).reduce((a, b) => a.concat(b));
+    return this.proyecto.escenas.map((escena: any) => escena.actores).reduce((a: any, b: any) => a.concat(b));
   }
 
   obtener_definicion_de_actor_por_nombre(nombre: string) {
     let entidades = this.obtener_entidades_de_actores_de_todas_las_escenas();
-    return entidades.filter(entidad => entidad.nombre === nombre)[0];
+    return entidades.filter((entidad: any) => entidad.nombre === nombre)[0];
   }
 
-  crear_actor(entidad) {
-    let x = entidad.x;
-    let y = entidad.y;
-    let imagen = entidad.imagen;
+  crear_actor(entidad: any) {
     let actor = null;
 
     let clase = this.clases[entidad.nombre];
@@ -478,7 +460,7 @@ class ModoEjecucion extends Modo {
       actor.iniciar();
 
       if (entidad.habilidades) {
-        entidad.habilidades.map(habilidad => {
+        entidad.habilidades.map((habilidad: any) => {
           actor.aprender(habilidad);
         });
       }
@@ -527,7 +509,7 @@ class ModoEjecucion extends Modo {
     return `__clases = ${diccionario_como_cadena};\n__clases;`;
   }
 
-  guardar_parametros_en_atributos(datos) {
+  guardar_parametros_en_atributos(datos: any) {
     this.pilas = datos.pilas;
     this.ancho = datos.proyecto.ancho;
     this.alto = datos.proyecto.alto;
@@ -539,6 +521,10 @@ class ModoEjecucion extends Modo {
   }
 
   update() {
+    if (this.con_error) {
+      return;
+    }
+
     super.update(this.pilas.escena.actores);
 
     try {
@@ -551,32 +537,25 @@ class ModoEjecucion extends Modo {
       if (this.permitir_modo_pausa) {
         this.guardar_foto_de_entidades();
       }
+
+      if (this.pilas.depurador.fisica_en_modo_ejecucion) {
+        this.canvas_fisica.setAlpha(1);
+        this.actualizar_canvas_fisica();
+      } else {
+        this.canvas_fisica.setAlpha(0);
+      }
+
+      this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
     } catch (e) {
-      console.error(e);
-      this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
-      this.pilas.modo.pausar();
+      return this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
     }
-
-    if (this.pilas.depurador.fisica_en_modo_ejecucion) {
-      this.canvas_fisica.setAlpha(1);
-      this.actualizar_canvas_fisica();
-    } else {
-      this.canvas_fisica.setAlpha(0);
-    }
-
-    this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x, this.pilas.escena.desplazamiento_del_fondo_y);
-  }
-
-  pausar() {
-    console.warn("Pausando la escena a causa del error anterior.");
-    this.scene.pause(); // tslint:disable-line
   }
 
   guardar_foto_de_entidades() {
     this.pilas.historia.serializar_escena(this.pilas.escena);
   }
 
-  dibujar_punto_de_control(graphics, _x, _y) {
+  dibujar_punto_de_control(graphics: Phaser.GameObjects.Graphics, _x: number, _y: number) {
     graphics.fillStyle(0xffffff, 1);
     let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, _y);
     graphics.fillRect(x - 3, y - 3, 6, 6);

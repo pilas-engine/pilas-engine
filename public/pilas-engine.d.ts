@@ -71,8 +71,8 @@ declare class AnimacionDePropiedad {
     escalar_y_hasta(escala: number, segundos?: number): this;
     escalar_hasta(escala: number, segundos?: number): this;
     transparencia_hasta(valor: number, segundos?: number): this;
-    ocultar(segundos?: number): any;
-    mostrar(segundos?: number): any;
+    ocultar(segundos?: number): this;
+    mostrar(segundos?: number): this;
 }
 declare class Animaciones {
     pilas: Pilas;
@@ -1835,6 +1835,7 @@ declare class ModoEjecucion extends Modo {
     _escena_en_ejecucion: any;
     teclas: Set<string>;
     instancia_de_proyecto: any;
+    con_error: boolean;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -1852,7 +1853,7 @@ declare class ModoEjecucion extends Modo {
     obtener_nombre_de_la_escena_inicial(): string;
     obtener_escena_por_nombre(nombre: string): any;
     instanciar_proyecto(): void;
-    instanciar_escena(nombre: any): void;
+    instanciar_escena(nombre: string): void;
     crear_escena(datos_de_la_escena: any): void;
     clonar_actor_por_nombre(nombre: string): any;
     obtener_nombres_de_actores(): any;
@@ -1863,9 +1864,24 @@ declare class ModoEjecucion extends Modo {
     obtener_codigo_para_exportar_clases(codigo: any): string;
     guardar_parametros_en_atributos(datos: any): void;
     update(): void;
-    pausar(): void;
     guardar_foto_de_entidades(): void;
-    dibujar_punto_de_control(graphics: any, _x: any, _y: any): void;
+    dibujar_punto_de_control(graphics: Phaser.GameObjects.Graphics, _x: number, _y: number): void;
+}
+declare class ModoError extends Modo {
+    pilas: Pilas;
+    permitir_modo_pausa: boolean;
+    constructor();
+    preload(): void;
+    create(datos: any): void;
+    private traducir_mensaje_de_error;
+    crear_fondo(): void;
+    private crear_titulo;
+    private crear_subtitulo;
+    private crear_detalle_del_error;
+    update(): void;
+    guardar_foto_de_entidades(): void;
+    conectar_eventos(): void;
+    private manejar_evento_key_up;
 }
 declare class ModoPausa extends Modo {
     pilas: Pilas;

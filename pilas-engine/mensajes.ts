@@ -111,50 +111,22 @@ class Mensajes {
     this.pilas.definir_modo("ModoEjecucion", parametros);
   }
 
-  emitir_excepcion_al_editor(error, origen) {
-    // Simplifica el stacktrace para que no tenga referencia a la url
-    // local, sino que solamente muestre el nombre de archivo:
-    let stacktrace = error.stack.replace(/ht.*localhost:\d+\/*/g, "en: ").replace(/  at /g, "⇾ ");
+  emitir_excepcion_al_editor(error: any, origen: any) {
+    let stacktrace = error.stack.replace(/\(.*\)/g, "").replace(/  at /g, " - ");
+    let parametros = {
+      pilas: this.pilas,
+      error: error,
+      stacktrace: stacktrace,
+      origen: origen
+    };
 
-    let detalle = {
+    this.pilas.modo.con_error = true;
+    this.pilas.definir_modo("ModoError", parametros);
+
+    this.emitir_mensaje_al_editor("error_de_ejecucion", {
       mensaje: error.message,
       stack: stacktrace
-    };
-
-    let fuente_grande = {
-      font: "18px verdana"
-    };
-
-    let fuente_principal = {
-      font: "16px verdana",
-      wordWrap: { width: 400, useAdvancedWrap: true }
-    };
-
-    let fuente_pequena = {
-      font: "14px verdana",
-      fill: "#ddd"
-    };
-
-    let fondo = this.pilas.modo.add.graphics();
-    fondo.fillStyle(0x000000, 0.75);
-    fondo.fillRect(0, 0, 3000, 3000);
-    fondo.setDepth(500000);
-
-    let texto_titulo = this.pilas.modo.add.text(5, 5, "Se ha producido un error:", fuente_grande);
-    let texto_detalle = this.pilas.modo.add.text(5, 30, detalle.mensaje, fuente_principal);
-    let texto_stack = this.pilas.modo.add.text(5, 5 + 30 + texto_detalle.height, detalle.stack, fuente_pequena);
-
-    texto_titulo.setDepth(500001);
-    texto_detalle.setDepth(500001);
-    texto_stack.setDepth(500001);
-
-    fondo.setScrollFactor(0, 0);
-    texto_titulo.setScrollFactor(0, 0);
-    texto_detalle.setScrollFactor(0, 0);
-    texto_stack.setScrollFactor(0, 0);
-
-    this.emitir_mensaje_al_editor("error_de_ejecucion", detalle);
-    console.error(error);
+    });
   }
 
   atender_mensaje_selecciona_actor_desde_el_editor(datos) {
