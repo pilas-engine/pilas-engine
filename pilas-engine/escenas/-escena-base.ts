@@ -35,8 +35,8 @@ class EscenaBase {
     this.desplazamiento_del_fondo_y = 0;
   }
 
-  crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number) {
-    let animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+  crear_animacion(actor: Actor, tipo_de_animacion: Tipo, veces: number, duración: number) {
+    let animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, veces, duración);
     this.animaciones_pendientes_de_ejecucion.push(animacion);
     return animacion;
   }

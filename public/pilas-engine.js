@@ -146,16 +146,17 @@ var Tipo;
     Tipo["desborde"] = "Back";
 })(Tipo || (Tipo = {}));
 var AnimacionDePropiedad = (function () {
-    function AnimacionDePropiedad(pilas, actor, tipo, repeticiones) {
+    function AnimacionDePropiedad(pilas, actor, tipo, veces, duración) {
         if (tipo === void 0) { tipo = Tipo.lineal; }
         this.veces_que_ejecuto = 0;
         this.data = [];
         this.pilas = pilas;
         this.actor = actor;
         this.tipo_de_animacion = tipo;
-        this.repeticiones = repeticiones;
-        if (repeticiones < -1 || repeticiones === 0) {
-            throw Error("La cantidad de repeticiones tiene que ser -1 o un n\u00FAmero mayor a 0. Se envi\u00F3 el valor " + repeticiones);
+        this.veces = veces;
+        this.duración = duración;
+        if (veces < -1 || veces === 0) {
+            throw Error("La cantidad de veces tiene que ser -1 o un n\u00FAmero mayor a 0. Se envi\u00F3 el valor " + veces);
         }
     }
     AnimacionDePropiedad.prototype.repetir = function () {
@@ -174,39 +175,73 @@ var AnimacionDePropiedad = (function () {
         });
         return this;
     };
-    AnimacionDePropiedad.prototype.mover = function (x, y, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.agregar = function (datos) {
+        var duración = datos["duración"];
+        if (duración === 0) {
+            duración = this.duración;
+        }
+        datos["duration"] = duración * 1000;
+        datos["duración"] = undefined;
+        this.data.push(datos);
+        return this;
+    };
+    AnimacionDePropiedad.prototype.mover = function (x, y, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             x: "+=" + x,
             y: "+=" + y,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.mover_hasta = function (x, y, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.mover_x = function (x, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
+            x: "+=" + x,
+            duración: duración
+        });
+    };
+    AnimacionDePropiedad.prototype.mover_y = function (y, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
+            y: "+=" + y,
+            duración: duración
+        });
+    };
+    AnimacionDePropiedad.prototype.mover_hasta = function (x, y, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             x: x,
             y: y,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.rotar = function (angulo, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.mover_x_hasta = function (x, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
+            x: x,
+            duración: duración
+        });
+    };
+    AnimacionDePropiedad.prototype.mover_y_hasta = function (y, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
+            y: y,
+            duración: duración
+        });
+    };
+    AnimacionDePropiedad.prototype.rotar = function (angulo, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             rotacion: "+=" + angulo,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.rotar_hasta = function (angulo, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.rotar_hasta = function (angulo, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             rotacion: angulo,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
     AnimacionDePropiedad.prototype.eliminar = function () {
         if (this.timeline) {
@@ -232,7 +267,7 @@ var AnimacionDePropiedad = (function () {
         });
         this.timeline.on("complete", function () {
             _this.veces_que_ejecuto += 1;
-            if (_this.veces_que_ejecuto == _this.repeticiones) {
+            if (_this.veces_que_ejecuto == _this.veces) {
                 _this.cuando_finaliza();
             }
             else {
@@ -243,14 +278,19 @@ var AnimacionDePropiedad = (function () {
         return this;
     };
     AnimacionDePropiedad.prototype.funcion = function (funcion_a_ejecutar) {
-        this.data.push({
+        var animacion = this;
+        return this.agregar({
             demo: 0,
-            duration: 1,
+            duración: 0.001,
             onStart: function () {
-                funcion_a_ejecutar.call(this);
+                try {
+                    funcion_a_ejecutar.call(this);
+                }
+                catch (e) {
+                    animacion.pilas.mensajes.emitir_excepcion_al_editor(e, "animación de propiedad");
+                }
             }
         });
-        return this;
     };
     AnimacionDePropiedad.prototype.decir = function (mensaje) {
         var _this = this;
@@ -259,76 +299,68 @@ var AnimacionDePropiedad = (function () {
         });
         return this;
     };
-    AnimacionDePropiedad.prototype.esperar = function (segundos) {
-        this.data.push({
+    AnimacionDePropiedad.prototype.esperar = function (duración) {
+        return this.agregar({
             demo: 0,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.escalar_x = function (escala, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.escalar_x = function (escala, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             escala_x: "+=" + escala,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.escalar_y = function (escala, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.escalar_y = function (escala, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             escala_y: "+=" + escala,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.escalar = function (escala, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.escalar = function (escala, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             escala: "+=" + escala,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.escalar_x_hasta = function (escala, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.escalar_x_hasta = function (escala, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             escala_x: escala,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.escalar_y_hasta = function (escala, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.escalar_y_hasta = function (escala, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             escala_y: escala,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.escalar_hasta = function (escala, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.escalar_hasta = function (escala, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             escala: escala,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.transparencia_hasta = function (valor, segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        this.data.push({
+    AnimacionDePropiedad.prototype.transparencia_hasta = function (valor, duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.agregar({
             transparencia: valor,
-            duration: segundos * 1000
+            duración: duración
         });
-        return this;
     };
-    AnimacionDePropiedad.prototype.ocultar = function (segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        return this.transparencia_hasta(100, segundos);
+    AnimacionDePropiedad.prototype.ocultar = function (duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.transparencia_hasta(100, duración);
     };
-    AnimacionDePropiedad.prototype.mostrar = function (segundos) {
-        if (segundos === void 0) { segundos = 1; }
-        return this.transparencia_hasta(0, segundos);
+    AnimacionDePropiedad.prototype.mostrar = function (duración) {
+        if (duración === void 0) { duración = 0; }
+        return this.transparencia_hasta(0, duración);
     };
     return AnimacionDePropiedad;
 }());
@@ -1940,8 +1972,8 @@ var Pilas = (function () {
         this.comportamientos = new Comportamientos(this);
         this.eventos = new Eventos(this);
     }
-    Pilas.prototype.crear_animacion = function (actor, tipo_de_animacion, repeticiones) {
-        return this.escena.crear_animacion(actor, tipo_de_animacion, repeticiones);
+    Pilas.prototype.crear_animacion = function (actor, tipo_de_animacion, repeticiones, duración) {
+        return this.escena.crear_animacion(actor, tipo_de_animacion, repeticiones, duración);
     };
     Object.defineProperty(Pilas.prototype, "escena", {
         get: function () {
@@ -3238,10 +3270,11 @@ var ActorBase = (function () {
         enumerable: true,
         configurable: true
     });
-    ActorBase.prototype.animar = function (tipo_de_animacion, repeticiones) {
+    ActorBase.prototype.animar = function (tipo_de_animacion, veces, duración) {
         if (tipo_de_animacion === void 0) { tipo_de_animacion = Tipo.suave; }
-        if (repeticiones === void 0) { repeticiones = 1; }
-        return this.pilas.escena.crear_animacion(this, tipo_de_animacion, repeticiones);
+        if (veces === void 0) { veces = 1; }
+        if (duración === void 0) { duración = 1; }
+        return this.pilas.escena.crear_animacion(this, tipo_de_animacion, veces, duración);
     };
     ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
@@ -4751,8 +4784,8 @@ var EscenaBase = (function () {
         this.desplazamiento_del_fondo_x = 0;
         this.desplazamiento_del_fondo_y = 0;
     }
-    EscenaBase.prototype.crear_animacion = function (actor, tipo_de_animacion, repeticiones) {
-        var animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, repeticiones);
+    EscenaBase.prototype.crear_animacion = function (actor, tipo_de_animacion, veces, duración) {
+        var animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, veces, duración);
         this.animaciones_pendientes_de_ejecucion.push(animacion);
         return animacion;
     };
@@ -8727,11 +8760,15 @@ var ModoError = (function (_super) {
     ModoError.prototype.traducir_mensaje_de_error = function (mensaje) {
         var error_undefined = /(.*) is not defined/;
         var error_position = /Cannot read property 'position' of undefined/;
+        var error_metodo = /Cannot read property '(.*)' of undefined/;
         if (mensaje.match(error_undefined)) {
             return mensaje.replace(error_undefined, "La variable '$1' no est\u00E1 definida");
         }
         if (mensaje.match(error_position)) {
             return mensaje.replace(error_position, "Se intent\u00F3 acceder a un actor eliminado");
+        }
+        if (mensaje.match(error_metodo)) {
+            return mensaje.replace(error_metodo, "No se puede llamar a '$1' de una variable que tiene el valor undefined");
         }
         return mensaje;
     };
@@ -8848,11 +8885,11 @@ var ModoPausa = (function (_super) {
             }
             return _this.crear_sprite_desde_entidad(entidad);
         });
-        var minutos_como_numero = Math.floor(posicion / 60 / 60);
-        var segundos_como_numero = Math.floor(posicion / 60) % 60;
+        var minutos_como_numero = Math.floor((posicion + 1) / 60 / 60);
+        var segundos_como_numero = Math.floor((posicion + 1) / 60) % 60;
         var minutos = ("0" + minutos_como_numero).slice(-2);
         var segundos = ("0" + segundos_como_numero).slice(-2);
-        this.indicador_de_texto.text = "Tiempo: " + minutos + "' " + segundos + "''\nCuadro: " + posicion + "\nCantidad de actores: " + foto.actores.length;
+        this.indicador_de_texto.text = "Tiempo: " + minutos + "' " + segundos + "''\nCuadro: " + (posicion + 1) + "\nCantidad de actores: " + foto.actores.length;
         this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
     };
     ModoPausa.prototype.posicionar_fondo = function (escena) {

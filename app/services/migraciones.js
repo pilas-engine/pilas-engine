@@ -59,10 +59,9 @@ export default Service.extend({
     // Migracion 2020-05-08: si el proyecto no tiene código se lo agrega.
     if (!proyecto.codigos.proyecto) {
       proyecto.codigos.proyecto = `class Proyecto {
-        iniciar() {
-
-        }
-      }`;
+    iniciar() {
+    }
+}`;
     }
 
     // Migracion 2020-05-08: si el proyecto no tiene tamaño lo agrega.

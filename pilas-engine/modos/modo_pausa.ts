@@ -104,13 +104,13 @@ class ModoPausa extends Modo {
       return this.crear_sprite_desde_entidad(entidad);
     });
 
-    let minutos_como_numero = Math.floor(posicion / 60 / 60);
-    let segundos_como_numero = Math.floor(posicion / 60) % 60;
+    let minutos_como_numero = Math.floor((posicion + 1) / 60 / 60);
+    let segundos_como_numero = Math.floor((posicion + 1) / 60) % 60;
 
     let minutos = `0${minutos_como_numero}`.slice(-2);
     let segundos = `0${segundos_como_numero}`.slice(-2);
 
-    this.indicador_de_texto.text = `Tiempo: ${minutos}' ${segundos}''\nCuadro: ${posicion}\nCantidad de actores: ${foto.actores.length}`;
+    this.indicador_de_texto.text = `Tiempo: ${minutos}' ${segundos}''\nCuadro: ${posicion + 1}\nCantidad de actores: ${foto.actores.length}`;
     this.indicador_de_texto.x = this.ancho - this.indicador_de_texto.width - 10;
   }
 

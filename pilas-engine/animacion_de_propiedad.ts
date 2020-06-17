@@ -13,17 +13,19 @@ class AnimacionDePropiedad {
   private tipo_de_animacion: Tipo;
   private data: [any?];
   private veces_que_ejecuto: number = 0;
-  private repeticiones: number;
+  private veces: number;
+  private duración: number;
 
-  constructor(pilas: Pilas, actor: Actor, tipo: Tipo = Tipo.lineal, repeticiones: number) {
+  constructor(pilas: Pilas, actor: Actor, tipo: Tipo = Tipo.lineal, veces: number, duración: number) {
     this.data = [];
     this.pilas = pilas;
     this.actor = actor;
     this.tipo_de_animacion = tipo;
-    this.repeticiones = repeticiones;
+    this.veces = veces;
+    this.duración = duración;
 
-    if (repeticiones < -1 || repeticiones === 0) {
-      throw Error(`La cantidad de repeticiones tiene que ser -1 o un número mayor a 0. Se envió el valor ${repeticiones}`);
+    if (veces < -1 || veces === 0) {
+      throw Error(`La cantidad de veces tiene que ser -1 o un número mayor a 0. Se envió el valor ${veces}`);
     }
   }
 
@@ -46,42 +48,76 @@ class AnimacionDePropiedad {
     return this;
   }
 
-  mover(x: number, y: number, segundos: number = 1) {
-    this.data.push({
+  private agregar(datos: any) {
+    let duración = datos["duración"];
+
+    if (duración === 0) {
+      duración = this.duración;
+    }
+
+    datos["duration"] = duración * 1000;
+    datos["duración"] = undefined;
+
+    this.data.push(datos);
+    return this;
+  }
+
+  mover(x: number, y: number, duración: number = 0) {
+    return this.agregar({
       x: "+=" + x,
       y: "+=" + y,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  mover_hasta(x: number, y: number, segundos: number = 1) {
-    this.data.push({
+  mover_x(x: number, duración: number = 0) {
+    return this.agregar({
+      x: "+=" + x,
+      duración
+    });
+  }
+
+  mover_y(y: number, duración: number = 0) {
+    return this.agregar({
+      y: "+=" + y,
+      duración
+    });
+  }
+
+  mover_hasta(x: number, y: number, duración: number = 0) {
+    return this.agregar({
       x: x,
       y: y,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  rotar(angulo: number, segundos: number = 1) {
-    this.data.push({
+  mover_x_hasta(x: number, duración: number = 0) {
+    return this.agregar({
+      x: x,
+      duración
+    });
+  }
+
+  mover_y_hasta(y: number, duración: number = 0) {
+    return this.agregar({
+      y: y,
+      duración
+    });
+  }
+
+  rotar(angulo: number, duración: number = 0) {
+    return this.agregar({
       rotacion: "+=" + angulo,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  rotar_hasta(angulo: number, segundos: number = 1) {
-    this.data.push({
+  rotar_hasta(angulo: number, duración: number = 0) {
+    return this.agregar({
       rotacion: angulo,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
   eliminar() {
@@ -90,7 +126,6 @@ class AnimacionDePropiedad {
     }
 
     this.data = [];
-
     this.timeline = null;
   }
 
@@ -116,7 +151,7 @@ class AnimacionDePropiedad {
     this.timeline.on("complete", () => {
       this.veces_que_ejecuto += 1;
 
-      if (this.veces_que_ejecuto == this.repeticiones) {
+      if (this.veces_que_ejecuto == this.veces) {
         this.cuando_finaliza();
       } else {
         this.repetir();
@@ -128,18 +163,21 @@ class AnimacionDePropiedad {
   }
 
   funcion(funcion_a_ejecutar: any) {
-    this.data.push({
+    let animacion = this;
+    return this.agregar({
       demo: 0,
-      duration: 1,
+      duración: 0.001,
       onStart: function() {
-        funcion_a_ejecutar.call(this);
+        try {
+          funcion_a_ejecutar.call(this);
+        } catch (e) {
+          animacion.pilas.mensajes.emitir_excepcion_al_editor(e, "animación de propiedad");
+        }
       }
     });
-
-    return this;
   }
 
-  decir(mensaje) {
+  decir(mensaje: string) {
     this.funcion(() => {
       this.actor.decir(mensaje);
     });
@@ -147,83 +185,67 @@ class AnimacionDePropiedad {
     return this;
   }
 
-  esperar(segundos: number) {
-    this.data.push({
+  esperar(duración: number) {
+    return this.agregar({
       demo: 0,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  escalar_x(escala: number, segundos: number = 1) {
-    this.data.push({
+  escalar_x(escala: number, duración: number = 0) {
+    return this.agregar({
       escala_x: "+=" + escala,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  escalar_y(escala: number, segundos: number = 1) {
-    this.data.push({
+  escalar_y(escala: number, duración: number = 0) {
+    return this.agregar({
       escala_y: "+=" + escala,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  escalar(escala: number, segundos: number = 1) {
-    this.data.push({
+  escalar(escala: number, duración: number = 0) {
+    return this.agregar({
       escala: "+=" + escala,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  escalar_x_hasta(escala: number, segundos: number = 1) {
-    this.data.push({
+  escalar_x_hasta(escala: number, duración: number = 0) {
+    return this.agregar({
       escala_x: escala,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  escalar_y_hasta(escala: number, segundos: number = 1) {
-    this.data.push({
+  escalar_y_hasta(escala: number, duración: number = 0) {
+    return this.agregar({
       escala_y: escala,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  escalar_hasta(escala: number, segundos: number = 1) {
-    this.data.push({
+  escalar_hasta(escala: number, duración: number = 0) {
+    return this.agregar({
       escala: escala,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  transparencia_hasta(valor: number, segundos: number = 1) {
-    this.data.push({
+  transparencia_hasta(valor: number, duración: number = 0) {
+    return this.agregar({
       transparencia: valor,
-      duration: segundos * 1000
+      duración
     });
-
-    return this;
   }
 
-  ocultar(segundos: number = 1) {
-    return this.transparencia_hasta(100, segundos);
+  ocultar(duración: number = 0) {
+    return this.transparencia_hasta(100, duración);
   }
 
-  mostrar(segundos: number = 1) {
-    return this.transparencia_hasta(0, segundos);
+  mostrar(duración: number = 0) {
+    return this.transparencia_hasta(0, duración);
   }
 }

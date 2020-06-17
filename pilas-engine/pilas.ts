@@ -66,8 +66,8 @@ class Pilas {
     this.eventos = new Eventos(this);
   }
 
-  crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number) {
-    return this.escena.crear_animacion(actor, tipo_de_animacion, repeticiones);
+  crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number, duración: number) {
+    return this.escena.crear_animacion(actor, tipo_de_animacion, repeticiones, duración);
   }
 
   get escena(): EscenaBase {

@@ -23,23 +23,23 @@ export default {
     actores: [
       {
         nombre: "plataforma",
-        codigo: "// @ts-ignore\nclass plataforma extends Actor {\n    iniciar() {}\n}"
+        codigo: "// @ts-ignore\nclass plataforma extends Actor {\n    iniciar() {\n\n    }\n}"
       },
       {
         nombre: "caja",
-        codigo: "// @ts-ignore\nclass caja extends Actor {\n    iniciar() {}\n}"
+        codigo: "// @ts-ignore\nclass caja extends Actor {\n    iniciar() {\n\n    }\n}"
       },
       {
         nombre: "pelota",
-        codigo: "// @ts-ignore\nclass pelota extends Actor {\n    iniciar() {}\n}"
+        codigo: "// @ts-ignore\nclass pelota extends Actor {\n    iniciar() {\n\n    }\n}"
       },
       {
         nombre: "techo",
-        codigo: "// @ts-ignore\nclass techo extends Actor {\n    iniciar() {}\n}"
+        codigo: "// @ts-ignore\nclass techo extends Actor {\n    iniciar() {\n\n    }\n}"
       },
       {
         nombre: "suelo",
-        codigo: "// @ts-ignore\nclass suelo extends Actor {\n    iniciar() {}\n}"
+        codigo: "// @ts-ignore\nclass suelo extends Actor {\n    iniciar() {\n\n    }\n}"
       }
     ]
   },

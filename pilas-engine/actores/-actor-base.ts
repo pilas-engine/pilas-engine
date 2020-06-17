@@ -893,8 +893,8 @@ class ActorBase {
     }
   }
 
-  animar(tipo_de_animacion: Tipo = Tipo.suave, repeticiones: number = 1): AnimacionDePropiedad {
-    return this.pilas.escena.crear_animacion(this, tipo_de_animacion, repeticiones);
+  animar(tipo_de_animacion: Tipo = Tipo.suave, veces: number = 1, duración: number = 1): AnimacionDePropiedad {
+    return this.pilas.escena.crear_animacion(this, tipo_de_animacion, veces, duración);
   }
 
   get animacion() {

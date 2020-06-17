@@ -158,6 +158,14 @@ export default Component.extend({
             overflow: hidden;
           }
 
+          .vs-dark .mtk11 {
+            color: #d4d4d4 !important;
+          }
+
+          .vs .mtk11 {
+            color: #000000 !important;
+          }
+
           /* Oculta las barras verticales para indicar identación */
 
           .monaco-editor .lines-content .cigr {
@@ -211,16 +219,11 @@ export default Component.extend({
                 theme: theme,
                 tabSize: 4,
                 autoClosingBrackets: true,
-                folding: true,
                 insertSpaces: true,
                 tabWidth: 4,
                 lineNumbers: ${this.linenumbers},
                 readOnly: ${this.readOnly},
               });
-
-              //var statusNode = document.getElementById('status');
-              //var vimMode = MonacoVim.initVimMode(editor, statusNode);
-
 
               window.activar_vim = function() {
                 if (!window.vimMode) {
