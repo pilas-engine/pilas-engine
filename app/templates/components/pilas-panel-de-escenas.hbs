@@ -5,7 +5,9 @@
   </li>
 
   {{#each escenas as |escena|}}
-    <li role="button" class="pointer texto truncate pa1 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona escena.id}}>
+    <li role="button"
+        class="pointer texto truncate pa1 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}"
+        {{action cuandoSelecciona escena.id}}>
 
       {{#if (eq ultimaEscenaSeleccionada escena.id)}}
         ▾
@@ -26,37 +28,18 @@
     {{#if (eq ultimaEscenaSeleccionada escena.id)}}
       <ul class="list">
         {{#each escena.actores as |actor|}}
-          <li role="button" class="truncate-text texto pa1 pointer {{if (eq seleccion actor.id) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona actor.id}}>
-            {{pilas-icono-de-actor actor=actor}}
 
-            {{#if (eq actor.activo false)}}
-              <span class="o-50">{{actor.nombre}}</span>
-            {{else}}
-              {{actor.nombre}}
-            {{/if}}
+          {{pilas-panel-de-escenas/item-actor
+              seleccion=seleccion
+              cuandoSelecciona=cuandoSelecciona
+              actor=actor
+              cuando_intenta_duplicar=cuando_intenta_duplicar
+              cuando_intenta_duplicar_x5=cuando_intenta_duplicar_x5
+              cuando_intenta_eliminar=cuando_intenta_eliminar
+              cuando_intenta_mover_a_escena_nueva=cuando_intenta_mover_a_escena_nueva
+              cuando_intenta_mover_a_una_escena=cuando_intenta_mover_a_una_escena
+          }}
 
-            <div class="dib fr f7">
-              {{#if (eq seleccion actor.id)}}
-
-                {{#if (eq actor.activo false)}}
-                  {{pilas-indicador-inactivo}}
-                {{/if}}
-
-                {{pilas-boton-menu-actor
-                    escenas=escenas
-                    actor_id=actor.id
-                    escena_id=ultimaEscenaSeleccionada
-                    accionClonar=(action cuando_intenta_duplicar actor.id)
-                    accionClonarX5=(action cuando_intenta_duplicar_x5 actor.id)
-                    accionEliminar=(action cuando_intenta_eliminar actor.id)
-                    accionCuandoIntentaMoverAEscenaNueva=(action cuando_intenta_mover_a_escena_nueva actor ultimaEscenaSeleccionada)
-                    accionCuandoIntentaMoverAUnaEscena=(action cuando_intenta_mover_a_una_escena actor ultimaEscenaSeleccionada)
-                  }}
-
-              {{/if}}
-            </div>
-
-          </li>
         {{else}}
           <li class="truncate texto pa1">sin actores</li>
         {{/each}}

@@ -207,16 +207,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">iconos/grilla-actores/grilla_actor_barra_de_energia.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_boton_activable.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_abajo.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_arriba.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_derecha.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_espacio.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_boton_de_control_izquierda.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_caja.png</key>
-            <key type="filename">iconos/grilla-actores/grilla_actor_ceferino.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_chispa.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_gallina.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_golpe.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_humo.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_interruptor_de_gravedad.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_nube_animada.png</key>
+            <key type="filename">iconos/grilla-actores/grilla_actor_pantalla_completa.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_pizarra.png</key>
             <key type="filename">iconos/grilla-actores/grilla_actor_robot.png</key>
             <struct type="IndividualSpriteSettings">
@@ -406,34 +412,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">iconos/icono-actores/icono_actor_aceituna.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_actortexto.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_boton.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_caja.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_conejo.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_deslizador.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_gallina.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_laser.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_logo.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_moneda.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_nave.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_nube.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_pelota.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_plataforma.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_suelo.png</key>
-            <key type="filename">iconos/icono-actores/icono_actor_techo.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>3,3,5,5</rect>
-                <key>scale9Paddings</key>
-                <rect>3,3,5,5</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">iconos/logos/arduino.png</key>
             <key type="filename">iconos/principal/actores.png</key>
             <key type="filename">iconos/principal/demo.png</key>
@@ -441,6 +419,8 @@
             <key type="filename">iconos/principal/preferencias.png</key>
             <key type="filename">iconos/ui/abrir.png</key>
             <key type="filename">iconos/ui/actor.png</key>
+            <key type="filename">iconos/ui/animaciones.png</key>
+            <key type="filename">iconos/ui/ayuda.png</key>
             <key type="filename">iconos/ui/desplegar.png</key>
             <key type="filename">iconos/ui/detener.png</key>
             <key type="filename">iconos/ui/ejecutar.png</key>
@@ -448,9 +428,11 @@
             <key type="filename">iconos/ui/escena.png</key>
             <key type="filename">iconos/ui/guardar.png</key>
             <key type="filename">iconos/ui/no.png</key>
+            <key type="filename">iconos/ui/nuevo.png</key>
             <key type="filename">iconos/ui/pausa.png</key>
             <key type="filename">iconos/ui/plegar.png</key>
             <key type="filename">iconos/ui/si.png</key>
+            <key type="filename">iconos/ui/sonidos.png</key>
             <key type="filename">iconos/ui/volver.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -636,7 +618,6 @@
             <filename>iconos/principal</filename>
             <filename>iconos/ui</filename>
             <filename>iconos/grilla-actores</filename>
-            <filename>iconos/icono-actores</filename>
             <filename>iconos/recetas</filename>
         </array>
         <key>ignoreFileList</key>
