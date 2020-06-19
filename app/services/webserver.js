@@ -65,7 +65,7 @@ export default Service.extend({
   detener_servidor() {
     this.app.server.close();
     this.set("app", null);
-    this.bus.off("recargar_proyecto", this, "recargar_proyecto");
+    this.bus.off("prueba-editor:recargar_proyecto", this, "recargar_proyecto");
   },
 
   generar_proyecto_inicial() {
@@ -74,7 +74,7 @@ export default Service.extend({
   },
 
   iniciar_servidor(puerto) {
-    this.bus.on("recargar_proyecto", this, "recargar_proyecto");
+    this.bus.on("prueba-editor:recargar_proyecto", this, "recargar_proyecto");
 
     this.generar_proyecto_inicial();
     this.generar_tick(false);
@@ -234,7 +234,21 @@ export default Service.extend({
       var ha_iniciado = false;
 
       var proyecto = JSON.parse(b64DecodeUnicode(proyecto_serializado_inicial));
-      var pilas = pilasengine.iniciar(proyecto.proyecto.ancho*1, proyecto.proyecto.alto);
+      var pixelart = false;
+
+      if (proyecto.proyecto.modo_de_video === "pixelart") {
+        pixelart = true;
+      }
+
+      var opciones = {
+        pixelart: pixelart,
+        fps: proyecto.proyecto.fps
+      };
+
+
+      var ancho = proyecto.proyecto.ancho;
+      var alto = proyecto.proyecto.alto;
+      var pilas = pilasengine.iniciar(ancho, alto, null, opciones, proyecto.proyecto.imagenes);
 
       pilas.onready = function() {
         if (!ha_iniciado) {
