@@ -427,6 +427,7 @@ var Automata = (function () {
             this._estado = nombre;
             this.validar_que_existen_los_metodos_de_estado(nombre);
             this.iniciar_estado(nombre);
+            this.actor.cuadro_del_estado = 0;
         },
         enumerable: true,
         configurable: true
@@ -435,15 +436,28 @@ var Automata = (function () {
         this.actor[nombre + "_iniciar"]();
     };
     Automata.prototype.actualizar = function () {
+        this.actor.cuadro_del_estado += 1;
         if (this._estado !== "") {
             this.actor[this._estado + "_actualizar"]();
+            if (this.actor.cuadro_del_estado > 0 && this.actor.cuadro_del_estado % 60 === 0) {
+                var segundos_transcurridos = Math.floor(this.actor.cuadro_del_estado / 60);
+                this.cada_segundo(segundos_transcurridos);
+            }
         }
     };
     Automata.prototype.cuando_finaliza_animacion = function (nombre) {
         if (this._estado !== "") {
             var metodo = this.actor[this._estado + "_cuando_finaliza_animacion"];
             if (metodo) {
-                metodo.call(this, nombre);
+                metodo.call(this.actor, nombre);
+            }
+        }
+    };
+    Automata.prototype.cada_segundo = function (segundos_transcurridos) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cada_segundo"];
+            if (metodo) {
+                metodo.call(this.actor, segundos_transcurridos);
             }
         }
     };
@@ -2489,6 +2503,7 @@ var ActorBase = (function () {
         this._figura_alto = propiedades.figura_alto;
         this._figura_radio = propiedades.figura_radio;
         this._es_texto = propiedades.es_texto;
+        this.cuadro = 0;
         switch (figura) {
             case "rectangulo":
                 this.sprite = this.crear_sprite("matter", propiedades.imagen);
@@ -2754,6 +2769,7 @@ var ActorBase = (function () {
         return this.pilas.utilidades.obtener_color_al_azar();
     };
     ActorBase.prototype.pre_actualizar = function () {
+        this.cuadro += 1;
         if (this.figura && this.sin_rotacion) {
             this.sprite.setAngularVelocity(0);
         }

@@ -73,6 +73,9 @@ class ActorBase {
     figura: ""
   };
 
+  cuadro: number;
+  cuadro_del_estado: number;
+
   constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.automata = new Automata(this);
@@ -96,6 +99,7 @@ class ActorBase {
     this._figura_alto = propiedades.figura_alto;
     this._figura_radio = propiedades.figura_radio;
     this._es_texto = propiedades.es_texto;
+    this.cuadro = 0;
 
     switch (figura) {
       case "rectangulo":
@@ -403,6 +407,8 @@ class ActorBase {
   }
 
   pre_actualizar() {
+    this.cuadro += 1;
+
     if (this.figura && this.sin_rotacion) {
       (this.sprite as any).setAngularVelocity(0);
     }

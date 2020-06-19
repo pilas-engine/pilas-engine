@@ -96,6 +96,7 @@ declare class Automata {
     iniciar_estado(nombre: string): void;
     actualizar(): void;
     cuando_finaliza_animacion(nombre: string): void;
+    cada_segundo(segundos_transcurridos: number): void;
     validar_que_existen_los_metodos_de_estado(nombre: string): void;
 }
 declare class Camara {
@@ -606,6 +607,8 @@ declare class ActorBase {
         color: string;
     };
     propiedades: any;
+    cuadro: number;
+    cuadro_del_estado: number;
     constructor(pilas: Pilas);
     readonly propiedades_iniciales: any;
     pre_iniciar(propiedades: any): void;

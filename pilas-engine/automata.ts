@@ -15,6 +15,7 @@ class Automata {
     this._estado = nombre;
     this.validar_que_existen_los_metodos_de_estado(nombre);
     this.iniciar_estado(nombre);
+    this.actor.cuadro_del_estado = 0;
   }
 
   iniciar_estado(nombre: string) {
@@ -22,8 +23,15 @@ class Automata {
   }
 
   actualizar() {
+    this.actor.cuadro_del_estado += 1;
+
     if (this._estado !== "") {
       this.actor[`${this._estado}_actualizar`]();
+
+      if (this.actor.cuadro_del_estado > 0 && this.actor.cuadro_del_estado % 60 === 0) {
+        let segundos_transcurridos = Math.floor(this.actor.cuadro_del_estado / 60);
+        this.cada_segundo(segundos_transcurridos);
+      }
     }
   }
 
@@ -32,7 +40,17 @@ class Automata {
       let metodo = this.actor[`${this._estado}_cuando_finaliza_animacion`];
 
       if (metodo) {
-        metodo.call(this, nombre);
+        metodo.call(this.actor, nombre);
+      }
+    }
+  }
+
+  cada_segundo(segundos_transcurridos: number) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cada_segundo`];
+
+      if (metodo) {
+        metodo.call(this.actor, segundos_transcurridos);
       }
     }
   }
