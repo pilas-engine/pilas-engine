@@ -150,6 +150,10 @@
     {
       "nombre": "tipos_de_animacion",
       "desde": "2.3.0"
+    },
+    {
+      "nombre": "pacman-con-paredes",
+      "desde": "2.3.0"
     }
   ]
 }
