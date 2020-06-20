@@ -1,49 +1,34 @@
-<ul class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba borde mt2 mb2 {{if desactivado "o-40 disabled"}}">
+<ul id="pilas-panel-de-escenas" class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba borde mt2 mb2 {{if desactivado "o-40 disabled"}}">
 
   <li role="button" class="pointer texto truncate pa1 {{if (eq seleccion 0) "bg-black-20" "hover-bg-black-10"}}" {{action cuandoSelecciona "proyecto"}}>
     ◆ proyecto
   </li>
 
   {{#each escenas as |escena|}}
-    <li role="button"
-        class="pointer texto truncate pa1 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}"
-        {{action cuandoSelecciona escena.id}}>
 
-      {{#if (eq ultimaEscenaSeleccionada escena.id)}}
-        ▾
-      {{else}}
-        ▸
-      {{/if}}
+    {{pilas-panel-de-escenas/item-escena
+      cuandoSelecciona=cuandoSelecciona
+      ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
+      escena=escena
+      seleccion=seleccion
+      cuando_intenta_eliminar=cuando_intenta_eliminar
+    }}
 
-      <span data-test="nombre-de-escena">{{escena.nombre}}</span>
-
-      <div class="dib fr f7">
-        {{#if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0))}}
-          {{pilas-boton-eliminar-con-confirmacion contador=true tipo="escena" titulo="¿Quieres eliminar la escena?" accion=(action cuando_intenta_eliminar escena.id)}}
-        {{/if}}
-      </div>
-
-    </li>
 
     {{#if (eq ultimaEscenaSeleccionada escena.id)}}
-      <ul class="list">
-        {{#each escena.actores as |actor|}}
 
-          {{pilas-panel-de-escenas/item-actor
-              seleccion=seleccion
-              cuandoSelecciona=cuandoSelecciona
-              actor=actor
-              cuando_intenta_duplicar=cuando_intenta_duplicar
-              cuando_intenta_duplicar_x5=cuando_intenta_duplicar_x5
-              cuando_intenta_eliminar=cuando_intenta_eliminar
-              cuando_intenta_mover_a_escena_nueva=cuando_intenta_mover_a_escena_nueva
-              cuando_intenta_mover_a_una_escena=cuando_intenta_mover_a_una_escena
-          }}
+      {{pilas-panel-de-escenas/contenido-de-la-escena
+        escena=escena
 
-        {{else}}
-          <li class="truncate texto pa1">sin actores</li>
-        {{/each}}
-      </ul>
+        seleccion=seleccion
+        cuandoSelecciona=cuandoSelecciona
+        escenas=escenas
+        ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
+
+        cuando_intenta_mover_a_escena_nueva=cuando_intenta_mover_a_escena_nueva
+        cuando_intenta_mover_a_una_escena=cuando_intenta_mover_a_una_escena
+      }}
+
     {{/if}}
 
   {{else}}

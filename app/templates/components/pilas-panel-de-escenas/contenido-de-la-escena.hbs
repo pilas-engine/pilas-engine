@@ -1,0 +1,35 @@
+{{#each escena_como_nodos as |nodo|}}
+
+  {{#if (eq nodo.tipo "carpeta")}}
+
+    {{pilas-panel-de-escenas/item-carpeta
+      actores=nodo.actores
+      carpeta=nodo.carpeta
+
+      seleccion=seleccion
+      escenas=escenas
+      ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
+      cuandoSelecciona=cuandoSelecciona
+    }}
+
+  {{else if (eq nodo.tipo "actor")}}
+
+    {{pilas-panel-de-escenas/item-actor
+      actor=nodo.actor
+      seleccion=seleccion
+      escenas=escenas
+      ultimaEscenaSeleccionada=ultimaEscenaSeleccionada
+      cuandoSelecciona=cuandoSelecciona
+    }}
+
+  {{else}}
+    <div class="ba b--red">Tipo de nodo desconocido: {{nodo.tipo}}</div>
+  {{/if}}
+
+{{else}}
+
+  <div class="texto pv1">
+    Sin actores
+  </div>
+
+{{/each}}

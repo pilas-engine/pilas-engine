@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:9d9e97f9082fd7d5dfd8ef9ca8c0361a:d8d245bfd478bf77d24491dc3c768a94:467c798a4e4a5265189118ecb556e0a2$
+   $TexturePacker:SmartUpdate:a0232c03d816b4cca9d9f9369616de26:69fad49509ad606c8ecfc50811c1c00b:467c798a4e4a5265189118ecb556e0a2$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -21,18 +21,20 @@
 .arduino {width:24px; height:24px; background-position: -227px -553px}
 .ayuda {width:24px; height:24px; background-position: -227px -579px}
 .borrar {width:16px; height:16px; background-position: -233px -72px}
+.carpeta {width:16px; height:16px; background-position: -233px -90px}
 .computadora {width:25px; height:25px; background-position: -200px -175px}
+.crear-carpeta {width:16px; height:16px; background-position: -233px -108px}
 .demo {width:24px; height:24px; background-position: -151px -551px}
 .desplegar {width:24px; height:24px; background-position: -151px -577px}
 .detener {width:24px; height:24px; background-position: -227px -605px}
-.duplicar {width:16px; height:16px; background-position: -233px -90px}
-.editar {width:16px; height:16px; background-position: -233px -108px}
+.duplicar {width:16px; height:16px; background-position: -233px -126px}
+.editar {width:16px; height:16px; background-position: -233px -144px}
 .ejecutar {width:24px; height:24px; background-position: -227px -631px}
 .ejemplos {width:25px; height:25px; background-position: -227px -189px}
 .electron {width:60px; height:60px; background-position: -123px -219px}
 .ember {width:63px; height:60px; background-position: -1px -203px}
 .enjambre {width:100px; height:74px; background-position: -131px -72px}
-.enjambre-texto {width:100px; height:19px; background-position: -51px -713px}
+.enjambre-texto {width:100px; height:19px; background-position: -51px -687px}
 .error {width:24px; height:24px; background-position: -151px -603px}
 .escena {width:24px; height:24px; background-position: -151px -629px}
 .exportar {width:25px; height:25px; background-position: -227px -189px}
@@ -74,32 +76,32 @@
 .grilla_actor_techo {width:48px; height:48px; background-position: -1px -679px}
 .grilla_actor_texto {width:48px; height:48px; background-position: -177px -647px}
 .guardar {width:24px; height:24px; background-position: -227px -657px}
-.imagen {width:16px; height:16px; background-position: -233px -126px}
-.inactivo {width:16px; height:16px; background-position: -233px -144px}
+.imagen {width:16px; height:16px; background-position: -239px -243px}
+.inactivo {width:16px; height:16px; background-position: -239px -261px}
 .info {width:24px; height:24px; background-position: -227px -683px}
 .info_squared {width:25px; height:25px; background-position: -200px -202px}
 .manual {width:25px; height:25px; background-position: -227px -216px}
-.mas {width:16px; height:16px; background-position: -239px -243px}
-.menu {width:16px; height:16px; background-position: -239px -261px}
-.mover {width:16px; height:16px; background-position: -239px -279px}
+.mas {width:16px; height:16px; background-position: -239px -279px}
+.menu {width:16px; height:16px; background-position: -127px -643px}
+.mover {width:16px; height:16px; background-position: -127px -661px}
 .no {width:24px; height:24px; background-position: -101px -643px}
 .nuevo {width:24px; height:24px; background-position: -145px -655px}
-.off {width:16px; height:14px; background-position: -127px -679px}
-.on {width:16px; height:14px; background-position: -153px -707px}
-.panel-abierto {width:16px; height:16px; background-position: -127px -643px}
-.panel-central-off {width:18px; height:14px; background-position: -77px -687px}
-.panel-central-on {width:18px; height:14px; background-position: -97px -695px}
-.panel-cerrado {width:16px; height:16px; background-position: -127px -661px}
-.panel-derecho-off {width:18px; height:14px; background-position: -117px -695px}
-.panel-derecho-on {width:18px; height:14px; background-position: -153px -723px}
-.panel-izquierdo-off {width:18px; height:14px; background-position: -173px -723px}
-.panel-izquierdo-on {width:18px; height:14px; background-position: -193px -723px}
-.pausa {width:24px; height:24px; background-position: -101px -669px}
+.off {width:16px; height:14px; background-position: -153px -699px}
+.on {width:16px; height:14px; background-position: -189px -723px}
+.panel-abierto {width:16px; height:16px; background-position: -101px -669px}
+.panel-central-off {width:18px; height:14px; background-position: -1px -729px}
+.panel-central-on {width:18px; height:14px; background-position: -21px -729px}
+.panel-cerrado {width:16px; height:16px; background-position: -153px -681px}
+.panel-derecho-off {width:18px; height:14px; background-position: -41px -729px}
+.panel-derecho-on {width:18px; height:14px; background-position: -51px -708px}
+.panel-izquierdo-off {width:18px; height:14px; background-position: -149px -715px}
+.panel-izquierdo-on {width:18px; height:14px; background-position: -169px -723px}
+.pausa {width:24px; height:24px; background-position: -171px -697px}
 .phaser {width:70px; height:70px; background-position: -1px -131px}
 .pilas_logo_128 {width:128px; height:128px; background-position: -1px -1px}
 .pilas_logo_60 {width:60px; height:60px; background-position: -1px -265px}
-.plegar {width:24px; height:24px; background-position: -145px -681px}
-.preferencias {width:24px; height:24px; background-position: -171px -697px}
+.plegar {width:24px; height:24px; background-position: -197px -697px}
+.preferencias {width:24px; height:24px; background-position: -223px -709px}
 .receta {width:25px; height:25px; background-position: -185px -229px}
 .receta_azar {width:25px; height:25px; background-position: -212px -243px}
 .receta_click {width:25px; height:25px; background-position: -185px -256px}
@@ -112,9 +114,9 @@
 .receta_sonido {width:25px; height:25px; background-position: -151px -418px}
 .receta_tiempo {width:25px; height:25px; background-position: -151px -445px}
 .settings {width:25px; height:25px; background-position: -151px -472px}
-.si {width:24px; height:24px; background-position: -197px -697px}
-.sonidos {width:24px; height:24px; background-position: -223px -709px}
+.si {width:24px; height:24px; background-position: -71px -715px}
+.sonidos {width:24px; height:24px; background-position: -97px -708px}
 .test {width:25px; height:25px; background-position: -228px -447px}
 .typescript {width:60px; height:60px; background-position: -116px -281px}
-.volver {width:24px; height:24px; background-position: -51px -687px}
+.volver {width:24px; height:24px; background-position: -123px -708px}
 .webserver {width:25px; height:25px; background-position: -228px -474px}

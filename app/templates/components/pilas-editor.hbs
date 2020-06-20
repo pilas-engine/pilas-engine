@@ -1,4 +1,4 @@
-{{pilas-proyecto proyecto=proyecto}}
+{{pilas-proyecto proyecto=proyecto editor=this}}
 
 {{#if ocultar_interfaz}}
   <div class="flex flex-column {{if oscuro "theme-oscuro" "theme-claro"}} pa2 fixed top-0 left-0 right-0 bottom-0 bg-fondo z-9999">
@@ -52,8 +52,6 @@
         instancia_seleccionada=instancia_seleccionada
         tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
 
-        cuando_intenta_duplicar=(action "cuando_intenta_duplicar")
-        cuando_intenta_duplicar_x5=(action "cuando_intenta_duplicar_x5")
         cuando_intenta_mover_a_una_escena=(action "mover_actor_a_una_escena" proyecto)
         cuando_intenta_mover_a_escena_nueva=(action "mover_actor_a_escena_nueva" proyecto)
 

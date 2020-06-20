@@ -5,6 +5,11 @@ export default function convertirProyectoEnObjetoEmber(proyecto) {
 
   proyectoComoObjetoEmber.escenas = proyecto.escenas.map(escena => {
     escena.actores = escena.actores.map(a => EmberObject.create(a));
+
+    if (escena.carpetas) {
+      escena.carpetas = escena.carpetas.map(a => EmberObject.create(a));
+    }
+
     return EmberObject.create(escena);
   });
 

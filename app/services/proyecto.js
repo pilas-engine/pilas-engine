@@ -20,8 +20,9 @@ export default Service.extend({
     window.document.title = titulo;
   }),
 
-  vincular(proyecto) {
+  vincular(proyecto, editor) {
     this.set("proyecto", proyecto);
+    this.set("editor", editor);
 
     if (ENV.environment === "development") {
       window.proyecto = proyecto;
@@ -93,9 +94,19 @@ export default Service.extend({
     return actores.filter(a => a.nombre === nombre)[0];
   },
 
+  buscar_actor_por_id(id) {
+    let actores = this.obtener_todos_los_actores();
+    return actores.filter(a => a.id == id)[0];
+  },
+
   buscar_escena_por_nombre(nombre) {
     let escenas = this.obtener_todas_las_escenas();
     return escenas.filter(a => a.nombre === nombre)[0];
+  },
+
+  buscar_escena_por_id(id) {
+    let escenas = this.obtener_todas_las_escenas();
+    return escenas.filter(a => a.id == id)[0];
   },
 
   obtener_todos_los_actores() {
@@ -140,5 +151,22 @@ export default Service.extend({
 
   finaliza_carga() {
     this.set("canvas_disponible", true);
+  },
+
+  agregar_actor_a_la_carpeta(actor_id, carpeta_id) {
+    let actor = this.buscar_actor_por_id(actor_id);
+    actor.set("carpeta", carpeta_id);
+  },
+
+  agregar_actor_a_la_escena(actor_id, escena_origen_id, escena_nueva_id) {
+    let proyecto = this.proyecto;
+    let actor = this.buscar_actor_por_id(actor_id);
+    let destino = this.buscar_escena_por_id(escena_nueva_id);
+
+    actor.set("carpeta", undefined);
+
+    if (escena_origen_id !== destino.get("id")) {
+      this.editor.send("mover_actor_a_una_escena", proyecto, actor, escena_origen_id, destino);
+    }
   }
 });

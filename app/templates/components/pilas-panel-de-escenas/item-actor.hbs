@@ -13,15 +13,17 @@
       {{pilas-indicador-inactivo}}
     {{/if}}
 
+    {{cuando_intenta_duplicar}}
+
     {{pilas-boton-menu-actor
         escenas=escenas
         actor_id=actor.id
         escena_id=ultimaEscenaSeleccionada
-        accionClonar=(action cuando_intenta_duplicar actor.id)
-        accionClonarX5=(action cuando_intenta_duplicar_x5 actor.id)
-        accionEliminar=(action cuando_intenta_eliminar actor.id)
-        accionCuandoIntentaMoverAEscenaNueva=(action cuando_intenta_mover_a_escena_nueva actor ultimaEscenaSeleccionada)
-        accionCuandoIntentaMoverAUnaEscena=(action cuando_intenta_mover_a_una_escena actor ultimaEscenaSeleccionada)
+        accionClonar=(action "cuando_intenta_duplicar" actor.id)
+        accionClonarX5=(action "cuando_intenta_duplicar_x5" actor.id)
+        accionEliminar=(action "cuando_intenta_eliminar" actor.id)
+        accionCuandoIntentaMoverAEscenaNueva=(action "cuando_intenta_mover_a_una_escena_nueva")
+        accionCuandoIntentaMoverAUnaEscena=(action "cuando_intenta_mover_a_otra_escena")
       }}
 
   {{/if}}

@@ -31,15 +31,11 @@ export default Component.extend({
 
   modificar_contador: task(function*() {
     this.set("tiempo", 3);
-    console.log(3);
     yield timeout(1000);
-    console.log(2);
     this.set("tiempo", 2);
     yield timeout(1000);
-    console.log(1);
     this.set("tiempo", 1);
     yield timeout(1000);
-    console.log(0);
     this.set("tiempo", 0);
   }),
 

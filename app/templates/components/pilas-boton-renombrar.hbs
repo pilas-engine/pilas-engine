@@ -1,7 +1,7 @@
 <button id="boton-editar"
   {{action "cambiarNombre"}}
-  class="bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0">
-  {{pilas-icono icono="editar"}}{{yield}}
+  class="bg-transparent no-outline p0 pointer glow bn pa0 texto truncate w4 tl verdana">
+  {{pilas-icono icono="editar"}} {{nombre}}
 </button>
 
 
@@ -10,6 +10,7 @@
 
     {{input
       enter=(action "confirmar")
+      spellcheck=false
       value=nombreSugerido
       type="text"
       class="input w-100 v-top pa1 br2"
