@@ -1,4 +1,4 @@
-<div class="dib br-100 bg-silver icono-item-de-actor"></div>
+<div class="dib br-100 {{if actor.color actor.color "bg-silver"}} icono-item-de-actor"></div>
 
 {{#if (eq actor.activo false)}}
   <span class="o-50">{{actor.nombre}}</span>
@@ -19,6 +19,7 @@
         escenas=escenas
         actor_id=actor.id
         escena_id=ultimaEscenaSeleccionada
+        accionDefinirColor=(action "cambiar_color" actor.id)
         accionClonar=(action "cuando_intenta_duplicar" actor.id)
         accionClonarX5=(action "cuando_intenta_duplicar_x5" actor.id)
         accionEliminar=(action "cuando_intenta_eliminar" actor.id)

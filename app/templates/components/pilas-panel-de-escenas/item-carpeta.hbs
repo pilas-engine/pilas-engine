@@ -1,5 +1,4 @@
-<div class="hover-bg-black-10 pa1" role="button" {{action "alternar"}}>
-
+<div class="{{claseSeleccionado}} pa2 mr2 br2" role="button" {{action "alternar"}}>
   <div class="colapsador">
     {{#if carpeta.abierta}}
       ▾
@@ -8,11 +7,17 @@
     {{/if}}
   </div>
 
-  {{pilas-icono icono="carpeta"}} {{carpeta.nombre}}
+  {{#if carpeta.abierta}}
+    {{pilas-icono icono="carpeta-abierta"}}
+  {{else}}
+    {{pilas-icono icono="carpeta"}}
+  {{/if}}
+
+  {{carpeta.nombre}}
 </div>
 
 {{#if carpeta.abierta}}
-  <div class="ml4 pv1">
+  <div class="ml4">
     {{#each actores as |actor|}}
 
       {{pilas-panel-de-escenas/item-actor
@@ -23,8 +28,8 @@
         cuandoSelecciona=cuandoSelecciona
       }}
     {{else}}
-      <div class="texto pv1">
-        Sin actores
+      <div class="texto pv1 o-50 pl3 ml2">
+        sin actores
       </div>
     {{/each}}
   </div>

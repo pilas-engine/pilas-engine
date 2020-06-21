@@ -8,6 +8,20 @@
 
     {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
 
+      <div class="tc pb2">
+        <div class="flex justify-center">
+
+          {{pilas-selector-de-color accion=accionDefinirColor color="bg-silver"}}
+          {{pilas-selector-de-color accion=accionDefinirColor color="bg-orange"}}
+          {{pilas-selector-de-color accion=accionDefinirColor color="bg-green"}}
+          {{pilas-selector-de-color accion=accionDefinirColor color="bg-blue"}}
+          {{pilas-selector-de-color accion=accionDefinirColor color="bg-yellow"}}
+          {{pilas-selector-de-color accion=accionDefinirColor color="bg-pink"}}
+          {{pilas-selector-de-color accion=accionDefinirColor color="bg-white"}}
+
+        </div>
+      </div>
+
       <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action accionClonar}}>
         {{pilas-icono icono="duplicar" class="v-top"}} Duplicar este actor
       </div>
@@ -17,7 +31,7 @@
       </div>
 
       {{pilas-boton-eliminar-con-confirmacion
-          comoCelda=true 
+          comoCelda=true
           tipo="actor"
           titulo="¿Realmente quieres eliminar este actor?"
           accion=accionEliminar}}

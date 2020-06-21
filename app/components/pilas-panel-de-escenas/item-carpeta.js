@@ -1,17 +1,25 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
+import { computed } from "@ember/object";
 
 export default Component.extend({
   tagName: "li",
-
   proyecto: service(),
-
-  classNames: ["truncate-text", "texto", "pa2", "br2", "pointer"],
+  classNames: ["truncate-text", "texto", "ml1", "mv1", "br2", "pointer"],
   classNameBindings: ["clase"],
-
   carpeta: null,
 
   clase: "",
+
+  claseSeleccionado: computed("seleccion", "actores.[]", function() {
+    let actor = this.actores.findBy("id", this.seleccion);
+
+    if (actor !== undefined) {
+      return "bg-black-20";
+    } else {
+      return "hover-bg-black-10";
+    }
+  }),
 
   dragLeave(event) {
     event.preventDefault();

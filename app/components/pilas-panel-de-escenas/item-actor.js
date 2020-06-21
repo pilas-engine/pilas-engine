@@ -4,7 +4,7 @@ import { inject as service } from "@ember/service";
 
 export default Component.extend({
   tagName: "li",
-  classNames: ["truncate-text", "texto", "pa2", "br2", "pointer", "ma1"],
+  classNames: ["truncate-text", "texto", "pa2", "br2", "pointer", "ml1", "mt1", "mr2"],
   classNameBindings: ["claseSeleccionado"],
   attributeBindings: ["draggable"],
   draggable: "true",
@@ -36,6 +36,7 @@ export default Component.extend({
   click() {
     this.get("cuandoSelecciona")(this.actor.id);
   },
+
   actions: {
     cuando_intenta_duplicar(actor_id) {
       this.proyecto.editor.send("cuando_intenta_duplicar", actor_id);
@@ -55,6 +56,10 @@ export default Component.extend({
 
     cuando_intenta_mover_a_otra_escena(escena_nueva) {
       this.proyecto.editor.send("mover_actor_a_una_escena", this.proyecto.proyecto, this.actor, this.ultimaEscenaSeleccionada, escena_nueva);
+    },
+
+    cambiar_color(actor_id, color) {
+      this.proyecto.cambiar_color_de_un_actor(actor_id, color);
     }
   }
 });

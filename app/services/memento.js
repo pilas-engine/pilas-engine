@@ -8,6 +8,7 @@ export default Service.extend({
   ultima_accion: "",
   ultima_llamada: null,
   bus: service(),
+  proyecto: service(),
 
   iniciar() {
     this.set("historial", []);
@@ -100,6 +101,23 @@ export default Service.extend({
           actor: actor
         });
         break;
+
+      case "cambia_actor_de_escena": {
+        let actor_id = paso.datos.id;
+        let escena_anterior = paso.datos.escena_anterior;
+        let escena_nueva = paso.datos.escena_nueva;
+
+        this.proyecto.agregar_actor_a_la_escena(actor_id, escena_nueva, escena_anterior, true);
+        break;
+      }
+
+      case "cambia_actor_de_carpeta": {
+        let actor_id = paso.datos.id;
+        let carpeta_anterior = paso.datos.carpeta_anterior;
+
+        this.proyecto.agregar_actor_a_la_carpeta(actor_id, carpeta_anterior, true);
+        break;
+      }
 
       default:
         throw Error(`Caso no contemplado ${paso.nombre}`);

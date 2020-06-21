@@ -7,6 +7,7 @@ import ENV from "pilas-engine/config/environment";
 
 export default Service.extend({
   bus: service(),
+  memento: service(),
   canvas_disponible: true,
   hay_cambios_por_guardar: false,
 
@@ -153,20 +154,58 @@ export default Service.extend({
     this.set("canvas_disponible", true);
   },
 
-  agregar_actor_a_la_carpeta(actor_id, carpeta_id) {
+  agregar_actor_a_la_carpeta(actor_id, carpeta_id, omitir_memento) {
     let actor = this.buscar_actor_por_id(actor_id);
+    let carpeta_anterior = actor.get("carpeta");
+
     actor.set("carpeta", carpeta_id);
+    this.cuando_realiza_un_cambio();
+
+    if (!omitir_memento) {
+      this.memento.accion("cambia_actor_de_carpeta", {
+        id: actor.id,
+        carpeta_anterior: carpeta_anterior,
+        carpeta_nueva: actor.get("carpeta")
+      });
+    }
   },
 
-  agregar_actor_a_la_escena(actor_id, escena_origen_id, escena_nueva_id) {
+  agregar_actor_a_la_escena(actor_id, escena_origen_id, escena_nueva_id, omitir_memento) {
     let proyecto = this.proyecto;
     let actor = this.buscar_actor_por_id(actor_id);
     let destino = this.buscar_escena_por_id(escena_nueva_id);
 
+    let carpeta_anterior = actor.get("carpeta");
     actor.set("carpeta", undefined);
 
     if (escena_origen_id !== destino.get("id")) {
       this.editor.send("mover_actor_a_una_escena", proyecto, actor, escena_origen_id, destino);
+      this.cuando_realiza_un_cambio();
+
+      if (!omitir_memento) {
+        this.memento.accion("cambia_actor_de_escena", {
+          id: actor.id,
+          carpeta_anterior: carpeta_anterior,
+          carpeta_nueva: undefined,
+          escena_anterior: escena_origen_id,
+          escena_nueva: escena_nueva_id
+        });
+      }
+    }
+  },
+
+  cambiar_color_de_un_actor(actor_id, color, omitir_memento) {
+    let actor = this.buscar_actor_por_id(actor_id);
+    let color_anterior = actor.get("color");
+
+    actor.set("color", color);
+
+    if (!omitir_memento) {
+      this.memento.accion("cambia_color_del_actor", {
+        id: actor_id,
+        color_nuevo: color,
+        color_anterior: color_anterior
+      });
     }
   }
 });

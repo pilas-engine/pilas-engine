@@ -5,9 +5,16 @@ import json_a_string from "../utils/json-a-string";
 export default Component.extend({
   classNames: ["theme-claro", "h-100", "overflow-auto"],
   router: service(),
+  clase: "",
 
   dragOver() {
-    return false;
+    event.preventDefault();
+    this.set("clase", "bg-light-yellow");
+  },
+
+  dragLeave(event) {
+    event.preventDefault();
+    this.set("clase", "");
   },
 
   drop(evento) {

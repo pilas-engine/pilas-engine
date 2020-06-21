@@ -5,7 +5,7 @@ export default Component.extend({
   tagName: "ul",
   classNames: ["list"],
 
-  escena_como_nodos: computed("escena.carpetas.[]", "escena.actores.@each.{carpeta}", function() {
+  escena_como_nodos: computed("escena.carpetas.[]", "escena.actores.@each.{carpeta,color}", function() {
     let mapa_de_carpetas = {};
     let nodos = [];
 

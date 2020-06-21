@@ -1,5 +1,5 @@
 <li role="button"
-    class="pointer texto truncate pa1 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}"
+    class="pointer texto truncate pa2 {{if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0)) "bg-black-20" "hover-bg-black-10"}}"
     {{action cuandoSelecciona escena.id}}>
 
   <div class="colapsador">
@@ -13,7 +13,7 @@
   <span data-test="nombre-de-escena">{{escena.nombre}}</span>
 
   <div class="dib fr f7">
-    {{#if (eq ultimaEscenaSeleccionada escena.id)}}
+    {{#if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0))}}
       {{pilas-boton-crear-carpeta escena=escena}}
     {{/if}}
 
