@@ -12,12 +12,14 @@ export default Component.extend({
   clase: "",
 
   claseSeleccionado: computed("seleccion", "actores.[]", function() {
-    let actor = this.actores.findBy("id", this.seleccion);
+    if (this.actores) {
+      let actor = this.actores.findBy("id", this.seleccion);
 
-    if (actor !== undefined) {
-      return "bg-black-20";
-    } else {
-      return "hover-bg-black-10";
+      if (actor !== undefined) {
+        return "bg-black-20";
+      } else {
+        return "hover-bg-black-10";
+      }
     }
   }),
 

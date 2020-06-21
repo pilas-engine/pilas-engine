@@ -1,10 +1,13 @@
 {{#if recursos.data}}
 
-  {{pilas-canvas
-      ancho=600
-      nombre_del_contexto="pilas-test"
-      alto=600
-      pixelart=false
-  }}
+  <div style="width: 700px; height: 700px; display: flex; justify-content: center; margin: auto;">
+    {{pilas-canvas
+        nombre_del_contexto="pilas-test"
+        ancho=350
+        alto=350
+        proyecto=proyecto
+        pixelart=false
+    }}
+  </div>
 
 {{/if}}

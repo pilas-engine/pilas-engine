@@ -15,10 +15,11 @@ export default Component.extend({
 
     this.set("proyecto", {
       titulo: "Proyecto para pilas-test",
-      ancho: 500,
-      alto: 500,
+      ancho: 350,
+      pixelart: false,
+      alto: 350,
       codigos: {
-        proyecto: "class Proyecto { iniciar() {} }",
+        proyecto: "class Proyecto { iniciar() { } }",
         escenas: [
           {
             nombre: "principal",
@@ -39,6 +40,8 @@ export default Component.extend({
           id: 1,
           camara_x: 0,
           camara_y: 0,
+          ancho: 350,
+          alto: 350,
           actores: [],
           fondo: "decoracion:fondos/fondo-plano"
         }
