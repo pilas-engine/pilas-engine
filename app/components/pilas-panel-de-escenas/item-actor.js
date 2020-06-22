@@ -20,7 +20,9 @@ export default Component.extend({
 
   dragStart() {
     let id = this.actor.id;
-    return event.dataTransfer.setData("text/data", id);
+    let nombre = this.actor.nombre;
+    let activo = this.actor.activo;
+    return event.dataTransfer.setData("text/data", JSON.stringify({ id, nombre, activo }));
   },
 
   dragOver() {

@@ -2470,8 +2470,7 @@ var ActorBase = (function () {
             figura_rebote: 1,
             figura_sensor: false,
             es_texto: false,
-            texto_con_borde: false,
-            color: "white"
+            texto_con_borde: false
         };
         this.propiedades = {
             x: 0,
@@ -8640,6 +8639,15 @@ var ModoEjecucion = (function (_super) {
             }
             return _this.crear_actor(e);
         })
+            .map(function (datos) {
+            if (datos) {
+                var actor_1 = datos.actor, entidad = datos.entidad;
+                return _this.inicializar_actor(actor_1, entidad);
+            }
+            else {
+                return false;
+            }
+        })
             .filter(function (e) { return e; });
         this._escena_en_ejecucion = escena;
         escena.iniciar();
@@ -8652,7 +8660,8 @@ var ModoEjecucion = (function (_super) {
         }
         var entidad = this.obtener_definicion_de_actor_por_nombre(nombre);
         entidad.id = undefined;
-        return this.crear_actor(entidad);
+        var actor = this.crear_actor(entidad).actor;
+        return this.inicializar_actor(actor, entidad);
     };
     ModoEjecucion.prototype.obtener_nombres_de_actores = function () {
         return this.obtener_entidades_de_actores_de_todas_las_escenas().map(function (entidad) { return entidad.nombre; });
@@ -8673,17 +8682,20 @@ var ModoEjecucion = (function (_super) {
             var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
             actor.pre_iniciar(p);
-            actor.agregar_sensores_desde_lista(entidad.sensores);
-            actor.iniciar();
-            if (entidad.habilidades) {
-                entidad.habilidades.map(function (habilidad) {
-                    actor.aprender(habilidad);
-                });
-            }
         }
         else {
             var nombres_de_clases = Object.getOwnPropertyNames(this.clases);
             throw new Error("No existe c\u00F3digo para crear un actor de la clase " + entidad.nombre + ". Las clases disponibles son [" + nombres_de_clases.join(", ") + "]");
+        }
+        return { actor: actor, entidad: entidad };
+    };
+    ModoEjecucion.prototype.inicializar_actor = function (actor, entidad) {
+        actor.agregar_sensores_desde_lista(entidad.sensores);
+        actor.iniciar();
+        if (entidad.habilidades) {
+            entidad.habilidades.map(function (habilidad) {
+                actor.aprender(habilidad);
+            });
         }
         return actor;
     };
@@ -8777,6 +8789,7 @@ var ModoError = (function (_super) {
         var error_undefined = /(.*) is not defined/;
         var error_position = /Cannot read property 'position' of undefined/;
         var error_metodo = /Cannot read property '(.*)' of undefined/;
+        var error_funcion = /(.*) is not a function/;
         if (mensaje.match(error_undefined)) {
             return mensaje.replace(error_undefined, "La variable '$1' no est\u00E1 definida");
         }
@@ -8785,6 +8798,9 @@ var ModoError = (function (_super) {
         }
         if (mensaje.match(error_metodo)) {
             return mensaje.replace(error_metodo, "No se puede llamar a '$1' de una variable que tiene el valor undefined");
+        }
+        if (mensaje.match(error_funcion)) {
+            return mensaje.replace(error_funcion, "'$1' no es una funci\u00F3n");
         }
         return mensaje;
     };

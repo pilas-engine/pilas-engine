@@ -1,0 +1,16 @@
+{{yield}}
+
+{{#basic-dropdown onOpen=(action "cuandoAbre") as |dd|}}
+  {{#dd.trigger}}
+    <button class="texto bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0">{{pilas-icono icono="editar"}}</button>
+  {{/dd.trigger}}
+
+  {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
+    <div class="ph1">
+      {{input  
+        escape-press=(action "cancelar" dd)
+        enter=(action "confirmarCambioDeNombre" dd)
+        spellcheck=false id="input-renombrar-carpeta" type="text" value=nombre class="input w-100 v-top pa1 br2 mb2 f6" placeholder="Nombre"}}
+    </div>
+  {{/dd.content}}
+{{/basic-dropdown}}

@@ -7,19 +7,26 @@
   {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
 
     <div class="ph1">
-      {{input autofocus=true id="boton-receta" type="text" value=filtro class="input w-100 v-top pa1 br2 mb2" placeholder="Filtrar"}}
+      {{input spellcheck=false autofocus=true id="boton-receta" type="text" value=filtro class="input w-100 v-top pa1 br2 mb2 f6" placeholder="Filtrar"}}
     </div>
 
-    {{#each recetas_filtradas_por_tipo as |receta|}}
-      <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action "usar_receta" receta dd}}>
-        {{pilas-icono icono=receta.icono class="v-top"}} {{receta.titulo}}
-      </div>
-    {{/each}}
+    <div class="h5 overflow-y-auto">
+      {{#each recetas_filtradas_por_tipo as |receta|}}
+        <div role="button" class="pa2 texto pointer hover-bg-black-10 f6 truncate" {{action "usar_receta" receta dd}}>
+          {{pilas-icono icono=receta.icono class="v-top"}} {{receta.titulo}}
+        </div>
+      {{else}}
+        <div class="pa2 texto f6 truncate">
+          No hay recetas que coincidan con esta búsqueda.
+        </div>
+      {{/each}}
 
-    {{#if es_proyecto}}
-      <div class="pa2 texto f7 truncate">
-        Seleccioná un actor o una escena para ver recetas.
-      </div>
-    {{/if}}
+      {{#if es_proyecto}}
+        <div class="pa2 texto f6 truncate">
+          Seleccioná un actor o una escena para ver recetas.
+        </div>
+      {{/if}}
+    </div>
+
   {{/dd.content}}
 {{/basic-dropdown}}

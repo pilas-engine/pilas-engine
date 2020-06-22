@@ -29,6 +29,7 @@ class ModoError extends Modo {
     let error_undefined = /(.*) is not defined/;
     let error_position = /Cannot read property 'position' of undefined/;
     let error_metodo = /Cannot read property '(.*)' of undefined/;
+    let error_funcion = /(.*) is not a function/;
 
     // mensaje tipo: "a is not defined"
     if (mensaje.match(error_undefined)) {
@@ -40,11 +41,15 @@ class ModoError extends Modo {
       return mensaje.replace(error_position, `Se intentó acceder a un actor eliminado`);
     }
 
-    // mensaje tipo: "TypeError: Cannot read property 'clonar_en' of undefined"
+    // mensaje tipo: "Cannot read property 'clonar_en' of undefined"
     if (mensaje.match(error_metodo)) {
       return mensaje.replace(error_metodo, `No se puede llamar a '$1' de una variable que tiene el valor undefined`);
     }
 
+    // mensaje tipo: "this.saltar is not a function"
+    if (mensaje.match(error_funcion)) {
+      return mensaje.replace(error_funcion, `'$1' no es una función`);
+    }
 
     return mensaje;
   }

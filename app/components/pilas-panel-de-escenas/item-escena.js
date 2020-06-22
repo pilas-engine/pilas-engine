@@ -18,7 +18,7 @@ export default Component.extend({
 
   drop(event) {
     this.set("clase", "");
-    let actor_id = event.dataTransfer.getData("text/data");
+    let actor_id = JSON.parse(event.dataTransfer.getData("text/data")).id;
     this.proyecto.agregar_actor_a_la_escena(actor_id, this.ultimaEscenaSeleccionada, this.escena.id);
 
     return false;

@@ -23,6 +23,14 @@ export default Component.extend({
     }
   }),
 
+  estaSeleccionada: computed("seleccion", "actores.[]", function() {
+    if (this.actores) {
+      let actor = this.actores.findBy("id", this.seleccion);
+
+      return actor !== undefined;
+    }
+  }),
+
   dragLeave(event) {
     event.preventDefault();
     this.set("clase", "");
@@ -35,7 +43,7 @@ export default Component.extend({
 
   drop(event) {
     this.set("clase", "");
-    let actor_id = event.dataTransfer.getData("text/data");
+    let actor_id = JSON.parse(event.dataTransfer.getData("text/data")).id;
     this.proyecto.agregar_actor_a_la_carpeta(actor_id, this.carpeta.id);
 
     return false;
@@ -48,6 +56,10 @@ export default Component.extend({
       } else {
         this.carpeta.set("abierta", true);
       }
+    },
+
+    eliminarCarpetaDelProyecto() {
+      this.proyecto.eliminarCarpetaDelProyecto(this.carpeta, this.actores, this.escena);
     }
   }
 });

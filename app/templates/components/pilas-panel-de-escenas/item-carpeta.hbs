@@ -1,19 +1,31 @@
-<div class="{{claseSeleccionado}} pa2 mr2 br2" role="button" {{action "alternar"}}>
-  <div class="colapsador">
+<div class="{{claseSeleccionado}} pa2 mr2 br2 flex">
+  <div class="flex1 truncate" role="button" {{action "alternar"}}>
+
+    <div class="colapsador">
+      {{#if carpeta.abierta}}
+        ▾
+      {{else}}
+        ▸
+      {{/if}}
+    </div>
+
     {{#if carpeta.abierta}}
-      ▾
+      {{pilas-icono icono="carpeta-abierta"}}
     {{else}}
-      ▸
+      {{pilas-icono icono="carpeta"}}
     {{/if}}
+
+    {{carpeta.nombre}}
+
   </div>
 
   {{#if carpeta.abierta}}
-    {{pilas-icono icono="carpeta-abierta"}}
-  {{else}}
-    {{pilas-icono icono="carpeta"}}
+    <div class="">
+      {{pilas-boton-renombrar-carpeta carpeta=carpeta}}
+      {{pilas-boton-eliminar-con-confirmacion contador=true tipo="carpeta" titulo="¿Quieres eliminar la carpeta?" accion=(action "eliminarCarpetaDelProyecto")}}
+    </div>
   {{/if}}
 
-  {{carpeta.nombre}}
 </div>
 
 {{#if carpeta.abierta}}
@@ -28,8 +40,8 @@
         cuandoSelecciona=cuandoSelecciona
       }}
     {{else}}
-      <div class="texto pv1 o-50 pl3 ml2">
-        sin actores
+      <div class="bg-black-20 br2 mv1 mr2 o-50 pa2 texto">
+        Sin actores
       </div>
     {{/each}}
   </div>

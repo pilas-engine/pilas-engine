@@ -184,7 +184,52 @@ export default Component.extend({
 
         <script>
 
+
+        function codigo_para_clonar_un_actor(nombre) {
+            return 'let ' + nombre + ' = this.pilas.clonar("' + nombre + '");';
+        }
+
+        function codigo_para_obtener_actor(nombre) {
+            return 'let ' + nombre + ' = this.pilas.obtener_actor_por_nombre("' + nombre + '");';
+        }
+
         window.onload = function() {
+
+          window.addEventListener("dragover", function(e){
+              e.preventDefault();
+              e.stopPropagation();
+            }, false)
+
+          window.addEventListener("drop", function(e){
+              e.preventDefault();
+              e.stopPropagation();
+
+              let data = event.dataTransfer.getData("text/Data");
+              let {nombre, activo} = JSON.parse(data);
+
+              let p = editor.getTargetAtClientPoint(e.clientX, e.clientY).position;
+
+              let texto = "";
+
+              if (activo) {
+                texto = codigo_para_obtener_actor(nombre);
+              } else {
+                texto = codigo_para_clonar_un_actor(nombre);
+              }
+
+              var texto_completo = editor.getValue(p);
+              var lista = texto_completo.split('\\n');
+
+              lista = lista.slice(0, p.lineNumber).
+                          concat([texto]).
+                          concat(lista.slice(p.lineNumber, lista.length))
+
+              editor.setValue(lista.join('\\n'));
+              editor.setPosition(p);
+
+              editor.getAction("editor.action.formatDocument").run();
+
+          }, false)
 
           window.require.config({
             'vs/nls' : {
@@ -217,6 +262,7 @@ export default Component.extend({
                 },
                 fontSize: ${this.tamano},
                 theme: theme,
+                contextmenu: false,
                 tabSize: 4,
                 autoClosingBrackets: true,
                 insertSpaces: true,

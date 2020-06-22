@@ -604,7 +604,6 @@ declare class ActorBase {
         figura_sensor: boolean;
         es_texto: boolean;
         texto_con_borde: boolean;
-        color: string;
     };
     propiedades: any;
     cuadro: number;
@@ -1868,7 +1867,11 @@ declare class ModoEjecucion extends Modo {
     obtener_nombres_de_actores(): any;
     obtener_entidades_de_actores_de_todas_las_escenas(): any;
     obtener_definicion_de_actor_por_nombre(nombre: string): any;
-    crear_actor(entidad: any): any;
+    crear_actor(entidad: any): {
+        actor: any;
+        entidad: any;
+    };
+    inicializar_actor(actor: any, entidad: any): any;
     obtener_referencias_a_clases(): any;
     obtener_codigo_para_exportar_clases(codigo: any): string;
     guardar_parametros_en_atributos(datos: any): void;

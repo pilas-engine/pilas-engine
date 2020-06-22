@@ -207,5 +207,10 @@ export default Service.extend({
         color_anterior: color_anterior
       });
     }
+  },
+
+  eliminarCarpetaDelProyecto(carpeta, actores, escena) {
+    actores.map(actor => this.editor.eliminar_actor(actor.id));
+    escena.carpetas.removeObject(carpeta);
   }
 });

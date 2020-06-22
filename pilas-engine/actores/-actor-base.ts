@@ -61,8 +61,7 @@ class ActorBase {
     figura_sensor: false,
 
     es_texto: false,
-    texto_con_borde: false,
-    color: "white"
+    texto_con_borde: false
   };
 
   propiedades: any = {

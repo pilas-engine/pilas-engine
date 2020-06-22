@@ -404,6 +404,14 @@ class ModoEjecucion extends Modo {
 
         return this.crear_actor(e);
       })
+      .map((datos: any) => {
+        if (datos) {
+          let { actor, entidad } = datos;
+          return this.inicializar_actor(actor, entidad);
+        } else {
+          return false;
+        }
+      })
       .filter((e: any) => e);
 
     this._escena_en_ejecucion = escena;
@@ -427,7 +435,8 @@ class ModoEjecucion extends Modo {
 
     entidad.id = undefined;
 
-    return this.crear_actor(entidad);
+    let { actor } = this.crear_actor(entidad);
+    return this.inicializar_actor(actor, entidad);
   }
 
   obtener_nombres_de_actores() {
@@ -456,17 +465,22 @@ class ModoEjecucion extends Modo {
       p = this.pilas.utilidades.combinar_propiedades(p, entidad);
 
       actor.pre_iniciar(p);
-      actor.agregar_sensores_desde_lista(entidad.sensores);
-      actor.iniciar();
-
-      if (entidad.habilidades) {
-        entidad.habilidades.map((habilidad: any) => {
-          actor.aprender(habilidad);
-        });
-      }
     } else {
       let nombres_de_clases = Object.getOwnPropertyNames(this.clases);
       throw new Error(`No existe código para crear un actor de la clase ${entidad.nombre}. Las clases disponibles son [${nombres_de_clases.join(", ")}]`);
+    }
+
+    return { actor, entidad };
+  }
+
+  inicializar_actor(actor: any, entidad: any) {
+    actor.agregar_sensores_desde_lista(entidad.sensores);
+    actor.iniciar();
+
+    if (entidad.habilidades) {
+      entidad.habilidades.map((habilidad: any) => {
+        actor.aprender(habilidad);
+      });
     }
 
     return actor;
