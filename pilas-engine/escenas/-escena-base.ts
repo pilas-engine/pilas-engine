@@ -247,6 +247,7 @@ class EscenaBase {
     this.actores.map(e => {
       try {
         e.cuando_pulsa_tecla(tecla, evento_original);
+        e.automata.cuando_pulsa_tecla(tecla, evento_original);
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
       }

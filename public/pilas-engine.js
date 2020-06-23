@@ -473,6 +473,46 @@ var Automata = (function () {
             throw new Error("Imposible usar el estado '" + nombre + "', porque no existe un m\u00E9todo llamado '" + nombre_del_metodo_actualizar + "'");
         }
     };
+    Automata.prototype.cuando_pulsa_tecla = function (tecla, evento_original) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cuando_pulsa_tecla"];
+            if (metodo) {
+                metodo.call(this.actor, tecla, evento_original);
+            }
+        }
+    };
+    Automata.prototype.cuando_hace_click = function (x, y, evento_original) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cuando_hace_click"];
+            if (metodo) {
+                metodo.call(this.actor, x, y, evento_original);
+            }
+        }
+    };
+    Automata.prototype.cuando_termina_de_hacer_click = function (x, y, evento_original) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cuando_termina_de_hacer_click"];
+            if (metodo) {
+                metodo.call(this.actor, x, y, evento_original);
+            }
+        }
+    };
+    Automata.prototype.cuando_sale = function (x, y, evento_original) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cuando_sale"];
+            if (metodo) {
+                metodo.call(this.actor, x, y, evento_original);
+            }
+        }
+    };
+    Automata.prototype.cuando_mueve = function (x, y, evento_original) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cuando_mueve"];
+            if (metodo) {
+                metodo.call(this.actor, x, y, evento_original);
+            }
+        }
+    };
     return Automata;
 }());
 var Camara = (function () {
@@ -2576,24 +2616,28 @@ var ActorBase = (function () {
             _this.ejecutar_de_modo_seguro(function () {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.cuando_hace_click(posicion.x, posicion.y, cursor);
+                _this.automata.cuando_hace_click(posicion.x, posicion.y, cursor);
             });
         });
         this.sprite.on("pointerup", function (cursor) {
             _this.ejecutar_de_modo_seguro(function () {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+                _this.automata.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
             });
         });
         this.sprite.on("pointerout", function (cursor) {
             _this.ejecutar_de_modo_seguro(function () {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.cuando_sale(posicion.x, posicion.y, cursor);
+                _this.automata.cuando_sale(posicion.x, posicion.y, cursor);
             });
         });
         this.sprite.on("pointermove", function (cursor) {
             _this.ejecutar_de_modo_seguro(function () {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.cuando_mueve(posicion.x, posicion.y, cursor);
+                _this.automata.cuando_mueve(posicion.x, posicion.y, cursor);
             });
         });
         this.pilas.escena.agregar_actor(this);
@@ -4973,6 +5017,7 @@ var EscenaBase = (function () {
         this.actores.map(function (e) {
             try {
                 e.cuando_pulsa_tecla(tecla, evento_original);
+                e.automata.cuando_pulsa_tecla(tecla, evento_original);
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");

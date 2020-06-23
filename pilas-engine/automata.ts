@@ -69,4 +69,54 @@ class Automata {
       throw new Error(`Imposible usar el estado '${nombre}', porque no existe un método llamado '${nombre_del_metodo_actualizar}'`);
     }
   }
+
+  cuando_pulsa_tecla(tecla: string, evento_original: any) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cuando_pulsa_tecla`];
+
+      if (metodo) {
+        metodo.call(this.actor, tecla, evento_original);
+      }
+    }
+  }
+
+  cuando_hace_click(x: number, y: number, evento_original: any) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cuando_hace_click`];
+
+      if (metodo) {
+        metodo.call(this.actor, x, y, evento_original);
+      }
+    }
+  }
+
+  cuando_termina_de_hacer_click(x: number, y: number, evento_original: any) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cuando_termina_de_hacer_click`];
+
+      if (metodo) {
+        metodo.call(this.actor, x, y, evento_original);
+      }
+    }
+  }
+
+  cuando_sale(x: number, y: number, evento_original: any) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cuando_sale`];
+
+      if (metodo) {
+        metodo.call(this.actor, x, y, evento_original);
+      }
+    }
+  }
+
+  cuando_mueve(x: number, y: number, evento_original: any) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cuando_mueve`];
+
+      if (metodo) {
+        metodo.call(this.actor, x, y, evento_original);
+      }
+    }
+  }
 }

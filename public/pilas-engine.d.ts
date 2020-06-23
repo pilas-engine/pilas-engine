@@ -98,6 +98,11 @@ declare class Automata {
     cuando_finaliza_animacion(nombre: string): void;
     cada_segundo(segundos_transcurridos: number): void;
     validar_que_existen_los_metodos_de_estado(nombre: string): void;
+    cuando_pulsa_tecla(tecla: string, evento_original: any): void;
+    cuando_hace_click(x: number, y: number, evento_original: any): void;
+    cuando_termina_de_hacer_click(x: number, y: number, evento_original: any): void;
+    cuando_sale(x: number, y: number, evento_original: any): void;
+    cuando_mueve(x: number, y: number, evento_original: any): void;
 }
 declare class Camara {
     pilas: Pilas;
@@ -704,7 +709,7 @@ declare class ActorBase {
     cuando_se_mantiene_una_colision(actor: Actor): void;
     cuando_termina_una_colision(actor: Actor): void;
     cuando_colisiona(actor: Actor): void;
-    cuando_hace_click(x: any, y: any, evento_original: any): void;
+    cuando_hace_click(x: number, y: number, evento_original: any): void;
     cuando_termina_de_hacer_click(x: any, y: any, evento_original: any): void;
     cuando_sale(x: any, y: any, evento_original: any): void;
     cuando_mueve(x: any, y: any, evento_original: any): void;

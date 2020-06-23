@@ -1,7 +1,7 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
-import { later } from '@ember/runloop';
+import { later } from "@ember/runloop";
 
 // recetas de actores
 import reproducir_sonido_al_comenzar from "pilas-engine/utils/recetas/actor/reproducir-sonido-al-comenzar";
@@ -34,8 +34,8 @@ export default Component.extend({
     let valor = this.recetas.filterBy("para", this.tipo_de_la_instancia_seleccionada).sortBy("titulo");
 
     if (this.filtro) {
-      return valor.filter((e) => {
-        return (e.titulo.toLowerCase().includes(this.filtro.toLowerCase()));
+      return valor.filter(e => {
+        return e.titulo.toLowerCase().includes(this.filtro.toLowerCase());
       });
     } else {
       return valor;
@@ -74,14 +74,15 @@ export default Component.extend({
 
   actions: {
     usar_receta(receta, dd) {
+      alert(receta);
       this.bus.trigger("usar_receta", receta);
       dd.actions.close();
     },
-     cuando_abre() {
-       later(() => {
-         let boton = document.getElementById("boton-receta");
-         boton.focus();
-       }, 1)
-     }
+    cuando_abre() {
+      later(() => {
+        let boton = document.getElementById("boton-receta");
+        boton.focus();
+      }, 1);
+    }
   }
 });

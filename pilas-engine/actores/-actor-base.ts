@@ -190,6 +190,7 @@ class ActorBase {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_hace_click(posicion.x, posicion.y, cursor);
+        this.automata.cuando_hace_click(posicion.x, posicion.y, cursor);
       });
     });
 
@@ -197,6 +198,7 @@ class ActorBase {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
+        this.automata.cuando_termina_de_hacer_click(posicion.x, posicion.y, cursor);
       });
     });
 
@@ -204,6 +206,7 @@ class ActorBase {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_sale(posicion.x, posicion.y, cursor);
+        this.automata.cuando_sale(posicion.x, posicion.y, cursor);
       });
     });
 
@@ -211,6 +214,7 @@ class ActorBase {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
         this.cuando_mueve(posicion.x, posicion.y, cursor);
+        this.automata.cuando_mueve(posicion.x, posicion.y, cursor);
       });
     });
 
@@ -917,7 +921,7 @@ class ActorBase {
    */
   cuando_colisiona(actor: Actor) {}
 
-  cuando_hace_click(x, y, evento_original) {}
+  cuando_hace_click(x: number, y: number, evento_original: any) {}
 
   cuando_termina_de_hacer_click(x, y, evento_original) {}
 

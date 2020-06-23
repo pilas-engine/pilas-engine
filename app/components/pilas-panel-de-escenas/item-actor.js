@@ -4,7 +4,7 @@ import { inject as service } from "@ember/service";
 
 export default Component.extend({
   tagName: "li",
-  classNames: ["truncate-text", "texto", "pa2", "br2", "pointer", "ml1", "mt1", "mr2"],
+  classNames: ["truncate-text", "texto", "pa2", "br2", "pointer", "ml1", "mt1", "mr2", "flex", "items-center"],
   classNameBindings: ["claseSeleccionado"],
   attributeBindings: ["draggable"],
   draggable: "true",

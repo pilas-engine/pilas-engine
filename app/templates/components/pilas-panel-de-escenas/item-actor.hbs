@@ -1,10 +1,12 @@
 <div class="dib br-100 {{if actor.color actor.color "bg-silver"}} icono-item-de-actor"></div>
 
-{{#if (eq actor.activo false)}}
-  <span class="o-50">{{actor.nombre}}</span>
-{{else}}
-  {{actor.nombre}}
-{{/if}}
+<div class="flex1 pl2">
+  {{#if (eq actor.activo false)}}
+    <span class="o-50">{{actor.nombre}}</span>
+  {{else}}
+    {{actor.nombre}}
+  {{/if}}
+</div>
 
 <div class="dib fr f7">
   {{#if (eq seleccion actor.id)}}
