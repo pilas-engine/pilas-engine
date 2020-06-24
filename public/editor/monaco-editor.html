@@ -188,6 +188,12 @@
 	            insertText: 'this.pilas.clonar_en("${1:}", ${2:0}, ${3:0});',
 	            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
 	          },
+	          {
+	            label: "control",
+	            kind: monaco.languages.CompletionItemKind.Function,
+	            insertText: 'if (this.pilas.control.${1:}) {\n    ${2:}\n}',
+	            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+	          },
 	        ]
 	      }
 

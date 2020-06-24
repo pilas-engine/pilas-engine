@@ -40,6 +40,10 @@ export default Component.extend({
   }),
 
   sincronizarOscuro: observer("oscuro", function() {
+    this.definirTema();
+  }),
+
+  definirTema() {
     var theme = "vs";
 
     if (this.oscuro) {
@@ -49,7 +53,7 @@ export default Component.extend({
     if (this.monaco) {
       this.monaco.editor.setTheme(theme);
     }
-  }),
+  },
 
   sincronizarModoVim: observer("modoVim", function() {
     if (this.window) {
@@ -120,12 +124,9 @@ export default Component.extend({
       return;
     }
     const frame = this.getFrameById(this.elementId);
-    const frameDoc = frame.document;
-    let oscuro = this.oscuro;
     this.set("frame", frame);
 
-    let rootURL = this.rootURL;
-    let modoVim = this.modoVim;
+    //let rootURL = this.rootURL;
 
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
     this.bus.on("usar_receta", this, "usar_receta");
@@ -143,12 +144,14 @@ export default Component.extend({
     this.editor.updateOptions({ fontSize: this.tamano });
 
     if (this.modoVim) {
-        this.window.activar_vim();
+      this.window.activar_vim();
     }
 
     if (this.cuandoCarga) {
       this.cuandoCarga();
     }
+
+    this.definirTema();
 
     this.set("loading", false);
   },
