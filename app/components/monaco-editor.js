@@ -11,7 +11,6 @@ export default Component.extend({
   readOnly: false,
   editor: null,
   bus: service(),
-  declaraciones: service(),
   linenumbers: true,
   modoVim: false,
   window: null,
@@ -84,7 +83,7 @@ export default Component.extend({
 
       if (event.source === this.frame && event.data && event.data.message) {
         if (event.data.message === "load-complete") {
-          this.onLoadEditor(this.frame.editor, this.frame.monaco, this.frame.window);
+          this.cuandoCargaElEditor(this.frame.editor, this.frame.monaco, this.frame.window);
         }
 
         if (event.data.message === "on-save") {
@@ -101,9 +100,7 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    this.declaraciones.iniciar().then(() => {
-      this.iniciarEditor();
-    });
+    this.iniciarEditor();
   },
 
   getFrameById(id) {
@@ -127,221 +124,26 @@ export default Component.extend({
     let oscuro = this.oscuro;
     this.set("frame", frame);
 
-    let declaraciones_de_pilas_engine_ts = this.declaraciones.obtener();
     let rootURL = this.rootURL;
     let modoVim = this.modoVim;
-
-    frameDoc.open();
-    frameDoc.write(`
-
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" id="print-modal-content">
-      <head>
-
-        <script>
-        var HOST = "file://";
-
-        if (window.location.host) {
-          HOST = window.location.protocol + "//" + window.location.host;
-        }
-        </script>
-
-        <script src="${rootURL}vs/loader.js"></script>
-
-        <style type="text/css">
-          html,
-          body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-          }
-
-          .vs-dark .mtk11 {
-            color: #d4d4d4 !important;
-          }
-
-          .vs .mtk11 {
-            color: #000000 !important;
-          }
-
-          /* Oculta las barras verticales para indicar identación */
-
-          .monaco-editor .lines-content .cigr {
-            box-shadow: 1px 0 0 0 transparent inset !important;
-          }
-
-          .monaco-editor .lines-content .cigra {
-            box-shadow: 1px 0 0 0 transparent inset !important;
-          }
-
-          #status {
-            display: none !important;
-          }
-
-        </style>
-
-        <script>
-
-
-        function codigo_para_clonar_un_actor(nombre) {
-            return 'let ' + nombre + ' = this.pilas.clonar("' + nombre + '");';
-        }
-
-        function codigo_para_obtener_actor(nombre) {
-            return 'let ' + nombre + ' = this.pilas.obtener_actor_por_nombre("' + nombre + '");';
-        }
-
-        window.onload = function() {
-
-          window.addEventListener("dragover", function(e){
-              e.preventDefault();
-              e.stopPropagation();
-            }, false)
-
-          window.addEventListener("drop", function(e){
-              e.preventDefault();
-              e.stopPropagation();
-
-              let data = event.dataTransfer.getData("text/Data");
-              let {nombre, activo} = JSON.parse(data);
-
-              let p = editor.getTargetAtClientPoint(e.clientX, e.clientY).position;
-
-              let texto = "";
-
-              if (activo) {
-                texto = codigo_para_obtener_actor(nombre);
-              } else {
-                texto = codigo_para_clonar_un_actor(nombre);
-              }
-
-              var texto_completo = editor.getValue(p);
-              var lista = texto_completo.split('\\n');
-
-              lista = lista.slice(0, p.lineNumber).
-                          concat([texto]).
-                          concat(lista.slice(p.lineNumber, lista.length))
-
-              editor.setValue(lista.join('\\n'));
-              editor.setPosition(p);
-
-              editor.getAction("editor.action.formatDocument").run();
-
-          }, false)
-
-          window.require.config({
-            'vs/nls' : {
-              availableLanguages: {
-                '*': 'es'
-              }
-            },
-            paths: {
-              'vs': '${rootURL}vs',
-              'monaco-vim': '${rootURL}monaco-vim',
-            }
-          });
-
-          window.require(['${rootURL}vs/editor/editor.main', '${rootURL}monaco-vim/monaco-vim'], function (a, MonacoVim) {
-
-            if (typeof monaco !== "undefined") {
-
-              monaco.languages.typescript.typescriptDefaults.addExtraLib(\`'${declaraciones_de_pilas_engine_ts}\`, 'pilas-engine.d.ts');
-
-              var theme = 'vs';
-
-              if (${oscuro}) {
-                theme = 'vs-dark';
-              }
-
-              var editor = monaco.editor.create(document.getElementById('monaco-editor-wrapper'), {
-                language: 'typescript',
-                minimap: {
-                  enabled: false
-                },
-                fontSize: ${this.tamano},
-                theme: theme,
-                contextmenu: false,
-                tabSize: 4,
-                autoClosingBrackets: true,
-                insertSpaces: true,
-                tabWidth: 4,
-                lineNumbers: ${this.linenumbers},
-                readOnly: ${this.readOnly},
-              });
-
-              window.activar_vim = function() {
-                if (!window.vimMode) {
-                  var statusNode = document.getElementById('status');
-                  statusNode.innerHTML = "";
-                  var vimMode = MonacoVim.initVimMode(editor, statusNode);
-                  window.vimMode = vimMode;
-                } else {
-                  console.error("Vim ya se había activado previamente.");
-                }
-              }
-
-              window.desactivar_vim = function() {
-                if (window.vimMode) {
-                  window.vimMode.dispose();
-                  delete window.vimMode
-                } else {
-                  console.error("Vim no estaba activado.");
-                }
-              }
-
-              editor.onDidChangeModelContent(function (event) {
-                window.top.postMessage({updatedCode: editor.getValue()}, HOST);
-              });
-
-              if (${modoVim}) {
-                activar_vim();
-              }
-
-              window.top.postMessage({message: "load-complete"}, HOST);
-              window.editor = editor;
-              window.monaco = monaco;
-
-              window.onresize = function() {
-                editor.layout();
-              };
-
-              var myBinding = editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
-                window.top.postMessage({message: "on-save"}, HOST);
-              });
-
-            }
-          });
-        }
-          </script>
-
-
-
-
-      </head>
-
-      <body>
-        <div id="monaco-editor-wrapper" style="width:100%;height:100%"></div>
-        <div id="status"></div>
-      </body>
-
-      </html>
-
-      `);
-    frameDoc.close();
 
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
     this.bus.on("usar_receta", this, "usar_receta");
   },
 
-  onLoadEditor(editor, monaco, window) {
+  cuandoCargaElEditor(editor, monaco, window) {
     this.set("editor", editor);
     this.set("monaco", monaco);
     this.set("window", window);
 
     if (this.code) {
       this.cargar_codigo();
+    }
+
+    this.editor.updateOptions({ fontSize: this.tamano });
+
+    if (this.modoVim) {
+        this.window.activar_vim();
     }
 
     if (this.cuandoCarga) {

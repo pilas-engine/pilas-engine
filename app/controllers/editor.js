@@ -32,7 +32,7 @@ const queryParams = new QueryParams({
   pixelart: { defaultValue: false, replace: true },
   ejemplo: { defaultValue: null, replace: true, refresh: true },
   hash: { defaultValue: null, replace: true, refresh: true },
-  tamano: { defaultValue: 14, replace: true, refresh: true },
+  tamano: { defaultValue: 16, replace: true, refresh: true },
   mostrarModalDeAnimaciones: { defaultValue: false, replace: true },
   mostrarModalDeSonidos: { defaultValue: false, replace: true },
   mostrarModalDeAyuda: { defaultValue: false, replace: true }
