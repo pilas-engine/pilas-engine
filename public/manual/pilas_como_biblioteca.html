@@ -85,39 +85,40 @@
       <h1 class="title">Pilas como biblioteca externa</h1>
             </header>
       <p>Pilas se puede usar como una biblioteca externa para permitir un uso avanzado y muy personalizado de pilas.</p>
-<p>Esta opción es ideal si quieres poner tu juego en blogs, fotos o incluso en dispositivos móviles como tablets o celulares con herramientas como cordova o phonegap.</p>
-<p>El primer paso para incorporar pilas como biblioteca es descargar los archivos javascript <code>phaser</code>, <code>nineslice</code> y <code>pilas-engine</code> del directorio <code>public</code> de nuestro repositorio y colocarlos en un directorio local:</p>
-<ul>
-<li>https://github.com/pilas-engine/pilas-engine/tree/master/public</li>
-</ul>
-<p>Luego, deberías agregar en ese mismo directorio los archivos “imagenes/sin_imagen.png” y el directorio “fuentes” que también aparencen en el link anterior.</p>
-<p>Por último, deberías crear un archivo index.html con la estructura inicial que necesita pilas.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="kw">&lt;head&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;archivo phaser js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;archivo nineslice js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;archivo pilas-engine js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">&lt;/head&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="kw">&lt;body&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="kw">&lt;script&gt;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>      <span class="kw">var</span> pilas <span class="op">=</span> pilasengine<span class="op">.</span><span class="fu">iniciar</span>(<span class="dv">600</span><span class="op">,</span> <span class="dv">600</span>)<span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a>      pilas<span class="op">.</span><span class="at">onready</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
-<span id="cb1-16"><a href="#cb1-16"></a>        <span class="kw">let</span> actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>      }<span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>    <span class="kw">&lt;/script&gt;</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="kw">&lt;/body&gt;</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
-<p>Este archivo <code>index.html</code> se tiene que cargar en un navegador usando un webserver y no directamente abriendo el archivo <code>index.html</code>. Esto se tiene que hacer debido a que pilas (y phaser) usan ajax para cargar imágenes y otros recursos.</p>
-<p>Adicionalmente, si tu juego utiliza recursos propios, u otros actores de pilas, te recomendamos ver este otro ejemplo en donde se cargan varios recursos:</p>
-<ul>
-<li>https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html</li>
-</ul>
-<p>Vas a notar que la diferencia más grande de este otro ejemplo es que usamos un parámetro para especificar la lista de recursos a cargar y opcionalmente enumeramos los detalles del proyecto.</p>  <div class="tc navegacion">
+<p>De todas formas, la opción más recomendada para llevar tu juego a blogs, mobile u otros medios es siguiendo las instrucciones que están en esta otra sección: <a href="exportar_juegos.html">Cómo exportar juegos</a></p>
+<p>Esta sección solo es aconsejable para programadores avanzados que quieran integrar pilas a otras bibliotecas, como <a href="https://reactjs.org/">react</a>, <a href="https://vuejs.org/">vue</a> o similares, partiendo de un código minimalista, sin imágenes, sonidos ni actores predeterminados de pilas.</p>
+<h2 id="archivos-iniciales">Archivos iniciales</h2>
+<p>Para utilizar pilas como biblioteca se suele crear un archivo <code>.html</code> e incorporar las dependencias del proyecto, como <code>phaser</code> y <code>nine-slice</code>. Así que para hacer más sencilla esta tarea inicial pilas se distribuye junto a una plantilla que tiene todos estos archivos listos y configurados para utilizar.</p>
+<p>Ingresá en el sitio de pilas, y en la sección descargas vas a encontrar un link para descargar una plantilla llamada “versión-minima”:</p>
+<p><img src="imagenes/pilas-como-biblioteca/descarga.png" /></p>
+<p>Este archivo <code>.zip</code> tiene lo mínimo y necesario para cargar pilas y poder usar el motor directamente:</p>
+<p>Ten en cuenta que para utilizar esta versión tienes que descomprimir el archivo <code>.zip</code>, luego iniciar un servidor web y por último abrir el archivo <code>.html</code> desde un navegador:</p>
+<p><img src="imagenes/pilas-como-biblioteca/ejecucion.png" /></p>
+<p>Es importante usar un servidor web y no abrir el archivo directamente ya que pilas (y phaser) usan una tecnología llamada Ajax para cargar imágenes y otros recursos.</p>
+<p>A partir de ahí, para editar tu juego deberías inspeccionar el archivo <code>.html</code>, en donde aparecerá el código mínimo para iniciar pilas, crear un actor y moverlo por la pantalla:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>var imagenes <span class="op">=</span> [</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  {</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    nombre<span class="op">:</span> <span class="st">&quot;logo&quot;</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    ruta<span class="op">:</span> <span class="st">&quot;logo.png&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  }<span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  {</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    nombre<span class="op">:</span> <span class="st">&quot;fondo&quot;</span><span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    ruta<span class="op">:</span> <span class="st">&quot;fondo.png&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10"></a>]<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>var pilas <span class="op">=</span> pilasengine<span class="op">.</span><span class="fu">iniciar</span>(<span class="dv">500</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> recursos<span class="op">,</span> opciones<span class="op">,</span> imagenes)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>pilas<span class="op">.</span><span class="at">onready</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  let logo <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor_basico</span>(<span class="st">&quot;logo&quot;</span>)<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  logo<span class="op">.</span><span class="at">transparencia</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  logo</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="op">.</span><span class="fu">animar</span>()</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="op">.</span><span class="fu">mostrar</span>()</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="op">.</span><span class="fu">mover_hasta</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>}<span class="op">;</span></span></code></pre></div>
+<p>Por supuesto puedes cambiar ese código y adaptarlo a tus necesidades, pero no olvides que esta versión mínima no incluye las tipografías, sonidos e imágenes que incluye pilas, deberías cargar archivos <code>.png</code> propios para tener más posibilidades.</p>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

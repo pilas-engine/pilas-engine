@@ -5,57 +5,67 @@ title: Pilas como biblioteca externa
 Pilas se puede usar como una biblioteca externa para permitir un uso avanzado
 y muy personalizado de pilas.
 
-Esta opción es ideal si quieres poner tu juego en blogs, fotos o incluso
-en dispositivos móviles como tablets o celulares con herramientas como
-cordova o phonegap.
+De todas formas, la opción más recomendada para llevar tu juego
+a blogs, mobile u otros medios es siguiendo las instrucciones
+que están en esta otra sección: [Cómo exportar juegos](exportar_juegos.html)
 
-El primer paso para incorporar pilas como biblioteca es descargar los
-archivos javascript `phaser`, `nineslice` y `pilas-engine` del directorio
-`public` de nuestro repositorio y colocarlos en un directorio local:
+Esta sección solo es aconsejable para programadores avanzados
+que quieran integrar pilas a otras bibliotecas, como [react](https://reactjs.org/),
+[vue](https://vuejs.org/) o similares, partiendo de un código minimalista, sin imágenes,
+sonidos ni actores predeterminados de pilas.
 
-- https://github.com/pilas-engine/pilas-engine/tree/master/public
+## Archivos iniciales
 
-Luego, deberías agregar en ese mismo directorio los archivos
-"imagenes/sin_imagen.png" y el directorio "fuentes" que también aparencen
-en el link anterior.
+Para utilizar pilas como biblioteca se suele crear un archivo `.html` e incorporar
+las dependencias del proyecto, como `phaser` y `nine-slice`. Así que para hacer más sencilla
+esta tarea inicial pilas se distribuye junto a una plantilla que tiene todos estos
+archivos listos y configurados para utilizar.
 
-Por último, deberías crear un archivo index.html con la estructura inicial
-que necesita pilas.
+Ingresá en el sitio de pilas, y en la sección descargas vas a encontrar un link para
+descargar una plantilla llamada "versión-minima":
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
+![](imagenes/pilas-como-biblioteca/descarga.png)
 
-    <script src="archivo phaser js"></script>
-    <script src="archivo nineslice js"></script>
-    <script src="archivo pilas-engine js"></script>
-  </head>
+Este archivo `.zip` tiene lo mínimo y necesario para cargar pilas y poder usar el
+motor directamente:
 
-  <body>
-    <script>
-      var pilas = pilasengine.iniciar(600, 600);
+Ten en cuenta que para utilizar esta versión tienes que descomprimir el archivo
+`.zip`, luego iniciar un servidor web y por último abrir el archivo `.html` desde un
+navegador:
 
-      pilas.onready = function() {
-        let actor = pilas.actores.actor();
-      };
-    </script>
-  </body>
-</html>
+![](imagenes/pilas-como-biblioteca/ejecucion.png)
+
+Es importante usar un servidor web y no abrir el archivo directamente ya que
+pilas (y phaser) usan una tecnología llamada Ajax para cargar imágenes y otros recursos.
+
+A partir de ahí, para editar tu juego deberías inspeccionar el archivo `.html`, en donde
+aparecerá el código mínimo para iniciar pilas, crear un actor y moverlo por la pantalla:
+
+```typescript
+var imagenes = [
+  {
+    nombre: "logo",
+    ruta: "logo.png"
+  },
+  {
+    nombre: "fondo",
+    ruta: "fondo.png"
+  }
+];
+
+var pilas = pilasengine.iniciar(500, 500, recursos, opciones, imagenes);
+
+pilas.onready = function() {
+  let logo = pilas.actores.actor_basico("logo");
+  logo.transparencia = 100;
+
+  logo
+    .animar()
+    .mostrar()
+    .mover_hasta(0, 50);
+};
 ```
 
-Este archivo `index.html` se tiene que cargar en un navegador usando
-un webserver y no directamente abriendo el archivo `index.html`.
-Esto se tiene que hacer debido a que pilas (y phaser) usan ajax para cargar
-imágenes y otros recursos.
-
-Adicionalmente, si tu juego utiliza recursos propios, u otros actores de
-pilas, te recomendamos ver este otro ejemplo en donde se cargan varios
-recursos:
-
-- https://github.com/pilas-engine/pilas-engine/blob/feature/adaptar-para-ser-usada-como-biblioteca/public/ejemplo-minimo-con-recursos.html
-
-Vas a notar que la diferencia más grande de este otro ejemplo es que usamos
-un parámetro para especificar la lista de recursos a cargar y opcionalmente
-enumeramos los detalles del proyecto.
+Por supuesto puedes cambiar ese código y adaptarlo a tus necesidades, pero no olvides
+que esta versión mínima no incluye las tipografías, sonidos e imágenes que incluye pilas,
+deberías cargar archivos `.png` propios para tener más posibilidades.

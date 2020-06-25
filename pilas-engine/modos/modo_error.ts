@@ -16,6 +16,12 @@ class ModoError extends Modo {
     let espaciado: number;
     this.pilas = datos.pilas;
 
+    if (this.pilas.opciones.modo_simple) {
+      this.add.text(0, 0, "Ha ocurrido un error, mire el detalle en la consola.");
+      console.error(datos.error);
+      return;
+    }
+
     this.conectar_eventos();
     this.crear_fondo();
     this.crear_titulo();

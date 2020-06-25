@@ -10,6 +10,7 @@ COMPILAR_EN_WINDOWS=1
 COMPILAR_EN_LINUX=1
 COMPILAR_EN_ARM=1
 EMPAQUETAR_PARA_SERVIDOR_ESTATICO=1
+EMPAQUETAR_VERSION_MINIMA=1
 
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
@@ -167,6 +168,7 @@ binarios:
 	$(call task, "Comenzando a generar binarios.")
 	$(call log, "Limpiando directorio de binarios ...")
 	@rm -rf binarios
+	@mkdir binarios
 	$(call log, "Compilando aplicación ember ...")
 	${BIN_EMBER} build
 	$(call log, "Generando binarios ...")
@@ -227,6 +229,19 @@ ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	@mv dist/ pilas-engine-compilado
 	@zip -qr binarios/pilas-engine-compilado.zip pilas-engine-compilado
 	@rm -rf pilas-engine-compilado
+endif
+ifeq ($(EMPAQUETAR_VERSION_MINIMA), 1)
+	@echo "Empaquetando versión mínima ..."
+	@rm -rf version-minima
+	@mkdir version-minima
+	@cp public/pilas-engine.js ./version-minima/
+	@cp public/nineslice.js ./version-minima/
+	@cp public/phaser.js ./version-minima/
+	@cp extras/ejemplo-minimo.html ./version-minima/
+	@cp recursos/imagenes/basicos/logo.png version-minima/
+	@cp recursos/decoracion/fondos/fondo-azul.png version-minima/fondo.png
+	@zip -qr binarios/version-minima.zip version-minima
+	@rm -rf version-minima
 endif
 
 .PHONY: tmp docs binarios manual

@@ -30,7 +30,7 @@ El primer paso es tener instalado [Node.JS](https://nodejs.org/es/) y acceso a u
 
 Luego, se tiene que ingresar en el directorio "proyecto" y ejecutar el comando:
 
-```typescript
+```bash
 npm install
 ```
 
@@ -44,7 +44,7 @@ A partir de este punto, vas a tener la posiblidad de hacer alguna de estas cosas
 
 Para iniciar el juego directamente en un navegador podrías escribir este comando en el mismo directorio "proyecto":
 
-```
+```bash
 npm start
 ```
 
@@ -60,7 +60,7 @@ Otra opción es lanzar el juego como si se tratara de una aplicación dedicada, 
 
 Para eso, tendrías que ejecutar este comando:
 
-```
+```bash
 npm run electron
 ```
 
@@ -80,7 +80,7 @@ Tomemos el ejemplo más solicitado, hagamos que nuestro juego se pueda compilar 
 o bien, abrir el comando "cmd", ingresar en el directorio del juego
 exportado y ejecutar estos comandos:
 
-```
+```bash
 npm install electron-packager --save-dev
 
 node_modules/.bin/electron-packager . mijuego --platform=win32 --arch=ia32
@@ -96,7 +96,7 @@ En mi caso, los archivos se generaron en un directorio llamado "mijuego-win32-ia
 
 Si además de windows estás buscando llevar tu juego a otras plataformas como gnu/linux, mac/osx o raspberry también hay un parámetro para lanzar la compilación en todas las plataformas soportadas así:
 
-```
+```bash
 node_modules/.bin/electron-packager . mijuego --all
 ```
 
@@ -119,7 +119,7 @@ Pilas incluye una forma sencilla de probar juegos en celulares y tablets, si sol
 
 Ahora bien, si en realidad lo que buscas es llevar tu juego de forma permanente a un celular o tablet, ya sea para tí, amigos o para publicar en un tienda oficial, lo que necesitas es instalar cordova, los SDK oficiales para tu tipo de dispositivo (android o ios) y compilar tu juego por completo.
 
-```
+```bash
 npm install cordova -g
 
 cordova create cordova
@@ -131,7 +131,7 @@ Por último, tendrías que agregar la plataforma principal (android o ios) y lue
 
 Por ejemplo, para ios:
 
-```
+```bash
 cd cordova
 cordova platform add ios
 cordova build ios
@@ -144,7 +144,7 @@ y luego abrir el proyecto desde el directorio "platforms/ios" en xcode y ejecuta
 
 Y para android:
 
-```
+```bash
 cd cordova
 cordova platform add android
 ```
@@ -153,7 +153,7 @@ En este punto, asegúrate de haber movido todos los archivos del directorio "pro
 
 Luego tienes que generar el proyecto para android con este comando:
 
-```
+```bash
 cordova build android
 ```
 

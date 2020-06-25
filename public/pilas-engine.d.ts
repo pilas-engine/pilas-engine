@@ -1,7 +1,7 @@
 declare class Actores {
     pilas: Pilas;
     constructor(pilas: Pilas);
-    crear_actor(nombre: string, clase?: any): Actor;
+    crear_actor(nombre: string, clase?: any, imagen?: string): Actor;
     vincular(nombre: string, clase: any): void;
     actor(): Actor;
     aceituna(): Actor;
@@ -35,6 +35,7 @@ declare class Actores {
     pantalla_completa(): Actor;
     barra_de_energia(): Actor;
     interruptor_de_gravedad(): Actor;
+    actor_basico(imagen: string): Actor;
 }
 declare enum Tipo {
     lineal = "Linear",
@@ -1767,6 +1768,7 @@ declare class ModoCargador extends Modo {
     contador: number;
     barra_de_progreso: any;
     x: number;
+    modo_simple: boolean;
     constructor();
     preload(): void;
     init(data: any): void;

@@ -15,8 +15,9 @@ var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
     }
-    Actores.prototype.crear_actor = function (nombre, clase) {
+    Actores.prototype.crear_actor = function (nombre, clase, imagen) {
         if (clase === void 0) { clase = null; }
+        if (imagen === void 0) { imagen = null; }
         if (!clase) {
             clase = window[nombre];
         }
@@ -25,6 +26,9 @@ var Actores = (function () {
         if (!p.nombre) {
             var nombre_asignado = this.pilas.escena.obtener_nombre_para(nombre);
             p.nombre = nombre_asignado;
+        }
+        if (imagen) {
+            p.imagen = imagen;
         }
         actor.pre_iniciar(p);
         actor.iniciar();
@@ -134,6 +138,9 @@ var Actores = (function () {
     };
     Actores.prototype.interruptor_de_gravedad = function () {
         return this.crear_actor("interruptor_de_gravedad");
+    };
+    Actores.prototype.actor_basico = function (imagen) {
+        return this.crear_actor("Actor", null, imagen);
     };
     return Actores;
 }());
@@ -1930,8 +1937,13 @@ var Utilidades = (function () {
     };
     Utilidades.prototype.validar_que_existe_imagen = function (nombre) {
         if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
-            var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
-            throw Error("No se encuentra la imagen \"" + nombre + "\"\n\u00BFQuisiste decir \"" + sugerencia + "\"?");
+            if (this.pilas.imagenes_precargadas.length === 0) {
+                throw Error("No se encuentra la imagen \"" + nombre + "\" y parece que no se carg\u00F3 ninguna imagen");
+            }
+            else {
+                var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
+                throw Error("No se encuentra la imagen \"" + nombre + "\"\n\u00BFQuisiste decir \"" + sugerencia + "\"?");
+            }
         }
     };
     Utilidades.prototype.sincronizar_contenedor = function (contenedor, sprite) {
@@ -2070,6 +2082,9 @@ var Pilas = (function () {
         this._alto = alto;
         this.recursos = recursos;
         var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
+        if (opciones.modo_simple) {
+            configuracion["modo_simple"] = opciones.modo_simple;
+        }
         if (opciones.fps === 30) {
             configuracion["fps"] = {
                 target: opciones.fps,
@@ -7375,7 +7390,9 @@ var Modo = (function (_super) {
         this.alto = alto;
         this.canvas_fisica = this.sys.add.graphics({ x: 0, y: 0 });
         this.canvas_fisica.depth = 99999;
-        this.crear_indicadores_de_rendimiento_fps();
+        if (!datos.pilas.opciones.modo_simple) {
+            this.crear_indicadores_de_rendimiento_fps();
+        }
         this.crear_canvas_de_depuracion();
         this.pilas = datos.pilas;
         if (datos.proyecto && datos.proyecto.fps === 30) {
@@ -7723,26 +7740,30 @@ var ModoCargador = (function (_super) {
         this.load.crossOrigin = "anonymous";
         this.contador = 0;
         this.crear_indicador_de_carga();
-        this.load.multiatlas("imagenes", "imagenes.json", "./");
-        this.load.multiatlas("bloques", "bloques.json", "./");
-        this.load.multiatlas("decoracion", "decoracion.json", "./");
-        this.load.multiatlas("fuentes", "fuentes.json", "./");
-        this.load.json("fuentes-datos-json", "fuentes-datos.json");
-        var _loop_2 = function (i) {
-            var sonido = this_2.pilas.recursos.sonidos[i];
-            this_2.pilas.sonidos.agregar_sonido(sonido.nombre);
-            if (sonido.contenido) {
-                this_2.convertir_sonido_en_array_buffer(sonido, function (buffer) {
-                    _this.cache.audio.add(sonido.nombre, buffer);
-                });
+        if (!this.pilas.opciones.modo_simple) {
+            this.load.multiatlas("imagenes", "imagenes.json", "./");
+            this.load.multiatlas("bloques", "bloques.json", "./");
+            this.load.multiatlas("decoracion", "decoracion.json", "./");
+            this.load.multiatlas("fuentes", "fuentes.json", "./");
+            this.load.json("fuentes-datos-json", "fuentes-datos.json");
+        }
+        if (this.pilas.recursos.sonidos) {
+            var _loop_2 = function (i) {
+                var sonido = this_2.pilas.recursos.sonidos[i];
+                this_2.pilas.sonidos.agregar_sonido(sonido.nombre);
+                if (sonido.contenido) {
+                    this_2.convertir_sonido_en_array_buffer(sonido, function (buffer) {
+                        _this.cache.audio.add(sonido.nombre, buffer);
+                    });
+                }
+                else {
+                    this_2.load.audio(sonido.nombre, sonido.ruta, {});
+                }
+            };
+            var this_2 = this;
+            for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
+                _loop_2(i);
             }
-            else {
-                this_2.load.audio(sonido.nombre, sonido.ruta, {});
-            }
-        };
-        var this_2 = this;
-        for (var i = 0; i < this.pilas.recursos.sonidos.length; i++) {
-            _loop_2(i);
         }
         if (this.pilas.recursos.atlas) {
             for (var i = 0; i < this.pilas.recursos.atlas.length; i++) {
@@ -7757,8 +7778,10 @@ var ModoCargador = (function (_super) {
             }
         }
         else {
-            this.load.multiatlas("atlas-robot", "robot.json", "./");
-            this.load.json("robot", "robot.scon");
+            if (this.pilas.recursos.huesos === undefined) {
+                this.load.multiatlas("atlas-robot", "robot.json", "./");
+                this.load.json("robot", "robot.scon");
+            }
         }
         if (this.pilas.recursos.imagenes) {
             for (var i = 0; i < this.pilas.recursos.imagenes.length; i++) {
@@ -7768,7 +7791,17 @@ var ModoCargador = (function (_super) {
         }
         if (this.pilas.imagenes) {
             this.pilas.imagenes.map(function (item) {
-                _this.textures.addBase64(item.nombre, item.contenido);
+                if (item.contenido) {
+                    _this.textures.addBase64(item.nombre, item.contenido);
+                }
+                else {
+                    if (item.ruta) {
+                        _this.load.image(item.nombre, item.ruta);
+                    }
+                    else {
+                        throw Error("No se puede cargar una imagen sin contenido ni ruta.");
+                    }
+                }
             });
         }
         this.load.on("progress", this.cuando_progresa_la_carga, this);
@@ -7824,15 +7857,17 @@ var ModoCargador = (function (_super) {
         this.pilas.imagenes_precargadas = imagenes;
     };
     ModoCargador.prototype.create = function () {
-        this.crear_fuente_bitmap("color-negro");
-        this.crear_fuente_bitmap("color-blanco");
-        this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
-        this.crear_fuente_bitmap("color-blanco-con-sombra-grande");
-        this.crear_fuente_bitmap("color-blanco-con-sombra-medio");
-        this.crear_fuente_bitmap("color-blanco-con-sombra");
-        this.crear_fuente_bitmap("pixel-color-negro");
-        this.crear_fuente_bitmap("pixel-color-blanco");
-        _super.prototype.create.call(this, { pilas: this.pilas }, 500, 500);
+        if (!this.pilas.opciones.modo_simple) {
+            this.crear_fuente_bitmap("color-negro");
+            this.crear_fuente_bitmap("color-blanco");
+            this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
+            this.crear_fuente_bitmap("color-blanco-con-sombra-grande");
+            this.crear_fuente_bitmap("color-blanco-con-sombra-medio");
+            this.crear_fuente_bitmap("color-blanco-con-sombra");
+            this.crear_fuente_bitmap("pixel-color-negro");
+            this.crear_fuente_bitmap("pixel-color-blanco");
+        }
+        _super.prototype.create.call(this, { pilas: this.pilas }, this.pilas._ancho, this.pilas._alto);
         this.notificar_imagenes_cargadas();
         if (this.pilas.opciones.modo_simple) {
             this.pilas.definir_modo("ModoEjecucion", {
@@ -7841,8 +7876,8 @@ var ModoCargador = (function (_super) {
                 es_cambio_de_escena: false,
                 codigo: "\n\n        var __extends = (this && this.__extends) || (function () {\n          var extendStatics = function (d, b) {\n              extendStatics = Object.setPrototypeOf ||\n                  ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n                  function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n              return extendStatics(d, b);\n          }\n          return function (d, b) {\n              extendStatics(d, b);\n              function __() { this.constructor = d; }\n              d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n          };\n      })();\n      var Proyecto = /** @class */ (function () {\n          function Proyecto() {\n          }\n          Proyecto.prototype.iniciar = function () {\n          };\n          return Proyecto;\n      }());\n      var principal = /** @class */ (function (_super) {\n          __extends(principal, _super);\n          function principal() {\n              return _super !== null && _super.apply(this, arguments) || this;\n          }\n          principal.prototype.iniciar = function () {\n          };\n          principal.prototype.actualizar = function () {\n          };\n          return principal;\n      }(Escena));\n      ",
                 proyecto: {
-                    alto: 200,
-                    ancho: 200,
+                    alto: this.pilas._alto,
+                    ancho: this.pilas._ancho,
                     titulo: "sin usar",
                     escena_inicial: 3,
                     codigos: {
@@ -7858,9 +7893,9 @@ var ModoCargador = (function (_super) {
                         {
                             nombre: "principal",
                             id: 3,
-                            ancho: 200,
-                            alto: 200,
-                            fondo: "decoracion:fondos/fondo-plano",
+                            ancho: this.pilas._ancho,
+                            alto: this.pilas._alto,
+                            fondo: "fondo",
                             actores: [],
                             camara_x: 0,
                             camara_y: 0
@@ -8823,6 +8858,11 @@ var ModoError = (function (_super) {
     ModoError.prototype.create = function (datos) {
         var espaciado;
         this.pilas = datos.pilas;
+        if (this.pilas.opciones.modo_simple) {
+            this.add.text(0, 0, "Ha ocurrido un error, mire el detalle en la consola.");
+            console.error(datos.error);
+            return;
+        }
         this.conectar_eventos();
         this.crear_fondo();
         this.crear_titulo();

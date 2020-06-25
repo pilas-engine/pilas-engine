@@ -24,7 +24,9 @@ class Modo extends Phaser.Scene {
     this.canvas_fisica = this.sys.add.graphics({ x: 0, y: 0 });
     this.canvas_fisica.depth = 99999;
 
-    this.crear_indicadores_de_rendimiento_fps();
+    if (!datos.pilas.opciones.modo_simple) {
+      this.crear_indicadores_de_rendimiento_fps();
+    }
 
     this.crear_canvas_de_depuracion();
     this.pilas = datos.pilas;
@@ -153,7 +155,7 @@ class Modo extends Phaser.Scene {
     }
 
     canvas.lineTo(vertices[0].x, vertices[0].y);
-    
+
     canvas.closePath();
     canvas.strokePath();
   }

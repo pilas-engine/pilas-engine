@@ -5,6 +5,7 @@ class ModoCargador extends Modo {
   contador: number;
   barra_de_progreso: any;
   x: number;
+  modo_simple: boolean;
 
   constructor() {
     super({ key: "ModoCargador" });
@@ -16,24 +17,28 @@ class ModoCargador extends Modo {
 
     this.crear_indicador_de_carga();
 
-    this.load.multiatlas("imagenes", "imagenes.json", "./");
-    this.load.multiatlas("bloques", "bloques.json", "./");
-    this.load.multiatlas("decoracion", "decoracion.json", "./");
+    if (!this.pilas.opciones.modo_simple) {
+      this.load.multiatlas("imagenes", "imagenes.json", "./");
+      this.load.multiatlas("bloques", "bloques.json", "./");
+      this.load.multiatlas("decoracion", "decoracion.json", "./");
 
-    this.load.multiatlas("fuentes", "fuentes.json", "./");
-    this.load.json("fuentes-datos-json", "fuentes-datos.json");
+      this.load.multiatlas("fuentes", "fuentes.json", "./");
+      this.load.json("fuentes-datos-json", "fuentes-datos.json");
+    }
 
-    for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
-      let sonido = this.pilas.recursos.sonidos[i];
+    if (this.pilas.recursos.sonidos) {
+      for (let i = 0; i < this.pilas.recursos.sonidos.length; i++) {
+        let sonido = this.pilas.recursos.sonidos[i];
 
-      this.pilas.sonidos.agregar_sonido(sonido.nombre);
+        this.pilas.sonidos.agregar_sonido(sonido.nombre);
 
-      if (sonido.contenido) {
-        this.convertir_sonido_en_array_buffer(sonido, buffer => {
-          this.cache.audio.add(sonido.nombre, buffer);
-        });
-      } else {
-        this.load.audio(sonido.nombre, sonido.ruta, {});
+        if (sonido.contenido) {
+          this.convertir_sonido_en_array_buffer(sonido, buffer => {
+            this.cache.audio.add(sonido.nombre, buffer);
+          });
+        } else {
+          this.load.audio(sonido.nombre, sonido.ruta, {});
+        }
       }
     }
 
@@ -50,8 +55,10 @@ class ModoCargador extends Modo {
         this.load.json(hueso.nombre, hueso.ruta);
       }
     } else {
-      this.load.multiatlas("atlas-robot", "robot.json", "./");
-      this.load.json("robot", "robot.scon");
+      if (this.pilas.recursos.huesos === undefined) {
+        this.load.multiatlas("atlas-robot", "robot.json", "./");
+        this.load.json("robot", "robot.scon");
+      }
     }
 
     if (this.pilas.recursos.imagenes) {
@@ -63,7 +70,15 @@ class ModoCargador extends Modo {
 
     if (this.pilas.imagenes) {
       this.pilas.imagenes.map(item => {
-        this.textures.addBase64(item.nombre, item.contenido);
+        if (item.contenido) {
+          this.textures.addBase64(item.nombre, item.contenido);
+        } else {
+          if (item.ruta) {
+            this.load.image(item.nombre, item.ruta);
+          } else {
+            throw Error("No se puede cargar una imagen sin contenido ni ruta.");
+          }
+        }
       });
     }
 
@@ -135,16 +150,18 @@ class ModoCargador extends Modo {
   }
 
   create() {
-    this.crear_fuente_bitmap("color-negro");
-    this.crear_fuente_bitmap("color-blanco");
-    this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
-    this.crear_fuente_bitmap("color-blanco-con-sombra-grande");
-    this.crear_fuente_bitmap("color-blanco-con-sombra-medio");
-    this.crear_fuente_bitmap("color-blanco-con-sombra");
-    this.crear_fuente_bitmap("pixel-color-negro");
-    this.crear_fuente_bitmap("pixel-color-blanco");
+    if (!this.pilas.opciones.modo_simple) {
+      this.crear_fuente_bitmap("color-negro");
+      this.crear_fuente_bitmap("color-blanco");
+      this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
+      this.crear_fuente_bitmap("color-blanco-con-sombra-grande");
+      this.crear_fuente_bitmap("color-blanco-con-sombra-medio");
+      this.crear_fuente_bitmap("color-blanco-con-sombra");
+      this.crear_fuente_bitmap("pixel-color-negro");
+      this.crear_fuente_bitmap("pixel-color-blanco");
+    }
 
-    super.create({ pilas: this.pilas }, 500, 500);
+    super.create({ pilas: this.pilas }, this.pilas._ancho, this.pilas._alto);
     this.notificar_imagenes_cargadas();
 
     if (this.pilas.opciones.modo_simple) {
@@ -187,8 +204,8 @@ class ModoCargador extends Modo {
       }(Escena));
       `,
         proyecto: {
-          alto: 200,
-          ancho: 200,
+          alto: this.pilas._alto,
+          ancho: this.pilas._ancho,
           titulo: "sin usar",
           escena_inicial: 3,
           codigos: {
@@ -213,9 +230,9 @@ class ModoCargador extends Modo {
             {
               nombre: "principal",
               id: 3,
-              ancho: 200,
-              alto: 200,
-              fondo: "decoracion:fondos/fondo-plano",
+              ancho: this.pilas._ancho,
+              alto: this.pilas._alto,
+              fondo: "fondo",
               actores: [],
               camara_x: 0,
               camara_y: 0
@@ -313,7 +330,6 @@ class ModoCargador extends Modo {
       buffer2,
       (buffer: any) => {
         callback.call(this, buffer);
-        //this.cache.audio.add(sonido.nombre, buffer);
       },
       e => {
         console.log("Error with decoding audio data" + e.err);

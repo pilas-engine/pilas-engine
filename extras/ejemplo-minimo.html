@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <script src="phaser.js"></script>
+    <script src="nineslice.js"></script>
+    <script src="pilas-engine.js"></script>
+    <style media="screen">
+      body {
+        margin: 0;
+        background-color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      var opciones = {
+        maximizar: true,
+        pixelart: false,
+      }
+
+      var recursos = {
+        sonidos: [],
+        huesos: [],
+      }
+
+      var imagenes = [
+        {
+          nombre: "logo",
+          ruta: "logo.png",
+        },
+        {
+          nombre: "fondo",
+          ruta: "fondo.png"
+        }
+      ];
+
+      var pilas = pilasengine.iniciar(500, 500, recursos, opciones, imagenes);
+
+      pilas.onready = function() {
+        let logo = pilas.actores.actor_basico("logo");
+        logo.transparencia = 100;
+
+        logo.animar().
+          mostrar().
+          mover_hasta(0, 50);
+      };
+    </script>
+  </body>
+</html>

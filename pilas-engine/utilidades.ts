@@ -190,8 +190,12 @@ class Utilidades {
 
   validar_que_existe_imagen(nombre) {
     if (this.pilas.imagenes_precargadas.indexOf(nombre) === -1) {
-      let sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
-      throw Error(`No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`);
+      if (this.pilas.imagenes_precargadas.length === 0) {
+        throw Error(`No se encuentra la imagen "${nombre}" y parece que no se cargó ninguna imagen`);
+      } else {
+        let sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, this.pilas.imagenes_precargadas);
+        throw Error(`No se encuentra la imagen "${nombre}"\n¿Quisiste decir "${sugerencia}"?`);
+      }
     }
   }
 

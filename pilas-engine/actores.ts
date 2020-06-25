@@ -5,7 +5,7 @@ class Actores {
     this.pilas = pilas;
   }
 
-  crear_actor(nombre: string, clase: any = null) {
+  crear_actor(nombre: string, clase: any = null, imagen: string = null) {
     if (!clase) {
       clase = window[nombre];
     }
@@ -19,6 +19,10 @@ class Actores {
     if (!p.nombre) {
       let nombre_asignado = this.pilas.escena.obtener_nombre_para(nombre);
       p.nombre = nombre_asignado;
+    }
+
+    if (imagen) {
+      p.imagen = imagen;
     }
 
     actor.pre_iniciar(p);
@@ -162,5 +166,9 @@ class Actores {
 
   interruptor_de_gravedad() {
     return this.crear_actor("interruptor_de_gravedad");
+  }
+
+  actor_basico(imagen: string) {
+    return this.crear_actor("Actor", null, imagen);
   }
 }

@@ -108,6 +108,10 @@ class Pilas {
     this.recursos = recursos;
     var configuracion = this.crear_configuracion(ancho, alto, opciones.maximizar, opciones.pixelart, opciones.transparente);
 
+    if (opciones.modo_simple) {
+      configuracion["modo_simple"] = opciones.modo_simple;
+    }
+
     if (opciones.fps === 30) {
       configuracion["fps"] = {
         target: opciones.fps,
