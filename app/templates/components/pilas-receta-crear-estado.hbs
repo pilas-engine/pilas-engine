@@ -1,0 +1,47 @@
+<div id="receta-crear-estado" class="unselectable texto pointer hover-bg-black-10 f6 truncate">
+  <div role="button" class="pa2" {{action "seleccionar"}}>
+    {{pilas-icono icono=receta.icono class="v-top"}} {{receta.titulo}}
+  </div>
+
+  <div class={{if modal_visible "" "dn"}}>
+
+    <div class="pa2 texto pl5">
+
+      <div class="pv2">
+        Indicá el nombre del nuevo estado:
+      </div>
+
+      {{input
+        enter=(action "confirmar")
+        spellcheck=false
+        value=nombreSugerido
+        placeholder="caminar"
+        type="text"
+        id="input-nombre-del-estado"
+        class="input w-100 v-top pa1 br2"
+      }}
+    </div>
+
+    <div class="pa2">
+      {{#each errores as |error|}}
+        <div class="pv2 tr f7">
+          {{error}}
+        </div>
+      {{else}}
+        <div class="pv2 tr f7">
+          &nbsp;
+        </div>
+      {{/each}}
+
+      <div class="flex pt2">
+        <div class="flex1"></div>
+
+        <div class="">
+          <button class="boton" {{action "ocultar"}}>Cancelar</button>
+          <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>Crear estado</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

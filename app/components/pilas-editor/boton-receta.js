@@ -7,6 +7,7 @@ import { later } from "@ember/runloop";
 import reproducir_sonido_al_comenzar from "pilas-engine/utils/recetas/actor/reproducir-sonido-al-comenzar";
 import detecta_el_paso_del_tiempo_en_segundos from "pilas-engine/utils/recetas/actor/detecta-el-paso-del-tiempo-en-segundos";
 import cuando_colisiona_explotar from "pilas-engine/utils/recetas/actor/cuando-colisiona-explotar";
+import crear_estado from "pilas-engine/utils/recetas/actor/crear-estado";
 import cuando_colisiona_emitir_mensaje from "pilas-engine/utils/recetas/actor/cuando-colisiona-emitir-mensaje";
 import cuando_colisiona_eliminar_al_otro_actor from "pilas-engine/utils/recetas/actor/cuando-colisiona-eliminar-al-otro-actor";
 import mover_al_actor_a_la_izquierda from "pilas-engine/utils/recetas/actor/mover-al-actor-a-la-izquierda";
@@ -52,6 +53,7 @@ export default Component.extend({
       // recetas de actores
       detecta_el_paso_del_tiempo_en_segundos(),
       cuando_colisiona_explotar(),
+      crear_estado(),
       cuando_colisiona_emitir_mensaje(),
       cuando_colisiona_eliminar_al_otro_actor(),
       mover_al_actor_a_la_izquierda(),
@@ -74,14 +76,13 @@ export default Component.extend({
 
   actions: {
     usar_receta(receta, dd) {
-      alert(receta);
       this.bus.trigger("usar_receta", receta);
       dd.actions.close();
     },
     cuando_abre() {
       later(() => {
-        let boton = document.getElementById("boton-receta");
-        boton.focus();
+        let filtro = document.getElementById("input-filtro-de-receta");
+        filtro.focus();
       }, 1);
     }
   }
