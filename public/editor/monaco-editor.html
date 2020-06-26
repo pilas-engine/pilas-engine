@@ -33,6 +33,7 @@
     #status {
       display: none !important;
     }
+
   </style>
 </head>
 
@@ -64,11 +65,10 @@
 					}
 	      });
 
-
 	    	require(['vs/editor/editor.main'], iniciar_editor);
 	    }
 
-	    function iniciar_editor(editor, MonacoVim) {
+	    function iniciar_editor(editor) {
 	      registrar_snippets();
 	      limitar_autocompletado_a_definiciones_de_pilas();
 
@@ -91,6 +91,8 @@
 	      editor.onDidChangeModelContent(function (event) {
 	        window.top.postMessage({updatedCode: editor.getValue()}, HOST);
 	      });
+
+				reemplazar_atajo_de_ir_a_simbolo(editor);
 
 	    	require(['monaco-vim'], function(MonacoVim) {
 
@@ -160,6 +162,15 @@
 
 	      }, false)
 	  	}
+
+			function reemplazar_atajo_de_ir_a_simbolo(editor) {
+				function changeCommandKeybinding(editor, id, keybinding) {
+					editor._standaloneKeybindingService.addDynamicKeybinding('-' + id);
+					editor._standaloneKeybindingService.addDynamicKeybinding(id, keybinding);
+				}
+
+				changeCommandKeybinding(editor, 'editor.action.quickOutline', monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_P);
+			}
 
 	    function registrar_snippets() {
 

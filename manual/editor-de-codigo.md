@@ -67,3 +67,22 @@ Otros de los fragmentos rápidos que incluye el editor son los siguientes:
 
 Te recomendamos probar escribir alguno de estos atajos para familiarizarte, sobre todo
 el fragmento `control` que es bastante completo.
+
+
+## Navegar métodos rápidamente
+
+Cuando tenemos un actor con muchos métodos es aconsejable hacer búsquedas en lugar de
+recorrer el código hacia arriba y abajo con la barra de scroll.
+
+Para buscar métodos por nombres se puede pulsar el botón derecho del mouse sobre el
+editor y seleccionar la siguiente opción:
+
+![](imagenes/editor-de-codigo/secundario.png)
+
+Luego vas a notar que aparecerá una barra de búsqueda con todos los métodos del
+actor, simplemente escribí o selecciona el método al que quieras ingresar.
+
+![](imagenes/editor-de-codigo/simbolos.png)
+
+Ten en cuenta que también podes activar esta funcionalidad pulsando `ctrl+P` como
+atajo.
