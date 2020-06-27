@@ -42,7 +42,7 @@ class AnimacionDePropiedad {
       explosion.x = this.actor.x;
       explosion.y = this.actor.y;
       this.actor.eliminar();
-      this.eliminar();
+      this.eliminar_inmediatamente();
     });
 
     return this;
@@ -121,6 +121,13 @@ class AnimacionDePropiedad {
   }
 
   eliminar() {
+    this.funcion(() => {
+      this.eliminar_inmediatamente();
+    });
+    return this;
+  }
+
+  private eliminar_inmediatamente() {
     if (this.timeline) {
       this.timeline.destroy();
     }

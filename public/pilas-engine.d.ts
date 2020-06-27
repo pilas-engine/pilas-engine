@@ -66,7 +66,8 @@ declare class AnimacionDePropiedad {
     mover_y_hasta(y: number, duración?: number): this;
     rotar(angulo: number, duración?: number): this;
     rotar_hasta(angulo: number, duración?: number): this;
-    eliminar(): void;
+    eliminar(): this;
+    private eliminar_inmediatamente;
     private ejecutar;
     funcion(funcion_a_ejecutar: any): this;
     decir(mensaje: string): this;

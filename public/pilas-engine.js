@@ -178,7 +178,7 @@ var AnimacionDePropiedad = (function () {
             explosion.x = _this.actor.x;
             explosion.y = _this.actor.y;
             _this.actor.eliminar();
-            _this.eliminar();
+            _this.eliminar_inmediatamente();
         });
         return this;
     };
@@ -251,6 +251,13 @@ var AnimacionDePropiedad = (function () {
         });
     };
     AnimacionDePropiedad.prototype.eliminar = function () {
+        var _this = this;
+        this.funcion(function () {
+            _this.eliminar_inmediatamente();
+        });
+        return this;
+    };
+    AnimacionDePropiedad.prototype.eliminar_inmediatamente = function () {
         if (this.timeline) {
             this.timeline.destroy();
         }

@@ -154,6 +154,10 @@
     {
       "nombre": "pacman-con-paredes",
       "desde": "2.3.0"
+    },
+    {
+      "nombre": "automata-contra-calaveras",
+      "desde": "2.2.6"
     }
   ]
 }
