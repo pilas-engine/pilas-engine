@@ -158,6 +158,10 @@
     {
       "nombre": "automata-contra-calaveras",
       "desde": "2.2.6"
+    },
+    {
+      "nombre": "automata-cofre",
+      "desde": "2.2.6"
     }
   ]
 }

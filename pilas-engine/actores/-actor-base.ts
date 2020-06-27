@@ -174,12 +174,18 @@ class ActorBase {
       });
     };
 
-    this.sprite.on("animationcomplete", (anim, frame) => {
+    this.sprite.on("animationrepeat", (anim, frame) => {
       this.ejecutar_de_modo_seguro(() => {
-        if (frame.isLast) {
-          let nombre = anim.key.split("-")[1];
+        if (frame.isFirst) {
+          let nombre = anim.key;
+
+          if (nombre.includes("-")) {
+            nombre = anim.key.split("-")[1];
+          }
+
+          let estado_actual = this.estado;
+
           // una vez que avisó que terminó la animación la repite.
-          this.sprite.anims.play(anim.key);
           this.cuando_finaliza_animacion(nombre);
           this.automata.cuando_finaliza_animacion(nombre);
         }
@@ -189,6 +195,7 @@ class ActorBase {
     this.sprite.on("pointerdown", (cursor: any) => {
       this.ejecutar_de_modo_seguro(() => {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
+
         this.cuando_hace_click(posicion.x, posicion.y, cursor);
         this.automata.cuando_hace_click(posicion.x, posicion.y, cursor);
       });

@@ -389,7 +389,8 @@ var Animaciones = (function () {
             var animacion = this.pilas.modo.anims.create({
                 key: nombre,
                 frames: frames,
-                frameRate: velocidad
+                frameRate: velocidad,
+                repeat: -1
             });
             this.animaciones[nombre] = animacion;
         }
@@ -2624,11 +2625,14 @@ var ActorBase = (function () {
                 _this.actualizar();
             });
         };
-        this.sprite.on("animationcomplete", function (anim, frame) {
+        this.sprite.on("animationrepeat", function (anim, frame) {
             _this.ejecutar_de_modo_seguro(function () {
-                if (frame.isLast) {
-                    var nombre = anim.key.split("-")[1];
-                    _this.sprite.anims.play(anim.key);
+                if (frame.isFirst) {
+                    var nombre = anim.key;
+                    if (nombre.includes("-")) {
+                        nombre = anim.key.split("-")[1];
+                    }
+                    var estado_actual = _this.estado;
                     _this.cuando_finaliza_animacion(nombre);
                     _this.automata.cuando_finaliza_animacion(nombre);
                 }

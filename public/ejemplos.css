@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:473b96700378305f45a03de0c1178296:754b7624bd5b3896886fa5235e09e08a:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:2f6472bd3cf08510e7fabc99b42e51c4:4096c8732d68957d95ab1d04a3c7531d:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -19,7 +19,8 @@
 .capturas-aprender-y-olvidar {width:180px; height:140px; background-position: -1px -569px}
 .capturas-arkanoid {width:180px; height:140px; background-position: -1px -711px}
 .capturas-arrastrables {width:180px; height:140px; background-position: -1px -853px}
-.capturas-automata-contra-calaveras {width:179px; height:140px; background-position: -911px -569px}
+.capturas-automata-cofre {width:179px; height:140px; background-position: -911px -569px}
+.capturas-automata-contra-calaveras {width:179px; height:140px; background-position: -911px -711px}
 .capturas-azar {width:180px; height:140px; background-position: -183px -1px}
 .capturas-barra-de-energia {width:180px; height:140px; background-position: -183px -143px}
 .capturas-barras-de-energia {width:180px; height:140px; background-position: -183px -285px}
@@ -31,7 +32,7 @@
 .capturas-cursores {width:180px; height:140px; background-position: -365px -143px}
 .capturas-dos-jugadores {width:180px; height:140px; background-position: -365px -285px}
 .capturas-ejemplo-nave {width:180px; height:140px; background-position: -365px -427px}
-.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -911px -711px}
+.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -911px -853px}
 .capturas-flappy {width:180px; height:140px; background-position: -365px -569px}
 .capturas-gravedad {width:180px; height:140px; background-position: -365px -711px}
 .capturas-huesos {width:180px; height:140px; background-position: -365px -853px}

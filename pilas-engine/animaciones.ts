@@ -13,8 +13,8 @@ class Animaciones {
       let animacion = this.pilas.modo.anims.create({
         key: nombre,
         frames: frames,
-        frameRate: velocidad
-        //repeat: -1,
+        frameRate: velocidad,
+        repeat: -1
       });
 
       this.animaciones[nombre] = animacion;
