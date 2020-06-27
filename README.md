@@ -11,6 +11,7 @@ para obtener más información:
 
 ## Artículos y noticias
 
+- [Resumen del sprint 19 (27 de Junio del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-19/1932)
 - [Resumen del sprint 18 (6 de Junio del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-18/1907)
 - [Resumen del sprint 17 (23 de Mayo de 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-17/1876)
 - [Resumen del sprint 16 (11 de Mayo de 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-16/1862)
