@@ -149,11 +149,11 @@
     },
     {
       "nombre": "tipos_de_animacion",
-      "desde": "2.3.0"
+      "desde": "2.2.6"
     },
     {
       "nombre": "pacman-con-paredes",
-      "desde": "2.3.0"
+      "desde": "2.2.6"
     },
     {
       "nombre": "automata-contra-calaveras",
@@ -162,6 +162,10 @@
     {
       "nombre": "automata-cofre",
       "desde": "2.2.6"
+    },
+    {
+      "nombre": "menu-simple",
+      "desde": "2.2.8"
     }
   ]
 }
