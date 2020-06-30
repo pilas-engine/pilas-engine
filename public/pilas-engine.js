@@ -2171,6 +2171,7 @@ var Pilas = (function () {
         game.scene.add("ModoCargador", ModoCargador);
         game.scene.add("ModoEditor", ModoEditor);
         game.scene.add("ModoEjecucion", ModoEjecucion);
+        game.scene.add("ModoEjecucionEnPausa", ModoEjecucionEnPausa);
         game.scene.add("ModoPausa", ModoPausa);
         game.scene.add("ModoError", ModoError);
         game.scene.start("ModoCargador", { pilas: this });
@@ -2464,6 +2465,10 @@ var Pilas = (function () {
             throw new Error("El valor de la grilla tiene que ser mayor a 1");
         }
         return Math.round(numero / grilla) * grilla;
+    };
+    Pilas.prototype.pausar = function () {
+        this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this.pilas });
+        this.modo.game.scene.pause("ModoEjecucion");
     };
     return Pilas;
 }());
@@ -8857,6 +8862,30 @@ var ModoEjecucion = (function (_super) {
         graphics.fillRect(x - 2, y - 2, 4, 4);
     };
     return ModoEjecucion;
+}(Modo));
+var ModoEjecucionEnPausa = (function (_super) {
+    __extends(ModoEjecucionEnPausa, _super);
+    function ModoEjecucionEnPausa() {
+        return _super.call(this, { key: "ModoEjecucionEnPausa" }) || this;
+    }
+    ModoEjecucionEnPausa.prototype.preload = function () { };
+    ModoEjecucionEnPausa.prototype.create = function (datos) {
+        this.pilas = this.scene.manager.getScene("ModoCargador").pilas;
+        var ancho = this.pilas._ancho;
+        var alto = this.pilas._alto;
+        var titulo = this.add.bitmapText(ancho / 2, 200, "color-blanco-con-sombra-medio", "PAUSA");
+        var detalle = this.add.bitmapText(ancho / 2, 260, "color-blanco-con-sombra-chico", "Click o SPACE para reanudar");
+        titulo.x -= titulo.getTextBounds().local.width / 2;
+        detalle.x -= detalle.getTextBounds().local.width / 2;
+        this.input.keyboard.once("keydown_W", this.reanudar, this);
+        this.input.on("pointerdown", this.reanudar, this);
+    };
+    ModoEjecucionEnPausa.prototype.update = function () { };
+    ModoEjecucionEnPausa.prototype.reanudar = function () {
+        this.pilas.modo.scene.resume("ModoEjecucion");
+        this.game.scene.stop("ModoEjecucionEnPausa");
+    };
+    return ModoEjecucionEnPausa;
 }(Modo));
 var ModoError = (function (_super) {
     __extends(ModoError, _super);

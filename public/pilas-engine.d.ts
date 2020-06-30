@@ -544,6 +544,7 @@ declare class Pilas {
     solicitar_modo_ventana(): void;
     ajustar(numero: number, grilla: number): number;
     alinear(numero: number, grilla: number): number;
+    pausar(): void;
 }
 declare var pilasengine: Pilas;
 declare class Sensor {
@@ -1883,6 +1884,14 @@ declare class ModoEjecucion extends Modo {
     update(): void;
     guardar_foto_de_entidades(): void;
     dibujar_punto_de_control(graphics: Phaser.GameObjects.Graphics, _x: number, _y: number): void;
+}
+declare class ModoEjecucionEnPausa extends Modo {
+    pilas: Pilas;
+    constructor();
+    preload(): void;
+    create(datos: any): void;
+    update(): void;
+    reanudar(): void;
 }
 declare class ModoError extends Modo {
     pilas: Pilas;

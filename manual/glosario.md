@@ -807,7 +807,6 @@ Por ejemplo, si un actor llama a la siguiente función `this.pilas.enviar_mensaj
 deberías poder capturar ese mensaje desde cualquier actor o escena
 declarando el método "cuando_llega_el_mensaje_ganar".
 
-
 El argumento `datos` es opcional, y se puede utilizar para enviar
 parámetros adicionales junto con el mensaje. Este argumento datos
 se va a enviar directamente a todos los actores que atiendan el mensaje,
@@ -869,5 +868,16 @@ Por ejemplo:
 › pilas.alienar(130, 64)
 ‹ 28
 ```
+
+</div>
+
+<div class="funcion">
+```
+pilas.pausar()
+```
+
+Detiene la ejecución del juego por completo y espera a que
+el usuario pulse la tecla espacio o haga click con el
+mouse para continuar.
 
 </div>

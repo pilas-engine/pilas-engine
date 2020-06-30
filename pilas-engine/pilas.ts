@@ -197,6 +197,7 @@ class Pilas {
     game.scene.add("ModoCargador", ModoCargador);
     game.scene.add("ModoEditor", ModoEditor);
     game.scene.add("ModoEjecucion", ModoEjecucion);
+    game.scene.add("ModoEjecucionEnPausa", ModoEjecucionEnPausa);
     game.scene.add("ModoPausa", ModoPausa);
     game.scene.add("ModoError", ModoError);
 
@@ -644,6 +645,11 @@ class Pilas {
     }
 
     return Math.round(numero / grilla) * grilla;
+  }
+
+  pausar() {
+    this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this.pilas });
+    this.modo.game.scene.pause("ModoEjecucion");
   }
 }
 
