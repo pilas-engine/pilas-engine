@@ -45,6 +45,14 @@ class EscenaBase {
     return this.pilas.reproducir_sonido(nombre);
   }
 
+  reproducir_musica(nombre: string) {
+    return this.pilas.reproducir_musica(nombre);
+  }
+
+  detener_musica() {
+    return this.pilas.detener_musica();
+  }
+
   planificar_reproducir_sonido(sonido: string) {
     this._sonidos_para_reproducir.push(sonido);
   }
@@ -188,7 +196,6 @@ class EscenaBase {
         actor.actualizar_habilidades();
         actor.actualizar();
         actor.actualizar_sensores();
-
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
       }

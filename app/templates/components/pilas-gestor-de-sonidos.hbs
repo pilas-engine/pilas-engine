@@ -38,7 +38,7 @@
 
   </div>
 
-  <div class="flex1 flex flex-column tc">
+  <div class="flex1 flex flex-column tc mw7">
     <div class="tl f6">
 
       <div class="lh-copy">
@@ -48,6 +48,26 @@
       <div class="flex items-center">
         <pre class="ba borde pa2 bg-fondo-secundario mr2 flex1">{{helper-sonido sonido_seleccionado.nombre}}</pre>
         {{pilas-boton-copiar texto=(helper-sonido sonido_seleccionado.nombre)}}
+      </div>
+
+
+      <div class="lh-copy">
+        y si el sonido se trata de una música que se tiene que repetir varias veces usá
+        estas sentencias de código para reproducila:
+      </div>
+
+      <div class="flex items-center">
+        <pre class="ba borde pa2 bg-fondo-secundario mr2 flex1">{{helper-reproducir-musica sonido_seleccionado.nombre}}</pre>
+        {{pilas-boton-copiar texto=(helper-reproducir-musica sonido_seleccionado.nombre)}}
+      </div>
+
+      <div class="lh-copy">
+        y esta otra sentencia para detener la música:
+      </div>
+
+      <div class="flex items-center">
+        <pre class="ba borde pa2 bg-fondo-secundario mr2 flex1">{{helper-detener-musica}}</pre>
+        {{pilas-boton-copiar texto=(helper-detener-musica)}}
       </div>
 
       <div class="lh-copy">

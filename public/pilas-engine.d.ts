@@ -469,6 +469,7 @@ declare class Pilas {
     opciones: any;
     imagenes_precargadas: string[];
     imagenes: any;
+    private musica_en_reproduccion;
     constructor();
     crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number, duración: number): AnimacionDePropiedad;
     escena: EscenaBase;
@@ -509,6 +510,9 @@ declare class Pilas {
         };
     };
     reproducir_sonido(nombre: string): void;
+    reproducir_musica(nombre: string): any;
+    detener_musica(): void;
+    esta_reproduciendo_musica(): boolean;
     obtener_actores(): Actor[];
     buscar_actor(nombre: string): Actor;
     obtener_actor_por_nombre(nombre: string): Actor;
@@ -742,6 +746,8 @@ declare class ActorBase {
     hacer_recorrido(posiciones: any, duracion?: number, veces?: number, seguir_rotacion?: boolean): void;
     obtener_sensor(nombre: string): Sensor;
     reproducir_sonido(nombre: string): void;
+    reproducir_musica(nombre: string): any;
+    detener_musica(): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1233,6 +1239,8 @@ declare class EscenaBase {
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, tipo_de_animacion: Tipo, veces: number, duración: number): AnimacionDePropiedad;
     reproducir_sonido(nombre: string): void;
+    reproducir_musica(nombre: string): any;
+    detener_musica(): void;
     planificar_reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
     agregar_actor(actor: Actor): void;

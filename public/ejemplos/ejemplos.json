@@ -166,6 +166,14 @@
     {
       "nombre": "menu-simple",
       "desde": "2.2.8"
+    },
+    {
+      "nombre": "pausar",
+      "desde": "2.2.8"
+    },
+    {
+      "nombre": "musica",
+      "desde": "2.2.8"
     }
   ]
 }

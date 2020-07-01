@@ -97,6 +97,7 @@ export default Component.extend({
     let actor = this.pilas.obtener_actor_por_nombre("aceituna");
     let sonido = this.sonido;
 
+    actor.pilas.game.sound.stopAll();
     actor.pilas.reproducir_sonido(sonido.nombre);
     actor.transparencia = 0;
     actor.transparencia = [100];

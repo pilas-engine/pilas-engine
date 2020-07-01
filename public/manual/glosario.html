@@ -477,6 +477,24 @@ pilas.ajustar(numero, grilla)</code></pre>
 <p>Por ejemplo:</p>
 <pre><code>› pilas.alienar(130, 64)
 ‹ 28</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.pausar()</code></pre>
+<p>Detiene la ejecución del juego por completo y espera a que el usuario pulse la tecla espacio o haga click con el mouse para continuar.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.reproducir_musica(nombre)</code></pre>
+<p>Comienza a reproducir una música a partir de un nombre y vuelve a repetirlo cuando finaliza de forma automática.</p>
+<p>Si hay otra música sonando esta función la detiene y comienza a reproducir la música nueva.</p>
+<p>Ten en cuenta que la música seguirá sonando, incluso cuando cambies de escena.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.detener_musica()</code></pre>
+<p>Detiene toda música que esté sonando en ese momento.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.esta_reproduciendo_musica()</code></pre>
+<p>Retorna <code>true</code> si en ese momento está sonando una música, sino responde con el valor <code>false</code>.</p>
 </div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>

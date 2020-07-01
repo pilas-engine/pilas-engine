@@ -881,3 +881,37 @@ el usuario pulse la tecla espacio o haga click con el
 mouse para continuar.
 
 </div>
+
+<div class="funcion">
+```
+pilas.reproducir_musica(nombre)
+```
+
+Comienza a reproducir una música a partir de un nombre y vuelve a repetirlo cuando finaliza
+de forma automática.
+
+Si hay otra música sonando esta función la detiene y comienza a reproducir la
+música nueva.
+
+Ten en cuenta que la música seguirá sonando, incluso cuando cambies de escena.
+
+</div>
+
+<div class="funcion">
+```
+pilas.detener_musica()
+```
+
+Detiene toda música que esté sonando en ese momento.
+
+</div>
+
+<div class="funcion">
+```
+pilas.esta_reproduciendo_musica()
+```
+
+Retorna `true` si en ese momento está sonando una música, sino responde
+con el valor `false`.
+
+</div>

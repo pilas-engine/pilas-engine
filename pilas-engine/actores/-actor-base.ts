@@ -1247,4 +1247,12 @@ class ActorBase {
   reproducir_sonido(nombre: string) {
     return this.pilas.reproducir_sonido(nombre);
   }
+
+  reproducir_musica(nombre: string) {
+    return this.pilas.reproducir_musica(nombre);
+  }
+
+  detener_musica() {
+    return this.pilas.detener_musica();
+  }
 }

@@ -48,6 +48,8 @@ class Pilas {
   imagenes_precargadas: string[] = [];
   imagenes: any = [];
 
+  private musica_en_reproduccion: any;
+
   constructor() {
     this.Phaser = Phaser;
 
@@ -221,6 +223,14 @@ class Pilas {
       console.warn(e);
     }
 
+    if (nombre !== "ModoEjecucion") {
+      // solo detiene el audio si no es un cambio de escena
+      // interno en el juego.
+      this.game.sound.stopAll();
+    } else {
+      this.musica_en_reproduccion = null;
+    }
+
     this.modo = this.game.scene.getScene(nombre);
     this.definir_cursor("default");
     this.game.scene.start(nombre, datos);
@@ -299,6 +309,37 @@ class Pilas {
         throw new Error(`No se puede reproducir el sonido "${nombre}" porque no hay ningún sonido en el proyecto.`);
       }
     }
+  }
+
+  reproducir_musica(nombre: string) {
+    if (this.musica_en_reproduccion) {
+      this.detener_musica();
+    }
+
+    if (this.sonidos.existe_sonido(nombre)) {
+      var sonido = this.modo.sound.add(nombre, { loop: true });
+      sonido.play();
+      this.musica_en_reproduccion = sonido;
+      return sonido;
+    } else {
+      if (this.sonidos.hay_sonidos_cargados()) {
+        let alternativa = this.sonidos.obtener_sonido_con_nombre_similar(nombre);
+        throw new Error(`No existe una música llamada "${nombre}", ¿quisiste decir "${alternativa}"?`);
+      } else {
+        throw new Error(`No se puede la música "${nombre}" porque no hay ningún sonido o música en el proyecto.`);
+      }
+    }
+  }
+
+  detener_musica() {
+    if (this.musica_en_reproduccion) {
+      this.musica_en_reproduccion.stop();
+      this.musica_en_reproduccion = null;
+    }
+  }
+
+  esta_reproduciendo_musica() {
+    return this.musica_en_reproduccion !== null;
   }
 
   obtener_actores() {

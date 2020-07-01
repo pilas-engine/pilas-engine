@@ -20,7 +20,7 @@ class ModoEjecucionEnPausa extends Modo {
     titulo.x -= titulo.getTextBounds().local.width / 2;
     detalle.x -= detalle.getTextBounds().local.width / 2;
 
-    this.input.keyboard.once("keydown_W", this.reanudar, this);
+    this.input.keyboard.once("keydown_SPACE", this.reanudar, this);
     this.input.on("pointerdown", this.reanudar, this);
   }
 

@@ -2191,6 +2191,12 @@ var Pilas = (function () {
         catch (e) {
             console.warn(e);
         }
+        if (nombre !== "ModoEjecucion") {
+            this.game.sound.stopAll();
+        }
+        else {
+            this.musica_en_reproduccion = null;
+        }
         this.modo = this.game.scene.getScene(nombre);
         this.definir_cursor("default");
         this.game.scene.start(nombre, datos);
@@ -2259,6 +2265,35 @@ var Pilas = (function () {
                 throw new Error("No se puede reproducir el sonido \"" + nombre + "\" porque no hay ning\u00FAn sonido en el proyecto.");
             }
         }
+    };
+    Pilas.prototype.reproducir_musica = function (nombre) {
+        if (this.musica_en_reproduccion) {
+            this.detener_musica();
+        }
+        if (this.sonidos.existe_sonido(nombre)) {
+            var sonido = this.modo.sound.add(nombre, { loop: true });
+            sonido.play();
+            this.musica_en_reproduccion = sonido;
+            return sonido;
+        }
+        else {
+            if (this.sonidos.hay_sonidos_cargados()) {
+                var alternativa = this.sonidos.obtener_sonido_con_nombre_similar(nombre);
+                throw new Error("No existe una m\u00FAsica llamada \"" + nombre + "\", \u00BFquisiste decir \"" + alternativa + "\"?");
+            }
+            else {
+                throw new Error("No se puede la m\u00FAsica \"" + nombre + "\" porque no hay ning\u00FAn sonido o m\u00FAsica en el proyecto.");
+            }
+        }
+    };
+    Pilas.prototype.detener_musica = function () {
+        if (this.musica_en_reproduccion) {
+            this.musica_en_reproduccion.stop();
+            this.musica_en_reproduccion = null;
+        }
+    };
+    Pilas.prototype.esta_reproduciendo_musica = function () {
+        return this.musica_en_reproduccion !== null;
     };
     Pilas.prototype.obtener_actores = function () {
         return this.escena.actores;
@@ -3647,6 +3682,12 @@ var ActorBase = (function () {
     ActorBase.prototype.reproducir_sonido = function (nombre) {
         return this.pilas.reproducir_sonido(nombre);
     };
+    ActorBase.prototype.reproducir_musica = function (nombre) {
+        return this.pilas.reproducir_musica(nombre);
+    };
+    ActorBase.prototype.detener_musica = function () {
+        return this.pilas.detener_musica();
+    };
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -4881,6 +4922,12 @@ var EscenaBase = (function () {
     };
     EscenaBase.prototype.reproducir_sonido = function (nombre) {
         return this.pilas.reproducir_sonido(nombre);
+    };
+    EscenaBase.prototype.reproducir_musica = function (nombre) {
+        return this.pilas.reproducir_musica(nombre);
+    };
+    EscenaBase.prototype.detener_musica = function () {
+        return this.pilas.detener_musica();
     };
     EscenaBase.prototype.planificar_reproducir_sonido = function (sonido) {
         this._sonidos_para_reproducir.push(sonido);
@@ -8877,7 +8924,7 @@ var ModoEjecucionEnPausa = (function (_super) {
         var detalle = this.add.bitmapText(ancho / 2, 260, "color-blanco-con-sombra-chico", "Click o SPACE para reanudar");
         titulo.x -= titulo.getTextBounds().local.width / 2;
         detalle.x -= detalle.getTextBounds().local.width / 2;
-        this.input.keyboard.once("keydown_W", this.reanudar, this);
+        this.input.keyboard.once("keydown_SPACE", this.reanudar, this);
         this.input.on("pointerdown", this.reanudar, this);
     };
     ModoEjecucionEnPausa.prototype.update = function () { };
