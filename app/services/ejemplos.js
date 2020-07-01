@@ -82,5 +82,21 @@ export default Service.extend({
 
       xhr.send();
     });
+  },
+
+  obtener_anterior(nombre) {
+    let indice = this.cache.ejemplos.findIndex(e => e.nombre == nombre);
+
+    if (indice > 0) {
+      return this.cache.ejemplos[indice - 1].nombre;
+    }
+  },
+
+  obtener_siguiente(nombre) {
+    let indice = this.cache.ejemplos.findIndex(e => e.nombre == nombre);
+
+    if (indice < this.cache.ejemplos.length - 1) {
+      return this.cache.ejemplos[indice + 1].nombre;
+    }
   }
 });

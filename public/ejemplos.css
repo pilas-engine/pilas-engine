@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:a049c3f74965a3b2ece731dd0ade587c:4504b6cab497f5444b717cb20b1844c9:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:fcfb1eaaaf5512bca36d45371bcd1526:626a2bf040b5f4c519d0c90ba210196f:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -39,6 +39,7 @@
 .capturas-imagenes-como-botones {width:180px; height:140px; background-position: -183px -569px}
 .capturas-laser-y-misil {width:180px; height:140px; background-position: -365px -569px}
 .capturas-mantener-valores-entre-escenas {width:180px; height:140px; background-position: -547px -569px}
+.capturas-mejor-puntaje {width:180px; height:139px; background-position: -727px -1278px}
 .capturas-mensaje_global {width:180px; height:140px; background-position: -729px -569px}
 .capturas-menu-simple {width:180px; height:140px; background-position: -1px -711px}
 .capturas-musica {width:180px; height:140px; background-position: -183px -711px}

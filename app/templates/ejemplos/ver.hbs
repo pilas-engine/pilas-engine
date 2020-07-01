@@ -1,17 +1,20 @@
 <div class="ma2 flex">
-  <div class="">
+  <div class="w5">
     {{#link-to "ejemplos" class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{pilas-icono icono="volver"}} Volver{{/link-to}}
-    {{#link-to "editor" (query-params ejemplo=model.nombre) class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{pilas-icono icono="computadora"}} Abrir en el editor{{/link-to}}
+    {{#link-to "editor" (query-params ejemplo=model.nombre) class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{pilas-icono icono="computadora"}} Editar{{/link-to}}
   </div>
 
-  <div class="flex1">
-  </div>
+  <div class="flex1"></div>
 
-  <div class="dib">
+  {{pilas-navegar-ejemplos nombre=model.nombre}}
+
+  <div class="flex1"></div>
+
+  <div class="w5 tr">
     {{pilas-selector-de-modo-zoom modoZoom=model.modoZoom}}
   </div>
 </div>
 
-<div class="ma2 flex vh-100">
-  {{pilas-ejemplo modoZoom=model.modoZoom proyecto=model.ejemplo.proyecto}}
+<div class="ma2 flex vh-100 bg-fondo-canvas">
+  {{pilas-ejemplo nombre=model.nombre modoZoom=model.modoZoom proyecto=model.ejemplo.proyecto}}
 </div>

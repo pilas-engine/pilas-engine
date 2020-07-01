@@ -1,6 +1,8 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 import { task, timeout } from "ember-concurrency";
+import { observer } from "@ember/object";
+import { later } from "@ember/runloop";
 
 export default Component.extend({
   bus: service(),
@@ -8,6 +10,16 @@ export default Component.extend({
   tagName: "",
   recursos: service(),
   debe_mantener_foco: false,
+  cambiando: false,
+
+  cuando_cambia_nombre: observer("nombre", function() {
+    this.set("cambiando", true);
+    later(this, this.reiniciar, 1);
+  }),
+
+  reiniciar() {
+    this.set("cambiando", false);
+  },
 
   didInsertElement() {
     this.recursos.iniciar();
