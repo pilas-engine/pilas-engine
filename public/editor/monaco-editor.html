@@ -229,7 +229,7 @@
 	      	allowNonTsExtensions: true
 	      });
 
-	      fetch("/pilas-engine.d.ts").then(res => {
+	      fetch("../pilas-engine.d.ts").then(res => {
 	        return res.text();
 	      }).then(data => {
 	        monaco.languages.typescript.typescriptDefaults.addExtraLib(data, 'pilas-engine.d.ts');

@@ -5,8 +5,10 @@ import string_a_json from "../utils/string-a-json";
 export default Service.extend({
   compilar(codigoTypescript, proyecto) {
     let compilerOptions = {};
+    let diagnostics = undefined;
+    let moduleName = undefined;
 
-    let codigo = ts.transpile(codigoTypescript, compilerOptions, "codigo.js", /*diagnostics*/ undefined, /*moduleName*/ undefined);
+    let codigo = ts.transpile(codigoTypescript, compilerOptions, "codigo.js", diagnostics, moduleName);
     let proyecto_serializado = string_a_json(json_a_string(proyecto));
 
     return { codigo, proyecto_serializado };
