@@ -178,6 +178,10 @@
     {
       "nombre": "mejor-puntaje",
       "desde": "2.2.8"
+    },
+    {
+      "nombre": "memorizar",
+      "desde": "2.3.0"
     }
   ]
 }
