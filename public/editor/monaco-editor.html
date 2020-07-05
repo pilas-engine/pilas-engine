@@ -234,6 +234,12 @@
 	      }).then(data => {
 	        monaco.languages.typescript.typescriptDefaults.addExtraLib(data, 'pilas-engine.d.ts');
 	      });
+
+	      fetch("../tipos.d.ts").then(res => {
+	        return res.text();
+	      }).then(data => {
+	        monaco.languages.typescript.typescriptDefaults.addExtraLib(data, 'tipos.d.ts');
+	      });
 	    }
 
 	  </script>
