@@ -13,21 +13,21 @@ Para realizar Pilas usamos principalmente Javascript junto a varios Frameworks y
 - **Phaser**: Es la biblioteca multimedia que utilizamos para dibujar el espacio de juego de pilas, Phaser nos permite cargar imágenes, dibujarlas en pantalla, reproducir sonidos, detectar colisiones, realizar simulaciones físicas etc…
 - **ember-js**: Es el framework web que utilizamos para crear la estructura visual y de interacción de la aplicación; incluye componentes, rutas, controladores y complementos. Ember también nos permite empaquetar toda la aplicación y publicarla en la web.
 - **Typescript**: Lo utilizamos para el código fuente del motor Pilas. El motor de Pilas es el encargado de declarar todos los actores existentes, es donde vive la estructura de escenas, y donde se encapsulan todas las llamadas a Phaser.
-- **gitbook**: Es la herramienta que usamos para componer el manual de pilas. Básicamente gittbok convierte archivos markdown en archivos .html que se pueden abrir desde la aplicación y la web.
+- **pandoc**: Es la herramienta que usamos para componer el manual de pilas. Pandoc convierte archivos markdown en archivos .html para abrir desde la web.
 - **electron**: Sirve para empaquetar la aplicación web completa y distribuirla en formato binario, como un ejecutable que se puede usar de forma offline.
 
 ### Estructura de directorios
 
 Estos son los archivos principales del repositorio y qué función cumplen:
 
-| Directorio       | ¿Qué función cumple?                                         |
-| ---------------- | ------------------------------------------------------------ |
-| api_docs         | Almacena el resultado de la documentación automática. Si ejecutás "make api" vas a ver cómo se recorre el código de Pilas y se genera esta documentación. |
+| Directorio       | ¿Qué función cumple?                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| api_docs         | Almacena el resultado de la documentación automática. Si ejecutás "make api" vas a ver cómo se recorre el código de Pilas y se genera esta documentación.                                                                                                                                                                                                                                                                   |
 | **app**          | Es un directorio importante, aquí está todo el código fuente de la aplicación realizado con Ember. Dentro están las plantillas, los controladores, componentes y rutas. Más adelante en este tutorial damos detalles sobre cómo editar los archivos de este directorio. Pero a grandes razgos, con "make ejecutar" o "make compilar" se puede invocar a Ember para que convierta todo ese directorio en una aplicación web. |
-| **manual**       | Contiene todo el manual de Pilas en formato markdown. Podes editar el contenido con cualquier editor de textos, y para convertirlo en html y que se vea dentro de la aplicación deberías ejecutar el comando "make pilas_manual". |
-| **pilas-engine** | Contiene el código fuente del motor de pilas. El código está diseñado usando typescript, por ese motivo para compilarlo hay que ejecutar el comando "make compilar_pilas" o "make compilar_pilas_live" para hacerlo de forma continua. |
-| **public**       | Almacena todos los archivos que se deben servir desde la aplicación emberjs sin procesar. Por ejemplo imágenes, fuentes y sonidos. Pero además, este directorio también se actualiza desde otros comandos. Por ejemplo, cuando compilamos el código del directorio *pilas-engine* con el comando "make compilar_pilas", el archivo generado se copia a este directorio "public". |
-| **tests**        | Almacena todos los tests de unidad, integración y aceptación. Estos tests se ejecutan cuando se invoca el comando "make test" o cuando se ejecuta "make ejecutar" y luego se ingresa a http://localhost:4200/tests. Además, se ejecutan en remoto cada vez que se hace un push al repositorio. Más adelante en este documento se describe cómo funcionan los tests en la estructura del proyecto. |
+| **manual**       | Contiene todo el manual de Pilas en formato markdown. Podes editar el contenido con cualquier editor de textos, y para convertirlo en html y que se vea dentro de la aplicación deberías ejecutar el comando "make pilas_manual".                                                                                                                                                                                           |
+| **pilas-engine** | Contiene el código fuente del motor de pilas. El código está diseñado usando typescript, por ese motivo para compilarlo hay que ejecutar el comando "make compilar_pilas" o "make compilar_pilas_live" para hacerlo de forma continua.                                                                                                                                                                                      |
+| **public**       | Almacena todos los archivos que se deben servir desde la aplicación emberjs sin procesar. Por ejemplo imágenes, fuentes y sonidos. Pero además, este directorio también se actualiza desde otros comandos. Por ejemplo, cuando compilamos el código del directorio _pilas-engine_ con el comando "make compilar_pilas", el archivo generado se copia a este directorio "public".                                            |
+| **tests**        | Almacena todos los tests de unidad, integración y aceptación. Estos tests se ejecutan cuando se invoca el comando "make test" o cuando se ejecuta "make ejecutar" y luego se ingresa a http://localhost:4200/tests. Además, se ejecutan en remoto cada vez que se hace un push al repositorio. Más adelante en este documento se describe cómo funcionan los tests en la estructura del proyecto.                           |
 
 ## Repositorio y modelo de trabajo
 
@@ -74,15 +74,11 @@ y luego abrí esta dirección en el navegador: http://localhost:4200
 
 Ten en cuenta que el servidor de Ember va a estar en ejecución; cada vez que modifiques un archivo del código de la aplicación Ember se va a encargar de actualizar el navegador automáticamente.
 
-
-
 ## Estilo de programación
 
 Te recomendamos escribir el código en español siempre que sea posible, y aquellas variables o métodos que tienen varias palabras intentaremos escribirlas como "nombre_del_metodo" en lugar de "nombreDelMetodo".
 
 Además, es muy importante que tengas configurado tu editor para usar automáticamente prettier (<https://prettier.io/>).
-
-
 
 ## Tests
 
@@ -104,8 +100,6 @@ Tendrías que ingresar a la dirección "http://localhost:4200/tests":
 
 En la imagen marqué dos opciones que me parecen útiles para todas las personas, la primera evita que la pantalla se llene con detalles de tests que corren bien y la segunda es simplemente estética: sirve para ver cómo se ven los tests visualmente al costado de la pantalla.
 
-
-
 ## Automatización e integración contínua
 
 Hay varias tareas que se realizan de forma automática cada vez que realizamos un push al repositorio.
@@ -124,4 +118,4 @@ La forma que utilizamos para marcar que Pilas se puede publicar es realizando un
 
 ![](imagenes/assets/pilas-engine 2018-03-21 00-00-56.png)
 
-Si bien estos pasos son automáticos, todo el detalle de lo que se debe ejecutar está en el archivo  `.circleci/config.yml`.
+Si bien estos pasos son automáticos, todo el detalle de lo que se debe ejecutar está en el archivo `.circleci/config.yml`.

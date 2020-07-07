@@ -42,10 +42,31 @@ export default Component.extend({
             class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
                 let actor = this.pilas.actores.aceituna();
-                this.actor = actor;
-                this.actor.aprender("moverse con el teclado");
+                //this.actor = actor;
+                actor.recortar(0, 0, 10, 100);
 
-                actor.decir("Texto largo")
+                let actor2 = this.pilas.actores.aceituna();
+                actor2.centro_y = 1;
+                actor2.y-=20
+                actor2.rotacion = [-40];
+                actor2.recortar(10, 10, 100, 100);
+
+                actor2.aprender("arrastrable");
+
+                actor2.cuando_termina_de_hacer_click = function() {
+                  console.log("suelta");
+                  //actor2.eliminar();
+                }
+
+                actor2.cuando_hace_click = function() {
+                  console.log("asd");
+                }
+
+                window.aceituna = actor2;
+
+
+                //this.actor.aprender("moverse con el teclado");
+                //actor.decir("Texto largo")
 
 
               }

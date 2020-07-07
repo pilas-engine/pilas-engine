@@ -19,6 +19,8 @@ del actor. Hay una propiedad llamada "Habilidades" en donde cargar una o
 más habilidades que busquemos enseñarle a un actor al momento de iniciar
 la escena.
 
+![](imagenes/habilidades/habilidades.png)
+
 ## Desde el código
 
 Otra opción, es enseñarle una habilidad al actor desde el código.
