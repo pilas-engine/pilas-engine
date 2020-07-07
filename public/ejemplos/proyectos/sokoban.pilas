@@ -1,7 +1,5 @@
 {
   "titulo": "Proyecto demo",
-  "ancho": 600,
-  "alto": 600,
   "imagenes": [
     {
       "nombre": "player_08",
@@ -420,7 +418,7 @@
     "actores": [
       {
         "nombre": "protagonista",
-        "codigo": "// @ts-ignore\nclass protagonista extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n\n    cuando_pulsa_tecla(tecla) {\n        if (tecla === \"izquierda\") {\n            this.mover(-1, 0);\n            this.imagen = \"player_20\";\n        }\n\n        if (tecla === \"derecha\") {\n            this.mover(1, 0);\n            this.imagen = \"player_17\";\n        }\n\n        if (tecla === \"arriba\") {\n            this.mover(0, 1);\n            this.imagen = \"player_08\";\n        }\n\n        if (tecla == \"abajo\") {\n            this.mover(0, -1);\n            this.imagen = \"player_05\";\n        }\n    }\n\n    mover(x, y) {\n\n        if (this.es_pared(x, y)) {\n            this.decir(\"No puedo empujar la pared.\");\n            return;\n        }\n\n        if (this.es_caja(x, y)) {\n            if (this.puede_empujar_la_caja(x, y)) {\n                this.empujar_caja(x, y);\n\n                // Mueve al personaje.\n                this.x += x * 64;\n                this.y += y * 64;\n                return;\n\n            } else {\n                this.decir(\"Esta caja está bloqueada\");\n                return true;\n            }\n        }\n\n        // Mueve al personaje si no hay pared ni cajas en su camino.\n        this.x += x * 64;\n        this.y += y * 64;\n    }\n\n    es_pared(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una pared.\n        return actores.find((actor) => actor.tiene_etiqueta(\"pared\"));\n    }\n\n    es_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una caja.\n        return actores.find((actor) => actor.tiene_etiqueta(\"caja\"));\n    }\n\n    empujar_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        let caja = (actores.find((actor) => actor.tiene_etiqueta(\"caja\")));\n\n        caja.x += x * 64;\n        caja.y += y * 64;\n\n    }\n\n    puede_empujar_la_caja(x, y) {\n        // calcula los siguientes dos pasos que dará.\n        let pos_x = this.x + x * 2 * 64;\n        let pos_y = this.y + y * 2 * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, en caso de que a dos pasos exista una pared.\n        // es decir, si hay una pared a dos pasos es que no puede empujar\n        // una caja en esa dirección.\n        if (actores.find((actor) => {\n                return actor.tiene_etiqueta(\"pared\") || actor.tiene_etiqueta(\"caja\");\n            })) {\n            return false;\n        } else {\n            return true;\n        }\n    }\n}"
+        "codigo": "// @ts-ignore\nclass protagonista extends Actor {\n\n    iniciar() { }\n\n    actualizar() { }\n\n    cuando_pulsa_tecla(tecla) {\n        if (tecla === \"izquierda\") {\n            this.mover(-1, 0);\n            this.imagen = \"player_20\";\n        }\n\n        if (tecla === \"derecha\") {\n            this.mover(1, 0);\n            this.imagen = \"player_17\";\n        }\n\n        if (tecla === \"arriba\") {\n            this.mover(0, 1);\n            this.imagen = \"player_08\";\n        }\n\n        if (tecla == \"abajo\") {\n            this.mover(0, -1);\n            this.imagen = \"player_05\";\n        }\n    }\n\n    mover(x, y) {\n\n        if (this.es_pared(x, y)) {\n            this.decir(\"No puedo empujar la pared.\");\n            return;\n        }\n\n        if (this.es_caja(x, y)) {\n            if (this.puede_empujar_la_caja(x, y)) {\n                this.empujar_caja(x, y);\n\n                // Mueve al personaje.\n                this.animar(Tipo.desborde).mover(x * 64, y * 64, 0.1);\n                return;\n\n            } else {\n                this.decir(\"Esta caja está bloqueada\");\n                return true;\n            }\n        }\n\n        // Mueve al personaje si no hay pared ni cajas en su camino.\n\n        this.animar(Tipo.desborde).mover(x * 64, y * 64, 0.1);\n    }\n\n    es_pared(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una pared.\n        return actores.find((actor) => actor.tiene_etiqueta(\"pared\"));\n    }\n\n    es_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, si alguno de los actores en su siguiente\n        // posicion es una caja.\n        return actores.find((actor) => actor.tiene_etiqueta(\"caja\"));\n    }\n\n    empujar_caja(x, y) {\n        // calcula el siguiente paso que dará.\n        let pos_x = this.x + x * 64;\n        let pos_y = this.y + y * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        let caja = (actores.find((actor) => actor.tiene_etiqueta(\"caja\")));\n\n        caja.animar(Tipo.desborde).mover(x * 64, y * 64, 0.1);\n\n    }\n\n    puede_empujar_la_caja(x, y) {\n        // calcula los siguientes dos pasos que dará.\n        let pos_x = this.x + x * 2 * 64;\n        let pos_y = this.y + y * 2 * 64;\n\n        let actores = this.pilas.obtener_actores_en(pos_x, pos_y);\n\n        // retorna true, en caso de que a dos pasos exista una pared.\n        // es decir, si hay una pared a dos pasos es que no puede empujar\n        // una caja en esa dirección.\n        if (actores.find((actor) => {\n            return actor.tiene_etiqueta(\"pared\") || actor.tiene_etiqueta(\"caja\");\n        })) {\n            return false;\n        } else {\n            return true;\n        }\n    }\n}"
       },
       {
         "nombre": "diamante",
@@ -593,49 +591,84 @@
     ],
     "proyecto": "class Proyecto {\n        iniciar() {\n\n        }\n      }"
   },
+  "fps": 60,
+  "nombre_de_la_escena_inicial": "escena1",
+  "tamaño": "600x600",
+  "modo_de_video": "suavizado",
+  "sonidos": [
+    {
+      "nombre": "laser",
+      "ruta": "sonidos/laser.mp3"
+    },
+    {
+      "nombre": "explosion",
+      "ruta": "sonidos/explosion.mp3"
+    },
+    {
+      "nombre": "gallina",
+      "ruta": "sonidos/gallina.mp3"
+    },
+    {
+      "nombre": "moneda",
+      "ruta": "sonidos/moneda.mp3"
+    },
+    {
+      "nombre": "salto-corto",
+      "ruta": "sonidos/salto-corto.mp3"
+    },
+    {
+      "nombre": "salto-largo",
+      "ruta": "sonidos/salto-largo.mp3"
+    },
+    {
+      "nombre": "seleccion-aguda",
+      "ruta": "sonidos/seleccion-aguda.mp3"
+    },
+    {
+      "nombre": "seleccion-grave",
+      "ruta": "sonidos/seleccion-grave.mp3"
+    },
+    {
+      "nombre": "comer",
+      "ruta": "sonidos/comer.mp3"
+    }
+  ],
   "escenas": [
     {
-      "nombre": "escena1",
       "id": 1,
-      "ancho": 1000,
-      "alto": 1000,
-      "camara_x": 0,
-      "camara_y": 0,
-      "gravedad_x": 0,
-      "gravedad_y": 1,
-      "fondo": "decoracion:fondos/fondo-cesped_2",
+      "nombre": "escena1",
       "actores": [
         {
-          "x": -44,
-          "y": 172,
-          "z": 0,
-          "imagen": "player_05",
-          "centro_x": 0.5,
-          "centro_y": 0.5,
-          "rotacion": 0,
-          "escala_x": 1,
-          "escala_y": 1,
-          "transparencia": 0,
-          "etiqueta": "actor",
-          "espejado": false,
-          "espejado_vertical": false,
           "figura": "rectangulo",
-          "figura_dinamica": false,
-          "figura_ancho": 64,
-          "figura_alto": 64,
-          "figura_radio": 40,
-          "figura_sin_rotacion": false,
-          "figura_rebote": 1,
-          "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "sensores": [],
+          "color": "white",
           "id": 1663,
           "activo": true,
           "nombre": "protagonista",
+          "etiqueta": "actor",
+          "imagen": "player_05",
+          "x": -44,
+          "y": 172,
+          "z": 0,
           "habilidades": [],
-          "sensores": []
+          "escala_x": 1,
+          "escala_y": 1,
+          "rotacion": 0,
+          "transparencia": 0,
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura_ancho": 64,
+          "figura_alto": 64,
+          "figura_radio": 40,
+          "figura_rebote": 1,
+          "figura_dinamica": false,
+          "figura_sin_rotacion": false,
+          "figura_sensor": false
         },
         {
           "x": -172,
@@ -661,13 +694,13 @@
           "figura_sensor": true,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1262,
           "activo": true,
-          "nombre": "diamante",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "diamante"
         },
         {
           "x": 148,
@@ -693,13 +726,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1513,
           "activo": true,
-          "nombre": "pared",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared"
         },
         {
           "x": -44,
@@ -725,13 +758,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1321,
           "activo": true,
-          "nombre": "caja",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "caja"
         },
         {
           "x": -172,
@@ -757,13 +790,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1491,
           "activo": true,
-          "nombre": "pared1",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared1"
         },
         {
           "x": -108,
@@ -789,13 +822,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1279,
           "activo": true,
-          "nombre": "pared2",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared2"
         },
         {
           "x": -44,
@@ -821,13 +854,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1973,
           "activo": true,
-          "nombre": "pared3",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared3"
         },
         {
           "x": 20,
@@ -853,13 +886,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1918,
           "activo": true,
-          "nombre": "pared4",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared4"
         },
         {
           "x": 84,
@@ -885,13 +918,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1516,
           "activo": true,
-          "nombre": "pared5",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared5"
         },
         {
           "x": 148,
@@ -917,13 +950,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1546,
           "activo": true,
-          "nombre": "pared6",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared6"
         },
         {
           "x": 20,
@@ -949,13 +982,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1869,
           "activo": true,
-          "nombre": "pared7",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared7"
         },
         {
           "x": 20,
@@ -981,13 +1014,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1868,
           "activo": true,
-          "nombre": "pared8",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared8"
         },
         {
           "x": -108,
@@ -1013,13 +1046,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1701,
           "activo": true,
-          "nombre": "pared9",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared9"
         },
         {
           "x": 20,
@@ -1045,13 +1078,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1671,
           "activo": true,
-          "nombre": "pared10",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared10"
         },
         {
           "x": -236,
@@ -1077,13 +1110,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1051,
           "activo": true,
-          "nombre": "pared11",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared11"
         },
         {
           "x": -172,
@@ -1109,13 +1142,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1369,
           "activo": true,
-          "nombre": "pared12",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared12"
         },
         {
           "x": -172,
@@ -1141,13 +1174,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1597,
           "activo": true,
-          "nombre": "pared13",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared13"
         },
         {
           "x": -236,
@@ -1173,13 +1206,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1382,
           "activo": true,
-          "nombre": "pared14",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared14"
         },
         {
           "x": -172,
@@ -1205,13 +1238,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1515,
           "activo": true,
-          "nombre": "pared15",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared15"
         },
         {
           "x": -236,
@@ -1237,13 +1270,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1533,
           "activo": true,
-          "nombre": "pared16",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared16"
         },
         {
           "x": -172,
@@ -1269,13 +1302,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1388,
           "activo": true,
-          "nombre": "pared17",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared17"
         },
         {
           "x": -108,
@@ -1301,13 +1334,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1498,
           "activo": true,
-          "nombre": "pared18",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared18"
         },
         {
           "x": -236,
@@ -1333,13 +1366,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1850,
           "activo": true,
-          "nombre": "pared19",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared19"
         },
         {
           "x": -236,
@@ -1365,13 +1398,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1716,
           "activo": true,
-          "nombre": "pared20",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared20"
         },
         {
           "x": 212,
@@ -1397,13 +1430,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1199,
           "activo": true,
-          "nombre": "pared21",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared21"
         },
         {
           "x": 148,
@@ -1429,13 +1462,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 18699,
           "activo": true,
-          "nombre": "pared22",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared22"
         },
         {
           "x": 84,
@@ -1461,13 +1494,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1476,
           "activo": true,
-          "nombre": "pared23",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared23"
         },
         {
           "x": -44,
@@ -1493,13 +1526,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1760,
           "activo": true,
-          "nombre": "pared24",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared24"
         },
         {
           "x": 212,
@@ -1525,13 +1558,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1111,
           "activo": true,
-          "nombre": "pared25",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared25"
         },
         {
           "x": 212,
@@ -1557,13 +1590,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1030,
           "activo": true,
-          "nombre": "pared26",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared26"
         },
         {
           "x": -108,
@@ -1589,13 +1622,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1758,
           "activo": true,
-          "nombre": "pared27",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared27"
         },
         {
           "x": -172,
@@ -1621,13 +1654,13 @@
           "figura_sensor": true,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1609,
           "activo": true,
-          "nombre": "diamante1",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "diamante1"
         },
         {
           "x": -172,
@@ -1653,13 +1686,13 @@
           "figura_sensor": true,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1270,
           "activo": true,
-          "nombre": "diamante2",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "diamante2"
         },
         {
           "x": -108,
@@ -1685,13 +1718,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1490,
           "activo": true,
-          "nombre": "caja1",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "caja1"
         },
         {
           "x": 84,
@@ -1717,13 +1750,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1459,
           "activo": true,
-          "nombre": "caja2",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "caja2"
         },
         {
           "x": 212,
@@ -1749,13 +1782,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1998,
           "activo": true,
-          "nombre": "pared28",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared28"
         },
         {
           "x": 212,
@@ -1781,13 +1814,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1711,
           "activo": true,
-          "nombre": "pared29",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared29"
         },
         {
           "x": 148,
@@ -1813,13 +1846,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1660,
           "activo": true,
-          "nombre": "pared30",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared30"
         },
         {
           "x": 84,
@@ -1845,13 +1878,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1108,
           "activo": true,
-          "nombre": "pared31",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared31"
         },
         {
           "x": 20,
@@ -1877,13 +1910,13 @@
           "figura_sensor": false,
           "es_texto": false,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
+          "habilidades": [],
+          "sensores": [],
+          "color": "white",
           "id": 1251,
           "activo": true,
-          "nombre": "pared32",
-          "habilidades": [],
-          "sensores": []
+          "nombre": "pared32"
         },
         {
           "x": 225.49510763209366,
@@ -1909,16 +1942,16 @@
           "figura_sensor": false,
           "es_texto": true,
           "texto_con_borde": false,
-          "color": "black",
           "magnitud": 18,
           "fondo": "imagenes:redimensionables/gris",
           "texto": "Reintentar",
-          "id": 1506,
-          "activo": true,
-          "nombre": "reiniciar_escena",
           "habilidades": [],
           "sensores": [],
-          "fuente": "color-negro"
+          "fuente": "color-negro",
+          "color": "black",
+          "id": 1506,
+          "activo": true,
+          "nombre": "reiniciar_escena"
         },
         {
           "x": 3.5225048923679765,
@@ -1944,16 +1977,16 @@
           "figura_sensor": false,
           "es_texto": true,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
           "texto": "¡ Prueba completada !",
-          "id": 1390,
-          "activo": false,
-          "nombre": "nivel_completado",
           "habilidades": [],
           "fondo": "imagenes:redimensionables/con_bordes_2",
           "sensores": [],
-          "fuente": "color-blanco-con-sombra"
+          "fuente": "color-blanco-con-sombra",
+          "color": "white",
+          "id": 1390,
+          "activo": false,
+          "nombre": "nivel_completado"
         },
         {
           "x": 0,
@@ -1979,21 +2012,27 @@
           "figura_sensor": false,
           "es_texto": true,
           "texto_con_borde": false,
-          "color": "white",
           "magnitud": 18,
           "texto": "Quedan cajas por ubicar.",
-          "id": 1376,
-          "activo": true,
-          "nombre": "texto_de_cajas_por_ubicar",
           "habilidades": [],
           "fondo": "imagenes:redimensionables/con_bordes_2",
           "sensores": [],
-          "fuente": "color-blanco-con-sombra"
+          "fuente": "color-blanco-con-sombra",
+          "color": "white",
+          "id": 1376,
+          "activo": true,
+          "nombre": "texto_de_cajas_por_ubicar"
         }
-      ]
+      ],
+      "ancho": 1000,
+      "alto": 1000,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-cesped_2",
+      "gravedad_x": 0,
+      "gravedad_y": 1
     }
   ],
-  "fps": 60,
-  "nombre_de_la_escena_inicial": "escena1",
-  "tamaño": "600x600"
+  "ancho": 600,
+  "alto": 600
 }

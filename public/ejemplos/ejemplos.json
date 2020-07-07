@@ -182,6 +182,10 @@
     {
       "nombre": "memorizar",
       "desde": "2.3.0"
+    },
+    {
+      "nombre": "rompecabezas",
+      "desde": "2.3.0"
     }
   ]
 }

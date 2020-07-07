@@ -579,6 +579,7 @@ declare class ActorBase {
     texto: any;
     private _id;
     private _nombre;
+    private recorte_activado;
     proyecto: any;
     private _habilidades;
     private _comportamientos;
@@ -657,6 +658,11 @@ declare class ActorBase {
         espejado_vertical: boolean;
         transparencia: any;
         id_color: number;
+        hit_x: any;
+        hit_y: any;
+        hit_ancho: any;
+        hit_alto: any;
+        hit_activado: boolean;
         sensores: any[];
     };
     etiqueta: any;
@@ -748,6 +754,8 @@ declare class ActorBase {
     reproducir_sonido(nombre: string): void;
     reproducir_musica(nombre: string): any;
     detener_musica(): void;
+    recortar(x: number, y: number, ancho: number, alto: number): void;
+    eliminar_recortado(): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1798,6 +1806,7 @@ declare class ModoEditor extends Modo {
     sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
     tamaño_de_la_grilla: number;
     tecla_meta_pulsada: boolean;
+    actor_seleccionado: any;
     constructor();
     preload(): void;
     create(datos: any): void;

@@ -8,6 +8,7 @@ class ModoEditor extends Modo {
   sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
   tamaño_de_la_grilla: number;
   tecla_meta_pulsada: boolean;
+  actor_seleccionado: any;
 
   constructor() {
     super({ key: "ModoEditor" });
@@ -25,6 +26,7 @@ class ModoEditor extends Modo {
     this.usar_grilla = false;
     this.tamaño_de_la_grilla = 256;
     this.crear_sprite_para_el_cursor_de_la_grilla();
+    this.actor_seleccionado = null;
 
     this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
     this.posicionar_la_camara(datos.escena);
@@ -421,9 +423,16 @@ class ModoEditor extends Modo {
     sprite["destacar"] = () => {
       sprite["destacandose"] = true;
 
-      this.crear_destello(sprite, () => {
-        sprite["destacandose"] = false;
-      });
+      if (this.actor_seleccionado) {
+        this.input.removeDebug(this.actor_seleccionado);
+      }
+
+      this.input.enableDebug(sprite);
+      this.actor_seleccionado = sprite;
+
+      // this.crear_destello(sprite, () => {
+      //   sprite["destacandose"] = false;
+      // });
     };
 
     // la siguiente función además de definir atributos genera la figura para
@@ -507,6 +516,11 @@ class ModoEditor extends Modo {
   eliminar_actor_por_id(id) {
     let indice = this.actores.findIndex(e => e.id === id);
     let actor_a_eliminar = this.actores.splice(indice, 1);
+
+    if (this.actor_seleccionado.id == actor_a_eliminar[0].id) {
+      this.input.removeDebug(this.actor_seleccionado);
+      this.actor_seleccionado = null;
+    }
 
     if (actor_a_eliminar[0].figura) {
       this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);

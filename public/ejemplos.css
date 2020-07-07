@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:b487bddb0d5d82c0b23d73b06e3e7a0d:a95445b7067a05e76d7f6d32276328cd:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:69fce508b30ce3e8ca057239e51ef1cc:c94c871450ae3c2059c67dcb004da8f2:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -56,6 +56,7 @@
 .capturas-recorrido-con-orientacion {width:180px; height:140px; background-position: -547px -853px}
 .capturas-recorrido-de-curva {width:180px; height:140px; background-position: -729px -853px}
 .capturas-recorrido-simple {width:180px; height:140px; background-position: -365px -995px}
+.capturas-rompecabezas {width:180px; height:139px; background-position: -365px -1279px}
 .capturas-sokoban {width:180px; height:140px; background-position: -365px -1137px}
 .capturas-temporizadores {width:180px; height:140px; background-position: -547px -995px}
 .capturas-tipos_de_animacion {width:180px; height:140px; background-position: -729px -995px}

@@ -1390,8 +1390,10 @@ var Arrastrable = (function (_super) {
         if (this.actor !== objeto.actor) {
             return;
         }
-        this.valor_inicial_dinamico = objeto.actor.dinamico;
-        objeto.actor.dinamico = false;
+        if (this.actor.figura) {
+            this.valor_inicial_dinamico = objeto.actor.dinamico;
+            objeto.actor.dinamico = false;
+        }
     };
     Arrastrable.prototype.cuando_mueve = function (_, objeto, x, y) {
         objeto.x = x;
@@ -1401,7 +1403,9 @@ var Arrastrable = (function (_super) {
         if (this.actor !== objeto.actor) {
             return;
         }
-        objeto.actor.dinamico = this.valor_inicial_dinamico;
+        if (this.actor.figura) {
+            objeto.actor.dinamico = this.valor_inicial_dinamico;
+        }
     };
     return Arrastrable;
 }(Habilidad));
@@ -2599,6 +2603,7 @@ var ActorBase = (function () {
         var figura = propiedades.figura || "";
         this._id = propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
         this._nombre = propiedades.nombre;
+        this.recorte_activado = false;
         this.sensores = [];
         this._comportamientos = [];
         this._figura_ancho = propiedades.figura_ancho;
@@ -2858,6 +2863,11 @@ var ActorBase = (function () {
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
             id_color: this.id_color,
+            hit_x: this.sprite.input.hitArea.x,
+            hit_y: this.sprite.input.hitArea.y,
+            hit_ancho: this.sprite.input.hitArea.width,
+            hit_alto: this.sprite.input.hitArea.height,
+            hit_activado: this.recorte_activado,
             sensores: sensores_serializados
         };
     };
@@ -3687,6 +3697,29 @@ var ActorBase = (function () {
     };
     ActorBase.prototype.detener_musica = function () {
         return this.pilas.detener_musica();
+    };
+    ActorBase.prototype.recortar = function (x, y, ancho, alto) {
+        if (this.figura) {
+            throw new Error("No se puede recortar un actor que tiene una figura din\u00E1mica.");
+        }
+        this.recorte_activado = true;
+        this.sprite.setCrop(x, y, ancho, alto);
+        this.sprite.input.hitArea.x = x;
+        this.sprite.input.hitArea.y = y;
+        this.sprite.input.hitArea.width = ancho;
+        this.sprite.input.hitArea.height = alto;
+        this.centro_x = (x + ancho / 2) / this.sprite.width;
+        this.centro_y = (y + alto / 2) / this.sprite.height;
+    };
+    ActorBase.prototype.eliminar_recortado = function () {
+        this.sprite.setCrop();
+        this.recorte_activado = false;
+        this.sprite.input.hitArea.x = 0;
+        this.sprite.input.hitArea.y = 0;
+        this.sprite.input.hitArea.width = this.sprite.width;
+        this.sprite.input.hitArea.height = this.sprite.height;
+        this.centro_x = 0.5;
+        this.centro_y = 0.5;
     };
     return ActorBase;
 }());
@@ -8054,6 +8087,7 @@ var ModoEditor = (function (_super) {
         this.usar_grilla = false;
         this.tamaño_de_la_grilla = 256;
         this.crear_sprite_para_el_cursor_de_la_grilla();
+        this.actor_seleccionado = null;
         this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
         this.posicionar_la_camara(datos.escena);
         this.aplicar_limites_a_la_camara(datos.escena);
@@ -8359,9 +8393,11 @@ var ModoEditor = (function (_super) {
         sprite["destacandose"] = false;
         sprite["destacar"] = function () {
             sprite["destacandose"] = true;
-            _this.crear_destello(sprite, function () {
-                sprite["destacandose"] = false;
-            });
+            if (_this.actor_seleccionado) {
+                _this.input.removeDebug(_this.actor_seleccionado);
+            }
+            _this.input.enableDebug(sprite);
+            _this.actor_seleccionado = sprite;
         };
         this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
         this.input.setDraggable(sprite, undefined);
@@ -8430,6 +8466,10 @@ var ModoEditor = (function (_super) {
         var _this = this;
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
         var actor_a_eliminar = this.actores.splice(indice, 1);
+        if (this.actor_seleccionado.id == actor_a_eliminar[0].id) {
+            this.input.removeDebug(this.actor_seleccionado);
+            this.actor_seleccionado = null;
+        }
         if (actor_a_eliminar[0].figura) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);
         }
@@ -9215,6 +9255,9 @@ var ModoPausa = (function (_super) {
         sprite.setFlipX(entidad.espejado);
         sprite.setFlipY(entidad.espejado_vertical);
         sprite.depth = -entidad.z;
+        if (entidad.hit_activado) {
+            sprite.setCrop(entidad.hit_x, entidad.hit_y, entidad.hit_ancho, entidad.hit_alto);
+        }
         if (entidad.fijo) {
             sprite.setScrollFactor(0, 0);
         }

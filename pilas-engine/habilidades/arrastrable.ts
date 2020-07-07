@@ -30,8 +30,10 @@ class Arrastrable extends Habilidad {
       return;
     }
 
-    this.valor_inicial_dinamico = objeto.actor.dinamico;
-    objeto.actor.dinamico = false;
+    if (this.actor.figura) {
+      this.valor_inicial_dinamico = objeto.actor.dinamico;
+      objeto.actor.dinamico = false;
+    }
   }
 
   private cuando_mueve(_, objeto, x, y) {
@@ -44,6 +46,8 @@ class Arrastrable extends Habilidad {
       return;
     }
 
-    objeto.actor.dinamico = this.valor_inicial_dinamico;
+    if (this.actor.figura) {
+      objeto.actor.dinamico = this.valor_inicial_dinamico;
+    }
   }
 }

@@ -259,6 +259,10 @@ class ModoPausa extends Modo {
     sprite.setFlipY(entidad.espejado_vertical);
     sprite.depth = -entidad.z;
 
+    if (entidad.hit_activado) {
+      sprite.setCrop(entidad.hit_x, entidad.hit_y, entidad.hit_ancho, entidad.hit_alto);
+    }
+
     if (entidad.fijo) {
       sprite.setScrollFactor(0, 0);
     }

@@ -19,6 +19,7 @@ class ActorBase {
   texto: any;
   private _id: any;
   private _nombre: any;
+  private recorte_activado: boolean;
 
   proyecto: any;
 
@@ -92,6 +93,7 @@ class ActorBase {
     this._id = propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
     this._nombre = propiedades.nombre;
 
+    this.recorte_activado = false;
     this.sensores = [];
     this._comportamientos = [];
     this._figura_ancho = propiedades.figura_ancho;
@@ -395,6 +397,12 @@ class ActorBase {
       espejado_vertical: this.espejado_vertical,
       transparencia: this.transparencia,
       id_color: this.id_color,
+
+      hit_x: this.sprite.input.hitArea.x,
+      hit_y: this.sprite.input.hitArea.y,
+      hit_ancho: this.sprite.input.hitArea.width,
+      hit_alto: this.sprite.input.hitArea.height,
+      hit_activado: this.recorte_activado,
 
       sensores: sensores_serializados
     };
@@ -1254,5 +1262,35 @@ class ActorBase {
 
   detener_musica() {
     return this.pilas.detener_musica();
+  }
+
+  recortar(x: number, y: number, ancho: number, alto: number) {
+    if (this.figura) {
+      throw new Error(`No se puede recortar un actor que tiene una figura dinámica.`);
+    }
+
+    this.recorte_activado = true;
+    this.sprite.setCrop(x, y, ancho, alto);
+
+    this.sprite.input.hitArea.x = x;
+    this.sprite.input.hitArea.y = y;
+    this.sprite.input.hitArea.width = ancho;
+    this.sprite.input.hitArea.height = alto;
+
+    this.centro_x = (x + ancho / 2) / this.sprite.width;
+    this.centro_y = (y + alto / 2) / this.sprite.height;
+  }
+
+  eliminar_recortado() {
+    this.sprite.setCrop();
+    this.recorte_activado = false;
+
+    this.sprite.input.hitArea.x = 0;
+    this.sprite.input.hitArea.y = 0;
+    this.sprite.input.hitArea.width = this.sprite.width;
+    this.sprite.input.hitArea.height = this.sprite.height;
+
+    this.centro_x = 0.5;
+    this.centro_y = 0.5;
   }
 }
