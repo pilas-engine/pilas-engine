@@ -186,6 +186,10 @@
     {
       "nombre": "rompecabezas",
       "desde": "2.3.0"
+    },
+    {
+      "nombre": "asusta-fantasmas",
+      "desde": "2.3.0"
     }
   ]
 }

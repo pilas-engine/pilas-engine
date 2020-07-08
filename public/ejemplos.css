@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:69fce508b30ce3e8ca057239e51ef1cc:c94c871450ae3c2059c67dcb004da8f2:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:fb942a5580b8bfa0cb8fe748b40b66d3:2105ed127f8f8e496780628dd8a7cfbd:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -12,51 +12,52 @@
 
 .sprite-ejemplos {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(ejemplos.jpg);}
 
-.capturas-acceder-a-actores {width:180px; height:140px; background-position: -1px -1px}
-.capturas-angulo {width:180px; height:140px; background-position: -365px -1px}
-.capturas-angulo-entre-actores {width:180px; height:140px; background-position: -183px -1px}
-.capturas-apilador-de-cajas {width:180px; height:140px; background-position: -547px -1px}
-.capturas-aprender-y-olvidar {width:180px; height:140px; background-position: -729px -1px}
-.capturas-arkanoid {width:180px; height:140px; background-position: -1px -143px}
-.capturas-arrastrables {width:180px; height:140px; background-position: -183px -143px}
-.capturas-automata-cofre {width:179px; height:140px; background-position: -547px -1137px}
-.capturas-automata-contra-calaveras {width:179px; height:140px; background-position: -728px -1137px}
-.capturas-azar {width:180px; height:140px; background-position: -365px -143px}
-.capturas-barra-de-energia {width:180px; height:140px; background-position: -547px -143px}
-.capturas-barras-de-energia {width:180px; height:140px; background-position: -729px -143px}
-.capturas-camara-seguir-clicks {width:180px; height:140px; background-position: -1px -285px}
-.capturas-click {width:180px; height:140px; background-position: -183px -285px}
-.capturas-click_actor {width:180px; height:140px; background-position: -365px -285px}
-.capturas-controles {width:180px; height:140px; background-position: -547px -285px}
-.capturas-cuando-pulsa-tecla {width:180px; height:140px; background-position: -729px -285px}
-.capturas-cursores {width:180px; height:140px; background-position: -1px -427px}
-.capturas-dos-jugadores {width:180px; height:140px; background-position: -183px -427px}
-.capturas-ejemplo-nave {width:180px; height:140px; background-position: -365px -427px}
-.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -1px -1279px}
-.capturas-flappy {width:180px; height:140px; background-position: -547px -427px}
-.capturas-gravedad {width:180px; height:140px; background-position: -729px -427px}
-.capturas-huesos {width:180px; height:140px; background-position: -1px -569px}
-.capturas-imagenes-como-botones {width:180px; height:140px; background-position: -183px -569px}
-.capturas-laser-y-misil {width:180px; height:140px; background-position: -365px -569px}
-.capturas-mantener-valores-entre-escenas {width:180px; height:140px; background-position: -547px -569px}
-.capturas-mejor-puntaje {width:180px; height:139px; background-position: -183px -1279px}
-.capturas-memorizar {width:180px; height:140px; background-position: -729px -569px}
-.capturas-mensaje_global {width:180px; height:140px; background-position: -1px -711px}
-.capturas-menu-simple {width:180px; height:140px; background-position: -1px -853px}
-.capturas-musica {width:180px; height:140px; background-position: -1px -995px}
-.capturas-nave_contra_aliens {width:180px; height:140px; background-position: -1px -1137px}
-.capturas-naves {width:180px; height:140px; background-position: -183px -711px}
-.capturas-nubes {width:180px; height:140px; background-position: -365px -711px}
-.capturas-pacman {width:180px; height:140px; background-position: -729px -711px}
-.capturas-pacman-con-paredes {width:180px; height:140px; background-position: -547px -711px}
-.capturas-pantalla-completa {width:180px; height:140px; background-position: -183px -853px}
-.capturas-pausar {width:180px; height:140px; background-position: -183px -995px}
-.capturas-plataformas {width:180px; height:140px; background-position: -365px -853px}
-.capturas-plataformas-2 {width:180px; height:140px; background-position: -183px -1137px}
-.capturas-recorrido-con-orientacion {width:180px; height:140px; background-position: -547px -853px}
-.capturas-recorrido-de-curva {width:180px; height:140px; background-position: -729px -853px}
-.capturas-recorrido-simple {width:180px; height:140px; background-position: -365px -995px}
-.capturas-rompecabezas {width:180px; height:139px; background-position: -365px -1279px}
-.capturas-sokoban {width:180px; height:140px; background-position: -365px -1137px}
-.capturas-temporizadores {width:180px; height:140px; background-position: -547px -995px}
-.capturas-tipos_de_animacion {width:180px; height:140px; background-position: -729px -995px}
+.capturas-acceder-a-actores {width:180px; height:140px; background-position: -547px -1px}
+.capturas-angulo {width:180px; height:140px; background-position: -1px -142px}
+.capturas-angulo-entre-actores {width:180px; height:140px; background-position: -729px -1px}
+.capturas-apilador-de-cajas {width:180px; height:140px; background-position: -183px -142px}
+.capturas-aprender-y-olvidar {width:180px; height:140px; background-position: -365px -142px}
+.capturas-arkanoid {width:180px; height:140px; background-position: -547px -143px}
+.capturas-arrastrables {width:180px; height:140px; background-position: -729px -143px}
+.capturas-asusta-fantasmas {width:179px; height:140px; background-position: -1px -284px}
+.capturas-automata-cofre {width:179px; height:140px; background-position: -182px -284px}
+.capturas-automata-contra-calaveras {width:179px; height:140px; background-position: -363px -284px}
+.capturas-azar {width:180px; height:140px; background-position: -544px -285px}
+.capturas-barra-de-energia {width:180px; height:140px; background-position: -726px -285px}
+.capturas-barras-de-energia {width:180px; height:140px; background-position: -1px -426px}
+.capturas-camara-seguir-clicks {width:180px; height:140px; background-position: -183px -426px}
+.capturas-click {width:180px; height:140px; background-position: -365px -427px}
+.capturas-click_actor {width:180px; height:140px; background-position: -547px -427px}
+.capturas-controles {width:180px; height:140px; background-position: -729px -427px}
+.capturas-cuando-pulsa-tecla {width:180px; height:140px; background-position: -1px -568px}
+.capturas-cursores {width:180px; height:140px; background-position: -183px -568px}
+.capturas-dos-jugadores {width:180px; height:140px; background-position: -365px -569px}
+.capturas-ejemplo-nave {width:180px; height:140px; background-position: -547px -569px}
+.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -1px -1px}
+.capturas-flappy {width:180px; height:140px; background-position: -729px -569px}
+.capturas-gravedad {width:180px; height:140px; background-position: -1px -710px}
+.capturas-huesos {width:180px; height:140px; background-position: -183px -710px}
+.capturas-imagenes-como-botones {width:180px; height:140px; background-position: -365px -711px}
+.capturas-laser-y-misil {width:180px; height:140px; background-position: -547px -711px}
+.capturas-mantener-valores-entre-escenas {width:180px; height:140px; background-position: -729px -711px}
+.capturas-mejor-puntaje {width:180px; height:139px; background-position: -183px -1px}
+.capturas-memorizar {width:180px; height:140px; background-position: -1px -852px}
+.capturas-mensaje_global {width:180px; height:140px; background-position: -183px -852px}
+.capturas-menu-simple {width:180px; height:140px; background-position: -365px -853px}
+.capturas-musica {width:180px; height:140px; background-position: -547px -853px}
+.capturas-nave_contra_aliens {width:180px; height:140px; background-position: -729px -853px}
+.capturas-naves {width:180px; height:140px; background-position: -1px -994px}
+.capturas-nubes {width:180px; height:140px; background-position: -183px -994px}
+.capturas-pacman {width:180px; height:140px; background-position: -547px -995px}
+.capturas-pacman-con-paredes {width:180px; height:140px; background-position: -365px -995px}
+.capturas-pantalla-completa {width:180px; height:140px; background-position: -729px -995px}
+.capturas-pausar {width:180px; height:140px; background-position: -1px -1136px}
+.capturas-plataformas {width:180px; height:140px; background-position: -365px -1137px}
+.capturas-plataformas-2 {width:180px; height:140px; background-position: -183px -1136px}
+.capturas-recorrido-con-orientacion {width:180px; height:140px; background-position: -547px -1137px}
+.capturas-recorrido-de-curva {width:180px; height:140px; background-position: -729px -1137px}
+.capturas-recorrido-simple {width:180px; height:140px; background-position: -1px -1278px}
+.capturas-rompecabezas {width:180px; height:139px; background-position: -365px -1px}
+.capturas-sokoban {width:180px; height:140px; background-position: -183px -1278px}
+.capturas-temporizadores {width:180px; height:140px; background-position: -365px -1279px}
+.capturas-tipos_de_animacion {width:180px; height:140px; background-position: -547px -1279px}
