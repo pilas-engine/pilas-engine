@@ -32,7 +32,6 @@ export default Component.extend({
       yield this.agregar_archivo(zip, "./proyecto-exportable/LEER.html");
 
       yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/package.json");
-      yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/package-lock.json");
       yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/index.js");
       yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/instalar_dependencias.bat");
       yield this.agregar_archivo(carpeta_del_juego, "./proyecto-exportable/generar_version_exe.bat");
