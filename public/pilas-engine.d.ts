@@ -476,7 +476,7 @@ declare class Pilas {
     control: Control;
     readonly camara: Camara;
     iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any, imagenes: any): void;
-    iniciar(ancho: number, alto: number, recursos: any, opciones?: any, imagenes?: any): this;
+    iniciar(ancho: number, alto: number, recursos: any, opciones?: any, imagenes?: any, omitir_imagenes_de_pilas?: boolean): this;
     listar_imagenes(): string[];
     private iniciar_phaser_desde_configuracion_y_cargar_escenas;
     ejecutar(): void;

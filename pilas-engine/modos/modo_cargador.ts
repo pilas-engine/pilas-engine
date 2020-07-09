@@ -17,7 +17,7 @@ class ModoCargador extends Modo {
 
     this.crear_indicador_de_carga();
 
-    if (!this.pilas.opciones.modo_simple) {
+    if (!this.pilas.opciones.omitir_imagenes_de_pilas) {
       this.load.multiatlas("imagenes", "imagenes.json", "./");
       this.load.multiatlas("bloques", "bloques.json", "./");
       this.load.multiatlas("decoracion", "decoracion.json", "./");
@@ -150,7 +150,7 @@ class ModoCargador extends Modo {
   }
 
   create() {
-    if (!this.pilas.opciones.modo_simple) {
+    if (!this.pilas.opciones.omitir_imagenes_de_pilas) {
       this.crear_fuente_bitmap("color-negro");
       this.crear_fuente_bitmap("color-blanco");
       this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
@@ -163,6 +163,8 @@ class ModoCargador extends Modo {
 
     super.create({ pilas: this.pilas }, this.pilas._ancho, this.pilas._alto);
     this.notificar_imagenes_cargadas();
+
+    let fondo = undefined;
 
     if (this.pilas.opciones.modo_simple) {
       this.pilas.definir_modo("ModoEjecucion", {
@@ -232,7 +234,7 @@ class ModoCargador extends Modo {
               id: 3,
               ancho: this.pilas._ancho,
               alto: this.pilas._alto,
-              fondo: "fondo",
+              fondo: fondo,
               actores: [],
               camara_x: 0,
               camara_y: 0
@@ -261,15 +263,6 @@ class ModoCargador extends Modo {
     this.barra_de_progreso.clear();
     this.barra_de_progreso.fillStyle(0xffffff, 1);
     this.barra_de_progreso.fillRect(this.x + 5, 220 + 5, 300 * progreso, 10);
-
-    if (this.pilas.opciones.modo_simple) {
-      //console.log(`Progreso: ${progreso}`);
-    } else {
-      // TODO: eliminar esta señal
-      this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
-        progreso: Math.ceil(progreso * 100)
-      });
-    }
   }
 
   convertir_sonido_en_array_buffer(sonido, callback) {

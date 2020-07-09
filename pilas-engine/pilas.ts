@@ -133,19 +133,16 @@ class Pilas {
     }
   }
 
-  iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}, imagenes: any = []) {
+  iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}, imagenes: any = [], omitir_imagenes_de_pilas: boolean = false) {
+    console.log({ ancho, alto, recursos, opciones, imagenes, omitir_imagenes_de_pilas });
+
     if (opciones === undefined) {
       opciones = {};
     }
 
     if (recursos === undefined || recursos === null) {
       recursos = {
-        imagenes: [
-          {
-            nombre: "sin_imagen",
-            ruta: "imagenes/sin_imagen.png"
-          }
-        ],
+        imagenes: [],
         sonidos: [
           {
             nombre: "explosion",
@@ -185,6 +182,7 @@ class Pilas {
     // modo_simple indica que pilas debe iniciar asumiendo que se está
     // usando fuera del editor, sin señales ni iframes.
     opciones.modo_simple = true;
+    opciones.omitir_imagenes_de_pilas = omitir_imagenes_de_pilas;
     this.iniciar_phaser(ancho, alto, recursos, opciones, imagenes);
     return this;
   }

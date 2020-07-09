@@ -365,8 +365,6 @@ class ModoEjecucion extends Modo {
 
     if (escena.fondo) {
       this.crear_fondo(escena.fondo, escena.ancho, escena.alto);
-    } else {
-      console.warn("Cuidado, la escena no tiene un fondo definido");
     }
 
     this.crear_escena(escena);

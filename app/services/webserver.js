@@ -248,7 +248,7 @@ export default Service.extend({
 
       var ancho = proyecto.proyecto.ancho;
       var alto = proyecto.proyecto.alto;
-      var pilas = pilasengine.iniciar(ancho, alto, null, opciones, proyecto.proyecto.imagenes);
+      var pilas = pilasengine.iniciar(ancho, alto, null, opciones, proyecto.proyecto.imagenes, false);
 
       pilas.onready = function() {
         if (!ha_iniciado) {

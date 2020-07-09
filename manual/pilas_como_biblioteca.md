@@ -53,7 +53,7 @@ var imagenes = [
   }
 ];
 
-var pilas = pilasengine.iniciar(500, 500, recursos, opciones, imagenes);
+var pilas = pilasengine.iniciar(500, 500, recursos, opciones, imagenes, true);
 
 pilas.onready = function() {
   let logo = pilas.actores.actor_basico("logo");

@@ -2113,20 +2113,17 @@ var Pilas = (function () {
             this.iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion);
         }
     };
-    Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones, imagenes) {
+    Pilas.prototype.iniciar = function (ancho, alto, recursos, opciones, imagenes, omitir_imagenes_de_pilas) {
         if (opciones === void 0) { opciones = {}; }
         if (imagenes === void 0) { imagenes = []; }
+        if (omitir_imagenes_de_pilas === void 0) { omitir_imagenes_de_pilas = false; }
+        console.log({ ancho: ancho, alto: alto, recursos: recursos, opciones: opciones, imagenes: imagenes, omitir_imagenes_de_pilas: omitir_imagenes_de_pilas });
         if (opciones === undefined) {
             opciones = {};
         }
         if (recursos === undefined || recursos === null) {
             recursos = {
-                imagenes: [
-                    {
-                        nombre: "sin_imagen",
-                        ruta: "imagenes/sin_imagen.png"
-                    }
-                ],
+                imagenes: [],
                 sonidos: [
                     {
                         nombre: "explosion",
@@ -2164,6 +2161,7 @@ var Pilas = (function () {
             };
         }
         opciones.modo_simple = true;
+        opciones.omitir_imagenes_de_pilas = omitir_imagenes_de_pilas;
         this.iniciar_phaser(ancho, alto, recursos, opciones, imagenes);
         return this;
     };
@@ -7836,7 +7834,7 @@ var ModoCargador = (function (_super) {
         this.load.crossOrigin = "anonymous";
         this.contador = 0;
         this.crear_indicador_de_carga();
-        if (!this.pilas.opciones.modo_simple) {
+        if (!this.pilas.opciones.omitir_imagenes_de_pilas) {
             this.load.multiatlas("imagenes", "imagenes.json", "./");
             this.load.multiatlas("bloques", "bloques.json", "./");
             this.load.multiatlas("decoracion", "decoracion.json", "./");
@@ -7953,7 +7951,7 @@ var ModoCargador = (function (_super) {
         this.pilas.imagenes_precargadas = imagenes;
     };
     ModoCargador.prototype.create = function () {
-        if (!this.pilas.opciones.modo_simple) {
+        if (!this.pilas.opciones.omitir_imagenes_de_pilas) {
             this.crear_fuente_bitmap("color-negro");
             this.crear_fuente_bitmap("color-blanco");
             this.crear_fuente_bitmap("color-blanco-con-sombra-chico");
@@ -7965,6 +7963,7 @@ var ModoCargador = (function (_super) {
         }
         _super.prototype.create.call(this, { pilas: this.pilas }, this.pilas._ancho, this.pilas._alto);
         this.notificar_imagenes_cargadas();
+        var fondo = undefined;
         if (this.pilas.opciones.modo_simple) {
             this.pilas.definir_modo("ModoEjecucion", {
                 pilas: this.pilas,
@@ -7991,7 +7990,7 @@ var ModoCargador = (function (_super) {
                             id: 3,
                             ancho: this.pilas._ancho,
                             alto: this.pilas._alto,
-                            fondo: "fondo",
+                            fondo: fondo,
                             actores: [],
                             camara_x: 0,
                             camara_y: 0
@@ -8017,13 +8016,6 @@ var ModoCargador = (function (_super) {
         this.barra_de_progreso.clear();
         this.barra_de_progreso.fillStyle(0xffffff, 1);
         this.barra_de_progreso.fillRect(this.x + 5, 220 + 5, 300 * progreso, 10);
-        if (this.pilas.opciones.modo_simple) {
-        }
-        else {
-            this.pilas.mensajes.emitir_mensaje_al_editor("progreso_de_carga", {
-                progreso: Math.ceil(progreso * 100)
-            });
-        }
     };
     ModoCargador.prototype.convertir_sonido_en_array_buffer = function (sonido, callback) {
         var _this = this;
@@ -8790,9 +8782,6 @@ var ModoEjecucion = (function (_super) {
         var escena = this.obtener_escena_por_nombre(nombre);
         if (escena.fondo) {
             this.crear_fondo(escena.fondo, escena.ancho, escena.alto);
-        }
-        else {
-            console.warn("Cuidado, la escena no tiene un fondo definido");
         }
         this.crear_escena(escena);
     };
