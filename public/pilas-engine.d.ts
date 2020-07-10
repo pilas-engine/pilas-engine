@@ -1842,7 +1842,6 @@ declare class ModoEditor extends Modo {
     };
     crear_actores_desde_los_datos_de_la_escena(escena: Escena): void;
     crear_sprite_desde_actor(actor: Actor): void;
-    private crear_destello;
     private copiar_atributos_excepto_alpha;
     aplicar_atributos_de_actor_a_sprite(actor: Actor, sprite: any): void;
     update(): void;

@@ -199,7 +199,7 @@ class ModoEditor extends Modo {
       this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
     });
 
-    this.input.on("pointerdown", evento => {
+    this.input.on("pointerup", evento => {
       if (this.tecla_meta_pulsada) {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
         this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado_con_click", { x: posicion.x, y: posicion.y });
@@ -418,21 +418,14 @@ class ModoEditor extends Modo {
 
     sprite["setInteractive"]();
     sprite["actor"] = actor;
-    sprite["destacandose"] = false;
 
     sprite["destacar"] = () => {
-      sprite["destacandose"] = true;
-
       if (this.actor_seleccionado) {
         this.input.removeDebug(this.actor_seleccionado);
       }
 
       this.input.enableDebug(sprite);
       this.actor_seleccionado = sprite;
-
-      // this.crear_destello(sprite, () => {
-      //   sprite["destacandose"] = false;
-      // });
     };
 
     // la siguiente función además de definir atributos genera la figura para
@@ -440,35 +433,6 @@ class ModoEditor extends Modo {
     this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
     this.input.setDraggable(sprite, undefined);
     this.actores.push(sprite);
-  }
-
-  /**
-   * Realiza un efecto de destello blanco para indicar que se selecciona al actor.
-   */
-  private crear_destello(sprite, cuando_termina) {
-    let t = sprite.texture;
-    let cuadro = sprite.frame.name;
-    let sprite2 = this.add.sprite(0, 0, t.key, cuadro);
-
-    this.copiar_atributos_excepto_alpha(sprite, sprite2);
-    sprite2.setTintFill(0xffffff);
-    sprite2.setAlpha(0.4);
-
-    this.tweens.add({
-      targets: sprite2,
-      alpha: 0.7,
-      duration: 100,
-      ease: "Power2",
-      yoyo: true,
-      delay: 0,
-      onUpdate: () => {
-        this.copiar_atributos_excepto_alpha(sprite, sprite2);
-      },
-      onComplete: function() {
-        sprite2.destroy();
-        cuando_termina();
-      }
-    });
   }
 
   private copiar_atributos_excepto_alpha(origen, destino) {
@@ -510,6 +474,28 @@ class ModoEditor extends Modo {
       this.actualizar_canvas_fisica();
     } else {
       this.canvas_fisica.setAlpha(0);
+    }
+
+    if (this.fps) {
+      if (this.pilas.depurador.mostrar_fps) {
+        this.fps.alpha = 1;
+
+        let x = this.pilas.cursor_x;
+        let y = this.pilas.cursor_y;
+
+        this.fps.text = [
+          `FPS: ${Math.round(this.pilas.game.loop["actualFps"])}`, // fila inicial
+          `Cantidad de actores: ${this.actores.length}`,
+          `Cursor X: ${x}`,
+          `Cursor Y: ${y}`
+        ].join("\n");
+      } else {
+        this.fps.alpha = 0;
+      }
+    }
+
+    if (!this.pilas.game.hasFocus) {
+      this.tecla_meta_pulsada = false;
     }
   }
 

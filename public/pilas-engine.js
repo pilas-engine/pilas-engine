@@ -7537,22 +7537,6 @@ var Modo = (function (_super) {
                 _this.dibujar_punto_de_control(_this.graphics, sprite.x, sprite.y);
             });
         }
-        if (this.fps) {
-            if (this.pilas.depurador.mostrar_fps && !this.es_modo_ejecucion) {
-                this.fps.alpha = 1;
-                var x = this.pilas.cursor_x;
-                var y = this.pilas.cursor_y;
-                this.fps.text = [
-                    "FPS: " + Math.round(this.pilas.game.loop["actualFps"]),
-                    "Cantidad de actores: " + actores.length,
-                    "Cursor X: " + x,
-                    "Cursor Y: " + y
-                ].join("\n");
-            }
-            else {
-                this.fps.alpha = 0;
-            }
-        }
     };
     Modo.prototype.actualizar_canvas_fisica = function () {
         var canvas = this.canvas_fisica;
@@ -8205,7 +8189,7 @@ var ModoEditor = (function (_super) {
             _this.pilas.cursor_x_absoluta = Math.trunc(posicion_absoluta.x);
             _this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
         });
-        this.input.on("pointerdown", function (evento) {
+        this.input.on("pointerup", function (evento) {
             if (_this.tecla_meta_pulsada) {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
                 _this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado_con_click", { x: posicion.x, y: posicion.y });
@@ -8382,9 +8366,7 @@ var ModoEditor = (function (_super) {
         }
         sprite["setInteractive"]();
         sprite["actor"] = actor;
-        sprite["destacandose"] = false;
         sprite["destacar"] = function () {
-            sprite["destacandose"] = true;
             if (_this.actor_seleccionado) {
                 _this.input.removeDebug(_this.actor_seleccionado);
             }
@@ -8394,30 +8376,6 @@ var ModoEditor = (function (_super) {
         this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
         this.input.setDraggable(sprite, undefined);
         this.actores.push(sprite);
-    };
-    ModoEditor.prototype.crear_destello = function (sprite, cuando_termina) {
-        var _this = this;
-        var t = sprite.texture;
-        var cuadro = sprite.frame.name;
-        var sprite2 = this.add.sprite(0, 0, t.key, cuadro);
-        this.copiar_atributos_excepto_alpha(sprite, sprite2);
-        sprite2.setTintFill(0xffffff);
-        sprite2.setAlpha(0.4);
-        this.tweens.add({
-            targets: sprite2,
-            alpha: 0.7,
-            duration: 100,
-            ease: "Power2",
-            yoyo: true,
-            delay: 0,
-            onUpdate: function () {
-                _this.copiar_atributos_excepto_alpha(sprite, sprite2);
-            },
-            onComplete: function () {
-                sprite2.destroy();
-                cuando_termina();
-            }
-        });
     };
     ModoEditor.prototype.copiar_atributos_excepto_alpha = function (origen, destino) {
         destino.x = origen.x;
@@ -8452,6 +8410,25 @@ var ModoEditor = (function (_super) {
         }
         else {
             this.canvas_fisica.setAlpha(0);
+        }
+        if (this.fps) {
+            if (this.pilas.depurador.mostrar_fps) {
+                this.fps.alpha = 1;
+                var x = this.pilas.cursor_x;
+                var y = this.pilas.cursor_y;
+                this.fps.text = [
+                    "FPS: " + Math.round(this.pilas.game.loop["actualFps"]),
+                    "Cantidad de actores: " + this.actores.length,
+                    "Cursor X: " + x,
+                    "Cursor Y: " + y
+                ].join("\n");
+            }
+            else {
+                this.fps.alpha = 0;
+            }
+        }
+        if (!this.pilas.game.hasFocus) {
+            this.tecla_meta_pulsada = false;
         }
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {

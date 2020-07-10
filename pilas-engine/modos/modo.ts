@@ -90,24 +90,6 @@ class Modo extends Phaser.Scene {
         this.dibujar_punto_de_control(this.graphics, sprite.x, sprite.y);
       });
     }
-
-    if (this.fps) {
-      if (this.pilas.depurador.mostrar_fps && !this.es_modo_ejecucion) {
-        this.fps.alpha = 1;
-
-        let x = this.pilas.cursor_x;
-        let y = this.pilas.cursor_y;
-
-        this.fps.text = [
-          `FPS: ${Math.round(this.pilas.game.loop["actualFps"])}`, // fila inicial
-          `Cantidad de actores: ${actores.length}`,
-          `Cursor X: ${x}`,
-          `Cursor Y: ${y}`
-        ].join("\n");
-      } else {
-        this.fps.alpha = 0;
-      }
-    }
   }
 
   actualizar_canvas_fisica() {
