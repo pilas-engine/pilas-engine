@@ -18,7 +18,9 @@ export default Component.extend({
     if (this.mostrarEditor) {
       return "flex flex-column";
     } else {
-      return "dn";
+      // Se añaden estas clases en lugar de "dn" porque monaco necesita un espacio
+      // en pantalla para inicializarse correctamente.
+      return "fixed w1 h1 no-pointer-events o-0";
     }
   }),
 

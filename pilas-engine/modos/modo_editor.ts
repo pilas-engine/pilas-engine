@@ -424,7 +424,7 @@ class ModoEditor extends Modo {
         this.input.removeDebug(this.actor_seleccionado);
       }
 
-      this.input.enableDebug(sprite);
+      this.input.enableDebug(sprite, 0xffffff);
       this.actor_seleccionado = sprite;
     };
 

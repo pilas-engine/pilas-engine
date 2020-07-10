@@ -8370,7 +8370,7 @@ var ModoEditor = (function (_super) {
             if (_this.actor_seleccionado) {
                 _this.input.removeDebug(_this.actor_seleccionado);
             }
-            _this.input.enableDebug(sprite);
+            _this.input.enableDebug(sprite, 0xffffff);
             _this.actor_seleccionado = sprite;
         };
         this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
