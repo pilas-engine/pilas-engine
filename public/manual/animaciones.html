@@ -110,65 +110,16 @@
 <p><img src="imagenes/animaciones.assets/image-20191219000753983.png" /></p>
 <p>Ese código, sirve para indicarle al actor qué animación tiene que reproducir. Por ejemplo, si quieres que el actor muestre esta animación al comenzar deberías colocarlo dentro de la función “iniciar” así:</p>
 <p><img src="imagenes/animaciones.assets/image-20191219000913347.png" /></p>
-<h2 id="crear-animaciones-desde-el-código">Crear animaciones desde el código</h2>
-<p>Para crear y asignar animaciones también se puede usar directamente el código del editor. Esto es algo más difícil, pero en algunas situaciones puede ser útil.</p>
-<p>Existe un método llamado “crear_animacion” que se puede invocar especificando el nombre de la animación, los cuadros que se deben mostrar y la velocidad.</p>
-<p>Por ejemplo, para crear una animación de un actor mientras está esperando usé lo siguiente:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_parado&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_parado1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_parado2&quot;</span>]<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span></code></pre></div>
-<p>El valor “2” significa que la animación se debe mostrar a una velocidad de 2 cuadros por segundo.</p>
-<p>Luego, una vez creada la animación, se puede reproducir usando esta llamada:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span></code></pre></div>
-<p>La creación de animaciones generalmente se realiza en el método iniciar de esta forma:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>class Conejo extends Actor {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  iniciar() {</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_parado&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_parado1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_parado2&quot;</span>]<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_camina&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_camina1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_camina2&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_salta&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_salta&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_muere&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_pierde&quot;</span>]<span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>    this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>  }</span>
-<span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a>  actualizar() {}</span>
-<span id="cb3-12"><a href="#cb3-12"></a>}</span></code></pre></div>
-<p>Luego, para cambiar de animación, se puede re-definir el valor del atributo animación así:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>class Conejo extends Actor {</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  iniciar() {</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_parado&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_parado1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_parado2&quot;</span>]<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_camina&quot;</span><span class="op">,</span> [<span class="st">&quot;imagenes:conejo/conejo_camina1&quot;</span><span class="op">,</span> <span class="st">&quot;imagenes:conejo/conejo_camina2&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_salta&quot;</span><span class="op">,</span> [<span class="st">&quot;conejo_salta&quot;</span>]<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>    this<span class="op">.</span><span class="fu">crear_animacion</span>(<span class="st">&quot;conejo_muere&quot;</span><span class="op">,</span> [<span class="st">&quot;conejo_muere&quot;</span>]<span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-8"><a href="#cb4-8"></a>    this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>  }</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a>  actualizar() {</span>
-<span id="cb4-12"><a href="#cb4-12"></a>    if (this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">izquierda</span>) {</span>
-<span id="cb4-13"><a href="#cb4-13"></a>      this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_camina&quot;</span><span class="op">;</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>      this<span class="op">.</span><span class="at">x</span> <span class="op">-=</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>    }</span>
-<span id="cb4-16"><a href="#cb4-16"></a></span>
-<span id="cb4-17"><a href="#cb4-17"></a>    if (this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">derecha</span>) {</span>
-<span id="cb4-18"><a href="#cb4-18"></a>      this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_camina&quot;</span><span class="op">;</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a>      this<span class="op">.</span><span class="at">x</span> <span class="op">+=</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>    }</span>
-<span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a>    if (<span class="op">!</span>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">izquierda</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="at">control</span><span class="op">.</span><span class="at">derecha</span>) {</span>
-<span id="cb4-23"><a href="#cb4-23"></a>      this<span class="op">.</span><span class="at">animacion</span> <span class="op">=</span> <span class="st">&quot;conejo_parado&quot;</span><span class="op">;</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a>    }</span>
-<span id="cb4-25"><a href="#cb4-25"></a>  }</span>
-<span id="cb4-26"><a href="#cb4-26"></a>}</span></code></pre></div>
 <h2 id="detectar-la-finalización-de-las-animaciones">Detectar la finalización de las animaciones</h2>
 <p>Las animaciones siempre se muestran de forma cíclica, es decir, cuanto terminan vuelven a empezar desde cero. Si tu animación es tradicional, como un personaje caminando, no tienes que hacer nada adicional para que continue la animación automáticamente.</p>
 <p>Si quieres detectar el momento exacto cuando la animación llega a su final, deberías crear un método llamado <code>cuando_finaliza_animacion</code> y colocar ahí algún código para reaccionar ante la finalización de la animación. Por ejemplo, el actor “explosión” se elimina de la pantalla automáticamente cuando finaliza su animación:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a>class explosion extends Actor {</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="co">// Otros métodos</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  cuando_finaliza_animacion(nombre<span class="op">:</span> <span class="dt">string</span>) {</span>
-<span id="cb5-6"><a href="#cb5-6"></a>    this<span class="op">.</span><span class="fu">eliminar</span>()<span class="op">;</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  }</span>
-<span id="cb5-8"><a href="#cb5-8"></a>}</span></code></pre></div>  <div class="tc navegacion">
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>class explosion extends Actor {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="co">// Otros métodos</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  cuando_finaliza_animacion(nombre<span class="op">:</span> <span class="dt">string</span>) {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    this<span class="op">.</span><span class="fu">eliminar</span>()<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  }</span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

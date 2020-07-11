@@ -24,9 +24,9 @@ Para mover la cámara podemos acceder a los atributos de posición directamente,
 
 ```typescript
 class escena1 extends Escena {
-    actualizar() {
-        this.camara.x += 1;
-    }
+  actualizar() {
+    this.camara.x += 1;
+  }
 }
 ```
 
@@ -34,10 +34,9 @@ O bien, si quieres que un actor se mueva libremente por el escenario y la cámar
 
 ```typescript
 class nave extends Actor {
-
-    actualizar() {
-        this.camara.seguir_al_actor(this, 10, true);
-		}
+  actualizar() {
+    this.camara.seguir_al_actor(this, 10, true);
+  }
 }
 ```
 
@@ -46,9 +45,9 @@ Ten en cuenta que esta función se tiene que llamar todo el tiempo, por eso la t
 También ten en cuenta que la función lleva 3 parámetros:
 
 ```typescript
-seguir_al_actor(actor, suavidad, ignorar_bordes)
+seguir_al_actor(actor, suavidad, ignorar_bordes);
 ```
 
 - `actor`: el actor que la cámara tiene que seguir.
 - `suavidad`: tiene que ser un número indicando cuán gradual tiene que ser el movimiento de la cámara, cuanto menor sea el número mas rápido y brusco será el movimiento de la cámara.
-- `ignorar_bordes`: el último parámetro tiene que ser `true` o `false`. Si se envía `true` la cámara seguirá al actor incluso si sale del area del escenario, esto es ideal para juegos con area de movimiento infinita. Si se coloca `false` la cámara se detendrá en los bordes del escenario. 
+- `ignorar_bordes`: el último parámetro tiene que ser `true` o `false`. Si se envía `true` la cámara seguirá al actor incluso si sale del area del escenario, esto es ideal para juegos con area de movimiento infinita. Si se coloca `false` la cámara se detendrá en los bordes del escenario.

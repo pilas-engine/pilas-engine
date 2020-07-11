@@ -10,7 +10,7 @@ Este botón abrirá una ventana en donde se pueden previsualizar todas la animac
 
 ![](imagenes/animaciones.assets/image-20191218235117098.png)
 
-Estas animaciones también se pueden editar fácilmente, solo tienes que pasar el mouse sobre el nombre de la animación y pulsar el  botón "editar":
+Estas animaciones también se pueden editar fácilmente, solo tienes que pasar el mouse sobre el nombre de la animación y pulsar el botón "editar":
 
 ![](imagenes/animaciones.assets/image-20191218235228151.png)
 
@@ -54,75 +54,6 @@ Ese código, sirve para indicarle al actor qué animación tiene que reproducir.
 
 ![](imagenes/animaciones.assets/image-20191219000913347.png)
 
-## Crear animaciones desde el código
-
-Para crear y asignar animaciones también se puede usar directamente el código del editor. Esto es algo más difícil, pero en algunas situaciones puede ser útil.
-
-Existe un método llamado "crear_animacion" que se puede invocar especificando el nombre de la animación, los cuadros que se deben mostrar y la velocidad.
-
-Por ejemplo, para crear una animación de un actor mientras está esperando usé lo siguiente:
-
-```typescript
-this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
-```
-
-El valor "2" significa que la animación se debe mostrar a una velocidad de 2 cuadros por segundo.
-
-Luego, una vez creada la animación, se puede reproducir usando esta llamada:
-
-```typescript
-this.animacion = "conejo_parado";
-```
-
-La creación de animaciones generalmente se realiza en el método iniciar de esta forma:
-
-```typescript
-class Conejo extends Actor {
-  iniciar() {
-    this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
-    this.crear_animacion("conejo_camina", ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"], 20);
-    this.crear_animacion("conejo_salta", ["imagenes:conejo/conejo_salta"], 20);
-    this.crear_animacion("conejo_muere", ["imagenes:conejo/conejo_pierde"], 1);
-
-    this.animacion = "conejo_parado";
-  }
-
-  actualizar() {}
-}
-```
-
-Luego, para cambiar de animación, se puede re-definir el valor del atributo
-animación así:
-
-```typescript
-class Conejo extends Actor {
-  iniciar() {
-    this.crear_animacion("conejo_parado", ["imagenes:conejo/conejo_parado1", "imagenes:conejo/conejo_parado2"], 2);
-    this.crear_animacion("conejo_camina", ["imagenes:conejo/conejo_camina1", "imagenes:conejo/conejo_camina2"], 20);
-    this.crear_animacion("conejo_salta", ["conejo_salta"], 20);
-    this.crear_animacion("conejo_muere", ["conejo_muere"], 1);
-
-    this.animacion = "conejo_parado";
-  }
-
-  actualizar() {
-    if (this.pilas.control.izquierda) {
-      this.animacion = "conejo_camina";
-      this.x -= 5;
-    }
-
-    if (this.pilas.control.derecha) {
-      this.animacion = "conejo_camina";
-      this.x += 5;
-    }
-
-    if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {
-      this.animacion = "conejo_parado";
-    }
-  }
-}
-```
-
 ## Detectar la finalización de las animaciones
 
 Las animaciones siempre se muestran de forma cíclica, es decir, cuanto terminan
@@ -138,7 +69,6 @@ finaliza su animación:
 
 ```typescript
 class explosion extends Actor {
-
   // Otros métodos
 
   cuando_finaliza_animacion(nombre: string) {
