@@ -41,9 +41,7 @@ app.on("ready", function onReady() {
 
   process.on("uncaughtException", err => {
     console.log("An exception in the main thread was not handled.");
-    console.log(
-      "This is a serious issue that needs to be handled and/or debugged."
-    );
+    console.log("This is a serious issue that needs to be handled and/or debugged.");
     console.log(`Exception: ${err}`);
   });
 });

@@ -9,7 +9,7 @@ Ahora bien, si cambiamos progresivamente estas propiedades podemos lograr animac
 Por ejemplo podríamos cambiar progresivamente la rotación de un actor para que parezca estar en
 movimiento así:
 
-![rotacion](imagenes/animacion_de_propiedades/rotacion.png)
+![rotacion](imagenes/animacion_de_propiedades/rotacion.gif)
 
 Y lo mismo con las otras propiedades, si queremos que un actor se mueva hacia la derecha de la
 pantalla podemos cambiar muchas veces su propiedad `x` para que parezca "moverse" hacia un costado
@@ -46,7 +46,7 @@ this.animar(Tipo.suave, 1)
   .mover_hasta(0, 0);
 ```
 
-![animacion-de-nave](imagenes/animacion_de_propiedades/animacion-de-nave.png)
+![animacion-de-nave](imagenes/animacion_de_propiedades/animacion-de-nave.gif)
 
 ## Animaciones soportadas
 
