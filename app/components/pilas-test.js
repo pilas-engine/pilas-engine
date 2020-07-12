@@ -18,6 +18,7 @@ export default Component.extend({
       ancho: 350,
       pixelart: false,
       alto: 350,
+      modo_de_video: "suavizado",
       codigos: {
         proyecto: "class Proyecto { iniciar() { } }",
         escenas: [
