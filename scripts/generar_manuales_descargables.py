@@ -29,6 +29,7 @@ def generar_archivo_tmp_md_contatenado():
 def crear_libros():
     opciones = '--toc --top-level-division=chapter --metadata title="Manual de Pilas Engine 2"'
     generar_archivo_tmp_md_contatenado()
+    #os.system("cd manual; pandoc " + opciones + " tmp.md -o ../manuales/book.pdf --pdf-engine=/Library/TeX/texbin/pdflatex")
     os.system("cd manual; pandoc " + opciones + " tmp.md -o ../manuales/book.pdf")
     os.system("cd manual; pandoc " + opciones + " tmp.md -o ../manuales/book.epub")
     os.system("rm manual/tmp.md")
