@@ -564,6 +564,40 @@ Por ejemplo:
 
 <div class="funcion">
 ```
+pilas.azar_desde_lista(lista)
+```
+
+Retorna al azar uno de los elementos de la lista que se envía como
+parámetro.
+
+Por ejemplo:
+
+```
+› pilas.azar_desde_lista(['uno', 'dos', 'tres']
+‹ 'uno'
+```
+
+</div>
+
+<div class="funcion">
+```
+pilas.desordenar_lista(lista)
+```
+
+Retorna una copia de la lista enviada como parámetro pero
+con todos sus elementos intercambiados de posición al azar.
+
+Por ejemplo:
+
+```
+› pilas.azar_desde_lista([1, 2, 3, 4, 5, 6])
+‹ [4, 6, 1, 3, 2, 5]
+```
+
+</div>
+
+<div class="funcion">
+```
 pilas.obtener_distancia_entre_puntos(x, y, x1, y1)
 ```
 

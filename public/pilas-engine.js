@@ -889,12 +889,156 @@ var Comportamientos = (function () {
     };
     return Comportamientos;
 }());
+var GamePad = (function () {
+    function GamePad(gamepad, indice) {
+        this.gamepad = gamepad;
+        this.indice = indice;
+        this.umbral = 0.3;
+    }
+    Object.defineProperty(GamePad.prototype, "control_interno", {
+        get: function () {
+            return this.gamepad.gamepads[this.indice];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "analogico_izquierdo_x", {
+        get: function () {
+            return this.obtener_stick("izquierdo").x;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "analogico_izquierdo_y", {
+        get: function () {
+            return this.obtener_stick("izquierdo").y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "analogico_derecho_x", {
+        get: function () {
+            return this.obtener_stick("derecho").x;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "analogico_derecho_y", {
+        get: function () {
+            return this.obtener_stick("derecho").y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "izquierda", {
+        get: function () {
+            return this.obtener_stick("izquierdo").x < -this.umbral;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "derecha", {
+        get: function () {
+            return this.obtener_stick("izquierdo").x > this.umbral;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "arriba", {
+        get: function () {
+            return this.obtener_stick("izquierdo").y > this.umbral;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "abajo", {
+        get: function () {
+            return this.obtener_stick("izquierdo").y < -this.umbral;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "boton_x", {
+        get: function () {
+            return this.obtener_boton(3);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "boton_y", {
+        get: function () {
+            return this.obtener_boton(2);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "boton_a", {
+        get: function () {
+            return this.obtener_boton(1);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "boton_b", {
+        get: function () {
+            return this.obtener_boton(0);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "boton_lb", {
+        get: function () {
+            return this.obtener_boton(4);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GamePad.prototype, "boton_rb", {
+        get: function () {
+            return this.obtener_boton(5);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    GamePad.prototype.obtener_boton = function (indice) {
+        var control = this.gamepad.gamepads[this.indice];
+        if (control) {
+            if (indice < control.getButtonTotal()) {
+                return control.getButtonValue(indice) !== 0;
+            }
+        }
+        return false;
+    };
+    GamePad.prototype.obtener_stick = function (tipo) {
+        var control = this.gamepad.gamepads[this.indice];
+        var stick = tipo === "izquierdo" ? "leftStick" : "rightStick";
+        if (control && control[stick]) {
+            var resultado = control[stick];
+            return {
+                x: resultado.x,
+                y: -resultado.y
+            };
+        }
+        else {
+            return { x: 0, y: 0 };
+        }
+    };
+    return GamePad;
+}());
 var Control = (function () {
     function Control(pilas) {
         this.pilas = pilas;
+        this.vincular_gamepads();
         this.conectar_teclas();
     }
-    Control.prototype.terminar = function () {
+    Control.prototype.terminar = function () { };
+    Control.prototype.desvincular_gamepad_del_control_principal = function () { };
+    Control.prototype.vincular_gamepads = function () {
+        this.pilas.modo.input.gamepad.start();
+        this.gamepad_1 = new GamePad(this.pilas.modo.input.gamepad, 0);
+    };
+    Control.prototype.obtener_cantidad_de_gamepads_conectados = function () {
+        return this.pilas.modo.input.gamepad.gamepads.length;
     };
     Control.prototype.conectar_teclas = function () {
         var keyboard = this.pilas.modo.input.keyboard;
@@ -918,35 +1062,35 @@ var Control = (function () {
     };
     Object.defineProperty(Control.prototype, "arriba", {
         get: function () {
-            return this.se_pulsa_tecla("UP", "arriba");
+            return this.se_pulsa_tecla("UP", "arriba") || this.gamepad_1.arriba;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "abajo", {
         get: function () {
-            return this.se_pulsa_tecla("DOWN", "abajo");
+            return this.se_pulsa_tecla("DOWN", "abajo") || this.gamepad_1.abajo;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "izquierda", {
         get: function () {
-            return this.se_pulsa_tecla("LEFT", "izquierda");
+            return this.se_pulsa_tecla("LEFT", "izquierda") || this.gamepad_1.izquierda;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "derecha", {
         get: function () {
-            return this.se_pulsa_tecla("RIGHT", "derecha");
+            return this.se_pulsa_tecla("RIGHT", "derecha") || this.gamepad_1.derecha;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "espacio", {
         get: function () {
-            return this.se_pulsa_tecla("SPACE", "espacio");
+            return this.se_pulsa_tecla("SPACE", "espacio") || this.gamepad_1.boton_x;
         },
         enumerable: true,
         configurable: true
@@ -2507,6 +2651,19 @@ var Pilas = (function () {
         this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this.pilas });
         this.modo.game.scene.pause("ModoEjecucion");
     };
+    Pilas.prototype.azar_desde_lista = function (lista) {
+        var index = this.azar(0, lista.length - 1);
+        return lista[index];
+    };
+    Pilas.prototype.desordenar_lista = function (lista_original) {
+        var _a;
+        var lista = lista_original.slice();
+        for (var i = lista.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            _a = [lista[j], lista[i]], lista[i] = _a[0], lista[j] = _a[1];
+        }
+        return lista;
+    };
     return Pilas;
 }());
 var pilasengine = new Pilas();
@@ -2833,6 +2990,18 @@ var ActorBase = (function () {
                 });
             });
         }
+        var hit_x = 0;
+        var hit_y = 0;
+        var hit_ancho = 0;
+        var hit_alto = 0;
+        var hit_activado = false;
+        if (this.sprite.input && this.sprite.input.hitArea) {
+            hit_x = this.sprite.input.hitArea.x;
+            hit_y = this.sprite.input.hitArea.y;
+            hit_ancho = this.sprite.input.hitArea.width;
+            hit_alto = this.sprite.input.hitArea.height;
+            hit_activado = this.recorte_activado;
+        }
         return {
             tipo: this.tipo,
             x: Math.round(this.x),
@@ -2861,11 +3030,11 @@ var ActorBase = (function () {
             espejado_vertical: this.espejado_vertical,
             transparencia: this.transparencia,
             id_color: this.id_color,
-            hit_x: this.sprite.input.hitArea.x,
-            hit_y: this.sprite.input.hitArea.y,
-            hit_ancho: this.sprite.input.hitArea.width,
-            hit_alto: this.sprite.input.hitArea.height,
-            hit_activado: this.recorte_activado,
+            hit_x: hit_x,
+            hit_y: hit_y,
+            hit_ancho: hit_ancho,
+            hit_alto: hit_alto,
+            hit_activado: hit_activado,
             sensores: sensores_serializados
         };
     };

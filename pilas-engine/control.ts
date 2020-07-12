@@ -1,3 +1,102 @@
+class GamePad {
+  gamepad: Phaser.input.GamePad;
+  indice: number;
+  umbral: number;
+
+  constructor(gamepad, indice) {
+    this.gamepad = gamepad;
+    this.indice = indice;
+    this.umbral = 0.3;
+  }
+
+  get control_interno() {
+    return this.gamepad.gamepads[this.indice];
+  }
+
+  get analogico_izquierdo_x() {
+    return this.obtener_stick("izquierdo").x;
+  }
+
+  get analogico_izquierdo_y() {
+    return this.obtener_stick("izquierdo").y;
+  }
+
+  get analogico_derecho_x() {
+    return this.obtener_stick("derecho").x;
+  }
+
+  get analogico_derecho_y() {
+    return this.obtener_stick("derecho").y;
+  }
+
+  get izquierda() {
+    return this.obtener_stick("izquierdo").x < -this.umbral;
+  }
+
+  get derecha() {
+    return this.obtener_stick("izquierdo").x > this.umbral;
+  }
+
+  get arriba() {
+    return this.obtener_stick("izquierdo").y > this.umbral;
+  }
+
+  get abajo() {
+    return this.obtener_stick("izquierdo").y < -this.umbral;
+  }
+
+  get boton_x() {
+    return this.obtener_boton(3);
+  }
+
+  get boton_y() {
+    return this.obtener_boton(2);
+  }
+
+  get boton_a() {
+    return this.obtener_boton(1);
+  }
+
+  get boton_b() {
+    return this.obtener_boton(0);
+  }
+
+  get boton_lb() {
+    return this.obtener_boton(4);
+  }
+
+  get boton_rb() {
+    return this.obtener_boton(5);
+  }
+
+  obtener_boton(indice) {
+    let control = this.gamepad.gamepads[this.indice];
+
+    if (control) {
+      if (indice < control.getButtonTotal()) {
+        return control.getButtonValue(indice) !== 0;
+      }
+    }
+
+    return false;
+  }
+
+  obtener_stick(tipo) {
+    let control = this.gamepad.gamepads[this.indice];
+    let stick = tipo === "izquierdo" ? "leftStick" : "rightStick";
+
+    if (control && control[stick]) {
+      let resultado = control[stick];
+      return {
+        x: resultado.x,
+        y: -resultado.y
+      };
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
+}
+
 class Control {
   private pilas: Pilas;
 
@@ -10,13 +109,25 @@ class Control {
   private _simulaciones: any;
   private teclas: any;
 
+  public gamepad_1: GamePad;
+
   constructor(pilas: Pilas) {
     this.pilas = pilas;
+    this.vincular_gamepads();
     this.conectar_teclas();
   }
 
-  terminar() {
-    // TODO: desconectar teclas.
+  terminar() {}
+
+  desvincular_gamepad_del_control_principal() {}
+
+  vincular_gamepads() {
+    this.pilas.modo.input.gamepad.start();
+    this.gamepad_1 = new GamePad(this.pilas.modo.input.gamepad, 0);
+  }
+
+  obtener_cantidad_de_gamepads_conectados() {
+    return this.pilas.modo.input.gamepad.gamepads.length;
   }
 
   private conectar_teclas() {
@@ -42,23 +153,23 @@ class Control {
   }
 
   get arriba(): boolean {
-    return this.se_pulsa_tecla("UP", "arriba");
+    return this.se_pulsa_tecla("UP", "arriba") || this.gamepad_1.arriba;
   }
 
   get abajo(): boolean {
-    return this.se_pulsa_tecla("DOWN", "abajo");
+    return this.se_pulsa_tecla("DOWN", "abajo") || this.gamepad_1.abajo;
   }
 
   get izquierda(): boolean {
-    return this.se_pulsa_tecla("LEFT", "izquierda");
+    return this.se_pulsa_tecla("LEFT", "izquierda") || this.gamepad_1.izquierda;
   }
 
   get derecha(): boolean {
-    return this.se_pulsa_tecla("RIGHT", "derecha");
+    return this.se_pulsa_tecla("RIGHT", "derecha") || this.gamepad_1.derecha;
   }
 
   get espacio(): boolean {
-    return this.se_pulsa_tecla("SPACE", "espacio");
+    return this.se_pulsa_tecla("SPACE", "espacio") || this.gamepad_1.boton_x;
   }
 
   get tecla_a() {

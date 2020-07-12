@@ -690,6 +690,22 @@ class Pilas {
     this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this.pilas });
     this.modo.game.scene.pause("ModoEjecucion");
   }
+
+  azar_desde_lista(lista) {
+    let index = this.azar(0, lista.length - 1);
+    return lista[index];
+  }
+
+  desordenar_lista(lista_original) {
+    let lista = [...lista_original];
+
+    for (let i = lista.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [lista[i], lista[j]] = [lista[j], lista[i]];
+    }
+
+    return lista;
+  }
 }
 
 var pilasengine = new Pilas();

@@ -190,6 +190,14 @@
     {
       "nombre": "asusta-fantasmas",
       "desde": "2.3.0"
+    },
+    {
+      "nombre": "gamepad-simple",
+      "desde": "2.3.0"
+    },
+    {
+      "nombre": "gamepad-analogicos",
+      "desde": "2.3.0"
     }
   ]
 }

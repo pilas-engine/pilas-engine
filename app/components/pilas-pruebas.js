@@ -41,37 +41,30 @@ export default Component.extend({
 
             class ${NOMBRE_DE_LA_ESCENA} extends Escena {
               iniciar() {
-                let actor = this.pilas.actores.aceituna();
-                //this.actor = actor;
-                actor.recortar(0, 0, 10, 100);
-
-                let actor2 = this.pilas.actores.aceituna();
-                actor2.centro_y = 1;
-                actor2.y-=20
-                actor2.rotacion = [-40];
-                actor2.recortar(10, 10, 100, 100);
-
-                actor2.aprender("arrastrable");
-
-                actor2.cuando_termina_de_hacer_click = function() {
-                  console.log("suelta");
-                  //actor2.eliminar();
-                }
-
-                actor2.cuando_hace_click = function() {
-                  console.log("asd");
-                }
-
-                window.aceituna = actor2;
-
-
-                //this.actor.aprender("moverse con el teclado");
-                //actor.decir("Texto largo")
-
-
+                this.pilas.actores.nave();
               }
 
               actualizar() {
+                this.pilas.observar("Cantidad de gamepads", this.pilas.control.obtener_cantidad_de_gamepads_conectados());
+                
+                this.pilas.observar("Analógico Izquierdo X", this.pilas.control.gamepad_1.analogico_izquierdo_x);
+                this.pilas.observar("Analógico Izquierdo Y", this.pilas.control.gamepad_1.analogico_izquierdo_y);
+
+                this.pilas.observar("Analógico Derecho X", this.pilas.control.gamepad_1.analogico_derecho_x);
+                this.pilas.observar("Analógico Derecho Y", this.pilas.control.gamepad_1.analogico_derecho_y);
+
+                this.pilas.observar("Izquierda", this.pilas.control.gamepad_1.izquierda);
+                this.pilas.observar("Derecha", this.pilas.control.gamepad_1.derecha);
+                this.pilas.observar("Arriba", this.pilas.control.gamepad_1.arriba);
+                this.pilas.observar("Abajo", this.pilas.control.gamepad_1.abajo);
+
+                this.pilas.observar("Botón X", this.pilas.control.gamepad_1.boton_x);
+                this.pilas.observar("Botón Y", this.pilas.control.gamepad_1.boton_y);
+                this.pilas.observar("Botón A", this.pilas.control.gamepad_1.boton_a);
+                this.pilas.observar("Botón B", this.pilas.control.gamepad_1.boton_b);
+
+                this.pilas.observar("Botón LB", this.pilas.control.gamepad_1.boton_lb);
+                this.pilas.observar("Botón RB", this.pilas.control.gamepad_1.boton_rb);
               }
 
             }

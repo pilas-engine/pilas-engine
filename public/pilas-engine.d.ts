@@ -182,6 +182,32 @@ declare class Comportamientos {
     vincular(nombre: string, clase: any): void;
     validar_si_existe(nombre: string): void;
 }
+declare class GamePad {
+    gamepad: Phaser.input.GamePad;
+    indice: number;
+    umbral: number;
+    constructor(gamepad: any, indice: any);
+    readonly control_interno: any;
+    readonly analogico_izquierdo_x: any;
+    readonly analogico_izquierdo_y: number;
+    readonly analogico_derecho_x: any;
+    readonly analogico_derecho_y: number;
+    readonly izquierda: boolean;
+    readonly derecha: boolean;
+    readonly arriba: boolean;
+    readonly abajo: boolean;
+    readonly boton_x: boolean;
+    readonly boton_y: boolean;
+    readonly boton_a: boolean;
+    readonly boton_b: boolean;
+    readonly boton_lb: boolean;
+    readonly boton_rb: boolean;
+    obtener_boton(indice: any): boolean;
+    obtener_stick(tipo: any): {
+        x: any;
+        y: number;
+    };
+}
 declare class Control {
     private pilas;
     private _izquierda;
@@ -191,8 +217,12 @@ declare class Control {
     private _espacio;
     private _simulaciones;
     private teclas;
+    gamepad_1: GamePad;
     constructor(pilas: Pilas);
     terminar(): void;
+    desvincular_gamepad_del_control_principal(): void;
+    vincular_gamepads(): void;
+    obtener_cantidad_de_gamepads_conectados(): any;
     private conectar_teclas;
     private se_pulsa_tecla;
     readonly arriba: boolean;
@@ -549,6 +579,8 @@ declare class Pilas {
     ajustar(numero: number, grilla: number): number;
     alinear(numero: number, grilla: number): number;
     pausar(): void;
+    azar_desde_lista(lista: any): any;
+    desordenar_lista(lista_original: any): any[];
 }
 declare var pilasengine: Pilas;
 declare class Sensor {
@@ -658,10 +690,10 @@ declare class ActorBase {
         espejado_vertical: boolean;
         transparencia: any;
         id_color: number;
-        hit_x: any;
-        hit_y: any;
-        hit_ancho: any;
-        hit_alto: any;
+        hit_x: number;
+        hit_y: number;
+        hit_ancho: number;
+        hit_alto: number;
         hit_activado: boolean;
         sensores: any[];
     };

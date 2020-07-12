@@ -364,6 +364,20 @@ class ActorBase {
       });
     }
 
+    let hit_x = 0;
+    let hit_y = 0;
+    let hit_ancho = 0;
+    let hit_alto = 0;
+    let hit_activado = false;
+
+    if (this.sprite.input && this.sprite.input.hitArea) {
+      hit_x = this.sprite.input.hitArea.x;
+      hit_y = this.sprite.input.hitArea.y;
+      hit_ancho = this.sprite.input.hitArea.width;
+      hit_alto = this.sprite.input.hitArea.height;
+      hit_activado = this.recorte_activado;
+    }
+
     return {
       tipo: this.tipo,
       x: Math.round(this.x),
@@ -398,11 +412,11 @@ class ActorBase {
       transparencia: this.transparencia,
       id_color: this.id_color,
 
-      hit_x: this.sprite.input.hitArea.x,
-      hit_y: this.sprite.input.hitArea.y,
-      hit_ancho: this.sprite.input.hitArea.width,
-      hit_alto: this.sprite.input.hitArea.height,
-      hit_activado: this.recorte_activado,
+      hit_x,
+      hit_y,
+      hit_ancho,
+      hit_alto,
+      hit_activado,
 
       sensores: sensores_serializados
     };
