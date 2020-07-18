@@ -7810,6 +7810,9 @@ var Modo = (function (_super) {
         }
         sprite.input.hitArea.width = sprite.width;
         sprite.input.hitArea.height = sprite.height;
+        if (this.actor_seleccionado === sprite) {
+            this.input.enableDebug(sprite, 0xffffff);
+        }
         if (actor.activo === false) {
             sprite.alpha = 0.5;
         }
