@@ -22,7 +22,7 @@ module("Integration | Pilas | puede realizar animación de propiedades", functio
       done();
     });
 
-    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=2 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
+    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=3 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
   });
 
   test("puede animar la escala", async function(assert) {
@@ -44,7 +44,7 @@ module("Integration | Pilas | puede realizar animación de propiedades", functio
       done();
     });
 
-    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=2.5 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
+    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=3.5 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
   });
 
   test("puede animar la transparencia", async function(assert) {
@@ -66,6 +66,6 @@ module("Integration | Pilas | puede realizar animación de propiedades", functio
       done();
     });
 
-    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=2.5 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
+    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=3.5 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
   });
 });
