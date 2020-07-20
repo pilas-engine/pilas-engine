@@ -1,8 +1,13 @@
 {{#basic-dropdown onOpen=(action "cuando_abre") as |dd|}}
-  {{#dd.trigger}}
+  {{#if desactivado}}
     {{pilas-boton id="receta" extraClass="" desactivado=desactivado
-                  texto="Recetas" responsive=true icono="receta"}}
-  {{/dd.trigger}}
+                    texto="Recetas" responsive=true icono="receta"}}
+  {{else}}
+    {{#dd.trigger}}
+      {{pilas-boton id="receta" extraClass="" desactivado=desactivado
+                    texto="Recetas" responsive=true icono="receta"}}
+    {{/dd.trigger}}
+  {{/if}}
 
   {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
 
