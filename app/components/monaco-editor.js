@@ -191,29 +191,33 @@ export default Component.extend({
   },
 
   resaltarLineasEjecutadas() {
-    let listado = this.lineas_para_resaltar.map(numero => {
-      return {
-        range: new this.monaco.Range(numero, 1, numero, 1),
-        options: {
-          isWholeLine: true,
-          className: "linea"
-        }
-      };
-    });
+    if (this.monaco) {
+      let listado = this.lineas_para_resaltar.map(numero => {
+        return {
+          range: new this.monaco.Range(numero, 1, numero, 1),
+          options: {
+            isWholeLine: true,
+            className: "linea"
+          }
+        };
+      });
 
-    this.decorations = this.editor.deltaDecorations(this.decorations, listado);
+      this.decorations = this.editor.deltaDecorations(this.decorations, listado);
+    }
   },
 
   limpiar_resaltado() {
-    let rango = new this.monaco.Range(1, 1, 1, 1);
-    this.set("lineas_para_resaltar", []);
+    if (this.monaco) {
+      let rango = new this.monaco.Range(1, 1, 1, 1);
+      this.set("lineas_para_resaltar", []);
 
-    this.editor.deltaDecorations(this.decorations, [
-      {
-        range: rango,
-        options: {}
-      }
-    ]);
+      this.editor.deltaDecorations(this.decorations, [
+        {
+          range: rango,
+          options: {}
+        }
+      ]);
+    }
   },
 
   regresa_al_modo_editor() {
