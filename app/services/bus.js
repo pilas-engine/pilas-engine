@@ -32,6 +32,8 @@ import Service from "@ember/service";
  * - mientras_mueve_la_camara
  * - expandir_codigo
  * - duplicar_el_actor_seleccionado
+ * - regresa_al_modo_editor
+ * - codigo_ejecutado
  *
  * Otra señal que se emite para avisarle al webserver que cambió el código es:
  *

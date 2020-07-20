@@ -11,6 +11,7 @@ class Modo extends Phaser.Scene {
   es_modo_ejecucion: boolean;
   canvas_fisica: Phaser.GameObjects.Graphics;
   posicion_anterior_de_arrastre: any;
+  actor_seleccionado: any;
 
   constructor(data) {
     super(data);
@@ -426,7 +427,7 @@ class Modo extends Phaser.Scene {
         actor.figura_radio,
         {
           isStatic: true,
-          angule: angulo //
+          angle: angulo //
         },
         25
         //

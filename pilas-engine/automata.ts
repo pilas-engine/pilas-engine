@@ -1,9 +1,11 @@
 class Automata {
   actor: Actor;
   _estado: string;
+  pilas: Pilas;
 
   constructor(actor: Actor) {
     this.actor = actor;
+    this.pilas = actor.pilas;
     this._estado = "";
   }
 

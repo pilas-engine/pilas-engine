@@ -9,13 +9,13 @@ class ActorBase {
   colisiones: Actor[];
   sensores: any[];
   private _etiqueta: string = null;
-  private _vivo: boolean = true;
+  _vivo: boolean = true;
   private _animacion_en_curso: string = "";
   private _figura_ancho: number;
   private _figura_alto: number;
   private _figura_radio: number;
   private _es_texto: boolean = false;
-  private _texto: any;
+  _texto: any;
   texto: any;
   private _id: any;
   private _nombre: any;
@@ -23,17 +23,17 @@ class ActorBase {
 
   proyecto: any;
 
-  private _habilidades: any[];
-  private _comportamientos: { nombre_del_comportamiento: string; argumentos: any }[];
-  private _comportamiento_actual: Comportamiento = null;
+  _habilidades: any[];
+  _comportamientos: { nombre_del_comportamiento: string; argumentos: any }[];
+  _comportamiento_actual: Comportamiento = null;
 
-  private _fondo: any = null;
-  private _fondo_imagen: string = "";
-  private _dialogo: any = null;
-  private _fuente: string = "color-blanco-con-sombra";
+  _fondo: any = null;
+  _fondo_imagen: string = "";
+  _dialogo: any = null;
+  _fuente: string = "color-blanco-con-sombra";
 
-  private _texto_con_borde: boolean = false;
-  private _color_de_texto: string = "white";
+  _texto_con_borde: boolean = false;
+  _color_de_texto: string = "white";
 
   propiedades_base = {
     x: 0,

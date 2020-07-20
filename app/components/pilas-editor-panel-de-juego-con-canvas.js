@@ -5,6 +5,7 @@ export default Component.extend({
   tagName: "",
   maximizar: false,
   memento: service(),
+  bus: service(),
 
   actions: {
     alCambiarMaximizado(valor) {

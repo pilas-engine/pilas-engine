@@ -483,6 +483,12 @@ export default Component.extend({
       return;
     }
 
+    if (e.data.tipo === "codigo_ejecutado") {
+      // Emite el mensaje codigo_ejecutado que lo suele atender el editor de código.
+      this.bus.trigger("codigo_ejecutado", e.data);
+      return;
+    }
+
     throw Error(`En pilas canvas no se envió la señal ${e.data.tipo} al servicio bus.`);
   },
   actions: {

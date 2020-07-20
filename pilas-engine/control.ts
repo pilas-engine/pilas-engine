@@ -1,5 +1,5 @@
 class GamePad {
-  gamepad: Phaser.input.GamePad;
+  gamepad: any;
   indice: number;
   umbral: number;
 

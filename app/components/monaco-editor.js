@@ -6,7 +6,7 @@ import { later } from "@ember/runloop";
 
 export default Component.extend({
   classNames: ["monaco-editor", "w-100", "flex1", "flex"],
-  code: "// demo",
+  code: "",
   loading: true,
   readOnly: false,
   editor: null,
@@ -14,6 +14,36 @@ export default Component.extend({
   linenumbers: true,
   modoVim: false,
   window: null,
+  titulo: "",
+
+  cuandoCargaElEditor(editor, monaco, window) {
+    this.set("editor", editor);
+    this.set("monaco", monaco);
+    this.set("window", window);
+
+    window.editor = editor;
+
+    this.set("lineas_para_resaltar", []);
+    this.set("decorations", []);
+
+    if (this.code) {
+      this.cargar_codigo();
+    }
+
+    this.editor.updateOptions({ fontSize: this.tamano });
+
+    if (this.modoVim) {
+      this.window.activar_vim();
+    }
+
+    if (this.cuandoCarga) {
+      this.cuandoCarga();
+    }
+
+    this.definirTema();
+
+    this.set("loading", false);
+  },
 
   cuandoCambiaDeArchivo: observer("titulo", function() {
     this.cargar_codigo();
@@ -27,6 +57,30 @@ export default Component.extend({
       editor.getModel().setValue(this.code);
       editor.setPosition(pos);
     }
+  },
+
+  /**
+   * Se ejecuta cuando llega la señal "codigo_ejecutado" con el mapa de archivos
+   * y lineas ejecutadas.
+   *
+   * Este método se encarga de resaltar esas lineas para mostrarle al usuario cómo
+   * se está ejecutando el código.
+   */
+  codigo_ejecutado(data) {
+    this.limpiar_resaltado();
+
+    // En data debería guardar el ID del actor que se instrumentó.
+    // y solamente ingresar a data.ID del actor seleccionado (ver la propiedad
+    // this.titulo)
+    let id_actor_seleccionado = +this.titulo.match(/: (\d+)/)[1];
+
+    if (id_actor_seleccionado && data[id_actor_seleccionado]) {
+      data[id_actor_seleccionado].map(linea => {
+        this.resaltarLinea(linea);
+      });
+    }
+
+    this.resaltarLineasEjecutadas();
   },
 
   /*
@@ -126,34 +180,44 @@ export default Component.extend({
     const frame = this.getFrameById(this.elementId);
     this.set("frame", frame);
 
-    //let rootURL = this.rootURL;
-
     this.bus.on("hacerFocoEnElEditor", this, "hacerFoco");
     this.bus.on("usar_receta", this, "usar_receta");
+    this.bus.on("codigo_ejecutado", this, "codigo_ejecutado");
+    this.bus.on("regresa_al_modo_editor", this, "regresa_al_modo_editor");
   },
 
-  cuandoCargaElEditor(editor, monaco, window) {
-    this.set("editor", editor);
-    this.set("monaco", monaco);
-    this.set("window", window);
+  resaltarLinea(linea) {
+    this.lineas_para_resaltar.pushObject(linea);
+  },
 
-    if (this.code) {
-      this.cargar_codigo();
-    }
+  resaltarLineasEjecutadas() {
+    let listado = this.lineas_para_resaltar.map(numero => {
+      return {
+        range: new this.monaco.Range(numero, 1, numero, 1),
+        options: {
+          isWholeLine: true,
+          className: "linea"
+        }
+      };
+    });
 
-    this.editor.updateOptions({ fontSize: this.tamano });
+    this.decorations = this.editor.deltaDecorations(this.decorations, listado);
+  },
 
-    if (this.modoVim) {
-      this.window.activar_vim();
-    }
+  limpiar_resaltado() {
+    let rango = new this.monaco.Range(1, 1, 1, 1);
+    this.set("lineas_para_resaltar", []);
 
-    if (this.cuandoCarga) {
-      this.cuandoCarga();
-    }
+    this.editor.deltaDecorations(this.decorations, [
+      {
+        range: rango,
+        options: {}
+      }
+    ]);
+  },
 
-    this.definirTema();
-
-    this.set("loading", false);
+  regresa_al_modo_editor() {
+    later(this, "limpiar_resaltado", 100);
   },
 
   hacerFoco() {
@@ -190,6 +254,10 @@ export default Component.extend({
   willDestroyElement() {
     this._super(...arguments);
     window.removeEventListener("message", this._subscription);
+
     this.bus.off("hacerFocoEnElEditor", this, "hacerFoco");
+    this.bus.off("usar_receta", this, "usar_receta");
+    this.bus.off("codigo_ejecutado", this, "codigo_ejecutado");
+    this.bus.off("regresa_al_modo_editor", this, "regresa_al_modo_editor");
   }
 });

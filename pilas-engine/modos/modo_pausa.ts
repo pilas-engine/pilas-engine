@@ -321,6 +321,9 @@ class ModoPausa extends Modo {
 
     this.crear_sprites_desde_historia(this.posicion);
 
+    let instrumentacion = this.pilas.historia.obtener_foto(this.posicion).instrumentacion;
+    this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
+
     this.actualizar_canvas_fisica();
     this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
   }

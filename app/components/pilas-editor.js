@@ -623,6 +623,9 @@ export default Component.extend({
 
       let escena = this.obtener_la_escena_actual();
 
+      /* El compilador llevará el código TypeScript del proyecto a un AST, aplicará
+         la instrumentación del código y luego retornará el resultado como código
+         JavaScript listo para ejecutar. */
       let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
       let datos = {
@@ -658,6 +661,7 @@ export default Component.extend({
       this.bus.trigger("hacerFocoEnElEditor", {});
       this.log.limpiar();
       this.log.info("Ingresando al modo edición");
+      this.bus.trigger("regresa_al_modo_editor");
     },
 
     pausar() {

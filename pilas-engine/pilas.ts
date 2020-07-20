@@ -50,6 +50,8 @@ class Pilas {
 
   private musica_en_reproduccion: any;
 
+  instrumentacion: any;
+
   constructor() {
     this.Phaser = Phaser;
 
@@ -687,7 +689,7 @@ class Pilas {
   }
 
   pausar() {
-    this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this.pilas });
+    this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this });
     this.modo.game.scene.pause("ModoEjecucion");
   }
 
@@ -705,6 +707,28 @@ class Pilas {
     }
 
     return lista;
+  }
+
+  /**
+   * Añade una nota para indicarle a pilas que un actor ejecutó una linea de código
+   * en plena ejecución. Esta función está diseñada para ser invocada directamente
+   * por una instrumentación de código, y su resultado sirve para resaltar el código
+   * que se ejecutó.
+   */
+  notificar_traza_de_ejecucion(id, linea) {
+    if (this.instrumentacion === undefined) {
+      this.limpiar_traza_de_ejecucion();
+    }
+
+    if (this.instrumentacion[id]) {
+      this.instrumentacion[id].push(linea);
+    } else {
+      this.instrumentacion[id] = [linea];
+    }
+  }
+
+  limpiar_traza_de_ejecucion() {
+    this.instrumentacion = {};
   }
 }
 

@@ -11,6 +11,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
@@ -432,6 +439,7 @@ var Animaciones = (function () {
 var Automata = (function () {
     function Automata(actor) {
         this.actor = actor;
+        this.pilas = actor.pilas;
         this._estado = "";
     }
     Object.defineProperty(Automata.prototype, "estado", {
@@ -444,7 +452,7 @@ var Automata = (function () {
             this.iniciar_estado(nombre);
             this.actor.cuadro_del_estado = 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Automata.prototype.iniciar_estado = function (nombre) {
@@ -550,7 +558,7 @@ var Camara = (function () {
         get: function () {
             return this.pilas.modo.cameras.main;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Camara.prototype.vibrar = function (intensidad, tiempo) {
@@ -584,7 +592,7 @@ var Camara = (function () {
             this.pilas.utilidades.validar_numero(x);
             this.camara_principal.setScroll(x, -this.y);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "y", {
@@ -595,35 +603,35 @@ var Camara = (function () {
             this.pilas.utilidades.validar_numero(y);
             this.camara_principal.setScroll(this.x, -y);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "borde_izquierdo", {
         get: function () {
             return -this.camara_principal.midPoint.x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "borde_derecho", {
         get: function () {
             return this.camara_principal.midPoint.x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "borde_arriba", {
         get: function () {
             return this.camara_principal.midPoint.y;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "borde_abajo", {
         get: function () {
             return -this.camara_principal.midPoint.y;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return Camara;
@@ -714,7 +722,7 @@ var Colores = (function () {
         get: function () {
             return this._lista_de_colores.map(function (e) { return e.nombre; });
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Colores.prototype.generar = function (rojo, verde, azul) {
@@ -899,105 +907,105 @@ var GamePad = (function () {
         get: function () {
             return this.gamepad.gamepads[this.indice];
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "analogico_izquierdo_x", {
         get: function () {
             return this.obtener_stick("izquierdo").x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "analogico_izquierdo_y", {
         get: function () {
             return this.obtener_stick("izquierdo").y;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "analogico_derecho_x", {
         get: function () {
             return this.obtener_stick("derecho").x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "analogico_derecho_y", {
         get: function () {
             return this.obtener_stick("derecho").y;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "izquierda", {
         get: function () {
             return this.obtener_stick("izquierdo").x < -this.umbral;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "derecha", {
         get: function () {
             return this.obtener_stick("izquierdo").x > this.umbral;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "arriba", {
         get: function () {
             return this.obtener_stick("izquierdo").y > this.umbral;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "abajo", {
         get: function () {
             return this.obtener_stick("izquierdo").y < -this.umbral;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "boton_x", {
         get: function () {
             return this.obtener_boton(3);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "boton_y", {
         get: function () {
             return this.obtener_boton(2);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "boton_a", {
         get: function () {
             return this.obtener_boton(1);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "boton_b", {
         get: function () {
             return this.obtener_boton(0);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "boton_lb", {
         get: function () {
             return this.obtener_boton(4);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GamePad.prototype, "boton_rb", {
         get: function () {
             return this.obtener_boton(5);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     GamePad.prototype.obtener_boton = function (indice) {
@@ -1064,287 +1072,287 @@ var Control = (function () {
         get: function () {
             return this.se_pulsa_tecla("UP", "arriba") || this.gamepad_1.arriba;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "abajo", {
         get: function () {
             return this.se_pulsa_tecla("DOWN", "abajo") || this.gamepad_1.abajo;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "izquierda", {
         get: function () {
             return this.se_pulsa_tecla("LEFT", "izquierda") || this.gamepad_1.izquierda;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "derecha", {
         get: function () {
             return this.se_pulsa_tecla("RIGHT", "derecha") || this.gamepad_1.derecha;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "espacio", {
         get: function () {
             return this.se_pulsa_tecla("SPACE", "espacio") || this.gamepad_1.boton_x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_a", {
         get: function () {
             return this.se_pulsa_tecla("A");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_b", {
         get: function () {
             return this.se_pulsa_tecla("B");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_c", {
         get: function () {
             return this.se_pulsa_tecla("C");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_d", {
         get: function () {
             return this.se_pulsa_tecla("D");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_e", {
         get: function () {
             return this.se_pulsa_tecla("E");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_f", {
         get: function () {
             return this.se_pulsa_tecla("F");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_g", {
         get: function () {
             return this.se_pulsa_tecla("G");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_h", {
         get: function () {
             return this.se_pulsa_tecla("H");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_i", {
         get: function () {
             return this.se_pulsa_tecla("I");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_j", {
         get: function () {
             return this.se_pulsa_tecla("J");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_k", {
         get: function () {
             return this.se_pulsa_tecla("K");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_l", {
         get: function () {
             return this.se_pulsa_tecla("L");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_m", {
         get: function () {
             return this.se_pulsa_tecla("M");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_n", {
         get: function () {
             return this.se_pulsa_tecla("N");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_\u00F1", {
         get: function () {
             return this.se_pulsa_tecla("SEMICOLON");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_o", {
         get: function () {
             return this.se_pulsa_tecla("O");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_p", {
         get: function () {
             return this.se_pulsa_tecla("P");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_q", {
         get: function () {
             return this.se_pulsa_tecla("Q");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_r", {
         get: function () {
             return this.se_pulsa_tecla("R");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_s", {
         get: function () {
             return this.se_pulsa_tecla("S");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_t", {
         get: function () {
             return this.se_pulsa_tecla("T");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_u", {
         get: function () {
             return this.se_pulsa_tecla("U");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_v", {
         get: function () {
             return this.se_pulsa_tecla("V");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_w", {
         get: function () {
             return this.se_pulsa_tecla("W");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_x", {
         get: function () {
             return this.se_pulsa_tecla("X");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_y", {
         get: function () {
             return this.se_pulsa_tecla("Y");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_z", {
         get: function () {
             return this.se_pulsa_tecla("Z");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_1", {
         get: function () {
             return this.se_pulsa_tecla("1");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_2", {
         get: function () {
             return this.se_pulsa_tecla("2");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_3", {
         get: function () {
             return this.se_pulsa_tecla("3");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_4", {
         get: function () {
             return this.se_pulsa_tecla("4");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_5", {
         get: function () {
             return this.se_pulsa_tecla("5");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_6", {
         get: function () {
             return this.se_pulsa_tecla("6");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_7", {
         get: function () {
             return this.se_pulsa_tecla("7");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_8", {
         get: function () {
             return this.se_pulsa_tecla("8");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Control.prototype, "tecla_9", {
         get: function () {
             return this.se_pulsa_tecla("9");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Control.prototype.simular_pulsacion = function (nombre, pulsacion) {
@@ -1461,7 +1469,7 @@ var Fisica = (function () {
         get: function () {
             return Phaser.Physics.Matter["Matter"];
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Fisica.prototype, "gravedad_x", {
@@ -1471,7 +1479,7 @@ var Fisica = (function () {
         set: function (v) {
             this.pilas.escena.gravedad_x = v;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Fisica.prototype, "gravedad_y", {
@@ -1481,7 +1489,7 @@ var Fisica = (function () {
         set: function (v) {
             this.pilas.escena.gravedad_y = v;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return Fisica;
@@ -1705,10 +1713,11 @@ var Historia = (function () {
     Historia.prototype.limpiar = function () {
         this.fotos = [];
     };
-    Historia.prototype.serializar_escena = function (escena_actual) {
+    Historia.prototype.serializar_escena = function (escena_actual, instrumentacion) {
         this.fotos.push({
             escena: escena_actual.serializar(),
-            actores: escena_actual.actores.filter(function (a) { return a.esta_vivo(); }).map(function (e) { return e.serializar(); })
+            actores: escena_actual.actores.filter(function (a) { return a.esta_vivo(); }).map(function (e) { return e.serializar(); }),
+            instrumentacion: instrumentacion
         });
     };
     Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (graphics) {
@@ -2204,7 +2213,7 @@ var Pilas = (function () {
         set: function (_) {
             this.utilidades.acceso_incorrecto("escena");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Pilas.prototype, "control", {
@@ -2214,14 +2223,14 @@ var Pilas = (function () {
         set: function (_) {
             this.utilidades.acceso_incorrecto("control");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Pilas.prototype, "camara", {
         get: function () {
             return this.escena.camara;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Pilas.prototype.iniciar_phaser = function (ancho, alto, recursos, opciones, imagenes) {
@@ -2648,7 +2657,7 @@ var Pilas = (function () {
         return Math.round(numero / grilla) * grilla;
     };
     Pilas.prototype.pausar = function () {
-        this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this.pilas });
+        this.modo.game.scene.start("ModoEjecucionEnPausa", { pilas: this });
         this.modo.game.scene.pause("ModoEjecucion");
     };
     Pilas.prototype.azar_desde_lista = function (lista) {
@@ -2657,12 +2666,26 @@ var Pilas = (function () {
     };
     Pilas.prototype.desordenar_lista = function (lista_original) {
         var _a;
-        var lista = lista_original.slice();
+        var lista = __spreadArrays(lista_original);
         for (var i = lista.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             _a = [lista[j], lista[i]], lista[i] = _a[0], lista[j] = _a[1];
         }
         return lista;
+    };
+    Pilas.prototype.notificar_traza_de_ejecucion = function (id, linea) {
+        if (this.instrumentacion === undefined) {
+            this.limpiar_traza_de_ejecucion();
+        }
+        if (this.instrumentacion[id]) {
+            this.instrumentacion[id].push(linea);
+        }
+        else {
+            this.instrumentacion[id] = [linea];
+        }
+    };
+    Pilas.prototype.limpiar_traza_de_ejecucion = function () {
+        this.instrumentacion = {};
     };
     return Pilas;
 }());
@@ -2675,7 +2698,7 @@ var Sensor = (function () {
         get: function () {
             return this._figura.colisiones;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Sensor.prototype.colisiona_con_etiqueta = function (etiqueta) {
@@ -2690,7 +2713,7 @@ var Sensor = (function () {
         get: function () {
             return this._figura.colisiones.length;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return Sensor;
@@ -2750,7 +2773,7 @@ var ActorBase = (function () {
         get: function () {
             return this.propiedades;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.pre_iniciar = function (propiedades) {
@@ -2936,7 +2959,7 @@ var ActorBase = (function () {
                 this.sprite.disableInteractive();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "area_de_interactividad", {
@@ -2948,7 +2971,7 @@ var ActorBase = (function () {
         set: function (v) {
             console.warn("No pude definir el area así, use definir_area_de_interactividad");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.definir_area_de_interactividad = function (ancho, alto) {
@@ -2966,7 +2989,7 @@ var ActorBase = (function () {
     ActorBase.prototype.cuando_hace_click_en_la_pantalla = function (x, y, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "fondo", {
         set: function (fondo) { },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.serializar = function () {
@@ -3045,7 +3068,7 @@ var ActorBase = (function () {
         set: function (etiqueta) {
             this._etiqueta = etiqueta;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.tiene_etiqueta = function (etiqueta) {
@@ -3114,7 +3137,7 @@ var ActorBase = (function () {
         set: function (estado) {
             this.automata.estado = estado;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.actualizar = function () { };
@@ -3165,7 +3188,7 @@ var ActorBase = (function () {
                 this.sprite.setTexture(imagen);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "nombre", {
@@ -3175,7 +3198,7 @@ var ActorBase = (function () {
         set: function (a) {
             throw new Error("No puede definir este atributo");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "id", {
@@ -3185,7 +3208,7 @@ var ActorBase = (function () {
         set: function (a) {
             throw new Error("No puede definir este atributo");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "x", {
@@ -3203,7 +3226,7 @@ var ActorBase = (function () {
                 this.sprite.x = x;
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "y", {
@@ -3221,7 +3244,7 @@ var ActorBase = (function () {
                 this.sprite.y = y;
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "z", {
@@ -3232,7 +3255,7 @@ var ActorBase = (function () {
             this.pilas.utilidades.validar_numero(_z);
             this.sprite.depth = -_z;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "rotacion", {
@@ -3248,7 +3271,7 @@ var ActorBase = (function () {
                 this.sprite.angle = -(angulo % 360);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "escala_x", {
@@ -3264,7 +3287,7 @@ var ActorBase = (function () {
                 this.sprite.scaleX = s;
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "escala_y", {
@@ -3280,7 +3303,7 @@ var ActorBase = (function () {
                 this.sprite.scaleY = s;
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "escala", {
@@ -3297,7 +3320,7 @@ var ActorBase = (function () {
                 this.escala_y = escala;
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "centro_y", {
@@ -3317,7 +3340,7 @@ var ActorBase = (function () {
             this.pilas.utilidades.validar_numero(y);
             this.sprite.setOrigin(this.centro_x, y);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "centro_x", {
@@ -3337,7 +3360,7 @@ var ActorBase = (function () {
             this.pilas.utilidades.validar_numero(x);
             this.sprite.setOrigin(x, this.centro_y);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "transparencia", {
@@ -3354,7 +3377,7 @@ var ActorBase = (function () {
                 this.sprite.alpha = 1 - t / 100;
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.toString = function () {
@@ -3397,7 +3420,7 @@ var ActorBase = (function () {
         set: function (a) {
             throw new Error("No puede definir este atributo");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "alto", {
@@ -3407,7 +3430,7 @@ var ActorBase = (function () {
         set: function (a) {
             throw new Error("No puede definir este atributo");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "estatico", {
@@ -3426,7 +3449,7 @@ var ActorBase = (function () {
                 console.warn("Este actor no tiene figura, ignorando valor estatico/dinámico.");
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "dinamico", {
@@ -3436,7 +3459,7 @@ var ActorBase = (function () {
         set: function (dinamico) {
             this.estatico = !dinamico;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.impulsar = function (x, y) {
@@ -3452,7 +3475,7 @@ var ActorBase = (function () {
             this.fallar_si_no_tiene_figura();
             this.sprite.setVelocityX(valor);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "velocidad_y", {
@@ -3464,7 +3487,7 @@ var ActorBase = (function () {
             this.fallar_si_no_tiene_figura();
             this.sprite.setVelocityY(-valor);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "rebote", {
@@ -3477,7 +3500,7 @@ var ActorBase = (function () {
             this.fallar_si_no_tiene_figura();
             this.sprite.setBounce(valor);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "sensor", {
@@ -3491,7 +3514,7 @@ var ActorBase = (function () {
             this.fallar_si_no_tiene_figura();
             this.sprite.setSensor(valor);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "fijo", {
@@ -3512,7 +3535,7 @@ var ActorBase = (function () {
                 }
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "espejado", {
@@ -3522,7 +3545,7 @@ var ActorBase = (function () {
         set: function (valor) {
             this.sprite.setFlipX(valor);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "espejado_vertical", {
@@ -3532,7 +3555,7 @@ var ActorBase = (function () {
         set: function (valor) {
             this.sprite.setFlipY(valor);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.cada_segundo = function (segundos_transcurridos) { };
@@ -3569,7 +3592,7 @@ var ActorBase = (function () {
                 }
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.animar = function (tipo_de_animacion, veces, duración) {
@@ -3592,7 +3615,7 @@ var ActorBase = (function () {
         get: function () {
             return this.colisiones.length;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.agregar_sensores_desde_lista = function (lista_de_sensores) {
@@ -3629,7 +3652,7 @@ var ActorBase = (function () {
             return "";
         },
         set: function (fuente) { },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "figura_ancho", {
@@ -3639,7 +3662,7 @@ var ActorBase = (function () {
         set: function (valor) {
             throw new Error("No puede definir este atributo");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "figura_alto", {
@@ -3649,7 +3672,7 @@ var ActorBase = (function () {
         set: function (valor) {
             throw new Error("No puede definir este atributo");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "figura_radio", {
@@ -3659,7 +3682,7 @@ var ActorBase = (function () {
         set: function (valor) {
             throw new Error("No puede definir este atributo");
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.decir = function (mensaje, duracion) {
@@ -3756,21 +3779,21 @@ var ActorBase = (function () {
         set: function (con_borde) {
             this._texto_con_borde = con_borde;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "color", {
         set: function (color) {
             this._color_de_texto = color;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorBase.prototype, "control", {
         get: function () {
             return this.pilas.control;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.obtener_distancia_al_punto = function (x, y) {
@@ -3802,7 +3825,7 @@ var ActorBase = (function () {
         get: function () {
             return this.pilas.camara;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorBase.prototype.hacer_recorrido = function (posiciones, duracion, veces, seguir_rotacion) {
@@ -3937,7 +3960,7 @@ var ActorTextoBase = (function (_super) {
             }
             this.actualizar_tamano_del_fondo();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorTextoBase.prototype, "fuente", {
@@ -3953,7 +3976,7 @@ var ActorTextoBase = (function (_super) {
             this._fuente = fuente;
             this.actualizar_tamano_del_fondo();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ActorTextoBase.prototype, "fondo", {
@@ -3967,7 +3990,7 @@ var ActorTextoBase = (function (_super) {
                 this.crear_fondo(fondo);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ActorTextoBase.prototype.crear_fondo = function (fondo) {
@@ -5170,7 +5193,7 @@ var EscenaBase = (function () {
             this._gravedad_x = v;
             this.actualizar_gravedad();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(EscenaBase.prototype, "gravedad_y", {
@@ -5181,7 +5204,7 @@ var EscenaBase = (function () {
             this._gravedad_y = v;
             this.actualizar_gravedad();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     EscenaBase.prototype.actualizar_gravedad = function () {
@@ -5588,21 +5611,21 @@ var Angle = (function () {
         set: function (value) {
             this.rad = (value * Math.PI) / 180;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Angle.prototype, "cos", {
         get: function () {
             return Math.cos(this.rad);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Angle.prototype, "sin", {
         get: function () {
             return Math.sin(this.rad);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Angle.prototype.selfIdentity = function () {
@@ -7960,7 +7983,7 @@ var Modo = (function (_super) {
         if (actor.figura === "circulo") {
             var figura_1 = this.matter.add.circle(coordenada.x, coordenada.y, actor.figura_radio, {
                 isStatic: true,
-                angule: angulo
+                angle: angulo
             }, 25);
             figura_1["es_sensor"] = actor.figura_sensor;
             figura_1["es_dinamica"] = actor.figura_dinamica;
@@ -8668,6 +8691,7 @@ var ModoEjecucion = (function (_super) {
             if (!datos.es_cambio_de_escena) {
                 this.instanciar_proyecto();
             }
+            this.pilas.instrumentacion = {};
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
             if (this.pilas.opciones.modo_simple) {
                 if (this.pilas["onready"]) {
@@ -9060,9 +9084,6 @@ var ModoEjecucion = (function (_super) {
             this.pilas.escena.actualizar();
             this.pilas.escena.actualizar_actores();
             this.pilas.escena.reproducir_sonidos_pendientes();
-            if (this.permitir_modo_pausa) {
-                this.guardar_foto_de_entidades();
-            }
             if (this.pilas.depurador.fisica_en_modo_ejecucion) {
                 this.canvas_fisica.setAlpha(1);
                 this.actualizar_canvas_fisica();
@@ -9075,9 +9096,17 @@ var ModoEjecucion = (function (_super) {
         catch (e) {
             return this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
         }
+        if (this.permitir_modo_pausa) {
+            this.guardar_foto_de_entidades();
+        }
+        this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", this.pilas.instrumentacion);
+        this.pilas.limpiar_traza_de_ejecucion();
     };
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
-        this.pilas.historia.serializar_escena(this.pilas.escena);
+        if (this.pilas.instrumentacion) {
+            var copia_de_instrumentacion = JSON.parse(JSON.stringify(this.pilas.instrumentacion));
+            this.pilas.historia.serializar_escena(this.pilas.escena, copia_de_instrumentacion);
+        }
     };
     ModoEjecucion.prototype.dibujar_punto_de_control = function (graphics, _x, _y) {
         graphics.fillStyle(0xffffff, 1);
@@ -9095,7 +9124,7 @@ var ModoEjecucionEnPausa = (function (_super) {
     }
     ModoEjecucionEnPausa.prototype.preload = function () { };
     ModoEjecucionEnPausa.prototype.create = function (datos) {
-        this.pilas = this.scene.manager.getScene("ModoCargador").pilas;
+        this.pilas = this.scene.manager.getScene("ModoCargador")["pilas"];
         var ancho = this.pilas._ancho;
         var alto = this.pilas._alto;
         var titulo = this.add.bitmapText(ancho / 2, 200, "color-blanco-con-sombra-medio", "PAUSA");
@@ -9439,6 +9468,8 @@ var ModoPausa = (function (_super) {
         this.posicion = Math.min(this.posicion, this.total);
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
+        var instrumentacion = this.pilas.historia.obtener_foto(this.posicion).instrumentacion;
+        this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
         this.actualizar_canvas_fisica();
         this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
     };

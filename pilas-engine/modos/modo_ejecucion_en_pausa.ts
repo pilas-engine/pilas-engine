@@ -10,7 +10,7 @@ class ModoEjecucionEnPausa extends Modo {
   preload() {}
 
   create(datos) {
-    this.pilas = this.scene.manager.getScene("ModoCargador").pilas;
+    this.pilas = this.scene.manager.getScene("ModoCargador")["pilas"];
     let ancho = this.pilas._ancho;
     let alto = this.pilas._alto;
 

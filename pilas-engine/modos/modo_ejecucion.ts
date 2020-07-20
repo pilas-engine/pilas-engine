@@ -46,6 +46,7 @@ class ModoEjecucion extends Modo {
         this.instanciar_proyecto();
       }
 
+      this.pilas.instrumentacion = {};
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
 
       if (this.pilas.opciones.modo_simple) {
@@ -546,10 +547,6 @@ class ModoEjecucion extends Modo {
       this.pilas.escena.actualizar_actores();
       this.pilas.escena.reproducir_sonidos_pendientes();
 
-      if (this.permitir_modo_pausa) {
-        this.guardar_foto_de_entidades();
-      }
-
       if (this.pilas.depurador.fisica_en_modo_ejecucion) {
         this.canvas_fisica.setAlpha(1);
         this.actualizar_canvas_fisica();
@@ -561,10 +558,20 @@ class ModoEjecucion extends Modo {
     } catch (e) {
       return this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando escena");
     }
+
+    if (this.permitir_modo_pausa) {
+      this.guardar_foto_de_entidades();
+    }
+
+    this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", this.pilas.instrumentacion);
+    this.pilas.limpiar_traza_de_ejecucion();
   }
 
   guardar_foto_de_entidades() {
-    this.pilas.historia.serializar_escena(this.pilas.escena);
+    if (this.pilas.instrumentacion) {
+      let copia_de_instrumentacion = JSON.parse(JSON.stringify(this.pilas.instrumentacion));
+      this.pilas.historia.serializar_escena(this.pilas.escena, copia_de_instrumentacion);
+    }
   }
 
   dibujar_punto_de_control(graphics: Phaser.GameObjects.Graphics, _x: number, _y: number) {
