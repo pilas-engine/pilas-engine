@@ -82,10 +82,10 @@
   },
   "dependencies": {
     "js-beautify": "^1.9.1",
-    "phaser": "3.23.0",
+    "phaser": "3.24.1",
     "polka": "^0.5.2",
     "sharp": "^0.22.1",
     "sirv": "^0.4.2",
-    "typescript": "3.4.3"
+    "typescript": "3.9.7"
   }
 }
