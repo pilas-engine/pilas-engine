@@ -679,6 +679,7 @@ declare class ActorBase {
     get area_de_interactividad(): any;
     set fondo(fondo: string);
     serializar(): {
+        nombre: any;
         tipo: String;
         x: number;
         y: number;

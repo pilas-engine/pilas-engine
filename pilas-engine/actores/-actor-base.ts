@@ -379,6 +379,7 @@ class ActorBase {
     }
 
     return {
+      nombre: this.nombre,
       tipo: this.tipo,
       x: Math.round(this.x),
       y: Math.round(this.y),
