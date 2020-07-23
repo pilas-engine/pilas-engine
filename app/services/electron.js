@@ -26,12 +26,10 @@ export default Service.extend({
   },
 
   obtener_filtros_de_archivos() {
-    return [
-      {
-        name: "Proyectos de pilas",
-        extensions: ["pilas"]
-      }
-    ];
+    return [{
+      name: "Proyectos de pilas",
+      extensions: ["pilas"]
+    }];
   },
 
   abrir_proyecto() {
@@ -45,11 +43,11 @@ export default Service.extend({
     };
 
     return new Promise(function(resolve, reject) {
-      electron.remote.dialog.showOpenDialog(opciones, paths => {
-        if (paths === undefined) {
+      electron.remote.dialog.showOpenDialog(opciones).then(result => {
+        if (result.canceled === undefined) {
           return reject("No ha seleccionado archivo");
         }
-        resolve(paths[0]);
+        resolve(result.filePaths[0]);
       });
     });
   },
@@ -69,26 +67,26 @@ export default Service.extend({
     };
 
     return new Promise(function(resolve, reject) {
-      electron.remote.dialog.showSaveDialog(opciones, ruta => {
-        if (ruta === undefined) {
+      electron.remote.dialog.showSaveDialog(opciones).then(resultado => {
+        if (resultado.canceled === undefined) {
           return reject("No ha seleccionado archivo");
         }
-        resolve(ruta);
+        resolve(resultado.filePath);
       });
     });
   },
 
   guardar_proyecto_en_archivo(proyecto, ruta) {
-      let fs = requireNode("fs");
-      let data = JSON.stringify(proyecto, null, 4);
-      fs.writeFileSync(ruta, data);
+    let fs = requireNode("fs");
+    let data = JSON.stringify(proyecto, null, 4);
+    fs.writeFileSync(ruta, data);
   },
 
   abrir_proyecto_desde_archivo(ruta) {
-      let fs = requireNode("fs");
+    let fs = requireNode("fs");
 
-      let data = fs.readFileSync(ruta);
-      return JSON.parse(data);
+    let data = fs.readFileSync(ruta);
+    return JSON.parse(data);
   }
 
 });
