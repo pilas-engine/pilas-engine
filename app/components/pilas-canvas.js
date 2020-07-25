@@ -98,7 +98,7 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:finaliza_carga`, this, "finaliza_carga");
       this.bus.on(`${this.nombre_del_contexto}:ejecutar_proyecto`, this, "ejecutar_proyecto");
       this.bus.on(`${this.nombre_del_contexto}:pausar_escena`, this, "pausar_escena");
-      this.bus.on(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, this, "cambiar_posicion_desde_el_editor");
+      this.bus.on(`${this.nombre_del_contexto}:cambiar_posicion_del_modo_historia_desde_el_editor`, this, "cambiar_posicion_del_modo_historia_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, this, "selecciona_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, this, "actualizar_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, this, "actualizar_escena_desde_el_editor");
@@ -126,7 +126,7 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:finaliza_carga`, this, "finaliza_carga");
     this.bus.off(`${this.nombre_del_contexto}:ejecutar_proyecto`, this, "ejecutar_proyecto");
     this.bus.off(`${this.nombre_del_contexto}:pausar_escena`, this, "pausar_escena");
-    this.bus.off(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, this, "cambiar_posicion_desde_el_editor");
+    this.bus.off(`${this.nombre_del_contexto}:cambiar_posicion_del_modo_historia_desde_el_editor`, this, "cambiar_posicion_del_modo_historia_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, this, "selecciona_actor_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, this, "actualizar_actor_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:actualizar_escena_desde_el_editor`, this, "actualizar_escena_desde_el_editor");
@@ -359,7 +359,7 @@ export default Component.extend({
     return htmlSafe(`width: ${porcentajeDeCarga}%`);
   }),
 
-  cambiar_posicion_desde_el_editor({ posicion }) {
+  cambiar_posicion_del_modo_historia_desde_el_editor({ posicion }) {
     let data = {
       tipo: "cambiar_posicion",
       nombre_del_contexto: this.nombre_del_contexto,
@@ -486,6 +486,11 @@ export default Component.extend({
     if (e.data.tipo === "codigo_ejecutado") {
       // Emite el mensaje codigo_ejecutado que lo suele atender el editor de código.
       this.bus.trigger("codigo_ejecutado", e.data);
+      return;
+    }
+
+    if (e.data.tipo === "aplica_el_cambio_de_posicion_en_el_modo_pausa") {
+      this.bus.trigger("aplica_el_cambio_de_posicion_en_el_modo_pausa", e.data);
       return;
     }
 

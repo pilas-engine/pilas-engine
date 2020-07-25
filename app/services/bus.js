@@ -9,7 +9,7 @@ import Service from "@ember/service";
  *
  * - actualizar_actor_desde_el_editor
  * - actualizar_escena_desde_el_editor
- * - cambiar_posicion_desde_el_editor
+ * - cambiar_posicion_del_modo_historia_desde_el_editor
  * - cargar_escena
  * - comienza_a_mover_un_actor
  * - cuando_cambia_posicion_dentro_del_modo_pausa
@@ -34,6 +34,9 @@ import Service from "@ember/service";
  * - duplicar_el_actor_seleccionado
  * - regresa_al_modo_editor
  * - codigo_ejecutado
+ * - aplica_el_cambio_de_posicion_en_el_modo_pausa
+ * - formatear
+ * - formatear_y_guardar
  *
  * Otra señal que se emite para avisarle al webserver que cambió el código es:
  *

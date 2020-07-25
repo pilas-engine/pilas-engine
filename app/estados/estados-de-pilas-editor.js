@@ -1,5 +1,10 @@
 class ModoCargando {
   constructor() {
+    this.es_modo_pausa = false;
+    this.es_modo_ejecucion = false;
+    this.es_modo_edicion = false;
+    this.es_modo_cargando = true;
+
     this.puede_editar = false;
     this.ModoCargando = true;
     this.nombreDeEstado = "ModoCargando";
@@ -21,6 +26,11 @@ class ModoCargando {
 
 class ModoEdicion {
   constructor() {
+    this.es_modo_pausa = false;
+    this.es_modo_ejecucion = false;
+    this.es_modo_edicion = true;
+    this.es_modo_cargando = false;
+
     this.puede_editar = true;
     this.ModoCargando = false;
     this.nombreDeEstado = "ModoEdicion";
@@ -46,6 +56,11 @@ class ModoEdicion {
 
 class ModoEjecucion {
   constructor() {
+    this.es_modo_pausa = false;
+    this.es_modo_ejecucion = true;
+    this.es_modo_edicion = false;
+    this.es_modo_cargando = false;
+
     this.puede_editar = false;
     this.ModoCargando = false;
     this.nombreDeEstado = "ModoEjecucion";
@@ -74,6 +89,11 @@ class ModoEjecucion {
 
 class ModoPausa {
   constructor() {
+    this.es_modo_pausa = true;
+    this.es_modo_ejecucion = false;
+    this.es_modo_edicion = false;
+    this.es_modo_cargando = false;
+
     this.puede_editar = false;
     this.ModoCargando = false;
     this.nombreDeEstado = "ModoPausa";

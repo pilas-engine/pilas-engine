@@ -3026,6 +3026,7 @@ var ActorBase = (function () {
             hit_activado = this.recorte_activado;
         }
         return {
+            nombre: this.nombre,
             tipo: this.tipo,
             x: Math.round(this.x),
             y: Math.round(this.y),
@@ -9468,10 +9469,29 @@ var ModoPausa = (function (_super) {
         this.posicion = Math.min(this.posicion, this.total);
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
-        var instrumentacion = this.pilas.historia.obtener_foto(this.posicion).instrumentacion;
+        var foto = this.pilas.historia.obtener_foto(this.posicion);
+        var instrumentacion = foto.instrumentacion;
         this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
+        this.completar_foto_detallando_actores_nuevos_y_eliminados(foto);
+        this.pilas.mensajes.emitir_mensaje_al_editor("aplica_el_cambio_de_posicion_en_el_modo_pausa", { posicion: this.posicion, foto: foto });
         this.actualizar_canvas_fisica();
         this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
+    };
+    ModoPausa.prototype.completar_foto_detallando_actores_nuevos_y_eliminados = function (foto) {
+        if (this.posicion - 1 > 0) {
+            var foto_anterior = this.pilas.historia.obtener_foto(this.posicion - 1);
+            var nombres_1 = foto_anterior.actores.map(function (a) { return a.nombre; });
+            foto.actores.forEach(function (actor) {
+                actor.es_nuevo = !nombres_1.includes(actor.nombre);
+            });
+        }
+        if (this.posicion + 1 < this.pilas.historia.obtener_cantidad_de_posiciones()) {
+            var siguiente_foto = this.pilas.historia.obtener_foto(this.posicion + 1);
+            var nombres_2 = siguiente_foto.actores.map(function (a) { return a.nombre; });
+            foto.actores.forEach(function (actor) {
+                actor.se_elimina_en_el_siguiente_cuadro = !nombres_2.includes(actor.nombre);
+            });
+        }
     };
     ModoPausa.prototype.avanzar_posicion = function () {
         this.posicion += 1;

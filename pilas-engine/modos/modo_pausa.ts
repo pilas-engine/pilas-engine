@@ -321,11 +321,42 @@ class ModoPausa extends Modo {
 
     this.crear_sprites_desde_historia(this.posicion);
 
-    let instrumentacion = this.pilas.historia.obtener_foto(this.posicion).instrumentacion;
+    let foto = this.pilas.historia.obtener_foto(this.posicion);
+
+    let instrumentacion = foto.instrumentacion;
     this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
+
+    this.completar_foto_detallando_actores_nuevos_y_eliminados(foto);
+
+    this.pilas.mensajes.emitir_mensaje_al_editor("aplica_el_cambio_de_posicion_en_el_modo_pausa", { posicion: this.posicion, foto });
 
     this.actualizar_canvas_fisica();
     this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
+  }
+
+
+  completar_foto_detallando_actores_nuevos_y_eliminados(foto) {
+
+    // Busca en el cuadro anterior a ver si el actor es nuevo.
+    if (this.posicion -1 > 0) {
+      let foto_anterior = this.pilas.historia.obtener_foto(this.posicion -1);
+      let nombres = foto_anterior.actores.map(a => a.nombre);
+
+      foto.actores.forEach(actor => {
+        actor.es_nuevo = !nombres.includes(actor.nombre);
+      });
+    }
+
+    // Busca en el siguiente cuadro si el actor se eliminó.
+    if (this.posicion + 1 < this.pilas.historia.obtener_cantidad_de_posiciones()) {
+      let siguiente_foto = this.pilas.historia.obtener_foto(this.posicion +1);
+      let nombres = siguiente_foto.actores.map(a => a.nombre);
+
+      foto.actores.forEach(actor => {
+        actor.se_elimina_en_el_siguiente_cuadro = !nombres.includes(actor.nombre);
+      });
+    }
+
   }
 
   avanzar_posicion() {

@@ -2043,6 +2043,7 @@ declare class ModoPausa extends Modo {
     dibujar_sensores_sobre_canvas_fisica(posicion: any): void;
     crear_sprite_desde_entidad(entidad: any): any;
     actualizar_posicion(posicion: any): void;
+    completar_foto_detallando_actores_nuevos_y_eliminados(foto: any): void;
     avanzar_posicion(): void;
     retroceder_posicion(): void;
     crear_canvas_de_depuracion_modo_pausa(): void;

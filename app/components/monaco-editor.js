@@ -30,7 +30,9 @@ export default Component.extend({
       this.cargar_codigo();
     }
 
-    this.editor.updateOptions({ fontSize: this.tamano });
+    this.editor.updateOptions({
+      fontSize: this.tamano
+    });
 
     if (this.modoVim) {
       this.window.activar_vim();
@@ -89,7 +91,9 @@ export default Component.extend({
    */
   sincronizarReadOnly: observer("readOnly", function() {
     if (this.editor) {
-      this.editor.updateOptions({ readOnly: this.readOnly });
+      this.editor.updateOptions({
+        readOnly: this.readOnly
+      });
     }
   }),
 
@@ -121,7 +125,9 @@ export default Component.extend({
 
   sincronizarTamano: observer("tamano", function() {
     if (this.monaco) {
-      this.editor.updateOptions({ fontSize: this.tamano });
+      this.editor.updateOptions({
+        fontSize: this.tamano
+      });
     }
   }),
 
@@ -145,10 +151,7 @@ export default Component.extend({
         }
 
         if (event.data.message === "on-save") {
-          this.editor.getAction("editor.action.formatDocument").run();
-          later(() => {
-            this.onSave(this.frame.editor);
-          }, 100);
+          this.bus.trigger("formatear_y_guardar");
         }
       }
     };
@@ -184,10 +187,23 @@ export default Component.extend({
     this.bus.on("usar_receta", this, "usar_receta");
     this.bus.on("codigo_ejecutado", this, "codigo_ejecutado");
     this.bus.on("regresa_al_modo_editor", this, "regresa_al_modo_editor");
+    this.bus.on("formatear_y_guardar", this, "formatear_y_guardar")
+    this.bus.on("formatear", this, "formatear")
   },
 
   resaltarLinea(linea) {
     this.lineas_para_resaltar.pushObject(linea);
+  },
+
+  formatear_y_guardar() {
+    this.editor.getAction("editor.action.formatDocument").run();
+    later(() => {
+      this.onSave(this.frame.editor);
+    }, 100);
+  },
+
+  formatear() {
+    this.editor.getAction("editor.action.formatDocument").run();
   },
 
   resaltarLineasEjecutadas() {
@@ -211,12 +227,10 @@ export default Component.extend({
       let rango = new this.monaco.Range(1, 1, 1, 1);
       this.set("lineas_para_resaltar", []);
 
-      this.editor.deltaDecorations(this.decorations, [
-        {
-          range: rango,
-          options: {}
-        }
-      ]);
+      this.editor.deltaDecorations(this.decorations, [{
+        range: rango,
+        options: {}
+      }]);
     }
   },
 
@@ -263,5 +277,7 @@ export default Component.extend({
     this.bus.off("usar_receta", this, "usar_receta");
     this.bus.off("codigo_ejecutado", this, "codigo_ejecutado");
     this.bus.off("regresa_al_modo_editor", this, "regresa_al_modo_editor");
+    this.bus.off("formatear_y_guardar", this, "formatear_y_guardar");
+    this.bus.off("formatear", this, "formatear")
   }
 });

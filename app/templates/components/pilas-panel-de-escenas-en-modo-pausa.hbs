@@ -1,0 +1,38 @@
+<ul
+  id="pilas-panel-de-escenas"
+  class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba borde mt2 mb2">
+
+  {{#each actores as |actor|}}
+    <li class="truncate-text texto br2 pointer ml1 mt1 mr2 flex items-center hover-bg-black-10">
+      <div class="pa2 dib">
+        <div class="dib br-100 bg-silver icono-item-de-actor"></div>
+      </div>
+
+      <div class="flex1 pl2 flex items-center truncate">
+        <div class="flex1 pa2 truncate">
+          {{actor.nombre}}
+        </div>
+
+        {{#if actor.es_nuevo}}
+          <div class="bg-blue tc f7 br1 pa1 mr1">
+            NUEVO
+          </div>
+        {{/if}}
+
+        {{#if actor.se_elimina_en_el_siguiente_cuadro}}
+          <div class="bg-white-10 tc f7 br1 pa1 mr1">
+            SE ELIMINARÁ
+          </div>
+        {{/if}}
+
+        {{!-- coordenada del actor --}}
+        <div class="bg-black-30 tc f7 br1 pa1 mr1">
+          ({{actor.x}}, {{actor.y}})
+        </div>
+      </div>
+
+      <div class="dib fr f7"></div>
+    </li>
+  {{/each}}
+
+</ul>

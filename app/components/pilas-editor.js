@@ -110,7 +110,7 @@ export default Component.extend({
     return actor || escena;
   },
 
-  alPulsarTecla(/*evento*/) {},
+  alPulsarTecla( /*evento*/ ) {},
 
   willDestroyElement() {
     this.desconectar_eventos();
@@ -618,40 +618,48 @@ export default Component.extend({
 
     ejecutar() {
       this.bus.trigger(`${this.nombre_del_contexto}:quitar_pausa`, {});
-      this.set("existe_un_error_reciente", false);
-      this.set("estado", this.estado.ejecutar());
 
-      let escena = this.obtener_la_escena_actual();
+      this.bus.trigger(`formatear`);
 
-      /* El compilador llevará el código TypeScript del proyecto a un AST, aplicará
-         la instrumentación del código y luego retornará el resultado como código
-         JavaScript listo para ejecutar. */
-      let resultado = this.compilador.compilar_proyecto(this.proyecto);
+      later(() => {
 
-      let datos = {
-        nombre_de_la_escena_inicial: escena.nombre,
-        codigo: resultado.codigo,
-        permitir_modo_pausa: this.permitir_modo_pausa,
-        proyecto: resultado.proyecto_serializado
-      };
+        this.set("existe_un_error_reciente", false);
+        this.set("estado", this.estado.ejecutar());
 
-      let hash = base64_encode(datos);
+        let escena = this.obtener_la_escena_actual();
 
-      let tamaño = `${this.proyecto.ancho}x${this.proyecto.alto}`;
+        /* El compilador llevará el código TypeScript del proyecto a un AST, aplicará
+           la instrumentación del código y luego retornará el resultado como código
+           JavaScript listo para ejecutar. */
+        let resultado = this.compilador.compilar_proyecto(this.proyecto);
 
-      if (this.tamaño_de_pantalla_del_proyecto !== tamaño) {
-        this.set("tamaño_de_pantalla_del_proyecto", tamaño);
-        this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, true);
-      } else {
-        this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, false);
-      }
+        let datos = {
+          nombre_de_la_escena_inicial: escena.nombre,
+          codigo: resultado.codigo,
+          permitir_modo_pausa: this.permitir_modo_pausa,
+          proyecto: resultado.proyecto_serializado
+        };
 
-      this.bus.trigger(`${this.nombre_del_contexto}:ejecutar_proyecto`, datos);
-      this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
+        let hash = base64_encode(datos);
 
-      this.log.limpiar();
-      this.log.info("Ingresando en modo ejecución");
-      this.log.info("Puedes usar las variables pilas o actores.");
+        let tamaño = `${this.proyecto.ancho}x${this.proyecto.alto}`;
+
+        if (this.tamaño_de_pantalla_del_proyecto !== tamaño) {
+          this.set("tamaño_de_pantalla_del_proyecto", tamaño);
+          this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, true);
+        } else {
+          this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, false);
+        }
+
+        this.bus.trigger(`${this.nombre_del_contexto}:ejecutar_proyecto`, datos);
+        this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
+
+        this.log.limpiar();
+        this.log.info("Ingresando en modo ejecución");
+        this.log.info("Puedes usar las variables pilas o actores.");
+
+      }, 10)
+
     },
 
     detener() {
@@ -681,12 +689,12 @@ export default Component.extend({
       this.serviceProyecto.cuando_realiza_un_cambio();
       this.set("posicion", valorNuevo);
 
-      this.bus.trigger(`${this.nombre_del_contexto}:cambiar_posicion_desde_el_editor`, {
+      this.bus.trigger(`${this.nombre_del_contexto}:cambiar_posicion_del_modo_historia_desde_el_editor`, {
         posicion: valorNuevo
       });
     },
 
-    cuandoGuardaDesdeElEditor(/*editor*/) {
+    cuandoGuardaDesdeElEditor( /*editor*/ ) {
       this.send("alternarEstadoDeEjecucion");
 
       if (this.get("panelMaximizado")) {
@@ -849,7 +857,7 @@ export default Component.extend({
       this.cuandoIntentaCrearUnProyecto();
     },
 
-    cuando_cambia_un_nombre_de_actor(/*nombre*/) {
+    cuando_cambia_un_nombre_de_actor( /*nombre*/ ) {
       // Intenta recargar el editor, para eso vuelve a seleccionar el actor
       // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
       let actor = this.obtenerDetalleDeActorPorIndice(this.seleccion);
@@ -862,7 +870,7 @@ export default Component.extend({
       this.set("tituloDelCodigo", `Código del actor: ${this.seleccion} ${r}`);
     },
 
-    cuando_cambia_un_nombre_de_escena(/*nombre*/) {
+    cuando_cambia_un_nombre_de_escena( /*nombre*/ ) {
       // Intenta recargar el editor, para eso vuelve a seleccionar la escena
       // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
       let escena = this.obtenerDetalleDeEscenaPorIndice(this.seleccion);
