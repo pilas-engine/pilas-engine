@@ -196,14 +196,19 @@ export default Component.extend({
   },
 
   formatear_y_guardar() {
-    this.editor.getAction("editor.action.formatDocument").run();
+    if (this.editor) {
+      this.editor.getAction("editor.action.formatDocument").run();
+    }
+
     later(() => {
       this.onSave(this.frame.editor);
     }, 100);
   },
 
   formatear() {
-    this.editor.getAction("editor.action.formatDocument").run();
+    if (this.editor) {
+      this.editor.getAction("editor.action.formatDocument").run();
+    }
   },
 
   resaltarLineasEjecutadas() {
@@ -266,7 +271,10 @@ export default Component.extend({
     let pos = this.editor.getPosition();
     this.editor.getModel().setValue(codigo);
     this.editor.setPosition(pos);
-    this.editor.getAction("editor.action.formatDocument").run();
+
+    if (this.editor) {
+      this.editor.getAction("editor.action.formatDocument").run();
+    }
   },
 
   willDestroyElement() {
