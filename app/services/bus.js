@@ -22,6 +22,7 @@ import Service from "@ember/service";
  * - hacerFocoEnElEditor
  * - hacer_foco_en_pilas
  * - inicia_modo_depuracion_en_pausa
+ * - inicia_modo_edicion
  * - pausar_escena
  * - progreso_de_carga
  * - pulsa_la_tecla_escape
@@ -37,6 +38,8 @@ import Service from "@ember/service";
  * - aplica_el_cambio_de_posicion_en_el_modo_pausa
  * - formatear
  * - formatear_y_guardar
+ * - selecciona_un_actor_en_modo_pausa
+ * - selecciona_la_escena_completa_en_modo_pausa
  *
  * Otra señal que se emite para avisarle al webserver que cambió el código es:
  *

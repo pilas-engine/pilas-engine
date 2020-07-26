@@ -382,7 +382,7 @@ declare class Historia {
     constructor(pilas: Pilas);
     limpiar(): void;
     serializar_escena(escena_actual: any, instrumentacion: any): void;
-    dibujar_puntos_de_las_posiciones_recorridas(graphics: any): void;
+    dibujar_puntos_de_las_posiciones_recorridas(graphics: any, filtro_actor: any): void;
     obtener_cantidad_de_posiciones(): number;
     obtener_foto(posicion: number): any;
 }
@@ -429,6 +429,7 @@ declare class Mensajes {
     atender_mensaje_pausar_escena(): void;
     atender_mensaje_cambiar_posicion(datos: any): void;
     atender_mensaje_eliminar_actor_desde_el_editor(datos: any): void;
+    atender_mensaje_selecciona_un_actor_en_modo_pausa(datos: any): void;
 }
 declare class Utilidades {
     pilas: Pilas;
@@ -679,6 +680,7 @@ declare class ActorBase {
     get area_de_interactividad(): any;
     set fondo(fondo: string);
     serializar(): {
+        id: any;
         nombre: any;
         tipo: String;
         x: number;
@@ -1866,6 +1868,7 @@ declare class Modo extends Phaser.Scene {
     crear_figura_estatica_para(actor: any): any;
     actualizar_posicion(posicion?: any): void;
     dibujar_punto_de_control(graphics: any, x: any, y: any): void;
+    selecciona_actor_o_escena_en_modo_pausa(actor: any): void;
 }
 declare class ModoCargador extends Modo {
     pilas: Pilas;
@@ -2025,6 +2028,7 @@ declare class ModoPausa extends Modo {
     _anterior_valor_del_modo_posicion_activado: boolean;
     _anterior_posicion_x_de_la_camara: number;
     _anterior_posicion_y_de_la_camara: number;
+    seleccion: any;
     constructor();
     private crear_indicador_de_texto;
     preload(): void;
@@ -2047,4 +2051,5 @@ declare class ModoPausa extends Modo {
     avanzar_posicion(): void;
     retroceder_posicion(): void;
     crear_canvas_de_depuracion_modo_pausa(): void;
+    selecciona_actor_o_escena_en_modo_pausa(actor: any): void;
 }

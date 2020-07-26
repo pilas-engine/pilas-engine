@@ -2,8 +2,22 @@
   id="pilas-panel-de-escenas"
   class="verdana f6 unselectable pa0 flex1 overflow-y-auto ba borde mt2 mb2">
 
+  {{!-- Selecciona toda la escena --}}
+  <li {{action "seleccionarEscena"}} role="button"
+    class="{{if (eq actorSeleccionado null) "bg-black-20" "hover-bg-black-10"}} truncate-text texto br2 pointer ml1 mt1 mr2 flex items-center">
+
+    <div class="flex1 pl2 flex items-center truncate">
+      <div class="flex1 pa2 truncate">
+        Escena con {{actores.length}} actores.
+      </div>
+    </div>
+
+  </li>
+
   {{#each actores as |actor|}}
-    <li class="truncate-text texto br2 pointer ml1 mt1 mr2 flex items-center hover-bg-black-10">
+    {{!-- item para seleccionar un actor --}}
+    <li {{action "seleccionaActor" actor}} role="button"
+      class="{{if (eq actorSeleccionado actor.nombre) "bg-black-20" "hover-bg-black-10"}} truncate-text texto br2 pointer ml1 mt1 mr2 flex items-center">
       <div class="pa2 dib">
         <div class="dib br-100 bg-silver icono-item-de-actor"></div>
       </div>

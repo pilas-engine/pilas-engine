@@ -20,6 +20,8 @@ class ModoPausa extends Modo {
   _anterior_posicion_x_de_la_camara = 0;
   _anterior_posicion_y_de_la_camara = 0;
 
+  seleccion: any; // referencia al actor o null si lo que está seleccionado es la escena completa.
+
   constructor() {
     super({ key: "ModoPausa" });
   }
@@ -33,7 +35,7 @@ class ModoPausa extends Modo {
     this.indicador_de_texto.align = 2;
   }
 
-  preload() {}
+  preload() { }
 
   create(datos: any) {
     super.create(datos, datos.pilas._ancho, datos.pilas._alto);
@@ -322,8 +324,10 @@ class ModoPausa extends Modo {
     this.crear_sprites_desde_historia(this.posicion);
 
     let foto = this.pilas.historia.obtener_foto(this.posicion);
+    // Se copia toda la instrumentación para que al enviar el mensaje no se
+    // agregen datos al diccionario.
+    let instrumentacion = JSON.parse(JSON.stringify(foto.instrumentacion));
 
-    let instrumentacion = foto.instrumentacion;
     this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
 
     this.completar_foto_detallando_actores_nuevos_y_eliminados(foto);
@@ -334,12 +338,11 @@ class ModoPausa extends Modo {
     this.dibujar_sensores_sobre_canvas_fisica(this.posicion);
   }
 
-
   completar_foto_detallando_actores_nuevos_y_eliminados(foto) {
 
     // Busca en el cuadro anterior a ver si el actor es nuevo.
-    if (this.posicion -1 > 0) {
-      let foto_anterior = this.pilas.historia.obtener_foto(this.posicion -1);
+    if (this.posicion - 1 > 0) {
+      let foto_anterior = this.pilas.historia.obtener_foto(this.posicion - 1);
       let nombres = foto_anterior.actores.map(a => a.nombre);
 
       foto.actores.forEach(actor => {
@@ -349,7 +352,7 @@ class ModoPausa extends Modo {
 
     // Busca en el siguiente cuadro si el actor se eliminó.
     if (this.posicion + 1 < this.pilas.historia.obtener_cantidad_de_posiciones()) {
-      let siguiente_foto = this.pilas.historia.obtener_foto(this.posicion +1);
+      let siguiente_foto = this.pilas.historia.obtener_foto(this.posicion + 1);
       let nombres = siguiente_foto.actores.map(a => a.nombre);
 
       foto.actores.forEach(actor => {
@@ -376,6 +379,16 @@ class ModoPausa extends Modo {
     graphics_modo_pausa.depth = 190;
     this.graphics_modo_pausa = graphics_modo_pausa;
 
-    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa);
+    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa, null);
+  }
+
+  selecciona_actor_o_escena_en_modo_pausa(actor) {
+    this.seleccion = actor;
+    // vuelve a dibujar el canvas por completo.
+    this.actualizar_posicion(this.posicion);
+    this.graphics_modo_pausa.clear();
+
+    this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(this.graphics_modo_pausa, actor);
+
   }
 }

@@ -110,6 +110,9 @@ export default Component.extend({
       this.bus.on(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
       this.bus.on(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
       this.bus.on(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
+
+      this.bus.on(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
+      this.bus.on(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
     };
   },
 
@@ -138,6 +141,8 @@ export default Component.extend({
     this.bus.off(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
     this.bus.off(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
     this.bus.off(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
+    this.bus.off(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
+    this.bus.off(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
   },
 
   convertir_a_boolean(valor) {
@@ -274,6 +279,26 @@ export default Component.extend({
       tipo: "termina_de_reproducir_sonido",
       nombre_del_contexto: this.nombre_del_contexto,
       sonido: sonido
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  selecciona_un_actor_en_modo_pausa(actor) {
+    let data = {
+      tipo: "selecciona_un_actor_en_modo_pausa",
+      nombre_del_contexto: this.nombre_del_contexto,
+      actor
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  selecciona_la_escena_completa_en_modo_pausa() {
+    let data = {
+      tipo: "selecciona_un_actor_en_modo_pausa",
+      nombre_del_contexto: this.nombre_del_contexto,
+      actor: null,
     };
 
     this.contexto.postMessage(data, utils.HOST);
@@ -444,6 +469,11 @@ export default Component.extend({
 
     if (e.data.tipo === "comienza_a_depurar_en_modo_pausa") {
       this.bus.trigger(`${this.nombre_del_contexto}:inicia_modo_depuracion_en_pausa`, e.data);
+      return;
+    }
+
+    if (e.data.tipo === "comienza_el_modo_edicion") {
+      this.bus.trigger(`${this.nombre_del_contexto}:inicia_modo_edicion`, e.data);
       return;
     }
 

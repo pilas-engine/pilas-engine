@@ -1720,7 +1720,7 @@ var Historia = (function () {
             instrumentacion: instrumentacion
         });
     };
-    Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (graphics) {
+    Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (graphics, filtro_actor) {
         var _this = this;
         var cantidad = 60 * 14;
         var historia_reciente = this.fotos.slice(-cantidad);
@@ -1728,6 +1728,11 @@ var Historia = (function () {
         for (var i = 0; i < cantidad_total; i++) {
             var historia = historia_reciente[i];
             historia.actores.map(function (entidad) {
+                if (filtro_actor) {
+                    if (filtro_actor.nombre !== entidad.nombre) {
+                        return;
+                    }
+                }
                 var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y), x = _a.x, y = _a.y;
                 graphics.fillStyle(entidad.id_color, 1);
                 graphics.fillRect(x, y, 2, 2);
@@ -1958,6 +1963,9 @@ var Mensajes = (function () {
     };
     Mensajes.prototype.atender_mensaje_eliminar_actor_desde_el_editor = function (datos) {
         this.pilas.modo.eliminar_actor_por_id(datos.id);
+    };
+    Mensajes.prototype.atender_mensaje_selecciona_un_actor_en_modo_pausa = function (datos) {
+        this.pilas.modo.selecciona_actor_o_escena_en_modo_pausa(datos.actor);
     };
     return Mensajes;
 }());
@@ -3026,6 +3034,7 @@ var ActorBase = (function () {
             hit_activado = this.recorte_activado;
         }
         return {
+            id: this.id,
             nombre: this.nombre,
             tipo: this.tipo,
             x: Math.round(this.x),
@@ -8002,6 +8011,8 @@ var Modo = (function (_super) {
         graphics.fillStyle(0x000000, 1);
         graphics.fillRect(x - 2, y - 2, 4, 4);
     };
+    Modo.prototype.selecciona_actor_o_escena_en_modo_pausa = function (actor) {
+    };
     return Modo;
 }(Phaser.Scene));
 var ModoCargador = (function (_super) {
@@ -8273,6 +8284,7 @@ var ModoEditor = (function (_super) {
         this.conectar_eventos_de_teclado();
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
         this.pilas.game.scale.resize(this.ancho, this.alto);
+        this.pilas.mensajes.emitir_mensaje_al_editor("comienza_el_modo_edicion");
     };
     ModoEditor.prototype.conectar_eventos_de_teclado = function () {
         this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
@@ -9470,7 +9482,7 @@ var ModoPausa = (function (_super) {
         this.posicion = Math.max(this.posicion, 0);
         this.crear_sprites_desde_historia(this.posicion);
         var foto = this.pilas.historia.obtener_foto(this.posicion);
-        var instrumentacion = foto.instrumentacion;
+        var instrumentacion = JSON.parse(JSON.stringify(foto.instrumentacion));
         this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
         this.completar_foto_detallando_actores_nuevos_y_eliminados(foto);
         this.pilas.mensajes.emitir_mensaje_al_editor("aplica_el_cambio_de_posicion_en_el_modo_pausa", { posicion: this.posicion, foto: foto });
@@ -9507,7 +9519,13 @@ var ModoPausa = (function (_super) {
         var graphics_modo_pausa = this.add.graphics();
         graphics_modo_pausa.depth = 190;
         this.graphics_modo_pausa = graphics_modo_pausa;
-        this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa);
+        this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa, null);
+    };
+    ModoPausa.prototype.selecciona_actor_o_escena_en_modo_pausa = function (actor) {
+        this.seleccion = actor;
+        this.actualizar_posicion(this.posicion);
+        this.graphics_modo_pausa.clear();
+        this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(this.graphics_modo_pausa, actor);
     };
     return ModoPausa;
 }(Modo));

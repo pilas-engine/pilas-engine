@@ -19,7 +19,7 @@ class Historia {
     });
   }
 
-  dibujar_puntos_de_las_posiciones_recorridas(graphics) {
+  dibujar_puntos_de_las_posiciones_recorridas(graphics, filtro_actor) {
     let cantidad = 60 * 14;
 
     let historia_reciente = this.fotos.slice(-cantidad);
@@ -29,6 +29,13 @@ class Historia {
       let historia = historia_reciente[i];
 
       historia.actores.map(entidad => {
+
+        if (filtro_actor) {
+          if (filtro_actor.nombre !== entidad.nombre) {
+            return
+          }
+        }
+
         let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
 
         graphics.fillStyle(entidad.id_color, 1);

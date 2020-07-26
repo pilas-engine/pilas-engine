@@ -141,7 +141,7 @@ export default Component.extend({
 
       if (event.source === this.frame && event.data && event.data.updatedCode) {
         if (this.onChange) {
-          this.onChange(event.data.updatedCode);
+          this.onChange(event.data.updatedCode, this.titulo);
         }
       }
 
@@ -187,8 +187,8 @@ export default Component.extend({
     this.bus.on("usar_receta", this, "usar_receta");
     this.bus.on("codigo_ejecutado", this, "codigo_ejecutado");
     this.bus.on("regresa_al_modo_editor", this, "regresa_al_modo_editor");
-    this.bus.on("formatear_y_guardar", this, "formatear_y_guardar")
-    this.bus.on("formatear", this, "formatear")
+    this.bus.on("formatear_y_guardar", this, "formatear_y_guardar");
+    this.bus.on("formatear", this, "formatear");
   },
 
   resaltarLinea(linea) {

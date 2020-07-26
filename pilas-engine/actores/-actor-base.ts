@@ -296,7 +296,7 @@ class ActorBase {
     destino.setOrigin(origen.originX, origen.originY);
   }
 
-  iniciar() {}
+  iniciar() { }
 
   get interactivo() {
     return this.sprite.input.enabled;
@@ -327,7 +327,7 @@ class ActorBase {
     }
   }
 
-  cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any) {}
+  cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any) { }
 
   get area_de_interactividad() {
     let ancho = this.sprite.input.hitArea.width;
@@ -336,7 +336,7 @@ class ActorBase {
     return { ancho, alto };
   }
 
-  set fondo(fondo: string) {}
+  set fondo(fondo: string) { }
 
   serializar() {
     let texto = "";
@@ -379,6 +379,7 @@ class ActorBase {
     }
 
     return {
+      id: this.id,
       nombre: this.nombre,
       tipo: this.tipo,
       x: Math.round(this.x),
@@ -512,7 +513,7 @@ class ActorBase {
     this.automata.estado = estado;
   }
 
-  actualizar() {}
+  actualizar() { }
 
   actualizar_habilidades() {
     this._habilidades.map(h => {
@@ -896,9 +897,9 @@ class ActorBase {
     return this.sprite.flipY;
   }
 
-  cada_segundo(segundos_transcurridos: number) {}
+  cada_segundo(segundos_transcurridos: number) { }
 
-  cuando_transcurre_un_segundo(segundos_transcurridos: number) {}
+  cuando_transcurre_un_segundo(segundos_transcurridos: number) { }
 
   avanzar(rotacion: number = null, velocidad: number = 1) {
     if (rotacion === null) {
@@ -919,7 +920,7 @@ class ActorBase {
     this.sprite.anims.play(nombre_de_la_animacion);
   }
 
-  cuando_finaliza_animacion(animacion: string) {}
+  cuando_finaliza_animacion(animacion: string) { }
 
   set animacion(nombre) {
     if (this._animacion_en_curso !== nombre) {
@@ -940,28 +941,28 @@ class ActorBase {
     return this._animacion_en_curso;
   }
 
-  cuando_comienza_una_colision(actor: Actor) {}
+  cuando_comienza_una_colision(actor: Actor) { }
 
-  cuando_se_mantiene_una_colision(actor: Actor) {}
+  cuando_se_mantiene_una_colision(actor: Actor) { }
 
-  cuando_termina_una_colision(actor: Actor) {}
+  cuando_termina_una_colision(actor: Actor) { }
 
   /**
    * Se llama en todo momento en que se produce una colisión.
    */
-  cuando_colisiona(actor: Actor) {}
+  cuando_colisiona(actor: Actor) { }
 
-  cuando_hace_click(x: number, y: number, evento_original: any) {}
+  cuando_hace_click(x: number, y: number, evento_original: any) { }
 
-  cuando_termina_de_hacer_click(x, y, evento_original) {}
+  cuando_termina_de_hacer_click(x, y, evento_original) { }
 
-  cuando_sale(x, y, evento_original) {}
+  cuando_sale(x, y, evento_original) { }
 
-  cuando_mueve(x, y, evento_original) {}
+  cuando_mueve(x, y, evento_original) { }
 
-  cuando_pulsa_tecla(tecla: string, evento_original: any) {}
+  cuando_pulsa_tecla(tecla: string, evento_original: any) { }
 
-  cuando_suelta_tecla(tecla: string, evento_original: any) {}
+  cuando_suelta_tecla(tecla: string, evento_original: any) { }
 
   get cantidad_de_colisiones() {
     return this.colisiones.length;
@@ -1007,7 +1008,7 @@ class ActorBase {
     return "";
   }
 
-  set fuente(fuente: string) {}
+  set fuente(fuente: string) { }
 
   set figura_ancho(valor: number) {
     throw new Error("No puede definir este atributo");
@@ -1142,7 +1143,7 @@ class ActorBase {
     );
   }
 
-  aumentar(cantidad: number = 1) {}
+  aumentar(cantidad: number = 1) { }
 
   set con_borde(con_borde: boolean) {
     // ver ActorTextoBase.con_borde
@@ -1190,7 +1191,7 @@ class ActorBase {
     }
   }
 
-  cuando_llega_un_mensaje(mensaje: string, datos: any = {}) {}
+  cuando_llega_un_mensaje(mensaje: string, datos: any = {}) { }
 
   /**
    * Envía un mensaje a todos los actores y la escena actual.

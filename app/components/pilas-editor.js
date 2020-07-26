@@ -121,12 +121,27 @@ export default Component.extend({
     this.lista_de_eventos.map(evento => {
       this.bus.on(`${this.nombre_del_contexto}:${evento}`, this, evento);
     });
+
+    this.bus.on("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
+  },
+
+  seleccionaUnActorEnModoPausa(actor) {
+    try {
+      let codigo = this.obtener_codigo_para_el_actor({ nombre: actor.nombre });
+      this.set("codigo", codigo);
+      this.set("tituloDelCodigo", `Código en modo pausa: ${actor.id}`);
+
+    } catch (TypeError) {
+      console.warn("No se puede encontrar el código de este actor", actor);
+    }
   },
 
   desconectar_eventos() {
     this.lista_de_eventos.map(evento => {
       this.bus.off(`${this.nombre_del_contexto}:${evento}`, this, evento);
     });
+
+    this.bus.on("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
   },
 
   duplicar_el_actor_seleccionado() {
@@ -444,6 +459,7 @@ export default Component.extend({
   },
 
   guardar_codigo_en_el_proyecto(seleccion, codigo) {
+
     if (seleccion === 0) {
       this.definir_codigo_para_el_proyecto(codigo);
     } else {
@@ -607,7 +623,14 @@ export default Component.extend({
 
     cuando_termino_de_cargar_monaco_editor() {},
 
-    cuando_cambia_el_codigo(codigo) {
+    cuando_cambia_el_codigo(codigo, titulo) {
+
+      // Cuando cambia el código en el modo pausa se tiene
+      // que ignorar el cambio y no alterar el código del proyecto.
+      if (titulo.includes("modo pausa")) {
+        return;
+      }
+
       if (!this.cargando) {
         this.serviceProyecto.cuando_realiza_un_cambio();
       }
@@ -663,6 +686,12 @@ export default Component.extend({
     },
 
     detener() {
+      // Vuelve a seleccionar el actor o escena actual para que el
+      // editor de código muestre el actor actual. Esto se hace porque
+      // el usuario podría cambiar el texto del editor seleccionando otro
+      // actor mientras está en el modo pausa.
+      this.send("cuandoSelecciona", this.seleccion);
+
       this.set("existe_un_error_reciente", false);
       this.mostrar_la_escena_actual_sobre_pilas();
       this.set("estado", this.estado.detener());
@@ -745,7 +774,9 @@ export default Component.extend({
       if (actor) {
         this.set("instancia_seleccionada", actor);
         this.set("tipo_de_la_instancia_seleccionada", "actor");
+        console.log("actor seleccionado ", actor);
         this.set("codigo", this.obtener_codigo_para_el_actor(actor));
+        //console.log("seleccion", seleccion);
         this.set("tituloDelCodigo", `Código del actor: ${seleccion}`);
 
         this.bus.trigger(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, {

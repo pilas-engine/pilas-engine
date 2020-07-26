@@ -153,4 +153,8 @@ class Mensajes {
   atender_mensaje_eliminar_actor_desde_el_editor(datos) {
     this.pilas.modo.eliminar_actor_por_id(datos.id);
   }
+
+  atender_mensaje_selecciona_un_actor_en_modo_pausa(datos) {
+    this.pilas.modo.selecciona_actor_o_escena_en_modo_pausa(datos.actor);
+  }
 }

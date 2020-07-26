@@ -49,6 +49,8 @@ class ModoEditor extends Modo {
     this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
     this.pilas.game.scale.resize(this.ancho, this.alto);
 
+    this.pilas.mensajes.emitir_mensaje_al_editor("comienza_el_modo_edicion");
+
     // Para que el canvas ocupe toda el area visible deberían ejecutarse
     // estas sentencias.
     //this.pilas.game.scale.scaleMode = Phaser.Scale.RESIZE;

@@ -451,4 +451,8 @@ class Modo extends Phaser.Scene {
     graphics.fillStyle(0x000000, 1);
     graphics.fillRect(x - 2, y - 2, 4, 4);
   }
+
+  // se implementa en ModoPausa
+  selecciona_actor_o_escena_en_modo_pausa(actor) {
+  }
 }
