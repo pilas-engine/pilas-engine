@@ -7,7 +7,9 @@ module("Integration | Component | pilas editor", function(hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function(assert) {
-    this.set("proyecto", {});
+    this.set("proyecto", {
+      modo_de_video: 'pixelart'
+    });
     this.set("ocultarEditor", false);
     this.set("ocultarPropiedades", false);
     this.set("escenaActual", 1);
@@ -15,22 +17,18 @@ module("Integration | Component | pilas editor", function(hooks) {
 
     this.set("recursos", {
       data: {
-        imagenes: [
-          {
-            nombre: "plano",
-            ruta: "imagenes/fondos/plano.png"
-          }
-        ],
-        sonidos: [
-          {
-            nombre: "laser",
-            ruta: "sonidos/laser.mp3"
-          }
-        ]
+        imagenes: [{
+          nombre: "plano",
+          ruta: "imagenes/fondos/plano.png"
+        }],
+        sonidos: [{
+          nombre: "laser",
+          ruta: "sonidos/laser.mp3"
+        }]
       }
     });
 
-    await render(hbs`{{pilas-editor
+    await render(hbs `{{pilas-editor
       recursos=recursos
       proyecto=proyecto
       ocultarEditor=ocultarEditor
