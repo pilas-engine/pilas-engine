@@ -14,7 +14,7 @@ class ModoEditor extends Modo {
     super({ key: "ModoEditor" });
   }
 
-  preload() {}
+  preload() { }
 
   create(datos) {
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
@@ -505,7 +505,7 @@ class ModoEditor extends Modo {
     let indice = this.actores.findIndex(e => e.id === id);
     let actor_a_eliminar = this.actores.splice(indice, 1);
 
-    if (this.actor_seleccionado.id == actor_a_eliminar[0].id) {
+    if (this.actor_seleccionado && this.actor_seleccionado.id == actor_a_eliminar[0].id) {
       this.input.removeDebug(this.actor_seleccionado);
       this.actor_seleccionado = null;
     }
@@ -537,7 +537,7 @@ class ModoEditor extends Modo {
 
     try {
       this.actualizar_posicion_del_minimap_y_el_borde_de_camara(false);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   cambiar_fondo(fondo) {

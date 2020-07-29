@@ -351,6 +351,14 @@ export default Component.extend({
       this.proyecto.codigos.escenas.removeObject(codigo);
     }
 
+    // Elimina los actores de la escena.
+    let nombres_de_actores_a_eliminar = escenaActual.actores.map(n => n.nombre);
+
+    nombres_de_actores_a_eliminar.map(nombre => {
+      let objetoCodigo = this.proyecto.codigos.actores.findBy("nombre", nombre);
+      this.proyecto.codigos.actores.removeObject(objetoCodigo);
+    });
+
     if (this.el_proyecto_no_tiene_escena()) {
       this.send("agregarEscena", this.proyecto);
     } else {

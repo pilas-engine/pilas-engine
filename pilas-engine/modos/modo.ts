@@ -47,7 +47,7 @@ class Modo extends Phaser.Scene {
   destacar_actor_por_id(id) {
     let actor = this.obtener_actor_por_id(id);
 
-    if (actor) {
+    if (actor && actor.destacar) {
       actor.destacar();
     }
   }

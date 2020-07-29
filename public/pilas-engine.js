@@ -7703,7 +7703,7 @@ var Modo = (function (_super) {
     };
     Modo.prototype.destacar_actor_por_id = function (id) {
         var actor = this.obtener_actor_por_id(id);
-        if (actor) {
+        if (actor && actor.destacar) {
             actor.destacar();
         }
     };
@@ -8643,7 +8643,7 @@ var ModoEditor = (function (_super) {
         var _this = this;
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
         var actor_a_eliminar = this.actores.splice(indice, 1);
-        if (this.actor_seleccionado.id == actor_a_eliminar[0].id) {
+        if (this.actor_seleccionado && this.actor_seleccionado.id == actor_a_eliminar[0].id) {
             this.input.removeDebug(this.actor_seleccionado);
             this.actor_seleccionado = null;
         }
