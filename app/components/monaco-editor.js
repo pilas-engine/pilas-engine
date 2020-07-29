@@ -1,8 +1,9 @@
 import { observer } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { later } from "@ember/runloop";
+import { debounce } from '@ember/runloop';
 import Component from "@ember/component";
 import utils from "../utils/utils";
-import { later } from "@ember/runloop";
 
 export default Component.extend({
   classNames: ["monaco-editor", "w-100", "flex1", "flex"],
@@ -141,6 +142,7 @@ export default Component.extend({
 
       if (event.source === this.frame && event.data && event.data.updatedCode) {
         if (this.onChange) {
+          debounce(this, 'analizarErrores', 1000);
           this.onChange(event.data.updatedCode, this.titulo);
         }
       }
@@ -158,6 +160,12 @@ export default Component.extend({
 
     this.set("_subscription", subscription);
     window.addEventListener("message", subscription);
+  },
+
+  analizarErrores() {
+    let errores = this.frame.monaco.editor.getModelMarkers({});
+    let cantidadDeErrores = errores.length;
+    this.cuandoTerminaDeComprobarErrores(cantidadDeErrores);
   },
 
   didInsertElement() {

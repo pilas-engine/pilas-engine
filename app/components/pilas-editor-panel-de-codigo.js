@@ -49,6 +49,10 @@ export default Component.extend({
       } else {
         this.set("panelMaximizado", null);
       }
+    },
+
+    actualizarEstadoDeErrores(cantidadDeErrores) {
+      this.set("tieneErrores", cantidadDeErrores > 0);
     }
   }
 });

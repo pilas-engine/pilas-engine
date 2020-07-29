@@ -37,13 +37,27 @@
 
   </div>
 
-  <div class="unselectable pr2 pb2 flex bg-fondo">
+  <div class="unselectable pr2 pb2 flex bg-fondo items-center">
     <div class="relative">
       {{pilas-editor/boton-receta desactivado=(not estado.puede_editar) tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada}}
     </div>
 
     <div class="flex1">
     </div>
+
+    {{#if tieneErrores}}
+      <div class="flex items-end pv2">
+        <div class="yellow w1 mr1">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div class="f7 tr texto pv1">
+          Cuidado, hay errores en este código.
+        </div>
+      </div>
+    {{/if}}
+
   </div>
 
   {{monaco-editor
@@ -57,5 +71,6 @@
       cuandoCarga=cuando_termino_de_cargar_monaco_editor
       onSave=cuandoGuardaDesdeElEditor
       onChange=cuando_cambia_el_codigo
+      cuandoTerminaDeComprobarErrores=(action "actualizarEstadoDeErrores")
     }}
 </div>
