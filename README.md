@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg)](https://circleci.com/gh/pilas-engine/pilas-engine)
 
 Pilas es un motor para aprender a programar realizando videojuegos, visitá la web
-para obtener más información: 
+para obtener más información:
 
 - http://www.pilas-engine.com.ar
 
@@ -11,6 +11,7 @@ para obtener más información:
 
 ## Artículos y noticias
 
+- [Resumen del sprint 21 (1 de Agosto del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-21/1984)
 - [Resumen del sprint 20 (12 de Julio del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-20/1975)
 - [Resumen del sprint 19 (27 de Junio del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-19/1932)
 - [Resumen del sprint 18 (6 de Junio del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-18/1907)
@@ -46,9 +47,11 @@ para obtener más información:
 ## Primeros pasos
 
 Antes de comenzar, te recomendamos tener en cuenta este video en donde
-explicamos cómo crear el entorno de pilas-engine y hacer algunas tareas básicas: https://www.youtube.com/watch?v=ASKYT7OoLos
+explicamos cómo crear el entorno de pilas-engine y hacer algunas tareas
+básicas: https://www.youtube.com/watch?v=ASKYT7OoLos
 
-También vas a encontrar instrucciones para colaborar aquí: http://manual-pilas-engine.surge.sh/entorno.html
+También vas a encontrar instrucciones para colaborar
+aquí: http://manual-pilas-engine.surge.sh/entorno.html
 
 Para comenzar a utilizar este repositorio deberías tener instalado git, Make, nodejs
 (versión 6 o superior) y ejecutar estos comandos:
@@ -73,7 +76,7 @@ prueba de concepto. Sin embargo, cada vez que hacemos un push a este repositorio
 se ejecutan todos los tests sobre [circle.ci](https://circleci.com/gh/pilas-engine)
 y se realiza una instalación en:
 
-- http://pilas-engine.surge.sh/
+- https://app-dev.pilas-engine.com.ar
 
 Si el push viene acompañado de un número de versión (como tag), también
 se generan los binarios para cada plataforma en esta dirección:
@@ -87,11 +90,6 @@ instalado wine con anterioridad y luego ejecutar `make binarios`:
 brew install wine winetricks
 make binarios
 ```
-
-## Nota
-
-Los binarios de serialport corresponden a la versión de electron v53, y se
-obtuvieron desde: https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/tag/v5.1.0-beta5
 
 ## Estilo de programación
 
