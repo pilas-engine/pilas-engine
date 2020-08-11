@@ -2,9 +2,11 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
+import { setupIntl } from 'ember-intl/test-support';
 
 module("Integration | Component | pilas-inspector/proyecto", function(hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, "es");
 
   test("it renders", async function(assert) {
     this.set("instancia_seleccionada", {
@@ -17,7 +19,7 @@ module("Integration | Component | pilas-inspector/proyecto", function(hooks) {
       escenas: [{ nombre: "demo" }]
     });
 
-    await render(hbs`{{pilas-inspector/proyecto
+    await render(hbs `{{pilas-inspector/proyecto
       instancia_seleccionada=instancia_seleccionada
       escenas=escenas
     }}`);

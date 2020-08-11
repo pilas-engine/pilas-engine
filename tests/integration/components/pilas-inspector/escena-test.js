@@ -2,9 +2,11 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
+import { setupIntl } from 'ember-intl/test-support';
 
 module("Integration | Component | pilas-inspector/escena", function(hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, "es");
 
   test("it renders", async function(assert) {
     this.set("instancia_seleccionada", {
@@ -13,7 +15,7 @@ module("Integration | Component | pilas-inspector/escena", function(hooks) {
       camara_y: 200
     });
 
-    await render(hbs`{{pilas-inspector/escena
+    await render(hbs `{{pilas-inspector/escena
       instancia_seleccionada=instancia_seleccionada
     }}`);
 
