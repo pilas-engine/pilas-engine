@@ -3,9 +3,11 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render, find } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
+import { setupIntl } from 'ember-intl/test-support';
 
 module("Integration | Component | pilas propiedad", function(hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, "es");
 
   test("it renders", async function(assert) {
     let propiedad_rotacion = { propiedad: "rotacion", incremento: 10 };
@@ -19,13 +21,18 @@ module("Integration | Component | pilas propiedad", function(hooks) {
     this.set("objeto", objeto);
 
     await render(
-      hbs`{{pilas-propiedad/numero objeto=objeto propiedad=propiedad}}`
+      hbs `
+        {{pilas-propiedad/numero
+          etiqueta="actor.rotation"
+          objeto=objeto
+          propiedad=propiedad}}`
     );
     assert.ok(find("*").textContent.trim(), "tiene que tener texto");
+
     assert.ok(
       find("*")
-        .textContent.trim()
-        .indexOf("Rotacion") > -1,
+      .textContent.trim()
+      .indexOf("Rotación") > -1,
       "debe aparecer la etiqueta de la propiedad"
     );
   });

@@ -3,11 +3,11 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
+import { setupIntl } from 'ember-intl/test-support';
 
-module("Integration | Component | pilas propiedad/interruptor", function(
-  hooks
-) {
+module("Integration | Component | pilas propiedad/interruptor", function(hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, "es");
 
   test("it renders", async function(assert) {
     let objeto = EmberObject.create({ invertir: true });
@@ -19,12 +19,14 @@ module("Integration | Component | pilas propiedad/interruptor", function(
     this.set("propiedad", propiedad);
     this.set("objeto", objeto);
 
-    await render(hbs`
-      {{pilas-propiedad/interruptor objeto=objeto
+    await render(hbs `
+      {{pilas-propiedad/interruptor
+        etiqueta="nombre"
+        objeto=objeto
         propiedad=propiedad
       }}
       `);
 
-    assert.dom("*").hasText("Invertir");
+    assert.dom("*").hasText("t:nombre:()");
   });
 });
