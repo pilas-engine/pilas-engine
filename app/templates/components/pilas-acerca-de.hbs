@@ -1,0 +1,41 @@
+<div class="vh-100 w-100 dt">
+  <div class="flex flex-column vh-100">
+
+    <div class="bb b--black-10 pa2">
+      {{pilas-boton-regresar}}
+    </div>
+
+    <div class="overflow-auto">
+      <div class="center mw7 ph4 lato lh-copy pb6">
+
+        <h2>{{t "about.title"}}</h2>
+
+        {{#each parrafos as |parrafo|}}
+          <p>{{parrafo}}</p>
+        {{/each}}
+
+        <p class="tc">
+          {{pilas-enjambre-link incluirLogo=true}}
+        </p>
+
+        <p>
+          {{t "about.end"}}
+        </p>
+
+        <ul>
+          <li>{{t "about.web.link"}}: {{#pilas-link url="http://pilas-engine.com.ar"}}pilas-engine.com.ar{{/pilas-link}}</li>
+          <li>{{t "about.forum.link"}}: {{#pilas-link url="http://foro.pilas-engine.com.ar"}}foro.pilas-engine.com.ar{{/pilas-link}}</li>
+        </ul>
+
+        <p class="tc gray pt3">
+          © Hugo Ruscitti
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+  {{outlet}}
+
+</div>

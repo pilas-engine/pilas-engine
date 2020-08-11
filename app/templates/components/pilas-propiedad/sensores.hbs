@@ -15,7 +15,7 @@
 
           <div class="flex items-center flex-end">
 
-            <div class="texto pa2">Nombre</div>
+            <div class="texto pa2">{{t "name"}}</div>
 
             {{pilas-propiedad/nombre-de-sensor
                 sensores=sensores
@@ -70,7 +70,7 @@
 
       <div class="tr pt2">
         <a role="button" {{action "crear_un_sensor"}} class="boton pa2 dib verdana f6 link pointer unselectable truncate">
-          <span>Crear un sensor</span>
+          <span>{{t "actor.new.sensor"}}</span>
         </a>
       </div>
 

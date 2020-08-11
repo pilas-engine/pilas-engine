@@ -5,13 +5,13 @@
 
     {{pilas-boton-regresar confirmar=hay_cambios_por_guardar}}
 
-    {{pilas-boton responsive=true icono="nuevo" desactivado=cargando accion=cuando_crea_un_proyecto demora=0 texto="Nuevo"}}
-    {{pilas-boton responsive=true icono="abrir" desactivado=cargando accion=cuando_abre demora=0 texto="Abrir"}}
+    {{pilas-boton responsive=true icono="nuevo" desactivado=cargando accion=cuando_crea_un_proyecto demora=0 texto=(t "new")}}
+    {{pilas-boton responsive=true icono="abrir" desactivado=cargando accion=cuando_abre demora=0 texto=(t "open")}}
 
     {{#en-electron}}
-      {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=cuando_guarda demora=0 texto="Guardar"}}
+      {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=cuando_guarda demora=0 texto=(t "save")}}
     {{else}}
-      {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=cuando_guarda demora=1 texto="Guardar"}}
+      {{pilas-boton responsive=true icono="guardar" desactivado=cargando accion=cuando_guarda demora=1 texto=(t "save")}}
     {{/en-electron}}
 
     {{pilas-boton-exportar responsive=true proyecto=proyecto desactivado=(not estado.puedeEjecutar)}}

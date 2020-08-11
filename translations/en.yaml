@@ -1,0 +1,138 @@
+home:
+  welcome: ¡Hi!, welcome to Pilas Engine 2
+  editor: Open editor
+  examples: Explore examples
+  manual: Open manual
+  about: About
+  tip.title: Tip
+  tip.text: You can open any project by drag and drop a .pilas file here.
+  sponsor: Sponsored by
+
+return: Return
+edit: Edit
+previous: Previuos
+next: Next
+open.new.window: Open in a new window
+new: New
+open: Open
+save: Save
+export: Export
+animations: Animations
+help: Help
+properties: Properties
+create.scene: Create scene
+create.actor: Create actor
+run: Run
+stop: Stop
+pause: Pause
+save.and.run: Save and run
+code: Code
+warning.code.errors: Warning, there are errors in code.
+recipes: Recipes
+no.recipes: There is no recipes
+select.recipe: Select and actor or scene to see all recipes
+stop.and.back.to.editor: Stop and return to editor
+back.to.editor: Return to editor
+frame: Frame
+quit: ¿Do you want to quit?"
+interpreter:
+  label: Interpeter
+  help: Press run to start to code here
+  entering.run: Entering to runtime mode
+  entering.pause: Entering to pause mode
+  entering.edit: Entering to edit mode
+  scope: You can use the pilas or actores variables.
+
+tooltip:
+  show.shapes: Show the physical shapes
+  show.fps: Show the performance in FPS
+  show.minimap: Show the minimap
+  show.positions: Show the control points of earch actor
+change.image: Change image
+custom.images: Custom images
+images.included: Images included
+
+loading: Loading
+sounds: Sounds
+name: Name
+
+stage:
+  stage: Stage
+  width: Width
+  height: Height
+  camera: Camera
+  camera.x: Camera X
+  camera.y: Camera Y
+  appearance: Appearance
+  background: Background
+  physical.simulation: Physical Simulation
+  gravity.x: Gravity X
+  gravity.y: Gravity Y
+
+actor:
+  active: Active
+  label: Label
+  text: Text
+  font: Font
+  background: Background
+  image: Image
+  position: Position
+  x: X
+  y: Y
+  z: Z
+  behaviors: Behaviors
+  ablities: Abilities
+  transformations: Transformations
+  scale:
+    x: Scale X
+    y: Scale Y
+  rotation: Rotation
+  transparency: Transparency
+  center:
+    x: Center X
+    y: Center Y
+  flip:
+    x: Horizontal Flip
+    y: Vertical Flip
+  physical.simulation: Physical Simulation
+  shape:
+    title: Shape
+    width: Width
+    height: Height
+    ratio: Ratio
+    bounce: Bounce
+    dynamic: Dynamic
+    no.rotation: No rotation
+    is.sensor: Is Sensor?
+  sensors: Sensors
+  sensor: Sensor
+  new.sensor: New sensor
+
+project:
+  video.mode: Video mode
+  main.scene: Main scene
+  performance: Performance
+  size: Size
+
+about:
+  title: ¿What is Pilas Engine?
+  text: |-
+    Pilas is a tool for making video games in a fun and simple way.
+
+    We made this tool for so that young people can discover and learn to program
+    computers. We believe that learning to program video games is something so
+    spectacular that all people should be able to do it. Learn to code lets you
+    take control of computers to invent, share and develop any type of software.
+
+    The interface icons have been created by Icons8, while the game graphics have
+    been created by Walter Velazquez and the kenney project.
+
+    In addition, we are sponsored by EnjambreBit, a company that makes it possible
+    for us to keep developing and improving the tool every day.
+
+  end: |-
+    Visit the PilasEngine web site to learn more about this project, or write to us
+    directly in our message board if you have any questions.
+
+  forum.link: Message board
+  web.link: PilasEngine web site

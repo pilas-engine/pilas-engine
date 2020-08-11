@@ -1,11 +1,13 @@
 <div class="center mw7 mt4 pa2 unselectable">
 
+  {{pilas-selector-de-idioma}}
+
   <div class="tc">
     {{pilas-logo}}
   </div>
 
   <div class="tc lato">
-    <p>¡Hola!, te damos la bienvenida a <strong>Pilas Engine 2</strong></p>
+    <p>{{t "home.welcome"}}</p>
   </div>
 
   <div class="flex flex-column mt4">
@@ -13,7 +15,7 @@
     <div class="flex items-center justify-center">
       {{pilas-boton-principal
           icono="computadora"
-          texto="Abrir el editor"
+          texto=(t "home.editor")
           ruta="editor"
           queryParams=(query-params ruta=null)
           id="abrir-editor"
@@ -21,7 +23,7 @@
 
       {{pilas-boton-principal
           icono="manual"
-          texto="Abrir el manual"
+          texto=(t "home.manual")
           ruta="manual"
         }}
     </div>
@@ -29,23 +31,21 @@
     <div class="flex items-center justify-center">
       {{pilas-boton-principal
           icono="ejemplos"
-          texto="Explorar ejemplos"
+          texto=(t "home.examples")
           ruta="ejemplos"
         }}
 
       {{pilas-boton-principal
           icono="info_squared"
-          texto="Acerca de pilas"
+          texto=(t "home.about")
           ruta="acercade"
         }}
     </div>
 
-
   </div>
 
   <div class="{{clase}} measure center verdana f7 tc lh-copy gray mt4 pa2">
-    <span>Consejo:</span> Podés abrir un proyecto desde tu computadora
-    arrastrando el archivo .pilas aquí.
+    <span>{{t "home.tip.title"}}:</span> {{t "home.tip.text"}}
   </div>
 
 

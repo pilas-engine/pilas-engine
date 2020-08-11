@@ -9,25 +9,27 @@ export default Component.extend({
     propiedades.pushObject({
       tipo: "interruptor",
       propiedad: "activo",
-      nombreCorto: "Activo"
+      etiqueta: "actor.active"
     });
 
     propiedades.pushObject({
       tipo: "cadena",
-      propiedad: "etiqueta"
+      propiedad: "etiqueta",
+      etiqueta: "actor.label"
     });
 
     if (this.get("instancia_seleccionada.es_texto")) {
       propiedades.pushObject({
         tipo: "cadena",
-        propiedad: "texto"
+        propiedad: "texto",
+        etiqueta: "actor.text"
       });
 
       propiedades.pushObject({
         tipo: "combo",
         propiedad: "fuente",
-        opciones: [
-          {
+        etiqueta: "actor.font",
+        opciones: [{
             valor: "color-negro",
             texto: "color-negro"
           },
@@ -65,101 +67,118 @@ export default Component.extend({
       propiedades.pushObject({
         tipo: "imagen",
         propiedad: "fondo",
-        filtroPropuesto: "redimensionable"
+        filtroPropuesto: "redimensionable",
+        etiqueta: "actor.background"
       });
     } else {
       propiedades.pushObject({
         tipo: "imagen",
-        propiedad: "imagen"
+        propiedad: "imagen",
+        etiqueta: "actor.image"
       });
     }
 
-    propiedades.addObjects([
-      {
+    propiedades.addObjects([{
         tipo: "separador",
-        nombre: "Posición"
+        nombre: "Posición",
+        etiqueta: "actor.position"
       },
       {
         tipo: "numero",
         propiedad: "x",
-        intensidad: 1
+        intensidad: 1,
+        etiqueta: "actor.x"
       },
       {
         tipo: "numero",
         propiedad: "y",
-        intensidad: 1
+        intensidad: 1,
+        etiqueta: "actor.y"
       },
       {
         tipo: "numero",
         propiedad: "z",
-        intensidad: 1
+        intensidad: 1,
+        etiqueta: "actor.z"
       },
 
       {
         tipo: "separador",
-        nombre: "Comportamientos iniciales"
+        nombre: "Comportamientos iniciales",
+        etiqueta: "actor.behaviors"
       },
       {
         tipo: "habilidades",
-        propiedad: "habilidades"
+        propiedad: "habilidades",
+        etiqueta: "actor.ablities"
       },
 
       {
         tipo: "separador",
-        nombre: "Transformaciones"
+        nombre: "Transformaciones",
+        etiqueta: "actor.transformations"
       },
       {
         tipo: "numero",
         propiedad: "escala_x",
-        intensidad: 0.01
+        intensidad: 0.01,
+        etiqueta: "actor.scale.x"
       },
       {
         tipo: "numero",
         propiedad: "escala_y",
-        intensidad: 0.01
+        intensidad: 0.01,
+        etiqueta: "actor.scale.y"
       },
       {
         tipo: "numero",
         propiedad: "rotacion",
-        intensidad: 1
+        intensidad: 1,
+        etiqueta: "actor.rotation"
       },
       {
         tipo: "numero",
         propiedad: "transparencia",
         intensidad: 1,
         min: 0,
-        max: 100
+        max: 100,
+        etiqueta: "actor.transparency"
       },
       {
         tipo: "numero",
         propiedad: "centro_x",
-        intensidad: 0.1
+        intensidad: 0.1,
+        etiqueta: "actor.center.x"
       },
       {
         tipo: "numero",
         propiedad: "centro_y",
-        intensidad: 0.1
+        intensidad: 0.1,
+        etiqueta: "actor.center.x"
       },
       {
         tipo: "interruptor",
         propiedad: "espejado",
-        nombreCorto: "Espejado Horizontal"
+        nombreCorto: "Espejado Horizontal",
+        etiqueta: "actor.flip.x"
       },
       {
         tipo: "interruptor",
         propiedad: "espejado_vertical",
-        nombreCorto: "Espejado Vertical"
+        nombreCorto: "Espejado Vertical",
+        etiqueta: "actor.flip.y"
       },
 
       {
         tipo: "separador",
-        nombre: "Simulación física"
+        nombre: "Simulación física",
+        etiqueta: "actor.physical.simulation"
       },
       {
         tipo: "combo",
         propiedad: "figura",
-        opciones: [
-          {
+        etiqueta: "actor.shape.title",
+        opciones: [{
             valor: "",
             texto: "ninguna"
           },
@@ -179,7 +198,8 @@ export default Component.extend({
         nombreCorto: "Ancho",
         intensidad: 1,
         min: 1,
-        max: 1000
+        max: 1000,
+        etiqueta: "actor.shape.width"
       },
       {
         tipo: "numero",
@@ -187,7 +207,8 @@ export default Component.extend({
         nombreCorto: "Alto",
         intensidad: 1,
         min: 1,
-        max: 1000
+        max: 1000,
+        etiqueta: "actor.shape.height"
       },
       {
         tipo: "numero",
@@ -195,7 +216,8 @@ export default Component.extend({
         nombreCorto: "Radio",
         intensidad: 1,
         min: 1,
-        max: 1000
+        max: 1000,
+        etiqueta: "actor.shape.ratio"
       },
       {
         tipo: "numero",
@@ -203,35 +225,39 @@ export default Component.extend({
         nombreCorto: "Rebote",
         intensidad: 0.01,
         min: 0,
-        max: 1.5
+        max: 1.5,
+        etiqueta: "actor.shape.bounce"
       },
       {
         tipo: "interruptor",
         propiedad: "figura_dinamica",
-        nombreCorto: "Dinámica"
+        nombreCorto: "Dinámica",
+        etiqueta: "actor.shape.dynamic"
       },
       {
         tipo: "interruptor",
         propiedad: "figura_sin_rotacion",
-        nombreCorto: "Sin rotación"
+        nombreCorto: "Sin rotación",
+        etiqueta: "actor.shape.no.rotation"
       },
       {
         tipo: "interruptor",
         propiedad: "figura_sensor",
-        nombreCorto: "¿Es sensor?"
+        etiqueta: "actor.shape.is.sensor"
       }
     ]);
 
-    propiedades.addObjects([
-    {
-      tipo: "separador",
-      nombre: "Sensores"
-    },
-    {
-      tipo: "sensores",
-      propiedad: "sensores",
-    }
-  ]);
+    propiedades.addObjects([{
+        tipo: "separador",
+        nombre: "Sensores",
+        etiqueta: "actor.sensors"
+      },
+      {
+        tipo: "sensores",
+        propiedad: "sensores",
+        etiqueta: "actor.sensors"
+      }
+    ]);
 
     this.set("propiedades", propiedades);
   }

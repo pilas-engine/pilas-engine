@@ -1,0 +1,138 @@
+home:
+  welcome: ¡Hola!, te damos la bienvenida a Pilas Engine 2
+  editor: Abrir el editor
+  examples: Explorar ejemplos
+  manual: Abrir el manual
+  about: Acerca de pilas
+  tip.title: Consejo
+  tip.text: Podés abrir un proyecto desde tu computadora arrastrando el archivo .pilas aquí.
+  sponsor: Patrocinado por
+
+return: Volver
+edit: Editar
+previous: Anterior
+next: Siguiente
+open.new.window: Abrir en una ventana nueva
+new: Nuevo
+open: Abrir
+save: Guardar
+export: Exportar
+animations: Animaciones
+help: Ayuda
+properties: Propiedades
+create.scene: Crear escena
+create.actor: Crear actor
+run: Ejecutar
+stop: Detener
+pause: Pausar
+save.and.run: Guardar y ejecutar
+code: Código
+warning.code.errors: Cuidado, hay errores en el código.
+recipes: Recetas
+no.recipes: No hay recetas que coincidan con esta búsqueda.
+select.recipe: Seleccioná un actor o una escena para ver recetas.
+stop.and.back.to.editor: Detener y volver al editor
+back.to.editor: Volver al editor
+frame: Cuadro
+quit: ¿Realmente quieres salir?"
+interpreter:
+  label: Intérprete
+  help: Pulsá ejecutar para escribir comandos
+  entering.run: Ingresando en modo ejecución
+  entering.pause: Ingresando en modo pausa
+  entering.edit: Ingresando en modo edición
+  scope: Puedes usar las variables pilas o actores.
+
+tooltip:
+  show.shapes: Muestra las figuras físicas
+  show.fps: Muestra el rendimiento en cuadros por segundo (FPS)
+  show.minimap: Muestra el minimapa
+  show.positions: Marca los puntos de control de cada actor
+change.image: Cambiar imagen
+custom.images: Imágenes personalizadas
+images.included: Imágenes incluídas en pilas
+
+loading: Comenzando
+sounds: Sonidos
+name: Nombre
+
+stage:
+  stage: Escenario
+  width: Ancho
+  height: Alto
+  camera: Cámara
+  camera.x: Cámara X
+  camera.y: Cámara Y
+  appearance: Apariencia
+  background: Fondo
+  physical.simulation: Simulación Física
+  gravity.x: Gravedad X
+  gravity.y: Gravedad Y
+
+actor:
+  active: Activo
+  label: Etiqueta
+  text: Texto
+  font: Fuente
+  background: Fondo
+  image: Imagen
+  position: Posición
+  x: X
+  y: Y
+  z: Z
+  behaviors: Comportamientos inciales
+  ablities: Habilidades
+  transformations: Transformaciones
+  scale:
+    x: Escala X
+    y: Escala Y
+  rotation: Rotación
+  transparency: Transparencia
+  center:
+    x: Centro X
+    y: Centro Y
+  flip:
+    x: Espejado Horizontal
+    y: Espejado Vertical
+  physical.simulation: Simulación Física
+  shape:
+    title: Figura
+    width: Ancho
+    height: Alto
+    ratio: Radio
+    bounce: Rebote
+    dynamic: Dinámica
+    no.rotation: Sin rotación
+    is.sensor: ¿Es sensor?
+  sensors: Sensores
+  sensor: Sensor
+  new.sensor: Crear un sensor
+
+project:
+  video.mode: Modo de video
+  main.scene: Escena inicial
+  performance: Rendimiento
+  size: Tamaño
+
+about:
+  title: ¿Qué es Pilas Engine?
+  text: |-
+    Pilas es una herramienta para construir videojuegos de manera sencilla y divertida.
+
+    Ideamos esta herramienta para que los jóvenes puedan descubrir y aprender a programar
+    computadoras. Creemos que aprender a programar videojuegos es algo tan espectacular que todas
+    las personas deberían tener la posibilidad de hacerlo. Programar te permite tomar el control de
+    las computadoras para inventar, compartir y desarrollar cualquier tipo de software.
+
+    Los íconos de la interfaz han sido creados por Icons8, mientras que los gráficos de juegos de
+    incluidos han sido desarrollados por Walter Velazquez y el proyecto kenney.
+
+    Además, contamos con el patrocinio de EnjambreBit, una empresa que hace posible que podamos
+    seguir desarrollando y mejorando la herramienta día a día.
+
+  end: |-
+    Visitá el sitio de PilasEngine para conocer más sobre acerca de este proyecto, o
+    escribinos directamente en en nuestro foro de mensajes si te surge alguna duda.
+
+  forum.link: Foro de mensajes
+  web.link: Sitio de PilasEngine

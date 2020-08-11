@@ -1,13 +1,13 @@
 {{yield}}
 
 {{#if anterior}}
-  {{#link-to "ejemplos.ver" anterior  class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}Anterior{{/link-to}}
+  {{#link-to "ejemplos.ver" anterior  class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{t "previous"}}{{/link-to}}
 {{else}}
-  {{#link-to "ejemplos" class="disabled o-50 ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}Anterior{{/link-to}}
+  {{#link-to "ejemplos" class="disabled o-50 ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{t "previous"}}{{/link-to}}
 {{/if}}
 
 {{#if siguiente}}
-  {{#link-to "ejemplos.ver" siguiente class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}Siguiente{{/link-to}}
+  {{#link-to "ejemplos.ver" siguiente class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{t "next"}}{{/link-to}}
 {{else}}
-  {{#link-to "ejemplos" class="disabled o-50 ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}Siguiente{{/link-to}}
+  {{#link-to "ejemplos" class="disabled o-50 ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{t "next"}}{{/link-to}}
 {{/if}}

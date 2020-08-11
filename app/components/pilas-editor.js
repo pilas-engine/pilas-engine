@@ -17,6 +17,7 @@ import { later } from "@ember/runloop";
 export default Component.extend({
   bus: service(),
   log: service(),
+  intl: service(),
   memento: service(),
   compilador: service(),
   recursos: service(),
@@ -686,8 +687,8 @@ export default Component.extend({
         this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
 
         this.log.limpiar();
-        this.log.info("Ingresando en modo ejecución");
-        this.log.info("Puedes usar las variables pilas o actores.");
+        this.log.info(this.intl.t("interpreter.entering.run"));
+        this.log.info(this.intl.t("interpreter.scope"));
 
       }, 10)
 
@@ -705,7 +706,7 @@ export default Component.extend({
       this.set("estado", this.estado.detener());
       this.bus.trigger("hacerFocoEnElEditor", {});
       this.log.limpiar();
-      this.log.info("Ingresando al modo edición");
+      this.log.info(this.intl.t("interpreter.entering.edit"));
       this.bus.trigger("regresa_al_modo_editor");
     },
 
@@ -715,7 +716,7 @@ export default Component.extend({
       this.bus.trigger(`${this.nombre_del_contexto}:pausar_escena`, {});
       this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
       this.log.limpiar();
-      this.log.info("Ingresando en modo pausa");
+      this.log.info(this.intl.t("interpreter.entering.pause"));
     },
 
     deshacer() {

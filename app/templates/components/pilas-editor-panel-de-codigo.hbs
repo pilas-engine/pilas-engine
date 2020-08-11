@@ -1,8 +1,8 @@
 <div class="{{if maximizar "dn"}} {{claseDelPanelColapsado}} bl borde pl2 pa2">
   {{pilas-boton-para-colapsar-panel dataTest="boton-abrir-panel-de-codigo" variable=mostrarEditor}}
   <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
-    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor">
-      CÓDIGO
+    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor ttu">
+      {{t "code"}}
     </div>
   </div>
 </div>
@@ -16,8 +16,8 @@
       <div class="flex items-center">
         {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
 
-        <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarEditor"}} role="button">
-          CÓDIGO
+        <div class="f7 unselectable texto pl2 dib ttu" {{action "alternar" "mostrarEditor"}} role="button">
+          {{t "code"}}
         </div>
       </div>
 
@@ -26,7 +26,7 @@
 
     <div class="pt2 pr2">
       {{#if maximizar}}
-        {{#pilas-boton-miniatura-pulsable accion=cuandoGuardaDesdeElEditor}}Guardar y ejecutar <span class="atajo">CTRL+S</span>{{/pilas-boton-miniatura-pulsable}}
+        {{#pilas-boton-miniatura-pulsable accion=cuandoGuardaDesdeElEditor}}{{t "save.and.run"}} <span class="atajo">CTRL+S</span>{{/pilas-boton-miniatura-pulsable}}
       {{/if}}
     </div>
 
@@ -53,7 +53,7 @@
           </svg>
         </div>
         <div class="f7 tr texto pv1">
-          Cuidado, hay errores en este código.
+          {{t "warning.code.errors"}}
         </div>
       </div>
     {{/if}}

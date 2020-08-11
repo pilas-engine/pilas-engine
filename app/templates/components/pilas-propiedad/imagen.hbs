@@ -3,7 +3,7 @@
   <div class="w-50">
 
     <div class="dib texto">
-      {{etiqueta propiedad.propiedad}}
+      {{t etiqueta}}
     </div>
 
   </div>
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  {{#pilas-modal alCerrar=(action "ocultar") visible=mostrar id="dialogo_cambiar_imagen" titulo="Cambiar imagen"}}
+  {{#pilas-modal alCerrar=(action "ocultar") visible=mostrar id="dialogo_cambiar_imagen" titulo=(t "change.image")}}
     <div>
       {{pilas-grilla-de-imagenes filtro=filtroPropuesto cuando_selecciona=(action "cuando_selecciona_imagen")}}
     </div>

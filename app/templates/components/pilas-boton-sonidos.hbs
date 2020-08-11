@@ -1,7 +1,7 @@
 {{yield}}
 
-{{pilas-boton responsive=true icono="sonidos" desactivado=desactivado accion=(action "abrirModal") texto="Sonidos"}}
+{{pilas-boton responsive=true icono="sonidos" desactivado=desactivado accion=(action "abrirModal") texto=(t "sounds")}}
 
-{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoSonidos" titulo="Sonidos"}}
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoSonidos" titulo=(t "sounds")}}
   {{pilas-gestor-de-sonidos proyecto=proyecto pixelart=pixelart}}
 {{/pilas-modal}}

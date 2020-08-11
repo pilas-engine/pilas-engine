@@ -4,6 +4,7 @@ import ENV from "pilas-engine/config/environment";
 
 export default Route.extend({
   serviceProyecto: service("proyecto"),
+  intl: service(),
 
   model() {
     return this.paramsFor("application");
@@ -28,7 +29,7 @@ export default Route.extend({
       }
 
       if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
-        if (window.confirm("¿Realmente quieres salir?")) {
+        if (window.confirm(this.intl.t("quit"))) {
           return true;
         } else {
           transition.abort();

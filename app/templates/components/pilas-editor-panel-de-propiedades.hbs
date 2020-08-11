@@ -2,8 +2,8 @@
 <div class={{if mostrarPropiedades "dn" "flex flex-column w-panel-colapsado borde br pa2"}}>
   {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
   <div class="relative">
-    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-de-escenas" {{action "alternar" "mostrarPropiedades"}} role="button">
-      PROPIEDADES
+    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-de-escenas ttu" {{action "alternar" "mostrarPropiedades"}} role="button">
+      {{t "properties"}}
     </div>
   </div>
 </div>
@@ -13,13 +13,13 @@
   <div class="texto pb2">
     {{pilas-boton-para-colapsar-panel variable=mostrarPropiedades}}
 
-    <div class="f7 unselectable texto pl2 dib" {{action "alternar" "mostrarPropiedades"}} role="button">
-      PROPIEDADES
+    <div class="f7 unselectable texto pl2 dib ttu" {{action "alternar" "mostrarPropiedades"}} role="button">
+      {{t "properties"}}
     </div>
   </div>
 
   <div class="unselectable">
-    {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=agregar_escena texto="Crear Escena"}}
+    {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=agregar_escena texto=(t "create.scene")}}
     {{pilas-crear-actor icono="actor" desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=agregar_actor modalVisible=mostrarModalCreacionDeActor}}
   </div>
 

@@ -1,6 +1,7 @@
 {{pilas-propiedad/nombre
     es_actor=true
     cuando_cambia=cuando_cambia_un_nombre_de_actor
+    etiqueta="nombre"
     objeto=instancia_seleccionada
     nombre=instancia_seleccionada.nombre}}
 
@@ -15,6 +16,7 @@
           max=propiedad.max
           propiedad=propiedad intensidad=propiedad.intensidad
           modificarAtributo=cuando_modifica_atributo_de_actor
+          etiqueta=propiedad.etiqueta
         }}
 
     {{else if (eq propiedad.tipo "interruptor")}}
@@ -22,6 +24,7 @@
       {{pilas-propiedad/interruptor objeto=instancia_seleccionada
           propiedad=propiedad
           modificarAtributo=cuando_modifica_atributo_de_actor
+          etiqueta=propiedad.etiqueta
       }}
 
     {{else if (eq propiedad.tipo "combo")}}
@@ -30,6 +33,7 @@
           opciones=propiedad.opciones
           propiedad=propiedad
           modificarAtributo=cuando_modifica_atributo_de_actor
+          etiqueta=propiedad.etiqueta
         }}
 
     {{else if (eq propiedad.tipo "cadena")}}
@@ -37,6 +41,7 @@
       {{pilas-propiedad/cadena objeto=instancia_seleccionada
           propiedad=propiedad
           modificarAtributo=cuando_modifica_atributo_de_actor
+          etiqueta=propiedad.etiqueta
         }}
 
     {{else if (eq propiedad.tipo "imagen")}}
@@ -45,6 +50,7 @@
           propiedad=propiedad
           filtroPropuesto=propiedad.filtroPropuesto
           modificarAtributo=cuando_modifica_atributo_de_actor
+          etiqueta=propiedad.etiqueta
         }}
 
     {{else if (eq propiedad.tipo "habilidades")}}
@@ -52,11 +58,14 @@
       {{pilas-propiedad/habilidades objeto=instancia_seleccionada
           propiedad=propiedad
           modificarAtributo=cuando_modifica_atributo_de_actor
+          etiqueta=propiedad.etiqueta
         }}
 
     {{else if (eq propiedad.tipo "separador")}}
 
-      {{pilas-propiedad/separador propiedad=propiedad}}
+      {{pilas-propiedad/separador
+        etiqueta=propiedad.etiqueta
+        propiedad=propiedad}}
 
     {{else if (eq propiedad.tipo "sensores")}}
 
@@ -64,6 +73,7 @@
           id=instancia_seleccionada.id
           objeto=instancia_seleccionada
           propiedad=propiedad
+          etiqueta=propiedad.etiqueta
           modificarAtributo=cuando_modifica_atributo_de_actor
         }}
 

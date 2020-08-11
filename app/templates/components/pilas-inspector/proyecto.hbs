@@ -2,7 +2,7 @@
   {{pilas-propiedad/combo
       objeto=instancia_seleccionada
       opciones=resoluciones
-      titulo="Tamaño"
+      titulo=(t "project.size")
       valor=(get instancia_seleccionada "tamaño")
       modificarAtributo=(action "cuando_cambia_resolucion")
   }}
@@ -12,7 +12,7 @@
   {{pilas-propiedad/combo
       objeto=instancia_seleccionada
       opciones=opciones_de_rendimiento
-      titulo="Rendimiento"
+      titulo=(t "project.performance")
       valor=(get instancia_seleccionada "fps")
       modificarAtributo=(action "cuando_cambia_rendimiento")
   }}
@@ -22,7 +22,7 @@
   {{pilas-propiedad/combo
       objeto=instancia_seleccionada
       opciones=lista_de_escenas
-      titulo="Escena inicial"
+      titulo=(t "project.main.scene")
       valor=(get instancia_seleccionada "nombre_de_la_escena_inicial")
       modificarAtributo=(action "cuando_cambia_escena_inicial")
   }}
@@ -32,7 +32,7 @@
   {{pilas-propiedad/combo
       objeto=instancia_seleccionada
       opciones=lista_de_modos
-      titulo="Modo de video"
+      titulo=(t "project.video.mode")
       valor=(get instancia_seleccionada "modo_de_video")
       modificarAtributo=(action "cuando_cambia_el_modo_de_video")
   }}

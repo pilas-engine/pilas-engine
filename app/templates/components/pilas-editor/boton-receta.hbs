@@ -1,11 +1,9 @@
 {{#basic-dropdown onOpen=(action "cuando_abre") as |dd|}}
   {{#if desactivado}}
-    {{pilas-boton id="receta" extraClass="" desactivado=desactivado
-                    texto="Recetas" responsive=true icono="receta"}}
+    {{pilas-boton id="receta" extraClass="" desactivado=desactivado texto=(t "recipes") responsive=true icono="receta"}}
   {{else}}
     {{#dd.trigger}}
-      {{pilas-boton id="receta" extraClass="" desactivado=desactivado
-                    texto="Recetas" responsive=true icono="receta"}}
+      {{pilas-boton id="receta" extraClass="" desactivado=desactivado texto=(t "recipes") responsive=true icono="receta"}}
     {{/dd.trigger}}
   {{/if}}
 
@@ -26,13 +24,13 @@
         {{/if}}
       {{else}}
         <div class="pa2 texto f6 truncate">
-          No hay recetas que coincidan con esta búsqueda.
+          {{t "no.recipes"}}
         </div>
       {{/each}}
 
       {{#if es_proyecto}}
         <div class="pa2 texto f6 truncate">
-          Seleccioná un actor o una escena para ver recetas.
+          {{t "select.recipe"}}
         </div>
       {{/if}}
     </div>

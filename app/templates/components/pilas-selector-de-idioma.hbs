@@ -1,0 +1,16 @@
+{{yield}}
+
+<div class="fixed top-1 right-1 verdana flex f7 gray">
+  <div class="{{if (eq seleccion "es") "black"}} pa1 hover-bg-black-10 br2 pointer" {{action "definirIdioma" "es"}}role="button">
+    ES
+  </div>
+
+  <div class="{{if (eq seleccion "en") "black"}} pa1 hover-bg-black-10 br2 pointer" {{action "definirIdioma" "en"}}role="button">
+    EN
+  </div>
+
+  <div class="{{if (eq seleccion "cn") "black"}} pa1 hover-bg-black-10 br2 pointer" {{action "definirIdioma" "cn"}}role="button">
+    CN
+  </div>
+
+</div>

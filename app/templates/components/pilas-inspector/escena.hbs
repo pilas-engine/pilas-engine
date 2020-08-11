@@ -11,6 +11,7 @@
     {{#if (eq propiedad.tipo "numero")}}
 
       {{pilas-propiedad/numero objeto=instancia_seleccionada
+          etiqueta=propiedad.etiqueta
           min=propiedad.min
           max=propiedad.max
           propiedad=propiedad intensidad=propiedad.intensidad
@@ -19,13 +20,16 @@
     {{else if (eq propiedad.tipo "imagen")}}
 
       {{pilas-propiedad/imagen objeto=instancia_seleccionada
+          etiqueta=propiedad.etiqueta
           propiedad=propiedad
           filtroPropuesto=propiedad.filtroPropuesto
           modificarAtributo=cuando_modifica_atributo_de_escena}}
 
     {{else if (eq propiedad.tipo "separador")}}
 
-      {{pilas-propiedad/separador propiedad=propiedad}}
+      {{pilas-propiedad/separador
+        etiqueta=propiedad.etiqueta
+        propiedad=propiedad}}
 
     {{else}}
 

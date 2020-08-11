@@ -9,6 +9,7 @@ export default Route.extend({
   actores: service(),
   estadisticas: service(),
   recursos: service(),
+  intl: service(),
 
   model() {
     this.electron.iniciar();
@@ -20,13 +21,11 @@ export default Route.extend({
       actores: this.actores.iniciar(),
       recursos: this.recursos.iniciar()
     });
+  },
+
+  beforeModel() {
+    this._super(...arguments);
+    this.intl.setLocale(['es']);
   }
 
-  /*
-  TODO: activar este código para precargar imágenes antes de iniciar el editor.
-
-  afterModel() {
-    return $().get(`${config.rootURL}spritesheet.png`);
-  }
-  */
 });

@@ -1,9 +1,9 @@
 {{yield}}
 
-{{pilas-boton icono=icono desactivado=desactivado accion=(action "abrirModal") texto="Crear actor"}}
+{{pilas-boton icono=icono desactivado=desactivado accion=(action "abrirModal") texto=(t "create.actor")}}
 
 
-{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoCrearActor" titulo="Agregar un actor a la escena"}}
+{{#pilas-modal alCerrar=(action "ocultar") visible=modalVisible id="dialogoCrearActor" titulo=(t "create.actor")}}
   <div>
 
     {{#if tarea.isRunning}}
