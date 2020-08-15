@@ -1,2 +1,134 @@
 home:
-  welcome: 您好，这是一个示例文本
+  welcome: 你好，欢迎来到Pilas Engine 2
+  editor: 打开编辑器
+  examples: 探索实例
+  manual: 打开手册
+  about: 关于Pilas
+  tip.title: 理事会
+  tip.text: 你可以通过把.pilas文件从电脑上拖动到这儿来打开一个项目。
+  sponsor: 赞助者
+
+return: 返回
+edit: 编辑
+previous: 上一个
+next: 下一个
+open.new.window: 在新窗口中打开
+new: 新建
+open: 打开
+save: 保存
+export: 出口
+animations: 动画
+help: 帮助
+properties: 属性
+create.scene: 创建一个场景
+create.actor: 创建一个演员
+run: 执行
+stop: 停止
+pause: 暂停
+save.and.run: 保存并运行
+code: 代码
+warning.code.errors: 警告，代码中存在错误。
+recipes: 方法
+no.recipes: 没有符合此搜索的方法。
+select.recipe: 选择一个演员或一个场景来查看方法。
+stop.and.back.to.editor: 停下来，回到编辑那里
+back.to.editor: 返回编辑
+frame: 列表
+quit: 你真的要退出吗？"
+interpreter:
+  label: 口译员
+  help: 按执行键输入命令
+  entering.run: 进入运行模式
+  entering.pause: 进入暂停模式
+  entering.edit: 进入编辑模式
+  scope: 你可以使用可变电池或演员。
+
+tooltip:
+  show.shapes: 它显示了物理数据
+  show.fps: 以每秒帧数（FPS）为单位显示性能。
+  show.minimap: 显示小地图
+  show.positions: 标记每个演员的控制点
+change.image: 更改图像
+custom.images: 自定义图像
+images.included: 包含在Pilas中的图像
+
+loading: 开始于
+sounds: 声音
+name: 名称
+
+stage:
+  stage: 场景
+  width: 宽度
+  height: 高度
+  camera: 摄像机
+  camera.x: 摄像机 X
+  camera.y: 摄像机 Y
+  appearance: 外观
+  background: 背景
+  physical.simulation: 物理仿真
+  gravity.x: 重力 X
+  gravity.y: 重力 Y
+
+actor:
+  active: 活动
+  label: 标签
+  text: 文本
+  font: 字体
+  background: 背景
+  image: 图像
+  position: 位置
+  x: X
+  y: Y
+  z: Z
+  behaviors: 初始行为
+  ablities: 技能
+  transformations: 变换
+  scale:
+    x: 比例尺 X
+    y: 比例尺 Y
+  rotation: 旋转
+  transparency: 透明度
+  center:
+    x: 中心 X
+    y: 中心 Y
+  flip:
+    x: 水平
+    y: 竖直
+  physical.simulation: 物理仿真
+  shape:
+    title: 图
+    width: 宽度
+    height: 高度
+    ratio: 比率
+    bounce: 反弹
+    dynamic: 动力性
+    no.rotation: 无旋转
+    is.sensor: 是传感器吗？
+  sensors: 传感器
+  sensor: 传感器
+  new.sensor: 创建一个传感器
+
+project:
+  video.mode: 视频模式
+  main.scene: 主场景
+  performance: 性能
+  size: 大小
+
+about:
+  title: 什么是Pilas引擎？
+  text: |-
+    Pilas是以简单而有趣的方式构建视频游戏的工具。
+    我们设计了这个工具，让年轻人能够发现和学习如何编程。
+    计算机。我们认为，学习电子游戏编程是一件非常壮观的事情，所有
+    人们应该能够做到这一点。编程允许你控制
+    计算机来发明、分享和开发任何一种软件。
+    界面图标是由Icons8制作的，而游戏画面则是由Icons8制作的。
+    包括由Walter Velazquez和Kenney项目开发的。
+    此外，我们还得到了EnjambreBit公司的赞助，该公司使我们有可能实现以下目标
+    继续每天开发和改进该工具。
+    中文翻译由街头艺术家工作室提供，如有不恰当的地方，请联系QQ494033201。
+  end: |-
+    访问PilasEngine网站以了解更多关于这个项目的信息，或
+    如果您有任何问题，请直接在我们的留言板上给我们写信。
+  forum.link: 留言板
+  web.link: PilasEngine网站
