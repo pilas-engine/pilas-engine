@@ -8,6 +8,7 @@ export default Component.extend({
 
   didInsertElement() {
     this.set("seleccion", this.intl.locale[0]);
+    this.set("idiomas", ["es", "en", "zh"])
   },
 
   actions: {
