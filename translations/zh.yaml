@@ -1,12 +1,12 @@
 home:
-  welcome: 你好，欢迎来到Pilas Engine 2
+  welcome: 你好，欢迎使用Pilas Engine 2
   editor: 打开编辑器
   examples: 探索实例
   manual: 打开手册
   about: 关于Pilas
-  tip.title: 理事会
-  tip.text: 你可以通过把.pilas文件从电脑上拖动到这儿来打开一个项目。
-  sponsor: 赞助者
+  tip.title: 提示
+  tip.text: 你可以通过从电脑上拖动.pilas文件到这儿来打开一个项目。
+  sponsor: 赞助方
 
 return: 返回
 edit: 编辑
@@ -31,12 +31,12 @@ warning.code.errors: 警告，代码中存在错误。
 recipes: 方法
 no.recipes: 没有符合此搜索的方法。
 select.recipe: 选择一个演员或一个场景来查看方法。
-stop.and.back.to.editor: 停下来，回到编辑那里
+stop.and.back.to.editor: 停止，回到编辑
 back.to.editor: 返回编辑
 frame: 列表
 quit: 你真的要退出吗？"
 interpreter:
-  label: 口译员
+  label: 终端
   help: 按执行键输入命令
   entering.run: 进入运行模式
   entering.pause: 进入暂停模式
@@ -44,7 +44,7 @@ interpreter:
   scope: 你可以使用可变电池或演员。
 
 tooltip:
-  show.shapes: 它显示了物理数据
+  show.shapes: 显示了物理数据
   show.fps: 以每秒帧数（FPS）为单位显示性能。
   show.minimap: 显示小地图
   show.positions: 标记每个演员的控制点
