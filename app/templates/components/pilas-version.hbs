@@ -5,9 +5,9 @@
   </div>
 
   {{#if enDesarrollo}}
-    versión en desarrollo
+    {{t "versions.development"}}
     <br>
-    <a class="f7 link gray" href="https://github.com/pilas-engine/pilas-engine/commits/master" target="_blank" rel="noopener">{{version}} (más información)</a>
+    <a class="f7 link gray" href="https://github.com/pilas-engine/pilas-engine/commits/master" target="_blank" rel="noopener">{{version}} ({{t "versions.more.info"}})</a>
   {{else}}
     {{version_simplificada}}
   {{/if}}
@@ -15,16 +15,16 @@
   <div class="w1 dib pt1">
 
     {{#if consultando}}
-      {{#pilas-tooltip class="w4" texto="Buscando versiones nuevas ..."}}
+      {{#pilas-tooltip class="w4" texto=(t "versions.searching")}}
         {{pilas-spinner}}
       {{/pilas-tooltip}}
     {{else}}
       {{#if actualizada}}
-        {{#pilas-tooltip class="w4" texto="Tienes la versión más nueva de pilas."}}
+        {{#pilas-tooltip class="w4" texto=(t "versions.updated")}}
           {{pilas-mini-icono icono="actualizada"}}
         {{/pilas-tooltip}}
       {{else}}
-        {{#pilas-tooltip class="right-1 w4" texto="Hay una versión nueva para descargar desde www.pilas-enginee.com.ar."}}
+        {{#pilas-tooltip class="right-1 w4" texto=(t "versions.new")}}
           <div class="red dib">
             {{pilas-mini-icono icono="desactualizada"}}
           </div>

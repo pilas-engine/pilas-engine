@@ -41,6 +41,7 @@ const queryParams = new QueryParams({
 export default Controller.extend(queryParams.Mixin, {
   proyecto: null,
   bus: service(),
+  intl: service(),
   ejemplos: service(),
   electron: service(),
   router: service(),
@@ -162,7 +163,7 @@ export default Controller.extend(queryParams.Mixin, {
           var file = e.target.files[0];
 
           if (file.name.indexOf(".pilas") === -1) {
-            alert("Solo puede abrir con extensión .pilas");
+            alert(this.intl.t("only.pilas.files"));
           } else {
             const reader = new FileReader();
             reader.onload = event => {

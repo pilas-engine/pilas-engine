@@ -16,8 +16,6 @@ open.new.window: Open in a new window
 new: New
 open: Open
 save: Save
-export: Export
-animations: Animations
 help: Help
 properties: Properties
 create.scene: Create scene
@@ -136,3 +134,116 @@ about:
 
   forum.link: Message board
   web.link: PilasEngine web site
+
+
+import.image: Image import
+error:
+  title: Ups, an error occurred.
+  detail: See the browser console to see more details.
+
+app:
+  loading: Project loading ...
+  opening: Opening project ... 
+
+animations:
+  title: Animations
+  create: Crear a new animation
+  remove.button: Animation remove
+  remove.title: Do you really want to delete this animation?
+  name: Name
+  fps: Frames per second
+  play: Play
+  pause: Pause
+  zoom: Zoom
+  edit: Edit
+  help: Help
+  how.to.use: enter this code to play this animation
+  edit.title: Edit animation
+
+tile.size: Tile size
+zoom.adjust: Adjust
+zoom.tooltip: Editor zoom
+
+versions:
+  development: development version
+  more.info: more information
+  searching: Searching for updates ...
+  updated: There is a new version to download.
+  new: Ther is a new version to download from www.pilas-engine.com.ar
+
+
+
+yes: Yes
+no: No
+
+manual:
+  title: Manual
+  functions: Index of functions
+  shortcuts: Keyboard shortcuts
+
+settings:
+  dark.mode: Dark mode
+  allow.pause: Allow pause mode
+  text.size: Font size
+  vim.mode: VIM mode (experimental)
+
+delete: Delete
+no.undo: This action can't be undone
+export:
+  index: Export
+  title: Export project
+  choice.title: There are two ways to export a project
+  choice.question: Which one would you like to use?
+  zip: Export as zip
+  web: Export and publish in the web
+  include.source: Include source code
+  manual: See documentation about how to publish games
+  close: Close
+audio:
+  load.sound: Upload an mp3 file
+  help: Help
+  use.sound: enter this code to use this sound in a game
+  play.music: enter this code if you want to loop this sound it like a music
+  stop.music: and enter this code to stop the music
+  format: Keep in mind that sound files must should be less than 200kb, and must be MP3 format only.
+
+menu:
+  duplicate.actor: Double this actor
+  duplicate.actor.x5: Duplicate 5 times
+  delete:
+    title: Do you really want to remove this actor?
+  move: Move to another scene
+  move.to: Move to
+  move.to.new.scene: Move to a new scene
+
+
+exit:
+  title: You are about to leave without saving
+  question: You want to do?
+  confirm: Get out anyway
+  cancel: Cancel, and return to editor
+
+cancel: Cancel
+ok: OK
+actors.in.scene.counter: Scene whit {count} actors
+fsm:
+  name: Enter the state's name
+  create: New state
+panel:
+  project: Project
+  no.scenes: No scenes
+  no.actors: No actors
+  remove.scene: Do you really want to remove this scene?
+to.delete: It will deleted
+validations:
+  name.exists: Error, name exists
+  not.empty: Error, can't be empty
+  invalid: Error, invalid name
+server:
+  starting: Starting web server ...
+  stoping: Stoping web server ...
+  stop: Stop web server
+  start: Start web server
+
+undo: Undo
+only.pilas.files: You can only open .pilas files

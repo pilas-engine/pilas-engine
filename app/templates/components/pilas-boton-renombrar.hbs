@@ -20,8 +20,8 @@
       <div class="flex1"></div>
 
       <div class="">
-        <button class="boton" {{action "ocultar"}}>Cancelar</button>
-        <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>OK</button>
+        <button class="boton" {{action "ocultar"}}>{{t "cancel"}}</button>
+        <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>{{t "ok"}}</button>
       </div>
     </div>
 
@@ -29,19 +29,19 @@
 
       {{#if invalido_por_duplicado}}
         <div class="pt2">
-          Error: Nombre existente
+          {{t "validations.name.exists"}}
         </div>
       {{/if}}
 
       {{#if invalido_por_vacio}}
         <div class="pt2">
-          Error: No puede ser vacío
+          {{t "validations.not.empty"}}
         </div>
       {{/if}}
 
       {{#if invalido_por_caracteres}}
         <div class="pt2">
-          Error: Nombre inválido (solo se permite letras)
+          {{t "validations.invalid"}}
         </div>
       {{/if}}
 

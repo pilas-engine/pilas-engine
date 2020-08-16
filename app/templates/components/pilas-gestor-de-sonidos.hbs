@@ -42,7 +42,7 @@
     <div class="tl f6">
 
       <div class="lh-copy">
-        Ayuda: para usar este sonido dentro del juego podes escribir el siguiente código:
+        {{t "audio.help"}}: {{t "audio.use.sound"}}:
       </div>
 
       <div class="flex items-center">
@@ -50,10 +50,8 @@
         {{pilas-boton-copiar texto=(helper-sonido sonido_seleccionado.nombre)}}
       </div>
 
-
       <div class="lh-copy">
-        y si el sonido se trata de una música que se tiene que repetir varias veces usá
-        estas sentencias de código para reproducila:
+        {{t "audio.play.music"}}:
       </div>
 
       <div class="flex items-center">
@@ -62,7 +60,7 @@
       </div>
 
       <div class="lh-copy">
-        y esta otra sentencia para detener la música:
+        {{t "audio.stop.music"}}
       </div>
 
       <div class="flex items-center">
@@ -71,8 +69,7 @@
       </div>
 
       <div class="lh-copy">
-        Ten en cuenta que los sonidos tienen que ocupar menos de 200kb, y estar en un formato
-        de compresión .mp3 para optimizar el tamaño del proyecto.
+        {{t "audio.format"}}
       </div>
 
     </div>

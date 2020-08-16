@@ -1,16 +1,34 @@
 {{yield}}
 
 {{#if iniciando}}
-  {{pilas-boton responsive=true icono="webserver" desactivado=true texto="Iniciando servidor web ..."}}
+  {{pilas-boton 
+        responsive=true 
+        icono="webserver" 
+        desactivado=true 
+        texto=(t "server.starting")}}
 {{else}}
   {{#if deteniendo}}
-    {{pilas-boton responsive=true icono="webserver" desactivado=true texto="Deteniendo servidor web ..."}}
+    {{pilas-boton 
+        responsive=true 
+        icono="webserver" 
+        desactivado=true 
+        texto=(t "server.stoping")}}
   {{else}}
     {{#if activado}}
-      {{pilas-boton responsive=true icono="webserver" texto="Detener servidor web" accion=(action "detener_servidor")}}
+      {{pilas-boton 
+        responsive=true 
+        icono="webserver" 
+        texto=(t "server.stop")
+        accion=(action "detener_servidor")}}
+
       <span class="texto f7 pt2 mt1 dib unselectable pointer" {{action "abrir_en_un_navegador"}} role="button">{{direccion}}</span>
     {{else}}
-      {{pilas-boton responsive=true icono="webserver" desactivado=cargando accion=(action "cuando_activa_webserver") texto="Iniciar servidor web"}}
+      {{pilas-boton 
+        responsive=true 
+        icono="webserver" 
+        desactivado=cargando 
+        accion=(action "cuando_activa_webserver") 
+        texto=(t "server.start")}}
     {{/if}}
   {{/if}}
 {{/if}}

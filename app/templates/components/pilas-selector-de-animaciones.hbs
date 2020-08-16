@@ -3,7 +3,7 @@
 
   <div class="w5 pl2 pr3 flex flex-column">
     <div class="">
-      {{pilas-boton accion=(action "crear_animación_nueva") texto="Crear una animación" icono="mas"}}
+      {{pilas-boton accion=(action "crear_animación_nueva") texto=(t "animations.create") icono="mas"}}
     </div>
 
     <div class="h1">
@@ -17,7 +17,7 @@
             {{item_animación.nombre}}
           </div>
           <div class="child f7">
-            {{pilas-boton accion=(action "editar" item_animación) texto="Editar" icono="editar"}}
+            {{pilas-boton accion=(action "editar" item_animación) texto=(t "animations.edit") icono="editar"}}
           </div>
         </div>
 
@@ -29,7 +29,7 @@
   <div class="flex1 flex flex-column tc">
     <div class="tl f6">
       <div class="lh-copy">
-        Ayuda: para mostrar esta animación escribe el siguiente código en un actor:
+        {{t "animations.help"}}: {{t "animations.how.to.use"}}
       </div>
 
       <div class="flex items-center">
@@ -48,6 +48,10 @@
   </div>
 </div>
 
-{{#pilas-modal alCerrar=(action "ocultar") visible=modal_editor_de_animaciones id="dialogoEditorAnimacion" titulo="Editar animación"}}
+{{#pilas-modal 
+        alCerrar=(action "ocultar") 
+        visible=modal_editor_de_animaciones 
+        id="dialogoEditorAnimacion" 
+        titulo=(t "animations.edit.title")}}
   {{pilas-animador pixelart=pixelart animacion=animación animaciones=proyecto.animaciones cuando_quiere_eliminar_animacion=(action "cuando_quiere_eliminar_animacion")}}
 {{/pilas-modal}}

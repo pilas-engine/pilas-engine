@@ -19,7 +19,7 @@
 
     {{#if (and (eq ultimaEscenaSeleccionada escena.id) (not-eq seleccion 0))}}
       {{pilas-boton-eliminar-con-confirmacion contador=true tipo="escena"
-      titulo="¿Quieres eliminar la escena?" accion=(action cuando_intenta_eliminar escena.id)}}
+      titulo=(t "panel.remove.scene") accion=(action cuando_intenta_eliminar escena.id)}}
     {{/if}}
   </div>
 

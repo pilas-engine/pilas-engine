@@ -16,8 +16,6 @@ open.new.window: Abrir en una ventana nueva
 new: Nuevo
 open: Abrir
 save: Guardar
-export: Exportar
-animations: Animaciones
 help: Ayuda
 properties: Propiedades
 create.scene: Crear escena
@@ -136,3 +134,115 @@ about:
 
   forum.link: Foro de mensajes
   web.link: Sitio de PilasEngine
+
+import.image: Importar imagen
+error:
+  title: Uhhh, ocurrió un error.
+  detail: Visualizá la consola del navegador para ver más detalles.
+
+app:
+  loading: Cargando proyecto ...
+  opening: Abriendo proyecto ... 
+
+animations:
+  title: Animaciones
+  create: Crear una animación
+  remove.button: Eliminar esta animación
+  remove.title: ¿Realmente quieres eliminar esta animación?
+  name: Nombre
+  fps: Cuadros por segundo
+  play: Reproducir
+  pause: Pausar
+  zoom: Aumento
+  edit: Editar
+  help: Ayuda
+  how.to.use: para mostrar esta animación escribe el siguiente código en un actor
+  edit.title: Editar animación
+
+tile.size: Tamaño de la grilla
+zoom.adjust: Ajustar
+zoom.tooltip: Zoom del editor
+
+versions:
+  development: versión en desarrollo
+  more.info: más información
+  searching: Buscando versiones nuevas ...
+  updated: Tienes la versión más nueva de pilas.
+  new: Hay una versión nueva para descargar desde www.pilas-engine.com.ar
+
+
+
+yes: Sí
+no: No
+
+manual:
+  title: Manual
+  functions: Glosario de funciones
+  shortcuts: Atajos de teclado
+
+settings:
+  dark.mode: Modo oscuro
+  allow.pause: Permitir el modo pausa
+  text.size: Tamaño del texto
+  vim.mode: Modo VIM (experimental)
+
+delete: Eliminar
+no.undo: Esta acción no se podrá deshacer
+export:
+  index: Exportar
+  title: Exportar proyecto
+  choice.title: Existen dos formas de exportar tu proyecto en pilas
+  choice.question: ¿Cuál te gustaría usar?
+  zip: Exportar como zip
+  web: Exportar y publicar en la web
+  include.source: Incluir código visible
+  manual: Ver documentación sobre cómo publicar juegos
+  close: Cerrar
+audio:
+  load.sound: Cargar un sonido mp3
+  help: Ayuda
+  use.sound: para usar este sonido dentro del juego podes escribir el siguiente código
+  play.music: y si el sonido se trata de una música que se tiene que repetir varias veces usá este código
+  stop.music: y esta otra sentencia para detener la música
+  format: Ten en cuenta que los sonidos tienen que ocupar menos de 200kb, y estar en un formato de compresión .mp3 para optimizar el tamaño del proyecto.
+
+menu:
+  duplicate.actor: Duplicar este actor
+  duplicate.actor.x5: Duplicar 5 veces este actor 
+  delete:
+    title: ¿Realmente quieres eliminar este actor?
+  move: Mover a otra escena
+  move.to: Mover a
+  move.to.new.scene: Mover a una escena nueva
+
+
+exit:
+  title: Estás por abandonar sin haber guardado.
+  question: ¿Que quieres hacer?
+  confirm: Salir de todas formas
+  cancel: Cancelar, y volver al editor
+
+cancel: Cancelar
+ok: OK
+actors.in.scene.counter: Escena con {count} actores
+fsm:
+  name: Indicá el nombre del nuevo estado
+  create: Crear estado
+panel:
+  project: Proyecto
+  no.scenes: Sin escenas
+  no.actors: Sin actores
+  remove.scene: ¿Quieres eliminar la escena? 
+to.delete: Se eliminará
+validations:
+  name.exists: Error, nombre existente
+  not.empty: Error, no puede ser vacío
+  invalid: Error, nombre no válido
+server:
+  starting: Iniciando servidor web ...
+  stoping: Deteniendo servidor web ...
+  stop: Detener servidor web
+  start: Iniciar servidor web
+
+undo: Deshacer
+only.pilas.files: Solo puede abrir archivos con extensión .pilas

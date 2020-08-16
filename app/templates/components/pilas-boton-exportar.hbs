@@ -1,24 +1,28 @@
 {{yield}}
 
-{{pilas-boton responsive=responsive ejecutando=tareaExportar.last.isRunning icono="exportar" desactivado=desactivado accion=(action "abrir_modal_par_exportar") texto=(t "export")}}
+{{pilas-boton responsive=responsive ejecutando=tareaExportar.last.isRunning 
+        icono="exportar" desactivado=desactivado 
+        accion=(action "abrir_modal_par_exportar") texto=(t "export.index")}}
 
-{{#pilas-modal medio=true alCerrar=(action "cerrar") puede_cerrar=puede_cerrar visible=mostrar_modal titulo="Exportar proyecto"}}
+{{#pilas-modal medio=true alCerrar=(action "cerrar") 
+        puede_cerrar=puede_cerrar 
+        visible=mostrar_modal titulo=(t "export.title")}}
 
   {{#if (eq paso 1)}}
     <div class="flex1">
-      <p>Existen dos formas de exportar tu proyecto en pilas</p>
-      <p>¿Cuál te gustaría usar?</p>
+      <p>{{t "export.choice.title"}}</p>
+      <p>{{t "export.choice.question"}}</p>
 
-      {{pilas-boton texto="Exportar como zip" accion=(action "exportar_zip")}}
+      {{pilas-boton texto=(t "export.zip") accion=(action "exportar_zip")}}
 
       <div class="dib relative">
-        {{pilas-boton texto="Exportar y publicar en la web" accion=(action "exportar_y_publicar")}}
+        {{pilas-boton texto=(t "export.web") accion=(action "exportar_y_publicar")}}
 
         <div class="f6 tr verdana pt2">
           <div class="pv1">
             {{input type="checkbox" id="ver_codigo" checked=ver_codigo}}
             <label for="ver_codigo" class="unselectable pointer">
-              Incluir código visible
+              (t "export.include.source")
             </label>
           </div>
         </div>
@@ -45,10 +49,12 @@
       {{pilas-boton texto="Cerrar" accion=(action "cerrar")}}
 
       <div class="pt2 mt1 pl3 dib">
-        {{#pilas-link class="white link texto dib f7" url="https://app.pilas-engine.com.ar/manual/exportar_juegos.html"}}Ver documentación sobre cómo publicar juegos{{/pilas-link}}
+        {{#pilas-link class="white link texto dib f7" url="https://app.pilas-engine.com.ar/manual/exportar_juegos.html"}}
+          {{t "export.manual"}}
+        {{/pilas-link}}
       </div>
     {{else}}
-      {{pilas-boton desactivado=true texto="Cerrar"}}
+      {{pilas-boton desactivado=true texto=(t "export.close")}}
     {{/if}}
   </div>
 

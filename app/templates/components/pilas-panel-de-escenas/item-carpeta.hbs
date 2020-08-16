@@ -22,7 +22,11 @@
   {{#if carpeta.abierta}}
     <div class="">
       {{pilas-boton-renombrar-carpeta carpeta=carpeta}}
-      {{pilas-boton-eliminar-con-confirmacion contador=true tipo="carpeta" titulo="¿Quieres eliminar la carpeta?" accion=(action "eliminarCarpetaDelProyecto")}}
+      {{pilas-boton-eliminar-con-confirmacion 
+                contador=true 
+                tipo="carpeta" 
+                titulo="¿Quieres eliminar la carpeta?" 
+                accion=(action "eliminarCarpetaDelProyecto")}}
     </div>
   {{/if}}
 
@@ -41,7 +45,7 @@
       }}
     {{else}}
       <div class="bg-black-20 br2 mv1 mr2 o-50 pa2 texto">
-        Sin actores
+        {{t "panel.no.actors"}}
       </div>
     {{/each}}
   </div>

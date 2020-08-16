@@ -1,9 +1,17 @@
 {{#if comoCelda}}
-  <div role="button" id="boton-eliminar-{{tipo}}" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action "mostrar" bubbles=false}}>
-    {{pilas-icono icono="borrar"}} Eliminar
+  <div role="button" 
+    {{action "mostrar" bubbles=false}}
+    class="pa2 texto pointer hover-bg-black-10 f7 truncate"
+    id="boton-eliminar-{{tipo}}"> 
+    {{pilas-icono icono="borrar"}} {{t "delete"}}
   </div>
 {{else}}
-  <button id="boton-eliminar-{{tipo}}" class="bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0" {{action "mostrar" bubbles=false}}>{{pilas-icono icono="borrar"}}{{yield}}</button>
+  <button 
+    class="bg-transparent no-outline p0 f7 o-50 pointer glow bn pa0" 
+    {{action "mostrar" bubbles=false}}
+    id="boton-eliminar-{{tipo}}">
+    {{pilas-icono icono="borrar"}}{{yield}}
+  </button>
 {{/if}}
 
 {{#if modalVisible}}
@@ -17,14 +25,21 @@
 
     {{#if contador}}
       <div class="orange pb3 tc">
-        Esta acción no se podrá deshacer
+        {{t "no.undo"}}
       </div>
     {{/if}}
 
-
+    
     <div class="tc">
-      {{pilas-boton extraClass="boton-confirmacion" desactivado=tiempo icono="si" accion=(action "ocultarEjecutandoAccion") texto=texto_del_boton atajo="Enter"}}
-      {{pilas-boton extraClass="boton-confirmacion" icono="no" accion=(action "ocultar") texto="No" atajo="Escape"}}
+      {{pilas-boton extraClass="boton-confirmacion" desactivado=tiempo 
+        icono="si" accion=(action "ocultarEjecutandoAccion") 
+        texto=texto_del_boton 
+        atajo="Enter"}}
+
+      {{pilas-boton extraClass="boton-confirmacion" 
+        icono="no" accion=(action "ocultar") 
+        texto=(t "no")
+        atajo="Escape"}}
     </div>
 
   </div>

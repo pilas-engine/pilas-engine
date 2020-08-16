@@ -8,7 +8,7 @@
     <div class="pa2 texto pl5">
 
       <div class="pv2">
-        Indicá el nombre del nuevo estado:
+        {{t "fsm.name"}}:
       </div>
 
       {{input
@@ -37,8 +37,8 @@
         <div class="flex1"></div>
 
         <div class="">
-          <button class="boton" {{action "ocultar"}}>Cancelar</button>
-          <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>Crear estado</button>
+          <button class="boton" {{action "ocultar"}}>{{t "cancel"}}</button>
+          <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>{{t "fsm.create"}}</button>
         </div>
       </div>
     </div>

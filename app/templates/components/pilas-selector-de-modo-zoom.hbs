@@ -2,6 +2,6 @@
   {{yield}}
   <select class="select f7 mt1 verdana" onchange={{action "cambiarModo" value="target.value"}} >
     <option value={{2}} selected={{eq modoZoom 2}}>1:1</option>
-    <option value={{1}} selected={{eq modoZoom 1}}>Ajustar</option>
+    <option value={{1}} selected={{eq modoZoom 1}}>{{t "zoom.adjust"}}</option>
   </select>
 </div>

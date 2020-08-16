@@ -8,7 +8,7 @@
 
     <div class="flex1 pl2 flex items-center truncate">
       <div class="flex1 pa2 truncate">
-        Escena con {{actores.length}} actores.
+        {{t "actors.in.scene.counter" count=actores.length}} 
       </div>
     </div>
 
@@ -29,13 +29,13 @@
 
         {{#if actor.es_nuevo}}
           <div class="bg-blue tc f7 br1 pa1 mr1">
-            NUEVO
+            {{t "new"}}
           </div>
         {{/if}}
 
         {{#if actor.se_elimina_en_el_siguiente_cuadro}}
           <div class="bg-white-10 tc f7 br1 pa1 mr1">
-            SE ELIMINARÁ
+            {{t "to.delete"}}
           </div>
         {{/if}}
 

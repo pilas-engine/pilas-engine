@@ -10,11 +10,17 @@
     {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
 
       <div class="">
-        {{pilas-interruptor dataTest="boton-modo-oscuro" variable=oscuro texto="Modo oscuro"}}
+        {{pilas-interruptor 
+                dataTest="boton-modo-oscuro" 
+                variable=oscuro 
+                texto=(t "settings.dark.mode")}}
       </div>
 
       <div class="">
-        {{pilas-interruptor dataTest="boton-modo-oscuro" variable=permitir_modo_pausa texto="Permitir el modo pausa"}}
+        {{pilas-interruptor 
+                dataTest="boton-modo-oscuro" 
+                variable=permitir_modo_pausa
+                texto=(t "settings.allow.pause")}}
       </div>
 
     {{/dd.content}}

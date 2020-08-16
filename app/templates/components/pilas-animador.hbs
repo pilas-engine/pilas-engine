@@ -6,17 +6,21 @@
 
     {{#basic-dropdown as |dd|}}
       {{#dd.trigger}}
-        {{pilas-boton icono="no" texto="Eliminar esta animación"}}
+        {{pilas-boton icono="no" texto=(t "animations.remove.button")}}
       {{/dd.trigger}}
 
       {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2"}}
         <div class="flex1 verdana f6 texto pa2">
-          ¿Realmente quieres eliminar esta animación?
+          {{t "animations.remove.title"}}
         </div>
 
         <div class="tc">
-          {{pilas-boton icono="si" accion=(action cuando_quiere_eliminar_animacion animacion dd) texto="Sí" atajo="Enter"}}
-          {{pilas-boton icono="no" accion=(action dd.actions.close) texto="No" atajo="Escape"}}
+          {{pilas-boton icono="si" 
+                accion=(action cuando_quiere_eliminar_animacion animacion dd) 
+                texto=(t "yes") atajo="Enter"}}
+          {{pilas-boton icono="no" 
+                accion=(action dd.actions.close) 
+                texto=(t "no") atajo="Escape"}}
         </div>
       {{/dd.content}}
     {{/basic-dropdown}}
@@ -26,13 +30,22 @@
   <div class="flex">
 
     <div class="flex items-center">
-      <div class="texto pr2">Nombre:</div>
-      {{pilas-nombre-de-animacion animación=animacion animaciones=animaciones iniciando=iniciando}}
+      <div class="texto pr2">{{t "animations.name"}}:</div>
+
+      {{pilas-nombre-de-animacion 
+        animación=animacion 
+        animaciones=animaciones 
+        iniciando=iniciando}}
     </div>
 
     <div class="flex pl4 items-center">
-      <div class="texto pr2">Cuadros por segundo:</div>
-      {{input class="w3 input v-top pa1 br2" disabled=iniciando value=animacion.velocidad type="number" min=1}}
+      <div class="texto pr2">{{t "animations.fps"}}:</div>
+
+      {{input class="w3 input v-top pa1 br2" 
+        disabled=iniciando 
+        value=animacion.velocidad 
+        type="number" 
+        min=1}}
     </div>
 
   </div>
@@ -41,15 +54,21 @@
 
 <div class="pa2 unselectable ba borde overflow-x-scroll">
 
-  {{#pilas-ordenable-horizontal iniciando=iniciando identificador="cuadros-de-animacion" cuando_cambia_orden=(action "cuando_cambia_orden")}}
+  {{#pilas-ordenable-horizontal iniciando=iniciando 
+        identificador="cuadros-de-animacion" 
+        cuando_cambia_orden=(action "cuando_cambia_orden")}}
 
     {{#if lista_visible}}
       {{#each animacion.cuadros as |cuadro index|}}
         {{! template-lint-disable }}
-        <div class="bg-fondo v-top ba borde dib ma1 hide-child relative w3 h3 tc pointer" {{action "seleccionar_cuadro" index}} role="button" data-index={{index}}>
+        <div class="bg-fondo v-top ba borde dib ma1 hide-child relative w3 h3 tc pointer" 
+          {{action "seleccionar_cuadro" index}} 
+          role="button" data-index={{index}}>
 
           <div class="absolute contenedor-boton-borrar-cuadro child">
-            <button type="button" name="button" class="boton-borrar-cuadro bn bg-red white f7" {{action "eliminar_cuadro" cuadro}}>×</button>
+            <button type="button" name="button" 
+              class="boton-borrar-cuadro bn bg-red white f7" 
+              {{action "eliminar_cuadro" cuadro}}>×</button>
           </div>
 
           <div class="absolute contenedor-boton-mover child z-99">
@@ -60,7 +79,8 @@
 
 
           {{#if cuadro.contenido}}
-            <img src={{cuadro.contenido}} alt="" class="object-fit-contain" width={{48}} height={{48}}>
+            <img src={{cuadro.contenido}} alt="" 
+                class="object-fit-contain" width={{48}} height={{48}}>
           {{else}}
             <div class="sprite-grilla-de-imagenes {{cuadro.sprite}}"></div>
           {{/if}}
@@ -73,7 +93,8 @@
       {{/each}}
     {{/if}}
 
-    <div role="button" {{action "abrir_modal_para_agregar_imagen"}} class="dim v-top ba borde dib ma1 relative w3 h3 tc pt3 no-mover">
+    <div role="button" {{action "abrir_modal_para_agregar_imagen"}} 
+      class="dim v-top ba borde dib ma1 relative w3 h3 tc pt3 no-mover">
       <span class="v-mid">+</span>
     </div>
 
@@ -81,7 +102,9 @@
 
   {{#pilas-modal alCerrar=(action "ocultar") visible=mostrarModalDeImagenes titulo="Agregar imagen"}}
     <div>
-      {{pilas-grilla-de-imagenes filtro=filtro cuando_selecciona=(action "cuando_selecciona_imagen_en_el_modal")}}
+      {{pilas-grilla-de-imagenes 
+        filtro=filtro 
+        cuando_selecciona=(action "cuando_selecciona_imagen_en_el_modal")}}
     </div>
   {{/pilas-modal}}
 
@@ -90,9 +113,11 @@
 <div class="pv2 unselectable flex">
   <div class="">
     {{#if pausado}}
-      {{pilas-boton desactivado=iniciando id="reproducir" accion=(action "resumir") texto="Reproducir" icono="ejecutar"}}
+      {{pilas-boton desactivado=iniciando id="reproducir" 
+        accion=(action "resumir") texto=(t "animations.play") icono="ejecutar"}}
     {{else}}
-      {{pilas-boton desactivado=iniciando id="pausar" accion=(action "pausar") texto="Pausar" icono="pausa"}}
+      {{pilas-boton desactivado=iniciando id="pausar" 
+        accion=(action "pausar") texto=(t "animations.pause") icono="pausa"}}
     {{/if}}
   </div>
 
@@ -100,7 +125,7 @@
   </div>
 
   <div class="flex">
-    <div class="pt1 f6">Aumento</div>
+    <div class="pt1 f6">{{t "animations.zoom"}}</div>
     {{pilas-zoom-de-canvas nombre_del_contexto=nombre_del_contexto}}
   </div>
 

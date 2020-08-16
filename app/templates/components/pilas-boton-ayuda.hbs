@@ -1,11 +1,12 @@
 {{yield}}
-{{pilas-boton responsive=true  icono="ayuda" accion=(action "mostrar") texto=(t "help")}}
+{{pilas-boton responsive=true icono="ayuda" accion=(action "mostrar") texto=(t "help")}}
 
 {{#ember-wormhole to="modal-ayuda"}}
   <div class={{if modal_visible "" "dn"}}>
     <div class="flex absolute absolute--fill default-cursor" id={{id}}>
 
-      <div {{action "ocultar"}} role="button" class="bg-black-50 z-1 animacion-aparecer absolute absolute--fill"></div>
+      <div {{action "ocultar"}} role="button" 
+         class="bg-black-50 z-1 animacion-aparecer absolute absolute--fill"></div>
 
       <div class="flex texto borde ba shadow-3 flex-column flex-auto ma4 bg-fondo z-2">
 
@@ -18,19 +19,19 @@
             <div class="flex pt2 pl2">
 
               {{pilas-solapa-de-ayuda
-                  texto="Manual"
+                  texto=(t "manual.title")
                   seleccionada=manual_seleccionado
                   accion=(action "seleccionar_manual")
               }}
 
               {{pilas-solapa-de-ayuda
-                  texto="Glosario de funciones"
+                  texto=(t "manual.functions")
                   seleccionada=glosario_seleccionado
                   accion=(action "seleccionar_glosario")
               }}
 
               {{pilas-solapa-de-ayuda
-                  texto="Atajos de teclado"
+                  texto=(t "manual.shortcuts")
                   seleccionada=atajos_seleccionado
                   accion=(action "seleccionar_atajos")
               }}
@@ -42,7 +43,8 @@
           </div>
 
           <div class="">
-            <button class="pointer w2 h2 ma1 bn bg-fondo texto f3 pr2" {{action "ocultar"}} id="cerrar">×</button>
+            <button class="pointer w2 h2 ma1 bn bg-fondo texto f3 pr2" 
+              {{action "ocultar"}} id="cerrar">×</button>
           </div>
         </div>
 

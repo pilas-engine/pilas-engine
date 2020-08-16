@@ -10,16 +10,26 @@
     {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
 
       <div class="pa2 texto">
-        Tamaño de texto:
-        {{pilas-boton dataTest="boton-disminuir" class="button link pointer hover-bg-black-10 unselectable ph1 mh1" texto="-" accion=(action "disminuir")}}
+        {{t "settings.text.size"}}:
+        {{pilas-boton 
+                dataTest="boton-disminuir" 
+                class="button link pointer hover-bg-black-10 unselectable ph1 mh1" 
+                texto="-" 
+                accion=(action "disminuir")}}
         <div role="button" class="dib pointer" {{action "restaurar"}}>{{tamano}}pt</div>
-        {{pilas-boton dataTest="boton-aumentar" class="button link pointer hover-bg-black-10 unselectable ph1 mh1" texto="+" accion=(action "aumentar")}}
+        {{pilas-boton 
+                dataTest="boton-aumentar" 
+                class="button link pointer hover-bg-black-10 unselectable ph1 mh1" 
+                texto="+" 
+                accion=(action "aumentar")}}
       </div>
 
       <div class="">
-        {{pilas-interruptor dataTest="boton-modo-vim" variable=modoVim texto="Modo VIM (experimental)"}}
+        {{pilas-interruptor 
+                dataTest="boton-modo-vim" 
+                variable=modoVim 
+                texto=(t "settings.vim.mode")}}
       </div>
-
 
     {{/dd.content}}
   {{/basic-dropdown}}

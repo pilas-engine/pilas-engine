@@ -1,7 +1,6 @@
 {{#each log.items as |item|}}
   <div style={{estilo}} class="truncate f6 cf pa1 break-all {{if (eq item.tipo "error") "red" "texto"}}">
 
-
     {{#if (eq item.tipo "grupo")}}
 
       <div class="gray unselectable">{{pilas-icono icono="info"}}{{item.titulo}}</div>
@@ -25,7 +24,6 @@
       {{else}}
         {{pilas-icono icono=item.tipo}} {{item.mensaje}}
       {{/if}}
-
 
       <div class="dib pl3 truncate w4">
         {{item.detalle}}

@@ -10,7 +10,12 @@
       {{input  
         escape-press=(action "cancelar" dd)
         enter=(action "confirmarCambioDeNombre" dd)
-        spellcheck=false id="input-renombrar-carpeta" type="text" value=nombre class="input w-100 v-top pa1 br2 mb2 f6" placeholder="Nombre"}}
+        spellcheck=false 
+        id="input-renombrar-carpeta" 
+        type="text" 
+        value=nombre 
+        class="input w-100 v-top pa1 br2 mb2 f6" 
+        placeholder=(t "name")}}
     </div>
   {{/dd.content}}
 {{/basic-dropdown}}

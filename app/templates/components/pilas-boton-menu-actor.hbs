@@ -23,17 +23,17 @@
       </div>
 
       <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action accionClonar}}>
-        {{pilas-icono icono="duplicar" class="v-top"}} Duplicar este actor
+        {{pilas-icono icono="duplicar" class="v-top"}} {{t "menu.duplicate.actor"}}
       </div>
 
       <div role="button" class="pa2 texto pointer hover-bg-black-10 f7 truncate" {{action accionClonarX5}}>
-        {{pilas-icono icono="duplicar" class="v-top"}} Duplicar 5 veces este actor
+        {{pilas-icono icono="duplicar" class="v-top"}} {{t "menu.duplicate.actor.x5"}}
       </div>
 
       {{pilas-boton-eliminar-con-confirmacion
           comoCelda=true
           tipo="actor"
-          titulo="¿Realmente quieres eliminar este actor?"
+          titulo=(t "menu.delete.title")
           accion=accionEliminar}}
 
       {{pilas-mover-actor-de-escena
