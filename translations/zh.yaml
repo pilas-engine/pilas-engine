@@ -32,7 +32,7 @@ select.recipe: 选择一个演员或一个场景来查看方法。
 stop.and.back.to.editor: 停止，回到编辑
 back.to.editor: 返回编辑
 frame: 列表
-quit: 你真的要退出吗？"
+quit: 你真的要退出吗？
 interpreter:
   label: 终端
   help: 按执行键输入命令
@@ -131,114 +131,114 @@ about:
   forum.link: 留言板
   web.link: PilasEngine网站
 
-import.image: Image import
+import.image: 图像导入
 error:
-  title: Ups, an error occurred.
-  detail: See the browser console to see more details.
+  title: 发生错误！
+  detail: 请参阅浏览器控制台以查看更多详细信息。
 
 app:
-  loading: Project loading ...
-  opening: Opening project ... 
+  loading: 项目加载中...
+  opening: 打开项目中...
 
 animations:
   title: 动画
-  create: Crear a new animation
-  remove.button: Animation remove
-  remove.title: Do you really want to delete this animation?
-  name: Name
-  fps: Frames per second
-  play: Play
-  pause: Pause
-  zoom: Zoom
-  edit: Edit
-  help: Help
-  how.to.use: enter this code to play this animation
-  edit.title: Edit animation
+  create: 创建新动画
+  remove.button: 移除动画
+  remove.title: 您真的要删除此动画吗？
+  name: 名字
+  fps: 每秒帧数
+  play: 播放
+  pause: 暂停
+  zoom: 缩放
+  edit: 编辑
+  help: 帮助
+  how.to.use: 输入此代码以播放此动画
+  edit.title: 编辑动画
 
-tile.size: Tile size
-zoom.adjust: Adjust
-zoom.tooltip: Editor zoom
+tile.size: 视窗大小
+zoom.adjust: 调整
+zoom.tooltip: 编辑器缩放
 
 versions:
-  development: development version
-  more.info: more information
-  searching: Searching for updates ...
-  updated: There is a new version to download.
-  new: Ther is a new version to download from www.pilas-engine.com.ar
+  development: 开发版本
+  more.info: 更多信息
+  searching: 搜索更新...
+  updated: 有一个新版本可供下载。
+  new: 这儿是一个新版本，可以从www.pilas-engine.com.ar下载
 
 
 
-yes: Yes
-no: No
+yes: 是
+no: 否
 
 manual:
-  title: Manual
-  functions: Index of functions
-  shortcuts: Keyboard shortcuts
+  title: 手册
+  functions: 功能索引
+  shortcuts: 键盘快捷键
 
 settings:
-  dark.mode: Dark mode
-  allow.pause: Allow pause mode
-  text.size: Font size
-  vim.mode: VIM mode (experimental)
+  dark.mode: 暗模式
+  allow.pause: 允许暂停模式
+  text.size: 字体大小
+  vim.mode: VIM模式（实验性）
 
-delete: Delete
-no.undo: This action can't be undone
+delete: 删除
+no.undo: 此操作无法撤消
 export:
-  index: 出口
-  title: Export project
-  choice.title: There are two ways to export a project
-  choice.question: Which one would you like to use?
-  zip: Export as zip
-  web: Export and publish in the web
-  include.source: Include source code
-  manual: See documentation about how to publish games
-  close: Close
+  index: 导出
+  title: 导出项目
+  choice.title: 有两种导出项目的方法
+  choice.question: 您想使用哪一个？
+  zip: 导出为zip
+  web: 在网络中导出和发布
+  include.source: 包含源代码
+  manual: 请参阅有关如何发布游戏的文档
+  close: 关闭
 audio:
-  load.sound: Upload an mp3 file
-  help: Help
-  use.sound: enter this code to use this sound in a game
-  play.music: enter this code if you want to loop this sound it like a music
-  stop.music: and enter this code to stop the music
-  format: Keep in mind that sound files must should be less than 200kb, and must be MP3 format only.
+  load.sound: 上传mp3文件
+  help: 帮助
+  use.sound: 输入此代码以在游戏中使用此声音
+  play.music: 如果要循环播放此声音，请输入此代码
+  stop.music: 然后输入此代码以停止音乐
+  format: 请记住，声音文件必须小于200kb，并且只能是MP3格式。
 
 menu:
-  duplicate.actor: Double this actor
-  duplicate.actor.x5: Duplicate 5 times
+  duplicate.actor: 放大演员1倍
+  duplicate.actor.x5: 放大演员4倍
   delete:
-    title: Do you really want to remove this actor?
-  move: Move to another scene
-  move.to: Move to
-  move.to.new.scene: Move to a new scene
+    title: 您真的要删除此演员吗？
+  move: 移动到另一个场景
+  move.to: 移至
+  move.to.new.scene: 移动到新场景
 
 
 exit:
-  title: You are about to leave without saving
-  question: You want to do?
-  confirm: Get out anyway
-  cancel: Cancel, and return to editor
+  title: 您将要离开而没有保存
+  question: 你想要这样做吗?
+  confirm: 退出
+  cancel: 取消，返回编辑器
 
-cancel: Cancel
-ok: OK
-actors.in.scene.counter: Scene whit {count} actors
+cancel: 取消
+ok: 好的
+actors.in.scene.counter: 场景 {count}个演员
 fsm:
-  name: Enter the state's name
-  create: New state
+  name: 输入状态名
+  create: 新状态
 panel:
-  project: Project
-  no.scenes: No scenes
-  no.actors: No actors
-  remove.scene: Do you really want to remove this scene?
-to.delete: It will deleted
+  project: 项目
+  no.scenes: 无场景
+  no.actors: 无演员
+  remove.scene: 您真的要删除此场景吗？
+to.delete: 将被删除
 validations:
-  name.exists: Error, name exists
-  not.empty: Error, can't be empty
-  invalid: Error, invalid name
+  name.exists: 错误，名称存在
+  not.empty: 错误，名称不能为空
+  invalid: 错误，名称无效
 server:
-  starting: Starting web server ...
-  stoping: Stoping web server ...
-  stop: Stop web server
-  start: Start web server
+  starting: 启动Web服务器...
+  stoping: 正在停止网络服务器...
+  stop: 停止Web服务器
+  start: 启动Web服务器
 
-undo: Undo
-only.pilas.files: You can only open .pilas files
+undo: 撤消
+only.pilas.files: 您只能打开.pilas文件
