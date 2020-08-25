@@ -1,7 +1,7 @@
 import { observer } from "@ember/object";
 import { inject as service } from "@ember/service";
 import { later } from "@ember/runloop";
-import { debounce } from '@ember/runloop';
+import { debounce } from "@ember/runloop";
 import Component from "@ember/component";
 import utils from "../utils/utils";
 
@@ -75,15 +75,19 @@ export default Component.extend({
     // En data debería guardar el ID del actor que se instrumentó.
     // y solamente ingresar a data.ID del actor seleccionado (ver la propiedad
     // this.titulo)
-    let id_actor_seleccionado = +this.titulo.match(/: (\d+)/)[1];
+    let expresion = this.titulo.match(/: (\d+)/);
 
-    if (id_actor_seleccionado && data[id_actor_seleccionado]) {
-      data[id_actor_seleccionado].map(linea => {
-        this.resaltarLinea(linea);
-      });
+    if (expresion) {
+      let id_actor_seleccionado = +expresion[1];
+
+      if (id_actor_seleccionado && data[id_actor_seleccionado]) {
+        data[id_actor_seleccionado].map(linea => {
+          this.resaltarLinea(linea);
+        });
+      }
+
+      this.resaltarLineasEjecutadas();
     }
-
-    this.resaltarLineasEjecutadas();
   },
 
   /*
@@ -142,7 +146,7 @@ export default Component.extend({
 
       if (event.source === this.frame && event.data && event.data.updatedCode) {
         if (this.onChange) {
-          debounce(this, 'analizarErrores', 1000);
+          debounce(this, "analizarErrores", 1000);
           this.onChange(event.data.updatedCode, this.titulo);
         }
       }
@@ -240,10 +244,12 @@ export default Component.extend({
       let rango = new this.monaco.Range(1, 1, 1, 1);
       this.set("lineas_para_resaltar", []);
 
-      this.editor.deltaDecorations(this.decorations, [{
-        range: rango,
-        options: {}
-      }]);
+      this.editor.deltaDecorations(this.decorations, [
+        {
+          range: rango,
+          options: {}
+        }
+      ]);
     }
   },
 
@@ -294,6 +300,7 @@ export default Component.extend({
     this.bus.off("codigo_ejecutado", this, "codigo_ejecutado");
     this.bus.off("regresa_al_modo_editor", this, "regresa_al_modo_editor");
     this.bus.off("formatear_y_guardar", this, "formatear_y_guardar");
-    this.bus.off("formatear", this, "formatear")
+    this.bus.off("formatear", this, "formatear");
   }
 });
+
