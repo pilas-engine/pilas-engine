@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
+import { debounce } from "@ember/runloop";
 
 export default Component.extend({
   tagName: "",
@@ -16,11 +17,14 @@ export default Component.extend({
   },
 
   actualizar(data) {
+    debounce(this, this.realizarActualizacion, data, 500);
+  },
+
+  realizarActualizacion(data) {
     this.set("actores", data.foto.actores);
   },
 
   actions: {
-
     seleccionaActor(actor) {
       this.set("actorSeleccionado", actor.nombre);
       this.bus.trigger("selecciona_un_actor_en_modo_pausa", actor);
@@ -30,6 +34,6 @@ export default Component.extend({
       this.set("actorSeleccionado", null);
       this.bus.trigger("selecciona_la_escena_completa_en_modo_pausa");
     }
-
   }
 });
+
