@@ -27,7 +27,7 @@ class ModoEjecucion extends Modo {
     this.es_modo_ejecucion = true;
   }
 
-  preload() { }
+  preload() {}
 
   create(datos) {
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);

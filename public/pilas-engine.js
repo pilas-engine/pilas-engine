@@ -5179,7 +5179,7 @@ var EscenaBase = (function () {
                 var texto = JSON.stringify(self_1._observables, null, 4)
                     .replace(/{|}|"/g, "")
                     .replace(/,\n/g, "\n")
-                    .replace(/    /g, "")
+                    .replace(/ {4}/g, "")
                     .trim();
                 this.texto = texto;
             };
@@ -5280,6 +5280,7 @@ var EscenaBase = (function () {
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
+                throw Error(e);
             }
         });
         actores_a_eliminar.map(function (actor) {
@@ -5363,7 +5364,7 @@ var EscenaBase = (function () {
                 e.eliminar();
             }
             catch (e) {
-                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "eliminando actores");
             }
         });
         this.actualizar();

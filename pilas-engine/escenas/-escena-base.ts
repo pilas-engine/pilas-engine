@@ -75,7 +75,7 @@ class EscenaBase {
         let texto = JSON.stringify(self._observables, null, 4)
           .replace(/{|}|"/g, "")
           .replace(/,\n/g, "\n")
-          .replace(/    /g, "")
+          .replace(/ {4}/g, "")
           .trim();
 
         this.texto = texto;
@@ -198,6 +198,7 @@ class EscenaBase {
         actor.actualizar_sensores();
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
+        throw Error(e);
       }
     });
 
@@ -288,7 +289,7 @@ class EscenaBase {
       try {
         e.eliminar();
       } catch (e) {
-        this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "eliminando actores");
       }
     });
     this.actualizar();
