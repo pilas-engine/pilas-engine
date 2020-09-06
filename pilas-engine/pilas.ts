@@ -32,6 +32,7 @@ class Pilas {
   fisica: Fisica;
   habilidades: Habilidades;
   comportamientos: Comportamientos;
+  referencia_de_mapa: any;
 
   modo: any;
   _ancho: number;
@@ -369,6 +370,14 @@ class Pilas {
   existe_un_actor_llamado(nombre: string) {
     let actor = this.obtener_actores().find(actor => actor.nombre === nombre);
     return actor !== undefined;
+  }
+
+  /**
+   * Retorna true si existe un actor llamado de la forma indicada en alguna
+   * de todas las escenas del proyecto.
+   */
+  existe_un_actor_llamado_en_el_proyecto(nombre: string) {
+    return this.modo.existe_actor_llamado_en_el_proyecto(nombre);
   }
 
   /**
@@ -729,6 +738,118 @@ class Pilas {
 
   limpiar_traza_de_ejecucion() {
     this.instrumentacion = {};
+  }
+
+  /**
+   * Permite describir cómo se van a representar los actores en un
+   * mapa de escenario. Esta función se utiliza casi siempre al
+   * principio del juego o antes de llamar a la función `pilas.crear_mapa`.
+   *
+   * Un ejemplo de invocación es el siguiente:
+   *
+   *    > this.pilas.definir_mapa({
+   *                     x: "ladrillo",
+   *                     n: "nave"
+   *                });
+   *
+   * y luego de que se definieron los caracteres, se puede crear
+   * un mapa así:
+   *
+   *    > this.pilas.crear_mapa(`
+   *           xxxxxxx
+   *           x.....x
+   *           x..n..x
+   *           x.....x
+   *           xxxxxxx
+   *         `);
+   */
+  definir_mapa(diccionario: any) {
+    // Busca si el mapa es válido y cumple estas 2 condiciones:
+    //
+    // 1. Las claves del mapa tienen que ser de una sola letra o número.
+    // 2. El valor del mapa tiene que ser un actor existente.
+    for (var key in diccionario) {
+      if (diccionario.hasOwnProperty(key)) {
+        if (typeof key !== "string" || key.length > 1) {
+          throw new Error(`Las claves del mapa tienen que ser de una sola letra o número. Se encontró: ${key}`);
+        }
+
+        if ([".", "-", " "].indexOf(key) !== -1) {
+          throw new Error(`Las claves del mapa no pueden ser punto, guión ni espacio. Esos caracteres están reservados para definir espacios.`);
+        }
+
+        if (!this.existe_un_actor_llamado_en_el_proyecto(diccionario[key])) {
+          throw new Error(`Los valores del mapa tienen que nombres de actores que existan en alguna escena. El actor "${diccionario[key]}" no existe.`);
+        }
+      }
+    }
+
+    this.referencia_de_mapa = diccionario;
+  }
+
+  /**
+   * Esta función permite crear un mapa a partir de un diccionario de
+   * símbolos previamente creado con la función `pilas.definir_mapa`.
+   *
+   * El argumento mapa tiene que ser una cadena de textos con la descripción
+   * del escenario. Opcionalmente se pueden usar caracteres punto (.) o guión
+   * (-) para separar los items del mapa. También se pueden usar espacios para
+   * facilitar la legibilidad, esta función va a ignorar esos espacios.
+   *
+   * Por ejemplo, esta podría ser una llamada a esta función `crear_mapa`:
+   *
+   *    > this.pilas.crear_mapa(`
+   *           xxxxxxx
+   *           x.....x
+   *           x..n..x
+   *           x.....x
+   *           xxxxxxx
+   *         `);
+   *
+   * Luego esta función admite como argumentos el tamaño de la grilla (64px
+   * por omisión) y las coordenadas en las que se debería dibujar el mapa
+   * (x=0, y=0 por omisión).
+   */
+  crear_mapa(mapa: string, grilla: number = 64, origen_x: number = 0, origen_y: number = 0) {
+    // Se queda con las filas que describen el mapa y descarta los espacios
+    // y lineas vacías.
+    let filas = mapa
+      .split("\n")
+      .map(e => e.trim())
+      .filter(e => e);
+
+    let cantidad_de_filas = filas.length;
+
+    if (!this.referencia_de_mapa) {
+      throw Error(`No se puede crear un mapa si no se llamó antes a la función 'pilas.definir_mapa'.`);
+    }
+
+    for (let fila = 0; fila < cantidad_de_filas; fila++) {
+      let cantidad_de_columnas = filas[fila].length;
+
+      for (let columna = 0; columna < cantidad_de_columnas; columna++) {
+        let letra = filas[fila][columna];
+
+        // la coordenada X e Y se tienen que convertir de modo tal que respeten
+        // la grilla de coordenadas del mapa.
+        let x = columna * grilla + origen_x - ((cantidad_de_columnas / 2) << 0) * grilla;
+        let y = fila * grilla + origen_y - ((cantidad_de_filas / 2) << 0) * grilla;
+
+        // Aquí se intentan crear todos los actores del mapa pero teniendo en cuenta
+        // que se deben ignorar los caracteres ".", "-" y " ".
+        //
+        // Y si se llega a mencionar un actor que no estuvo declarado desde un principio
+        // (con la función "definir_mapa") se lanzará un error.
+        if (this.referencia_de_mapa[letra]) {
+          let clase = this.referencia_de_mapa[letra];
+          this.clonar_en(clase, x, -y);
+        } else {
+          if (["-", " ", "."].indexOf(letra) == -1) {
+            throw Error(`Cuidado, el mapa usa la letra "${letra}" que no se definió a llamar a la función 'definir_mapa'.`);
+          }
+        }
+      }
+    }
   }
 }
 

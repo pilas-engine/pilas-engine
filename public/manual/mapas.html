@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Mapas y niveles</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        { color: #cccccc; background-color: #303030; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ffcfaf; } /* Alert */
+      code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+      code span.at { } /* Attribute */
+      code span.bn { color: #dca3a3; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #f0dfaf; } /* ControlFlow */
+      code span.ch { color: #dca3a3; } /* Char */
+      code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+      code span.co { color: #7f9f7f; } /* Comment */
+      code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+      code span.do { color: #7f9f7f; } /* Documentation */
+      code span.dt { color: #dfdfbf; } /* DataType */
+      code span.dv { color: #dcdccc; } /* DecVal */
+      code span.er { color: #c3bf9f; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #c0bed1; } /* Float */
+      code span.fu { color: #efef8f; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+      code span.kw { color: #f0dfaf; } /* Keyword */
+      code span.op { color: #f0efd0; } /* Operator */
+      code span.ot { color: #efef8f; } /* Other */
+      code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+      code span.sc { color: #dca3a3; } /* SpecialChar */
+      code span.ss { color: #cc9393; } /* SpecialString */
+      code span.st { color: #cc9393; } /* String */
+      code span.va { } /* Variable */
+      code span.vs { color: #cc9393; } /* VerbatimString */
+      code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+        <script src="./manual.js" charset="utf-8"></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Mapas y niveles</h1>
+            </header>
+      <p>Los escenarios de muchos videojuegos se construyen utilizando una técnica llamada tiles, que consiste en utilizar pequeños bloques llamados “tiles” para crear niveles grandes.</p>
+<p>Por ejemplo, en esta imagen se puede ver un nivel diseñado usando esta técnica:</p>
+<p><img src="imagenes/mapas/tiles.png" /></p>
+<p>Esta técnica es muy útil porque permite crear escenarios de manera sencilla. Simplemente repitiendo bloques y reutilizando actores.</p>
+<p>Pilas incluye dos funciones para que podamos hacer niveles de esta forma. Por un lado tenemos una función para definir los bloques que vamos a utilizar y luego una función para dibujar el escenario en pantalla.</p>
+<h2 id="cómo-dibujar-un-mapa-en-pantalla">Cómo dibujar un mapa en pantalla</h2>
+<p>El primer paso es definir qué actores vamos a utilizar como bloques, tenemos que tener esos actores en cualquiera de las escenas.</p>
+<p>Por ejemplo, aquí tengo dos actores, uno llamado “dado” y el otro “plataforma”:</p>
+<p><img src="imagenes/mapas/actores.png" /></p>
+<p>Si quiero crear un nivel usando estos actores tengo que indicarle a pilas cómo llamar a estos actores en la definición de un mapa:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2"></a>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">definir_mapa</span>({</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="st">&quot;d&quot;</span><span class="op">:</span> <span class="st">&quot;dado&quot;</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="st">&quot;p&quot;</span><span class="op">:</span> <span class="st">&quot;plataforma&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>})<span class="op">;</span></span></code></pre></div>
+<p>De esta forma, pilas sabrá que cada que vez que usemos la letra <code>d</code> en un mapa nos estaremos refiriendo a un dado y cada vez que usemos la letra <code>p</code> estaremos refiriéndonos a una plataforma.</p>
+<p>Ahora, imagina que queremos dibujar el mensaje “HOLA” usando dados y luego poner una plataforma debajo del mensaje así:</p>
+<p><img src="imagenes/mapas/resultado.png" /></p>
+<p>Para esto podemos usar la función <code>pilas.crear_mapa</code> y las teclas <code>d</code> y <code>p</code> que definimos antes así:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">crear_mapa</span>(<span class="vs">`</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="vs">      d.d.ddd.d....d.</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="vs">      d.d.d.d.d...d.d</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="vs">      ddd.d.d.d...ddd</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="vs">      d.d.d.d.d...d.d</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="vs">      d.d.ddd.ddd.d.d</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="vs">      pppppppppppppppp</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="vs">`</span><span class="op">,</span> <span class="dv">32</span>)</span></code></pre></div>
+<p>Oh, un pequeño consejo: suele ayudarte a leer mejor el mapa en texto si seleccionar el caracter que estás ingresando con el editor:</p>
+<p><img src="imagenes/mapas/codigo.png" /></p>
+<p>También puede ayudarte a mejorar la legibilidad si usas separadores como “.”, “-” o espacios en aquellos lugares donde no necesitas dibujar un actor.</p>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>

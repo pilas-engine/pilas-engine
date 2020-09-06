@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var timeout = null;
 
+  /*
+   * Esta función permite lanzar una función dentro de un marco
+   * de tiempo donde podría cancelarse.
+   *
+   * Es muy útil para lanzar búsquedas mientras el usuario va
+   * escribiendo y evitando que la aplicación se vuelva super lenta.
+   */
   function debounce(func, wait) {
     if (timeout) {
       clearTimeout(timeout);
@@ -20,6 +27,50 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 200);
   }
 
+  /*
+   * Esta función se encarga de mostrar u ocultar los bloques
+   * HTML del documento dependiento de si coinciden con una búsqueda
+   * o no.
+   *
+   * Por ejemplo, el documento podría ser de esta forma:
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.nave()
+   *      ```
+   *
+   *      Permite crear una nave.
+   *    </div>
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.pelota()
+   *      ```
+   *
+   *      Permite crear un actor pelota.
+   *    </div>
+   *
+   * Pero si se llama a esta función así `filtrar("pelota")`, solamente
+   * el segundo bloque debería verse en el navegador, el primer bloque
+   * que no tiene el texto "pelota" debería tener la clase "dn" (display none)
+   *
+   *    <div class="funcion dn">          <-- Se agregá la clase "dn"
+   *      ```
+   *      pilas.actores.nave()
+   *      ```
+   *
+   *      Permite crear una nave.
+   *    </div>
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.pelota()
+   *      ```
+   *
+   *      Permite crear un actor pelota.
+   *    </div>
+   *
+   */
   function filtrar(valor) {
     var funciones = document.querySelectorAll(".funcion");
     var cantidad_ocultos = 0;
@@ -947,5 +998,69 @@ pilas.esta_reproduciendo_musica()
 
 Retorna `true` si en ese momento está sonando una música, sino responde
 con el valor `false`.
+
+</div>
+
+
+<div class="funcion">
+```
+pilas.definir_mapa(diccionario)
+```
+
+Permite describir cómo se van a representar los actores en un
+mapa de escenario. Esta función se utiliza casi siempre al
+principio del juego o antes de llamar a la función `pilas.crear_mapa`.
+
+Un ejemplo de invocación es el siguiente:
+
+```
+this.pilas.definir_mapa({
+                x: "ladrillo",
+                n: "nave"
+            });
+```
+
+y luego de que se definieron los caracteres, se puede crear
+un mapa así:
+
+
+```
+this.pilas.crear_mapa(`
+          xxxxxxx
+          x.....x
+          x..n..x
+          x.....x
+          xxxxxxx
+        `);
+```
+
+</div>
+
+
+<div class="funcion">
+```
+pilas.crear_mapa(mapa, grilla, origen_x, origen_y)
+```
+
+Esta función permite crear un mapa a partir de un diccionario de
+símbolos previamente creado con la función `pilas.definir_mapa`.
+
+El argumento mapa tiene que ser una cadena de textos con la descripción
+del escenario. Opcionalmente se pueden usar caracteres punto (.) o guión
+(-) para separar los items del mapa. También se pueden usar espacios para
+facilitar la legibilidad, esta función va a ignorar esos espacios.
+
+Por ejemplo, esta podría ser una llamada a esta función `crear_mapa`:
+
+```
+this.pilas.crear_mapa(`
+          x.....x
+          x..n..x
+        `);
+```
+
+Luego esta función admite como argumentos el tamaño de la grilla (64px
+por omisión) y las coordenadas en las que se debería dibujar el mapa
+(x=0, y=0 por omisión).
 
 </div>

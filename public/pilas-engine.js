@@ -2477,6 +2477,9 @@ var Pilas = (function () {
         var actor = this.obtener_actores().find(function (actor) { return actor.nombre === nombre; });
         return actor !== undefined;
     };
+    Pilas.prototype.existe_un_actor_llamado_en_el_proyecto = function (nombre) {
+        return this.modo.existe_actor_llamado_en_el_proyecto(nombre);
+    };
     Pilas.prototype.obtener_actor_por_etiqueta = function (etiqueta) {
         return this.obtener_actores().find(function (actor) {
             return actor.tiene_etiqueta(etiqueta);
@@ -2694,6 +2697,52 @@ var Pilas = (function () {
     };
     Pilas.prototype.limpiar_traza_de_ejecucion = function () {
         this.instrumentacion = {};
+    };
+    Pilas.prototype.definir_mapa = function (diccionario) {
+        for (var key in diccionario) {
+            if (diccionario.hasOwnProperty(key)) {
+                if (typeof key !== "string" || key.length > 1) {
+                    throw new Error("Las claves del mapa tienen que ser de una sola letra o n\u00FAmero. Se encontr\u00F3: " + key);
+                }
+                if ([".", "-", " "].indexOf(key) !== -1) {
+                    throw new Error("Las claves del mapa no pueden ser punto, gui\u00F3n ni espacio. Esos caracteres est\u00E1n reservados para definir espacios.");
+                }
+                if (!this.existe_un_actor_llamado_en_el_proyecto(diccionario[key])) {
+                    throw new Error("Los valores del mapa tienen que nombres de actores que existan en alguna escena. El actor \"" + diccionario[key] + "\" no existe.");
+                }
+            }
+        }
+        this.referencia_de_mapa = diccionario;
+    };
+    Pilas.prototype.crear_mapa = function (mapa, grilla, origen_x, origen_y) {
+        if (grilla === void 0) { grilla = 64; }
+        if (origen_x === void 0) { origen_x = 0; }
+        if (origen_y === void 0) { origen_y = 0; }
+        var filas = mapa
+            .split("\n")
+            .map(function (e) { return e.trim(); })
+            .filter(function (e) { return e; });
+        var cantidad_de_filas = filas.length;
+        if (!this.referencia_de_mapa) {
+            throw Error("No se puede crear un mapa si no se llam\u00F3 antes a la funci\u00F3n 'pilas.definir_mapa'.");
+        }
+        for (var fila = 0; fila < cantidad_de_filas; fila++) {
+            var cantidad_de_columnas = filas[fila].length;
+            for (var columna = 0; columna < cantidad_de_columnas; columna++) {
+                var letra = filas[fila][columna];
+                var x = columna * grilla + origen_x - ((cantidad_de_columnas / 2) << 0) * grilla;
+                var y = fila * grilla + origen_y - ((cantidad_de_filas / 2) << 0) * grilla;
+                if (this.referencia_de_mapa[letra]) {
+                    var clase = this.referencia_de_mapa[letra];
+                    this.clonar_en(clase, x, -y);
+                }
+                else {
+                    if (["-", " ", "."].indexOf(letra) == -1) {
+                        throw Error("Cuidado, el mapa usa la letra \"" + letra + "\" que no se defini\u00F3 a llamar a la funci\u00F3n 'definir_mapa'.");
+                    }
+                }
+            }
+        }
     };
     return Pilas;
 }());
@@ -9010,6 +9059,10 @@ var ModoEjecucion = (function (_super) {
             .filter(function (e) { return e; });
         this._escena_en_ejecucion = escena;
         escena.iniciar();
+    };
+    ModoEjecucion.prototype.existe_actor_llamado_en_el_proyecto = function (nombre) {
+        var nombres_de_todos_los_actores = this.obtener_nombres_de_actores();
+        return nombres_de_todos_los_actores.indexOf(nombre) !== -1;
     };
     ModoEjecucion.prototype.clonar_actor_por_nombre = function (nombre) {
         var nombres_de_todos_los_actores = this.obtener_nombres_de_actores();

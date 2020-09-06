@@ -418,6 +418,12 @@ class ModoEjecucion extends Modo {
     escena.iniciar();
   }
 
+  existe_actor_llamado_en_el_proyecto(nombre: string) {
+    let nombres_de_todos_los_actores = this.obtener_nombres_de_actores();
+
+    return nombres_de_todos_los_actores.indexOf(nombre) !== -1;
+  }
+
   clonar_actor_por_nombre(nombre: string) {
     let nombres_de_todos_los_actores = this.obtener_nombres_de_actores();
 

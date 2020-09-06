@@ -198,6 +198,14 @@
     {
       "nombre": "gamepad-analogicos",
       "desde": "2.3.0"
+    },
+    {
+      "nombre": "mapa-hola",
+      "desde": "2.4.0"
+    },
+    {
+      "nombre": "mapa-niveles",
+      "desde": "2.4.0"
     }
   ]
 }

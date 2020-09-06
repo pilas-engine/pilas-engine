@@ -30,6 +30,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var timeout = null;
 
+  /*
+   * Esta función permite lanzar una función dentro de un marco
+   * de tiempo donde podría cancelarse.
+   *
+   * Es muy útil para lanzar búsquedas mientras el usuario va
+   * escribiendo y evitando que la aplicación se vuelva super lenta.
+   */
   function debounce(func, wait) {
     if (timeout) {
       clearTimeout(timeout);
@@ -41,6 +48,50 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 200);
   }
 
+  /*
+   * Esta función se encarga de mostrar u ocultar los bloques
+   * HTML del documento dependiento de si coinciden con una búsqueda
+   * o no.
+   *
+   * Por ejemplo, el documento podría ser de esta forma:
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.nave()
+   *      ```
+   *
+   *      Permite crear una nave.
+   *    </div>
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.pelota()
+   *      ```
+   *
+   *      Permite crear un actor pelota.
+   *    </div>
+   *
+   * Pero si se llama a esta función así `filtrar("pelota")`, solamente
+   * el segundo bloque debería verse en el navegador, el primer bloque
+   * que no tiene el texto "pelota" debería tener la clase "dn" (display none)
+   *
+   *    <div class="funcion dn">          <-- Se agregá la clase "dn"
+   *      ```
+   *      pilas.actores.nave()
+   *      ```
+   *
+   *      Permite crear una nave.
+   *    </div>
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.pelota()
+   *      ```
+   *
+   *      Permite crear un actor pelota.
+   *    </div>
+   *
+   */
   function filtrar(valor) {
     var funciones = document.querySelectorAll(".funcion");
     var cantidad_ocultos = 0;
@@ -509,6 +560,34 @@ pilas.ajustar(numero, grilla)</code></pre>
 <div class="funcion">
 <pre><code>pilas.esta_reproduciendo_musica()</code></pre>
 <p>Retorna <code>true</code> si en ese momento está sonando una música, sino responde con el valor <code>false</code>.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.definir_mapa(diccionario)</code></pre>
+<p>Permite describir cómo se van a representar los actores en un mapa de escenario. Esta función se utiliza casi siempre al principio del juego o antes de llamar a la función <code>pilas.crear_mapa</code>.</p>
+<p>Un ejemplo de invocación es el siguiente:</p>
+<pre><code>this.pilas.definir_mapa({
+                x: &quot;ladrillo&quot;,
+                n: &quot;nave&quot;
+            });</code></pre>
+<p>y luego de que se definieron los caracteres, se puede crear un mapa así:</p>
+<pre><code>this.pilas.crear_mapa(`
+          xxxxxxx
+          x.....x
+          x..n..x
+          x.....x
+          xxxxxxx
+        `);</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.crear_mapa(mapa, grilla, origen_x, origen_y)</code></pre>
+<p>Esta función permite crear un mapa a partir de un diccionario de símbolos previamente creado con la función <code>pilas.definir_mapa</code>.</p>
+<p>El argumento mapa tiene que ser una cadena de textos con la descripción del escenario. Opcionalmente se pueden usar caracteres punto (.) o guión (-) para separar los items del mapa. También se pueden usar espacios para facilitar la legibilidad, esta función va a ignorar esos espacios.</p>
+<p>Por ejemplo, esta podría ser una llamada a esta función <code>crear_mapa</code>:</p>
+<pre><code>this.pilas.crear_mapa(`
+          x.....x
+          x..n..x
+        `);</code></pre>
+<p>Luego esta función admite como argumentos el tamaño de la grilla (64px por omisión) y las coordenadas en las que se debería dibujar el mapa (x=0, y=0 por omisión).</p>
 </div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>

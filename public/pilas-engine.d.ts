@@ -496,6 +496,7 @@ declare class Pilas {
     fisica: Fisica;
     habilidades: Habilidades;
     comportamientos: Comportamientos;
+    referencia_de_mapa: any;
     modo: any;
     _ancho: number;
     _alto: number;
@@ -557,6 +558,7 @@ declare class Pilas {
     buscar_actor(nombre: string): Actor;
     obtener_actor_por_nombre(nombre: string): Actor;
     existe_un_actor_llamado(nombre: string): boolean;
+    existe_un_actor_llamado_en_el_proyecto(nombre: string): any;
     obtener_actor_por_etiqueta(etiqueta: string): Actor;
     obtener_todos_los_actores_con_la_etiqueta(etiqueta: string): Actor[];
     obtener_cantidad_de_actores(): number;
@@ -593,6 +595,8 @@ declare class Pilas {
     desordenar_lista(lista_original: any): any[];
     notificar_traza_de_ejecucion(id: any, linea: any): void;
     limpiar_traza_de_ejecucion(): void;
+    definir_mapa(diccionario: any): void;
+    crear_mapa(mapa: string, grilla?: number, origen_x?: number, origen_y?: number): void;
 }
 declare var pilasengine: Pilas;
 declare class Sensor {
@@ -1974,6 +1978,7 @@ declare class ModoEjecucion extends Modo {
     instanciar_proyecto(): void;
     instanciar_escena(nombre: string): void;
     crear_escena(datos_de_la_escena: any): void;
+    existe_actor_llamado_en_el_proyecto(nombre: string): boolean;
     clonar_actor_por_nombre(nombre: string): any;
     obtener_nombres_de_actores(): any;
     obtener_entidades_de_actores_de_todas_las_escenas(): any;
