@@ -303,4 +303,3 @@ export default Component.extend({
     this.bus.off("formatear", this, "formatear");
   }
 });
-
