@@ -201,11 +201,11 @@
     },
     {
       "nombre": "mapa-hola",
-      "desde": "2.4.0"
+      "desde": "2.4.1"
     },
     {
       "nombre": "mapa-niveles",
-      "desde": "2.4.0"
+      "desde": "2.4.1"
     }
   ]
 }
