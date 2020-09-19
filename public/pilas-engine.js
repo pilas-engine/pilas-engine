@@ -1855,6 +1855,9 @@ var Mensajes = (function () {
         var metodo = "atender_mensaje_" + nombre;
         var datos = e.data;
         if (!contexto) {
+            if (nombre === "codigo_ejecutado" || nombre === "termina_de_reproducir_sonido") {
+                return;
+            }
             throw new Error("No lleg\u00F3 el nombre de contexto con el mensaje " + nombre);
         }
         if (DEPURAR_MENSAJES) {
@@ -2291,7 +2294,7 @@ var Pilas = (function () {
                         ruta: "sonidos/explosion.mp3"
                     },
                     {
-                        nombre: "laser",
+                        nombre: "gallina",
                         ruta: "sonidos/gallina.mp3"
                     },
                     {

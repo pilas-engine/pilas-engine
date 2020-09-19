@@ -152,7 +152,7 @@ class Pilas {
             ruta: "sonidos/explosion.mp3"
           },
           {
-            nombre: "laser",
+            nombre: "gallina",
             ruta: "sonidos/gallina.mp3"
           },
           {

@@ -95,6 +95,20 @@ export default Component.extend({
 
       let codigo_index_html = archivo_index.replace("CODIGO_SERIALIZADO", json_a_string(proyecto_completo));
       codigo_index_html = codigo_index_html.replace("pilas-engine.js", nombre_de_archivo_con_hash);
+
+      /* caso particular: cuando se usa la apliación en producción, el script de pilas
+       * tiene un finguerprint diferente, así que primero se intenta obtener ese
+       * path de archivo, y luego reemplazarlo por el archivo que realmente se tiene
+       * que utilizar
+       */
+      let expresionDelArchivoPilas = codigo_index_html.match(/pilas-engine-\w*.js/);
+
+
+      if (expresionDelArchivoPilas) {
+        let nombre_incorrecto = expresionDelArchivoPilas[0];
+        codigo_index_html = codigo_index_html.replace(nombre_incorrecto, nombre_de_archivo_con_hash);
+      }
+
       yield carpeta_del_juego.file("index.html", codigo_index_html);
 
       var carpeta_sonidos = carpeta_del_juego.folder("sonidos");

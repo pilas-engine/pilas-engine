@@ -21,6 +21,14 @@ class Mensajes {
     let datos = e.data;
 
     if (!contexto) {
+      /* Caso particuar: cuando se ejecuta el juego en modo
+       * exportado se envía este mensaje pero no hace falta
+       * atenderlo.
+       */
+      if (nombre === "codigo_ejecutado" || nombre === "termina_de_reproducir_sonido") {
+        return;
+      }
+
       throw new Error(`No llegó el nombre de contexto con el mensaje ${nombre}`);
     }
 
