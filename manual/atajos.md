@@ -25,3 +25,6 @@ Esta es una lista de los atajos de teclado que soporta el editor.
 | Tecla  | Acción                                     |
 | ------ | ------------------------------------------ |
 | ctrl+s | Guarda el código y ejecuta automáticamente |
+| ctrl+p | Abre el selector de archivos               |
+| ctrl+o | Abre el selector de símbolos               |
+

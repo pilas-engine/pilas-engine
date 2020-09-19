@@ -111,7 +111,7 @@ export default Component.extend({
     return actor || escena;
   },
 
-  alPulsarTecla( /*evento*/ ) {},
+  alPulsarTecla(/*evento*/) {},
 
   willDestroyElement() {
     this.desconectar_eventos();
@@ -130,8 +130,7 @@ export default Component.extend({
     try {
       let codigo = this.obtener_codigo_para_el_actor({ nombre: actor.nombre });
       this.set("codigo", codigo);
-      this.set("tituloDelCodigo", `Código en modo pausa: ${actor.id}`);
-
+      this.set("tituloDelCodigo", actor.nombre);
     } catch (TypeError) {
       console.warn("No se puede encontrar el código de este actor", actor);
     }
@@ -467,8 +466,15 @@ export default Component.extend({
     return this.get("proyecto.escenas").findBy("id", indice);
   },
 
-  guardar_codigo_en_el_proyecto(seleccion, codigo) {
+  obtenerEscenaDesdeActorID(indice) {
+    let escenas = this.get("proyecto.escenas");
 
+    return escenas.filter(escena => {
+      return escena.actores.findBy("id", indice);
+    }).firstObject;
+  },
+
+  guardar_codigo_en_el_proyecto(seleccion, codigo) {
     if (seleccion === 0) {
       this.definir_codigo_para_el_proyecto(codigo);
     } else {
@@ -633,7 +639,6 @@ export default Component.extend({
     cuando_termino_de_cargar_monaco_editor() {},
 
     cuando_cambia_el_codigo(codigo, titulo) {
-
       // Cuando cambia el código en el modo pausa se tiene
       // que ignorar el cambio y no alterar el código del proyecto.
       if (titulo.includes("modo pausa")) {
@@ -654,7 +659,6 @@ export default Component.extend({
       this.bus.trigger(`formatear`);
 
       later(() => {
-
         this.set("existe_un_error_reciente", false);
         this.set("estado", this.estado.ejecutar());
 
@@ -689,9 +693,7 @@ export default Component.extend({
         this.log.limpiar();
         this.log.info(this.intl.t("interpreter.entering.run"));
         this.log.info(this.intl.t("interpreter.scope"));
-
-      }, 10)
-
+      }, 10);
     },
 
     detener() {
@@ -732,7 +734,7 @@ export default Component.extend({
       });
     },
 
-    cuandoGuardaDesdeElEditor( /*editor*/ ) {
+    cuandoGuardaDesdeElEditor(/*editor*/) {
       this.send("alternarEstadoDeEjecucion");
 
       if (this.get("panelMaximizado")) {
@@ -770,7 +772,7 @@ export default Component.extend({
         this.set("tipo_de_la_instancia_seleccionada", "proyecto");
 
         this.set("codigo", this.proyecto.codigos.proyecto);
-        this.set("tituloDelCodigo", `Codigo del proyecto`);
+        this.set("tituloDelCodigo", "proyecto");
 
         return;
       }
@@ -780,17 +782,20 @@ export default Component.extend({
       let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
       let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
 
-      if (actor) {
-        this.set("instancia_seleccionada", actor);
-        this.set("tipo_de_la_instancia_seleccionada", "actor");
-        console.log("actor seleccionado ", actor);
-        this.set("codigo", this.obtener_codigo_para_el_actor(actor));
-        //console.log("seleccion", seleccion);
-        this.set("tituloDelCodigo", `Código del actor: ${seleccion}`);
+      if (!actor && !escena) {
+        // Si no encuentra el actor es probable que tenga que seleccionar
+        // otra escena y volver a lanzar la búsqueda.
 
-        this.bus.trigger(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, {
-          id: seleccion
-        });
+        let objeto_escena = this.obtenerEscenaDesdeActorID(seleccion)
+
+        if (objeto_escena) {
+          let escenaID = objeto_escena.id;
+          this.set("ultimaEscenaSeleccionada", escenaID);
+          this.mostrar_la_escena_actual_sobre_pilas();
+
+          // Luego de seleccionar la escena vuelve a buscar al actor.
+          actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+        }
       }
 
       if (escena) {
@@ -801,7 +806,19 @@ export default Component.extend({
         this.mostrar_la_escena_actual_sobre_pilas();
 
         this.set("codigo", this.obtener_codigo_para_la_escena(escena));
-        this.set("tituloDelCodigo", `Código de la escena: ${seleccion}`);
+        this.set("tituloDelCodigo", escena.nombre);
+      }
+
+      if (actor) {
+        this.set("instancia_seleccionada", actor);
+        this.set("tipo_de_la_instancia_seleccionada", "actor");
+
+        this.set("codigo", this.obtener_codigo_para_el_actor(actor));
+        this.set("tituloDelCodigo", actor.nombre);
+
+        this.bus.trigger(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, {
+          id: seleccion
+        });
       }
     },
 
@@ -897,7 +914,7 @@ export default Component.extend({
       this.cuandoIntentaCrearUnProyecto();
     },
 
-    cuando_cambia_un_nombre_de_actor( /*nombre*/ ) {
+    cuando_cambia_un_nombre_de_actor(/*nombre*/) {
       // Intenta recargar el editor, para eso vuelve a seleccionar el actor
       // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
       let actor = this.obtenerDetalleDeActorPorIndice(this.seleccion);
@@ -906,11 +923,10 @@ export default Component.extend({
       this.set("tipo_de_la_instancia_seleccionada", "actor");
       this.set("codigo", this.obtener_codigo_para_el_actor(actor));
 
-      let r = Math.random();
-      this.set("tituloDelCodigo", `Código del actor: ${this.seleccion} ${r}`);
+      this.set("tituloDelCodigo", actor.nombre);
     },
 
-    cuando_cambia_un_nombre_de_escena( /*nombre*/ ) {
+    cuando_cambia_un_nombre_de_escena(/*nombre*/) {
       // Intenta recargar el editor, para eso vuelve a seleccionar la escena
       // actual y asigna un tituloDelCodigo aleatorio para que se cargue de nuevo.
       let escena = this.obtenerDetalleDeEscenaPorIndice(this.seleccion);
@@ -919,8 +935,7 @@ export default Component.extend({
       this.set("tipo_de_la_instancia_seleccionada", "escena");
       this.set("codigo", this.obtener_codigo_para_la_escena(escena));
 
-      let r = Math.random();
-      this.set("tituloDelCodigo", `Código de la escena: ${this.seleccion} ${r}`);
+      this.set("tituloDelCodigo", escena.nombre);
     },
 
     alternar(propiedad) {

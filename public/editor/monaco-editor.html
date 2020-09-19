@@ -92,6 +92,10 @@
 	        window.top.postMessage({message: "on-save"}, HOST);
 	      });
 
+	      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_P, function() {
+	        window.top.postMessage({message: "abrir-selector-de-codigos"}, HOST);
+	      });
+
 	      editor.onDidChangeModelContent(function (event) {
 	        window.top.postMessage({updatedCode: editor.getValue()}, HOST);
 	      });
@@ -173,7 +177,7 @@
 					editor._standaloneKeybindingService.addDynamicKeybinding(id, keybinding);
 				}
 
-				changeCommandKeybinding(editor, 'editor.action.quickOutline', monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_P);
+				changeCommandKeybinding(editor, 'editor.action.quickOutline', monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_O);
 			}
 
 	    function registrar_snippets() {

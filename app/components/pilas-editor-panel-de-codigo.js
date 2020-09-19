@@ -52,6 +52,10 @@ export default Component.extend({
     },
 
     actualizarEstadoDeErrores(cantidadDeErrores) {
+      if (this.isDestroyed || this.isDestroying) {
+        return;
+      }
+
       this.set("tieneErrores", cantidadDeErrores > 0);
     }
   }

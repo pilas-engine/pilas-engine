@@ -10,6 +10,11 @@
     box-shadow: 0 0 0 2px #6fb5f1;
   }
 
+  .selector-de-codigo {
+    border: 1px solid #767676;
+    background-color: #ffffff;
+  }
+
   .select {
     padding: 2px;
     outline: 0;
@@ -30,7 +35,6 @@
   .boton {
     color: #454545;
     vertical-align: top;
-    background-color: #e5e9e8;
     box-shadow: inset 0 1px #fff;
     border: 1px solid #9daca9;
     border-radius: 4px;
@@ -54,7 +58,7 @@
 
   .boton-miniatura {
     color: #454545;
-    background-color: #e5e9e8;
+    background-color: #fff;
     border: 1px solid #9daca9;
     border-radius: 4px;
   }

@@ -79,6 +79,7 @@ export default Component.extend({
       this.bus.trigger("usar_receta", receta);
       dd.actions.close();
     },
+
     cuando_abre() {
       later(() => {
         let filtro = document.getElementById("input-filtro-de-receta");

@@ -159,6 +159,10 @@ export default Component.extend({
         if (event.data.message === "on-save") {
           this.bus.trigger("formatear_y_guardar");
         }
+
+        if (event.data.message === "abrir-selector-de-codigos") {
+          this.bus.trigger("abrir_selector_de_codigos");
+        }
       }
     };
 

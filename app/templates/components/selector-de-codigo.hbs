@@ -1,0 +1,56 @@
+{{#basic-dropdown onOpen=(action "cuando_abre") as |dd|}}
+  {{abrir-selector-con-teclado dd=dd tecla=80 mostrarEditor=mostrarEditor}}
+
+  {{#if desactivado}}
+    <div class="o-50 texto selector-de-codigo f7 relative w4 truncate tc">
+      {{titulo_del_codigo}}
+    </div>
+  {{else}}
+    {{#dd.trigger}}
+      <div class="texto selector-de-codigo f7 relative w4 truncate tc">
+        {{titulo_del_codigo}}
+      </div>
+    {{/dd.trigger}}
+  {{/if}}
+
+  {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
+
+    <div class="ph1">
+      {{input 
+        spellcheck=false 
+        autofocus=true 
+        id="input-filtro-de-codigos" 
+        autocomplete="off"
+        type="text" 
+        value=filtro 
+        class="input w-100 v-top pa1 br2 mb2 f6" 
+        placeholder="Filtrar"
+        enter=(action "cuandoPulsaEnter" dd)
+        focusOut=(action "cuandoDejaElInput" dd)
+      }}
+    </div>
+
+    <div class="h5 overflow-y-auto">
+      {{#each entidades_filtradas as |entidad| }}
+        <div {{action "seleccionarEntidad" entidad dd}}
+          class="pa2 unselectable texto pointer hover-bg-black-10 f6 truncate" 
+          role="button">
+          {{#if (eq entidad.tipo "proyecto")}}
+            ◆
+          {{else if (eq entidad.tipo "escena")}}
+            &nbsp; ▾
+          {{else}}
+            &nbsp; &nbsp;
+            <div class="dib br-100 {{if entidad.color entidad.color "bg-silver"}} icono-item-de-actor"></div>
+          {{/if}}
+
+          {{entidad.nombre}}
+        </div>
+      {{else}}
+        <div class="pa2 unselectable o-70 texto f6 truncate">No hay códigos para mostrar</div>
+      {{/each}}
+    </div>
+
+  {{/dd.content}}
+
+{{/basic-dropdown}}
