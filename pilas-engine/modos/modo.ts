@@ -356,10 +356,10 @@ class Modo extends Phaser.Scene {
     texto.depth = sprite.depth + 0.1;
 
     if (sprite.input) {
-      sprite.input.hitArea.width = texto.width;
-      sprite.input.hitArea.height = texto.height;
+      sprite.input.hitArea.width = texto.width + 15;
+      sprite.input.hitArea.height = texto.height + 10;
 
-      sprite.input.hitArea.x = -texto.width / 2;
+      sprite.input.hitArea.x = -texto.width / 2 ;
       sprite.input.hitArea.y = -texto.height / 2;
     }
 
@@ -393,6 +393,8 @@ class Modo extends Phaser.Scene {
         sprite.setOrigin(sprite.originX, sprite.originY);
         sprite.input.hitArea.width = texto.width + margen;
         sprite.input.hitArea.height = texto.height + margen;
+        sprite.input.hitArea.x = 0;
+        sprite.input.hitArea.y = 0;
       }
     }
   }
