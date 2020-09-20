@@ -14,7 +14,10 @@ class Camara {
 
     if (!ignorar_limites) {
       this.pilas.camara.x = Math.max(this.pilas.camara.x, 0);
+      this.pilas.camara.x = Math.min(this.pilas.camara.x, this.pilas.escena.ancho - this.pilas.modo.ancho / 2);
+
       this.pilas.camara.y = Math.min(this.pilas.camara.y, 0);
+      this.pilas.camara.y = Math.max(this.pilas.camara.y, -(this.pilas.escena.alto - this.pilas.modo.alto));
     }
   }
 

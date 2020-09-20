@@ -551,7 +551,9 @@ var Camara = (function () {
         this.pilas.camara.y += dy / suavidad;
         if (!ignorar_limites) {
             this.pilas.camara.x = Math.max(this.pilas.camara.x, 0);
+            this.pilas.camara.x = Math.min(this.pilas.camara.x, this.pilas.escena.ancho - this.pilas.modo.ancho / 2);
             this.pilas.camara.y = Math.min(this.pilas.camara.y, 0);
+            this.pilas.camara.y = Math.max(this.pilas.camara.y, -(this.pilas.escena.alto - this.pilas.modo.alto));
         }
     };
     Object.defineProperty(Camara.prototype, "camara_principal", {
@@ -8326,7 +8328,7 @@ var ModoEditor = (function (_super) {
         this.tamaño_de_la_grilla = 256;
         this.crear_sprite_para_el_cursor_de_la_grilla();
         this.actor_seleccionado = null;
-        this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
+        this.crear_fondo(datos.escena.fondo, datos.escena.ancho + this.ancho / 2, datos.escena.alto);
         this.posicionar_la_camara(datos.escena);
         this.aplicar_limites_a_la_camara(datos.escena);
         this.crear_minimap(datos.escena);
@@ -8440,7 +8442,7 @@ var ModoEditor = (function (_super) {
         this.fondo["es_fondo"] = true;
     };
     ModoEditor.prototype.aplicar_limites_a_la_camara = function (escena) {
-        this.cameras.cameras[0].setBounds(0, 0, escena.ancho, escena.alto);
+        this.cameras.cameras[0].setBounds(0, 0, escena.ancho + this.ancho / 2, escena.alto);
     };
     ModoEditor.prototype.conectar_movimiento_del_mouse = function () {
         var _this = this;
@@ -8598,8 +8600,8 @@ var ModoEditor = (function (_super) {
         if (x < bordes.x) {
             x = bordes.x;
         }
-        if (x > bordes.width - width) {
-            x = bordes.width - width;
+        if (x > bordes.width - width / 2) {
+            x = bordes.width - width / 2;
         }
         if (y < bordes.y) {
             y = bordes.y;

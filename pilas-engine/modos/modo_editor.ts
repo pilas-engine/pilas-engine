@@ -28,7 +28,7 @@ class ModoEditor extends Modo {
     this.crear_sprite_para_el_cursor_de_la_grilla();
     this.actor_seleccionado = null;
 
-    this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
+    this.crear_fondo(datos.escena.fondo, datos.escena.ancho + this.ancho/2, datos.escena.alto);
     this.posicionar_la_camara(datos.escena);
     this.aplicar_limites_a_la_camara(datos.escena);
 
@@ -187,7 +187,7 @@ class ModoEditor extends Modo {
   }
 
   aplicar_limites_a_la_camara(escena) {
-    this.cameras.cameras[0].setBounds(0, 0, escena.ancho, escena.alto);
+    this.cameras.cameras[0].setBounds(0, 0, escena.ancho + this.ancho/2, escena.alto);
   }
 
   private conectar_movimiento_del_mouse() {
@@ -384,8 +384,9 @@ class ModoEditor extends Modo {
       x = bordes.x;
     }
 
-    if (x > bordes.width - width) {
-      x = bordes.width - width;
+    // Evita que sobrepase el límite derecho de la pantalla.
+    if (x > bordes.width - width / 2) {
+      x = bordes.width - width / 2;
     }
 
     if (y < bordes.y) {
