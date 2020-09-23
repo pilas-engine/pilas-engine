@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:cadd58da30408c34448deedcde153d75:c25ee62f4fb7d8a68316c1e376f2066d:920e202f5b2071cb7cfe5b9cc5ec03bb$
+   $TexturePacker:SmartUpdate:1bc854e6f73f5b878aaa50e222040c87:abf4d38ac68974532fe271029b04f78d:920e202f5b2071cb7cfe5b9cc5ec03bb$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -13,55 +13,57 @@
 .sprite-ejemplos {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(ejemplos.jpg);}
 
 .capturas-acceder-a-actores {width:180px; height:140px; background-position: -1px -1px}
-.capturas-angulo {width:180px; height:140px; background-position: -1px -285px}
-.capturas-angulo-entre-actores {width:180px; height:140px; background-position: -1px -143px}
-.capturas-apilador-de-cajas {width:180px; height:140px; background-position: -1px -427px}
-.capturas-aprender-y-olvidar {width:180px; height:140px; background-position: -1px -569px}
-.capturas-arkanoid {width:180px; height:140px; background-position: -183px -1px}
-.capturas-arrastrables {width:180px; height:140px; background-position: -183px -143px}
-.capturas-asusta-fantasmas {width:179px; height:140px; background-position: -1821px -1px}
-.capturas-automata-cofre {width:179px; height:140px; background-position: -1821px -143px}
-.capturas-automata-contra-calaveras {width:179px; height:140px; background-position: -1821px -285px}
-.capturas-azar {width:180px; height:140px; background-position: -183px -285px}
-.capturas-barra-de-energia {width:180px; height:140px; background-position: -183px -427px}
-.capturas-barras-de-energia {width:180px; height:140px; background-position: -183px -569px}
-.capturas-camara-seguir-clicks {width:180px; height:140px; background-position: -365px -1px}
-.capturas-click {width:180px; height:140px; background-position: -365px -143px}
-.capturas-click_actor {width:180px; height:140px; background-position: -365px -285px}
-.capturas-controles {width:180px; height:140px; background-position: -365px -427px}
-.capturas-cuando-pulsa-tecla {width:180px; height:140px; background-position: -365px -569px}
-.capturas-cursores {width:180px; height:140px; background-position: -547px -1px}
-.capturas-dos-jugadores {width:180px; height:140px; background-position: -547px -143px}
-.capturas-ejemplo-nave {width:180px; height:140px; background-position: -547px -285px}
-.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -1639px -285px}
-.capturas-flappy {width:180px; height:140px; background-position: -547px -427px}
-.capturas-gamepad-analogicos {width:180px; height:140px; background-position: -547px -569px}
-.capturas-gamepad-simple {width:180px; height:140px; background-position: -729px -1px}
-.capturas-gravedad {width:180px; height:140px; background-position: -729px -143px}
-.capturas-huesos {width:180px; height:140px; background-position: -729px -285px}
-.capturas-imagenes-como-botones {width:180px; height:140px; background-position: -729px -427px}
-.capturas-laser-y-misil {width:180px; height:140px; background-position: -729px -569px}
-.capturas-mantener-valores-entre-escenas {width:180px; height:140px; background-position: -911px -1px}
-.capturas-mapa-hola {width:180px; height:140px; background-position: -911px -143px}
-.capturas-mapa-niveles {width:180px; height:140px; background-position: -911px -285px}
-.capturas-mejor-puntaje {width:180px; height:139px; background-position: -1639px -426px}
-.capturas-memorizar {width:180px; height:140px; background-position: -911px -427px}
-.capturas-mensaje_global {width:180px; height:140px; background-position: -911px -569px}
-.capturas-menu-simple {width:180px; height:140px; background-position: -1093px -1px}
-.capturas-musica {width:180px; height:140px; background-position: -1093px -143px}
-.capturas-nave_contra_aliens {width:180px; height:140px; background-position: -1093px -285px}
-.capturas-naves {width:180px; height:140px; background-position: -1093px -427px}
-.capturas-nubes {width:180px; height:140px; background-position: -1093px -569px}
-.capturas-pacman {width:180px; height:140px; background-position: -1457px -1px}
-.capturas-pacman-con-paredes {width:180px; height:140px; background-position: -1275px -1px}
-.capturas-pantalla-completa {width:180px; height:140px; background-position: -1639px -1px}
-.capturas-pausar {width:180px; height:140px; background-position: -1275px -143px}
-.capturas-plataformas {width:180px; height:140px; background-position: -1275px -427px}
-.capturas-plataformas-2 {width:180px; height:140px; background-position: -1275px -285px}
-.capturas-recorrido-con-orientacion {width:180px; height:140px; background-position: -1275px -569px}
-.capturas-recorrido-de-curva {width:180px; height:140px; background-position: -1457px -143px}
-.capturas-recorrido-simple {width:180px; height:140px; background-position: -1639px -143px}
-.capturas-rompecabezas {width:180px; height:139px; background-position: -1639px -567px}
-.capturas-sokoban {width:180px; height:140px; background-position: -1457px -285px}
-.capturas-temporizadores {width:180px; height:140px; background-position: -1457px -427px}
-.capturas-tipos_de_animacion {width:180px; height:140px; background-position: -1457px -569px}
+.capturas-angulo {width:180px; height:140px; background-position: -365px -1px}
+.capturas-angulo-entre-actores {width:180px; height:140px; background-position: -183px -1px}
+.capturas-apilador-de-cajas {width:180px; height:140px; background-position: -547px -1px}
+.capturas-aprender-y-olvidar {width:180px; height:140px; background-position: -729px -1px}
+.capturas-arkanoid {width:180px; height:140px; background-position: -911px -1px}
+.capturas-arrastrables {width:180px; height:140px; background-position: -1093px -1px}
+.capturas-asusta-fantasmas {width:179px; height:140px; background-position: -1457px -569px}
+.capturas-automata-cofre {width:179px; height:140px; background-position: -1638px -569px}
+.capturas-automata-contra-calaveras {width:179px; height:140px; background-position: -1819px -569px}
+.capturas-azar {width:180px; height:140px; background-position: -1275px -1px}
+.capturas-barra-de-energia {width:180px; height:140px; background-position: -1457px -1px}
+.capturas-barras-de-energia {width:180px; height:140px; background-position: -1639px -1px}
+.capturas-burbujas {width:180px; height:140px; background-position: -1821px -1px}
+.capturas-camara-seguir-clicks {width:180px; height:140px; background-position: -1px -143px}
+.capturas-click {width:180px; height:140px; background-position: -183px -143px}
+.capturas-click_actor {width:180px; height:140px; background-position: -365px -143px}
+.capturas-controles {width:180px; height:140px; background-position: -547px -143px}
+.capturas-cuando-pulsa-tecla {width:180px; height:140px; background-position: -729px -143px}
+.capturas-cursores {width:180px; height:140px; background-position: -911px -143px}
+.capturas-dos-jugadores {width:180px; height:140px; background-position: -1093px -143px}
+.capturas-ejemplo-nave {width:180px; height:140px; background-position: -1275px -143px}
+.capturas-explosion_al_colisionar {width:180px; height:139px; background-position: -911px -569px}
+.capturas-flappy {width:180px; height:140px; background-position: -1457px -143px}
+.capturas-gamepad-analogicos {width:180px; height:140px; background-position: -1639px -143px}
+.capturas-gamepad-simple {width:180px; height:140px; background-position: -1821px -143px}
+.capturas-gravedad {width:180px; height:140px; background-position: -1px -285px}
+.capturas-huesos {width:180px; height:140px; background-position: -183px -285px}
+.capturas-imagenes-como-botones {width:180px; height:140px; background-position: -365px -285px}
+.capturas-laser-y-misil {width:180px; height:140px; background-position: -547px -285px}
+.capturas-lucha {width:180px; height:140px; background-position: -729px -285px}
+.capturas-mantener-valores-entre-escenas {width:180px; height:140px; background-position: -911px -285px}
+.capturas-mapa-hola {width:180px; height:140px; background-position: -1093px -285px}
+.capturas-mapa-niveles {width:180px; height:140px; background-position: -1275px -285px}
+.capturas-mejor-puntaje {width:180px; height:139px; background-position: -1093px -569px}
+.capturas-memorizar {width:180px; height:140px; background-position: -1457px -285px}
+.capturas-mensaje_global {width:180px; height:140px; background-position: -1639px -285px}
+.capturas-menu-simple {width:180px; height:140px; background-position: -1821px -285px}
+.capturas-musica {width:180px; height:140px; background-position: -1px -427px}
+.capturas-nave_contra_aliens {width:180px; height:140px; background-position: -183px -427px}
+.capturas-naves {width:180px; height:140px; background-position: -365px -427px}
+.capturas-nubes {width:180px; height:140px; background-position: -547px -427px}
+.capturas-pacman {width:180px; height:140px; background-position: -911px -427px}
+.capturas-pacman-con-paredes {width:180px; height:140px; background-position: -729px -427px}
+.capturas-pantalla-completa {width:180px; height:140px; background-position: -1093px -427px}
+.capturas-pausar {width:180px; height:140px; background-position: -1275px -427px}
+.capturas-plataformas {width:180px; height:140px; background-position: -1639px -427px}
+.capturas-plataformas-2 {width:180px; height:140px; background-position: -1457px -427px}
+.capturas-recorrido-con-orientacion {width:180px; height:140px; background-position: -1821px -427px}
+.capturas-recorrido-de-curva {width:180px; height:140px; background-position: -1px -569px}
+.capturas-recorrido-simple {width:180px; height:140px; background-position: -183px -569px}
+.capturas-rompecabezas {width:180px; height:139px; background-position: -1275px -569px}
+.capturas-sokoban {width:180px; height:140px; background-position: -365px -569px}
+.capturas-temporizadores {width:180px; height:140px; background-position: -547px -569px}
+.capturas-tipos_de_animacion {width:180px; height:140px; background-position: -729px -569px}
