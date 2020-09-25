@@ -6,6 +6,7 @@
   </div>
 
   {{#basic-dropdown onOpen=(action "cuando_abre") as |dd|}}
+
     {{#dd.trigger}}
       <div class="f7 tr texto pv1 pointer">
         {{t "warning.code.errors"}}
@@ -15,7 +16,7 @@
     {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
       <div class="texto lh-copy w5 truncate">
         {{#each errores as |error|}}
-          {{error.startLineNumber}}: {{error.message}}<br/>
+          {{error.startLineNumber}}: {{error.message}}<br>
         {{/each}}
       </div>
 
