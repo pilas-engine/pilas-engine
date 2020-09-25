@@ -172,8 +172,7 @@ export default Component.extend({
 
   analizarErrores() {
     let errores = this.frame.monaco.editor.getModelMarkers({});
-    let cantidadDeErrores = errores.length;
-    this.cuandoTerminaDeComprobarErrores(cantidadDeErrores);
+    this.cuandoTerminaDeComprobarErrores(errores);
   },
 
   didInsertElement() {

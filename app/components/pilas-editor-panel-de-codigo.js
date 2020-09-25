@@ -51,12 +51,13 @@ export default Component.extend({
       }
     },
 
-    actualizarEstadoDeErrores(cantidadDeErrores) {
+    actualizarEstadoDeErrores(errores) {
       if (this.isDestroyed || this.isDestroying) {
         return;
       }
 
-      this.set("tieneErrores", cantidadDeErrores > 0);
+      this.set("tieneErrores", errores.length > 0);
+      this.set("errores", errores);
     }
   }
 });

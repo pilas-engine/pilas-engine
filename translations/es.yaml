@@ -25,7 +25,7 @@ stop: Detener
 pause: Pausar
 save.and.run: Guardar y ejecutar
 code: Código
-warning.code.errors: Cuidado, hay errores en el código.
+warning.code.errors: Código con errores.
 recipes: Recetas
 no.recipes: No hay recetas que coincidan con esta búsqueda.
 select.recipe: Seleccioná un actor o una escena para ver recetas.

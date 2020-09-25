@@ -25,7 +25,7 @@ stop: Stop
 pause: Pause
 save.and.run: Save and run
 code: Code
-warning.code.errors: Warning, there are errors in code.
+warning.code.errors: Code with errors.
 recipes: Recipes
 no.recipes: There is no recipes
 select.recipe: Select and actor or scene to see all recipes
