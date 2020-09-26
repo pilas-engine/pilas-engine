@@ -131,6 +131,7 @@ export default Component.extend({
       let codigo = this.obtener_codigo_para_el_actor({ nombre: actor.nombre });
       this.set("codigo", codigo);
       this.set("tituloDelCodigo", actor.nombre);
+      this.set("identificador", actor.id);
     } catch (TypeError) {
       console.warn("No se puede encontrar el código de este actor", actor);
     }
@@ -641,7 +642,7 @@ export default Component.extend({
     cuando_cambia_el_codigo(codigo, titulo) {
       // Cuando cambia el código en el modo pausa se tiene
       // que ignorar el cambio y no alterar el código del proyecto.
-      if (titulo.includes("modo pausa")) {
+      if (this.estado.es_modo_pausa) {
         return;
       }
 
@@ -773,6 +774,7 @@ export default Component.extend({
 
         this.set("codigo", this.proyecto.codigos.proyecto);
         this.set("tituloDelCodigo", "proyecto");
+        this.set("identificador", "");
 
         return;
       }
@@ -786,7 +788,7 @@ export default Component.extend({
         // Si no encuentra el actor es probable que tenga que seleccionar
         // otra escena y volver a lanzar la búsqueda.
 
-        let objeto_escena = this.obtenerEscenaDesdeActorID(seleccion)
+        let objeto_escena = this.obtenerEscenaDesdeActorID(seleccion);
 
         if (objeto_escena) {
           let escenaID = objeto_escena.id;
@@ -807,6 +809,7 @@ export default Component.extend({
 
         this.set("codigo", this.obtener_codigo_para_la_escena(escena));
         this.set("tituloDelCodigo", escena.nombre);
+        this.set("identificador", escena.id);
       }
 
       if (actor) {
@@ -815,6 +818,7 @@ export default Component.extend({
 
         this.set("codigo", this.obtener_codigo_para_el_actor(actor));
         this.set("tituloDelCodigo", actor.nombre);
+        this.set("identificador", actor.id);
 
         this.bus.trigger(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, {
           id: seleccion
@@ -924,6 +928,7 @@ export default Component.extend({
       this.set("codigo", this.obtener_codigo_para_el_actor(actor));
 
       this.set("tituloDelCodigo", actor.nombre);
+      this.set("identificador", actor.id);
     },
 
     cuando_cambia_un_nombre_de_escena(/*nombre*/) {
@@ -936,6 +941,7 @@ export default Component.extend({
       this.set("codigo", this.obtener_codigo_para_la_escena(escena));
 
       this.set("tituloDelCodigo", escena.nombre);
+      this.set("identificador", escena.id);
     },
 
     alternar(propiedad) {

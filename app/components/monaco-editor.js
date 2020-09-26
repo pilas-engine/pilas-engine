@@ -16,6 +16,7 @@ export default Component.extend({
   modoVim: false,
   window: null,
   titulo: "",
+  identificador: "",
 
   cuandoCargaElEditor(editor, monaco, window) {
     this.set("editor", editor);
@@ -73,12 +74,8 @@ export default Component.extend({
     this.limpiar_resaltado();
 
     // En data debería guardar el ID del actor que se instrumentó.
-    // y solamente ingresar a data.ID del actor seleccionado (ver la propiedad
-    // this.titulo)
-    let expresion = this.titulo.match(/: (\d+)/);
-
-    if (expresion) {
-      let id_actor_seleccionado = +expresion[1];
+    if (this.identificador) {
+      let id_actor_seleccionado = this.identificador;
 
       if (id_actor_seleccionado && data[id_actor_seleccionado]) {
         data[id_actor_seleccionado].map(linea => {
