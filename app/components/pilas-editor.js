@@ -639,7 +639,7 @@ export default Component.extend({
 
     cuando_termino_de_cargar_monaco_editor() {},
 
-    cuando_cambia_el_codigo(codigo, titulo) {
+    cuando_cambia_el_codigo(codigo /*, titulo*/) {
       // Cuando cambia el código en el modo pausa se tiene
       // que ignorar el cambio y no alterar el código del proyecto.
       if (this.estado.es_modo_pausa) {
