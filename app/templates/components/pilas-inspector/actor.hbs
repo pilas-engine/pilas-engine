@@ -70,12 +70,23 @@
     {{else if (eq propiedad.tipo "sensores")}}
 
       {{pilas-propiedad/sensores
-          id=instancia_seleccionada.id
+          actor_id=instancia_seleccionada.id
           objeto=instancia_seleccionada
           propiedad=propiedad
           etiqueta=propiedad.etiqueta
           modificarAtributo=cuando_modifica_atributo_de_actor
         }}
+
+    {{else if (eq propiedad.tipo "lasers")}}
+
+      {{pilas-propiedad/lasers
+          actor_id=instancia_seleccionada.id
+          objeto=instancia_seleccionada
+          propiedad=propiedad
+          etiqueta=propiedad.etiqueta
+          modificarAtributo=cuando_modifica_atributo_de_actor
+        }}
+
 
     {{else}}
 

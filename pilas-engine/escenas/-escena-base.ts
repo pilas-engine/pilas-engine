@@ -73,7 +73,7 @@ class EscenaBase {
 
       this._actor_visor_observables.actualizar = function() {
         let texto = JSON.stringify(self._observables, null, 4)
-          .replace(/{|}|"/g, "")
+          .replace(/^{|}$|"/g, "")
           .replace(/,\n/g, "\n")
           .replace(/ {4}/g, "")
           .trim();
@@ -88,8 +88,60 @@ class EscenaBase {
     if (typeof variable == "number" && !Number.isInteger(variable)) {
       this._observables[nombre] = variable.toFixed(2);
     } else {
-      this._observables[nombre] = `${variable}`;
+      this._observables[nombre] = `${this.convertir_a_string(variable)}`;
     }
+  }
+
+  /**
+   * Intenta convertir listas y objetos a un string que represente
+   * lo mejor posible el contenido.
+   *
+   * Es muy similar a la función JSON.stringify, pero intenta convertir
+   * solamente objetos que sean seriables.
+   */
+  private convertir_a_string(variable) {
+    if (Array.isArray(variable)) {
+      let items = [];
+
+      for (let i = 0; i < variable.length; i++) {
+        items.push(this.convertir_a_string(variable[i]));
+      }
+
+      return `[ ${items.join(", ")} ]`;
+    }
+
+    if (variable === null) {
+      return "null";
+    }
+
+    if (variable === undefined) {
+      return "undefined";
+    }
+
+    if (`${variable}` === "[object Object]") {
+      let campos = Object.entries(variable);
+
+      if (campos.length > 8) {
+        return "<Objeto>";
+      } else {
+        let items_diccionario = [];
+
+        for (let i = 0; i < campos.length; i++) {
+          let clave = campos[i][0];
+          let valor = campos[i][1];
+
+          items_diccionario.push(`${clave}: ${this.convertir_a_string(valor)}`);
+        }
+
+        return `{ ${items_diccionario.join(", ")} }`;
+      }
+    }
+
+    if (typeof variable === "number") {
+      return variable.toFixed(2);
+    }
+
+    return variable;
   }
 
   agregar_actor(actor: Actor) {

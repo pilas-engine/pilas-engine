@@ -20,6 +20,10 @@ class Mensajes {
     let metodo = "atender_mensaje_" + nombre;
     let datos = e.data;
 
+    if (!nombre) {
+      return;
+    }
+
     if (!contexto) {
       /* Caso particuar: cuando se ejecuta el juego en modo
        * exportado se envía este mensaje pero no hace falta
@@ -104,7 +108,7 @@ class Mensajes {
     this.pilas.modo.posicionar_la_camara(datos.escena);
   }
 
-  atender_mensaje_termina_de_reproducir_sonido(/*datos*/) { }
+  atender_mensaje_termina_de_reproducir_sonido(/*datos*/) {}
 
   atender_mensaje_ejecutar_proyecto(datos) {
     let parametros = {
@@ -120,7 +124,7 @@ class Mensajes {
   }
 
   emitir_excepcion_al_editor(error: any, origen: any) {
-    let stacktrace = error.stack.replace(/\(.*\)/g, "").replace(/  at /g, " - ");
+    let stacktrace = error.stack.replace(/\(.*\)/g, "").replace(/ {2}at /g, " - ");
     let parametros = {
       pilas: this.pilas,
       error: error,

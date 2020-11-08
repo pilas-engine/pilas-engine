@@ -105,6 +105,8 @@ actor:
   sensors: 传感器
   sensor: 传感器
   new.sensor: 创建一个传感器
+  lasers: 雷射
+  new.laser: 新激光
 
 project:
   video.mode: 视频模式

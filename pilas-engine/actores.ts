@@ -144,7 +144,8 @@ class Actores {
     return this.crear_actor("nube_animada");
   }
 
-  pizarra() {
+  pizarra(): pizarra {
+    // @ts-ignore
     return this.crear_actor("pizarra");
   }
 

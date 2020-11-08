@@ -18,6 +18,17 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
@@ -1841,6 +1852,273 @@ var Huesos = (function () {
     };
     return Huesos;
 }());
+var Laser = (function () {
+    function Laser(actor, nombre, rotacion, longitud) {
+        this.actor = actor;
+        this.nombre = nombre;
+        this.rotacion = rotacion;
+        this.longitud = longitud;
+    }
+    Laser.prototype.obtener_colisiones = function () {
+        var pilas = this.actor.pilas;
+        var angulo = pilas.utilidades.convertir_angulo_a_radianes(this.rotacion);
+        var x1 = this.actor.x;
+        var y1 = this.actor.y;
+        var x2 = x1 + Math.cos(angulo) * this.longitud;
+        var y2 = y1 + Math.sin(angulo) * this.longitud;
+        return pilas.laser(this.actor, x1, y1, x2, y2);
+    };
+    Laser.prototype.distancia_al_actor_mas_cercado = function () {
+        var colisiones = this.obtener_colisiones();
+        if (colisiones.length > 0) {
+            return colisiones[0].distancia;
+        }
+        else {
+            return this.longitud;
+        }
+    };
+    Laser.prototype.distancia_al_actor_con_etiqueta = function (etiqueta) {
+        var colisiones = this.obtener_colisiones();
+        colisiones = colisiones.filter(function (col) {
+            return col.actor.tiene_etiqueta(etiqueta);
+        });
+        if (colisiones.length > 0) {
+            return colisiones[0].distancia;
+        }
+        else {
+            return this.longitud;
+        }
+    };
+    Laser.prototype.colisiona_con_un_actor_de_etiqueta = function (etiqueta) {
+        var colisiones = this.obtener_colisiones();
+        colisiones = colisiones.filter(function (col) {
+            return col.actor.tiene_etiqueta(etiqueta);
+        });
+        return colisiones.length > 0;
+    };
+    Laser.prototype.obtener_actor_mas_cercano = function () {
+        var colisiones = this.obtener_colisiones();
+        if (colisiones.length > 0) {
+            return colisiones[0].actor;
+        }
+        else {
+            return null;
+        }
+    };
+    return Laser;
+}());
+function raycast(bodies, start, end, sort) {
+    if (sort === void 0) { sort = true; }
+    start = vec2.fromOther(start);
+    end = vec2.fromOther(end);
+    var query = Phaser.Physics.Matter.Matter.Query.ray(bodies, start, end);
+    var cols = [];
+    var raytest = new ray(start, end);
+    for (var i = query.length - 1; i >= 0; i--) {
+        var bcols = ray.bodyCollisions(raytest, query[i].body);
+        for (var k = bcols.length - 1; k >= 0; k--) {
+            cols.push(bcols[k]);
+        }
+    }
+    if (sort) {
+        cols.sort(function (a, b) {
+            return a.point.distance(start) - b.point.distance(start);
+        });
+    }
+    return cols;
+}
+var raycol = (function () {
+    function raycol(body, point, normal, verts) {
+        this.body = body;
+        this.point = point;
+        this.normal = normal;
+        this.verts = verts;
+    }
+    return raycol;
+}());
+var ray = (function () {
+    function ray(start, end) {
+        this.start = start;
+        this.end = end;
+    }
+    ray.prototype.yValueAt = function (x) {
+        return this.offsetY + this.slope * x;
+    };
+    ray.prototype.xValueAt = function (y) {
+        return (y - this.offsetY) / this.slope;
+    };
+    ray.prototype.pointInBounds = function (point) {
+        var minX = Math.min(this.start.x, this.end.x);
+        var maxX = Math.max(this.start.x, this.end.x);
+        var minY = Math.min(this.start.y, this.end.y);
+        var maxY = Math.max(this.start.y, this.end.y);
+        return point.x >= minX && point.x <= maxX && point.y >= minY && point.y <= maxY;
+    };
+    ray.prototype.calculateNormal = function (ref) {
+        var dif = this.difference;
+        var norm1 = dif.normalized().rotate(Math.PI / 2);
+        var norm2 = dif.normalized().rotate(Math.PI / -2);
+        if (this.start.plus(norm1).distance(ref) < this.start.plus(norm2).distance(ref))
+            return norm1;
+        return norm2;
+    };
+    Object.defineProperty(ray.prototype, "difference", {
+        get: function () {
+            return this.end.minus(this.start);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ray.prototype, "slope", {
+        get: function () {
+            var dif = this.difference;
+            return dif.y / dif.x;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ray.prototype, "offsetY", {
+        get: function () {
+            return this.start.y - this.slope * this.start.x;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ray.prototype, "isHorizontal", {
+        get: function () {
+            return compareNum(this.start.y, this.end.y);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ray.prototype, "isVertical", {
+        get: function () {
+            return compareNum(this.start.x, this.end.x);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    ray.intersect = function (rayA, rayB) {
+        if (rayA.isVertical && rayB.isVertical)
+            return null;
+        if (rayA.isVertical)
+            return new vec2(rayA.start.x, rayB.yValueAt(rayA.start.x));
+        if (rayB.isVertical)
+            return new vec2(rayB.start.x, rayA.yValueAt(rayB.start.x));
+        if (compareNum(rayA.slope, rayB.slope))
+            return null;
+        if (rayA.isHorizontal)
+            return new vec2(rayB.xValueAt(rayA.start.y), rayA.start.y);
+        if (rayB.isHorizontal)
+            return new vec2(rayA.xValueAt(rayB.start.y), rayB.start.y);
+        var x = (rayB.offsetY - rayA.offsetY) / (rayA.slope - rayB.slope);
+        return new vec2(x, rayA.yValueAt(x));
+    };
+    ray.collisionPoint = function (rayA, rayB) {
+        var intersection = ray.intersect(rayA, rayB);
+        if (!intersection)
+            return null;
+        if (!rayA.pointInBounds(intersection))
+            return null;
+        if (!rayB.pointInBounds(intersection))
+            return null;
+        return intersection;
+    };
+    ray.bodyEdges = function (body) {
+        var r = [];
+        for (var i = body.parts.length - 1; i >= 0; i--) {
+            for (var k = body.parts[i].vertices.length - 1; k >= 0; k--) {
+                var k2 = k + 1;
+                if (k2 >= body.parts[i].vertices.length)
+                    k2 = 0;
+                var tray = new ray(vec2.fromOther(body.parts[i].vertices[k]), vec2.fromOther(body.parts[i].vertices[k2]));
+                tray.verts = [body.parts[i].vertices[k], body.parts[i].vertices[k2]];
+                r.push(tray);
+            }
+        }
+        return r;
+    };
+    ray.bodyCollisions = function (rayA, body) {
+        var r = [];
+        var edges = ray.bodyEdges(body);
+        for (var i = edges.length - 1; i >= 0; i--) {
+            var colpoint = ray.collisionPoint(rayA, edges[i]);
+            if (!colpoint)
+                continue;
+            var normal = edges[i].calculateNormal(rayA.start);
+            r.push(new raycol(body, colpoint, normal, edges[i].verts));
+        }
+        return r;
+    };
+    return ray;
+}());
+function compareNum(a, b, leniency) {
+    if (leniency === void 0) { leniency = 0.00001; }
+    return Math.abs(b - a) <= leniency;
+}
+var vec2 = (function () {
+    function vec2(x, y) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = x; }
+        this.x = x;
+        this.y = y;
+    }
+    vec2.prototype.normalized = function (magnitude) {
+        if (magnitude === void 0) { magnitude = 1; }
+        return this.multiply(magnitude / this.distance());
+    };
+    Object.defineProperty(vec2.prototype, "inverted", {
+        get: function () {
+            return this.multiply(-1);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    vec2.prototype.multiply = function (factor) {
+        return new vec2(this.x * factor, this.y * factor);
+    };
+    vec2.prototype.plus = function (vec) {
+        return new vec2(this.x + vec.x, this.y + vec.y);
+    };
+    vec2.prototype.minus = function (vec) {
+        return this.plus(vec.inverted);
+    };
+    vec2.prototype.rotate = function (rot) {
+        var ang = this.direction;
+        var mag = this.distance();
+        ang += rot;
+        return vec2.fromAng(ang, mag);
+    };
+    vec2.prototype.toPhysVector = function () {
+        return Phaser.Physics.Matter.Matter.Vector.create(this.x, this.y);
+    };
+    Object.defineProperty(vec2.prototype, "direction", {
+        get: function () {
+            return Math.atan2(this.y, this.x);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    vec2.prototype.distance = function (vec) {
+        if (vec === void 0) { vec = new vec2(); }
+        var d = Math.sqrt(Math.pow(this.x - vec.x, 2) + Math.pow(this.y - vec.y, 2));
+        return d;
+    };
+    vec2.prototype.clone = function () {
+        return new vec2(this.x, this.y);
+    };
+    vec2.fromAng = function (angle, magnitude) {
+        if (magnitude === void 0) { magnitude = 1; }
+        return new vec2(Math.cos(angle) * magnitude, Math.sin(angle) * magnitude);
+    };
+    vec2.fromOther = function (vector) {
+        return new vec2(vector.x, vector.y);
+    };
+    vec2.prototype.toString = function () {
+        return "vector<" + this.x + ", " + this.y + ">";
+    };
+    return vec2;
+}());
 var DEPURAR_MENSAJES = false;
 var DEPURAR_MENSAJES_DE_CARGA = false;
 var Mensajes = (function () {
@@ -1856,6 +2134,9 @@ var Mensajes = (function () {
         var contexto = e.data.nombre_del_contexto;
         var metodo = "atender_mensaje_" + nombre;
         var datos = e.data;
+        if (!nombre) {
+            return;
+        }
         if (!contexto) {
             if (nombre === "codigo_ejecutado" || nombre === "termina_de_reproducir_sonido") {
                 return;
@@ -1936,7 +2217,7 @@ var Mensajes = (function () {
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
     Mensajes.prototype.emitir_excepcion_al_editor = function (error, origen) {
-        var stacktrace = error.stack.replace(/\(.*\)/g, "").replace(/  at /g, " - ");
+        var stacktrace = error.stack.replace(/\(.*\)/g, "").replace(/ {2}at /g, " - ");
         var parametros = {
             pilas: this.pilas,
             error: error,
@@ -2749,6 +3030,54 @@ var Pilas = (function () {
             }
         }
     };
+    Pilas.prototype.laser = function (actor, x1, y1, x2, y2) {
+        var _this = this;
+        var bodies = this.modo.matter.world.getAllBodies();
+        var ids = [];
+        var desde = this.utilidades.convertir_coordenada_de_pilas_a_phaser(x1, y1);
+        var hasta = this.utilidades.convertir_coordenada_de_pilas_a_phaser(x2, y2);
+        var colisiones = raycast(bodies, desde, hasta);
+        colisiones = colisiones.filter(function (col) {
+            return col.body.gameObject && col.body.gameObject.actor;
+        });
+        colisiones = colisiones.filter(function (col) {
+            return col.body.gameObject.actor.id !== actor.id;
+        });
+        colisiones = colisiones.filter(function (col) {
+            if (ids.includes(col.body.gameObject.actor.id)) {
+                return false;
+            }
+            else {
+                ids.push(col.body.gameObject.actor.id);
+                return true;
+            }
+        });
+        return colisiones
+            .map(function (col) {
+            var punto = _this.utilidades.convertir_coordenada_de_phaser_a_pilas(col.point.x, col.point.y);
+            return {
+                actor: col.body.gameObject.actor,
+                body: col.body,
+                distancia: Math.trunc(_this.obtener_distancia_entre_puntos(x1, y1, punto.x, punto.y)),
+                x: punto.x,
+                y: punto.y
+            };
+        })
+            .sort(function (a, b) { return a.distancia - b.distancia; });
+    };
+    Pilas.prototype.laser_al_primer_actor = function (actor, x1, y1, x2, y2, etiqueta) {
+        if (etiqueta === void 0) { etiqueta = ""; }
+        var colisiones = this.laser(actor, x1, y1, x2, y2);
+        if (etiqueta) {
+            colisiones = colisiones.filter(function (e) { return e.actor.tiene_etiqueta(etiqueta); });
+        }
+        if (colisiones.length > 0) {
+            return colisiones[0];
+        }
+        else {
+            return null;
+        }
+    };
     return Pilas;
 }());
 var pilasengine = new Pilas();
@@ -2763,6 +3092,9 @@ var Sensor = (function () {
         enumerable: false,
         configurable: true
     });
+    Sensor.prototype.colisiones_con_la_etiqueta = function (etiqueta) {
+        return this._figura.colisiones.filter(function (actor) { return actor.tiene_etiqueta(etiqueta); });
+    };
     Sensor.prototype.colisiona_con_etiqueta = function (etiqueta) {
         if (this._figura.colisiones.find(function (actor) { return actor.tiene_etiqueta(etiqueta); })) {
             return true;
@@ -2778,11 +3110,15 @@ var Sensor = (function () {
         enumerable: false,
         configurable: true
     });
+    Sensor.prototype.cantidad_de_colisiones_con_la_etiqueta = function (etiqueta) {
+        return this.colisiones_con_la_etiqueta(etiqueta).length;
+    };
     return Sensor;
 }());
 var ActorBase = (function () {
     function ActorBase(pilas) {
         this.figura = "";
+        this.lasers_serializados = [];
         this._etiqueta = null;
         this._vivo = true;
         this._animacion_en_curso = "";
@@ -2845,6 +3181,7 @@ var ActorBase = (function () {
         this._nombre = propiedades.nombre;
         this.recorte_activado = false;
         this.sensores = [];
+        this.lasers = [];
         this._comportamientos = [];
         this._figura_ancho = propiedades.figura_ancho;
         this._figura_alto = propiedades.figura_alto;
@@ -2898,6 +3235,18 @@ var ActorBase = (function () {
         this.espejado = propiedades.espejado;
         this.espejado_vertical = propiedades.espejado_vertical;
         this.sprite["actor"] = this;
+        if (propiedades.lasers) {
+            var body_id_1 = null;
+            this.lasers = propiedades.lasers.map(function (data) {
+                return new Laser(_this, data.nombre, data.rotacion, data.longitud);
+            });
+            if (this.sprite.body) {
+                body_id_1 = this.sprite.body.id;
+            }
+            this.lasers_serializados = propiedades.lasers.map(function (e) {
+                return __assign(__assign({}, e), { actor_id: _this.id, body_id: body_id_1 });
+            });
+        }
         if (propiedades.es_texto) {
             this.texto = propiedades.texto;
             this.fuente = propiedades.fuente;
@@ -3122,7 +3471,8 @@ var ActorBase = (function () {
             hit_ancho: hit_ancho,
             hit_alto: hit_alto,
             hit_activado: hit_activado,
-            sensores: sensores_serializados
+            sensores: sensores_serializados,
+            lasers: this.lasers_serializados
         };
     };
     Object.defineProperty(ActorBase.prototype, "etiqueta", {
@@ -3761,8 +4111,6 @@ var ActorBase = (function () {
         texto.x = this.x - 15;
         texto.y = this.y + this.alto;
         texto.fuente = "color-negro";
-        texto.transparencia = 100;
-        texto.transparencia = [0];
         texto.fondo = "imagenes:redimensionables/dialogo";
         texto.color = "black";
         texto.centro_x = 1;
@@ -3926,6 +4274,20 @@ var ActorBase = (function () {
                 }
             }
         });
+    };
+    ActorBase.prototype.obtener_laser = function (nombre) {
+        var laser = this.lasers.find(function (l) { return l.nombre === nombre; });
+        if (!laser) {
+            var nombres_de_lasers = this.lasers.map(function (l) { return l.nombre; });
+            if (nombres_de_lasers.length > 0) {
+                var sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, nombres_de_lasers);
+                throw Error("No existe un laser que se llame \"" + nombre + "\". \u00BFQuisiste decir \"" + sugerencia + "\"?");
+            }
+            else {
+                throw Error("No hay lasers creados, as\u00ED que no se busc\u00F3 si exist\u00EDa uno llamado \"" + nombre + "\".");
+            }
+        }
+        return laser;
     };
     ActorBase.prototype.obtener_sensor = function (nombre) {
         var figura = this.sensores.find(function (e) { return e.nombre === nombre; });
@@ -5231,7 +5593,7 @@ var EscenaBase = (function () {
             var self_1 = this;
             this._actor_visor_observables.actualizar = function () {
                 var texto = JSON.stringify(self_1._observables, null, 4)
-                    .replace(/{|}|"/g, "")
+                    .replace(/^{|}$|"/g, "")
                     .replace(/,\n/g, "\n")
                     .replace(/ {4}/g, "")
                     .trim();
@@ -5243,8 +5605,42 @@ var EscenaBase = (function () {
             this._observables[nombre] = variable.toFixed(2);
         }
         else {
-            this._observables[nombre] = "" + variable;
+            this._observables[nombre] = "" + this.convertir_a_string(variable);
         }
+    };
+    EscenaBase.prototype.convertir_a_string = function (variable) {
+        if (Array.isArray(variable)) {
+            var items = [];
+            for (var i = 0; i < variable.length; i++) {
+                items.push(this.convertir_a_string(variable[i]));
+            }
+            return "[ " + items.join(", ") + " ]";
+        }
+        if (variable === null) {
+            return "null";
+        }
+        if (variable === undefined) {
+            return "undefined";
+        }
+        if ("" + variable === "[object Object]") {
+            var campos = Object.entries(variable);
+            if (campos.length > 8) {
+                return "<Objeto>";
+            }
+            else {
+                var items_diccionario = [];
+                for (var i = 0; i < campos.length; i++) {
+                    var clave = campos[i][0];
+                    var valor = campos[i][1];
+                    items_diccionario.push(clave + ": " + this.convertir_a_string(valor));
+                }
+                return "{ " + items_diccionario.join(", ") + " }";
+            }
+        }
+        if (typeof variable === "number") {
+            return variable.toFixed(2);
+        }
+        return variable;
     };
     EscenaBase.prototype.agregar_actor = function (actor) {
         this.actores.push(actor);
@@ -7728,6 +8124,7 @@ var Pose = (function () {
     };
     return Pose;
 }());
+var COLOR_DEL_LASER = 0xfffda0;
 var Modo = (function (_super) {
     __extends(Modo, _super);
     function Modo(data) {
@@ -7797,7 +8194,7 @@ var Modo = (function (_super) {
     };
     Modo.prototype.actualizar_canvas_fisica = function () {
         var canvas = this.canvas_fisica;
-        var figuras = pilasengine.modo.matter.world.localWorld.bodies;
+        var figuras = this.matter.world.localWorld.bodies;
         canvas.clear();
         for (var i = 0; i < figuras.length; i++) {
             var figura = figuras[i];
@@ -7815,6 +8212,69 @@ var Modo = (function (_super) {
             }
             this.dibujar_figura_desde_vertices(canvas, 2, color, figura.vertices);
         }
+        this.dibujar_lasers();
+    };
+    Modo.prototype.dibujar_lasers = function () {
+        var _this = this;
+        var canvas = this.canvas_fisica;
+        this.actores.map(function (actor) {
+            actor.lasers.map(function (laser) {
+                _this.dibujar_laser_del_actor(laser, canvas, actor);
+            });
+        });
+    };
+    Modo.prototype.dibujar_laser_del_actor = function (laser, canvas, actor) {
+        var angulo = -laser.rotacion * (Math.PI / 180);
+        var color = COLOR_DEL_LASER;
+        var desde_x = actor.x;
+        var desde_y = actor.y;
+        var hasta_x = actor.x + Math.cos(angulo) * laser.longitud;
+        var hasta_y = actor.y + Math.sin(angulo) * laser.longitud;
+        canvas.lineStyle(2, color, 1);
+        canvas.lineBetween(desde_x, desde_y, hasta_x, hasta_y);
+        var puntos = this._laser_entre_entidades(desde_x, desde_y, hasta_x, hasta_y, actor);
+        puntos.map(function (interseccion) {
+            canvas.beginPath();
+            canvas.fillStyle(color);
+            canvas.fillCircle(interseccion.x, interseccion.y, 5);
+            canvas.closePath();
+        });
+    };
+    Modo.prototype._laser_entre_entidades = function (x1, y1, x2, y2, actor) {
+        var _this = this;
+        var bodies = this.matter.world.getAllBodies();
+        var ids = [];
+        var colisiones = raycast(bodies, { x: x1, y: y1 }, { x: x2, y: y2 });
+        colisiones = colisiones.filter(function (col) {
+            if (actor && actor.figura && actor.figura.id === col.body.id) {
+                return false;
+            }
+            if (col.body && col.body.actor_id && col.body.actor_id === actor.id) {
+                return false;
+            }
+            if (col.body.es_sensor) {
+                return false;
+            }
+            if (ids.includes(col.body.id)) {
+                return false;
+            }
+            else {
+                ids.push(col.body.id);
+            }
+            return col;
+        });
+        return colisiones
+            .map(function (col) {
+            var distancia = _this.pilas.obtener_distancia_entre_puntos(x1, y1, col.point.x, col.point.y);
+            return {
+                actor: null,
+                body: col.body,
+                distancia: distancia,
+                x: col.point.x,
+                y: col.point.y
+            };
+        })
+            .sort(function (a, b) { return a.distancia - b.distancia; });
     };
     Modo.prototype.dibujar_figura_desde_vertices = function (canvas, linea, color, vertices) {
         canvas.beginPath();
@@ -7922,6 +8382,7 @@ var Modo = (function (_super) {
             sprite.figura = this.crear_figura_estatica_para(actor);
         }
         this.actualizar_sensores_del_actor(actor, sprite);
+        this.actualizar_lasers_del_actor(actor, sprite);
         sprite.setFlipX(actor.espejado);
         sprite.setFlipY(actor.espejado_vertical);
         if (actor.es_texto) {
@@ -7976,6 +8437,17 @@ var Modo = (function (_super) {
                 figura["dx"] = sensor.x;
                 figura["dy"] = sensor.y;
                 return figura;
+            });
+        }
+    };
+    Modo.prototype.actualizar_lasers_del_actor = function (actor, sprite) {
+        if (actor.lasers) {
+            sprite.lasers = actor.lasers.map(function (laser) {
+                return {
+                    nombre: laser.nombre,
+                    rotacion: laser.rotacion,
+                    longitud: laser.longitud
+                };
             });
         }
     };
@@ -8058,8 +8530,8 @@ var Modo = (function (_super) {
         }
         throw Error("No se reconoce la figura " + actor.figura + " en este modo.");
     };
-    Modo.prototype.actualizar_posicion = function (posicion) {
-        if (posicion === void 0) { posicion = null; }
+    Modo.prototype.actualizar_posicion = function (_posicion) {
+        if (_posicion === void 0) { _posicion = null; }
         throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
     };
     Modo.prototype.dibujar_punto_de_control = function (graphics, x, y) {
@@ -8068,8 +8540,7 @@ var Modo = (function (_super) {
         graphics.fillStyle(0x000000, 1);
         graphics.fillRect(x - 2, y - 2, 4, 4);
     };
-    Modo.prototype.selecciona_actor_o_escena_en_modo_pausa = function (actor) {
-    };
+    Modo.prototype.selecciona_actor_o_escena_en_modo_pausa = function (actor) { };
     return Modo;
 }(Phaser.Scene));
 var ModoCargador = (function (_super) {
@@ -9534,6 +10005,7 @@ var ModoPausa = (function (_super) {
             sprite["figura"] = this.crear_figura_estatica_para(entidad);
             sprite["figura"].es_sensor = entidad.figura_sensor;
             sprite["figura"].es_dinamica = entidad.figura_dinamica;
+            sprite["figura"].actor_id = entidad.id;
         }
         return sprite;
     };
@@ -9581,6 +10053,17 @@ var ModoPausa = (function (_super) {
         graphics_modo_pausa.depth = 190;
         this.graphics_modo_pausa = graphics_modo_pausa;
         this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa, null);
+    };
+    ModoPausa.prototype.dibujar_lasers = function () {
+        var _this = this;
+        var foto = this.pilas.historia.obtener_foto(this.posicion);
+        var canvas = this.canvas_fisica;
+        foto.actores.map(function (actor) {
+            actor.lasers.map(function (laser) {
+                var _a = _this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y), x = _a.x, y = _a.y;
+                _this.dibujar_laser_del_actor(laser, canvas, { x: x, y: y, id: actor.id });
+            });
+        });
     };
     ModoPausa.prototype.selecciona_actor_o_escena_en_modo_pausa = function (actor) {
         this.seleccion = actor;

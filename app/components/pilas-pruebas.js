@@ -18,8 +18,8 @@ export default Component.extend({
 
     this.set("proyecto", {
       titulo: "Proyecto demo",
-      ancho: 480,
-      alto: 480,
+      ancho: 780,
+      alto: 780,
       imagenes: [
         {
           nombre: "link",
@@ -40,31 +40,48 @@ export default Component.extend({
             codigo: `
 
             class ${NOMBRE_DE_LA_ESCENA} extends Escena {
+              actor: Actor;
               iniciar() {
-                this.pilas.actores.nave();
+                let p1 = this.pilas.actores.plataforma();
+                let p2 = this.pilas.actores.plataforma();
+                p2.y = -300
+                this.actor = this.pilas.actores.pelota();
+                this.pizarra = this.pilas.actores.pizarra();
               }
 
               actualizar() {
-                this.pilas.observar("Cantidad de gamepads", this.pilas.control.obtener_cantidad_de_gamepads_conectados());
-                
-                this.pilas.observar("Analógico Izquierdo X", this.pilas.control.gamepad_1.analogico_izquierdo_x);
-                this.pilas.observar("Analógico Izquierdo Y", this.pilas.control.gamepad_1.analogico_izquierdo_y);
+                this.pizarra.limpiar();
+                let colisiones = this.pilas.laser(0, 0, 0, -500);
+                this.pilas.observar("colisiones", colisiones);
 
-                this.pilas.observar("Analógico Derecho X", this.pilas.control.gamepad_1.analogico_derecho_x);
-                this.pilas.observar("Analógico Derecho Y", this.pilas.control.gamepad_1.analogico_derecho_y);
+                let colisiones_del_mouse = this.pilas.laser(this.actor, this.pilas.cursor_x, this.pilas.cursor_y, this.pilas.cursor_x, -500);
+                this.pilas.observar("colisiones_del_mouse", colisiones_del_mouse);
 
-                this.pilas.observar("Izquierda", this.pilas.control.gamepad_1.izquierda);
-                this.pilas.observar("Derecha", this.pilas.control.gamepad_1.derecha);
-                this.pilas.observar("Arriba", this.pilas.control.gamepad_1.arriba);
-                this.pilas.observar("Abajo", this.pilas.control.gamepad_1.abajo);
+                this.pilas.observar("x", this.pilas.cursor_x);
 
-                this.pilas.observar("Botón X", this.pilas.control.gamepad_1.boton_x);
-                this.pilas.observar("Botón Y", this.pilas.control.gamepad_1.boton_y);
-                this.pilas.observar("Botón A", this.pilas.control.gamepad_1.boton_a);
-                this.pilas.observar("Botón B", this.pilas.control.gamepad_1.boton_b);
+                this.pilas.observar("y", this.pilas.cursor_y);
 
-                this.pilas.observar("Botón LB", this.pilas.control.gamepad_1.boton_lb);
-                this.pilas.observar("Botón RB", this.pilas.control.gamepad_1.boton_rb);
+                let colisiones_del_mouse_al_primer_actor = this.pilas.laser_al_primer_actor(this.actor, this.pilas.cursor_x, this.pilas.cursor_y, this.pilas.cursor_x, -500);
+                this.pilas.observar("colisiones_del_mouse_al_primer_actor", colisiones_del_mouse_al_primer_actor);
+
+                if (colisiones_del_mouse_al_primer_actor) {
+                  this.pizarra.dibujar_linea(this.pilas.cursor_x, 
+                                     this.pilas.cursor_y,
+                                     this.pilas.cursor_x,
+                                     this.pilas.cursor_y - colisiones_del_mouse_al_primer_actor.distancia)
+
+                  this.pizarra.dibujar_circulo(
+                      colisiones_del_mouse_al_primer_actor.x,
+                      colisiones_del_mouse_al_primer_actor.y, 4)
+
+                } else {
+
+                this.pizarra.dibujar_linea(this.pilas.cursor_x, 
+                                   this.pilas.cursor_y,
+                                   this.pilas.cursor_x,
+                                   this.pilas.cursor_y - 500)
+
+                }
               }
 
             }

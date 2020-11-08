@@ -2,8 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg)](https://circleci.com/gh/pilas-engine/pilas-engine)
 
-Pilas es un motor para aprender a programar realizando videojuegos, visitá la web
-para obtener más información:
+Pilas es un motor para aprender a programar realizando videojuegos, visitá la
+web para obtener más información:
 
 - http://www.pilas-engine.com.ar
 
@@ -55,8 +55,8 @@ básicas: https://www.youtube.com/watch?v=ASKYT7OoLos
 También vas a encontrar instrucciones para colaborar
 aquí: http://manual-pilas-engine.surge.sh/entorno.html
 
-Para comenzar a utilizar este repositorio deberías tener instalado git, Make, nodejs
-(versión 6 o superior) y ejecutar estos comandos:
+Para comenzar a utilizar este repositorio deberías tener instalado git, 
+Make, nodejs (versión 6 o superior) y ejecutar estos comandos:
 
 ```
 git clone https://github.com/pilas-engine/pilas-engine.git
@@ -74,9 +74,10 @@ los comandos típicos a la hora de utilizar el proyecto.
 ## Versión en desarrollo
 
 Esta versión está en fase de experimentación y desarrollo inicial, es casi una
-prueba de concepto. Sin embargo, cada vez que hacemos un push a este repositorio
-se ejecutan todos los tests sobre [circle.ci](https://circleci.com/gh/pilas-engine)
-y se realiza una instalación en:
+prueba de concepto. Sin embargo, cada vez que hacemos un push a este
+repositorio se ejecutan todos los tests sobre
+[circle.ci](https://circleci.com/gh/pilas-engine) y se realiza una instalación
+en:
 
 - https://app-dev.pilas-engine.com.ar
 
@@ -105,8 +106,8 @@ automáticamente Prettier (https://prettier.io/).
 
 ## Créditos
 
-Este proyecto es posible gracias a la comunidad de pilas-engine, y a la existencia
-de varias herramientas y bibliotecas como:
+Este proyecto es posible gracias a la comunidad de pilas-engine, y a la
+existencia de varias herramientas y bibliotecas como:
 
 - https://phaser.io/
 - https://github.com/jdotrjs/phaser3-nineslice/

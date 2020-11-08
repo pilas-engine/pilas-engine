@@ -214,6 +214,10 @@
     {
       "nombre": "burbujas",
       "desde": "2.4.2"
+    },
+    {
+      "nombre": "sensor-basico",
+      "desde": "2.4.3"
     }
   ]
 }

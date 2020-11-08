@@ -1064,3 +1064,44 @@ por omisión) y las coordenadas en las que se debería dibujar el mapa
 (x=0, y=0 por omisión).
 
 </div>
+
+<div class="funcion">
+```
+pilas.laser(actor, x, y, x_final, y_final)
+```
+
+Esta función realiza un laser "instantáneo" para reconocer todos
+los actores que colisionan en una linea recta que va del punto
+(x, y) hasta el punto (x_final, y_final).
+
+Una vez que la función se ejecuta, retornará una lista de esta
+forma:
+
+
+```
+[
+   {
+      x: 10,
+      y: 10,
+      actor: <actor>
+      distancia: 30
+   },
+   ...
+ ]
+```
+</div>
+
+<div class="funcion">
+```
+pilas.laser_al_primer_actor(actor, x, y, x_final, y_final, etiqueta)
+```
+
+Similar a la función "laser", pero solo retornará el primer actor que
+se encuentre cuando traza un laser desde la posición (x, y) hasta
+la posición (x_final, y_final).
+
+Opcionalmente, a esta función se le puede indicar una etiqueta, para
+que solo tenga en cuenta colisiones contra actores que tengan esa
+etiqueta.
+
+</div>

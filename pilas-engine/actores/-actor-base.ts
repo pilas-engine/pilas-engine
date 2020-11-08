@@ -8,6 +8,8 @@ class ActorBase {
   automata: Automata;
   colisiones: Actor[];
   sensores: any[];
+  lasers: Laser[];
+  lasers_serializados: any[] = [];
   private _etiqueta: string = null;
   _vivo: boolean = true;
   private _animacion_en_curso: string = "";
@@ -95,6 +97,7 @@ class ActorBase {
 
     this.recorte_activado = false;
     this.sensores = [];
+    this.lasers = [];
     this._comportamientos = [];
     this._figura_ancho = propiedades.figura_ancho;
     this._figura_alto = propiedades.figura_alto;
@@ -160,6 +163,25 @@ class ActorBase {
     this.espejado_vertical = propiedades.espejado_vertical;
 
     this.sprite["actor"] = this;
+
+    if (propiedades.lasers) {
+      let body_id = null;
+
+      this.lasers = propiedades.lasers.map(data => {
+        return new Laser(this, data.nombre, data.rotacion, data.longitud);
+      });
+
+      if (this.sprite.body) {
+        // si el sprite tiene body, lo guarda para que el modo
+        // pausa pueda reconocer desde qué actor/cuerpo sale
+        // el laser.
+        body_id = this.sprite.body.id;
+      }
+
+      this.lasers_serializados = propiedades.lasers.map(e => {
+        return { ...e, actor_id: this.id, body_id };
+      });
+    }
 
     if (propiedades.es_texto) {
       this.texto = propiedades.texto;
@@ -296,7 +318,7 @@ class ActorBase {
     destino.setOrigin(origen.originX, origen.originY);
   }
 
-  iniciar() { }
+  iniciar() {}
 
   get interactivo() {
     return this.sprite.input.enabled;
@@ -327,7 +349,7 @@ class ActorBase {
     }
   }
 
-  cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any) { }
+  cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any) {}
 
   get area_de_interactividad() {
     let ancho = this.sprite.input.hitArea.width;
@@ -336,7 +358,7 @@ class ActorBase {
     return { ancho, alto };
   }
 
-  set fondo(fondo: string) { }
+  set fondo(fondo: string) {}
 
   serializar() {
     let texto = "";
@@ -420,7 +442,8 @@ class ActorBase {
       hit_alto,
       hit_activado,
 
-      sensores: sensores_serializados
+      sensores: sensores_serializados,
+      lasers: this.lasers_serializados
     };
   }
 
@@ -513,7 +536,7 @@ class ActorBase {
     this.automata.estado = estado;
   }
 
-  actualizar() { }
+  actualizar() {}
 
   actualizar_habilidades() {
     this._habilidades.map(h => {
@@ -897,9 +920,9 @@ class ActorBase {
     return this.sprite.flipY;
   }
 
-  cada_segundo(segundos_transcurridos: number) { }
+  cada_segundo(segundos_transcurridos: number) {}
 
-  cuando_transcurre_un_segundo(segundos_transcurridos: number) { }
+  cuando_transcurre_un_segundo(segundos_transcurridos: number) {}
 
   avanzar(rotacion: number = null, velocidad: number = 1) {
     if (rotacion === null) {
@@ -920,7 +943,7 @@ class ActorBase {
     this.sprite.anims.play(nombre_de_la_animacion);
   }
 
-  cuando_finaliza_animacion(animacion: string) { }
+  cuando_finaliza_animacion(animacion: string) {}
 
   set animacion(nombre) {
     if (this._animacion_en_curso !== nombre) {
@@ -941,28 +964,28 @@ class ActorBase {
     return this._animacion_en_curso;
   }
 
-  cuando_comienza_una_colision(actor: Actor) { }
+  cuando_comienza_una_colision(actor: Actor) {}
 
-  cuando_se_mantiene_una_colision(actor: Actor) { }
+  cuando_se_mantiene_una_colision(actor: Actor) {}
 
-  cuando_termina_una_colision(actor: Actor) { }
+  cuando_termina_una_colision(actor: Actor) {}
 
   /**
    * Se llama en todo momento en que se produce una colisión.
    */
-  cuando_colisiona(actor: Actor) { }
+  cuando_colisiona(actor: Actor) {}
 
-  cuando_hace_click(x: number, y: number, evento_original: any) { }
+  cuando_hace_click(x: number, y: number, evento_original: any) {}
 
-  cuando_termina_de_hacer_click(x, y, evento_original) { }
+  cuando_termina_de_hacer_click(x, y, evento_original) {}
 
-  cuando_sale(x, y, evento_original) { }
+  cuando_sale(x, y, evento_original) {}
 
-  cuando_mueve(x, y, evento_original) { }
+  cuando_mueve(x, y, evento_original) {}
 
-  cuando_pulsa_tecla(tecla: string, evento_original: any) { }
+  cuando_pulsa_tecla(tecla: string, evento_original: any) {}
 
-  cuando_suelta_tecla(tecla: string, evento_original: any) { }
+  cuando_suelta_tecla(tecla: string, evento_original: any) {}
 
   get cantidad_de_colisiones() {
     return this.colisiones.length;
@@ -1008,7 +1031,7 @@ class ActorBase {
     return "";
   }
 
-  set fuente(fuente: string) { }
+  set fuente(fuente: string) {}
 
   set figura_ancho(valor: number) {
     throw new Error("No puede definir este atributo");
@@ -1049,8 +1072,6 @@ class ActorBase {
     texto.x = this.x - 15;
     texto.y = this.y + this.alto;
     texto.fuente = "color-negro";
-    texto.transparencia = 100;
-    texto.transparencia = [0];
     texto.fondo = "imagenes:redimensionables/dialogo";
     texto.color = "black";
     texto.centro_x = 1;
@@ -1143,7 +1164,7 @@ class ActorBase {
     );
   }
 
-  aumentar(cantidad: number = 1) { }
+  aumentar(cantidad: number = 1) {}
 
   set con_borde(con_borde: boolean) {
     // ver ActorTextoBase.con_borde
@@ -1191,7 +1212,7 @@ class ActorBase {
     }
   }
 
-  cuando_llega_un_mensaje(mensaje: string, datos: any = {}) { }
+  cuando_llega_un_mensaje(mensaje: string, datos: any = {}) {}
 
   /**
    * Envía un mensaje a todos los actores y la escena actual.
@@ -1247,6 +1268,23 @@ class ActorBase {
         }
       }
     });
+  }
+
+  obtener_laser(nombre: string) {
+    let laser = this.lasers.find(l => l.nombre === nombre);
+
+    if (!laser) {
+      let nombres_de_lasers = this.lasers.map(l => l.nombre);
+
+      if (nombres_de_lasers.length > 0) {
+        let sugerencia = this.pilas.utilidades.obtener_mas_similar(nombre, nombres_de_lasers);
+        throw Error(`No existe un laser que se llame "${nombre}". ¿Quisiste decir "${sugerencia}"?`);
+      } else {
+        throw Error(`No hay lasers creados, así que no se buscó si existía uno llamado "${nombre}".`);
+      }
+    }
+
+    return laser;
   }
 
   obtener_sensor(nombre: string) {

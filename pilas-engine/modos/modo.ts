@@ -1,3 +1,5 @@
+const COLOR_DEL_LASER = 0xfffda0;
+
 class Modo extends Phaser.Scene {
   matter: Phaser.Physics.Matter.MatterPhysics;
   actores: any;
@@ -13,12 +15,12 @@ class Modo extends Phaser.Scene {
   posicion_anterior_de_arrastre: any;
   actor_seleccionado: any;
 
-  constructor(data) {
+  constructor(data: any) {
     super(data);
     this.es_modo_ejecucion = false;
   }
 
-  create(datos, ancho, alto) {
+  create(datos: any, ancho: number, alto: number) {
     this.ancho = ancho;
     this.alto = alto;
 
@@ -95,7 +97,7 @@ class Modo extends Phaser.Scene {
 
   actualizar_canvas_fisica() {
     let canvas = this.canvas_fisica;
-    let figuras = pilasengine.modo.matter.world.localWorld.bodies;
+    let figuras = this.matter.world.localWorld.bodies;
 
     canvas.clear();
 
@@ -115,6 +117,87 @@ class Modo extends Phaser.Scene {
 
       this.dibujar_figura_desde_vertices(canvas, 2, color, figura.vertices);
     }
+
+    this.dibujar_lasers();
+  }
+
+  // se sobre-escribe en modo pausa
+  dibujar_lasers() {
+    let canvas = this.canvas_fisica;
+
+    this.actores.map(actor => {
+      actor.lasers.map(laser => {
+        this.dibujar_laser_del_actor(laser, canvas, actor);
+      });
+    });
+  }
+
+  protected dibujar_laser_del_actor(laser: any, canvas: Phaser.GameObjects.Graphics, actor: any) {
+    let angulo = -laser.rotacion * (Math.PI / 180);
+    const color = COLOR_DEL_LASER;
+
+    let desde_x = actor.x;
+    let desde_y = actor.y;
+    let hasta_x = actor.x + Math.cos(angulo) * laser.longitud;
+    let hasta_y = actor.y + Math.sin(angulo) * laser.longitud;
+
+    canvas.lineStyle(2, color, 1);
+    canvas.lineBetween(desde_x, desde_y, hasta_x, hasta_y);
+
+    let puntos = this._laser_entre_entidades(desde_x, desde_y, hasta_x, hasta_y, actor);
+
+    puntos.map(interseccion => {
+      canvas.beginPath();
+      canvas.fillStyle(color);
+      canvas.fillCircle(interseccion.x, interseccion.y, 5);
+      canvas.closePath();
+    });
+  }
+
+  _laser_entre_entidades(x1, y1, x2, y2, actor: Actor): Intersección[] {
+    let bodies = this.matter.world.getAllBodies();
+    let ids = [];
+    let colisiones = raycast(bodies, { x: x1, y: y1 }, { x: x2, y: y2 });
+
+    colisiones = colisiones.filter(col => {
+      // @ts-ignore
+      if (actor && actor.figura && actor.figura.id === col.body.id) {
+        // se ignoran las colisiones con la propia figura del actor.
+        return false;
+      }
+
+      // caso particular: cuando se calcula el laser en el modo pausa
+      // se tiene que omitir el contacto entre el laser y la figura del actor.
+      if (col.body && col.body.actor_id && col.body.actor_id === actor.id) {
+        return false;
+      }
+
+      if (col.body.es_sensor) {
+        return false;
+      }
+
+      if (ids.includes(col.body.id)) {
+        return false;
+      } else {
+        ids.push(col.body.id);
+      }
+
+      return col;
+    });
+
+    return colisiones
+      .map(col => {
+        let distancia = this.pilas.obtener_distancia_entre_puntos(x1, y1, col.point.x, col.point.y);
+
+        return {
+          actor: null,
+          body: col.body,
+          distancia: distancia,
+          x: col.point.x,
+          y: col.point.y
+        };
+      })
+      .sort((a, b) => a.distancia - b.distancia);
   }
 
   dibujar_figura_desde_vertices(canvas, linea, color, vertices) {
@@ -250,6 +333,7 @@ class Modo extends Phaser.Scene {
     }
 
     this.actualizar_sensores_del_actor(actor, sprite);
+    this.actualizar_lasers_del_actor(actor, sprite);
 
     sprite.setFlipX(actor.espejado);
     sprite.setFlipY(actor.espejado_vertical);
@@ -330,7 +414,19 @@ class Modo extends Phaser.Scene {
     }
   }
 
-  obtener_imagen_para_nineslice(imagen) {
+  private actualizar_lasers_del_actor(actor, sprite) {
+    if (actor.lasers) {
+      sprite.lasers = actor.lasers.map(laser => {
+        return {
+          nombre: laser.nombre,
+          rotacion: laser.rotacion,
+          longitud: laser.longitud
+        };
+      });
+    }
+  }
+
+  obtener_imagen_para_nineslice(imagen: string) {
     if (imagen.indexOf(":") > -1) {
       let partes = imagen.split(":");
       return { key: partes[0], frame: partes[1] };
@@ -359,7 +455,7 @@ class Modo extends Phaser.Scene {
       sprite.input.hitArea.width = texto.width + 15;
       sprite.input.hitArea.height = texto.height + 10;
 
-      sprite.input.hitArea.x = -texto.width / 2 ;
+      sprite.input.hitArea.x = -texto.width / 2;
       sprite.input.hitArea.y = -texto.height / 2;
     }
 
@@ -443,11 +539,11 @@ class Modo extends Phaser.Scene {
     throw Error(`No se reconoce la figura ${actor.figura} en este modo.`);
   }
 
-  actualizar_posicion(posicion: any = null) {
+  actualizar_posicion(_posicion: any = null) {
     throw Error("No se puede actualizar posicion en este modo. Solo se puede en el modo pausa.");
   }
 
-  dibujar_punto_de_control(graphics, x, y) {
+  dibujar_punto_de_control(graphics: Phaser.GameObjects.Graphics, x: number, y: number) {
     graphics.fillStyle(0xffffff, 1);
     graphics.fillRect(x - 3, y - 3, 6, 6);
     graphics.fillStyle(0x000000, 1);
@@ -455,6 +551,5 @@ class Modo extends Phaser.Scene {
   }
 
   // se implementa en ModoPausa
-  selecciona_actor_o_escena_en_modo_pausa(actor) {
-  }
+  selecciona_actor_o_escena_en_modo_pausa(actor: any) {}
 }

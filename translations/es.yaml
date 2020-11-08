@@ -105,6 +105,8 @@ actor:
   sensors: Sensores
   sensor: Sensor
   new.sensor: Crear un sensor
+  lasers: Lasers
+  new.laser: Crear un laser
 
 project:
   video.mode: Modo de video

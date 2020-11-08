@@ -623,6 +623,10 @@ export default Component.extend({
         actor.propiedades.sensores = [];
       }
 
+      if (!actor.propiedades.lasers) {
+        actor.propiedades.lasers = [];
+      }
+
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 
       this.registrar_codigo_de_actor(nombre, preparar_codigo_para_el_editor(actor.codigo));

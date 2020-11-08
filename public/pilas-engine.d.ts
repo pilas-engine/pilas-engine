@@ -29,7 +29,7 @@ declare class Actores {
     puntaje(): Actor;
     reiniciar_escena(): Actor;
     nube_animada(): Actor;
-    pizarra(): Actor;
+    pizarra(): pizarra;
     explosion(): Actor;
     boton_activable(): Actor;
     pantalla_completa(): Actor;
@@ -404,6 +404,75 @@ declare class Huesos {
     actualizar_posicion(pose: any): void;
     eliminar_sprites(): void;
 }
+interface Intersección {
+    actor: Actor;
+    body: any;
+    distancia: number;
+    x: number;
+    y: number;
+}
+declare class Laser {
+    actor: Actor;
+    nombre: string;
+    rotacion: number;
+    longitud: number;
+    constructor(actor: Actor, nombre: string, rotacion: number, longitud: number);
+    obtener_colisiones(): Intersección[];
+    distancia_al_actor_mas_cercado(): number;
+    distancia_al_actor_con_etiqueta(etiqueta: string): number;
+    colisiona_con_un_actor_de_etiqueta(etiqueta: string): boolean;
+    obtener_actor_mas_cercano(): Actor;
+}
+declare function raycast(bodies: any, start: any, end: any, sort?: boolean): any[];
+declare class raycol {
+    body: any;
+    point: any;
+    normal: any;
+    verts: any;
+    constructor(body: any, point: any, normal: any, verts: any);
+}
+declare class ray {
+    start: any;
+    end: any;
+    verts: any;
+    constructor(start: any, end: any);
+    yValueAt(x: number): number;
+    xValueAt(y: number): number;
+    pointInBounds(point: any): boolean;
+    calculateNormal(ref: any): any;
+    get difference(): any;
+    get slope(): number;
+    get offsetY(): number;
+    get isHorizontal(): boolean;
+    get isVertical(): boolean;
+    static intersect(rayA: any, rayB: any): vec2;
+    static collisionPoint(rayA: {
+        pointInBounds: (arg0: vec2) => any;
+    }, rayB: {
+        pointInBounds: (arg0: vec2) => any;
+    }): vec2;
+    static bodyEdges(body: any): any[];
+    static bodyCollisions(rayA: any, body: any): any[];
+}
+declare function compareNum(a: number, b: number, leniency?: number): boolean;
+declare class vec2 {
+    x: number;
+    y: number;
+    constructor(x?: number, y?: number);
+    normalized(magnitude?: number): vec2;
+    get inverted(): vec2;
+    multiply(factor: number): vec2;
+    plus(vec: any): vec2;
+    minus(vec: any): vec2;
+    rotate(rot: number): vec2;
+    toPhysVector(): any;
+    get direction(): number;
+    distance(vec?: vec2): number;
+    clone(): vec2;
+    static fromAng(angle: number, magnitude?: number): vec2;
+    static fromOther(vector: any): vec2;
+    toString(): string;
+}
 declare const DEPURAR_MENSAJES = false;
 declare const DEPURAR_MENSAJES_DE_CARGA = false;
 declare class Mensajes {
@@ -593,18 +662,22 @@ declare class Pilas {
     pausar(): void;
     azar_desde_lista(lista: any): any;
     desordenar_lista(lista_original: any): any[];
-    notificar_traza_de_ejecucion(id: any, linea: any): void;
+    notificar_traza_de_ejecucion(id: string | number, linea: any): void;
     limpiar_traza_de_ejecucion(): void;
     definir_mapa(diccionario: any): void;
     crear_mapa(mapa: string, grilla?: number, origen_x?: number, origen_y?: number): void;
+    laser(actor: Actor, x1: number, y1: number, x2: number, y2: number): Intersección[];
+    laser_al_primer_actor(actor: Actor, x1: number, y1: number, x2: number, y2: number, etiqueta?: string): Intersección;
 }
 declare var pilasengine: Pilas;
 declare class Sensor {
     private _figura;
     constructor(figura: any);
     get colisiones(): any;
+    colisiones_con_la_etiqueta(etiqueta: string): any;
     colisiona_con_etiqueta(etiqueta: string): boolean;
     get cantidad_de_colisiones(): any;
+    cantidad_de_colisiones_con_la_etiqueta(etiqueta: string): any;
 }
 declare class ActorBase {
     tipo: String;
@@ -616,6 +689,8 @@ declare class ActorBase {
     automata: Automata;
     colisiones: Actor[];
     sensores: any[];
+    lasers: Laser[];
+    lasers_serializados: any[];
     private _etiqueta;
     _vivo: boolean;
     private _animacion_en_curso;
@@ -719,6 +794,7 @@ declare class ActorBase {
         hit_alto: number;
         hit_activado: boolean;
         sensores: any[];
+        lasers: any[];
     };
     set etiqueta(etiqueta: string);
     get etiqueta(): string;
@@ -836,6 +912,7 @@ declare class ActorBase {
     enviar_mensaje_global(mensaje: string, datos?: any): void;
     get camara(): Camara;
     hacer_recorrido(posiciones: any, duracion?: number, veces?: number, seguir_rotacion?: boolean): void;
+    obtener_laser(nombre: string): Laser;
     obtener_sensor(nombre: string): Sensor;
     reproducir_sonido(nombre: string): void;
     reproducir_musica(nombre: string): any;
@@ -1339,6 +1416,7 @@ declare class EscenaBase {
     detener_musica(): void;
     planificar_reproducir_sonido(sonido: string): void;
     observar(nombre: string, variable: any): void;
+    private convertir_a_string;
     agregar_actor(actor: Actor): void;
     get gravedad_x(): number;
     set gravedad_x(v: number);
@@ -1834,6 +1912,7 @@ declare class Pose {
     update(elapsed_time: number): void;
     strike(): void;
 }
+declare const COLOR_DEL_LASER = 16776608;
 declare class Modo extends Phaser.Scene {
     matter: Phaser.Physics.Matter.MatterPhysics;
     actores: any;
@@ -1849,13 +1928,16 @@ declare class Modo extends Phaser.Scene {
     posicion_anterior_de_arrastre: any;
     actor_seleccionado: any;
     constructor(data: any);
-    create(datos: any, ancho: any, alto: any): void;
+    create(datos: any, ancho: number, alto: number): void;
     crear_indicadores_de_rendimiento_fps(): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
     crear_manejadores_para_controlar_el_zoom(emitir_mensajes_al_editor: any): void;
     update(actores: any): void;
     actualizar_canvas_fisica(): void;
+    dibujar_lasers(): void;
+    protected dibujar_laser_del_actor(laser: any, canvas: Phaser.GameObjects.Graphics, actor: any): void;
+    _laser_entre_entidades(x1: any, y1: any, x2: any, y2: any, actor: Actor): Intersección[];
     dibujar_figura_desde_vertices(canvas: any, linea: any, color: any, vertices: any): void;
     obtener_posicion_de_la_camara(): {
         x: any;
@@ -1867,11 +1949,15 @@ declare class Modo extends Phaser.Scene {
     obtener_actor_por_id(id: any): any;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     private actualizar_sensores_del_actor;
-    obtener_imagen_para_nineslice(imagen: any): any;
+    private actualizar_lasers_del_actor;
+    obtener_imagen_para_nineslice(imagen: string): string | {
+        key: string;
+        frame: string;
+    };
     copiar_valores_de_sprite_a_texto(sprite: any): void;
     crear_figura_estatica_para(actor: any): any;
-    actualizar_posicion(posicion?: any): void;
-    dibujar_punto_de_control(graphics: any, x: any, y: any): void;
+    actualizar_posicion(_posicion?: any): void;
+    dibujar_punto_de_control(graphics: Phaser.GameObjects.Graphics, x: number, y: number): void;
     selecciona_actor_o_escena_en_modo_pausa(actor: any): void;
 }
 declare class ModoCargador extends Modo {
@@ -2056,5 +2142,6 @@ declare class ModoPausa extends Modo {
     avanzar_posicion(): void;
     retroceder_posicion(): void;
     crear_canvas_de_depuracion_modo_pausa(): void;
+    dibujar_lasers(): void;
     selecciona_actor_o_escena_en_modo_pausa(actor: any): void;
 }

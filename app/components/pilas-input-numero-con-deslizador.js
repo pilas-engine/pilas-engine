@@ -14,6 +14,8 @@ export default Component.extend({
   posicion_inicial_x: null,
   valor_inicial_al_comenzar_a_arrastrar: null,
   classNames: ["flex"],
+  claseEtiqueta: "w2",
+  claseInput: "w25",
 
   cuando_pulsa(e) {
     this.set("posicion_inicial_x", e.clientX);

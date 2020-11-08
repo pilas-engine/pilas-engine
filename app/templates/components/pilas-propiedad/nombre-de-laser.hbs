@@ -1,0 +1,23 @@
+{{yield}}
+<div class="texto" role="button">
+
+  {{#basic-dropdown as |dd|}}
+    {{#dd.trigger}}
+      <div class="br2 dib input mv2 pa1 w-input-nombre-de-sensor no-outline">
+        {{laser.nombre}}
+      </div>
+    {{/dd.trigger}}
+
+    {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2"}}
+      <div class="texto">
+        {{pilas-input-nombre-validado-de-laser
+            valor_inicial=laser.nombre
+            lasers=lasers
+            cuandoCambia=cuandoCambia
+            dd=dd
+        }}
+      </div>
+    {{/dd.content}}
+  {{/basic-dropdown}}
+
+</div>

@@ -29,6 +29,11 @@ export default Service.extend({
           actor.set("sensores", []);
         }
 
+        // migracion 2020-10-05: los actores ahora tienen una lista de lasers.
+        if (!actor.get("lasers")) {
+          actor.set("lasers", []);
+        }
+
         // miración 2020-04-12: hacer que los actores de texto tengan una fuente por omisión.
         if (actor.get("es_texto") && !actor.get("fuente")) {
           if (actor.get("fondo") === "imagenes:redimensionables/gris") {

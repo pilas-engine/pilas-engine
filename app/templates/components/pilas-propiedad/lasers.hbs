@@ -1,0 +1,67 @@
+<div class="flex pv1">
+
+  <div class="w-100">
+
+    <div class="">
+      {{#each lasers as |laser|}}
+
+        <div class="mb3">
+
+          <div class="tr pb2">
+            <a role="button" {{action "eliminar_laser" laser}} class="texto o-50 glow dib verdana f6 link pointer unselectable">
+              {{pilas-icono icono="borrar"}}
+            </a>
+          </div>
+
+          <div class="flex items-center flex-end">
+
+            <div class="texto pa2">{{t "name"}}</div>
+
+            {{pilas-propiedad/nombre-de-laser
+                lasers=lasers
+                laser=laser
+                cuandoCambia=(action "al_cambiar_valor" "nombre" laser)
+            }}
+          </div>
+
+          <div class="flex items-center flex-end">
+
+            {{pilas-input-numero-con-deslizador
+              identificador="Rotación"
+              valor=(get laser "rotacion")
+              cuandoCambia=(action "al_cambiar_valor" "rotacion" laser)
+              claseEtiqueta=""
+              claseInput="w3"
+            }}
+
+          </div>
+
+          <div class="flex items-center flex-end">
+
+            {{pilas-input-numero-con-deslizador
+              identificador="Longitud"
+              min=0
+              max=500
+              valor=(get laser "longitud")
+              cuandoCambia=(action "al_cambiar_valor" "longitud" laser)
+              claseEtiqueta=""
+              claseInput="w3"
+            }}
+
+          </div>
+
+        </div>
+
+      {{/each}}
+
+      <div class="tr pt2">
+        <a role="button" {{action "crear_un_laser"}} class="boton pa2 dib verdana f6 link pointer unselectable truncate">
+          <span>{{t "actor.new.laser"}}</span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

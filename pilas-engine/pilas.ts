@@ -724,7 +724,7 @@ class Pilas {
    * por una instrumentación de código, y su resultado sirve para resaltar el código
    * que se ejecutó.
    */
-  notificar_traza_de_ejecucion(id, linea) {
+  notificar_traza_de_ejecucion(id: string | number, linea: any) {
     if (this.instrumentacion === undefined) {
       this.limpiar_traza_de_ejecucion();
     }
@@ -849,6 +849,89 @@ class Pilas {
           }
         }
       }
+    }
+  }
+
+  /**
+   * Retorna una lista de todos los actores que colisionan en una linea
+   * que va desde el punto (x1, y1) hasta el punto (x2, y2).
+   *
+   * El resultado de la función será una lista de la forma:
+   *
+   *   [
+   *      {
+   *         x: 10,
+   *         y: 10,
+   *         actor: <actor>
+   *         distancia: 30
+   *      },
+   *      ...
+   *    ]
+   */
+  laser(actor: Actor, x1: number, y1: number, x2: number, y2: number): Intersección[] {
+    let bodies = this.modo.matter.world.getAllBodies();
+    let ids = [];
+
+    let desde = this.utilidades.convertir_coordenada_de_pilas_a_phaser(x1, y1);
+    let hasta = this.utilidades.convertir_coordenada_de_pilas_a_phaser(x2, y2);
+
+    let colisiones = raycast(bodies, desde, hasta);
+
+    // Solo deja las colisiones contra actores, no contra sensores.
+    colisiones = colisiones.filter(col => {
+      return col.body.gameObject && col.body.gameObject.actor;
+    });
+
+    // excluye de las colisiones al actor sobre el que se genera el laser.
+    colisiones = colisiones.filter(col => {
+      return col.body.gameObject.actor.id !== actor.id;
+    });
+
+    // Solo deja la primer colisión con cada actor.
+    colisiones = colisiones.filter(col => {
+      if (ids.includes(col.body.gameObject.actor.id)) {
+        return false;
+      } else {
+        ids.push(col.body.gameObject.actor.id);
+        return true;
+      }
+    });
+
+    return colisiones
+      .map(col => {
+        let punto = this.utilidades.convertir_coordenada_de_phaser_a_pilas(col.point.x, col.point.y);
+
+        return {
+          actor: col.body.gameObject.actor,
+          body: col.body,
+          distancia: Math.trunc(this.obtener_distancia_entre_puntos(x1, y1, punto.x, punto.y)),
+          x: punto.x,
+          y: punto.y
+        };
+      })
+      .sort((a, b) => a.distancia - b.distancia);
+  }
+
+  /**
+   * Similar a la función "laser", pero solo retornará el primer actor que
+   * se encuentre cuando traza un laser desde la posición (x1, y1) hasta
+   * la posición (x2, y2).
+   *
+   * Opcionalmente, a esta función se le puede indicar una etiqueta, para
+   * que solo tenga en cuenta colisiones contra actores que tengan esa
+   * etiqueta.
+   */
+  laser_al_primer_actor(actor: Actor, x1: number, y1: number, x2: number, y2: number, etiqueta = ""): Intersección {
+    let colisiones = this.laser(actor, x1, y1, x2, y2);
+
+    if (etiqueta) {
+      colisiones = colisiones.filter(e => e.actor.tiene_etiqueta(etiqueta));
+    }
+
+    if (colisiones.length > 0) {
+      return colisiones[0];
+    } else {
+      return null;
     }
   }
 }

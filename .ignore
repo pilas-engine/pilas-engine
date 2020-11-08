@@ -1,0 +1,7 @@
+*.html
+api_docs
+*.d.ts
+*.pilas
+public/pilas-engine.js
+public/actores.json
+tags

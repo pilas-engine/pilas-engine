@@ -29,7 +29,8 @@ export default Component.extend({
         tipo: "combo",
         propiedad: "fuente",
         etiqueta: "actor.font",
-        opciones: [{
+        opciones: [
+          {
             valor: "color-negro",
             texto: "color-negro"
           },
@@ -78,7 +79,8 @@ export default Component.extend({
       });
     }
 
-    propiedades.addObjects([{
+    propiedades.addObjects([
+      {
         tipo: "separador",
         nombre: "Posición",
         etiqueta: "actor.position"
@@ -178,7 +180,8 @@ export default Component.extend({
         tipo: "combo",
         propiedad: "figura",
         etiqueta: "actor.shape.title",
-        opciones: [{
+        opciones: [
+          {
             valor: "",
             texto: "ninguna"
           },
@@ -247,7 +250,8 @@ export default Component.extend({
       }
     ]);
 
-    propiedades.addObjects([{
+    propiedades.addObjects([
+      {
         tipo: "separador",
         nombre: "Sensores",
         etiqueta: "actor.sensors"
@@ -259,6 +263,20 @@ export default Component.extend({
       }
     ]);
 
+    propiedades.addObjects([
+      {
+        tipo: "separador",
+        nombre: "Lasers",
+        etiqueta: "actor.lasers"
+      },
+      {
+        tipo: "lasers",
+        propiedad: "lasers",
+        etiqueta: "actor.lasers"
+      }
+    ]);
+
     this.set("propiedades", propiedades);
   }
 });
+

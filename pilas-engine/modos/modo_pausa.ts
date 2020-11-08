@@ -35,7 +35,7 @@ class ModoPausa extends Modo {
     this.indicador_de_texto.align = 2;
   }
 
-  preload() { }
+  preload() {}
 
   create(datos: any) {
     super.create(datos, datos.pilas._ancho, datos.pilas._alto);
@@ -311,6 +311,7 @@ class ModoPausa extends Modo {
       sprite["figura"] = this.crear_figura_estatica_para(entidad);
       sprite["figura"].es_sensor = entidad.figura_sensor;
       sprite["figura"].es_dinamica = entidad.figura_dinamica;
+      sprite["figura"].actor_id = entidad.id;
     }
 
     return sprite;
@@ -339,7 +340,6 @@ class ModoPausa extends Modo {
   }
 
   completar_foto_detallando_actores_nuevos_y_eliminados(foto) {
-
     // Busca en el cuadro anterior a ver si el actor es nuevo.
     if (this.posicion - 1 > 0) {
       let foto_anterior = this.pilas.historia.obtener_foto(this.posicion - 1);
@@ -359,7 +359,6 @@ class ModoPausa extends Modo {
         actor.se_elimina_en_el_siguiente_cuadro = !nombres.includes(actor.nombre);
       });
     }
-
   }
 
   avanzar_posicion() {
@@ -382,13 +381,25 @@ class ModoPausa extends Modo {
     this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(graphics_modo_pausa, null);
   }
 
-  selecciona_actor_o_escena_en_modo_pausa(actor) {
+  // Se invoca desde Modo#dibujar_canvas_fisica (del archivo modo.ts)
+  dibujar_lasers() {
+    let foto = this.pilas.historia.obtener_foto(this.posicion);
+    let canvas = this.canvas_fisica;
+
+    foto.actores.map(actor => {
+      actor.lasers.map(laser => {
+        let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+        this.dibujar_laser_del_actor(laser, canvas, { x, y, id: actor.id });
+      });
+    });
+  }
+
+  selecciona_actor_o_escena_en_modo_pausa(actor: any) {
     this.seleccion = actor;
     // vuelve a dibujar el canvas por completo.
     this.actualizar_posicion(this.posicion);
     this.graphics_modo_pausa.clear();
 
     this.pilas.historia.dibujar_puntos_de_las_posiciones_recorridas(this.graphics_modo_pausa, actor);
-
   }
 }
