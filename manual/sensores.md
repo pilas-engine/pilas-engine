@@ -22,7 +22,7 @@ añadir el sensor al final de la lista de propiedades:
 Una vez que pulsamos ese botón, vamos a poder cambiar las coordenadas del sensor
 y ajustarlo a nuestro gusto.
 
-En este caso, hice que el actor tuviera un sensor para detectar si se encuentra
+En este caso, hice que el actor tenga un sensor para detectar si se encuentra
 frente a algún actor:
 
 ![](imagenes/sensores/crear-sensor-2.png)

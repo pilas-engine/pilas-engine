@@ -11,7 +11,8 @@ web para obtener más información:
 
 ## Artículos y noticias
 
-- [Resumen del sprint 23 (27 de septiembre del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-23/2034)
+- [Resumen del sprint 24 (15 de Noviembre del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-24/2066)
+- [Resumen del sprint 23 (27 de Septiembre del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-23/2034)
 - [Resumen del sprint 22 (6 de Septiembre del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-22/2006)
 - [Resumen del sprint 21 (1 de Agosto del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-21/1984)
 - [Resumen del sprint 20 (12 de Julio del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-20/1975)
