@@ -156,7 +156,7 @@ export default Component.extend({
         tipo: "numero",
         propiedad: "centro_y",
         intensidad: 0.1,
-        etiqueta: "actor.center.x"
+        etiqueta: "actor.center.y"
       },
       {
         tipo: "interruptor",
@@ -279,4 +279,3 @@ export default Component.extend({
     this.set("propiedades", propiedades);
   }
 });
-
