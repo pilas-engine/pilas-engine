@@ -110,6 +110,21 @@ class Mensajes {
 
   atender_mensaje_termina_de_reproducir_sonido(/*datos*/) {}
 
+  atender_mensaje_ubicar_camara_en_el_actor(data: any) {
+    let sprite = this.pilas.modo.obtener_actor_por_id(data.actor_id);
+    let camera = this.pilas.modo.cameras.cameras[0];
+
+    camera.pan(sprite.x, sprite.y, 250, "Sine.easeInOut");
+
+    setTimeout(() => {
+      let x = camera.scrollX;
+      let y = -camera.scrollY;
+
+      this.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x, y });
+      this.pilas.modo.posicionar_la_camara({ camara_x: x, camara_y: y });
+    }, 260);
+  }
+
   atender_mensaje_ejecutar_proyecto(datos) {
     let parametros = {
       pilas: this.pilas,

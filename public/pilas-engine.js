@@ -2205,6 +2205,18 @@ var Mensajes = (function () {
         this.pilas.modo.posicionar_la_camara(datos.escena);
     };
     Mensajes.prototype.atender_mensaje_termina_de_reproducir_sonido = function () { };
+    Mensajes.prototype.atender_mensaje_ubicar_camara_en_el_actor = function (data) {
+        var _this = this;
+        var sprite = this.pilas.modo.obtener_actor_por_id(data.actor_id);
+        var camera = this.pilas.modo.cameras.cameras[0];
+        camera.pan(sprite.x, sprite.y, 250, "Sine.easeInOut");
+        setTimeout(function () {
+            var x = camera.scrollX;
+            var y = -camera.scrollY;
+            _this.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x: x, y: y });
+            _this.pilas.modo.posicionar_la_camara({ camara_x: x, camara_y: y });
+        }, 260);
+    };
     Mensajes.prototype.atender_mensaje_ejecutar_proyecto = function (datos) {
         var parametros = {
             pilas: this.pilas,

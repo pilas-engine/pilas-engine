@@ -110,7 +110,7 @@ export default Component.extend({
       this.bus.on(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
       this.bus.on(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
       this.bus.on(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
-
+      this.bus.on(`ubicar_camara_en_el_actor`, this, "ubicar_camara_en_el_actor");
       this.bus.on(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
       this.bus.on(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
     };
@@ -141,6 +141,7 @@ export default Component.extend({
     this.bus.off(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
     this.bus.off(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
     this.bus.off(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
+    this.bus.off(`${this.nombre_del_contexto}:ubicar_camara_en_el_actor`, this, "ubicar_camara_en_el_actor");
     this.bus.off(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
     this.bus.off(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
   },
@@ -298,7 +299,7 @@ export default Component.extend({
     let data = {
       tipo: "selecciona_un_actor_en_modo_pausa",
       nombre_del_contexto: this.nombre_del_contexto,
-      actor: null,
+      actor: null
     };
 
     this.contexto.postMessage(data, utils.HOST);
@@ -383,6 +384,16 @@ export default Component.extend({
     let porcentajeDeCarga = this.porcentajeDeCarga;
     return htmlSafe(`width: ${porcentajeDeCarga}%`);
   }),
+
+  ubicar_camara_en_el_actor(actor_id) {
+    let data = {
+      tipo: "ubicar_camara_en_el_actor",
+      nombre_del_contexto: this.nombre_del_contexto,
+      actor_id: actor_id
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
 
   cambiar_posicion_del_modo_historia_desde_el_editor({ posicion }) {
     let data = {
@@ -532,3 +543,4 @@ export default Component.extend({
     }
   }
 });
+

@@ -9,6 +9,7 @@ export default Component.extend({
   attributeBindings: ["draggable"],
   draggable: "true",
   proyecto: service(),
+  bus: service(),
 
   claseSeleccionado: computed("seleccion", "actor.id", function() {
     if (this.seleccion === this.actor.id) {
@@ -37,6 +38,10 @@ export default Component.extend({
 
   click() {
     this.get("cuandoSelecciona")(this.actor.id);
+  },
+
+  doubleClick() {
+    this.bus.trigger("ubicar_camara_en_el_actor", this.actor.id);
   },
 
   actions: {

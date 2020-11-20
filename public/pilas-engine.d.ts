@@ -491,6 +491,7 @@ declare class Mensajes {
     atender_mensaje_cuando_cambia_grilla_desde_el_selector_manual(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
     atender_mensaje_termina_de_reproducir_sonido(): void;
+    atender_mensaje_ubicar_camara_en_el_actor(data: any): void;
     atender_mensaje_ejecutar_proyecto(datos: any): void;
     emitir_excepcion_al_editor(error: any, origen: any): void;
     atender_mensaje_selecciona_actor_desde_el_editor(datos: any): void;
