@@ -7,7 +7,7 @@ export default Service.extend({
   electron: service(),
   enElectron: alias("electron.enElectron"),
 
-  publicar_juego(proyecto_como_string, serializado, ver_codigo) {
+  publicar_juego(serializado, ver_codigo, hash) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -34,11 +34,18 @@ export default Service.extend({
         reject(url);
       };
 
-      var data = JSON.stringify({
-        codigo: proyecto_como_string,
+      let data_original = {
         codigo_serializado: serializado,
         ver_codigo: ver_codigo
-      });
+      };
+
+      // Solo incluye el hash cuando se trata de una
+      // parte complementaria al post inicial.
+      if (hash) {
+        data_original = { ...data_original, hash };
+      }
+
+      var data = JSON.stringify(data_original);
 
       xhr.send(data);
     });

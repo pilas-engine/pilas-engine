@@ -103,7 +103,6 @@ export default Component.extend({
        */
       let expresionDelArchivoPilas = codigo_index_html.match(/pilas-engine-\w*.js/);
 
-
       if (expresionDelArchivoPilas) {
         let nombre_incorrecto = expresionDelArchivoPilas[0];
         codigo_index_html = codigo_index_html.replace(nombre_incorrecto, nombre_de_archivo_con_hash);
@@ -142,13 +141,26 @@ export default Component.extend({
     }
   }),
 
+  dividirEnPartes(str, chunkSize) {
+    var chunks = [];
+
+    while (str) {
+      if (str.length < chunkSize) {
+        chunks.push(str);
+        return chunks;
+      } else {
+        chunks.push(str.substr(0, chunkSize));
+        str = str.substr(chunkSize);
+      }
+    }
+  },
+
   tareaExportarYPublicar: task(function*() {
     this.agregar_mensaje("Comenzando exportación del proyecto ...");
     yield timeout(1000);
 
     let serializado = json_a_string(this.proyecto);
     let proyecto = string_a_json(serializado);
-    let proyecto_como_string = JSON.stringify(proyecto, null, 2);
 
     let resultado = this.compilador.compilar_proyecto(proyecto);
 
@@ -162,7 +174,29 @@ export default Component.extend({
     let data = "";
 
     try {
-      data = yield this.api.publicar_juego(proyecto_como_string, json_a_string(proyecto_completo), this.ver_codigo);
+      const proyecto_serializado = json_a_string(proyecto_completo);
+      this.agregar_mensaje(`Evaluando tamaño del proyecto ...`);
+      yield timeout(1000);
+      let proyecto_en_partes = this.dividirEnPartes(proyecto_serializado, 1024 * 512); // bloques de 500kb
+      let cantidad_de_partes = proyecto_en_partes.length;
+
+      if (cantidad_de_partes === 1) {
+        // Si el proyecto es muy pequeño, se envía en un solo post:
+        this.agregar_mensaje(`Subiendo el proyecto completo en una sola parte...`);
+        data = yield this.api.publicar_juego(proyecto_serializado, this.ver_codigo);
+      } else {
+        // Si el proyecto tiene varias partes, hace un primer post para obtener el hash
+        // y luego envía las siguientes partes especificando ese hash para que se carguen
+        // en el mismo proyecto.
+        this.agregar_mensaje(`Subiendo el proyecto en ${cantidad_de_partes} partes de 500kb`);
+        this.agregar_mensaje(`Subiendo parte 1 de ${cantidad_de_partes}`);
+        data = yield this.api.publicar_juego(proyecto_en_partes[0], this.ver_codigo);
+
+        for (let i = 1; i < cantidad_de_partes; i++) {
+          this.agregar_mensaje(`Subiendo parte ${i + 1} de ${cantidad_de_partes}`);
+          yield this.api.publicar_juego(proyecto_en_partes[i], this.ver_codigo, data.hash);
+        }
+      }
 
       this.agregar_mensaje(`¡Listo!`);
       this.agregar_mensaje("");
