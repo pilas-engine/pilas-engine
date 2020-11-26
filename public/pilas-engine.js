@@ -597,6 +597,29 @@ var Camara = (function () {
             }
         };
     };
+    Object.defineProperty(Camara.prototype, "escala", {
+        get: function () {
+            return this.camara_principal.zoom;
+        },
+        set: function (x) {
+            this.pilas.utilidades.validar_numero(x);
+            if (x >= 1 && x <= 10) {
+                this.camara_principal.setZoom(x);
+            }
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Camara.prototype, "zoom", {
+        get: function () {
+            return this.escala;
+        },
+        set: function (x) {
+            this.escala = x;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Camara.prototype, "x", {
         get: function () {
             return this.camara_principal.scrollX;

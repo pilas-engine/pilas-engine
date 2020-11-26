@@ -49,6 +49,26 @@ class Camara {
     };
   }
 
+  get escala() {
+    return this.camara_principal.zoom;
+  }
+
+  set escala(x: number) {
+    this.pilas.utilidades.validar_numero(x);
+
+    if (x >= 1 && x <= 10) {
+      this.camara_principal.setZoom(x);
+    }
+  }
+
+  get zoom() {
+    return this.escala;
+  }
+
+  set zoom(x: number) {
+    this.escala = x;
+  }
+
   get x() {
     return this.camara_principal.scrollX;
   }

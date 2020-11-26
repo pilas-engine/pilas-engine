@@ -51,3 +51,22 @@ seguir_al_actor(actor, suavidad, ignorar_bordes);
 - `actor`: el actor que la cámara tiene que seguir.
 - `suavidad`: tiene que ser un número indicando cuán gradual tiene que ser el movimiento de la cámara, cuanto menor sea el número mas rápido y brusco será el movimiento de la cámara.
 - `ignorar_bordes`: el último parámetro tiene que ser `true` o `false`. Si se envía `true` la cámara seguirá al actor incluso si sale del area del escenario, esto es ideal para juegos con area de movimiento infinita. Si se coloca `false` la cámara se detendrá en los bordes del escenario.
+
+
+## Zoom o aumento
+
+La cámara de pilas también permite hacer acercamientos, o zoom, usando un atributo
+llamado `escala`.
+
+Por ejemplo, si queremos aumentar el acercamiento de la cámara podemos usar el atributo
+`escala` con valores superiores a `1`:
+
+```
+this.camara.escala = 2.5;
+```
+
+O bien regresar al zoom original escribiendo:
+
+```
+this.camara.escala = 1;
+```

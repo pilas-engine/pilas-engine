@@ -114,6 +114,10 @@ declare class Camara {
     seguir_al_actor(actor: Actor, suavidad?: number, ignorar_limites?: boolean): void;
     get camara_principal(): any;
     vibrar(intensidad?: number, tiempo?: number): void;
+    get escala(): number;
+    set escala(x: number);
+    get zoom(): number;
+    set zoom(x: number);
     get x(): number;
     set x(x: number);
     get y(): number;

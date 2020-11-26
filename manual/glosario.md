@@ -246,6 +246,13 @@ Por ejemplo:
 ‹ Sin definir (undefined)
 ```
 
+Incluso también se puede cambiar el zoom con sentencias como:
+
+```
+› pilas.camara.escala = 2.5
+› pilas.camara.escala = 1
+```
+
 </div>
 
 <div class="funcion">
