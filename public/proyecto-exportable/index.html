@@ -83,7 +83,16 @@
 
       var ancho = proyecto.proyecto.ancho;
       var alto = proyecto.proyecto.alto;
-      var pilas = pilasengine.iniciar(ancho, alto, null, opciones, proyecto.proyecto.imagenes, false);
+
+      var recursos = null;
+
+      if (proyecto.proyecto.sonidos) {
+        recursos = {
+          sonidos: proyecto.proyecto.sonidos
+        }
+      }
+
+      var pilas = pilasengine.iniciar(ancho, alto, recursos, opciones, proyecto.proyecto.imagenes, false);
 
       pilas.onready = function() {
         if (!ha_iniciado) {
