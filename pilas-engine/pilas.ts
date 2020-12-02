@@ -228,7 +228,6 @@ class Pilas {
       // solo detiene el audio si no es un cambio de escena
       // interno en el juego.
       this.game.sound.stopAll();
-    } else {
       this.musica_en_reproduccion = null;
     }
 

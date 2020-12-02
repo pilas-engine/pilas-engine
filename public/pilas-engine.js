@@ -2677,8 +2677,6 @@ var Pilas = (function () {
         }
         if (nombre !== "ModoEjecucion") {
             this.game.sound.stopAll();
-        }
-        else {
             this.musica_en_reproduccion = null;
         }
         this.modo = this.game.scene.getScene(nombre);
