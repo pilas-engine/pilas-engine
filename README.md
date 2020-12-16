@@ -9,6 +9,7 @@ web para obtener más información:
 
 ![](extras/editor.png)
 
+
 ## Artículos y noticias
 
 - [Resumen del sprint 24 (15 de Noviembre del 2020)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-24/2066)
