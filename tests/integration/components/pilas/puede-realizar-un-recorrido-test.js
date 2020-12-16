@@ -45,6 +45,6 @@ module("Integration | Pilas | puede realizar un recorrido", function(hooks) {
       done();
     });
 
-    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=2 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
+    await render(hbs`{{pilas-test cuandoInicia=cuandoInicia espera=5 cuandoTerminaLaEspera=cuandoTerminaLaEspera}}`);
   });
 });
