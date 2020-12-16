@@ -146,19 +146,15 @@ deploy_a_dokku:
 	${BIN_EMBER} build --prod
 	@echo "Subiendo contenido al sitio de pilas (producción)."
 	touch dist/.static
-	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@examplelab.com.ar:pilas-engine-dev; git push dokku master -f
+	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@examplelab.com.ar:pilas-engine; git push dokku master -f
 
 deploy_a_dokku_dev:
 	rm -rf dist
 	@echo "Compilando la aplicación en modo producción a entorno de pruebas..."
 	${BIN_EMBER} build --prod
 	@echo "Subiendo contenido al sitio de pilas (desarrollo)."
-	rm -rf pilas-engine-en-dokku-dev
-	git clone dokku@hugoruscitti.com.ar:app-dev pilas-engine-en-dokku-dev
-	rm -rf pilas-engine-en-dokku-dev/*
-	cp -rf dist/* pilas-engine-en-dokku-dev/
-	cd pilas-engine-en-dokku-dev; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git push -f
-	rm -rf pilas-engine-en-dokku-dev
+	touch dist/.static
+	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@examplelab.com.ar:pilas-engine-dev; git push dokku master -f
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
