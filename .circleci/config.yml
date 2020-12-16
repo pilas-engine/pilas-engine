@@ -42,6 +42,7 @@ jobs:
       - run: make iniciar
       - run: make test
       - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+      - run: echo -e "Host examplelab.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
       - run:
           name: "Realizando deploy a dokku producción ..."
           command: make deploy_a_dokku
@@ -53,6 +54,7 @@ jobs:
       - run: make iniciar
       - run: make test
       - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+      - run: echo -e "Host examplelab.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
       - run:
           name: "Realizando deploy a dokku desarrollo ..."
           command: make deploy_a_dokku_dev
