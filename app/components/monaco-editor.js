@@ -254,7 +254,7 @@ export default Component.extend({
   },
 
   regresa_al_modo_editor() {
-    later(this, "limpiar_resaltado", 100);
+    later(this, "limpiar_resaltado", 1000);
   },
 
   hacerFoco() {
