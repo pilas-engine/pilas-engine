@@ -2778,7 +2778,7 @@ var Pilas = (function () {
         return this.musica_en_reproduccion !== null;
     };
     Pilas.prototype.obtener_actores = function () {
-        return this.escena.actores;
+        return this.escena.actores.filter(function (a) { return a._vivo; });
     };
     Pilas.prototype.buscar_actor = function (nombre) {
         return this.obtener_actor_por_nombre(nombre);

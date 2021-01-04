@@ -343,7 +343,7 @@ class Pilas {
   }
 
   obtener_actores() {
-    return this.escena.actores;
+    return this.escena.actores.filter(a => a._vivo);
   }
 
   buscar_actor(nombre: string) {
