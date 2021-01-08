@@ -7,8 +7,8 @@ enum Tipo {
 }
 
 class AnimacionDePropiedad {
-  private timeline: Phaser.Tweens.Timeline;
-  private actor: Actor;
+  timeline: Phaser.Tweens.Timeline;
+  actor: Actor;
   private pilas: Pilas;
   private tipo_de_animacion: Tipo;
   private data: [any?];

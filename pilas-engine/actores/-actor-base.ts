@@ -1021,6 +1021,7 @@ class ActorBase {
 
   eliminar() {
     this._vivo = false;
+    this.pilas.escena.eliminar_animaciones_del_actor(this);
   }
 
   esta_vivo() {

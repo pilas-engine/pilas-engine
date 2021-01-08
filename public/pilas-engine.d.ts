@@ -45,8 +45,8 @@ declare enum Tipo {
     desborde = "Back"
 }
 declare class AnimacionDePropiedad {
-    private timeline;
-    private actor;
+    timeline: Phaser.Tweens.Timeline;
+    actor: Actor;
     private pilas;
     private tipo_de_animacion;
     private data;
@@ -1414,8 +1414,10 @@ declare class EscenaBase {
     desplazamiento_del_fondo_y: number;
     proyecto: any;
     private animaciones_pendientes_de_ejecucion;
+    private animaciones_en_ejecucion;
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, tipo_de_animacion: Tipo, veces: number, duración: number): AnimacionDePropiedad;
+    eliminar_animaciones_del_actor(actor: any): void;
     reproducir_sonido(nombre: string): void;
     reproducir_musica(nombre: string): any;
     detener_musica(): void;

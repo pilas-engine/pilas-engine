@@ -18,11 +18,13 @@ class EscenaBase {
   desplazamiento_del_fondo_y: number;
   proyecto: any;
   private animaciones_pendientes_de_ejecucion: [AnimacionDePropiedad?];
+  private animaciones_en_ejecucion: [AnimacionDePropiedad?];
 
   constructor(pilas: Pilas) {
     this.pilas = pilas;
     this.actores = [];
     this.animaciones_pendientes_de_ejecucion = [];
+    this.animaciones_en_ejecucion = [];
     this.pilas.utilidades.obtener_id_autoincremental();
     this.camara = new Camara(pilas);
     this.pilas.escenas.definir_escena_actual(this);
@@ -39,6 +41,14 @@ class EscenaBase {
     let animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, veces, duración);
     this.animaciones_pendientes_de_ejecucion.push(animacion);
     return animacion;
+  }
+
+  eliminar_animaciones_del_actor(actor) {
+    this.animaciones_en_ejecucion.map(animacion => {
+      if (animacion.actor === actor) {
+        animacion.timeline.stop();
+      }
+    });
   }
 
   reproducir_sonido(nombre: string) {
@@ -210,6 +220,7 @@ class EscenaBase {
     if (this.animaciones_pendientes_de_ejecucion.length > 0) {
       this.animaciones_pendientes_de_ejecucion.map(animacion => {
         (<any>animacion).ejecutar();
+        this.animaciones_en_ejecucion.push(animacion);
       });
 
       this.animaciones_pendientes_de_ejecucion = [];

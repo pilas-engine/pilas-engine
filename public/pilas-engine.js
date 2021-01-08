@@ -4090,6 +4090,7 @@ var ActorBase = (function () {
     };
     ActorBase.prototype.eliminar = function () {
         this._vivo = false;
+        this.pilas.escena.eliminar_animaciones_del_actor(this);
     };
     ActorBase.prototype.esta_vivo = function () {
         return this._vivo;
@@ -5586,6 +5587,7 @@ var EscenaBase = (function () {
         this.pilas = pilas;
         this.actores = [];
         this.animaciones_pendientes_de_ejecucion = [];
+        this.animaciones_en_ejecucion = [];
         this.pilas.utilidades.obtener_id_autoincremental();
         this.camara = new Camara(pilas);
         this.pilas.escenas.definir_escena_actual(this);
@@ -5601,6 +5603,13 @@ var EscenaBase = (function () {
         var animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, veces, duración);
         this.animaciones_pendientes_de_ejecucion.push(animacion);
         return animacion;
+    };
+    EscenaBase.prototype.eliminar_animaciones_del_actor = function (actor) {
+        this.animaciones_en_ejecucion.map(function (animacion) {
+            if (animacion.actor === actor) {
+                animacion.timeline.stop();
+            }
+        });
     };
     EscenaBase.prototype.reproducir_sonido = function (nombre) {
         return this.pilas.reproducir_sonido(nombre);
@@ -5727,9 +5736,11 @@ var EscenaBase = (function () {
     EscenaBase.prototype.pre_actualizar = function () { };
     EscenaBase.prototype.actualizar = function () { };
     EscenaBase.prototype.iniciar_animaciones_pendientes = function () {
+        var _this = this;
         if (this.animaciones_pendientes_de_ejecucion.length > 0) {
             this.animaciones_pendientes_de_ejecucion.map(function (animacion) {
                 animacion.ejecutar();
+                _this.animaciones_en_ejecucion.push(animacion);
             });
             this.animaciones_pendientes_de_ejecucion = [];
         }
