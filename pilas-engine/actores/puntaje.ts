@@ -10,6 +10,7 @@ class puntaje extends ActorTextoBase {
 
   iniciar() {
     this.actualizar_texto();
+    this.fijo = true;
   }
 
   aumentar(cantidad: number = 1) {

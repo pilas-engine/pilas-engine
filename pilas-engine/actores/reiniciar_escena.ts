@@ -8,6 +8,10 @@ class reiniciar_escena extends ActorTextoBase {
     fuente: "color-negro"
   };
 
+  iniciar() {
+    this.fijo = true;
+  }
+
   cuando_hace_click() {
     this.pilas.reiniciar_escena();
   }

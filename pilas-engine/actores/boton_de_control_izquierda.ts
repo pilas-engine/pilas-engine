@@ -6,7 +6,9 @@ class boton_de_control_izquierda extends Actor {
 
   pulsado: boolean = false;
 
-  iniciar() {}
+  iniciar() {
+    this.fijo = true;
+  }
 
   actualizar() {
     if (this.pulsado) {

@@ -70,3 +70,24 @@ O bien regresar al zoom original escribiendo:
 ```
 this.camara.escala = 1;
 ```
+
+## Fijar actores a la pantalla
+
+Hay casos en donde queremos que algún actor permanezca fijo
+en su posición, independiente del movimiento de la cámara.
+
+Por ejemplo, el puntaje del jugador no es algo que queremos
+que salga de la pantalla cuando la cámara se mueve, tampoco
+los controles, ni el contador de vidas.
+
+Para que este tipo de actores quede visible en pantalla
+tenemos tenemos que definirles la propiedad `fijo` de
+esta forma:
+
+```
+this.fijo = true;
+```
+
+Esa propiedad en valor `true` le indica a pilas que este actor
+no se tiene que desplazar respetando la cámara, sino que debe
+permanecer fijo a la pantalla en todo momento.

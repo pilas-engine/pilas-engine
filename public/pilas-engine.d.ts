@@ -1030,6 +1030,7 @@ declare class boton_de_control_abajo extends Actor {
     propiedades: {
         imagen: string;
         z: number;
+        fijo: boolean;
     };
     pulsado: boolean;
     iniciar(): void;

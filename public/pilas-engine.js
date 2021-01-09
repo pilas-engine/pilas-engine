@@ -4729,7 +4729,8 @@ var boton_de_control_abajo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             imagen: "imagenes:botones/botones_abajo",
-            z: -100
+            z: -100,
+            fijo: true
         };
         _this.pulsado = false;
         return _this;
