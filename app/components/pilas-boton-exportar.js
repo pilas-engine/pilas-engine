@@ -177,7 +177,7 @@ export default Component.extend({
       const proyecto_serializado = json_a_string(proyecto_completo);
       this.agregar_mensaje(`Evaluando tamaño del proyecto ...`);
       yield timeout(1000);
-      let proyecto_en_partes = this.dividirEnPartes(proyecto_serializado, 1024 * 512); // bloques de 500kb
+      let proyecto_en_partes = this.dividirEnPartes(proyecto_serializado, 1024 * 256); // bloques de 256kb
       let cantidad_de_partes = proyecto_en_partes.length;
 
       if (cantidad_de_partes === 1) {
@@ -188,7 +188,7 @@ export default Component.extend({
         // Si el proyecto tiene varias partes, hace un primer post para obtener el hash
         // y luego envía las siguientes partes especificando ese hash para que se carguen
         // en el mismo proyecto.
-        this.agregar_mensaje(`Subiendo el proyecto en ${cantidad_de_partes} partes de 500kb`);
+        this.agregar_mensaje(`Subiendo el proyecto en ${cantidad_de_partes} partes de 256kb`);
         this.agregar_mensaje(`Subiendo parte 1 de ${cantidad_de_partes}`);
         data = yield this.api.publicar_juego(proyecto_en_partes[0], this.ver_codigo);
 
@@ -205,9 +205,17 @@ export default Component.extend({
       this.agregar_mensaje(`¡Visitá esa dirección o compartila para mostrar tu creación!`);
       this.agregar_mensaje("");
       this.agregar_mensaje(`Opcionalmente, también podes mostrar tu juego copiando y pegando este código en el foro u otro sitio:`);
+
+      let url_sin_query_params = data.url.replace("?sin_cabecera=true", "");
+
       this.agregar_mensaje({
         codigo: `<iframe src="[...]"></iframe>`,
-        codigoCompleto: `<iframe src="${data.url}?sin_cabecera=true" width=${proyecto.ancho} height=${proyecto.alto}></iframe>`
+        codigoCompleto: [
+          //
+          `[Abrir este proyecto en el editor de pilas](${url_sin_query_params})`,
+          ``,
+          `<iframe src="${data.url}?sin_cabecera=true" width=${proyecto.ancho} height=${proyecto.alto}></iframe>`
+        ].join("\n")
       });
     } catch (url) {
       this.agregar_mensaje(`Error, el servidor en "${url}" no responde o hay un problema de conexión a Internet.`);
