@@ -29,27 +29,23 @@ export default Component.extend({
     return this.invalido_por_caracteres || this.invalido_por_vacio || this.invalido_por_duplicado;
   }),
 
-  obtener_nombres_de_los_otros_actores() {
+  obtener_nombres_no_permitidos() {
     let actores = this.proyecto.obtener_nombres_de_actores();
-    actores.removeObject(this.nombre);
-    return actores;
-  },
-
-  obtener_nombres_de_las_otras_escenas() {
     let escenas = this.proyecto.obtener_nombres_de_todas_las_escenas();
-    escenas.removeObject(this.nombre);
-    return escenas;
+
+    let nombres = [...actores, ...escenas];
+
+    nombres.removeObject(this.nombre);
+    return nombres;
   },
 
   actions: {
     cambiarNombre() {
       this.set("mostrar", true);
       this.set("nombreSugerido", this.nombre);
-      if (this.es_actor) {
-        this.set("nombres_no_permitidos", this.obtener_nombres_de_los_otros_actores());
-      } else {
-        this.set("nombres_no_permitidos", this.obtener_nombres_de_las_otras_escenas());
-      }
+
+      this.set("nombres_no_permitidos", this.obtener_nombres_no_permitidos());
+
       later(this, this.hacer_foco, 1);
     },
 

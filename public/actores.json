@@ -52,22 +52,22 @@
     },
     {
       "nombre": "boton_de_control_arriba",
-      "codigo": "class boton_de_control_arriba extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_arriba\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {}\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"arriba\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
+      "codigo": "class boton_de_control_arriba extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_arriba\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"arriba\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
       "archivo": "boton_de_control_arriba.ts"
     },
     {
       "nombre": "boton_de_control_derecha",
-      "codigo": "class boton_de_control_derecha extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_derecha\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {}\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"derecha\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
+      "codigo": "class boton_de_control_derecha extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_derecha\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"derecha\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
       "archivo": "boton_de_control_derecha.ts"
     },
     {
       "nombre": "boton_de_control_espacio",
-      "codigo": "class boton_de_control_espacio extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_a\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {}\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"espacio\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
+      "codigo": "class boton_de_control_espacio extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_a\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"espacio\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
       "archivo": "boton_de_control_espacio.ts"
     },
     {
       "nombre": "boton_de_control_izquierda",
-      "codigo": "class boton_de_control_izquierda extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_izquierda\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {}\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"izquierda\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
+      "codigo": "class boton_de_control_izquierda extends Actor {\n  propiedades = {\n    imagen: \"imagenes:botones/botones_izquierda\",\n    z: -100\n  };\n\n  pulsado: boolean = false;\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"izquierda\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n",
       "archivo": "boton_de_control_izquierda.ts"
     },
     {
@@ -177,7 +177,7 @@
     },
     {
       "nombre": "reiniciar_escena",
-      "codigo": "class reiniciar_escena extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    fondo: \"imagenes:redimensionables/gris\",\n    texto: \"Reiniciar escena\",\n    es_texto: true,\n    z: -10,\n    fuente: \"color-negro\"\n  };\n\n  cuando_hace_click() {\n    this.pilas.reiniciar_escena();\n  }\n\n  cuando_mueve() {\n    this.pilas.definir_cursor(\"pointer\");\n  }\n\n  cuando_sale() {\n    this.pilas.definir_cursor(\"normal\");\n  }\n}\n",
+      "codigo": "class reiniciar_escena extends ActorTextoBase {\n  propiedades = {\n    imagen: \"imagenes:basicos/invisible\",\n    fondo: \"imagenes:redimensionables/gris\",\n    texto: \"Reiniciar escena\",\n    es_texto: true,\n    z: -10,\n    fuente: \"color-negro\"\n  };\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  cuando_hace_click() {\n    this.pilas.reiniciar_escena();\n  }\n\n  cuando_mueve() {\n    this.pilas.definir_cursor(\"pointer\");\n  }\n\n  cuando_sale() {\n    this.pilas.definir_cursor(\"normal\");\n  }\n}\n",
       "archivo": "reiniciar_escena.ts"
     },
     {
