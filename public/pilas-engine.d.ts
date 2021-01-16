@@ -962,6 +962,8 @@ declare class PizarraBase extends Actor {
     dibujar_borde_de_rectangulo(x?: number, y?: number, ancho?: number, alto?: number, color?: any, grosor?: number): void;
     dibujar_linea(x?: number, y?: number, x1?: number, y1?: number, color?: any, grosor?: number): void;
     limpiar(): void;
+    get fijo(): boolean;
+    set fijo(valor: boolean);
     actualizar(): void;
     pre_actualizar(): void;
 }
@@ -1030,7 +1032,6 @@ declare class boton_de_control_abajo extends Actor {
     propiedades: {
         imagen: string;
         z: number;
-        fijo: boolean;
     };
     pulsado: boolean;
     iniciar(): void;
@@ -1350,6 +1351,7 @@ declare class reiniciar_escena extends ActorTextoBase {
         z: number;
         fuente: string;
     };
+    iniciar(): void;
     cuando_hace_click(): void;
     cuando_mueve(): void;
     cuando_sale(): void;

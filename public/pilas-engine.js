@@ -4558,6 +4558,21 @@ var PizarraBase = (function (_super) {
     PizarraBase.prototype.limpiar = function () {
         this._canvas.clear();
     };
+    Object.defineProperty(PizarraBase.prototype, "fijo", {
+        get: function () {
+            return this._canvas.scrollFactorX == 0;
+        },
+        set: function (valor) {
+            if (valor) {
+                this._canvas.setScrollFactor(0, 0);
+            }
+            else {
+                this._canvas.setScrollFactor(1, 1);
+            }
+        },
+        enumerable: false,
+        configurable: true
+    });
     PizarraBase.prototype.actualizar = function () { };
     PizarraBase.prototype.pre_actualizar = function () {
         this.pilas.utilidades.sincronizar_contenedor(this._canvas, this.sprite);
@@ -4729,13 +4744,14 @@ var boton_de_control_abajo = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             imagen: "imagenes:botones/botones_abajo",
-            z: -100,
-            fijo: true
+            z: -100
         };
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_abajo.prototype.iniciar = function () { };
+    boton_de_control_abajo.prototype.iniciar = function () {
+        this.fijo = true;
+    };
     boton_de_control_abajo.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
@@ -4767,7 +4783,9 @@ var boton_de_control_arriba = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_arriba.prototype.iniciar = function () { };
+    boton_de_control_arriba.prototype.iniciar = function () {
+        this.fijo = true;
+    };
     boton_de_control_arriba.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
@@ -4799,7 +4817,9 @@ var boton_de_control_derecha = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_derecha.prototype.iniciar = function () { };
+    boton_de_control_derecha.prototype.iniciar = function () {
+        this.fijo = true;
+    };
     boton_de_control_derecha.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
@@ -4831,7 +4851,9 @@ var boton_de_control_espacio = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_espacio.prototype.iniciar = function () { };
+    boton_de_control_espacio.prototype.iniciar = function () {
+        this.fijo = true;
+    };
     boton_de_control_espacio.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
@@ -4863,7 +4885,9 @@ var boton_de_control_izquierda = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_izquierda.prototype.iniciar = function () { };
+    boton_de_control_izquierda.prototype.iniciar = function () {
+        this.fijo = true;
+    };
     boton_de_control_izquierda.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
@@ -5473,6 +5497,7 @@ var puntaje = (function (_super) {
     }
     puntaje.prototype.iniciar = function () {
         this.actualizar_texto();
+        this.fijo = true;
     };
     puntaje.prototype.aumentar = function (cantidad) {
         if (cantidad === void 0) { cantidad = 1; }
@@ -5498,6 +5523,9 @@ var reiniciar_escena = (function (_super) {
         };
         return _this;
     }
+    reiniciar_escena.prototype.iniciar = function () {
+        this.fijo = true;
+    };
     reiniciar_escena.prototype.cuando_hace_click = function () {
         this.pilas.reiniciar_escena();
     };

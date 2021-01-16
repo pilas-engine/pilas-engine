@@ -47,12 +47,18 @@ export default Component.extend({
                 p2.y = -300
                 this.actor = this.pilas.actores.pelota();
                 this.pizarra = this.pilas.actores.pizarra();
+                this.pizarra.fijo = true;
+
+                this.barra = this.pilas.actores.barra_de_energia();
+                this.barra.fijo = true;
               }
 
               actualizar() {
                 this.pizarra.limpiar();
                 let colisiones = this.pilas.laser(0, 0, 0, -500);
                 this.pilas.observar("colisiones", colisiones);
+
+                this.camara.x += 1;
 
                 let colisiones_del_mouse = this.pilas.laser(this.actor, this.pilas.cursor_x, this.pilas.cursor_y, this.pilas.cursor_x, -500);
                 this.pilas.observar("colisiones_del_mouse", colisiones_del_mouse);

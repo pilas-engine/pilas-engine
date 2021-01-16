@@ -48,6 +48,18 @@ class PizarraBase extends Actor {
     this._canvas.clear();
   }
 
+  get fijo() {
+    return this._canvas.scrollFactorX == 0;
+  }
+
+  set fijo(valor: boolean) {
+    if (valor) {
+      this._canvas.setScrollFactor(0, 0);
+    } else {
+      this._canvas.setScrollFactor(1, 1);
+    }
+  }
+
   actualizar() {}
 
   pre_actualizar() {
