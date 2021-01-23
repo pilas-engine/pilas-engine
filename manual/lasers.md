@@ -48,22 +48,22 @@ la plataforma, pero no con la manzana (ya que no tiene figura física).
 ## Accediendo a los lasers desde el código
 
 Una vez que creamos el laser desde el editor, podemos escribir código para
-comenzar a interactuar con los sensores.
+comenzar a interactuar con los lasers cuando el juego esté en funcionamiento.
 
 Veamos esto con un ejemplo, queremos que nuestro personaje detecte si está sobre
-una plataforma o no. Así que podemos crear un sensor llamado "pies" y colocarlo
+una plataforma o no. Así que podemos crear un laser llamado "pies" y colocarlo
 en dirección al suelo así:
 
 ![](imagenes/lasers/ejemplo-editor.png)
 
 Ahora podemos ir al código del actor, crear un atributo llamado `pies` y luego
-vincularle el sensor llamando a la función `obtener_sensor` así:
+vincularle el laser llamando a la función `obtener_laser` así:
 
 ![](imagenes/lasers/ejemplo-codigo-1.png)
 
 Y con ese código, ahora vamos a poder hacerle consultas en cualquier momento al
-sensor que vinculamos. Estas son algunas de las funciones que incluyen los
-sensores:
+laser que vinculamos. Estas son algunas de las funciones que incluyen los
+lasers:
 
 ![](imagenes/lasers/autocompletado.png)
 
@@ -106,8 +106,8 @@ y el resultado va a ser similar a este:
 
 Es decir, gracias a que el laser nos retorna la distancia como un número,
 podemos decirle al actor que si la distancia es menor a `40` queremos que
-muestre la animación "correr" y si esa distancia es mayor es porque tiene que
-mostrar la animación de "salto".
+muestre la animación "correr" y si esa distancia es mayor a `40` queremos
+que muestre la animación de "salto".
 
 ## Avanzado: Lasers instantáneos desde el código
 
@@ -131,7 +131,7 @@ this.pilas.observar("resultado", resultado);
 this.pilas.observar("cantidad de colisiones", resultado.length);
 ```
 
-También hay otroa función muy similar llamada `laser_al_primer_actor` que además
+También hay otra función muy similar llamada `laser_al_primer_actor` que además
 acepta una etiqueta, para que podamos detectar distancias contra un tipo de actor
 en especial.
 

@@ -112,7 +112,19 @@
 <li><code>actor</code>: el actor que la cámara tiene que seguir.</li>
 <li><code>suavidad</code>: tiene que ser un número indicando cuán gradual tiene que ser el movimiento de la cámara, cuanto menor sea el número mas rápido y brusco será el movimiento de la cámara.</li>
 <li><code>ignorar_bordes</code>: el último parámetro tiene que ser <code>true</code> o <code>false</code>. Si se envía <code>true</code> la cámara seguirá al actor incluso si sale del area del escenario, esto es ideal para juegos con area de movimiento infinita. Si se coloca <code>false</code> la cámara se detendrá en los bordes del escenario.</li>
-</ul>  <div class="tc navegacion">
+</ul>
+<h2 id="zoom-o-aumento">Zoom o aumento</h2>
+<p>La cámara de pilas también permite hacer acercamientos, o zoom, usando un atributo llamado <code>escala</code>.</p>
+<p>Por ejemplo, si queremos aumentar el acercamiento de la cámara podemos usar el atributo <code>escala</code> con valores superiores a <code>1</code>:</p>
+<pre><code>this.camara.escala = 2.5;</code></pre>
+<p>O bien regresar al zoom original escribiendo:</p>
+<pre><code>this.camara.escala = 1;</code></pre>
+<h2 id="fijar-actores-a-la-pantalla">Fijar actores a la pantalla</h2>
+<p>Hay casos en donde queremos que algún actor permanezca fijo en su posición, independiente del movimiento de la cámara.</p>
+<p>Por ejemplo, el puntaje del jugador no es algo que queremos que salga de la pantalla cuando la cámara se mueve, tampoco los controles, ni el contador de vidas.</p>
+<p>Para que este tipo de actores quede visible en pantalla tenemos tenemos que definirles la propiedad <code>fijo</code> de esta forma:</p>
+<pre><code>this.fijo = true;</code></pre>
+<p>Esa propiedad en valor <code>true</code> le indica a pilas que este actor no se tiene que desplazar respetando la cámara, sino que debe permanecer fijo a la pantalla en todo momento.</p>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

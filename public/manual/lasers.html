@@ -100,12 +100,12 @@
 <p>Eso sí, el laser solo detectará el contacto con aquellos actores que tengan una figura física asignada. Por ejemplo aquí se reconocen colisiones con una caja y la plataforma, pero no con la manzana (ya que no tiene figura física).</p>
 <p><img src="imagenes/lasers/distancias-2.png" /></p>
 <h2 id="accediendo-a-los-lasers-desde-el-código">Accediendo a los lasers desde el código</h2>
-<p>Una vez que creamos el laser desde el editor, podemos escribir código para comenzar a interactuar con los sensores.</p>
-<p>Veamos esto con un ejemplo, queremos que nuestro personaje detecte si está sobre una plataforma o no. Así que podemos crear un sensor llamado “pies” y colocarlo en dirección al suelo así:</p>
+<p>Una vez que creamos el laser desde el editor, podemos escribir código para comenzar a interactuar con los lasers cuando el juego esté en funcionamiento.</p>
+<p>Veamos esto con un ejemplo, queremos que nuestro personaje detecte si está sobre una plataforma o no. Así que podemos crear un laser llamado “pies” y colocarlo en dirección al suelo así:</p>
 <p><img src="imagenes/lasers/ejemplo-editor.png" /></p>
-<p>Ahora podemos ir al código del actor, crear un atributo llamado <code>pies</code> y luego vincularle el sensor llamando a la función <code>obtener_sensor</code> así:</p>
+<p>Ahora podemos ir al código del actor, crear un atributo llamado <code>pies</code> y luego vincularle el laser llamando a la función <code>obtener_laser</code> así:</p>
 <p><img src="imagenes/lasers/ejemplo-codigo-1.png" /></p>
-<p>Y con ese código, ahora vamos a poder hacerle consultas en cualquier momento al sensor que vinculamos. Estas son algunas de las funciones que incluyen los sensores:</p>
+<p>Y con ese código, ahora vamos a poder hacerle consultas en cualquier momento al laser que vinculamos. Estas son algunas de las funciones que incluyen los lasers:</p>
 <p><img src="imagenes/lasers/autocompletado.png" /></p>
 <p>Tenemos funciones para consultar cuántos actores se encuentran en el camino del laser, cual es el más cercano, a qué distancia está cada actor y muchas cosas más.</p>
 <p>Por ejemplo, podríamos hacer que el actor diga en todo momento a qué distancia está el suelo usando esta función dentro del método <code>actualizar</code>:</p>
@@ -120,7 +120,7 @@
 <p><img src="imagenes/lasers/codigo-de-animacion.png" /></p>
 <p>y el resultado va a ser similar a este:</p>
 <p><img src="imagenes/lasers/animacion-laser.gif" /></p>
-<p>Es decir, gracias a que el laser nos retorna la distancia como un número, podemos decirle al actor que si la distancia es menor a <code>40</code> queremos que muestre la animación “correr” y si esa distancia es mayor es porque tiene que mostrar la animación de “salto”.</p>
+<p>Es decir, gracias a que el laser nos retorna la distancia como un número, podemos decirle al actor que si la distancia es menor a <code>40</code> queremos que muestre la animación “correr” y si esa distancia es mayor a <code>40</code> queremos que muestre la animación de “salto”.</p>
 <h2 id="avanzado-lasers-instantáneos-desde-el-código">Avanzado: Lasers instantáneos desde el código</h2>
 <p>Los lasers que creamos desde el editor son ideales para visualizar, configurar y comprender fácilmente de qué se trata este concepto de distancia y colisiones en linea recta.</p>
 <p>Sin embargo, hay casos muy puntales en donde nos interesa calcular distancias o colisiones pero directamente desde el código. Para estos casos pilas incorpora lasers “instantáneos”.</p>
@@ -129,7 +129,7 @@
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">observar</span>(<span class="st">&quot;resultado&quot;</span><span class="op">,</span> resultado)<span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">observar</span>(<span class="st">&quot;cantidad de colisiones&quot;</span><span class="op">,</span> resultado<span class="op">.</span><span class="at">length</span>)<span class="op">;</span></span></code></pre></div>
-<p>También hay otroa función muy similar llamada <code>laser_al_primer_actor</code> que además acepta una etiqueta, para que podamos detectar distancias contra un tipo de actor en especial.</p>
+<p>También hay otra función muy similar llamada <code>laser_al_primer_actor</code> que además acepta una etiqueta, para que podamos detectar distancias contra un tipo de actor en especial.</p>
 <p>Estas dos funciones son bastante avanzadas, si queres saber más acerca de ellas te recomendamos ver el glosario de funciones.</p>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
