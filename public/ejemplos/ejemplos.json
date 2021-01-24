@@ -222,6 +222,10 @@
     {
       "nombre": "volley",
       "desde": "2.4.3"
+    },
+    {
+      "nombre": "don-ceferino",
+      "desde": "2.6.0"
     }
   ]
 }
