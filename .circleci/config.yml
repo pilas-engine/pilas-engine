@@ -46,7 +46,7 @@ jobs:
       - run:
           name: "Realizando deploy a dokku producción ..."
           command: make deploy_a_dokku
-  actualizar-sitio-dev:
+  deprecated__actualizar-sitio-dev:
     docker:
       - image: circleci/node:12.16.1-stretch-browsers
     steps:
@@ -63,7 +63,6 @@ workflows:
   compilar-y-subir:
     jobs:
       - compilar
-      - actualizar-sitio-dev
       - binarios:
           filters:
             tags:
