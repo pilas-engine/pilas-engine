@@ -580,6 +580,9 @@ export default Component.extend({
       let escena_origen = this.obtener_escena_por_id(proyecto, escena_origen_id);
       let escena_nueva = this.crear_escena_nueva(proyecto);
 
+      // si el actor está en una carpeta lo tiene que quitar.
+      actor.set("carpeta", undefined);
+
       escena_origen.actores.removeObject(actor);
       escena_nueva.actores.pushObject(actor);
       this.send("cuandoSelecciona", escena_nueva.id);
@@ -587,6 +590,10 @@ export default Component.extend({
 
     mover_actor_a_una_escena(proyecto, actor, escena_origen_id, escena_seleccionada) {
       let escena_origen = this.obtener_escena_por_id(proyecto, escena_origen_id);
+
+      // si el actor está en una carpeta lo tiene que quitar.
+      actor.set("carpeta", undefined);
+
       escena_origen.actores.removeObject(actor);
       escena_seleccionada.actores.pushObject(actor);
       this.send("cuandoSelecciona", escena_seleccionada.id);
