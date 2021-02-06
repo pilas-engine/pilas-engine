@@ -1,4 +1,6 @@
 import Service from "@ember/service";
+import EmberObject from "@ember/object";
+import { A } from "@ember/array";
 
 export default Service.extend({
   /**
@@ -126,6 +128,36 @@ export default Service.extend({
           ruta: "sonidos/comer.mp3"
         }
       ]);
+    }
+
+    // migración 2021-01-31: hacer que el proyecto ahora almacene código de blockly
+    if (!proyecto.bloques) {
+      console.log("CREANDO BLOQUES");
+      proyecto.set("bloques", EmberObject.create({}));
+      proyecto.set("bloques.proyecto", "----");
+      proyecto.set(
+        "bloques.escenas",
+        A(
+          proyecto.codigos.escenas.map(e => {
+            return EmberObject.create({
+              nombre: e.get("nombre"),
+              bloques: "----"
+            });
+          })
+        )
+      );
+
+      proyecto.set(
+        "bloques.actores",
+        A(
+          proyecto.codigos.actores.map(e => {
+            return EmberObject.create({
+              nombre: e.get("nombre"),
+              bloques: "----"
+            });
+          })
+        )
+      );
     }
 
     return proyecto;

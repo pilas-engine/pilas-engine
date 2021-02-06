@@ -24,6 +24,7 @@ export default Component.extend({
   serviceProyecto: service("proyecto"),
 
   codigo: "",
+  bloques: "",
   tagName: "",
   actorSeleccionado: -1, //en desuso
   seleccion: -1,
@@ -452,6 +453,14 @@ export default Component.extend({
     return this.get("proyecto.codigos.actores").findBy("nombre", nombre);
   },
 
+  obtener_bloques_del_actor_por_nombre(nombre) {
+    return this.get("proyecto.bloques.actores").findBy("nombre", nombre);
+  },
+
+  obtener_bloques_de_la_escena_por_nombre(nombre) {
+    return this.get("proyecto.bloques.escenas").findBy("nombre", nombre);
+  },
+
   obtenerDetalleDeActorPorIndice(indice) {
     let escena = this.obtener_la_escena_actual();
 
@@ -490,6 +499,21 @@ export default Component.extend({
     }
   },
 
+  guardar_bloques_en_el_proyecto(seleccion, bloques) {
+    if (seleccion === 0) {
+      this.definir_bloques_para_el_proyecto(bloques);
+    } else {
+      let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+
+      if (actor) {
+        this.definir_bloques_para_el_actor(actor, bloques);
+      } else {
+        let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
+        this.definir_bloques_para_la_escena(escena, bloques);
+      }
+    }
+  },
+
   obtener_todos_los_nombres_de_actores() {
     let escenas = this.get("proyecto.escenas");
     let actores = escenas.map(e => e.actores);
@@ -518,6 +542,10 @@ export default Component.extend({
     this.proyecto.codigos.proyecto = codigo;
   },
 
+  definir_bloques_para_el_proyecto(bloques) {
+    this.proyecto.bloques.proyecto = bloques;
+  },
+
   error(data) {
     this.log.error(data.mensaje, "");
     this.set("existe_un_error_reciente", true);
@@ -525,6 +553,14 @@ export default Component.extend({
 
   definir_codigo_para_el_actor({ nombre }, codigo) {
     this.obtener_actor_por_nombre(nombre).set("codigo", codigo);
+  },
+
+  definir_bloques_para_el_actor({ nombre }, bloques) {
+    this.obtener_bloques_del_actor_por_nombre(nombre).set("bloques", bloques);
+  },
+
+  definir_bloques_para_la_escena({ nombre }, bloques) {
+    this.obtener_bloques_de_la_escena_por_nombre(nombre).set("bloques", bloques);
   },
 
   reiniciar_escena_actual() {
@@ -656,6 +692,16 @@ export default Component.extend({
 
       this.set("codigo", codigo);
       this.guardar_codigo_en_el_proyecto(this.seleccion, codigo);
+    },
+
+    cuando_cambia_bloques(bloques) {
+      // Cuando cambia el código en el modo pausa se tiene
+      // que ignorar el cambio y no alterar el código del proyecto.
+      if (this.estado.es_modo_pausa) {
+        return;
+      }
+
+      this.guardar_bloques_en_el_proyecto(this.seleccion, bloques);
     },
 
     ejecutar() {

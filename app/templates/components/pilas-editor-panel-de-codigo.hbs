@@ -62,6 +62,14 @@
 
   </div>
 
+
+  {{titulo_del_codigo}}
+
+  {{blockly-editor
+    titulo=titulo_del_codigo
+    cuandoCambia=cuando_cambia_bloques
+  }}
+
   {{monaco-editor
       titulo=titulo_del_codigo
       readOnly=(not estado.puede_editar)

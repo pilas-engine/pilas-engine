@@ -14,7 +14,11 @@ export default Component.extend({
     return this.entidades.filter(e => e.nombre.toLowerCase().includes(f));
   }),
 
-  entidades: computed("contador", "proyecto.escenas.@each.actores.@each", function() {
+  los_actores: computed("proyecto.escenas.@each.actores", function() {
+    return this.get("proyectos.escenas.@each.actores");
+  }),
+
+  entidades: computed("contador", "los_actores.@each", function() {
     let lista = [];
 
     lista.pushObject({ nombre: "Proyecto", id: "proyecto", tipo: "proyecto" });
