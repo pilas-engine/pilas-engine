@@ -126,6 +126,14 @@ class ModoEjecucion extends Modo {
       y: p.y,
       evento
     });
+
+    if (this._escena_en_ejecucion) {
+      try {
+        this._escena_en_ejecucion.cuando_termina_de_hacer_click(p.x, p.y, evento);
+      } catch (e) {
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
+      }
+    }
   }
 
   private manejar_evento_muevemouse(evento) {

@@ -5896,6 +5896,7 @@ var EscenaBase = (function () {
     };
     EscenaBase.prototype.cuando_hace_click = function (x, y, evento_original) { };
     EscenaBase.prototype.cuando_mueve = function (x, y, evento_original) { };
+    EscenaBase.prototype.cuando_termina_de_hacer_click = function (x, y, evento_original) { };
     EscenaBase.prototype.cada_segundo = function (segundos_transcurridos) { };
     EscenaBase.prototype.cuando_transcurre_un_segundo = function (segundos_transcurridos) { };
     EscenaBase.prototype.cuando_pulsa_tecla = function (tecla, evento) { };
@@ -9376,6 +9377,14 @@ var ModoEjecucion = (function (_super) {
             y: p.y,
             evento: evento
         });
+        if (this._escena_en_ejecucion) {
+            try {
+                this._escena_en_ejecucion.cuando_termina_de_hacer_click(p.x, p.y, evento);
+            }
+            catch (e) {
+                this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
+            }
+        }
     };
     ModoEjecucion.prototype.manejar_evento_muevemouse = function (evento) {
         var posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);

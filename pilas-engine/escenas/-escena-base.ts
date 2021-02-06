@@ -371,6 +371,12 @@ class EscenaBase {
   cuando_mueve(x: number, y: number, evento_original: any) {}
 
   /**
+   * Se ejecuta después de hacer click, cuando el usuario deja de pulsar el
+   * botón del mouse.
+   */
+  cuando_termina_de_hacer_click(x: number, y: number, evento_original: any) {}
+
+  /**
    * Se ejecuta una vez por segundo.
    */
   cada_segundo(segundos_transcurridos: number) {}

@@ -1455,6 +1455,7 @@ declare class EscenaBase {
     terminar(): void;
     cuando_hace_click(x: number, y: number, evento_original: any): void;
     cuando_mueve(x: number, y: number, evento_original: any): void;
+    cuando_termina_de_hacer_click(x: number, y: number, evento_original: any): void;
     cada_segundo(segundos_transcurridos: number): void;
     cuando_transcurre_un_segundo(segundos_transcurridos: number): void;
     cuando_pulsa_tecla(tecla: string, evento: any): void;
