@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  compilar:
+  tests:
     docker:
       - image: circleci/node:12.16.1-stretch-browsers
     steps:
@@ -17,7 +17,6 @@ jobs:
     steps:
       - checkout
       - run: make iniciar
-      - run: make test
       - run: echo "Instalando wine ..."
       - run: sudo dpkg --add-architecture i386 && sudo apt update
       - run: sudo apt install wine wine32 wine64 libwine libwine:i386 fonts-wine
@@ -40,7 +39,6 @@ jobs:
     steps:
       - checkout
       - run: make iniciar
-      - run: make test
       - run: echo -e "Host hugoruscitti.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
       - run: echo -e "Host examplelab.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
       - run:
@@ -60,9 +58,9 @@ jobs:
           command: make deploy_a_dokku_dev
 workflows:
   version: 2
-  compilar-y-subir:
+  principal:
     jobs:
-      - compilar
+      - tests
       - binarios:
           filters:
             tags:
