@@ -127,4 +127,3 @@ existencia de varias herramientas y bibliotecas como:
 Tenemos un board de trello con todas las tareas que estamos desarrollando:
 
 - https://trello.com/b/eQJOjpOF/pilas-engine-2
-
