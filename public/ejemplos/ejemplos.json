@@ -226,6 +226,10 @@
     {
       "nombre": "don-ceferino",
       "desde": "2.6.0"
+    },
+    {
+      "nombre": "dialogo-y-camara",
+      "desde": "2.7.0"
     }
   ]
 }
