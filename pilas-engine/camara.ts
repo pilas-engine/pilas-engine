@@ -88,18 +88,18 @@ class Camara {
   }
 
   get borde_izquierdo() {
-    return -this.camara_principal.midPoint.x;
+    return this.x - this.pilas.modo.ancho / 2;
   }
 
   get borde_derecho() {
-    return this.camara_principal.midPoint.x;
+    return this.x + this.pilas.modo.ancho / 2;
   }
 
   get borde_arriba() {
-    return this.camara_principal.midPoint.y;
+    return this.y + this.pilas.modo.alto / 2;
   }
 
   get borde_abajo() {
-    return -this.camara_principal.midPoint.y;
+    return this.y - this.pilas.modo.alto / 2;
   }
 }

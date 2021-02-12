@@ -644,28 +644,28 @@ var Camara = (function () {
     });
     Object.defineProperty(Camara.prototype, "borde_izquierdo", {
         get: function () {
-            return -this.camara_principal.midPoint.x;
+            return this.x - this.pilas.modo.ancho / 2;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "borde_derecho", {
         get: function () {
-            return this.camara_principal.midPoint.x;
+            return this.x + this.pilas.modo.ancho / 2;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "borde_arriba", {
         get: function () {
-            return this.camara_principal.midPoint.y;
+            return this.y + this.pilas.modo.alto / 2;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(Camara.prototype, "borde_abajo", {
         get: function () {
-            return -this.camara_principal.midPoint.y;
+            return this.y - this.pilas.modo.alto / 2;
         },
         enumerable: false,
         configurable: true

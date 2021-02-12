@@ -123,8 +123,8 @@ declare class Camara {
     get y(): number;
     set y(y: number);
     get borde_izquierdo(): number;
-    get borde_derecho(): any;
-    get borde_arriba(): any;
+    get borde_derecho(): number;
+    get borde_arriba(): number;
     get borde_abajo(): number;
 }
 interface Color {
