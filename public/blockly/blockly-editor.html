@@ -2,29 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Blockly Demo: Fixed Blockly</title>
+  <title>Blockly Editor</title>
   <script src="./blockly_compressed.js"></script>
   <script src="./blocks_compressed.js"></script>
   <script src="./msg/js/en.js"></script>
+  <script src="./javascript_compressed.js"></script>
+  <script src="./bloques.js"></script>
   <style>
     body {
       background-color: #fff;
       font-family: sans-serif;
     }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
 
-        html, body {
+    html, body {
       height: 100%;
       margin: 0;
     }
-    body {
-      background-color: transparent;
-      font-family: sans-serif;
-      overflow: hidden;
-    }
+
     h1 {
       font-weight: normal;
       font-size: 140%;
@@ -33,10 +27,10 @@
       height: 100%;
       width: 100%;
     }
+
     #blocklyArea {
       height: 99%;
     }
-
 
     .blocklyMainBackground {
       stroke-width: 0 !important;
@@ -48,23 +42,32 @@
   <table>
     <tr>
       <td id="blocklyArea">
-
-  <div id="blocklyDiv" style="position: absolute;"></div>
+        <div id="blocklyDiv" style="position: absolute;"></div>
       </td>
     </tr>
   </table>
 
-
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <block type="controls_if"></block>
-    <block type="logic_compare"></block>
-    <block type="controls_repeat_ext"></block>
-    <block type="math_number">
-      <field name="NUM">123</field>
-    </block>
-    <block type="math_arithmetic"></block>
-    <block type="text"></block>
-    <block type="text_print"></block>
+    
+    <category name="eventos">
+      <block type="actor_inicia"></block>
+      <block type="actor_actualizar"></block>
+    </category>
+
+    <category name="control">
+      <block type="controls_if"></block>
+    </category>
+
+    <category name="acciones">
+      <block type="text"></block>
+      <block type="actor_decir"></block>
+      <block type="desplazar"></block>
+    </category>
+
+    <category name="sensores">
+      <block type="control_izquierda"></block>
+    </category>
+
   </xml>
 
   <script>
@@ -122,22 +125,38 @@
 	  window.top.postMessage({message: "carga-completa-de-blockly"}, HOST);
 
     function onChange(event) {
-      console.log(event);
-
       if (!event.isUiEvent) {
         let xml = Blockly.Xml.workspaceToDom(workspace);
         let xml_text = Blockly.Xml.domToText(xml);
+        let codigo = Blockly.JavaScript.workspaceToCode(workspace);
 
         window.top.postMessage({
           message: "cambia-el-workspace-de-blockly",
-          texto: xml_text
+          texto: xml_text,
+          codigo: codigo,
         }, HOST);
       }
     }
 
     workspace.addChangeListener(onChange);
+  
+    // Atiende mensaje que envía el componente blockly-editor.
+    window.addEventListener("message", (message) => {
+          if (message.data && message.data.message === "cargar-bloques") {
+                Blockly.mainWorkspace.clear();
 
+                if (message.data.xml_como_texto === '----') {
+                      console.log("Ojo, hay guiones en lugar de código");
+                    } else {
+    let xml = Blockly.Xml.textToDom(message.data.xml_como_texto);
+    Blockly.Xml.domToWorkspace(workspace, xml);
+                        }
 
+              } else  {
+
+          console.log("mensaje desde iframe", message);
+                  }
+        });
   </script>
 
 </body>

@@ -42,15 +42,14 @@
 
   </div>
 
-  <div class="unselectable pr2 pb2 flex bg-fondo items-center">
+  <div class="unselectable pr2 flex bg-fondo items-center pt2">
+      
     <div class="relative">
-      {{pilas-editor/boton-receta 
-          desactivado=(not estado.puede_editar) 
-          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
-      }}
+      <div class="dib mb2 {{if mostrarBloques "solapa" "solapa-seleccionada"}}" role="button" {{action "mostrarCodigo"}}>Código</div>
+      <div class="dib mb2 {{if mostrarBloques "solapa-seleccionada" "solapa"}}" role="button" {{action "mostrarBloques"}}>Bloques</div>
     </div>
 
-    <div class="flex1 flex justify-center">
+    <div class="flex1 flex justify-center pb2">
       {{selector-de-codigo 
           desactivado=(not estado.puede_editar) 
           titulo_del_codigo=titulo_del_codigo 
@@ -60,17 +59,32 @@
        }}
     </div>
 
+    <div class="relative pb2 {{if mostrarBloques "dn"}}">
+      {{pilas-editor/boton-receta 
+          desactivado=(not estado.puede_editar) 
+          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
+      }}
+    </div>
+    
+    {{!-- el botón de recetas se dibujar pero completamente invisible para preservar el layout --}}
+    <div class="relative pb2 {{if mostrarBloques "o-0" "dn"}}">
+      {{pilas-editor/boton-receta 
+          desactivado=true
+          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
+      }}
+    </div>
+
   </div>
 
+  <div class={{if mostrarBloques "flex flex-auto" "dn"}}>
+    {{blockly-editor
+      titulo=titulo_del_codigo
+      cuandoCambia=cuando_cambia_bloques
+    }}
+  </div>
 
-  {{titulo_del_codigo}}
-
-  {{blockly-editor
-    titulo=titulo_del_codigo
-    cuandoCambia=cuando_cambia_bloques
-  }}
-
-  {{monaco-editor
+  <div class={{if mostrarBloques "dn" "flex flex-auto"}}>
+    {{monaco-editor
       titulo=titulo_del_codigo
       readOnly=(not estado.puede_editar)
       code=codigo
@@ -84,4 +98,5 @@
       onChange=cuando_cambia_el_codigo
       cuandoTerminaDeComprobarErrores=(action "actualizarEstadoDeErrores")
     }}
+  </div>
 </div>

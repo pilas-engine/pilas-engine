@@ -3391,6 +3391,10 @@ var ActorBase = (function () {
         destino.setOrigin(origen.originX, origen.originY);
     };
     ActorBase.prototype.iniciar = function () { };
+    ActorBase.prototype._bloques_iniciar = function () {
+        console.log("esta actor no tiene bloques");
+    };
+    ActorBase.prototype._bloques_actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "interactivo", {
         get: function () {
             return this.sprite.input.enabled;
@@ -5800,6 +5804,9 @@ var EscenaBase = (function () {
                 actor.actualizar_habilidades();
                 actor.actualizar();
                 actor.actualizar_sensores();
+                if (actor._bloques_actualizar) {
+                    actor._bloques_actualizar();
+                }
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando actores");
@@ -9642,6 +9649,10 @@ var ModoEjecucion = (function (_super) {
         if (clase) {
             actor = new this.clases[entidad.nombre](this.pilas);
             actor.proyecto = this.instancia_de_proyecto;
+            var items_bloques = this.bloques.actores.filter(function (e) { return e.nombre == entidad.nombre; });
+            if (items_bloques.length > 0) {
+                eval(items_bloques[0].codigo_de_bloques);
+            }
             var p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
             p = this.pilas.utilidades.combinar_propiedades(p, entidad);
             actor.pre_iniciar(p);
@@ -9655,6 +9666,9 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.inicializar_actor = function (actor, entidad) {
         actor.agregar_sensores_desde_lista(entidad.sensores);
         actor.iniciar();
+        if (actor._bloques_iniciar) {
+            actor._bloques_iniciar();
+        }
         if (entidad.habilidades) {
             entidad.habilidades.map(function (habilidad) {
                 actor.aprender(habilidad);
@@ -9690,6 +9704,8 @@ var ModoEjecucion = (function (_super) {
         this.proyecto = datos.proyecto;
         this.codigo = datos.codigo;
         this.permitir_modo_pausa = datos.permitir_modo_pausa;
+        this.bloques = datos.proyecto.bloques;
+        console.log("TODO: extraer los códigos de bloques desde datos.proyecto");
     };
     ModoEjecucion.prototype.update = function () {
         if (this.con_error) {

@@ -21,6 +21,7 @@ class ModoEjecucion extends Modo {
 
   instancia_de_proyecto: any = null;
   con_error: boolean;
+  bloques: any;
 
   constructor() {
     super({ key: "ModoEjecucion" });
@@ -466,6 +467,12 @@ class ModoEjecucion extends Modo {
       actor = new this.clases[entidad.nombre](this.pilas);
       actor.proyecto = this.instancia_de_proyecto;
 
+      let items_bloques = this.bloques.actores.filter(e => e.nombre == entidad.nombre);
+
+      if (items_bloques.length > 0) {
+        eval(items_bloques[0].codigo_de_bloques);
+      }
+
       let p = this.pilas.utilidades.combinar_propiedades(actor.propiedades_base, actor.propiedades);
       p = this.pilas.utilidades.combinar_propiedades(p, entidad);
 
@@ -481,6 +488,10 @@ class ModoEjecucion extends Modo {
   inicializar_actor(actor: any, entidad: any) {
     actor.agregar_sensores_desde_lista(entidad.sensores);
     actor.iniciar();
+
+    if (actor._bloques_iniciar) {
+      actor._bloques_iniciar();
+    }
 
     if (entidad.habilidades) {
       entidad.habilidades.map((habilidad: any) => {
@@ -537,6 +548,9 @@ class ModoEjecucion extends Modo {
     this.proyecto = datos.proyecto;
     this.codigo = datos.codigo;
     this.permitir_modo_pausa = datos.permitir_modo_pausa;
+
+    this.bloques = datos.proyecto.bloques;
+    console.log("TODO: extraer los códigos de bloques desde datos.proyecto");
   }
 
   update() {

@@ -556,7 +556,8 @@ export default Component.extend({
   },
 
   definir_bloques_para_el_actor({ nombre }, bloques) {
-    this.obtener_bloques_del_actor_por_nombre(nombre).set("bloques", bloques);
+    this.obtener_bloques_del_actor_por_nombre(nombre).set("bloques", bloques.texto);
+    this.obtener_bloques_del_actor_por_nombre(nombre).set("codigo_de_bloques", bloques.codigo_de_bloques);
   },
 
   definir_bloques_para_la_escena({ nombre }, bloques) {

@@ -35,7 +35,8 @@ const queryParams = new QueryParams({
   tamano: { defaultValue: 16, replace: true, refresh: true },
   mostrarModalDeAnimaciones: { defaultValue: false, replace: true },
   mostrarModalDeSonidos: { defaultValue: false, replace: true },
-  mostrarModalDeAyuda: { defaultValue: false, replace: true }
+  mostrarModalDeAyuda: { defaultValue: false, replace: true },
+  mostrarBloques: { defaultValue: false, replace: true }
 });
 
 export default Controller.extend(queryParams.Mixin, {
@@ -129,7 +130,6 @@ export default Controller.extend(queryParams.Mixin, {
 
       if (this.electron.enElectron) {
         let json = string_a_json(str);
-
 
         this.electron.guardar_proyecto(this.ruta).then(ruta => {
           let proyecto = json;

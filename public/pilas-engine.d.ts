@@ -756,6 +756,8 @@ declare class ActorBase {
     private crear_sprite;
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
+    _bloques_iniciar(): void;
+    _bloques_actualizar(): void;
     get interactivo(): boolean;
     set interactivo(activo: boolean);
     set area_de_interactividad(v: any);
@@ -2055,6 +2057,7 @@ declare class ModoEjecucion extends Modo {
     teclas: Set<string>;
     instancia_de_proyecto: any;
     con_error: boolean;
+    bloques: any;
     constructor();
     preload(): void;
     create(datos: any): void;

@@ -58,6 +58,14 @@ export default Component.extend({
 
       this.set("tieneErrores", errores.length > 0);
       this.set("errores", errores);
+    },
+
+    mostrarCodigo() {
+      this.set("mostrarBloques", false);
+    },
+
+    mostrarBloques() {
+      this.set("mostrarBloques", true);
     }
   }
 });

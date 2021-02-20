@@ -56,6 +56,28 @@ export default Service.extend({
     return this.obtener_todas_las_escenas().map(a => a.nombre);
   },
 
+  /**
+   * Intenta obtener el XML de bloques para un actor, escena o proyecto.
+   */
+  obtener_bloques_de_entidad_por_nombre(nombre) {
+    if (nombre === "proyecto") {
+      return this.proyecto.bloques.proyecto;
+    } else {
+      let nombres_de_actores = this.obtener_nombres_de_actores();
+      let nombres_de_escenas = this.obtener_nombres_de_todas_las_escenas();
+
+      if (nombres_de_actores.includes(nombre)) {
+        return this.proyecto.bloques.actores.findBy("nombre", nombre).get("bloques");
+      }
+
+      if (nombres_de_escenas.includes(nombre)) {
+        return this.proyecto.bloques.escenas.findBy("nombre", nombre).get("bloques");
+      }
+    }
+
+    throw new Error(`No se pueden obtener bloques para la entidad '${nombre}'`);
+  },
+
   renombrar_actor(nombre, nombre_nuevo) {
     let actor = this.buscar_actor_por_nombre(nombre);
     actor.set("nombre", nombre_nuevo);
