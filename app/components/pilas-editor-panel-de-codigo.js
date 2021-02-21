@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { later } from "@ember/runloop";
 
 export default Component.extend({
   tagName: "",
@@ -62,10 +63,28 @@ export default Component.extend({
 
     mostrarCodigo() {
       this.set("mostrarBloques", false);
+      this.set("mostrarLoader", true);
+
+      later(
+        this,
+        () => {
+          this.set("mostrarLoader", false);
+        },
+        1000
+      );
     },
 
     mostrarBloques() {
       this.set("mostrarBloques", true);
+      this.set("mostrarLoader", true);
+
+      later(
+        this,
+        () => {
+          this.set("mostrarLoader", false);
+        },
+        1000
+      );
     }
   }
 });

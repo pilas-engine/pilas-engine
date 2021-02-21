@@ -76,14 +76,18 @@
 
   </div>
 
-  <div class={{if mostrarBloques "flex flex-auto" "dn"}}>
+  <div class="relative {{if mostrarBloques "flex flex-auto" "ocultar-fuera-de-pantalla"}}">
+    {{pilas-loader-del-editor mostrarLoader=mostrarLoader}}
+
     {{blockly-editor
       titulo=titulo_del_codigo
       cuandoCambia=cuando_cambia_bloques
     }}
   </div>
 
-  <div class={{if mostrarBloques "dn" "flex flex-auto"}}>
+  <div class="relative {{if mostrarBloques "ocultar-fuera-de-pantalla" "flex flex-auto"}}">
+    {{pilas-loader-del-editor mostrarLoader=mostrarLoader}}
+ 
     {{monaco-editor
       titulo=titulo_del_codigo
       readOnly=(not estado.puede_editar)
@@ -99,4 +103,5 @@
       cuandoTerminaDeComprobarErrores=(action "actualizarEstadoDeErrores")
     }}
   </div>
+
 </div>

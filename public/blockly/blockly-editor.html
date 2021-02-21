@@ -1,163 +1,178 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Blockly Editor</title>
-  <script src="./blockly_compressed.js"></script>
-  <script src="./blocks_compressed.js"></script>
-  <script src="./msg/js/en.js"></script>
-  <script src="./javascript_compressed.js"></script>
-  <script src="./bloques.js"></script>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-    table {
-      height: 100%;
-      width: 100%;
-    }
-
-    #blocklyArea {
-      height: 99%;
-    }
-
-    .blocklyMainBackground {
-      stroke-width: 0 !important;
-      stroke: #1e1e1e !important;
-    }
-  </style>
-</head>
-<body>
-  <table>
-    <tr>
-      <td id="blocklyArea">
-        <div id="blocklyDiv" style="position: absolute;"></div>
-      </td>
-    </tr>
-  </table>
-
-  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    
-    <category name="eventos">
-      <block type="actor_inicia"></block>
-      <block type="actor_actualizar"></block>
-    </category>
-
-    <category name="control">
-      <block type="controls_if"></block>
-    </category>
-
-    <category name="acciones">
-      <block type="text"></block>
-      <block type="actor_decir"></block>
-      <block type="desplazar"></block>
-    </category>
-
-    <category name="sensores">
-      <block type="control_izquierda"></block>
-    </category>
-
-  </xml>
-
-  <script>
-    var HOST = "file://";
-
-    if (window.location.host) {
-      HOST = window.location.protocol + "//" + window.location.host;
-    }
-
-    var blocklyArea = document.getElementById('blocklyArea');
-    var blocklyDiv = document.getElementById('blocklyDiv');
-    var workspace = Blockly.inject(blocklyDiv, {
-      media: './media/',
-      toolbox: document.getElementById('toolbox'),
-          theme: 'dark',
-          trashcan: true,
-          zoom: {
-                controls: true,
-                wheel: true,
-                startScale: 1.0,
-                maxScale: 3,
-                minScale: 0.3,
-                scaleSpeed: 1.2,
-                pinch: true
-          },
-          move: {
-            scrollbars: true,
-            drag: true,
-            wheel: false
-          },
-    });
-    var onresize = function(e) {
-     // Compute the absolute coordinates and dimensions of blocklyArea.
-     var element = blocklyArea;
-     var x = 0;
-     var y = 0;
-     do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-       } while (element);
-     // Position blocklyDiv over blocklyArea.
-     blocklyDiv.style.left = x - 2 + 'px';
-     blocklyDiv.style.top = y - 2 + 'px';
-     blocklyDiv.style.width = blocklyArea.offsetWidth + 4 + 'px';
-     blocklyDiv.style.height = blocklyArea.offsetHeight + 4 + 'px';
-     Blockly.svgResize(workspace);
-    };
-
-    window.addEventListener('resize', onresize, false);
-    onresize();
-    Blockly.svgResize(workspace);
-
-    // Avisa al componente que cargó blockly.
-	  window.top.postMessage({message: "carga-completa-de-blockly"}, HOST);
-
-    function onChange(event) {
-      if (!event.isUiEvent) {
-        let xml = Blockly.Xml.workspaceToDom(workspace);
-        let xml_text = Blockly.Xml.domToText(xml);
-        let codigo = Blockly.JavaScript.workspaceToCode(workspace);
-
-        window.top.postMessage({
-          message: "cambia-el-workspace-de-blockly",
-          texto: xml_text,
-          codigo: codigo,
-        }, HOST);
+  <head>
+    <meta charset="utf-8" />
+    <title>Blockly Editor</title>
+    <script src="./blockly_compressed.js"></script>
+    <script src="./blocks_compressed.js"></script>
+    <script src="./msg/js/en.js"></script>
+    <script src="./javascript_compressed.js"></script>
+    <script src="./bloques.js"></script>
+    <style>
+      body {
+        background-color: #fff;
+        font-family: sans-serif;
       }
-    }
 
-    workspace.addChangeListener(onChange);
-  
-    // Atiende mensaje que envía el componente blockly-editor.
-    window.addEventListener("message", (message) => {
-          if (message.data && message.data.message === "cargar-bloques") {
-                Blockly.mainWorkspace.clear();
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
 
-                if (message.data.xml_como_texto === '----') {
-                      console.log("Ojo, hay guiones en lugar de código");
-                    } else {
-    let xml = Blockly.Xml.textToDom(message.data.xml_como_texto);
-    Blockly.Xml.domToWorkspace(workspace, xml);
-                        }
+      h1 {
+        font-weight: normal;
+        font-size: 140%;
+      }
+      table {
+        height: 100%;
+        width: 100%;
+      }
 
-              } else  {
+      #blocklyArea {
+        height: 99%;
+      }
 
+      .blocklyMainBackground {
+        stroke-width: 0 !important;
+        stroke: #1e1e1e !important;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td id="blocklyArea">
+          <div id="blocklyDiv" style="position: absolute;"></div>
+        </td>
+      </tr>
+    </table>
+
+    <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+      <category name="eventos">
+        <block type="actor_inicia"></block>
+        <block type="actor_actualizar"></block>
+      </category>
+
+      <category name="control">
+        <block type="controls_if"></block>
+      </category>
+
+      <category name="acciones">
+        <block type="text"></block>
+        <block type="actor_decir"></block>
+        <block type="desplazar"></block>
+        <block type="reproducir_animacion"></block>
+      </category>
+
+      <category name="sensores">
+        <block type="control_tecla"></block>
+      </category>
+    </xml>
+
+    <script>
+      var HOST = "file://";
+      window.valores_dropdown = {teclas: [
+              ['A', 'A'],
+      ]};
+
+      if (window.location.host) {
+        HOST = window.location.protocol + "//" + window.location.host;
+      }
+
+      var blocklyArea = document.getElementById("blocklyArea");
+      var blocklyDiv = document.getElementById("blocklyDiv");
+      var workspace = Blockly.inject(blocklyDiv, {
+        media: "./media/",
+        toolbox: document.getElementById("toolbox"),
+        theme: "dark",
+        trashcan: true,
+        zoom: {
+          controls: true,
+          wheel: true,
+          startScale: 1.0,
+          maxScale: 3,
+          minScale: 0.3,
+          scaleSpeed: 1.2,
+          pinch: true
+        },
+        move: {
+          scrollbars: true,
+          drag: true,
+          wheel: false
+        }
+      });
+      var onresize = function(e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+          x += element.offsetLeft;
+          y += element.offsetTop;
+          element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x - 2 + "px";
+        blocklyDiv.style.top = y - 2 + "px";
+        blocklyDiv.style.width = blocklyArea.offsetWidth + 4 + "px";
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 4 + "px";
+        Blockly.svgResize(workspace);
+      };
+
+      window.addEventListener("resize", onresize, false);
+      onresize();
+      Blockly.svgResize(workspace);
+
+      // Avisa al componente que cargó blockly.
+      window.top.postMessage({ message: "carga-completa-de-blockly" }, HOST);
+
+      function onChange(event) {
+        if (!event.isUiEvent) {
+          let xml = Blockly.Xml.workspaceToDom(workspace);
+          let xml_text = Blockly.Xml.domToText(xml);
+          let codigo = Blockly.JavaScript.workspaceToCode(workspace);
+
+          window.top.postMessage(
+            {
+              message: "cambia-el-workspace-de-blockly",
+              texto: xml_text,
+              codigo: codigo
+            },
+            HOST
+          );
+        }
+      }
+
+      workspace.addChangeListener(onChange);
+
+      // Desactiva los bloques que no están conectados a un bloque
+      // de evento.
+      workspace.addChangeListener(Blockly.Events.disableOrphans);
+
+      // Atiende mensaje que envía el componente blockly-editor.
+      window.addEventListener("message", message => {
+
+        if (message.data && message.data.message === "cargar-bloques") {
+          Blockly.mainWorkspace.clear();
+
+          window.valores_dropdown = {teclas: [
+            ['A', 'A'],
+            ['B', 'B'],
+            ['C', 'C'],
+            ['D', 'D'],
+          ]};
+
+          if (message.data.xml_como_texto === "----") {
+            console.log("Ojo, hay guiones en lugar de código");
+          } else {
+            let xml = Blockly.Xml.textToDom(message.data.xml_como_texto);
+            Blockly.Xml.domToWorkspace(workspace, xml);
+          }
+        } else {
           console.log("mensaje desde iframe", message);
-                  }
-        });
-  </script>
-
-</body>
+        }
+      });
+    </script>
+  </body>
 </html>

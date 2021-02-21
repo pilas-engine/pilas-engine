@@ -134,14 +134,14 @@ export default Service.extend({
     if (!proyecto.bloques) {
       console.log("CREANDO BLOQUES");
       proyecto.set("bloques", EmberObject.create({}));
-      proyecto.set("bloques.proyecto", "----");
+      proyecto.set("bloques.proyecto", `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="ZC\`*TK^}PI+^~52^ak!H" x="35" y="44"></block></xml>`);
       proyecto.set(
         "bloques.escenas",
         A(
           proyecto.codigos.escenas.map(e => {
             return EmberObject.create({
               nombre: e.get("nombre"),
-              bloques: "----"
+              bloques: `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`
             });
           })
         )
@@ -153,7 +153,7 @@ export default Service.extend({
           proyecto.codigos.actores.map(e => {
             return EmberObject.create({
               nombre: e.get("nombre"),
-              bloques: "----"
+              bloques: `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`
             });
           })
         )

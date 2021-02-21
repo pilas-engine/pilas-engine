@@ -87,17 +87,50 @@ Blockly.JavaScript["actor_actualizar"] = function(block) {
   return code;
 };
 
-Blockly.Blocks["control_izquierda"] = {
+Blockly.Blocks["control_tecla"] = {
   init: function() {
-    this.appendDummyInput().appendField("¿Pulsa tecla izquierda?");
+    this.appendDummyInput()
+      .appendField("¿Pulsa la tecla")
+      .appendField(new Blockly.FieldDropdown(this.generateOptions), "NAME")
+      .appendField("?");
     this.setOutput(true, "Boolean");
     this.setColour(330);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+
+  generateOptions: function() {
+    return window.valores_dropdown.teclas;
+  }
+};
+
+Blockly.JavaScript["control_tecla"] = function(block) {
+  var dropdown_name = block.getFieldValue("NAME");
+  var code = "this.pilas.control." + dropdown_name;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks["reproducir_animacion"] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Reproducir la animación")
+      .appendField(
+        new Blockly.FieldDropdown([
+          ["explosion", "explosion"],
+          ["mini_explosion", "mini_explosion"]
+        ]),
+        "animacion"
+      );
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
   }
 };
 
-Blockly.JavaScript["control_izquierda"] = function() {
-  var code = "this.pilas.control.izquierda";
-  return [code, Blockly.JavaScript.ORDER_NONE];
+Blockly.JavaScript["reproducir_animacion"] = function(block) {
+  var animacion = block.getFieldValue("animacion");
+  var code = `this.reproducir_animacion("${animacion}");\n`;
+  return code;
 };

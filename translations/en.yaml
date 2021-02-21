@@ -24,7 +24,7 @@ run: Run
 stop: Stop
 pause: Pause
 save.and.run: Save and run
-code: Code
+code: Code and blocks
 warning.code.errors: Code with errors.
 recipes: Recipes
 no.recipes: There is no recipes

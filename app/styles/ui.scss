@@ -172,8 +172,8 @@ span.atajo {
 }
 
 .texto-vertical-del-panel-editor {
-  right: -35px;
-  width: 89px;
+  right: -112px;
+  width: 244px;
   top: 23px;
 }
 
@@ -266,4 +266,10 @@ span.atajo {
   line-height: 2.6;
   padding-right: 15px;
   padding-left: 15px;
+}
+
+.ocultar-fuera-de-pantalla {
+  position: fixed;
+  left: 0em;
+  bottom: -16em;
 }
