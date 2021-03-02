@@ -44,7 +44,6 @@ web para obtener más información:
 - http://pilas-engine.surge.sh - La versión más reciente de pilas (mirror).
 - http://manual-pilas-engine.surge.sh - El manual actualizado al día de la fecha.
 - https://circleci.com/gh/pilas-engine/pilas-engine - El resultado de los tests de integración.
-- https://trello.com/b/eQJOjpOF/pilas-engine-2 - Nuestra planificación de tareas.
 - http://foro.pilas-engine.com.ar - El foro donde debatimos ideas y anunciamos las versiones nuevas.
 - https://github.com/pilas-engine/pilas-engine/releases - Las versiones descargables de Pilas offline y los manuales.
 
@@ -114,6 +113,7 @@ existencia de varias herramientas y bibliotecas como:
 - https://phaser.io/
 - https://github.com/jdotrjs/phaser3-nineslice/
 - https://electronjs.org/
+- https://developers.google.com/blockly
 - https://github.com/koffsyrup/FileSaver.js
 - https://github.com/lukeed/polka
 - https://github.com/lukeed/sirv
@@ -124,6 +124,7 @@ existencia de varias herramientas y bibliotecas como:
 
 ## Próximas tareas a desarrollar
 
-Tenemos un board de trello con todas las tareas que estamos desarrollando:
-
-- https://trello.com/b/eQJOjpOF/pilas-engine-2
+Las próximas tareas siempre se describen en el foro de pilas, y
+en los resúmenes de sprint. Te recomiendo ver el más reciente
+en la sección ["Artículos y noticias"](https://github.com/pilas-engine/pilas-engine#art%C3%ADculos-y-noticias)
+de este mismo archivo.
