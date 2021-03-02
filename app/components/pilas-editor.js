@@ -60,7 +60,8 @@ export default Component.extend({
       "duplicar_el_actor_seleccionado_con_click",
       "eliminar_el_actor_seleccionado",
       "crear_un_actor_desde_atajo",
-      "mover_al_actor_con_el_teclado"
+      "mover_al_actor_con_el_teclado",
+      "imprimir_en_consola"
     ]);
 
     this.set("estado", new estados.ModoCargando());
@@ -193,6 +194,10 @@ export default Component.extend({
       },
       10
     );
+  },
+
+  imprimir_en_consola(data) {
+    this.log.imprimir_desde_el_editor(data.mensaje, data.tipo_de_dato);
   },
 
   mover_al_actor_con_el_teclado(data) {

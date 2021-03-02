@@ -40,6 +40,15 @@ export default Service.extend({
     this.bus.trigger("se_actualiza_el_log");
   },
 
+  imprimir_desde_el_editor(mensaje, tipo_de_dato) {
+    this.items.pushObject({
+      tipo: "mensaje-desde-el-editor",
+      mensaje,
+      tipo_de_dato
+    });
+    this.bus.trigger("se_actualiza_el_log");
+  },
+
   entrada(mensaje) {
     this.items.pushObject({
       tipo: "entrada",

@@ -933,6 +933,17 @@ class Pilas {
       return null;
     }
   }
+
+  imprimir_en_consola(mensaje: any) {
+    let tipo_de_dato = typeof mensaje;
+    let mensaje_como_cadena = mensaje.toString();
+    this.mensajes.emitir_mensaje_al_editor("imprimir_en_consola", { mensaje: mensaje_como_cadena, tipo_de_dato });
+  }
 }
 
 var pilasengine = new Pilas();
+
+// @ts-ignore
+var print = function print(mensaje: any) {
+  pilasengine.imprimir_en_consola(mensaje);
+};

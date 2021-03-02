@@ -535,7 +535,12 @@ export default Component.extend({
       return;
     }
 
-    throw Error(`En pilas canvas no se envió la señal ${e.data.tipo} al servicio bus.`);
+    if (e.data.tipo === "imprimir_en_consola") {
+      this.bus.trigger(`${nombre_del_contexto}:imprimir_en_consola`, e.data);
+      return;
+    }
+
+    throw Error(`En pilas-canvas.js se recibió el mensaje ${e.data.tipo}, pero este no se re-envió al servicio bus.`);
   },
   actions: {
     detener() {

@@ -3111,9 +3111,17 @@ var Pilas = (function () {
             return null;
         }
     };
+    Pilas.prototype.imprimir_en_consola = function (mensaje) {
+        var tipo_de_dato = typeof mensaje;
+        var mensaje_como_cadena = mensaje.toString();
+        this.mensajes.emitir_mensaje_al_editor("imprimir_en_consola", { mensaje: mensaje_como_cadena, tipo_de_dato: tipo_de_dato });
+    };
     return Pilas;
 }());
 var pilasengine = new Pilas();
+var print = function print(mensaje) {
+    pilasengine.imprimir_en_consola(mensaje);
+};
 var Sensor = (function () {
     function Sensor(figura) {
         this._figura = figura;
