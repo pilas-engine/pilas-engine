@@ -70,7 +70,9 @@ export default Component.extend({
    * Este método se encarga de resaltar esas lineas para mostrarle al usuario cómo
    * se está ejecutando el código.
    */
-  codigo_ejecutado(data) {
+  codigo_ejecutado(datos_de_instrumentacion) {
+    let data = datos_de_instrumentacion.instrumentacion;
+
     this.limpiar_resaltado();
 
     // En data debería guardar el ID del actor que se instrumentó.

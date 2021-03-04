@@ -52,6 +52,7 @@ class Pilas {
   private musica_en_reproduccion: any;
 
   instrumentacion: any;
+  instrumentacion_de_bloques: any;
 
   constructor() {
     this.Phaser = Phaser;
@@ -735,8 +736,25 @@ class Pilas {
     }
   }
 
+  /**
+   * Añade una nota para indicarle a pilas que un actor ejecutó un bloque
+   * y que debe ser resaltado. La llamada a esta función se realiza
+   * automáticamente desde el iframe de blocky (buscar texto Blockly.JavaScript.STATEMENT_PREFIX)
+   *
+   * Interamente, todos los bloques que se deben resaltar quedan guardados en
+   * un diccionario que luego se procesará desde la clase ModoEjecucion.
+   */
+  notificar_ejecucion_del_bloque(bloque: string, id: string) {
+    if (this.instrumentacion_de_bloques[id]) {
+      this.instrumentacion_de_bloques[id].push(bloque);
+    } else {
+      this.instrumentacion_de_bloques[id] = [bloque];
+    }
+  }
+
   limpiar_traza_de_ejecucion() {
     this.instrumentacion = {};
+    this.instrumentacion_de_bloques = {};
   }
 
   /**

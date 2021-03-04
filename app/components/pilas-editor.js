@@ -81,6 +81,29 @@ export default Component.extend({
 
     this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
     this.instanciarSplitJS();
+
+    this.capturar_ctrl_s();
+  },
+
+  capturar_ctrl_s() {
+    document.addEventListener("keydown", e => {
+      e = e || window.event; //Get event
+      console.log(e);
+
+      if (!e.ctrlKey && !e.metaKey) {
+        return;
+      }
+
+      var code = e.which || e.keyCode; //Get key code
+
+      switch (code) {
+        case 83: //Block Ctrl+S
+          this.send("alternarEstadoDeEjecucion");
+          e.preventDefault();
+          e.stopPropagation();
+          break;
+      }
+    });
   },
 
   instanciarSplitJS() {
@@ -116,8 +139,10 @@ export default Component.extend({
   alPulsarTecla(/*evento*/) {},
 
   willDestroyElement() {
-    this.desconectar_eventos();
     document.removeEventListener("keydown", this.alPulsarTecla);
+
+    this.bus.off("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
+    this.bus.off("cierra_dialogo_de_animaciones", this, "cierra_dialogo_de_animaciones");
   },
 
   conectar_eventos() {
@@ -126,6 +151,7 @@ export default Component.extend({
     });
 
     this.bus.on("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
+    this.bus.on("cierra_dialogo_de_animaciones", this, "cierra_dialogo_de_animaciones");
   },
 
   seleccionaUnActorEnModoPausa(actor) {
@@ -233,11 +259,64 @@ export default Component.extend({
     this.set("cargando", false);
     this.mostrar_la_escena_inicial();
 
+    this.actualizar_enumeraciones_del_proyecto();
+
     if (this.estado.ModoCargando) {
       this.set("estado", this.estado.cuandoTerminoDeCargarPilas());
     } else {
       console.warn("Se ha reiniciando el canvas, se omite cambiar el autómata de estados.");
     }
+  },
+
+  actualizar_enumeraciones_del_proyecto() {
+    this.bus.trigger("actualizar_enumeraciones", {
+      animaciones: this.proyecto.animaciones.map(e => e.nombre),
+      sonidos: this.proyecto.sonidos.map(e => e.nombre),
+      teclas: [
+        "izquierda", //
+        "derecha",
+        "arriba",
+        "abajo",
+        "espacio",
+        "tecla_0",
+        "tecla_1",
+        "tecla_2",
+        "tecla_3",
+        "tecla_4",
+        "tecla_5",
+        "tecla_6",
+        "tecla_7",
+        "tecla_8",
+        "tecla_9",
+        "tecla_a",
+        "tecla_b",
+        "tecla_c",
+        "tecla_d",
+        "tecla_e",
+        "tecla_f",
+        "tecla_g",
+        "tecla_h",
+        "tecla_i",
+        "tecla_j",
+        "tecla_k",
+        "tecla_l",
+        "tecla_m",
+        "tecla_n",
+        "tecla_ñ",
+        "tecla_o",
+        "tecla_p",
+        "tecla_q",
+        "tecla_r",
+        "tecla_s",
+        "tecla_t",
+        "tecla_u",
+        "tecla_v",
+        "tecla_w",
+        "tecla_x",
+        "tecla_y",
+        "tecla_z"
+      ]
+    });
   },
 
   mostrar_la_escena_inicial() {
@@ -609,6 +688,10 @@ export default Component.extend({
   normalizar_a_la_grilla(valor) {
     let grilla = this.get("grilla") || 1;
     return Math.round(valor / grilla) * grilla;
+  },
+
+  cierra_dialogo_de_animaciones() {
+    this.actualizar_enumeraciones_del_proyecto();
   },
 
   actions: {

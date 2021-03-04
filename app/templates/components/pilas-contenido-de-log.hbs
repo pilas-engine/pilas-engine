@@ -21,13 +21,21 @@
         <div class="pl1 pr2 dib gray tr">‹</div>{{item.mensaje}}
       {{else if (eq item.tipo "salida-especial")}}
         <div class="pl1 pr2 dib gray tr">‹</div><span class="i gray">{{item.mensaje}}</span>
+      {{else if (eq item.tipo "mensaje-desde-el-editor")}}
+        <div class="flex">
+          <div class="pl1 pr2 dib gray tr">‹</div>
+          <div class="i gray flex-auto truncate">{{item.mensaje}}</div>
+          <div class="i gray pr2 o-50">{{item.tipo_de_dato}}</div>
+        </div>
       {{else}}
         {{pilas-icono icono=item.tipo}} {{item.mensaje}}
       {{/if}}
 
-      <div class="dib pl3 truncate w4">
-        {{item.detalle}}
-      </div>
+      {{#if item.detalle}}
+        <div class="dib pl3 truncate w4">
+          {{item.detalle}}
+        </div>
+      {{/if}}
 
     {{/if}}
 

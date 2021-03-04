@@ -48,6 +48,7 @@ class ModoEjecucion extends Modo {
       }
 
       this.pilas.instrumentacion = {};
+      this.pilas.instrumentacion_de_bloques = {};
       this.instanciar_escena(this.nombre_de_la_escena_inicial);
 
       if (this.pilas.opciones.modo_simple) {
@@ -583,14 +584,19 @@ class ModoEjecucion extends Modo {
       this.guardar_foto_de_entidades();
     }
 
-    this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", this.pilas.instrumentacion);
+    this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", {
+      instrumentacion: this.pilas.instrumentacion,
+      instrumentacion_de_bloques: this.pilas.instrumentacion_de_bloques
+    });
+
     this.pilas.limpiar_traza_de_ejecucion();
   }
 
   guardar_foto_de_entidades() {
     if (this.pilas.instrumentacion) {
       let copia_de_instrumentacion = JSON.parse(JSON.stringify(this.pilas.instrumentacion));
-      this.pilas.historia.serializar_escena(this.pilas.escena, copia_de_instrumentacion);
+      let copia_de_instrumentacion_de_codigo = JSON.parse(JSON.stringify(this.pilas.instrumentacion_de_bloques));
+      this.pilas.historia.serializar_escena(this.pilas.escena, copia_de_instrumentacion, copia_de_instrumentacion_de_codigo);
     }
   }
 

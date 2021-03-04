@@ -4,20 +4,19 @@
 
 Blockly.Blocks["actor_decir"] = {
   init: function() {
-    this.appendValueInput("NAME")
-      .setCheck("String")
-      .appendField("Decir");
+    this.appendDummyInput()
+      .appendField("Decir")
+      .appendField(new Blockly.FieldTextInput("¡hola!"), "NAME");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(135);
-    this.setTooltip("Hace que el actor diga algo");
+    this.setColour(120);
+    this.setTooltip("");
     this.setHelpUrl("");
   }
 };
-
 Blockly.JavaScript["actor_decir"] = function(block) {
-  var value_name = Blockly.JavaScript.valueToCode(block, "NAME", Blockly.JavaScript.ORDER_ATOMIC);
-  var code = `this.decir(${value_name});\n`;
+  var value_name = block.getFieldValue("NAME");
+  var code = `this.decir("${value_name}");\n`;
   return code;
 };
 
@@ -114,13 +113,94 @@ Blockly.Blocks["reproducir_animacion"] = {
   init: function() {
     this.appendDummyInput()
       .appendField("Reproducir la animación")
-      .appendField(
-        new Blockly.FieldDropdown([
-          ["explosion", "explosion"],
-          ["mini_explosion", "mini_explosion"]
-        ]),
-        "animacion"
-      );
+      .appendField(new Blockly.FieldDropdown(this.generateOptions), "animacion");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+
+  generateOptions: function() {
+    return window.valores_dropdown.animaciones;
+  }
+};
+
+Blockly.JavaScript["reproducir_animacion"] = function(block) {
+  var animacion = block.getFieldValue("animacion");
+  var code = `this.animacion = "${animacion}";\n`;
+  return code;
+};
+
+Blockly.Blocks["cuando_comienza_una_colision"] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Cuando comienza una colisión con el actor")
+      .appendField(new Blockly.FieldVariable("actor"), "actor");
+    this.appendStatementInput("NAME").setCheck(null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript["cuando_comienza_una_colision"] = function(block) {
+  var variable_actor = Blockly.JavaScript.variableDB_.getName(block.getFieldValue("actor"), Blockly.Variables.NAME_TYPE);
+  var statements_name = Blockly.JavaScript.statementToCode(block, "NAME");
+  // TODO: Assemble JavaScript into code variable.
+  var code = "...;\n";
+  return code;
+};
+
+Blockly.Blocks["reproducir_sonido"] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Reproducir el sonido")
+      .appendField(new Blockly.FieldDropdown(this.generateOptions), "sonido");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+
+  generateOptions: function() {
+    return window.valores_dropdown.sonidos;
+  }
+};
+
+Blockly.JavaScript["reproducir_sonido"] = function(block) {
+  var sonido = block.getFieldValue("sonido");
+  var code = `this.pilas.reproducir_sonido("${sonido}");\n`;
+  return code;
+};
+
+Blockly.Blocks["reproducir_musica"] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Reproducir música")
+      .appendField(new Blockly.FieldDropdown(this.generateOptions), "musica");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+
+  generateOptions: function() {
+    return window.valores_dropdown.sonidos;
+  }
+};
+
+Blockly.JavaScript["reproducir_musica"] = function(block) {
+  var musica = block.getFieldValue("musica");
+  var code = `this.pilas.reproducir_musica("${musica}");\n`;
+  return code;
+};
+
+Blockly.Blocks["detener_musica"] = {
+  init: function() {
+    this.appendDummyInput().appendField("Detener música");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
@@ -129,8 +209,7 @@ Blockly.Blocks["reproducir_animacion"] = {
   }
 };
 
-Blockly.JavaScript["reproducir_animacion"] = function(block) {
-  var animacion = block.getFieldValue("animacion");
-  var code = `this.reproducir_animacion("${animacion}");\n`;
+Blockly.JavaScript["detener_musica"] = function() {
+  var code = `this.pilas.detener_musica();\n`;
   return code;
 };

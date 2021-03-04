@@ -1749,11 +1749,12 @@ var Historia = (function () {
     Historia.prototype.limpiar = function () {
         this.fotos = [];
     };
-    Historia.prototype.serializar_escena = function (escena_actual, instrumentacion) {
+    Historia.prototype.serializar_escena = function (escena_actual, instrumentacion, instrumentacion_de_bloques) {
         this.fotos.push({
             escena: escena_actual.serializar(),
             actores: escena_actual.actores.filter(function (a) { return a.esta_vivo(); }).map(function (e) { return e.serializar(); }),
-            instrumentacion: instrumentacion
+            instrumentacion: instrumentacion,
+            instrumentacion_de_bloques: instrumentacion_de_bloques
         });
     };
     Historia.prototype.dibujar_puntos_de_las_posiciones_recorridas = function (graphics, filtro_actor) {
@@ -3014,8 +3015,17 @@ var Pilas = (function () {
             this.instrumentacion[id] = [linea];
         }
     };
+    Pilas.prototype.notificar_ejecucion_del_bloque = function (bloque, id) {
+        if (this.instrumentacion_de_bloques[id]) {
+            this.instrumentacion_de_bloques[id].push(bloque);
+        }
+        else {
+            this.instrumentacion_de_bloques[id] = [bloque];
+        }
+    };
     Pilas.prototype.limpiar_traza_de_ejecucion = function () {
         this.instrumentacion = {};
+        this.instrumentacion_de_bloques = {};
     };
     Pilas.prototype.definir_mapa = function (diccionario) {
         for (var key in diccionario) {
@@ -4033,6 +4043,15 @@ var ActorBase = (function () {
         this.pilas.animaciones.crear_animacion(nombre, cuadros, velocidad);
     };
     ActorBase.prototype.reproducir_animacion = function (nombre_de_la_animacion) {
+        var animacion = this.pilas.animaciones.animaciones[nombre_de_la_animacion];
+        if (!animacion) {
+            throw Error("No existe una animaci\u00F3n con el nombre \"" + nombre_de_la_animacion + "\"");
+        }
+        else {
+            if (animacion.frames.length === 0) {
+                throw Error("La animaci\u00F3n \"" + nombre_de_la_animacion + "\" est\u00E1 vac\u00EDa.");
+            }
+        }
         this.sprite.anims.play(nombre_de_la_animacion);
     };
     ActorBase.prototype.cuando_finaliza_animacion = function (animacion) { };
@@ -9321,6 +9340,7 @@ var ModoEjecucion = (function (_super) {
                 this.instanciar_proyecto();
             }
             this.pilas.instrumentacion = {};
+            this.pilas.instrumentacion_de_bloques = {};
             this.instanciar_escena(this.nombre_de_la_escena_inicial);
             if (this.pilas.opciones.modo_simple) {
                 if (this.pilas["onready"]) {
@@ -9741,13 +9761,17 @@ var ModoEjecucion = (function (_super) {
         if (this.permitir_modo_pausa) {
             this.guardar_foto_de_entidades();
         }
-        this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", this.pilas.instrumentacion);
+        this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", {
+            instrumentacion: this.pilas.instrumentacion,
+            instrumentacion_de_bloques: this.pilas.instrumentacion_de_bloques
+        });
         this.pilas.limpiar_traza_de_ejecucion();
     };
     ModoEjecucion.prototype.guardar_foto_de_entidades = function () {
         if (this.pilas.instrumentacion) {
             var copia_de_instrumentacion = JSON.parse(JSON.stringify(this.pilas.instrumentacion));
-            this.pilas.historia.serializar_escena(this.pilas.escena, copia_de_instrumentacion);
+            var copia_de_instrumentacion_de_codigo = JSON.parse(JSON.stringify(this.pilas.instrumentacion_de_bloques));
+            this.pilas.historia.serializar_escena(this.pilas.escena, copia_de_instrumentacion, copia_de_instrumentacion_de_codigo);
         }
     };
     ModoEjecucion.prototype.dibujar_punto_de_control = function (graphics, _x, _y) {
@@ -10113,7 +10137,11 @@ var ModoPausa = (function (_super) {
         this.crear_sprites_desde_historia(this.posicion);
         var foto = this.pilas.historia.obtener_foto(this.posicion);
         var instrumentacion = JSON.parse(JSON.stringify(foto.instrumentacion));
-        this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
+        var instrumentacion_de_bloques = JSON.parse(JSON.stringify(foto.instrumentacion_de_bloques));
+        this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", {
+            instrumentacion: instrumentacion,
+            instrumentacion_de_bloques: instrumentacion_de_bloques
+        });
         this.completar_foto_detallando_actores_nuevos_y_eliminados(foto);
         this.pilas.mensajes.emitir_mensaje_al_editor("aplica_el_cambio_de_posicion_en_el_modo_pausa", { posicion: this.posicion, foto: foto });
         this.actualizar_canvas_fisica();

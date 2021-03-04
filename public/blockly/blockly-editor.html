@@ -49,25 +49,32 @@
     </table>
 
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-      <category name="eventos">
+      <category name="Eventos">
         <block type="actor_inicia"></block>
         <block type="actor_actualizar"></block>
+        <block type="cuando_comienza_una_colision"></block>
       </category>
 
-      <category name="control">
+      <category name="Control">
         <block type="controls_if"></block>
       </category>
 
-      <category name="acciones">
+      <category name="Acciones">
         <block type="text"></block>
         <block type="actor_decir"></block>
         <block type="desplazar"></block>
         <block type="reproducir_animacion"></block>
+        <block type="reproducir_sonido"></block>
+        <block type="reproducir_musica"></block>
+        <block type="detener_musica"></block>
       </category>
 
-      <category name="sensores">
+      <category name="Sensores">
         <block type="control_tecla"></block>
       </category>
+
+      <category name="Variables" custom="VARIABLE"></category>
+      <category name="Functions" custom="PROCEDURE"></category>
     </xml>
 
     <script>
@@ -102,6 +109,7 @@
           wheel: false
         }
       });
+
       var onresize = function(e) {
         // Compute the absolute coordinates and dimensions of blocklyArea.
         var element = blocklyArea;
@@ -127,6 +135,10 @@
       // Avisa al componente que cargó blockly.
       window.top.postMessage({ message: "carga-completa-de-blockly" }, HOST);
 
+      function convertir_en_dropdown(lista) {
+        return lista.map(item => [item, item]); 
+      }
+
       function onChange(event) {
         if (!event.isUiEvent) {
           let xml = Blockly.Xml.workspaceToDom(workspace);
@@ -150,18 +162,53 @@
       // de evento.
       workspace.addChangeListener(Blockly.Events.disableOrphans);
 
+      Blockly.JavaScript.STATEMENT_PREFIX = 'if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque(%1, this.id);\n}\n';
+
       // Atiende mensaje que envía el componente blockly-editor.
       window.addEventListener("message", message => {
 
-        if (message.data && message.data.message === "cargar-bloques") {
-          Blockly.mainWorkspace.clear();
+        if (!message.data) {
+          return;
+        }
 
-          window.valores_dropdown = {teclas: [
-            ['A', 'A'],
-            ['B', 'B'],
-            ['C', 'C'],
-            ['D', 'D'],
-          ]};
+
+        if (message.data.message === "resaltar-bloques") {
+          message.data.ids_de_bloques.map((bloque, index) => {
+
+            if (index === 0) {
+              // si es el primer bloque en resaltar descactiva todos
+              // los demás así no quedan resaltados.
+              Blockly.mainWorkspace.highlightBlock(bloque);
+            } else {
+              // resalta el bloque actual sin alterar al resto de los bloques.
+              Blockly.mainWorkspace.highlightBlock(bloque, true);
+            }
+
+          });
+        }
+
+        if (message.data.message === "limpiar-bloques-resaltados") {
+          setTimeout(function() {
+            Blockly.mainWorkspace.highlightBlock();
+          }, 100);
+        }
+
+        if (message.data.message === "actualizar-enumeraciones") {
+          console.log("en blockly-editor.html, debo actualizar enumeraciones", message.data.data);
+
+          window.valores_dropdown = {
+            animaciones: convertir_en_dropdown(message.data.data.animaciones),
+            sonidos: convertir_en_dropdown(message.data.data.sonidos),
+            teclas: convertir_en_dropdown(message.data.data.teclas),
+          }
+
+          console.log("en blockly-editor.html se actualiza valores_dropdown");
+          console.log(window.valores_dropdown);
+        }
+
+        if (message.data.message === "cargar-bloques") {
+          Blockly.mainWorkspace.clear();
+          console.log("cargar los bloques!");
 
           if (message.data.xml_como_texto === "----") {
             console.log("Ojo, hay guiones en lugar de código");
@@ -169,9 +216,8 @@
             let xml = Blockly.Xml.textToDom(message.data.xml_como_texto);
             Blockly.Xml.domToWorkspace(workspace, xml);
           }
-        } else {
-          console.log("mensaje desde iframe", message);
         }
+              
       });
     </script>
   </body>
