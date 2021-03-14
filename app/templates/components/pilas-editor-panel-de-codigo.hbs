@@ -1,8 +1,12 @@
 <div class="{{if maximizar "dn"}} {{claseDelPanelColapsado}} bl borde pl2 pa2">
   {{pilas-boton-para-colapsar-panel dataTest="boton-abrir-panel-de-codigo" variable=mostrarEditor}}
   <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
-    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor ttu">
-      {{t "code"}}
+    <div class="absolute unselectable rotate-270 f7 texto pl2 {{if activarBloquesDesdeConfiguracion "texto-vertical-del-panel-editor" "texto-vertical-del-panel-editor-sin-bloques"}} ttu">
+      {{#if activarBloquesDesdeConfiguracion}}
+        {{t "code.blocks"}}
+      {{else}}
+        {{t "code"}}
+      {{/if}}
     </div>
   </div>
 </div>
@@ -14,10 +18,15 @@
       <div class="flex1"></div>
     {{else}}
       <div class="flex items-center">
+
         {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
 
         <div class="f7 unselectable texto pl2 dib ttu" {{action "alternar" "mostrarEditor"}} role="button">
-          {{t "code"}}
+          {{#if activarBloquesDesdeConfiguracion}}
+            {{t "code.blocks"}}
+          {{else}}
+            {{t "code"}}
+          {{/if}}
         </div>
       </div>
 
@@ -44,10 +53,12 @@
 
   <div class="unselectable pr2 flex bg-fondo items-center pt2">
       
-    <div class="relative">
-      <div class="dib mb2 {{if mostrarBloques "solapa" "solapa-seleccionada"}}" role="button" {{action "mostrarCodigo"}}>Código</div>
-      <div class="dib mb2 {{if mostrarBloques "solapa-seleccionada" "solapa"}}" role="button" {{action "mostrarBloques"}}>Bloques</div>
-    </div>
+    {{#if activarBloquesDesdeConfiguracion}}
+      <div class="relative">
+        <div class="dib mb2 {{if mostrarBloques "solapa" "solapa-seleccionada"}}" role="button" {{action "mostrarCodigo"}}>Código</div>
+        <div class="dib mb2 {{if mostrarBloques "solapa-seleccionada" "solapa"}}" role="button" {{action "mostrarBloques"}}>Bloques</div>
+      </div>
+    {{/if}}
 
     <div class="flex1 flex justify-center pb2">
       {{selector-de-codigo 

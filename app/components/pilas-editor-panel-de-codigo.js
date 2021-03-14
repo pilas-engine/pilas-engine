@@ -2,10 +2,12 @@ import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 import { later } from "@ember/runloop";
+import ENV from "pilas-engine/config/environment";
 
 export default Component.extend({
   tagName: "",
   bus: service(),
+  activarBloquesDesdeConfiguracion: ENV.activarBloques,
 
   canvasMaximizado: computed("panelMaximizado", function() {
     return this.get("panelMaximizado") == "canvas" || this.get("panelMaximizado") == "canvas-desde-el-editor";
