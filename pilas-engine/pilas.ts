@@ -52,6 +52,7 @@ class Pilas {
   private musica_en_reproduccion: any;
 
   instrumentacion: any;
+  instrumentacion_de_bloques: any;
 
   constructor() {
     this.Phaser = Phaser;
@@ -735,8 +736,25 @@ class Pilas {
     }
   }
 
+  /**
+   * Añade una nota para indicarle a pilas que un actor ejecutó un bloque
+   * y que debe ser resaltado. La llamada a esta función se realiza
+   * automáticamente desde el iframe de blocky (buscar texto Blockly.JavaScript.STATEMENT_PREFIX)
+   *
+   * Interamente, todos los bloques que se deben resaltar quedan guardados en
+   * un diccionario que luego se procesará desde la clase ModoEjecucion.
+   */
+  notificar_ejecucion_del_bloque(bloque: string, id: string) {
+    if (this.instrumentacion_de_bloques[id]) {
+      this.instrumentacion_de_bloques[id].push(bloque);
+    } else {
+      this.instrumentacion_de_bloques[id] = [bloque];
+    }
+  }
+
   limpiar_traza_de_ejecucion() {
     this.instrumentacion = {};
+    this.instrumentacion_de_bloques = {};
   }
 
   /**
@@ -933,6 +951,17 @@ class Pilas {
       return null;
     }
   }
+
+  imprimir_en_consola(mensaje: any) {
+    let tipo_de_dato = typeof mensaje;
+    let mensaje_como_cadena = mensaje.toString();
+    this.mensajes.emitir_mensaje_al_editor("imprimir_en_consola", { mensaje: mensaje_como_cadena, tipo_de_dato });
+  }
 }
 
 var pilasengine = new Pilas();
+
+// @ts-ignore
+var print = function print(mensaje: any) {
+  pilasengine.imprimir_en_consola(mensaje);
+};

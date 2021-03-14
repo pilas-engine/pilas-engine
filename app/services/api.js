@@ -7,7 +7,7 @@ export default Service.extend({
   electron: service(),
   enElectron: alias("electron.enElectron"),
 
-  publicar_juego(serializado, ver_codigo, hash) {
+  publicar_juego(serializado, ver_codigo, cantidad_de_partes, numero_de_parte, hash) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -36,7 +36,9 @@ export default Service.extend({
 
       let data_original = {
         codigo_serializado: serializado,
-        ver_codigo: ver_codigo
+        ver_codigo: ver_codigo,
+        cantidad_de_partes,
+        numero_de_parte
       };
 
       // Solo incluye el hash cuando se trata de una

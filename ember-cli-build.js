@@ -4,11 +4,29 @@ const EmberApp = require("ember-cli/lib/broccoli/ember-app");
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      exclude: ["proyecto-exportable", "vs", "manual", "api", "imagenes", "fuentes", "sonidos", "monaco-vim", "decoracion", "bloques", "robot"]
+      exclude: [
+        //
+        "proyecto-exportable",
+        "vs",
+        "manual",
+        "api",
+        "imagenes",
+        "fuentes",
+        "sonidos",
+        "monaco-vim",
+        "decoracion",
+        "bloques",
+        "robot"
+      ]
     },
     minifyJS: {
       options: {
-        exclude: ["proyecto-exportable", "**/phaser.js", "**/typescript.js"]
+        exclude: [
+          //
+          "proyecto-exportable",
+          "**/phaser.js",
+          "**/typescript.js"
+        ]
       }
     }
   });

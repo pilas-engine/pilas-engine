@@ -1,8 +1,12 @@
 <div class="{{if maximizar "dn"}} {{claseDelPanelColapsado}} bl borde pl2 pa2">
   {{pilas-boton-para-colapsar-panel dataTest="boton-abrir-panel-de-codigo" variable=mostrarEditor}}
   <div class="relative pointer" {{action "alternar" "mostrarEditor"}} role="button">
-    <div class="absolute unselectable rotate-270 f7 texto pl2 texto-vertical-del-panel-editor ttu">
-      {{t "code"}}
+    <div class="absolute unselectable rotate-270 f7 texto pl2 {{if activarBloquesDesdeConfiguracion "texto-vertical-del-panel-editor" "texto-vertical-del-panel-editor-sin-bloques"}} ttu">
+      {{#if activarBloquesDesdeConfiguracion}}
+        {{t "code.blocks"}}
+      {{else}}
+        {{t "code"}}
+      {{/if}}
     </div>
   </div>
 </div>
@@ -14,10 +18,15 @@
       <div class="flex1"></div>
     {{else}}
       <div class="flex items-center">
+
         {{pilas-boton-para-colapsar-panel variable=mostrarEditor}}
 
         <div class="f7 unselectable texto pl2 dib ttu" {{action "alternar" "mostrarEditor"}} role="button">
-          {{t "code"}}
+          {{#if activarBloquesDesdeConfiguracion}}
+            {{t "code.blocks"}}
+          {{else}}
+            {{t "code"}}
+          {{/if}}
         </div>
       </div>
 
@@ -42,15 +51,16 @@
 
   </div>
 
-  <div class="unselectable pr2 pb2 flex bg-fondo items-center">
-    <div class="relative">
-      {{pilas-editor/boton-receta 
-          desactivado=(not estado.puede_editar) 
-          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
-      }}
-    </div>
+  <div class="unselectable pr2 flex bg-fondo items-center pt2">
+      
+    {{#if activarBloquesDesdeConfiguracion}}
+      <div class="relative">
+        <div class="dib mb2 {{if mostrarBloques "solapa" "solapa-seleccionada"}}" role="button" {{action "mostrarCodigo"}}>Código</div>
+        <div class="dib mb2 {{if mostrarBloques "solapa-seleccionada" "solapa"}}" role="button" {{action "mostrarBloques"}}>Bloques</div>
+      </div>
+    {{/if}}
 
-    <div class="flex1 flex justify-center">
+    <div class="flex1 flex justify-center pb2">
       {{selector-de-codigo 
           desactivado=(not estado.puede_editar) 
           titulo_del_codigo=titulo_del_codigo 
@@ -60,9 +70,37 @@
        }}
     </div>
 
+    <div class="relative pb2 {{if mostrarBloques "dn"}}">
+      {{pilas-editor/boton-receta 
+          desactivado=(not estado.puede_editar) 
+          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
+      }}
+    </div>
+    
+    {{!-- el botón de recetas se dibujar pero completamente invisible para preservar el layout --}}
+    <div class="relative pb2 {{if mostrarBloques "o-0" "dn"}}">
+      {{pilas-editor/boton-receta 
+          desactivado=true
+          tipo_de_la_instancia_seleccionada=tipo_de_la_instancia_seleccionada
+      }}
+    </div>
+
   </div>
 
-  {{monaco-editor
+  <div class="relative {{if mostrarBloques "flex flex-auto" "ocultar-fuera-de-pantalla"}}">
+    {{pilas-loader-del-editor mostrarLoader=mostrarLoader}}
+
+    {{blockly-editor
+      titulo=titulo_del_codigo
+      cuandoCambia=cuando_cambia_bloques
+      desactivado=(not estado.puede_editar)
+    }}
+  </div>
+
+  <div class="relative {{if mostrarBloques "ocultar-fuera-de-pantalla" "flex flex-auto"}}">
+    {{pilas-loader-del-editor mostrarLoader=mostrarLoader}}
+ 
+    {{monaco-editor
       titulo=titulo_del_codigo
       readOnly=(not estado.puede_editar)
       code=codigo
@@ -76,4 +114,6 @@
       onChange=cuando_cambia_el_codigo
       cuandoTerminaDeComprobarErrores=(action "actualizarEstadoDeErrores")
     }}
+  </div>
+
 </div>

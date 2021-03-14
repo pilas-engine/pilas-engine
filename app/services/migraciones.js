@@ -1,4 +1,6 @@
 import Service from "@ember/service";
+import EmberObject from "@ember/object";
+import { A } from "@ember/array";
 
 export default Service.extend({
   /**
@@ -126,6 +128,36 @@ export default Service.extend({
           ruta: "sonidos/comer.mp3"
         }
       ]);
+    }
+
+    // migración 2021-01-31: hacer que el proyecto ahora almacene código de blockly
+    if (!proyecto.bloques) {
+      console.log("CREANDO BLOQUES");
+      proyecto.set("bloques", EmberObject.create({}));
+      proyecto.set("bloques.proyecto", `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="ZC\`*TK^}PI+^~52^ak!H" x="35" y="44"></block></xml>`);
+      proyecto.set(
+        "bloques.escenas",
+        A(
+          proyecto.codigos.escenas.map(e => {
+            return EmberObject.create({
+              nombre: e.get("nombre"),
+              bloques: `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`
+            });
+          })
+        )
+      );
+
+      proyecto.set(
+        "bloques.actores",
+        A(
+          proyecto.codigos.actores.map(e => {
+            return EmberObject.create({
+              nombre: e.get("nombre"),
+              bloques: `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`
+            });
+          })
+        )
+      );
     }
 
     return proyecto;

@@ -1,4 +1,8 @@
-*.html
+api_docs/*.html
+manual/*.html
+manuales/*.html
+public/api/*.html
+public/manual/*.html
 api_docs
 *.d.ts
 *.pilas

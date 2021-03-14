@@ -385,7 +385,7 @@ declare class Historia {
     fotos: any;
     constructor(pilas: Pilas);
     limpiar(): void;
-    serializar_escena(escena_actual: any, instrumentacion: any): void;
+    serializar_escena(escena_actual: any, instrumentacion: any, instrumentacion_de_bloques: any): void;
     dibujar_puntos_de_las_posiciones_recorridas(graphics: any, filtro_actor: any): void;
     obtener_cantidad_de_posiciones(): number;
     obtener_foto(posicion: number): any;
@@ -583,6 +583,7 @@ declare class Pilas {
     imagenes: any;
     private musica_en_reproduccion;
     instrumentacion: any;
+    instrumentacion_de_bloques: any;
     constructor();
     crear_animacion(actor: Actor, tipo_de_animacion: Tipo, repeticiones: number, duración: number): AnimacionDePropiedad;
     get escena(): EscenaBase;
@@ -668,13 +669,16 @@ declare class Pilas {
     azar_desde_lista(lista: any): any;
     desordenar_lista(lista_original: any): any[];
     notificar_traza_de_ejecucion(id: string | number, linea: any): void;
+    notificar_ejecucion_del_bloque(bloque: string, id: string): void;
     limpiar_traza_de_ejecucion(): void;
     definir_mapa(diccionario: any): void;
     crear_mapa(mapa: string, grilla?: number, origen_x?: number, origen_y?: number): void;
     laser(actor: Actor, x1: number, y1: number, x2: number, y2: number): Intersección[];
     laser_al_primer_actor(actor: Actor, x1: number, y1: number, x2: number, y2: number, etiqueta?: string): Intersección;
+    imprimir_en_consola(mensaje: any): void;
 }
 declare var pilasengine: Pilas;
+declare var print: (mensaje: any) => void;
 declare class Sensor {
     private _figura;
     constructor(figura: any);
@@ -756,6 +760,8 @@ declare class ActorBase {
     private crear_sprite;
     protected copiar_atributos_de_sprite(origen: any, destino: any): void;
     iniciar(): void;
+    _bloques_iniciar(): void;
+    _bloques_actualizar(): void;
     get interactivo(): boolean;
     set interactivo(activo: boolean);
     set area_de_interactividad(v: any);
@@ -2056,6 +2062,7 @@ declare class ModoEjecucion extends Modo {
     teclas: Set<string>;
     instancia_de_proyecto: any;
     con_error: boolean;
+    bloques: any;
     constructor();
     preload(): void;
     create(datos: any): void;

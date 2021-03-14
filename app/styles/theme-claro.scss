@@ -127,6 +127,60 @@
   .bb-dashed-on-hover {
     border-bottom: 1px solid transparent;
   }
+
+  .bg-loader-del-panel-editor {
+    background-color: #FFFFFF;
+  }
+
+  .solapa-de-ayuda-seleccionada {
+    opacity: 100%;
+    color: black;
+    text-shadow: 0 0 3px rgb(236 236 236 / 69%);
+    vertical-align: top;
+    background-color: #ffffff;
+    border: 1px solid #a6a6a6;
+    border-bottom: 0;
+    padding: 0.5em 1.25em;
+    border-radius: 0;
+    user-select: none;
+  }
+
+  .solapa-de-ayuda {
+    opacity: 50%;
+    color: #000000;
+    vertical-align: top;
+    border-bottom: 0;
+    padding: 0.5em 1.25em;
+    border-radius: 0;
+    border: 1px solid transparent;
+    user-select: none;
+  }
+
+  .solapa-seleccionada {
+    opacity: 100%;
+    color: black;
+    text-shadow: 0 0 3px rgb(236 236 236 / 69%);
+    vertical-align: top;
+    background-color: #ffffff;
+    border: 1px solid #a6a6a6;
+    padding: 0.5em;
+    border-radius: 0;
+    user-select: none;
+
+  }
+
+  .solapa {
+    opacity: 50%;
+    color: black;
+    vertical-align: top;
+    border-bottom: 0;
+    padding: 0.5em;
+    border-radius: 0;
+    border: 1px solid transparent;
+    user-select: none;
+  }
+
+
 }
 
 .theme-claro.bg-fondo {

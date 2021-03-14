@@ -25,6 +25,7 @@ stop: Detener
 pause: Pausar
 save.and.run: Guardar y ejecutar
 code: Código
+code.blocks: Código y bloques
 warning.code.errors: Código con errores.
 recipes: Recetas
 no.recipes: No hay recetas que coincidan con esta búsqueda.

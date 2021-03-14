@@ -325,11 +325,16 @@ class ModoPausa extends Modo {
     this.crear_sprites_desde_historia(this.posicion);
 
     let foto = this.pilas.historia.obtener_foto(this.posicion);
+
     // Se copia toda la instrumentación para que al enviar el mensaje no se
     // agregen datos al diccionario.
     let instrumentacion = JSON.parse(JSON.stringify(foto.instrumentacion));
+    let instrumentacion_de_bloques = JSON.parse(JSON.stringify(foto.instrumentacion_de_bloques));
 
-    this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", instrumentacion);
+    this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado", {
+      instrumentacion,
+      instrumentacion_de_bloques
+    });
 
     this.completar_foto_detallando_actores_nuevos_y_eliminados(foto);
 

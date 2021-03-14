@@ -320,6 +320,12 @@ class ActorBase {
 
   iniciar() {}
 
+  _bloques_iniciar() {
+    console.log("esta actor no tiene bloques");
+  }
+
+  _bloques_actualizar() {}
+
   get interactivo() {
     return this.sprite.input.enabled;
   }
@@ -940,6 +946,16 @@ class ActorBase {
   }
 
   reproducir_animacion(nombre_de_la_animacion) {
+    let animacion = this.pilas.animaciones.animaciones[nombre_de_la_animacion];
+
+    if (!animacion) {
+      throw Error(`No existe una animación con el nombre "${nombre_de_la_animacion}"`);
+    } else {
+      if (animacion.frames.length === 0) {
+        throw Error(`La animación "${nombre_de_la_animacion}" está vacía.`);
+      }
+    }
+
     this.sprite.anims.play(nombre_de_la_animacion);
   }
 

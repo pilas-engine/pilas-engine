@@ -25,6 +25,7 @@ stop: 停止
 pause: 暂停
 save.and.run: 保存并运行
 code: 代码
+code.blocks: 代码和块
 warning.code.errors: 警告，代码中存在错误。
 recipes: 方法
 no.recipes: 没有符合此搜索的方法。

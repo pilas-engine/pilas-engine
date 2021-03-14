@@ -42,6 +42,8 @@ import Service from "@ember/service";
  * - selecciona_la_escena_completa_en_modo_pausa
  * - abrir_selector_de_codigos
  * - ubicar_camara_en_el_actor
+ * - actualizar_enumeraciones
+ * - cierra_dialogo_de_animaciones
  *
  * Otra señal que se emite para avisarle al webserver que cambió el código es:
  *

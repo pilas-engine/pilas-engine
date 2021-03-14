@@ -18,6 +18,7 @@ module.exports = function(environment) {
 
     remoteBackendURL: "https://backend.pilas-engine.com.ar",
     remoteFrontendURL: "https://app.pilas-engine.com.ar",
+    activarBloques: false,
 
     APP: {},
 

@@ -1,10 +1,13 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { later } from "@ember/runloop";
+import ENV from "pilas-engine/config/environment";
 
 export default Component.extend({
   tagName: "",
   bus: service(),
+  activarBloquesDesdeConfiguracion: ENV.activarBloques,
 
   canvasMaximizado: computed("panelMaximizado", function() {
     return this.get("panelMaximizado") == "canvas" || this.get("panelMaximizado") == "canvas-desde-el-editor";
@@ -58,6 +61,32 @@ export default Component.extend({
 
       this.set("tieneErrores", errores.length > 0);
       this.set("errores", errores);
+    },
+
+    mostrarCodigo() {
+      this.set("mostrarBloques", false);
+      this.set("mostrarLoader", true);
+
+      later(
+        this,
+        () => {
+          this.set("mostrarLoader", false);
+        },
+        1000
+      );
+    },
+
+    mostrarBloques() {
+      this.set("mostrarBloques", true);
+      this.set("mostrarLoader", true);
+
+      later(
+        this,
+        () => {
+          this.set("mostrarLoader", false);
+        },
+        1000
+      );
     }
   }
 });
