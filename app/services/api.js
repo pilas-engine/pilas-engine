@@ -7,7 +7,7 @@ export default Service.extend({
   electron: service(),
   enElectron: alias("electron.enElectron"),
 
-  publicar_juego(serializado, ver_codigo, cantidad_de_partes, numero_de_parte, hash) {
+  publicar_juego(serializado, imagen_en_base64, ver_codigo, cantidad_de_partes, numero_de_parte, hash) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -40,6 +40,10 @@ export default Service.extend({
         cantidad_de_partes,
         numero_de_parte
       };
+
+      if (imagen_en_base64) {
+        data_original["imagen_en_base64"] = imagen_en_base64;
+      }
 
       // Solo incluye el hash cuando se trata de una
       // parte complementaria al post inicial.

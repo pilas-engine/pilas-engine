@@ -2179,6 +2179,12 @@ var Mensajes = (function () {
             }
         }
     };
+    Mensajes.prototype.atender_mensaje_capturar_pantalla = function (datos) {
+        var _this = this;
+        pilasengine.game.renderer.snapshot(function (imagen) {
+            _this.emitir_mensaje_al_editor("captura_de_pantalla_realizada", { data: imagen["src"] });
+        });
+    };
     Mensajes.prototype.atender_mensaje_cambiar_zoom = function (datos) {
         this.pilas.modo.cameras.main.setZoom(datos.zoom);
     };
@@ -3410,7 +3416,6 @@ var ActorBase = (function () {
     };
     ActorBase.prototype.iniciar = function () { };
     ActorBase.prototype._bloques_iniciar = function () {
-        console.log("esta actor no tiene bloques");
     };
     ActorBase.prototype._bloques_actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "interactivo", {

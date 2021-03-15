@@ -50,6 +50,12 @@ class Mensajes {
     }
   }
 
+  atender_mensaje_capturar_pantalla(datos) {
+    pilasengine.game.renderer.snapshot(imagen => {
+      this.emitir_mensaje_al_editor("captura_de_pantalla_realizada", { data: imagen["src"] });
+    });
+  }
+
   atender_mensaje_cambiar_zoom(datos) {
     this.pilas.modo.cameras.main.setZoom(datos.zoom);
   }

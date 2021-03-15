@@ -485,6 +485,7 @@ declare class Mensajes {
     constructor(pilas: Pilas);
     private agregar_manejador_de_eventos;
     atender_mensaje(e: any): void;
+    atender_mensaje_capturar_pantalla(datos: any): void;
     atender_mensaje_cambiar_zoom(datos: any): void;
     atender_mensaje_iniciar_pilas(datos: any): void;
     atender_mensaje_definir_estados_de_depuracion(datos: any): void;

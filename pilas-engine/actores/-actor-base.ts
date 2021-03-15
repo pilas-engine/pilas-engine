@@ -321,7 +321,7 @@ class ActorBase {
   iniciar() {}
 
   _bloques_iniciar() {
-    console.log("esta actor no tiene bloques");
+    //console.log("esta actor no tiene bloques");
   }
 
   _bloques_actualizar() {}

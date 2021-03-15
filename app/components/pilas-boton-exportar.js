@@ -12,6 +12,7 @@ export default Component.extend({
   mostrar_boton_para_cerrar: false,
   electron: service(),
   compilador: service(),
+  bus: service(),
   paso: 1,
   ver_codigo: true,
 
@@ -159,6 +160,48 @@ export default Component.extend({
     this.agregar_mensaje("Comenzando exportación del proyecto ...");
     yield timeout(1000);
 
+    this.agregar_mensaje("Capturando pantalla:");
+    let esperando = true;
+    let imagenEnBase64 = null; // Esta variable se completa luego de realizar la captura.
+
+    function captura_realizada(data) {
+      var canvas = document.getElementById("canvas-boton-exportar");
+      var imagen = new Image();
+
+      imagen.addEventListener("load", () => {
+        var escala = imagen.height / imagen.width;
+        canvas.width = 320;
+        canvas.height = 320 * escala;
+        var contexto = canvas.getContext("2d");
+        contexto.drawImage(imagen, 0, 0, imagen.width, imagen.height, 0, 0, canvas.width, canvas.height);
+
+        imagenEnBase64 = canvas.toDataURL("image/jpeg", 0.5);
+
+        esperando = false;
+      });
+
+      imagen.src = data.data;
+    }
+
+    // Conecta la función para cuando llegue la captura de pantalla.
+    this.bus.on("captura_de_pantalla_realizada", captura_realizada);
+
+    // Pide la captura de pantalla, que llega de forma asincrónica.
+    this.bus.trigger("capturar_pantalla");
+
+    while (esperando == true) {
+      yield timeout(1000);
+    }
+
+    this.bus.off("captura_de_pantalla_realizada", captura_realizada);
+
+    this.agregar_mensaje({
+      tipo: "captura",
+      data: imagenEnBase64
+    });
+
+    yield timeout(1000);
+
     let serializado = json_a_string(this.proyecto);
     let proyecto = string_a_json(serializado);
 
@@ -183,18 +226,18 @@ export default Component.extend({
       if (cantidad_de_partes === 1) {
         // Si el proyecto es muy pequeño, se envía en un solo post:
         this.agregar_mensaje(`Subiendo el proyecto completo en una sola parte...`);
-        data = yield this.api.publicar_juego(proyecto_serializado, this.ver_codigo, 1, 0);
+        data = yield this.api.publicar_juego(proyecto_serializado, imagenEnBase64, this.ver_codigo, 1, 0);
       } else {
         // Si el proyecto tiene varias partes, hace un primer post para obtener el hash
         // y luego envía las siguientes partes especificando ese hash para que se carguen
         // en el mismo proyecto.
         this.agregar_mensaje(`Subiendo el proyecto en ${cantidad_de_partes} partes de 256kb`);
         this.agregar_mensaje(`Subiendo parte 1 de ${cantidad_de_partes}`);
-        data = yield this.api.publicar_juego(proyecto_en_partes[0], this.ver_codigo, cantidad_de_partes, 0);
+        data = yield this.api.publicar_juego(proyecto_en_partes[0], imagenEnBase64, this.ver_codigo, cantidad_de_partes, 0);
 
         for (let i = 1; i < cantidad_de_partes; i++) {
           this.agregar_mensaje(`Subiendo parte ${i + 1} de ${cantidad_de_partes}`);
-          yield this.api.publicar_juego(proyecto_en_partes[i], this.ver_codigo, cantidad_de_partes, i, data.hash);
+          yield this.api.publicar_juego(proyecto_en_partes[i], null, this.ver_codigo, cantidad_de_partes, i, data.hash);
         }
       }
 

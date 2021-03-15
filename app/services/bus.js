@@ -44,6 +44,8 @@ import Service from "@ember/service";
  * - ubicar_camara_en_el_actor
  * - actualizar_enumeraciones
  * - cierra_dialogo_de_animaciones
+ * - capturar_pantalla
+ * - captura_de_pantalla_realizada (respuesta a capturar_pantalla desde pilas)
  *
  * Otra señal que se emite para avisarle al webserver que cambió el código es:
  *

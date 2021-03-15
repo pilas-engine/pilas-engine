@@ -132,7 +132,6 @@ export default Service.extend({
 
     // migración 2021-01-31: hacer que el proyecto ahora almacene código de blockly
     if (!proyecto.bloques) {
-      console.log("CREANDO BLOQUES");
       proyecto.set("bloques", EmberObject.create({}));
       proyecto.set("bloques.proyecto", `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="ZC\`*TK^}PI+^~52^ak!H" x="35" y="44"></block></xml>`);
       proyecto.set(

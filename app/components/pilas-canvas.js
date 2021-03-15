@@ -113,6 +113,7 @@ export default Component.extend({
       this.bus.on(`ubicar_camara_en_el_actor`, this, "ubicar_camara_en_el_actor");
       this.bus.on(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
       this.bus.on(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
+      this.bus.on(`capturar_pantalla`, this, "capturar_pantalla");
     };
   },
 
@@ -144,6 +145,7 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:ubicar_camara_en_el_actor`, this, "ubicar_camara_en_el_actor");
     this.bus.off(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
     this.bus.off(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
+    this.bus.off(`capturar_pantalla`, this, "capturar_pantalla");
   },
 
   convertir_a_boolean(valor) {
@@ -290,6 +292,15 @@ export default Component.extend({
       tipo: "selecciona_un_actor_en_modo_pausa",
       nombre_del_contexto: this.nombre_del_contexto,
       actor
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
+  },
+
+  capturar_pantalla() {
+    let data = {
+      tipo: "capturar_pantalla",
+      nombre_del_contexto: this.nombre_del_contexto
     };
 
     this.contexto.postMessage(data, utils.HOST);
@@ -537,6 +548,11 @@ export default Component.extend({
 
     if (e.data.tipo === "imprimir_en_consola") {
       this.bus.trigger(`${nombre_del_contexto}:imprimir_en_consola`, e.data);
+      return;
+    }
+
+    if (e.data.tipo === "captura_de_pantalla_realizada") {
+      this.bus.trigger(`captura_de_pantalla_realizada`, e.data);
       return;
     }
 

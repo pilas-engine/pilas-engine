@@ -17,7 +17,7 @@ export default Component.extend({
     window.addEventListener("message", event => {
       if (event.source === this.frame.contentWindow && event.data) {
         if (event.data.message === "carga-completa-de-blockly") {
-          console.log("carga completa de blockly", event.data);
+          //console.log("carga completa de blockly", event.data);
         }
 
         if (event.data.message === "cambia-el-workspace-de-blockly") {
@@ -62,7 +62,7 @@ export default Component.extend({
 
   cuandoCambiaDeArchivo: observer("titulo", function() {
     let { id, bloques } = this.proyecto.obtener_bloques_de_entidad_por_nombre(this.titulo);
-    console.log(id);
+    //console.log(id);
 
     this.set("entidad_id", id);
 

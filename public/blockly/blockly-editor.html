@@ -194,7 +194,7 @@
         }
 
         if (message.data.message === "actualizar-enumeraciones") {
-          console.log("en blockly-editor.html, debo actualizar enumeraciones", message.data.data);
+          //console.log("en blockly-editor.html, debo actualizar enumeraciones", message.data.data);
 
           window.valores_dropdown = {
             animaciones: convertir_en_dropdown(message.data.data.animaciones),
@@ -202,16 +202,16 @@
             teclas: convertir_en_dropdown(message.data.data.teclas),
           }
 
-          console.log("en blockly-editor.html se actualiza valores_dropdown");
-          console.log(window.valores_dropdown);
+          //console.log("en blockly-editor.html se actualiza valores_dropdown");
+          //console.log(window.valores_dropdown);
         }
 
         if (message.data.message === "cargar-bloques") {
           Blockly.mainWorkspace.clear();
-          console.log("cargar los bloques!");
+          //console.log("cargar los bloques!");
 
           if (message.data.xml_como_texto === "----") {
-            console.log("Ojo, hay guiones en lugar de código");
+            //console.log("Ojo, hay guiones en lugar de código");
           } else {
             let xml = Blockly.Xml.textToDom(message.data.xml_como_texto);
             Blockly.Xml.domToWorkspace(workspace, xml);
