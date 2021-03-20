@@ -148,14 +148,6 @@ deploy_a_dokku:
 	touch dist/.static
 	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@pilas-engine.com.ar:pilas-engine; git push dokku master -f
 
-deploy_a_dokku_dev:
-	rm -rf dist
-	@echo "Compilando la aplicación en modo producción a entorno de pruebas..."
-	${BIN_EMBER} build --prod
-	@echo "Subiendo contenido al sitio de pilas (desarrollo)."
-	touch dist/.static
-	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@examplelab.com.ar:pilas-engine-dev; git push dokku master -f
-
 binarios:
 	$(call task, "Comenzando a generar binarios.")
 	$(call log, "Limpiando directorio de binarios ...")
