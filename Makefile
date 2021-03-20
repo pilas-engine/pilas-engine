@@ -146,7 +146,7 @@ deploy_a_dokku:
 	${BIN_EMBER} build --prod
 	@echo "Subiendo contenido al sitio de pilas (producción)."
 	touch dist/.static
-	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@examplelab.com.ar:pilas-engine; git push dokku master -f
+	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@pilas-engine.com.ar:pilas-engine; git push dokku master -f
 
 deploy_a_dokku_dev:
 	rm -rf dist
