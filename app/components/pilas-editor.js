@@ -88,7 +88,7 @@ export default Component.extend({
   capturar_ctrl_s() {
     document.addEventListener("keydown", e => {
       e = e || window.event; //Get event
-      console.log(e);
+      //console.log(e);
 
       if (!e.ctrlKey && !e.metaKey) {
         return;
@@ -271,9 +271,12 @@ export default Component.extend({
   },
 
   actualizar_enumeraciones_del_proyecto() {
+    let animaciones = this.proyecto.animaciones || [];
+    let sonidos = this.proyecto.sonidos || [];
+
     this.bus.trigger("actualizar_enumeraciones", {
-      animaciones: this.proyecto.animaciones.map(e => e.nombre),
-      sonidos: this.proyecto.sonidos.map(e => e.nombre),
+      animaciones: animaciones.map(e => e.nombre),
+      sonidos: sonidos.map(e => e.nombre),
       teclas: [
         "izquierda", //
         "derecha",

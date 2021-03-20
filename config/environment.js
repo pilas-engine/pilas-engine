@@ -28,8 +28,10 @@ module.exports = function(environment) {
   };
 
   if (environment === "development") {
-    ENV.backendURL = "http://127.0.0.1:8000";
-    ENV.frontendURL = "http://localhost:4200";
+    //ENV.backendURL = "http://127.0.0.1:8000";
+    //ENV.frontendURL = "http://localhost:4200";
+    ENV.backendURL = ENV.remoteBackendURL;
+    ENV.frontendURL = ENV.remoteFrontendURL;
   }
 
   if (environment === "test") {
