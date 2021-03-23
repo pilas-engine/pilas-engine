@@ -9,6 +9,29 @@
 
     {{content-for "head"}} {{content-for "test-head"}}
 
+    <style>
+      #qunit-userAgent {
+        display: none !important;
+      }
+
+      #qunit-header {
+        border-radius: 0px !important;
+      }
+
+      #qunit-testresult {
+        margin-top: 6px !important;
+      }
+
+      #qunit-banner.qunit-pass {
+        background-color: #1cad42 !important;
+        height: 20px;
+      }
+
+      #ember-testing-container {
+        position: fixed !important;
+      }
+    </style>
+
     <script>
       window.enElectron = false;
 
@@ -50,6 +73,7 @@
 
     <script>
       QUnit.config.testTimeout = 1000 * 60 * 2; // Espera 2 minutos antes de fallar.
+      console.log(QUnit.config);
     </script>
 
     {{content-for "body-footer"}} {{content-for "test-body-footer"}}
