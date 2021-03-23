@@ -16,7 +16,8 @@ fs.readdir(src, (err, files) => {
     actores.push({
       nombre: nombre,
       codigo: contenido,
-      archivo: file
+      archivo: file,
+      bloques: `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`
     });
   });
 

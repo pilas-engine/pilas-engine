@@ -213,7 +213,13 @@
           if (message.data.xml_como_texto === "----") {
             //console.log("Ojo, hay guiones en lugar de código");
           } else {
-            let xml = Blockly.Xml.textToDom(message.data.xml_como_texto);
+            var texto = message.data.xml_como_texto;
+
+            if (message.data.xml_como_texto.texto) {
+              texto = message.data.xml_como_texto.texto;
+            }
+
+            let xml = Blockly.Xml.textToDom(texto);
             Blockly.Xml.domToWorkspace(workspace, xml);
           }
         }

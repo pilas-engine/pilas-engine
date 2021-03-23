@@ -522,6 +522,17 @@ export default Component.extend({
     );
   },
 
+  registrar_bloques_de_actor(nombre, bloques) {
+    let proyecto = this.proyecto;
+
+    proyecto.bloques.actores.pushObject(
+      EmberObject.create({
+        nombre,
+        bloques
+      })
+    );
+  },
+
   registrar_codigo_de_escena(nombre, codigo) {
     let proyecto = this.proyecto;
 
@@ -529,6 +540,17 @@ export default Component.extend({
       EmberObject.create({
         nombre: nombre,
         codigo: aplicar_nombre(nombre, codigo)
+      })
+    );
+  },
+
+  registrar_bloques_de_escena(nombre, bloques) {
+    let proyecto = this.proyecto;
+
+    proyecto.bloques.escenas.pushObject(
+      EmberObject.create({
+        nombre,
+        bloques
       })
     );
   },
@@ -681,8 +703,11 @@ export default Component.extend({
     model.escenas.pushObject(escena);
 
     let plantilla = obtener_plantilla_de_escena();
+    let plantilla_de_bloques = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`;
 
     this.registrar_codigo_de_escena(nombre, plantilla);
+    this.registrar_bloques_de_escena(nombre, plantilla_de_bloques);
+
     return escena;
   },
 
@@ -767,6 +792,7 @@ export default Component.extend({
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 
       this.registrar_codigo_de_actor(nombre, preparar_codigo_para_el_editor(actor.codigo));
+      this.registrar_bloques_de_actor(nombre, actor.bloques);
 
       this.set("mostrarModalCreacionDeActor", false);
 
