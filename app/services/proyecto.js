@@ -56,35 +56,54 @@ export default Service.extend({
     return this.obtener_todas_las_escenas().map(a => a.nombre);
   },
 
+  obtener_tipo_de_entidad_por_nombre(nombre) {
+    if (nombre === "proyecto") {
+      return "proyecto";
+    }
+
+    let nombres_de_actores = this.obtener_nombres_de_actores();
+
+    if (nombres_de_actores.includes(nombre)) {
+      return "actor";
+    }
+
+    let nombres_de_escenas = this.obtener_nombres_de_todas_las_escenas();
+
+    if (nombres_de_escenas.includes(nombre)) {
+      return "escena";
+    }
+
+    throw new Error(`no se puede reconocer qué tipo de entidad tiene el nombre "${nombre}"`);
+  },
+
   /**
    * Intenta obtener el XML de bloques para un actor, escena o proyecto.
    */
   obtener_bloques_de_entidad_por_nombre(nombre) {
-    if (nombre === "proyecto") {
+    const tipo = this.obtener_tipo_de_entidad_por_nombre(nombre);
+
+    if (tipo === "proyecto") {
       return { id: 1, bloques: this.proyecto.bloques.proyecto };
-    } else {
-      let nombres_de_actores = this.obtener_nombres_de_actores();
-      let nombres_de_escenas = this.obtener_nombres_de_todas_las_escenas();
+    }
 
-      if (nombres_de_actores.includes(nombre)) {
-        let bloques = this.proyecto.bloques.actores.findBy("nombre", nombre).get("bloques");
-        let actor = this.buscar_actor_por_nombre(nombre);
+    if (tipo === "actor") {
+      let bloques = this.proyecto.bloques.actores.findBy("nombre", nombre).get("bloques");
+      let actor = this.buscar_actor_por_nombre(nombre);
 
-        return {
-          id: actor.id,
-          bloques
-        };
-      }
+      return {
+        id: actor.id,
+        bloques
+      };
+    }
 
-      if (nombres_de_escenas.includes(nombre)) {
-        let bloques = this.proyecto.bloques.escenas.findBy("nombre", nombre).get("bloques");
-        let escena = this.buscar_escena_por_nombre(nombre);
+    if (tipo === "escena") {
+      let bloques = this.proyecto.bloques.escenas.findBy("nombre", nombre).get("bloques");
+      let escena = this.buscar_escena_por_nombre(nombre);
 
-        return {
-          id: escena.id,
-          bloques
-        };
-      }
+      return {
+        id: escena.id,
+        bloques
+      };
     }
 
     throw new Error(`No se pueden obtener bloques para la entidad '${nombre}'`);

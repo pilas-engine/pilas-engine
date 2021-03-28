@@ -49,42 +49,147 @@
     </table>
 
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-      <category name="Eventos">
-        <block type="actor_inicia"></block>
-        <block type="actor_actualizar"></block>
-        <block type="cuando_comienza_una_colision"></block>
+      <category name="..">
       </category>
-
-      <category name="Control">
-        <block type="controls_if"></block>
-      </category>
-
-      <category name="Acciones">
-        <block type="text"></block>
-        <block type="actor_decir"></block>
-        <block type="desplazar"></block>
-        <block type="reproducir_animacion"></block>
-        <block type="reproducir_sonido"></block>
-        <block type="reproducir_musica"></block>
-        <block type="detener_musica"></block>
-      </category>
-
-      <category name="Sensores">
-        <block type="control_tecla"></block>
-      </category>
-
-      <category name="Variables" custom="VARIABLE"></category>
-      <category name="Functions" custom="PROCEDURE"></category>
     </xml>
 
     <script>
       var HOST = "file://";
       window.valores_dropdown = {teclas: [
-              ['A', 'A'],
+        ['A', 'A'],
       ]};
 
       if (window.location.host) {
         HOST = window.location.protocol + "//" + window.location.host;
+      }
+
+      const toolbox = {
+        "actor": [
+          {
+            "kind": "category",
+            "name": "Eventos",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "actor_inicia"
+              },
+              {
+                "kind": "block",
+                "type": "actor_inicia"
+              },
+              {
+                "kind": "block",
+                "type": "cuando_comienza_una_colision"
+              },
+            ]
+          },
+          {
+            "kind": "category",
+            "name": "Control",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "controls_if"
+              }
+            ]
+          },
+          {
+            "kind": "category",
+            "name": "Acciones",
+            "contents": [
+                    {
+                            "kind": "block",
+                            "type": "text"
+                    },
+                    {
+                            "kind": "block",
+                            "type": "actor_decir",
+                    },
+                    {
+                            "kind": "block",
+                            "type": "desplazar"
+                          },
+                    {
+                              "kind": "block",
+                              "type": "reproducir_animacion"
+                          },
+                      {
+                              "kind": "block",
+                              "type": "reproducir_sonido"
+                            },
+                      {
+                              "kind": "block",
+                              "type": "reproducir_musica"
+                            },
+
+                      {
+                              "kind": "block",
+                              "type": "detener_musica"
+                            }
+
+            ]
+          },
+          {
+            "kind": "category",
+            "name": "Sensores",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "control_tecla"
+              }
+            ]
+          },
+          {
+  "kind": "category",
+  "name": "Variables",
+  "custom": "VARIABLE"
+},
+{
+  "kind": "category",
+  "name": "Functions",
+  "custom": "PROCEDURE"
+}
+        ],
+        "proyecto": [
+          {
+            "kind": "category",
+            "name": "Logic",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "logic_compare"
+              },
+              {
+                "kind": "block",
+                "type": "logic_operation"
+              },
+              {
+                "kind": "block",
+                "type": "logic_boolean"
+              }
+            ]
+          },
+        ],
+        "escena": [
+          {
+            "kind": "category",
+            "name": "Logic escena",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "logic_compare"
+              },
+              {
+                "kind": "block",
+                "type": "logic_operation"
+              },
+              {
+                "kind": "block",
+                "type": "logic_boolean"
+              }
+            ]
+          }
+        ]
       }
 
       var blocklyArea = document.getElementById("blocklyArea");
@@ -205,10 +310,18 @@
           //console.log("en blockly-editor.html se actualiza valores_dropdown");
           //console.log(window.valores_dropdown);
         }
+                
+        if (message.data.message === "cargar-toolbox") {
+          console.log("Debo cargar bloques nuevos: " + message.data.tipo);
+
+          Blockly.mainWorkspace.updateToolbox({
+            "kind": "categoryToolbox",
+            "contents": toolbox[message.data.tipo]
+          });
+        }
 
         if (message.data.message === "cargar-bloques") {
           Blockly.mainWorkspace.clear();
-          //console.log("cargar los bloques!");
 
           if (message.data.xml_como_texto === "----") {
             //console.log("Ojo, hay guiones en lugar de código");
@@ -220,7 +333,7 @@
             }
 
             let xml = Blockly.Xml.textToDom(texto);
-            Blockly.Xml.domToWorkspace(workspace, xml);
+            Blockly.Xml.domToWorkspace(xml, workspace);
           }
         }
               

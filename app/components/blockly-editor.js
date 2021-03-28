@@ -61,6 +61,13 @@ export default Component.extend({
   },
 
   cuandoCambiaDeArchivo: observer("titulo", function() {
+    let tipo = this.proyecto.obtener_tipo_de_entidad_por_nombre(this.titulo);
+
+    this.frame.contentWindow.postMessage({
+      message: "cargar-toolbox",
+      tipo: tipo
+    });
+
     let { id, bloques } = this.proyecto.obtener_bloques_de_entidad_por_nombre(this.titulo);
     this.set("entidad_id", id);
 
