@@ -17,7 +17,7 @@ export default Component.extend({
     window.addEventListener("message", event => {
       if (event.source === this.frame.contentWindow && event.data) {
         if (event.data.message === "carga-completa-de-blockly") {
-          //console.log("carga completa de blockly", event.data);
+          this.cargarCódigoDeLaEntidadPorTitulo(this.titulo);
         }
 
         if (event.data.message === "cambia-el-workspace-de-blockly") {
@@ -61,19 +61,23 @@ export default Component.extend({
   },
 
   cuandoCambiaDeArchivo: observer("titulo", function() {
-    let tipo = this.proyecto.obtener_tipo_de_entidad_por_nombre(this.titulo);
+    this.cargarCódigoDeLaEntidadPorTitulo(this.titulo);
+  }),
+
+  cargarCódigoDeLaEntidadPorTitulo(titulo) {
+    let tipo = this.proyecto.obtener_tipo_de_entidad_por_nombre(titulo);
 
     this.frame.contentWindow.postMessage({
       message: "cargar-toolbox",
       tipo: tipo
     });
 
-    let { id, bloques } = this.proyecto.obtener_bloques_de_entidad_por_nombre(this.titulo);
+    let { id, bloques } = this.proyecto.obtener_bloques_de_entidad_por_nombre(titulo);
     this.set("entidad_id", id);
 
     this.frame.contentWindow.postMessage({
       message: "cargar-bloques",
       xml_como_texto: bloques
     });
-  })
+  }
 });
