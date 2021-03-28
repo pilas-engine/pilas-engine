@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 import { observer } from "@ember/object";
+import ENV from "../config/environment";
 
 export default Component.extend({
   classNames: ["flex-auto"],
@@ -17,7 +18,9 @@ export default Component.extend({
     window.addEventListener("message", event => {
       if (event.source === this.frame.contentWindow && event.data) {
         if (event.data.message === "carga-completa-de-blockly") {
-          this.cargarCódigoDeLaEntidadPorTitulo(this.titulo);
+          if (ENV.environment !== "test") {
+            this.cargarCódigoDeLaEntidadPorTitulo(this.titulo);
+          }
         }
 
         if (event.data.message === "cambia-el-workspace-de-blockly") {
