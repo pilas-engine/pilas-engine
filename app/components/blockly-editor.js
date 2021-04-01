@@ -8,8 +8,15 @@ export default Component.extend({
   proyecto: service(),
   bus: service(),
   entidad_id: null,
+  host: null,
 
   didInsertElement() {
+    if (window.location.host) {
+      this.set("host", window.location.protocol + "//" + window.location.host);
+    } else {
+      this.set("host", "file://");
+    }
+
     this.frame = this.element.querySelector("iframe");
     this.bus.on("codigo_ejecutado", this, "codigo_ejecutado");
     this.bus.on("regresa_al_modo_editor", this, "limpiar_bloques_resaltados");
@@ -32,10 +39,13 @@ export default Component.extend({
 
   codigo_ejecutado({ instrumentacion_de_bloques }) {
     if (this.entidad_id && instrumentacion_de_bloques[this.entidad_id]) {
-      this.frame.contentWindow.postMessage({
-        message: "resaltar-bloques",
-        ids_de_bloques: instrumentacion_de_bloques[this.entidad_id]
-      });
+      this.frame.contentWindow.postMessage(
+        {
+          message: "resaltar-bloques",
+          ids_de_bloques: instrumentacion_de_bloques[this.entidad_id]
+        },
+        this.host
+      );
     }
   },
 
@@ -46,16 +56,22 @@ export default Component.extend({
   },
 
   actualizar_enumeraciones(data) {
-    this.frame.contentWindow.postMessage({
-      message: "actualizar-enumeraciones",
-      data: data
-    });
+    this.frame.contentWindow.postMessage(
+      {
+        message: "actualizar-enumeraciones",
+        data: data
+      },
+      this.host
+    );
   },
 
   limpiar_bloques_resaltados() {
-    this.frame.contentWindow.postMessage({
-      message: "limpiar-bloques-resaltados"
-    });
+    this.frame.contentWindow.postMessage(
+      {
+        message: "limpiar-bloques-resaltados"
+      },
+      this.host
+    );
 
     // TODO: quitar esta segunda llamada para limpiar bloques
     //this.frame.contentWindow.postMessage({
@@ -70,17 +86,23 @@ export default Component.extend({
   cargarCódigoDeLaEntidadPorTitulo(titulo) {
     let tipo = this.proyecto.obtener_tipo_de_entidad_por_nombre(titulo);
 
-    this.frame.contentWindow.postMessage({
-      message: "cargar-toolbox",
-      tipo: tipo
-    });
+    this.frame.contentWindow.postMessage(
+      {
+        message: "cargar-toolbox",
+        tipo: tipo
+      },
+      this.host
+    );
 
     let { id, bloques } = this.proyecto.obtener_bloques_de_entidad_por_nombre(titulo);
     this.set("entidad_id", id);
 
-    this.frame.contentWindow.postMessage({
-      message: "cargar-bloques",
-      xml_como_texto: bloques
-    });
+    this.frame.contentWindow.postMessage(
+      {
+        message: "cargar-bloques",
+        xml_como_texto: bloques
+      },
+      this.host
+    );
   }
 });
