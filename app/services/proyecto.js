@@ -119,7 +119,14 @@ export default Service.extend({
     let codigo_nuevo = codigo.get("codigo").replace(`class ${nombre}`, `class ${nombre_nuevo}`);
     codigo.set("codigo", codigo_nuevo);
 
+    this.renombrar_bloques_de_un_actor(nombre, nombre_nuevo);
+
     return actor;
+  },
+
+  renombrar_bloques_de_un_actor(nombre, nombre_nuevo) {
+    let bloques_del_actor = this.proyecto.bloques.actores.findBy("nombre", nombre);
+    bloques_del_actor.set("nombre", nombre_nuevo);
   },
 
   renombrar_escena(nombre, nombre_nuevo) {
@@ -132,7 +139,14 @@ export default Service.extend({
     let codigo_nuevo = codigo.get("codigo").replace(`class ${nombre}`, `class ${nombre_nuevo}`);
     codigo.set("codigo", codigo_nuevo);
 
+    this.renombrar_bloques_de_una_escena(nombre, nombre_nuevo);
+
     return escena;
+  },
+
+  renombrar_bloques_de_una_escena(nombre, nombre_nuevo) {
+    let bloques_una_escena = this.proyecto.bloques.escenas.findBy("nombre", nombre);
+    bloques_una_escena.set("nombre", nombre_nuevo);
   },
 
   obtener_codigo_de_actor_por_nombre(nombre) {
