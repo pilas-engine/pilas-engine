@@ -33,7 +33,7 @@ export default Component.extend({
     let actores = this.proyecto.obtener_nombres_de_actores();
     let escenas = this.proyecto.obtener_nombres_de_todas_las_escenas();
 
-    let nombres = [...actores, ...escenas];
+    let nombres = [...actores, ...escenas, "proyecto", "Proyecto"];
 
     nombres.removeObject(this.nombre);
     return nombres;
