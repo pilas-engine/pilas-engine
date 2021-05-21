@@ -4,7 +4,7 @@ title: Entorno para colaboradores de Pilas
 
 Si sos desarrollador y queres replicar el entorno completo para editar el código de Pilas te recomendamos una serie de pasos para tener un entorno completo de desarrollo.
 
-Ten en cuenta que si bien esta es una sección muy avanzada del manual de Pilas, cualquier duda que te surja al respecto podes realizarla en el foro de Pilas (http://foro.pilas-engine.com.ar/) para que podemos mejorar el manual.
+Ten en cuenta que si bien esta es una sección muy avanzada del manual de Pilas, cualquier duda que te surja al respecto puedes realizarla en el foro de Pilas (http://foro.pilas-engine.com.ar/) para que podemos mejorar el manual.
 
 ## ¿Qué software se utiliza internamente en Pilas?
 
@@ -56,13 +56,13 @@ Deberías ver cómo se van instalando todas las dependencias dentro del director
 
 ![](imagenes/assets/instalar.png)
 
-Una vez finalizada la instalación de dependencias podes ejecutar el comando "make". Cuando lo escribas, van a aparecer en pantalla todos los atajos que usamos dentro del proyecto:
+Una vez finalizada la instalación de dependencias puedes ejecutar el comando "make". Cuando lo escribas, van a aparecer en pantalla todos los atajos que usamos dentro del proyecto:
 
 ![](imagenes/assets/make-1597532.png)
 
 Obviamente en la mayoría de los casos usamos solo algunos comandos, pero siempre vamos a mantener actualizado este listado para simplificar el desarrollo.
 
-Para poner en funcionamiento el servidor de Ember podes ejecutar este comando:
+Para poner en funcionamiento el servidor de Ember puedes ejecutar este comando:
 
 ```
 make ejecutar

@@ -32,7 +32,7 @@ Por ejemplo, aquí incluí algunos cuadros de animación de un personaje corrien
 
 ![](imagenes/animaciones.assets/image-20191219000155013.png)
 
-Podes utilizar el botón "Reproducir" y la propiedad "Cuadros por segundo" para ajustar la velocidad de la animación y dejarla como quieras:
+Puedes utilizar el botón "Reproducir" y la propiedad "Cuadros por segundo" para ajustar la velocidad de la animación y dejarla como quieras:
 
 ![](imagenes/animaciones.assets/screencast 2019-12-19 00-04-05.gif)
 
@@ -42,7 +42,7 @@ Por último es muy importante que le asignes un nombre a la animación, por ejem
 
 Esto es muy importante porque tu juego puede tener un montón de animaciones, y el nombre que le asignes será la única forma de identificar cada una de las animaciones.
 
-Ahora sí, podes cerrar la ventana del editor y continuar con la siguiente sección.
+Ahora sí, puedes cerrar la ventana del editor y continuar con la siguiente sección.
 
 ## Cómo usar las animaciones
 

@@ -8,7 +8,7 @@ Pilas Engine es un proyecto de Software Libre, que se desarrolla de forma colabo
 
 Todas las personas que quieran participar del desarrollo son bienvenidas, Pilas nos es solo una herramienta de software, es un proyecto colaborativo que sostiene un equipo de personas amigables y respetuosas que buscan mejorar la calidad de la educación brindándole a los Jóvenes la posibilidad de volverse protagonistas en el uso de la tecnología.
 
-Por ese motivo, queremos invitarte a participar. ¡Vos también podes formar parte del equipo de Pilas!.
+Por ese motivo, queremos invitarte a participar. ¡Vos también puedes formar parte del equipo de Pilas!.
 
 Te damos algunas ideas de participación que podrían interesante:
 
@@ -16,7 +16,7 @@ Te damos algunas ideas de participación que podrían interesante:
 
 La tarea mas recomendable para quienes recién comienzan es dar de alta una cuenta en nuestro foro ([http://foro.pilas-engine.com.ar](http://foro.pilas-engine.com.ar/)), presentarse y ayudarnos a resolver preguntas de otros usuarios.
 
-No hace falta experiencia previa para colaborar en el foro, podes ingresar, saludar y contarnos qué te parece Pilas, cómo lo conociste; vas a notar que el foro es el lugar ideal para aportar ideas, conversar, y publicar juegos.
+No hace falta experiencia previa para colaborar en el foro, puedes ingresar, saludar y contarnos qué te parece Pilas, cómo lo conociste; vas a notar que el foro es el lugar ideal para aportar ideas, conversar, y publicar juegos.
 
 ## Ayudar a difundir Pilas
 

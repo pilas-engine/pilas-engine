@@ -107,7 +107,7 @@ Siempre que escribas una variable conocida el intérprete va a intentar ayudarte
 
 ![autocompletado](imagenes/interprete.assets/autocompletado.png)
 
-Otra necesidad muy común es querer volver a repetir una instrucción anterior, para eso podes pulsar las flechitas del teclado hacia arriba y abajo para navegar:
+Otra necesidad muy común es querer volver a repetir una instrucción anterior, para eso puedes pulsar las flechitas del teclado hacia arriba y abajo para navegar:
 
 ![autocompletado-historico](imagenes/interprete.assets/autocompletado-historico.gif)
 

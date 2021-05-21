@@ -45,7 +45,7 @@ Ahora si bien es el actor más discreto de todos, lo vamos usar para hacer
 algunas pruebas y mostrarte conceptos de la herramienta.
 
 Pulsa el botón "crear actor" y luego selecciona a este actor de modo que te
-quede en la escena de esta forma (los otros actores los podes eliminar por el
+quede en la escena de esta forma (los otros actores los puedes eliminar por el
 momento):
 
 ![actor-sin-imagen-en-la-escena](imagenes/actores/actor-sin-imagen-en-la-escena.png)

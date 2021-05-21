@@ -118,7 +118,7 @@ Pero a diferencia de antes, que elegimos la nave, ahora elegí el actor que no t
 
 ![actor-sin-imagen](imagenes/primeros-pasos/actor-sin-imagen.png)
 
-Luego, podes mover este actor usando el mouse, así no tapa a la nave:
+Luego, puedes mover este actor usando el mouse, así no tapa a la nave:
 
 ![mover-actor](imagenes/primeros-pasos/mover-actor.png)
 

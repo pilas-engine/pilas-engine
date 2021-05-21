@@ -84,5 +84,5 @@ actor, simplemente escribí o selecciona el método al que quieras ingresar.
 
 ![](imagenes/editor-de-codigo/simbolos.png)
 
-Ten en cuenta que también podes activar esta funcionalidad pulsando `ctrl+P` como
+Ten en cuenta que también puedes activar esta funcionalidad pulsando `ctrl+P` como
 atajo.
