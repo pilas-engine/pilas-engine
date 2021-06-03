@@ -6,7 +6,6 @@ home:
   about: 关于Pilas
   tip.title: 提示
   tip.text: 你可以通过从电脑上拖动.pilas文件到这儿来打开一个项目。
-  sponsor: 赞助方
 
 return: 返回
 edit: 编辑
@@ -125,8 +124,6 @@ about:
     计算机来发明、分享和开发任何一种软件。
     界面图标是由Icons8制作的，而游戏画面则是由Icons8制作的。
     包括由Walter Velazquez和Kenney项目开发的。
-    此外，我们还得到了EnjambreBit公司的赞助，该公司使我们有可能实现以下目标
-    继续每天开发和改进该工具。
     中文翻译由街头艺术家工作室提供，如有不恰当的地方，请联系QQ494033201。
   end: |-
     访问PilasEngine网站以了解更多关于这个项目的信息，或

@@ -6,7 +6,6 @@ home:
   about: About
   tip.title: Tip
   tip.text: You can open any project by drag and drop a .pilas file here.
-  sponsor: Sponsored by
 
 return: Return
 edit: Edit
@@ -127,9 +126,6 @@ about:
 
     The interface icons have been created by Icons8, while the game graphics have
     been created by Walter Velazquez and the kenney project.
-
-    In addition, we are sponsored by EnjambreBit, a company that makes it possible
-    for us to keep developing and improving the tool every day.
 
   end: |-
     Visit the PilasEngine web site to learn more about this project, or write to us

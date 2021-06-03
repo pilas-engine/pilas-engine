@@ -6,7 +6,6 @@ home:
   about: Acerca de pilas
   tip.title: Consejo
   tip.text: Podés abrir un proyecto desde tu computadora arrastrando el archivo .pilas aquí.
-  sponsor: Patrocinado por
 
 return: Volver
 edit: Editar
@@ -127,9 +126,6 @@ about:
 
     Los íconos de la interfaz han sido creados por Icons8, mientras que los gráficos de juegos de
     incluidos han sido desarrollados por Walter Velazquez y el proyecto kenney.
-
-    Además, contamos con el patrocinio de EnjambreBit, una empresa que hace posible que podamos
-    seguir desarrollando y mejorando la herramienta día a día.
 
   end: |-
     Visitá el sitio de PilasEngine para conocer más sobre acerca de este proyecto, o
