@@ -72,29 +72,6 @@ unos minutos en completarse.
 Una vez que termine, con el comando `make` van a aparecer en pantalla
 los comandos típicos a la hora de utilizar el proyecto.
 
-## Versión en desarrollo
-
-Esta versión está en fase de experimentación y desarrollo inicial, es casi una
-prueba de concepto. Sin embargo, cada vez que hacemos un push a este
-repositorio se ejecutan todos los tests sobre
-[circle.ci](https://circleci.com/gh/pilas-engine) y se realiza una instalación
-en:
-
-- https://app-dev.pilas-engine.com.ar
-
-Si el push viene acompañado de un número de versión (como tag), también
-se generan los binarios para cada plataforma en esta dirección:
-
-- https://github.com/pilas-engine/pilas-engine/releases
-
-Si se quieren generar los binarios directamente de forma local, hay que tener
-instalado wine con anterioridad y luego ejecutar `make binarios`:
-
-```
-brew install wine winetricks
-make binarios
-```
-
 ## Estilo de programación
 
 Si estás con ganas de participar del proyecto o enviar correcciones, ten
