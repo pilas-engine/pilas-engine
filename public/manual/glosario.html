@@ -140,6 +140,38 @@ document.addEventListener("DOMContentLoaded", function() {
 <p><span id="detalle" class="small"></span> <button id="limpiar" class="boton v-mid">Limpiar</button></p>
 </div>
 <div class="funcion">
+<pre><code>mostrar(mensaje)</code></pre>
+<p>Imprime un mensaje en la pantalla del intérprete. También muestra el tipo de dato del argumento.</p>
+<p>Esta función también se puede llamar usando el nombre <code>print</code> en lugar de <code>mostrar</code>.</p>
+<p>Ejempos:</p>
+<pre><code>❯ mostrar(2 + 2)
+❮ 4                     (number)
+
+❯ mostrar(&quot;Hola &quot; + &quot;hugo&quot;)
+❮ Hola hugo             (string)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>ingresar(mensaje = &quot;&quot;)</code></pre>
+<p>Bloquea el programa a la espera de que el usuario ingrese un texto.</p>
+<p>Esta función retornará un <code>string</code> con el mensaje que escribió el usuario o <code>null</code> si canceló el ingreso del mensaje.</p>
+<p>Ejempos:</p>
+<pre><code>❯ ingresar(&quot;¿Cuál es tu nombre?)
+❮ &quot;pepe&quot;                     (string)
+
+❯ ingresar(&quot;¿Cuantos años tienes?)
+❮ &quot;14&quot;                     (string)</code></pre>
+<p>Tener en cuenta que la función retorna cadenas de texto (tipo <code>string</code>). Si quieres tomar la respuesta del usuario y procesarla como un número deberás anteponer <code>+</code> delante de la función o la variable para convertirla en un número:</p>
+<pre><code>❯ +ingresar(&quot;¿Cuantos años tienes?)
+❮ 14                     (number)
+
+❯ let edad = ingresar(&quot;¿Cuantos años tienes?)
+❯ mostrar(edad)
+❮ &quot;14&quot;                   (string)
+
+❯ mostrar(+edad)
+❮ 14                     (number)</code></pre>
+</div>
+<div class="funcion">
 <pre><code>pilas.actores.clonar(nombre)</code></pre>
 <p>Consulta si existe un actor en la coordenada x e y. La función retorna <code>true</code> si hay un actor en esa posición o <code>false</code> en caso negativo.</p>
 <p>Por ejemplo:</p>

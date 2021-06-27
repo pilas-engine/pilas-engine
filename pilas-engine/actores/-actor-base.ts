@@ -841,7 +841,7 @@ class ActorBase {
     return !this.estatico;
   }
 
-  impulsar(x, y) {
+  impulsar(x: number, y: number) {
     this.fallar_si_no_tiene_figura();
     (this.sprite as any).setVelocity(x, -y);
   }
@@ -1363,5 +1363,14 @@ class ActorBase {
 
     this.centro_x = 0.5;
     this.centro_y = 0.5;
+  }
+
+
+  saltar() {
+    this.impulsar(0, 10);
+  }
+
+  saludar() {
+    this.decir("¡hola!");
   }
 }

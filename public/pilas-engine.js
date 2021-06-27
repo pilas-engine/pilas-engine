@@ -3138,6 +3138,11 @@ var pilasengine = new Pilas();
 var print = function print(mensaje) {
     pilasengine.imprimir_en_consola(mensaje);
 };
+var mostrar = print;
+var ingresar = function ingresar(mensaje) {
+    if (mensaje === void 0) { mensaje = ""; }
+    return prompt(mensaje);
+};
 var Sensor = (function () {
     function Sensor(figura) {
         this._figura = figura;
@@ -4406,6 +4411,12 @@ var ActorBase = (function () {
         this.sprite.input.hitArea.height = this.sprite.height;
         this.centro_x = 0.5;
         this.centro_y = 0.5;
+    };
+    ActorBase.prototype.saltar = function () {
+        this.impulsar(0, 10);
+    };
+    ActorBase.prototype.saludar = function () {
+        this.decir("¡hola!");
     };
     return ActorBase;
 }());
@@ -8455,7 +8466,12 @@ var Modo = (function (_super) {
         }
     };
     Modo.prototype.obtener_actor_por_id = function (id) {
-        return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
+        if (this.pilas && this.pilas.modo && this.pilas.actores) {
+            return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
+        }
+        else {
+            return null;
+        }
     };
     Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
         var _this = this;

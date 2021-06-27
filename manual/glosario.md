@@ -123,6 +123,70 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <div class="funcion">
 ```
+mostrar(mensaje)
+```
+
+Imprime un mensaje en la pantalla del intérprete. También muestra el tipo
+de dato del argumento.
+
+Esta función también se puede llamar usando el nombre `print` en lugar
+de `mostrar`.
+
+Ejempos:
+
+```
+❯ mostrar(2 + 2)
+❮ 4                     (number)
+
+❯ mostrar("Hola " + "hugo")
+❮ Hola hugo             (string)
+```
+
+</div>
+
+
+<div class="funcion">
+```
+ingresar(mensaje = "")
+```
+
+Bloquea el programa a la espera de que el usuario ingrese un texto.
+
+Esta función retornará un `string` con el mensaje que escribió
+el usuario o `null` si canceló el ingreso del mensaje.
+
+Ejempos:
+
+```
+❯ ingresar("¿Cuál es tu nombre?)
+❮ "pepe"                     (string)
+
+❯ ingresar("¿Cuantos años tienes?)
+❮ "14"                     (string)
+```
+
+Tener en cuenta que la función retorna cadenas de texto (tipo `string`). Si
+quieres tomar la respuesta del usuario y procesarla como un número deberás
+anteponer `+` delante de la función o la variable para convertirla en un
+número:
+
+```
+❯ +ingresar("¿Cuantos años tienes?)
+❮ 14                     (number)
+
+❯ let edad = ingresar("¿Cuantos años tienes?)
+❯ mostrar(edad)
+❮ "14"                   (string)
+
+❯ mostrar(+edad)
+❮ 14                     (number)
+```
+
+</div>
+
+
+<div class="funcion">
+```
 pilas.actores.clonar(nombre)
 ```
 

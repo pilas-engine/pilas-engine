@@ -965,3 +965,11 @@ var pilasengine = new Pilas();
 var print = function print(mensaje: any) {
   pilasengine.imprimir_en_consola(mensaje);
 };
+
+// @ts-ignore
+var mostrar = print;
+
+// @ts-ignore
+var ingresar = function ingresar(mensaje: string = "") {
+  return prompt(mensaje);
+};

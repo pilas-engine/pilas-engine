@@ -283,7 +283,11 @@ class Modo extends Phaser.Scene {
   }
 
   obtener_actor_por_id(id) {
-    return this.pilas.modo.actores.filter(e => e.id === id)[0];
+    if (this.pilas && this.pilas.modo && this.pilas.actores) {
+      return this.pilas.modo.actores.filter(e => e.id === id)[0];
+    } else {
+      return null;
+    }
   }
 
   actualizar_sprite_desde_datos(sprite, actor) {

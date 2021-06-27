@@ -680,6 +680,8 @@ declare class Pilas {
 }
 declare var pilasengine: Pilas;
 declare var print: (mensaje: any) => void;
+declare var mostrar: typeof print;
+declare var ingresar: (mensaje?: string) => string;
 declare class Sensor {
     private _figura;
     constructor(figura: any);
@@ -931,6 +933,8 @@ declare class ActorBase {
     detener_musica(): void;
     recortar(x: number, y: number, ancho: number, alto: number): void;
     eliminar_recortado(): void;
+    saltar(): void;
+    saludar(): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {

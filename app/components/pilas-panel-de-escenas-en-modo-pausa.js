@@ -21,7 +21,9 @@ export default Component.extend({
   },
 
   realizarActualizacion(data) {
-    this.set("actores", data.foto.actores);
+    if (!(this.get("isDestroyed") || this.get("isDestroying"))) {
+      this.set("actores", data.foto.actores);
+    }
   },
 
   actions: {
@@ -33,7 +35,6 @@ export default Component.extend({
     seleccionarEscena() {
       this.set("actorSeleccionado", null);
       this.bus.trigger("selecciona_la_escena_completa_en_modo_pausa");
-    }
-  }
+    },
+  },
 });
-
