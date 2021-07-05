@@ -15,8 +15,11 @@ export default Component.extend({
   estado: null,
   contexto: null,
   mantenerFoco: false,
-  classNames: ["flex1", "flex", "overflow-hidden", "unseletable", "bg-fondo-canvas"],
-  classNameBindings: ["altoFijo:h250"],
+  classNames: ["flex1", "flex", "unseletable", "bg-fondo-canvas"],
+  classNameBindings: ["altoFijo:h250", 
+    "activarScroll:items-center", 
+    "activarScroll:overflow-scroll", 
+    "desactivarScroll:overflow-hidden"],
   altoFijo: false,
   porcentajeDeCarga: 0,
   cuando_termina_de_cargar: null,
@@ -182,6 +185,22 @@ export default Component.extend({
     }
 
     return Error(`No se puede usar el modoZoom ${this.modoZoom}`);
+  }),
+
+  clasesDeAcuerdoAlModoZoom: computed("modoZoom", function() {
+    if (this.modoZoom === 1) {
+      return `flex1 height-revert`;
+    } else {
+      return `overflow-scroll`;
+    }
+  }),
+
+  activarScroll: computed("modoZoom", function() {
+    return (this.modoZoom !== 1);
+  }),
+
+  desactivarScroll: computed("modoZoom", function() {
+    return (this.modoZoom === 1);
   }),
 
   cargar_escena({ escena, proyecto }) {
