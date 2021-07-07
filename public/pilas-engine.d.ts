@@ -863,7 +863,7 @@ declare class ActorBase {
     set estatico(estatico: boolean);
     set dinamico(dinamico: boolean);
     get dinamico(): boolean;
-    impulsar(x: any, y: any): void;
+    impulsar(x: number, y: number): void;
     get velocidad_x(): number;
     set velocidad_x(valor: number);
     get velocidad_y(): number;
