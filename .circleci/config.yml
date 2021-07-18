@@ -33,28 +33,12 @@ jobs:
       - run: sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
       - run: make pilas_manuales_descargables
       - run: /tmp/go/bin/ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` manuales/
-  actualizar-sitio:
-    docker:
-      - image: circleci/node:12.16.1-stretch-browsers
-    steps:
-      - checkout
-      - run: make iniciar
-      - run: echo -e "Host pilas-engine.com.ar\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-      - run:
-          name: "Realizando deploy a dokku producción ..."
-          command: make deploy_a_dokku
 workflows:
   version: 2
   principal:
     jobs:
       - tests
       - binarios:
-          filters:
-            tags:
-              only: /^v\d+.\d+.\d+/
-            branches:
-              ignore: /.*/
-      - actualizar-sitio:
           filters:
             tags:
               only: /^v\d+.\d+.\d+/

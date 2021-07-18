@@ -71,6 +71,7 @@ comandos:
 	@echo "    ${G}version_minor${N}                Genera una versión MINOR."
 	@echo "    ${G}version_major${N}                Genera una versión MAJOR."
 	@echo "    ${G}binarios${N}                     Genera los binarios de la aplicación."
+	@echo "    ${G}deploy${N}                       Sube una versión productiva al servidor."
 	@echo ""
 	@echo ""
 
@@ -105,15 +106,21 @@ prettier:
 	${BIN_PRETTIER} --write 'app/**/*.js'
 	${BIN_PRETTIER} ./node_modules/.bin/prettier --write 'tests/**/*.js'
 
+cuidado_falta_deploy:
+	@echo ""
+	@echo "${Y}CUIDADO: AQUÍ NO SE ACTUALIZA DE LA VERSIÓN ONLINE.${N}"
+	@echo "${Y}CUIDADO: (ejecuta make deploy para actualizar).${N}"
+	@echo ""
+
 version: version_patch
 
-version_patch:
+version_patch: cuidado_falta_deploy
 	${BIN_EMBER} release
 
-version_minor:
+version_minor: cuidado_falta_deploy
 	${BIN_EMBER} release --minor
 
-version_major:
+version_major: cuidado_falta_deploy
 	${BIN_EMBER} release --major
 
 electron:
@@ -140,13 +147,12 @@ test:
 	$(call log, "Ejecutando test...")
 	${BIN_EMBER} test
 
-deploy_a_dokku:
-	rm -rf dist
+deploy:
 	@echo "Compilando la aplicación en modo producción..."
-	${BIN_EMBER} build --prod
-	@echo "Subiendo contenido al sitio de pilas (producción)."
-	touch dist/.static
-	cd dist; git init; git add .; git config user.email "hugoruscitti@gmail.com"; git config user.name "Hugo Ruscitti"; git commit -am 'rebuild' --allow-empty; git remote add dokku dokku@pilas-engine.com.ar:pilas-engine; git push dokku master -f
+	ember build --prod  --output-path docs
+	git add docs
+	git commit -m "Realizando deploy"
+	git push
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
