@@ -494,23 +494,23 @@ if(a){var l=a.mainline.keyframe_array,p=Keyframe.find(l,c),u=(p+1)%l.length,_=l[
 f<h&&(f=a.length)
 var m=c
 if(h!==f){var y=(c-h)/(f-h)
-y=_.curve.evaluate(y),m=tween(h,f,y)}var g=a.timeline_array,b=_.bone_ref_array,v=e.bone_array
-b.forEach((function(t,e){var i=t.timeline_index,o=g[i],r=o.keyframe_array,n=t.keyframe_index,s=(n+1)%r.length,c=r[n],l=r[s],p=c.time,u=l.time
+y=_.curve.evaluate(y),m=tween(h,f,y)}var b=a.timeline_array,g=_.bone_ref_array,v=e.bone_array
+g.forEach((function(t,e){var i=t.timeline_index,o=b[i],r=o.keyframe_array,n=t.keyframe_index,s=(n+1)%r.length,c=r[n],l=r[s],p=c.time,u=l.time
 u<p&&(u=a.length)
 var _=0
 p!==u&&(_=(m-p)/(u-p),_=c.curve.evaluate(_))
 var d=v[e]=v[e]||new Bone,h=c,f=l
-d.copy(h.bone).tween(f.bone,_,c.spin),d.name=o.name,d.parent_index=t.parent_index})),v.length=b.length,v.forEach((function(t){var e=v[t.parent_index]
+d.copy(h.bone).tween(f.bone,_,c.spin),d.name=o.name,d.parent_index=t.parent_index})),v.length=g.length,v.forEach((function(t){var e=v[t.parent_index]
 e?Space.combine(e.world_space,t.local_space,t.world_space):t.world_space.copy(t.local_space)}))
 var x=_.object_ref_array,j=e.object_array
-if(x.forEach((function(t,e){var i=t.timeline_index,o=g[i],r=o.keyframe_array,n=t.keyframe_index,s=(n+1)%r.length,c=r[n],l=r[s],p=c.time,u=l.time
+if(x.forEach((function(t,e){var i=t.timeline_index,o=b[i],r=o.keyframe_array,n=t.keyframe_index,s=(n+1)%r.length,c=r[n],l=r[s],p=c.time,u=l.time
 u<p&&(u=a.length)
 var _=0
 switch(p!==u&&(_=(m-p)/(u-p),_=c.curve.evaluate(_)),o.type){case"sprite":var d=j[e]=j[e]||new SpriteObject,h=c,f=l
 d.copy(h.sprite).tween(f.sprite,_,c.spin),d.name=o.name,d.parent_index=t.parent_index,d.z_index_secundario=t.z_index
 break
-case"bone":var y=j[e]=j[e]||new Bone,b=c,v=l
-y.copy(b.bone).tween(v.bone,_,c.spin),y.name=o.name,y.parent_index=t.parent_index
+case"bone":var y=j[e]=j[e]||new Bone,g=c,v=l
+y.copy(g.bone).tween(v.bone,_,c.spin),y.name=o.name,y.parent_index=t.parent_index
 break
 case"box":var x=j[e]=j[e]||new BoxObject,w=c,z=l
 x.copy(w.box).tween(z.box,_,c.spin),x.name=o.name,x.parent_index=t.parent_index
@@ -546,12 +546,12 @@ var f=i.obj_info_map[t.name]
 if(f){var m=f
 l=(.5-d.pivot.x)*m.w,p=(.5-d.pivot.y)*m.h
 Space.translate(d.world_space,l,p)}break
-case"point":var y=t,g=v[y.parent_index]
-g?Space.combine(g.world_space,y.local_space,y.world_space):y.world_space.copy(y.local_space)
+case"point":var y=t,b=v[y.parent_index]
+b?Space.combine(b.world_space,y.local_space,y.world_space):y.world_space.copy(y.local_space)
 break
 case"sound":break
-case"entity":var b=t,x=v[b.parent_index]
-x?Space.combine(x.world_space,b.local_space,b.world_space):b.world_space.copy(b.local_space)
+case"entity":var g=t,x=v[g.parent_index]
+x?Space.combine(x.world_space,g.local_space,g.world_space):g.world_space.copy(g.local_space)
 break
 case"variable":break
 default:throw new Error(t.type)}})),j.forEach((function(i){switch(i.type){case"entity":var a=i,o=a.pose=a.pose||new t(e.data),r=o.data.entity_keys[a.entity_index]
@@ -681,7 +681,7 @@ this.matter.world.on("beforeupdate",(function(t){var i=this.engine.world.bodies.
 i.map((function(t){try{var a=i.filter((function(e){return e.id!==t.id}))
 e.Phaser.Physics.Matter.Matter.Query.collides(t,a).map((function(t){var e=t.bodyA,i=t.bodyB
 if(e.gameObject&&e.gameObject.actor&&i.gameObject&&i.gameObject.actor){var a=e.gameObject.actor,o=i.gameObject.actor
-if(a._vivo&&o._vivo){var r=a.cuando_colisiona(o),n=o.cuando_colisiona(a);(r||n)&&(t.isActive=!1)}}}))}catch(o){e.mensajes.emitir_excepcion_al_editor(o,"al detectar colisiones")}}))})),this.matter.world.on("collisionstart",(function(e){try{for(var i=0;i<e.pairs.length;i++){var a=e.pairs[i],o=a.bodyA,r=a.bodyB
+if(a._vivo&&o._vivo){var r=a.cuando_colisiona(o),n=o.cuando_colisiona(a);(r||n)&&(t.isActive=!1),a._bloques_cuando_colisiona&&(r=a._bloques_cuando_colisiona(o)),o._bloques_cuando_colisiona&&(n=o._bloques_cuando_colisiona(a)),(r||n)&&(t.isActive=!1)}}}))}catch(o){e.mensajes.emitir_excepcion_al_editor(o,"al detectar colisiones")}}))})),this.matter.world.on("collisionstart",(function(e){try{for(var i=0;i<e.pairs.length;i++){var a=e.pairs[i],o=a.bodyA,r=a.bodyB
 if(o.gameObject&&o.gameObject.actor&&r.gameObject&&r.gameObject.actor){var n=o.gameObject.actor,s=r.gameObject.actor
 n.colisiones.push(s),s.colisiones.push(n)
 var c=n.cuando_comienza_una_colision(s),l=s.cuando_comienza_una_colision(n);(c||l)&&(a.isActive=!1)}else r.sensor_del_actor&&o.gameObject&&r.sensor_del_actor!==o.gameObject.actor&&r.colisiones.push(o.gameObject.actor),o.sensor_del_actor&&r.gameObject&&o.sensor_del_actor!==r.gameObject.actor&&o.colisiones.push(r.gameObject.actor)}}catch(p){t.pilas.mensajes.emitir_excepcion_al_editor(p,"crear la escena")}})),this.matter.world.on("collisionactive",(function(t,e,i){for(var a=0;a<t.pairs.length;a++){var o=t.pairs[a],r=o.bodyA,n=o.bodyB
@@ -712,7 +712,7 @@ return p=this.pilas.utilidades.combinar_propiedades(p,entidad),actor.pre_iniciar
 return eval(codigo_completo)},ModoEjecucion.prototype.obtener_codigo_para_exportar_clases=function(t){var e=/var (.*) \= \/\*\* @class/g,i=/var\ (\w+)/,a=[]
 t.match(e)&&(a=t.match(e).map((function(t){return t.match(i)[1]})))
 for(var o={},r=0;r<a.length;r++){var n=a[r]
-o[n]=n}return"__clases = "+JSON.stringify(o).replace(/"/g,"")+";\n__clases;"},ModoEjecucion.prototype.guardar_parametros_en_atributos=function(t){this.pilas=t.pilas,this.ancho=t.proyecto.ancho,this.alto=t.proyecto.alto,this.nombre_de_la_escena_inicial=t.nombre_de_la_escena_inicial,this.proyecto=t.proyecto,this.codigo=t.codigo,this.permitir_modo_pausa=t.permitir_modo_pausa,this.bloques=t.proyecto.bloques,console.log("TODO: extraer los códigos de bloques desde datos.proyecto")},ModoEjecucion.prototype.update=function(){if(!this.con_error){_super.prototype.update.call(this,this.pilas.escena.actores)
+o[n]=n}return"__clases = "+JSON.stringify(o).replace(/"/g,"")+";\n__clases;"},ModoEjecucion.prototype.guardar_parametros_en_atributos=function(t){this.pilas=t.pilas,this.ancho=t.proyecto.ancho,this.alto=t.proyecto.alto,this.nombre_de_la_escena_inicial=t.nombre_de_la_escena_inicial,this.proyecto=t.proyecto,this.codigo=t.codigo,this.permitir_modo_pausa=t.permitir_modo_pausa,this.bloques=t.proyecto.bloques},ModoEjecucion.prototype.update=function(){if(!this.con_error){_super.prototype.update.call(this,this.pilas.escena.actores)
 try{this.pilas.escena.iniciar_animaciones_pendientes(),this.pilas.escena.pre_actualizar(),this.pilas.escena.actualizar(),this.pilas.escena.actualizar_actores(),this.pilas.escena.reproducir_sonidos_pendientes(),this.pilas.depurador.fisica_en_modo_ejecucion?(this.canvas_fisica.setAlpha(1),this.actualizar_canvas_fisica()):this.canvas_fisica.setAlpha(0),this.posicionar_fondo(this.pilas.escena.desplazamiento_del_fondo_x,this.pilas.escena.desplazamiento_del_fondo_y)}catch(t){return this.pilas.mensajes.emitir_excepcion_al_editor(t,"actualizando escena")}this.permitir_modo_pausa&&this.guardar_foto_de_entidades(),this.pilas.mensajes.emitir_mensaje_al_editor("codigo_ejecutado",{instrumentacion:this.pilas.instrumentacion,instrumentacion_de_bloques:this.pilas.instrumentacion_de_bloques}),this.pilas.limpiar_traza_de_ejecucion()}},ModoEjecucion.prototype.guardar_foto_de_entidades=function(){if(this.pilas.instrumentacion){var t=JSON.parse(JSON.stringify(this.pilas.instrumentacion)),e=JSON.parse(JSON.stringify(this.pilas.instrumentacion_de_bloques))
 this.pilas.historia.serializar_escena(this.pilas.escena,t,e)}},ModoEjecucion.prototype.dibujar_punto_de_control=function(t,e,i){t.fillStyle(16777215,1)
 var a=this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(e,i),o=a.x,r=a.y
