@@ -106,6 +106,14 @@ prettier:
 	${BIN_PRETTIER} --write 'app/**/*.js'
 	${BIN_PRETTIER} ./node_modules/.bin/prettier --write 'tests/**/*.js'
 
+deploy:
+	@echo "Compilando la aplicación en modo producción..."
+	ember build --prod  --output-path docs
+	echo "app.pilas-engine.com.ar" > docs/CNAME
+	git add docs
+	git commit -m "Realizando deploy"
+	git push
+
 cuidado_falta_deploy:
 	@echo ""
 	@echo "${Y}CUIDADO: AQUÍ NO SE ACTUALIZA DE LA VERSIÓN ONLINE.${N}"
@@ -146,13 +154,6 @@ compilar_pilas_live:
 test:
 	$(call log, "Ejecutando test...")
 	${BIN_EMBER} test
-
-deploy:
-	@echo "Compilando la aplicación en modo producción..."
-	ember build --prod  --output-path docs
-	git add docs
-	git commit -m "Realizando deploy"
-	git push
 
 binarios:
 	$(call task, "Comenzando a generar binarios.")
