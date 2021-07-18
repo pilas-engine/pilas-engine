@@ -1,0 +1,775 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 2,
+  "imagenes": [],
+  "animaciones": [
+    {
+      "nombre": "mini_explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:mini-explosion/explosion_0",
+          "sprite": "mini-explosion-explosion_0"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_1",
+          "sprite": "mini-explosion-explosion_1"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_2",
+          "sprite": "mini-explosion-explosion_2"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_3",
+          "sprite": "mini-explosion-explosion_3"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_4",
+          "sprite": "mini-explosion-explosion_4"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_5",
+          "sprite": "mini-explosion-explosion_5"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_6",
+          "sprite": "mini-explosion-explosion_6"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:explosion/explosion_001",
+          "sprite": "explosion-explosion_001"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_002",
+          "sprite": "explosion-explosion_002"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_003",
+          "sprite": "explosion-explosion_003"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_004",
+          "sprite": "explosion-explosion_004"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_005",
+          "sprite": "explosion-explosion_005"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_006",
+          "sprite": "explosion-explosion_006"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_007",
+          "sprite": "explosion-explosion_007"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_008",
+          "sprite": "explosion-explosion_008"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_009",
+          "sprite": "explosion-explosion_009"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_010",
+          "sprite": "explosion-explosion_010"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_011",
+          "sprite": "explosion-explosion_011"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_012",
+          "sprite": "explosion-explosion_012"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_013",
+          "sprite": "explosion-explosion_013"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_014",
+          "sprite": "explosion-explosion_014"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_015",
+          "sprite": "explosion-explosion_015"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_1",
+          "sprite": "pixelados-pixel_player_1"
+        },
+        {
+          "nombre": "imagenes:pixelados/pixel_player_2",
+          "sprite": "pixelados-pixel_player_2"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_0",
+          "sprite": "pixelados-pixel_player_0"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "fantasma_azul_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_0",
+          "sprite": "pacman-fantasma_azul_0"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_1",
+          "sprite": "pacman-fantasma_azul_1"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "fantasma_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_6",
+          "sprite": "pacman-fantasma_6"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_7",
+          "sprite": "pacman-fantasma_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "moneda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:monedas/moneda_0",
+          "sprite": "monedas-moneda_0"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_1",
+          "sprite": "monedas-moneda_1"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_2",
+          "sprite": "monedas-moneda_2"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_3",
+          "sprite": "monedas-moneda_3"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_4",
+          "sprite": "monedas-moneda_4"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_5",
+          "sprite": "monedas-moneda_5"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_6",
+          "sprite": "monedas-moneda_6"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_7",
+          "sprite": "monedas-moneda_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "pacman_come",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "pacman-pacman_4"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_5",
+          "sprite": "pacman-pacman_5"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_6",
+          "sprite": "pacman-pacman_6"
+        }
+      ],
+      "velocidad": "40"
+    },
+    {
+      "nombre": "pacman_espera",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "pacman-pacman_4"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "nave_girando_a_la_derecha",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_derecha_1",
+          "sprite": "nave-nave_derecha_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_derecha_2",
+          "sprite": "nave-nave_derecha_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_girando_a_la_izquierda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_izquierda_1",
+          "sprite": "nave-nave_izquierda_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_izquierda_2",
+          "sprite": "nave-nave_izquierda_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanzando",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_en_reposo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_reposo",
+          "sprite": "nave-nave_reposo"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "gallina_vuela",
+      "cuadros": [
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_1",
+          "sprite": "gallina-gallina_vuela_1"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "gallina-gallina_vuela_2"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_3",
+          "sprite": "gallina-gallina_vuela_3"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "gallina-gallina_vuela_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanza",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_salta",
+          "sprite": "conejo-conejo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_parado1",
+          "sprite": "conejo-conejo_parado1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_parado2",
+          "sprite": "conejo-conejo_parado2"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "conejo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_camina1",
+          "sprite": "conejo-conejo_camina1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_camina2",
+          "sprite": "conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_camina_1",
+          "sprite": "bmo-bmo_camina_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_camina_2",
+          "sprite": "bmo-bmo_camina_2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_escala",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_escala_1",
+          "sprite": "bmo-bmo_escala_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_escala_2",
+          "sprite": "bmo-bmo_escala_2"
+        }
+      ],
+      "velocidad": 10
+    }
+  ],
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "escena_de_juego",
+        "codigo": "class escena_de_juego extends Escena {\n    iniciar() {\n        // Al comenzar el juego clona varias veces el bloque\n        // de color verde.\n\n        for (let fila = 0; fila < 3; fila++) {\n            for (let columna = 0; columna < 6; columna++) {\n                this.pilas.clonar_en(\"bloque\", -180 + columna * 70, 100 + fila * 40)\n            }\n        }\n\n    }\n\n    actualizar() {\n\n    }\n\n    // Se llama cuando el actor pelota sale de la pantalla\n    // y envía el mensajes \"perdio\" con la función\n    // this.pilas.enviar_mensaje_global(\"perdio\").\n    cuando_llega_el_mensaje_perdio() {\n        this.pilas.clonar(\"texto_has_perdido\");\n        this.pilas.clonar(\"reiniciar_escena\");\n\n        let jugador = this.pilas.obtener_actor_por_nombre(\"jugador\");\n        jugador.eliminar();\n\n        this.pilas.clonar_en(\"explosion\", jugador.x, jugador.y);\n        this.pilas.camara.vibrar(2, 0.25)\n    }\n\n    // Se llama cuando el actor pelota logra eliminar un bloque\n    // y envía el mensajes \"elimina_bloque\" con la función\n    // this.pilas.enviar_mensaje_global(\"elimina_bloque\").\n    cuando_llega_el_mensaje_elimina_bloque() {\n        let cantidad = this.pilas.obtener_todos_los_actores_con_la_etiqueta(\"bloque\").length;\n\n        if (cantidad === 0) {\n            let pelota = this.pilas.obtener_actor_por_nombre(\"pelota_azul\");\n            pelota.eliminar();\n            this.pilas.clonar(\"texto_gana\")\n        }\n    }\n}"
+      },
+      {
+        "nombre": "escena_juego_perdido",
+        "codigo": "class escena_juego_perdido extends Escena {\n\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n\n}"
+      },
+      {
+        "nombre": "escena_ha_ganado",
+        "codigo": "class escena_ha_ganado extends Escena {\n\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "plataforma",
+        "codigo": "// @ts-ignore\nclass plataforma extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "caja",
+        "codigo": "// @ts-ignore\nclass caja extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "pelota_azul",
+        "codigo": "// @ts-ignore\nclass pelota_azul extends Actor {\n    iniciar() {}\n\n    // Este método se llama automáticamente\n    // cuando el jugador pulsa la tecla ESPACIO.\n    // Mirá el código de jugar y buscá la llamada\n    // a la función pelota.enviar_mensaje(\"empujar\")\n    cuando_llega_el_mensaje_empujar() {\n        this.velocidad_x = 5;\n        this.velocidad_y = 5;\n    }\n\n    actualizar() {\n        //realiza el movimiento de la pelota.\n        this.x += this.velocidad_x;\n        this.y += this.velocidad_y;\n\n        this.actualizar_posicion_para_no_salir_de_la_pantalla();\n        this.actualizar_colision_con_el_jugador();\n        this.verificar_si_el_jugador_perdio();\n    }\n\n    actualizar_posicion_para_no_salir_de_la_pantalla() {\n        // Evita que salga por el borde derecho.\n        if (this.x > 240) {\n            this.x = 240;\n            this.velocidad_x *= -1;\n        }\n\n        // Evita que salga por el borde izquierdo.\n        if (this.x < -240) {\n            this.x = -240;\n            this.velocidad_x *= -1;\n        }\n\n        // Evita que salga por arriba.\n        if (this.y > 240) {\n            this.y = 240;\n            this.velocidad_y *= -1;\n        }\n    }\n\n    actualizar_colision_con_el_jugador() {\n        // Si la pelota está por colisionar con el jugador, se\n        // intenta verificar si el jugador está en posición\n        // de volver a empujar la pelota hacia arriba o no.\n\n        if (this.y < -200 && this.y > -250) {\n            let jugador = this.pilas.obtener_actor_por_nombre(\"jugador\");\n\n            let borde_izquierdo_del_jugador = jugador.x - 50;\n            let borde_derecho_del_jugador = jugador.x + 50;\n\n            // si está colisionando con el jugador.\n            if (this.x > borde_izquierdo_del_jugador && this.x < borde_derecho_del_jugador) {\n                // coloca la pelota justo en contacto con el jugador.\n                this.y = -200;\n\n                this.velocidad_y *= -1;\n\n                // elije la velocidad_x en base a dónde colisionó\n                // con el jugador usando una regla de 3 simple.\n                let diferencia = this.x - jugador.x;\n                this.velocidad_x = (diferencia * 10) / 50;\n            }\n\n        }\n    }\n\n    verificar_si_el_jugador_perdio() {\n        if (this.y < -250) {\n            this.eliminar();\n            this.enviar_mensaje_global(\"perdio\");\n        }\n    }\n\n    cuando_colisiona(actor: Actor) {\n        if (actor.tiene_etiqueta(\"bloque\")) {\n            let izquierda_del_bloque = actor.x - 31;\n            let derecha_del_bloque = actor.x + 31;\n\n            // Si colisiona por abajo o arriba del bloque se empuja a la pelota\n            // verticalmente\n            if (izquierda_del_bloque < this.x && this.x < derecha_del_bloque) {\n                actor.eliminar();\n                this.velocidad_y *= -1;\n            } else {\n                actor.eliminar();\n                // en caso contrario, el golpe se tendría que haber dado\n                // horizontalmente, así que se empuja a la pelota horizontalmente.\n                this.velocidad_x *= -1;\n            }\n\n\n            // Emite un mensaje global para avisale al actor\n            // texto_bloques que vuelva a calcular cuantos\n            // bloques hay en el escenario.\n            //\n            // Este mensaje también lo recibe la escena\n            // del juego, y la utiliza para saber si tiene\n            // que decirle al jugador si pasó de nivel.\n            this.enviar_mensaje_global(\"elimina_bloque\");\n\n        }\n    }\n}"
+      },
+      {
+        "nombre": "techo",
+        "codigo": "// @ts-ignore\nclass techo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo",
+        "codigo": "// @ts-ignore\nclass suelo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "jugador",
+        "codigo": "// @ts-ignore\nclass jugador extends Actor {\n\n    fase = \"comenzando\";\n\n    iniciar() {\n\n    }\n\n    actualizar() {\n        let velocidad = 8;\n\n        // permite mover el jugador de izquierda a derecha.\n        if (this.control.izquierda) {\n            this.x -= velocidad;\n        }\n\n        if (this.control.derecha) {\n            this.x += velocidad;\n        }\n\n        // limita el movimiento para que no salga de la pantalla.\n        if (this.x < -200) {\n            this.x = -200;\n        }\n\n        if (this.x > 200) {\n            this.x = 200;\n        }\n\n        // en la fase inicial, la pelota debe seguir el\n        // movimiento del jugador.\n        if (this.fase === \"comenzando\") {\n            let pelota = this.pilas.obtener_actor_por_nombre(\"pelota_azul\");\n            pelota.x = this.x;\n        }\n    }\n\n    cuando_pulsa_tecla(tecla) {\n        // Permite disparar la pelota cuando se pulsa la tecla espacio.\n        if (this.fase === \"comenzando\") {\n            if (tecla === \"espacio\") {\n                let pelota = this.pilas.obtener_actor_por_nombre(\"pelota_azul\");\n\n                pelota.enviar_mensaje(\"empujar\");\n\n                this.fase = \"jugando\";\n                this.eliminar_cartel_inicial();\n            }\n        }\n    }\n\n    eliminar_cartel_inicial() {\n        let cartel = this.pilas.obtener_actor_por_nombre(\"cartel\");\n        cartel.eliminar();\n    }\n}"
+      },
+      {
+        "nombre": "pelota",
+        "codigo": "// @ts-ignore\nclass pelota extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "cartel",
+        "codigo": "// @ts-ignore\nclass cartel extends ActorTextoBase {}"
+      },
+      {
+        "nombre": "bloque",
+        "codigo": "// @ts-ignore\nclass bloque extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "texto_has_perdido",
+        "codigo": "// @ts-ignore\nclass texto_has_perdido extends ActorTextoBase {}"
+      },
+      {
+        "nombre": "reiniciar_escena",
+        "codigo": "// @ts-ignore\nclass reiniciar_escena extends ActorTextoBase {\n\n    cuando_hace_click() {\n        this.pilas.reiniciar_escena();\n    }\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+      },
+      {
+        "nombre": "explosion",
+        "codigo": "// @ts-ignore\nclass explosion extends Actor {\n\n    iniciar() {\n        this.animacion = \"explosion\";\n        this.pilas.reproducir_sonido(\"explosion\");\n    }\n\n    actualizar() {}\n\n    cuando_finaliza_animacion(nombre: string) {\n        this.eliminar();\n    }\n}"
+      },
+      {
+        "nombre": "texto_bloques",
+        "codigo": "// @ts-ignore\nclass texto_bloques extends ActorTextoBase {\n\n    // este método se invoca cuando se llama a la función \n    // \"this.pilas.enviar_mensaje_global('elimina_bloque')\" desde el código\n    // de la pelota.\n    cuando_llega_el_mensaje_elimina_bloque() {\n        let cantidad = this.pilas.obtener_todos_los_actores_con_la_etiqueta(\"bloque\").length;\n        this.texto = `Cantidad de bloques: ${cantidad}`;\n    }\n}"
+      },
+      {
+        "nombre": "texto_gana",
+        "codigo": "// @ts-ignore\nclass texto_gana extends ActorTextoBase {}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "escena_de_juego",
+      "id": 2,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-madera",
+      "actores": [
+        {
+          "x": 0,
+          "y": -223.81995661605202,
+          "z": 0,
+          "imagen": "imagenes:objetos/paleta",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 101,
+          "figura_alto": 25,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1494,
+          "activo": true,
+          "nombre": "jugador",
+          "habilidades": []
+        },
+        {
+          "x": 0,
+          "y": -200,
+          "z": 0,
+          "imagen": "imagenes:objetos/pelota_azul",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "circulo",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 12,
+          "figura_sin_rotacion": true,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1998,
+          "activo": true,
+          "nombre": "pelota_azul",
+          "habilidades": [
+            "oscilar rotacion"
+          ]
+        },
+        {
+          "x": 0,
+          "y": -26,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 5,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "texto": "Pulsa la tecla \"Espacio\" para comenzar",
+          "id": 1533,
+          "activo": true,
+          "nombre": "cartel",
+          "habilidades": []
+        },
+        {
+          "x": 0,
+          "y": 100,
+          "z": 0,
+          "imagen": "imagenes:objetos/bloque_arkanoid_verde",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "bloque",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 59,
+          "figura_alto": 28,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1075,
+          "activo": false,
+          "nombre": "bloque",
+          "habilidades": []
+        },
+        {
+          "x": 0,
+          "y": 232.311320754717,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "texto": "",
+          "id": 1892,
+          "activo": true,
+          "nombre": "texto_bloques",
+          "habilidades": []
+        }
+      ]
+    },
+    {
+      "id": 1214,
+      "nombre": "escena_juego_perdido",
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "x": 0,
+          "y": 61,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "texto": "Lo siento, has perdido",
+          "id": 1915,
+          "activo": true,
+          "nombre": "texto_has_perdido",
+          "habilidades": []
+        },
+        {
+          "x": -4,
+          "y": 0,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "black",
+          "magnitud": 18,
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Reiniciar escena",
+          "id": 1850,
+          "activo": true,
+          "nombre": "reiniciar_escena",
+          "habilidades": []
+        },
+        {
+          "x": 0,
+          "y": -200,
+          "z": 0,
+          "imagen": "imagenes:explosion/explosion_001",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "explosion",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1833,
+          "activo": true,
+          "nombre": "explosion",
+          "habilidades": []
+        }
+      ]
+    },
+    {
+      "id": 1686,
+      "nombre": "escena_ha_ganado",
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "texto": "¡ Ganaste !",
+          "id": 1530,
+          "activo": true,
+          "nombre": "texto_gana",
+          "habilidades": []
+        }
+      ]
+    }
+  ]
+}

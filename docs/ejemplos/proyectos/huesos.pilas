@@ -1,0 +1,111 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 1,
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "escena1",
+        "codigo": "class escena1 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n        let robot = this.pilas.obtener_actor_por_nombre(\"robot\");\n        this.pilas.observar(\"animacion\", robot.huesos.animacion_actual);\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "plataforma",
+        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "caja",
+        "codigo": "class caja extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"caja\",\n        etiqueta: \"caja\",\n        figura: \"rectangulo\",\n        figura_ancho: 45,\n        figura_alto: 45,\n        figura_rebote: 0.9\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "pelota",
+        "codigo": "class pelota extends Actor {\n    propiedades = {\n        imagen: \"pelota\",\n        figura: \"circulo\",\n        figura_radio: 25\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "techo",
+        "codigo": "class techo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"techo\",\n        y: +255,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo",
+        "codigo": "class suelo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"suelo\",\n        y: -250,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "robot",
+        "codigo": "class robot extends Actor {\n    propiedades = {\n        imagen: \"imagenes:objetos/robot\",\n        centro_y: 1\n    };\n\n    contenedor: any;\n    huesos: Huesos;\n\n    iniciar() {\n        this.imagen = \"imagenes:basicos/invisible\";\n        this.contenedor = this.pilas.modo.add.container();\n        this.huesos = new Huesos(this.pilas, \"robot\", \"atlas-robot\", this.contenedor);\n        this.huesos.definir_animacion(\"run\");\n    }\n\n    actualizar() {\n        this.huesos.actualizar_animacion(20);\n    }\n\n    pre_actualizar() {\n        this.pilas.utilidades.sincronizar_contenedor(this.contenedor, this.sprite);\n    }\n}"
+      },
+      {
+        "nombre": "boton",
+        "codigo": "class boton extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        fondo: \"imagenes:redimensionables/gris\",\n        texto: \"Botón\",\n        es_texto: true\n    };\n\n    avanzar_animacion() {\n        let actor = this.pilas.obtener_actor_por_nombre(\"robot\");\n\n        let animacion = actor.huesos.obtener_siguiente_animacion();\n        actor.huesos.definir_animacion(animacion)\n    }\n\n    cuando_hace_click() {\n        this.avanzar_animacion();\n        this.y -= 2;\n\n        this.pilas.luego(0.2, () => {\n            this.y += 2;\n        });\n    }\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "escena1",
+      "id": 1,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "imagen": "imagenes:objetos/robot",
+          "centro_x": 0.5,
+          "centro_y": 1,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1425,
+          "nombre": "robot",
+          "habilidades": []
+        },
+        {
+          "x": 3.138075313807576,
+          "y": -104.60251046025104,
+          "z": 0,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Avanzar animación",
+          "id": 1822,
+          "nombre": "boton",
+          "habilidades": []
+        }
+      ]
+    }
+  ]
+}

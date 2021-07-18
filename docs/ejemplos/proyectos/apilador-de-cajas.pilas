@@ -1,0 +1,726 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 2,
+  "imagenes": [],
+  "animaciones": [
+    {
+      "nombre": "mini_explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:mini-explosion/explosion_0",
+          "sprite": "mini-explosion-explosion_0"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_1",
+          "sprite": "mini-explosion-explosion_1"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_2",
+          "sprite": "mini-explosion-explosion_2"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_3",
+          "sprite": "mini-explosion-explosion_3"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_4",
+          "sprite": "mini-explosion-explosion_4"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_5",
+          "sprite": "mini-explosion-explosion_5"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_6",
+          "sprite": "mini-explosion-explosion_6"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:explosion/explosion_001",
+          "sprite": "explosion-explosion_001"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_002",
+          "sprite": "explosion-explosion_002"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_003",
+          "sprite": "explosion-explosion_003"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_004",
+          "sprite": "explosion-explosion_004"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_005",
+          "sprite": "explosion-explosion_005"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_006",
+          "sprite": "explosion-explosion_006"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_007",
+          "sprite": "explosion-explosion_007"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_008",
+          "sprite": "explosion-explosion_008"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_009",
+          "sprite": "explosion-explosion_009"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_010",
+          "sprite": "explosion-explosion_010"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_011",
+          "sprite": "explosion-explosion_011"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_012",
+          "sprite": "explosion-explosion_012"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_013",
+          "sprite": "explosion-explosion_013"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_014",
+          "sprite": "explosion-explosion_014"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_015",
+          "sprite": "explosion-explosion_015"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_1",
+          "sprite": "pixelados-pixel_player_1"
+        },
+        {
+          "nombre": "imagenes:pixelados/pixel_player_2",
+          "sprite": "pixelados-pixel_player_2"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_0",
+          "sprite": "pixelados-pixel_player_0"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "fantasma_azul_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_0",
+          "sprite": "pacman-fantasma_azul_0"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_1",
+          "sprite": "pacman-fantasma_azul_1"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "fantasma_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_6",
+          "sprite": "pacman-fantasma_6"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_7",
+          "sprite": "pacman-fantasma_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "moneda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:monedas/moneda_0",
+          "sprite": "monedas-moneda_0"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_1",
+          "sprite": "monedas-moneda_1"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_2",
+          "sprite": "monedas-moneda_2"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_3",
+          "sprite": "monedas-moneda_3"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_4",
+          "sprite": "monedas-moneda_4"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_5",
+          "sprite": "monedas-moneda_5"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_6",
+          "sprite": "monedas-moneda_6"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_7",
+          "sprite": "monedas-moneda_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "pacman_come",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "pacman-pacman_4"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_5",
+          "sprite": "pacman-pacman_5"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_6",
+          "sprite": "pacman-pacman_6"
+        }
+      ],
+      "velocidad": "40"
+    },
+    {
+      "nombre": "pacman_espera",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "pacman-pacman_4"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "nave_girando_a_la_derecha",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_derecha_1",
+          "sprite": "nave-nave_derecha_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_derecha_2",
+          "sprite": "nave-nave_derecha_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_girando_a_la_izquierda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_izquierda_1",
+          "sprite": "nave-nave_izquierda_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_izquierda_2",
+          "sprite": "nave-nave_izquierda_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanzando",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_en_reposo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_reposo",
+          "sprite": "nave-nave_reposo"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "gallina_vuela",
+      "cuadros": [
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_1",
+          "sprite": "gallina-gallina_vuela_1"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "gallina-gallina_vuela_2"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_3",
+          "sprite": "gallina-gallina_vuela_3"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "gallina-gallina_vuela_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanza",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_salta",
+          "sprite": "conejo-conejo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_parado1",
+          "sprite": "conejo-conejo_parado1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_parado2",
+          "sprite": "conejo-conejo_parado2"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "conejo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_camina1",
+          "sprite": "conejo-conejo_camina1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_camina2",
+          "sprite": "conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_camina_1",
+          "sprite": "bmo-bmo_camina_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_camina_2",
+          "sprite": "bmo-bmo_camina_2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_escala",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_escala_1",
+          "sprite": "bmo-bmo_escala_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_escala_2",
+          "sprite": "bmo-bmo_escala_2"
+        }
+      ],
+      "velocidad": 10
+    }
+  ],
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "escena",
+        "codigo": "class escena extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n        // se consulta si es que el fantasma sigue vivo y jugando.\n        if (this.pilas.existe_un_actor_llamado(\"fantasma\")) {\n            let fantasma = this.pilas.obtener_actor_por_nombre(\"fantasma\");\n            this.pilas.camara.y = (fantasma.y - 200);\n            this.pilas.camara.y = Math.max(this.pilas.camara.y, -500);\n        }\n    }\n\n}"
+      },
+      {
+        "nombre": "actores_pierde",
+        "codigo": "class actores_pierde extends Escena {\n\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "plataforma",
+        "codigo": "// @ts-ignore\nclass plataforma extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "pelota",
+        "codigo": "// @ts-ignore\nclass pelota extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "techo",
+        "codigo": "// @ts-ignore\nclass techo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo",
+        "codigo": "// @ts-ignore\nclass suelo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "fantasma",
+        "codigo": "// @ts-ignore\nclass fantasma extends Actor {\n    velocidad = 3;\n\n    iniciar() {}\n\n    actualizar() {\n        this.patrullar();\n        this.hacer_que_la_caja_siga_al_fantasma();\n    }\n\n    hacer_que_la_caja_siga_al_fantasma() {\n        let caja_invisible = this.pilas.obtener_actor_por_nombre(\"caja_invisible\");\n\n        caja_invisible.x = this.x;\n        caja_invisible.y = (this.y - 150);\n    }\n\n    patrullar() {\n        this.x += this.velocidad;\n\n        if (this.velocidad > 0) {\n            if (this.x > 180) {\n                this.x = 180;\n                this.velocidad *= -1;\n                this.espejado = false;\n            }\n        } else {\n            if (this.x < -180) {\n                this.x = -180;\n                this.velocidad *= -1;\n                this.espejado = true;\n            }\n        }\n\n    }\n\n    cuando_hace_click_en_la_pantalla() {\n        this.pilas.clonar_en(\"caja\", this.x, this.y);\n        this.y = [this.y + 50];\n        this.enviar_mensaje_global(\"aumentar_puntaje\")\n    }\n\n    cuando_llega_el_mensaje_perder() {\n        let pierde = this.pilas.clonar_en(\"fantasma_pierde\", this.x, this.y);\n        pierde.espejado = this.espejado;\n        pierde.decir(\"¡ Oh, no !\")\n        this.eliminar();\n\n        this.pilas.clonar(\"reiniciar\");\n    }\n}"
+      },
+      {
+        "nombre": "caja",
+        "codigo": "// @ts-ignore\nclass caja extends Actor {\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "plataforma",
+        "codigo": "// @ts-ignore\nclass plataforma extends Actor {\n\n  iniciar() {}\n}\n"
+      },
+      {
+        "nombre": "caja_invisible",
+        "codigo": "// @ts-ignore\nclass caja_invisible extends Actor {\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "fantasma_pierde",
+        "codigo": "// @ts-ignore\nclass fantasma_pierde extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "zona_perder",
+        "codigo": "// @ts-ignore\nclass zona_perder extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n\n    cuando_comienza_una_colision() {\n        this.pilas.enviar_mensaje_global(\"perder\");\n    }\n}"
+      },
+      {
+        "nombre": "reiniciar",
+        "codigo": "// @ts-ignore\nclass reiniciar extends ActorTextoBase {\n\n    iniciar() {\n        this.y = [this.pilas.camara.y];\n    }\n\n    cuando_hace_click() {\n        this.pilas.reiniciar_escena();\n    }\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+      },
+      {
+        "nombre": "caja",
+        "codigo": "// @ts-ignore\nclass caja extends Actor {\n\n  iniciar() {}\n}\n"
+      },
+      {
+        "nombre": "puntaje",
+        "codigo": "// @ts-ignore\nclass puntaje extends ActorTextoBase {\n    puntaje: number = 0;\n\n    iniciar() {\n        this.actualizar_texto();\n        this.fijo = true;\n        this.y = 220;\n    }\n\n    aumentar(cantidad: number = 1) {\n        this.puntaje += cantidad;\n        this.actualizar_texto();\n    }\n\n    actualizar_texto() {\n        this.texto = `PUNTAJE: ${this.puntaje}`;\n    }\n\n    cuando_llega_el_mensaje_aumentar_puntaje() {\n        this.aumentar(1);\n    }\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "escena",
+      "id": 2,
+      "ancho": 1000,
+      "alto": 1000,
+      "camara_x": 0,
+      "camara_y": -500,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "x": 2.0790020790020947,
+          "y": -496.8814968814969,
+          "z": 0,
+          "imagen": "imagenes:enemigos/fantasma_normal",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": true,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": true,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1872,
+          "activo": true,
+          "nombre": "fantasma",
+          "habilidades": []
+        },
+        {
+          "x": 8.316008316008322,
+          "y": -689.1891891891892,
+          "z": 0,
+          "imagen": "imagenes:plataformas/plataforma",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "plataforma",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 250,
+          "figura_alto": 40,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1768,
+          "activo": true,
+          "nombre": "plataforma",
+          "habilidades": []
+        },
+        {
+          "x": 3.1185031185029857,
+          "y": -626.8191268191267,
+          "z": -10,
+          "imagen": "imagenes:objetos/caja",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 45,
+          "etiqueta": "caja",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": false,
+          "figura_ancho": 45,
+          "figura_alto": 45,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0.9,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1438,
+          "activo": true,
+          "nombre": "caja_invisible",
+          "habilidades": []
+        },
+        {
+          "x": 3.1185031185031846,
+          "y": -731.8087318087319,
+          "z": 0,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 800,
+          "figura_alto": 22,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": true,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1793,
+          "activo": true,
+          "nombre": "zona_perder",
+          "habilidades": []
+        },
+        {
+          "x": 4.158004158004076,
+          "y": -645.5301455301455,
+          "z": 0,
+          "imagen": "imagenes:objetos/caja",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "caja",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": true,
+          "figura_ancho": 45,
+          "figura_alto": 45,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0.4,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1223,
+          "activo": true,
+          "nombre": "caja",
+          "habilidades": []
+        },
+        {
+          "x": 0,
+          "y": -280,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": true,
+          "color": "white",
+          "magnitud": 20,
+          "texto": "PUNTAJE: 0",
+          "id": 1746,
+          "activo": true,
+          "nombre": "puntaje",
+          "habilidades": []
+        }
+      ]
+    },
+    {
+      "id": 1356,
+      "nombre": "actores_pierde",
+      "ancho": 1000,
+      "alto": 1000,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "x": 2.842170943040401e-14,
+          "y": 40.54054054054055,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "black",
+          "magnitud": 18,
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Volver a jugar",
+          "id": 1618,
+          "activo": false,
+          "nombre": "reiniciar",
+          "habilidades": []
+        },
+        {
+          "x": 211.0187110187111,
+          "y": 197.50519750519754,
+          "z": 0,
+          "imagen": "imagenes:enemigos/fantasma_asustando",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1516,
+          "activo": false,
+          "nombre": "fantasma_pierde",
+          "habilidades": []
+        }
+      ]
+    }
+  ]
+}

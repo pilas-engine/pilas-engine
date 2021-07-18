@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      #game {
+        width: 100%;
+        height: 100%;
+        background-color: #424242;
+        text-align: center;
+      }
+
+      canvas {
+        width: auto;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        margin-left: 0 !important; /* Se agrega para que phaser no mueva el canvas a la derecha cuando se maximiza */
+      }
+    </style>
+
+    <script integrity="" src="phaser-73219995616f80e252f03935fe5b7789.js"></script>
+    <script integrity="" src="nineslice-dd48a29e43da355eefbc4f1b0db11d2d.js"></script>
+    <script integrity="" src="pilas-engine-51ee37b4dcc39b0f3f4cbd81b2cb1ee8.js"></script>
+  </head>
+
+  <body>
+    <div tabindex="0" id="game"></div>
+  </body>
+</html>

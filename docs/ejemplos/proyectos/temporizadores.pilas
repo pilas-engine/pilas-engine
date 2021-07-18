@@ -1,0 +1,213 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 1,
+  "imagenes": [],
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "escena1",
+        "codigo": "class escena1 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      },
+      {
+        "nombre": "escena2",
+        "codigo": "class escena2 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "techo",
+        "codigo": "// @ts-ignore\nclass techo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo",
+        "codigo": "// @ts-ignore\nclass suelo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "boton_activable",
+        "codigo": "// @ts-ignore\nclass boton_activable extends ActorTextoBase {\n\n    habilitado: boolean = true;\n\n    cuando_hace_click() {\n        if (this.habilitado) {\n            this.realizar_animacion_de_pulsacion();\n            this.decir(\"Desactivando ...\");\n\n            this.desactivar();\n\n            this.pilas.luego(3, () => {\n                this.activar();\n                this.decir(\"Activando!!!\")\n            })\n        }\n    }\n\n    realizar_animacion_de_pulsacion() {\n        this.y -= 2;\n\n        this.pilas.luego(0.2, () => {\n            this.y += 2;\n        });\n    }\n\n    cuando_mueve() {\n        if (this.habilitado) {\n            this.pilas.definir_cursor(\"pointer\");\n        }\n    }\n\n    cuando_sale() {\n        if (this.habilitado) {\n            this.pilas.definir_cursor(\"normal\");\n        }\n    }\n\n    habilitar() {\n        this.habilitado = true;\n        this.transparencia = 0;\n    }\n\n    deshabilitar() {\n        this.habilitado = false;\n        this.transparencia = 30;\n        this.pilas.definir_cursor(\"normal\");\n    }\n\n    activar() {\n        this.habilitar();\n    }\n\n    desactivar() {\n        this.deshabilitar();\n    }\n}"
+      },
+      {
+        "nombre": "alien",
+        "codigo": "// @ts-ignore\nclass alien extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "boton_activable1",
+        "codigo": "// @ts-ignore\nclass boton_activable1 extends ActorTextoBase {\n\n    habilitado: boolean = true;\n\n    cuando_hace_click() {\n        if (this.habilitado) {\n\n            // Desactiva el botón ...\n            this.desactivar();\n\n            // Vuelve a activar el botón luego de que\n            // pasan 10 segundos.\n            this.pilas.luego(10, () => {\n                this.activar();\n            });\n\n            // Obtiene una referencia al alien ...\n            var alien = this.pilas.obtener_actor_por_nombre(\"alien\");\n\n            // Le pide a pilas que cada 2 segundos, ejecute una\n            // función que mueve el alien 50 píxeles a la derecha.\n            //\n            // También le indica a pilas que haga esto 5 veces.\n            this.pilas.cada(2, () => {\n                alien.x += 50;\n            }, 5)\n\n            this.realizar_animacion_de_pulsacion();\n        }\n    }\n\n    realizar_animacion_de_pulsacion() {\n        this.y -= 2;\n\n        this.pilas.luego(0.2, () => {\n            this.y += 2;\n        });\n    }\n\n    cuando_mueve() {\n        if (this.habilitado) {\n            this.pilas.definir_cursor(\"pointer\");\n        }\n    }\n\n    cuando_sale() {\n        if (this.habilitado) {\n            this.pilas.definir_cursor(\"normal\");\n        }\n    }\n\n    habilitar() {\n        this.habilitado = true;\n        this.transparencia = 0;\n    }\n\n    deshabilitar() {\n        this.habilitado = false;\n        this.transparencia = 30;\n        this.pilas.definir_cursor(\"normal\");\n    }\n\n    activar() {\n        this.habilitar();\n    }\n\n    desactivar() {\n        this.deshabilitar();\n    }\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "escena1",
+      "id": 1,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "activo": true,
+          "x": 0,
+          "y": 255,
+          "z": 0,
+          "habilidades": [],
+          "imagen": "imagenes:plataformas/techo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 600,
+          "figura_alto": 25,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "id": 1403,
+          "nombre": "techo"
+        },
+        {
+          "activo": true,
+          "x": 0,
+          "y": -250,
+          "z": 0,
+          "habilidades": [],
+          "imagen": "imagenes:plataformas/suelo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 600,
+          "figura_alto": 25,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "id": 1019,
+          "nombre": "suelo"
+        },
+        {
+          "x": 2.493765586034897,
+          "y": 114.71321695760597,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "black",
+          "magnitud": 18,
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Desactivar este botón 3 segundos.",
+          "id": 1618,
+          "activo": true,
+          "nombre": "boton_activable",
+          "habilidades": []
+        },
+        {
+          "x": -175.67567567567568,
+          "y": -133.90663390663389,
+          "z": 0,
+          "imagen": "imagenes:aliens/alien_verde",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1820,
+          "activo": true,
+          "nombre": "alien",
+          "habilidades": []
+        },
+        {
+          "x": 2,
+          "y": -43,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "black",
+          "magnitud": 18,
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Mover 5 veces al actor (cada 2 segundos)",
+          "id": 1255,
+          "activo": true,
+          "nombre": "boton_activable1",
+          "habilidades": []
+        }
+      ]
+    },
+    {
+      "nombre": "escena2",
+      "id": 2,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": []
+    }
+  ]
+}

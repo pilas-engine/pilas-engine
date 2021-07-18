@@ -1,0 +1,93 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 1,
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "principal",
+        "codigo": "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "nave",
+        "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave/nave_reposo\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    mirar_en_direccion_al_planeta() {\n        let planeta = this.pilas.obtener_actor_por_nombre(\"actor\");\n        this.rotacion = this.pilas.obtener_angulo_entre_actores(this, planeta);\n    }\n\n    actualizar() {\n        this.mirar_en_direccion_al_planeta();\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.puede_disparar()) {\n            this.disparar_laser();\n        }\n    }\n\n    cuando_hace_click() {\n        this.disparar_laser();\n    }\n\n    disparar_laser() {\n        let laser = this.pilas.actores.laser();\n        laser.x = this.x;\n        laser.y = this.y;\n        laser.rotacion = this.rotacion;\n        laser.z = this.z + 1;\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    puede_disparar() {\n        return (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5)\n    }\n}"
+      },
+      {
+        "nombre": "actor",
+        "codigo": "class actor extends Actor {\n    propiedades = {\n        imagen: \"imagenes:basicos/sin_imagen\"\n    };\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "principal",
+      "id": 1,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-espacio_2",
+      "actores": [
+        {
+          "x": -204,
+          "y": -214,
+          "z": 0,
+          "imagen": "imagenes:nave/nave_reposo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1016,
+          "nombre": "nave",
+          "habilidades": [
+            "seguir al mouse"
+          ]
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "z": 13,
+          "imagen": "imagenes:basicos/planeta",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1930,
+          "nombre": "actor",
+          "habilidades": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Glosario de funciones</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+    </style>
+        <link rel="stylesheet" href="estilo.css" integrity="sha256-cff8PQddadfn7PwNFkawXEw+XqnsHp9JdhFo2q9L+jQ= sha512-oIMVqRG4AQBXeV/gDU9vrfBBWahpKTXPPaTrVIDWfh9rSHlL4sMDmr74WvSswlNIDfwTTNg07ginCXwhhic05w==" />
+        <script src="./manual.js" charset="utf-8" integrity="sha256-ZYfRoP0qK0P/Zt5uKSrp2a9HJt2WkYpOa70R9y1HXrU= sha512-IcPIFwMSOFTwzeCmIyW4VeLQurFHPIzUqEMiAAGW2mqyklHyIOOXMDKmxlSBWQIIsbvKWYcMu8wsCdLr0mG3eA==" ></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Glosario de funciones</h1>
+            </header>
+      <script>
+document.addEventListener("DOMContentLoaded", function() {
+  var input = document.querySelector("#buscador");
+  var limpiar = document.querySelector("#limpiar");
+
+  var timeout = null;
+
+  /*
+   * Esta función permite lanzar una función dentro de un marco
+   * de tiempo donde podría cancelarse.
+   *
+   * Es muy útil para lanzar búsquedas mientras el usuario va
+   * escribiendo y evitando que la aplicación se vuelva super lenta.
+   */
+  function debounce(func, wait) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    timeout = setTimeout(() => {
+      func.call(this);  
+      timeout = null;
+    }, 200);
+  }
+
+  /*
+   * Esta función se encarga de mostrar u ocultar los bloques
+   * HTML del documento dependiento de si coinciden con una búsqueda
+   * o no.
+   *
+   * Por ejemplo, el documento podría ser de esta forma:
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.nave()
+   *      ```
+   *
+   *      Permite crear una nave.
+   *    </div>
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.pelota()
+   *      ```
+   *
+   *      Permite crear un actor pelota.
+   *    </div>
+   *
+   * Pero si se llama a esta función así `filtrar("pelota")`, solamente
+   * el segundo bloque debería verse en el navegador, el primer bloque
+   * que no tiene el texto "pelota" debería tener la clase "dn" (display none)
+   *
+   *    <div class="funcion dn">          <-- Se agregá la clase "dn"
+   *      ```
+   *      pilas.actores.nave()
+   *      ```
+   *
+   *      Permite crear una nave.
+   *    </div>
+   *
+   *    <div class="funcion">
+   *      ```
+   *      pilas.actores.pelota()
+   *      ```
+   *
+   *      Permite crear un actor pelota.
+   *    </div>
+   *
+   */
+  function filtrar(valor) {
+    var funciones = document.querySelectorAll(".funcion");
+    var cantidad_ocultos = 0;
+    var cantidad_visibles = 0;
+
+    funciones.forEach(elemento => {
+
+      if (elemento.firstElementChild.textContent.includes(valor)) {
+        elemento.classList.remove("dn");
+        cantidad_visibles += 1;
+      } else {
+        elemento.classList.add("dn");
+        cantidad_ocultos += 1;
+      }
+
+    });
+
+
+    var detalle = document.getElementById("detalle");
+    var total = cantidad_visibles + cantidad_ocultos;
+
+    if (cantidad_ocultos > 0) {
+      detalle.innerHTML = `Mostrando ${cantidad_visibles} de ${total}`;
+    } else {
+      detalle.innerHTML = "";
+    }
+  }
+
+  input.onkeydown = function(e) {
+    debounce(() => {
+      filtrar(this.value);
+    }, 500);
+  }
+
+  limpiar.onclick = function() {
+    input.value = "";
+    filtrar("");
+  }
+
+});
+</script>
+<div class="tr">
+<p><input id="buscador" placeholder="Buscar ..." class="input" autocomplete="off"></p>
+</div>
+<div class="tr">
+<p><span id="detalle" class="small"></span> <button id="limpiar" class="boton v-mid">Limpiar</button></p>
+</div>
+<div class="funcion">
+<pre><code>mostrar(mensaje)</code></pre>
+<p>Imprime un mensaje en la pantalla del intérprete. También muestra el tipo de dato del argumento.</p>
+<p>Esta función también se puede llamar usando el nombre <code>print</code> en lugar de <code>mostrar</code>.</p>
+<p>Ejempos:</p>
+<pre><code>❯ mostrar(2 + 2)
+❮ 4                     (number)
+
+❯ mostrar(&quot;Hola &quot; + &quot;hugo&quot;)
+❮ Hola hugo             (string)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>ingresar(mensaje = &quot;&quot;)</code></pre>
+<p>Bloquea el programa a la espera de que el usuario ingrese un texto.</p>
+<p>Esta función retornará un <code>string</code> con el mensaje que escribió el usuario o <code>null</code> si canceló el ingreso del mensaje.</p>
+<p>Ejempos:</p>
+<pre><code>❯ ingresar(&quot;¿Cuál es tu nombre?)
+❮ &quot;pepe&quot;                     (string)
+
+❯ ingresar(&quot;¿Cuantos años tienes?)
+❮ &quot;14&quot;                     (string)</code></pre>
+<p>Tener en cuenta que la función retorna cadenas de texto (tipo <code>string</code>). Si quieres tomar la respuesta del usuario y procesarla como un número deberás anteponer <code>+</code> delante de la función o la variable para convertirla en un número:</p>
+<pre><code>❯ +ingresar(&quot;¿Cuantos años tienes?)
+❮ 14                     (number)
+
+❯ let edad = ingresar(&quot;¿Cuantos años tienes?)
+❯ mostrar(edad)
+❮ &quot;14&quot;                   (string)
+
+❯ mostrar(+edad)
+❮ 14                     (number)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.actores.clonar(nombre)</code></pre>
+<p>Consulta si existe un actor en la coordenada x e y. La función retorna <code>true</code> si hay un actor en esa posición o <code>false</code> en caso negativo.</p>
+<p>Por ejemplo:</p>
+<pre><code>❯ this.pilas.existe_actor_en(10, 10)
+❮ false</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actores_en(x, y)</code></pre>
+<p>Busca actores en la coordenada <code>x</code> e <code>y</code>. Si existen actores en esa posición retornará una lista con todas las referencias a esos actores. Y si ningún actor está en esa posición entonces retorna una lista vacía <code>[]</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actores_en(0, -94)
+‹ [
+    &lt;plataforma en (0.00, -90.00)&gt;,
+    &lt;pacman en (10.00, -92.00)&gt;,
+  ]
+
+› pilas.obtener_actores_en(200, 0)
+‹ []</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actor_en(x, y)</code></pre>
+<p>Busca actores en la coordenada <code>x</code> e <code>y</code> y si existe al menos uno lo retorna. Si existen mas de un actor solo retornará el primero que encuentre.</p>
+<p>Si no hay ningún actor retornará <code>null</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actor_en(0, -94)
+‹ &lt;plataforma en (0.00, -90.00)&gt;
+
+› pilas.obtener_actor_en(200, 0)
+‹ null</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.escena
+pilas.escena_actual()</code></pre>
+<p>Retorna una referencia a la escena actual, desde donde se puede acceder a los actores y otras propiedades de la escena.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.escena.actores
+‹ &lt;plataforma en (0.00, -90.00)&gt;,&lt;caja en (96.00, -47.55)&gt;</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.control</code></pre>
+<p>Almacena la referencia al control de teclado. Desde donde se pueden consultar la pulsación de teclas.</p>
+<p>Es importante llamar a esta función dentro del bloque <code>actualizar</code> de un actor o escena.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.control.izquierda
+‹ false
+
+› pilas.control.tecla_n
+‹ true</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.camara</code></pre>
+<p>Contiene una referencia a la cámara de la escena, desde donde se pueden aplicar movimientos de desplazamientos o efectos.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.camara.x
+‹ 0
+
+› pilas.camara.y = 30
+‹ 30
+
+› pilas.camara.vibrar(2, 1)
+‹ Sin definir (undefined)</code></pre>
+<p>Incluso también se puede cambiar el zoom con sentencias como:</p>
+<pre><code>› pilas.camara.escala = 2.5
+› pilas.camara.escala = 1</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.listar_imagenes()</code></pre>
+<p>Retorna una lista de todas las imágenes registradas en el proyecto, incluyendo las que vienen en pilas y las que el usuario cargó en el editor.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.listar_imagenes()
+‹ [
+    &quot;bloques:plataformas-marrones/plataforma-marron-1&quot;,
+    &quot;bloques:plataformas-marrones/plataforma-marron-10&quot;,
+    ...
+  ]</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.cambiar_escena(nombre)</code></pre>
+<p>Permite cambiar a una escena nueva indicando su nombre. Si se le pide cambiar a una escena que no existe retornará un error.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.cambiar_escena(&quot;opciones&quot;)
+‹ Sin definir (undefined)
+
+› pilas.cambiar_escena(&quot;cualquiera&quot;)
+‹ Error: No se puede encontrar la escena &quot;cualquiera&quot;.</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.reiniciar_escena()</code></pre>
+<p>Permite reiniciar la escena que está en ejecución. Al reiniciar la escena se vuelven a crear todos los actores en su posición inicial y se vuelve a ejecutar el método <code>iniciar</code> de la escena.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.reiniciar_escena()
+‹ Sin definir (undefined)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.reproducir_sonido(nombre)</code></pre>
+<p>Reproduce un sonido desde la biblioteca del proyecto. El parámetro nombre tiene que ser exactamente el nombre del sonido.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.reproducir_sonido(&quot;saltar&quot;)
+‹ Sin definir (undefined)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actores()</code></pre>
+<p>Retorna una lista de todos los actores que hay actualmente en la escena.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actores()
+‹ [
+    &lt;plataforma en (0.00, -90.00)&gt;,
+    &lt;caja en (96.00, -47.55)&gt;
+  ]</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actor_por_nombre(nombre)
+pilas.buscar_actor(nombre)</code></pre>
+<p>Busca en todos los actores de la escena si existe uno con el nombre solicitado, y en caso afirmativo retorna una referencia a ese actor.</p>
+<p>Es importante que al momento de llamar a esta función el actor esté vivo, sino la función va a retornar un error.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actor_por_nombre(&quot;plataforma&quot;)
+‹ &lt;plataforma en (0.00, -90.00)&gt;
+
+› var mi_plataforma = pilas.obtener_actor_por_nombre(&quot;plataforma&quot;)
+› mi_plataforma.decir(&quot;¡hola!&quot;)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.existe_un_actor_llamado(nombre)</code></pre>
+<p>Retorna <code>true</code> o <code>false</code> indicando si en la escena actual existe un actor con el nombre solicitado. Esta función es útil para saber si se puede llamar a <code>obtener_actor_por_nombre</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.existe_un_actor_llamado(&quot;plataforma&quot;)
+‹ true
+
+› pilas.existe_un_actor_llamado(&quot;jugador&quot;)
+‹ false
+
+if (pilas.existe_un_actor_llamado(&quot;jugador&quot;)) {
+  actor.decir(&quot;El jugar está vivo!&quot;)
+} else {
+  actor.decir(&quot;Uh, el jugador no está, ¿se eliminó?&quot;)
+}</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actor_por_etiqueta(etiqueta)</code></pre>
+<p>Retorna el primer actor que encuentre con la etiqueta solicitada. La etiqueta se tiene que enviar como una cadena de texto entre comillas.</p>
+<p>Si no se encuentra ningún actor con esa etiqueta la función va a retornar <code>undefined</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actor_por_etiqueta(&quot;enemigo&quot;)
+‹ &lt;alien en (0.00, -70.00)&gt;
+
+› pilas.obtener_actor_por_etiqueta(&quot;prueba&quot;)
+‹ Sin definir (undefined)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_todos_los_actores_con_la_etiqueta(etiqueta)</code></pre>
+<p>Retorna una lista de todos los actores que contienen la etiqueta enviada como parámetro.</p>
+<p>Si no existe ningún actor con esa etiqueta esta función retornará una lista vacía.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_todos_los_actores_con_la_etiqueta(&quot;enemigo&quot;)
+‹ [
+    &lt;alien en (0.00, -70.00)&gt;,
+    &lt;fantasma en (20.00, -20.00)&gt;
+  ]
+
+› pilas.obtener_todos_los_actores_con_la_etiqueta(&quot;moneda&quot;)
+‹ []</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_cantidad_de_actores()</code></pre>
+<p>Retorna el número de actores que existen en la escena actual.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_cantidad_de_actores()
+‹ 10</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_diccionario_de_actores()</code></pre>
+<p>Retorna una estructura de datos tipo diccionario con todos los nombres y referencias a los actores.</p>
+<p>Por ejemplo:</p>
+<pre><code>› var diccionario = pilas.obtener_diccionario_de_actores()
+› diccionario.pelota
+‹ &lt;pelota en (-200, -40)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_actores_en(x, y)</code></pre>
+<p>Retorna una lista de todos los actores que están ocupando la coordenada <code>x</code> e <code>y</code> enviada por parámetro.</p>
+<p>Si no existe ningún actor en esa coordenada esta función retornará una lista vacía.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_actores_en(-190, -30)
+‹ [
+    &lt;pelota en (-200, -40)
+  ]
+
+› pilas.obtener_actores_en(0, 0)
+‹ []</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.existe_actor_en(x, y)</code></pre>
+<p>Retorna <code>true</code> si hay un actor en esa coordenada <code>x</code> e <code>y</code> enviara por parámetro.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.existe_actor_en(-190, -30)
+‹ true</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.existe_actor_con_etiqueta_en(etiqueta, x, y)</code></pre>
+<p>Retorna <code>true</code> si un actor con la etiqueta enviara como parámetro se encuentra en esa posición <code>x</code> e <code>y</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.existe_actor_con_etiqueta_en(&quot;pelota&quot;, -190, -30)
+‹ true
+
+› pilas.existe_actor_con_etiqueta_en(&quot;enemigo&quot;, -190, -30)
+‹ false</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.luego(duración, tarea)</code></pre>
+<p>Ejecuta una tarea o función luego de que transcurra una cantidad de segundos determinada por el parámetro <code>duración</code>.</p>
+<p>Es importante mencionar que la duración tiene que ser un número de segundos, que puede ser un número entero o con parte decimal. Y la función se puede enviar como una referencia o una función tipo <code>arrow</code> como se muestra en este ejemplo.</p>
+<p>Por ejemplo, para que una actor salude luego de 3 segundos:</p>
+<pre><code>› actor = pilas.actores.nave()
+› pilas.luego(3, () =&gt; {
+    actor.saludar(&quot;Hola!, luego de 3 segundos.&quot;);
+  }</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.cada(duración, tarea, veces)</code></pre>
+<p>Ejecuta una tarea o función varias veces cada cierto intervalo de segundos.</p>
+<p>Es importante mencionar que la duración tiene que ser un número de segundos, y que la función se va a llamar tantas veces como indique el argumento <code>veces</code>. Si se quiere ejecutar esa función infinitas veces se puede omitir ese último parámetro.</p>
+<p>Opcionalmente, también se puede interrumpir las subsiguientes repeticiones si se retorna <code>true</code> desde la función.</p>
+<p>Por ejemplo:</p>
+<pre><code>› actor = pilas.actores.nave()
+› pilas.cada(5, () =&gt; {
+    actor.saludar(&quot;¡Hola!, saludando cada 5 segundos&quot;);
+  }, 10);</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.azar(desde, hasta)</code></pre>
+<p>Retorna un número aleatorio en el rango que va desde el primer argumento al segundo (incluyendo los extremos).</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.azar(1, 5)
+‹ 3
+
+› pilas.azar(1, 5)
+‹ 5
+
+› pilas.azar(1, 5)
+‹ 2</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.azar_desde_lista(lista)</code></pre>
+<p>Retorna al azar uno de los elementos de la lista que se envía como parámetro.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.azar_desde_lista([&#39;uno&#39;, &#39;dos&#39;, &#39;tres&#39;]
+‹ &#39;uno&#39;</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.desordenar_lista(lista)</code></pre>
+<p>Retorna una copia de la lista enviada como parámetro pero con todos sus elementos intercambiados de posición al azar.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.azar_desde_lista([1, 2, 3, 4, 5, 6])
+‹ [4, 6, 1, 3, 2, 5]</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_distancia_entre_puntos(x, y, x1, y1)</code></pre>
+<p>Retorna la cantidad de pixels de distancia entre dos puntos indicados por parámetros.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_distancia_entre_puntos(0, 0, 0, 100)
+‹ 100
+
+› pilas.obtener_distancia_entre_puntos(0, 0, 30, 40)
+‹ 50</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_distancia_entre_actores(actor1, actor2)</code></pre>
+<p>Retorna la cantidad de pixels de distancia entre dos actores enviados por parámetros.</p>
+<p>Por ejemplo:</p>
+<pre><code>› nave = pilas.actores.nave()
+› pelota = pilas.actores.nave()
+› pilas.obtener_distancia_entre_actores(nave, pelota)
+‹ 69.5</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_angulo_entre_puntos(x, y, x2, y2)</code></pre>
+<p>Retorna el ángulo en grados que se forma al trazar una linea entre los puntos enviados por parámetro.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.obtener_angulo_entre_puntos(0, 0, 40, 40)
+‹ 45
+
+› pilas.obtener_angulo_entre_puntos(0, 0, 100, 40)
+‹ 21.80</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.obtener_angulo_entre_actores(actor1, actor2)</code></pre>
+<p>Retorna el ángulo en grados que se forma al trazar una linea entre la posición de un actor y otro.</p>
+<p>Por ejemplo:</p>
+<pre><code>› nave = pilas.actores.nave()
+› pelota = pilas.actores.nave()
+› pilas.obtener_angulo_entre_actores(nave, pelota)
+‹ 221</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.ocultar_cursor()</code></pre>
+<p>Hace que el puntero del mouse sea invisible.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.ocultar_cursor()</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.definir_cursor(nombre)</code></pre>
+<p>Permite cambiar el puntero del mouse.</p>
+<p>El parámetro nombre puede ser alguno de estos:</p>
+<ul>
+<li>normal</li>
+<li>pointer</li>
+<li>help</li>
+<li>none</li>
+<li>wait</li>
+<li>crosshair</li>
+<li>cell</li>
+<li>move</li>
+<li>text</li>
+<li>no-drop</li>
+</ul>
+</div>
+<div class="funcion">
+<pre><code>pilas.observar(nombre, variable)</code></pre>
+<p>Agrega un texto en pantalla para visualizar el valor de una variable enviada por parámetro.</p>
+<p>Esta función está diseñada para llamarse dentro del bloque <code>actualizar</code>, tanto de escenas como de actores. Si se llama desde otro lado el valor de la variable no se va a actualizar, y va quedar con el valor inicial.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.observar(&quot;posicion_x&quot;, nave.x)
+› pilas.observar(&quot;rotacion de la nave&quot;, nave.rotacion)</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.clonar(nombre)</code></pre>
+<p>Permite clonar un actor en la posición inicial.</p>
+<p>Por ejemplo:</p>
+<pre><code>› var actor = pilas.actores.nave()
+› pilas.clonar(&quot;nave&quot;)
+‹ &lt;nave en (0, 0)&gt;</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.clonar_en(nombre, x, y)</code></pre>
+<p>Permite clonar un actor en la posición solicitada.</p>
+<p>Por ejemplo:</p>
+<pre><code>› var actor = pilas.actores.nave()
+› pilas.clonar(&quot;nave&quot;, 100, 100)
+‹ &lt;nave en (100, 100)&gt;</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.clonar_en_la_posión_del_cursor(nombre)</code></pre>
+<p>Permite clonar un actor en la posición del mouse.</p>
+<p>Por ejemplo:</p>
+<pre><code>› var actor = pilas.actores.nave()
+
+› pilas.cursor_x
+‹ 24
+
+› pilas.cursor_y
+‹ -139
+
+› pilas.clonar_en_la_posión_del_cursor(&quot;nave&quot;)
+‹ &lt;nave en (24, -139)&gt;</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.clonar_en_posicion_al_azar(nombre)</code></pre>
+<p>Permite clonar un actor en una posición aleatoria de la pantalla.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.actores.nave()
+‹ &lt;nave en (131, 183)&gt;</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.es_multiplo(a, b)</code></pre>
+<p>Determina si un numero es múltiplo de otro.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.es_multiplo(12, 3)
+‹ true
+
+› pilas.es_multiplo(3, 2)
+‹ false</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.enviar_mensaje_global(mensaje, datos)</code></pre>
+<p>Envía un mensaje a todos los actores y la escena actual.</p>
+<p>Para capturar estos mensajes desde actores o la escena, se tiene que crear un método de la forma “cuando_llega_el_mensaje_nombre” donde “nombre” tiene que ser mensaje que se quiere capturar.</p>
+<p>Por ejemplo, si un actor llama a la siguiente función <code>this.pilas.enviar_mensaje_global('ganar')</code> deberías poder capturar ese mensaje desde cualquier actor o escena declarando el método “cuando_llega_el_mensaje_ganar”.</p>
+<p>El argumento <code>datos</code> es opcional, y se puede utilizar para enviar parámetros adicionales junto con el mensaje. Este argumento datos se va a enviar directamente a todos los actores que atiendan el mensaje, pero es aconsejable que sea un diccionario. Por ejemplo, si se quiere enviar dos valores se podría armar un diccionario así:</p>
+<pre><code>pilas.enviar_mensaje_global(&quot;empujar&quot;, {fuerza: 10, mi_posicion: this.x})</code></pre>
+<p>y desde cualquier otro actor se puede atender esa función creando el siguiente método</p>
+<pre><code>class actor {
+
+  cuando_llega_el_mensaje_empujar(datos) {
+    this.impulsar(0, datos.fuerza);
+
+    this.decir(`el otro parámetro era x: ${datos.mi_posicion}`);
+  }</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.alternar_modo_pantalla_completa()
+pilas.solicitar_modo_pantalla_completa()
+pilas.solicitar_modo_ventana()</code></pre>
+<p>Permite cambiar el modo de pantalla a pantalla completa o ventana.</p>
+<p>Si se pasa al modo pantalla completa, el usuario de todas formas puede volver al modo ventana pulsando la tecla <code>ESC</code>.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.alternar_modo_pantalla_completa()</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.alinear(numero, grilla)
+pilas.ajustar(numero, grilla)</code></pre>
+<p>Ajusta un número a una escala de grilla, muy útil en juegos donde el jugador se puede mover por escenarios rígidos tipo mosaico o tableros.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.alienar(130, 64)
+‹ 28</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.pausar()</code></pre>
+<p>Detiene la ejecución del juego por completo y espera a que el usuario pulse la tecla espacio o haga click con el mouse para continuar.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.reproducir_musica(nombre)</code></pre>
+<p>Comienza a reproducir una música a partir de un nombre y vuelve a repetirlo cuando finaliza de forma automática.</p>
+<p>Si hay otra música sonando esta función la detiene y comienza a reproducir la música nueva.</p>
+<p>Ten en cuenta que la música seguirá sonando, incluso cuando cambies de escena.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.detener_musica()</code></pre>
+<p>Detiene toda música que esté sonando en ese momento.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.esta_reproduciendo_musica()</code></pre>
+<p>Retorna <code>true</code> si en ese momento está sonando una música, sino responde con el valor <code>false</code>.</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.definir_mapa(diccionario)</code></pre>
+<p>Permite describir cómo se van a representar los actores en un mapa de escenario. Esta función se utiliza casi siempre al principio del juego o antes de llamar a la función <code>pilas.crear_mapa</code>.</p>
+<p>Un ejemplo de invocación es el siguiente:</p>
+<pre><code>this.pilas.definir_mapa({
+                x: &quot;ladrillo&quot;,
+                n: &quot;nave&quot;
+            });</code></pre>
+<p>y luego de que se definieron los caracteres, se puede crear un mapa así:</p>
+<pre><code>this.pilas.crear_mapa(`
+          xxxxxxx
+          x.....x
+          x..n..x
+          x.....x
+          xxxxxxx
+        `);</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.crear_mapa(mapa, grilla, origen_x, origen_y)</code></pre>
+<p>Esta función permite crear un mapa a partir de un diccionario de símbolos previamente creado con la función <code>pilas.definir_mapa</code>.</p>
+<p>El argumento mapa tiene que ser una cadena de textos con la descripción del escenario. Opcionalmente se pueden usar caracteres punto (.) o guión (-) para separar los items del mapa. También se pueden usar espacios para facilitar la legibilidad, esta función va a ignorar esos espacios.</p>
+<p>Por ejemplo, esta podría ser una llamada a esta función <code>crear_mapa</code>:</p>
+<pre><code>this.pilas.crear_mapa(`
+          x.....x
+          x..n..x
+        `);</code></pre>
+<p>Luego esta función admite como argumentos el tamaño de la grilla (64px por omisión) y las coordenadas en las que se debería dibujar el mapa (x=0, y=0 por omisión).</p>
+</div>
+<div class="funcion">
+<pre><code>pilas.laser(actor, x, y, x_final, y_final)</code></pre>
+<p>Esta función realiza un laser “instantáneo” para reconocer todos los actores que colisionan en una linea recta que va del punto (x, y) hasta el punto (x_final, y_final).</p>
+<p>Una vez que la función se ejecuta, retornará una lista de esta forma:</p>
+<pre><code>[
+   {
+      x: 10,
+      y: 10,
+      actor: &lt;actor&gt;
+      distancia: 30
+   },
+   ...
+ ]</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.laser_al_primer_actor(actor, x, y, x_final, y_final, etiqueta)</code></pre>
+<p>Similar a la función “laser”, pero solo retornará el primer actor que se encuentre cuando traza un laser desde la posición (x, y) hasta la posición (x_final, y_final).</p>
+<p>Opcionalmente, a esta función se le puede indicar una etiqueta, para que solo tenga en cuenta colisiones contra actores que tengan esa etiqueta.</p>
+</div>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>

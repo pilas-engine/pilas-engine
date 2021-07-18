@@ -1,0 +1,221 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 1,
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "principal",
+        "codigo": "class principal extends Escena {\n    iniciar() {\n        this.pilas.ocultar_cursor();\n    }\n\n    actualizar() {\n        this.pilas.observar(\"cursor x\", this.pilas.cursor_x);\n        this.pilas.observar(\"cursor y\", this.pilas.cursor_y);\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "plataforma",
+        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "caja",
+        "codigo": "class caja extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"caja\",\n        etiqueta: \"caja\",\n        figura: \"rectangulo\",\n        figura_ancho: 45,\n        figura_alto: 45,\n        figura_rebote: 0.9\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "pelota",
+        "codigo": "class pelota extends Actor {\n    propiedades = {\n        imagen: \"pelota\",\n        figura: \"circulo\",\n        figura_radio: 25\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "techo",
+        "codigo": "class techo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"techo\",\n        y: +255,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo",
+        "codigo": "class suelo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"suelo\",\n        y: -250,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "actor",
+        "codigo": "class actor extends Actor {\n    propiedades = {\n        imagen: \"imagenes:basicos/sin_imagen\"\n    };\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "actor1",
+        "codigo": "class actor1 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:basicos/sin_imagen\"\n    };\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "actor2",
+        "codigo": "class actor2 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:basicos/sin_imagen\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        let cursor_x = this.pilas.cursor_x;\n        let cursor_y = this.pilas.cursor_y;\n        this.rotacion = this.pilas.obtener_angulo_entre_puntos(this.x, this.y, cursor_x, cursor_y);\n        this.pilas.observar(\"rotación del cañon\", this.rotacion)\n\n        let distancia = this.pilas.obtener_distancia_entre_puntos(this.x, this.y, cursor_x, cursor_y);\n        this.pilas.observar(\"distancia entre el cañon y el mouse\", distancia)\n\n    }\n}"
+      },
+      {
+        "nombre": "actor3",
+        "codigo": "class actor3 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:basicos/sin_imagen\"\n    };\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "actor3",
+        "codigo": "class actor3 extends Actor {\n  propiedades = {\n    imagen: \"imagenes:basicos/sin_imagen\"\n  };\n\n  iniciar() {}\n\n  actualizar() {}\n}\n"
+      },
+      {
+        "nombre": "actor4",
+        "codigo": "class actor4 extends Actor {\n    propiedades = {\n        imagen: \"imagenes:basicos/sin_imagen\"\n    };\n\n    iniciar() {}\n\n    actualizar() {}\n}"
+      },
+      {
+        "nombre": "boton",
+        "codigo": "class boton extends ActorTextoBase {\n    propiedades = {\n        imagen: \"imagenes:basicos/invisible\",\n        fondo: \"imagenes:redimensionables/gris\",\n        texto: \"Botón\",\n        es_texto: true\n    };\n\n    cuando_hace_click() {\n        this.pilas.ocultar_cursor();\n        this.y -= 2;\n\n        this.pilas.luego(0.2, () => {\n            this.y += 2;\n        });\n    }\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "principal",
+      "id": 1,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-rojo",
+      "actores": [
+        {
+          "x": -112.73885350318471,
+          "y": -54.96815286624201,
+          "z": 0,
+          "habilidades": [],
+          "imagen": "imagenes:plataformas/plataforma",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "plataforma",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 250,
+          "figura_alto": 40,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "id": 1952,
+          "nombre": "plataforma"
+        },
+        {
+          "x": -155,
+          "y": -23.178343949044574,
+          "z": 0,
+          "imagen": "imagenes:tanque/tanque_ruedas",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1858,
+          "nombre": "actor",
+          "habilidades": []
+        },
+        {
+          "x": -153,
+          "y": 1,
+          "z": 0,
+          "imagen": "imagenes:tanque/tanque_base",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1043,
+          "nombre": "actor1",
+          "habilidades": []
+        },
+        {
+          "x": -158.18471337579615,
+          "y": 22.273885350318466,
+          "z": 0,
+          "imagen": "imagenes:tanque/tanque_torreta",
+          "centro_x": 2.7755575615628914e-17,
+          "centro_y": 0.5,
+          "rotacion": 38,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1975,
+          "nombre": "actor2",
+          "habilidades": []
+        },
+        {
+          "x": 97.82608695652175,
+          "y": 167.11956521739128,
+          "z": 0,
+          "imagen": "imagenes:cursores/cursor_disparo_negro",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1098,
+          "nombre": "actor3",
+          "habilidades": [
+            "seguir al mouse"
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "escena2",
+      "id": 2,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": []
+    }
+  ]
+}

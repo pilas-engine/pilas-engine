@@ -1,0 +1,751 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "tamaño": "500x500",
+  "nombre_de_la_escena_inicial": "escena1",
+  "imagenes": [],
+  "animaciones": [
+    {
+      "nombre": "explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:explosion/explosion_001",
+          "sprite": "imagenes-explosion-explosion_001"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_002",
+          "sprite": "imagenes-explosion-explosion_002"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_003",
+          "sprite": "imagenes-explosion-explosion_003"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_004",
+          "sprite": "imagenes-explosion-explosion_004"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_005",
+          "sprite": "imagenes-explosion-explosion_005"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_006",
+          "sprite": "imagenes-explosion-explosion_006"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_007",
+          "sprite": "imagenes-explosion-explosion_007"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_008",
+          "sprite": "imagenes-explosion-explosion_008"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_009",
+          "sprite": "imagenes-explosion-explosion_009"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_010",
+          "sprite": "imagenes-explosion-explosion_010"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_011",
+          "sprite": "imagenes-explosion-explosion_011"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_012",
+          "sprite": "imagenes-explosion-explosion_012"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_013",
+          "sprite": "imagenes-explosion-explosion_013"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_014",
+          "sprite": "imagenes-explosion-explosion_014"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_015",
+          "sprite": "imagenes-explosion-explosion_015"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "mini_explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:mini-explosion/explosion_0",
+          "sprite": "imagenes-mini-explosion-explosion_0"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_1",
+          "sprite": "imagenes-mini-explosion-explosion_1"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_2",
+          "sprite": "imagenes-mini-explosion-explosion_2"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_3",
+          "sprite": "imagenes-mini-explosion-explosion_3"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_4",
+          "sprite": "imagenes-mini-explosion-explosion_4"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_5",
+          "sprite": "imagenes-mini-explosion-explosion_5"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_6",
+          "sprite": "imagenes-mini-explosion-explosion_6"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "golpe",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/golpe-1",
+          "sprite": "imagenes-efectos-golpe-1"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-2",
+          "sprite": "imagenes-efectos-golpe-2"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-3",
+          "sprite": "imagenes-efectos-golpe-3"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-4",
+          "sprite": "imagenes-efectos-golpe-4"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-5",
+          "sprite": "imagenes-efectos-golpe-5"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-6",
+          "sprite": "imagenes-efectos-golpe-6"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "chispa",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/chispa-1",
+          "sprite": "imagenes-efectos-chispa-1"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-2",
+          "sprite": "imagenes-efectos-chispa-2"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-3",
+          "sprite": "imagenes-efectos-chispa-3"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-4",
+          "sprite": "imagenes-efectos-chispa-4"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-5",
+          "sprite": "imagenes-efectos-chispa-5"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "humo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/humo-01",
+          "sprite": "imagenes-efectos-humo-01"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-02",
+          "sprite": "imagenes-efectos-humo-02"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-03",
+          "sprite": "imagenes-efectos-humo-03"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-04",
+          "sprite": "imagenes-efectos-humo-04"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-05",
+          "sprite": "imagenes-efectos-humo-05"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-06",
+          "sprite": "imagenes-efectos-humo-06"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-07",
+          "sprite": "imagenes-efectos-humo-07"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-08",
+          "sprite": "imagenes-efectos-humo-08"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-09",
+          "sprite": "imagenes-efectos-humo-09"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-10",
+          "sprite": "imagenes-efectos-humo-10"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "hombre_pixel_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_1",
+          "sprite": "imagenes-pixelados-pixel_player_1"
+        },
+        {
+          "nombre": "imagenes:pixelados/pixel_player_2",
+          "sprite": "imagenes-pixelados-pixel_player_2"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_0",
+          "sprite": "imagenes-pixelados-pixel_player_0"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "fantasma_azul_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_0",
+          "sprite": "imagenes-pacman-fantasma_azul_0"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_1",
+          "sprite": "imagenes-pacman-fantasma_azul_1"
+        }
+      ],
+      "velocidad": "10"
+    },
+    {
+      "nombre": "fantasma_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_6",
+          "sprite": "imagenes-pacman-fantasma_6"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_7",
+          "sprite": "imagenes-pacman-fantasma_7"
+        }
+      ],
+      "velocidad": "10"
+    },
+    {
+      "nombre": "moneda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:monedas/moneda_0",
+          "sprite": "imagenes-monedas-moneda_0"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_1",
+          "sprite": "imagenes-monedas-moneda_1"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_2",
+          "sprite": "imagenes-monedas-moneda_2"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_3",
+          "sprite": "imagenes-monedas-moneda_3"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_4",
+          "sprite": "imagenes-monedas-moneda_4"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_5",
+          "sprite": "imagenes-monedas-moneda_5"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_6",
+          "sprite": "imagenes-monedas-moneda_6"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_7",
+          "sprite": "imagenes-monedas-moneda_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "pacman_come",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_5",
+          "sprite": "imagenes-pacman-pacman_5"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_6",
+          "sprite": "imagenes-pacman-pacman_6"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "pacman_espera",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "nave_girando_a_la_derecha",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_derecha_1",
+          "sprite": "imagenes-nave-nave_derecha_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_derecha_2",
+          "sprite": "imagenes-nave-nave_derecha_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_girando_a_la_izquierda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_izquierda_1",
+          "sprite": "imagenes-nave-nave_izquierda_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_izquierda_2",
+          "sprite": "imagenes-nave-nave_izquierda_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanzando",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_en_reposo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_reposo",
+          "sprite": "imagenes-nave-nave_reposo"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "gallina_vuela",
+      "cuadros": [
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_1",
+          "sprite": "imagenes-gallina-gallina_vuela_1"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_3",
+          "sprite": "imagenes-gallina-gallina_vuela_3"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanza",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_salta",
+          "sprite": "imagenes-conejo-conejo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_parado1",
+          "sprite": "imagenes-conejo-conejo_parado1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_parado2",
+          "sprite": "imagenes-conejo-conejo_parado2"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "conejo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_camina1",
+          "sprite": "imagenes-conejo-conejo_camina1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_camina2",
+          "sprite": "imagenes-conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_camina_1",
+          "sprite": "imagenes-bmo-bmo_camina_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_camina_2",
+          "sprite": "imagenes-bmo-bmo_camina_2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_escala",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_escala_1",
+          "sprite": "imagenes-bmo-bmo_escala_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_escala_2",
+          "sprite": "imagenes-bmo-bmo_escala_2"
+        }
+      ],
+      "velocidad": 10
+    }
+  ],
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "escena2",
+        "codigo": "class escena2 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "caja",
+        "codigo": "// @ts-ignore\nclass caja extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "pelota",
+        "codigo": "// @ts-ignore\nclass pelota extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "techo",
+        "codigo": "// @ts-ignore\nclass techo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo",
+        "codigo": "// @ts-ignore\nclass suelo extends Actor {\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "barra_de_energia2",
+        "codigo": "// @ts-ignore\nclass barra_de_energia2 extends PizarraBase {\n\n    barra_largo: number = 200;\n    barra_alto: number = 15;\n    vida_actual: number = 100; // valor entre 0 y 100\n\n    private vida_anterior: number = 0;\n\n    iniciar() {\n        super.iniciar();\n        this.imagen = \"imagenes:basicos/invisible\";\n    }\n\n    actualizar() {\n        this.dibujar();\n    }\n\n    cuando_llega_el_mensaje_bajar_energia() {\n        this.vida_actual -= 25;\n\n        if (this.vida_actual <= 0) {\n            this.pilas.enviar_mensaje_global(\"perder\");\n        }\n    }\n\n    dibujar() {\n        if (this.vida_actual === this.vida_anterior) {\n            return;\n        }\n\n        this.vida_actual = Math.max(0, this.vida_actual);\n        this.vida_actual = Math.min(100, this.vida_actual);\n        this.vida_anterior = this.vida_actual;\n        this.dibujar_barra();\n    }\n\n    private dibujar_barra() {\n        let vida = this.vida_actual;\n        let largo = this.barra_largo;\n        let alto = this.barra_alto;\n        let x = -largo / 2;\n        let y = +alto / 2;\n\n        this.limpiar();\n        this.dibujar_borde_de_rectangulo(x, y, largo, alto, \"blanco\", 4);\n        this.dibujar_rectangulo(x, y, largo, alto, \"rojo\");\n\n        this.dibujar_rectangulo(x, y, (largo / 100) * vida, alto, \"amarillo\");\n    }\n}"
+      },
+      {
+        "nombre": "barra_de_energia",
+        "codigo": "// @ts-ignore\nclass barra_de_energia extends PizarraBase {\n\n  barra_largo: number = 200;\n  barra_alto: number = 15;\n  vida_actual: number = 100; // valor entre 0 y 100\n\n  private vida_anterior: number = 0;\n\n  iniciar() {\n    super.iniciar();\n    this.imagen = \"imagenes:basicos/invisible\";\n  }\n\n  actualizar() {\n    this.dibujar();\n    this.vida_actual -= 0.2;\n  }\n\n  dibujar() {\n    if (this.vida_actual === this.vida_anterior) {\n      return;\n    }\n\n    this.vida_actual = Math.max(0, this.vida_actual);\n    this.vida_actual = Math.min(100, this.vida_actual);\n    this.vida_anterior = this.vida_actual;\n    this.dibujar_barra();\n  }\n\n  private dibujar_barra() {\n    let vida = this.vida_actual;\n    let largo = this.barra_largo;\n    let alto = this.barra_alto;\n    let x = -largo / 2;\n    let y = +alto / 2;\n\n    this.limpiar();\n    this.dibujar_borde_de_rectangulo(x, y, largo, alto, \"blanco\", 4);\n    this.dibujar_rectangulo(x, y, largo, alto, \"rojo\");\n\n    this.dibujar_rectangulo(x, y, (largo / 100) * vida, alto, \"amarillo\");\n  }\n}\n"
+      },
+      {
+        "nombre": "plataforma",
+        "codigo": "// @ts-ignore\nclass plataforma extends Actor {\n\n  iniciar() {}\n}\n"
+      },
+      {
+        "nombre": "alien",
+        "codigo": "// @ts-ignore\nclass alien extends Actor {\n\n    iniciar() {}\n\n    actualizar() {}\n\n    cuando_colisiona(laser: Actor) {\n        this.pilas.clonar_en(\"explosion\", this.x, this.y);\n        laser.eliminar();\n\n        this.pilas.camara.vibrar(2, 0.5);\n\n        // envía un mensaje global que recibirá el actor\n        // energía llamando al método \"cuando_llega_el_mensaje_bajar_energia\".\n        this.pilas.enviar_mensaje_global(\"bajar_energia\");\n    }\n\n    // el siguiente método se ejecuta cuando la barra de energía\n    // emite el mensaje global \"perder\".\n    cuando_llega_el_mensaje_perder() {\n        this.eliminar();\n    }\n\n}"
+      },
+      {
+        "nombre": "laser",
+        "codigo": "// @ts-ignore\nclass laser extends Actor {\n\n    velocidad;\n\n    iniciar() {\n        this.centro_x = 0.3;\n        this.velocidad = 10;\n        this.pilas.reproducir_sonido(\"laser\");\n    }\n\n    actualizar() {\n        this.avanzar(this.rotacion, this.velocidad);\n\n        if (this.x > 400 || this.x < -400 || this.y > 400 || this.y < -400) {\n            this.eliminar();\n        }\n    }\n}"
+      },
+      {
+        "nombre": "explosion",
+        "codigo": "// @ts-ignore\nclass explosion extends Actor {\n\n    iniciar() {\n        this.animacion = \"explosion\";\n        this.pilas.reproducir_sonido(\"explosion\");\n    }\n\n    actualizar() {}\n\n    cuando_finaliza_animacion(nombre: string) {\n        this.eliminar();\n    }\n}"
+      },
+      {
+        "nombre": "nave_automatica",
+        "codigo": "// @ts-ignore\nclass nave_automatica extends Actor {\n\n    actualizar() {}\n\n    cuando_llega_el_mensaje_disparar() {\n        this.pilas.clonar_en(\"laser\", this.x, this.y);\n    }\n\n    // el siguiente método se ejecuta cuando la barra de energía\n    // emite el mensaje global \"perder\".\n    cuando_llega_el_mensaje_perder() {\n        this.decir(\"uh... no\")\n    }\n}"
+      },
+      {
+        "nombre": "boton",
+        "codigo": "// @ts-ignore\nclass boton extends ActorTextoBase {\n\n    cuando_hace_click() {\n        // se envía el mensaje \"disparar\" para que el código\n        // de la nave realice el disparo desde el método \"atener_mensaje_disarar\".\n        this.pilas.enviar_mensaje_global(\"disparar\");\n    }\n}"
+      }
+    ],
+    "proyecto": "class Proyecto {\n        iniciar() {\n\n        }\n      }"
+  },
+  "escenas": [
+    {
+      "nombre": "escena2",
+      "id": 2,
+      "ancho": 1000,
+      "alto": 1000,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "x": 0,
+          "y": 178,
+          "z": 0,
+          "imagen": "imagenes:basicos/barra_de_energia",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "id": 15374470999981384,
+          "activo": true,
+          "nombre": "barra_de_energia2",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 165,
+          "y": -10,
+          "z": 0,
+          "imagen": "imagenes:aliens/alien_verde",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "alien",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "circulo",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "id": 19826651650430770,
+          "activo": true,
+          "nombre": "alien",
+          "habilidades": [
+            "oscilar verticalmente"
+          ],
+          "sensores": []
+        },
+        {
+          "x": -163.46280991735537,
+          "y": 67.80991735537185,
+          "z": 0,
+          "imagen": "imagenes:disparos/laser",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 46,
+          "figura_alto": 13,
+          "figura_radio": 11,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "id": 14843881489483604,
+          "activo": false,
+          "nombre": "laser",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 100,
+          "y": 96,
+          "z": 0,
+          "imagen": "imagenes:explosion/explosion_001",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "explosion",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "id": 14200574066627434,
+          "activo": false,
+          "nombre": "explosion",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": -144.45454545454547,
+          "y": -7.9669421487603245,
+          "z": 0,
+          "imagen": "imagenes:nave/nave_enemiga_2",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "id": 12121557578932288,
+          "activo": true,
+          "nombre": "nave_automatica",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": -2,
+          "y": -150,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "black",
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Disparar",
+          "fuente": "color-negro",
+          "id": 19671780515211000,
+          "activo": true,
+          "nombre": "boton",
+          "habilidades": [],
+          "sensores": []
+        }
+      ]
+    }
+  ],
+  "fps": 60,
+  "escena_inicial": 2
+}

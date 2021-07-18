@@ -1,0 +1,235 @@
+{
+  "ejemplos": [
+    {
+      "nombre": "nubes"
+    },
+    {
+      "nombre": "plataformas"
+    },
+    {
+      "nombre": "ejemplo-nave"
+    },
+    {
+      "nombre": "click"
+    },
+    {
+      "nombre": "click_actor"
+    },
+    {
+      "nombre": "gravedad",
+      "desde": "2.0.74"
+    },
+    {
+      "nombre": "arrastrables",
+      "desde": "2.0.74"
+    },
+    {
+      "nombre": "cursores",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "azar",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "angulo",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "angulo-entre-actores",
+      "desde": "2.0.77"
+    },
+    {
+      "nombre": "controles",
+      "desde": "2.0.78"
+    },
+    {
+      "nombre": "flappy",
+      "desde": "2.0.78"
+    },
+    {
+      "nombre": "huesos",
+      "desde": "2.0.79"
+    },
+    {
+      "nombre": "explosion_al_colisionar",
+      "desde": "2.0.84"
+    },
+    {
+      "nombre": "nave_contra_aliens",
+      "desde": "2.0.90"
+    },
+    {
+      "nombre": "aprender-y-olvidar",
+      "desde": "2.0.91"
+    },
+    {
+      "nombre": "temporizadores",
+      "desde": "2.0.91"
+    },
+    {
+      "nombre": "laser-y-misil",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "pacman",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "cuando-pulsa-tecla",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "dos-jugadores",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "camara-seguir-clicks",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "arkanoid",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "mensaje_global",
+      "desde": "2.0.92"
+    },
+    {
+      "nombre": "acceder-a-actores",
+      "desde": "2.1.0"
+    },
+    {
+      "nombre": "apilador-de-cajas",
+      "desde": "2.1.0"
+    },
+    {
+      "nombre": "sokoban",
+      "desde": "2.1.0"
+    },
+    {
+      "nombre": "recorrido-simple",
+      "desde": "2.1.0"
+    },
+    {
+      "nombre": "recorrido-de-curva",
+      "desde": "2.1.0"
+    },
+    {
+      "nombre": "naves",
+      "desde": "2.1.0"
+    },
+    {
+      "nombre": "recorrido-con-orientacion",
+      "desde": "2.1.0"
+    },
+    {
+      "nombre": "plataformas-2",
+      "desde": "2.1.1"
+    },
+    {
+      "nombre": "mantener-valores-entre-escenas",
+      "desde": "2.1.3"
+    },
+    {
+      "nombre": "pantalla-completa",
+      "desde": "2.1.3"
+    },
+    {
+      "nombre": "barra-de-energia",
+      "desde": "2.1.3"
+    },
+    {
+      "nombre": "imagenes-como-botones",
+      "desde": "2.1.6"
+    },
+    {
+      "nombre": "barras-de-energia",
+      "desde": "2.2.0"
+    },
+    {
+      "nombre": "tipos_de_animacion",
+      "desde": "2.2.6"
+    },
+    {
+      "nombre": "pacman-con-paredes",
+      "desde": "2.2.6"
+    },
+    {
+      "nombre": "automata-contra-calaveras",
+      "desde": "2.2.6"
+    },
+    {
+      "nombre": "automata-cofre",
+      "desde": "2.2.6"
+    },
+    {
+      "nombre": "menu-simple",
+      "desde": "2.2.8"
+    },
+    {
+      "nombre": "pausar",
+      "desde": "2.2.8"
+    },
+    {
+      "nombre": "musica",
+      "desde": "2.2.8"
+    },
+    {
+      "nombre": "mejor-puntaje",
+      "desde": "2.2.8"
+    },
+    {
+      "nombre": "memorizar",
+      "desde": "2.3.0"
+    },
+    {
+      "nombre": "rompecabezas",
+      "desde": "2.3.0"
+    },
+    {
+      "nombre": "asusta-fantasmas",
+      "desde": "2.3.0"
+    },
+    {
+      "nombre": "gamepad-simple",
+      "desde": "2.3.0"
+    },
+    {
+      "nombre": "gamepad-analogicos",
+      "desde": "2.3.0"
+    },
+    {
+      "nombre": "mapa-hola",
+      "desde": "2.4.1"
+    },
+    {
+      "nombre": "mapa-niveles",
+      "desde": "2.4.1"
+    },
+    {
+      "nombre": "lucha",
+      "desde": "2.4.2"
+    },
+    {
+      "nombre": "burbujas",
+      "desde": "2.4.2"
+    },
+    {
+      "nombre": "sensor-basico",
+      "desde": "2.4.3"
+    },
+    {
+      "nombre": "volley",
+      "desde": "2.4.3"
+    },
+    {
+      "nombre": "don-ceferino",
+      "desde": "2.6.0"
+    },
+    {
+      "nombre": "dialogo-y-camara",
+      "desde": "2.7.0"
+    }
+  ]
+}

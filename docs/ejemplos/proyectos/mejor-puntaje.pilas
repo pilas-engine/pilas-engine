@@ -1,0 +1,1124 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "tamaño": "500x500",
+  "nombre_de_la_escena_inicial": "menu",
+  "imagenes": [
+    {
+      "nombre": "globo",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAAB0CAYAAAD5Gw6OAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAFOgAwAEAAAAAQAAAHQAAAAApQHzDAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAOgBJREFUeAHdnQm0pVdV57/hDm+uV69ezZVUZaqMkIkEgrREpJk0tOJSGRpFbGnttUC6BbSVpmO7dLUK9BIabNMi2K2ogAtUBgPajQYUIUNlDkkqVUnN06tX79Ub7/2+r/+///nOfbeSilQgBFafqnPPtM8+e//PPvucb7j3pcl3V0glTnrjGchU01Q1KSl9Y7mufmYTBHimQxzToF0iEI5ffXW2dOJENrplSzo7OFhNPfZY9VcDA9Vto6NPAOfq2dn0hsXFdOLss9PRhYV0du/eaqrdrpK195b3fjGpLhWgN66A+oT+305lo2LPyBg/miTZagF3mYBLLrgg+cPDh8vbbrihSG68sXycAC2ViY1nCexNivsF0N0BpI7qicuK/SFNrr668T54K0xt2VIkX/xieeMzCOy3C8weXwB8sQBsjY7mnz2ytvz4vR/vB2FUyq45/9zRy4ZXn3VOc2jVZKM9eFaeNTZmeWNN3miOpFWVp2nSSNO0UxVlUVXVTFV2p9Oye7hYWNhbLC0cXZg5/NgjD+y9561JckA4zigS0jeff37rqm43fXT37u6NScKERUuNKXRPW+gp/TRxjPxYwlmybVvj2MUXV+//3OeWav7DHx5KLtl42bMvHxxde31jeOSSxuDw1mZrYGJoYChpt1qJQEyqNLPWaJziCqvKDhEsMhUzNWSVsCmKpNNZThYW55PludmTnYW5Xd2TM/cszBz5wv77v37ba5eT+8Sim1x/fePDu3c3ltfsLv7tbUmhughmTGvxvrUkKv+tcUHnEAziVoH4U2vWFMltt7Ec2x+fSK5ed8nzXjk4seFF7ZGxK0ZGx5uDg0NJmeVJUVaOeVUVSaWC/qdlkSqVUZaBsVROo/4yU/2v0lSQZlrRMlkhLIzTVNOQNATwwskTyeyJ4wudE8dvmZ/a91dfuPvBT74zSfYlyY/mv7fpy+3b9u/v3KSpkGwRzJjWanxzSQThm+vdB6IYZB8GxOHhMrn33uWfTZJ1r7nioh8a23ze6wfGJ69bs2ZdnjTbSUdgVWVZpkVRJt1upijgSmKSAhoWJ0u0NTpFtBVdg8C12CTCElDTXODmDce0kbm2LV6d2RPJ8cP7Dswd3fe/7r7t7g+9LkkeSi69tPXeEyfy/7B3Ly4H5nGAmKrqqYdaqqfeUT2sCumbz08a5yxuySTcgsqr//FZ579h7OwL/93kpq3nN8dWJ8uV7KYoulqTWdIBvCJNAU8xgEZePbFEACTUgAY1Qx1ge9SocgQzmKpBNbh5niR5XqWtVpk08iSvyjyfP5kc2f/YlNzrBz90x73//XeS5NCNmzYNHRvaX7z/YbmCACicI3dln1r4ZsCMfUgzCdS6UctG+eKWCzf8yNrNF/7qurO3X5yOr0nKNC+SrpoAsVsGAAFM1mngemDKWnvg1foYVOhqhSLIFJVf8aIqG0xSlr2iHStpnlTNPEkbTYAt0qpoNGamk0N7Ht55+MCD//m6rx/4KCeAGw8caEoHrNRTqpQQRw6lM/iMwJwBqUmgd7xaor56/frW2w8dmvvdizZse+HI5HvWbDz3VYNbzk2KgUGBqKULiGUhq5SMANcHHr4R2W2JBhL+gNcHLFV1XcjW+p2ahCYAlWi4UACtAJQ0F6hYaqORJM2GQW10O42lg3uSI3se+rPP3Xrn238hSfb89vr1w9IlAgqohHqkUPhGnxrljEMPyJdLtGvXr2/+qoC85aqLbrhiaPWfb9526XPLjVvLqtmq0uVOLosMfrAHouQTUAE8ZA3AxdHDBqM6MFClMSGt85FuJa1ts1a3t0FB4MkJ/O2HGStMJDJlZbNZJmPj1eSqNc/aPDb0ylcOLN33+scOfV2ADo7PzVUcAb6ZcKZgRiCzN2zb1pyYns7fPzc3f8dzLn3HptbwH4xt2T7WWbepm2ZZnnblD7Wj2vIAr7ZG79KPAzAgFQBzng9GekJKDVYXUitKAcqQhDxlR4AMbQYZcGNggyvkchQ6QyPdkVUTk0Nl/hOvHU6mf2zX3ltesGlT+/nrZ9OvTsUOZ56eCZhBPi3rN2i3vnv37uzTOrvdc+3lv725OfCfkvXnJOnaDUWWZY2wnLE+CWDr0DKWVlhjZIJozgsFgPCydGUohyz5WDZR6ESjetOvV2EmlFeCoRNNP4a0xs3N7Zavysr2QNEcn8jGs+bLXjucjrzpod2fz6e2NF68bSbbMc2UnHn4RmAiNjF7g4D8vIB8UDZ3z7XPvmlL1vrZxbVby8bajUnebMk3BivsAWkQ1VPi9PRVpodDrKSOKNcGoaxboynSzpGHlHoIXBfLoagWdQx9VeP/ruIEUTe5WR9sWw4R5YBqlrXaZTUyWq3JWt/z6qF02zsPPvIZAZm8Yds2ATp9xoD+c2AiCjET08b+3bvzHQLy3udd+ZEtSf66+ckt3caGTVnebsv4NJ7+2wrppHI8xgR9asXQzlxJVcdR2+CpDHCnxECjykDjInxCNFI1vwA4A4vIAeI625fEqp6ctAUL1Ym/kRTDo8Vkml/5muH8ov9x8MgnS7mzl29L0jO10CcDk3GJmTabPJ2ebv6VDjh3PffKD25JktfPj2/qNjZuaTQGhpDLAgUBpaiKIEvOdVF5qlHWAIY0Aphox41A9uoAVrswFhmub+rUu3QA1CAyImN4tDCGZWCsOLayiNmrR5a+QBsMBGjWGRzuThblZa8Za571qwePfvKC6aS1Vd0f7qN/suzpwGTMGPOfmZxs/878/MKO6678tc1l9eaFkbVFc/PZeT48YhWYWQuJNHTURyxbQiuvBtIaNAMGUJSVyt865QiTKZK67UkAxVrDQCBQD0gaZVAz7ZaoV19L5XItqJLQJ7S5JJfVaQ91Vy0uXPnaiaH2Ww4cvflVk5MDX56fr48g7nTajycDE3Hy37xwsv2Le46e/NJ1V/7UlrL6raXGcNXYvC3Nx1bJkNSVJaLgpVcrEpWwklghwqN8vYQ599niAExXJ85ribHMVoBUvfiHmKme/pSxTuXNE76KcQzG76uPearUFAITGuVUThf4K201oVdBq5l2Gq1qdHbmBT+8bnz/T+989B9unJgY/uLCQgQ0KF6zjcnjwYxD52/Tgfy/PHpk+WPPufTq89Psz5pF3sw2basaE5Pat5vBJ9bL2QJKGHe2gCuKoZRBsMUBDMAJGMUMAAGyWafK62Bdgx1SA5mKvrZqb0QACjC4gDheP8hIwn/aDJ4LVLi+1+ainFGvnjxddOdEN5x1ryVtzk5///M3rL35zbse3f96na3vmpuLgEYMe6mk7wWzUSm7Xlb57kOH0mTDhlWXtto3jS2XQ8ur1hTN0bE8FRgIE4KUMqB1FRZo76TEgiqRoEEnVdiyIrjBymxpfUDgZx2weh/4OSXohpKuonSDRDwUlaYFgKpO9Zxl3cZY9NOFfgUqvmxVmSo+6pW04piCtPTx5Sz8dcPKk9RoZunkuu7q2enBy6YPfyAZG3v5iUOHOtcLmy+GboBKEOMQ0L4/iFOSXX/+BHe5F249d/MvrSury5eyVjcbHg1AmhrRGFTRVoJi+DqlgG0rxLKCdVGn62NbYNpUyn3LdjvJBgaSVDEfVBwaDOmg0gGi6toDomuJvu0+aVN5LLe2YC4RyTv2uY3gEpAnRuSrY+1vbY0rVhGAFqi+a6XJ82Vwe6CxtHZjd0N76NovXXD22/4ySeaunzA2Ytbf2aAkcZkDIjGXKbfet+do50+uevbzzsmy3y2XOlnaHpKfXJ1mwyMBFJaXfdWpyywsQQDWsjRNbX21UlZaYGatACig5gArsKjLyNOOCzA4KwAEX8n86Xq7z9rDMkd6VkCthl2A8tShp9KwlJGNele6nnzg4UyoC5VhMpryn0vLaT534nmXrVv712/f/RjLvXG65X7KMt+m7oPLy9Sllw403rmqW+YLuvOTNlq2yscvSZHV/2tF+oS3uAiNgrJYgwNA3MUBsOgnldqCvNRFz6JhubGUO1316+omcjepul0rXaW6cSKWkOlCWyDJivQf2CJgqe6xVFrq3J1yXX1rL96Zoh2n71WPjP3B1lm7BPXLmq20WrO2Ozk71bx88eS7RPpjNUYa9ZS7TLZM2GG2+ZsmJ1vvm5pa/MI1l9+wKU1/qbPULbNKW8DoeKIdXEty0JYTHX+GdQoEdl3XeZNQ3nWhPu7c3mhshbLGdtMWmWqp61mFolK1JQI5kTvgHmRclrZw0CPUiS2TQvgfGpznI8RobaFrJKzbIzMVI7151X3NX3l4sAKrPM+WF5eq1vzM9ms2rrv9nbseu++NwuqOcFwyNz6iZabbJP6uAq+eDK5rZG9pdUo9/tP0sUTlq1AUv8fgHqQeOJTVzWVS/kMjTnwArHdv7dhYo5ez+AAi4KkcwGNC1IdNA58lq7QPxl2oGsFstFwmukYVrqM1WivjqqyIT9cNVG6bqgzPUMYc4WPfKBpbq8oE6kMIVhuu5fV0RHLmk2vL0dnj+TnzM+8Qzf+dPXq01AVMvjdYp7tJA1unrfJ/yio/+9xnv2JLkv1CZ6lTSYEsGxxOslWrk3xkNEnZEKLV1T7R/pE6lnC0UNOoTJ2ij0ASyD6x3kxsjdEysUqDGoFlUogAFYJzXpeGqVfbA8AEAUiwNuA1sJT4H9K+vKsAXqHnZ1fywULre6NSvFhaKtrzM2dds3H9A79+4PDtN0xMtO9eWGC5O9g/bhOrw90uwLY3pPlPDOq4MQ/iQidtaceVst6NBZKXXxQyAqq0AkDVO4pRWP6ArIhVt7BKduPaKrHMHoj4zRo8H08kH2OBAADaWgWi2jKVfSYxsDVGogTi4DyNmmvkMEVAxAfDrublw6Ty+FL1rFmJABr61wArZzuGHh3GJ5KhqcPJ5s7iz6npL5enpop+67TE16xd2/jI9PTyTVdc9KyBqnrp/LKcPU9VUcg+TACQr0GMO7Vnk/oYAYSIz8MqObbIRXh5+1gjPlgggOI6DOZp0tqtrNAKbPHyUag+bsE7jME4fbEet+d3Vbar4sgWj2/ImwsgtfFYOeim1PoZS/AMUBppAY/BDA/nneGxanWSXPv+K571/R9PksUXTkxIGXuhrHG+Mps7HY2ULF3WHvjhVVJxkaNrqssOBKtBkBMWpSyvtxw0WgRYqYFHGNPUFskRSX4y7t5c3QQgI6B1amCkDBrg5GwdWJHyhfp0ZakNxVJ5dvnamtA3+EZq5DdVNg/YUFD08yaDxM6vOn0EXwoRIFGHlRLpoLKDeNZy4FdtoRjH+ES5anYqP6vsvl5kf93UnXulxDITePmnpnXzbnBwYjhJbig6ElqXDx6f2YwWAGCuZMAYxQNAa4B99lTZQlDP4Gw6gAgfW3nMa3JcF8tKdWyyRfXXM4m2dLU7H1Ks0ZPdl9paa9pwwVD3wShUH324+VCHC4KndVjRI6w4IyoQBYcm0JH80FDWbQ8lY0n6krdfsv0KVvT1WtlqSrOrV69u7pZV/sUl5z9/IEkuXC4K+ouzZtDLrRa+9mmqNZinWKjAddmgqreXOwrofIkSKGhAa2CscAAjKuaUZeiIYooo2osrZQMAGPBx1KR5AiiTD20RQMsQ6Wt+/UCSDzKHdEU36aJgy9SjmIqo82A6NFxM5Hn70lbrpWout4WVrR1quJAESbouz79PaDMT4ZxRW5hnGMUIgMUyjpZJtaqIYQl5MQhYVcEVIQWoY09gNfRbQpyAHs8wWaahLvbrARcBCwD23zgJN0wEpCaO6MtY8j2Aqac9ROSK1hpSydqTDSXsUDDNpOp0knJ52RcPla6KtKEkq/LsVdJyXHfjk01I+qG9M2WyafWkbvO+dImrjACZPiU0y1wMrWcPxD7woNZ/B5aCD3Vsm/g9JcgDWAAKKOSV9NLY1ykLQiH6MabVA9OHvsgDH8CsAQNggMEqI2h16uNYS8eyCJ5onO+3WvOhPzzhTRSAGi9lgwr/A4B6p6lcXFDUjqKHhoWsR5caF9546YVX6AlE5/KJCaRIit+fXHuB3vU5u8MdmB564hV9HMqgWB18/jJaUtgYyPwBHSDYNMyFw24tVD+IBigyor/o8eEcW2DmjYC8AkO6b61oKaU5JhnoulntVabxuYRU6sN5romVLhl1Si1TTZMJhEp3hnxXiWsU7kiJhHre0jEtGw7DwFv9Wd62SoFZyTrLZT3GFqSr87xxdqt1vfJfHBnqtgGze8Hg4PVa4g12cZUlcVjKfpDPSD0F62VsBIPCriHbFR2AMMPe4KikTkkPlDrf6y8a89awuGroXFY/0/T1xVLMF/FqWuZAwGD9FVdNVl7g4HOUN7ARaNQAXEXTA6pu4TH3Bl0ZLvNtNNLZt/TgIzkqvdlTLS8lVW2ZAAvynAq0zzxPRKN7985w7kgGddK7xPf0VJB8FjZamp0vzB05iACShwiWSA2KcHzhcMx1kywyzItopXsAtQYgWiB8PFHqh7UZIAkfwSSNoAEkfMM8q56sPnzvUf0FnG9eCDiWp3devZlT+p6n6JAPWo3HM33Ahr6kn5po8wkEvr5AUOo8tAKz1KWtXvNhiVfzcyqrvuhkXRnOQJZe9VNbt5714Ucf3dlIxsdH21V6WUeDqL+4i5E/KCkydY4wVh64xYxNyALQhoD4W70VyDGoKjnHCowYwSHmSQFJtN61YEldrug8ZWWYGOgAzfKICVl4QSf9wsFblRofK0zqZeuXIARQJqSohk2w1DBkuGukerUFAxbIAtE3nDWuwVYbwUYk/qUsM+nIOrvahLQZ4cdLAS1rHN0+1L5ApA823rN5/blSf1vXvkjjMhNixPiVnC4zUhEtcBAaEPExGklCBJ/CIJRtiZpJW6stT5pTbyurQTIaQsXtgU+wTsSvA8qgKSla+0pFeYAkGgXJg8U5Ku862iCXXWClWjEMA4teP5FWtVvRW6ChgzQWtT+9CanabXRmmRPRkVT6lPIXAr0YyfN8stl4tpj8ZWNbu7VVK7ElAoyfIQPDGgifrQQqzBKfohBUB3PR4RpKQNZMATyDcyRCgWAtSlkieg21hwLCw9vu2cMpj7kpmKlSW58KWCuTBkhsgrTHrtBQxkLJe9kzLmXRa5nTlmk8gKt43RjaGjzDJrIAoDdesWMMxqzpJKct024CMFmdNKq36YJM7Sy7XJXDDR2JJrTFMw5i6z8hEIfZkK8QWKnAylGIVtYOobZKwCyXloJj1/Gi1JJn2TsK7JSJ4NhBP/s+UhggDOgwA6oABFgTPZSJAi2+l741uUHDIiMt9QAVo+8manJ7ZbUzKH3UqfZnrqLGGImHF4H1p0700gO35g1JgyORoz544ualnqYbVD3YEKpbW+LQ9QWrVq9qCcycHTkWxzuWHFhtuAgoy2TW5BoMmGgANNwYURvHBwD2JDR0XBUSgAlYEQBM2JOiegMCGkZQqSr6si4jGHRYnqcdGkVkYpI5TbgfRHW9swE2yKS728AIjEMq26TsLtJHDSYDOBmCNxsA9fJmaO7vhzmFUt9YkN9MN1w+OTnISfKsMvpLAchw5s5gMANIgVItaSdjREDkAI0EinbGHBWwRClXApz6ZSrrPBY2JAGJy+tZDZqE+fUBPDSKgE0HYAAJ/garlqehOjY7vWmddBVJ8XvQwQv+BMoSATldxzmTNjYYmQoG0JMjynBKCguAlD4Fe0W9X1CHWI5MgHiJbSGZ9A7B5AtXDW9u5Gk2IWcKB5EpWLhAbPMGFJ2vbFkCM9VpiktMM0NQgZ2KxkcOZq2JFXeSQseIcBkHSOgnZeAdIz5N9ziFihQVAZPgVPSIYgDqVInNgUkADPs/9fekSAaba1/KSYGJoRM06FfbE3blO6KAQ57vJZBXWhKjf2RpyyhK3fEvpWOJrjWA4mhuqFLPTXvj0PAmvUqfrML8IfAal+DkUTwAFphW8om46Qw/mWrWRGNLwXoFHsBzez+VFSdLWua6iw6gfokAWvHLNHJmYaWswVOqB2Y+6OPjbNUSgIM/YEbL7M8jvbVQXxQkYrHeIElVD3ik3ghpV76msesSLaD56sapQGNlyVWwEqPPL+S+iByLoNcx3XqjO1hIFH2UZTNvZENZNsH3EvT1CENTgyjr02zyz0/3GIzTvxmpL0JyfUwXlEJgCYICElvgyQYRSG6B44le3FSTRlDM1DcveDIpS+YGMcDrXGqr97Wx+AKgwVRKniUbQWU8LI3lDTj4yQhoBA5QARw5e20s2XDyAKhCbQBZqn8JsOzSBlJ5LFFuS48owj4BmNCjg8Y3fsaCvIJ8h9YqfnNYL3lLYBWIdbOB8gqCGKFS+Q35SXaurNT1Eg6QLnBDCRSjwCCAL8vUnRVdYehtbPAAaPHJEUoA+qFaA39a32Rgc8IqnSpvEOuUcfCXpF6yVkETUYMFoBE88ixxyrVcHGfYEwBRRmTgWLLh/BnkqryUlSetweR0QmQzRWYDKbZgFLSVYUkml4SLstybSluIJ1C9RygLLJY95NTdwnFHSWBV2mywTNW5LPACmCis9tpKLYAAqpZlnZ4EFNBzcD22yCSwXzRQu2+GaGTqPSiA9oOKNFgqQHrilWJxXspKAdCASg4EZ2IBC+Bi6nwEVKkmFatUprZKLLOQNcoKAZ1ULqrgVIJhYJGKBPUKwzC5CiSO+loiOwDXhtRrC+IiMQR35QMmCI7FsZoBBgszC7UrH4KgFQjhBKD22gqZPdu8yixthA1va/DWRn3zWJOTS2j628fKNeAiepeLDCA8NXqQBbk8aVISC0RZgUM1j3BtiQLQRuAupcSkXuDF5c6EAByAk2qC8f0GVGm1yI0NRVwRNBoDIO0rJVrIIxGrUeMXVaYnK+mCLQqrYmBZQFziYffF0aoO0NTup4Oi1Vbk1WR2tKMqmwiDyg+xw3MjAUysLEce8cAiceSklfxluSwAlRbQClTOqpkskWn1Sw70t1UGPvbnKBeXrsaz1Sgl4AvV1YAaTEBVk/2k0i5A0YfJxholp5c8S3lJ0ctasgvIckHHQQMJdOATANUDsnAqYzwi/CRYQ2SLtkcRqEpySxIUCB8mDA+lJJQZ0gStegb5IQ51WB9C2gJkgQK3lNM0HoApqykUPZ5SFMK5sJwAFJB9oxcRWPoAjEXiUphk1cfNjONcBNQDBK3sb/GNtmwwMHAAqkdu9p/KK7UbAFhcgFKigWSJC1g2IbsDGUYEkVXGycdsObMG9qG97FaNTpUcrZ8sBmgYHGz0CXhGTIJ7nWlgfc1LNmltA4U50kF1+DoBhBCkWKdZqNkm6pu7ahNCQeG4nGWlBkBl9fEzHvH1RQCmbWujQjKhvCfCKomx6igzBpPhpSClNbSD6BGiYGPxcpR8LGnkxBqpB0jlC5a16tlAcUfB/8PfKNRLHFxU1li2yCAWq7Db0JjHcgkgFX0KsUAWkB7AGS1WAgurUJaCQXqnMHU/Cc6Vg9iKmYQRmTqYD48CMlX7dor2L3dnknytDkgCkmWu6fdXYGSZvmtjq4SNegAkY5BnTK0AB8TxOHWKogyrvg6iLbX7h90cIIM1AqCPRSxtL2+V6zqDyVgMBS9FW6YkISW4TTcqZDbCL1+WZVZ7/SA+aA1J6BnI63yQ1F+QQlAsAPreSFJPYIX7iELcoGqGayuhjGX6Sosjlsq+d8iG5ZMBy1L9xA+hnSetI7WWHwuslzzWj0WGEPoFB60axkUNmCljv4dVYm0ClY0GC7QlUlcvcYA1X7spgFSfWiamjdE8aZLGrHE9ElMcksWymmnMF8W+RZ+QtHoDBRIouOBPdkgAdEHV+C8skTL6xMvEHqBYjPxlsBYJBHgCzUBwGclyl8L6sm1wBwCKWDzD8WRpYmCvyBiI7o0HdIhMlhedJoix4KVqdn9Eg5V7AQQgQu9lLbBq8MLS1hLncK52+03oyIvWA5upc4gRlrly5AkeTRuAHq51j3QXDzeOL3dnl3Xp18z16w3atiUWagTqPma+vDSD2CQFTSrmIkcJg8ZVuAT2zgEnlhpWq1n30Um7eMwnevCFFfqdS1mpNyZoGaIGyKBaDgZAAYAJFmnfaWLR+0YwQzForbDJlLfFCSTJZX/Jrq2rtEqvAXEfIfhgAUg/bzhkAw9YxEgNthgMS8Io8LKa5Fl45OTCocaOmZM7rxobOak7HyNcc3tmTRaIrYGzLGwyYZAwLyprpECpTwThBjLKMrsgoRsOLGkveZyN67WkAZXnNIAn/8jmhaBsIPBzXc/MNCaAKnqVQOGixrElq4OOg+TZIJUxrfvUd5YMJLu4NxyuaurlzaqjHqv0GOpepz1AxTcAGmQj7+BLST8c2fcXs7NTjQ/s2nXwtZvW7RxtNC7vdLtyQ7qzCSUyEXuhFtJyYuAoKLHjwAAhRVhOKcuXdvJYnk773MTBNwOS9xy9N2SA1Y7leklHYDWmZSC1NOKlfx4TS2cctTF0FNK8QgWVQXTKgKTJ9fKtd3H7SACUfETLyvJG5hjFA9BY8NTLJCRjncIfuaQLnkknoulkeZZtN1lc7Ba7mo3m5UuNRpUjrCzMAY0sMKUwK6RBQdrq2aSPA31t9jodC8im+gAofLwFyhpUMMCyGD/ohy9gyiLha04IKYwBj7Mn46i1p6iyASS3iQ8k7qgP8anvzxpALjK8zNUFazS42rHj6jHIsAsMND6AhbJT5QHUoCplGI3ocXSVUXG/oZtWjyZLyTxgLunh5QMQ8yIru6vfqmVGLTWf6ozEBKW2MDl+7sQECyVlEH0w02rDOgESnlR757XACCIaLFR33YPPrIFkCPHHelFOCV0tBScAcpZNOeodAIt/yAV/j+UPNQsYrJKUGyPksE54ox/01LmbP4Kuqqi3g3p5i4o6tdoi0Yn3N7TzLMsPzxSFXupIbJmN20/MfG1Ls9nVe8F6xsBTLMksIgCyJgZQmqocD8VycgJFAuEna8uMTyq5o1PppX51o0sIlrguGRd9QIBgBCaStAaU7Cl9qVBApdAQWilzoght4RNrwwLh7zykmlgDIjl8lVbLQ2KGgV2gqeXmCQsu124XKoiR2a8N6flssZwtaLb2V91H1OwbHfmNB/fteunEmkPDWbUZj+nXqX3ANgd9qE6f3GxgzACyBNVOBqBYIkJzFtAXCgxwqeWeATb07LAAHiR3Qh1yWVkyKE+gjvLjg/qal+pJYRItiwq30sAY4h12fIB2pdiLP3ROWcoUzIhOZPRpLi7hWIKvDKJDjzvS0naEkpvduk4/8k9zJ3ereyN7xfh4mkzPH5vqdr7cgpC+VkjLVErZn5FGBWsZ7ALNXODRRicxD35JRLJsO3hA5o4OSpG3hXCW0zFFeR+SqeuPbA7q3+MReUFPvq8MaF7K3mTUrjF6l4s1T1/l0E5ZZgxIWDOAMIXgzyySxEj9ShuUqCgwfSZWWYz0omuy0O3cesveg4dfkAymjS7mI7H3LXe+tq3V+jEtVR0fscTAQG0roR6U0d0OiBg3ICr6zjySCYywhNWu//5wWtPVVb168YGjAzwJSjwcilPnMalTLQ1OTOGi5amboLXVkvLP9CGts2YQ86SCGjVWNht18vzXqY1Kjx/DTXJBponhYdrJRnaXui/qWz2tXL+nNqT3hgceKqvpF4+PvXI0zUb4wTURBK3IKYSqkK81oVYR4GsAAJSuFLnpQSvWKzBcD7lZqwpJaafci3X7k5QtA/3MowbJfARFzXsFxMAryk1akwAvQ7sPIFLqLWnlo5+MdRFINh0m1iMvd7K5peWlv1s8+Zs7pmem2q1uJzuqvt87MJA+cPjwwYPd6iv1oVmYa7A6KnFYEYY2s1S9agEP0BjMzlkDYp1S1LsnyxNlKIszkeXoRxykXqJKtfZ6rkF1Wr89+tBvpX8oh2XrJQsfEO2log0IO12RXfUS13NiLciH5c5+D5Di5CUezpZyd7ksUnoBJFdLkr1qSL75pLrnI/v37r5I2u+Z1wX0SfXXWQ4+nbvnT376mITR6Bxegs+AcT0YsiGKUyRS6M04S1GAcrSqeMFA/te3vAyg+ihFSLoBBExWQFULINinhXq32c+tlFfaqbMwlsV84afo6jrvMSBzVHscP3QN+ikPaDrM1VFeSvmSo5t0qFja6MSmZquUAnpVHV9/LE0+p2+ezW7Ql2bBkbVY3L6w0LlMT7F/7cGdtx4qigd1eFZPqxyEAwBFhI7CYrm2NtoQ3u3K05VLwyiMBLMyOG/upbBROVUfMXsCoLVl2UoNikYlhZZ/HotckMm+mTF8n4YUeWpZ67ENdl3f3x/ACgHWi3W5lBU66jFLxRMBVp15iRNKL3XymaI7c9v87C1qaO5fXORi1mCW+gJVd3zVqkqPXo/sWl765LxnQI/l1a9n+hIwCImg5KNiQakgcFAyWDJ5KSdecpxBGKUIxlWNZ17tYXL6+EW+Ar03BmNbGSaingzKrATHoLCVpsw4RFF70utxLDd5tRWKPD0t5ZoKgecoKyyJcVljmYwjPtYS2XR0YBefTcu/++M9+x96frudPxjuDPhVXMYodp04oceOSeuDew9+dk/RPaoDq97Mtn2Imf7ByGxDygCO+ghp7Q7we1iRKn1McapytDgp4eMFykYwyCO0z2Q1cPCnPrYxwTVQTEZYegIDhVVvFwM4lFkZdZ4bKWFS4aV+4mcagYj12Sq1jPXTey7b59dyYfXoJtHCpKDX4lJ2Ur78kbL4JCIupLo7JPyIHCyJ2azidWNj7TuPHz9+3YZ1q9c2m9fomCSgNbqD2ap7SIGU/wznGqMnwtAcMuRRFGPyR91IIkFDCOyDBYsb9NC6n/Ic+KGlrAgwvTYrW7er3h6EtKYL4IX2kA9gAxwvR9g6xSNYKinakAY1EHMl6iikR5xN7eLTaXLrLzz40PsvlmR3d7v8MiOGqN+vDKCDbPdRfiZVPuBD+/Z+bE+3e6Sjb6kVWuws97BEYK7BNAKDsLTtN+v2IITAVTlYp9rZybWRhN17pT5YOnz0zxa4AoJBi3VOa+tiTCuP0kEWp7U8TAKg+eqFFFBtuVirLFH+zxYonoFPbVLWJfQNE6IKeKEH48TVpnufALS3LD+qZH5kYMC4KU/KvTL1CjGb1Q+DXjs6OnDH1PTU1WvXNNe0Wt+jSybhGJ7+2Cpr6UliMCAUGFzRwXR1lhFiPbOuNgsa00AmwdVosNRuYPpTEaktBOgoh3bq4nC9VLS2drX1JsC8ueeJIUQgscQaSDOtuUlIGwBHIXHXzx2XjU43m8qzu97yyAPvuUjwPSSr1Bq3VaqXLZPx4c3a7z40O7u4Sd/u/ZUd93x8b1HsXMrSXM+J9CCTx7QawAqog/KeDnUyODBBKJeDxdpy8TO1ZdqHctzBf1JPVGfSnoVThqE4mW9djnx7dYynSmjd1z2eCKqBhFZAoeQpUf1j2RMZx4Kv/CJ8fRceQHW3SVeLyWNF8Ycch4bb7ULr25iJLVBU/ZbJXGf6+kp63thY8+DS0vwla8anJ1rtl+kui99NgCCIy0wqh2YOAcRemyFVA9pKCcES0kiPsPyjTJM+Am/y9OgrMU5/Td1EN0dNYBjDSair23pA1ZMcy6Q+nKsekLF4i4Y49UYZDue6KFCzQC2aRZkfzZJb33rfff+NnzvfUYCl7mKGnRwwfTRCpjiOkd4xM7N45Uir/Zt33f/5g0Vxc9FqZXq/oehohnQvXlEzpRQrDdYpYBhUgtlylTdYpKIFtBVrVLnfOuEjCYIVBIDJ63/gUafBCqELwpqnBI90UKOEmt1vJR9oooL0j3uAaSyrPujnFYN8ugnD1Zduj8FP90KzRVnlQ2X3JhXnW+0250qfLWmuY88yVXaAKzFrZc30hL7Qr58Vvf+ckZGXt/XqIVf2upb2yOEjWCQDWitSgjXyhwqmDO21hZgAFAhqtoXSptgjj5maKGwsgR6i6A9jaj7U+19Y0lGCqC2pIKpBD5uQ+0MIkBFEDAAgOS6pi37DMDvcSG9+x1333nRVq9W4fXlZR3P7yugvYV2/AWDtDAGGhnV2HltcXLpqZCT9mz0Hdj6yuPCeRb2+sqBjyrIGwULlR33XpGchcAMYgxLywYdiZThx1SkNQktY9Sf69hlpLEsxaEWxYkFPaA999QnTQE8/eBhQVTOe+fTzI89EAGRNAwsuY/12MLcNZZXqyUlAclRpp8hnsnTu/8zOfAB2evIYlzY4hYUZhrBlqo557QXyxOyA3nJ49sjI8Cf27HvgBRvWnzPWam2X8hqRO8ASS8L3grKBCXXRcqyuFfT6hLjuE1r6h6UX/Woloa0tOY4SnhHVfUynj5qGwQHSk6a8XY5Y2H30lxGhpmMIzWZ9f1RqeWlLBoAkynG2dNtrd1b93rvve+Az1+mvINw5P49VRkAjmBaRDag/aFjEcnC+qQcyesaR75hfvPO5E6tfPJBl49qVJUEfoAZIIrrnyvYRQQgAqhT+i7kycl4GlD4mjBOgsurMKk4WBcWarG4UvaoNntO6LDpbn+rCkg715GEX+rAyIKiB5GazVOKtPQPJeVQ3CVtFlR/L0wd+9uv33rihU5YHl5f1XpyBjMv7nwVTI/TAJA+QyWUjI61HZmZObh0Z3rlmYPBfcRS2b8Z/SirbgyVFQgkshYIKQYFQiSKGrx4gouNW19GPGSGpifoz1IYQhjEN2RhXgK2Xft3GhoN4bteK8gao5ezn/LpVyBcD7J6wRgGpiwbt32XW0WXpjs7SL39538Gvn6e/APOowBTL01olgp3OMqm3WjE9rOV+9fDw0F8cOLT7qsnJpcmB9vO1F0k2OR9UMZDMdsyT1mzghDIU6wCdAYsVpMGs+1KECFMSyEIPaiKv+MWG4Bqo1z+GVgwA4ovDycPLGUtUJO+VIRV8jtQAvp7nhjbX9GrVhpvtScr//St33vVH14yMNG8/eZLlLcP0Lo6/ZG48P0odHg9mrO9PDeyBTqe6rNUa+tj+/Xd8z4b1W8ZbrYv1/XReWZehogHKo4hAZWc0YKoE81p9lSDgMwSylNUxAFJTwggg+2gDhHz2bN5c8YkEkrABhdQgyZXYI+HmAZL3DO2hoBeQuBp1tFUCpHZvLfNCP46eH0mTB950/92/vKFbFodkkTJHgGR59x+JGLoXTgemVelRhAx1qW5XZXrRq3Hz/oP/dP3Gjc8ZaTQ2LUtaNdpCg8IIKs0QUkDGZ/ARVOpocztcoSNhnLiZGEjVBbtXm1tFWtul+mi6MC7VkYYYANKyZTIFHg/tDCJACjzG8iTRV2MAuBJdVOtNE0Vdx9OQzekeyFcWZ/79V/cf2X3u6Gj52Mryjr4yWkgQDNkVTgdmaDn102AKyOQCnbOm9Hcq5srq1gtWjb1oMMvG9JdTcMTc3+mFMEqwLnZ9vyNkIIPlohiXkfpwapANGj1Db0D0P2gdsS6ACzzC5SngUQ94dT6mgFVbn8djuJp7AFdlpLZFyirTTHtQmu3sLr/71+++/zPP0fK+4+TJOXWJfjIeh4KAPW1D5kzBjN1SAVnpuNT+6tTU9OTw4I6NQ0M/oL98pI0PL+7vzjLZCsGKLDxg1lbXs1oUxWLYCPBhnO9Udh1lokEL1mXAsDSDpiXqfLBAhna7xvFS74EvFspHIJHKJmUoNEESlCOQXxrLGl0dgxr7yuJzP7/jzvfocN68bWEBIPuXd/SVVgt+/eEpg0ln+ZDqquHhwc8dPLR/6+jIzrVDg69gkWA0atZGT+jbZCQ0OgWABTJlKALqpnUzRFivWvk0mKrCioJlqlk0gjKkzkerpRd5aOgcaKml0r7WExpWi2kFZDgKNYumfvz3UFV+/WcevvttyXK5nDcaizrJAOTprLIewcP0Pr4RmD116x4woS7VhlReqx3+kwcO7jx/fNVjk4MD/1LvzPOKpzQPgBoWA4eVWi139zkQxWprDfAFzqajD/4SZZV3uxpgDFim6SsDnsGmnXEAzxPgguuU01WPmMKbNi1vzpV6XCGXmefTVTH91zNTb7nn4PF9l420iocXfMkIkNFPaqn0WMHuCeEbgfn4DhKlxzDdpx3+GlnoJ/btv3/76vH9E4MD3y+GBlTq2EKtXM0l5gHESumjd9vOSoo5IKrdtPoKSwTcqRq8jNU9AhyAC5Yc+gEkUUMAGj5T49CfS0j7WfioXOS58G1kc+L61dmZt/7Bzt23y09mO056eQNktEqAjHOOaKcNTxXMJzDaLwt9ztDQkAC977zV43vXDACobxNw1PN3W90JRXoiUIOCNWi1hdoK1QQQFV/xk+XYgkQdruEDDy91W14AMQAcgHZbMFUBKTDhRX+iymxerAxZpL5T1sw4ity7MP+f3vPwzpu10lpfm5vTU9uen8QqzwhI0Z3xbg4tQUOfEpAzEaCVAB38c1noueNje1a3Wi/S93v1qidPPMKmhFKohdWgHUsWxZ1XSnMPFPIaqeT9TixVZf7WmsEgFb1jzQOe7gufGshYNnBYpYcCSPECSB7j6p3try8vvPvXHnzoT69tNptfXVyMQEaL7N9w1POfD0/FMgESvQgxDSV9YqGXC9BP7T/wwMbRkXtlod+nn6tod7nfD6AGLIAZ9I2gBBB7youzrYdUfEtZqPuqP6YOoAaPNvIGVALBvy9GfjYr+tUWqcvFise52sHTR5YXP/iuBx/+/SsE5G2dDlc4/ZeL8RiEGOj7BJ1Vd0p4KmDSsR9QyqcMcqgG9LMHD+0aHmx/bf1g+xp9D3u8y2M9LdraaAIYKGgG8VYbYAAgiouxRvKyl2WyUfiWmX4BgauWeOUCYIbTUgCyaOvlH94XqtuxcsWu3j0t+bFAAbmrs3TTOx/a+cFLBORuAan1DJAs6/4N54yBVL+nvMzpA6AEVIihlwfQK4aHB/728JFDjxbdL24fHb14LM83d2SitcWxQa0AGgEBJOptbYBSA6ER9Gc8w7KHhtcN8X3Umw8g1vwkEnlcAik0pgPIrKFv2TczPZ2URS584F07d/3u+fqy+/6yM6/H3NEiT7e8e7pFZZ8sfaqW+Xg+/QPFfHVQgG4fbrYemJ6b//yhw3971ZqJ4ZFG/iwhpEfxvmejbToojNL9eQOjUQwGTfUuLOoaHIElCzXU7huA57gTrDGAKzzdly+NdjN9raPVypdl4Q8uL/zWrz+658MXyyIPnArk4y2SeXhK4VsFk8F6INZ5ytWxTlls0aUnD+M+d/TY3583NnpEP6j0XPnRllY9estewk/Z2CJtVSxa1WJ5ylDymRDLVN4bkH6lGxp2d9PYAgUwdfhF91MeEBX1xkahv0KQz+ohwf2Li+967779nwDIRzqdOTlJLPLJDuZq8lCkZxSeDjAZCP0IpDHy4nypX4tNtjab7U8fPXav/sDIP+j23QXDWbZRflRfkQxWajsTCl6W3iiUByRi3GTERw+gdPkpwPQmsqoDwBqOjcmbEzSKvNEmMPWVpLxs6F2gqaTa++WTc2/9yOHDf/dsAXlvp3NS4APikwHZ00E0Zxyi/zvjDqchhEeM2i7sh7VdJkR+f8pR1jB8v5a/yqNv37b1Neuy9KdHiqLV0bGKHUW7k+7M8i0NDqciE2iZ/KP2cm1dOnYz7YziJa4CVzMKaE1wKkvkgK6bu0XV0A/j6AeiDyfJlz4xfew37p5f2qvNpnGfLFLkT+Yjke+bAhIZni7LhFfUizxCEaizgEdlYix7rfHyb6ZPfG2o2frqUCOf1E2SrTo36U9Ei0CGJ2tM/ShZNz34VQK+XO9vly3ph0r0LY4Cq8QSeShWW6S2pGCRwlLnSv0V1EY+m+fd3UXxvv966NB7DneKme06Vz4gi5Q80SLxkdybjGfJbwlI8fFckz4dAbshkEYL5XtGxJ6V6mAycG6zOSjFEL7xhg1rX3RW3njjaFluxxJ1d09OUfalF6RSfoFGRRiGb2dobmR9/nkKD6HZsjVCoBd29Z1Ffg5oKs/vumNx6b2fmZ3dcZ7GEIJLh57oHwEzXt18y0CK19MKJvwI1l0pgEZQARNQWfLCM2lvEajKtB8J1rHqjWvXvGR9lv34cFme1wBUffVQP5lWpsvag4Uf32ZLB8ViTL+XpKZ0Vi6AJS/3iPk39Pcn5huNpSNp9vsfmJ7+U1WdvEh/ReGRTjIn1OJ1djz6xLvlgEn3GJX95kO0pm+ew+l7RkBJI6DRSgGzF7c2k8GTnaRxDFAbjTWvGx3+vrVp9qqhsrhYLsHfCceRNiYG9dejWkmlH6Mt+FbucX4YVH8WRr/2x/uW03l2y45u8Xt/v7h4z6RWgmats+9U3wiQLOkIZL81Aua3HL5dYCJY5A2Y5PHPxLjssVaDqo/WRlnqEbXruILCo68YHnyuLPVlA93yX+TttFmOtqpcb+nhHblzX04t6SV9vWnayKf3pdn7P7W4+Gn1K87VWHv1CousEd/IUu63xn7/CJiEpwVIGEWFyX87QuRPGgGNlhqX/imgbhCo2m6xVBRvnTc+euELl5ZvHFtY2tpcO1K1x0fT8sRc1T0ym85l2dyXkuTn7iyKu7bpJxfVb1ETwjV2BJE0bjL9QEYAYyqybz08nbv5N5ImCh7TuMxI8V1+aHEipOW4gDx/cmTggamTjz6rW+TnXb79+d1HDlTV1Ml0fG6pHNm8Jtt7Yu5vb66qP9YbvEMPy0cKRYCMB3GAjGCav8qMHaOyT29gyT0ToR9ALJQyFtoDUnksh1gIgWJw/er07kPHi3Ou2j766hvf9MLztq3XnZIy2f/Q3uqWmz6V3/eFry0d2rb2z5LdR5KDAlL9AJIlTQRE81IaN5mnfVmL9ynhmbTM/oGjdfSD7PyIqM4ZGGjOjQ1152bmlm649Lwf0JPX1x98bL9+8yhPtl95QfWC17wkLbZt/vR7P/qFP7r2yu35zoPHADJezZwOyDhevwz/X+Wx0H7/OXC+Dj6qW6M4pHjxT27Z8ul/k7Sr18m6flzW/IOKb9yUlp/+41+udvzTTcvvevu//hHRbb366nPPVqpNPBlV1E+ne5PDUKKvVvbbH56pZX46TaJV0lZdJ8X/UUv0JevXD2xfPflD2dLy25rzJ6+caxbV2FA7aw6N6KXRPFl+dLb62Ot+I73kP776jumy2E3nY8dmscbHbzTPuDUyc9/JYOu8VEeieyXFK2VdG0aG/6QaHPleHFx7aLAYHtMfDtW7kwsHDiT6q85J68KLi6b+yNGdt9/65zcnyc9ftG1D84HdB3VL8hRf+YwDCYjfSctkfC9DrUvkmB8aaL5s//z89z50cq6jdZ7zt4pWrRpLJteuS9ZtPz8p5xYSvfSTpnrJYs2GVefqV+was7sPstGAPTGC2G/1qn5mwncaTLTUT52GM+jxTnmMc83ZuqrRH2bMkuGhpBoZSab0y/0nZJnrVR4dH08Wj08nCwdPzOkPQvHiGOE7CmIQ4TtrmdHFpHz7XVY4dnNRfOUH8/QrI2X1vHTdRKehd30G104kg2smkkXdNTqy92Ayt2tntWZ4mBu/xxP9VWcxgc93BZjspt8VQTeR2X2L/UX1jmYjPzpUVs3xbVu6a7duqdoDQ/ozle1klf6eL39l/NiePclQu4mfZGkT+pd1fz60PkOf3zVg7heQm3RJeHuS7Lq/rH5SfyP4oYHjJxrlMl+JbemHtPjprqwaXTORLmu5LywuX8gfjNHh8nSAPkPwnTrMd+rQHqVgiRJ93pSpZVt0xnygqo7tWFr6m20dvYYwM3dBc2mprWccqX4pS9fli0Xj2OFsupnue7jsfFSH/ErX5PFqJ25Ckf8zmn63gNkDdUbqr9HBWxtR9+75+S8tLix8eWBhbqqYOtFYfmzPaHNdPnByy+oH/37/iV9cGBo6pN+FL3XI5IzZf/39jIIYB/t/iYM+fKnfV84AAAAASUVORK5CYII="
+    }
+  ],
+  "animaciones": [
+    {
+      "nombre": "explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:explosion/explosion_001",
+          "sprite": "imagenes-explosion-explosion_001"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_002",
+          "sprite": "imagenes-explosion-explosion_002"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_003",
+          "sprite": "imagenes-explosion-explosion_003"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_004",
+          "sprite": "imagenes-explosion-explosion_004"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_005",
+          "sprite": "imagenes-explosion-explosion_005"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_006",
+          "sprite": "imagenes-explosion-explosion_006"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_007",
+          "sprite": "imagenes-explosion-explosion_007"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_008",
+          "sprite": "imagenes-explosion-explosion_008"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_009",
+          "sprite": "imagenes-explosion-explosion_009"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_010",
+          "sprite": "imagenes-explosion-explosion_010"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_011",
+          "sprite": "imagenes-explosion-explosion_011"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_012",
+          "sprite": "imagenes-explosion-explosion_012"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_013",
+          "sprite": "imagenes-explosion-explosion_013"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_014",
+          "sprite": "imagenes-explosion-explosion_014"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_015",
+          "sprite": "imagenes-explosion-explosion_015"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "mini_explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:mini-explosion/explosion_0",
+          "sprite": "imagenes-mini-explosion-explosion_0"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_1",
+          "sprite": "imagenes-mini-explosion-explosion_1"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_2",
+          "sprite": "imagenes-mini-explosion-explosion_2"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_3",
+          "sprite": "imagenes-mini-explosion-explosion_3"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_4",
+          "sprite": "imagenes-mini-explosion-explosion_4"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_5",
+          "sprite": "imagenes-mini-explosion-explosion_5"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_6",
+          "sprite": "imagenes-mini-explosion-explosion_6"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "golpe",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/golpe-1",
+          "sprite": "imagenes-efectos-golpe-1"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-2",
+          "sprite": "imagenes-efectos-golpe-2"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-3",
+          "sprite": "imagenes-efectos-golpe-3"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-4",
+          "sprite": "imagenes-efectos-golpe-4"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-5",
+          "sprite": "imagenes-efectos-golpe-5"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-6",
+          "sprite": "imagenes-efectos-golpe-6"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "chispa",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/chispa-1",
+          "sprite": "imagenes-efectos-chispa-1"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-2",
+          "sprite": "imagenes-efectos-chispa-2"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-3",
+          "sprite": "imagenes-efectos-chispa-3"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-4",
+          "sprite": "imagenes-efectos-chispa-4"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-5",
+          "sprite": "imagenes-efectos-chispa-5"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "humo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/humo-01",
+          "sprite": "imagenes-efectos-humo-01"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-02",
+          "sprite": "imagenes-efectos-humo-02"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-03",
+          "sprite": "imagenes-efectos-humo-03"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-04",
+          "sprite": "imagenes-efectos-humo-04"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-05",
+          "sprite": "imagenes-efectos-humo-05"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-06",
+          "sprite": "imagenes-efectos-humo-06"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-07",
+          "sprite": "imagenes-efectos-humo-07"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-08",
+          "sprite": "imagenes-efectos-humo-08"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-09",
+          "sprite": "imagenes-efectos-humo-09"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-10",
+          "sprite": "imagenes-efectos-humo-10"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "hombre_pixel_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_1",
+          "sprite": "imagenes-pixelados-pixel_player_1"
+        },
+        {
+          "nombre": "imagenes:pixelados/pixel_player_2",
+          "sprite": "imagenes-pixelados-pixel_player_2"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "hombre_pixel_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_0",
+          "sprite": "imagenes-pixelados-pixel_player_0"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "fantasma_azul_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_0",
+          "sprite": "imagenes-pacman-fantasma_azul_0"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_1",
+          "sprite": "imagenes-pacman-fantasma_azul_1"
+        }
+      ],
+      "velocidad": "10"
+    },
+    {
+      "nombre": "fantasma_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_6",
+          "sprite": "imagenes-pacman-fantasma_6"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_7",
+          "sprite": "imagenes-pacman-fantasma_7"
+        }
+      ],
+      "velocidad": "10"
+    },
+    {
+      "nombre": "moneda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:monedas/moneda_0",
+          "sprite": "imagenes-monedas-moneda_0"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_1",
+          "sprite": "imagenes-monedas-moneda_1"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_2",
+          "sprite": "imagenes-monedas-moneda_2"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_3",
+          "sprite": "imagenes-monedas-moneda_3"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_4",
+          "sprite": "imagenes-monedas-moneda_4"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_5",
+          "sprite": "imagenes-monedas-moneda_5"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_6",
+          "sprite": "imagenes-monedas-moneda_6"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_7",
+          "sprite": "imagenes-monedas-moneda_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "pacman_come",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_5",
+          "sprite": "imagenes-pacman-pacman_5"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_6",
+          "sprite": "imagenes-pacman-pacman_6"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "pacman_espera",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "nave_girando_a_la_derecha",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_derecha_1",
+          "sprite": "imagenes-nave-nave_derecha_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_derecha_2",
+          "sprite": "imagenes-nave-nave_derecha_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_girando_a_la_izquierda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_izquierda_1",
+          "sprite": "imagenes-nave-nave_izquierda_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_izquierda_2",
+          "sprite": "imagenes-nave-nave_izquierda_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanzando",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_en_reposo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_reposo",
+          "sprite": "imagenes-nave-nave_reposo"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "gallina_vuela",
+      "cuadros": [
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_1",
+          "sprite": "imagenes-gallina-gallina_vuela_1"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_3",
+          "sprite": "imagenes-gallina-gallina_vuela_3"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanza",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_salta",
+          "sprite": "imagenes-conejo-conejo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_parado1",
+          "sprite": "imagenes-conejo-conejo_parado1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_parado2",
+          "sprite": "imagenes-conejo-conejo_parado2"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "conejo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_camina1",
+          "sprite": "imagenes-conejo-conejo_camina1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_camina2",
+          "sprite": "imagenes-conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_camina_1",
+          "sprite": "imagenes-bmo-bmo_camina_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_camina_2",
+          "sprite": "imagenes-bmo-bmo_camina_2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_escala",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_escala_1",
+          "sprite": "imagenes-bmo-bmo_escala_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_escala_2",
+          "sprite": "imagenes-bmo-bmo_escala_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "bmo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_salta",
+          "sprite": "imagenes-bmo-bmo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "bmo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_parado",
+          "sprite": "imagenes-bmo-bmo_parado"
+        }
+      ],
+      "velocidad": 10
+    }
+  ],
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "menu",
+        "codigo": "class menu extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      },
+      {
+        "nombre": "juego",
+        "codigo": "class juego extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n\n    cada_segundo() {\n        let x = this.pilas.azar(-200, 200);\n\n        let globo = this.pilas.clonar_en(\"globo\", x, -300);\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "mejor_puntaje",
+        "codigo": "// @ts-ignore\nclass mejor_puntaje extends ActorTextoBase {\n    iniciar() {\n    }\n\n    actualizar() {\n        let puntaje = this.proyecto.puntaje;\n        this.texto = \"Mejor puntaje: \" + puntaje;\n    }\n}\n"
+      },
+      {
+        "nombre": "boton_jugar",
+        "codigo": "// @ts-ignore\nclass boton_jugar extends ActorTextoBase {\n\n    cuando_hace_click() {\n        this.pilas.cambiar_escena(\"juego\");\n    }\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}\n"
+      },
+      {
+        "nombre": "globo",
+        "codigo": "// @ts-ignore\nclass globo extends Actor {\n\n    iniciar() { }\n\n    actualizar() {\n        this.y += 3;\n\n        if (this.y > 300) {\n            this.eliminar();\n        }\n    }\n\n    cuando_hace_click() {\n        this.reproducir_sonido(\"explota-globo\");\n        this.eliminar();\n        this.pilas.clonar_en(\"chispa\", this.x, this.y + 50);\n        let puntaje = this.pilas.obtener_actor_por_nombre(\"puntaje\");\n        puntaje.aumentar();\n    }\n}\n"
+      },
+      {
+        "nombre": "chispa",
+        "codigo": "// @ts-ignore\nclass chispa extends Actor {\n\n  iniciar() {\n    this.animacion = \"chispa\";\n  }\n\n  actualizar() {}\n\n  cuando_finaliza_animacion(nombre: string) {\n    this.eliminar();\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada",
+        "codigo": "// @ts-ignore\nclass nube_animada extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 2;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada1",
+        "codigo": "// @ts-ignore\nclass nube_animada1 extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 2;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada2",
+        "codigo": "// @ts-ignore\nclass nube_animada2 extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 1;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "puntaje",
+        "codigo": "// @ts-ignore\nclass puntaje extends ActorTextoBase {\n    puntaje: number = 0;\n\n    iniciar() {\n        this.actualizar_texto();\n    }\n\n    aumentar(cantidad: number = 1) {\n        this.puntaje += cantidad;\n        this.actualizar_texto();\n\n        this.proyecto.avisar_cambio_de_puntaje(this.puntaje);\n    }\n\n    actualizar_texto() {\n        this.texto = `PUNTAJE: ${this.puntaje}`;\n    }\n}\n"
+      },
+      {
+        "nombre": "boton_volver",
+        "codigo": "// @ts-ignore\nclass boton_volver extends ActorTextoBase {\n\n    cuando_hace_click() {\n        this.pilas.cambiar_escena(\"menu\");\n    }\n\n    cuando_mueve() {\n        this.pilas.definir_cursor(\"pointer\");\n    }\n\n    cuando_sale() {\n        this.pilas.definir_cursor(\"normal\");\n    }\n}\n"
+      },
+      {
+        "nombre": "record",
+        "codigo": "// @ts-ignore\nclass record extends ActorTextoBase {\n        actualizar() {\n        let puntaje = this.proyecto.puntaje;\n        this.texto = \"Mejor puntaje: \" + puntaje;\n    }\n}\n"
+      },
+      {
+        "nombre": "actor",
+        "codigo": "// @ts-ignore\nclass actor extends Actor {\n\n    iniciar() { }\n\n    actualizar() {\n        this.y += 1;\n\n        if (this.y > 350) {\n            this.y = -350;\n        }\n    }\n}\n"
+      },
+      {
+        "nombre": "actor1",
+        "codigo": "// @ts-ignore\nclass actor1 extends Actor {\n\n    iniciar() { }\n\n    actualizar() {\n        this.y += 2;\n\n        if (this.y > 370) {\n            this.y = -370;\n        }\n    }\n}\n"
+      },
+      {
+        "nombre": "actor2",
+        "codigo": "// @ts-ignore\nclass actor2 extends Actor {\n\n    iniciar() { }\n\n    actualizar() {\n        this.y += 1.5;\n\n        if (this.y > 370) {\n            this.y = -370;\n        }\n    }\n}\n"
+      },
+      {
+        "nombre": "texto",
+        "codigo": "// @ts-ignore\nclass texto extends ActorTextoBase {\n}\n"
+      },
+      {
+        "nombre": "actor3",
+        "codigo": "// @ts-ignore\nclass actor3 extends Actor {\n\n  iniciar() {}\n\n  actualizar() {}\n}\n"
+      }
+    ],
+    "proyecto": "class Proyecto {\n    puntaje: number;\n\n    iniciar() {\n        this.puntaje = 10;\n\n\n        // Si quieres que el puntaje se mantenta\n        // en cada juego, activá estas lineas de código:\n\n        //if (localStorage.getItem(\"globos-record\")) {\n        //    this.puntaje = localStorage.getItem(\"globos-record\");\n        //}\n\n        // Tambien necesitas revisar el código del actor del siguiente\n        // método y activar algunas lineas de código.\n    }\n\n    avisar_cambio_de_puntaje(puntaje: number) {\n\n        // si el puntaje es mayor al puntaje\n        // máximo lo actualiza.\n        if (puntaje > this.puntaje) {\n            this.puntaje = puntaje;\n\n            // Si quieres que el puntaje se mantenga entre\n            // distintos juegos, activá estas lineas de código:\n\n            // localStorage.setItem(\"globos-record\", this.puntaje);\n        }\n\n\n    }\n}"
+  },
+  "escenas": [
+    {
+      "nombre": "menu",
+      "id": 1,
+      "ancho": 1000,
+      "alto": 1000,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-azul-plano",
+      "actores": [
+        {
+          "x": 0,
+          "y": 135.33057851239664,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "texto": "Mejor puntaje: ?",
+          "fuente": "color-blanco-con-sombra-chico",
+          "id": 12299020486633136,
+          "activo": true,
+          "nombre": "mejor_puntaje",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Jugar",
+          "color": "bg-white",
+          "fuente": "color-negro",
+          "id": 15978811817378942,
+          "activo": true,
+          "nombre": "boton_jugar",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 11.36363636363626,
+          "y": -236.57024793388427,
+          "z": 18,
+          "imagen": "globo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1.5,
+          "escala_y": 1.5,
+          "transparencia": 61,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 16245683074829158,
+          "activo": true,
+          "nombre": "actor",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": -157.68595041322334,
+          "y": 127.72727272727292,
+          "z": 14,
+          "imagen": "globo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 2,
+          "escala_y": 2,
+          "transparencia": 44,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 13895848557936056,
+          "activo": true,
+          "nombre": "actor1",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 234.21487603305764,
+          "y": -170.16528925619804,
+          "z": 14,
+          "imagen": "globo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 2,
+          "escala_y": 2,
+          "transparencia": 54,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 18504565341753824,
+          "activo": true,
+          "nombre": "actor2",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 0,
+          "y": 199.38016528925615,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "texto": "GLOBOS ROJOS",
+          "fuente": "color-blanco-con-sombra-medio",
+          "id": 16309429522853832,
+          "activo": true,
+          "nombre": "texto",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": -2.0661157024799763,
+          "y": -153.9256198347107,
+          "z": 197,
+          "imagen": "decoracion:objetos/decoracion_nubes_lejanas",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1.3,
+          "escala_y": 1.3,
+          "transparencia": 74,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 12216183163330468,
+          "activo": true,
+          "nombre": "actor3",
+          "habilidades": [],
+          "sensores": []
+        }
+      ]
+    },
+    {
+      "nombre": "juego",
+      "id": 2,
+      "ancho": 1000,
+      "alto": 1000,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-azul-plano",
+      "actores": [
+        {
+          "x": -96.0743801652892,
+          "y": -128.09917355371874,
+          "z": 0,
+          "imagen": "globo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 18783783032728724,
+          "activo": false,
+          "nombre": "globo",
+          "habilidades": [],
+          "sensores": [],
+          "color": "bg-orange"
+        },
+        {
+          "x": 3.0991735537189697,
+          "y": 115.70247933884295,
+          "z": 0,
+          "imagen": "imagenes:efectos/chispa-3",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "chispa",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 13238629207236536,
+          "activo": false,
+          "nombre": "chispa",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 226.23966942148758,
+          "y": 203.51239669421486,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 12011617501968958,
+          "activo": true,
+          "nombre": "nube_animada",
+          "habilidades": [],
+          "sensores": [],
+          "color": "bg-silver"
+        },
+        {
+          "x": -285.7851239669421,
+          "y": -119.17355371900828,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 10385783885753948,
+          "activo": true,
+          "nombre": "nube_animada1",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 44.13223140495876,
+          "y": -16.239669421487633,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.7,
+          "escala_y": 0.7,
+          "transparencia": 33,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 15385971905171798,
+          "activo": true,
+          "nombre": "nube_animada2",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 0,
+          "y": 223.14049586776858,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "texto": "PUNTAJE: 0",
+          "fuente": "color-blanco-con-sombra-chico",
+          "id": 14137282268703996,
+          "activo": true,
+          "nombre": "puntaje",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": -195.24793388429748,
+          "y": 217.97520661157023,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "boton",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "fondo": "imagenes:redimensionables/gris",
+          "texto": "Volver",
+          "color": "black",
+          "fuente": "color-negro",
+          "id": 17971817198752072,
+          "activo": true,
+          "nombre": "boton_volver",
+          "habilidades": [],
+          "sensores": []
+        },
+        {
+          "x": 0,
+          "y": 197.31404958677686,
+          "z": -10,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "texto": "mejor puntaje",
+          "fuente": "color-blanco-con-sombra",
+          "id": 16963090883968770,
+          "activo": true,
+          "nombre": "record",
+          "habilidades": [],
+          "sensores": []
+        }
+      ]
+    }
+  ],
+  "fps": 60,
+  "modo_de_video": "suavizado",
+  "sonidos": [
+    {
+      "nombre": "laser",
+      "ruta": "sonidos/laser.mp3"
+    },
+    {
+      "nombre": "explosion",
+      "ruta": "sonidos/explosion.mp3"
+    },
+    {
+      "nombre": "gallina",
+      "ruta": "sonidos/gallina.mp3"
+    },
+    {
+      "nombre": "moneda",
+      "ruta": "sonidos/moneda.mp3"
+    },
+    {
+      "nombre": "salto-corto",
+      "ruta": "sonidos/salto-corto.mp3"
+    },
+    {
+      "nombre": "salto-largo",
+      "ruta": "sonidos/salto-largo.mp3"
+    },
+    {
+      "nombre": "seleccion-aguda",
+      "ruta": "sonidos/seleccion-aguda.mp3"
+    },
+    {
+      "nombre": "seleccion-grave",
+      "ruta": "sonidos/seleccion-grave.mp3"
+    },
+    {
+      "nombre": "comer",
+      "ruta": "sonidos/comer.mp3"
+    },
+    {
+      "nombre": "explota-globo",
+      "contenido": "data:audio/mpeg;base64,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FAlkSusm0UTEumReLxjU/9ZfLhMIG5u9NFtFSSS0f/6ZcLiB//tUxPQAC6jXS+ywawmVI+l9gw31fN3QzRBBvpLRR//////L5fTBD//sEqpMQU1FMy4xMDCqqqqqUBYAAGAgICbBTYorgVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//uExOgADGjvR/WUACNfuGe/NxBAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//sUxOEDwawJGxwwACgAADSAAAAEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV"
+    }
+  ]
+}

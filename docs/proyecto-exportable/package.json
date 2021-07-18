@@ -1,0 +1,22 @@
+{
+  "name": "proyecto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "surge": "surge",
+    "start": "http-server -o",
+    "electron": "electron index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "9.1.0",
+    "http-server": "^0.12.3",
+    "surge": "^0.21.3"
+  },
+  "dependencies": {
+    "electron-packager": "15.0.0"
+  }
+}

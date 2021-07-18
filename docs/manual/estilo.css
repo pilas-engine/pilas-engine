@@ -1,0 +1,126 @@
+body {
+  font-size: 17px;
+  line-height: 1.5;
+  max-width: 720px;
+  margin: auto;
+  padding: 1em;
+  font-family: Verdana;
+}
+
+a {
+  text-decoration: none;
+}
+
+tr.odd {
+  background-color: #ececec;
+}
+
+tr td {
+  padding: 10px;
+  vertical-align: top;
+}
+
+.tc {
+  text-align: center;
+}
+
+.tr {
+  text-align: right;
+}
+
+.tl {
+  text-align: left;
+}
+
+h1,
+h2,
+h3 {
+  color: #005590;
+  font-weight: 200;
+}
+
+pre.sourceCode {
+  margin: 0;
+  padding: 10px;
+  font-size: 16px;
+}
+
+p code {
+  white-space: pre-wrap;
+  font-size: 16px;
+  background-color: #303030;
+  padding: 3px 8px;
+  border-radius: 3px;
+  color: #cccccc;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  padding: 1em;
+  margin: auto;
+}
+
+.funcion pre:first-child {
+  margin: 0;
+  margin-top: 2em;
+}
+
+.funcion pre {
+  margin-left: 5em;
+  text-align: left;
+  padding: 0.5em;
+  background-color: #303030;
+}
+
+.funcion ul {
+  margin-left: 5em !important;
+  text-align: justify !important;
+}
+
+.funcion p {
+  margin-left: 5em;
+  text-align: justify;
+}
+
+.dn {
+  display: none;
+}
+
+.small {
+  font-size: small;
+}
+
+.boton {
+  color: #c6c8c8;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.69);
+  vertical-align: top;
+  background-color: #595b5b;
+  box-shadow: inset 0 1px #737373;
+  border: 1px solid #333434;
+  border-radius: 4px;
+}
+
+.boton:hover {
+  background-color: #626465;
+}
+
+.boton:focus {
+  border: 1px solid #0036ff;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.36), 0 0 0 2px #6fb5f1;
+  outline: 0;
+}
+
+.boton:active {
+  border: 1px solid #333434;
+  background-color: #3f4041;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.v-mid {
+  vertical-align: middle;
+}
+
+figcaption {
+  display: none !important;
+}

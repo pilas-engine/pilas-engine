@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Blockly Editor</title>
+    <script src="./blockly_compressed-ab59f1afdcc7517959a74315f4b2e14b.js" integrity="sha256-VyaWAlAyM8ay/IcMDQQ0g+8z/Wzk5Lz0bwP1StET+XY= sha512-/n6gbaAGoAd2trxeNogbThtATPSQPImbp/12latNI8ggpKV3UHj3I8bXG8gf7kbhjEvp4RJTmOpwprXG5RCoKA==" ></script>
+    <script src="./blocks_compressed-1543f572e11a833898c89fd10e773ebf.js" integrity="sha256-5tc6oDs3RX5sFFpYhFNURWXq83R4vd1Ijh+AU1+nsbA= sha512-t/D5TwY4LiTlMXrpeKG9z/25ZFSIqhVcj17F1icLqEywBRG1WXe91YfIE4f19yRHVBGSIUKZylnoWhRvbsOSWQ==" ></script>
+    <script src="./msg/js/en-e134ca4313ab007b3bc759c300ff1f5f.js" integrity="sha256-LPBy2k4McPC6lj7Dof4bP/xHilDp+zmqCBxlO2zDpjU= sha512-nwNHzu/25lKIo8mYOoRX8qigGj5vf2Y4uvLmCo7wwHO8znuLjlsGKqd99yVJWfpluuie4DpToBrAaxRCiq8cmA==" ></script>
+    <script src="./javascript_compressed-93d5c821230fcfc68260e3e403128ad6.js" integrity="sha256-NWK79p0DNrs2gO68IWSf8djwOFZj+3whWyKRkMagAvo= sha512-QUWTI50K59BlggL7wNSmOZP5LbEaSDfR5fHjgiMWLMCn3s6rXmjRywIAUFzILSVaBY1AqOa3L16NsK/W/FeZ7g==" ></script>
+    <script src="./bloques.js" integrity="sha256-fIYqdURWjOIAPaQotC4dfLc/KUoITyv4Q9lmxzlh4W4= sha512-4i+a7at5d3uCRVp88KUzXe0noGtgWHndNUYPUdHss5qgNykMkV/lk/xD1S+sbdkx290vuWJK+bYh+zpkS/I0uQ==" ></script>
+    <style>
+      body {
+        background-color: #fff;
+        font-family: sans-serif;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      h1 {
+        font-weight: normal;
+        font-size: 140%;
+      }
+      table {
+        height: 100%;
+        width: 100%;
+      }
+
+      #blocklyArea {
+        height: 99%;
+      }
+
+      .blocklyMainBackground {
+        stroke-width: 0 !important;
+        stroke: #1e1e1e !important;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td id="blocklyArea">
+          <div id="blocklyDiv" style="position: absolute;"></div>
+        </td>
+      </tr>
+    </table>
+
+    <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+      <category name="..">
+      </category>
+    </xml>
+
+    <script>
+      var HOST = "file://";
+      window.valores_dropdown = {teclas: [
+        ['A', 'A'],
+      ]};
+
+      if (window.location.host) {
+        HOST = window.location.protocol + "//" + window.location.host;
+      }
+
+      const toolbox = {
+        "actor": [
+          {
+            "kind": "category",
+            "name": "Eventos",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "actor_inicia"
+              },
+              {
+                "kind": "block",
+                "type": "actor_inicia"
+              },
+              {
+                "kind": "block",
+                "type": "cuando_comienza_una_colision"
+              },
+            ]
+          },
+          {
+            "kind": "category",
+            "name": "Control",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "controls_if"
+              }
+            ]
+          },
+          {
+            "kind": "category",
+            "name": "Acciones",
+            "contents": [
+                    {
+                            "kind": "block",
+                            "type": "text"
+                    },
+                    {
+                            "kind": "block",
+                            "type": "actor_decir",
+                    },
+                    {
+                            "kind": "block",
+                            "type": "desplazar"
+                          },
+                    {
+                              "kind": "block",
+                              "type": "reproducir_animacion"
+                          },
+                      {
+                              "kind": "block",
+                              "type": "reproducir_sonido"
+                            },
+                      {
+                              "kind": "block",
+                              "type": "reproducir_musica"
+                            },
+
+                      {
+                              "kind": "block",
+                              "type": "detener_musica"
+                            }
+
+            ]
+          },
+          {
+            "kind": "category",
+            "name": "Sensores",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "control_tecla"
+              }
+            ]
+          },
+          {
+  "kind": "category",
+  "name": "Variables",
+  "custom": "VARIABLE"
+},
+{
+  "kind": "category",
+  "name": "Functions",
+  "custom": "PROCEDURE"
+}
+        ],
+        "proyecto": [
+          {
+            "kind": "category",
+            "name": "Logic",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "logic_compare"
+              },
+              {
+                "kind": "block",
+                "type": "logic_operation"
+              },
+              {
+                "kind": "block",
+                "type": "logic_boolean"
+              }
+            ]
+          },
+        ],
+        "escena": [
+          {
+            "kind": "category",
+            "name": "Logic escena",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "logic_compare"
+              },
+              {
+                "kind": "block",
+                "type": "logic_operation"
+              },
+              {
+                "kind": "block",
+                "type": "logic_boolean"
+              }
+            ]
+          }
+        ]
+      }
+
+      var blocklyArea = document.getElementById("blocklyArea");
+      var blocklyDiv = document.getElementById("blocklyDiv");
+      var workspace = Blockly.inject(blocklyDiv, {
+        media: "./media/",
+        toolbox: document.getElementById("toolbox"),
+        theme: "dark",
+        trashcan: true,
+        zoom: {
+          controls: true,
+          wheel: true,
+          startScale: 1.0,
+          maxScale: 3,
+          minScale: 0.3,
+          scaleSpeed: 1.2,
+          pinch: true
+        },
+        move: {
+          scrollbars: true,
+          drag: true,
+          wheel: false
+        }
+      });
+
+      var onresize = function(e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+          x += element.offsetLeft;
+          y += element.offsetTop;
+          element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x - 2 + "px";
+        blocklyDiv.style.top = y - 2 + "px";
+        blocklyDiv.style.width = blocklyArea.offsetWidth + 4 + "px";
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 4 + "px";
+        Blockly.svgResize(workspace);
+      };
+
+
+      // ctrl+s o cmd+s para guardar y ejecutar
+      document.addEventListener("keydown", function(e) {
+        var pulsa_ctrl_s = (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83;
+
+        if (pulsa_ctrl_s) {
+          e.preventDefault();
+	        window.top.postMessage({message: "pulsa-ctrl-s"}, HOST);
+        }
+      }, false);
+
+
+      window.addEventListener("resize", onresize, false);
+      onresize();
+      Blockly.svgResize(workspace);
+
+      // Avisa al componente que cargó blockly.
+      window.top.postMessage({ message: "carga-completa-de-blockly" }, HOST);
+
+      function convertir_en_dropdown(lista) {
+        return lista.map(item => [item, item]); 
+      }
+
+      function onChange(event) {
+        if (!event.isUiEvent) {
+          let xml = Blockly.Xml.workspaceToDom(workspace);
+          let xml_text = Blockly.Xml.domToText(xml);
+          let codigo = Blockly.JavaScript.workspaceToCode(workspace);
+
+          window.top.postMessage(
+            {
+              message: "cambia-el-workspace-de-blockly",
+              texto: xml_text,
+              codigo: codigo
+            },
+            HOST
+          );
+        }
+      }
+
+      workspace.addChangeListener(onChange);
+
+      // Desactiva los bloques que no están conectados a un bloque
+      // de evento.
+      workspace.addChangeListener(Blockly.Events.disableOrphans);
+
+      Blockly.JavaScript.STATEMENT_PREFIX = 'if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque(%1, this.id);\n}\n';
+
+      // Atiende mensaje que envía el componente blockly-editor.
+      window.addEventListener("message", message => {
+
+        if (!message.data) {
+          return;
+        }
+
+
+        if (message.data.message === "resaltar-bloques") {
+          message.data.ids_de_bloques.map((bloque, index) => {
+
+            if (index === 0) {
+              // si es el primer bloque en resaltar descactiva todos
+              // los demás así no quedan resaltados.
+              Blockly.mainWorkspace.highlightBlock(bloque);
+            } else {
+              // resalta el bloque actual sin alterar al resto de los bloques.
+              Blockly.mainWorkspace.highlightBlock(bloque, true);
+            }
+
+          });
+        }
+
+        if (message.data.message === "limpiar-bloques-resaltados") {
+          setTimeout(function() {
+            Blockly.mainWorkspace.highlightBlock();
+          }, 100);
+        }
+
+        if (message.data.message === "actualizar-enumeraciones") {
+          //console.log("en blockly-editor.html, debo actualizar enumeraciones", message.data.data);
+
+          window.valores_dropdown = {
+            animaciones: convertir_en_dropdown(message.data.data.animaciones),
+            sonidos: convertir_en_dropdown(message.data.data.sonidos),
+            teclas: convertir_en_dropdown(message.data.data.teclas),
+          }
+
+          //console.log("en blockly-editor.html se actualiza valores_dropdown");
+          //console.log(window.valores_dropdown);
+        }
+                
+        if (message.data.message === "cargar-toolbox") {
+
+          Blockly.mainWorkspace.updateToolbox({
+            "kind": "categoryToolbox",
+            "contents": toolbox[message.data.tipo]
+          });
+        }
+
+        if (message.data.message === "cargar-bloques") {
+          Blockly.mainWorkspace.clear();
+
+          if (message.data.xml_como_texto === "----") {
+            //console.log("Ojo, hay guiones en lugar de código");
+          } else {
+            var texto = message.data.xml_como_texto;
+
+            if (message.data.xml_como_texto.texto) {
+              texto = message.data.xml_como_texto.texto;
+            }
+
+            let xml = Blockly.Xml.textToDom(texto);
+            Blockly.Xml.domToWorkspace(xml, workspace);
+          }
+        }
+              
+      });
+    </script>
+  </body>
+</html>

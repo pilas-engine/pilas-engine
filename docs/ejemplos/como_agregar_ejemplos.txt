@@ -1,0 +1,24 @@
+Para agregar ejemplos se tiene que editar manualmente
+el archivo "ejemplos.json", añadir una linea especificando
+el nombre del ejemplo y desde qué versión aparece.
+
+También hay que crear un archivo .pilas dentro del directorio
+proyectos con el mismo nombre del ejemplo que se ingresó
+en el archivo "ejemplos.json".
+
+Luego se tiene que hacer una captura de pantalla del
+ejemplo (del tamaño 180x140) y colocarlo dentro
+del directorio "recursos/iconos/ejemplos".
+
+Después hay que editar el archivo:
+
+- app/components/pilas-lista-de-ejemplos.js
+
+e incrementar el contador.
+
+Y finalmente, se tiene que ejecutar el comando:
+
+"make actualizar_imagenes"
+
+(posiblemente necesites ejecutar dos veces el comando
+si ember está corriendo)

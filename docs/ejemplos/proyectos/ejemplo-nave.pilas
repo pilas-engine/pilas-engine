@@ -1,0 +1,57 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 1,
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "principal",
+        "codigo": "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "nave",
+        "codigo": "class nave extends Actor {\n    propiedades = {\n        imagen: \"imagenes:nave/nave_reposo\"\n    };\n\n    velocidad = 5;\n    cuadros_desde_el_ultimo_disparo;\n\n    iniciar() {\n        this.crear_animacion(\"nave_en_reposo\", [\"imagenes:nave/nave_reposo\"], 2);\n        this.crear_animacion(\"nave_avanzando\", [\"imagenes:nave/nave_avanza_1\", \"imagenes:nave/nave_avanza_2\"], 20);\n        this.crear_animacion(\"nave_girando_a_la_izquierda\", [\"imagenes:nave/nave_izquierda_1\", \"imagenes:nave/nave_izquierda_2\"], 20);\n        this.crear_animacion(\"nave_girando_a_la_derecha\", [\"imagenes:nave/nave_derecha_1\", \"imagenes:nave/nave_derecha_2\"], 20);\n\n        this.animacion = \"nave_en_reposo\";\n        this.cuadros_desde_el_ultimo_disparo = 0;\n    }\n\n    actualizar() {\n        this.cuadros_desde_el_ultimo_disparo += 1;\n\n        if (this.pilas.control.izquierda) {\n            this.rotacion += this.velocidad;\n            this.animacion = \"nave_girando_a_la_izquierda\";\n        }\n\n        if (this.pilas.control.derecha) {\n            this.rotacion -= this.velocidad;\n            this.animacion = \"nave_girando_a_la_derecha\";\n        }\n\n        if (this.pilas.control.espacio && this.cuadros_desde_el_ultimo_disparo > 5) {\n            let laser = this.pilas.actores.laser();\n            laser.x = this.x;\n            laser.y = this.y;\n            laser.rotacion = this.rotacion;\n            laser.z = this.z + 1;\n            this.cuadros_desde_el_ultimo_disparo = 0;\n        }\n\n        if (this.pilas.control.arriba) {\n            this.avanzar(this.rotacion, this.velocidad);\n            this.animacion = \"nave_avanzando\";\n        } else {\n            if (!this.pilas.control.izquierda && !this.pilas.control.derecha) {\n                this.animacion = \"nave_en_reposo\";\n            }\n        }\n    }\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "principal",
+      "id": 1,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-espacio_1",
+      "actores": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "imagen": "imagenes:nave/nave_reposo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1304,
+          "nombre": "nave"
+        }
+      ]
+    }
+  ]
+}

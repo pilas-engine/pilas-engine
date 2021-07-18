@@ -1,0 +1,701 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 1,
+  "imagenes": [],
+  "animaciones": [
+    {
+      "nombre": "mini_explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:mini-explosion/explosion_0",
+          "sprite": "mini-explosion-explosion_0"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_1",
+          "sprite": "mini-explosion-explosion_1"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_2",
+          "sprite": "mini-explosion-explosion_2"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_3",
+          "sprite": "mini-explosion-explosion_3"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_4",
+          "sprite": "mini-explosion-explosion_4"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_5",
+          "sprite": "mini-explosion-explosion_5"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_6",
+          "sprite": "mini-explosion-explosion_6"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:explosion/explosion_001",
+          "sprite": "explosion-explosion_001"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_002",
+          "sprite": "explosion-explosion_002"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_003",
+          "sprite": "explosion-explosion_003"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_004",
+          "sprite": "explosion-explosion_004"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_005",
+          "sprite": "explosion-explosion_005"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_006",
+          "sprite": "explosion-explosion_006"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_007",
+          "sprite": "explosion-explosion_007"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_008",
+          "sprite": "explosion-explosion_008"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_009",
+          "sprite": "explosion-explosion_009"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_010",
+          "sprite": "explosion-explosion_010"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_011",
+          "sprite": "explosion-explosion_011"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_012",
+          "sprite": "explosion-explosion_012"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_013",
+          "sprite": "explosion-explosion_013"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_014",
+          "sprite": "explosion-explosion_014"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_015",
+          "sprite": "explosion-explosion_015"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_1",
+          "sprite": "pixelados-pixel_player_1"
+        },
+        {
+          "nombre": "imagenes:pixelados/pixel_player_2",
+          "sprite": "pixelados-pixel_player_2"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_0",
+          "sprite": "pixelados-pixel_player_0"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "fantasma_azul_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_0",
+          "sprite": "pacman-fantasma_azul_0"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_1",
+          "sprite": "pacman-fantasma_azul_1"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "fantasma_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_6",
+          "sprite": "pacman-fantasma_6"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_7",
+          "sprite": "pacman-fantasma_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "moneda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:monedas/moneda_0",
+          "sprite": "monedas-moneda_0"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_1",
+          "sprite": "monedas-moneda_1"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_2",
+          "sprite": "monedas-moneda_2"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_3",
+          "sprite": "monedas-moneda_3"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_4",
+          "sprite": "monedas-moneda_4"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_5",
+          "sprite": "monedas-moneda_5"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_6",
+          "sprite": "monedas-moneda_6"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_7",
+          "sprite": "monedas-moneda_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "pacman_come",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "pacman-pacman_4"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_5",
+          "sprite": "pacman-pacman_5"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_6",
+          "sprite": "pacman-pacman_6"
+        }
+      ],
+      "velocidad": "40"
+    },
+    {
+      "nombre": "pacman_espera",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "pacman-pacman_4"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "nave_girando_a_la_derecha",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_derecha_1",
+          "sprite": "nave-nave_derecha_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_derecha_2",
+          "sprite": "nave-nave_derecha_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_girando_a_la_izquierda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_izquierda_1",
+          "sprite": "nave-nave_izquierda_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_izquierda_2",
+          "sprite": "nave-nave_izquierda_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanzando",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_en_reposo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_reposo",
+          "sprite": "nave-nave_reposo"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "gallina_vuela",
+      "cuadros": [
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_1",
+          "sprite": "gallina-gallina_vuela_1"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "gallina-gallina_vuela_2"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_3",
+          "sprite": "gallina-gallina_vuela_3"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "gallina-gallina_vuela_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanza",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_salta",
+          "sprite": "conejo-conejo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_parado1",
+          "sprite": "conejo-conejo_parado1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_parado2",
+          "sprite": "conejo-conejo_parado2"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "conejo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_camina1",
+          "sprite": "conejo-conejo_camina1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_camina2",
+          "sprite": "conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_camina_1",
+          "sprite": "bmo-bmo_camina_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_camina_2",
+          "sprite": "bmo-bmo_camina_2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_escala",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_escala_1",
+          "sprite": "bmo-bmo_escala_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_escala_2",
+          "sprite": "bmo-bmo_escala_2"
+        }
+      ],
+      "velocidad": 10
+    }
+  ],
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "escena1",
+        "codigo": "class escena1 extends Escena {\n    iniciar() {\n        this.pilas.definir_cursor(\"mano\")\n    }\n}"
+      },
+      {
+        "nombre": "escena2",
+        "codigo": "class escena2 extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "cactus",
+        "codigo": "// @ts-ignore\nclass cactus extends Actor {\n\n    iniciar() {}\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n    }\n}"
+      },
+      {
+        "nombre": "protagonista",
+        "codigo": "// @ts-ignore\nclass protagonista extends Actor {\n    destino_x: number;\n    destino_y: number;\n\n    iniciar() {\n        this.estado = \"esperando\";\n    }\n\n    esperando_iniciar() {\n        this.animacion = \"hombre_pixel_parado\";\n    }\n\n    esperando_actualizar() {\n\n    }\n\n    caminando_iniciar() {\n        this.animacion = \"hombre_pixel_camina\";\n    }\n\n    caminando_actualizar() {\n        let velocidad = 10;\n        let distancia = this.obtener_distancia_al_punto(this.destino_x, this.destino_y);\n\n        if (distancia > velocidad) {\n            this.mover_hacia_el_punto(this.destino_x, this.destino_y, velocidad);\n        } else {\n            this.estado = \"esperando\";\n        }\n    }\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n\n        // Hacer que la cámara siga al protagonista.\n        this.pilas.camara.seguir_al_actor(this, 5, true);\n    }\n\n    cuando_hace_click_en_la_pantalla(x, y) {\n        this.destino_x = x;\n        this.destino_y = y;\n\n        // Hace que el actor mire en dirección al punto que tiene\n        // que alcanzar.\n        if (this.destino_x > this.x) {\n            this.espejado = false;\n        } else {\n            this.espejado = true;\n        }\n\n        this.estado = \"caminando\";\n    }\n}"
+      },
+      {
+        "nombre": "descripcion",
+        "codigo": "// @ts-ignore\nclass descripcion extends ActorTextoBase {\n    iniciar() {\n        // Hace que este texto no siga la cámara.\n        this.fijo = true;\n    }\n}"
+      },
+      {
+        "nombre": "cactus1",
+        "codigo": "// @ts-ignore\nclass cactus1 extends Actor {\n\n    iniciar() {}\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n    }\n}"
+      },
+      {
+        "nombre": "cactus2",
+        "codigo": "// @ts-ignore\nclass cactus2 extends Actor {\n\n    iniciar() {}\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n    }\n}"
+      },
+      {
+        "nombre": "cactus3",
+        "codigo": "// @ts-ignore\nclass cactus3 extends Actor {\n\n    iniciar() {}\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n    }\n}"
+      },
+      {
+        "nombre": "cactus4",
+        "codigo": "// @ts-ignore\nclass cactus4 extends Actor {\n\n    iniciar() {}\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n    }\n}"
+      },
+      {
+        "nombre": "cactus5",
+        "codigo": "// @ts-ignore\nclass cactus5 extends Actor {\n\n    iniciar() {}\n\n    actualizar() {\n        // hace que la profundidad dependa de la posición \"y\"\n        // para que el protagonista pueda pasar por \"detrás\" de\n        // otros objetos.\n        this.z = this.y;\n    }\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "escena1",
+      "id": 1,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-tierra_1",
+      "actores": [
+        {
+          "x": 140,
+          "y": 50,
+          "z": 0,
+          "imagen": "decoracion:objetos/decoracion_cactus",
+          "centro_x": 0.5,
+          "centro_y": 0.8999999999999999,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "cactus",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1567,
+          "activo": true,
+          "nombre": "cactus",
+          "habilidades": []
+        },
+        {
+          "x": -18.209125475285163,
+          "y": -16.011406844106318,
+          "z": 0,
+          "imagen": "imagenes:pixelados/pixel_player_0",
+          "centro_x": 0.5,
+          "centro_y": 0.8999999999999999,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1950,
+          "activo": true,
+          "nombre": "protagonista",
+          "habilidades": []
+        },
+        {
+          "x": -1,
+          "y": -202,
+          "z": -999999,
+          "imagen": "imagenes:basicos/invisible",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": true,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "texto": "Has click para mover al personaje por la pantalla",
+          "id": 1277,
+          "activo": true,
+          "nombre": "descripcion",
+          "habilidades": []
+        },
+        {
+          "x": -226,
+          "y": -238,
+          "z": 0,
+          "imagen": "decoracion:objetos/decoracion_cactus",
+          "centro_x": 0.5,
+          "centro_y": 0.8999999999999999,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "cactus",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1927,
+          "activo": true,
+          "nombre": "cactus1",
+          "habilidades": []
+        },
+        {
+          "x": 105,
+          "y": 191,
+          "z": 0,
+          "imagen": "decoracion:objetos/decoracion_cactus",
+          "centro_x": 0.5,
+          "centro_y": 0.8999999999999999,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "cactus",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1642,
+          "activo": true,
+          "nombre": "cactus2",
+          "habilidades": []
+        },
+        {
+          "x": -142,
+          "y": 227,
+          "z": 0,
+          "imagen": "decoracion:objetos/decoracion_cactus",
+          "centro_x": 0.5,
+          "centro_y": 0.8999999999999999,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "cactus",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1616,
+          "activo": true,
+          "nombre": "cactus3",
+          "habilidades": []
+        },
+        {
+          "x": -193,
+          "y": 7,
+          "z": 0,
+          "imagen": "decoracion:objetos/decoracion_cactus",
+          "centro_x": 0.5,
+          "centro_y": 0.8999999999999999,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "cactus",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1750,
+          "activo": true,
+          "nombre": "cactus4",
+          "habilidades": []
+        },
+        {
+          "x": 232,
+          "y": -76,
+          "z": 0,
+          "imagen": "decoracion:objetos/decoracion_cactus",
+          "centro_x": 0.5,
+          "centro_y": 0.8999999999999999,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "cactus",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "color": "white",
+          "magnitud": 18,
+          "id": 1357,
+          "activo": true,
+          "nombre": "cactus5",
+          "habilidades": []
+        }
+      ],
+      "ancho": 1000,
+      "alto": 1000
+    },
+    {
+      "nombre": "escena2",
+      "id": 2,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [],
+      "ancho": 1000,
+      "alto": 1000
+    }
+  ]
+}

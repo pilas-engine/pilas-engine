@@ -1,0 +1,755 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 1,
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "principal",
+        "codigo": "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "conejo",
+        "codigo": "class conejo extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"conejo_parado1\",\n\n        figura: \"rectangulo\",\n        figura_ancho: 50,\n        figura_alto: 100,\n        figura_radio: 50,\n        figura_sin_rotacion: true,\n        figura_dinamica: true,\n        figura_rebote: 0\n    };\n\n    toca_el_suelo = false;\n    pies = null;\n\n    iniciar() {\n        this.crear_animacion(\"conejo_parado\", [\"imagenes:conejo/conejo_parado1\", \"imagenes:conejo/conejo_parado2\"], 2);\n        this.crear_animacion(\"conejo_camina\", [\"imagenes:conejo/conejo_camina1\", \"imagenes:conejo/conejo_camina2\"], 20);\n        this.crear_animacion(\"conejo_salta\", [\"imagenes:conejo/conejo_salta\"], 20);\n        this.crear_animacion(\"conejo_muere\", [\"imagenes:conejo/conejo_pierde\"], 1);\n\n        this.estado = \"parado\";\n        this.pies = this.agregar_sensor(50, 10, 0, -50);\n    }\n\n    actualizar() {\n        if (this.pies.colisiones.length > 0) {\n            this.toca_el_suelo = true;\n        } else {\n            this.toca_el_suelo = false;\n        }\n    }\n\n    parado_iniciar() {\n        this.reproducir_animacion(\"conejo_parado\");\n    }\n\n    parado_actualizar() {\n        if (this.pilas.control.izquierda || this.pilas.control.derecha) {\n            this.estado = \"camina\";\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = \"salta\";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = \"salta\";\n        }\n    }\n\n    camina_iniciar() {\n        this.reproducir_animacion(\"conejo_camina\");\n    }\n\n    camina_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n            this.espejado = true;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n            this.espejado = false;\n        }\n\n        if (!this.pilas.control.derecha && !this.pilas.control.izquierda) {\n            this.estado = \"parado\";\n            return;\n        }\n\n        if (this.pilas.control.arriba && this.toca_el_suelo) {\n            this.impulsar(0, 10);\n            this.estado = \"salta\";\n        }\n\n        if (!this.toca_el_suelo) {\n            this.estado = \"salta\";\n        }\n    }\n\n    salta_iniciar() {\n        this.reproducir_animacion(\"conejo_salta\");\n    }\n\n    salta_actualizar() {\n        if (this.pilas.control.izquierda) {\n            this.x -= 5;\n        }\n\n        if (this.pilas.control.derecha) {\n            this.x += 5;\n        }\n\n        if (this.toca_el_suelo) {\n            this.estado = \"parado\";\n        }\n    }\n\n    cuando_comienza_una_colision(actor: Actor) {\n        if (actor.etiqueta === \"moneda\") {\n            this.pilas.reproducir_sonido(\"moneda\");\n            actor.eliminar();\n        }\n\n        if (actor.etiqueta === \"plataforma\" && this.velocidad_y > 0) {\n            return true;\n        }\n    }\n\n    cuando_se_mantiene_una_colision(actor) {}\n\n    cuando_termina_una_colision(actor) {}\n}"
+      },
+      {
+        "nombre": "plataforma",
+        "codigo": "class plataforma extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "caja",
+        "codigo": "class caja extends Actor {\n    propiedades = {\n        x: 0,\n        y: 0,\n        imagen: \"caja\",\n        etiqueta: \"caja\",\n        figura: \"rectangulo\",\n        figura_ancho: 45,\n        figura_alto: 45,\n        figura_rebote: 0.9\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "pelota",
+        "codigo": "class pelota extends Actor {\n    propiedades = {\n        imagen: \"pelota\",\n        figura: \"circulo\",\n        figura_radio: 25\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "techo",
+        "codigo": "class techo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"techo\",\n        y: +255,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo",
+        "codigo": "class suelo extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"suelo\",\n        y: -250,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "suelo1",
+        "codigo": "class suelo1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"suelo\",\n        y: -250,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "techo1",
+        "codigo": "class techo1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"techo\",\n        y: +255,\n        figura_ancho: 600,\n        figura_alto: 25,\n        figura_dinamica: false\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "plataforma1",
+        "codigo": "class plataforma1 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "plataforma2",
+        "codigo": "class plataforma2 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "plataforma3",
+        "codigo": "class plataforma3 extends Actor {\n    propiedades = {\n        figura: \"rectangulo\",\n        imagen: \"imagenes:plataformas/plataforma\",\n        y: 0,\n        figura_ancho: 250,\n        figura_alto: 40,\n        figura_dinamica: false,\n        figura_rebote: 0\n    };\n\n    iniciar() {}\n}"
+      },
+      {
+        "nombre": "moneda",
+        "codigo": "class moneda extends Actor {\n    propiedades = {\n        imagen: \"moneda\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
+      },
+      {
+        "nombre": "moneda1",
+        "codigo": "class moneda1 extends Actor {\n    propiedades = {\n        imagen: \"moneda\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
+      },
+      {
+        "nombre": "moneda2",
+        "codigo": "class moneda2 extends Actor {\n    propiedades = {\n        imagen: \"moneda\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
+      },
+      {
+        "nombre": "moneda3",
+        "codigo": "class moneda3 extends Actor {\n    propiedades = {\n        imagen: \"moneda\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
+      },
+      {
+        "nombre": "moneda4",
+        "codigo": "class moneda4 extends Actor {\n    propiedades = {\n        imagen: \"moneda\",\n        etiqueta: \"moneda\",\n        figura: \"circulo\",\n        figura_radio: 10,\n        figura_dinamica: false,\n        figura_sensor: true\n    };\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "principal",
+      "id": 1,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-cielo",
+      "actores": [
+        {
+          "x": -64,
+          "y": 4,
+          "imagen": "imagenes:conejo/conejo_parado1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": true,
+          "figura_ancho": 50,
+          "figura_alto": 100,
+          "figura_radio": 50,
+          "figura_sin_rotacion": true,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "id": 1143,
+          "nombre": "conejo"
+        },
+        {
+          "x": -32.96850393700785,
+          "y": -98.45669291338584,
+          "imagen": "imagenes:plataformas/plataforma",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "plataforma",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 250,
+          "figura_alto": 40,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "id": 1952,
+          "nombre": "plataforma"
+        },
+        {
+          "x": -262,
+          "y": -31,
+          "imagen": "imagenes:plataformas/techo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 90,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 600,
+          "figura_alto": 25,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "id": 1403,
+          "nombre": "techo"
+        },
+        {
+          "x": 0,
+          "y": -250,
+          "imagen": "imagenes:plataformas/suelo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 600,
+          "figura_alto": 25,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "id": 1019,
+          "nombre": "suelo"
+        },
+        {
+          "x": 20,
+          "y": -270,
+          "imagen": "imagenes:plataformas/suelo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 600,
+          "figura_alto": 25,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "id": 1403,
+          "nombre": "suelo1"
+        },
+        {
+          "x": 259,
+          "y": -5,
+          "imagen": "imagenes:plataformas/techo",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 90,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 600,
+          "figura_alto": 25,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "id": 1129,
+          "nombre": "techo1"
+        },
+        {
+          "x": 98.03149606299212,
+          "y": 54.54330708661416,
+          "imagen": "imagenes:plataformas/plataforma",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "plataforma",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 250,
+          "figura_alto": 40,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "id": 1228,
+          "nombre": "plataforma1"
+        },
+        {
+          "x": -157,
+          "y": 135,
+          "imagen": "imagenes:objetos/moneda",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "moneda",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "circulo",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 10,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": true,
+          "id": 1325,
+          "nombre": "moneda"
+        },
+        {
+          "x": 60,
+          "y": -24,
+          "imagen": "imagenes:objetos/moneda",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "moneda",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "circulo",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 10,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": true,
+          "id": 1933,
+          "nombre": "moneda1"
+        },
+        {
+          "x": -19,
+          "y": 157,
+          "imagen": "imagenes:objetos/moneda",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "moneda",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "circulo",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 10,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": true,
+          "id": 1826,
+          "nombre": "moneda2"
+        },
+        {
+          "x": 148,
+          "y": 141,
+          "imagen": "imagenes:objetos/moneda",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "moneda",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "circulo",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 10,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": true,
+          "id": 1098,
+          "nombre": "moneda3"
+        },
+        {
+          "x": -50,
+          "y": -172,
+          "imagen": "imagenes:objetos/moneda",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "moneda",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "circulo",
+          "figura_dinamica": false,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 10,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": true,
+          "id": 1892,
+          "nombre": "moneda4"
+        }
+      ],
+      "ancho": 1000,
+      "alto": 1000
+    }
+  ],
+  "animaciones": [
+    {
+      "nombre": "mini_explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:mini-explosion/explosion_0",
+          "sprite": "imagenes-mini-explosion-explosion_0"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_1",
+          "sprite": "imagenes-mini-explosion-explosion_1"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_2",
+          "sprite": "imagenes-mini-explosion-explosion_2"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_3",
+          "sprite": "imagenes-mini-explosion-explosion_3"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_4",
+          "sprite": "imagenes-mini-explosion-explosion_4"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_5",
+          "sprite": "imagenes-mini-explosion-explosion_5"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_6",
+          "sprite": "imagenes-mini-explosion-explosion_6"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:explosion/explosion_001",
+          "sprite": "imagenes-explosion-explosion_001"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_002",
+          "sprite": "imagenes-explosion-explosion_002"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_003",
+          "sprite": "imagenes-explosion-explosion_003"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_004",
+          "sprite": "imagenes-explosion-explosion_004"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_005",
+          "sprite": "imagenes-explosion-explosion_005"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_006",
+          "sprite": "imagenes-explosion-explosion_006"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_007",
+          "sprite": "imagenes-explosion-explosion_007"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_008",
+          "sprite": "imagenes-explosion-explosion_008"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_009",
+          "sprite": "imagenes-explosion-explosion_009"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_010",
+          "sprite": "imagenes-explosion-explosion_010"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_011",
+          "sprite": "imagenes-explosion-explosion_011"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_012",
+          "sprite": "imagenes-explosion-explosion_012"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_013",
+          "sprite": "imagenes-explosion-explosion_013"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_014",
+          "sprite": "imagenes-explosion-explosion_014"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_015",
+          "sprite": "imagenes-explosion-explosion_015"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_1",
+          "sprite": "imagenes-pixelados-pixel_player_1"
+        },
+        {
+          "nombre": "imagenes:pixelados/pixel_player_2",
+          "sprite": "imagenes-pixelados-pixel_player_2"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "hombre_pixel_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_0",
+          "sprite": "imagenes-pixelados-pixel_player_0"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "fantasma_azul_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_0",
+          "sprite": "imagenes-pacman-fantasma_azul_0"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_1",
+          "sprite": "imagenes-pacman-fantasma_azul_1"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "fantasma_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_6",
+          "sprite": "imagenes-pacman-fantasma_6"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_7",
+          "sprite": "imagenes-pacman-fantasma_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "moneda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:monedas/moneda_0",
+          "sprite": "imagenes-monedas-moneda_0"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_1",
+          "sprite": "imagenes-monedas-moneda_1"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_2",
+          "sprite": "imagenes-monedas-moneda_2"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_3",
+          "sprite": "imagenes-monedas-moneda_3"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_4",
+          "sprite": "imagenes-monedas-moneda_4"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_5",
+          "sprite": "imagenes-monedas-moneda_5"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_6",
+          "sprite": "imagenes-monedas-moneda_6"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_7",
+          "sprite": "imagenes-monedas-moneda_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "pacman_come",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_5",
+          "sprite": "imagenes-pacman-pacman_5"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_6",
+          "sprite": "imagenes-pacman-pacman_6"
+        }
+      ],
+      "velocidad": "40"
+    },
+    {
+      "nombre": "pacman_espera",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "nave_girando_a_la_derecha",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_derecha_1",
+          "sprite": "imagenes-nave-nave_derecha_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_derecha_2",
+          "sprite": "imagenes-nave-nave_derecha_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_girando_a_la_izquierda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_izquierda_1",
+          "sprite": "imagenes-nave-nave_izquierda_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_izquierda_2",
+          "sprite": "imagenes-nave-nave_izquierda_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanzando",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_en_reposo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_reposo",
+          "sprite": "imagenes-nave-nave_reposo"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "gallina_vuela",
+      "cuadros": [
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_1",
+          "sprite": "imagenes-gallina-gallina_vuela_1"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_3",
+          "sprite": "imagenes-gallina-gallina_vuela_3"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanza",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_salta",
+          "sprite": "imagenes-conejo-conejo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_parado1",
+          "sprite": "imagenes-conejo-conejo_parado1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_parado2",
+          "sprite": "imagenes-conejo-conejo_parado2"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "conejo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_camina1",
+          "sprite": "imagenes-conejo-conejo_camina1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_camina2",
+          "sprite": "imagenes-conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_camina_1",
+          "sprite": "imagenes-bmo-bmo_camina_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_camina_2",
+          "sprite": "imagenes-bmo-bmo_camina_2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_escala",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_escala_1",
+          "sprite": "imagenes-bmo-bmo_escala_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_escala_2",
+          "sprite": "imagenes-bmo-bmo_escala_2"
+        }
+      ],
+      "velocidad": 10
+    }
+  ]
+}

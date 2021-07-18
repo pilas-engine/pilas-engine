@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script>
+      var proyecto_serializado_inicial = "CODIGO_SERIALIZADO";
+    </script>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      #game {
+        width: 100%;
+        height: 100%;
+        background-color: #424242;
+        text-align: center;
+      }
+
+      .dn {
+        display: none;
+      }
+
+      canvas {
+        width: auto;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        margin-left: 0 !important;
+      }
+    </style>
+
+    <script src="phaser-73219995616f80e252f03935fe5b7789.js"></script>
+    <script src="nineslice-dd48a29e43da355eefbc4f1b0db11d2d.js"></script>
+    <script src="pilas-engine-51ee37b4dcc39b0f3f4cbd81b2cb1ee8.js"></script>
+  </head>
+
+  <body>
+    <script>
+      function b64DecodeUnicode(str) {
+        return decodeURIComponent(
+          atob(str)
+            .split("")
+            .map(function(c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+      }
+    </script>
+
+    <div id="game"></div>
+
+    <script>
+      var ha_iniciado = false;
+
+      var proyecto = JSON.parse(b64DecodeUnicode(proyecto_serializado_inicial));
+      var pixelart = false;
+
+      if (proyecto.proyecto.modo_de_video === "pixelart") {
+        pixelart = true;
+      }
+
+      var opciones = {
+        pixelart: pixelart,
+        fps: proyecto.proyecto.fps
+      };
+
+      var ancho = proyecto.proyecto.ancho;
+      var alto = proyecto.proyecto.alto;
+
+      var recursos = null;
+
+      if (proyecto.proyecto.sonidos) {
+        recursos = {
+          sonidos: proyecto.proyecto.sonidos
+        }
+      }
+
+      var pilas = pilasengine.iniciar(ancho, alto, recursos, opciones, proyecto.proyecto.imagenes, false);
+
+      pilas.onready = function() {
+        if (!ha_iniciado) {
+          ha_iniciado = true;
+          proyecto.pilas = pilas;
+          pilas.definir_modo("ModoEjecucion", proyecto);
+        }
+      };
+    </script>
+  </body>
+</html>

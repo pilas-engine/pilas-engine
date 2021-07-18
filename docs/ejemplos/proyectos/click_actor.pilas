@@ -1,0 +1,57 @@
+{
+  "titulo": "Proyecto demo",
+  "ancho": 500,
+  "alto": 500,
+  "escena_inicial": 2,
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "principal",
+        "codigo": "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "actor",
+        "codigo": "class actor extends Actor {\n  propiedades = {};\n\n  iniciar() {\n    this.transparencia = 50;\n  }\n\n  actualizar() {}\n\n  cuando_mueve(x, y, evento_original) {\n    this.escala = 1.2;\n    this.transparencia = 0;\n  }\n\n  cuando_sale(x, y, evento_original) {\n    this.transparencia = 50;\n    this.escala = 1;\n  }\n\n  cuando_hace_click(x, y, evento_original) {\n    this.rotacion = [360];\n  }\n}"
+      }
+    ]
+  },
+  "escenas": [
+    {
+      "nombre": "principal",
+      "id": 2,
+      "camara_x": 0,
+      "camara_y": 0,
+      "fondo": "decoracion:fondos/fondo-plano",
+      "actores": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "imagen": "imagenes:cartas/carta",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "id": 1416,
+          "nombre": "actor"
+        }
+      ]
+    }
+  ]
+}

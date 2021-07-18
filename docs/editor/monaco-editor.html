@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <style type="text/css">
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000000 !important;
+    }
+
+    .vs-dark .mtk11 {
+      color: #d4d4d4 !important;
+    }
+
+    .vs .mtk11 {
+      color: #000000 !important;
+    }
+
+    .monaco-editor .lines-content .cigr {
+      box-shadow: 1px 0 0 0 transparent inset !important;
+    }
+
+    .monaco-editor .lines-content .cigra {
+      box-shadow: 1px 0 0 0 transparent inset !important;
+    }
+
+    #status {
+      display: none !important;
+    }
+
+		.cdr.linea {
+		  background: #3d377d;
+		}
+
+  </style>
+</head>
+
+  <body>
+
+  	<div id="container" style="width:100%;height:100%"></div>
+	  <div id="monaco-editor-wrapper" style="width:100%;height:100%"></div>
+	  <div id="status"></div>
+
+	  <script src="./min/vs/loader.js" integrity="sha256-l5mrnzK0EepiafWNdfX1tcwhil6QhKgqmDeITJ5jX2s= sha512-9kAp78vP1ebGBBOjvPcsrBcWDbvbJgDsm7PmJfut9z3p+lxj14ZKKqjIf/5ck/Hp2Xl1qtgh0K163C0nTUgIbw==" ></script>
+
+	  <script>
+
+	    var HOST = "file://";
+
+	    if (window.location.host) {
+	      HOST = window.location.protocol + "//" + window.location.host;
+	    }
+
+	    window.onload = function iniciar() {
+	    	require.config({
+	        paths: {
+	          'vs': './min/vs',
+	        },
+					'vs/nls' : {
+						availableLanguages: {
+							'*': 'es'
+						}
+					}
+	      });
+
+	    	require(['vs/editor/editor.main'], iniciar_editor);
+	    }
+
+	    function iniciar_editor(editor) {
+	      registrar_snippets();
+	      limitar_autocompletado_a_definiciones_de_pilas();
+
+	      var editor = monaco.editor.create(document.getElementById('container'), {
+	  			language: "typescript",
+	        minimap: { enabled: false },
+	        theme: "vs-dark",
+	        contextmenu: true,
+	        tabSize: 2,
+	        autoClosingBrackets: true,
+	        insertSpaces: true,
+	        tabWidth: 2,
+	        matchBrackets: false,
+	  		});
+
+        // ctrl+s o cmd+s para guardar y ejecutar
+	      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
+	        window.top.postMessage({message: "on-save"}, HOST);
+	      });
+
+	      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_P, function() {
+	        window.top.postMessage({message: "abrir-selector-de-codigos"}, HOST);
+	      });
+
+	      editor.onDidChangeModelContent(function (event) {
+	        window.top.postMessage({updatedCode: editor.getValue()}, HOST);
+	      });
+
+				reemplazar_atajo_de_ir_a_simbolo(editor);
+
+	    	require(['monaco-vim'], function(MonacoVim) {
+
+	          window.activar_vim = function() {
+	            if (!window.vimMode) {
+	              var statusNode = document.getElementById('status');
+	              statusNode.innerHTML = "";
+	              var vimMode = MonacoVim.initVimMode(editor, statusNode);
+	              window.vimMode = vimMode;
+	            } else {
+	              console.error("Vim ya se había activado previamente.");
+	            }
+	          }
+
+	          window.desactivar_vim = function() {
+	            if (window.vimMode) {
+	              window.vimMode.dispose();
+	              delete window.vimMode
+	            } else {
+	              console.error("Vim no estaba activado.");
+	            }
+	          }
+
+	          window.top.postMessage({message: "load-complete"}, HOST);
+	      });
+
+	      window.editor = editor;
+	      window.monaco = monaco;
+
+	  		window.onresize = function() {
+	  			editor.layout();
+	  		};
+
+	      window.addEventListener("dragover", function(e){
+	          e.preventDefault();
+	          e.stopPropagation();
+	        }, false)
+
+	      window.addEventListener("drop", function(e){
+	          e.preventDefault();
+	          e.stopPropagation();
+
+	          let data = event.dataTransfer.getData("text/Data");
+	          let {nombre, activo} = JSON.parse(data);
+
+	          let p = editor.getTargetAtClientPoint(e.clientX, e.clientY).position;
+
+	          let texto = "";
+
+	          if (activo) {
+	            texto = codigo_para_obtener_actor(nombre);
+	          } else {
+	            texto = codigo_para_clonar_un_actor(nombre);
+	          }
+
+	          var texto_completo = editor.getValue(p);
+	          var lista = texto_completo.split('\n');
+
+	          lista = lista.slice(0, p.lineNumber).
+	                      concat([texto]).
+	                      concat(lista.slice(p.lineNumber, lista.length))
+
+	          editor.setValue(lista.join('\n'));
+	          editor.setPosition(p);
+
+	          editor.getAction("editor.action.formatDocument").run();
+
+	      }, false)
+	  	}
+
+			function reemplazar_atajo_de_ir_a_simbolo(editor) {
+				function changeCommandKeybinding(editor, id, keybinding) {
+					editor._standaloneKeybindingService.addDynamicKeybinding('-' + id);
+					editor._standaloneKeybindingService.addDynamicKeybinding(id, keybinding);
+				}
+
+				changeCommandKeybinding(editor, 'editor.action.quickOutline', monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_O);
+			}
+
+	    function registrar_snippets() {
+
+	      function snippets() {
+	        return [
+	          {
+	            label: "observar",
+	            kind: monaco.languages.CompletionItemKind.Function,
+	            insertText: 'this.pilas.observar("${1:x}", this.${1});',
+	            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+	          },
+	          {
+	            label: "pilas",
+	            kind: monaco.languages.CompletionItemKind.Function,
+	            insertText: 'this.pilas.',
+	          },
+	          {
+	            label: "clonar",
+	            kind: monaco.languages.CompletionItemKind.Function,
+	            insertText: 'this.pilas.clonar("${1:}");',
+	            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+	          },
+	          {
+	            label: "clonar_en",
+	            kind: monaco.languages.CompletionItemKind.Function,
+	            insertText: 'this.pilas.clonar_en("${1:}", ${2:0}, ${3:0});',
+	            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+	          },
+	          {
+	            label: "control",
+	            kind: monaco.languages.CompletionItemKind.Function,
+	            insertText: 'if (this.pilas.control.${1:}) {\n    ${2:}\n}',
+	            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+	          },
+	        ]
+	      }
+
+	      monaco.languages.registerCompletionItemProvider('typescript', {
+	        provideCompletionItems: function(model, position) {
+	          return {suggestions: snippets()};
+	        }
+	      });
+	    }
+
+	    function codigo_para_clonar_un_actor(nombre) {
+	        return 'let ' + nombre + ' = this.pilas.clonar("' + nombre + '");';
+	    }
+
+	    function codigo_para_obtener_actor(nombre) {
+	        return 'let ' + nombre + ' = this.pilas.obtener_actor_por_nombre("' + nombre + '");';
+	    }
+
+	    function limitar_autocompletado_a_definiciones_de_pilas() {
+	      monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+	      	noLib: true,
+	      	allowNonTsExtensions: true
+	      });
+
+	      fetch("../pilas-engine.d.ts").then(res => {
+	        return res.text();
+	      }).then(data => {
+	        monaco.languages.typescript.typescriptDefaults.addExtraLib(data, 'pilas-engine.d.ts');
+	      });
+
+	      fetch("../tipos.d.ts").then(res => {
+	        return res.text();
+	      }).then(data => {
+	        monaco.languages.typescript.typescriptDefaults.addExtraLib(data, 'tipos.d.ts');
+	      });
+	    }
+
+	  </script>
+
+
+	</body>
+</html>

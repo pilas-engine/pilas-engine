@@ -1,0 +1,139 @@
+{
+    "titulo": "Proyecto demo",
+    "ancho": 500,
+    "alto": 500,
+    "escena_inicial": 2,
+    "codigos": {
+        "escenas": [
+            {
+                "nombre": "principal",
+                "codigo": "class principal extends Escena {\n    iniciar() {\n\n    }\n\n    actualizar() {\n\n    }\n}"
+            }
+        ],
+        "actores": [
+            {
+                "nombre": "nube",
+                "codigo": "class nube extends Actor {\n    propiedades = {\n        imagen: \"decoracion:objetos/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 1;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+            },
+            {
+                "nombre": "nube1",
+                "codigo": "class nube1 extends Actor {\n    propiedades = {\n        imagen: \"decoracion:objetos/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 2;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+            },
+            {
+                "nombre": "nube2",
+                "codigo": "class nube2 extends Actor {\n    propiedades = {\n        imagen: \"decoracion:objetos/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 3;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+            },
+            {
+                "nombre": "nube3",
+                "codigo": "class nube3 extends Actor {\n    propiedades = {\n        imagen: \"decoracion:objetos/nube\"\n    };\n\n    iniciar() {}\n\n    actualizar() {\n        this.x -= 2;\n\n        if (this.x < -500) {\n            this.x = 500;\n        }\n    }\n}"
+            }
+        ]
+    },
+    "escenas": [
+        {
+            "nombre": "principal",
+            "id": 2,
+            "camara_x": 0,
+            "camara_y": 0,
+            "fondo": "decoracion:fondos/fondo-cielo",
+            "actores": [
+                {
+                    "x": 133.21443736730362,
+                    "y": 83.44798301486199,
+                    "imagen": "decoracion:objetos/nube",
+                    "centro_x": 0.5,
+                    "centro_y": 0.5,
+                    "rotacion": 0,
+                    "escala_x": 1,
+                    "escala_y": 1,
+                    "transparencia": 38,
+                    "etiqueta": "actor",
+                    "espejado": true,
+                    "espejado_vertical": false,
+                    "figura": "",
+                    "figura_dinamica": true,
+                    "figura_ancho": 100,
+                    "figura_alto": 100,
+                    "figura_radio": 40,
+                    "figura_sin_rotacion": false,
+                    "figura_rebote": 1,
+                    "figura_sensor": false,
+                    "id": 1443,
+                    "nombre": "nube"
+                },
+                {
+                    "x": 217.92755212140202,
+                    "y": -94.849537646295,
+                    "imagen": "decoracion:objetos/nube",
+                    "centro_x": 0.5,
+                    "centro_y": 0.5,
+                    "rotacion": 0,
+                    "escala_x": 2,
+                    "escala_y": 2,
+                    "transparencia": 0,
+                    "etiqueta": "actor",
+                    "espejado": false,
+                    "espejado_vertical": false,
+                    "figura": "",
+                    "figura_dinamica": true,
+                    "figura_ancho": 100,
+                    "figura_alto": 100,
+                    "figura_radio": 40,
+                    "figura_sin_rotacion": false,
+                    "figura_rebote": 1,
+                    "figura_sensor": false,
+                    "id": 1859,
+                    "nombre": "nube1"
+                },
+                {
+                    "x": -182.59703804253246,
+                    "y": 194.53062764296112,
+                    "imagen": "decoracion:objetos/nube",
+                    "centro_x": 0.5,
+                    "centro_y": 0.5,
+                    "rotacion": 0,
+                    "escala_x": 2,
+                    "escala_y": 2,
+                    "transparencia": 0,
+                    "etiqueta": "actor",
+                    "espejado": false,
+                    "espejado_vertical": true,
+                    "figura": "",
+                    "figura_dinamica": true,
+                    "figura_ancho": 100,
+                    "figura_alto": 100,
+                    "figura_radio": 40,
+                    "figura_sin_rotacion": false,
+                    "figura_rebote": 1,
+                    "figura_sensor": false,
+                    "id": 1995,
+                    "nombre": "nube2"
+                },
+                {
+                    "x": -206.9085134523685,
+                    "y": -188.53548805951817,
+                    "imagen": "decoracion:objetos/nube",
+                    "centro_x": 0.5,
+                    "centro_y": 0.5,
+                    "rotacion": 0,
+                    "escala_x": 2,
+                    "escala_y": 2,
+                    "transparencia": 0,
+                    "etiqueta": "actor",
+                    "espejado": false,
+                    "espejado_vertical": false,
+                    "figura": "",
+                    "figura_dinamica": true,
+                    "figura_ancho": 100,
+                    "figura_alto": 100,
+                    "figura_radio": 40,
+                    "figura_sin_rotacion": false,
+                    "figura_rebote": 1,
+                    "figura_sensor": false,
+                    "id": 1068,
+                    "nombre": "nube3"
+                }
+            ]
+        }
+    ]
+}
