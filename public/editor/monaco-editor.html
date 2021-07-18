@@ -88,6 +88,7 @@
 	        matchBrackets: false,
 	  		});
 
+        // ctrl+s o cmd+s para guardar y ejecutar
 	      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
 	        window.top.postMessage({message: "on-save"}, HOST);
 	      });

@@ -33,6 +33,10 @@ export default Component.extend({
         if (event.data.message === "cambia-el-workspace-de-blockly") {
           this.cuandoCambia({ texto: event.data.texto, codigo_de_bloques: event.data.codigo });
         }
+
+        if (event.data.message === "pulsa-ctrl-s") {
+          this.alGuardar();
+        }
       }
     });
   },

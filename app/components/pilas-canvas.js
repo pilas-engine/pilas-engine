@@ -18,7 +18,7 @@ export default Component.extend({
   classNames: ["flex1", "flex", "unseletable", "bg-fondo-canvas"],
   classNameBindings: ["altoFijo:h250", 
     "activarScroll:items-center", 
-    "activarScroll:overflow-scroll", 
+    "activarScroll:overflow-auto", 
     "desactivarScroll:overflow-hidden"],
   altoFijo: false,
   porcentajeDeCarga: 0,

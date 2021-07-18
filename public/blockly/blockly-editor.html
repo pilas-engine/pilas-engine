@@ -233,6 +233,18 @@
         Blockly.svgResize(workspace);
       };
 
+
+      // ctrl+s o cmd+s para guardar y ejecutar
+      document.addEventListener("keydown", function(e) {
+        var pulsa_ctrl_s = (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83;
+
+        if (pulsa_ctrl_s) {
+          e.preventDefault();
+	        window.top.postMessage({message: "pulsa-ctrl-s"}, HOST);
+        }
+      }, false);
+
+
       window.addEventListener("resize", onresize, false);
       onresize();
       Blockly.svgResize(workspace);

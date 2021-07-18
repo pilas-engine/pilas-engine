@@ -87,17 +87,16 @@ export default Component.extend({
 
   capturar_ctrl_s() {
     document.addEventListener("keydown", e => {
-      e = e || window.event; //Get event
-      //console.log(e);
+      e = e || window.event;
 
       if (!e.ctrlKey && !e.metaKey) {
         return;
       }
 
-      var code = e.which || e.keyCode; //Get key code
+      var code = e.which || e.keyCode;
 
       switch (code) {
-        case 83: //Block Ctrl+S
+        case 83:
           this.send("alternarEstadoDeEjecucion");
           e.preventDefault();
           e.stopPropagation();
@@ -910,6 +909,10 @@ export default Component.extend({
       this.bus.trigger(`${this.nombre_del_contexto}:cambiar_posicion_del_modo_historia_desde_el_editor`, {
         posicion: valorNuevo
       });
+    },
+
+    cuandoGuardaDesdeElEditorDeBloques() {
+      this.send("cuandoGuardaDesdeElEditor");
     },
 
     cuandoGuardaDesdeElEditor(/*editor*/) {
