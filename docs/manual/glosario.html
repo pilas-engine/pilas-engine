@@ -415,11 +415,43 @@ if (pilas.existe_un_actor_llamado(&quot;jugador&quot;)) {
 ‹ 2</code></pre>
 </div>
 <div class="funcion">
+<pre><code>pilas.azar_excluyendo_un_valor(desde, hasta, valor_a_excluir)</code></pre>
+<p>Retorna un número aleatorio en el rango que va desde el primer argumento al segundo (incluyendo los extremos), pero excluye el valor indicado en el último argumento.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.azar(1, 3, 2)
+‹ 1
+
+› pilas.azar(1, 3, 2)
+‹ 3
+
+› pilas.azar(5, 8, 6)
+‹ 7
+
+› pilas.azar(5, 8, 6)
+‹ 5
+
+› pilas.azar(5, 8, 6)
+‹ 8</code></pre>
+</div>
+<div class="funcion">
 <pre><code>pilas.azar_desde_lista(lista)</code></pre>
 <p>Retorna al azar uno de los elementos de la lista que se envía como parámetro.</p>
 <p>Por ejemplo:</p>
-<pre><code>› pilas.azar_desde_lista([&#39;uno&#39;, &#39;dos&#39;, &#39;tres&#39;]
+<pre><code>› pilas.azar_desde_lista([&#39;uno&#39;, &#39;dos&#39;, &#39;tres&#39;])
 ‹ &#39;uno&#39;</code></pre>
+</div>
+<div class="funcion">
+<pre><code>pilas.subdividir_lista(lista, cantidad_de_elementos)</code></pre>
+<p>Retorna una lista nueva que solo tendrá la cantidad de elementos que se le soliciten por parámetro. Los elementos que se preservarán serán aquellos que estén al principio de la lista inicial.</p>
+<p>Por ejemplo:</p>
+<pre><code>› pilas.subdividir_lista([&#39;uno&#39;, &#39;dos&#39;, &#39;tres&#39;], 2)
+‹ [&#39;uno&#39;, &#39;dos&#39;]
+
+› pilas.subdividir_lista([3, 4, 5, 6], 3)
+‹ [3, 4, 5]
+
+› pilas.subdividir_lista([3, 4, 5, 6, 8, 2, 3], 1)
+‹ [3]</code></pre>
 </div>
 <div class="funcion">
 <pre><code>pilas.desordenar_lista(lista)</code></pre>
@@ -429,217 +461,321 @@ if (pilas.existe_un_actor_llamado(&quot;jugador&quot;)) {
 ‹ [4, 6, 1, 3, 2, 5]</code></pre>
 </div>
 <div class="funcion">
-<pre><code>pilas.obtener_distancia_entre_puntos(x, y, x1, y1)</code></pre>
-<p>Retorna la cantidad de pixels de distancia entre dos puntos indicados por parámetros.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.obtener_distancia_entre_puntos(0, 0, 0, 100)
-‹ 100
+<pre><code>pilas.intercambiar_posiciones_al_azar(lista_de_actores)</code></pre>
+<p>Intercambia de posición de los actores enviados como una lista entre sí.</p>
+<pre><code>
+&lt;/div&gt;
 
-› pilas.obtener_distancia_entre_puntos(0, 0, 30, 40)
-‹ 50</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.obtener_distancia_entre_actores(actor1, actor2)</code></pre>
-<p>Retorna la cantidad de pixels de distancia entre dos actores enviados por parámetros.</p>
-<p>Por ejemplo:</p>
-<pre><code>› nave = pilas.actores.nave()
-› pelota = pilas.actores.nave()
-› pilas.obtener_distancia_entre_actores(nave, pelota)
-‹ 69.5</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.obtener_angulo_entre_puntos(x, y, x2, y2)</code></pre>
-<p>Retorna el ángulo en grados que se forma al trazar una linea entre los puntos enviados por parámetro.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.obtener_angulo_entre_puntos(0, 0, 40, 40)
-‹ 45
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.obtener_distancia_entre_puntos(x, y, x1, y1)</p>
+<pre><code>
+Retorna la cantidad de pixels de distancia entre dos puntos indicados
+por parámetros.
 
-› pilas.obtener_angulo_entre_puntos(0, 0, 100, 40)
-‹ 21.80</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.obtener_angulo_entre_actores(actor1, actor2)</code></pre>
-<p>Retorna el ángulo en grados que se forma al trazar una linea entre la posición de un actor y otro.</p>
-<p>Por ejemplo:</p>
-<pre><code>› nave = pilas.actores.nave()
-› pelota = pilas.actores.nave()
-› pilas.obtener_angulo_entre_actores(nave, pelota)
-‹ 221</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.ocultar_cursor()</code></pre>
-<p>Hace que el puntero del mouse sea invisible.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.ocultar_cursor()</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.definir_cursor(nombre)</code></pre>
-<p>Permite cambiar el puntero del mouse.</p>
-<p>El parámetro nombre puede ser alguno de estos:</p>
-<ul>
-<li>normal</li>
-<li>pointer</li>
-<li>help</li>
-<li>none</li>
-<li>wait</li>
-<li>crosshair</li>
-<li>cell</li>
-<li>move</li>
-<li>text</li>
-<li>no-drop</li>
-</ul>
-</div>
-<div class="funcion">
-<pre><code>pilas.observar(nombre, variable)</code></pre>
-<p>Agrega un texto en pantalla para visualizar el valor de una variable enviada por parámetro.</p>
-<p>Esta función está diseñada para llamarse dentro del bloque <code>actualizar</code>, tanto de escenas como de actores. Si se llama desde otro lado el valor de la variable no se va a actualizar, y va quedar con el valor inicial.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.observar(&quot;posicion_x&quot;, nave.x)
-› pilas.observar(&quot;rotacion de la nave&quot;, nave.rotacion)</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.clonar(nombre)</code></pre>
-<p>Permite clonar un actor en la posición inicial.</p>
-<p>Por ejemplo:</p>
-<pre><code>› var actor = pilas.actores.nave()
-› pilas.clonar(&quot;nave&quot;)
-‹ &lt;nave en (0, 0)&gt;</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.clonar_en(nombre, x, y)</code></pre>
-<p>Permite clonar un actor en la posición solicitada.</p>
-<p>Por ejemplo:</p>
-<pre><code>› var actor = pilas.actores.nave()
-› pilas.clonar(&quot;nave&quot;, 100, 100)
-‹ &lt;nave en (100, 100)&gt;</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.clonar_en_la_posión_del_cursor(nombre)</code></pre>
-<p>Permite clonar un actor en la posición del mouse.</p>
-<p>Por ejemplo:</p>
-<pre><code>› var actor = pilas.actores.nave()
+Por ejemplo:
+</code></pre>
+<p>› pilas.obtener_distancia_entre_puntos(0, 0, 0, 100) ‹ 100</p>
+<p>› pilas.obtener_distancia_entre_puntos(0, 0, 30, 40) ‹ 50</p>
+<pre><code>
+&lt;/div&gt;
 
-› pilas.cursor_x
-‹ 24
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.obtener_distancia_entre_actores(actor1, actor2)</p>
+<pre><code>
+Retorna la cantidad de pixels de distancia entre dos actores
+enviados por parámetros.
 
-› pilas.cursor_y
-‹ -139
+Por ejemplo:
+</code></pre>
+<p>› nave = pilas.actores.nave() › pelota = pilas.actores.nave() › pilas.obtener_distancia_entre_actores(nave, pelota) ‹ 69.5</p>
+<pre><code>
+&lt;/div&gt;
 
-› pilas.clonar_en_la_posión_del_cursor(&quot;nave&quot;)
-‹ &lt;nave en (24, -139)&gt;</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.clonar_en_posicion_al_azar(nombre)</code></pre>
-<p>Permite clonar un actor en una posición aleatoria de la pantalla.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.actores.nave()
-‹ &lt;nave en (131, 183)&gt;</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.es_multiplo(a, b)</code></pre>
-<p>Determina si un numero es múltiplo de otro.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.es_multiplo(12, 3)
-‹ true
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.obtener_angulo_entre_puntos(x, y, x2, y2)</p>
+<pre><code>
+Retorna el ángulo en grados que se forma al trazar una linea
+entre los puntos enviados por parámetro.
 
-› pilas.es_multiplo(3, 2)
-‹ false</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.enviar_mensaje_global(mensaje, datos)</code></pre>
-<p>Envía un mensaje a todos los actores y la escena actual.</p>
-<p>Para capturar estos mensajes desde actores o la escena, se tiene que crear un método de la forma “cuando_llega_el_mensaje_nombre” donde “nombre” tiene que ser mensaje que se quiere capturar.</p>
-<p>Por ejemplo, si un actor llama a la siguiente función <code>this.pilas.enviar_mensaje_global('ganar')</code> deberías poder capturar ese mensaje desde cualquier actor o escena declarando el método “cuando_llega_el_mensaje_ganar”.</p>
-<p>El argumento <code>datos</code> es opcional, y se puede utilizar para enviar parámetros adicionales junto con el mensaje. Este argumento datos se va a enviar directamente a todos los actores que atiendan el mensaje, pero es aconsejable que sea un diccionario. Por ejemplo, si se quiere enviar dos valores se podría armar un diccionario así:</p>
-<pre><code>pilas.enviar_mensaje_global(&quot;empujar&quot;, {fuerza: 10, mi_posicion: this.x})</code></pre>
-<p>y desde cualquier otro actor se puede atender esa función creando el siguiente método</p>
-<pre><code>class actor {
+Por ejemplo:
+</code></pre>
+<p>› pilas.obtener_angulo_entre_puntos(0, 0, 40, 40) ‹ 45</p>
+<p>› pilas.obtener_angulo_entre_puntos(0, 0, 100, 40) ‹ 21.80</p>
+<pre><code>
+&lt;/div&gt;
 
-  cuando_llega_el_mensaje_empujar(datos) {
-    this.impulsar(0, datos.fuerza);
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.obtener_angulo_entre_actores(actor1, actor2)</p>
+<pre><code>
+Retorna el ángulo en grados que se forma al trazar una linea
+entre la posición de un actor y otro.
 
-    this.decir(`el otro parámetro era x: ${datos.mi_posicion}`);
-  }</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.alternar_modo_pantalla_completa()
-pilas.solicitar_modo_pantalla_completa()
-pilas.solicitar_modo_ventana()</code></pre>
-<p>Permite cambiar el modo de pantalla a pantalla completa o ventana.</p>
-<p>Si se pasa al modo pantalla completa, el usuario de todas formas puede volver al modo ventana pulsando la tecla <code>ESC</code>.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.alternar_modo_pantalla_completa()</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.alinear(numero, grilla)
-pilas.ajustar(numero, grilla)</code></pre>
-<p>Ajusta un número a una escala de grilla, muy útil en juegos donde el jugador se puede mover por escenarios rígidos tipo mosaico o tableros.</p>
-<p>Por ejemplo:</p>
-<pre><code>› pilas.alienar(130, 64)
-‹ 28</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.pausar()</code></pre>
-<p>Detiene la ejecución del juego por completo y espera a que el usuario pulse la tecla espacio o haga click con el mouse para continuar.</p>
-</div>
-<div class="funcion">
-<pre><code>pilas.reproducir_musica(nombre)</code></pre>
-<p>Comienza a reproducir una música a partir de un nombre y vuelve a repetirlo cuando finaliza de forma automática.</p>
-<p>Si hay otra música sonando esta función la detiene y comienza a reproducir la música nueva.</p>
-<p>Ten en cuenta que la música seguirá sonando, incluso cuando cambies de escena.</p>
-</div>
-<div class="funcion">
-<pre><code>pilas.detener_musica()</code></pre>
-<p>Detiene toda música que esté sonando en ese momento.</p>
-</div>
-<div class="funcion">
-<pre><code>pilas.esta_reproduciendo_musica()</code></pre>
-<p>Retorna <code>true</code> si en ese momento está sonando una música, sino responde con el valor <code>false</code>.</p>
-</div>
-<div class="funcion">
-<pre><code>pilas.definir_mapa(diccionario)</code></pre>
-<p>Permite describir cómo se van a representar los actores en un mapa de escenario. Esta función se utiliza casi siempre al principio del juego o antes de llamar a la función <code>pilas.crear_mapa</code>.</p>
-<p>Un ejemplo de invocación es el siguiente:</p>
-<pre><code>this.pilas.definir_mapa({
-                x: &quot;ladrillo&quot;,
-                n: &quot;nave&quot;
-            });</code></pre>
-<p>y luego de que se definieron los caracteres, se puede crear un mapa así:</p>
-<pre><code>this.pilas.crear_mapa(`
-          xxxxxxx
-          x.....x
-          x..n..x
-          x.....x
-          xxxxxxx
-        `);</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.crear_mapa(mapa, grilla, origen_x, origen_y)</code></pre>
-<p>Esta función permite crear un mapa a partir de un diccionario de símbolos previamente creado con la función <code>pilas.definir_mapa</code>.</p>
-<p>El argumento mapa tiene que ser una cadena de textos con la descripción del escenario. Opcionalmente se pueden usar caracteres punto (.) o guión (-) para separar los items del mapa. También se pueden usar espacios para facilitar la legibilidad, esta función va a ignorar esos espacios.</p>
-<p>Por ejemplo, esta podría ser una llamada a esta función <code>crear_mapa</code>:</p>
-<pre><code>this.pilas.crear_mapa(`
-          x.....x
-          x..n..x
-        `);</code></pre>
-<p>Luego esta función admite como argumentos el tamaño de la grilla (64px por omisión) y las coordenadas en las que se debería dibujar el mapa (x=0, y=0 por omisión).</p>
-</div>
-<div class="funcion">
-<pre><code>pilas.laser(actor, x, y, x_final, y_final)</code></pre>
-<p>Esta función realiza un laser “instantáneo” para reconocer todos los actores que colisionan en una linea recta que va del punto (x, y) hasta el punto (x_final, y_final).</p>
-<p>Una vez que la función se ejecuta, retornará una lista de esta forma:</p>
-<pre><code>[
-   {
-      x: 10,
-      y: 10,
-      actor: &lt;actor&gt;
-      distancia: 30
-   },
-   ...
- ]</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.laser_al_primer_actor(actor, x, y, x_final, y_final, etiqueta)</code></pre>
+Por ejemplo:
+</code></pre>
+<p>› nave = pilas.actores.nave() › pelota = pilas.actores.nave() › pilas.obtener_angulo_entre_actores(nave, pelota) ‹ 221</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.ocultar_cursor()</p>
+<pre><code>
+Hace que el puntero del mouse sea invisible.
+
+Por ejemplo:
+</code></pre>
+<p>› pilas.ocultar_cursor()</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.definir_cursor(nombre)</p>
+<pre><code>
+Permite cambiar el puntero del mouse.
+
+El parámetro nombre puede ser alguno de estos:
+
+- normal
+- pointer
+- help
+- none
+- wait
+- crosshair
+- cell
+- move
+- text
+- no-drop
+
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.observar(nombre, variable)</p>
+<pre><code>
+Agrega un texto en pantalla para visualizar el valor de una variable
+enviada por parámetro.
+
+Esta función está diseñada para llamarse dentro del bloque `actualizar`,
+tanto de escenas como de actores. Si se llama desde otro lado el
+valor de la variable no se va a actualizar, y va quedar con el valor
+inicial.
+
+Por ejemplo:
+</code></pre>
+<p>› pilas.observar(“posicion_x”, nave.x) › pilas.observar(“rotacion de la nave”, nave.rotacion)</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.clonar(nombre)</p>
+<pre><code>
+Permite clonar un actor en la posición inicial.
+
+Por ejemplo:
+</code></pre>
+<p>› var actor = pilas.actores.nave() › pilas.clonar(“nave”) ‹ &lt;nave en (0, 0)&gt;</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.clonar_en(nombre, x, y)</p>
+<pre><code>
+Permite clonar un actor en la posición solicitada.
+
+Por ejemplo:
+</code></pre>
+<p>› var actor = pilas.actores.nave() › pilas.clonar(“nave”, 100, 100) ‹ &lt;nave en (100, 100)&gt;</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.clonar_en_la_posión_del_cursor(nombre)</p>
+<pre><code>
+Permite clonar un actor en la posición del mouse.
+
+Por ejemplo:
+</code></pre>
+<p>› var actor = pilas.actores.nave()</p>
+<p>› pilas.cursor_x ‹ 24</p>
+<p>› pilas.cursor_y ‹ -139</p>
+<p>› pilas.clonar_en_la_posión_del_cursor(“nave”) ‹ &lt;nave en (24, -139)&gt;</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.clonar_en_posicion_al_azar(nombre)</p>
+<pre><code>
+Permite clonar un actor en una posición aleatoria de la pantalla.
+
+Por ejemplo:
+</code></pre>
+<p>› pilas.actores.nave() ‹ &lt;nave en (131, 183)&gt;</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.es_multiplo(a, b)</p>
+<pre><code>
+Determina si un numero es múltiplo de otro.
+
+Por ejemplo:
+</code></pre>
+<p>› pilas.es_multiplo(12, 3) ‹ true</p>
+<p>› pilas.es_multiplo(3, 2) ‹ false</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.enviar_mensaje_global(mensaje, datos)</p>
+<pre><code>
+Envía un mensaje a todos los actores y la escena actual.
+
+Para capturar estos mensajes desde actores o la escena, se tiene
+que crear un método de la forma &quot;cuando_llega_el_mensaje_nombre&quot; donde
+&quot;nombre&quot; tiene que ser mensaje que se quiere capturar.
+
+Por ejemplo, si un actor llama a la siguiente función `this.pilas.enviar_mensaje_global(&#39;ganar&#39;)`
+deberías poder capturar ese mensaje desde cualquier actor o escena
+declarando el método &quot;cuando_llega_el_mensaje_ganar&quot;.
+
+El argumento `datos` es opcional, y se puede utilizar para enviar
+parámetros adicionales junto con el mensaje. Este argumento datos
+se va a enviar directamente a todos los actores que atiendan el mensaje,
+pero es aconsejable que sea un diccionario. Por ejemplo, si se quiere
+enviar dos valores se podría armar un diccionario así:
+</code></pre>
+<p>pilas.enviar_mensaje_global(“empujar”, {fuerza: 10, mi_posicion: this.x})</p>
+<pre><code>
+y desde cualquier otro actor se puede atender esa función creando
+el siguiente método
+</code></pre>
+<p>class actor {</p>
+<p>cuando_llega_el_mensaje_empujar(datos) { this.impulsar(0, datos.fuerza);</p>
+<pre><code>this.decir(`el otro parámetro era x: ${datos.mi_posicion}`);</code></pre>
+<p>}</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.alternar_modo_pantalla_completa() pilas.solicitar_modo_pantalla_completa() pilas.solicitar_modo_ventana()</p>
+<pre><code>
+Permite cambiar el modo de pantalla a pantalla completa o ventana.
+
+Si se pasa al modo pantalla completa, el usuario de todas formas
+puede volver al modo ventana pulsando la tecla `ESC`.
+
+Por ejemplo:
+</code></pre>
+<p>› pilas.alternar_modo_pantalla_completa()</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.alinear(numero, grilla) pilas.ajustar(numero, grilla)</p>
+<pre><code>
+Ajusta un número a una escala de grilla, muy útil en juegos donde
+el jugador se puede mover por escenarios rígidos tipo mosaico o
+tableros.
+
+Por ejemplo:
+</code></pre>
+<p>› pilas.alienar(130, 64) ‹ 28</p>
+<pre><code>
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.pausar()</p>
+<pre><code>
+Detiene la ejecución del juego por completo y espera a que
+el usuario pulse la tecla espacio o haga click con el
+mouse para continuar.
+
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.reproducir_musica(nombre)</p>
+<pre><code>
+Comienza a reproducir una música a partir de un nombre y vuelve a repetirlo cuando finaliza
+de forma automática.
+
+Si hay otra música sonando esta función la detiene y comienza a reproducir la
+música nueva.
+
+Ten en cuenta que la música seguirá sonando, incluso cuando cambies de escena.
+
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.detener_musica()</p>
+<pre><code>
+Detiene toda música que esté sonando en ese momento.
+
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.esta_reproduciendo_musica()</p>
+<pre><code>
+Retorna `true` si en ese momento está sonando una música, sino responde
+con el valor `false`.
+
+&lt;/div&gt;
+
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.definir_mapa(diccionario)</p>
+<pre><code>
+Permite describir cómo se van a representar los actores en un
+mapa de escenario. Esta función se utiliza casi siempre al
+principio del juego o antes de llamar a la función `pilas.crear_mapa`.
+
+Un ejemplo de invocación es el siguiente:
+</code></pre>
+<p>this.pilas.definir_mapa({ x: “ladrillo”, n: “nave” });</p>
+<pre><code>
+y luego de que se definieron los caracteres, se puede crear
+un mapa así:
+
+</code></pre>
+<p>this.pilas.crear_mapa(<code>xxxxxxx           x.....x           x..n..x           x.....x           xxxxxxx</code>);</p>
+<pre><code>
+&lt;/div&gt;
+
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.crear_mapa(mapa, grilla, origen_x, origen_y)</p>
+<pre><code>
+Esta función permite crear un mapa a partir de un diccionario de
+símbolos previamente creado con la función `pilas.definir_mapa`.
+
+El argumento mapa tiene que ser una cadena de textos con la descripción
+del escenario. Opcionalmente se pueden usar caracteres punto (.) o guión
+(-) para separar los items del mapa. También se pueden usar espacios para
+facilitar la legibilidad, esta función va a ignorar esos espacios.
+
+Por ejemplo, esta podría ser una llamada a esta función `crear_mapa`:
+</code></pre>
+<p>this.pilas.crear_mapa(<code>x.....x           x..n..x</code>);</p>
+<pre><code>
+Luego esta función admite como argumentos el tamaño de la grilla (64px
+por omisión) y las coordenadas en las que se debería dibujar el mapa
+(x=0, y=0 por omisión).
+
+&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.laser(actor, x, y, x_final, y_final)</p>
+<pre><code>
+Esta función realiza un laser &quot;instantáneo&quot; para reconocer todos
+los actores que colisionan en una linea recta que va del punto
+(x, y) hasta el punto (x_final, y_final).
+
+Una vez que la función se ejecuta, retornará una lista de esta
+forma:
+
+</code></pre>
+<p>[ { x: 10, y: 10, actor: <actor> distancia: 30 }, … ]</p>
+<pre><code>&lt;/div&gt;
+
+&lt;div class=&quot;funcion&quot;&gt;</code></pre>
+<p>pilas.laser_al_primer_actor(actor, x, y, x_final, y_final, etiqueta) ```</p>
 <p>Similar a la función “laser”, pero solo retornará el primer actor que se encuentre cuando traza un laser desde la posición (x, y) hasta la posición (x_final, y_final).</p>
 <p>Opcionalmente, a esta función se le puede indicar una etiqueta, para que solo tenga en cuenta colisiones contra actores que tengan esa etiqueta.</p>
 </div>  <div class="tc navegacion">

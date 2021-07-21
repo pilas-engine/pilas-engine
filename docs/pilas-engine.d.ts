@@ -648,6 +648,7 @@ declare class Pilas {
     luego(duracion: number, tarea: any): any;
     cada(duracion: number, tarea: any, veces: number): any;
     azar(desde: number, hasta: number): number;
+    azar_excluyendo_un_valor(desde: number, hasta: number, valor_a_excluir: number): number;
     obtener_distancia_entre_puntos(x: number, y: number, x2: number, y2: number): number;
     obtener_distancia_entre_actores(actor1: ActorBase, actor2: ActorBase): number;
     obtener_angulo_entre_puntos(x: number, y: number, x2: number, y2: number): number;
@@ -668,7 +669,9 @@ declare class Pilas {
     alinear(numero: number, grilla: number): number;
     pausar(): void;
     azar_desde_lista(lista: any): any;
+    intercambiar_posiciones_al_azar(lista_de_actores: any): void;
     desordenar_lista(lista_original: any): any[];
+    subdividir_lista(lista_original: any, cantidad_de_elementos: any): any[];
     notificar_traza_de_ejecucion(id: string | number, linea: any): void;
     notificar_ejecucion_del_bloque(bloque: string, id: string): void;
     limpiar_traza_de_ejecucion(): void;
