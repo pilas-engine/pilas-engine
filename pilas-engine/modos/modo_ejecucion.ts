@@ -229,6 +229,19 @@ class ModoEjecucion extends Modo {
                 if (cancelar_1 || cancelar_2) {
                   colision.isActive = false;
                 }
+
+                if (actor_a._bloques_cuando_colisiona) {
+                  cancelar_1 = actor_a._bloques_cuando_colisiona(actor_b);
+                }
+
+                if (actor_b._bloques_cuando_colisiona) {
+                  cancelar_2 = actor_b._bloques_cuando_colisiona(actor_a);
+                }
+
+                if (cancelar_1 || cancelar_2) {
+                  colision.isActive = false;
+                }
+
               }
             }
           });
@@ -559,7 +572,6 @@ class ModoEjecucion extends Modo {
     this.permitir_modo_pausa = datos.permitir_modo_pausa;
 
     this.bloques = datos.proyecto.bloques;
-    console.log("TODO: extraer los códigos de bloques desde datos.proyecto");
   }
 
   update() {

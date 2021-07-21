@@ -11,21 +11,29 @@ Hay dos funciones principales en el temporizador de pilas:
 - `pilas.luego(cantidad_de_segundos_a_esperar, función)`
 - `pilas.cada(segundos_para_el_intervalo, función, veces_a_repetir: opcional)`
 
-La primer función permite ejecutar una función luego de un periodo de tiempo. Por ejemplo, si queremos hacer que un actor diga algo luego de 3 segundos podemos hacerlo así:
+La primer función permite ejecutar una función luego de un periodo de tiempo.
+Por ejemplo, si queremos hacer que un actor diga algo luego de 3 segundos una
+vez que se coloca en pantalla podemos hacerlo escribiendo esta
+sentencia dentro del método `iniciar` del actor así:
 
 ```typescript
-let mi_actor = pilas.actores.aceituna();
+iniciar() {
 
-pilas.luego(3, () => {
-  mi_actor.decir("¡Han pasado 3 segundos!");
-});
+  this.pilas.luego(3, () => {
+    this.decir("¡Han pasado 3 segundos!");
+  });
+
+}
 ```
 
 Hay que tener en cuenta que esta función se ejecutará una sola vez.
 
-La segunda función, llamada `pilas.cada`, permite invocar una función cada determinada cantidad de segundos, muy similar a la anterior, pero invoca la función que le pidamos varias veces.
+La segunda función, llamada `pilas.cada`, permite invocar una función cada
+determinada cantidad de segundos, muy similar a la anterior, pero invoca la
+función que le pidamos varias veces.
 
-Por ejemplo, imagina que queremos crear actores `pelota` cada medio segundo, podemos hacer algo así:
+Por ejemplo, imagina que queremos crear actores `pelota` cada medio segundo,
+podemos hacer algo así:
 
 ```typescript
 pilas.cada(0.5, () => {

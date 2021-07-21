@@ -686,6 +686,37 @@ Por ejemplo:
 
 <div class="funcion">
 ```
+pilas.azar_excluyendo_un_valor(desde, hasta, valor_a_excluir)
+```
+
+Retorna un número aleatorio en el rango que va desde el primer argumento
+al segundo (incluyendo los extremos), pero excluye el valor
+indicado en el último argumento.
+
+Por ejemplo:
+
+```
+› pilas.azar(1, 3, 2)
+‹ 1
+
+› pilas.azar(1, 3, 2)
+‹ 3
+
+› pilas.azar(5, 8, 6)
+‹ 7
+
+› pilas.azar(5, 8, 6)
+‹ 5
+
+› pilas.azar(5, 8, 6)
+‹ 8
+```
+
+</div>
+
+
+<div class="funcion">
+```
 pilas.azar_desde_lista(lista)
 ```
 
@@ -695,8 +726,32 @@ parámetro.
 Por ejemplo:
 
 ```
-› pilas.azar_desde_lista(['uno', 'dos', 'tres']
+› pilas.azar_desde_lista(['uno', 'dos', 'tres'])
 ‹ 'uno'
+```
+
+</div>
+
+<div class="funcion">
+```
+pilas.subdividir_lista(lista, cantidad_de_elementos)
+```
+
+Retorna una lista nueva que solo tendrá la cantidad de elementos
+que se le soliciten por parámetro. Los elementos que se preservarán
+serán aquellos que estén al principio de la lista inicial.
+
+Por ejemplo:
+
+```
+› pilas.subdividir_lista(['uno', 'dos', 'tres'], 2)
+‹ ['uno', 'dos']
+
+› pilas.subdividir_lista([3, 4, 5, 6], 3)
+‹ [3, 4, 5]
+
+› pilas.subdividir_lista([3, 4, 5, 6, 8, 2, 3], 1)
+‹ [3]
 ```
 
 </div>
@@ -714,6 +769,18 @@ Por ejemplo:
 ```
 › pilas.azar_desde_lista([1, 2, 3, 4, 5, 6])
 ‹ [4, 6, 1, 3, 2, 5]
+```
+
+</div>
+
+<div class="funcion">
+```
+pilas.intercambiar_posiciones_al_azar(lista_de_actores)
+```
+
+Intercambia de posición de los actores enviados como una lista
+entre sí.
+
 ```
 
 </div>

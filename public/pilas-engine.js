@@ -2904,6 +2904,13 @@ var Pilas = (function () {
         }
         return Math.floor(Math.random() * (hasta - desde + 1)) + desde;
     };
+    Pilas.prototype.azar_excluyendo_un_valor = function (desde, hasta, valor_a_excluir) {
+        var valor = this.azar(desde, hasta);
+        while (valor == valor_a_excluir) {
+            valor = this.azar(desde, hasta);
+        }
+        return valor;
+    };
     Pilas.prototype.obtener_distancia_entre_puntos = function (x, y, x2, y2) {
         var dx = x - x2;
         var dy = y - y2;
@@ -3001,6 +3008,19 @@ var Pilas = (function () {
         var index = this.azar(0, lista.length - 1);
         return lista[index];
     };
+    Pilas.prototype.intercambiar_posiciones_al_azar = function (lista_de_actores) {
+        var posiciones = lista_de_actores.map(function (a) {
+            return {
+                x: a.x,
+                y: a.y
+            };
+        });
+        posiciones = this.desordenar_lista(posiciones);
+        lista_de_actores.map(function (actor, i) {
+            actor.x = posiciones[i].x;
+            actor.y = posiciones[i].y;
+        });
+    };
     Pilas.prototype.desordenar_lista = function (lista_original) {
         var _a;
         var lista = __spreadArrays(lista_original);
@@ -3009,6 +3029,10 @@ var Pilas = (function () {
             _a = [lista[j], lista[i]], lista[i] = _a[0], lista[j] = _a[1];
         }
         return lista;
+    };
+    Pilas.prototype.subdividir_lista = function (lista_original, cantidad_de_elementos) {
+        var lista = __spreadArrays(lista_original);
+        return lista.slice(0, cantidad_de_elementos);
     };
     Pilas.prototype.notificar_traza_de_ejecucion = function (id, linea) {
         if (this.instrumentacion === undefined) {
@@ -3420,8 +3444,7 @@ var ActorBase = (function () {
         destino.setOrigin(origen.originX, origen.originY);
     };
     ActorBase.prototype.iniciar = function () { };
-    ActorBase.prototype._bloques_iniciar = function () {
-    };
+    ActorBase.prototype._bloques_iniciar = function () { };
     ActorBase.prototype._bloques_actualizar = function () { };
     Object.defineProperty(ActorBase.prototype, "interactivo", {
         get: function () {
@@ -9513,6 +9536,15 @@ var ModoEjecucion = (function (_super) {
                                 if (cancelar_1 || cancelar_2) {
                                     colision.isActive = false;
                                 }
+                                if (actor_a._bloques_cuando_colisiona) {
+                                    cancelar_1 = actor_a._bloques_cuando_colisiona(actor_b);
+                                }
+                                if (actor_b._bloques_cuando_colisiona) {
+                                    cancelar_2 = actor_b._bloques_cuando_colisiona(actor_a);
+                                }
+                                if (cancelar_1 || cancelar_2) {
+                                    colision.isActive = false;
+                                }
                             }
                         }
                     });
@@ -9763,7 +9795,6 @@ var ModoEjecucion = (function (_super) {
         this.codigo = datos.codigo;
         this.permitir_modo_pausa = datos.permitir_modo_pausa;
         this.bloques = datos.proyecto.bloques;
-        console.log("TODO: extraer los códigos de bloques desde datos.proyecto");
     };
     ModoEjecucion.prototype.update = function () {
         if (this.con_error) {

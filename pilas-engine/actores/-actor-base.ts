@@ -320,9 +320,7 @@ class ActorBase {
 
   iniciar() {}
 
-  _bloques_iniciar() {
-    //console.log("esta actor no tiene bloques");
-  }
+  _bloques_iniciar() {}
 
   _bloques_actualizar() {}
 

@@ -146,9 +146,11 @@ Blockly.Blocks["cuando_comienza_una_colision"] = {
 
 Blockly.JavaScript["cuando_comienza_una_colision"] = function(block) {
   var variable_actor = Blockly.JavaScript.variableDB_.getName(block.getFieldValue("actor"), Blockly.Variables.NAME_TYPE);
-  var statements_name = Blockly.JavaScript.statementToCode(block, "NAME");
-  // TODO: Assemble JavaScript into code variable.
-  var code = "alert('oeoe');\n";
+  var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
+
+  var code = `actor._bloques_cuando_colisiona = function(${variable_actor}) {
+    ${sentencias}
+  };\n`;
   return code;
 };
 

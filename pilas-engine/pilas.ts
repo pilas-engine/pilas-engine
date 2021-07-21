@@ -539,6 +539,33 @@ class Pilas {
   }
 
   /**
+   * Retorna un número aleatorio en el rango que va desde el primer argumento
+   * al segundo (incluyendo los extremos), pero excluye el valor
+   * indicado en el último argumento.
+   *
+   * Por ejemplo, esta llamada puede retornar dos valores:
+   *
+   * ```
+   *  pilas.azar(1, 3, 2); // posible resultado 1 o 3 
+   * ```
+   *
+   * o bien
+   *
+   * ```
+   *  pilas.azar(5, 10, 6); // posible resultado 5, 7, 8, 9 o 10
+   * ```
+   */
+  azar_excluyendo_un_valor(desde: number, hasta: number, valor_a_excluir: number) {
+    let valor = this.azar(desde, hasta);
+
+    while (valor == valor_a_excluir) {
+      valor = this.azar(desde, hasta);
+    }
+
+    return valor;
+  }
+
+  /**
    * Retorna la cantidad de pixels de distancia entre dos puntos
    * indicados por parámetros.
    */
@@ -707,6 +734,22 @@ class Pilas {
     return lista[index];
   }
 
+  intercambiar_posiciones_al_azar(lista_de_actores) {
+    let posiciones = lista_de_actores.map(a => {
+      return {
+        x: a.x, 
+        y: a.y
+      };
+    });
+
+    posiciones = this.desordenar_lista(posiciones);
+
+    lista_de_actores.map((actor, i) => {
+      actor.x = posiciones[i].x;
+      actor.y = posiciones[i].y;
+    });
+  }
+
   desordenar_lista(lista_original) {
     let lista = [...lista_original];
 
@@ -716,6 +759,28 @@ class Pilas {
     }
 
     return lista;
+  }
+
+  /**
+   * Retorna una lista nueva que solo tendrá la cantidad de elementos
+   * que se le soliciten por parámetro. Los elementos que se preservarán
+   * serán aquellos que estén al principio de la lista inicial.
+   *
+   * Por ejemplo:
+   *
+   * › pilas.subdividir_lista(['uno', 'dos', 'tres'], 2)
+   * ‹ ['uno', 'dos']
+   * 
+   * › pilas.subdividir_lista([3, 4, 5, 6], 3)
+   * ‹ [3, 4, 5]
+   * 
+   * › pilas.subdividir_lista([3, 4, 5, 6, 8, 2, 3], 1)
+   * ‹ [3]
+   *
+   */
+  subdividir_lista(lista_original, cantidad_de_elementos) {
+    let lista = [...lista_original];
+    return lista.slice(0, cantidad_de_elementos);
   }
 
   /**
