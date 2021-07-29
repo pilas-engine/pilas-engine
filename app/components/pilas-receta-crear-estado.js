@@ -66,6 +66,10 @@ export default Component.extend({
         ${estado}_cada_segundo(segundos_transcurridos: number) {
 
         }
+
+        ${estado}_cuando_hace_click(x: number, y: number, evento_original) {
+
+        }
       `;
       this.usar_receta(this.receta, this.dd);
     }
