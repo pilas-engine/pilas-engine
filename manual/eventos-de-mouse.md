@@ -45,14 +45,23 @@ Para capturar un evento desde el mouse simplemente hay que declarar alguna de es
 - cuando_mueve(x, y, evento_original)
 - cuando_sale(x, y, evento_original)
 
-Estas funciones se pueden crear en el código de una escena o de un actor. La diferencia es que en las escenas el "click" o el movimiento se van a detectar en toda la pantalla, mientras que en el código del actor solo se detectarán si el mouse apunta al actor.
+Estas funciones se pueden crear en el código de una escena o de un actor. La
+diferencia es que en las escenas el "click" o el movimiento se van a detectar
+en toda la pantalla, mientras que en el código del actor solo se detectarán si
+el mouse apunta al actor.
 
 Si desde un actor necesitas detectar el click del mouse en la pantalla deberías
 usar este otro método:
 
 - cuando_hace_click_en_la_pantalla(x, y, evento_original)
 
-Veamos un ejemplo, imaginá que queremos crear actores de la clase "Pelota" cada vez que el usuario hace "click" sobre la pantalla. Podríamos hacerlo colocando este código en la escena:
+o bien:
+
+- cuando_termina_de_hacer_click_en_la_pantalla(x, y, evento_original)
+
+Veamos un ejemplo, imaginá que queremos crear actores de la clase "Pelota" cada
+vez que el usuario hace "click" sobre la pantalla. Podríamos hacerlo colocando
+este código en la escena:
 
 ```typescript
 class escena2 extends Escena {

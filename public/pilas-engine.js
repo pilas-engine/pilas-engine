@@ -3486,6 +3486,7 @@ var ActorBase = (function () {
         }
     };
     ActorBase.prototype.cuando_hace_click_en_la_pantalla = function (x, y, evento_original) { };
+    ActorBase.prototype.cuando_termina_de_hacer_click_en_la_pantalla = function (x, y, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "fondo", {
         set: function (fondo) { },
         enumerable: false,
@@ -5914,6 +5915,17 @@ var EscenaBase = (function () {
         this.actores.map(function (actor) {
             try {
                 actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+            }
+            catch (e) {
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+            }
+        });
+    };
+    EscenaBase.prototype.avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores = function (x, y, evento_original) {
+        var _this = this;
+        this.actores.map(function (actor) {
+            try {
+                actor.cuando_termina_de_hacer_click_en_la_pantalla(x, y, evento_original);
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
@@ -9459,6 +9471,7 @@ var ModoEjecucion = (function (_super) {
         if (this._escena_en_ejecucion) {
             try {
                 this._escena_en_ejecucion.cuando_termina_de_hacer_click(p.x, p.y, evento);
+                this._escena_en_ejecucion.avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(p.x, p.y, evento);
             }
             catch (e) {
                 this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");

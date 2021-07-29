@@ -319,6 +319,16 @@ class EscenaBase {
     });
   }
 
+  avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(x: number, y:number, evento_original: any) {
+    this.actores.map(actor => {
+      try {
+        actor.cuando_termina_de_hacer_click_en_la_pantalla(x, y, evento_original);
+      } catch (e) {
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+      }
+    });
+  }
+
   avisar_cuando_pulsa_tecla_a_los_actores(tecla: string, evento_original: any) {
     this.actores.map(e => {
       try {

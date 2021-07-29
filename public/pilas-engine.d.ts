@@ -773,6 +773,7 @@ declare class ActorBase {
     set area_de_interactividad(v: any);
     definir_area_de_interactividad(ancho: number, alto: number): void;
     cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any): void;
+    cuando_termina_de_hacer_click_en_la_pantalla(x: number, y: number, evento_original: any): void;
     get area_de_interactividad(): any;
     set fondo(fondo: string);
     serializar(): {
@@ -1463,6 +1464,7 @@ declare class EscenaBase {
     actualizar_actores(): void;
     reproducir_sonidos_pendientes(): void;
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
+    avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_pulsa_tecla_a_los_actores(tecla: string, evento_original: any): void;
     avisar_cuando_suelta_tecla_a_los_actores(tecla: string, evento_original: any): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;

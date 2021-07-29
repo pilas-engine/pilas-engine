@@ -132,6 +132,7 @@ class ModoEjecucion extends Modo {
     if (this._escena_en_ejecucion) {
       try {
         this._escena_en_ejecucion.cuando_termina_de_hacer_click(p.x, p.y, evento);
+        this._escena_en_ejecucion.avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(p.x, p.y, evento);
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_hace_click");
       }
