@@ -36,6 +36,10 @@ export default Service.extend({
     localStorage.setItem("pilas:proyecto_serializado", proyecto_serializado);
   },
 
+  guardar_captura_de_pantalla_del_proyecto(imagen_en_base_64) {
+    localStorage.setItem("pilas:captura_de_pantalla", imagen_en_base_64);
+  },
+
   cuando_guarda() {
     this.set("hay_cambios_por_guardar", false);
   },

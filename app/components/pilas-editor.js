@@ -1087,6 +1087,11 @@ export default Component.extend({
 
     cuando_guarda(proyecto) {
       this.serviceProyecto.cuando_guarda();
+
+      // invoca a la acción "al_guardar" dentro de controllers/editor.js
+      // esta función es la que hace la captura de pantalla, la guarda en
+      // local storage y además abre el cuadro de dialogo para guardar
+      // el archivo .pilas
       this.cuandoIntentaGuardar(proyecto);
     },
 

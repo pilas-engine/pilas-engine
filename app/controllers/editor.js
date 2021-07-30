@@ -124,9 +124,43 @@ export default Controller.extend(queryParams.Mixin, {
     return proyecto;
   },
 
+
+    realizar_captura_de_pantalla_y_guardar_en_localstorage() {
+      let bus = this.bus;
+      let servicioProyecto = this.servicioProyecto;
+
+      function captura_realizada(data) {
+        var imagen = new Image();
+        var canvas = document.createElement("canvas");
+
+        imagen.addEventListener("load", () => {
+          var escala = imagen.height / imagen.width;
+          canvas.width = 128;
+          canvas.height = 128 * escala;
+          var contexto = canvas.getContext("2d");
+          contexto.drawImage(imagen, 0, 0, imagen.width, imagen.height, 0, 0, canvas.width, canvas.height);
+
+          let imagenEnBase64 = canvas.toDataURL("image/jpeg", 0.5);
+
+          servicioProyecto.guardar_captura_de_pantalla_del_proyecto(imagenEnBase64);
+        });
+
+        imagen.src = data.data;
+        bus.off("captura_de_pantalla_realizada", captura_realizada);
+      }
+      
+      this.bus.on("captura_de_pantalla_realizada", captura_realizada);
+        
+      // solicita hacer una captura de pantalla
+      this.bus.trigger("capturar_pantalla");
+    },
+
+
   actions: {
     al_guardar(proyecto) {
       let str = json_a_string(proyecto);
+
+      this.realizar_captura_de_pantalla_y_guardar_en_localstorage();
 
       if (this.electron.enElectron) {
         let json = string_a_json(str);
