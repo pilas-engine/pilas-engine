@@ -242,3 +242,7 @@ server:
 
 undo: 撤消
 only.pilas.files: 您只能打开.pilas文件
+
+iniciar.proyecto:
+  recommended: 推荐
+  title: 选择一个模板开始创建您的游戏

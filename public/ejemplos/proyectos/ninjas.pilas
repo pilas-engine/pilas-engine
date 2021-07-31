@@ -746,7 +746,7 @@
       },
       {
         "nombre": "enemigo",
-        "codigo": "// @ts-ignore\nclass enemigo extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.animacion = \"enemigo\";\n    this.x = this.pilas.azar_desde_lista([-500, -300, 300, 500]);\n    this.y = this.pilas.azar_desde_lista([-500, -300, 300, 500]);\n    this.velocidad = this.pilas.azar_desde_lista([2,5,8]);\n  }\n\n  actualizar() {\n    let ninja = this.pilas.obtener_actor_por_nombre(\"ninja\");\n    let anguloAlNinja = this.pilas.obtener_angulo_entre_actores(this, ninja);\n    this.avanzar(anguloAlNinja, this.velocidad);\n  }\n}\n"
+        "codigo": "// @ts-ignore\nclass enemigo extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.animacion = \"enemigo\";\n    this.x = this.pilas.azar_desde_lista([-500, -300, 300, 500]);\n    this.y = this.pilas.azar_desde_lista([-500, -300, 300, 500]);\n    this.velocidad = this.pilas.azar_desde_lista([1,2,3]);\n  }\n\n  actualizar() {\n    let ninja = this.pilas.obtener_actor_por_nombre(\"ninja\");\n    let anguloAlNinja = this.pilas.obtener_angulo_entre_actores(this, ninja);\n    this.avanzar(anguloAlNinja, this.velocidad);\n  }\n}\n"
       }
     ],
     "proyecto": "class Proyecto {\n    iniciar() {\n    }\n}\n\n"

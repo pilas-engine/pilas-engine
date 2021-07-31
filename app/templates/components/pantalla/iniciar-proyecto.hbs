@@ -1,0 +1,80 @@
+<div class="theme-oscuro bg-fondo vh-100 wrapper verdana flex flex-column">
+
+  <div class="h2-5 flex bb borde items-center">
+
+    <div class="pa2 truncate">
+      {{pilas-boton-regresar confirmar=false}}
+    </div>
+
+    <div class="texto flex-auto tc">
+      {{t "iniciar.proyecto.title"}}
+    </div>
+
+    <div class="w2">
+    </div>
+
+  </div>
+
+
+  <div class="tc pt3">
+
+    {{#if tieneProyectoAnterior}}
+      {{#link-to "editor" (query-params tipo="continuar") id="anterior" tagName="div" class="dib w180 pointer"}}
+        <div style="width: 180px; height: 140px;" class="overflow-hidden">
+          <img src={{capturaDelProyectoAnterior}} alt="">
+        </div>
+
+        <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+          Seguir con mi proyecto anterior
+        </div>
+      {{/link-to}}
+    {{/if}}
+
+    {{#link-to "editor" (query-params tipo="inicial") id="inicial" class="link dib relative"}}
+
+      <div style="width: 180px; height: 140px;">
+        <div class="sprite-iniciar-proyecto capturas-fisica"></div>
+      </div>
+
+      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+        Iniciar con física básica
+      </div>
+
+      <div class="absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow ttu">{{t "iniciar.proyecto.recommended"}}</div>
+    {{/link-to}}
+
+
+    {{#link-to "editor" (query-params tipo="nuevo") id="nuevo" tagName="div" class="dib w180 pointer"}}
+      <div style="width: 180px; height: 140px;">
+        <div class="sprite-iniciar-proyecto capturas-cero"></div>
+      </div>
+
+      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+        Iniciar un proyecto desde cero
+      </div>
+    {{/link-to}}
+
+    {{#link-to "editor" (query-params tipo="plataformas-minimo") id="plataformas-minimo" tagName="div" class="dib w180 pointer"}}
+      <div style="width: 180px; height: 140px;">
+        <div class="sprite-iniciar-proyecto capturas-plataformas-minimo"></div>
+      </div>
+
+      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+        Plataformas mínimo con cámara
+      </div>
+    {{/link-to}}
+
+    {{#link-to "editor" (query-params tipo="plataformas-animado") id="plataformas-animado" tagName="div" class="dib w180 pointer"}}
+      <div style="width: 180px; height: 140px;">
+        <div class="sprite-iniciar-proyecto capturas-plataformas-animado"></div>
+      </div>
+
+      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+        Plataformas con animaciones
+      </div>
+    {{/link-to}}
+
+  </div>
+
+
+</div>

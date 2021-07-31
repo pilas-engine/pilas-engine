@@ -246,3 +246,7 @@ server:
 
 undo: Undo
 only.pilas.files: You can only open .pilas files
+
+iniciar.proyecto:
+  recommended: Recommended
+  title: Choose a template to start creating your game

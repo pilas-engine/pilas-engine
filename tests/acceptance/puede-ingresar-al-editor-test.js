@@ -17,7 +17,9 @@ module("Acceptance | puede ingresar al editor", function(hooks) {
     assert.equal(currentURL(), "/", "Está en la ruta principal");
 
     await pulsar("Abrir el editor");
-    assert.equal(currentURL(), "/editor", "Ingresó al editor");
+    assert.equal(currentURL(), "/iniciar-proyecto", "Aparece el selector de plantilla");
+
+    await click("#inicial");
 
     await esperarElemento("a#ejecutar");
 

@@ -7,4 +7,8 @@ class moneda extends Actor {
     figura_dinamica: false,
     figura_sensor: true
   };
+
+  iniciar() {
+    this.animacion = "moneda";
+  }
 }

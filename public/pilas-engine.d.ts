@@ -1266,6 +1266,7 @@ declare class moneda extends Actor {
         figura_dinamica: boolean;
         figura_sensor: boolean;
     };
+    iniciar(): void;
 }
 declare class nave extends Actor {
     propiedades: {

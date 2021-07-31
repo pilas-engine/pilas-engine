@@ -1,0 +1,18 @@
+/* -----------------------------------------------------
+   created with https://www.codeandweb.com/texturepacker 
+   -----------------------------------------------------
+   $TexturePacker:SmartUpdate:337621a966156d3a55786866d99b9dd6:2fb8bafdc018660703f7cefc6986e67e:741a09b0e3a568873dd34f31f36f953c$
+   -----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite-iniciar-proyecto {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(iniciar-proyecto.png);}
+
+.capturas-cero {width:179px; height:140px; background-position: -1px -426px}
+.capturas-fisica {width:180px; height:140px; background-position: -1px -1px}
+.capturas-plataformas-animado {width:180px; height:139px; background-position: -1px -285px}
+.capturas-plataformas-minimo {width:180px; height:140px; background-position: -1px -143px}

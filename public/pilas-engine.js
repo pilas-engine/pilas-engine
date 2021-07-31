@@ -5366,6 +5366,9 @@ var moneda = (function (_super) {
         };
         return _this;
     }
+    moneda.prototype.iniciar = function () {
+        this.animacion = "moneda";
+    };
     return moneda;
 }(Actor));
 var nave = (function (_super) {

@@ -46,6 +46,7 @@ Router.map(function() {
     this.route('crear_proyecto');
   });
   this.route("proyecto", { path: "proyecto/:hash" });
+  this.route('iniciar-proyecto');
 });
 
 export default Router;

@@ -245,3 +245,7 @@ server:
 
 undo: Deshacer
 only.pilas.files: Solo puede abrir archivos con extensión .pilas
+
+iniciar.proyecto:
+  recommended: Recomendado
+  title: Elige una plantilla para comenzar a crear tu juego

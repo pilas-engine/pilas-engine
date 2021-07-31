@@ -1,21 +1,13 @@
 "use strict";
 var fs = require("fs");
 
-async function corregir_grilla_de_imagenes() {
-  let css = "public/grilla-imagenes.css";
-  let contenido = fs.readFileSync(css).toString();
-  contenido = contenido.replace(".sprite {", ".sprite-grilla-de-imagenes {");
+async function corregir_grilla(archivo, clase) {
+  let contenido = fs.readFileSync(archivo).toString();
+  contenido = contenido.replace(".sprite {", clase + " {");
 
-  fs.writeFileSync(css, contenido);
+  fs.writeFileSync(archivo, contenido);
 }
 
-async function corregir_grilla_de_ejemplos() {
-  let css = "public/ejemplos.css";
-  let contenido = fs.readFileSync(css).toString();
-  contenido = contenido.replace(".sprite {", ".sprite-ejemplos {");
-
-  fs.writeFileSync(css, contenido);
-}
-
-corregir_grilla_de_imagenes();
-corregir_grilla_de_ejemplos();
+corregir_grilla("public/iniciar-proyecto.css", ".sprite-iniciar-proyecto");
+corregir_grilla("public/ejemplos.css", ".sprite-ejemplos");
+corregir_grilla("public/grilla-imagenes.css", ".sprite-grilla-de-imagenes");

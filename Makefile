@@ -311,6 +311,7 @@ actualizar_imagenes:
 	$(call log, "Creando spritesheets de imágenes")
 	TexturePacker recursos/iconos.tps
 	TexturePacker recursos/ejemplos.tps
+	TexturePacker recursos/iniciar-proyecto.tps
 	TexturePacker recursos/grilla-imagenes.tps
 	TexturePacker recursos/huesos/robot.tps
 	$(call log, "Corrigiendo nombres de clases en los css generados")
