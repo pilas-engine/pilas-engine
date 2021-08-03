@@ -151,6 +151,14 @@ compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
 	yarn compilar_pilas_live
 
+compilar_bloques:
+	$(call log, "Compilando los bloques modo live")
+	yarn compilar_bloques
+
+compilar_bloques_live:
+	$(call log, "Compilando los bloques modo live")
+	yarn compilar_bloques_live
+
 test:
 	$(call log, "Ejecutando test...")
 	${BIN_EMBER} test
