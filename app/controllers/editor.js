@@ -113,9 +113,19 @@ export default Controller.extend(queryParams.Mixin, {
       return this.migraciones.migrar(proyecto);
     }
 
-    // por omisión, se deja el comportamiento de antes (proyecto con física básica)
-    let proyecto = this.crearProyectoInicial();
-    return this.migraciones.migrar(proyecto);
+    // por omisión, se deja el comportamiento de antes: cuando el usuario
+    // vuelve a abrir el editor se le muestra el proyecto anterior o el
+    // proyecto inicial con física básica.
+    if (localStorage.getItem("pilas:proyecto_serializado")) {
+      let proyecto_serializado = localStorage.getItem("pilas:proyecto_serializado");
+      let proyecto = this.crear_proyecto_desde_cadena_serializada(proyecto_serializado);
+
+      return this.migraciones.migrar(proyecto);
+    } else {
+      let proyecto = this.crearProyectoInicial();
+      return this.migraciones.migrar(proyecto);
+    }
+
   }),
 
   reset(_, isExiting) {

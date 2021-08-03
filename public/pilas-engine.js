@@ -5276,7 +5276,8 @@ var humo = (function (_super) {
     humo.prototype.iniciar = function () {
         this.animacion = "humo";
     };
-    humo.prototype.actualizar = function () { };
+    humo.prototype.actualizar = function () {
+    };
     humo.prototype.cuando_finaliza_animacion = function (nombre) {
         this.eliminar();
     };

@@ -128,7 +128,7 @@
     },
     {
       "nombre": "humo",
-      "codigo": "class humo extends Actor {\n  propiedades = {\n    figura: \"\",\n    imagen: \"imagenes:efectos/humo-03\",\n    etiqueta: \"humo\"\n  };\n\n  iniciar() {\n    this.animacion = \"humo\";\n  }\n\n  actualizar() {}\n\n  cuando_finaliza_animacion(nombre: string) {\n    this.eliminar();\n  }\n}\n",
+      "codigo": "class humo extends Actor {\n  propiedades = {\n    figura: \"\",\n    imagen: \"imagenes:efectos/humo-03\",\n    etiqueta: \"humo\"\n  };\n\n  iniciar() {\n    this.animacion = \"humo\";\n  }\n\n  actualizar() {\n  }\n\n  cuando_finaliza_animacion(nombre: string) {\n    this.eliminar();\n  }\n}\n",
       "archivo": "humo.ts",
       "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>"
     },

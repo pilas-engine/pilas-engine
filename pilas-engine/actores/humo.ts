@@ -9,7 +9,8 @@ class humo extends Actor {
     this.animacion = "humo";
   }
 
-  actualizar() {}
+  actualizar() {
+  }
 
   cuando_finaliza_animacion(nombre: string) {
     this.eliminar();
