@@ -108,7 +108,7 @@ prettier:
 
 deploy:
 	@echo "Compilando la aplicación en modo producción..."
-	ember build --prod  --output-path docs
+	ember build --prod --output-path docs
 	echo "app.pilas-engine.com.ar" > docs/CNAME
 	git add docs
 	git commit -m "Realizando deploy"
