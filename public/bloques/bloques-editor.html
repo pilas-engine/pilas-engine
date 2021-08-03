@@ -6,8 +6,9 @@
     <script src="./blockly_compressed.js"></script>
     <script src="./blocks_compressed.js"></script>
     <script src="./msg/js/en.js"></script>
+    <script src="./msg/js/es.js"></script>
     <script src="./javascript_compressed.js"></script>
-    <script src="./bloques.js"></script>
+    <script src="./bloques-compilados.js"></script>
     <style>
       body {
         background-color: #fff;
@@ -43,159 +44,32 @@
     <table>
       <tr>
         <td id="blocklyArea">
-          <div id="blocklyDiv" style="position: absolute;"></div>
+          <div id="blocklyDiv" style="position: absolute"></div>
         </td>
       </tr>
     </table>
 
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-      <category name="..">
-      </category>
+      <category name=".."> </category>
     </xml>
 
     <script>
       var HOST = "file://";
-      window.valores_dropdown = {teclas: [
-        ['A', 'A'],
-      ]};
+      window.valores_dropdown = { teclas: [["A", "A"]] };
 
       if (window.location.host) {
         HOST = window.location.protocol + "//" + window.location.host;
       }
 
-      const toolbox = {
-        "actor": [
-          {
-            "kind": "category",
-            "name": "Eventos",
-            "contents": [
-              {
-                "kind": "block",
-                "type": "actor_inicia"
-              },
-              {
-                "kind": "block",
-                "type": "actor_inicia"
-              },
-              {
-                "kind": "block",
-                "type": "cuando_comienza_una_colision"
-              },
-            ]
-          },
-          {
-            "kind": "category",
-            "name": "Control",
-            "contents": [
-              {
-                "kind": "block",
-                "type": "controls_if"
-              }
-            ]
-          },
-          {
-            "kind": "category",
-            "name": "Acciones",
-            "contents": [
-                    {
-                            "kind": "block",
-                            "type": "text"
-                    },
-                    {
-                            "kind": "block",
-                            "type": "actor_decir",
-                    },
-                    {
-                            "kind": "block",
-                            "type": "desplazar"
-                          },
-                    {
-                              "kind": "block",
-                              "type": "reproducir_animacion"
-                          },
-                      {
-                              "kind": "block",
-                              "type": "reproducir_sonido"
-                            },
-                      {
-                              "kind": "block",
-                              "type": "reproducir_musica"
-                            },
-
-                      {
-                              "kind": "block",
-                              "type": "detener_musica"
-                            }
-
-            ]
-          },
-          {
-            "kind": "category",
-            "name": "Sensores",
-            "contents": [
-              {
-                "kind": "block",
-                "type": "control_tecla"
-              }
-            ]
-          },
-          {
-  "kind": "category",
-  "name": "Variables",
-  "custom": "VARIABLE"
-},
-{
-  "kind": "category",
-  "name": "Functions",
-  "custom": "PROCEDURE"
-}
-        ],
-        "proyecto": [
-          {
-            "kind": "category",
-            "name": "Logic",
-            "contents": [
-              {
-                "kind": "block",
-                "type": "logic_compare"
-              },
-              {
-                "kind": "block",
-                "type": "logic_operation"
-              },
-              {
-                "kind": "block",
-                "type": "logic_boolean"
-              }
-            ]
-          },
-        ],
-        "escena": [
-          {
-            "kind": "category",
-            "name": "Logic escena",
-            "contents": [
-              {
-                "kind": "block",
-                "type": "logic_compare"
-              },
-              {
-                "kind": "block",
-                "type": "logic_operation"
-              },
-              {
-                "kind": "block",
-                "type": "logic_boolean"
-              }
-            ]
-          }
-        ]
-      }
+      // esta variable proviene del archivo bloques_compilados.js que se
+      // genera con el comando make compilar_bloques
+      const toolbox = toolbox_de_bloques_compilados;
 
       var blocklyArea = document.getElementById("blocklyArea");
       var blocklyDiv = document.getElementById("blocklyDiv");
       var workspace = Blockly.inject(blocklyDiv, {
         media: "./media/",
+        locale: "es",
         toolbox: document.getElementById("toolbox"),
         theme: "dark",
         trashcan: true,
@@ -206,16 +80,16 @@
           maxScale: 3,
           minScale: 0.3,
           scaleSpeed: 1.2,
-          pinch: true
+          pinch: true,
         },
         move: {
           scrollbars: true,
           drag: true,
-          wheel: false
-        }
+          wheel: false,
+        },
       });
 
-      var onresize = function(e) {
+      var onresize = function (e) {
         // Compute the absolute coordinates and dimensions of blocklyArea.
         var element = blocklyArea;
         var x = 0;
@@ -233,17 +107,19 @@
         Blockly.svgResize(workspace);
       };
 
-
       // ctrl+s o cmd+s para guardar y ejecutar
-      document.addEventListener("keydown", function(e) {
-        var pulsa_ctrl_s = (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83;
+      document.addEventListener(
+        "keydown",
+        function (e) {
+          var pulsa_ctrl_s = (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.keyCode == 83;
 
-        if (pulsa_ctrl_s) {
-          e.preventDefault();
-	        window.top.postMessage({message: "pulsa-ctrl-s"}, HOST);
-        }
-      }, false);
-
+          if (pulsa_ctrl_s) {
+            e.preventDefault();
+            window.top.postMessage({ message: "pulsa-ctrl-s" }, HOST);
+          }
+        },
+        false
+      );
 
       window.addEventListener("resize", onresize, false);
       onresize();
@@ -253,7 +129,7 @@
       window.top.postMessage({ message: "carga-completa-de-blockly" }, HOST);
 
       function convertir_en_dropdown(lista) {
-        return lista.map(item => [item, item]); 
+        return lista.map((item) => [item, item]);
       }
 
       function onChange(event) {
@@ -266,7 +142,7 @@
             {
               message: "cambia-el-workspace-de-blockly",
               texto: xml_text,
-              codigo: codigo
+              codigo: codigo,
             },
             HOST
           );
@@ -279,19 +155,16 @@
       // de evento.
       workspace.addChangeListener(Blockly.Events.disableOrphans);
 
-      Blockly.JavaScript.STATEMENT_PREFIX = 'if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque(%1, this.id);\n}\n';
+      Blockly.JavaScript.STATEMENT_PREFIX = "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque(%1, this.id);\n}\n";
 
       // Atiende mensaje que envía el componente blockly-editor.
-      window.addEventListener("message", message => {
-
+      window.addEventListener("message", (message) => {
         if (!message.data) {
           return;
         }
 
-
         if (message.data.message === "resaltar-bloques") {
           message.data.ids_de_bloques.map((bloque, index) => {
-
             if (index === 0) {
               // si es el primer bloque en resaltar descactiva todos
               // los demás así no quedan resaltados.
@@ -300,12 +173,11 @@
               // resalta el bloque actual sin alterar al resto de los bloques.
               Blockly.mainWorkspace.highlightBlock(bloque, true);
             }
-
           });
         }
 
         if (message.data.message === "limpiar-bloques-resaltados") {
-          setTimeout(function() {
+          setTimeout(function () {
             Blockly.mainWorkspace.highlightBlock();
           }, 100);
         }
@@ -317,17 +189,16 @@
             animaciones: convertir_en_dropdown(message.data.data.animaciones),
             sonidos: convertir_en_dropdown(message.data.data.sonidos),
             teclas: convertir_en_dropdown(message.data.data.teclas),
-          }
+          };
 
           //console.log("en blockly-editor.html se actualiza valores_dropdown");
           //console.log(window.valores_dropdown);
         }
-                
-        if (message.data.message === "cargar-toolbox") {
 
+        if (message.data.message === "cargar-toolbox") {
           Blockly.mainWorkspace.updateToolbox({
-            "kind": "categoryToolbox",
-            "contents": toolbox[message.data.tipo]
+            kind: "categoryToolbox",
+            contents: toolbox[message.data.tipo],
           });
         }
 
@@ -347,7 +218,6 @@
             Blockly.Xml.domToWorkspace(xml, workspace);
           }
         }
-              
       });
     </script>
   </body>

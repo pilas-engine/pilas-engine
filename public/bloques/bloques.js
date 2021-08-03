@@ -14,33 +14,14 @@ Blockly.Blocks["actor_decir"] = {
     this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript["actor_decir"] = function(block) {
   var value_name = block.getFieldValue("NAME");
   var code = `this.decir("${value_name}");\n`;
   return code;
 };
 
-// https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#yigt2z
 
-Blockly.Blocks["actor_inicia"] = {
-  init: function() {
-    this.appendDummyInput().appendField("Al iniciar");
-    this.appendStatementInput("NAME").setCheck(null);
-    this.setColour(210);
-    this.setTooltip("Hace que el actor diga algo");
-    this.setHelpUrl("");
-  }
-};
-
-Blockly.JavaScript["actor_inicia"] = function(block) {
-  var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
-
-  var code = `actor._bloques_iniciar = function() {
-    ${sentencias}
-  };\n`;
-
-  return code;
-};
 
 Blockly.Blocks["desplazar"] = {
   init: function() {
@@ -67,24 +48,6 @@ Blockly.JavaScript["desplazar"] = function(block) {
   return code;
 };
 
-Blockly.Blocks["actor_actualizar"] = {
-  init: function() {
-    this.appendDummyInput().appendField("Al actualizar");
-    this.appendStatementInput("NAME").setCheck(null);
-    this.setColour(230);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  }
-};
-
-Blockly.JavaScript["actor_actualizar"] = function(block) {
-  var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
-
-  var code = `actor._bloques_actualizar = function() {
-    ${sentencias}
-  };\n`;
-  return code;
-};
 
 Blockly.Blocks["control_tecla"] = {
   init: function() {
@@ -213,5 +176,26 @@ Blockly.Blocks["detener_musica"] = {
 
 Blockly.JavaScript["detener_musica"] = function() {
   var code = `this.pilas.detener_musica();\n`;
+  return code;
+};
+
+
+// Escenas
+Blockly.Blocks["escena_iniciar"] = {
+  init: function() {
+    this.appendDummyInput().appendField("Al iniciar");
+    this.appendStatementInput("NAME").setCheck(null);
+    this.setColour(210);
+    this.setTooltip("Cuando comienza la escena");
+  }
+};
+
+Blockly.JavaScript["escena_iniciar"] = function(block) {
+  var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
+
+  var code = `escena._bloques_iniciar = function() {
+    ${sentencias}
+  };\n`;
+
   return code;
 };
