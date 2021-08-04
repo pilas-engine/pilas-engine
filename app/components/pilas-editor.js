@@ -8,6 +8,7 @@ import copiar from "../utils/copiar";
 import obtener_nombre_sin_repetir from "../utils/obtener-nombre-sin-repetir";
 import obtener_plantilla_de_escena from "../utils/obtener-plantilla-de-escena";
 import preparar_codigo_para_el_editor from "../utils/preparar-codigo-para-el-editor";
+import fixture_workspace_bloques_de_escena_nueva from "../fixtures/workspace-bloques-de-escena-nueva";
 import { observer } from "@ember/object";
 import base64_encode from "../utils/base64-encode";
 import { run } from "@ember/runloop";
@@ -702,7 +703,7 @@ export default Component.extend({
     model.escenas.pushObject(escena);
 
     let plantilla = obtener_plantilla_de_escena();
-    let plantilla_de_bloques = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`;
+    let plantilla_de_bloques = fixture_workspace_bloques_de_escena_nueva;
 
     this.registrar_codigo_de_escena(nombre, plantilla);
     this.registrar_bloques_de_escena(nombre, plantilla_de_bloques);

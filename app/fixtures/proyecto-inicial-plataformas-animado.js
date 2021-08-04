@@ -1,4 +1,5 @@
 import animaciones_iniciales from "./animaciones-iniciales";
+import fixture_workspace_bloques_de_escena_nueva from "./workspace-bloques-de-escena-nueva";
 
 export default {
   titulo: "Proyecto",
@@ -231,7 +232,7 @@ export default {
       {
         nombre: "escena1",
         bloques: {
-          texto: '<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>',
+          texto: fixture_workspace_bloques_de_escena_nueva,
           codigo_de_bloques:
             "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n",
         },

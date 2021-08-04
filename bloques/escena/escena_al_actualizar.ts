@@ -12,9 +12,9 @@ Blockly.Blocks["escena_al_actualizar"] = {
 Blockly.JavaScript["escena_al_actualizar"] = function(block) {
   var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
 
-  var code = `escena._bloques_al_actualizar = function(x, y, evento) {
+  var code = `escena._bloques_al_actualizar = function() {
     ${sentencias}
-  };\n`;
+  };`;
 
   return code;
 };
