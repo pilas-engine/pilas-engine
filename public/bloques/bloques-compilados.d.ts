@@ -8,21 +8,55 @@ declare function bloque(nombre: any): {
     kind: string;
     type: any;
 };
+declare function variables(): {
+    kind: string;
+    name: string;
+    custom: string;
+};
+declare function procedimientos(): {
+    kind: string;
+    name: string;
+    custom: string;
+};
 declare function generar_toolbox(): {
-    actor: {
+    actor: ({
         kind: string;
         name: any;
         contents: any;
-    }[];
-    escena: any[];
+    } | {
+        kind: string;
+        name: string;
+        custom: string;
+    })[];
+    escena: ({
+        kind: string;
+        name: any;
+        contents: any;
+    } | {
+        kind: string;
+        name: string;
+        custom: string;
+    })[];
     proyecto: any[];
 };
 declare var toolbox_de_bloques_compilados: {
-    actor: {
+    actor: ({
         kind: string;
         name: any;
         contents: any;
-    }[];
-    escena: any[];
+    } | {
+        kind: string;
+        name: string;
+        custom: string;
+    })[];
+    escena: ({
+        kind: string;
+        name: any;
+        contents: any;
+    } | {
+        kind: string;
+        name: string;
+        custom: string;
+    })[];
     proyecto: any[];
 };

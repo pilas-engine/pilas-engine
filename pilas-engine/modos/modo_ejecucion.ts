@@ -110,6 +110,11 @@ class ModoEjecucion extends Modo {
 
     if (this._escena_en_ejecucion) {
       try {
+
+        if (this._escena_en_ejecucion._bloques_cuando_hace_click) {
+          this._escena_en_ejecucion._bloques_cuando_hace_click(posicion.x, posicion.y, evento);
+        }
+
         this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, evento);
         this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores(posicion.x, posicion.y, evento);
       } catch (e) {
@@ -439,6 +444,13 @@ class ModoEjecucion extends Modo {
 
     this._escena_en_ejecucion = escena;
 
+    let items_bloques = this.bloques.escenas.filter(e => e.nombre == nombre);
+
+    // si tiene bloques asociados los evalúa para ejecutarlos.
+    if (items_bloques.length > 0) {
+      eval(items_bloques[0].bloques.codigo_de_bloques);
+    }
+
     escena.iniciar();
   }
 
@@ -492,6 +504,7 @@ class ModoEjecucion extends Modo {
 
       let items_bloques = this.bloques.actores.filter(e => e.nombre == entidad.nombre);
 
+      // si tiene bloques asociados los evalúa para ejecutarlos.
       if (items_bloques.length > 0) {
         eval(items_bloques[0].codigo_de_bloques);
       }

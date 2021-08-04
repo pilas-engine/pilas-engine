@@ -11,6 +11,20 @@ function bloque(nombre) {
         type: nombre
     };
 }
+function variables() {
+    return {
+        kind: "category",
+        name: "Variables",
+        custom: "VARIABLE",
+    };
+}
+function procedimientos() {
+    return {
+        kind: "category",
+        name: "Funciones",
+        custom: "PROCEDURE",
+    };
+}
 function generar_toolbox() {
     return {
         actor: [
@@ -18,8 +32,24 @@ function generar_toolbox() {
                 bloque("actor_inicia"),
                 bloque("actor_actualizar"),
             ]),
+            variables(),
+            procedimientos(),
         ],
-        escena: [],
+        escena: [
+            categoria("Valores", [
+                bloque("pilas_cursor_x"),
+                bloque("pilas_cursor_y"),
+            ]),
+            categoria("Cámara", [
+                bloque("camara_mover_camara"),
+                bloque("camara_vibrar"),
+            ]),
+            categoria("Eventos", [
+                bloque("escena_cuando_hace_click"),
+            ]),
+            variables(),
+            procedimientos(),
+        ],
         proyecto: [],
     };
 }
@@ -51,4 +81,85 @@ Blockly.JavaScript["actor_inicia"] = function (block) {
     var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
     var code = "actor._bloques_iniciar = function() {\n    " + sentencias + "\n  };\n";
     return code;
+};
+Blockly.Blocks["camara_mover_camara"] = {
+    init: function () {
+        this.appendDummyInput().appendField("Mover la cámara a X:");
+        this.appendValueInput("x").setCheck("Number");
+        this.appendDummyInput().appendField("e Y:");
+        this.appendValueInput("y").setCheck("Number");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+};
+Blockly.JavaScript["camara_mover_camara"] = function (block) {
+    var value_x = Blockly.JavaScript.valueToCode(block, "x", Blockly.JavaScript.ORDER_ATOMIC);
+    var value_y = Blockly.JavaScript.valueToCode(block, "y", Blockly.JavaScript.ORDER_ATOMIC);
+    var code = "\n    pilas.camara.x = " + value_x + ";\n    pilas.camara.y = " + value_y + ";\n  ";
+    return code;
+};
+Blockly.Blocks["camara_vibrar"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Vibrar cámara con intensidad de")
+            .appendField(new Blockly.FieldNumber(2, 1, 50, 1), "intensidad")
+            .appendField("pixels durante")
+            .appendField(new Blockly.FieldNumber(0.5, 0.1, 10, 0.1), "segundos")
+            .appendField("segundos");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+};
+Blockly.JavaScript["camara_vibrar"] = function (block) {
+    var intensidad = block.getFieldValue("intensidad");
+    var segundos = block.getFieldValue("segundos");
+    return "pilas.camara.vibrar(" + intensidad + ", " + segundos + ");\n";
+};
+Blockly.Blocks["escena_cuando_hace_click"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Cuando hace click");
+        this.appendStatementInput("NAME").setCheck(null);
+        this.setColour(195);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["escena_cuando_hace_click"] = function (block) {
+    var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
+    var code = "escena._bloques_cuando_hace_click = function(x, y, evento) {\n    " + sentencias + "\n  };\n";
+    return code;
+};
+Blockly.Blocks["pilas_cursor_x"] = {
+    init: function () {
+        this.appendDummyInput().appendField("Posición X del mouse");
+        this.setOutput(true, null);
+        this.setColour(135);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+};
+Blockly.JavaScript["pilas_cursor_x"] = function (block) {
+    var code = "pilas.cursor_x";
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+Blockly.Blocks["pilas_cursor_y"] = {
+    init: function () {
+        this.appendDummyInput().appendField("Posición Y del mouse");
+        this.setOutput(true, null);
+        this.setColour(135);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+};
+Blockly.JavaScript["pilas_cursor_y"] = function (block) {
+    var code = "pilas.cursor_y";
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };

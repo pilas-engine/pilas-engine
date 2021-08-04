@@ -9455,6 +9455,9 @@ var ModoEjecucion = (function (_super) {
         });
         if (this._escena_en_ejecucion) {
             try {
+                if (this._escena_en_ejecucion._bloques_cuando_hace_click) {
+                    this._escena_en_ejecucion._bloques_cuando_hace_click(posicion.x, posicion.y, evento);
+                }
                 this._escena_en_ejecucion.cuando_hace_click(posicion.x, posicion.y, evento);
                 this._escena_en_ejecucion.avisar_click_en_la_pantalla_a_los_actores(posicion.x, posicion.y, evento);
             }
@@ -9723,6 +9726,11 @@ var ModoEjecucion = (function (_super) {
         })
             .filter(function (e) { return e; });
         this._escena_en_ejecucion = escena;
+        var items_bloques = this.bloques.escenas.filter(function (e) { return e.nombre == nombre; });
+        if (items_bloques.length > 0) {
+            console.log("evaluando código de bloques", items_bloques[0].bloques.codigo_de_bloques);
+            eval(items_bloques[0].bloques.codigo_de_bloques);
+        }
         escena.iniciar();
     };
     ModoEjecucion.prototype.existe_actor_llamado_en_el_proyecto = function (nombre) {

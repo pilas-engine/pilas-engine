@@ -20,6 +20,23 @@ function bloque(nombre) {
   }
 }
 
+function variables() {
+
+  return {
+            kind: "category",
+            name: "Variables",
+            custom: "VARIABLE",
+  };
+}
+
+function procedimientos() {
+  return          {
+            kind: "category",
+            name: "Funciones",
+            custom: "PROCEDURE",
+          }
+}
+
 function generar_toolbox() {
   return {
     actor: [
@@ -27,8 +44,25 @@ function generar_toolbox() {
         bloque("actor_inicia"),
         bloque("actor_actualizar"),
       ]),
+      variables(),
+      procedimientos(),
     ],
-    escena: [],
+    escena: [
+			categoria("Valores", [
+				bloque("pilas_cursor_x"),
+				bloque("pilas_cursor_y"),
+			]),
+
+      categoria("Cámara", [
+        bloque("camara_mover_camara"),
+        bloque("camara_vibrar"),
+      ]),
+      categoria("Eventos", [
+        bloque("escena_cuando_hace_click"),
+      ]),
+      variables(),
+      procedimientos(),
+    ],
     proyecto: [],
   }
 }
