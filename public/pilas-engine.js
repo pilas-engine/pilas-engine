@@ -9728,7 +9728,6 @@ var ModoEjecucion = (function (_super) {
         this._escena_en_ejecucion = escena;
         var items_bloques = this.bloques.escenas.filter(function (e) { return e.nombre == nombre; });
         if (items_bloques.length > 0) {
-            console.log("evaluando código de bloques", items_bloques[0].bloques.codigo_de_bloques);
             eval(items_bloques[0].bloques.codigo_de_bloques);
         }
         escena.iniciar();
