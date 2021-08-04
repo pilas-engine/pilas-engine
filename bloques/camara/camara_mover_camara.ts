@@ -18,8 +18,8 @@ Blockly.JavaScript["camara_mover_camara"] = function (block) {
   var value_y = Blockly.JavaScript.valueToCode(block, "y", Blockly.JavaScript.ORDER_ATOMIC);
 
   var code = `
-    pilas.camara.x = ${value_x};
-    pilas.camara.y = ${value_y};
+    this.pilas.camara.x = ${value_x};
+    this.pilas.camara.y = ${value_y};
   `;
 
   return code;

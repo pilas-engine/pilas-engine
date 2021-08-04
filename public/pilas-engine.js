@@ -6015,6 +6015,9 @@ var Escena = (function (_super) {
         if (this.cuadro > 0 && this.cuadro % 60 === 0) {
             var segundos_transcurridos_1 = Math.floor(this.cuadro / 60);
             this.cada_segundo(segundos_transcurridos_1);
+            if (this._bloques_cada_segundo) {
+                this._bloques_cada_segundo(segundos_transcurridos_1);
+            }
             this.cuando_transcurre_un_segundo(segundos_transcurridos_1);
             this.actores.map(function (actor) {
                 actor.cada_segundo(segundos_transcurridos_1);
@@ -9731,6 +9734,9 @@ var ModoEjecucion = (function (_super) {
             eval(items_bloques[0].bloques.codigo_de_bloques);
         }
         escena.iniciar();
+        if (escena._bloques_al_iniciar) {
+            escena._bloques_al_iniciar();
+        }
     };
     ModoEjecucion.prototype.existe_actor_llamado_en_el_proyecto = function (nombre) {
         var nombres_de_todos_los_actores = this.obtener_nombres_de_actores();
@@ -9829,6 +9835,9 @@ var ModoEjecucion = (function (_super) {
             this.pilas.escena.iniciar_animaciones_pendientes();
             this.pilas.escena.pre_actualizar();
             this.pilas.escena.actualizar();
+            if (this.pilas.escena._bloques_al_actualizar) {
+                this.pilas.escena._bloques_al_actualizar();
+            }
             this.pilas.escena.actualizar_actores();
             this.pilas.escena.reproducir_sonidos_pendientes();
             if (this.pilas.depurador.fisica_en_modo_ejecucion) {

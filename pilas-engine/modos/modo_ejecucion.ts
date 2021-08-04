@@ -452,6 +452,10 @@ class ModoEjecucion extends Modo {
     }
 
     escena.iniciar();
+
+    if (escena._bloques_al_iniciar) {
+      escena._bloques_al_iniciar();
+    }
   }
 
   existe_actor_llamado_en_el_proyecto(nombre: string) {
@@ -599,6 +603,11 @@ class ModoEjecucion extends Modo {
       this.pilas.escena.iniciar_animaciones_pendientes();
       this.pilas.escena.pre_actualizar();
       this.pilas.escena.actualizar();
+
+      if (this.pilas.escena._bloques_al_actualizar) {
+        this.pilas.escena._bloques_al_actualizar();
+      }
+
       this.pilas.escena.actualizar_actores();
       this.pilas.escena.reproducir_sonidos_pendientes();
 

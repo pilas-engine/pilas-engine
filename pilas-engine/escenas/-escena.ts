@@ -9,6 +9,11 @@ class Escena extends EscenaBase {
     if (this.cuadro > 0 && this.cuadro % 60 === 0) {
       let segundos_transcurridos = Math.floor(this.cuadro / 60);
       this.cada_segundo(segundos_transcurridos);
+
+      if (this._bloques_cada_segundo) {
+        this._bloques_cada_segundo(segundos_transcurridos);
+      }
+
       this.cuando_transcurre_un_segundo(segundos_transcurridos);
 
       this.actores.map(actor => {

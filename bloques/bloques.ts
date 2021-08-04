@@ -21,20 +21,19 @@ function bloque(nombre) {
 }
 
 function variables() {
-
   return {
-            kind: "category",
-            name: "Variables",
-            custom: "VARIABLE",
+    kind: "category",
+    name: "Variables",
+    custom: "VARIABLE",
   };
 }
 
 function procedimientos() {
-  return          {
-            kind: "category",
-            name: "Funciones",
-            custom: "PROCEDURE",
-          }
+  return {
+    kind: "category",
+    name: "Funciones",
+    custom: "PROCEDURE",
+  }
 }
 
 function generar_toolbox() {
@@ -54,12 +53,20 @@ function generar_toolbox() {
 			]),
 
       categoria("Cámara", [
-        bloque("camara_mover_camara"),
+        bloque("camara_fijar_x"),
+        bloque("camara_fijar_y"),
         bloque("camara_vibrar"),
+        bloque("camara_desplazar_horizontalmente"),
+        bloque("camara_desplazar_verticalmente"),
       ]),
+
       categoria("Eventos", [
+        bloque("escena_al_iniciar"),
         bloque("escena_cuando_hace_click"),
+        bloque("escena_al_actualizar"),
+        bloque("escena_cada_segundo"),
       ]),
+
       variables(),
       procedimientos(),
     ],
