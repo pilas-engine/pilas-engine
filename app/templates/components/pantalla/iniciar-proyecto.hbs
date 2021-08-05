@@ -30,49 +30,11 @@
       {{/link-to}}
     {{/if}}
 
-    {{#link-to "editor" (query-params tipo="inicial") id="inicial" class="link dib relative"}}
-
-      <div style="width: 180px; height: 140px;">
-        <div class="sprite-iniciar-proyecto capturas-fisica"></div>
-      </div>
-
-      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
-        Iniciar con física básica
-      </div>
-
-      <div class="absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow ttu">{{t "iniciar.proyecto.recommended"}}</div>
-    {{/link-to}}
-
-
-    {{#link-to "editor" (query-params tipo="nuevo") id="nuevo" tagName="div" class="dib w180 pointer"}}
-      <div style="width: 180px; height: 140px;">
-        <div class="sprite-iniciar-proyecto capturas-cero"></div>
-      </div>
-
-      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
-        Iniciar un proyecto desde cero
-      </div>
-    {{/link-to}}
-
-    {{#link-to "editor" (query-params tipo="plataformas-minimo") id="plataformas-minimo" tagName="div" class="dib w180 pointer"}}
-      <div style="width: 180px; height: 140px;">
-        <div class="sprite-iniciar-proyecto capturas-plataformas-minimo"></div>
-      </div>
-
-      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
-        Plataformas mínimo con cámara
-      </div>
-    {{/link-to}}
-
-    {{#link-to "editor" (query-params tipo="plataformas-animado") id="plataformas-animado" tagName="div" class="dib w180 pointer"}}
-      <div style="width: 180px; height: 140px;">
-        <div class="sprite-iniciar-proyecto capturas-plataformas-animado"></div>
-      </div>
-
-      <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
-        Plataformas con animaciones
-      </div>
-    {{/link-to}}
+    {{iniciar-proyecto/item nombre="inicial" titulo="Iniciar con física básica"}}
+    {{iniciar-proyecto/item nombre="nuevo" titulo="Iniciar un proyecto desde cero"}}
+    {{iniciar-proyecto/item nombre="plataformas-minimo" titulo="Plataformas mínimo con cámara"}}
+    {{iniciar-proyecto/item nombre="plataformas-animado" titulo="Plataformas con animaciones"}}
+    {{iniciar-proyecto/item nombre="nave-minimo" titulo="Nave mínima con movimiento"}}
 
   </div>
 

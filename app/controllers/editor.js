@@ -8,6 +8,7 @@ import fixtureDeProyecto from "../fixtures/proyecto-inicial";
 import fixtureDeProyectoDesdeCero from "../fixtures/proyecto-inicial-desde-cero";
 import fixtureDeProyectoDePlataformasAnimado from "../fixtures/proyecto-inicial-plataformas-animado";
 import fixtureDeProyectoDePlataformasMinimo from "../fixtures/proyecto-inicial-plataformas-minimo";
+import fixtureDeProyectoDeNavesMinimo from "../fixtures/proyecto-inicial-naves-minimo";
 import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
 
 const queryParams = new QueryParams({
@@ -87,18 +88,19 @@ export default Controller.extend(queryParams.Mixin, {
     }
 
     if (tipo === "nuevo") {
-      let proyecto = this.crearProyectoDesdeCero();
-      return this.migraciones.migrar(proyecto);
+      return this.crear_proyecto_desde_fixture(fixtureDeProyectoDesdeCero);
     }
 
     if (tipo === "plataformas-animado") {
-      let proyecto = this.crearProyectoDePlataformasAnimado();
-      return this.migraciones.migrar(proyecto);
+      return this.crear_proyecto_desde_fixture(fixtureDeProyectoDePlataformasAnimado);
     }
 
     if (tipo === "plataformas-minimo") {
-      let proyecto = this.crearProyectoDePlataformasMinimo();
-      return this.migraciones.migrar(proyecto);
+      return this.crear_proyecto_desde_fixture(fixtureDeProyectoDePlataformasMinimo);
+    }
+
+    if (tipo === "nave-minimo") {
+      return this.crear_proyecto_desde_fixture(fixtureDeProyectoDeNavesMinimo);
     }
 
     if (tipo === "continuar" && localStorage.getItem("pilas:proyecto_serializado")) {
@@ -109,8 +111,7 @@ export default Controller.extend(queryParams.Mixin, {
     }
 
     if (tipo === "inicial") {
-      let proyecto = this.crearProyectoInicial();
-      return this.migraciones.migrar(proyecto);
+      return this.crear_proyecto_desde_fixture(fixtureDeProyecto);
     }
 
     // por omisión, se deja el comportamiento de antes: cuando el usuario
@@ -122,8 +123,7 @@ export default Controller.extend(queryParams.Mixin, {
 
       return this.migraciones.migrar(proyecto);
     } else {
-      let proyecto = this.crearProyectoInicial();
-      return this.migraciones.migrar(proyecto);
+      return this.crear_proyecto_desde_fixture(fixtureDeProyecto);
     }
 
   }),
@@ -159,32 +159,11 @@ export default Controller.extend(queryParams.Mixin, {
     return convertirProyectoEnObjetoEmber(proyecto);
   }),
 
-  crearProyectoInicial() {
-    let fixtureComoString = JSON.stringify(fixtureDeProyecto);
+  crear_proyecto_desde_fixture(fixture_como_objeto) {
+    let fixtureComoString = JSON.stringify(fixture_como_objeto);
     let fixture = JSON.parse(fixtureComoString);
     let proyecto = convertirProyectoEnObjetoEmber(fixture);
-    return proyecto;
-  },
-
-  crearProyectoDesdeCero() {
-    let fixtureComoString = JSON.stringify(fixtureDeProyectoDesdeCero);
-    let fixture = JSON.parse(fixtureComoString);
-    let proyecto = convertirProyectoEnObjetoEmber(fixture);
-    return proyecto;
-  },
-
-  crearProyectoDePlataformasAnimado() {
-    let fixtureComoString = JSON.stringify(fixtureDeProyectoDePlataformasAnimado);
-    let fixture = JSON.parse(fixtureComoString);
-    let proyecto = convertirProyectoEnObjetoEmber(fixture);
-    return proyecto;
-  },
-
-  crearProyectoDePlataformasMinimo() {
-    let fixtureComoString = JSON.stringify(fixtureDeProyectoDePlataformasMinimo);
-    let fixture = JSON.parse(fixtureComoString);
-    let proyecto = convertirProyectoEnObjetoEmber(fixture);
-    return proyecto;
+    return this.migraciones.migrar(proyecto);
   },
 
   realizar_captura_de_pantalla_y_guardar_en_localstorage() {
