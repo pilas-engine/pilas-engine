@@ -2,27 +2,6 @@
 
 // https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#7ragh2
 
-Blockly.Blocks["actor_decir"] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Decir")
-      .appendField(new Blockly.FieldTextInput("¡hola!"), "NAME");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(120);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  }
-};
-
-Blockly.JavaScript["actor_decir"] = function(block) {
-  var value_name = block.getFieldValue("NAME");
-  var code = `this.decir("${value_name}");\n`;
-  return code;
-};
-
-
-
 Blockly.Blocks["desplazar"] = {
   init: function() {
     this.appendDummyInput()
@@ -114,88 +93,5 @@ Blockly.JavaScript["cuando_comienza_una_colision"] = function(block) {
   var code = `actor._bloques_cuando_colisiona = function(${variable_actor}) {
     ${sentencias}
   };\n`;
-  return code;
-};
-
-Blockly.Blocks["reproducir_sonido"] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Reproducir el sonido")
-      .appendField(new Blockly.FieldDropdown(this.generateOptions), "sonido");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
-
-  generateOptions: function() {
-    return window.valores_dropdown.sonidos;
-  }
-};
-
-Blockly.JavaScript["reproducir_sonido"] = function(block) {
-  var sonido = block.getFieldValue("sonido");
-  var code = `this.pilas.reproducir_sonido("${sonido}");\n`;
-  return code;
-};
-
-Blockly.Blocks["reproducir_musica"] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Reproducir música")
-      .appendField(new Blockly.FieldDropdown(this.generateOptions), "musica");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
-
-  generateOptions: function() {
-    return window.valores_dropdown.sonidos;
-  }
-};
-
-Blockly.JavaScript["reproducir_musica"] = function(block) {
-  var musica = block.getFieldValue("musica");
-  var code = `this.pilas.reproducir_musica("${musica}");\n`;
-  return code;
-};
-
-Blockly.Blocks["detener_musica"] = {
-  init: function() {
-    this.appendDummyInput().appendField("Detener música");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  }
-};
-
-Blockly.JavaScript["detener_musica"] = function() {
-  var code = `this.pilas.detener_musica();\n`;
-  return code;
-};
-
-
-// Escenas
-Blockly.Blocks["escena_iniciar"] = {
-  init: function() {
-    this.appendDummyInput().appendField("Al iniciar");
-    this.appendStatementInput("NAME").setCheck(null);
-    this.setColour(210);
-    this.setTooltip("Cuando comienza la escena");
-  }
-};
-
-Blockly.JavaScript["escena_iniciar"] = function(block) {
-  var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
-
-  var code = `escena._bloques_iniciar = function() {
-    ${sentencias}
-  };\n`;
-
   return code;
 };

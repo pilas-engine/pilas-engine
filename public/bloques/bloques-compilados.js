@@ -50,6 +50,7 @@ function categoria_audio() {
     return categoria("Audio", [
         bloque("audio_reproducir_sonido"),
         bloque("audio_reproducir_musica"),
+        bloque("audio_detener_musica"),
     ]);
 }
 function generar_toolbox() {
@@ -59,6 +60,7 @@ function generar_toolbox() {
                 bloque("actor_decir"),
                 bloque("actor_saltar"),
                 bloque("actor_impulsar"),
+                bloque("actor_desplazar"),
                 bloque("actor_reiniciar"),
             ]),
             categoria("Eventos", [
@@ -171,6 +173,26 @@ Blockly.JavaScript["actor_decir"] = function (block) {
     var code = "this.decir(\"" + value_name + "\");\n";
     return code;
 };
+Blockly.Blocks["actor_desplazar"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Desplazar X")
+            .appendField(new Blockly.FieldNumber(0, -300, 300), "x")
+            .appendField("e Y")
+            .appendField(new Blockly.FieldNumber(0, -300, 300), "y");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_desplazar"] = function (block) {
+    var number_x = block.getFieldValue("x");
+    var number_y = block.getFieldValue("y");
+    var code = "this.x += " + number_x + ";\nthis.y += " + number_y + ";\n";
+    return code;
+};
 Blockly.Blocks["actor_impulsar"] = {
     init: function () {
         this.appendDummyInput()
@@ -234,6 +256,24 @@ Blockly.Blocks["actor_saltar"] = {
 };
 Blockly.JavaScript["actor_saltar"] = function (block) {
     var code = "this.saltar();\n";
+    return code;
+};
+Blockly.Blocks["audio_detener_musica"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Detener música");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+    generateOptions: function () {
+        return window.valores_dropdown.sonidos;
+    }
+};
+Blockly.JavaScript["audio_detener_musica"] = function (block) {
+    var code = "this.pilas.detener_musica();\n";
     return code;
 };
 Blockly.Blocks["audio_reproducir_musica"] = {

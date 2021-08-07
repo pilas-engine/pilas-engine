@@ -63,6 +63,7 @@ function categoria_audio() {
   return categoria("Audio", [
     bloque("audio_reproducir_sonido"),
     bloque("audio_reproducir_musica"),
+    bloque("audio_detener_musica"),
   ]);
 }
 
@@ -73,6 +74,7 @@ function generar_toolbox() {
 				bloque("actor_decir"),
 				bloque("actor_saltar"),
 				bloque("actor_impulsar"),
+				bloque("actor_desplazar"),
 				bloque("actor_reiniciar"),
       ]),
       categoria("Eventos", [
@@ -144,15 +146,6 @@ var toolbox_de_bloques_compilados = generar_toolbox();
                 kind: "block",
                 type: "reproducir_animacion",
               },
-              {
-                kind: "block",
-                type: "reproducir_musica",
-              },
-
-              {
-                kind: "block",
-                type: "detener_musica",
-              },
             ],
           },
           {
@@ -165,48 +158,8 @@ var toolbox_de_bloques_compilados = generar_toolbox();
               },
             ],
           },
-          {
-            kind: "category",
-            name: "Variables",
-            custom: "VARIABLE",
-          },
-          {
-            kind: "category",
-            name: "Funciones",
-            custom: "PROCEDURE",
-          },
-        ],
-        proyecto: [
-          {
-            kind: "category",
-            name: "Logic",
-            contents: [
-              {
-                kind: "block",
-                type: "logic_compare",
-              },
-              {
-                kind: "block",
-                type: "logic_operation",
-              },
-              {
-                kind: "block",
-                type: "logic_boolean",
-              },
-            ],
-          },
         ],
         escena: [
-          {
-            kind: "category",
-            name: "Eventos",
-            contents: [
-              {
-                kind: "block",
-                type: "escena_iniciar",
-              }
-            ]
-          },
           {
             kind: "category",
             name: "Lógica",
