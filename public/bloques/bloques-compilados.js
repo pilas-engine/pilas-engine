@@ -59,6 +59,7 @@ function generar_toolbox() {
                 bloque("actor_decir"),
                 bloque("actor_saltar"),
                 bloque("actor_impulsar"),
+                bloque("actor_reiniciar"),
             ]),
             categoria("Eventos", [
                 bloque("actor_inicia"),
@@ -203,6 +204,21 @@ Blockly.Blocks["actor_inicia"] = {
 Blockly.JavaScript["actor_inicia"] = function (block) {
     var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
     var code = "actor._bloques_iniciar = function() {\n    " + sentencias + "\n  };\n";
+    return code;
+};
+Blockly.Blocks["actor_reiniciar"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Reiniciar");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_reiniciar"] = function (block) {
+    var code = "this.reiniciar();\n";
     return code;
 };
 Blockly.Blocks["actor_saltar"] = {

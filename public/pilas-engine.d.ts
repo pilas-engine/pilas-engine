@@ -938,6 +938,7 @@ declare class ActorBase {
     detener_musica(): void;
     recortar(x: number, y: number, ancho: number, alto: number): void;
     eliminar_recortado(): void;
+    reiniciar(): void;
     saltar(): void;
     saludar(): void;
     _bloques_cuando_hace_click_en_la_pantalla(x: number, y: number, evento: any): void;

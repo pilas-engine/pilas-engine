@@ -73,6 +73,7 @@ function generar_toolbox() {
 				bloque("actor_decir"),
 				bloque("actor_saltar"),
 				bloque("actor_impulsar"),
+				bloque("actor_reiniciar"),
       ]),
       categoria("Eventos", [
         bloque("actor_inicia"),

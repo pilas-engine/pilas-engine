@@ -1366,6 +1366,11 @@ class ActorBase {
     this.centro_y = 0.5;
   }
 
+  reiniciar() {
+    this.eliminar();
+    this.pilas.clonar(this.nombre);
+  }
+
 
   saltar() {
     this.impulsar(0, 10);

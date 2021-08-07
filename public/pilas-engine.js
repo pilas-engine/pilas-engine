@@ -4438,6 +4438,10 @@ var ActorBase = (function () {
         this.centro_x = 0.5;
         this.centro_y = 0.5;
     };
+    ActorBase.prototype.reiniciar = function () {
+        this.eliminar();
+        this.pilas.clonar(this.nombre);
+    };
     ActorBase.prototype.saltar = function () {
         this.impulsar(0, 10);
     };
