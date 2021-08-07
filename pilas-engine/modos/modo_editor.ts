@@ -137,7 +137,9 @@ class ModoEditor extends Modo {
       this.sprite_cursor_de_la_grilla.destroy();
     }
 
-    let sprite = <any>this.add.rectangle(x, y, this.tamaño_de_la_grilla, this.tamaño_de_la_grilla);
+    // se crea el sprite pero fuera de la pantalla, sino se observa ni bien carga
+    // el modo editor.
+    let sprite = <any>this.add.rectangle(x-2000, y-2000, this.tamaño_de_la_grilla, this.tamaño_de_la_grilla);
     (<any>sprite).setStrokeStyle(1, 0xffffff);
     sprite.depth = 9999999;
 
