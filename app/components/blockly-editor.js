@@ -26,7 +26,9 @@ export default Component.extend({
       if (event.source === this.frame.contentWindow && event.data) {
         if (event.data.message === "carga-completa-de-blockly") {
           if (ENV.environment !== "test") {
-            this.cargarCódigoDeLaEntidadPorTitulo(this.titulo);
+            if (this.titulo) {
+              this.cargarCódigoDeLaEntidadPorTitulo(this.titulo);
+            }
           }
         }
 

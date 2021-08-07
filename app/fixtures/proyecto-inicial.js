@@ -1,4 +1,5 @@
 import animaciones_iniciales from "./animaciones-iniciales";
+import fixture_sonidos_iniciales from "./sonidos-iniciales";
 
 export default {
   titulo: "Proyecto demo",
@@ -8,7 +9,6 @@ export default {
   nombre_de_la_escena_inicial: "escena1",
   imagenes: [],
   animaciones: animaciones_iniciales,
-
   codigos: {
     escenas: [
       {
@@ -204,5 +204,8 @@ export default {
       fondo: "decoracion:fondos/fondo-plano",
       actores: []
     }
-  ]
+  ],
+  fps: 60,
+  modo_de_video: "suavizado",
+  sonidos: fixture_sonidos_iniciales,
 };

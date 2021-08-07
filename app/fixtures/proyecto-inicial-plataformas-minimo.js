@@ -1,5 +1,6 @@
 import animaciones_iniciales from "./animaciones-iniciales";
 import fixture_workspace_bloques_de_escena_nueva from "./workspace-bloques-de-escena-nueva";
+import fixture_sonidos_iniciales from "./sonidos-iniciales";
 
 export default {
   titulo: "Proyecto",
@@ -187,44 +188,7 @@ export default {
   ],
   fps: 60,
   modo_de_video: "suavizado",
-  sonidos: [
-    {
-      nombre: "laser",
-      ruta: "sonidos/laser.mp3",
-    },
-    {
-      nombre: "explosion",
-      ruta: "sonidos/explosion.mp3",
-    },
-    {
-      nombre: "gallina",
-      ruta: "sonidos/gallina.mp3",
-    },
-    {
-      nombre: "moneda",
-      ruta: "sonidos/moneda.mp3",
-    },
-    {
-      nombre: "salto-corto",
-      ruta: "sonidos/salto-corto.mp3",
-    },
-    {
-      nombre: "salto-largo",
-      ruta: "sonidos/salto-largo.mp3",
-    },
-    {
-      nombre: "seleccion-aguda",
-      ruta: "sonidos/seleccion-aguda.mp3",
-    },
-    {
-      nombre: "seleccion-grave",
-      ruta: "sonidos/seleccion-grave.mp3",
-    },
-    {
-      nombre: "comer",
-      ruta: "sonidos/comer.mp3",
-    },
-  ],
+  sonidos: fixture_sonidos_iniciales,
   bloques: {
     proyecto: '<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="ZC`*TK^}PI+^~52^ak!H" x="35" y="44"></block></xml>',
     escenas: [
