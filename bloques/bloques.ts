@@ -39,8 +39,15 @@ function procedimientos() {
 function generar_toolbox() {
   return {
     actor: [
+			categoria("Acciones", [
+				bloque("actor_decir"),
+				bloque("actor_saltar"),
+				bloque("actor_impulsar"),
+      ]),
       categoria("Eventos", [
         bloque("actor_inicia"),
+        bloque("actor_cuando_hace_click"),
+        bloque("actor_cuando_hace_click_en_la_pantalla"),
         bloque("actor_actualizar"),
       ]),
       variables(),
@@ -78,7 +85,6 @@ var toolbox_de_bloques_compilados = generar_toolbox();
 
 /*
  {
- asda
         actor: [
           {
             kind: "category",
