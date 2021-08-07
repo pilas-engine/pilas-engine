@@ -46,6 +46,20 @@ function categoria_camara() {
       ]);
 }
 
+function categoria_control() {
+  return {
+            kind: "category",
+            name: "Control",
+            contents: [
+              {
+                kind: "block",
+                type: "controls_if",
+              },
+            ],
+          };
+}
+
+
 function generar_toolbox() {
   return {
     actor: [
@@ -61,6 +75,7 @@ function generar_toolbox() {
         bloque("actor_actualizar"),
         bloque("actor_cada_segundo"),
       ]),
+      categoria_control(),
       categoria_camara(),
       variables(),
       procedimientos(),
@@ -78,6 +93,7 @@ function generar_toolbox() {
         bloque("escena_cada_segundo"),
       ]),
 
+      categoria_control(),
       categoria_camara(),
 
       variables(),
@@ -104,25 +120,11 @@ var toolbox_de_bloques_compilados = generar_toolbox();
           },
           {
             kind: "category",
-            name: "Control",
-            contents: [
-              {
-                kind: "block",
-                type: "controls_if",
-              },
-            ],
-          },
-          {
-            kind: "category",
             name: "Acciones",
             contents: [
               {
                 kind: "block",
                 type: "text",
-              },
-              {
-                kind: "block",
-                type: "actor_decir",
               },
               {
                 kind: "block",

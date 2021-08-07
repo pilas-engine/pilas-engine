@@ -34,6 +34,18 @@ function categoria_camara() {
         bloque("camara_desplazar_verticalmente"),
     ]);
 }
+function categoria_control() {
+    return {
+        kind: "category",
+        name: "Control",
+        contents: [
+            {
+                kind: "block",
+                type: "controls_if",
+            },
+        ],
+    };
+}
 function generar_toolbox() {
     return {
         actor: [
@@ -49,6 +61,7 @@ function generar_toolbox() {
                 bloque("actor_actualizar"),
                 bloque("actor_cada_segundo"),
             ]),
+            categoria_control(),
             categoria_camara(),
             variables(),
             procedimientos(),
@@ -64,6 +77,7 @@ function generar_toolbox() {
                 bloque("escena_al_actualizar"),
                 bloque("escena_cada_segundo"),
             ]),
+            categoria_control(),
             categoria_camara(),
             variables(),
             procedimientos(),

@@ -23,6 +23,14 @@ declare function categoria_camara(): {
     name: any;
     contents: any;
 };
+declare function categoria_control(): {
+    kind: string;
+    name: string;
+    contents: {
+        kind: string;
+        type: string;
+    }[];
+};
 declare function generar_toolbox(): {
     actor: ({
         kind: string;
