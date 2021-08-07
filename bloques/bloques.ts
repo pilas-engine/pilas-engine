@@ -59,6 +59,12 @@ function categoria_control() {
           };
 }
 
+function categoria_audio() {
+  return categoria("Audio", [
+    bloque("audio_reproducir_sonido"),
+    bloque("audio_reproducir_musica"),
+  ]);
+}
 
 function generar_toolbox() {
   return {
@@ -77,6 +83,8 @@ function generar_toolbox() {
       ]),
       categoria_control(),
       categoria_camara(),
+      categoria_audio(),
+      
       variables(),
       procedimientos(),
     ],
@@ -95,6 +103,7 @@ function generar_toolbox() {
 
       categoria_control(),
       categoria_camara(),
+      categoria_audio(),
 
       variables(),
       procedimientos(),
@@ -133,10 +142,6 @@ var toolbox_de_bloques_compilados = generar_toolbox();
               {
                 kind: "block",
                 type: "reproducir_animacion",
-              },
-              {
-                kind: "block",
-                type: "reproducir_sonido",
               },
               {
                 kind: "block",

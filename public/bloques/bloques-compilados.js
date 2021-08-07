@@ -46,6 +46,12 @@ function categoria_control() {
         ],
     };
 }
+function categoria_audio() {
+    return categoria("Audio", [
+        bloque("audio_reproducir_sonido"),
+        bloque("audio_reproducir_musica"),
+    ]);
+}
 function generar_toolbox() {
     return {
         actor: [
@@ -63,6 +69,7 @@ function generar_toolbox() {
             ]),
             categoria_control(),
             categoria_camara(),
+            categoria_audio(),
             variables(),
             procedimientos(),
         ],
@@ -79,6 +86,7 @@ function generar_toolbox() {
             ]),
             categoria_control(),
             categoria_camara(),
+            categoria_audio(),
             variables(),
             procedimientos(),
         ],
@@ -168,7 +176,7 @@ Blockly.Blocks["actor_impulsar"] = {
             .appendField("Impulsar X")
             .appendField(new Blockly.FieldNumber(-100, 4, 100, 0.1), "x")
             .appendField("e Y")
-            .appendField(new Blockly.FieldNumber(-100, 4, 100, 0.1), "y");
+            .appendField(new Blockly.FieldNumber(-100, 8, 100, 0.1), "y");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -210,6 +218,46 @@ Blockly.Blocks["actor_saltar"] = {
 };
 Blockly.JavaScript["actor_saltar"] = function (block) {
     var code = "this.saltar();\n";
+    return code;
+};
+Blockly.Blocks["audio_reproducir_musica"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Reproducir música")
+            .appendField(new Blockly.FieldDropdown(this.generateOptions), "musica");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+    generateOptions: function () {
+        return window.valores_dropdown.sonidos;
+    }
+};
+Blockly.JavaScript["audio_reproducir_musica"] = function (block) {
+    var musica = block.getFieldValue("musica");
+    var code = "this.pilas.reproducir_musica(\"" + musica + "\");\n";
+    return code;
+};
+Blockly.Blocks["audio_reproducir_sonido"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Reproducir el sonido")
+            .appendField(new Blockly.FieldDropdown(this.generateOptions), "sonido");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+    generateOptions: function () {
+        return window.valores_dropdown.sonidos;
+    }
+};
+Blockly.JavaScript["audio_reproducir_sonido"] = function (block) {
+    var sonido = block.getFieldValue("sonido");
+    var code = "this.pilas.reproducir_sonido(\"" + sonido + "\");\n";
     return code;
 };
 Blockly.Blocks["camara_desplazar_horizontalmente"] = {

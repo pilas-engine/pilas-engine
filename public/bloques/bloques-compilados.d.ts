@@ -31,6 +31,11 @@ declare function categoria_control(): {
         type: string;
     }[];
 };
+declare function categoria_audio(): {
+    kind: string;
+    name: any;
+    contents: any;
+};
 declare function generar_toolbox(): {
     actor: ({
         kind: string;

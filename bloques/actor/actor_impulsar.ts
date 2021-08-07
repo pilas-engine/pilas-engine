@@ -4,7 +4,7 @@ Blockly.Blocks["actor_impulsar"] = {
       .appendField("Impulsar X")
 			.appendField(new Blockly.FieldNumber(-100, 4, 100, 0.1), "x")
 			.appendField("e Y")
-			.appendField(new Blockly.FieldNumber(-100, 4, 100, 0.1), "y")
+			.appendField(new Blockly.FieldNumber(-100, 8, 100, 0.1), "y")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
