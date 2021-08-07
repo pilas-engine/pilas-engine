@@ -773,6 +773,7 @@ Por ejemplo:
 
 </div>
 
+
 <div class="funcion">
 ```
 pilas.intercambiar_posiciones_al_azar(lista_de_actores)
@@ -781,11 +782,6 @@ pilas.intercambiar_posiciones_al_azar(lista_de_actores)
 Intercambia de posición de los actores enviados como una lista
 entre sí.
 
-```
-
-</div>
-
-<div class="funcion">
 ```
 pilas.obtener_distancia_entre_puntos(x, y, x1, y1)
 ```
