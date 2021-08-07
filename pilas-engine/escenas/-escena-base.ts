@@ -313,6 +313,8 @@ class EscenaBase {
     this.actores.map(actor => {
       try {
         actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+        actor._bloques_cuando_hace_click_en_la_pantalla(x, y, evento_original);
+
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
       }
@@ -419,6 +421,10 @@ class EscenaBase {
       this[`cuando_llega_el_mensaje_${mensaje}`](datos);
     }
   }
+
+  _bloques_al_actualizar() {}
+
+  _bloques_cada_segundo(segundos: number) {}
 
   cuando_llega_un_mensaje(mensaje: string, datos: any = {}) {}
 }

@@ -222,6 +222,7 @@ class ActorBase {
 
         this.cuando_hace_click(posicion.x, posicion.y, cursor);
         this.automata.cuando_hace_click(posicion.x, posicion.y, cursor);
+        this._bloques_cuando_hace_click(posicion.x, posicion.y, cursor);
       });
     });
 
@@ -1373,4 +1374,7 @@ class ActorBase {
   saludar() {
     this.decir("¡hola!");
   }
+
+  _bloques_cuando_hace_click_en_la_pantalla(x: number, y: number, evento: any) {}
+  _bloques_cuando_hace_click(x: number, y: number, evento: any) {}
 }

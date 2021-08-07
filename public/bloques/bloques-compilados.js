@@ -28,8 +28,15 @@ function procedimientos() {
 function generar_toolbox() {
     return {
         actor: [
+            categoria("Acciones", [
+                bloque("actor_decir"),
+                bloque("actor_saltar"),
+                bloque("actor_impulsar"),
+            ]),
             categoria("Eventos", [
                 bloque("actor_inicia"),
+                bloque("actor_cuando_hace_click"),
+                bloque("actor_cuando_hace_click_en_la_pantalla"),
                 bloque("actor_actualizar"),
             ]),
             variables(),
@@ -64,7 +71,7 @@ Blockly.Blocks["actor_actualizar"] = {
     init: function () {
         this.appendDummyInput().appendField("Al actualizar");
         this.appendStatementInput("NAME").setCheck(null);
-        this.setColour(230);
+        this.setColour(195);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -74,18 +81,101 @@ Blockly.JavaScript["actor_actualizar"] = function (block) {
     var code = "actor._bloques_actualizar = function() {\n    " + sentencias + "\n  };\n";
     return code;
 };
+Blockly.Blocks["actor_cuando_hace_click"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Cuando hace click");
+        this.appendStatementInput("NAME").setCheck(null);
+        this.setColour(195);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_cuando_hace_click"] = function (block) {
+    var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
+    var code = "\n\n  actor._bloques_cuando_hace_click = function(x, y, evento) {\n    " + sentencias + "\n  };\n";
+    return code;
+};
+Blockly.Blocks["actor_cuando_hace_click_en_la_pantalla"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Cuando hace click en la pantalla");
+        this.appendStatementInput("NAME").setCheck(null);
+        this.setColour(195);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_cuando_hace_click_en_la_pantalla"] = function (block) {
+    var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
+    var code = "\n\n  actor._bloques_cuando_hace_click_en_la_pantalla = function(x, y, evento) {\n    " + sentencias + "\n  };\n";
+    return code;
+};
+Blockly.Blocks["actor_decir"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Decir")
+            .appendField(new Blockly.FieldTextInput("¡hola!"), "NAME");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_decir"] = function (block) {
+    var value_name = block.getFieldValue("NAME");
+    var code = "this.decir(\"" + value_name + "\");\n";
+    return code;
+};
+Blockly.Blocks["actor_impulsar"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Impulsar X")
+            .appendField(new Blockly.FieldNumber(-100, 4, 100, 0.1), "x")
+            .appendField("e Y")
+            .appendField(new Blockly.FieldNumber(-100, 4, 100, 0.1), "y");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_impulsar"] = function (block) {
+    var intensidad = block.getFieldValue("intensidad");
+    var x = +block.getFieldValue("x");
+    var y = +block.getFieldValue("y");
+    var code = "this.impulsar(" + x + ", " + y + ");\n";
+    return code;
+};
 Blockly.Blocks["actor_inicia"] = {
     init: function () {
         this.appendDummyInput().appendField("Al iniciar");
         this.appendStatementInput("NAME").setCheck(null);
-        this.setColour(210);
-        this.setTooltip("Hace que el actor diga algo");
+        this.setColour(195);
+        this.setTooltip("");
         this.setHelpUrl("");
     }
 };
 Blockly.JavaScript["actor_inicia"] = function (block) {
     var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
     var code = "actor._bloques_iniciar = function() {\n    " + sentencias + "\n  };\n";
+    return code;
+};
+Blockly.Blocks["actor_saltar"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Saltar");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_saltar"] = function (block) {
+    var code = "this.saltar();\n";
     return code;
 };
 Blockly.Blocks["camara_desplazar_horizontalmente"] = {

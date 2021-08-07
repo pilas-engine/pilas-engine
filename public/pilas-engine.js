@@ -2730,6 +2730,7 @@ var Pilas = (function () {
                 keyboard: true,
                 mouse: true,
                 touch: true,
+                activePointers: 6,
                 gamepad: true
             },
             plugins: {
@@ -3363,6 +3364,7 @@ var ActorBase = (function () {
                 var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(cursor.x, cursor.y);
                 _this.cuando_hace_click(posicion.x, posicion.y, cursor);
                 _this.automata.cuando_hace_click(posicion.x, posicion.y, cursor);
+                _this._bloques_cuando_hace_click(posicion.x, posicion.y, cursor);
             });
         });
         this.sprite.on("pointerup", function (cursor) {
@@ -4442,6 +4444,8 @@ var ActorBase = (function () {
     ActorBase.prototype.saludar = function () {
         this.decir("¡hola!");
     };
+    ActorBase.prototype._bloques_cuando_hace_click_en_la_pantalla = function (x, y, evento) { };
+    ActorBase.prototype._bloques_cuando_hace_click = function (x, y, evento) { };
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -5919,6 +5923,7 @@ var EscenaBase = (function () {
         this.actores.map(function (actor) {
             try {
                 actor.cuando_hace_click_en_la_pantalla(x, y, evento_original);
+                actor._bloques_cuando_hace_click_en_la_pantalla(x, y, evento_original);
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
@@ -5997,6 +6002,8 @@ var EscenaBase = (function () {
             this["cuando_llega_el_mensaje_" + mensaje](datos);
         }
     };
+    EscenaBase.prototype._bloques_al_actualizar = function () { };
+    EscenaBase.prototype._bloques_cada_segundo = function (segundos) { };
     EscenaBase.prototype.cuando_llega_un_mensaje = function (mensaje, datos) {
         if (datos === void 0) { datos = {}; }
     };
@@ -9046,7 +9053,7 @@ var ModoEditor = (function (_super) {
             y = this.sprite_cursor_de_la_grilla.y;
             this.sprite_cursor_de_la_grilla.destroy();
         }
-        var sprite = this.add.rectangle(x, y, this.tamaño_de_la_grilla, this.tamaño_de_la_grilla);
+        var sprite = this.add.rectangle(x - 2000, y - 2000, this.tamaño_de_la_grilla, this.tamaño_de_la_grilla);
         sprite.setStrokeStyle(1, 0xffffff);
         sprite.depth = 9999999;
         this.sprite_cursor_de_la_grilla = sprite;
@@ -9729,9 +9736,11 @@ var ModoEjecucion = (function (_super) {
         })
             .filter(function (e) { return e; });
         this._escena_en_ejecucion = escena;
-        var items_bloques = this.bloques.escenas.filter(function (e) { return e.nombre == nombre; });
-        if (items_bloques.length > 0) {
-            eval(items_bloques[0].bloques.codigo_de_bloques);
+        if (this.bloques && this.bloques.escenas) {
+            var items_bloques = this.bloques.escenas.filter(function (e) { return e.nombre == nombre; });
+            if (items_bloques.length > 0) {
+                eval(items_bloques[0].bloques.codigo_de_bloques);
+            }
         }
         escena.iniciar();
         if (escena._bloques_al_iniciar) {

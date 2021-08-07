@@ -444,11 +444,13 @@ class ModoEjecucion extends Modo {
 
     this._escena_en_ejecucion = escena;
 
-    let items_bloques = this.bloques.escenas.filter(e => e.nombre == nombre);
+    if (this.bloques && this.bloques.escenas) {
+      let items_bloques = this.bloques.escenas.filter(e => e.nombre == nombre);
 
-    // si tiene bloques asociados los evalúa para ejecutarlos.
-    if (items_bloques.length > 0) {
-      eval(items_bloques[0].bloques.codigo_de_bloques);
+      // si tiene bloques asociados los evalúa para ejecutarlos.
+      if (items_bloques.length > 0) {
+        eval(items_bloques[0].bloques.codigo_de_bloques);
+      }
     }
 
     escena.iniciar();

@@ -616,6 +616,7 @@ declare class Pilas {
             keyboard: boolean;
             mouse: boolean;
             touch: boolean;
+            activePointers: number;
             gamepad: boolean;
         };
         plugins: {
@@ -939,6 +940,8 @@ declare class ActorBase {
     eliminar_recortado(): void;
     saltar(): void;
     saludar(): void;
+    _bloques_cuando_hace_click_en_la_pantalla(x: number, y: number, evento: any): void;
+    _bloques_cuando_hace_click(x: number, y: number, evento: any): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1478,6 +1481,8 @@ declare class EscenaBase {
     cuando_pulsa_tecla(tecla: string, evento: any): void;
     cuando_suelta_tecla(tecla: string, evento: any): void;
     enviar_mensaje(mensaje: string, datos?: any): void;
+    _bloques_al_actualizar(): void;
+    _bloques_cada_segundo(segundos: number): void;
     cuando_llega_un_mensaje(mensaje: string, datos?: any): void;
 }
 declare class Escena extends EscenaBase {
