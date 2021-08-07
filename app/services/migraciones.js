@@ -1,7 +1,9 @@
 import Service from "@ember/service";
 import EmberObject from "@ember/object";
 import { A } from "@ember/array";
-import animaciones_iniciales from "../fixtures/animaciones-iniciales";
+import fixture_animaciones_iniciales from "../fixtures/animaciones-iniciales";
+import fixture_sonidos_iniciales from "../fixtures/sonidos-iniciales";
+import fixture_workspace_bloques_de_escena_nueva from "../fixtures/workspace-bloques-de-escena-nueva";
 
 export default Service.extend({
   /**
@@ -91,49 +93,12 @@ export default Service.extend({
 
     // migración 2020-06-02: agregando sonidos al proyecto para que se puedan editar.
     if (!proyecto.get("sonidos")) {
-      proyecto.set("sonidos", [
-        {
-          nombre: "laser",
-          ruta: "sonidos/laser.mp3"
-        },
-        {
-          nombre: "explosion",
-          ruta: "sonidos/explosion.mp3"
-        },
-        {
-          nombre: "gallina",
-          ruta: "sonidos/gallina.mp3"
-        },
-        {
-          nombre: "moneda",
-          ruta: "sonidos/moneda.mp3"
-        },
-        {
-          nombre: "salto-corto",
-          ruta: "sonidos/salto-corto.mp3"
-        },
-        {
-          nombre: "salto-largo",
-          ruta: "sonidos/salto-largo.mp3"
-        },
-        {
-          nombre: "seleccion-aguda",
-          ruta: "sonidos/seleccion-aguda.mp3"
-        },
-        {
-          nombre: "seleccion-grave",
-          ruta: "sonidos/seleccion-grave.mp3"
-        },
-        {
-          nombre: "comer",
-          ruta: "sonidos/comer.mp3"
-        }
-      ]);
+      proyecto.set("sonidos", fixture_sonidos_iniciales);
     }
 
     // migración 2021-03-20: hacer que el proyecto siempre tenga animaciones
     if (!proyecto.get("animaciones")) {
-      proyecto.set("animaciones", animaciones_iniciales);
+      proyecto.set("animaciones", fixture_animaciones_iniciales);
     }
 
     // migración 2021-01-31: hacer que el proyecto ahora almacene código de blockly
@@ -146,7 +111,7 @@ export default Service.extend({
           proyecto.codigos.escenas.map(e => {
             return EmberObject.create({
               nombre: e.get("nombre"),
-              bloques: `<xml xmlns="https://developers.google.com/blockly/xml"><block type="actor_inicia" id="^BS9[_V!D30$Klp?G]Nt" x="-217" y="-205"></block><block type="actor_actualizar" id="D[i2{g4SjDY+sAT7f=W@" x="-212" y="-36"></block></xml>`
+              bloques: fixture_workspace_bloques_de_escena_nueva,
             });
           })
         )
