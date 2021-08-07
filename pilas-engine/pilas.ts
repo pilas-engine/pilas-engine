@@ -287,6 +287,7 @@ class Pilas {
         keyboard: true,
         mouse: true,
         touch: true,
+        activePointers: 6,
         gamepad: true
       },
       plugins: {
