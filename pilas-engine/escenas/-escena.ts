@@ -19,6 +19,7 @@ class Escena extends EscenaBase {
       this.actores.map(actor => {
         actor.cada_segundo(segundos_transcurridos);
         actor.cuando_transcurre_un_segundo(segundos_transcurridos);
+        actor._bloques_cada_segundo(segundos_transcurridos);
       });
     }
   }

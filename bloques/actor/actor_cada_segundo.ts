@@ -1,4 +1,4 @@
-Blockly.Blocks["escena_cada_segundo"] = {
+Blockly.Blocks["actor_cada_segundo"] = {
   init: function() {
     this.appendDummyInput()
       .appendField("En cada segundo transcurrido")
@@ -9,10 +9,10 @@ Blockly.Blocks["escena_cada_segundo"] = {
   }
 };
 
-Blockly.JavaScript["escena_cada_segundo"] = function(block) {
+Blockly.JavaScript["actor_cada_segundo"] = function(block) {
   var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
 
-  var code = `escena._bloques_cada_segundo = function(segundos_transcurridos) {
+  var code = `actor._bloques_cada_segundo = function(segundos_transcurridos) {
     ${sentencias}
   };\n`;
 

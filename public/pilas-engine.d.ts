@@ -942,6 +942,7 @@ declare class ActorBase {
     saludar(): void;
     _bloques_cuando_hace_click_en_la_pantalla(x: number, y: number, evento: any): void;
     _bloques_cuando_hace_click(x: number, y: number, evento: any): void;
+    _bloques_cada_segundo(segundos_transcurridos: number): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {

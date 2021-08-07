@@ -36,6 +36,16 @@ function procedimientos() {
   }
 }
 
+function categoria_camara() {
+  return categoria("Cámara", [
+        bloque("camara_fijar_x"),
+        bloque("camara_fijar_y"),
+        bloque("camara_vibrar"),
+        bloque("camara_desplazar_horizontalmente"),
+        bloque("camara_desplazar_verticalmente"),
+      ]);
+}
+
 function generar_toolbox() {
   return {
     actor: [
@@ -49,7 +59,9 @@ function generar_toolbox() {
         bloque("actor_cuando_hace_click"),
         bloque("actor_cuando_hace_click_en_la_pantalla"),
         bloque("actor_actualizar"),
+        bloque("actor_cada_segundo"),
       ]),
+      categoria_camara(),
       variables(),
       procedimientos(),
     ],
@@ -59,20 +71,14 @@ function generar_toolbox() {
 				bloque("pilas_cursor_y"),
 			]),
 
-      categoria("Cámara", [
-        bloque("camara_fijar_x"),
-        bloque("camara_fijar_y"),
-        bloque("camara_vibrar"),
-        bloque("camara_desplazar_horizontalmente"),
-        bloque("camara_desplazar_verticalmente"),
-      ]),
-
       categoria("Eventos", [
         bloque("escena_al_iniciar"),
         bloque("escena_cuando_hace_click"),
         bloque("escena_al_actualizar"),
         bloque("escena_cada_segundo"),
       ]),
+
+      categoria_camara(),
 
       variables(),
       procedimientos(),

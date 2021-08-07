@@ -4446,6 +4446,7 @@ var ActorBase = (function () {
     };
     ActorBase.prototype._bloques_cuando_hace_click_en_la_pantalla = function (x, y, evento) { };
     ActorBase.prototype._bloques_cuando_hace_click = function (x, y, evento) { };
+    ActorBase.prototype._bloques_cada_segundo = function (segundos_transcurridos) { };
     return ActorBase;
 }());
 var ActorTextoBase = (function (_super) {
@@ -6029,6 +6030,7 @@ var Escena = (function (_super) {
             this.actores.map(function (actor) {
                 actor.cada_segundo(segundos_transcurridos_1);
                 actor.cuando_transcurre_un_segundo(segundos_transcurridos_1);
+                actor._bloques_cada_segundo(segundos_transcurridos_1);
             });
         }
     };

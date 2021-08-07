@@ -18,6 +18,11 @@ declare function procedimientos(): {
     name: string;
     custom: string;
 };
+declare function categoria_camara(): {
+    kind: string;
+    name: any;
+    contents: any;
+};
 declare function generar_toolbox(): {
     actor: ({
         kind: string;

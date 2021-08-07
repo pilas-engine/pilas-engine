@@ -25,6 +25,15 @@ function procedimientos() {
         custom: "PROCEDURE",
     };
 }
+function categoria_camara() {
+    return categoria("Cámara", [
+        bloque("camara_fijar_x"),
+        bloque("camara_fijar_y"),
+        bloque("camara_vibrar"),
+        bloque("camara_desplazar_horizontalmente"),
+        bloque("camara_desplazar_verticalmente"),
+    ]);
+}
 function generar_toolbox() {
     return {
         actor: [
@@ -38,7 +47,9 @@ function generar_toolbox() {
                 bloque("actor_cuando_hace_click"),
                 bloque("actor_cuando_hace_click_en_la_pantalla"),
                 bloque("actor_actualizar"),
+                bloque("actor_cada_segundo"),
             ]),
+            categoria_camara(),
             variables(),
             procedimientos(),
         ],
@@ -47,19 +58,13 @@ function generar_toolbox() {
                 bloque("pilas_cursor_x"),
                 bloque("pilas_cursor_y"),
             ]),
-            categoria("Cámara", [
-                bloque("camara_fijar_x"),
-                bloque("camara_fijar_y"),
-                bloque("camara_vibrar"),
-                bloque("camara_desplazar_horizontalmente"),
-                bloque("camara_desplazar_verticalmente"),
-            ]),
             categoria("Eventos", [
                 bloque("escena_al_iniciar"),
                 bloque("escena_cuando_hace_click"),
                 bloque("escena_al_actualizar"),
                 bloque("escena_cada_segundo"),
             ]),
+            categoria_camara(),
             variables(),
             procedimientos(),
         ],
@@ -79,6 +84,21 @@ Blockly.Blocks["actor_actualizar"] = {
 Blockly.JavaScript["actor_actualizar"] = function (block) {
     var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
     var code = "actor._bloques_actualizar = function() {\n    " + sentencias + "\n  };\n";
+    return code;
+};
+Blockly.Blocks["actor_cada_segundo"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("En cada segundo transcurrido");
+        this.appendStatementInput("NAME").setCheck(null);
+        this.setColour(195);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript["actor_cada_segundo"] = function (block) {
+    var sentencias = Blockly.JavaScript.statementToCode(block, "NAME");
+    var code = "actor._bloques_cada_segundo = function(segundos_transcurridos) {\n    " + sentencias + "\n  };\n";
     return code;
 };
 Blockly.Blocks["actor_cuando_hace_click"] = {
@@ -319,7 +339,7 @@ Blockly.JavaScript["escena_al_iniciar"] = function (block) {
 Blockly.Blocks["escena_cada_segundo"] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("En cada segundo trancurrido");
+            .appendField("En cada segundo transcurrido");
         this.appendStatementInput("NAME").setCheck(null);
         this.setColour(195);
         this.setTooltip("");
