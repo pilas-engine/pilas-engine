@@ -1,4 +1,4 @@
-Blockly.Blocks["audio_reproducir_animacion"] = {
+Blockly.Blocks["actor_reproducir_animacion"] = {
   init: function() {
     this.appendDummyInput()
       .appendField("Reproducir la animación")
@@ -15,7 +15,7 @@ Blockly.Blocks["audio_reproducir_animacion"] = {
   }
 };
 
-Blockly.JavaScript["audio_reproducir_animacion"] = function (block) {
+Blockly.JavaScript["actor_reproducir_animacion"] = function (block) {
   var animacion = block.getFieldValue("animacion");
   return `this.animacion = "${animacion}";\n`;
 };
