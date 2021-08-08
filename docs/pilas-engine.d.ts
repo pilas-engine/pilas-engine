@@ -616,6 +616,7 @@ declare class Pilas {
             keyboard: boolean;
             mouse: boolean;
             touch: boolean;
+            activePointers: number;
             gamepad: boolean;
         };
         plugins: {
@@ -773,6 +774,7 @@ declare class ActorBase {
     set area_de_interactividad(v: any);
     definir_area_de_interactividad(ancho: number, alto: number): void;
     cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any): void;
+    cuando_termina_de_hacer_click_en_la_pantalla(x: number, y: number, evento_original: any): void;
     get area_de_interactividad(): any;
     set fondo(fondo: string);
     serializar(): {
@@ -936,8 +938,12 @@ declare class ActorBase {
     detener_musica(): void;
     recortar(x: number, y: number, ancho: number, alto: number): void;
     eliminar_recortado(): void;
+    reiniciar(): void;
     saltar(): void;
     saludar(): void;
+    _bloques_cuando_hace_click_en_la_pantalla(x: number, y: number, evento: any): void;
+    _bloques_cuando_hace_click(x: number, y: number, evento: any): void;
+    _bloques_cada_segundo(segundos_transcurridos: number): void;
 }
 declare class ActorTextoBase extends ActorBase {
     propiedades: {
@@ -1265,6 +1271,7 @@ declare class moneda extends Actor {
         figura_dinamica: boolean;
         figura_sensor: boolean;
     };
+    iniciar(): void;
 }
 declare class nave extends Actor {
     propiedades: {
@@ -1463,6 +1470,7 @@ declare class EscenaBase {
     actualizar_actores(): void;
     reproducir_sonidos_pendientes(): void;
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
+    avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_pulsa_tecla_a_los_actores(tecla: string, evento_original: any): void;
     avisar_cuando_suelta_tecla_a_los_actores(tecla: string, evento_original: any): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
@@ -1475,6 +1483,8 @@ declare class EscenaBase {
     cuando_pulsa_tecla(tecla: string, evento: any): void;
     cuando_suelta_tecla(tecla: string, evento: any): void;
     enviar_mensaje(mensaje: string, datos?: any): void;
+    _bloques_al_actualizar(): void;
+    _bloques_cada_segundo(segundos: number): void;
     cuando_llega_un_mensaje(mensaje: string, datos?: any): void;
 }
 declare class Escena extends EscenaBase {
