@@ -28,7 +28,7 @@ declare function categoria_control(): {
     name: string;
     contents: {
         kind: string;
-        type: string;
+        type: any;
     }[];
 };
 declare function categoria_audio(): {

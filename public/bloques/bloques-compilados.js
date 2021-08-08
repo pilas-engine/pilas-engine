@@ -37,12 +37,25 @@ function categoria_camara() {
 function categoria_control() {
     return {
         kind: "category",
-        name: "Control",
+        name: "Lógica",
         contents: [
             {
                 kind: "block",
                 type: "controls_if",
             },
+            {
+                kind: "block",
+                type: "logic_compare",
+            },
+            {
+                kind: "block",
+                type: "logic_operation",
+            },
+            {
+                kind: "block",
+                type: "logic_boolean",
+            },
+            bloque("control_tecla"),
         ],
     };
 }
@@ -62,6 +75,7 @@ function generar_toolbox() {
                 bloque("actor_impulsar"),
                 bloque("actor_desplazar"),
                 bloque("actor_reiniciar"),
+                bloque("actor_reproducir_animacion"),
             ]),
             categoria("Eventos", [
                 bloque("actor_inicia"),
@@ -177,9 +191,9 @@ Blockly.Blocks["actor_desplazar"] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Desplazar X")
-            .appendField(new Blockly.FieldNumber(0, -300, 300), "x")
+            .appendField(new Blockly.FieldNumber(1, -300, 300), "x")
             .appendField("e Y")
-            .appendField(new Blockly.FieldNumber(0, -300, 300), "y");
+            .appendField(new Blockly.FieldNumber(2, -300, 300), "y");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -242,6 +256,25 @@ Blockly.Blocks["actor_reiniciar"] = {
 Blockly.JavaScript["actor_reiniciar"] = function (block) {
     var code = "this.reiniciar();\n";
     return code;
+};
+Blockly.Blocks["audio_reproducir_animacion"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Reproducir la animación")
+            .appendField(new Blockly.FieldDropdown(this.generateOptions), "animacion");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+    generateOptions: function () {
+        return window.valores_dropdown.animaciones;
+    }
+};
+Blockly.JavaScript["audio_reproducir_animacion"] = function (block) {
+    var animacion = block.getFieldValue("animacion");
+    return "this.animacion = \"" + animacion + "\";\n";
 };
 Blockly.Blocks["actor_saltar"] = {
     init: function () {
@@ -423,6 +456,26 @@ Blockly.JavaScript["camara_vibrar"] = function (block) {
     var intensidad = block.getFieldValue("intensidad");
     var segundos = block.getFieldValue("segundos");
     return "pilas.camara.vibrar(" + intensidad + ", " + segundos + ");\n";
+};
+Blockly.Blocks["control_tecla"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("¿Pulsa la tecla")
+            .appendField(new Blockly.FieldDropdown(this.generateOptions), "NAME")
+            .appendField("?");
+        this.setOutput(true, "Boolean");
+        this.setColour(210);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+    generateOptions: function () {
+        return window.valores_dropdown.teclas;
+    }
+};
+Blockly.JavaScript["control_tecla"] = function (block) {
+    var dropdown_name = block.getFieldValue("NAME");
+    var code = "this.pilas.control." + dropdown_name;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.Blocks["escena_al_actualizar"] = {
     init: function () {

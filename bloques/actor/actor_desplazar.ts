@@ -2,9 +2,9 @@ Blockly.Blocks["actor_desplazar"] = {
   init: function() {
     this.appendDummyInput()
       .appendField("Desplazar X")
-      .appendField(new Blockly.FieldNumber(0, -300, 300), "x")
+      .appendField(new Blockly.FieldNumber(1, -300, 300), "x")
 			.appendField("e Y")
-      .appendField(new Blockly.FieldNumber(0, -300, 300), "y");
+      .appendField(new Blockly.FieldNumber(2, -300, 300), "y");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);

@@ -49,12 +49,25 @@ function categoria_camara() {
 function categoria_control() {
   return {
             kind: "category",
-            name: "Control",
+            name: "Lógica",
             contents: [
               {
                 kind: "block",
                 type: "controls_if",
               },
+              {
+                kind: "block",
+                type: "logic_compare",
+              },
+              {
+                kind: "block",
+                type: "logic_operation",
+              },
+              {
+                kind: "block",
+                type: "logic_boolean",
+              },
+              bloque("control_tecla"),
             ],
           };
 }
@@ -76,6 +89,7 @@ function generar_toolbox() {
 				bloque("actor_impulsar"),
 				bloque("actor_desplazar"),
 				bloque("actor_reiniciar"),
+				bloque("actor_reproducir_animacion"),
       ]),
       categoria("Eventos", [
         bloque("actor_inicia"),
@@ -138,46 +152,9 @@ var toolbox_de_bloques_compilados = generar_toolbox();
                 kind: "block",
                 type: "text",
               },
-              {
-                kind: "block",
-                type: "desplazar",
-              },
-              {
-                kind: "block",
-                type: "reproducir_animacion",
-              },
             ],
           },
-          {
-            kind: "category",
-            name: "Sensores",
-            contents: [
-              {
-                kind: "block",
-                type: "control_tecla",
-              },
-            ],
-          },
-        ],
-        escena: [
-          {
-            kind: "category",
-            name: "Lógica",
-            contents: [
-              {
-                kind: "block",
-                type: "logic_compare",
-              },
-              {
-                kind: "block",
-                type: "logic_operation",
-              },
-              {
-                kind: "block",
-                type: "logic_boolean",
-              },
-            ],
-          },
+          ,
         ],
       }
 */
