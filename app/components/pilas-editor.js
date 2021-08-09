@@ -792,7 +792,7 @@ export default Component.extend({
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 
       this.registrar_codigo_de_actor(nombre, preparar_codigo_para_el_editor(actor.codigo));
-      this.registrar_bloques_de_actor(nombre, actor.bloques);
+      this.registrar_bloques_de_actor(nombre, actor.bloques.bloques);
 
       this.set("mostrarModalCreacionDeActor", false);
 
@@ -1039,9 +1039,12 @@ export default Component.extend({
       let actor_original = this.obtenerDetalleDeActorPorIndice(id);
       let codigo = this.obtener_codigo_para_el_actor(actor_original);
 
+      let bloques = this.obtener_bloques_del_actor_por_nombre(actor_original.get("nombre"));
+
       let actor = {
         nombre: actor_original.get("nombre"),
         codigo: codigo,
+        bloques: bloques,
         imagen: actor_original.get("imagen"),
         propiedades: JSON.parse(JSON.stringify(actor_original))
       };
