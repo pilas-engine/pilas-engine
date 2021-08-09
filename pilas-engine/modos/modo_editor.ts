@@ -203,6 +203,15 @@ class ModoEditor extends Modo {
       this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
     });
 
+    //this.input.on("pointerdown", evento => {
+
+      //// es botón derecho
+      //if (evento.button == 2) {
+        //console.log(evento.x, evento.y);
+      //}
+
+    //});
+
     this.input.on("pointerup", evento => {
       if (this.tecla_meta_pulsada) {
         let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
