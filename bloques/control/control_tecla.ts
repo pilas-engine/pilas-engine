@@ -11,7 +11,7 @@ Blockly.Blocks["control_tecla"] = {
   },
 
   generateOptions: function() {
-    return window.valores_dropdown.teclas;
+    return window["valores_dropdown"].teclas;
   }
 };
 

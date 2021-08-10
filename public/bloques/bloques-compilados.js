@@ -269,7 +269,7 @@ Blockly.Blocks["actor_reproducir_animacion"] = {
         this.setHelpUrl("");
     },
     generateOptions: function () {
-        return window.valores_dropdown.animaciones;
+        return window["valores_dropdown"].animaciones;
     }
 };
 Blockly.JavaScript["actor_reproducir_animacion"] = function (block) {
@@ -302,7 +302,7 @@ Blockly.Blocks["audio_detener_musica"] = {
         this.setHelpUrl("");
     },
     generateOptions: function () {
-        return window.valores_dropdown.sonidos;
+        return window["valores_dropdown"].sonidos;
     }
 };
 Blockly.JavaScript["audio_detener_musica"] = function (block) {
@@ -321,7 +321,7 @@ Blockly.Blocks["audio_reproducir_musica"] = {
         this.setHelpUrl("");
     },
     generateOptions: function () {
-        return window.valores_dropdown.sonidos;
+        return window["valores_dropdown"].sonidos;
     }
 };
 Blockly.JavaScript["audio_reproducir_musica"] = function (block) {
@@ -341,7 +341,7 @@ Blockly.Blocks["audio_reproducir_sonido"] = {
         this.setHelpUrl("");
     },
     generateOptions: function () {
-        return window.valores_dropdown.sonidos;
+        return window["valores_dropdown"].sonidos;
     }
 };
 Blockly.JavaScript["audio_reproducir_sonido"] = function (block) {
@@ -469,7 +469,7 @@ Blockly.Blocks["control_tecla"] = {
         this.setHelpUrl("");
     },
     generateOptions: function () {
-        return window.valores_dropdown.teclas;
+        return window["valores_dropdown"].teclas;
     }
 };
 Blockly.JavaScript["control_tecla"] = function (block) {

@@ -11,7 +11,7 @@ Blockly.Blocks["audio_detener_musica"] = {
   },
 
   generateOptions: function() {
-    return window.valores_dropdown.sonidos;
+    return window["valores_dropdown"].sonidos;
   }
 };
 

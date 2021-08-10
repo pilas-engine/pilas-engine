@@ -12,7 +12,7 @@ Blockly.Blocks["audio_reproducir_musica"] = {
   },
 
   generateOptions: function() {
-    return window.valores_dropdown.sonidos;
+    return window["valores_dropdown"].sonidos;
   }
 };
 

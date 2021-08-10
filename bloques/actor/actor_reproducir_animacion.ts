@@ -11,7 +11,7 @@ Blockly.Blocks["actor_reproducir_animacion"] = {
   },
 
   generateOptions: function() {
-    return window.valores_dropdown.animaciones;
+    return window["valores_dropdown"].animaciones;
   }
 };
 
