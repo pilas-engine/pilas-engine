@@ -131,6 +131,13 @@ version_minor: cuidado_falta_deploy
 version_major: cuidado_falta_deploy
 	${BIN_EMBER} release --major
 
+compilar_para_electron: actualizar_actores
+	$(call log, "Iniciando compilación.")
+	${BIN_EMBER} build --environment develop
+	cp prod-electron.js dist/electron.js
+	cp prod-package.json dist/package.json
+	cd dist/; yarn install
+
 electron:
 	@echo "${G}Iniciando electron ... (pero sin compilar desde cero).${N}"
 	${BIN_ELECTRON} .
