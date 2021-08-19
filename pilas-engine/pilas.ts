@@ -138,7 +138,6 @@ class Pilas {
   }
 
   iniciar(ancho: number, alto: number, recursos: any, opciones: any = {}, imagenes: any = [], omitir_imagenes_de_pilas: boolean = false) {
-    console.log({ ancho, alto, recursos, opciones, imagenes, omitir_imagenes_de_pilas });
 
     if (opciones === undefined) {
       opciones = {};

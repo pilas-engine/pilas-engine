@@ -43,11 +43,11 @@ export default Service.extend({
   },
 
   obtener_ip() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       let dns = requireNode("dns");
       let os = requireNode("os");
 
-      dns.lookup(os.hostname(), function(err, ip) {
+      dns.lookup(os.hostname(), function (err, ip) {
         if (err) {
           return reject(err);
         }
@@ -87,7 +87,7 @@ export default Service.extend({
       const polka = requireNode("polka");
       const ruta = this.obtener_directorio_de_recursos();
       const serve = requireNode("sirv")(ruta, {
-        extensions: []
+        extensions: [],
       });
 
       let app = polka()
@@ -97,16 +97,16 @@ export default Service.extend({
         })
         .get("/tick", (req, res) => {
           res.writeHead(200, {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           });
           let json = JSON.stringify(this.obtener_tick());
           res.end(json);
         })
-        .listen(puerto, err => {
+        .listen(puerto, (err) => {
           if (err) {
             reject(err);
           } else {
-            this.obtener_ip().then(ip => {
+            this.obtener_ip().then((ip) => {
               resolve(`${ip}:${puerto}`);
             });
           }
@@ -245,10 +245,9 @@ export default Service.extend({
         fps: proyecto.proyecto.fps
       };
 
-
       var ancho = proyecto.proyecto.ancho;
       var alto = proyecto.proyecto.alto;
-      var pilas = pilasengine.iniciar(ancho, alto, null, opciones, proyecto.proyecto.imagenes, false);
+      var pilas = pilasengine.iniciar(ancho, alto, {imagenes: [], sonidos: proyecto.proyecto.sonidos}, opciones, proyecto.proyecto.imagenes, false);
 
       pilas.onready = function() {
         if (!ha_iniciado) {
@@ -294,33 +293,17 @@ export default Service.extend({
               if (tickAnterior !== data.tick) {
                 console.log("El tick ha cambiando, reiniciando");
 
-                if (data.recargarTodo) {
-                  console.log("Es un hard refresh!!!");
-
-                  setTimeout(function() {
-                      window.location.reload();
-                  }, 200);
-
-                } else {
-                  console.log({tickAnterior, tick: data.tick})
-                  tickAnterior = data.tick;
-                  console.log("Es una actualización rápida...");
-
-                  pilas.escena.terminar();
-
-                  let t = pilas.actores.texto()
-                  t.texto = "Reiniciando ...";
-                  t.color = "white";
-
-                  setTimeout(function() {
-                    var proyecto = JSON.parse(b64DecodeUnicode(data.proyecto));
-                    console.log(proyecto);
-
-                    proyecto.pilas = pilas;
-                    pilas.definir_modo("ModoEjecucion", proyecto);
-                  }, 500)
-
-                }
+                // anteriormente, se leía el atributo 'data.recargarTodo'
+                // para saber si se tenía que hacer refresh de toda
+                // la página o reiniciar solamente la escena. Pero esto
+                // traía problemas, ya que el proyecto podría tener imágenes
+                // o sonidos nuevos. Así que para simplificar todo eso ahora
+                // siempre se hace un hard-refresh de la página. Así que
+                // data.recargarTodo se asume true siempre.
+                
+                setTimeout(function() {
+                    window.location.reload();
+                }, 200);
 
                 if (data.recargarTodo) {
                   return null;
@@ -346,5 +329,5 @@ export default Service.extend({
 
         consultar_tick();
     `;
-  }
+  },
 });

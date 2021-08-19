@@ -79,7 +79,11 @@ export default Service.extend({
   guardar_proyecto_en_archivo(proyecto, ruta) {
     let fs = requireNode("fs");
     let data = JSON.stringify(proyecto, null, 4);
-    fs.writeFileSync(ruta, data);
+
+    if (ruta) {
+      // ruta puede ser "" si el usuario cancela el dialogo de electron.
+      fs.writeFileSync(ruta, data);
+    }
   },
 
   abrir_proyecto_desde_archivo(ruta) {

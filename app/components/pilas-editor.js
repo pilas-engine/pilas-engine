@@ -860,10 +860,9 @@ export default Component.extend({
 
         if (this.tamaño_de_pantalla_del_proyecto !== tamaño) {
           this.set("tamaño_de_pantalla_del_proyecto", tamaño);
-          this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, true);
-        } else {
-          this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, false);
         }
+
+        this.bus.trigger(`${this.nombre_del_contexto}:recargar_proyecto`, hash, true);
 
         this.bus.trigger(`${this.nombre_del_contexto}:ejecutar_proyecto`, datos);
         this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
