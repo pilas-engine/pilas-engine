@@ -2606,7 +2606,6 @@ var Pilas = (function () {
         if (opciones === void 0) { opciones = {}; }
         if (imagenes === void 0) { imagenes = []; }
         if (omitir_imagenes_de_pilas === void 0) { omitir_imagenes_de_pilas = false; }
-        console.log({ ancho: ancho, alto: alto, recursos: recursos, opciones: opciones, imagenes: imagenes, omitir_imagenes_de_pilas: omitir_imagenes_de_pilas });
         if (opciones === undefined) {
             opciones = {};
         }

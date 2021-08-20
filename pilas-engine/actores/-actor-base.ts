@@ -553,6 +553,7 @@ class ActorBase {
 
   actualizar_sensores() {
     let Body = this.pilas.Phaser.Physics.Matter.Matter.Body;
+
     this.sensores.map(s => {
       let { x, y } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(this.x, this.y);
 
