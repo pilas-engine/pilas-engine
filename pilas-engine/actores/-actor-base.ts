@@ -1080,7 +1080,7 @@ class ActorBase {
    * Muestra un mensaje como si se tratara de un globo de historieta. Llamar
    * a este método borra el dialogo anterior si existiera.
    */
-  decir(mensaje: string, duracion: number = 4) {
+  decir(mensaje: string, duracion: number = 4, dx: number = 0, dy: number = 0) {
     if (this._dialogo) {
       this._dialogo.eliminar();
       this._dialogo = null;
@@ -1088,8 +1088,8 @@ class ActorBase {
 
     let texto = this.pilas.actores.texto();
     texto.texto = mensaje;
-    texto.x = this.x - 15;
-    texto.y = this.y + this.alto;
+    texto.x = this.x - 15 + dx;
+    texto.y = this.y + this.alto + dy;
     texto.fuente = "color-negro";
     texto.fondo = "imagenes:redimensionables/dialogo";
     texto.color = "black";
@@ -1124,8 +1124,8 @@ class ActorBase {
 
     texto.actualizar = () => {
       if (this.esta_vivo()) {
-        texto.x = this.x - 15;
-        texto.y = this.y + this.alto;
+        texto.x = this.x - 15 + dx;
+        texto.y = this.y + this.alto + dy;
         mantener_en_pantalla();
       }
     };

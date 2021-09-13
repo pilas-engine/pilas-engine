@@ -915,7 +915,7 @@ declare class ActorBase {
     get figura_alto(): number;
     set figura_radio(valor: number);
     get figura_radio(): number;
-    decir(mensaje: string, duracion?: number): void;
+    decir(mensaje: string, duracion?: number, dx?: number, dy?: number): void;
     aprender(habilidad: string): string;
     olvidar(habilidad: string): void;
     tiene_habilidad(habilidad: string): boolean;

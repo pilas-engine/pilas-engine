@@ -4199,17 +4199,19 @@ var ActorBase = (function () {
         enumerable: false,
         configurable: true
     });
-    ActorBase.prototype.decir = function (mensaje, duracion) {
+    ActorBase.prototype.decir = function (mensaje, duracion, dx, dy) {
         var _this = this;
         if (duracion === void 0) { duracion = 4; }
+        if (dx === void 0) { dx = 0; }
+        if (dy === void 0) { dy = 0; }
         if (this._dialogo) {
             this._dialogo.eliminar();
             this._dialogo = null;
         }
         var texto = this.pilas.actores.texto();
         texto.texto = mensaje;
-        texto.x = this.x - 15;
-        texto.y = this.y + this.alto;
+        texto.x = this.x - 15 + dx;
+        texto.y = this.y + this.alto + dy;
         texto.fuente = "color-negro";
         texto.fondo = "imagenes:redimensionables/dialogo";
         texto.color = "black";
@@ -4234,8 +4236,8 @@ var ActorBase = (function () {
         }
         texto.actualizar = function () {
             if (_this.esta_vivo()) {
-                texto.x = _this.x - 15;
-                texto.y = _this.y + _this.alto;
+                texto.x = _this.x - 15 + dx;
+                texto.y = _this.y + _this.alto + dy;
                 mantener_en_pantalla();
             }
         };
