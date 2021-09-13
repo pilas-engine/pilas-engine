@@ -52,7 +52,7 @@ export default Component.extend({
       {
         tipo: "imagen",
         propiedad: "fondo",
-        filtroPropuesto: "fondo",
+        filtroPropuesto: "",
         etiqueta: "stage.background"
       },
       {
