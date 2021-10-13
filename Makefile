@@ -280,7 +280,7 @@ actualizar_phaser:
 	@echo "${Y}Para actualizar phaser, hay que seguir estos pasos:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y} - Subir el número de versión de package.json.${N}"
-	@echo "${Y} - Ejecutar yarn install.${N}"
+	@echo "${Y} - Ejecutar el comando yarn${N}"
 	@echo "${Y} - Copiar phaser al directorio public:${N}"
 	@echo "${Y}${N}"
 	@echo "${Y}        cp node_modules/phaser/dist/phaser.js public/${N}"
