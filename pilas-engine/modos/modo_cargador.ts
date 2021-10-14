@@ -255,7 +255,7 @@ class ModoCargador extends Modo {
     let parser = new DOMParser();
     var xmlDoc = parser.parseFromString(json[nombre].contenido, "application/xml");
 
-    var data = ParseXMLBitmapFont(xmlDoc, undefined, undefined, nombre);
+    var data = ParseXMLBitmapFont(xmlDoc, frame, undefined, undefined);
     this.sys.cache.bitmapFont.add(nombre, { data: data, texture: "fuentes", frame: nombre });
   }
 

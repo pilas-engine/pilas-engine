@@ -103,6 +103,7 @@ export default Component.extend({
     let { id, bloques } = this.proyecto.obtener_bloques_de_entidad_por_nombre(titulo);
     this.set("entidad_id", id);
 
+
     this.frame.contentWindow.postMessage(
       {
         message: "cargar-bloques",
