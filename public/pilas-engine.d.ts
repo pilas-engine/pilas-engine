@@ -772,6 +772,8 @@ declare class ActorBase {
     get interactivo(): boolean;
     set interactivo(activo: boolean);
     set area_de_interactividad(v: any);
+    desactivar_clicks(): void;
+    activar_clicks(): void;
     definir_area_de_interactividad(ancho: number, alto: number): void;
     cuando_hace_click_en_la_pantalla(x: number, y: number, evento_original: any): void;
     cuando_termina_de_hacer_click_en_la_pantalla(x: number, y: number, evento_original: any): void;

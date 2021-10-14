@@ -3474,13 +3474,15 @@ var ActorBase = (function () {
         enumerable: false,
         configurable: true
     });
+    ActorBase.prototype.desactivar_clicks = function () {
+        this.definir_area_de_interactividad(0, 0);
+    };
+    ActorBase.prototype.activar_clicks = function () {
+        this.definir_area_de_interactividad(this.sprite.width, this.sprite.height);
+    };
     ActorBase.prototype.definir_area_de_interactividad = function (ancho, alto) {
         if (this.sprite) {
-            this.sprite.width = ancho;
-            this.sprite.height = alto;
-            this.sprite.input.hitArea.width = ancho;
-            this.sprite.input.hitArea.height = alto;
-            this.sprite.setOrigin(this.centro_x, this.centro_y);
+            this.sprite.input.hitArea.setTo(-ancho * this.centro_x, -alto * this.centro_y, ancho, alto);
         }
         else {
             console.log("aún no tiene sprite");
