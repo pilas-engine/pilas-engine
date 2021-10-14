@@ -8821,7 +8821,6 @@ var ModoCargador = (function (_super) {
             text: "Iniciando ...",
             style: {
                 font: "14px verdana",
-                fill: "#ffffff"
             }
         });
         loadingText.setOrigin(0.5, 0.5);

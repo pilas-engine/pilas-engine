@@ -102,7 +102,6 @@ class ModoCargador extends Modo {
       text: "Iniciando ...",
       style: {
         font: "14px verdana",
-        fill: "#ffffff"
       }
     });
     loadingText.setOrigin(0.5, 0.5);
