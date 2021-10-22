@@ -46,6 +46,7 @@ import Service from "@ember/service";
  * - cierra_dialogo_de_animaciones
  * - capturar_pantalla
  * - captura_de_pantalla_realizada (respuesta a capturar_pantalla desde pilas)
+ * - cambia_folding_en_el_editor
  *
  * Otra señal que se emite para avisarle al webserver que cambió el código es:
  *

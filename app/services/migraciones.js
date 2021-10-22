@@ -130,6 +130,11 @@ export default Service.extend({
       );
     }
 
+    // migración 2021-10-22: Haciendo que se guarde el estado de plegado.
+    if (!proyecto.get("plegados")) {
+      proyecto.set("plegados", {});
+    }
+
     return proyecto;
   },
 

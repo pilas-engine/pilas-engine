@@ -46,6 +46,22 @@ export default Component.extend({
 
     this.definirTema();
 
+    this.editor._contributions["editor.contrib.folding"].foldingModel.onDidChange(e => {
+      if (e.collapseStateChanged) {
+        // Solo toma en cuenta este evento si el usuario
+        // cambió el estado del plegado de código.
+        //
+        // Hago esta comprobación porque si no el evento
+        // también se llama cuando cambia el modelo de código
+        // del editor.
+
+        let estado = this.editor.saveViewState(); 
+        console.log("datos de folding", this.titulo, estado);
+        this.bus.trigger("cambia_folding_en_el_editor", {titulo: this.titulo, estado: estado});
+
+      }
+    });
+
     this.set("loading", false);
   },
 
@@ -60,6 +76,9 @@ export default Component.extend({
       let pos = editor.getPosition();
       editor.getModel().setValue(this.code);
       editor.setPosition(pos);
+      console.log("Aquí se debería ver si llegó como propiedad el folding y cargarlo");
+      console.log("Carga el código", this.code);
+      console.log("TODO: definir el viewstate (si es que está guardado para este titulo:", this.titulo)
     }
   },
 
@@ -146,6 +165,8 @@ export default Component.extend({
       if (event.source === this.frame && event.data && event.data.updatedCode) {
         if (this.onChange) {
           debounce(this, "analizarErrores", 1000);
+          // esta llamada a onChange hace referencia al método 
+          // "cuando_cambia_el_codigo" de "app/components/pilas-editor.js"
           this.onChange(event.data.updatedCode, this.titulo);
         }
       }
@@ -159,11 +180,14 @@ export default Component.extend({
           this.bus.trigger("formatear_y_guardar");
         }
 
+        console.log(event.data.message);
+
         if (event.data.message === "abrir-selector-de-codigos") {
           this.bus.trigger("abrir_selector_de_codigos");
         }
       }
     };
+
 
     this.set("_subscription", subscription);
     window.addEventListener("message", subscription);
@@ -215,6 +239,7 @@ export default Component.extend({
     }
 
     later(() => {
+      console.log("Termina de editar código");
       this.onSave(this.frame.editor);
     }, 100);
   },

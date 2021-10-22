@@ -143,6 +143,7 @@ export default Component.extend({
 
     this.bus.off("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
     this.bus.off("cierra_dialogo_de_animaciones", this, "cierra_dialogo_de_animaciones");
+    this.bus.off("cambia_folding_en_el_editor", this, "cambia_folding_en_el_editor");
   },
 
   conectar_eventos() {
@@ -152,6 +153,7 @@ export default Component.extend({
 
     this.bus.on("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
     this.bus.on("cierra_dialogo_de_animaciones", this, "cierra_dialogo_de_animaciones");
+    this.bus.on("cambia_folding_en_el_editor", this, "cambia_folding_en_el_editor");
   },
 
   seleccionaUnActorEnModoPausa(actor) {
@@ -724,6 +726,11 @@ export default Component.extend({
     this.actualizar_enumeraciones_del_proyecto();
   },
 
+  cambia_folding_en_el_editor(datos) {
+    debugger; // eslint-disable-line;
+    //this.actualizar_enumeraciones_del_proyecto();
+  },
+
   actions: {
     agregarEscena(proyecto) {
       let escena = this.crear_escena_nueva(proyecto);
@@ -955,6 +962,7 @@ export default Component.extend({
         this.set("codigo", this.proyecto.codigos.proyecto);
         this.set("tituloDelCodigo", "proyecto");
         this.set("identificador", "");
+        console.log("TODO: aquí se debería ver si se guardó el folding para este código y guardarlo");
 
         return;
       }
@@ -989,6 +997,7 @@ export default Component.extend({
 
         this.set("codigo", this.obtener_codigo_para_la_escena(escena));
         this.set("tituloDelCodigo", escena.nombre);
+        console.log("TODO: aquí se debería ver si se guardó el folding para este código y guardarlo");
         this.set("identificador", escena.id);
       }
 
@@ -998,6 +1007,7 @@ export default Component.extend({
 
         this.set("codigo", this.obtener_codigo_para_el_actor(actor));
         this.set("tituloDelCodigo", actor.nombre);
+        console.log("TODO: aquí se debería ver si se guardó el folding para este código y guardarlo");
         this.set("identificador", actor.id);
 
         this.bus.trigger(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, {
