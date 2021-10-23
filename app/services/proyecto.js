@@ -33,7 +33,14 @@ export default Service.extend({
   },
 
   guardar_proyecto_serializado(proyecto_serializado) {
-    localStorage.setItem("pilas:proyecto_serializado", proyecto_serializado);
+    try {
+      localStorage.setItem("pilas:proyecto_serializado", proyecto_serializado);
+    } catch (e) {
+      console.warn("El proyecto es demasiado grande, así que se evitó guardarlo en localstorage para que se pueda abrir desde proyectos recientes.");
+      console.warn("Se ha creado una variable global para poder abrir el proyecto...");
+      localStorage.removeItem("pilas:proyecto_serializado");
+      window.__tmp__proyecto_serializado = proyecto_serializado;
+    }
   },
 
   guardar_captura_de_pantalla_del_proyecto(imagen_en_base_64) {

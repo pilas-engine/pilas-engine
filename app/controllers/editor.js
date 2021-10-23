@@ -118,12 +118,23 @@ export default Controller.extend(queryParams.Mixin, {
     // vuelve a abrir el editor se le muestra el proyecto anterior o el
     // proyecto inicial con física básica.
     if (localStorage.getItem("pilas:proyecto_serializado")) {
+
       let proyecto_serializado = localStorage.getItem("pilas:proyecto_serializado");
       let proyecto = this.crear_proyecto_desde_cadena_serializada(proyecto_serializado);
 
       return this.migraciones.migrar(proyecto);
     } else {
-      return this.crear_proyecto_desde_fixture(fixtureDeProyecto);
+
+      // caso especial: si el proyecto es muy grande, no se guarda
+      // en localstorage sino que se almacena temporalmente en una variable
+      // global. Esta variable se elimina al finalizar la carga
+      if (window.__tmp__proyecto_serializado) {
+        let proyecto = this.crear_proyecto_desde_cadena_serializada(window.__tmp__proyecto_serializado);
+        window.__tmp__proyecto_serializado = undefined;
+        return this.migraciones.migrar(proyecto);
+      } else {
+        return this.crear_proyecto_desde_fixture(fixtureDeProyecto);
+      }
     }
 
   }),
