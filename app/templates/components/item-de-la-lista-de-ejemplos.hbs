@@ -1,0 +1,18 @@
+{{#link-to "ejemplos.ver" ejemplo.nombre class=clases}}
+  <div class="flex flex-column" style="width: 180px">
+
+    <div style="width: 180px; height: 140px;">
+      <div class="sprite-ejemplos capturas-{{ejemplo.nombre}} b--gray ba"></div>
+    </div>
+
+    <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+      {{ejemplo.nombre}}
+    </div>
+
+    {{#pilas-ejemplos-es-nuevo ejemplo=ejemplo}}
+      <div class="absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow ttu">{{t "new"}}</div>
+    {{/pilas-ejemplos-es-nuevo}}
+
+  </div>
+{{/link-to}}
+
