@@ -17,6 +17,10 @@ export default Component.extend({
   // se hace un observer para que el filtro tarde en aplicarse.
   observer_de_filtro: observer("filtro", function() {
     debounce(this, () => {
+      if (this.isDestroyed || this.isDestroying) {
+        return;
+      }
+
       this.set("filtro_diferido", this.filtro);
     }, 400);
   })
