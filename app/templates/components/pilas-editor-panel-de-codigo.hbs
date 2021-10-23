@@ -55,10 +55,15 @@
       
     {{#if activarBloquesDesdeConfiguracion}}
       <div class="relative">
-        <div class="dib mb2 {{if mostrarBloques "solapa" "solapa-seleccionada"}}" role="button" {{action "mostrarCodigo"}}>Código</div>
+
+        <div class="dib mb2 {{if mostrarBloques "solapa" "solapa-seleccionada"}}" role="button" {{action "mostrarCodigo"}}>
+          Código
+        </div>
+
         <div class="dib mb2 {{if mostrarBloques "solapa-seleccionada" "solapa"}}" role="button" {{action "mostrarBloques"}}>
           Bloques 
         </div>
+
       </div>
     {{/if}}
 
@@ -105,6 +110,7 @@
  
     {{monaco-editor
       titulo=titulo_del_codigo
+      plegado_del_codigo=plegado_del_codigo
       readOnly=(not estado.puede_editar)
       code=codigo
       oscuro=oscuro

@@ -727,8 +727,19 @@ export default Component.extend({
   },
 
   cambia_folding_en_el_editor(datos) {
-    debugger; // eslint-disable-line;
-    //this.actualizar_enumeraciones_del_proyecto();
+    this.guardar_folding_en_el_proyecto(datos.titulo, datos.estado);
+  },
+
+  guardar_folding_en_el_proyecto(titulo, estado_folding) {
+    this.get("proyecto.plegados")[titulo] = estado_folding;
+  },
+
+  obtener_estado_de_plegado(titulo) {
+    if (this.proyecto.plegados && this.proyecto.plegados[titulo]) {
+      return this.proyecto.plegados[titulo];
+    } else {
+      return null;
+    }
   },
 
   actions: {
@@ -954,6 +965,7 @@ export default Component.extend({
     },
 
     cuandoSelecciona(seleccion) {
+
       if (seleccion === "proyecto") {
         this.set("seleccion", 0);
         this.set("instancia_seleccionada", this.proyecto);
@@ -962,8 +974,7 @@ export default Component.extend({
         this.set("codigo", this.proyecto.codigos.proyecto);
         this.set("tituloDelCodigo", "proyecto");
         this.set("identificador", "");
-        console.log("TODO: aquí se debería ver si se guardó el folding para este código y guardarlo");
-
+        this.set("plegadoDelCodigo", this.obtener_estado_de_plegado("proyecto"));
         return;
       }
 
@@ -997,8 +1008,8 @@ export default Component.extend({
 
         this.set("codigo", this.obtener_codigo_para_la_escena(escena));
         this.set("tituloDelCodigo", escena.nombre);
-        console.log("TODO: aquí se debería ver si se guardó el folding para este código y guardarlo");
         this.set("identificador", escena.id);
+        this.set("plegadoDelCodigo", this.obtener_estado_de_plegado(escena.nombre));
       }
 
       if (actor) {
@@ -1007,8 +1018,8 @@ export default Component.extend({
 
         this.set("codigo", this.obtener_codigo_para_el_actor(actor));
         this.set("tituloDelCodigo", actor.nombre);
-        console.log("TODO: aquí se debería ver si se guardó el folding para este código y guardarlo");
         this.set("identificador", actor.id);
+        this.set("plegadoDelCodigo", this.obtener_estado_de_plegado(actor.nombre));
 
         this.bus.trigger(`${this.nombre_del_contexto}:selecciona_actor_desde_el_editor`, {
           id: seleccion

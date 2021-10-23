@@ -56,9 +56,7 @@ export default Component.extend({
         // del editor.
 
         let estado = this.editor.saveViewState(); 
-        console.log("datos de folding", this.titulo, estado);
         this.bus.trigger("cambia_folding_en_el_editor", {titulo: this.titulo, estado: estado});
-
       }
     });
 
@@ -76,9 +74,12 @@ export default Component.extend({
       let pos = editor.getPosition();
       editor.getModel().setValue(this.code);
       editor.setPosition(pos);
-      console.log("Aquí se debería ver si llegó como propiedad el folding y cargarlo");
-      console.log("Carga el código", this.code);
-      console.log("TODO: definir el viewstate (si es que está guardado para este titulo:", this.titulo)
+
+      // si hay estado de plegado del código intenta cargarlo. Este
+      // atributo "plegado_del_codigo" se guarda dentro de pilas-editor.js
+      if (this.plegado_del_codigo) {
+        this.editor.restoreViewState(this.plegado_del_codigo); 
+      }
     }
   },
 
@@ -180,8 +181,6 @@ export default Component.extend({
           this.bus.trigger("formatear_y_guardar");
         }
 
-        console.log(event.data.message);
-
         if (event.data.message === "abrir-selector-de-codigos") {
           this.bus.trigger("abrir_selector_de_codigos");
         }
@@ -239,7 +238,6 @@ export default Component.extend({
     }
 
     later(() => {
-      console.log("Termina de editar código");
       this.onSave(this.frame.editor);
     }, 100);
   },
