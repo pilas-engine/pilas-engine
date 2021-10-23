@@ -210,12 +210,18 @@
           } else {
             var texto = message.data.xml_como_texto;
 
-            if (message.data.xml_como_texto["texto"]) {
-              texto = message.data.xml_como_texto.texto;
+            if (message.data.xml_como_texto && message.data.xml_como_texto["texto"]) {
+              texto = message.data.xml_como_texto["texto"];
             }
 
-            let xml = Blockly.Xml.textToDom(texto);
-            Blockly.Xml.domToWorkspace(xml, workspace);
+            if (texto) {
+              let xml = Blockly.Xml.textToDom(texto);
+              Blockly.Xml.domToWorkspace(xml, workspace);
+            } else {
+              console.log("Ojo, el elemento seleccionado no tiene espacio de bloques asignado" );
+              console.log(message.data);
+            }
+
           }
         }
       });

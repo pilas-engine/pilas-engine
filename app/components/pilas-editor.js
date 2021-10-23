@@ -810,7 +810,12 @@ export default Component.extend({
       escena.actores.pushObject(EmberObject.create(actor.propiedades));
 
       this.registrar_codigo_de_actor(nombre, preparar_codigo_para_el_editor(actor.codigo));
-      this.registrar_bloques_de_actor(nombre, actor.bloques.bloques);
+
+      if (actor.bloques.get && actor.bloques.get("bloques")) {
+        this.registrar_bloques_de_actor(nombre, actor.bloques.get("bloques"));
+      } else {
+        this.registrar_bloques_de_actor(nombre, actor.bloques);
+      }
 
       this.set("mostrarModalCreacionDeActor", false);
 
