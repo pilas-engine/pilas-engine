@@ -16,8 +16,10 @@ module.exports = function(environment) {
       }
     },
 
-    remoteBackendURL: "https://backend.pilas-engine.com.ar",
-    remoteFrontendURL: "https://app.pilas-engine.com.ar",
+    //remoteBackendURL: "https://backend.pilas-engine.com.ar",
+    //remoteFrontendURL: "https://app.pilas-engine.com.ar",
+    remoteBackendURL: "https://localhost:8000",
+    remoteFrontendURL: "https://localhost:4200",
     activarBloques: true, // bloques
 
     APP: {},
@@ -28,9 +30,9 @@ module.exports = function(environment) {
   };
 
   if (environment === "development") {
-    //ENV.backendURL = "http://127.0.0.1:8000";
+    ENV.backendURL = "http://127.0.0.1:8000";
     //ENV.frontendURL = "http://localhost:4200";
-    ENV.backendURL = ENV.remoteBackendURL;
+    //ENV.backendURL = ENV.remoteBackendURL;
     ENV.frontendURL = ENV.remoteFrontendURL;
   }
 

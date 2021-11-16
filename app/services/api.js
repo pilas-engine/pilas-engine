@@ -7,6 +7,54 @@ export default Service.extend({
   electron: service(),
   enElectron: alias("electron.enElectron"),
 
+  autenticar(usuario, contraseña) {
+    return this.post("api-token-auth/", { username: usuario, password: contraseña});
+  },
+
+  obtenerPerfilDesdeToken(token) {
+    return this.get(`perfiles/obtener-perfil-desde-token/${token}`);
+  },
+
+  post(endpoint, datos) {
+    return new Promise((resolve, reject) => {
+      let xhr = new XMLHttpRequest();
+      let url = null;
+
+      if (this.enElectron) {
+        url = `${ENV.remoteBackendURL}/${endpoint}`;
+      } else {
+        url = `${ENV.backendURL}/${endpoint}`;
+      }
+
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-type", "application/json");
+
+      xhr.onload = function() {
+        if (xhr.status == 200) {
+          let json = JSON.parse(xhr.responseText);
+          resolve(json);
+        } else {
+          reject(JSON.parse(xhr.response));
+        }
+      };
+
+      xhr.onerror = function() {
+        reject({error: url});
+      };
+
+      xhr.send(JSON.stringify(datos));
+    });
+
+  },
+
+
+  
+
+  
+  crearUsuario(usuario, contraseña, email) {
+    return this.post("perfiles/crear-usuario", {usuario, password: contraseña, email});
+  },
+
   publicar_juego(serializado, imagen_en_base64, ver_codigo, cantidad_de_partes, numero_de_parte, hash) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
@@ -58,9 +106,13 @@ export default Service.extend({
   },
 
   obtener_proyecto(hash) {
+    return this.get(`proyecto/obtener/${hash}`);
+  },
+
+  get(endpoint) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
-      let url = `${ENV.backendURL}/proyecto/obtener/${hash}`;
+      let url = `${ENV.backendURL}/${endpoint}`;
 
       xhr.open("GET", url, true);
 

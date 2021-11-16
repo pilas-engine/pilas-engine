@@ -1,0 +1,67 @@
+{{yield}}
+
+<div class="fixed top-4 right-1 verdana f7 gray tr">
+
+  {{#if sesion.autenticandoEnCurso}}
+    {{pilas-spinner}}
+  {{/if}}
+
+  {{#if sinAutenticar}}
+    <div class="pa1 hover-bg-black-10 br2 pointer" {{action "mostrar"}} role="button">
+      Ingresar
+    </div>
+  {{/if}}
+
+
+  <div>
+
+    {{#if obtenerDatosDeUsuario.last.isSuccessful}}
+      nombre: {{sesion.nombre}}
+    {{/if}}
+  </div>
+
+</div>
+
+
+<div id="modal"></div>
+
+{{#pilas-modal alCerrar=(action "ocultar") visible=mostrarModal medio=true id="dialogoLogin" titulo=(t "login.ingresar")}}
+  <div>
+
+    {{#if etapaLogin}}
+
+      <label>Usuario: {{input value=usuario}}</label>
+      <label>Contraseña: {{input type="password" value=contraseña}}</label>
+
+      {{#if tareaIngresar.last.isRunning}}
+        <button disabled=disabled>Ingresar ...</button>
+      {{else}}
+        <button {{action "ingresar"}}>Ingresar</button>
+      {{/if}}
+
+      <div class="red">{{error}}</div>
+
+      <a href="" {{action "irACrearUsuario"}}>Crear usuario</a>
+
+    {{/if}}
+
+    {{#if etapaCrearUsuario}}
+
+      <label>Usuario: {{input value=usuario}}</label>
+      <label>Email: {{input value=email}}</label>
+      <label>Contraseña: {{input type="password" value=contraseña}}</label>
+
+      {{#if tareaCrearUsuario.last.isRunning}}
+        <button disabled=disabled>Crear usuario ...</button>
+      {{else}}
+        <button {{action "crearUsuario"}}>Crear usuario</button>
+      {{/if}}
+
+      <div class="red">{{error}}</div>
+
+      <a href="" {{action "irALogin"}}>Cancelar</a>
+
+    {{/if}}
+
+  </div>
+{{/pilas-modal}}

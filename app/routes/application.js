@@ -5,6 +5,7 @@ import Route from "@ember/routing/route";
 export default Route.extend({
   electron: service(),
   bus: service(),
+  sesion: service(),
   log: service(),
   actores: service(),
   estadisticas: service(),
@@ -16,6 +17,7 @@ export default Route.extend({
     this.bus.iniciar();
     this.log.iniciar();
     this.estadisticas.iniciar();
+    this.sesion.iniciar();
 
     return hash({
       actores: this.actores.iniciar(),
