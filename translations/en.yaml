@@ -113,6 +113,7 @@ project:
   main.scene: Main scene
   performance: Performance
   size: Size
+  title: Game title
 
 about:
   title: ¿What is Pilas Engine?

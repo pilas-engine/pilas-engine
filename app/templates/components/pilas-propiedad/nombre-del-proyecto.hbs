@@ -1,0 +1,61 @@
+{{yield}}
+<div class="pv1 flex texto relative">
+  <div class="w-50">{{etiqueta (t "project.title")}}</div>
+
+  <div class="w-50 pb2">
+
+    <button id="boton-editar"
+      {{action "cambiarNombre"}}
+      class="bg-transparent no-outline p0 pointer glow bn pa0 texto truncate w4 tl verdana">
+      {{pilas-icono icono="editar"}} {{nombre}}
+    </button>
+
+    {{#if mostrar}}
+      <div class="absolute ba borde shadow-4 pa2 top-1 left-2 right-1 z-9999 bg-fondo texto shadow-1">
+
+        {{input
+          enter=(action "confirmar")
+          spellcheck=false
+          value=nombreSugerido
+          type="text"
+          class="input w-100 v-top pa1 br2"
+        }}
+
+        <div class="flex pt2">
+          <div class="flex1"></div>
+
+          <div class="">
+            <button class="boton" {{action "ocultar"}}>{{t "cancel"}}</button>
+            <button class="boton {{if invalido "o-50"}}" disabled={{invalido}} {{action "confirmar"}}>{{t "ok"}}</button>
+          </div>
+        </div>
+
+        <div class="tc f7 lh-copy">
+
+          {{#if invalido_por_duplicado}}
+            <div class="pt2">
+              {{t "validations.name.exists"}}
+            </div>
+          {{/if}}
+
+          {{#if invalido_por_vacio}}
+            <div class="pt2">
+              {{t "validations.not.empty"}}
+            </div>
+          {{/if}}
+
+          {{#if invalido_por_caracteres}}
+            <div class="pt2">
+              {{t "validations.invalid"}}
+            </div>
+          {{/if}}
+
+        </div>
+
+      </div>
+
+      <div role="button" class="fixed z-1 absolute--fill pointer" {{action "ocultar"}}></div>
+    {{/if}}
+  </div>
+
+</div>

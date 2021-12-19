@@ -9,6 +9,7 @@ COMPILAR_EN_OSX=1
 COMPILAR_EN_WINDOWS=1
 COMPILAR_EN_LINUX=1
 COMPILAR_EN_ARM=1
+COMPILAR_EN_ARM_64=1
 EMPAQUETAR_PARA_SERVIDOR_ESTATICO=1
 EMPAQUETAR_VERSION_MINIMA=1
 
@@ -225,7 +226,10 @@ ifeq ($(COMPILAR_EN_LINUX), 1)
 	@zip -qr binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
 endif
 ifeq ($(COMPILAR_EN_ARM), 1)
-	@zip -qr binarios/${NOMBREBIN}-linux-arm.zip binarios/${NOMBREBIN}-linux-armv7l
+	@zip -qr binarios/${NOMBREBIN}-linux-armv7l.zip binarios/${NOMBREBIN}-linux-armv7l
+endif
+ifeq ($(COMPILAR_EN_ARM_64), 1)
+	@zip -qr binarios/${NOMBREBIN}-linux-arm64.zip binarios/${NOMBREBIN}-linux-arm64
 endif
 ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	@echo "Empaquetando para servidor estático ..."

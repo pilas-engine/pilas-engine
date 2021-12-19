@@ -113,6 +113,7 @@ project:
   main.scene: 主场景
   performance: 性能
   size: 大小
+  title: 游戏名称
 
 about:
   title: 什么是Pilas引擎？

@@ -108,6 +108,10 @@ export default Service.extend({
     throw new Error(`No se pueden obtener bloques para la entidad '${nombre}'`);
   },
 
+  renombrar_proyecto(nombre) {
+    this.proyecto.set("titulo", nombre);
+  },
+
   renombrar_actor(nombre, nombre_nuevo) {
     let actor = this.buscar_actor_por_nombre(nombre);
     actor.set("nombre", nombre_nuevo);
