@@ -208,6 +208,11 @@ ifeq ($(COMPILAR_EN_LINUX), 1)
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=ia32 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR_LINUX_32bits} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 endif
+ifeq ($(COMPILAR_EN_ARM_64), 1)
+	$(call log, "Compilando para ARM64 ...")
+	cd dist; rm -rf build
+	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=arm64 --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
+endif
 ifeq ($(COMPILAR_EN_ARM), 1)
 	$(call log, "Compilando para ARM ...")
 	cd dist; rm -rf build
