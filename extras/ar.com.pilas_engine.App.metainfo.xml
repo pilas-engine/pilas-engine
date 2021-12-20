@@ -29,6 +29,7 @@
   </screenshots>
   <releases>
     <release version="2.7.3" date="2021-10-23"/>
+    <release version="2.7.4" date="2021-12-20"/>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="social-info">mild</content_attribute>
