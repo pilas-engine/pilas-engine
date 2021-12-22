@@ -11,9 +11,7 @@ export default Service.extend({
   // este método se llama automáticamente cuando la aplicación inicia
   // (ver archivo app/routes/application.js)
   iniciar() {
-
     if (this.autenticado) {
-      console.log("ya está autenticado");
       return;
     }
 
@@ -24,18 +22,23 @@ export default Service.extend({
     }
   },
 
+  registrarLogin(token) {
+    // se invoca cuando el component pilas-boton-login logra hacer una
+    // autenticación exitosa.
+    localStorage.setItem("token-auth", token);
+    return this.obtenerDatosDeUsuario.perform();
+  },
+
   obtenerDatosDeUsuario: task(function*() {
     if (this.autenticandoEnCurso) {
       console.log("evitando obtener datos de usuario porque está autenticando en curso");
       return;
     }
 
-    console.log("obteniendo datos de usuario...");
-
     this.set("autenticandoEnCurso", true);
 
     let token = localStorage.getItem("token-auth");
-    yield timeout(500);
+    yield timeout(1000);
 
     try {
       let respuesta = yield this.api.obtenerPerfilDesdeToken(token);
@@ -48,6 +51,13 @@ export default Service.extend({
       this.set("autenticandoEnCurso", false);
     }
 
-    console.log("listo!, proceso finalizado");
   }),
+
+  cerrarSesion() {
+    this.set("autenticado", false);
+    this.set("autenticandoEnCurso", false);
+    let token = localStorage.getItem("token-auth");
+    localStorage.removeItem("token-auth");
+    return this.api.cerrarSesion(token);
+  }
 });

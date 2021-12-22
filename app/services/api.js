@@ -11,6 +11,10 @@ export default Service.extend({
     return this.post("api-token-auth/", { username: usuario, password: contraseña});
   },
 
+  cerrarSesion(token) {
+    return this.get("api-token-logout/", {token: token});
+  },
+
   obtenerPerfilDesdeToken(token) {
     return this.get(`perfiles/obtener-perfil-desde-token/${token}`);
   },
@@ -38,8 +42,10 @@ export default Service.extend({
         }
       };
 
-      xhr.onerror = function() {
-        reject({error: url});
+      xhr.onerror = function(error) {
+        debugger; // eslint-disable-line;
+        console.log(xhr.responseText)
+        reject({error: url, error});
       };
 
       xhr.send(JSON.stringify(datos));
@@ -47,10 +53,6 @@ export default Service.extend({
 
   },
 
-
-  
-
-  
   crearUsuario(usuario, contraseña, email) {
     return this.post("perfiles/crear-usuario", {usuario, password: contraseña, email});
   },
@@ -109,12 +111,18 @@ export default Service.extend({
     return this.get(`proyecto/obtener/${hash}`);
   },
 
-  get(endpoint) {
+  get(endpoint, headers) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
+
+
       let url = `${ENV.backendURL}/${endpoint}`;
 
       xhr.open("GET", url, true);
+
+      if (headers && headers.token) {
+        xhr.setRequestHeader("HTTP_AUTHORIZATION", `token ${headers.token}`);
+      }
 
       xhr.onload = function() {
         if (xhr.status == 200) {

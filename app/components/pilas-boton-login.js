@@ -10,10 +10,11 @@ export default Component.extend({
   sesion: service(),
   autenticando: false,
   autenticado: false,
+  saliendo: false,
 
-  usuario: "a",
-  email: "b",
-  contraseña: "c",
+  usuario: "asdfasdf",
+  email: "??",
+  contraseña: "asdfasdf",
   //sesion: null,
 
   etapaLogin: computed("paso", function() {
@@ -28,8 +29,8 @@ export default Component.extend({
     this.set("usuario", "");
     this.set("email", "");
     this.set("contraseña", "");
+    this.set("error", "");
   },
-
 
   tareaCrearUsuario: task(function*() {
     this.set("error", "");
@@ -64,16 +65,20 @@ export default Component.extend({
 
     try {
       let respuesta = yield this.api.autenticar(this.usuario, this.contraseña);
-
-      //this.set("token", respuesta.token);
-      //console.log(respuesta.token);
-
-      localStorage.setItem("token-auth", respuesta.token);
-
-      this.obtenerDatosDeUsuario.perform();
+      this.send("ocultar");
+      console.log(respuesta);
+      yield this.sesion.registrarLogin(respuesta.token);
     } catch (e) {
+      console.log(e);
       this.set("error", "Usuario o contraseña incorrecta");
     }
+  }),
+
+  tareaCerrarSesion: task(function*() {
+    this.set("saliendo", true);
+    yield timeout(1000);
+    this.set("saliendo", false);
+    yield this.sesion.cerrarSesion();
   }),
 
   actions: {
@@ -97,6 +102,10 @@ export default Component.extend({
 
     ingresar() {
       this.tareaIngresar.perform();
+    },
+
+    cerrarSesion() {
+      this.tareaCerrarSesion.perform();
     },
 
     crearUsuario() {
