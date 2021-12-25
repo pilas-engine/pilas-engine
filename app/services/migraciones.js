@@ -142,7 +142,7 @@ export default Service.extend({
 
     // migración 2021-12-19: hacer que el proyecto tenga etiquetas
     if (!proyecto.get("etiquetas")) {
-      proyecto.set("etiquetas", A(['pilas']));
+      proyecto.set("etiquetas", A([]));
     }
 
     return proyecto;

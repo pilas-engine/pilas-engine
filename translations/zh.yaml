@@ -114,6 +114,8 @@ project:
   performance: 性能
   size: 大小
   title: 游戏名称
+  tags: 标签
+  maketag: 创建
 
 about:
   title: 什么是Pilas引擎？

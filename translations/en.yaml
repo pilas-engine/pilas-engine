@@ -114,6 +114,8 @@ project:
   performance: Performance
   size: Size
   title: Game title
+  tags: Tags
+  maketag: Create
 
 about:
   title: ¿What is Pilas Engine?

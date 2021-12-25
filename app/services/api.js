@@ -57,7 +57,7 @@ export default Service.extend({
     return this.post("perfiles/crear-usuario", {usuario, password: contraseña, email});
   },
 
-  publicar_juego(serializado, imagen_en_base64, ver_codigo, cantidad_de_partes, numero_de_parte, hash) {
+  publicar_juego(serializado, imagen_en_base64, ver_codigo, tags, cantidad_de_partes, numero_de_parte, hash) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -88,7 +88,8 @@ export default Service.extend({
         codigo_serializado: serializado,
         ver_codigo: ver_codigo,
         cantidad_de_partes,
-        numero_de_parte
+        numero_de_parte,
+        tags,
       };
 
       if (imagen_en_base64) {

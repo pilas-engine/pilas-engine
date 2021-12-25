@@ -114,6 +114,8 @@ project:
   performance: Rendimiento
   size: Tamaño
   title: Título del juego
+  tags: Etiquetas
+  maketag: Crear etiqueta
 
 about:
   title: ¿Qué es Pilas Engine?

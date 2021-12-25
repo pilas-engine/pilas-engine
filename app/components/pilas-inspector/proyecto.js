@@ -75,6 +75,14 @@ export default Component.extend({
       this.cuando_modifica_atributo_del_proyecto("tamaño", valor);
     },
 
+    cuando_cambia_etiquetas(valor) {
+      this.instancia_seleccionada.set("etiquetas", valor);
+
+      // se omite avisar al proyecto que cambiaron las etiquetas
+      // porque esto no necesita que se reinice el canvas.
+      //this.cuando_modifica_atributo_del_proyecto("etiquetas", valor);
+    },
+
     cuando_cambia_rendimiento(_, valor) {
       this.cuando_modifica_atributo_del_proyecto("fps", valor);
     },

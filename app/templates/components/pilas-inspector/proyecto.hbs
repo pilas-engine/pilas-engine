@@ -2,8 +2,15 @@
   <div class="texto mt1 mb2 b">Principales:</div>
 </div>
 
-<div class="pb1">
+<div class="">
   {{pilas-propiedad/nombre-del-proyecto}}
+</div>
+
+<div class="pb1">
+  {{pilas-propiedad/etiquetas
+      valor=(get instancia_seleccionada "etiquetas")
+      cuandoCambia=(action "cuando_cambia_etiquetas")
+  }}
 </div>
 
 <div class="pb1">
