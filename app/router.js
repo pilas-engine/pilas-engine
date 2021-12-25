@@ -27,7 +27,6 @@ Router.map(function() {
   this.route("api");
   this.route("experimentos");
   this.route("pruebas");
-  this.route("arduino");
   this.route("editor");
   this.route("ejemplos", function() {
     this.route("ver", { path: ":nombre" });
