@@ -64,7 +64,7 @@ export default Component.extend({
       if (respuesta.ok) {
         yield this.sesion.registrarLogin(respuesta.token);
         this.set("paso", "finalizado");
-        later(hacer_foco_en_el_primer_boton, 1);
+        later(this.hacer_foco_en_el_primer_boton, 1);
       } else {
         this.set("error", respuesta.error);
       }

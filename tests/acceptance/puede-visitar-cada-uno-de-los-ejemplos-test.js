@@ -16,7 +16,7 @@ module("Acceptance | puede visitar cada uno de los ejemplos", function(hooks) {
     assert.dom("#pilas-logo").exists();
     assert.equal(currentURL(), "/", "Está en la ruta principal");
 
-    await pulsar("Explorar ejemplos");
+    await pulsar("Ver ejemplos");
     assert.equal(currentURL(), "/ejemplos", "Ingresó en la sección de ejemplos");
 
     await esperar(PAUSA);
