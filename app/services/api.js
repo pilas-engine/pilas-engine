@@ -15,6 +15,10 @@ export default Service.extend({
     return this.get("logout/", {token});
   },
 
+  buscarEtiquetas(query) {
+    return this.get(`buscar-etiquetas/?query=${query}`);
+  },
+
   obtenerPerfilDesdeToken(token) {
     return this.get(`perfiles/mi-perfil`, {token});
   },

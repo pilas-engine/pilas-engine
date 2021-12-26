@@ -25,12 +25,18 @@
           </div>
 
           {{#if proyecto.tags}}
-            <div class="absolute truncate top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow">
+            <div class="hide-child relative absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow">
               {{#if (eq proyecto.tags.length 1)}}
                 1 etiqueta
               {{else}}
                 {{proyecto.tags.length}} etiquetas
               {{/if}}
+
+              <div class="absolute bg-white child pa1 right-0 w4 z-top">
+                {{#each proyecto.tags as |etiqueta|}}
+                  <div>{{etiqueta}}</div>
+                {{/each}}
+              </div>
             </div>
           {{/if}}
 

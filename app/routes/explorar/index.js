@@ -4,6 +4,9 @@ export default Route.extend({
   queryParams: {
     pagina: {
       replace: true
-    }
+    },
+    etiqueta: {
+      replace: true
+    },
   }
 });

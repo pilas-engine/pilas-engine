@@ -1,26 +1,41 @@
-<div class="tr bg-light-gray pa2 mb3">
-  <div>
-    Pagina {{tarea.lastSuccessful.value.pagina}} de 
-    {{tarea.lastSuccessful.value.cantidad_de_paginas}} 
+<div class="flex bg-light-gray pa2 mb3">
+  <div class="flex1 tl flex items-start">
+    <div class="pr2">
+      Etiqueta: 
+    </div>
 
-    {{#if tarea.lastSuccessful.value.tiene_anterior_pagina}}
-      <button {{action "retroceder"}}>«</button>
-    {{else}}
-      <button disabled>«</button>
-    {{/if}}
-
-    {{#if tarea.lastSuccessful.value.tiene_siguiente_pagina}}
-      <button {{action "avanzar"}}>»</button>
-    {{else}}
-      <button disabled>»</button>
-    {{/if}}
+    {{#power-select
+      search=(perform obtener_etiquetas)
+      selected=etiqueta
+      triggerClass="w5"
+      onchange=(action "cuando_cambia_etiqueta")
+      allowClear=true
+      as |opcion|
+    }}
+      {{opcion}}
+    {{/power-select}}
   </div>
 
-  <div>
-    {{#if etiqueta}}
-      {{tarea.lastSuccessful.value.total}} juegos con la etiqueta {{tarea.lastSuccessful.value.etiqueta}}.
-    {{else}}
-      {{tarea.lastSuccessful.value.total}} juegos en total.
-    {{/if}}
+  <div class="tr flex1">
+    <div>
+
+      {{#if tarea.lastSuccessful.value.tiene_anterior_pagina}}
+        <button {{action "retroceder"}}>«</button>
+      {{else}}
+        <button disabled>«</button>
+      {{/if}}
+
+      <div class="dib ph2">
+        Pagina {{tarea.lastSuccessful.value.pagina}} de 
+        {{tarea.lastSuccessful.value.cantidad_de_paginas}} 
+      </div>
+
+      {{#if tarea.lastSuccessful.value.tiene_siguiente_pagina}}
+        <button {{action "avanzar"}}>»</button>
+      {{else}}
+        <button disabled>»</button>
+      {{/if}}
+    </div>
+
   </div>
 </div>
