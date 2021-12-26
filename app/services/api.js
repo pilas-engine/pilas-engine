@@ -8,15 +8,15 @@ export default Service.extend({
   enElectron: alias("electron.enElectron"),
 
   autenticar(usuario, contraseña) {
-    return this.post("api-token-auth/", { username: usuario, password: contraseña});
+    return this.post("login/", { username: usuario, password: contraseña});
   },
 
   cerrarSesion(token) {
-    return this.get("api-token-logout/", {token: token});
+    return this.get("logout/", {token});
   },
 
   obtenerPerfilDesdeToken(token) {
-    return this.get(`perfiles/obtener-perfil-desde-token/${token}`);
+    return this.get(`perfiles/mi-perfil`, {token});
   },
 
   post(endpoint, datos) {
@@ -43,9 +43,8 @@ export default Service.extend({
       };
 
       xhr.onerror = function(error) {
-        debugger; // eslint-disable-line;
-        console.log(xhr.responseText)
-        reject({error: url, error});
+        console.log("error", xhr.responseText)
+        reject({url, error});
       };
 
       xhr.send(JSON.stringify(datos));
@@ -57,7 +56,7 @@ export default Service.extend({
     return this.post("perfiles/crear-usuario", {usuario, password: contraseña, email});
   },
 
-  publicar_juego(serializado, imagen_en_base64, ver_codigo, tags, titulo, cantidad_de_partes, numero_de_parte, hash) {
+  publicar_juego(serializado, imagen_en_base64, ver_codigo, tags, titulo, token, cantidad_de_partes, numero_de_parte, hash) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -70,6 +69,10 @@ export default Service.extend({
 
       xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-type", "application/json");
+
+      if (token) {
+        xhr.setRequestHeader("authorization", `Token ${token}`);
+      }
 
       xhr.onload = function() {
         if (xhr.status == 200) {
@@ -113,8 +116,6 @@ export default Service.extend({
     pagina = pagina || 1;
     etiqueta = etiqueta || null;
 
-    console.log([etiqueta, pagina]);
-
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = `${ENV.backendURL}/explorar/?pagina=${pagina}`;
@@ -150,13 +151,12 @@ export default Service.extend({
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
 
-
       let url = `${ENV.backendURL}/${endpoint}`;
 
       xhr.open("GET", url, true);
 
       if (headers && headers.token) {
-        xhr.setRequestHeader("HTTP_AUTHORIZATION", `token ${headers.token}`);
+        xhr.setRequestHeader("authorization", `Token ${headers.token}`);
       }
 
       xhr.onload = function() {

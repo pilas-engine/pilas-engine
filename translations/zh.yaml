@@ -249,3 +249,10 @@ only.pilas.files: 您只能打开.pilas文件
 iniciar.proyecto:
   recommended: 推荐
   title: 选择一个模板开始创建您的游戏
+
+login:
+  ingresar: 登录
+  hi: 你好
+
+explore:
+  description: 这些是电池引擎社区制作的一些游戏。请记住，您可以在此处上传您的游戏并通过按编辑器中的“导出”按钮来分享它们。

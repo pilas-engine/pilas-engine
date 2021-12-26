@@ -1,11 +1,12 @@
 home:
   welcome: ¡Hola!, te damos la bienvenida a Pilas Engine 2
   editor: Abrir el editor
-  examples: Explorar ejemplos
+  examples: Ver ejemplos
   manual: Abrir el manual
   about: Acerca de pilas
   tip.title: Consejo
   tip.text: Podés abrir un proyecto desde tu computadora arrastrando el archivo .pilas aquí.
+  explore: Explorar comunidad
 
 return: Volver
 edit: Editar
@@ -255,3 +256,7 @@ iniciar.proyecto:
 
 login:
   ingresar: Ingresar
+  hi: Hola
+
+explore:
+  description: Estos son algunos de los juegos que ha realizado la comunidad de pilas engine. Recuerda que puedes subir tus juegos aquí y compartirlos pulsando el botón "exportar" del editor.

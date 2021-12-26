@@ -9,7 +9,7 @@
       {{pilas-boton-copiar miniatura=true texto=mensaje.codigoCompleto}}
     </div>
   {{else if (eq mensaje.tipo "captura")}}
-    <img src={{mensaje.data}} alt="captura de pantalla">
+    <img src={{mensaje.data}} alt="captura de pantalla" style="width: 180px; margin-top: 10px; margin-bottom: 10px;">
   {{else}}
     <div class="f6 pb1">{{mensaje}}</div>
   {{/if}}

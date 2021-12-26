@@ -11,7 +11,7 @@
 
       {{#if sesion.autenticado}}
         <div class="dib">
-          Hola {{sesion.perfil.nombre}} - 
+          {{t "login.hi"}} {{sesion.perfil.nombre}} - 
           <a href="" {{action "cerrarSesion"}}>Salir</a>
         </div>
       {{else}}
@@ -29,65 +29,98 @@
 <div id="modal"></div>
 
 {{#pilas-modal alCerrar=(action "ocultar") visible=mostrarModal medio=true id="dialogoLogin" titulo=(t "login.ingresar")}}
-  <div class="measure">
+  <div class="center measure">
 
     {{#if etapaLogin}}
 
-      <div class="pa2 flex">
-        <label class="w4">Usuario:</label> {{input value=usuario autofocus="autofocus"}}
+      <div class="pa2 flex items-center">
+        <label class="w4">Usuario:</label> {{input tabindex="1" enter=(action "hacer_foco_en" 2) value=usuario class="pa2 input flex1" autofocus="autofocus"}}
       </div>
 
-      <div class="pa2 flex">
-        <label class="w4">Contraseña:</label> {{input type="password" value=contraseña}}
+      <div class="pa2 flex items-center">
+        <label class="w4">Contraseña:</label> {{input tabindex="2" enter=(action "hacer_click_en" 3) type="password" class="pa2 input flex1" value=contraseña}}
       </div>
 
-      <div class="pa2 ml6">
+      <div class="flex pa2 mt2">
+        <label class="w4"></label> 
+
         {{#if tareaIngresar.last.isRunning}}
-          <button class="ph2 pv1" disabled>Ingresando ...</button>
+          <button class="ph2 pv1 boton o-50" disabled>Ingresando ...</button>
         {{else}}
-          <button class="ph2 pv1" {{action "ingresar"}}>Ingresar</button>
+          <button tabindex="3" class="ph2 pv1 boton" {{action "ingresar"}}>Ingresar</button>
         {{/if}}
       </div>
 
-      <div class="red pa2">{{error}}</div>
+      <div class="flex pa2 mt2">
+        <label class="w4"></label> 
+        <div class="red flex1">{{error}}</div>
+      </div>
 
-      <div class="ph2 lh-copy f6 pt3 gray">
-        No es necesario crear un usuario para usar pilas, sin embargo puede ser
-        útil para que tus juegos queden guardados asociados a un usuario y los
-        puedas recuperar fácilmente. Si quieres crear tu usuario puedes hacer
-        click <a href="" {{action "irACrearUsuario"}}>aquí</a>.
+      <div class="flex pa2 mt2">
+        <label class="w4"></label> 
+
+        <div class="lh-copy f6 gray tj flex1">
+          No es necesario crear un usuario para usar pilas, sin embargo puede ser
+          útil para que tus juegos queden guardados asociados a un usuario y los
+          puedas recuperar fácilmente. Si quieres crear tu usuario puedes hacer
+          click <a href="" class="link" {{action "irACrearUsuario"}}>aquí</a>.
+        </div>
       </div>
 
     {{/if}}
 
     {{#if etapaCrearUsuario}}
 
-      <div class="pa2 flex">
-        <label class="w4">Usuario:</label> {{input value=usuario}}
+      <div class="pa2 flex items-center">
+        <label class="w4">Usuario:</label> 
+
+        {{input tabindex="1" enter=(action "hacer_foco_en" 2) class="pa2 input flex1" value=usuario}}
       </div>
 
-      <div class="pa2 flex">
-        <label class="w4">Email:</label> {{input value=email}}
+      <div class="pa2 flex items-center">
+        <label class="w4">Email:</label>
+
+        {{input tabindex="2" enter=(action "hacer_foco_en" 3) class="pa2 input flex1" value=email}}
       </div>
 
-      <div class="pa2 flex">
-        <label class="w4">Contraseña:</label> {{input type="password" value=contraseña}}
+      <div class="pa2 flex items-center">
+        <label class="w4">Contraseña:</label>
+
+        {{input tabindex="3" enter=(action "hacer_click_en" 4) type="password" class="pa2 input flex1" value=contraseña}}
       </div>
 
-      <div class="pa2 ml6">
+      <div class="flex pa2 mt2">
+        <label class="w4"></label> 
+
         {{#if tareaCrearUsuario.last.isRunning}}
-          <button class="ph2 pv1" disabled>Crear usuario ...</button>
+          <button class="ph2 pv1 boton o-50" disabled>Creando usuario ...</button>
         {{else}}
-          <button class="ph2 pv1" {{action "crearUsuario"}}>Crear usuario</button>
+          <button tabindex="4" class="ph2 pv1 boton" {{action "crearUsuario"}}>Crear usuario</button>
         {{/if}}
       </div>
 
-      <div class="red pa2">{{error}}</div>
-
-      <div class="pa2 f6">
-        <a href="" {{action "irALogin"}}>Volver</a>
+      <div class="flex pa2 mt3">
+        <label class="w4"></label> 
+        <div class="red flex1">{{error}}</div>
       </div>
 
+      <div class="flex pa2 mt3">
+        <label class="w4"></label> 
+        <div class="f6 flex1">
+          <a href="" {{action "volver"}}>Volver</a>
+        </div>
+      </div>
+
+    {{/if}}
+
+    {{#if etapaUsuarioCreadoYAutenticado}}
+      <div class="pa2">
+        Se ha creado correctamente tu cuenta.
+      </div>
+
+      <div class="pa2 tc mt2">
+        <button class="boton ph3" {{action "ocultar"}}>Continuar</button>
+      </div>
     {{/if}}
 
   </div>

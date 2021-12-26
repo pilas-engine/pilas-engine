@@ -1,4 +1,5 @@
 import Component from "@ember/component";
+import { later } from "@ember/runloop";
 import { computed } from "@ember/object";
 import { task, timeout } from "ember-concurrency";
 import { inject as service } from "@ember/service";
@@ -12,10 +13,9 @@ export default Component.extend({
   autenticado: false,
   saliendo: false,
 
-  usuario: "asdfasdf",
-  email: "??",
-  contraseña: "asdfasdf",
-  //sesion: null,
+  usuario: "",
+  email: "",
+  contraseña: "",
 
   etapaLogin: computed("paso", function() {
     return this.paso === "login";
@@ -24,6 +24,23 @@ export default Component.extend({
   etapaCrearUsuario: computed("paso", function() {
     return this.paso === "crearUsuario";
   }),
+
+  etapaUsuarioCreadoYAutenticado: computed("paso", function() {
+    return this.paso === "finalizado";
+  }),
+
+  hacer_foco_en_el_primer_input() {
+    let input = this.element.getElementsByTagName("input")[0];
+
+    input.focus();
+    input.select();
+  },
+
+  hacer_foco_en_el_primer_boton() {
+    let input = this.element.getElementsByTagName("button")[0];
+
+    input.focus();
+  },
 
   limpiar() {
     this.set("usuario", "");
@@ -45,7 +62,9 @@ export default Component.extend({
       let respuesta = yield this.api.crearUsuario(this.usuario, this.contraseña, this.email);
 
       if (respuesta.ok) {
-        console.log("Usuario creado", respuesta);
+        yield this.sesion.registrarLogin(respuesta.token);
+        this.set("paso", "finalizado");
+        later(hacer_foco_en_el_primer_boton, 1);
       } else {
         this.set("error", respuesta.error);
       }
@@ -66,8 +85,11 @@ export default Component.extend({
     try {
       let respuesta = yield this.api.autenticar(this.usuario, this.contraseña);
       this.send("ocultar");
-      console.log(respuesta);
+      // la creación de usuario también retorna un token
+      // para que se pueda validar la sesión sin tener que
+      // hacer otra petición.
       yield this.sesion.registrarLogin(respuesta.token);
+      this.limpiar();
     } catch (e) {
       console.log(e);
       this.set("error", "Usuario o contraseña incorrecta");
@@ -86,18 +108,32 @@ export default Component.extend({
       this.set("mostrarModal", false);
     },
 
+    hacer_foco_en(tabindex) {
+      let input = this.element.querySelector(`input[tabindex='${tabindex}'`);
+      input.focus();
+    },
+
+    hacer_click_en(tabindex) {
+      let elemento = this.element.querySelector(`[tabindex='${tabindex}'`);
+      elemento.click();
+    },
+
     mostrar() {
       this.set("mostrarModal", true);
+      this.set("paso", "login");
+      later(this, this.hacer_foco_en_el_primer_input, 1);
     },
 
     irACrearUsuario() {
       this.set("paso", "crearUsuario");
       this.limpiar();
+      later(this, this.hacer_foco_en_el_primer_input, 1);
     },
 
-    irALogin() {
+    volver() {
       this.set("paso", "login");
       this.limpiar();
+      later(this, this.hacer_foco_en_el_primer_input, 1);
     },
 
     ingresar() {

@@ -290,3 +290,13 @@ span.atajo {
   vertical-align: middle;
   border-radius: 3px;
 }
+
+.overflow-scroll { scrollbar-gutter: stable; }
+.overflow-auto { scrollbar-gutter: stable; }
+.overflow-x-visible { scrollbar-gutter: stable; }
+.overflow-x-hidden { scrollbar-gutter: stable; }
+.overflow-x-scroll { scrollbar-gutter: stable; }
+.overflow-x-auto { scrollbar-gutter: stable; }
+.overflow-y-visible { scrollbar-gutter: stable; }
+.overflow-y-scroll { scrollbar-gutter: stable; }
+.overflow-y-auto { scrollbar-gutter: stable; }

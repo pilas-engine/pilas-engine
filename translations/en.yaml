@@ -249,9 +249,14 @@ server:
 
 undo: Undo
 only.pilas.files: You can only open .pilas files
-login:
-  ingresar: Login
 
 iniciar.proyecto:
   recommended: Recommended
   title: Choose a template to start creating your game
+
+login:
+  ingresar: Login
+  hi: Hi
+
+explore:
+  description: These are some of the games made by the pilas engine community. Remember that you can upload your games here and share them by pressing the \ "export \" button in the editor.

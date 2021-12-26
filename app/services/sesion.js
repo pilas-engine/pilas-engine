@@ -38,7 +38,7 @@ export default Service.extend({
     this.set("autenticandoEnCurso", true);
 
     let token = localStorage.getItem("token-auth");
-    yield timeout(1000);
+    yield timeout(500);
 
     try {
       let respuesta = yield this.api.obtenerPerfilDesdeToken(token);

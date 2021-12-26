@@ -3,7 +3,7 @@ import { task, timeout } from "ember-concurrency";
 import { inject as service } from "@ember/service";
 
 export default Component.extend({
-  classNames: ['flex1', 'overflow-y-auto', 'pb3'],
+  classNames: ['tc', 'pb3'],
   api: service(),
   pagina: 1,
 
