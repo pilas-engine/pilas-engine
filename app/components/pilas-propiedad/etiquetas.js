@@ -15,7 +15,7 @@ export default Component.extend({
 
   sanitizar_etiqueta(etiqueta) {
     etiqueta = etiqueta.replace(/ /gim,"-");
-    etiqueta = etiqueta.replace(/[^a-z0-9áéíóúñü\.,_-]/gim,"");
+    etiqueta = etiqueta.replace(/[^a-z0-9áéíóúñü.,_-]/gim,"");
     return etiqueta.trim().toLowerCase();
   },
 

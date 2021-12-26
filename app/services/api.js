@@ -57,7 +57,7 @@ export default Service.extend({
     return this.post("perfiles/crear-usuario", {usuario, password: contraseña, email});
   },
 
-  publicar_juego(serializado, imagen_en_base64, ver_codigo, tags, cantidad_de_partes, numero_de_parte, hash) {
+  publicar_juego(serializado, imagen_en_base64, ver_codigo, tags, titulo, cantidad_de_partes, numero_de_parte, hash) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -89,6 +89,7 @@ export default Service.extend({
         ver_codigo: ver_codigo,
         cantidad_de_partes,
         numero_de_parte,
+        titulo,
         tags,
       };
 
@@ -105,6 +106,39 @@ export default Service.extend({
       var data = JSON.stringify(data_original);
 
       xhr.send(data);
+    });
+  },
+
+  obtener_lista_de_proyectos(pagina, etiqueta) {
+    pagina = pagina || 1;
+    etiqueta = etiqueta || null;
+
+    console.log([etiqueta, pagina]);
+
+    return new Promise((resolve, reject) => {
+      let xhr = new XMLHttpRequest();
+      let url = `${ENV.backendURL}/explorar/?pagina=${pagina}`;
+
+      if (etiqueta) {
+        url += `&etiqueta=${etiqueta}`;
+      }
+
+      xhr.open("GET", url, true);
+
+      xhr.onload = function() {
+        if (xhr.status == 200) {
+          let json = JSON.parse(xhr.responseText);
+          resolve(json);
+        } else {
+          reject(url);
+        }
+      };
+
+      xhr.onerror = function() {
+        reject(url);
+      };
+
+      xhr.send();
     });
   },
 

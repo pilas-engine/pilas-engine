@@ -46,6 +46,11 @@ Router.map(function() {
   });
   this.route("proyecto", { path: "proyecto/:hash" });
   this.route('iniciar-proyecto');
+
+  this.route('explorar', function() {
+    this.route('etiqueta', { path: ":etiqueta" } );
+  });
+
 });
 
 export default Router;

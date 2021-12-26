@@ -1,0 +1,67 @@
+{{yield}}
+
+{{pilas-paginador tarea=proyectos pagina=pagina etiqueta=etiqueta}}
+
+<div class="relative">
+
+  {{#if proyectos.lastSuccessful }}
+
+    {{#each proyectos.lastSuccessful.value.proyectos as |proyecto|}}
+
+      {{#link-to "proyecto" proyecto.hash class="dib link relative pointer v-top mb2 mr2 ejemplo"}}
+        <div class="flex flex-column" style="width: 180px">
+
+          <div style="width: 180px; height: 140px; overflow: hidden">
+            <img class="b--gray ba" src={{proyecto.imagen_url}}>
+          </div>
+
+          <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+            {{proyecto.titulo}} 
+
+            {{#if proyecto.perfil}}
+              (por {{proyecto.perfil}})
+            {{/if}}
+
+          </div>
+
+          {{#if proyecto.tags}}
+            <div class="absolute truncate top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow ttu">
+              {{#if (eq proyecto.tags.length 1)}}
+                1 etiqueta
+              {{else}}
+                {{proyecto.tags.length}} etiquetas
+              {{/if}}
+            </div>
+          {{/if}}
+
+        </div>
+      {{/link-to}}
+
+    {{else}}
+      <div class="gray pa4 tc">
+        No hay proyectos para mostrar
+      </div>
+    {{/each}}
+
+    {{#if proyectos.last.isRunning}}
+      <div class="absolute absolute--fill bg-white-50 z--top flex items-center justify-center">
+        {{pilas-spinner s=64}}
+      </div>
+    {{/if}}
+
+  {{else}}
+
+    {{#if proyectos.last.isRunning}}
+      {{#each (range 0 10)}}
+        <div class="dib v-top mb2 mr1">
+          <div class="relative bg-light-gray" style="width: 180px; height: 140px;"></div>
+          <div class="bg-gray pa1 white tc lato f7">
+            &nbsp;
+          </div>
+        </div>
+      {{/each}}
+    {{/if}}
+
+  {{/if}}
+
+</div>

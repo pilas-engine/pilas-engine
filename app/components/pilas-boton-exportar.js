@@ -226,18 +226,18 @@ export default Component.extend({
       if (cantidad_de_partes === 1) {
         // Si el proyecto es muy pequeño, se envía en un solo post:
         this.agregar_mensaje(`Subiendo el proyecto completo en una sola parte...`);
-        data = yield this.api.publicar_juego(proyecto_serializado, imagenEnBase64, this.ver_codigo, proyecto.etiquetas, 1, 0);
+        data = yield this.api.publicar_juego(proyecto_serializado, imagenEnBase64, this.ver_codigo, proyecto.etiquetas, proyecto.titulo, 1, 0);
       } else {
         // Si el proyecto tiene varias partes, hace un primer post para obtener el hash
         // y luego envía las siguientes partes especificando ese hash para que se carguen
         // en el mismo proyecto.
         this.agregar_mensaje(`Subiendo el proyecto en ${cantidad_de_partes} partes de 256kb`);
         this.agregar_mensaje(`Subiendo parte 1 de ${cantidad_de_partes}`);
-        data = yield this.api.publicar_juego(proyecto_en_partes[0], imagenEnBase64, this.ver_codigo, proyecto.etiquetas, cantidad_de_partes, 0);
+        data = yield this.api.publicar_juego(proyecto_en_partes[0], imagenEnBase64, this.ver_codigo, proyecto.etiquetas, proyecto.titulo, cantidad_de_partes, 0);
 
         for (let i = 1; i < cantidad_de_partes; i++) {
           this.agregar_mensaje(`Subiendo parte ${i + 1} de ${cantidad_de_partes}`);
-          yield this.api.publicar_juego(proyecto_en_partes[i], null, this.ver_codigo, proyecto.etiquetas, cantidad_de_partes, i, data.hash);
+          yield this.api.publicar_juego(proyecto_en_partes[i], null, this.ver_codigo, proyecto.etiquetas, proyecto.titulo, cantidad_de_partes, i, data.hash);
         }
       }
 

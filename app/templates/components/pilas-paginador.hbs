@@ -1,0 +1,26 @@
+<div class="tr bg-light-gray pa2 mb3">
+  <div>
+    Pagina {{tarea.lastSuccessful.value.pagina}} de 
+    {{tarea.lastSuccessful.value.cantidad_de_paginas}} 
+
+    {{#if tarea.lastSuccessful.value.tiene_anterior_pagina}}
+      <button {{action "retroceder"}}>«</button>
+    {{else}}
+      <button disabled>«</button>
+    {{/if}}
+
+    {{#if tarea.lastSuccessful.value.tiene_siguiente_pagina}}
+      <button {{action "avanzar"}}>»</button>
+    {{else}}
+      <button disabled>»</button>
+    {{/if}}
+  </div>
+
+  <div>
+    {{#if etiqueta}}
+      {{tarea.lastSuccessful.value.total}} juegos con la etiqueta {{tarea.lastSuccessful.value.etiqueta}}.
+    {{else}}
+      {{tarea.lastSuccessful.value.total}} juegos en total.
+    {{/if}}
+  </div>
+</div>
