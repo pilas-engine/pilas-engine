@@ -7,6 +7,9 @@
     {{#power-select
       search=(perform obtener_etiquetas)
       selected=etiqueta
+      loadingMessage="Buscando ..."
+      noMatchesMessage="No hay etiquetas con ese texto"
+      searchMessage="Ingresa el nombre de la etiqueta"
       triggerClass="w5"
       onchange=(action "cuando_cambia_etiqueta")
       allowClear=true

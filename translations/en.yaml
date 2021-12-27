@@ -6,6 +6,7 @@ home:
   about: About
   tip.title: Tip
   tip.text: You can open any project by drag and drop a .pilas file here.
+  explore: Explore community
 
 return: Return
 edit: Edit
