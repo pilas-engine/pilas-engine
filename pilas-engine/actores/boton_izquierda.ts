@@ -1,4 +1,4 @@
-class boton_de_control_izquierda extends Actor {
+class boton_izquierda extends Actor {
   propiedades = {
     imagen: "imagenes:botones/botones_izquierda",
     z: -100

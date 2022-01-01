@@ -1098,7 +1098,7 @@ declare class boton_de_control_espacio extends Actor {
     cuando_sale(): void;
     cuando_termina_de_hacer_click(): void;
 }
-declare class boton_de_control_izquierda extends Actor {
+declare class boton_izquierda extends Actor {
     propiedades: {
         imagen: string;
         z: number;

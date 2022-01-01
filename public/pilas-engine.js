@@ -113,7 +113,7 @@ var Actores = (function () {
         return this.crear_actor("boton");
     };
     Actores.prototype.boton_de_control_izquierda = function () {
-        return this.crear_actor("boton_de_control_izquierda");
+        return this.crear_actor("boton_izquierda");
     };
     Actores.prototype.boton_de_control_derecha = function () {
         return this.crear_actor("boton_de_control_derecha");
@@ -4957,9 +4957,9 @@ var boton_de_control_espacio = (function (_super) {
     };
     return boton_de_control_espacio;
 }(Actor));
-var boton_de_control_izquierda = (function (_super) {
-    __extends(boton_de_control_izquierda, _super);
-    function boton_de_control_izquierda() {
+var boton_izquierda = (function (_super) {
+    __extends(boton_izquierda, _super);
+    function boton_izquierda() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             imagen: "imagenes:botones/botones_izquierda",
@@ -4968,10 +4968,10 @@ var boton_de_control_izquierda = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_izquierda.prototype.iniciar = function () {
+    boton_izquierda.prototype.iniciar = function () {
         this.fijo = true;
     };
-    boton_de_control_izquierda.prototype.actualizar = function () {
+    boton_izquierda.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
         }
@@ -4980,16 +4980,16 @@ var boton_de_control_izquierda = (function (_super) {
         }
         this.pilas.control.simular_pulsacion("izquierda", this.pulsado);
     };
-    boton_de_control_izquierda.prototype.cuando_hace_click = function () {
+    boton_izquierda.prototype.cuando_hace_click = function () {
         this.pulsado = true;
     };
-    boton_de_control_izquierda.prototype.cuando_sale = function () {
+    boton_izquierda.prototype.cuando_sale = function () {
         this.pulsado = false;
     };
-    boton_de_control_izquierda.prototype.cuando_termina_de_hacer_click = function () {
+    boton_izquierda.prototype.cuando_termina_de_hacer_click = function () {
         this.pulsado = false;
     };
-    return boton_de_control_izquierda;
+    return boton_izquierda;
 }(Actor));
 var caja = (function (_super) {
     __extends(caja, _super);
@@ -5945,7 +5945,7 @@ var EscenaBase = (function () {
                 actor.cuando_termina_de_hacer_click_en_la_pantalla(x, y, evento_original);
             }
             catch (e) {
-                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando clicnk de pantalla");
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
             }
         });
     };

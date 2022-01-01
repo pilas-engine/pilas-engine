@@ -1,6 +1,6 @@
-class boton_de_control_derecha extends Actor {
+class boton_abajo extends Actor {
   propiedades = {
-    imagen: "imagenes:botones/botones_derecha",
+    imagen: "imagenes:botones/botones_abajo",
     z: -100
   };
 
@@ -17,7 +17,7 @@ class boton_de_control_derecha extends Actor {
       this.transparencia = 50;
     }
 
-    this.pilas.control.simular_pulsacion("derecha", this.pulsado);
+    this.pilas.control.simular_pulsacion("abajo", this.pulsado);
   }
 
   cuando_hace_click() {

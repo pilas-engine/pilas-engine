@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:61bcc116959221e13502bb18b49ed15a:320be03f9ba936a91344600a68731f45:467c798a4e4a5265189118ecb556e0a2$
+   $TexturePacker:SmartUpdate:01d09f441b10d0a4d1546f51d3ee0d82:a8e1817b223aee1fabe152c178b97b05:467c798a4e4a5265189118ecb556e0a2$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -45,12 +45,12 @@
 .grilla_actor_actor {width:48px; height:48px; background-position: -123px -228px}
 .grilla_actor_barra_de_energia {width:48px; height:48px; background-position: -1px -402px}
 .grilla_actor_boton {width:48px; height:48px; background-position: -1px -452px}
+.grilla_actor_boton_abajo {width:48px; height:48px; background-position: -1px -502px}
 .grilla_actor_boton_activable {width:48px; height:48px; background-position: -1px -452px}
-.grilla_actor_boton_de_control_abajo {width:48px; height:48px; background-position: -1px -502px}
-.grilla_actor_boton_de_control_arriba {width:48px; height:48px; background-position: -1px -552px}
-.grilla_actor_boton_de_control_derecha {width:48px; height:48px; background-position: -1px -602px}
-.grilla_actor_boton_de_control_espacio {width:48px; height:48px; background-position: -1px -652px}
-.grilla_actor_boton_de_control_izquierda {width:48px; height:48px; background-position: -1px -702px}
+.grilla_actor_boton_arriba {width:48px; height:48px; background-position: -1px -552px}
+.grilla_actor_boton_derecha {width:48px; height:48px; background-position: -1px -602px}
+.grilla_actor_boton_espacio {width:48px; height:48px; background-position: -1px -652px}
+.grilla_actor_boton_izquierda {width:48px; height:48px; background-position: -1px -702px}
 .grilla_actor_caja {width:48px; height:48px; background-position: -51px -402px}
 .grilla_actor_chispa {width:48px; height:48px; background-position: -63px -350px}
 .grilla_actor_conejo {width:48px; height:48px; background-position: -51px -452px}

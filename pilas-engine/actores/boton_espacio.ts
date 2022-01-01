@@ -1,6 +1,6 @@
-class boton_de_control_arriba extends Actor {
+class boton_espacio extends Actor {
   propiedades = {
-    imagen: "imagenes:botones/botones_arriba",
+    imagen: "imagenes:botones/botones_a",
     z: -100
   };
 
@@ -17,7 +17,7 @@ class boton_de_control_arriba extends Actor {
       this.transparencia = 50;
     }
 
-    this.pilas.control.simular_pulsacion("arriba", this.pulsado);
+    this.pilas.control.simular_pulsacion("espacio", this.pulsado);
   }
 
   cuando_hace_click() {
