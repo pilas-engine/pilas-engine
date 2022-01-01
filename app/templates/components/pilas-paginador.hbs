@@ -22,7 +22,7 @@
   <div class="tr flex1">
     <div>
 
-      {{#if tarea.lastSuccessful.value.tiene_anterior_pagina}}
+      {{#if tarea.last.value.tiene_anterior_pagina}}
         <button {{action "retroceder"}}>«</button>
       {{else}}
         <button disabled>«</button>
@@ -33,7 +33,7 @@
         {{tarea.lastSuccessful.value.cantidad_de_paginas}} 
       </div>
 
-      {{#if tarea.lastSuccessful.value.tiene_siguiente_pagina}}
+      {{#if tarea.last.value.tiene_siguiente_pagina}}
         <button {{action "avanzar"}}>»</button>
       {{else}}
         <button disabled>»</button>

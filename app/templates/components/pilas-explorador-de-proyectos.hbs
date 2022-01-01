@@ -66,6 +66,10 @@
           </div>
         </div>
       {{/each}}
+    {{else}}
+      {{#if proyectos.last.isError}}
+        <div class="red pa4">No se puede obtener la lista de proyectos. ¿Tienes acceso a internet?</div>
+      {{/if}}
     {{/if}}
 
   {{/if}}

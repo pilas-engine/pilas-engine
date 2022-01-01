@@ -8,6 +8,11 @@ export default Component.extend({
   pagina: 1,
 
   didInsertElement() {
+
+    if (this.pagina < 0) {
+      this.set("pagina", 1);
+    }
+
     this.proyectos.perform(this.etiqueta, this.pagina);
   },
 
