@@ -11,8 +11,13 @@
 
       {{#if sesion.autenticado}}
         <div class="dib">
-          {{t "login.hi"}} {{sesion.perfil.nombre}} - 
-          <a href="" {{action "cerrarSesion"}}>Salir</a>
+          {{t "login.hi"}} {{sesion.perfil.nombre}}
+        </div>
+
+        <div class="mt2">
+          {{#link-to "mis-juegos.index" class="link"}}Ver mis juegos {{/link-to}}
+          |  
+          <a href="" {{action "cerrarSesion"}} class="link">Salir</a>
         </div>
       {{else}}
         <div class="pa1 hover-bg-black-10 br2 pointer" {{action "mostrar"}} role="button">

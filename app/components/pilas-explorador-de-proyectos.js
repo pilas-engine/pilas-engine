@@ -18,6 +18,11 @@ export default Component.extend({
 
   proyectos: task(function *(etiqueta, pagina) {
     yield timeout(1000);
-    return yield this.api.obtener_lista_de_proyectos(pagina, etiqueta);
+
+    return yield this.api.obtener_lista_de_proyectos(
+      pagina, 
+      etiqueta, 
+      this.soloMisJuegos
+    );
   }),
 });

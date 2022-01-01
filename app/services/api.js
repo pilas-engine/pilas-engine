@@ -116,7 +116,7 @@ export default Service.extend({
     });
   },
 
-  obtener_lista_de_proyectos(pagina, etiqueta) {
+  obtener_lista_de_proyectos(pagina, etiqueta, soloMisJuegos) {
     pagina = pagina || 1;
     etiqueta = etiqueta || null;
 
@@ -124,11 +124,20 @@ export default Service.extend({
       let xhr = new XMLHttpRequest();
       let url = `${ENV.backendURL}/explorar/?pagina=${pagina}`;
 
+      if (soloMisJuegos) {
+        url += `&solo_mis_juegos=${soloMisJuegos}`;
+      }
+
       if (etiqueta) {
         url += `&etiqueta=${etiqueta}`;
       }
 
       xhr.open("GET", url, true);
+
+      if (soloMisJuegos) {
+        let token = localStorage.getItem("token-auth");
+        xhr.setRequestHeader("authorization", `Token ${token}`);
+      }
 
       xhr.onload = function() {
         if (xhr.status == 200) {

@@ -49,6 +49,7 @@ Router.map(function() {
 
   this.route('explorar', function() {});
 
+  this.route('mis-juegos', function() {});
 });
 
 export default Router;
