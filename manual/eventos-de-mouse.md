@@ -79,6 +79,32 @@ class escena2 extends Escena {
 }
 ```
 
+## ¿Cómo desactivar clicks?
+
+Si quieres que un actor deje de responder a clicks, no hace
+falta eliminar la función `cuando_hace_click` sino que puedes
+llamar a la siguiente función:
+
+```
+this.desactivar_clicks();
+```
+
+Cuando a un actor se le pide que desactive sus clicks, los
+eventos `click` pasarán a actor que esté detrás de él. No se llamará
+a la función `cuando_hace_click` ni se podrá arrastrar y soltar
+a ese actor.
+
+Luego, si quieres volver a activar los clicks deberías llamar
+a esta función:
+
+```
+this.activar_clicks();
+```
+
+Hay un ejemplo llamado `desactivar_clicks` en donde se muestra
+cómo usar esta función.
+
+
 ## ¿Cómo capturar eventos del mouse en un actor?
 
 Para capturar eventos en el contexto de un actor, tenemos que usar las mismas funciones, pero declarándolas dentro del código del actor.

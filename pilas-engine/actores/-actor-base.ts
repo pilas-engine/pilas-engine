@@ -342,11 +342,11 @@ class ActorBase {
   }
 
   desactivar_clicks() {
-    this.definir_area_de_interactividad(0, 0);
+    this.sprite.disableInteractive();
   }
 
   activar_clicks() {
-    this.definir_area_de_interactividad(this.sprite.width, this.sprite.height);
+    this.sprite.setInteractive();
   }
 
   definir_area_de_interactividad(ancho: number, alto: number) {

@@ -15,6 +15,7 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -73,6 +74,7 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" />
         <script src="./manual.js" charset="utf-8"></script>
@@ -88,11 +90,11 @@
 <p>Aquí es donde entra en juego una pieza de Pilas llamada “Intérprete”. El intérprete es como un <em>chat</em> en donde podemos comunicarnos directamente con la computadora y esperar respuestas.</p>
 <p>Para mostrar brevemente lo que puede hacer el intérprete pulsá el botón “Ejecutar”, y luego hace click en ese botón que aparece debajo del area de juego a la izquierda:</p>
 <figure>
-<img src="imagenes/interprete.assets/boton-interprete.png" alt="" /><figcaption>boton-interprete</figcaption>
+<img src="imagenes/interprete.assets/boton-interprete.png" alt="boton-interprete" /><figcaption aria-hidden="true">boton-interprete</figcaption>
 </figure>
 <p>Cuando pulses ese botón debería abrirse un area rectangular de esta forma:</p>
 <figure>
-<img src="imagenes/interprete.assets/interprete-inicial.png" alt="" /><figcaption>interprete-inicial</figcaption>
+<img src="imagenes/interprete.assets/interprete-inicial.png" alt="interprete-inicial" /><figcaption aria-hidden="true">interprete-inicial</figcaption>
 </figure>
 <p>Lo primero que aparece en esta pantalla son dos mensajes que nos envía pilas avisando que ingresamos en el modo ejecución, es decir, el juego está en funcionamiento. Y por el otro lado nos dice que hay dos variables para usar “pilas” y “actores”.</p>
 <p>Pero antes de hablar de variables, vamos a probar exactamente qué nos permite hacer el intérprete.</p>
@@ -100,53 +102,53 @@
 <p>Hagamos una prueba, escribí <code>2+2</code> en el intérprete así probamos la interacción con la computadora.</p>
 <p>En area en donde se puede escribir es la que está marcada con ese cursor <code>›</code>:</p>
 <figure>
-<img src="imagenes/interprete.assets/suma.png" alt="" /><figcaption>suma</figcaption>
+<img src="imagenes/interprete.assets/suma.png" alt="suma" /><figcaption aria-hidden="true">suma</figcaption>
 </figure>
 <p>Luego pulsa la tecla “Enter” y la computadora te va a responder:</p>
 <figure>
-<img src="imagenes/interprete.assets/respuesta.png" alt="" /><figcaption>respuesta</figcaption>
+<img src="imagenes/interprete.assets/respuesta.png" alt="respuesta" /><figcaption aria-hidden="true">respuesta</figcaption>
 </figure>
 <p>El intérprete va a responder a cada una de las cuentas con el resultado, como si fuera una calculadora aritmética.</p>
 <p>Sin embargo, hace más que eso, si le pedimos incorrectamente algo nos dará un mensaje de error:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">2</span> <span class="op">+</span> numero<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> numero<span class="op">;</span></span></code></pre></div>
 <figure>
-<img src="imagenes/interprete.assets/error.png" alt="" /><figcaption>error</figcaption>
+<img src="imagenes/interprete.assets/error.png" alt="error" /><figcaption aria-hidden="true">error</figcaption>
 </figure>
 <p>Y esto está bien, si bien el texto rojo parece algo grave, no lo es. La computadora nos explica que no sabe de que se trata “numero” y por lo tanto no sabría decirnos el resultado de esa cuenta.</p>
 <p>Si le indicamos que el “numero” es <code>10</code> sí va a poder decirnos el resultado:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>numero <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">2</span> <span class="op">+</span> numero<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>numero <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> numero<span class="op">;</span></span></code></pre></div>
 <figure>
-<img src="imagenes/interprete.assets/resultado-con-variable.png" alt="" /><figcaption>resultado-con-variable</figcaption>
+<img src="imagenes/interprete.assets/resultado-con-variable.png" alt="resultado-con-variable" /><figcaption aria-hidden="true">resultado-con-variable</figcaption>
 </figure>
 <p>¡Claro!, el resultado es <code>12</code> ya que creamos una variable llamada “numero” con el valor de 10.</p>
 <h2 id="accediendo-a-las-variables-pilas-y-actores">Accediendo a las variables pilas y actores</h2>
 <p>Ahora bien, el intérprete no solo puede realizar cuentas aritméticas, también nos da la posibilidad de realizar pruebas, crear o modificar los actores en la pantalla y varias cosas mas.</p>
 <p>Al principio de esta sección mencioné que pilas nos avisaba que había dos variables listas para utilizar “pilas” y “actores”:</p>
 <figure>
-<img src="imagenes/interprete.assets/variables.png" alt="" /><figcaption>variables</figcaption>
+<img src="imagenes/interprete.assets/variables.png" alt="variables" /><figcaption aria-hidden="true">variables</figcaption>
 </figure>
 <p>Estas dos palabras se denominan variables, porque representan un nombre que almacena un valor asignado con anterioridad. En nuestro caso, “numero” también es una variable, porque básicamente es el nombre que le dimos al valor <code>10</code>.</p>
 <p>Ahora bien, ¿qué podemos hacer con estas variables?.</p>
 <p>La variable <code>pilas</code> nos permite acceder a todas las funcionalidades del motor. Si escribimos algo como:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">nave</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">nave</span>()</span></code></pre></div>
 <p>Vas a notar que aparecerá una nave en la pantalla como respuesta al código que escribimos:</p>
 <figure>
-<img src="imagenes/interprete.assets/creacion-de-la-nave.png" alt="" /><figcaption>image-20200604161609718</figcaption>
+<img src="imagenes/interprete.assets/creacion-de-la-nave.png" alt="image-20200604161609718" /><figcaption aria-hidden="true">image-20200604161609718</figcaption>
 </figure>
 <p>También vas a notar que en el intérprete aparece el mensaje <code>&lt;nave en (0, 0)&gt;</code>, esto es así para indicarnos que obedeció a nuestras orden. Pilas creó el actor nave y lo dejó en la posición <code>(0, 0)</code> de la pantalla.</p>
 <p>Si haces click en la pantalla, vas a notar que la nave está “viva”, se puede mover y disparar usando el teclado.</p>
 <figure>
-<img src="imagenes/interprete.assets/nave-disparando.png" alt="" /><figcaption>image-20200604161800642</figcaption>
+<img src="imagenes/interprete.assets/nave-disparando.png" alt="image-20200604161800642" /><figcaption aria-hidden="true">image-20200604161800642</figcaption>
 </figure>
 <p>Ahora bien, aquí es donde entra en juego la otra variable que te comenté llamada “actores”. Esta variable va a permitirnos referirnos a cualquier actor dentro de la escena.</p>
 <p>Escribí estas lineas de código en el intérprete para ver el resultado:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>nave<span class="op">.</span><span class="at">escala</span> <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>nave<span class="op">.</span><span class="at">rotacion</span> <span class="op">=</span> <span class="dv">90</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>nave<span class="op">.</span><span class="fu">decir</span>(<span class="st">&quot;hola&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nave<span class="op">.</span><span class="at">escala</span> <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>nave<span class="op">.</span><span class="at">rotacion</span> <span class="op">=</span> <span class="dv">90</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>nave<span class="op">.</span><span class="fu">decir</span>(<span class="st">&quot;hola&quot;</span>)</span></code></pre></div>
 <p>Lo que deberías ver es que la nave cambia de tamaño, apunta hacia arriba y además muestra un mensaje:</p>
 <figure>
-<img src="imagenes/interprete.assets/nave-dice-hola.png" alt="" /><figcaption>nave-dice-hola</figcaption>
+<img src="imagenes/interprete.assets/nave-dice-hola.png" alt="nave-dice-hola" /><figcaption aria-hidden="true">nave-dice-hola</figcaption>
 </figure>
 <p>Esto es bastante útil, porque el código que escribimos en el intérprete también se puede trasladar al editor. Si tenemos dudas sobre alguna función o forma de hacer algo en pilas podemos probar en el intérprete, y si todo sale bien, llevarlo al editor y que forma parte de nuestro juego.</p>
 <h2 id="algunos-consejos">Algunos consejos</h2>
@@ -154,11 +156,11 @@
 <p>Y como varias de las personas que usamos pilas venimos de ese mundo, el intérprete está diseñado en base a la experiencia de usar intérpretes durante muchos años… Un ejemplo de esto es el sistema de auto completado:</p>
 <p>Siempre que escribas una variable conocida el intérprete va a intentar ayudarte a escribir código de esta forma:</p>
 <figure>
-<img src="imagenes/interprete.assets/autocompletado.png" alt="" /><figcaption>autocompletado</figcaption>
+<img src="imagenes/interprete.assets/autocompletado.png" alt="autocompletado" /><figcaption aria-hidden="true">autocompletado</figcaption>
 </figure>
 <p>Otra necesidad muy común es querer volver a repetir una instrucción anterior, para eso puedes pulsar las flechitas del teclado hacia arriba y abajo para navegar:</p>
 <figure>
-<img src="imagenes/interprete.assets/autocompletado-historico.gif" alt="" /><figcaption>autocompletado-historico</figcaption>
+<img src="imagenes/interprete.assets/autocompletado-historico.gif" alt="autocompletado-historico" /><figcaption aria-hidden="true">autocompletado-historico</figcaption>
 </figure>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>

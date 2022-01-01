@@ -3475,10 +3475,10 @@ var ActorBase = (function () {
         configurable: true
     });
     ActorBase.prototype.desactivar_clicks = function () {
-        this.definir_area_de_interactividad(0, 0);
+        this.sprite.disableInteractive();
     };
     ActorBase.prototype.activar_clicks = function () {
-        this.definir_area_de_interactividad(this.sprite.width, this.sprite.height);
+        this.sprite.setInteractive();
     };
     ActorBase.prototype.definir_area_de_interactividad = function (ancho, alto) {
         if (this.sprite) {
@@ -5945,7 +5945,7 @@ var EscenaBase = (function () {
                 actor.cuando_termina_de_hacer_click_en_la_pantalla(x, y, evento_original);
             }
             catch (e) {
-                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando click de pantalla");
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando clicnk de pantalla");
             }
         });
     };
