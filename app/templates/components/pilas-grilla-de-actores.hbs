@@ -1,7 +1,12 @@
 {{yield}}
 
+<div class="tl mb2">
+  {{pilas-input-filtro filtro=filtro}}
+</div>
+
 {{#each actores as |actor|}}
   {{pilas-celda-de-actor 
+        filtro=filtro
         actor_seleccionado=actor_seleccionado 
         actor=actor 
         cuandoQuiereCrearActor=cuandoQuiereCrearActor}}

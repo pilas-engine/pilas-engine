@@ -1,6 +1,6 @@
 <div test-celda-actor
   class="
-    celda-actor dib
+    celda-actor 
     ba pa2 button
     br2
     verdana f6 link pointer
@@ -8,6 +8,8 @@
     unselectable
     v-top
     mb1
+
+    {{if debeOcultarPorFiltro "dn" "dib"}}
 
     {{if (eq actor actor_seleccionado) "bg-black-20" "hover-bg-black-10"}}
 "
@@ -22,8 +24,8 @@
       <div class="sprite grilla_actor_{{actor.nombre}} mw-100 mh-100"></div>
     </div>
 
-    <div class="f6 tc mt2 h1 texto truncate">
-      {{actor.nombre}}
+    <div class="f6 tc texto">
+      {{nombreSeparadoEnPalabras}}
     </div>
 
   </div>
