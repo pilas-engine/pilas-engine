@@ -223,7 +223,24 @@ class ModoEditor extends Modo {
   crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara() {
     let escena = this;
 
+    // Esta variable se ha creado porque había un bug cuando se
+    // arrastraba un actor por fuera de la pantalla. Phaser continúa
+    // arrastrando el actor cuando se pierde el foco del canvas, así
+    // que esta variable sirve para dejar de mover al actor cuando
+    // se pierde el foco del canvas.
+    let actor_que_se_esta_arrastrando = null;
+
     this.input.on("dragstart", (pointer, gameObject) => {
+
+      // Caso especial, cuando se detecta un drag dentro del
+      // editor se tiene que ignorar salvo que se haga dentro
+      // del canvas del juego.
+      if (pointer.downElement && pointer.downElement.tagName !== "CANVAS") {
+        return false;
+      }
+
+      actor_que_se_esta_arrastrando = gameObject;
+
       this.mover_cursor_de_la_grilla(pointer.worldX, pointer.worldY);
       this.posicion_anterior_de_arrastre = pointer.position.clone();
 
@@ -237,8 +254,15 @@ class ModoEditor extends Modo {
         escena.input.setDefaultCursor("-webkit-grabbing");
       }
     });
-
+      
     this.input.on("drag", (pointer, gameObject, dragX, dragY) => {
+
+      // Si el drag sigue activo, pero se salió del canvas con
+      // el mouse, se desactivan todos los eventos que siguen.
+      if (!actor_que_se_esta_arrastrando) {
+        return null;
+      }
+
       if (gameObject["es_fondo"]) {
         this.desplazar_la_camara_desde_el_evento_drag(pointer);
       } else {
@@ -246,7 +270,18 @@ class ModoEditor extends Modo {
       }
     });
 
-    this.input.on("dragend", (pointer, gameObject) => {
+    // Aquí se ha creado una función para ser re-utilizada tanto
+    // en el evento dragend como gameout (cuando el mouse sale del canvas).
+    const cuando_termina_de_mover_un_actor = (pointer, gameObject) => {
+
+      // En este caso, si el gameObject es null es porque se dejó
+      // el canvas mientras se movía un actor.
+      if (!gameObject) {
+        return;
+      }
+
+      actor_que_se_esta_arrastrando = null;
+
       escena.input.setDefaultCursor("default");
 
       if (!gameObject["es_fondo"]) {
@@ -256,6 +291,16 @@ class ModoEditor extends Modo {
 
         let posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
         escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
+      }
+    }
+
+    this.input.on("dragend", cuando_termina_de_mover_un_actor);
+
+    // Este evento se captura para evitar que el usuario siga
+    // arrastrando los actores cuando el mouse sale del canvas,
+    this.input.on('gameout', () => {
+      if (actor_que_se_esta_arrastrando) {
+        cuando_termina_de_mover_un_actor(null, actor_que_se_esta_arrastrando);
       }
     });
   }

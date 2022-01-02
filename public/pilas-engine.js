@@ -112,20 +112,20 @@ var Actores = (function () {
     Actores.prototype.boton = function () {
         return this.crear_actor("boton");
     };
-    Actores.prototype.boton_de_control_izquierda = function () {
+    Actores.prototype.boton_izquierda = function () {
         return this.crear_actor("boton_izquierda");
     };
-    Actores.prototype.boton_de_control_derecha = function () {
-        return this.crear_actor("boton_de_control_derecha");
+    Actores.prototype.boton_derecha = function () {
+        return this.crear_actor("boton_derecha");
     };
-    Actores.prototype.boton_de_control_arriba = function () {
-        return this.crear_actor("boton_de_control_arriba");
+    Actores.prototype.boton_arriba = function () {
+        return this.crear_actor("boton_arriba");
     };
-    Actores.prototype.boton_de_control_abajo = function () {
-        return this.crear_actor("boton_de_control_abajo");
+    Actores.prototype.boton_abajo = function () {
+        return this.crear_actor("boton_abajo");
     };
-    Actores.prototype.boton_de_control_espacio = function () {
-        return this.crear_actor("boton_de_control_espacio");
+    Actores.prototype.boton_espacio = function () {
+        return this.crear_actor("boton_espacio");
     };
     Actores.prototype.robot = function () {
         return this.crear_actor("robot");
@@ -4765,6 +4765,40 @@ var boton = (function (_super) {
     };
     return boton;
 }(ActorTextoBase));
+var boton_abajo = (function (_super) {
+    __extends(boton_abajo, _super);
+    function boton_abajo() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.propiedades = {
+            imagen: "imagenes:botones/botones_abajo",
+            z: -100
+        };
+        _this.pulsado = false;
+        return _this;
+    }
+    boton_abajo.prototype.iniciar = function () {
+        this.fijo = true;
+    };
+    boton_abajo.prototype.actualizar = function () {
+        if (this.pulsado) {
+            this.transparencia = 0;
+        }
+        else {
+            this.transparencia = 50;
+        }
+        this.pilas.control.simular_pulsacion("abajo", this.pulsado);
+    };
+    boton_abajo.prototype.cuando_hace_click = function () {
+        this.pulsado = true;
+    };
+    boton_abajo.prototype.cuando_sale = function () {
+        this.pulsado = false;
+    };
+    boton_abajo.prototype.cuando_termina_de_hacer_click = function () {
+        this.pulsado = false;
+    };
+    return boton_abajo;
+}(Actor));
 var boton_activable = (function (_super) {
     __extends(boton_activable, _super);
     function boton_activable() {
@@ -4821,43 +4855,9 @@ var boton_activable = (function (_super) {
     };
     return boton_activable;
 }(ActorTextoBase));
-var boton_de_control_abajo = (function (_super) {
-    __extends(boton_de_control_abajo, _super);
-    function boton_de_control_abajo() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.propiedades = {
-            imagen: "imagenes:botones/botones_abajo",
-            z: -100
-        };
-        _this.pulsado = false;
-        return _this;
-    }
-    boton_de_control_abajo.prototype.iniciar = function () {
-        this.fijo = true;
-    };
-    boton_de_control_abajo.prototype.actualizar = function () {
-        if (this.pulsado) {
-            this.transparencia = 0;
-        }
-        else {
-            this.transparencia = 50;
-        }
-        this.pilas.control.simular_pulsacion("abajo", this.pulsado);
-    };
-    boton_de_control_abajo.prototype.cuando_hace_click = function () {
-        this.pulsado = true;
-    };
-    boton_de_control_abajo.prototype.cuando_sale = function () {
-        this.pulsado = false;
-    };
-    boton_de_control_abajo.prototype.cuando_termina_de_hacer_click = function () {
-        this.pulsado = false;
-    };
-    return boton_de_control_abajo;
-}(Actor));
-var boton_de_control_arriba = (function (_super) {
-    __extends(boton_de_control_arriba, _super);
-    function boton_de_control_arriba() {
+var boton_arriba = (function (_super) {
+    __extends(boton_arriba, _super);
+    function boton_arriba() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             imagen: "imagenes:botones/botones_arriba",
@@ -4866,10 +4866,10 @@ var boton_de_control_arriba = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_arriba.prototype.iniciar = function () {
+    boton_arriba.prototype.iniciar = function () {
         this.fijo = true;
     };
-    boton_de_control_arriba.prototype.actualizar = function () {
+    boton_arriba.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
         }
@@ -4878,20 +4878,20 @@ var boton_de_control_arriba = (function (_super) {
         }
         this.pilas.control.simular_pulsacion("arriba", this.pulsado);
     };
-    boton_de_control_arriba.prototype.cuando_hace_click = function () {
+    boton_arriba.prototype.cuando_hace_click = function () {
         this.pulsado = true;
     };
-    boton_de_control_arriba.prototype.cuando_sale = function () {
+    boton_arriba.prototype.cuando_sale = function () {
         this.pulsado = false;
     };
-    boton_de_control_arriba.prototype.cuando_termina_de_hacer_click = function () {
+    boton_arriba.prototype.cuando_termina_de_hacer_click = function () {
         this.pulsado = false;
     };
-    return boton_de_control_arriba;
+    return boton_arriba;
 }(Actor));
-var boton_de_control_derecha = (function (_super) {
-    __extends(boton_de_control_derecha, _super);
-    function boton_de_control_derecha() {
+var boton_derecha = (function (_super) {
+    __extends(boton_derecha, _super);
+    function boton_derecha() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             imagen: "imagenes:botones/botones_derecha",
@@ -4900,10 +4900,10 @@ var boton_de_control_derecha = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_derecha.prototype.iniciar = function () {
+    boton_derecha.prototype.iniciar = function () {
         this.fijo = true;
     };
-    boton_de_control_derecha.prototype.actualizar = function () {
+    boton_derecha.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
         }
@@ -4912,20 +4912,20 @@ var boton_de_control_derecha = (function (_super) {
         }
         this.pilas.control.simular_pulsacion("derecha", this.pulsado);
     };
-    boton_de_control_derecha.prototype.cuando_hace_click = function () {
+    boton_derecha.prototype.cuando_hace_click = function () {
         this.pulsado = true;
     };
-    boton_de_control_derecha.prototype.cuando_sale = function () {
+    boton_derecha.prototype.cuando_sale = function () {
         this.pulsado = false;
     };
-    boton_de_control_derecha.prototype.cuando_termina_de_hacer_click = function () {
+    boton_derecha.prototype.cuando_termina_de_hacer_click = function () {
         this.pulsado = false;
     };
-    return boton_de_control_derecha;
+    return boton_derecha;
 }(Actor));
-var boton_de_control_espacio = (function (_super) {
-    __extends(boton_de_control_espacio, _super);
-    function boton_de_control_espacio() {
+var boton_espacio = (function (_super) {
+    __extends(boton_espacio, _super);
+    function boton_espacio() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.propiedades = {
             imagen: "imagenes:botones/botones_a",
@@ -4934,10 +4934,10 @@ var boton_de_control_espacio = (function (_super) {
         _this.pulsado = false;
         return _this;
     }
-    boton_de_control_espacio.prototype.iniciar = function () {
+    boton_espacio.prototype.iniciar = function () {
         this.fijo = true;
     };
-    boton_de_control_espacio.prototype.actualizar = function () {
+    boton_espacio.prototype.actualizar = function () {
         if (this.pulsado) {
             this.transparencia = 0;
         }
@@ -4946,16 +4946,16 @@ var boton_de_control_espacio = (function (_super) {
         }
         this.pilas.control.simular_pulsacion("espacio", this.pulsado);
     };
-    boton_de_control_espacio.prototype.cuando_hace_click = function () {
+    boton_espacio.prototype.cuando_hace_click = function () {
         this.pulsado = true;
     };
-    boton_de_control_espacio.prototype.cuando_sale = function () {
+    boton_espacio.prototype.cuando_sale = function () {
         this.pulsado = false;
     };
-    boton_de_control_espacio.prototype.cuando_termina_de_hacer_click = function () {
+    boton_espacio.prototype.cuando_termina_de_hacer_click = function () {
         this.pulsado = false;
     };
-    return boton_de_control_espacio;
+    return boton_espacio;
 }(Actor));
 var boton_izquierda = (function (_super) {
     __extends(boton_izquierda, _super);
@@ -9121,7 +9121,12 @@ var ModoEditor = (function (_super) {
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara = function () {
         var _this = this;
         var escena = this;
+        var actor_que_se_esta_arrastrando = null;
         this.input.on("dragstart", function (pointer, gameObject) {
+            if (pointer.downElement && pointer.downElement.tagName !== "CANVAS") {
+                return false;
+            }
+            actor_que_se_esta_arrastrando = gameObject;
             _this.mover_cursor_de_la_grilla(pointer.worldX, pointer.worldY);
             _this.posicion_anterior_de_arrastre = pointer.position.clone();
             if (!gameObject["es_fondo"]) {
@@ -9135,6 +9140,9 @@ var ModoEditor = (function (_super) {
             }
         });
         this.input.on("drag", function (pointer, gameObject, dragX, dragY) {
+            if (!actor_que_se_esta_arrastrando) {
+                return null;
+            }
             if (gameObject["es_fondo"]) {
                 _this.desplazar_la_camara_desde_el_evento_drag(pointer);
             }
@@ -9142,7 +9150,11 @@ var ModoEditor = (function (_super) {
                 _this.desplazar_actor_desde_el_evento_drag(gameObject, pointer);
             }
         });
-        this.input.on("dragend", function (pointer, gameObject) {
+        var cuando_termina_de_mover_un_actor = function (pointer, gameObject) {
+            if (!gameObject) {
+                return;
+            }
+            actor_que_se_esta_arrastrando = null;
             escena.input.setDefaultCursor("default");
             if (!gameObject["es_fondo"]) {
                 if (_this.usar_grilla) {
@@ -9150,6 +9162,12 @@ var ModoEditor = (function (_super) {
                 }
                 var posicion = escena.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(gameObject.x, gameObject.y);
                 escena.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", { id: gameObject.id, x: posicion.x, y: posicion.y });
+            }
+        };
+        this.input.on("dragend", cuando_termina_de_mover_un_actor);
+        this.input.on('gameout', function () {
+            if (actor_que_se_esta_arrastrando) {
+                cuando_termina_de_mover_un_actor(null, actor_que_se_esta_arrastrando);
             }
         });
     };
