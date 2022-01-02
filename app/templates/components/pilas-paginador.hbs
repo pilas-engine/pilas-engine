@@ -3,7 +3,7 @@
     {{#unless soloMisJuegos}}
       <div class="flex1 tl flex items-start">
         <div class="pr2">
-          Etiqueta: 
+          {{t "tag"}}:
         </div>
 
         {{#power-select
@@ -32,7 +32,7 @@
         {{/if}}
 
         <div class="dib ph2">
-          Pagina {{tarea.lastSuccessful.value.pagina}} de 
+          {{t "page"}} {{tarea.lastSuccessful.value.pagina}} de 
           {{tarea.lastSuccessful.value.cantidad_de_paginas}} 
         </div>
 

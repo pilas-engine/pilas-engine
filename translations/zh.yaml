@@ -260,6 +260,8 @@ login:
 explore:
   description: 这些是电池引擎社区制作的一些游戏。请记住，您可以在此处上传您的游戏并通过按编辑器中的“导出”按钮来分享它们。
 
+page: 页
+tag: 标签
 
 games:
   title: 我的游戏
