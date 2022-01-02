@@ -254,6 +254,13 @@ iniciar.proyecto:
 login:
   ingresar: 登录
   hi: 你好
+  logout: 登出
+  games: 看我的游戏
 
 explore:
   description: 这些是电池引擎社区制作的一些游戏。请记住，您可以在此处上传您的游戏并通过按编辑器中的“导出”按钮来分享它们。
+
+
+games:
+  title: 我的游戏
+  description: 这些是您在 pilas 的云中导出并发布的游戏。

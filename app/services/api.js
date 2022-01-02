@@ -116,7 +116,7 @@ export default Service.extend({
     });
   },
 
-  obtener_lista_de_proyectos(pagina, etiqueta, soloMisJuegos) {
+  obtener_lista_de_proyectos(pagina, etiqueta, soloMisJuegos, mostrarRecientesAgrupados) {
     pagina = pagina || 1;
     etiqueta = etiqueta || null;
 
@@ -130,6 +130,10 @@ export default Service.extend({
 
       if (etiqueta) {
         url += `&etiqueta=${etiqueta}`;
+
+        if (mostrarRecientesAgrupados) {
+          url += `&mostrar_recientes_agrupados=true`;
+        }
       }
 
       xhr.open("GET", url, true);

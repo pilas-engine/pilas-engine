@@ -258,6 +258,12 @@ iniciar.proyecto:
 login:
   ingresar: Login
   hi: Hi
+  logout: Logout
+  games: see my games
 
 explore:
-  description: These are some of the games made by the pilas engine community. Remember that you can upload your games here and share them by pressing the \ "export \" button in the editor.
+  description: These are some of the games made by the pilas engine community. Remember that you can upload your games here and share them by pressing the "export" button in the editor.
+
+games:
+  title: My games
+  description: These are the games that you have exported and published in the pilas's cloud.

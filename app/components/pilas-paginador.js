@@ -4,6 +4,7 @@ import { task, timeout } from "ember-concurrency";
 
 export default Component.extend({
   api: service(),
+  mostrarRecientesAgrupados: false,
 
   obtener_etiquetas: task(function *(query) {
     yield timeout(500);
@@ -22,7 +23,12 @@ export default Component.extend({
     cuando_cambia_etiqueta(etiqueta) {
       this.set("etiqueta", etiqueta);
       this.set("pagina", 1);
-      this.tarea.perform(this.etiqueta, this.pagina);
+      this.tarea.perform(this.etiqueta, this.pagina, this.mostrarRecientesAgrupados);
+    },
+    cuando_cambia_agrupador(value) {
+      this.set("pagina", 1);
+      this.set("mostrarRecientesAgrupados", value.target.checked);
+      this.tarea.perform(this.etiqueta, this.pagina, this.mostrarRecientesAgrupados);
     }
   }
 });

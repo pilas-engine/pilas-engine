@@ -1,0 +1,34 @@
+{{#link-to "proyecto" proyecto.hash class="dib link relative pointer v-top mb2 mr2 ejemplo"}}
+  <div class="flex flex-column" style="width: 180px">
+
+    <div style="width: 180px; height: 140px; overflow: hidden">
+      <img class="b--gray ba" src={{proyecto.imagen_url}} alt="imagen de proyecto">
+    </div>
+
+    <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+      {{proyecto.titulo}} 
+
+      {{#if proyecto.perfil}}
+        (por {{proyecto.perfil}})
+      {{/if}}
+
+    </div>
+
+    {{#if proyecto.tags}}
+      <div class="hide-child relative absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow">
+        {{#if (eq proyecto.tags.length 1)}}
+          1 etiqueta
+        {{else}}
+          {{proyecto.tags.length}} etiquetas
+        {{/if}}
+
+        <div class="absolute bg-white child pa1 right-0 w4 z-top">
+          {{#each proyecto.tags as |etiqueta|}}
+            <div>{{etiqueta}}</div>
+          {{/each}}
+        </div>
+      </div>
+    {{/if}}
+
+  </div>
+{{/link-to}}

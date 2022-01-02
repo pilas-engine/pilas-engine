@@ -16,13 +16,14 @@ export default Component.extend({
     this.proyectos.perform(this.etiqueta, this.pagina);
   },
 
-  proyectos: task(function *(etiqueta, pagina) {
+  proyectos: task(function *(etiqueta, pagina, mostrarRecientesAgrupados) {
     yield timeout(1000);
 
     return yield this.api.obtener_lista_de_proyectos(
       pagina, 
       etiqueta, 
-      this.soloMisJuegos
+      this.soloMisJuegos,
+      mostrarRecientesAgrupados
     );
   }),
 });

@@ -1,46 +1,60 @@
-<div class="flex bg-light-gray pa2 mb3">
-  {{#unless soloMisJuegos}}
-    <div class="flex1 tl flex items-start">
-      <div class="pr2">
-        Etiqueta: 
+<div class="bg-light-gray pa2 mb3">
+  <div class="flex">
+    {{#unless soloMisJuegos}}
+      <div class="flex1 tl flex items-start">
+        <div class="pr2">
+          Etiqueta: 
+        </div>
+
+        {{#power-select
+          search=(perform obtener_etiquetas)
+          selected=etiqueta
+          loadingMessage="Buscando ..."
+          noMatchesMessage="No hay etiquetas con ese texto"
+          searchMessage="Ingresa el nombre de la etiqueta"
+          triggerClass="w5"
+          onchange=(action "cuando_cambia_etiqueta")
+          allowClear=true
+          as |opcion|
+        }}
+          {{opcion}}
+        {{/power-select}}
+      </div>
+    {{/unless}}
+
+    <div class="tr flex1">
+      <div>
+
+        {{#if tarea.last.value.tiene_anterior_pagina}}
+          <button {{action "retroceder"}}>«</button>
+        {{else}}
+          <button disabled>«</button>
+        {{/if}}
+
+        <div class="dib ph2">
+          Pagina {{tarea.lastSuccessful.value.pagina}} de 
+          {{tarea.lastSuccessful.value.cantidad_de_paginas}} 
+        </div>
+
+        {{#if tarea.last.value.tiene_siguiente_pagina}}
+          <button {{action "avanzar"}}>»</button>
+        {{else}}
+          <button disabled>»</button>
+        {{/if}}
       </div>
 
-      {{#power-select
-        search=(perform obtener_etiquetas)
-        selected=etiqueta
-        loadingMessage="Buscando ..."
-        noMatchesMessage="No hay etiquetas con ese texto"
-        searchMessage="Ingresa el nombre de la etiqueta"
-        triggerClass="w5"
-        onchange=(action "cuando_cambia_etiqueta")
-        allowClear=true
-        as |opcion|
-      }}
-        {{opcion}}
-      {{/power-select}}
     </div>
-  {{/unless}}
-
-  <div class="tr flex1">
-    <div>
-
-      {{#if tarea.last.value.tiene_anterior_pagina}}
-        <button {{action "retroceder"}}>«</button>
-      {{else}}
-        <button disabled>«</button>
-      {{/if}}
-
-      <div class="dib ph2">
-        Pagina {{tarea.lastSuccessful.value.pagina}} de 
-        {{tarea.lastSuccessful.value.cantidad_de_paginas}} 
-      </div>
-
-      {{#if tarea.last.value.tiene_siguiente_pagina}}
-        <button {{action "avanzar"}}>»</button>
-      {{else}}
-        <button disabled>»</button>
-      {{/if}}
-    </div>
-
   </div>
+
+  {{#if etiqueta}}
+    <div class="pa2 tl">
+      <label>
+        {{input 
+          type="checkbox" 
+          change=(action "cuando_cambia_agrupador") 
+          checked=mostrarRecientesAgrupados}}
+        Mostrar los más recientes agrupados por persona
+      </label>
+    </div>
+  {{/if}}
 </div>

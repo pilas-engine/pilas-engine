@@ -11,48 +11,65 @@
 
   {{#if proyectos.lastSuccessful }}
 
+    {{!-- hay dos casos a contemplar:
+
+    1 - Si se pide ala lista directamente, la tarea retorna
+    una lista de proyectos en value.
+
+    Este es el caso más común, por ejemplo si se piden todos
+    los proyectos o los proyectos con etiquetas.
+
+    Estos son algunos ejemplos de endpoints que disparan el
+    caso 1:
+
+      - /explorar/?pagina=1
+      - /explorar/?pagina=3
+      - /explorar/?pagina=1&etiqueta=club-de-chicas-programadoras
+
+    2 - El otro caso, aparece si se llama al endpoint con una
+    bandera llamada `mostrar_recientes_agrupados`.
+
+    En este caso, se retorna una lista con diccionarios que tienen
+    el nombre del usuario y la lista de proyectos que subió con
+    ese tag.
+
+    Por ejemplo, el caso 2 se puede generar si la aplicación pide
+    los datos al servidor así:
+
+      - /explorar/?pagina=1&etiqueta=club-de-chicas-programadoras&mostrar_recientes_agrupados=true
+
+    (tener en cuenta que cuando se pide agrupar los juegos
+    por usuario también se tiene que usar el filtro de etiqueta. Además, el
+    resultado llegará sin paginar en este caso)
+
+    --}}
+
+    {{! CASO 1: llegan los proyectos en una lista (ver descripción más arriba) }}
     {{#each proyectos.lastSuccessful.value.proyectos as |proyecto|}}
 
-      {{#link-to "proyecto" proyecto.hash class="dib link relative pointer v-top mb2 mr2 ejemplo"}}
-        <div class="flex flex-column" style="width: 180px">
-
-          <div style="width: 180px; height: 140px; overflow: hidden">
-            <img class="b--gray ba" src={{proyecto.imagen_url}} alt="imagen de proyecto">
-          </div>
-
-          <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
-            {{proyecto.titulo}} 
-
-            {{#if proyecto.perfil}}
-              (por {{proyecto.perfil}})
-            {{/if}}
-
-          </div>
-
-          {{#if proyecto.tags}}
-            <div class="hide-child relative absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow">
-              {{#if (eq proyecto.tags.length 1)}}
-                1 etiqueta
-              {{else}}
-                {{proyecto.tags.length}} etiquetas
-              {{/if}}
-
-              <div class="absolute bg-white child pa1 right-0 w4 z-top">
-                {{#each proyecto.tags as |etiqueta|}}
-                  <div>{{etiqueta}}</div>
-                {{/each}}
-              </div>
-            </div>
-          {{/if}}
-
-        </div>
-      {{/link-to}}
+      {{pilas-item-de-proyecto-en-el-explorador proyecto=proyecto}}
 
     {{else}}
-      <div class="gray pa4 tc">
-        No hay proyectos para mostrar
-      </div>
+
+      {{! CASO 2: llegan los proyectos agrupados por usuario (ver descripción más arriba) }}
+      {{#each proyectos.lastSuccessful.value.proyectos_agrupados as |proyecto_agrupado|}}
+        <div class="pb3 tl">
+          <div class="pv2">Perfil: {{proyecto_agrupado.perfil}}</div>
+          <div>
+            {{#each proyecto_agrupado.proyectos as |proyecto|}}
+              {{pilas-item-de-proyecto-en-el-explorador proyecto=proyecto}}
+            {{/each}}
+          </div>
+        </div>
+      {{else}}
+        <div class="gray pa4 tc">
+          No hay proyectos para mostrar
+        </div>
+      {{/each}}
+
     {{/each}}
+
+
 
     {{#if proyectos.last.isRunning}}
       <div class="absolute absolute--fill bg-white-50 z--top flex items-center justify-center">

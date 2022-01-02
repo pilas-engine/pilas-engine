@@ -8,7 +8,7 @@ import esperar from "pilas-engine/tests/helpers/esperar";
 module("Acceptance | puede visitar cada uno de los ejemplos", function(hooks) {
   setupApplicationTest(hooks);
 
-  const PAUSA = 3;
+  const PAUSA = 5;
 
   test("puede visitar cada uno de los ejemplos", async function(assert) {
     await visit("/");
@@ -28,8 +28,9 @@ module("Acceptance | puede visitar cada uno de los ejemplos", function(hooks) {
     for (let i = 0; i < items.length; i++) {
       let link = items[i].getAttribute("href");
 
-      assert.equal(1, 1, `Probando ejemplo ${i}/${items.length}`);
       await visit(link);
+      let nombre = document.getElementById("test-nombre").getAttribute("data-nombre");
+      assert.equal(1, 1, `Probando ejemplo ${i}/${items.length} - ${nombre}`);
       await esperar(PAUSA);
     }
   });
