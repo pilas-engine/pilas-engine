@@ -15,6 +15,7 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -73,8 +74,9 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
-        <link rel="stylesheet" href="estilo.css" integrity="sha256-cff8PQddadfn7PwNFkawXEw+XqnsHp9JdhFo2q9L+jQ= sha512-oIMVqRG4AQBXeV/gDU9vrfBBWahpKTXPPaTrVIDWfh9rSHlL4sMDmr74WvSswlNIDfwTTNg07ginCXwhhic05w==" />
+        <link rel="stylesheet" href="estilo.css" integrity="sha256-jfSlYGVjcNFbhP1AhVEa/8elEXJ0hgVXxapq1yx7+W4= sha512-HpDnpO4swkxC1gWmaLvshqaFjcqEwnF/7JnSVLfw8La41W5UAuKeG0iUcpsdmwRKn2MJjENYBlm1DYoDG+CNRg==" />
         <script src="./manual.js" charset="utf-8" integrity="sha256-ZYfRoP0qK0P/Zt5uKSrp2a9HJt2WkYpOa70R9y1HXrU= sha512-IcPIFwMSOFTwzeCmIyW4VeLQurFHPIzUqEMiAAGW2mqyklHyIOOXMDKmxlSBWQIIsbvKWYcMu8wsCdLr0mG3eA==" ></script>
       <div class="tc navegacion">
   <a href="index.html">Regresar al índice</a>
@@ -96,28 +98,28 @@
 <p><img src="imagenes/pilas-como-biblioteca/ejecucion.png" /></p>
 <p>Es importante usar un servidor web y no abrir el archivo directamente ya que pilas (y phaser) usan una tecnología llamada Ajax para cargar imágenes y otros recursos.</p>
 <p>A partir de ahí, para editar tu juego deberías inspeccionar el archivo <code>.html</code>, en donde aparecerá el código mínimo para iniciar pilas, crear un actor y moverlo por la pantalla:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>var imagenes <span class="op">=</span> [</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  {</span>
-<span id="cb1-3"><a href="#cb1-3"></a>    nombre<span class="op">:</span> <span class="st">&quot;logo&quot;</span><span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    ruta<span class="op">:</span> <span class="st">&quot;logo.png&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  }<span class="op">,</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  {</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    nombre<span class="op">:</span> <span class="st">&quot;fondo&quot;</span><span class="op">,</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>    ruta<span class="op">:</span> <span class="st">&quot;fondo.png&quot;</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  }</span>
-<span id="cb1-10"><a href="#cb1-10"></a>]<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>var pilas <span class="op">=</span> pilasengine<span class="op">.</span><span class="fu">iniciar</span>(<span class="dv">500</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> recursos<span class="op">,</span> opciones<span class="op">,</span> imagenes<span class="op">,</span> true)<span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>pilas<span class="op">.</span><span class="at">onready</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  let logo <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor_basico</span>(<span class="st">&quot;logo&quot;</span>)<span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  logo<span class="op">.</span><span class="at">transparencia</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  logo</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    <span class="op">.</span><span class="fu">animar</span>()</span>
-<span id="cb1-20"><a href="#cb1-20"></a>    <span class="op">.</span><span class="fu">mostrar</span>()</span>
-<span id="cb1-21"><a href="#cb1-21"></a>    <span class="op">.</span><span class="fu">mover_hasta</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>}<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> imagenes <span class="op">=</span> [</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    nombre<span class="op">:</span> <span class="st">&quot;logo&quot;</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ruta<span class="op">:</span> <span class="st">&quot;logo.png&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    nombre<span class="op">:</span> <span class="st">&quot;fondo&quot;</span><span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    ruta<span class="op">:</span> <span class="st">&quot;fondo.png&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pilas <span class="op">=</span> pilasengine<span class="op">.</span><span class="fu">iniciar</span>(<span class="dv">500</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> recursos<span class="op">,</span> opciones<span class="op">,</span> imagenes<span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="at">onready</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> logo <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor_basico</span>(<span class="st">&quot;logo&quot;</span>)<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  logo<span class="op">.</span><span class="at">transparencia</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  logo</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">animar</span>()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">mostrar</span>()</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">mover_hasta</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
 <p>Por supuesto puedes cambiar ese código y adaptarlo a tus necesidades, pero no olvides que esta versión mínima no incluye las tipografías, sonidos e imágenes que incluye pilas, deberías cargar archivos <code>.png</code> propios para tener más posibilidades.</p>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>

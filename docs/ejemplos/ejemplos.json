@@ -1,5 +1,9 @@
 {
   "ejemplos": [
+    { "nombre": "cursor-animado", "desde": "2.8.0" },
+    { "nombre": "gravedad-aleatoria", "desde": "2.8.0" },
+    { "nombre": "teclado", "desde": "2.8.0" },
+    { "nombre": "desactivar-clicks", "desde": "2.8.0" },
     { "nombre": "ninjas", "desde": "2.6.14" },
     { "nombre": "juego-educativo-de-numeros", "desde": "2.6.14" },
     { "nombre": "dialogo-y-camara", "desde": "2.7.0" },

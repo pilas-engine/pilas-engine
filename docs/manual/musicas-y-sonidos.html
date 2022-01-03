@@ -15,6 +15,7 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -73,8 +74,9 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
-        <link rel="stylesheet" href="estilo.css" integrity="sha256-cff8PQddadfn7PwNFkawXEw+XqnsHp9JdhFo2q9L+jQ= sha512-oIMVqRG4AQBXeV/gDU9vrfBBWahpKTXPPaTrVIDWfh9rSHlL4sMDmr74WvSswlNIDfwTTNg07ginCXwhhic05w==" />
+        <link rel="stylesheet" href="estilo.css" integrity="sha256-jfSlYGVjcNFbhP1AhVEa/8elEXJ0hgVXxapq1yx7+W4= sha512-HpDnpO4swkxC1gWmaLvshqaFjcqEwnF/7JnSVLfw8La41W5UAuKeG0iUcpsdmwRKn2MJjENYBlm1DYoDG+CNRg==" />
         <script src="./manual.js" charset="utf-8" integrity="sha256-ZYfRoP0qK0P/Zt5uKSrp2a9HJt2WkYpOa70R9y1HXrU= sha512-IcPIFwMSOFTwzeCmIyW4VeLQurFHPIzUqEMiAAGW2mqyklHyIOOXMDKmxlSBWQIIsbvKWYcMu8wsCdLr0mG3eA==" ></script>
       <div class="tc navegacion">
   <a href="index.html">Regresar al índice</a>
@@ -87,11 +89,11 @@
       <p>La música y el sonido de un videojuego es clave para lograr que el juego sea divertido y genere reacción en las personas que lo juegan, por ese motivo pilas también incluye un gestor de sonidos incluir audio en tus videojuegos.</p>
 <p>Para gestionar los sonidos del proyecto tienes que pulsar el botón “Sonidos” de la interfaz:</p>
 <figure>
-<img src="imagenes/musicas-y-sonidos/sonidos.png" alt="" /><figcaption>sonidos</figcaption>
+<img src="imagenes/musicas-y-sonidos/sonidos.png" alt="sonidos" /><figcaption aria-hidden="true">sonidos</figcaption>
 </figure>
 <p>Luego vas a ver una ventana con varios sonidos pre cargados, la posibilidad de subir sonidos personalizados y algunos códigos de ejemplo para reproducir estos sonidos desde el código:</p>
 <figure>
-<img src="imagenes/musicas-y-sonidos/dialogo.png" alt="" /><figcaption>dialogo</figcaption>
+<img src="imagenes/musicas-y-sonidos/dialogo.png" alt="dialogo" /><figcaption aria-hidden="true">dialogo</figcaption>
 </figure>
 <h2 id="cómo-reproducir-sonidos-desde-el-código">Cómo reproducir sonidos desde el código</h2>
 <p>Cada sonido tiene su propio nombre dentro del gestor de sonidos. Este nombre es super importante porque es el que nos va a permitir distinguir los diferentes sonidos, o músicas, que incluye el juego.</p>
@@ -103,10 +105,10 @@
 <li>Los sonidos se pueden reproducir en simultáneo, tantas veces como se quiera y junto a otros sonidos.</li>
 </ul>
 <p>Ahora bien, esta distinción la tenemos que expresar en el código: cada vez que queramos reproducir una música, debemos llamar a la función:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>this<span class="op">.</span><span class="fu">reproducir_musica</span>(nombre)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">reproducir_musica</span>(nombre)<span class="op">;</span></span></code></pre></div>
 <p>lo que hará que comience a reproducirse ese audio (infinitas veces) y se detendrá cualquier otra música.</p>
 <p>Mientras que si queremos reproducir un sonido podemos llamar a la función:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>this<span class="op">.</span><span class="fu">reproducir_sonido</span>(nombre)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">reproducir_sonido</span>(nombre)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>
