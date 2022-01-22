@@ -1,0 +1,13 @@
+services:
+  ejecutar:
+    build: .
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+    command: make ejecutar
+  compilar_pilas_live:
+    build: .
+    volumes:
+      - .:/app
+    command: make compilar_pilas_live
