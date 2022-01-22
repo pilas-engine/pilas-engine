@@ -25,7 +25,7 @@ class ModoError extends Modo {
     this.conectar_eventos();
     this.crear_fondo();
     this.crear_titulo();
-    espaciado = this.crear_subtitulo(datos.pilas._ancho, datos.error.message);
+    espaciado = this.crear_subtitulo(datos.pilas._ancho, datos.error.message.replace(/Error: /g, ""));
     this.crear_detalle_del_error(espaciado, datos);
 
     console.error(datos.error);
@@ -105,7 +105,8 @@ class ModoError extends Modo {
 
     texto_stack.on("pointerdown", function() {
       this.destroy();
-      modo.add.bitmapText(10, espaciado, "color-blanco-con-sombra", datos.stacktrace).setDepth(500000);
+      let mensaje = datos.stacktrace.replace(/Error: /g, "");
+      modo.add.bitmapText(10, espaciado, "color-blanco-con-sombra", mensaje).setDepth(500000);
     });
 
     texto_stack.setDepth(500001);

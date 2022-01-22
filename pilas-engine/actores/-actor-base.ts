@@ -1214,7 +1214,11 @@ class ActorBase {
    * Retorna la distancia en pixels de este actor a otro.
    */
   obtener_distancia_al_actor(actor: Actor) {
-    return this.obtener_distancia_al_punto(actor.x, actor.y);
+    if (!actor.esta_vivo()) {
+      throw Error(`No se puede llamar a obtener_distancia_al_actor porque el actor "${actor.nombre}" se eliminó. Llama a la función this.pilas.existe_actor_llamado("${actor.nombre}") para consultar si existe ese actor antes de llamar a esta función`);
+    } else {
+      return this.obtener_distancia_al_punto(actor.x, actor.y);
+    }
   }
 
   /**

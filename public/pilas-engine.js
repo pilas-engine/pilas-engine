@@ -4316,7 +4316,12 @@ var ActorBase = (function () {
         return this.pilas.utilidades.obtener_distancia_entre(this.x, this.y, x, y);
     };
     ActorBase.prototype.obtener_distancia_al_actor = function (actor) {
-        return this.obtener_distancia_al_punto(actor.x, actor.y);
+        if (!actor.esta_vivo()) {
+            throw Error("No se puede llamar a obtener_distancia_al_actor porque el actor \"" + actor.nombre + "\" se elimin\u00F3. Llama a la funci\u00F3n this.pilas.existe_actor_llamado(\"" + actor.nombre + "\") para consultar si existe ese actor antes de llamar a esta funci\u00F3n");
+        }
+        else {
+            return this.obtener_distancia_al_punto(actor.x, actor.y);
+        }
     };
     ActorBase.prototype.mover_hacia_el_punto = function (x, y, velocidad) {
         if (velocidad === void 0) { velocidad = 10; }
@@ -5883,10 +5888,7 @@ var EscenaBase = (function () {
                     actores_a_eliminar.push(actor);
                     return;
                 }
-                actor.pre_actualizar();
-                actor.actualizar_habilidades();
-                actor.actualizar();
-                actor.actualizar_sensores();
+                _this.actualizar_actor(actor);
                 if (actor._bloques_actualizar) {
                     actor._bloques_actualizar();
                 }
@@ -5899,6 +5901,18 @@ var EscenaBase = (function () {
         actores_a_eliminar.map(function (actor) {
             _this.quitar_actor_luego_de_eliminar(actor);
         });
+    };
+    EscenaBase.prototype.actualizar_actor = function (actor) {
+        try {
+            actor.pre_actualizar();
+            actor.actualizar_habilidades();
+            actor.actualizar();
+            actor.actualizar_sensores();
+        }
+        catch (e) {
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "actualizando al actor \"" + actor.nombre + "\"");
+            throw Error(e);
+        }
     };
     EscenaBase.prototype.reproducir_sonidos_pendientes = function () {
         var _this = this;
@@ -9955,7 +9969,7 @@ var ModoError = (function (_super) {
         this.conectar_eventos();
         this.crear_fondo();
         this.crear_titulo();
-        espaciado = this.crear_subtitulo(datos.pilas._ancho, datos.error.message);
+        espaciado = this.crear_subtitulo(datos.pilas._ancho, datos.error.message.replace(/Error: /g, ""));
         this.crear_detalle_del_error(espaciado, datos);
         console.error(datos.error);
     };
@@ -10010,7 +10024,8 @@ var ModoError = (function (_super) {
         var modo = this;
         texto_stack.on("pointerdown", function () {
             this.destroy();
-            modo.add.bitmapText(10, espaciado, "color-blanco-con-sombra", datos.stacktrace).setDepth(500000);
+            var mensaje = datos.stacktrace.replace(/Error: /g, "");
+            modo.add.bitmapText(10, espaciado, "color-blanco-con-sombra", mensaje).setDepth(500000);
         });
         texto_stack.setDepth(500001);
         texto_stack.setScrollFactor(0, 0);

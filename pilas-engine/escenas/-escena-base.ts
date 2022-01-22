@@ -255,10 +255,8 @@ class EscenaBase {
           return;
         }
 
-        actor.pre_actualizar();
-        actor.actualizar_habilidades();
-        actor.actualizar();
-        actor.actualizar_sensores();
+        // la siguiente función también captura errores.
+        this.actualizar_actor(actor);
 
         if (actor._bloques_actualizar) {
           actor._bloques_actualizar();
@@ -272,6 +270,18 @@ class EscenaBase {
     actores_a_eliminar.map(actor => {
       this.quitar_actor_luego_de_eliminar(actor);
     });
+  }
+
+  actualizar_actor(actor) {
+    try {
+        actor.pre_actualizar();
+        actor.actualizar_habilidades();
+        actor.actualizar();
+        actor.actualizar_sensores();
+      } catch (e) {
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, `actualizando al actor "${actor.nombre}"`);
+        throw Error(e);
+      }
   }
 
   /**
