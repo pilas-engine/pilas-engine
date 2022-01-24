@@ -1,0 +1,11 @@
+recursos
+vendor
+docs
+manual/imagenes/* 
+*.png
+public/api
+public/editor
+public/manual
+*.mp3
+dist
+tmp
