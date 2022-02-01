@@ -185,22 +185,6 @@ número:
 </div>
 
 
-<div class="funcion">
-```
-pilas.actores.clonar(nombre)
-```
-
-Consulta si existe un actor en la coordenada x e y. La función retorna `true` si
-hay un actor en esa posición o `false` en caso negativo.
-
-Por ejemplo:
-
-```
-❯ this.pilas.existe_actor_en(10, 10)
-❮ false
-```
-
-</div>
 
 <div class="funcion">
 ```
@@ -918,19 +902,23 @@ Por ejemplo:
 
 </div>
 
+
 <div class="funcion">
 ```
 pilas.clonar(nombre)
 ```
 
-Permite clonar un actor en la posición inicial.
+Permite clonar un actor y poner esa copia del actor en pantalla. Esta función creará
+al nuevo actor en la misma posición del actor original.
+
+Se puede clonar cualquier actor de la escena, o de otras escenas, incluso se pueden
+clonar actores que no estén activos.
 
 Por ejemplo:
 
 ```
-› var actor = pilas.actores.nave()
-› pilas.clonar("nave")
-‹ <nave en (0, 0)>
+› var nave_nueva = pilas.clonar("nave")
+› nave_nueva.x = 100
 ```
 
 </div>
@@ -946,7 +934,7 @@ Por ejemplo:
 
 ```
 › var actor = pilas.actores.nave()
-› pilas.clonar("nave", 100, 100)
+› pilas.clonar_en("nave", 100, 100)
 ‹ <nave en (100, 100)>
 ```
 
