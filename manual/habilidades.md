@@ -42,6 +42,17 @@ arrastrable así:
 mi_actor.aprender("arrastrable");
 ```
 
+La lista de habilidades disponibles dentro de pilas es la siguiente:
+
+- "arrastrable"
+- "mover con el teclado"
+- "oscilar rotacion"
+- "oscilar transparencia"
+- "oscilar verticalmente"
+- "rotar constantemente"
+- "seguir al mouse lentamente"
+- "seguir al mouse"
+
 ## Olvidar o eliminar habilidades
 
 Si en algún momento quieres eliminar una habilidad de un actor, simplemente
