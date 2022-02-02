@@ -15,7 +15,6 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
-      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -74,7 +73,6 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" />
         <script src="./manual.js" charset="utf-8"></script>
@@ -95,13 +93,24 @@
 <h2 id="desde-el-código">Desde el código</h2>
 <p>Otra opción, es enseñarle una habilidad al actor desde el código.</p>
 <p>Imaginá que buscamos crear un juego de cartas, donde el usuario tiene que poder mover una carta por la pantalla usando el mouse o gestos del dispositivo mobile. El primer paso es crear el actor, con la imagen que nos interesa:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="at">imagen</span> <span class="op">=</span> <span class="st">&quot;imagenes:cartas/carta&quot;</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>let mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>mi_actor<span class="op">.</span><span class="at">imagen</span> <span class="op">=</span> <span class="st">&quot;imagenes:cartas/carta&quot;</span><span class="op">;</span></span></code></pre></div>
 <p>Y aquí lo interesante, para hacer que el usuario pueda mover este actor por la pantalla simplemente tenemos que “enseñarle” al actor la habilidad arrastrable así:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">aprender</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>mi_actor<span class="op">.</span><span class="fu">aprender</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<p>La lista de habilidades disponibles dentro de pilas es la siguiente:</p>
+<ul>
+<li>“arrastrable”</li>
+<li>“mover con el teclado”</li>
+<li>“oscilar rotacion”</li>
+<li>“oscilar transparencia”</li>
+<li>“oscilar verticalmente”</li>
+<li>“rotar constantemente”</li>
+<li>“seguir al mouse lentamente”</li>
+<li>“seguir al mouse”</li>
+</ul>
 <h2 id="olvidar-o-eliminar-habilidades">Olvidar o eliminar habilidades</h2>
 <p>Si en algún momento quieres eliminar una habilidad de un actor, simplemente se puede llamar a la función <code>olvidar</code> así:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">olvidar</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>mi_actor<span class="op">.</span><span class="fu">olvidar</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

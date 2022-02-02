@@ -15,7 +15,6 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
-      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -74,7 +73,6 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" />
         <script src="./manual.js" charset="utf-8"></script>
@@ -100,20 +98,20 @@
 <p>En este caso hay 4 comportamientos, y queda en nuestro control si queremos que luego de los 4 comportamientos comience nuevamente.</p>
 <h2 id="realizando-comportamientos">Realizando comportamientos</h2>
 <p>Para indicarle a un actor que realice un comportamiento tenemos que llamar a la función <code>hacer</code> indicándole el nombre del comportamiento:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;aparecer&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>let mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;aparecer&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <p>Ten en cuenta que los comportamientos se pueden encadenar para lograr efectos o animaciones una detrás de otra. Por ejemplo, si queremos mostrar y ocultar un actor podemos hacerlo así:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;aparecer&quot;</span>)<span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;desaparecer&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>let mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;aparecer&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;desaparecer&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <p>Incluso, algunas habilidades reciben parámetros para indicar velocidad, posición etc…</p>
 <p>Por ejemplo, si queremos hacer que el actor desaparezca y aparezca varias veces muy rápidamente podemos escribir algo así:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span><span class="dv">50</span><span class="op">;</span> i<span class="op">++</span>) {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;aparecer&quot;</span><span class="op">,</span> {velocidad<span class="op">:</span> <span class="dv">10</span>})<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;desaparecer&quot;</span><span class="op">,</span> {velocidad<span class="op">:</span> <span class="dv">10</span>})<span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>let mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>for (i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span><span class="dv">50</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;aparecer&quot;</span><span class="op">,</span> {velocidad<span class="op">:</span> <span class="dv">10</span>})<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;desaparecer&quot;</span><span class="op">,</span> {velocidad<span class="op">:</span> <span class="dv">10</span>})<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>}</span></code></pre></div>
 <h2 id="comportamientos-incluidos-en-pilas">Comportamientos incluidos en pilas</h2>
 <p>Esta es la lista de comportamientos que incluye pilas:</p>
 <ul>
@@ -125,21 +123,21 @@
 <h2 id="comportamientos-personalizados">Comportamientos personalizados</h2>
 <p>Si quieres crear tus propios comportamientos podrías abordarlo de la siguiente forma:</p>
 <p>Primero, deberías crear una clase que herede de <code>Comportamientos</code> y tenga al menos un método iniciar y actualizar así:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MiComportamiento <span class="kw">extends</span> Comportamiento {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">iniciar</span>(argumentos) {</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actualizar</span>() {</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// retornar true para detener el comportamiento.</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">terminar</span>() {}</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>class MiComportamiento extends Comportamiento {</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  iniciar(argumentos) {</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  }</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  actualizar() {</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="co">// retornar true para detener el comportamiento.</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  }</span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  terminar() {}</span>
+<span id="cb4-11"><a href="#cb4-11"></a>}</span></code></pre></div>
 <p>Luego, deberías vincularlo al módulo de comportamientos:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="at">comportamientos</span><span class="op">.</span><span class="fu">vincular</span>(<span class="st">&quot;mi comportamiento&quot;</span><span class="op">,</span> MiComportamiento)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a>pilas<span class="op">.</span><span class="at">comportamientos</span><span class="op">.</span><span class="fu">vincular</span>(<span class="st">&quot;mi comportamiento&quot;</span><span class="op">,</span> MiComportamiento)<span class="op">;</span></span></code></pre></div>
 <p>y por último asignárselo a un actor:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;mi_comportamiento&quot;</span>)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
+<div class="sourceCode" id="cb6"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1"></a>mi_actor<span class="op">.</span><span class="fu">hacer</span>(<span class="st">&quot;mi_comportamiento&quot;</span>)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>
