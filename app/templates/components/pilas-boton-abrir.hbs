@@ -1,0 +1,28 @@
+<a role="button" {{action "ejecutar_accion"}} data-test={{dataTest}} class="{{class}} {{extraClass}} {{if desactivado "disabled o-50"}}" id={{id}}>
+  {{pilas-icono icono="abrir"}}
+
+  {{#if responsive}}
+    <span class="dn dib-l ml1">{{t "open"}}</span>
+  {{else}}
+    <span>{{t "open"}}</span>
+  {{/if}}
+
+  <div class="relative b--black-20 bl ml1 pl1">
+    ▾
+    <div class="absolute ba borde shadow-4 pa2 top-1 left-2 right-1 z-9999 bg-fondo texto shadow-1">
+      adfasd
+    </div>
+  </div>
+
+{{#basic-dropdown isOpen=mostrarDesplegable as |dd|}}
+  {{#dd.trigger}}
+    a
+  {{/dd.trigger}}
+
+  {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
+    asdfasdf
+  {{/dd.content}}
+{{/basic-dropdown}}
+
+  {{yield}}
+</a>
