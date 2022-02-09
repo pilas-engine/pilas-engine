@@ -47,7 +47,9 @@
     {{! CASO 1: llegan los proyectos en una lista (ver descripción más arriba) }}
     {{#each proyectos.lastSuccessful.value.proyectos as |proyecto|}}
 
-      {{pilas-item-de-proyecto-en-el-explorador proyecto=proyecto}}
+      {{#unless proyecto.borrado}}
+        {{pilas-item-de-proyecto-en-el-explorador puedeBorrar=soloMisJuegos proyecto=proyecto}}
+      {{/unless}}
 
     {{else}}
 

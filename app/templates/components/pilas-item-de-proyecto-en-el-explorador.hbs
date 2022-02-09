@@ -1,18 +1,25 @@
-{{#link-to "proyecto" proyecto.hash class="dib link relative pointer v-top mb2 mr2 ejemplo"}}
+<div class="dib link relative v-top mb2 mr2 ejemplo hide-child">
   <div class="flex flex-column" style="width: 180px">
 
+    {{#if puedeBorrar}}
+      <div {{action "borrar"}} class="child z-max pointer absolute right-0 top-0 ma1 bg-white-60 br3 ph2 hover-bg-white-90">
+        {{pilas-icono icono="borrar"}}
+      </div>
+    {{/if}}
+
     <div style="width: 180px; height: 140px; overflow: hidden">
-      <img class="b--gray ba" src={{proyecto.imagen_url}} alt="imagen de proyecto">
+      {{#link-to "proyecto" proyecto.hash class="pointer mb2 mr2"}}
+        <img class="b--gray ba" src={{proyecto.imagen_url}} alt="imagen de proyecto">
+      {{/link-to}}
     </div>
 
-    <div class="bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate">
+    {{#link-to "proyecto" proyecto.hash tagName="div" class="pointer bg-black-80 pa1 white tc lato f7 bl bb br b--black-90 truncate"}}
       {{proyecto.titulo}} 
 
       {{#if proyecto.perfil}}
         (por {{proyecto.perfil}})
       {{/if}}
-
-    </div>
+    {{/link-to}}
 
     {{#if proyecto.tags}}
       <div class="hide-child relative absolute top-0 right-0 pa1 ma1 br2 black lato f7 bg-yellow">
@@ -31,4 +38,4 @@
     {{/if}}
 
   </div>
-{{/link-to}}
+</div>

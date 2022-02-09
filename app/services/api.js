@@ -23,7 +23,7 @@ export default Service.extend({
     return this.get(`perfiles/mi-perfil`, {token});
   },
 
-  post(endpoint, datos) {
+  post(endpoint, datos, token) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       let url = null;
@@ -36,6 +36,10 @@ export default Service.extend({
 
       xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-type", "application/json");
+
+      if (token) {
+        xhr.setRequestHeader("authorization", `Token ${token}`);
+      }
 
       xhr.onload = function() {
         if (xhr.status == 200) {
@@ -191,5 +195,10 @@ export default Service.extend({
 
       xhr.send();
     });
+  },
+
+  eliminar_proyecto(hash) {
+    let token = localStorage.getItem("token-auth");
+    return this.post(`proyecto/eliminar_proyecto/`, {hash}, token);
   }
 });

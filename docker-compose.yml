@@ -5,9 +5,11 @@ services:
       - "4200:4200"
     volumes:
       - .:/app
+      - /app/node_modules
     command: make ejecutar
   compilar_pilas_live:
     build: .
     volumes:
       - .:/app
+      - /app/node_modules
     command: make compilar_pilas_live

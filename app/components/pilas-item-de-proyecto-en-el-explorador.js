@@ -1,5 +1,19 @@
 import Component from '@ember/component';
+import { inject as service } from "@ember/service";
 
 export default Component.extend({
-  tagName: ""
+  tagName: "",
+  api: service(),
+
+  actions: {
+    borrar() {
+      var respuesta = confirm("¿Realmente quires borrar este juego?")
+
+      if (respuesta) {
+        this.set("proyecto.borrado", true);
+        this.api.eliminar_proyecto(this.proyecto.hash);
+      }
+
+    }
+  }
 });
