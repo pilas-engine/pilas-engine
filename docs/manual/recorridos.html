@@ -15,7 +15,6 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
-      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -74,7 +73,6 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" integrity="sha256-jfSlYGVjcNFbhP1AhVEa/8elEXJ0hgVXxapq1yx7+W4= sha512-HpDnpO4swkxC1gWmaLvshqaFjcqEwnF/7JnSVLfw8La41W5UAuKeG0iUcpsdmwRKn2MJjENYBlm1DYoDG+CNRg==" />
         <script src="./manual.js" charset="utf-8" integrity="sha256-ZYfRoP0qK0P/Zt5uKSrp2a9HJt2WkYpOa70R9y1HXrU= sha512-IcPIFwMSOFTwzeCmIyW4VeLQurFHPIzUqEMiAAGW2mqyklHyIOOXMDKmxlSBWQIIsbvKWYcMu8wsCdLr0mG3eA==" ></script>
@@ -92,7 +90,7 @@
 <p>Primero tenemos que tener en cuenta qué puntos de la pantalla queremos que recorra. Por ejemplo, que primero visite la posición <code>(x= -200, y=0)</code>, luego hacia abajo a la posición <code>(x=0, y=-100)</code>, luego a la derecha <code>(x=200, y=0)</code> y por último que regrese al punto de origen <code>(x=0, y=0)</code>:</p>
 <p><img src="imagenes/recorridos.assets/posiciones-1.png" /></p>
 <p>Y por último, tenemos que llamar a la función <code>hacer_recorrido</code> de esta forma dentro de una actor:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">hacer_recorrido</span>([<span class="op">-</span><span class="dv">200</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span><span class="dv">100</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>]<span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">false</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>this<span class="op">.</span><span class="fu">hacer_recorrido</span>([<span class="op">-</span><span class="dv">200</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span><span class="dv">100</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>]<span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> false)<span class="op">;</span></span></code></pre></div>
 <p>El primer parámetro tiene que ser una lista con todas las coordenadas que queremos que recorra. Tenemos que ingresar el número de la coordenada <code>x</code>, luego en de la coordenada <code>y</code> y seguir así. Esta lista tiene que tener la forma <code>[x_punto_1, y_punto_1, x_punto_2, y_punto_2 ....]</code></p>
 <p>El segundo argumento, que en este ejemplo es <code>7</code>, tiene que ser un número indicando cuantos segundos tiene que durar el movimiento. En este caso se pide que el movimiento dure 7 segundos.</p>
 <p>El ante último argumento es el número que indicará las repeticiones de esta animación, si le pasamos <code>0</code> el movimiento se va a repetir constantemente.</p>

@@ -1470,6 +1470,7 @@ declare class EscenaBase {
     actualizar(): void;
     iniciar_animaciones_pendientes(): void;
     actualizar_actores(): void;
+    actualizar_actor(actor: any): void;
     reproducir_sonidos_pendientes(): void;
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;

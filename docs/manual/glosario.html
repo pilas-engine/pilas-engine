@@ -12,7 +12,6 @@
       div.column{display: inline-block; vertical-align: top; width: 50%;}
       div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
       ul.task-list{list-style: none;}
-      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" integrity="sha256-jfSlYGVjcNFbhP1AhVEa/8elEXJ0hgVXxapq1yx7+W4= sha512-HpDnpO4swkxC1gWmaLvshqaFjcqEwnF/7JnSVLfw8La41W5UAuKeG0iUcpsdmwRKn2MJjENYBlm1DYoDG+CNRg==" />
         <script src="./manual.js" charset="utf-8" integrity="sha256-ZYfRoP0qK0P/Zt5uKSrp2a9HJt2WkYpOa70R9y1HXrU= sha512-IcPIFwMSOFTwzeCmIyW4VeLQurFHPIzUqEMiAAGW2mqyklHyIOOXMDKmxlSBWQIIsbvKWYcMu8wsCdLr0mG3eA==" ></script>
@@ -171,13 +170,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ❯ mostrar(+edad)
 ❮ 14                     (number)</code></pre>
-</div>
-<div class="funcion">
-<pre><code>pilas.actores.clonar(nombre)</code></pre>
-<p>Consulta si existe un actor en la coordenada x e y. La función retorna <code>true</code> si hay un actor en esa posición o <code>false</code> en caso negativo.</p>
-<p>Por ejemplo:</p>
-<pre><code>❯ this.pilas.existe_actor_en(10, 10)
-❮ false</code></pre>
 </div>
 <div class="funcion">
 <pre><code>pilas.obtener_actores_en(x, y)</code></pre>
@@ -534,18 +526,18 @@ if (pilas.existe_un_actor_llamado(&quot;jugador&quot;)) {
 </div>
 <div class="funcion">
 <pre><code>pilas.clonar(nombre)</code></pre>
-<p>Permite clonar un actor en la posición inicial.</p>
+<p>Permite clonar un actor y poner esa copia del actor en pantalla. Esta función creará al nuevo actor en la misma posición del actor original.</p>
+<p>Se puede clonar cualquier actor de la escena, o de otras escenas, incluso se pueden clonar actores que no estén activos.</p>
 <p>Por ejemplo:</p>
-<pre><code>› var actor = pilas.actores.nave()
-› pilas.clonar(&quot;nave&quot;)
-‹ &lt;nave en (0, 0)&gt;</code></pre>
+<pre><code>› var nave_nueva = pilas.clonar(&quot;nave&quot;)
+› nave_nueva.x = 100</code></pre>
 </div>
 <div class="funcion">
 <pre><code>pilas.clonar_en(nombre, x, y)</code></pre>
 <p>Permite clonar un actor en la posición solicitada.</p>
 <p>Por ejemplo:</p>
 <pre><code>› var actor = pilas.actores.nave()
-› pilas.clonar(&quot;nave&quot;, 100, 100)
+› pilas.clonar_en(&quot;nave&quot;, 100, 100)
 ‹ &lt;nave en (100, 100)&gt;</code></pre>
 </div>
 <div class="funcion">

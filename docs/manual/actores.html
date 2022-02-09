@@ -15,7 +15,6 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
-      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -74,7 +73,6 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" integrity="sha256-jfSlYGVjcNFbhP1AhVEa/8elEXJ0hgVXxapq1yx7+W4= sha512-HpDnpO4swkxC1gWmaLvshqaFjcqEwnF/7JnSVLfw8La41W5UAuKeG0iUcpsdmwRKn2MJjENYBlm1DYoDG+CNRg==" />
         <script src="./manual.js" charset="utf-8" integrity="sha256-ZYfRoP0qK0P/Zt5uKSrp2a9HJt2WkYpOa70R9y1HXrU= sha512-IcPIFwMSOFTwzeCmIyW4VeLQurFHPIzUqEMiAAGW2mqyklHyIOOXMDKmxlSBWQIIsbvKWYcMu8wsCdLr0mG3eA==" ></script>
@@ -93,58 +91,58 @@
 <h2 id="cómo-crear-un-actor-nuevo">Cómo crear un actor nuevo</h2>
 <p>Para crear un actor simplemente hay que pulsar el botón “crear actor” del editor:</p>
 <figure>
-<img src="imagenes/actores/crear-actor-4420826.png" alt="crear-actor-4420826" /><figcaption aria-hidden="true">crear-actor-4420826</figcaption>
+<img src="imagenes/actores/crear-actor-4420826.png" alt="" /><figcaption>crear-actor-4420826</figcaption>
 </figure>
 <p>Y ahí se va a desplegar una ventana con varios actores pre diseñados para incluir en tu juego:</p>
 <figure>
-<img src="imagenes/actores/actores-predisenados.png" alt="actores-predisenados" /><figcaption aria-hidden="true">actores-predisenados</figcaption>
+<img src="imagenes/actores/actores-predisenados.png" alt="" /><figcaption>actores-predisenados</figcaption>
 </figure>
 <p>Cada uno de estos actores viene con algún comportamiento para que puedas experimentar e investigar. Ten en cuenta que cada actor que agregues se va a poder cambiar por completo.</p>
 <h2 id="un-actor-básico">Un actor básico</h2>
 <p>Si bien pilas trae varios actores completos, cada juego es diferente y único, así que el actor mas conveniente para todo juego es un actor mínimo que podemos personalizar desde cero.</p>
 <p>Este actor aparece como un rectángulo blanco que dice “sin imagen”:</p>
 <figure>
-<img src="imagenes/actores/actor-sin-imagen.png" alt="actor-sin-imagen" /><figcaption aria-hidden="true">actor-sin-imagen</figcaption>
+<img src="imagenes/actores/actor-sin-imagen.png" alt="" /><figcaption>actor-sin-imagen</figcaption>
 </figure>
 <p>Ahora si bien es el actor más discreto de todos, lo vamos usar para hacer algunas pruebas y mostrarte conceptos de la herramienta.</p>
 <p>Pulsa el botón “crear actor” y luego selecciona a este actor de modo que te quede en la escena de esta forma (los otros actores los puedes eliminar por el momento):</p>
 <figure>
-<img src="imagenes/actores/actor-sin-imagen-en-la-escena.png" alt="actor-sin-imagen-en-la-escena" /><figcaption aria-hidden="true">actor-sin-imagen-en-la-escena</figcaption>
+<img src="imagenes/actores/actor-sin-imagen-en-la-escena.png" alt="" /><figcaption>actor-sin-imagen-en-la-escena</figcaption>
 </figure>
 <p>A partir de ese momento, el actor formará parte de la escena, así que vas a ver su nombre en el panel de la escena y una serie de propiedades en el panel izquierdo:</p>
 <figure>
-<img src="imagenes/actores/propiedades.png" alt="propiedades" /><figcaption aria-hidden="true">propiedades</figcaption>
+<img src="imagenes/actores/propiedades.png" alt="" /><figcaption>propiedades</figcaption>
 </figure>
 <p>Sentite libre de cambiar esas propiedades para experimentar cómo se puede personalizar a un actor.</p>
 <p>La propiedad más utilizada es <code>imagen</code>, que cuando la pulses te va a dar una serie imágenes alternativas para seleccionar:</p>
 <figure>
-<img src="imagenes/actores/imagenes.png" alt="imagenes" /><figcaption aria-hidden="true">imagenes</figcaption>
+<img src="imagenes/actores/imagenes.png" alt="" /><figcaption>imagenes</figcaption>
 </figure>
 <p>Por ejemplo, si elijo la imagen del mono sonriendo mi actor va a tener una apariencia completamente diferente:</p>
 <figure>
-<img src="imagenes/actores/actor-mono.png" alt="actor-mono" /><figcaption aria-hidden="true">actor-mono</figcaption>
+<img src="imagenes/actores/actor-mono.png" alt="" /><figcaption>actor-mono</figcaption>
 </figure>
 <p>Todas las propiedades se pueden ajustar usando el teclado o incluso realizando movimientos con el mouse:</p>
 <figure>
-<img src="imagenes/actores/animacion.gif" alt="animacion" /><figcaption aria-hidden="true">animacion</figcaption>
+<img src="imagenes/actores/animacion.gif" alt="" /><figcaption>animacion</figcaption>
 </figure>
 <h2 id="recortar-imágenes-de-actores">Recortar imágenes de actores</h2>
 <p>Si estás buscando crear efectos o juegos de piezas, ten en cuenta que existe un método llamado <code>recortar</code> que te permite seleccionar una porción de la imagen del actor y mostrarla en pantalla.</p>
 <p>Por ejemplo, si tenemos un actor como este:</p>
 <figure>
-<img src="imagenes/actores/nube.png" alt="nube" /><figcaption aria-hidden="true">nube</figcaption>
+<img src="imagenes/actores/nube.png" alt="" /><figcaption>nube</figcaption>
 </figure>
 <p>Podemos crear un recorte a la mitad mediante este código:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">recortar</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">125</span><span class="op">,</span> <span class="dv">146</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>this<span class="op">.</span><span class="fu">recortar</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">125</span><span class="op">,</span> <span class="dv">146</span>)<span class="op">;</span></span></code></pre></div>
 <figure>
-<img src="imagenes/actores/nube-recortada.png" alt="nube-recortada" /><figcaption aria-hidden="true">nube-recortada</figcaption>
+<img src="imagenes/actores/nube-recortada.png" alt="" /><figcaption>nube-recortada</figcaption>
 </figure>
 <p>Donde los valores <code>0, 0, 125, 146</code> son las coordenadas <code>izquierda</code>, <code>arriba</code>, <code>ancho</code> y <code>alto</code> :</p>
 <figure>
-<img src="imagenes/actores/recorte-.png" alt="recorte-" /><figcaption aria-hidden="true">recorte-</figcaption>
+<img src="imagenes/actores/recorte-.png" alt="" /><figcaption>recorte-</figcaption>
 </figure>
 <p>y cuando quieras volver a la imagen original, simplemente puede llamar a la función:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">eliminar_recortado</span>()<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>this<span class="op">.</span><span class="fu">eliminar_recortado</span>()<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>
