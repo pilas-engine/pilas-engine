@@ -1,6 +1,4 @@
 import Component from "@ember/component";
-import { on } from "@ember/object/evented";
-import { later } from "@ember/runloop";
 
 /*
 
@@ -26,9 +24,8 @@ export default Component.extend({
 
   actions: {
     ejecutar_accion() {
-      
       this.toggleProperty("mostrarDesplegable");
-      dd.actions.toggle
+      //dd.actions.toggle
       //this.accion_abrir_archivo();
     }
   }

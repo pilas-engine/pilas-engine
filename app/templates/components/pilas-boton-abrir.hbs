@@ -14,15 +14,15 @@
     </div>
   </div>
 
-{{#basic-dropdown isOpen=mostrarDesplegable as |dd|}}
-  {{#dd.trigger}}
-    a
-  {{/dd.trigger}}
+  {{#basic-dropdown isOpen=mostrarDesplegable as |dd|}}
+    {{#dd.trigger}}
+      a
+    {{/dd.trigger}}
 
-  {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
-    asdfasdf
-  {{/dd.content}}
-{{/basic-dropdown}}
+    {{#dd.content class="slide-fade bg-fondo ba borde shadow-4 pa2 f7"}}
+      asdfasdf
+    {{/dd.content}}
+  {{/basic-dropdown}}
 
   {{yield}}
 </a>
