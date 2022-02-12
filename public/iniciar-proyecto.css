@@ -1,7 +1,7 @@
 /* -----------------------------------------------------
    created with https://www.codeandweb.com/texturepacker 
    -----------------------------------------------------
-   $TexturePacker:SmartUpdate:373c976e22197948852f13a52d18a0cb:be131bccac33c31b4699830bacc3fbce:741a09b0e3a568873dd34f31f36f953c$
+   $TexturePacker:SmartUpdate:390f6697818f05dec383bb67eb5b03d7:e9f4d90489e37e233bfd90a228ce1680:741a09b0e3a568873dd34f31f36f953c$
    -----------------------------------------------------
 
    usage: <span class="{-spritename-} sprite"></span>
@@ -12,8 +12,9 @@
 
 .sprite-iniciar-proyecto {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(iniciar-proyecto.png);}
 
-.capturas-inicial {width:180px; height:140px; background-position: -1px -1px}
-.capturas-nave-minimo {width:180px; height:140px; background-position: -1px -143px}
-.capturas-nuevo {width:179px; height:140px; background-position: -1px -568px}
-.capturas-plataformas-animado {width:180px; height:139px; background-position: -1px -427px}
-.capturas-plataformas-minimo {width:180px; height:140px; background-position: -1px -285px}
+.capturas-calle {width:180px; height:140px; background-position: -1px -1px}
+.capturas-inicial {width:180px; height:140px; background-position: -1px -143px}
+.capturas-nave-minimo {width:180px; height:140px; background-position: -1px -285px}
+.capturas-nuevo {width:179px; height:140px; background-position: -1px -710px}
+.capturas-plataformas-animado {width:180px; height:139px; background-position: -1px -569px}
+.capturas-plataformas-minimo {width:180px; height:140px; background-position: -1px -427px}
