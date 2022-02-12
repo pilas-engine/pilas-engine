@@ -9,6 +9,7 @@ import fixtureDeProyectoDesdeCero from "../fixtures/proyecto-inicial-desde-cero"
 import fixtureDeProyectoDePlataformasAnimado from "../fixtures/proyecto-inicial-plataformas-animado";
 import fixtureDeProyectoDePlataformasMinimo from "../fixtures/proyecto-inicial-plataformas-minimo";
 import fixtureDeProyectoDeNavesMinimo from "../fixtures/proyecto-inicial-naves-minimo";
+import fixtureDeProyectoCalle from "../fixtures/proyecto-inicial-calle";
 import convertirProyectoEnObjetoEmber from "pilas-engine/utils/convertir-proyecto-en-objeto-ember";
 
 const queryParams = new QueryParams({
@@ -101,6 +102,10 @@ export default Controller.extend(queryParams.Mixin, {
 
     if (tipo === "nave-minimo") {
       return this.crear_proyecto_desde_fixture(fixtureDeProyectoDeNavesMinimo);
+    }
+
+    if (tipo === "calle") {
+      return this.crear_proyecto_desde_fixture(fixtureDeProyectoCalle);
     }
 
     if (tipo === "continuar" && localStorage.getItem("pilas:proyecto_serializado")) {
