@@ -1,5 +1,4 @@
 import animaciones_iniciales from "./animaciones-iniciales";
-import fixture_workspace_bloques_de_escena_nueva from "./workspace-bloques-de-escena-nueva";
 import fixture_sonidos_iniciales from "./sonidos-iniciales";
 
 export default {
