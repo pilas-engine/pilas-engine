@@ -102,7 +102,7 @@ actor:
     bounce: Rebote
     dynamic: Dinámica
     no.rotation: Sin rotación
-    is.sensor: ¿Es sensor?
+    is.sensor: ¿Es gaseoso?
   sensors: Sensores
   sensor: Sensor
   new.sensor: Crear un sensor

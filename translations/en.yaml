@@ -102,7 +102,7 @@ actor:
     bounce: Bounce
     dynamic: Dynamic
     no.rotation: No rotation
-    is.sensor: Is Sensor?
+    is.sensor: Is Gaseous?
   sensors: Sensors
   sensor: Sensor
   new.sensor: New sensor

@@ -12,6 +12,17 @@ export default Component.extend({
       etiqueta: "actor.active"
     });
 
+
+    propiedades.addObjects([
+      {
+        tipo: "separador",
+        nombre: "Posición",
+        etiqueta: "actor.position"
+      },
+    ]);
+
+
+
     propiedades.pushObject({
       tipo: "cadena",
       propiedad: "etiqueta",
@@ -170,84 +181,17 @@ export default Component.extend({
         nombreCorto: "Espejado Vertical",
         etiqueta: "actor.flip.y"
       },
+    ]);
 
+    propiedades.pushObjects([
       {
         tipo: "separador",
         nombre: "Simulación física",
         etiqueta: "actor.physical.simulation"
       },
       {
-        tipo: "combo",
-        propiedad: "figura",
-        etiqueta: "actor.shape.title",
-        opciones: [
-          {
-            valor: "",
-            texto: "ninguna"
-          },
-          {
-            valor: "circulo",
-            texto: "círculo"
-          },
-          {
-            valor: "rectangulo",
-            texto: "rectángulo"
-          }
-        ]
+        tipo: "fisica",
       },
-      {
-        tipo: "numero",
-        propiedad: "figura_ancho",
-        nombreCorto: "Ancho",
-        intensidad: 1,
-        min: 1,
-        max: 1000,
-        etiqueta: "actor.shape.width"
-      },
-      {
-        tipo: "numero",
-        propiedad: "figura_alto",
-        nombreCorto: "Alto",
-        intensidad: 1,
-        min: 1,
-        max: 1000,
-        etiqueta: "actor.shape.height"
-      },
-      {
-        tipo: "numero",
-        propiedad: "figura_radio",
-        nombreCorto: "Radio",
-        intensidad: 1,
-        min: 1,
-        max: 1000,
-        etiqueta: "actor.shape.ratio"
-      },
-      {
-        tipo: "numero",
-        propiedad: "figura_rebote",
-        nombreCorto: "Rebote",
-        intensidad: 0.01,
-        min: 0,
-        max: 1.5,
-        etiqueta: "actor.shape.bounce"
-      },
-      {
-        tipo: "interruptor",
-        propiedad: "figura_dinamica",
-        nombreCorto: "Dinámica",
-        etiqueta: "actor.shape.dynamic"
-      },
-      {
-        tipo: "interruptor",
-        propiedad: "figura_sin_rotacion",
-        nombreCorto: "Sin rotación",
-        etiqueta: "actor.shape.no.rotation"
-      },
-      {
-        tipo: "interruptor",
-        propiedad: "figura_sensor",
-        etiqueta: "actor.shape.is.sensor"
-      }
     ]);
 
     propiedades.addObjects([

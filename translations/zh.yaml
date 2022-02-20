@@ -102,7 +102,7 @@ actor:
     bounce: 反弹
     dynamic: 动力性
     no.rotation: 无旋转
-    is.sensor: 是传感器吗？
+    is.sensor: 它是气态的吗？
   sensors: 传感器
   sensor: 传感器
   new.sensor: 创建一个传感器

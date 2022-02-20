@@ -1,0 +1,94 @@
+{{yield}}
+
+<div class="pb1">
+  {{pilas-propiedad/combo 
+    objeto=objeto
+    opciones=tiposDeFiguras
+    propiedad=propiedadFigura
+    modificarAtributo=(action "cuandoCambiaDeFigura")
+    titulo=(t "actor.shape.title")
+  }}
+</div>
+
+{{#if esCirculo}}
+  <div class="pb1">
+    {{pilas-propiedad/numero 
+      objeto=objeto
+      min=1
+      max=1000
+      propiedad=propiedadRadio
+      intensidad=1
+      modificarAtributo=modificarAtributo
+      etiqueta="actor.shape.ratio"
+    }}
+  </div>
+{{/if}}
+
+{{#if esRectangulo}}
+  <div class="pb1">
+    {{pilas-propiedad/numero 
+      objeto=objeto
+      min=1
+      max=1000
+      propiedad=propiedadAncho
+      intensidad=1
+      modificarAtributo=modificarAtributo
+      etiqueta="actor.shape.width"
+    }}
+  </div>
+
+  <div class="pb1">
+    {{pilas-propiedad/numero 
+      objeto=objeto
+      min=1
+      max=1000
+      propiedad=propiedadAlto
+      intensidad=1
+      modificarAtributo=modificarAtributo
+      etiqueta="actor.shape.height"
+    }}
+  </div>
+{{/if}}
+
+{{#if tieneFigura}}
+  <div class="pb1">
+    {{pilas-propiedad/numero 
+      objeto=objeto
+      min=0
+      max=1.5
+      propiedad=propiedadRebote
+      intensidad=0.01
+      modificarAtributo=modificarAtributo
+      etiqueta="actor.shape.bounce"
+    }}
+  </div>
+
+  <div class="pb1">
+    {{pilas-propiedad/interruptor 
+      objeto=objeto
+      propiedad=propiedadFiguraDinamica
+      modificarAtributo=modificarAtributo
+      etiqueta="actor.shape.dynamic"
+    }}
+  </div>
+
+  <div class="pb1">
+    {{pilas-propiedad/interruptor 
+      objeto=objeto
+      propiedad=propiedadSinRotacion
+      modificarAtributo=modificarAtributo
+      etiqueta="actor.shape.no.rotation"
+    }}
+  </div>
+
+  <div class="pb1">
+    {{pilas-propiedad/interruptor 
+      objeto=objeto
+      propiedad=propiedadSensor
+      modificarAtributo=modificarAtributo
+      etiqueta="actor.shape.is.sensor"
+    }}
+  </div>
+
+{{/if}}
+

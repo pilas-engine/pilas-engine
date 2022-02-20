@@ -23,6 +23,6 @@ module("Integration | Component | pilas-inspector/actor", function(hooks) {
       instancia_seleccionada=instancia_seleccionada
     }}`);
 
-    assert.ok(this.element.textContent.includes("¿Es sensor?"));
+    assert.ok(this.element.textContent.includes("¿Es gaseoso?"));
   });
 });
