@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Animación de propiedades</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        { color: #cccccc; background-color: #303030; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ffcfaf; } /* Alert */
+      code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+      code span.at { } /* Attribute */
+      code span.bn { color: #dca3a3; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #f0dfaf; } /* ControlFlow */
+      code span.ch { color: #dca3a3; } /* Char */
+      code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+      code span.co { color: #7f9f7f; } /* Comment */
+      code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+      code span.do { color: #7f9f7f; } /* Documentation */
+      code span.dt { color: #dfdfbf; } /* DataType */
+      code span.dv { color: #dcdccc; } /* DecVal */
+      code span.er { color: #c3bf9f; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #c0bed1; } /* Float */
+      code span.fu { color: #efef8f; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+      code span.kw { color: #f0dfaf; } /* Keyword */
+      code span.op { color: #f0efd0; } /* Operator */
+      code span.ot { color: #efef8f; } /* Other */
+      code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+      code span.sc { color: #dca3a3; } /* SpecialChar */
+      code span.ss { color: #cc9393; } /* SpecialString */
+      code span.st { color: #cc9393; } /* String */
+      code span.va { } /* Variable */
+      code span.vs { color: #cc9393; } /* VerbatimString */
+      code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+        <script src="./manual.js" charset="utf-8"></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Animación de propiedades</h1>
+            </header>
+      <p>Todos los actores tienen una serie de propiedades como <code>x</code>, <code>y</code>, <code>rotacion</code> y <code>transparencia</code>. En total hay mas de 10 propiedades listas para modificar, tanto desde el editor como desde el código.</p>
+<p>Ahora bien, si cambiamos progresivamente estas propiedades podemos lograr animaciones interesantes. Por ejemplo podríamos cambiar progresivamente la rotación de un actor para que parezca estar en movimiento así:</p>
+<figure>
+<img src="imagenes/animacion_de_propiedades/rotacion.gif" alt="" /><figcaption>rotacion</figcaption>
+</figure>
+<p>Y lo mismo con las otras propiedades, si queremos que un actor se mueva hacia la derecha de la pantalla podemos cambiar muchas veces su propiedad <code>x</code> para que parezca “moverse” hacia un costado de la pantalla.</p>
+<p>Sin embargo, hacer animaciones cambiando propiedades una a una se puede volver tedioso si realmente queremos hacer animaciones completas, así que pilas tienen una forma de simplificar esto.</p>
+<h2 id="usando-la-función-animar">Usando la función “animar”</h2>
+<p>Todos los actores tienen una función llamada <code>animar</code> parar facilitar la creación de animaciones, o movimientos, mediante el cambio de propiedades de un actor.</p>
+<p>Si queremos lograr que un actor gire infinitas veces como mostramos en la animación de más arriba podemos escribir lo siguiente:</p>
+<figure>
+<img src="imagenes/animacion_de_propiedades/sentencia-de-animacion.png" alt="" /><figcaption>image-20200617173113502</figcaption>
+</figure>
+<p>La función <code>this.animar</code> iniciará una animación sobre las propiedades del actor. Primero espera dos argumentos:</p>
+<ul>
+<li>El tipo de animación que se realizará, esta puede ser <code>Tipo.lineal</code>, <code>Tipo.desborde</code>, <code>Tipo.suave</code>, <code>Tipo.elastico</code>, <code>Tipo.rebote</code>. Vamos a ver esto en la siguiente sección.</li>
+<li>La cantidad de veces que se ejecutará la animación: aquí se puede poner un número como 5 para que la animación de rotación se haga <code>5</code> veces, o como valor especial se puede colocar <code>-1</code> para que la animación se haga por siembre.</li>
+</ul>
+<p>Lo siguiente que se coloca después de la llamada a <code>this.animar()</code> es una secuencia de animaciones a realizar.</p>
+<p>Por ejemplo, en este ejemplo se le pide al actor que se mueva a la derecha, gire 180 grados y luego regrese al punto <code>(0, 0)</code> una vez:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">suave</span><span class="op">,</span> <span class="dv">1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="op">.</span><span class="fu">rotar</span>(<span class="dv">180</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="op">.</span><span class="fu">mover_x</span>(<span class="dv">200</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="op">.</span><span class="fu">rotar</span>(<span class="dv">180</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="op">.</span><span class="fu">mover_hasta</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="imagenes/animacion_de_propiedades/animacion-de-nave.gif" alt="" /><figcaption>animacion-de-nave</figcaption>
+</figure>
+<h2 id="animaciones-soportadas">Animaciones soportadas</h2>
+<p>Existen varias propiedades que se pueden animar, como la posición de los actores, la rotación, transparencia etc…</p>
+<p>Para ver el listado completo de estas animaciones te recomiendo mirar la ayuda que te ofrece el editor justo después cerrar el paréntesis que inicia la animación:</p>
+<figure>
+<img src="imagenes/animacion_de_propiedades/animaciones.png" alt="" /><figcaption>animacion-de-nave</figcaption>
+</figure>
+<p>Algunas animaciones esperan parámetros, como el valor esperado para la propiedad y la duración total de la animación, así que nuevamente ten en cuenta que el editor te ayudará a conocer los parámetros que espera cada una de las animaciones.</p>
+<h2 id="tipos-de-animaciones">Tipos de animaciones</h2>
+<p>El primer argumento de la función <code>this.animar</code> pude ser uno de estos:</p>
+<ul>
+<li><code>Tipo.lineal</code></li>
+<li><code>Tipo.suave</code></li>
+<li><code>Tipo.desborde</code></li>
+<li><code>Tipo.rebote</code></li>
+<li><code>Tipo.elastico</code></li>
+</ul>
+<p>Ahora bien, ¿qué significan estos valores?, ¿En qué se diferencian?: Las animaciones son básicamente transformaciones que se le hacen a las propiedades a través del tiempo, así que estos tipos de animaciones se diferencian en cómo la animación progresará en el tiempo.</p>
+<p>Veamos el tipo de animación <code>Tipo.lineal</code> primero, que es uno de los más sencillos:</p>
+<h3 id="tipo.lineal">Tipo.Lineal</h3>
+<p>Imagina que tenemos un actor y le pedimos hacer un movimiento en el eje <code>x</code> de forma lineal con este código:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">lineal</span>)<span class="op">.</span><span class="fu">mover_x</span>(<span class="dv">350</span>)<span class="op">;</span></span></code></pre></div>
+<p>Si dibujamos cómo se mueve un actor en el tiempo usando una animación de tipo <code>lineal</code> vamos a ver que el movimiento se hace de forma constante, avanzando siempre a la misma velocidad:</p>
+<p><img src="imagenes/animacion_de_propiedades/tipo-lineal.png" /></p>
+<p>¿Y cómo son el resto de las animaciones?.</p>
+<h3 id="tipo.suave">Tipo.Suave</h3>
+<p>La animación de tipo <code>suave</code> es similar a la lineal, pero hace que el actor se mueva con cierta desaceleración:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">suave</span>)<span class="op">.</span><span class="fu">mover_x</span>(<span class="dv">350</span>)<span class="op">;</span></span></code></pre></div>
+<p><img src="imagenes/animacion_de_propiedades/tipo-suave.png" /></p>
+<p>Esto se puede notar porque los puntos por los que pasó el actor se ven cada vez más juntos.</p>
+<h3 id="tipo.desborde">Tipo.desborde</h3>
+<p>La animación de tipo <code>desborde</code> superará el punto de llegada, pero retomará la posición para corregir el desvío.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">desborde</span>)<span class="op">.</span><span class="fu">mover_x</span>(<span class="dv">350</span>)<span class="op">;</span></span></code></pre></div>
+<p>Para que este gráfico se vea un poco mejor, se combinó con un movimiento vertical:</p>
+<p><img src="imagenes/animacion_de_propiedades/tipo-desborde.png" /></p>
+<p>Observa como cerca del punto de llegada el personaje superó la coordenada 350, a la que le habíamos pedido que se mueva, pero suavemente retomó para corregir el desborde:</p>
+<p><img src="imagenes/animacion_de_propiedades/tipo-desborde-analisis.png" /></p>
+<h3 id="tipo.rebote">Tipo.rebote</h3>
+<p>La animación de tipo rebote llegará al punto solicitado pero va a regresar y corregir la posición varias veces:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">rebote</span>)<span class="op">.</span><span class="fu">mover_x</span>(<span class="dv">350</span>)<span class="op">;</span></span></code></pre></div>
+<p><img src="imagenes/animacion_de_propiedades/tipo-rebote.png" /></p>
+<p>Es ideal para movimiento que aparenten ser mecánicos, como giros de engranajes o palancas.</p>
+<h3 id="tipo.elastico">Tipo.elastico</h3>
+<p>Las animaciones elásticas son las más llamativas cuando se utilizan en movimientos y rotaciones:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">elastico</span>)<span class="op">.</span><span class="fu">mover_x</span>(<span class="dv">350</span>)<span class="op">;</span></span></code></pre></div>
+<p><img src="imagenes/animacion_de_propiedades/tipo-elastico.png" /></p>
+<p>Este tipo de animaciones también se ven muy bien cuando se aplican a escalas, por ejemplo si quieres hacer que un actor parezca “esponjoso” podrías lograrlo combinando dos animaciones así:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">this</span><span class="op">.</span><span class="at">escala_x</span> <span class="op">=</span> <span class="fl">0.6</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">this</span><span class="op">.</span><span class="at">escala_y</span> <span class="op">=</span> <span class="fl">1.4</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">elastico</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">.</span><span class="fu">escalar_x_hasta</span>(<span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">this</span><span class="op">.</span><span class="fu">animar</span>(Tipo<span class="op">.</span><span class="at">elastico</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">.</span><span class="fu">escalar_y_hasta</span>(<span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
+<p><img src="imagenes/animacion_de_propiedades/escala-elastica.gif" /></p>
+<h2 id="comparando-tipos-de-animaciones">Comparando tipos de animaciones</h2>
+<p>Una forma de ayudarte a reconocer los tipos de animaciones es probar el ejemplo “tipos de animación” de los ejemplos de pilas:</p>
+<p><img src="imagenes/animacion_de_propiedades/ejemplo-tipos-de-animacion.png" /></p>
+<p>Sin embargo, mi recomendación es que pruebes qué tipo de animación funciona mejor en el juego que estés haciendo, recuerda que cuando escribas el código el propio editor te guiará por todas las opciones disponibles:</p>
+<p><img src="imagenes/animacion_de_propiedades/autocompletado.png" /></p>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>

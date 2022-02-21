@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Sensores</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+        <script src="./manual.js" charset="utf-8"></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Sensores</h1>
+            </header>
+      <p>Los sensores nos permiten detectar colisiones entre un actor y otros mediante areas rectangulares.</p>
+<p>Se pueden utilizar en muchas situaciones diferentes, podrían ser útiles para detectar si una puerta se tiene que abrir ante la cercanía de un actor, detectar si un actor está pisando el suelo o saltando, hacer que un soldado detecte a un enemigo y varias cosas más.</p>
+<h2 id="crear-sensores-desde-el-editor">Crear sensores desde el editor</h2>
+<p>El primer paso para crear un sensor es tener seleccionado un actor y luego añadir el sensor al final de la lista de propiedades:</p>
+<p><img src="imagenes/sensores/crear-sensor-1.png" /></p>
+<p>Una vez que pulsamos ese botón, vamos a poder cambiar las coordenadas del sensor y ajustarlo a nuestro gusto.</p>
+<p>En este caso, hice que el actor tenga un sensor para detectar si se encuentra frente a algún actor:</p>
+<p><img src="imagenes/sensores/crear-sensor-2.png" /></p>
+<h2 id="acceder-a-los-sensores-desde-el-código">Acceder a los sensores desde el código</h2>
+<p>Lo interesante de los sensores es cuando podemos interactuar con ellos desde el código, ya que desde ahí vamos a poder saber si el sensor detecta colisión con otros actores.</p>
+<p>Tomemos como ejemplo el actor de la imagen anterior, el sensor que creamos se llama “disparo” así que para poder consultarle cosas necesitamos vincularlo a la clase del actor así:</p>
+<p><img src="imagenes/sensores/codigo-1.png" /></p>
+<p>A partir de ese momento, vamos a poder acceder a toda la información del sensor así:</p>
+<p><img src="imagenes/sensores/codigo-2.png" /></p>
+<p>Por ejemplo, si queremos hacer que el actor nos diga en todo momento si hay algún actor frente a su vista podemos escribir algo así:</p>
+<p><img src="imagenes/sensores/codigo-3.png" /></p>
+<p>y como resultado, tendríamos que observar algo así:</p>
+<p><img src="imagenes/sensores/ejemplo.gif" /></p>
+<p>Es decir, cada vez que usemos el código <code>this.disparo.cantidad_de_colisiones</code> podremos obtener el número de actores colisionando con ese sensor.</p>
+<h2 id="evaluando-colisiones-con-etiquetas">Evaluando colisiones con etiquetas</h2>
+<p>Mediante código también se puede saber con qué actores entra en contacto un sensor. Se puede utilizar la función <code>colisiona_con_etiqueta(etiqueta)</code> que retorna <code>true</code> o <code>false</code> o incluso la función <code>colisiones_con_la_etiqueta(etiqueta)</code> que retornará una lista de todos los actores que colisionan con el sensor.</p>
+<p>Si quieres ver un caso más completo de esto te recomendamos ver este minijuego dentro de la sección de ejemplos, en donde se usan sensores para detectar que actores se pueden golpear:</p>
+<p><img src="imagenes/sensores/avanzado.png" /></p>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>

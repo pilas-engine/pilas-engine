@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Pilas como biblioteca externa</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        { color: #cccccc; background-color: #303030; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ffcfaf; } /* Alert */
+      code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+      code span.at { } /* Attribute */
+      code span.bn { color: #dca3a3; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #f0dfaf; } /* ControlFlow */
+      code span.ch { color: #dca3a3; } /* Char */
+      code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+      code span.co { color: #7f9f7f; } /* Comment */
+      code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+      code span.do { color: #7f9f7f; } /* Documentation */
+      code span.dt { color: #dfdfbf; } /* DataType */
+      code span.dv { color: #dcdccc; } /* DecVal */
+      code span.er { color: #c3bf9f; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #c0bed1; } /* Float */
+      code span.fu { color: #efef8f; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+      code span.kw { color: #f0dfaf; } /* Keyword */
+      code span.op { color: #f0efd0; } /* Operator */
+      code span.ot { color: #efef8f; } /* Other */
+      code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+      code span.sc { color: #dca3a3; } /* SpecialChar */
+      code span.ss { color: #cc9393; } /* SpecialString */
+      code span.st { color: #cc9393; } /* String */
+      code span.va { } /* Variable */
+      code span.vs { color: #cc9393; } /* VerbatimString */
+      code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+        <script src="./manual.js" charset="utf-8"></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Pilas como biblioteca externa</h1>
+            </header>
+      <p>Pilas se puede usar como una biblioteca externa para permitir un uso avanzado y muy personalizado de pilas.</p>
+<p>De todas formas, la opción más recomendada para llevar tu juego a blogs, mobile u otros medios es siguiendo las instrucciones que están en esta otra sección: <a href="exportar_juegos.html">Cómo exportar juegos</a></p>
+<p>Esta sección solo es aconsejable para programadores avanzados que quieran integrar pilas a otras bibliotecas, como <a href="https://reactjs.org/">react</a>, <a href="https://vuejs.org/">vue</a> o similares, partiendo de un código minimalista, sin imágenes, sonidos ni actores predeterminados de pilas.</p>
+<h2 id="archivos-iniciales">Archivos iniciales</h2>
+<p>Para utilizar pilas como biblioteca se suele crear un archivo <code>.html</code> e incorporar las dependencias del proyecto, como <code>phaser</code> y <code>nine-slice</code>. Así que para hacer más sencilla esta tarea inicial pilas se distribuye junto a una plantilla que tiene todos estos archivos listos y configurados para utilizar.</p>
+<p>Ingresá en el sitio de pilas, y en la sección descargas vas a encontrar un link para descargar una plantilla llamada “versión-minima”:</p>
+<p><img src="imagenes/pilas-como-biblioteca/descarga.png" /></p>
+<p>Este archivo <code>.zip</code> tiene lo mínimo y necesario para cargar pilas y poder usar el motor directamente:</p>
+<p>Ten en cuenta que para utilizar esta versión tienes que descomprimir el archivo <code>.zip</code>, luego iniciar un servidor web y por último abrir el archivo <code>.html</code> desde un navegador:</p>
+<p><img src="imagenes/pilas-como-biblioteca/ejecucion.png" /></p>
+<p>Es importante usar un servidor web y no abrir el archivo directamente ya que pilas (y phaser) usan una tecnología llamada Ajax para cargar imágenes y otros recursos.</p>
+<p>A partir de ahí, para editar tu juego deberías inspeccionar el archivo <code>.html</code>, en donde aparecerá el código mínimo para iniciar pilas, crear un actor y moverlo por la pantalla:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>var imagenes <span class="op">=</span> [</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  {</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    nombre<span class="op">:</span> <span class="st">&quot;logo&quot;</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    ruta<span class="op">:</span> <span class="st">&quot;logo.png&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  }<span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  {</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    nombre<span class="op">:</span> <span class="st">&quot;fondo&quot;</span><span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    ruta<span class="op">:</span> <span class="st">&quot;fondo.png&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10"></a>]<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>var pilas <span class="op">=</span> pilasengine<span class="op">.</span><span class="fu">iniciar</span>(<span class="dv">500</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> recursos<span class="op">,</span> opciones<span class="op">,</span> imagenes<span class="op">,</span> true)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>pilas<span class="op">.</span><span class="at">onready</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  let logo <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor_basico</span>(<span class="st">&quot;logo&quot;</span>)<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  logo<span class="op">.</span><span class="at">transparencia</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  logo</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="op">.</span><span class="fu">animar</span>()</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="op">.</span><span class="fu">mostrar</span>()</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="op">.</span><span class="fu">mover_hasta</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>}<span class="op">;</span></span></code></pre></div>
+<p>Por supuesto puedes cambiar ese código y adaptarlo a tus necesidades, pero no olvides que esta versión mínima no incluye las tipografías, sonidos e imágenes que incluye pilas, deberías cargar archivos <code>.png</code> propios para tener más posibilidades.</p>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>

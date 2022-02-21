@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Cámara</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        { color: #cccccc; background-color: #303030; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ffcfaf; } /* Alert */
+      code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+      code span.at { } /* Attribute */
+      code span.bn { color: #dca3a3; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #f0dfaf; } /* ControlFlow */
+      code span.ch { color: #dca3a3; } /* Char */
+      code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+      code span.co { color: #7f9f7f; } /* Comment */
+      code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+      code span.do { color: #7f9f7f; } /* Documentation */
+      code span.dt { color: #dfdfbf; } /* DataType */
+      code span.dv { color: #dcdccc; } /* DecVal */
+      code span.er { color: #c3bf9f; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #c0bed1; } /* Float */
+      code span.fu { color: #efef8f; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+      code span.kw { color: #f0dfaf; } /* Keyword */
+      code span.op { color: #f0efd0; } /* Operator */
+      code span.ot { color: #efef8f; } /* Other */
+      code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+      code span.sc { color: #dca3a3; } /* SpecialChar */
+      code span.ss { color: #cc9393; } /* SpecialString */
+      code span.st { color: #cc9393; } /* String */
+      code span.va { } /* Variable */
+      code span.vs { color: #cc9393; } /* VerbatimString */
+      code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+        <script src="./manual.js" charset="utf-8"></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Cámara</h1>
+            </header>
+      <p>Si bien el juego tendrá un tamaño fijo en la pantalla, pilas incorpora una cámara que nos permite realizar desplazamientos para mostrar otras partes de la escena.</p>
+<p>En esta sección vamos a controlar cámara de la escena tanto desde el editor como desde el juego en ejecución.</p>
+<h2 id="mover-la-cámara-desde-el-editor">Mover la cámara desde el editor</h2>
+<p>Para desplazar la cámara simplemente tenemos que pulsar y arrastrar con el mouse sobre el fondo de la escena:</p>
+<p><img src="imagenes/camara.assets/movimiento.gif" /></p>
+<p>Vas a notar que en la escena el movimiento de la cámara se refleja en los atributos “Cámara x” y “Cámara Y”.</p>
+<p>Esos dos atributos también se utilizan para definir la posición inicial de la cámara cuando comienza a ejecutarse el juego.</p>
+<p>También vas a observar otros dos atributos llamados “Ancho” y “Alto”. Estos dos atributos van a definir el tamaño total del escenario. Podes cambiar esos parámetros para hacer que el escenario total sea más grande o más chico.</p>
+<h2 id="mover-la-cámara-mientras-se-ejecuta-el-juego">Mover la cámara mientras se ejecuta el juego</h2>
+<p>Para mover la cámara podemos acceder a los atributos de posición directamente, por ejemplo si quieres mover constantemente la cámara hacia la derecha, podrías escribir este código en la escena:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>class escena1 extends Escena {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  actualizar() {</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    this<span class="op">.</span><span class="at">camara</span><span class="op">.</span><span class="at">x</span> <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  }</span>
+<span id="cb1-5"><a href="#cb1-5"></a>}</span></code></pre></div>
+<p>O bien, si quieres que un actor se mueva libremente por el escenario y la cámara la siga todo el tiempo podrías usar el método <code>seguir_al_actor</code> así:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>class nave extends Actor {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  actualizar() {</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    this<span class="op">.</span><span class="at">camara</span><span class="op">.</span><span class="fu">seguir_al_actor</span>(this<span class="op">,</span> <span class="dv">10</span><span class="op">,</span> true)<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  }</span>
+<span id="cb2-5"><a href="#cb2-5"></a>}</span></code></pre></div>
+<p>Ten en cuenta que esta función se tiene que llamar todo el tiempo, por eso la tenemos que incluir dentro del método actualizar.</p>
+<p>También ten en cuenta que la función lleva 3 parámetros:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>seguir_al_actor(actor<span class="op">,</span> suavidad<span class="op">,</span> ignorar_bordes)<span class="op">;</span></span></code></pre></div>
+<ul>
+<li><code>actor</code>: el actor que la cámara tiene que seguir.</li>
+<li><code>suavidad</code>: tiene que ser un número indicando cuán gradual tiene que ser el movimiento de la cámara, cuanto menor sea el número mas rápido y brusco será el movimiento de la cámara.</li>
+<li><code>ignorar_bordes</code>: el último parámetro tiene que ser <code>true</code> o <code>false</code>. Si se envía <code>true</code> la cámara seguirá al actor incluso si sale del area del escenario, esto es ideal para juegos con area de movimiento infinita. Si se coloca <code>false</code> la cámara se detendrá en los bordes del escenario.</li>
+</ul>
+<h2 id="zoom-o-aumento">Zoom o aumento</h2>
+<p>La cámara de pilas también permite hacer acercamientos, o zoom, usando un atributo llamado <code>escala</code>.</p>
+<p>Por ejemplo, si queremos aumentar el acercamiento de la cámara podemos usar el atributo <code>escala</code> con valores superiores a <code>1</code>:</p>
+<pre><code>this.camara.escala = 2.5;</code></pre>
+<p>O bien regresar al zoom original escribiendo:</p>
+<pre><code>this.camara.escala = 1;</code></pre>
+<h2 id="fijar-actores-a-la-pantalla">Fijar actores a la pantalla</h2>
+<p>Hay casos en donde queremos que algún actor permanezca fijo en su posición, independiente del movimiento de la cámara.</p>
+<p>Por ejemplo, el puntaje del jugador no es algo que queremos que salga de la pantalla cuando la cámara se mueve, tampoco los controles, ni el contador de vidas.</p>
+<p>Para que este tipo de actores quede visible en pantalla tenemos tenemos que definirles la propiedad <code>fijo</code> de esta forma:</p>
+<pre><code>this.fijo = true;</code></pre>
+<p>Esa propiedad en valor <code>true</code> le indica a pilas que este actor no se tiene que desplazar respetando la cámara, sino que debe permanecer fijo a la pantalla en todo momento.</p>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Entorno para colaboradores de Pilas</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+        <script src="./manual.js" charset="utf-8"></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Entorno para colaboradores de Pilas</h1>
+            </header>
+      <p>Si sos desarrollador y queres replicar el entorno completo para editar el código de Pilas te recomendamos una serie de pasos para tener un entorno completo de desarrollo.</p>
+<p>Ten en cuenta que si bien esta es una sección muy avanzada del manual de Pilas, cualquier duda que te surja al respecto puedes realizarla en el foro de Pilas (http://foro.pilas-engine.com.ar/) para que podemos mejorar el manual.</p>
+<h2 id="qué-software-se-utiliza-internamente-en-pilas">¿Qué software se utiliza internamente en Pilas?</h2>
+<p>Para realizar Pilas usamos principalmente Javascript junto a varios Frameworks y utilidades. Las más importantes son:</p>
+<ul>
+<li><strong>Phaser</strong>: Es la biblioteca multimedia que utilizamos para dibujar el espacio de juego de pilas, Phaser nos permite cargar imágenes, dibujarlas en pantalla, reproducir sonidos, detectar colisiones, realizar simulaciones físicas etc…</li>
+<li><strong>ember-js</strong>: Es el framework web que utilizamos para crear la estructura visual y de interacción de la aplicación; incluye componentes, rutas, controladores y complementos. Ember también nos permite empaquetar toda la aplicación y publicarla en la web.</li>
+<li><strong>Typescript</strong>: Lo utilizamos para el código fuente del motor Pilas. El motor de Pilas es el encargado de declarar todos los actores existentes, es donde vive la estructura de escenas, y donde se encapsulan todas las llamadas a Phaser.</li>
+<li><strong>pandoc</strong>: Es la herramienta que usamos para componer el manual de pilas. Pandoc convierte archivos markdown en archivos .html para abrir desde la web.</li>
+<li><strong>electron</strong>: Sirve para empaquetar la aplicación web completa y distribuirla en formato binario, como un ejecutable que se puede usar de forma offline.</li>
+</ul>
+<h3 id="estructura-de-directorios">Estructura de directorios</h3>
+<p>Estos son los archivos principales del repositorio y qué función cumplen:</p>
+<table>
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 96%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Directorio</th>
+<th>¿Qué función cumple?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>api_docs</td>
+<td>Almacena el resultado de la documentación automática. Si ejecutás “make api” vas a ver cómo se recorre el código de Pilas y se genera esta documentación.</td>
+</tr>
+<tr class="even">
+<td><strong>app</strong></td>
+<td>Es un directorio importante, aquí está todo el código fuente de la aplicación realizado con Ember. Dentro están las plantillas, los controladores, componentes y rutas. Más adelante en este tutorial damos detalles sobre cómo editar los archivos de este directorio. Pero a grandes razgos, con “make ejecutar” o “make compilar” se puede invocar a Ember para que convierta todo ese directorio en una aplicación web.</td>
+</tr>
+<tr class="odd">
+<td><strong>manual</strong></td>
+<td>Contiene todo el manual de Pilas en formato markdown. Podes editar el contenido con cualquier editor de textos, y para convertirlo en html y que se vea dentro de la aplicación deberías ejecutar el comando “make pilas_manual”.</td>
+</tr>
+<tr class="even">
+<td><strong>pilas-engine</strong></td>
+<td>Contiene el código fuente del motor de pilas. El código está diseñado usando typescript, por ese motivo para compilarlo hay que ejecutar el comando “make compilar_pilas” o “make compilar_pilas_live” para hacerlo de forma continua.</td>
+</tr>
+<tr class="odd">
+<td><strong>public</strong></td>
+<td>Almacena todos los archivos que se deben servir desde la aplicación emberjs sin procesar. Por ejemplo imágenes, fuentes y sonidos. Pero además, este directorio también se actualiza desde otros comandos. Por ejemplo, cuando compilamos el código del directorio <em>pilas-engine</em> con el comando “make compilar_pilas”, el archivo generado se copia a este directorio “public”.</td>
+</tr>
+<tr class="even">
+<td><strong>tests</strong></td>
+<td>Almacena todos los tests de unidad, integración y aceptación. Estos tests se ejecutan cuando se invoca el comando “make test” o cuando se ejecuta “make ejecutar” y luego se ingresa a http://localhost:4200/tests. Además, se ejecutan en remoto cada vez que se hace un push al repositorio. Más adelante en este documento se describe cómo funcionan los tests en la estructura del proyecto.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="repositorio-y-modelo-de-trabajo">Repositorio y modelo de trabajo</h2>
+<p>Antes de iniciar, necesitas tener instalado NodeJS 8 y el gestor de paquetes “yarn”.</p>
+<p>Si quieres asegurarte de tener todo correctamente instalado escribí los siguientes comandos:</p>
+<pre><code>npm install -g yarn
+node -v</code></pre>
+<p>El código completo de Pilas está almacenado en Github dentro del siguiente repositorio:</p>
+<ul>
+<li>https://github.com/pilas-engine/pilas-engine</li>
+</ul>
+<p>Te recomendamos iniciar un fork del repositorio antes de continuar, hay instrucciones sobre cómo realizar un fork del repositorio aquí: https://help.github.com/articles/fork-a-repo/</p>
+<p>Una vez que tengas realizado el fork, cloná el repositorio con estos comandos e instalá las dependencias del proyecto:</p>
+<pre><code>make iniciar</code></pre>
+<p>Deberías ver cómo se van instalando todas las dependencias dentro del directorio “node_modules”. Esto puede demorar varios minutos:</p>
+<p><img src="imagenes/assets/instalar.png" /></p>
+<p>Una vez finalizada la instalación de dependencias puedes ejecutar el comando “make”. Cuando lo escribas, van a aparecer en pantalla todos los atajos que usamos dentro del proyecto:</p>
+<p><img src="imagenes/assets/make-1597532.png" /></p>
+<p>Obviamente en la mayoría de los casos usamos solo algunos comandos, pero siempre vamos a mantener actualizado este listado para simplificar el desarrollo.</p>
+<p>Para poner en funcionamiento el servidor de Ember puedes ejecutar este comando:</p>
+<pre><code>make ejecutar</code></pre>
+<p>y luego abrí esta dirección en el navegador: http://localhost:4200</p>
+<p><img src="imagenes/assets/navegador.png" /></p>
+<p>Ten en cuenta que el servidor de Ember va a estar en ejecución; cada vez que modifiques un archivo del código de la aplicación Ember se va a encargar de actualizar el navegador automáticamente.</p>
+<h2 id="estilo-de-programación">Estilo de programación</h2>
+<p>Te recomendamos escribir el código en español siempre que sea posible, y aquellas variables o métodos que tienen varias palabras intentaremos escribirlas como “nombre_del_metodo” en lugar de “nombreDelMetodo”.</p>
+<p>Además, es muy importante que tengas configurado tu editor para usar automáticamente prettier (<a href="https://prettier.io/" class="uri">https://prettier.io/</a>).</p>
+<h2 id="tests">Tests</h2>
+<p>El proyecto incluye tests que intentamos llevar de la mano con cada característica que agregamos a la herramienta. Los tests se almacenan en el directorio “tests” y cada uno de ellos está diseñado para encargarse del funcionamiento de una característica de la herramienta.</p>
+<p>Por ejemplo, el archivo <code>tests/acceptance/puede-ingresar-al-editor-test.js</code> se encarga de simular el comportamiento de un usuario que ingresa en la aplicación y comienza a interactuar con la interfaz.</p>
+<p>Cada sentencia del archivo intenta simular una acción del usuario y viene acompañada de alguna validación:</p>
+<p><img src="imagenes/assets/pilas-engine%202018-03-20%2023-44-00.png" /></p>
+<p>De esta forma, tenemos la seguridad de que podemos validar el funcionamiento de toda la herramienta de forma automatizada. Nos permite detectar errores y darnos confianza para re-estructurar o mejorar partes internas de la aplicación sabiendo qué funcionalidad podría comprometer.</p>
+<p>Si ejecutas el comando “make ejecutar”, y abrís la aplicación con un navegador desde “http://localhost:4200”, también vas a poder ejecutar los tests directamente en el navegador.</p>
+<p>Tendrías que ingresar a la dirección “http://localhost:4200/tests”:</p>
+<p><img src="imagenes/assets/PilasEngine%20Tests%202018-03-20%2023-48-34.png" /></p>
+<p>En la imagen marqué dos opciones que me parecen útiles para todas las personas, la primera evita que la pantalla se llene con detalles de tests que corren bien y la segunda es simplemente estética: sirve para ver cómo se ven los tests visualmente al costado de la pantalla.</p>
+<h2 id="automatización-e-integración-contínua">Automatización e integración contínua</h2>
+<p>Hay varias tareas que se realizan de forma automática cada vez que realizamos un push al repositorio.</p>
+<p>Por ejemplo, cada vez que se ejecuta un push sobre github, un servicio llamado “circle-ci” se encarga de correr todos los tests del proyecto desde cero.</p>
+<p>Este servicio no solo ejecuta los tests, sino que nos avisa por email si alguna de las pruebas falló o si alguna fase de la instalación tuvo problemas. Además nos genera un listado histórico para corroborar si un cambio introduce algún tipo de error:</p>
+<p><img src="imagenes/assets/CircleCI%202018-03-20%2023-53-29.png" /></p>
+<p>También usamos “circle-ci” cada vez que hacemos un lanzamiento estable de la herramienta para que se generen los binarios y las versiones web de la aplicación.</p>
+<p>La forma que utilizamos para marcar que Pilas se puede publicar es realizando un tag. Los tags los va a detectar circle CI para generar binarios y subir una versión actualizada de la aplicación a la web.</p>
+<p><img src="imagenes/assets/pilas-engine%202018-03-20%2023-56-30.png" />Por ejemplo, en la imagen se ve el tag de la versión v2.0.25. Cuando eso sucedió, “circle-ci” generó estos archivos para que esa versión de pilas esté compilada y disponible para descargar desde aquí:</p>
+<p><img src="imagenes/assets/pilas-engine%202018-03-21%2000-00-56.png" /></p>
+<p>Si bien estos pasos son automáticos, todo el detalle de lo que se debe ejecutar está en el archivo <code>.circleci/config.yml</code>.</p>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>

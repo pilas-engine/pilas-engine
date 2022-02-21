@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+          <title>Ángulos y distancias</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        { color: #cccccc; background-color: #303030; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ffcfaf; } /* Alert */
+      code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+      code span.at { } /* Attribute */
+      code span.bn { color: #dca3a3; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #f0dfaf; } /* ControlFlow */
+      code span.ch { color: #dca3a3; } /* Char */
+      code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+      code span.co { color: #7f9f7f; } /* Comment */
+      code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+      code span.do { color: #7f9f7f; } /* Documentation */
+      code span.dt { color: #dfdfbf; } /* DataType */
+      code span.dv { color: #dcdccc; } /* DecVal */
+      code span.er { color: #c3bf9f; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #c0bed1; } /* Float */
+      code span.fu { color: #efef8f; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+      code span.kw { color: #f0dfaf; } /* Keyword */
+      code span.op { color: #f0efd0; } /* Operator */
+      code span.ot { color: #efef8f; } /* Other */
+      code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+      code span.sc { color: #dca3a3; } /* SpecialChar */
+      code span.ss { color: #cc9393; } /* SpecialString */
+      code span.st { color: #cc9393; } /* String */
+      code span.va { } /* Variable */
+      code span.vs { color: #cc9393; } /* VerbatimString */
+      code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+    </style>
+        <link rel="stylesheet" href="estilo.css" />
+        <script src="./manual.js" charset="utf-8"></script>
+      <div class="tc navegacion">
+  <a href="index.html">Regresar al índice</a>
+</div> 
+  </head>
+  <body>
+         <header id="title-block-header">
+      <h1 class="title">Ángulos y distancias</h1>
+            </header>
+      <p>Pilas trae varias funciones para realizar cálculos geométricos sencillos, como obtener la distancia entre actores o incluso el ángulo entre ellos.</p>
+<h2 id="ángulo-entre-actores-o-puntos">Ángulo entre actores o puntos</h2>
+<p>Un ejemplo práctico sería poder mirar en dirección a donde está el puntero del mouse: Observa uno de los ejemplos que trae pilas, el usuario puede mover el puntero del mouse y observar cómo el cañon ajusta su rotación correctamente:</p>
+<p><img src="imagenes/angulos/angulo.gif" /></p>
+<p>Este ejemplo hace uso de la función <code>obtener_angulo_entre_puntos</code> así:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>let x <span class="op">=</span> actor_cañon<span class="op">.</span><span class="at">x</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>let y <span class="op">=</span> actor_cañon<span class="op">.</span><span class="at">y</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>let cx <span class="op">=</span> pilas<span class="op">.</span><span class="at">cursor_x</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>let cy <span class="op">=</span> pilas<span class="op">.</span><span class="at">cursor_y</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>actor_cañon<span class="op">.</span><span class="at">rotacion</span> <span class="op">=</span> pilas<span class="op">.</span><span class="fu">obtener_angulo_entre_puntos</span>(x<span class="op">,</span> y<span class="op">,</span> cx<span class="op">,</span> cy)<span class="op">;</span></span></code></pre></div>
+<p>La función <code>obtener_angulo_entre_puntos</code> espera que le enviemos 4 parámetros, correspondientes a los dos puntos que nos interesan. El resutado de la función es el ángulo en grados esperado.</p>
+<p>También existe una función llamada <code>obtener_angulo_entre_actores</code>, que hace algo muy similar, solamente que espera que le enviemos dos actores en lugar de 4 números.</p>
+<p>Un ejemplo que muestra esto es <code>angulo-entre-actores</code>, que nos muestra una nave mirando constantemente al centro de la pantalla, donde está el actor planeta:</p>
+<p><img src="imagenes/angulos/angulo-entre-actores.jpg" /></p>
+<p>Si observas el código, vas a encontrar una llamada a <code>obtener_angulo_entre_actores</code> similar a la siguiente:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>let nave <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">nave</span>()<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>let planeta <span class="op">=</span> pilas<span class="op">.</span><span class="fu">obtener_actor_por_nombre</span>(<span class="st">&quot;planeta&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>nave<span class="op">.</span><span class="at">rotacion</span> <span class="op">=</span> pilas<span class="op">.</span><span class="fu">obtener_angulo_entre_actores</span>(nave<span class="op">,</span> planeta)<span class="op">;</span></span></code></pre></div>
+<h2 id="distancia-entre-puntos-y-actores">Distancia entre puntos y actores</h2>
+<p>Otras dos funciones útiles en esta categoría son las funciones <code>obtener_distancia_entre_puntos</code> y <code>obtener_distancia_entre_actores</code>. Ambas reciben los argumentos de manera muy similar a las funciones de ángulos anteriores. Aquí unos ejemplos:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>let actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">aceituna</span>()<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>let cx <span class="op">=</span> pilas<span class="op">.</span><span class="at">cursor_x</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>let cy <span class="op">=</span> pilas<span class="op">.</span><span class="at">cursor_y</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>let distancia <span class="op">=</span> pilas<span class="op">.</span><span class="fu">obtener_distancia_entre_puntos</span>(actor<span class="op">.</span><span class="at">x</span><span class="op">,</span> actor<span class="op">.</span><span class="at">y</span><span class="op">,</span> cx<span class="op">,</span> cy)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>actor<span class="op">.</span><span class="fu">decir</span>(<span class="vs">`la distancia al mouse es </span><span class="sc">${</span>distancia<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+<p>o entre actores:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>let actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">aceituna</span>()<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>actor<span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>let nave <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">nave</span>()<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>let distancia <span class="op">=</span> pilas<span class="op">.</span><span class="fu">obtener_distancia_entre_actores</span>(actor<span class="op">,</span> nave)<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>nave<span class="op">.</span><span class="fu">decir</span>(<span class="vs">`la distancia al otro actor es </span><span class="sc">${</span>distancia<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
+  <div>
+    <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
+  </div>
+
+  <div>
+    <a href="index.html">Regresar al índice</a>
+  </div>
+</div> 
+  </body>
+</html>
