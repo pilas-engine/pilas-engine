@@ -2096,6 +2096,12 @@ declare class ModoEjecucion extends Modo {
     private manejar_evento_key_down;
     private manejar_evento_key_up;
     cambiar_escena(nombre: string): void;
+    _obtener_cuerpos_desde_clave(clave: any, cuerpos_estaticos: any): {
+        figura_1: any;
+        figura_2: any;
+    };
+    _reportar_colision_entre_figuras(figura_1: any, figura_2: any): void;
+    _reportar_colision_activa_entre_figuras(figura_1: any, figura_2: any): void;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;
     obtener_nombre_de_la_escena_inicial(): string;

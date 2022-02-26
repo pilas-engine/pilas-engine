@@ -9584,12 +9584,67 @@ var ModoEjecucion = (function (_super) {
         };
         this.pilas.definir_modo("ModoEjecucion", parametros);
     };
+    ModoEjecucion.prototype._obtener_cuerpos_desde_clave = function (clave, cuerpos_estaticos) {
+        var partes = clave.split("-");
+        var id_cuerpo_1 = +partes[0];
+        var id_cuerpo_2 = +partes[1];
+        var figura_1 = cuerpos_estaticos.find(function (e) { return e.id === id_cuerpo_1; });
+        var figura_2 = cuerpos_estaticos.find(function (e) { return e.id === id_cuerpo_2; });
+        return { figura_1: figura_1, figura_2: figura_2 };
+    };
+    ModoEjecucion.prototype._reportar_colision_entre_figuras = function (figura_1, figura_2) {
+        try {
+            if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                var actor_a = figura_1.gameObject.actor;
+                var actor_b = figura_2.gameObject.actor;
+                actor_a.colisiones.push(actor_b);
+                actor_b.colisiones.push(actor_a);
+                var cancelar_1 = actor_a.cuando_comienza_una_colision(actor_b);
+                var cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
+                if (cancelar_1 || cancelar_2) {
+                    colision.isActive = false;
+                }
+            }
+            else {
+                if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+                    figura_2.colisiones.push(figura_1.gameObject.actor);
+                }
+                if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+                    figura_1.colisiones.push(figura_2.gameObject.actor);
+                }
+            }
+        }
+        catch (e) {
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
+        }
+    };
+    ModoEjecucion.prototype._reportar_colision_activa_entre_figuras = function (figura_1, figura_2) {
+        try {
+            if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                var actor_a = figura_1.gameObject.actor;
+                var actor_b = figura_2.gameObject.actor;
+                if (actor_a.colisiones.indexOf(actor_b) === -1) {
+                    actor_a.colisiones.push(actor_b);
+                }
+                if (actor_b.colisiones.indexOf(actor_a) === -1) {
+                    actor_b.colisiones.push(actor_a);
+                }
+                actor_a.cuando_se_mantiene_una_colision(actor_b);
+                actor_b.cuando_se_mantiene_una_colision(actor_a);
+            }
+        }
+        catch (e) {
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
+        }
+    };
     ModoEjecucion.prototype.vincular_eventos_de_colision = function () {
         var _this = this;
         var pilas = this.pilas;
         var modo = this;
+        var mapa_de_colisiones = [];
         this.matter.world.on("beforeupdate", function (listener) {
-            var cuerpos_estaticos = this.engine.world.bodies.filter(function (e) { return e.isStatic; });
+            var cuerpos_estaticos = _this.matter.world.getAllBodies().filter(function (e) { return e.isStatic; });
+            var mapa_de_colisiones_nuevo = [];
             cuerpos_estaticos.map(function (cuerpo) {
                 try {
                     var otros_cuerpos = cuerpos_estaticos.filter(function (c) { return c.id !== cuerpo.id; });
@@ -9603,6 +9658,7 @@ var ModoEjecucion = (function (_super) {
                             if (actor_a._vivo && actor_b._vivo) {
                                 var cancelar_1 = actor_a.cuando_colisiona(actor_b);
                                 var cancelar_2 = actor_b.cuando_colisiona(actor_a);
+                                mapa_de_colisiones_nuevo.push(figura_1.id + "-" + figura_2.id);
                                 if (cancelar_1 || cancelar_2) {
                                     colision.isActive = false;
                                 }
@@ -9623,36 +9679,26 @@ var ModoEjecucion = (function (_super) {
                     pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
                 }
             });
+            var nuevos = mapa_de_colisiones_nuevo.filter(function (x) { return !mapa_de_colisiones.includes(x); });
+            if (nuevos.length > 0) {
+                nuevos.map(function (key) {
+                    var _a = _this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos), figura_1 = _a.figura_1, figura_2 = _a.figura_2;
+                    _this._reportar_colision_entre_figuras(figura_1, figura_2);
+                });
+                console.log(cuerpos_estaticos);
+                debugger;
+            }
+            var siguen_en_contacto = mapa_de_colisiones_nuevo.filter(function (x) { return mapa_de_colisiones.includes(x); });
+            var terminan_de_colisionar = mapa_de_colisiones.filter(function (x) { return !mapa_de_colisiones_nuevo.includes(x); });
+            console.log({ nuevos: nuevos, siguen_en_contacto: siguen_en_contacto, terminan_de_colisionar: terminan_de_colisionar });
+            mapa_de_colisiones = mapa_de_colisiones_nuevo;
         });
         this.matter.world.on("collisionstart", function (event) {
-            try {
-                for (var i = 0; i < event.pairs.length; i++) {
-                    var colision = event.pairs[i];
-                    var figura_1 = colision.bodyA;
-                    var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
-                        var actor_a = figura_1.gameObject.actor;
-                        var actor_b = figura_2.gameObject.actor;
-                        actor_a.colisiones.push(actor_b);
-                        actor_b.colisiones.push(actor_a);
-                        var cancelar_1 = actor_a.cuando_comienza_una_colision(actor_b);
-                        var cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
-                        if (cancelar_1 || cancelar_2) {
-                            colision.isActive = false;
-                        }
-                    }
-                    else {
-                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
-                            figura_2.colisiones.push(figura_1.gameObject.actor);
-                        }
-                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
-                            figura_1.colisiones.push(figura_2.gameObject.actor);
-                        }
-                    }
-                }
-            }
-            catch (e) {
-                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
+            for (var i = 0; i < event.pairs.length; i++) {
+                var colision = event.pairs[i];
+                var figura_1 = colision.bodyA;
+                var figura_2 = colision.bodyB;
+                _this._reportar_colision_entre_figuras(figura_1, figura_2);
             }
         });
         this.matter.world.on("collisionactive", function (event, a, b) {
@@ -9660,48 +9706,30 @@ var ModoEjecucion = (function (_super) {
                 var colision = event.pairs[i];
                 var figura_1 = colision.bodyA;
                 var figura_2 = colision.bodyB;
-                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
-                    var actor_a = figura_1.gameObject.actor;
-                    var actor_b = figura_2.gameObject.actor;
-                    if (actor_a.colisiones.indexOf(actor_b) === -1) {
-                        actor_a.colisiones.push(actor_b);
-                    }
-                    if (actor_b.colisiones.indexOf(actor_a) === -1) {
-                        actor_b.colisiones.push(actor_a);
-                    }
-                    actor_a.cuando_se_mantiene_una_colision(actor_b);
-                    actor_b.cuando_se_mantiene_una_colision(actor_a);
-                }
-                else {
-                }
+                _this._reportar_colision_activa_entre_figuras(figura_1, figura_2);
             }
         });
         this.matter.world.on("collisionend", function (event, a, b) {
-            try {
-                for (var i = 0; i < event.pairs.length; i++) {
-                    var colision = event.pairs[i];
-                    var figura_1 = colision.bodyA;
-                    var figura_2 = colision.bodyB;
-                    if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
-                        var actor_a = figura_1.gameObject.actor;
-                        var actor_b = figura_2.gameObject.actor;
-                        actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
-                        actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
-                        actor_a.cuando_termina_una_colision(actor_b);
-                        actor_b.cuando_termina_una_colision(actor_a);
+            for (var i = 0; i < event.pairs.length; i++) {
+                var colision = event.pairs[i];
+                var figura_1 = colision.bodyA;
+                var figura_2 = colision.bodyB;
+                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                    var actor_a = figura_1.gameObject.actor;
+                    var actor_b = figura_2.gameObject.actor;
+                    actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
+                    actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
+                    actor_a.cuando_termina_una_colision(actor_b);
+                    actor_b.cuando_termina_una_colision(actor_a);
+                }
+                else {
+                    if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+                        figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
                     }
-                    else {
-                        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
-                            figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
-                        }
-                        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
-                            figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
-                        }
+                    if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+                        figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
                     }
                 }
-            }
-            catch (e) {
-                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
             }
         });
     };

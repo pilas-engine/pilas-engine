@@ -205,12 +205,96 @@ class ModoEjecucion extends Modo {
     this.pilas.definir_modo("ModoEjecucion", parametros);
   }
 
+  /*
+   * Dada una clave, como "12-34", esta función se encarga
+   * de recorrer la lista de cuerpos de matterjs y retornar
+   * los dos cuerpos que tienen id 12 y 34.
+   */
+  _obtener_cuerpos_desde_clave(clave, cuerpos_estaticos) {
+      let partes = clave.split("-");
+      let id_cuerpo_1 = +partes[0];
+      let id_cuerpo_2 = +partes[1];
+
+      let figura_1 = cuerpos_estaticos.find(e => e.id === id_cuerpo_1);
+      let figura_2 = cuerpos_estaticos.find(e => e.id === id_cuerpo_2);
+
+      return {figura_1, figura_2};
+  }
+
+
+  _reportar_colision_entre_figuras(figura_1, figura_2) {
+    try {
+      if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+        let actor_a = figura_1.gameObject.actor;
+        let actor_b = figura_2.gameObject.actor;
+
+        actor_a.colisiones.push(actor_b);
+        actor_b.colisiones.push(actor_a);
+
+        let cancelar_1 = actor_a.cuando_comienza_una_colision(actor_b);
+        let cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
+
+        if (cancelar_1 || cancelar_2) {
+          colision.isActive = false;
+        }
+      } else {
+        // colisión entre sensor de actor y actor
+
+        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+          figura_2.colisiones.push(figura_1.gameObject.actor);
+        }
+
+        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+          figura_1.colisiones.push(figura_2.gameObject.actor);
+        }
+      }
+
+    } catch (e) {
+      this.pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
+    }
+  }
+
+  _reportar_colision_activa_entre_figuras(figura_1, figura_2) {
+    try {
+        if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+          let actor_a = figura_1.gameObject.actor;
+          let actor_b = figura_2.gameObject.actor;
+
+          if (actor_a.colisiones.indexOf(actor_b) === -1) {
+            actor_a.colisiones.push(actor_b);
+          }
+
+          if (actor_b.colisiones.indexOf(actor_a) === -1) {
+            actor_b.colisiones.push(actor_a);
+          }
+
+          actor_a.cuando_se_mantiene_una_colision(actor_b);
+          actor_b.cuando_se_mantiene_una_colision(actor_a);
+        }
+    } catch (e) {
+      this.pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
+    }
+
+  }
+
   vincular_eventos_de_colision() {
     let pilas = this.pilas;
     let modo = this;
 
-    this.matter.world.on("beforeupdate", function(listener) {
-      let cuerpos_estaticos = this.engine.world.bodies.filter(e => e.isStatic);
+    let mapa_de_colisiones = [];
+
+    this.matter.world.on("beforeupdate", (listener) => {
+      // Matter no informa los eventos de colisión en los cuerpos estáticos,
+      // así que la siguiente porción de código busca hacer que se generen
+      // estos eventos de forma manual.
+      //
+      // La idea es que los usuarios de pilas siempre puedan escribir código
+      // como "cuando_comienza_una_colision" o "cuando_termina_una_colision" sin
+      // preocuparse por el tipo de dinámica que tiene un actor.
+      //
+      let cuerpos_estaticos = this.matter.world.getAllBodies().filter(e => e.isStatic);
+
+      let mapa_de_colisiones_nuevo = [];
 
       cuerpos_estaticos.map(cuerpo => {
         try {
@@ -232,6 +316,8 @@ class ModoEjecucion extends Modo {
                 let cancelar_1 = actor_a.cuando_colisiona(actor_b);
                 let cancelar_2 = actor_b.cuando_colisiona(actor_a);
 
+                mapa_de_colisiones_nuevo.push(`${figura_1.id}-${figura_2.id}`);
+
                 if (cancelar_1 || cancelar_2) {
                   colision.isActive = false;
                 }
@@ -251,46 +337,43 @@ class ModoEjecucion extends Modo {
               }
             }
           });
+
         } catch (e) {
           pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
         }
       });
+
+
+      let nuevos = mapa_de_colisiones_nuevo.filter(x => !mapa_de_colisiones.includes(x) );
+
+      if (nuevos.length > 0) {
+
+        nuevos.map(key => {
+          let { figura_1, figura_2 } = this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos);
+
+          this._reportar_colision_entre_figuras(figura_1, figura_2);
+        });
+
+        console.log(cuerpos_estaticos);
+        debugger; // eslint-disable-line;
+      }
+
+      let siguen_en_contacto = mapa_de_colisiones_nuevo.filter(x => mapa_de_colisiones.includes(x));
+      let terminan_de_colisionar = mapa_de_colisiones.filter(x => !mapa_de_colisiones_nuevo.includes(x));
+
+      console.log({nuevos, siguen_en_contacto, terminan_de_colisionar});
+
+      mapa_de_colisiones = mapa_de_colisiones_nuevo
+
     });
 
     this.matter.world.on("collisionstart", (event /*, a, b*/) => {
-      try {
-        for (let i = 0; i < event.pairs.length; i++) {
-          let colision = event.pairs[i];
-          let figura_1 = colision.bodyA;
-          let figura_2 = colision.bodyB;
+      for (let i = 0; i < event.pairs.length; i++) {
+        let colision = event.pairs[i];
+        let figura_1 = colision.bodyA;
+        let figura_2 = colision.bodyB;
 
-          if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
-            let actor_a = figura_1.gameObject.actor;
-            let actor_b = figura_2.gameObject.actor;
-
-            actor_a.colisiones.push(actor_b);
-            actor_b.colisiones.push(actor_a);
-
-            let cancelar_1 = actor_a.cuando_comienza_una_colision(actor_b);
-            let cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
-
-            if (cancelar_1 || cancelar_2) {
-              colision.isActive = false;
-            }
-          } else {
-            // colisión entre sensor de actor y actor
-
-            if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
-              figura_2.colisiones.push(figura_1.gameObject.actor);
-            }
-
-            if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
-              figura_1.colisiones.push(figura_2.gameObject.actor);
-            }
-          }
-        }
-      } catch (e) {
-        this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
+        this._reportar_colision_entre_figuras(figura_1, figura_2);
       }
     });
 
@@ -300,33 +383,16 @@ class ModoEjecucion extends Modo {
         let figura_1 = colision.bodyA;
         let figura_2 = colision.bodyB;
 
-        // colisión entre actores.
-
-        if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
-          let actor_a = figura_1.gameObject.actor;
-          let actor_b = figura_2.gameObject.actor;
-
-          if (actor_a.colisiones.indexOf(actor_b) === -1) {
-            actor_a.colisiones.push(actor_b);
-          }
-
-          if (actor_b.colisiones.indexOf(actor_a) === -1) {
-            actor_b.colisiones.push(actor_a);
-          }
-
-          actor_a.cuando_se_mantiene_una_colision(actor_b);
-          actor_b.cuando_se_mantiene_una_colision(actor_a);
-        } else {
-        }
+        this._reportar_colision_activa_entre_figuras(figura_1, figura_2);
       }
     });
 
     this.matter.world.on("collisionend", (event, a, b) => {
-      try {
         for (let i = 0; i < event.pairs.length; i++) {
           let colision = event.pairs[i];
           let figura_1 = colision.bodyA;
           let figura_2 = colision.bodyB;
+
 
           if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
             let actor_a = figura_1.gameObject.actor;
@@ -349,9 +415,6 @@ class ModoEjecucion extends Modo {
             }
           }
         }
-      } catch (e) {
-        this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
-      }
     });
   }
 
