@@ -43,6 +43,11 @@ class EscenaBase {
     return animacion;
   }
 
+  crear_animacion_nula() {
+    let animacion = new AnimacionNula();
+    return animacion;
+  }
+
   eliminar_animaciones_del_actor(actor) {
     this.animaciones_en_ejecucion.map(animacion => {
       if (animacion.actor === actor) {

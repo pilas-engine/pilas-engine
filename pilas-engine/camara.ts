@@ -6,6 +6,12 @@ class Camara {
   }
 
   seguir_al_actor(actor: Actor, suavidad: number = 10, ignorar_limites: boolean = false) {
+
+    if (!actor._vivo) {
+      console.warn(`No se moverá la cámara porque el actor ${actor.nombre} ha sido eliminado (llamando a seguir_al_actor)`);
+      return;
+    }
+
     let dx = actor.x - this.pilas.camara.x;
     let dy = actor.y - this.pilas.camara.y;
 

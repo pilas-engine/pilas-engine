@@ -82,6 +82,31 @@ declare class AnimacionDePropiedad {
     ocultar(duración?: number): this;
     mostrar(duración?: number): this;
 }
+declare class AnimacionNula extends AnimacionDePropiedad {
+    constructor();
+    cuando_finaliza(): void;
+    explotar(): this;
+    mover_x(): this;
+    mover_y(): this;
+    mover_hasta(): this;
+    mover_x_hasta(): this;
+    mover_y_hasta(): this;
+    rotar(): this;
+    rotar_hasta(): this;
+    eliminar(): this;
+    funcion(): this;
+    decir(): this;
+    esperar(): this;
+    escalar_x(): this;
+    escalar_y(): this;
+    escalar(): this;
+    escalar_x_hasta(): this;
+    escalar_y_hasta(): this;
+    escalar_hasta(): this;
+    transparencia_hasta(): this;
+    ocultar(): this;
+    mostrar(): this;
+}
 declare class Animaciones {
     pilas: Pilas;
     animaciones: {};
@@ -1443,6 +1468,7 @@ declare class EscenaBase {
     private animaciones_en_ejecucion;
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, tipo_de_animacion: Tipo, veces: number, duración: number): AnimacionDePropiedad;
+    crear_animacion_nula(): AnimacionNula;
     eliminar_animaciones_del_actor(actor: any): void;
     reproducir_sonido(nombre: string): void;
     reproducir_musica(nombre: string): any;
@@ -2100,8 +2126,9 @@ declare class ModoEjecucion extends Modo {
         figura_1: any;
         figura_2: any;
     };
-    _reportar_colision_entre_figuras(figura_1: any, figura_2: any): void;
-    _reportar_colision_activa_entre_figuras(figura_1: any, figura_2: any): void;
+    private _reportar_colision_entre_figuras;
+    private _reportar_colision_activa_entre_figuras;
+    private _reportar_fin_de_colision_entre_figuras;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;
     obtener_nombre_de_la_escena_inicial(): string;

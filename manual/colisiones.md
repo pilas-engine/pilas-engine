@@ -26,9 +26,8 @@ Si esa propiedad tiene el valor "ninguna", el actor no podrá
 colisionar ni moverse usando el botón de física, para la computadora
 será solamente una imagen a mostrar en la pantalla.
 
-Sin embargo, si nosotros cambiamos esa propiedad a "círculo" o "rectángulo"
+Si la propiedad tiene el valor "círculo" o "rectángulo"
 veremos que el actor tendrá una forma y tamaño en color verde:
-
 
 ![](imagenes/colisiones/con-figura.png)
 
@@ -110,7 +109,7 @@ pueda chocarla o chocar a otros actores.
 
 ## Colisiones
 
-Las colisiones permiten ejecutar funciones como respuesta al contacto entre
+Las colisiones permiten ejecutar código como respuesta al contacto entre
 diferentes actores. Las funciones se pueden personalizar para hacer casi
 cualquier cosa: reproducir un sonido para magnificar el impacto, eliminar
 alguno de los actores en contacto, emitir efectos etc…
@@ -155,8 +154,11 @@ colisión usando [etiquetas](etiquetas.md). :
 Hay 3 instantes muy importantes cuando se producen colisiones:
 
 - Cuando se detecta el contacto inicial.
-- Cuando los dos actores permanecen en contacto prolongado. Por ejemplo cuando un actor se posa sobre una plataforma.
-- El instante en donde la colisión desaparece porque los actores dejan de estar en contacto. Por ejemplo cuando un actor posando sobre una plataforma "salta" y deja de estar en contacto.
+- Cuando los dos actores permanecen en contacto prolongado. Por ejemplo cuando
+  un actor se posa sobre una plataforma.
+- El instante en donde la colisión desaparece porque los actores dejan de estar
+  en contacto. Por ejemplo cuando un actor posando sobre una plataforma "salta"
+  y deja de estar en contacto.
 
 Para distinguir estos casos pilas llamará a las tres funciones de forma diferente. Este es un ejemplo de cómo se declaran esas funciones en el código de un actor:
 
@@ -174,17 +176,3 @@ class mi_actor extends Actor {
   cuando_termina_una_colision(actor: Actor) {}
 }
 ```
-
-Luego, el tipo de colisión más común que se llamará siempre tiene la siguiente
-forma:
-
-```typescript
-  cuando_colisiona(actor: Actor) {
-  }
-```
-
-## Colisiones entre figuras estáticas (no dinámicas)
-
-Hay otro tipo de colisión especial que solo se produce entre figuras
-no dinámicas, esas colisiones se notifican constantemente en cada cuadro
-de animación mediante el método `cuando_colisionan`.

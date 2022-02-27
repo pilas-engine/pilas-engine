@@ -221,10 +221,9 @@ class ModoEjecucion extends Modo {
       return {figura_1, figura_2};
   }
 
-
-  _reportar_colision_entre_figuras(figura_1, figura_2) {
+  private _reportar_colision_entre_figuras(figura_1, figura_2, colision=null) {
     try {
-      if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+      if (figura_1 && figura_2 && figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
         let actor_a = figura_1.gameObject.actor;
         let actor_b = figura_2.gameObject.actor;
 
@@ -235,16 +234,18 @@ class ModoEjecucion extends Modo {
         let cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
 
         if (cancelar_1 || cancelar_2) {
-          colision.isActive = false;
+          if (colision) {
+            colision.isActive = false;
+          }
         }
       } else {
         // colisión entre sensor de actor y actor
 
-        if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+        if (figura_1 && figura_2 && figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
           figura_2.colisiones.push(figura_1.gameObject.actor);
         }
 
-        if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+        if (figura_1 && figura_2 && figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
           figura_1.colisiones.push(figura_2.gameObject.actor);
         }
       }
@@ -254,9 +255,9 @@ class ModoEjecucion extends Modo {
     }
   }
 
-  _reportar_colision_activa_entre_figuras(figura_1, figura_2) {
+  private _reportar_colision_activa_entre_figuras(figura_1, figura_2) {
     try {
-        if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+        if (figura_1 && figura_2 && figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
           let actor_a = figura_1.gameObject.actor;
           let actor_b = figura_2.gameObject.actor;
 
@@ -274,7 +275,33 @@ class ModoEjecucion extends Modo {
     } catch (e) {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
     }
+  }
 
+  private _reportar_fin_de_colision_entre_figuras(figura_1, figura_2) {
+    try {
+      if (figura_1 && figura_2 && figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+        let actor_a = figura_1.gameObject.actor;
+        let actor_b = figura_2.gameObject.actor;
+
+        actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
+        actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
+
+        actor_a.cuando_termina_una_colision(actor_b);
+        actor_b.cuando_termina_una_colision(actor_a);
+      } else {
+        // colisión entre sensor de actor y actor
+
+        if (figura_1 && figura_2 && figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+          figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
+        }
+
+        if (figura_1 && figura_2 && figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+          figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
+        }
+      }
+    } catch (e) {
+      this.pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
+    }
   }
 
   vincular_eventos_de_colision() {
@@ -309,9 +336,6 @@ class ModoEjecucion extends Modo {
               let actor_a = figura_1.gameObject.actor;
               let actor_b = figura_2.gameObject.actor;
 
-              ///actor_a.colisiones.push(actor_b);
-              ///actor_b.colisiones.push(actor_a);
-
               if (actor_a._vivo && actor_b._vivo) {
                 let cancelar_1 = actor_a.cuando_colisiona(actor_b);
                 let cancelar_2 = actor_b.cuando_colisiona(actor_a);
@@ -345,23 +369,23 @@ class ModoEjecucion extends Modo {
 
 
       let nuevos = mapa_de_colisiones_nuevo.filter(x => !mapa_de_colisiones.includes(x) );
-
-      if (nuevos.length > 0) {
-
-        nuevos.map(key => {
-          let { figura_1, figura_2 } = this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos);
-
-          this._reportar_colision_entre_figuras(figura_1, figura_2);
-        });
-
-        console.log(cuerpos_estaticos);
-        debugger; // eslint-disable-line;
-      }
-
       let siguen_en_contacto = mapa_de_colisiones_nuevo.filter(x => mapa_de_colisiones.includes(x));
       let terminan_de_colisionar = mapa_de_colisiones.filter(x => !mapa_de_colisiones_nuevo.includes(x));
 
-      console.log({nuevos, siguen_en_contacto, terminan_de_colisionar});
+      nuevos.map(key => {
+          let { figura_1, figura_2 } = this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos);
+          this._reportar_colision_entre_figuras(figura_1, figura_2, null);
+      });
+
+      siguen_en_contacto.map(key => {
+          let { figura_1, figura_2 } = this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos);
+          this._reportar_colision_activa_entre_figuras(figura_1, figura_2);
+      });
+
+      terminan_de_colisionar.map(key => {
+          let { figura_1, figura_2 } = this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos);
+          this._reportar_fin_de_colision_entre_figuras(figura_1, figura_2);
+      });
 
       mapa_de_colisiones = mapa_de_colisiones_nuevo
 
@@ -373,7 +397,7 @@ class ModoEjecucion extends Modo {
         let figura_1 = colision.bodyA;
         let figura_2 = colision.bodyB;
 
-        this._reportar_colision_entre_figuras(figura_1, figura_2);
+        this._reportar_colision_entre_figuras(figura_1, figura_2, colision);
       }
     });
 
@@ -388,33 +412,13 @@ class ModoEjecucion extends Modo {
     });
 
     this.matter.world.on("collisionend", (event, a, b) => {
-        for (let i = 0; i < event.pairs.length; i++) {
-          let colision = event.pairs[i];
-          let figura_1 = colision.bodyA;
-          let figura_2 = colision.bodyB;
+      for (let i = 0; i < event.pairs.length; i++) {
+        let colision = event.pairs[i];
+        let figura_1 = colision.bodyA;
+        let figura_2 = colision.bodyB;
 
-
-          if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
-            let actor_a = figura_1.gameObject.actor;
-            let actor_b = figura_2.gameObject.actor;
-
-            actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
-            actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
-
-            actor_a.cuando_termina_una_colision(actor_b);
-            actor_b.cuando_termina_una_colision(actor_a);
-          } else {
-            // colisión entre sensor de actor y actor
-
-            if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
-              figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
-            }
-
-            if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
-              figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
-            }
-          }
-        }
+        this._reportar_fin_de_colision_entre_figuras(figura_1, figura_2);
+      }
     });
   }
 

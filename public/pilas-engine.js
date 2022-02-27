@@ -396,6 +396,77 @@ var AnimacionDePropiedad = (function () {
     };
     return AnimacionDePropiedad;
 }());
+var AnimacionNula = (function (_super) {
+    __extends(AnimacionNula, _super);
+    function AnimacionNula() {
+        return _super.call(this, null, null, null, null, null) || this;
+    }
+    AnimacionNula.prototype.cuando_finaliza = function () { };
+    AnimacionNula.prototype.explotar = function () {
+        return this;
+    };
+    AnimacionNula.prototype.mover_x = function () {
+        return this;
+    };
+    AnimacionNula.prototype.mover_y = function () {
+        return this;
+    };
+    AnimacionNula.prototype.mover_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.mover_x_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.mover_y_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.rotar = function () {
+        return this;
+    };
+    AnimacionNula.prototype.rotar_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.eliminar = function () {
+        return this;
+    };
+    AnimacionNula.prototype.funcion = function () {
+        return this;
+    };
+    AnimacionNula.prototype.decir = function () {
+        return this;
+    };
+    AnimacionNula.prototype.esperar = function () {
+        return this;
+    };
+    AnimacionNula.prototype.escalar_x = function () {
+        return this;
+    };
+    AnimacionNula.prototype.escalar_y = function () {
+        return this;
+    };
+    AnimacionNula.prototype.escalar = function () {
+        return this;
+    };
+    AnimacionNula.prototype.escalar_x_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.escalar_y_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.escalar_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.transparencia_hasta = function () {
+        return this;
+    };
+    AnimacionNula.prototype.ocultar = function () {
+        return this;
+    };
+    AnimacionNula.prototype.mostrar = function () {
+        return this;
+    };
+    return AnimacionNula;
+}(AnimacionDePropiedad));
 var Animaciones = (function () {
     function Animaciones(pilas) {
         this.animaciones = {};
@@ -556,6 +627,10 @@ var Camara = (function () {
     Camara.prototype.seguir_al_actor = function (actor, suavidad, ignorar_limites) {
         if (suavidad === void 0) { suavidad = 10; }
         if (ignorar_limites === void 0) { ignorar_limites = false; }
+        if (!actor._vivo) {
+            console.warn("No se mover\u00E1 la c\u00E1mara porque el actor " + actor.nombre + " ha sido eliminado (llamando a seguir_al_actor)");
+            return;
+        }
         var dx = actor.x - this.pilas.camara.x;
         var dy = actor.y - this.pilas.camara.y;
         this.pilas.camara.x += dx / suavidad;
@@ -3719,17 +3794,37 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "x", {
         get: function () {
-            var x = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
-            return x;
+            try {
+                var x = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0).x;
+                return x;
+            }
+            catch (e) {
+                if (e.stack.includes("Tween")) {
+                    return;
+                }
+                else {
+                    throw Error("No se puede acceder a la posici\u00F3n el actor " + this.nombre + " porque ha sido eliminado");
+                }
+            }
         },
         set: function (_x) {
-            if (this.pilas.utilidades.es_animacion(_x)) {
-                this.pilas.animar(this, "x", _x);
+            try {
+                if (this.pilas.utilidades.es_animacion(_x)) {
+                    this.pilas.animar(this, "x", _x);
+                }
+                else {
+                    this.pilas.utilidades.validar_numero(_x);
+                    var x = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0).x;
+                    this.sprite.x = x;
+                }
             }
-            else {
-                this.pilas.utilidades.validar_numero(_x);
-                var x = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0).x;
-                this.sprite.x = x;
+            catch (e) {
+                if (e.stack.includes("Tween")) {
+                    return;
+                }
+                else {
+                    throw Error("No se puede acceder a la posici\u00F3n el actor " + this.nombre + " porque ha sido eliminado");
+                }
             }
         },
         enumerable: false,
@@ -3737,8 +3832,18 @@ var ActorBase = (function () {
     });
     Object.defineProperty(ActorBase.prototype, "y", {
         get: function () {
-            var y = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y).y;
-            return y;
+            try {
+                var y = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y).y;
+                return y;
+            }
+            catch (e) {
+                if (e.stack.includes("Tween")) {
+                    return;
+                }
+                else {
+                    throw Error("No se puede acceder a la posici\u00F3n el actor " + this.nombre + " porque ha sido eliminado");
+                }
+            }
         },
         set: function (_y) {
             if (this.pilas.utilidades.es_animacion(_y)) {
@@ -4114,7 +4219,12 @@ var ActorBase = (function () {
         if (tipo_de_animacion === void 0) { tipo_de_animacion = Tipo.suave; }
         if (veces === void 0) { veces = 1; }
         if (duración === void 0) { duración = 1; }
-        return this.pilas.escena.crear_animacion(this, tipo_de_animacion, veces, duración);
+        if (this._vivo) {
+            return this.pilas.escena.crear_animacion(this, tipo_de_animacion, veces, duración);
+        }
+        else {
+            return this.pilas.escena.crear_animacion_nula();
+        }
     };
     ActorBase.prototype.cuando_comienza_una_colision = function (actor) { };
     ActorBase.prototype.cuando_se_mantiene_una_colision = function (actor) { };
@@ -4212,8 +4322,13 @@ var ActorBase = (function () {
         }
         var texto = this.pilas.actores.texto();
         texto.texto = mensaje;
-        texto.x = this.x - 15 + dx;
-        texto.y = this.y + this.alto + dy;
+        try {
+            texto.x = this.x - 15 + dx;
+            texto.y = this.y + this.alto + dy;
+        }
+        catch (e) {
+            console.warn("No se puede llamar a \"decir\" porque el actor " + this.nombre + " ha sido eliminado");
+        }
         texto.fuente = "color-negro";
         texto.fondo = "imagenes:redimensionables/dialogo";
         texto.color = "black";
@@ -5723,6 +5838,10 @@ var EscenaBase = (function () {
     EscenaBase.prototype.crear_animacion = function (actor, tipo_de_animacion, veces, duración) {
         var animacion = new AnimacionDePropiedad(this.pilas, actor, tipo_de_animacion, veces, duración);
         this.animaciones_pendientes_de_ejecucion.push(animacion);
+        return animacion;
+    };
+    EscenaBase.prototype.crear_animacion_nula = function () {
+        var animacion = new AnimacionNula();
         return animacion;
     };
     EscenaBase.prototype.eliminar_animaciones_del_actor = function (actor) {
@@ -9592,9 +9711,10 @@ var ModoEjecucion = (function (_super) {
         var figura_2 = cuerpos_estaticos.find(function (e) { return e.id === id_cuerpo_2; });
         return { figura_1: figura_1, figura_2: figura_2 };
     };
-    ModoEjecucion.prototype._reportar_colision_entre_figuras = function (figura_1, figura_2) {
+    ModoEjecucion.prototype._reportar_colision_entre_figuras = function (figura_1, figura_2, colision) {
+        if (colision === void 0) { colision = null; }
         try {
-            if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+            if (figura_1 && figura_2 && figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                 var actor_a = figura_1.gameObject.actor;
                 var actor_b = figura_2.gameObject.actor;
                 actor_a.colisiones.push(actor_b);
@@ -9602,14 +9722,16 @@ var ModoEjecucion = (function (_super) {
                 var cancelar_1 = actor_a.cuando_comienza_una_colision(actor_b);
                 var cancelar_2 = actor_b.cuando_comienza_una_colision(actor_a);
                 if (cancelar_1 || cancelar_2) {
-                    colision.isActive = false;
+                    if (colision) {
+                        colision.isActive = false;
+                    }
                 }
             }
             else {
-                if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
+                if (figura_1 && figura_2 && figura_2.sensor_del_actor && figura_1.gameObject && figura_2.sensor_del_actor !== figura_1.gameObject.actor) {
                     figura_2.colisiones.push(figura_1.gameObject.actor);
                 }
-                if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
+                if (figura_1 && figura_2 && figura_1.sensor_del_actor && figura_2.gameObject && figura_1.sensor_del_actor !== figura_2.gameObject.actor) {
                     figura_1.colisiones.push(figura_2.gameObject.actor);
                 }
             }
@@ -9620,7 +9742,7 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype._reportar_colision_activa_entre_figuras = function (figura_1, figura_2) {
         try {
-            if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+            if (figura_1 && figura_2 && figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
                 var actor_a = figura_1.gameObject.actor;
                 var actor_b = figura_2.gameObject.actor;
                 if (actor_a.colisiones.indexOf(actor_b) === -1) {
@@ -9631,6 +9753,29 @@ var ModoEjecucion = (function (_super) {
                 }
                 actor_a.cuando_se_mantiene_una_colision(actor_b);
                 actor_b.cuando_se_mantiene_una_colision(actor_a);
+            }
+        }
+        catch (e) {
+            this.pilas.mensajes.emitir_excepcion_al_editor(e, "al detectar colisiones");
+        }
+    };
+    ModoEjecucion.prototype._reportar_fin_de_colision_entre_figuras = function (figura_1, figura_2) {
+        try {
+            if (figura_1 && figura_2 && figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
+                var actor_a = figura_1.gameObject.actor;
+                var actor_b = figura_2.gameObject.actor;
+                actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
+                actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
+                actor_a.cuando_termina_una_colision(actor_b);
+                actor_b.cuando_termina_una_colision(actor_a);
+            }
+            else {
+                if (figura_1 && figura_2 && figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
+                    figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
+                }
+                if (figura_1 && figura_2 && figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
+                    figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
+                }
             }
         }
         catch (e) {
@@ -9680,17 +9825,20 @@ var ModoEjecucion = (function (_super) {
                 }
             });
             var nuevos = mapa_de_colisiones_nuevo.filter(function (x) { return !mapa_de_colisiones.includes(x); });
-            if (nuevos.length > 0) {
-                nuevos.map(function (key) {
-                    var _a = _this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos), figura_1 = _a.figura_1, figura_2 = _a.figura_2;
-                    _this._reportar_colision_entre_figuras(figura_1, figura_2);
-                });
-                console.log(cuerpos_estaticos);
-                debugger;
-            }
             var siguen_en_contacto = mapa_de_colisiones_nuevo.filter(function (x) { return mapa_de_colisiones.includes(x); });
             var terminan_de_colisionar = mapa_de_colisiones.filter(function (x) { return !mapa_de_colisiones_nuevo.includes(x); });
-            console.log({ nuevos: nuevos, siguen_en_contacto: siguen_en_contacto, terminan_de_colisionar: terminan_de_colisionar });
+            nuevos.map(function (key) {
+                var _a = _this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos), figura_1 = _a.figura_1, figura_2 = _a.figura_2;
+                _this._reportar_colision_entre_figuras(figura_1, figura_2, null);
+            });
+            siguen_en_contacto.map(function (key) {
+                var _a = _this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos), figura_1 = _a.figura_1, figura_2 = _a.figura_2;
+                _this._reportar_colision_activa_entre_figuras(figura_1, figura_2);
+            });
+            terminan_de_colisionar.map(function (key) {
+                var _a = _this._obtener_cuerpos_desde_clave(key, cuerpos_estaticos), figura_1 = _a.figura_1, figura_2 = _a.figura_2;
+                _this._reportar_fin_de_colision_entre_figuras(figura_1, figura_2);
+            });
             mapa_de_colisiones = mapa_de_colisiones_nuevo;
         });
         this.matter.world.on("collisionstart", function (event) {
@@ -9698,7 +9846,7 @@ var ModoEjecucion = (function (_super) {
                 var colision = event.pairs[i];
                 var figura_1 = colision.bodyA;
                 var figura_2 = colision.bodyB;
-                _this._reportar_colision_entre_figuras(figura_1, figura_2);
+                _this._reportar_colision_entre_figuras(figura_1, figura_2, colision);
             }
         });
         this.matter.world.on("collisionactive", function (event, a, b) {
@@ -9714,22 +9862,7 @@ var ModoEjecucion = (function (_super) {
                 var colision = event.pairs[i];
                 var figura_1 = colision.bodyA;
                 var figura_2 = colision.bodyB;
-                if (figura_1.gameObject && figura_1.gameObject.actor && figura_2.gameObject && figura_2.gameObject.actor) {
-                    var actor_a = figura_1.gameObject.actor;
-                    var actor_b = figura_2.gameObject.actor;
-                    actor_a.colisiones.splice(actor_a.colisiones.indexOf(actor_b), 1);
-                    actor_b.colisiones.splice(actor_b.colisiones.indexOf(actor_a), 1);
-                    actor_a.cuando_termina_una_colision(actor_b);
-                    actor_b.cuando_termina_una_colision(actor_a);
-                }
-                else {
-                    if (figura_2.sensor_del_actor && figura_1.gameObject && figura_2.colisiones.indexOf(figura_1.gameObject.actor) > -1) {
-                        figura_2.colisiones.splice(figura_2.colisiones.indexOf(figura_1.gameObject.actor), 1);
-                    }
-                    if (figura_1.sensor_del_actor && figura_2.gameObject && figura_1.colisiones.indexOf(figura_2.gameObject.actor) > -1) {
-                        figura_1.colisiones.splice(figura_1.colisiones.indexOf(figura_2.gameObject.actor), 1);
-                    }
-                }
+                _this._reportar_fin_de_colision_entre_figuras(figura_1, figura_2);
             }
         });
     };

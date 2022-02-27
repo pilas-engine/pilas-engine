@@ -15,6 +15,7 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -73,6 +74,7 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" />
         <script src="./manual.js" charset="utf-8"></script>
@@ -89,16 +91,16 @@
 <p><img src="imagenes/assets/escenas_juego.png" /></p>
 <h2 id="cambiar-o-reiniciar-escenas">Cambiar o reiniciar escenas</h2>
 <p>Para cambiar la escena actual se puede llamar a la función <code>cambiar_escena</code> indicando el nombre de la escena que se quiere cambiar. Por ejemplo:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>pilas<span class="op">.</span><span class="fu">cambiar_escena</span>(<span class="st">&quot;escena2&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="fu">cambiar_escena</span>(<span class="st">&quot;escena2&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <p>También se puede reiniciar la escena actual llamando a esta función:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>pilas<span class="op">.</span><span class="fu">reiniciar_escena</span>()<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="fu">reiniciar_escena</span>()<span class="op">;</span></span></code></pre></div>
 <h2 id="gravedad-y-simulación-física">Gravedad y simulación física</h2>
 <p>Cada escena tiene asociado su propio entorno de simulación de física. Así que si estás haciendo un juego que involucra física es probable que quieras ajustar algunos parámetros como <code>gravedad_x</code> y <code>gravedad_y</code>. Estos parámetros se encuentran en el inspector de la escena y también se pueden cambiar desde el código así:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>pilas<span class="op">.</span><span class="at">fisica</span><span class="op">.</span><span class="at">gravedad_x</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>pilas<span class="op">.</span><span class="at">fisica</span><span class="op">.</span><span class="at">gravedad_y</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="at">fisica</span><span class="op">.</span><span class="at">gravedad_x</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="at">fisica</span><span class="op">.</span><span class="at">gravedad_y</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span></code></pre></div>
 <p>o bien:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>pilas<span class="op">.</span><span class="at">escena</span><span class="op">.</span><span class="at">gravedad_x</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>pilas<span class="op">.</span><span class="at">escena</span><span class="op">.</span><span class="at">gravedad_y</span> <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="at">escena</span><span class="op">.</span><span class="at">gravedad_x</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pilas<span class="op">.</span><span class="at">escena</span><span class="op">.</span><span class="at">gravedad_y</span> <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

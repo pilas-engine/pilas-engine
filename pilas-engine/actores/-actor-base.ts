@@ -619,6 +619,7 @@ class ActorBase {
   }
 
   set x(_x) {
+    try {
     if (this.pilas.utilidades.es_animacion(_x)) {
       this.pilas.animar(this, "x", _x);
     } else {
@@ -626,11 +627,26 @@ class ActorBase {
       let { x } = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(_x, 0);
       this.sprite.x = x;
     }
+      } catch (e) {
+        if (e.stack.includes("Tween")) {
+          return ;
+        } else {
+          throw Error(`No se puede acceder a la posición el actor ${this.nombre} porque ha sido eliminado`);
+        }
+      }
   }
 
   get x() {
-    let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
-    return x;
+    try {
+      let { x } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.sprite.x, 0);
+      return x;
+      } catch (e) {
+        if (e.stack.includes("Tween")) {
+          return ;
+        } else {
+          throw Error(`No se puede acceder a la posición el actor ${this.nombre} porque ha sido eliminado`);
+        }
+      }
   }
 
   set y(_y: any) {
@@ -644,8 +660,16 @@ class ActorBase {
   }
 
   get y() {
-    let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
-    return y;
+    try {
+      let { y } = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(0, this.sprite.y);
+      return y;
+      } catch (e) {
+        if (e.stack.includes("Tween")) {
+          return ;
+        } else {
+          throw Error(`No se puede acceder a la posición el actor ${this.nombre} porque ha sido eliminado`);
+        }
+      }
   }
 
   set z(_z: number) {
@@ -978,7 +1002,13 @@ class ActorBase {
   }
 
   animar(tipo_de_animacion: Tipo = Tipo.suave, veces: number = 1, duración: number = 1): AnimacionDePropiedad {
-    return this.pilas.escena.crear_animacion(this, tipo_de_animacion, veces, duración);
+    if (this._vivo) {
+      return this.pilas.escena.crear_animacion(this, tipo_de_animacion, veces, duración);
+    } else {
+      return this.pilas.escena.crear_animacion_nula();
+    }
+
+
   }
 
   get animacion() {
@@ -1091,8 +1121,15 @@ class ActorBase {
 
     let texto = this.pilas.actores.texto();
     texto.texto = mensaje;
-    texto.x = this.x - 15 + dx;
-    texto.y = this.y + this.alto + dy;
+
+    try {
+      texto.x = this.x - 15 + dx;
+      texto.y = this.y + this.alto + dy;
+    } catch (e) {
+      console.warn(`No se puede llamar a "decir" porque el actor ${this.nombre} ha sido eliminado`);
+    }
+
+
     texto.fuente = "color-negro";
     texto.fondo = "imagenes:redimensionables/dialogo";
     texto.color = "black";
