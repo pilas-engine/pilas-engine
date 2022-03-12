@@ -953,7 +953,6 @@ var Comportamientos = (function () {
     function Comportamientos(pilas) {
         this.pilas = pilas;
         this._comportamientos = [];
-        console.log({ comportamientos: this._comportamientos });
         this.vincular("desaparecer", ComportamientoDesaparecer);
         this.vincular("aparecer", ComportamientoAparecer);
         this.vincular("eliminar", ComportamientoEliminar);
@@ -1768,7 +1767,6 @@ var Habilidades = (function () {
     function Habilidades(pilas) {
         this.pilas = pilas;
         this._habilidades = [];
-        console.log({ habilidades: this._habilidades });
         this.vincular("rotar constantemente", RotarConstantemente);
         this.vincular("arrastrable", Arrastrable);
         this.vincular("mover con el teclado", MoverConElTeclado);
@@ -2761,6 +2759,8 @@ var Pilas = (function () {
         if (nombre !== "ModoEjecucion") {
             this.game.sound.stopAll();
             this.musica_en_reproduccion = null;
+            this.comportamientos = new Comportamientos(this);
+            this.habilidades = new Habilidades(this);
         }
         this.modo = this.game.scene.getScene(nombre);
         this.definir_cursor("default");

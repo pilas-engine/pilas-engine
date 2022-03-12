@@ -10,7 +10,6 @@ class Comportamientos {
   constructor(pilas) {
     this.pilas = pilas;
     this._comportamientos = [];
-    console.log({comportamientos: this._comportamientos});
 
     this.vincular("desaparecer", ComportamientoDesaparecer);
     this.vincular("aparecer", ComportamientoAparecer);

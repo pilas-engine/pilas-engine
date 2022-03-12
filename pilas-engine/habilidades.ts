@@ -14,7 +14,6 @@ class Habilidades {
   constructor(pilas) {
     this.pilas = pilas;
     this._habilidades = [];
-    console.log({habilidades: this._habilidades});
 
     this.vincular("rotar constantemente", RotarConstantemente);
     this.vincular("arrastrable", Arrastrable);

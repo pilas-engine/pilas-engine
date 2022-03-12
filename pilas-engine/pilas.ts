@@ -229,6 +229,9 @@ class Pilas {
       // interno en el juego.
       this.game.sound.stopAll();
       this.musica_en_reproduccion = null;
+          
+      this.comportamientos = new Comportamientos(this);
+      this.habilidades = new Habilidades(this);
     }
 
     this.modo = this.game.scene.getScene(nombre);
@@ -750,7 +753,7 @@ class Pilas {
     });
   }
 
-  desordenar_lista(lista_original) {
+  desordenar_lista(lista_original: [any]) {
     let lista = [...lista_original];
 
     for (let i = lista.length - 1; i > 0; i--) {
@@ -778,7 +781,7 @@ class Pilas {
    * ‹ [3]
    *
    */
-  subdividir_lista(lista_original, cantidad_de_elementos) {
+  subdividir_lista(lista_original, cantidad_de_elementos: number) {
     let lista = [...lista_original];
     return lista.slice(0, cantidad_de_elementos);
   }

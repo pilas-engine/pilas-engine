@@ -696,8 +696,8 @@ declare class Pilas {
     pausar(): void;
     azar_desde_lista(lista: any): any;
     intercambiar_posiciones_al_azar(lista_de_actores: any): void;
-    desordenar_lista(lista_original: any): any[];
-    subdividir_lista(lista_original: any, cantidad_de_elementos: any): any[];
+    desordenar_lista(lista_original: [any]): any[];
+    subdividir_lista(lista_original: any, cantidad_de_elementos: number): any[];
     notificar_traza_de_ejecucion(id: string | number, linea: any): void;
     notificar_ejecucion_del_bloque(bloque: string, id: string): void;
     limpiar_traza_de_ejecucion(): void;
