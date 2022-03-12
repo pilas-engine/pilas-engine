@@ -953,6 +953,7 @@ var Comportamientos = (function () {
     function Comportamientos(pilas) {
         this.pilas = pilas;
         this._comportamientos = [];
+        console.log({ comportamientos: this._comportamientos });
         this.vincular("desaparecer", ComportamientoDesaparecer);
         this.vincular("aparecer", ComportamientoAparecer);
         this.vincular("eliminar", ComportamientoEliminar);
@@ -1767,6 +1768,7 @@ var Habilidades = (function () {
     function Habilidades(pilas) {
         this.pilas = pilas;
         this._habilidades = [];
+        console.log({ habilidades: this._habilidades });
         this.vincular("rotar constantemente", RotarConstantemente);
         this.vincular("arrastrable", Arrastrable);
         this.vincular("mover con el teclado", MoverConElTeclado);
@@ -1801,17 +1803,17 @@ var Habilidades = (function () {
         return this._habilidades.map(function (h) { return h.nombre; });
     };
     Habilidades.prototype.vincular = function (nombre, clase) {
-        var encontrado = this._habilidades.find(function (habilidad) {
+        var habilidad = this._habilidades.find(function (habilidad) {
             return habilidad.nombre === nombre;
         });
-        if (!encontrado) {
+        if (!habilidad) {
             this._habilidades.push({
                 nombre: nombre,
                 clase: clase
             });
         }
         else {
-            console.warn("No se vincul\u00F3 la clase " + nombre + " porque ya estaba vinculada con anterioridad.");
+            habilidad.clase = clase;
         }
     };
     return Habilidades;

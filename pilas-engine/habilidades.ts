@@ -14,6 +14,7 @@ class Habilidades {
   constructor(pilas) {
     this.pilas = pilas;
     this._habilidades = [];
+    console.log({habilidades: this._habilidades});
 
     this.vincular("rotar constantemente", RotarConstantemente);
     this.vincular("arrastrable", Arrastrable);
@@ -55,19 +56,17 @@ class Habilidades {
   }
 
   vincular(nombre: string, clase: any) {
-    let encontrado = this._habilidades.find(function(habilidad) {
+    let habilidad = this._habilidades.find(function(habilidad) {
       return habilidad.nombre === nombre;
     });
 
-    if (!encontrado) {
+    if (!habilidad) {
       this._habilidades.push({
         nombre: nombre,
         clase: clase
       });
     } else {
-      console.warn(
-        `No se vinculó la clase ${nombre} porque ya estaba vinculada con anterioridad.`
-      );
+      habilidad.clase = clase;
     }
   }
 }

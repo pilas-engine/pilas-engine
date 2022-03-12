@@ -61,3 +61,46 @@ se puede llamar a la función `olvidar` así:
 ```typescript
 mi_actor.olvidar("arrastrable");
 ```
+
+## Habilidades personalizadas
+
+Pilas también te permite crear tus propias habilidades.
+
+Primero, deberías crear una clase que herede de `Habilidad`
+e implementar los métodos `iniciar`, `actualizar` y `terminar`.
+
+Por ejemplo, aquí tenemos el código de una habilidad que
+se debería colocar en la parte inferior de cuaquier actor:
+
+```typescript
+class GirarMuyRapido extends Habilidad {
+  iniciar() {
+    // aquí puedes acceder a this.actor
+  }
+  
+  actualizar() {
+    this.actor.rotacion += 15;
+  }
+  
+  terminar() {
+    // aquí puedes acceder a this.actor
+  }
+}
+```
+
+Luego, puedes tomar algún actor de tu juego y enseñarle esta
+habilidad usando dos sentecias como estas:
+
+```
+this.pilas.habilidades.vincular("girar muy rapido", GirarMuyRapido);
+this.aprender("girar muy rapido");
+```
+
+Lo bueno de estas habilidades es que una vez que las declaras
+se pueden usar en cualquier otro actor, lo único que
+deberías hacer es agregar este código al método `iniciar` del
+actor:
+
+```
+this.aprender("girar muy rapido");
+```
