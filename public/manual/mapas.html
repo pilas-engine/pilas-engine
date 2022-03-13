@@ -15,7 +15,6 @@
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
-      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -74,7 +73,6 @@
       code span.va { } /* Variable */
       code span.vs { color: #cc9393; } /* VerbatimString */
       code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     </style>
         <link rel="stylesheet" href="estilo.css" />
         <script src="./manual.js" charset="utf-8"></script>
@@ -96,23 +94,23 @@
 <p>Por ejemplo, aquí tengo dos actores, uno llamado “dado” y el otro “plataforma”:</p>
 <p><img src="imagenes/mapas/actores.png" /></p>
 <p>Si quiero crear un nivel usando estos actores tengo que indicarle a pilas cómo llamar a estos actores en la definición de un mapa:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">definir_mapa</span>({</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;d&quot;</span><span class="op">:</span> <span class="st">&quot;dado&quot;</span><span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;p&quot;</span><span class="op">:</span> <span class="st">&quot;plataforma&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2"></a>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">definir_mapa</span>({</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="st">&quot;d&quot;</span><span class="op">:</span> <span class="st">&quot;dado&quot;</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="st">&quot;p&quot;</span><span class="op">:</span> <span class="st">&quot;plataforma&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>})<span class="op">;</span></span></code></pre></div>
 <p>De esta forma, pilas sabrá que cada que vez que usemos la letra <code>d</code> en un mapa nos estaremos refiriendo a un dado y cada vez que usemos la letra <code>p</code> estaremos refiriéndonos a una plataforma.</p>
 <p>Ahora, imagina que queremos dibujar el mensaje “HOLA” usando dados y luego poner una plataforma debajo del mensaje así:</p>
 <p><img src="imagenes/mapas/resultado.png" /></p>
 <p>Para esto podemos usar la función <code>pilas.crear_mapa</code> y las teclas <code>d</code> y <code>p</code> que definimos antes así:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">crear_mapa</span>(<span class="vs">`</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">      d.d.ddd.d....d.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">      d.d.d.d.d...d.d</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">      ddd.d.d.d...ddd</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">      d.d.d.d.d...d.d</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">      d.d.ddd.ddd.d.d</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">      pppppppppppppppp</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span><span class="op">,</span> <span class="dv">32</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">crear_mapa</span>(<span class="vs">`</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="vs">      d.d.ddd.d....d.</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="vs">      d.d.d.d.d...d.d</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="vs">      ddd.d.d.d...ddd</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="vs">      d.d.d.d.d...d.d</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="vs">      d.d.ddd.ddd.d.d</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="vs">      pppppppppppppppp</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="vs">`</span><span class="op">,</span> <span class="dv">32</span>)</span></code></pre></div>
 <p>Oh, un pequeño consejo: suele ayudarte a leer mejor el mapa en texto si seleccionar el caracter que estás ingresando con el editor:</p>
 <p><img src="imagenes/mapas/codigo.png" /></p>
 <p>También puede ayudarte a mejorar la legibilidad si usas separadores como “.”, “-” o espacios en aquellos lugares donde no necesitas dibujar un actor.</p>  <div class="tc navegacion">
