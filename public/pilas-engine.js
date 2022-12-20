@@ -1721,6 +1721,36 @@ var SeguirAlMouseLentamente = (function (_super) {
     };
     return SeguirAlMouseLentamente;
 }(Habilidad));
+var SeguirAlTeclado = (function (_super) {
+    __extends(SeguirAlTeclado, _super);
+    function SeguirAlTeclado() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    SeguirAlTeclado.prototype.iniciar = function () {
+        var habilidad_teclado = this.pilas.habilidades.buscar("mover con el teclado").name;
+        var actores_con_teclado = this.pilas.obtener_actores().filter(function (a) {
+            return a.tiene_habilidad(habilidad_teclado);
+        });
+        if (actores_con_teclado) {
+            this.actor_con_teclado = actores_con_teclado[0];
+        }
+        else {
+            this.actor_con_teclado = null;
+        }
+    };
+    SeguirAlTeclado.prototype.limitar = function (v) {
+        return Math.max(-5, Math.min(5, v));
+    };
+    SeguirAlTeclado.prototype.actualizar = function () {
+        if (this.actor_con_teclado) {
+            var destino_x = this.actor_con_teclado.x;
+            var destino_y = this.actor_con_teclado.y;
+            this.actor.x += this.limitar((destino_x - this.actor.x) / 10);
+            this.actor.y += this.limitar((destino_y - this.actor.y) / 10);
+        }
+    };
+    return SeguirAlTeclado;
+}(Habilidad));
 var OscilarVerticalmente = (function (_super) {
     __extends(OscilarVerticalmente, _super);
     function OscilarVerticalmente() {
@@ -1772,6 +1802,7 @@ var Habilidades = (function () {
         this.vincular("mover con el teclado", MoverConElTeclado);
         this.vincular("seguir al mouse", SeguirAlMouse);
         this.vincular("seguir al mouse lentamente", SeguirAlMouseLentamente);
+        this.vincular("seguir al teclado", SeguirAlTeclado);
         this.vincular("oscilar verticalmente", OscilarVerticalmente);
         this.vincular("oscilar rotacion", OscilarRotacion);
         this.vincular("oscilar transparencia", OscilarTransparencia);

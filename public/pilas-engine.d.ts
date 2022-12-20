@@ -378,6 +378,12 @@ declare class SeguirAlMouseLentamente extends Habilidad {
     iniciar(): void;
     actualizar(): void;
 }
+declare class SeguirAlTeclado extends Habilidad {
+    actor_con_teclado: Actor;
+    iniciar(): void;
+    limitar(v: number): number;
+    actualizar(): void;
+}
 declare class OscilarVerticalmente extends Habilidad {
     contador: number;
     iniciar(): void;
