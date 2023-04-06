@@ -42,6 +42,8 @@ web para obtener más información:
 - [Resumen del sprint 1 (20 de Marzo del 2018)](http://foro.pilas-engine.com.ar/t/resumen-del-sprint-01/1366)
 - [Anuncio del comienzo de pilas 2](https://www.examplelab.com.ar/posts/2018-03-04-comenzamos-pilas-engine-2/)
 
+
+
 ## Links útiles
 
 - http://app.pilas-engine.com.ar - La versión más reciente de pilas.
@@ -53,7 +55,12 @@ web para obtener más información:
 
 ## Primeros pasos
 
-Antes de comenzar, te recomendamos tener en cuenta este video en donde
+
+Tienes que tener instalada la versión 12.x de nodejs, o usar
+un gestor de versiones como nvm. Y luego usar comandos de
+make para iniciar el entorno y configurar todo lo demás.
+
+Te recomendamos tener en cuenta este video en donde
 explicamos cómo crear el entorno de pilas-engine y hacer algunas tareas
 básicas: https://www.youtube.com/watch?v=ASKYT7OoLos
 
