@@ -132,6 +132,7 @@ declare class Automata {
     cuando_termina_de_hacer_click(x: number, y: number, evento_original: any): void;
     cuando_sale(x: number, y: number, evento_original: any): void;
     cuando_mueve(x: number, y: number, evento_original: any): void;
+    cuando_mueve_sobre_la_pantalla(x: number, y: number, evento_original: any): void;
 }
 declare class Camara {
     pilas: Pilas;
@@ -927,6 +928,7 @@ declare class ActorBase {
     cuando_termina_de_hacer_click(x: any, y: any, evento_original: any): void;
     cuando_sale(x: any, y: any, evento_original: any): void;
     cuando_mueve(x: any, y: any, evento_original: any): void;
+    cuando_mueve_sobre_la_pantalla(x: any, y: any, evento_original: any): void;
     cuando_pulsa_tecla(tecla: string, evento_original: any): void;
     cuando_suelta_tecla(tecla: string, evento_original: any): void;
     get cantidad_de_colisiones(): number;
@@ -1501,6 +1503,7 @@ declare class EscenaBase {
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_pulsa_tecla_a_los_actores(tecla: string, evento_original: any): void;
+    avisar_cuando_mueve_a_todos_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_suelta_tecla_a_los_actores(tecla: string, evento_original: any): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
     terminar(): void;

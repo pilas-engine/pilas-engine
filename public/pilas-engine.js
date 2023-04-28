@@ -618,6 +618,14 @@ var Automata = (function () {
             }
         }
     };
+    Automata.prototype.cuando_mueve_sobre_la_pantalla = function (x, y, evento_original) {
+        if (this._estado !== "") {
+            var metodo = this.actor[this._estado + "_cuando_mueve_sobre_la_pantalla"];
+            if (metodo) {
+                metodo.call(this.actor, x, y, evento_original);
+            }
+        }
+    };
     return Automata;
 }());
 var Camara = (function () {
@@ -4236,6 +4244,7 @@ var ActorBase = (function () {
     ActorBase.prototype.cuando_termina_de_hacer_click = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_sale = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_mueve = function (x, y, evento_original) { };
+    ActorBase.prototype.cuando_mueve_sobre_la_pantalla = function (x, y, evento_original) { };
     ActorBase.prototype.cuando_pulsa_tecla = function (tecla, evento_original) { };
     ActorBase.prototype.cuando_suelta_tecla = function (tecla, evento_original) { };
     Object.defineProperty(ActorBase.prototype, "cantidad_de_colisiones", {
@@ -6090,6 +6099,18 @@ var EscenaBase = (function () {
             try {
                 e.cuando_pulsa_tecla(tecla, evento_original);
                 e.automata.cuando_pulsa_tecla(tecla, evento_original);
+            }
+            catch (e) {
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
+            }
+        });
+    };
+    EscenaBase.prototype.avisar_cuando_mueve_a_todos_los_actores = function (x, y, evento_original) {
+        var _this = this;
+        this.actores.map(function (e) {
+            try {
+                e.cuando_mueve_sobre_la_pantalla(x, y, evento_original);
+                e.automata.cuando_mueve_sobre_la_pantalla(x, y, evento_original);
             }
             catch (e) {
                 _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
@@ -9671,6 +9692,7 @@ var ModoEjecucion = (function (_super) {
         if (this._escena_en_ejecucion) {
             try {
                 this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, evento);
+                this._escena_en_ejecucion.avisar_cuando_mueve_a_todos_los_actores(posicion.x, posicion.y, evento);
             }
             catch (e) {
                 this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");

@@ -357,6 +357,17 @@ class EscenaBase {
     });
   }
 
+  avisar_cuando_mueve_a_todos_los_actores(x: number, y: number, evento_original: any) {
+    this.actores.map(e => {
+      try {
+        e.cuando_mueve_sobre_la_pantalla(x, y, evento_original);
+        e.automata.cuando_mueve_sobre_la_pantalla(x, y, evento_original);
+      } catch (e) {
+        this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que mueven el mouse sobre toda la pantalla");
+      }
+    });
+  }
+
   avisar_cuando_suelta_tecla_a_los_actores(tecla: string, evento_original: any) {
     this.actores.map(e => {
       try {

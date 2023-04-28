@@ -5,7 +5,10 @@ title: Eventos del mouse
 En pilas llamamos "eventos" a las señales que emiten desde
 dispositivos como el mouse o teclado. Por ejemplo, un "click" del mouse es un evento al igual que la pulsación de una tecla.
 
-Y lo interesante de los eventos es que podemos capturarlos y disparar alguna acción dentro del juego para responder. Por ejemplo, en un juego de acción, el "click" del mouse podría realizar una explosión o hacer que un personaje salte.
+Y lo interesante de los eventos es que podemos capturarlos y
+disparar alguna acción dentro del juego para responder. Por
+ejemplo, en un juego de acción, el "click" del mouse podría
+realizar una explosión o hacer que un personaje salte.
 
 ## Antes de empezar, el caso más común
 
@@ -50,13 +53,11 @@ diferencia es que en las escenas el "click" o el movimiento se van a detectar
 en toda la pantalla, mientras que en el código del actor solo se detectarán si
 el mouse apunta al actor.
 
-Si desde un actor necesitas detectar el click del mouse en la pantalla deberías
-usar este otro método:
+Si desde un actor necesitas detectar estos eventos del mouse pero sobre toda
+la pantalla deberías usar alguno de estos otros métodos:
 
 - cuando_hace_click_en_la_pantalla(x, y, evento_original)
-
-o bien:
-
+- cuando_mueve_sobre_la_pantalla(x, y, evento_original)
 - cuando_termina_de_hacer_click_en_la_pantalla(x, y, evento_original)
 
 Veamos un ejemplo, imaginá que queremos crear actores de la clase "Pelota" cada
@@ -68,8 +69,6 @@ class escena2 extends Escena {
   iniciar() {}
 
   actualizar() {}
-
-  cuando_mueve(x, y, evento_original) {}
 
   cuando_hace_click(x, y, evento_original) {
     let pelota = this.pilas.actores.pelota();

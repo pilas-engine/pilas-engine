@@ -162,6 +162,7 @@ class ModoEjecucion extends Modo {
     if (this._escena_en_ejecucion) {
       try {
         this._escena_en_ejecucion.cuando_mueve(posicion.x, posicion.y, evento);
+        this._escena_en_ejecucion.avisar_cuando_mueve_a_todos_los_actores(posicion.x, posicion.y, evento);
       } catch (e) {
         this.pilas.mensajes.emitir_excepcion_al_editor(e, "emitir cuando_mueve");
       }

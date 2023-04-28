@@ -121,4 +121,14 @@ class Automata {
       }
     }
   }
+
+  cuando_mueve_sobre_la_pantalla(x: number, y: number, evento_original: any) {
+    if (this._estado !== "") {
+      let metodo = this.actor[`${this._estado}_cuando_mueve_sobre_la_pantalla`];
+
+      if (metodo) {
+        metodo.call(this.actor, x, y, evento_original);
+      }
+    }
+  }
 }

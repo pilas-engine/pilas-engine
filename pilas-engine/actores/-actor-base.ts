@@ -1034,6 +1034,8 @@ class ActorBase {
 
   cuando_mueve(x, y, evento_original) {}
 
+  cuando_mueve_sobre_la_pantalla(x, y, evento_original) {}
+
   cuando_pulsa_tecla(tecla: string, evento_original: any) {}
 
   cuando_suelta_tecla(tecla: string, evento_original: any) {}
