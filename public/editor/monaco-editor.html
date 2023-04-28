@@ -56,6 +56,7 @@
 	    if (window.location.host) {
 	      HOST = window.location.protocol + "//" + window.location.host;
 	    }
+      HOST = window.location.origin;
 
 	    window.onload = function iniciar() {
 	    	require.config({
@@ -90,16 +91,17 @@
 
         // ctrl+s o cmd+s para guardar y ejecutar
 	      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
-	        window.top.postMessage({message: "on-save"}, HOST);
+	        window.parent.postMessage({message: "on-save"}, HOST);
 	      });
 
 	      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_P, function() {
-	        window.top.postMessage({message: "abrir-selector-de-codigos"}, HOST);
+	        window.parent.postMessage({message: "abrir-selector-de-codigos"}, HOST);
 	      });
 
 	      editor.onDidChangeModelContent(function (event) {
-	        window.top.postMessage({updatedCode: editor.getValue()}, HOST);
+	        window.parent.postMessage({updatedCode: editor.getValue()}, HOST);
 	      });
+
 
 				reemplazar_atajo_de_ir_a_simbolo(editor);
 
@@ -125,7 +127,8 @@
 	            }
 	          }
 
-	          window.top.postMessage({message: "load-complete"}, HOST);
+	          window.parent.postMessage({message: "load-complete"});
+	          window.parent.postMessage({message: "load-complete"}, HOST);
 	      });
 
 	      window.editor = editor;

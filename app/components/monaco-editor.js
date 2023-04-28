@@ -173,6 +173,7 @@ export default Component.extend({
       }
 
       if (event.source === this.frame && event.data && event.data.message) {
+
         if (event.data.message === "load-complete") {
           this.cuandoCargaElEditor(this.frame.editor, this.frame.monaco, this.frame.window);
         }
