@@ -7,7 +7,17 @@ export default Route.extend({
   intl: service(),
 
   model() {
+    this.conectar_manejador_para_evitar_cierres_accidentales();
     return this.paramsFor("application");
+  },
+
+  conectar_manejador_para_evitar_cierres_accidentales() {
+    // Evita que el usuario cierre accidentalmente la ventana.
+    window.onbeforeunload = (e) => {
+      if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
+        return 'Hay cambios sin guardar, ¿Quieres salir?';
+      }
+    };
   },
 
   actions: {
