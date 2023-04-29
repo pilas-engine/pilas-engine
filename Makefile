@@ -54,6 +54,7 @@ comandos:
 	@echo "    ${G}actualizar_actores${N}           Actualiza el listado de actores implementados."
 	@echo "    ${G}actualizar_actores_live${N}      Actualiza el listado de actores en modo continuo."
 	@echo "    ${G}actualizar_definiciones${N}      Actualiza las definiciones de typescript para phaser."
+	@echo "    ${G}actualizar-imagenes${N}          Actualiza todos los spritesheets."
 	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
 	@echo ""
@@ -323,7 +324,7 @@ actualizar_fuentes:
 actualizar_fuentes_live:
 	@node scripts/actualizar-fuentes-live.js
 
-actualizar_imagenes:
+actualizar-imagenes:
 	$(call log, "Creando spritesheets de imágenes de pilas")
 	TexturePacker recursos/imagenes.tps
 	TexturePacker recursos/bloques.tps

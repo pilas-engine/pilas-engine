@@ -13,7 +13,7 @@ export default Route.extend({
 
   conectar_manejador_para_evitar_cierres_accidentales() {
     // Evita que el usuario cierre accidentalmente la ventana.
-    window.onbeforeunload = (e) => {
+    window.onbeforeunload = () => {
       if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
         return 'Hay cambios sin guardar, ¿Quieres salir?';
       }
