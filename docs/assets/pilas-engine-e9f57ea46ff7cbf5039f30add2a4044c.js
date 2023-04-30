@@ -186,7 +186,7 @@ for(var n=0,t=new Array(a);n<a;n++)t[n]=e[n]
 return t}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var o=Ember.Component.extend({actions:{seleccionar_sonido:function(){this.element.querySelector("input").click()},procesar_sonido_seleccionado:function(e){var t=this,o=n(e.target.files).filter((function(e){return e.size/1024>400}))
 if(o.length>0){var i=o[0]
-alert('No se puede incorporar el archivo "'.concat(i.name,'" porque excede los 400kb. Te recomendamos optimizar este archivo con un software como audacity para que pilas pueda procesarlo.'))}else{var r=n(e.target.files).map((function(e){return(0,a.default)(e,"mp3|wav|ogg")}))
+alert('No se puede incorporar el archivo "'.concat(i.name,'" porque excede los 5MB. Te recomendamos optimizar este archivo con un software como audacity para que pilas pueda procesarlo.'))}else{var r=n(e.target.files).map((function(e){return(0,a.default)(e,"mp3|wav|ogg")}))
 Ember.RSVP.all(r).then((function(e){t.cuando_procesa_archivos(e)}))}}}})
 e.default=o})),define("pilas-engine/components/pilas-boton-login",["exports","ember-concurrency"],(function(e,a){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var n=Ember.Component.extend({mostrarModal:!1,paso:"login",api:Ember.inject.service(),sesion:Ember.inject.service(),autenticando:!1,autenticado:!1,saliendo:!1,usuario:"",email:"",contraseña:"",etapaLogin:Ember.computed("paso",(function(){return"login"===this.paso})),etapaCrearUsuario:Ember.computed("paso",(function(){return"crearUsuario"===this.paso})),etapaUsuarioCreadoYAutenticado:Ember.computed("paso",(function(){return"finalizado"===this.paso})),hacer_foco_en_el_primer_input:function(){var e=this.element.getElementsByTagName("input")[0]

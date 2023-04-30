@@ -208,7 +208,7 @@ audio:
   use.sound: enter this code to use this sound in a game
   play.music: enter this code if you want to loop this sound it like a music
   stop.music: and enter this code to stop the music
-  format: Keep in mind that sound files must should be less than 400kb, and must be MP3 format only.
+  format: Keep in mind that sound files must should be less than 5MB, and must be MP3 format only.
 
 menu:
   duplicate.actor: Double this actor

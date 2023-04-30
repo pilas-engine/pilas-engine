@@ -10,12 +10,12 @@ export default Component.extend({
 
     procesar_sonido_seleccionado(event) {
       let encontrado = [...event.target.files].filter(archivo => {
-        return archivo.size / 1024 > 400; // 400kb
+        return archivo.size / 1024 > 1024 * 5; // 5MB - es el límite de upload de archivos.
       });
 
       if (encontrado.length > 0) {
         let archivo = encontrado[0];
-        alert(`No se puede incorporar el archivo "${archivo.name}" porque excede los 400kb. Te recomendamos optimizar este archivo con un software como audacity para que pilas pueda procesarlo.`);
+        alert(`No se puede incorporar el archivo "${archivo.name}" porque excede los 5MB. Te recomendamos optimizar este archivo con un software como audacity para que pilas pueda procesarlo.`);
         return;
       }
 

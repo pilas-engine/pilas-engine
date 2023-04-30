@@ -207,7 +207,7 @@ audio:
   use.sound: para usar este sonido dentro del juego podes escribir el siguiente código
   play.music: y si el sonido se trata de una música que se tiene que repetir varias veces usá este código
   stop.music: y esta otra sentencia para detener la música
-  format: Ten en cuenta que los sonidos tienen que ocupar menos de 400kb, y estar en un formato de compresión .mp3 para optimizar el tamaño del proyecto.
+  format: Ten en cuenta que los sonidos tienen que ocupar menos de 5MB, y estar en un formato de compresión .mp3 para optimizar el tamaño del proyecto.
 
 menu:
   duplicate.actor: Duplicar este actor

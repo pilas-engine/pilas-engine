@@ -204,7 +204,7 @@ audio:
   use.sound: 输入此代码以在游戏中使用此声音
   play.music: 如果要循环播放此声音，请输入此代码
   stop.music: 然后输入此代码以停止音乐
-  format: 请记住，声音文件必须小于400kb，并且只能是MP3格式。
+  format: 请记住，声音文件必须小于5MB，并且只能是MP3格式。
 
 menu:
   duplicate.actor: 放大演员1倍
