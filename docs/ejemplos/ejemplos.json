@@ -1,5 +1,6 @@
 {
   "ejemplos": [
+    { "nombre": "dibuja-rectangulos", "desde": "2.8.6" },
     { "nombre": "cursor-animado", "desde": "2.8.0" },
     { "nombre": "gravedad-aleatoria", "desde": "2.8.0" },
     { "nombre": "teclado", "desde": "2.8.0" },

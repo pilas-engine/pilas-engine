@@ -61,6 +61,8 @@
         HOST = window.location.protocol + "//" + window.location.host;
       }
 
+      HOST = window.location.origin;
+
       // esta variable proviene del archivo bloques_compilados.js que se
       // genera con el comando make compilar_bloques
       const toolbox = toolbox_de_bloques_compilados;
@@ -115,7 +117,7 @@
 
           if (pulsa_ctrl_s) {
             e.preventDefault();
-            window.top.postMessage({ message: "pulsa-ctrl-s" }, HOST);
+            window.parent.postMessage({ message: "pulsa-ctrl-s" }, HOST);
           }
         },
         false
@@ -126,7 +128,7 @@
       Blockly.svgResize(workspace);
 
       // Avisa al componente que cargó blockly.
-      window.top.postMessage({ message: "carga-completa-de-blockly" }, HOST);
+      window.parent.postMessage({ message: "carga-completa-de-blockly" }, HOST);
 
       function convertir_en_dropdown(lista) {
         return lista.map((item) => [item, item]);
@@ -138,7 +140,7 @@
           let xml_text = Blockly.Xml.domToText(xml);
           let codigo = Blockly.JavaScript.workspaceToCode(workspace);
 
-          window.top.postMessage(
+          window.parent.postMessage(
             {
               message: "cambia-el-workspace-de-blockly",
               texto: xml_text,

@@ -8,13 +8,21 @@
     <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
       div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
       ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1.6em;
+        vertical-align: middle;
+      }
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+      /* CSS for syntax highlighting */
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -84,87 +92,141 @@
          <header id="title-block-header">
       <h1 class="title">Colisiones y física</h1>
             </header>
-      <p>Pilas incluye un motor de física para hacer que los actores puedan colisionar, rebotar entre sí, ser lanzados y reaccionar la aceleración gravitatoria del escenario.</p>
-<p>Este motor de física tiene muchas variantes, así que vamos a explorar todas esas oportunidades de configuración en esta sección.</p>
+      <p>Pilas incluye un motor de física para hacer que los actores
+puedan colisionar, rebotar entre sí, ser lanzados y reaccionar la
+aceleración gravitatoria del escenario.</p>
+<p>Este motor de física tiene muchas variantes, así que vamos a explorar
+todas esas oportunidades de configuración en esta sección.</p>
 <h2 id="parámetros-principales">Parámetros principales</h2>
-<p>Para que un actor reaccione a las colisiones o se mueva como un objeto físico tenemos que activarle una figura desde las propiedades del actor.</p>
-<p>En el panel de propiedades vas a ver una sección llamada “Simulación Física” y dentro de esa sección una propiedad llamada “Figura”:</p>
+<p>Para que un actor reaccione a las colisiones o se mueva como un
+objeto físico tenemos que activarle una figura desde las propiedades del
+actor.</p>
+<p>En el panel de propiedades vas a ver una sección llamada “Simulación
+Física” y dentro de esa sección una propiedad llamada “Figura”:</p>
 <p><img src="imagenes/colisiones/simulacion-fisica.png" /></p>
-<p>Si esa propiedad tiene el valor “ninguna”, el actor no podrá colisionar ni moverse usando el botón de física, para la computadora será solamente una imagen a mostrar en la pantalla.</p>
-<p>Sin embargo, si nosotros cambiamos esa propiedad a “círculo” o “rectángulo” veremos que el actor tendrá una forma y tamaño en color verde:</p>
+<p>Si esa propiedad tiene el valor “ninguna”, el actor no podrá
+colisionar ni moverse usando el botón de física, para la computadora
+será solamente una imagen a mostrar en la pantalla.</p>
+<p>Si la propiedad tiene el valor “círculo” o “rectángulo” veremos que
+el actor tendrá una forma y tamaño en color verde:</p>
 <p><img src="imagenes/colisiones/con-figura.png" /></p>
-<p>Con esta propiedad, el actor va a reaccionar a la física del escenario, por ejemplo si colocas una plataforma y pulsas el botón ejecutar el actor comenzará a rebotar así:</p>
+<p>Con esta propiedad, el actor va a reaccionar a la física del
+escenario, por ejemplo si colocas una plataforma y pulsas el botón
+ejecutar el actor comenzará a rebotar así:</p>
 <p><img src="imagenes/colisiones/ejecutando-con-figura.gif" /></p>
-<p>También vas a notar que al elegir una figura aparecerán más propiedades como radio, rebote, dinámica etc…:</p>
+<p>También vas a notar que al elegir una figura aparecerán más
+propiedades como radio, rebote, dinámica etc…:</p>
 <p><img src="imagenes/colisiones/propiedades.png" /></p>
 <h3 id="propiedad-radio">Propiedad Radio</h3>
-<p>La propiedad <code>radio</code> nos indica el tamaño de colisión si el actor tiene la figura círculo:</p>
+<p>La propiedad <code>radio</code> nos indica el tamaño de colisión si
+el actor tiene la figura círculo:</p>
 <p><img src="imagenes/colisiones/radios.png" /></p>
-<p>Es aconsejable hacer que el tamaño de esta figura coincida con la imagen del actor, porque la figura física será invisible para quienes jueguen a tu juego, los jugadores solo van a ver la imagen del actor.</p>
+<p>Es aconsejable hacer que el tamaño de esta figura coincida con la
+imagen del actor, porque la figura física será invisible para quienes
+jueguen a tu juego, los jugadores solo van a ver la imagen del
+actor.</p>
 <h3 id="propiedad-ancho-y-alto">Propiedad ancho y alto</h3>
-<p>Estas propiedades son similares a la propiedad <code>radio</code>, pero solo estarán disponibles si la figura es un <code>rectángulo</code>:</p>
+<p>Estas propiedades son similares a la propiedad <code>radio</code>,
+pero solo estarán disponibles si la figura es un
+<code>rectángulo</code>:</p>
 <p><img src="imagenes/colisiones/rectangulos.png" /></p>
-<p>Pilas incluye estas figuras porque son las más simples y útiles de todas, si bien</p>
+<p>Pilas incluye estas figuras porque son las más simples y útiles de
+todas, si bien</p>
 <h3 id="propiedad-rebote">Propiedad rebote</h3>
-<p>La propiedad <code>rebote</code> indicará de qué forma se tiene que impulsar el actor cuando entre en contacto con otro. Si el valor de rebote es muy bajo, por ejemplo <code>0</code>, el golpe va a hacer que el objeto se detenga por completo. Mientras que valores como <code>1.5</code> harán que el objeto se impulse con más fuerza.</p>
-<p>Ten en cuenta que la reacción del actor dependerá del valor que tenga la propiedad <code>rebote</code> en ambos actores.</p>
+<p>La propiedad <code>rebote</code> indicará de qué forma se tiene que
+impulsar el actor cuando entre en contacto con otro. Si el valor de
+rebote es muy bajo, por ejemplo <code>0</code>, el golpe va a hacer que
+el objeto se detenga por completo. Mientras que valores como
+<code>1.5</code> harán que el objeto se impulse con más fuerza.</p>
+<p>Ten en cuenta que la reacción del actor dependerá del valor que tenga
+la propiedad <code>rebote</code> en ambos actores.</p>
 <h3 id="propiedad-dinámica">Propiedad Dinámica</h3>
-<p>La propiedad <code>dinámica</code> puede tener los valores <code>si</code> y <code>no</code>. Una figura con <code>dinámica=si</code> rebotará y se moverá de acuerdo a la aceleración gravitatoria del escenario.</p>
-<p>Si la figura tiene la propiedad <code>dinamica=no</code> el actor quedará rígido sin moverse ni reaccionar a la aceleración gravitatoria. Esto es ideal para hacer paredes, plataformas u obstáculos del escenario que no queremos que se muevan por ningún motivo.</p>
+<p>La propiedad <code>dinámica</code> puede tener los valores
+<code>si</code> y <code>no</code>. Una figura con
+<code>dinámica=si</code> rebotará y se moverá de acuerdo a la
+aceleración gravitatoria del escenario.</p>
+<p>Si la figura tiene la propiedad <code>dinamica=no</code> el actor
+quedará rígido sin moverse ni reaccionar a la aceleración gravitatoria.
+Esto es ideal para hacer paredes, plataformas u obstáculos del escenario
+que no queremos que se muevan por ningún motivo.</p>
 <h3 id="propiedad-sin-rotación">Propiedad Sin rotación</h3>
-<p>La propiedad <code>sin_rotacion</code> sirve para fijar la rotación de un actor como se muestra en la siguiente imagen:</p>
+<p>La propiedad <code>sin_rotacion</code> sirve para fijar la rotación
+de un actor como se muestra en la siguiente imagen:</p>
 <p><img src="imagenes/colisiones/rotacion.png" /></p>
-<p>Esta propiedad es ideal para personajes, ya que no queremos que ante una colisión aparezcan inclinados.</p>
+<p>Esta propiedad es ideal para personajes, ya que no queremos que ante
+una colisión aparezcan inclinados.</p>
 <h3 id="propiedad-gaseoso">Propiedad gaseoso</h3>
-<p>La propiedad <code>¿Es gaseoso?</code> se utiliza para hacer que un actor se comporte como un fantasma, y que ninguna figura pueda chocarla o chocar a otros actores.</p>
+<p>La propiedad <code>¿Es gaseoso?</code> se utiliza para hacer que un
+actor se comporte como un fantasma, y que ninguna figura pueda chocarla
+o chocar a otros actores.</p>
 <h2 id="colisiones">Colisiones</h2>
-<p>Las colisiones permiten ejecutar funciones como respuesta al contacto entre diferentes actores. Las funciones se pueden personalizar para hacer casi cualquier cosa: reproducir un sonido para magnificar el impacto, eliminar alguno de los actores en contacto, emitir efectos etc…</p>
+<p>Las colisiones permiten ejecutar código como respuesta al contacto
+entre diferentes actores. Las funciones se pueden personalizar para
+hacer casi cualquier cosa: reproducir un sonido para magnificar el
+impacto, eliminar alguno de los actores en contacto, emitir efectos
+etc…</p>
 <p>Por ejemplo, imagina que tenemos estos tres actores:</p>
-<p><img src="imagenes/assets/colisiones.md%202018-04-11%2023-53-00.png" /></p>
-<p>Cuando el juego se ejecute, la plataforma va a quedar fija en pantalla. Mientras que la pelota y la caja van a moverse hacia abajo y colisionarán.</p>
-<p>Pilas va a llamar automáticamente a la función <code>cuando_comienza_una_colision</code> ni bien entren en contacto dos actores. Por ejemplo en este caso, pilas va a llamar a la función <code>cuando_comienza_una_colision</code> cuando la pelota colisione con la caja, y luego la plataforma.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">class</span> pelota <span class="kw">extends</span> Actor {</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  cuando_comienza_una_colision(<span class="dt">actor</span><span class="op">:</span> Actor) {</span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="cf">if</span> (actor<span class="op">.</span><span class="at">etiqueta</span> <span class="op">===</span> <span class="st">&quot;caja&quot;</span>) {</span>
-<span id="cb1-5"><a href="#cb1-5"></a>      <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>    }</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a>    <span class="cf">if</span> (actor<span class="op">.</span><span class="at">etiqueta</span> <span class="op">===</span> <span class="st">&quot;plataforma&quot;</span>) {</span>
-<span id="cb1-9"><a href="#cb1-9"></a>      <span class="kw">this</span><span class="op">.</span><span class="fu">decir</span>(<span class="st">&quot;Oh, colisioné con una plataforma!&quot;</span>)<span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>    }</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  }</span>
-<span id="cb1-12"><a href="#cb1-12"></a>}</span></code></pre></div>
-<p>En el código hay dos cosas interesantes, tenemos la función <code>cuando_comienza_una_colision</code> dentro de la clase “pelota” para detectar colisiones y además intentamos distinguir contra qué actores se produce la colisión usando <a href="etiquetas.md">etiquetas</a>. :</p>
+<p><img
+src="imagenes/assets/colisiones.md%202018-04-11%2023-53-00.png" /></p>
+<p>Cuando el juego se ejecute, la plataforma va a quedar fija en
+pantalla. Mientras que la pelota y la caja van a moverse hacia abajo y
+colisionarán.</p>
+<p>Pilas va a llamar automáticamente a la función
+<code>cuando_comienza_una_colision</code> ni bien entren en contacto dos
+actores. Por ejemplo en este caso, pilas va a llamar a la función
+<code>cuando_comienza_una_colision</code> cuando la pelota colisione con
+la caja, y luego la plataforma.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> pelota <span class="kw">extends</span> Actor {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cuando_comienza_una_colision</span>(<span class="dt">actor</span><span class="op">:</span> Actor) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (actor<span class="op">.</span><span class="at">etiqueta</span> <span class="op">===</span> <span class="st">&quot;caja&quot;</span>) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (actor<span class="op">.</span><span class="at">etiqueta</span> <span class="op">===</span> <span class="st">&quot;plataforma&quot;</span>) {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">this</span><span class="op">.</span><span class="fu">decir</span>(<span class="st">&quot;Oh, colisioné con una plataforma!&quot;</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>En el código hay dos cosas interesantes, tenemos la función
+<code>cuando_comienza_una_colision</code> dentro de la clase “pelota”
+para detectar colisiones y además intentamos distinguir contra qué
+actores se produce la colisión usando <a
+href="etiquetas.md">etiquetas</a>. :</p>
 <ul>
-<li>Si la pelota colisiona con una caja, le indicamos a pilas que ignore la colisión, y continúe. Esto se hace simplemente retornando <code>true</code>.</li>
-<li>Si la pelota colisiona con una plataforma, emitimos un mensaje para que el usuario pueda reconocer que la pelota detectó la colisión.</li>
+<li>Si la pelota colisiona con una caja, le indicamos a pilas que ignore
+la colisión, y continúe. Esto se hace simplemente retornando
+<code>true</code>.</li>
+<li>Si la pelota colisiona con una plataforma, emitimos un mensaje para
+que el usuario pueda reconocer que la pelota detectó la colisión.</li>
 </ul>
 <h2 id="tipos-de-colisiones">Tipos de colisiones</h2>
 <p>Hay 3 instantes muy importantes cuando se producen colisiones:</p>
 <ul>
 <li>Cuando se detecta el contacto inicial.</li>
-<li>Cuando los dos actores permanecen en contacto prolongado. Por ejemplo cuando un actor se posa sobre una plataforma.</li>
-<li>El instante en donde la colisión desaparece porque los actores dejan de estar en contacto. Por ejemplo cuando un actor posando sobre una plataforma “salta” y deja de estar en contacto.</li>
+<li>Cuando los dos actores permanecen en contacto prolongado. Por
+ejemplo cuando un actor se posa sobre una plataforma.</li>
+<li>El instante en donde la colisión desaparece porque los actores dejan
+de estar en contacto. Por ejemplo cuando un actor posando sobre una
+plataforma “salta” y deja de estar en contacto.</li>
 </ul>
-<p>Para distinguir estos casos pilas llamará a las tres funciones de forma diferente. Este es un ejemplo de cómo se declaran esas funciones en el código de un actor:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>class mi_actor extends Actor {</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  cuando_comienza_una_colision(actor<span class="op">:</span> Actor) {</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    if (actor<span class="op">.</span><span class="at">etiqueta</span> <span class="op">===</span> <span class="st">&quot;moneda&quot;</span>) {</span>
-<span id="cb2-4"><a href="#cb2-4"></a>      this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">reproducir_sonido</span>(<span class="st">&quot;moneda&quot;</span>)<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>      actor<span class="op">.</span><span class="fu">eliminar</span>()<span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>    }</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  }</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a>  cuando_se_mantiene_una_colision(actor<span class="op">:</span> Actor) {}</span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  cuando_termina_una_colision(actor<span class="op">:</span> Actor) {}</span>
-<span id="cb2-12"><a href="#cb2-12"></a>}</span></code></pre></div>
-<p>Luego, el tipo de colisión más común que se llamará siempre tiene la siguiente forma:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>  cuando_colisiona(actor<span class="op">:</span> Actor) {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  }</span></code></pre></div>
-<h2 id="colisiones-entre-figuras-estáticas-no-dinámicas">Colisiones entre figuras estáticas (no dinámicas)</h2>
-<p>Hay otro tipo de colisión especial que solo se produce entre figuras no dinámicas, esas colisiones se notifican constantemente en cada cuadro de animación mediante el método <code>cuando_colisionan</code>.</p>  <div class="tc navegacion">
+<p>Para distinguir estos casos pilas llamará a las tres funciones de
+forma diferente. Este es un ejemplo de cómo se declaran esas funciones
+en el código de un actor:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> mi_actor <span class="kw">extends</span> Actor {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cuando_comienza_una_colision</span>(actor<span class="op">:</span> Actor) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (actor<span class="op">.</span><span class="at">etiqueta</span> <span class="op">===</span> <span class="st">&quot;moneda&quot;</span>) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">reproducir_sonido</span>(<span class="st">&quot;moneda&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      actor<span class="op">.</span><span class="fu">eliminar</span>()<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cuando_se_mantiene_una_colision</span>(actor<span class="op">:</span> Actor) {}</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cuando_termina_una_colision</span>(actor<span class="op">:</span> Actor) {}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

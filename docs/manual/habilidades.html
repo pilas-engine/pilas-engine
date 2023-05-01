@@ -8,13 +8,21 @@
     <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
       div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
       ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1.6em;
+        vertical-align: middle;
+      }
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+      /* CSS for syntax highlighting */
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -84,20 +92,37 @@
          <header id="title-block-header">
       <h1 class="title">Habilidades</h1>
             </header>
-      <p>Cuando realizamos juegos hay ciertos comportamientos que son tan comunes que ni siquiera necesitamos programarlos escribiendo código.</p>
-<p>Un ejemplo de estos comportamientos comunes incluyen “hacer que un actor se mueva con el teclado”, “poder arrastrar y soltar un actor con el mouse” etc…</p>
-<p>A todos estos comportamientos los llamamos “habilidades”, y lo interesante es que podemos tomar a cualquier actor y “enseñarle” cualquier de las habilidades para mejorar nuestro juego.</p>
+      <p>Cuando realizamos juegos hay ciertos comportamientos que son
+tan comunes que ni siquiera necesitamos programarlos escribiendo
+código.</p>
+<p>Un ejemplo de estos comportamientos comunes incluyen “hacer que un
+actor se mueva con el teclado”, “poder arrastrar y soltar un actor con
+el mouse” etc…</p>
+<p>A todos estos comportamientos los llamamos “habilidades”, y lo
+interesante es que podemos tomar a cualquier actor y “enseñarle”
+cualquier de las habilidades para mejorar nuestro juego.</p>
 <h2 id="desde-el-editor">Desde el editor</h2>
-<p>Una opción para incorporarle habilidades a un actor es usar el inspector del actor. Hay una propiedad llamada “Habilidades” en donde cargar una o más habilidades que busquemos enseñarle a un actor al momento de iniciar la escena.</p>
+<p>Una opción para incorporarle habilidades a un actor es usar el
+inspector del actor. Hay una propiedad llamada “Habilidades” en donde
+cargar una o más habilidades que busquemos enseñarle a un actor al
+momento de iniciar la escena.</p>
 <p><img src="imagenes/habilidades/habilidades.png" /></p>
 <h2 id="desde-el-código">Desde el código</h2>
 <p>Otra opción, es enseñarle una habilidad al actor desde el código.</p>
-<p>Imaginá que buscamos crear un juego de cartas, donde el usuario tiene que poder mover una carta por la pantalla usando el mouse o gestos del dispositivo mobile. El primer paso es crear el actor, con la imagen que nos interesa:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>let mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>mi_actor<span class="op">.</span><span class="at">imagen</span> <span class="op">=</span> <span class="st">&quot;imagenes:cartas/carta&quot;</span><span class="op">;</span></span></code></pre></div>
-<p>Y aquí lo interesante, para hacer que el usuario pueda mover este actor por la pantalla simplemente tenemos que “enseñarle” al actor la habilidad arrastrable así:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>mi_actor<span class="op">.</span><span class="fu">aprender</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>
-<p>La lista de habilidades disponibles dentro de pilas es la siguiente:</p>
+<p>Imaginá que buscamos crear un juego de cartas, donde el usuario tiene
+que poder mover una carta por la pantalla usando el mouse o gestos del
+dispositivo mobile. El primer paso es crear el actor, con la imagen que
+nos interesa:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> mi_actor <span class="op">=</span> pilas<span class="op">.</span><span class="at">actores</span><span class="op">.</span><span class="fu">actor</span>()<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="at">imagen</span> <span class="op">=</span> <span class="st">&quot;imagenes:cartas/carta&quot;</span><span class="op">;</span></span></code></pre></div>
+<p>Y aquí lo interesante, para hacer que el usuario pueda mover este
+actor por la pantalla simplemente tenemos que “enseñarle” al actor la
+habilidad arrastrable así:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">aprender</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<p>La lista de habilidades disponibles dentro de pilas es la
+siguiente:</p>
 <ul>
 <li>“arrastrable”</li>
 <li>“mover con el teclado”</li>
@@ -108,9 +133,41 @@
 <li>“seguir al mouse lentamente”</li>
 <li>“seguir al mouse”</li>
 </ul>
-<h2 id="olvidar-o-eliminar-habilidades">Olvidar o eliminar habilidades</h2>
-<p>Si en algún momento quieres eliminar una habilidad de un actor, simplemente se puede llamar a la función <code>olvidar</code> así:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>mi_actor<span class="op">.</span><span class="fu">olvidar</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>  <div class="tc navegacion">
+<h2 id="olvidar-o-eliminar-habilidades">Olvidar o eliminar
+habilidades</h2>
+<p>Si en algún momento quieres eliminar una habilidad de un actor,
+simplemente se puede llamar a la función <code>olvidar</code> así:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mi_actor<span class="op">.</span><span class="fu">olvidar</span>(<span class="st">&quot;arrastrable&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<h2 id="habilidades-personalizadas">Habilidades personalizadas</h2>
+<p>Pilas también te permite crear tus propias habilidades.</p>
+<p>Primero, deberías crear una clase que herede de
+<code>Habilidad</code> e implementar los métodos <code>iniciar</code>,
+<code>actualizar</code> y <code>terminar</code>.</p>
+<p>Por ejemplo, aquí tenemos el código de una habilidad que se debería
+colocar en la parte inferior de cuaquier actor:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GirarMuyRapido <span class="kw">extends</span> Habilidad {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">iniciar</span>() {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// aquí puedes acceder a this.actor</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actualizar</span>() {</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">actor</span><span class="op">.</span><span class="at">rotacion</span> <span class="op">+=</span> <span class="dv">15</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">terminar</span>() {</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// aquí puedes acceder a this.actor</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Luego, puedes tomar algún actor de tu juego y enseñarle esta
+habilidad usando dos sentecias como estas:</p>
+<pre><code>this.pilas.habilidades.vincular(&quot;girar muy rapido&quot;, GirarMuyRapido);
+this.aprender(&quot;girar muy rapido&quot;);</code></pre>
+<p>Lo bueno de estas habilidades es que una vez que las declaras se
+pueden usar en cualquier otro actor, lo único que deberías hacer es
+agregar este código al método <code>iniciar</code> del actor:</p>
+<pre><code>this.aprender(&quot;girar muy rapido&quot;);</code></pre>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>

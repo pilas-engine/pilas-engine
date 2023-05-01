@@ -82,6 +82,31 @@ declare class AnimacionDePropiedad {
     ocultar(duración?: number): this;
     mostrar(duración?: number): this;
 }
+declare class AnimacionNula extends AnimacionDePropiedad {
+    constructor();
+    cuando_finaliza(): void;
+    explotar(): this;
+    mover_x(): this;
+    mover_y(): this;
+    mover_hasta(): this;
+    mover_x_hasta(): this;
+    mover_y_hasta(): this;
+    rotar(): this;
+    rotar_hasta(): this;
+    eliminar(): this;
+    funcion(): this;
+    decir(): this;
+    esperar(): this;
+    escalar_x(): this;
+    escalar_y(): this;
+    escalar(): this;
+    escalar_x_hasta(): this;
+    escalar_y_hasta(): this;
+    escalar_hasta(): this;
+    transparencia_hasta(): this;
+    ocultar(): this;
+    mostrar(): this;
+}
 declare class Animaciones {
     pilas: Pilas;
     animaciones: {};
@@ -107,6 +132,7 @@ declare class Automata {
     cuando_termina_de_hacer_click(x: number, y: number, evento_original: any): void;
     cuando_sale(x: number, y: number, evento_original: any): void;
     cuando_mueve(x: number, y: number, evento_original: any): void;
+    cuando_mueve_sobre_la_pantalla(x: number, y: number, evento_original: any): void;
 }
 declare class Camara {
     pilas: Pilas;
@@ -671,8 +697,8 @@ declare class Pilas {
     pausar(): void;
     azar_desde_lista(lista: any): any;
     intercambiar_posiciones_al_azar(lista_de_actores: any): void;
-    desordenar_lista(lista_original: any): any[];
-    subdividir_lista(lista_original: any, cantidad_de_elementos: any): any[];
+    desordenar_lista(lista_original: [any]): any[];
+    subdividir_lista(lista_original: any, cantidad_de_elementos: number): any[];
     notificar_traza_de_ejecucion(id: string | number, linea: any): void;
     notificar_ejecucion_del_bloque(bloque: string, id: string): void;
     limpiar_traza_de_ejecucion(): void;
@@ -902,6 +928,7 @@ declare class ActorBase {
     cuando_termina_de_hacer_click(x: any, y: any, evento_original: any): void;
     cuando_sale(x: any, y: any, evento_original: any): void;
     cuando_mueve(x: any, y: any, evento_original: any): void;
+    cuando_mueve_sobre_la_pantalla(x: any, y: any, evento_original: any): void;
     cuando_pulsa_tecla(tecla: string, evento_original: any): void;
     cuando_suelta_tecla(tecla: string, evento_original: any): void;
     get cantidad_de_colisiones(): number;
@@ -1443,6 +1470,7 @@ declare class EscenaBase {
     private animaciones_en_ejecucion;
     constructor(pilas: Pilas);
     crear_animacion(actor: Actor, tipo_de_animacion: Tipo, veces: number, duración: number): AnimacionDePropiedad;
+    crear_animacion_nula(): AnimacionNula;
     eliminar_animaciones_del_actor(actor: any): void;
     reproducir_sonido(nombre: string): void;
     reproducir_musica(nombre: string): any;
@@ -1475,6 +1503,7 @@ declare class EscenaBase {
     avisar_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_termina_de_hacer_click_en_la_pantalla_a_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_pulsa_tecla_a_los_actores(tecla: string, evento_original: any): void;
+    avisar_cuando_mueve_a_todos_los_actores(x: number, y: number, evento_original: any): void;
     avisar_cuando_suelta_tecla_a_los_actores(tecla: string, evento_original: any): void;
     quitar_actor_luego_de_eliminar(actor: Actor): void;
     terminar(): void;
@@ -2096,6 +2125,13 @@ declare class ModoEjecucion extends Modo {
     private manejar_evento_key_down;
     private manejar_evento_key_up;
     cambiar_escena(nombre: string): void;
+    _obtener_cuerpos_desde_clave(clave: any, cuerpos_estaticos: any): {
+        figura_1: any;
+        figura_2: any;
+    };
+    private _reportar_colision_entre_figuras;
+    private _reportar_colision_activa_entre_figuras;
+    private _reportar_fin_de_colision_entre_figuras;
     vincular_eventos_de_colision(): void;
     obtener_escena_inicial(): any;
     obtener_nombre_de_la_escena_inicial(): string;
