@@ -73,6 +73,7 @@ comandos:
 	@echo "    ${G}version_minor${N}                Genera una versión MINOR."
 	@echo "    ${G}version_major${N}                Genera una versión MAJOR."
 	@echo "    ${G}binarios${N}                     Genera los binarios de la aplicación."
+	@echo "    ${G}subir-binarios${N}               Genera los binarios de la aplicación."
 	@echo "    ${G}deploy${N}                       Sube una versión productiva al servidor."
 	@echo ""
 	@echo ""
@@ -341,3 +342,8 @@ actualizar-imagenes:
 	TexturePacker recursos/huesos/robot.tps
 	$(call log, "Corrigiendo nombres de clases en los css generados")
 	@node scripts/corregir-css-de-grilla-de-images.js
+
+
+subir-binarios:
+	ghr --replace ${VERSION} binarios/
+
