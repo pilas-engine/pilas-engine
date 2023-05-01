@@ -260,6 +260,8 @@ ifeq ($(EMPAQUETAR_VERSION_MINIMA), 1)
 	@zip -qr binarios/version-minima.zip version-minima
 	@rm -rf version-minima
 endif
+	$(call log, "Listo, recordá ejecutar make subir-binarios para publicar el release.")
+
 
 .PHONY: tmp docs binarios manual
 
@@ -343,7 +345,10 @@ actualizar-imagenes:
 	$(call log, "Corrigiendo nombres de clases en los css generados")
 	@node scripts/corregir-css-de-grilla-de-images.js
 
-
 subir-binarios:
+	$(call log, "Subiendo binarios de la versión ${VERSION}")
 	ghr --replace ${VERSION} binarios/
+	$(call log, "Los binarios se subieron aquí:")
+	$(call log, "")
+	$(call log, "  - https://github.com/pilas-engine/pilas-engine/releases/latest")
 
