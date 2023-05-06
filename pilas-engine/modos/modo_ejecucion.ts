@@ -125,7 +125,7 @@ class ModoEjecucion extends Modo {
 
   private manejar_evento_termina_click(evento) {
     let x = evento.worldX;
-    let y = evento.worldX;
+    let y = evento.worldY;
     let p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
 
     this.pilas.eventos.emitir_evento("termina_click", {

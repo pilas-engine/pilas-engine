@@ -6113,7 +6113,7 @@ var EscenaBase = (function () {
                 e.automata.cuando_mueve_sobre_la_pantalla(x, y, evento_original);
             }
             catch (e) {
-                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que pulsan tecla");
+                _this.pilas.mensajes.emitir_excepcion_al_editor(e, "avisando que mueven el mouse sobre toda la pantalla");
             }
         });
     };
@@ -9660,7 +9660,7 @@ var ModoEjecucion = (function (_super) {
     };
     ModoEjecucion.prototype.manejar_evento_termina_click = function (evento) {
         var x = evento.worldX;
-        var y = evento.worldX;
+        var y = evento.worldY;
         var p = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(x, y);
         this.pilas.eventos.emitir_evento("termina_click", {
             x: p.x,
