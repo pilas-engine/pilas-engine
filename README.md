@@ -1,7 +1,5 @@
 # Pilas Engine 2
 
-[![CircleCI](https://circleci.com/gh/pilas-engine/pilas-engine.svg?style=svg)](https://circleci.com/gh/pilas-engine/pilas-engine)
-
 Pilas es un motor para aprender a programar realizando videojuegos, visitá la
 web para obtener más información:
 
