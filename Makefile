@@ -10,8 +10,8 @@ COMPILAR_EN_WINDOWS=1
 COMPILAR_EN_LINUX=1
 COMPILAR_EN_ARM=1
 COMPILAR_EN_ARM_64=1
-EMPAQUETAR_PARA_SERVIDOR_ESTATICO=1
-EMPAQUETAR_VERSION_MINIMA=1
+EMPAQUETAR_PARA_SERVIDOR_ESTATICO=0
+EMPAQUETAR_VERSION_MINIMA=0
 
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
@@ -178,6 +178,11 @@ binarios:
 	$(call log, "Limpiando directorio de binarios ...")
 	@rm -rf binarios
 	@mkdir binarios
+	make compilar-binarios
+	make comprimir-binarios
+	$(call log, "Listo, recordá ejecutar make subir-binarios para publicar el release.")
+
+compilar-binarios:
 	$(call log, "Compilando aplicación ember ...")
 	${BIN_EMBER} build
 	$(call log, "Generando binarios ...")
@@ -220,23 +225,31 @@ ifeq ($(COMPILAR_EN_ARM), 1)
 	cd dist; rm -rf build
 	cd dist; ../${BIN_ELECTRON_PACKAGER} . ${NOMBREBIN} --platform=linux --arch=armv7l --electron-version=${VERSION_DE_ELECTRON_PARA_DISTRIBUIR} --out=../binarios ${FLAGS_ELECTRON_PACKAGER}
 endif
+
+comprimir-binarios:
 ifeq ($(COMPILAR_EN_OSX), 1)
-	$(call log, "Comprimiendo ...")
-	@zip -qr binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
+	$(call log, "Comprimiendo osx-64 bits...")
+	zip -r -qq -dg binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
 endif
 ifeq ($(COMPILAR_EN_WINDOWS), 1)
-	@zip -qr binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
-	@zip -qr binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
+	$(call log, "Comprimiendo win32 32 bits...")
+	zip -r -qq -dg binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
+	$(call log, "Comprimiendo win32 64 bits...")
+	zip -r -qq -dg binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
 endif
 ifeq ($(COMPILAR_EN_LINUX), 1)
-	@zip -qr binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
-	@zip -qr binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
+	$(call log, "Comprimiendo linux 32 bits...")
+	zip -r -qq -dg binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
+	$(call log, "Comprimiendo linux 64 bits...")
+	zip -r -qq -dg binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
 endif
 ifeq ($(COMPILAR_EN_ARM), 1)
-	@zip -qr binarios/${NOMBREBIN}-linux-armv7l.zip binarios/${NOMBREBIN}-linux-armv7l
+	$(call log, "Comprimiendo linux armv7l ...")
+	zip -r -qq -dg binarios/${NOMBREBIN}-linux-armv7l.zip binarios/${NOMBREBIN}-linux-armv7l
 endif
 ifeq ($(COMPILAR_EN_ARM_64), 1)
-	@zip -qr binarios/${NOMBREBIN}-linux-arm64.zip binarios/${NOMBREBIN}-linux-arm64
+	$(call log, "Comprimiendo linux arm 64 bits ...")
+	zip -r -qq -dg binarios/${NOMBREBIN}-linux-arm64.zip binarios/${NOMBREBIN}-linux-arm64
 endif
 ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	@echo "Empaquetando para servidor estático ..."
@@ -244,23 +257,9 @@ ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	${BIN_EMBER} build --prod
 	@echo "Empaquetando para servidor estático: comprimiendo ..."
 	@mv dist/ pilas-engine-compilado
-	@zip -qr binarios/pilas-engine-compilado.zip pilas-engine-compilado
+	zip -r -qq -dg binarios/pilas-engine-compilado.zip pilas-engine-compilado
 	@rm -rf pilas-engine-compilado
 endif
-ifeq ($(EMPAQUETAR_VERSION_MINIMA), 1)
-	@echo "Empaquetando versión mínima ..."
-	@rm -rf version-minima
-	@mkdir version-minima
-	@cp public/pilas-engine.js ./version-minima/
-	@cp public/nineslice.js ./version-minima/
-	@cp public/phaser.js ./version-minima/
-	@cp extras/ejemplo-minimo.html ./version-minima/
-	@cp recursos/imagenes/basicos/logo.png version-minima/
-	@cp recursos/decoracion/fondos/fondo-azul.png version-minima/fondo.png
-	@zip -qr binarios/version-minima.zip version-minima
-	@rm -rf version-minima
-endif
-	$(call log, "Listo, recordá ejecutar make subir-binarios para publicar el release.")
 
 
 .PHONY: tmp docs binarios manual
@@ -351,4 +350,11 @@ subir-binarios:
 	$(call log, "Los binarios se subieron aquí:")
 	$(call log, "")
 	$(call log, "  - https://github.com/pilas-engine/pilas-engine/releases/latest")
+	$(call log, "")
+	$(call log, "Recordá que luego de hacer esto te conviene actualizar los")
+	$(call log, "links de descarga de la web de pilas. Para hacer eso, ejecutá")
+	$(call log, "estos comandos:")
+	$(call log, "")
+	$(call log, "  cd ../sitio-web:")
+	$(call log, "  make actualizar-descargas update deploy")
 
