@@ -77,15 +77,11 @@ class ModoEjecucion extends Modo {
     this.pilas.game.scale.resize(this.ancho, this.alto);
   }
 
-  private cargar_animaciones(datos) {
+  private cargar_animaciones(datos: any) {
     let animaciones = datos.proyecto.animaciones;
 
     if (animaciones) {
-      for (let i = 0; i < animaciones.length; i++) {
-        let animación = animaciones[i];
-        let cuadros_de_animacion = animación.cuadros.map(e => e.nombre);
-        this.pilas.animaciones.crear_animacion(animación.nombre, cuadros_de_animacion, animación.velocidad);
-      }
+      this.pilas.animaciones.reemplazar_todas_las_animaciones(animaciones);
     }
   }
 

@@ -475,22 +475,25 @@ var Animaciones = (function () {
     Animaciones.prototype.crear_animacion = function (nombre, cuadros, velocidad) {
         var frames = this.crear_frames_de_animacion(cuadros, nombre);
         if (!this.animaciones[nombre]) {
-            var animacion = this.pilas.modo.anims.create({
-                key: nombre,
-                frames: frames,
-                frameRate: velocidad,
-                repeat: -1
-            });
-            this.animaciones[nombre] = animacion;
+            this.pilas.modo.anims.remove(nombre);
         }
-        else {
-            var animacion = this.pilas.modo.anims.get(nombre);
-            var cantidad = animacion.frames.length;
-            for (var i = 0; i < cantidad; i++) {
-                animacion.removeFrameAt(0);
-            }
-            animacion.addFrame(frames);
-            animacion.msPerFrame = 1000 / velocidad;
+        var animacion = this.pilas.modo.anims.create({
+            key: nombre,
+            frames: frames,
+            frameRate: velocidad,
+            repeat: -1
+        });
+        this.animaciones[nombre] = animacion;
+    };
+    Animaciones.prototype.reemplazar_todas_las_animaciones = function (animaciones) {
+        for (var animacion in this.animaciones) {
+            this.pilas.modo.anims.remove(animacion);
+        }
+        this.animaciones = {};
+        for (var i = 0; i < animaciones.length; i++) {
+            var animación = animaciones[i];
+            var cuadros_de_animacion = animación.cuadros.map(function (e) { return e.nombre; });
+            this.crear_animacion(animación.nombre, cuadros_de_animacion, animación.velocidad);
         }
     };
     Animaciones.prototype.crear_frames_de_animacion = function (cuadros, nombre_de_la_animacion) {
@@ -9622,11 +9625,7 @@ var ModoEjecucion = (function (_super) {
     ModoEjecucion.prototype.cargar_animaciones = function (datos) {
         var animaciones = datos.proyecto.animaciones;
         if (animaciones) {
-            for (var i = 0; i < animaciones.length; i++) {
-                var animación = animaciones[i];
-                var cuadros_de_animacion = animación.cuadros.map(function (e) { return e.nombre; });
-                this.pilas.animaciones.crear_animacion(animación.nombre, cuadros_de_animacion, animación.velocidad);
-            }
+            this.pilas.animaciones.reemplazar_todas_las_animaciones(animaciones);
         }
     };
     ModoEjecucion.prototype.conectar_eventos = function () {

@@ -10,26 +10,36 @@ class Animaciones {
     let frames = this.crear_frames_de_animacion(cuadros, nombre);
 
     if (!this.animaciones[nombre]) {
-      let animacion = this.pilas.modo.anims.create({
-        key: nombre,
-        frames: frames,
-        frameRate: velocidad,
-        repeat: -1
-      });
-
-      this.animaciones[nombre] = animacion;
-    } else {
-      let animacion = this.pilas.modo.anims.get(nombre);
-
-      // limpia todos los cuadros de animación
-      let cantidad = animacion.frames.length;
-      for (let i = 0; i < cantidad; i++) {
-        animacion.removeFrameAt(0);
-      }
-
-      animacion.addFrame(frames);
-      animacion.msPerFrame = 1000 / velocidad;
+      this.pilas.modo.anims.remove(nombre);
     }
+
+    let animacion = this.pilas.modo.anims.create({
+      key: nombre,
+      frames: frames,
+      frameRate: velocidad,
+      repeat: -1
+    });
+
+    this.animaciones[nombre] = animacion;
+  }
+
+  public reemplazar_todas_las_animaciones(animaciones: any) {
+
+    // borra todas las animaciones.
+    for (let animacion in this.animaciones) {
+      this.pilas.modo.anims.remove(animacion);
+    }
+
+    // limpia el array de animaciones.
+    this.animaciones = {};
+
+    // carga todas las animaciones de nuevo.
+    for (let i = 0; i < animaciones.length; i++) {
+      let animación = animaciones[i];
+      let cuadros_de_animacion = animación.cuadros.map(e => e.nombre);
+      this.crear_animacion(animación.nombre, cuadros_de_animacion, animación.velocidad);
+    }
+
   }
 
   private crear_frames_de_animacion(cuadros: any[], nombre_de_la_animacion: string) {
