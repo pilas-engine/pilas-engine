@@ -112,6 +112,7 @@ declare class Animaciones {
     animaciones: {};
     constructor(pilas: Pilas);
     crear_animacion(nombre: string, cuadros: any[], velocidad: number): void;
+    reemplazar_todas_las_animaciones(animaciones: any): void;
     private crear_frames_de_animacion;
     existe_animacion(nombre: string): boolean;
 }
