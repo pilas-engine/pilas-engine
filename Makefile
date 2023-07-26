@@ -1,4 +1,4 @@
-VERSION=$(shell git describe --tags)
+VERSION=$(shell git describe --tags --abbrev=0)
 NOMBRE="pilas-engine"
 NOMBREBIN="pilas-engine"
 DATE=`date +'%y.%m.%d %H:%M:%S'`
@@ -174,13 +174,11 @@ test:
 	${BIN_EMBER} test
 
 binarios:
-	$(call task, "Comenzando a generar binarios.")
-	$(call log, "Limpiando directorio de binarios ...")
 	@rm -rf binarios
 	@mkdir binarios
 	make compilar-binarios
 	make comprimir-binarios
-	$(call log, "Listo, recordá ejecutar make subir-binarios para publicar el release.")
+	@echo "Listo, recordá ejecutar make subir-binarios para publicar el release"
 
 compilar-binarios:
 	$(call log, "Compilando aplicación ember ...")
@@ -344,15 +342,15 @@ actualizar-imagenes:
 	$(call log, "Corrigiendo nombres de clases en los css generados")
 	@node scripts/corregir-css-de-grilla-de-images.js
 
+
 subir-binarios:
-	$(call log, "Subiendo binarios de la versión ${VERSION}")
 	ghr --replace ${VERSION} binarios/
 	$(call log, "Los binarios se subieron aquí:")
 	$(call log, "")
 	$(call log, "  - https://github.com/pilas-engine/pilas-engine/releases/latest")
 	$(call log, "")
 	$(call log, "Recordá que luego de hacer esto te conviene actualizar los")
-	$(call log, "links de descarga de la web de pilas. Para hacer eso, ejecutá")
+	$(call log, "links de descarga de la web de pilas. Para hacer eso ejecuta")
 	$(call log, "estos comandos:")
 	$(call log, "")
 	$(call log, "  cd ../sitio-web:")
