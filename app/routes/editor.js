@@ -12,12 +12,22 @@ export default Route.extend({
   },
 
   conectar_manejador_para_evitar_cierres_accidentales() {
-    // Evita que el usuario cierre accidentalmente la ventana.
-    window.onbeforeunload = () => {
-      if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
-        return 'Hay cambios sin guardar, ¿Quieres salir?';
-      }
-    };
+    // Evita que el usuario cierre accidentalmente la ventana cuando
+    // no se usa electron.
+    // 
+    // Se evita usar este código en electron porque hay varios problemas
+    // en utilizar "onbeforeunload" en electron. Para evitar que el usuario
+    // cierre la ventana y pierda cambios se usa otra estrategia, ver el archivo
+    // electron.js o prod-electron.js.
+    if (!window.enElectron) {
+      window.onbeforeunload = () => {
+
+        if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
+          return 'Hay cambios sin guardar, ¿Quieres salir?';
+        }
+
+      };
+    }
   },
 
   actions: {

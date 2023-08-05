@@ -37,10 +37,34 @@ export default Service.extend({
 
   cuando_guarda() {
     this.set("hay_cambios_por_guardar", false);
+    this.avisar_a_electron_si_hay_cambios_por_guardar();
   },
 
   cuando_realiza_un_cambio() {
     this.set("hay_cambios_por_guardar", true);
+    this.avisar_a_electron_si_hay_cambios_por_guardar();
+
+  },
+
+  avisar_a_electron_si_hay_cambios_por_guardar() {
+    // Electron necesita poder controlar si la ventana
+    // de la aplicación se puede cerrar o no, para esto
+    // ember tiene que avisarle al proceso principal de
+    // electron si el usuario tiene cambios por guardar
+    // o no. Este código hace exactamente eso, le envía
+    // al proceso principal de electron si el usuario
+    // tiene cambios por guardar o no. Vea el archivo
+    // electron.js o prod-electron.js para ver cómo gestiona
+    // electron este cambio del lado del proceso principal.
+    //
+    // Este código solo funciona cuando la aplicación
+    // está funcionando dentro de electron
+
+    if (window.enElectron) {
+      const { ipcRenderer } = requireNode('electron');
+      let cambios = this.get("hay_cambios_por_guardar");
+      ipcRenderer.send("cambia-estado-guardado", cambios);
+    }
   },
 
   eliminar_proyectos_guardados() {
