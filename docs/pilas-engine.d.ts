@@ -747,6 +747,7 @@ declare class ActorBase {
     private _nombre;
     private recorte_activado;
     proyecto: any;
+    animacion_pausada: boolean;
     _habilidades: any[];
     _comportamientos: {
         nombre_del_comportamiento: string;
@@ -916,6 +917,10 @@ declare class ActorBase {
     cuando_transcurre_un_segundo(segundos_transcurridos: number): void;
     avanzar(rotacion?: number, velocidad?: number): void;
     crear_animacion(nombre: any, cuadros: any, velocidad: any): void;
+    pausar_animacion(): void;
+    continuar_animacion(): void;
+    reiniciar_animacion(): void;
+    actualizar_animacion(): void;
     reproducir_animacion(nombre_de_la_animacion: any): void;
     cuando_finaliza_animacion(animacion: string): void;
     set animacion(nombre: string);
@@ -2114,9 +2119,12 @@ declare class ModoEjecucion extends Modo {
     instancia_de_proyecto: any;
     con_error: boolean;
     bloques: any;
+    _time: number;
+    _delta: number;
     constructor();
     preload(): void;
     create(datos: any): void;
+    save_delta_times(time: any, delta: any): void;
     modificar_modo_de_pantalla(): void;
     private cargar_animaciones;
     private conectar_eventos;
