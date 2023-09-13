@@ -22,6 +22,8 @@ class ModoEjecucion extends Modo {
   instancia_de_proyecto: any = null;
   con_error: boolean;
   bloques: any;
+  _time: number;
+  _delta: number;
 
   constructor() {
     super({ key: "ModoEjecucion" });
@@ -70,6 +72,13 @@ class ModoEjecucion extends Modo {
     } catch (e) {
       this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
     }
+
+    this.events.on('update', this.save_delta_times.bind(this));
+  }
+
+  save_delta_times(time, delta) {
+    this._time = time;
+    this._delta = delta;
   }
 
   modificar_modo_de_pantalla() {
@@ -662,6 +671,8 @@ class ModoEjecucion extends Modo {
     if (this.con_error) {
       return;
     }
+
+    //console.log({a, b, update: true});
 
     super.update(this.pilas.escena.actores);
 

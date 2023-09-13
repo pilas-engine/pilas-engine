@@ -3297,6 +3297,7 @@ var ActorBase = (function () {
         this._vivo = true;
         this._animacion_en_curso = "";
         this._es_texto = false;
+        this.animacion_pausada = false;
         this._comportamiento_actual = null;
         this._fondo = null;
         this._fondo_imagen = "";
@@ -3428,11 +3429,6 @@ var ActorBase = (function () {
                 this.fondo = propiedades.fondo;
             }
         }
-        this.sprite.update = function () {
-            _this.ejecutar_de_modo_seguro(function () {
-                _this.actualizar();
-            });
-        };
         this.sprite.on("animationrepeat", function (anim, frame) {
             _this.ejecutar_de_modo_seguro(function () {
                 if (frame.isFirst) {
@@ -4197,7 +4193,31 @@ var ActorBase = (function () {
     ActorBase.prototype.crear_animacion = function (nombre, cuadros, velocidad) {
         this.pilas.animaciones.crear_animacion(nombre, cuadros, velocidad);
     };
+    ActorBase.prototype.pausar_animacion = function () {
+        this.animacion_pausada = true;
+        this.sprite.anims.pause();
+    };
+    ActorBase.prototype.continuar_animacion = function () {
+        if (this.animacion_pausada) {
+            this.sprite.anims.resume();
+        }
+    };
+    ActorBase.prototype.reiniciar_animacion = function () {
+        this.sprite.anims.restart();
+    };
+    ActorBase.prototype.actualizar_animacion = function () {
+        if (this.animacion_pausada) {
+            this.sprite.anims.resume();
+        }
+        var delta = this.pilas.modo._delta;
+        var time = this.pilas.modo._time;
+        this.sprite.anims.update(time, delta);
+        if (this.animacion_pausada) {
+            this.sprite.anims.pause();
+        }
+    };
     ActorBase.prototype.reproducir_animacion = function (nombre_de_la_animacion) {
+        this.sprite.anims.resume();
         var animacion = this.pilas.animaciones.animaciones[nombre_de_la_animacion];
         if (!animacion) {
             throw Error("No existe una animaci\u00F3n con el nombre \"" + nombre_de_la_animacion + "\"");
@@ -9617,6 +9637,11 @@ var ModoEjecucion = (function (_super) {
         catch (e) {
             this.pilas.mensajes.emitir_excepcion_al_editor(e, "crear la escena");
         }
+        this.events.on('update', this.save_delta_times.bind(this));
+    };
+    ModoEjecucion.prototype.save_delta_times = function (time, delta) {
+        this._time = time;
+        this._delta = delta;
     };
     ModoEjecucion.prototype.modificar_modo_de_pantalla = function () {
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;

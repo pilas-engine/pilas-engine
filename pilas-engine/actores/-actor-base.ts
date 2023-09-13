@@ -24,6 +24,7 @@ class ActorBase {
   private recorte_activado: boolean;
 
   proyecto: any;
+  animacion_pausada: boolean = false;
 
   _habilidades: any[];
   _comportamientos: { nombre_del_comportamiento: string; argumentos: any }[];
@@ -192,11 +193,14 @@ class ActorBase {
       }
     }
 
-    this.sprite.update = () => {
+    /*
+    this.sprite.update = (a, b) => {
       this.ejecutar_de_modo_seguro(() => {
+      console.log({type: "sprite update", a, b});
         this.actualizar();
       });
     };
+    */
 
     this.sprite.on("animationrepeat", (anim, frame) => {
       this.ejecutar_de_modo_seguro(() => {
@@ -974,7 +978,40 @@ class ActorBase {
     this.pilas.animaciones.crear_animacion(nombre, cuadros, velocidad);
   }
 
+  pausar_animacion() {
+    this.animacion_pausada = true;
+    this.sprite.anims.pause();
+  }
+
+
+  continuar_animacion() {
+    if (this.animacion_pausada) {
+      this.sprite.anims.resume();
+    }
+  }
+
+  reiniciar_animacion() {
+    this.sprite.anims.restart();
+  }
+
+  actualizar_animacion() {
+
+    if (this.animacion_pausada) {
+      this.sprite.anims.resume();
+    }
+
+    let delta = this.pilas.modo._delta;
+    let time = this.pilas.modo._time;
+    this.sprite.anims.update(time, delta);
+
+    if (this.animacion_pausada) {
+      this.sprite.anims.pause();
+    }
+
+  }
+
   reproducir_animacion(nombre_de_la_animacion) {
+    this.sprite.anims.resume();
     let animacion = this.pilas.animaciones.animaciones[nombre_de_la_animacion];
 
     if (!animacion) {
