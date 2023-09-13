@@ -193,15 +193,6 @@ class ActorBase {
       }
     }
 
-    /*
-    this.sprite.update = (a, b) => {
-      this.ejecutar_de_modo_seguro(() => {
-      console.log({type: "sprite update", a, b});
-        this.actualizar();
-      });
-    };
-    */
-
     this.sprite.on("animationrepeat", (anim, frame) => {
       this.ejecutar_de_modo_seguro(() => {
         if (frame.isFirst) {
