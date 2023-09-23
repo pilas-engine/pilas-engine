@@ -1,5 +1,8 @@
 {
   "ejemplos": [
+    { "nombre": "atravesar-plataformas", "desde": "2.8.14" },
+    { "nombre": "velocidad-de-animacion", "desde": "2.8.14" },
+    { "nombre": "controlar-animaciones", "desde": "2.8.14" },
     { "nombre": "dibuja-rectangulos", "desde": "2.8.6" },
     { "nombre": "cursor-animado", "desde": "2.8.0" },
     { "nombre": "gravedad-aleatoria", "desde": "2.8.0" },

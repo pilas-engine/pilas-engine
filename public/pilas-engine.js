@@ -4205,13 +4205,29 @@ var ActorBase = (function () {
     ActorBase.prototype.reiniciar_animacion = function () {
         this.sprite.anims.restart();
     };
-    ActorBase.prototype.actualizar_animacion = function () {
+    ActorBase.prototype.actualizar_animacion = function (velocidad) {
+        if (velocidad === void 0) { velocidad = 1; }
+        var modulo_de_velocidad = null;
+        if (velocidad < 0) {
+            this.sprite.anims.inReverse = true;
+            this.sprite.anims.forward = false;
+        }
         if (this.animacion_pausada) {
             this.sprite.anims.resume();
         }
+        if (velocidad > 0) {
+            modulo_de_velocidad = velocidad;
+        }
+        else {
+            modulo_de_velocidad = -velocidad;
+        }
         var delta = this.pilas.modo._delta;
         var time = this.pilas.modo._time;
-        this.sprite.anims.update(time, delta);
+        this.sprite.anims.update(time, delta * modulo_de_velocidad);
+        if (velocidad < 0) {
+            this.sprite.anims.inReverse = false;
+            this.sprite.anims.forward = true;
+        }
         if (this.animacion_pausada) {
             this.sprite.anims.pause();
         }

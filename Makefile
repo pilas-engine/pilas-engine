@@ -10,8 +10,6 @@ COMPILAR_EN_WINDOWS=1
 COMPILAR_EN_LINUX=1
 COMPILAR_EN_ARM=1
 COMPILAR_EN_ARM_64=1
-EMPAQUETAR_PARA_SERVIDOR_ESTATICO=0
-EMPAQUETAR_VERSION_MINIMA=0
 
 # Binarios
 BIN_ELECTRON=./node_modules/.bin/electron
@@ -178,6 +176,7 @@ binarios:
 	@mkdir binarios
 	make compilar-binarios
 	make comprimir-binarios
+	make compilar-version-minima
 	@echo "Listo, recordá ejecutar make subir-binarios para publicar el release"
 
 compilar-binarios:
@@ -249,7 +248,6 @@ ifeq ($(COMPILAR_EN_ARM_64), 1)
 	$(call log, "Comprimiendo linux arm 64 bits ...")
 	zip -r -qq -dg binarios/${NOMBREBIN}-linux-arm64.zip binarios/${NOMBREBIN}-linux-arm64
 endif
-ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	@echo "Empaquetando para servidor estático ..."
 	@rm -rf dist
 	${BIN_EMBER} build --prod
@@ -257,8 +255,21 @@ ifeq ($(EMPAQUETAR_PARA_SERVIDOR_ESTATICO), 1)
 	@mv dist/ pilas-engine-compilado
 	zip -r -qq -dg binarios/pilas-engine-compilado.zip pilas-engine-compilado
 	@rm -rf pilas-engine-compilado
-endif
 
+
+compilar-version-minima:
+	@echo "Empaquetando versión mínima ..."
+	@rm -rf version-minima
+	@mkdir version-minima
+	@cp public/pilas-engine.js ./version-minima/
+	@cp public/nineslice.js ./version-minima/
+	@cp public/phaser.js ./version-minima/
+	@cp extras/ejemplo-minimo.html ./version-minima/
+	@cp recursos/imagenes/basicos/logo.png version-minima/
+	@cp recursos/decoracion/fondos/fondo-azul.png version-minima/fondo.png
+	@zip -qr binarios/version-minima.zip version-minima
+	@rm -rf version-minima
+	@echo "Archivo binarios/version-minima.zip creado"
 
 .PHONY: tmp docs binarios manual
 
@@ -266,6 +277,7 @@ manual: pilas_manual
 actualizar_manual: pilas_manual
 compilar_manual: pilas_manual
 
+actualizar-manual: pilas_manual
 
 pilas_manual:
 	$(call log, "Generando documentación")

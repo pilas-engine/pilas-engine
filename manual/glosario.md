@@ -1227,3 +1227,70 @@ que solo tenga en cuenta colisiones contra actores que tengan esa
 etiqueta.
 
 </div>
+
+<div class="funcion">
+```
+actor.pausar_animacion()
+```
+
+Detiene la animación actual en el cuadro de animación en
+donde se encuentre. Llamar a este método es necesario si
+queremos controlar manualmente la animación más adelante en
+el código.
+
+
+La animación permanecerá pausada hasta que se llame a la
+función "actualizar_animación" o se cambie a otra animación
+diferente.
+</div>
+
+<div class="funcion">
+```
+actor.actualizar_animacion(velocidad = 1)
+```
+
+Este método intenta avanzar la animación de forma manual
+cada vez que se invoca. Es un método útil cuando la
+animación está pausada y queremos hacerla avanzar de forma
+controlada, por ejemplo cuando un personaje sube una
+escalera:
+
+
+```
+actualizar() {
+  if (this.control.arriba) {
+    this.actualizar_animacion(1);
+  }
+
+  if (this.control.abajo) {
+    this.actualizar_animacion(-1);
+  }
+}
+```
+
+El método admite un parámetro para controlar la velocidad de
+la animación, e incluso la posibilidad de reproducir la
+animación en reversa.
+
+La velocidad puede ser cualquier número positivo para
+"avanzar" la animación, siendo el número 1 (para la
+velocidad normal) o 2, 3, 4 para reproducir más rápido o
+numeros fraccionarios como 1/2, 1/3 etc.. para velocidades
+más lentas.
+
+También se pueden especificar números negativos, para llevar
+la animación en reversa. Y aquí lo mismo de antes, valores
+como -2 o -4 harán que la animación se ejecute muy rápido,
+mientras que otros valores como -1/4 o -0.5 reproducirán la
+animación en reversa muy lentamente.
+
+</div>
+
+<div class="funcion">
+```
+actor.continuar_animacion()
+```
+
+Restaura la animación desde el punto en donde se dejó.
+
+</div>

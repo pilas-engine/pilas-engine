@@ -985,15 +985,33 @@ class ActorBase {
     this.sprite.anims.restart();
   }
 
-  actualizar_animacion() {
+  actualizar_animacion(velocidad = 1) {
+    let modulo_de_velocidad = null;
+
+    if (velocidad < 0) {
+      this.sprite.anims.inReverse = true;
+      this.sprite.anims.forward = false;
+    }
 
     if (this.animacion_pausada) {
       this.sprite.anims.resume();
     }
 
+    if (velocidad > 0) {
+      modulo_de_velocidad = velocidad;
+    } else {
+      modulo_de_velocidad = -velocidad;
+    }
+
+
     let delta = this.pilas.modo._delta;
     let time = this.pilas.modo._time;
-    this.sprite.anims.update(time, delta);
+    this.sprite.anims.update(time, delta * modulo_de_velocidad);
+
+    if (velocidad < 0) {
+      this.sprite.anims.inReverse = false;
+      this.sprite.anims.forward = true;
+    }
 
     if (this.animacion_pausada) {
       this.sprite.anims.pause();

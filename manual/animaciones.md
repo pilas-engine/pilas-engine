@@ -76,3 +76,55 @@ class explosion extends Actor {
   }
 }
 ```
+
+## Controlando animaciones desde el código
+
+Para mostrar una animación en un actor tenemos que asignar
+un valor al atributo animación así:
+
+```typescript
+iniciar() { // iniciar, u otro método.
+  this.animacion = "personaje_caminando";
+}
+```
+
+Esto hará que la animación se muestre de forma contínua. Si
+queremos hacer un uso manual, primero tenemos que pausar la
+animación así:
+
+```typescript
+this.pausar_animacion();
+```
+
+Una vez ahí, podemos hacer que la animación avance
+manualmente llamando al método "actualizar_animacion": 
+
+```typescript
+this.actualizar_animacion();
+```
+
+Este método también admite un parámetro para controlar la
+velocidad, estos son algunos ejemplos de invocación:
+
+```typescript
+// para reproducir la animación al doble de velocidad:
+this.actualizar_animacion(2);
+
+// para reproducir la animación a la mitad de velocidad:
+this.actualizar_animacion(1/2);
+
+// para reproducir la animación en reversa
+this.actualizar_animacion(-1);
+
+// para reproducir la animación en reversa muy lentamente, 5
+// veces más lento de lo normal
+this.actualizar_animacion(-1/5);
+```
+
+Una vez finalizado el manejo de las animaciones de forma
+manual, se puede llamar al siguiente método para continuar
+con la animación desde donde quedó:
+
+```typescript
+this.continuar_animacion();
+```

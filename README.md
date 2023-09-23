@@ -7,8 +7,8 @@ web para obtener más información:
 
 ![](extras/editor.png)
 
-## Artículos y noticias
 
+## Artículos y noticias
 
 - [Resumen del sprint 30 (Mayo de 2023)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-30/2516)
 - [Resumen del sprint 29 (Enero de 2022)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-29/2339)
