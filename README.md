@@ -7,6 +7,7 @@ web para obtener más información:
 
 ![](extras/editor.png)
 
+Nota: usar node versión 12.18.2
 
 ## Artículos y noticias
 
