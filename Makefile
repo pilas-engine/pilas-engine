@@ -226,27 +226,34 @@ endif
 comprimir-binarios:
 ifeq ($(COMPILAR_EN_OSX), 1)
 	$(call log, "Comprimiendo osx-64 bits...")
-	zip -r -qq -dg binarios/${NOMBREBIN}-osx-64_bits.zip     binarios/${NOMBREBIN}-darwin-x64
+	zip -r -qq -dg binarios/${NOMBREBIN}-osx-64_bits.zip binarios/${NOMBREBIN}-darwin-x64
+	rm -rf binarios/${NOMBREBIN}-darwin-x64
 endif
 ifeq ($(COMPILAR_EN_WINDOWS), 1)
 	$(call log, "Comprimiendo win32 32 bits...")
 	zip -r -qq -dg binarios/${NOMBREBIN}-windows-32_bits.zip binarios/${NOMBREBIN}-win32-ia32
+	rm -rf binarios/${NOMBREBIN}-win32-ia32
 	$(call log, "Comprimiendo win32 64 bits...")
 	zip -r -qq -dg binarios/${NOMBREBIN}-windows-64_bits.zip binarios/${NOMBREBIN}-win32-x64
+	rm -rf binarios/${NOMBREBIN}-win32-x64
 endif
 ifeq ($(COMPILAR_EN_LINUX), 1)
 	$(call log, "Comprimiendo linux 32 bits...")
 	zip -r -qq -dg binarios/${NOMBREBIN}-linux-64_bits.zip binarios/${NOMBREBIN}-linux-x64
+	rm -rf binarios/${NOMBREBIN}-linux-x64
 	$(call log, "Comprimiendo linux 64 bits...")
 	zip -r -qq -dg binarios/${NOMBREBIN}-linux-32_bits.zip binarios/${NOMBREBIN}-linux-ia32
+	rm -rf binarios/${NOMBREBIN}-linux-ia32
 endif
 ifeq ($(COMPILAR_EN_ARM), 1)
 	$(call log, "Comprimiendo linux armv7l ...")
 	zip -r -qq -dg binarios/${NOMBREBIN}-linux-armv7l.zip binarios/${NOMBREBIN}-linux-armv7l
+	rm -rf binarios/${NOMBREBIN}-linux-armv7l
 endif
 ifeq ($(COMPILAR_EN_ARM_64), 1)
 	$(call log, "Comprimiendo linux arm 64 bits ...")
 	zip -r -qq -dg binarios/${NOMBREBIN}-linux-arm64.zip binarios/${NOMBREBIN}-linux-arm64
+	rm -rf binarios/${NOMBREBIN}-linux-arm64
 endif
 	@echo "Empaquetando para servidor estático ..."
 	@rm -rf dist
@@ -255,7 +262,6 @@ endif
 	@mv dist/ pilas-engine-compilado
 	zip -r -qq -dg binarios/pilas-engine-compilado.zip pilas-engine-compilado
 	@rm -rf pilas-engine-compilado
-
 
 compilar-version-minima:
 	@echo "Empaquetando versión mínima ..."
