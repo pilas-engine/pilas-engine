@@ -920,7 +920,7 @@ declare class ActorBase {
     pausar_animacion(): void;
     continuar_animacion(): void;
     reiniciar_animacion(): void;
-    actualizar_animacion(): void;
+    actualizar_animacion(velocidad?: number): void;
     reproducir_animacion(nombre_de_la_animacion: any): void;
     cuando_finaliza_animacion(animacion: string): void;
     set animacion(nombre: string);

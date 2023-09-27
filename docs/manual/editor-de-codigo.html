@@ -8,21 +8,13 @@
     <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
-      div.columns{display: flex; gap: min(4vw, 1.5em);}
-      div.column{flex: auto; overflow-x: auto;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
       div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
       ul.task-list{list-style: none;}
-      ul.task-list li input[type="checkbox"] {
-        width: 0.8em;
-        margin: 0 0.8em 0.2em -1.6em;
-        vertical-align: middle;
-      }
-      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-      /* CSS for syntax highlighting */
       pre > code.sourceCode { white-space: pre; position: relative; }
       pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
-      .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
       div.sourceCode { margin: 1em 0; }
       pre.sourceCode { margin: 0; }
@@ -92,44 +84,27 @@
          <header id="title-block-header">
       <h1 class="title">Consejos para usar el editor de código</h1>
             </header>
-      <p>El editor de código tiene varias funcionalidades para ayudarte
-a escribir código de manera rápida y cómoda.</p>
-<p>En esta sección te vamos a resumir algunas de esas
-funcionalidades:</p>
+      <p>El editor de código tiene varias funcionalidades para ayudarte a escribir código de manera rápida y cómoda.</p>
+<p>En esta sección te vamos a resumir algunas de esas funcionalidades:</p>
 <h2 id="autocompletado">Autocompletado</h2>
-<p>Siempre que escribas código, el editor intentará anticiparse a lo que
-escribas para mostrar sugerencias:</p>
+<p>Siempre que escribas código, el editor intentará anticiparse a lo que escribas para mostrar sugerencias:</p>
 <p><img src="imagenes/editor-de-codigo/autocompletado.png" /></p>
-<p>Además, si estás escribiendo la llamada a un método el editor te
-mostrará los argumentos que podrías incluir:</p>
+<p>Además, si estás escribiendo la llamada a un método el editor te mostrará los argumentos que podrías incluir:</p>
 <p><img src="imagenes/editor-de-codigo/argumentos.png" /></p>
-<p>En este caso, el método decir admite dos argumentos: un mensaje y una
-duración. Notá que la duración tiene un símbolo de pregunta, lo que
-indica que ese argumento es opcional.</p>
-<h2 id="obtener-referencias-a-actores">Obtener referencias a
-actores</h2>
-<p>Para obtener referencias rápidas a los actores puedes simplemente
-“arrastrar y soltar” los actores sobre el código del editor:</p>
+<p>En este caso, el método decir admite dos argumentos: un mensaje y una duración. Notá que la duración tiene un símbolo de pregunta, lo que indica que ese argumento es opcional.</p>
+<h2 id="obtener-referencias-a-actores">Obtener referencias a actores</h2>
+<p>Para obtener referencias rápidas a los actores puedes simplemente “arrastrar y soltar” los actores sobre el código del editor:</p>
 <p><img src="imagenes/editor-de-codigo/arrastrar.png" /></p>
-<p>Cuando el editor detecte que arrojaste un actor sobre el editor va a
-escribir una linea de código como esta:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> pelota <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">obtener_actor_por_nombre</span>(<span class="st">&quot;pelota&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<p>Cuando el editor detecte que arrojaste un actor sobre el editor va a escribir una linea de código como esta:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>let pelota <span class="op">=</span> this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">obtener_actor_por_nombre</span>(<span class="st">&quot;pelota&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <p>Lo que es bastante útil, porque nos evita escribir ese código.</p>
-<p>Y si el actor que arrastramos sobre el editor es un actor
-desactivado, el editor va a colocar este código en su lugar:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> pelota <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">clonar</span>(<span class="st">&quot;pelota&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<p>Y si el actor que arrastramos sobre el editor es un actor desactivado, el editor va a colocar este código en su lugar:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a>let pelota <span class="op">=</span> this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">clonar</span>(<span class="st">&quot;pelota&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <h2 id="fragmentos-rápidos-de-código">Fragmentos rápidos de código</h2>
-<p>Además del autocompletado el editor nos permite escribir fragmentos
-rápidos, por ejemplo si escribis “observar” y pulsas enter, el editor va
-a autocompletar este texto:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">observar</span>(<span class="st">&quot;x&quot;</span><span class="op">,</span> <span class="kw">this</span><span class="op">.</span><span class="at">x</span>)<span class="op">;</span></span></code></pre></div>
-<p>Además va a situar el cursor en la posición para que podamos
-personalizar esta linea de código rápidamente.</p>
-<p>Otros de los fragmentos rápidos que incluye el editor son los
-siguientes:</p>
+<p>Además del autocompletado el editor nos permite escribir fragmentos rápidos, por ejemplo si escribis “observar” y pulsas enter, el editor va a autocompletar este texto:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>this<span class="op">.</span><span class="at">pilas</span><span class="op">.</span><span class="fu">observar</span>(<span class="st">&quot;x&quot;</span><span class="op">,</span> this<span class="op">.</span><span class="at">x</span>)<span class="op">;</span></span></code></pre></div>
+<p>Además va a situar el cursor en la posición para que podamos personalizar esta linea de código rápidamente.</p>
+<p>Otros de los fragmentos rápidos que incluye el editor son los siguientes:</p>
 <ul>
 <li><code>pilas</code></li>
 <li><code>clonar</code></li>
@@ -137,22 +112,14 @@ siguientes:</p>
 <li><code>control</code></li>
 <li><code>animar</code></li>
 </ul>
-<p>Te recomendamos probar escribir alguno de estos atajos para
-familiarizarte, sobre todo el fragmento <code>control</code> que es
-bastante completo.</p>
+<p>Te recomendamos probar escribir alguno de estos atajos para familiarizarte, sobre todo el fragmento <code>control</code> que es bastante completo.</p>
 <h2 id="navegar-métodos-rápidamente">Navegar métodos rápidamente</h2>
-<p>Cuando tenemos un actor con muchos métodos es aconsejable hacer
-búsquedas en lugar de recorrer el código hacia arriba y abajo con la
-barra de scroll.</p>
-<p>Para buscar métodos por nombres se puede pulsar el botón derecho del
-mouse sobre el editor y seleccionar la siguiente opción:</p>
+<p>Cuando tenemos un actor con muchos métodos es aconsejable hacer búsquedas en lugar de recorrer el código hacia arriba y abajo con la barra de scroll.</p>
+<p>Para buscar métodos por nombres se puede pulsar el botón derecho del mouse sobre el editor y seleccionar la siguiente opción:</p>
 <p><img src="imagenes/editor-de-codigo/secundario.png" /></p>
-<p>Luego vas a notar que aparecerá una barra de búsqueda con todos los
-métodos del actor, simplemente escribí o selecciona el método al que
-quieras ingresar.</p>
+<p>Luego vas a notar que aparecerá una barra de búsqueda con todos los métodos del actor, simplemente escribí o selecciona el método al que quieras ingresar.</p>
 <p><img src="imagenes/editor-de-codigo/simbolos.png" /></p>
-<p>Ten en cuenta que también puedes activar esta funcionalidad pulsando
-<code>ctrl+P</code> como atajo.</p>  <div class="tc navegacion">
+<p>Ten en cuenta que también puedes activar esta funcionalidad pulsando <code>ctrl+P</code> como atajo.</p>  <div class="tc navegacion">
   <div>
     <a href="#" onclick="document.documentElement.scrollTo(0, 0);">Subir</a>
   </div>
