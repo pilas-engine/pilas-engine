@@ -11,6 +11,7 @@ Nota: usar node versión 12.18.2
 
 ## Artículos y noticias
 
+- [Resumen del sprint 31 (Septiembre de 2023)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-31/2545)
 - [Resumen del sprint 30 (Mayo de 2023)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-30/2516)
 - [Resumen del sprint 29 (Enero de 2022)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-29/2339)
 - [Resumen del sprint 28 (Octubre de 2021)](https://foro.pilas-engine.com.ar/t/resumen-del-sprint-28/2298)
