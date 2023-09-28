@@ -114,6 +114,12 @@ deploy:
 	git add docs
 	git commit -m "Realizando deploy"
 	git push
+	@echo "La versión se debería publicar aquí:"
+	@echo ""
+	@echo "  https://app.pilas-engine.com.ar"
+	@echo " "
+	@echo "  (git pages demora unos minutos, esperar 1 o 2 minutos)"
+	@echo " "
 
 cuidado_falta_deploy:
 	@echo ""
