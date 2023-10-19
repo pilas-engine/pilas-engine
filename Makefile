@@ -161,6 +161,8 @@ compilar_pilas:
 	$(call log, "Compilando pilas-engine")
 	yarn compilar_pilas
 
+compilar-pilas-live: compilar_pilas_live
+
 compilar_pilas_live:
 	$(call log, "Compilando ejemplos de pilas-engine en modo live")
 	yarn compilar_pilas_live
