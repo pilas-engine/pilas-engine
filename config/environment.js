@@ -16,6 +16,7 @@ module.exports = function(environment) {
       }
     },
 
+    confirmarCambioDeRutasORecargas: true,
     remoteBackendURL: "https://backend.pilas-engine.com.ar",
     remoteFrontendURL: "https://app.pilas-engine.com.ar",
     //remoteBackendURL: "http://localhost:8000",

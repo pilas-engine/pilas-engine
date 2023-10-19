@@ -20,13 +20,15 @@ export default Route.extend({
     // cierre la ventana y pierda cambios se usa otra estrategia, ver el archivo
     // electron.js o prod-electron.js.
     if (!window.enElectron) {
-      window.onbeforeunload = () => {
+      if (ENV.confirmarCambioDeRutasORecargas) {
+        window.onbeforeunload = () => {
 
-        if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
-          return 'Hay cambios sin guardar, ¿Quieres salir?';
-        }
+          if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
+            return 'Hay cambios sin guardar, ¿Quieres salir?';
+          }
 
-      };
+        };
+      }
     }
   },
 
@@ -48,7 +50,7 @@ export default Route.extend({
         return true;
       }
 
-      if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar) {
+      if (ENV.environment !== "test" && this.serviceProyecto.hay_cambios_por_guardar && ENV.confirmarCambioDeRutasORecargas) {
         if (window.confirm(this.intl.t("quit"))) {
           return true;
         } else {
