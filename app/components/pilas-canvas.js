@@ -290,7 +290,7 @@ export default Component.extend({
     let data = {
       tipo: "cambiar_zoom",
       nombre_del_contexto: this.nombre_del_contexto,
-      zoom: cantidad
+      zoom: +cantidad   // HOTFIX: el zoom debe ser un número, no un string.
     };
 
     this.contexto.postMessage(data, utils.HOST);
