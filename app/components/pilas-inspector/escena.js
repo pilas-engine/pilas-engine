@@ -1,28 +1,19 @@
 import Component from "@ember/component";
+import { inject as service } from "@ember/service";
+import { debounce } from "@ember/runloop";
 
 export default Component.extend({
+  bus: service(),
+
   didInsertElement() {
-    this.set("propiedades", [{
-        tipo: "separador",
-        nombre: "Escenario",
-        etiqueta: "stage.stage"
-      },
-      {
-        tipo: "numero",
-        propiedad: "ancho",
-        etiqueta: "stage.width",
-        intensidad: 1,
-        min: 200,
-        max: 99999
-      },
-      {
-        tipo: "numero",
-        propiedad: "alto",
-        etiqueta: "stage.height",
-        intensidad: 1,
-        min: 200,
-        max: 99999
-      },
+    // atributos que se reciben del nivel superior
+    // this.instancia_seleccionada
+
+    // Atributos especiales para el tamaño del escenario.
+    this.set("propiedad_ancho", {propiedad: "ancho"});
+    this.set("propiedad_alto", {propiedad: "alto"});
+
+    this.set("propiedades", [
       {
         tipo: "separador",
         nombre: "Cámara",
@@ -73,5 +64,21 @@ export default Component.extend({
         etiqueta: "stage.gravity.y"
       }
     ]);
+  },
+
+
+  actions: {
+    cuando_cambia_el_tamaño_del_escenario(propiedad, valor) {
+      let proyecto = this.instancia_seleccionada;
+
+      // importante, la propiedad solo puede ser "ancho" o "alto".
+      console.assert(['ancho', 'alto'].includes(propiedad), "No es un valor aceptado");
+      proyecto.set(propiedad, valor);
+
+        this.bus.trigger("cuando_cambia_el_tamaño_del_escenario", {
+          ancho: proyecto.get("ancho"),
+          alto: proyecto.get("alto"),
+        });
+    }
   }
 });

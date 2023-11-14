@@ -16,10 +16,7 @@ export default Component.extend({
   contexto: null,
   mantenerFoco: false,
   classNames: ["flex1", "flex", "unseletable", "bg-fondo-canvas"],
-  classNameBindings: ["altoFijo:h250", 
-    "activarScroll:items-center", 
-    "activarScroll:overflow-auto", 
-    "desactivarScroll:overflow-hidden"],
+  classNameBindings: ["altoFijo:h250", "desactivarScroll:overflow-hidden"],
   altoFijo: false,
   porcentajeDeCarga: 0,
   cuando_termina_de_cargar: null,
@@ -109,19 +106,19 @@ export default Component.extend({
       this.bus.on(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
       this.bus.on(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
       this.bus.on(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
-      this.bus.on(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
-      this.bus.on(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
       this.bus.on(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
       this.bus.on(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
       this.bus.on(`ubicar_camara_en_el_actor`, this, "ubicar_camara_en_el_actor");
       this.bus.on(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
       this.bus.on(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
       this.bus.on(`capturar_pantalla`, this, "capturar_pantalla");
+      this.bus.on("cuando_cambia_el_tamaño_del_escenario", this, "cuando_cambia_el_tamaño_del_escenario");
     };
   },
 
   didReceiveAttrs() {
     if (this.contexto) {
+      console.warn("TODO: Aquí se emiten los estados de depuración, evitar hacer esto y notificar desde la barra de botones.");
       this.emitir_estados_de_depuracion_a_pilas();
     }
   },
@@ -141,14 +138,24 @@ export default Component.extend({
     this.bus.off(`${this.nombre_del_contexto}:progreso_de_carga`, this, "progreso_de_carga");
     this.bus.off(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, this, "eliminar_actor_desde_el_editor");
     this.bus.off(`${this.nombre_del_contexto}:cuando_termina_de_iniciar_ejecucion`, this, "cuando_termina_de_iniciar");
-    this.bus.off(`${this.nombre_del_contexto}:cambiar_zoom`, this, "cuando_cambia_zoom");
-    this.bus.off(`cuando_cambia_zoom_desde_el_selector_manual`, this, "cuando_cambia_zoom_desde_el_selector_manual");
     this.bus.off(`cuando_cambia_grilla_desde_el_selector_manual`, this, "cuando_cambia_grilla_desde_el_selector_manual");
     this.bus.off(`${this.nombre_del_contexto}:termina_de_reproducir_sonido`, this, "termina_de_reproducir_sonido");
     this.bus.off(`${this.nombre_del_contexto}:ubicar_camara_en_el_actor`, this, "ubicar_camara_en_el_actor");
     this.bus.off(`selecciona_un_actor_en_modo_pausa`, this, "selecciona_un_actor_en_modo_pausa");
     this.bus.off(`selecciona_la_escena_completa_en_modo_pausa`, this, "selecciona_la_escena_completa_en_modo_pausa");
     this.bus.off(`capturar_pantalla`, this, "capturar_pantalla");
+    this.bus.off("cuando_cambia_el_tamaño_del_escenario", this, "cuando_cambia_el_tamaño_del_escenario");
+  },
+
+  cuando_cambia_el_tamaño_del_escenario(datos) {
+    let data = {
+      tipo: "cuando_cambia_el_tamaño_del_escenario",
+      nombre_del_contexto: this.nombre_del_contexto,
+      ancho: datos.ancho,
+      alto: datos.alto,
+    };
+
+    this.contexto.postMessage(data, utils.HOST);
   },
 
   convertir_a_boolean(valor) {
@@ -214,7 +221,7 @@ export default Component.extend({
 
     this.contexto.postMessage(data, utils.HOST);
     this.emitir_estados_de_depuracion_a_pilas();
-    this.definir_zoom_inicial_para_el_modo_editor();
+    //this.definir_zoom_inicial_para_el_modo_editor();
     this.definir_grilla_inicial_para_el_modo_editor();
   },
 
@@ -286,16 +293,6 @@ export default Component.extend({
     this.contexto.postMessage(data, utils.HOST);
   },
 
-  cuando_cambia_zoom(cantidad) {
-    let data = {
-      tipo: "cambiar_zoom",
-      nombre_del_contexto: this.nombre_del_contexto,
-      zoom: +cantidad   // HOTFIX: el zoom debe ser un número, no un string.
-    };
-
-    this.contexto.postMessage(data, utils.HOST);
-  },
-
   termina_de_reproducir_sonido(sonido) {
     let data = {
       tipo: "termina_de_reproducir_sonido",
@@ -330,16 +327,6 @@ export default Component.extend({
       tipo: "selecciona_un_actor_en_modo_pausa",
       nombre_del_contexto: this.nombre_del_contexto,
       actor: null
-    };
-
-    this.contexto.postMessage(data, utils.HOST);
-  },
-
-  cuando_cambia_zoom_desde_el_selector_manual(zoom) {
-    let data = {
-      tipo: "cuando_cambia_zoom_desde_el_selector_manual",
-      nombre_del_contexto: this.nombre_del_contexto,
-      zoom: zoom
     };
 
     this.contexto.postMessage(data, utils.HOST);
@@ -544,11 +531,6 @@ export default Component.extend({
       return;
     }
 
-    if (e.data.tipo === "cambia_zoom") {
-      this.bus.trigger(`cuando_cambia_zoom`, e.data);
-      return;
-    }
-
     if (e.data.tipo === "termina_de_reproducir_sonido") {
       this.bus.trigger(`${nombre_del_contexto}:termina_de_reproducir_sonido`, e.data);
       return;
@@ -571,11 +553,16 @@ export default Component.extend({
     }
 
     if (e.data.tipo === "captura_de_pantalla_realizada") {
-      this.bus.trigger(`captura_de_pantalla_realizada`, e.data);
+      this.bus.trigger("captura_de_pantalla_realizada", e.data);
       return;
     }
 
-    throw Error(`En pilas-canvas.js se recibió el mensaje ${e.data.tipo}, pero este no se re-envió al servicio bus.`);
+    if (e.data.tipo === "cuando_cambia_el_estado_de_la_camara_en_el_editor") {
+      this.bus.trigger("cuando_cambia_el_estado_de_la_camara_en_el_editor", e.data);
+      return;
+    }
+
+    throw Error(`En pilas-canvas.js se recibió el mensaje ${e.data.tipo}, pero este no se re-envió al servicio bus. Busque el método atenderMensajesDePilas`);
   },
   actions: {
     detener() {

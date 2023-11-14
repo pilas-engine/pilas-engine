@@ -144,6 +144,7 @@ export default Component.extend({
     this.bus.off("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
     this.bus.off("cierra_dialogo_de_animaciones", this, "cierra_dialogo_de_animaciones");
     this.bus.off("cambia_folding_en_el_editor", this, "cambia_folding_en_el_editor");
+    this.bus.off("cuando_cambia_el_estado_de_la_camara_en_el_editor", this, "cuando_cambia_el_estado_de_la_camara_en_el_editor");
   },
 
   conectar_eventos() {
@@ -154,6 +155,8 @@ export default Component.extend({
     this.bus.on("selecciona_un_actor_en_modo_pausa", this, "seleccionaUnActorEnModoPausa");
     this.bus.on("cierra_dialogo_de_animaciones", this, "cierra_dialogo_de_animaciones");
     this.bus.on("cambia_folding_en_el_editor", this, "cambia_folding_en_el_editor");
+
+    this.bus.on("cuando_cambia_el_estado_de_la_camara_en_el_editor", this, "cuando_cambia_el_estado_de_la_camara_en_el_editor");
   },
 
   seleccionaUnActorEnModoPausa(actor) {
@@ -380,6 +383,14 @@ export default Component.extend({
     let escena = this.obtener_la_escena_actual();
     escena.set("camara_x", datos.x);
     escena.set("camara_y", datos.y);
+  },
+
+  // Se ejecuta cuando el usuario mueve la cámara o
+  // ajusta el zoom de la cámara del editor.
+  cuando_cambia_el_estado_de_la_camara_en_el_editor(datos) {
+    this.set("proyecto.editor_camara_x", datos.x);
+    this.set("proyecto.editor_camara_y", datos.y);
+    this.set("proyecto.editor_camara_zoom", datos.zoom);
   },
 
   comienza_a_mover_un_actor(datos) {

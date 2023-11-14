@@ -145,6 +145,22 @@ export default Service.extend({
       proyecto.set("etiquetas", A([]));
     }
 
+
+    // Migracion 2023-10-19: si no tiene datos de la cámara en el editor
+    if (!proyecto.editor_camara_x) {
+      proyecto.set("editor_camara_x", 0);
+    }
+
+    // Migracion 2023-10-19: si no tiene datos de la cámara en el editor
+    if (!proyecto.editor_camara_y) {
+      proyecto.set("editor_camara_y", 0);
+    }
+
+    // Migracion 2023-10-19: si no tiene datos de la cámara en el editor
+    if (!proyecto.editor_camara_zoom) {
+      proyecto.set("editor_camara_zoom", 1);
+    }
+
     return proyecto;
   },
 

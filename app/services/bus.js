@@ -47,6 +47,13 @@ import Service from "@ember/service";
  * - capturar_pantalla
  * - captura_de_pantalla_realizada (respuesta a capturar_pantalla desde pilas)
  * - cambia_folding_en_el_editor
+ * - cuando_cambia_el_estado_de_la_camara_en_el_editor
+ * - cuando_cambia_el_tamaño_del_escenario
+ *          Se ejecuta cuando el usuario modifica las propiedades como ancho
+ *          y alto dentro del panel de propiedades de la escena, este evento
+ *          se dispara desde 'app/components/pilas-inspector/escena.js', y
+ *          luego se captura en app/components/pilas-canvas.js para ser enviado
+ *          directamente al canvas de pilas.
  *
  * Otra señal que se emite para avisarle al webserver que cambió el código es:
  *

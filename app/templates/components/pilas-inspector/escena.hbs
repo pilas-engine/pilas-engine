@@ -4,6 +4,33 @@
     cuando_cambia=cuando_cambia_un_nombre_de_escena
 }}
 
+{{pilas-propiedad/separador etiqueta="stage.stage" propiedad="Escenario"}}
+
+<div class="pb1">
+  {{pilas-propiedad/numero 
+    objeto=instancia_seleccionada
+    etiqueta="stage.width"
+    min=200
+    max=9999
+    propiedad=propiedad_ancho
+    intensidad=1
+    modificarAtributo=(action "cuando_cambia_el_tamaño_del_escenario")
+  }}
+</div>
+
+<div class="pb1">
+  {{pilas-propiedad/numero 
+    objeto=instancia_seleccionada
+    etiqueta="stage.height"
+    min=200
+    max=9999
+    propiedad=propiedad_alto
+    intensidad=1
+    modificarAtributo=(action "cuando_cambia_el_tamaño_del_escenario")
+  }}
+</div>
+
+
 {{#each propiedades as |propiedad|}}
 
   <div class="pb1">

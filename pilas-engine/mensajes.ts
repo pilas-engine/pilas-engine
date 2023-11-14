@@ -101,17 +101,17 @@ class Mensajes {
     this.pilas.modo.cameras.main.setZoom(datos.zoom);
   }
 
-  atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual(datos) {
-    this.pilas.modo.cameras.main.setZoom(datos.zoom);
-  }
-
   atender_mensaje_cuando_cambia_grilla_desde_el_selector_manual(datos) {
     this.pilas.modo.cuando_cambia_grilla_desde_el_selector_manual(datos.grilla);
   }
 
   atender_mensaje_actualizar_escena_desde_el_editor(datos) {
-    this.pilas.modo.cambiar_fondo(datos.escena.fondo);
+    this.pilas.modo.cambiar_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
     this.pilas.modo.posicionar_la_camara(datos.escena);
+  }
+
+  atender_mensaje_cuando_cambia_el_tamaño_del_escenario(datos) {
+    this.pilas.modo.cambiar_el_tamaño_del_escenario(datos.ancho, datos.alto);
   }
 
   atender_mensaje_termina_de_reproducir_sonido(/*datos*/) {}

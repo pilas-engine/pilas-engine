@@ -7,35 +7,37 @@ export default Component.extend({
   items: null,
 
   didInsertElement() {
-    this.set("items", [
-      { etiqueta: "100%", valor: 1 },
-      { etiqueta: "125%", valor: 1.25 },
-      { etiqueta: "150%", valor: 1.5 },
-      { etiqueta: "175%", valor: 1.75 },
-
-      { etiqueta: "200%", valor: 2 },
-      { etiqueta: "225%", valor: 2.25 },
-      { etiqueta: "250%", valor: 2.5 },
-      { etiqueta: "275%", valor: 2.75 },
-
-      { etiqueta: "300%", valor: 3 },
-      { etiqueta: "325%", valor: 3.25 },
-      { etiqueta: "350%", valor: 3.5 },
-      { etiqueta: "375%", valor: 3.75 },
-
-      { etiqueta: "400%", valor: 4 },
-      { etiqueta: "425%", valor: 4.25 },
-      { etiqueta: "450%", valor: 4.5 },
-      { etiqueta: "475%", valor: 4.75 },
-
-      { etiqueta: "500%", valor: 5 }
-    ]);
-
-    this.bus.on("cuando_cambia_zoom", this, "definirZoom");
+    this.crear_opciones_de_zoom();
+    this.bus.on("cuando_cambia_el_estado_de_la_camara_en_el_editor", this, "cuando_cambia_estado_de_la_camara");
   },
 
-  definirZoom({ zoom }) {
-    debounce(this, "definirZoomInmediatamente", zoom, 1000);
+  crear_opciones_de_zoom() {
+    this.set("items", [
+        { etiqueta: '20%', 'valor': 0.2},
+        { etiqueta: '40%', 'valor': 0.4},
+        { etiqueta: '60%', 'valor': 0.6},
+        { etiqueta: '80%', 'valor': 0.8},
+        { etiqueta: '100%', 'valor': 1.0},
+        { etiqueta: '120%', 'valor': 1.2},
+        { etiqueta: '140%', 'valor': 1.4},
+        { etiqueta: '160%', 'valor': 1.6},
+        { etiqueta: '180%', 'valor': 1.8},
+        { etiqueta: '200%', 'valor': 2.0},
+        { etiqueta: '220%', 'valor': 2.2},
+        { etiqueta: '240%', 'valor': 2.4},
+        { etiqueta: '260%', 'valor': 2.6},
+        { etiqueta: '280%', 'valor': 2.8},
+        { etiqueta: '300%', 'valor': 3.0},
+        { etiqueta: '320%', 'valor': 3.2},
+        { etiqueta: '340%', 'valor': 3.4},
+        { etiqueta: '360%', 'valor': 3.6},
+        { etiqueta: '380%', 'valor': 3.8},
+        { etiqueta: '400%', 'valor': 4.0},
+    ]);
+  },
+
+  cuando_cambia_estado_de_la_camara(data) {
+    debounce(this, "definirZoomInmediatamente", data.zoom, 50);
   },
 
   definirZoomInmediatamente(zoom) {
@@ -45,7 +47,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this.bus.off("cuando_cambia_zoom", this, "definirZoom");
+    this.bus.off("cuando_cambia_el_estado_de_la_camara_en_el_editor", this, "cuando_cambia_estado_de_la_camara");
   },
 
   actions: {
