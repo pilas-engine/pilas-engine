@@ -26,6 +26,7 @@ app.on("ready", function onReady() {
     height: 650,
     minWidth: 800,
     minHeight: 650,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: true
