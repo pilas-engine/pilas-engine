@@ -21,7 +21,8 @@
     "compilar_bloques": "tsc -p bloques --pretty -d",
     "compilar_bloques_live": "tsc -p bloques --watch --pretty -d",
     "actualizar_actores": "node scripts/actualizar-actores.js",
-    "actualizar_actores_live": "node scripts/actualizar-actores-live.js"
+    "actualizar_actores_live": "node scripts/actualizar-actores-live.js",
+    "prepublish": "python3 scripts/actualizar_appdata.py"
   },
   "prettier": {
     "tabWidth": 2,
