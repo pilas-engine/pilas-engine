@@ -131,12 +131,21 @@ version: version_patch
 
 version_patch: cuidado_falta_deploy
 	${BIN_EMBER} release
+	make actualizar-flatpak
 
 version_minor: cuidado_falta_deploy
 	${BIN_EMBER} release --minor
+	make actualizar-flatpak
 
 version_major: cuidado_falta_deploy
 	${BIN_EMBER} release --major
+	make actualizar-flatpak
+
+actualizar-flatpak:
+	$(call log, "Actualizando flatpak")
+	npm run prepublish
+	git add extras/ar.com.pilas_engine.App.metainfo.xml
+	git commit -m "Actualizando la versión de flatpak a ${VERSION}"
 
 compilar_para_electron: actualizar_actores
 	$(call log, "Iniciando compilación.")
