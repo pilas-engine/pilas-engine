@@ -13,6 +13,9 @@ def get_version_from_package_json():
 def get_version_date():
     return datetime.today().strftime('%Y-%m-%d')
 
+def sort_children_by(parent, attr):
+    parent[:] = sorted(parent, reverse=True, key=lambda child: child.get(attr))
+
 def main():
     new_version = get_version_from_package_json()
 
@@ -31,6 +34,7 @@ def main():
 
     date = get_version_date()
     ElementTree.SubElement(releases, 'release', { 'version': new_version, 'date': date })
+    sort_children_by(releases, 'version')
     ElementTree.indent(releases, level=1)
 
     # ElementTree.dump(releases)
