@@ -16,7 +16,14 @@
   </div>
 
 
-  <div class="tc pt3">
+  <div class="pa3">
+    <p class="texto">Plantillas más usadas</p>
+
+    {{#iniciar-proyecto/item nombre="nuevo" titulo="Iniciar un proyecto desde cero"}}
+      <div class="absolute f4 pv5 tc text-shadow-1 top-0 w-100 white">
+        Nuevo
+      </div>
+    {{/iniciar-proyecto/item}}
 
     {{#if tieneProyectoAnterior}}
       {{#link-to "editor" (query-params tipo="continuar") id="anterior" tagName="div" class="dib w180 pointer"}}
@@ -30,13 +37,13 @@
       {{/link-to}}
     {{/if}}
 
+  </div>
+
+  <div class="pa3">
+    <p class="texto">Plantillas de juegos</p>
+
     {{iniciar-proyecto/item nombre="inicial" titulo="Iniciar con física básica"}}
 
-    {{#iniciar-proyecto/item nombre="nuevo" titulo="Iniciar un proyecto desde cero"}}
-      <div class="absolute f4 pv5 tc text-shadow-1 top-0 w-100 white">
-        Nuevo
-      </div>
-    {{/iniciar-proyecto/item}}
 
     {{iniciar-proyecto/item nombre="plataformas-minimo" titulo="Plataformas mínimo con cámara"}}
     {{iniciar-proyecto/item nombre="plataformas-animado" titulo="Plataformas con animaciones"}}
