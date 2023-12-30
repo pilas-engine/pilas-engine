@@ -31,7 +31,13 @@
     {{/if}}
 
     {{iniciar-proyecto/item nombre="inicial" titulo="Iniciar con física básica"}}
-    {{iniciar-proyecto/item nombre="nuevo" titulo="Iniciar un proyecto desde cero"}}
+
+    {{#iniciar-proyecto/item nombre="nuevo" titulo="Iniciar un proyecto desde cero"}}
+      <div class="absolute f4 pv5 tc text-shadow-1 top-0 w-100 white">
+        Nuevo
+      </div>
+    {{/iniciar-proyecto/item}}
+
     {{iniciar-proyecto/item nombre="plataformas-minimo" titulo="Plataformas mínimo con cámara"}}
     {{iniciar-proyecto/item nombre="plataformas-animado" titulo="Plataformas con animaciones"}}
     {{iniciar-proyecto/item nombre="nave-minimo" titulo="Nave con movimiento"}}
