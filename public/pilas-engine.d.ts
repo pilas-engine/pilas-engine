@@ -308,7 +308,6 @@ declare class Depurador {
     modo_posicion_activado: boolean;
     mostrar_fps: boolean;
     mostrar_fisica: boolean;
-    minimapa: boolean;
     fisica_en_modo_ejecucion: boolean;
     constructor(pilas: Pilas);
     definir_estados_de_depuracion(datos: any): void;
@@ -519,9 +518,9 @@ declare class Mensajes {
     emitir_mensaje_al_editor(nombre: string, datos?: any): void;
     atender_mensaje_define_escena(datos: any): void;
     atender_mensaje_definir_zoom_inicial_para_el_modo_editor(datos: any): void;
-    atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual(datos: any): void;
     atender_mensaje_cuando_cambia_grilla_desde_el_selector_manual(datos: any): void;
     atender_mensaje_actualizar_escena_desde_el_editor(datos: any): void;
+    atender_mensaje_cuando_cambia_el_tamaño_del_escenario(datos: any): void;
     atender_mensaje_termina_de_reproducir_sonido(): void;
     atender_mensaje_ubicar_camara_en_el_actor(data: any): void;
     atender_mensaje_ejecutar_proyecto(datos: any): void;
@@ -1985,6 +1984,38 @@ declare class Pose {
     update(elapsed_time: number): void;
     strike(): void;
 }
+declare class ActorEnModoEdición extends Phaser.GameObjects.Container {
+    pilas: Pilas;
+    borde: Phaser.GameObjects.Rectangle;
+    sprite: Phaser.GameObjects.Sprite;
+    fondo: any;
+    sensores: any[];
+    figura: any;
+    texto: any;
+    id: number;
+    identificador: number;
+    constructor(pilas: any, scene: any, datos_del_actor: any);
+    private separar_imagen;
+    private crear_sprite;
+    actualizar_datos(entidad: any): void;
+    private crear_borde;
+    private hacer_interactivo;
+    destacar(): void;
+    private conectar_eventos_del_mouse;
+    quitar_destacado(): void;
+    eliminar(): void;
+    private eliminar_sensores;
+    private eliminar_figura;
+}
+declare class CamaraEnModoEdición extends Phaser.GameObjects.Container {
+    pilas: Pilas;
+    borde: Phaser.GameObjects.Rectangle;
+    ancho: any;
+    alto: any;
+    constructor(pilas: any, scene: any, x: any, y: any, ancho: any, alto: any);
+    definirTamaño(x: any, y: any, ancho: any, alto: any): void;
+    mover(x: any, y: any): void;
+}
 declare const COLOR_DEL_LASER = 16776608;
 declare class Modo extends Phaser.Scene {
     matter: Phaser.Physics.Matter.MatterPhysics;
@@ -2005,22 +2036,21 @@ declare class Modo extends Phaser.Scene {
     crear_indicadores_de_rendimiento_fps(): void;
     destacar_actor_por_id(id: any): void;
     crear_canvas_de_depuracion(): void;
-    crear_manejadores_para_controlar_el_zoom(emitir_mensajes_al_editor: any): void;
     update(actores: any): void;
     actualizar_canvas_fisica(): void;
     dibujar_lasers(): void;
     protected dibujar_laser_del_actor(laser: any, canvas: Phaser.GameObjects.Graphics, actor: any): void;
     _laser_entre_entidades(x1: any, y1: any, x2: any, y2: any, actor: Actor): Intersección[];
     dibujar_figura_desde_vertices(canvas: any, linea: any, color: any, vertices: any): void;
+    crear_fondo(fondo: any, ancho: any, alto: any): void;
     obtener_posicion_de_la_camara(): {
         x: any;
         y: any;
     };
-    crear_fondo(fondo: any, ancho: any, alto: any): void;
     posicionar_fondo(dx: any, dy: any): void;
-    cambiar_fondo(fondo: any, ancho?: any, alto?: any): void;
+    cambiar_fondo(fondo: any, ancho: any, alto: any): void;
     obtener_actor_por_id(id: any): any;
-    actualizar_sprite_desde_datos(sprite: any, actor: any): void;
+    deprecated__actualizar_sprite_desde_datos(sprite: any, actor: any): void;
     private actualizar_sensores_del_actor;
     private actualizar_lasers_del_actor;
     obtener_imagen_para_nineslice(imagen: string): string | {
@@ -2050,7 +2080,7 @@ declare class ModoCargador extends Modo {
     cuando_progresa_la_carga(progreso: any): void;
     convertir_sonido_en_array_buffer(sonido: any, callback: any): void;
 }
-declare class ModoEditor extends Modo {
+declare class __deprecated_ModoEditor extends Modo {
     pilas: Pilas;
     minimap: Phaser.Cameras.Scene2D.Camera;
     sprite_borde_de_la_camara: Phaser.GameObjects.Sprite;
@@ -2067,7 +2097,6 @@ declare class ModoEditor extends Modo {
     private manejar_evento_key_up;
     private manejar_evento_key_down;
     crear_sprite_para_el_cursor_de_la_grilla(): void;
-    crear_minimap(escena: any): void;
     crear_sprite_con_el_borde_de_la_camara({ camara_x, camara_y }: {
         camara_x: any;
         camara_y: any;
@@ -2100,6 +2129,37 @@ declare class ModoEditor extends Modo {
     eliminar_actor_por_id(id: any): void;
     posicionar_la_camara(datos_de_la_escena: any): void;
     cambiar_fondo(fondo: any): void;
+}
+declare class ModoEditor extends Modo {
+    pilas: Pilas;
+    usar_grilla: boolean;
+    sprite_cursor_de_la_grilla: Phaser.GameObjects.Sprite;
+    tamaño_de_la_grilla: number;
+    tecla_meta_pulsada: boolean;
+    actor_seleccionado: any;
+    camara: CamaraEnModoEdición;
+    constructor();
+    cuando_cambia_grilla_desde_el_selector_manual(grilla: any): void;
+    preload(): void;
+    private conectar_eventos_de_teclado;
+    create(datos: any): void;
+    recuperar_datos_de_la_camara_en_el_editor(datos_del_proyecto: any): void;
+    conectar_eventos_para_activar_zoom(): void;
+    conectar_eventos_para_desplazar_pantalla(): void;
+    private manejar_evento_key_up;
+    private manejar_evento_key_down;
+    crear_camara(pilas: any, x: any, y: any, ancho: any, alto: any): void;
+    conectar_eventos_resize(): void;
+    resize(gameSize: any): void;
+    private ajustar_tamaño;
+    crear_actores_desde_los_datos_de_la_escena(escena: Escena): void;
+    crear_sprite_desde_actor(datos_del_actor: Actor): void;
+    aplicar_atributos_de_actor_a_sprite(actor: Actor, sprite: any): void;
+    cambiar_el_tamaño_del_escenario(ancho: any, alto: any): void;
+    posicionar_la_camara(datos_de_la_escena: any): void;
+    private crear_manejadores_para_hacer_arrastrables_los_actores;
+    eliminar_actor_por_id(id: any): void;
+    actualizar_sprite_desde_datos(sprite: any, actor: any): void;
 }
 declare class ModoEjecucion extends Modo {
     pilas: Pilas;

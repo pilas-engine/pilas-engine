@@ -381,6 +381,7 @@ export default Component.extend({
 
   mientras_mueve_la_camara(datos) {
     let escena = this.obtener_la_escena_actual();
+
     escena.set("camara_x", datos.x);
     escena.set("camara_y", datos.y);
   },
@@ -388,9 +389,15 @@ export default Component.extend({
   // Se ejecuta cuando el usuario mueve la cámara o
   // ajusta el zoom de la cámara del editor.
   cuando_cambia_el_estado_de_la_camara_en_el_editor(datos) {
+    console.assert(datos.x);
+    console.assert(datos.y);
+
     this.set("proyecto.editor_camara_x", datos.x);
     this.set("proyecto.editor_camara_y", datos.y);
-    this.set("proyecto.editor_camara_zoom", datos.zoom);
+
+    if (datos.zoom) {
+      this.set("proyecto.editor_camara_zoom", datos.zoom);
+    }
   },
 
   comienza_a_mover_un_actor(datos) {

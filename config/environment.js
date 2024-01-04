@@ -16,7 +16,8 @@ module.exports = function(environment) {
       }
     },
 
-    confirmarCambioDeRutasORecargas: true,
+    //TODO: esto tiene que ponerse en true antes de hacer el release.
+    confirmarCambioDeRutasORecargas: false,
     remoteBackendURL: "https://backend.pilas-engine.com.ar",
     remoteFrontendURL: "https://app.pilas-engine.com.ar",
     //remoteBackendURL: "http://localhost:8000",

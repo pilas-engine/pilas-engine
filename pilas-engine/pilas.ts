@@ -251,12 +251,14 @@ class Pilas {
     let escala = undefined;
     let color_de_fondo = "#000000";
 
-    if (maximizar) {
-      escala = {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
-      };
-    }
+    let escala = {
+      mode: Phaser.Scale.NONE,
+
+      width: "100%",
+      height: "100%",
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      autoRound: false,
+    };
 
     if (pixelart === undefined) {
       pixelart = true;

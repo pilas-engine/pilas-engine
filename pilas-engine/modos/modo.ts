@@ -49,8 +49,13 @@ class Modo extends Phaser.Scene {
   destacar_actor_por_id(id) {
     let actor = this.obtener_actor_por_id(id);
 
+    if (this.actor_seleccionado) {
+      this.actor_seleccionado.quitar_destacado();
+    }
+
     if (actor && actor.destacar) {
       actor.destacar();
+      this.actor_seleccionado = actor;
     }
   }
 
@@ -58,29 +63,6 @@ class Modo extends Phaser.Scene {
     let graphics = this.add.graphics();
     graphics.depth = 20000;
     this.graphics = graphics;
-  }
-
-  crear_manejadores_para_controlar_el_zoom(emitir_mensajes_al_editor) {
-    let escena = this;
-
-    this.input.on("wheel", function(pointer, currentlyOver, dx, dy, dz, event) {
-      let zoom = this.cameras.main.zoom;
-
-      if (dy > 0) {
-        zoom += 0.25;
-      } else {
-        zoom -= 0.25;
-      }
-
-      zoom = Math.max(1, zoom);
-      zoom = Math.min(5, zoom);
-
-      if (emitir_mensajes_al_editor) {
-        escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
-      }
-
-      this.cameras.main.setZoom(zoom);
-    });
   }
 
   update(actores) {
@@ -226,16 +208,12 @@ class Modo extends Phaser.Scene {
     canvas.strokePath();
   }
 
-  obtener_posicion_de_la_camara() {
-    let x = this.pilas.modo.cameras.cameras[0].scrollX;
-    let y = this.pilas.modo.cameras.cameras[0].scrollY;
-    return { x, y };
-  }
-
   crear_fondo(fondo, ancho, alto) {
     this._nombre_del_fondo = fondo;
     this.pilas.utilidades.validar_que_existe_imagen(fondo);
 
+    // Espera el tamaño de escenario de la escena, pero si no
+    // se define una el area de pantalla del proyecto.
     ancho = ancho || this.ancho;
     alto = alto || this.alto;
 
@@ -251,6 +229,12 @@ class Modo extends Phaser.Scene {
 
     this.fondo.depth = -20000;
     this.fondo.setOrigin(0);
+  }
+
+  obtener_posicion_de_la_camara() {
+    let x = this.pilas.modo.cameras.cameras[0].scrollX;
+    let y = this.pilas.modo.cameras.cameras[0].scrollY;
+    return { x, y };
   }
 
   posicionar_fondo(dx, dy) {
@@ -273,28 +257,33 @@ class Modo extends Phaser.Scene {
     }
   }
 
-  cambiar_fondo(fondo, ancho = null, alto = null) {
+  cambiar_fondo(fondo, ancho, alto) {
     // Este método se re-define en la clase modo_editor
     if (fondo !== this._nombre_del_fondo) {
       this.fondo.destroy();
       this.fondo = null;
       this.crear_fondo(fondo, ancho, alto);
+    } else {
+      this.fondo.width = ancho;
+      this.fondo.height = alto;
     }
   }
 
   obtener_actor_por_id(id) {
     if (this.pilas && this.pilas.modo && this.pilas.actores) {
-      return this.pilas.modo.actores.filter(e => e.id === id)[0];
+      let actor = this.pilas.modo.actores.find(e => e.identificador == id)
+      console.assert(actor, "no se encuentra el actor buscado con el id " + id);
+      return actor;
     } else {
+      console.assert(false, "Imposible buscar actores porque la lista no existe");
       return null;
     }
   }
 
-  actualizar_sprite_desde_datos(sprite, actor) {
-    let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
+  deprecated__actualizar_sprite_desde_datos(sprite, actor) {
+    sprite.actualizar_datos(actor);
 
-    this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
-
+    /*
     if (actor.imagen.indexOf(":") > -1) {
       let g = actor.imagen.split(":")[0];
       let i = actor.imagen.split(":")[1];
@@ -306,8 +295,10 @@ class Modo extends Phaser.Scene {
 
     // Arreglo: se cambia el area de contacto para poder
     // arrastrar correctamente al actor luego de cambiar su textura.
-    sprite.input.hitArea.width = sprite.width;
-    sprite.input.hitArea.height = sprite.height;
+    if (sprite.input) {
+      sprite.input.hitArea.width = sprite.width;
+      sprite.input.hitArea.height = sprite.height;
+    }
 
     if (this.actor_seleccionado === sprite) {
       this.input.enableDebug(sprite, 0xffffff);
@@ -385,6 +376,7 @@ class Modo extends Phaser.Scene {
 
       this.copiar_valores_de_sprite_a_texto(sprite);
     }
+    */
   }
 
   private actualizar_sensores_del_actor(actor, sprite) {

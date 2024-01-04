@@ -126,8 +126,10 @@ class Mensajes {
       let x = camera.scrollX;
       let y = -camera.scrollY;
 
-      this.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x, y });
-      this.pilas.modo.posicionar_la_camara({ camara_x: x, camara_y: y });
+      this.emitir_mensaje_al_editor("cuando_cambia_el_estado_de_la_camara_en_el_editor", { x, y:-y });
+
+      //this.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x, y });
+      //this.pilas.modo.posicionar_la_camara({ camara_x: x, camara_y: y });
     }, 260);
   }
 
@@ -168,6 +170,7 @@ class Mensajes {
 
   atender_mensaje_actualizar_actor_desde_el_editor(datos) {
     let sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
+    // Nota: el siguiente método solo está definido en el estado "modo_editor".
     this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
   }
 

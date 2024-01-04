@@ -1,6 +1,6 @@
 recursos
 vendor
-docs
+docs/*
 manual/imagenes/* 
 *.png
 public/api

@@ -170,7 +170,15 @@ export default Component.extend({
     return valor;
   },
 
-  widthParaElModoZoomEnviado: computed("modoZoom", "ancho", function() {
+  widthParaElModoZoomEnviado: computed("modoZoom", "nombre_del_estado", "ancho", function() {
+
+    if (this.nombre_del_estado == "ModoEdicion") {
+      // cuando está en modo edición, el canvas se extiende para ocupar el 100%
+      // del area en pantalla. Es phaser quién se encarga de hacer todo
+      // lo demás aquí.
+      return "100%";
+    }
+
     if (this.modoZoom === 1) {
       return htmlSafe("100%");
     }
@@ -182,7 +190,15 @@ export default Component.extend({
     return Error(`No se puede usar el modoZoom ${this.modoZoom}`);
   }),
 
-  heightParaElModoZoomEnviado: computed("modoZoom", "alto", function() {
+  heightParaElModoZoomEnviado: computed("modoZoom", "nombre_del_estado", "alto", function() {
+
+    if (this.nombre_del_estado == "ModoEdicion") {
+      // cuando está en modo edición, el canvas se extiende para ocupar el 100%
+      // del area en pantalla. Es phaser quién se encarga de hacer todo
+      // lo demás aquí.
+      return "100%";
+    }
+
     if (this.modoZoom === 1) {
       return htmlSafe("");
     }
@@ -245,7 +261,6 @@ export default Component.extend({
       pos: this.pos,
       fps: this.fps,
       fisica: this.fisica,
-      minimapa: this.minimapa,
       fisica_en_modo_ejecucion: this.fisica_en_modo_ejecucion
     };
 

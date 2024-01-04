@@ -45,7 +45,6 @@ interpreter:
 tooltip:
   show.shapes: Show the physical shapes
   show.fps: Show the performance in FPS
-  show.minimap: Show the minimap
   show.positions: Show the control points of earch actor
 change.image: Change image
 custom.images: Custom images

@@ -96,15 +96,6 @@ class ModoCargador extends Modo {
 
     var width = this.cameras.main.width;
     var height = this.cameras.main.height;
-    var loadingText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 100,
-      text: "Iniciando ...",
-      style: {
-        font: "14px verdana",
-      }
-    });
-    loadingText.setOrigin(0.5, 0.5);
 
     this.x = width / 2 - 310 / 2;
 

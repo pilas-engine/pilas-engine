@@ -1497,7 +1497,6 @@ var Depurador = (function () {
         this.mostrar_fps = datos.fps;
         this.modo_posicion_activado = datos.pos;
         this.mostrar_fisica = datos.fisica;
-        this.minimapa = datos.minimapa;
         this.fisica_en_modo_ejecucion = datos.fisica_en_modo_ejecucion;
     };
     return Depurador;
@@ -2310,15 +2309,15 @@ var Mensajes = (function () {
     Mensajes.prototype.atender_mensaje_definir_zoom_inicial_para_el_modo_editor = function (datos) {
         this.pilas.modo.cameras.main.setZoom(datos.zoom);
     };
-    Mensajes.prototype.atender_mensaje_cuando_cambia_zoom_desde_el_selector_manual = function (datos) {
-        this.pilas.modo.cameras.main.setZoom(datos.zoom);
-    };
     Mensajes.prototype.atender_mensaje_cuando_cambia_grilla_desde_el_selector_manual = function (datos) {
         this.pilas.modo.cuando_cambia_grilla_desde_el_selector_manual(datos.grilla);
     };
     Mensajes.prototype.atender_mensaje_actualizar_escena_desde_el_editor = function (datos) {
-        this.pilas.modo.cambiar_fondo(datos.escena.fondo);
+        this.pilas.modo.cambiar_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
         this.pilas.modo.posicionar_la_camara(datos.escena);
+    };
+    Mensajes.prototype.atender_mensaje_cuando_cambia_el_tamaño_del_escenario = function (datos) {
+        this.pilas.modo.cambiar_el_tamaño_del_escenario(datos.ancho, datos.alto);
     };
     Mensajes.prototype.atender_mensaje_termina_de_reproducir_sonido = function () { };
     Mensajes.prototype.atender_mensaje_ubicar_camara_en_el_actor = function (data) {
@@ -2329,8 +2328,7 @@ var Mensajes = (function () {
         setTimeout(function () {
             var x = camera.scrollX;
             var y = -camera.scrollY;
-            _this.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x: x, y: y });
-            _this.pilas.modo.posicionar_la_camara({ camara_x: x, camara_y: y });
+            _this.emitir_mensaje_al_editor("cuando_cambia_el_estado_de_la_camara_en_el_editor", { x: x, y: -y });
         }, 260);
     };
     Mensajes.prototype.atender_mensaje_ejecutar_proyecto = function (datos) {
@@ -2786,12 +2784,13 @@ var Pilas = (function () {
     Pilas.prototype.crear_configuracion = function (ancho, alto, maximizar, pixelart, transparente) {
         var escala = undefined;
         var color_de_fondo = "#000000";
-        if (maximizar) {
-            escala = {
-                mode: Phaser.Scale.FIT,
-                autoCenter: Phaser.Scale.CENTER_BOTH
-            };
-        }
+        var escala = {
+            mode: Phaser.Scale.NONE,
+            width: "100%",
+            height: "100%",
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            autoRound: false,
+        };
         if (pixelart === undefined) {
             pixelart = true;
         }
@@ -8501,6 +8500,225 @@ var Pose = (function () {
     };
     return Pose;
 }());
+var ActorEnModoEdición = (function (_super) {
+    __extends(ActorEnModoEdición, _super);
+    function ActorEnModoEdición(pilas, scene, datos_del_actor) {
+        var _this = _super.call(this, scene, 0, 0) || this;
+        _this.fondo = null;
+        _this.sensores = [];
+        _this.figura = null;
+        _this.texto = null;
+        _this.pilas = pilas;
+        var _a = _this.separar_imagen(datos_del_actor.imagen), g = _a.g, i = _a.i;
+        _this.pilas.utilidades.validar_que_existe_imagen(datos_del_actor.imagen);
+        _this.identificador = datos_del_actor.id;
+        console.log("Guardando este actor como", _this.identificador);
+        _this.crear_sprite(g, i);
+        _this.crear_borde();
+        _this.hacer_interactivo();
+        _this.conectar_eventos_del_mouse();
+        return _this;
+    }
+    ActorEnModoEdición.prototype.separar_imagen = function (imagen) {
+        var g = undefined;
+        var i = undefined;
+        if (imagen.indexOf(":") > -1) {
+            g = imagen.split(":")[0];
+            i = imagen.split(":")[1];
+        }
+        else {
+            g = imagen;
+        }
+        return { g: g, i: i };
+    };
+    ActorEnModoEdición.prototype.crear_sprite = function (g, i) {
+        var scene = this.pilas.modo;
+        this.sprite = scene.add.sprite(0, 0, g, i);
+        this.add(this.sprite);
+    };
+    ActorEnModoEdición.prototype.actualizar_datos = function (entidad) {
+        var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
+        this.pilas.utilidades.validar_que_existe_imagen(entidad.imagen);
+        if (entidad.imagen.indexOf(":") > -1) {
+            var g = entidad.imagen.split(":")[0];
+            var i = entidad.imagen.split(":")[1];
+            this.sprite.setTexture(g, i);
+        }
+        else {
+            this.sprite.setTexture(entidad.imagen);
+        }
+        this.x = coordenada.x;
+        this.y = coordenada.y;
+        if (entidad.activo === false) {
+            this.sprite.alpha = 0.5;
+        }
+        else {
+            this.sprite.alpha = 1 - entidad.transparencia / 100;
+        }
+        this.sprite.angle = -entidad.rotacion;
+        this.sprite.scaleX = entidad.escala_x;
+        this.sprite.scaleY = entidad.escala_y;
+        this.sprite.depth = -entidad.z || 0;
+        this.sprite.setOrigin(entidad.centro_x, entidad.centro_y);
+        this.borde.setSize(this.sprite.width, this.sprite.height);
+    };
+    ActorEnModoEdición.prototype.crear_borde = function () {
+        this.borde = this.pilas.modo.add.rectangle(this.sprite.x, 0, this.sprite.width, this.sprite.height);
+        this.borde.setStrokeStyle(2, 0xff00f0);
+        this.add(this.borde);
+        this.borde.alpha = 0.5;
+    };
+    ActorEnModoEdición.prototype.hacer_interactivo = function () {
+        var borde = this.sprite.getTopLeft();
+        this.setInteractive({
+            draggable: true,
+            hitArea: new Phaser.Geom.Rectangle(borde.x, borde.y, this.sprite.width, this.sprite.height),
+            hitAreaCallback: Phaser.Geom.Rectangle.Contains,
+        });
+        this.pilas.modo.input.enableDebug(this, 0x00ff00);
+    };
+    ActorEnModoEdición.prototype.destacar = function () {
+        this.pilas.modo.input.enableDebug(this, 0xffffff);
+    };
+    ActorEnModoEdición.prototype.conectar_eventos_del_mouse = function () {
+        var _this = this;
+        this.on("pointermove", function (data) {
+            if (data.buttons) {
+                _this.scene.input.setDefaultCursor("grabbing");
+            }
+            else {
+                _this.scene.input.setDefaultCursor("grab");
+            }
+            _this.borde.alpha = 0.5;
+        });
+        this.on("pointerout", function () {
+            _this.scene.input.setDefaultCursor("default");
+            _this.borde.alpha = 0.5;
+        });
+        this.on("pointerdown", function () {
+            _this.scene.input.setDefaultCursor("grabbing");
+            _this.borde.alpha = 0.5;
+        });
+        this.on("pointerup", function () {
+            _this.scene.input.setDefaultCursor("grab");
+        });
+        this.on("drag", function (evento, x, y) {
+            _this.x = Math.floor(x);
+            _this.y = Math.floor(y);
+            console.log("Moviendo el actor", { x: x, y: y });
+        });
+        this.on("dragend", function (pointer) {
+            var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(_this.x, _this.y);
+            var datos = {
+                id: _this.identificador,
+                x: posicion.x,
+                y: posicion.y,
+            };
+            _this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", datos);
+        });
+    };
+    ActorEnModoEdición.prototype.quitar_destacado = function () {
+        this.pilas.modo.input.removeDebug(this);
+    };
+    ActorEnModoEdición.prototype.eliminar = function () {
+        if (this.figura) {
+            this.eliminar_figura(this.figura);
+        }
+        if (this.sensores) {
+            this.eliminar_sensores();
+        }
+        if (this.texto) {
+            this.texto.destroy();
+        }
+        if (this.fondo) {
+            this.fondo.destroy();
+        }
+        this.destroy();
+    };
+    ActorEnModoEdición.prototype.eliminar_sensores = function () {
+        var _this = this;
+        this.sensores.map(function (sensor) {
+            _this.eliminar_figura(sensor);
+        });
+    };
+    ActorEnModoEdición.prototype.eliminar_figura = function (figura) {
+        var matter = this.pilas.Phaser.Physics.Matter.Matter;
+        var world = this.pilas.modo.matter.world.localWorld;
+        matter.World.remove(world, figura);
+    };
+    return ActorEnModoEdición;
+}(Phaser.GameObjects.Container));
+var CamaraEnModoEdición = (function (_super) {
+    __extends(CamaraEnModoEdición, _super);
+    function CamaraEnModoEdición(pilas, scene, x, y, ancho, alto) {
+        var _this = _super.call(this, scene, x + ancho / 2, y + alto / 2) || this;
+        _this.pilas = pilas;
+        _this.ancho = ancho;
+        _this.alto = alto;
+        var manejador_ancho = 50;
+        var manejador_alto = 20;
+        var manejador = null;
+        _this.borde = scene.add.rectangle(0, 0, ancho, alto);
+        _this.borde.setStrokeStyle(1, 0x00ff00);
+        _this.add(_this.borde);
+        var manejador_x = ancho / 2 - manejador_ancho / 2;
+        var manejador_y = alto / 2 + manejador_alto / 2;
+        manejador = scene.add.rectangle(manejador_x, manejador_y, manejador_ancho, manejador_alto);
+        manejador.setStrokeStyle(2, 0x00ff00);
+        manejador.setFillStyle(0x00ff00);
+        manejador.setAlpha(0.25);
+        _this.add(manejador);
+        _this.setInteractive({
+            draggable: true,
+            hitArea: new Phaser.Geom.Rectangle(manejador_x - manejador_ancho / 2, manejador_y - manejador_alto / 2, manejador_ancho, manejador_alto),
+            hitAreaCallback: Phaser.Geom.Rectangle.Contains,
+        });
+        var icono = scene.add.sprite(manejador_x, manejador_y, "camara");
+        _this.add(icono);
+        _this.alpha = 0.75;
+        _this.setDepth(1000000000);
+        _this.on("pointermove", function (data) {
+            _this.alpha = 1;
+            if (data.buttons) {
+                _this.scene.input.setDefaultCursor("grabbing");
+            }
+            else {
+                _this.scene.input.setDefaultCursor("grab");
+            }
+        });
+        _this.on("pointerout", function () {
+            _this.alpha = 0.75;
+            _this.scene.input.setDefaultCursor("default");
+        });
+        _this.on("pointerdown", function () {
+            _this.scene.input.setDefaultCursor("grabbing");
+        });
+        _this.on("pointerup", function () {
+            _this.scene.input.setDefaultCursor("grab");
+        });
+        _this.on("drag", function (evento, x, y) {
+            _this.x = Math.floor(x);
+            _this.y = Math.floor(y);
+        });
+        _this.on("dragend", function () {
+            var p = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(_this.x, _this.y);
+            _this.pilas.mensajes.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x: p.x, y: p.y });
+        });
+        return _this;
+    }
+    CamaraEnModoEdición.prototype.definirTamaño = function (x, y, ancho, alto) {
+        this.borde.setSize(ancho, alto);
+        this.x = x;
+        this.y = y;
+        this.ancho = ancho;
+        this.alto = alto;
+    };
+    CamaraEnModoEdición.prototype.mover = function (x, y) {
+        this.x = x;
+        this.y = y;
+    };
+    return CamaraEnModoEdición;
+}(Phaser.GameObjects.Container));
 var COLOR_DEL_LASER = 0xfffda0;
 var Modo = (function (_super) {
     __extends(Modo, _super);
@@ -8532,32 +8750,18 @@ var Modo = (function (_super) {
     };
     Modo.prototype.destacar_actor_por_id = function (id) {
         var actor = this.obtener_actor_por_id(id);
+        if (this.actor_seleccionado) {
+            this.actor_seleccionado.quitar_destacado();
+        }
         if (actor && actor.destacar) {
             actor.destacar();
+            this.actor_seleccionado = actor;
         }
     };
     Modo.prototype.crear_canvas_de_depuracion = function () {
         var graphics = this.add.graphics();
         graphics.depth = 20000;
         this.graphics = graphics;
-    };
-    Modo.prototype.crear_manejadores_para_controlar_el_zoom = function (emitir_mensajes_al_editor) {
-        var escena = this;
-        this.input.on("wheel", function (pointer, currentlyOver, dx, dy, dz, event) {
-            var zoom = this.cameras.main.zoom;
-            if (dy > 0) {
-                zoom += 0.25;
-            }
-            else {
-                zoom -= 0.25;
-            }
-            zoom = Math.max(1, zoom);
-            zoom = Math.min(5, zoom);
-            if (emitir_mensajes_al_editor) {
-                escena.pilas.mensajes.emitir_mensaje_al_editor("cambia_zoom", { zoom: zoom });
-            }
-            this.cameras.main.setZoom(zoom);
-        });
     };
     Modo.prototype.update = function (actores) {
         var _this = this;
@@ -8673,11 +8877,6 @@ var Modo = (function (_super) {
         canvas.closePath();
         canvas.strokePath();
     };
-    Modo.prototype.obtener_posicion_de_la_camara = function () {
-        var x = this.pilas.modo.cameras.cameras[0].scrollX;
-        var y = this.pilas.modo.cameras.cameras[0].scrollY;
-        return { x: x, y: y };
-    };
     Modo.prototype.crear_fondo = function (fondo, ancho, alto) {
         this._nombre_del_fondo = fondo;
         this.pilas.utilidades.validar_que_existe_imagen(fondo);
@@ -8693,6 +8892,11 @@ var Modo = (function (_super) {
         }
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
+    };
+    Modo.prototype.obtener_posicion_de_la_camara = function () {
+        var x = this.pilas.modo.cameras.cameras[0].scrollX;
+        var y = this.pilas.modo.cameras.cameras[0].scrollY;
+        return { x: x, y: y };
     };
     Modo.prototype.posicionar_fondo = function (dx, dy) {
         if (!dx) {
@@ -8710,98 +8914,29 @@ var Modo = (function (_super) {
         }
     };
     Modo.prototype.cambiar_fondo = function (fondo, ancho, alto) {
-        if (ancho === void 0) { ancho = null; }
-        if (alto === void 0) { alto = null; }
         if (fondo !== this._nombre_del_fondo) {
             this.fondo.destroy();
             this.fondo = null;
             this.crear_fondo(fondo, ancho, alto);
         }
+        else {
+            this.fondo.width = ancho;
+            this.fondo.height = alto;
+        }
     };
     Modo.prototype.obtener_actor_por_id = function (id) {
         if (this.pilas && this.pilas.modo && this.pilas.actores) {
-            return this.pilas.modo.actores.filter(function (e) { return e.id === id; })[0];
+            var actor_1 = this.pilas.modo.actores.find(function (e) { return e.identificador == id; });
+            console.assert(actor_1, "no se encuentra el actor buscado con el id " + id);
+            return actor_1;
         }
         else {
+            console.assert(false, "Imposible buscar actores porque la lista no existe");
             return null;
         }
     };
-    Modo.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
-        var _this = this;
-        var coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(actor.x, actor.y);
-        this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
-        if (actor.imagen.indexOf(":") > -1) {
-            var g = actor.imagen.split(":")[0];
-            var i = actor.imagen.split(":")[1];
-            sprite.setTexture(g, i);
-        }
-        else {
-            sprite.setTexture(actor.imagen);
-        }
-        sprite.input.hitArea.width = sprite.width;
-        sprite.input.hitArea.height = sprite.height;
-        if (this.actor_seleccionado === sprite) {
-            this.input.enableDebug(sprite, 0xffffff);
-        }
-        if (actor.activo === false) {
-            sprite.alpha = 0.5;
-        }
-        else {
-            sprite.alpha = 1 - actor.transparencia / 100;
-        }
-        sprite.id = actor.id;
-        sprite.x = coordenada.x;
-        sprite.y = coordenada.y;
-        sprite.angle = -actor.rotacion;
-        sprite.scaleX = actor.escala_x;
-        sprite.scaleY = actor.escala_y;
-        sprite.depth = -actor.z || 0;
-        sprite.setOrigin(actor.centro_x, actor.centro_y);
-        if (sprite.figura) {
-            this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, sprite.figura);
-        }
-        if (actor.figura) {
-            sprite.figura = this.crear_figura_estatica_para(actor);
-        }
-        this.actualizar_sensores_del_actor(actor, sprite);
-        this.actualizar_lasers_del_actor(actor, sprite);
-        sprite.setFlipX(actor.espejado);
-        sprite.setFlipY(actor.espejado_vertical);
-        if (actor.es_texto) {
-            if (sprite["texto"] && sprite["texto_fuente"] !== actor.fuente) {
-                sprite["texto"].destroy();
-                sprite["texto"] = undefined;
-                if (sprite["fondo"]) {
-                    sprite["fondo"].destroy();
-                }
-            }
-            if (!sprite["texto"]) {
-                sprite["texto"] = this.add.bitmapText(0, 0, actor.fuente, actor.texto);
-                sprite["texto_fuente"] = actor.fuente;
-                sprite.update = function () {
-                    _this.copiar_valores_de_sprite_a_texto(sprite);
-                };
-                if (actor.fondo) {
-                    var imagen = this.obtener_imagen_para_nineslice(actor.fondo);
-                    var f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
-                    sprite["fondo"] = f;
-                    sprite["fondo_imagen"] = actor.fondo;
-                }
-            }
-            sprite["texto"].text = actor.texto;
-            if (actor.fondo !== sprite["fondo_imagen"]) {
-                if (sprite["fondo"]) {
-                    sprite["fondo"].destroy();
-                }
-                if (actor.fondo) {
-                    var imagen = this.obtener_imagen_para_nineslice(actor.fondo);
-                    var f = this.add["nineslice"](0, 0, 30, 20, imagen, 10, 10);
-                    sprite["fondo"] = f;
-                    sprite["fondo_imagen"] = actor.fondo;
-                }
-            }
-            this.copiar_valores_de_sprite_a_texto(sprite);
-        }
+    Modo.prototype.deprecated__actualizar_sprite_desde_datos = function (sprite, actor) {
+        sprite.actualizar_datos(actor);
     };
     Modo.prototype.actualizar_sensores_del_actor = function (actor, sprite) {
         var _this = this;
@@ -9010,15 +9145,6 @@ var ModoCargador = (function (_super) {
         this.barra_de_progreso = this.add.graphics();
         var width = this.cameras.main.width;
         var height = this.cameras.main.height;
-        var loadingText = this.make.text({
-            x: width / 2,
-            y: height / 2 - 100,
-            text: "Iniciando ...",
-            style: {
-                font: "14px verdana",
-            }
-        });
-        loadingText.setOrigin(0.5, 0.5);
         this.x = width / 2 - 310 / 2;
         borde.lineStyle(1, 0x555555, 1);
         borde.strokeRect(this.x, 220, 310, 20);
@@ -9166,13 +9292,13 @@ var ModoCargador = (function (_super) {
     };
     return ModoCargador;
 }(Modo));
-var ModoEditor = (function (_super) {
-    __extends(ModoEditor, _super);
-    function ModoEditor() {
+var __deprecated_ModoEditor = (function (_super) {
+    __extends(__deprecated_ModoEditor, _super);
+    function __deprecated_ModoEditor() {
         return _super.call(this, { key: "ModoEditor" }) || this;
     }
-    ModoEditor.prototype.preload = function () { };
-    ModoEditor.prototype.create = function (datos) {
+    __deprecated_ModoEditor.prototype.preload = function () { };
+    __deprecated_ModoEditor.prototype.create = function (datos) {
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.pilas = datos.pilas;
@@ -9183,23 +9309,21 @@ var ModoEditor = (function (_super) {
         this.crear_fondo(datos.escena.fondo, datos.escena.ancho + this.ancho / 2, datos.escena.alto);
         this.posicionar_la_camara(datos.escena);
         this.aplicar_limites_a_la_camara(datos.escena);
-        this.crear_minimap(datos.escena);
         this.crear_sprite_con_el_borde_de_la_camara(datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.hacer_que_el_fondo_se_pueda_arrastrar();
         this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
-        this.crear_manejadores_para_controlar_el_zoom(true);
         this.conectar_movimiento_del_mouse();
         this.conectar_eventos_de_teclado();
         this.pilas.game.scale.scaleMode = Phaser.Scale.FIT;
         this.pilas.game.scale.resize(this.ancho, this.alto);
         this.pilas.mensajes.emitir_mensaje_al_editor("comienza_el_modo_edicion");
     };
-    ModoEditor.prototype.conectar_eventos_de_teclado = function () {
+    __deprecated_ModoEditor.prototype.conectar_eventos_de_teclado = function () {
         this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
         this.input.keyboard.on("keydown", this.manejar_evento_key_down.bind(this));
     };
-    ModoEditor.prototype.crear_fondo = function (fondo, ancho, alto) {
+    __deprecated_ModoEditor.prototype.crear_fondo = function (fondo, ancho, alto) {
         if (ancho === void 0) { ancho = null; }
         if (alto === void 0) { alto = null; }
         this._nombre_del_fondo = fondo;
@@ -9217,7 +9341,7 @@ var ModoEditor = (function (_super) {
         this.fondo.depth = -20000;
         this.fondo.setOrigin(0);
     };
-    ModoEditor.prototype.manejar_evento_key_up = function (evento) {
+    __deprecated_ModoEditor.prototype.manejar_evento_key_up = function (evento) {
         if (evento.key === "d") {
             this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado", {});
         }
@@ -9243,12 +9367,12 @@ var ModoEditor = (function (_super) {
             this.tecla_meta_pulsada = false;
         }
     };
-    ModoEditor.prototype.manejar_evento_key_down = function (evento) {
+    __deprecated_ModoEditor.prototype.manejar_evento_key_down = function (evento) {
         if (evento.key === "Meta") {
             this.tecla_meta_pulsada = true;
         }
     };
-    ModoEditor.prototype.crear_sprite_para_el_cursor_de_la_grilla = function () {
+    __deprecated_ModoEditor.prototype.crear_sprite_para_el_cursor_de_la_grilla = function () {
         var x = 0;
         var y = 0;
         if (this.sprite_cursor_de_la_grilla) {
@@ -9261,25 +9385,7 @@ var ModoEditor = (function (_super) {
         sprite.depth = 9999999;
         this.sprite_cursor_de_la_grilla = sprite;
     };
-    ModoEditor.prototype.crear_minimap = function (escena) {
-        var game = this;
-        var w = 100;
-        var h = 70;
-        var p = 5;
-        var width = this.ancho;
-        var height = this.alto;
-        var ancho_del_escenario = escena.ancho;
-        var alto_del_escenario = escena.alto;
-        this.minimap = game.cameras.add(width - w - p, height - h - p, w, h).setZoom(0.1);
-        this.minimap.setBounds(0, 0, ancho_del_escenario, alto_del_escenario);
-        this.minimap.setBackgroundColor(0x002244);
-        this.minimap.scrollX = 0;
-        this.minimap.scrollY = 0;
-        this.minimap.inputEnabled = false;
-        this.minimap.ignore(this.fondo);
-        this.minimap.ignore(this.fps);
-    };
-    ModoEditor.prototype.crear_sprite_con_el_borde_de_la_camara = function (_a) {
+    __deprecated_ModoEditor.prototype.crear_sprite_con_el_borde_de_la_camara = function (_a) {
         var camara_x = _a.camara_x, camara_y = _a.camara_y;
         this.sprite_borde_de_la_camara = this.add.rectangle(this.ancho / 2, this.alto / 2, this.ancho, this.alto);
         this.sprite_borde_de_la_camara.setStrokeStyle(3, 0xffffff);
@@ -9288,15 +9394,15 @@ var ModoEditor = (function (_super) {
         this.sprite_borde_de_la_camara.y = -camara_y + this.alto / 2;
         this.cameras.cameras[0].ignore(this.sprite_borde_de_la_camara);
     };
-    ModoEditor.prototype.hacer_que_el_fondo_se_pueda_arrastrar = function () {
+    __deprecated_ModoEditor.prototype.hacer_que_el_fondo_se_pueda_arrastrar = function () {
         this.fondo.setInteractive();
         this.input.setDraggable(this.fondo, undefined);
         this.fondo["es_fondo"] = true;
     };
-    ModoEditor.prototype.aplicar_limites_a_la_camara = function (escena) {
+    __deprecated_ModoEditor.prototype.aplicar_limites_a_la_camara = function (escena) {
         this.cameras.cameras[0].setBounds(0, 0, escena.ancho + this.ancho / 2, escena.alto);
     };
-    ModoEditor.prototype.conectar_movimiento_del_mouse = function () {
+    __deprecated_ModoEditor.prototype.conectar_movimiento_del_mouse = function () {
         var _this = this;
         this.input.on("pointermove", function (evento) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
@@ -9313,7 +9419,7 @@ var ModoEditor = (function (_super) {
             }
         });
     };
-    ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara = function () {
+    __deprecated_ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara = function () {
         var _this = this;
         var escena = this;
         var actor_que_se_esta_arrastrando = null;
@@ -9366,13 +9472,13 @@ var ModoEditor = (function (_super) {
             }
         });
     };
-    ModoEditor.prototype.ajustar_posicion_a_la_grilla = function (gameObject) {
+    __deprecated_ModoEditor.prototype.ajustar_posicion_a_la_grilla = function (gameObject) {
         gameObject.x = this.sprite_cursor_de_la_grilla.x;
         gameObject.y = this.sprite_cursor_de_la_grilla.y;
         this.ajustar_figura(gameObject);
         this.ajustar_sensores(gameObject);
     };
-    ModoEditor.prototype.cuando_cambia_grilla_desde_el_selector_manual = function (grilla) {
+    __deprecated_ModoEditor.prototype.cuando_cambia_grilla_desde_el_selector_manual = function (grilla) {
         if (grilla === 0) {
             this.usar_grilla = false;
             this.tamaño_de_la_grilla = 0;
@@ -9389,7 +9495,7 @@ var ModoEditor = (function (_super) {
             this.sprite_cursor_de_la_grilla.alpha = 1;
         }
     };
-    ModoEditor.prototype.desplazar_la_camara_desde_el_evento_drag = function (pointer) {
+    __deprecated_ModoEditor.prototype.desplazar_la_camara_desde_el_evento_drag = function (pointer) {
         var zoom = this.cameras.main.zoom;
         var factor = this.obtener_factores();
         var dx = this.posicion_anterior_de_arrastre.x - pointer.position.x;
@@ -9399,12 +9505,12 @@ var ModoEditor = (function (_super) {
         this.posicion_anterior_de_arrastre = pointer.position.clone();
         this.actualizar_posicion_del_minimap_y_el_borde_de_camara();
     };
-    ModoEditor.prototype.obtener_factores = function () {
+    __deprecated_ModoEditor.prototype.obtener_factores = function () {
         var factor_horizontal = Math.min(1, this.ancho / this.alto);
         var factor_vertical = Math.min(1, this.alto / this.ancho);
         return { x: factor_horizontal, y: factor_vertical };
     };
-    ModoEditor.prototype.desplazar_actor_desde_el_evento_drag = function (gameObject, pointer) {
+    __deprecated_ModoEditor.prototype.desplazar_actor_desde_el_evento_drag = function (gameObject, pointer) {
         var zoom = this.cameras.main.zoom;
         var factor = this.obtener_factores();
         var dx = (pointer.position.x - this.posicion_anterior_de_arrastre.x) / factor.x / zoom;
@@ -9416,7 +9522,7 @@ var ModoEditor = (function (_super) {
         this.ajustar_sensores(gameObject);
         this.posicion_anterior_de_arrastre = pointer.position.clone();
     };
-    ModoEditor.prototype.ajustar_figura = function (gameObject) {
+    __deprecated_ModoEditor.prototype.ajustar_figura = function (gameObject) {
         var matter = this.pilas.Phaser.Physics.Matter.Matter;
         if (gameObject.figura) {
             var figura = gameObject.figura;
@@ -9426,7 +9532,7 @@ var ModoEditor = (function (_super) {
             });
         }
     };
-    ModoEditor.prototype.ajustar_sensores = function (sprite) {
+    __deprecated_ModoEditor.prototype.ajustar_sensores = function (sprite) {
         var matter = this.pilas.Phaser.Physics.Matter.Matter;
         if (sprite.sensores) {
             sprite.sensores.map(function (sensor) {
@@ -9437,7 +9543,7 @@ var ModoEditor = (function (_super) {
             });
         }
     };
-    ModoEditor.prototype.mover_cursor_de_la_grilla = function (x, y) {
+    __deprecated_ModoEditor.prototype.mover_cursor_de_la_grilla = function (x, y) {
         var grilla = this.tamaño_de_la_grilla;
         function normalizar(valor) {
             return Math.round(valor / grilla) * grilla;
@@ -9449,7 +9555,7 @@ var ModoEditor = (function (_super) {
         this.sprite_cursor_de_la_grilla.x = x_normalizada;
         this.sprite_cursor_de_la_grilla.y = y_normalizada;
     };
-    ModoEditor.prototype.actualizar_posicion_del_minimap_y_el_borde_de_camara = function (emitir_evento) {
+    __deprecated_ModoEditor.prototype.actualizar_posicion_del_minimap_y_el_borde_de_camara = function (emitir_evento) {
         if (emitir_evento === void 0) { emitir_evento = true; }
         var _a = this.obtener_posicion_de_desplazamiento_de_la_camara(), x = _a.x, y = _a.y;
         this.sprite_borde_de_la_camara.x = x + this.ancho / 2;
@@ -9460,7 +9566,7 @@ var ModoEditor = (function (_super) {
             this.pilas.mensajes.emitir_mensaje_al_editor("mientras_mueve_la_camara", { x: x, y: -y });
         }
     };
-    ModoEditor.prototype.obtener_posicion_de_desplazamiento_de_la_camara = function () {
+    __deprecated_ModoEditor.prototype.obtener_posicion_de_desplazamiento_de_la_camara = function () {
         var camara = this.cameras.main;
         var x = camara.scrollX;
         var y = camara.scrollY;
@@ -9481,13 +9587,13 @@ var ModoEditor = (function (_super) {
         }
         return { x: x, y: y };
     };
-    ModoEditor.prototype.crear_actores_desde_los_datos_de_la_escena = function (escena) {
+    __deprecated_ModoEditor.prototype.crear_actores_desde_los_datos_de_la_escena = function (escena) {
         var _this = this;
         escena.actores.map(function (actor) {
             _this.crear_sprite_desde_actor(actor);
         });
     };
-    ModoEditor.prototype.crear_sprite_desde_actor = function (actor) {
+    __deprecated_ModoEditor.prototype.crear_sprite_desde_actor = function (actor) {
         var _this = this;
         this.pilas.utilidades.validar_que_existe_imagen(actor.imagen);
         var sprite = null;
@@ -9508,11 +9614,12 @@ var ModoEditor = (function (_super) {
             _this.input.enableDebug(sprite, 0xffffff);
             _this.actor_seleccionado = sprite;
         };
+        console.log("aplicando sprites!!!");
         this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
         this.input.setDraggable(sprite, undefined);
         this.actores.push(sprite);
     };
-    ModoEditor.prototype.copiar_atributos_excepto_alpha = function (origen, destino) {
+    __deprecated_ModoEditor.prototype.copiar_atributos_excepto_alpha = function (origen, destino) {
         destino.x = origen.x;
         destino.y = origen.y;
         destino.angle = origen.angle;
@@ -9523,17 +9630,11 @@ var ModoEditor = (function (_super) {
         destino.depth = origen.depth;
         destino.setOrigin(origen.originX, origen.originY);
     };
-    ModoEditor.prototype.aplicar_atributos_de_actor_a_sprite = function (actor, sprite) {
+    __deprecated_ModoEditor.prototype.aplicar_atributos_de_actor_a_sprite = function (actor, sprite) {
         this.actualizar_sprite_desde_datos(sprite, actor);
     };
-    ModoEditor.prototype.update = function () {
+    __deprecated_ModoEditor.prototype.update = function () {
         _super.prototype.update.call(this, this.actores);
-        if (this.pilas.depurador.minimapa) {
-            this.minimap.setAlpha(1);
-        }
-        else {
-            this.minimap.setAlpha(0);
-        }
         this.actores.map(function (a) {
             a.update();
         });
@@ -9566,7 +9667,7 @@ var ModoEditor = (function (_super) {
             this.tecla_meta_pulsada = false;
         }
     };
-    ModoEditor.prototype.eliminar_actor_por_id = function (id) {
+    __deprecated_ModoEditor.prototype.eliminar_actor_por_id = function (id) {
         var _this = this;
         var indice = this.actores.findIndex(function (e) { return e.id === id; });
         var actor_a_eliminar = this.actores.splice(indice, 1);
@@ -9590,19 +9691,221 @@ var ModoEditor = (function (_super) {
         }
         actor_a_eliminar[0].destroy();
     };
-    ModoEditor.prototype.posicionar_la_camara = function (datos_de_la_escena) {
+    __deprecated_ModoEditor.prototype.posicionar_la_camara = function (datos_de_la_escena) {
         this.cameras.cameras[0].setScroll(datos_de_la_escena.camara_x, -datos_de_la_escena.camara_y);
         try {
             this.actualizar_posicion_del_minimap_y_el_borde_de_camara(false);
         }
         catch (e) { }
     };
-    ModoEditor.prototype.cambiar_fondo = function (fondo) {
+    __deprecated_ModoEditor.prototype.cambiar_fondo = function (fondo) {
         var ancho = this.cameras.main.getBounds().width;
         var alto = this.cameras.main.getBounds().height;
         _super.prototype.cambiar_fondo.call(this, fondo, ancho, alto);
         this.minimap.ignore(this.fondo);
         this.hacer_que_el_fondo_se_pueda_arrastrar();
+    };
+    return __deprecated_ModoEditor;
+}(Modo));
+var ModoEditor = (function (_super) {
+    __extends(ModoEditor, _super);
+    function ModoEditor() {
+        var _this = _super.call(this, { key: "ModoEditor" }) || this;
+        console.log("Llamando al constructor");
+        return _this;
+    }
+    ModoEditor.prototype.cuando_cambia_grilla_desde_el_selector_manual = function (grilla) {
+    };
+    ModoEditor.prototype.preload = function () {
+        this.load.image("camara", "/camara.png");
+    };
+    ModoEditor.prototype.conectar_eventos_de_teclado = function () {
+        this.input.keyboard.on("keyup", this.manejar_evento_key_up.bind(this));
+        this.input.keyboard.on("keydown", this.manejar_evento_key_down.bind(this));
+    };
+    ModoEditor.prototype.create = function (datos) {
+        _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
+        this.actores = [];
+        this.pilas = datos.pilas;
+        this.crear_camara(this.pilas, datos.escena.camara_x, datos.escena.camara_y, datos.proyecto.ancho, datos.proyecto.alto);
+        this.posicionar_la_camara(datos.escena);
+        this.ajustar_tamaño();
+        this.conectar_eventos_resize();
+        this.conectar_eventos_de_teclado();
+        this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
+        this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
+        this.conectar_eventos_para_activar_zoom();
+        this.conectar_eventos_para_desplazar_pantalla();
+        this.crear_manejadores_para_hacer_arrastrables_los_actores();
+        this.recuperar_datos_de_la_camara_en_el_editor(datos.proyecto);
+    };
+    ModoEditor.prototype.recuperar_datos_de_la_camara_en_el_editor = function (datos_del_proyecto) {
+        var x = datos_del_proyecto.editor_camara_x;
+        var y = datos_del_proyecto.editor_camara_y;
+        var zoom = datos_del_proyecto.editor_camara_zoom;
+        var camera = this.cameras.main;
+        camera.zoom = zoom;
+        camera.scrollX = x;
+        camera.scrollY = y;
+    };
+    ModoEditor.prototype.conectar_eventos_para_activar_zoom = function () {
+        var _this = this;
+        this.input.on("wheel", function (pointer, gameObjects, deltaX, deltaY, deltaZ) {
+            var camera = _this.cameras.main;
+            var salir = false;
+            if (deltaY > 0) {
+                camera.zoom += 0.2;
+            }
+            else {
+                if (deltaY < 0) {
+                    camera.zoom -= 0.2;
+                }
+            }
+            if (camera.zoom > 4) {
+                camera.zoom = 4;
+                salir = true;
+            }
+            else {
+                if (camera.zoom < 0.2) {
+                    camera.zoom = 0.2;
+                    salir = true;
+                }
+            }
+            camera.zoom = parseFloat(camera.zoom.toFixed(1));
+            if (salir) {
+                return;
+            }
+            camera.scrollX += ((pointer.worldX - camera.midPoint.x) / camera.zoom) / 10.0;
+            camera.scrollY += ((pointer.worldY - camera.midPoint.y) / camera.zoom) / 10.0;
+            _this.pilas.mensajes.emitir_mensaje_al_editor("cuando_cambia_el_estado_de_la_camara_en_el_editor", {
+                zoom: camera.zoom,
+                x: camera.scrollX,
+                y: camera.scrollY,
+            });
+        });
+    };
+    ModoEditor.prototype.conectar_eventos_para_desplazar_pantalla = function () {
+        var _this = this;
+        this.input.on('pointermove', function (pointer) {
+            if (_this.input.activePointer.middleButtonDown()) {
+                var camera = _this.cameras.main;
+                _this.input.setDefaultCursor("grabbing");
+                camera.scrollX -= (pointer.x - pointer.prevPosition.x) / camera.zoom;
+                camera.scrollY -= (pointer.y - pointer.prevPosition.y) / camera.zoom;
+            }
+        });
+        this.input.on('pointerup', function (pointer) {
+            if (_this.input.activePointer.middleButtonReleased()) {
+                pulsa_boton_medio = false;
+                _this.input.setDefaultCursor("default");
+                _this.pilas.mensajes.emitir_mensaje_al_editor("cuando_cambia_el_estado_de_la_camara_en_el_editor", {
+                    zoom: _this.cameras.main.zoom,
+                    x: _this.cameras.main.scrollX,
+                    y: _this.cameras.main.scrollY,
+                });
+            }
+        });
+    };
+    ModoEditor.prototype.manejar_evento_key_up = function (evento) {
+        if (evento.key === "d") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado", {});
+        }
+        if (evento.key === "x") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("eliminar_el_actor_seleccionado", {});
+        }
+        if (evento.key === "n") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("crear_un_actor_desde_atajo", {});
+        }
+        if (evento.key === "ArrowLeft") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: -1 });
+        }
+        if (evento.key === "ArrowRight") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: 1 });
+        }
+        if (evento.key === "ArrowUp") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: 1 });
+        }
+        if (evento.key === "ArrowDown") {
+            this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: -1 });
+        }
+        if (evento.key === "Meta") {
+            this.tecla_meta_pulsada = false;
+        }
+    };
+    ModoEditor.prototype.manejar_evento_key_down = function (evento) {
+        if (evento.key === "Meta") {
+            this.tecla_meta_pulsada = true;
+        }
+    };
+    ModoEditor.prototype.crear_camara = function (pilas, x, y, ancho, alto) {
+        this.camara = new CamaraEnModoEdición(this.pilas, this, x, y, ancho, alto);
+        this.add.existing(this.camara);
+        this.cameras.main.setBackgroundColor("CCC");
+    };
+    ModoEditor.prototype.conectar_eventos_resize = function () {
+        var _this = this;
+        function onResize() {
+            this.ajustar_tamaño();
+        }
+        var funcion = onResize.bind(this);
+        window.addEventListener("resize", funcion, false);
+        this.scale.on('resize', this.resize, this);
+        this.events.on('shutdown', function () {
+            window.removeEventListener("resize", funcion);
+            _this.scale.off('resize', _this.resize, _this);
+        });
+    };
+    ModoEditor.prototype.resize = function (gameSize) {
+        this.cameras.resize(gameSize.width, gameSize.height);
+    };
+    ModoEditor.prototype.ajustar_tamaño = function () {
+        this.game.scale.resize(window.innerWidth, window.innerHeight);
+        this.game.scale.setZoom(1);
+    };
+    ModoEditor.prototype.crear_actores_desde_los_datos_de_la_escena = function (escena) {
+        var _this = this;
+        escena.actores.map(function (actor) {
+            _this.crear_sprite_desde_actor(actor);
+        });
+    };
+    ModoEditor.prototype.crear_sprite_desde_actor = function (datos_del_actor) {
+        var actor = new ActorEnModoEdición(this.pilas, this, datos_del_actor);
+        this.aplicar_atributos_de_actor_a_sprite(datos_del_actor, actor);
+        this.actores.push(actor);
+        this.add.existing(actor);
+    };
+    ModoEditor.prototype.aplicar_atributos_de_actor_a_sprite = function (actor, sprite) {
+        sprite.actualizar_datos(actor);
+    };
+    ModoEditor.prototype.cambiar_el_tamaño_del_escenario = function (ancho, alto) {
+        this.fondo.width = ancho;
+        this.fondo.height = alto;
+    };
+    ModoEditor.prototype.posicionar_la_camara = function (datos_de_la_escena) {
+        var camara_x = datos_de_la_escena.camara_x, camara_y = datos_de_la_escena.camara_y;
+        this.camara.mover(camara_x + this.ancho / 2, -camara_y + this.alto / 2);
+    };
+    ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores = function () {
+        this.input.on("dragstart", function (pointer, gameObject) {
+            console.log("dragstart", pointer);
+            if (pointer.downElement && pointer.downElement.tagName !== "CANVAS") {
+                return false;
+            }
+            actor_que_se_esta_arrastrando = gameObject;
+            console.log("Actor que se arrastra", gameObject);
+        });
+    };
+    ModoEditor.prototype.eliminar_actor_por_id = function (id) {
+        var indice = this.actores.findIndex(function (e) { return e.id === id; });
+        var actor = this.actores.splice(indice, 1)[0];
+        if (this.actor_seleccionado && this.actor_seleccionado.id == actor.id) {
+            actor.quitar_destacado();
+            this.actor_seleccionado = null;
+        }
+        actor.eliminar();
+    };
+    ModoEditor.prototype.actualizar_sprite_desde_datos = function (sprite, actor) {
+        sprite.actualizar_datos(actor);
     };
     return ModoEditor;
 }(Modo));
@@ -9992,8 +10295,8 @@ var ModoEjecucion = (function (_super) {
         })
             .map(function (datos) {
             if (datos) {
-                var actor_1 = datos.actor, entidad = datos.entidad;
-                return _this.inicializar_actor(actor_1, entidad);
+                var actor_2 = datos.actor, entidad = datos.entidad;
+                return _this.inicializar_actor(actor_2, entidad);
             }
             else {
                 return false;

@@ -45,7 +45,6 @@ interpreter:
 tooltip:
   show.shapes: Muestra las figuras físicas
   show.fps: Muestra el rendimiento en cuadros por segundo (FPS)
-  show.minimap: Muestra el minimapa
   show.positions: Marca los puntos de control de cada actor
 change.image: Cambiar imagen
 custom.images: Imágenes personalizadas

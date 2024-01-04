@@ -27,6 +27,7 @@ class Actores {
 
     actor.pre_iniciar(p);
     actor.iniciar();
+
     return actor;
   }
 

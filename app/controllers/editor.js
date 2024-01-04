@@ -24,7 +24,6 @@ const queryParams = new QueryParams({
   mostrarInterprete: { defaultValue: false, replace: true },
   pos: { defaultValue: false, replace: true },
   fps: { defaultValue: true, replace: true },
-  minimapa: { defaultValue: true, replace: true },
   fisica: { defaultValue: true, replace: true },
   fisica_en_modo_ejecucion: { defaultValue: false, replace: false },
   permitir_modo_pausa: { defaultValue: true, replace: true },

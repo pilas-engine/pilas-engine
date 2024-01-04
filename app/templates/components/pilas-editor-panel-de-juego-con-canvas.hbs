@@ -84,7 +84,9 @@
   </div>
 
   {{#pilas-reiniciador}}
+
     {{pilas-canvas
+              nombre_del_estado=estado.nombreDeEstado
               nombre_del_contexto=nombre_del_contexto
               ancho=proyecto.ancho
               alto=proyecto.alto
@@ -97,7 +99,6 @@
               cuandoPulsaEscapeEnModoEjecucion=detener
               pos=pos
               fps=fps
-              minimapa=minimapa
               fisica=fisica
               fisica_en_modo_ejecucion=fisica_en_modo_ejecucion
               pixelart=pixelart
@@ -126,10 +127,6 @@
 
         {{#pilas-tooltip class="right-1 bottom-2 w4" texto=(t "tooltip.show.fps")}}
           {{pilas-boton-miniatura desactivado=estado.pausaActivada icono="fps" pulsado=fps}}
-        {{/pilas-tooltip}}
-
-        {{#pilas-tooltip class="right-1 bottom-2 w4" texto=(t "tooltip.show.minimap")}}
-          {{pilas-boton-miniatura desactivado=estado.pausaActivada icono="mapa" pulsado=minimapa}}
         {{/pilas-tooltip}}
 
         {{#pilas-tooltip class="right-1 bottom-2 w4" texto=(t "tooltip.show.positions")}}
