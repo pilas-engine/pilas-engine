@@ -86,15 +86,9 @@ AudioSpriteSound	pilas-engine/declaraciones/phaser.d.ts	/^            type Audio
 Automata	pilas-engine/automata.ts	/^class Automata {$/;"	c
 Average	pilas-engine/declaraciones/phaser.d.ts	/^        function Average(values: number[]): number;$/;"	f
 Axis	pilas-engine/declaraciones/phaser.d.ts	/^            class Axis {$/;"	c
-B	Makefile	/^B=[01;34m$/;"	m
 B	pilas-engine/declaraciones/phaser.d.ts	/^                B: boolean;$/;"	m
 B	pilas-engine/declaraciones/phaser.d.ts	/^                B: string;$/;"	m
 BACK	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly BACK: Phaser.Math.Vector3;$/;"	m
-BIN_ELECTRON	Makefile	/^BIN_ELECTRON=.\/node_modules\/.bin\/electron$/;"	m
-BIN_ELECTRON_PACKAGER	Makefile	/^BIN_ELECTRON_PACKAGER=.\/node_modules\/.bin\/electron-packager$/;"	m
-BIN_EMBER	Makefile	/^BIN_EMBER=.\/node_modules\/.bin\/ember$/;"	m
-BIN_PRETTIER	Makefile	/^BIN_PRETTIER=.\/node_modules\/.bin\/prettier$/;"	m
-BIN_TYPEDOC	Makefile	/^BIN_TYPEDOC=.\/node_modules\/.bin\/typedoc$/;"	m
 BITMAPMASK_PIPELINE	pilas-engine/declaraciones/phaser.d.ts	/^                BITMAPMASK_PIPELINE: Phaser.Renderer.WebGL.Pipelines.BitmapMaskPipeline;$/;"	m
 BPTC	pilas-engine/declaraciones/phaser.d.ts	/^                    BPTC: object | undefined;$/;"	m
 Back	pilas-engine/declaraciones/phaser.d.ts	/^            namespace Back {$/;"	c
@@ -171,11 +165,6 @@ BuildTilesetIndex	pilas-engine/declaraciones/phaser.d.ts	/^                funct
 Builders	pilas-engine/declaraciones/phaser.d.ts	/^        namespace Builders {$/;"	c
 Button	pilas-engine/declaraciones/phaser.d.ts	/^            class Button {$/;"	c
 C	pilas-engine/declaraciones/phaser.d.ts	/^                C: string;$/;"	m
-COMPILAR_EN_ARM	Makefile	/^COMPILAR_EN_ARM=1$/;"	m
-COMPILAR_EN_ARM_64	Makefile	/^COMPILAR_EN_ARM_64=1$/;"	m
-COMPILAR_EN_LINUX	Makefile	/^COMPILAR_EN_LINUX=1$/;"	m
-COMPILAR_EN_OSX	Makefile	/^COMPILAR_EN_OSX=1$/;"	m
-COMPILAR_EN_WINDOWS	Makefile	/^COMPILAR_EN_WINDOWS=1$/;"	m
 CSSFile	pilas-engine/declaraciones/phaser.d.ts	/^            class CSSFile extends Phaser.Loader.File {$/;"	c
 CSSFileConfig	pilas-engine/declaraciones/phaser.d.ts	/^                type CSSFileConfig = {$/;"	t
 Cache	pilas-engine/declaraciones/phaser.d.ts	/^    namespace Cache {$/;"	c
@@ -316,7 +305,6 @@ Curves	pilas-engine/declaraciones/phaser.d.ts	/^        namespace Curves {$/;"	c
 Curves	pilas-engine/declaraciones/phaser.d.ts	/^    namespace Curves {$/;"	c
 CustomPluginContainer	pilas-engine/declaraciones/phaser.d.ts	/^            type CustomPluginContainer = {$/;"	t
 D	pilas-engine/declaraciones/phaser.d.ts	/^                D: string;$/;"	m
-DATE	Makefile	/^DATE=`date +'%y.%m.%d %H:%M:%S'`$/;"	m
 DOM	pilas-engine/declaraciones/phaser.d.ts	/^    namespace DOM {$/;"	c
 DOMContainerConfig	pilas-engine/declaraciones/phaser.d.ts	/^            type DOMContainerConfig = {$/;"	t
 DOMContentLoaded	pilas-engine/declaraciones/phaser.d.ts	/^        function DOMContentLoaded(callback: ContentLoadedCallback): void;$/;"	f
@@ -355,7 +343,6 @@ DownDuration	pilas-engine/declaraciones/phaser.d.ts	/^            function DownD
 Drag	pilas-engine/declaraciones/phaser.d.ts	/^                interface Drag {$/;"	i
 DynamicBitmapText	pilas-engine/declaraciones/phaser.d.ts	/^        class DynamicBitmapText extends Phaser.GameObjects.BitmapText {$/;"	c
 E	pilas-engine/declaraciones/phaser.d.ts	/^                E: string;$/;"	m
-ELIMINAR_MAPS	Makefile	/^ELIMINAR_MAPS=1$/;"	m
 ENVELOP	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly ENVELOP: number;$/;"	m
 ETC	pilas-engine/declaraciones/phaser.d.ts	/^                    ETC: object | undefined;$/;"	m
 ETC1	pilas-engine/declaraciones/phaser.d.ts	/^                    ETC1: object | undefined;$/;"	m
@@ -420,7 +407,6 @@ Extend	pilas-engine/declaraciones/phaser.d.ts	/^            static Extend(line: 
 Extern	pilas-engine/declaraciones/phaser.d.ts	/^        class Extern extends Phaser.GameObjects.GameObject implements Phaser.GameObjects.Components.Alpha, Phaser.GameObjects.Components.BlendMode, Phaser.GameObjects.Components.Depth, Phaser.GameObjects.Components.Flip, Phaser.GameObjects.Components.Origin, Phaser.GameObjects.Components.ScrollFactor, Phaser.GameObjects.Components.Size, Phaser.GameObjects.Components.Texture, Phaser.GameObjects.Components.Tint, Phaser.GameObjects.Components.Transform, Phaser.GameObjects.Components.Visible {$/;"	c
 F	pilas-engine/declaraciones/phaser.d.ts	/^                F: string;$/;"	m
 FIT	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly FIT: number;$/;"	m
-FLAGS_ELECTRON_PACKAGER	Makefile	/^FLAGS_ELECTRON_PACKAGER=--asar$/;"	m
 FORWARD	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly FORWARD: Phaser.Math.Vector3;$/;"	m
 FPSConfig	pilas-engine/declaraciones/phaser.d.ts	/^            type FPSConfig = {$/;"	t
 Face	pilas-engine/declaraciones/phaser.d.ts	/^            class Face {$/;"	c
@@ -465,7 +451,6 @@ FromOrientationString	pilas-engine/declaraciones/phaser.d.ts	/^            funct
 FromPercent	pilas-engine/declaraciones/phaser.d.ts	/^        function FromPercent(percent: number, min: number, max?: number): number;$/;"	f
 Fullscreen	pilas-engine/declaraciones/phaser.d.ts	/^        type Fullscreen = {$/;"	t
 Fuzzy	pilas-engine/declaraciones/phaser.d.ts	/^        namespace Fuzzy {$/;"	c
-G	Makefile	/^G=[01;32m$/;"	m
 GIDData	pilas-engine/declaraciones/phaser.d.ts	/^            type GIDData = {$/;"	t
 GLSLFile	pilas-engine/declaraciones/phaser.d.ts	/^            class GLSLFile extends Phaser.Loader.File {$/;"	c
 GLSLFileConfig	pilas-engine/declaraciones/phaser.d.ts	/^                type GLSLFileConfig = {$/;"	t
@@ -597,7 +582,6 @@ GroupConfig	pilas-engine/declaraciones/phaser.d.ts	/^                type GroupC
 GroupCreateConfig	pilas-engine/declaraciones/phaser.d.ts	/^                type GroupCreateConfig = {$/;"	t
 GroupMultipleCreateCallback	pilas-engine/declaraciones/phaser.d.ts	/^                type GroupMultipleCreateCallback = (items: Phaser.GameObjects.GameObject[])=>void;$/;"	t
 HEIGHT_CONTROLS_WIDTH	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly HEIGHT_CONTROLS_WIDTH: number;$/;"	m
-HOST	app/utils/utils.js	/^var HOST = window.location.origin;$/;"	v
 HSLToColor	pilas-engine/declaraciones/phaser.d.ts	/^            static HSLToColor(h: number, s: number, l: number): Phaser.Display.Color;$/;"	m
 HSVColorObject	pilas-engine/declaraciones/phaser.d.ts	/^            type HSVColorObject = {$/;"	t
 HSVColorWheel	pilas-engine/declaraciones/phaser.d.ts	/^            static HSVColorWheel(s?: number, v?: number): Phaser.Types.Display.ColorObject[];$/;"	m
@@ -815,9 +799,6 @@ MultiFile	pilas-engine/declaraciones/phaser.d.ts	/^        class MultiFile {$/;"
 MultiPipeline	pilas-engine/declaraciones/phaser.d.ts	/^                class MultiPipeline extends Phaser.Renderer.WebGL.WebGLPipeline {$/;"	c
 MultiScriptFile	pilas-engine/declaraciones/phaser.d.ts	/^            class MultiScriptFile extends Phaser.Loader.MultiFile {$/;"	c
 MultiScriptFileConfig	pilas-engine/declaraciones/phaser.d.ts	/^                type MultiScriptFileConfig = {$/;"	t
-N	Makefile	/^N=[0m$/;"	m
-NOMBRE	Makefile	/^NOMBRE="pilas-engine"$/;"	m
-NOMBREBIN	Makefile	/^NOMBREBIN="pilas-engine"$/;"	m
 NONE	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly NONE: number;$/;"	m
 NOOP	pilas-engine/declaraciones/phaser.d.ts	/^            type NOOP = ()=>void;$/;"	t
 NOOP	pilas-engine/declaraciones/phaser.d.ts	/^        function NOOP(): void;$/;"	f
@@ -1396,9 +1377,6 @@ Utilidades	pilas-engine/utilidades.ts	/^class Utilidades {$/;"	c
 UtilityPipeline	pilas-engine/declaraciones/phaser.d.ts	/^                class UtilityPipeline extends Phaser.Renderer.WebGL.WebGLPipeline {$/;"	c
 Utils	pilas-engine/declaraciones/phaser.d.ts	/^            namespace Utils {$/;"	c
 Utils	pilas-engine/declaraciones/phaser.d.ts	/^    namespace Utils {$/;"	c
-VERSION	Makefile	/^VERSION=$(shell git describe --tags --abbrev=0)$/;"	m
-VERSION_DE_ELECTRON_PARA_DISTRIBUIR	Makefile	/^VERSION_DE_ELECTRON_PARA_DISTRIBUIR=9.1.0$/;"	m
-VERSION_DE_ELECTRON_PARA_DISTRIBUIR_LINUX_32bits	Makefile	/^VERSION_DE_ELECTRON_PARA_DISTRIBUIR_LINUX_32bits=3.1.0$/;"	m
 ValueToColor	pilas-engine/declaraciones/phaser.d.ts	/^            static ValueToColor(input: string | number | Phaser.Types.Display.InputColorObject): Phaser.Display.Color;$/;"	m
 VarDef	pilas-engine/libs/spriter.ts	/^class VarDef extends Element {$/;"	c
 VarDefs	pilas-engine/libs/spriter.ts	/^class VarDefs extends Element {$/;"	c
@@ -1459,7 +1437,6 @@ XHRSettings	pilas-engine/declaraciones/phaser.d.ts	/^        function XHRSetting
 XHRSettingsObject	pilas-engine/declaraciones/phaser.d.ts	/^            type XHRSettingsObject = {$/;"	t
 XMLFile	pilas-engine/declaraciones/phaser.d.ts	/^            class XMLFile extends Phaser.Loader.File {$/;"	c
 XMLFileConfig	pilas-engine/declaraciones/phaser.d.ts	/^                type XMLFileConfig = {$/;"	t
-Y	Makefile	/^Y=[01;33m$/;"	m
 Y	pilas-engine/declaraciones/phaser.d.ts	/^                Y: boolean;$/;"	m
 ZERO	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly ZERO: Phaser.Math.Vector2;$/;"	m
 ZERO	pilas-engine/declaraciones/phaser.d.ts	/^            static readonly ZERO: Phaser.Math.Vector3;$/;"	m
@@ -1560,8 +1537,6 @@ activeContacts	pilas-engine/declaraciones/phaser.d.ts	/^                    acti
 activePointer	pilas-engine/declaraciones/phaser.d.ts	/^            activePointer: Phaser.Input.Pointer;$/;"	m
 activePointer	pilas-engine/declaraciones/phaser.d.ts	/^            readonly activePointer: Phaser.Input.Pointer;$/;"	m
 activePointers	pilas-engine/pilas.ts	/^        activePointers: 6,$/;"	m
-actor	bloques/bloques.ts	/^        actor: [$/;"	m
-actor	bloques/bloques.ts	/^    actor: [$/;"	m
 actor	pilas-engine/actores.ts	/^  actor() {$/;"	m
 actor	pilas-engine/actores/actor.ts	/^class actor extends Actor {$/;"	c
 actor	pilas-engine/animacion_de_propiedad.ts	/^  actor: Actor;$/;"	m
@@ -1626,14 +1601,12 @@ actualizar	pilas-engine/habilidades/seguir-al-mouse.ts	/^  actualizar() {$/;"	m
 actualizar	pilas-engine/modos/modo_cargador.ts	/^                    actualizar() {$/;"	m
 actualizar_actor	pilas-engine/escenas/-escena-base.ts	/^  actualizar_actor(actor) {$/;"	m
 actualizar_actores	pilas-engine/escenas/-escena-base.ts	/^  actualizar_actores() {$/;"	m
-actualizar_actores	scripts/actualizar-actores-live.js	/^function actualizar_actores() {$/;"	f
 actualizar_animacion	pilas-engine/actores/-actor-base.ts	/^  actualizar_animacion(velocidad = 1) {$/;"	m
 actualizar_animacion	pilas-engine/huesos.ts	/^  actualizar_animacion(dt: any) {$/;"	m
 actualizar_canvas_fisica	pilas-engine/modos/modo.ts	/^  actualizar_canvas_fisica() {$/;"	m
 actualizar_comportamientos	pilas-engine/actores/-actor-base.ts	/^  actualizar_comportamientos() {$/;"	m
 actualizar_datos	pilas-engine/modos/actor_en_modo_edicion.ts	/^  actualizar_datos(entidad: any) {$/;"	m
 actualizar_datos_de_la_figura	pilas-engine/modos/actor_en_modo_edicion.ts	/^  actualizar_datos_de_la_figura(entidad) {$/;"	m
-actualizar_fuentes	scripts/actualizar-fuentes-live.js	/^function actualizar_fuentes() {$/;"	f
 actualizar_gravedad	pilas-engine/escenas/-escena-base.ts	/^  private actualizar_gravedad() {$/;"	m
 actualizar_habilidades	pilas-engine/actores/-actor-base.ts	/^  actualizar_habilidades() {$/;"	m
 actualizar_lasers_del_actor	pilas-engine/modos/modo.ts	/^  private actualizar_lasers_del_actor(actor, sprite) {$/;"	m
@@ -1747,7 +1720,6 @@ add_tag	pilas-engine/libs/spriter.ts	/^                  add_tag(tag_keyframe);$
 addedToScene	pilas-engine/declaraciones/phaser.d.ts	/^            addedToScene(): void;$/;"	m
 adjoint	pilas-engine/declaraciones/phaser.d.ts	/^            adjoint(): Phaser.Math.Matrix3;$/;"	m
 adjoint	pilas-engine/declaraciones/phaser.d.ts	/^            adjoint(): this;$/;"	m
-adjuntar_prefijo	app/utils/autocompletar.js	/^  function adjuntar_prefijo(prefijo, elemento) {$/;"	f
 adjustViewport	pilas-engine/declaraciones/phaser.d.ts	/^                adjustViewport(): void;$/;"	m
 ads	pilas-engine/declaraciones/phaser.d.ts	/^        ads: AdInstance[];$/;"	m
 advancedWordWrap	pilas-engine/declaraciones/phaser.d.ts	/^            advancedWordWrap(text: string, context: CanvasRenderingContext2D, wordWrapWidth: number): string;$/;"	m
@@ -1872,8 +1844,6 @@ aprender	pilas-engine/actores/-actor-base.ts	/^  aprender(habilidad: string) {$/
 arc	pilas-engine/declaraciones/phaser.d.ts	/^            arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean, overshoot?: number): this;$/;"	m
 arc	pilas-engine/declaraciones/phaser.d.ts	/^            arc(x?: number, y?: number, radius?: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean, fillColor?: number, fillAlpha?: number): Phaser.GameObjects.Arc;$/;"	m
 arcLengthDivisions	pilas-engine/declaraciones/phaser.d.ts	/^            arcLengthDivisions: number;$/;"	m
-archivo_de_entrada	scripts/patch.py	/^archivo_de_entrada = open(ruta, "rt")$/;"	v
-archivo_de_salida	scripts/patch.py	/^    archivo_de_salida = open(ruta, "wt")$/;"	v
 area	pilas-engine/declaraciones/phaser.d.ts	/^            area: number;$/;"	m
 area_de_interactividad	pilas-engine/actores/-actor-base.ts	/^  get area_de_interactividad() {$/;"	m
 area_de_interactividad	pilas-engine/actores/-actor-base.ts	/^  set area_de_interactividad(v: any) {$/;"	m
@@ -1934,7 +1904,6 @@ autoRound	pilas-engine/declaraciones/phaser.d.ts	/^            autoRound: number
 autoRound	pilas-engine/declaraciones/phaser.d.ts	/^            readonly autoRound: boolean;$/;"	m
 autoRound	pilas-engine/pilas.ts	/^      autoRound: false,$/;"	m
 autoUpdate	pilas-engine/declaraciones/phaser.d.ts	/^                autoUpdate: boolean;$/;"	m
-autocompletar	app/utils/autocompletar.js	/^  function autocompletar(tokens, contexto, finaliza_con_punto, prefijo) {$/;"	f
 automata	pilas-engine/actores/-actor-base.ts	/^  automata: Automata;$/;"	m
 autostart	pilas-engine/pilas.ts	/^      autostart: false,$/;"	m
 available	pilas-engine/declaraciones/phaser.d.ts	/^            available: boolean;$/;"	m
@@ -2004,8 +1973,6 @@ beginPath	pilas-engine/declaraciones/phaser.d.ts	/^            beginPath(): this
 between	pilas-engine/declaraciones/phaser.d.ts	/^            between(min: number, max: number): number;$/;"	m
 binary	pilas-engine/declaraciones/phaser.d.ts	/^            binary(key: string | Phaser.Types.Loader.FileTypes.BinaryFileConfig | Phaser.Types.Loader.FileTypes.BinaryFileConfig[], url?: string, dataType?: any, xhrSettings?: Phaser.Types.Loader.XHRSettingsObject): this;$/;"	m
 binary	pilas-engine/declaraciones/phaser.d.ts	/^            binary: Phaser.Cache.BaseCache;$/;"	m
-bind	app/components/pilas-input-numero-con-deslizador.js	/^var bind = function(fn, me) {$/;"	f
-bind	app/components/pilas-propiedad/numero.js	/^var bind = function(fn, me) {$/;"	f
 bind	pilas-engine/declaraciones/phaser.d.ts	/^                    bind(): this;$/;"	m
 bind	pilas-engine/declaraciones/phaser.d.ts	/^                bind(adjustViewport?: boolean, width?: number, height?: number): void;$/;"	m
 bind	pilas-engine/declaraciones/phaser.d.ts	/^                bind(currentShader?: Phaser.Renderer.WebGL.WebGLShader): this;$/;"	m
@@ -2036,33 +2003,6 @@ blitFrame	pilas-engine/declaraciones/phaser.d.ts	/^                blitFrame(sou
 blitter	pilas-engine/declaraciones/phaser.d.ts	/^            blitter(config: Phaser.Types.GameObjects.Sprite.SpriteConfig, addToScene?: boolean): Phaser.GameObjects.Blitter;$/;"	m
 blitter	pilas-engine/declaraciones/phaser.d.ts	/^            blitter(x: number, y: number, key: string, frame?: string | number): Phaser.GameObjects.Blitter;$/;"	m
 blocked	pilas-engine/declaraciones/phaser.d.ts	/^                blocked: Phaser.Types.Physics.Arcade.ArcadeBodyCollision;$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("actor_decir"),$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("actor_desplazar"),$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("actor_impulsar"),$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("actor_reiniciar"),$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("actor_reproducir_animacion"),$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("actor_saltar"),$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("pilas_cursor_x"),$/;"	m
-bloque	bloques/bloques.ts	/^				bloque("pilas_cursor_y"),$/;"	m
-bloque	bloques/bloques.ts	/^              bloque("control_tecla"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("actor_actualizar"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("actor_cada_segundo"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("actor_cuando_hace_click"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("actor_cuando_hace_click_en_la_pantalla"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("actor_inicia"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("camara_desplazar_horizontalmente"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("camara_desplazar_verticalmente"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("camara_fijar_x"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("camara_fijar_y"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("camara_vibrar"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("escena_al_actualizar"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("escena_al_iniciar"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("escena_cada_segundo"),$/;"	m
-bloque	bloques/bloques.ts	/^        bloque("escena_cuando_hace_click"),$/;"	m
-bloque	bloques/bloques.ts	/^    bloque("audio_detener_musica"),$/;"	m
-bloque	bloques/bloques.ts	/^    bloque("audio_reproducir_musica"),$/;"	m
-bloque	bloques/bloques.ts	/^    bloque("audio_reproducir_sonido"),$/;"	m
-bloque	bloques/bloques.ts	/^function bloque(nombre) {$/;"	f
 bloques	pilas-engine/modos/modo_ejecucion.ts	/^  bloques: any;$/;"	m
 blue	pilas-engine/declaraciones/phaser.d.ts	/^            blue: number;$/;"	m
 blueGL	pilas-engine/declaraciones/phaser.d.ts	/^            blueGL: number;$/;"	m
@@ -2244,16 +2184,6 @@ captures	pilas-engine/declaraciones/phaser.d.ts	/^                captures: numb
 car	pilas-engine/declaraciones/phaser.d.ts	/^                car(x: number, y: number, width: number, height: number, wheelSize: number): MatterJS.CompositeType;$/;"	m
 cargar_animaciones	pilas-engine/modos/modo_ejecucion.ts	/^  private cargar_animaciones(datos: any) {$/;"	m
 catalog	pilas-engine/declaraciones/phaser.d.ts	/^        catalog: Product[];$/;"	m
-categoria	bloques/bloques.ts	/^			categoria("Acciones", [$/;"	m
-categoria	bloques/bloques.ts	/^			categoria("Valores", [$/;"	m
-categoria	bloques/bloques.ts	/^      categoria("Eventos", [$/;"	m
-categoria	bloques/bloques.ts	/^function categoria(nombre, bloques) {$/;"	f
-categoria_audio	bloques/bloques.ts	/^      categoria_audio(),$/;"	m
-categoria_audio	bloques/bloques.ts	/^function categoria_audio() {$/;"	f
-categoria_camara	bloques/bloques.ts	/^      categoria_camara(),$/;"	m
-categoria_camara	bloques/bloques.ts	/^function categoria_camara() {$/;"	f
-categoria_control	bloques/bloques.ts	/^      categoria_control(),$/;"	m
-categoria_control	bloques/bloques.ts	/^function categoria_control() {$/;"	f
 cellHeight	pilas-engine/declaraciones/phaser.d.ts	/^            cellHeight: number;$/;"	m
 cellWidth	pilas-engine/declaraciones/phaser.d.ts	/^            cellWidth: number;$/;"	m
 center	pilas-engine/declaraciones/phaser.d.ts	/^                center: Phaser.Math.Vector2;$/;"	m
@@ -2272,6 +2202,7 @@ centerY	pilas-engine/declaraciones/phaser.d.ts	/^                    centerY: nu
 centerY	pilas-engine/declaraciones/phaser.d.ts	/^                readonly centerY: number;$/;"	m
 centerY	pilas-engine/declaraciones/phaser.d.ts	/^            centerY: number;$/;"	m
 centro	pilas-engine/actores/-actor-base.ts	/^      centro: 0.5,$/;"	m
+centro	pilas-engine/modos/actor_en_modo_edicion.ts	/^  centro: Phaser.GameObjects.Graphics;$/;"	m
 centro_x	pilas-engine/actores/-actor-base.ts	/^      centro_x: this.centro_x,$/;"	m
 centro_x	pilas-engine/actores/-actor-base.ts	/^    centro_x: 0.5,$/;"	m
 centro_x	pilas-engine/actores/-actor-base.ts	/^  get centro_x() {$/;"	m
@@ -2717,11 +2648,6 @@ containsPoint	pilas-engine/declaraciones/phaser.d.ts	/^            containsPoint
 containsTileIndex	pilas-engine/declaraciones/phaser.d.ts	/^            containsTileIndex(tileIndex: number): boolean;$/;"	m
 contenedor	pilas-engine/actores/robot.ts	/^  contenedor: any;$/;"	m
 contenedor	pilas-engine/huesos.ts	/^  contenedor: any;$/;"	m
-contenido	scripts/patch.py	/^    contenido = contenido.replace(buscar_scale_x, "\\n\/\/ Desactivando escalado de body\\n")$/;"	v
-contenido	scripts/patch.py	/^    contenido = contenido.replace(buscar_scale_y, "\\n\/\/ Desactivando escalado de body\\n")$/;"	v
-contenido	scripts/patch.py	/^contenido = archivo_de_entrada.read()$/;"	v
-contents	bloques/bloques.ts	/^            contents: [$/;"	m
-contents	bloques/bloques.ts	/^    contents: bloques,$/;"	m
 context	pilas-engine/declaraciones/phaser.d.ts	/^            context: AudioContext;$/;"	m
 context	pilas-engine/declaraciones/phaser.d.ts	/^            context: CanvasRenderingContext2D;$/;"	m
 context	pilas-engine/declaraciones/phaser.d.ts	/^            readonly context: CanvasRenderingContext2D | WebGLRenderingContext;$/;"	m
@@ -2746,7 +2672,6 @@ convertir_a_string	pilas-engine/escenas/-escena-base.ts	/^  private convertir_a_
 convertir_angulo_a_radianes	pilas-engine/utilidades.ts	/^  convertir_angulo_a_radianes(grados: number) {$/;"	m
 convertir_coordenada_de_phaser_a_pilas	pilas-engine/utilidades.ts	/^  convertir_coordenada_de_phaser_a_pilas(x: number, y: number) {$/;"	m
 convertir_coordenada_de_pilas_a_phaser	pilas-engine/utilidades.ts	/^  convertir_coordenada_de_pilas_a_phaser(x: number, y: number) {$/;"	m
-convertir_markdown_a_html	scripts/generar_manual.py	/^def convertir_markdown_a_html(fuente, includes):$/;"	f
 convertir_radianes_a_angulos	pilas-engine/utilidades.ts	/^  convertir_radianes_a_angulos(radianes: number) {$/;"	m
 convertir_sonido_en_array_buffer	pilas-engine/modos/modo_cargador.ts	/^  convertir_sonido_en_array_buffer(sonido, callback) {$/;"	m
 copiar_atributos_de_sprite	pilas-engine/actores/-actor-base.ts	/^  protected copiar_atributos_de_sprite(origen, destino) {$/;"	m
@@ -2809,6 +2734,7 @@ crear_borde	pilas-engine/modos/actor_en_modo_edicion.ts	/^  private crear_borde(
 crear_camara	pilas-engine/modos/modo_editor.ts	/^  crear_camara(pilas, x, y, ancho, alto) {$/;"	m
 crear_canvas_de_depuracion	pilas-engine/modos/modo.ts	/^  crear_canvas_de_depuracion() {$/;"	m
 crear_canvas_de_depuracion_modo_pausa	pilas-engine/modos/modo_pausa.ts	/^  crear_canvas_de_depuracion_modo_pausa() {$/;"	m
+crear_centro	pilas-engine/modos/actor_en_modo_edicion.ts	/^  private crear_centro() {$/;"	m
 crear_configuracion	pilas-engine/pilas.ts	/^  crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean, transparente: boolean) {$/;"	m
 crear_detalle_del_error	pilas-engine/modos/modo_error.ts	/^  private crear_detalle_del_error(espaciado: number, datos: any) {$/;"	m
 crear_escena	pilas-engine/modos/modo_ejecucion.ts	/^  crear_escena(datos_de_la_escena: any) {$/;"	m
@@ -2824,7 +2750,6 @@ crear_fuente_bitmap	pilas-engine/modos/modo_cargador.ts	/^  private crear_fuente
 crear_indicador_de_carga	pilas-engine/modos/modo_cargador.ts	/^  private crear_indicador_de_carga() {$/;"	m
 crear_indicador_de_texto	pilas-engine/modos/modo_pausa.ts	/^  private crear_indicador_de_texto() {$/;"	m
 crear_indicadores_de_rendimiento_fps	pilas-engine/modos/modo.ts	/^  crear_indicadores_de_rendimiento_fps() {$/;"	m
-crear_libros	scripts/generar_manuales_descargables.py	/^def crear_libros():$/;"	f
 crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara	pilas-engine/modos/modo_deprecated.ts	/^  crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara() {$/;"	m
 crear_mapa	pilas-engine/pilas.ts	/^  crear_mapa(mapa: string, grilla: number = 64, origen_x: number = 0, origen_y: number = 0) {$/;"	m
 crear_marca	pilas-engine/actores/deslizador.ts	/^  crear_marca() {$/;"	m
@@ -3031,8 +2956,6 @@ curve	pilas-engine/declaraciones/phaser.d.ts	/^            curve(x?: number, y?:
 curve	pilas-engine/libs/spriter.ts	/^  curve: Curve = new Curve();$/;"	m
 curves	pilas-engine/declaraciones/phaser.d.ts	/^                curves: Phaser.Types.Curves.JSONCurve[];$/;"	m
 curves	pilas-engine/declaraciones/phaser.d.ts	/^            curves: Phaser.Curves.Curve[];$/;"	m
-custom	bloques/bloques.ts	/^    custom: "PROCEDURE",$/;"	m
-custom	bloques/bloques.ts	/^    custom: "VARIABLE",$/;"	m
 custom	pilas-engine/declaraciones/phaser.d.ts	/^            custom: {[key: string]: Phaser.Cache.BaseCache};$/;"	m
 customBoundsRectangle	pilas-engine/declaraciones/phaser.d.ts	/^                customBoundsRectangle: Phaser.Geom.Rectangle;$/;"	m
 customData	pilas-engine/declaraciones/phaser.d.ts	/^            customData: object;$/;"	m
@@ -3357,7 +3280,6 @@ dropShadowX	pilas-engine/declaraciones/phaser.d.ts	/^            dropShadowX: nu
 dropShadowY	pilas-engine/declaraciones/phaser.d.ts	/^            dropShadowY: number;$/;"	m
 dropZone	pilas-engine/declaraciones/phaser.d.ts	/^                dropZone: boolean;$/;"	m
 dump	pilas-engine/declaraciones/phaser.d.ts	/^            dump(): void;$/;"	m
-duplicar_estructura_y_archivos	scripts/actualizar-imagenes.js	/^function duplicar_estructura_y_archivos(listado, fuente, destino) {$/;"	f
 duration	pilas-engine/actores/-actor-base.ts	/^      duration: duracion * 1000,$/;"	m
 duration	pilas-engine/declaraciones/phaser.d.ts	/^                    readonly duration: number;$/;"	m
 duration	pilas-engine/declaraciones/phaser.d.ts	/^                duration: Function;$/;"	m
@@ -3485,7 +3407,6 @@ es_animacion	pilas-engine/utilidades.ts	/^  es_animacion(valor: any) {$/;"	m
 es_cambio_de_escena	pilas-engine/mensajes.ts	/^      es_cambio_de_escena: false$/;"	m
 es_cambio_de_escena	pilas-engine/modos/modo_cargador.ts	/^        es_cambio_de_escena: false,$/;"	m
 es_cambio_de_escena	pilas-engine/modos/modo_ejecucion.ts	/^      es_cambio_de_escena: true$/;"	m
-es_directorio	scripts/actualizar-imagenes.js	/^function es_directorio(ruta) {$/;"	f
 es_firefox	pilas-engine/utilidades.ts	/^  es_firefox() {$/;"	m
 es_modo_ejecucion	pilas-engine/modos/modo.ts	/^  es_modo_ejecucion: boolean;$/;"	m
 es_multiplo	pilas-engine/pilas.ts	/^  es_multiplo(a: number, b: number) {$/;"	m
@@ -3528,7 +3449,6 @@ escalar_y	pilas-engine/animacion_de_propiedad.ts	/^  escalar_y(escala: number, d
 escalar_y	pilas-engine/animacion_nula.ts	/^  escalar_y() {$/;"	m
 escalar_y_hasta	pilas-engine/animacion_de_propiedad.ts	/^  escalar_y_hasta(escala: number, duración: number = 0) {$/;"	m
 escalar_y_hasta	pilas-engine/animacion_nula.ts	/^  escalar_y_hasta() {$/;"	m
-escena	bloques/bloques.ts	/^    escena: [$/;"	m
 escena	pilas-engine/historia.ts	/^      escena: escena_actual.serializar(),$/;"	m
 escena	pilas-engine/mensajes.ts	/^      escena: datos.escena,$/;"	m
 escena	pilas-engine/pilas.ts	/^  get escena(): EscenaBase {$/;"	m
@@ -3559,7 +3479,6 @@ estado	pilas-engine/automata.ts	/^  get estado() {$/;"	m
 estado	pilas-engine/automata.ts	/^  set estado(nombre: string) {$/;"	m
 estatico	pilas-engine/actores/-actor-base.ts	/^  get estatico() {$/;"	m
 estatico	pilas-engine/actores/-actor-base.ts	/^  set estatico(estatico: boolean) {$/;"	m
-estilos	manual/templates/manual.js	/^var estilos = [];$/;"	v
 etiqueta	pilas-engine/actores/-actor-base.ts	/^    etiqueta: "actor",$/;"	m
 etiqueta	pilas-engine/actores/-actor-base.ts	/^  get etiqueta() {$/;"	m
 etiqueta	pilas-engine/actores/-actor-base.ts	/^  set etiqueta(etiqueta) {$/;"	m
@@ -3608,7 +3527,6 @@ extendStatics	pilas-engine/modos/modo_cargador.ts	/^              extendStatics(
 extensions	pilas-engine/declaraciones/phaser.d.ts	/^                extensions: object;$/;"	m
 extern	pilas-engine/declaraciones/phaser.d.ts	/^            extern(): Phaser.GameObjects.Extern;$/;"	m
 extract	pilas-engine/libs/spriter.ts	/^  static extract(ab, a, out) {$/;"	m
-extraer_nombre_de_archivo_markdown	scripts/generar_manuales_descargables.py	/^def extraer_nombre_de_archivo_markdown(linea):$/;"	f
 f	pilas-engine/declaraciones/phaser.d.ts	/^                f: number;$/;"	m
 faceBottom	pilas-engine/declaraciones/phaser.d.ts	/^            faceBottom: boolean;$/;"	m
 faceLeft	pilas-engine/declaraciones/phaser.d.ts	/^            faceLeft: boolean;$/;"	m
@@ -3921,8 +3839,6 @@ fromRotationXYTranslation	pilas-engine/declaraciones/phaser.d.ts	/^            f
 fromSVG	pilas-engine/declaraciones/phaser.d.ts	/^                fromSVG(x: number, y: number, xml: object, scale?: number, options?: Phaser.Types.Physics.Matter.MatterBodyConfig, addToWorld?: boolean): MatterJS.BodyType;$/;"	m
 fromVertices	pilas-engine/declaraciones/phaser.d.ts	/^                fromVertices(x: number, y: number, vertexSets: string | any[], options?: Phaser.Types.Physics.Matter.MatterBodyConfig, flagInternal?: boolean, removeCollinear?: number, minimumArea?: number): MatterJS.BodyType;$/;"	m
 frustum	pilas-engine/declaraciones/phaser.d.ts	/^            frustum(left: number, right: number, bottom: number, top: number, near: number, far: number): this;$/;"	m
-fs	scripts/actualizar-actores.js	/^var fs = require("fs");$/;"	v
-fs	scripts/corregir-css-de-grilla-de-images.js	/^var fs = require("fs");$/;"	v
 fuente	pilas-engine/actores/-actor-base.ts	/^      fuente: fuente,$/;"	m
 fuente	pilas-engine/actores/-actor-base.ts	/^  get fuente() {$/;"	m
 fuente	pilas-engine/actores/-actor-base.ts	/^  set fuente(fuente: string) {}$/;"	m
@@ -3977,23 +3893,14 @@ gamepad_1	pilas-engine/control.ts	/^  public gamepad_1: GamePad;$/;"	m
 gamepads	pilas-engine/declaraciones/phaser.d.ts	/^                gamepads: Phaser.Input.Gamepad.Gamepad[];$/;"	m
 gamepads	pilas-engine/declaraciones/phaser.d.ts	/^            gamepads: boolean;$/;"	m
 generar	pilas-engine/colores.ts	/^  generar(rojo: number, verde: number, azul: number) {$/;"	m
-generar_archivo_tmp_md_contatenado	scripts/generar_manuales_descargables.py	/^def generar_archivo_tmp_md_contatenado():$/;"	f
 generar_color_para_depurar	pilas-engine/actores/-actor-base.ts	/^  generar_color_para_depurar() {$/;"	m
 generar_id	pilas-engine/eventos_de_escena.ts	/^  private generar_id(nombre: string) {$/;"	m
 generar_lista_de_similitudes	pilas-engine/comportamientos.ts	/^  generar_lista_de_similitudes(comportamiento) {$/;"	m
 generar_lista_de_similitudes	pilas-engine/habilidades.ts	/^  generar_lista_de_similitudes(habilidad) {$/;"	m
-generar_manual_en_html	scripts/generar_manual.py	/^def generar_manual_en_html():$/;"	f
-generar_manuales_descargables	scripts/generar_manuales_descargables.py	/^def generar_manuales_descargables():$/;"	f
-generar_toolbox	bloques/bloques.ts	/^function generar_toolbox() {$/;"	f
 generate	pilas-engine/declaraciones/phaser.d.ts	/^            generate(key: string, config: Phaser.Types.Create.GenerateTextureConfig): Phaser.Textures.Texture;$/;"	m
 generateFrameNames	pilas-engine/declaraciones/phaser.d.ts	/^            generateFrameNames(key: string, config?: Phaser.Types.Animations.GenerateFrameNames): Phaser.Types.Animations.AnimationFrame[];$/;"	m
 generateFrameNumbers	pilas-engine/declaraciones/phaser.d.ts	/^            generateFrameNumbers(key: string, config: Phaser.Types.Animations.GenerateFrameNumbers): Phaser.Types.Animations.AnimationFrame[];$/;"	m
 generateMipmap	pilas-engine/declaraciones/phaser.d.ts	/^                generateMipmap: boolean;$/;"	m
-generateOptions	bloques/actor/actor_reproducir_animacion.ts	/^  generateOptions: function() {$/;"	m
-generateOptions	bloques/audio/audio_detener_musica.ts	/^  generateOptions: function() {$/;"	m
-generateOptions	bloques/audio/audio_reproducir_musica.ts	/^  generateOptions: function() {$/;"	m
-generateOptions	bloques/audio/audio_reproducir_sonido.ts	/^  generateOptions: function() {$/;"	m
-generateOptions	bloques/control/control_tecla.ts	/^  generateOptions: function() {$/;"	m
 generateTexture	pilas-engine/declaraciones/phaser.d.ts	/^            generateTexture(key: string | HTMLCanvasElement, width?: number, height?: number): this;$/;"	m
 geom	pilas-engine/declaraciones/phaser.d.ts	/^            readonly geom: any;$/;"	m
 geometryMask	pilas-engine/declaraciones/phaser.d.ts	/^                geometryMask: Phaser.GameObjects.Graphics;$/;"	m
@@ -4311,8 +4218,6 @@ glTexture	pilas-engine/declaraciones/phaser.d.ts	/^            glTexture: WebGLT
 glTexture	pilas-engine/declaraciones/phaser.d.ts	/^            readonly glTexture: WebGLTexture;$/;"	m
 global	pilas-engine/declaraciones/phaser.d.ts	/^                    global: Phaser.Types.GameObjects.BitmapText.GlobalBitmapTextSize;$/;"	m
 global	pilas-engine/pilas.ts	/^        global: [NineSlice.Plugin.DefaultCfg]$/;"	m
-global.sharedObj.desarrollo	electron.js	/^global.sharedObj = { desarrollo: true };$/;"	p
-global.sharedObj.desarrollo	prod-electron.js	/^global.sharedObj = { desarrollo: false };$/;"	p
 globalAlpha	pilas-engine/declaraciones/phaser.d.ts	/^            globalAlpha: number;$/;"	m
 globalRemove	pilas-engine/declaraciones/phaser.d.ts	/^            globalRemove(key?: string, animation?: Phaser.Animations.Animation): void;$/;"	m
 globalTimeScale	pilas-engine/declaraciones/phaser.d.ts	/^                globalTimeScale: number;$/;"	m
@@ -4777,6 +4682,7 @@ if	pilas-engine/mensajes.ts	/^    if (!nombre) {$/;"	m
 if	pilas-engine/mensajes.ts	/^    if (DEPURAR_MENSAJES) {$/;"	m
 if	pilas-engine/mensajes.ts	/^    if (nombre === "progreso_de_carga") {$/;"	m
 if	pilas-engine/mensajes.ts	/^    if (this[metodo]) {$/;"	m
+if	pilas-engine/modos/actor_en_modo_edicion.ts	/^      if (!this.seleccionado) {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^      if (data.buttons) {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^      if (this.figura && !entidad.figura) {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^      if (this.figura.geom.type !== 0) {$/;"	m
@@ -4785,6 +4691,7 @@ if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (entidad.activo === fals
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (entidad.figura && !this.figura) {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (entidad.figura === "circulo") {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (entidad.figura === "rectangulo") {$/;"	m
+if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (entidad.figura_dinamica) {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (entidad.imagen.indexOf(":") > -1) {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (imagen.indexOf(":") > -1) {$/;"	m
 if	pilas-engine/modos/actor_en_modo_edicion.ts	/^    if (this.figura) {$/;"	m
@@ -4888,14 +4795,15 @@ if	pilas-engine/modos/modo_deprecated.ts	/^    if (x < bordes.x) {$/;"	m
 if	pilas-engine/modos/modo_deprecated.ts	/^    if (x > bordes.width - width \/ 2) {$/;"	m
 if	pilas-engine/modos/modo_deprecated.ts	/^    if (y < bordes.y) {$/;"	m
 if	pilas-engine/modos/modo_deprecated.ts	/^    if (y > bordes.height - height) {$/;"	m
-if	pilas-engine/modos/modo_editor.ts	/^        if (camera.zoom < 0.2) {$/;"	m
+if	pilas-engine/modos/modo_editor.ts	/^        if (camera.zoom < 0.6) {$/;"	m
 if	pilas-engine/modos/modo_editor.ts	/^        if (deltaY < 0) {$/;"	m
-if	pilas-engine/modos/modo_editor.ts	/^      if (camera.zoom > 4) {$/;"	m
+if	pilas-engine/modos/modo_editor.ts	/^      if (!boton_medio || !pulsa_sobre_pantalla) {$/;"	m
+if	pilas-engine/modos/modo_editor.ts	/^      if (boton_medio || pulsa_sobre_pantalla) {$/;"	m
+if	pilas-engine/modos/modo_editor.ts	/^      if (camera.zoom > 3) {$/;"	m
 if	pilas-engine/modos/modo_editor.ts	/^      if (deltaY > 0) {$/;"	m
-if	pilas-engine/modos/modo_editor.ts	/^      if (p.middleButtonDown() || pulsa_sobre_pantalla) {$/;"	m
-if	pilas-engine/modos/modo_editor.ts	/^      if (pulsa_sobre_pantalla) {$/;"	m
+if	pilas-engine/modos/modo_editor.ts	/^      if (p.leftButtonReleased()) {$/;"	m
+if	pilas-engine/modos/modo_editor.ts	/^      if (p.middleButtonReleased()) {$/;"	m
 if	pilas-engine/modos/modo_editor.ts	/^      if (salir) {$/;"	m
-if	pilas-engine/modos/modo_editor.ts	/^      if (this.input.activePointer.middleButtonReleased()) {$/;"	m
 if	pilas-engine/modos/modo_editor.ts	/^    if (actor.imagen.indexOf(":") > -1) {$/;"	m
 if	pilas-engine/modos/modo_editor.ts	/^    if (evento.key === "ArrowDown") {$/;"	m
 if	pilas-engine/modos/modo_editor.ts	/^    if (evento.key === "ArrowLeft") {$/;"	m
@@ -5197,33 +5105,6 @@ iniciar_animaciones_pendientes	pilas-engine/escenas/-escena-base.ts	/^  iniciar_
 iniciar_estado	pilas-engine/automata.ts	/^  iniciar_estado(nombre: string) {$/;"	m
 iniciar_phaser	pilas-engine/pilas.ts	/^  iniciar_phaser(ancho: number, alto: number, recursos: any, opciones: any, imagenes: any) {$/;"	m
 iniciar_phaser_desde_configuracion_y_cargar_escenas	pilas-engine/pilas.ts	/^  private iniciar_phaser_desde_configuracion_y_cargar_escenas(configuracion) {$/;"	m
-init	bloques/actor/actor_actualizar.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_cada_segundo.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_cuando_hace_click.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_cuando_hace_click_en_la_pantalla.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_decir.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_desplazar.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_impulsar.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_iniciar.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_reiniciar.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_reproducir_animacion.ts	/^  init: function() {$/;"	m
-init	bloques/actor/actor_saltar.ts	/^  init: function() {$/;"	m
-init	bloques/audio/audio_detener_musica.ts	/^  init: function() {$/;"	m
-init	bloques/audio/audio_reproducir_musica.ts	/^  init: function() {$/;"	m
-init	bloques/audio/audio_reproducir_sonido.ts	/^  init: function() {$/;"	m
-init	bloques/camara/camara_desplazar_horizontalmente.ts	/^  init: function() {$/;"	m
-init	bloques/camara/camara_desplazar_verticalmente.ts	/^  init: function() {$/;"	m
-init	bloques/camara/camara_fijar_x.ts	/^    init: function() {$/;"	m
-init	bloques/camara/camara_fijar_y.ts	/^    init: function() {$/;"	m
-init	bloques/camara/camara_mover_camara.ts	/^  init: function () {$/;"	m
-init	bloques/camara/camara_vibrar.ts	/^  init: function () {$/;"	m
-init	bloques/control/control_tecla.ts	/^  init: function() {$/;"	m
-init	bloques/escena/escena_al_actualizar.ts	/^  init: function() {$/;"	m
-init	bloques/escena/escena_al_iniciar.ts	/^  init: function() {$/;"	m
-init	bloques/escena/escena_cada_segundo.ts	/^  init: function() {$/;"	m
-init	bloques/escena/escena_cuando_hace_click.ts	/^  init: function() {$/;"	m
-init	bloques/generales/pilas_cursor_x.ts	/^  init: function () {$/;"	m
-init	bloques/generales/pilas_cursor_y.ts	/^  init: function () {$/;"	m
 init	pilas-engine/declaraciones/phaser.d.ts	/^                init(): void;$/;"	m
 init	pilas-engine/declaraciones/phaser.d.ts	/^                init(config: object): this;$/;"	m
 init	pilas-engine/declaraciones/phaser.d.ts	/^            init(): boolean;$/;"	m
@@ -5456,10 +5337,6 @@ killAll	pilas-engine/declaraciones/phaser.d.ts	/^            killAll(): Phaser.T
 killAndHide	pilas-engine/declaraciones/phaser.d.ts	/^            killAndHide(gameObject: Phaser.GameObjects.GameObject): void;$/;"	m
 killOnEnter	pilas-engine/declaraciones/phaser.d.ts	/^                    killOnEnter: boolean;$/;"	m
 killTweensOf	pilas-engine/declaraciones/phaser.d.ts	/^            killTweensOf(target: object | any[]): Phaser.Tweens.TweenManager;$/;"	m
-kind	bloques/bloques.ts	/^                kind: "block",$/;"	m
-kind	bloques/bloques.ts	/^            kind: "category",$/;"	m
-kind	bloques/bloques.ts	/^    kind: "block",$/;"	m
-kind	bloques/bloques.ts	/^    kind: "category",$/;"	m
 kindle	pilas-engine/declaraciones/phaser.d.ts	/^            kindle: boolean;$/;"	m
 kodachrome	pilas-engine/declaraciones/phaser.d.ts	/^            kodachrome(multiply?: boolean): this;$/;"	m
 laser	pilas-engine/actores.ts	/^  laser() {$/;"	m
@@ -5500,10 +5377,6 @@ lerp	pilas-engine/declaraciones/phaser.d.ts	/^            lerp(src: Phaser.Types
 lerp	pilas-engine/declaraciones/phaser.d.ts	/^            lerp(v: Phaser.Math.Quaternion | Phaser.Math.Vector4, t?: number): Phaser.Math.Quaternion;$/;"	m
 lerp	pilas-engine/declaraciones/phaser.d.ts	/^            lerp(v: Phaser.Math.Vector3, t?: number): Phaser.Math.Vector3;$/;"	m
 lerp	pilas-engine/declaraciones/phaser.d.ts	/^            lerp(v: Phaser.Math.Vector4, t?: number): Phaser.Math.Vector4;$/;"	m
-let.locationType	config/environment.js	/^    locationType: "hash",$/;"	p
-let.modulePrefix	config/environment.js	/^    modulePrefix: "pilas-engine",$/;"	p
-let.pilas	config/environment.js	/^    pilas: {$/;"	p
-let.rootURL	config/environment.js	/^    rootURL: "",$/;"	p
 letterSpacing	pilas-engine/declaraciones/phaser.d.ts	/^                    letterSpacing: number;$/;"	m
 letterSpacing	pilas-engine/declaraciones/phaser.d.ts	/^            letterSpacing: number;$/;"	m
 levenshtein_distance_b	pilas-engine/utilidades.ts	/^    function levenshtein_distance_b(a, b) {$/;"	f
@@ -5644,7 +5517,6 @@ location	pilas-engine/declaraciones/phaser.d.ts	/^                location: numb
 lockOrientation	pilas-engine/declaraciones/phaser.d.ts	/^            lockOrientation(orientation: string): boolean;$/;"	m
 locked	pilas-engine/declaraciones/phaser.d.ts	/^                locked: boolean;$/;"	m
 locked	pilas-engine/declaraciones/phaser.d.ts	/^            readonly locked: boolean;$/;"	m
-log	Makefile	/^define log$/;"	m
 log	pilas-engine/declaraciones/phaser.d.ts	/^        log(name: string, value?: number, params?: object): this;$/;"	m
 logo	pilas-engine/actores.ts	/^  logo() {$/;"	m
 logo	pilas-engine/actores/logo.ts	/^class logo extends Actor {$/;"	c
@@ -5796,17 +5668,6 @@ modo	pilas-engine/pilas.ts	/^  modo: any;$/;"	m
 modo_fisica_activado	pilas-engine/modos/modo_ejecucion.ts	/^  modo_fisica_activado: boolean;$/;"	m
 modo_posicion_activado	pilas-engine/depurador.ts	/^  modo_posicion_activado: boolean;$/;"	m
 modo_simple	pilas-engine/modos/modo_cargador.ts	/^  modo_simple: boolean;$/;"	m
-module.exports	config/ember-intl.js	/^module.exports = function(\/* environment *\/) {$/;"	f
-module.exports	config/environment.js	/^module.exports = function(environment) {$/;"	f
-module.exports	ember-cli-build.js	/^module.exports = function(defaults) {$/;"	f
-module.exports.disable_watching	testem.js	/^  disable_watching: true,$/;"	p
-module.exports.extends	.template-lintrc.js	/^  extends: "recommended",$/;"	p
-module.exports.launch_in_ci	testem.js	/^  launch_in_ci: ["Chrome"],$/;"	p
-module.exports.make_targets	ember-electron/electron-forge-config.js	/^  "make_targets": {$/;"	p
-module.exports.parserOptions	.eslintrc.js	/^  parserOptions: {$/;"	p
-module.exports.root	.eslintrc.js	/^  root: true,$/;"	p
-module.exports.rules	.template-lintrc.js	/^  rules: {$/;"	p
-module.exports.test_page	testem.js	/^  test_page: "tests\/index.html?hidepassed",$/;"	p
 moneda	pilas-engine/actores.ts	/^  moneda() {$/;"	m
 moneda	pilas-engine/actores/moneda.ts	/^class moneda extends Actor {$/;"	c
 mostrar	pilas-engine/animacion_de_propiedad.ts	/^  mostrar(duración: number = 0) {$/;"	m
@@ -5885,12 +5746,6 @@ multiplyWithOffset	pilas-engine/declaraciones/phaser.d.ts	/^                mult
 musica_en_reproduccion	pilas-engine/pilas.ts	/^  private musica_en_reproduccion: any;$/;"	m
 mute	pilas-engine/declaraciones/phaser.d.ts	/^            mute: boolean;$/;"	m
 muteNode	pilas-engine/declaraciones/phaser.d.ts	/^            muteNode: GainNode;$/;"	m
-name	bloques/bloques.ts	/^            name: "Acciones",$/;"	m
-name	bloques/bloques.ts	/^            name: "Eventos",$/;"	m
-name	bloques/bloques.ts	/^            name: "Lógica",$/;"	m
-name	bloques/bloques.ts	/^    name: "Funciones",$/;"	m
-name	bloques/bloques.ts	/^    name: "Variables",$/;"	m
-name	bloques/bloques.ts	/^    name: nombre,$/;"	m
 name	pilas-engine/declaraciones/phaser.d.ts	/^                    name: string;$/;"	m
 name	pilas-engine/declaraciones/phaser.d.ts	/^                name: string;$/;"	m
 name	pilas-engine/declaraciones/phaser.d.ts	/^            name: string;$/;"	m
@@ -6025,7 +5880,6 @@ obtener_cantidad_de_posiciones	pilas-engine/historia.ts	/^  obtener_cantidad_de_
 obtener_codigo_para_exportar_clases	pilas-engine/modos/modo_ejecucion.ts	/^  obtener_codigo_para_exportar_clases(codigo) {$/;"	m
 obtener_colisiones	pilas-engine/laser.ts	/^  obtener_colisiones() {$/;"	m
 obtener_color_al_azar	pilas-engine/utilidades.ts	/^  obtener_color_al_azar() {$/;"	m
-obtener_contenido	scripts/generar_manuales_descargables.py	/^def obtener_contenido(ruta):$/;"	f
 obtener_definicion_de_actor_por_nombre	pilas-engine/modos/modo_ejecucion.ts	/^  obtener_definicion_de_actor_por_nombre(nombre: string) {$/;"	m
 obtener_diccionario_de_actores	pilas-engine/pilas.ts	/^  obtener_diccionario_de_actores() {$/;"	m
 obtener_distancia_al_actor	pilas-engine/actores/-actor-base.ts	/^  obtener_distancia_al_actor(actor: Actor) {$/;"	m
@@ -6043,8 +5897,6 @@ obtener_id_autoincremental	pilas-engine/utilidades.ts	/^  obtener_id_autoincreme
 obtener_imagen_para_nineslice	pilas-engine/modos/modo.ts	/^  obtener_imagen_para_nineslice(imagen: string) {$/;"	m
 obtener_laser	pilas-engine/actores/-actor-base.ts	/^  obtener_laser(nombre: string) {$/;"	m
 obtener_mas_similar	pilas-engine/utilidades.ts	/^  obtener_mas_similar(nombre, posibilidades) {$/;"	m
-obtener_modificacion	scripts/actualizar-actores-live.js	/^function obtener_modificacion() {$/;"	f
-obtener_modificacion	scripts/actualizar-fuentes-live.js	/^function obtener_modificacion() {$/;"	f
 obtener_nombre_de_la_escena_inicial	pilas-engine/modos/modo_ejecucion.ts	/^  obtener_nombre_de_la_escena_inicial() {$/;"	m
 obtener_nombre_de_la_tecla_desde_un_evento	pilas-engine/utilidades.ts	/^  obtener_nombre_de_la_tecla_desde_un_evento(evento) {$/;"	m
 obtener_nombre_para	pilas-engine/escenas/-escena-base.ts	/^  obtener_nombre_para(nombre_propuesto: string) {$/;"	m
@@ -6178,8 +6030,6 @@ originY	pilas-engine/declaraciones/phaser.d.ts	/^            readonly originY: n
 originalEvent	pilas-engine/declaraciones/phaser.d.ts	/^                originalEvent: KeyboardEvent;$/;"	m
 ortho	pilas-engine/declaraciones/phaser.d.ts	/^            ortho(left: number, right: number, bottom: number, top: number, near: number, far: number): this;$/;"	m
 os	pilas-engine/declaraciones/phaser.d.ts	/^        os: Phaser.Device.OS;$/;"	m
-os	scripts/generar_manual.py	/^import os$/;"	i
-os	scripts/generar_manuales_descargables.py	/^import os$/;"	i
 outerRadius	pilas-engine/declaraciones/phaser.d.ts	/^            outerRadius: number;$/;"	m
 outlineFillAlpha	pilas-engine/declaraciones/phaser.d.ts	/^            outlineFillAlpha: number;$/;"	m
 outlineFillColor	pilas-engine/declaraciones/phaser.d.ts	/^            outlineFillColor: number;$/;"	m
@@ -6256,7 +6106,6 @@ path	pilas-engine/declaraciones/phaser.d.ts	/^                path: Phaser.Curve
 path	pilas-engine/declaraciones/phaser.d.ts	/^            path(x: number, y: number): Phaser.Curves.Path;$/;"	m
 path	pilas-engine/declaraciones/phaser.d.ts	/^            path: Phaser.Curves.Path;$/;"	m
 path	pilas-engine/declaraciones/phaser.d.ts	/^            path: string;$/;"	m
-path	scripts/actualizar-actores.js	/^var path = require("path");$/;"	v
 pathConfig	pilas-engine/declaraciones/phaser.d.ts	/^            pathConfig: Phaser.Types.GameObjects.PathFollower.PathConfig;$/;"	m
 pathData	pilas-engine/declaraciones/phaser.d.ts	/^            readonly pathData: number[];$/;"	m
 pathDelta	pilas-engine/declaraciones/phaser.d.ts	/^            pathDelta: Phaser.Math.Vector2;$/;"	m
@@ -6543,8 +6392,6 @@ previousFrame	pilas-engine/declaraciones/phaser.d.ts	/^            previousFrame
 primaryDown	pilas-engine/declaraciones/phaser.d.ts	/^            primaryDown: boolean;$/;"	m
 principal	pilas-engine/modos/modo_cargador.ts	/^                  class principal extends Escena {$/;"	c
 principal	pilas-engine/modos/modo_cargador.ts	/^          function principal() {$/;"	f
-procedimientos	bloques/bloques.ts	/^      procedimientos(),$/;"	m
-procedimientos	bloques/bloques.ts	/^function procedimientos() {$/;"	f
 processCallback	pilas-engine/declaraciones/phaser.d.ts	/^                processCallback: ArcadePhysicsCallback;$/;"	m
 processQueue	pilas-engine/declaraciones/phaser.d.ts	/^            processQueue(): void;$/;"	m
 processX	pilas-engine/declaraciones/phaser.d.ts	/^                processX(x: number, vx?: number, left?: boolean, right?: boolean): void;$/;"	m
@@ -6574,7 +6421,6 @@ propertyValueInc	pilas-engine/declaraciones/phaser.d.ts	/^            propertyVa
 propertyValueSet	pilas-engine/declaraciones/phaser.d.ts	/^            propertyValueSet(key: string, value: number, step?: number, index?: number, direction?: number): this;$/;"	m
 propiedades	pilas-engine/actores/-actor-base.ts	/^  propiedades: any = {$/;"	m
 propiedades_iniciales	pilas-engine/actores/-actor-base.ts	/^  get propiedades_iniciales() {$/;"	m
-proyecto	bloques/bloques.ts	/^    proyecto: [],$/;"	m
 proyecto	pilas-engine/actores/-actor-base.ts	/^  proyecto: any;$/;"	m
 proyecto	pilas-engine/escenas/-escena-base.ts	/^  proyecto: any;$/;"	m
 proyecto	pilas-engine/mensajes.ts	/^      proyecto: datos.proyecto$/;"	m
@@ -6639,7 +6485,6 @@ rawDelta	pilas-engine/declaraciones/phaser.d.ts	/^            rawDelta: number;$
 ray	pilas-engine/laser.ts	/^class ray {$/;"	c
 raycast	pilas-engine/laser.ts	/^function raycast(bodies: any, start: any, end: any, sort = true) {$/;"	f
 raycol	pilas-engine/laser.ts	/^class raycol {$/;"	c
-re	scripts/generar_manuales_descargables.py	/^import re$/;"	i
 real	pilas-engine/declaraciones/phaser.d.ts	/^            real(): number;$/;"	m
 realHeight	pilas-engine/declaraciones/phaser.d.ts	/^            readonly realHeight: number;$/;"	m
 realInRange	pilas-engine/declaraciones/phaser.d.ts	/^            realInRange(min: number, max: number): number;$/;"	m
@@ -6877,14 +6722,12 @@ resizeInterval	pilas-engine/declaraciones/phaser.d.ts	/^            readonly res
 resizeInterval	pilas-engine/declaraciones/phaser.d.ts	/^            resizeInterval: number;$/;"	m
 resolution	pilas-engine/declaraciones/phaser.d.ts	/^            resolution: number;$/;"	m
 resolver	pilas-engine/declaraciones/phaser.d.ts	/^                resolver: MatterJS.ResolverFactory;$/;"	m
-resolver.namespace.modulePrefix	tests/helpers/resolver.js	/^  modulePrefix: config.modulePrefix,$/;"	p
 responseType	pilas-engine/declaraciones/phaser.d.ts	/^                responseType: XMLHttpRequestResponseType;$/;"	m
 restart	pilas-engine/declaraciones/phaser.d.ts	/^            restart(): this;$/;"	m
 restart	pilas-engine/declaraciones/phaser.d.ts	/^            restart(data?: object): this;$/;"	m
 restart	pilas-engine/declaraciones/phaser.d.ts	/^            restart(includeDelay?: boolean, resetRepeats?: boolean): Phaser.GameObjects.GameObject;$/;"	m
 restitution	pilas-engine/declaraciones/phaser.d.ts	/^                    restitution: number;$/;"	m
 restore	pilas-engine/declaraciones/phaser.d.ts	/^            restore(): this;$/;"	m
-results	app/helpers/etiqueta.js	/^    var results = [];$/;"	v
 resume	pilas-engine/declaraciones/phaser.d.ts	/^                resume(): Phaser.Physics.Arcade.World;$/;"	m
 resume	pilas-engine/declaraciones/phaser.d.ts	/^                resume(): Phaser.Physics.Matter.World;$/;"	m
 resume	pilas-engine/declaraciones/phaser.d.ts	/^                resume(): this;$/;"	m
@@ -7004,7 +6847,6 @@ ruta	pilas-engine/pilas.ts	/^            ruta: "sonidos\/salto-corto.mp3"$/;"	m
 ruta	pilas-engine/pilas.ts	/^            ruta: "sonidos\/salto-largo.mp3"$/;"	m
 ruta	pilas-engine/pilas.ts	/^            ruta: "sonidos\/seleccion-aguda.mp3"$/;"	m
 ruta	pilas-engine/pilas.ts	/^            ruta: "sonidos\/seleccion-grave.mp3"$/;"	m
-ruta	scripts/patch.py	/^ruta = "public\/phaser.js"$/;"	v
 s	pilas-engine/declaraciones/phaser.d.ts	/^                s: number;$/;"	m
 s	pilas-engine/declaraciones/phaser.d.ts	/^            s: number;$/;"	m
 safari	pilas-engine/declaraciones/phaser.d.ts	/^            safari: boolean;$/;"	m
@@ -7109,6 +6951,7 @@ seguir_al_actor	pilas-engine/camara.ts	/^  seguir_al_actor(actor: Actor, suavida
 seleccion	pilas-engine/modos/modo_pausa.ts	/^  seleccion: any; \/\/ referencia al actor o null si lo que está seleccionado es la escena completa.$/;"	m
 selecciona_actor_o_escena_en_modo_pausa	pilas-engine/modos/modo.ts	/^  selecciona_actor_o_escena_en_modo_pausa(actor: any) {}$/;"	m
 selecciona_actor_o_escena_en_modo_pausa	pilas-engine/modos/modo_pausa.ts	/^  selecciona_actor_o_escena_en_modo_pausa(actor: any) {$/;"	m
+seleccionado	pilas-engine/modos/actor_en_modo_edicion.ts	/^  seleccionado: bool;$/;"	m
 selfAdd	pilas-engine/libs/spriter.ts	/^  public selfAdd(other: Vector): Vector {$/;"	m
 selfAdd	pilas-engine/libs/spriter.ts	/^  selfAdd(other: Angle): Angle {$/;"	m
 selfIdentity	pilas-engine/libs/spriter.ts	/^  public selfIdentity(): Scale {$/;"	m
@@ -8099,7 +7942,6 @@ strokeRoundedRect	pilas-engine/declaraciones/phaser.d.ts	/^            strokeRou
 strokeThickness	pilas-engine/declaraciones/phaser.d.ts	/^            strokeThickness: number;$/;"	m
 strokeTriangle	pilas-engine/declaraciones/phaser.d.ts	/^            strokeTriangle(x0: number, y0: number, x1: number, y1: number, x2: number, y2: number): this;$/;"	m
 strokeTriangleShape	pilas-engine/declaraciones/phaser.d.ts	/^            strokeTriangleShape(triangle: Phaser.Geom.Triangle): this;$/;"	m
-style	manual/templates/manual.js	/^var style = document.createElement("style");$/;"	v
 style	pilas-engine/declaraciones/phaser.d.ts	/^            style: Phaser.GameObjects.TextStyle;$/;"	m
 subdividir_lista	pilas-engine/pilas.ts	/^  subdividir_lista(lista_original, cantidad_de_elementos: number) {$/;"	m
 subscribeBot	pilas-engine/declaraciones/phaser.d.ts	/^        subscribeBot(): this;$/;"	m
@@ -8198,7 +8040,6 @@ targets	pilas-engine/declaraciones/phaser.d.ts	/^                targets: any;$/
 targets	pilas-engine/declaraciones/phaser.d.ts	/^                targets: object | object[];$/;"	m
 targets	pilas-engine/declaraciones/phaser.d.ts	/^            targets: object[];$/;"	m
 targets	pilas-engine/pilas.ts	/^      targets: actor,$/;"	m
-task	Makefile	/^define task$/;"	m
 technicolor	pilas-engine/declaraciones/phaser.d.ts	/^            technicolor(multiply?: boolean): this;$/;"	m
 techo	pilas-engine/actores.ts	/^  techo() {$/;"	m
 techo	pilas-engine/actores/techo.ts	/^class techo extends Actor {$/;"	c
@@ -8510,13 +8351,6 @@ tweenAngleRadians	pilas-engine/libs/spriter.ts	/^function tweenAngleRadians(a, b
 tweens	pilas-engine/declaraciones/phaser.d.ts	/^        tweens: Phaser.Tweens.TweenManager;$/;"	m
 tx	pilas-engine/declaraciones/phaser.d.ts	/^                tx: number;$/;"	m
 ty	pilas-engine/declaraciones/phaser.d.ts	/^                ty: number;$/;"	m
-type	bloques/bloques.ts	/^                type: "controls_if",$/;"	m
-type	bloques/bloques.ts	/^                type: "cuando_comienza_una_colision",$/;"	m
-type	bloques/bloques.ts	/^                type: "logic_boolean",$/;"	m
-type	bloques/bloques.ts	/^                type: "logic_compare",$/;"	m
-type	bloques/bloques.ts	/^                type: "logic_operation",$/;"	m
-type	bloques/bloques.ts	/^                type: "text",$/;"	m
-type	bloques/bloques.ts	/^    type: nombre$/;"	m
 type	pilas-engine/declaraciones/phaser.d.ts	/^                    type: GLenum;$/;"	m
 type	pilas-engine/declaraciones/phaser.d.ts	/^                    type: Phaser.Types.Renderer.WebGL.WebGLConst;$/;"	m
 type	pilas-engine/declaraciones/phaser.d.ts	/^                    type: string;$/;"	m
@@ -8664,8 +8498,6 @@ var_def_index	pilas-engine/libs/spriter.ts	/^  var_def_index: number = -1;$/;"	m
 var_defs	pilas-engine/libs/spriter.ts	/^  var_defs: VarDefs;$/;"	m
 var_map	pilas-engine/libs/spriter.ts	/^  var_map: { [key: string]: number | string } = {};$/;"	m
 variable	pilas-engine/libs/spriter.ts	/^  variable: VariableObject;$/;"	m
-variables	bloques/bloques.ts	/^      variables(),$/;"	m
-variables	bloques/bloques.ts	/^function variables() {$/;"	f
 varline_array	pilas-engine/libs/spriter.ts	/^  varline_array: Varline[];$/;"	m
 vec2	pilas-engine/laser.ts	/^class vec2 {$/;"	c
 veces	pilas-engine/animacion_de_propiedad.ts	/^  private veces: number;$/;"	m
@@ -8762,8 +8594,6 @@ w	pilas-engine/declaraciones/phaser.d.ts	/^                    w: number;$/;"	m
 w	pilas-engine/declaraciones/phaser.d.ts	/^                w: number;$/;"	m
 w	pilas-engine/declaraciones/phaser.d.ts	/^            w: number;$/;"	m
 w	pilas-engine/libs/spriter.ts	/^  w: number = 0;$/;"	m
-wait	scripts/actualizar-actores-live.js	/^function wait(milleseconds) {$/;"	f
-wait	scripts/actualizar-fuentes-live.js	/^function wait(milleseconds) {$/;"	f
 wake	pilas-engine/declaraciones/phaser.d.ts	/^            wake(data?: object): Phaser.Scenes.Systems;$/;"	m
 wake	pilas-engine/declaraciones/phaser.d.ts	/^            wake(key: string | Phaser.Scene, data?: object): this;$/;"	m
 wake	pilas-engine/declaraciones/phaser.d.ts	/^            wake(key?: string | Phaser.Scene, data?: object): this;$/;"	m

@@ -71,6 +71,7 @@ comandos:
 	@echo "    ${G}actualizar_phaser${N}            Actualiza phaser a una versión más reciente."
 	@echo "    ${G}actualizar_fuentes${N}           "
 	@echo "    ${G}actualizar_fuentes_live${N}      "
+	@echo "    ${G}tags${N}                         Actualiza el archivo ctags."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
 	@echo ""
@@ -400,3 +401,5 @@ subir-binarios:
 	$(call log, "  cd ../sitio-web:")
 	$(call log, "  make actualizar-descargas update deploy")
 
+tags:
+	ctags -R pilas-engine/
