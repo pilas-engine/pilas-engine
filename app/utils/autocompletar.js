@@ -1,4 +1,5 @@
 export default function autocompletar(contexto, texto) {
+
   function obtener_atributos(objeto) {
     let atributos = [];
 

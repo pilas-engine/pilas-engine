@@ -27,7 +27,7 @@ export default Component.extend({
       lista.pushObject({ nombre: escena.nombre, id: escena.id, tipo: "escena" });
 
       escena.actores.map(actor => {
-        lista.pushObject({ nombre: actor.nombre, color: actor.color, id: actor.id, tipo: "actor" });
+        lista.pushObject({ nombre: actor.nombre, color: actor.color, id: actor.identificador, tipo: "actor" });
       });
     });
 

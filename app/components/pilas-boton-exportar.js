@@ -159,6 +159,7 @@ export default Component.extend({
   tareaExportarYPublicar: task(function*() {
     this.agregar_mensaje("Comenzando exportación del proyecto ...");
     yield timeout(1000);
+    alert("Tarea exportar 123123!!");
 
     this.agregar_mensaje("Capturando pantalla:");
     let esperando = true;

@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  pilas:
+    build: .
+    command: ember s
+    volumes:
+      - .:/myapp
+      - .bash_history:/root/.bash_history
+      - node_modules:/myapp/node_modules
+    tmpfs:
+      - /myapp/tmp
+    ports:
+      - "4200:4200"
+      - "7020:7020"
+      - "7357:7357"
+
+volumes:
+  node_modules:

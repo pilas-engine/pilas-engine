@@ -169,9 +169,8 @@ class Mensajes {
   }
 
   atender_mensaje_actualizar_actor_desde_el_editor(datos) {
-    let sprite = this.pilas.modo.obtener_actor_por_id(datos.id);
-    // Nota: el siguiente método solo está definido en el estado "modo_editor".
-    this.pilas.modo.actualizar_sprite_desde_datos(sprite, datos.actor);
+    let actor_en_modo_edicion = this.pilas.modo.obtener_actor_por_id(datos.id);
+    actor_en_modo_edicion.actualizar_datos(datos.actor);
   }
 
   atender_mensaje_pausar_escena() {

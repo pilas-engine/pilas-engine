@@ -46,10 +46,10 @@ class ModoEditor extends Modo {
     this.conectar_eventos_de_teclado();
 
     this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
+    console.log("datos de la escena", datos.escena);
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
     this.conectar_eventos_para_activar_zoom();
     this.conectar_eventos_para_desplazar_pantalla();
-    this.crear_manejadores_para_hacer_arrastrables_los_actores();
 
     this.recuperar_datos_de_la_camara_en_el_editor(datos.proyecto);
   }
@@ -82,12 +82,12 @@ class ModoEditor extends Modo {
       }
 
       // ajusta los límites del zoom
-      if (camera.zoom > 4) {
-        camera.zoom = 4;
+      if (camera.zoom > 3) {
+        camera.zoom = 3;
         salir = true;
       } else {
-        if (camera.zoom < 0.2) {
-          camera.zoom = 0.2;
+        if (camera.zoom < 0.6) {
+          camera.zoom = 0.6;
           salir = true;
         }
       }
@@ -117,8 +117,23 @@ class ModoEditor extends Modo {
 
   conectar_eventos_para_desplazar_pantalla() {
 
-    this.input.on('pointermove', (pointer) => {
-      if (this.input.activePointer.middleButtonDown()) {
+    pulsa_sobre_pantalla = false;
+    boton_medio = false;
+
+    this.input.on('pointerdown', (pointer, objetos) => {
+      let p = this.input.activePointer;
+
+      pulsa_sobre_pantalla = p.leftButtonDown() && objetos.length === 0;
+      boton_medio = p.middleButtonDown(); 
+    });
+
+    this.input.on('pointermove', (pointer, objetos) => {
+      let p = this.input.activePointer;
+
+      // Se puede arrastrar y soltar la cámara del editor con el
+      // botón medio o con el boton izquierdo siempre y cuando no se esté
+      // seleccionando un actor.
+      if (boton_medio || pulsa_sobre_pantalla) {
         var camera = this.cameras.main;
         this.input.setDefaultCursor("grabbing");
 
@@ -128,8 +143,18 @@ class ModoEditor extends Modo {
     });
 
     this.input.on('pointerup', (pointer) => {
-      if (this.input.activePointer.middleButtonReleased()) {
-        pulsa_boton_medio = false;
+      let p = this.input.activePointer;
+
+      if (p.middleButtonReleased()) {
+        boton_medio = false;
+      }
+
+      if (p.leftButtonReleased()) {
+        pulsa_sobre_pantalla = false;
+      }
+
+
+      if (!boton_medio || !pulsa_sobre_pantalla) {
         this.input.setDefaultCursor("default");
 
         this.pilas.mensajes.emitir_mensaje_al_editor("cuando_cambia_el_estado_de_la_camara_en_el_editor", {
@@ -156,24 +181,36 @@ class ModoEditor extends Modo {
     }
 
     if (evento.key === "ArrowLeft") {
-      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: -1 });
+      this.mover_actor_seleccionado(evento.shiftKey, -1, 0);
     }
 
     if (evento.key === "ArrowRight") {
-      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: 1 });
+      this.mover_actor_seleccionado(evento.shiftKey, 1, 0);
     }
 
     if (evento.key === "ArrowUp") {
-      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: 1 });
+      this.mover_actor_seleccionado(evento.shiftKey, 0, 1);
     }
 
     if (evento.key === "ArrowDown") {
-      this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { y: -1 });
+      this.mover_actor_seleccionado(evento.shiftKey, 0, -1);
     }
 
     if (evento.key === "Meta") {
       this.tecla_meta_pulsada = false;
     }
+  }
+
+  mover_actor_seleccionado(pulsa_shift, x, y) {
+    x = x || 0;
+    y = y || 0;
+
+    if (pulsa_shift) {
+      x *= 10;
+      y *= 10;
+    }
+
+    this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", {x, y});
   }
 
   private manejar_evento_key_down(evento: any) {
@@ -226,6 +263,7 @@ class ModoEditor extends Modo {
 
 
   crear_sprite_desde_actor(datos_del_actor: Actor) {
+    console.log("crear_sprite_desde_actor", {datos_del_actor});
     let actor = new ActorEnModoEdición(this.pilas, this, datos_del_actor);
 
     
@@ -272,35 +310,13 @@ class ModoEditor extends Modo {
     this.fondo.height = alto;
   }
 
-
   posicionar_la_camara(datos_de_la_escena) {
     let {camara_x, camara_y} = datos_de_la_escena;
     this.camara.mover(camara_x + this.ancho / 2, -camara_y + this.alto/2);
   }
 
-  private crear_manejadores_para_hacer_arrastrables_los_actores() {
-
-    this.input.on("dragstart", (pointer, gameObject) => {
-
-      console.log("dragstart", pointer);
-
-      // Caso especial, cuando se detecta un drag dentro del
-      // editor se tiene que ignorar salvo que se haga dentro
-      // del canvas del juego.
-      if (pointer.downElement && pointer.downElement.tagName !== "CANVAS") {
-        return false;
-      }
-
-      actor_que_se_esta_arrastrando = gameObject;
-      console.log("Actor que se arrastra", gameObject);
-
-
-    });
-
-  }
-
   eliminar_actor_por_id(id) {
-    let indice = this.actores.findIndex(e => e.id === id);
+    let indice = this.actores.findIndex(e => e.identificador === id);
     let actor = this.actores.splice(indice, 1)[0];
 
     if (this.actor_seleccionado && this.actor_seleccionado.id == actor.id) {

@@ -61,7 +61,6 @@ class ModoPausa extends Modo {
     let t = this.pilas.historia.obtener_cantidad_de_posiciones();
     let datos_para_el_editor = { minimo: 0, posicion: t, maximo: t };
     this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_depurar_en_modo_pausa", datos_para_el_editor);
-    this.crear_manejadores_para_controlar_el_zoom(false);
   }
 
   private crear_sprites_desde_historia(posicion) {

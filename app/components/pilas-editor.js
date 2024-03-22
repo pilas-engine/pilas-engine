@@ -70,7 +70,7 @@ export default Component.extend({
 
     this.memento.iniciar();
 
-    if (this.seleccion != -1) {
+    if (this.seleccion && this.seleccion != -1) {
       if (!this.existe_actor_o_escena_con_id(this.seleccion)) {
         this.set("seleccion", 1);
       }
@@ -110,7 +110,7 @@ export default Component.extend({
     if (this.mostrarEditor && !this.splitjs) {
       let splitjs = Split(["#panel-canvas", "#panel-editor"], {
         sizes: [50, 50],
-        minSize: [150, 200],
+        minSize: [150, 430],
         expandToMin: false
       });
 
@@ -147,6 +147,29 @@ export default Component.extend({
     this.bus.off("cuando_cambia_el_estado_de_la_camara_en_el_editor", this, "cuando_cambia_el_estado_de_la_camara_en_el_editor");
   },
 
+  obtenerTipoDeEntidad(indice) {
+    if (indice === 0) {
+      return "proyecto";
+    }
+
+    let escenas = this.get("proyecto.escenas");
+    let ids_escenas = escenas.map(e => e.get("id"));
+
+    if (ids_escenas.includes(indice)) {
+      return "escena";
+    }
+
+    let ids_actores = escenas.map(e => e.actores).
+      reduce(lista => [...lista]).
+      map(actor => actor.get("identificador"));
+
+    if (ids_actores.includes(indice)) {
+      return "actor";
+    }
+
+    throw Error(`No se puede encontrar el tipo de entidad para '${indice}'`);
+  },
+
   conectar_eventos() {
     this.lista_de_eventos.map(evento => {
       this.bus.on(`${this.nombre_del_contexto}:${evento}`, this, evento);
@@ -179,12 +202,15 @@ export default Component.extend({
   },
 
   duplicar_el_actor_seleccionado() {
+    console.log("Duplicando el actor");
+
     debounce(
       this,
       () => {
         if (this.get("tipo_de_la_instancia_seleccionada") == "actor") {
           let actor = this.get("instancia_seleccionada");
-          this.send("cuando_intenta_duplicar", actor.id, false);
+          console.log("Intentando duplicar", actor.identificador);
+          this.send("cuando_intenta_duplicar", actor.identificador, false);
         }
       },
       10
@@ -210,7 +236,8 @@ export default Component.extend({
       () => {
         if (this.get("tipo_de_la_instancia_seleccionada") == "actor") {
           let actor = this.get("instancia_seleccionada");
-          this.send("cuando_intenta_eliminar", actor.id);
+          console.log("Intentando borrar", actor.identificador);
+          this.send("cuando_intenta_eliminar", actor.identificador);
         }
       },
       10
@@ -243,7 +270,7 @@ export default Component.extend({
 
       // guarda la posición actual para deshacer en caso de error.
       this.memento.accion("mueve_actor", {
-        id: actor.id,
+        id: actor.identificador,
         x: actor.x,
         y: actor.y
       });
@@ -367,7 +394,7 @@ export default Component.extend({
     this.serviceProyecto.cuando_realiza_un_cambio();
 
     let escena = this.obtener_la_escena_actual();
-    let actor = escena.actores.findBy("id", datos.id);
+    let actor = escena.actores.findBy("identificador", datos.id);
 
     this.memento.accion("mueve_actor", {
       id: datos.id,
@@ -389,9 +416,6 @@ export default Component.extend({
   // Se ejecuta cuando el usuario mueve la cámara o
   // ajusta el zoom de la cámara del editor.
   cuando_cambia_el_estado_de_la_camara_en_el_editor(datos) {
-    console.assert(datos.x);
-    console.assert(datos.y);
-
     this.set("proyecto.editor_camara_x", datos.x);
     this.set("proyecto.editor_camara_y", datos.y);
 
@@ -401,7 +425,7 @@ export default Component.extend({
   },
 
   comienza_a_mover_un_actor(datos) {
-    this.send("cuandoSelecciona", datos.id);
+    this.send("cuandoSelecciona", datos.identificador);
   },
 
   inicia_modo_depuracion_en_pausa(datos) {
@@ -485,7 +509,7 @@ export default Component.extend({
     this.serviceProyecto.cuando_realiza_un_cambio();
 
     let escenaActual = this.obtener_la_escena_actual();
-    let actor = escenaActual.actores.findBy("id", id);
+    let actor = escenaActual.actores.findBy("identificador", id);
     let codigo = this.proyecto.codigos.actores.findBy("nombre", actor.nombre);
 
     if (!omitir_deshacer) {
@@ -500,7 +524,7 @@ export default Component.extend({
       });
     }
 
-    this.bus.trigger(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, { id: actor.id });
+    this.bus.trigger(`${this.nombre_del_contexto}:eliminar_actor_desde_el_editor`, { id: actor.identificador });
     escenaActual.actores.removeObject(actor);
 
     if (codigo) {
@@ -520,7 +544,7 @@ export default Component.extend({
 
   seleccionar_primer_actor_de_la_escena(escena) {
     let actor = escena.actores[0];
-    this.send("cuandoSelecciona", actor.id);
+    this.send("cuandoSelecciona", actor.identificador);
   },
 
   seleccionar_primer_escena_del_proyecto() {
@@ -577,7 +601,8 @@ export default Component.extend({
 
   generar_id() {
     let id = Math.floor(Math.random() * 9999999999999999) + 10000000000000000;
-    return id;
+
+    return parseInt(id, 10).toString(36);
   },
 
   obtener_actor_por_nombre(nombre) {
@@ -592,11 +617,16 @@ export default Component.extend({
     return this.get("proyecto.bloques.escenas").findBy("nombre", nombre);
   },
 
-  obtenerDetalleDeActorPorIndice(indice) {
+  obtenerDetalleDeActorPorIndice(identificador) {
     let escena = this.obtener_la_escena_actual();
 
     if (escena) {
-      let actor = escena.get("actores").findBy("id", indice);
+      let actor = escena.get("actores").findBy("identificador", identificador);
+
+      if (!actor) {
+        throw Error(`No se encuentra el actor con id "${identificador}".`);
+      }
+
       return actor;
     }
 
@@ -616,32 +646,50 @@ export default Component.extend({
   },
 
   guardar_codigo_en_el_proyecto(seleccion, codigo) {
-    if (seleccion === 0) {
-      this.definir_codigo_para_el_proyecto(codigo);
-    } else {
-      let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+    let tipo = this.obtenerTipoDeEntidad(seleccion);
 
-      if (actor) {
+    switch (tipo) {
+
+      case "proyecto": {
+        this.definir_codigo_para_el_proyecto(codigo);
+        break;
+      }
+
+      case "actor": {
+        let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
         this.definir_codigo_para_el_actor(actor, codigo);
-      } else {
+        break;
+      }
+
+      case "escena": {
         let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
         this.definir_codigo_para_la_escena(escena, codigo);
       }
+
     }
   },
 
   guardar_bloques_en_el_proyecto(seleccion, bloques) {
-    if (seleccion === 0) {
-      this.definir_bloques_para_el_proyecto(bloques);
-    } else {
-      let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+    let tipo = this.obtenerTipoDeEntidad(seleccion);
 
-      if (actor) {
+    switch (tipo) {
+
+      case "proyecto": {
+        this.definir_bloques_para_el_proyecto(bloques);
+        break;
+      }
+
+      case "actor": {
+        let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
         this.definir_bloques_para_el_actor(actor, bloques);
-      } else {
+        break;
+      }
+
+      case "escena": {
         let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
         this.definir_bloques_para_la_escena(escena, bloques);
       }
+
     }
   },
 
@@ -805,7 +853,7 @@ export default Component.extend({
 
       let nombre = obtener_nombre_sin_repetir(nombres, actor.nombre);
 
-      actor.propiedades.id = id;
+      actor.propiedades.identificador = id;
       actor.propiedades.imagen = actor.imagen || "sin_imagen";
 
       if (!actor.propiedades.x && !actor.propiedades.y) {
@@ -1003,8 +1051,16 @@ export default Component.extend({
 
       this.set("seleccion", seleccion);
 
-      let actor = this.obtenerDetalleDeActorPorIndice(seleccion);
-      let escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
+      let actor = null;
+      let escena = null;
+
+      if (this.obtenerTipoDeEntidad(seleccion) == "actor") {
+        actor = this.obtenerDetalleDeActorPorIndice(seleccion);
+      } else {
+        // asume que se trata de una escena.
+        escena = this.obtenerDetalleDeEscenaPorIndice(seleccion);
+      }
+
 
       if (!actor && !escena) {
         // Si no encuentra el actor es probable que tenga que seleccionar
@@ -1053,7 +1109,7 @@ export default Component.extend({
     cuandoModificaObjeto(objeto) {
       this.serviceProyecto.cuando_realiza_un_cambio();
       this.bus.trigger(`${this.nombre_del_contexto}:actualizar_actor_desde_el_editor`, {
-        id: objeto.id,
+        id: objeto.identificador,
         actor: objeto
       });
     },
@@ -1120,13 +1176,13 @@ export default Component.extend({
       }
     },
 
-    cuando_intenta_eliminar(id) {
+    cuando_intenta_eliminar(identificador) {
       this.serviceProyecto.cuando_realiza_un_cambio();
 
-      let actor = this.obtenerDetalleDeActorPorIndice(id);
+      let actor = this.obtenerDetalleDeActorPorIndice(identificador);
 
       if (actor) {
-        this.eliminar_actor(id);
+        this.eliminar_actor(identificador);
       } else {
         this.eliminar_escena_actual();
       }

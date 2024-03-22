@@ -629,7 +629,13 @@ declare class Pilas {
     crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean, transparente: boolean): {
         type: number;
         parent: string;
-        scale: any;
+        scale: {
+            mode: number;
+            width: string;
+            height: string;
+            autoCenter: number;
+            autoRound: boolean;
+        };
         width: number;
         height: number;
         backgroundColor: string;
@@ -743,6 +749,7 @@ declare class ActorBase {
     _texto: any;
     texto: any;
     private _id;
+    private identificador;
     private _nombre;
     private recorte_activado;
     proyecto: any;
@@ -1998,11 +2005,13 @@ declare class ActorEnModoEdición extends Phaser.GameObjects.Container {
     private separar_imagen;
     private crear_sprite;
     actualizar_datos(entidad: any): void;
+    actualizar_datos_de_la_figura(entidad: any): void;
+    private crear_representacion_de_figura;
     private crear_borde;
     private hacer_interactivo;
     destacar(): void;
-    private conectar_eventos_del_mouse;
     quitar_destacado(): void;
+    private conectar_eventos_del_mouse;
     eliminar(): void;
     private eliminar_sensores;
     private eliminar_figura;
@@ -2147,6 +2156,7 @@ declare class ModoEditor extends Modo {
     conectar_eventos_para_activar_zoom(): void;
     conectar_eventos_para_desplazar_pantalla(): void;
     private manejar_evento_key_up;
+    mover_actor_seleccionado(pulsa_shift: any, x: any, y: any): void;
     private manejar_evento_key_down;
     crear_camara(pilas: any, x: any, y: any, ancho: any, alto: any): void;
     conectar_eventos_resize(): void;
@@ -2157,7 +2167,6 @@ declare class ModoEditor extends Modo {
     aplicar_atributos_de_actor_a_sprite(actor: Actor, sprite: any): void;
     cambiar_el_tamaño_del_escenario(ancho: any, alto: any): void;
     posicionar_la_camara(datos_de_la_escena: any): void;
-    private crear_manejadores_para_hacer_arrastrables_los_actores;
     eliminar_actor_por_id(id: any): void;
     actualizar_sprite_desde_datos(sprite: any, actor: any): void;
 }

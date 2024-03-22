@@ -365,6 +365,8 @@ export default Component.extend({
       actor
     };
 
+    console.log("Se intenta actualizar el actor con estos datos", actor);
+
     this.contexto.postMessage(data, utils.HOST);
   },
 

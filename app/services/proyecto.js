@@ -191,7 +191,7 @@ export default Service.extend({
 
   buscar_actor_por_id(id) {
     let actores = this.obtener_todos_los_actores();
-    return actores.filter(a => a.id == id)[0];
+    return actores.filter(a => a.identificador == id)[0];
   },
 
   buscar_escena_por_nombre(nombre) {

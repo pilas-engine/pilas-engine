@@ -48,6 +48,12 @@ export default Service.extend({
             actor.set("fuente", "color-blanco-con-sombra");
           }
         }
+
+        if (!actor.get("identificador")) {
+          console.log("🔥 El actor no tiene identificador, guardando en base 36");
+          actor.set("identificador", parseInt(actor.get("id"), 10).toString(36));
+        }
+
       });
     });
 

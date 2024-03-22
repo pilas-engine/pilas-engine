@@ -11,8 +11,8 @@ export default Component.extend({
   proyecto: service(),
   bus: service(),
 
-  claseSeleccionado: computed("seleccion", "actor.id", function() {
-    if (this.seleccion === this.actor.id) {
+  claseSeleccionado: computed("seleccion", "actor.identificador", function() {
+    if (this.seleccion === this.actor.identificador) {
       return "bg-black-20";
     } else {
       return "hover-bg-black-10";
@@ -20,7 +20,7 @@ export default Component.extend({
   }),
 
   dragStart() {
-    let id = this.actor.id;
+    let id = this.actor.identificador;
     let nombre = this.actor.nombre;
     let activo = this.actor.activo;
     return event.dataTransfer.setData("text/data", JSON.stringify({ id, nombre, activo }));
@@ -37,15 +37,16 @@ export default Component.extend({
   },
 
   click() {
-    this.get("cuandoSelecciona")(this.actor.id);
+    this.get("cuandoSelecciona")(this.actor.identificador);
   },
 
   doubleClick() {
-    this.bus.trigger("ubicar_camara_en_el_actor", this.actor.id);
+    this.bus.trigger("ubicar_camara_en_el_actor", this.actor.identificador);
   },
 
   actions: {
     cuando_intenta_duplicar(actor_id) {
+      console.log(`intentando duplicar el actor ${actor_id}`);
       this.proyecto.editor.send("cuando_intenta_duplicar", actor_id);
     },
 

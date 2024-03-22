@@ -20,6 +20,7 @@ class ActorBase {
   _texto: any;
   texto: any;
   private _id: any;
+  private identificador: any;
   private _nombre: any;
   private recorte_activado: boolean;
 
@@ -94,6 +95,12 @@ class ActorBase {
     let figura = propiedades.figura || "";
 
     this._id = propiedades.id || this.pilas.utilidades.obtener_id_autoincremental();
+
+    // cambio: 2024-01-30: se comienza a usar el atributo identificador. Actualmente
+    // no tiene otra utilidad, solamente sirve para ser consistente con la estructura
+    // del proyecto.
+    this.identificador = this._id;
+
     this._nombre = propiedades.nombre;
 
     this.recorte_activado = false;

@@ -5,6 +5,7 @@ export default Component.extend({
 
   actions: {
     alternar() {
+      alert("test");
       this.toggleProperty("variable");
     }
   }

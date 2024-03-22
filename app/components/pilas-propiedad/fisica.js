@@ -69,8 +69,6 @@ export default Component.extend({
     },
 
     al_cambiar_valor(nombre, receptor, valor) {
-      console.log(nombre, valor);
-
       set(receptor, nombre, valor);
       this.modificarAtributo("atributo-del-actor", this.sensores);
     },

@@ -4,6 +4,7 @@
     "module": "amd",
     "declaration": true,
     "noImplicitAny": false,
+    "strict": false,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

@@ -65,7 +65,7 @@ export default Service.extend({
     switch (paso.nombre) {
       case "mueve_actor":
         escena = editor.obtener_la_escena_actual();
-        actor = escena.actores.findBy("id", paso.datos.id);
+        actor = escena.actores.findBy("identificador", paso.datos.id);
         actor.set("x", paso.datos.x);
         actor.set("y", paso.datos.y);
 

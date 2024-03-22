@@ -2,6 +2,7 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
   pilas: Pilas;
   borde: Phaser.GameObjects.Rectangle;
   sprite: Phaser.GameObjects.Sprite;
+  centro: Phaser.GameObjects.Graphics;
 
   fondo = null;
   sensores = [];
@@ -9,28 +10,31 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
   texto = null;
   id: number;
   identificador: number;
+  seleccionado: bool;
 
   constructor(pilas, scene, datos_del_actor) {
     super(scene, 0, 0);
     this.pilas = pilas;
+    this.seleccionado = false;
 
     var {g, i} = this.separar_imagen(datos_del_actor.imagen);
 
     this.pilas.utilidades.validar_que_existe_imagen(datos_del_actor.imagen);
-    this.identificador = datos_del_actor.id;
-
-    // TODO: Cada actor tiene su ID, aquí me tengo que asegurar que ese ID se
-    // asigna al objeto en el que estoy ahora,
-    console.log("Guardando este actor como", this.identificador);
+    console.log({identificador: datos_del_actor});
+    this.identificador = datos_del_actor.identificador;
+    this.id = datos_del_actor.id;
 
     this.crear_sprite(g, i);
     this.crear_borde();
+    this.crear_centro();
     this.hacer_interactivo();
+
+    console.log("id del actor", this.id);
 
     this.conectar_eventos_del_mouse();
   }
 
-  private separar_imagen(imagen) {
+  private separar_imagen(imagen: string) {
     var g = undefined;
     var i = undefined;
 
@@ -44,14 +48,14 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
     return {g, i};
   }
 
-  private crear_sprite(g, i) {
+  private crear_sprite(g: string, i: string) {
     let scene = this.pilas.modo;
 
     this.sprite = scene.add.sprite(0, 0, g, i);
     this.add(this.sprite);
   }
 
-  actualizar_datos(entidad) {
+  actualizar_datos(entidad: any) {
 
     let coordenada = this.pilas.utilidades.convertir_coordenada_de_pilas_a_phaser(entidad.x, entidad.y);
     this.pilas.utilidades.validar_que_existe_imagen(entidad.imagen);
@@ -62,11 +66,13 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
     if (entidad.imagen.indexOf(":") > -1) {
       let g = entidad.imagen.split(":")[0];
       let i = entidad.imagen.split(":")[1];
-
       this.sprite.setTexture(g, i);
     } else {
       this.sprite.setTexture(entidad.imagen);
     }
+
+    //this.sprite.texture.setFilter(Phaser.Textures.NEAREST);
+    //debugger;
 
     // Actualiza las propiedades del actor:
     
@@ -89,14 +95,110 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
     // interactiva.
     
     this.borde.setSize(this.sprite.width, this.sprite.height);
+
+
+
+    console.log(entidad.lasers);
+
+
+    // Si detecta que el usuario ha definido una figura y antes no había
+    // ninguna la intenta crear.
+    if (entidad.figura && !this.figura) {
+      console.log("Debo crear figura visual para este actor", this);
+      this.figura = this.crear_representacion_de_figura(entidad);
+    } else {
+      // Si detecta que el usuario eliminó una figura la quita del dibujo.
+      if (this.figura && !entidad.figura) {
+        this.figura.destroy();
+        this.figura = null;
+      }
+    }
+
+    // Dada una figura, la actualiza para que simbolice visualmente lo que
+    // el usuario seleccionó.
+    if (this.figura) {
+      this.actualizar_datos_de_la_figura(entidad);
+    }
+
+  }
+
+  actualizar_datos_de_la_figura(entidad) {
+
+    if (entidad.figura === "rectangulo") {
+      // si la figura ya no es un rectángulo vuelve a crearla.
+      if (this.figura.geom.type !== 5) {
+        this.figura.destroy();
+        this.figura = this.crear_representacion_de_figura(entidad);
+      }
+
+      this.figura.setSize(entidad.figura_ancho, entidad.figura_alto);
+    }
+
+    if (entidad.figura === "circulo") {
+      // si la figura ya no es un círculo vuelve a crearla.
+      if (this.figura.geom.type !== 0) {
+        this.figura.destroy();
+        this.figura = this.crear_representacion_de_figura(entidad);
+      }
+
+      this.figura.setRadius(entidad.figura_radio);
+    }
+
+    if (entidad.figura_dinamica) {
+      this.figura.setStrokeStyle(1, 0x00FF00);
+      this.figura.fillColor = 0x00FF00;
+      this.figura.fillAlpha = 0.25;
+    } else {
+      this.figura.setStrokeStyle(1, 0x0000AA);
+      this.figura.fillColor = 0x0000CC;
+      this.figura.fillAlpha = 0.25;
+    }
+
+    this.figura.setOrigin(0.5, 0.5);
+  }
+
+  private crear_representacion_de_figura(entidad) {
+    let figura = null;
+
+    if (entidad.figura === "rectangulo") {
+      figura = this.pilas.modo.add.rectangle(0, 0, 100, 100, 0xffffff);
+    }
+
+    if (entidad.figura === "circulo") {
+      figura = this.pilas.modo.add.circle(0, 0, 100, 0xffffff);
+    }
+
+    figura.setStrokeStyle(1, 0x0000FF);
+    //figura.fillColor = 0x00FF00;
+    figura.fillAlpha = 0.5;
+
+    this.add(figura);
+
+    return figura;
   }
 
   private crear_borde() {
     this.borde = this.pilas.modo.add.rectangle(this.sprite.x, 0, this.sprite.width, this.sprite.height);
-    this.borde.setStrokeStyle(2, 0xff00f0);
+    this.borde.setStrokeStyle(1, 0xffffff);
     this.add(this.borde);
 
-    this.borde.alpha = 0.5;
+    this.borde.alpha = 0;
+  }
+
+  private crear_centro() {
+    this.centro = this.pilas.modo.add.graphics();
+
+    this.centro.lineStyle(3, 0x000000, 1);
+
+    // lineas de fondo
+    this.centro.lineBetween(-4, -4, +4, +4);
+    this.centro.lineBetween(+4, -4, -4, +4);
+
+    this.centro.lineStyle(1, 0xFFFFFF, 1);
+    this.centro.lineBetween(-3, -3, +3, +3);
+    this.centro.lineBetween(+3, -3, -3, +3);
+
+    this.add(this.centro);
   }
 
   private hacer_interactivo() {
@@ -108,48 +210,63 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
       hitAreaCallback: Phaser.Geom.Rectangle.Contains,
     });
 
-    this.pilas.modo.input.enableDebug(this, 0x00ff00);
+    //this.pilas.modo.input.enableDebug(this, 0x00ff00);
   }
 
   // Al ser seleccionado desde la barra de actores.
   destacar() {
-    this.pilas.modo.input.enableDebug(this, 0xffffff);
+    //this.pilas.modo.input.enableDebug(this, 0xffffff);
+    this.borde.alpha = 1;
+    this.seleccionado = true;
+  }
+
+  // Al dejar de ser seleccionado en el modo edición.
+  quitar_destacado() {
+    //this.pilas.modo.input.removeDebug(this);
+    this.borde.alpha = 0;
+    this.seleccionado = false;
   }
 
   private conectar_eventos_del_mouse() {
 
-    this.on("pointermove", (data) => {
+    this.on("pointermove", (data: any) => {
       if (data.buttons) {
         this.scene.input.setDefaultCursor("grabbing");
       } else {
         this.scene.input.setDefaultCursor("grab");
       }
 
-      this.borde.alpha = 0.5;
+      if (!this.seleccionado) {
+        this.borde.alpha = 0.5;
+      }
+
     });
 
     this.on("pointerout", () => {
       this.scene.input.setDefaultCursor("default");
-      this.borde.alpha = 0.5;
+
+      if (!this.seleccionado) {
+        this.borde.alpha = 0;
+      }
+
     });
 
     this.on("pointerdown", () => {
       this.scene.input.setDefaultCursor("grabbing");
-      this.borde.alpha = 0.5;
+      this.borde.alpha = 1;
+      this.pilas.mensajes.emitir_mensaje_al_editor("comienza_a_mover_un_actor", { identificador: this.identificador });
     });
 
     this.on("pointerup", () => {
       this.scene.input.setDefaultCursor("grab");
     });
 
-    this.on("drag", (evento, x, y) => {
+    this.on("drag", (_:any, x: number, y: number) => {
       this.x = Math.floor(x);
       this.y = Math.floor(y);
-      console.log("Moviendo el actor", {x, y});
     });
 
-
-    this.on("dragend", (pointer) => {
+    this.on("dragend", () => {
       let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(this.x, this.y);
 
       let datos = {
@@ -158,22 +275,16 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
         y: posicion.y,
       };
 
+      console.log({id: this.id, identificador: this.identificador});
       this.pilas.mensajes.emitir_mensaje_al_editor("termina_de_mover_un_actor", datos);
     });
 
-
-  }
-
-  // Al dejar de ser seleccionado en el modo edición.
-  quitar_destacado() {
-    this.pilas.modo.input.removeDebug(this);
   }
 
   eliminar() {
-
-    if (this.figura) {
-      this.eliminar_figura(this.figura);
-    }
+    //if (this.figura) {
+    //  this.eliminar_figura(this.figura);
+    //}
 
     if (this.sensores) {
       this.eliminar_sensores();
@@ -196,7 +307,7 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
     });
   }
 
-  private eliminar_figura(figura) {
+  private eliminar_figura(figura: any) {
     let matter = this.pilas.Phaser.Physics.Matter.Matter;
     let world = this.pilas.modo.matter.world.localWorld;
     matter.World.remove(world, figura);

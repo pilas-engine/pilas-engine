@@ -38,7 +38,6 @@ class __deprecated_ModoEditor extends Modo {
     this.hacer_que_el_fondo_se_pueda_arrastrar();
 
     this.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara();
-    //this.crear_manejadores_para_controlar_el_zoom(true);
 
     //this.matter.world.createDebugGraphic();
     this.conectar_movimiento_del_mouse();
@@ -98,6 +97,7 @@ class __deprecated_ModoEditor extends Modo {
     }
 
     if (evento.key === "ArrowLeft") {
+
       this.pilas.mensajes.emitir_mensaje_al_editor("mover_al_actor_con_el_teclado", { x: -1 });
     }
 

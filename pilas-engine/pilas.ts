@@ -248,9 +248,7 @@ class Pilas {
   }
 
   crear_configuracion(ancho: number, alto: number, maximizar: boolean, pixelart: boolean, transparente: boolean) {
-    let escala = undefined;
     let color_de_fondo = "#000000";
-
     let escala = {
       mode: Phaser.Scale.NONE,
 

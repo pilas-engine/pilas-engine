@@ -13,8 +13,6 @@ export default Component.extend({
 
   crear_opciones_de_zoom() {
     this.set("items", [
-        { etiqueta: '20%', 'valor': 0.2},
-        { etiqueta: '40%', 'valor': 0.4},
         { etiqueta: '60%', 'valor': 0.6},
         { etiqueta: '80%', 'valor': 0.8},
         { etiqueta: '100%', 'valor': 1.0},
@@ -28,11 +26,6 @@ export default Component.extend({
         { etiqueta: '260%', 'valor': 2.6},
         { etiqueta: '280%', 'valor': 2.8},
         { etiqueta: '300%', 'valor': 3.0},
-        { etiqueta: '320%', 'valor': 3.2},
-        { etiqueta: '340%', 'valor': 3.4},
-        { etiqueta: '360%', 'valor': 3.6},
-        { etiqueta: '380%', 'valor': 3.8},
-        { etiqueta: '400%', 'valor': 4.0},
     ]);
   },
 
