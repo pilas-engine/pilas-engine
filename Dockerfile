@@ -1,8 +1,11 @@
-FROM node:12.13.0
+FROM node:12.18.2
+MAINTAINER Hugo Ruscitti <hugoruscitti@gmail.com>
 
-RUN apt-get update && apt-get install -y netcat
+EXPOSE 4200 7020 7357
+WORKDIR /myapp
 
-WORKDIR /app
-COPY ["package.json", "yarn.lock", "Makefile", "./"]
-RUN make iniciar 
-COPY . .
+run find ./
+RUN npm install -g bower@1.8.8
+RUN npm install -g ember-cli@3.8.2
+RUN yarn install
+CMD ["ember", "server"]

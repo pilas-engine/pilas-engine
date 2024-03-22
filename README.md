@@ -45,6 +45,14 @@ Nota: usar node versión 12.18.2
 - [Anuncio del comienzo de pilas 2](https://www.examplelab.com.ar/posts/2018-03-04-comenzamos-pilas-engine-2/)
 
 
+## Comandos para utilizar con docker
+
+
+```
+make docker-ejecutar
+make docker-compilar-pilas-live
+make docker-actualizar
+```
 
 ## Links útiles
 

@@ -54,6 +54,13 @@ comandos:
 	@echo "    ${G}actualizar_definiciones${N}      Actualiza las definiciones de typescript para phaser."
 	@echo "    ${G}actualizar-imagenes${N}          Actualiza todos los spritesheets."
 	@echo ""
+	@echo "  ${Y}Para usar con docker${N}"
+	@echo ""
+	@echo "    ${G}docker-iniciar${N}               "
+	@echo "    ${G}docker-ejecutar${N}              "
+	@echo "    ${G}docker-compilar-pilas-live${N}   "
+	@echo "    ${G}docker-actualizar${N}            "
+	@echo ""
 	@echo "  ${Y}Relacionados con pilas ${N}"
 	@echo ""
 	@echo "    ${G}compilar_pilas${N}               Genera pilasengine.js."
@@ -368,6 +375,17 @@ actualizar-imagenes:
 	$(call log, "Corrigiendo nombres de clases en los css generados")
 	@node scripts/corregir-css-de-grilla-de-images.js
 
+docker-ejecutar:
+	docker-compose up pilas
+
+docker-compilar-pilas-live:
+	docker-compose run pilas make compilar_pilas_live
+
+docker-actualizar:
+	docker-compose run pilas touch app/index.html
+
+docker-iniciar:
+	docker-compose run pilas yarn
 
 subir-binarios:
 	ghr --replace ${VERSION} binarios/
