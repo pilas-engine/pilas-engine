@@ -19,7 +19,7 @@
   </div>
 
   <div class="unselectable">
-    {{pilas-boton icono="escena" desactivado=(not estado.puede_editar) accion=agregar_escena texto=(t "create.scene")}}
+    {{pilas-boton icono="escena" svg=true desactivado=(not estado.puede_editar) accion=agregar_escena texto=(t "create.scene")}}
     {{pilas-crear-actor icono="actor" desactivado=(not estado.puede_editar) cuandoQuiereCrearActor=agregar_actor modalVisible=mostrarModalCreacionDeActor}}
   </div>
 

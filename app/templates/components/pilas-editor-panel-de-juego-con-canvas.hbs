@@ -24,7 +24,7 @@
 
   <div class="mb2 flex" style="padding-bottom: 0px ">
     {{#if estado.puedeEjecutar}}
-      {{pilas-boton id="ejecutar" accion=ejecutar texto=(t "run") icono="ejecutar"}}
+      {{pilas-boton id="ejecutar" accion=ejecutar texto=(t "run") svg=true icono="ejecutar"}}
 
       <div class="dib f6 flex1 tr"></div>
 
@@ -41,12 +41,12 @@
     {{/if}}
 
     {{#if estado.puedeDetener}}
-      {{pilas-boton id="detener" accion=detener texto=(t "stop") icono="detener"}}
+      {{pilas-boton id="detener" accion=detener texto=(t "stop") svg=true icono="detener"}}
     {{/if}}
 
     {{#if permitir_modo_pausa}}
       {{#if estado.puedePausar}}
-        {{pilas-boton id="pausar" extraClass="ml2" desactivado=existe_un_error_reciente accion=pausar texto=(t "pause") icono="pausa"}}
+        {{pilas-boton id="pausar" extraClass="ml2" desactivado=existe_un_error_reciente accion=pausar texto=(t "pause") svg=true icono="pausa"}}
 
         <div class="dib f6 flex1 tr"></div>
 

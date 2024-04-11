@@ -1,10 +1,19 @@
-<a role="button" {{action "ejecutar_accion"}} data-test={{dataTest}} class="{{class}} {{extraClass}} {{if truncate "truncate" ""}} {{if ejecutando "disabled o-50"}} {{if desactivado "disabled o-50"}}" id={{id}}>
+<a role="button" {{action "ejecutar_accion"}} data-test={{dataTest}} class="{{class}} inline-flex items-center {{extraClass}} {{if truncate "truncate" ""}} {{if ejecutando "disabled o-50"}} {{if desactivado "disabled o-50"}}" id={{id}}>
   {{#if ejecutando}}
     {{pilas-spinner}}
   {{/if}}
 
   {{#if icono}}
-    {{pilas-icono icono=icono}}
+    {{#if svg}}
+      <img src="/iconos/{{icono}}.svg" class="v-mid" width="25" height="25" />
+    {{else}}
+      {{pilas-icono icono=icono}}
+    {{/if}}
+
+    {{#if texto}}
+      <span class="dn dib-l" style="width: 5px"></span>
+    {{/if}}
+
     {{#if responsive}}
       <span class="dn dib-l">{{texto}}</span>
     {{else}}

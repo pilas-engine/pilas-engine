@@ -8,7 +8,11 @@
   {{/link-to}}
 {{else}}
   {{#link-to ruta class=class id=id}}
-    {{pilas-icono icono=icono conSeparacion=true}}
+    {{#if svg}}
+      <img src="/iconos/{{icono}}.svg" class="v-mid mr2" width="25" height="25" />
+    {{else}}
+      {{pilas-icono icono=icono conSeparacion=true}}
+    {{/if}}
 
     {{texto}}
     {{yield}}

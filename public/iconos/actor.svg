@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1"
+   viewBox="0 0 48 48"
+   enable-background="new 0 0 48 48"
+   id="svg12"
+   sodipodi:docname="actor.svg"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="17.645833"
+     inkscape:cx="24"
+     inkscape:cy="24"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg12" />
+  <circle
+     fill="#FF9800"
+     cx="28"
+     cy="9"
+     r="5"
+     id="circle2" />
+  <path
+     fill="#00796b"
+     d="M 34.157025,31.833648 31.539489,28.498868 19.8,23.426682 c -1,-0.5 -1.5,1 -2,2 -0.5,1 -4.1,7.2 -3.8,8.3 0.3,0.9 1.326682,-2.566942 2.126682,-2.566942 0.2,0 1.076742,-6.403778 1.450059,-2.536836 l 12.208644,4.760857 5.248381,4.813405 c 0,0 2.409975,0.923095 2.30673,-2.083353 z"
+     id="path4"
+     sodipodi:nodetypes="cccscsccccc"
+     style="fill:#008080" />
+  <path
+     fill="#009688"
+     d="m 26.8,15.2 -2.2,-1 c -1.3,-0.6 -2.9,0 -3.5,1.3 L 13.197841,32.499603 9.2,41.1 c -0.5,1 0,2.2 1,2.7 0.3,0.1 0.6,0.2 0.9,0.2 0.8,0 1.5,-0.4 1.8,-1.1 0,0 3.210671,-4.448118 6.073204,-8.509014 C 21.060478,31.429903 22.96265,28.674701 23.3,28 c 0.8,-1.6 4.9,-9.3 4.9,-9.3 0.5,-1.3 0,-2.9 -1.4,-3.5 z"
+     id="path6"
+     sodipodi:nodetypes="ccccccscsscc" />
+  <path
+     fill="#FF9800"
+     d="M40.5,15.7c-0.7-0.8-2-1-2.8-0.3l-5,4.2l-6.4-3.5c-1.1-0.6-2.6-0.4-3.3,0.9c-0.8,1.3-0.4,2.9,0.8,3.4 l8.3,3.4c0.3,0.1,0.6,0.2,0.9,0.2c0.5,0,0.9-0.2,1.3-0.5l6-5C41.1,17.8,41.2,16.6,40.5,15.7z"
+     id="path8" />
+  <path
+     fill="#FF9800"
+     d="M11.7,23.1l3.4-5.1l4.6,0.6l1.5-3.1c0.4-0.9,1.2-1.4,2.1-1.5c-0.1,0-0.2,0-0.2,0h-9c-0.7,0-1.3,0.3-1.7,0.9 l-4,6c-0.6,0.9-0.4,2.2,0.6,2.8C9.2,23.9,9.6,24,10,24C10.6,24,11.3,23.7,11.7,23.1z"
+     id="path10" />
+</svg>
