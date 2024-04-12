@@ -9,7 +9,6 @@ class ActorBase {
   colisiones: Actor[];
   sensores: any[];
   lasers: Laser[];
-  lasers_serializados: any[] = [];
   private _etiqueta: string = null;
   _vivo: boolean = true;
   private _animacion_en_curso: string = "";
@@ -179,9 +178,6 @@ class ActorBase {
         body_id = this.sprite.body.id;
       }
 
-      this.lasers_serializados = propiedades.lasers.map(e => {
-        return { ...e, actor_id: this.id, body_id };
-      });
     }
 
     if (propiedades.es_texto) {
@@ -448,8 +444,18 @@ class ActorBase {
       hit_activado,
 
       sensores: sensores_serializados,
-      lasers: this.lasers_serializados
+      lasers: this.serializar_lasers(),
     };
+  }
+
+  serializar_lasers() {
+    return this.lasers.map(e => {
+      return {
+        "actor_id": e.actor.id,
+        "rotacion": e.rotacion,
+        "longitud": e.longitud
+      }
+    });
   }
 
   set etiqueta(etiqueta) {

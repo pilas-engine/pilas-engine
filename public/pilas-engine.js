@@ -18,17 +18,6 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
@@ -3292,7 +3281,6 @@ var Sensor = (function () {
 var ActorBase = (function () {
     function ActorBase(pilas) {
         this.figura = "";
-        this.lasers_serializados = [];
         this._etiqueta = null;
         this._vivo = true;
         this._animacion_en_curso = "";
@@ -3411,16 +3399,13 @@ var ActorBase = (function () {
         this.espejado_vertical = propiedades.espejado_vertical;
         this.sprite["actor"] = this;
         if (propiedades.lasers) {
-            var body_id_1 = null;
+            var body_id = null;
             this.lasers = propiedades.lasers.map(function (data) {
                 return new Laser(_this, data.nombre, data.rotacion, data.longitud);
             });
             if (this.sprite.body) {
-                body_id_1 = this.sprite.body.id;
+                body_id = this.sprite.body.id;
             }
-            this.lasers_serializados = propiedades.lasers.map(function (e) {
-                return __assign(__assign({}, e), { actor_id: _this.id, body_id: body_id_1 });
-            });
         }
         if (propiedades.es_texto) {
             this.texto = propiedades.texto;
@@ -3648,8 +3633,17 @@ var ActorBase = (function () {
             hit_alto: hit_alto,
             hit_activado: hit_activado,
             sensores: sensores_serializados,
-            lasers: this.lasers_serializados
+            lasers: this.serializar_lasers(),
         };
+    };
+    ActorBase.prototype.serializar_lasers = function () {
+        return this.lasers.map(function (e) {
+            return {
+                "actor_id": e.actor.id,
+                "rotacion": e.rotacion,
+                "longitud": e.longitud
+            };
+        });
     };
     Object.defineProperty(ActorBase.prototype, "etiqueta", {
         get: function () {

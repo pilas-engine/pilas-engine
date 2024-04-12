@@ -733,7 +733,6 @@ declare class ActorBase {
     colisiones: Actor[];
     sensores: any[];
     lasers: Laser[];
-    lasers_serializados: any[];
     private _etiqueta;
     _vivo: boolean;
     private _animacion_en_curso;
@@ -843,8 +842,17 @@ declare class ActorBase {
         hit_alto: number;
         hit_activado: boolean;
         sensores: any[];
-        lasers: any[];
+        lasers: {
+            actor_id: any;
+            rotacion: number;
+            longitud: number;
+        }[];
     };
+    serializar_lasers(): {
+        actor_id: any;
+        rotacion: number;
+        longitud: number;
+    }[];
     set etiqueta(etiqueta: string);
     get etiqueta(): string;
     tiene_etiqueta(etiqueta: string): boolean;
