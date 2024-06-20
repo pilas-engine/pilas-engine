@@ -10,6 +10,7 @@ export default Component.extend({
       "moverse con el teclado",
       "seguir al mouse lentamente",
       "seguir al mouse",
+      "seguir al teclado",
       "oscilar verticalmente",
       "oscilar rotacion",
       "oscilar transparencia"
