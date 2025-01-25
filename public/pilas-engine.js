@@ -8512,15 +8512,14 @@ var ActorEnModoEdición = (function (_super) {
         _this.seleccionado = false;
         var _a = _this.separar_imagen(datos_del_actor.imagen), g = _a.g, i = _a.i;
         _this.pilas.utilidades.validar_que_existe_imagen(datos_del_actor.imagen);
-        console.log({ identificador: datos_del_actor });
         _this.identificador = datos_del_actor.identificador;
         _this.id = datos_del_actor.id;
         _this.crear_sprite(g, i);
         _this.crear_borde();
-        _this.crear_centro();
         _this.hacer_interactivo();
         console.log("id del actor", _this.id);
         _this.conectar_eventos_del_mouse();
+        _this.crear_centro();
         return _this;
     }
     ActorEnModoEdición.prototype.separar_imagen = function (imagen) {
@@ -8565,7 +8564,6 @@ var ActorEnModoEdición = (function (_super) {
         this.sprite.depth = -entidad.z || 0;
         this.sprite.setOrigin(entidad.centro_x, entidad.centro_y);
         this.borde.setSize(this.sprite.width, this.sprite.height);
-        console.log(entidad.lasers);
         if (entidad.figura && !this.figura) {
             console.log("Debo crear figura visual para este actor", this);
             this.figura = this.crear_representacion_de_figura(entidad);
@@ -8617,12 +8615,16 @@ var ActorEnModoEdición = (function (_super) {
         }
         figura.setStrokeStyle(1, 0x0000FF);
         figura.fillAlpha = 0.5;
+        figura.angle = -entidad.rotacion;
         this.add(figura);
         return figura;
     };
     ActorEnModoEdición.prototype.crear_borde = function () {
-        this.borde = this.pilas.modo.add.rectangle(this.sprite.x, 0, this.sprite.width, this.sprite.height);
-        this.borde.setStrokeStyle(1, 0xffffff);
+        var x = this.sprite.x;
+        var y = -4;
+        var w = this.sprite.width;
+        this.borde = this.pilas.modo.add.rectangle(x, y, w, this.sprite.height);
+        this.borde.setStrokeStyle(2, 0xffffff);
         this.add(this.borde);
         this.borde.alpha = 0;
     };
@@ -8638,11 +8640,7 @@ var ActorEnModoEdición = (function (_super) {
     };
     ActorEnModoEdición.prototype.hacer_interactivo = function () {
         var borde = this.sprite.getTopLeft();
-        this.setInteractive({
-            draggable: true,
-            hitArea: new Phaser.Geom.Rectangle(borde.x, borde.y, this.sprite.width, this.sprite.height),
-            hitAreaCallback: Phaser.Geom.Rectangle.Contains,
-        });
+        this.setInteractive();
     };
     ActorEnModoEdición.prototype.destacar = function () {
         this.borde.alpha = 1;
@@ -8735,7 +8733,7 @@ var CamaraEnModoEdición = (function (_super) {
         var manejador_x = ancho / 2 - manejador_ancho / 2;
         var manejador_y = alto / 2 + manejador_alto / 2;
         manejador = scene.add.rectangle(manejador_x, manejador_y, manejador_ancho, manejador_alto);
-        manejador.setStrokeStyle(2, 0x00ff00);
+        manejador.setStrokeStyle(1, 0x00ff00);
         manejador.setFillStyle(0x00ff00);
         manejador.setAlpha(0.25);
         _this.add(manejador);
@@ -8746,7 +8744,6 @@ var CamaraEnModoEdición = (function (_super) {
         });
         var icono = scene.add.sprite(manejador_x, manejador_y, "camara");
         _this.add(icono);
-        _this.alpha = 0.75;
         _this.setDepth(1000000000);
         _this.on("pointermove", function (data) {
             _this.alpha = 1;
@@ -9804,7 +9801,6 @@ var ModoEditor = (function (_super) {
         this.conectar_eventos_resize();
         this.conectar_eventos_de_teclado();
         this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
-        console.log("datos de la escena", datos.escena);
         this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
         this.conectar_eventos_para_activar_zoom();
         this.conectar_eventos_para_desplazar_pantalla();
@@ -9875,6 +9871,10 @@ var ModoEditor = (function (_super) {
         });
         this.input.on('pointerup', function (pointer) {
             var p = _this.input.activePointer;
+            var debe_quitar_seleccion = false;
+            if (pulsa_sobre_pantalla) {
+                debe_quitar_seleccion = true;
+            }
             if (p.middleButtonReleased()) {
                 boton_medio = false;
             }
@@ -9888,6 +9888,9 @@ var ModoEditor = (function (_super) {
                     x: _this.cameras.main.scrollX,
                     y: _this.cameras.main.scrollY,
                 });
+                if (debe_quitar_seleccion) {
+                    _this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_sobre_el_escenario", {});
+                }
             }
         });
     };

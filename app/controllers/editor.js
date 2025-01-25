@@ -22,7 +22,6 @@ const queryParams = new QueryParams({
   ultimaEscenaSeleccionada: { defaultValue: 1, replace: true },
   mostrarModalCreacionDeActor: { defaultValue: false, replace: true },
   mostrarInterprete: { defaultValue: false, replace: true },
-  pos: { defaultValue: false, replace: true },
   fps: { defaultValue: true, replace: true },
   fisica: { defaultValue: true, replace: true },
   fisica_en_modo_ejecucion: { defaultValue: false, replace: false },

@@ -365,8 +365,6 @@ export default Component.extend({
       actor
     };
 
-    console.log("Se intenta actualizar el actor con estos datos", actor);
-
     this.contexto.postMessage(data, utils.HOST);
   },
 
@@ -454,6 +452,11 @@ export default Component.extend({
     }
 
     if (!e.data.tipo) {
+      return;
+    }
+
+    if (e.data.tipo === "pulsa_sobre_el_escenario") {
+      this.bus.trigger(`${nombre_del_contexto}:pulsa_sobre_el_escenario`, contexto.pilasengine, contexto);
       return;
     }
 

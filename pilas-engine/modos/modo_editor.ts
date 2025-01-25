@@ -46,7 +46,7 @@ class ModoEditor extends Modo {
     this.conectar_eventos_de_teclado();
 
     this.crear_fondo(datos.escena.fondo, datos.escena.ancho, datos.escena.alto);
-    console.log("datos de la escena", datos.escena);
+
     this.crear_actores_desde_los_datos_de_la_escena(datos.escena);
     this.conectar_eventos_para_activar_zoom();
     this.conectar_eventos_para_desplazar_pantalla();
@@ -116,7 +116,6 @@ class ModoEditor extends Modo {
   }
 
   conectar_eventos_para_desplazar_pantalla() {
-
     pulsa_sobre_pantalla = false;
     boton_medio = false;
 
@@ -144,6 +143,14 @@ class ModoEditor extends Modo {
 
     this.input.on('pointerup', (pointer) => {
       let p = this.input.activePointer;
+      let debe_quitar_seleccion = false;
+
+      // Si ha pulsado o desplazado la pantalla, elimina toda selección
+      // de actores y selecciona la escena actual.
+      if (pulsa_sobre_pantalla) {
+        debe_quitar_seleccion = true;
+      }
+
 
       if (p.middleButtonReleased()) {
         boton_medio = false;
@@ -153,7 +160,6 @@ class ModoEditor extends Modo {
         pulsa_sobre_pantalla = false;
       }
 
-
       if (!boton_medio || !pulsa_sobre_pantalla) {
         this.input.setDefaultCursor("default");
 
@@ -162,6 +168,12 @@ class ModoEditor extends Modo {
           x: this.cameras.main.scrollX,
           y: this.cameras.main.scrollY,
         });
+
+        if (debe_quitar_seleccion) {
+          this.pilas.mensajes.emitir_mensaje_al_editor("pulsa_sobre_el_escenario", { });
+        }
+
+
       }
     });
 

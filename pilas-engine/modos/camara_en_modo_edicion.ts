@@ -19,6 +19,7 @@ class CamaraEnModoEdición extends Phaser.GameObjects.Container {
 
     let manejador: Phaser.GameObjects.Rectangle = null;
 
+    // borde verde
     this.borde = scene.add.rectangle(0, 0, ancho, alto);
     this.borde.setStrokeStyle(1, 0x00ff00);
     this.add(this.borde);
@@ -26,14 +27,13 @@ class CamaraEnModoEdición extends Phaser.GameObjects.Container {
     let manejador_x = ancho/2 - manejador_ancho/2;
     let manejador_y = alto/2 + manejador_alto/2;
 
+    // rectángulo que contiene el ícono de la cámara.
     manejador = scene.add.rectangle(manejador_x, manejador_y, manejador_ancho, manejador_alto);
-    manejador.setStrokeStyle(2, 0x00ff00);
+    manejador.setStrokeStyle(1, 0x00ff00);
     manejador.setFillStyle(0x00ff00);
     manejador.setAlpha(0.25);
 
     this.add(manejador);
-
-    //this.setSize(250, 25);
 
     this.setInteractive({
       draggable: true,
@@ -42,10 +42,9 @@ class CamaraEnModoEdición extends Phaser.GameObjects.Container {
     });
 
     const icono = scene.add.sprite(manejador_x, manejador_y, "camara");
-
     this.add(icono);
 
-    this.alpha = 0.75;
+    //this.alpha = 0.75;
 
     this.setDepth(1000000000);
 

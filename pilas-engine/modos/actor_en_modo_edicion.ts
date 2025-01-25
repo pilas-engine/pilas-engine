@@ -20,18 +20,17 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
     var {g, i} = this.separar_imagen(datos_del_actor.imagen);
 
     this.pilas.utilidades.validar_que_existe_imagen(datos_del_actor.imagen);
-    console.log({identificador: datos_del_actor});
     this.identificador = datos_del_actor.identificador;
     this.id = datos_del_actor.id;
 
     this.crear_sprite(g, i);
     this.crear_borde();
-    this.crear_centro();
     this.hacer_interactivo();
 
     console.log("id del actor", this.id);
 
     this.conectar_eventos_del_mouse();
+    this.crear_centro();
   }
 
   private separar_imagen(imagen: string) {
@@ -71,9 +70,6 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
       this.sprite.setTexture(entidad.imagen);
     }
 
-    //this.sprite.texture.setFilter(Phaser.Textures.NEAREST);
-    //debugger;
-
     // Actualiza las propiedades del actor:
     
     this.x = coordenada.x;
@@ -91,15 +87,11 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
     this.sprite.depth = -entidad.z || 0;
     this.sprite.setOrigin(entidad.centro_x, entidad.centro_y);
 
+
     // Actualiza el borde que indica el tamaño del actor y su zona
     // interactiva.
     
     this.borde.setSize(this.sprite.width, this.sprite.height);
-
-
-
-    console.log(entidad.lasers);
-
 
     // Si detecta que el usuario ha definido una figura y antes no había
     // ninguna la intenta crear.
@@ -169,17 +161,20 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
     }
 
     figura.setStrokeStyle(1, 0x0000FF);
-    //figura.fillColor = 0x00FF00;
     figura.fillAlpha = 0.5;
+    figura.angle = -entidad.rotacion;
 
     this.add(figura);
-
     return figura;
   }
 
   private crear_borde() {
-    this.borde = this.pilas.modo.add.rectangle(this.sprite.x, 0, this.sprite.width, this.sprite.height);
-    this.borde.setStrokeStyle(1, 0xffffff);
+    let x = this.sprite.x;
+    let y = -4;
+    let w = this.sprite.width;
+
+    this.borde = this.pilas.modo.add.rectangle(x, y, w, this.sprite.height);
+    this.borde.setStrokeStyle(2, 0xffffff);
     this.add(this.borde);
 
     this.borde.alpha = 0;
@@ -190,10 +185,11 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
 
     this.centro.lineStyle(3, 0x000000, 1);
 
-    // lineas de fondo
+    // lineas negras en el fondo.
     this.centro.lineBetween(-4, -4, +4, +4);
     this.centro.lineBetween(+4, -4, -4, +4);
 
+    // cruz blanca del centro.
     this.centro.lineStyle(1, 0xFFFFFF, 1);
     this.centro.lineBetween(-3, -3, +3, +3);
     this.centro.lineBetween(+3, -3, -3, +3);
@@ -204,11 +200,7 @@ class ActorEnModoEdición extends Phaser.GameObjects.Container {
   private hacer_interactivo() {
     let borde = this.sprite.getTopLeft();
 
-    this.setInteractive({
-      draggable: true,
-      hitArea: new Phaser.Geom.Rectangle(borde.x, borde.y, this.sprite.width, this.sprite.height),
-      hitAreaCallback: Phaser.Geom.Rectangle.Contains,
-    });
+    this.setInteractive();
 
     //this.pilas.modo.input.enableDebug(this, 0x00ff00);
   }

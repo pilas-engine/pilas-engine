@@ -54,6 +54,7 @@ export default Component.extend({
       "mientras_mueve_la_camara",
       "termina_de_mover_un_actor",
       "comienza_a_mover_un_actor",
+      "pulsa_sobre_el_escenario",
       "inicia_modo_depuracion_en_pausa",
       "cuando_cambia_posicion_dentro_del_modo_pausa",
       "pulsa_la_tecla_escape",
@@ -371,6 +372,7 @@ export default Component.extend({
 
     let escena_inicial = this.obtener_la_escena_inicial();
     this.set("ultimaEscenaSeleccionada", escena_inicial.id);
+    console.log("La última escena seleccionada es", escena_inicial.id);
     this.mostrar_la_escena_actual_sobre_pilas();
   },
 
@@ -426,6 +428,12 @@ export default Component.extend({
 
   comienza_a_mover_un_actor(datos) {
     this.send("cuandoSelecciona", datos.identificador);
+  },
+
+  pulsa_sobre_el_escenario(datos) {
+    console.log("🔥🔥 TODO: seleccionar el escenario");
+    this.set("seleccion", 1);
+    this.send("cuandoSelecciona", this.seleccion);
   },
 
   inicia_modo_depuracion_en_pausa(datos) {
