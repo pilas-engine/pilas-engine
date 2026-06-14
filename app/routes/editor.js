@@ -7,7 +7,11 @@ export default Route.extend({
   intl: service(),
 
   model() {
-    this.conectar_manejador_para_evitar_cierres_accidentales();
+
+    if (ENV.evitarCierresAccidentales) {
+      this.conectar_manejador_para_evitar_cierres_accidentales();
+    }
+
     return this.paramsFor("application");
   },
 

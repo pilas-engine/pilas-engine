@@ -2,8 +2,17 @@
 
   <div class="ma2 flex">
     <div class="w5">
-      {{#link-to "ejemplos" class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{pilas-icono icono="volver"}} {{t "return"}}{{/link-to}}
-      {{#link-to "editor" (query-params ejemplo=model.nombre) class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}{{pilas-icono icono="computadora"}} {{t "edit"}}{{/link-to}}
+
+      {{#link-to "ejemplos" class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}
+        <img alt="" src="/iconos/volver.svg" class="v-mid" width="24" height="24">
+        {{t "return"}}
+      {{/link-to}}
+
+      {{#link-to "editor" (query-params ejemplo=model.nombre) class="ba pa2 button dib br2 verdana f6 link pointer hover-bg-black-10 black bg-animate hover-bg-black-10 b--black-20 unselectable v-top"}}
+        <img alt="" src="/iconos/computadora.svg" class="v-mid mr2" width="24" height="24">
+        {{t "edit"}}
+      {{/link-to}}
+
       <span class="dn" id="test-nombre" data-nombre={{model.nombre}}>{{model.nombre}}</span>
     </div>
 

@@ -162,6 +162,7 @@ export default Controller.extend(queryParams.Mixin, {
   }),
 
   cargarProyectoDesdeHashDelBackend: task(function*(hash) {
+    yield this.api.obtener_tamano_del_proyecto(hash);
     let proyecto_serializado = yield this.api.obtener_proyecto(hash);
     let proyecto = string_a_json(proyecto_serializado.serializado);
     let objeto = convertirProyectoEnObjetoEmber(proyecto.proyecto);

@@ -8,11 +8,13 @@ export default Route.extend({
   migraciones: service(),
 
   model(params) {
-    return this.api.obtener_proyecto(params.hash).then(data => {
-      return {
-        hash: params.hash,
-        proyecto: data
-      };
+    return this.api.obtener_tamano_del_proyecto(params.hash).then(() => {
+      return this.api.obtener_proyecto(params.hash).then(data => {
+        return {
+          hash: params.hash,
+          proyecto: data
+        };
+      });
     });
   },
 

@@ -6,6 +6,7 @@ module.exports = function(environment) {
     environment,
     rootURL: "",
     locationType: "hash",
+    evitarCierresAccidentales: true,
     pilas: {
       esperar_antes_de_iniciar: false
     },

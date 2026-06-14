@@ -1,5 +1,10 @@
 {{#if tareaCargarProyecto.isRunning}}
-  <div class="pa2 gray verdana f6 tc">{{t "app.loading"}}</div>
+  <div class="pa5 theme-oscuro bg-fondo texto vh-100">
+    <div class="verdana f6 tc pa2">{{pilas-spinner s=40}}</div>
+    <div class="verdana f6 tc texto">{{t "app.loading"}}</div>
+
+    {{pilas-api-barra-de-progreso}}
+  </div>
 {{else}}
 
   {{pilas-editor

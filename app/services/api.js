@@ -7,6 +7,12 @@ export default Service.extend({
   electron: service(),
   enElectron: alias("electron.enElectron"),
 
+  // Estos tres atributos se usan para mostrar una barra de progreso
+  // al cargar un proyecto nuevo.
+  tamano_ultimo_proyecto: 0,
+  ultimo_proyecto_cargado: 0,
+  bytes_cargados_del_ultimo_proyecto: 0,
+
   autenticar(usuario, contraseña) {
     return this.post("login/", { username: usuario, password: contraseña});
   },
@@ -164,11 +170,25 @@ export default Service.extend({
     });
   },
 
+  obtener_tamano_del_proyecto(hash) {
+    this.set("ultimo_proyecto_cargando", hash);
+    return new Promise((resolve) => {
+      let tamano = this.get(`proyecto/obtener-tamano/${hash}`);
+      tamano.then((d) => {
+        this.set("tamano_ultimo_proyecto", d.tamano);
+        resolve(d.tamano);
+      })
+    });
+  },
+
   obtener_proyecto(hash) {
+    this.set("ultimo_proyecto_cargando", hash);
     return this.get(`proyecto/obtener/${hash}`);
   },
 
   get(endpoint, headers) {
+    let self = this;
+
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
 
@@ -178,6 +198,10 @@ export default Service.extend({
 
       if (headers && headers.token) {
         xhr.setRequestHeader("authorization", `Token ${headers.token}`);
+      }
+
+      xhr.onprogress = function(progreso) {
+        self.set("bytes_cargados_del_ultimo_proyecto", progreso.loaded);
       }
 
       xhr.onload = function() {

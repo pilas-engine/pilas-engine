@@ -102,7 +102,10 @@ class ActorTextoBase extends ActorBase {
     let ancho = this._texto.width + this.margen_interno;
     let alto = this._texto.height + this.margen_interno;
 
-    this._fondo.resize(ancho, alto);
+    if (this._fondo['resize']) {
+      this._fondo.resize(ancho, alto);
+    }
+
     this.definir_area_de_interactividad(ancho, alto);
   }
 

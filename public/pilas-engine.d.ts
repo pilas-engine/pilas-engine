@@ -2067,6 +2067,10 @@ declare class ModoEditor extends Modo {
     tamaño_de_la_grilla: number;
     tecla_meta_pulsada: boolean;
     actor_seleccionado: any;
+    anterior_actor_seleccionado: any;
+    canvas_auxiliar: Phaser.GameObjects.Graphics;
+    actor_bajo_el_puntero_del_mouse: any;
+    distancia: any;
     constructor();
     preload(): void;
     create(datos: any): void;
@@ -2083,6 +2087,11 @@ declare class ModoEditor extends Modo {
     hacer_que_el_fondo_se_pueda_arrastrar(): void;
     aplicar_limites_a_la_camara(escena: any): void;
     private conectar_movimiento_del_mouse;
+    distancia_de_recorrido_del_mouse(x: any, y: any, x1: any, y1: any): {
+        distancia: number;
+        centro_x: number;
+        centro_y: number;
+    };
     crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara(): void;
     ajustar_posicion_a_la_grilla(gameObject: Phaser.GameObjects.Sprite): void;
     cuando_cambia_grilla_desde_el_selector_manual(grilla: any): void;
@@ -2105,6 +2114,9 @@ declare class ModoEditor extends Modo {
     private copiar_atributos_excepto_alpha;
     aplicar_atributos_de_actor_a_sprite(actor: Actor, sprite: any): void;
     update(): void;
+    dibujar_linea(canvas: any, x0: any, y0: any, x1: any, y1: any, grosor: any, color: any): void;
+    dibujar_canvas_auxiliar(): void;
+    dibujar_numero(canvas: any, x: any, y: any, numero: any): void;
     eliminar_actor_por_id(id: any): void;
     posicionar_la_camara(datos_de_la_escena: any): void;
     cambiar_fondo(fondo: any): void;

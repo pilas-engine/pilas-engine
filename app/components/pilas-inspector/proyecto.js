@@ -46,6 +46,7 @@ export default Component.extend({
       "1920x1080",
       "1366x768",
       "1280x720",
+      "400x224",
       // --- verticales
       "240x320",
       "480x640",
@@ -53,7 +54,8 @@ export default Component.extend({
       "768x1024",
       "1080x1920",
       "768x1366",
-      "720x1280"
+      "720x1280",
+      "224x400",
     ];
 
     return resoluciones.map(e => {

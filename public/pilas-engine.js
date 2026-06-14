@@ -18,6 +18,17 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var Actores = (function () {
     function Actores(pilas) {
         this.pilas = pilas;
@@ -4720,7 +4731,9 @@ var ActorTextoBase = (function (_super) {
         }
         var ancho = this._texto.width + this.margen_interno;
         var alto = this._texto.height + this.margen_interno;
-        this._fondo.resize(ancho, alto);
+        if (this._fondo['resize']) {
+            this._fondo.resize(ancho, alto);
+        }
         this.definir_area_de_interactividad(ancho, alto);
     };
     ActorTextoBase.prototype.eliminar = function () {
@@ -9170,10 +9183,15 @@ var ModoEditor = (function (_super) {
         _super.prototype.create.call(this, datos, datos.proyecto.ancho, datos.proyecto.alto);
         this.actores = [];
         this.pilas = datos.pilas;
+        this.canvas_auxiliar = this.sys.add.graphics({ x: 0, y: 0 });
+        this.canvas_auxiliar.depth = 999999;
+        this.distancia = null;
+        this.actor_bajo_el_puntero_del_mouse = null;
         this.usar_grilla = false;
         this.tamaño_de_la_grilla = 256;
         this.crear_sprite_para_el_cursor_de_la_grilla();
         this.actor_seleccionado = null;
+        this.anterior_actor_seleccionado = null;
         this.crear_fondo(datos.escena.fondo, datos.escena.ancho + this.ancho / 2, datos.escena.alto);
         this.posicionar_la_camara(datos.escena);
         this.aplicar_limites_a_la_camara(datos.escena);
@@ -9292,6 +9310,14 @@ var ModoEditor = (function (_super) {
     };
     ModoEditor.prototype.conectar_movimiento_del_mouse = function () {
         var _this = this;
+        var comenzo_a_pulsar = false;
+        var posicion_inicial_x = 0;
+        var posicion_inicial_y = 0;
+        this.input.on("pointerdown", function (evento) {
+            comenzo_a_pulsar = true;
+            posicion_inicial_x = evento.worldX;
+            posicion_inicial_y = evento.worldY;
+        });
         this.input.on("pointermove", function (evento) {
             var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
             _this.pilas.cursor_x = Math.trunc(posicion.x);
@@ -9302,10 +9328,24 @@ var ModoEditor = (function (_super) {
         });
         this.input.on("pointerup", function (evento) {
             if (_this.tecla_meta_pulsada) {
-                var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
-                _this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado_con_click", { x: posicion.x, y: posicion.y });
+                var dist = _this.distancia_de_recorrido_del_mouse(posicion_inicial_x, posicion_inicial_y, evento.worldX, evento.worldY);
+                if (dist.distancia < 5) {
+                    var posicion = _this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
+                    _this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado_con_click", { x: posicion.x, y: posicion.y });
+                }
+                else {
+                }
             }
         });
+    };
+    ModoEditor.prototype.distancia_de_recorrido_del_mouse = function (x, y, x1, y1) {
+        var dx = x - x1;
+        var dy = y - y1;
+        return {
+            distancia: parseInt("" + Math.sqrt(dx * dx + dy * dy), 10),
+            centro_x: (x1 + x) / 2,
+            centro_y: (y1 + y) / 2
+        };
     };
     ModoEditor.prototype.crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara = function () {
         var _this = this;
@@ -9316,6 +9356,17 @@ var ModoEditor = (function (_super) {
                 return false;
             }
             actor_que_se_esta_arrastrando = gameObject;
+            if (pointer.event.metaKey) {
+                _this.distancia = {
+                    desde_x: gameObject.x,
+                    desde_y: gameObject.y,
+                    hasta_x: pointer.worldX,
+                    hasta_y: pointer.worldY,
+                };
+                console.info("Se evita arrastrar el actor porque se tiene que calcular distancia");
+                console.info("Usar este actor como origen de medida", actor_que_se_esta_arrastrando);
+                return false;
+            }
             _this.mover_cursor_de_la_grilla(pointer.worldX, pointer.worldY);
             _this.posicion_anterior_de_arrastre = pointer.position.clone();
             if (!gameObject["es_fondo"]) {
@@ -9332,6 +9383,15 @@ var ModoEditor = (function (_super) {
             if (!actor_que_se_esta_arrastrando) {
                 return null;
             }
+            if (pointer.event.metaKey) {
+                if (_this.actor_bajo_el_puntero_del_mouse && !_this.actor_bajo_el_puntero_del_mouse.es_fondo) {
+                    _this.distancia = __assign(__assign({}, _this.distancia), { hasta_x: _this.actor_bajo_el_puntero_del_mouse.x, hasta_y: _this.actor_bajo_el_puntero_del_mouse.y });
+                }
+                else {
+                    _this.distancia = __assign(__assign({}, _this.distancia), { hasta_x: pointer.worldX, hasta_y: pointer.worldY });
+                }
+                return null;
+            }
             if (gameObject["es_fondo"]) {
                 _this.desplazar_la_camara_desde_el_evento_drag(pointer);
             }
@@ -9339,7 +9399,19 @@ var ModoEditor = (function (_super) {
                 _this.desplazar_actor_desde_el_evento_drag(gameObject, pointer);
             }
         });
+        this.input.on("pointerover", function (evento, objetos) {
+            if (objetos.length > 0) {
+                _this.actor_bajo_el_puntero_del_mouse = objetos[0];
+            }
+            else {
+                _this.actor_bajo_el_puntero_del_mouse = null;
+            }
+        });
         var cuando_termina_de_mover_un_actor = function (pointer, gameObject) {
+            if (_this.distancia) {
+                _this.distancia = null;
+                _this.canvas_auxiliar.clear();
+            }
             if (!gameObject) {
                 return;
             }
@@ -9500,6 +9572,15 @@ var ModoEditor = (function (_super) {
                 _this.input.removeDebug(_this.actor_seleccionado);
             }
             _this.input.enableDebug(sprite, 0xffffff);
+            if (_this.actor_seleccionado) {
+                if (_this.actor_seleccionado.id != actor.id) {
+                    _this.anterior_actor_seleccionado = _this.actor_seleccionado;
+                    console.info("Guardando anterior_actor_seleccionado", {
+                        anterior: _this.anterior_actor_seleccionado,
+                        nuevo: actor
+                    });
+                }
+            }
             _this.actor_seleccionado = sprite;
         };
         this.aplicar_atributos_de_actor_a_sprite(actor, sprite);
@@ -9556,8 +9637,164 @@ var ModoEditor = (function (_super) {
                 this.fps.alpha = 0;
             }
         }
-        if (!this.pilas.game.hasFocus) {
-            this.tecla_meta_pulsada = false;
+        this.dibujar_canvas_auxiliar();
+    };
+    ModoEditor.prototype.dibujar_linea = function (canvas, x0, y0, x1, y1, grosor, color) {
+        this.canvas_auxiliar.lineStyle(grosor, color, 1);
+        this.canvas_auxiliar.lineBetween(x0, y0, x1, y1);
+    };
+    ModoEditor.prototype.dibujar_canvas_auxiliar = function () {
+        if (this.distancia) {
+            this.canvas_auxiliar.clear();
+            var blanco = 0xFFFFFF;
+            var negro = 0x000000;
+            var distancia_diagonal = this.distancia_de_recorrido_del_mouse(this.distancia.desde_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.hasta_y);
+            var distancia_x = this.distancia_de_recorrido_del_mouse(this.distancia.desde_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.desde_y);
+            var distancia_y = this.distancia_de_recorrido_del_mouse(this.distancia.hasta_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.hasta_y);
+            this.dibujar_linea(this.canvas_auxiliar, this.distancia.desde_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.hasta_y, 4, negro);
+            this.dibujar_linea(this.canvas_auxiliar, this.distancia.desde_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.desde_y, 4, negro);
+            this.dibujar_linea(this.canvas_auxiliar, this.distancia.hasta_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.hasta_y, 4, negro);
+            this.dibujar_linea(this.canvas_auxiliar, this.distancia.desde_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.hasta_y, 2, blanco);
+            this.dibujar_linea(this.canvas_auxiliar, this.distancia.desde_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.desde_y, 2, blanco);
+            this.dibujar_linea(this.canvas_auxiliar, this.distancia.hasta_x, this.distancia.desde_y, this.distancia.hasta_x, this.distancia.hasta_y, 2, blanco);
+            this.dibujar_numero(this.canvas_auxiliar, distancia_diagonal.centro_x, distancia_diagonal.centro_y, "" + distancia_diagonal.distancia);
+            this.dibujar_numero(this.canvas_auxiliar, distancia_x.centro_x, distancia_x.centro_y, "" + distancia_x.distancia);
+            this.dibujar_numero(this.canvas_auxiliar, distancia_y.centro_x, distancia_y.centro_y, "" + distancia_y.distancia);
+        }
+    };
+    ModoEditor.prototype.dibujar_numero = function (canvas, x, y, numero) {
+        var numeros = {
+            "0": [
+                [0, 0, 2, 2, 2, 0, 0],
+                [0, 2, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 1, 2, 0, 2, 1, 2],
+                [2, 1, 2, 0, 2, 1, 2],
+                [2, 1, 2, 0, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 2, 0],
+                [0, 0, 2, 2, 2, 0, 0],
+            ],
+            "1": [
+                [0, 0, 0, 2, 0, 0, 0],
+                [0, 0, 2, 1, 2, 0, 0],
+                [0, 2, 1, 1, 2, 0, 0],
+                [2, 1, 2, 1, 2, 0, 0],
+                [2, 2, 2, 1, 2, 0, 0],
+                [0, 0, 2, 1, 2, 0, 0],
+                [2, 2, 2, 1, 2, 2, 2],
+                [2, 1, 1, 1, 1, 1, 2],
+                [2, 2, 2, 2, 2, 2, 2],
+            ],
+            "2": [
+                [0, 0, 2, 2, 2, 0, 0],
+                [0, 2, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 2, 0, 0, 2, 1, 2],
+                [0, 0, 0, 2, 1, 2, 0],
+                [0, 0, 2, 1, 2, 0, 0],
+                [0, 2, 1, 2, 2, 2, 2],
+                [2, 1, 1, 1, 1, 1, 2],
+                [2, 2, 2, 2, 2, 2, 2],
+            ],
+            "3": [
+                [0, 0, 2, 2, 2, 0, 0],
+                [0, 2, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 0, 2, 2, 1, 2],
+                [0, 0, 2, 1, 1, 2, 0],
+                [0, 2, 0, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 2, 0],
+                [0, 0, 2, 2, 2, 0, 0],
+            ],
+            "4": [
+                [0, 0, 0, 0, 2, 2, 2],
+                [0, 0, 0, 2, 1, 1, 2],
+                [0, 0, 2, 1, 2, 1, 2],
+                [0, 2, 1, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 1, 1, 1, 1, 1, 2],
+                [0, 2, 2, 2, 2, 1, 2],
+                [0, 0, 0, 0, 2, 1, 2],
+                [0, 0, 0, 0, 2, 2, 2],
+            ],
+            "5": [
+                [2, 2, 2, 2, 2, 2, 0],
+                [2, 1, 1, 1, 1, 1, 2],
+                [2, 1, 2, 2, 2, 2, 0],
+                [2, 1, 2, 2, 2, 0, 0],
+                [0, 2, 1, 1, 1, 2, 0],
+                [0, 2, 2, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 2, 0],
+                [0, 0, 2, 2, 2, 0, 0],
+            ],
+            "6": [
+                [0, 0, 2, 2, 2, 0, 0],
+                [0, 2, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 2, 0],
+                [2, 1, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 2, 0],
+                [0, 0, 2, 2, 2, 0, 0],
+            ],
+            "7": [
+                [2, 2, 2, 2, 2, 2, 2],
+                [2, 1, 1, 1, 1, 1, 2],
+                [2, 2, 2, 2, 2, 1, 2],
+                [0, 0, 0, 0, 2, 1, 2],
+                [0, 0, 2, 2, 1, 2, 0],
+                [0, 2, 2, 1, 2, 0, 0],
+                [2, 2, 1, 2, 0, 0, 0],
+                [2, 1, 2, 0, 0, 0, 0],
+                [2, 2, 0, 0, 0, 0, 0],
+            ],
+            "8": [
+                [0, 0, 2, 2, 2, 2, 0],
+                [0, 2, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 2, 0],
+                [0, 0, 2, 2, 2, 0, 0],
+            ],
+            "9": [
+                [0, 0, 2, 2, 2, 0, 0],
+                [0, 2, 1, 1, 1, 2, 0],
+                [2, 1, 2, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 1, 2],
+                [0, 2, 2, 2, 2, 1, 2],
+                [2, 1, 2, 2, 2, 1, 2],
+                [0, 2, 1, 1, 1, 2, 0],
+                [0, 0, 2, 2, 2, 0, 0],
+            ],
+        };
+        console.assert(typeof (numero) === 'string');
+        for (var indice = 0; indice < numero.length; indice++) {
+            var n = numero[indice];
+            var matriz = numeros[n];
+            console.assert(matriz);
+            var cantidad_de_filas = 9;
+            var cantidad_de_columnas = 7;
+            for (var f = 0; f < cantidad_de_filas; f++) {
+                for (var c = 0; c < cantidad_de_columnas; c++) {
+                    var p = matriz[f][c];
+                    if (p === 1) {
+                        canvas.fillStyle(0xFFFFFF, 1);
+                        canvas.fillPoint(x + c + indice * 8, y + f);
+                    }
+                    if (p === 2) {
+                        canvas.fillStyle(0x000000, 0.75);
+                        canvas.fillPoint(x + c + indice * 8, y + f);
+                    }
+                }
+            }
         }
     };
     ModoEditor.prototype.eliminar_actor_por_id = function (id) {
@@ -9567,6 +9804,7 @@ var ModoEditor = (function (_super) {
         if (this.actor_seleccionado && this.actor_seleccionado.id == actor_a_eliminar[0].id) {
             this.input.removeDebug(this.actor_seleccionado);
             this.actor_seleccionado = null;
+            this.anterior_actor_seleccionado = null;
         }
         if (actor_a_eliminar[0].figura) {
             this.pilas.Phaser.Physics.Matter.Matter.World.remove(this.pilas.modo.matter.world.localWorld, actor_a_eliminar[0].figura);

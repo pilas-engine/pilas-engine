@@ -1,0 +1,1461 @@
+{
+  "titulo": "Proyecto",
+  "ancho": 400,
+  "alto": 224,
+  "tamaño": "400x224",
+  "nombre_de_la_escena_inicial": "escena1",
+  "imagenes": [
+    {
+      "nombre": "cuadro-17",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej/zKqz6nOrUjYpcMz/AE0pLDPrB+SYAAAAAXRSTlMAQObYZgAAAMBJREFUeNq10tEOAyEIRNHFLtz//+Ouk5jaRuCpEx9PBoxefwxKq0KBTrUOIMxCoWwCrK4jQKCtA0mlXO4DgdQNRYy8ELPxnNGsBzaQo2BsjHQ75mpiABpNegGzaRliQcZEFDHOQwEQIsLMjm5DEDbD8RIKqiFnEWuYgYmfVYTYqoPs7y72AqQSJueeqIvlHJ/hvgvnK/eT5Fndd5X9zW9GypZjK8sdkJYpKBNuZdWCiLVOy5WMBylNnQzQs58nfQM9/AtNFX2lWQAAAABJRU5ErkJggg=="
+    },
+    {
+      "nombre": "cuadro-16",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAMRJREFUeNrN1DEOhDAMBdF8HHvuf+OVgwuUVUyxzY6A6kEMkRh/E6t3FFnvCpV7U1LPSiWD94dBBDTTP+KwYDG4D5q5MJNMohufpTBEMz8PdnRmAIuZGRyZga3ZMg77bVnRYjuSyhl1B2wujUR9DgvuJHYFUmTJ8kpI8L2mFOVuFSH22ZQRmVtCp9jmKOZ+Xe5+EZIO7+pZMU5bjz9iHMLfGfSqYnrPSs1NtQzoVToKMRoGM02ili06mmDOdY4+IC+//fE+5acKuaefQPIAAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "cuadro-15",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE0pcMz/zKqrUjb/8ej95kDnW0v6AAAAAXRSTlMAQObYZgAAAL9JREFUeNqd04GqwyAQRNHertn+/x8/Zw1KeRmFDkEMOcyCxNevoXJE7wpndXa3ynwDHMqSsWFfNgwnJuMVMJFiqwZrlcNEWsvsz5YhtWdIFaORONcFQLEesKyhZbDmmVLUM+BWgBuKsqCy+8/WZHdomVojQvz54ChFLmeZ4thyxaQ+n+gL7jy6ImKy3c2LGX8Troul8OoKllO9Y8GEKueJfTu9PrFyKLfyU0cBxTCMOQdfJje/YMr+N5+VnFc+fwMeBXzaUHyaAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-14",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAG1BMVEVHcEwpLDP/AE0pcMz/zKr/8eirUjb95kCz6nPkGcAlAAAAAXRSTlMAQObYZgAAANNJREFUeNq90tGKwzAMRNHcOHL3/7+4GiEQu3i2b72UiOKD4odcPuD6HBHxn6PSSIdHt9Iyv7CR3DCrIm4gwCxrJRbxeRnqrCg1wc3xhcw5Nf29eJ6I/AGeUYqHqHXm/jAMqUMpyIplYNmTqu6muCxTop7Rx6iaZ0TDG2XUXcnlMLuuViVKedYtQfsFRUSztfJpWChINQw4MAKEXi89gL3hwPihWfmd/WWUY1UaUoe3qs2apIZN7L3azTLD2oFflkxA6a+GYaoPpSz7dejYGB9C3+gNCqMF11OK4sEAAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "cuadro-13",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAMNJREFUeNrd1FGKgDAMRVHjS7z73/HQpKKSsX7M31xQpB5sQOj2TyP7Rsdo7QqV+1ZmazbVmsHJGK2mv4KXDSfjvBZzIQkh4J2BZCbJWMxPMYRBF7mGBJBMUnOYGckEyl3L8VQjQBUow4zGcv5S5AONkewJU91ZrRwVqjgg1RNyuohxA9b/Pabb3iJS7XtE7GzA76qaDHfoCOKKodzpyol7A9GZe/BkvLCA7495zVSFOwsWXKNO1dn9TVeTwfYZ8Ocz6gcOSAsC6AmuUgAAAABJRU5ErkJggg=="
+    },
+    {
+      "nombre": "cuadro-12",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAALFJREFUeNrd0+EKhCAQReGmm533f+PNOyxLpM7C/tsDicSHitT2n+FKdDpqVTvSRJwAxWJBTlgvloaC2cwVkIhsulQyIYliRxuhJQMpQlKwuA2SIQIGgj5KAGaj0xERmAnkXdNxVz1AGcgRwYP5/KnwhAfD7A6tbsxvzgxlDL4RgLdrrQ+wujezdNssmtW+t2tgrty3LPuZ8TGpalf97yXjOI7rsSpZj/WeZnbb2sGIvQAJDApig9CyNwAAAABJRU5ErkJggg=="
+    },
+    {
+      "nombre": "cuadro-11",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE3/8ej/zKopcMz95kCrUjYd07rHAAAAAXRSTlMAQObYZgAAAL9JREFUeNrl0kEOwyAMRNH8gMP9b1x7BAsHAeqiq04EROYJEMn130E5ozuyd0LdnVUpezaU2HkxIvvTj8Biw87obcVkaq3EA2uGq1JcFjbnBzEqBWahmgsAMc/kKD4jVl1pVznIKkIIBfroxYn184dCL0wMsQylElNFTNemcINUhgxnFh2w/+7W3cJ4M6nnMe/QHm/VGpgyGDQvTswMSwnFSwWzrxliQFaZwXKxhoByAYTKTDXNpdp8H4t/8Cf5AItsBfneUbVdAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-10",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAK1JREFUeNrd0sEKwyAQRdFMX8z9/z9u8saNJDql3fUuROSgIm7/Ga5Eh6NWtesq4gAoNgtywnqzNBTMZq6AjrLpVsmEJIoTbYSWDKQIScHiNUiGCLgLryEBmD3djojATCCfmo5RXQHKQI4Ibsz3T4Un3BhmI7QamFeODGU8/BEAumvtGmD1bmbptlk0q9ernQNz5T5l2c+MUVUOCmZnuM1jpzrSnWq/omB77zv2BgB9CjtCfSdKAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-09",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAG1BMVEVHcEz/8ej95kD/zKqz6nOrUjYpcMz/AE0pLDORnlZ/AAAAAXRSTlMAQObYZgAAAK5JREFUeNrl0lsOhCAQRNFpGbD2v2KrOh3iBwUL8AYfkRPR6O/LITujW+1donJnFbFnpcSA8810ZhxKzWAWLEaewzGF1iI4ZCxDKjR4BqoXc44CLBlzTpNU+WzKMlbUM9Q0lI6WTZjtvqegIrJKjSGMP9iOlYsIwKti6VaMlxNdl3Z0SxbqxYiwZhCras0lw0TDvajcmPn/g3G6GJVhvXfN48xEuHXmHaBNfDrfkj0D4wtJcSiuGAAAAABJRU5ErkJggg=="
+    },
+    {
+      "nombre": "cuadro-08",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAG1BMVEVHcEz/8ej95kD/zKqz6nOrUjYpcMz/AE0pLDORnlZ/AAAAAXRSTlMAQObYZgAAALxJREFUeNrd0kEOwjAMRNEOxsm//4nRIAuKiFPW/EUbVU9OFPX4y8Bdo+m4ULPiByXtWak948VwHSpVQbNhMZh42TFHhBQS0DOwIhCb83NirYvAziy8blnghxSuZa5oy4BSQL1ZsjMESdBfW1Fht1JujGE9AbasnKSvw+GvpYrN1Z5yYHS7+YHtsWB8MjJhxbgzKqwyv5id2SsjWF2uFW/W/nE2tMMqcjhcP4zMcs/B/bA87+RFxxzHPnr2AH/aDKlgL/G3AAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-07",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAJtJREFUeNrl0jEOxDAIBdFlMZn733jjL8vaIoD7TJHqSZCEz5tD9eia1U5IcaDMSrZVydiMWbn9DpKBi8EF2VuwjLuZa2zOkMIxiv35Y6lzBxC7g5Q5uHabpUyJ5gxYCsiHwobNLQnuifWvj7gfreod6zjEIGdSRkR8MQo2A45YBFEw5CAiuu+GVEgVcIxGKcZMqmaqZZyx8XQePzA4CGPDMEtPAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-06",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAFVBMVEVHcEz/8ej/zKqrUjYpcMz/AE0pLDMXTWmvAAAAAXRSTlMAQObYZgAAAKNJREFUeNrl0cEKxCAMRdFq7f3/T568VHAKfRFmOxcpLg6pkOOfI9ujS9Uu0XR71VrNphKD/TDdoHr9CvPDyeA+jil6by2OjGWkouMZUos5F4IoWQSW9VD5NuWZEi0YMNV9w7EHlDJNqKgWz7iuMeJTqSYlp9XXTEn5LSymMOo8Ycjt2BjLgVFiX/3OUi0GziXjNvhxEOqYmwx3Ru+Ox2jjlGcfPg4HnwENQMgAAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "cuadro-05",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej/zKqz6nOrUjYpcMz/AE0pLDPrB+SYAAAAAXRSTlMAQObYZgAAAKpJREFUeNrd0UEWgzAIRVGhSd7+d1yhcpqBH+e+qVeC5nhlZM9oRb1LVO5RmbWsVM+gGFG/fQXiQOr5AvUVZdzN3AzQjFQ4RrM/G5POHSDZGUjm4Llb1DAvKhlwKcABxXZoVk5DUhny3plzwloW0agVdcyCrSutzoJVfADFygGMMe4dcysUt/9jtqz6M5IBehiAHAajJv3eEcPGWamEMeye7efkLO2Oh9DsCwa/ChFrNAhxAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-04",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAJhJREFUeNrl0jsOQzEIBdHwMJ797zjxlWOlAdxn6iOBP69/DtWjuaqdkOJCmZXsqJJxGKty+xMkAzeDCdkpvsbdzDU2Z0jhGMX+/LDUuQOIfYKUObh2W6VMieYM2ArIh8KBzV9CUHVPGhFzzk71jv03xICUSRlPRDwYOVvdsliJFQ7EmnuTQihJZFexMeCORYyVVO4Qal3C3ongCM6OhuZCAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-03",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAFVBMVEVHcEz/8ej/zKqrUjYpcMz/AE0pLDMXTWmvAAAAAXRSTlMAQObYZgAAAHtJREFUeNrt0TEOxDAIRNEdzPz7H3ll7HQhriPlNxS8BvH7+npHVGfkGQflHWdl6YEBlxJAo+zNFodG7SiDOyaxYdUwSahURATdBZrZUXWOxQh4YBhLcgAF4U5hPCvQH5BeZWZGRGZyYkm2LE+qopZjRk26x48rxuhdz/5WFgVVvzO0JQAAAABJRU5ErkJggg=="
+    },
+    {
+      "nombre": "cuadro-02",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAJtJREFUeNrd0jEOAyEMRFFY1vvvf+PEDKIbk7T7C9M8CSTcXhmzM3qy2gnJnVXvJduqZGxGVr5+B+bCxeCBPA3LGArwDMaK4v0kywE4J8FYgWVDSlmmoGLAUoC/FDZUzSUoevjRiCjXKJFznnFS1xXfYRxzGSM2Mz/fs9jRO4bxI+PMppOA6XBfEDOdfuFCodk8uzOdnt0rNP9mH/ohCfwUdpe9AAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "cuadro-01",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE3/8ej/zKopcMz95kCrUjYd07rHAAAAAXRSTlMAQObYZgAAAKRJREFUeNrd0kEOwyAMBdFObSf3v3GxHaJ28aHddoRg8yRA8PjLqPboma1do3Z7ZbZkU60ZNyNbn34GYsOLQQ5xi2nczcYANKMUjrE4P29MOneAYiOQzMHrbJlkWVPNgEsBelP4gK2k9I7Ni0bE8hslUk4zduo4YkwgmJkNNJl6ecviDjME40vGnpVrAeVQTxBVr/rDRUfPD83OrFfNzit6/pm9AA1GBabmjCHNAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "tile-01",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAANUlEQVR4Ae3MsQkAMAwDwew/mbZK4ur7x+DGgi9PZze/62GVn8IhiUlikpgkJovJ48YDgekB4816J8eK4kQAAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "tile-02",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAFElEQVR4AWMAgRMkoGGsYVTDqAYAFpK7gVKNLJgAAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "tile-03",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAADFBMVEVHcEwAyAAAeEgAAAA191tqAAAAAXRSTlMAQObYZgAAADdJREFUeNqVyMEJACAMwECb7r+zRSIUFMH8ciOjRcQnAG/gBjRAoC9ZgC+UmH+A0l7xlVzrS3snv5IBb1FAJ30AAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "tile-04",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAD1BMVEUAAADImFgAyAB4aBgAeEg9jTVAAAAAPklEQVR42pXIQQ6AMBDDQHfj/7+ZA6CFqqrUnOKhvrOKM1D34ApkasGpH7Eb7QGEf5MWckNAFfJCH4Ax0oMLRUcCZKXEPJoAAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "tile-05",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAADFBMVEUAAAB4aBjImFjgwFAyqr6jAAAAJUlEQVR4AWNgmzY1gIHR0dGBgcfGQoBB//+vAHRC+vWrAGLVAQBHsh3pguR4HwAAAABJRU5ErkJggg=="
+    },
+    {
+      "nombre": "tile-06",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABnRSTlMARwBwAEyv7uYjAAAALUlEQVR4AWNwL/DBihhwAHwaftxQQEN010C5H36AEBDcWGABR/TRMPDxMBoPAPY5BxByjNtMAAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "tile-07",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAALElEQVR4AWMgGdxYYIGJgOI/biggy0LYdNBADkAzFYJQxRFsumgYHPEwGg8AQ9n5AQFrmb0AAAAASUVORK5CYII="
+    },
+    {
+      "nombre": "tile-08",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACVBMVEVHcEwAAAAAyAAVSFTVAAAAAXRSTlMAQObYZgAAACZJREFUeAFjIBEwggg2BwYBFqkJDCmSQCJTKmsiQ1ZW1jIgsWoZAFBZB7P5CuN3AAAAAElFTkSuQmCC"
+    },
+    {
+      "nombre": "tile-09",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAXklEQVR4AWMgGbz48IMkxMBwgkTEUOGBTQIkDkHoIkCAWwIhixCpyJBAk4CLQxCYhxDBLoEHMZyYEYEpChSEIzRBkAYiEWkaHhwIACK4BoQQ3TVgijAQdDrJnqZUAwCeSVXwxPjzoQAAAABJRU5ErkJggg=="
+    },
+    {
+      "nombre": "tile-10",
+      "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEXImFjgwFC+YDiQAAAAHElEQVR4AWOAAAUgkmBggyAGKACyJCAIJA0RAgAdEAE1OtGZiAAAAABJRU5ErkJggg=="
+    }
+  ],
+  "animaciones": [
+    {
+      "nombre": "salta",
+      "cuadros": [
+        {
+          "nombre": "cuadro-14",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAG1BMVEVHcEwpLDP/AE0pcMz/zKr/8eirUjb95kCz6nPkGcAlAAAAAXRSTlMAQObYZgAAANNJREFUeNq90tGKwzAMRNHcOHL3/7+4GiEQu3i2b72UiOKD4odcPuD6HBHxn6PSSIdHt9Iyv7CR3DCrIm4gwCxrJRbxeRnqrCg1wc3xhcw5Nf29eJ6I/AGeUYqHqHXm/jAMqUMpyIplYNmTqu6muCxTop7Rx6iaZ0TDG2XUXcnlMLuuViVKedYtQfsFRUSztfJpWChINQw4MAKEXi89gL3hwPihWfmd/WWUY1UaUoe3qs2apIZN7L3azTLD2oFflkxA6a+GYaoPpSz7dejYGB9C3+gNCqMF11OK4sEAAAAASUVORK5CYII="
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "corre",
+      "cuadros": [
+        {
+          "nombre": "cuadro-10",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAK1JREFUeNrd0sEKwyAQRdFMX8z9/z9u8saNJDql3fUuROSgIm7/Ga5Eh6NWtesq4gAoNgtywnqzNBTMZq6AjrLpVsmEJIoTbYSWDKQIScHiNUiGCLgLryEBmD3djojATCCfmo5RXQHKQI4Ibsz3T4Un3BhmI7QamFeODGU8/BEAumvtGmD1bmbptlk0q9ernQNz5T5l2c+MUVUOCmZnuM1jpzrSnWq/omB77zv2BgB9CjtCfSdKAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-11",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE3/8ej/zKopcMz95kCrUjYd07rHAAAAAXRSTlMAQObYZgAAAL9JREFUeNrl0kEOwyAMRNH8gMP9b1x7BAsHAeqiq04EROYJEMn130E5ozuyd0LdnVUpezaU2HkxIvvTj8Biw87obcVkaq3EA2uGq1JcFjbnBzEqBWahmgsAMc/kKD4jVl1pVznIKkIIBfroxYn184dCL0wMsQylElNFTNemcINUhgxnFh2w/+7W3cJ4M6nnMe/QHm/VGpgyGDQvTswMSwnFSwWzrxliQFaZwXKxhoByAYTKTDXNpdp8H4t/8Cf5AItsBfneUbVdAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-12",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAALFJREFUeNrd0+EKhCAQReGmm533f+PNOyxLpM7C/tsDicSHitT2n+FKdDpqVTvSRJwAxWJBTlgvloaC2cwVkIhsulQyIYliRxuhJQMpQlKwuA2SIQIGgj5KAGaj0xERmAnkXdNxVz1AGcgRwYP5/KnwhAfD7A6tbsxvzgxlDL4RgLdrrQ+wujezdNssmtW+t2tgrty3LPuZ8TGpalf97yXjOI7rsSpZj/WeZnbb2sGIvQAJDApig9CyNwAAAABJRU5ErkJggg=="
+        },
+        {
+          "nombre": "cuadro-13",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAMNJREFUeNrd1FGKgDAMRVHjS7z73/HQpKKSsX7M31xQpB5sQOj2TyP7Rsdo7QqV+1ZmazbVmsHJGK2mv4KXDSfjvBZzIQkh4J2BZCbJWMxPMYRBF7mGBJBMUnOYGckEyl3L8VQjQBUow4zGcv5S5AONkewJU91ZrRwVqjgg1RNyuohxA9b/Pabb3iJS7XtE7GzA76qaDHfoCOKKodzpyol7A9GZe/BkvLCA7495zVSFOwsWXKNO1dn9TVeTwfYZ8Ocz6gcOSAsC6AmuUgAAAABJRU5ErkJggg=="
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "camina",
+      "cuadros": [
+        {
+          "nombre": "cuadro-04",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAJhJREFUeNrl0jsOQzEIBdHwMJ797zjxlWOlAdxn6iOBP69/DtWjuaqdkOJCmZXsqJJxGKty+xMkAzeDCdkpvsbdzDU2Z0jhGMX+/LDUuQOIfYKUObh2W6VMieYM2ArIh8KBzV9CUHVPGhFzzk71jv03xICUSRlPRDwYOVvdsliJFQ7EmnuTQihJZFexMeCORYyVVO4Qal3C3ongCM6OhuZCAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-05",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej/zKqz6nOrUjYpcMz/AE0pLDPrB+SYAAAAAXRSTlMAQObYZgAAAKpJREFUeNrd0UEWgzAIRVGhSd7+d1yhcpqBH+e+qVeC5nhlZM9oRb1LVO5RmbWsVM+gGFG/fQXiQOr5AvUVZdzN3AzQjFQ4RrM/G5POHSDZGUjm4Llb1DAvKhlwKcABxXZoVk5DUhny3plzwloW0agVdcyCrSutzoJVfADFygGMMe4dcysUt/9jtqz6M5IBehiAHAajJv3eEcPGWamEMeye7efkLO2Oh9DsCwa/ChFrNAhxAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-06",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAFVBMVEVHcEz/8ej/zKqrUjYpcMz/AE0pLDMXTWmvAAAAAXRSTlMAQObYZgAAAKNJREFUeNrl0cEKxCAMRdFq7f3/T568VHAKfRFmOxcpLg6pkOOfI9ujS9Uu0XR71VrNphKD/TDdoHr9CvPDyeA+jil6by2OjGWkouMZUos5F4IoWQSW9VD5NuWZEi0YMNV9w7EHlDJNqKgWz7iuMeJTqSYlp9XXTEn5LSymMOo8Ycjt2BjLgVFiX/3OUi0GziXjNvhxEOqYmwx3Ru+Ox2jjlGcfPg4HnwENQMgAAAAASUVORK5CYII="
+        },
+        {
+          "nombre": "cuadro-07",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAJtJREFUeNrl0jEOxDAIBdFlMZn733jjL8vaIoD7TJHqSZCEz5tD9eia1U5IcaDMSrZVydiMWbn9DpKBi8EF2VuwjLuZa2zOkMIxiv35Y6lzBxC7g5Q5uHabpUyJ5gxYCsiHwobNLQnuifWvj7gfreod6zjEIGdSRkR8MQo2A45YBFEw5CAiuu+GVEgVcIxGKcZMqmaqZZyx8XQePzA4CGPDMEtPAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-08",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAG1BMVEVHcEz/8ej95kD/zKqz6nOrUjYpcMz/AE0pLDORnlZ/AAAAAXRSTlMAQObYZgAAALxJREFUeNrd0kEOwjAMRNEOxsm//4nRIAuKiFPW/EUbVU9OFPX4y8Bdo+m4ULPiByXtWak948VwHSpVQbNhMZh42TFHhBQS0DOwIhCb83NirYvAziy8blnghxSuZa5oy4BSQL1ZsjMESdBfW1Fht1JujGE9AbasnKSvw+GvpYrN1Z5yYHS7+YHtsWB8MjJhxbgzKqwyv5id2SsjWF2uFW/W/nE2tMMqcjhcP4zMcs/B/bA87+RFxxzHPnr2AH/aDKlgL/G3AAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-09",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAG1BMVEVHcEz/8ej95kD/zKqz6nOrUjYpcMz/AE0pLDORnlZ/AAAAAXRSTlMAQObYZgAAAK5JREFUeNrl0lsOhCAQRNFpGbD2v2KrOh3iBwUL8AYfkRPR6O/LITujW+1donJnFbFnpcSA8810ZhxKzWAWLEaewzGF1iI4ZCxDKjR4BqoXc44CLBlzTpNU+WzKMlbUM9Q0lI6WTZjtvqegIrJKjSGMP9iOlYsIwKti6VaMlxNdl3Z0SxbqxYiwZhCras0lw0TDvajcmPn/g3G6GJVhvXfN48xEuHXmHaBNfDrfkj0D4wtJcSiuGAAAAABJRU5ErkJggg=="
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "parado",
+      "cuadros": [
+        {
+          "nombre": "cuadro-01",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE3/8ej/zKopcMz95kCrUjYd07rHAAAAAXRSTlMAQObYZgAAAKRJREFUeNrd0kEOwyAMBdFObSf3v3GxHaJ28aHddoRg8yRA8PjLqPboma1do3Z7ZbZkU60ZNyNbn34GYsOLQQ5xi2nczcYANKMUjrE4P29MOneAYiOQzMHrbJlkWVPNgEsBelP4gK2k9I7Ni0bE8hslUk4zduo4YkwgmJkNNJl6ecviDjME40vGnpVrAeVQTxBVr/rDRUfPD83OrFfNzit6/pm9AA1GBabmjCHNAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-02",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEz/8ej95kD/zKqrUjYpcMz/AE0pLDP3jkGeAAAAAXRSTlMAQObYZgAAAJtJREFUeNrd0jEOAyEMRFFY1vvvf+PEDKIbk7T7C9M8CSTcXhmzM3qy2gnJnVXvJduqZGxGVr5+B+bCxeCBPA3LGArwDMaK4v0kywE4J8FYgWVDSlmmoGLAUoC/FDZUzSUoevjRiCjXKJFznnFS1xXfYRxzGSM2Mz/fs9jRO4bxI+PMppOA6XBfEDOdfuFCodk8uzOdnt0rNP9mH/ohCfwUdpe9AAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-01",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE3/8ej/zKopcMz95kCrUjYd07rHAAAAAXRSTlMAQObYZgAAAKRJREFUeNrd0kEOwyAMBdFObSf3v3GxHaJ28aHddoRg8yRA8PjLqPboma1do3Z7ZbZkU60ZNyNbn34GYsOLQQ5xi2nczcYANKMUjrE4P29MOneAYiOQzMHrbJlkWVPNgEsBelP4gK2k9I7Ni0bE8hslUk4zduo4YkwgmJkNNJl6ecviDjME40vGnpVrAeVQTxBVr/rDRUfPD83OrFfNzit6/pm9AA1GBabmjCHNAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-01",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE3/8ej/zKopcMz95kCrUjYd07rHAAAAAXRSTlMAQObYZgAAAKRJREFUeNrd0kEOwyAMBdFObSf3v3GxHaJ28aHddoRg8yRA8PjLqPboma1do3Z7ZbZkU60ZNyNbn34GYsOLQQ5xi2nczcYANKMUjrE4P29MOneAYiOQzMHrbJlkWVPNgEsBelP4gK2k9I7Ni0bE8hslUk4zduo4YkwgmJkNNJl6ecviDjME40vGnpVrAeVQTxBVr/rDRUfPD83OrFfNzit6/pm9AA1GBabmjCHNAAAAAElFTkSuQmCC"
+        },
+        {
+          "nombre": "cuadro-01",
+          "contenido": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAMAAADSK7iXAAAAGFBMVEVHcEwpLDP/AE3/8ej/zKopcMz95kCrUjYd07rHAAAAAXRSTlMAQObYZgAAAKRJREFUeNrd0kEOwyAMBdFObSf3v3GxHaJ28aHddoRg8yRA8PjLqPboma1do3Z7ZbZkU60ZNyNbn34GYsOLQQ5xi2nczcYANKMUjrE4P29MOneAYiOQzMHrbJlkWVPNgEsBelP4gK2k9I7Ni0bE8hslUk4zduo4YkwgmJkNNJl6ecviDjME40vGnpVrAeVQTxBVr/rDRUfPD83OrFfNzit6/pm9AA1GBabmjCHNAAAAAElFTkSuQmCC"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:explosion/explosion_001",
+          "sprite": "imagenes-explosion-explosion_001"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_002",
+          "sprite": "imagenes-explosion-explosion_002"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_003",
+          "sprite": "imagenes-explosion-explosion_003"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_004",
+          "sprite": "imagenes-explosion-explosion_004"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_005",
+          "sprite": "imagenes-explosion-explosion_005"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_006",
+          "sprite": "imagenes-explosion-explosion_006"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_007",
+          "sprite": "imagenes-explosion-explosion_007"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_008",
+          "sprite": "imagenes-explosion-explosion_008"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_009",
+          "sprite": "imagenes-explosion-explosion_009"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_010",
+          "sprite": "imagenes-explosion-explosion_010"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_011",
+          "sprite": "imagenes-explosion-explosion_011"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_012",
+          "sprite": "imagenes-explosion-explosion_012"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_013",
+          "sprite": "imagenes-explosion-explosion_013"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_014",
+          "sprite": "imagenes-explosion-explosion_014"
+        },
+        {
+          "nombre": "imagenes:explosion/explosion_015",
+          "sprite": "imagenes-explosion-explosion_015"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "mini_explosion",
+      "cuadros": [
+        {
+          "nombre": "imagenes:mini-explosion/explosion_0",
+          "sprite": "imagenes-mini-explosion-explosion_0"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_1",
+          "sprite": "imagenes-mini-explosion-explosion_1"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_2",
+          "sprite": "imagenes-mini-explosion-explosion_2"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_3",
+          "sprite": "imagenes-mini-explosion-explosion_3"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_4",
+          "sprite": "imagenes-mini-explosion-explosion_4"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_5",
+          "sprite": "imagenes-mini-explosion-explosion_5"
+        },
+        {
+          "nombre": "imagenes:mini-explosion/explosion_6",
+          "sprite": "imagenes-mini-explosion-explosion_6"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "golpe",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/golpe-1",
+          "sprite": "imagenes-efectos-golpe-1"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-2",
+          "sprite": "imagenes-efectos-golpe-2"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-3",
+          "sprite": "imagenes-efectos-golpe-3"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-4",
+          "sprite": "imagenes-efectos-golpe-4"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-5",
+          "sprite": "imagenes-efectos-golpe-5"
+        },
+        {
+          "nombre": "imagenes:efectos/golpe-6",
+          "sprite": "imagenes-efectos-golpe-6"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "chispa",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/chispa-1",
+          "sprite": "imagenes-efectos-chispa-1"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-2",
+          "sprite": "imagenes-efectos-chispa-2"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-3",
+          "sprite": "imagenes-efectos-chispa-3"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-4",
+          "sprite": "imagenes-efectos-chispa-4"
+        },
+        {
+          "nombre": "imagenes:efectos/chispa-5",
+          "sprite": "imagenes-efectos-chispa-5"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "humo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:efectos/humo-01",
+          "sprite": "imagenes-efectos-humo-01"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-02",
+          "sprite": "imagenes-efectos-humo-02"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-03",
+          "sprite": "imagenes-efectos-humo-03"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-04",
+          "sprite": "imagenes-efectos-humo-04"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-05",
+          "sprite": "imagenes-efectos-humo-05"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-06",
+          "sprite": "imagenes-efectos-humo-06"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-07",
+          "sprite": "imagenes-efectos-humo-07"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-08",
+          "sprite": "imagenes-efectos-humo-08"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-09",
+          "sprite": "imagenes-efectos-humo-09"
+        },
+        {
+          "nombre": "imagenes:efectos/humo-10",
+          "sprite": "imagenes-efectos-humo-10"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "hombre_pixel_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_1",
+          "sprite": "imagenes-pixelados-pixel_player_1"
+        },
+        {
+          "nombre": "imagenes:pixelados/pixel_player_2",
+          "sprite": "imagenes-pixelados-pixel_player_2"
+        }
+      ],
+      "velocidad": "15"
+    },
+    {
+      "nombre": "hombre_pixel_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pixelados/pixel_player_0",
+          "sprite": "imagenes-pixelados-pixel_player_0"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "fantasma_azul_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_0",
+          "sprite": "imagenes-pacman-fantasma_azul_0"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_azul_1",
+          "sprite": "imagenes-pacman-fantasma_azul_1"
+        }
+      ],
+      "velocidad": "10"
+    },
+    {
+      "nombre": "fantasma_camina",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/fantasma_6",
+          "sprite": "imagenes-pacman-fantasma_6"
+        },
+        {
+          "nombre": "imagenes:pacman/fantasma_7",
+          "sprite": "imagenes-pacman-fantasma_7"
+        }
+      ],
+      "velocidad": "10"
+    },
+    {
+      "nombre": "moneda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:monedas/moneda_0",
+          "sprite": "imagenes-monedas-moneda_0"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_1",
+          "sprite": "imagenes-monedas-moneda_1"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_2",
+          "sprite": "imagenes-monedas-moneda_2"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_3",
+          "sprite": "imagenes-monedas-moneda_3"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_4",
+          "sprite": "imagenes-monedas-moneda_4"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_5",
+          "sprite": "imagenes-monedas-moneda_5"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_6",
+          "sprite": "imagenes-monedas-moneda_6"
+        },
+        {
+          "nombre": "imagenes:monedas/moneda_7",
+          "sprite": "imagenes-monedas-moneda_7"
+        }
+      ],
+      "velocidad": "30"
+    },
+    {
+      "nombre": "pacman_come",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_5",
+          "sprite": "imagenes-pacman-pacman_5"
+        },
+        {
+          "nombre": "imagenes:pacman/pacman_6",
+          "sprite": "imagenes-pacman-pacman_6"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "pacman_espera",
+      "cuadros": [
+        {
+          "nombre": "imagenes:pacman/pacman_4",
+          "sprite": "imagenes-pacman-pacman_4"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "nave_girando_a_la_derecha",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_derecha_1",
+          "sprite": "imagenes-nave-nave_derecha_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_derecha_2",
+          "sprite": "imagenes-nave-nave_derecha_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_girando_a_la_izquierda",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_izquierda_1",
+          "sprite": "imagenes-nave-nave_izquierda_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_izquierda_2",
+          "sprite": "imagenes-nave-nave_izquierda_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanzando",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_en_reposo",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_reposo",
+          "sprite": "imagenes-nave-nave_reposo"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "gallina_vuela",
+      "cuadros": [
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_1",
+          "sprite": "imagenes-gallina-gallina_vuela_1"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_3",
+          "sprite": "imagenes-gallina-gallina_vuela_3"
+        },
+        {
+          "nombre": "imagenes:gallina/gallina_vuela_2",
+          "sprite": "imagenes-gallina-gallina_vuela_2"
+        }
+      ],
+      "velocidad": "20"
+    },
+    {
+      "nombre": "nave_avanza",
+      "cuadros": [
+        {
+          "nombre": "imagenes:nave/nave_avanza_1",
+          "sprite": "imagenes-nave-nave_avanza_1"
+        },
+        {
+          "nombre": "imagenes:nave/nave_avanza_2",
+          "sprite": "imagenes-nave-nave_avanza_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_salta",
+          "sprite": "imagenes-conejo-conejo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "conejo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_parado1",
+          "sprite": "imagenes-conejo-conejo_parado1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_parado2",
+          "sprite": "imagenes-conejo-conejo_parado2"
+        }
+      ],
+      "velocidad": "2"
+    },
+    {
+      "nombre": "conejo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:conejo/conejo_camina1",
+          "sprite": "imagenes-conejo-conejo_camina1"
+        },
+        {
+          "nombre": "imagenes:conejo/conejo_camina2",
+          "sprite": "imagenes-conejo-conejo_camina2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_camina",
+      "velocidad": 15,
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_camina_1",
+          "sprite": "imagenes-bmo-bmo_camina_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_camina_2",
+          "sprite": "imagenes-bmo-bmo_camina_2"
+        }
+      ]
+    },
+    {
+      "nombre": "bmo_escala",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_escala_1",
+          "sprite": "imagenes-bmo-bmo_escala_1"
+        },
+        {
+          "nombre": "imagenes:bmo/bmo_escala_2",
+          "sprite": "imagenes-bmo-bmo_escala_2"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "bmo_salta",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_salta",
+          "sprite": "imagenes-bmo-bmo_salta"
+        }
+      ],
+      "velocidad": 10
+    },
+    {
+      "nombre": "bmo_parado",
+      "cuadros": [
+        {
+          "nombre": "imagenes:bmo/bmo_parado",
+          "sprite": "imagenes-bmo-bmo_parado"
+        }
+      ],
+      "velocidad": 10
+    }
+  ],
+  "codigos": {
+    "escenas": [
+      {
+        "nombre": "escena1",
+        "codigo": "class escena1 extends Escena {\n  iniciar() {\n    this.pilas.definir_mapa({\n      1: \"p1\",\n      2: \"p2\",\n      3: \"p3\",\n      4: \"p4\",\n      5: \"p5\",\n    });\n\n    this.pilas.crear_mapa(`\n    4..........................................54......\n    4..........................................54......\n    4..........................................54......\n    4..........................................54......\n    4..........................................54......\n    4................54........................54......\n    4................54........................54......\n    4...........111111111111111111.............54......\n    4...........333333333333333333111..........54......\n    111111111111333333333333333333333111111111111111111\n    333333333333333333333333333333333333333333333333333\n    `, 16, 240, 0)\n  }\n\n  actualizar() {\n\n  }\n}"
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "mario",
+        "codigo": "// @ts-ignore\nclass mario extends Actor {\n  contador: number; /* sirve para conocer si el actor estuvo \n                       caminando mas de 1 segundo, si es así\n                       sirve para que pueda comenzar a correr */\n  vy = 0; // velocidad vertical\n  vx = 0; // velocidad de movimiento horizontal en el salto\n  pies: Laser;\n  derecha: Laser;\n  izquierda: Laser;\n\n  distancia_al_suelo: number;\n  distancia_derecha = 0;   // distancia a paredes\n  distancia_izquierda = 0; // distancia a paredes\n\n  iniciar() {\n    this.estado = \"salta\";\n    this.pies = this.obtener_laser(\"pies\");\n    this.derecha = this.obtener_laser(\"derecha\");\n    this.izquierda = this.obtener_laser(\"izquierda\");\n  }\n\n  actualizar() {\n    this.pilas.camara.seguir_al_actor(this);\n    this.distancia_al_suelo = this.pies.distancia_al_actor_con_etiqueta(\"suelo\");\n\n    this.distancia_derecha = this.derecha.distancia_al_actor_con_etiqueta(\"suelo\");\n    this.distancia_izquierda = this.izquierda.distancia_al_actor_con_etiqueta(\"suelo\");\n\n    //this.pilas.observar(\"distancia_al_suelo\", this.distancia_al_suelo);\n    //this.pilas.observar(\"distancia_derecha\", this.distancia_derecha);\n    //this.pilas.observar(\"distancia_izquierda\", this.distancia_izquierda);\n    //this.pilas.observar(\"vy\", this.vy);\n  }\n\n  parado_iniciar() {\n    this.animacion = \"parado\";\n  }\n\n  parado_actualizar() {\n    if (this.control.izquierda) {\n      this.espejado = true;\n      this.estado = \"camina\";\n    }\n    if (this.control.derecha) {\n      this.espejado = false;\n      this.estado = \"camina\";\n    }\n\n    if (this.control.arriba) {\n      this.iniciar_salto();\n    }\n  }\n\n  camina_iniciar() {\n    this.animacion = \"camina\";\n    this.contador = 0;\n  }\n\n  caer() {\n    this.estado = \"salta\";\n    this.vy = 0;\n  }\n\n  mover_horizontalmente(velocidad = 0) {\n    // intenta moverse a la izquieda o derecha pero sin\n    // sobrepasar las paredes.\n\n    if (velocidad < 0) {\n      // mueve hacia la izquierda\n      this.espejado = true;\n\n      if (this.distancia_izquierda - 10 < -velocidad) {\n        this.x -= this.distancia_izquierda - 10;\n      } else {\n        this.x += velocidad;\n      }\n    } else {\n      // mueve hacia la derecha\n      this.espejado = false;\n\n      if (this.distancia_derecha < velocidad) {\n        this.x += this.distancia_derecha;\n      } else {\n        this.x += velocidad;\n      }\n\n    }\n  }\n\n  camina_actualizar() {\n    this.contador += 1;\n\n    if (this.control.izquierda) {\n      this.mover_horizontalmente(-2);\n    }\n\n    if (this.control.derecha) {\n      this.mover_horizontalmente(2);\n    }\n\n    if (this.control.arriba) {\n      this.iniciar_salto();\n    }\n\n    if (!this.control.izquierda && !this.control.derecha) {\n      this.estado = \"parado\"\n    }\n\n    if (this.contador > 30) {\n      // si pasó mas de un segundo caminando, empieza a correr!!!\n      this.estado = \"corre\";\n    }\n\n    if (this.distancia_al_suelo > 20) {\n      // si no está tocando el suelo comienza a caer\n      this.caer();\n    }\n  }\n\n  corre_iniciar() {\n    this.animacion = \"corre\";\n  }\n\n  corre_actualizar() {\n    if (this.control.izquierda) {\n      this.mover_horizontalmente(-3);\n    }\n\n    if (this.control.derecha) {\n      this.mover_horizontalmente(3);\n    }\n\n    if (this.control.arriba) {\n      this.iniciar_salto(3);\n    }\n\n    if (!this.control.izquierda && !this.control.derecha) {\n      this.estado = \"parado\"\n    }\n    if (this.distancia_al_suelo > 20) {\n      // si no está tocando el suelo comienza a caer\n      this.caer();\n    }\n  }\n\n\n  salta_iniciar() {\n    this.animacion = \"salta\";\n  }\n\n  salta_actualizar() {\n    this.distancia_al_suelo = this.pies.distancia_al_actor_con_etiqueta(\"suelo\");\n\n    if (this.control.izquierda) {\n      this.mover_horizontalmente(-this.vx);\n      //this.x -= this.vx;\n      //this.espejado = true;\n    }\n\n    if (this.control.derecha) {\n      this.mover_horizontalmente(this.vx);\n      //this.x += this.vx;\n      //this.espejado = false;\n    }\n\n    if (this.vy < 0 && this.distancia_al_suelo - 17 < -this.vy) {\n      this.y -= this.distancia_al_suelo - 17;\n      this.vy = 0;\n      this.estado = \"parado\";\n    } else {\n      this.y += this.vy;\n      this.vy -= 0.35;\n    }\n  }\n\n  iniciar_salto(velocidad = 2) {\n    this.estado = \"salta\";\n    this.vx = velocidad;\n    this.vy = 8;\n  }\n}\n"
+      },
+      {
+        "nombre": "p1",
+        "codigo": "// @ts-ignore\nclass p1 extends Actor {\n\n  iniciar() { }\n\n  actualizar() { }\n}\n"
+      },
+      {
+        "nombre": "p2",
+        "codigo": "// @ts-ignore\nclass p2 extends Actor {\n\n  iniciar() { }\n\n  actualizar() { }\n}\n"
+      },
+      {
+        "nombre": "p3",
+        "codigo": "// @ts-ignore\nclass p3 extends Actor {\n\n  iniciar() { }\n\n  actualizar() { }\n}\n"
+      },
+      {
+        "nombre": "nube_animada",
+        "codigo": "// @ts-ignore\nclass nube_animada extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 0.5;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada1",
+        "codigo": "// @ts-ignore\nclass nube_animada1 extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 0.1;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada2",
+        "codigo": "// @ts-ignore\nclass nube_animada2 extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 0.5;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada3",
+        "codigo": "// @ts-ignore\nclass nube_animada3 extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 0.2;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada4",
+        "codigo": "// @ts-ignore\nclass nube_animada4 extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 0.1;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "nube_animada5",
+        "codigo": "// @ts-ignore\nclass nube_animada5 extends Actor {\n\n  velocidad: number;\n\n  iniciar() {\n    this.z = 50;\n    this.velocidad = 0.2;\n  }\n\n  actualizar() {\n    this.x -= this.velocidad;\n\n    if (this.x < -400) {\n      this.x = 400;\n      this.y = this.pilas.azar(-200, 200);\n    }\n  }\n}\n"
+      },
+      {
+        "nombre": "p4",
+        "codigo": "// @ts-ignore\nclass p4 extends Actor {\n\n  iniciar() { }\n\n  actualizar() { }\n}\n"
+      },
+      {
+        "nombre": "boton_izquierda",
+        "codigo": "// @ts-ignore\nclass boton_izquierda extends Actor {\n\n  pulsado: boolean = false;\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"izquierda\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n"
+      },
+      {
+        "nombre": "boton_derecha",
+        "codigo": "// @ts-ignore\nclass boton_derecha extends Actor {\n\n  pulsado: boolean = false;\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"derecha\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n"
+      },
+      {
+        "nombre": "boton_arriba",
+        "codigo": "// @ts-ignore\nclass boton_arriba extends Actor {\n\n  pulsado: boolean = false;\n\n  iniciar() {\n    this.fijo = true;\n  }\n\n  actualizar() {\n    if (this.pulsado) {\n      this.transparencia = 0;\n    } else {\n      this.transparencia = 50;\n    }\n\n    this.pilas.control.simular_pulsacion(\"arriba\", this.pulsado);\n  }\n\n  cuando_hace_click() {\n    this.pulsado = true;\n  }\n\n  cuando_sale() {\n    this.pulsado = false;\n  }\n\n  cuando_termina_de_hacer_click() {\n    this.pulsado = false;\n  }\n}\n"
+      },
+      {
+        "nombre": "p5",
+        "codigo": "// @ts-ignore\nclass p5 extends Actor {\n\n  iniciar() { }\n\n  actualizar() { }\n}\n"
+      }
+    ],
+    "proyecto": "class Proyecto {\n  iniciar() {\n  }\n}"
+  },
+  "escenas": [
+    {
+      "nombre": "escena1",
+      "id": 1,
+      "ancho": 1000,
+      "alto": 1000,
+      "camara_x": 0,
+      "camara_y": 0,
+      "gravedad_x": 0,
+      "gravedad_y": 1,
+      "fondo": "decoracion:fondos/fondo-azul-plano",
+      "actores": [
+        {
+          "x": -104,
+          "y": 0,
+          "z": -5,
+          "imagen": "cuadro-01",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "mario",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 16,
+          "figura_alto": 35,
+          "figura_radio": 18,
+          "figura_sin_rotacion": true,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 11241625192071678,
+          "activo": true,
+          "nombre": "mario",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": [
+            {
+              "id": "laser-0.6939418376948691",
+              "rotacion": -90,
+              "longitud": 60,
+              "etiquetas": [],
+              "nombre": "pies"
+            },
+            {
+              "id": "laser-0.25653111521069416",
+              "rotacion": -20,
+              "longitud": 40,
+              "etiquetas": [],
+              "nombre": "derecha"
+            },
+            {
+              "id": "laser-0.878776209736167",
+              "rotacion": -160,
+              "longitud": 40,
+              "etiquetas": [],
+              "nombre": "izquierda"
+            }
+          ]
+        },
+        {
+          "x": -35,
+          "y": -96,
+          "z": 0,
+          "imagen": "tile-09",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "suelo",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 17,
+          "figura_alto": 16,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 13441471286544744,
+          "activo": false,
+          "nombre": "p1",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": -168,
+          "y": -80,
+          "z": 0,
+          "imagen": "tile-08",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 13765013778863354,
+          "activo": false,
+          "nombre": "p2",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": -168,
+          "y": -112,
+          "z": 0,
+          "imagen": "tile-10",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "suelo",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 17,
+          "figura_alto": 16,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 12637157117897468,
+          "activo": false,
+          "nombre": "p3",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": 216,
+          "y": 32,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.25,
+          "escala_y": 0.25,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 13810799354859224,
+          "activo": true,
+          "nombre": "nube_animada",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": [],
+          "carpeta": 0.5424522996495426
+        },
+        {
+          "x": -24168,
+          "y": 23920,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.1,
+          "escala_y": 0.1,
+          "transparencia": 36,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 16273576990676784,
+          "activo": true,
+          "nombre": "nube_animada1",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": [],
+          "carpeta": 0.5424522996495426
+        },
+        {
+          "x": -152,
+          "y": 32,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.25,
+          "escala_y": 0.25,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 17974293767333912,
+          "activo": true,
+          "nombre": "nube_animada2",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": [],
+          "carpeta": 0.5424522996495426
+        },
+        {
+          "x": 40,
+          "y": 0,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.2,
+          "escala_y": 0.2,
+          "transparencia": 18,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 15119386950766284,
+          "activo": true,
+          "nombre": "nube_animada3",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": [],
+          "carpeta": 0.5424522996495426
+        },
+        {
+          "x": 168,
+          "y": -32,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.1,
+          "escala_y": 0.1,
+          "transparencia": 36,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 19275384812337412,
+          "activo": true,
+          "nombre": "nube_animada4",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": [],
+          "carpeta": 0.5424522996495426
+        },
+        {
+          "x": 296,
+          "y": 0,
+          "z": 30,
+          "imagen": "decoracion:objetos/decoracion_nube_1",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.2,
+          "escala_y": 0.2,
+          "transparencia": 18,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 13067284952281978,
+          "activo": true,
+          "nombre": "nube_animada5",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": -184,
+          "y": -19,
+          "z": 0,
+          "imagen": "tile-07",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "suelo",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 16,
+          "figura_alto": 16,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 12086739592066298,
+          "activo": false,
+          "nombre": "p4",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": -173.88347663410687,
+          "y": -85,
+          "z": -100,
+          "imagen": "imagenes:botones/botones_izquierda",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 17288323805098276,
+          "activo": true,
+          "nombre": "boton_izquierda",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": -118.79019489815775,
+          "y": -85,
+          "z": -100,
+          "imagen": "imagenes:botones/botones_derecha",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 19727585760801890,
+          "activo": true,
+          "nombre": "boton_derecha",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": 164.83073427299394,
+          "y": -85,
+          "z": -100,
+          "imagen": "imagenes:botones/botones_arriba",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 0.5,
+          "escala_y": 0.5,
+          "transparencia": 0,
+          "etiqueta": "actor",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "",
+          "figura_dinamica": true,
+          "figura_ancho": 100,
+          "figura_alto": 100,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 1,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 10335254876424616,
+          "activo": true,
+          "nombre": "boton_arriba",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        },
+        {
+          "x": -148,
+          "y": -33,
+          "z": 0,
+          "imagen": "tile-06",
+          "centro_x": 0.5,
+          "centro_y": 0.5,
+          "rotacion": 0,
+          "escala_x": 1,
+          "escala_y": 1,
+          "transparencia": 0,
+          "etiqueta": "suelo",
+          "espejado": false,
+          "espejado_vertical": false,
+          "figura": "rectangulo",
+          "figura_dinamica": false,
+          "figura_ancho": 16,
+          "figura_alto": 16,
+          "figura_radio": 40,
+          "figura_sin_rotacion": false,
+          "figura_rebote": 0,
+          "figura_sensor": false,
+          "es_texto": false,
+          "texto_con_borde": false,
+          "id": 13647980050873464,
+          "activo": false,
+          "nombre": "p5",
+          "habilidades": [],
+          "sensores": [],
+          "lasers": []
+        }
+      ],
+      "carpetas": [
+        {
+          "nombre": "nubes",
+          "id": 0.5424522996495426,
+          "abierta": true
+        }
+      ]
+    }
+  ],
+  "fps": 60,
+  "modo_de_video": "pixelart",
+  "sonidos": [
+    {
+      "nombre": "laser",
+      "ruta": "sonidos/laser.mp3"
+    },
+    {
+      "nombre": "explosion",
+      "ruta": "sonidos/explosion.mp3"
+    },
+    {
+      "nombre": "gallina",
+      "ruta": "sonidos/gallina.mp3"
+    },
+    {
+      "nombre": "moneda",
+      "ruta": "sonidos/moneda.mp3"
+    },
+    {
+      "nombre": "salto-corto",
+      "ruta": "sonidos/salto-corto.mp3"
+    },
+    {
+      "nombre": "salto-largo",
+      "ruta": "sonidos/salto-largo.mp3"
+    },
+    {
+      "nombre": "seleccion-aguda",
+      "ruta": "sonidos/seleccion-aguda.mp3"
+    },
+    {
+      "nombre": "seleccion-grave",
+      "ruta": "sonidos/seleccion-grave.mp3"
+    },
+    {
+      "nombre": "comer",
+      "ruta": "sonidos/comer.mp3"
+    }
+  ],
+  "bloques": {
+    "proyecto": {
+      "texto": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"ZC`*TK^}PI+^~52^ak!H\" x=\"35\" y=\"44\"></block></xml>",
+      "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('ZC`*TK^}PI+^~52^ak!H', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n"
+    },
+    "escenas": [
+      {
+        "nombre": "escena1",
+        "bloques": {
+          "texto": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"escena_al_iniciar\" id=\"ms2+If6B9Dl^C;YsS/{x\" x=\"-225\" y=\"-202\"></block><block type=\"escena_cuando_hace_click\" id=\"=UY{}h^MjrUa!2]Q!d*C\" x=\"-224\" y=\"-111\"></block><block type=\"escena_al_actualizar\" id=\"3oE27p+:PzlhcbX-XBVe\" x=\"-221\" y=\"-18\"></block></xml>",
+          "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('ms2+If6B9Dl^C;YsS/{x', this.id);\n}\nescena._bloques_al_iniciar = function(x, y, evento) {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('=UY{}h^MjrUa!2]Q!d*C', this.id);\n}\nescena._bloques_cuando_hace_click = function(x, y, evento) {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('3oE27p+:PzlhcbX-XBVe', this.id);\n}\nescena._bloques_al_actualizar = function() {\n\n  };"
+        }
+      }
+    ],
+    "actores": [
+      {
+        "nombre": "mario",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "p1",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "p2",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "p3",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "nube_animada",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "nube_animada1",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "nube_animada2",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "nube_animada3",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "nube_animada4",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "nube_animada5",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "p4",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "boton_izquierda",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "boton_derecha",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "boton_espacio",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "boton_arriba",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "plataforma",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      },
+      {
+        "nombre": "p5",
+        "bloques": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"actor_inicia\" id=\"^BS9[_V!D30$Klp?G]Nt\" x=\"-217\" y=\"-205\"></block><block type=\"actor_actualizar\" id=\"D[i2{g4SjDY+sAT7f=W@\" x=\"-212\" y=\"-36\"></block></xml>",
+        "codigo_de_bloques": "if (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('^BS9[_V!D30$Klp?G]Nt', this.id);\n}\nactor._bloques_iniciar = function() {\n\n  };\n\nif (this.id) {\n\tthis.pilas.notificar_ejecucion_del_bloque('D[i2{g4SjDY+sAT7f=W@', this.id);\n}\nactor._bloques_actualizar = function() {\n\n  };\n"
+      }
+    ]
+  },
+  "plegados": {
+    "mario": {
+      "cursorState": [
+        {
+          "inSelectionMode": false,
+          "selectionStart": {
+            "lineNumber": 2,
+            "column": 28
+          },
+          "position": {
+            "lineNumber": 2,
+            "column": 28
+          }
+        }
+      ],
+      "viewState": {
+        "scrollLeft": 0,
+        "firstPosition": {
+          "lineNumber": 1,
+          "column": 1
+        },
+        "firstPositionDeltaTop": 0
+      },
+      "contributionsState": {
+        "editor.contrib.folding": {
+          "lineCount": 174,
+          "provider": "indent"
+        },
+        "editor.contrib.wordHighlighter": false
+      }
+    }
+  },
+  "etiquetas": []
+}

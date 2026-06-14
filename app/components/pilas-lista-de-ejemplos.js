@@ -6,7 +6,7 @@ import { debounce } from "@ember/runloop";
 export default Component.extend({
   classNames: ['tc'],
   ejemplos: service(),
-  cantidad_de_ejemplos: 40,
+  cantidad_de_ejemplos: 41,
   filtro_diferido: "",
 
   didInsertElement() {

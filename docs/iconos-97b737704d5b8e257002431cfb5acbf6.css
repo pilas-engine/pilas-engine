@@ -1,0 +1,97 @@
+/* -----------------------------------------------------
+   created with https://www.codeandweb.com/texturepacker 
+   -----------------------------------------------------
+   $TexturePacker:SmartUpdate:841404c8780542a5b47240822b933c6d:63d97cb6a826b881aebd92659c736717:467c798a4e4a5265189118ecb556e0a2$
+   -----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(iconos-0e5b4b1da6fba2f628a527d7d9ad2f5c.png);}
+
+.borrar {width:16px; height:16px; background-position: -564px -1px}
+.carpeta {width:19px; height:16px; background-position: -189px -216px}
+.carpeta-abierta {width:19px; height:16px; background-position: -189px -198px}
+.crear-carpeta {width:16px; height:16px; background-position: -564px -19px}
+.demo {width:24px; height:24px; background-position: -437px -228px}
+.desplegar {width:24px; height:24px; background-position: -463px -228px}
+.duplicar {width:16px; height:16px; background-position: -564px -37px}
+.editar {width:16px; height:16px; background-position: -564px -55px}
+.error {width:24px; height:24px; background-position: -489px -228px}
+.github {width:60px; height:50px; background-position: -1px -202px}
+.grilla_actor_aceituna {width:48px; height:48px; background-position: -63px -202px}
+.grilla_actor_actor {width:48px; height:48px; background-position: -264px -1px}
+.grilla_actor_barra_de_energia {width:48px; height:48px; background-position: -314px -1px}
+.grilla_actor_boton {width:48px; height:48px; background-position: -364px -1px}
+.grilla_actor_boton_abajo {width:48px; height:48px; background-position: -414px -1px}
+.grilla_actor_boton_activable {width:48px; height:48px; background-position: -364px -1px}
+.grilla_actor_boton_arriba {width:48px; height:48px; background-position: -464px -1px}
+.grilla_actor_boton_derecha {width:48px; height:48px; background-position: -514px -1px}
+.grilla_actor_boton_espacio {width:48px; height:48px; background-position: -187px -72px}
+.grilla_actor_boton_izquierda {width:48px; height:48px; background-position: -237px -63px}
+.grilla_actor_caja {width:48px; height:48px; background-position: -287px -51px}
+.grilla_actor_chispa {width:48px; height:48px; background-position: -337px -51px}
+.grilla_actor_conejo {width:48px; height:48px; background-position: -387px -51px}
+.grilla_actor_deslizador {width:48px; height:48px; background-position: -437px -51px}
+.grilla_actor_explosion {width:123px; height:69px; background-position: -1px -131px}
+.grilla_actor_gallina {width:48px; height:48px; background-position: -487px -51px}
+.grilla_actor_golpe {width:48px; height:48px; background-position: -113px -202px}
+.grilla_actor_humo {width:48px; height:48px; background-position: -287px -101px}
+.grilla_actor_interruptor_de_gravedad {width:48px; height:48px; background-position: -337px -101px}
+.grilla_actor_laser {width:48px; height:48px; background-position: -387px -101px}
+.grilla_actor_logo {width:48px; height:48px; background-position: -437px -101px}
+.grilla_actor_moneda {width:48px; height:48px; background-position: -487px -101px}
+.grilla_actor_nave {width:48px; height:48px; background-position: -237px -113px}
+.grilla_actor_nube {width:48px; height:48px; background-position: -187px -122px}
+.grilla_actor_nube_animada {width:48px; height:48px; background-position: -287px -151px}
+.grilla_actor_pantalla_completa {width:48px; height:48px; background-position: -337px -151px}
+.grilla_actor_pared {width:48px; height:48px; background-position: -387px -151px}
+.grilla_actor_pelota {width:48px; height:48px; background-position: -437px -151px}
+.grilla_actor_pizarra {width:48px; height:48px; background-position: -487px -151px}
+.grilla_actor_plataforma {width:48px; height:48px; background-position: -237px -163px}
+.grilla_actor_puntaje {width:69px; height:69px; background-position: -131px -1px}
+.grilla_actor_reiniciar_escena {width:54px; height:54px; background-position: -131px -72px}
+.grilla_actor_robot {width:48px; height:48px; background-position: -287px -201px}
+.grilla_actor_suelo {width:48px; height:48px; background-position: -337px -201px}
+.grilla_actor_techo {width:48px; height:48px; background-position: -337px -201px}
+.grilla_actor_texto {width:48px; height:48px; background-position: -387px -201px}
+.imagen {width:16px; height:16px; background-position: -564px -73px}
+.inactivo {width:16px; height:16px; background-position: -564px -91px}
+.mas {width:16px; height:16px; background-position: -564px -109px}
+.menu {width:16px; height:16px; background-position: -564px -127px}
+.mover {width:16px; height:16px; background-position: -564px -145px}
+.no {width:24px; height:24px; background-position: -515px -228px}
+.off {width:16px; height:14px; background-position: -153px -181px}
+.on {width:16px; height:14px; background-position: -210px -230px}
+.panel-abierto {width:16px; height:16px; background-position: -564px -163px}
+.panel-central-off {width:18px; height:14px; background-position: -126px -185px}
+.panel-central-on {width:18px; height:14px; background-position: -210px -198px}
+.panel-cerrado {width:16px; height:16px; background-position: -564px -181px}
+.panel-derecho-off {width:18px; height:14px; background-position: -189px -234px}
+.panel-derecho-on {width:18px; height:14px; background-position: -210px -214px}
+.panel-izquierdo-off {width:18px; height:14px; background-position: -230px -213px}
+.panel-izquierdo-on {width:18px; height:14px; background-position: -250px -213px}
+.pausa {width:24px; height:24px; background-position: -541px -228px}
+.pilas_logo_128 {width:128px; height:128px; background-position: -1px -1px}
+.pilas_logo_60 {width:60px; height:60px; background-position: -202px -1px}
+.plegar {width:24px; height:24px; background-position: -153px -155px}
+.preferencias {width:24px; height:24px; background-position: -179px -172px}
+.receta_automata {width:24px; height:24px; background-position: -205px -172px}
+.receta_azar {width:25px; height:25px; background-position: -537px -51px}
+.receta_click {width:25px; height:25px; background-position: -437px -201px}
+.receta_clonar {width:25px; height:25px; background-position: -537px -78px}
+.receta_colision {width:25px; height:25px; background-position: -464px -201px}
+.receta_mover_izquierda {width:25px; height:25px; background-position: -491px -201px}
+.receta_mueve {width:25px; height:25px; background-position: -518px -201px}
+.receta_pad {width:25px; height:25px; background-position: -537px -105px}
+.receta_saltar {width:25px; height:25px; background-position: -537px -132px}
+.receta_sonido {width:25px; height:25px; background-position: -537px -159px}
+.receta_tiempo {width:25px; height:25px; background-position: -545px -199px}
+.settings {width:25px; height:25px; background-position: -126px -131px}
+.si {width:24px; height:24px; background-position: -163px -198px}
+.test {width:25px; height:25px; background-position: -126px -158px}
+.volver {width:24px; height:24px; background-position: -163px -224px}
+.webserver {width:25px; height:25px; background-position: -153px -128px}

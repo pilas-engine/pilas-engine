@@ -1,5 +1,6 @@
 {
   "ejemplos": [
+    { "nombre": "mini-mario", "desde": "2.9.0" },
     { "nombre": "atravesar-plataformas", "desde": "2.8.14" },
     { "nombre": "velocidad-de-animacion", "desde": "2.8.14" },
     { "nombre": "controlar-animaciones", "desde": "2.8.14" },

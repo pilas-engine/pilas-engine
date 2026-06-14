@@ -9,6 +9,11 @@ class ModoEditor extends Modo {
   tamaño_de_la_grilla: number;
   tecla_meta_pulsada: boolean;
   actor_seleccionado: any;
+  anterior_actor_seleccionado: any;
+  canvas_auxiliar: Phaser.GameObjects.Graphics;
+  actor_bajo_el_puntero_del_mouse: any;
+
+  distancia: any;
 
   constructor() {
     super({ key: "ModoEditor" });
@@ -20,6 +25,10 @@ class ModoEditor extends Modo {
     super.create(datos, datos.proyecto.ancho, datos.proyecto.alto);
     this.actores = [];
     this.pilas = datos.pilas;
+    this.canvas_auxiliar = this.sys.add.graphics({ x: 0, y: 0 });
+    this.canvas_auxiliar.depth = 999999;
+    this.distancia = null;
+    this.actor_bajo_el_puntero_del_mouse = null;
 
     // Estos valores se re-definen ni bien el editor carga la
     // escena de edición, con la señal cuando_cambia_grilla_desde_el_selector_manual.
@@ -27,6 +36,7 @@ class ModoEditor extends Modo {
     this.tamaño_de_la_grilla = 256;
     this.crear_sprite_para_el_cursor_de_la_grilla();
     this.actor_seleccionado = null;
+    this.anterior_actor_seleccionado = null;
 
     this.crear_fondo(datos.escena.fondo, datos.escena.ancho + this.ancho/2, datos.escena.alto);
     this.posicionar_la_camara(datos.escena);
@@ -193,6 +203,21 @@ class ModoEditor extends Modo {
   }
 
   private conectar_movimiento_del_mouse() {
+    /* guardo estas 3 variables para distingir cuándo el usuario
+     * hace click y cuándo hace un gesto de movimiento para
+     * medir distancia entre actores.
+     */
+    let comenzo_a_pulsar = false;
+    let posicion_inicial_x = 0;
+    let posicion_inicial_y = 0;
+
+    this.input.on("pointerdown", evento => {
+      comenzo_a_pulsar = true;
+      posicion_inicial_x = evento.worldX;
+      posicion_inicial_y = evento.worldY;
+    });
+
+
     this.input.on("pointermove", evento => {
       let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
       this.pilas.cursor_x = Math.trunc(posicion.x);
@@ -203,21 +228,40 @@ class ModoEditor extends Modo {
       this.pilas.cursor_y_absoluta = Math.trunc(posicion_absoluta.y);
     });
 
-    //this.input.on("pointerdown", evento => {
-
-      //// es botón derecho
-      //if (evento.button == 2) {
-        //console.log(evento.x, evento.y);
-      //}
-
-    //});
 
     this.input.on("pointerup", evento => {
+
       if (this.tecla_meta_pulsada) {
-        let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
-        this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado_con_click", { x: posicion.x, y: posicion.y });
+        // detecta si hay distancia suficiente para concidenarlo como
+        // un click y no un desplazamiento de arrastrar y soltar.
+        const dist = this.distancia_de_recorrido_del_mouse(
+          posicion_inicial_x,
+          posicion_inicial_y,
+          evento.worldX,
+          evento.worldY);
+        
+        // Se intenta distinguir entre un click y un evento de arratrar
+        // y soltar.
+        if (dist.distancia < 5) {
+          // en caso de un click
+          let posicion = this.pilas.utilidades.convertir_coordenada_de_phaser_a_pilas(evento.worldX, evento.worldY);
+          this.pilas.mensajes.emitir_mensaje_al_editor("duplicar_el_actor_seleccionado_con_click", { x: posicion.x, y: posicion.y });
+        } else {
+          // en caso de arrastrar y soltar
+        }
       }
     });
+  }
+
+  distancia_de_recorrido_del_mouse(x, y, x1, y1) {
+    const dx = x - x1;
+    const dy = y - y1;
+
+    return {
+      distancia: parseInt(`${Math.sqrt(dx*dx + dy*dy)}`, 10),
+      centro_x: (x1 + x) / 2,
+      centro_y: (y1 + y) / 2
+    }
   }
 
   crear_manejadores_para_hacer_arrastrables_los_actores_y_la_camara() {
@@ -241,6 +285,23 @@ class ModoEditor extends Modo {
 
       actor_que_se_esta_arrastrando = gameObject;
 
+      if (pointer.event.metaKey) {
+
+        this.distancia = {
+          desde_x: gameObject.x,
+          desde_y: gameObject.y,
+          hasta_x: pointer.worldX,
+          hasta_y: pointer.worldY,
+        };
+
+
+
+        console.info("Se evita arrastrar el actor porque se tiene que calcular distancia");
+        console.info("Usar este actor como origen de medida", actor_que_se_esta_arrastrando);
+        return false;
+      }
+
+
       this.mover_cursor_de_la_grilla(pointer.worldX, pointer.worldY);
       this.posicion_anterior_de_arrastre = pointer.position.clone();
 
@@ -263,6 +324,28 @@ class ModoEditor extends Modo {
         return null;
       }
 
+      if (pointer.event.metaKey) {
+        // Si se mueve el mouse sobre un actor, toma su posición
+        // como destino de la medición de distancia.
+        //
+        // En cambio, si no hay un actor debajo del mouse se mueve libremente
+        // y permite medir cualquier distancia.
+        
+        if (this.actor_bajo_el_puntero_del_mouse && !this.actor_bajo_el_puntero_del_mouse.es_fondo) {
+          this.distancia = {...this.distancia,
+            hasta_x: this.actor_bajo_el_puntero_del_mouse.x,
+            hasta_y: this.actor_bajo_el_puntero_del_mouse.y
+          };
+        } else {
+          this.distancia = {...this.distancia,
+            hasta_x: pointer.worldX,
+            hasta_y: pointer.worldY,
+          };
+        }
+
+        return null;
+      }
+
       if (gameObject["es_fondo"]) {
         this.desplazar_la_camara_desde_el_evento_drag(pointer);
       } else {
@@ -270,15 +353,47 @@ class ModoEditor extends Modo {
       }
     });
 
+    this.input.on("pointerover", (evento, objetos) => {
+
+      if (objetos.length > 0) {
+        this.actor_bajo_el_puntero_del_mouse = objetos[0];
+      } else {
+        this.actor_bajo_el_puntero_del_mouse = null;
+      }
+
+      /*
+
+      if (evento.event.metaKey) {
+        console.log("Mueve sobre un objeto!", objetos);
+
+        if (objetos.length > 0) {
+          this.distancia = {...this.distancia,
+            hasta_x: objetos[0].x,
+            hasta_y: objetos[0].y
+          };
+        }
+
+      }
+      */
+
+    });
+
     // Aquí se ha creado una función para ser re-utilizada tanto
     // en el evento dragend como gameout (cuando el mouse sale del canvas).
     const cuando_termina_de_mover_un_actor = (pointer, gameObject) => {
+
+      // En caso de que se dibujara la distancia entre actores.
+      if (this.distancia) {
+        this.distancia = null;
+        this.canvas_auxiliar.clear(); 
+      }
 
       // En este caso, si el gameObject es null es porque se dejó
       // el canvas mientras se movía un actor.
       if (!gameObject) {
         return;
       }
+
 
       actor_que_se_esta_arrastrando = null;
 
@@ -484,6 +599,21 @@ class ModoEditor extends Modo {
       }
 
       this.input.enableDebug(sprite, 0xffffff);
+
+      // intenta guardar el último actor seleccionado
+      if (this.actor_seleccionado) {
+        if (this.actor_seleccionado.id != actor.id) {
+          this.anterior_actor_seleccionado = this.actor_seleccionado;
+
+          console.info("Guardando anterior_actor_seleccionado", {
+            anterior: this.anterior_actor_seleccionado,
+            nuevo: actor
+          });
+
+        }
+      }
+
+
       this.actor_seleccionado = sprite;
     };
 
@@ -553,9 +683,266 @@ class ModoEditor extends Modo {
       }
     }
 
-    if (!this.pilas.game.hasFocus) {
-      this.tecla_meta_pulsada = false;
+    this.dibujar_canvas_auxiliar();
+  }
+
+  /*
+   * Auxiliar: dibuja una linea recta en el canvas indicado
+   */
+  dibujar_linea(canvas, x0, y0, x1, y1, grosor, color) {
+      this.canvas_auxiliar.lineStyle(grosor, color, 1);
+      this.canvas_auxiliar.lineBetween(x0, y0, x1, y1);
+  }
+
+  /*
+   * Auxiliar: dibujar la linea de distancia si es que el usuario
+   * arrastró y soltó el mouse con la tecla meta pulsada.
+   */
+  dibujar_canvas_auxiliar() {
+
+    if (this.distancia) {
+      this.canvas_auxiliar.clear(); 
+      const blanco = 0xFFFFFF;
+      const negro = 0x000000;
+
+
+      // 1 - obtiene la distancia diagonal, horizontal y vertical.
+      
+      let distancia_diagonal = this.distancia_de_recorrido_del_mouse(
+                        this.distancia.desde_x,
+                        this.distancia.desde_y,
+                        this.distancia.hasta_x,
+                        this.distancia.hasta_y);
+
+      let distancia_x = this.distancia_de_recorrido_del_mouse(
+                         this.distancia.desde_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.desde_y);
+
+      let distancia_y = this.distancia_de_recorrido_del_mouse(
+                         this.distancia.hasta_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.hasta_y);
+        
+
+      // 2 - dibuja el borde de las lineas de distancia.
+
+      this.dibujar_linea(this.canvas_auxiliar,
+                         this.distancia.desde_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.hasta_y,
+                         4,
+                         negro);
+
+      this.dibujar_linea(this.canvas_auxiliar,
+                         this.distancia.desde_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.desde_y,
+                         4,
+                         negro);
+
+      this.dibujar_linea(this.canvas_auxiliar,
+                         this.distancia.hasta_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.hasta_y,
+                         4,
+                         negro);
+
+      // 3 - dibujar el centro de color de las 3 lineas.
+
+      this.dibujar_linea(this.canvas_auxiliar,
+                         this.distancia.desde_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.hasta_y,
+                         2,
+                         blanco);
+
+      this.dibujar_linea(this.canvas_auxiliar,
+                         this.distancia.desde_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.desde_y,
+                         2,
+                         blanco);
+
+      this.dibujar_linea(this.canvas_auxiliar,
+                         this.distancia.hasta_x,
+                         this.distancia.desde_y, 
+                         this.distancia.hasta_x,
+                         this.distancia.hasta_y,
+                         2,
+                         blanco);
+
+
+      // 4 - dibujar el texto con la distancia:
+      this.dibujar_numero(this.canvas_auxiliar, distancia_diagonal.centro_x, distancia_diagonal.centro_y, `${distancia_diagonal.distancia}`);
+      this.dibujar_numero(this.canvas_auxiliar, distancia_x.centro_x, distancia_x.centro_y, `${distancia_x.distancia}`);
+      this.dibujar_numero(this.canvas_auxiliar, distancia_y.centro_x, distancia_y.centro_y, `${distancia_y.distancia}`);
+
     }
+  }
+
+  dibujar_numero(canvas, x, y, numero) {
+
+    const numeros = {
+      "0": [
+        [0, 0, 2, 2, 2, 0, 0],
+        [0, 2, 1, 1, 1, 2, 0],
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 0, 2, 1, 2], 
+        [2, 1, 2, 0, 2, 1, 2], 
+        [2, 1, 2, 0, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [0, 0, 2, 2, 2, 0, 0],
+      ],
+      "1": [
+        [0, 0, 0, 2, 0, 0, 0], 
+        [0, 0, 2, 1, 2, 0, 0], 
+        [0, 2, 1, 1, 2, 0, 0], 
+        [2, 1, 2, 1, 2, 0, 0], 
+        [2, 2, 2, 1, 2, 0, 0], 
+        [0, 0, 2, 1, 2, 0, 0], 
+        [2, 2, 2, 1, 2, 2, 2], 
+        [2, 1, 1, 1, 1, 1, 2], 
+        [2, 2, 2, 2, 2, 2, 2], 
+      ],
+      "2": [
+        [0, 0, 2, 2, 2, 0, 0], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 2, 0, 0, 2, 1, 2], 
+        [0, 0, 0, 2, 1, 2, 0], 
+        [0, 0, 2, 1, 2, 0, 0], 
+        [0, 2, 1, 2, 2, 2, 2], 
+        [2, 1, 1, 1, 1, 1, 2], 
+        [2, 2, 2, 2, 2, 2, 2], 
+      ],
+      "3": [
+        [0, 0, 2, 2, 2, 0, 0],
+        [0, 2, 1, 1, 1, 2, 0], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 0, 2, 2, 1, 2], 
+        [0, 0, 2, 1, 1, 2, 0], 
+        [0, 2, 0, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [0, 0, 2, 2, 2, 0, 0],
+      ],
+      "4": [
+        [0, 0, 0, 0, 2, 2, 2],
+        [0, 0, 0, 2, 1, 1, 2], 
+        [0, 0, 2, 1, 2, 1, 2], 
+        [0, 2, 1, 2, 2,  1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 1, 1, 1, 1, 1, 2], 
+        [0, 2, 2, 2, 2, 1, 2], 
+        [0, 0, 0, 0, 2, 1, 2], 
+        [0, 0, 0, 0, 2, 2, 2], 
+      ],
+      "5": [
+        [2, 2, 2, 2, 2, 2, 0],
+        [2, 1, 1, 1, 1, 1, 2], 
+        [2, 1, 2, 2, 2, 2, 0], 
+        [2, 1, 2, 2, 2, 0, 0], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [0, 2, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [0, 0, 2, 2, 2, 0, 0],
+      ],
+      "6": [
+        [0, 0, 2, 2, 2, 0, 0],
+        [0, 2, 1, 1, 1, 2, 0], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 2, 0], 
+        [2, 1, 1, 1, 1, 2, 0], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [0, 0, 2, 2, 2, 0, 0],
+      ],
+      "7": [
+        [2, 2, 2, 2, 2, 2, 2],
+        [2, 1, 1, 1, 1, 1, 2], 
+        [2, 2, 2, 2, 2, 1, 2], 
+        [0, 0, 0, 0, 2, 1, 2], 
+        [0, 0, 2, 2, 1, 2, 0], 
+        [0, 2, 2, 1, 2, 0, 0], 
+        [2, 2, 1, 2, 0, 0, 0], 
+        [2, 1, 2, 0, 0, 0, 0], 
+        [2, 2, 0, 0, 0, 0, 0],
+      ],
+      "8": [
+        [0, 0, 2, 2, 2, 2, 0],
+        [0, 2, 1, 1, 1, 2, 0], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [0, 0, 2, 2, 2, 0, 0],
+      ],
+      "9": [
+        [0, 0, 2, 2, 2, 0, 0],
+        [0, 2, 1, 1, 1, 2, 0], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 1, 2], 
+        [0, 2, 2, 2, 2, 1, 2], 
+        [2, 1, 2, 2, 2, 1, 2], 
+        [0, 2, 1, 1, 1, 2, 0], 
+        [0, 0, 2, 2, 2, 0, 0],
+      ],
+    }
+
+    console.assert(typeof(numero) === 'string');
+
+    for (let indice=0; indice<numero.length; indice ++) {
+      // por cada número obtiene la matriz de 1 y 0 para
+      // dibujar los pixeles.
+      const n = numero[indice];
+      const matriz = numeros[n];
+
+      console.assert(matriz);
+
+      // todo eliminar estas dos, es solo para probar el caso del número 0
+      let cantidad_de_filas = 9;
+      let cantidad_de_columnas = 7;
+
+      for (let f=0; f<cantidad_de_filas; f++) {
+        // por cada fila...
+        for (let c=0; c<cantidad_de_columnas; c++) {
+          // y por cada columna busca qué pixeles pintar.
+
+          const p = matriz[f][c];
+
+          if (p === 1) {
+            // color blanco
+            canvas.fillStyle(0xFFFFFF, 1);
+            canvas.fillPoint(x+c + indice*8, y+f);
+          }
+
+          if (p === 2) {
+            // sombra
+            canvas.fillStyle(0x000000, 0.75);
+            canvas.fillPoint(x+c + indice*8, y+f);
+          }
+
+
+        }
+        
+      }
+    }
+
+
   }
 
   eliminar_actor_por_id(id) {
@@ -565,6 +952,7 @@ class ModoEditor extends Modo {
     if (this.actor_seleccionado && this.actor_seleccionado.id == actor_a_eliminar[0].id) {
       this.input.removeDebug(this.actor_seleccionado);
       this.actor_seleccionado = null;
+      this.anterior_actor_seleccionado = null;
     }
 
     if (actor_a_eliminar[0].figura) {
