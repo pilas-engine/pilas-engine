@@ -1,5 +1,5 @@
 home:
-  welcome: ¡Hi!, welcome to Pilas Engine 2
+  welcome: Hi!, welcome to Pilas Engine 2
   editor: Open editor
   examples: Explore examples
   manual: Open manual
@@ -29,11 +29,11 @@ code.blocks: Code and blocks
 warning.code.errors: Code with errors.
 recipes: Recipes
 no.recipes: There is no recipes
-select.recipe: Select and actor or scene to see all recipes
+select.recipe: Select an actor or scene to see all recipes
 stop.and.back.to.editor: Stop and return to editor
 back.to.editor: Return to editor
 frame: Frame
-quit: ¿Do you want to quit?"
+quit: Do you want to quit?
 interpreter:
   label: Interpeter
   help: Press run to start to code here
@@ -116,10 +116,10 @@ project:
   size: Size
   title: Game title
   tags: Tags
-  maketag: Create
+  maketag: Create tag
 
 about:
-  title: ¿What is Pilas Engine?
+  title: What is Pilas Engine?
   text: |-
     Pilas is a tool for making video games in a fun and simple way.
 
@@ -141,8 +141,8 @@ about:
 
 import.image: Image import
 error:
-  title: Ups, an error occurred.
-  detail: See the browser console to see more details.
+  title: Oops, an error occurred.
+  detail: See the browser console for more details.
 
 app:
   loading: Project loading ...
@@ -150,8 +150,8 @@ app:
 
 animations:
   title: Animations
-  create: Crear a new animation
-  remove.button: Animation remove
+  create: Create a new animation
+  remove.button: Remove animation
   remove.title: Do you really want to delete this animation?
   name: Name
   fps: Frames per second
@@ -160,19 +160,19 @@ animations:
   zoom: Zoom
   edit: Edit
   help: Help
-  how.to.use: enter this code to play this animation
+  how.to.use: enter this code in an actor to play this animation
   edit.title: Edit animation
 
 tile.size: Tile size
 zoom.adjust: Adjust
-zoom.tooltip: Editor zoom
+zoom.tooltip: Editor's zoom
 
 versions:
   development: development version
   more.info: more information
   searching: Searching for updates ...
   updated: There is a new version to download.
-  new: Ther is a new version to download from www.pilas-engine.com.ar
+  new: There is a new version to download from www.pilas-engine.com.ar
 
 
 
@@ -224,11 +224,11 @@ exit:
   title: You are about to leave without saving
   question: You want to do?
   confirm: Get out anyway
-  cancel: Cancel, and return to editor
+  cancel: Cancel and return to editor
 
 cancel: Cancel
 ok: OK
-actors.in.scene.counter: Scene whit {count} actors
+actors.in.scene.counter: Scene with {count} actors
 fsm:
   name: Enter the state's name
   create: New state
@@ -239,7 +239,7 @@ panel:
   remove.scene: Do you really want to remove this scene?
 to.delete: It will deleted
 validations:
-  name.exists: Error, name exists
+  name.exists: Error, name already exists
   not.empty: Error, can't be empty
   invalid: Error, invalid name
 server:

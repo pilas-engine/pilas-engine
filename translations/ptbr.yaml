@@ -1,0 +1,272 @@
+home:
+  welcome: Olá! Bem-vindo ao Pilas Engine 2
+  editor: Abrir editor
+  examples: Explorar exemplos
+  manual: Abrir manual
+  about: Sobre
+  tip.title: Dica
+  tip.text: Você pode abrir qualquer projeto arrastando e soltando um arquivo '.pilas' aqui.
+  explore: Explorar comunidade
+
+return: Voltar
+edit: Editar
+previous: Anterior
+next: Próximo
+open.new.window: Abrir em uma nova janela
+new: Novo
+open: Abrir
+save: Salvar
+help: Ajuda
+properties: Propriedades
+create.scene: Criar cena
+create.actor: Criar ator
+run: Executar
+stop: Parar
+pause: Pausar
+save.and.run: Salvar e executar
+code: Código
+code.blocks: Código e blocos
+warning.code.errors: Códigos com erros.
+recipes: Receitas
+no.recipes: Não há receitas
+select.recipe: Selecione um ator ou cena exibir todas as receitas
+stop.and.back.to.editor: Para e retornar ao editor
+back.to.editor: Retornar ao editor
+frame: Quadro
+quit: Você quer mesmo sair?
+interpreter:
+  label: Intérprete
+  help: Pressione executar para começar a escrever o código
+  entering.run: Entrando no modo de execução
+  entering.pause: Entrando no modo de pausa
+  entering.edit: Entrando no modo de edição
+  scope: Você pode usar as variáveis do pilas ou dos atores.
+
+tooltip:
+  show.shapes: Mostra as formas físicas
+  show.fps: Mostra a performance em FPS
+  show.minimap: Mostra o minimapa
+  show.positions: Mostra os pontos de controle de cada ator
+change.image: Trocar imagem
+custom.images: Imagens personalizadas
+images.included: Imagens incluídas na pilas
+
+loading: Carregando
+sounds: Sons
+name: Nome
+
+stage:
+  stage: Cenário
+  width: Largura
+  height: Altura
+  camera: Câmera
+  camera.x: Câmera X
+  camera.y: Câmera Y
+  appearance: Aparência
+  background: Fundo
+  physical.simulation: Simulação física
+  gravity.x: Gravidade X
+  gravity.y: Gravidade Y
+
+actor:
+  active: Ativo
+  label: Etiqueta
+  text: Texto
+  font: Fonte
+  background: Fundo
+  image: Imagem
+  position: Posição
+  x: X
+  y: Y
+  z: Z
+  behaviors: Comportamentos
+  ablities: Habilidades
+  transformations: Transformações
+  scale:
+    x: Escala X
+    y: Escala Y
+  rotation: Rotação
+  transparency: Transparência
+  center:
+    x: Centro X
+    y: Centro Y
+  flip:
+    x: Espelhar na Horizontal 
+    y: Espelhar na Vertical
+  physical.simulation: Simulação física
+  shape:
+    title: Forma
+    width: Largura
+    height: Altura
+    ratio: Relação
+    bounce: Rebote
+    dynamic: Dinâmico
+    no.rotation: Sem rotação
+    is.sensor: É Gasoso?
+  sensors: Sensores
+  sensor: Sensor
+  new.sensor: Criar um sensor
+  lasers: Lasers
+  new.laser: Criar um laser
+
+project:
+  video.mode: Modo de vídeo
+  main.scene: Cena principal
+  performance: Performance
+  size: Tamanho
+  title: Título do jogo
+  tags: Etiquetas
+  maketag: Criar etiqueta
+
+about:
+  title: O que é Pilas Engine?
+  text: |-
+    Pilas é uma ferramentas para fazer jogos de uma maneira simples e divertida.
+
+    Nós fizemos essa ferramenta para que jovens possam descobrir e aprender a programar
+    computadores. Nós acreditamos que aprender a programar videogames é algo tão
+    espetacular que todas as pessoas deveriam ter a habilidade de fazê-lo. Aprender a programar te permite
+    tomar o controle de computadores para inventar, compartilhar e desenvolver qualquer tipo de programa.
+
+    Os ícones da interface foram criados por Icons8, enquanto os gráficos de jogo
+    foram criados por Walter Velazquez e kenney project.
+
+  end: |-
+    Visite o site do PilasEngine para aprender mais sobre esse projeto ou envie uma mensagem
+    diretamente em nosso fórum de mensagens de você tiver alguma dúvida ou sugestão.
+
+  forum.link: Fórum de mensagens
+  web.link: Site do PilasEngine
+
+
+import.image: Importar imagem
+error:
+  title: Ixi, ocorreu um erro.
+  detail: Veja o painel do navegador para mais detalhe
+
+app:
+  loading: Carregando projeto ...
+  opening: Abrindo projeto ... 
+
+animations:
+  title: Animações
+  create: Criar uma nova animação
+  remove.button: Remover animação
+  remove.title: Você quer mesmo deletar essa animação?
+  name: Nome
+  fps: Quadros por segundo
+  play: Executar
+  pause: Pausar
+  zoom: Zoom
+  edit: Editar
+  help: Ajuda
+  how.to.use: Digite esse código em um ator para exibir a animação
+  edit.title: Editar animação
+
+tile.size: Tamanho de tile
+zoom.adjust: Ajustar
+zoom.tooltip: Zoom do editor
+
+versions:
+  development: Versão de desenvolvimento
+  more.info: Mais informações
+  searching: Buscando por atualizações ...
+  updated: Há uma versão nova para download.
+  new: Há uma versão nova para download em www.pilas-engine.com.ar
+
+
+
+yes: Sim
+no: Não
+
+manual:
+  title: Manual
+  functions: Glossário de funções 
+  shortcuts: Atalhos de teclado
+
+settings:
+  dark.mode: Modo escuro
+  allow.pause: Permitir modo de pausa
+  text.size: Tamanho da fonte
+  vim.mode: Modo VIM (experimental)
+
+delete: Deletar
+no.undo: Não é possível desfazer essa ação
+export:
+  index: Exportar
+  title: Exportar projeto
+  choice.title: Existem duas maneiras de se exportar um projeto
+  choice.question: Qual deles você gostaria de usar?
+  zip: Exportar como zip
+  web: Exportar e publicar no site
+  include.source: Incluir código fonte
+  manual: Veja a documentação sobre como publicar jogos
+  close: Fechar
+audio:
+  load.sound: Fazer o upload de um arquivo mp3
+  help: Ajuda
+  use.sound: digite esse código para usar esse som em um jogo
+  play.music: digite esse código se você quiser que esse som se repita em ciclo, como uma música
+  stop.music: e digite esse código para para o som
+  format: Lembre-se de que o arquivo de áudio deve ser menor que 5MB e deve ser somente no formato MP3.
+
+menu:
+  duplicate.actor: Duplicar este ator
+  duplicate.actor.x5: Duplicar 5 vezes
+  delete:
+    title: Você quer remover esse ator?
+  move: Mover para outra cena
+  move.to: Mover para
+  move.to.new.scene: Mover para uma cena nova
+
+
+exit:
+  title: Você está saindo sem salvar
+  question: É o que você quer fazer?
+  confirm: Sair sem salvar
+  cancel: Cancelar e retornar ao editor
+
+cancel: Cancelar
+ok: OK
+actors.in.scene.counter: Cena com {count} atores
+fsm:
+  name: Insira o nome do estado
+  create: Novo estado
+panel:
+  project: Projeto
+  no.scenes: Sem cenas
+  no.actors: Sem atores
+  remove.scene: Você quer mesmo remover essa cena?
+to.delete: Vai ser deletada
+validations:
+  name.exists: Erro, o nome já existe
+  not.empty: Erro, não pode estar vazio
+  invalid: Error, nome inválido
+server:
+  starting: Iniciando o servidor web ...
+  stoping: Encerrando servidor web ...
+  stop: Encerrar servidor web
+  start: Iniciar servidor web
+
+undo: Desfazer
+only.pilas.files: Você só pode abrir arquivos .pilas
+
+iniciar.proyecto:
+  recommended: Recomendado
+  title: Escolha um modelo para começar a criar seu jogo
+
+login:
+  ingresar: Entrar
+  hi: Oi
+  logout: Sair
+  games: ver meus jogos
+
+explore:
+  description: Estes são alguns jogos feitos pela comunidade do pilas engine. Lembre-se de que você pode fazer o upload do seu jogo aqui e compartilhá-los pressionando o botão "exportar" no editor.
+
+page: Página
+tag: Etiqueta
+
+games:
+  title: Meus jogos
+  description: Esses são os jogos que você exportou e publicou na nuvem do pilas.
