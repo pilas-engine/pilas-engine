@@ -4,4 +4,10 @@
       {{pilas-mini-icono icono="undo"}}
     {{/pilas-boton-miniatura-pulsable}}
   {{/pilas-tooltip}}
+
+  {{#pilas-tooltip class="right-1 w4" texto=(concat (concat (t "redo") " ") memento.ultima_accion)}}
+    {{#pilas-boton-miniatura-pulsable desactivado=(not memento.puede_rehacer) class="f7 texto pr2" accion=rehacer}}
+      {{pilas-mini-icono icono="redo"}}
+    {{/pilas-boton-miniatura-pulsable}}
+  {{/pilas-tooltip}}
 </div>

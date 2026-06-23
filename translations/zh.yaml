@@ -245,6 +245,7 @@ server:
   start: 启动Web服务器
 
 undo: 撤消
+redo: 重做
 only.pilas.files: 您只能打开.pilas文件
 
 iniciar.proyecto:
