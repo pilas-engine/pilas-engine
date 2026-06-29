@@ -1,6 +1,7 @@
 import Service from "@ember/service";
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
+import copiar from "../utils/copiar";
 
 const LIMITE = 10;
 
@@ -12,6 +13,7 @@ export default Service.extend({
 
   iniciar() {
     this.set("historial", []);
+    this.set("pila_de_rehacer", []);
     window.memento = this;
 
     this.set("ultima_llamada", new Date());
@@ -25,12 +27,17 @@ export default Service.extend({
     return this.pasos > 0;
   }),
 
+  puede_rehacer: computed("pila_de_rehacer.length", function() {
+    return this.get("pila_de_rehacer.length") > 0;
+  }),
+
   accion(nombre, datos) {
     if (this.pasos >= LIMITE) {
       this.historial.removeAt(0);
     }
 
     this.historial.pushObject({ nombre, datos });
+    this.set("pila_de_rehacer", []);
     this.registrar_ultima_accion(nombre);
   },
 
@@ -49,13 +56,68 @@ export default Service.extend({
   deshacer(editor) {
     let paso = this.historial.popObject();
 
+    if (!paso) {
+      return;
+    }
+
     if (this.historial.lastObject) {
       this.registrar_ultima_accion(this.historial.lastObject.nombre);
     } else {
       this.set("ultima_accion", "");
     }
 
+    let paso_para_rehacer = this.crear_paso_inverso(paso, editor);
+    this.pila_de_rehacer.pushObject(paso_para_rehacer);
     this.aplicar_paso_de_memento(paso, editor);
+  },
+
+  rehacer(editor) {
+    let paso = this.pila_de_rehacer.popObject();
+
+    if (!paso) {
+      return;
+    }
+
+    let paso_para_deshacer = this.crear_paso_inverso(paso, editor);
+    this.historial.pushObject(paso_para_deshacer);
+    this.registrar_ultima_accion(paso.nombre);
+    this.aplicar_paso_de_memento(paso, editor);
+  },
+
+  crear_paso_inverso(paso, editor) {
+    let escena;
+    let actor;
+
+    switch (paso.nombre) {
+      case "mueve_actor":
+        escena = editor.obtener_la_escena_actual();
+        actor = escena.actores.findBy("id", paso.datos.id);
+        return { nombre: "mueve_actor", datos: { id: paso.datos.id, x: actor.x, y: actor.y } };
+
+      case "agrega_actor": {
+        escena = editor.obtener_la_escena_actual();
+        actor = escena.actores.findBy("id", paso.datos.id);
+        let codigo = editor.proyecto.codigos.actores.findBy("nombre", actor.nombre);
+        return { nombre: "elimina_actor", datos: { actor: { nombre: actor.nombre, codigo: copiar(codigo.codigo), imagen: actor.imagen, propiedades: copiar(actor) }, id: paso.datos.id } };
+      }
+
+      case "elimina_actor":
+        return { nombre: "agrega_actor", datos: { id: paso.datos.id } };
+
+      case "propiedad_de_actor":
+        escena = editor.obtener_la_escena_actual();
+        actor = escena.actores.findBy("id", paso.datos.id);
+        return { nombre: "propiedad_de_actor", datos: { id: paso.datos.id, propiedad: paso.datos.propiedad, valor: actor.get(paso.datos.propiedad) } };
+
+      case "cambia_actor_de_escena":
+        return { nombre: "cambia_actor_de_escena", datos: { id: paso.datos.id, escena_anterior: paso.datos.escena_nueva, escena_nueva: paso.datos.escena_anterior } };
+
+      case "cambia_actor_de_carpeta":
+        return { nombre: "cambia_actor_de_carpeta", datos: { id: paso.datos.id, carpeta_anterior: paso.datos.carpeta_nueva, carpeta_nueva: paso.datos.carpeta_anterior } };
+
+      default:
+        throw Error(`Caso no contemplado para crear_paso_inverso: ${paso.nombre}`);
+    }
   },
 
   aplicar_paso_de_memento(paso, editor) {
@@ -126,6 +188,7 @@ export default Service.extend({
 
   limpiar() {
     this.set("historial", []);
+    this.set("pila_de_rehacer", []);
   },
 
   registrar_ultima_accion(nombre) {

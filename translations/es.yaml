@@ -249,6 +249,7 @@ server:
   start: Iniciar servidor web
 
 undo: Deshacer
+redo: Rehacer
 only.pilas.files: Solo puede abrir archivos con extensión .pilas
 
 iniciar.proyecto:

@@ -78,12 +78,13 @@ export default Component.extend({
       this.send("cuandoSelecciona", this.seleccion);
     }
 
-    document.addEventListener("keydown", this.alPulsarTecla.bind(this));
+    document.addEventListener("keydown", this.alPulsarTecla.bind(this), true);
 
     this.bus.trigger(`${this.nombre_del_contexto}:hacer_foco_en_pilas`, {});
     this.instanciarSplitJS();
 
     this.capturar_ctrl_s();
+    this.capturar_ctrl_z_y();
   },
 
   capturar_ctrl_s() {
@@ -103,7 +104,36 @@ export default Component.extend({
           e.stopPropagation();
           break;
       }
-    });
+    }, true);
+  },
+
+  capturar_ctrl_z_y() {
+    document.addEventListener("keydown", e => {
+      e = e || window.event;
+
+      if (!e.ctrlKey && !e.metaKey) {
+        return;
+      }
+
+      var code = e.which || e.keyCode;
+
+      switch (code) {
+        case 90:
+          if (e.shiftKey) {
+            this.send("rehacer");
+          } else {
+            this.send("deshacer");
+          }
+          e.preventDefault();
+          e.stopPropagation();
+          break;
+        case 89:
+          this.send("rehacer");
+          e.preventDefault();
+          e.stopPropagation();
+          break;
+      }
+    }, true);
   },
 
   instanciarSplitJS() {
@@ -923,6 +953,10 @@ export default Component.extend({
 
     deshacer() {
       this.memento.deshacer(this);
+    },
+
+    rehacer() {
+      this.memento.rehacer(this);
     },
 
     cambiarPosicion(valorNuevo) {

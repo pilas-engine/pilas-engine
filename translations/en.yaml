@@ -250,6 +250,7 @@ server:
   start: Start web server
 
 undo: Undo
+redo: Redo
 only.pilas.files: You can only open .pilas files
 
 iniciar.proyecto:
