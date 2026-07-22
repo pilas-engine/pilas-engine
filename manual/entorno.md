@@ -31,7 +31,7 @@ Estos son los archivos principales del repositorio y qué función cumplen:
 
 ## Repositorio y modelo de trabajo
 
-Antes de iniciar, necesitas tener instalado NodeJS 8 y el gestor de paquetes "yarn".
+Antes de iniciar, necesitas tener instalado NodeJS 12 (12.22.12 es la última versión estable) y el gestor de paquetes "yarn". Es importante tener activa la versión de node 12 antes de instalar "yarn".
 
 Si quieres asegurarte de tener todo correctamente instalado escribí los siguientes comandos:
 
